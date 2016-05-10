@@ -18,9 +18,11 @@
   ],
   "scripts": {
     "lint": "./node_modules/.bin/eslint src",
+    "test": "true",
+    "cover": "true",
     "build": "./node_modules/.bin/babel --out-dir lib src",
     "watch": "./node_modules/.bin/babel --out-dir lib src --watch",
-    "prepublish": "npm run lint && npm run build"
+    "prepublish": "npm run lint && npm run test && npm run build"
   },
   "devDependencies": {
     "babel-cli": "^6.8.0",
