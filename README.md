@@ -1,24 +1,20 @@
 # uniforms
 
-This is a set of npm packages, which contains helpers and `React` components - both unstyled and stylised with the Semantic UI - to easily create, generate and validate forms using `SimpleSchema`.
+This is a set of npm packages for Meteor, which contains helpers and `React` components - both unstyled and stylised with the Semantic UI - to easily create, generate and validate forms using [`SimpleSchema`](https://github.com/aldeed/meteor-simple-schema).
 
-## Note
+
+## Installation
 
 These are npm packages, so they can't imply any Meteor package, and you have to install dependencies manually, in your Meteor app directory:
 
 ```shell
-$ meteor add aldeed:simple-schema
-$ meteor add mdg:validation-error
-```
-
-## Installation
-
-```shell
 # semantic ui components
-$ npm install --save react uniforms uniforms-semantic
+$ meteor npm install --save react uniforms uniforms-semantic
+$ meteor add mdg:validation-error aldeed:simple-schema
 
 # unstyled components
-$ npm install --save react uniforms uniforms-unstyled
+$ meteor npm install --save react uniforms uniforms-unstyled
+$ meteor add mdg:validation-error aldeed:simple-schema
 ```
 
 ## Basic usage
