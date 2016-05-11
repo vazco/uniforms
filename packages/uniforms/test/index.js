@@ -24,24 +24,39 @@ global.navigator = {
     userAgent: 'node.js'
 };
 
-// Meteor mocks
 import mock from 'mock-require';
 
-mock('meteor/check', {
-    Match: {
-        OneOf () {},
-        Optional () {},
-        ObjectIncluding () {}
-    }
-});
+// Meteor mocks
+// Currently importing from meteor is impossible.
 
-mock('meteor/aldeed:simple-schema', {
-    SimpleSchema: {
-        extendOptions () {},
-        _makeGeneric (name) {
-            return name.replace(/\.[0-9]+(?=\.|$)/g, '.$');
-        }
+global.Match = {
+    OneOf () {},
+    Optional () {},
+    ObjectIncluding () {}
+};
+
+global.SimpleSchema = {
+    extendOptions () {},
+    _makeGeneric (name) {
+        return name.replace(/\.[0-9]+(?=\.|$)/g, '.$');
     }
-});
+};
+
+// mock('meteor/check', {
+//     Match: {
+//         OneOf () {},
+//         Optional () {},
+//         ObjectIncluding () {}
+//     }
+// });
+
+// mock('meteor/aldeed:simple-schema', {
+//     SimpleSchema: {
+//         extendOptions () {},
+//         _makeGeneric (name) {
+//             return name.replace(/\.[0-9]+(?=\.|$)/g, '.$');
+//         }
+//     }
+// });
 
 mock('uniforms', '../src');

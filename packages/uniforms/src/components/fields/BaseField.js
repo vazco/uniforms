@@ -2,7 +2,9 @@ import get         from 'lodash.get';
 import {Component} from 'react';
 import {PropTypes} from 'react';
 
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+// Currently importing from meteor is impossible.
+// import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+let SimpleSchema = (typeof global === 'object' ? global : window).SimpleSchema;
 
 import BaseForm from '../forms/BaseForm';
 import joinName from '../../helpers/joinName';
