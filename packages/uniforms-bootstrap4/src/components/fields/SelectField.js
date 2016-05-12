@@ -20,6 +20,7 @@ const Select = ({
       <select
         className={classnames(
           inputClassName,
+          'c-select',
           'form-control',
           (error ? 'form-control-danger' : ''),
         )}
