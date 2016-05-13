@@ -1,3 +1,5 @@
+<a href="http://unicms.io"><img src="http://unicms.io/banners/standalone.png" /></a>
+
 # uniforms
 
 This is a set of npm packages for Meteor, which contains helpers and `React` components - both unstyled and stylised with the Semantic UI - to easily create, generate and validate forms using [`SimpleSchema`](https://github.com/aldeed/meteor-simple-schema).
@@ -299,3 +301,11 @@ $ npm run build # build src/
 $ npm run watch # build src/ continuously
 $ npm run cover # build code coverage raport
 ```
+
+### Copyright and license
+
+Code and documentation &copy; 2016 [Vazco.eu](http://vazco.eu)
+Released under the MIT license.
+
+This package is part of [Universe](http://unicms.io), a package ecosystem based on [Meteor platform](http://meteor.com) maintained by [Vazco](http://www.vazco.eu).
+It works as standalone Meteor package, but you can get much more features when using the whole system.
