@@ -12,11 +12,11 @@ These are npm packages, so they can't imply any Meteor package, and you have to 
 ```shell
 # semantic ui components
 $ meteor npm install --save react uniforms uniforms-semantic
-$ meteor add mdg:validation-error aldeed:simple-schema
+$ meteor add aldeed:simple-schema check
 
 # unstyled components
 $ meteor npm install --save react uniforms uniforms-unstyled
-$ meteor add mdg:validation-error aldeed:simple-schema
+$ meteor add aldeed:simple-schema check
 ```
 
 ## Basic usage
