@@ -2,10 +2,6 @@ import get         from 'lodash.get';
 import {Component} from 'react';
 import {PropTypes} from 'react';
 
-// Currently importing from meteor is impossible.
-// import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-let SimpleSchema = (typeof global === 'object' ? global : window).SimpleSchema;
-
 import BaseForm from '../forms/BaseForm';
 import joinName from '../../helpers/joinName';
 
@@ -88,15 +84,12 @@ export default class BaseField extends Component {
             name = joinName(context.name, coprops.name);
         }
 
-        const field = context.schema.getDefinition(name);
+        const field = {...context.schema.getField(name)};
+        const props = {...context.schema.getProps(name), ...coprops};
 
-        if (field === undefined) {
-            throw new Error(`Field not found in schema: '${name}'`);
-        }
-
-        const props = {...coprops, ...field.uniforms};
-
-        const fields = context.schema.objectKeys(SimpleSchema._makeGeneric(name));
+        const type   = context.schema.getType(name);
+        const error  = context.schema.getError(name, context.error);
+        const fields = context.schema.getSubfields(name);
         const parent = includeParent && name.indexOf('.') !== -1
             ? this.getFieldProps(name.replace(/(.+)\..+$/, '$1'), {includeParent: false})
             : null;
@@ -115,28 +108,7 @@ export default class BaseField extends Component {
                 : props.placeholder
             : '';
 
-        const error = (
-            context.error &&
-            context.error.details &&
-            context.error.details.find &&
-            context.error.details.find(error => error.name === name)
-        );
-
-        const disabled = props.disabled;
-
-        const defaultValue = field.defaultValue
-            ? field.defaultValue
-            : field.allowedValues
-                ? field.allowedValues[0]
-                : field.type === Date || field.type === Number
-                    ? field.min !== undefined
-                        ? field.min
-                        : field.max !== undefined
-                            ? field.max
-                            : field.type === Number
-                                ? 0
-                                : new Date()
-                    : field.type();
+        const defaultValue = context.schema.getDefaultValue(name);
 
         let value = get(context.model, name);
         if (value === undefined && !explicitDefaultValue) {
@@ -146,12 +118,12 @@ export default class BaseField extends Component {
         const onChange = (value, key = name) => context.onChange(key, value);
 
         return {
-            disabled,
             error,
             field,
             fields,
             onChange,
             parent,
+            type,
             value,
 
             ...explicitDefaultValue ? {defaultValue} : {},

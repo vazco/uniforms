@@ -1,7 +1,14 @@
 import React          from 'react';
 import {connectField} from 'uniforms';
 
-const Bool = ({disabled, name, label, value, onChange, ...props}) =>
+const Bool = ({
+    disabled,
+    label,
+    name,
+    onChange,
+    value,
+    ...props
+}) =>
     <section {...props}>
         <input
             checked={value}

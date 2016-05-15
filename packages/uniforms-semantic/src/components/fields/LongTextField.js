@@ -2,9 +2,19 @@ import React          from 'react';
 import classnames     from 'classnames';
 import {connectField} from 'uniforms';
 
-// eslint-disable-next-line max-len
-const LongText = ({className, disabled, error, field: {optional}, label, name, placeholder, value, onChange, ...props}) =>
-    <section className={classnames(className, {disabled, error, required: !optional}, 'field')} {...props}>
+const LongText = ({
+    className,
+    disabled,
+    error,
+    label,
+    name,
+    onChange,
+    placeholder,
+    required,
+    value,
+    ...props
+}) =>
+    <section className={classnames(className, {disabled, error, required}, 'field')} {...props}>
         {label && (
             <label>
                 {label}

@@ -24,10 +24,8 @@ global.navigator = {
     userAgent: 'node.js'
 };
 
+// Mocks
 import mock from 'mock-require';
-
-// Meteor mocks
-// Currently importing from meteor is impossible.
 
 global.Match = {
     OneOf () {},
@@ -38,25 +36,12 @@ global.Match = {
 global.SimpleSchema = {
     extendOptions () {},
     _makeGeneric (name) {
+        if (typeof name !== 'string') {
+            return null;
+        }
+
         return name.replace(/\.[0-9]+(?=\.|$)/g, '.$');
     }
 };
-
-// mock('meteor/check', {
-//     Match: {
-//         OneOf () {},
-//         Optional () {},
-//         ObjectIncluding () {}
-//     }
-// });
-
-// mock('meteor/aldeed:simple-schema', {
-//     SimpleSchema: {
-//         extendOptions () {},
-//         _makeGeneric (name) {
-//             return name.replace(/\.[0-9]+(?=\.|$)/g, '.$');
-//         }
-//     }
-// });
 
 mock('uniforms', '../src');

@@ -4,14 +4,15 @@ import {match}  from 'sinon';
 import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 
-import {connectField} from 'uniforms';
+import {connectField}       from 'uniforms';
+import {createSchemaBridge} from 'uniforms';
 
 describe('connectField', () => {
     const error = new Error();
     const model = {field: 'Value'};
     const onChange = spy();
     const state = {label: true, disabled: false, placeholder: false};
-    const schema = {
+    const schema = createSchemaBridge({
         getDefinition (name) {
             if (name === 'field') {
                 return {
@@ -29,6 +30,8 @@ describe('connectField', () => {
             }
         },
 
+        messageForError () {},
+
         objectKeys (name) {
             if (name === 'field') {
                 return ['subfield'];
@@ -38,8 +41,10 @@ describe('connectField', () => {
             if (name === 'field.subfield') {
                 return [];
             }
-        }
-    };
+        },
+
+        validator () {}
+    });
 
     const Test = spy(() => null);
     const Field = connectField(Test);

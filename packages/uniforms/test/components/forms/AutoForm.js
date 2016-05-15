@@ -10,12 +10,10 @@ describe('AutoForm', () => {
     const onChange = spy();
     const model = {a: 1};
     const schema = {
-        objectKeys () {
-            return ['a', 'b', 'c'];
-        },
-        validator () {
-            return validator;
-        }
+        getDefinition:   () => {},
+        messageForError: () => {},
+        objectKeys:      () => ['a', 'b', 'c'],
+        validator:       () => validator
     };
 
     beforeEach(() => {

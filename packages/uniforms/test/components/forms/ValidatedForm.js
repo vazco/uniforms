@@ -13,6 +13,9 @@ describe('ValidatedForm', () => {
     const error = new Error();
     const model = {a: 1};
     const schema = {
+        getDefinition   () {},
+        messageForError () {},
+        objectKeys      () {},
         validator () {
             return validator;
         }

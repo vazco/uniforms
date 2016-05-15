@@ -1,7 +1,15 @@
 import React          from 'react';
 import {connectField} from 'uniforms';
 
-const Text = ({disabled, label, name, placeholder, value, onChange, ...props}) =>
+const Text = ({
+    disabled,
+    label,
+    name,
+    onChange,
+    placeholder,
+    value,
+    ...props
+}) =>
     <section {...props}>
         {label && (
             <label>

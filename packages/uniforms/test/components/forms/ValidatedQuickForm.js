@@ -26,12 +26,10 @@ describe('ValidatedQuickForm', () => {
 
     const validator = spy();
     const schema = {
-        objectKeys () {
-            return ['a', 'b', 'c'];
-        },
-        validator () {
-            return validator;
-        }
+        getDefinition   () {},
+        messageForError () {},
+        objectKeys      () {return ['a', 'b', 'c'];},
+        validator       () {return validator;}
     };
 
     beforeEach(() => {

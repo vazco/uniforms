@@ -2,14 +2,21 @@ import React          from 'react';
 import classnames     from 'classnames';
 import {connectField} from 'uniforms';
 
-const ListAdd = ({className, parent: {field: {maxCount}, value: parentValue, onChange}, value, ...props}) => {
-    const limitReached = !(maxCount <= parentValue.length);
+const ListAdd = ({className, parent, value, ...props}) => {
+    const limitNotReached = !(parent.maxCount <= parent.value.length);
 
     return (
         <i
             {...props}
-            className={classnames('ui', className, limitReached ? 'link' : 'disabled', 'fitted add icon')}
-            onClick={() => limitReached && onChange(parentValue.concat([value]))}
+            className={classnames(
+                'ui',
+                className,
+                limitNotReached
+                    ? 'link'
+                    : 'disabled',
+                'fitted add icon'
+            )}
+            onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
         />
     );
 };

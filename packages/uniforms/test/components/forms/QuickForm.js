@@ -25,9 +25,10 @@ describe('QuickForm', () => {
     }
 
     const schema = {
-        objectKeys () {
-            return ['a', 'b', 'c'];
-        }
+        getDefinition   () {},
+        messageForError () {},
+        objectKeys      () {return ['a', 'b', 'c'];},
+        validator       () {}
     };
 
     beforeEach(() => {
