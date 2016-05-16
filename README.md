@@ -69,10 +69,10 @@ Then, import all needed components:
 
 ```js
 import {AutoForm}  from 'uniforms-semantic';
-import {AutoValue} from 'uniforms-semantic';
+import {AutoField} from 'uniforms-semantic';
 // or
 import {AutoForm}  from 'uniforms-unstyled';
-import {AutoValue} from 'uniforms-unstyled';
+import {AutoField} from 'uniforms-unstyled';
 
 // ...
 ```
