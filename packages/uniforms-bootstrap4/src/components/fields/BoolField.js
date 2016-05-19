@@ -4,36 +4,32 @@ import {connectField} from 'uniforms';
 import autoid         from '../../autoid';
 import FormGroup      from './FormGroup';
 
-const Bool = ({
-  field: {inline, optional},
-  disabled, error, schema,
-  label, name, id,  value,
-  placeholder,
-  inputClassName,
-  onChange, ...props
-}) => {
-  const idNice = autoid(id);
+const BoolField = props => {
+  console.log('BoolField (WIP)', props);
+  const idNice = autoid(props.id);
   return (
     <FormGroup id={idNice} {...props}>
       <div
-        className={classnames((inline ? 'checkbox-inline' : 'checkbox'))}
-        key={item}
+        className={classnames(
+          (inline ? 'checkbox-inline' : 'checkbox')
+        )}
+        key={props.item}
       >
-        <label onClick={() => onChange(!value)}>
+        <label onClick={() => onChange(!props.value)}>
           <input
-            checked={value}
+            checked={props.value}
             className="hidden"
-            disabled={disabled}
-            name={name}
-            onChange={() => onChange(!value)}
+            disabled={props.disabled}
+            name={props.name}
+            onChange={() => props.onChange(!props.value)}
             type="checkbox"
           />
-          {label}
+          {props.label}
         </label>
       </div>
     </FormGroup>
   );
 };
 
-export default connectField(Bool);
+export default connectField(BoolField);
 

@@ -1,19 +1,12 @@
-/**
- * This is a consistent wrapper for labels and inputs
- *
- * Ideally I want to use this as a wrapper for each field type
- * and this will render the wrapper, label, error, etc...
- */
+import React      from 'react';
+import classnames from 'classnames';
 
-import React          from 'react';
-import classnames     from 'classnames';
-import {BaseField} from 'uniforms';
-import {connectField} from 'uniforms';
-import autoid         from '../../autoid';
-import buildGrid      from '../../buildGrid';
-import buildErrors    from '../../buildErrors';
+import autoid      from '../../autoid';
+import buildGrid   from '../../buildGrid';
+import ErrorsField from './ErrorsField';
 
 const FormGroup = ({
+  children,
   field,
   id,                // string id (optional, auto-generated if empty)
   label,             // string label (or false)
@@ -25,55 +18,67 @@ const FormGroup = ({
   className,         // class name for the whole .form-group
   help,              // help text
   showHelpAndErrors, // boolean, if true, show help & error
-  disabled,
-  error,             // TODO need to get the error object here
-  schema,            // TODO need to get the schema
-  ...props}
-) => {
-  const idNice = autoid(id);
-
-  console.log('FormGroup (WIP need error & schema)', {
-    field, id,
-    label, grid, help,
-    error, schema,
+  disabled,          // boolean, if true, show fields as disabled
+  error,             // error validation response
+  ...props
+}) => {
+  console.log('FormGroup (WIP)', {
+    error,
+    field,
+    grid,
+    help,
+    id,
+    label
   });
 
-  const helpNice = (
-    help && (!error || showHelpAndErrors) ?
-    <span className={classnames(helpClassName ? helpClassName : 'text-muted')}>{help}</span>
-    : ''
+  const helpNice = help && (!error || showHelpAndErrors) && (
+    <span className={classnames(helpClassName ? helpClassName : 'text-muted')}>
+      {help}
+    </span>
   );
 
-  const errorNice = buildErrors(error, schema);
+  const errorNice = (
+    <ErrorsField error={error} />
+  );
+
   const required = field && !field.optional;
 
   return (
-    <section className={classnames(
-      className,
-      {disabled, 'has-danger': error, required},
-      'field',
-      'form-group',
-      {'row' : grid},
-    )} {...props}>
+    <section
+      className={classnames(
+        className,
+        'field',
+        'form-group',
+        {disabled, 'has-danger': error, required, row: grid}
+      )}
+    >
+      {label && (
+        <label
+          htmlFor={id}
+          className={classnames(
+            'form-control-label',
+            buildGrid(grid, 'label')
+          )}
+        >
+          {label}
+        </label>
+      )}
 
-    {label && (
-      <label htmlFor={idNice} className={classnames(
-        'form-control-label',
-        buildGrid(grid, 'label'),
-      )}>{label}</label>
-    )}
-
-    {grid || wrapClassName ?
-      <div className={classnames(wrapClassName, buildGrid(grid, 'input'))}>
-        {props.children} {errorNice} {helpNice}
-      </div>
+      {(grid || wrapClassName) ?
+        <div className={classnames(wrapClassName, buildGrid(grid, 'input'))}>
+          {children}
+          {errorNice}
+          {helpNice}
+        </div>
       :
-      <span>{props.children} {errorNice} {helpNice}</span>
-    }
-
-  </section>
+        <span>
+          {children}
+          {errorNice}
+          {helpNice}
+        </span>
+      }
+    </section>
   );
 }
 
-export default connectField(FormGroup);
-
+export default FormGroup;

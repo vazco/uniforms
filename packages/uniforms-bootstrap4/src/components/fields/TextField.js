@@ -4,41 +4,28 @@ import {connectField} from 'uniforms';
 import autoid         from '../../autoid';
 import FormGroup      from './FormGroup';
 
-const Text = ({
-  field: {optional},
-  disabled, error, schema,
-  label, name, id,  value,
-  placeholder,
-  inputClassName,
-  onChange, ...props
-}) => {
-  const idNice = autoid(id);
-
-  console.log('FormGroup (WIP need error & schema)', {
-    id,
-    label,
-    error, schema,
-  });
-
+const TextField = props => {
+  console.log('TextField (WIP)', props);
+  const idNice = autoid(props.id);
   return (
     <FormGroup id={idNice} {...props}>
       <input
         className={classnames(
-          inputClassName,
+          props.inputClassName,
           'form-control',
-          (error ? 'form-control-danger' : ''),
+          {'form-control-danger': props.error}
         )}
-        disabled={disabled}
-        name={name}
+        disabled={props.disabled}
+        name={props.name}
         id={idNice}
-        onChange={event => onChange(event.target.value)}
-        placeholder={placeholder}
+        onChange={event => props.onChange(event.target.value)}
+        placeholder={props.placeholder}
         type="text"
-        value={value}
+        value={props.value}
       />
     </FormGroup>
   )
 ;
 }
 
-export default connectField(Text);
+export default connectField(TextField);

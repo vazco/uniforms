@@ -1,7 +1,7 @@
 import React       from 'react';
 import classnames  from 'classnames';
 import {BaseField} from 'uniforms';
-import buildGrid      from '../../buildGrid';
+import buildGrid   from '../../buildGrid';
 
 const SubmitField = (
   {

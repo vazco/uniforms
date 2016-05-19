@@ -4,24 +4,26 @@ import autoid         from '../../autoid';
 import {connectField} from 'uniforms';
 
 // eslint-disable-next-line max-len
-const LongText = ({
-  field: {optional},
-  disabled, error, schema,
-  label, name, id,  value,
-  placeholder,
-  inputClassName,
-  onChange, ...props
-}) => {
-  const idNice = autoid(id);
+const LongText = props => {
+  const { field: { allowedValues} } = props;
+  console.log('LongText (WIP)', props);
+  const idNice = autoid(props.id);
   return (
     <FormGroup id={idNice} {...props}>
       <textarea
-        disabled={disabled}
-        name={name}
-        onChange={event => onChange(event.target.value)}
+        className={classnames(
+          props.inputClassName,
+          'form-control',
+          (props.error ? 'form-control-danger' : ''),
+        )}
+        disabled={props.disabled}
+        name={props.name}
+        id={idNice}
+        onChange={event => props.onChange(event.target.value)}
         placeholder={placeholder}
+        value={props.value}
         type="text"
-        value={value}
+        {...props}
       />
     </FormGroup>
   );

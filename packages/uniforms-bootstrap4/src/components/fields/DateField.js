@@ -12,30 +12,25 @@ const dateParse = (timestamp, onChange) => {
     }
 };
 
-const Date_ = ({
-  disabled, error, schema,
-  field: {max, min, optional},
-  label, name, id,  value,
-  inputClassName,
-  onChange, ...props
-}) => {
-  const idNice = autoid(id);
+const Date_ = props => {
+  console.log('DateField (WIP)', props);
+  const idNice = autoid(props.id);
   return (
     <FormGroup id={idNice} {...props}>
       <input
         className={classnames(
-          inputClassName,
+          props.inputClassName,
           'form-control',
-          // (error ? 'form-control-danger' : ''),
+          {'form-control-danger': props.error}
         )}
-        disabled={disabled}
-        max={dateFormat(max)}
-        min={dateFormat(min)}
-        name={name}
+        disabled={props.disabled}
+        name={props.name}
         id={idNice}
-        onChange={event => dateParse(event.target.valueAsNumber, onChange)}
+        max={dateFormat(props.max)}
+        min={dateFormat(props.min)}
+        onChange={event => dateParse(event.target.valueAsNumber, props.onChange)}
         type="datetime-local"
-        value={dateFormat(value)}
+        value={dateFormat(props.value)}
       />
     </FormGroup>
   );

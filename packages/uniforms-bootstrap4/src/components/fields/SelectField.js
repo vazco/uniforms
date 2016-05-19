@@ -2,49 +2,45 @@ import React          from 'react';
 import classnames     from 'classnames';
 import {connectField} from 'uniforms';
 import autoid         from '../../autoid';
+import buildOptions   from '../../buildOptions';
 import FormGroup      from './FormGroup';
 
 // eslint-disable-next-line max-len
-const Select = ({
-  field: {allowedValues, optional},
-  transform,
-  disabled, error, schema,
-  label, name, id,  value,
-  placeholder,
-  inputClassName,
-  onChange, ...props
-}) => {
-  const idNice = autoid(id);
+const SelectField = props => {
+  const { field: { allowedValues} } = props;
+  const idNice = autoid(props.id);
+  const options = buildOptions(props);
+  console.log('SelectField (WIP)', props, options);
   return (
     <FormGroup id={idNice} {...props}>
       <select
         className={classnames(
-          inputClassName,
+          props.inputClassName,
           'c-select',
           'form-control',
-          (error ? 'form-control-danger' : ''),
+          (props.error ? 'form-control-danger' : ''),
         )}
-        disabled={disabled}
-        name={name}
-        onChange={event => onChange(event.target.value)}
-        value={value}
+        disabled={props.disabled}
+        name={props.name}
+        id={idNice}
+        onChange={event => props.onChange(event.target.value)}
+        value={props.value}
         {...props}
       >
-        {placeholder && (
+        {props.placeholder && (
           <option value="" disabled hidden>
-            {placeholder}
+            {props.placeholder}
           </option>
         )}
 
-        {allowedValues.map(value =>
-          <option key={value} value={value}>
-            {transform ? transform(value) : value}
-          </option>
-        )}
+        {options && Object.keys(options).map(value => {
+          const label = options[value];
+          return <option key={value} value={value}>{label ? label : value}</option>
+        })}
       </select>
     </FormGroup>
   );
 };
 
-export default connectField(Select);
+export default connectField(SelectField);
 
