@@ -1,24 +1,22 @@
+<a href="http://unicms.io"><img src="http://unicms.io/banners/standalone.png" /></a>
+
 # uniforms
 
-This is a set of npm packages, which contains helpers and `React` components - both unstyled and stylised with the Semantic UI - to easily create, generate and validate forms using `SimpleSchema`.
+This is a set of npm packages for Meteor, which contains helpers and `React` components - both unstyled and stylised with the Semantic UI - to easily create, generate and validate forms using [`SimpleSchema`](https://github.com/aldeed/meteor-simple-schema).
 
-## Note
+
+## Installation
 
 These are npm packages, so they can't imply any Meteor package, and you have to install dependencies manually, in your Meteor app directory:
 
 ```shell
-$ meteor add aldeed:simple-schema
-$ meteor add mdg:validation-error
-```
-
-## Installation
-
-```shell
 # semantic ui components
-$ npm install --save react uniforms uniforms-semantic
+$ meteor npm install --save react uniforms uniforms-semantic
+$ meteor add aldeed:simple-schema check
 
 # unstyled components
-$ npm install --save react uniforms uniforms-unstyled
+$ meteor npm install --save react uniforms uniforms-unstyled
+$ meteor add aldeed:simple-schema check
 ```
 
 ## Basic usage
@@ -71,10 +69,10 @@ Then, import all needed components:
 
 ```js
 import {AutoForm}  from 'uniforms-semantic';
-import {AutoValue} from 'uniforms-semantic';
+import {AutoField} from 'uniforms-semantic';
 // or
 import {AutoForm}  from 'uniforms-unstyled';
-import {AutoValue} from 'uniforms-unstyled';
+import {AutoField} from 'uniforms-unstyled';
 
 // ...
 ```
@@ -303,3 +301,11 @@ $ npm run build # build src/
 $ npm run watch # build src/ continuously
 $ npm run cover # build code coverage raport
 ```
+
+### Copyright and license
+
+Code and documentation &copy; 2016 [Vazco.eu](http://vazco.eu)
+Released under the MIT license.
+
+This package is part of [Universe](http://unicms.io), a package ecosystem based on [Meteor platform](http://meteor.com) maintained by [Vazco](http://www.vazco.eu).
+It works as standalone Meteor package, but you can get much more features when using the whole system.
