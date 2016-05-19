@@ -21,4 +21,4 @@ const ListAdd = ({className, parent, value, ...props}) => {
     );
 };
 
-export default connectField(ListAdd, {includeParent: true, includeDefault: false});
+export default connectField(ListAdd, {includeParent: true, initialValue: false});

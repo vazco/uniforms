@@ -131,7 +131,7 @@ BaseForm.childContextTypes = {
             getProps:        PropTypes.func.isRequired,
             getSubfields:    PropTypes.func.isRequired,
             getValidator:    PropTypes.func.isRequired,
-            getDefaultValue: PropTypes.func.isRequired
+            getInitialValue: PropTypes.func.isRequired
         }).isRequired,
 
         state: PropTypes.shape({

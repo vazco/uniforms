@@ -160,9 +160,9 @@ export default connectField(MyText, {
 
     baseField: BaseField, // connectField returns create HOC inherited from baseField class.
 
+    initialValue: true,   // Pass true, to set initial value, when it is not defined.
     includeParent: false, // Pass true, to receive parent props.
-    includeInChain: true, // Pass true, to stay visible, in nested fields.
-    includeDefault: true  // Pass true, to set default value, when it is not defined.
+    includeInChain: true  // Pass true, to stay visible, in nested fields.
 });
 ```
 

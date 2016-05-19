@@ -131,9 +131,9 @@ describe('connectField', () => {
         });
     });
 
-    context('when called with `includeDefault`', () => {
+    context('when called with `initialValue`', () => {
         it('includes default value (true)', () => {
-            const Field = connectField(Test, {includeDefault: true});
+            const Field = connectField(Test, {initialValue: true});
 
             mount(
                 <Field name="field" />,
@@ -144,7 +144,7 @@ describe('connectField', () => {
         });
 
         it('does nothing (false)', () => {
-            const Field = connectField(Test, {includeDefault: false});
+            const Field = connectField(Test, {initialValue: false});
 
             mount(
                 <Field name="field" />,

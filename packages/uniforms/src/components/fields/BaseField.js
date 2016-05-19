@@ -69,23 +69,19 @@ export default class BaseField extends Component {
     }
 
     // eslint-disable-next-line complexity
-    getFieldProps (name, {explicitDefaultValue = false, includeParent = true} = {}) {
-        const costate = this.getChildContextState();
+    getFieldProps (name, {explicitInitialValue = false, includeParent = false} = {}) {
         const context = this.context.uniforms;
-        const coprops = {
-            label:       costate.label,
-            disabled:    costate.disabled,
-            placeholder: costate.placeholder,
-
+        const props = {
+            ...this.getChildContextState(),
             ...this.props
         };
 
         if (name === undefined) {
-            name = joinName(context.name, coprops.name);
+            name = joinName(context.name, props.name);
         }
 
-        const field = {...context.schema.getField(name)};
-        const props = {...context.schema.getProps(name), ...coprops};
+        const field = context.schema.getField(name);
+        const schemaProps = context.schema.getProps(name);
 
         const type   = context.schema.getType(name);
         const error  = context.schema.getError(name, context.error);
@@ -96,7 +92,7 @@ export default class BaseField extends Component {
 
         const label = props.label
             ? props.label === true
-                ? field.label
+                ? schemaProps.label
                 : props.label
             : props.label === null
                 ? null
@@ -104,15 +100,15 @@ export default class BaseField extends Component {
 
         const placeholder = props.placeholder
             ? props.placeholder === true
-                ? field.label
+                ? schemaProps.label
                 : props.placeholder
             : '';
 
-        const defaultValue = context.schema.getDefaultValue(name);
-
         let value = get(context.model, name);
-        if (value === undefined && !explicitDefaultValue) {
-            value = defaultValue;
+        if (value === undefined && !explicitInitialValue) {
+            value = context.schema.getInitialValue(name);
+        } else if (explicitInitialValue) {
+            props.initialValue = context.schema.getInitialValue(name);
         }
 
         const onChange = (value, key = name) => context.onChange(key, value);
@@ -126,7 +122,7 @@ export default class BaseField extends Component {
             type,
             value,
 
-            ...explicitDefaultValue ? {defaultValue} : {},
+            ...schemaProps,
             ...props,
 
             name,

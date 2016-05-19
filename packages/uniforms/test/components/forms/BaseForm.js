@@ -3,19 +3,22 @@ import {expect} from 'chai';
 import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 
-import {BaseForm}           from 'uniforms';
-import {createSchemaBridge} from 'uniforms';
+import {BaseForm} from 'uniforms';
 
 describe('BaseForm', () => {
-    const error    = new Error();
-    const model    = {_: 1};
-    const _schema  = {
-        getDefinition   () {return {type: String};},
-        messageForError () {},
-        objectKeys      () {return ['_'];},
-        validator       () {}
+    const error  = new Error();
+    const model  = {_: 1};
+    const schema = {
+        getError:         () => {},
+        getErrorMessages: () => {},
+        getField:         () => ({type: String}),
+        getInitialValue:  () => {},
+        getProps:         () => {},
+        getSubfields:     () => ['_'],
+        getType:          () => {},
+        getValidator:     () => {}
     };
-    const schema   = createSchemaBridge(_schema);
+
     const onChange = spy();
     const onSubmit = spy();
 
@@ -49,7 +52,8 @@ describe('BaseForm', () => {
         });
 
         it('have correct `schema`', () => {
-            expect(context.uniforms).to.have.property('schema', schema);
+            expect(context.uniforms).to.have.property('schema');
+            expect(context.uniforms.schema).to.have.property('schema', schema);
         });
 
         it('have correct `state`', () => {
@@ -84,20 +88,6 @@ describe('BaseForm', () => {
         it('have correct children', () => {
             expect(wrapper).to.be.not.empty;
             expect(wrapper).to.have.exactly(3).descendants('div');
-        });
-    });
-
-    context('when rerendered', () => {
-        const wrapper = mount(
-            <BaseForm model={model} schema={_schema} onChange={onChange} />
-        );
-
-        wrapper.setProps({schema});
-
-        const context = wrapper.instance().getChildContext();
-
-        it('creates new schema bridge', () => {
-            expect(context.uniforms).to.have.property('schema', schema);
         });
     });
 

@@ -25,4 +25,4 @@ const ListFieldDel = ({className, disabled, parent, name, ...props}) => {
    );
 };
 
-export default connectField(ListFieldDel, {includeParent: true, includeDefault: false});
+export default connectField(ListFieldDel, {includeParent: true, initialValue: false});
