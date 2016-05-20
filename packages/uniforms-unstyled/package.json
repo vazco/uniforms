@@ -1,6 +1,6 @@
 {
   "name": "uniforms-unstyled",
-  "version": "1.0.0-rc.2",
+  "version": "1.0.0-rc.3",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "description": "Unstyled components for uniforms.",
@@ -37,7 +37,7 @@
   },
   "peerDependencies": {
     "react": "^15.0.2",
-    "uniforms": "^1.0.0-rc.2"
+    "uniforms": "^1.0.0-rc.3"
   },
   "babel": {
     "presets": [
