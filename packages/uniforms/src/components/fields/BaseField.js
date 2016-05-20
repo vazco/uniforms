@@ -143,6 +143,15 @@ export default class BaseField extends Component {
             value = defaultValue;
         }
 
+        const findError = name => (
+            context.error &&
+            context.error.details &&
+            context.error.details.find &&
+            context.error.details.find(error => error.name === name)
+        );
+        const findValue = name => get(context.model, name);
+        const findField = name => context.schema.getDefinition(name);
+
         const onChange = (value, key = name) => context.onChange(key, value);
 
         return {
@@ -150,6 +159,9 @@ export default class BaseField extends Component {
             error,
             field,
             fields,
+            findError,
+            findField,
+            findValue,
             onChange,
             parent,
             value,

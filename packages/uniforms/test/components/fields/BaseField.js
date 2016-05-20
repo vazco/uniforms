@@ -204,6 +204,21 @@ describe('BaseField', () => {
             expect(props).to.have.property('field').that.is.deep.equal(schema.getDefinition('a'));
         });
 
+        it('have correct `findError`', () => {
+            expect(props).to.have.property('findError').that.is.a('function');
+            expect(props.findError('a')).to.deep.equal(props.error);
+        });
+
+        it('have correct `findField`', () => {
+            expect(props).to.have.property('findField').that.is.a('function');
+            expect(props.findField('a')).to.deep.equal(props.field);
+        });
+
+        it('have correct `findValue`', () => {
+            expect(props).to.have.property('findValue').that.is.a('function');
+            expect(props.findValue('a')).to.deep.equal(props.value);
+        });
+
         it('have correct `fields`', () => {
             expect(props).to.have.property('fields').that.is.an('array');
             expect(props).to.have.property('fields').that.is.deep.equal(schema.objectKeys('a'));
