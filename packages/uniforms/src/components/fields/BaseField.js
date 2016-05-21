@@ -111,12 +111,24 @@ export default class BaseField extends Component {
             props.initialValue = context.schema.getInitialValue(name);
         }
 
+        const findError = name => (
+            context.error &&
+            context.error.details &&
+            context.error.details.find &&
+            context.error.details.find(error => error.name === name)
+        );
+        const findValue = name => get(context.model, name);
+        const findField = name => context.schema.getField(name);
+
         const onChange = (value, key = name) => context.onChange(key, value);
 
         return {
             error,
             field,
             fields,
+            findError,
+            findField,
+            findValue,
             onChange,
             parent,
             type,
