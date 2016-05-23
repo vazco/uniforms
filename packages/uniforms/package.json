@@ -17,7 +17,7 @@
     "schema"
   ],
   "scripts": {
-    "lint": "./node_modules/.bin/eslint --no-eslintrc -c .eslintrc src",
+    "lint": "./node_modules/.bin/eslint src",
     "test": "./node_modules/.bin/babel-node ./node_modules/.bin/_mocha --require test/index.js --recursive test --reporter list",
     "cover": "./node_modules/.bin/babel-node ./node_modules/.bin/isparta cover --root src --report html ./node_modules/.bin/_mocha -- --require test/index.js --recursive test",
     "build": "./node_modules/.bin/babel --out-dir lib src",
@@ -65,6 +65,7 @@
     ]
   },
   "eslintConfig": {
+    "root": true,
     "extends": [
       "vazco"
     ],

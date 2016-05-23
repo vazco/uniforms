@@ -17,7 +17,7 @@
     "schema"
   ],
   "scripts": {
-    "lint": "./node_modules/.bin/eslint --no-eslintrc -c .eslintrc src",
+    "lint": "./node_modules/.bin/eslint src",
     "test": "true",
     "cover": "true",
     "build": "./node_modules/.bin/babel --out-dir lib src",
@@ -47,6 +47,7 @@
     ]
   },
   "eslintConfig": {
+    "root": true,
     "extends": [
       "vazco"
     ]
