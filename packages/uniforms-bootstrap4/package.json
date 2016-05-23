@@ -1,6 +1,6 @@
 {
   "name": "uniforms-bootstrap4",
-  "version": "1.0.0-rc.2",
+  "version": "1.0.0-rc.3",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "description": "Bootstrap4 UI components for uniforms.",
@@ -22,7 +22,7 @@
     "cover": "true",
     "build": "./node_modules/.bin/babel --out-dir lib src",
     "watch": "./node_modules/.bin/babel --out-dir lib src --watch",
-    "prepublish": "npm run lint && npm run test && npm run build"
+    "prepublish": "npm run test && npm run build"
   },
   "devDependencies": {
     "babel-cli": "^6.8.0",

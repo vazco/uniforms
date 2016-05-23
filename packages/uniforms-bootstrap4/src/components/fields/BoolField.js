@@ -11,7 +11,7 @@ const BoolField = props => {
     <FormGroup id={idNice} {...props}>
       <div
         className={classnames(
-          (inline ? 'checkbox-inline' : 'checkbox')
+          (props.inline ? 'checkbox-inline' : 'checkbox')
         )}
         key={props.item}
       >
