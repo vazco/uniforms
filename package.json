@@ -1,8 +1,8 @@
 {
   "private": true,
 
-  "dependencies": {
-    "lerna": "2.0.0-beta.7"
+  "devDependencies": {
+    "lerna": "2.0.0-beta.13"
   },
 
   "scripts": {
