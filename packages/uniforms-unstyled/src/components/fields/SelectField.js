@@ -1,7 +1,17 @@
 import React          from 'react';
 import {connectField} from 'uniforms';
 
-const Select = ({disabled, field: {allowedValues}, label, name, placeholder, transform, value, onChange, ...props}) =>
+const Select = ({
+    allowedValues,
+    disabled,
+    label,
+    name,
+    onChange,
+    placeholder,
+    transform,
+    value,
+    ...props
+}) =>
     <section {...props}>
         {label && (
             <label>

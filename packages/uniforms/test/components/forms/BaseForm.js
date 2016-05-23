@@ -6,9 +6,19 @@ import {spy}    from 'sinon';
 import {BaseForm} from 'uniforms';
 
 describe('BaseForm', () => {
-    const error    = new Error();
-    const model    = {_: 1};
-    const schema   = {_: {type: String}};
+    const error  = new Error();
+    const model  = {_: 1};
+    const schema = {
+        getError:         () => {},
+        getErrorMessages: () => {},
+        getField:         () => ({type: String}),
+        getInitialValue:  () => {},
+        getProps:         () => {},
+        getSubfields:     () => ['_'],
+        getType:          () => {},
+        getValidator:     () => {}
+    };
+
     const onChange = spy();
     const onSubmit = spy();
 
@@ -42,7 +52,8 @@ describe('BaseForm', () => {
         });
 
         it('have correct `schema`', () => {
-            expect(context.uniforms).to.have.property('schema', schema);
+            expect(context.uniforms).to.have.property('schema');
+            expect(context.uniforms.schema).to.have.property('schema', schema);
         });
 
         it('have correct `state`', () => {

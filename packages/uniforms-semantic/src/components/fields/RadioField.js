@@ -2,11 +2,21 @@ import React          from 'react';
 import classnames     from 'classnames';
 import {connectField} from 'uniforms';
 
-// eslint-disable-next-line max-len
-const Select = ({className, disabled, error, field: {allowedValues, optional}, label, name, value, onChange, ...props}) =>
+const Select = ({
+    allowedValues,
+    className,
+    disabled,
+    error,
+    label,
+    name,
+    onChange,
+    required,
+    value,
+    ...props
+}) =>
     <section className={classnames(className, {disabled, error}, 'grouped fields')} {...props}>
         {label && (
-            <section className={classnames({required: !optional}, 'field')}>
+            <section className={classnames({required}, 'field')}>
                 <label>
                     {label}
                 </label>

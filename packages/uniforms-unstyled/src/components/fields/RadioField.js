@@ -1,7 +1,15 @@
 import React          from 'react';
 import {connectField} from 'uniforms';
 
-const Radio = ({disabled, field: {allowedValues}, label, name, value, onChange, ...props}) =>
+const Radio = ({
+    allowedValues,
+    disabled,
+    label,
+    name,
+    onChange,
+    value,
+    ...props
+}) =>
     <section {...props}>
         {label && (
             <label>

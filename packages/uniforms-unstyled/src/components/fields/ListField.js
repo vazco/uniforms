@@ -6,8 +6,15 @@ import {joinName}     from 'uniforms';
 import ListAddField  from './ListAddField';
 import ListItemField from './ListItemField';
 
+const List = ({
+    children,
+    label,
+    name,
 // eslint-disable-next-line no-unused-vars
-const List = ({children, label, name, placeholder, value, onChange, ...props}) =>
+    onChange,
+    value,
+    ...props
+}) =>
     <ul {...props}>
         {label && (
             <label>

@@ -2,10 +2,6 @@ import get         from 'lodash.get';
 import {Component} from 'react';
 import {PropTypes} from 'react';
 
-// Currently importing from meteor is impossible.
-// import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-let SimpleSchema = (typeof global === 'object' ? global : window).SimpleSchema;
-
 import BaseForm from '../forms/BaseForm';
 import joinName from '../../helpers/joinName';
 
@@ -73,37 +69,30 @@ export default class BaseField extends Component {
     }
 
     // eslint-disable-next-line complexity
-    getFieldProps (name, {explicitDefaultValue = false, includeParent = true} = {}) {
-        const costate = this.getChildContextState();
+    getFieldProps (name, {explicitInitialValue = false, includeParent = false} = {}) {
         const context = this.context.uniforms;
-        const coprops = {
-            label:       costate.label,
-            disabled:    costate.disabled,
-            placeholder: costate.placeholder,
-
+        const props = {
+            ...this.getChildContextState(),
             ...this.props
         };
 
         if (name === undefined) {
-            name = joinName(context.name, coprops.name);
+            name = joinName(context.name, props.name);
         }
 
-        const field = context.schema.getDefinition(name);
+        const field = context.schema.getField(name);
+        const schemaProps = context.schema.getProps(name);
 
-        if (field === undefined) {
-            throw new Error(`Field not found in schema: '${name}'`);
-        }
-
-        const props = {...coprops, ...field.uniforms};
-
-        const fields = context.schema.objectKeys(SimpleSchema._makeGeneric(name));
+        const type   = context.schema.getType(name);
+        const error  = context.schema.getError(name, context.error);
+        const fields = context.schema.getSubfields(name);
         const parent = includeParent && name.indexOf('.') !== -1
             ? this.getFieldProps(name.replace(/(.+)\..+$/, '$1'), {includeParent: false})
             : null;
 
         const label = props.label
             ? props.label === true
-                ? field.label
+                ? schemaProps.label
                 : props.label
             : props.label === null
                 ? null
@@ -111,36 +100,15 @@ export default class BaseField extends Component {
 
         const placeholder = props.placeholder
             ? props.placeholder === true
-                ? field.label
+                ? schemaProps.label
                 : props.placeholder
             : '';
 
-        const error = (
-            context.error &&
-            context.error.details &&
-            context.error.details.find &&
-            context.error.details.find(error => error.name === name)
-        );
-
-        const disabled = props.disabled;
-
-        const defaultValue = field.defaultValue
-            ? field.defaultValue
-            : field.allowedValues
-                ? field.allowedValues[0]
-                : field.type === Date || field.type === Number
-                    ? field.min !== undefined
-                        ? field.min
-                        : field.max !== undefined
-                            ? field.max
-                            : field.type === Number
-                                ? 0
-                                : new Date()
-                    : field.type();
-
         let value = get(context.model, name);
-        if (value === undefined && !explicitDefaultValue) {
-            value = defaultValue;
+        if (value === undefined && !explicitInitialValue) {
+            value = context.schema.getInitialValue(name);
+        } else if (explicitInitialValue) {
+            props.initialValue = context.schema.getInitialValue(name);
         }
 
         const findError = name => (
@@ -150,12 +118,11 @@ export default class BaseField extends Component {
             context.error.details.find(error => error.name === name)
         );
         const findValue = name => get(context.model, name);
-        const findField = name => context.schema.getDefinition(name);
+        const findField = name => context.schema.getField(name);
 
         const onChange = (value, key = name) => context.onChange(key, value);
 
         return {
-            disabled,
             error,
             field,
             fields,
@@ -164,9 +131,10 @@ export default class BaseField extends Component {
             findValue,
             onChange,
             parent,
+            type,
             value,
 
-            ...explicitDefaultValue ? {defaultValue} : {},
+            ...schemaProps,
             ...props,
 
             name,

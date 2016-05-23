@@ -1,7 +1,18 @@
 import React          from 'react';
 import {connectField} from 'uniforms';
 
-const Num = ({disabled, field: {decimal, max, min}, label, name, placeholder, value, onChange, ...props}) =>
+const Num = ({
+    decimal,
+    disabled,
+    label,
+    max,
+    min,
+    name,
+    onChange,
+    placeholder,
+    value,
+    ...props
+}) =>
     <section {...props}>
         {label && (
             <label>

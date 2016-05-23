@@ -1,7 +1,15 @@
 import React          from 'react';
 import {connectField} from 'uniforms';
 
-const LongText = ({disabled, label, name, placeholder, value, onChange, ...props}) =>
+const LongText = ({
+    disabled,
+    label,
+    name,
+    onChange,
+    placeholder,
+    value,
+    ...props
+}) =>
     <section {...props}>
         {label && (
             <label>
