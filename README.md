@@ -2,8 +2,9 @@
 
 # uniforms
 
-This is a set of npm packages for Meteor, which contains helpers and `React` components - both unstyled and stylised with the Semantic UI - to easily create, generate and validate forms using [`SimpleSchema`](https://github.com/aldeed/meteor-simple-schema).
+This is a set of npm packages designed for Meteor, which contains helpers and `React` components - both unstyled and stylised with the Semantic UI - to easily create, generate and validate forms using [`SimpleSchema`](https://github.com/aldeed/meteor-simple-schema).
 
+**Note:** Following examples are heavily based on `SimpleSchema`, but it's not mandatory and you can easily [use different schemas](#custom-schema).
 
 ## Installation
 
@@ -122,7 +123,7 @@ const ExplicitAutoForm = () =>
 
 | Component       | Description                                                     | Prerequisites            |
 |:---------------:|:---------------------------------------------------------------:|:------------------------:|
-| `AutoField`     | Automatically renders a correct field, based on a given schema. | *none*                   |
+| `AutoField`     | Automatically renders a correct field, based on field's `type`. | *none*                   |
 | `BoolField`     | Checkbox.                                                       | `type: Boolean`          |
 | `DateField`     | HTML5 `date-localtime` input.                                   | `type: Date`             |
 | `ErrorsField`   | Error message with a given error or list of validation errors.  | *none*                   |
@@ -137,6 +138,8 @@ const ExplicitAutoForm = () =>
 | `SelectField`   | Select.                                                         | `allowedValues`          |
 | `SubmitField`   | Submit button.                                                  | *none*                   |
 | `TextField`     | Text input.                                                     | `type: String`           |
+
+**Note:** You can pass `component` prop to `AutoField` to bypass field guessing algorithm.
 
 ### Custom field component
 
@@ -160,13 +163,32 @@ export default connectField(MyText, {
 
     baseField: BaseField, // connectField returns create HOC inherited from baseField class.
 
+    initialValue: true,   // Pass true, to set initial value, when it is not defined.
     includeParent: false, // Pass true, to receive parent props.
-    includeInChain: true, // Pass true, to stay visible, in nested fields.
-    includeDefault: true  // Pass true, to set default value, when it is not defined.
+    includeInChain: true  // Pass true, to stay visible, in nested fields.
 });
 ```
 
-### Custom field in schema
+### Custom schema
+
+To use different schemas, you have to create a *bridge* - unified schema mapper. *Bridge* is (preferably) a subclass of `Bridge`, implementing static `check(schema)` and these instance methods:
+
+- `getError(name, error)`
+- `getErrorMessages(error)`
+- `getField(name)`
+- `getInitialValue(name)`
+- `getProps(name)`
+- `getSubfields(name)`
+- `getType(name)`
+- `getValidator(options)`
+
+Currently built-in bridges:
+
+- SimpleSchema
+
+**Note:** Further informations in [`src/bridges/Bridge.js`](src/bridges/Bridge.js).
+
+### Custom component in SimpleSchema
 
 **Note:** remeber to import `uniforms` packages first.
 
@@ -187,6 +209,8 @@ const PersonSchema = new SimpleSchema({
 
 ### Field props
 
+**Note:** These are **not** only props, that field will receive - these are guaranteed by `uniforms`.
+
 | Name          | Type                  | Description                            |
 |:-------------:|:---------------------:|:--------------------------------------:|
 | `disabled`    | `bool`                | Is field disabled?                     |
@@ -201,6 +225,7 @@ const PersonSchema = new SimpleSchema({
 | `onChange`    | `func(value, [name])` | Change field value.                    |
 | `parent`      | `object`              | Parent field props.                    |
 | `placeholder` | `string`              | Field placeholder.                     |
+| `type`        | `func`                | Field type.                            |
 | `value`       | `any`                 | Field value.                           |
 
 Every prop can be overriden, but `label`, `placeholder` and `disabled` have special semantics:

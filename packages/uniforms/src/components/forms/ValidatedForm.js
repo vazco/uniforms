@@ -12,7 +12,9 @@ export default class ValidatedForm extends BaseForm {
         this.state = {
             error: null,
             after: false,
-            validator: this.props.schema.validator(this.props.validator)
+            validator: this
+                .getChildContextSchema()
+                .getValidator(this.props.validator)
         };
 
         this.validate = this.validate.bind(this);
@@ -23,11 +25,20 @@ export default class ValidatedForm extends BaseForm {
     }
 
     componentWillReceiveProps ({model, schema, validator}) {
+        super.componentWillReceiveProps(...arguments);
+
         if (this.props.schema    !== schema ||
             this.props.validator !== validator) {
-            this.setState({validator: schema.validator(validator)}, () => this.validate());
+            this.setState({
+                after: true,
+                validator: this
+                    .getChildContextSchema()
+                    .getValidator(validator)
+            }, () => this.validate());
         } else if (!isEqual(this.props.model, model)) {
-            this.validate();
+            this.setState({
+                after: true
+            }, () => this.validate());
         }
     }
 
@@ -69,10 +80,7 @@ export default class ValidatedForm extends BaseForm {
 ValidatedForm.defaultProps = {
     ...BaseForm.defaultProps,
 
-    validate: 'onChangeAfterSubmit',
-    validator: {
-        clean: true
-    }
+    validate: 'onChangeAfterSubmit'
 };
 
 ValidatedForm.propTypes = {
@@ -83,5 +91,5 @@ ValidatedForm.propTypes = {
         'onChangeAfterSubmit',
         'onSubmit'
     ]),
-    validator: PropTypes.object
+    validator: PropTypes.any
 };

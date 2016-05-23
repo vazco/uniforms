@@ -9,7 +9,16 @@ const dateParse = (timestamp, onChange) => {
     }
 };
 
-const Date_ = ({disabled, field: {max, min}, label, name, value, onChange, ...props}) =>
+const Date_ = ({
+    disabled,
+    label,
+    max,
+    min,
+    name,
+    onChange,
+    value,
+    ...props
+}) =>
     <section {...props}>
         {label && (
             <label>

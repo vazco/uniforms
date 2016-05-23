@@ -23,7 +23,7 @@ export default class ValidatedQuickForm extends ValidatedForm {
 
         return (
             <form {...nativeFormProps}>
-                {this.props.schema.objectKeys().map(key =>
+                {this.getChildContextSchema().getSubfields().map(key =>
                     <AutoField key={key} name={key} />
                 )}
 

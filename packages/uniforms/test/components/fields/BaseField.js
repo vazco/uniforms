@@ -3,7 +3,8 @@ import {expect} from 'chai';
 import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 
-import {BaseField} from 'uniforms';
+import {BaseField}          from 'uniforms';
+import {createSchemaBridge} from 'uniforms';
 
 describe('BaseField', () => {
     class TestField extends BaseField {
@@ -20,7 +21,7 @@ describe('BaseField', () => {
     const model = {a: {b: {c: 'example'}}};
     const onChange = spy();
     const state = {label: true, disabled: false, placeholder: true};
-    const schema = {
+    const schema = createSchemaBridge({
         getDefinition (name) {
             if (name === 'a' || name === 'a.b') {
                 return {
@@ -77,6 +78,8 @@ describe('BaseField', () => {
             }
         },
 
+        messageForError () {},
+
         objectKeys (name) {
             if (name === 'a') {
                 return ['b'];
@@ -87,8 +90,10 @@ describe('BaseField', () => {
             }
 
             return [];
-        }
-    };
+        },
+
+        validator () {}
+    });
 
     afterEach(() => {
         onChange.reset();
@@ -201,7 +206,7 @@ describe('BaseField', () => {
 
         it('have correct `field`', () => {
             expect(props).to.have.property('field').that.is.an('object');
-            expect(props).to.have.property('field').that.is.deep.equal(schema.getDefinition('a'));
+            expect(props).to.have.property('field').that.is.deep.equal(schema.getField('a'));
         });
 
         it('have correct `findError`', () => {
@@ -221,7 +226,7 @@ describe('BaseField', () => {
 
         it('have correct `fields`', () => {
             expect(props).to.have.property('fields').that.is.an('array');
-            expect(props).to.have.property('fields').that.is.deep.equal(schema.objectKeys('a'));
+            expect(props).to.have.property('fields').that.is.deep.equal(schema.getSubfields('a'));
         });
 
         it('have correct `label`', () => {

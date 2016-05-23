@@ -5,8 +5,15 @@ import {joinName}     from 'uniforms';
 
 import AutoField from './AutoField';
 
+const Nest = ({
+    children,
+    fields,
+    label,
+    name,
 // eslint-disable-next-line no-unused-vars
-const Nest = ({children, fields, label, name, onChange, ...props}) =>
+    onChange,
+    ...props
+}) =>
     <section {...props}>
         {label && (
             <label>

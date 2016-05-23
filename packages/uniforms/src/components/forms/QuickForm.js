@@ -23,7 +23,7 @@ export default class QuickForm extends BaseForm {
 
         return (
             <form {...nativeFormProps}>
-                {this.props.schema.objectKeys().map(key =>
+                {this.getChildContextSchema().getSubfields().map(key =>
                     <AutoField key={key} name={key} />
                 )}
 

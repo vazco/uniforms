@@ -2,9 +2,13 @@ import React       from 'react';
 import {Component} from 'react';
 import {PropTypes} from 'react';
 
+import createSchemaBridge from '../../bridges';
+
 export default class BaseForm extends Component {
     constructor () {
         super(...arguments);
+
+        this.bridge = createSchemaBridge(this.props.schema);
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -52,7 +56,13 @@ export default class BaseForm extends Component {
     }
 
     getChildContextSchema () {
-        return this.props.schema;
+        return this.bridge;
+    }
+
+    componentWillReceiveProps ({schema}) {
+        if (this.props.schema !== schema) {
+            this.bridge = createSchemaBridge(schema);
+        }
     }
 
     render () {
@@ -113,7 +123,16 @@ BaseForm.childContextTypes = {
     uniforms: PropTypes.shape({
         error:  PropTypes.object,
         model:  PropTypes.object.isRequired,
-        schema: PropTypes.object.isRequired,
+
+        schema: PropTypes.shape({
+            getType:         PropTypes.func.isRequired,
+            getError:        PropTypes.func.isRequired,
+            getField:        PropTypes.func.isRequired,
+            getProps:        PropTypes.func.isRequired,
+            getSubfields:    PropTypes.func.isRequired,
+            getValidator:    PropTypes.func.isRequired,
+            getInitialValue: PropTypes.func.isRequired
+        }).isRequired,
 
         state: PropTypes.shape({
             label:       PropTypes.bool.isRequired,
