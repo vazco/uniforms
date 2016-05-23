@@ -6,8 +6,19 @@ import {joinName}     from 'uniforms';
 
 import AutoField from './AutoField';
 
+const Nest = ({
+    children,
+    className,
+    disabled,
+    error,
+    fields,
+    label,
+    name,
+// onChange shouldn't be passed to <section>
 // eslint-disable-next-line no-unused-vars
-const Nest = ({className, children, disabled, error, fields, label, name, onChange, ...props}) =>
+    onChange,
+    ...props
+}) =>
     <section className={classnames(className, {disabled, error}, 'grouped fields')} {...props}>
         {label && (
             <section className="field">

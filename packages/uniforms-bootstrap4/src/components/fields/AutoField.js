@@ -9,28 +9,13 @@ import NestField   from './NestField';
 import TextField   from './TextField';
 import SelectField from './SelectField';
 
-// eslint-disable-next-line complexity
 const Auto = props => {
-    let component;
-
-    let uniforms = props.field.uniforms;
-    if (uniforms) {
-        if (typeof uniforms === 'string' ||
-            typeof uniforms === 'function') {
-            component = uniforms;
-        }
-
-        if (typeof uniforms.component === 'string' ||
-            typeof uniforms.component === 'function') {
-            component = uniforms.component;
-        }
-    }
-
+    let component = props.component;
     if (component === undefined) {
-        if (props.field.allowedValues) {
+        if (props.allowedValues) {
             component = SelectField;
         } else {
-            switch (props.field.type) {
+            switch (props.type) {
                 case Date:    component = DateField; break;
                 case Array:   component = ListField; break;
                 case Number:  component = NumField;  break;
@@ -38,7 +23,7 @@ const Auto = props => {
                 case String:  component = TextField; break;
                 case Boolean: component = BoolField; break;
 
-                default: throw new Error(`Unsupported field type: ${props.field.type.toString()}`);
+                default: throw new Error(`Unsupported field type: ${props.type.toString()}`);
             }
         }
     }

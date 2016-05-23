@@ -1,35 +1,25 @@
 import React          from 'react';
-import classnames     from 'classnames';
 import {connectField} from 'uniforms';
-import autoid         from '../../autoid';
-import FormGroup      from './FormGroup';
 
-const BoolField = props => {
-  console.log('BoolField (WIP)', props);
-  const idNice = autoid(props.id);
-  return (
-    <FormGroup id={idNice} {...props}>
-      <div
-        className={classnames(
-          (props.inline ? 'checkbox-inline' : 'checkbox')
-        )}
-        key={props.item}
-      >
-        <label onClick={() => onChange(!props.value)}>
-          <input
-            checked={props.value}
-            className="hidden"
-            disabled={props.disabled}
-            name={props.name}
-            onChange={() => props.onChange(!props.value)}
-            type="checkbox"
-          />
-          {props.label}
-        </label>
-      </div>
+import FormGroup from './FormGroup';
+
+const Bool = props =>
+    <FormGroup {...props}>
+        <section className={`checkbox${props.inline ? '-inline' : ''}`}>
+            <label onClick={() => props.onChange(!props.value)}>
+                <input
+                    checked={props.value}
+                    className="hidden"
+                    disabled={props.disabled}
+                    name={props.name}
+                    onChange={() => props.onChange(!props.value)}
+                    type="checkbox"
+                />
+                {props.label}
+            </label>
+        </section>
     </FormGroup>
-  );
-};
+;
 
-export default connectField(BoolField);
+export default connectField(Bool);
 

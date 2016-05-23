@@ -6,7 +6,6 @@ import {joinName}     from 'uniforms';
 
 import AutoField from './AutoField';
 
-// eslint-disable-next-line no-unused-vars
 const Nest = ({
     children,
     className,

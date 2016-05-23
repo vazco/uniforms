@@ -7,11 +7,23 @@ import {joinName}     from 'uniforms';
 import ListAddField  from './ListAddField';
 import ListItemField from './ListItemField';
 
-// eslint-disable-next-line max-len, no-unused-vars
-const List = ({className, disabled, children, error, field: {optional}, label, name, value, onChange, ...props}) =>
+const List = ({
+    children,
+    className,
+    disabled,
+    error,
+    label,
+    name,
+// onChange shouldn't be passed to <section>
+// eslint-disable-next-line no-unused-vars
+    onChange,
+    required,
+    value,
+    ...props
+}) =>
     <section className={classnames('ui', className, {disabled}, 'grouped fitted fields list')} {...props}>
         {label && (
-            <section className={classnames({error, required: !optional}, 'field item')}>
+            <section className={classnames({error, required}, 'field item')}>
                 <label className="left floated">
                     {label}
                 </label>

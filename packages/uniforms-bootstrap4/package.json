@@ -22,7 +22,7 @@
     "cover": "true",
     "build": "./node_modules/.bin/babel --out-dir lib src",
     "watch": "./node_modules/.bin/babel --out-dir lib src --watch",
-    "prepublish": "npm run test && npm run build"
+    "prepublish": "npm run lint && npm run test && npm run build"
   },
   "devDependencies": {
     "babel-cli": "^6.8.0",
@@ -52,7 +52,6 @@
     ]
   },
   "dependencies": {
-    "classnames": "^2.2.5",
-    "shortid": "^2.2.6"
+    "classnames": "^2.2.5"
   }
 }
