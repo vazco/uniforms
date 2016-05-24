@@ -10,17 +10,17 @@ const makeHelp = (help, helpClassName) => help && (
 );
 
 const FormGroup = ({
-    grid,              // grid is either a int [1-11] or object {xs:6,sm:4,md:2}
+    children,
     className,         // class name for the whole .form-group
-    helpClassName,     // class name for the help text (default: 'text-muted')
-    wrapClassName,     // class name for the div wrapping the input(s)
     disabled,          // boolean, if true, show fields as disabled
     error,             // error validation response
+    grid,              // grid is either a int [1-11] or object {xs:6,sm:4,md:2}
     help,              // help text
+    helpClassName,     // class name for the help text (default: 'text-muted')
     label,             // string label (or false)
     required,
-    children
-}) => (
+    wrapClassName     // class name for the section wrapping the input(s)
+}) =>
     <section
         className={classnames(
             className,
@@ -36,10 +36,10 @@ const FormGroup = ({
         )}
 
         {(grid || wrapClassName) ? (
-            <div className={classnames(wrapClassName, gridClassName(grid, 'input'))}>
+            <section className={classnames(wrapClassName, gridClassName(grid, 'input'))}>
                 {children}
                 {makeHelp(help, helpClassName)}
-            </div>
+            </section>
         ) : (
             <span>
                 {children}
@@ -47,7 +47,6 @@ const FormGroup = ({
             </span>
         )}
     </section>
-)
 ;
 
 export default FormGroup;

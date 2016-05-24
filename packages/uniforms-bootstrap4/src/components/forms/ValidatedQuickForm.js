@@ -1,4 +1,5 @@
 import classnames                   from 'classnames';
+import {PropTypes}                  from 'react';
 import {ValidatedQuickForm as Base} from 'uniforms';
 
 import AutoField   from '../fields/AutoField';
@@ -27,3 +28,11 @@ export default class ValidatedQuickForm extends Base {
         return SubmitField;
     }
 }
+
+ValidatedQuickForm.propTypes = {
+    ...Base.propTypes,
+    grid: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ])
+};

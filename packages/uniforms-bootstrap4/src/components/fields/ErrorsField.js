@@ -9,8 +9,8 @@ const ErrorsField = ({className, children, ...props}, {uniforms: {error, schema}
           className,
           'error message'
         )} {...props}>
-            <div className="card-block">
-                <div className="card-text">
+            <section className="card-block">
+                <section className="card-text">
                     {children}
                     <ul className="list">
                         {schema.getErrorMessages(error).map((message, index) =>
@@ -19,8 +19,8 @@ const ErrorsField = ({className, children, ...props}, {uniforms: {error, schema}
                             </li>
                         )}
                     </ul>
-                </div>
-            </div>
+                </section>
+            </section>
         </section>
     )
 ;

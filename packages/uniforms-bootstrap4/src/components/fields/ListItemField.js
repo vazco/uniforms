@@ -9,11 +9,11 @@ import ListDelField from './ListDelField';
 const ListItem = props =>
     <li className="list-group-item">
 
-        <div className="list-group-item-top text-xs-right" style={{marginBottom: 5}}>
+        <section className="list-group-item-top text-xs-right" style={{marginBottom: 5}}>
             <span className="label label-default label-pill">
                 <ListDelField name={props.name} />
             </span>
-        </div>
+        </section>
 
         <section className="middle aligned content">
             {props.children ? (

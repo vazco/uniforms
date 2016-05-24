@@ -200,7 +200,7 @@ Currently built-in bridges:
 
 - SimpleSchema
 
-**Note:** Further informations in [`src/bridges/Bridge.js`](src/bridges/Bridge.js).
+**Note:** Further information in [`src/bridges/Bridge.js`](src/bridges/Bridge.js).
 
 ### Custom component in SimpleSchema
 

@@ -1,6 +1,6 @@
 import classnames         from 'classnames';
-import {BaseForm as Base} from 'uniforms';
 import {PropTypes}        from 'react';
+import {BaseForm as Base} from 'uniforms';
 
 export default class BaseForm extends Base {
     getNativeFormProps () {

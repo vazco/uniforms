@@ -1,6 +1,6 @@
 import classnames         from 'classnames';
-import {AutoForm as Base} from 'uniforms';
 import {PropTypes}        from 'react';
+import {AutoForm as Base} from 'uniforms';
 
 import AutoField   from '../fields/AutoField';
 import ErrorsField from '../fields/ErrorsField';

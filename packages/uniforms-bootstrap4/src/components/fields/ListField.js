@@ -29,24 +29,19 @@ const List = ({
     )} {...props}>
         {label && (
             <section className="card-block">
-                <div className={classnames(
-                    'card-title',
-                    {error, required},
-                    'field item'
-                )}>
+                <section className={classnames('card-title', {error, required}, 'field item')}>
                     <label className="control-label">
                         {label}&nbsp;
                     </label>
 
-                    <div className="label label-default label-pill pull-xs-right">
-                        <ListAddField name={`${name}.$`} className="" />
-                    </div>
-                </div>
+                    <section className="label label-default label-pill pull-xs-right">
+                        <ListAddField name={`${name}.$`} />
+                    </section>
+                </section>
             </section>
         )}
 
         <ul className="list-group list-group-flush">
-
             {children ? (
                 value.map((item, index) =>
                       Children.map(children, child =>
@@ -61,8 +56,8 @@ const List = ({
                       )
                  )
             ) : (
-                value.map(
-                    (item, index) => <ListItemField
+                value.map((item, index) =>
+                    <ListItemField
                         key={index}
                         label={null}
                         name={joinName(name, index)}
