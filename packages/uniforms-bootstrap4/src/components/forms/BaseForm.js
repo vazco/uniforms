@@ -10,4 +10,10 @@ export default class BaseForm extends Base {
             className: classnames('form', props.className, {error: !!this.getChildContextError()})
         };
     }
+    getChildContextState () {
+        const state = super.getChildContextState();
+        return Object.assign({}, state, {
+            grid: this.props.grid
+        });
+    }
 }
