@@ -65,6 +65,7 @@
     ]
   },
   "eslintConfig": {
+    "root": true,
     "extends": [
       "vazco"
     ],

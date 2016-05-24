@@ -1,10 +1,10 @@
 {
-  "name": "uniforms-semantic",
+  "name": "uniforms-bootstrap4",
   "version": "1.0.0-rc.4",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
-  "description": "Semantic UI components for uniforms.",
-  "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-semantic",
+  "description": "Bootstrap4 UI components for uniforms.",
+  "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-bootstrap4",
   "homepage": "https://github.com/vazco/uniforms/",
   "license": "MIT",
   "bugs": {
