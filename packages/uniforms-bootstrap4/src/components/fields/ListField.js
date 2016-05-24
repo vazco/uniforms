@@ -21,34 +21,55 @@ const List = ({
     value,
     ...props
 }) =>
-    <section className={classnames('ui', className, {disabled}, 'grouped fitted fields list')} {...props}>
+    <section className={classnames(
+        'card',
+        className,
+        {disabled},
+        'grouped fields list'
+    )} {...props}>
         {label && (
-            <section className={classnames({error, required}, 'field item')}>
-                <label className="left floated">
-                    {label}
-                </label>
+            <section className="card-block">
+                <div className={classnames(
+                    'card-title',
+                    {error, required},
+                    'field item'
+                )}>
+                    <label className="control-label">
+                        {label}&nbsp;
+                    </label>
 
-                <ListAddField name={`${name}.$`} className="right floated" />
+                    <div className="label label-default label-pill pull-xs-right">
+                        <ListAddField name={`${name}.$`} className="" />
+                    </div>
+                </div>
             </section>
         )}
 
-        <section className="ui fitted hidden clearing divider" />
+        <ul className="list-group list-group-flush">
 
-        {children ? (
-            value.map((item, index) =>
-                Children.map(children, child =>
-                    React.cloneElement(child, {
-                        key: index,
-                        label: null,
-                        name: joinName(name, child.props.name && child.props.name.replace('$', index))
-                    })
+            {children ? (
+                value.map((item, index) =>
+                      Children.map(children, child =>
+                           React.cloneElement(child, {
+                               key: index,
+                               label: null,
+                               name: joinName(
+                                   name,
+                                   child.props.name && child.props.name.replace('$', index)
+                               )
+                           })
+                      )
+                 )
+            ) : (
+                value.map(
+                    (item, index) => <ListItemField
+                        key={index}
+                        label={null}
+                        name={joinName(name, index)}
+                    />
                 )
-            )
-        ) : (
-            value.map((item, index) =>
-                <ListItemField key={index} label={null} name={joinName(name, index)} />
-            )
-        )}
+            )}
+        </ul>
     </section>
 ;
 

@@ -10,12 +10,11 @@ const ListFieldDel = ({className, disabled, parent, name, ...props}) => {
         <i
             {...props}
             className={classnames(
-                'ui',
+                'del octicon octicon-dash', // TODO configure to alternate icon
                 className,
                 limitNotReached && !disabled
                     ? 'link'
                     : 'disabled',
-                'fitted close icon'
             )}
             onClick={() => limitNotReached && parent.onChange(
                 [].concat(parent.value.slice(0,  fieldIndex))

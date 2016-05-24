@@ -7,8 +7,12 @@ import AutoField    from './AutoField';
 import ListDelField from './ListDelField';
 
 const ListItem = props =>
-    <section className="item">
-        <ListDelField className="top aligned" name={props.name} />
+    <li className="list-group-item">
+
+
+        <div className="label label-default label-pill pull-xs-right">
+            <ListDelField name={props.name} />
+        </div>
 
         <section className="middle aligned content">
             {props.children ? (
@@ -26,7 +30,7 @@ const ListItem = props =>
                 <AutoField {...props} style={{margin: 0}} />
             )}
         </section>
-    </section>
+    </li>
 ;
 
 export default connectField(ListItem, {includeInChain: false});

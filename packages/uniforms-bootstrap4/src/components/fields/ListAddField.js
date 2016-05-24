@@ -9,12 +9,11 @@ const ListAdd = ({className, parent, value, ...props}) => {
         <i
             {...props}
             className={classnames(
-                'ui',
+                'add octicon octicon-plus', // TODO configure to alternate icon
                 className,
                 limitNotReached
                     ? 'link'
                     : 'disabled',
-                'fitted add icon'
             )}
             onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
         />

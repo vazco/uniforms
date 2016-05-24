@@ -12,9 +12,15 @@ For more in depth documentation see: [https://github.com/vazco/uniforms/](https:
 
 ## Roadmap
 
-- [] ErrorsField
-- [] ListAddField
-- [] ListDelField
-- [] ListField
-- [] ListItemField
+- [x] ErrorsField
+- [x] ListAddField
+- [x] ListDelField
+- [x] ListField
+- [x] ListItemField
+- [ ] Figure out how to get `grid` from AutoForm into fields
+- [ ] Add Support: autoform.options --> select options
+- [ ] Configure: ListAdd/ListDel octicon / glyphicon / text / etc
+- [ ] Configure: ListField label styling options
+- [ ] Configure: ErrorsField class styling
+- [ ] MAYBE Add wrapped DateTimePicker widget from react-widgets (new package)
 
