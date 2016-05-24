@@ -25,13 +25,13 @@ This is a set of npm packages designed for Meteor, which contains helpers and `R
 These are npm packages, so they can't imply any Meteor package, and you have to install dependencies manually, in your Meteor app directory:
 
 ```shell
-# semantic ui components
-$ meteor npm install --save react uniforms uniforms-semantic
+# If you are using SimpleSchema
 $ meteor add aldeed:simple-schema check
 
-# unstyled components
+# Components (pick one)
+$ meteor npm install --save react uniforms uniforms-bootstrap4
+$ meteor npm install --save react uniforms uniforms-semantic
 $ meteor npm install --save react uniforms uniforms-unstyled
-$ meteor add aldeed:simple-schema check
 ```
 
 ## Basic usage
@@ -83,13 +83,9 @@ const PostSchema = new SimpleSchema({
 Then, import all needed components:
 
 ```js
+# Replace 'uniforms-semantic' with other components set, if needed
 import {AutoForm}  from 'uniforms-semantic';
 import {AutoField} from 'uniforms-semantic';
-// or
-import {AutoForm}  from 'uniforms-unstyled';
-import {AutoField} from 'uniforms-unstyled';
-
-// ...
 ```
 
 And use them:
