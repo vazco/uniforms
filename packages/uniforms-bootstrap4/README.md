@@ -23,4 +23,5 @@ For more in depth documentation see: [https://github.com/vazco/uniforms/](https:
 - [ ] Configure: ListField label styling options
 - [ ] Configure: ErrorsField class styling
 - [ ] MAYBE Add wrapped DateTimePicker widget from react-widgets (new package)
+- [ ] Establish a github pages demo, or a meteorapp.com demo or something
 
