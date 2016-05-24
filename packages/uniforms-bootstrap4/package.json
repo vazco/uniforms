@@ -37,7 +37,7 @@
   },
   "peerDependencies": {
     "react": "^15.0.2",
-    "uniforms": "^1.0.0-rc.2"
+    "uniforms": "^1.0.0-rc.4"
   },
   "babel": {
     "presets": [

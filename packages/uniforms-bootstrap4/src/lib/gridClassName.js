@@ -18,6 +18,14 @@ export default function gridClassName (grid, side) {
         return gridClassNamePart('sm', grid, side);
     }
 
+    if (typeof grid === 'string' && !isNaN(parseInt(grid))) {
+        return gridClassNamePart('sm', parseInt(grid), side);
+    }
+
+    if (typeof grid === 'string') {
+        return grid;
+    }
+
     if (typeof grid === 'object') {
         // grid value is an object config
         // eg: { xs: 6, sm: 4, md: 3 }

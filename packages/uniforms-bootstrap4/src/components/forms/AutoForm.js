@@ -1,5 +1,6 @@
 import classnames         from 'classnames';
 import {AutoForm as Base} from 'uniforms';
+import {PropTypes}        from 'react';
 
 import AutoField   from '../fields/AutoField';
 import ErrorsField from '../fields/ErrorsField';
@@ -15,6 +16,13 @@ export default class AutoForm extends Base {
         };
     }
 
+    getChildContextState () {
+        return {
+            ...super.getChildContextState(),
+            grid: this.props.grid
+        };
+    }
+
     getAutoField () {
         return AutoField;
     }
@@ -27,3 +35,11 @@ export default class AutoForm extends Base {
         return SubmitField;
     }
 }
+
+AutoForm.propTypes = {
+    ...Base.propTypes,
+    grid: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ])
+};

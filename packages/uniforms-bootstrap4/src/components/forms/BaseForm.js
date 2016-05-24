@@ -1,5 +1,6 @@
 import classnames         from 'classnames';
 import {BaseForm as Base} from 'uniforms';
+import {PropTypes}        from 'react';
 
 export default class BaseForm extends Base {
     getNativeFormProps () {
@@ -11,9 +12,17 @@ export default class BaseForm extends Base {
         };
     }
     getChildContextState () {
-        const state = super.getChildContextState();
-        return Object.assign({}, state, {
+        return {
+            ...super.getChildContextState(),
             grid: this.props.grid
-        });
+        };
     }
 }
+
+BaseForm.propTypes = {
+    ...Base.propTypes,
+    grid: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ])
+};
