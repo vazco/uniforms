@@ -1,19 +1,9 @@
-import {AutoForm as Base} from 'uniforms';
+import {AutoForm} from 'uniforms';
 
-import AutoField   from '../fields/AutoField';
-import ErrorsField from '../fields/ErrorsField';
-import SubmitField from '../fields/SubmitField';
+import ValidatedQuickForm from './ValidatedQuickForm';
 
-export default class AutoForm extends Base {
-    getAutoField () {
-        return AutoField;
-    }
+const Auto = parent => class extends AutoForm.Auto(parent) {
+    static Auto = Auto;
+};
 
-    getErrorsField () {
-        return ErrorsField;
-    }
-
-    getSubmitField () {
-        return SubmitField;
-    }
-}
+export default Auto(ValidatedQuickForm);

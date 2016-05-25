@@ -1,3 +1,9 @@
-import {ValidatedForm as Base} from 'uniforms';
+import {ValidatedForm} from 'uniforms';
 
-export default class ValidatedForm extends Base {}
+import BaseForm from './BaseForm';
+
+const Validated = parent => class extends ValidatedForm.Validated(parent) {
+    static Validated = Validated;
+};
+
+export default Validated(BaseForm);

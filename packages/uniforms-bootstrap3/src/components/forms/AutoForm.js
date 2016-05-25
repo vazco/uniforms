@@ -1,53 +1,9 @@
-import classnames         from 'classnames';
-import {PropTypes}        from 'react';
-import {AutoForm as Base} from 'uniforms';
+import {AutoForm} from 'uniforms';
 
-import AutoField   from '../fields/AutoField';
-import ErrorsField from '../fields/ErrorsField';
-import SubmitField from '../fields/SubmitField';
+import ValidatedQuickForm from './ValidatedQuickForm';
 
-export default class AutoForm extends Base {
-    static propTypes = {
-        ...Base.propTypes,
+const Auto = parent => class extends AutoForm.Auto(parent) {
+    static Auto = Auto;
+};
 
-        grid: PropTypes.oneOfType([
-            PropTypes.number,
-            PropTypes.string
-        ])
-    };
-
-    getNativeFormProps () {
-        const props = super.getNativeFormProps();
-
-        return {
-            ...props,
-            className: classnames(
-                'form',
-                {
-                    error: !!this.getChildContextError(),
-                    'form-horizontal': !!props.grid
-                },
-                props.className
-            )
-        };
-    }
-
-    getChildContextState () {
-        return {
-            ...super.getChildContextState(),
-            grid: this.props.grid
-        };
-    }
-
-    getAutoField () {
-        return AutoField;
-    }
-
-    getErrorsField () {
-        return ErrorsField;
-    }
-
-    getSubmitField () {
-        return SubmitField;
-    }
-}
+export default Auto(ValidatedQuickForm);

@@ -1,23 +1,9 @@
-import classnames              from 'classnames';
-import {PropTypes}             from 'react';
-import {ValidatedForm as Base} from 'uniforms';
+import {ValidatedForm} from 'uniforms';
 
-export default class ValidatedForm extends Base {
-    static propTypes = {
-        ...Base.propTypes,
+import BaseForm from './BaseForm';
 
-        grid: PropTypes.oneOfType([
-            PropTypes.number,
-            PropTypes.string
-        ])
-    };
+const Validated = parent => class extends ValidatedForm.Validated(parent) {
+    static Validated = Validated;
+};
 
-    getNativeFormProps () {
-        const props = super.getNativeFormProps();
-
-        return {
-            ...props,
-            className: classnames('form', props.className, {error: !!this.getChildContextError()})
-        };
-    }
-}
+export default Validated(BaseForm);

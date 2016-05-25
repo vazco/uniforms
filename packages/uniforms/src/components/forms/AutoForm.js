@@ -4,7 +4,11 @@ import set       from 'lodash.set';
 
 import ValidatedQuickForm from './ValidatedQuickForm';
 
-export default class AutoForm extends ValidatedQuickForm {
+const Auto = parent => class extends parent {
+    static Auto = Auto;
+
+    static displayName = `Auto${parent.displayName}`;
+
     constructor () {
         super(...arguments);
 
@@ -29,4 +33,6 @@ export default class AutoForm extends ValidatedQuickForm {
         super.onChange(...arguments);
         this.forceUpdate();
     }
-}
+};
+
+export default Auto(ValidatedQuickForm);

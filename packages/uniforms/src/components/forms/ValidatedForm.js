@@ -5,15 +5,19 @@ import {PropTypes} from 'react';
 
 import BaseForm from './BaseForm';
 
-export default class ValidatedForm extends BaseForm {
+const Validated = parent => class extends parent {
+    static Validated = Validated;
+
+    static displayName = `Validated${parent.displayName}`;
+
     static defaultProps = {
-        ...BaseForm.defaultProps,
+        ...parent.defaultProps,
 
         validate: 'onChangeAfterSubmit'
     };
 
     static propTypes = {
-        ...BaseForm.propTypes,
+        ...parent.propTypes,
 
         validator: PropTypes.any,
         validate: PropTypes.oneOf([
@@ -92,4 +96,6 @@ export default class ValidatedForm extends BaseForm {
             )
         );
     }
-}
+};
+
+export default Validated(BaseForm);

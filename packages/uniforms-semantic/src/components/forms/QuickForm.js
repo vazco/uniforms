@@ -1,19 +1,12 @@
-import classnames          from 'classnames';
-import {QuickForm as Base} from 'uniforms';
+import {QuickForm} from 'uniforms';
 
+import BaseForm    from './BaseForm';
 import AutoField   from '../fields/AutoField';
 import ErrorsField from '../fields/ErrorsField';
 import SubmitField from '../fields/SubmitField';
 
-export default class QuickForm extends Base {
-    getNativeFormProps () {
-        const props = super.getNativeFormProps();
-
-        return {
-            ...props,
-            className: classnames('ui', props.className, {error: !!this.getChildContextError()}, 'form')
-        };
-    }
+const Quick = parent => class extends QuickForm.Quick(parent) {
+    static Quick = Quick;
 
     getAutoField () {
         return AutoField;
@@ -26,4 +19,6 @@ export default class QuickForm extends Base {
     getSubmitField () {
         return SubmitField;
     }
-}
+};
+
+export default Quick(BaseForm);

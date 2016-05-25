@@ -2,7 +2,11 @@ import React from 'react';
 
 import BaseForm from './BaseForm';
 
-export default class QuickForm extends BaseForm {
+const Quick = parent => class extends parent {
+    static Quick = Quick;
+
+    static displayName = `Quick${parent.displayName}`;
+
     constructor () {
         super(...arguments);
 
@@ -44,4 +48,6 @@ export default class QuickForm extends BaseForm {
     getSubmitField () {
         return () => null;
     }
-}
+};
+
+export default Quick(BaseForm);

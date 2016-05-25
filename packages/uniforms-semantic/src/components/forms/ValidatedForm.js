@@ -1,13 +1,9 @@
-import classnames              from 'classnames';
-import {ValidatedForm as Base} from 'uniforms';
+import {ValidatedForm} from 'uniforms';
 
-export default class ValidatedForm extends Base {
-    getNativeFormProps () {
-        const props = super.getNativeFormProps();
+import BaseForm from './BaseForm';
 
-        return {
-            ...props,
-            className: classnames('ui', props.className, {error: !!this.getChildContextError()}, 'form')
-        };
-    }
-}
+const Validated = parent => class extends ValidatedForm.Validated(parent) {
+    static Validated = Validated;
+};
+
+export default Validated(BaseForm);

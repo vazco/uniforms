@@ -5,6 +5,8 @@ import {PropTypes} from 'react';
 import createSchemaBridge from '../../bridges';
 
 export default class BaseForm extends Component {
+    static displayName = 'Form';
+
     static defaultProps = {
         model: {},
         label: true

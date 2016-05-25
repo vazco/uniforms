@@ -1,13 +1,20 @@
-import classnames         from 'classnames';
-import {BaseForm as Base} from 'uniforms';
+import classnames from 'classnames';
+import {BaseForm} from 'uniforms';
 
-export default class BaseForm extends Base {
+const Semantic = parent => class extends parent {
+    static Semantic = Semantic;
+
+    static displayName = `Semantic${parent.displayName}`;
+
     getNativeFormProps () {
         const props = super.getNativeFormProps();
+        const error = this.getChildContextError();
 
         return {
             ...props,
-            className: classnames('ui', props.className, {error: !!this.getChildContextError()}, 'form')
+            className: classnames('ui', props.className, {error}, 'form')
         };
     }
-}
+};
+
+export default Semantic(BaseForm);

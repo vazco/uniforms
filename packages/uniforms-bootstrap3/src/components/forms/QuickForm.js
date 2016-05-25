@@ -1,36 +1,12 @@
-import classnames          from 'classnames';
-import {PropTypes}         from 'react';
-import {QuickForm as Base} from 'uniforms';
+import {QuickForm} from 'uniforms';
 
+import BaseForm    from './BaseForm';
 import AutoField   from '../fields/AutoField';
 import ErrorsField from '../fields/ErrorsField';
 import SubmitField from '../fields/SubmitField';
 
-export default class QuickForm extends Base {
-    static propTypes = {
-        ...Base.propTypes,
-
-        grid: PropTypes.oneOfType([
-            PropTypes.number,
-            PropTypes.string
-        ])
-    };
-
-    getNativeFormProps () {
-        const props = super.getNativeFormProps();
-
-        return {
-            ...props,
-            className: classnames(
-                'form',
-                {
-                    error: !!this.getChildContextError(),
-                    'form-horizontal': !!props.grid
-                },
-                props.className
-            )
-        };
-    }
+const Quick = parent => class extends QuickForm.Quick(parent) {
+    static Quick = Quick;
 
     getAutoField () {
         return AutoField;
@@ -43,4 +19,6 @@ export default class QuickForm extends Base {
     getSubmitField () {
         return SubmitField;
     }
-}
+};
+
+export default Quick(BaseForm);

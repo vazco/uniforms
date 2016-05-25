@@ -1,3 +1,9 @@
-import {BaseForm as Base} from 'uniforms';
+import {BaseForm} from 'uniforms';
 
-export default class BaseForm extends Base {}
+const Unstyled = parent => class extends parent {
+    static Unstyled = Unstyled;
+
+    static displayName = `Unstyled${parent.displayName}`;
+};
+
+export default Unstyled(BaseForm);
