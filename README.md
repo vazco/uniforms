@@ -29,6 +29,7 @@ These are npm packages, so they can't imply any Meteor package, and you have to 
 $ meteor add aldeed:simple-schema check
 
 # Components (pick one)
+$ meteor npm install --save react uniforms uniforms-bootstrap3
 $ meteor npm install --save react uniforms uniforms-bootstrap4
 $ meteor npm install --save react uniforms uniforms-semantic
 $ meteor npm install --save react uniforms uniforms-unstyled
