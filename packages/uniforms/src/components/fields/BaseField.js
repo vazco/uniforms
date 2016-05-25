@@ -6,6 +6,17 @@ import BaseForm from '../forms/BaseForm';
 import joinName from '../../helpers/joinName';
 
 export default class BaseField extends Component {
+    static propTypes = {
+        name:     PropTypes.string,
+        disabled: PropTypes.bool,
+
+        label:       PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+        placeholder: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
+    };
+
+    static contextTypes      = BaseForm.childContextTypes;
+    static childContextTypes = BaseForm.childContextTypes;
+
     constructor () {
         super(...arguments);
 
@@ -146,14 +157,3 @@ export default class BaseField extends Component {
         };
     }
 }
-
-BaseField.propTypes = {
-    name:     PropTypes.string,
-    disabled: PropTypes.bool,
-
-    label:       PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-    placeholder: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
-};
-
-BaseField.contextTypes      = BaseForm.childContextTypes;
-BaseField.childContextTypes = BaseForm.childContextTypes;

@@ -5,6 +5,53 @@ import {PropTypes} from 'react';
 import createSchemaBridge from '../../bridges';
 
 export default class BaseForm extends Component {
+    static defaultProps = {
+        model: {},
+        label: true
+    };
+
+    static propTypes = {
+        error:  PropTypes.any,
+        model:  PropTypes.any,
+        schema: PropTypes.any.isRequired,
+
+        onChange: PropTypes.func,
+        onSubmit: PropTypes.func,
+
+        label:       PropTypes.bool,
+        disabled:    PropTypes.bool,
+        placeholder: PropTypes.bool
+    };
+
+    static childContextTypes = {
+        uniforms: PropTypes.shape({
+            name: PropTypes.arrayOf(PropTypes.string).isRequired,
+
+            error:  PropTypes.object,
+            model:  PropTypes.object.isRequired,
+
+            schema: PropTypes.shape({
+                getError:         PropTypes.func.isRequired,
+                getErrorMessage:  PropTypes.func.isRequired,
+                getErrorMessages: PropTypes.func.isRequired,
+                getField:         PropTypes.func.isRequired,
+                getInitialValue:  PropTypes.func.isRequired,
+                getProps:         PropTypes.func.isRequired,
+                getSubfields:     PropTypes.func.isRequired,
+                getType:          PropTypes.func.isRequired,
+                getValidator:     PropTypes.func.isRequired
+            }).isRequired,
+
+            state: PropTypes.shape({
+                label:       PropTypes.bool.isRequired,
+                disabled:    PropTypes.bool.isRequired,
+                placeholder: PropTypes.bool.isRequired
+            }).isRequired,
+
+            onChange: PropTypes.func.isRequired
+        }).isRequired
+    };
+
     constructor () {
         super(...arguments);
 
@@ -49,9 +96,9 @@ export default class BaseForm extends Component {
 
     getChildContextState () {
         return {
-            label:       this.props.label,
-            disabled:    this.props.disabled,
-            placeholder: this.props.placeholder
+            label:       !!this.props.label,
+            disabled:    !!this.props.disabled,
+            placeholder: !!this.props.placeholder
         };
     }
 
@@ -97,51 +144,3 @@ export default class BaseForm extends Component {
         }
     }
 }
-
-BaseForm.defaultProps = {
-    model: {},
-
-    label:       true,
-    disabled:    false,
-    placeholder: false
-};
-
-BaseForm.propTypes = {
-    error:  PropTypes.object,
-    model:  PropTypes.object,
-    schema: PropTypes.object.isRequired,
-
-    label:       PropTypes.bool,
-    disabled:    PropTypes.bool,
-    placeholder: PropTypes.bool,
-
-    onChange: PropTypes.func,
-    onSubmit: PropTypes.func
-};
-
-BaseForm.childContextTypes = {
-    uniforms: PropTypes.shape({
-        error:  PropTypes.object,
-        model:  PropTypes.object.isRequired,
-
-        schema: PropTypes.shape({
-            getType:         PropTypes.func.isRequired,
-            getError:        PropTypes.func.isRequired,
-            getField:        PropTypes.func.isRequired,
-            getProps:        PropTypes.func.isRequired,
-            getSubfields:    PropTypes.func.isRequired,
-            getValidator:    PropTypes.func.isRequired,
-            getInitialValue: PropTypes.func.isRequired
-        }).isRequired,
-
-        state: PropTypes.shape({
-            label:       PropTypes.bool.isRequired,
-            disabled:    PropTypes.bool.isRequired,
-            placeholder: PropTypes.bool.isRequired
-        }).isRequired,
-
-        onChange: PropTypes.func.isRequired,
-
-        name: PropTypes.arrayOf(PropTypes.string).isRequired
-    }).isRequired
-};

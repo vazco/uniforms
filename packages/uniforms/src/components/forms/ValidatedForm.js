@@ -6,6 +6,23 @@ import {PropTypes} from 'react';
 import BaseForm from './BaseForm';
 
 export default class ValidatedForm extends BaseForm {
+    static defaultProps = {
+        ...BaseForm.defaultProps,
+
+        validate: 'onChangeAfterSubmit'
+    };
+
+    static propTypes = {
+        ...BaseForm.propTypes,
+
+        validator: PropTypes.any,
+        validate: PropTypes.oneOf([
+            'onChange',
+            'onChangeAfterSubmit',
+            'onSubmit'
+        ])
+    };
+
     constructor () {
         super(...arguments);
 
@@ -76,20 +93,3 @@ export default class ValidatedForm extends BaseForm {
         );
     }
 }
-
-ValidatedForm.defaultProps = {
-    ...BaseForm.defaultProps,
-
-    validate: 'onChangeAfterSubmit'
-};
-
-ValidatedForm.propTypes = {
-    ...BaseForm.propTypes,
-
-    validate: PropTypes.oneOf([
-        'onChange',
-        'onChangeAfterSubmit',
-        'onSubmit'
-    ]),
-    validator: PropTypes.any
-};

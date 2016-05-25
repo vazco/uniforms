@@ -7,6 +7,15 @@ import ErrorsField from '../fields/ErrorsField';
 import SubmitField from '../fields/SubmitField';
 
 export default class ValidatedQuickForm extends Base {
+    static propTypes = {
+        ...Base.propTypes,
+
+        grid: PropTypes.oneOfType([
+            PropTypes.number,
+            PropTypes.string
+        ])
+    };
+
     getNativeFormProps () {
         const props = super.getNativeFormProps();
 
@@ -28,11 +37,3 @@ export default class ValidatedQuickForm extends Base {
         return SubmitField;
     }
 }
-
-ValidatedQuickForm.propTypes = {
-    ...Base.propTypes,
-    grid: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ])
-};
