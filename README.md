@@ -185,6 +185,7 @@ export default connectField(MyText, {
 To use different schemas, you have to create a *bridge* - unified schema mapper. *Bridge* is (preferably) a subclass of `Bridge`, implementing static `check(schema)` and these instance methods:
 
 - `getError(name, error)`
+- `getErrorMessage(name, error)`
 - `getErrorMessages(error)`
 - `getField(name)`
 - `getInitialValue(name)`

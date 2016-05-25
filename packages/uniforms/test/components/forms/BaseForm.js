@@ -10,6 +10,7 @@ describe('BaseForm', () => {
     const model  = {_: 1};
     const schema = {
         getError:         () => {},
+        getErrorMessage:  () => {},
         getErrorMessages: () => {},
         getField:         () => ({type: String}),
         getInitialValue:  () => {},

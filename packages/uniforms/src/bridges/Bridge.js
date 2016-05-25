@@ -8,6 +8,7 @@ export default class Bridge {
         return (
             schema &&
             schema.getError &&
+            schema.getErrorMessage &&
             schema.getErrorMessages &&
             schema.getField &&
             schema.getInitialValue &&
@@ -21,6 +22,11 @@ export default class Bridge {
     // Field's scoped error
     getError (name, error) {
         return this.schema.getError(name, error);
+    }
+
+    // Field's scoped error message
+    getErrorMessage (name, error) {
+        return this.schema.getErrorMessage(name, error);
     }
 
     // All error messages from error

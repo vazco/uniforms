@@ -78,7 +78,9 @@ describe('BaseField', () => {
             }
         },
 
-        messageForError () {},
+        messageForError () {
+            return 'CorrectErrorMessage';
+        },
 
         objectKeys (name) {
             if (name === 'a') {
@@ -202,6 +204,10 @@ describe('BaseField', () => {
 
         it('have correct `error`', () => {
             expect(props).to.have.property('error', error.details[0]);
+        });
+
+        it('have correct `errorMessage`', () => {
+            expect(props).to.have.property('errorMessage', 'CorrectErrorMessage');
         });
 
         it('have correct `field`', () => {

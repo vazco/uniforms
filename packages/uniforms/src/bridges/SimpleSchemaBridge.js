@@ -52,6 +52,21 @@ export default class SimpleSchemaBridge extends Bridge {
         );
     }
 
+    getErrorMessage (name, error) {
+        let scopedError = this.getError(name, error);
+        if (scopedError) {
+            return this.schema.messageForError(
+                scopedError.type,
+                scopedError.name,
+                null,
+                scopedError.details &&
+                scopedError.details.value
+            );
+        }
+
+        return '';
+    }
+
     getErrorMessages (error) {
         return (error && error.details || []).map(error => this.schema.messageForError(
             error.type,

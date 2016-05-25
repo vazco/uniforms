@@ -90,6 +90,8 @@ export default class BaseField extends Component {
             ? this.getFieldProps(name.replace(/(.+)\..+$/, '$1'), {includeParent: false})
             : null;
 
+        const errorMessage = context.schema.getErrorMessage(name, context.error);
+
         const label = props.label
             ? props.label === true
                 ? schemaProps.label
@@ -124,6 +126,7 @@ export default class BaseField extends Component {
 
         return {
             error,
+            errorMessage,
             field,
             fields,
             findError,
