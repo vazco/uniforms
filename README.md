@@ -223,22 +223,23 @@ const PersonSchema = new SimpleSchema({
 
 **Note:** These are **not** only props, that field will receive - these are guaranteed by `uniforms`.
 
-| Name          | Type                  | Description                            |
-|:-------------:|:---------------------:|:--------------------------------------:|
-| `disabled`    | `bool`                | Is field disabled?                     |
-| `error`       | `object`              | Field scoped part of validation error. |
-| `field`       | `object`              | Field definition from schema.          |
-| `fields`      | `arrayOf(string)`     | Subfields names.                       |
-| `findError`   | `func(name)`          | Request another field error.           |
-| `findField`   | `func(name)`          | Request another field field.           |
-| `findValue`   | `func(name)`          | Request another field value.           |
-| `label`       | `string`              | Field label.                           |
-| `name`        | `string`              | Field name.                            |
-| `onChange`    | `func(value, [name])` | Change field value.                    |
-| `parent`      | `object`              | Parent field props.                    |
-| `placeholder` | `string`              | Field placeholder.                     |
-| `type`        | `func`                | Field type.                            |
-| `value`       | `any`                 | Field value.                           |
+| Name           | Type                  | Description                            |
+|:--------------:|:---------------------:|:--------------------------------------:|
+| `disabled`     | `bool`                | Is field disabled?                     |
+| `error`        | `object`              | Field scoped part of validation error. |
+| `errorMessage` | `string`              | Field scoped validation error message. |
+| `field`        | `object`              | Field definition from schema.          |
+| `fields`       | `arrayOf(string)`     | Subfields names.                       |
+| `findError`    | `func(name)`          | Request another field error.           |
+| `findField`    | `func(name)`          | Request another field field.           |
+| `findValue`    | `func(name)`          | Request another field value.           |
+| `label`        | `string`              | Field label.                           |
+| `name`         | `string`              | Field name.                            |
+| `onChange`     | `func(value, [name])` | Change field value.                    |
+| `parent`       | `object`              | Parent field props.                    |
+| `placeholder`  | `string`              | Field placeholder.                     |
+| `type`         | `func`                | Field type.                            |
+| `value`        | `any`                 | Field value.                           |
 
 Every prop can be overriden, but `label`, `placeholder` and `disabled` have special semantics:
 
