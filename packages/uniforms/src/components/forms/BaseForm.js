@@ -21,6 +21,7 @@ export default class BaseForm extends Component {
         onSubmit: PropTypes.func,
 
         label:       PropTypes.bool,
+        autosave:    PropTypes.bool,
         disabled:    PropTypes.bool,
         placeholder: PropTypes.bool
     };
@@ -132,6 +133,10 @@ export default class BaseForm extends Component {
     onChange (key, value) {
         if (this.props.onChange) {
             this.props.onChange(key, value);
+        }
+
+        if (this.props.autosave) {
+            this.onSubmit();
         }
     }
 

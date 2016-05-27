@@ -94,8 +94,23 @@ describe('BaseForm', () => {
 
     context('when changed', () => {
         const wrapper = mount(
-            <BaseForm model={model} schema={schema} onChange={onChange} />
+            <BaseForm model={model} schema={schema} onChange={onChange} onSubmit={onSubmit} />
         );
+
+        it('autosaves correctly (`autosave` = true)', () => {
+            wrapper.setProps({autosave: true});
+            wrapper.instance().getChildContext().uniforms.onChange('a', 1);
+
+            expect(onSubmit).to.have.been.calledOnce;
+            expect(onSubmit).to.have.been.calledWith(model);
+        });
+
+        it('autosaves correctly (`autosave` = false)', () => {
+            wrapper.setProps({autosave: false});
+            wrapper.instance().getChildContext().uniforms.onChange('a', 1);
+
+            expect(onSubmit).to.have.been.not.called;
+        });
 
         it('calls `onChange` with correct name and value', () => {
             wrapper.instance().getChildContext().uniforms.onChange('a', 1);

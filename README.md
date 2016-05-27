@@ -277,6 +277,11 @@ Every prop can be overriden, but `label`, `placeholder` and `disabled` have spec
 ### Forms components
 
 ![](README.png)
+**Note:**
+*Temporarily this image is a bit outdated - inheritance has changed.*
+*Also `BaseForm` (and his descendants) has new prop - `autosave`.*
+
+<br />
 
 | Component            | Generated? | Validated? | Self-managed? |
 |:--------------------:|:----------:|:----------:|:-------------:|
