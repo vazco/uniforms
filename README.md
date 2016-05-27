@@ -137,6 +137,7 @@ const ExplicitAutoForm = () =>
 | `AutoField`     | Automatically renders a correct field, based on field's `type`. | *none*                   |
 | `BoolField`     | Checkbox.                                                       | `type: Boolean`          |
 | `DateField`     | HTML5 `date-localtime` input.                                   | `type: Date`             |
+| `ErrorField`    | Error message for given field.                                  | *none*                   |
 | `ErrorsField`   | Error message with a given error or list of validation errors.  | *none*                   |
 | `ListAddField`  | "+" with action to add list item.                               | child of `ListField`     |
 | `ListDelField`  | "-" with action to remove list item.                            | child of `ListFieldItem` |

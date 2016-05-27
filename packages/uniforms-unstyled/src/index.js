@@ -1,6 +1,7 @@
 export {default as AutoField}     from './components/fields/AutoField';
 export {default as BoolField}     from './components/fields/BoolField';
 export {default as DateField}     from './components/fields/DateField';
+export {default as ErrorField}    from './components/fields/ErrorField';
 export {default as ErrorsField}   from './components/fields/ErrorsField';
 export {default as ListAddField}  from './components/fields/ListAddField';
 export {default as ListDelField}  from './components/fields/ListDelField';
