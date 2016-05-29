@@ -1,15 +1,12 @@
 {
   "private": true,
-
   "devDependencies": {
-    "lerna": "2.0.0-beta.13"
+    "lerna": "2.0.0-beta.15"
   },
-
   "scripts": {
-    "lint":  "./node_modules/.bin/lerna run lint",
-    "test":  "./node_modules/.bin/lerna run test",
+    "lint": "./node_modules/.bin/lerna run lint",
+    "test": "./node_modules/.bin/lerna run test",
     "cover": "./node_modules/.bin/lerna run cover",
-
     "publish": "./node_modules/.bin/lerna publish",
     "install": "./node_modules/.bin/lerna bootstrap"
   }
