@@ -10,6 +10,7 @@ const Nest = ({
     fields,
     label,
     name,
+// onChange shouldn't be passed to <section>
 // eslint-disable-next-line no-unused-vars
     onChange,
     ...props

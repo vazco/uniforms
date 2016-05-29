@@ -4,6 +4,7 @@ import {connectField} from 'uniforms';
 const Error = ({
     children,
     errorMessage,
+// onChange shouldn't be passed to <section>
 // eslint-disable-next-line no-unused-vars
     onChange,
     ...props
