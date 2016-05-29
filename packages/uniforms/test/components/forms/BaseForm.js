@@ -7,7 +7,7 @@ import {BaseForm} from 'uniforms';
 
 describe('BaseForm', () => {
     const error  = new Error();
-    const model  = {_: 1};
+    const model  = {$: [1], _: 1};
     const schema = {
         getError:         () => {},
         getErrorMessage:  () => {},
@@ -15,7 +15,7 @@ describe('BaseForm', () => {
         getField:         () => ({type: String}),
         getInitialValue:  () => {},
         getProps:         () => {},
-        getSubfields:     () => ['_'],
+        getSubfields:     () => ['$', '_'],
         getType:          () => {},
         getValidator:     () => {}
     };
@@ -59,6 +59,8 @@ describe('BaseForm', () => {
 
         it('have correct `state`', () => {
             expect(context.uniforms).to.have.property('state').that.is.an('object');
+            expect(context.uniforms.state).to.have.property('changed', false);
+            expect(context.uniforms.state).to.have.property('changedMap').that.is.deep.equal({});
             expect(context.uniforms.state).to.have.property('label', true);
             expect(context.uniforms.state).to.have.property('disabled', false);
             expect(context.uniforms.state).to.have.property('placeholder', false);
@@ -90,12 +92,44 @@ describe('BaseForm', () => {
             expect(wrapper).to.be.not.empty;
             expect(wrapper).to.have.exactly(3).descendants('div');
         });
+
+        it('updates schema bridge', () => {
+            const schema2 = {...schema, getType: () => {}};
+
+            wrapper.setProps({schema: schema2});
+
+            const context = wrapper.instance().getChildContext();
+
+            expect(context.uniforms).to.have.property('schema');
+            expect(context.uniforms.schema).to.have.property('schema', schema2);
+        });
     });
 
     context('when changed', () => {
         const wrapper = mount(
             <BaseForm model={model} schema={schema} onChange={onChange} onSubmit={onSubmit} />
         );
+
+        it('updates `changed` and `changedMap`', () => {
+            const context1 = wrapper.instance().getChildContext().uniforms.state;
+            expect(context1).to.have.property('changed', false);
+            expect(context1).to.have.property('changedMap').that.is.deep.equal({});
+
+            wrapper.instance().getChildContext().uniforms.onChange('$', [1, 2]);
+
+            const context2 = wrapper.instance().getChildContext().uniforms.state;
+            expect(context2).to.have.property('changed', true);
+            expect(context2).to.have.deep.property('changedMap.$.1', true);
+            expect(context2).to.not.have.deep.property('changedMap.$.0');
+
+            wrapper.instance().getChildContext().uniforms.onChange('a', [1]);
+
+            const context3 = wrapper.instance().getChildContext().uniforms.state;
+            expect(context3).to.have.property('changed', true);
+            expect(context2).to.have.deep.property('changedMap.$.1', true);
+            expect(context2).to.have.deep.property('changedMap.a.0', true);
+            expect(context2).to.not.have.deep.property('changedMap.$.0');
+        });
 
         it('autosaves correctly (`autosave` = true)', () => {
             wrapper.setProps({autosave: true});

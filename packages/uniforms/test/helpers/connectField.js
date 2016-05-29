@@ -11,7 +11,7 @@ describe('connectField', () => {
     const error = new Error();
     const model = {field: 'Value'};
     const onChange = spy();
-    const state = {label: true, disabled: false, placeholder: false};
+    const state = {changed: false, changedMap: {}, label: true, disabled: false, placeholder: false};
     const schema = createSchemaBridge({
         getDefinition (name) {
             if (name === 'field') {

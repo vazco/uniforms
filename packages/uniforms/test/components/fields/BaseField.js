@@ -20,7 +20,7 @@ describe('BaseField', () => {
     const error = {details: [{name: 'a'}]};
     const model = {a: {b: {c: 'example'}}};
     const onChange = spy();
-    const state = {label: true, disabled: false, placeholder: true};
+    const state = {changed: false, changedMap: {}, label: true, disabled: false, placeholder: true};
     const schema = createSchemaBridge({
         getDefinition (name) {
             if (name === 'a' || name === 'a.b') {
@@ -197,6 +197,10 @@ describe('BaseField', () => {
         );
 
         const props = wrapper.find('div').props();
+
+        it('have correct `changed`', () => {
+            expect(props).to.have.property('changed', false);
+        });
 
         it('have correct `disabled`', () => {
             expect(props).to.have.property('disabled', false);

@@ -117,6 +117,8 @@ export default class BaseField extends Component {
                 : props.placeholder
             : '';
 
+        const changed = !!get(context.state.changedMap, name);
+
         let value = get(context.model, name);
         if (value === undefined && !explicitInitialValue) {
             value = context.schema.getInitialValue(name);
@@ -136,6 +138,7 @@ export default class BaseField extends Component {
         const onChange = (value, key = name) => context.onChange(key, value);
 
         return {
+            changed,
             error,
             errorMessage,
             field,

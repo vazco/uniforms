@@ -226,6 +226,7 @@ const PersonSchema = new SimpleSchema({
 
 | Name           | Type                  | Description                            |
 |:--------------:|:---------------------:|:--------------------------------------:|
+| `changed`      | `bool`                | Has field changed?                     |
 | `disabled`     | `bool`                | Is field disabled?                     |
 | `error`        | `object`              | Field scoped part of validation error. |
 | `errorMessage` | `string`              | Field scoped validation error message. |

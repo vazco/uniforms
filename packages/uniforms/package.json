@@ -28,7 +28,8 @@
     "lodash.clonedeep": "^4.3.2",
     "lodash.get": "^4.2.1",
     "lodash.isequal": "^4.1.4",
-    "lodash.set": "^4.1.0"
+    "lodash.set": "^4.1.0",
+    "lodash.xorwith": "^4.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.8.0",
