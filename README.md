@@ -5,22 +5,36 @@
 </p>
 
 <p align="center">
-    <img src="https://img.shields.io/github/license/vazco/uniforms.svg?maxAge=86400" alt="license">
+    <a href="#">
+        <img src="https://img.shields.io/github/license/vazco/uniforms.svg?maxAge=86400" alt="license">
+    </a>
 
     <a href="https://npmjs.org/package/uniforms">
         <img src="https://img.shields.io/npm/v/uniforms.svg?maxAge=86400" alt="npm version">
     </a>
 
-    <img src="https://img.shields.io/codeship/fe6eb2a0-f8df-0133-0060-4e010acc8333/master.svg?maxAge=86400" alt="build status">
+    <a href="#">
+        <img src="https://img.shields.io/codeship/fe6eb2a0-f8df-0133-0060-4e010acc8333/master.svg?maxAge=86400" alt="build status">
+    </a>
 </p>
 
 # uniforms
 
-This is a set of npm packages designed for Meteor, which contains helpers and `React` components - both unstyled and stylised with the Semantic UI - to easily create, generate and validate forms using [`SimpleSchema`](https://github.com/aldeed/meteor-simple-schema).
+This is a set of npm packages designed for Meteor (but completely independent!), which contains helpers and [`React`](https://facebook.github.io/react/) components - both unstyled and stylised with the Bootstrap3, Bootstrap4 and Semantic UI - to easily create, generate and validate forms using [`SimpleSchema`](https://github.com/aldeed/meteor-simple-schema), or your custom schemas.
 
 **Note:** Following examples are heavily based on `SimpleSchema`, but it's not mandatory and you can easily [use different schemas](#custom-schema).
 
-## Installation
+## Installation - npm
+
+```shell
+# Components (pick one)
+$ npm install --save react uniforms uniforms-bootstrap3
+$ npm install --save react uniforms uniforms-bootstrap4
+$ npm install --save react uniforms uniforms-semantic
+$ npm install --save react uniforms uniforms-unstyled
+```
+
+## Installation - Meteor
 
 These are npm packages, so they can't imply any Meteor package, and you have to install dependencies manually, in your Meteor app directory:
 
@@ -40,6 +54,7 @@ $ meteor npm install --save react uniforms uniforms-unstyled
 Firstly, write your schemas:
 
 ```js
+// Using SimpleSchema
 const PersonSchema = new SimpleSchema({
     name: {
         type: String,
@@ -79,12 +94,14 @@ const PostSchema = new SimpleSchema({
         optional: true
     }
 });
+
+// More about custom schemas below
 ```
 
 Then, import all needed components:
 
 ```js
-# Replace 'uniforms-semantic' with other components set, if needed
+// Replace 'uniforms-semantic' with other components set, if needed
 import {AutoForm}  from 'uniforms-semantic';
 import {AutoField} from 'uniforms-semantic';
 ```
@@ -199,7 +216,7 @@ Currently built-in bridges:
 
 - SimpleSchema
 
-**Note:** Further information in [`src/bridges/Bridge.js`](src/bridges/Bridge.js).
+**Note:** Further information in [`Bridge.js`](https://github.com/vazco/uniforms/blob/master/packages/uniforms/src/bridges/Bridge.js).
 
 ### Custom component in SimpleSchema
 
@@ -279,9 +296,6 @@ Every prop can be overriden, but `label`, `placeholder` and `disabled` have spec
 ### Forms components
 
 ![](README.png)
-**Note:**
-*Temporarily this image is a bit outdated - inheritance has changed.*
-*Also `BaseForm` (and his descendants) has new prop - `autosave`.*
 
 <br />
 
@@ -339,15 +353,23 @@ MyComponent.contextTypes = {
 };
 ```
 
+**Note:** What's more in context? Discover it in [`BaseForm.js`](https://github.com/vazco/uniforms/blob/master/packages/uniforms/src/components/forms/BaseForm.js).
+
 ### Contributing
 
-Anyone is welcome to contribute. Fork, make your changes, run tests, and then submit a pull request.
+Everyone is welcome to contribute. Create an issue or fork, make your changes, run tests, and then submit a pull request.
 
 ```shell
-$ npm test # run tests
+# Single package
+$ npm run lint # run lints
+$ npm run test # run tests
 $ npm run build # build src/
 $ npm run watch # build src/ continuously
 $ npm run cover # build code coverage raport
+
+# All packages
+$ npm run lint # run lints
+$ npm run test # run tests
 ```
 
 ### Copyright and license
