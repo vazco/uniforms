@@ -76,6 +76,32 @@ describe('BaseField', () => {
                     type: Date
                 };
             }
+
+            if (name === 'j') {
+                return {
+                    type: Array,
+                    minCount: 3
+                };
+            }
+
+            if (name === 'j.0') {
+                return {
+                    type: String
+                };
+            }
+
+            if (name === 'k') {
+                return {
+                    type: Array,
+                    initialCount: 2
+                };
+            }
+
+            if (name === 'k.0') {
+                return {
+                    type: String
+                };
+            }
         },
 
         messageForError () {
@@ -395,6 +421,24 @@ describe('BaseField', () => {
             );
 
             expect(wrapper.find('div').props()).to.have.property('value').that.is.instanceOf(Date);
+        });
+
+        it('have correct `value` (minCount)', () => {
+            const wrapper = mount(
+                <TestField name="j" />,
+                {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+            );
+
+            expect(wrapper.find('div').props()).to.have.property('value').that.is.deep.equal(['', '', '']);
+        });
+
+        it('have correct `value` (initialCount)', () => {
+            const wrapper = mount(
+                <TestField name="k" />,
+                {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+            );
+
+            expect(wrapper.find('div').props()).to.have.property('value').that.is.deep.equal(['', '']);
         });
     });
 });

@@ -1,4 +1,5 @@
-import Bridge from './Bridge';
+import Bridge   from './Bridge';
+import joinName from '../helpers/joinName';
 
 let SimpleSchema = (typeof global === 'object' ? global : window).SimpleSchema;
 let Match        = (typeof global === 'object' ? global : window).Match;
@@ -88,6 +89,17 @@ export default class SimpleSchemaBridge extends Bridge {
 
     getInitialValue (name) {
         const field = this.getField(name);
+
+        if (field.type === Array) {
+            const item = this.getInitialValue(joinName(name, '0'));
+            const items = field.initialCount !== undefined
+                ? field.initialCount
+                : field.minCount !== undefined
+                    ? field.minCount
+                    : 0;
+
+            return [...Array(items)].map(() => item);
+        }
 
         return field.defaultValue
             ? field.defaultValue
