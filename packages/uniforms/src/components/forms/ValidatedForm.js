@@ -87,8 +87,10 @@ const Validated = parent => class extends parent {
     }
 
     onSubmit (event) {
-        event.preventDefault();
-        event.stopPropagation();
+        if (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
 
         this.validate(() =>
             this.setState({after: true}, () =>
