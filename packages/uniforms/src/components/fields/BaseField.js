@@ -121,9 +121,9 @@ export default class BaseField extends Component {
 
         let value = get(context.model, name);
         if (value === undefined && !explicitInitialValue) {
-            value = context.schema.getInitialValue(name);
+            value = context.schema.getInitialValue(name, this.props);
         } else if (explicitInitialValue) {
-            props.initialValue = context.schema.getInitialValue(name);
+            props.initialValue = context.schema.getInitialValue(name, this.props);
         }
 
         const findError = name => (

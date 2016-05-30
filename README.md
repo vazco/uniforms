@@ -206,7 +206,7 @@ To use different schemas, you have to create a *bridge* - unified schema mapper.
 - `getErrorMessage(name, error)`
 - `getErrorMessages(error)`
 - `getField(name)`
-- `getInitialValue(name)`
+- `getInitialValue(name, props)`
 - `getProps(name)`
 - `getSubfields(name)`
 - `getType(name)`

@@ -40,8 +40,8 @@ export default class Bridge {
     }
 
     // Field's initial value
-    getInitialValue (name) {
-        return this.schema.getInitialValue(name);
+    getInitialValue (name, props) {
+        return this.schema.getInitialValue(name, props);
     }
 
     // Field's props

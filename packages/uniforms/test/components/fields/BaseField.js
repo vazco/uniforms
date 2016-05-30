@@ -92,8 +92,7 @@ describe('BaseField', () => {
 
             if (name === 'k') {
                 return {
-                    type: Array,
-                    initialCount: 2
+                    type: Array
                 };
             }
 
@@ -434,7 +433,7 @@ describe('BaseField', () => {
 
         it('have correct `value` (initialCount)', () => {
             const wrapper = mount(
-                <TestField name="k" />,
+                <TestField name="k" initialCount={2} />,
                 {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
             );
 
