@@ -180,7 +180,8 @@ export default class BaseForm extends Component {
             this.props.onChange(key, value);
         }
 
-        if (this.props.autosave) {
+        // Do not call `onSubmit` before componentDidMount
+        if (this.changed !== null && this.props.autosave) {
             this.onSubmit();
         }
     }

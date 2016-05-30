@@ -8,6 +8,7 @@ import {AutoForm} from 'uniforms';
 describe('AutoForm', () => {
     const validator = spy();
     const onChange = spy();
+    const onSubmit = spy();
     const model = {a: 1};
     const schema = {
         getDefinition:   () => {},
@@ -30,6 +31,19 @@ describe('AutoForm', () => {
 
             expect(onChange).to.have.been.calledOnce;
             expect(onChange).to.have.been.calledWith('a', 2);
+        });
+    });
+
+    context('when rendered', () => {
+        const wrapper = mount(
+            <AutoForm onSubmit={onSubmit} schema={schema} autosave />
+        );
+
+        it('skips `onSubmit` until rendered (`autosave` = true)', () => {
+            expect(onSubmit).to.have.been.not.called;
+            wrapper.instance().getChildContext().uniforms.onChange('a', 1);
+            expect(onSubmit).to.have.been.calledOnce;
+            expect(onSubmit).to.have.been.calledWith({a: 1});
         });
     });
 
