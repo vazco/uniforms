@@ -7,20 +7,24 @@ const ListFieldDel = ({className, disabled, parent, name, ...props}) => {
     const limitNotReached = !(parent.minCount >= parent.value.length);
 
     return (
-        <i
-            {...props}
-            className={classnames(
-                'del glyphicon glyphicon-minus', // TODO configure to alternate icon
-                className,
-                limitNotReached && !disabled
-                    ? 'link'
-                    : 'disabled',
-            )}
+        <span
+            className="badge"
             onClick={() => limitNotReached && parent.onChange(
                 [].concat(parent.value.slice(0,  fieldIndex))
                   .concat(parent.value.slice(1 + fieldIndex))
             )}
-       />
+        >
+            <i
+                {...props}
+                className={classnames(
+                    'del glyphicon glyphicon-minus', // TODO configure to alternate icon
+                    className,
+                    limitNotReached && !disabled
+                        ? 'link'
+                        : 'disabled',
+                )}
+           />
+        </span>
    );
 };
 

@@ -34,9 +34,7 @@ const List = ({
                         {label}&nbsp;
                     </label>
 
-                    <section className="label label-default label-pill pull-xs-right">
-                        <ListAddField name={`${name}.$`} />
-                    </section>
+                    <ListAddField name={`${name}.$`} />
                 </section>
             </section>
         )}

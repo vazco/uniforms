@@ -10,9 +10,7 @@ const ListItem = props =>
     <li className="list-group-item">
 
         <section className="list-group-item-top text-xs-right" style={{marginBottom: 5}}>
-            <span className="label label-default label-pill">
-                <ListDelField name={props.name} />
-            </span>
+            <ListDelField name={props.name} />
         </section>
 
         <section className="middle aligned content">

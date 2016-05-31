@@ -32,10 +32,13 @@ const List = ({
         'grouped fields list'
     )} {...props}>
         <div className="panel-heading">
-            {label ? <label className="control-label">{label}&nbsp;</label> : ''}
-            <div className="badge pull-right">
-                <ListAddField name={`${name}.$`} />
-            </div>
+            {label && (
+                <label className="control-label">
+                    {label}&nbsp;
+                </label>
+            )}
+
+            <ListAddField name={`${name}.$`} />
         </div>
 
         <ul className="list-group list-group-flush">

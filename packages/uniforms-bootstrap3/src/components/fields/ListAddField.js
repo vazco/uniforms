@@ -6,17 +6,21 @@ const ListAdd = ({className, parent, value, ...props}) => {
     const limitNotReached = !(parent.maxCount <= parent.value.length);
 
     return (
-        <i
-            {...props}
-            className={classnames(
-                'add glyphicon glyphicon-plus', // TODO configure to alternate icon
-                className,
-                limitNotReached
-                    ? 'link'
-                    : 'disabled',
-            )}
+        <section
+            className="badge pull-right"
             onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
-        />
+        >
+            <i
+                {...props}
+                className={classnames(
+                    'add glyphicon glyphicon-plus', // TODO configure to alternate icon
+                    className,
+                    limitNotReached
+                        ? 'link'
+                        : 'disabled',
+                )}
+            />
+        </section>
     );
 };
 
