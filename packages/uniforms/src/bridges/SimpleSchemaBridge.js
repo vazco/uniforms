@@ -87,17 +87,15 @@ export default class SimpleSchemaBridge extends Bridge {
         throw new Error(`Field not found in schema: '${name}'`);
     }
 
-    getInitialValue (name, props) {
+    getInitialValue (name, props = {}) {
         const field = this.getField(name);
 
         if (field.type === Array) {
-            const initialCount = props && props.initialCount;
             const item = this.getInitialValue(joinName(name, '0'));
-            const items = initialCount !== undefined
-                ? initialCount
-                : field.minCount !== undefined
-                    ? field.minCount
-                    : 0;
+            const items = Math.max(
+                props.initialCount || 0,
+                field.minCount     || 0
+            );
 
             return [...Array(items)].map(() => item);
         }

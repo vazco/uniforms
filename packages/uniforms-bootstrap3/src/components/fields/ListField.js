@@ -12,6 +12,7 @@ const List = ({
     className,
     disabled,
     error,
+    initialCount,
     label,
     name,
 // onChange shouldn't be passed to <section>
@@ -38,7 +39,7 @@ const List = ({
                 </label>
             )}
 
-            <ListAddField name={`${name}.$`} />
+            <ListAddField name={`${name}.$`} initialCount={initialCount} />
         </div>
 
         <ul className="list-group list-group-flush">

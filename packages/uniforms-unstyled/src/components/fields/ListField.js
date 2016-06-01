@@ -8,6 +8,7 @@ import ListItemField from './ListItemField';
 
 const List = ({
     children,
+    initialCount,
     label,
     name,
 // onChange shouldn't be passed to <section>
@@ -21,7 +22,7 @@ const List = ({
             <label>
                 {label}
 
-                <ListAddField name={`${name}.$`} />
+                <ListAddField name={`${name}.$`} initialCount={initialCount} />
             </label>
         )}
 

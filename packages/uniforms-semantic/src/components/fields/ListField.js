@@ -12,6 +12,7 @@ const List = ({
     className,
     disabled,
     error,
+    initialCount,
     label,
     name,
 // onChange shouldn't be passed to <section>
@@ -28,7 +29,7 @@ const List = ({
                     {label}
                 </label>
 
-                <ListAddField name={`${name}.$`} className="right floated" />
+                <ListAddField name={`${name}.$`} initialCount={initialCount} className="right floated" />
             </section>
         )}
 

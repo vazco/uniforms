@@ -12,6 +12,7 @@ const List = ({
     className,
     disabled,
     error,
+    initialCount,
     label,
     name,
 // onChange shouldn't be passed to <section>
@@ -34,7 +35,7 @@ const List = ({
                         {label}&nbsp;
                     </label>
 
-                    <ListAddField name={`${name}.$`} />
+                    <ListAddField name={`${name}.$`} initialCount={initialCount} />
                 </section>
             </section>
         )}
