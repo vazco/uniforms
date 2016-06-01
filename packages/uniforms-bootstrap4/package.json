@@ -1,6 +1,6 @@
 {
   "name": "uniforms-bootstrap4",
-  "version": "1.0.0-rc.11",
+  "version": "1.0.0-rc.12",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "description": "Bootstrap4 UI components for uniforms.",
@@ -37,7 +37,7 @@
   },
   "peerDependencies": {
     "react": "^15.1.0",
-    "uniforms": "^1.0.0-rc.10"
+    "uniforms": "^1.0.0-rc.12"
   },
   "babel": {
     "presets": [
