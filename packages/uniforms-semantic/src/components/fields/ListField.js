@@ -33,7 +33,9 @@ const List = ({
             </section>
         )}
 
-        <section className="ui fitted hidden clearing divider" />
+        {label && (
+            <section className="ui fitted hidden clearing divider" />
+        )}
 
         {children ? (
             value.map((item, index) =>
