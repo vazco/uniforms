@@ -11,10 +11,17 @@
     "url": "https://github.com/vazco/uniforms/issues"
   },
   "keyword": [
+    "form",
     "forms",
     "meteor",
     "react",
-    "schema"
+    "react-component",
+    "schema",
+    "validation"
+  ],
+  "files": [
+    "lib/",
+    "src/"
   ],
   "scripts": {
     "lint": "./node_modules/.bin/eslint src",
@@ -22,6 +29,7 @@
     "cover": "true",
     "build": "./node_modules/.bin/babel --out-dir lib src",
     "watch": "./node_modules/.bin/babel --out-dir lib src --watch",
+    "clean": "rm -rf lib node_modules",
     "prepublish": "npm run lint && npm run test && npm run build"
   },
   "devDependencies": {
