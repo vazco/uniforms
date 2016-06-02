@@ -1,6 +1,6 @@
 # uniforms-bootstrap3
 
-> Bootstrap4 UI components for `uniforms`.
+> Bootstrap3 UI components for `uniforms`.
 
 ## Install
 
