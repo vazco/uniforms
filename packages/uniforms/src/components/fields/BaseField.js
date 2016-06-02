@@ -63,11 +63,10 @@ export default class BaseField extends Component {
 
         return {
             ...state,
-            ...{
-                label:       propagate('label'),
-                disabled:    propagate('disabled'),
-                placeholder: propagate('placeholder')
-            }
+
+            label:       propagate('label'),
+            disabled:    propagate('disabled'),
+            placeholder: propagate('placeholder')
         };
     }
 

@@ -119,16 +119,8 @@ describe('BaseForm', () => {
 
             const context2 = wrapper.instance().getChildContext().uniforms.state;
             expect(context2).to.have.property('changed', true);
-            expect(context2).to.have.deep.property('changedMap.$.1', true);
-            expect(context2).to.not.have.deep.property('changedMap.$.0');
-
-            wrapper.instance().getChildContext().uniforms.onChange('a', [1]);
-
-            const context3 = wrapper.instance().getChildContext().uniforms.state;
-            expect(context3).to.have.property('changed', true);
-            expect(context2).to.have.deep.property('changedMap.$.1', true);
-            expect(context2).to.have.deep.property('changedMap.a.0', true);
-            expect(context2).to.not.have.deep.property('changedMap.$.0');
+            expect(context2).to.have.deep.property('changedMap.$').that.is.ok;
+            expect(context2).to.have.deep.property('changedMap.$.1').that.is.ok;
         });
 
         it('autosaves correctly (`autosave` = true)', () => {

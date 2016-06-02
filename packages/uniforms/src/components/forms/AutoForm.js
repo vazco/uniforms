@@ -12,26 +12,39 @@ const Auto = parent => class extends parent {
     constructor () {
         super(...arguments);
 
-        this.model = cloneDeep(this.props.model);
+        this.state = {
+            ...this.state,
+
+            model:     this.props.model,
+            modelSync: this.props.model
+        };
     }
 
     componentWillReceiveProps ({model}) {
         super.componentWillReceiveProps(...arguments);
 
         if (!isEqual(this.props.model, model)) {
-            this.model = cloneDeep(model);
-            this.forceUpdate();
+            this.setState({model, modelSync: model});
         }
     }
 
     getChildContextModel () {
-        return this.model;
+        return this.state.modelSync;
+    }
+
+    getModel () {
+        return this.state.model;
+    }
+
+    validate () {
+        this.validateModel(this.getModel());
     }
 
     onChange (key, value) {
-        set(this.model, key, value);
-        super.onChange(...arguments);
-        this.forceUpdate();
+        this.setState(state => ({model: set(cloneDeep(state.model), key, value)}), () => {
+            super.onChange(...arguments);
+            this.setState({modelSync: this.state.model});
+        });
     }
 };
 

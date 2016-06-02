@@ -311,11 +311,14 @@ Every prop can be overriden, but `label`, `placeholder` and `disabled` have spec
 
 Every form component inherits from `BaseForm` which is subclass of `React.Component`, and provides a few overridable methods:
 
+- `getChangedKeys(root, valueA, valueB)`
 - `getChildContextError()`
 - `getChildContextModel()`
 - `getChildContextName()`
+- `getChildContextOnChange()`
 - `getChildContextSchema()`
 - `getChildContextState()`
+- `getModel()`
 - `getNativeFormProps()`
 - `onChange(key, value)`
 - `onSubmit(event)`
@@ -328,7 +331,8 @@ Additionally, `QuickForm` provides:
 
 Additionally, `ValidatedForm` provides:
 
-- `validate(callback, key, value)`
+- `validate(key, value)`
+- `validateModel(model)`
 
 ### Context data
 

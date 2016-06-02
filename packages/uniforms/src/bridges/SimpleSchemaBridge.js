@@ -1,3 +1,5 @@
+import cloneDeep from 'lodash.clonedeep';
+
 import Bridge   from './Bridge';
 import joinName from '../helpers/joinName';
 
@@ -37,10 +39,10 @@ export default class SimpleSchemaBridge extends Bridge {
     static check (schema) {
         return SimpleSchema && (
             schema &&
-            schema.validator &&
-            schema.objectKeys &&
             schema.getDefinition &&
-            schema.messageForError
+            schema.messageForError &&
+            schema.objectKeys &&
+            schema.validator
         );
     }
 
@@ -69,13 +71,15 @@ export default class SimpleSchemaBridge extends Bridge {
     }
 
     getErrorMessages (error) {
-        return (error && error.details || []).map(error => this.schema.messageForError(
-            error.type,
-            error.name,
-            null,
-            error.details &&
-            error.details.value
-        ));
+        return (error && error.details || []).map(error =>
+            this.schema.messageForError(
+                error.type,
+                error.name,
+                null,
+                error.details &&
+                error.details.value
+            )
+        );
     }
 
     getField (name) {
@@ -116,9 +120,9 @@ export default class SimpleSchemaBridge extends Bridge {
     }
 
     getProps (name) {
-        let {uniforms, ...field} = this.getField(name);
+        let {optional, uniforms, ...field} = this.getField(name);
 
-        field = {...field, required: !field.optional};
+        field = {...field, required: !optional};
 
         if (uniforms) {
             if (typeof uniforms === 'string' ||
@@ -141,7 +145,8 @@ export default class SimpleSchemaBridge extends Bridge {
     }
 
     getValidator (options = {clean: true}) {
-        return this.schema.validator(options);
+        const validator = this.schema.validator(options);
+        return model => validator(cloneDeep(model));
     }
 }
 

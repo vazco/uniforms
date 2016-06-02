@@ -31,14 +31,17 @@ const Validated = parent => class extends parent {
         super(...arguments);
 
         this.state = {
+            ...this.state,
+
             error: null,
-            after: false,
+            validate: false,
             validator: this
                 .getChildContextSchema()
                 .getValidator(this.props.validator)
         };
 
-        this.validate = this.validate.bind(this);
+        this.validate      = this.validate.bind(this);
+        this.validateModel = this.validateModel.bind(this);
     }
 
     getChildContextError () {
@@ -51,39 +54,44 @@ const Validated = parent => class extends parent {
         if (this.props.schema    !== schema ||
             this.props.validator !== validator) {
             this.setState({
-                after: true,
+                validate: true,
                 validator: this
                     .getChildContextSchema()
                     .getValidator(validator)
-            }, () => this.validate());
+            });
+
+            this.validate();
         } else if (!isEqual(this.props.model, model)) {
-            this.setState({
-                after: true
-            }, () => this.validate());
+            this.setState({validate: true});
+            this.validate();
         }
     }
 
-    validate (callback, key, value) {
-        let model = cloneDeep(this.getChildContextModel());
+    validate (key, value) {
+        let model = this.getModel();
         if (model && key) {
-            set(model, key, cloneDeep(value));
+            model = set(cloneDeep(model), key, cloneDeep(value));
         }
 
+        this.validateModel(model);
+    }
+
+    validateModel (model) {
         try {
             this.state.validator(model);
-            this.setState({error: null}, callback);
+            this.setState({error: null});
         } catch (error) {
-            this.setState({error}, callback);
+            this.setState({error});
         }
     }
 
     onChange (key, value) {
         if (this.props.validate === 'onChange' ||
-            this.props.validate === 'onChangeAfterSubmit' && this.state.after) {
-            this.validate(() => super.onChange(...arguments), key, value);
-        } else {
-            super.onChange(...arguments);
+            this.props.validate === 'onChangeAfterSubmit' && this.state.validate) {
+            this.validate(key, value);
         }
+
+        super.onChange(...arguments);
     }
 
     onSubmit (event) {
@@ -92,11 +100,8 @@ const Validated = parent => class extends parent {
             event.stopPropagation();
         }
 
-        this.validate(() =>
-            this.setState({after: true}, () =>
-                this.getChildContextError() || super.onSubmit()
-            )
-        );
+        this.validate();
+        this.setState({validate: true}, () => this.getChildContextError() || super.onSubmit());
     }
 };
 

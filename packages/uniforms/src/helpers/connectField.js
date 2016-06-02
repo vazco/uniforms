@@ -19,7 +19,7 @@ export default function connectField (component, {
             return createElement(component, mapProps(this.getFieldProps(undefined, {includeParent})));
         }
 
-        componentDidMount () {
+        componentWillMount () {
             if (initialValue) {
                 let props = this.getFieldProps(undefined, {explicitInitialValue: true, includeParent: false});
                 if (props.value === undefined && !props.field.optional) {

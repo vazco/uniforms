@@ -1,41 +1,22 @@
 import React    from 'react';
 import {expect} from 'chai';
 import {mount}  from 'enzyme';
-import {spy}    from 'sinon';
 
 import {QuickForm} from 'uniforms';
 
 describe('QuickForm', () => {
-    const AutoField   = spy(() => null);
-    const ErrorsField = spy(() => null);
-    const SubmitField = spy(() => null);
-
     class TestQuickForm extends QuickForm {
-        getAutoField () {
-            return AutoField;
-        }
-
-        getErrorsField () {
-            return ErrorsField;
-        }
-
-        getSubmitField () {
-            return SubmitField;
-        }
+        getAutoField   = () => () => <i id="auto" />;
+        getErrorsField = () => () => <i id="errors" />;
+        getSubmitField = () => () => <i id="submit" />;
     }
 
     const schema = {
-        getDefinition   () {},
-        messageForError () {},
-        objectKeys      () {return ['a', 'b', 'c'];},
-        validator       () {}
+        getDefinition:   () => {},
+        messageForError: () => {},
+        objectKeys:      () => ['a', 'b', 'c'],
+        validator:       () => {}
     };
-
-    beforeEach(() => {
-        AutoField.reset();
-        ErrorsField.reset();
-        SubmitField.reset();
-    });
 
     context('when rendered', () => {
         const wrapper = mount(
@@ -49,27 +30,27 @@ describe('QuickForm', () => {
 
     context('when rendered with custom fields', () => {
         it('renders `AutoField` for each field', () => {
-            mount(
+            const wrapper = mount(
                 <TestQuickForm schema={schema} />
             );
 
-            expect(AutoField).to.have.callCount(3);
+            expect(wrapper).to.have.descendants('#auto');
         });
 
         it('renders `ErrorsField`', () => {
-            mount(
+            const wrapper = mount(
                 <TestQuickForm schema={schema} />
             );
 
-            expect(ErrorsField).to.have.been.calledOnce;
+            expect(wrapper).to.have.descendants('#errors');
         });
 
         it('renders `SubmitField`', () => {
-            mount(
+            const wrapper = mount(
                 <TestQuickForm schema={schema} />
             );
 
-            expect(SubmitField).to.have.been.calledOnce;
+            expect(wrapper).to.have.descendants('#submit');
         });
     });
 

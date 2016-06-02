@@ -1,12 +1,11 @@
 import React       from 'react';
+import cloneDeep   from 'lodash.clonedeep';
 import get         from 'lodash.get';
-import isEqual     from 'lodash.isequal';
 import set         from 'lodash.set';
-import xorWith     from 'lodash.xorwith';
 import {Component} from 'react';
 import {PropTypes} from 'react';
 
-import joinName           from '../../helpers/joinName';
+import changedKeys        from '../../helpers/changedKeys';
 import createSchemaBridge from '../../bridges';
 
 export default class BaseForm extends Component {
@@ -66,21 +65,26 @@ export default class BaseForm extends Component {
     constructor () {
         super(...arguments);
 
-        // These can't be in state, because state is asynchronous
-        this.bridge     = createSchemaBridge(this.props.schema);
-        this.changed    = null;
-        this.changedMap = {};
+        this.state = {
+            bridge: createSchemaBridge(this.props.schema),
+
+            changed: null,
+            changedMap: {}
+        };
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
+        this.getModel           = this.getModel.bind(this);
+        this.getChangedKeys     = this.getChangedKeys.bind(this);
         this.getNativeFormProps = this.getNativeFormProps.bind(this);
 
-        this.getChildContextName   = this.getChildContextName.bind(this);
-        this.getChildContextError  = this.getChildContextError.bind(this);
-        this.getChildContextModel  = this.getChildContextModel.bind(this);
-        this.getChildContextState  = this.getChildContextState.bind(this);
-        this.getChildContextSchema = this.getChildContextSchema.bind(this);
+        this.getChildContextName     = this.getChildContextName.bind(this);
+        this.getChildContextError    = this.getChildContextError.bind(this);
+        this.getChildContextModel    = this.getChildContextModel.bind(this);
+        this.getChildContextState    = this.getChildContextState.bind(this);
+        this.getChildContextSchema   = this.getChildContextSchema.bind(this);
+        this.getChildContextOnChange = this.getChildContextOnChange.bind(this);
     }
 
     getChildContext () {
@@ -91,7 +95,7 @@ export default class BaseForm extends Component {
                 model:    this.getChildContextModel(),
                 state:    this.getChildContextState(),
                 schema:   this.getChildContextSchema(),
-                onChange: this.onChange
+                onChange: this.getChildContextOnChange()
             }
         };
     }
@@ -110,8 +114,8 @@ export default class BaseForm extends Component {
 
     getChildContextState () {
         return {
-            changed:  !!this.changed,
-            changedMap: this.changedMap,
+            changed:  !!this.state.changed,
+            changedMap: this.state.changedMap,
 
             label:       !!this.props.label,
             disabled:    !!this.props.disabled,
@@ -120,16 +124,24 @@ export default class BaseForm extends Component {
     }
 
     getChildContextSchema () {
-        return this.bridge;
+        return this.state.bridge;
     }
 
-    componentDidMount () {
-        this.changed = false;
+    getChildContextOnChange () {
+        return this.onChange;
+    }
+
+    getModel () {
+        return this.getChildContextModel();
+    }
+
+    componentWillMount () {
+        this.setState({}, () => this.setState({changed: false}));
     }
 
     componentWillReceiveProps ({schema}) {
         if (this.props.schema !== schema) {
-            this.bridge = createSchemaBridge(schema);
+            this.setState({bridge: createSchemaBridge(schema)});
         }
     }
 
@@ -140,21 +152,7 @@ export default class BaseForm extends Component {
     }
 
     getChangedKeys (root, valueA, valueB) {
-        if (Array.isArray(valueA)) {
-            if (valueB) {
-                const pairsA = valueA.map((value, index) => [value, index]);
-                const pairsB = valueB.map((value, index) => [value, index]);
-
-                return xorWith(pairsA, pairsB, isEqual)
-                    .map(pair => pair[1])
-                    .filter((value, index, array) => array.indexOf(value) === index)
-                    .map(index => joinName(root, index));
-            }
-
-            return Object.keys(valueA).map(index => joinName(root, index));
-        }
-
-        return [root];
+        return changedKeys(root, valueA, valueB);
     }
 
     getNativeFormProps () {
@@ -168,12 +166,14 @@ export default class BaseForm extends Component {
 
     onChange (key, value) {
         // Do not set `changed` before componentDidMount
-        if (this.changed !== null) {
-            this.changed = true;
-            this.forceUpdate();
-            this.getChangedKeys(key, value, get(this.getChildContextModel(), key)).forEach(key => {
-                set(this.changedMap, key, true);
-            });
+        if (this.state.changed !== null) {
+            this.setState({changed: true});
+            this.getChangedKeys(key, value, get(this.getChildContextModel(), key)).forEach(key =>
+                this.setState(state => get(state.changedMap, key)
+                    ? {}
+                    : {changedMap: set(cloneDeep(state.changedMap), key, {})}
+                )
+            );
         }
 
         if (this.props.onChange) {
@@ -181,7 +181,7 @@ export default class BaseForm extends Component {
         }
 
         // Do not call `onSubmit` before componentDidMount
-        if (this.changed !== null && this.props.autosave) {
+        if (this.state.changed !== null && this.props.autosave) {
             this.onSubmit();
         }
     }
@@ -193,7 +193,7 @@ export default class BaseForm extends Component {
         }
 
         if (this.props.onSubmit) {
-            this.props.onSubmit(this.getChildContextModel());
+            this.props.onSubmit(this.getModel());
         }
     }
 }
