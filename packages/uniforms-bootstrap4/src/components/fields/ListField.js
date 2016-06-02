@@ -10,60 +10,52 @@ import ListItemField from './ListItemField';
 const List = ({
     children,
     className,
-    disabled,
-    error,
     initialCount,
     label,
     name,
 // onChange shouldn't be passed to <section>
 // eslint-disable-next-line no-unused-vars
     onChange,
-    required,
     value,
     ...props
 }) =>
-    <section className={classnames(
-        'card',
-        className,
-        {disabled},
-        'grouped fields list'
-    )} {...props}>
-        {label && (
-            <section className="card-block">
-                <section className={classnames('card-title', {error, required}, 'field item')}>
+    <section className={classnames('card', className)} {...props}>
+        <section className="card-block">
+            {label && (
+                <section className="card-title">
                     <label className="control-label">
                         {label}&nbsp;
                     </label>
 
                     <ListAddField name={`${name}.$`} initialCount={initialCount} />
                 </section>
-            </section>
-        )}
-
-        <ul className="list-group list-group-flush">
-            {children ? (
-                value.map((item, index) =>
-                      Children.map(children, child =>
-                           React.cloneElement(child, {
-                               key: index,
-                               label: null,
-                               name: joinName(
-                                   name,
-                                   child.props.name && child.props.name.replace('$', index)
-                               )
-                           })
-                      )
-                 )
-            ) : (
-                value.map((item, index) =>
-                    <ListItemField
-                        key={index}
-                        label={null}
-                        name={joinName(name, index)}
-                    />
-                )
             )}
-        </ul>
+
+            <ul className="list-group list-group-flush">
+                {children ? (
+                    value.map((item, index) =>
+                          Children.map(children, child =>
+                               React.cloneElement(child, {
+                                   key: index,
+                                   label: null,
+                                   name: joinName(
+                                       name,
+                                       child.props.name && child.props.name.replace('$', index)
+                                   )
+                               })
+                          )
+                     )
+                ) : (
+                    value.map((item, index) =>
+                        <ListItemField
+                            key={index}
+                            label={null}
+                            name={joinName(name, index)}
+                        />
+                    )
+                )}
+            </ul>
+        </section>
     </section>
 ;
 

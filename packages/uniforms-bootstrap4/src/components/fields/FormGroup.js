@@ -22,12 +22,13 @@ const FormGroup = ({
     wrapClassName     // class name for the section wrapping the input(s)
 }) =>
     <section
-        className={classnames(
-            className,
-            'field',
-            'form-group',
-            {disabled, 'has-danger': error, required, row: grid}
-        )}
+        className={classnames({
+            'form-group': true,
+            'has-danger': error,
+            disabled,
+            required,
+            row: grid
+        }, className)}
     >
         {label && (
             <label className={classnames('form-control-label', gridClassName(grid, 'label'))}>
@@ -35,17 +36,15 @@ const FormGroup = ({
             </label>
         )}
 
-        {(grid || wrapClassName) ? (
+        {(grid || wrapClassName) && (
             <section className={classnames(wrapClassName, gridClassName(grid, 'input'))}>
                 {children}
                 {makeHelp(help, helpClassName)}
             </section>
-        ) : (
-            <span>
-                {children}
-                {makeHelp(help, helpClassName)}
-            </span>
         )}
+
+        {!grid && !wrapClassName && children}
+        {!grid && !wrapClassName && makeHelp(help, helpClassName)}
     </section>
 ;
 

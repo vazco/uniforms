@@ -1,5 +1,4 @@
 import React          from 'react';
-import classnames     from 'classnames';
 import {Children}     from 'react';
 import {connectField} from 'uniforms';
 import {joinName}     from 'uniforms';
@@ -9,8 +8,6 @@ import AutoField from './AutoField';
 const Nest = ({
     children,
     className,
-    disabled,
-    error,
     fields,
     label,
     name,
@@ -19,13 +16,11 @@ const Nest = ({
     onChange,
     ...props
 }) =>
-    <section className={classnames(className, {disabled, error}, 'grouped fields')} {...props}>
+    <section className={className} {...props}>
         {label && (
-            <section className="field">
-                <label>
-                    {label}
-                </label>
-            </section>
+            <label>
+                {label}
+            </label>
         )}
 
         {children ? (

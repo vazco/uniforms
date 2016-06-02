@@ -7,8 +7,8 @@ import FormGroup from './FormGroup';
 const Select = props =>
     <FormGroup {...props}>
         {props.allowedValues.map(item =>
-            <section className={classnames(`radio${props.inline ? '-inline' : ''}`)}>
-                <label>
+            <section className={classnames(props.inputClassName, `radio${props.inline ? '-inline' : ''}`)}>
+                <label onClick={() => props.onChange(item)}>
                     <input
                         checked={item === props.value}
                         disabled={props.disabled}

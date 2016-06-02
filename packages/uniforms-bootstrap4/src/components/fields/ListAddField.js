@@ -7,19 +7,12 @@ const ListAdd = ({className, parent, value, ...props}) => {
 
     return (
         <section
-            className="label label-default label-pill pull-xs-right"
+            className={classnames('label label-default label-pill pull-xs-right', className)}
             onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
+            {...props}
         >
-            <i
-                {...props}
-                className={classnames(
-                    'add octicon octicon-plus', // TODO configure to alternate icon
-                    className,
-                    limitNotReached
-                        ? 'link'
-                        : 'disabled',
-                )}
-            />
+            {/* TODO: configure to alternate icon */}
+            <i className="octicon octicon-plus" />
         </section>
     );
 };

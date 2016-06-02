@@ -1,11 +1,12 @@
 import React          from 'react';
+import classnames     from 'classnames';
 import {connectField} from 'uniforms';
 
 import FormGroup from './FormGroup';
 
 const Bool = props =>
     <FormGroup {...props}>
-        <section className={`checkbox${props.inline ? '-inline' : ''}`}>
+        <section className={classnames(props.inputClassName, `checkbox${props.inline ? '-inline' : ''}`)}>
             <label onClick={() => props.onChange(!props.value)}>
                 <input
                     checked={props.value}

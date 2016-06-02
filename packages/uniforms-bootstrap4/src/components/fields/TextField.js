@@ -7,11 +7,7 @@ import FormGroup from './FormGroup';
 const Text = props =>
     <FormGroup {...props}>
         <input
-            className={classnames(
-                props.inputClassName,
-                'form-control',
-                {'form-control-danger': props.error}
-            )}
+            className={classnames(props.inputClassName, 'form-control', {'form-control-danger': props.error})}
             disabled={props.disabled}
             name={props.name}
             onChange={event => props.onChange(event.target.value)}
