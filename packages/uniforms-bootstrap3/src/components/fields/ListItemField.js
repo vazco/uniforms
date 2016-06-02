@@ -7,28 +7,22 @@ import AutoField    from './AutoField';
 import ListDelField from './ListDelField';
 
 const ListItem = props =>
-    <li className="list-group-item">
-
-        <section className="list-group-item-top text-right" style={{marginBottom: 5}}>
+    <li className="list-group-item row">
+        <section className="col-xs-1 list-group-item-top">
             <ListDelField name={props.name} />
         </section>
 
-        <section className="middle aligned content">
-            {props.children ? (
-                Children.map(props.children, child =>
-                    React.cloneElement(child, {
-                        name: joinName(props.name, child.props.name),
-                        label: null,
-                        style: {
-                            margin: 0,
-                            ...child.props.style
-                        }
-                    })
-                )
-            ) : (
-                <AutoField {...props} style={{margin: 0}} />
-            )}
-        </section>
+        {props.children ? (
+            Children.map(props.children, child =>
+                React.cloneElement(child, {
+                    className: 'col-xs-1',
+                    name: joinName(props.name, child.props.name),
+                    label: null
+                })
+            )
+        ) : (
+            <AutoField {...props} className="col-xs-11" />
+        )}
     </li>
 ;
 

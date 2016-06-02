@@ -7,19 +7,12 @@ const ListAdd = ({className, parent, value, ...props}) => {
 
     return (
         <section
-            className="badge pull-right"
+            className={classnames('badge pull-right', className)}
             onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
+            {...props}
         >
-            <i
-                {...props}
-                className={classnames(
-                    'add glyphicon glyphicon-plus', // TODO configure to alternate icon
-                    className,
-                    limitNotReached
-                        ? 'link'
-                        : 'disabled',
-                )}
-            />
+            {/* TODO: configure to alternate icon */}
+            <i className="glyphicon glyphicon-plus" />
         </section>
     );
 };

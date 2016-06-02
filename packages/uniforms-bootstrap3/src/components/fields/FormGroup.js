@@ -41,14 +41,15 @@ const FormGroup = ({
             </label>
         )}
 
-        {(grid || wrapClassName) ?
+        {(grid || wrapClassName) && (
             <section className={classnames(wrapClassName, gridClassName(grid, 'input'))}>
                 {children}
                 {makeHelp(help, helpClassName)}
             </section>
-        : ''}
-        {(grid || wrapClassName) ? '' : children}
-        {(grid || wrapClassName) ? '' : makeHelp(help, helpClassName)}
+        )}
+
+        {!grid && !wrapClassName && children}
+        {!grid && !wrapClassName && makeHelp(help, helpClassName)}
     </section>
 ;
 

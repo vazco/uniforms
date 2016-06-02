@@ -7,10 +7,7 @@ import FormGroup from './FormGroup';
 const Text = props =>
     <FormGroup feedbackable {...props}>
         <input
-            className={classnames(
-                props.inputClassName,
-                'form-control',
-            )}
+            className={classnames(props.inputClassName, 'form-control', {'form-control-danger': props.error})}
             disabled={props.disabled}
             name={props.name}
             onChange={event => props.onChange(event.target.value)}
@@ -18,10 +15,10 @@ const Text = props =>
             type="text"
             value={props.value}
         />
-        {props.error ?
-            <span className="glyphicon glyphicon-remove form-control-feedback" />
-            : ''
-        }
+
+        {props.error && (
+            <i className="glyphicon glyphicon-remove form-control-feedback" />
+        )}
     </FormGroup>
 ;
 

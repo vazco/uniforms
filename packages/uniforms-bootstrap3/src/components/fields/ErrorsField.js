@@ -4,21 +4,18 @@ import {BaseField} from 'uniforms';
 
 const ErrorsField = ({className, children, ...props}, {uniforms: {error, schema}}) =>
     (!error && !children) ? null : (
-        <section className={classnames(
-          'panel panel-danger text-left',
-          className,
-          'error message'
-        )} {...props}>
-            <div className="panel-heading">
+        <section className={classnames('panel panel-default', className)}>
+            <section className="panel-body">
                 {children}
-                <ul className="list">
+
+                <ul className="list-group">
                     {schema.getErrorMessages(error).map((message, index) =>
-                        <li key={index}>
+                        <li key={index} className="disabled">
                             {message}
                         </li>
                     )}
                 </ul>
-            </div>
+            </section>
         </section>
     )
 ;
