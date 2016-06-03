@@ -1,6 +1,5 @@
 import React    from 'react';
 import {expect} from 'chai';
-import {match}  from 'sinon';
 import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 
@@ -9,7 +8,6 @@ import {createSchemaBridge} from 'uniforms';
 
 describe('connectField', () => {
     const error = new Error();
-    const model = {field: 'Value'};
     const onChange = spy();
     const state = {changed: false, changedMap: {}, label: true, disabled: false, placeholder: false};
     const schema = createSchemaBridge({
@@ -165,55 +163,6 @@ describe('connectField', () => {
             );
 
             expect(Test).to.have.been.calledWith({a: 1});
-        });
-    });
-
-    context('when rendered', () => {
-        beforeEach(() => {
-            mount(
-                <Field name="field" />,
-                {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
-            );
-        });
-
-        it('have correct `disabled`', () => {
-            expect(Test).to.have.been.calledWithMatch({disabled: false});
-        });
-
-        it('have correct `error`', () => {
-            expect(Test).to.have.been.calledWithMatch({error: undefined});
-        });
-
-        it('have correct `field`', () => {
-            expect(Test).to.have.been.calledWithMatch({field: {label: 'Field', type: String}});
-        });
-
-        it('have correct `fields`', () => {
-            expect(Test).to.have.been.calledWithMatch({fields: ['subfield']});
-        });
-
-        it('have correct `label`', () => {
-            expect(Test).to.have.been.calledWithMatch({label: 'Field'});
-        });
-
-        it('have correct `name`', () => {
-            expect(Test).to.have.been.calledWithMatch({name: 'field'});
-        });
-
-        it('have correct `onChange`', () => {
-            expect(Test).to.have.been.calledWithMatch({onChange: match.typeOf('function')});
-        });
-
-        it('have correct `parent`', () => {
-            expect(Test).to.have.been.calledWithMatch({parent: null});
-        });
-
-        it('have correct `placeholder`', () => {
-            expect(Test).to.have.been.calledWithMatch({placeholder: ''});
-        });
-
-        it('have correct `value`', () => {
-            expect(Test).to.have.been.calledWithMatch({value: 'Value'});
         });
     });
 });
