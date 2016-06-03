@@ -6,7 +6,13 @@ import BaseForm from '../forms/BaseForm';
 import joinName from '../../helpers/joinName';
 
 export default class BaseField extends Component {
+    static defaultProps = {
+        id: Math.random().toString(36).substr(2, 16)
+    };
+
     static propTypes = {
+        id: PropTypes.string,
+
         name:     PropTypes.string,
         disabled: PropTypes.bool,
 
@@ -153,8 +159,8 @@ export default class BaseField extends Component {
             ...schemaProps,
             ...props,
 
-            name,
             label,
+            name,
             placeholder
         };
     }

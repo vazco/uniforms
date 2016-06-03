@@ -264,6 +264,10 @@ describe('BaseField', () => {
             expect(props).to.have.property('fields').that.is.deep.equal(schema.getSubfields('a'));
         });
 
+        it('have correct `id`', () => {
+            expect(props).to.have.property('id').that.is.an('string');
+        });
+
         it('have correct `label`', () => {
             expect(props).to.have.property('label', 'a');
         });
@@ -297,6 +301,17 @@ describe('BaseField', () => {
                     {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
                 );
             }).to.throw(Error, /Field not found in schema: 'field'/);
+        });
+    });
+
+    context('when rendered with `id`', () => {
+        it('have correct `id`', () => {
+            const wrapper = mount(
+                <TestField name="a" id="x" />,
+                {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+            );
+
+            expect(wrapper.find('div').props()).to.have.property('id', 'x');
         });
     });
 

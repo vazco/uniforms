@@ -252,6 +252,7 @@ const PersonSchema = new SimpleSchema({
 | `findError`    | `func(name)`          | Request another field error.           |
 | `findField`    | `func(name)`          | Request another field field.           |
 | `findValue`    | `func(name)`          | Request another field value.           |
+| `id`           | `string`              | Field id - given or random.            |
 | `label`        | `string`              | Field label.                           |
 | `name`         | `string`              | Field name.                            |
 | `onChange`     | `func(value, [name])` | Change field value.                    |
