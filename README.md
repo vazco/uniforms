@@ -166,7 +166,7 @@ const ExplicitAutoForm = () =>
 | `RadioField`    | Radio checkbox.                                                 | `allowedValues`          |
 | `SelectField`   | Select.                                                         | `allowedValues`          |
 | `SubmitField`   | Submit button.                                                  | *none*                   |
-| `TextField`     | Text input. `type` can be overriden by valid HTML input types   | `type: String`           |
+| `TextField`     | Text (or any HTML5 compatible) input.                           | `type: String`           |
 
 **Note:** You can pass `component` prop to `AutoField` to bypass field guessing algorithm.
 
@@ -261,15 +261,15 @@ const PersonSchema = new SimpleSchema({
 | `type`         | `func`                | Field type.                            |
 | `value`        | `any`                 | Field value.                           |
 
-Default value of `text` is provided to text inputs but it can be overriden
+`TextField` can be any HTML5 compatible input with `type` prop. For example:
 
 ```js
-<TextField type="password" />    // html password field
-<TextField type="color" />       // html5 color picker
-<TextField type="tel" />         // html5 phone input
+<TextField type="password" /> // html password field
+<TextField type="color" />    // html5 color picker
+<TextField type="tel" />      // html5 phone input
 ```
 
-Every prop can be overriden, but `label`, `placeholder` and `disabled` have special semantics:
+Every prop can be overridden, but `label`, `placeholder` and `disabled` have special semantics:
 
 ```js
 <TextField />                    // default label | no      placeholder
@@ -315,6 +315,35 @@ Every prop can be overriden, but `label`, `placeholder` and `disabled` have spec
 | `QuickForm`          | ✔          | ✘         | ✘             |
 | `ValidatedForm`      | ✘          | ✔         | ✘             |
 | `ValidatedQuickForm` | ✔          | ✔         | ✘             |
+
+### Asynchronous validation
+
+`ValidatedForm` (and inherited ones) have an `onValidate` prop. It can be used to create an asynchronous validation:
+
+```js
+const onValidate = (model, error, callback) => {
+    // You can pass additional validation if an error is already there
+    if (error) {
+        return callback();
+    }
+
+    MyAPI.checkIfIsUnique(model, errorCompatibileWithUsedSchema => {
+        if (errorCompatibileWithUsedSchema) {
+            callback(errorCompatibileWithUsedSchema);
+        } else {
+             // Use default validation error
+            callback();
+
+            // Ignore validation error
+            callback(null);
+        }
+    });
+};
+
+// Later...
+
+<ValidatedForm {...props} onValidate={onValidate} />
+```
 
 ### Custom form component
 

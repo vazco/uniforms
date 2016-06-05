@@ -19,6 +19,8 @@ const Validated = parent => class extends parent {
     static propTypes = {
         ...parent.propTypes,
 
+        onValidate: PropTypes.func,
+
         validator: PropTypes.any,
         validate: PropTypes.oneOf([
             'onChange',
@@ -77,11 +79,17 @@ const Validated = parent => class extends parent {
     }
 
     validateModel (model) {
+        let catched = null;
         try {
             this.state.validator(model);
-            this.setState({error: null});
         } catch (error) {
-            this.setState({error});
+            catched = error;
+        }
+
+        if (this.props.onValidate) {
+            this.props.onValidate(model, catched, (error = catched) => this.setState({error}));
+        } else {
+            this.setState({error: catched});
         }
     }
 

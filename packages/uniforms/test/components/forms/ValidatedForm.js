@@ -1,5 +1,6 @@
 import React    from 'react';
 import {expect} from 'chai';
+import {match}  from 'sinon';
 import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 import {stub}   from 'sinon';
@@ -7,9 +8,11 @@ import {stub}   from 'sinon';
 import {ValidatedForm} from 'uniforms';
 
 describe('ValidatedForm', () => {
-    const validator = stub();
-    const onChange  = spy();
-    const onSubmit  = spy();
+    let validator = stub();
+
+    const onChange   = spy();
+    const onSubmit   = spy();
+    const onValidate = spy();
     const error = new Error();
     const model = {a: 1};
     const schema = {
@@ -24,7 +27,9 @@ describe('ValidatedForm', () => {
     beforeEach(() => {
         onChange.reset();
         onSubmit.reset();
-        validator.reset();
+        onValidate.reset();
+
+        validator = stub();
     });
 
     context('when rendered', () => {
@@ -183,6 +188,60 @@ describe('ValidatedForm', () => {
             expect(validator).to.have.been.calledTwice;
             expect(onSubmit).to.have.been.calledOnce;
             expect(onSubmit).to.have.been.calledWith(model);
+        });
+    });
+
+    context('when validated', () => {
+        it('calls `onValidate`', () => {
+            const wrapper = mount(
+                <ValidatedForm model={model} schema={schema} onValidate={onValidate} validate="onChange" />
+            );
+
+            wrapper.instance().getChildContext().uniforms.onChange('a', 2);
+
+            expect(validator).to.have.been.calledOnce;
+            expect(onValidate).to.have.been.calledOnce;
+            expect(onValidate).to.have.been.calledWith({a: 2}, null, match.instanceOf(Function));
+        });
+
+        it('calls `onValidate` (error)', () => {
+            validator.throws(error);
+
+            const wrapper = mount(
+                <ValidatedForm model={model} schema={schema} onValidate={onValidate} validate="onChange" />
+            );
+
+            wrapper.instance().getChildContext().uniforms.onChange('a', 2);
+
+            expect(validator).to.have.been.calledOnce;
+            expect(onValidate).to.have.been.calledOnce;
+            expect(onValidate).to.have.been.calledWith({a: 2}, error, match.instanceOf(Function));
+        });
+
+        it('works with async errors from `onValidate`', () => {
+            const wrapper = mount(
+                <ValidatedForm model={model} schema={schema} onValidate={onValidate} validate="onChange" />
+            );
+
+            wrapper.instance().getChildContext().uniforms.onChange('a', 2);
+
+            const call = onValidate.getCall(0);
+            call.args[2](error);
+
+            expect(wrapper.instance().getChildContext()).to.have.deep.property('uniforms.error', error);
+        });
+
+        it('works with no errors from `onValidate`', () => {
+            const wrapper = mount(
+                <ValidatedForm model={model} schema={schema} onValidate={onValidate} validate="onChange" />
+            );
+
+            wrapper.instance().getChildContext().uniforms.onChange('a', 2);
+
+            const call = onValidate.getCall(0);
+            call.args[2]();
+
+            expect(wrapper.instance().getChildContext()).to.have.deep.property('uniforms.error', null);
         });
     });
 });
