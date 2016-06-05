@@ -397,22 +397,7 @@ MyComponent.contextTypes = {
 
 **Note:** What's more in context? Discover it in [`BaseForm.js`](https://github.com/vazco/uniforms/blob/master/packages/uniforms/src/components/forms/BaseForm.js).
 
-### Contributing
-
-Everyone is welcome to contribute. Create an issue or fork, make your changes, run tests, and then submit a pull request.
-
-```shell
-# Single package
-$ npm run lint # run lints
-$ npm run test # run tests
-$ npm run build # build src/
-$ npm run watch # build src/ continuously
-$ npm run cover # build code coverage raport
-
-# All packages
-$ npm run lint # run lints
-$ npm run test # run tests
-```
+### [Contributing](https://github.com/vazco/uniforms/blob/master/CONTRIBUTING.md)
 
 ### Copyright and license
 
