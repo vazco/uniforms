@@ -1,4 +1,5 @@
 import React          from 'react';
+import {connectField} from 'uniforms';
 
 const Text = ({
     type="text",
