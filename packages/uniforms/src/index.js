@@ -5,6 +5,7 @@ export {default as createSchemaBridge} from './bridges';
 export {default as changedKeys}  from './helpers/changedKeys';
 export {default as connectField} from './helpers/connectField';
 export {default as joinName}     from './helpers/joinName';
+export {default as checkInputType}     from './helpers/checkInputType';
 
 export {default as BaseField} from './components/fields/BaseField';
 

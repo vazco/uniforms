@@ -1,8 +1,9 @@
 import React          from 'react';
 import classnames     from 'classnames';
-import {connectField} from 'uniforms';
+import {connectField, checkInputType} from 'uniforms';
 
 const Text = ({
+    type="text",
     className,
     disabled,
     error,
@@ -13,23 +14,30 @@ const Text = ({
     required,
     value,
     ...props
-}) =>
-    <section className={classnames(className, {disabled, error, required}, 'field')} {...props}>
-        {label && (
-            <label>
-                {label}
-            </label>
-        )}
+}) => {
 
-        <input
-            disabled={disabled}
-            name={name}
-            onChange={event => onChange(event.target.value)}
-            placeholder={placeholder}
-            type="text"
-            value={value}
-        />
-    </section>
-;
+    if (!checkInputType(type)) {
+        throw new Error(`Unrecognised type attribute: ${type}`)
+    }
+
+    return (
+        <section className={classnames(className, {disabled, error, required}, 'field')} {...props}>
+            {label && (
+                <label>
+                    {label}
+                </label>
+            )}
+
+            <input
+                disabled={disabled}
+                name={name}
+                onChange={event => onChange(event.target.value)}
+                placeholder={placeholder}
+                type={type}
+                value={value}
+            />
+        </section>
+    );
+}
 
 export default connectField(Text);
