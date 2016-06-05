@@ -3,7 +3,6 @@ import classnames     from 'classnames';
 import {connectField} from 'uniforms';
 
 const Text = ({
-    type="text",
     className,
     disabled,
     error,
@@ -12,9 +11,11 @@ const Text = ({
     onChange,
     placeholder,
     required,
+    type = 'text',
     value,
     ...props
-}) => <section className={classnames(className, {disabled, error, required}, 'field')} {...props}>
+}) =>
+    <section className={classnames(className, {disabled, error, required}, 'field')} {...props}>
         {label && (
             <label>
                 {label}
@@ -29,6 +30,7 @@ const Text = ({
             type={type}
             value={value}
         />
-      </section>
+    </section>
+;
 
 export default connectField(Text);
