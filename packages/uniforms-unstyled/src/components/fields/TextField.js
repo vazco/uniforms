@@ -2,6 +2,7 @@ import React          from 'react';
 import {connectField} from 'uniforms';
 
 const Text = ({
+    type="text",
     disabled,
     label,
     name,
@@ -9,8 +10,7 @@ const Text = ({
     placeholder,
     value,
     ...props
-}) =>
-    <section {...props}>
+}) => <section {...props}>
         {label && (
             <label>
                 {label}
@@ -22,10 +22,10 @@ const Text = ({
             disabled={disabled}
             onChange={event => onChange(event.target.value)}
             placeholder={placeholder}
-            type="text"
+            type={type}
             value={value}
         />
-    </section>
+      </section>
 ;
 
 export default connectField(Text);

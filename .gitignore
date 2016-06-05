@@ -4,3 +4,4 @@ npm-debug.log
 packages/*/coverage
 packages/*/lib
 packages/*/node_modules
+.idea

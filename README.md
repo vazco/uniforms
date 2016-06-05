@@ -166,7 +166,7 @@ const ExplicitAutoForm = () =>
 | `RadioField`    | Radio checkbox.                                                 | `allowedValues`          |
 | `SelectField`   | Select.                                                         | `allowedValues`          |
 | `SubmitField`   | Submit button.                                                  | *none*                   |
-| `TextField`     | Text input.                                                     | `type: String`           |
+| `TextField`     | Text input. `type` can be overriden by valid HTML input types   | `type: String`           |
 
 **Note:** You can pass `component` prop to `AutoField` to bypass field guessing algorithm.
 
@@ -260,6 +260,14 @@ const PersonSchema = new SimpleSchema({
 | `placeholder`  | `string`              | Field placeholder.                     |
 | `type`         | `func`                | Field type.                            |
 | `value`        | `any`                 | Field value.                           |
+
+Default value of `text` is provided to text inputs but it can be overriden
+
+```js
+<TextField type="password" />    // html password field
+<TextField type="color" />       // html5 color picker
+<TextField type="tel" />         // html5 phone input
+```
 
 Every prop can be overriden, but `label`, `placeholder` and `disabled` have special semantics:
 

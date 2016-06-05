@@ -12,7 +12,7 @@ const Text = props =>
             name={props.name}
             onChange={event => props.onChange(event.target.value)}
             placeholder={props.placeholder}
-            type="text"
+            type={props.type || 'text'}
             value={props.value}
         />
 
