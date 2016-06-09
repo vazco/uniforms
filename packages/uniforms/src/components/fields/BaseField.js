@@ -97,7 +97,7 @@ export default class BaseField extends Component {
         }
 
         const field = context.schema.getField(name);
-        const schemaProps = context.schema.getProps(name);
+        const schemaProps = context.schema.getProps(name, props);
 
         const type   = context.schema.getType(name);
         const error  = context.schema.getError(name, context.error);
@@ -156,8 +156,8 @@ export default class BaseField extends Component {
             type,
             value,
 
-            ...schemaProps,
             ...props,
+            ...schemaProps,
 
             label,
             name,

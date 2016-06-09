@@ -119,7 +119,7 @@ export default class SimpleSchemaBridge extends Bridge {
                     : field.type();
     }
 
-    getProps (name) {
+    getProps (name, props) {
         let {optional, uniforms, ...field} = this.getField(name);
 
         field = {...field, required: !optional};
@@ -127,10 +127,31 @@ export default class SimpleSchemaBridge extends Bridge {
         if (uniforms) {
             if (typeof uniforms === 'string' ||
                 typeof uniforms === 'function') {
-                return {...field, component: uniforms};
+                field = {...field, component: uniforms};
+            } else {
+                field = {...field, ...uniforms};
+            }
+        }
+
+        let options = props.options || field.options;
+        if (options) {
+            if (typeof options === 'function') {
+                options = options();
             }
 
-            return {...field, ...uniforms};
+            if (!Array.isArray(options)) {
+                field = {
+                    ...field,
+                    transform: value => options[value],
+                    allowedValues: Object.keys(options)
+                };
+            } else {
+                field = {
+                    ...field,
+                    transform: value => options.find(option => option.value === value).label,
+                    allowedValues: options.map(options => options.value)
+                };
+            }
         }
 
         return field;

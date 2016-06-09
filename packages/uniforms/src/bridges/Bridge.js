@@ -45,8 +45,8 @@ export default class Bridge {
     }
 
     // Field's props
-    getProps (name) {
-        return this.schema.getProps(name);
+    getProps (name, props) {
+        return this.schema.getProps(name, props);
     }
 
     // Field's subfields (or first-level fields)
