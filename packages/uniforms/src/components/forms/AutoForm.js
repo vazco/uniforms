@@ -37,13 +37,13 @@ const Auto = parent => class extends parent {
     }
 
     validate () {
-        this.validateModel(this.getModel());
+        this.validateModel(this.getChildContextModel());
     }
 
     onChange (key, value) {
-        this.setState(state => ({model: set(cloneDeep(state.model), key, value)}), () => {
+        this.setState(state => ({modelSync: set(cloneDeep(state.modelSync), key, value)}), () => {
             super.onChange(...arguments);
-            this.setState({modelSync: this.state.model});
+            this.setState({model: this.state.modelSync});
         });
     }
 };

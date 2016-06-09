@@ -168,7 +168,7 @@ export default class BaseForm extends Component {
         // Do not set `changed` before componentDidMount
         if (this.state.changed !== null) {
             this.setState({changed: true});
-            this.getChangedKeys(key, value, get(this.getChildContextModel(), key)).forEach(key =>
+            this.getChangedKeys(key, value, get(this.getModel(), key)).forEach(key =>
                 this.setState(state => get(state.changedMap, key)
                     ? {}
                     : {changedMap: set(cloneDeep(state.changedMap), key, {})}
