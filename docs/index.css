@@ -1,9 +1,15 @@
-body {
+body,
+html {
     margin:  0;
     padding: 0;
 
-    font-size:   16px;
-    line-height: 18px;
+    font-size:   16px !important;
+    line-height: 18px !important;
+}
+
+iframe {
+    width: 100%;
+    border: 0;
 }
 
 .markdown-body {

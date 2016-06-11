@@ -43,7 +43,11 @@ FlowRouter.notFound = {
 page('Introduction');
 page('Introduction', 'Motivation');
 page('Introduction', 'Ecosystem');
-page('Introduction', 'Examples');
+page('Examples');
+page('Examples', 'Bootstrap3');
+page('Examples', 'Bootstrap4');
+page('Examples', 'Semantic');
+page('Examples', 'Unstyled');
 page('Basics');
 page('Basics', 'Installation');
 page('Basics', 'AutoForm');

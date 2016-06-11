@@ -22,7 +22,7 @@ function processFilesForTarget (files) {
 
         file.addJavaScript({
             data: markdownRender(name, file.getContentsAsString()),
-            path: path + '.js'
+            path: name + '.js'
         });
     });
 }
