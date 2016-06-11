@@ -1,7 +1,10 @@
+.idea
+/docs/.meteor/local
+/docs/node_modules
+/docs/packages/documentation/.npm
 /node_modules
 lerna-debug.log
 npm-debug.log
 packages/*/coverage
 packages/*/lib
 packages/*/node_modules
-.idea
