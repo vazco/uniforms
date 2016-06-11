@@ -10,7 +10,7 @@ const ListItem = props =>
     <section className="item">
         <ListDelField className="top aligned" name={props.name} />
 
-        <section className="middle aligned content">
+        <section className="middle aligned content" style={{width: '100%'}}>
             {props.children ? (
                 Children.map(props.children, child =>
                     React.cloneElement(child, {

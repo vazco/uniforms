@@ -8,13 +8,11 @@ const ErrorsField = ({className, children, ...props}, {uniforms: {error, schema}
             <section className="panel-body">
                 {children}
 
-                <ul className="list-group">
-                    {schema.getErrorMessages(error).map((message, index) =>
-                        <li key={index} className="disabled">
-                            {message}
-                        </li>
-                    )}
-                </ul>
+                {schema.getErrorMessages(error).map((message, index) =>
+                    <section key={index}>
+                        {message}
+                    </section>
+                )}
             </section>
         </section>
     )

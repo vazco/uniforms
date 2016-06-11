@@ -7,8 +7,8 @@ import AutoField    from './AutoField';
 import ListDelField from './ListDelField';
 
 const ListItem = props =>
-    <li className="list-group-item row">
-        <section className="col-xs-1 list-group-item-top">
+    <section className="row">
+        <section className="col-xs-1">
             <ListDelField name={props.name} />
         </section>
 
@@ -23,7 +23,7 @@ const ListItem = props =>
         ) : (
             <AutoField {...props} className="col-xs-11" />
         )}
-    </li>
+    </section>
 ;
 
 export default connectField(ListItem, {includeInChain: false});
