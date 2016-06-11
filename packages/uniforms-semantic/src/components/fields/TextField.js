@@ -11,7 +11,7 @@ const Text = ({
     onChange,
     placeholder,
     required,
-    type = 'text',
+    type,
     value,
     ...props
 }) =>
@@ -27,7 +27,7 @@ const Text = ({
             name={name}
             onChange={event => onChange(event.target.value)}
             placeholder={placeholder}
-            type={type}
+            type={typeof type === 'function' ? 'text' : type}
             value={value}
         />
     </section>

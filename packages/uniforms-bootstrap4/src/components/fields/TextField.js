@@ -12,7 +12,7 @@ const Text = props =>
             name={props.name}
             onChange={event => props.onChange(event.target.value)}
             placeholder={props.placeholder}
-            type={props.type || 'text'}
+            type={typeof props.type === 'function' ? 'text' : props.type}
             value={props.value}
         />
     </FormGroup>
