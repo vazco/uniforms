@@ -86,6 +86,7 @@ describe('BaseForm', () => {
 
         it('have correct props', () => {
             expect(wrapper).to.have.prop('className', 'name');
+            expect(wrapper).to.have.prop('noValidate', true);
         });
 
         it('have correct children', () => {

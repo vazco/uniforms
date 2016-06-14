@@ -13,7 +13,9 @@ export default class BaseForm extends Component {
 
     static defaultProps = {
         model: {},
-        label: true
+        label: true,
+
+        noValidate: true
     };
 
     static propTypes = {
