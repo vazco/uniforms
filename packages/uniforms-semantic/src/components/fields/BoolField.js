@@ -6,6 +6,7 @@ const Bool = ({
     className,
     disabled,
     error,
+    id,
     label,
     name,
     onChange,
@@ -19,12 +20,13 @@ const Bool = ({
                 checked={value}
                 className="hidden"
                 disabled={disabled}
+                id={id}
                 name={name}
                 onChange={() => onChange(!value)}
                 type="checkbox"
             />
 
-            <label onClick={() => onChange(!value)}>
+            <label htmlFor={id}>
                 {label}
             </label>
         </section>

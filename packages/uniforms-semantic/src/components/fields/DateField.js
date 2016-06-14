@@ -14,6 +14,7 @@ const Date_ = ({
     className,
     disabled,
     error,
+    id,
     label,
     max,
     min,
@@ -25,13 +26,14 @@ const Date_ = ({
 }) =>
     <section className={classnames(className, {disabled, error, required}, 'field')} {...props}>
         {label && (
-            <label>
+            <label htmlFor={id}>
                 {label}
             </label>
         )}
 
         <input
             disabled={disabled}
+            id={id}
             max={dateFormat(max)}
             min={dateFormat(min)}
             name={name}

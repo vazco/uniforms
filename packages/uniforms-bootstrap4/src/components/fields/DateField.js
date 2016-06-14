@@ -17,6 +17,7 @@ const Date_ = props =>
         <input
             className={classnames(props.inputClassName, 'form-control', {'form-control-danger': props.error})}
             disabled={props.disabled}
+            id={props.id}
             max={dateFormat(props.max)}
             min={dateFormat(props.min)}
             name={props.name}

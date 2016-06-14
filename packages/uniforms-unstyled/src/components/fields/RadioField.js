@@ -4,6 +4,7 @@ import {connectField} from 'uniforms';
 const Radio = ({
     allowedValues,
     disabled,
+    id,
     label,
     name,
     onChange,
@@ -22,11 +23,13 @@ const Radio = ({
                 <input
                     checked={item === value}
                     disabled={disabled}
+                    id={`${id}-${item}`}
                     name={name}
                     onChange={() => onChange(item)}
                     type="radio"
                 />
-                <label>
+
+                <label htmlFor={`${id}-${item}`}>
                     {item}
                 </label>
             </section>

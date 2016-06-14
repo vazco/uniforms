@@ -9,6 +9,7 @@ const Num = props =>
         <input
             className={classnames(props.inputClassName, 'form-control', {'form-control-danger': props.error})}
             disabled={props.disabled}
+            id={props.id}
             max={props.max}
             min={props.min}
             name={props.name}

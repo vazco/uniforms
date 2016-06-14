@@ -17,9 +17,10 @@ const FormGroup = ({
     grid,              // grid is either a int [1-11] or object {xs:6,sm:4,md:2}
     help,              // help text
     helpClassName,     // class name for the help text (default: 'text-muted')
+    id,
     label,             // string label (or false)
     required,
-    wrapClassName     // class name for the section wrapping the input(s)
+    wrapClassName      // class name for the section wrapping the input(s)
 }) =>
     <section
         className={classnames({
@@ -31,7 +32,7 @@ const FormGroup = ({
         }, className)}
     >
         {label && (
-            <label className={classnames('form-control-label', gridClassName(grid, 'label'))}>
+            <label htmlFor={id} className={classnames('form-control-label', gridClassName(grid, 'label'))}>
                 {label}
             </label>
         )}

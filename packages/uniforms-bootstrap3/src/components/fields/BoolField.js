@@ -7,11 +7,11 @@ import FormGroup from './FormGroup';
 const Bool = props =>
     <FormGroup {...props}>
         <section className={classnames(props.inputClassName, `checkbox${props.inline ? '-inline' : ''}`)}>
-            <label onClick={() => props.onChange(!props.value)}>
+            <label htmlFor={props.id}>
                 <input
                     checked={props.value}
-                    className="hidden"
                     disabled={props.disabled}
+                    id={props.id}
                     name={props.name}
                     onChange={() => props.onChange(!props.value)}
                     type="checkbox"

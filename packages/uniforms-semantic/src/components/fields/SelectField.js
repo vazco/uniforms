@@ -6,6 +6,7 @@ const Select = ({
     allowedValues,
     disabled,
     error,
+    id,
     label,
     name,
     onChange,
@@ -17,13 +18,14 @@ const Select = ({
 }) =>
     <section className={classnames({disabled, error, required}, 'field')}>
         {label && (
-            <label>
+            <label htmlFor={id}>
                 {label}
             </label>
         )}
 
         <select
             disabled={disabled}
+            id={id}
             name={name}
             onChange={event => onChange(event.target.value)}
             value={value}

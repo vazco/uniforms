@@ -6,6 +6,7 @@ const Text = ({
     className,
     disabled,
     error,
+    id,
     label,
     name,
     onChange,
@@ -17,13 +18,14 @@ const Text = ({
 }) =>
     <section className={classnames(className, {disabled, error, required}, 'field')} {...props}>
         {label && (
-            <label>
+            <label htmlFor={id}>
                 {label}
             </label>
         )}
 
         <input
             disabled={disabled}
+            id={id}
             name={name}
             onChange={event => onChange(event.target.value)}
             placeholder={placeholder}

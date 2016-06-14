@@ -4,14 +4,15 @@ import {connectField} from 'uniforms';
 
 import FormGroup from './FormGroup';
 
-const Select = props =>
+const Radio = props =>
     <FormGroup {...props}>
         {props.allowedValues.map(item =>
             <section className={classnames(props.inputClassName, `radio${props.inline ? '-inline' : ''}`)}>
-                <label onClick={() => props.onChange(item)}>
+                <label htmlFor={`${props.id}-${item}`}>
                     <input
                         checked={item === props.value}
                         disabled={props.disabled}
+                        id={`${props.id}-${item}`}
                         name={props.name}
                         onChange={() => props.onChange(item)}
                         type="radio"
@@ -23,5 +24,5 @@ const Select = props =>
     </FormGroup>
 ;
 
-export default connectField(Select);
+export default connectField(Radio);
 

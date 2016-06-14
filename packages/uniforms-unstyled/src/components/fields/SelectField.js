@@ -4,6 +4,7 @@ import {connectField} from 'uniforms';
 const Select = ({
     allowedValues,
     disabled,
+    id,
     label,
     name,
     onChange,
@@ -14,12 +15,12 @@ const Select = ({
 }) =>
     <section {...props}>
         {label && (
-            <label>
+            <label htmlFor={id}>
                 {label}
             </label>
         )}
 
-        <select disabled={disabled} name={name} value={value} onChange={event => onChange(event.target.value)}>
+        <select disabled={disabled} id={id} name={name} value={value} onChange={event => onChange(event.target.value)}>
             {placeholder && (
                 <option value="" disabled hidden>
                     {placeholder}

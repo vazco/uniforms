@@ -11,6 +11,7 @@ const dateParse = (timestamp, onChange) => {
 
 const Date_ = ({
     disabled,
+    id,
     label,
     max,
     min,
@@ -21,13 +22,14 @@ const Date_ = ({
 }) =>
     <section {...props}>
         {label && (
-            <label>
+            <label htmlFor={id}>
                 {label}
             </label>
         )}
 
         <input
             disabled={disabled}
+            id={id}
             max={dateFormat(max)}
             min={dateFormat(min)}
             name={name}

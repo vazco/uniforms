@@ -14,13 +14,14 @@ const FormGroup = ({
     className,         // class name for the whole .form-group
     disabled,          // boolean, if true, show fields as disabled
     error,             // error validation response
+    feedbackable,      // only some input types support feedback icons
     grid,              // grid is either a int [1-11] or object {xs:6,sm:4,md:2}
     help,              // help text
     helpClassName,     // class name for the help text (default: 'text-muted')
+    id,
     label,             // string label (or false)
     required,
-    feedbackable,     // only some input types support feedback icons
-    wrapClassName     // class name for the section wrapping the input(s)
+    wrapClassName      // class name for the section wrapping the input(s)
 }) =>
     <section
         className={classnames(
@@ -36,7 +37,7 @@ const FormGroup = ({
         )}
     >
         {label && (
-            <label className={classnames('control-label', gridClassName(grid, 'label'))}>
+            <label htmlFor={id} className={classnames('control-label', gridClassName(grid, 'label'))}>
                 {label}
             </label>
         )}

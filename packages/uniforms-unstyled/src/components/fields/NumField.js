@@ -4,6 +4,7 @@ import {connectField} from 'uniforms';
 const Num = ({
     decimal,
     disabled,
+    id,
     label,
     max,
     min,
@@ -15,13 +16,14 @@ const Num = ({
 }) =>
     <section {...props}>
         {label && (
-            <label>
+            <label htmlFor={id}>
                 {label}
             </label>
         )}
 
         <input
             disabled={disabled}
+            id={id}
             max={max}
             min={min}
             name={name}

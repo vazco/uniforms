@@ -7,6 +7,7 @@ const Num = ({
     decimal,
     disabled,
     error,
+    id,
     label,
     max,
     min,
@@ -19,13 +20,14 @@ const Num = ({
 }) =>
     <section className={classnames(className, {disabled, error, required}, 'field')} {...props}>
         {label && (
-            <label>
+            <label htmlFor={id}>
                 {label}
             </label>
         )}
 
         <input
             disabled={disabled}
+            id={id}
             max={max}
             min={min}
             name={name}

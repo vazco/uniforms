@@ -9,6 +9,7 @@ const Text = props =>
         <input
             className={classnames(props.inputClassName, 'form-control', {'form-control-danger': props.error})}
             disabled={props.disabled}
+            id={props.id}
             name={props.name}
             onChange={event => props.onChange(event.target.value)}
             placeholder={props.placeholder}

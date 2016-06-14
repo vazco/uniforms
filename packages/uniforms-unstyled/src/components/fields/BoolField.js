@@ -3,6 +3,7 @@ import {connectField} from 'uniforms';
 
 const Bool = ({
     disabled,
+    id,
     label,
     name,
     onChange,
@@ -13,13 +14,14 @@ const Bool = ({
         <input
             checked={value}
             disabled={disabled}
+            id={id}
             name={name}
             onChange={() => disabled || onChange(!value)}
             type="checkbox"
         />
 
         {label && (
-            <label onClick={() => disabled || onChange(!value)}>
+            <label htmlFor={id}>
                 {label}
             </label>
         )}

@@ -9,6 +9,7 @@ const Select = props =>
         <select
             className={classnames(props.inputClassName, 'c-select form-control', {'form-control-danger': props.error})}
             disabled={props.disabled}
+            id={props.id}
             name={props.name}
             onChange={event => props.onChange(event.target.value)}
             value={props.value}

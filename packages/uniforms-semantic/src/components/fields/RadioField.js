@@ -2,11 +2,12 @@ import React          from 'react';
 import classnames     from 'classnames';
 import {connectField} from 'uniforms';
 
-const Select = ({
+const Radio = ({
     allowedValues,
     className,
     disabled,
     error,
+    id,
     label,
     name,
     onChange,
@@ -29,11 +30,13 @@ const Select = ({
                     <input
                         checked={item === value}
                         disabled={disabled}
+                        id={`${id}-${item}`}
                         name={name}
                         onChange={() => onChange(item)}
                         type="radio"
                     />
-                    <label>
+
+                    <label htmlFor={`${id}-${item}`}>
                         {item}
                     </label>
                 </section>
@@ -42,4 +45,4 @@ const Select = ({
     </section>
 ;
 
-export default connectField(Select);
+export default connectField(Radio);
