@@ -1,0 +1,15 @@
+{
+  "name": "docs",
+  "private": true,
+  "dependencies": {
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "react-frame-component": "^0.6.1",
+    "react-mounter": "^1.2.0",
+    "uniforms": "/home/radekmi/Vazco/uniforms/packages/uniforms",
+    "uniforms-bootstrap3": "/home/radekmi/Vazco/uniforms/packages/uniforms-bootstrap3",
+    "uniforms-bootstrap4": "/home/radekmi/Vazco/uniforms/packages/uniforms-bootstrap4",
+    "uniforms-semantic": "/home/radekmi/Vazco/uniforms/packages/uniforms-semantic",
+    "uniforms-unstyled": "/home/radekmi/Vazco/uniforms/packages/uniforms-unstyled"
+  }
+}

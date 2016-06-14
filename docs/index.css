@@ -1,0 +1,73 @@
+body,
+html {
+    margin:  0;
+    padding: 0;
+
+    font-size:   16px !important;
+    line-height: 18px !important;
+}
+
+iframe {
+    width: 100%;
+    border: 0;
+}
+
+.markdown-body {
+    margin: 0 auto;
+
+    min-width: 200px;
+    max-width: 888px;
+}
+
+.side a {
+    display: block;
+
+    padding: 0.5rem;
+
+    color: rgba(0, 0, 0, 0.85);
+
+    text-decoration: none;
+}
+
+.side a:hover,
+.side a.active {
+    color: dodgerblue;
+}
+
+.side a:before {
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.side ol {
+    margin: 0;
+    list-style: none;
+    padding-left: 1rem;
+}
+
+.side           > ol { counter-reset: level1; }
+.side > ol > li > ol { counter-reset: level2; }
+.side           > ol > li { counter-increment: level1; }
+.side > ol > li > ol > li { counter-increment: level2; }
+.side > ol > li           > a:before { content: counter(level1) "."; }
+.side > ol > li > ol > li > a:before { content: counter(level1) "." counter(level2) "."; }
+
+.side-wrapper {
+    position: fixed;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    top:    0;
+    bottom: 0;
+
+    width: 16rem;
+
+    background-color:       rgba(0, 0, 0, 0.05);
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.view {
+    margin-left: 16rem;
+    padding: 2rem;
+}
