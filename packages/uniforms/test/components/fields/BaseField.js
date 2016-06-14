@@ -213,6 +213,10 @@ describe('BaseField', () => {
         it('have correct `value`', () => {
             expect(props).to.have.property('value', 'example');
         });
+
+        it('have unique `id`', () => {
+            expect(props).to.have.property('id').that.is.not.equal(wrapper.find('div').first().props().id);
+        });
     });
 
     context('when rendered', () => {
@@ -453,6 +457,23 @@ describe('BaseField', () => {
             );
 
             expect(wrapper.find('div').props()).to.have.property('value').that.is.deep.equal(['', '']);
+        });
+    });
+
+    context('when rerendered', () => {
+        it('have same `id`', () => {
+            const wrapper = mount(
+                <TestField name="d" />,
+                {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+            );
+
+            const props1 = wrapper.props();
+            expect(props1).to.have.property('id').that.is.an('string');
+
+            wrapper.setProps({name: 'e'});
+
+            const props2 = wrapper.props();
+            expect(props2).to.have.property('id', props1.id);
         });
     });
 });

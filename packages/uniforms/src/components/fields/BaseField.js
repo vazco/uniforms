@@ -16,6 +16,15 @@ export default class BaseField extends Component {
         placeholder: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
     };
 
+    static defaultProps = Object.create({}, {
+        id: {
+            enumerable:   true,
+            configurable: true,
+
+            get: () => Math.random().toString(36).substr(2, 16)
+        }
+    });
+
     static contextTypes      = BaseForm.childContextTypes;
     static childContextTypes = BaseForm.childContextTypes;
 
@@ -87,10 +96,6 @@ export default class BaseField extends Component {
             ...this.getChildContextState(),
             ...this.props
         };
-
-        if (props.id === undefined) {
-            props.id = Math.random().toString(36).substr(2, 16);
-        }
 
         if (name === undefined) {
             name = joinName(context.name, props.name);
