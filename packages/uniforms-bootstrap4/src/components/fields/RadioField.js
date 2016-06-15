@@ -17,7 +17,7 @@ const Radio = props =>
                         onChange={() => props.onChange(item)}
                         type="radio"
                     />
-                    {item}
+                    {props.transform ? props.transform(item) : item}
                 </label>
             </section>
         )}
@@ -25,4 +25,3 @@ const Radio = props =>
 ;
 
 export default connectField(Radio);
-

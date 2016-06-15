@@ -8,6 +8,7 @@ const Radio = ({
     label,
     name,
     onChange,
+    transform,
     value,
     ...props
 }) =>
@@ -30,7 +31,7 @@ const Radio = ({
                 />
 
                 <label htmlFor={`${id}-${item}`}>
-                    {item}
+                    {transform ? transform(item) : item}
                 </label>
             </section>
         )}
