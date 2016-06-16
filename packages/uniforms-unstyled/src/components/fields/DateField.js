@@ -17,6 +17,9 @@ const Date_ = ({
     min,
     name,
     onChange,
+// type shouldn't be passed to <section>
+// eslint-disable-next-line no-unused-vars
+    type,
     value,
     ...props
 }) =>
