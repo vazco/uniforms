@@ -1,6 +1,6 @@
 {
   "name": "uniforms-unstyled",
-  "version": "1.0.0-rc.16",
+  "version": "1.0.0-rc.17",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "description": "Unstyled components for uniforms.",
