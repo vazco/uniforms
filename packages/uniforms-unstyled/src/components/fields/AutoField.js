@@ -15,7 +15,7 @@ const Auto = props => {
         if (props.allowedValues) {
             component = SelectField;
         } else {
-            switch (props.type) {
+            switch (props.fieldType) {
                 case Date:    component = DateField; break;
                 case Array:   component = ListField; break;
                 case Number:  component = NumField;  break;

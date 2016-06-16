@@ -102,9 +102,9 @@ export default class BaseField extends Component {
         }
 
         const field = context.schema.getField(name);
+        const fieldType = context.schema.getType(name);
         const schemaProps = context.schema.getProps(name, props);
 
-        const type   = context.schema.getType(name);
         const error  = context.schema.getError(name, context.error);
         const fields = context.schema.getSubfields(name);
         const parent = includeParent && name.indexOf('.') !== -1
@@ -153,12 +153,12 @@ export default class BaseField extends Component {
             errorMessage,
             field,
             fields,
+            fieldType,
             findError,
             findField,
             findValue,
             onChange,
             parent,
-            type,
             value,
 
             ...props,

@@ -250,6 +250,7 @@ const PersonSchema = new SimpleSchema({
 | `errorMessage` | `string`              | Field scoped validation error message. |
 | `field`        | `object`              | Field definition from schema.          |
 | `fields`       | `arrayOf(string)`     | Subfields names.                       |
+| `fieldType`    | `func`                | Field type.                            |
 | `findError`    | `func(name)`          | Request another field error.           |
 | `findField`    | `func(name)`          | Request another field field.           |
 | `findValue`    | `func(name)`          | Request another field value.           |
@@ -259,7 +260,6 @@ const PersonSchema = new SimpleSchema({
 | `onChange`     | `func(value, [name])` | Change field value.                    |
 | `parent`       | `object`              | Parent field props.                    |
 | `placeholder`  | `string`              | Field placeholder.                     |
-| `type`         | `func`                | Field type.                            |
 | `value`        | `any`                 | Field value.                           |
 
 `TextField` can be any HTML5 compatible input with `type` prop. For example:
