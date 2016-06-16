@@ -1,14 +1,15 @@
-import React    from 'react';
-import {expect} from 'chai';
-import {mount}  from 'enzyme';
+import React       from 'react';
+import {Component} from 'react';
+import {expect}    from 'chai';
+import {mount}     from 'enzyme';
 
 import {QuickForm} from 'uniforms';
 
 describe('QuickForm', () => {
     class TestQuickForm extends QuickForm {
-        getAutoField   = () => () => <i id="auto" />;
-        getErrorsField = () => () => <i id="errors" />;
-        getSubmitField = () => () => <i id="submit" />;
+        getAutoField   = () => () => <i className="auto" />;
+        getErrorsField = () => () => <i className="errors" />;
+        getSubmitField = () => () => <i className="submit" />;
     }
 
     const schema = {
@@ -34,7 +35,7 @@ describe('QuickForm', () => {
                 <TestQuickForm schema={schema} />
             );
 
-            expect(wrapper).to.have.descendants('#auto');
+            expect(wrapper).to.have.descendants('.auto');
         });
 
         it('renders `ErrorsField`', () => {
@@ -42,7 +43,7 @@ describe('QuickForm', () => {
                 <TestQuickForm schema={schema} />
             );
 
-            expect(wrapper).to.have.descendants('#errors');
+            expect(wrapper).to.have.descendants('.errors');
         });
 
         it('renders `SubmitField`', () => {
@@ -50,7 +51,58 @@ describe('QuickForm', () => {
                 <TestQuickForm schema={schema} />
             );
 
-            expect(wrapper).to.have.descendants('#submit');
+            expect(wrapper).to.have.descendants('.submit');
+        });
+    });
+
+    context('when rendered with custom fields in `props`', () => {
+        it('renders `AutoField` for each field', () => {
+            const wrapper = mount(
+                <TestQuickForm schema={schema} autoField={() => <i className="autoOverride" />} />
+            );
+
+            expect(wrapper).to.have.descendants('.autoOverride');
+        });
+
+        it('renders `ErrorsField`', () => {
+            const wrapper = mount(
+                <TestQuickForm schema={schema} errorsField={() => <i className="errorsOverride" />} />
+            );
+
+            expect(wrapper).to.have.descendants('.errorsOverride');
+        });
+
+        it('renders `SubmitField`', () => {
+            const wrapper = mount(
+                <TestQuickForm schema={schema} submitField={() => <i className="submitOverride" />} />
+            );
+
+            expect(wrapper).to.have.descendants('.submitOverride');
+        });
+
+        it('works with string', () => {
+            const wrapper = mount(
+                <TestQuickForm schema={schema} autoField="code" />
+            );
+
+            expect(wrapper).to.have.descendants('code');
+        });
+
+        it('works with elements', () => {
+            class Code extends Component {render = () => <code />}
+            const wrapper = mount(
+                <TestQuickForm schema={schema} autoField={Code} />
+            );
+
+            expect(wrapper).to.have.descendants('code');
+        });
+
+        it('works with functions', () => {
+            const wrapper = mount(
+                <TestQuickForm schema={schema} autoField={() => <code />} />
+            );
+
+            expect(wrapper).to.have.descendants('code');
         });
     });
 
