@@ -4,7 +4,7 @@ import {BaseField} from 'uniforms';
 
 import gridClassName from '../../lib/gridClassName';
 
-const SubmitField = ({className, wrapClassName, ...props}, {uniforms: {error, state: {disabled, grid} = {}}}) =>
+const SubmitField = ({className, wrapClassName, value, ...props}, {uniforms: {error, state: {disabled, grid} = {}}}) =>
     <section className={classnames(className, {'has-danger': error, row: grid})} {...props}>
         {(grid || wrapClassName) && (
             <label className={classnames('form-control-label', gridClassName(grid, 'label'))}>
@@ -14,10 +14,10 @@ const SubmitField = ({className, wrapClassName, ...props}, {uniforms: {error, st
 
         {(grid || wrapClassName) ? (
             <section className={classnames(wrapClassName, gridClassName(grid, 'input'))}>
-                <input className="btn btn-primary" disabled={error || disabled ? true : null} type="submit" />
+                <input className="btn btn-primary" disabled={!!(error || disabled)} value={value} type="submit" />
             </section>
         ) : (
-            <input className="btn btn-primary" disabled={error || disabled ? true : null} type="submit" />
+            <input className="btn btn-primary" disabled={!!(error || disabled)} value={value} type="submit" />
         )}
     </section>
 ;

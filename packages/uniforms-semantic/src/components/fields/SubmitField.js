@@ -5,7 +5,7 @@ import {BaseField} from 'uniforms';
 const SubmitField = ({className, ...props}, {uniforms: {error, state: {disabled} = {}}}) =>
     <input
         className={classnames('ui', className, 'button')}
-        disabled={error || disabled ? true : null}
+        disabled={!!(error || disabled)}
         type="submit"
         {...props}
     />
