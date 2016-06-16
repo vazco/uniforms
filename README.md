@@ -152,6 +152,7 @@ const ExplicitAutoForm = () =>
 | Component       | Description                                                     | Prerequisites            |
 |:---------------:|:---------------------------------------------------------------:|:------------------------:|
 | `AutoField`     | Automatically renders a correct field, based on field's `type`. | *none*                   |
+| `AutoFields`    | Render `fields` without `omitFields` (given in `props`).        | *none*                   |
 | `BoolField`     | Checkbox.                                                       | `type: Boolean`          |
 | `DateField`     | HTML5 `date-localtime` input.                                   | `type: Date`             |
 | `ErrorField`    | Error message for given field.                                  | *none*                   |
