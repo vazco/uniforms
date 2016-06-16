@@ -25,7 +25,7 @@ const Text = ({
             name={name}
             onChange={event => onChange(event.target.value)}
             placeholder={placeholder}
-            type={typeof type === 'function' ? 'text' : type}
+            type={typeof type === 'string' ? type : 'text'}
             value={value}
         />
     </section>
