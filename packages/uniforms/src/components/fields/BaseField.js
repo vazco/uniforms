@@ -12,7 +12,7 @@ export default class BaseField extends Component {
         name:     PropTypes.string,
         disabled: PropTypes.bool,
 
-        label:       PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+        label:       PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.node]),
         placeholder: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
     };
 
