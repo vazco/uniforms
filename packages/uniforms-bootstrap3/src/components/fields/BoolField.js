@@ -4,8 +4,15 @@ import {connectField} from 'uniforms';
 
 import FormGroup from './FormGroup';
 
+// IDEA manipulate props for label on left: re #35
+const modifyProps = (props) {
+    if (!props.label) return props;
+    if (!props.labelLeft) return Object.assign({}, props, { label: props.labelLeft });
+    return Object.assign({}, props, { label: '&nbsp;' });
+}
+
 const Bool = props =>
-    <FormGroup {...props}>
+    <FormGroup {...modifyProps(props)}>
         <section className={classnames(props.inputClassName, `checkbox${props.inline ? '-inline' : ''}`)}>
             <label htmlFor={props.id}>
                 <input
