@@ -5,11 +5,12 @@ import {connectField} from 'uniforms';
 import FormGroup from './FormGroup';
 
 // IDEA manipulate props for label on left: re #35
-const modifyProps = (props) {
+const modifyProps = (props) => {
     if (!props.label) return props;
-    if (!props.labelLeft) return Object.assign({}, props, { label: props.labelLeft });
-    return Object.assign({}, props, { label: '&nbsp;' });
-}
+    return Object.assign({}, props, {
+        label: (props.labelLeft ? props.labelLeft : <span>&nbsp;</span>)
+    });
+};
 
 const Bool = props =>
     <FormGroup {...modifyProps(props)}>
