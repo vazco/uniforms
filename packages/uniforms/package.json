@@ -28,7 +28,7 @@
     "test": "babel-node node_modules/.bin/_mocha --require test/index.js --recursive test --reporter list",
     "cover": "babel-node isparta cover --root src --report html _mocha -- --require test/index.js --recursive test",
     "build": "babel --out-dir lib src",
-    "clean": "rm -rf coverage lib node_modules",
+    "clean": "rimraf coverage lib node_modules",
     "prepublish": "npm run lint && npm run test && npm run build"
   },
   "dependencies": {
@@ -58,6 +58,7 @@
     "react": "^15.1.0",
     "react-addons-test-utils": "^15.1.0",
     "react-dom": "^15.1.0",
+    "rimraf": "^2.5.2",
     "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0"
   },
