@@ -26,7 +26,7 @@
   "scripts": {
     "lint": "eslint src",
     "test": "babel-node node_modules/.bin/_mocha --require test/index.js --recursive test --reporter list",
-    "cover": "babel-node isparta cover --root src --report html _mocha -- --require test/index.js --recursive test",
+    "cover": "cross-env NODE_ENV=test nyc -r html --instrument false --source-map false -i babel-register npm test",
     "build": "babel --out-dir lib src",
     "clean": "rimraf coverage lib node_modules",
     "prepublish": "npm run lint && npm run test && npm run build"
@@ -41,20 +41,22 @@
   "devDependencies": {
     "babel-cli": "^6.9.0",
     "babel-eslint": "^6.0.4",
+    "babel-plugin-__coverage__": "^11.0.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "chai": "^3.5.0",
     "chai-enzyme": "^0.5.0",
+    "cross-env": "^1.0.8",
     "enzyme": "^2.3.0",
     "eslint": "^2.11.0",
     "eslint-config-vazco": "^1.0.0",
     "eslint-plugin-babel": "^3.2.0",
     "eslint-plugin-react": "^5.1.1",
-    "isparta": "^4.0.0",
     "jsdom": "^9.2.1",
     "mocha": "^2.5.3",
     "mock-require": "^1.3.0",
+    "nyc": "^6.6.1",
     "react": "^15.1.0",
     "react-addons-test-utils": "^15.1.0",
     "react-dom": "^15.1.0",
@@ -71,7 +73,14 @@
       "es2015",
       "react",
       "stage-0"
-    ]
+    ],
+    "env": {
+      "test": {
+        "plugins": [
+          "__coverage__"
+        ]
+      }
+    }
   },
   "eslintConfig": {
     "root": true,

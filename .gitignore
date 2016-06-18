@@ -1,4 +1,5 @@
 .idea
+.nyc_output
 /docs/.meteor/local
 /docs/node_modules
 /docs/packages/documentation/.npm
