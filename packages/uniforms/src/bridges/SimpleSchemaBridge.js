@@ -135,6 +135,19 @@ export default class SimpleSchemaBridge extends Bridge {
             }
         }
 
+        if (type === Array) {
+            try {
+                let itemProps = this.getProps(`${name}.$`, props);
+                if (itemProps.allowedValues && !props.allowedValues) {
+                    field.allowedValues = itemProps.allowedValues;
+                }
+
+                if (itemProps.transform && !props.transform) {
+                    field.transform = itemProps.transform;
+                }
+            } catch (e) { /* do nothing */ }
+        }
+
         let options = props.options || field.options;
         if (options) {
             if (typeof options === 'function') {
