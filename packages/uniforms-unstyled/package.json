@@ -24,11 +24,11 @@
     "src/"
   ],
   "scripts": {
-    "lint": "./node_modules/.bin/eslint src",
+    "lint": "eslint src",
     "test": "true",
     "cover": "true",
-    "build": "./node_modules/.bin/babel --out-dir lib src",
-    "watch": "./node_modules/.bin/babel --out-dir lib src --watch",
+    "build": "babel --out-dir lib src",
+    "watch": "babel --out-dir lib src --watch",
     "clean": "rm -rf lib node_modules",
     "prepublish": "npm run lint && npm run test && npm run build"
   },
