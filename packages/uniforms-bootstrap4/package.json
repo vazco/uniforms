@@ -28,7 +28,6 @@
     "test": "true",
     "cover": "true",
     "build": "babel --out-dir lib src",
-    "watch": "babel --out-dir lib src --watch",
     "clean": "rm -rf lib node_modules",
     "prepublish": "npm run lint && npm run test && npm run build"
   },

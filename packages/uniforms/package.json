@@ -28,7 +28,6 @@
     "test": "babel-node node_modules/.bin/_mocha --require test/index.js --recursive test --reporter list",
     "cover": "babel-node isparta cover --root src --report html _mocha -- --require test/index.js --recursive test",
     "build": "babel --out-dir lib src",
-    "watch": "babel --out-dir lib src --watch",
     "clean": "rm -rf coverage lib node_modules",
     "prepublish": "npm run lint && npm run test && npm run build"
   },
