@@ -169,7 +169,29 @@ const ExplicitAutoForm = () =>
 | `SubmitField`   | Submit button.                                                  | *none*                   |
 | `TextField`     | Text (or any HTML5 compatible) input.                           | `type: String`           |
 
-**Note:** You can pass `component` prop to `AutoField` to bypass field guessing algorithm.
+### `AutoField` algorithm
+
+    let component = props.component;
+    if (component === undefined) {
+        if (props.allowedValues) {
+            if (props.checkboxes && props.fieldType !== Array) {
+                component = RadioField;
+            } else {
+                component = SelectField;
+            }
+        } else {
+            switch (props.fieldType) {
+                case Date:    component = DateField; break;
+                case Array:   component = ListField; break;
+                case Number:  component = NumField;  break;
+                case Object:  component = NestField; break;
+                case String:  component = TextField; break;
+                case Boolean: component = BoolField; break;
+
+                default: throw new Error(`Unsupported field type: ${props.type.toString()}`);
+            }
+        }
+    }
 
 ### Custom field component
 

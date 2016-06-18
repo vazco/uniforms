@@ -7,13 +7,18 @@ import DateField   from './DateField';
 import ListField   from './ListField';
 import NestField   from './NestField';
 import TextField   from './TextField';
+import RadioField  from './RadioField';
 import SelectField from './SelectField';
 
 const Auto = props => {
     let component = props.component;
     if (component === undefined) {
         if (props.allowedValues) {
-            component = SelectField;
+            if (props.checkboxes && props.fieldType !== Array) {
+                component = RadioField;
+            } else {
+                component = SelectField;
+            }
         } else {
             switch (props.fieldType) {
                 case Date:    component = DateField; break;
