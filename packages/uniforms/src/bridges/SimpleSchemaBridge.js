@@ -1,3 +1,5 @@
+/* global Package */
+
 import cloneDeep from 'lodash.clonedeep';
 
 import Bridge   from './Bridge';
@@ -7,12 +9,16 @@ let SimpleSchema = (typeof global === 'object' ? global : window).SimpleSchema;
 let Match        = (typeof global === 'object' ? global : window).Match;
 
 try {
-    if (Match === undefined) {
-        Match = require('meteor/check').Match;
-    }
+    if (typeof Package === 'object') {
+        if (Match === undefined) {
+            Match = Package['meteor/check'];
+            Match = Match.Match;
+        }
 
-    if (SimpleSchema === undefined) {
-        SimpleSchema = require('meteor/aldeed:simple-schema').SimpleSchema;
+        if (SimpleSchema === undefined) {
+            SimpleSchema = Package['meteor/aldeed:simple-schema'];
+            SimpleSchema = SimpleSchema.SimpleSchema;
+        }
     }
 
     SimpleSchema.extendOptions({
