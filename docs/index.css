@@ -12,6 +12,11 @@ iframe {
     border: 0;
 }
 
+img {
+    width:  auto;
+    height: auto;
+}
+
 .markdown-body {
     margin: 0 auto;
 
