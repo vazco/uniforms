@@ -6,18 +6,19 @@ import {spy}    from 'sinon';
 import {BaseForm} from 'uniforms';
 
 describe('BaseForm', () => {
+    const noop   = () => {};
     const error  = new Error();
     const model  = {$: [1], _: 1};
     const schema = {
-        getError:         () => {},
-        getErrorMessage:  () => {},
-        getErrorMessages: () => {},
-        getField:         () => ({type: String}),
-        getInitialValue:  () => {},
-        getProps:         () => {},
-        getSubfields:     () => ['$', '_'],
-        getType:          () => {},
-        getValidator:     () => {}
+        getError:         noop,
+        getErrorMessage:  noop,
+        getErrorMessages: noop,
+        getField:         noop,
+        getInitialValue:  noop,
+        getProps:         noop,
+        getSubfields:     noop,
+        getType:          noop,
+        getValidator:     noop
     };
 
     const onChange = spy();

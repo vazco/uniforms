@@ -12,33 +12,19 @@ describe('connectField', () => {
     const state = {changed: false, changedMap: {}, label: true, disabled: false, placeholder: false};
     const schema = createSchemaBridge({
         getDefinition (name) {
-            if (name === 'field') {
-                return {
-                    type: String,
-                    label: 'Field'
-                };
-            }
-
-            /* istanbul ignore else */
-            if (name === 'field.subfield') {
-                return {
-                    type: Number,
-                    label: 'SubField'
-                };
-            }
+            return {
+                'field':          {type: Object, label: 'Field'},
+                'field.subfield': {type: Number, label: 'Subfield'}
+            }[name];
         },
 
         messageForError () {},
 
         objectKeys (name) {
-            if (name === 'field') {
-                return ['subfield'];
-            }
-
-            /* istanbul ignore else */
-            if (name === 'field.subfield') {
-                return [];
-            }
+            return {
+                'field':          ['subfield'],
+                'field.subfield': []
+            }[name];
         },
 
         validator () {}
@@ -84,7 +70,7 @@ describe('connectField', () => {
                 {context: {uniforms: {error, model: {}, name: [], schema, state, onChange}}}
             );
 
-            expect(Test).to.have.been.calledWithMatch({parent: {label: 'Field', field: {type: String}}});
+            expect(Test).to.have.been.calledWithMatch({parent: {label: 'Field', field: {type: Object}}});
         });
 
         it('hides parent field (false)', () => {
@@ -95,7 +81,7 @@ describe('connectField', () => {
                 {context: {uniforms: {error, model: {}, name: [], schema, state, onChange}}}
             );
 
-            expect(Test).to.have.not.been.calledWithMatch({parent: {label: 'Field', field: {type: String}}});
+            expect(Test).to.have.not.been.calledWithMatch({parent: {label: 'Field', field: {type: Object}}});
         });
     });
 
@@ -138,7 +124,7 @@ describe('connectField', () => {
                 {context: {uniforms: {error, model: {}, name: [], schema, state, onChange}}}
             );
 
-            expect(onChange).to.have.been.calledWith('field', '');
+            expect(onChange).to.have.been.calledWith('field', {});
         });
 
         it('does nothing (false)', () => {

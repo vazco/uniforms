@@ -23,84 +23,24 @@ describe('BaseField', () => {
     const state = {changed: false, changedMap: {}, label: true, disabled: false, placeholder: true};
     const schema = createSchemaBridge({
         getDefinition (name) {
-            if (name === 'a' || name === 'a.b') {
-                return {
-                    type: Object,
-                    label: name
-                };
-            }
+            // Simulate SimpleSchema.
+            name = name.replace(/\d+/g, '$');
 
-            if (name === 'a.b.c') {
-                return {
-                    type: String,
-                    label: name
-                };
-            }
-
-            if (name === 'd') {
-                return {
-                    type: String,
-                    defaultValue: 'D'
-                };
-            }
-
-            if (name === 'e') {
-                return {
-                    type: String,
-                    allowedValues: ['E']
-                };
-            }
-
-            if (name === 'f') {
-                return {
-                    type: Number,
-                    min: 42
-                };
-            }
-
-            if (name === 'g') {
-                return {
-                    type: Number,
-                    max: 42
-                };
-            }
-
-            if (name === 'h') {
-                return {
-                    type: Number
-                };
-            }
-
-            if (name === 'i') {
-                return {
-                    type: Date
-                };
-            }
-
-            if (name === 'j') {
-                return {
-                    type: Array,
-                    minCount: 3
-                };
-            }
-
-            if (name === 'j.0') {
-                return {
-                    type: String
-                };
-            }
-
-            if (name === 'k') {
-                return {
-                    type: Array
-                };
-            }
-
-            if (name === 'k.0') {
-                return {
-                    type: String
-                };
-            }
+            return {
+                'a':     {type: Object, label: name},
+                'a.b':   {type: Object, label: name},
+                'a.b.c': {type: String, label: name},
+                'd':     {type: String, defaultValue: 'D'},
+                'e':     {type: String, allowedValues: ['E']},
+                'f':     {type: Number, min: 42},
+                'g':     {type: Number, max: 42},
+                'h':     {type: Number},
+                'i':     {type: Date},
+                'j':     {type: Array, minCount: 3},
+                'j.$':   {type: String},
+                'k':     {type: Array},
+                'k.$':   {type: String}
+            }[name];
         },
 
         messageForError () {
@@ -108,15 +48,10 @@ describe('BaseField', () => {
         },
 
         objectKeys (name) {
-            if (name === 'a') {
-                return ['b'];
-            }
-
-            if (name === 'a.b') {
-                return ['c'];
-            }
-
-            return [];
+            return {
+                'a':   ['b'],
+                'a.b': ['c']
+            }[name] || [];
         },
 
         validator () {}
