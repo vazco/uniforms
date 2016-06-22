@@ -24,19 +24,13 @@
     "src/"
   ],
   "scripts": {
-    "lint": "eslint src",
-    "test": "babel-node node_modules/.bin/_mocha --require test/index.js --recursive test --reporter list",
-    "cover": "cross-env NODE_ENV=test nyc -r html --instrument false --source-map false -i babel-register npm test",
     "build": "babel --out-dir lib src",
-    "clean": "rimraf coverage lib node_modules",
-    "prepublish": "npm run lint && npm run test && npm run build"
-  },
-  "dependencies": {
-    "lodash.clonedeep": "^4.3.2",
-    "lodash.get": "^4.3.0",
-    "lodash.isequal": "^4.2.0",
-    "lodash.set": "^4.2.0",
-    "lodash.xorwith": "^4.3.0"
+    "clean": "rimraf coverage lib .nyc_output",
+    "cover": "nyc npm test",
+    "lint": "eslint src",
+    "prepublish": "npm run lint && npm run test && npm run build",
+    "reset": "rimraf node_modules && npm run clean",
+    "test": "cross-env NODE_ENV=test babel-node node_modules/.bin/_mocha --require test/index.js --recursive test --reporter list"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
@@ -90,5 +84,22 @@
     "env": {
       "mocha": true
     }
+  },
+  "nyc": {
+    "reporter": [
+      "html"
+    ],
+    "require": [
+      "babel-register"
+    ],
+    "sourceMap": false,
+    "instrument": false
+  },
+  "dependencies": {
+    "lodash.clonedeep": "^4.3.2",
+    "lodash.get": "^4.3.0",
+    "lodash.isequal": "^4.2.0",
+    "lodash.set": "^4.2.0",
+    "lodash.xorwith": "^4.3.0"
   }
 }

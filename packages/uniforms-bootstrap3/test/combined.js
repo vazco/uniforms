@@ -5,6 +5,8 @@ import {spy}    from 'sinon';
 import {stub}   from 'sinon';
 
 import {AutoForm}      from 'uniforms-bootstrap3';
+import {ErrorField}    from 'uniforms-bootstrap3';
+import {SelectField}   from 'uniforms-bootstrap3';
 import {LongTextField} from 'uniforms-bootstrap3';
 
 describe('AutoForm', () => {
@@ -21,9 +23,8 @@ describe('AutoForm', () => {
     const required      = true;
     const transform     = x => x;
     const checkboxes    = true;
-    const placeholder   = 'placeholder';
-    const allowedValues = [1, 2, 3, 4, 5];
-    const base = {label, placeholder, required};
+    const allowedValues = [1, 2, 3];
+    const base = {label, required};
 
     const schema = {
         'x01':     {...base, id: 'x01',    __type__: String},
@@ -60,7 +61,11 @@ describe('AutoForm', () => {
         'x26':     {...base, id: 'x26',    __type__: Array, initialCount: 1},
         'x26.$':   {...base,               __type__: String},
         'x27':     {...base, id: 'x27',    __type__: Array, initialCount: 1, children: <p>x27</p>},
-        'x27.$':   {...base,               __type__: String}
+        'x27.$':   {...base,               __type__: String},
+        'x28':     {...base,               __type__: String, component: ErrorField},
+        'x29':     {...base,               __type__: String, help: 'Help'},
+        'x30':     {...base,               __type__: String, help: 'Help', helpClassName: 'help'},
+        'x31':     {...base,               __type__: String, allowedValues, checkboxes, component: SelectField}
     };
 
     const bridge = {
@@ -86,9 +91,18 @@ describe('AutoForm', () => {
         getValidator: () => validator
     };
 
-    context('?', () => {
+    it('works', function works () {
+        // Yep, this may take a while
+        this.timeout(10000);
+
         const wrapper = mount(
-            <AutoForm schema={bridge} onChange={onChange} onSubmit={onSubmit} autosave />
+            <AutoForm
+                autosave
+                onChange={onChange}
+                onSubmit={onSubmit}
+                placeholder
+                schema={bridge}
+            />
         );
 
         expect(wrapper.find('#x01')).to.have.value('');
@@ -97,7 +111,7 @@ describe('AutoForm', () => {
         expect(onChange.lastCall).to.have.been.calledWith('x01', 'x01');
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x01: 'x01'});
 
-        expect(wrapper.find('#x02')).to.have.value('1');
+        expect(wrapper.find('#x02')).to.have.value('');
         expect(wrapper.find('#x02').simulate('change', {target: {value: 2}})).to.be.ok;
         expect(wrapper.find('#x02')).to.have.value('2');
         expect(onChange.lastCall).to.have.been.calledWith('x02', 2);
@@ -181,8 +195,20 @@ describe('AutoForm', () => {
         expect(onChange.lastCall).to.have.been.calledWith('x26', []);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x26: []});
 
+        expect(wrapper.find('[name="x31"]').at(1)).to.be.checked;
+        expect(wrapper.find('[name="x31"]').at(0)).to.be.not.checked;
+        expect(wrapper.find('[name="x31"]').at(0).simulate('change', {target: {value: true}})).to.be.ok;
+        expect(wrapper.find('[name="x31"]').at(0)).to.be.checked;
+        expect(wrapper.find('[name="x31"]').at(1)).to.be.not.checked;
+        expect(onChange.lastCall).to.have.been.calledWith('x31', 1);
+        expect(onSubmit.lastCall).to.have.been.calledWithMatch({x31: 1});
+
         wrapper.setProps({grid:  10});
         wrapper.setProps({error: {}});
         wrapper.setProps({model: {x09: ['', '', '']}});
+
+        schema.x01.__type__ = () => {};
+
+        expect(() => wrapper.update()).to.throw(/Unsupported field type/);
     });
 });

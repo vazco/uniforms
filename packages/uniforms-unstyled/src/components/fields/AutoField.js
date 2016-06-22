@@ -28,7 +28,7 @@ const Auto = props => {
                 case String:  component = TextField; break;
                 case Boolean: component = BoolField; break;
 
-                default: throw new Error(`Unsupported field type: ${props.type.toString()}`);
+                default: throw new Error(`Unsupported field type: ${props.fieldType.toString()}`);
             }
         }
     }
