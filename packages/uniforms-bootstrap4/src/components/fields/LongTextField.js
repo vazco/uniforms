@@ -9,10 +9,10 @@ const LongText = props =>
         <textarea
             className={classnames(props.inputClassName, 'form-control', {'form-control-danger': props.error})}
             disabled={props.disabled}
+            id={props.id}
             name={props.name}
             onChange={event => props.onChange(event.target.value)}
             placeholder={props.placeholder}
-            type="text"
             value={props.value}
         />
     </FormGroup>
