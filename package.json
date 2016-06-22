@@ -1,16 +1,18 @@
 {
   "private": true,
   "devDependencies": {
-    "lerna": "2.0.0-beta.20"
+    "lerna": "2.0.0-beta.20",
+    "nyc": "^6.6.1",
+    "rimraf": "^2.5.2"
   },
   "scripts": {
     "build": "lerna run build",
-    "clean": "lerna run clean && ./packages/uniforms/node_modules/.bin/rimraf coverage .nyc_output",
-    "cover": "lerna run cover && ./packages/uniforms/node_modules/.bin/nyc npm test",
+    "clean": "lerna run clean && rimraf coverage .nyc_output",
+    "cover": "lerna run cover && nyc npm test",
     "install": "lerna bootstrap",
     "lint": "lerna run lint",
     "publish": "lerna publish",
-    "reset": "lerna run reset && ./packages/uniforms/node_modules/.bin/rimraf node_modules",
+    "reset": "lerna run reset && rimraf node_modules",
     "test": "lerna run test"
   },
   "nyc": {
