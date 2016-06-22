@@ -7,6 +7,7 @@ import {stub}   from 'sinon';
 import {AutoForm}      from 'uniforms-bootstrap4';
 import {ErrorField}    from 'uniforms-bootstrap4';
 import {SelectField}   from 'uniforms-bootstrap4';
+import {ListDelField}  from 'uniforms-bootstrap4';
 import {LongTextField} from 'uniforms-bootstrap4';
 
 describe('AutoForm', () => {
@@ -191,9 +192,13 @@ describe('AutoForm', () => {
         expect(onChange.lastCall).to.have.been.calledWith('x26', ['']);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x26: ['']});
 
-        expect(wrapper.find('.col-xs-1 span').at(0).simulate('click')).to.be.ok;
-        expect(onChange.lastCall).to.have.been.calledWith('x26', []);
-        expect(onSubmit.lastCall).to.have.been.calledWithMatch({x26: []});
+        expect(wrapper.find({initialCount: 1}).at(0).simulate('click')).to.be.ok;
+        expect(onChange.lastCall).to.have.been.calledWith('x26', ['', '']);
+        expect(onSubmit.lastCall).to.have.been.calledWithMatch({x26: ['', '']});
+
+        expect(wrapper.find(ListDelField).at(0).simulate('click')).to.be.ok;
+        expect(onChange.lastCall).to.have.been.calledWith('x26', ['']);
+        expect(onSubmit.lastCall).to.have.been.calledWithMatch({x26: ['']});
 
         expect(wrapper.find('[name="x31"]').at(1)).to.be.checked;
         expect(wrapper.find('[name="x31"]').at(0)).to.be.not.checked;

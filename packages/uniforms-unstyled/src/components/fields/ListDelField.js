@@ -1,7 +1,7 @@
 import React          from 'react';
 import {connectField} from 'uniforms';
 
-const ListFieldDel = ({disabled, name, parent, ...props}) => {
+const ListDel = ({disabled, name, parent, ...props}) => {
     const fieldIndex      = +name.slice(1 + name.lastIndexOf('.'));
     const limitNotReached = !(parent.minCount >= parent.value.length);
 
@@ -17,4 +17,4 @@ const ListFieldDel = ({disabled, name, parent, ...props}) => {
     );
 };
 
-export default connectField(ListFieldDel, {includeParent: true, initialValue: false});
+export default connectField(ListDel, {includeParent: true, initialValue: false});

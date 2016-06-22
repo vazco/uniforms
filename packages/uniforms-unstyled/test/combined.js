@@ -4,11 +4,11 @@ import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 import {stub}   from 'sinon';
 
-import {AutoForm}      from 'uniforms-semantic';
-import {ErrorField}    from 'uniforms-semantic';
-import {SelectField}   from 'uniforms-semantic';
-import {ListDelField}  from 'uniforms-semantic';
-import {LongTextField} from 'uniforms-semantic';
+import {AutoForm}      from 'uniforms-unstyled';
+import {ErrorField}    from 'uniforms-unstyled';
+import {SelectField}   from 'uniforms-unstyled';
+import {ListDelField}  from 'uniforms-unstyled';
+import {LongTextField} from 'uniforms-unstyled';
 
 describe('AutoForm', () => {
     const validator = stub();
