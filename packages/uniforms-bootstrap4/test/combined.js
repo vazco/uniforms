@@ -58,7 +58,7 @@ describe('AutoForm', () => {
         'x23':     {...base, id: 'x23',    __type__: String, type: 'password'},
         'x24':     {...base, id: 'x24',    __type__: Object, children: <p>x24</p>},
         'x25':     {...base, id: 'x25',    __type__: String, component: LongTextField},
-        'x26':     {...base, id: 'x26',    __type__: Array, initialCount: 1},
+        'x26':     {...base, id: 'x26',    __type__: Array, minCount: 1, initialCount: 1, maxCount: 2},
         'x26.$':   {...base,               __type__: String},
         'x27':     {...base, id: 'x27',    __type__: Array, initialCount: 1, children: <p>x27</p>},
         'x27.$':   {...base,               __type__: String},

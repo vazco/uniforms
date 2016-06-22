@@ -4,10 +4,10 @@ import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 import {stub}   from 'sinon';
 
-import {AutoForm}      from 'uniforms-bootstrap3';
-import {ErrorField}    from 'uniforms-bootstrap3';
-import {SelectField}   from 'uniforms-bootstrap3';
-import {LongTextField} from 'uniforms-bootstrap3';
+import {AutoForm}      from 'uniforms-semantic';
+import {ErrorField}    from 'uniforms-semantic';
+import {SelectField}   from 'uniforms-semantic';
+import {LongTextField} from 'uniforms-semantic';
 
 describe('AutoForm', () => {
     const validator = stub();
@@ -191,9 +191,13 @@ describe('AutoForm', () => {
         expect(onChange.lastCall).to.have.been.calledWith('x26', ['']);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x26: ['']});
 
-        expect(wrapper.find('.col-xs-1 span').at(0).simulate('click')).to.be.ok;
-        expect(onChange.lastCall).to.have.been.calledWith('x26', []);
-        expect(onSubmit.lastCall).to.have.been.calledWithMatch({x26: []});
+        expect(wrapper.find({initialCount: 1}).at(0).simulate('click')).to.be.ok;
+        expect(onChange.lastCall).to.have.been.calledWith('x26', ['', '']);
+        expect(onSubmit.lastCall).to.have.been.calledWithMatch({x26: ['', '']});
+
+        expect(wrapper.find('.ui.fitted.close.icon').at(0).simulate('click')).to.be.ok;
+        expect(onChange.lastCall).to.have.been.calledWith('x26', ['']);
+        expect(onSubmit.lastCall).to.have.been.calledWithMatch({x26: ['']});
 
         expect(wrapper.find('[name="x31"]').at(1)).to.be.checked;
         expect(wrapper.find('[name="x31"]').at(0)).to.be.not.checked;
