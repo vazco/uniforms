@@ -1,6 +1,7 @@
 {
   "private": true,
   "devDependencies": {
+    "babel-cli": "^6.10.1",
     "lerna": "2.0.0-beta.20",
     "nyc": "^6.6.1",
     "rimraf": "^2.5.2"
