@@ -5,6 +5,7 @@ import {spy}    from 'sinon';
 
 import {BaseField}          from 'uniforms';
 import {createSchemaBridge} from 'uniforms';
+import {randomIds}          from 'uniforms';
 
 describe('BaseField', () => {
     class TestField extends BaseField {
@@ -20,6 +21,7 @@ describe('BaseField', () => {
     const error = {details: [{name: 'a'}]};
     const model = {a: {b: {c: 'example'}}};
     const onChange = spy();
+    const randomId = randomIds();
     const state = {changed: false, changedMap: {}, label: true, disabled: false, placeholder: true};
     const schema = createSchemaBridge({
         getDefinition (name) {
@@ -64,7 +66,7 @@ describe('BaseField', () => {
     context('child context', () => {
         const wrapper = mount(
             <TestField name="a" />,
-            {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+            {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
         );
 
         const context = wrapper.instance().getChildContext();
@@ -105,7 +107,7 @@ describe('BaseField', () => {
     context('when changed', () => {
         const wrapper = mount(
             <TestField name="a" />,
-            {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+            {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
         );
 
         const props = wrapper.find('div').last().props();
@@ -136,7 +138,7 @@ describe('BaseField', () => {
                     <TestField name="c" />
                 </TestField>
             </TestField>,
-            {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+            {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
         );
 
         const props = wrapper.find('div').last().props();
@@ -157,7 +159,7 @@ describe('BaseField', () => {
     context('when rendered', () => {
         const wrapper = mount(
             <TestField name="a" />,
-            {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+            {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
         );
 
         const props = wrapper.find('div').props();
@@ -237,7 +239,7 @@ describe('BaseField', () => {
             expect(() => {
                 mount(
                     <TestField name="field" />,
-                    {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+                    {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
                 );
             }).to.throw(Error, /Field not found in schema: 'field'/);
         });
@@ -247,7 +249,7 @@ describe('BaseField', () => {
         it('have correct `id`', () => {
             const wrapper = mount(
                 <TestField name="a" id="x" />,
-                {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(wrapper.find('div').props()).to.have.property('id', 'x');
@@ -258,7 +260,7 @@ describe('BaseField', () => {
         it('have correct `label` (true)', () => {
             const wrapper = mount(
                 <TestField name="a" label />,
-                {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(wrapper.find('div').props()).to.have.property('label', 'a');
@@ -267,7 +269,7 @@ describe('BaseField', () => {
         it('have correct `label` (falsy value)', () => {
             const wrapper = mount(
                 <TestField name="a" label={false} />,
-                {context: {uniforms: {model, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(wrapper.find('div').props()).to.have.property('label', '');
@@ -276,7 +278,7 @@ describe('BaseField', () => {
         it('have correct `label` (null)', () => {
             const wrapper = mount(
                 <TestField name="a" label={null} />,
-                {context: {uniforms: {model, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(wrapper.find('div').props()).to.have.property('label', null);
@@ -285,7 +287,7 @@ describe('BaseField', () => {
         it('have correct `label` (string)', () => {
             const wrapper = mount(
                 <TestField name="a" label="A" />,
-                {context: {uniforms: {model, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(wrapper.find('div').props()).to.have.property('label', 'A');
@@ -296,7 +298,7 @@ describe('BaseField', () => {
         it('have correct `placeholder` (true)', () => {
             const wrapper = mount(
                 <TestField name="a" placeholder />,
-                {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(wrapper.find('div').props()).to.have.property('placeholder', 'a');
@@ -305,7 +307,7 @@ describe('BaseField', () => {
         it('have correct `placeholder` (falsy value)', () => {
             const wrapper = mount(
                 <TestField name="a" placeholder={false} />,
-                {context: {uniforms: {model, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(wrapper.find('div').props()).to.have.property('placeholder', '');
@@ -314,7 +316,7 @@ describe('BaseField', () => {
         it('have correct `placeholder` (string)', () => {
             const wrapper = mount(
                 <TestField name="a" placeholder="A" />,
-                {context: {uniforms: {model, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(wrapper.find('div').props()).to.have.property('placeholder', 'A');
@@ -325,7 +327,7 @@ describe('BaseField', () => {
         it('have correct `value` (defaultValue)', () => {
             const wrapper = mount(
                 <TestField name="d" />,
-                {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(wrapper.find('div').props()).to.have.property('value', 'D');
@@ -334,7 +336,7 @@ describe('BaseField', () => {
         it('have correct `value` (allowedValues)', () => {
             const wrapper = mount(
                 <TestField name="e" />,
-                {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(wrapper.find('div').props()).to.have.property('value', 'E');
@@ -343,7 +345,7 @@ describe('BaseField', () => {
         it('have correct `value` (min)', () => {
             const wrapper = mount(
                 <TestField name="f" />,
-                {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(wrapper.find('div').props()).to.have.property('value', 42);
@@ -352,7 +354,7 @@ describe('BaseField', () => {
         it('have correct `value` (max)', () => {
             const wrapper = mount(
                 <TestField name="g" />,
-                {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(wrapper.find('div').props()).to.have.property('value', 42);
@@ -361,7 +363,7 @@ describe('BaseField', () => {
         it('have correct `value` (Number)', () => {
             const wrapper = mount(
                 <TestField name="h" />,
-                {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(wrapper.find('div').props()).to.have.property('value', 0);
@@ -370,7 +372,7 @@ describe('BaseField', () => {
         it('have correct `value` (Date)', () => {
             const wrapper = mount(
                 <TestField name="i" />,
-                {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(wrapper.find('div').props()).to.have.property('value').that.is.instanceOf(Date);
@@ -379,7 +381,7 @@ describe('BaseField', () => {
         it('have correct `value` (minCount)', () => {
             const wrapper = mount(
                 <TestField name="j" />,
-                {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(wrapper.find('div').props()).to.have.property('value').that.is.deep.equal(['', '', '']);
@@ -388,7 +390,7 @@ describe('BaseField', () => {
         it('have correct `value` (initialCount)', () => {
             const wrapper = mount(
                 <TestField name="k" initialCount={2} />,
-                {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(wrapper.find('div').props()).to.have.property('value').that.is.deep.equal(['', '']);
@@ -399,15 +401,15 @@ describe('BaseField', () => {
         it('have same `id`', () => {
             const wrapper = mount(
                 <TestField name="d" />,
-                {context: {uniforms: {error, model, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}}
             );
 
-            const props1 = wrapper.props();
+            const props1 = wrapper.find('div').props();
             expect(props1).to.have.property('id').that.is.an('string');
 
             wrapper.setProps({name: 'e'});
 
-            const props2 = wrapper.props();
+            const props2 = wrapper.find('div').props();
             expect(props2).to.have.property('id', props1.id);
         });
     });

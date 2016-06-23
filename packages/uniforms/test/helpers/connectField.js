@@ -6,10 +6,12 @@ import {spy}    from 'sinon';
 import {connectField}       from 'uniforms';
 import {createSchemaBridge} from 'uniforms';
 import {nothing}            from 'uniforms';
+import {randomIds}          from 'uniforms';
 
 describe('connectField', () => {
     const error = new Error();
     const onChange = spy();
+    const randomId = randomIds();
     const state = {changed: false, changedMap: {}, label: true, disabled: false, placeholder: false};
     const schema = createSchemaBridge({
         getDefinition (name) {
@@ -68,7 +70,7 @@ describe('connectField', () => {
 
             mount(
                 <Field name="field.subfield" />,
-                {context: {uniforms: {error, model: {}, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(Test).to.have.been.calledWithMatch({parent: {label: 'Field', field: {type: Object}}});
@@ -79,7 +81,7 @@ describe('connectField', () => {
 
             mount(
                 <Field name="field.subfield" />,
-                {context: {uniforms: {error, model: {}, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(Test).to.have.not.been.calledWithMatch({parent: {label: 'Field', field: {type: Object}}});
@@ -95,7 +97,7 @@ describe('connectField', () => {
                 <Field1 name="field">
                     <Field2 name="subfield" />
                 </Field1>,
-                {context: {uniforms: {error, model: {}, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(Test).to.have.been.calledWithMatch({name: 'field.subfield'});
@@ -109,7 +111,7 @@ describe('connectField', () => {
                 <Field1 name="field">
                     <Field2 name="field.subfield" />
                 </Field1>,
-                {context: {uniforms: {error, model: {}, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(Test).to.have.been.calledWithMatch({name: 'field.subfield'});
@@ -122,7 +124,7 @@ describe('connectField', () => {
 
             mount(
                 <Field name="field" />,
-                {context: {uniforms: {error, model: {}, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(onChange).to.have.been.calledWith('field', {});
@@ -133,7 +135,7 @@ describe('connectField', () => {
 
             mount(
                 <Field name="field" />,
-                {context: {uniforms: {error, model: {}, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(onChange).to.have.been.not.called;
@@ -146,7 +148,7 @@ describe('connectField', () => {
 
             mount(
                 <Field name="field" />,
-                {context: {uniforms: {error, model: {}, name: [], schema, state, onChange}}}
+                {context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange}}}
             );
 
             expect(Test).to.have.been.calledWith({a: 1});

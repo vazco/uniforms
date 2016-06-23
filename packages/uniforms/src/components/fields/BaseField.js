@@ -16,20 +16,13 @@ export default class BaseField extends Component {
         placeholder: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
     };
 
-    static defaultProps = Object.create({}, {
-        id: {
-            enumerable:   true,
-            configurable: true,
-
-            get: () => Math.random().toString(36).substr(2, 16)
-        }
-    });
-
     static contextTypes      = BaseForm.childContextTypes;
     static childContextTypes = BaseForm.childContextTypes;
 
     constructor () {
         super(...arguments);
+
+        this.randomId = this.context.uniforms.randomId();
 
         this.getFieldProps = this.getFieldProps.bind(this);
 
@@ -49,7 +42,8 @@ export default class BaseField extends Component {
                 model:    this.getChildContextModel(),
                 state:    this.getChildContextState(),
                 schema:   this.getChildContextSchema(),
-                onChange: this.getChildContextOnChange()
+                onChange: this.getChildContextOnChange(),
+                randomId: this.context.uniforms.randomId
             }
         };
     }
@@ -111,6 +105,8 @@ export default class BaseField extends Component {
             ? this.getFieldProps(name.replace(/(.+)\..+$/, '$1'), {includeParent: false})
             : null;
 
+        const id = props.id || this.randomId;
+
         const errorMessage = context.schema.getErrorMessage(name, context.error);
 
         const label = props.label
@@ -157,6 +153,7 @@ export default class BaseField extends Component {
             findError,
             findField,
             findValue,
+            id,
             onChange,
             parent,
             value,
