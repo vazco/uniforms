@@ -82,17 +82,17 @@ describe('BaseForm', () => {
         );
 
         it('is <form>', () => {
-            expect(wrapper).to.have.tagName('form');
+            expect(wrapper.find('form')).to.have.length(1);
         });
 
         it('have correct props', () => {
-            expect(wrapper).to.have.prop('className', 'name');
-            expect(wrapper).to.have.prop('noValidate', true);
+            expect(wrapper.props()).to.have.property('className', 'name');
+            expect(wrapper.props()).to.have.property('noValidate', true);
         });
 
         it('have correct children', () => {
             expect(wrapper).to.be.not.empty;
-            expect(wrapper).to.have.exactly(3).descendants('div');
+            expect(wrapper.find('div')).to.have.length(3);
         });
 
         it('updates schema bridge', () => {

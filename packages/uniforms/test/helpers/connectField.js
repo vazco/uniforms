@@ -5,6 +5,7 @@ import {spy}    from 'sinon';
 
 import {connectField}       from 'uniforms';
 import {createSchemaBridge} from 'uniforms';
+import {nothing}            from 'uniforms';
 
 describe('connectField', () => {
     const error = new Error();
@@ -30,7 +31,7 @@ describe('connectField', () => {
         validator () {}
     });
 
-    const Test = spy(() => null);
+    const Test = spy(() => nothing);
     const Field = connectField(Test);
 
     beforeEach(() => {

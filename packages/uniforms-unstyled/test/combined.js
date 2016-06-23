@@ -32,7 +32,7 @@ describe('AutoForm', () => {
         'x02':     {...base, id: 'x02',    __type__: Number, allowedValues},
         'x03':     {...base,               __type__: Number, allowedValues, checkboxes},
         'x04':     {...base,               __type__: Array,  allowedValues, checkboxes},
-        'x05.$':   {...base,               __type__: Number},
+        'x04.$':   {...base,               __type__: Number},
         'x05':     {...base, id: 'x05',    __type__: Date},
         'x06':     {...base, id: 'x06',    __type__: Boolean},
         'x07':     {...base, id: 'x07',    __type__: Boolean, inline: true},
@@ -106,15 +106,15 @@ describe('AutoForm', () => {
             />
         );
 
-        expect(wrapper.find('#x01')).to.have.value('');
+        expect(wrapper.find('#x01').props()).to.have.property('value', '');
         expect(wrapper.find('#x01').simulate('change', {target: {value: 'x01'}})).to.be.ok;
-        expect(wrapper.find('#x01')).to.have.value('x01');
+        expect(wrapper.find('#x01').props()).to.have.property('value', 'x01');
         expect(onChange.lastCall).to.have.been.calledWith('x01', 'x01');
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x01: 'x01'});
 
-        expect(wrapper.find('#x02')).to.have.value('');
+        expect(wrapper.find('#x02').props()).to.have.property('value', 0);
         expect(wrapper.find('#x02').simulate('change', {target: {value: 2}})).to.be.ok;
-        expect(wrapper.find('#x02')).to.have.value('2');
+        expect(wrapper.find('#x02').props()).to.have.property('value', 2);
         expect(onChange.lastCall).to.have.been.calledWith('x02', 2);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x02: 2});
 
@@ -146,9 +146,9 @@ describe('AutoForm', () => {
         expect(onChange.lastCall).to.have.been.calledWith('x04', []);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x04: []});
 
-        expect(wrapper.find('#x05')).to.have.value(dateA.toISOString().slice(0, -8));
+        expect(wrapper.find('#x05').props()).to.have.property('value', dateA.toISOString().slice(0, -8));
         expect(wrapper.find('#x05').simulate('change', {target: {valueAsNumber: +dateB}})).to.be.ok;
-        expect(wrapper.find('#x05')).to.have.value(dateB.toISOString().slice(0, -8));
+        expect(wrapper.find('#x05').props()).to.have.property('value', dateB.toISOString().slice(0, -8));
         expect(onChange.lastCall).to.have.been.calledWith('x05', dateB);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x05: dateB});
 
@@ -158,33 +158,33 @@ describe('AutoForm', () => {
         expect(onChange.lastCall).to.have.been.calledWith('x06', true);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x06: true});
 
-        expect(wrapper.find('#x08y01')).to.have.value('');
+        expect(wrapper.find('#x08y01').props()).to.have.property('value', '');
         expect(wrapper.find('#x08y01').simulate('change', {target: {value: 'x08y01'}})).to.be.ok;
-        expect(wrapper.find('#x08y01')).to.have.value('x08y01');
+        expect(wrapper.find('#x08y01').props()).to.have.property('value', 'x08y01');
         expect(onChange.lastCall).to.have.been.calledWith('x08.y01', 'x08y01');
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x08: {y01: 'x08y01'}});
 
-        expect(wrapper.find('#x08y02')).to.have.value('0');
+        expect(wrapper.find('#x08y02').props()).to.have.property('value', 0);
         expect(wrapper.find('#x08y02').simulate('change', {target: {value: 2}})).to.be.ok;
-        expect(wrapper.find('#x08y02')).to.have.value('2');
+        expect(wrapper.find('#x08y02').props()).to.have.property('value', 2);
         expect(onChange.lastCall).to.have.been.calledWith('x08.y02', 2);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x08: {y02: 2}});
 
-        expect(wrapper.find('#x22')).to.have.value('0');
+        expect(wrapper.find('#x22').props()).to.have.property('value', 0);
         expect(wrapper.find('#x22').simulate('change', {target: {value: ''}})).to.be.ok;
-        expect(wrapper.find('#x22')).to.have.value('0');
+        expect(wrapper.find('#x22').props()).to.have.property('value', 0);
         expect(onChange.lastCall).to.have.been.calledWith('x22', undefined);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x22: undefined});
 
-        expect(wrapper.find('#x22')).to.have.value('0');
+        expect(wrapper.find('#x22').props()).to.have.property('value', 0);
         expect(wrapper.find('#x22').simulate('change', {target: {value: 2}})).to.be.ok;
-        expect(wrapper.find('#x22')).to.have.value('2');
+        expect(wrapper.find('#x22').props()).to.have.property('value', 2);
         expect(onChange.lastCall).to.have.been.calledWith('x22', 2);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x22: 2});
 
-        expect(wrapper.find('#x25')).to.have.value('');
+        expect(wrapper.find('#x25').props()).to.have.property('value', '');
         expect(wrapper.find('#x25').simulate('change', {target: {value: 'x25'}})).to.be.ok;
-        expect(wrapper.find('#x25')).to.have.value('x25');
+        expect(wrapper.find('#x25').props()).to.have.property('value', 'x25');
         expect(onChange.lastCall).to.have.been.calledWith('x25', 'x25');
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x25: 'x25'});
 

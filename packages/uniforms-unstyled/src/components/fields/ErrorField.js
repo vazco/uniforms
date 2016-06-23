@@ -1,5 +1,6 @@
 import React          from 'react';
 import {connectField} from 'uniforms';
+import {nothing}      from 'uniforms';
 
 const Error = ({
     children,
@@ -9,7 +10,7 @@ const Error = ({
     onChange,
     ...props
 }) =>
-    !errorMessage ? null : (
+    !errorMessage ? nothing : (
         <section {...props}>
             {children || errorMessage}
         </section>
