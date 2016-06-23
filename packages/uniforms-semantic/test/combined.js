@@ -94,7 +94,7 @@ describe('AutoForm', () => {
 
     it('works', function works () {
         // Yep, this may take a while
-        this.timeout(10000);
+        this.timeout(1000 * 60 * 10);
 
         const wrapper = mount(
             <AutoForm
