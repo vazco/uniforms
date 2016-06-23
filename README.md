@@ -14,7 +14,7 @@
     </a>
 
     <a href="#">
-        <img src="https://img.shields.io/codeship/fe6eb2a0-f8df-0133-0060-4e010acc8333/master.svg?maxAge=86400" alt="build status">
+        <img src="https://img.shields.io/travis/vazco/uniforms.svg?maxAge=86400" alt="build status">
     </a>
 </p>
 
