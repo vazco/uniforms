@@ -11,12 +11,12 @@ let Match        = (typeof global === 'object' ? global : window).Match;
 try {
     if (typeof Package === 'object') {
         if (Match === undefined) {
-            Match = Package['meteor/check'];
+            Match = Package['check'];
             Match = Match.Match;
         }
 
         if (SimpleSchema === undefined) {
-            SimpleSchema = Package['meteor/aldeed:simple-schema'];
+            SimpleSchema = Package['aldeed:simple-schema'];
             SimpleSchema = SimpleSchema.SimpleSchema;
         }
     }
