@@ -33,6 +33,8 @@ describe('connectField', () => {
         validator () {}
     });
 
+    const reactContext = {context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange}}};
+
     const Test = spy(() => nothing);
     const Field = connectField(Test);
 
@@ -70,7 +72,7 @@ describe('connectField', () => {
 
             mount(
                 <Field name="field.subfield" />,
-                {context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange}}}
+                reactContext
             );
 
             expect(Test).to.have.been.calledWithMatch({parent: {label: 'Field', field: {type: Object}}});
@@ -81,7 +83,7 @@ describe('connectField', () => {
 
             mount(
                 <Field name="field.subfield" />,
-                {context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange}}}
+                reactContext
             );
 
             expect(Test).to.have.not.been.calledWithMatch({parent: {label: 'Field', field: {type: Object}}});
@@ -97,7 +99,7 @@ describe('connectField', () => {
                 <Field1 name="field">
                     <Field2 name="subfield" />
                 </Field1>,
-                {context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange}}}
+                reactContext
             );
 
             expect(Test).to.have.been.calledWithMatch({name: 'field.subfield'});
@@ -111,7 +113,7 @@ describe('connectField', () => {
                 <Field1 name="field">
                     <Field2 name="field.subfield" />
                 </Field1>,
-                {context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange}}}
+                reactContext
             );
 
             expect(Test).to.have.been.calledWithMatch({name: 'field.subfield'});
@@ -124,7 +126,7 @@ describe('connectField', () => {
 
             mount(
                 <Field name="field" />,
-                {context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange}}}
+                reactContext
             );
 
             expect(onChange).to.have.been.calledWith('field', {});
@@ -135,7 +137,7 @@ describe('connectField', () => {
 
             mount(
                 <Field name="field" />,
-                {context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange}}}
+                reactContext
             );
 
             expect(onChange).to.have.been.not.called;
@@ -148,7 +150,7 @@ describe('connectField', () => {
 
             mount(
                 <Field name="field" />,
-                {context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange}}}
+                reactContext
             );
 
             expect(Test).to.have.been.calledWith({a: 1});
