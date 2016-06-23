@@ -13,7 +13,7 @@
         <img src="https://img.shields.io/npm/v/uniforms.svg?maxAge=86400" alt="npm version">
     </a>
 
-    <a href="#">
+    <a href="https://travis-ci.org/vazco/uniforms">
         <img src="https://img.shields.io/travis/vazco/uniforms.svg?maxAge=86400" alt="build status">
     </a>
 </p>

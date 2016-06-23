@@ -9,7 +9,9 @@
     <a href="https://npmjs.org/package/uniforms">
         <img src="https://img.shields.io/npm/v/uniforms.svg?maxAge=86400" alt="Version">
     </a>
-    <img src="https://img.shields.io/travis/vazco/uniforms.svg?maxAge=86400" alt="Status">
+    <a href="https://travis-ci.org/vazco/uniforms">
+        <img src="https://img.shields.io/travis/vazco/uniforms.svg?maxAge=86400" alt="Status">
+    </a>
 </p>
 
 # uniforms
