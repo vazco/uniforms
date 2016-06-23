@@ -10,7 +10,7 @@ import {SelectField}   from 'uniforms-bootstrap4';
 import {ListDelField}  from 'uniforms-bootstrap4';
 import {LongTextField} from 'uniforms-bootstrap4';
 
-describe('AutoForm', () => {
+describe('Everything', () => {
     const validator = stub();
 
     const onChange = spy();
@@ -92,32 +92,33 @@ describe('AutoForm', () => {
         getValidator: () => validator
     };
 
-    it('works', function works () {
-        // Yep, this may take a while
-        this.timeout(1000 * 60 * 10);
+    const wrapper = mount(
+        <AutoForm
+            autosave
+            onChange={onChange}
+            onSubmit={onSubmit}
+            placeholder
+            schema={bridge}
+        />
+    );
 
-        const wrapper = mount(
-            <AutoForm
-                autosave
-                onChange={onChange}
-                onSubmit={onSubmit}
-                placeholder
-                schema={bridge}
-            />
-        );
-
+    it('works (TextField)', () => {
         expect(wrapper.find('#x01').props()).to.have.property('value', '');
         expect(wrapper.find('#x01').simulate('change', {target: {value: 'x01'}})).to.be.ok;
         expect(wrapper.find('#x01').props()).to.have.property('value', 'x01');
         expect(onChange.lastCall).to.have.been.calledWith('x01', 'x01');
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x01: 'x01'});
+    });
 
+    it('works (SelectField)', () => {
         expect(wrapper.find('#x02').props()).to.have.property('value', 0);
         expect(wrapper.find('#x02').simulate('change', {target: {value: 2}})).to.be.ok;
         expect(wrapper.find('#x02').props()).to.have.property('value', 2);
         expect(onChange.lastCall).to.have.been.calledWith('x02', 2);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x02: 2});
+    });
 
+    it('works (RadioField, on)', () => {
         expect(wrapper.find('[name="x03"]').at(0)).to.be.checked;
         expect(wrapper.find('[name="x03"]').at(1)).to.be.not.checked;
         expect(wrapper.find('[name="x03"]').at(1).simulate('change', {target: {value: true}})).to.be.ok;
@@ -125,7 +126,9 @@ describe('AutoForm', () => {
         expect(wrapper.find('[name="x03"]').at(0)).to.be.not.checked;
         expect(onChange.lastCall).to.have.been.calledWith('x03', 2);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x03: 2});
+    });
 
+    it('works (RadioField, off)', () => {
         expect(wrapper.find('[name="x03"]').at(1)).to.be.checked;
         expect(wrapper.find('[name="x03"]').at(0)).to.be.not.checked;
         expect(wrapper.find('[name="x03"]').at(0).simulate('change', {target: {value: true}})).to.be.ok;
@@ -133,73 +136,99 @@ describe('AutoForm', () => {
         expect(wrapper.find('[name="x03"]').at(1)).to.be.not.checked;
         expect(onChange.lastCall).to.have.been.calledWith('x03', 1);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x03: 1});
+    });
 
+    it('works (SelectField, checkboxes, multiple, on)', () => {
         expect(wrapper.find('[name="x04"]').at(1)).to.be.not.checked;
         expect(wrapper.find('[name="x04"]').at(1).simulate('change', {target: {value: true}})).to.be.ok;
         expect(wrapper.find('[name="x04"]').at(1)).to.be.checked;
         expect(onChange.lastCall).to.have.been.calledWith('x04', [2]);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x04: [2]});
+    });
 
+    it('works (SelectField, checkboxes, multiple, off)', () => {
         expect(wrapper.find('[name="x04"]').at(1)).to.be.checked;
         expect(wrapper.find('[name="x04"]').at(1).simulate('change', {target: {value: false}})).to.be.ok;
         expect(wrapper.find('[name="x04"]').at(1)).to.be.not.checked;
         expect(onChange.lastCall).to.have.been.calledWith('x04', []);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x04: []});
+    });
 
+    it('works (DateField)', () => {
         expect(wrapper.find('#x05').props()).to.have.property('value', dateA.toISOString().slice(0, -8));
         expect(wrapper.find('#x05').simulate('change', {target: {valueAsNumber: +dateB}})).to.be.ok;
         expect(wrapper.find('#x05').props()).to.have.property('value', dateB.toISOString().slice(0, -8));
         expect(onChange.lastCall).to.have.been.calledWith('x05', dateB);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x05: dateB});
+    });
 
+    it('works (BoolField)', () => {
         expect(wrapper.find('#x06')).to.be.not.checked;
         expect(wrapper.find('#x06').simulate('change', {target: {value: true}})).to.be.ok;
         expect(wrapper.find('#x06')).to.be.checked;
         expect(onChange.lastCall).to.have.been.calledWith('x06', true);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x06: true});
+    });
 
+    it('works (NestField, TextField)', () => {
         expect(wrapper.find('#x08y01').props()).to.have.property('value', '');
         expect(wrapper.find('#x08y01').simulate('change', {target: {value: 'x08y01'}})).to.be.ok;
         expect(wrapper.find('#x08y01').props()).to.have.property('value', 'x08y01');
         expect(onChange.lastCall).to.have.been.calledWith('x08.y01', 'x08y01');
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x08: {y01: 'x08y01'}});
+    });
 
+    it('works (NestField, NumField)', () => {
         expect(wrapper.find('#x08y02').props()).to.have.property('value', 0);
         expect(wrapper.find('#x08y02').simulate('change', {target: {value: 2}})).to.be.ok;
         expect(wrapper.find('#x08y02').props()).to.have.property('value', 2);
         expect(onChange.lastCall).to.have.been.calledWith('x08.y02', 2);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x08: {y02: 2}});
+    });
 
+    it('works (NumField, decimal, nullable)', () => {
         expect(wrapper.find('#x22').props()).to.have.property('value', 0);
         expect(wrapper.find('#x22').simulate('change', {target: {value: ''}})).to.be.ok;
         expect(wrapper.find('#x22').props()).to.have.property('value', 0);
         expect(onChange.lastCall).to.have.been.calledWith('x22', undefined);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x22: undefined});
+    });
 
+    it('works (NumField, decimal)', () => {
         expect(wrapper.find('#x22').props()).to.have.property('value', 0);
         expect(wrapper.find('#x22').simulate('change', {target: {value: 2}})).to.be.ok;
         expect(wrapper.find('#x22').props()).to.have.property('value', 2);
         expect(onChange.lastCall).to.have.been.calledWith('x22', 2);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x22: 2});
+    });
 
+    it('works (LongTextField)', () => {
         expect(wrapper.find('#x25').props()).to.have.property('value', '');
         expect(wrapper.find('#x25').simulate('change', {target: {value: 'x25'}})).to.be.ok;
         expect(wrapper.find('#x25').props()).to.have.property('value', 'x25');
         expect(onChange.lastCall).to.have.been.calledWith('x25', 'x25');
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x25: 'x25'});
+    });
 
+    it('works (ListAddField, one)', () => {
         expect(wrapper.find({initialCount: 1}).at(0).simulate('click')).to.be.ok;
         expect(onChange.lastCall).to.have.been.calledWith('x26', ['']);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x26: ['']});
+    });
 
+    it('works (ListAddField, two)', () => {
         expect(wrapper.find({initialCount: 1}).at(0).simulate('click')).to.be.ok;
         expect(onChange.lastCall).to.have.been.calledWith('x26', ['', '']);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x26: ['', '']});
+    });
 
+    it('works (ListDelField)', () => {
         expect(wrapper.find(ListDelField).at(0).simulate('click')).to.be.ok;
         expect(onChange.lastCall).to.have.been.calledWith('x26', ['']);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x26: ['']});
+    });
 
+    it('works (SelectField, checkboxes, multiple, on)', () => {
         expect(wrapper.find('[name="x31"]').at(1)).to.be.checked;
         expect(wrapper.find('[name="x31"]').at(0)).to.be.not.checked;
         expect(wrapper.find('[name="x31"]').at(0).simulate('change', {target: {value: true}})).to.be.ok;
@@ -207,7 +236,9 @@ describe('AutoForm', () => {
         expect(wrapper.find('[name="x31"]').at(1)).to.be.not.checked;
         expect(onChange.lastCall).to.have.been.calledWith('x31', 1);
         expect(onSubmit.lastCall).to.have.been.calledWithMatch({x31: 1});
+    });
 
+    it('works (rest)', () => {
         wrapper.setProps({grid:  10});
         wrapper.setProps({error: {}});
         wrapper.setProps({model: {x09: ['', '', '']}});
