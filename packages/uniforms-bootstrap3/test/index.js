@@ -1,9 +1,3 @@
-// custom assertions
-import chai   from 'chai';
-import sinon  from 'sinon-chai';
-
-chai.use(sinon);
-
 // DOM for React
 import {jsdom} from 'jsdom';
 

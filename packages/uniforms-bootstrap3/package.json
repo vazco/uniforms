@@ -26,12 +26,12 @@
   "scripts": {
     "build": "babel --out-dir lib src",
     "clean": "rimraf coverage lib .nyc_output",
-    "cover": "nyc npm test",
+    "cover": "cross-env NODE_ENV=test nyc npm test",
     "lint": "eslint src",
     "prepublish": "npm run lint && npm run test && npm run build",
     "pretest": "npm run lint",
     "reset": "rimraf node_modules",
-    "test": "cross-env NODE_ENV=test babel-node node_modules/.bin/_mocha --require test/index.js --recursive test --reporter list"
+    "test": "babel-node node_modules/.bin/_mocha --require test/index.js --recursive test --reporter list"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
@@ -55,8 +55,7 @@
     "react-addons-test-utils": "^15.0.0 || ^0.14.0",
     "react-dom": "^15.0.0 || ^0.14.0",
     "rimraf": "^2.5.2",
-    "sinon": "^1.17.4",
-    "sinon-chai": "^2.8.0"
+    "sinon": "^1.17.4"
   },
   "peerDependencies": {
     "react": "^15.0.0 || ^0.14.0",

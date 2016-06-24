@@ -29,8 +29,8 @@ describe('AutoForm', () => {
         it('updates', () => {
             wrapper.instance().getChildContext().uniforms.onChange('a', 2);
 
-            expect(onChange).to.have.been.calledOnce;
-            expect(onChange).to.have.been.calledWith('a', 2);
+            expect(onChange.calledOnce).to.be.ok;
+            expect(onChange.calledWith('a', 2)).to.be.ok;
         });
     });
 
@@ -40,10 +40,10 @@ describe('AutoForm', () => {
         );
 
         it('skips `onSubmit` until rendered (`autosave` = true)', () => {
-            expect(onSubmit).to.have.been.not.called;
+            expect(onSubmit.called).to.be.false;
             wrapper.instance().getChildContext().uniforms.onChange('a', 1);
-            expect(onSubmit).to.have.been.calledOnce;
-            expect(onSubmit).to.have.been.calledWith({a: 1});
+            expect(onSubmit.calledOnce).to.be.ok;
+            expect(onSubmit.calledWith({a: 1})).to.be.ok;
         });
     });
 
@@ -55,13 +55,13 @@ describe('AutoForm', () => {
         it('updates when changed', () => {
             wrapper.setProps({model: {}});
 
-            expect(validator).to.have.been.not.called;
+            expect(validator.called).to.be.false;
         });
 
         it('validates', () => {
             wrapper.setProps({model});
 
-            expect(validator).to.have.been.calledOnce;
+            expect(validator.calledOnce).to.be.ok;
         });
     });
 });
