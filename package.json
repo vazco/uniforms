@@ -2,19 +2,19 @@
   "private": true,
   "devDependencies": {
     "babel-cli": "^6.10.1",
-    "lerna": "2.0.0-beta.20",
+    "lerna": "2.0.0-beta.22",
     "nyc": "^6.6.1",
     "rimraf": "^2.5.2"
   },
   "scripts": {
-    "build": "lerna run build",
-    "clean": "lerna run clean && rimraf coverage .nyc_output",
-    "cover": "lerna run cover && nyc npm test",
-    "install": "lerna bootstrap",
-    "lint": "lerna run lint",
-    "publish": "lerna publish",
-    "reset": "lerna run reset && rimraf node_modules",
-    "test": "lerna run test"
+    "build": "lerna --concurrency 1 run build",
+    "clean": "lerna --concurrency 1 run clean && rimraf coverage .nyc_output",
+    "cover": "lerna --concurrency 1 run cover && nyc npm test",
+    "install": "lerna --concurrency 1 bootstrap",
+    "lint": "lerna --concurrency 1 run lint",
+    "publish": "lerna --concurrency 1 publish",
+    "reset": "lerna --concurrency 1 run reset && rimraf node_modules",
+    "test": "lerna --concurrency 1 run test"
   },
   "nyc": {
     "reporter": [

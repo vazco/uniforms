@@ -32,16 +32,6 @@ describe('ValidatedForm', () => {
         validator = stub();
     });
 
-    context('when rendered', () => {
-        const wrapper = mount(
-            <ValidatedForm schema={schema} />
-        );
-
-        it('is <form>', () => {
-            expect(wrapper).to.have.tagName('form');
-        });
-    });
-
     context('when submitted', () => {
         it('calls `onSubmit` when valid', () => {
             const wrapper = mount(
