@@ -117,19 +117,19 @@ describe('BaseField', () => {
         it('calls `onChange` once', () => {
             props.onChange({b: 1});
 
-            expect(onChange).to.have.been.calledOnce;
+            expect(onChange.calledOnce).to.be.ok;
         });
 
         it('calls `onChange` with correct name and value', () => {
             props.onChange({b: 1});
 
-            expect(onChange).to.have.been.calledWith('a', {b: 1});
+            expect(onChange.calledWith('a', {b: 1})).to.be.ok;
         });
 
         it('calls `onChange` with correct name and value (foreign field)', () => {
             props.onChange(1, 'a.b');
 
-            expect(onChange).to.have.been.calledWith('a.b', 1);
+            expect(onChange.calledWith('a.b', 1)).to.be.ok;
         });
     });
 

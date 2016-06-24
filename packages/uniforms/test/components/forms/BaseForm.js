@@ -129,35 +129,35 @@ describe('BaseForm', () => {
             wrapper.setProps({autosave: true});
             wrapper.instance().getChildContext().uniforms.onChange('a', 1);
 
-            expect(onSubmit).to.have.been.calledOnce;
-            expect(onSubmit).to.have.been.calledWith(model);
+            expect(onSubmit.calledOnce).to.be.ok;
+            expect(onSubmit.calledWith(model)).to.be.ok;
         });
 
         it('autosaves correctly (`autosave` = false)', () => {
             wrapper.setProps({autosave: false});
             wrapper.instance().getChildContext().uniforms.onChange('a', 1);
 
-            expect(onSubmit).to.have.been.not.called;
+            expect(onSubmit.called).to.be.false;
         });
 
         it('calls `onChange` with correct name and value', () => {
             wrapper.instance().getChildContext().uniforms.onChange('a', 1);
 
-            expect(onChange).to.have.been.calledOnce;
-            expect(onChange).to.have.been.calledWith('a', 1);
+            expect(onChange.calledOnce).to.be.ok;
+            expect(onChange.calledWith('a', 1)).to.be.ok;
         });
 
         it('cancels `onChange` event', () => {
             wrapper.find('form').simulate('change');
 
-            expect(onChange).to.have.been.not.called;
+            expect(onChange.called).to.be.false;
         });
 
         it('does nothing without `onChange`', () => {
             wrapper.setProps({onChange: undefined});
             wrapper.instance().getChildContext().uniforms.onChange('a', 1);
 
-            expect(onChange).to.have.been.not.called;
+            expect(onChange.called).to.be.false;
         });
     });
 
@@ -169,20 +169,20 @@ describe('BaseForm', () => {
         it('calls `onSubmit` once', () => {
             wrapper.find('form').simulate('submit');
 
-            expect(onSubmit).to.have.been.calledOnce;
+            expect(onSubmit.calledOnce).to.be.ok;
         });
 
         it('calls `onSubmit` with correct model', () => {
             wrapper.find('form').simulate('submit');
 
-            expect(onSubmit).to.have.been.calledWith(model);
+            expect(onSubmit.calledWith(model)).to.be.ok;
         });
 
         it('does nothing without `onSubmit`', () => {
             wrapper.setProps({onSubmit: undefined});
             wrapper.find('form').simulate('submit');
 
-            expect(onSubmit).to.have.been.not.called;
+            expect(onSubmit.called).to.be.false;
         });
     });
 });

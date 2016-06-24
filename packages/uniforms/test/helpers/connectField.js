@@ -75,7 +75,7 @@ describe('connectField', () => {
                 reactContext
             );
 
-            expect(Test).to.have.been.calledWithMatch({parent: {label: 'Field', field: {type: Object}}});
+            expect(Test.calledWithMatch({parent: {label: 'Field', field: {type: Object}}})).to.be.ok;
         });
 
         it('hides parent field (false)', () => {
@@ -86,7 +86,7 @@ describe('connectField', () => {
                 reactContext
             );
 
-            expect(Test).to.have.not.been.calledWithMatch({parent: {label: 'Field', field: {type: Object}}});
+            expect(Test.calledWithMatch({parent: {label: 'Field', field: {type: Object}}})).to.be.false;
         });
     });
 
@@ -102,7 +102,7 @@ describe('connectField', () => {
                 reactContext
             );
 
-            expect(Test).to.have.been.calledWithMatch({name: 'field.subfield'});
+            expect(Test.calledWithMatch({name: 'field.subfield'})).to.be.ok;
         });
 
         it('is not in chain (false)', () => {
@@ -116,7 +116,7 @@ describe('connectField', () => {
                 reactContext
             );
 
-            expect(Test).to.have.been.calledWithMatch({name: 'field.subfield'});
+            expect(Test.calledWithMatch({name: 'field.subfield'})).to.be.ok;
         });
     });
 
@@ -129,7 +129,7 @@ describe('connectField', () => {
                 reactContext
             );
 
-            expect(onChange).to.have.been.calledWith('field', {});
+            expect(onChange.calledWith('field', {})).to.be.ok;
         });
 
         it('does nothing (false)', () => {
@@ -140,7 +140,7 @@ describe('connectField', () => {
                 reactContext
             );
 
-            expect(onChange).to.have.been.not.called;
+            expect(onChange.called).to.be.false;
         });
     });
 
@@ -153,7 +153,7 @@ describe('connectField', () => {
                 reactContext
             );
 
-            expect(Test).to.have.been.calledWith({a: 1});
+            expect(Test.calledWith({a: 1})).to.be.ok;
         });
     });
 });
