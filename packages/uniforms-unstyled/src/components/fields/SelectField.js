@@ -37,7 +37,7 @@ const renderSelect = ({allowedValues, disabled, id, name, onChange, placeholder,
         onChange={event => onChange(event.target.value)}
         value={value}
     >
-        {placeholder && (
+        {!!placeholder && (
             <option value="" disabled hidden>
                 {placeholder}
             </option>
