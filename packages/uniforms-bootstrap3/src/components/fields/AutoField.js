@@ -7,13 +7,18 @@ import DateField   from './DateField';
 import ListField   from './ListField';
 import NestField   from './NestField';
 import TextField   from './TextField';
+import RadioField  from './RadioField';
 import SelectField from './SelectField';
 
 const Auto = props => {
     let component = props.component;
     if (component === undefined) {
         if (props.allowedValues) {
-            component = SelectField;
+            if (props.checkboxes && props.fieldType !== Array) {
+                component = RadioField;
+            } else {
+                component = SelectField;
+            }
         } else {
             switch (props.fieldType) {
                 case Date:    component = DateField; break;
@@ -23,7 +28,7 @@ const Auto = props => {
                 case String:  component = TextField; break;
                 case Boolean: component = BoolField; break;
 
-                default: throw new Error(`Unsupported field type: ${props.type.toString()}`);
+                default: throw new Error(`Unsupported field type: ${props.fieldType.toString()}`);
             }
         }
     }

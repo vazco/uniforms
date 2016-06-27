@@ -1,3 +1,5 @@
+/* global Package */
+
 import cloneDeep from 'lodash.clonedeep';
 
 import Bridge   from './Bridge';
@@ -7,12 +9,16 @@ let SimpleSchema = (typeof global === 'object' ? global : window).SimpleSchema;
 let Match        = (typeof global === 'object' ? global : window).Match;
 
 try {
-    if (Match === undefined) {
-        Match = require('meteor/check').Match;
-    }
+    if (typeof Package === 'object') {
+        if (Match === undefined) {
+            Match = Package['check'];
+            Match = Match.Match;
+        }
 
-    if (SimpleSchema === undefined) {
-        SimpleSchema = require('meteor/aldeed:simple-schema').SimpleSchema;
+        if (SimpleSchema === undefined) {
+            SimpleSchema = Package['aldeed:simple-schema'];
+            SimpleSchema = SimpleSchema.SimpleSchema;
+        }
     }
 
     SimpleSchema.extendOptions({
@@ -133,6 +139,19 @@ export default class SimpleSchemaBridge extends Bridge {
             } else {
                 field = {...field, ...uniforms};
             }
+        }
+
+        if (type === Array) {
+            try {
+                let itemProps = this.getProps(`${name}.$`, props);
+                if (itemProps.allowedValues && !props.allowedValues) {
+                    field.allowedValues = itemProps.allowedValues;
+                }
+
+                if (itemProps.transform && !props.transform) {
+                    field.transform = itemProps.transform;
+                }
+            } catch (e) { /* do nothing */ }
         }
 
         let options = props.options || field.options;

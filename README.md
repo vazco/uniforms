@@ -5,16 +5,16 @@
 </p>
 
 <p align="center">
-    <a href="#">
-        <img src="https://img.shields.io/github/license/vazco/uniforms.svg?maxAge=86400" alt="license">
+    <a href="https://coveralls.io/github/vazco/uniforms">
+        <img src="https://img.shields.io/coveralls/vazco/uniforms.svg?maxAge=86400" alt="Coverage">
     </a>
 
     <a href="https://npmjs.org/package/uniforms">
-        <img src="https://img.shields.io/npm/v/uniforms.svg?maxAge=86400" alt="npm version">
+        <img src="https://img.shields.io/npm/v/uniforms.svg?maxAge=86400" alt="Version">
     </a>
 
-    <a href="#">
-        <img src="https://img.shields.io/codeship/fe6eb2a0-f8df-0133-0060-4e010acc8333/master.svg?maxAge=86400" alt="build status">
+    <a href="https://travis-ci.org/vazco/uniforms">
+        <img src="https://img.shields.io/travis/vazco/uniforms.svg?maxAge=86400" alt="Status">
     </a>
 </p>
 
@@ -169,7 +169,29 @@ const ExplicitAutoForm = () =>
 | `SubmitField`   | Submit button.                                                  | *none*                   |
 | `TextField`     | Text (or any HTML5 compatible) input.                           | `type: String`           |
 
-**Note:** You can pass `component` prop to `AutoField` to bypass field guessing algorithm.
+### `AutoField` algorithm
+
+    let component = props.component;
+    if (component === undefined) {
+        if (props.allowedValues) {
+            if (props.checkboxes && props.fieldType !== Array) {
+                component = RadioField;
+            } else {
+                component = SelectField;
+            }
+        } else {
+            switch (props.fieldType) {
+                case Date:    component = DateField; break;
+                case Array:   component = ListField; break;
+                case Number:  component = NumField;  break;
+                case Object:  component = NestField; break;
+                case String:  component = TextField; break;
+                case Boolean: component = BoolField; break;
+
+                default: throw new Error(`Unsupported field type: ${props.type.toString()}`);
+            }
+        }
+    }
 
 ### Custom field component
 

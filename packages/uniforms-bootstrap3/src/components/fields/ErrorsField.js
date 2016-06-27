@@ -1,9 +1,10 @@
 import React       from 'react';
 import classnames  from 'classnames';
 import {BaseField} from 'uniforms';
+import {nothing}   from 'uniforms';
 
 const ErrorsField = ({className, children, ...props}, {uniforms: {error, schema}}) =>
-    (!error && !children) ? null : (
+    (!error && !children) ? nothing : (
         <section className={classnames('panel panel-default', className)}>
             <section className="panel-body">
                 {children}

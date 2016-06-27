@@ -7,7 +7,7 @@ import FormGroup from './FormGroup';
 const Radio = props =>
     <FormGroup {...props}>
         {props.allowedValues.map(item =>
-            <section className={classnames(props.inputClassName, `radio${props.inline ? '-inline' : ''}`)}>
+            <section key={item} className={classnames(props.inputClassName, `radio${props.inline ? '-inline' : ''}`)}>
                 <label htmlFor={`${props.id}-${item}`}>
                     <input
                         checked={item === props.value}

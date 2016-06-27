@@ -5,46 +5,37 @@ import {spy}    from 'sinon';
 
 import {connectField}       from 'uniforms';
 import {createSchemaBridge} from 'uniforms';
+import {nothing}            from 'uniforms';
+import {randomIds}          from 'uniforms';
 
 describe('connectField', () => {
     const error = new Error();
     const onChange = spy();
+    const randomId = randomIds();
     const state = {changed: false, changedMap: {}, label: true, disabled: false, placeholder: false};
     const schema = createSchemaBridge({
         getDefinition (name) {
-            if (name === 'field') {
-                return {
-                    type: String,
-                    label: 'Field'
-                };
-            }
-
-            /* istanbul ignore else */
-            if (name === 'field.subfield') {
-                return {
-                    type: Number,
-                    label: 'SubField'
-                };
-            }
+            return {
+                'field':          {type: Object, label: 'Field'},
+                'field.subfield': {type: Number, label: 'Subfield'}
+            }[name];
         },
 
         messageForError () {},
 
         objectKeys (name) {
-            if (name === 'field') {
-                return ['subfield'];
-            }
-
-            /* istanbul ignore else */
-            if (name === 'field.subfield') {
-                return [];
-            }
+            return {
+                'field':          ['subfield'],
+                'field.subfield': []
+            }[name];
         },
 
         validator () {}
     });
 
-    const Test = spy(() => null);
+    const reactContext = {context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange}}};
+
+    const Test = spy(() => nothing);
     const Field = connectField(Test);
 
     beforeEach(() => {
@@ -81,10 +72,10 @@ describe('connectField', () => {
 
             mount(
                 <Field name="field.subfield" />,
-                {context: {uniforms: {error, model: {}, name: [], schema, state, onChange}}}
+                reactContext
             );
 
-            expect(Test).to.have.been.calledWithMatch({parent: {label: 'Field', field: {type: String}}});
+            expect(Test.calledWithMatch({parent: {label: 'Field', field: {type: Object}}})).to.be.ok;
         });
 
         it('hides parent field (false)', () => {
@@ -92,10 +83,10 @@ describe('connectField', () => {
 
             mount(
                 <Field name="field.subfield" />,
-                {context: {uniforms: {error, model: {}, name: [], schema, state, onChange}}}
+                reactContext
             );
 
-            expect(Test).to.have.not.been.calledWithMatch({parent: {label: 'Field', field: {type: String}}});
+            expect(Test.calledWithMatch({parent: {label: 'Field', field: {type: Object}}})).to.be.false;
         });
     });
 
@@ -108,10 +99,10 @@ describe('connectField', () => {
                 <Field1 name="field">
                     <Field2 name="subfield" />
                 </Field1>,
-                {context: {uniforms: {error, model: {}, name: [], schema, state, onChange}}}
+                reactContext
             );
 
-            expect(Test).to.have.been.calledWithMatch({name: 'field.subfield'});
+            expect(Test.calledWithMatch({name: 'field.subfield'})).to.be.ok;
         });
 
         it('is not in chain (false)', () => {
@@ -122,10 +113,10 @@ describe('connectField', () => {
                 <Field1 name="field">
                     <Field2 name="field.subfield" />
                 </Field1>,
-                {context: {uniforms: {error, model: {}, name: [], schema, state, onChange}}}
+                reactContext
             );
 
-            expect(Test).to.have.been.calledWithMatch({name: 'field.subfield'});
+            expect(Test.calledWithMatch({name: 'field.subfield'})).to.be.ok;
         });
     });
 
@@ -135,10 +126,10 @@ describe('connectField', () => {
 
             mount(
                 <Field name="field" />,
-                {context: {uniforms: {error, model: {}, name: [], schema, state, onChange}}}
+                reactContext
             );
 
-            expect(onChange).to.have.been.calledWith('field', '');
+            expect(onChange.calledWith('field', {})).to.be.ok;
         });
 
         it('does nothing (false)', () => {
@@ -146,10 +137,10 @@ describe('connectField', () => {
 
             mount(
                 <Field name="field" />,
-                {context: {uniforms: {error, model: {}, name: [], schema, state, onChange}}}
+                reactContext
             );
 
-            expect(onChange).to.have.been.not.called;
+            expect(onChange.called).to.be.false;
         });
     });
 
@@ -159,10 +150,10 @@ describe('connectField', () => {
 
             mount(
                 <Field name="field" />,
-                {context: {uniforms: {error, model: {}, name: [], schema, state, onChange}}}
+                reactContext
             );
 
-            expect(Test).to.have.been.calledWith({a: 1});
+            expect(Test.calledWith({a: 1})).to.be.ok;
         });
     });
 });

@@ -2,6 +2,7 @@ import React       from 'react';
 import {PropTypes} from 'react';
 
 import BaseForm from './BaseForm';
+import nothing  from '../../helpers/nothing';
 
 const Quick = parent => class extends parent {
     static Quick = Quick;
@@ -47,15 +48,15 @@ const Quick = parent => class extends parent {
     }
 
     getAutoField () {
-        return () => null;
+        return () => nothing;
     }
 
     getErrorsField () {
-        return () => null;
+        return () => nothing;
     }
 
     getSubmitField () {
-        return () => null;
+        return () => nothing;
     }
 };
 

@@ -1,8 +1,9 @@
 import React       from 'react';
 import {BaseField} from 'uniforms';
+import {nothing}   from 'uniforms';
 
 const ErrorsField = ({children, ...props}, {uniforms: {error, schema}}) =>
-    (!error && !children) ? null : (
+    (!error && !children) ? nothing : (
         <section {...props}>
             {children}
 

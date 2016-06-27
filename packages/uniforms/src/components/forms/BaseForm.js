@@ -7,6 +7,7 @@ import {PropTypes} from 'react';
 
 import changedKeys        from '../../helpers/changedKeys';
 import createSchemaBridge from '../../bridges';
+import randomIds          from '../../helpers/randomIds';
 
 export default class BaseForm extends Component {
     static displayName = 'Form';
@@ -60,7 +61,8 @@ export default class BaseForm extends Component {
                 placeholder: PropTypes.bool.isRequired
             }).isRequired,
 
-            onChange: PropTypes.func.isRequired
+            onChange: PropTypes.func.isRequired,
+            randomId: PropTypes.func.isRequired
         }).isRequired
     };
 
@@ -73,6 +75,8 @@ export default class BaseForm extends Component {
             changed: null,
             changedMap: {}
         };
+
+        this.randomId = randomIds(this.props.id);
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -97,7 +101,8 @@ export default class BaseForm extends Component {
                 model:    this.getChildContextModel(),
                 state:    this.getChildContextState(),
                 schema:   this.getChildContextSchema(),
-                onChange: this.getChildContextOnChange()
+                onChange: this.getChildContextOnChange(),
+                randomId: this.randomId
             }
         };
     }

@@ -1,6 +1,6 @@
 {
   "name": "uniforms-bootstrap3",
-  "version": "1.0.0-rc.17",
+  "version": "1.0.0-rc.21",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "description": "Bootstrap3 UI components for uniforms.",
@@ -24,41 +24,75 @@
     "src/"
   ],
   "scripts": {
-    "lint": "./node_modules/.bin/eslint src",
-    "test": "true",
-    "cover": "true",
-    "build": "./node_modules/.bin/babel --out-dir lib src",
-    "watch": "./node_modules/.bin/babel --out-dir lib src --watch",
-    "clean": "rm -rf lib node_modules",
-    "prepublish": "npm run lint && npm run test && npm run build"
+    "build": "babel --out-dir lib src",
+    "clean": "rimraf coverage lib .nyc_output",
+    "cover": "cross-env NODE_ENV=test nyc npm test",
+    "lint": "eslint src",
+    "prepublish": "npm run lint && npm run test && npm run build",
+    "pretest": "npm run lint",
+    "reset": "rimraf node_modules",
+    "test": "babel-node node_modules/.bin/_mocha --require test/index.js --recursive test --reporter list"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
     "babel-eslint": "^6.0.4",
+    "babel-plugin-__coverage__": "^11.0.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
+    "chai": "^3.5.0",
+    "cross-env": "^1.0.8",
+    "enzyme": "^2.3.0",
     "eslint": "^2.11.0",
     "eslint-config-vazco": "^1.0.0",
     "eslint-plugin-babel": "^3.2.0",
-    "eslint-plugin-react": "^5.1.1"
+    "eslint-plugin-react": "^5.1.1",
+    "jsdom": "^9.2.1",
+    "mocha": "^2.5.3",
+    "mock-require": "^1.3.0",
+    "nyc": "^6.6.1",
+    "react": "^15.0.0 || ^0.14.0",
+    "react-addons-test-utils": "^15.0.0 || ^0.14.0",
+    "react-dom": "^15.0.0 || ^0.14.0",
+    "rimraf": "^2.5.2",
+    "sinon": "^1.17.4"
   },
   "peerDependencies": {
-    "react": "^15.1.0",
-    "uniforms": "^1.0.0-rc.16"
+    "react": "^15.0.0 || ^0.14.0",
+    "uniforms": "^1.0.0-rc.21"
   },
   "babel": {
     "presets": [
       "es2015",
       "react",
       "stage-0"
-    ]
+    ],
+    "env": {
+      "test": {
+        "plugins": [
+          "__coverage__"
+        ]
+      }
+    }
   },
   "eslintConfig": {
     "root": true,
     "extends": [
       "vazco"
-    ]
+    ],
+    "env": {
+      "mocha": true
+    }
+  },
+  "nyc": {
+    "reporter": [
+      "html"
+    ],
+    "require": [
+      "babel-register"
+    ],
+    "sourceMap": false,
+    "instrument": false
   },
   "dependencies": {
     "classnames": "^2.2.5"

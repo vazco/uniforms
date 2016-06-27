@@ -6,6 +6,7 @@ const LongText = ({
     className,
     disabled,
     error,
+    id,
     label,
     name,
     onChange,
@@ -23,10 +24,10 @@ const LongText = ({
 
         <textarea
             disabled={disabled}
+            id={id}
             name={name}
             onChange={event => onChange(event.target.value)}
             placeholder={placeholder}
-            type="text"
             value={value}
         />
     </section>
