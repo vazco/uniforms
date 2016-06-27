@@ -32,6 +32,25 @@ describe('ValidatedForm', () => {
         validator = stub();
     });
 
+    context('when reset', () => {
+        it('removes `error`', () => {
+            const wrapper = mount(
+                <ValidatedForm model={model} schema={schema} onSubmit={onSubmit} />
+            );
+
+            validator.onFirstCall().throws();
+            validator.onSecondCall().returns();
+
+            wrapper.find('form').simulate('submit');
+
+            expect(wrapper.instance().getChildContext().uniforms.error).to.be.ok;
+
+            wrapper.instance().reset();
+
+            expect(wrapper.instance().getChildContext().uniforms.error).to.be.null;
+        });
+    });
+
     context('when submitted', () => {
         it('calls `onSubmit` when valid', () => {
             const wrapper = mount(

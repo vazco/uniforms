@@ -47,6 +47,18 @@ describe('AutoForm', () => {
         });
     });
 
+    context('when reset', () => {
+        const wrapper = mount(
+            <AutoForm onSubmit={onSubmit} schema={schema} autosave />
+        );
+
+        it('reset `model`', () => {
+            wrapper.instance().reset();
+
+            expect(wrapper.instance().getChildContext().uniforms.model).to.be.deep.equal({});
+        });
+    });
+
     context('when updated', () => {
         const wrapper = mount(
             <AutoForm schema={schema} />
@@ -55,7 +67,7 @@ describe('AutoForm', () => {
         it('updates when changed', () => {
             wrapper.setProps({model: {}});
 
-            expect(validator.called).to.be.false;
+            expect(wrapper.instance().getChildContext().uniforms.model).to.be.deep.equal({});
         });
 
         it('validates', () => {

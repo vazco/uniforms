@@ -368,6 +368,27 @@ const onValidate = (model, error, callback) => {
 <ValidatedForm {...props} onValidate={onValidate} />
 ```
 
+### Reset form
+
+You can use [React `ref` prop](https://facebook.github.io/react/docs/more-about-refs.html) to manually reset form. Example usage:
+
+```js
+const MyForm = ({schema, onSubmit}) => {
+    let formRef;
+
+    return (
+        <section>
+            <AutoForm ref={ref => formRef = ref} schema={schema} onSubmit={onSubmit} />
+            <small onClick={() => formRef.reset()}>
+                Reset
+            </small>
+        </section>
+    );
+};
+```
+
+**Note:** You can use `ref` to manage form manually. More documentation will be available soon.
+
 ### Custom form component
 
 Every form component inherits from `BaseForm` which is subclass of `React.Component`, and provides a few overridable methods:

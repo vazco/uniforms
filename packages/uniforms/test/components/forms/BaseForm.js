@@ -95,6 +95,10 @@ describe('BaseForm', () => {
             expect(wrapper.find('div')).to.have.length(3);
         });
 
+        it('have correct `resetCount`', () => {
+            expect(wrapper.state('resetCount')).to.equal(0);
+        });
+
         it('updates schema bridge', () => {
             const schema2 = {...schema, getType: () => {}};
 
@@ -158,6 +162,18 @@ describe('BaseForm', () => {
             wrapper.instance().getChildContext().uniforms.onChange('a', 1);
 
             expect(onChange.called).to.be.false;
+        });
+    });
+
+    context('when reset', () => {
+        const wrapper = mount(
+            <BaseForm schema={schema} />
+        );
+
+        it('increase `resetCount`', () => {
+            wrapper.instance().reset();
+
+            expect(wrapper.state('resetCount')).to.equal(1);
         });
     });
 

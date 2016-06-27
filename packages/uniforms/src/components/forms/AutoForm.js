@@ -36,6 +36,11 @@ const Auto = parent => class extends parent {
         return this.state.model;
     }
 
+    reset () {
+        super.reset();
+        this.setState(() => ({model: {}, modelSync: {}}));
+    }
+
     validate () {
         this.validateModel(this.getChildContextModel());
     }

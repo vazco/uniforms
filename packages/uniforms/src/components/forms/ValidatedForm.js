@@ -69,6 +69,11 @@ const Validated = parent => class extends parent {
         }
     }
 
+    reset () {
+        super.reset();
+        this.setState(() => ({error: null, validate: false}));
+    }
+
     validate (key, value) {
         let model = this.getModel();
         if (model && key) {

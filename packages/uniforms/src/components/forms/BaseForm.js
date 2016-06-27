@@ -73,7 +73,9 @@ export default class BaseForm extends Component {
             bridge: createSchemaBridge(this.props.schema),
 
             changed: null,
-            changedMap: {}
+            changedMap: {},
+
+            resetCount: 0
         };
 
         this.randomId = randomIds(this.props.id);
@@ -167,8 +169,14 @@ export default class BaseForm extends Component {
             ...this.props,
 
             onChange () {},
-            onSubmit: this.onSubmit
+            onSubmit: this.onSubmit,
+
+            key: `reset-${this.state.resetCount}`
         };
+    }
+
+    reset () {
+        this.setState(state => ({changed: false, changedMap: {}, resetCount: state.resetCount + 1}));
     }
 
     onChange (key, value) {
