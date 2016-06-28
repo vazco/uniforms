@@ -42,8 +42,8 @@ const Validated = parent => class extends parent {
                 .getValidator(this.props.validator)
         };
 
-        this.validate      = this.validate.bind(this);
-        this.validateModel = this.validateModel.bind(this);
+        this.onValidate      = this.validate      = this.onValidate.bind(this);
+        this.onValidateModel = this.validateModel = this.onValidateModel.bind(this);
     }
 
     getChildContextError () {
@@ -62,28 +62,47 @@ const Validated = parent => class extends parent {
                     .getValidator(validator)
             });
 
-            this.validate();
+            this.onValidate();
         } else if (!isEqual(this.props.model, model)) {
             this.setState({validate: true});
-            this.validate();
+            this.onValidate();
         }
     }
 
-    reset () {
-        super.reset();
+    onChange (key, value) {
+        if (this.props.validate === 'onChange' ||
+            this.props.validate === 'onChangeAfterSubmit' && this.state.validate) {
+            this.onValidate(key, value);
+        }
+
+        super.onChange(...arguments);
+    }
+
+    onReset () {
+        super.onReset();
         this.setState(() => ({error: null, validate: false}));
     }
 
-    validate (key, value) {
+    onSubmit (event) {
+        if (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        this.onValidate();
+        this.setState({validate: true}, () => this.getChildContextError() || super.onSubmit());
+    }
+
+    onValidate (key, value) {
         let model = this.getModel();
         if (model && key) {
             model = set(cloneDeep(model), key, cloneDeep(value));
         }
 
-        this.validateModel(model);
+        this.onValidateModel(model);
     }
 
-    validateModel (model) {
+    onValidateModel (model) {
         let catched = null;
         try {
             this.state.validator(model);
@@ -96,25 +115,6 @@ const Validated = parent => class extends parent {
         } else {
             this.setState({error: catched});
         }
-    }
-
-    onChange (key, value) {
-        if (this.props.validate === 'onChange' ||
-            this.props.validate === 'onChangeAfterSubmit' && this.state.validate) {
-            this.validate(key, value);
-        }
-
-        super.onChange(...arguments);
-    }
-
-    onSubmit (event) {
-        if (event) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-
-        this.validate();
-        this.setState({validate: true}, () => this.getChildContextError() || super.onSubmit());
     }
 };
 

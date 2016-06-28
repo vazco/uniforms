@@ -80,8 +80,9 @@ export default class BaseForm extends Component {
 
         this.randomId = randomIds(this.props.id);
 
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+        this.onReset  = this.reset  = this.onReset.bind(this);
+        this.onChange = this.change = this.onChange.bind(this);
+        this.onSubmit = this.submit = this.onSubmit.bind(this);
 
         this.getModel           = this.getModel.bind(this);
         this.getChangedKeys     = this.getChangedKeys.bind(this);
@@ -175,10 +176,6 @@ export default class BaseForm extends Component {
         };
     }
 
-    reset () {
-        this.setState(state => ({changed: false, changedMap: {}, resetCount: state.resetCount + 1}));
-    }
-
     onChange (key, value) {
         // Do not set `changed` before componentDidMount
         if (this.state.changed !== null) {
@@ -199,6 +196,10 @@ export default class BaseForm extends Component {
         if (this.state.changed !== null && this.props.autosave) {
             this.onSubmit();
         }
+    }
+
+    onReset () {
+        this.setState(state => ({changed: false, changedMap: {}, resetCount: state.resetCount + 1}));
     }
 
     onSubmit (event) {

@@ -36,20 +36,20 @@ const Auto = parent => class extends parent {
         return this.state.model;
     }
 
-    reset () {
-        super.reset();
-        this.setState(() => ({model: {}, modelSync: {}}));
-    }
-
-    validate () {
-        this.validateModel(this.getChildContextModel());
-    }
-
     onChange (key, value) {
         this.setState(state => ({modelSync: set(cloneDeep(state.modelSync), key, value)}), () => {
             super.onChange(...arguments);
             this.setState({model: this.state.modelSync});
         });
+    }
+
+    onReset () {
+        super.onReset();
+        this.setState(() => ({model: {}, modelSync: {}}));
+    }
+
+    onValidate () {
+        this.onValidateModel(this.getChildContextModel());
     }
 };
 

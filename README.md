@@ -380,14 +380,41 @@ const MyForm = ({schema, onSubmit}) => {
         <section>
             <AutoForm ref={ref => formRef = ref} schema={schema} onSubmit={onSubmit} />
             <small onClick={() => formRef.reset()}>
-                Reset
+                Reset!
             </small>
         </section>
     );
 };
 ```
 
-**Note:** You can use `ref` to manage form manually. More documentation will be available soon.
+**Note:** Also, `ref` can be used to manage form manually. Other available methods:
+
+- `change(key, value)`
+- `submit()`
+- `validate()`
+
+Example:
+
+```js
+const MyOtherForm = ({schema, onSubmit}) => {
+    let formRef;
+
+    return (
+        <section>
+            <AutoForm ref={ref => formRef = ref} schema={schema} onSubmit={onSubmit} />
+            <small onClick={() => formRef.submit()}>
+                Submit!
+            </small>
+            <small onClick={() => formRef.change('fieldA', 0)}>
+                Change fieldA to 0!
+            </small>
+            <small onClick={() => formRef.validate()}>
+                Validate!
+            </small>
+        </section>
+    );
+};
+```
 
 ### Custom form component
 
