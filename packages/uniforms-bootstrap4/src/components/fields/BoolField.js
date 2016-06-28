@@ -15,7 +15,8 @@ const Bool = ({label, labelBefore, ...props}) =>
                     name={props.name}
                     onChange={() => props.onChange(!props.value)}
                     type="checkbox"
-                />&nbsp;
+                />
+                &nbsp;
                 {label}
             </label>
         </section>
