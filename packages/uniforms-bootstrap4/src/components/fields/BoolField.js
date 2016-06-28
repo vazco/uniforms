@@ -16,7 +16,7 @@ const Bool = ({label, labelBefore, ...props}) =>
                     onChange={() => props.onChange(!props.value)}
                     type="checkbox"
                 />&nbsp;
-                {props.label}
+                {label}
             </label>
         </section>
     </FormGroup>
