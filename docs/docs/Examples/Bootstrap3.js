@@ -1,3 +1,7 @@
+/**
+ * This is a Bootstrap3 auto-loader for our common examples
+ * your build system will probably already have Bootstrap3
+ */
 import React      from 'react';
 import {AutoForm} from 'uniforms-bootstrap3';
 
