@@ -156,4 +156,17 @@ describe('connectField', () => {
             expect(Test.calledWith({a: 1})).to.be.ok;
         });
     });
+
+    context('when rendered with value', () => {
+        it('treats value as initial value', () => {
+            const Field = connectField(Test);
+
+            mount(
+                <Field name="field" value="initialValueExample" />,
+                reactContext
+            );
+
+            expect(onChange.calledWith('field', 'initialValueExample')).to.be.ok;
+        });
+    });
 });

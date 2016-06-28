@@ -212,13 +212,13 @@ describe('Everything', () => {
 
     it('works (ListAddField, one)', () => {
         expect(wrapper.find({initialCount: 1}).at(0).simulate('click')).to.be.ok;
-        expect(onChange.lastCall.calledWith('x26', [''])).to.be.ok;
+        expect(onChange.lastCall.calledWith('x26.0', '')).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x26: ['']})).to.be.ok;
     });
 
     it('works (ListAddField, two)', () => {
         expect(wrapper.find({initialCount: 1}).at(0).simulate('click')).to.be.ok;
-        expect(onChange.lastCall.calledWith('x26', ['', ''])).to.be.ok;
+        expect(onChange.lastCall.calledWith('x26.1', '')).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x26: ['', '']})).to.be.ok;
     });
 

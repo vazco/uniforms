@@ -3,14 +3,16 @@ import {createElement} from 'react';
 import BaseField from '../components/fields/BaseField';
 
 export default function connectField (component, {
-    mapProps = x => x,
-
+    mapProps  = x => x,
     baseField = BaseField,
-    initialValue = true,
-    includeParent = false,
+
+    initialValue   = true,
+    includeParent  = false,
     includeInChain = true
 } = {}) {
-    class Field extends baseField {
+    return class extends baseField {
+        static displayName = `${baseField.displayName || baseField.name}(${component.displayName || component.name})`;
+
         getChildContextName () {
             return includeInChain ? super.getChildContextName() : this.context.uniforms.name;
         }
@@ -22,14 +24,18 @@ export default function connectField (component, {
         componentWillMount () {
             if (initialValue) {
                 let props = this.getFieldProps(undefined, {explicitInitialValue: true, includeParent: false});
+
+                // https://github.com/vazco/uniforms/issues/52
+                // If field is initially rendered with value, we treat it as an initial value.
+                if (this.props.value !== undefined) {
+                    props.onChange(this.props.value);
+                    return;
+                }
+
                 if (props.value === undefined && !props.field.optional) {
                     props.onChange(props.initialValue);
                 }
             }
         }
-    }
-
-    Field.displayName = `${baseField.displayName || baseField.name}(${component.displayName || component.name})`;
-
-    return Field;
+    };
 }
