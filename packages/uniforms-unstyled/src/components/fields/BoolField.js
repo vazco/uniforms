@@ -18,7 +18,7 @@ const Bool = ({
             name={name}
             onChange={() => disabled || onChange(!value)}
             type="checkbox"
-        />
+        />&nbsp;
 
         {label && (
             <label htmlFor={id}>

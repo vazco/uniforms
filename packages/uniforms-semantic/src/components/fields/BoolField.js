@@ -24,7 +24,7 @@ const Bool = ({
                 name={name}
                 onChange={() => onChange(!value)}
                 type="checkbox"
-            />
+            />&nbsp;
 
             <label htmlFor={id}>
                 {label}
