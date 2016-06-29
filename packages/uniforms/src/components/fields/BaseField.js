@@ -84,7 +84,7 @@ export default class BaseField extends Component {
     }
 
     // eslint-disable-next-line complexity
-    getFieldProps (name, {explicitInitialValue = false, includeParent = false} = {}) {
+    getFieldProps (name, {explicitInitialValue = false, overrideValue = false, includeParent = false} = {}) {
         const context = this.context.uniforms;
         const props = {
             ...this.getChildContextState(),
@@ -160,6 +160,7 @@ export default class BaseField extends Component {
 
             ...props,
             ...schemaProps,
+            ...overrideValue ? {value} : {},
 
             label,
             name,

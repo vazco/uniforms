@@ -6,6 +6,7 @@ import {stub}   from 'sinon';
 
 import {AutoForm}      from 'uniforms-bootstrap3';
 import {ErrorField}    from 'uniforms-bootstrap3';
+import {HiddenField}   from 'uniforms-bootstrap3';
 import {SelectField}   from 'uniforms-bootstrap3';
 import {ListDelField}  from 'uniforms-bootstrap3';
 import {LongTextField} from 'uniforms-bootstrap3';
@@ -66,7 +67,8 @@ describe('Everything', () => {
         'x28':     {...base,               __type__: String, component: ErrorField},
         'x29':     {...base,               __type__: String, help: 'Help'},
         'x30':     {...base,               __type__: String, help: 'Help', helpClassName: 'help'},
-        'x31':     {...base,               __type__: String, allowedValues, checkboxes, component: SelectField}
+        'x31':     {...base,               __type__: String, allowedValues, checkboxes, component: SelectField},
+        'x32':     {...base, id: 'x32',    __type__: String, component: HiddenField}
     };
 
     const bridge = {
@@ -236,6 +238,36 @@ describe('Everything', () => {
         expect(wrapper.find('[name="x31"]').at(1)).to.be.not.checked;
         expect(onChange.lastCall.calledWith('x31', 1)).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x31: 1})).to.be.ok;
+    });
+
+    it('works (HiddenField)', () => {
+        const wrapperHidden = mount(
+            <HiddenField name="x32" value="" />,
+            {context: wrapper.instance().getChildContext()}
+        );
+
+        expect(wrapperHidden.find('#x32').props()).to.have.property('value', '');
+
+        wrapperHidden.setProps({value: 'x32'});
+
+        expect(wrapperHidden.find('#x32').props()).to.have.property('value', 'x32');
+        expect(onChange.lastCall.calledWith('x32', 'x32')).to.be.ok;
+        expect(onSubmit.lastCall.calledWithMatch({x32: 'x32'})).to.be.ok;
+    });
+
+    it('works (HiddenField, noDOM)', () => {
+        const wrapperHidden = mount(
+            <HiddenField name="x32" value="" noDOM />,
+            {context: wrapper.instance().getChildContext()}
+        );
+
+        expect(wrapperHidden.find(HiddenField).props()).to.have.property('value', '');
+
+        wrapperHidden.setProps({value: 'x32'});
+
+        expect(wrapperHidden.find(HiddenField).props()).to.have.property('value', 'x32');
+        expect(onChange.lastCall.calledWith('x32', 'x32')).to.be.ok;
+        expect(onSubmit.lastCall.calledWithMatch({x32: 'x32'})).to.be.ok;
     });
 
     it('works (rest)', () => {

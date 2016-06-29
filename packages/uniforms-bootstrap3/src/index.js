@@ -4,6 +4,7 @@ export {default as DateField}     from './components/fields/DateField';
 export {default as ErrorField}    from './components/fields/ErrorField';
 export {default as ErrorsField}   from './components/fields/ErrorsField';
 export {default as FormGroup}     from './components/fields/FormGroup';
+export {default as HiddenField}   from './components/fields/HiddenField';
 export {default as ListAddField}  from './components/fields/ListAddField';
 export {default as ListDelField}  from './components/fields/ListDelField';
 export {default as ListField}     from './components/fields/ListField';

@@ -157,6 +157,7 @@ const ExplicitAutoForm = () =>
 | `DateField`     | HTML5 `date-localtime` input.                                   | `type: Date`             |
 | `ErrorField`    | Error message for given field.                                  | *none*                   |
 | `ErrorsField`   | Error message with a given error or list of validation errors.  | *none*                   |
+| `HiddenField`   | Hidden field with `noDOM` mode (prop).                          | *none*                   |
 | `ListAddField`  | "+" with action to add list item.                               | child of `ListField`     |
 | `ListDelField`  | "-" with action to remove list item.                            | child of `ListFieldItem` |
 | `ListField`     | List of repeated nested fields.                                 | `type: Array`            |
