@@ -17,4 +17,4 @@ const Error = ({
     )
 ;
 
-export default connectField(Error);
+export default connectField(Error, {initialValue: false});
