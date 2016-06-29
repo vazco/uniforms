@@ -6,11 +6,13 @@ import {mount}     from 'enzyme';
 import {QuickForm} from 'uniforms';
 
 describe('QuickForm', () => {
+    /* eslint-disable react/display-name */
     class TestQuickForm extends QuickForm {
         getAutoField   = () => () => <i className="auto" />;
         getErrorsField = () => () => <i className="errors" />;
         getSubmitField = () => () => <i className="submit" />;
     }
+    /* eslint-enable react/display-name */
 
     const schema = {
         getDefinition:   () => {},
