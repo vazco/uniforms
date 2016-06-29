@@ -77,15 +77,29 @@ export default class SimpleSchemaBridge extends Bridge {
     }
 
     getErrorMessages (error) {
-        return (error && error.details || []).map(error =>
-            this.schema.messageForError(
-                error.type,
-                error.name,
-                null,
-                error.details &&
-                error.details.value
-            )
-        );
+        if (error) {
+            if (Array.isArray(error.details)) {
+                return error.details.map(error =>
+                    this.schema.messageForError(
+                        error.type,
+                        error.name,
+                        null,
+                        error.details &&
+                        error.details.value
+                    )
+                );
+            }
+
+            if (error.message) {
+                return [error.message];
+            }
+        }
+
+        if (error !== undefined) {
+            return [error];
+        }
+
+        return [];
     }
 
     getField (name) {

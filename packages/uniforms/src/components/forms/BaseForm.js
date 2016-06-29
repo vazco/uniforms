@@ -21,7 +21,7 @@ export default class BaseForm extends Component {
 
     static propTypes = {
         error:  PropTypes.any,
-        model:  PropTypes.any,
+        model:  PropTypes.object,
         schema: PropTypes.any.isRequired,
 
         onChange: PropTypes.func,
@@ -37,8 +37,8 @@ export default class BaseForm extends Component {
         uniforms: PropTypes.shape({
             name: PropTypes.arrayOf(PropTypes.string).isRequired,
 
-            error:  PropTypes.object,
-            model:  PropTypes.object.isRequired,
+            error: PropTypes.any,
+            model: PropTypes.object.isRequired,
 
             schema: PropTypes.shape({
                 getError:         PropTypes.func.isRequired,

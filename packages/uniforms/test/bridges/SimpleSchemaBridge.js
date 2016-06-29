@@ -103,12 +103,16 @@ describe('Bridge', () => {
             expect(bridge.getErrorMessages()).to.be.deep.equal([]);
         });
 
-        it('works with invalid error', () => {
-            expect(bridge.getErrorMessages({})).to.be.deep.equal([]);
-            expect(bridge.getErrorMessages({invalid: true})).to.be.deep.equal([]);
+        it('works with other errors', () => {
+            expect(bridge.getErrorMessages('correct')).to.be.deep.equal(['correct']);
+            expect(bridge.getErrorMessages(999999999)).to.be.deep.equal([999999999]);
         });
 
-        it('works with correct error', () => {
+        it('works with Error', () => {
+            expect(bridge.getErrorMessages(new Error('correct'))).to.be.deep.equal(['correct']);
+        });
+
+        it('works with ValidationError', () => {
             expect(bridge.getErrorMessages({details: [{name: 'a', details: {value: 1}}]})).to.be.deep.equal(['(a)']);
             expect(bridge.getErrorMessages({details: [{name: 'b', details: {value: 1}}]})).to.be.deep.equal(['(b)']);
         });
