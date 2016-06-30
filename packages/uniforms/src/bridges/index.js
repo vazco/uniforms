@@ -1,8 +1,10 @@
 import Bridge             from './Bridge';
+import AstronomyBridge    from './AstronomyBridge';
 import SimpleSchemaBridge from './SimpleSchemaBridge';
 
 const bridges = [
     Bridge,
+    AstronomyBridge,
     SimpleSchemaBridge
 ];
 
