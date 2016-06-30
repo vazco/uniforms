@@ -16,13 +16,17 @@ require('fbjs/lib/ExecutionEnvironment').canUseDOM = true;
 // Mocks
 import mock from 'mock-require';
 
-global.Match = {
+global.Package = {};
+
+global.Package['check'] = {};
+global.Package['check'].Match = {
     OneOf () {},
     Optional () {},
     ObjectIncluding () {}
 };
 
-global.SimpleSchema = {
+global.Package['aldeed:simple-schema'] = {};
+global.Package['aldeed:simple-schema'].SimpleSchema = {
     extendOptions () {},
     _makeGeneric (name) {
         if (typeof name !== 'string') {

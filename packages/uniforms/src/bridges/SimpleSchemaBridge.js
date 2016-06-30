@@ -5,8 +5,8 @@ import cloneDeep from 'lodash.clonedeep';
 import Bridge   from './Bridge';
 import joinName from '../helpers/joinName';
 
-let SimpleSchema = (typeof global === 'object' ? global : window).SimpleSchema;
 let Match        = (typeof global === 'object' ? global : window).Match;
+let SimpleSchema = (typeof global === 'object' ? global : window).SimpleSchema;
 
 try {
     if (typeof Package === 'object') {
@@ -37,9 +37,7 @@ try {
             )
         )
     });
-} catch (_) {
-    // eslint-disable-line
-}
+} catch (_) { /* Ignore it. */ }
 
 export default class SimpleSchemaBridge extends Bridge {
     static check (schema) {
