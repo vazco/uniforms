@@ -17,7 +17,8 @@ describe('connectField', () => {
         getDefinition (name) {
             return {
                 'field':          {type: Object, label: 'Field'},
-                'field.subfield': {type: Number, label: 'Subfield'}
+                'field.subfield': {type: Number, label: 'Subfield'},
+                'another':        {type: String, optional: true}
             }[name];
         },
 
@@ -137,6 +138,17 @@ describe('connectField', () => {
 
             mount(
                 <Field name="field" />,
+                reactContext
+            );
+
+            expect(onChange.called).to.be.false;
+        });
+
+        it('respects `required`', () => {
+            const Field = connectField(Test, {initialValue: true});
+
+            mount(
+                <Field name="another" />,
                 reactContext
             );
 

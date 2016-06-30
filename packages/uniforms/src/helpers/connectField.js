@@ -32,7 +32,7 @@ export default function connectField (component, {
                     return;
                 }
 
-                if (props.value === undefined && !props.field.optional) {
+                if (props.value === undefined && props.required) {
                     props.onChange(props.initialValue);
                 }
             }
