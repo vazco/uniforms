@@ -6,6 +6,7 @@ import {spy}    from 'sinon';
 import {AutoForm} from 'uniforms';
 
 describe('AutoForm', () => {
+    const onChangeModel = spy();
     const validator = spy();
     const onChange = spy();
     const onSubmit = spy();
@@ -18,12 +19,15 @@ describe('AutoForm', () => {
     };
 
     beforeEach(() => {
+        onChange.reset();
+        onChangeModel.reset();
+        onSubmit.reset();
         validator.reset();
     });
 
     context('when changed', () => {
         const wrapper = mount(
-            <AutoForm onChange={onChange} schema={schema} />
+            <AutoForm onChange={onChange} onChangeModel={onChangeModel} schema={schema} />
         );
 
         it('updates', () => {
@@ -31,6 +35,13 @@ describe('AutoForm', () => {
 
             expect(onChange.calledOnce).to.be.ok;
             expect(onChange.calledWith('a', 2)).to.be.ok;
+        });
+
+        it('calls `onChangeModel`', () => {
+            wrapper.instance().getChildContext().uniforms.onChange('a', 2);
+
+            expect(onChangeModel.calledOnce).to.be.ok;
+            expect(onChangeModel.calledWith({a: 2})).to.be.ok;
         });
     });
 

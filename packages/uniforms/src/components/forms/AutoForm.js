@@ -1,3 +1,4 @@
+import PropTypes from 'react';
 import cloneDeep from 'lodash.clonedeep';
 import isEqual   from 'lodash.isequal';
 import set       from 'lodash.set';
@@ -8,6 +9,12 @@ const Auto = parent => class extends parent {
     static Auto = Auto;
 
     static displayName = `Auto${parent.displayName}`;
+
+    static propTypes = {
+        ...parent.propTypes,
+
+        onChangeModel: PropTypes.func
+    };
 
     constructor () {
         super(...arguments);
@@ -39,7 +46,11 @@ const Auto = parent => class extends parent {
     onChange (key, value) {
         this.setState(state => ({modelSync: set(cloneDeep(state.modelSync), key, value)}), () => {
             super.onChange(...arguments);
-            this.setState({model: this.state.modelSync});
+            this.setState({model: this.state.modelSync}, () => {
+                if (this.props.onChangeModel) {
+                    this.props.onChangeModel(this.state.model);
+                }
+            });
         });
     }
 
