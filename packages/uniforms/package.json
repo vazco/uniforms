@@ -98,6 +98,7 @@
     "lodash.clonedeep": "^4.3.2",
     "lodash.get": "^4.3.0",
     "lodash.isequal": "^4.2.0",
+    "lodash.isfunction": "^3.0.8",
     "lodash.set": "^4.2.0",
     "lodash.xorwith": "^4.3.0"
   }

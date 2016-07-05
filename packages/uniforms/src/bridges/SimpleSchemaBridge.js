@@ -1,6 +1,7 @@
 /* global Package */
 
-import cloneDeep from 'lodash.clonedeep';
+import cloneDeep  from 'lodash.clonedeep';
+import isFunction from 'lodash.isfunction';
 
 import Bridge   from './Bridge';
 import joinName from '../helpers/joinName';
@@ -123,7 +124,9 @@ export default class SimpleSchemaBridge extends Bridge {
         }
 
         return field.defaultValue
-            ? field.defaultValue
+            ? isFunction(field.defaultValue)
+                ? field.defaultValue()
+                : field.defaultValue
             : field.allowedValues
                 ? field.allowedValues[0]
                 : field.type === Date || field.type === Number
