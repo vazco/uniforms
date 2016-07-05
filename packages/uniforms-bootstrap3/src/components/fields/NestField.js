@@ -1,6 +1,6 @@
 import React          from 'react';
-import {Children}     from 'react';
 import {connectField} from 'uniforms';
+import {injectName}   from 'uniforms';
 import {joinName}     from 'uniforms';
 
 import AutoField from './AutoField';
@@ -24,11 +24,7 @@ const Nest = ({
         )}
 
         {children ? (
-            Children.map(children, child =>
-                React.cloneElement(child, {
-                    name: joinName(name, child.props.name)
-                })
-            )
+            injectName(name, children)
         ) : (
             fields.map(key =>
                 <AutoField key={key} name={joinName(name, key)} />
