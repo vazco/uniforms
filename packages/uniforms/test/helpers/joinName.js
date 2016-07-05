@@ -37,4 +37,14 @@ describe('joinName', () => {
         expect(joinName('a', 1, 'b')).to.equal('a.1.b');
         expect(joinName('a', 'b', 1)).to.equal('a.b.1');
     });
+
+    it('works with partials', () => {
+        expect(joinName('a', 'b.c.d')).to.equal('a.b.c.d');
+        expect(joinName('a.b', 'c.d')).to.equal('a.b.c.d');
+        expect(joinName('a.b.c', 'd')).to.equal('a.b.c.d');
+
+        expect(joinName(null, 'a', 'b.c.d')).to.deep.equal(['a', 'b', 'c', 'd']);
+        expect(joinName(null, 'a.b', 'c.d')).to.deep.equal(['a', 'b', 'c', 'd']);
+        expect(joinName(null, 'a.b.c', 'd')).to.deep.equal(['a', 'b', 'c', 'd']);
+    });
 });
