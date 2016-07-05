@@ -1,7 +1,7 @@
-import PropTypes from 'react';
-import cloneDeep from 'lodash.clonedeep';
-import isEqual   from 'lodash.isequal';
-import set       from 'lodash.set';
+import cloneDeep   from 'lodash.clonedeep';
+import isEqual     from 'lodash.isequal';
+import set         from 'lodash.set';
+import {PropTypes} from 'react';
 
 import ValidatedQuickForm from './ValidatedQuickForm';
 
