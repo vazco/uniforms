@@ -11,6 +11,7 @@ const List = ({
     children,
     className,
     initialCount,
+    itemProps,
     label,
     name,
 // onChange shouldn't be passed to <section>
@@ -37,20 +38,13 @@ const List = ({
                            React.cloneElement(child, {
                                key: index,
                                label: null,
-                               name: joinName(
-                                   name,
-                                   child.props.name && child.props.name.replace('$', index)
-                               )
+                               name: joinName(name, child.props.name && child.props.name.replace('$', index))
                            })
                       )
                  )
             ) : (
                 value.map((item, index) =>
-                    <ListItemField
-                        key={index}
-                        label={null}
-                        name={joinName(name, index)}
-                    />
+                    <ListItemField key={index} label={null} name={joinName(name, index)} {...itemProps} />
                 )
             )}
         </section>

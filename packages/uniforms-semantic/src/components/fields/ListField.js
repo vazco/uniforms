@@ -13,6 +13,7 @@ const List = ({
     disabled,
     error,
     initialCount,
+    itemProps,
     label,
     name,
 // onChange shouldn't be passed to <section>
@@ -49,7 +50,7 @@ const List = ({
             )
         ) : (
             value.map((item, index) =>
-                <ListItemField key={index} label={null} name={joinName(name, index)} />
+                <ListItemField key={index} label={null} name={joinName(name, index)} {...itemProps} />
             )
         )}
     </section>
