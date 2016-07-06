@@ -68,7 +68,8 @@ describe('Everything', () => {
         'x29':     {...base,               __type__: String, help: 'Help'},
         'x30':     {...base,               __type__: String, help: 'Help', helpClassName: 'help'},
         'x31':     {...base,               __type__: String, allowedValues, checkboxes, component: SelectField},
-        'x32':     {...base, id: 'x32',    __type__: String, component: HiddenField}
+        'x32':     {...base, id: 'x32',    __type__: String, component: HiddenField},
+        'x33':     {...base, id: 'x33',    __type__: String, component: HiddenField, value: undefined}
     };
 
     const bridge = {

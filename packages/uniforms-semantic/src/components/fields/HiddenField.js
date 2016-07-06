@@ -4,6 +4,10 @@ import {nothing}   from 'uniforms';
 
 export default class HiddenField extends BaseField {
     componentWillReceiveProps ({value: valueDesired}) {
+        if (valueDesired === undefined) {
+            return;
+        }
+
         let props = this.getFieldProps(undefined, {overrideValue: true});
         if (props.value !== valueDesired) {
             props.onChange(valueDesired);
