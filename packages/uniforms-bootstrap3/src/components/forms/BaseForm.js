@@ -24,12 +24,17 @@ const Bootstrap3 = parent => class extends parent {
     }
 
     getNativeFormProps () {
-        const props = super.getNativeFormProps();
         const error = this.getChildContextError();
+        const {
+            className,
+            grid,
+
+            ...props
+        } = super.getNativeFormProps();
 
         return {
             ...props,
-            className: classnames('form', {error, 'form-horizontal': props.grid}, props.className)
+            className: classnames('form', {error, 'form-horizontal': grid}, className)
         };
     }
 };
