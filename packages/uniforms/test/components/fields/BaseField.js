@@ -334,69 +334,6 @@ describe('BaseField', () => {
 
             expect(wrapper.find('div').props()).to.have.property('value', 'D');
         });
-
-        it('have correct `value` (allowedValues)', () => {
-            const wrapper = mount(
-                <TestField name="e" />,
-                reactContext
-            );
-
-            expect(wrapper.find('div').props()).to.have.property('value', 'E');
-        });
-
-        it('have correct `value` (min)', () => {
-            const wrapper = mount(
-                <TestField name="f" />,
-                reactContext
-            );
-
-            expect(wrapper.find('div').props()).to.have.property('value', 42);
-        });
-
-        it('have correct `value` (max)', () => {
-            const wrapper = mount(
-                <TestField name="g" />,
-                reactContext
-            );
-
-            expect(wrapper.find('div').props()).to.have.property('value', 42);
-        });
-
-        it('have correct `value` (Number)', () => {
-            const wrapper = mount(
-                <TestField name="h" />,
-                reactContext
-            );
-
-            expect(wrapper.find('div').props()).to.have.property('value', 0);
-        });
-
-        it('have correct `value` (Date)', () => {
-            const wrapper = mount(
-                <TestField name="i" />,
-                reactContext
-            );
-
-            expect(wrapper.find('div').props()).to.have.property('value').that.is.instanceOf(Date);
-        });
-
-        it('have correct `value` (minCount)', () => {
-            const wrapper = mount(
-                <TestField name="j" />,
-                reactContext
-            );
-
-            expect(wrapper.find('div').props()).to.have.property('value').that.is.deep.equal(['', '', '']);
-        });
-
-        it('have correct `value` (initialCount)', () => {
-            const wrapper = mount(
-                <TestField name="k" initialCount={2} />,
-                reactContext
-            );
-
-            expect(wrapper.find('div').props()).to.have.property('value').that.is.deep.equal(['', '']);
-        });
     });
 
     context('when rerendered', () => {

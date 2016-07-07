@@ -122,19 +122,11 @@ export default class SimpleSchemaBridge extends Bridge {
             return [...Array(items)].map(() => item);
         }
 
-        return field.defaultValue
-            ? field.defaultValue
-            : field.allowedValues
-                ? field.allowedValues[0]
-                : field.type === Date || field.type === Number
-                    ? field.min !== undefined
-                        ? field.min
-                        : field.max !== undefined
-                            ? field.max
-                            : field.type === Number
-                                ? 0
-                                : new Date()
-                    : field.type();
+        if (field.type === Object) {
+            return {};
+        }
+
+        return field.defaultValue;
     }
 
     getProps (name, props) {

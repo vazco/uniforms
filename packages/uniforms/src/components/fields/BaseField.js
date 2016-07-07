@@ -128,6 +128,12 @@ export default class BaseField extends Component {
         let value = get(context.model, name);
         if (value === undefined && !explicitInitialValue) {
             value = context.schema.getInitialValue(name, this.props);
+
+            // This prevents (un)controlled input change warning.
+            // More info: https://fb.me/react-controlled-components.
+            if (value === undefined) {
+                value = '';
+            }
         } else if (explicitInitialValue) {
             props.initialValue = context.schema.getInitialValue(name, this.props);
         }

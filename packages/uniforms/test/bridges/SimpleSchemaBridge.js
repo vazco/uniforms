@@ -129,40 +129,12 @@ describe('Bridge', () => {
     });
 
     context('#getInitialValue', () => {
-        it('works with allowedValues', () => {
-            expect(bridge.getInitialValue('e')).to.be.equal('E');
-        });
-
         it('works with arrays', () => {
             expect(bridge.getInitialValue('k')).to.be.deep.equal([]);
         });
 
-        it('works with arrays (minCount)', () => {
-            expect(bridge.getInitialValue('j')).to.be.deep.equal(['', '', '']);
-        });
-
-        it('works with dates', () => {
-            expect(bridge.getInitialValue('i')).to.be.instanceof(Date);
-        });
-
-        it('works with numbers', () => {
-            expect(bridge.getInitialValue('h')).to.be.equal(0);
-        });
-
-        it('works with numbers (max)', () => {
-            expect(bridge.getInitialValue('g')).to.be.equal(42);
-        });
-
-        it('works with numbers (min)', () => {
-            expect(bridge.getInitialValue('f')).to.be.equal(42);
-        });
-
-        it('works with objects', () => {
-            expect(bridge.getInitialValue('a')).to.be.deep.equal({});
-        });
-
-        it('works with strings', () => {
-            expect(bridge.getInitialValue('a.b.c')).to.be.equal('');
+        it('works with defaultValue', () => {
+            expect(bridge.getInitialValue('d')).to.be.equal('D');
         });
     });
 
