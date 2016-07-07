@@ -166,8 +166,22 @@ export default class BaseForm extends Component {
     }
 
     getNativeFormProps () {
+        const {
+            autosave,    // eslint-disable-line no-unused-vars
+            disabled,    // eslint-disable-line no-unused-vars
+            error,       // eslint-disable-line no-unused-vars
+            label,       // eslint-disable-line no-unused-vars
+            model,       // eslint-disable-line no-unused-vars
+            onChange,    // eslint-disable-line no-unused-vars
+            onSubmit,    // eslint-disable-line no-unused-vars
+            placeholder, // eslint-disable-line no-unused-vars
+            schema,      // eslint-disable-line no-unused-vars
+
+            ...props
+        } = this.props;
+
         return {
-            ...this.props,
+            ...props,
 
             onChange () {},
             onSubmit: this.onSubmit,

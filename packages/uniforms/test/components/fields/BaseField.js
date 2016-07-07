@@ -5,13 +5,17 @@ import {spy}    from 'sinon';
 
 import {BaseField}          from 'uniforms';
 import {createSchemaBridge} from 'uniforms';
+import {nothing}            from 'uniforms';
 import {randomIds}          from 'uniforms';
 
 describe('BaseField', () => {
+    const PropsComponent = () => nothing;
+
     class TestField extends BaseField {
         render () {
             return (
-                <div {...this.getFieldProps()}>
+                <div>
+                    <PropsComponent {...this.getFieldProps()} />
                     {this.props.children}
                 </div>
             );
@@ -112,7 +116,7 @@ describe('BaseField', () => {
             reactContext
         );
 
-        const props = wrapper.find('div').last().props();
+        const props = wrapper.find(PropsComponent).last().props();
 
         it('calls `onChange` once', () => {
             props.onChange({b: 1});
@@ -143,7 +147,7 @@ describe('BaseField', () => {
             reactContext
         );
 
-        const props = wrapper.find('div').last().props();
+        const props = wrapper.find(PropsComponent).last().props();
 
         it('have correct `name`', () => {
             expect(props).to.have.property('name', 'a.b.c');
@@ -154,7 +158,7 @@ describe('BaseField', () => {
         });
 
         it('have unique `id`', () => {
-            expect(props).to.have.property('id').that.is.not.equal(wrapper.find('div').first().props().id);
+            expect(props).to.have.property('id').that.is.not.equal(wrapper.find(TestField).first().props().id);
         });
     });
 
@@ -164,7 +168,7 @@ describe('BaseField', () => {
             reactContext
         );
 
-        const props = wrapper.find('div').props();
+        const props = wrapper.find(PropsComponent).props();
 
         it('have correct `changed`', () => {
             expect(props).to.have.property('changed', false);
@@ -254,7 +258,7 @@ describe('BaseField', () => {
                 reactContext
             );
 
-            expect(wrapper.find('div').props()).to.have.property('id', 'x');
+            expect(wrapper.find(PropsComponent).props()).to.have.property('id', 'x');
         });
     });
 
@@ -265,7 +269,7 @@ describe('BaseField', () => {
                 reactContext
             );
 
-            expect(wrapper.find('div').props()).to.have.property('label', 'a');
+            expect(wrapper.find(PropsComponent).props()).to.have.property('label', 'a');
         });
 
         it('have correct `label` (falsy value)', () => {
@@ -274,7 +278,7 @@ describe('BaseField', () => {
                 reactContext
             );
 
-            expect(wrapper.find('div').props()).to.have.property('label', '');
+            expect(wrapper.find(PropsComponent).props()).to.have.property('label', '');
         });
 
         it('have correct `label` (null)', () => {
@@ -283,7 +287,7 @@ describe('BaseField', () => {
                 reactContext
             );
 
-            expect(wrapper.find('div').props()).to.have.property('label', null);
+            expect(wrapper.find(PropsComponent).props()).to.have.property('label', null);
         });
 
         it('have correct `label` (string)', () => {
@@ -292,7 +296,7 @@ describe('BaseField', () => {
                 reactContext
             );
 
-            expect(wrapper.find('div').props()).to.have.property('label', 'A');
+            expect(wrapper.find(PropsComponent).props()).to.have.property('label', 'A');
         });
     });
 
@@ -303,7 +307,7 @@ describe('BaseField', () => {
                 reactContext
             );
 
-            expect(wrapper.find('div').props()).to.have.property('placeholder', 'a');
+            expect(wrapper.find(PropsComponent).props()).to.have.property('placeholder', 'a');
         });
 
         it('have correct `placeholder` (falsy value)', () => {
@@ -312,7 +316,7 @@ describe('BaseField', () => {
                 reactContext
             );
 
-            expect(wrapper.find('div').props()).to.have.property('placeholder', '');
+            expect(wrapper.find(PropsComponent).props()).to.have.property('placeholder', '');
         });
 
         it('have correct `placeholder` (string)', () => {
@@ -321,7 +325,7 @@ describe('BaseField', () => {
                 reactContext
             );
 
-            expect(wrapper.find('div').props()).to.have.property('placeholder', 'A');
+            expect(wrapper.find(PropsComponent).props()).to.have.property('placeholder', 'A');
         });
     });
 
@@ -332,7 +336,7 @@ describe('BaseField', () => {
                 reactContext
             );
 
-            expect(wrapper.find('div').props()).to.have.property('value', 'D');
+            expect(wrapper.find(PropsComponent).props()).to.have.property('value', 'D');
         });
     });
 
@@ -343,12 +347,12 @@ describe('BaseField', () => {
                 reactContext
             );
 
-            const props1 = wrapper.find('div').props();
+            const props1 = wrapper.find(PropsComponent).props();
             expect(props1).to.have.property('id').that.is.an('string');
 
             wrapper.setProps({name: 'e'});
 
-            const props2 = wrapper.find('div').props();
+            const props2 = wrapper.find(PropsComponent).props();
             expect(props2).to.have.property('id', props1.id);
         });
     });

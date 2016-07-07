@@ -50,6 +50,18 @@ const Validated = parent => class extends parent {
         return super.getChildContextError() || this.state.error;
     }
 
+    getNativeFormProps () {
+        const {
+            onValidate, // eslint-disable-line no-unused-vars
+            validator,  // eslint-disable-line no-unused-vars
+            validate,   // eslint-disable-line no-unused-vars
+
+            ...props
+        } = super.getNativeFormProps();
+
+        return props;
+    }
+
     componentWillReceiveProps ({model, schema, validator}) {
         super.componentWillReceiveProps(...arguments);
 

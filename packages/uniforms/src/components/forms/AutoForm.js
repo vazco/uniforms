@@ -39,6 +39,16 @@ const Auto = parent => class extends parent {
         return this.state.modelSync;
     }
 
+    getNativeFormProps () {
+        const {
+            onChangeModel, // eslint-disable-line no-unused-vars
+
+            ...props
+        } = super.getNativeFormProps();
+
+        return props;
+    }
+
     getModel () {
         return this.state.model;
     }

@@ -25,6 +25,18 @@ const Quick = parent => class extends parent {
         this.getSubmitField = this.getSubmitField.bind(this);
     }
 
+    getNativeFormProps () {
+        const {
+            autoField,   // eslint-disable-line no-unused-vars
+            errorsField, // eslint-disable-line no-unused-vars
+            submitField, // eslint-disable-line no-unused-vars
+
+            ...props
+        } = super.getNativeFormProps();
+
+        return props;
+    }
+
     render () {
         let nativeFormProps = this.getNativeFormProps();
         if (nativeFormProps.children) {
