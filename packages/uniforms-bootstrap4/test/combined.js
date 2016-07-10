@@ -7,9 +7,10 @@ import {stub}   from 'sinon';
 import {AutoForm}      from 'uniforms-bootstrap4';
 import {ErrorField}    from 'uniforms-bootstrap4';
 import {HiddenField}   from 'uniforms-bootstrap4';
-import {SelectField}   from 'uniforms-bootstrap4';
+import {ListAddField}  from 'uniforms-bootstrap4';
 import {ListDelField}  from 'uniforms-bootstrap4';
 import {LongTextField} from 'uniforms-bootstrap4';
+import {SelectField}   from 'uniforms-bootstrap4';
 
 describe('Everything', () => {
     const validator = stub();
@@ -60,9 +61,9 @@ describe('Everything', () => {
         'x23':     {...base, id: 'x23',    __type__: String, type: 'password'},
         'x24':     {...base, id: 'x24',    __type__: Object, children: <p>x24</p>},
         'x25':     {...base, id: 'x25',    __type__: String, component: LongTextField},
-        'x26':     {...base, id: 'x26',    __type__: Array, minCount: 1, initialCount: 1, maxCount: 2},
+        'x26':     {...base, id: 'x27',    __type__: Array, initialCount: 1, children: <p>x27</p>},
         'x26.$':   {...base,               __type__: String},
-        'x27':     {...base, id: 'x27',    __type__: Array, initialCount: 1, children: <p>x27</p>},
+        'x27':     {...base, id: 'x26',    __type__: Array, minCount: 1, initialCount: 1, maxCount: 2},
         'x27.$':   {...base,               __type__: String},
         'x28':     {...base,               __type__: String, component: ErrorField},
         'x29':     {...base,               __type__: String, help: 'Help'},
@@ -214,21 +215,21 @@ describe('Everything', () => {
     });
 
     it('works (ListAddField, one)', () => {
-        expect(wrapper.find({initialCount: 1}).at(0).simulate('click')).to.be.ok;
-        expect(onChange.lastCall.calledWith('x26.0', '')).to.be.ok;
-        expect(onSubmit.lastCall.calledWithMatch({x26: ['']})).to.be.ok;
+        expect(wrapper.find(ListAddField).findWhere(x => x.props().onClick).last().simulate('click')).to.be.ok;
+        expect(onChange.lastCall.calledWith('x27.0', '')).to.be.ok;
+        expect(onSubmit.lastCall.calledWithMatch({x27: ['']})).to.be.ok;
     });
 
     it('works (ListAddField, two)', () => {
-        expect(wrapper.find({initialCount: 1}).at(0).simulate('click')).to.be.ok;
-        expect(onChange.lastCall.calledWith('x26.1', '')).to.be.ok;
-        expect(onSubmit.lastCall.calledWithMatch({x26: ['', '']})).to.be.ok;
+        expect(wrapper.find(ListAddField).findWhere(x => x.props().onClick).last().simulate('click')).to.be.ok;
+        expect(onChange.lastCall.calledWith('x27.1', '')).to.be.ok;
+        expect(onSubmit.lastCall.calledWithMatch({x27: ['', '']})).to.be.ok;
     });
 
     it('works (ListDelField)', () => {
         expect(wrapper.find(ListDelField).at(0).simulate('click')).to.be.ok;
-        expect(onChange.lastCall.calledWith('x26', [''])).to.be.ok;
-        expect(onSubmit.lastCall.calledWithMatch({x26: ['']})).to.be.ok;
+        expect(onChange.lastCall.calledWith('x27', [''])).to.be.ok;
+        expect(onSubmit.lastCall.calledWithMatch({x27: ['']})).to.be.ok;
     });
 
     it('works (SelectField, checkboxes, multiple, on)', () => {

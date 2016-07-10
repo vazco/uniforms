@@ -24,12 +24,17 @@ const Bootstrap4 = parent => class extends parent {
     }
 
     getNativeFormProps () {
-        const props = super.getNativeFormProps();
         const error = this.getChildContextError();
+        const {
+            className,
+            grid,      // eslint-disable-line no-unused-vars
+
+            ...props
+        } = super.getNativeFormProps();
 
         return {
             ...props,
-            className: classnames('form', {error}, props.className)
+            className: classnames('form', {error}, className)
         };
     }
 };

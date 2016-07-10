@@ -8,15 +8,30 @@ import ListAddField  from './ListAddField';
 import ListItemField from './ListItemField';
 
 const List = ({
+    changed,      // eslint-disable-line no-unused-vars
+    changedMap,   // eslint-disable-line no-unused-vars
     children,
     className,
+    disabled,     // eslint-disable-line no-unused-vars
+    error,        // eslint-disable-line no-unused-vars
+    errorMessage, // eslint-disable-line no-unused-vars
+    field,        // eslint-disable-line no-unused-vars
+    fieldType,    // eslint-disable-line no-unused-vars
+    fields,       // eslint-disable-line no-unused-vars
+    findError,    // eslint-disable-line no-unused-vars
+    findField,    // eslint-disable-line no-unused-vars
+    findValue,    // eslint-disable-line no-unused-vars
+    grid,         // eslint-disable-line no-unused-vars
+    id,           // eslint-disable-line no-unused-vars
     initialCount,
     itemProps,
     label,
+    maxCount,     // eslint-disable-line no-unused-vars
+    minCount,     // eslint-disable-line no-unused-vars
     name,
-// onChange shouldn't be passed to <section>
-// eslint-disable-next-line no-unused-vars
-    onChange,
+    onChange,     // eslint-disable-line no-unused-vars
+    parent,       // eslint-disable-line no-unused-vars
+    placeholder,  // eslint-disable-line no-unused-vars
     value,
     ...props
 }) =>
