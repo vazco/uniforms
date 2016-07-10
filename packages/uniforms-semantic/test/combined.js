@@ -22,7 +22,6 @@ describe('Everything', () => {
     const dateB = new Date(2005, 5, 5);
 
     const label         = 'label';
-    const inline        = true;
     const required      = true;
     const transform     = x => x;
     const checkboxes    = true;
@@ -49,8 +48,6 @@ describe('Everything', () => {
         'x17':     {...base, id: 'x17',    __type__: Number, allowedValues, transform},
         'x18':     {...base,               __type__: Number, allowedValues, checkboxes, transform},
         'x19':     {...base,               __type__: Array,  allowedValues, checkboxes, transform},
-        'x20':     {...base,               __type__: Array,  allowedValues, checkboxes, transform, inline},
-        'x21':     {...base,               __type__: Number, allowedValues, checkboxes, transform, inline},
         'x22':     {...base, id: 'x22',    __type__: Number, decimal: true},
         'x23':     {...base, id: 'x23',    __type__: String, type: 'password'},
         'x24':     {...base, id: 'x24',    __type__: Object, children: <p>x24</p>},
