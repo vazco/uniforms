@@ -10,8 +10,7 @@ import TextField   from './TextField';
 import RadioField  from './RadioField';
 import SelectField from './SelectField';
 
-const Auto = props => {
-    let component = props.component;
+const Auto = ({component, ...props}) => {
     if (component === undefined) {
         if (props.allowedValues) {
             if (props.checkboxes && props.fieldType !== Array) {
