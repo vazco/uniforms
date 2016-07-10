@@ -4,13 +4,25 @@ import {connectField} from 'uniforms';
 
 const Radio = ({
     allowedValues,
+    changed,       // eslint-disable-line no-unused-vars
+    changedMap,    // eslint-disable-line no-unused-vars
+    checkboxes,    // eslint-disable-line no-unused-vars
     className,
     disabled,
     error,
+    errorMessage,  // eslint-disable-line no-unused-vars
+    field,         // eslint-disable-line no-unused-vars
+    fieldType,     // eslint-disable-line no-unused-vars
+    fields,        // eslint-disable-line no-unused-vars
+    findError,     // eslint-disable-line no-unused-vars
+    findField,     // eslint-disable-line no-unused-vars
+    findValue,     // eslint-disable-line no-unused-vars
     id,
     label,
     name,
     onChange,
+    parent,        // eslint-disable-line no-unused-vars
+    placeholder,   // eslint-disable-line no-unused-vars
     required,
     transform,
     value,

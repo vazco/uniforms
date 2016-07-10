@@ -7,9 +7,10 @@ import {stub}   from 'sinon';
 import {AutoForm}      from 'uniforms-semantic';
 import {ErrorField}    from 'uniforms-semantic';
 import {HiddenField}   from 'uniforms-semantic';
-import {SelectField}   from 'uniforms-semantic';
+import {ListAddField}  from 'uniforms-semantic';
 import {ListDelField}  from 'uniforms-semantic';
 import {LongTextField} from 'uniforms-semantic';
+import {SelectField}   from 'uniforms-semantic';
 
 describe('Everything', () => {
     const validator = stub();
@@ -36,17 +37,11 @@ describe('Everything', () => {
         'x04.$':   {...base,               __type__: Number},
         'x05':     {...base, id: 'x05',    __type__: Date},
         'x06':     {...base, id: 'x06',    __type__: Boolean},
-        'x07':     {...base, id: 'x07',    __type__: Boolean, inline: true},
         'x08':     {...base, id: 'x08',    __type__: Object, subfields: ['y01', 'y02']},
         'x08.y01': {...base, id: 'x08y01', __type__: String},
         'x08.y02': {...base, id: 'x08y02', __type__: Number},
         'x09':     {...base, id: 'x09',    __type__: Array},
         'x09.$':   {...base,               __type__: String},
-        'x10':     {...base, id: 'x10',    __type__: String, grid: ''},
-        'x11':     {...base, id: 'x11',    __type__: String, grid: 1},
-        'x12':     {...base, id: 'x12',    __type__: String, grid: '1'},
-        'x13':     {...base, id: 'x13',    __type__: String, grid: 'col-sm-1'},
-        'x14':     {...base, id: 'x14',    __type__: String, grid: {xs: 6, sm: 4}},
         'x15':     {...base, id: 'x15',    __type__: Array, minCount: 3},
         'x15.$':   {...base,               __type__: String},
         'x16':     {...base, id: 'x16',    __type__: Array, maxCount: 3},
@@ -60,13 +55,11 @@ describe('Everything', () => {
         'x23':     {...base, id: 'x23',    __type__: String, type: 'password'},
         'x24':     {...base, id: 'x24',    __type__: Object, children: <p>x24</p>},
         'x25':     {...base, id: 'x25',    __type__: String, component: LongTextField},
-        'x26':     {...base, id: 'x26',    __type__: Array, minCount: 1, initialCount: 1, maxCount: 2},
+        'x26':     {...base, id: 'x27',    __type__: Array, initialCount: 1, children: <p>x27</p>},
         'x26.$':   {...base,               __type__: String},
-        'x27':     {...base, id: 'x27',    __type__: Array, initialCount: 1, children: <p>x27</p>},
+        'x27':     {...base, id: 'x26',    __type__: Array, minCount: 1, initialCount: 1, maxCount: 2},
         'x27.$':   {...base,               __type__: String},
         'x28':     {...base,               __type__: String, component: ErrorField},
-        'x29':     {...base,               __type__: String, help: 'Help'},
-        'x30':     {...base,               __type__: String, help: 'Help', helpClassName: 'help'},
         'x31':     {...base,               __type__: String, allowedValues, checkboxes, component: SelectField},
         'x32':     {...base, id: 'x32',    __type__: String, component: HiddenField},
         'x33':     {...base, id: 'x33',    __type__: String, component: HiddenField, value: undefined}
@@ -214,21 +207,21 @@ describe('Everything', () => {
     });
 
     it('works (ListAddField, one)', () => {
-        expect(wrapper.find({initialCount: 1}).at(0).simulate('click')).to.be.ok;
-        expect(onChange.lastCall.calledWith('x26.0', '')).to.be.ok;
-        expect(onSubmit.lastCall.calledWithMatch({x26: ['']})).to.be.ok;
+        expect(wrapper.find(ListAddField).findWhere(x => x.props().onClick).last().simulate('click')).to.be.ok;
+        expect(onChange.lastCall.calledWith('x27.0', '')).to.be.ok;
+        expect(onSubmit.lastCall.calledWithMatch({x27: ['']})).to.be.ok;
     });
 
     it('works (ListAddField, two)', () => {
-        expect(wrapper.find({initialCount: 1}).at(0).simulate('click')).to.be.ok;
-        expect(onChange.lastCall.calledWith('x26.1', '')).to.be.ok;
-        expect(onSubmit.lastCall.calledWithMatch({x26: ['', '']})).to.be.ok;
+        expect(wrapper.find(ListAddField).findWhere(x => x.props().onClick).last().simulate('click')).to.be.ok;
+        expect(onChange.lastCall.calledWith('x27.1', '')).to.be.ok;
+        expect(onSubmit.lastCall.calledWithMatch({x27: ['', '']})).to.be.ok;
     });
 
     it('works (ListDelField)', () => {
         expect(wrapper.find(ListDelField).at(0).simulate('click')).to.be.ok;
-        expect(onChange.lastCall.calledWith('x26', [''])).to.be.ok;
-        expect(onSubmit.lastCall.calledWithMatch({x26: ['']})).to.be.ok;
+        expect(onChange.lastCall.calledWith('x27', [''])).to.be.ok;
+        expect(onSubmit.lastCall.calledWithMatch({x27: ['']})).to.be.ok;
     });
 
     it('works (SelectField, checkboxes, multiple, on)', () => {
@@ -272,7 +265,6 @@ describe('Everything', () => {
     });
 
     it('works (rest)', () => {
-        wrapper.setProps({grid:  10});
         wrapper.setProps({error: {}});
         wrapper.setProps({model: {x09: ['', '', '']}});
 
