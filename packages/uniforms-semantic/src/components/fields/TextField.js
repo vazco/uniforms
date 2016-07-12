@@ -15,6 +15,8 @@ const Text = ({
     findError,    // eslint-disable-line no-unused-vars
     findField,    // eslint-disable-line no-unused-vars
     findValue,    // eslint-disable-line no-unused-vars
+    icon,
+    iconLeft,
     id,
     label,
     name,
@@ -26,7 +28,17 @@ const Text = ({
     value,
     ...props
 }) =>
-    <section className={classnames(className, {disabled, error, required}, 'field')} {...props}>
+    <section
+        className={classnames(className, {
+            ui: icon || iconLeft,
+            disabled,
+            error,
+            required,
+            left: iconLeft,
+            'icon input': icon || iconLeft
+        }, 'field')}
+        {...props}
+    >
         {label && (
             <label htmlFor={id}>
                 {label}
@@ -42,6 +54,10 @@ const Text = ({
             type={type || 'text'}
             value={value}
         />
+
+        {(icon || iconLeft) && (
+            <i className={`${icon || iconLeft} icon`} />
+        )}
     </section>
 ;
 
