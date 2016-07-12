@@ -16,6 +16,9 @@ export default class BaseForm extends Component {
         model: {},
         label: true,
 
+        autosave: false,
+        autosaveDelay: 0,
+
         noValidate: true
     };
 
@@ -28,9 +31,11 @@ export default class BaseForm extends Component {
         onSubmit: PropTypes.func,
 
         label:       PropTypes.bool,
-        autosave:    PropTypes.bool,
         disabled:    PropTypes.bool,
-        placeholder: PropTypes.bool
+        placeholder: PropTypes.bool,
+
+        autosave:      PropTypes.bool,
+        autosaveDelay: PropTypes.number
     };
 
     static childContextTypes = {
@@ -78,6 +83,7 @@ export default class BaseForm extends Component {
             resetCount: 0
         };
 
+        this.delayId  = null;
         this.randomId = randomIds(this.props.id);
 
         this.onReset  = this.reset  = this.onReset.bind(this);
@@ -167,15 +173,16 @@ export default class BaseForm extends Component {
 
     getNativeFormProps () {
         const {
-            autosave,    // eslint-disable-line no-unused-vars
-            disabled,    // eslint-disable-line no-unused-vars
-            error,       // eslint-disable-line no-unused-vars
-            label,       // eslint-disable-line no-unused-vars
-            model,       // eslint-disable-line no-unused-vars
-            onChange,    // eslint-disable-line no-unused-vars
-            onSubmit,    // eslint-disable-line no-unused-vars
-            placeholder, // eslint-disable-line no-unused-vars
-            schema,      // eslint-disable-line no-unused-vars
+            autosave,      // eslint-disable-line no-unused-vars
+            autosaveDelay, // eslint-disable-line no-unused-vars
+            disabled,      // eslint-disable-line no-unused-vars
+            error,         // eslint-disable-line no-unused-vars
+            label,         // eslint-disable-line no-unused-vars
+            model,         // eslint-disable-line no-unused-vars
+            onChange,      // eslint-disable-line no-unused-vars
+            onSubmit,      // eslint-disable-line no-unused-vars
+            placeholder,   // eslint-disable-line no-unused-vars
+            schema,        // eslint-disable-line no-unused-vars
 
             ...props
         } = this.props;
@@ -208,7 +215,16 @@ export default class BaseForm extends Component {
 
         // Do not call `onSubmit` before componentDidMount
         if (this.state.changed !== null && this.props.autosave) {
-            this.onSubmit();
+            if (this.delayId) {
+                clearTimeout(this.delayId);
+                this.delayId = null;
+            }
+
+            if (this.props.autosaveDelay > 0) {
+                this.delayId = setTimeout(this.onSubmit, this.props.autosaveDelay);
+            } else {
+                this.onSubmit();
+            }
         }
     }
 
