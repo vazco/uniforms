@@ -49,7 +49,7 @@ const Text = ({
             />
 
             {(icon || iconLeft) && (
-                <i className={`${icon || iconLeft} icon`} {...(iconProps || {})} />
+                <i className={`${icon || iconLeft} icon`} {...iconProps} />
             )}
         </section>
     </section>
