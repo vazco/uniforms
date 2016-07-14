@@ -1,4 +1,5 @@
 import get         from 'lodash.get';
+import isEqual     from 'lodash.isequal';
 import {Component} from 'react';
 import {PropTypes} from 'react';
 
@@ -32,6 +33,40 @@ export default class BaseField extends Component {
         this.getChildContextState    = this.getChildContextState.bind(this);
         this.getChildContextSchema   = this.getChildContextSchema.bind(this);
         this.getChildContextOnChange = this.getChildContextOnChange.bind(this);
+    }
+
+    shouldComponentUpdate (nextProps, nextState, {uniforms: nextContext}) {
+        const prevProps   = this.props;
+        const prevContext = this.context.uniforms;
+
+        if (!isEqual(prevProps.value, nextProps.value)) {
+            return true;
+        }
+
+        const prevName = joinName(prevContext.name, prevProps.name);
+        const nextName = joinName(nextContext.name, nextProps.name);
+
+        if (prevName !== nextName) {
+            return true;
+        }
+
+        if (nextName.indexOf('.') !== -1) {
+            const prevParentValue = get(prevContext.model, prevName.replace(/(.+)\..+$/, '$1'));
+            const nextParentValue = get(nextContext.model, nextName.replace(/(.+)\..+$/, '$1'));
+
+            if (Array.isArray(nextParentValue) && !isEqual(prevParentValue, nextParentValue)) {
+                return true;
+            }
+        }
+
+        const prevValue = get(prevContext.model, prevName);
+        const nextValue = get(nextContext.model, nextName);
+
+        if (!isEqual(prevValue, nextValue)) {
+            return true;
+        }
+
+        return false;
     }
 
     getChildContext () {
