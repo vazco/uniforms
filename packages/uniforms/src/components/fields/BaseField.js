@@ -66,6 +66,15 @@ export default class BaseField extends Component {
             return true;
         }
 
+        if (prevContext.error !== nextContext.error) {
+            const prevError = prevContext.error && prevContext.schema.getError(prevName, prevContext.error);
+            const nextError = nextContext.error && nextContext.schema.getError(nextName, nextContext.error);
+
+            if (!isEqual(prevError, nextError)) {
+                return true;
+            }
+        }
+
         return false;
     }
 
