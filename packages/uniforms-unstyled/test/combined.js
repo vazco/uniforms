@@ -265,7 +265,7 @@ describe('Everything', () => {
         wrapper.setProps({error: {}});
         wrapper.setProps({model: {x09: ['', '', '']}});
 
-        schema.x34 = {__type__: () => {}};
+        schema.x00 = {__type__: () => {}};
 
         expect(() => wrapper.update()).to.throw(/Unsupported field type/);
     });
