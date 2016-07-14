@@ -37,7 +37,6 @@ const Text = ({
         )}
 
         <section className={classnames('ui', {left: iconLeft, icon: icon || iconLeft}, 'input')}>
-
             <input
                 disabled={disabled}
                 id={id}
