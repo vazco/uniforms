@@ -16,6 +16,9 @@ const Num = ({
     findError,    // eslint-disable-line no-unused-vars
     findField,    // eslint-disable-line no-unused-vars
     findValue,    // eslint-disable-line no-unused-vars
+    icon,
+    iconLeft,
+    iconProps,
     id,
     label,
     max,
@@ -35,18 +38,24 @@ const Num = ({
             </label>
         )}
 
-        <input
-            disabled={disabled}
-            id={id}
-            max={max}
-            min={min}
-            name={name}
-            onChange={event => onChange((decimal ? parseFloat : parseInt)(event.target.value) || undefined)}
-            placeholder={placeholder}
-            step={decimal ? 0.01 : 1}
-            type="number"
-            value={value === undefined ? null : value}
-        />
+        <section className={classnames('ui', {left: iconLeft, icon: icon || iconLeft}, 'input')}>
+            <input
+                disabled={disabled}
+                id={id}
+                max={max}
+                min={min}
+                name={name}
+                onChange={event => onChange((decimal ? parseFloat : parseInt)(event.target.value) || undefined)}
+                placeholder={placeholder}
+                step={decimal ? 0.01 : 1}
+                type="number"
+                value={value === undefined ? null : value}
+            />
+
+            {(icon || iconLeft) && (
+                <i className={`${icon || iconLeft} icon`} {...iconProps} />
+            )}
+        </section>
     </section>
 ;
 

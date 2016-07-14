@@ -23,6 +23,9 @@ const Date_ = ({
     findError,    // eslint-disable-line no-unused-vars
     findField,    // eslint-disable-line no-unused-vars
     findValue,    // eslint-disable-line no-unused-vars
+    icon,
+    iconLeft,
+    iconProps,
     id,
     label,
     max,
@@ -42,16 +45,22 @@ const Date_ = ({
             </label>
         )}
 
-        <input
-            disabled={disabled}
-            id={id}
-            max={dateFormat(max)}
-            min={dateFormat(min)}
-            name={name}
-            onChange={event => dateParse(event.target.valueAsNumber, onChange)}
-            type="datetime-local"
-            value={dateFormat(value)}
-        />
+        <section className={classnames('ui', {left: iconLeft, icon: icon || iconLeft}, 'input')}>
+            <input
+                disabled={disabled}
+                id={id}
+                max={dateFormat(max)}
+                min={dateFormat(min)}
+                name={name}
+                onChange={event => dateParse(event.target.valueAsNumber, onChange)}
+                type="datetime-local"
+                value={dateFormat(value)}
+            />
+
+            {(icon || iconLeft) && (
+                <i className={`${icon || iconLeft} icon`} {...iconProps} />
+            )}
+        </section>
     </section>
 ;
 

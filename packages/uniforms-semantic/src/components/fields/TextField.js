@@ -15,6 +15,9 @@ const Text = ({
     findError,    // eslint-disable-line no-unused-vars
     findField,    // eslint-disable-line no-unused-vars
     findValue,    // eslint-disable-line no-unused-vars
+    icon,
+    iconLeft,
+    iconProps,
     id,
     label,
     name,
@@ -33,15 +36,21 @@ const Text = ({
             </label>
         )}
 
-        <input
-            disabled={disabled}
-            id={id}
-            name={name}
-            onChange={event => onChange(event.target.value)}
-            placeholder={placeholder}
-            type={type || 'text'}
-            value={value}
-        />
+        <section className={classnames('ui', {left: iconLeft, icon: icon || iconLeft}, 'input')}>
+            <input
+                disabled={disabled}
+                id={id}
+                name={name}
+                onChange={event => onChange(event.target.value)}
+                placeholder={placeholder}
+                type={type || 'text'}
+                value={value}
+            />
+
+            {(icon || iconLeft) && (
+                <i className={`${icon || iconLeft} icon`} {...iconProps} />
+            )}
+        </section>
     </section>
 ;
 

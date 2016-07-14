@@ -59,7 +59,13 @@ describe('Everything', () => {
         'x28':     {...base,               __type__: String, component: ErrorField},
         'x31':     {...base,               __type__: String, allowedValues, checkboxes, component: SelectField},
         'x32':     {...base, id: 'x32',    __type__: String, component: HiddenField},
-        'x33':     {...base, id: 'x33',    __type__: String, component: HiddenField, value: undefined}
+        'x33':     {...base, id: 'x33',    __type__: String, component: HiddenField, value: undefined},
+        'x34':     {...base, id: 'x34',    __type__: String, icon: 'user'},
+        'x35':     {...base, id: 'x35',    __type__: String, iconLeft: 'user'},
+        'x36':     {...base, id: 'x36',    __type__: Date, icon: 'user'},
+        'x37':     {...base, id: 'x37',    __type__: Date, iconLeft: 'user'},
+        'x38':     {...base, id: 'x38',    __type__: Number, icon: 'user'},
+        'x39':     {...base, id: 'x39',    __type__: Number, iconLeft: 'user'}
     };
 
     const bridge = {
