@@ -24,7 +24,7 @@
     "src/"
   ],
   "scripts": {
-    "build": "babel --out-dir lib src",
+    "build": "babel --compact --out-dir lib src",
     "clean": "rimraf coverage lib .nyc_output",
     "cover": "cross-env NODE_ENV=test nyc npm test",
     "lint": "eslint src test",

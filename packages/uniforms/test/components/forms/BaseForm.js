@@ -137,6 +137,45 @@ describe('BaseForm', () => {
             expect(onSubmit.calledWith(model)).to.be.ok;
         });
 
+        it('autosaves are not delayed', () => {
+            wrapper.instance().getChildContext().uniforms.onChange('a', 1);
+            wrapper.instance().getChildContext().uniforms.onChange('a', 2);
+            wrapper.instance().getChildContext().uniforms.onChange('a', 3);
+
+            expect(onSubmit.calledThrice).to.be.ok;
+            expect(onSubmit.calledWith(model)).to.be.ok;
+        });
+
+        it('autosaves can be delayed', async () => {
+            wrapper.setProps({autosaveDelay: 10});
+            wrapper.instance().getChildContext().uniforms.onChange('a', 1);
+            wrapper.instance().getChildContext().uniforms.onChange('a', 2);
+            wrapper.instance().getChildContext().uniforms.onChange('a', 3);
+
+            await new Promise(resolve => setTimeout(resolve, 25));
+
+            expect(onSubmit.calledOnce).to.be.ok;
+            expect(onSubmit.calledWith(model)).to.be.ok;
+        });
+
+        it('autosaves can be delayed (longer)', async () => {
+            wrapper.setProps({autosaveDelay: 10});
+            wrapper.instance().getChildContext().uniforms.onChange('a', 1);
+            wrapper.instance().getChildContext().uniforms.onChange('a', 2);
+            wrapper.instance().getChildContext().uniforms.onChange('a', 3);
+
+            await new Promise(resolve => setTimeout(resolve, 25));
+
+            wrapper.instance().getChildContext().uniforms.onChange('a', 1);
+            wrapper.instance().getChildContext().uniforms.onChange('a', 2);
+            wrapper.instance().getChildContext().uniforms.onChange('a', 3);
+
+            await new Promise(resolve => setTimeout(resolve, 25));
+
+            expect(onSubmit.calledTwice).to.be.ok;
+            expect(onSubmit.calledWith(model)).to.be.ok;
+        });
+
         it('autosaves correctly (`autosave` = false)', () => {
             wrapper.setProps({autosave: false});
             wrapper.instance().getChildContext().uniforms.onChange('a', 1);

@@ -15,7 +15,7 @@ const ListItem = props =>
         {props.children ? (
             Children.map(props.children, child =>
                 React.cloneElement(child, {
-                    className: 'col-xs-1',
+                    className: 'col-xs-11',
                     name: joinName(props.name, child.props.name),
                     label: null
                 })

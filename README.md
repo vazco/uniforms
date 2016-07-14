@@ -330,6 +330,8 @@ Every prop can be overridden, but `label`, `placeholder` and `disabled` have spe
 
 ![](README.png)
 
+**Note:** This image can be a little outdated - there could be more props.
+
 <br />
 
 | Component            | Generated? | Validated? | Self-managed? |
