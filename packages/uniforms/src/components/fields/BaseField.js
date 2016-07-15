@@ -39,7 +39,7 @@ export default class BaseField extends Component {
         const prevProps   = this.props;
         const prevContext = this.context.uniforms;
 
-        if (!isEqual(prevProps.value, nextProps.value)) {
+        if (!isEqual(prevProps, nextProps)) {
             return true;
         }
 
@@ -127,9 +127,23 @@ export default class BaseField extends Component {
         return this.context.uniforms.onChange;
     }
 
-    // eslint-disable-next-line complexity
-    getFieldProps (name, {explicitInitialValue = false, overrideValue = false, includeParent = false} = {}) {
+    // eslint-disable-next-line complexity, max-len
+    getFieldProps (name, {explicitInitialValue = false, overrideValue = false, includeParent = false, onlyDescriptor = false} = {}) {
         const context = this.context.uniforms;
+
+        if (onlyDescriptor) {
+            const props = this.props;
+            const name = joinName(context.name, this.props.name);
+            const schemaProps = context.schema.getProps(name, props);
+
+            return {
+                fieldType: context.schema.getType(name),
+
+                ...props,
+                ...schemaProps
+            };
+        }
+
         const props = {
             ...this.getChildContextState(),
             ...this.props
