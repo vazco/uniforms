@@ -29,7 +29,7 @@ const Date_ = ({
     name,
     onChange,
     parent,       // eslint-disable-line no-unused-vars
-    placeholder,  // eslint-disable-line no-unused-vars
+    placeholder,
     required,     // eslint-disable-line no-unused-vars
     value,
     ...props
@@ -48,6 +48,7 @@ const Date_ = ({
             min={dateFormat(min)}
             name={name}
             onChange={event => dateParse(event.target.valueAsNumber, onChange)}
+            placeholder={placeholder}
             ref={inputRef}
             type="datetime-local"
             value={dateFormat(value)}

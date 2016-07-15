@@ -22,6 +22,7 @@ const Date_ = props =>
             min={dateFormat(props.min)}
             name={props.name}
             onChange={event => dateParse(event.target.valueAsNumber, props.onChange)}
+            placeholder={props.placeholder}
             ref={props.inputRef}
             type="datetime-local"
             value={dateFormat(props.value)}
