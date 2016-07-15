@@ -2,11 +2,11 @@
   "private": true,
   "devDependencies": {
     "babel-cli": "^6.10.1",
-    "coveralls": "^2.11.9",
-    "cross-env": "^1.0.8",
-    "lerna": "2.0.0-beta.22",
+    "coveralls": "^2.11.11",
+    "cross-env": "^2.0.0",
+    "lerna": "2.0.0-beta.24",
     "nyc": "^7.0.0",
-    "rimraf": "^2.5.2"
+    "rimraf": "^2.5.3"
   },
   "scripts": {
     "build": "lerna --concurrency 1 run build",
