@@ -2,8 +2,8 @@
   "name": "docs",
   "private": true,
   "dependencies": {
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1",
     "react-frame-component": "^0.6.1",
     "react-mounter": "^1.2.0",
     "uniforms": "../packages/uniforms",
