@@ -19,6 +19,7 @@ const Text = ({
     iconLeft,
     iconProps,
     id,
+    inputRef,
     label,
     name,
     onChange,
@@ -43,6 +44,7 @@ const Text = ({
                 name={name}
                 onChange={event => onChange(event.target.value)}
                 placeholder={placeholder}
+                ref={inputRef}
                 type={type || 'text'}
                 value={value}
             />

@@ -7,6 +7,7 @@ import gridClassName from '../../lib/gridClassName';
 const SubmitField = ({
     className,
     inputClassName = 'btn btn-primary',
+    inputRef,
     value,
     wrapClassName,
     ...props
@@ -20,10 +21,22 @@ const SubmitField = ({
 
         {(grid || wrapClassName) ? (
             <section className={classnames(wrapClassName, gridClassName(grid, 'input'))}>
-                <input className={inputClassName} disabled={!!(error || disabled)} value={value} type="submit" />
+                <input
+                    className={inputClassName}
+                    disabled={!!(error || disabled)}
+                    ref={inputRef}
+                    type="submit"
+                    value={value}
+                />
             </section>
         ) : (
-            <input className={inputClassName} disabled={!!(error || disabled)} value={value} type="submit" />
+            <input
+                className={inputClassName}
+                disabled={!!(error || disabled)}
+                ref={inputRef}
+                type="submit"
+                value={value}
+            />
         )}
     </section>
 ;

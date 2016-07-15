@@ -29,12 +29,13 @@ const renderCheckboxes = ({allowedValues, disabled, fieldType, id, name, onChang
     )
 ;
 
-const renderSelect = ({allowedValues, disabled, id, name, onChange, placeholder, transform, value}) =>
+const renderSelect = ({allowedValues, disabled, id, inputRef, name, onChange, placeholder, transform, value}) =>
     <select
         disabled={disabled}
         id={id}
         name={name}
         onChange={event => onChange(event.target.value)}
+        ref={inputRef}
         value={value}
     >
         {!!placeholder && (
@@ -66,6 +67,7 @@ const Select = ({
     findField,     // eslint-disable-line no-unused-vars
     findValue,     // eslint-disable-line no-unused-vars
     id,
+    inputRef,
     label,
     name,
     onChange,
@@ -85,7 +87,7 @@ const Select = ({
 
         {checkboxes || fieldType === Array
             ? renderCheckboxes({allowedValues, disabled, id, name, onChange, transform, value, fieldType})
-            : renderSelect    ({allowedValues, disabled, id, name, onChange, transform, value, placeholder})
+            : renderSelect    ({allowedValues, disabled, id, name, onChange, transform, value, placeholder, inputRef})
         }
     </section>
 ;

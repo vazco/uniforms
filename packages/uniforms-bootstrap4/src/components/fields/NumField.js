@@ -15,6 +15,7 @@ const Num = props =>
             name={props.name}
             onChange={event => props.onChange((props.decimal ? parseFloat : parseInt)(event.target.value) || undefined)}
             placeholder={props.placeholder}
+            ref={props.inputRef}
             step={props.decimal ? 0.01 : 1}
             type="number"
             value={props.value === undefined ? null : props.value}

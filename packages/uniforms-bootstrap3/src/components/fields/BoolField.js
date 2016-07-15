@@ -14,6 +14,7 @@ const Bool = ({label, labelBefore, ...props}) =>
                     id={props.id}
                     name={props.name}
                     onChange={() => props.onChange(!props.value)}
+                    ref={props.inputRef}
                     type="checkbox"
                 />
                 &nbsp;

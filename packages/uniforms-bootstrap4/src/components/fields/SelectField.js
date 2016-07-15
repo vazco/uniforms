@@ -38,6 +38,7 @@ const renderSelect = props =>
         id={props.id}
         name={props.name}
         onChange={event => props.onChange(event.target.value)}
+        ref={props.inputRef}
         value={props.value}
     >
         {!!props.placeholder && (

@@ -22,6 +22,7 @@ const Date_ = ({
     findField,    // eslint-disable-line no-unused-vars
     findValue,    // eslint-disable-line no-unused-vars
     id,
+    inputRef,
     label,
     max,
     min,
@@ -47,6 +48,7 @@ const Date_ = ({
             min={dateFormat(min)}
             name={name}
             onChange={event => dateParse(event.target.valueAsNumber, onChange)}
+            ref={inputRef}
             type="datetime-local"
             value={dateFormat(value)}
         />

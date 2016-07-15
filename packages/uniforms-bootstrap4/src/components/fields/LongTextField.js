@@ -13,6 +13,7 @@ const LongText = props =>
             name={props.name}
             onChange={event => props.onChange(event.target.value)}
             placeholder={props.placeholder}
+            ref={props.inputRef}
             value={props.value}
         />
     </FormGroup>

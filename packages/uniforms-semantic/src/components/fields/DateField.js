@@ -27,6 +27,7 @@ const Date_ = ({
     iconLeft,
     iconProps,
     id,
+    inputRef,
     label,
     max,
     min,
@@ -53,6 +54,7 @@ const Date_ = ({
                 min={dateFormat(min)}
                 name={name}
                 onChange={event => dateParse(event.target.valueAsNumber, onChange)}
+                ref={inputRef}
                 type="datetime-local"
                 value={dateFormat(value)}
             />

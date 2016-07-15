@@ -14,6 +14,7 @@ const Text = ({
     findField,    // eslint-disable-line no-unused-vars
     findValue,    // eslint-disable-line no-unused-vars
     id,
+    inputRef,
     label,
     name,
     onChange,
@@ -37,6 +38,7 @@ const Text = ({
             name={name}
             onChange={event => onChange(event.target.value)}
             placeholder={placeholder}
+            ref={inputRef}
             type={type || 'text'}
             value={value}
         />

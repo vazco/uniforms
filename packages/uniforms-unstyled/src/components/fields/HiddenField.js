@@ -23,6 +23,7 @@ export default class HiddenField extends BaseField {
                     disabled={props.disabled}
                     id={props.id}
                     name={props.name}
+                    ref={props.inputRef}
                     type="hidden"
                     value={props.value}
                 />

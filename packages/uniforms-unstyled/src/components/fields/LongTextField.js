@@ -14,6 +14,7 @@ const LongText = ({
     findField,    // eslint-disable-line no-unused-vars
     findValue,    // eslint-disable-line no-unused-vars
     id,
+    inputRef,
     label,
     name,
     onChange,
@@ -36,6 +37,7 @@ const LongText = ({
             name={name}
             onChange={event => onChange(event.target.value)}
             placeholder={placeholder}
+            ref={inputRef}
             value={value}
         />
     </section>

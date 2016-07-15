@@ -13,6 +13,7 @@ const Text = props =>
             name={props.name}
             onChange={event => props.onChange(event.target.value)}
             placeholder={props.placeholder}
+            ref={props.inputRef}
             type={props.type || 'text'}
             value={props.value}
         />

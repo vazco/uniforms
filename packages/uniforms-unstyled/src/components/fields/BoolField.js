@@ -14,6 +14,7 @@ const Bool = ({
     findField,    // eslint-disable-line no-unused-vars
     findValue,    // eslint-disable-line no-unused-vars
     id,
+    inputRef,
     label,
     name,
     onChange,
@@ -30,6 +31,7 @@ const Bool = ({
             id={id}
             name={name}
             onChange={() => disabled || onChange(!value)}
+            ref={inputRef}
             type="checkbox"
         />
 
