@@ -8,8 +8,7 @@ export default function connectField (component, {
 
     initialValue   = true,
     includeParent  = false,
-    includeInChain = true,
-    onlyDescriptor = false
+    includeInChain = true
 } = {}) {
     return class extends baseField {
         static displayName = `${baseField.displayName || baseField.name}(${component.displayName || component.name})`;
@@ -19,7 +18,7 @@ export default function connectField (component, {
         }
 
         render () {
-            return createElement(component, mapProps(this.getFieldProps(undefined, {includeParent, onlyDescriptor})));
+            return createElement(component, mapProps(this.getFieldProps(undefined, {includeParent})));
         }
 
         componentWillMount () {

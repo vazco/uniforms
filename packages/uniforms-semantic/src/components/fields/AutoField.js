@@ -35,4 +35,4 @@ const Auto = ({component, ...props}) => {
     return createElement(component, props);
 };
 
-export default connectField(Auto, {includeInChain: false, onlyDescriptor: true});
+export default connectField(Auto, {includeInChain: false});

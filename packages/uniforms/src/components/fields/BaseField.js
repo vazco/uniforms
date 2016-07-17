@@ -25,6 +25,10 @@ export default class BaseField extends Component {
 
         this.randomId = this.context.uniforms.randomId();
 
+        this.findValue = this.findValue.bind(this);
+        this.findField = this.findField.bind(this);
+        this.findError = this.findError.bind(this);
+
         this.getFieldProps = this.getFieldProps.bind(this);
 
         this.getChildContextName     = this.getChildContextName.bind(this);
@@ -127,23 +131,9 @@ export default class BaseField extends Component {
         return this.context.uniforms.onChange;
     }
 
-    // eslint-disable-next-line complexity, max-len
-    getFieldProps (name, {explicitInitialValue = false, overrideValue = false, includeParent = false, onlyDescriptor = false} = {}) {
+    // eslint-disable-next-line complexity
+    getFieldProps (name, {explicitInitialValue = false, overrideValue = false, includeParent = false} = {}) {
         const context = this.context.uniforms;
-
-        if (onlyDescriptor) {
-            const props = this.props;
-            const name = joinName(context.name, this.props.name);
-            const schemaProps = context.schema.getProps(name, props);
-
-            return {
-                fieldType: context.schema.getType(name),
-
-                ...props,
-                ...schemaProps
-            };
-        }
-
         const props = {
             ...this.getChildContextState(),
             ...this.props
@@ -196,9 +186,9 @@ export default class BaseField extends Component {
             props.initialValue = context.schema.getInitialValue(name, this.props);
         }
 
-        const findValue = name => get(context.model, name);
-        const findField = name => context.schema.getField(name);
-        const findError = name => context.schema.getError(name, context.error);
+        const findValue = this.findValue;
+        const findField = this.findField;
+        const findError = this.findError;
 
         const onChange = (value, key = name) => context.onChange(key, value);
 
@@ -219,11 +209,23 @@ export default class BaseField extends Component {
 
             ...props,
             ...schemaProps,
-            ...overrideValue ? {value} : {},
+            ...overrideValue && {value},
 
             label,
             name,
             placeholder
         };
+    }
+
+    findError (name) {
+        return this.context.uniforms.schema.getError(name, this.context.uniforms.error);
+    }
+
+    findField (name) {
+        return this.context.uniforms.schema.getField(name);
+    }
+
+    findValue (name) {
+        return get(this.context.uniforms.model, name);
     }
 }
