@@ -1,39 +1,22 @@
-import React          from 'react';
-import {Children}     from 'react';
-import {connectField} from 'uniforms';
-import {joinName}     from 'uniforms';
+import React            from 'react';
+import {Children}       from 'react';
+import {connectField}   from 'uniforms';
+import {filterDOMProps} from 'uniforms';
+import {joinName}       from 'uniforms';
 
 import ListAddField  from './ListAddField';
 import ListItemField from './ListItemField';
 
 const List = ({
-    changed,      // eslint-disable-line
-    changedMap,   // eslint-disable-line
     children,
-    disabled,     // eslint-disable-line
-    error,        // eslint-disable-line
-    errorMessage, // eslint-disable-line
-    field,        // eslint-disable-line
-    fieldType,    // eslint-disable-line
-    fields,       // eslint-disable-line
-    findError,    // eslint-disable-line
-    findField,    // eslint-disable-line
-    findValue,    // eslint-disable-line
-    id,           // eslint-disable-line
     initialCount,
     itemProps,
     label,
-    maxCount,     // eslint-disable-line
-    minCount,     // eslint-disable-line
     name,
-    onChange,     // eslint-disable-line
-    parent,       // eslint-disable-line
-    placeholder,  // eslint-disable-line
-    required,     // eslint-disable-line
     value,
     ...props
 }) =>
-    <ul {...props}>
+    <ul {...filterDOMProps(props)}>
         {label && (
             <label>
                 {label}

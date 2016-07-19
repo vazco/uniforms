@@ -1,19 +1,10 @@
-import React          from 'react';
-import {connectField} from 'uniforms';
+import React            from 'react';
+import {connectField}   from 'uniforms';
+import {filterDOMProps} from 'uniforms';
 
 const Num = ({
-    changed,      // eslint-disable-line no-unused-vars
-    changedMap,   // eslint-disable-line no-unused-vars
     decimal,
     disabled,
-    error,        // eslint-disable-line no-unused-vars
-    errorMessage, // eslint-disable-line no-unused-vars
-    field,        // eslint-disable-line no-unused-vars
-    fieldType,    // eslint-disable-line no-unused-vars
-    fields,       // eslint-disable-line no-unused-vars
-    findError,    // eslint-disable-line no-unused-vars
-    findField,    // eslint-disable-line no-unused-vars
-    findValue,    // eslint-disable-line no-unused-vars
     id,
     inputRef,
     label,
@@ -21,13 +12,11 @@ const Num = ({
     min,
     name,
     onChange,
-    parent,       // eslint-disable-line no-unused-vars
     placeholder,
-    required,     // eslint-disable-line no-unused-vars
     value,
     ...props
 }) =>
-    <section {...props}>
+    <section {...filterDOMProps(props)}>
         {label && (
             <label htmlFor={id}>
                 {label}
