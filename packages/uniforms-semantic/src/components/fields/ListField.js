@@ -1,41 +1,30 @@
-import React          from 'react';
-import classnames     from 'classnames';
-import {Children}     from 'react';
-import {connectField} from 'uniforms';
-import {joinName}     from 'uniforms';
+import React            from 'react';
+import classnames       from 'classnames';
+import {Children}       from 'react';
+import {connectField}   from 'uniforms';
+import {filterDOMProps} from 'uniforms';
+import {joinName}       from 'uniforms';
 
 import ListAddField  from './ListAddField';
 import ListItemField from './ListItemField';
 
 const List = ({
-    changed,      // eslint-disable-line
-    changedMap,   // eslint-disable-line
     children,
     className,
     disabled,
     error,
-    errorMessage, // eslint-disable-line
-    field,        // eslint-disable-line
-    fieldType,    // eslint-disable-line
-    fields,       // eslint-disable-line
-    findError,    // eslint-disable-line
-    findField,    // eslint-disable-line
-    findValue,    // eslint-disable-line
-    id,           // eslint-disable-line
     initialCount,
     itemProps,
     label,
-    maxCount,     // eslint-disable-line
-    minCount,     // eslint-disable-line
     name,
-    onChange,     // eslint-disable-line
-    parent,       // eslint-disable-line
-    placeholder,  // eslint-disable-line
     required,
     value,
     ...props
 }) =>
-    <section className={classnames('ui', className, {disabled}, 'grouped fitted fields list')} {...props}>
+    <section
+        className={classnames('ui', className, {disabled}, 'grouped fitted fields list')}
+        {...filterDOMProps(props)}
+    >
         {label && (
             <section className={classnames({error, required}, 'field item')}>
                 <label className="left floated">

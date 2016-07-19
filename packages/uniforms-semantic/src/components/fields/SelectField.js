@@ -1,6 +1,7 @@
-import React          from 'react';
-import classnames     from 'classnames';
-import {connectField} from 'uniforms';
+import React            from 'react';
+import classnames       from 'classnames';
+import {connectField}   from 'uniforms';
+import {filterDOMProps} from 'uniforms';
 
 const xor = (item, array) => {
     let index = array.indexOf(item);
@@ -57,32 +58,23 @@ const renderSelect = ({allowedValues, disabled, id, inputRef, name, onChange, pl
 
 const Select = ({
     allowedValues,
-    changed,       // eslint-disable-line no-unused-vars
-    changedMap,    // eslint-disable-line no-unused-vars
     checkboxes,
     className,
     disabled,
     error,
-    errorMessage,  // eslint-disable-line no-unused-vars
-    field,         // eslint-disable-line no-unused-vars
     fieldType,
-    fields,        // eslint-disable-line no-unused-vars
-    findError,     // eslint-disable-line no-unused-vars
-    findField,     // eslint-disable-line no-unused-vars
-    findValue,     // eslint-disable-line no-unused-vars
     id,
     inputRef,
     label,
     name,
     onChange,
-    parent,        // eslint-disable-line no-unused-vars
     placeholder,
     required,
     transform,
     value,
     ...props
 }) =>
-    <section className={classnames({disabled, error, required}, className, 'field')} {...props}>
+    <section className={classnames({disabled, error, required}, className, 'field')} {...filterDOMProps(props)}>
         {label && (
             <label htmlFor={id}>
                 {label}
