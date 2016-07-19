@@ -2,12 +2,13 @@ export {default as Bridge}             from './bridges/Bridge';
 export {default as SimpleSchemaBridge} from './bridges/SimpleSchemaBridge';
 export {default as createSchemaBridge} from './bridges';
 
-export {default as changedKeys}  from './helpers/changedKeys';
-export {default as connectField} from './helpers/connectField';
-export {default as injectName}   from './helpers/injectName';
-export {default as joinName}     from './helpers/joinName';
-export {default as nothing}      from './helpers/nothing';
-export {default as randomIds}    from './helpers/randomIds';
+export {default as changedKeys}    from './helpers/changedKeys';
+export {default as connectField}   from './helpers/connectField';
+export {default as filterDOMProps} from './helpers/filterDOMProps';
+export {default as injectName}     from './helpers/injectName';
+export {default as joinName}       from './helpers/joinName';
+export {default as nothing}        from './helpers/nothing';
+export {default as randomIds}      from './helpers/randomIds';
 
 export {default as BaseField} from './components/fields/BaseField';
 

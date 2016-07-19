@@ -2,8 +2,9 @@
 
 import cloneDeep from 'lodash.clonedeep';
 
-import Bridge   from './Bridge';
-import joinName from '../helpers/joinName';
+import Bridge         from './Bridge';
+import joinName       from '../helpers/joinName';
+import filterDOMProps from '../helpers/filterDOMProps';
 
 let Match        = (typeof global === 'object' ? global : window).Match;
 let SimpleSchema = (typeof global === 'object' ? global : window).SimpleSchema;
@@ -37,6 +38,27 @@ try {
             )
         )
     });
+
+    // There's no possibility to retrieve them at runtime
+    filterDOMProps.register(
+        'allowedValues',
+        'autoValue',
+        'blackbox',
+        'custom',
+        'decimal',
+        'defaultValue',
+        'exclusiveMax',
+        'exclusiveMin',
+        'label',
+        'max',
+        'maxCount',
+        'min',
+        'minCount',
+        'optional',
+        'regEx',
+        'trim',
+        'type'
+    );
 } catch (_) { /* Ignore it. */ }
 
 export default class SimpleSchemaBridge extends Bridge {
