@@ -1,6 +1,7 @@
-import React       from 'react';
-import {BaseField} from 'uniforms';
-import {nothing}   from 'uniforms';
+import React            from 'react';
+import {BaseField}      from 'uniforms';
+import {filterDOMProps} from 'uniforms';
+import {nothing}        from 'uniforms';
 
 export default class HiddenField extends BaseField {
     componentWillReceiveProps ({value: valueDesired}) {
@@ -19,14 +20,7 @@ export default class HiddenField extends BaseField {
 
         return (
             props.noDOM ? nothing : (
-                <input
-                    disabled={props.disabled}
-                    id={props.id}
-                    name={props.name}
-                    ref={props.inputRef}
-                    type="hidden"
-                    value={props.value}
-                />
+                <input ref={props.inputRef} type="hidden" value={props.value} {...filterDOMProps(props)} />
             )
         );
     }

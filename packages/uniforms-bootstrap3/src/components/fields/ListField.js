@@ -1,41 +1,28 @@
-import React          from 'react';
-import classnames     from 'classnames';
-import {Children}     from 'react';
-import {connectField} from 'uniforms';
-import {joinName}     from 'uniforms';
+import React            from 'react';
+import classnames       from 'classnames';
+import {Children}       from 'react';
+import {connectField}   from 'uniforms';
+import {filterDOMProps} from 'uniforms';
+import {joinName}       from 'uniforms';
 
 import ListAddField  from './ListAddField';
 import ListItemField from './ListItemField';
 
 const List = ({
-    changed,      // eslint-disable-line no-unused-vars
-    changedMap,   // eslint-disable-line no-unused-vars
     children,
     className,
-    disabled,     // eslint-disable-line no-unused-vars
     error,
-    errorMessage, // eslint-disable-line no-unused-vars
-    field,        // eslint-disable-line no-unused-vars
-    fieldType,    // eslint-disable-line no-unused-vars
-    fields,       // eslint-disable-line no-unused-vars
-    findError,    // eslint-disable-line no-unused-vars
-    findField,    // eslint-disable-line no-unused-vars
-    findValue,    // eslint-disable-line no-unused-vars
-    grid,         // eslint-disable-line no-unused-vars
-    id,           // eslint-disable-line no-unused-vars
     initialCount,
     itemProps,
     label,
-    maxCount,     // eslint-disable-line no-unused-vars
-    minCount,     // eslint-disable-line no-unused-vars
     name,
-    onChange,     // eslint-disable-line no-unused-vars
-    parent,       // eslint-disable-line no-unused-vars
-    placeholder,  // eslint-disable-line no-unused-vars
     value,
     ...props
 }) =>
-    <section className={classnames('panel panel-default', {'panel-danger': error}, className)} {...props}>
+    <section
+        className={classnames('panel panel-default', {'panel-danger': error}, className)}
+        {...filterDOMProps(props)}
+    >
         <section className="panel-body">
             {label && (
                 <section className="panel-heading">
