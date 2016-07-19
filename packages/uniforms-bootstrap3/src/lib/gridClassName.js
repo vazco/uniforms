@@ -1,3 +1,7 @@
+import {filterDOMProps} from 'uniforms';
+
+filterDOMProps.register('grid');
+
 function gridClassNamePart (size, value, side) {
     return side === 'label'
         ? `col-${size}-${value}`
