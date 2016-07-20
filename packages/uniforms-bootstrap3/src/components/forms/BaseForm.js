@@ -12,6 +12,7 @@ const Bootstrap3 = parent => class extends parent {
 
         grid: PropTypes.oneOfType([
             PropTypes.number,
+            PropTypes.object,
             PropTypes.string
         ])
     };
