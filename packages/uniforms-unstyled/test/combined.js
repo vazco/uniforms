@@ -95,143 +95,194 @@ describe('Everything', () => {
         />
     );
 
-    it('works (TextField)', () => {
+    it('works (TextField)', async () => {
         expect(wrapper.find('#x01').props()).to.have.property('value', '');
         expect(wrapper.find('#x01').simulate('change', {target: {value: 'x01'}})).to.be.ok;
         expect(wrapper.find('#x01').props()).to.have.property('value', 'x01');
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
         expect(onChange.lastCall.calledWith('x01', 'x01')).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x01: 'x01'})).to.be.ok;
     });
 
-    it('works (SelectField)', () => {
+    it('works (SelectField)', async () => {
         expect(wrapper.find('#x02').props()).to.have.property('value', 0);
         expect(wrapper.find('#x02').simulate('change', {target: {value: 2}})).to.be.ok;
         expect(wrapper.find('#x02').props()).to.have.property('value', 2);
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
         expect(onChange.lastCall.calledWith('x02', 2)).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x02: 2})).to.be.ok;
     });
 
-    it('works (RadioField, on)', () => {
+    it('works (RadioField, on)', async () => {
         expect(wrapper.find('[name="x03"]').at(0)).to.be.checked;
         expect(wrapper.find('[name="x03"]').at(1)).to.be.not.checked;
         expect(wrapper.find('[name="x03"]').at(1).simulate('change', {target: {value: true}})).to.be.ok;
         expect(wrapper.find('[name="x03"]').at(1)).to.be.checked;
         expect(wrapper.find('[name="x03"]').at(0)).to.be.not.checked;
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
         expect(onChange.lastCall.calledWith('x03', 2)).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x03: 2})).to.be.ok;
     });
 
-    it('works (RadioField, off)', () => {
+    it('works (RadioField, off)', async () => {
         expect(wrapper.find('[name="x03"]').at(1)).to.be.checked;
         expect(wrapper.find('[name="x03"]').at(0)).to.be.not.checked;
         expect(wrapper.find('[name="x03"]').at(0).simulate('change', {target: {value: true}})).to.be.ok;
         expect(wrapper.find('[name="x03"]').at(0)).to.be.checked;
         expect(wrapper.find('[name="x03"]').at(1)).to.be.not.checked;
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
         expect(onChange.lastCall.calledWith('x03', 1)).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x03: 1})).to.be.ok;
     });
 
-    it('works (SelectField, checkboxes, multiple, on)', () => {
+    it('works (SelectField, checkboxes, multiple, on)', async () => {
         expect(wrapper.find('[name="x04"]').at(1)).to.be.not.checked;
         expect(wrapper.find('[name="x04"]').at(1).simulate('change', {target: {value: true}})).to.be.ok;
         expect(wrapper.find('[name="x04"]').at(1)).to.be.checked;
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
         expect(onChange.lastCall.calledWith('x04', [2])).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x04: [2]})).to.be.ok;
     });
 
-    it('works (SelectField, checkboxes, multiple, off)', () => {
+    it('works (SelectField, checkboxes, multiple, off)', async () => {
         expect(wrapper.find('[name="x04"]').at(1)).to.be.checked;
         expect(wrapper.find('[name="x04"]').at(1).simulate('change', {target: {value: false}})).to.be.ok;
         expect(wrapper.find('[name="x04"]').at(1)).to.be.not.checked;
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
         expect(onChange.lastCall.calledWith('x04', [])).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x04: []})).to.be.ok;
     });
 
-    it('works (DateField)', () => {
+    it('works (DateField)', async () => {
         expect(wrapper.find('#x05').props()).to.have.property('value', dateA.toISOString().slice(0, -8));
         expect(wrapper.find('#x05').simulate('change', {target: {valueAsNumber: +dateB}})).to.be.ok;
         expect(wrapper.find('#x05').props()).to.have.property('value', dateB.toISOString().slice(0, -8));
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
         expect(onChange.lastCall.calledWith('x05', dateB)).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x05: dateB})).to.be.ok;
     });
 
-    it('works (BoolField)', () => {
+    it('works (BoolField)', async () => {
         expect(wrapper.find('#x06')).to.be.not.checked;
         expect(wrapper.find('#x06').simulate('change', {target: {value: true}})).to.be.ok;
         expect(wrapper.find('#x06')).to.be.checked;
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
         expect(onChange.lastCall.calledWith('x06', true)).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x06: true})).to.be.ok;
     });
 
-    it('works (NestField, TextField)', () => {
+    it('works (NestField, TextField)', async () => {
         expect(wrapper.find('#x08y01').props()).to.have.property('value', '');
         expect(wrapper.find('#x08y01').simulate('change', {target: {value: 'x08y01'}})).to.be.ok;
         expect(wrapper.find('#x08y01').props()).to.have.property('value', 'x08y01');
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
         expect(onChange.lastCall.calledWith('x08.y01', 'x08y01')).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x08: {y01: 'x08y01'}})).to.be.ok;
     });
 
-    it('works (NestField, NumField)', () => {
+    it('works (NestField, NumField)', async () => {
         expect(wrapper.find('#x08y02').props()).to.have.property('value', 0);
         expect(wrapper.find('#x08y02').simulate('change', {target: {value: 2}})).to.be.ok;
         expect(wrapper.find('#x08y02').props()).to.have.property('value', 2);
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
         expect(onChange.lastCall.calledWith('x08.y02', 2)).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x08: {y02: 2}})).to.be.ok;
     });
 
-    it('works (NumField, decimal, nullable)', () => {
+    it('works (NumField, decimal, nullable)', async () => {
         expect(wrapper.find('#x22').props()).to.have.property('value', 0);
         expect(wrapper.find('#x22').simulate('change', {target: {value: ''}})).to.be.ok;
         expect(wrapper.find('#x22').props()).to.have.property('value', 0);
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
         expect(onChange.lastCall.calledWith('x22', undefined)).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x22: undefined})).to.be.ok;
     });
 
-    it('works (NumField, decimal)', () => {
+    it('works (NumField, decimal)', async () => {
         expect(wrapper.find('#x22').props()).to.have.property('value', 0);
         expect(wrapper.find('#x22').simulate('change', {target: {value: 2}})).to.be.ok;
         expect(wrapper.find('#x22').props()).to.have.property('value', 2);
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
         expect(onChange.lastCall.calledWith('x22', 2)).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x22: 2})).to.be.ok;
     });
 
-    it('works (LongTextField)', () => {
+    it('works (LongTextField)', async () => {
         expect(wrapper.find('#x25').props()).to.have.property('value', '');
         expect(wrapper.find('#x25').simulate('change', {target: {value: 'x25'}})).to.be.ok;
         expect(wrapper.find('#x25').props()).to.have.property('value', 'x25');
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
         expect(onChange.lastCall.calledWith('x25', 'x25')).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x25: 'x25'})).to.be.ok;
     });
 
-    it('works (ListAddField, one)', () => {
+    it('works (ListAddField, one)', async () => {
         expect(wrapper.find(ListAddField).findWhere(x => x.props().onClick).last().simulate('click')).to.be.ok;
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
         expect(onChange.lastCall.calledWith('x27.0', '')).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x27: ['']})).to.be.ok;
     });
 
-    it('works (ListAddField, two)', () => {
+    it('works (ListAddField, two)', async () => {
         expect(wrapper.find(ListAddField).findWhere(x => x.props().onClick).last().simulate('click')).to.be.ok;
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
         expect(onChange.lastCall.calledWith('x27.1', '')).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x27: ['', '']})).to.be.ok;
     });
 
-    it('works (ListDelField)', () => {
+    it('works (ListDelField)', async () => {
         expect(wrapper.find(ListDelField).at(0).simulate('click')).to.be.ok;
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
         expect(onChange.lastCall.calledWith('x27', [''])).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x27: ['']})).to.be.ok;
     });
 
-    it('works (SelectField, checkboxes, multiple, on)', () => {
+    it('works (SelectField, checkboxes, multiple, on)', async () => {
         expect(wrapper.find('[name="x31"]').at(1)).to.be.checked;
         expect(wrapper.find('[name="x31"]').at(0)).to.be.not.checked;
         expect(wrapper.find('[name="x31"]').at(0).simulate('change', {target: {value: true}})).to.be.ok;
         expect(wrapper.find('[name="x31"]').at(0)).to.be.checked;
         expect(wrapper.find('[name="x31"]').at(1)).to.be.not.checked;
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
         expect(onChange.lastCall.calledWith('x31', 1)).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x31: 1})).to.be.ok;
     });
 
-    it('works (HiddenField)', () => {
+    it('works (HiddenField)', async () => {
         const wrapperHidden = mount(
             <HiddenField name="x32" value="" />,
             {context: wrapper.instance().getChildContext()}
@@ -242,11 +293,14 @@ describe('Everything', () => {
         wrapperHidden.setProps({value: 'x32'});
 
         expect(wrapperHidden.find('#x32').props()).to.have.property('value', 'x32');
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
         expect(onChange.lastCall.calledWith('x32', 'x32')).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x32: 'x32'})).to.be.ok;
     });
 
-    it('works (HiddenField, noDOM)', () => {
+    it('works (HiddenField, noDOM)', async () => {
         const wrapperHidden = mount(
             <HiddenField name="x32" value="" noDOM />,
             {context: wrapper.instance().getChildContext()}
@@ -257,6 +311,9 @@ describe('Everything', () => {
         wrapperHidden.setProps({value: 'x32'});
 
         expect(wrapperHidden.find(HiddenField).props()).to.have.property('value', 'x32');
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
         expect(onChange.lastCall.calledWith('x32', 'x32')).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x32: 'x32'})).to.be.ok;
     });

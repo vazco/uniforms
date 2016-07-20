@@ -101,8 +101,11 @@ const Validated = parent => class extends parent {
             event.stopPropagation();
         }
 
-        this.onValidate();
-        this.setState({validate: true}, () => this.getChildContextError() || super.onSubmit());
+        return new Promise(resolve =>
+            this.setState({validate: true}, () =>
+                resolve(this.onValidate().then(() => super.onSubmit()))
+            )
+        );
     }
 
     onValidate (key, value) {
@@ -111,22 +114,26 @@ const Validated = parent => class extends parent {
             model = set(cloneDeep(model), key, cloneDeep(value));
         }
 
-        this.onValidateModel(model);
+        return this.onValidateModel(model);
     }
 
     onValidateModel (model) {
-        let catched = null;
+        let catched = this.props.error || null;
         try {
             this.state.validator(model);
         } catch (error) {
             catched = error;
         }
 
-        if (this.props.onValidate) {
-            this.props.onValidate(model, catched, (error = catched) => this.setState({error}));
-        } else {
-            this.setState({error: catched});
-        }
+        return new Promise((resolve, reject) => {
+            if (this.props.onValidate) {
+                this.props.onValidate(model, catched, (error = catched) =>
+                    this.setState({error}, () => error ? reject(error) : resolve())
+                );
+            } else {
+                this.setState({error: catched}, () => catched ? reject(catched) : resolve());
+            }
+        });
     }
 };
 

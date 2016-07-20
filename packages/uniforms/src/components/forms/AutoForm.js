@@ -70,7 +70,7 @@ const Auto = parent => class extends parent {
     }
 
     onValidate () {
-        this.onValidateModel(this.getChildContextModel());
+        return this.onValidateModel(this.getChildContextModel());
     }
 };
 

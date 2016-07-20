@@ -50,9 +50,12 @@ describe('AutoForm', () => {
             <AutoForm onSubmit={onSubmit} schema={schema} autosave />
         );
 
-        it('skips `onSubmit` until rendered (`autosave` = true)', () => {
+        it('skips `onSubmit` until rendered (`autosave` = true)', async () => {
             expect(onSubmit.called).to.be.false;
             wrapper.instance().getChildContext().uniforms.onChange('a', 1);
+
+            await new Promise(resolve => setTimeout(resolve, 5));
+
             expect(onSubmit.calledOnce).to.be.ok;
             expect(onSubmit.calledWith({a: 1})).to.be.ok;
         });

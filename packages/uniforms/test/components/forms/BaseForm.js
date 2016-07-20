@@ -2,6 +2,7 @@ import React    from 'react';
 import {expect} from 'chai';
 import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
+import {stub}   from 'sinon';
 
 import {BaseForm} from 'uniforms';
 
@@ -21,8 +22,10 @@ describe('BaseForm', () => {
         getValidator:     noop
     };
 
-    const onChange = spy();
-    const onSubmit = spy();
+    const onChange        = spy();
+    const onSubmit        = stub();
+    const onSubmitSuccess = spy();
+    const onSubmitFailure = spy();
 
     afterEach(() => {
         onChange.reset();
@@ -238,6 +241,34 @@ describe('BaseForm', () => {
             wrapper.find('form').simulate('submit');
 
             expect(onSubmit.called).to.be.false;
+        });
+
+        it('calls `onSubmitSuccess` when `onSubmit` resolves', async () => {
+            onSubmit.onFirstCall().returns(Promise.resolve());
+
+            const wrapper = mount(
+                <BaseForm model={model} schema={schema} onSubmit={onSubmit} onSubmitSuccess={onSubmitSuccess} />
+            );
+
+            wrapper.find('form').simulate('submit');
+
+            await new Promise(resolve => setTimeout(resolve, 5));
+
+            expect(onSubmitSuccess.calledOnce).to.be.ok;
+        });
+
+        it('calls `onSubmitFailure` when `onSubmit` rejects', async () => {
+            onSubmit.onFirstCall().returns(Promise.reject());
+
+            const wrapper = mount(
+                <BaseForm model={model} schema={schema} onSubmit={onSubmit} onSubmitFailure={onSubmitFailure} />
+            );
+
+            wrapper.find('form').simulate('submit');
+
+            await new Promise(resolve => setTimeout(resolve, 5));
+
+            expect(onSubmitFailure.calledOnce).to.be.ok;
         });
     });
 });

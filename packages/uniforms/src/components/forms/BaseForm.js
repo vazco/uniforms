@@ -27,8 +27,10 @@ export default class BaseForm extends Component {
         model:  PropTypes.object,
         schema: PropTypes.any.isRequired,
 
-        onChange: PropTypes.func,
-        onSubmit: PropTypes.func,
+        onChange:        PropTypes.func,
+        onSubmit:        PropTypes.func,
+        onSubmitFailure: PropTypes.func,
+        onSubmitSuccess: PropTypes.func,
 
         label:       PropTypes.bool,
         disabled:    PropTypes.bool,
@@ -173,16 +175,18 @@ export default class BaseForm extends Component {
 
     getNativeFormProps () {
         const {
-            autosave,      // eslint-disable-line no-unused-vars
-            autosaveDelay, // eslint-disable-line no-unused-vars
-            disabled,      // eslint-disable-line no-unused-vars
-            error,         // eslint-disable-line no-unused-vars
-            label,         // eslint-disable-line no-unused-vars
-            model,         // eslint-disable-line no-unused-vars
-            onChange,      // eslint-disable-line no-unused-vars
-            onSubmit,      // eslint-disable-line no-unused-vars
-            placeholder,   // eslint-disable-line no-unused-vars
-            schema,        // eslint-disable-line no-unused-vars
+            autosave,        // eslint-disable-line no-unused-vars
+            autosaveDelay,   // eslint-disable-line no-unused-vars
+            disabled,        // eslint-disable-line no-unused-vars
+            error,           // eslint-disable-line no-unused-vars
+            label,           // eslint-disable-line no-unused-vars
+            model,           // eslint-disable-line no-unused-vars
+            onChange,        // eslint-disable-line no-unused-vars
+            onSubmit,        // eslint-disable-line no-unused-vars
+            onSubmitFailure, // eslint-disable-line no-unused-vars
+            onSubmitSuccess, // eslint-disable-line no-unused-vars
+            placeholder,     // eslint-disable-line no-unused-vars
+            schema,          // eslint-disable-line no-unused-vars
 
             ...props
         } = this.props;
@@ -190,7 +194,6 @@ export default class BaseForm extends Component {
         return {
             ...props,
 
-            onChange () {},
             onSubmit: this.onSubmit,
 
             key: `reset-${this.state.resetCount}`
@@ -216,8 +219,7 @@ export default class BaseForm extends Component {
         // Do not call `onSubmit` before componentDidMount
         if (this.state.changed !== null && this.props.autosave) {
             if (this.delayId) {
-                clearTimeout(this.delayId);
-                this.delayId = null;
+                this.delayId = clearTimeout(this.delayId);
             }
 
             if (this.props.autosaveDelay > 0) {
@@ -238,8 +240,16 @@ export default class BaseForm extends Component {
             event.stopPropagation();
         }
 
-        if (this.props.onSubmit) {
-            this.props.onSubmit(this.getModel());
-        }
+        const promise = Promise.resolve(
+            this.props.onSubmit &&
+            this.props.onSubmit(this.getModel())
+        );
+
+        promise.then(
+            this.props.onSubmitSuccess,
+            this.props.onSubmitFailure
+        );
+
+        return promise;
     }
 }

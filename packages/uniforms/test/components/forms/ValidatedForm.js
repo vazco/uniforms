@@ -13,6 +13,7 @@ describe('ValidatedForm', () => {
     const onChange   = spy();
     const onSubmit   = spy();
     const onValidate = spy();
+
     const error = new Error();
     const model = {a: 1};
     const schema = {
@@ -52,24 +53,40 @@ describe('ValidatedForm', () => {
     });
 
     context('when submitted', () => {
-        it('calls `onSubmit` when valid', () => {
-            const wrapper = mount(
-                <ValidatedForm error={error} model={model} schema={schema} onSubmit={onSubmit} />
-            );
-
-            wrapper.find('form').simulate('submit');
-
-            expect(onSubmit.called).to.be.false;
-        });
-
-        it('calls `onSubmit` with correct model', () => {
+        it('calls `onSubmit` when valid', async () => {
             const wrapper = mount(
                 <ValidatedForm model={model} schema={schema} onSubmit={onSubmit} />
             );
 
             wrapper.find('form').simulate('submit');
 
+            await new Promise(resolve => setTimeout(resolve, 5));
+
+            expect(onSubmit.calledOnce).to.be.ok;
+        });
+
+        it('calls `onSubmit` with correct model', async () => {
+            const wrapper = mount(
+                <ValidatedForm model={model} schema={schema} onSubmit={onSubmit} />
+            );
+
+            wrapper.find('form').simulate('submit');
+
+            await new Promise(resolve => setTimeout(resolve, 5));
+
             expect(onSubmit.calledWith(model)).to.be.ok;
+        });
+
+        it('skips `onSubmit` when invalid', async () => {
+            const wrapper = mount(
+                <ValidatedForm error={error} model={model} schema={schema} onSubmit={onSubmit} />
+            );
+
+            wrapper.find('form').simulate('submit');
+
+            await new Promise(resolve => setTimeout(resolve, 5));
+
+            expect(onSubmit.called).to.be.false;
         });
 
         it('revalidates with new model', () => {
@@ -131,7 +148,7 @@ describe('ValidatedForm', () => {
             expect(onChange.calledWith('key', 'value')).to.be.ok;
         });
 
-        it('validates (onChangeAfterSubmit)', () => {
+        it('validates (onChangeAfterSubmit)', async () => {
             validator.onFirstCall().throws();
             validator.onSecondCall().returns();
             validator.onThirdCall().returns();
@@ -148,11 +165,15 @@ describe('ValidatedForm', () => {
 
             wrapper.find('form').simulate('submit');
 
+            await new Promise(resolve => setTimeout(resolve, 5));
+
             expect(validator.calledOnce).to.be.ok;
             expect(onChange.called).to.be.false;
             expect(onSubmit.called).to.be.false;
 
             wrapper.instance().getChildContext().uniforms.onChange('key', 'value');
+
+            await new Promise(resolve => setTimeout(resolve, 5));
 
             expect(validator).to.have.been.calledTwice;
             expect(onChange.calledOnce).to.be.ok;
@@ -160,12 +181,14 @@ describe('ValidatedForm', () => {
 
             wrapper.find('form').simulate('submit');
 
+            await new Promise(resolve => setTimeout(resolve, 5));
+
             expect(validator).to.have.been.calledThrice;
             expect(onSubmit.calledOnce).to.be.ok;
             expect(onSubmit.calledWith(model)).to.be.ok;
         });
 
-        it('validates (onSubmit)', () => {
+        it('validates (onSubmit)', async () => {
             validator.onFirstCall().throws();
             validator.onSecondCall().returns();
             validator.onThirdCall().returns();
@@ -182,17 +205,23 @@ describe('ValidatedForm', () => {
 
             wrapper.find('form').simulate('submit');
 
+            await new Promise(resolve => setTimeout(resolve, 5));
+
             expect(validator.calledOnce).to.be.ok;
             expect(onChange.called).to.be.false;
             expect(onSubmit.called).to.be.false;
 
             wrapper.instance().getChildContext().uniforms.onChange('key', 'value');
 
+            await new Promise(resolve => setTimeout(resolve, 5));
+
             expect(validator.calledOnce).to.be.ok;
             expect(onChange.calledOnce).to.be.ok;
             expect(onChange.calledWith('key', 'value')).to.be.ok;
 
             wrapper.find('form').simulate('submit');
+
+            await new Promise(resolve => setTimeout(resolve, 5));
 
             expect(validator).to.have.been.calledTwice;
             expect(onSubmit.calledOnce).to.be.ok;
