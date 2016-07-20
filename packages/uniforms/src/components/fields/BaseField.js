@@ -79,6 +79,10 @@ export default class BaseField extends Component {
             }
         }
 
+        if (nextContext.schema !== prevContext.schema) {
+            return true;
+        }
+
         return false;
     }
 
