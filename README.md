@@ -172,27 +172,29 @@ const ExplicitAutoForm = () =>
 
 ### `AutoField` algorithm
 
-    let component = props.component;
-    if (component === undefined) {
-        if (props.allowedValues) {
-            if (props.checkboxes && props.fieldType !== Array) {
-                component = RadioField;
-            } else {
-                component = SelectField;
-            }
+```js
+let component = props.component;
+if (component === undefined) {
+    if (props.allowedValues) {
+        if (props.checkboxes && props.fieldType !== Array) {
+            component = RadioField;
         } else {
-            switch (props.fieldType) {
-                case Date:    component = DateField; break;
-                case Array:   component = ListField; break;
-                case Number:  component = NumField;  break;
-                case Object:  component = NestField; break;
-                case String:  component = TextField; break;
-                case Boolean: component = BoolField; break;
-
-                default: throw new Error(`Unsupported field type: ${props.type.toString()}`);
-            }
+            component = SelectField;
         }
+    } else {
+        switch (props.fieldType) {
+            case Date:    component = DateField; break;
+            case Array:   component = ListField; break;
+            case Number:  component = NumField;  break;
+            case Object:  component = NestField; break;
+            case String:  component = TextField; break;
+            case Boolean: component = BoolField; break;
+        }
+
+        invariant(component, 'Unsupported field type: %s', props.fieldType.toString());
     }
+}
+```
 
 ### Custom field component
 
@@ -330,8 +332,6 @@ Every prop can be overridden, but `label`, `placeholder` and `disabled` have spe
 
 ![](README.png)
 
-**Note:** This image can be a little outdated - there could be more props.
-
 <br />
 
 | Component            | Generated? | Validated? | Self-managed? |
@@ -341,6 +341,20 @@ Every prop can be overridden, but `label`, `placeholder` and `disabled` have spe
 | `QuickForm`          | ✔          | ✘         | ✘             |
 | `ValidatedForm`      | ✘          | ✔         | ✘             |
 | `ValidatedQuickForm` | ✔          | ✔         | ✘             |
+
+### Autosave
+
+Every field has an `autosave` prop. If it's set, every change (even `formRef.change(key, value)`) will trigger a submit. There's also an `autosaveDelay` - time between saves in milliseconds (default `0`).
+
+Example:
+```js
+<AutoForm
+    autosave
+    autosaveDelay={5000} // 5 second
+    schema={schema}
+    onSubmit={onSubmit}
+/>
+```
 
 ### Asynchronous validation
 
@@ -370,6 +384,26 @@ const onValidate = (model, error, callback) => {
 
 <ValidatedForm {...props} onValidate={onValidate} />
 ```
+
+### Post-submit handling
+
+```js
+<AutoForm
+    schema={schema}
+    onSubmit={model => db.saveThatReturnsPromise(model)}
+    onSubmitSuccess={() => alert('Saved!')}
+    onSubmitFailure={() => alert('Error!')}
+/>
+```
+
+##### Flow:
+- HTML submit event **or** `formRef.submit()`
+- validation
+- validation (`onValidate`)
+- if no error occured **or** reported
+    - submit (`onSubmit`)
+        - additional `onSubmitSuccess` is attached (`.then`)
+        - additional `onSubmitFailure` is attached (`.catch`)
 
 ### Reset form
 
@@ -443,8 +477,8 @@ Additionally, `QuickForm` provides:
 
 Additionally, `ValidatedForm` provides:
 
-- `validate(key, value)`
-- `validateModel(model)`
+- `onValidate(key, value)`
+- `onValidateModel(model)`
 
 ### Context data
 
@@ -457,14 +491,34 @@ const MyComponent = (props, context) =>
 
 MyComponent.contextTypes = {
     uniforms: PropTypes.shape({
-        error:  PropTypes.object,
-        model:  PropTypes.object.isRequired,
-        state:  PropTypes.object.isRequired,
-        schema: PropTypes.object.isRequired,
+        name: PropTypes.arrayOf(PropTypes.string).isRequired,
+
+        error: PropTypes.any,
+        model: PropTypes.object.isRequired,
+
+        schema: PropTypes.shape({
+            getError:         PropTypes.func.isRequired,
+            getErrorMessage:  PropTypes.func.isRequired,
+            getErrorMessages: PropTypes.func.isRequired,
+            getField:         PropTypes.func.isRequired,
+            getInitialValue:  PropTypes.func.isRequired,
+            getProps:         PropTypes.func.isRequired,
+            getSubfields:     PropTypes.func.isRequired,
+            getType:          PropTypes.func.isRequired,
+            getValidator:     PropTypes.func.isRequired
+        }).isRequired,
+
+        state: PropTypes.shape({
+            changed:    PropTypes.bool.isRequired,
+            changedMap: PropTypes.object.isRequired,
+
+            label:       PropTypes.bool.isRequired,
+            disabled:    PropTypes.bool.isRequired,
+            placeholder: PropTypes.bool.isRequired
+        }).isRequired,
 
         onChange: PropTypes.func.isRequired,
-
-        name: PropTypes.arrayOf(PropTypes.string).isRequired
+        randomId: PropTypes.func.isRequired
     }).isRequired
 };
 ```
