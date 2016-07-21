@@ -19,10 +19,7 @@ export default class BaseForm extends Component {
         autosave: false,
         autosaveDelay: 0,
 
-        noValidate: true,
-
-        onSubmitFailure () {},
-        onSubmitSuccess () {}
+        noValidate: true
     };
 
     static propTypes = {
