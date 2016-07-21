@@ -77,6 +77,13 @@ export default class BaseField extends Component {
             if (!isEqual(prevError, nextError)) {
                 return true;
             }
+
+            // TODO: This is a workaround for List and Nest fields
+            //       Those should update, if their child error has changed
+            // eslint-disable-next-line max-len
+            if (nextValue && typeof nextValue === 'object' && Object.prototype.toString.call(nextValue) !== '[object Date]') {
+                return true;
+            }
         }
 
         if (nextContext.schema !== prevContext.schema) {
