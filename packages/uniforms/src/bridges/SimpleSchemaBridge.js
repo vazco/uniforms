@@ -1,6 +1,7 @@
 /* global Package */
 
 import cloneDeep from 'lodash.clonedeep';
+import invariant from 'invariant';
 
 import Bridge         from './Bridge';
 import joinName       from '../helpers/joinName';
@@ -123,12 +124,11 @@ export default class SimpleSchemaBridge extends Bridge {
     }
 
     getField (name) {
-        let definition = this.schema.getDefinition(name);
-        if (definition) {
-            return definition;
-        }
+        const definition = this.schema.getDefinition(name);
 
-        throw new Error(`Field not found in schema: '${name}'`);
+        invariant(definition, 'Field not found in schema: "%s"', name);
+
+        return definition;
     }
 
     getInitialValue (name, props = {}) {

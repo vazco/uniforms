@@ -58,6 +58,7 @@
     "sinon": "^1.17.4"
   },
   "peerDependencies": {
+    "invariant": "^2.2.1",
     "react": "^15.0.0 || ^0.14.0",
     "uniforms": "^1.0.0-rc.26"
   },
@@ -95,6 +96,6 @@
     "instrument": false
   },
   "dependencies": {
-    "classnames": "^2.2.5"
+    "invariant": "^2.2.1"
   }
 }

@@ -1,3 +1,5 @@
+import invariant from 'invariant';
+
 import Bridge             from './Bridge';
 import SimpleSchemaBridge from './SimpleSchemaBridge';
 
@@ -7,10 +9,9 @@ const bridges = [
 ];
 
 export default function createSchemaBridge (schema) {
-    let Bridge = bridges.find(bridge => bridge.check(schema));
-    if (Bridge) {
-        return new Bridge(schema);
-    }
+    const Bridge = bridges.find(bridge => bridge.check(schema));
 
-    throw new Error(`Unrecognised schema: ${schema}`);
+    invariant(Bridge, 'Unrecognised schema: %s', schema);
+
+    return new Bridge(schema);
 }

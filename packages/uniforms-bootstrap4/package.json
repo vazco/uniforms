@@ -95,6 +95,7 @@
     "instrument": false
   },
   "dependencies": {
-    "classnames": "^2.2.5"
+    "classnames": "^2.2.5",
+    "invariant": "^2.2.1"
   }
 }

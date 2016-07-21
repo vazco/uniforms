@@ -247,7 +247,7 @@ describe('BaseField', () => {
                     <TestField name="field" />,
                     reactContext
                 );
-            }).to.throw(Error, /Field not found in schema: 'field'/);
+            }).to.throw(Error, /Field not found in schema: "field"/);
         });
     });
 

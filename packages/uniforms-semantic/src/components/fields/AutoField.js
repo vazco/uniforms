@@ -1,3 +1,4 @@
+import invariant       from 'invariant';
 import {connectField}  from 'uniforms';
 import {createElement} from 'react';
 
@@ -26,9 +27,9 @@ const Auto = ({component, ...props}) => {
                 case Object:  component = NestField; break;
                 case String:  component = TextField; break;
                 case Boolean: component = BoolField; break;
-
-                default: throw new Error(`Unsupported field type: ${props.fieldType.toString()}`);
             }
+
+            invariant(component, 'Unsupported field type: %s', props.fieldType.toString());
         }
     }
 
