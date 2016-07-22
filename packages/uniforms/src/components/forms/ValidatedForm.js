@@ -106,14 +106,9 @@ const Validated = parent => class extends parent {
         }
 
         return new Promise(resolve =>
-            this.setState({validate: true}, () => {
-                const promise = this.onValidate();
-
-                // This prevents "Uncaught (in promise)" warning
-                promise.catch(() => {});
-
-                resolve(promise.then(() => super.onSubmit()));
-            })
+            this.setState({validate: true}, () =>
+                resolve(this.onValidate().then(() => super.onSubmit()))
+            )
         );
     }
 
