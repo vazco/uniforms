@@ -89,12 +89,27 @@ describe('ValidatedForm', () => {
             expect(onSubmit.called).to.be.false;
         });
 
-        it('revalidates with new model', () => {
+        it('revalidates with new model only if required', () => {
             validator.onFirstCall().throws();
             validator.onSecondCall().returns();
 
             const wrapper = mount(
                 <ValidatedForm model={{}} schema={schema} />
+            );
+
+            expect(validator.called).to.be.false;
+
+            wrapper.setProps({model});
+
+            expect(validator.called).to.be.false;
+        });
+
+        it('revalidates with new model', () => {
+            validator.onFirstCall().throws();
+            validator.onSecondCall().returns();
+
+            const wrapper = mount(
+                <ValidatedForm model={{}} schema={schema} validate="onChange" />
             );
 
             expect(validator.called).to.be.false;
@@ -119,6 +134,21 @@ describe('ValidatedForm', () => {
             expect(validator.called).to.be.false;
         });
 
+        it('revalidates with new validator only if required', () => {
+            validator.onFirstCall().throws();
+            validator.onSecondCall().returns();
+
+            const wrapper = mount(
+                <ValidatedForm model={{}} schema={schema} validate="onChange" />
+            );
+
+            expect(validator.called).to.be.false;
+
+            wrapper.setProps({model, validator: {}});
+
+            expect(validator.calledOnce).to.be.ok;
+        });
+
         it('revalidates with new validator', () => {
             validator.onFirstCall().throws();
             validator.onSecondCall().returns();
@@ -131,7 +161,7 @@ describe('ValidatedForm', () => {
 
             wrapper.setProps({model, validator: {}});
 
-            expect(validator.calledOnce).to.be.ok;
+            expect(validator.called).to.be.false;
         });
 
         it('validates (onChange)', () => {

@@ -85,7 +85,7 @@ describe('AutoForm', () => {
         });
 
         it('validates', () => {
-            wrapper.setProps({model});
+            wrapper.setProps({model, validate: 'onChange'});
 
             expect(validator.calledOnce).to.be.ok;
         });

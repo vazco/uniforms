@@ -62,22 +62,26 @@ const Validated = parent => class extends parent {
         return props;
     }
 
-    componentWillReceiveProps ({model, schema, validator}) {
+    componentWillReceiveProps ({model, schema, validate, validator}) {
         super.componentWillReceiveProps(...arguments);
 
         if (this.props.schema    !== schema ||
             this.props.validator !== validator) {
             this.setState({
-                validate: true,
                 validator: this
                     .getChildContextSchema()
                     .getValidator(validator)
+            }, () => {
+                if (validate === 'onChange' ||
+                    validate === 'onChangeAfterSubmit' && this.state.validate) {
+                    this.onValidate();
+                }
             });
-
-            this.onValidate();
         } else if (!isEqual(this.props.model, model)) {
-            this.setState({validate: true});
-            this.onValidate();
+            if (validate === 'onChange' ||
+                validate === 'onChangeAfterSubmit' && this.state.validate) {
+                this.onValidate();
+            }
         }
     }
 
