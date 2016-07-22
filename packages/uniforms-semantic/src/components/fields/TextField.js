@@ -36,7 +36,7 @@ const Text = ({
                 onChange={event => onChange(event.target.value)}
                 placeholder={placeholder}
                 ref={inputRef}
-                type={type || 'text'}
+                type={type}
                 value={value}
             />
 
@@ -46,5 +46,9 @@ const Text = ({
         </section>
     </section>
 ;
+
+Text.defaultProps = {
+    type: 'text'
+};
 
 export default connectField(Text);

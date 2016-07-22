@@ -14,7 +14,7 @@ const Text = props =>
             onChange={event => props.onChange(event.target.value)}
             placeholder={props.placeholder}
             ref={props.inputRef}
-            type={props.type || 'text'}
+            type={props.type}
             value={props.value}
         />
 
@@ -23,5 +23,9 @@ const Text = props =>
         )}
     </FormGroup>
 ;
+
+Text.defaultProps = {
+    type: 'text'
+};
 
 export default connectField(Text);
