@@ -17,6 +17,7 @@ const FormGroup = ({
     className,         // class name for the whole .form-group
     disabled,          // boolean, if true, show fields as disabled
     error,             // error validation response
+    errorMessage,      // errorMessage string of error
     grid,              // grid is either a int [1-11] or object {xs:6,sm:4,md:2}
     help,              // help text
     helpClassName,     // class name for the help text (default: 'text-muted')
@@ -45,13 +46,13 @@ const FormGroup = ({
             <section className={classnames(wrapClassName, gridClassName(grid, 'input'))}>
                 {children}
                 {makeHelp(help, helpClassName)}
-                {error && showInlineError ? makeHelp(error, 'text-help-error') : ''}
+                {errorMessage && showInlineError ? makeHelp(errorMessage, 'text-help-error') : ''}
             </section>
         )}
 
         {!grid && !wrapClassName && children}
         {!grid && !wrapClassName && makeHelp(help, helpClassName)}
-        {!grid && !wrapClassName && error && showInlineError ? makeHelp(error, 'text-help-error') : ''}
+        {!grid && !wrapClassName && errorMessage && showInlineError ? makeHelp(errorMessage, 'text-help-error') : ''}
     </section>
 ;
 
