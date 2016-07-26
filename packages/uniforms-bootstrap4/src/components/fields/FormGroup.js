@@ -4,7 +4,10 @@ import classnames from 'classnames';
 import gridClassName from '../../lib/gridClassName';
 
 const makeHelp = (help, helpClassName) => help && (
-    <span className={helpClassName || 'text-muted'}>
+    <span className={classnames(
+        'text-help',
+        helpClassName || 'text-muted'
+    )}>
         {help}
     </span>
 );
@@ -21,7 +24,7 @@ const FormGroup = ({
     label,             // string label (or false)
     required,
     wrapClassName,     // class name for the section wrapping the input(s)
-    showError          // boolean, if true, show <span.help-text> with error message
+    showInlineError    // boolean, if true, show <span.help-text> with error message
 }) =>
     <section
         className={classnames({
@@ -42,13 +45,13 @@ const FormGroup = ({
             <section className={classnames(wrapClassName, gridClassName(grid, 'input'))}>
                 {children}
                 {makeHelp(help, helpClassName)}
-                {error && showError ? makeHelp(error, 'text-help') : ''}
+                {error && showInlineError ? makeHelp(error, 'text-help-error') : ''}
             </section>
         )}
 
         {!grid && !wrapClassName && children}
         {!grid && !wrapClassName && makeHelp(help, helpClassName)}
-        {!grid && !wrapClassName && error && showError ? makeHelp(error, 'text-help') : ''}
+        {!grid && !wrapClassName && error && showInlineError ? makeHelp(error, 'text-help-error') : ''}
     </section>
 ;
 
