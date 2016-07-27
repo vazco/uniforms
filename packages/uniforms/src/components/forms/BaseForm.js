@@ -9,6 +9,22 @@ import changedKeys        from '../../helpers/changedKeys';
 import createSchemaBridge from '../../bridges';
 import randomIds          from '../../helpers/randomIds';
 
+// Silent `Uncaught (in promise)` warnings
+// TODO: Find a better way to do it
+/* eslint-disable */
+let   unhandledPromiseHandlerCount   = 0;
+const unhandledPromiseHandlerAllowed = typeof window !== 'undefined';
+const unhandledPromiseHandler = event =>
+    event &&
+    event.reason &&
+    event.reason.__uniformsPromiseMark &&
+    event.preventDefault()
+;
+
+const unhandledPromiseHandlerAdd = () => unhandledPromiseHandlerAllowed && ++unhandledPromiseHandlerCount === 1 && window.   addEventListener('unhandledrejection', unhandledPromiseHandler);
+const unhandledPromiseHandlerDel = () => unhandledPromiseHandlerAllowed && --unhandledPromiseHandlerCount === 0 && window.removeEventListener('unhandledrejection', unhandledPromiseHandler);
+/* eslint-enable */
+
 export default class BaseForm extends Component {
     static displayName = 'Form';
 
@@ -23,7 +39,7 @@ export default class BaseForm extends Component {
     };
 
     static propTypes = {
-        error:  PropTypes.any,
+        error:  PropTypes.object,
         model:  PropTypes.object,
         schema: PropTypes.any.isRequired,
 
@@ -44,7 +60,7 @@ export default class BaseForm extends Component {
         uniforms: PropTypes.shape({
             name: PropTypes.arrayOf(PropTypes.string).isRequired,
 
-            error: PropTypes.any,
+            error: PropTypes.object,
             model: PropTypes.object.isRequired,
 
             schema: PropTypes.shape({
@@ -155,6 +171,14 @@ export default class BaseForm extends Component {
 
     componentWillMount () {
         this.setState({}, () => this.setState({changed: false}));
+    }
+
+    componentDidMount () {
+        unhandledPromiseHandlerAdd();
+    }
+
+    componentWillUnmount () {
+        unhandledPromiseHandlerDel();
     }
 
     componentWillReceiveProps ({schema}) {

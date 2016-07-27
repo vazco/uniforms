@@ -525,13 +525,6 @@ MyComponent.contextTypes = {
 
 ### Troubleshooting
 
-0. _There's a lot of `Uncaught (in promise)` errors in my console!_
-Those are caused by a `Promise` API during validation. You can easily silent them (as well as the other ones) with this snippet:
-
-```js
-window.addEventListener('unhandledrejection', event => event.preventDefault());
-```
-
 0. _There's a lot of `The specified value "..." is not a valid email address.` (or similar ones)!_
 Those are harmless, but currently there's no way to get rid of them, other than downgrading to React `15.1.0`.
 

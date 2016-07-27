@@ -129,15 +129,23 @@ const Validated = parent => class extends parent {
             catched = error;
         }
 
-        return new Promise((resolve, reject) => {
-            if (this.props.onValidate) {
-                this.props.onValidate(model, catched, (error = catched) =>
-                    this.setState({error}, () => error ? reject(error) : resolve())
-                );
-            } else {
-                this.setState({error: catched}, () => catched ? reject(catched) : resolve());
-            }
-        });
+        const markAndHandle = (error = catched, resolve, reject) =>
+            this.setState({error}, () => {
+                if (error) {
+                    error.__uniformsPromiseMark = true;
+
+                    reject(error);
+                } else {
+                    resolve();
+                }
+            })
+        ;
+
+        return new Promise((resolve, reject) =>
+            this.props.onValidate
+                ? this.props.onValidate(model, catched, error => markAndHandle(error, resolve, reject))
+                : markAndHandle(catched, resolve, reject)
+        );
     }
 };
 
