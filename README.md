@@ -356,6 +356,39 @@ Example:
 />
 ```
 
+### Custom `AutoField`
+
+Sometimes you want to implement your own `AutoField` algorithm. Example:
+
+```js
+const CustomAuto = props => {
+    const Component = props.useCustomTextField
+        ? CustomTextField
+        : AutoField;
+
+    return (
+        <Component {...props} />
+    );
+};
+
+const CustomAutoField = connectField(CustomAuto, {includeInChain: true});
+
+// Then...
+
+const CustomAutoFieldExampleSchema = new SimpleSchema({
+    field: {
+        type: 'String',
+        uniforms: {
+            useCustomTextField: true
+        }
+    }
+});
+
+<QuickForm schema={CustomAutoFieldExampleSchema} autoField={CustomAutoField} />
+```
+
+**Note:** Same rules applies to `ErrorsField` and `SubmitField` (respectively `errorsField` and `submitField` props).
+
 ### Asynchronous validation
 
 `ValidatedForm` (and inherited ones) have an `onValidate` prop. It can be used to create an asynchronous validation:
