@@ -77,8 +77,7 @@ const Select = ({
 
         {checkboxes || fieldType === Array
             ? renderCheckboxes({allowedValues, disabled, id, name, onChange, transform, value, fieldType})
-            : renderSelect    ({allowedValues, disabled, id, name, onChange, transform, value, placeholder, inputRef})
-        }
+            : renderSelect    ({allowedValues, disabled, id, name, onChange, transform, value, placeholder, inputRef})}
     </section>
 ;
 

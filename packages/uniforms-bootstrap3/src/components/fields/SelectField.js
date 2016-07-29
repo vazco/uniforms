@@ -59,8 +59,7 @@ const Select = props =>
     <FormGroup {...props}>
         {props.checkboxes || props.fieldType === Array
             ? renderCheckboxes(props)
-            : renderSelect(props)
-        }
+            : renderSelect(props)}
     </FormGroup>
 ;
 
