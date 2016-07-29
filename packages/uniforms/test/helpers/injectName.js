@@ -76,9 +76,9 @@ describe('injectName', () => {
             mount(
                 <Field name="fieldA">
                     {injectName('fieldB', [
-                        <Field />,
-                        <Field />,
-                        <Field />
+                        <Field key={1} />,
+                        <Field key={2} />,
+                        <Field key={3} />
                     ])}
                 </Field>
             , reactContext);
