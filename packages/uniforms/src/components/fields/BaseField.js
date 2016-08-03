@@ -142,8 +142,8 @@ export default class BaseField extends Component {
         return this.context.uniforms.onChange;
     }
 
-    // eslint-disable-next-line complexity
-    getFieldProps (name, {explicitInitialValue = false, overrideValue = false, includeParent = false} = {}) {
+    // eslint-disable-next-line complexity, max-len
+    getFieldProps (name, {explicitInitialValue = false, overrideValue = false, includeParent = false, ensureValue = true} = {}) {
         const context = this.context.uniforms;
         const props = {
             ...this.getChildContextState(),
@@ -190,7 +190,7 @@ export default class BaseField extends Component {
 
             // This prevents (un)controlled input change warning.
             // More info: https://fb.me/react-controlled-components.
-            if (value === undefined) {
+            if (value === undefined && ensureValue) {
                 value = '';
             }
         } else if (explicitInitialValue) {

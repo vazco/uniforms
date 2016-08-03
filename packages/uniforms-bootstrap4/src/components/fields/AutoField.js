@@ -36,4 +36,4 @@ const Auto = ({component, ...props}) => {
     return createElement(component, props);
 };
 
-export default connectField(Auto, {includeInChain: false});
+export default connectField(Auto, {ensureValue: false, includeInChain: false, initialValue: false});

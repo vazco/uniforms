@@ -6,6 +6,7 @@ export default function connectField (component, {
     mapProps  = x => x,
     baseField = BaseField,
 
+    ensureValue    = true,
     initialValue   = true,
     includeParent  = false,
     includeInChain = true
@@ -18,7 +19,7 @@ export default function connectField (component, {
         }
 
         render () {
-            return createElement(component, mapProps(this.getFieldProps(undefined, {includeParent})));
+            return createElement(component, mapProps(this.getFieldProps(undefined, {ensureValue, includeParent})));
         }
 
         componentWillMount () {
