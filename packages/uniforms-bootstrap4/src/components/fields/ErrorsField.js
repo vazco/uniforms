@@ -5,7 +5,7 @@ import {nothing}   from 'uniforms';
 
 const ErrorsField = ({className, children, ...props}, {uniforms: {error, schema}}) =>
     (!error && !children) ? nothing : (
-        <section className={classnames('card', className)} {...props}>
+        <section className={classnames('card', className)} {...filterDOMProps(props)}>
             <section className="card-block">
                 {children}
 
