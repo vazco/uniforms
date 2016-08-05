@@ -1,6 +1,7 @@
-import React       from 'react';
-import classnames  from 'classnames';
-import {BaseField} from 'uniforms';
+import React            from 'react';
+import classnames       from 'classnames';
+import {BaseField}      from 'uniforms';
+import {filterDOMProps} from 'uniforms';
 
 const SubmitField = ({className, inputRef, ...props}, {uniforms: {error, state: {disabled}}}) =>
     <input
@@ -8,7 +9,7 @@ const SubmitField = ({className, inputRef, ...props}, {uniforms: {error, state: 
         disabled={!!(error || disabled)}
         ref={inputRef}
         type="submit"
-        {...props}
+        {...filterDOMProps(props)}
     />
 ;
 
