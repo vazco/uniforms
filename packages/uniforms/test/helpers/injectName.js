@@ -142,5 +142,28 @@ describe('injectName', () => {
             expect(Test.getCall(1).calledWithMatch({name: 'fieldA.fieldB.fieldC'})).to.be.ok;
             expect(Test.getCall(2).calledWithMatch({name: 'fieldA.fieldB.fieldC'})).to.be.ok;
         });
+
+        it('injects only the first level', () => {
+            mount(
+                <Field name="fieldA">
+                    {injectName('fieldB',
+                        <Field name="fieldC">
+                            <Test name="fieldD" />
+                        </Field>
+                    )}
+
+                    {injectName('fieldB',
+                        <span>
+                            <Field name="fieldC">
+                                <Test name="fieldD" />
+                            </Field>
+                        </span>
+                    )}
+                </Field>
+            , reactContext);
+
+            expect(Test.getCall(2).calledWithMatch({name: 'fieldD'})).to.be.ok;
+            expect(Test.getCall(4).calledWithMatch({name: 'fieldD'})).to.be.ok;
+        });
     });
 });
