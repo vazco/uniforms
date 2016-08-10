@@ -164,3 +164,152 @@ This is a guaranteed set of fields - every theme package will implement these, b
 | `SelectField`   | Select (or set of radio checkboxes).            |
 | `SubmitField`   | Submit button.                                  |
 | `TextField`     | Text (or any HTML5 compatible) input.           |
+
+<br>
+
+# Advanced topics
+
+## Forms
+
+### Asynchronous validation
+
+`ValidatedForm` (and so `AutoForm`) have an `onValidate` prop. It can be used to create an asynchronous validation:
+
+```js
+const onValidate = (model, error, callback) => {
+    // You can either ignore validation error...
+    if (omitValidation(model)) {
+        return callback(null);
+    }
+
+    // ... or any additional validation if an error is already there...
+    if (error) {
+        return callback();
+    }
+
+    // ... or feed it with another error.
+    MyAPI.validate(model, error => callback(error || null));
+};
+
+// Later...
+
+<ValidatedForm {...props} onValidate={onValidate} />
+```
+
+### Autosave
+
+Every form has an autosave functionality. If you set an `autosave` prop, then every change will trigger a submit. There's also an `autosaveDelay` prop - minimum time between saves in milliseconds (default: `0`).
+
+**Example:**
+
+```js
+<AutoForm
+    autosave
+    autosaveDelay={5000} // 5 seconds
+    schema={schema}
+    onSubmit={onSubmit}
+/>
+```
+
+### Post-submit handling
+
+It's a good UX practice to tell your users, that something failed or succeed. To make it simpler, there are `onSubmitFailure` and `onSubmitSuccess` props.
+
+**Example:**
+
+```js
+<AutoForm
+    schema={schema}
+    onSubmit={doc => db.saveThatReturnsPromise(doc)}
+    onSubmitSuccess={() => alert('Promise resolved!')}
+    onSubmitFailure={() => alert('Promise rejected!')}
+/>
+```
+
+### Validation options and modes
+
+Form can be validated in one those three styles:
+
+* `onChange`
+    Validate on every change.
+
+* `onChangeAfterSubmit` _(default)_
+    Validate on every change, but only after first submit.
+
+* `onSubmit`
+    Validate on every submit.
+
+If your schema validator accepts any options, those can be passed in `validator` prop.
+
+**Example:**
+
+```js
+<AutoForm
+    validate="onChange"
+    validator={validatorOptions}
+    schema={schema}
+    onSubmit={onSubmit}
+/>
+```
+
+### Example: `ModifierForm`
+
+```js
+import {BaseForm} from 'uniforms';
+import {AutoForm} from 'uniforms-semantic'; // Remember to choose correct theme package
+
+// In uniforms, every form is just an injectable set of functionalities. This way
+// allows us to live without many higher order components in favor of composed one.
+// If you want to get a deeper dive into it, read source of AutoForm or QuickForm
+// in the core package.
+const Modifier = parent => class extends parent {
+    // Expose injector.
+    // It's not required, but recommended.
+    static Modifier = Modifier;
+
+    // Alter component display name.
+    // It's also not required, but recommended.
+    static displayName = `Modifier${parent.displayName}`;
+
+    // Here you can override any internal form methods or create additional ones.
+    onSubmit (event) {
+        // Prevent default form submission.
+        // In this example, we are calling this.props.onSubmit directly, but
+        // normally you can just call super.onSubmit(event) - it will handle
+        // it by default.
+        if (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        if (this.props.onSubmit) {
+            const doc  = this.getModel();
+            const keys = this.getChildContextSchema().getSubfields();
+
+            const update = keys.filter(key =>  doc[key]);
+            const remove = keys.filter(key => !doc[key]);
+
+            // It's a good idea to omit empty modifiers.
+            if (update.length || remove.length) {
+                const $set   = update.reduce((acc, key) => ({...acc, [key]: doc[key]}), {});
+                const $unset = remove.reduce((acc, key) => ({...acc, [key]: ''}), {});
+
+                this.props.onSubmit({
+                    ...update.length && {$set},
+                    ...remove.length && {$unset}
+                });
+            }
+        }
+    }
+};
+
+// Now we have to inject our functionality.
+// This one can be called a ModifierBaseForm.
+export default Modifier(BaseForm);
+
+// Every functionality have to be overriden independently. This might seem a
+// little bit crazy, but we have to override BaseForm#onSubmit. If you are
+// using for example Bootstrap3, then change AutoForm.Semantic to AutoForm.Bootstrap3.
+// This one can be called AutoModifierForm.
+export default AutoForm.Auto(AutoForm.Validated(AutoForm.Quick(AutoForm.Semantic(Modifier(BaseForm)))));
+```
