@@ -108,8 +108,7 @@ const PostSchema = new SimpleSchema({
 Then use it in your form:
 
 ```js
-// Remember to choose correct theme package
-import {AutoForm} from 'uniforms-semantic';
+import {AutoForm} from 'uniforms-semantic'; // Remember to choose correct theme package
 
 const PostCreateForm = () =>
     <AutoForm schema={PostSchema} onSubmit={doc => console.log(doc)} />
@@ -312,4 +311,175 @@ export default Modifier(BaseForm);
 // using for example Bootstrap3, then change AutoForm.Semantic to AutoForm.Bootstrap3.
 // This one can be called AutoModifierForm.
 export default AutoForm.Auto(AutoForm.Validated(AutoForm.Quick(AutoForm.Semantic(Modifier(BaseForm)))));
+```
+
+<br>
+
+## Fields
+
+### `AutoField` algorithm
+
+```js
+let component = props.component;
+if (component === undefined) {
+    if (props.allowedValues) {
+        if (props.checkboxes && props.fieldType !== Array) {
+            component = RadioField;
+        } else {
+            component = SelectField;
+        }
+    } else {
+        switch (props.fieldType) {
+            case Date:    component = DateField; break;
+            case Array:   component = ListField; break;
+            case Number:  component = NumField;  break;
+            case Object:  component = NestField; break;
+            case String:  component = TextField; break;
+            case Boolean: component = BoolField; break;
+        }
+
+        invariant(component, 'Unsupported field type: %s', props.fieldType.toString());
+    }
+}
+```
+
+### Guaranteed props
+
+**Note:** These are **not** the only props, that field will receive - these are guaranteed for all fields created with `connectField` helper.
+
+| Name           | Type                  | Description                            |
+|:--------------:|:---------------------:|:--------------------------------------:|
+| `changed`      | `bool`                | Has field changed?                     |
+| `disabled`     | `bool`                | Is field disabled?                     |
+| `error`        | `object`              | Field scoped part of validation error. |
+| `errorMessage` | `string`              | Field scoped validation error message. |
+| `field`        | `object`              | Field definition from schema.          |
+| `fields`       | `arrayOf(string)`     | Subfields names.                       |
+| `fieldType`    | `func`                | Field type.                            |
+| `findError`    | `func(name)`          | Request another field error.           |
+| `findField`    | `func(name)`          | Request another field field.           |
+| `findValue`    | `func(name)`          | Request another field value.           |
+| `id`           | `string`              | Field id - given or random.            |
+| `label`        | `string`              | Field label.                           |
+| `name`         | `string`              | Field name.                            |
+| `onChange`     | `func(value, [name])` | Change field value.                    |
+| `parent`       | `object`              | Parent field props.                    |
+| `placeholder`  | `string`              | Field placeholder.                     |
+| `value`        | `any`                 | Field value.                           |
+
+### Props propagation
+
+Few props propagate in a very special way. These are `label`, `placeholder` and `disabled`.
+
+**Example:**
+
+```js
+<TextField />                    // default label | no      placeholder
+<TextField label="Text" />       // custom  label | no      placeholder
+<TextField label={false} />      // no      label | no      placeholder
+<TextField placeholder />        // default label | default placeholder
+<TextField placeholder="Text" /> // default label | custom  placeholder
+
+<NestField label={null}> // null = no label, but children have their labels
+    <TextField />
+</NestField>
+
+<NestField label={false}> // false = no label and their children have no labels
+    <TextField />
+</NestField>
+
+<ListField name="authors" disabled>   // Additions are disabled...
+    <ListItemField name="$" disabled> // deletion too...
+        <NestField disabled={false}>  // but editing is not.
+            <TextField name="name" />
+            <NumField  name="age" />
+        </NestField>
+    </ListItemField>
+</ListField>
+```
+
+**Note:** `label`, `placeholder` and `disabled` are casted to `Boolean` before being passed to nested fields.
+
+### Example: CustomAutoField
+
+**Note:** This example uses `connectField` helper. To read more see [API](#api).
+
+```js
+import {AutoField} from 'uniforms-semantic'; // Remember to choose correct theme package
+
+const CustomAuto = props => {
+    // This way we don't care about not handled cases - we use default
+    // AutoField as a fallback component.
+    const Component = determineComponentFromProps(props) || AutoField;
+
+    return (
+        <Component {...props} />
+    );
+};
+
+const CustomAutoField = connectField(CustomAuto, {ensureValue: false, includeInChain: false, initialValue: false});
+```
+
+You can also tell your `AutoForm`/`QuickForm`/`ValidatedQuickForm` to use it.
+
+```js
+<AutoForm {...props} autoField={CustomAutoField} />
+```
+
+### Example: CycleField
+
+**Note:** This example uses `connectField` helper. To read more see [API](#api).
+
+```js
+import React          from 'react';
+import classnames     from 'classnames';
+import {connectField} from 'uniforms';
+
+// This field works like this: cycle all allowed values and optionally
+// no-value state if field is not required. This one uses Semantic-UI.
+const Cycle = ({allowedValues, disabled, label, required, value, onChange}) =>
+    <a
+        className={classnames('ui', !value && 'basic', 'label')}
+        onClick={() =>
+            onChange(value
+                ? allowedValues.indexOf(value) === allowedValues.length - 1
+                    ? required
+                        ? allowedValues[0]
+                        : null
+                    : allowedValues[allowedValues.indexOf(value) + 1]
+                : allowedValues[0]
+            )
+        }
+    >
+        {value || label}
+    </a>
+;
+
+export default connectField(Cycle);
+```
+
+### Example: RatingField
+
+**Note:** This example uses `connectField` helper. To read more see [API](#api).
+
+```js
+import React          from 'react';
+import classnames     from 'classnames';
+import {connectField} from 'uniforms';
+
+// This field works like this: render stars for each rating and mark them
+// as filled, if rating (value) is greater. This one uses Semantic-UI.
+const Rating = ({className, disabled, max = 5, required, value, onChange}) =>
+    <section className={classnames('ui', {disabled, required}, className, 'rating')}>
+        {[...Array(max)].map((_, index) => index + 1).map(index =>
+            <i
+                key={index}
+                className={classnames(index <= value && 'active', 'icon')}
+                onClick={() => disabled || onChange(!required && value === index ? null : index)}
+            />
+        )}
+    </section>
+;
+
+export default connectField(Rating);
 ```
