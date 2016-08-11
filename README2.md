@@ -483,3 +483,126 @@ const Rating = ({className, disabled, max = 5, required, value, onChange}) =>
 
 export default connectField(Rating);
 ```
+
+## Schemas
+
+To make use of any schema, uniforms have to create a _bridge_ of it - unified schema mapper. A bridge is (preferably) a subclass of `Bridge`, implementing static `check(schema)` method and these instance methods:
+
+- `getError(name, error)`
+- `getErrorMessage(name, error)`
+- `getErrorMessages(error)`
+- `getField(name)`
+- `getInitialValue(name, props)`
+- `getProps(name, props)`
+- `getSubfields(name)`
+- `getType(name)`
+- `getValidator(options)`
+
+Currently there's only one built in bridge - `SimpleSchemaBridge`.
+
+**Note:** To read more see [API](#api), [`Bridge`](https://github.com/vazco/uniforms/blob/master/packages/uniforms/src/bridges/Bridge.js) and [`SimpleSchemaBridge`](https://github.com/vazco/uniforms/blob/master/packages/uniforms/src/bridges/SimpleSchemaBridge.js).
+
+### SimpleSchema definition
+
+**Note:** remember to import `uniforms` packages first.
+
+```js
+const PersonSchema = new SimpleSchema({
+    // ...
+
+    aboutMe: {
+        type: String,
+        uniforms: MyText       // Component...
+        uniforms: {            // ... or object ...
+            component: MyText, // ... with component ...
+            propA: 1           // ... and/or extra props.
+        }
+    }
+});
+```
+
+### Example: MyLittleSchema
+
+**Note:** This is a very basic schema just to show how it works and how can you create your own schema bridges.
+
+```js
+import {Bridge} from 'uniforms';
+
+class MyLittleSchema extends Bridge {
+    constructor (schema, validator) {
+        super(schema);
+
+        this.validator = validator;
+    }
+
+    getError (name, error) {
+        return error && error[name];
+    }
+
+    getErrorMessage (name, error) {
+        return error && error[name];
+    }
+
+    getErrorMessages (error) {
+        return error
+            ? Object.keys(this.schema).map(field => error[field])
+            : [];
+    }
+
+    getField (name) {
+        return this.schema[name.replace(/\.\d+/g, '.$')];
+    }
+
+    getType (name) {
+        return this.schema[name.replace(/\.\d+/g, '.$')].__type__;
+    }
+
+    getProps (name) {
+        return this.schema[name.replace(/\.\d+/g, '.$')];
+    }
+
+    getInitialValue (name) {
+        return this.schema[name.replace(/\.\d+/g, '.$')].initialValue;
+    }
+
+    getSubfields (name) {
+        return name
+            ? this.schema[name.replace(/\.\d+/g, '.$')].subfields || []
+            : Object.keys(this.schema).filter(field => field.indexOf('.') === -1);
+    }
+
+    getValidator () {
+        return this.validator;
+    }
+}
+
+const ExampleOfMyLittleSchema = new MyLittleSchema({
+    login:     {__type__: String, required: true, initialValue: '', label: 'Login'},
+    password1: {__type__: String, required: true, initialValue: '', label: 'Password'},
+    password2: {__type__: String, required: true, initialValue: '', label: 'Password (again)'}
+}, model => {
+    const error = {};
+
+    if (!model.login) {
+        error.login = 'Login is required!';
+    } else if (model.login.length < 5) {
+        error.login = 'Login have to be at least 5 characters!';
+    }
+
+    if (!model.password1) {
+        error.password1 = 'Password is required!';
+    } else if (model.password1.length < 10) {
+        error.login = 'Password have to be at least 10 characters!';
+    }
+
+    if (model.password1 !== model.password2) {
+        error.password1 = 'Passwords mismatch!';
+    }
+
+    if (Object.keys(error).length) {
+        throw error;
+    }
+});
+
+<AutoForm schema={ExampleOfMyLittleSchema} />
+```
