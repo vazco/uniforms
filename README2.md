@@ -606,3 +606,144 @@ const ExampleOfMyLittleSchema = new MyLittleSchema({
 
 <AutoForm schema={ExampleOfMyLittleSchema} />
 ```
+
+## Context data
+
+Some components might need to know current form state. All this this data is passed as `uniforms` in [React context](https://facebook.github.io/react/docs/context.html).
+
+### Available context data
+
+```js
+MyComponentUsingUniformsContext.contextTypes = {
+    uniforms: PropTypes.shape({
+        name: PropTypes.arrayOf(PropTypes.string).isRequired,
+
+        error: PropTypes.any,
+        model: PropTypes.object.isRequired,
+
+        schema: PropTypes.shape({
+            getError:         PropTypes.func.isRequired,
+            getErrorMessage:  PropTypes.func.isRequired,
+            getErrorMessages: PropTypes.func.isRequired,
+            getField:         PropTypes.func.isRequired,
+            getInitialValue:  PropTypes.func.isRequired,
+            getProps:         PropTypes.func.isRequired,
+            getSubfields:     PropTypes.func.isRequired,
+            getType:          PropTypes.func.isRequired,
+            getValidator:     PropTypes.func.isRequired
+        }).isRequired,
+
+        state: PropTypes.shape({
+            changed:    PropTypes.bool.isRequired,
+            changedMap: PropTypes.object.isRequired,
+
+            label:       PropTypes.bool.isRequired,
+            disabled:    PropTypes.bool.isRequired,
+            placeholder: PropTypes.bool.isRequired
+        }).isRequired,
+
+        onChange: PropTypes.func.isRequired,
+        randomId: PropTypes.func.isRequired
+    }).isRequired
+};
+```
+
+### Example: Conditional display
+
+```js
+import {BaseField} from 'uniforms';
+import {Children}  from 'react';
+import {nothing}   from 'uniforms';
+
+// We have to ensure, that there's only one children, because
+// returning an array from component is prohibited.
+const DisplayIf = ({children, condition}, {uniforms}) =>
+    condition(uniforms)
+        ? Children.only(children)
+        : nothing
+;
+
+DisplayIf.contextTypes = BaseField.contextTypes;
+
+export default DisplayIf;
+```
+
+**Example:**
+
+```js
+const ThreeStepForm = ({schema}) =>
+    <AutoForm schema={schema}>
+        <TextField name="fieldA" />
+
+        <DisplayIf condition={context => context.model.fieldA}>
+            <section>
+                <TextField name="fieldB" />
+
+                <DisplayIf condition={context => context.model.fieldB}>
+                    <span>
+                        Well done!
+                    </span>
+                </DisplayIf>
+            </section>
+        </DisplayIf>
+    </AutoForm>
+;
+```
+
+### Example: SubmitButton
+
+```js
+import React            from 'react';
+import {BaseField}      from 'uniforms';
+import {filterDOMProps} from 'uniforms';
+
+// This field works like this: render standard submit field and
+// disable it, when form is invalid. It's simplified version of
+// default SubmitField from uniforms-semantic.
+const SubmitField = (props, {uniforms: {error, state: {disabled}}}) =>
+    <input type="submit" disabled={!!(error || disabled)} />
+;
+
+SubmitField.contextTypes = BaseField.contextTypes;
+
+export default SubmitField;
+```
+
+### Example: SwapField
+
+```js
+import get            from 'lodash.get';
+import {Children}     from 'react';
+import {BaseField}    from 'uniforms';
+import {cloneElement} from 'react';
+
+// This field works like this: on click of it's child it
+// swaps values of fieldA and fieldB. Simple.
+const SwapField = ({children, fieldA, fieldB}, {uniforms: {model, onChange}}) =>
+    cloneElement(Children.only(children), {
+        onClick () {
+            const valueA = get(model, fieldA);
+            const valueB = get(model, fieldB);
+
+            onChange(fieldA, valueB);
+            onChange(fieldB, valueA);
+        }
+    })
+;
+
+SwapField.contextTypes = BaseField.contextTypes;
+
+export default SwapField;
+```
+
+**Example:**
+
+```js
+<section>
+    <TextField name="firstName" />
+    <SwapField fieldA="firstName" fieldB="lastName">
+        <Icon name="refresh" />
+    </SwapField>
+    <TextField name="lastName" />
+</section>
+```
