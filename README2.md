@@ -313,8 +313,6 @@ export default Modifier(BaseForm);
 export default AutoForm.Auto(AutoForm.Validated(AutoForm.Quick(AutoForm.Semantic(Modifier(BaseForm)))));
 ```
 
-<br>
-
 ## Fields
 
 ### `AutoField` algorithm
@@ -747,3 +745,27 @@ export default SwapField;
     <TextField name="lastName" />
 </section>
 ```
+
+<br>
+
+# Troubleshooting
+
+> `The specified value "..." is not a valid email address.`
+
+Your browser is trying to do it best. Those warnings are harmless, but currently there's no way to get rid of them, other than downgrading to React `15.1.0` or using different browser.
+
+<br>
+
+# Contributing
+
+See [CONTRIBUTING.md](https://github.com/vazco/uniforms/blob/master/CONTRIBUTING.md).
+
+<br>
+
+# Copyright and License
+
+Code and documentation &copy; 2016 [Vazco.eu](http://vazco.eu)
+Released under the MIT license.
+
+This package is part of [Universe](http://unicms.io), a package ecosystem based on [Meteor platform](http://meteor.com) maintained by [Vazco](http://www.vazco.eu).
+It works as standalone Meteor package, but you can get much more features when using the whole system.
