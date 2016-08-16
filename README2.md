@@ -127,7 +127,7 @@ That's all! `AutoForm` will generate complete form with labeled fields, an error
 
 **Note:** For a full description of components and their props - see [API](#api).
 
-### Forms components
+## Forms components
 
 Most of time you'll be using either `AutoForm` or `ValidatedForm`, but there are also other form components (rather low-level ones) with different capabilities.
 
@@ -745,6 +745,12 @@ export default SwapField;
     <TextField name="lastName" />
 </section>
 ```
+
+<br>
+
+# API
+
+See [API.md](https://github.com/vazco/uniforms/blob/master/API.md).
 
 <br>
 
