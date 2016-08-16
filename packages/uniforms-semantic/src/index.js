@@ -1,4 +1,5 @@
 export {default as AutoField}     from './components/fields/AutoField';
+export {default as AutoFields}    from './components/fields/AutoFields';
 export {default as BoolField}     from './components/fields/BoolField';
 export {default as DateField}     from './components/fields/DateField';
 export {default as ErrorField}    from './components/fields/ErrorField';
