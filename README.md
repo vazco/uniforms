@@ -39,6 +39,7 @@ In short: uniforms is a set of npm packages, which contains helpers and [React](
     - [Forms](#forms)
         - [Asynchronous validation](#asynchronous-validation)
         - [Autosave](#autosave)
+        - [Hierarchy](#hierarchy)
         - [Post-submit handling](#post-submit-handling)
         - [Validation options and modes](#validation-options-and-modes)
         - [Example: `ModifierForm`](#example-modifierform)
@@ -251,6 +252,12 @@ Every form has an autosave functionality. If you set an `autosave` prop, then ev
     onSubmit={onSubmit}
 />
 ```
+
+### Hierarchy
+
+<p align="center">
+    <img src="README.png">
+</p>
 
 ### Post-submit handling
 
@@ -817,3 +824,10 @@ Released under the MIT license.
 
 This package is part of [Universe](http://unicms.io), a package ecosystem based on [Meteor platform](http://meteor.com) maintained by [Vazco](http://www.vazco.eu).
 It works as standalone Meteor package, but you can get much more features when using the whole system.
+
+<style>
+    /* Full width tables */
+    .markdown-body table {
+        display:  table;
+    }
+</style>
