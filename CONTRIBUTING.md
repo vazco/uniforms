@@ -21,19 +21,28 @@ Third-party patches are essential for keeping every project great. We simply can
         * `Refactoring core package.`
         * `Updated README.`
 * Make sure you have added the necessary tests for your changes.
-* Make sure your code passes *all* tests.
+* Make sure your code passes *all* tests:
+    * `npm test`
 
 ## Preparing environment
 
-```shell
-# In root or single package directory
-$ npm run install
+**Note:** Ready to use playground is coming.
+
+If you want to use local version of `uniforms`, then clone the repo, run `npm install` inside and then link it in your `package.json`:
+
+```json
+{
+    "dependencies": {
+        "uniforms":            "path/to/repo/packages/uniforms",
+        "uniforms-bootstrap4": "path/to/repo/packages/uniforms-bootstrap4"
+    }
+}
 ```
 
-## Running linting and tests
+To reload your changes:
+
+**Note:** Remember to run `npm run build` in the repo first.
 
 ```shell
-# In root or single package directory
-$ npm run lint
-$ npm run test
+rm -rf node_modules/uniforms* && npm install --ignore-scripts
 ```
