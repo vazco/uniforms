@@ -24,6 +24,48 @@ In short: uniforms is a set of npm packages, which contains helpers and [React](
 
 <br>
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Installation](#installation)
+    - [meteor](#meteor)
+    - [npm](#npm)
+- [Quick start](#quick-start)
+- [Overview](#overview)
+    - [Forms components](#forms-components)
+    - [Fields components](#fields-components)
+- [Advanced topics](#advanced-topics)
+    - [Forms](#forms)
+        - [Asynchronous validation](#asynchronous-validation)
+        - [Autosave](#autosave)
+        - [Post-submit handling](#post-submit-handling)
+        - [Validation options and modes](#validation-options-and-modes)
+        - [Example: `ModifierForm`](#example-modifierform)
+    - [Fields](#fields)
+        - [`AutoField` algorithm](#autofield-algorithm)
+        - [Guaranteed props](#guaranteed-props)
+        - [Props propagation](#props-propagation)
+        - [Example: CustomAutoField](#example-customautofield)
+        - [Example: CycleField](#example-cyclefield)
+        - [Example: RatingField](#example-ratingfield)
+    - [Schemas](#schemas)
+        - [SimpleSchema definition](#simpleschema-definition)
+        - [Example: MyLittleSchema](#example-mylittleschema)
+    - [Context data](#context-data)
+        - [Available context data](#available-context-data)
+        - [Example: Conditional display](#example-conditional-display)
+        - [Example: SubmitButton](#example-submitbutton)
+        - [Example: SwapField](#example-swapfield)
+- [API](#api)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [Copyright and License](#copyright-and-license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<br>
+
 # Installation
 
 **Note:** If you are going to use a themed package - remember to include correct styles!
