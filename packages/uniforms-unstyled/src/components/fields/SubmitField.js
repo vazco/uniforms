@@ -2,8 +2,14 @@ import React            from 'react';
 import {BaseField}      from 'uniforms';
 import {filterDOMProps} from 'uniforms';
 
-const SubmitField = ({inputRef, ...props}, {uniforms: {error, state: {disabled}}}) =>
-    <input {...filterDOMProps(props)} ref={inputRef} type="submit" disabled={!!(error || disabled)} />
+const SubmitField = ({inputRef, value, ...props}, {uniforms: {error, state: {disabled}}}) =>
+    <input
+        disabled={!!(error || disabled)}
+        ref={inputRef}
+        type="submit"
+        value={value}
+        {...filterDOMProps(props)}
+    />
 ;
 
 SubmitField.contextTypes = BaseField.contextTypes;
