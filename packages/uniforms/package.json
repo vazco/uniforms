@@ -36,7 +36,7 @@
   "devDependencies": {
     "babel-cli": "^6.11.4",
     "babel-eslint": "^6.1.2",
-    "babel-plugin-istanbul": "^1.0.3",
+    "babel-plugin-istanbul": "^2.0.0",
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
@@ -47,10 +47,10 @@
     "eslint-config-vazco": "2.0.0",
     "eslint-plugin-babel": "^3.3.0",
     "eslint-plugin-react": "^6.1.2",
-    "jsdom": "^9.4.1",
+    "jsdom": "^9.4.2",
     "mocha": "^3.0.2",
     "mock-require": "^1.3.0",
-    "nyc": "^7.1.0",
+    "nyc": "^8.1.0",
     "react": "^15.0.0 || ^0.14.0",
     "react-addons-test-utils": "^15.0.0 || ^0.14.0",
     "react-dom": "^15.0.0 || ^0.14.0",
@@ -96,10 +96,10 @@
   },
   "dependencies": {
     "invariant": "^2.2.1",
-    "lodash.clonedeep": "^4.3.2",
-    "lodash.get": "^4.3.0",
-    "lodash.isequal": "^4.2.0",
-    "lodash.set": "^4.2.0",
-    "lodash.xorwith": "^4.3.0"
+    "lodash.clonedeep": "^4.5.0",
+    "lodash.get": "^4.4.2",
+    "lodash.isequal": "^4.4.0",
+    "lodash.set": "^4.3.2",
+    "lodash.xorwith": "^4.5.0"
   }
 }
