@@ -47,17 +47,19 @@ In short: uniforms is a set of npm packages, which contains helpers and [React](
         - [`AutoField` algorithm](#autofield-algorithm)
         - [Guaranteed props](#guaranteed-props)
         - [Props propagation](#props-propagation)
-        - [Example: CustomAutoField](#example-customautofield)
-        - [Example: CycleField](#example-cyclefield)
-        - [Example: RatingField](#example-ratingfield)
+        - [Example: `CompositeField`](#example-compositefield)
+        - [Example: `CustomAutoField`](#example-customautofield)
+        - [Example: `CycleField`](#example-cyclefield)
+        - [Example: `RangeField`](#example-rangefield)
+        - [Example: `RatingField`](#example-ratingfield)
     - [Schemas](#schemas)
         - [SimpleSchema definition](#simpleschema-definition)
-        - [Example: MyLittleSchema](#example-mylittleschema)
+        - [Example: `MyLittleSchema`](#example-mylittleschema)
     - [Context data](#context-data)
         - [Available context data](#available-context-data)
-        - [Example: Conditional display](#example-conditional-display)
-        - [Example: SubmitButton](#example-submitbutton)
-        - [Example: SwapField](#example-swapfield)
+        - [Example: `DisplayIf`](#example-displayif)
+        - [Example: `SubmitButton`](#example-submitbutton)
+        - [Example: `SwapField`](#example-swapfield)
 - [API](#api)
 - [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
@@ -447,7 +449,29 @@ Few props propagate in a very special way. These are `label`, `placeholder` and 
 
 **Note:** `label`, `placeholder` and `disabled` are casted to `Boolean` before being passed to nested fields.
 
-### Example: CustomAutoField
+### Example: `CompositeField`
+
+**Note:** This example uses `connectField` helper. To read more see [API](#api).
+
+```js
+import React          from 'react';
+import {AutoField}    from 'uniforms';
+import {connectField} from 'uniforms';
+
+// This field is a kind of a shortcut for few fields. You can also access all field props
+// here, like value or onChange for some extra logic.
+const Composity = () =>
+    <section>
+        <AutoField field="firstName" />
+        <AutoField field="lastName" />
+        <AutoField field="age" />
+    </section>
+;
+
+export default connectField(Composity);
+```
+
+### Example: `CustomAutoField`
 
 **Note:** This example uses `connectField` helper. To read more see [API](#api).
 
@@ -473,7 +497,7 @@ You can also tell your `AutoForm`/`QuickForm`/`ValidatedQuickForm` to use it.
 <AutoForm {...props} autoField={CustomAutoField} />
 ```
 
-### Example: CycleField
+### Example: `CycleField`
 
 **Note:** This example uses `connectField` helper. To read more see [API](#api).
 
@@ -505,7 +529,27 @@ const Cycle = ({allowedValues, disabled, label, required, value, onChange}) =>
 export default connectField(Cycle);
 ```
 
-### Example: RatingField
+### Example: `RangeField`
+
+**Note:** This example uses `connectField` helper. To read more see [API](#api).
+
+```js
+import React          from 'react';
+import {connectField} from 'uniforms';
+
+// This field works like this: two datepickers are bound to each other - outcoming value is an
+// {start, stop} object.
+const Range = ({onChange, value: {start, stop}}) =>
+    <section>
+        <DatePicker max={stop}  value={start} onChange={start => onChange(start, stop)} />
+        <DatePicker min={start} value={stop}  onChange={stop  => onChange(start, stop)} />
+    </section>
+;
+
+export default connectField(Range);
+```
+
+### Example: `RatingField`
 
 **Note:** This example uses `connectField` helper. To read more see [API](#api).
 
@@ -568,7 +612,7 @@ const PersonSchema = new SimpleSchema({
 });
 ```
 
-### Example: MyLittleSchema
+### Example: `MyLittleSchema`
 
 **Note:** This is a very basic schema just to show how it works and how can you create your own schema bridges.
 
@@ -695,7 +739,7 @@ MyComponentUsingUniformsContext.contextTypes = {
 };
 ```
 
-### Example: Conditional display
+### Example: `DisplayIf`
 
 ```js
 import {BaseField} from 'uniforms';
@@ -737,7 +781,7 @@ const ThreeStepForm = ({schema}) =>
 ;
 ```
 
-### Example: SubmitButton
+### Example: `SubmitButton`
 
 ```js
 import React            from 'react';
@@ -756,7 +800,7 @@ SubmitField.contextTypes = BaseField.contextTypes;
 export default SubmitField;
 ```
 
-### Example: SwapField
+### Example: `SwapField`
 
 ```js
 import get            from 'lodash.get';
