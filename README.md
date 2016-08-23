@@ -460,7 +460,7 @@ import {connectField} from 'uniforms';
 
 // This field is a kind of a shortcut for few fields. You can also access all field props
 // here, like value or onChange for some extra logic.
-const Composity = () =>
+const Composite = () =>
     <section>
         <AutoField field="firstName" />
         <AutoField field="lastName" />
@@ -468,7 +468,7 @@ const Composity = () =>
     </section>
 ;
 
-export default connectField(Composity);
+export default connectField(Composite);
 ```
 
 ### Example: `CustomAutoField`
