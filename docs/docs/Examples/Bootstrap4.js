@@ -1,3 +1,7 @@
+/**
+ * This is a Bootstrap4 auto-loader for our common examples
+ * your build system will probably already have Bootstrap4 & Tether
+ */
 import React      from 'react';
 import {AutoForm} from 'uniforms-bootstrap4';
 
