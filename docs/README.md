@@ -2,10 +2,19 @@
 
 We'd love your contributions! Please send us Pull Requests or open issues on [github](https://github.com/vazco/uniforms). Also, read the [contribution guidelines](https://github.com/vazco/uniforms/blob/master/CONTRIBUTING.md).
 
-## Running locally
-
-If you are making a larger contribution, you may need to run the site locally:
+# Preparing environment
 
 ```shell
-$ meteor
+$ git clone git@github.com:vazco/uniforms.git
+$ cd uniforms
+$ npm install
+$ npm run build
+$ cd docs
+$ npm install
+$ npm start
 ```
+
+# Making changes
+
+1. Edit code in `packages/`.
+2. Run `npm run reset` in the docs.

@@ -1,6 +1,5 @@
 aldeed:simple-schema
 check
-documentation
 ecmascript
 es5-shim
 kadira:dochead

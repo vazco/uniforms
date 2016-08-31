@@ -1,13 +1,126 @@
-import React from 'react';
+import Frame      from 'react-frame-component';
+import PanelGroup from 'react-panelgroup';
+import React      from 'react';
 
-import Side from './Side';
-import View from './View';
+import {getSchemas} from '/assets/schemas';
+import {getSchema}  from '/assets/schemas';
+import {getStyles}  from '/assets/styles';
+import {getThemes}  from '/assets/themes';
+import {getTheme}   from '/assets/themes';
 
-const Application = ({route}) =>
-    <main>
-        <Side route={route} />
-        <View route={route} />
-    </main>
-;
+export class Application extends React.Component {
+    componentWillMount () {
+        this.componentWillReceiveProps(this.props);
+    }
+
+    componentWillReceiveProps ({schema, theme}) {
+        const state = {
+            doc: null,
+
+            schemas: getSchemas(),
+            themes:  getThemes(),
+
+            schema: getSchema(schema),
+            styles: getStyles(theme),
+            theme:  getTheme(theme)
+        };
+
+        if (this.state) {
+            this.setState(state);
+        } else {
+            this.state = state;
+        }
+    }
+
+    render () {
+        const {
+            props: {
+                onSchema,
+                onTheme
+            },
+
+            state: {
+                doc,
+                schema,
+                schemas,
+                styles,
+                theme,
+                themes
+            }
+        } = this;
+
+        return (
+            <PanelGroup spacing={3}>
+                <section>
+                    <nav className="panelGroupNavbar">
+                        <section className="panelHeader">
+                            <b>
+                                uniforms
+                            </b>
+                        </section>
+
+                        <section className="panelHeaderInfo">
+                            <select value={theme.text} onChange={event => onTheme(event.target.value)}>
+                                {themes.map(theme =>
+                                    <option key={theme} value={theme}>
+                                        Theme - {theme}
+                                    </option>
+                                )}
+                            </select>
+
+                            <select value={0} onChange={event => onSchema(getSchema(event.target.value).string)}>
+                                <option value={0}>
+                                    Select example
+                                </option>
+
+                                {schemas.map(schema =>
+                                    <option key={schema} value={schema}>
+                                        {schema}
+                                    </option>
+                                )}
+                            </select>
+                        </section>
+                    </nav>
+
+                    <textarea value={schema.string} onChange={event => onSchema(event.target.value)} />
+
+                    <a href="https://github.com/vazco/uniforms">
+                        {/* eslint-disable max-len */}
+                        <img
+                            alt="Fork me on GitHub"
+                            data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
+                            src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
+                        />
+                        {/* eslint-enable max-len */}
+                    </a>
+                </section>
+
+                <Frame>
+                    {styles}
+                    {schema.object ? (
+                        <theme.components.AutoForm
+                            key={schema.string}
+                            schema={schema.object}
+                            onSubmit={doc => this.setState({doc: JSON.stringify(doc, null, 4)})}
+                        />
+                    ) : (
+                        <span>
+                            {schema.error.message}
+                        </span>
+                    )}
+
+                    {!!doc && (
+                        <br />
+                    )}
+                    {!!doc && (
+                        <pre>
+                            {doc}
+                        </pre>
+                    )}
+                </Frame>
+            </PanelGroup>
+        );
+    }
+}
 
 export default Application;

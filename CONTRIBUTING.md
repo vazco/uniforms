@@ -24,25 +24,6 @@ Third-party patches are essential for keeping every project great. We simply can
 * Make sure your code passes *all* tests:
     * `npm test`
 
-## Preparing environment
+# Running locally
 
-**Note:** Ready to use playground is coming.
-
-If you want to use local version of `uniforms`, then clone the repo, run `npm install` inside and then link it in your `package.json`:
-
-```json
-{
-    "dependencies": {
-        "uniforms":            "path/to/repo/packages/uniforms",
-        "uniforms-bootstrap4": "path/to/repo/packages/uniforms-bootstrap4"
-    }
-}
-```
-
-To reload your changes:
-
-**Note:** Remember to run `npm run build` in the repo first.
-
-```shell
-rm -rf node_modules/uniforms* && npm install --ignore-scripts
-```
+See [docs](https://github.com/vazco/uniforms/blob/master/docs).
