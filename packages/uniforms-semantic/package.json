@@ -28,7 +28,7 @@
     "clean": "rimraf coverage lib .nyc_output",
     "cover": "cross-env NODE_ENV=test nyc npm test",
     "lint": "eslint src test",
-    "prepublish": "npm run lint && npm run test && npm run build",
+    "prepublish": "npm run build",
     "pretest": "npm run lint",
     "reset": "rimraf node_modules",
     "test": "babel-node node_modules/.bin/_mocha --require test/index.js --recursive test --reporter list"
