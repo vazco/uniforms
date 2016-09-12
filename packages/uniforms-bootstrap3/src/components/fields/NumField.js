@@ -4,6 +4,8 @@ import {connectField} from 'uniforms';
 
 import FormGroup from './FormGroup';
 
+const noneIfNaN = x => isNaN(x) ? undefined : x;
+
 const Num = props =>
     <FormGroup {...props}>
         <input
@@ -13,7 +15,7 @@ const Num = props =>
             max={props.max}
             min={props.min}
             name={props.name}
-            onChange={event => props.onChange((props.decimal ? parseFloat : parseInt)(event.target.value) || undefined)}
+            onChange={event => props.onChange(noneIfNaN((props.decimal ? parseFloat : parseInt)(event.target.value)))}
             placeholder={props.placeholder}
             ref={props.inputRef}
             step={props.decimal ? 0.01 : 1}

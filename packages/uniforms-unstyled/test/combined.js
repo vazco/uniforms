@@ -29,6 +29,7 @@ describe('Everything', () => {
     const base = {label, required};
 
     const schema = {
+        'x00':     {...base, id: 'x00',    __type__: Number},
         'x01':     {...base, id: 'x01',    __type__: String},
         'x02':     {...base, id: 'x02',    __type__: Number, allowedValues},
         'x03':     {...base,               __type__: Number, allowedValues, checkboxes},
@@ -94,6 +95,28 @@ describe('Everything', () => {
             schema={bridge}
         />
     );
+
+    it('works (NumField)', async () => {
+        expect(wrapper.find('#x00').props()).to.have.property('value', 0);
+        expect(wrapper.find('#x00').simulate('change', {target: {value: 0}})).to.be.ok;
+        expect(wrapper.find('#x00').props()).to.have.property('value', 0);
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
+        expect(onChange.lastCall.calledWith('x00', 0)).to.be.ok;
+        expect(onSubmit.lastCall.calledWithMatch({x00: 0})).to.be.ok;
+    });
+
+    it('works (NumField, invalid)', async () => {
+        expect(wrapper.find('#x00').props()).to.have.property('value', 0);
+        expect(wrapper.find('#x00').simulate('change', {target: {value: 'invalid'}})).to.be.ok;
+        expect(wrapper.find('#x00').props()).to.have.property('value', 0);
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
+        expect(onChange.lastCall.calledWith('x00', undefined)).to.be.ok;
+        expect(onSubmit.lastCall.calledWithMatch({x00: undefined})).to.be.ok;
+    });
 
     it('works (TextField)', async () => {
         expect(wrapper.find('#x01').props()).to.have.property('value', '');
@@ -322,7 +345,7 @@ describe('Everything', () => {
         wrapper.setProps({error: {}});
         wrapper.setProps({model: {x09: ['', '', '']}});
 
-        schema.x00 = {__type__: () => {}};
+        schema.x = {__type__: () => {}};
 
         expect(() => wrapper.update()).to.throw(/Unsupported field type/);
     });

@@ -2,6 +2,8 @@ import React            from 'react';
 import {connectField}   from 'uniforms';
 import {filterDOMProps} from 'uniforms';
 
+const noneIfNaN = x => isNaN(x) ? undefined : x;
+
 const Num = ({
     decimal,
     disabled,
@@ -29,7 +31,7 @@ const Num = ({
             max={max}
             min={min}
             name={name}
-            onChange={event => onChange((decimal ? parseFloat : parseInt)(event.target.value) || undefined)}
+            onChange={event => onChange(noneIfNaN((decimal ? parseFloat : parseInt)(event.target.value)))}
             placeholder={placeholder}
             ref={inputRef}
             step={decimal ? 0.01 : 1}
