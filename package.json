@@ -4,20 +4,20 @@
     "babel-cli": "^6.11.4",
     "coveralls": "^2.11.12",
     "cross-env": "^2.0.0",
-    "lerna": "2.0.0-beta.24",
+    "lerna": "2.0.0-beta.28",
     "nyc": "^8.1.0",
     "rimraf": "^2.5.4"
   },
   "scripts": {
-    "build": "lerna --concurrency 1 run build",
-    "clean": "lerna --concurrency 1 run clean && rimraf coverage .nyc_output",
-    "cover": "lerna --concurrency 1 run cover && cross-env NODE_ENV=test nyc npm test",
+    "build": "lerna --concurrency 5 run build",
+    "clean": "lerna --concurrency 5 run clean && rimraf coverage .nyc_output",
+    "cover": "lerna --concurrency 5 run cover && cross-env NODE_ENV=test nyc npm test",
     "coveralls": "cross-env NODE_ENV=test nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "install": "lerna --concurrency 1 bootstrap",
-    "lint": "lerna --concurrency 1 run lint",
-    "publish": "lerna --concurrency 1 publish",
-    "reset": "lerna --concurrency 1 run reset && rimraf node_modules",
-    "test": "lerna --concurrency 1 run test"
+    "install": "lerna --concurrency 5 bootstrap",
+    "lint": "lerna --concurrency 5 run lint",
+    "publish": "lerna publish",
+    "reset": "lerna --concurrency 5 run reset && rimraf node_modules",
+    "test": "lerna --concurrency 5 run test"
   },
   "nyc": {
     "reporter": [
