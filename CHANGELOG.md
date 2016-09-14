@@ -39,7 +39,7 @@
 <br>
 
 ## v1.0.0-rc.27
-- **Added:** New `onSubmitSuccess` and `onSubmitFailure` props on forms. [#\51](https://github.com/vazco/uniforms/issues/51)
+- **Added:** New `onSubmitSuccess` and `onSubmitFailure` props on forms. [\#51](https://github.com/vazco/uniforms/issues/51)
 - **Changed:**  Improved error handling - make use of `invariant` package.
 - **Changed:** Prevent validation when schema has changed and form is not submitted. [\#82](https://github.com/vazco/uniforms/issues/82)
 - **Fixed:** Regression with HTML5 inputs. [\#80](https://github.com/vazco/uniforms/issues/80)
@@ -49,19 +49,19 @@
 ## v1.0.0-rc.26
 - **Added:** New `filterDOMProps` helper.
 - **Fixed:** AutoForm performance. [\#70](https://github.com/vazco/uniforms/issues/70)
-- **Fixed:** Dynamic schema change. [#\76](https://github.com/vazco/uniforms/issues/76)
-- **Fixed:** Get rid of unknown props warning. [#\64](https://github.com/vazco/uniforms/issues/64)
-- **Fixed:** Get rid of unknown props warning. [#\75](https://github.com/vazco/uniforms/issues/75)
+- **Fixed:** Dynamic schema change. [\#76](https://github.com/vazco/uniforms/issues/76)
+- **Fixed:** Get rid of unknown props warning. [\#64](https://github.com/vazco/uniforms/issues/64)
+- **Fixed:** Get rid of unknown props warning. [\#75](https://github.com/vazco/uniforms/issues/75)
 
 <br>
 
 ## v1.0.0-rc.25
 - **Added:** New `autosaveDelay` prop on forms. [\#29](https://github.com/vazco/uniforms/issues/29)
 - **Added:** New `icon` and `iconLeft` prop in semantic theme. [\#67](https://github.com/vazco/uniforms/issues/67)
-- **Added:** New `inputRef` prop on every field. [#\68](https://github.com/vazco/uniforms/issues/68)
+- **Added:** New `inputRef` prop on every field. [\#68](https://github.com/vazco/uniforms/issues/68)
 - **Documented:** `ModifierForm` example. [\#66](https://github.com/vazco/uniforms/issues/66)
-- **Fixed:** Dramatically improved performance. [#\70](https://github.com/vazco/uniforms/issues/70)
-- **Fixed:** Styling of `ListField` in bootstrap theme. [#\72](https://github.com/vazco/uniforms/issues/72)
+- **Fixed:** Dramatically improved performance. [\#70](https://github.com/vazco/uniforms/issues/70)
+- **Fixed:** Styling of `ListField` in bootstrap theme. [\#72](https://github.com/vazco/uniforms/issues/72)
 - **Fixed:** `findError`.
 
 <br>
@@ -71,7 +71,7 @@
 - **Added:** New `injectName` helper.
 - **Changed:** Initial value logic for better UX. [\#58](https://github.com/vazco/uniforms/issues/58)
 - **Changed:** `joinName` works with dots in parts.
-- **Fixed:** Get rid of unknown props warning. [#\64](https://github.com/vazco/uniforms/issues/64)
+- **Fixed:** Get rid of unknown props warning. [\#64](https://github.com/vazco/uniforms/issues/64)
 - **Fixed:** Invalid `propTypes`.
 - **Fixed:** `HiddenField` lead to infinite loop. [\#63](https://github.com/vazco/uniforms/issues/63)
 - **Fixed:** `NestField` lead to infinite loop. [\#62](https://github.com/vazco/uniforms/issues/62)
