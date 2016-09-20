@@ -80,7 +80,7 @@ const Validated = parent => class extends parent {
         } else if (!isEqual(this.props.model, model)) {
             if (validate === 'onChange' ||
                 validate === 'onChangeAfterSubmit' && this.state.validate) {
-                this.onValidate();
+                this.onValidateModel(model);
             }
         }
     }
