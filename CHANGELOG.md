@@ -1,11 +1,16 @@
 # Change Log
 
+## [v1.0.1](https://github.com/vazco/uniforms/releases/tag/v1.0.1)
+- **Fixed:** Controlled `ValidatedForm` validates with the old model. [\#104](https://github.com/vazco/uniforms/issues/104)
+
+<br>
+
 ## [v1.0.0](https://github.com/vazco/uniforms/releases/tag/v1.0.0)
 
 <br>
 
 ## [v1.0.0-rc.33](https://github.com/vazco/uniforms/releases/tag/v1.0.0-rc.33)
-- **Fixed:** A `NumberField` does not seem to let me enter "0" as the number. [\#101](https://github.com/vazco/uniforms/issues/101)
+- **Fixed:** `NumberField` does not seem to let me enter "0" as the number. [\#101](https://github.com/vazco/uniforms/issues/101)
 
 <br>
 
