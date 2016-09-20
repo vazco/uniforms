@@ -1,5 +1,7 @@
 # Change Log
 
+## [v1.0.0](https://github.com/vazco/uniforms/releases/tag/v1.0.0)
+
 <br>
 
 ## [v1.0.0-rc.33](https://github.com/vazco/uniforms/releases/tag/v1.0.0-rc.33)
