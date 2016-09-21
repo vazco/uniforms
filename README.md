@@ -40,6 +40,7 @@ In short: uniforms is a set of npm packages, which contains helpers and [React](
         - [Asynchronous validation](#asynchronous-validation)
         - [Autosave](#autosave)
         - [Hierarchy](#hierarchy)
+        - [Methods](#methods)
         - [Post-submit handling](#post-submit-handling)
         - [Validation options and modes](#validation-options-and-modes)
         - [Example: `ModifierForm`](#example-modifierform)
@@ -260,6 +261,35 @@ Every form has an autosave functionality. If you set an `autosave` prop, then ev
 <p align="center">
     <img src="README.png">
 </p>
+
+### Methods
+
+You can use [React `ref` prop](https://facebook.github.io/react/docs/more-about-refs.html) to manually access form methods. Example usage:
+
+```js
+const MyForm = ({schema, onSubmit}) => {
+    let formRef;
+
+    return (
+        <section>
+            <AutoForm ref={ref => formRef = ref} schema={schema} onSubmit={onSubmit} />
+            <small onClick={() => formRef.reset()}>
+                Reset
+            </small>
+            <small onClick={() => formRef.submit()}>
+                Submit
+            </small>
+        </section>
+    );
+};
+```
+
+All available methods:
+
+* `change(key, value)`
+* `reset()`
+* `submit()`
+* `validate()` _(added in `ValidatedForm`)_
 
 ### Post-submit handling
 
