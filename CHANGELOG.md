@@ -1,5 +1,10 @@
 # Change Log
 
+## [v1.1.0](https://github.com/vazco/uniforms/releases/tag/v1.1.0)
+- **Added:** Support for SimpleSchema2. [\#99](https://github.com/vazco/uniforms/issues/99)
+
+<br>
+
 ## [v1.0.1](https://github.com/vazco/uniforms/releases/tag/v1.0.1)
 - **Fixed:** Controlled `ValidatedForm` validates with the old model. [\#104](https://github.com/vazco/uniforms/issues/104)
 
@@ -15,7 +20,7 @@
 <br>
 
 ## [v1.0.0-rc.32](https://github.com/vazco/uniforms/releases/tag/v1.0.0-rc.32)
-- **Added:** New documentation. [\#92](https://github.com/vazco/uniforms/issues/98)
+- **Added:** New documentation. [\#92](https://github.com/vazco/uniforms/issues/92)
 - **Added:** New playground. [\#98](https://github.com/vazco/uniforms/issues/98)
 - **Fixed:** `SubmitField` doesn't allow you to set value. [\#95](https://github.com/vazco/uniforms/issues/95)
 
