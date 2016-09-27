@@ -1,5 +1,10 @@
 # Change Log
 
+## [v1.1.1](https://github.com/vazco/uniforms/releases/tag/v1.1.1)
+- **Fixed:** Missing export.
+
+<br>
+
 ## [v1.1.0](https://github.com/vazco/uniforms/releases/tag/v1.1.0)
 - **Added:** Support for SimpleSchema2. [\#99](https://github.com/vazco/uniforms/issues/99)
 
