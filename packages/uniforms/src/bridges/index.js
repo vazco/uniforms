@@ -1,11 +1,13 @@
 import invariant from 'invariant';
 
-import Bridge             from './Bridge';
-import SimpleSchemaBridge from './SimpleSchemaBridge';
+import Bridge              from './Bridge';
+import SimpleSchemaBridge  from './SimpleSchemaBridge';
+import SimpleSchema2Bridge from './SimpleSchema2Bridge';
 
 const bridges = [
     Bridge,
-    SimpleSchemaBridge
+    SimpleSchemaBridge,
+    SimpleSchema2Bridge
 ];
 
 export default function createSchemaBridge (schema) {
