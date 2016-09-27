@@ -82,6 +82,9 @@ These are npm packages, so they can't imply any Meteor package, and you have to 
 # If you are going to use SimpleSchema
 $ meteor add aldeed:simple-schema check
 
+# If you are going to use SimpleSchema@2
+$ meteor npm install simpl-schema
+
 # Components (pick one)
 $ meteor npm install --save react react-dom uniforms uniforms-bootstrap3
 $ meteor npm install --save react react-dom uniforms uniforms-bootstrap4
@@ -619,9 +622,12 @@ To make use of any schema, uniforms have to create a _bridge_ of it - unified sc
 - `getType(name)`
 - `getValidator(options)`
 
-Currently there's only one built in bridge - `SimpleSchemaBridge`.
+Currently built in bridges:
 
-**Note:** To read more see [API](#api), [`Bridge`](https://github.com/vazco/uniforms/blob/master/packages/uniforms/src/bridges/Bridge.js) and [`SimpleSchemaBridge`](https://github.com/vazco/uniforms/blob/master/packages/uniforms/src/bridges/SimpleSchemaBridge.js).
+- `SimpleSchemaBridge`
+- `SimpleSchema2Bridge`
+
+**Note:** To read more see [API](#api) and [`Bridge`](https://github.com/vazco/uniforms/blob/master/packages/uniforms/src/bridges/Bridge.js).
 
 ### SimpleSchema definition
 
