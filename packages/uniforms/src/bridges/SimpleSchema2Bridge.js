@@ -1,44 +1,13 @@
-/* global Package */
-
-import cloneDeep from 'lodash.clonedeep';
 import invariant from 'invariant';
 
 import Bridge         from './Bridge';
 import joinName       from '../helpers/joinName';
 import filterDOMProps from '../helpers/filterDOMProps';
 
-let Match        = (typeof global === 'object' ? global : window).Match;
-let SimpleSchema = (typeof global === 'object' ? global : window).SimpleSchema;
-
+let SimpleSchema;
 try {
-    if (typeof Package === 'object') {
-        if (Match === undefined) {
-            Match = Package['check'];
-            Match = Match.Match;
-        }
-
-        if (SimpleSchema === undefined) {
-            SimpleSchema = Package['aldeed:simple-schema'];
-            SimpleSchema = SimpleSchema.SimpleSchema;
-        }
-    }
-
-    SimpleSchema.extendOptions({
-        uniforms: Match.Optional(
-            Match.OneOf(
-                String,
-                Function,
-                Match.ObjectIncluding({
-                    component: Match.Optional(
-                        Match.OneOf(
-                            String,
-                            Function
-                        )
-                    )
-                })
-            )
-        )
-    });
+    SimpleSchema = require('simpl-schema').default;
+    SimpleSchema.extendOptions(['uniforms']);
 
     // There's no possibility to retrieve them at runtime
     filterDOMProps.register(
@@ -62,15 +31,16 @@ try {
     );
 } catch (_) { /* Ignore it. */ }
 
-export default class SimpleSchemaBridge extends Bridge {
+// export default class SimpleSchema2Bridge extends Bridge {
+export class SimpleSchema2Bridge extends Bridge {
     static check (schema) {
         return SimpleSchema && (
             schema &&
             schema.getDefinition &&
-            schema.messageForError &&
+            schema.messageBox &&
             schema.objectKeys &&
             schema.validator &&
-            schema.version !== 2
+            schema.version === 2
         );
     }
 
@@ -86,13 +56,7 @@ export default class SimpleSchemaBridge extends Bridge {
     getErrorMessage (name, error) {
         let scopedError = this.getError(name, error);
         if (scopedError) {
-            return this.schema.messageForError(
-                scopedError.type,
-                scopedError.name,
-                null,
-                scopedError.details &&
-                scopedError.details.value
-            );
+            return this.schema.messageForError(scopedError);
         }
 
         return '';
@@ -101,15 +65,7 @@ export default class SimpleSchemaBridge extends Bridge {
     getErrorMessages (error) {
         if (error) {
             if (Array.isArray(error.details)) {
-                return error.details.map(error =>
-                    this.schema.messageForError(
-                        error.type,
-                        error.name,
-                        null,
-                        error.details &&
-                        error.details.value
-                    )
-                );
+                return error.details.map(error => this.schema.messageForError(error));
             }
 
             if (error.message) {
@@ -129,7 +85,7 @@ export default class SimpleSchemaBridge extends Bridge {
 
         invariant(definition, 'Field not found in schema: "%s"', name);
 
-        return definition;
+        return {...definition, ...definition.type[0]};
     }
 
     getInitialValue (name, props = {}) {
@@ -145,14 +101,14 @@ export default class SimpleSchemaBridge extends Bridge {
             return [...Array(items)].map(() => item);
         }
 
-        if (field.type === Object) {
+        if (field.type === Object || SimpleSchema2Bridge.check(field.type)) {
             return {};
         }
 
         return field.defaultValue;
     }
 
-    getProps (name, props) {
+    getProps (name, props = {}) {
         // Type should be omitted.
         // eslint-disable-next-line no-unused-vars
         let {optional, type, uniforms, ...field} = this.getField(name);
@@ -179,6 +135,8 @@ export default class SimpleSchemaBridge extends Bridge {
                     field.transform = itemProps.transform;
                 }
             } catch (e) { /* do nothing */ }
+        } else if (type === Number) {
+            field = {...field, decimal: true};
         }
 
         let options = props.options || field.options;
@@ -206,16 +164,37 @@ export default class SimpleSchemaBridge extends Bridge {
     }
 
     getSubfields (name) {
-        return this.schema.objectKeys(SimpleSchema._makeGeneric(name));
+        // aldeed/node-simple-schema#12
+        // return this.schema.objectKeys(name);
+
+        if (!name) {
+            return this.schema.objectKeys();
+        }
+
+        const type = this.getField(name).type;
+
+        if (SimpleSchema2Bridge.check(type)) {
+            return type.objectKeys();
+        }
+
+        return this.schema.objectKeys(name);
     }
 
     getType (name) {
-        return this.getField(name).type;
+        const type = this.getField(name).type;
+
+        if (type === SimpleSchema.Integer) {
+            return Number;
+        }
+
+        if (SimpleSchema2Bridge.check(type)) {
+            return Object;
+        }
+
+        return type;
     }
 
     getValidator (options = {clean: true}) {
-        const validator = this.schema.validator(options);
-        return model => validator(cloneDeep({...model}));
+        return this.schema.validator(options);
     }
 }
-
