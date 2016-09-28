@@ -16,4 +16,5 @@ require('fbjs/lib/ExecutionEnvironment').canUseDOM = true;
 // Mocks
 import mock from 'mock-require';
 
+mock('uniforms', '../../uniforms/src');
 mock('uniforms-unstyled', '../src');
