@@ -100,6 +100,7 @@
     "lodash.get": "^4.4.2",
     "lodash.isequal": "^4.4.0",
     "lodash.set": "^4.3.2",
-    "lodash.xorwith": "^4.5.0"
+    "lodash.xorwith": "^4.5.0",
+    "simpl-schema": "0.0.3"
   }
 }
