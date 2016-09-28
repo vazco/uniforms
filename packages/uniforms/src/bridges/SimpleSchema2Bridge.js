@@ -31,8 +31,7 @@ try {
     );
 } catch (_) { /* Ignore it. */ }
 
-// export default class SimpleSchema2Bridge extends Bridge {
-export class SimpleSchema2Bridge extends Bridge {
+export default class SimpleSchema2Bridge extends Bridge {
     static check (schema) {
         return SimpleSchema && (
             schema &&
