@@ -1,71 +1,46 @@
-import {expect} from 'chai';
+import SimpleSchema from 'simpl-schema';
+import {expect}     from 'chai';
 
-import {SimpleSchemaBridge} from 'uniforms';
+import {SimpleSchema2Bridge} from 'uniforms';
 
-describe('SimpleSchemaBridge', () => {
+describe('SimpleSchema2Bridge', () => {
     const noop = () => {};
-    const schema = {
-        getDefinition (name) {
-            // Simulate SimpleSchema.
-            name = name.replace(/\d+/g, '$');
+    const schema = new SimpleSchema({
+        'a':     {type: Object, label: name},
+        'a.b':   {type: Object, label: name},
+        'a.b.c': {type: String, label: name},
+        'd':     {type: String, defaultValue: 'D'},
+        'e':     {type: String, allowedValues: ['E']},
+        'f':     {type: Number, min: 42},
+        'g':     {type: Number, max: 42},
+        'h':     {type: Number},
+        'i':     {type: Date},
+        'j':     {type: Array, minCount: 3},
+        'j.$':   {type: String},
+        'k':     {type: Array},
+        'k.$':   {type: String},
+        'l':     {type: String, uniforms: 'div'},
+        'm':     {type: String, uniforms: noop},
+        'n':     {type: String, uniforms: {component: 'div'}},
+        'o':     {type: Array},
+        'o.$':   {type: String, allowedValues: ['O']},
+        'p':     {type: Array},
+        'p.$':   {type: String, uniforms: {transform: noop}},
+        'r':     {type: String, uniforms: {options: {a: 1, b: 2}}},
+        's':     {type: String, uniforms: {options: [{label: 1, value: 'a'}, {label: 2, value: 'b'}]}},
+        't':     {type: String, uniforms: {options: () => ({a: 1, b: 2})}}
+    });
 
-            const field = {
-                'a':     {type: Object, label: name},
-                'a.b':   {type: Object, label: name},
-                'a.b.c': {type: String, label: name},
-                'd':     {type: String, defaultValue: 'D'},
-                'e':     {type: String, allowedValues: ['E']},
-                'f':     {type: Number, min: 42},
-                'g':     {type: Number, max: 42},
-                'h':     {type: Number},
-                'i':     {type: Date},
-                'j':     {type: Array, minCount: 3},
-                'j.$':   {type: String},
-                'k':     {type: Array},
-                'k.$':   {type: String},
-                'l':     {type: String, uniforms: 'div'},
-                'm':     {type: String, uniforms: noop},
-                'n':     {type: String, uniforms: {component: 'div'}},
-                'o':     {type: Array},
-                'o.$':   {type: String, allowedValues: ['O']},
-                'p':     {type: Array},
-                'p.$':   {type: String, uniforms: {transform: noop}},
-                'r':     {type: String, uniforms: {options: {a: 1, b: 2}}},
-                's':     {type: String, uniforms: {options: [{label: 1, value: 'a'}, {label: 2, value: 'b'}]}},
-                't':     {type: String, uniforms: {options: () => ({a: 1, b: 2})}}
-            }[name];
-
-            if (field) {
-                return {label: name.split('.').join(' ').toUpperCase(), ...field};
-            }
-        },
-
-        messageForError (type, name) {
-            return `(${name})`;
-        },
-
-        objectKeys (name) {
-            return {
-                'a':   ['b'],
-                'a.b': ['c']
-            }[name] || [];
-        },
-
-        validator () {
-            throw 'ValidationError';
-        }
-    };
-
-    const bridge = new SimpleSchemaBridge(schema);
+    const bridge = new SimpleSchema2Bridge(schema);
 
     context('#check()', () => {
         it('works correctly without schema', () => {
-            expect(SimpleSchemaBridge.check()).to.be.falsy;
+            expect(SimpleSchema2Bridge.check()).to.be.falsy;
         });
 
         Object.keys(schema).forEach(method => {
             it(`works correctly without '${method}'`, () => {
-                expect(SimpleSchemaBridge.check({...schema, [method]: null})).to.be.falsy;
+                expect(SimpleSchema2Bridge.check({...schema, [method]: null})).to.be.falsy;
             });
         });
     });
@@ -97,7 +72,7 @@ describe('SimpleSchemaBridge', () => {
         });
 
         it('works with correct error', () => {
-            expect(bridge.getErrorMessage('a', {details: [{name: 'a', details: {value: 1}}]})).to.be.equal('(a)');
+            expect(bridge.getErrorMessage('a', {details: [{name: 'a', details: {value: 1}}]})).to.be.ok;
             expect(bridge.getErrorMessage('a', {details: [{name: 'b', details: {value: 1}}]})).to.be.falsy;
         });
     });
@@ -117,14 +92,17 @@ describe('SimpleSchemaBridge', () => {
         });
 
         it('works with ValidationError', () => {
-            expect(bridge.getErrorMessages({details: [{name: 'a', details: {value: 1}}]})).to.be.deep.equal(['(a)']);
-            expect(bridge.getErrorMessages({details: [{name: 'b', details: {value: 1}}]})).to.be.deep.equal(['(b)']);
+            expect(bridge.getErrorMessages({details: [{name: 'a', details: {value: 1}}]})).to.have.length(1);
+            expect(bridge.getErrorMessages({details: [{name: 'b', details: {value: 1}}]})).to.have.length(1);
         });
     });
 
     context('#getField', () => {
         it('return correct definition', () => {
-            expect(bridge.getField('a')).to.be.deep.equal(schema.getDefinition('a'));
+            const definition = schema.getDefinition('a');
+            const definitionComposed = {...definition, ...definition.type[0]};
+
+            expect(bridge.getField('a')).to.be.deep.equal(definitionComposed);
         });
 
         it('throws on not found field', () => {

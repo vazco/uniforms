@@ -4,13 +4,19 @@ import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 import {stub}   from 'sinon';
 
+import {AutoFields}    from 'uniforms-bootstrap3';
 import {AutoForm}      from 'uniforms-bootstrap3';
 import {ErrorField}    from 'uniforms-bootstrap3';
+import {ErrorsField}   from 'uniforms-bootstrap3';
 import {HiddenField}   from 'uniforms-bootstrap3';
 import {ListAddField}  from 'uniforms-bootstrap3';
 import {ListDelField}  from 'uniforms-bootstrap3';
+import {ListField}     from 'uniforms-bootstrap3';
+import {ListItemField} from 'uniforms-bootstrap3';
 import {LongTextField} from 'uniforms-bootstrap3';
+import {NumField}      from 'uniforms-bootstrap3';
 import {SelectField}   from 'uniforms-bootstrap3';
+import {SubmitField}   from 'uniforms-bootstrap3';
 
 describe('Everything', () => {
     const validator = stub();
@@ -106,6 +112,24 @@ describe('Everything', () => {
             schema={bridge}
         />
     );
+
+    it('works (AutoFields, ErrorsField, SubmitField)', async () => {
+        const children = (
+            <section>
+                <AutoFields />
+                <ErrorsField />
+                <SubmitField />
+            </section>
+        );
+
+        wrapper.setProps({children});
+        wrapper.update();
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
+        wrapper.setProps({children: null});
+        wrapper.update();
+    });
 
     it('works (NumField)', async () => {
         expect(wrapper.find('#x00').props()).to.have.property('value', 0);
@@ -352,6 +376,24 @@ describe('Everything', () => {
         expect(onSubmit.lastCall.calledWithMatch({x32: 'x32'})).to.be.ok;
     });
 
+    it('works (ListField, custom children)', async () => {
+        const children = (
+            <ListField name="x04" value={[1]}>
+                <ListItemField name="$">
+                    <NumField />
+                </ListItemField>
+            </ListField>
+        );
+
+        wrapper.setProps({children});
+        wrapper.update();
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
+        wrapper.setProps({children: null});
+        wrapper.update();
+    });
+
     it('works (rest)', () => {
         wrapper.setProps({grid:  10});
         wrapper.setProps({error: {}});
@@ -360,5 +402,9 @@ describe('Everything', () => {
         schema.x = {__type__: () => {}};
 
         expect(() => wrapper.update()).to.throw(/Unsupported field type/);
+    });
+
+    it('works (unmount)', () => {
+        wrapper.unmount();
     });
 });

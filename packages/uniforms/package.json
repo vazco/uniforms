@@ -55,6 +55,7 @@
     "react-addons-test-utils": "^15.0.0 || ^0.14.0",
     "react-dom": "^15.0.0 || ^0.14.0",
     "rimraf": "^2.5.4",
+    "simpl-schema": "^0.0.3",
     "sinon": "^1.17.5"
   },
   "peerDependencies": {
