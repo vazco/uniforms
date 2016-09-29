@@ -59,6 +59,10 @@ describe('SimpleSchemaBridge', () => {
     const bridge = new SimpleSchemaBridge(schema);
 
     context('#check()', () => {
+        it('works correctly with schema', () => {
+            expect(SimpleSchemaBridge.check(schema)).to.be.ok;
+        });
+
         it('works correctly without schema', () => {
             expect(SimpleSchemaBridge.check()).to.be.falsy;
         });

@@ -28,12 +28,18 @@ describe('SimpleSchema2Bridge', () => {
         'p.$':   {type: String, uniforms: {transform: noop}},
         'r':     {type: String, uniforms: {options: {a: 1, b: 2}}},
         's':     {type: String, uniforms: {options: [{label: 1, value: 'a'}, {label: 2, value: 'b'}]}},
-        't':     {type: String, uniforms: {options: () => ({a: 1, b: 2})}}
+        't':     {type: String, uniforms: {options: () => ({a: 1, b: 2})}},
+        'u':     {type: SimpleSchema.Integer},
+        'w':     {type: new SimpleSchema({x: String})}
     });
 
     const bridge = new SimpleSchema2Bridge(schema);
 
     context('#check()', () => {
+        it('works correctly with schema', () => {
+            expect(SimpleSchema2Bridge.check(schema)).to.be.ok;
+        });
+
         it('works correctly without schema', () => {
             expect(SimpleSchema2Bridge.check()).to.be.falsy;
         });
@@ -113,6 +119,7 @@ describe('SimpleSchema2Bridge', () => {
     context('#getInitialValue', () => {
         it('works with arrays', () => {
             expect(bridge.getInitialValue('k')).to.be.deep.equal([]);
+            expect(bridge.getInitialValue('k', {initialCount: 1})).to.be.deep.equal([undefined]);
         });
 
         it('works with objects', () => {
@@ -122,7 +129,7 @@ describe('SimpleSchema2Bridge', () => {
 
     context('#getProps', () => {
         it('works with allowedValues', () => {
-            expect(bridge.getProps('o', {})).to.be.deep.equal({label: 'O', required: true, allowedValues: ['O']});
+            expect(bridge.getProps('o')).to.be.deep.equal({label: 'O', required: true, allowedValues: ['O']});
         });
 
         it('works with allowedValues from props', () => {
@@ -130,33 +137,37 @@ describe('SimpleSchema2Bridge', () => {
         });
 
         it('works with custom component', () => {
-            expect(bridge.getProps('l', {})).to.be.deep.equal({label: 'L', required: true, component: 'div'});
-            expect(bridge.getProps('m', {})).to.be.deep.equal({label: 'M', required: true, component: noop});
+            expect(bridge.getProps('l')).to.be.deep.equal({label: 'L', required: true, component: 'div'});
+            expect(bridge.getProps('m')).to.be.deep.equal({label: 'M', required: true, component: noop});
         });
 
         it('works with custom component (field)', () => {
-            expect(bridge.getProps('n', {})).to.be.deep.equal({label: 'N', required: true, component: 'div'});
+            expect(bridge.getProps('n')).to.be.deep.equal({label: 'N', required: true, component: 'div'});
+        });
+
+        it('works with Number type', () => {
+            expect(bridge.getProps('h')).to.be.deep.equal({label: 'H', required: true, decimal: true});
         });
 
         it('works with options (array)', () => {
-            expect(bridge.getProps('s', {}).transform('a')).to.be.equal(1);
-            expect(bridge.getProps('s', {}).transform('b')).to.be.equal(2);
-            expect(bridge.getProps('s', {}).allowedValues[0]).to.be.equal('a');
-            expect(bridge.getProps('s', {}).allowedValues[1]).to.be.equal('b');
+            expect(bridge.getProps('s').transform('a')).to.be.equal(1);
+            expect(bridge.getProps('s').transform('b')).to.be.equal(2);
+            expect(bridge.getProps('s').allowedValues[0]).to.be.equal('a');
+            expect(bridge.getProps('s').allowedValues[1]).to.be.equal('b');
         });
 
         it('works with options (function)', () => {
-            expect(bridge.getProps('t', {}).transform('a')).to.be.equal(1);
-            expect(bridge.getProps('t', {}).transform('b')).to.be.equal(2);
-            expect(bridge.getProps('t', {}).allowedValues[0]).to.be.equal('a');
-            expect(bridge.getProps('t', {}).allowedValues[1]).to.be.equal('b');
+            expect(bridge.getProps('t').transform('a')).to.be.equal(1);
+            expect(bridge.getProps('t').transform('b')).to.be.equal(2);
+            expect(bridge.getProps('t').allowedValues[0]).to.be.equal('a');
+            expect(bridge.getProps('t').allowedValues[1]).to.be.equal('b');
         });
 
         it('works with options (object)', () => {
-            expect(bridge.getProps('r', {}).transform('a')).to.be.equal(1);
-            expect(bridge.getProps('r', {}).transform('b')).to.be.equal(2);
-            expect(bridge.getProps('r', {}).allowedValues[0]).to.be.equal('a');
-            expect(bridge.getProps('r', {}).allowedValues[1]).to.be.equal('b');
+            expect(bridge.getProps('r').transform('a')).to.be.equal(1);
+            expect(bridge.getProps('r').transform('b')).to.be.equal(2);
+            expect(bridge.getProps('r').allowedValues[0]).to.be.equal('a');
+            expect(bridge.getProps('r').allowedValues[1]).to.be.equal('b');
         });
 
         it('works with options from props', () => {
@@ -167,7 +178,7 @@ describe('SimpleSchema2Bridge', () => {
         });
 
         it('works with transform', () => {
-            expect(bridge.getProps('p', {})).to.be.deep.equal({label: 'P', required: true, transform: noop});
+            expect(bridge.getProps('p')).to.be.deep.equal({label: 'P', required: true, transform: noop});
         });
 
         it('works with transform from props', () => {
@@ -176,6 +187,34 @@ describe('SimpleSchema2Bridge', () => {
     });
 
     context('#getSubfields', () => {
+        it('works on top level', () => {
+            expect(bridge.getSubfields()).to.be.deep.equal([
+                'a',
+                'd',
+                'e',
+                'f',
+                'g',
+                'h',
+                'i',
+                'j',
+                'k',
+                'l',
+                'm',
+                'n',
+                'o',
+                'p',
+                'r',
+                's',
+                't',
+                'u',
+                'w'
+            ]);
+        });
+
+        it('works with nested schemas', () => {
+            expect(bridge.getSubfields('w')).to.be.deep.equal(['x']);
+        });
+
         it('works with objects', () => {
             expect(bridge.getSubfields('a')).to.be.deep.equal(['b']);
             expect(bridge.getSubfields('a.b')).to.be.deep.equal(['c']);
@@ -194,6 +233,8 @@ describe('SimpleSchema2Bridge', () => {
             expect(bridge.getType('d')).to.be.equal(String);
             expect(bridge.getType('f')).to.be.equal(Number);
             expect(bridge.getType('i')).to.be.equal(Date);
+            expect(bridge.getType('u')).to.be.equal(Number);
+            expect(bridge.getType('w')).to.be.equal(Object);
         });
     });
 

@@ -26,7 +26,7 @@
   "scripts": {
     "build": "babel --compact --out-dir lib src",
     "clean": "rimraf coverage lib .nyc_output",
-    "cover": "cross-env NODE_ENV=test nyc npm test",
+    "cover": "cross-env NODE_ENV=cover nyc npm test",
     "lint": "eslint src test",
     "prepublish": "npm run build",
     "pretest": "npm run lint",
@@ -68,7 +68,7 @@
       "stage-0"
     ],
     "env": {
-      "test": {
+      "cover": {
         "plugins": [
           "istanbul"
         ]

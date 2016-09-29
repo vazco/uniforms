@@ -11,8 +11,8 @@
   "scripts": {
     "build": "lerna --concurrency 5 run build",
     "clean": "lerna --concurrency 5 run clean && rimraf coverage .nyc_output",
-    "cover": "lerna --concurrency 5 run cover && cross-env NODE_ENV=test nyc npm test",
-    "coveralls": "cross-env NODE_ENV=test nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "cover": "lerna --concurrency 5 run cover && cross-env NODE_ENV=cover nyc npm test",
+    "coveralls": "cross-env NODE_ENV=cover nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "install": "lerna --concurrency 5 bootstrap",
     "lint": "lerna --concurrency 5 run lint",
     "publish": "lerna publish",
@@ -21,8 +21,7 @@
   },
   "nyc": {
     "reporter": [
-      "html",
-      "text-lcov"
+      "html"
     ],
     "require": [
       "babel-register"

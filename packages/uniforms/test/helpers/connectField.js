@@ -37,7 +37,6 @@ describe('connectField', () => {
     const reactContext = {context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange}}};
 
     const Test = spy(() => nothing);
-    const Field = connectField(Test);
 
     beforeEach(() => {
         Test.reset();
