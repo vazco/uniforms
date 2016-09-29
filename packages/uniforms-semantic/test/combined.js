@@ -108,7 +108,9 @@ describe('Everything', () => {
         />
     );
 
-    it('works (AutoFields, ErrorsField, SubmitField)', async () => {
+    it('works (AutoFields, ErrorsField, SubmitField)', async function () {
+        this.timeout(10000);
+
         const children = (
             <section>
                 <AutoFields />
@@ -371,7 +373,9 @@ describe('Everything', () => {
         expect(onSubmit.lastCall.calledWithMatch({x32: 'x32'})).to.be.ok;
     });
 
-    it('works (ListField, custom children)', async () => {
+    it('works (ListField, custom children)', async function () {
+        this.timeout(10000);
+
         const children = (
             <ListField name="x04" value={[1]}>
                 <ListItemField name="$">
