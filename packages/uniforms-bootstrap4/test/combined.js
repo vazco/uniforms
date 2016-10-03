@@ -113,7 +113,7 @@ describe('Everything', () => {
         />
     );
 
-    it('works (AutoFields, ErrorsField, SubmitField)', async function () {
+    it('works (AutoFields, ErrorsField, SubmitField)', async function _ () {
         this.timeout(10000);
 
         const children = (
@@ -378,7 +378,7 @@ describe('Everything', () => {
         expect(onSubmit.lastCall.calledWithMatch({x32: 'x32'})).to.be.ok;
     });
 
-    it('works (ListField, custom children)', async function () {
+    it('works (ListField, custom children)', async function _ () {
         this.timeout(10000);
 
         const children = (

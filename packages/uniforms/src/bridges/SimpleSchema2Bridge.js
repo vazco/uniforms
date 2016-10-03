@@ -107,6 +107,7 @@ export default class SimpleSchema2Bridge extends Bridge {
         return field.defaultValue;
     }
 
+    // eslint-disable-next-line complexity
     getProps (name, props = {}) {
         // Type should be omitted.
         // eslint-disable-next-line no-unused-vars
