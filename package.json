@@ -1,11 +1,11 @@
 {
   "private": true,
   "devDependencies": {
-    "babel-cli": "^6.14.0",
-    "coveralls": "^2.11.12",
-    "cross-env": "^2.0.1",
-    "lerna": "2.0.0-beta.28",
-    "nyc": "^8.1.0",
+    "babel-cli": "^6.16.0",
+    "coveralls": "^2.11.14",
+    "cross-env": "^3.0.0",
+    "lerna": "2.0.0-beta.30",
+    "nyc": "^8.3.0",
     "rimraf": "^2.5.4"
   },
   "scripts": {
