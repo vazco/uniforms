@@ -11,19 +11,20 @@ import randomIds          from '../../helpers/randomIds';
 
 // Silent `Uncaught (in promise)` warnings
 // TODO: Find a better way to do it
-/* eslint-disable */
-let   unhandledPromiseHandlerCount   = 0;
-const unhandledPromiseHandlerAllowed = typeof window !== 'undefined';
-const unhandledPromiseHandler = event =>
+let   __unhandledCount = 0;
+const __unhandled = event =>
     event &&
     event.reason &&
     event.reason.__uniformsPromiseMark &&
     event.preventDefault()
 ;
 
-const unhandledPromiseHandlerAdd = () => unhandledPromiseHandlerAllowed && ++unhandledPromiseHandlerCount === 1 && window.   addEventListener('unhandledrejection', unhandledPromiseHandler);
-const unhandledPromiseHandlerDel = () => unhandledPromiseHandlerAllowed && --unhandledPromiseHandlerCount === 0 && window.removeEventListener('unhandledrejection', unhandledPromiseHandler);
-/* eslint-enable */
+const __unhandledWindow = typeof window !== 'undefined';
+const __unhandledAdd = (...args) => (__unhandledWindow ? window.   addEventListener : process.   addListener)(...args);
+const __unhandledDel = (...args) => (__unhandledWindow ? window.removeEventListener : process.removeListener)(...args);
+
+const rejectionHandlerAdd = () => ++__unhandledCount === 1 && __unhandledAdd('unhandledrejection', __unhandled);
+const rejectionHandlerDel = () => --__unhandledCount === 0 && __unhandledDel('unhandledrejection', __unhandled);
 
 export default class BaseForm extends Component {
     static displayName = 'Form';
@@ -174,11 +175,11 @@ export default class BaseForm extends Component {
     }
 
     componentDidMount () {
-        unhandledPromiseHandlerAdd();
+        rejectionHandlerAdd();
     }
 
     componentWillUnmount () {
-        unhandledPromiseHandlerDel();
+        rejectionHandlerDel();
     }
 
     componentWillReceiveProps ({schema}) {
