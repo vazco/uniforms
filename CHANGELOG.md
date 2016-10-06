@@ -1,5 +1,10 @@
 # Change Log
 
+## [v1.1.3](https://github.com/vazco/uniforms/releases/tag/v1.1.3)
+- **Fixed:** Unmet peer dependency warning.
+
+<br>
+
 ## [v1.1.2](https://github.com/vazco/uniforms/releases/tag/v1.1.2)
 - **Fixed:** Enabled SimpleSchema2Bridge. [\#107](https://github.com/vazco/uniforms/issues/107)
 
