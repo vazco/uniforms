@@ -1,5 +1,10 @@
 # Change Log
 
+## [v1.1.4](https://github.com/vazco/uniforms/releases/tag/v1.1.4)
+- **Fixed:** Reverted React dependency version.
+
+<br>
+
 ## [v1.1.3](https://github.com/vazco/uniforms/releases/tag/v1.1.3)
 - **Fixed:** Unmet peer dependency warning.
 
