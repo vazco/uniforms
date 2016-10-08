@@ -1,4 +1,4 @@
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 
 const schema = strings => strings[0].replace(/([\r\n]+) {4}/g, '$1');
 const schemas = {
@@ -25,9 +25,13 @@ const schemas = {
 
     'Example - addresses': schema`{
         addresses: {
-            type: [Object],
+            type: Array,
             minCount: 1,
             maxCount: 4
+        },
+
+        'addresses.$': {
+            type: Object
         },
 
         'addresses.$.street': {
@@ -82,13 +86,6 @@ const schemas = {
         }
     }`,
 
-    'Property - decimal': schema`{
-        price: {
-            type: Number,
-            decimal: true
-        }
-    }`,
-
     'Property - defaultValue': schema`{
         price: {
             type: Number,
@@ -105,15 +102,23 @@ const schemas = {
 
     'Property - maxCount': schema`{
         authors: {
-            type: [String],
+            type: Array,
             maxCount: 3
+        },
+
+        'authors.$': {
+            type: String
         }
     }`,
 
     'Property - minCount': schema`{
         authors: {
-            type: [String],
+            type: Array,
             minCount: 1
+        },
+
+        'authors.$': {
+            type: String
         }
     }`
 };
