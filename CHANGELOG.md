@@ -1,5 +1,10 @@
 # Change Log
 
+## [v1.1.5](https://github.com/vazco/uniforms/releases/tag/v1.1.5)
+- **Added:** Better nested fields support in SimpleSchema2.
+
+<br>
+
 ## [v1.1.4](https://github.com/vazco/uniforms/releases/tag/v1.1.4)
 - **Fixed:** Reverted React dependency version.
 
