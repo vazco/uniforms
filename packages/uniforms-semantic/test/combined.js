@@ -109,7 +109,7 @@ describe('Everything', () => {
     );
 
     it('works (AutoFields, ErrorsField, SubmitField)', async function _ () {
-        this.timeout(10000);
+        this.timeout(30000);
 
         const children = (
             <section>
@@ -374,7 +374,7 @@ describe('Everything', () => {
     });
 
     it('works (ListField, custom children)', async function _ () {
-        this.timeout(10000);
+        this.timeout(30000);
 
         const children = (
             <ListField name="x04" value={[1]}>
