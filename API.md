@@ -10,6 +10,7 @@
     - [`changedKeys`](#changedkeys)
     - [`connectField`](#connectfield)
     - [`filterDOMProps`](#filterdomprops)
+    - [`filterDOMProps.register`](#filterdompropsregister)
     - [`injectName`](#injectname)
     - [`joinName`](#joinname)
     - [`nothing`](#nothing)
@@ -84,7 +85,11 @@ import {filterDOMProps} from 'uniforms';
 // If you create your custom field, then it's a
 // safe way to get rid of all uniforms props.
 const nonUniformsProps = filterDOMProps(props);
+```
 
+## `filterDOMProps.register`
+
+```js
 // If you want to filter additional props, then
 // you have to register it.
 filterDOMProps.register(propA, propB, propC, ...);
