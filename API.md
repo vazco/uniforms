@@ -11,6 +11,7 @@
     - [`connectField`](#connectfield)
     - [`filterDOMProps`](#filterdomprops)
     - [`filterDOMProps.register`](#filterdompropsregister)
+    - [`filterDOMProps.registered`](#filterdompropsregistered)
     - [`injectName`](#injectname)
     - [`joinName`](#joinname)
     - [`nothing`](#nothing)
@@ -93,6 +94,13 @@ const nonUniformsProps = filterDOMProps(props);
 // If you want to filter additional props, then
 // you have to register it.
 filterDOMProps.register(propA, propB, propC, ...);
+```
+
+## `filterDOMProps.registered`
+
+```js
+// Array of already registered props.
+filterDOMProps.registered; // ['propA', 'propB', ...]
 ```
 
 ## `injectName`
