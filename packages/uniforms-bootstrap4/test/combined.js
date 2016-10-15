@@ -4,19 +4,30 @@ import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 import {stub}   from 'sinon';
 
-import {AutoFields}    from 'uniforms-bootstrap4';
-import {AutoForm}      from 'uniforms-bootstrap4';
-import {ErrorField}    from 'uniforms-bootstrap4';
-import {ErrorsField}   from 'uniforms-bootstrap4';
-import {HiddenField}   from 'uniforms-bootstrap4';
-import {ListAddField}  from 'uniforms-bootstrap4';
-import {ListDelField}  from 'uniforms-bootstrap4';
-import {ListField}     from 'uniforms-bootstrap4';
-import {ListItemField} from 'uniforms-bootstrap4';
-import {LongTextField} from 'uniforms-bootstrap4';
-import {NumField}      from 'uniforms-bootstrap4';
-import {SelectField}   from 'uniforms-bootstrap4';
-import {SubmitField}   from 'uniforms-bootstrap4';
+import {AutoFields}     from 'uniforms-bootstrap4';
+import {AutoForm}       from 'uniforms-bootstrap4';
+import {ErrorField}     from 'uniforms-bootstrap4';
+import {ErrorsField}    from 'uniforms-bootstrap4';
+import {HiddenField}    from 'uniforms-bootstrap4';
+import {ListAddField}   from 'uniforms-bootstrap4';
+import {ListDelField}   from 'uniforms-bootstrap4';
+import {ListField}      from 'uniforms-bootstrap4';
+import {ListItemField}  from 'uniforms-bootstrap4';
+import {LongTextField}  from 'uniforms-bootstrap4';
+import {NumField}       from 'uniforms-bootstrap4';
+import {SelectField}    from 'uniforms-bootstrap4';
+import {SubmitField}    from 'uniforms-bootstrap4';
+import {filterDOMProps} from 'uniforms';
+
+filterDOMProps.register(
+    '__type__',
+    'allowedValues',
+    'checkboxes',
+    'component',
+    'maxCount',
+    'minCount',
+    'subfields'
+);
 
 describe('Everything', () => {
     const validator = stub();

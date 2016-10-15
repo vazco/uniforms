@@ -4,19 +4,30 @@ import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 import {stub}   from 'sinon';
 
-import {AutoFields}    from 'uniforms-unstyled';
-import {AutoForm}      from 'uniforms-unstyled';
-import {ErrorField}    from 'uniforms-unstyled';
-import {ErrorsField}   from 'uniforms-unstyled';
-import {HiddenField}   from 'uniforms-unstyled';
-import {ListAddField}  from 'uniforms-unstyled';
-import {ListDelField}  from 'uniforms-unstyled';
-import {ListField}     from 'uniforms-unstyled';
-import {ListItemField} from 'uniforms-unstyled';
-import {LongTextField} from 'uniforms-unstyled';
-import {NumField}      from 'uniforms-unstyled';
-import {SelectField}   from 'uniforms-unstyled';
-import {SubmitField}   from 'uniforms-unstyled';
+import {AutoFields}     from 'uniforms-unstyled';
+import {AutoForm}       from 'uniforms-unstyled';
+import {ErrorField}     from 'uniforms-unstyled';
+import {ErrorsField}    from 'uniforms-unstyled';
+import {HiddenField}    from 'uniforms-unstyled';
+import {ListAddField}   from 'uniforms-unstyled';
+import {ListDelField}   from 'uniforms-unstyled';
+import {ListField}      from 'uniforms-unstyled';
+import {ListItemField}  from 'uniforms-unstyled';
+import {LongTextField}  from 'uniforms-unstyled';
+import {NumField}       from 'uniforms-unstyled';
+import {SelectField}    from 'uniforms-unstyled';
+import {SubmitField}    from 'uniforms-unstyled';
+import {filterDOMProps} from 'uniforms';
+
+filterDOMProps.register(
+    '__type__',
+    'allowedValues',
+    'checkboxes',
+    'component',
+    'maxCount',
+    'minCount',
+    'subfields'
+);
 
 describe('Everything', () => {
     const validator = stub();

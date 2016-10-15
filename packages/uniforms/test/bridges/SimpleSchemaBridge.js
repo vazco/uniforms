@@ -19,7 +19,7 @@ describe('SimpleSchemaBridge', () => {
                 'g':     {type: Number, max: 42},
                 'h':     {type: Number},
                 'i':     {type: Date},
-                'j':     {type: Array, minCount: 3},
+                'j':     {type: Array, minCount: 1},
                 'j.$':   {type: String},
                 'k':     {type: Array},
                 'k.$':   {type: String},
@@ -138,6 +138,7 @@ describe('SimpleSchemaBridge', () => {
 
     context('#getInitialValue', () => {
         it('works with arrays', () => {
+            expect(bridge.getInitialValue('j')).to.be.deep.equal([undefined]);
             expect(bridge.getInitialValue('k')).to.be.deep.equal([]);
         });
 
@@ -148,7 +149,7 @@ describe('SimpleSchemaBridge', () => {
 
     context('#getProps', () => {
         it('works with allowedValues', () => {
-            expect(bridge.getProps('o', {})).to.be.deep.equal({label: 'O', required: true, allowedValues: ['O']});
+            expect(bridge.getProps('o')).to.be.deep.equal({label: 'O', required: true, allowedValues: ['O']});
         });
 
         it('works with allowedValues from props', () => {
@@ -156,33 +157,33 @@ describe('SimpleSchemaBridge', () => {
         });
 
         it('works with custom component', () => {
-            expect(bridge.getProps('l', {})).to.be.deep.equal({label: 'L', required: true, component: 'div'});
-            expect(bridge.getProps('m', {})).to.be.deep.equal({label: 'M', required: true, component: noop});
+            expect(bridge.getProps('l')).to.be.deep.equal({label: 'L', required: true, component: 'div'});
+            expect(bridge.getProps('m')).to.be.deep.equal({label: 'M', required: true, component: noop});
         });
 
         it('works with custom component (field)', () => {
-            expect(bridge.getProps('n', {})).to.be.deep.equal({label: 'N', required: true, component: 'div'});
+            expect(bridge.getProps('n')).to.be.deep.equal({label: 'N', required: true, component: 'div'});
         });
 
         it('works with options (array)', () => {
-            expect(bridge.getProps('s', {}).transform('a')).to.be.equal(1);
-            expect(bridge.getProps('s', {}).transform('b')).to.be.equal(2);
-            expect(bridge.getProps('s', {}).allowedValues[0]).to.be.equal('a');
-            expect(bridge.getProps('s', {}).allowedValues[1]).to.be.equal('b');
+            expect(bridge.getProps('s').transform('a')).to.be.equal(1);
+            expect(bridge.getProps('s').transform('b')).to.be.equal(2);
+            expect(bridge.getProps('s').allowedValues[0]).to.be.equal('a');
+            expect(bridge.getProps('s').allowedValues[1]).to.be.equal('b');
         });
 
         it('works with options (function)', () => {
-            expect(bridge.getProps('t', {}).transform('a')).to.be.equal(1);
-            expect(bridge.getProps('t', {}).transform('b')).to.be.equal(2);
-            expect(bridge.getProps('t', {}).allowedValues[0]).to.be.equal('a');
-            expect(bridge.getProps('t', {}).allowedValues[1]).to.be.equal('b');
+            expect(bridge.getProps('t').transform('a')).to.be.equal(1);
+            expect(bridge.getProps('t').transform('b')).to.be.equal(2);
+            expect(bridge.getProps('t').allowedValues[0]).to.be.equal('a');
+            expect(bridge.getProps('t').allowedValues[1]).to.be.equal('b');
         });
 
         it('works with options (object)', () => {
-            expect(bridge.getProps('r', {}).transform('a')).to.be.equal(1);
-            expect(bridge.getProps('r', {}).transform('b')).to.be.equal(2);
-            expect(bridge.getProps('r', {}).allowedValues[0]).to.be.equal('a');
-            expect(bridge.getProps('r', {}).allowedValues[1]).to.be.equal('b');
+            expect(bridge.getProps('r').transform('a')).to.be.equal(1);
+            expect(bridge.getProps('r').transform('b')).to.be.equal(2);
+            expect(bridge.getProps('r').allowedValues[0]).to.be.equal('a');
+            expect(bridge.getProps('r').allowedValues[1]).to.be.equal('b');
         });
 
         it('works with options from props', () => {
@@ -193,7 +194,7 @@ describe('SimpleSchemaBridge', () => {
         });
 
         it('works with transform', () => {
-            expect(bridge.getProps('p', {})).to.be.deep.equal({label: 'P', required: true, transform: noop});
+            expect(bridge.getProps('p')).to.be.deep.equal({label: 'P', required: true, transform: noop});
         });
 
         it('works with transform from props', () => {
