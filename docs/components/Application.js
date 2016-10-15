@@ -9,36 +9,37 @@ import {getThemes}  from '/assets/themes';
 import {getTheme}   from '/assets/themes';
 
 export class Application extends React.Component {
-    componentWillMount () {
-        this.componentWillReceiveProps(this.props);
-    }
+    constructor () {
+        super(...arguments);
 
-    componentWillReceiveProps ({schema, theme}) {
-        const state = {
+        this.state = {
             doc: null,
 
             schemas: getSchemas(),
             themes:  getThemes(),
 
-            schema: getSchema(schema),
-            styles: getStyles(theme),
-            theme:  getTheme(theme)
+            schema: getSchema(),
+            styles: getStyles(),
+            theme:  getTheme()
         };
 
-        if (this.state) {
-            this.setState(state);
-        } else {
-            this.state = state;
-        }
+        this.onSchema = this.onSchema.bind(this);
+        this.onTheme  = this.onTheme.bind(this);
+    }
+
+    onSchema ({target: {value}}) {
+        this.setState({schema: getSchema(value)});
+    }
+
+    onTheme ({target: {value}}) {
+        this.setState({
+            styles: getStyles(value),
+            theme:  getTheme(value)
+        });
     }
 
     render () {
         const {
-            props: {
-                onSchema,
-                onTheme
-            },
-
             state: {
                 doc,
                 schema,
@@ -46,7 +47,10 @@ export class Application extends React.Component {
                 styles,
                 theme,
                 themes
-            }
+            },
+
+            onSchema,
+            onTheme
         } = this;
 
         return (
@@ -60,7 +64,7 @@ export class Application extends React.Component {
                         </section>
 
                         <section className="panelHeaderInfo">
-                            <select value={theme.text} onChange={event => onTheme(event.target.value)}>
+                            <select value={theme.text} onChange={onTheme}>
                                 {themes.map(theme =>
                                     <option key={theme} value={theme}>
                                         Theme - {theme}
@@ -68,7 +72,7 @@ export class Application extends React.Component {
                                 )}
                             </select>
 
-                            <select value={0} onChange={event => onSchema(getSchema(event.target.value).string)}>
+                            <select value={0} onChange={onSchema}>
                                 <option value={0}>
                                     Select example
                                 </option>
@@ -82,7 +86,7 @@ export class Application extends React.Component {
                         </section>
                     </nav>
 
-                    <textarea value={schema.string} onChange={event => onSchema(event.target.value)} />
+                    <textarea value={schema.string} onChange={onSchema} />
 
                     <a href="https://github.com/vazco/uniforms">
                         {/* eslint-disable max-len */}

@@ -11,21 +11,14 @@ if (Meteor.isServer) {
     FlowRouter.setDeferScriptLoading(true);
 }
 
-const onTheme  = theme  => FlowRouter.setQueryParams({theme});
-const onSchema = schema => FlowRouter.setQueryParams({schema});
-
 FlowRouter.route('/', {
-    action (params, {schema, theme}) {
-        if (Meteor.isServer && schema) {
-            schema = decodeURIComponent(schema);
-        }
-
+    action () {
         DocHead.setTitle('uniforms');
         DocHead.addMeta({charset: 'utf-8'});
         DocHead.addMeta({'http-equiv': 'x-ua-compatible', content: 'ie=edge'});
         DocHead.addMeta({name: 'viewport', content: 'width=device-width, initial-scale=1'});
 
-        mount(Application, {schema, theme, onSchema, onTheme}, {rootId: 'application'});
+        mount(Application, {}, {rootId: 'application'});
     }
 });
 
