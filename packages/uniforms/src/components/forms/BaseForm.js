@@ -8,23 +8,6 @@ import changedKeys        from '../../helpers/changedKeys';
 import createSchemaBridge from '../../bridges';
 import randomIds          from '../../helpers/randomIds';
 
-// Silent `Uncaught (in promise)` warnings
-// TODO: Find a better way to do it
-let   __unhandledCount = 0;
-const __unhandled = event =>
-    event &&
-    event.reason &&
-    event.reason.__uniformsPromiseMark &&
-    event.preventDefault()
-;
-
-const __unhandledWindow = typeof window !== 'undefined';
-const __unhandledAdd = (...args) => (__unhandledWindow ? window.   addEventListener : process.   addListener)(...args);
-const __unhandledDel = (...args) => (__unhandledWindow ? window.removeEventListener : process.removeListener)(...args);
-
-const rejectionHandlerAdd = () => ++__unhandledCount === 1 && __unhandledAdd('unhandledrejection', __unhandled);
-const rejectionHandlerDel = () => --__unhandledCount === 0 && __unhandledDel('unhandledrejection', __unhandled);
-
 export default class BaseForm extends Component {
     static displayName = 'Form';
 
@@ -170,14 +153,6 @@ export default class BaseForm extends Component {
             this.changedMap = {};
             this.forceUpdate();
         });
-    }
-
-    componentDidMount () {
-        rejectionHandlerAdd();
-    }
-
-    componentWillUnmount () {
-        rejectionHandlerDel();
     }
 
     componentWillReceiveProps ({schema}) {

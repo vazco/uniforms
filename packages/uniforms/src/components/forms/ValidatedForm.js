@@ -5,6 +5,23 @@ import {PropTypes} from 'react';
 
 import BaseForm from './BaseForm';
 
+// Silent `Uncaught (in promise)` warnings
+const __unhandledMark = typeof Symbol === 'undefined' ? '__uniformsPromiseMark' : Symbol();
+const __unhandled = event =>
+    event &&
+    event.reason &&
+    event.reason[__unhandledMark] &&
+    event.preventDefault()
+;
+
+if (typeof process !== 'undefined') {
+    process.addListener('unhandledRejection', __unhandled);
+}
+
+if (typeof window !== 'undefined') {
+    window.addEventListener('unhandledrejection', __unhandled);
+}
+
 const Validated = parent => class extends parent {
     static Validated = Validated;
 
@@ -132,7 +149,7 @@ const Validated = parent => class extends parent {
         const markAndHandle = (error = catched, resolve, reject) =>
             this.setState({error}, () => {
                 if (error) {
-                    error.__uniformsPromiseMark = true;
+                    error[__unhandledMark] = true;
 
                     reject(error);
                 } else {
