@@ -1,5 +1,12 @@
 # Change Log
 
+## [v1.2.0-rc.1](https://github.com/vazco/uniforms/releases/tag/v1.2.0-rc.1)
+- **Changed:** Moved from inline helpers to `babel-runtime` to minify build size.
+- **Changed:** Optimized `BaseForm`.
+- **Changed:** Optimized `ListField`.
+
+<br>
+
 ## [v1.1.5](https://github.com/vazco/uniforms/releases/tag/v1.1.5)
 - **Added:** Better nested fields support in SimpleSchema2.
 
