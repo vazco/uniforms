@@ -7,24 +7,46 @@ export default function connectField (component, {
     baseField = BaseField,
 
     ensureValue    = true,
-    initialValue   = true,
+    includeInChain = true,
     includeParent  = false,
-    includeInChain = true
+    initialValue   = true
 } = {}) {
     return class extends baseField {
         static displayName = `${baseField.displayName || baseField.name}(${component.displayName || component.name})`;
 
+        constructor () {
+            super(...arguments);
+
+            Object.assign(this.options, {
+                ensureValue,
+                includeInChain,
+                includeParent,
+                initialValue
+            });
+        }
+
         getChildContextName () {
-            return includeInChain ? super.getChildContextName() : this.context.uniforms.name;
+            return this.options.includeInChain ? super.getChildContextName() : this.context.uniforms.name;
         }
 
         render () {
-            return createElement(component, mapProps(this.getFieldProps(undefined, {ensureValue, includeParent})));
+            return createElement(
+                component,
+                mapProps(
+                    this.getFieldProps(
+                        undefined,
+                        {
+                            ensureValue:   this.options.ensureValue,
+                            includeParent: this.options.includeParent
+                        }
+                    )
+                )
+            );
         }
 
         componentWillMount () {
-            if (initialValue) {
-                let props = this.getFieldProps(undefined, {explicitInitialValue: true, includeParent: false});
+            if (this.options.initialValue) {
+                const props = this.getFieldProps(undefined, {explicitInitialValue: true, includeParent: false});
 
                 // https://github.com/vazco/uniforms/issues/52
                 // If field is initially rendered with value, we treat it as an initial value.

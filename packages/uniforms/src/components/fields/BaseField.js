@@ -23,6 +23,8 @@ export default class BaseField extends Component {
     constructor () {
         super(...arguments);
 
+        this.options = {};
+
         this.randomId = this.context.uniforms.randomId();
 
         this.findValue = this.findValue.bind(this);
@@ -58,7 +60,8 @@ export default class BaseField extends Component {
             const prevParentValue = get(prevContext.model, prevName.replace(/(.+)\..+$/, '$1'));
             const nextParentValue = get(nextContext.model, nextName.replace(/(.+)\..+$/, '$1'));
 
-            if (Array.isArray(nextParentValue) && !isEqual(prevParentValue, nextParentValue)) {
+            // eslint-disable-next-line max-len
+            if (Array.isArray(nextParentValue) && (!prevParentValue || prevParentValue.length !== nextParentValue.length)) {
                 return true;
             }
         }
@@ -142,8 +145,8 @@ export default class BaseField extends Component {
         return this.context.uniforms.onChange;
     }
 
-    // eslint-disable-next-line complexity, max-len
-    getFieldProps (name, {explicitInitialValue = false, overrideValue = false, includeParent = false, ensureValue = true} = {}) {
+    // eslint-disable-next-line complexity
+    getFieldProps (name, {ensureValue, explicitInitialValue, includeParent, overrideValue} = this.options) {
         const context = this.context.uniforms;
         const props = {
             ...this.getChildContextState(),
@@ -154,8 +157,8 @@ export default class BaseField extends Component {
             name = joinName(context.name, props.name);
         }
 
-        const field = context.schema.getField(name);
-        const fieldType = context.schema.getType(name);
+        const field       = context.schema.getField(name);
+        const fieldType   = context.schema.getType(name);
         const schemaProps = context.schema.getProps(name, props);
 
         const error  = context.schema.getError(name, context.error);
