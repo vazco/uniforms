@@ -1,6 +1,7 @@
 # Change Log
 
 ## [v1.2.0-rc.1](https://github.com/vazco/uniforms/releases/tag/v1.2.0-rc.1)
+- **Added:** Options passed to `connectField` are now stored on fields instances.
 - **Changed:** Moved from inline helpers to `babel-runtime` to minify build size.
 - **Changed:** Optimized `BaseForm`.
 - **Changed:** Optimized `ListField`.
