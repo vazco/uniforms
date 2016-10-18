@@ -76,6 +76,8 @@ In short: uniforms is a set of npm packages, which contains helpers and [React](
 
 ## meteor
 
+**Note:** If you prefer video, there's [Meteor University](https://meteoruniversity.org/) uniforms session available [here](https://www.youtube.com/watch?v=bTHPoghqtS4).
+
 These are npm packages, so they can't imply any Meteor package, and you have to install dependencies manually. In your Meteor app directory:
 
 ```shell
