@@ -9,15 +9,15 @@ import ListAddField  from './ListAddField';
 import ListItemField from './ListItemField';
 
 const List = ({
+    addIcon,
     children,
     className,
     initialCount,
     itemProps,
     label,
     name,
-    value,
-    addIcon,
     removeIcon,
+    value,
     ...props
 }) =>
     <section className={classnames('card', className)} {...filterDOMProps(props)}>

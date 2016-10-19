@@ -8,7 +8,7 @@ const ListDel = ({
     disabled,
     name,
     parent,
-    removeIcon = (<i className="octicon octicon-dash" />),
+    removeIcon,
     ...props
 }) => {
     const fieldIndex      = +name.slice(1 + name.lastIndexOf('.'));
@@ -26,6 +26,10 @@ const ListDel = ({
             {removeIcon}
         </span>
    );
+};
+
+ListDel.defaultProps = {
+    removeIcon: (<i className="octicon octicon-dash" />),
 };
 
 export default connectField(ListDel, {includeParent: true, initialValue: false});
