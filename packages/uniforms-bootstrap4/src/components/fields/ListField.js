@@ -16,6 +16,8 @@ const List = ({
     label,
     name,
     value,
+    addIcon,
+    removeIcon,
     ...props
 }) =>
     <section className={classnames('card', className)} {...filterDOMProps(props)}>
@@ -26,7 +28,7 @@ const List = ({
                         {label}&nbsp;
                     </label>
 
-                    <ListAddField name={`${name}.$`} initialCount={initialCount} />
+                    <ListAddField name={`${name}.$`} initialCount={initialCount} addIcon={addIcon} />
                 </section>
             )}
 
@@ -36,13 +38,21 @@ const List = ({
                            React.cloneElement(child, {
                                key: index,
                                label: null,
-                               name: joinName(name, child.props.name && child.props.name.replace('$', index))
+                               name: joinName(name, child.props.name && child.props.name.replace('$', index)),
+                               removeIcon
                            })
                       )
                  )
             ) : (
                 value.map((item, index) =>
-                    <ListItemField key={index} label={null} name={joinName(name, index)} {...itemProps} />
+
+                    <ListItemField
+                        key={index}
+                        label={null}
+                        name={joinName(name, index)}
+                        removeIcon={removeIcon}
+                        {...itemProps}
+                    />
                 )
             )}
         </section>

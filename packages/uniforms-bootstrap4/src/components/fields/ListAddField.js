@@ -8,6 +8,7 @@ const ListAdd = ({
     disabled,
     parent,
     value,
+    addIcon = (<i className="octicon octicon-plus" />),
     ...props
 }) => {
     const limitNotReached = !disabled && !(parent.maxCount <= parent.value.length);
@@ -18,8 +19,7 @@ const ListAdd = ({
             onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
             {...filterDOMProps(props)}
         >
-            {/* TODO: configure to alternate icon */}
-            <i className="octicon octicon-plus" />
+            {addIcon}
         </section>
     );
 };

@@ -8,6 +8,7 @@ const ListDel = ({
     disabled,
     name,
     parent,
+    removeIcon = (<i className="octicon octicon-dash" />),
     ...props
 }) => {
     const fieldIndex      = +name.slice(1 + name.lastIndexOf('.'));
@@ -22,8 +23,7 @@ const ListDel = ({
             )}
             {...filterDOMProps(props)}
         >
-            {/* TODO: configure to alternate icon */}
-            <i className="octicon octicon-dash" />
+            {removeIcon}
         </span>
    );
 };
