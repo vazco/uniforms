@@ -8,6 +8,7 @@ const ListDel = ({
     disabled,
     name,
     parent,
+    removeIcon,
     ...props
 }) => {
     const fieldIndex      = +name.slice(1 + name.lastIndexOf('.'));
@@ -22,10 +23,13 @@ const ListDel = ({
             )}
             {...filterDOMProps(props)}
         >
-            {/* TODO: configure to alternate icon */}
-            <i className="glyphicon glyphicon-minus" />
+            {removeIcon}
         </span>
    );
+};
+
+ListDel.defaultProps = {
+    removeIcon: <i className="glyphicon glyphicon-minus" />
 };
 
 export default connectField(ListDel, {includeParent: true, initialValue: false});
