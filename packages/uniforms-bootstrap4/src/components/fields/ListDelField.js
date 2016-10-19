@@ -29,7 +29,7 @@ const ListDel = ({
 };
 
 ListDel.defaultProps = {
-    removeIcon: (<i className="octicon octicon-dash" />),
+    removeIcon: <i className="octicon octicon-dash" />
 };
 
 export default connectField(ListDel, {includeParent: true, initialValue: false});
