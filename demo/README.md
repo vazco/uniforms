@@ -9,7 +9,7 @@ $ git clone git@github.com:vazco/uniforms.git
 $ cd uniforms
 $ npm install
 $ npm run build
-$ cd docs
+$ cd demo
 $ npm install
 $ npm start
 ```
@@ -17,4 +17,4 @@ $ npm start
 # Making changes
 
 1. Edit code in `packages/`.
-2. Run `npm run reset` in the docs.
+2. Run `npm run reset` in the demo.
