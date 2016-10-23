@@ -105,6 +105,7 @@
   "dependencies": {
     "babel-runtime": "^6.11.6",
     "classnames": "^2.2.5",
-    "invariant": "^2.2.1"
+    "invariant": "^2.2.1",
+    "warning": "^3.0.0"
   }
 }
