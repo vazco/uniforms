@@ -7,6 +7,7 @@ const Text = ({
     className,
     disabled,
     error,
+    errorMessage,
     icon,
     iconLeft,
     iconProps,
@@ -17,6 +18,7 @@ const Text = ({
     onChange,
     placeholder,
     required,
+    showInlineError,
     type,
     value,
     ...props
@@ -44,6 +46,12 @@ const Text = ({
                 <i className={`${icon || iconLeft} icon`} {...iconProps} />
             )}
         </section>
+
+        {!!(errorMessage && showInlineError) && (
+            <section className="ui red basic pointing label">
+                {errorMessage}
+            </section>
+        )}
     </section>
 ;
 
