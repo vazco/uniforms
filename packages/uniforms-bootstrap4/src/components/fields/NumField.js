@@ -2,12 +2,12 @@ import React          from 'react';
 import classnames     from 'classnames';
 import {connectField} from 'uniforms';
 
-import FormGroup from './FormGroup';
+import wrapField from '../../lib/wrapField';
 
 const noneIfNaN = x => isNaN(x) ? undefined : x;
 
 const Num = props =>
-    <FormGroup {...props}>
+    wrapField(props, (
         <input
             className={classnames(props.inputClassName, 'form-control', {'form-control-danger': props.error})}
             disabled={props.disabled}
@@ -22,7 +22,7 @@ const Num = props =>
             type="number"
             value={props.value === undefined ? null : props.value}
         />
-    </FormGroup>
+    ))
 ;
 
 export default connectField(Num);

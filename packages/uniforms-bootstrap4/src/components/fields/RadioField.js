@@ -2,11 +2,11 @@ import React          from 'react';
 import classnames     from 'classnames';
 import {connectField} from 'uniforms';
 
-import FormGroup from './FormGroup';
+import wrapField from '../../lib/wrapField';
 
 const Radio = props =>
-    <FormGroup {...props}>
-        {props.allowedValues.map(item =>
+    wrapField(props, (
+        props.allowedValues.map(item =>
             <section key={item} className={classnames(props.inputClassName, `radio${props.inline ? '-inline' : ''}`)}>
                 <label htmlFor={`${props.id}-${item}`}>
                     <input
@@ -20,8 +20,8 @@ const Radio = props =>
                     {props.transform ? props.transform(item) : item}
                 </label>
             </section>
-        )}
-    </FormGroup>
+        )
+    ))
 ;
 
 export default connectField(Radio);
