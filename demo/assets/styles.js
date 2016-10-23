@@ -8,11 +8,11 @@ const styles = {
 
     bootstrap4: style([
         'https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css',
-        'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.2/css/bootstrap.min.css'
+        'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.min.css'
     ]),
 
     semantic: style([
-        'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.css'
+        'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.css'
     ]),
 
     unstyled: style([])
