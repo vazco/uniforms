@@ -182,7 +182,7 @@ import {ValidatedForm} from 'uniforms'; // Or from the theme package.
 
 ## `ValidatedQuickForm`
 
-**Note:** All `QuickForm` props are also accepted.
+**Note:** All `QuickForm` props are also accepted.<br>
 **Note:** All `ValidatedForm` props are also accepted.
 
 <br>
