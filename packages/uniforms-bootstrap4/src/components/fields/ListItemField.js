@@ -9,7 +9,7 @@ import ListDelField from './ListDelField';
 const ListItem = props =>
     <section className="row">
         <section className="col-xs-1">
-            <ListDelField name={props.name} />
+            <ListDelField name={props.name} removeIcon={props.removeIcon} />
         </section>
 
         {props.children ? (

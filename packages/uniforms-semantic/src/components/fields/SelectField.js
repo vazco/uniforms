@@ -62,6 +62,7 @@ const Select = ({
     className,
     disabled,
     error,
+    errorMessage,
     fieldType,
     id,
     inputRef,
@@ -70,6 +71,7 @@ const Select = ({
     onChange,
     placeholder,
     required,
+    showInlineError,
     transform,
     value,
     ...props
@@ -84,6 +86,12 @@ const Select = ({
         {checkboxes || fieldType === Array
             ? renderCheckboxes({allowedValues, disabled, id, name, onChange, transform, value, fieldType})
             : renderSelect    ({allowedValues, disabled, id, name, onChange, transform, value, inputRef, placeholder})}
+
+        {!!(errorMessage && showInlineError) && (
+            <section className="ui red basic pointing label">
+                {errorMessage}
+            </section>
+        )}
     </section>
 ;
 

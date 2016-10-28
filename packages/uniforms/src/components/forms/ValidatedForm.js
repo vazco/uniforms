@@ -39,11 +39,11 @@ const Validated = parent => class extends parent {
         onValidate: PropTypes.func,
 
         validator: PropTypes.any,
-        validate: PropTypes.oneOf([
+        validate:  PropTypes.oneOf([
             'onChange',
             'onChangeAfterSubmit',
             'onSubmit'
-        ])
+        ]).isRequired
     };
 
     constructor () {

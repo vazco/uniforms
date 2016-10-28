@@ -7,12 +7,14 @@ const Bool = ({
     className,
     disabled,
     error,
+    errorMessage,
     id,
     inputRef,
     label,
     name,
     onChange,
     required,
+    showInlineError,
     value,
     ...props
 }) =>
@@ -33,6 +35,12 @@ const Bool = ({
                 {label}
             </label>
         </section>
+
+        {!!(errorMessage && showInlineError) && (
+            <section className="ui red basic pointing label">
+                {errorMessage}
+            </section>
+        )}
     </section>
 ;
 

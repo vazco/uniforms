@@ -6,6 +6,12 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
+- [Forms](#forms)
+    - [`AutoForm`](#autoform)
+    - [`BaseForm`](#baseform)
+    - [`QuickForm`](#quickform)
+    - [`ValidatedForm`](#validatedform)
+    - [`ValidatedQuickForm`](#validatedquickform)
 - [Helpers](#helpers)
     - [`changedKeys`](#changedkeys)
     - [`connectField`](#connectfield)
@@ -18,6 +24,166 @@
     - [`randomIds`](#randomids)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<br>
+
+# Forms
+
+## `AutoForm`
+
+```js
+import {AutoForm} from 'uniforms'; // Or from the theme package.
+
+<AutoForm
+    // Like onChange but for the whole model.
+    //   Triggered just after onChange but with
+    //   the next model instead of (key, value)
+    //   pair.
+    onChangeModel={model => console.log(model)}
+/>
+```
+
+**Note:** All `ValidatedQuickForm` props are also accepted.
+
+## `BaseForm`
+
+```js
+import {BaseForm} from 'uniforms'; // Or from the theme package.
+
+<BaseForm
+    // Autosave delay.
+    //   Set 0 for an instant autosave.
+    autosaveDelay={0}
+
+    // Enable autosave.
+    //   Every change triggers onSubmit.
+    autosave={false}
+
+    // Disable form.
+    //   Disables all fields and submit button.
+    disabled={false}
+
+    // Validation error.
+    //   Current validation state. It should be
+    //   either compatible with your schema or an
+    //   Error object.
+    error={new Error('Nope.')}
+
+    // Form layout.
+    //   Bootstrap grid layout style. Number is an
+    //   equivalent of {sm: n}. Object is a {mode: size}
+    //   object. Complete string is simply passed through.
+    // Available only in:
+    //   Bootstrap3
+    //   Bootstrap4
+    grid={3}        // 'col-3-sm' on label, 'col-9-sm' on input
+    grid="4"        // 'col-4-sm' on label, 'col-8-sm' on input
+    grid={{md: 5}}  // 'col-5-md' on label, 'col-7-md' on input
+    grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
+
+    // Default label prop for all fields.
+    //   By default it's true - set it to false
+    //   to disable labels for the whole form.
+    label={true}
+
+    // Form model.
+    //   An object with {field: value} structure. It
+    //   doesn't matter, if it has a prototype or not,
+    //   but keep in mind that in onSubmit or in onChangeModel
+    //   you'll receive a plain object. If you'll treat
+    //   form as an input, then this is value.
+    model={{fieldA: 1}}
+
+    // Field change action.
+    //   It receive two arguments: key and value, where
+    //   key is a dot separated path to the changed field
+    //   and value is the requested value.
+    onChange={(key, value) => console.log(key, value)}
+
+    // Submit failure action.
+    //   If onSubmit will return a Promise, then this
+    //   will be attached to it's .catch chain.
+    onSubmitFailure={() => alert('Promise rejected!')}
+
+    // Submit success action.
+    //   If onSubmit will return a Promise, then this
+    //   will be attached to it's .then chain.
+    onSubmitSuccess={() => alert('Promise resolved!')}
+
+    // Submit action.
+    //   When the form is submitted manually or by a
+    //   HTML5 event, then it's called with the current
+    //   model.
+    onSubmit={model => db.saveThatReturnsPromiseOrNothing(model)}
+
+    // Default placeholder prop for all fields.
+    //   By default it's false - set it to true
+    //   to enable placeholders for the whole form.
+    placeholder={false}
+
+    // Form schema.
+    //   BaseForm doesn't really care about it; it's
+    //   used mainly in QuickForm and ValidatedForm.
+    schema={myFormSchema}
+/>
+```
+
+## `QuickForm`
+
+```js
+import {QuickForm} from 'uniforms'; // Or from the theme package.
+
+<QuickForm
+    // Custom AutoField.
+    //   It should be anything, that will
+    //   pass through React.createElement.
+    autoField={CustomAutoField}
+
+    // Custom ErrorsField.
+    //   It should be anything, that will
+    //   pass through React.createElement.
+    errorsField={CustomErrorsField}
+
+    // Custom SubmitField.
+    //   It should be anything, that will
+    //   pass through React.createElement.
+    submitField={CustomSubmitField}
+/>
+```
+
+**Note:** All `BaseForm` props are also accepted.
+
+## `ValidatedForm`
+
+```js
+import {ValidatedForm} from 'uniforms'; // Or from the theme package.
+
+<ValidatedForm
+    // Additional asynchronous validation.
+    //   Schema validation have to be sync, so this is
+    //   the only way to achieve it in a clean way.
+    onValidate={(model, error, callback) => ...}
+
+    // Validation mode.
+    //   By default, form will start to validate from
+    //   the time of the first submit and then revalidate
+    //   on every change. It's 'onChangeAfterSubmit'. There's
+    //   also 'onChange' and 'onSubmit' modes, but those are
+    //   quite self-explanatory.
+    validate="onChangeAfterSubmit"
+
+    // Validator options.
+    //   It really depends on your schema.
+    validator={{clean: true}}
+/>
+```
+
+**Note:** All `BaseForm` props are also accepted.
+
+## `ValidatedQuickForm`
+
+**Note:** All `QuickForm` props are also accepted.<br>
+**Note:** All `ValidatedForm` props are also accepted.
 
 <br>
 

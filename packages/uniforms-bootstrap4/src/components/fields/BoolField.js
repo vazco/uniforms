@@ -2,10 +2,10 @@ import React          from 'react';
 import classnames     from 'classnames';
 import {connectField} from 'uniforms';
 
-import FormGroup from './FormGroup';
+import wrapField from '../../lib/wrapField';
 
 const Bool = ({label, labelBefore, ...props}) =>
-    <FormGroup label={labelBefore} {...props}>
+    wrapField({label: labelBefore, ...props}, (
         <section className={classnames(props.inputClassName, `checkbox${props.inline ? '-inline' : ''}`)}>
             <label htmlFor={props.id}>
                 <input
@@ -21,7 +21,7 @@ const Bool = ({label, labelBefore, ...props}) =>
                 {label}
             </label>
         </section>
-    </FormGroup>
+    ))
 ;
 
 export default connectField(Bool);

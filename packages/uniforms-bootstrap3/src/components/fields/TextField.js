@@ -2,10 +2,10 @@ import React          from 'react';
 import classnames     from 'classnames';
 import {connectField} from 'uniforms';
 
-import FormGroup from './FormGroup';
+import wrapField from '../../lib/wrapField';
 
 const Text = props =>
-    <FormGroup feedbackable {...props}>
+    wrapField({feedbackable: true, ...props}, (
         <input
             className={classnames(props.inputClassName, 'form-control', {'form-control-danger': props.error})}
             disabled={props.disabled}
@@ -17,11 +17,7 @@ const Text = props =>
             type={props.type}
             value={props.value}
         />
-
-        {props.error && (
-            <i className="glyphicon glyphicon-remove form-control-feedback" />
-        )}
-    </FormGroup>
+    ))
 ;
 
 Text.defaultProps = {

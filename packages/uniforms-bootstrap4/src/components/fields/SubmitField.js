@@ -7,41 +7,54 @@ import gridClassName from '../../lib/gridClassName';
 
 const SubmitField = ({
     className,
-    inputClassName = 'btn btn-primary',
+    inputClassName,
     inputRef,
     value,
     wrapClassName,
     ...props
-}, {uniforms: {error, state: {disabled, grid}}}) =>
-    <section className={classnames(className, {'has-danger': error, row: grid})} {...filterDOMProps(props)}>
-        {(grid || wrapClassName) && (
-            <label className={classnames('form-control-label', gridClassName(grid, 'label'))}>
-                &nbsp;
-            </label>
-        )}
+}, {
+    uniforms: {
+        error,
+        state: {
+            disabled,
+            grid
+        }
+    }
+}) => {
+    const hasWrap = !!(grid || wrapClassName);
 
-        {(grid || wrapClassName) ? (
-            <section className={classnames(wrapClassName, gridClassName(grid, 'input'))}>
-                <input
-                    className={inputClassName}
-                    disabled={!!(error || disabled)}
-                    ref={inputRef}
-                    type="submit"
-                    value={value}
-                />
-            </section>
-        ) : (
-            <input
-                className={inputClassName}
-                disabled={!!(error || disabled)}
-                ref={inputRef}
-                type="submit"
-                value={value}
-            />
-        )}
-    </section>
-;
+    const blockInput = (
+        <input
+            className={inputClassName}
+            disabled={!!(error || disabled)}
+            ref={inputRef}
+            type="submit"
+            value={value}
+        />
+    );
+
+    return (
+        <section className={classnames(className, {'has-danger': error, row: grid})} {...filterDOMProps(props)}>
+            {hasWrap && (
+                <label className={classnames('form-control-label', gridClassName(grid, 'label'))}>
+                    &nbsp;
+                </label>
+            )}
+
+            {hasWrap && (
+                <section className={classnames(wrapClassName, gridClassName(grid, 'input'))}>
+                    {blockInput}
+                </section>
+            )}
+
+            {!hasWrap && blockInput}
+        </section>
+    );
+};
 
 SubmitField.contextTypes = BaseField.contextTypes;
+SubmitField.defaultProps = {
+    inputClassName: 'btn btn-primary'
+};
 
 export default SubmitField;

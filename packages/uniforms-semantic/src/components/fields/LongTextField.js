@@ -7,6 +7,7 @@ const LongText = ({
     className,
     disabled,
     error,
+    errorMessage,
     id,
     inputRef,
     label,
@@ -14,6 +15,7 @@ const LongText = ({
     onChange,
     placeholder,
     required,
+    showInlineError,
     value,
     ...props
 }) =>
@@ -33,6 +35,12 @@ const LongText = ({
             ref={inputRef}
             value={value}
         />
+
+        {!!(errorMessage && showInlineError) && (
+            <section className="ui red basic pointing label">
+                {errorMessage}
+            </section>
+        )}
     </section>
 ;
 

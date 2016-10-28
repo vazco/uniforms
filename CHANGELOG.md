@@ -1,5 +1,11 @@
 # Change Log
 
+## [v1.3.0](https://github.com/vazco/uniforms/releases/tag/v1.3.0)
+- **Added:** Custom ListField icons in bootstrap3. [\#115](https://github.com/vazco/uniforms/issues/115)
+- **Added:** Custom ListField icons in bootstrap4. [\#114](https://github.com/vazco/uniforms/issues/114)
+
+<br>
+
 ## [v1.2.0](https://github.com/vazco/uniforms/releases/tag/v1.2.0)
 
 <br>

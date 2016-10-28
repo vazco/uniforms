@@ -4,6 +4,7 @@ import {connectField}   from 'uniforms';
 import {filterDOMProps} from 'uniforms';
 
 const ListAdd = ({
+    addIcon,
     className,
     disabled,
     parent,
@@ -18,10 +19,13 @@ const ListAdd = ({
             onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
             {...filterDOMProps(props)}
         >
-            {/* TODO: configure to alternate icon */}
-            <i className="octicon octicon-plus" />
+            {addIcon}
         </section>
     );
+};
+
+ListAdd.defaultProps = {
+    addIcon: <i className="octicon octicon-plus" />
 };
 
 export default connectField(ListAdd, {includeParent: true, initialValue: false});

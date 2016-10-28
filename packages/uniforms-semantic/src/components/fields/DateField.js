@@ -15,6 +15,7 @@ const Date_ = ({
     className,
     disabled,
     error,
+    errorMessage,
     icon,
     iconLeft,
     iconProps,
@@ -27,6 +28,7 @@ const Date_ = ({
     onChange,
     placeholder,
     required,
+    showInlineError,
     value,
     ...props
 }) =>
@@ -55,6 +57,12 @@ const Date_ = ({
                 <i className={`${icon || iconLeft} icon`} {...iconProps} />
             )}
         </section>
+
+        {!!(errorMessage && showInlineError) && (
+            <section className="ui red basic pointing label">
+                {errorMessage}
+            </section>
+        )}
     </section>
 ;
 
