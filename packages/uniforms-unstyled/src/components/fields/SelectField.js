@@ -30,28 +30,39 @@ const renderCheckboxes = ({allowedValues, disabled, fieldType, id, name, onChang
     )
 ;
 
-const renderSelect = ({allowedValues, disabled, id, inputRef, label, name, onChange, placeholder,
-    required, transform, value}) =>
-        <select
-            disabled={disabled}
-            id={id}
-            name={name}
-            onChange={event => onChange(event.target.value)}
-            ref={inputRef}
-            value={value}
-        >
-            {(!!placeholder || !required) && (
-                <option value="" disabled={required} hidden={required}>
-                    {placeholder ? placeholder : label}
-                </option>
-            )}
+const renderSelect = ({
+  allowedValues,
+  disabled,
+  id,
+  inputRef,
+  label,
+  name,
+  onChange,
+  placeholder,
+  required,
+  transform,
+  value
+}) =>
+    <select
+        disabled={disabled}
+        id={id}
+        name={name}
+        onChange={event => onChange(event.target.value)}
+        ref={inputRef}
+        value={value}
+    >
+        {(!!placeholder || !required) && (
+            <option value="" disabled={required} hidden={required}>
+                {placeholder ? placeholder : label}
+            </option>
+        )}
 
-            {allowedValues.map(value =>
-                <option key={value} value={value}>
-                    {transform ? transform(value) : value}
-                </option>
-            )}
-        </select>
+        {allowedValues.map(value =>
+            <option key={value} value={value}>
+                {transform ? transform(value) : value}
+            </option>
+        )}
+    </select>
 ;
 
 const Select = ({
