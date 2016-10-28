@@ -1,5 +1,15 @@
 # Change Log
 
+## [v1.4.0](https://github.com/vazco/uniforms/releases/tag/v1.4.0)
+- **Added:** New `showInlineError` prop in semantic theme.
+- **Changed:** Select is now deselectable. [\#120](https://github.com/vazco/uniforms/issues/120)
+- **Changed:** `FormGroup` component is deprecated.
+- **Documented:** Forms components.
+- **Fixed:** Bootstrap themes `grid` handling.
+- **Fixed:** Bootstrap4 `ListAddField` styling. [\#121](https://github.com/vazco/uniforms/issues/121)
+
+<br>
+
 ## [v1.3.0](https://github.com/vazco/uniforms/releases/tag/v1.3.0)
 - **Added:** Custom ListField icons in bootstrap3. [\#115](https://github.com/vazco/uniforms/issues/115)
 - **Added:** Custom ListField icons in bootstrap4. [\#114](https://github.com/vazco/uniforms/issues/114)
@@ -88,8 +98,8 @@
 <br>
 
 ## [v1.0.0-rc.28](https://github.com/vazco/uniforms/releases/tag/v1.0.0-rc.28)
-- **Fixed:** Removed custom validation warning. [\#83](https://github.com/vazco/uniforms/issues/83)
 - **Added:** New `showInlineError` prop in bootstrap theme. [\#84](https://github.com/vazco/uniforms/issues/84)
+- **Fixed:** Removed custom validation warning. [\#83](https://github.com/vazco/uniforms/issues/83)
 
 <br>
 
