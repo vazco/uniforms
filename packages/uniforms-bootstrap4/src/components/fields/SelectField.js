@@ -64,4 +64,3 @@ const Select = props =>
 ;
 
 export default connectField(Select);
-
