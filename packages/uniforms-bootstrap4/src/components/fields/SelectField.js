@@ -41,9 +41,9 @@ const renderSelect = props =>
         ref={props.inputRef}
         value={props.value}
     >
-        {!!props.placeholder && (
-            <option value="" disabled hidden>
-                {props.placeholder}
+        {(!!props.placeholder || !props.required) && (
+            <option value="" disabled={props.required} hidden={props.required}>
+                {props.placeholder ? props.placeholder : props.label}
             </option>
         )}
 
