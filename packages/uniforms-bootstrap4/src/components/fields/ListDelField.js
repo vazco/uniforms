@@ -25,7 +25,7 @@ const ListDel = ({
         >
             {removeIcon}
         </span>
-   );
+    );
 };
 
 ListDel.defaultProps = {

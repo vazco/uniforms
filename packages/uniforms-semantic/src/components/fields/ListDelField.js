@@ -29,7 +29,7 @@ const ListDel = ({
                   .concat(parent.value.slice(1 + fieldIndex))
             )}
         />
-   );
+    );
 };
 
 export default connectField(ListDel, {includeParent: true, initialValue: false});

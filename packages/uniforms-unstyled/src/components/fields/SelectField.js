@@ -31,17 +31,17 @@ const renderCheckboxes = ({allowedValues, disabled, fieldType, id, name, onChang
 ;
 
 const renderSelect = ({
-  allowedValues,
-  disabled,
-  id,
-  inputRef,
-  label,
-  name,
-  onChange,
-  placeholder,
-  required,
-  transform,
-  value
+    allowedValues,
+    disabled,
+    id,
+    inputRef,
+    label,
+    name,
+    onChange,
+    placeholder,
+    required,
+    transform,
+    value
 }) =>
     <select
         disabled={disabled}
