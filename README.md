@@ -10,6 +10,14 @@
     </a>
 
     <a href="https://npmjs.org/package/uniforms">
+        <img src="https://img.shields.io/npm/l/uniforms.svg?maxAge=86400" alt="License">
+    </a>
+
+    <a href="https://npmjs.org/package/uniforms">
+        <img src="https://img.shields.io/npm/dm/uniforms.svg?maxAge=86400" alt="Downloads">
+    </a>
+
+    <a href="https://npmjs.org/package/uniforms">
         <img src="https://img.shields.io/npm/v/uniforms.svg?maxAge=86400" alt="Version">
     </a>
 
