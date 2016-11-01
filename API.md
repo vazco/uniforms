@@ -5,6 +5,7 @@
 - [Fields](#fields)
     - [`AutoField`](#autofield)
     - [`AutoFields`](#autofields)
+    - [`BaseField`](#basefield)
     - [`BoolField`](#boolfield)
     - [`DateField`](#datefield)
     - [`ErrorField`](#errorfield)
@@ -43,22 +44,200 @@
 # Fields
 
 ## `AutoField`
+
+```js
+import {AutoField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<AutoField
+    // Field renderer.
+    //   If ommited, then default algorithm is used. Check README for the whole
+    //   logic.
+    component={MyComponent}
+
+    // All additional props are passed to computed field component.
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.
+
 ## `AutoFields`
+
+```js
+import {AutoFields} from 'uniforms-unstyled'; // Choose your theme package.
+
+<AutoFields
+    // AutoField component.
+    //   By default, it will be your theme AutoField, but you can use your
+    //   custom component
+    autoField={MyAutoField}
+
+    // Wrapping element.
+    //   It's clear, right?
+    element="section"
+
+    // List of fields to render.
+    //   By default, all fields are rendered.
+    fields={['fieldA', 'fieldB']}
+
+    // List of fields to omit.
+    //   By default it's empty.
+    omitFields={['fieldA', 'fieldB']}
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.
+
+## `BaseField`
+
+```js
+import {BaseForm} from 'uniforms';
+
+// You can't really render a BaseField, because it don't have a render method.
+// It's a base class of all packaged fields, so all below props are available to
+// all fields.
+<BaseForm
+    // Field disabled state.
+    //   It's passed directly to the field, but it propagates same as label.
+    disabled={false}
+
+    // Field label.
+    //   This prop have three modes. If you pass a string, then it will be used
+    //   as a label. If you pass a null, then it won't have a label, but nested
+    //   fields will have default labels. If you pass a non-null falsy value, it
+    //   won't have a label and nested fields won't have labels too.
+    label={true}
+
+    // Field name.
+    //   Used for identification. It should match with your schema - if not, it
+    //   will throw an error.
+    name="field"
+
+    // Field placeholder.
+    //   If set to true, then label will be used. Otherwise, it's handled like
+    //   label (including propagation).
+    placeholder={false}
+
+    // You can pass any prop, but remember, that passing onChange will "detach"
+    // the field from the form in some way - it won't change your form state.
+    // Also, passing any already provided prop - like id - will override the
+    // default one.
+/>
+```
+
 ## `BoolField`
+
+```js
+import {BoolField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<BoolField
+    // Field feedback state.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap4
+    feedbackable={true}
+
+    // Field layout.
+    //   Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object
+    //   is a {mode: size} object. Complete string is simply passed through.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    grid={3}        // 'col-3-sm' on label, 'col-9-sm' on input
+    grid="4"        // 'col-4-sm' on label, 'col-8-sm' on input
+    grid={{md: 5}}  // 'col-5-md' on label, 'col-7-md' on input
+    grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
+
+    // Help text.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    help="Need help?"
+
+    // Help block className.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    helpClassName="a b c"
+
+    // Checkbox inline state.
+    //   In bootstrpa themes, label is rendered as a text, but in inline mode,
+    //   it's treated as a field label.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    inline={true}
+
+    // Input wrapper class name.
+    //   In bootstrap themes, passed className is used on field block. This is
+    //   used on direct field wrapper.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    inputClassName="a b c"
+
+    // Input ref.
+    //   Setting ref prop to a field, won't work as desired, because you'll
+    //   receive field component, not HTML input. If you need an input ref, use
+    //   this prop instead.
+    inputRef={ref => {}}
+
+    // Left label.
+    //   In bootstrap themes, label is rendered on the right side of a checkbox.
+    //   This label is rendered above the field.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    labelBefore="Label"
+
+    // Field inline error.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    //   semantic
+    showInlineError={true}
+
+    // Field and sourroundings wrap className.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    wrapClassName="a b c"
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.
+
 ## `DateField`
+
 ## `ErrorField`
+
 ## `ErrorsField`
+
 ## `HiddenField`
+
 ## `ListAddField`
+
 ## `ListDelField`
+
 ## `ListField`
+
 ## `ListItemField`
+
 ## `LongTextField`
+
 ## `NestField`
+
 ## `NumField`
+
 ## `RadioField`
+
 ## `SelectField`
+
 ## `SubmitField`
+
 ## `TextField`
 
 # Forms
@@ -76,7 +255,7 @@ import {AutoForm} from 'uniforms'; // Or from the theme package.
 />
 ```
 
-**Note:** All `ValidatedQuickForm` props and methods are also accepted.
+**Note:** All `ValidatedQuickForm` props are also accepted and all methods are available.
 
 ## `BaseForm`
 
@@ -104,9 +283,9 @@ import {BaseForm} from 'uniforms'; // Or from the theme package.
     // Form layout.
     //   Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object
     //   is a {mode: size} object. Complete string is simply passed through.
-    // Available only in:
-    //   Bootstrap3
-    //   Bootstrap4
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
     grid={3}        // 'col-3-sm' on label, 'col-9-sm' on input
     grid="4"        // 'col-4-sm' on label, 'col-8-sm' on input
     grid={{md: 5}}  // 'col-5-md' on label, 'col-7-md' on input
@@ -195,7 +374,7 @@ import {QuickForm} from 'uniforms'; // Or from the theme package.
 />
 ```
 
-**Note:** All `BaseForm` props and methods are also accepted.
+**Note:** All `BaseForm` props are also accepted and all methods are available.
 
 ## `ValidatedForm`
 
@@ -254,12 +433,12 @@ import {ValidatedForm} from 'uniforms'; // Or from the theme package.
 />
 ```
 
-**Note:** All `BaseForm` props and methods are also accepted.
+**Note:** All `BaseForm` props are also accepted and all methods are available.
 
 ## `ValidatedQuickForm`
 
-**Note:** All `QuickForm` props and methods are also accepted.<br>
-**Note:** All `ValidatedForm` props and methods are also accepted.
+**Note:** All `QuickForm` props are also accepted and all methods are available.<br>
+**Note:** All `ValidatedForm` props are also accepted and all methods are available.
 
 <br>
 

@@ -162,7 +162,7 @@ Then use it in your form:
 
 ```js
 // Remember to choose correct theme package
-import {AutoForm} from 'uniforms-semantic';
+import {AutoForm} from 'uniforms-unstyled';
 
 const PostCreateForm = () =>
     <AutoForm schema={PostSchema} onSubmit={doc => console.log(doc)} />
@@ -404,8 +404,8 @@ export default Modifier(BaseForm);
 // for example Bootstrap3, then change AutoForm.Semantic to AutoForm.Bootstrap3.
 // This one can be called AutoModifierForm, but it's displayName will be
 // AutoValidatedQuickSemanticModifierForm. Sweet, huh?
-import {AutoForm} from 'uniforms-semantic';
-export default AutoForm.Auto(AutoForm.Validated(AutoForm.Quick(AutoForm.Semantic(Modifier(BaseForm)))));
+import {AutoForm} from 'uniforms-unstyled';
+export default AutoForm.Auto(AutoForm.Validated(AutoForm.Quick(AutoForm.Unstyled(Modifier(BaseForm)))));
 ```
 
 ## Fields
@@ -521,7 +521,7 @@ export default connectField(Composite);
 
 ```js
 // Remember to choose correct theme package
-import {AutoField} from 'uniforms-semantic';
+import {AutoField} from 'uniforms-unstyled';
 
 const CustomAuto = props => {
     // This way we don't care about not handled cases - we use default
@@ -842,9 +842,9 @@ import {filterDOMProps} from 'uniforms';
 
 // This field works like this: render standard submit field and disable it, when
 // the form is invalid. It's a simplified version of default SubmitField from
-// uniforms-semantic.
+// uniforms-unstyled.
 const SubmitField = (props, {uniforms: {error, state: {disabled}}}) =>
-    <input type="submit" disabled={!!(error || disabled)} />
+    <input disabled={!!(error || disabled)} type="submit" />
 ;
 
 SubmitField.contextTypes = BaseField.contextTypes;
