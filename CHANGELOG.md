@@ -1,5 +1,11 @@
 # Change Log
 
+## [v1.4.1](https://github.com/vazco/uniforms/releases/tag/v1.4.1)
+- **Fixed:** `ListAddField` and `ListDelField`. [\#125](https://github.com/vazco/uniforms/issues/125)
+- **Fixed:** `process.addListener` is not a function in some environments. [\#124](https://github.com/vazco/uniforms/issues/124)
+
+<br>
+
 ## [v1.4.0](https://github.com/vazco/uniforms/releases/tag/v1.4.0)
 - **Added:** New `showInlineError` prop in semantic theme.
 - **Changed:** Select is now deselectable. [\#120](https://github.com/vazco/uniforms/issues/120)
