@@ -12,9 +12,11 @@ const Nest = ({
     className,
     disabled,
     error,
+    errorMessage,
     fields,
     label,
     name,
+    showInlineError,
     ...props
 }) =>
     <section className={classnames(className, {disabled, error}, 'grouped fields')} {...filterDOMProps(props)}>
@@ -23,6 +25,12 @@ const Nest = ({
                 <label>
                     {label}
                 </label>
+            </section>
+        )}
+
+        {!!(errorMessage && showInlineError) && (
+            <section className="ui red basic label">
+                {errorMessage}
             </section>
         )}
 
