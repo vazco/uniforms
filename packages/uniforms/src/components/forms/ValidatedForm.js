@@ -14,11 +14,11 @@ const __unhandled = event =>
     event.preventDefault()
 ;
 
-if (typeof process !== 'undefined') {
+if (typeof process !== 'undefined' && process.addListener) {
     process.addListener('unhandledRejection', __unhandled);
 }
 
-if (typeof window !== 'undefined') {
+if (typeof window !== 'undefined' && window.addEventListener) {
     window.addEventListener('unhandledrejection', __unhandled);
 }
 
