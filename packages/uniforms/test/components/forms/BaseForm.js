@@ -68,6 +68,7 @@ describe('BaseForm', () => {
             expect(context.uniforms.state).to.have.property('label', true);
             expect(context.uniforms.state).to.have.property('disabled', false);
             expect(context.uniforms.state).to.have.property('placeholder', false);
+            expect(context.uniforms.state).to.have.property('showInlineError', false);
         });
 
         it('have correct `onChange`', () => {
@@ -77,7 +78,14 @@ describe('BaseForm', () => {
 
     context('when rendered', () => {
         const wrapper = mount(
-            <BaseForm className="name" schema={schema}>
+            <BaseForm
+                className="name"
+                disabled
+                label={false}
+                placeholder
+                schema={schema}
+                showInlineError
+            >
                 <div />
                 <div />
                 <div />
@@ -100,6 +108,16 @@ describe('BaseForm', () => {
 
         it('have correct `resetCount`', () => {
             expect(wrapper.state('resetCount')).to.equal(0);
+        });
+
+        it('have correct `state`', () => {
+            const context = wrapper.instance().getChildContext();
+
+            expect(context.uniforms).to.have.property('state').that.is.an('object');
+            expect(context.uniforms.state).to.have.property('label', false);
+            expect(context.uniforms.state).to.have.property('disabled', true);
+            expect(context.uniforms.state).to.have.property('placeholder', true);
+            expect(context.uniforms.state).to.have.property('showInlineError', true);
         });
 
         it('updates schema bridge', () => {

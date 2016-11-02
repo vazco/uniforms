@@ -17,6 +17,7 @@ let unwantedProps = [
     'onChange',
     'parent',
     'placeholder',
+    'showInlineError',
     'value'
 ];
 

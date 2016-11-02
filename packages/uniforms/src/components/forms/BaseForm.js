@@ -31,9 +31,10 @@ export default class BaseForm extends Component {
         onSubmitFailure: PropTypes.func,
         onSubmitSuccess: PropTypes.func,
 
-        label:       PropTypes.bool,
-        disabled:    PropTypes.bool,
-        placeholder: PropTypes.bool,
+        label:           PropTypes.bool,
+        disabled:        PropTypes.bool,
+        placeholder:     PropTypes.bool,
+        showInlineError: PropTypes.bool,
 
         autosave:      PropTypes.bool,
         autosaveDelay: PropTypes.number
@@ -62,9 +63,10 @@ export default class BaseForm extends Component {
                 changed:    PropTypes.bool.isRequired,
                 changedMap: PropTypes.object.isRequired,
 
-                label:       PropTypes.bool.isRequired,
-                disabled:    PropTypes.bool.isRequired,
-                placeholder: PropTypes.bool.isRequired
+                label:           PropTypes.bool.isRequired,
+                disabled:        PropTypes.bool.isRequired,
+                placeholder:     PropTypes.bool.isRequired,
+                showInlineError: PropTypes.bool.isRequired
             }).isRequired,
 
             onChange: PropTypes.func.isRequired,
@@ -129,9 +131,10 @@ export default class BaseForm extends Component {
             changed:  !!this.changed,
             changedMap: this.changedMap,
 
-            label:       !!this.props.label,
-            disabled:    !!this.props.disabled,
-            placeholder: !!this.props.placeholder
+            label:           !!this.props.label,
+            disabled:        !!this.props.disabled,
+            placeholder:     !!this.props.placeholder,
+            showInlineError: !!this.props.showInlineError
         };
     }
 
@@ -185,6 +188,7 @@ export default class BaseForm extends Component {
             onSubmitSuccess, // eslint-disable-line no-unused-vars
             placeholder,     // eslint-disable-line no-unused-vars
             schema,          // eslint-disable-line no-unused-vars
+            showInlineError, // eslint-disable-line no-unused-vars
 
             ...props
         } = this.props;

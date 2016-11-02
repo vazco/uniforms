@@ -333,6 +333,15 @@ import {BaseForm} from 'uniforms'; // Or from the theme package.
     //   QuickForm and validation in ValidatedForm.
     schema={myFormSchema}
 
+    // Default showInlineError prop for all fields.
+    //   By default it's false - set it to true to enable inline errors for the
+    //   whole form.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    //   semantic
+    showInlineError={true}
+
     // Form methods.
     ref={form => {
         // Reset form.
