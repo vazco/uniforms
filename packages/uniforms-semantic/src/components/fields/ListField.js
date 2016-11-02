@@ -13,11 +13,13 @@ const List = ({
     className,
     disabled,
     error,
+    errorMessage,
     initialCount,
     itemProps,
     label,
     name,
     required,
+    showInlineError,
     value,
     ...props
 }) =>
@@ -37,6 +39,12 @@ const List = ({
 
         {label && (
             <section className="ui fitted hidden clearing divider" />
+        )}
+
+        {!!(errorMessage && showInlineError) && (
+            <section className="ui red basic label">
+                {errorMessage}
+            </section>
         )}
 
         {children ? (
