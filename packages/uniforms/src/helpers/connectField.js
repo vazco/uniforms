@@ -30,18 +30,7 @@ export default function connectField (component, {
         }
 
         render () {
-            return createElement(
-                component,
-                mapProps(
-                    this.getFieldProps(
-                        undefined,
-                        {
-                            ensureValue:   this.options.ensureValue,
-                            includeParent: this.options.includeParent
-                        }
-                    )
-                )
-            );
+            return createElement(component, mapProps(this.getFieldProps()));
         }
 
         componentWillMount () {

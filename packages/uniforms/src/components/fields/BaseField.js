@@ -146,12 +146,19 @@ export default class BaseField extends Component {
     }
 
     // eslint-disable-next-line complexity
-    getFieldProps (name, {ensureValue, explicitInitialValue, includeParent, overrideValue} = this.options) {
+    getFieldProps (name, options) {
         const context = this.context.uniforms;
         const props = {
             ...this.getChildContextState(),
             ...this.props
         };
+
+        const {
+            ensureValue,
+            explicitInitialValue,
+            includeParent,
+            overrideValue
+        } = options ? {...this.options, ...options} : this.options;
 
         if (name === undefined) {
             name = joinName(context.name, props.name);
