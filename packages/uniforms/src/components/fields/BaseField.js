@@ -56,12 +56,12 @@ export default class BaseField extends Component {
             return true;
         }
 
+        // TODO: This might be optimized.
         if (nextName.indexOf('.') !== -1) {
             const prevParentValue = get(prevContext.model, prevName.replace(/(.+)\..+$/, '$1'));
             const nextParentValue = get(nextContext.model, nextName.replace(/(.+)\..+$/, '$1'));
 
-            // eslint-disable-next-line max-len
-            if (Array.isArray(nextParentValue) && (!prevParentValue || prevParentValue.length !== nextParentValue.length)) {
+            if (Array.isArray(nextParentValue) && !isEqual(prevParentValue, nextParentValue)) {
                 return true;
             }
         }
