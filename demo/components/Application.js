@@ -86,7 +86,7 @@ export class Application extends React.Component {
                         </section>
                     </nav>
 
-                    <textarea value={schema.string} onChange={onSchema} />
+                    <textarea spellCheck={false} value={schema.string} onChange={onSchema} />
 
                     <a href="https://github.com/vazco/uniforms">
                         {/* eslint-disable max-len */}
