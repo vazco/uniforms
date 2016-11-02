@@ -1,5 +1,10 @@
 # Change Log
 
+## [v1.5.0-rc.1](https://github.com/vazco/uniforms/releases/tag/v1.5.0-rc.1)
+- **Added:** New `showInlineError` prop in `BaseForm`. [\#87](https://github.com/vazco/uniforms/issues/87)
+- **Added:** New `showInlineError` prop in `ListField`. [\#100](https://github.com/vazco/uniforms/issues/100)
+- **Added:** New `showInlineError` prop in `NestField`.
+
 ## [v1.4.1](https://github.com/vazco/uniforms/releases/tag/v1.4.1)
 - **Fixed:** `ListAddField` and `ListDelField`. [\#125](https://github.com/vazco/uniforms/issues/125)
 - **Fixed:** `process.addListener` is not a function in some environments. [\#124](https://github.com/vazco/uniforms/issues/124)
