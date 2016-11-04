@@ -9,10 +9,6 @@ function gridClassNamePart (size, value, side) {
 }
 
 export default function gridClassName (grid, side) {
-    if (!grid) {
-        return '';
-    }
-
     // Example: 6
     if (typeof grid === 'number') {
         return gridClassNamePart('sm', grid, side);
@@ -34,4 +30,6 @@ export default function gridClassName (grid, side) {
             gridClassNamePart(size, grid[size], side)
         );
     }
+
+    return '';
 }

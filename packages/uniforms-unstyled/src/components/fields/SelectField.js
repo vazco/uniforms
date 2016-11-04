@@ -3,7 +3,7 @@ import {connectField}   from 'uniforms';
 import {filterDOMProps} from 'uniforms';
 
 const xor = (item, array) => {
-    let index = array.indexOf(item);
+    const index = array.indexOf(item);
     if (index === -1) {
         return array.concat([item]);
     }

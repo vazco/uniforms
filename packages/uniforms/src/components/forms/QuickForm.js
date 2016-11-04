@@ -38,7 +38,7 @@ const Quick = parent => class extends parent {
     }
 
     render () {
-        let nativeFormProps = this.getNativeFormProps();
+        const nativeFormProps = this.getNativeFormProps();
         if (nativeFormProps.children) {
             return super.render();
         }

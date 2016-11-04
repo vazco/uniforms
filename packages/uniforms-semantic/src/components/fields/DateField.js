@@ -5,7 +5,7 @@ import {filterDOMProps} from 'uniforms';
 
 const dateFormat = value => value && value.toISOString().slice(0, -8);
 const dateParse = (timestamp, onChange) => {
-    let date = new Date(timestamp);
+    const date = new Date(timestamp);
     if (date.getFullYear() < 10000) {
         onChange(date);
     }
