@@ -1,3 +1,4 @@
+import cloneDeep from 'lodash.clonedeep';
 import invariant from 'invariant';
 
 import Bridge         from './Bridge';
@@ -203,7 +204,14 @@ export default class SimpleSchema2Bridge extends Bridge {
         return type;
     }
 
-    getValidator (options = {clean: true}) {
-        return this.schema.validator(options);
+    getValidator (options = {clean: true, mutate: true}) {
+        const validator = this.schema.validator(options);
+
+        // Clean mutate its argument, even if mutate is false.
+        if (options.clean) {
+            return model => validator(cloneDeep({...model}));
+        }
+
+        return validator;
     }
 }
