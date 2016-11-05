@@ -1,5 +1,9 @@
 # Change Log
 
+## [v1.5.0](https://github.com/vazco/uniforms/releases/tag/v1.5.0)
+- **Fixed:** Got rid of unknown props warning in bootstrap themes.
+- **Fixed:** SimpleSchema validator.
+
 ## [v1.5.0-rc.1](https://github.com/vazco/uniforms/releases/tag/v1.5.0-rc.1)
 - **Added:** New `showInlineError` prop in `BaseForm`. [\#87](https://github.com/vazco/uniforms/issues/87)
 - **Added:** New `showInlineError` prop in `ListField`. [\#100](https://github.com/vazco/uniforms/issues/100)
@@ -96,8 +100,8 @@
 <br>
 
 ## [v1.0.0-rc.30](https://github.com/vazco/uniforms/releases/tag/v1.0.0-rc.30)
-- **Fixed:** Get rid of (un)controlled input warning. [\#90](https://github.com/vazco/uniforms/issues/90)
-- **Fixed:** Get rid of unknown props warning. [\#89](https://github.com/vazco/uniforms/issues/89)
+- **Fixed:** Got rid of (un)controlled input warning. [\#90](https://github.com/vazco/uniforms/issues/90)
+- **Fixed:** Got rid of unknown props warning. [\#89](https://github.com/vazco/uniforms/issues/89)
 - **Fixed:** Nesting `ListField` in `ListField`. [\#91](https://github.com/vazco/uniforms/issues/91)
 
 <br>
@@ -126,8 +130,8 @@
 - **Added:** New `filterDOMProps` helper.
 - **Fixed:** AutoForm performance. [\#70](https://github.com/vazco/uniforms/issues/70)
 - **Fixed:** Dynamic schema change. [\#76](https://github.com/vazco/uniforms/issues/76)
-- **Fixed:** Get rid of unknown props warning. [\#64](https://github.com/vazco/uniforms/issues/64)
-- **Fixed:** Get rid of unknown props warning. [\#75](https://github.com/vazco/uniforms/issues/75)
+- **Fixed:** Got rid of unknown props warning. [\#64](https://github.com/vazco/uniforms/issues/64)
+- **Fixed:** Got rid of unknown props warning. [\#75](https://github.com/vazco/uniforms/issues/75)
 
 <br>
 
@@ -147,7 +151,7 @@
 - **Added:** New `injectName` helper.
 - **Changed:** Initial value logic for better UX. [\#58](https://github.com/vazco/uniforms/issues/58)
 - **Changed:** `joinName` works with dots in parts.
-- **Fixed:** Get rid of unknown props warning. [\#64](https://github.com/vazco/uniforms/issues/64)
+- **Fixed:** Got rid of unknown props warning. [\#64](https://github.com/vazco/uniforms/issues/64)
 - **Fixed:** Invalid `propTypes`.
 - **Fixed:** `HiddenField` lead to infinite loop. [\#63](https://github.com/vazco/uniforms/issues/63)
 - **Fixed:** `NestField` lead to infinite loop. [\#62](https://github.com/vazco/uniforms/issues/62)
@@ -212,7 +216,7 @@
 <br>
 
 ## [v1.0.0-rc.15](https://github.com/vazco/uniforms/releases/tag/v1.0.0-rc.15)
-- **Fixed:** Get rid of warning about field value. [\#22](https://github.com/vazco/uniforms/issues/22)
+- **Fixed:** Got rid of warning about field value. [\#22](https://github.com/vazco/uniforms/issues/22)
 
 <br>
 
