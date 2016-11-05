@@ -28,14 +28,11 @@ export class Application extends React.Component {
     }
 
     onSchema ({target: {value}}) {
-        this.setState({schema: getSchema(value)});
+        this.setState({doc: null, schema: getSchema(value)});
     }
 
     onTheme ({target: {value}}) {
-        this.setState({
-            styles: getStyles(value),
-            theme:  getTheme(value)
-        });
+        this.setState({doc: null, styles: getStyles(value), theme: getTheme(value)});
     }
 
     render () {
