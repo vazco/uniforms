@@ -1,13 +1,15 @@
-# Change Log
-
 ## [v1.5.0](https://github.com/vazco/uniforms/releases/tag/v1.5.0)
 - **Fixed:** Got rid of unknown props warning in bootstrap themes.
 - **Fixed:** SimpleSchema validator.
+
+<br>
 
 ## [v1.5.0-rc.1](https://github.com/vazco/uniforms/releases/tag/v1.5.0-rc.1)
 - **Added:** New `showInlineError` prop in `BaseForm`. [\#87](https://github.com/vazco/uniforms/issues/87)
 - **Added:** New `showInlineError` prop in `ListField`. [\#100](https://github.com/vazco/uniforms/issues/100)
 - **Added:** New `showInlineError` prop in `NestField`.
+
+<br>
 
 ## [v1.4.1](https://github.com/vazco/uniforms/releases/tag/v1.4.1)
 - **Fixed:** `ListAddField` and `ListDelField`. [\#125](https://github.com/vazco/uniforms/issues/125)
@@ -18,8 +20,7 @@
 ## [v1.4.0](https://github.com/vazco/uniforms/releases/tag/v1.4.0)
 - **Added:** New `showInlineError` prop in semantic theme.
 - **Changed:** Select is now deselectable. [\#120](https://github.com/vazco/uniforms/issues/120)
-- **Changed:** `FormGroup` component is deprecated.
-- **Documented:** Forms components.
+- **Deprecated:** `FormGroup` helper component.
 - **Fixed:** Bootstrap themes `grid` handling.
 - **Fixed:** Bootstrap4 `ListAddField` styling. [\#121](https://github.com/vazco/uniforms/issues/121)
 
@@ -107,7 +108,7 @@
 <br>
 
 ## [v1.0.0-rc.29](https://github.com/vazco/uniforms/releases/tag/v1.0.0-rc.29)
-- **Documented:** Custom `AutoField` example. [\#85](https://github.com/vazco/uniforms/issues/85)
+- **Added:** Custom `AutoField` example. [\#85](https://github.com/vazco/uniforms/issues/85)
 - **Fixed:** `BoolField` return non-boolean value. [\#88](https://github.com/vazco/uniforms/issues/88)
 
 <br>
@@ -139,7 +140,7 @@
 - **Added:** New `autosaveDelay` prop on forms. [\#29](https://github.com/vazco/uniforms/issues/29)
 - **Added:** New `icon` and `iconLeft` prop in semantic theme. [\#67](https://github.com/vazco/uniforms/issues/67)
 - **Added:** New `inputRef` prop on every field. [\#68](https://github.com/vazco/uniforms/issues/68)
-- **Documented:** `ModifierForm` example. [\#66](https://github.com/vazco/uniforms/issues/66)
+- **Added:** `ModifierForm` example. [\#66](https://github.com/vazco/uniforms/issues/66)
 - **Fixed:** Dramatically improved performance. [\#70](https://github.com/vazco/uniforms/issues/70)
 - **Fixed:** Styling of `ListField` in bootstrap theme. [\#72](https://github.com/vazco/uniforms/issues/72)
 - **Fixed:** `findError`.
@@ -301,4 +302,3 @@
 <br>
 
 ## [v1.0.0-rc.1](https://github.com/vazco/uniforms/releases/tag/v1.0.0-rc.1)
-- **Added:** Basically... Everything!

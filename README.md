@@ -673,8 +673,9 @@ import {Bridge} from 'uniforms';
 
 class MyLittleSchema extends Bridge {
     constructor (schema, validator) {
-        super(schema);
+        super();
 
+        this.schema    = schema;
         this.validator = validator;
     }
 
@@ -719,7 +720,7 @@ class MyLittleSchema extends Bridge {
     }
 }
 
-const ExampleOfMyLittleSchema = new MyLittleSchema({
+const bridge = new MyLittleSchema({
     login:     {__type__: String, required: true, initialValue: '', label: 'Login'},
     password1: {__type__: String, required: true, initialValue: '', label: 'Password'},
     password2: {__type__: String, required: true, initialValue: '', label: 'Password (again)'}
@@ -747,7 +748,7 @@ const ExampleOfMyLittleSchema = new MyLittleSchema({
     }
 });
 
-<AutoForm schema={ExampleOfMyLittleSchema} />
+<AutoForm schema={bridge} />
 ```
 
 ## Context data

@@ -38,6 +38,11 @@
     - [`joinName`](#joinname)
     - [`nothing`](#nothing)
     - [`randomIds`](#randomids)
+- [Schemas](#schemas)
+    - [`Bridge`](#bridge)
+    - [`SimpleSchemaBridge`](#simpleschemabridge)
+    - [`SimpleSchema2Bridge`](#simpleschema2bridge)
+    - [`createSchemaBridge`](#createschemabridge)
 
 <br>
 
@@ -574,4 +579,77 @@ const predictableRandomIdA = safeRandomIdGenerator();
 const predictableRandomIdB = safeRandomIdGenerator();
 const predictableRandomIdC = safeRandomIdGenerator();
 // ...
+```
+
+# Schemas
+
+## `Bridge`
+
+```js
+import {Bridge} from 'uniforms';
+
+// This is a kind of abstract class. It should be extended to create custom
+// bridges. It implements all of the required methods and throws an error with
+// meaningful "method not implemented" error.
+class CustomBridge extends Bridge {
+    // Check, if this bridge is compatibile with given schema.
+    static check (schema) { /* ... */ }
+
+    // Field's scoped error.
+    getError (name, error) { /* ... */ }
+
+    // Field's scoped error message.
+    getErrorMessage (name, error) { /* ... */ }
+
+    // All error messages from error.
+    getErrorMessages (error) { /* ... */ }
+
+    // Field's definition (`field` prop).
+    getField (name) { /* ... */ }
+
+    // Field's initial value.
+    getInitialValue (name) { /* ... */ }
+
+    // Field's props.
+    getProps (name) { /* ... */ }
+
+    // Field's subfields (or first-level fields).
+    getSubfields (name) { /* ... */ }
+
+    // Field's type (ex. Number, String).
+    getType (name) { /* ... */ }
+
+    // Function with one argument - model - which throws errors when model is
+    // invalid.
+    getValidator (options) { /* ... */ }
+}
+```
+
+## `SimpleSchemaBridge`
+
+```js
+import {SimpleSchemaBridge} from 'uniforms';
+
+// SimpleSchema bridge.
+const bridge = new SimpleSchemaBridge(simpleSchemaInstance);
+```
+
+## `SimpleSchema2Bridge`
+
+```js
+import {SimpleSchema2Bridge} from 'uniforms';
+
+// SimpleSchema@2 bridge.
+const bridge = new SimpleSchema2Bridge(simpleSchema2Instance);
+```
+
+## `createSchemaBridge`
+
+```js
+import {createSchemaBridge} from 'uniforms';
+
+// It's rather an internal helper, but it's still exported. Use it, if you want
+// to manually create a schema bridge or to test your bridge. It will throw on
+// an unrecognised schema.
+const bridge = createSchemaBridge(schemaOrBridge);
 ```
