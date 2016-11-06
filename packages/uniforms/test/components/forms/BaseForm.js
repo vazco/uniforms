@@ -57,8 +57,7 @@ describe('BaseForm', () => {
         });
 
         it('have correct `schema`', () => {
-            expect(context.uniforms).to.have.property('schema');
-            expect(context.uniforms.schema).to.have.property('schema', schema);
+            expect(context.uniforms).to.have.property('schema', schema);
         });
 
         it('have correct `state`', () => {
@@ -127,8 +126,7 @@ describe('BaseForm', () => {
 
             const context = wrapper.instance().getChildContext();
 
-            expect(context.uniforms).to.have.property('schema');
-            expect(context.uniforms.schema).to.have.property('schema', schema2);
+            expect(context.uniforms).to.have.property('schema', schema2);
         });
     });
 

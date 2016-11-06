@@ -3,37 +3,33 @@ import {expect} from 'chai';
 import {Bridge} from 'uniforms';
 
 describe('Bridge', () => {
-    const id = x => () => x;
-    const schema = {
-        getError:         id('getError'),
-        getErrorMessage:  id('getErrorMessage'),
-        getErrorMessages: id('getErrorMessages'),
-        getField:         id('getField'),
-        getInitialValue:  id('getInitialValue'),
-        getProps:         id('getProps'),
-        getSubfields:     id('getSubfields'),
-        getType:          id('getType'),
-        getValidator:     id('getValidator')
-    };
+    class CustomBridge extends Bridge {}
+    const customBridgeInstance = new CustomBridge();
 
-    const bridge = new Bridge(schema);
+    it('cannot be instantiated', () => {
+        expect(() => new Bridge()).to.throw();
+    });
 
-    context('#check()', () => {
-        it('works correctly without schema', () => {
-            expect(Bridge.check()).to.be.falsy;
-        });
-
-        Object.keys(schema).forEach(method => {
-            it(`works correctly without '${method}'`, () => {
-                expect(Bridge.check({...schema, [method]: null})).to.be.falsy;
-            });
+    context('#check', () => {
+        it('throws an unimplemented error', () => {
+            expect(Bridge.check).to.throw();
         });
     });
 
-    Object.keys(schema).forEach(method => {
+    [
+        'getError',
+        'getErrorMessage',
+        'getErrorMessages',
+        'getField',
+        'getInitialValue',
+        'getProps',
+        'getSubfields',
+        'getType',
+        'getValidator'
+    ].forEach(method => {
         context(`#${method}`, () => {
-            it('is a flyweight', () => {
-                expect(bridge[method]()).to.be.equal(method);
+            it('throws an unimplemented error', () => {
+                expect(() => customBridgeInstance[method]()).to.throw();
             });
         });
     });

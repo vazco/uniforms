@@ -33,6 +33,12 @@ try {
 } catch (_) { /* Ignore it. */ }
 
 export default class SimpleSchema2Bridge extends Bridge {
+    constructor (schema) {
+        super();
+
+        this.schema = schema;
+    }
+
     static check (schema) {
         return SimpleSchema && (
             schema &&

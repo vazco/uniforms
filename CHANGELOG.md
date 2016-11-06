@@ -1,3 +1,10 @@
+## Next
+- **Changed:** `Bridge` cannot be instantiated.
+- **Changed:** `Bridge` constructor is now noop.
+- **Changed:** `Bridge` methods are now throwing an _unimplemented method_ errors.
+
+<br>
+
 ## [v1.5.0](https://github.com/vazco/uniforms/releases/tag/v1.5.0)
 - **Fixed:** Got rid of unknown props warning in bootstrap themes.
 - **Fixed:** SimpleSchema validator.
