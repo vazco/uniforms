@@ -2,10 +2,10 @@ import React          from 'react';
 import classnames     from 'classnames';
 import {connectField} from 'uniforms';
 
-import FormGroup from './FormGroup';
+import wrapField from '../../lib/wrapField';
 
 const LongText = props =>
-    <FormGroup {...props}>
+    wrapField(props, (
         <textarea
             className={classnames(props.inputClassName, 'form-control', {'form-control-danger': props.error})}
             disabled={props.disabled}
@@ -16,7 +16,7 @@ const LongText = props =>
             ref={props.inputRef}
             value={props.value}
         />
-    </FormGroup>
+    ))
 ;
 
 export default connectField(LongText);

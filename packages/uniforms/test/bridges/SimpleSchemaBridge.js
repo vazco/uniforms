@@ -38,6 +38,8 @@ describe('SimpleSchemaBridge', () => {
             if (field) {
                 return {label: name.split('.').join(' ').toUpperCase(), ...field};
             }
+
+            return undefined;
         },
 
         messageForError (type, name) {

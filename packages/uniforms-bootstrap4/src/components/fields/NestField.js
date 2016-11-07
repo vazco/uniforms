@@ -1,4 +1,5 @@
 import React            from 'react';
+import classnames       from 'classnames';
 import {connectField}   from 'uniforms';
 import {filterDOMProps} from 'uniforms';
 import {injectName}     from 'uniforms';
@@ -8,16 +9,26 @@ import AutoField from './AutoField';
 
 const Nest = ({
     children,
+    className,
+    error,
+    errorMessage,
     fields,
     label,
     name,
+    showInlineError,
     ...props
 }) =>
-    <section {...filterDOMProps(props)}>
+    <section className={classnames(className, {'has-error': error})} {...filterDOMProps(props)}>
         {label && (
             <label>
                 {label}
             </label>
+        )}
+
+        {!!(errorMessage && showInlineError) && (
+            <span className="text-danger">
+                {errorMessage}
+            </span>
         )}
 
         {children ? (

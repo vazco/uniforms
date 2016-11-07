@@ -13,11 +13,13 @@ const List = ({
     children,
     className,
     error,
+    errorMessage,
     initialCount,
     itemProps,
     label,
     name,
     removeIcon,
+    showInlineError,
     value,
     ...props
 }) =>
@@ -27,12 +29,18 @@ const List = ({
     >
         <section className="panel-body">
             {label && (
-                <section className="panel-heading">
+                <section className={classnames('panel-heading', {'has-error': error})}>
                     <label className="control-label">
                         {label}&nbsp;
                     </label>
 
                     <ListAddField name={`${name}.$`} initialCount={initialCount} addIcon={addIcon} />
+
+                    {!!(errorMessage && showInlineError) && (
+                        <span className="help-block">
+                            {errorMessage}
+                        </span>
+                    )}
                 </section>
             )}
 

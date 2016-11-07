@@ -12,11 +12,13 @@ const List = ({
     addIcon,
     children,
     className,
+    errorMessage,
     initialCount,
     itemProps,
     label,
     name,
     removeIcon,
+    showInlineError,
     value,
     ...props
 }) =>
@@ -29,6 +31,12 @@ const List = ({
                     </label>
 
                     <ListAddField name={`${name}.$`} initialCount={initialCount} addIcon={addIcon} />
+
+                    {!!(errorMessage && showInlineError) && (
+                        <span className="text-danger">
+                            {errorMessage}
+                        </span>
+                    )}
                 </section>
             )}
 
@@ -45,7 +53,6 @@ const List = ({
                  )
             ) : (
                 value.map((item, index) =>
-
                     <ListItemField
                         key={index}
                         label={null}

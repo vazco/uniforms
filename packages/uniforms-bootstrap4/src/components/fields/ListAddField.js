@@ -15,7 +15,7 @@ const ListAdd = ({
 
     return (
         <section
-            className={classnames('label label-default label-pill pull-xs-right', className)}
+            className={classnames('label label-default label-pill float-xs-right', className)}
             onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
             {...filterDOMProps(props)}
         >

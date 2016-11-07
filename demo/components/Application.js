@@ -28,14 +28,11 @@ export class Application extends React.Component {
     }
 
     onSchema ({target: {value}}) {
-        this.setState({schema: getSchema(value)});
+        this.setState({doc: null, schema: getSchema(value)});
     }
 
     onTheme ({target: {value}}) {
-        this.setState({
-            styles: getStyles(value),
-            theme:  getTheme(value)
-        });
+        this.setState({doc: null, styles: getStyles(value), theme: getTheme(value)});
     }
 
     render () {
@@ -86,7 +83,7 @@ export class Application extends React.Component {
                         </section>
                     </nav>
 
-                    <textarea value={schema.string} onChange={onSchema} />
+                    <textarea spellCheck={false} value={schema.string} onChange={onSchema} />
 
                     <a href="https://github.com/vazco/uniforms">
                         {/* eslint-disable max-len */}

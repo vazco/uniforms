@@ -4,7 +4,7 @@ import {connectField}   from 'uniforms';
 import {filterDOMProps} from 'uniforms';
 
 const xor = (item, array) => {
-    let index = array.indexOf(item);
+    const index = array.indexOf(item);
     if (index === -1) {
         return array.concat([item]);
     }
@@ -33,7 +33,19 @@ const renderCheckboxes = ({allowedValues, disabled, fieldType, id, name, onChang
     )
 ;
 
-const renderSelect = ({allowedValues, disabled, id, inputRef, name, onChange, placeholder, transform, value}) =>
+const renderSelect = ({
+    allowedValues,
+    disabled,
+    id,
+    inputRef,
+    label,
+    name,
+    onChange,
+    placeholder,
+    required,
+    transform,
+    value
+}) =>
     <select
         disabled={disabled}
         id={id}
@@ -42,17 +54,17 @@ const renderSelect = ({allowedValues, disabled, id, inputRef, name, onChange, pl
         ref={inputRef}
         value={value}
     >
-        {!!placeholder && (
-            <option value="" disabled hidden>
-                {placeholder}
+        {(!!placeholder || !required) && (
+            <option value="" disabled={required} hidden={required}>
+                {placeholder ? placeholder : label}
             </option>
-        )}
+       )}
 
         {allowedValues.map(value =>
             <option key={value} value={value}>
                 {transform ? transform(value) : value}
             </option>
-        )}
+       )}
     </select>
 ;
 
@@ -62,6 +74,7 @@ const Select = ({
     className,
     disabled,
     error,
+    errorMessage,
     fieldType,
     id,
     inputRef,
@@ -70,6 +83,7 @@ const Select = ({
     onChange,
     placeholder,
     required,
+    showInlineError,
     transform,
     value,
     ...props
@@ -84,6 +98,12 @@ const Select = ({
         {checkboxes || fieldType === Array
             ? renderCheckboxes({allowedValues, disabled, id, name, onChange, transform, value, fieldType})
             : renderSelect    ({allowedValues, disabled, id, name, onChange, transform, value, inputRef, placeholder})}
+
+        {!!(errorMessage && showInlineError) && (
+            <section className="ui red basic pointing label">
+                {errorMessage}
+            </section>
+        )}
     </section>
 ;
 

@@ -1,3 +1,4 @@
+import cloneDeep from 'lodash.clonedeep';
 import invariant from 'invariant';
 
 import Bridge         from './Bridge';
@@ -32,6 +33,12 @@ try {
 } catch (_) { /* Ignore it. */ }
 
 export default class SimpleSchema2Bridge extends Bridge {
+    constructor (schema) {
+        super();
+
+        this.schema = schema;
+    }
+
     static check (schema) {
         return SimpleSchema && (
             schema &&
@@ -53,7 +60,7 @@ export default class SimpleSchema2Bridge extends Bridge {
     }
 
     getErrorMessage (name, error) {
-        let scopedError = this.getError(name, error);
+        const scopedError = this.getError(name, error);
         if (scopedError) {
             return this.schema.messageForError(scopedError);
         }
@@ -110,7 +117,7 @@ export default class SimpleSchema2Bridge extends Bridge {
     // eslint-disable-next-line complexity
     getProps (name, props = {}) {
         // Type should be omitted.
-        // eslint-disable-next-line no-unused-vars
+        // eslint-disable-next-line no-unused-vars, prefer-const
         let {optional, type, uniforms, ...field} = this.getField(name);
 
         field = {...field, required: !optional};
@@ -126,7 +133,7 @@ export default class SimpleSchema2Bridge extends Bridge {
 
         if (type === Array) {
             try {
-                let itemProps = this.getProps(`${name}.$`, props);
+                const itemProps = this.getProps(`${name}.$`, props);
                 if (itemProps.allowedValues && !props.allowedValues) {
                     field.allowedValues = itemProps.allowedValues;
                 }
@@ -203,7 +210,14 @@ export default class SimpleSchema2Bridge extends Bridge {
         return type;
     }
 
-    getValidator (options = {clean: true}) {
-        return this.schema.validator(options);
+    getValidator (options = {clean: true, mutate: true}) {
+        const validator = this.schema.validator(options);
+
+        // Clean mutate its argument, even if mutate is false.
+        if (options.clean) {
+            return model => validator(cloneDeep({...model}));
+        }
+
+        return validator;
     }
 }

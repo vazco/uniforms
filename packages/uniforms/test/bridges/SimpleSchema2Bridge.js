@@ -241,6 +241,7 @@ describe('SimpleSchema2Bridge', () => {
     context('#getValidator', () => {
         it('calls correct validator', () => {
             expect(() => bridge.getValidator()({})).to.throw();
+            expect(() => bridge.getValidator({})({})).to.throw();
         });
     });
 });

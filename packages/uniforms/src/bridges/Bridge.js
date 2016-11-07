@@ -1,67 +1,47 @@
+import invariant from 'invariant';
+
 export default class Bridge {
-    constructor (schema) {
-        this.schema = schema;
+    constructor () {
+        invariant(this.constructor !== Bridge, 'Bridge cannot be instantiated.');
     }
 
-    // Check, if this bridge is compatibile with given schema
-    static check (schema) {
-        return (
-            schema &&
-            schema.getError &&
-            schema.getErrorMessage &&
-            schema.getErrorMessages &&
-            schema.getField &&
-            schema.getInitialValue &&
-            schema.getProps &&
-            schema.getSubfields &&
-            schema.getType &&
-            schema.getValidator
-        );
+    static check (/* schema */) {
+        invariant(false, '%s have not implemented `check` method.', this.constructor.name);
     }
 
-    // Field's scoped error
-    getError (name, error) {
-        return this.schema.getError(name, error);
+    getError (/* name, error */) {
+        invariant(false, '%s have not implemented `getError` method.', this.constructor.name);
     }
 
-    // Field's scoped error message
-    getErrorMessage (name, error) {
-        return this.schema.getErrorMessage(name, error);
+    getErrorMessage (/* name, error */) {
+        invariant(false, '%s have not implemented `getError` method.', this.constructor.name);
     }
 
-    // All error messages from error
-    getErrorMessages (error) {
-        return this.schema.getErrorMessages(error);
+    getErrorMessages (/* error */) {
+        invariant(false, '%s have not implemented `getErrorMessages` method.', this.constructor.name);
     }
 
-    // Field's definition (`field` prop)
-    getField (name) {
-        return this.schema.getField(name);
+    getField (/* name */) {
+        invariant(false, '%s have not implemented `getField` method.', this.constructor.name);
     }
 
-    // Field's initial value
-    getInitialValue (name, props) {
-        return this.schema.getInitialValue(name, props);
+    getInitialValue (/* name, props */) {
+        invariant(false, '%s have not implemented `getInitialValue` method.', this.constructor.name);
     }
 
-    // Field's props
-    getProps (name, props) {
-        return this.schema.getProps(name, props);
+    getProps (/* name, props */) {
+        invariant(false, '%s have not implemented `getProps` method.', this.constructor.name);
     }
 
-    // Field's subfields (or first-level fields)
-    getSubfields (name) {
-        return this.schema.getSubfields(name);
+    getSubfields (/* name */) {
+        invariant(false, '%s have not implemented `getSubfields` method.', this.constructor.name);
     }
 
-    // Field's type (ex. Number, String)
-    getType (name) {
-        return this.schema.getType(name);
+    getType (/* name */) {
+        invariant(false, '%s have not implemented `getType` method.', this.constructor.name);
     }
 
-    // Function with one argument - model - which throws errors
-    // when model is invalid
-    getValidator (options) {
-        return this.schema.getValidator(options);
+    getValidator (/* options */) {
+        invariant(false, '%s have not implemented `getValidator` method.', this.constructor.name);
     }
 }

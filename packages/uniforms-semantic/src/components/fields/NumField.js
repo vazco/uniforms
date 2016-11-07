@@ -10,6 +10,7 @@ const Num = ({
     decimal,
     disabled,
     error,
+    errorMessage,
     icon,
     iconLeft,
     iconProps,
@@ -22,6 +23,7 @@ const Num = ({
     onChange,
     placeholder,
     required,
+    showInlineError,
     value,
     ...props
 }) =>
@@ -51,6 +53,12 @@ const Num = ({
                 <i className={`${icon || iconLeft} icon`} {...iconProps} />
             )}
         </section>
+
+        {!!(errorMessage && showInlineError) && (
+            <section className="ui red basic pointing label">
+                {errorMessage}
+            </section>
+        )}
     </section>
 ;
 

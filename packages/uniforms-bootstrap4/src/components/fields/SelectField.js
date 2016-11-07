@@ -2,10 +2,10 @@ import React          from 'react';
 import classnames     from 'classnames';
 import {connectField} from 'uniforms';
 
-import FormGroup from './FormGroup';
+import wrapField from '../../lib/wrapField';
 
 const xor = (item, array) => {
-    let index = array.indexOf(item);
+    const index = array.indexOf(item);
     if (index === -1) {
         return array.concat([item]);
     }
@@ -41,9 +41,9 @@ const renderSelect = props =>
         ref={props.inputRef}
         value={props.value}
     >
-        {!!props.placeholder && (
-            <option value="" disabled hidden>
-                {props.placeholder}
+        {(!!props.placeholder || !props.required) && (
+            <option value="" disabled={props.required} hidden={props.required}>
+                {props.placeholder ? props.placeholder : props.label}
             </option>
         )}
 
@@ -56,12 +56,11 @@ const renderSelect = props =>
 ;
 
 const Select = props =>
-    <FormGroup {...props}>
-        {props.checkboxes || props.fieldType === Array
+    wrapField(props, (
+        props.checkboxes || props.fieldType === Array
             ? renderCheckboxes(props)
-            : renderSelect(props)}
-    </FormGroup>
+            : renderSelect(props)
+    ))
 ;
 
 export default connectField(Select);
-

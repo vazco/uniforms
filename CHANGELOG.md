@@ -1,8 +1,41 @@
-# Change Log
+## Next
+- **Changed:** `Bridge` cannot be instantiated.
+- **Changed:** `Bridge` constructor is now noop.
+- **Changed:** `Bridge` methods are now throwing an _unimplemented method_ errors.
+
+<br>
+
+## [v1.5.0](https://github.com/vazco/uniforms/releases/tag/v1.5.0)
+- **Fixed:** Got rid of unknown props warning in bootstrap themes.
+- **Fixed:** SimpleSchema validator.
+
+<br>
+
+## [v1.5.0-rc.1](https://github.com/vazco/uniforms/releases/tag/v1.5.0-rc.1)
+- **Added:** New `showInlineError` prop in `BaseForm`. [\#87](https://github.com/vazco/uniforms/issues/87)
+- **Added:** New `showInlineError` prop in `ListField`. [\#100](https://github.com/vazco/uniforms/issues/100)
+- **Added:** New `showInlineError` prop in `NestField`.
+
+<br>
+
+## [v1.4.1](https://github.com/vazco/uniforms/releases/tag/v1.4.1)
+- **Fixed:** `ListAddField` and `ListDelField`. [\#125](https://github.com/vazco/uniforms/issues/125)
+- **Fixed:** `process.addListener` is not a function in some environments. [\#124](https://github.com/vazco/uniforms/issues/124)
+
+<br>
+
+## [v1.4.0](https://github.com/vazco/uniforms/releases/tag/v1.4.0)
+- **Added:** New `showInlineError` prop in semantic theme.
+- **Changed:** Select is now deselectable. [\#120](https://github.com/vazco/uniforms/issues/120)
+- **Deprecated:** `FormGroup` helper component.
+- **Fixed:** Bootstrap themes `grid` handling.
+- **Fixed:** Bootstrap4 `ListAddField` styling. [\#121](https://github.com/vazco/uniforms/issues/121)
+
+<br>
 
 ## [v1.3.0](https://github.com/vazco/uniforms/releases/tag/v1.3.0)
-- **Added:** Added custom ListField icons in bootstrap3. [\#115](https://github.com/vazco/uniforms/issues/115)
-- **Added:** Added custom ListField icons in bootstrap4. [\#114](https://github.com/vazco/uniforms/issues/114)
+- **Added:** Custom ListField icons in bootstrap3. [\#115](https://github.com/vazco/uniforms/issues/115)
+- **Added:** Custom ListField icons in bootstrap4. [\#114](https://github.com/vazco/uniforms/issues/114)
 
 <br>
 
@@ -75,21 +108,21 @@
 <br>
 
 ## [v1.0.0-rc.30](https://github.com/vazco/uniforms/releases/tag/v1.0.0-rc.30)
-- **Fixed:** Get rid of (un)controlled input warning. [\#90](https://github.com/vazco/uniforms/issues/90)
-- **Fixed:** Get rid of unknown props warning. [\#89](https://github.com/vazco/uniforms/issues/89)
+- **Fixed:** Got rid of (un)controlled input warning. [\#90](https://github.com/vazco/uniforms/issues/90)
+- **Fixed:** Got rid of unknown props warning. [\#89](https://github.com/vazco/uniforms/issues/89)
 - **Fixed:** Nesting `ListField` in `ListField`. [\#91](https://github.com/vazco/uniforms/issues/91)
 
 <br>
 
 ## [v1.0.0-rc.29](https://github.com/vazco/uniforms/releases/tag/v1.0.0-rc.29)
-- **Documented:** Custom `AutoField` example. [\#85](https://github.com/vazco/uniforms/issues/85)
+- **Added:** Custom `AutoField` example. [\#85](https://github.com/vazco/uniforms/issues/85)
 - **Fixed:** `BoolField` return non-boolean value. [\#88](https://github.com/vazco/uniforms/issues/88)
 
 <br>
 
 ## [v1.0.0-rc.28](https://github.com/vazco/uniforms/releases/tag/v1.0.0-rc.28)
-- **Fixed:** Removed custom validation warning. [\#83](https://github.com/vazco/uniforms/issues/83)
 - **Added:** New `showInlineError` prop in bootstrap theme. [\#84](https://github.com/vazco/uniforms/issues/84)
+- **Fixed:** Removed custom validation warning. [\#83](https://github.com/vazco/uniforms/issues/83)
 
 <br>
 
@@ -105,8 +138,8 @@
 - **Added:** New `filterDOMProps` helper.
 - **Fixed:** AutoForm performance. [\#70](https://github.com/vazco/uniforms/issues/70)
 - **Fixed:** Dynamic schema change. [\#76](https://github.com/vazco/uniforms/issues/76)
-- **Fixed:** Get rid of unknown props warning. [\#64](https://github.com/vazco/uniforms/issues/64)
-- **Fixed:** Get rid of unknown props warning. [\#75](https://github.com/vazco/uniforms/issues/75)
+- **Fixed:** Got rid of unknown props warning. [\#64](https://github.com/vazco/uniforms/issues/64)
+- **Fixed:** Got rid of unknown props warning. [\#75](https://github.com/vazco/uniforms/issues/75)
 
 <br>
 
@@ -114,7 +147,7 @@
 - **Added:** New `autosaveDelay` prop on forms. [\#29](https://github.com/vazco/uniforms/issues/29)
 - **Added:** New `icon` and `iconLeft` prop in semantic theme. [\#67](https://github.com/vazco/uniforms/issues/67)
 - **Added:** New `inputRef` prop on every field. [\#68](https://github.com/vazco/uniforms/issues/68)
-- **Documented:** `ModifierForm` example. [\#66](https://github.com/vazco/uniforms/issues/66)
+- **Added:** `ModifierForm` example. [\#66](https://github.com/vazco/uniforms/issues/66)
 - **Fixed:** Dramatically improved performance. [\#70](https://github.com/vazco/uniforms/issues/70)
 - **Fixed:** Styling of `ListField` in bootstrap theme. [\#72](https://github.com/vazco/uniforms/issues/72)
 - **Fixed:** `findError`.
@@ -126,7 +159,7 @@
 - **Added:** New `injectName` helper.
 - **Changed:** Initial value logic for better UX. [\#58](https://github.com/vazco/uniforms/issues/58)
 - **Changed:** `joinName` works with dots in parts.
-- **Fixed:** Get rid of unknown props warning. [\#64](https://github.com/vazco/uniforms/issues/64)
+- **Fixed:** Got rid of unknown props warning. [\#64](https://github.com/vazco/uniforms/issues/64)
 - **Fixed:** Invalid `propTypes`.
 - **Fixed:** `HiddenField` lead to infinite loop. [\#63](https://github.com/vazco/uniforms/issues/63)
 - **Fixed:** `NestField` lead to infinite loop. [\#62](https://github.com/vazco/uniforms/issues/62)
@@ -191,7 +224,7 @@
 <br>
 
 ## [v1.0.0-rc.15](https://github.com/vazco/uniforms/releases/tag/v1.0.0-rc.15)
-- **Fixed:** Get rid of warning about field value. [\#22](https://github.com/vazco/uniforms/issues/22)
+- **Fixed:** Got rid of warning about field value. [\#22](https://github.com/vazco/uniforms/issues/22)
 
 <br>
 
@@ -276,4 +309,3 @@
 <br>
 
 ## [v1.0.0-rc.1](https://github.com/vazco/uniforms/releases/tag/v1.0.0-rc.1)
-- **Added:** Basically... Everything!

@@ -9,7 +9,7 @@ export default class HiddenField extends BaseField {
             return;
         }
 
-        let props = this.getFieldProps(undefined, {overrideValue: true});
+        const props = this.getFieldProps(undefined, {overrideValue: true});
         if (props.value !== valueDesired) {
             props.onChange(valueDesired);
         }

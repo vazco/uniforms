@@ -8,11 +8,13 @@ const Radio = ({
     className,
     disabled,
     error,
+    errorMessage,
     id,
     label,
     name,
     onChange,
     required,
+    showInlineError,
     transform,
     value,
     ...props
@@ -42,6 +44,12 @@ const Radio = ({
                         {transform ? transform(item) : item}
                     </label>
                 </section>
+            </section>
+        )}
+
+        {!!(errorMessage && showInlineError) && (
+            <section className="ui red basic pointing label">
+                {errorMessage}
             </section>
         )}
     </section>

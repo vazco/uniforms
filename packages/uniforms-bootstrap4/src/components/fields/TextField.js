@@ -2,10 +2,10 @@ import React          from 'react';
 import classnames     from 'classnames';
 import {connectField} from 'uniforms';
 
-import FormGroup from './FormGroup';
+import wrapField from '../../lib/wrapField';
 
 const Text = props =>
-    <FormGroup {...props}>
+    wrapField(props, (
         <input
             className={classnames(props.inputClassName, 'form-control', {'form-control-danger': props.error})}
             disabled={props.disabled}
@@ -17,7 +17,7 @@ const Text = props =>
             type={props.type}
             value={props.value}
         />
-    </FormGroup>
+    ))
 ;
 
 Text.defaultProps = {

@@ -6,10 +6,10 @@ import {joinName}     from 'uniforms';
 import AutoField    from './AutoField';
 import ListDelField from './ListDelField';
 
-const ListItem = props =>
+const ListItem = ({removeIcon, ...props}) =>
     <section className="row">
         <section className="col-xs-1">
-            <ListDelField name={props.name} removeIcon={props.removeIcon} />
+            <ListDelField name={props.name} removeIcon={removeIcon} />
         </section>
 
         {props.children ? (

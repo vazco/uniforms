@@ -2,18 +2,18 @@ import React          from 'react';
 import classnames     from 'classnames';
 import {connectField} from 'uniforms';
 
-import FormGroup from './FormGroup';
+import wrapField from '../../lib/wrapField';
 
 const dateFormat = value => value && value.toISOString().slice(0, -8);
 const dateParse = (timestamp, onChange) => {
-    let date = new Date(timestamp);
+    const date = new Date(timestamp);
     if (date.getFullYear() < 10000) {
         onChange(date);
     }
 };
 
 const Date_ = props =>
-    <FormGroup {...props}>
+    wrapField(props, (
         <input
             className={classnames(props.inputClassName, 'form-control', {'form-control-danger': props.error})}
             disabled={props.disabled}
@@ -27,7 +27,7 @@ const Date_ = props =>
             type="datetime-local"
             value={dateFormat(props.value)}
         />
-    </FormGroup>
+    ))
 ;
 
 Date_.displayName = 'Date';

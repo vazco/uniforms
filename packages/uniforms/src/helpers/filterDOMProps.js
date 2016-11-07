@@ -1,5 +1,5 @@
 // These props are provided by BaseField
-let unwantedProps = [
+const unwantedProps = [
     'changed',
     'changedMap',
     'disabled',
@@ -17,6 +17,7 @@ let unwantedProps = [
     'onChange',
     'parent',
     'placeholder',
+    'showInlineError',
     'value'
 ];
 

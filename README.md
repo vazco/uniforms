@@ -10,6 +10,14 @@
     </a>
 
     <a href="https://npmjs.org/package/uniforms">
+        <img src="https://img.shields.io/npm/l/uniforms.svg?maxAge=86400" alt="License">
+    </a>
+
+    <a href="https://npmjs.org/package/uniforms">
+        <img src="https://img.shields.io/npm/dm/uniforms.svg?maxAge=86400" alt="Downloads">
+    </a>
+
+    <a href="https://npmjs.org/package/uniforms">
         <img src="https://img.shields.io/npm/v/uniforms.svg?maxAge=86400" alt="Version">
     </a>
 
@@ -23,10 +31,6 @@
 In short: uniforms is a set of npm packages, which contains helpers and [React](https://facebook.github.io/react/) components - both unstyled and themed with [Bootstrap3](http://getbootstrap.com/), [Bootstrap4](http://v4-alpha.getbootstrap.com/) and [Semantic UI](http://semantic-ui.com/) - to easily manage, validate and even generate fully featured forms from your schemas.
 
 <br>
-
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Installation](#installation)
     - [meteor](#meteor)
@@ -62,11 +66,9 @@ In short: uniforms is a set of npm packages, which contains helpers and [React](
         - [Example: `SubmitButton`](#example-submitbutton)
         - [Example: `SwapField`](#example-swapfield)
 - [API](#api)
-- [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
+- [Troubleshooting](#troubleshooting)
 - [Copyright and License](#copyright-and-license)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 <br>
 
@@ -159,7 +161,8 @@ const PostSchema = new SimpleSchema({
 Then use it in your form:
 
 ```js
-import {AutoForm} from 'uniforms-semantic'; // Remember to choose correct theme package
+// Remember to choose correct theme package
+import {AutoForm} from 'uniforms-unstyled';
 
 const PostCreateForm = () =>
     <AutoForm schema={PostSchema} onSubmit={doc => console.log(doc)} />
@@ -341,62 +344,68 @@ If your schema validator accepts any options, those can be passed in `validator`
 
 ```js
 import {BaseForm} from 'uniforms';
-import {AutoForm} from 'uniforms-semantic'; // Remember to choose correct theme package
 
-// In uniforms, every form is just an injectable set of functionalities. This way
-// allows us to live without many higher order components in favor of composed one.
-// If you want to get a deeper dive into it, read source of AutoForm or QuickForm
-// in the core package.
+// In uniforms, every form is just an injectable set of functionalities. This
+// way allows us to live without many higher order components in favor of
+// composed one. If you want to get a deeper dive into it, read source of
+// AutoForm or QuickForm in the core package.
 const Modifier = parent => class extends parent {
     // Expose injector.
-    // It's not required, but recommended.
+    //   It's not required, but recommended.
     static Modifier = Modifier;
 
     // Alter component display name.
-    // It's also not required, but recommended.
+    //   It's not required, but recommended.
     static displayName = `Modifier${parent.displayName}`;
 
-    // Here you can override any internal form methods or create additional ones.
+    // Here you can override any form methods or create additional ones.
     onSubmit (event) {
-        // Prevent default form submission.
-        // In this example, we are calling this.props.onSubmit directly, but
-        // normally you can just call super.onSubmit(event) - it will handle
-        // it by default.
+        const doc  = this.getModel();
+        const keys = this.getChildContextSchema().getSubfields();
+
+        const update = keys.filter(key =>  doc[key]);
+        const remove = keys.filter(key => !doc[key]);
+
+        // It's a good idea to omit empty modifiers.
+        const $set   = update.reduce((acc, key) => ({...acc, [key]: doc[key]}), {});
+        const $unset = remove.reduce((acc, key) => ({...acc, [key]: ''}), {});
+
+        const modifier = {$set, $unset};
+
+        // Now we are going to bang our heads. There's (currently) no way to
+        // distinct between getting model for submit and validation, so we can't
+        // simply call super.onSubmit(event) and be happy (I'm working on it).
+        // Instead, we have to copy BaseForm#onSubmit with a little change.
+        // Don't worry, API is coming.
         if (event) {
             event.preventDefault();
             event.stopPropagation();
         }
 
-        if (this.props.onSubmit) {
-            const doc  = this.getModel();
-            const keys = this.getChildContextSchema().getSubfields();
+        const promise = Promise.resolve(
+            this.props.onSubmit &&
+            this.props.onSubmit(modifier)
+        );
 
-            const update = keys.filter(key =>  doc[key]);
-            const remove = keys.filter(key => !doc[key]);
+        promise.then(
+            this.props.onSubmitSuccess,
+            this.props.onSubmitFailure
+        );
 
-            // It's a good idea to omit empty modifiers.
-            if (update.length || remove.length) {
-                const $set   = update.reduce((acc, key) => ({...acc, [key]: doc[key]}), {});
-                const $unset = remove.reduce((acc, key) => ({...acc, [key]: ''}), {});
-
-                this.props.onSubmit({
-                    ...update.length && {$set},
-                    ...remove.length && {$unset}
-                });
-            }
-        }
+        return promise;
     }
 };
 
-// Now we have to inject our functionality.
-// This one can be called a ModifierBaseForm.
+// Now we have to inject our functionality. This one is a ModifierForm.
 export default Modifier(BaseForm);
 
 // Every functionality have to be overriden independently. This might seem a
-// little bit crazy, but we have to override BaseForm#onSubmit. If you are
-// using for example Bootstrap3, then change AutoForm.Semantic to AutoForm.Bootstrap3.
-// This one can be called AutoModifierForm.
-export default AutoForm.Auto(AutoForm.Validated(AutoForm.Quick(AutoForm.Semantic(Modifier(BaseForm)))));
+// little bit crazy, but we have to override BaseForm#onSubmit. If you are using
+// for example Bootstrap3, then change AutoForm.Semantic to AutoForm.Bootstrap3.
+// This one can be called AutoModifierForm, but it's displayName will be
+// AutoValidatedQuickSemanticModifierForm. Sweet, huh?
+import {AutoForm} from 'uniforms-unstyled';
+export default AutoForm.Auto(AutoForm.Validated(AutoForm.Quick(AutoForm.Unstyled(Modifier(BaseForm)))));
 ```
 
 ## Fields
@@ -493,8 +502,8 @@ import React          from 'react';
 import {AutoField}    from 'uniforms';
 import {connectField} from 'uniforms';
 
-// This field is a kind of a shortcut for few fields. You can also access all field props
-// here, like value or onChange for some extra logic.
+// This field is a kind of a shortcut for few fields. You can also access all
+// field props here, like value or onChange for some extra logic.
 const Composite = () =>
     <section>
         <AutoField field="firstName" />
@@ -511,7 +520,8 @@ export default connectField(Composite);
 **Note:** This example uses `connectField` helper. To read more see [API](#api).
 
 ```js
-import {AutoField} from 'uniforms-semantic'; // Remember to choose correct theme package
+// Remember to choose correct theme package
+import {AutoField} from 'uniforms-unstyled';
 
 const CustomAuto = props => {
     // This way we don't care about not handled cases - we use default
@@ -523,7 +533,11 @@ const CustomAuto = props => {
     );
 };
 
-const CustomAutoField = connectField(CustomAuto, {ensureValue: false, includeInChain: false, initialValue: false});
+const CustomAutoField = connectField(CustomAuto, {
+    ensureValue:    false,
+    includeInChain: false,
+    initialValue:   false
+});
 ```
 
 You can also tell your `AutoForm`/`QuickForm`/`ValidatedQuickForm` to use it.
@@ -541,8 +555,8 @@ import React          from 'react';
 import classnames     from 'classnames';
 import {connectField} from 'uniforms';
 
-// This field works like this: cycle all allowed values and optionally
-// no-value state if field is not required. This one uses Semantic-UI.
+// This field works like this: cycle all allowed values and optionally no-value
+// state if field is not required. This one uses Semantic-UI.
 const Cycle = ({allowedValues, disabled, label, required, value, onChange}) =>
     <a
         className={classnames('ui', !value && 'basic', 'label')}
@@ -572,8 +586,8 @@ export default connectField(Cycle);
 import React          from 'react';
 import {connectField} from 'uniforms';
 
-// This field works like this: two datepickers are bound to each other - outcoming value is an
-// {start, stop} object.
+// This field works like this: two datepickers are bound to each other. Value is
+// an {start, stop} object.
 const Range = ({onChange, value: {start, stop}}) =>
     <section>
         <DatePicker max={stop}  value={start} onChange={start => onChange(start, stop)} />
@@ -593,8 +607,8 @@ import React          from 'react';
 import classnames     from 'classnames';
 import {connectField} from 'uniforms';
 
-// This field works like this: render stars for each rating and mark them
-// as filled, if rating (value) is greater. This one uses Semantic-UI.
+// This field works like this: render stars for each rating and mark them as
+// filled, if rating (value) is greater. This one uses Semantic-UI.
 const Rating = ({className, disabled, max = 5, required, value, onChange}) =>
     <section className={classnames('ui', {disabled, required}, className, 'rating')}>
         {[...Array(max)].map((_, index) => index + 1).map(index =>
@@ -659,8 +673,9 @@ import {Bridge} from 'uniforms';
 
 class MyLittleSchema extends Bridge {
     constructor (schema, validator) {
-        super(schema);
+        super();
 
+        this.schema    = schema;
         this.validator = validator;
     }
 
@@ -705,7 +720,7 @@ class MyLittleSchema extends Bridge {
     }
 }
 
-const ExampleOfMyLittleSchema = new MyLittleSchema({
+const bridge = new MyLittleSchema({
     login:     {__type__: String, required: true, initialValue: '', label: 'Login'},
     password1: {__type__: String, required: true, initialValue: '', label: 'Password'},
     password2: {__type__: String, required: true, initialValue: '', label: 'Password (again)'}
@@ -733,7 +748,7 @@ const ExampleOfMyLittleSchema = new MyLittleSchema({
     }
 });
 
-<AutoForm schema={ExampleOfMyLittleSchema} />
+<AutoForm schema={bridge} />
 ```
 
 ## Context data
@@ -784,8 +799,8 @@ import {BaseField} from 'uniforms';
 import {Children}  from 'react';
 import {nothing}   from 'uniforms';
 
-// We have to ensure, that there's only one children, because
-// returning an array from component is prohibited.
+// We have to ensure, that there's only one children, because returning an array
+// from component is prohibited.
 const DisplayIf = ({children, condition}, {uniforms}) =>
     condition(uniforms)
         ? Children.only(children)
@@ -826,11 +841,11 @@ import React            from 'react';
 import {BaseField}      from 'uniforms';
 import {filterDOMProps} from 'uniforms';
 
-// This field works like this: render standard submit field and
-// disable it, when form is invalid. It's simplified version of
-// default SubmitField from uniforms-semantic.
+// This field works like this: render standard submit field and disable it, when
+// the form is invalid. It's a simplified version of default SubmitField from
+// uniforms-unstyled.
 const SubmitField = (props, {uniforms: {error, state: {disabled}}}) =>
-    <input type="submit" disabled={!!(error || disabled)} />
+    <input disabled={!!(error || disabled)} type="submit" />
 ;
 
 SubmitField.contextTypes = BaseField.contextTypes;
@@ -846,8 +861,8 @@ import {Children}     from 'react';
 import {BaseField}    from 'uniforms';
 import {cloneElement} from 'react';
 
-// This field works like this: on click of it's child it
-// swaps values of fieldA and fieldB. Simple.
+// This field works like this: on click of it's child it swaps values of fieldA
+// and fieldB. It's that simple.
 const SwapField = ({children, fieldA, fieldB}, {uniforms: {model, onChange}}) =>
     cloneElement(Children.only(children), {
         onClick () {
@@ -885,17 +900,17 @@ See [API.md](https://github.com/vazco/uniforms/blob/master/API.md).
 
 <br>
 
+# Contributing
+
+See [CONTRIBUTING.md](https://github.com/vazco/uniforms/blob/master/CONTRIBUTING.md).
+
+<br>
+
 # Troubleshooting
 
 > `The specified value "..." is not a valid email address.`
 
 Your browser is trying to do it best. Those warnings are harmless, but currently there's no way to get rid of them, other than downgrading to React `15.1.0` or using different browser.
-
-<br>
-
-# Contributing
-
-See [CONTRIBUTING.md](https://github.com/vazco/uniforms/blob/master/CONTRIBUTING.md).
 
 <br>
 

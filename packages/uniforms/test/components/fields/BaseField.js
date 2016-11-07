@@ -26,7 +26,7 @@ describe('BaseField', () => {
     const model = {a: {b: {c: 'example'}}};
     const onChange = spy();
     const randomId = randomIds();
-    const state = {changed: false, changedMap: {}, label: true, disabled: false, placeholder: true};
+    const state = {changed: !1, changedMap: {}, label: !0, disabled: !1, placeholder: !0, showInlineError: !0};
     const schema = createSchemaBridge({
         getDefinition (name) {
             // Simulate SimpleSchema.
@@ -103,6 +103,7 @@ describe('BaseField', () => {
             expect(context.uniforms.state).to.have.property('label', true);
             expect(context.uniforms.state).to.have.property('disabled', false);
             expect(context.uniforms.state).to.have.property('placeholder', true);
+            expect(context.uniforms.state).to.have.property('showInlineError', true);
         });
 
         it('have correct `onChange`', () => {
@@ -233,6 +234,10 @@ describe('BaseField', () => {
 
         it('have correct `placeholder`', () => {
             expect(props).to.have.property('placeholder', 'a');
+        });
+
+        it('have correct `showInlineError`', () => {
+            expect(props).to.have.property('showInlineError', true);
         });
 
         it('have correct `value`', () => {

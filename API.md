@@ -2,10 +2,32 @@
 
 <br>
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
+- [Fields](#fields)
+    - [`AutoField`](#autofield)
+    - [`AutoFields`](#autofields)
+    - [`BaseField`](#basefield)
+    - [`BoolField`](#boolfield)
+    - [`DateField`](#datefield)
+    - [`ErrorField`](#errorfield)
+    - [`ErrorsField`](#errorsfield)
+    - [`HiddenField`](#hiddenfield)
+    - [`ListAddField`](#listaddfield)
+    - [`ListDelField`](#listdelfield)
+    - [`ListField`](#listfield)
+    - [`ListItemField`](#listitemfield)
+    - [`LongTextField`](#longtextfield)
+    - [`NestField`](#nestfield)
+    - [`NumField`](#numfield)
+    - [`RadioField`](#radiofield)
+    - [`SelectField`](#selectfield)
+    - [`SubmitField`](#submitfield)
+    - [`TextField`](#textfield)
+- [Forms](#forms)
+    - [`AutoForm`](#autoform)
+    - [`BaseForm`](#baseform)
+    - [`QuickForm`](#quickform)
+    - [`ValidatedForm`](#validatedform)
+    - [`ValidatedQuickForm`](#validatedquickform)
 - [Helpers](#helpers)
     - [`changedKeys`](#changedkeys)
     - [`connectField`](#connectfield)
@@ -16,8 +38,421 @@
     - [`joinName`](#joinname)
     - [`nothing`](#nothing)
     - [`randomIds`](#randomids)
+- [Schemas](#schemas)
+    - [`Bridge`](#bridge)
+    - [`SimpleSchemaBridge`](#simpleschemabridge)
+    - [`SimpleSchema2Bridge`](#simpleschema2bridge)
+    - [`createSchemaBridge`](#createschemabridge)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<br>
+
+# Fields
+
+## `AutoField`
+
+```js
+import {AutoField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<AutoField
+    // Field renderer.
+    //   If ommited, then default algorithm is used. Check README for the whole
+    //   logic.
+    component={MyComponent}
+
+    // All additional props are passed to computed field component.
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.
+
+## `AutoFields`
+
+```js
+import {AutoFields} from 'uniforms-unstyled'; // Choose your theme package.
+
+<AutoFields
+    // AutoField component.
+    //   By default, it will be your theme AutoField, but you can use your
+    //   custom component
+    autoField={MyAutoField}
+
+    // Wrapping element.
+    //   It's clear, right?
+    element="section"
+
+    // List of fields to render.
+    //   By default, all fields are rendered.
+    fields={['fieldA', 'fieldB']}
+
+    // List of fields to omit.
+    //   By default it's empty.
+    omitFields={['fieldA', 'fieldB']}
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.
+
+## `BaseField`
+
+```js
+import {BaseField} from 'uniforms';
+
+// You can't really render a BaseField, because it don't have a render method.
+// It's a base class of all packaged fields, so all below props are available to
+// all fields.
+<BaseField
+    // Field disabled state.
+    //   It's passed directly to the field, but it propagates same as label.
+    disabled={false}
+
+    // Field label.
+    //   This prop have three modes. If you pass a string, then it will be used
+    //   as a label. If you pass a null, then it won't have a label, but nested
+    //   fields will have default labels. If you pass a non-null falsy value, it
+    //   won't have a label and nested fields won't have labels too.
+    label={true}
+
+    // Field name.
+    //   Used for identification. It should match with your schema - if not, it
+    //   will throw an error.
+    name="field"
+
+    // Field placeholder.
+    //   If set to true, then label will be used. Otherwise, it's handled like
+    //   label (including propagation).
+    placeholder={false}
+
+    // You can pass any prop, but remember, that passing onChange will "detach"
+    // the field from the form in some way - it won't change your form state.
+    // Also, passing any already provided prop - like id - will override the
+    // default one.
+/>
+```
+
+## `BoolField`
+
+```js
+import {BoolField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<BoolField
+    // Field feedback state.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap4
+    feedbackable={true}
+
+    // Field layout.
+    //   Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object
+    //   is a {mode: size} object. Complete string is simply passed through.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    grid={3}        // 'col-3-sm' on label, 'col-9-sm' on input
+    grid="4"        // 'col-4-sm' on label, 'col-8-sm' on input
+    grid={{md: 5}}  // 'col-5-md' on label, 'col-7-md' on input
+    grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
+
+    // Help text.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    help="Need help?"
+
+    // Help block className.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    helpClassName="a b c"
+
+    // Checkbox inline state.
+    //   In bootstrpa themes, label is rendered as a text, but in inline mode,
+    //   it's treated as a field label.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    inline={true}
+
+    // Input wrapper class name.
+    //   In bootstrap themes, passed className is used on field block. This is
+    //   used on direct field wrapper.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    inputClassName="a b c"
+
+    // Input ref.
+    //   Setting ref prop to a field, won't work as desired, because you'll
+    //   receive field component, not HTML input. If you need an input ref, use
+    //   this prop instead.
+    inputRef={ref => {}}
+
+    // Left label.
+    //   In bootstrap themes, label is rendered on the right side of a checkbox.
+    //   This label is rendered above the field.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    labelBefore="Label"
+
+    // Field inline error.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    //   semantic
+    showInlineError={true}
+
+    // Field and sourroundings wrap className.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    wrapClassName="a b c"
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.
+
+## `DateField`
+
+## `ErrorField`
+
+## `ErrorsField`
+
+## `HiddenField`
+
+## `ListAddField`
+
+## `ListDelField`
+
+## `ListField`
+
+## `ListItemField`
+
+## `LongTextField`
+
+## `NestField`
+
+## `NumField`
+
+## `RadioField`
+
+## `SelectField`
+
+## `SubmitField`
+
+## `TextField`
+
+# Forms
+
+## `AutoForm`
+
+```js
+import {AutoForm} from 'uniforms'; // Or from the theme package.
+
+<AutoForm
+    // Like onChange but for the whole model.
+    //   Triggered just after onChange but with the next model instead of
+    //   (key, value) pair.
+    onChangeModel={model => console.log(model)}
+/>
+```
+
+**Note:** All `ValidatedQuickForm` props are also accepted and all methods are available.
+
+## `BaseForm`
+
+```js
+import {BaseForm} from 'uniforms'; // Or from the theme package.
+
+<BaseForm
+    // Autosave delay.
+    //   Set 0 for an instant autosave.
+    autosaveDelay={0}
+
+    // Enable autosave.
+    //   Every change triggers onSubmit.
+    autosave={false}
+
+    // Disable form.
+    //   Disables all fields and submit button.
+    disabled={false}
+
+    // Validation error.
+    //   Current validation state. It should be either compatible with your
+    //   schema or an Error object.
+    error={new Error('Nope.')}
+
+    // Form layout.
+    //   Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object
+    //   is a {mode: size} object. Complete string is simply passed through.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    grid={3}        // 'col-3-sm' on label, 'col-9-sm' on input
+    grid="4"        // 'col-4-sm' on label, 'col-8-sm' on input
+    grid={{md: 5}}  // 'col-5-md' on label, 'col-7-md' on input
+    grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
+
+    // Default label prop for all fields.
+    //   By default it's true - set it to false to disable labels for the whole
+    //   form.
+    label={true}
+
+    // Form model.
+    //   An object with {field: value} structure. It doesn't matter, if it has a
+    //   prototype or not, but keep in mind that in onSubmit or in onChangeModel
+    //   you'll receive a plain object. If you'll treat form as an input, then
+    //   this is value.
+    model={{fieldA: 1}}
+
+    // Field change action.
+    //   It receive two arguments: key and value, where key is a dot separated
+    //   path to the changed field and value is the requested value.
+    onChange={(key, value) => console.log(key, value)}
+
+    // Submit failure action.
+    //   If onSubmit will return a Promise, then this will be attached to it's
+    //   .catch chain.
+    onSubmitFailure={() => alert('Promise rejected!')}
+
+    // Submit success action.
+    //   If onSubmit will return a Promise, then this will be attached to it's
+    //   .then chain.
+    onSubmitSuccess={() => alert('Promise resolved!')}
+
+    // Submit action.
+    //   When the form is submitted manually or by a HTML5 event, then it's
+    //   called with the current model.
+    onSubmit={model => db.saveThatReturnsPromiseOrNothing(model)}
+
+    // Default placeholder prop for all fields.
+    //   By default it's false - set it to true to enable placeholders for the
+    //   whole form.
+    placeholder={false}
+
+    // Form schema.
+    //   BaseForm doesn't really care about it. It's used for form generation in
+    //   QuickForm and validation in ValidatedForm.
+    schema={myFormSchema}
+
+    // Default showInlineError prop for all fields.
+    //   By default it's false - set it to true to enable inline errors for the
+    //   whole form.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    //   semantic
+    showInlineError={true}
+
+    // Form methods.
+    ref={form => {
+        // Reset form.
+        //   It will reset changed state, model state in AutoForm, validation
+        //   state in ValidatedForm and rerender.
+        form.reset();
+
+        // Trigger form change.
+        //   It's a programatic equivalent of a change event.
+        form.change(key, value);
+
+        // Submit form.
+        //   It's a programatic equivalent of a submit event. Returns a promise,
+        //   which will either resolve with submitted form or reject with
+        //   validation error in ValidatedForm. You can also use onSubmitFailure
+        //   and onSubmitSuccess instead of doing form.submit().then().
+        form.submit();
+    }}
+/>
+```
+
+## `QuickForm`
+
+```js
+import {QuickForm} from 'uniforms'; // Or from the theme package.
+
+<QuickForm
+    // Custom AutoField.
+    //   It should be anything, that will pass through React.createElement.
+    autoField={CustomAutoField}
+
+    // Custom ErrorsField.
+    //   It should be anything, that will pass through React.createElement.
+    errorsField={CustomErrorsField}
+
+    // Custom SubmitField.
+    //   It should be anything, that will pass through React.createElement.
+    submitField={CustomSubmitField}
+/>
+```
+
+**Note:** All `BaseForm` props are also accepted and all methods are available.
+
+## `ValidatedForm`
+
+```js
+import {ValidatedForm} from 'uniforms'; // Or from the theme package.
+
+<ValidatedForm
+    // Additional asynchronous validation.
+    //   Schema validation have to be sync, so this is the only way to achieve
+    //   async validation.
+    onValidate={(model, error, callback) => {
+        // You can either ignore validation error...
+        if (omitValidation(model)) {
+            return callback(null);
+        }
+
+        // ... or any additional validation if an error is already there...
+        if (error) {
+            return callback();
+        }
+
+        // ... or feed it with another error.
+        MyAPI.validate(model, error => callback(error || null));
+    }}
+
+    // Validation mode.
+    //   By default, form will start to validate from the time of the first
+    //   submit and then revalidate on every change. It's 'onChangeAfterSubmit'.
+    //   There's also 'onChange' and 'onSubmit' modes, but those are quite
+    //   self-explanatory.
+    validate="onChangeAfterSubmit"
+
+    // Validator options.
+    //   It's passed to getValidator of your schema bridge. It really depends on
+    //   your schema.
+    validator={{clean: true}}
+
+    // Form methods.
+    ref={form => {
+        // Validate form with the current model.
+        //   Returns a Promise, which rejects with an validation error or
+        //   resolves without any value. Note, that it resolves/rejects AFTER
+        //   the component is rerendered.
+        form.validate();
+
+        // Validate form with key set to value.
+        //   You can use it to check, if the given value will pass the
+        //   validation or not. Returns validation Promise, as described above.
+        form.validate(key, value);
+
+        // Validate form with the given model.
+        //   Rather internal function. Returns validation Promise, as described
+        //   above.
+        form.validateModel(model);
+    }}
+/>
+```
+
+**Note:** All `BaseForm` props are also accepted and all methods are available.
+
+## `ValidatedQuickForm`
+
+**Note:** All `QuickForm` props are also accepted and all methods are available.<br>
+**Note:** All `ValidatedForm` props are also accepted and all methods are available.
 
 <br>
 
@@ -28,8 +463,7 @@
 ```js
 import {changedKeys} from 'uniforms';
 
-// Returns array of changed keys between
-// valueA and valueB, where root is the
+// Returns array of changed keys between valueA and valueB, where root is the
 // root key.
 const arrayOfChangedKeys = changedKeys(root, valueA, valueB);
 ```
@@ -43,37 +477,33 @@ import {connectField} from 'uniforms';
 
 const ComponentXField = connectField(ComponentX, {
     // Props mapper
-    //   Useful for integration with third-party
-    //   components. For example, you can rename
-    //   specific props.
+    //   Useful for integration with third-party components. For example, you
+    //   can rename specific props instead of doing mapping by hand in the
+    //   component.
     mapProps = props => props,
 
     // Base field class
-    //   It's reserved for the future - right now
-    //   there's no useful usecase.
+    //   It's reserved for the future - right now there's no useful usecase.
     baseField = BaseField,
 
     // <input> helper
-    //   In React, <input> can't have undefined or
-    //   null value and any onChange at once - this
-    //   option fallback undefined value to ''.
+    //   In React, <input> can't have undefined or null value and any onChange
+    //   at once - this option fallback undefined value to ''.
     ensureValue = true,
 
     // Initial value check
-    //   If truthy, then after the first render
-    //   defaultValue is set as value if no value
-    //   is provided (undefined).
+    //   If truthy, then after the first render defaultValue is set as value if
+    //   no value is provided (undefined).
     initialValue = true,
 
     // Additional parent prop
-    //   If truthy, additional parent prop is
-    //   provided (if any). Useful for nested
-    //   or complex fields.
+    //   If truthy, additional parent prop is provided (if any). Useful for
+    //   nested or complex fields.
     includeParent = false,
 
     // Field name chain visibility
-    //   If truthy, then every nested field name
-    //   will be prefixed with parent name.
+    //   If truthy, then every nested field name will be prefixed with parent
+    //   name.
     includeInChain = true
 });
 ```
@@ -83,16 +513,15 @@ const ComponentXField = connectField(ComponentX, {
 ```js
 import {filterDOMProps} from 'uniforms';
 
-// If you create your custom field, then it's a
-// safe way to get rid of all uniforms props.
+// If you create your custom field, then it's a safe way to get rid of all
+// uniforms-related props.
 const nonUniformsProps = filterDOMProps(props);
 ```
 
 ## `filterDOMProps.register`
 
 ```js
-// If you want to filter additional props, then
-// you have to register it.
+// If you want to filter additional props, then you have to register it.
 filterDOMProps.register(propA, propB, propC, ...);
 ```
 
@@ -108,9 +537,8 @@ filterDOMProps.registered; // ['propA', 'propB', ...]
 ```js
 import {injectName} from 'uniforms';
 
-// It's rather internal helper, but it's still
-// exported. Injects name to all already rendered
-// fields.
+// It's rather internal helper, but it's still exported. Injects name to all
+// already rendered fields.
 const componentWithInjectedName = injectName(name, component);
 ```
 
@@ -119,13 +547,12 @@ const componentWithInjectedName = injectName(name, component);
 ```js
 import {joinName} from 'uniforms';
 
-// Use it to safely join partial field names.
-// If you create custom field with subfields,
-// then it's better to use this helper.
+// Use it to safely join partial field names. If you create custom field with
+// subfields, then it's better to use this helper.
 const joinedNameString = joinName(nameA, nameB, nameC, ...);
 
-// If you want to have a "raw" version of a name,
-// then pass null as a first param.
+// If you want to have a "raw" version of a name, then pass null as a first
+// param.
 const joinedNameArray = joinName(null, nameA, nameB, nameC, ...);
 ```
 
@@ -134,11 +561,9 @@ const joinedNameArray = joinName(null, nameA, nameB, nameC, ...);
 ```js
 import {nothing} from 'uniforms';
 
-// In React@0.14 you can't return null from
-// functional component, but in React@15 you
-// should use null - nothing is a "safe null".
-// Basically it's a <noscript /> in @0.14 and
-// null in @15.
+// In React@0.14 you can't return null from functional component, but in
+// React@15 you should use null - nothing is a "safe null". Basically it's a
+// <noscript /> in @0.14 and null in @15.
 const emptyJSX = () => nothing;
 ```
 
@@ -147,12 +572,84 @@ const emptyJSX = () => nothing;
 ```js
 import {randomIds} from 'uniforms';
 
-// It's rather internal helper, but it's still
-// exported. Use it, if you want to have some
-// random but deterministic strings.
-const safeRandomIdGenerator = randomIds(prefix);
-const safeRandomIdA = safeRandomIdGenerator();
-const safeRandomIdB = safeRandomIdGenerator();
-const safeRandomIdC = safeRandomIdGenerator();
+// It's rather an internal helper, but it's still exported. Use it, if you want
+// to have some random but deterministic strings.
+const predictableRandomIdGenerator = randomIds(prefix);
+const predictableRandomIdA = safeRandomIdGenerator();
+const predictableRandomIdB = safeRandomIdGenerator();
+const predictableRandomIdC = safeRandomIdGenerator();
 // ...
+```
+
+# Schemas
+
+## `Bridge`
+
+```js
+import {Bridge} from 'uniforms';
+
+// This is a kind of abstract class. It should be extended to create custom
+// bridges. It implements all of the required methods and throws an error with
+// meaningful "method not implemented" error.
+class CustomBridge extends Bridge {
+    // Check, if this bridge is compatibile with given schema.
+    static check (schema) { /* ... */ }
+
+    // Field's scoped error.
+    getError (name, error) { /* ... */ }
+
+    // Field's scoped error message.
+    getErrorMessage (name, error) { /* ... */ }
+
+    // All error messages from error.
+    getErrorMessages (error) { /* ... */ }
+
+    // Field's definition (`field` prop).
+    getField (name) { /* ... */ }
+
+    // Field's initial value.
+    getInitialValue (name) { /* ... */ }
+
+    // Field's props.
+    getProps (name) { /* ... */ }
+
+    // Field's subfields (or first-level fields).
+    getSubfields (name) { /* ... */ }
+
+    // Field's type (ex. Number, String).
+    getType (name) { /* ... */ }
+
+    // Function with one argument - model - which throws errors when model is
+    // invalid.
+    getValidator (options) { /* ... */ }
+}
+```
+
+## `SimpleSchemaBridge`
+
+```js
+import {SimpleSchemaBridge} from 'uniforms';
+
+// SimpleSchema bridge.
+const bridge = new SimpleSchemaBridge(simpleSchemaInstance);
+```
+
+## `SimpleSchema2Bridge`
+
+```js
+import {SimpleSchema2Bridge} from 'uniforms';
+
+// SimpleSchema@2 bridge.
+const bridge = new SimpleSchema2Bridge(simpleSchema2Instance);
+```
+
+## `createSchemaBridge`
+
+```js
+import {createSchemaBridge} from 'uniforms';
+
+// It's rather an internal helper, but it's still exported. Use it, if you want
+// to manually create a schema bridge or to test your bridge. It will throw on
+// an unrecognised schema.
+const bridge = createSchemaBridge(schemaOrBridge);
 ```
