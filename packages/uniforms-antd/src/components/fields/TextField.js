@@ -3,6 +3,20 @@ import classnames       from 'classnames';
 import {connectField}   from 'uniforms';
 import {filterDOMProps} from 'uniforms';
 
+/* EXAMPLEs
+state: {
+    type: String
+},
+zip: {
+    type: String,
+    regEx: /^[0-9]{5}$/
+},
+field: {
+    type: String,
+    uniforms: {rows: 14, type: 'textarea' }
+}
+*/
+
 const Text = ({
     className,
     disabled,
@@ -21,6 +35,7 @@ const Text = ({
     showInlineError,
     type,
     value,
+    rows,
     ...props
 }) => {
     const AntD = require('antd');
@@ -34,7 +49,6 @@ const Text = ({
         var vStatus = null;
     }
     return(
-
     <FormItem
         label={label}
         help={showInlineError ? errorMessage : null}
@@ -49,6 +63,7 @@ const Text = ({
             placeholder={placeholder}
             ref={inputRef}
             type={type}
+            rows={rows}
             value={value}
         />
     </FormItem>
