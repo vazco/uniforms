@@ -49,7 +49,6 @@ export class Application extends React.Component {
             onSchema,
             onTheme
         } = this;
-
         return (
             <PanelGroup spacing={3}>
                 <section>
@@ -102,6 +101,7 @@ export class Application extends React.Component {
                         <theme.components.AutoForm
                             key={schema.string}
                             schema={schema.object}
+                            showInlineError={true}
                             onSubmit={doc => this.setState({doc: JSON.stringify(doc, null, 4)})}
                         />
                     ) : (

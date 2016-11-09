@@ -4,15 +4,18 @@
   "scripts": {
     "start": "meteor run",
     "reset": "rm -rf node_modules/uniforms* && npm i",
+    "resetAD": "rm -rf node_modules/uniforms-antd && npm install file:../packages/uniforms-antd --save && meteor run",
     "test": "eslint ."
   },
   "dependencies": {
+    "antd": "^2.3.2",
     "babel-eslint": "^7.1.0",
     "eslint": "^3.9.1",
     "eslint-config-vazco": "2.2.0",
     "eslint-plugin-babel": "3.3.0",
     "eslint-plugin-react": "6.5.0",
     "eslint-plugin-vazco": "1.0.0",
+    "indexof": "0.0.1",
     "meteor-node-stubs": "^0.2.3",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
@@ -21,6 +24,7 @@
     "react-panelgroup": "^1.0.1",
     "simpl-schema": "^0.0.3",
     "uniforms": "file:../packages/uniforms",
+    "uniforms-antd": "file:///Users/gerrie/Desktop/MRM/MRMProjects/uniforms/packages/uniforms-antd",
     "uniforms-bootstrap3": "file:../packages/uniforms-bootstrap3",
     "uniforms-bootstrap4": "file:../packages/uniforms-bootstrap4",
     "uniforms-semantic": "file:../packages/uniforms-semantic",
