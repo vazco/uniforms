@@ -14,7 +14,7 @@ export class Application extends React.Component {
 
         this.state = {
             doc: null,
-
+            showInlineError: false,
             schemas: getSchemas(),
             themes:  getThemes(),
 
@@ -25,6 +25,7 @@ export class Application extends React.Component {
 
         this.onSchema = this.onSchema.bind(this);
         this.onTheme  = this.onTheme.bind(this);
+        this.changeInlineError  = this.changeInlineError.bind(this);
     }
 
     onSchema ({target: {value}}) {
@@ -33,6 +34,9 @@ export class Application extends React.Component {
 
     onTheme ({target: {value}}) {
         this.setState({doc: null, styles: getStyles(value), theme: getTheme(value)});
+    }
+    changeInlineError(){
+        this.setState({showInlineError: !this.state.showInlineError})
     }
 
     render () {
@@ -43,11 +47,13 @@ export class Application extends React.Component {
                 schemas,
                 styles,
                 theme,
-                themes
+                themes,
+                showInlineError
             },
 
             onSchema,
-            onTheme
+            onTheme,
+            changeInlineError
         } = this;
         return (
             <PanelGroup spacing={3}>
@@ -79,20 +85,23 @@ export class Application extends React.Component {
                                     </option>
                                 )}
                             </select>
+
+                            <input type='checkbox' onChange={changeInlineError} />
                         </section>
                     </nav>
 
                     <textarea spellCheck={false} value={schema.string} onChange={onSchema} />
-
+                    {/*
                     <a href="https://github.com/vazco/uniforms">
-                        {/* eslint-disable max-len */}
+
                         <img
                             alt="Fork me on GitHub"
                             data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
                             src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
                         />
-                        {/* eslint-enable max-len */}
+
                     </a>
+                */}
                 </section>
 
                 <Frame>
@@ -101,7 +110,7 @@ export class Application extends React.Component {
                         <theme.components.AutoForm
                             key={schema.string}
                             schema={schema.object}
-                            showInlineError={true}
+                            showInlineError={showInlineError}
                             onSubmit={doc => this.setState({doc: JSON.stringify(doc, null, 4)})}
                         />
                     ) : (
