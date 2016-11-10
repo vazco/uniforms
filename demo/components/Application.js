@@ -104,7 +104,7 @@ export class Application extends React.Component {
                     </a>
                 */}
                 </section>
-                <section style={{margin: '20px', fontSize: '13px', lineHeight: '1'}}>
+                <section style={{margin: '20px', fontSize: '13px', lineHeight: '1', overflow: 'scroll' }}>
                     {styles}
                         <div>
                         {schema.object ? (

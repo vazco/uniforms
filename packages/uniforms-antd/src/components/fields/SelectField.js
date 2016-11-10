@@ -12,8 +12,21 @@ const xor = (item, array) => {
     return array.slice(0, index).concat(array.slice(index + 1));
 };
 
-const renderCheckboxes = ({allowedValues, disabled, fieldType, id, name, onChange, transform, value}) =>
-    allowedValues.map(item =>
+const renderCheckboxes = ({
+    allowedValues,
+    disabled,
+    fieldType,
+    id,
+    name,
+    onChange,
+    transform,
+    value,
+    multiple
+}) =>
+allowedValues.map((item) =>{
+    const AntD = require('antd');
+
+    return(
         <section className="field" key={item}>
             <section className="ui checkbox">
                 <input
@@ -31,6 +44,7 @@ const renderCheckboxes = ({allowedValues, disabled, fieldType, id, name, onChang
             </section>
         </section>
     )
+    })
 ;
 
 const renderSelect = ({
@@ -44,28 +58,40 @@ const renderSelect = ({
     placeholder,
     required,
     transform,
-    value
-}) =>
-    <select
+    value,
+    multiple,
+    ...props
+}) =>{
+    const AntD = require('antd');
+    const Select = AntD.Select;
+    const Option = Select.Option;
+    return(
+    <Select
         disabled={disabled}
+        multiple={multiple}
         id={id}
         name={name}
-        onChange={event => onChange(event.target.value)}
+        onChange={(value) => onChange(value)}
         ref={inputRef}
-        value={value}
     >
         {(!!placeholder || !required) && (
-            <option value="" disabled={required} hidden={required}>
+            <Option value="" disabled={required} hidden={required}>
                 {placeholder ? placeholder : label}
-            </option>
+            </Option>
        )}
 
-        {allowedValues.map(value =>
-            <option key={value} value={value}>
-                {transform ? transform(value) : value}
-            </option>
+        {allowedValues.map((val) => {
+            console.log('val')
+            console.log(val)
+            return(
+            <Option key={val} value={val}>
+                {transform ? transform(val) : val}
+            </Option>
+        )}
        )}
-    </select>
+    </Select>
+)
+}
 ;
 
 const Select = ({
@@ -86,25 +112,28 @@ const Select = ({
     showInlineError,
     transform,
     value,
+    multiple,
     ...props
-}) =>
-    <section className={classnames({disabled, error, required}, className, 'field')} {...filterDOMProps(props)}>
-        {label && (
-            <label htmlFor={id}>
-                {label}
-            </label>
-        )}
-
-        {checkboxes || fieldType === Array
-            ? renderCheckboxes({allowedValues, disabled, id, name, onChange, transform, value, fieldType})
-            : renderSelect    ({allowedValues, disabled, id, name, onChange, transform, value, inputRef, placeholder})}
-
-        {!!(errorMessage && showInlineError) && (
-            <section className="ui red basic pointing label">
-                {errorMessage}
-            </section>
-        )}
-    </section>
+}) =>{
+    const AntD = require('antd');
+    const Form = AntD.Form;
+    const FormItem = Form.Item;
+    console.log(checkboxes)
+    console.log(fieldType)
+    console.log(multiple)
+return(
+    <FormItem
+        label={label}
+        help={showInlineError ? errorMessage : null}
+        hasFeedback={true}
+        validateStatus={errorMessage ? 'error' : null}
+        htmlFor={id}>
+        {checkboxes || (fieldType && !multiple) === Array
+            ? renderCheckboxes({allowedValues, disabled, id, name, onChange, transform, value, fieldType,multiple})
+            : renderSelect    ({allowedValues, disabled, id, name, onChange, transform, value, inputRef, placeholder,multiple, ...props})}
+    </FormItem>
+)
+}
 ;
 
 export default connectField(Select);
