@@ -25,9 +25,24 @@ const schemas = {
             type: Number,
             label: "Number Test"
         },
+        numberDec: {
+            type: Number,
+            label: "Number Test Deci",
+            decimal: true,
+            uniforms: {step: 0.1 }
+        },
         boolfield: {
             type: Boolean,
             defaultValue: true
+        },
+        "selectTest": {
+            type: String,
+            allowedValues: ['aaa','bbbb','cccc','dddd'],
+        },
+        "multiselectTest": {
+            type: [String],
+            allowedValues: ['aaa','bbbb','cccc','dddd'],
+            uniforms: {multiple: true}
         },
         datesamplefield: {
           type: Date,

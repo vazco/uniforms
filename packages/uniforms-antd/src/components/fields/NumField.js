@@ -3,12 +3,26 @@ import classnames       from 'classnames';
 import {connectField}   from 'uniforms';
 import {filterDOMProps} from 'uniforms';
 
+// SCHEMA PROTOTYPE
+/*
+number: {
+    type: Number,
+    label: "Number Test"
+},
+numberDec: {
+    type: Number,
+    label: "Number Test Deci",
+    decimal: true,
+    uniforms: {step: 0.1}  // number < 1 for deci
+},
+  */
+
 const noneIfNaN = x => isNaN(x) ? undefined : x;
 
 const Num = ({
     className,
-    decimal,
     disabled,
+    decimal,
     error,
     errorMessage,
     icon,
