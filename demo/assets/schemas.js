@@ -1,25 +1,29 @@
-import SimpleSchema from 'simpl-schema';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
 const schema = strings => strings[0].replace(/([\r\n]+) {4}/g, '$1');
 const schemas = {
     'Example - address': schema`{
         street: {
             type: String,
-            max: 100
+            max: 100,
+            defaultValue: 'aaaa'
         },
-
         city: {
             type: String,
-            max: 50
+            max: 50,
+            uniforms: {
+                type: 'textarea',
+                rows: 3
+            }
         },
-
-        state: {
-            type: String
-        },
-
         zip: {
             type: String,
-            regEx: /^[0-9]{5}$/
+            regEx: /^[0-9]{5}$/,
+            defaultValue: '11111'
+        },
+        boolfield: {
+            type: Boolean,
+            defaultValue: true
         }
     }`,
 

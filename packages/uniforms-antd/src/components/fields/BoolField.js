@@ -16,32 +16,34 @@ const Bool = ({
     required,
     showInlineError,
     value,
+    changed,
     ...props
-}) =>
-    <section className={classnames(className, {disabled, error, required}, 'field')} {...filterDOMProps(props)}>
-        <section className="ui checkbox">
-            <input
-                checked={value}
-                className="hidden"
-                disabled={disabled}
-                id={id}
-                name={name}
-                onChange={() => onChange(!value)}
-                ref={inputRef}
-                type="checkbox"
-            />
-
-            <label htmlFor={id}>
-                {label}
-            </label>
-        </section>
-
-        {!!(errorMessage && showInlineError) && (
-            <section className="ui red basic pointing label">
-                {errorMessage}
-            </section>
-        )}
-    </section>
+}) => {
+    const AntD = require('antd');
+    const Switch = AntD.Switch;
+    const Form = AntD.Form;
+    const Icon = AntD.Icon;
+    const FormItem = Form.Item;
+    return(
+            <FormItem
+                label={label}
+                help={showInlineError ? errorMessage : null}
+                hasFeedback={true}
+                validateStatus={errorMessage ? 'error' : null}
+                htmlFor={id}>
+                <Switch
+                        id={id}
+                        name={name}
+                        ref={inputRef}
+                        checked={value}
+                        disabled={disabled}
+                        onChange={() => onChange(!value)}
+                        checkedChildren={<Icon type="check" />}
+                        unCheckedChildren={<Icon type="cross" />}
+                    />
+            </FormItem>
+)
+}
 ;
 
 export default connectField(Bool);

@@ -36,6 +36,7 @@ const Text = ({
     type,
     value,
     rows,
+    changed,
     ...props
 }) => {
     const AntD = require('antd');
@@ -43,17 +44,12 @@ const Text = ({
     const Form = AntD.Form;
     const Col = AntD.Col;
     const FormItem = Form.Item;
-    if(errorMessage && showInlineError){
-        var vStatus = 'error';
-    }else{
-        var vStatus = null;
-    }
     return(
     <FormItem
         label={label}
         help={showInlineError ? errorMessage : null}
         hasFeedback={true}
-        validateStatus={vStatus}
+        validateStatus={errorMessage ? 'error' : null}
         htmlFor={id}>
         <Input
             disabled={disabled}
