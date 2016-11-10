@@ -3,6 +3,15 @@ import classnames       from 'classnames';
 import {connectField}   from 'uniforms';
 import {filterDOMProps} from 'uniforms';
 
+// SCHEMA PROTOTYPE
+/*
+boolfieldanttest:{
+  type: Boolean,
+  label: "Ant Boolean Field Sample",
+  defaultValue: true
+  }
+  */
+
 const Bool = ({
     className,
     disabled,

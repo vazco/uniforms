@@ -21,9 +21,25 @@ const schemas = {
             regEx: /^[0-9]{5}$/,
             defaultValue: '11111'
         },
+        number: {
+            type: Number,
+            label: "Number Test"
+        },
         boolfield: {
             type: Boolean,
             defaultValue: true
+        },
+        datesamplefield: {
+          type: Date,
+          label: "This is a date component",
+          defaultValue: new Date(2015,10,2,3,4,5),
+          uniforms: {
+            showTime: false,
+            format: "DD-MM-YYYY",
+            placeholder: "Select Date",
+            disabled: false,
+            allowClear: false
+          }
         }
     }`,
 
