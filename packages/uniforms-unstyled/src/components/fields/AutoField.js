@@ -1,4 +1,4 @@
-import invariant       from 'invariant';
+import invariant       from 'fbjs/lib/invariant';
 import {connectField}  from 'uniforms';
 import {createElement} from 'react';
 

@@ -409,6 +409,11 @@ describe('Everything', () => {
         wrapper.update();
     });
 
+    it('works (remount)', () => {
+        wrapper.unmount();
+        wrapper.mount();
+    });
+
     it('works (rest)', () => {
         wrapper.setProps({grid:  10});
         wrapper.setProps({error: {}});
@@ -417,9 +422,5 @@ describe('Everything', () => {
         schema.x = {__type__: () => {}};
 
         expect(() => wrapper.update()).to.throw(/Unsupported field type/);
-    });
-
-    it('works (unmount)', () => {
-        wrapper.unmount();
     });
 });

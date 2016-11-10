@@ -1,4 +1,4 @@
-import invariant from 'invariant';
+import invariant from 'fbjs/lib/invariant';
 
 import SimpleSchemaBridge  from './SimpleSchemaBridge';
 import SimpleSchema2Bridge from './SimpleSchema2Bridge';

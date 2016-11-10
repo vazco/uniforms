@@ -1,4 +1,4 @@
-import warning from 'warning';
+import warning from 'fbjs/lib/warning';
 
 import wrapField from '../../lib/wrapField';
 

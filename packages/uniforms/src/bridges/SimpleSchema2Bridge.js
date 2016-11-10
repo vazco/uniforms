@@ -1,5 +1,5 @@
 import cloneDeep from 'lodash.clonedeep';
-import invariant from 'invariant';
+import invariant from 'fbjs/lib/invariant';
 
 import Bridge         from './Bridge';
 import joinName       from '../helpers/joinName';
