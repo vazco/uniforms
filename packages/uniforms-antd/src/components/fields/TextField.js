@@ -3,7 +3,8 @@ import classnames       from 'classnames';
 import {connectField}   from 'uniforms';
 import {filterDOMProps} from 'uniforms';
 
-/* EXAMPLEs
+// SCHEMA PROTOTYPE
+/*
 state: {
     type: String
 },
@@ -42,7 +43,6 @@ const Text = ({
     const AntD = require('antd');
     const Input = AntD.Input;
     const Form = AntD.Form;
-    const Col = AntD.Col;
     const FormItem = Form.Item;
     return(
     <FormItem

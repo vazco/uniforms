@@ -17,7 +17,6 @@ export default class HiddenField extends BaseField {
 
     render () {
         const props = this.getFieldProps();
-
         return (
             props.noDOM ? nothing : (
                 <input ref={props.inputRef} type="hidden" value={props.value} {...filterDOMProps(props)} />

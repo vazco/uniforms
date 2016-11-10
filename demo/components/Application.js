@@ -1,7 +1,7 @@
 import Frame      from 'react-frame-component';
 import PanelGroup from 'react-panelgroup';
 import React      from 'react';
-
+import enUS from 'antd/lib/date-picker/locale/en_US';
 import {getSchemas} from '/assets/schemas';
 import {getSchema}  from '/assets/schemas';
 import {getStyles}  from '/assets/styles';
@@ -56,7 +56,8 @@ export class Application extends React.Component {
             changeInlineError
         } = this;
         return (
-            <PanelGroup spacing={3}>
+            <PanelGroup spacing={3} >
+
                 <section>
                     <nav className="panelGroupNavbar">
                         <section className="panelHeader">
@@ -90,7 +91,7 @@ export class Application extends React.Component {
                         </section>
                     </nav>
 
-                    <textarea spellCheck={false} value={schema.string} onChange={onSchema} />
+                    <textarea spellCheck={false} value={schema.string} onChange={onSchema} style={{fontSize: '13px', lineHeight: '1'}}/>
                     {/*
                     <a href="https://github.com/vazco/uniforms">
 
@@ -103,31 +104,39 @@ export class Application extends React.Component {
                     </a>
                 */}
                 </section>
-
-                <Frame>
+                <section style={{margin: '20px', fontSize: '13px', lineHeight: '1'}}>
                     {styles}
-                    {schema.object ? (
-                        <theme.components.AutoForm
-                            key={schema.string}
-                            schema={schema.object}
-                            showInlineError={showInlineError}
-                            onSubmit={doc => this.setState({doc: JSON.stringify(doc, null, 4)})}
-                        />
-                    ) : (
-                        <span>
-                            {schema.error.message}
-                        </span>
-                    )}
-
-                    {!!doc && (
-                        <br />
-                    )}
-                    {!!doc && (
-                        <pre>
-                            {doc}
-                        </pre>
-                    )}
-                </Frame>
+                        <div>
+                        {schema.object ? (
+                            <theme.components.AutoForm
+                                key={schema.string}
+                                schema={schema.object}
+                                showInlineError={showInlineError}
+                                onSubmit={doc => {
+                                    console.log(doc)
+                                    this.setState({doc: JSON.stringify(doc, null, 4)})
+                            }
+                            }
+                            />
+                        ) : (
+                            <span>
+                                {schema.error.message}
+                            </span>
+                        )}
+                        </div>
+                        <div>
+                        {!!doc && (
+                            <br />
+                        )}
+                        </div>
+                        <div>
+                        {!!doc && (
+                            <pre>
+                                {doc}
+                            </pre>
+                        )}
+                        </div>
+                </section>
             </PanelGroup>
         );
     }
