@@ -35,15 +35,48 @@ const schemas = {
             type: Boolean,
             defaultValue: true
         },
-        "selectTest": {
+        "select": {
             type: String,
-            allowedValues: ['aaa','bbbb','cccc','dddd'],
+            allowedValues: ['111','2222','333','444'],
         },
-        "multiselectTest": {
+        "selectOptional": {
+            type: String,
+            allowedValues: ['qqq','www','rrr','eee'],
+            optional: true
+        },
+        "multiselectAllowed": {
             type: [String],
-            allowedValues: ['aaa','bbbb','cccc','dddd'],
-            uniforms: {multiple: true}
+            allowedValues: ['ggg','hhh','jjj','kkk'],
+            uniforms: {
+                        multiple: true
+                    },
+            minCount: 1,
+            custom: function(){ return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null )}
         },
+        "multiselect": {
+            type: [String],
+            minCount: 1,
+            custom: function(){ return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null )},
+            uniforms: {
+                        multiple: true,
+                        options: [{value: 'aaa', label: 'a'},{value: 'bbb', label: 'b'},{value: 'ccc', label: 'c'},{value: 'ddd', label: 'd'}]
+                        }
+        },
+        "radio": {
+            type: String,
+            allowedValues: ['111','2222','333','444'],
+            uniforms: {
+                checkboxes: true
+            }
+        },
+        "checkboxes": {
+           type: [String],
+           allowedValues: ['111','2222','333','444'],
+           uniforms: {
+               checkboxes: true,
+               multiple: true
+           }
+       },
         datesamplefield: {
           type: Date,
           label: "This is a date component",
