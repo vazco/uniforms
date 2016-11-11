@@ -1,4 +1,6 @@
 ## Next
+- **Changed:** Optimized build size.
+- **Changed:** Removed `invariant` and `warning` dependencies.
 - **Changed:** `Bridge` cannot be instantiated.
 - **Changed:** `Bridge` constructor is now noop.
 - **Changed:** `Bridge` methods are now throwing an _unimplemented method_ errors.
