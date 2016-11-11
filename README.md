@@ -363,8 +363,8 @@ const Modifier = parent => class extends parent {
         const doc  = this.getModel();
         const keys = this.getChildContextSchema().getSubfields();
 
-        const update = keys.filter(key =>  doc[key]);
-        const remove = keys.filter(key => !doc[key]);
+        const update = keys.filter(key => doc[key] !== undefined);
+        const remove = keys.filter(key => doc[key] === undefined);
 
         // It's a good idea to omit empty modifiers.
         const $set   = update.reduce((acc, key) => ({...acc, [key]: doc[key]}), {});
