@@ -17,9 +17,6 @@ import {filterDOMProps} from 'uniforms';
 "multiselectAllowed": {
     type: [String],
     allowedValues: ['ggg','hhh','jjj','kkk'],
-    uniforms: {
-                multiple: true
-            },
     minCount: 1,
     custom: function(){ return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null )}
 },
@@ -28,16 +25,14 @@ import {filterDOMProps} from 'uniforms';
     minCount: 1,
     custom: function(){ return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null )},
     uniforms: {
-                multiple: true,
                 options: [{value: 'aaa', label: 'a'},{value: 'bbb', label: 'b'},{value: 'ccc', label: 'c'},{value: 'ddd', label: 'd'}]
                 }
 },
 "checkboxes": {
-       type: String,
+       type: [String],
        allowedValues: ['111','2222','333','444'],
        uniforms: {
-           checkboxes: true,
-           multiple: true
+           checkboxes: true
        }
   */
 
@@ -59,7 +54,6 @@ const renderCheckboxesAD = ({
     onChange,
     transform,
     value,
-    multiple,
     options,
     ...props
 }) => {
@@ -76,26 +70,28 @@ const renderCheckboxesAD = ({
 
 
 
-const renderSelectAD = ({allowedValues, disabled, required, id, name, onChange, transform, value, inputRef, placeholder,multiple, label,options, ...props}) =>{
+const renderSelectAD = ({allowedValues, disabled, required, id, name, onChange, transform, value, inputRef, placeholder,multiple, label, options, fieldType, ...props}) =>{
     const AntD = require('antd');
     const Select = AntD.Select;
     const Option = Select.Option;
     if(options){
         var op = options
-        if(!required && !multiple){
+        if(!required && !(fieldType === Array)){
             op.unshift({value: '...', label: '...'})
         }
     }else{
         var op = allowedValues
-        if(!required && !multiple){
+        if(!required && !(fieldType === Array)){
             op.unshift('...')
         }
     }
+    console.log(fieldType === Array)
+    console.log(fieldType)
     return(
     <Select
         disabled={disabled}
-        multiple={multiple}
-        allowClear={multiple}
+        multiple={fieldType === Array ? true : false}
+        allowClear={fieldType === Array ? true : false}
         id={id}
         name={name}
         onChange={(value) => onChange(value)}
@@ -135,7 +131,6 @@ const Select = ({
     showInlineError,
     transform,
     value,
-    multiple,
     options,
     ...props
 }) =>{
@@ -150,8 +145,8 @@ return(
         validateStatus={errorMessage ? 'error' : null}
         htmlFor={id}>
         {checkboxes
-            ? renderCheckboxesAD({allowedValues, disabled, id, name, onChange, transform, value, fieldType, multiple, options, ...props})
-            : renderSelectAD    ({allowedValues, disabled, required, id, name, onChange, transform, value, inputRef, placeholder, multiple, label, options, ...props})}
+            ? renderCheckboxesAD({allowedValues, disabled, id, name, onChange, transform, value, fieldType, options, ...props})
+            : renderSelectAD    ({allowedValues, disabled, required, id, name, onChange, transform, value, inputRef, placeholder, label, options, fieldType, ...props})}
     </FormItem>
 )}
 

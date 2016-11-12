@@ -47,9 +47,6 @@ const schemas = {
         "multiselectAllowed": {
             type: [String],
             allowedValues: ['ggg','hhh','jjj','kkk'],
-            uniforms: {
-                        multiple: true
-                    },
             minCount: 1,
             custom: function(){ return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null )}
         },
@@ -57,10 +54,9 @@ const schemas = {
             type: [String],
             minCount: 1,
             custom: function(){ return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null )},
-            uniforms: {
-                        multiple: true,
-                        options: [{value: 'aaa', label: 'a'},{value: 'bbb', label: 'b'},{value: 'ccc', label: 'c'},{value: 'ddd', label: 'd'}]
-                        }
+            uniforms:{
+                    options: [{value: 'aaa', label: 'a'},{value: 'bbb', label: 'b'},{value: 'ccc', label: 'c'},{value: 'ddd', label: 'd'}]
+                }
         },
         "radio": {
             type: String,
@@ -73,8 +69,7 @@ const schemas = {
            type: [String],
            allowedValues: ['111','2222','333','444'],
            uniforms: {
-               checkboxes: true,
-               multiple: true
+               checkboxes: true
            }
        },
         datesamplefield: {
