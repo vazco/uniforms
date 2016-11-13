@@ -6,9 +6,16 @@ import {joinName}     from 'uniforms';
 import AutoField    from './AutoField';
 import ListDelField from './ListDelField';
 
-const ListItem = props =>
+const ListItem = props =>{
+    return(
     <section className="item">
-        <ListDelField className="top aligned" name={props.name} />
+        <div  style={{width: "20px", marginLeft: "10px", float: "right", marginRight: "6px", marginBottom: "10px"}} >
+            <ListDelField className="top aligned" name={props.name} />
+        </div>
+        <div style={{overflow: "hidden", marginBottom: "10px"}}>
+            <div style={{borderBottom: "1px solid #DDD", marginTop: "-8px", height: "20px"}}></div>
+        </div>
+
 
         <section className="middle aligned content" style={{width: '100%'}}>
             {props.children ? (
@@ -27,6 +34,8 @@ const ListItem = props =>
             )}
         </section>
     </section>
+)
+}
 ;
 
 export default connectField(ListItem, {includeInChain: false});

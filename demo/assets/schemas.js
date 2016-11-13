@@ -3,8 +3,14 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 const schema = strings => strings[0].replace(/([\r\n]+) {4}/g, '$1');
 const schemas = {
     'Example - address': schema`{
+        'array.$.test': {
+            type: String
+        },
+        'array.$.one': {
+            type: Number
+        },
         street: {
-            type: String,
+            type: [String],
             max: 100,
             defaultValue: 'aaaa'
         },
@@ -48,11 +54,13 @@ const schemas = {
             type: [String],
             allowedValues: ['ggg','hhh','jjj','kkk'],
             minCount: 1,
+            defaultValue: ['jjj'],
             custom: function(){ return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null )}
         },
         "multiselect": {
             type: [String],
             minCount: 1,
+            defaultValue: ['bbb'],
             custom: function(){ return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null )},
             uniforms:{
                     options: [{value: 'aaa', label: 'a'},{value: 'bbb', label: 'b'},{value: 'ccc', label: 'c'},{value: 'ddd', label: 'd'}]
@@ -63,14 +71,18 @@ const schemas = {
             allowedValues: ['111','2222','333','444'],
             uniforms: {
                 checkboxes: true
-            }
+            },
+            defaultValue: '111',
+            custom: function(){ return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null )}
         },
         "checkboxes": {
            type: [String],
            allowedValues: ['111','2222','333','444'],
            uniforms: {
                checkboxes: true
-           }
+           },
+           defaultValue: ['333'],
+           custom: function(){ return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null )}
        },
         datesamplefield: {
           type: Date,

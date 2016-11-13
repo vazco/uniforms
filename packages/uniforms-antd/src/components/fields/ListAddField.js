@@ -11,20 +11,20 @@ const ListAdd = ({
     ...props
 }) => {
     const limitNotReached = !disabled && !(parent.maxCount <= parent.value.length);
+    var AntIn = require('antd');
+    const Button = AntIn.Button;
 
     return (
-        <i
-            {...filterDOMProps(props)}
-            className={classnames(
-                'ui',
-                className,
-                limitNotReached
-                    ? 'link'
-                    : 'disabled',
-                'fitted add icon'
-            )}
+      <section  className={classnames('pull-right', className)}>
+        <Button
+            type="ghost"
+            size="small"
+            icon="plus-square-o"
             onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
-        />
+            style={{float: "right", marginTop: "-10px"}}
+            {...filterDOMProps(props)}
+         />
+     </section>
     );
 };
 

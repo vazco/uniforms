@@ -3,7 +3,7 @@ import classnames       from 'classnames';
 import {connectField}   from 'uniforms';
 import {filterDOMProps} from 'uniforms';
 import moment from 'moment';
-import enUS from 'antd/lib/date-picker/locale/en_US';
+
 
 
 // SCHEMA PROTOTYPE
@@ -33,8 +33,22 @@ const dateParse = (timestamp, datestring, onChange, showTime) => {
     return;
 };
 
-const Date_ = ({
-    className,
+class Date_ extends (React.Component) {
+    constructor(){
+    super(...arguments);
+    this.state = {
+    }
+}
+componentWillMount(){
+  if(!(this.props.value instanceof Date) && this.props.value ){
+    var dateMoment = moment(this.props.value,this.props.format);
+    this.props.onChange(dateMoment.toDate())
+  }
+}
+render(){
+
+const {
+  props: { className,
     disabled,
     error,
     errorMessage,
@@ -55,24 +69,24 @@ const Date_ = ({
     format,
     allowClear,
     showTime,
-    ...props
-}) =>
-    {
+  },
+  props
+} = this;
     const AntD = require('antd');
     const DatePicker = AntD.DatePicker;
     const FormItem = AntD.Form.Item;
-    //not sure how to make this robust and not change state..
-    if(!(value instanceof Date) && value ){
-      var dateMoment = moment(value,format);
-      onChange(dateMoment.toDate())
-    }
+    const enUS = require('antd/lib/date-picker/locale/en_US');
+    const LocaleProvider = AntD.LocaleProvider;
     return(
         <FormItem
             label={label}
             help={showInlineError ? errorMessage : null}
             hasFeedback={true}
             validateStatus={errorMessage ? 'error' : null}
-            htmlFor={id}>
+            htmlFor={id}
+            style={{marginBottom: "12px"}}
+            >
+            <LocaleProvider locale={enUS}>
             <DatePicker
              ref={inputRef}
              disabled={disabled}
@@ -82,14 +96,15 @@ const Date_ = ({
              name={name}
              showTime={showTime}
              format={format ? format : "DD-MM-YYYY"}
-             locale={enUS}
+
              placeholder={placeholder}
              onChange={(value, datestring) => dateParse(value, dateFormat, onChange, showTime)}
              allowClear={allowClear}
              value={value instanceof Date? moment(value.toISOString()) : moment( new Date().toISOString()) }
-         />
+         /></LocaleProvider>
     </FormItem>
-)};
+)}
+}
 
 Date_.displayName = 'Date';
 
