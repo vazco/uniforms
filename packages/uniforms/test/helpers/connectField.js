@@ -12,7 +12,7 @@ describe('connectField', () => {
     const error = new Error();
     const onChange = spy();
     const randomId = randomIds();
-    const state = {changed: false, changedMap: {}, label: true, disabled: false, placeholder: false};
+    const state = {changed: !1, changedMap: {}, label: !0, disabled: !1, placeholder: !1, showInlineError: !0};
     const schema = createSchemaBridge({
         getDefinition (name) {
             return {

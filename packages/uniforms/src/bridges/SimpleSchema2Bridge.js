@@ -162,7 +162,7 @@ export default class SimpleSchema2Bridge extends Bridge {
                 field = {
                     ...field,
                     transform: value => options.find(option => option.value === value).label,
-                    allowedValues: options.map(options => options.value)
+                    allowedValues: options.map(option => option.value)
                 };
             }
         }
