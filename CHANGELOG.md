@@ -1,4 +1,4 @@
-## Next
+## [v1.6.0-beta.1](https://github.com/vazco/uniforms/releases/tag/v1.6.0-beta.1)
 - **Changed:** Added GraphQL schema support. [\#118](https://github.com/vazco/uniforms/issues/118)
 - **Changed:** Optimized build size.
 - **Changed:** Removed `invariant` and `warning` dependencies.
