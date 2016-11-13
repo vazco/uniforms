@@ -1,4 +1,5 @@
 ## Next
+- **Changed:** Added GraphQL schema support. [\#118](https://github.com/vazco/uniforms/issues/118)
 - **Changed:** Optimized build size.
 - **Changed:** Removed `invariant` and `warning` dependencies.
 - **Changed:** `Bridge` cannot be instantiated.
