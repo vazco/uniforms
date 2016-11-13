@@ -1,13 +1,14 @@
-import invariant           from 'invariant';
-import {GraphQLList}       from 'graphql';
-import {GraphQLNonNull}    from 'graphql';
-import {GraphQLObjectType} from 'graphql';
-import {GraphQLScalarType} from 'graphql';
+import invariant from 'fbjs/lib/invariant';
 
 import Bridge   from './Bridge';
 import joinName from '../helpers/joinName';
 
-const extractFromNonNull = x => x && x.type instanceof GraphQLNonNull ? {...x, type: x.type.ofType} : x;
+let graphql;
+try {
+    graphql = (0, require)('graphql');
+} catch (_) { /* Ignore it. */ }
+
+const extractFromNonNull = x => x && x.type instanceof graphql.GraphQLNonNull ? {...x, type: x.type.ofType} : x;
 
 export default class GraphQLBridge extends Bridge {
     constructor (schema, validator, extras = {}) {
@@ -63,7 +64,7 @@ export default class GraphQLBridge extends Bridge {
     getField (name, returnExtracted = true) {
         return joinName(null, name).reduce((definition, next, index, array) => {
             if (next === '$') {
-                invariant(definition.type instanceof GraphQLList, 'Field not found in schema: "%s"', name);
+                invariant(definition.type instanceof graphql.GraphQLList, 'Field not found in schema: "%s"', name);
                 definition = {type: extractFromNonNull(definition.type.ofType)};
             } else {
                 definition = definition[next];
@@ -71,13 +72,15 @@ export default class GraphQLBridge extends Bridge {
 
             invariant(definition, 'Field not found in schema: "%s"', name);
 
-            if (array.length - 1 === index && !returnExtracted) {
+            const isLast = array.length - 1 === index;
+
+            if (isLast && !returnExtracted) {
                 return definition;
             }
 
             const extracted = extractFromNonNull(definition);
 
-            if (array.length - 1 === index && returnExtracted || !(extracted.type instanceof GraphQLObjectType)) {
+            if (isLast && returnExtracted || !(extracted.type instanceof graphql.GraphQLObjectType)) {
                 return extracted;
             }
 
@@ -110,14 +113,14 @@ export default class GraphQLBridge extends Bridge {
 
         let computed = {
             label: '',
-            required: field.type instanceof GraphQLNonNull,
+            required: field.type instanceof graphql.GraphQLNonNull,
 
             ...this.extras[nameGeneric],
             ...this.extras[nameNormal],
             ...props
         };
 
-        if (fieldType instanceof GraphQLScalarType && fieldType.name === 'Float') {
+        if (fieldType instanceof graphql.GraphQLScalarType && fieldType.name === 'Float') {
             computed.decimal = true;
         }
 
@@ -147,7 +150,7 @@ export default class GraphQLBridge extends Bridge {
 
         const fieldType = this.getField(name).type;
 
-        if (fieldType instanceof GraphQLObjectType) {
+        if (fieldType instanceof graphql.GraphQLObjectType) {
             return Object.keys(fieldType.getFields());
         }
 
@@ -158,9 +161,9 @@ export default class GraphQLBridge extends Bridge {
         const fieldType = this.getField(name).type;
 
         return (
-            fieldType instanceof GraphQLList       ? Array  :
-            fieldType instanceof GraphQLObjectType ? Object :
-            fieldType instanceof GraphQLScalarType ?
+            fieldType instanceof graphql.GraphQLList       ? Array  :
+            fieldType instanceof graphql.GraphQLObjectType ? Object :
+            fieldType instanceof graphql.GraphQLScalarType ?
                 fieldType.name === 'Int'    ? Number :
                 fieldType.name === 'Float'  ? Number :
                 fieldType.name === 'String' ? String :
