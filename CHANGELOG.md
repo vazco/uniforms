@@ -1,4 +1,4 @@
-## Next
+## [v1.6.0-beta.2](https://github.com/vazco/uniforms/releases/tag/v1.6.0-beta.2)
 - **Fixed:** GraphQL conditional import.
 
 <br>
