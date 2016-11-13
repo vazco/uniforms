@@ -12,22 +12,20 @@ const ListDel = ({
 }) => {
     const fieldIndex      = +name.slice(1 + name.lastIndexOf('.'));
     const limitNotReached = !disabled && !(parent.minCount >= parent.value.length);
-
+    var AntIn = require('antd');
+    const Button = AntIn.Button;
+    const Icon = AntIn.Icon;
     return (
-        <i
-            {...filterDOMProps(props)}
-            className={classnames(
-                'ui',
-                className,
-                limitNotReached
-                    ? 'link'
-                    : 'disabled',
-                'fitted close icon'
-            )}
+        <Button
+            type="ghost"
+            shape="circle-outline"
+            size="small"
+            icon="delete"
             onClick={() => limitNotReached && parent.onChange(
-                [].concat(parent.value.slice(0,  fieldIndex))
-                  .concat(parent.value.slice(1 + fieldIndex))
+              [].concat(parent.value.slice(0,  fieldIndex))
+                .concat(parent.value.slice(1 + fieldIndex))
             )}
+            {...filterDOMProps(props)}
         />
     );
 };

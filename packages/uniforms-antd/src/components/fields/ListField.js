@@ -22,9 +22,12 @@ const List = ({
     showInlineError,
     value,
     ...props
-}) =>
+}) => {
+
+return(
     <section
-        className={classnames('ui', className, {disabled}, 'grouped fitted fields list')}
+        className={classnames('ui', className, {disabled})}
+        style={{border: "1px solid #DDD", borderRadius: "7px", padding: "10px", marginBottom: "5px", marginTop: "5px"}}
         {...filterDOMProps(props)}
     >
         {label && (
@@ -38,7 +41,7 @@ const List = ({
         )}
 
         {label && (
-            <section className="ui fitted hidden clearing divider" />
+            <section style={{height: "18px"}}  />
         )}
 
         {!!(errorMessage && showInlineError) && (
@@ -63,6 +66,7 @@ const List = ({
             )
         )}
     </section>
-;
+)}
+
 
 export default connectField(List, {includeInChain: false});

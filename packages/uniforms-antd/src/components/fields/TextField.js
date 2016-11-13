@@ -50,7 +50,9 @@ const Text = ({
         help={showInlineError ? errorMessage : null}
         hasFeedback={true}
         validateStatus={errorMessage ? 'error' : null}
-        htmlFor={id}>
+        htmlFor={id}
+        style={{marginBottom: "12px"}}
+        >
         <Input
             disabled={disabled}
             id={id}

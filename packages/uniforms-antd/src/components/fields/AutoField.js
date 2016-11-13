@@ -32,7 +32,6 @@ const Auto = ({component, ...props}) => {
             invariant(component, 'Unsupported field type: %s', props.fieldType.toString());
         }
     }
-
     return createElement(component, props);
 };
 

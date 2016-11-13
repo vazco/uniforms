@@ -55,6 +55,7 @@ const renderCheckboxesAD = ({
     transform,
     value,
     options,
+    defaultValue,
     ...props
 }) => {
     const AntD = require('antd');
@@ -63,14 +64,15 @@ const renderCheckboxesAD = ({
     const Radio = AntD.Radio;
     const RadioGroup = Radio.Group;
     var op = options ? options : allowedValues;
+
     return(
-        <CheckboxGroup options={op} onChange={onChange} value={value}/>
+        <CheckboxGroup options={op} onChange={onChange} defaultValue={defaultValue}/>
         )
 }
 
 
 
-const renderSelectAD = ({allowedValues, disabled, required, id, name, onChange, transform, value, inputRef, placeholder,multiple, label, options, fieldType, ...props}) =>{
+const renderSelectAD = ({allowedValues, disabled, required, id, name, onChange, transform, value, inputRef, placeholder,multiple, label, options, fieldType, defaultValue, ...props}) =>{
     const AntD = require('antd');
     const Select = AntD.Select;
     const Option = Select.Option;
@@ -85,8 +87,6 @@ const renderSelectAD = ({allowedValues, disabled, required, id, name, onChange, 
             op.unshift('...')
         }
     }
-    console.log(fieldType === Array)
-    console.log(fieldType)
     return(
     <Select
         disabled={disabled}
@@ -96,6 +96,7 @@ const renderSelectAD = ({allowedValues, disabled, required, id, name, onChange, 
         name={name}
         onChange={(value) => onChange(value)}
         ref={inputRef}
+        defaultValue={defaultValue}
     >
         {op.map((val) => {
             if(val instanceof Object){
@@ -113,42 +114,59 @@ const renderSelectAD = ({allowedValues, disabled, required, id, name, onChange, 
 )}
 
 
-const Select = ({
-    allowedValues,
-    checkboxes,
-    className,
-    disabled,
-    error,
-    errorMessage,
-    fieldType,
-    id,
-    inputRef,
-    label,
-    name,
-    onChange,
-    placeholder,
-    required,
-    showInlineError,
-    transform,
-    value,
-    options,
-    ...props
-}) =>{
+class Select extends (React.Component) {
+    constructor(){
+    super(...arguments);
+    this.state = {
+    }
+}
+componentWillMount(){
+    this.props.onChange(this.props.defaultValue);
+}
+
+render(){
+    const {
+        props: { allowedValues,
+        checkboxes,
+        className,
+        disabled,
+        error,
+        errorMessage,
+        fieldType,
+        id,
+        inputRef,
+        label,
+        name,
+        onChange,
+        placeholder,
+        required,
+        showInlineError,
+        transform,
+        value,
+        options,
+        defaultValue
+    },
+    props
+    } = this;
     const AntD = require('antd');
     const Form = AntD.Form;
     const FormItem = Form.Item;
+
 return(
     <FormItem
         label={label}
         help={showInlineError ? errorMessage : null}
         hasFeedback={true}
         validateStatus={errorMessage ? 'error' : null}
-        htmlFor={id}>
+        htmlFor={id}
+        style={{marginBottom: "12px"}}
+        >
         {checkboxes
-            ? renderCheckboxesAD({allowedValues, disabled, id, name, onChange, transform, value, fieldType, options, ...props})
-            : renderSelectAD    ({allowedValues, disabled, required, id, name, onChange, transform, value, inputRef, placeholder, label, options, fieldType, ...props})}
+            ? renderCheckboxesAD({allowedValues, disabled, id, name, onChange, transform, value, fieldType, options, defaultValue, ...props})
+            : renderSelectAD    ({allowedValues, disabled, required, id, name, onChange, transform, value, inputRef, placeholder, label, options, fieldType, defaultValue, ...props})}
     </FormItem>
 )}
+}
 
 
 export default connectField(Select);
