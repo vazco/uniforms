@@ -4,19 +4,19 @@ import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 import {stub}   from 'sinon';
 
-import {AutoFields}     from 'uniforms-semantic';
-import {AutoForm}       from 'uniforms-semantic';
-import {ErrorField}     from 'uniforms-semantic';
-import {ErrorsField}    from 'uniforms-semantic';
-import {HiddenField}    from 'uniforms-semantic';
-import {ListAddField}   from 'uniforms-semantic';
-import {ListDelField}   from 'uniforms-semantic';
-import {ListField}      from 'uniforms-semantic';
-import {ListItemField}  from 'uniforms-semantic';
-import {LongTextField}  from 'uniforms-semantic';
-import {NumField}       from 'uniforms-semantic';
-import {SelectField}    from 'uniforms-semantic';
-import {SubmitField}    from 'uniforms-semantic';
+import {AutoFields}     from 'uniforms-antd';
+import {AutoForm}       from 'uniforms-antd';
+import {ErrorField}     from 'uniforms-antd';
+import {ErrorsField}    from 'uniforms-antd';
+import {HiddenField}    from 'uniforms-antd';
+import {ListAddField}   from 'uniforms-antd';
+import {ListDelField}   from 'uniforms-antd';
+import {ListField}      from 'uniforms-antd';
+import {ListItemField}  from 'uniforms-antd';
+import {LongTextField}  from 'uniforms-antd';
+import {NumField}       from 'uniforms-antd';
+import {SelectField}    from 'uniforms-antd';
+import {SubmitField}    from 'uniforms-antd';
 import {filterDOMProps} from 'uniforms';
 
 filterDOMProps.register(

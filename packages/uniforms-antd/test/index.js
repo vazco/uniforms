@@ -17,4 +17,16 @@ require('fbjs/lib/ExecutionEnvironment').canUseDOM = true;
 import mock from 'mock-require';
 
 mock('uniforms', '../../uniforms/src');
-mock('uniforms-semantic', '../src');
+mock('uniforms-antd', '../src');
+
+if (typeof window !== 'undefined') {
+    const matchMediaPolyfill = function matchMediaPolyfill (mediaQuery) {
+        return {
+            media: mediaQuery,
+            matches: false,
+            addListener: function addListener () {},
+            removeListener: function removeListener () {}
+        };
+    };
+    window.matchMedia = window.matchMedia || matchMediaPolyfill;
+}
