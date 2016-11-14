@@ -1,10 +1,8 @@
 import React            from 'react';
-import classnames       from 'classnames';
 import {connectField}   from 'uniforms';
 import {filterDOMProps} from 'uniforms';
 
 const ListDel = ({
-    className,
     disabled,
     name,
     parent,
@@ -12,9 +10,8 @@ const ListDel = ({
 }) => {
     const fieldIndex      = +name.slice(1 + name.lastIndexOf('.'));
     const limitNotReached = !disabled && !(parent.minCount >= parent.value.length);
-    var AntIn = require('antd');
+    const AntIn = require('antd');
     const Button = AntIn.Button;
-    const Icon = AntIn.Icon;
     return (
         <Button
             type="ghost"

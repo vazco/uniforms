@@ -3,14 +3,20 @@ import {connectField}   from 'uniforms';
 
 // SCHEMA PROTOTYPE
 /*
-boolfieldanttest:{
-  type: Boolean,
-  label: "Ant Boolean Field Sample",
-  defaultValue: true
-  }
-  */
+state: {
+    type: String
+},
+zip: {
+    type: String,
+    regEx: /^[0-9]{5}$/
+},
+field: {
+    type: String,
+    uniforms: {rows: 14, type: 'textarea' }
+}
+*/
 
-const Bool = ({
+const LongText = ({
     disabled,
     errorMessage,
     id,
@@ -18,13 +24,15 @@ const Bool = ({
     label,
     name,
     onChange,
+    placeholder,
     showInlineError,
-    value
+    type,
+    value,
+    rows,
 }) => {
     const AntD = require('antd');
-    const Switch = AntD.Switch;
+    const Input = AntD.Input;
     const Form = AntD.Form;
-    const Icon = AntD.Icon;
     const FormItem = Form.Item;
     return (
         <FormItem
@@ -35,18 +43,24 @@ const Bool = ({
             htmlFor={id}
             style={{marginBottom: '12px'}}
         >
-            <Switch
+            <Input
+                disabled={disabled}
                 id={id}
                 name={name}
+                onChange={event => onChange(event.target.value)}
+                placeholder={placeholder}
                 ref={inputRef}
-                checked={value}
-                disabled={disabled}
-                onChange={() => onChange(!value)}
-                checkedChildren={<Icon type={'check'} />}
-                unCheckedChildren={<Icon type={'cross'} />}
+                type={type}
+                rows={rows}
+                value={value}
             />
         </FormItem>
     );
+}
+;
+
+LongText.defaultProps = {
+    type: 'text'
 };
 
-export default connectField(Bool);
+export default connectField(LongText);
