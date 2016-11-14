@@ -1,7 +1,5 @@
 import React            from 'react';
-import classnames       from 'classnames';
 import {connectField}   from 'uniforms';
-import {filterDOMProps} from 'uniforms';
 
 // SCHEMA PROTOTYPE
 /*
@@ -19,54 +17,45 @@ field: {
 */
 
 const Text = ({
-    className,
     disabled,
-    error,
     errorMessage,
-    icon,
-    iconLeft,
-    iconProps,
     id,
     inputRef,
     label,
     name,
     onChange,
     placeholder,
-    required,
     showInlineError,
     type,
     value,
     rows,
-    changed,
-    ...props
 }) => {
     const AntD = require('antd');
     const Input = AntD.Input;
     const Form = AntD.Form;
     const FormItem = Form.Item;
-    return(
-    <FormItem
-        label={label}
-        help={showInlineError ? errorMessage : null}
-        hasFeedback={true}
-        validateStatus={errorMessage ? 'error' : null}
-        htmlFor={id}
-        style={{marginBottom: "12px"}}
+    return (
+        <FormItem
+            label={label}
+            help={showInlineError ? errorMessage : null}
+            hasFeedback
+            validateStatus={errorMessage ? 'error' : null}
+            htmlFor={id}
+            style={{marginBottom: '12px'}}
         >
-        <Input
-            disabled={disabled}
-            id={id}
-            name={name}
-            onChange={event => onChange(event.target.value)}
-            placeholder={placeholder}
-            ref={inputRef}
-            type={type}
-            rows={rows}
-            value={value}
-        />
-    </FormItem>
-
-    )
+            <Input
+                disabled={disabled}
+                id={id}
+                name={name}
+                onChange={event => onChange(event.target.value)}
+                placeholder={placeholder}
+                ref={inputRef}
+                type={type}
+                rows={rows}
+                value={value}
+            />
+        </FormItem>
+    );
 }
 ;
 

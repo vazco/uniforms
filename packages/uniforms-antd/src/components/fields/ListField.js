@@ -23,50 +23,56 @@ const List = ({
     value,
     ...props
 }) => {
+    return (
+        <section
+            className={classnames('ui', className, {disabled})}
+            style={{
+                border: '1px solid #DDD',
+                borderRadius: '7px',
+                padding: '10px',
+                marginBottom: '5px',
+                marginTop: '5px'
+            }}
+            {...filterDOMProps(props)}
+        >
+            {label && (
+                <section className={classnames({error, required}, 'field item')}>
+                    <label className="left floated">
+                        {label}
+                    </label>
 
-return(
-    <section
-        className={classnames('ui', className, {disabled})}
-        style={{border: "1px solid #DDD", borderRadius: "7px", padding: "10px", marginBottom: "5px", marginTop: "5px"}}
-        {...filterDOMProps(props)}
-    >
-        {label && (
-            <section className={classnames({error, required}, 'field item')}>
-                <label className="left floated">
-                    {label}
-                </label>
+                    <ListAddField name={`${name}.$`} initialCount={initialCount} className="right floated" />
+                </section>
+            )}
 
-                <ListAddField name={`${name}.$`} initialCount={initialCount} className="right floated" />
-            </section>
-        )}
+            {label && (
+                <section style={{height: '18px'}}  />
+            )}
 
-        {label && (
-            <section style={{height: "18px"}}  />
-        )}
+            {!!(errorMessage && showInlineError) && (
+                <section className="ui red basic label">
+                    {errorMessage}
+                </section>
+            )}
 
-        {!!(errorMessage && showInlineError) && (
-            <section className="ui red basic label">
-                {errorMessage}
-            </section>
-        )}
-
-        {children ? (
-            value.map((item, index) =>
-                Children.map(children, child =>
-                    React.cloneElement(child, {
-                        key: index,
-                        label: null,
-                        name: joinName(name, child.props.name && child.props.name.replace('$', index))
-                    })
+            {children ? (
+                value.map((item, index) =>
+                    Children.map(children, child =>
+                        React.cloneElement(child, {
+                            key: index,
+                            label: null,
+                            name: joinName(name, child.props.name && child.props.name.replace('$', index))
+                        })
+                    )
                 )
-            )
-        ) : (
-            value.map((item, index) =>
-                <ListItemField key={index} label={null} name={joinName(name, index)} {...itemProps} />
-            )
-        )}
-    </section>
-)}
+            ) : (
+                value.map((item, index) =>
+                    <ListItemField key={index} label={null} name={joinName(name, index)} {...itemProps} />
+                )
+            )}
+        </section>
+    );
+};
 
 
 export default connectField(List, {includeInChain: false});

@@ -1,7 +1,5 @@
 import React            from 'react';
-import classnames       from 'classnames';
 import {connectField}   from 'uniforms';
-import {filterDOMProps} from 'uniforms';
 
 // SCHEMA PROTOTYPE
 /*
@@ -25,7 +23,23 @@ import {filterDOMProps} from 'uniforms';
     minCount: 1,
     custom: function(){ return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null )},
     uniforms: {
-                options: [{value: 'aaa', label: 'a'},{value: 'bbb', label: 'b'},{value: 'ccc', label: 'c'},{value: 'ddd', label: 'd'}]
+                options: [
+                    {
+                        value: 'aaa',
+                        label: 'a'
+                    },
+                    {
+                        value: 'bbb',
+                        label: 'b'
+                    },
+                    {
+                        value: 'ccc',
+                        label: 'c'
+                    },
+                    {
+                        value: 'ddd',
+                        label: 'd'
+                    }]
                 }
 },
 "checkboxes": {
@@ -35,7 +49,7 @@ import {filterDOMProps} from 'uniforms';
            checkboxes: true
        }
   */
-
+/*
 const xor = (item, array) => {
     const index = array.indexOf(item);
     if (index === -1) {
@@ -44,128 +58,173 @@ const xor = (item, array) => {
 
     return array.slice(0, index).concat(array.slice(index + 1));
 };
+*/
 
 const renderCheckboxesAD = ({
     allowedValues,
     disabled,
-    fieldType,
     id,
     name,
     onChange,
-    transform,
-    value,
     options,
     defaultValue,
-    ...props
 }) => {
     const AntD = require('antd');
     const Checkbox = AntD.Checkbox;
     const CheckboxGroup = Checkbox.Group;
-    const Radio = AntD.Radio;
-    const RadioGroup = Radio.Group;
-    var op = options ? options : allowedValues;
+    const op = options ? options : allowedValues;
+    return (
+        <CheckboxGroup
+            options={op}
+            id={id}
+            name={name}
+            onChange={onChange}
+            defaultValue={defaultValue}
+            disabled={disabled}
+        />
+    );
+};
 
-    return(
-        <CheckboxGroup options={op} onChange={onChange} defaultValue={defaultValue}/>
-        )
-}
 
 
-
-const renderSelectAD = ({allowedValues, disabled, required, id, name, onChange, transform, value, inputRef, placeholder,multiple, label, options, fieldType, defaultValue, ...props}) =>{
+const renderSelectAD = ({
+    allowedValues,
+    disabled,
+    required,
+    id,
+    name,
+    onChange,
+    transform,
+    inputRef,
+    options,
+    fieldType,
+    defaultValue
+}) => {
     const AntD = require('antd');
     const Select = AntD.Select;
     const Option = Select.Option;
-    if(options){
-        var op = options
-        if(!required && !(fieldType === Array)){
-            op.unshift({value: '...', label: '...'})
+    let op = [];
+    if (options) {
+        op = options;
+        if (!required && !(fieldType === Array)) {
+            op.unshift({value: '...', label: '...'});
         }
-    }else{
-        var op = allowedValues
-        if(!required && !(fieldType === Array)){
-            op.unshift('...')
+    } else {
+        op = allowedValues;
+        if (!required && !(fieldType === Array)) {
+            op.unshift('...');
         }
     }
-    return(
-    <Select
-        disabled={disabled}
-        multiple={fieldType === Array ? true : false}
-        allowClear={fieldType === Array ? true : false}
-        id={id}
-        name={name}
-        onChange={(value) => onChange(value)}
-        ref={inputRef}
-        defaultValue={defaultValue}
-    >
-        {op.map((val) => {
-            if(val instanceof Object){
-            return(
-                <Option key={val.value} value={val.value}>
-                    {val.label}
-                </Option>
-            )}else{
-            return(
-                <Option key={val} value={val}>
-                    {transform ? transform(val) : val}
-                </Option>
-            )}})}
-    </Select>
-)}
+    return (
+        <Select
+            disabled={disabled}
+            multiple={fieldType === Array}
+            allowClear={fieldType === Array}
+            id={id}
+            name={name}
+            onChange={value => onChange(value)}
+            ref={inputRef}
+            defaultValue={defaultValue}
+        >
+            {op.map(val => {
+                let v = '';
+                if (val instanceof Object) {
+                    v = (
+                        <Option key={val.value} value={val.value}>
+                            {val.label}
+                        </Option>
+                    );
+                } else {
+                    v = (
+                        <Option key={val} value={val}>
+                            {transform ? transform(val) : val}
+                        </Option>
+                    );
+                }
+                return v;
+            })}
+        </Select>
+    );
+};
 
 
 class Select extends (React.Component) {
-    constructor(){
-    super(...arguments);
-    this.state = {
+    constructor () {
+        super(...arguments);
+        this.state = {
+        };
     }
-}
-componentWillMount(){
-    this.props.onChange(this.props.defaultValue);
-}
-
-render(){
-    const {
-        props: { allowedValues,
-        checkboxes,
-        className,
-        disabled,
-        error,
-        errorMessage,
-        fieldType,
-        id,
-        inputRef,
-        label,
-        name,
-        onChange,
-        placeholder,
-        required,
-        showInlineError,
-        transform,
-        value,
-        options,
-        defaultValue
-    },
-    props
-    } = this;
-    const AntD = require('antd');
-    const Form = AntD.Form;
-    const FormItem = Form.Item;
-
-return(
-    <FormItem
-        label={label}
-        help={showInlineError ? errorMessage : null}
-        hasFeedback={true}
-        validateStatus={errorMessage ? 'error' : null}
-        htmlFor={id}
-        style={{marginBottom: "12px"}}
-        >
-        {checkboxes
-            ? renderCheckboxesAD({allowedValues, disabled, id, name, onChange, transform, value, fieldType, options, defaultValue, ...props})
-            : renderSelectAD    ({allowedValues, disabled, required, id, name, onChange, transform, value, inputRef, placeholder, label, options, fieldType, defaultValue, ...props})}
-    </FormItem>
-)}
+    componentWillMount () {
+        this.props.onChange(this.props.defaultValue);
+    }
+    render () {
+        const {
+            props: {allowedValues,
+            checkboxes,
+            disabled,
+            errorMessage,
+            fieldType,
+            id,
+            inputRef,
+            label,
+            name,
+            onChange,
+            placeholder,
+            required,
+            showInlineError,
+            transform,
+            value,
+            options,
+            defaultValue
+        },
+        props
+        } = this;
+        const AntD = require('antd');
+        const Form = AntD.Form;
+        const FormItem = Form.Item;
+        return (
+            <FormItem
+                label={label}
+                help={showInlineError ? errorMessage : null}
+                hasFeedback
+                validateStatus={errorMessage ? 'error' : null}
+                htmlFor={id}
+                style={{marginBottom: '12px'}}
+            >
+                {checkboxes
+                    ? renderCheckboxesAD({
+                        allowedValues,
+                        disabled,
+                        id,
+                        name,
+                        onChange,
+                        transform,
+                        value,
+                        fieldType,
+                        options,
+                        defaultValue,
+                        ...props
+                    })
+                    : renderSelectAD({
+                        allowedValues,
+                        disabled,
+                        required,
+                        id,
+                        name,
+                        onChange,
+                        transform,
+                        value,
+                        inputRef,
+                        placeholder,
+                        label,
+                        options,
+                        fieldType,
+                        defaultValue,
+                        ...props
+                    })}
+            </FormItem>
+        );
+    }
 }
 
 

@@ -1,7 +1,5 @@
 import React            from 'react';
-import classnames       from 'classnames';
 import {connectField}   from 'uniforms';
-import {filterDOMProps} from 'uniforms';
 
 // SCHEMA PROTOTYPE
 /*
@@ -20,14 +18,9 @@ numberDec: {
 const noneIfNaN = x => isNaN(x) ? undefined : x;
 
 const Num = ({
-    className,
     disabled,
     decimal,
-    error,
     errorMessage,
-    icon,
-    iconLeft,
-    iconProps,
     id,
     inputRef,
     label,
@@ -36,40 +29,38 @@ const Num = ({
     name,
     onChange,
     placeholder,
-    required,
     showInlineError,
     value,
     step,
-    ...props
-}) =>{
+}) => {
     const AntD = require('antd');
     const InputNumber = AntD.InputNumber;
     const Form = AntD.Form;
     const FormItem = Form.Item;
-    return(
-    <FormItem
-        label={label}
-        help={showInlineError ? errorMessage : null}
-        hasFeedback={true}
-        validateStatus={errorMessage ? 'error' : null}
-        htmlFor={id}
-        style={{marginBottom: "12px"}}
+    return (
+        <FormItem
+            label={label}
+            help={showInlineError ? errorMessage : null}
+            hasFeedback
+            validateStatus={errorMessage ? 'error' : null}
+            htmlFor={id}
+            style={{marginBottom: '12px'}}
         >
-        <InputNumber
-            disabled={disabled}
-            id={id}
-            max={max}
-            min={min}
-            name={name}
-            step={step ? step : 1}
-            onChange={value => onChange(noneIfNaN((decimal ? parseFloat : parseInt)(value)))}
-            placeholder={placeholder}
-            ref={inputRef}
-            value={value}
-        />
-    </FormItem>
-)
-}
+            <InputNumber
+                disabled={disabled}
+                id={id}
+                max={max}
+                min={min}
+                name={name}
+                step={step ? step : 1}
+                onChange={value => onChange(noneIfNaN((decimal ? parseFloat : parseInt)(value)))}
+                placeholder={placeholder}
+                ref={inputRef}
+                value={value}
+            />
+        </FormItem>
+    );
+};
 
 
 export default connectField(Num);
