@@ -15,13 +15,12 @@ const ListAdd = ({
     const Button = AntIn.Button;
 
     return (
-        <section  className={classnames('pull-right', className)}>
+        <section  className={classnames('pull-right', className)} s>
             <Button
                 type="ghost"
                 size="small"
                 icon="plus-square-o"
                 onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
-                style={{float: 'right', marginTop: '-10px'}}
                 {...filterDOMProps(props)}
             />
         </section>
