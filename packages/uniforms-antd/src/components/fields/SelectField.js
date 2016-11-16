@@ -1,5 +1,6 @@
 import React            from 'react';
 import {connectField}   from 'uniforms';
+import FormGroup from '../forms/FormGroup.js';
 
 // SCHEMA PROTOTYPE
 /*
@@ -67,7 +68,7 @@ const renderCheckboxesAD = ({
     name,
     onChange,
     options,
-    defaultValue,
+    value
 }) => {
     const AntD = require('antd');
     const Checkbox = AntD.Checkbox;
@@ -79,7 +80,7 @@ const renderCheckboxesAD = ({
             id={id}
             name={name}
             onChange={onChange}
-            defaultValue={defaultValue}
+            value={value}
             disabled={disabled}
         />
     );
@@ -98,7 +99,8 @@ const renderSelectAD = ({
     inputRef,
     options,
     fieldType,
-    defaultValue
+    defaultValue,
+    value
 }) => {
     const AntD = require('antd');
     const Select = AntD.Select;
@@ -124,7 +126,7 @@ const renderSelectAD = ({
             name={name}
             onChange={value => onChange(value)}
             ref={inputRef}
-            defaultValue={defaultValue}
+            value={fieldType === Array ? typeof value[0] != 'undefined' ? value : null : typeof value != 'undefined' ? value : null}
         >
             {op.map(val => {
                 let v = '';
@@ -148,14 +150,22 @@ const renderSelectAD = ({
 };
 
 
-class Select extends (React.Component) {
+export class Select extends (React.Component) {
     constructor () {
         super(...arguments);
         this.state = {
         };
     }
     componentWillMount () {
-        this.props.onChange(this.props.defaultValue);
+        if(!this.props.value){
+            this.props.onChange(this.props.defaultValue);
+        }else{
+            if(this.props.fieldType === Array ){
+                if(!this.props.value[0]){
+                    this.props.onChange(this.props.defaultValue);
+                }
+            }
+        }
     }
     render () {
         const {
@@ -175,22 +185,13 @@ class Select extends (React.Component) {
             transform,
             value,
             options,
-            defaultValue
+            defaultValue,
+            info
         },
         props
         } = this;
-        const AntD = require('antd');
-        const Form = AntD.Form;
-        const FormItem = Form.Item;
         return (
-            <FormItem
-                label={label}
-                help={showInlineError ? errorMessage : null}
-                hasFeedback
-                validateStatus={errorMessage ? 'error' : null}
-                htmlFor={id}
-                style={{marginBottom: '12px'}}
-            >
+            <FormGroup errorMessage={errorMessage} id={id} label={label} showInlineError={showInlineError} info={info} >
                 {checkboxes
                     ? renderCheckboxesAD({
                         allowedValues,
@@ -202,7 +203,6 @@ class Select extends (React.Component) {
                         value,
                         fieldType,
                         options,
-                        defaultValue,
                         ...props
                     })
                     : renderSelectAD({
@@ -219,10 +219,9 @@ class Select extends (React.Component) {
                         label,
                         options,
                         fieldType,
-                        defaultValue,
                         ...props
                     })}
-            </FormItem>
+            </FormGroup>
         );
     }
 }

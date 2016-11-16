@@ -1,5 +1,6 @@
 import React            from 'react';
 import {connectField}   from 'uniforms';
+import FormGroup from '../forms/FormGroup.js';
 
 // SCHEMA PROTOTYPE
 /*
@@ -19,22 +20,14 @@ const Bool = ({
     name,
     onChange,
     showInlineError,
-    value
+    value,
+    info
 }) => {
     const AntD = require('antd');
     const Switch = AntD.Switch;
-    const Form = AntD.Form;
     const Icon = AntD.Icon;
-    const FormItem = Form.Item;
     return (
-        <FormItem
-            label={label}
-            help={showInlineError ? errorMessage : null}
-            hasFeedback
-            validateStatus={errorMessage ? 'error' : null}
-            htmlFor={id}
-            style={{marginBottom: '12px'}}
-        >
+        <FormGroup errorMessage={errorMessage} id={id} label={label} showInlineError={showInlineError} info={info} >
             <Switch
                 id={id}
                 name={name}
@@ -45,7 +38,7 @@ const Bool = ({
                 checkedChildren={<Icon type={'check'} />}
                 unCheckedChildren={<Icon type={'cross'} />}
             />
-        </FormItem>
+        </FormGroup>
     );
 };
 

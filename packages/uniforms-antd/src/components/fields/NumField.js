@@ -1,5 +1,6 @@
 import React            from 'react';
 import {connectField}   from 'uniforms';
+import FormGroup from '../forms/FormGroup.js';
 
 // SCHEMA PROTOTYPE
 /*
@@ -31,21 +32,13 @@ const Num = ({
     placeholder,
     showInlineError,
     value,
+    info,
     step,
 }) => {
     const AntD = require('antd');
     const InputNumber = AntD.InputNumber;
-    const Form = AntD.Form;
-    const FormItem = Form.Item;
     return (
-        <FormItem
-            label={label}
-            help={showInlineError ? errorMessage : null}
-            hasFeedback
-            validateStatus={errorMessage ? 'error' : null}
-            htmlFor={id}
-            style={{marginBottom: '12px'}}
-        >
+        <FormGroup errorMessage={errorMessage} id={id} label={label} showInlineError={showInlineError} info={info} >
             <InputNumber
                 disabled={disabled}
                 id={id}
@@ -58,7 +51,7 @@ const Num = ({
                 ref={inputRef}
                 value={value}
             />
-        </FormItem>
+        </FormGroup>
     );
 };
 

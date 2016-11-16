@@ -44,6 +44,7 @@ const schemas = {
         "select": {
             type: String,
             allowedValues: ['111','2222','333','444'],
+            defaultValue: '333'
         },
         "selectOptional": {
             type: String,
@@ -79,7 +80,8 @@ const schemas = {
            type: [String],
            allowedValues: ['111','2222','333','444'],
            uniforms: {
-               checkboxes: true
+               checkboxes: true,
+               info: "select you fav"
            },
            defaultValue: ['333'],
            custom: function(){ return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null )}

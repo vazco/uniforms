@@ -1,6 +1,7 @@
 import React            from 'react';
 import {connectField}   from 'uniforms';
 import moment from 'moment';
+import FormGroup from '../forms/FormGroup.js';
 
 
 
@@ -63,22 +64,15 @@ class Date_ extends (React.Component) {
                 format,
                 allowClear,
                 showTime,
+                info
               }
             } = this;
         const AntD = require('antd');
         const DatePicker = AntD.DatePicker;
-        const FormItem = AntD.Form.Item;
         const enUS = require('antd/lib/date-picker/locale/en_US');
         const LocaleProvider = AntD.LocaleProvider;
         return (
-            <FormItem
-                label={label}
-                help={showInlineError ? errorMessage : null}
-                hasFeedback
-                validateStatus={errorMessage ? 'error' : null}
-                htmlFor={id}
-                style={{marginBottom: '12px'}}
-            >
+            <FormGroup errorMessage={errorMessage} id={id} label={label} showInlineError={showInlineError} info={info} >
                 <LocaleProvider locale={enUS}>
                     <DatePicker
                         ref={inputRef}
@@ -95,7 +89,7 @@ class Date_ extends (React.Component) {
                         value={value instanceof Date ? moment(value.toISOString()) : moment(new Date().toISOString())}
                     />
                 </LocaleProvider>
-            </FormItem>
+            </FormGroup>
         );
     }
 }

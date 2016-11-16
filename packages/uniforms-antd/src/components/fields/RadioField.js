@@ -1,5 +1,6 @@
 import React            from 'react';
 import {connectField}   from 'uniforms';
+import FormGroup from '../forms/FormGroup.js';
 
 // SCHEMA PROTOTYPE
 /*
@@ -23,24 +24,16 @@ const Radio = ({
     onChange,
     showInlineError,
     transform,
+    info,
     value,
     options
 }) => {
     const AntD = require('antd');
     const Radio = AntD.Radio;
     const RadioGroup = Radio.Group;
-    const Form = AntD.Form;
-    const FormItem = Form.Item;
     const op = options ? options : allowedValues;
     return (
-        <FormItem
-            label={label}
-            help={showInlineError ? errorMessage : null}
-            hasFeedback
-            validateStatus={errorMessage ? 'error' : null}
-            htmlFor={id}
-            style={{marginBottom: '12px'}}
-        >
+        <FormGroup errorMessage={errorMessage} id={id} label={label} showInlineError={showInlineError} info={info} >
             <RadioGroup onChange={e => onChange(e.target.value)} value={value} disabled={disabled} name={name}>
                 {op.map(val => {
                     let rad = '';
@@ -76,7 +69,7 @@ const Radio = ({
                     return rad;
                 })}
             </RadioGroup>
-        </FormItem>
+        </FormGroup>
     );
 };
 

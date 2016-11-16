@@ -13,14 +13,14 @@ const ListAdd = ({
     const limitNotReached = !disabled && !(parent.maxCount <= parent.value.length);
     const AntIn = require('antd');
     const Button = AntIn.Button;
-
     return (
-        <section  className={classnames('pull-right', className)} s>
+        <section  className={classnames('pull-right', className)}>
             <Button
                 type="ghost"
                 size="small"
                 icon="plus-square-o"
                 onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
+                style={{float: 'right'}}
                 {...filterDOMProps(props)}
             />
         </section>

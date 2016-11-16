@@ -1,5 +1,6 @@
 import React            from 'react';
 import {connectField}   from 'uniforms';
+import FormGroup from '../forms/FormGroup.js';
 
 // SCHEMA PROTOTYPE
 /*
@@ -29,20 +30,13 @@ const Text = ({
     type,
     value,
     rows,
+    info,
+    ...props
 }) => {
     const AntD = require('antd');
     const Input = AntD.Input;
-    const Form = AntD.Form;
-    const FormItem = Form.Item;
     return (
-        <FormItem
-            label={label}
-            help={showInlineError ? errorMessage : null}
-            hasFeedback
-            validateStatus={errorMessage ? 'error' : null}
-            htmlFor={id}
-            style={{marginBottom: '12px'}}
-        >
+        <FormGroup errorMessage={errorMessage} id={id} label={label} showInlineError={showInlineError} info={info}>
             <Input
                 disabled={disabled}
                 id={id}
@@ -54,7 +48,7 @@ const Text = ({
                 rows={rows}
                 value={value}
             />
-        </FormItem>
+        </FormGroup>
     );
 }
 ;
