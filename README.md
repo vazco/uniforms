@@ -32,6 +32,8 @@ In short: uniforms is a set of npm packages, which contains helpers and [React](
 
 <br>
 
+# Table of Contents
+
 - [Installation](#installation)
     - [meteor](#meteor)
     - [npm](#npm)
