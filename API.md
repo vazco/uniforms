@@ -1,5 +1,3 @@
-**Note:** This page is incomplete. For more, please refer to `index.js` of each package - you can find there all exported components and helpers. Also, go ahead and take a look on tests and source - it's not well documented but readable.
-
 # Table of Contents
 
 - [Fields](#fields)
@@ -548,6 +546,27 @@ import {LongTextField} from 'uniforms-unstyled'; // Choose your theme package.
 
 ## `NestField`
 
+```js
+import {NestField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<NestField
+    // Array of rendered fields.
+    //   If no custom content provided, only those fields are rendered. By
+    //   default, all of nested fields are rendered.
+    fields={['fieldA', 'fieldB', ...]}
+
+    // Field inline error.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    //   semantic
+    showInlineError={true}
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.
+
 ## `NumField`
 
 ```js
@@ -645,7 +664,93 @@ import {NumField} from 'uniforms-unstyled'; // Choose your theme package.
 
 ## `RadioField`
 
+```js
+import {RadioField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<RadioField
+    // Array of allowed values.
+    //   By default, those are extracted from your schema.
+    allowedValues={[value1, value2, ...]}
+
+    // Checkbox inline state.
+    //   In bootstrpa themes, label is rendered as a text, but in inline mode,
+    //   it's treated as a field label.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    inline={true}
+
+    // Input wrapper class name.
+    //   In bootstrap themes, passed className is used on field block. This is
+    //   used on direct field wrapper.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    inputClassName="a b c"
+
+    // Field inline error.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   semantic
+    showInlineError={true}
+
+    // Label transform.
+    //   *Some description would be great, huh?*
+    transform={value => label}
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.
+
 ## `SelectField`
+
+```js
+import {SelectField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<SelectField
+    // Array of allowed values.
+    //   By default, those are extracted from your schema.
+    allowedValues={[value1, value2, ...]}
+
+    // Turn on checkbox/radio mode.
+    //   It's always true in mutltiple (i.e. fieldType === Array) mode.
+    checkboxes={true}
+
+    // Checkbox inline state.
+    //   In bootstrpa themes, label is rendered as a text, but in inline mode,
+    //   it's treated as a field label.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    inline={true}
+
+    // Input wrapper class name.
+    //   In bootstrap themes, passed className is used on field block. This is
+    //   used on direct field wrapper.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    inputClassName="a b c"
+
+    // Input ref.
+    //   Setting ref prop to a field, won't work as desired, because you'll
+    //   receive field component, not HTML input. If you need an input ref, use
+    //   this prop instead.
+    inputRef={ref => {}}
+
+    // Field inline error.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   semantic
+    showInlineError={true}
+
+    // Label transform.
+    //   *Some description would be great, huh?*
+    transform={value => label}
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.
 
 ## `SubmitField`
 
