@@ -369,11 +369,97 @@ import {HiddenField} from 'uniforms-unstyled'; // Choose your theme package.
 
 ## `ListAddField`
 
+```js
+import {ListAddField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<ListAddField
+    // Icon.
+    //   By default, glyphicon is used.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    addIcon={<MyAddIcon />}
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.<br>
+**Note:** This is one of _internal_ components of `ListField`.
+
 ## `ListDelField`
+
+```js
+import {ListDelField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<ListDelField
+    // Icon.
+    //   By default, glyphicon is used.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    removeIcon={<MyRemoveIcon />}
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.<br>
+**Note:** This is one of _internal_ components of `ListField`.
 
 ## `ListField`
 
+```js
+import {ListField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<ListField
+    // Icon.
+    //   It's passed to the ListAddField.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    addIcon={<MyAddIcon />}
+
+    // Initial items count.
+    //   At least this amount of fields will be rendered at the beginning.
+    initialCount={5}
+
+    // ListItemField props.
+    //   These props are passed to the ListItemField.
+    itemProps={{/* ... /*}}
+
+    // Icon.
+    //   It's passed to the ListDelField.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    removeIcon={<MyRemoveIcon />}
+
+    // Field inline error.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    //   semantic
+    showInlineError={true}
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.
+
 ## `ListItemField`
+
+```js
+import {ListItemField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<ListItemField
+    // Icon.
+    //   It's passed to the ListDelField.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    removeIcon={<MyRemoveIcon />}
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.<br>
+**Note:** This is one of _internal_ components of `ListField`.
 
 ## `LongTextField`
 
