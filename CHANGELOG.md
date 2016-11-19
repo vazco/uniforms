@@ -1,4 +1,4 @@
-## Next
+## [v1.6.0-beta.4](https://github.com/vazco/uniforms/releases/tag/v1.6.0-beta.4)
 - **Fixed:** Handling of initial values. [\#135](https://github.com/vazco/uniforms/issues/135)
 
 <br>
