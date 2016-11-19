@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
-    "babel-eslint": "^7.1.0",
+    "babel-eslint": "^7.1.1",
     "babel-plugin-istanbul": "^3.0.0",
     "babel-plugin-transform-object-assign": "^6.8.0",
     "babel-plugin-transform-react-inline-elements": "^6.8.0",
@@ -49,7 +49,7 @@
     "enzyme": "^2.6.0",
     "eslint": "^3.10.2",
     "eslint-config-vazco": "2.2.0",
-    "eslint-plugin-babel": "3.3.0",
+    "eslint-plugin-babel": "4.0.0",
     "eslint-plugin-react": "6.7.1",
     "eslint-plugin-vazco": "1.0.0",
     "graphql": "^0.8.2",
