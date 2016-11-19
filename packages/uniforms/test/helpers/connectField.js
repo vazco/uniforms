@@ -122,7 +122,7 @@ describe('connectField', () => {
 
     context('when called with `initialValue`', () => {
         it('includes default value (true)', () => {
-            const Field = connectField(Test, {initialValue: true});
+            const Field = connectField(Test, {initialValue: true, ensureValue: false});
 
             mount(
                 <Field name="field" />,

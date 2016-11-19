@@ -1,4 +1,9 @@
 ## Next
+- **Fixed:** Handling of initial values. [\#135](https://github.com/vazco/uniforms/issues/135)
+
+<br>
+
+## [v1.6.0-beta.3](https://github.com/vazco/uniforms/releases/tag/v1.6.0-beta.3)
 - **Changed:** Components created with `connectField` have now different `displayName` to match forms inheritance.
 - **Fixed:** Handling of `defaultValue` in `SimpleSchema2Bridge`. [\#130](https://github.com/vazco/uniforms/issues/130)
 

@@ -46,7 +46,7 @@ const Num = ({
                 ref={inputRef}
                 step={decimal ? 0.01 : 1}
                 type="number"
-                value={value === undefined ? null : value}
+                value={value}
             />
 
             {(icon || iconLeft) && (
