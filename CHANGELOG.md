@@ -1,3 +1,8 @@
+## Next
+- **Fixed:** Handling of `defaultValue` in `SimpleSchema2Bridge`. [\#130](https://github.com/vazco/uniforms/issues/130)
+
+<br>
+
 ## [v1.6.0-beta.2](https://github.com/vazco/uniforms/releases/tag/v1.6.0-beta.2)
 - **Fixed:** GraphQL conditional import.
 
@@ -75,7 +80,7 @@
 <br>
 
 ## [v1.1.2](https://github.com/vazco/uniforms/releases/tag/v1.1.2)
-- **Fixed:** Enabled SimpleSchema2Bridge. [\#107](https://github.com/vazco/uniforms/issues/107)
+- **Fixed:** Enabled `SimpleSchema2Bridge`. [\#107](https://github.com/vazco/uniforms/issues/107)
 
 <br>
 
