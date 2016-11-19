@@ -12,7 +12,7 @@ export default function connectField (component, {
     initialValue   = true
 } = {}) {
     return class extends baseField {
-        static displayName = `${baseField.displayName || baseField.name}(${component.displayName || component.name})`;
+        static displayName = `${component.displayName || component.name}${baseField.displayName || baseField.name}`;
 
         constructor () {
             super(...arguments);

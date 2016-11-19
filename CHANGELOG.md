@@ -1,4 +1,5 @@
 ## Next
+- **Changed:** Components created with `connectField` have now different `displayName` to match forms inheritance.
 - **Fixed:** Handling of `defaultValue` in `SimpleSchema2Bridge`. [\#130](https://github.com/vazco/uniforms/issues/130)
 
 <br>

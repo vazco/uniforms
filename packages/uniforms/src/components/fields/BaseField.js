@@ -7,6 +7,8 @@ import BaseForm from '../forms/BaseForm';
 import joinName from '../../helpers/joinName';
 
 export default class BaseField extends Component {
+    static displayName = 'Field';
+
     static propTypes = {
         id: PropTypes.string,
 
