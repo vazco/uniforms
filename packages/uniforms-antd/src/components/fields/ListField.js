@@ -7,6 +7,7 @@ import {joinName}       from 'uniforms';
 
 import ListAddField  from './ListAddField';
 import ListItemField from './ListItemField';
+import {InfoMessage} from './InfoMessage';
 
 const List = ({
     children,
@@ -15,12 +16,12 @@ const List = ({
     error,
     errorMessage,
     initialCount,
-    itemProps,
     label,
     name,
     required,
     showInlineError,
     value,
+    info,
     ...props
 }) => {
     return (
@@ -33,14 +34,12 @@ const List = ({
                 marginBottom: '5px',
                 marginTop: '5px'
             }}
-            {...filterDOMProps(props)}
         >
             {label && (
                 <section className={classnames({error, required}, 'field item')}>
                     <label className="left floated">
-                        {label}
+                        <span>{label}{info && (<span>&nbsp;<InfoMessage info={info} /></span>)}</span>
                     </label>
-
                     <ListAddField name={`${name}.$`} initialCount={initialCount} className="right floated" />
                 </section>
             )}
@@ -67,7 +66,7 @@ const List = ({
                 )
             ) : (
                 value.map((item, index) =>
-                    <ListItemField key={index} label={null} name={joinName(name, index)} {...itemProps} />
+                    <ListItemField key={index} label={null} name={joinName(name, index)} {...filterDOMProps(props)} />
                 )
             )}
         </section>

@@ -56,15 +56,25 @@ const schemas = {
             allowedValues: ['ggg','hhh','jjj','kkk'],
             minCount: 1,
             defaultValue: ['jjj'],
-            custom: function(){ return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null )}
+            custom: function(){
+                return(this.value.length === 0 ? "minCount" : this.value[0] == null ? "minCount" : null)
+            }
         },
         "multiselect": {
             type: [String],
             minCount: 1,
             defaultValue: ['bbb'],
-            custom: function(){ return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null )},
+            custom: function(){
+                return(this.value.length === 0 ? "minCount" : this.value[0] == null ? "minCount" : null)
+            },
             uniforms:{
-                    options: [{value: 'aaa', label: 'a'},{value: 'bbb', label: 'b'},{value: 'ccc', label: 'c'},{value: 'ddd', label: 'd'}]
+                    options:
+                        [
+                            {value: 'aaa', label: 'a'},
+                            {value: 'bbb', label: 'b'},
+                            {value: 'ccc', label: 'c'},
+                            {value: 'ddd', label: 'd'}
+                        ]
                 }
         },
         "radio": {
@@ -74,7 +84,9 @@ const schemas = {
                 checkboxes: true
             },
             defaultValue: '111',
-            custom: function(){ return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null )}
+            custom: function(){
+                return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null)
+            }
         },
         "checkboxes": {
            type: [String],
@@ -84,7 +96,9 @@ const schemas = {
                info: "select you fav"
            },
            defaultValue: ['333'],
-           custom: function(){ return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null )}
+           custom: function(){
+               return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null)
+           }
        },
         datesamplefield: {
           type: Date,
