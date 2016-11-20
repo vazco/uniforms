@@ -3,6 +3,25 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 const schema = strings => strings[0].replace(/([\r\n]+) {4}/g, '$1');
 const schemas = {
     'Example - address': schema`{
+        colorArray: {
+          type: [String],
+          label: "Hex color value for chart text.",
+          uniforms: {
+            fieldComponent: 'color',
+            colorRatios: [0.35, 0.7, -0.2, -0.4],
+            info: "Hex color value"
+          }
+      },
+        colorOne: {
+          type: String,
+          label: "Hex color value for chart text.",
+          defaultValue: "#434d52",
+          uniforms: {
+            fieldComponent: 'color',
+            colorRatios: [0.35, 0.7, -0.2, -0.4],
+            info: "Hex color value"
+          }
+      },
         'array.$.test': {
             type: String
         },

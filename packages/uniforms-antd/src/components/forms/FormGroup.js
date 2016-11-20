@@ -1,5 +1,5 @@
 import React      from 'react';
-import {InfoMessage} from '../fields/InfoMessage.js';
+import {InfoMessage} from '../fields/InfoMessage';
 const FormGroup = ({
     children,
     errorMessage,      // errorMessage string of error

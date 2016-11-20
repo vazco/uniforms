@@ -16,7 +16,6 @@ export {default as RadioField}    from './components/fields/RadioField';
 export {default as SelectField}   from './components/fields/SelectField';
 export {default as SubmitField}   from './components/fields/SubmitField';
 export {default as TextField}     from './components/fields/TextField';
-export {default as InfoMessage}   from './components/fields/InfoMessage';
 
 export {default as AutoForm}           from './components/forms/AutoForm';
 export {default as BaseForm}           from './components/forms/BaseForm';
@@ -25,4 +24,7 @@ export {default as ValidatedForm}      from './components/forms/ValidatedForm';
 export {default as ValidatedQuickForm} from './components/forms/ValidatedQuickForm';
 export {default as FormGroup}          from './components/forms/FormGroup';
 
-export {Select}   from './components/fields/SelectField';
+export {default as ColorPickerField}   from './components/fields/ColorPickerField';
+
+export {default as InfoMessage}   from './components/fields/InfoMessage';
+export {Select} from './components/fields/SelectField';

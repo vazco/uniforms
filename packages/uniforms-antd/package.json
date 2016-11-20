@@ -1,6 +1,6 @@
 {
   "name": "uniforms-antd-extended",
-  "version": "1.5.19",
+  "version": "1.5.21",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "description": "Ant Design UI components for uniforms.",
@@ -62,7 +62,7 @@
     "sinon": "^2.0.0-pre.3"
   },
   "peerDependencies": {
-    "react": "^15.0.0 || ^0.14.0",
+    "react": "^15.4.0 || ^0.14.0",
     "uniforms": "^1.5.0"
   },
   "babel": {
@@ -107,6 +107,8 @@
     "babel-runtime": "^6.18.0",
     "classnames": "^2.2.5",
     "invariant": "^2.2.1",
-    "moment": "^2.14.0"
+    "moment": "^2.14.0",
+    "react-color": "^2.6.0",
+    "reactcss": "^1.1.1"
   }
 }

@@ -10,26 +10,37 @@ import NestField   from './NestField';
 import TextField   from './TextField';
 import RadioField  from './RadioField';
 import SelectField from './SelectField';
+import ColorPickerField from './ColorPickerField';
 
 const Auto = ({component, ...props}) => {
     if (component === undefined) {
-        if (props.allowedValues) {
-            if (props.checkboxes && props.fieldType !== Array) {
-                component = RadioField;
+        if(props.fieldComponent){
+            if(props.fieldType === Array){
+                component = ListField;
+            }else{
+                switch (props.fieldComponent) {
+                    case 'color':    component = ColorPickerField; break;
+                }
+                invariant(component, 'Unsupported field component: %s', props.fieldComponent);
+            }
+        }else{
+            if (props.allowedValues) {
+                if (props.checkboxes && props.fieldType !== Array) {
+                    component = RadioField;
+                } else {
+                    component = SelectField;
+                }
             } else {
-                component = SelectField;
+                switch (props.fieldType) {
+                    case Date:    component = DateField; break;
+                    case Array:   component = ListField; break;
+                    case Number:  component = NumField;  break;
+                    case Object:  component = NestField; break;
+                    case String:  component = TextField; break;
+                    case Boolean: component = BoolField; break;
+                }
+                invariant(component, 'Unsupported field type: %s', props.fieldType.toString());
             }
-        } else {
-            switch (props.fieldType) {
-                case Date:    component = DateField; break;
-                case Array:   component = ListField; break;
-                case Number:  component = NumField;  break;
-                case Object:  component = NestField; break;
-                case String:  component = TextField; break;
-                case Boolean: component = BoolField; break;
-            }
-
-            invariant(component, 'Unsupported field type: %s', props.fieldType.toString());
         }
     }
     return createElement(component, props);
