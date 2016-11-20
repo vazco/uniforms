@@ -1,7 +1,5 @@
-import Frame      from 'react-frame-component';
 import PanelGroup from 'react-panelgroup';
 import React      from 'react';
-import enUS from 'antd/lib/date-picker/locale/en_US';
 import {getSchemas} from '/assets/schemas';
 import {getSchema}  from '/assets/schemas';
 import {getStyles}  from '/assets/styles';
@@ -35,8 +33,8 @@ export class Application extends React.Component {
     onTheme ({target: {value}}) {
         this.setState({doc: null, styles: getStyles(value), theme: getTheme(value)});
     }
-    changeInlineError(){
-        this.setState({showInlineError: !this.state.showInlineError})
+    changeInlineError () {
+        this.setState({showInlineError: !this.state.showInlineError});
     }
 
     render () {
@@ -86,56 +84,48 @@ export class Application extends React.Component {
                                     </option>
                                 )}
                             </select>
-
-                            <input type='checkbox' onChange={changeInlineError} />
+                            <input type="checkbox" onChange={changeInlineError} />
                         </section>
                     </nav>
 
-                    <textarea spellCheck={false} value={schema.string} onChange={onSchema} style={{fontSize: '13px', lineHeight: '1'}}/>
-                    {/*
-                    <a href="https://github.com/vazco/uniforms">
-
-                        <img
-                            alt="Fork me on GitHub"
-                            data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
-                            src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
-                        />
-
-                    </a>
-                */}
+                    <textarea
+                        spellCheck={false}
+                        value={schema.string}
+                        onChange={onSchema}
+                        style={{fontSize: '13px', lineHeight: '1'}}
+                    />
                 </section>
-                <section style={{margin: '20px', fontSize: '13px', lineHeight: '1', overflow: 'scroll' }}>
+                <section style={{margin: '20px', fontSize: '13px', lineHeight: '1', overflow: 'scroll'}}>
                     {styles}
-                        <div>
+                    <div>
                         {schema.object ? (
                             <theme.components.AutoForm
                                 key={schema.string}
                                 schema={schema.object}
                                 showInlineError={showInlineError}
                                 onSubmit={doc => {
-                                    console.log(doc)
-                                    this.setState({doc: JSON.stringify(doc, null, 4)})
-                            }
-                            }
+                                    //console.log(doc);
+                                    this.setState({doc: JSON.stringify(doc, null, 4)});
+                                }}
                             />
                         ) : (
                             <span>
                                 {schema.error.message}
                             </span>
                         )}
-                        </div>
-                        <div>
+                    </div>
+                    <div>
                         {!!doc && (
                             <br />
                         )}
-                        </div>
-                        <div>
+                    </div>
+                    <div>
                         {!!doc && (
                             <pre>
                                 {doc}
                             </pre>
                         )}
-                        </div>
+                    </div>
                 </section>
             </PanelGroup>
         );

@@ -99,7 +99,6 @@ const renderSelectAD = ({
     inputRef,
     options,
     fieldType,
-    defaultValue,
     value
 }) => {
     const AntD = require('antd');
@@ -126,7 +125,10 @@ const renderSelectAD = ({
             name={name}
             onChange={value => onChange(value)}
             ref={inputRef}
-            value={fieldType === Array ? typeof value[0] != 'undefined' ? value : null : typeof value != 'undefined' ? value : null}
+            value={fieldType === Array ?
+                typeof value[0] != 'undefined' ?
+                    value : null : typeof value != 'undefined' ?
+                        value : null}
         >
             {op.map(val => {
                 let v = '';
@@ -157,14 +159,15 @@ export class Select extends (React.Component) {
         };
     }
     componentWillMount () {
-        if(!this.props.value){
+        if (!this.props.value) {
             this.props.onChange(this.props.defaultValue);
-        }else{
-            if(this.props.fieldType === Array ){
-                if(!this.props.value[0]){
-                    this.props.onChange(this.props.defaultValue);
-                }
-            }
+            return;
+        }
+        if (this.props.fieldType !== Array) {
+            return;
+        }
+        if (!this.props.value[0]) {
+            this.props.onChange(this.props.defaultValue);
         }
     }
     render () {
@@ -185,13 +188,18 @@ export class Select extends (React.Component) {
             transform,
             value,
             options,
-            defaultValue,
             info
         },
         props
         } = this;
         return (
-            <FormGroup errorMessage={errorMessage} id={id} label={label} showInlineError={showInlineError} info={info} >
+            <FormGroup
+                errorMessage={errorMessage}
+                id={id}
+                label={label}
+                showInlineError={showInlineError}
+                info={info}
+            >
                 {checkboxes
                     ? renderCheckboxesAD({
                         allowedValues,
