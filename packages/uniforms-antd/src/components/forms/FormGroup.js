@@ -10,10 +10,9 @@ const FormGroup = ({
     info
 }) => {
     const AntD = require('antd');
-    const Input = AntD.Input;
     const Form = AntD.Form;
     const FormItem = Form.Item;
-    return(
+    return (
         <FormItem
             label={label && (<span>{label}{info && (<span>&nbsp;<InfoMessage info={info} /></span>)}</span>)}
             help={showInlineError && (errorMessage)}
@@ -22,9 +21,9 @@ const FormGroup = ({
             htmlFor={id}
             style={{marginBottom: '12px'}}
         >
-          {children}
+            {children}
         </FormItem>
     );
-}
+};
 
 export default FormGroup;

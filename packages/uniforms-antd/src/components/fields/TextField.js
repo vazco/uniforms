@@ -30,8 +30,7 @@ const Text = ({
     type,
     value,
     rows,
-    info,
-    ...props
+    info
 }) => {
     const AntD = require('antd');
     const Input = AntD.Input;

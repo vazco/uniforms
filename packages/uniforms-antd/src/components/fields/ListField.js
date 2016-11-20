@@ -16,7 +16,6 @@ const List = ({
     error,
     errorMessage,
     initialCount,
-    itemProps,
     label,
     name,
     required,
@@ -41,7 +40,6 @@ const List = ({
                     <label className="left floated">
                         <span>{label}{info && (<span>&nbsp;<InfoMessage info={info} /></span>)}</span>
                     </label>
-
                     <ListAddField name={`${name}.$`} initialCount={initialCount} className="right floated" />
                 </section>
             )}
