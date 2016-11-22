@@ -1,4 +1,27 @@
-## Next
+## [v1.6.0](https://github.com/vazco/uniforms/releases/tag/v1.6.0)
+
+<br>
+
+## [v1.6.0-beta.4](https://github.com/vazco/uniforms/releases/tag/v1.6.0-beta.4)
+- **Fixed:** Handling of initial values. [\#135](https://github.com/vazco/uniforms/issues/135)
+
+<br>
+
+## [v1.6.0-beta.3](https://github.com/vazco/uniforms/releases/tag/v1.6.0-beta.3)
+- **Changed:** Components created with `connectField` have now different `displayName` to match forms inheritance.
+- **Fixed:** Handling of `defaultValue` in `SimpleSchema2Bridge`. [\#130](https://github.com/vazco/uniforms/issues/130)
+
+<br>
+
+## [v1.6.0-beta.2](https://github.com/vazco/uniforms/releases/tag/v1.6.0-beta.2)
+- **Fixed:** GraphQL conditional import.
+
+<br>
+
+## [v1.6.0-beta.1](https://github.com/vazco/uniforms/releases/tag/v1.6.0-beta.1)
+- **Changed:** Added GraphQL schema support. [\#118](https://github.com/vazco/uniforms/issues/118)
+- **Changed:** Optimized build size.
+- **Changed:** Removed `invariant` and `warning` dependencies.
 - **Changed:** `Bridge` cannot be instantiated.
 - **Changed:** `Bridge` constructor is now noop.
 - **Changed:** `Bridge` methods are now throwing an _unimplemented method_ errors.
@@ -67,7 +90,7 @@
 <br>
 
 ## [v1.1.2](https://github.com/vazco/uniforms/releases/tag/v1.1.2)
-- **Fixed:** Enabled SimpleSchema2Bridge. [\#107](https://github.com/vazco/uniforms/issues/107)
+- **Fixed:** Enabled `SimpleSchema2Bridge`. [\#107](https://github.com/vazco/uniforms/issues/107)
 
 <br>
 

@@ -32,6 +32,8 @@ In short: uniforms is a set of npm packages, which contains helpers and [React](
 
 <br>
 
+# Table of Contents
+
 - [Installation](#installation)
     - [meteor](#meteor)
     - [npm](#npm)
@@ -58,6 +60,7 @@ In short: uniforms is a set of npm packages, which contains helpers and [React](
         - [Example: `RangeField`](#example-rangefield)
         - [Example: `RatingField`](#example-ratingfield)
     - [Schemas](#schemas)
+        - [GraphQL definition](#graphql-definition)
         - [SimpleSchema definition](#simpleschema-definition)
         - [Example: `MyLittleSchema`](#example-mylittleschema)
     - [Context data](#context-data)
@@ -89,6 +92,9 @@ $ meteor add aldeed:simple-schema check
 # If you are going to use SimpleSchema@2
 $ meteor npm install simpl-schema
 
+# If you are going to use GraphQL
+$ meteor npm install graphql
+
 # Components (pick one)
 $ meteor npm install --save react react-dom uniforms uniforms-bootstrap3
 $ meteor npm install --save react react-dom uniforms uniforms-bootstrap4
@@ -110,7 +116,7 @@ $ npm install --save react react-dom uniforms uniforms-unstyled
 
 # Quick start
 
-**Note:** The following examples are designed to work out of box in meteor with `SimpleSchema` (a very common schema in meteor community), but it's not mandatory and you can easily use it without meteor and with different schemas (see: [Custom Schema](#schemas)).
+**Note:** The following examples are designed to work out of box in meteor with `SimpleSchema` (a very common schema in meteor community), but it's not mandatory and you can easily use it without meteor and with different schemas (see: [Custom Schema](#schemas)) There's also GraphQL support.
 
 Let's start with defining an example schema:
 
@@ -363,8 +369,8 @@ const Modifier = parent => class extends parent {
         const doc  = this.getModel();
         const keys = this.getChildContextSchema().getSubfields();
 
-        const update = keys.filter(key =>  doc[key]);
-        const remove = keys.filter(key => !doc[key]);
+        const update = keys.filter(key => doc[key] !== undefined);
+        const remove = keys.filter(key => doc[key] === undefined);
 
         // It's a good idea to omit empty modifiers.
         const $set   = update.reduce((acc, key) => ({...acc, [key]: doc[key]}), {});
@@ -640,10 +646,70 @@ To make use of any schema, uniforms have to create a _bridge_ of it - unified sc
 
 Currently built in bridges:
 
+- `GraphQLBridge`
 - `SimpleSchemaBridge`
 - `SimpleSchema2Bridge`
 
 **Note:** To read more see [API](#api) and [`Bridge`](https://github.com/vazco/uniforms/blob/master/packages/uniforms/src/bridges/Bridge.js).
+
+### GraphQL definition
+
+```js
+import {GraphQLBridge}  from 'uniforms';
+import {buildASTSchema} from 'graphql';
+import {parse}          from 'graphql';
+
+const schema = `
+    type Author {
+        id:        String!
+        firstName: String
+        lastName:  String
+    }
+
+    type Post {
+        id:     Int!
+        author: Author!
+        title:  String
+        votes:  Int
+    }
+
+    # This is required by buildASTSchema
+    type Query { anything: ID }
+`;
+
+const schemaType = buildASTSchema(parse(schema)).getType('Post');
+const schemaData = {
+    id: {
+        allowedValues: [1, 2, 3]
+    },
+    title: {
+        options: [
+            {label: 1, value: 'a'},
+            {label: 2, value: 'b'}
+        ]
+    }
+};
+
+const schemaValidator = model => {
+    const details = [];
+
+    if (!model.id) {
+        details.push({name: 'id', message: 'ID is required!'});
+    }
+
+    // ...
+
+    if (details.length) {
+        throw {details};
+    }
+};
+
+const bridge = new GraphQLBridge(schemaType, schemaValidator, schemaData);
+
+// Later...
+
+<ValidatedForm schema={bridge} />
+```
 
 ### SimpleSchema definition
 

@@ -1,7 +1,7 @@
 /* global Package */
 
 import cloneDeep from 'lodash.clonedeep';
-import invariant from 'invariant';
+import invariant from 'fbjs/lib/invariant';
 
 import Bridge         from './Bridge';
 import joinName       from '../helpers/joinName';
@@ -204,7 +204,7 @@ export default class SimpleSchemaBridge extends Bridge {
                 field = {
                     ...field,
                     transform: value => options.find(option => option.value === value).label,
-                    allowedValues: options.map(options => options.value)
+                    allowedValues: options.map(option => option.value)
                 };
             }
         }

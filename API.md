@@ -1,6 +1,4 @@
-**Note:** This page is incomplete. For more, please refer to `index.js` of each package - you can find there all exported components and helpers. Also, go ahead and take a look on tests and source - it's not well documented but readable.
-
-<br>
+# Table of Contents
 
 - [Fields](#fields)
     - [`AutoField`](#autofield)
@@ -40,6 +38,7 @@
     - [`randomIds`](#randomids)
 - [Schemas](#schemas)
     - [`Bridge`](#bridge)
+    - [`GraphQLBridge`](#graphqlbridge)
     - [`SimpleSchemaBridge`](#simpleschemabridge)
     - [`SimpleSchema2Bridge`](#simpleschema2bridge)
     - [`createSchemaBridge`](#createschemabridge)
@@ -121,6 +120,10 @@ import {BaseField} from 'uniforms';
     //   If set to true, then label will be used. Otherwise, it's handled like
     //   label (including propagation).
     placeholder={false}
+
+    // Field value.
+    //   Every field accept only it's specific value type.
+    value={/* accepted value */}
 
     // You can pass any prop, but remember, that passing onChange will "detach"
     // the field from the form in some way - it won't change your form state.
@@ -217,33 +220,650 @@ import {BoolField} from 'uniforms-unstyled'; // Choose your theme package.
 
 ## `DateField`
 
+```js
+import {DateField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<DateField
+    // Field feedback state.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap4
+    feedbackable={true}
+
+    // Field layout.
+    //   Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object
+    //   is a {mode: size} object. Complete string is simply passed through.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    grid={3}        // 'col-3-sm' on label, 'col-9-sm' on input
+    grid="4"        // 'col-4-sm' on label, 'col-8-sm' on input
+    grid={{md: 5}}  // 'col-5-md' on label, 'col-7-md' on input
+    grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
+
+    // Help text.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    help="Need help?"
+
+    // Help block className.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    helpClassName="a b c"
+
+    // Input icon.
+    //   Semantic inputs can have an icon. By default, it's placed on the right
+    //   side - to place it on the left, use iconLeft prop instead.
+    // Available in:
+    //   semantic
+    icon="user"
+
+    // Input left icon.
+    //   Semantic inputs can have an icon. With this prop, it's placed on the
+    //   left side - to place it on the right, use icon prop instead.
+    // Available in:
+    //   semantic
+    iconLeft="user"
+
+    // Input icon props.
+    //   Semantic inputs can have an icon. These props are passed directly to
+    //   the icon element.
+    // Available in:
+    //   semantic
+    iconProps={{onClick () {}}}
+
+    // Input wrapper class name.
+    //   In bootstrap themes, passed className is used on field block. This is
+    //   used on direct field wrapper.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    inputClassName="a b c"
+
+    // Input ref.
+    //   Setting ref prop to a field, won't work as desired, because you'll
+    //   receive field component, not HTML input. If you need an input ref, use
+    //   this prop instead.
+    inputRef={ref => {}}
+
+    // Maximum value.
+    //   Date object.
+    max={new Date(2100, 1, 1)}
+
+    // Minimal value.
+    //   Date object.
+    min={new Date(2000, 1, 1)}
+
+    // Field inline error.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    //   semantic
+    showInlineError={true}
+
+    // Field and sourroundings wrap className.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    wrapClassName="a b c"
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.
+
 ## `ErrorField`
+
+```js
+import {ErrorField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<ErrorField
+    // Custom content.
+    //   By default, it will render a block with the error message (if any), but
+    //   you can customize the content.
+    children={/* ... */}
+
+    // Target field.
+    //   This field error should be used.
+    name="field"
+/>
+```
 
 ## `ErrorsField`
 
+```js
+import {ErrorsField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<ErrorsField
+    // Custom content.
+    //   By default, it will render a block with the error messages (if any),
+    //   but you can customize the content.
+    children={/* ... */}
+/>
+```
+
 ## `HiddenField`
+
+```js
+import {HiddenField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<HiddenField
+    // Field name.
+    //   Used for identification. It should match with your schema - if not, it
+    //   will throw an error.
+    name="field"
+
+    // Field value.
+    //   This field have completely different semantics. When a value is set,
+    //   then it's updating current model instead of being passed to the field.
+    value={/* ... */}
+/>
+```
 
 ## `ListAddField`
 
+```js
+import {ListAddField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<ListAddField
+    // Icon.
+    //   By default, glyphicon is used.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    addIcon={<MyAddIcon />}
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.<br>
+**Note:** This is one of _internal_ components of `ListField`.
+
 ## `ListDelField`
+
+```js
+import {ListDelField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<ListDelField
+    // Icon.
+    //   By default, glyphicon is used.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    removeIcon={<MyRemoveIcon />}
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.<br>
+**Note:** This is one of _internal_ components of `ListField`.
 
 ## `ListField`
 
+```js
+import {ListField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<ListField
+    // Icon.
+    //   It's passed to the ListAddField.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    addIcon={<MyAddIcon />}
+
+    // Initial items count.
+    //   At least this amount of fields will be rendered at the beginning.
+    initialCount={5}
+
+    // ListItemField props.
+    //   These props are passed to the ListItemField.
+    itemProps={{/* ... /*}}
+
+    // Icon.
+    //   It's passed to the ListDelField.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    removeIcon={<MyRemoveIcon />}
+
+    // Field inline error.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    //   semantic
+    showInlineError={true}
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.
+
 ## `ListItemField`
+
+```js
+import {ListItemField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<ListItemField
+    // Icon.
+    //   It's passed to the ListDelField.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    removeIcon={<MyRemoveIcon />}
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.<br>
+**Note:** This is one of _internal_ components of `ListField`.
 
 ## `LongTextField`
 
+```js
+import {LongTextField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<LongTextField
+    // Field layout.
+    //   Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object
+    //   is a {mode: size} object. Complete string is simply passed through.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    grid={3}        // 'col-3-sm' on label, 'col-9-sm' on input
+    grid="4"        // 'col-4-sm' on label, 'col-8-sm' on input
+    grid={{md: 5}}  // 'col-5-md' on label, 'col-7-md' on input
+    grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
+
+    // Help text.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    help="Need help?"
+
+    // Help block className.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    helpClassName="a b c"
+
+    // Input icon.
+    //   Semantic inputs can have an icon. By default, it's placed on the right
+    //   side - to place it on the left, use iconLeft prop instead.
+    // Available in:
+    //   semantic
+    icon="user"
+
+    // Input left icon.
+    //   Semantic inputs can have an icon. With this prop, it's placed on the
+    //   left side - to place it on the right, use icon prop instead.
+    // Available in:
+    //   semantic
+    iconLeft="user"
+
+    // Input icon props.
+    //   Semantic inputs can have an icon. These props are passed directly to
+    //   the icon element.
+    // Available in:
+    //   semantic
+    iconProps={{onClick () {}}}
+
+    // Input wrapper class name.
+    //   In bootstrap themes, passed className is used on field block. This is
+    //   used on direct field wrapper.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    inputClassName="a b c"
+
+    // Input ref.
+    //   Setting ref prop to a field, won't work as desired, because you'll
+    //   receive field component, not HTML input. If you need an input ref, use
+    //   this prop instead.
+    inputRef={ref => {}}
+
+    // Field inline error.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    //   semantic
+    showInlineError={true}
+
+    // Field and sourroundings wrap className.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    wrapClassName="a b c"
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.
+
 ## `NestField`
+
+```js
+import {NestField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<NestField
+    // Array of rendered fields.
+    //   If no custom content provided, only those fields are rendered. By
+    //   default, all of nested fields are rendered.
+    fields={['fieldA', 'fieldB', ...]}
+
+    // Field inline error.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    //   semantic
+    showInlineError={true}
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.
 
 ## `NumField`
 
+```js
+import {NumField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<NumField
+    // Decimal mode.
+    //   This will change value step from 1 to 0.01.
+    decimal={true}
+
+    // Field layout.
+    //   Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object
+    //   is a {mode: size} object. Complete string is simply passed through.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    grid={3}        // 'col-3-sm' on label, 'col-9-sm' on input
+    grid="4"        // 'col-4-sm' on label, 'col-8-sm' on input
+    grid={{md: 5}}  // 'col-5-md' on label, 'col-7-md' on input
+    grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
+
+    // Help text.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    help="Need help?"
+
+    // Help block className.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    helpClassName="a b c"
+
+    // Input icon.
+    //   Semantic inputs can have an icon. By default, it's placed on the right
+    //   side - to place it on the left, use iconLeft prop instead.
+    // Available in:
+    //   semantic
+    icon="user"
+
+    // Input left icon.
+    //   Semantic inputs can have an icon. With this prop, it's placed on the
+    //   left side - to place it on the right, use icon prop instead.
+    // Available in:
+    //   semantic
+    iconLeft="user"
+
+    // Input icon props.
+    //   Semantic inputs can have an icon. These props are passed directly to
+    //   the icon element.
+    // Available in:
+    //   semantic
+    iconProps={{onClick () {}}}
+
+    // Input wrapper class name.
+    //   In bootstrap themes, passed className is used on field block. This is
+    //   used on direct field wrapper.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    inputClassName="a b c"
+
+    // Input ref.
+    //   Setting ref prop to a field, won't work as desired, because you'll
+    //   receive field component, not HTML input. If you need an input ref, use
+    //   this prop instead.
+    inputRef={ref => {}}
+
+    // Maximum value.
+    max={100}
+
+    // Minimum value.
+    min={10}
+
+    // Field inline error.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    //   semantic
+    showInlineError={true}
+
+    // Field and sourroundings wrap className.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    wrapClassName="a b c"
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.
+
 ## `RadioField`
+
+```js
+import {RadioField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<RadioField
+    // Array of allowed values.
+    //   By default, those are extracted from your schema.
+    allowedValues={[value1, value2, ...]}
+
+    // Checkbox inline state.
+    //   In bootstrpa themes, label is rendered as a text, but in inline mode,
+    //   it's treated as a field label.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    inline={true}
+
+    // Input wrapper class name.
+    //   In bootstrap themes, passed className is used on field block. This is
+    //   used on direct field wrapper.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    inputClassName="a b c"
+
+    // Field inline error.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   semantic
+    showInlineError={true}
+
+    // Label transform.
+    //   *Some description would be great, huh?*
+    transform={value => label}
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.
 
 ## `SelectField`
 
+```js
+import {SelectField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<SelectField
+    // Array of allowed values.
+    //   By default, those are extracted from your schema.
+    allowedValues={[value1, value2, ...]}
+
+    // Turn on checkbox/radio mode.
+    //   It's always true in mutltiple (i.e. fieldType === Array) mode.
+    checkboxes={true}
+
+    // Checkbox inline state.
+    //   In bootstrpa themes, label is rendered as a text, but in inline mode,
+    //   it's treated as a field label.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    inline={true}
+
+    // Input wrapper class name.
+    //   In bootstrap themes, passed className is used on field block. This is
+    //   used on direct field wrapper.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    inputClassName="a b c"
+
+    // Input ref.
+    //   Setting ref prop to a field, won't work as desired, because you'll
+    //   receive field component, not HTML input. If you need an input ref, use
+    //   this prop instead.
+    inputRef={ref => {}}
+
+    // Field inline error.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   semantic
+    showInlineError={true}
+
+    // Label transform.
+    //   *Some description would be great, huh?*
+    transform={value => label}
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.
+
 ## `SubmitField`
 
+```js
+import {SubmitField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<SubmitField
+    // Input wrapper class name.
+    //   In bootstrap themes, passed className is used on field block. This is
+    //   used on direct field wrapper.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    inputClassName="a b c"
+
+    // Input ref.
+    //   Setting ref prop to a field, won't work as desired, because you'll
+    //   receive field component, not HTML input. If you need an input ref, use
+    //   this prop instead.
+    inputRef={ref => {}}
+/>
+```
+
 ## `TextField`
+
+```js
+import {TextField} from 'uniforms-unstyled'; // Choose your theme package.
+
+<TextField
+    // Field layout.
+    //   Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object
+    //   is a {mode: size} object. Complete string is simply passed through.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    grid={3}        // 'col-3-sm' on label, 'col-9-sm' on input
+    grid="4"        // 'col-4-sm' on label, 'col-8-sm' on input
+    grid={{md: 5}}  // 'col-5-md' on label, 'col-7-md' on input
+    grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
+
+    // Help text.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    help="Need help?"
+
+    // Help block className.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    helpClassName="a b c"
+
+    // Input icon.
+    //   Semantic inputs can have an icon. By default, it's placed on the right
+    //   side - to place it on the left, use iconLeft prop instead.
+    // Available in:
+    //   semantic
+    icon="user"
+
+    // Input left icon.
+    //   Semantic inputs can have an icon. With this prop, it's placed on the
+    //   left side - to place it on the right, use icon prop instead.
+    // Available in:
+    //   semantic
+    iconLeft="user"
+
+    // Input icon props.
+    //   Semantic inputs can have an icon. These props are passed directly to
+    //   the icon element.
+    // Available in:
+    //   semantic
+    iconProps={{onClick () {}}}
+
+    // Input wrapper class name.
+    //   In bootstrap themes, passed className is used on field block. This is
+    //   used on direct field wrapper.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    inputClassName="a b c"
+
+    // Input ref.
+    //   Setting ref prop to a field, won't work as desired, because you'll
+    //   receive field component, not HTML input. If you need an input ref, use
+    //   this prop instead.
+    inputRef={ref => {}}
+
+    // Field inline error.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    //   semantic
+    showInlineError={true}
+
+    // Input type.
+    //   HTML compatible input type like password. Default is text.
+    type="password"
+
+    // Field and sourroundings wrap className.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    wrapClassName="a b c"
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.
+
+<br>
 
 # Forms
 
@@ -581,6 +1201,8 @@ const predictableRandomIdC = safeRandomIdGenerator();
 // ...
 ```
 
+<br>
+
 # Schemas
 
 ## `Bridge`
@@ -623,6 +1245,61 @@ class CustomBridge extends Bridge {
     // invalid.
     getValidator (options) { /* ... */ }
 }
+```
+
+## `GraphQLBridge`
+
+```js
+import {GraphQLBridge}  from 'uniforms';
+import {buildASTSchema} from 'graphql';
+import {parse}          from 'graphql';
+
+const schema = `
+    type Author {
+        id:        String!
+        firstName: String
+        lastName:  String
+    }
+
+    type Post {
+        id:     Int!
+        author: Author!
+        title:  String
+        votes:  Int
+    }
+
+    # This is required by buildASTSchema
+    type Query { anything: ID }
+`;
+
+const schemaType = buildASTSchema(parse(schema)).getType('Post');
+const schemaData = {
+    id: {
+        allowedValues: [1, 2, 3]
+    },
+    title: {
+        options: [
+            {label: 1, value: 'a'},
+            {label: 2, value: 'b'}
+        ]
+    }
+};
+
+const schemaValidator = model => {
+    const details = [];
+
+    if (!model.id) {
+        details.push({name: 'id', message: 'ID is required!'});
+    }
+
+    // ...
+
+    if (details.length) {
+        throw {details};
+    }
+};
+
+const bridge = new GraphQLBridge(schemaType, schemaValidator, schemaData);
 ```
 
 ## `SimpleSchemaBridge`

@@ -153,7 +153,7 @@ describe('Everything', () => {
     it('works (NumField, invalid)', async () => {
         expect(wrapper.find('#x00').props()).to.have.property('value', 0);
         expect(wrapper.find('#x00').simulate('change', {target: {value: 'invalid'}})).to.be.ok;
-        expect(wrapper.find('#x00').props()).to.have.property('value', 0);
+        expect(wrapper.find('#x00').props()).to.have.property('value', '');
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -278,7 +278,7 @@ describe('Everything', () => {
     it('works (NumField, decimal, nullable)', async () => {
         expect(wrapper.find('#x22').props()).to.have.property('value', 0);
         expect(wrapper.find('#x22').simulate('change', {target: {value: ''}})).to.be.ok;
-        expect(wrapper.find('#x22').props()).to.have.property('value', 0);
+        expect(wrapper.find('#x22').props()).to.have.property('value', '');
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -287,7 +287,7 @@ describe('Everything', () => {
     });
 
     it('works (NumField, decimal)', async () => {
-        expect(wrapper.find('#x22').props()).to.have.property('value', 0);
+        expect(wrapper.find('#x22').props()).to.have.property('value', '');
         expect(wrapper.find('#x22').simulate('change', {target: {value: 2}})).to.be.ok;
         expect(wrapper.find('#x22').props()).to.have.property('value', 2);
 
@@ -404,16 +404,17 @@ describe('Everything', () => {
         wrapper.update();
     });
 
+    it('works (remount)', () => {
+        wrapper.unmount();
+        wrapper.mount();
+    });
+
     it('works (rest)', () => {
         wrapper.setProps({error: {}});
-        wrapper.setProps({model: {x09: ['', '', '']}});
+        wrapper.setProps({model: {...wrapper.state('model'), x09: ['', '', '']}});
 
         schema.x = {__type__: () => {}};
 
         expect(() => wrapper.update()).to.throw(/Unsupported field type/);
-    });
-
-    it('works (unmount)', () => {
-        wrapper.unmount();
     });
 });

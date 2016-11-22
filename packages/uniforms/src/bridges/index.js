@@ -1,9 +1,11 @@
-import invariant from 'invariant';
+import invariant from 'fbjs/lib/invariant';
 
+import GraphQLBridge       from './GraphQLBridge';
 import SimpleSchemaBridge  from './SimpleSchemaBridge';
 import SimpleSchema2Bridge from './SimpleSchema2Bridge';
 
 const bridges = [
+    GraphQLBridge,
     SimpleSchemaBridge,
     SimpleSchema2Bridge
 ];

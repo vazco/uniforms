@@ -1,4 +1,5 @@
 export {default as Bridge}              from './bridges/Bridge';
+export {default as GraphQLBridge}       from './bridges/GraphQLBridge';
 export {default as SimpleSchemaBridge}  from './bridges/SimpleSchemaBridge';
 export {default as SimpleSchema2Bridge} from './bridges/SimpleSchema2Bridge';
 export {default as createSchemaBridge}  from './bridges';

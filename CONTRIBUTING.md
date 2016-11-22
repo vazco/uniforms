@@ -29,6 +29,8 @@ Third-party patches are essential for keeping every project great. We simply can
 * If you submit a PR with any code, passing ESLint should be enough _(everything else will be reported in your PR review)_.
 * If you submit a PR with any documentation, code blocks should pass ESLint and code comments should be wrapped at 80 characters.
 
+<br>
+
 # Running locally
 
 See [demo](https://github.com/vazco/uniforms/blob/master/demo).

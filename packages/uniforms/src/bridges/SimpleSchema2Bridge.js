@@ -1,5 +1,5 @@
 import cloneDeep from 'lodash.clonedeep';
-import invariant from 'invariant';
+import invariant from 'fbjs/lib/invariant';
 
 import Bridge         from './Bridge';
 import joinName       from '../helpers/joinName';
@@ -91,7 +91,20 @@ export default class SimpleSchema2Bridge extends Bridge {
 
         invariant(definition, 'Field not found in schema: "%s"', name);
 
-        return {...definition, ...definition.type[0]};
+        const merged = {
+            ...definition,
+            ...definition.type[0]
+        };
+
+        // aldeed/node-simple-schema#27
+        if (merged.autoValue && (
+            merged.autoValue.name === 'defaultAutoValueFunction' ||
+            merged.autoValue.toString().indexOf('$setOnInsert:') !== -1 // FIXME: Hack.
+        )) {
+            merged.defaultValue = merged.autoValue.call({operator: null});
+        }
+
+        return merged;
     }
 
     getInitialValue (name, props = {}) {
@@ -162,7 +175,7 @@ export default class SimpleSchema2Bridge extends Bridge {
                 field = {
                     ...field,
                     transform: value => options.find(option => option.value === value).label,
-                    allowedValues: options.map(options => options.value)
+                    allowedValues: options.map(option => option.value)
                 };
             }
         }

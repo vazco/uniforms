@@ -7,6 +7,8 @@ import BaseForm from '../forms/BaseForm';
 import joinName from '../../helpers/joinName';
 
 export default class BaseField extends Component {
+    static displayName = 'Field';
+
     static propTypes = {
         id: PropTypes.string,
 
@@ -196,16 +198,16 @@ export default class BaseField extends Component {
         const changed = !!get(context.state.changedMap, name);
 
         let value = get(context.model, name);
-        if (value === undefined && !explicitInitialValue) {
+        if (value === undefined && !changed && !explicitInitialValue) {
             value = context.schema.getInitialValue(name, this.props);
-
-            // This prevents (un)controlled input change warning.
-            // More info: https://fb.me/react-controlled-components.
-            if (value === undefined && ensureValue) {
-                value = '';
-            }
         } else if (explicitInitialValue) {
             props.initialValue = context.schema.getInitialValue(name, this.props);
+        }
+
+        // This prevents (un)controlled input change warning.
+        // More info: https://fb.me/react-controlled-components.
+        if (value === undefined && ensureValue) {
+            value = '';
         }
 
         const findValue = this.findValue;

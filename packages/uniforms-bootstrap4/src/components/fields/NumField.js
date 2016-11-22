@@ -20,7 +20,7 @@ const Num = props =>
             ref={props.inputRef}
             step={props.decimal ? 0.01 : 1}
             type="number"
-            value={props.value === undefined ? null : props.value}
+            value={props.value}
         />
     ))
 ;
