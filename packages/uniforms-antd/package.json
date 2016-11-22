@@ -1,6 +1,6 @@
 {
   "name": "uniforms-antd-extended",
-  "version": "1.5.21",
+  "version": "1.5.22",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "description": "Ant Design UI components for uniforms.",
