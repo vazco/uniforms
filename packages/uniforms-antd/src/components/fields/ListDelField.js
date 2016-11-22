@@ -18,6 +18,7 @@ const ListDel = ({
             shape="circle-outline"
             size="small"
             icon="delete"
+            disabled={!limitNotReached || disabled}
             onClick={() => limitNotReached && parent.onChange(
               [].concat(parent.value.slice(0,  fieldIndex))
                 .concat(parent.value.slice(1 + fieldIndex))

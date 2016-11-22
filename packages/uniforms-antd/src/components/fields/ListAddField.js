@@ -8,22 +8,22 @@ const ListAdd = ({
     disabled,
     parent,
     value,
+    fieldData,
     ...props
 }) => {
     const limitNotReached = !disabled && !(parent.maxCount <= parent.value.length);
     const AntIn = require('antd');
     const Button = AntIn.Button;
     return (
-        <section  className={classnames('pull-right', className)}>
             <Button
                 type="ghost"
                 size="small"
+                type="dashed"
                 icon="plus-square-o"
                 onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
-                style={{float: 'right'}}
+                style={{width: '100%'}}
                 {...filterDOMProps(props)}
             />
-        </section>
     );
 };
 

@@ -31,17 +31,19 @@ colorArray: {
   },
 */
 
-class ColorPicker extends React.Component {
-    constructor(){
-        super();
-    }
-    render() {
-      return(
-          <FormGroup {...this.props}>
-              <RenderColorPicker {...this.props} />
-          </FormGroup>
-      )
-    }
+const ColorPicker = ({
+    errorMessage,
+    id,
+    label,
+    showInlineError,
+    info,
+    ...props
+}) => {
+    return(
+        <FormGroup errorMessage={errorMessage} id={id} label={label} showInlineError={showInlineError} info={info} >
+            <RenderColorPicker {...props} />
+        </FormGroup>
+    )
 }
 
 export default connectField(ColorPicker);
@@ -69,7 +71,10 @@ class RenderColorPicker extends React.Component {
 
 //GvW ToDo: get companycolours from mongo
   getCompanyColors(index){
-    var compColors =  ["#ff5555","#550055","#9955ff","#D9A40D"];
+    const compColors = this.props.fieldData ?
+        this.props.fieldData.colors ?
+            this.props.fieldData.colors : ["#ff5555","#4ca64c","#3232ff","#D9A40D"]
+        : ["#ff5555","#4ca64c","#3232ff","#D9A40D"];
     return compColors[index];
   }
   shadeBlendConvert(p, from, to) {
@@ -393,9 +398,7 @@ class RenderColorPicker extends React.Component {
           this.state.displayCompanyColorPicker ?
               <section >
                 <Popover content={compColorContent} title={headerText} trigger="click" visible={true}>
-                  <Icon
-                    type="tablet"
-                  />
+                  <Icon type="tablet" />
                 </Popover>
               </section>
           : null

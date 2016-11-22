@@ -103,6 +103,7 @@ export class Application extends React.Component {
                                 key={schema.string}
                                 schema={schema.object}
                                 showInlineError={showInlineError}
+                                fieldData={{'colors' : ['#cc0000', '#000099', '#808080', '#da4264']}}
                                 onSubmit={doc => {
                                     //console.log(doc);
                                     this.setState({doc: JSON.stringify(doc, null, 4)});

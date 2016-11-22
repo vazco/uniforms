@@ -14,13 +14,15 @@ const AntD = parent => class extends parent {
             PropTypes.number,
             PropTypes.object,
             PropTypes.string
-        ])
+        ]),
+        fieldData: PropTypes.object
     };
 
     getChildContextState () {
         return {
             ...super.getChildContextState(),
-            grid: this.props.grid
+            grid: this.props.grid,
+            fieldData: this.props.fieldData
         };
     }
 
@@ -29,7 +31,7 @@ const AntD = parent => class extends parent {
         const {
             className,
             grid,
-
+            fieldData,
             ...props
         } = super.getNativeFormProps();
 
