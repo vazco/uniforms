@@ -6,6 +6,7 @@ const ListDel = ({
     disabled,
     name,
     parent,
+    fieldData,
     ...props
 }) => {
     const fieldIndex      = +name.slice(1 + name.lastIndexOf('.'));

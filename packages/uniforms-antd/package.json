@@ -1,7 +1,6 @@
 {
-
-  "name": "uniforms-antd",
-  "version": "1.6.0",
+  "name": "uniforms-antd-extended",
+  "version": "1.6.2",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "description": "Ant Design UI components for uniforms.",
@@ -108,6 +107,7 @@
     "babel-runtime": "^6.18.0",
     "classnames": "^2.2.5",
     "invariant": "^2.2.1",
-    "moment": "^2.14.0"
+    "moment": "^2.14.0",
+    "reactcss": "^1.1.1"
   }
 }
