@@ -11,7 +11,6 @@ const SubmitField = ({className, inputRef, value, ...props}, {uniforms: {error, 
             ref={inputRef}
             type="primary"
             htmlType="submit"
-            {...filterDOMProps(props)}
         >
             {value ? value : 'Submit'}
         </Button>

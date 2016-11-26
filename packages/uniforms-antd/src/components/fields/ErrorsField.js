@@ -1,6 +1,5 @@
 import React            from 'react';
 import {BaseField}      from 'uniforms';
-import {filterDOMProps} from 'uniforms';
 import {nothing}        from 'uniforms';
 
 const ErrorsField = ({className, children, ...props}, {uniforms: {error, schema}}) =>
@@ -13,7 +12,6 @@ const ErrorsField = ({className, children, ...props}, {uniforms: {error, schema}
                 padding: '10px',
                 backgroundColor: 'rgba(255, 85, 0, 0.2)'
             }}
-            {...filterDOMProps(props)}
         >
             {children}
             <ul className={'list'} >

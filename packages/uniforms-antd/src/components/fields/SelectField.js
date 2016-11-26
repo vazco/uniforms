@@ -1,6 +1,7 @@
 import React            from 'react';
 import {connectField}   from 'uniforms';
 import FormGroup from '../forms/FormGroup.js';
+import _ from 'lodash';
 
 // SCHEMA PROTOTYPE
 /*
@@ -123,12 +124,9 @@ const renderSelectAD = ({
             allowClear={fieldType === Array}
             id={id}
             name={name}
-            onChange={value => onChange(value)}
+            onChange={value => onChange(fieldType === Array ? _.without(value,null,undefined) : value)}
             ref={inputRef}
-            value={fieldType === Array ?
-                typeof value[0] != 'undefined' ?
-                    value : null : typeof value != 'undefined' ?
-                        value : null}
+            value={fieldType === Array ? _.without(value,null,undefined) : value }
         >
             {op.map(val => {
                 let v = '';

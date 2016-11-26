@@ -11,6 +11,7 @@ import TextField   from './TextField';
 import RadioField  from './RadioField';
 import SelectField from './SelectField';
 import ColorPickerField from './ColorPickerField';
+import HiddenField from './HiddenField';
 
 const Auto = ({component, ...props}) => {
     if (component === undefined) {
@@ -19,7 +20,8 @@ const Auto = ({component, ...props}) => {
                 component = ListField;
             }else{
                 switch (props.fieldComponent) {
-                    case 'color':    component = ColorPickerField; break;
+                    case 'color'    :   component = ColorPickerField; break;
+                    case 'hidden'   :   component = HiddenField; break;
                 }
                 invariant(component, 'Unsupported field component: %s', props.fieldComponent);
             }

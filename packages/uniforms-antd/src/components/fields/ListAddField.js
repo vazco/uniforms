@@ -22,7 +22,6 @@ const ListAdd = ({
                 icon="plus-square-o"
                 onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
                 style={{width: '100%'}}
-                {...filterDOMProps(props)}
             />
     );
 };

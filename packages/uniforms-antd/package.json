@@ -1,11 +1,11 @@
 {
   "name": "uniforms-antd-extended",
-  "version": "1.6.2",
+  "version": "1.6.14",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "description": "Ant Design UI components for uniforms.",
-  "repository": "https://github.com/gervwyk/uniforms/tree/master/packages/uniforms-antd",
-  "homepage": "https://github.com/vazco/uniforms/",
+  "repository": "https://github.com/Gervwyk/uniforms/tree/uniforms-antd-extended/packages/uniforms-antd",
+  "homepage": "https://github.com/Gervwyk/uniforms/tree/uniforms-antd-extended/packages/uniforms-antd",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/gervwyk/uniforms/issues"

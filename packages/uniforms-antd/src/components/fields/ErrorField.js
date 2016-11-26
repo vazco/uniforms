@@ -17,7 +17,6 @@ const Error = ({
                 padding: '10px',
                 backgroundColor: 'rgba(255, 85, 0, 0.2)'
             }}
-            {...filterDOMProps(props)}
         >
             {children ? (
                 children

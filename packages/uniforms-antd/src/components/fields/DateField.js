@@ -78,6 +78,7 @@ class Date_ extends (React.Component) {
                         ref={inputRef}
                         disabled={disabled}
                         id={id}
+                        locale={enUS}
                         max={moment(max,format)}
                         min={moment(min,format)}
                         name={name}

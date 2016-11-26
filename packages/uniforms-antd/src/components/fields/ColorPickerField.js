@@ -151,7 +151,7 @@ class RenderColorPicker extends React.Component {
         this.props.fieldData.colors ?
             this.props.fieldData.colors : ["#ff5555","#4ca64c","#3232ff","#D9A40D"]
         : ["#ff5555","#4ca64c","#3232ff","#D9A40D"];
-    let colorRatios = [0, 0.3, 0.4, -0.25, -0.5];
+    let colorRatios = [0, 0.3, 0.5, -0.25, -0.6];
     if(this.props.colorRatios)
         colorRatios = this.props.colorRatios;
     const compColorContent = (
