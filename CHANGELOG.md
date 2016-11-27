@@ -1,3 +1,9 @@
+## Next:
+
+- **Added:** New `modelTransform` prop in `BaseForm`. [\#123](https://github.com/vazco/uniforms/issues/123)
+
+<br>
+
 ## [v1.6.0](https://github.com/vazco/uniforms/releases/tag/v1.6.0)
 
 <br>

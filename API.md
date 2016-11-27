@@ -928,6 +928,23 @@ import {BaseForm} from 'uniforms'; // Or from the theme package.
     //   this is value.
     model={{fieldA: 1}}
 
+    // Model transform.
+    //   Function transforming one model into another. It's used in few
+    //   situations (modes) described below. Do not mutate given model!
+    modelTransform={(mode, model) => {
+        // This model will be passed to the fields.
+        if (mode === 'form') {/* ... */}
+
+        // This model will be submitted.
+        if (mode === 'submit') {/* ... */}
+
+        // This model will be validated.
+        if (mode === 'validate') {/* ... */}
+
+        // Otherwise, return unaltered model.
+        return model;
+    }}
+
     // Field change action.
     //   It receive two arguments: key and value, where key is a dot separated
     //   path to the changed field and value is the requested value.

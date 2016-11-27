@@ -47,6 +47,7 @@ In short: uniforms is a set of npm packages, which contains helpers and [React](
         - [Autosave](#autosave)
         - [Hierarchy](#hierarchy)
         - [Methods](#methods)
+        - [Model transformations](#model-transformations)
         - [Post-submit handling](#post-submit-handling)
         - [Validation options and modes](#validation-options-and-modes)
         - [Example: `ModifierForm`](#example-modifierform)
@@ -305,6 +306,33 @@ All available methods:
 * `submit()`
 * `validate()` _(added in `ValidatedForm`)_
 
+### Model transformations
+
+If you need to transform model before it will be validated, submited or passed down to the fields, there's a `modelTransform` prop, which should be used in those usecases.
+
+**Example:**
+
+```js
+<AutoForm
+    // Do not mutate given model!
+    modelTransform={(mode, model) => {
+        // This model will be passed to the fields.
+        if (mode === 'form') {/* ... */}
+
+        // This model will be submitted.
+        if (mode === 'submit') {/* ... */}
+
+        // This model will be validated.
+        if (mode === 'validate') {/* ... */}
+
+        // Otherwise, return unaltered model.
+        return model;
+    }}
+    onSubmit={onSubmit}
+    schema={schema}
+/>
+```
+
 ### Post-submit handling
 
 It's a good UX practice to tell your users, that something failed or succeed. To make it simpler, there are `onSubmitFailure` and `onSubmitSuccess` props.
@@ -365,53 +393,28 @@ const Modifier = parent => class extends parent {
     static displayName = `Modifier${parent.displayName}`;
 
     // Here you can override any form methods or create additional ones.
-    onSubmit (event) {
-        const doc  = this.getModel();
-        const keys = this.getChildContextSchema().getSubfields();
+    getModel (mode) {
+        if (mode === 'submit') {
+            const doc  = super.getModel('submit');
+            const keys = this.getChildContextSchema().getSubfields();
 
-        const update = keys.filter(key => doc[key] !== undefined);
-        const remove = keys.filter(key => doc[key] === undefined);
+            const update = keys.filter(key => doc[key] !== undefined);
+            const remove = keys.filter(key => doc[key] === undefined);
 
-        // It's a good idea to omit empty modifiers.
-        const $set   = update.reduce((acc, key) => ({...acc, [key]: doc[key]}), {});
-        const $unset = remove.reduce((acc, key) => ({...acc, [key]: ''}), {});
+            // It's a good idea to omit empty modifiers.
+            const $set   = update.reduce((acc, key) => ({...acc, [key]: doc[key]}), {});
+            const $unset = remove.reduce((acc, key) => ({...acc, [key]: ''}), {});
 
-        const modifier = {$set, $unset};
-
-        // Now we are going to bang our heads. There's (currently) no way to
-        // distinct between getting model for submit and validation, so we can't
-        // simply call super.onSubmit(event) and be happy (I'm working on it).
-        // Instead, we have to copy BaseForm#onSubmit with a little change.
-        // Don't worry, API is coming.
-        if (event) {
-            event.preventDefault();
-            event.stopPropagation();
+            return {$set, $unset};
         }
 
-        const promise = Promise.resolve(
-            this.props.onSubmit &&
-            this.props.onSubmit(modifier)
-        );
-
-        promise.then(
-            this.props.onSubmitSuccess,
-            this.props.onSubmitFailure
-        );
-
-        return promise;
+        return super.getModel(mode);
     }
 };
 
-// Now we have to inject our functionality. This one is a ModifierForm.
+// Now we have to inject our functionality. This one is a ModifierForm. Use any
+// form component you want.
 export default Modifier(BaseForm);
-
-// Every functionality have to be overriden independently. This might seem a
-// little bit crazy, but we have to override BaseForm#onSubmit. If you are using
-// for example Bootstrap3, then change AutoForm.Semantic to AutoForm.Bootstrap3.
-// This one can be called AutoModifierForm, but it's displayName will be
-// AutoValidatedQuickSemanticModifierForm. Sweet, huh?
-import {AutoForm} from 'uniforms-unstyled';
-export default AutoForm.Auto(AutoForm.Validated(AutoForm.Quick(AutoForm.Unstyled(Modifier(BaseForm)))));
 ```
 
 ## Fields

@@ -286,6 +286,32 @@ describe('ValidatedForm', () => {
             expect(onValidate.calledWith({a: 2}, error, match.instanceOf(Function))).to.be.ok;
         });
 
+        it('calls `onValidate` (`modelTransform`)', () => {
+            const modelTransform = (mode, model) => {
+                if (mode === 'validate') {
+                    return {...model, b: 1};
+                }
+
+                return model;
+            };
+
+            const wrapper = mount(
+                <ValidatedForm
+                    model={model}
+                    modelTransform={modelTransform}
+                    schema={schema}
+                    onValidate={onValidate}
+                    validate="onChange"
+                />
+            );
+
+            wrapper.instance().getChildContext().uniforms.onChange('a', 2);
+
+            expect(validator.calledOnce).to.be.ok;
+            expect(onValidate.calledOnce).to.be.ok;
+            expect(onValidate.calledWith({a: 2, b: 1}, null, match.instanceOf(Function))).to.be.ok;
+        });
+
         it('works with async errors from `onValidate`', () => {
             const wrapper = mount(
                 <ValidatedForm model={model} schema={schema} onValidate={onValidate} validate="onChange" />

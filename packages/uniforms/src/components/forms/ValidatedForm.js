@@ -130,7 +130,7 @@ const Validated = parent => class extends parent {
     }
 
     onValidate (key, value) {
-        let model = this.getModel();
+        let model = this.getChildContextModel();
         if (model && key) {
             model = set(cloneDeep(model), key, cloneDeep(value));
         }
@@ -139,6 +139,8 @@ const Validated = parent => class extends parent {
     }
 
     onValidateModel (model) {
+        model = this.getModel('validate', model);
+
         let catched = this.props.error || null;
         try {
             this.state.validator(model);

@@ -26,6 +26,8 @@ export default class BaseForm extends Component {
         model:  PropTypes.object,
         schema: PropTypes.any.isRequired,
 
+        modelTransform: PropTypes.func,
+
         onChange:        PropTypes.func,
         onSubmit:        PropTypes.func,
         onSubmitFailure: PropTypes.func,
@@ -98,6 +100,14 @@ export default class BaseForm extends Component {
         this.getChildContextState    = this.getChildContextState.bind(this);
         this.getChildContextSchema   = this.getChildContextSchema.bind(this);
         this.getChildContextOnChange = this.getChildContextOnChange.bind(this);
+
+        // TODO: It shouldn't be here
+        const getModel = this.getModel;
+        this.getModel = (mode = null, model = getModel(mode)) =>
+            mode !== null && this.props.modelTransform
+                ? this.props.modelTransform(mode, model)
+                : model
+        ;
     }
 
     getChildContext () {
@@ -123,7 +133,7 @@ export default class BaseForm extends Component {
     }
 
     getChildContextModel () {
-        return this.props.model;
+        return this.getModel('form');
     }
 
     getChildContextState () {
@@ -146,8 +156,8 @@ export default class BaseForm extends Component {
         return this.onChange;
     }
 
-    getModel () {
-        return this.getChildContextModel();
+    getModel (/* mode */) {
+        return this.props.model;
     }
 
     componentWillMount () {
@@ -182,6 +192,7 @@ export default class BaseForm extends Component {
             error,           // eslint-disable-line no-unused-vars
             label,           // eslint-disable-line no-unused-vars
             model,           // eslint-disable-line no-unused-vars
+            modelTransform,  // eslint-disable-line no-unused-vars
             onChange,        // eslint-disable-line no-unused-vars
             onSubmit,        // eslint-disable-line no-unused-vars
             onSubmitFailure, // eslint-disable-line no-unused-vars
@@ -206,7 +217,7 @@ export default class BaseForm extends Component {
         // Do not set `changed` before componentDidMount
         if (this.changed !== null) {
             this.changed = true;
-            this.getChangedKeys(key, value, get(this.getModel(), key)).forEach(key =>
+            this.getChangedKeys(key, value, get(this.getModel(null), key)).forEach(key =>
                 set(this.changedMap, key, {})
             );
         }
@@ -246,7 +257,7 @@ export default class BaseForm extends Component {
 
         const promise = Promise.resolve(
             this.props.onSubmit &&
-            this.props.onSubmit(this.getModel())
+            this.props.onSubmit(this.getModel('submit'))
         );
 
         promise.then(

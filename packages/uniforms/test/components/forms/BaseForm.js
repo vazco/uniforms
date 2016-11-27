@@ -252,6 +252,24 @@ describe('BaseForm', () => {
             expect(onSubmit.calledWith(model)).to.be.ok;
         });
 
+        it('calls `onSubmit` with correct model (`modelTransform`)', () => {
+            wrapper.setProps({
+                modelTransform (mode, model) {
+                    if (mode === 'submit') {
+                        return 1;
+                    }
+
+                    return model;
+                }
+            });
+
+            wrapper.find('form').simulate('submit');
+
+            expect(onSubmit.calledWith(1)).to.be.ok;
+
+            wrapper.setProps({modelTransform: undefined});
+        });
+
         it('does nothing without `onSubmit`', () => {
             wrapper.setProps({onSubmit: undefined});
             wrapper.find('form').simulate('submit');
