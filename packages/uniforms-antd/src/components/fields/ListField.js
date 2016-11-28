@@ -40,7 +40,6 @@ const List = ({
                     <label className="left floated">
                         <span>{label}{info && (<span>&nbsp;<InfoMessage info={info} /></span>)}</span>
                     </label>
-                    <ListAddField name={`${name}.$`} initialCount={initialCount} className="right floated" />
                 </section>
             )}
 
@@ -69,6 +68,9 @@ const List = ({
                     <ListItemField key={index} label={null} name={joinName(name, index)} {...filterDOMProps(props)} />
                 )
             )}
+            <div>
+                <ListAddField name={`${name}.$`} initialCount={initialCount} />
+            </div>
         </section>
     );
 };

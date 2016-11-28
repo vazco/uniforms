@@ -1,6 +1,7 @@
 import React            from 'react';
 import {connectField}   from 'uniforms';
 import FormGroup from '../forms/FormGroup.js';
+import _ from 'lodash';
 
 // SCHEMA PROTOTYPE
 /*
@@ -61,7 +62,7 @@ const xor = (item, array) => {
 };
 */
 
-const renderCheckboxesAD = ({
+const renderCheckboxes = ({
     allowedValues,
     disabled,
     id,
@@ -74,13 +75,17 @@ const renderCheckboxesAD = ({
     const Checkbox = AntD.Checkbox;
     const CheckboxGroup = Checkbox.Group;
     const op = options ? options : allowedValues;
+    let opObjs = [];
+    op.forEach( v => {
+        opObjs.push({ label: v.toString(), value: v, disabled: disabled });
+    });
     return (
         <CheckboxGroup
-            options={op}
+            options={opObjs}
             id={id}
             name={name}
             onChange={onChange}
-            value={value}
+            value={typeof value !== 'Array' ? [value] : value}
             disabled={disabled}
         />
     );
@@ -88,7 +93,7 @@ const renderCheckboxesAD = ({
 
 
 
-const renderSelectAD = ({
+const renderSelect = ({
     allowedValues,
     disabled,
     required,
@@ -123,12 +128,9 @@ const renderSelectAD = ({
             allowClear={fieldType === Array}
             id={id}
             name={name}
-            onChange={value => onChange(value)}
+            onChange={value => onChange(fieldType === Array ? _.without(value,null,undefined) : value)}
             ref={inputRef}
-            value={fieldType === Array ?
-                typeof value[0] != 'undefined' ?
-                    value : null : typeof value != 'undefined' ?
-                        value : null}
+            value={fieldType === Array ? _.without(value,null,undefined) : value }
         >
             {op.map(val => {
                 let v = '';
@@ -201,7 +203,7 @@ export class Select extends (React.Component) {
                 info={info}
             >
                 {checkboxes
-                    ? renderCheckboxesAD({
+                    ? renderCheckboxes({
                         allowedValues,
                         disabled,
                         id,
@@ -213,7 +215,7 @@ export class Select extends (React.Component) {
                         options,
                         ...props
                     })
-                    : renderSelectAD({
+                    : renderSelect({
                         allowedValues,
                         disabled,
                         required,

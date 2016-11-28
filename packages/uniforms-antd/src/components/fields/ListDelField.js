@@ -22,7 +22,6 @@ const ListDel = ({
               [].concat(parent.value.slice(0,  fieldIndex))
                 .concat(parent.value.slice(1 + fieldIndex))
             )}
-            {...filterDOMProps(props)}
         />
     );
 };

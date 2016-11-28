@@ -21,7 +21,6 @@ const ListAdd = ({
                 icon="plus-square-o"
                 onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
                 style={{float: 'right'}}
-                {...filterDOMProps(props)}
             />
         </section>
     );
