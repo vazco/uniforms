@@ -47,7 +47,7 @@ describe('connectField', () => {
         it('creates component', () => {
             const Field = connectField(Test);
 
-            expect(Field).to.be.function;
+            expect(Field).to.be.a('function');
         });
     });
 

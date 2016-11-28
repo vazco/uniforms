@@ -59,41 +59,41 @@ describe('GraphQLBridge', () => {
 
     context('#check()', () => {
         it('always returns false', () => {
-            expect(GraphQLBridge.check()).to.be.falsy;
-            expect(GraphQLBridge.check(bridge)).to.be.falsy;
-            expect(GraphQLBridge.check(schema)).to.be.falsy;
+            expect(GraphQLBridge.check()).to.be.not.ok;
+            expect(GraphQLBridge.check(bridge)).to.be.not.ok;
+            expect(GraphQLBridge.check(schema)).to.be.not.ok;
         });
     });
 
     context('#getError', () => {
         it('works without error', () => {
-            expect(bridge.getError('title')).to.be.falsy;
+            expect(bridge.getError('title')).to.be.not.ok;
         });
 
         it('works with invalid error', () => {
-            expect(bridge.getError('title', {})).to.be.falsy;
-            expect(bridge.getError('title', {invalid: true})).to.be.falsy;
+            expect(bridge.getError('title', {})).to.be.not.ok;
+            expect(bridge.getError('title', {invalid: true})).to.be.not.ok;
         });
 
         it('works with correct error', () => {
             expect(bridge.getError('title', {details: [{name: 'title'}]})).to.be.deep.equal({name: 'title'});
-            expect(bridge.getError('title', {details: [{name: 'field'}]})).to.be.falsy;
+            expect(bridge.getError('title', {details: [{name: 'field'}]})).to.be.not.ok;
         });
     });
 
     context('#getErrorMessage', () => {
         it('works without error', () => {
-            expect(bridge.getErrorMessage('title')).to.be.falsy;
+            expect(bridge.getErrorMessage('title')).to.be.not.ok;
         });
 
         it('works with invalid error', () => {
-            expect(bridge.getErrorMessage('title', {})).to.be.falsy;
-            expect(bridge.getErrorMessage('title', {invalid: true})).to.be.falsy;
+            expect(bridge.getErrorMessage('title', {})).to.be.not.ok;
+            expect(bridge.getErrorMessage('title', {invalid: true})).to.be.not.ok;
         });
 
         it('works with correct error', () => {
             expect(bridge.getErrorMessage('title', {details: [{name: 'title', message: '!'}]})).to.be.equal('!');
-            expect(bridge.getErrorMessage('title', {details: [{name: 'field', message: '$'}]})).to.be.falsy;
+            expect(bridge.getErrorMessage('title', {details: [{name: 'field', message: '$'}]})).to.be.not.ok;
         });
     });
 

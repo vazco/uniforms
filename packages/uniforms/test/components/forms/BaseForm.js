@@ -144,8 +144,8 @@ describe('BaseForm', () => {
 
             const context2 = wrapper.instance().getChildContext().uniforms.state;
             expect(context2).to.have.property('changed', true);
-            expect(context2).to.have.deep.property('changedMap.$').that.is.ok;
-            expect(context2).to.have.deep.property('changedMap.$.1').that.is.ok;
+            expect(context2).to.have.nested.property('changedMap.$').that.is.ok;
+            expect(context2).to.have.nested.property('changedMap.$.1').that.is.ok;
         });
 
         it('autosaves correctly (`autosave` = true)', () => {

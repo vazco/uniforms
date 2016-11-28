@@ -205,7 +205,7 @@ describe('ValidatedForm', () => {
 
             await new Promise(resolve => setTimeout(resolve, 5));
 
-            expect(validator).to.have.been.calledTwice;
+            expect(validator.calledTwice).to.be.ok;
             expect(onChange.calledOnce).to.be.ok;
             expect(onChange.calledWith('key', 'value')).to.be.ok;
 
@@ -213,7 +213,7 @@ describe('ValidatedForm', () => {
 
             await new Promise(resolve => setTimeout(resolve, 5));
 
-            expect(validator).to.have.been.calledThrice;
+            expect(validator.calledThrice).to.be.ok;
             expect(onSubmit.calledOnce).to.be.ok;
             expect(onSubmit.calledWith(model)).to.be.ok;
         });
@@ -253,7 +253,7 @@ describe('ValidatedForm', () => {
 
             await new Promise(resolve => setTimeout(resolve, 5));
 
-            expect(validator).to.have.been.calledTwice;
+            expect(validator.calledTwice).to.be.ok;
             expect(onSubmit.calledOnce).to.be.ok;
             expect(onSubmit.calledWith(model)).to.be.ok;
         });
@@ -322,7 +322,7 @@ describe('ValidatedForm', () => {
             const call = onValidate.getCall(0);
             call.args[2](error);
 
-            expect(wrapper.instance().getChildContext()).to.have.deep.property('uniforms.error', error);
+            expect(wrapper.instance().getChildContext()).to.have.nested.property('uniforms.error', error);
         });
 
         it('works with no errors from `onValidate`', () => {
@@ -335,7 +335,7 @@ describe('ValidatedForm', () => {
             const call = onValidate.getCall(0);
             call.args[2]();
 
-            expect(wrapper.instance().getChildContext()).to.have.deep.property('uniforms.error', null);
+            expect(wrapper.instance().getChildContext()).to.have.nested.property('uniforms.error', null);
         });
     });
 });

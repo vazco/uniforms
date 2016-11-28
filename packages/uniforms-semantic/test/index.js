@@ -10,9 +10,6 @@ Object.keys(window).forEach(property => {
     }
 });
 
-// Dirty fix for React
-require('fbjs/lib/ExecutionEnvironment').canUseDOM = true;
-
 // Mocks
 import mock from 'mock-require';
 
