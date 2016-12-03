@@ -76,6 +76,7 @@ const Select = ({
     name,
     onChange,
     placeholder,
+    required,
     transform,
     value,
     ...props
@@ -87,9 +88,13 @@ const Select = ({
             </label>
         )}
 
+        {/* TODO: Better handling of these props. */}
+        {/* eslint-disable max-len */}
         {checkboxes || fieldType === Array
             ? renderCheckboxes({allowedValues, disabled, id, name, onChange, transform, value, fieldType})
-            : renderSelect    ({allowedValues, disabled, id, name, onChange, transform, value, placeholder, inputRef})}
+            : renderSelect    ({allowedValues, disabled, id, name, onChange, transform, value, inputRef, label, placeholder, required})
+        }
+        {/* eslint-enable */}
     </section>
 ;
 

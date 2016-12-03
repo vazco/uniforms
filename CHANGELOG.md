@@ -1,6 +1,7 @@
 ## Next
 - **Fixed:** Handling of `label` in `GraphQLBridge`.
 - **Fixed:** Extraneous option in `SelectField` in semantic theme.
+- **Fixed:** Extraneous option in `SelectField` in unstyled theme.
 
 <br>
 
