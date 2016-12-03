@@ -1,5 +1,6 @@
 ## Next
 - **Fixed:** Handling of `label` in `GraphQLBridge`.
+- **Fixed:** Got rid of unknown props warning in semantic theme.
 - **Fixed:** Extraneous option in `SelectField` in semantic theme.
 - **Fixed:** Extraneous option in `SelectField` in unstyled theme.
 
