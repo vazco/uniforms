@@ -111,36 +111,40 @@ export default class GraphQLBridge extends Bridge {
         const field = this.getField(nameGeneric, false);
         const fieldType = extractFromNonNull(field.type);
 
-        let computed = {
+        const extra = {
+            ...this.extras[nameGeneric],
+            ...this.extras[nameNormal]
+        };
+
+        const ready = {
             label: '',
             required: field.type instanceof graphql.GraphQLNonNull,
 
-            ...this.extras[nameGeneric],
-            ...this.extras[nameNormal],
+            ...extra,
             ...props
         };
 
-        if (fieldType instanceof graphql.GraphQLScalarType && fieldType.name === 'Float') {
-            computed.decimal = true;
+        if (props.label === true && extra.label) {
+            ready.label = extra.label;
+        } else if (props.label !== undefined && !props.label) {
+            ready.label = '';
         }
 
-        if (computed.options) {
-            if (!Array.isArray(computed.options)) {
-                computed = {
-                    ...computed,
-                    transform: value => computed.options[value],
-                    allowedValues: Object.keys(computed.options)
-                };
+        if (fieldType instanceof graphql.GraphQLScalarType && fieldType.name === 'Float') {
+            ready.decimal = true;
+        }
+
+        if (ready.options) {
+            if (!Array.isArray(ready.options)) {
+                ready.transform = value => ready.options[value];
+                ready.allowedValues = Object.keys(ready.options);
             } else {
-                computed = {
-                    ...computed,
-                    transform: value => computed.options.find(option => option.value === value).label,
-                    allowedValues: computed.options.map(option => option.value)
-                };
+                ready.transform = value => ready.options.find(option => option.value === value).label;
+                ready.allowedValues = ready.options.map(option => option.value);
             }
         }
 
-        return computed;
+        return ready;
     }
 
     getSubfields (name) {

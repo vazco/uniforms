@@ -1,9 +1,13 @@
+## Next
+- **Fixed:** Handling of `label` in `GraphQLBridge`.
+
+<br>
+
 ## [v1.7.0](https://github.com/vazco/uniforms/releases/tag/v1.7.0)
 
 <br>
 
 ## [v1.7.0-beta.1](https://github.com/vazco/uniforms/releases/tag/v1.7.0-beta.1)
-
 - **Added:** New `modelTransform` prop in `BaseForm`. [\#123](https://github.com/vazco/uniforms/issues/123)
 
 <br>

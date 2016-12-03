@@ -37,7 +37,8 @@ describe('GraphQLBridge', () => {
             component: 'div'
         },
         id: {
-            allowedValues: [1, 2, 3]
+            allowedValues: [1, 2, 3],
+            label: 'Post ID'
         },
         title: {
             options: [
@@ -153,7 +154,7 @@ describe('GraphQLBridge', () => {
     context('#getProps', () => {
         it('works with allowedValues', () => {
             expect(bridge.getProps('id')).to.be.deep.equal({
-                label: '',
+                label: 'Post ID',
                 required: true,
                 allowedValues: [1, 2, 3]
             });
@@ -161,7 +162,7 @@ describe('GraphQLBridge', () => {
 
         it('works with allowedValues from props', () => {
             expect(bridge.getProps('id', {allowedValues: [1]})).to.be.deep.equal({
-                label: '',
+                label: 'Post ID',
                 required: true,
                 allowedValues: [1]
             });
@@ -172,6 +173,30 @@ describe('GraphQLBridge', () => {
                 label: '',
                 required: true,
                 component: 'div'
+            });
+        });
+
+        it('works with label (custom)', () => {
+            expect(bridge.getProps('id', {label: 'ID'})).to.be.deep.equal({
+                label: 'ID',
+                required: true,
+                allowedValues: [1, 2, 3]
+            });
+        });
+
+        it('works with label (true)', () => {
+            expect(bridge.getProps('id', {label: true})).to.be.deep.equal({
+                label: 'Post ID',
+                required: true,
+                allowedValues: [1, 2, 3]
+            });
+        });
+
+        it('works with label (falsy)', () => {
+            expect(bridge.getProps('id', {label: null})).to.be.deep.equal({
+                label: '',
+                required: true,
+                allowedValues: [1, 2, 3]
             });
         });
 
