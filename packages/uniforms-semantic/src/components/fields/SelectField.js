@@ -95,9 +95,13 @@ const Select = ({
             </label>
         )}
 
+        {/* TODO: Better handling of these props. */}
+        {/* eslint-disable max-len */}
         {checkboxes || fieldType === Array
             ? renderCheckboxes({allowedValues, disabled, id, name, onChange, transform, value, fieldType})
-            : renderSelect    ({allowedValues, disabled, id, name, onChange, transform, value, inputRef, placeholder})}
+            : renderSelect    ({allowedValues, disabled, id, name, onChange, transform, value, inputRef, label, placeholder, required})
+        }
+        {/* eslint-enable */}
 
         {!!(errorMessage && showInlineError) && (
             <section className="ui red basic pointing label">
