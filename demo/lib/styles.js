@@ -18,6 +18,4 @@ const styles = {
     unstyled: style([])
 };
 
-export function getStyles (theme) {
-    return styles[theme] || styles[Object.keys(styles)[0]];
-}
+export default styles;

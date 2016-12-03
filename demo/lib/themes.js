@@ -10,14 +10,4 @@ const themes = {
     unstyled
 };
 
-export function getTheme (theme) {
-    if (!themes[theme]) {
-        theme = getThemes()[0];
-    }
-
-    return {components: themes[theme], text: theme};
-}
-
-export function getThemes () {
-    return Object.keys(themes).sort();
-}
+export default themes;

@@ -1,0 +1,137 @@
+const preset = strings => strings[0].slice(9, -5).replace(/([\r\n]+) {8}/g, '$1');
+const presets = {
+    'Welcome!': preset`
+        new SimpleSchema({
+            date: {
+                type: Date,
+                defaultValue: new Date()
+            },
+
+            size: {
+                type: String,
+                defaultValue: 'm',
+                allowedValues: ['xs', 's', 'm', 'l', 'xl']
+            },
+
+            rating: {
+                type: Number,
+                allowedValues: [1, 2, 3, 4, 5],
+                uniforms: {
+                    checkboxes: true
+                }
+            },
+
+            friends: {
+                type: [Object],
+                minCount: 1
+            },
+
+            'friends.$.name': {
+                type: String,
+                min: 3
+            },
+
+            'friends.$.age': {
+                type: Number,
+                min: 0,
+                max: 150
+            }
+        })
+    `,
+
+    'Address (GraphQL)': preset`
+        new GraphQLBridge(buildASTSchema(parse(\`
+            type Address {
+                city:   String
+                state:  String!
+                street: String!
+                zip:    String!
+            }
+
+            # This is required by buildASTSchema
+            type Query { anything: ID }
+        \`)).getType('Address'), function (model) {
+            const details = [];
+
+            if (!model.state) {
+                details.push({name: 'state', message: 'State is required!'});
+            }
+
+            if (!model.street) {
+                details.push({name: 'street', message: 'Street is required!'});
+            }
+
+            if (!model.zip) {
+                details.push({name: 'zip', message: 'Zip is required!'});
+            }
+
+            if (model.city && model.city.length > 50) {
+                details.push({name: 'city', message: 'City can be at least 50 characters long!'});
+            }
+
+            if (model.street && model.street.length > 100) {
+                details.push({name: 'street', message: 'Street can be at least 100 characters long!'});
+            }
+
+            if (model.zip && !/^[0-9]{5}$/.test(model.zip)) {
+                details.push({name: 'zip', message: 'Zip does not match the regular expression!'});
+            }
+
+            if (details.length) {
+                throw {details};
+            }
+        }, {
+            city:   {label: 'City'},
+            state:  {label: 'State'},
+            street: {label: 'Street'},
+            zip:    {label: 'Zip'}
+        })
+    `,
+
+    'Address (SimpleSchema)': preset`
+        new SimpleSchema({
+            city: {
+                type: String,
+                optional: true,
+                max: 50,
+            },
+
+            state: {
+                type: String
+            },
+
+            street: {
+                type: String,
+                max: 100
+            },
+
+            zip: {
+                type: String,
+                regEx: /^[0-9]{5}$/
+            }
+        })
+    `,
+
+    'Address (SimpleSchema2)': preset`
+        new SimpleSchema2({
+            city: {
+                type: String,
+                max: 50
+            },
+
+            state: String,
+
+            street: {
+                type: String,
+                max: 100
+            },
+
+            zip: {
+                type: String,
+                regEx: /^[0-9]{5}$/
+            }
+        })
+    `
+};
+
+export default presets;
