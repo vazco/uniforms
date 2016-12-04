@@ -1,4 +1,4 @@
-## Next
+## [v1.7.1](https://github.com/vazco/uniforms/releases/tag/v1.7.1)
 - **Fixed:** Handling of `label` in `GraphQLBridge`.
 - **Fixed:** Got rid of unknown props warning in semantic theme.
 - **Fixed:** Extraneous option in `SelectField` in semantic theme.
