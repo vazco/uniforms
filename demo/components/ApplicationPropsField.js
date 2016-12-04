@@ -11,6 +11,7 @@ const ApplicationProps = ({onChange, schema, theme, value}) => {
     const link = styles[theme];
 
     const isBootstrap = theme === 'bootstrap3' || theme === 'bootstrap4';
+    const isMaterial  = theme === 'material';
     const isSemantic  = theme === 'semantic';
 
     const AutoForm      = themes[theme].AutoForm;
@@ -25,7 +26,7 @@ const ApplicationProps = ({onChange, schema, theme, value}) => {
 
             <style>{`
                 textarea {
-                    font-family: monospace;
+                    font-family: monospace !important;
                     min-height: 20em !important;
                 }
             `}</style>
@@ -36,8 +37,8 @@ const ApplicationProps = ({onChange, schema, theme, value}) => {
                 <BoolField     name="disabled" />
                 <BoolField     name="label" />
                 <BoolField     name="placeholder" />
-                <BoolField     name="showInlineError" disabled={!(isBootstrap || isSemantic)} />
-                <LongTextField name="schema" />
+                <BoolField     name="showInlineError" disabled={!(isBootstrap || isMaterial || isSemantic)} />
+                <LongTextField name="schema" {...isMaterial && {fullWidth: true, rowsMax: 20}} />
 
                 <ErrorsField />
             </AutoForm>

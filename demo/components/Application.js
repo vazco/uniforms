@@ -1,5 +1,10 @@
-import React       from 'react';
-import {Component} from 'react';
+import React          from 'react';
+import getMuiTheme    from 'material-ui/styles/getMuiTheme';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import {Component}    from 'react';
+import {PropTypes}    from 'react';
+
+import {Meteor} from 'meteor/meteor';
 
 import presets from '../lib/presets';
 import schema  from '../lib/schema';
@@ -16,6 +21,10 @@ class Application extends Component {
         this.state = schema.clean({});
 
         this.onChange = this.onChange.bind(this);
+    }
+
+    getChildContext () {
+        return {muiTheme: getMuiTheme(lightBaseTheme, {userAgent: Meteor.isServer ? false : undefined})};
     }
 
     onChange (key, value) {
@@ -61,5 +70,9 @@ class Application extends Component {
         );
     }
 }
+
+Application.childContextTypes = {
+    muiTheme: PropTypes.object.isRequired
+};
 
 export default Application;
