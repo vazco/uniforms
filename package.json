@@ -9,15 +9,15 @@
     "rimraf": "2.5.4"
   },
   "scripts": {
-    "build": "lerna --concurrency 5 run build",
-    "clean": "lerna --concurrency 5 run clean && rimraf coverage .nyc_output",
-    "cover": "lerna --concurrency 5 run cover && cross-env NODE_ENV=cover nyc npm test",
+    "build": "lerna --concurrency 6 run build",
+    "clean": "lerna --concurrency 6 run clean && rimraf coverage .nyc_output",
+    "cover": "lerna --concurrency 6 run cover && cross-env NODE_ENV=cover nyc npm test",
     "coveralls": "cross-env NODE_ENV=cover nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "install": "lerna --concurrency 5 bootstrap",
-    "lint": "lerna --concurrency 5 run lint",
+    "install": "lerna --concurrency 6 bootstrap",
+    "lint": "lerna --concurrency 6 run lint",
     "publish": "lerna publish",
-    "reset": "lerna --concurrency 5 run reset && rimraf node_modules",
-    "test": "lerna --concurrency 5 run test"
+    "reset": "lerna --concurrency 6 run reset && rimraf node_modules",
+    "test": "lerna --concurrency 6 run test"
   },
   "nyc": {
     "reporter": [

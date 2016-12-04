@@ -1,5 +1,6 @@
 import 'babel-polyfill';
-import {mount} from 'react-mounter';
+import tapEvent from 'react-tap-event-plugin';
+import {mount}  from 'react-mounter';
 
 import {Meteor}     from 'meteor/meteor';
 import {DocHead}    from 'meteor/kadira:dochead';
@@ -10,6 +11,8 @@ import Application from '/components/Application';
 if (Meteor.isServer) {
     FlowRouter.setPageCacheTimeout(100000);
     FlowRouter.setDeferScriptLoading(true);
+} else {
+    tapEvent();
 }
 
 FlowRouter.route('/', {
