@@ -62,7 +62,7 @@ const Auto = parent => class extends parent {
 
     onReset () {
         super.onReset();
-        this.setState(() => ({model: {}, modelSync: {}}));
+        this.setState(() => ({model: this.props.model, modelSync: this.props.model}));
     }
 
     onValidate () {
