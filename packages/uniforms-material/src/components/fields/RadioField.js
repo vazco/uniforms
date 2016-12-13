@@ -1,10 +1,9 @@
 import RadioButton      from 'material-ui/RadioButton';
 import React            from 'react';
-import Subheader        from 'material-ui/Subheader';
-import {ListItem}       from 'material-ui/List';
-import {List}           from 'material-ui/List';
 import {connectField}   from 'uniforms';
 import {filterDOMProps} from 'uniforms';
+import {ListItem}       from 'material-ui/List';
+import {List}           from 'material-ui/List';
 
 const Radio = ({
     allowedValues,
@@ -19,9 +18,10 @@ const Radio = ({
 }) =>
     <List {...filterDOMProps(props)}>
         {!!label && (
-            <Subheader>
-                {label}
-            </Subheader>
+            <ListItem
+                disabled
+                primaryText={label}
+            />
         )}
 
         {allowedValues.map(item =>
