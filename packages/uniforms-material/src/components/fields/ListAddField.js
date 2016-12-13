@@ -1,3 +1,5 @@
+import Add              from 'material-ui/svg-icons/content/add';
+import IconButton       from 'material-ui/IconButton';
 import React            from 'react';
 import {connectField}   from 'uniforms';
 import {filterDOMProps} from 'uniforms';
@@ -10,13 +12,14 @@ const ListAdd = ({
 }) => {
     const limitNotReached = !disabled && !(parent.maxCount <= value.length);
 
+    // TODO: Add support for tooltip
     return (
-        <span
+        <IconButton
             {...filterDOMProps(props)}
-            onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
+            onTouchTap={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
         >
-            +
-        </span>
+            <Add />
+        </IconButton>
     );
 };
 

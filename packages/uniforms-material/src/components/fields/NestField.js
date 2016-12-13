@@ -11,9 +11,10 @@ const Nest = ({
     fields,
     label,
     name,
+    style,
     ...props
 }) =>
-    <section {...filterDOMProps(props)}>
+    <section style={{display: 'flex', flexDirection: 'column', ...style}} {...filterDOMProps(props)}>
         {label && (
             <label>
                 {label}
