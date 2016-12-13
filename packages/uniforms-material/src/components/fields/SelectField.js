@@ -4,10 +4,10 @@ import RadioButton      from 'material-ui/RadioButton';
 import React            from 'react';
 import SelectField      from 'material-ui/SelectField';
 import Subheader        from 'material-ui/Subheader';
-import {ListItem}       from 'material-ui/List';
-import {List}           from 'material-ui/List';
 import {connectField}   from 'uniforms';
 import {filterDOMProps} from 'uniforms';
+import {ListItem}       from 'material-ui/List';
+import {List}           from 'material-ui/List';
 
 const xor = (item, array) => {
     const index = array.indexOf(item);
@@ -76,26 +76,29 @@ const renderSelect = ({
     value,
     ...props
 }) =>
-    <SelectField
-        disabled={disabled}
-        errorText={errorMessage}
-        floatingLabelText={label}
-        hintText={placeholder}
-        id={id}
-        name={name}
-        onChange={(event, index, value) => onChange(value)}
-        ref={inputRef}
-        value={value}
-        {...filterDOMProps(props)}
-    >
-        {allowedValues.map(value =>
-            <MenuItem
-                key={value}
-                value={value}
-                primaryText={transform ? transform(value) : value}
-            />
-        )}
-    </SelectField>
+    <ListItem
+        disabled
+        primaryText={<SelectField
+            disabled={disabled}
+            errorText={errorMessage}
+            floatingLabelText={label}
+            hintText={placeholder}
+            id={id}
+            name={name}
+            onChange={(event, index, value) => onChange(value)}
+            ref={inputRef}
+            value={value}
+            {...filterDOMProps(props)}
+        >
+            {allowedValues.map(value =>
+                <MenuItem
+                    key={value}
+                    value={value}
+                    primaryText={transform ? transform(value) : value}
+                />
+            )}
+        </SelectField>}
+    />
 ;
 
 const Select = props =>
