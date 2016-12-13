@@ -1,8 +1,9 @@
-import React            from 'react';
-import {Children}       from 'react';
-import {connectField}   from 'uniforms';
-import {filterDOMProps} from 'uniforms';
-import {joinName}       from 'uniforms';
+import React                            from 'react';
+import {Children}                       from 'react';
+import {connectField}                   from 'uniforms';
+import {filterDOMProps}                 from 'uniforms';
+import {joinName}                       from 'uniforms';
+import {List as ListMaterial, ListItem} from 'material-ui/List';
 
 import ListAddField  from './ListAddField';
 import ListItemField from './ListItemField';
@@ -16,13 +17,13 @@ const List = ({
     value,
     ...props
 }) =>
-    <ul {...filterDOMProps(props)}>
-        {label && (
-            <label>
-                {label}
-
-                <ListAddField name={`${name}.$`} initialCount={initialCount} />
-            </label>
+    <ListMaterial {...filterDOMProps(props)}>
+        {!!label && (
+            <ListItem
+                disabled
+                primaryText={label}
+                rightIconButton={<ListAddField name={`${name}.$`} initialCount={initialCount} />}
+            />
         )}
 
         {children ? (
@@ -40,7 +41,7 @@ const List = ({
                 <ListItemField key={index} label={null} name={joinName(name, index)} {...itemProps} />
             )
         )}
-    </ul>
+    </ListMaterial>
 ;
 
 export default connectField(List, {includeInChain: false});
