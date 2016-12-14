@@ -122,7 +122,7 @@ $ npm install --save react react-dom uniforms uniforms-unstyled
 Let's start with defining an example schema:
 
 ```js
-import {SimpleSchema} from 'aldeed:simple-schema';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
 const PersonSchema = new SimpleSchema({
     name: {
@@ -180,7 +180,7 @@ const PostUpdateForm = ({model}) =>
 ;
 ```
 
-That's all! `AutoForm` will generate complete form with labeled fields, an errors list (if any) and a submit button. Also, it will take care of validation and handling model changes.
+That's all! `AutoForm` will generate complete a form with labelled fields, errors list (if any) and a submit button. Also, it will take care of validation and handle model changes.
 
 <br>
 
@@ -190,7 +190,7 @@ That's all! `AutoForm` will generate complete form with labeled fields, an error
 
 ## Forms components
 
-Most of time you'll be using either `AutoForm` or `ValidatedForm`, but there are also other form components (rather low-level ones) with different capabilities.
+Most of the time you'll be using either `AutoForm` or `ValidatedForm`, but there are also other form components (rather low-level ones) with different capabilities.
 
 | Component            | Self-generated? | Self-managed? | Self-validated? |
 |:--------------------:|:---------------:|:-------------:|:---------------:|
@@ -258,7 +258,7 @@ const onValidate = (model, error, callback) => {
 
 ### Autosave
 
-Every form has an autosave functionality. If you set an `autosave` prop, then every change will trigger a submit. There's also an `autosaveDelay` prop - minimum time between saves in milliseconds (default: `0`).
+Every form has an autosave functionality. If you set an `autosave` prop, then every change will trigger a submit. There's also an `autosaveDelay` prop - a minimum time between saves in milliseconds (default: `0`).
 
 **Example:**
 
@@ -308,7 +308,7 @@ All available methods:
 
 ### Model transformations
 
-If you need to transform model before it will be validated, submited or passed down to the fields, there's a `modelTransform` prop, which should be used in those usecases.
+If you need to transform model before it will be validated, submitted or passed down to the fields, there's a `modelTransform` prop, which should be used in those use cases.
 
 **Example:**
 
@@ -350,7 +350,7 @@ It's a good UX practice to tell your users, that something failed or succeed. To
 
 ### Validation options and modes
 
-Form can be validated in one those three styles:
+Any form can be validated in one those three styles:
 
 * `onChange`
     Validate on every change.
@@ -380,7 +380,7 @@ If your schema validator accepts any options, those can be passed in `validator`
 import {BaseForm} from 'uniforms';
 
 // In uniforms, every form is just an injectable set of functionalities. This
-// way allows us to live without many higher order components in favor of
+// way allows us to live without many higher order components in favour of
 // composed one. If you want to get a deeper dive into it, read source of
 // AutoForm or QuickForm in the core package.
 const Modifier = parent => class extends parent {
@@ -500,7 +500,7 @@ Few props propagate in a very special way. These are `label`, `placeholder` and 
 </ListField>
 ```
 
-**Note:** `label`, `placeholder` and `disabled` are casted to `Boolean` before being passed to nested fields.
+**Note:** `label`, `placeholder` and `disabled` are cast to `Boolean` before being passed to nested fields.
 
 ### Example: `CompositeField`
 
@@ -565,7 +565,7 @@ import classnames     from 'classnames';
 import {connectField} from 'uniforms';
 
 // This field works like this: cycle all allowed values and optionally no-value
-// state if field is not required. This one uses Semantic-UI.
+// state if the field is not required. This one uses Semantic-UI.
 const Cycle = ({allowedValues, disabled, label, required, value, onChange}) =>
     <a
         className={classnames('ui', !value && 'basic', 'label')}
@@ -822,7 +822,7 @@ const bridge = new MyLittleSchema({
 
 ## Context data
 
-Some components might need to know current form state. All this this data is passed as `uniforms` in [React context](https://facebook.github.io/react/docs/context.html).
+Some components might need to know current form state. All this data is passed as `uniforms` in [React context](https://facebook.github.io/react/docs/context.html).
 
 ### Available context data
 
@@ -979,7 +979,7 @@ See [CONTRIBUTING.md](https://github.com/vazco/uniforms/blob/master/CONTRIBUTING
 
 > `The specified value "..." is not a valid email address.`
 
-Your browser is trying to do it best. Those warnings are harmless, but currently there's no way to get rid of them, other than downgrading to React `15.1.0` or using different browser.
+Your browser is trying to do it best. Those warnings are harmless, but currently, there's no way to get rid of them, other than downgrading to React `15.1.0` or using different browser.
 
 <br>
 
