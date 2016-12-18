@@ -96,12 +96,12 @@ import {AutoFields} from 'uniforms-unstyled'; // Choose your theme package.
 ```js
 import {BaseField} from 'uniforms';
 
-// You can't really render a BaseField, because it don't have a render method.
+// You can't really render a BaseField because it doesn't have a render method.
 // It's a base class of all packaged fields, so all below props are available to
 // all fields.
 <BaseField
     // Field disabled state.
-    //   It's passed directly to the field, but it propagates same as label.
+    //   It's passed directly to the field, but it propagates same as the label.
     disabled={false}
 
     // Field label.
