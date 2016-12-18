@@ -312,6 +312,11 @@ import {DateField} from 'uniforms-unstyled'; // Choose your theme package.
     //   bootstrap3
     //   bootstrap4
     wrapClassName="a b c"
+
+    // Display time picker in ampm (12hr) format or 24hr format.
+    // Available in:
+    //   material-ui
+    timeFormat="ampm"
 />
 ```
 
