@@ -23,3 +23,5 @@ export {default as BaseForm}           from './components/forms/BaseForm';
 export {default as QuickForm}          from './components/forms/QuickForm';
 export {default as ValidatedForm}      from './components/forms/ValidatedForm';
 export {default as ValidatedQuickForm} from './components/forms/ValidatedQuickForm';
+
+export {default as wrapField} from './lib/wrapField';
