@@ -12,11 +12,10 @@ const ListAdd = ({
 }) => {
     const limitNotReached = !disabled && !(parent.maxCount <= value.length);
 
-    // TODO: Add support for tooltip
     return (
         <IconButton
-            {...filterDOMProps(props)}
             onTouchTap={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
+            {...filterDOMProps(props)}
         >
             <Add />
         </IconButton>
