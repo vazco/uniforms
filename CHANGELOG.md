@@ -1,3 +1,8 @@
+## Next
+- **Fixed:** Reset of a form with a model. [\#140](https://github.com/vazco/uniforms/issues/140)
+
+<br>
+
 ## [v1.7.1](https://github.com/vazco/uniforms/releases/tag/v1.7.1)
 - **Fixed:** Handling of `label` in `GraphQLBridge`.
 - **Fixed:** Got rid of unknown props warning in semantic theme.
