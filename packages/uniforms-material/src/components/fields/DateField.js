@@ -14,8 +14,9 @@ class Date_ extends Component {
                 id,
                 max,
                 min,
-                onChange,
                 value,
+                style,
+                onChange,
                 timeFormat,
                 ...props
             }
@@ -31,6 +32,7 @@ class Date_ extends Component {
                             onFocus={() => this.refs.datepicker.openDialog()}
                             value={dateFormat(value)}
                             type="datetime-local"
+                            style={{marginTop: -14, ...style}}
                             {...props}
                         />
                         <DatePicker

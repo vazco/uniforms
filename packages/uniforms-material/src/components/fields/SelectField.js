@@ -72,6 +72,7 @@ const renderSelect = ({
     name,
     onChange,
     placeholder,
+    style,
     transform,
     value,
     ...props
@@ -88,6 +89,7 @@ const renderSelect = ({
                 name={name}
                 onChange={(event, index, value) => onChange(value)}
                 ref={inputRef}
+                style={{marginTop: -14, ...style}}
                 value={value}
                 {...filterDOMProps(props)}
             >
