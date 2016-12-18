@@ -48,7 +48,14 @@ class Date_ extends Component {
                     />
                     <TimePicker
                         value={value}
-                        onChange={(event, date) => onChange(date)}
+                        onChange={(event, date) => {
+                            if (value) {
+                                date.setFullYear(value.getFullYear());
+                                date.setMonth(value.getMonth());
+                                date.setDate(value.getDate());
+                            }
+                            onChange(date);
+                        }}
                         ref="timepicker"
                         id={`${id}-time`}
                         textFieldStyle={{display: 'none'}}
