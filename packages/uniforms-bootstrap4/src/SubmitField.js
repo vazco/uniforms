@@ -3,7 +3,7 @@ import classnames       from 'classnames';
 import {BaseField}      from 'uniforms';
 import {filterDOMProps} from 'uniforms';
 
-import gridClassName from '../../lib/gridClassName';
+import gridClassName from './gridClassName';
 
 const SubmitField = ({
     className,
