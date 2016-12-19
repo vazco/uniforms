@@ -5,7 +5,7 @@ import joinName from './joinName';
 
 let graphql;
 try {
-    graphql = (0, require)('graphql');
+    graphql = require('graphql');
 } catch (_) { /* Ignore it. */ }
 
 const extractFromNonNull = x => x && x.type instanceof graphql.GraphQLNonNull ? {...x, type: x.type.ofType} : x;

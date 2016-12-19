@@ -7,7 +7,7 @@ import filterDOMProps from './filterDOMProps';
 
 let SimpleSchema;
 try {
-    SimpleSchema = (0, require)('simpl-schema').default;
+    SimpleSchema = require('simpl-schema').default;
     SimpleSchema.extendOptions(['uniforms']);
 
     // There's no possibility to retrieve them at runtime
