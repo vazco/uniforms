@@ -1,7 +1,7 @@
 {
   "name": "uniforms-bootstrap4",
   "version": "1.7.1",
-  "main": "lib/index.js",
+  "main": "index.js",
   "jsnext:main": "src/index.js",
   "description": "Bootstrap4 UI components for uniforms.",
   "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-bootstrap4",
@@ -20,12 +20,12 @@
     "validation"
   ],
   "files": [
-    "lib/",
+    "*.js",
     "src/"
   ],
   "scripts": {
-    "build": "babel --out-dir lib src",
-    "clean": "rimraf coverage lib .nyc_output",
+    "build": "babel --out-dir . src",
+    "clean": "rimraf *.js coverage .nyc_output",
     "cover": "cross-env NODE_ENV=cover nyc npm test",
     "lint": "eslint src test",
     "prepublish": "npm run build",

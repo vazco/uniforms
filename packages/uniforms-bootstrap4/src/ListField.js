@@ -1,9 +1,9 @@
-import React            from 'react';
-import classnames       from 'classnames';
-import {Children}       from 'react';
-import {connectField}   from 'uniforms';
-import {filterDOMProps} from 'uniforms';
-import {joinName}       from 'uniforms';
+import React          from 'react';
+import classnames     from 'classnames';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
+import joinName       from 'uniforms/joinName';
+import {Children}     from 'react';
 
 import ListAddField  from './ListAddField';
 import ListItemField from './ListItemField';

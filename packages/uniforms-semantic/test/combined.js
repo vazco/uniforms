@@ -17,7 +17,7 @@ import {LongTextField}  from 'uniforms-semantic';
 import {NumField}       from 'uniforms-semantic';
 import {SelectField}    from 'uniforms-semantic';
 import {SubmitField}    from 'uniforms-semantic';
-import {filterDOMProps} from 'uniforms';
+import {filterDOMProps} from 'uniforms/filterDOMProps';
 
 filterDOMProps.register(
     '__type__',

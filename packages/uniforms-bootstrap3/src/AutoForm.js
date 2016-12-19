@@ -1,4 +1,4 @@
-import {AutoForm} from 'uniforms';
+import AutoForm from 'uniforms/AutoForm';
 
 import ValidatedQuickForm from './ValidatedQuickForm';
 

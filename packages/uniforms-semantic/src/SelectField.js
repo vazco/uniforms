@@ -1,7 +1,7 @@
-import React            from 'react';
-import classnames       from 'classnames';
-import {connectField}   from 'uniforms';
-import {filterDOMProps} from 'uniforms';
+import React          from 'react';
+import classnames     from 'classnames';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 const xor = (item, array) => {
     const index = array.indexOf(item);

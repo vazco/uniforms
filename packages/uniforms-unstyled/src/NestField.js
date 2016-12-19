@@ -1,8 +1,8 @@
-import React            from 'react';
-import {connectField}   from 'uniforms';
-import {filterDOMProps} from 'uniforms';
-import {injectName}     from 'uniforms';
-import {joinName}       from 'uniforms';
+import React          from 'react';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
+import injectName     from 'uniforms/injectName';
+import joinName       from 'uniforms/joinName';
 
 import AutoField from './AutoField';
 

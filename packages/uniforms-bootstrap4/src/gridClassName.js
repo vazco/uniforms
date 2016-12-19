@@ -1,4 +1,4 @@
-import {filterDOMProps} from 'uniforms';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 filterDOMProps.register('grid');
 

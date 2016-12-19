@@ -1,5 +1,5 @@
 import invariant       from 'fbjs/lib/invariant';
-import {connectField}  from 'uniforms';
+import connectField    from 'uniforms/connectField';
 import {createElement} from 'react';
 
 import NumField    from './NumField';

@@ -1,8 +1,8 @@
-import React            from 'react';
-import classnames       from 'classnames';
-import {connectField}   from 'uniforms';
-import {filterDOMProps} from 'uniforms';
-import {nothing}        from 'uniforms';
+import React          from 'react';
+import classnames     from 'classnames';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
+import nothing        from 'uniforms/nothing';
 
 const Error = ({
     children,

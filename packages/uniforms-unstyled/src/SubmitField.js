@@ -1,6 +1,6 @@
-import React            from 'react';
-import {BaseField}      from 'uniforms';
-import {filterDOMProps} from 'uniforms';
+import BaseField      from 'uniforms/BaseField';
+import React          from 'react';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 const SubmitField = ({inputRef, value, ...props}, {uniforms: {error, state: {disabled}}}) =>
     <input

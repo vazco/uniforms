@@ -11,7 +11,7 @@ npm-debug.log
 npm-debug.log*
 lerna-debug.log
 
+packages/*/*.js
 packages/*/.nyc_output
 packages/*/coverage
-packages/*/lib
 packages/*/node_modules
