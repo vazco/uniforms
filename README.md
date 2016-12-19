@@ -169,7 +169,7 @@ Then use it in your form:
 
 ```js
 // Remember to choose correct theme package
-import {AutoForm} from 'uniforms-unstyled';
+import AutoForm from 'uniforms-unstyled/AutoForm';
 
 const PostCreateForm = () =>
     <AutoForm schema={PostSchema} onSubmit={doc => console.log(doc)} />
@@ -377,7 +377,7 @@ If your schema validator accepts any options, those can be passed in `validator`
 ### Example: `ModifierForm`
 
 ```js
-import {BaseForm} from 'uniforms';
+import BaseForm from 'uniforms/BaseForm';
 
 // In uniforms, every form is just an injectable set of functionalities. This
 // way allows us to live without many higher order components in favour of
@@ -507,9 +507,9 @@ Few props propagate in a very special way. These are `label`, `placeholder` and 
 **Note:** This example uses `connectField` helper. To read more see [API](#api).
 
 ```js
-import React          from 'react';
-import {AutoField}    from 'uniforms';
-import {connectField} from 'uniforms';
+import AutoField    from 'uniforms/AutoField';
+import React        from 'react';
+import connectField from 'uniforms/connectField';
 
 // This field is a kind of a shortcut for few fields. You can also access all
 // field props here, like value or onChange for some extra logic.
@@ -530,7 +530,7 @@ export default connectField(Composite);
 
 ```js
 // Remember to choose correct theme package
-import {AutoField} from 'uniforms-unstyled';
+import AutoField from 'uniforms-unstyled/AutoField';
 
 const CustomAuto = props => {
     // This way we don't care about not handled cases - we use default
@@ -560,9 +560,9 @@ You can also tell your `AutoForm`/`QuickForm`/`ValidatedQuickForm` to use it.
 **Note:** This example uses `connectField` helper. To read more see [API](#api).
 
 ```js
-import React          from 'react';
-import classnames     from 'classnames';
-import {connectField} from 'uniforms';
+import React        from 'react';
+import classnames   from 'classnames';
+import connectField from 'uniforms/connectField';
 
 // This field works like this: cycle all allowed values and optionally no-value
 // state if the field is not required. This one uses Semantic-UI.
@@ -592,8 +592,8 @@ export default connectField(Cycle);
 **Note:** This example uses `connectField` helper. To read more see [API](#api).
 
 ```js
-import React          from 'react';
-import {connectField} from 'uniforms';
+import React        from 'react';
+import connectField from 'uniforms/connectField';
 
 // This field works like this: two datepickers are bound to each other. Value is
 // an {start, stop} object.
@@ -612,9 +612,9 @@ export default connectField(Range);
 **Note:** This example uses `connectField` helper. To read more see [API](#api).
 
 ```js
-import React          from 'react';
-import classnames     from 'classnames';
-import {connectField} from 'uniforms';
+import React        from 'react';
+import classnames   from 'classnames';
+import connectField from 'uniforms/connectField';
 
 // This field works like this: render stars for each rating and mark them as
 // filled, if rating (value) is greater. This one uses Semantic-UI.
@@ -658,7 +658,7 @@ Currently built in bridges:
 ### GraphQL definition
 
 ```js
-import {GraphQLBridge}  from 'uniforms';
+import GraphQLBridge    from 'uniforms/GraphQLBridge';
 import {buildASTSchema} from 'graphql';
 import {parse}          from 'graphql';
 
@@ -738,7 +738,7 @@ const PersonSchema = new SimpleSchema({
 **Note:** This is a very basic schema just to show how it works and how can you create your own schema bridges.
 
 ```js
-import {Bridge} from 'uniforms';
+import Bridge from 'uniforms/Bridge';
 
 class MyLittleSchema extends Bridge {
     constructor (schema, validator) {
@@ -864,9 +864,9 @@ MyComponentUsingUniformsContext.contextTypes = {
 ### Example: `DisplayIf`
 
 ```js
-import {BaseField} from 'uniforms';
-import {Children}  from 'react';
-import {nothing}   from 'uniforms';
+import BaseField  from 'uniforms/BaseField';
+import nothing    from 'uniforms/nothing';
+import {Children} from 'react';
 
 // We have to ensure, that there's only one children, because returning an array
 // from component is prohibited.
@@ -906,9 +906,9 @@ const ThreeStepForm = ({schema}) =>
 ### Example: `SubmitButton`
 
 ```js
-import React            from 'react';
-import {BaseField}      from 'uniforms';
-import {filterDOMProps} from 'uniforms';
+import BaseField      from 'uniforms/BaseField';
+import React          from 'react';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 // This field works like this: render standard submit field and disable it, when
 // the form is invalid. It's a simplified version of default SubmitField from
@@ -925,9 +925,9 @@ export default SubmitField;
 ### Example: `SwapField`
 
 ```js
+import BaseField      from 'uniforms/BaseField';
 import get            from 'lodash.get';
 import {Children}     from 'react';
-import {BaseField}    from 'uniforms';
 import {cloneElement} from 'react';
 
 // This field works like this: on click of it's child it swaps values of fieldA

@@ -1,4 +1,5 @@
 ## Next
+- **Added:** Support for direct imports, i.e. `import connectField from 'uniforms'`. [\#129](https://github.com/vazco/uniforms/issues/129)
 - **Fixed:** Reset of a form with a model. [\#140](https://github.com/vazco/uniforms/issues/140)
 
 <br>
