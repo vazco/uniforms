@@ -1,6 +1,6 @@
-import PanelGroup      from 'react-panelgroup';
-import React           from 'react';
-import {ValidatedForm} from 'uniforms';
+import PanelGroup    from 'react-panelgroup';
+import React         from 'react';
+import ValidatedForm from 'uniforms/ValidatedForm';
 
 export class ApplicationForm extends ValidatedForm {
     getChildContextState () {

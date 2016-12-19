@@ -1,7 +1,7 @@
-import Frame          from 'react-frame-component';
-import React          from 'react';
-import {Component}    from 'react';
-import {connectField} from 'uniforms';
+import Frame        from 'react-frame-component';
+import React        from 'react';
+import connectField from 'uniforms/connectField';
+import {Component}  from 'react';
 
 import styles from '../lib/styles';
 import themes from '../lib/themes';

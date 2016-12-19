@@ -1,5 +1,5 @@
-import React          from 'react';
-import {connectField} from 'uniforms';
+import React        from 'react';
+import connectField from 'uniforms/connectField';
 
 const ApplicationSelect = ({allowedValues, onChange, transform, value}) =>
     <section>

@@ -1,4 +1,4 @@
-import {BaseField} from 'uniforms';
+import BaseField from 'uniforms/BaseField';
 
 class ApplicationField extends BaseField {
     shouldComponentUpdate (props, state, context) {

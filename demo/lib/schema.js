@@ -1,10 +1,10 @@
 import MessageBox       from 'message-box';
 import SimpleSchema2    from 'simpl-schema';
-import {GraphQLBridge}  from 'uniforms';
-import {Meteor}         from 'meteor/meteor';
+import GraphQLBridge    from 'uniforms/GraphQLBridge';
 import {buildASTSchema} from 'graphql';
 import {parse}          from 'graphql';
 
+import {Meteor}       from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
 import presets from './presets';
