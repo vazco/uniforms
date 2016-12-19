@@ -4,20 +4,20 @@ import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 import {stub}   from 'sinon';
 
-import {AutoFields}     from 'uniforms-bootstrap4';
-import {AutoForm}       from 'uniforms-bootstrap4';
-import {ErrorField}     from 'uniforms-bootstrap4';
-import {ErrorsField}    from 'uniforms-bootstrap4';
-import {HiddenField}    from 'uniforms-bootstrap4';
-import {ListAddField}   from 'uniforms-bootstrap4';
-import {ListDelField}   from 'uniforms-bootstrap4';
-import {ListField}      from 'uniforms-bootstrap4';
-import {ListItemField}  from 'uniforms-bootstrap4';
-import {LongTextField}  from 'uniforms-bootstrap4';
-import {NumField}       from 'uniforms-bootstrap4';
-import {SelectField}    from 'uniforms-bootstrap4';
-import {SubmitField}    from 'uniforms-bootstrap4';
-import {filterDOMProps} from 'uniforms';
+import AutoFields     from 'uniforms-bootstrap4/AutoFields';
+import AutoForm       from 'uniforms-bootstrap4/AutoForm';
+import ErrorField     from 'uniforms-bootstrap4/ErrorField';
+import ErrorsField    from 'uniforms-bootstrap4/ErrorsField';
+import HiddenField    from 'uniforms-bootstrap4/HiddenField';
+import ListAddField   from 'uniforms-bootstrap4/ListAddField';
+import ListDelField   from 'uniforms-bootstrap4/ListDelField';
+import ListField      from 'uniforms-bootstrap4/ListField';
+import ListItemField  from 'uniforms-bootstrap4/ListItemField';
+import LongTextField  from 'uniforms-bootstrap4/LongTextField';
+import NumField       from 'uniforms-bootstrap4/NumField';
+import SelectField    from 'uniforms-bootstrap4/SelectField';
+import SubmitField    from 'uniforms-bootstrap4/SubmitField';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 filterDOMProps.register(
     '__type__',

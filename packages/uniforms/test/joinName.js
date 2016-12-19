@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 
-import {joinName} from 'uniforms';
+import joinName from 'uniforms/joinName';
 
 describe('joinName', () => {
     it('is a function', () => {

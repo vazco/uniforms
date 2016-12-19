@@ -4,20 +4,20 @@ import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 import {stub}   from 'sinon';
 
-import {AutoFields}     from 'uniforms-unstyled';
-import {AutoForm}       from 'uniforms-unstyled';
-import {ErrorField}     from 'uniforms-unstyled';
-import {ErrorsField}    from 'uniforms-unstyled';
-import {HiddenField}    from 'uniforms-unstyled';
-import {ListAddField}   from 'uniforms-unstyled';
-import {ListDelField}   from 'uniforms-unstyled';
-import {ListField}      from 'uniforms-unstyled';
-import {ListItemField}  from 'uniforms-unstyled';
-import {LongTextField}  from 'uniforms-unstyled';
-import {NumField}       from 'uniforms-unstyled';
-import {SelectField}    from 'uniforms-unstyled';
-import {SubmitField}    from 'uniforms-unstyled';
-import {filterDOMProps} from 'uniforms';
+import AutoFields     from 'uniforms-unstyled/AutoFields';
+import AutoForm       from 'uniforms-unstyled/AutoForm';
+import ErrorField     from 'uniforms-unstyled/ErrorField';
+import ErrorsField    from 'uniforms-unstyled/ErrorsField';
+import HiddenField    from 'uniforms-unstyled/HiddenField';
+import ListAddField   from 'uniforms-unstyled/ListAddField';
+import ListDelField   from 'uniforms-unstyled/ListDelField';
+import ListField      from 'uniforms-unstyled/ListField';
+import ListItemField  from 'uniforms-unstyled/ListItemField';
+import LongTextField  from 'uniforms-unstyled/LongTextField';
+import NumField       from 'uniforms-unstyled/NumField';
+import SelectField    from 'uniforms-unstyled/SelectField';
+import SubmitField    from 'uniforms-unstyled/SubmitField';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 filterDOMProps.register(
     '__type__',

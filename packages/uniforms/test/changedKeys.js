@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 
-import {changedKeys} from 'uniforms';
+import changedKeys from 'uniforms/changedKeys';
 
 describe('changedKeys', () => {
     it('is a function', () => {

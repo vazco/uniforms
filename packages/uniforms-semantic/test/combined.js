@@ -4,20 +4,20 @@ import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 import {stub}   from 'sinon';
 
-import {AutoFields}     from 'uniforms-semantic';
-import {AutoForm}       from 'uniforms-semantic';
-import {ErrorField}     from 'uniforms-semantic';
-import {ErrorsField}    from 'uniforms-semantic';
-import {HiddenField}    from 'uniforms-semantic';
-import {ListAddField}   from 'uniforms-semantic';
-import {ListDelField}   from 'uniforms-semantic';
-import {ListField}      from 'uniforms-semantic';
-import {ListItemField}  from 'uniforms-semantic';
-import {LongTextField}  from 'uniforms-semantic';
-import {NumField}       from 'uniforms-semantic';
-import {SelectField}    from 'uniforms-semantic';
-import {SubmitField}    from 'uniforms-semantic';
-import {filterDOMProps} from 'uniforms/filterDOMProps';
+import AutoFields     from 'uniforms-semantic/AutoFields';
+import AutoForm       from 'uniforms-semantic/AutoForm';
+import ErrorField     from 'uniforms-semantic/ErrorField';
+import ErrorsField    from 'uniforms-semantic/ErrorsField';
+import HiddenField    from 'uniforms-semantic/HiddenField';
+import ListAddField   from 'uniforms-semantic/ListAddField';
+import ListDelField   from 'uniforms-semantic/ListDelField';
+import ListField      from 'uniforms-semantic/ListField';
+import ListItemField  from 'uniforms-semantic/ListItemField';
+import LongTextField  from 'uniforms-semantic/LongTextField';
+import NumField       from 'uniforms-semantic/NumField';
+import SelectField    from 'uniforms-semantic/SelectField';
+import SubmitField    from 'uniforms-semantic/SubmitField';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 filterDOMProps.register(
     '__type__',

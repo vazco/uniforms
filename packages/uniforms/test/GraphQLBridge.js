@@ -4,7 +4,7 @@ import {expect}         from 'chai';
 import {parse}          from 'graphql';
 import {stub}           from 'sinon';
 
-import {GraphQLBridge} from 'uniforms';
+import GraphQLBridge from 'uniforms/GraphQLBridge';
 
 describe('GraphQLBridge', () => {
     const schema = `

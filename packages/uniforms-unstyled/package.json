@@ -54,7 +54,6 @@
     "eslint-plugin-vazco": "1.0.0",
     "jsdom": "^9.8.3",
     "mocha": "^3.2.0",
-    "mock-require": "^2.0.0",
     "nyc": "^10.0.0",
     "react": "^15.0.0 || ^0.14.0",
     "react-addons-test-utils": "^15.0.0 || ^0.14.0",

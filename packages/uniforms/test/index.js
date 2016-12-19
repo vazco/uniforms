@@ -12,7 +12,14 @@ Object.keys(window).forEach(property => {
 });
 
 // Mocks
-import mock from 'mock-require';
+const Module = require('module');
+const loader = Module._load;
+Module._load = function _load (request, parent) {
+    return loader(
+        request.replace(/^uniforms/, '../src'),
+        parent
+    );
+};
 
 global.Package = {};
 
@@ -34,5 +41,3 @@ global.Package['aldeed:simple-schema'].SimpleSchema = {
         return name.replace(/\.[0-9]+(?=\.|$)/g, '.$');
     }
 };
-
-mock('uniforms', '../src');

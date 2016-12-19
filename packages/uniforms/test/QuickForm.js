@@ -3,7 +3,7 @@ import {Component} from 'react';
 import {expect}    from 'chai';
 import {mount}     from 'enzyme';
 
-import {QuickForm} from 'uniforms';
+import QuickForm from 'uniforms/QuickForm';
 
 describe('QuickForm', () => {
     /* eslint-disable react/display-name */

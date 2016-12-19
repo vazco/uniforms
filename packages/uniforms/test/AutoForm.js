@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 
-import {AutoForm} from 'uniforms';
+import AutoForm from 'uniforms/AutoForm';
 
 describe('AutoForm', () => {
     const onChangeModel = spy();

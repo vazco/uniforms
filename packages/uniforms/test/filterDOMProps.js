@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 
-import {filterDOMProps} from 'uniforms';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 describe('joinName', () => {
     it('is a function', () => {

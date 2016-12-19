@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 
-import {Bridge} from 'uniforms';
+import Bridge from 'uniforms/Bridge';
 
 describe('Bridge', () => {
     class CustomBridge extends Bridge {}

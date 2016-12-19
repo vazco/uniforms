@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 
-import {createSchemaBridge} from 'uniforms';
+import createSchemaBridge from 'uniforms/createSchemaBridge';
 
 describe('createSchemaBridge', () => {
     it('is a function', () => {

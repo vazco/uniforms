@@ -4,7 +4,7 @@ import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 import {stub}   from 'sinon';
 
-import {BaseForm} from 'uniforms';
+import BaseForm from 'uniforms/BaseForm';
 
 describe('BaseForm', () => {
     const noop   = () => {};

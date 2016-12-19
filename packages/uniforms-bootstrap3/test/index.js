@@ -11,7 +11,13 @@ Object.keys(window).forEach(property => {
 });
 
 // Mocks
-import mock from 'mock-require';
-
-mock('uniforms', '../../uniforms/src');
-mock('uniforms-bootstrap3', '../src');
+const Module = require('module');
+const loader = Module._load;
+Module._load = function _load (request, parent) {
+    return loader(
+        request
+            .replace(/^uniforms-bootstrap3/, '../src')
+            .replace(/^uniforms/, '../../uniforms/src'),
+        parent
+    );
+};

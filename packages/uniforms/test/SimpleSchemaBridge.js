@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 
-import {SimpleSchemaBridge} from 'uniforms';
+import SimpleSchemaBridge from 'uniforms/SimpleSchemaBridge';
 
 describe('SimpleSchemaBridge', () => {
     const noop = () => {};

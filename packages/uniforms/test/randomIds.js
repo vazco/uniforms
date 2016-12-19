@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 
-import {randomIds} from 'uniforms';
+import randomIds from 'uniforms/randomIds';
 
 describe('randomIds', () => {
     it('is a function', () => {

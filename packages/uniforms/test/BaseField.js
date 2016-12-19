@@ -3,10 +3,10 @@ import {expect} from 'chai';
 import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 
-import {BaseField}          from 'uniforms';
-import {createSchemaBridge} from 'uniforms';
-import {nothing}            from 'uniforms';
-import {randomIds}          from 'uniforms';
+import BaseField          from 'uniforms/BaseField';
+import createSchemaBridge from 'uniforms/createSchemaBridge';
+import nothing            from 'uniforms/nothing';
+import randomIds          from 'uniforms/randomIds';
 
 describe('BaseField', () => {
     const PropsComponent = () => nothing;

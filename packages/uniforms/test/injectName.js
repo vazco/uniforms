@@ -3,11 +3,11 @@ import {expect} from 'chai';
 import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 
-import {connectField}       from 'uniforms';
-import {createSchemaBridge} from 'uniforms';
-import {injectName}         from 'uniforms';
-import {nothing}            from 'uniforms';
-import {randomIds}          from 'uniforms';
+import connectField       from 'uniforms/connectField';
+import createSchemaBridge from 'uniforms/createSchemaBridge';
+import injectName         from 'uniforms/injectName';
+import nothing            from 'uniforms/nothing';
+import randomIds          from 'uniforms/randomIds';
 
 describe('injectName', () => {
     const error = new Error();

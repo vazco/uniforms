@@ -5,7 +5,7 @@ import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 import {stub}   from 'sinon';
 
-import {ValidatedForm} from 'uniforms';
+import ValidatedForm from 'uniforms/ValidatedForm';
 
 describe('ValidatedForm', () => {
     let validator = stub();
