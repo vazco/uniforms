@@ -2,7 +2,7 @@ import React          from 'react';
 import classnames     from 'classnames';
 import {connectField} from 'uniforms';
 
-import wrapField from '../../lib/wrapField';
+import wrapField from './wrapField';
 
 const Radio = props =>
     wrapField(props, (
