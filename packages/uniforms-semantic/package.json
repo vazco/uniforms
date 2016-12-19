@@ -31,7 +31,7 @@
     "prepublish": "npm run build",
     "pretest": "npm run lint",
     "reset": "rimraf node_modules",
-    "test": "babel-node node_modules/.bin/_mocha --require test/index.js --recursive test --reporter list"
+    "test": "babel-node node_modules/.bin/_mocha --require test/index.js test --reporter list"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

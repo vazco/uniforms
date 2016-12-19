@@ -1,9 +1,9 @@
 import {QuickForm} from 'uniforms';
 
 import BaseForm    from './BaseForm';
-import AutoField   from '../fields/AutoField';
-import ErrorsField from '../fields/ErrorsField';
-import SubmitField from '../fields/SubmitField';
+import AutoField   from './AutoField';
+import ErrorsField from './ErrorsField';
+import SubmitField from './SubmitField';
 
 const Quick = parent => class extends QuickForm.Quick(parent) {
     static Quick = Quick;
