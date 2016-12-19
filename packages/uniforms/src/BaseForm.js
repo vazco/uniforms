@@ -4,9 +4,9 @@ import set         from 'lodash.set';
 import {Component} from 'react';
 import {PropTypes} from 'react';
 
-import changedKeys        from '../../helpers/changedKeys';
-import createSchemaBridge from '../../bridges';
-import randomIds          from '../../helpers/randomIds';
+import changedKeys        from './changedKeys';
+import createSchemaBridge from './createSchemaBridge';
+import randomIds          from './randomIds';
 
 export default class BaseForm extends Component {
     static displayName = 'Form';

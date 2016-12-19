@@ -1,6 +1,6 @@
 import {createElement} from 'react';
 
-import BaseField from '../components/fields/BaseField';
+import BaseField from './BaseField';
 
 export default function connectField (component, {
     mapProps  = x => x,

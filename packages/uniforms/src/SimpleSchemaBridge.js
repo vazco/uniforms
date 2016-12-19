@@ -4,8 +4,8 @@ import cloneDeep from 'lodash.clonedeep';
 import invariant from 'fbjs/lib/invariant';
 
 import Bridge         from './Bridge';
-import joinName       from '../helpers/joinName';
-import filterDOMProps from '../helpers/filterDOMProps';
+import joinName       from './joinName';
+import filterDOMProps from './filterDOMProps';
 
 let Match        = (typeof global === 'object' ? global : window).Match;
 let SimpleSchema = (typeof global === 'object' ? global : window).SimpleSchema;

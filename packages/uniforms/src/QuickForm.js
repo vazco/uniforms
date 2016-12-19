@@ -2,7 +2,7 @@ import React       from 'react';
 import {PropTypes} from 'react';
 
 import BaseForm from './BaseForm';
-import nothing  from '../../helpers/nothing';
+import nothing  from './nothing';
 
 const Quick = parent => class extends parent {
     static Quick = Quick;

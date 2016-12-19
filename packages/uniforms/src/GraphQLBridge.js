@@ -1,7 +1,7 @@
 import invariant from 'fbjs/lib/invariant';
 
 import Bridge   from './Bridge';
-import joinName from '../helpers/joinName';
+import joinName from './joinName';
 
 let graphql;
 try {

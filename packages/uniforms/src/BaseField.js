@@ -3,8 +3,8 @@ import isEqual     from 'lodash.isequal';
 import {Component} from 'react';
 import {PropTypes} from 'react';
 
-import BaseForm from '../forms/BaseForm';
-import joinName from '../../helpers/joinName';
+import BaseForm from './BaseForm';
+import joinName from './joinName';
 
 export default class BaseField extends Component {
     static displayName = 'Field';
