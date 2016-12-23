@@ -1,3 +1,27 @@
+## [v1.8.0](https://github.com/vazco/uniforms/releases/tag/v1.8.0)
+- **Added:** Support for direct imports, i.e. `import connectField from 'uniforms'`. [\#129](https://github.com/vazco/uniforms/issues/129)
+- **Fixed:** Optional packages resolution in Webpack. [\#150](https://github.com/vazco/uniforms/issues/150)
+- **Fixed:** Reset of a form with a model. [\#140](https://github.com/vazco/uniforms/issues/140)
+
+<br>
+
+## [v1.7.1](https://github.com/vazco/uniforms/releases/tag/v1.7.1)
+- **Fixed:** Handling of `label` in `GraphQLBridge`.
+- **Fixed:** Got rid of unknown props warning in semantic theme.
+- **Fixed:** Extraneous option in `SelectField` in semantic theme.
+- **Fixed:** Extraneous option in `SelectField` in unstyled theme.
+
+<br>
+
+## [v1.7.0](https://github.com/vazco/uniforms/releases/tag/v1.7.0)
+
+<br>
+
+## [v1.7.0-beta.1](https://github.com/vazco/uniforms/releases/tag/v1.7.0-beta.1)
+- **Added:** New `modelTransform` prop in `BaseForm`. [\#123](https://github.com/vazco/uniforms/issues/123)
+
+<br>
+
 ## [v1.6.0](https://github.com/vazco/uniforms/releases/tag/v1.6.0)
 
 <br>
