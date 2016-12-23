@@ -50,7 +50,7 @@
 ## `AutoField`
 
 ```js
-import {AutoField} from 'uniforms-unstyled'; // Choose your theme package.
+import AutoField from 'uniforms-unstyled/AutoField'; // Choose your theme package.
 
 <AutoField
     // Field renderer.
@@ -67,7 +67,7 @@ import {AutoField} from 'uniforms-unstyled'; // Choose your theme package.
 ## `AutoFields`
 
 ```js
-import {AutoFields} from 'uniforms-unstyled'; // Choose your theme package.
+import AutoFields from 'uniforms-unstyled/AutoFields'; // Choose your theme package.
 
 <AutoFields
     // AutoField component.
@@ -94,14 +94,14 @@ import {AutoFields} from 'uniforms-unstyled'; // Choose your theme package.
 ## `BaseField`
 
 ```js
-import {BaseField} from 'uniforms';
+import BaseField from 'uniforms/BaseField';
 
-// You can't really render a BaseField, because it don't have a render method.
+// You can't really render a BaseField because it doesn't have a render method.
 // It's a base class of all packaged fields, so all below props are available to
 // all fields.
 <BaseField
     // Field disabled state.
-    //   It's passed directly to the field, but it propagates same as label.
+    //   It's passed directly to the field, but it propagates same as the label.
     disabled={false}
 
     // Field label.
@@ -135,7 +135,7 @@ import {BaseField} from 'uniforms';
 ## `BoolField`
 
 ```js
-import {BoolField} from 'uniforms-unstyled'; // Choose your theme package.
+import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme package.
 
 <BoolField
     // Field feedback state.
@@ -221,7 +221,7 @@ import {BoolField} from 'uniforms-unstyled'; // Choose your theme package.
 ## `DateField`
 
 ```js
-import {DateField} from 'uniforms-unstyled'; // Choose your theme package.
+import DateField from 'uniforms-unstyled/DateField'; // Choose your theme package.
 
 <DateField
     // Field feedback state.
@@ -320,7 +320,7 @@ import {DateField} from 'uniforms-unstyled'; // Choose your theme package.
 ## `ErrorField`
 
 ```js
-import {ErrorField} from 'uniforms-unstyled'; // Choose your theme package.
+import ErrorField from 'uniforms-unstyled/ErrorField'; // Choose your theme package.
 
 <ErrorField
     // Custom content.
@@ -337,7 +337,7 @@ import {ErrorField} from 'uniforms-unstyled'; // Choose your theme package.
 ## `ErrorsField`
 
 ```js
-import {ErrorsField} from 'uniforms-unstyled'; // Choose your theme package.
+import ErrorsField from 'uniforms-unstyled/ErrorsField'; // Choose your theme package.
 
 <ErrorsField
     // Custom content.
@@ -350,7 +350,7 @@ import {ErrorsField} from 'uniforms-unstyled'; // Choose your theme package.
 ## `HiddenField`
 
 ```js
-import {HiddenField} from 'uniforms-unstyled'; // Choose your theme package.
+import HiddenField from 'uniforms-unstyled/HiddenField'; // Choose your theme package.
 
 <HiddenField
     // Field name.
@@ -368,7 +368,7 @@ import {HiddenField} from 'uniforms-unstyled'; // Choose your theme package.
 ## `ListAddField`
 
 ```js
-import {ListAddField} from 'uniforms-unstyled'; // Choose your theme package.
+import ListAddField from 'uniforms-unstyled/ListAddField'; // Choose your theme package.
 
 <ListAddField
     // Icon.
@@ -386,7 +386,7 @@ import {ListAddField} from 'uniforms-unstyled'; // Choose your theme package.
 ## `ListDelField`
 
 ```js
-import {ListDelField} from 'uniforms-unstyled'; // Choose your theme package.
+import ListDelField from 'uniforms-unstyled/ListDelField'; // Choose your theme package.
 
 <ListDelField
     // Icon.
@@ -404,7 +404,7 @@ import {ListDelField} from 'uniforms-unstyled'; // Choose your theme package.
 ## `ListField`
 
 ```js
-import {ListField} from 'uniforms-unstyled'; // Choose your theme package.
+import ListField from 'uniforms-unstyled/ListField'; // Choose your theme package.
 
 <ListField
     // Icon.
@@ -444,7 +444,7 @@ import {ListField} from 'uniforms-unstyled'; // Choose your theme package.
 ## `ListItemField`
 
 ```js
-import {ListItemField} from 'uniforms-unstyled'; // Choose your theme package.
+import ListItemField from 'uniforms-unstyled/ListItemField'; // Choose your theme package.
 
 <ListItemField
     // Icon.
@@ -462,7 +462,7 @@ import {ListItemField} from 'uniforms-unstyled'; // Choose your theme package.
 ## `LongTextField`
 
 ```js
-import {LongTextField} from 'uniforms-unstyled'; // Choose your theme package.
+import LongTextField from 'uniforms-unstyled/LongTextField'; // Choose your theme package.
 
 <LongTextField
     // Field layout.
@@ -547,7 +547,7 @@ import {LongTextField} from 'uniforms-unstyled'; // Choose your theme package.
 ## `NestField`
 
 ```js
-import {NestField} from 'uniforms-unstyled'; // Choose your theme package.
+import NestField from 'uniforms-unstyled/NestField'; // Choose your theme package.
 
 <NestField
     // Array of rendered fields.
@@ -570,7 +570,7 @@ import {NestField} from 'uniforms-unstyled'; // Choose your theme package.
 ## `NumField`
 
 ```js
-import {NumField} from 'uniforms-unstyled'; // Choose your theme package.
+import NumField from 'uniforms-unstyled/NumField'; // Choose your theme package.
 
 <NumField
     // Decimal mode.
@@ -665,7 +665,7 @@ import {NumField} from 'uniforms-unstyled'; // Choose your theme package.
 ## `RadioField`
 
 ```js
-import {RadioField} from 'uniforms-unstyled'; // Choose your theme package.
+import RadioField from 'uniforms-unstyled/RadioField'; // Choose your theme package.
 
 <RadioField
     // Array of allowed values.
@@ -705,7 +705,7 @@ import {RadioField} from 'uniforms-unstyled'; // Choose your theme package.
 ## `SelectField`
 
 ```js
-import {SelectField} from 'uniforms-unstyled'; // Choose your theme package.
+import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme package.
 
 <SelectField
     // Array of allowed values.
@@ -755,7 +755,7 @@ import {SelectField} from 'uniforms-unstyled'; // Choose your theme package.
 ## `SubmitField`
 
 ```js
-import {SubmitField} from 'uniforms-unstyled'; // Choose your theme package.
+import SubmitField from 'uniforms-unstyled/SubmitField'; // Choose your theme package.
 
 <SubmitField
     // Input wrapper class name.
@@ -777,7 +777,7 @@ import {SubmitField} from 'uniforms-unstyled'; // Choose your theme package.
 ## `TextField`
 
 ```js
-import {TextField} from 'uniforms-unstyled'; // Choose your theme package.
+import TextField from 'uniforms-unstyled/TextField'; // Choose your theme package.
 
 <TextField
     // Field layout.
@@ -870,7 +870,7 @@ import {TextField} from 'uniforms-unstyled'; // Choose your theme package.
 ## `AutoForm`
 
 ```js
-import {AutoForm} from 'uniforms'; // Or from the theme package.
+import AutoForm from 'uniforms/AutoForm'; // Or from the theme package.
 
 <AutoForm
     // Like onChange but for the whole model.
@@ -885,7 +885,7 @@ import {AutoForm} from 'uniforms'; // Or from the theme package.
 ## `BaseForm`
 
 ```js
-import {BaseForm} from 'uniforms'; // Or from the theme package.
+import BaseForm from 'uniforms/BaseForm'; // Or from the theme package.
 
 <BaseForm
     // Autosave delay.
@@ -927,6 +927,23 @@ import {BaseForm} from 'uniforms'; // Or from the theme package.
     //   you'll receive a plain object. If you'll treat form as an input, then
     //   this is value.
     model={{fieldA: 1}}
+
+    // Model transform.
+    //   Function transforming one model into another. It's used in few
+    //   situations (modes) described below. Do not mutate given model!
+    modelTransform={(mode, model) => {
+        // This model will be passed to the fields.
+        if (mode === 'form') {/* ... */}
+
+        // This model will be submitted.
+        if (mode === 'submit') {/* ... */}
+
+        // This model will be validated.
+        if (mode === 'validate') {/* ... */}
+
+        // Otherwise, return unaltered model.
+        return model;
+    }}
 
     // Field change action.
     //   It receive two arguments: key and value, where key is a dot separated
@@ -991,7 +1008,7 @@ import {BaseForm} from 'uniforms'; // Or from the theme package.
 ## `QuickForm`
 
 ```js
-import {QuickForm} from 'uniforms'; // Or from the theme package.
+import QuickForm from 'uniforms/QuickForm'; // Or from the theme package.
 
 <QuickForm
     // Custom AutoField.
@@ -1013,7 +1030,7 @@ import {QuickForm} from 'uniforms'; // Or from the theme package.
 ## `ValidatedForm`
 
 ```js
-import {ValidatedForm} from 'uniforms'; // Or from the theme package.
+import ValidatedForm from 'uniforms/ValidatedForm'; // Or from the theme package.
 
 <ValidatedForm
     // Additional asynchronous validation.
@@ -1081,7 +1098,7 @@ import {ValidatedForm} from 'uniforms'; // Or from the theme package.
 ## `changedKeys`
 
 ```js
-import {changedKeys} from 'uniforms';
+import changedKeys from 'uniforms/changedKeys';
 
 // Returns array of changed keys between valueA and valueB, where root is the
 // root key.
@@ -1093,7 +1110,7 @@ const arrayOfChangedKeys = changedKeys(root, valueA, valueB);
 ## `connectField`
 
 ```js
-import {connectField} from 'uniforms';
+import connectField from 'uniforms/connectField';
 
 const ComponentXField = connectField(ComponentX, {
     // Props mapper
@@ -1131,7 +1148,7 @@ const ComponentXField = connectField(ComponentX, {
 ## `filterDOMProps`
 
 ```js
-import {filterDOMProps} from 'uniforms';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 // If you create your custom field, then it's a safe way to get rid of all
 // uniforms-related props.
@@ -1155,7 +1172,7 @@ filterDOMProps.registered; // ['propA', 'propB', ...]
 ## `injectName`
 
 ```js
-import {injectName} from 'uniforms';
+import injectName from 'uniforms/injectName';
 
 // It's rather internal helper, but it's still exported. Injects name to all
 // already rendered fields.
@@ -1165,7 +1182,7 @@ const componentWithInjectedName = injectName(name, component);
 ## `joinName`
 
 ```js
-import {joinName} from 'uniforms';
+import joinName from 'uniforms/joinName';
 
 // Use it to safely join partial field names. If you create custom field with
 // subfields, then it's better to use this helper.
@@ -1179,7 +1196,7 @@ const joinedNameArray = joinName(null, nameA, nameB, nameC, ...);
 ## `nothing`
 
 ```js
-import {nothing} from 'uniforms';
+import nothing from 'uniforms/nothing';
 
 // In React@0.14 you can't return null from functional component, but in
 // React@15 you should use null - nothing is a "safe null". Basically it's a
@@ -1190,7 +1207,7 @@ const emptyJSX = () => nothing;
 ## `randomIds`
 
 ```js
-import {randomIds} from 'uniforms';
+import randomIds from 'uniforms/randomIds';
 
 // It's rather an internal helper, but it's still exported. Use it, if you want
 // to have some random but deterministic strings.
@@ -1208,7 +1225,7 @@ const predictableRandomIdC = safeRandomIdGenerator();
 ## `Bridge`
 
 ```js
-import {Bridge} from 'uniforms';
+import Bridge from 'uniforms/Bridge';
 
 // This is a kind of abstract class. It should be extended to create custom
 // bridges. It implements all of the required methods and throws an error with
@@ -1250,7 +1267,7 @@ class CustomBridge extends Bridge {
 ## `GraphQLBridge`
 
 ```js
-import {GraphQLBridge}  from 'uniforms';
+import GraphQLBridge    from 'uniforms/GraphQLBridge';
 import {buildASTSchema} from 'graphql';
 import {parse}          from 'graphql';
 
@@ -1305,7 +1322,7 @@ const bridge = new GraphQLBridge(schemaType, schemaValidator, schemaData);
 ## `SimpleSchemaBridge`
 
 ```js
-import {SimpleSchemaBridge} from 'uniforms';
+import SimpleSchemaBridge from 'uniforms/SimpleSchemaBridge';
 
 // SimpleSchema bridge.
 const bridge = new SimpleSchemaBridge(simpleSchemaInstance);
@@ -1314,7 +1331,7 @@ const bridge = new SimpleSchemaBridge(simpleSchemaInstance);
 ## `SimpleSchema2Bridge`
 
 ```js
-import {SimpleSchema2Bridge} from 'uniforms';
+import SimpleSchema2Bridge from 'uniforms/SimpleSchema2Bridge';
 
 // SimpleSchema@2 bridge.
 const bridge = new SimpleSchema2Bridge(simpleSchema2Instance);
@@ -1323,7 +1340,7 @@ const bridge = new SimpleSchema2Bridge(simpleSchema2Instance);
 ## `createSchemaBridge`
 
 ```js
-import {createSchemaBridge} from 'uniforms';
+import createSchemaBridge from 'uniforms/createSchemaBridge';
 
 // It's rather an internal helper, but it's still exported. Use it, if you want
 // to manually create a schema bridge or to test your bridge. It will throw on

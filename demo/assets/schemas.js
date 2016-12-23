@@ -3,6 +3,25 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 const schema = strings => strings[0].replace(/([\r\n]+) {4}/g, '$1');
 const schemas = {
     'Example - address': schema`{
+        colorArray: {
+          type: [String],
+          label: "Hex color value for chart text.",
+          uniforms: {
+            fieldComponent: 'color',
+            colorRatios: [0.35, 0.7, -0.2, -0.4],
+            info: "Hex color value"
+          }
+      },
+        colorOne: {
+          type: String,
+          label: "Hex color value for chart text.",
+          defaultValue: "#434d52",
+          uniforms: {
+            fieldComponent: 'color',
+            colorRatios: [0.35, 0.7, -0.2, -0.4],
+            info: "Hex color value"
+          }
+      },
         'array.$.test': {
             type: String
         },
@@ -76,6 +95,15 @@ const schemas = {
                             {value: 'ddd', label: 'd'}
                         ]
                 }
+        },
+        "nullMultiselect": {
+            type: [String],
+            allowedValues: ['ggg','hhh','jjj','kkk'],
+            minCount: 1,
+            defaultValue: [null],
+            custom: function(){
+                return(this.value.length === 0 ? "minCount" : this.value[0] == null ? "minCount" : null)
+            }
         },
         "radio": {
             type: String,
@@ -211,6 +239,26 @@ const schemas = {
         'authors.$': {
             type: String
         }
+    }`,
+    'Test Hidden': schema`{
+        company: {
+  type: String,
+  regEx: /^[A-Z]*$/,
+  label: 'Name of the company',
+  max: 30,
+  min: 3,
+  optional: true,
+  uniforms: {fieldComponent: 'hidden'}
+},
+title: {
+  type: String,
+  label: 'Title of the dashboard',
+},
+
+date: {
+  type: Date,
+  label: 'Title of the dashboard'
+}
     }`
 };
 

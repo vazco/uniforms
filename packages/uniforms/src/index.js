@@ -1,21 +1,18 @@
-export {default as Bridge}              from './bridges/Bridge';
-export {default as GraphQLBridge}       from './bridges/GraphQLBridge';
-export {default as SimpleSchemaBridge}  from './bridges/SimpleSchemaBridge';
-export {default as SimpleSchema2Bridge} from './bridges/SimpleSchema2Bridge';
-export {default as createSchemaBridge}  from './bridges';
-
-export {default as changedKeys}    from './helpers/changedKeys';
-export {default as connectField}   from './helpers/connectField';
-export {default as filterDOMProps} from './helpers/filterDOMProps';
-export {default as injectName}     from './helpers/injectName';
-export {default as joinName}       from './helpers/joinName';
-export {default as nothing}        from './helpers/nothing';
-export {default as randomIds}      from './helpers/randomIds';
-
-export {default as BaseField} from './components/fields/BaseField';
-
-export {default as AutoForm}           from './components/forms/AutoForm';
-export {default as BaseForm}           from './components/forms/BaseForm';
-export {default as QuickForm}          from './components/forms/QuickForm';
-export {default as ValidatedForm}      from './components/forms/ValidatedForm';
-export {default as ValidatedQuickForm} from './components/forms/ValidatedQuickForm';
+export {default as AutoForm}            from './AutoForm';
+export {default as BaseField}           from './BaseField';
+export {default as BaseForm}            from './BaseForm';
+export {default as Bridge}              from './Bridge';
+export {default as GraphQLBridge}       from './GraphQLBridge';
+export {default as QuickForm}           from './QuickForm';
+export {default as SimpleSchema2Bridge} from './SimpleSchema2Bridge';
+export {default as SimpleSchemaBridge}  from './SimpleSchemaBridge';
+export {default as ValidatedForm}       from './ValidatedForm';
+export {default as ValidatedQuickForm}  from './ValidatedQuickForm';
+export {default as changedKeys}         from './changedKeys';
+export {default as connectField}        from './connectField';
+export {default as createSchemaBridge}  from './createSchemaBridge';
+export {default as filterDOMProps}      from './filterDOMProps';
+export {default as injectName}          from './injectName';
+export {default as joinName}            from './joinName';
+export {default as nothing}             from './nothing';
+export {default as randomIds}           from './randomIds';

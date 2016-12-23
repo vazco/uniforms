@@ -4,20 +4,20 @@ import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 import {stub}   from 'sinon';
 
-import {AutoFields}     from 'uniforms-semantic';
-import {AutoForm}       from 'uniforms-semantic';
-import {ErrorField}     from 'uniforms-semantic';
-import {ErrorsField}    from 'uniforms-semantic';
-import {HiddenField}    from 'uniforms-semantic';
-import {ListAddField}   from 'uniforms-semantic';
-import {ListDelField}   from 'uniforms-semantic';
-import {ListField}      from 'uniforms-semantic';
-import {ListItemField}  from 'uniforms-semantic';
-import {LongTextField}  from 'uniforms-semantic';
-import {NumField}       from 'uniforms-semantic';
-import {SelectField}    from 'uniforms-semantic';
-import {SubmitField}    from 'uniforms-semantic';
-import {filterDOMProps} from 'uniforms';
+import AutoFields     from 'uniforms-semantic/AutoFields';
+import AutoForm       from 'uniforms-semantic/AutoForm';
+import ErrorField     from 'uniforms-semantic/ErrorField';
+import ErrorsField    from 'uniforms-semantic/ErrorsField';
+import HiddenField    from 'uniforms-semantic/HiddenField';
+import ListAddField   from 'uniforms-semantic/ListAddField';
+import ListDelField   from 'uniforms-semantic/ListDelField';
+import ListField      from 'uniforms-semantic/ListField';
+import ListItemField  from 'uniforms-semantic/ListItemField';
+import LongTextField  from 'uniforms-semantic/LongTextField';
+import NumField       from 'uniforms-semantic/NumField';
+import SelectField    from 'uniforms-semantic/SelectField';
+import SubmitField    from 'uniforms-semantic/SubmitField';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 filterDOMProps.register(
     '__type__',
@@ -75,7 +75,7 @@ describe('Everything', () => {
         'x27':     {...base, id: 'x26',    __type__: Array, minCount: 1, initialCount: 1, maxCount: 2},
         'x27.$':   {...base,               __type__: String},
         'x28':     {...base,               __type__: String, component: ErrorField},
-        'x31':     {...base,               __type__: String, allowedValues, checkboxes, component: SelectField},
+        'x31':     {...base,               __type__: Number, allowedValues, checkboxes, component: SelectField},
         'x32':     {...base, id: 'x32',    __type__: String, component: HiddenField},
         'x33':     {...base, id: 'x33',    __type__: String, component: HiddenField, value: undefined},
         'x34':     {...base, id: 'x34',    __type__: String, icon: 'user'},
@@ -86,6 +86,7 @@ describe('Everything', () => {
         'x39':     {...base, id: 'x39',    __type__: Number, iconLeft: 'user'}
     };
 
+    const bridgeName = name => name.replace(/\.\d+/g, '.$');
     const bridge = {
         getError:        (name, error) => error ? {noop: 0} : undefined,
         getErrorMessage: (name, error) => error ? 'message' : undefined,
@@ -94,16 +95,18 @@ describe('Everything', () => {
             ? Object.keys(schema)
             : [],
 
-        getField: name => schema[name.replace(/\.\d+/g, '.$')],
-        getType:  name => schema[name.replace(/\.\d+/g, '.$')].__type__,
-        getProps: name => ({...schema[name.replace(/\.\d+/g, '.$')], __type__: null}),
+        getField: name => schema[bridgeName(name)],
+        getType:  name => schema[bridgeName(name)].__type__,
+        getProps: name => ({...schema[bridgeName(name)], __type__: null}),
 
-        getInitialValue: name => schema[name.replace(/\.\d+/g, '.$')].__type__ === Date
+        getInitialValue: name => schema[bridgeName(name)].__type__ === Date
             ? dateA
-            : schema[name.replace(/\.\d+/g, '.$')].__type__(),
+            : schema[bridgeName(name)].allowedValues && schema[bridgeName(name)].__type__ !== Array
+                ? schema[bridgeName(name)].allowedValues[0]
+                : schema[bridgeName(name)].__type__(),
 
         getSubfields: name => name
-            ? schema[name.replace(/\.\d+/g, '.$')].subfields || []
+            ? schema[bridgeName(name)].subfields || []
             : Object.keys(schema).filter(field => field.indexOf('.') === -1),
 
         getValidator: () => validator
@@ -173,7 +176,7 @@ describe('Everything', () => {
     });
 
     it('works (SelectField)', async () => {
-        expect(wrapper.find('#x02').props()).to.have.property('value', 0);
+        expect(wrapper.find('#x02').props()).to.have.property('value', 1);
         expect(wrapper.find('#x02').simulate('change', {target: {value: 2}})).to.be.ok;
         expect(wrapper.find('#x02').props()).to.have.property('value', 2);
 
@@ -184,11 +187,11 @@ describe('Everything', () => {
     });
 
     it('works (RadioField, on)', async () => {
-        expect(wrapper.find('[name="x03"]').at(0)).to.be.checked;
-        expect(wrapper.find('[name="x03"]').at(1)).to.be.not.checked;
-        expect(wrapper.find('[name="x03"]').at(1).simulate('change', {target: {value: true}})).to.be.ok;
-        expect(wrapper.find('[name="x03"]').at(1)).to.be.checked;
-        expect(wrapper.find('[name="x03"]').at(0)).to.be.not.checked;
+        expect(wrapper.find('[name="x03"]').at(0).prop('checked')).to.be.true;
+        expect(wrapper.find('[name="x03"]').at(1).prop('checked')).to.be.false;
+        expect(wrapper.find('[name="x03"]').at(1).simulate('change', {target: {checked: true}})).to.be.ok;
+        expect(wrapper.find('[name="x03"]').at(1).prop('checked')).to.be.true;
+        expect(wrapper.find('[name="x03"]').at(0).prop('checked')).to.be.false;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -197,11 +200,11 @@ describe('Everything', () => {
     });
 
     it('works (RadioField, off)', async () => {
-        expect(wrapper.find('[name="x03"]').at(1)).to.be.checked;
-        expect(wrapper.find('[name="x03"]').at(0)).to.be.not.checked;
-        expect(wrapper.find('[name="x03"]').at(0).simulate('change', {target: {value: true}})).to.be.ok;
-        expect(wrapper.find('[name="x03"]').at(0)).to.be.checked;
-        expect(wrapper.find('[name="x03"]').at(1)).to.be.not.checked;
+        expect(wrapper.find('[name="x03"]').at(1).prop('checked')).to.be.true;
+        expect(wrapper.find('[name="x03"]').at(0).prop('checked')).to.be.false;
+        expect(wrapper.find('[name="x03"]').at(0).simulate('change', {target: {checked: true}})).to.be.ok;
+        expect(wrapper.find('[name="x03"]').at(0).prop('checked')).to.be.true;
+        expect(wrapper.find('[name="x03"]').at(1).prop('checked')).to.be.false;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -210,9 +213,9 @@ describe('Everything', () => {
     });
 
     it('works (SelectField, checkboxes, multiple, on)', async () => {
-        expect(wrapper.find('[name="x04"]').at(1)).to.be.not.checked;
+        expect(wrapper.find('[name="x04"]').at(1).prop('checked')).to.be.false;
         expect(wrapper.find('[name="x04"]').at(1).simulate('change', {target: {value: true}})).to.be.ok;
-        expect(wrapper.find('[name="x04"]').at(1)).to.be.checked;
+        expect(wrapper.find('[name="x04"]').at(1).prop('checked')).to.be.true;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -221,9 +224,9 @@ describe('Everything', () => {
     });
 
     it('works (SelectField, checkboxes, multiple, off)', async () => {
-        expect(wrapper.find('[name="x04"]').at(1)).to.be.checked;
+        expect(wrapper.find('[name="x04"]').at(1).prop('checked')).to.be.true;
         expect(wrapper.find('[name="x04"]').at(1).simulate('change', {target: {value: false}})).to.be.ok;
-        expect(wrapper.find('[name="x04"]').at(1)).to.be.not.checked;
+        expect(wrapper.find('[name="x04"]').at(1).prop('checked')).to.be.false;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -243,9 +246,9 @@ describe('Everything', () => {
     });
 
     it('works (BoolField)', async () => {
-        expect(wrapper.find('#x06')).to.be.not.checked;
+        expect(wrapper.find('#x06').prop('checked')).to.be.false;
         expect(wrapper.find('#x06').simulate('change', {target: {value: true}})).to.be.ok;
-        expect(wrapper.find('#x06')).to.be.checked;
+        expect(wrapper.find('#x06').prop('checked')).to.be.true;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -336,16 +339,16 @@ describe('Everything', () => {
     });
 
     it('works (SelectField, checkboxes, multiple, on)', async () => {
-        expect(wrapper.find('[name="x31"]').at(1)).to.be.checked;
-        expect(wrapper.find('[name="x31"]').at(0)).to.be.not.checked;
-        expect(wrapper.find('[name="x31"]').at(0).simulate('change', {target: {value: true}})).to.be.ok;
-        expect(wrapper.find('[name="x31"]').at(0)).to.be.checked;
-        expect(wrapper.find('[name="x31"]').at(1)).to.be.not.checked;
+        expect(wrapper.find('[name="x31"]').at(0).prop('checked')).to.be.true;
+        expect(wrapper.find('[name="x31"]').at(1).prop('checked')).to.be.false;
+        expect(wrapper.find('[name="x31"]').at(1).simulate('change', {target: {value: true}})).to.be.ok;
+        expect(wrapper.find('[name="x31"]').at(1).prop('checked')).to.be.true;
+        expect(wrapper.find('[name="x31"]').at(0).prop('checked')).to.be.false;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
-        expect(onChange.lastCall.calledWith('x31', 1)).to.be.ok;
-        expect(onSubmit.lastCall.calledWithMatch({x31: 1})).to.be.ok;
+        expect(onChange.lastCall.calledWith('x31', 2)).to.be.ok;
+        expect(onSubmit.lastCall.calledWithMatch({x31: 2})).to.be.ok;
     });
 
     it('works (HiddenField)', async () => {

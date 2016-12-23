@@ -34,18 +34,16 @@ img {
 }
 
 .panelGroup iframe,
-.panelGroup textarea,
 .panelGroupNavbar {
-    padding: 1rem;
+    padding: 0.75rem;
 }
 
 .panelGroup iframe,
-.panelGroup section,
-.panelGroup textarea {
+.panelGroup section {
     width: 100%;
 }
 
-.panelGroup textarea {
+.panelGroup iframe {
     flex: 1 1 100%;
 }
 
@@ -66,8 +64,11 @@ img {
     color: #121621;
 }
 
-.panelWrapper > section {
+.panelWrapper > section,
+.panelHeaderInfo {
     display: flex;
+}
 
+.panelWrapper > section {
     flex-direction: column;
 }
