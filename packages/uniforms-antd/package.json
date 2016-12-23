@@ -1,6 +1,6 @@
 {
-  "name": "uniforms-antd-extended",
-  "version": "1.6.14",
+  "name": "uniforms-antd",
+  "version": "1.6.15",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "description": "Ant Design UI components for uniforms.",
@@ -29,7 +29,7 @@
     "cover": "cross-env NODE_ENV=cover nyc npm test",
     "lint": "eslint src test",
     "prepublish": "npm run build",
-    "pretest": "npm run lint",
+    "pretest": "npnpm run lint",
     "reset": "rimraf node_modules",
     "test": "babel-node node_modules/.bin/_mocha --require test/index.js --recursive test --reporter list"
   },

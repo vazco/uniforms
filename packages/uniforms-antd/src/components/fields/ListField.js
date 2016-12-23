@@ -62,13 +62,14 @@ const List = ({
                             React.cloneElement(child, {
                                 key: index,
                                 label: null,
-                                name: joinName(name, child.props.name && child.props.name.replace('$', index))
+                                name: joinName(name, child.props.name && child.props.name.replace('$', index)),
+                                fieldComponent: fieldComponent
                             })
                         )
                     )
                 ) : (
                     value.map((item, index) =>
-                        <ListItemField key={index} label={null} name={joinName(name, index)} {...filterDOMProps(props)} />
+                        <ListItemField key={index} label={null} name={joinName(name, index)} fieldComponent={fieldComponent} {...filterDOMProps(props)} />
                     )
                 )}
                 <div>

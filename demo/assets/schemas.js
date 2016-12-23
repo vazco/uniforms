@@ -240,7 +240,7 @@ const schemas = {
             type: String
         }
     }`,
-    'Ex Test': schema`{
+    'Test Hidden': schema`{
         company: {
   type: String,
   regEx: /^[A-Z]*$/,
