@@ -2,7 +2,7 @@ import React          from 'react';
 import {connectField} from 'uniforms';
 import { ChromePicker } from 'react-color';
 import reactCSS from 'reactcss'
-import FormGroup from '../forms/FormGroup.js';
+import FormGroup from './FormGroup';
 
 /*
 // SCHEMA PROTOTYPE

@@ -1,6 +1,6 @@
 import React            from 'react';
 import {connectField}   from 'uniforms';
-import FormGroup from '../forms/FormGroup.js';
+import FormGroup from './FormGroup';
 import _ from 'lodash';
 
 // SCHEMA PROTOTYPE

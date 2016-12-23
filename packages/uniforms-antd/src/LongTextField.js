@@ -1,6 +1,6 @@
 import React            from 'react';
 import {connectField}   from 'uniforms';
-import FormGroup from '../forms/FormGroup.js';
+import FormGroup from './FormGroup';
 
 // SCHEMA PROTOTYPE
 /*
@@ -43,8 +43,8 @@ const LongText = ({
                 onChange={event => onChange(event.target.value)}
                 placeholder={placeholder}
                 ref={inputRef}
-                type={type}
-                rows={rows}
+                type={'textarea'}
+                rows={rows ? rows : 5}
                 value={value}
             />
         </FormGroup>

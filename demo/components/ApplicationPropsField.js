@@ -12,6 +12,7 @@ const ApplicationProps = ({onChange, schema, theme, value}) => {
 
     const isBootstrap = theme === 'bootstrap3' || theme === 'bootstrap4';
     const isSemantic  = theme === 'semantic';
+    const isAntd = theme === 'antd';
 
     const AutoForm      = themes[theme].AutoForm;
     const BoolField     = themes[theme].BoolField;
@@ -36,7 +37,7 @@ const ApplicationProps = ({onChange, schema, theme, value}) => {
                 <BoolField     name="disabled" />
                 <BoolField     name="label" />
                 <BoolField     name="placeholder" />
-                <BoolField     name="showInlineError" disabled={!(isBootstrap || isSemantic)} />
+                <BoolField     name="showInlineError" disabled={!(isBootstrap || isSemantic || isAntd)} />
                 <LongTextField name="schema" />
 
                 <ErrorsField />

@@ -1,7 +1,7 @@
 import React            from 'react';
 import {connectField}   from 'uniforms';
 import moment from 'moment';
-import FormGroup from '../forms/FormGroup.js';
+import FormGroup from './FormGroup';
 
 
 

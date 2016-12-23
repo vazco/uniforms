@@ -19,7 +19,7 @@ const Nest = ({
     showInlineError,
     ...props
 }) =>
-    <section className={classnames(className, {disabled, error}, 'grouped fields')} {...filterDOMProps(props)}>
+    <section className={classnames(className, {disabled, error}, 'grouped fields')} >
         {label && (
             <section className="field">
                 <label>
