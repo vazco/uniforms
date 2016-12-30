@@ -184,28 +184,6 @@ export default class SimpleSchema2Bridge extends Bridge {
     }
 
     getSubfields (name) {
-        // aldeed/node-simple-schema#12
-        // return this.schema.objectKeys(name);
-
-        if (!name) {
-            return this.schema.objectKeys();
-        }
-
-        const type = this.getField(name).type;
-
-        if (type === Object) {
-            const prefix = `${SimpleSchema._makeGeneric(name)}.`;
-
-            return Object.keys(this.schema.schema())
-                .filter(key => key.indexOf(prefix) === 0)
-                .map   (key => key.replace(prefix, ''))
-                .filter(key => key.indexOf('.') === -1);
-        }
-
-        if (SimpleSchema2Bridge.check(type)) {
-            return type.objectKeys();
-        }
-
         return this.schema.objectKeys(name);
     }
 
