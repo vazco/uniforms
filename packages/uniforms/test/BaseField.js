@@ -22,7 +22,8 @@ describe('BaseField', () => {
         }
     }
 
-    const error = {details: [{name: 'a'}]};
+    const error1 = {details: [{name: 'a'}]};
+    const error2 = {details: [{name: 'b'}]};
     const model = {a: {b: {c: 'example'}}};
     const onChange = spy();
     const randomId = randomIds();
@@ -36,6 +37,7 @@ describe('BaseField', () => {
                 'a':     {type: Object, label: name},
                 'a.b':   {type: Object, label: name},
                 'a.b.c': {type: String, label: name},
+                'b':     {type: String},
                 'd':     {type: String, defaultValue: 'D'},
                 'e':     {type: String, allowedValues: ['E']},
                 'f':     {type: Number, min: 42},
@@ -65,7 +67,12 @@ describe('BaseField', () => {
         validator () {}
     });
 
-    const reactContext = {context: {uniforms: {error, model, name: [], randomId, schema, state, onChange}}};
+    const reactContextBase = {error: error1, model, name: [], randomId, schema, state, onChange};
+    const reactContext1 = {context: {uniforms: {...reactContextBase}}};
+    const reactContext2 = {context: {uniforms: {...reactContextBase, error: error2}}};
+    const reactContext3 = {context: {uniforms: {...reactContextBase, error: {...error2}}}};
+    const reactContext4 = {context: {uniforms: {...reactContextBase, name: ['a']}}};
+    const reactContext5 = {context: {uniforms: {...reactContextBase, schema: Object.create(schema)}}};
 
     afterEach(() => {
         onChange.reset();
@@ -74,7 +81,7 @@ describe('BaseField', () => {
     context('child context', () => {
         const wrapper = mount(
             <TestField name="a" />,
-            reactContext
+            reactContext1
         );
 
         const context = wrapper.instance().getChildContext();
@@ -84,7 +91,7 @@ describe('BaseField', () => {
         });
 
         it('have correct `error`', () => {
-            expect(context.uniforms).to.have.property('error', error);
+            expect(context.uniforms).to.have.property('error', error1);
         });
 
         it('have correct `model`', () => {
@@ -116,7 +123,7 @@ describe('BaseField', () => {
     context('when changed', () => {
         const wrapper = mount(
             <TestField name="a" />,
-            reactContext
+            reactContext1
         );
 
         const props = wrapper.find(PropsComponent).last().props();
@@ -147,7 +154,7 @@ describe('BaseField', () => {
                     <TestField name="c" />
                 </TestField>
             </TestField>,
-            reactContext
+            reactContext1
         );
 
         const props = wrapper.find(PropsComponent).last().props();
@@ -168,7 +175,7 @@ describe('BaseField', () => {
     context('when rendered', () => {
         const wrapper = mount(
             <TestField name="a" />,
-            reactContext
+            reactContext1
         );
 
         const props = wrapper.find(PropsComponent).props();
@@ -182,7 +189,7 @@ describe('BaseField', () => {
         });
 
         it('have correct `error`', () => {
-            expect(props).to.have.property('error', error.details[0]);
+            expect(props).to.have.property('error', error1.details[0]);
         });
 
         it('have correct `errorMessage`', () => {
@@ -252,7 +259,7 @@ describe('BaseField', () => {
             expect(() => {
                 mount(
                     <TestField name="field" />,
-                    reactContext
+                    reactContext1
                 );
             }).to.throw(Error, /Field not found in schema: "field"/);
         });
@@ -262,7 +269,7 @@ describe('BaseField', () => {
         it('have correct `id`', () => {
             const wrapper = mount(
                 <TestField name="a" id="x" />,
-                reactContext
+                reactContext1
             );
 
             expect(wrapper.find(PropsComponent).props()).to.have.property('id', 'x');
@@ -273,7 +280,7 @@ describe('BaseField', () => {
         it('have correct `label` (true)', () => {
             const wrapper = mount(
                 <TestField name="a" label />,
-                reactContext
+                reactContext1
             );
 
             expect(wrapper.find(PropsComponent).props()).to.have.property('label', 'a');
@@ -282,7 +289,7 @@ describe('BaseField', () => {
         it('have correct `label` (true and falsy value in schema)', () => {
             const wrapper = mount(
                 <TestField name="l" label />,
-                reactContext
+                reactContext1
             );
 
             expect(wrapper.find(PropsComponent).props()).to.have.property('label', '');
@@ -291,7 +298,7 @@ describe('BaseField', () => {
         it('have correct `label` (falsy value)', () => {
             const wrapper = mount(
                 <TestField name="a" label={false} />,
-                reactContext
+                reactContext1
             );
 
             expect(wrapper.find(PropsComponent).props()).to.have.property('label', '');
@@ -300,7 +307,7 @@ describe('BaseField', () => {
         it('have correct `label` (falsy value in schema)', () => {
             const wrapper = mount(
                 <TestField name="l" />,
-                reactContext
+                reactContext1
             );
 
             expect(wrapper.find(PropsComponent).props()).to.have.property('label', '');
@@ -309,7 +316,7 @@ describe('BaseField', () => {
         it('have correct `label` (null)', () => {
             const wrapper = mount(
                 <TestField name="a" label={null} />,
-                reactContext
+                reactContext1
             );
 
             expect(wrapper.find(PropsComponent).props()).to.have.property('label', '');
@@ -318,7 +325,7 @@ describe('BaseField', () => {
         it('have correct `label` (string)', () => {
             const wrapper = mount(
                 <TestField name="a" label="A" />,
-                reactContext
+                reactContext1
             );
 
             expect(wrapper.find(PropsComponent).props()).to.have.property('label', 'A');
@@ -329,7 +336,7 @@ describe('BaseField', () => {
         it('have correct `placeholder` (true)', () => {
             const wrapper = mount(
                 <TestField name="a" placeholder />,
-                reactContext
+                reactContext1
             );
 
             expect(wrapper.find(PropsComponent).props()).to.have.property('placeholder', 'a');
@@ -338,7 +345,7 @@ describe('BaseField', () => {
         it('have correct `placeholder` (true and falsy value in schema)', () => {
             const wrapper = mount(
                 <TestField name="m" placeholder />,
-                reactContext
+                reactContext1
             );
 
             expect(wrapper.find(PropsComponent).props()).to.have.property('placeholder', '');
@@ -347,7 +354,7 @@ describe('BaseField', () => {
         it('have correct `placeholder` (falsy value)', () => {
             const wrapper = mount(
                 <TestField name="a" placeholder={false} />,
-                reactContext
+                reactContext1
             );
 
             expect(wrapper.find(PropsComponent).props()).to.have.property('placeholder', '');
@@ -356,7 +363,7 @@ describe('BaseField', () => {
         it('have correct `placeholder` (falsy value in schema)', () => {
             const wrapper = mount(
                 <TestField name="m" />,
-                reactContext
+                reactContext1
             );
 
             expect(wrapper.find(PropsComponent).props()).to.have.property('placeholder', '');
@@ -365,7 +372,7 @@ describe('BaseField', () => {
         it('have correct `placeholder` (string)', () => {
             const wrapper = mount(
                 <TestField name="a" placeholder="A" />,
-                reactContext
+                reactContext1
             );
 
             expect(wrapper.find(PropsComponent).props()).to.have.property('placeholder', 'A');
@@ -376,7 +383,7 @@ describe('BaseField', () => {
         it('have correct `value` (defaultValue)', () => {
             const wrapper = mount(
                 <TestField name="d" />,
-                reactContext
+                reactContext1
             );
 
             expect(wrapper.find(PropsComponent).props()).to.have.property('value', 'D');
@@ -387,7 +394,7 @@ describe('BaseField', () => {
         it('have same `id`', () => {
             const wrapper = mount(
                 <TestField name="d" />,
-                reactContext
+                reactContext1
             );
 
             const props1 = wrapper.find(PropsComponent).props();
@@ -397,6 +404,77 @@ describe('BaseField', () => {
 
             const props2 = wrapper.find(PropsComponent).props();
             expect(props2).to.have.property('id', props1.id);
+        });
+
+        it('updates on error change', () => {
+            const wrapper = mount(
+                <TestField name="a" />,
+                reactContext1
+            );
+
+            const props1 = wrapper.find(PropsComponent).props();
+            expect(props1).to.have.property('error', error1.details[0]);
+
+            wrapper.setContext(reactContext2.context);
+
+            const props2 = wrapper.find(PropsComponent).props();
+            expect(props2).to.have.property('error').that.is.not.ok;
+
+            wrapper.setContext(reactContext3.context);
+
+            const props3 = wrapper.find(PropsComponent).props();
+            expect(props3).to.have.property('error').that.is.not.ok;
+        });
+
+        it('updates on name change', () => {
+            const wrapper = mount(
+                <TestField name="b" />,
+                reactContext1
+            );
+
+            const props1 = wrapper.find(PropsComponent).props();
+            expect(props1).to.have.property('name', 'b');
+
+            wrapper.setContext(reactContext4.context);
+
+            const props2 = wrapper.find(PropsComponent).props();
+            expect(props2).to.have.property('name', 'a.b');
+        });
+
+        it('updates on schema change', () => {
+            const wrapper = mount(
+                <TestField name="a" />,
+                reactContext1
+            );
+
+            const props1 = wrapper.find(PropsComponent).props();
+
+            wrapper.setContext(reactContext5.context);
+
+            const props2 = wrapper.find(PropsComponent).props();
+
+            [
+                'changed',
+                'changedMap',
+                'disabled',
+                'error',
+                'errorMessage',
+                'field',
+                'fieldType',
+                'fields',
+                // 'findError', // It's a dynamic function.
+                // 'findField', // It's a dynamic function.
+                // 'findValue', // It's a dynamic function.
+                'id',
+                'label',
+                'name',
+                // 'onChange',  // It's a dynamic function.
+                'parent',
+                'placeholder',
+                'required',
+                'showInlineError',
+                'value'
+            ].forEach(prop => expect(props2).to.have.property(prop).that.is.deep.equal(props1[prop]));
         });
     });
 });
