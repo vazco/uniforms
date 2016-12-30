@@ -1,4 +1,4 @@
-## Next
+## [v1.8.1](https://github.com/vazco/uniforms/releases/tag/v1.8.1)
 - **Fixed:** Placeholder text from schema. [\#152](https://github.com/vazco/uniforms/issues/152)
 
 <br>
