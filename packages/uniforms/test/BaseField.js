@@ -45,7 +45,9 @@ describe('BaseField', () => {
                 'j':     {type: Array, minCount: 3},
                 'j.$':   {type: String},
                 'k':     {type: Array},
-                'k.$':   {type: String}
+                'k.$':   {type: String},
+                'l':     {type: String, uniforms: {label: false}},
+                'm':     {type: String, uniforms: {placeholder: false}}
             }[name];
         },
 
@@ -277,9 +279,27 @@ describe('BaseField', () => {
             expect(wrapper.find(PropsComponent).props()).to.have.property('label', 'a');
         });
 
+        it('have correct `label` (true and falsy value in schema)', () => {
+            const wrapper = mount(
+                <TestField name="l" label />,
+                reactContext
+            );
+
+            expect(wrapper.find(PropsComponent).props()).to.have.property('label', '');
+        });
+
         it('have correct `label` (falsy value)', () => {
             const wrapper = mount(
                 <TestField name="a" label={false} />,
+                reactContext
+            );
+
+            expect(wrapper.find(PropsComponent).props()).to.have.property('label', '');
+        });
+
+        it('have correct `label` (falsy value in schema)', () => {
+            const wrapper = mount(
+                <TestField name="l" />,
                 reactContext
             );
 
@@ -292,7 +312,7 @@ describe('BaseField', () => {
                 reactContext
             );
 
-            expect(wrapper.find(PropsComponent).props()).to.have.property('label', null);
+            expect(wrapper.find(PropsComponent).props()).to.have.property('label', '');
         });
 
         it('have correct `label` (string)', () => {
@@ -315,9 +335,27 @@ describe('BaseField', () => {
             expect(wrapper.find(PropsComponent).props()).to.have.property('placeholder', 'a');
         });
 
+        it('have correct `placeholder` (true and falsy value in schema)', () => {
+            const wrapper = mount(
+                <TestField name="m" placeholder />,
+                reactContext
+            );
+
+            expect(wrapper.find(PropsComponent).props()).to.have.property('placeholder', '');
+        });
+
         it('have correct `placeholder` (falsy value)', () => {
             const wrapper = mount(
                 <TestField name="a" placeholder={false} />,
+                reactContext
+            );
+
+            expect(wrapper.find(PropsComponent).props()).to.have.property('placeholder', '');
+        });
+
+        it('have correct `placeholder` (falsy value in schema)', () => {
+            const wrapper = mount(
+                <TestField name="m" />,
                 reactContext
             );
 

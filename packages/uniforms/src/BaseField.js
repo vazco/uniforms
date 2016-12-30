@@ -151,10 +151,8 @@ export default class BaseField extends Component {
     // eslint-disable-next-line complexity
     getFieldProps (name, options) {
         const context = this.context.uniforms;
-        const props = {
-            ...this.getChildContextState(),
-            ...this.props
-        };
+        const state = this.getChildContextState();
+        const props = {...state, ...this.props};
 
         const {
             ensureValue,
@@ -181,19 +179,43 @@ export default class BaseField extends Component {
 
         const errorMessage = context.schema.getErrorMessage(name, context.error);
 
-        const label = props.label
-            ? props.label === true
-                ? schemaProps.label
-                : props.label
-            : props.label === null
-                ? null
-                : '';
+        const _lProp           = this.props.label;
+        const _lPropDisabled   = _lProp === '' || _lProp === false || _lProp === null;
+        const _lPropSet        = _lProp !== undefined;
+        const _lSchema         = schemaProps.label;
+        const _lSchemaDisabled = _lSchema === '' || _lSchema === false || _lSchema === null;
+        const _lSchemaValue    = _lSchema === true || _lSchema === undefined ? '' : _lSchema;
+        const _lStateDisabled  = !state.label;
 
-        const placeholder = props.placeholder
-            ? props.placeholder === true
-                ? schemaProps.label
-                : props.placeholder
-            : '';
+        const label = _lPropDisabled || !_lPropSet && (_lSchemaDisabled || _lStateDisabled)
+            ? ''
+            : _lPropSet
+                ? _lProp === true
+                    ? _lSchemaDisabled
+                        ? ''
+                        : _lSchemaValue
+                    : _lProp
+                : _lSchemaValue
+        ;
+
+        const _pProp           = this.props.placeholder;
+        const _pPropDisabled   = _pProp === '' || _pProp === false || _pProp === null;
+        const _pPropSet        = _pProp !== undefined;
+        const _pSchema         = schemaProps.placeholder;
+        const _pSchemaDisabled = _pSchema === '' || _pSchema === false || _pSchema === null;
+        const _pSchemaValue    = _pSchema === true || _pSchema === undefined ? label || _lSchemaValue : _pSchema;
+        const _pStateDisabled  = !state.placeholder;
+
+        const placeholder = _pPropDisabled || !_pPropSet && (_pSchemaDisabled || _pStateDisabled)
+            ? ''
+            : _pPropSet
+                ? _pProp === true
+                    ? _pSchemaDisabled
+                        ? ''
+                        : _pSchemaValue
+                    : _pProp
+                : _pSchemaValue
+        ;
 
         const changed = !!get(context.state.changedMap, name);
 
