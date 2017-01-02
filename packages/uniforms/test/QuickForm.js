@@ -1,6 +1,8 @@
 import React       from 'react';
 import {Component} from 'react';
+import {describe}  from 'mocha';
 import {expect}    from 'chai';
+import {it}        from 'mocha';
 import {mount}     from 'enzyme';
 
 import QuickForm from 'uniforms/QuickForm';
@@ -21,7 +23,7 @@ describe('QuickForm', () => {
         validator:       () => {}
     };
 
-    context('when rendered with custom fields', () => {
+    describe('when rendered with custom fields', () => {
         it('renders `AutoField` for each field', () => {
             const wrapper = mount(
                 <TestQuickForm schema={schema} />
@@ -47,7 +49,7 @@ describe('QuickForm', () => {
         });
     });
 
-    context('when rendered with custom fields in `props`', () => {
+    describe('when rendered with custom fields in `props`', () => {
         it('renders `AutoField` for each field', () => {
             const wrapper = mount(
                 <TestQuickForm schema={schema} autoField={() => <i className="autoOverride" />} />
@@ -98,7 +100,7 @@ describe('QuickForm', () => {
         });
     });
 
-    context('when rendered with children', () => {
+    describe('when rendered with children', () => {
         const wrapper = mount(
             <QuickForm schema={schema}>
                 <div />

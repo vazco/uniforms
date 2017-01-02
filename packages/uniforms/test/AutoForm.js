@@ -1,7 +1,10 @@
-import React    from 'react';
-import {expect} from 'chai';
-import {mount}  from 'enzyme';
-import {spy}    from 'sinon';
+import React        from 'react';
+import {beforeEach} from 'mocha';
+import {describe}   from 'mocha';
+import {expect}     from 'chai';
+import {it}         from 'mocha';
+import {mount}      from 'enzyme';
+import {spy}        from 'sinon';
 
 import AutoForm from 'uniforms/AutoForm';
 
@@ -25,7 +28,7 @@ describe('AutoForm', () => {
         validator.reset();
     });
 
-    context('when changed', () => {
+    describe('when changed', () => {
         const wrapper = mount(
             <AutoForm onChange={onChange} onChangeModel={onChangeModel} schema={schema} />
         );
@@ -45,7 +48,7 @@ describe('AutoForm', () => {
         });
     });
 
-    context('when rendered', () => {
+    describe('when rendered', () => {
         const wrapper = mount(
             <AutoForm onSubmit={onSubmit} schema={schema} autosave />
         );
@@ -61,7 +64,7 @@ describe('AutoForm', () => {
         });
     });
 
-    context('when reset', () => {
+    describe('when reset', () => {
         const wrapper = mount(
             <AutoForm onSubmit={onSubmit} schema={schema} autosave />
         );
@@ -73,7 +76,7 @@ describe('AutoForm', () => {
         });
     });
 
-    context('when updated', () => {
+    describe('when updated', () => {
         const wrapper = mount(
             <AutoForm schema={schema} />
         );

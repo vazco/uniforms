@@ -92,10 +92,7 @@
     "root": true,
     "extends": [
       "vazco"
-    ],
-    "env": {
-      "mocha": true
-    }
+    ]
   },
   "nyc": {
     "reporter": [

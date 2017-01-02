@@ -1,6 +1,8 @@
 import {GraphQLString}  from 'graphql';
 import {buildASTSchema} from 'graphql';
+import {describe}       from 'mocha';
 import {expect}         from 'chai';
+import {it}             from 'mocha';
 import {parse}          from 'graphql';
 import {stub}           from 'sinon';
 
@@ -58,7 +60,7 @@ describe('GraphQLBridge', () => {
 
     const bridge = new GraphQLBridge(schemaType, schemaValidator, schemaData);
 
-    context('#check()', () => {
+    describe('#check()', () => {
         it('always returns false', () => {
             expect(GraphQLBridge.check()).to.be.not.ok;
             expect(GraphQLBridge.check(bridge)).to.be.not.ok;
@@ -66,7 +68,7 @@ describe('GraphQLBridge', () => {
         });
     });
 
-    context('#getError', () => {
+    describe('#getError', () => {
         it('works without error', () => {
             expect(bridge.getError('title')).to.be.not.ok;
         });
@@ -82,7 +84,7 @@ describe('GraphQLBridge', () => {
         });
     });
 
-    context('#getErrorMessage', () => {
+    describe('#getErrorMessage', () => {
         it('works without error', () => {
             expect(bridge.getErrorMessage('title')).to.be.not.ok;
         });
@@ -98,7 +100,7 @@ describe('GraphQLBridge', () => {
         });
     });
 
-    context('#getErrorMessages', () => {
+    describe('#getErrorMessages', () => {
         it('works without error', () => {
             expect(bridge.getErrorMessages()).to.be.deep.equal([]);
         });
@@ -118,7 +120,7 @@ describe('GraphQLBridge', () => {
         });
     });
 
-    context('#getField', () => {
+    describe('#getField', () => {
         it('return correct definition', () => {
             expect(bridge.getField('title')).to.be.deep.equal({
                 args: [],
@@ -136,7 +138,7 @@ describe('GraphQLBridge', () => {
         });
     });
 
-    context('#getInitialValue', () => {
+    describe('#getInitialValue', () => {
         it('works with arrays', () => {
             expect(bridge.getInitialValue('author.tags')).to.be.deep.equal([]);
             expect(bridge.getInitialValue('author.tags', {initialCount: 1})).to.be.deep.equal([undefined]);
@@ -151,7 +153,7 @@ describe('GraphQLBridge', () => {
         });
     });
 
-    context('#getProps', () => {
+    describe('#getProps', () => {
         it('works with allowedValues', () => {
             expect(bridge.getProps('id')).to.be.deep.equal({
                 label: 'Post ID',
@@ -239,7 +241,7 @@ describe('GraphQLBridge', () => {
         });
     });
 
-    context('#getSubfields', () => {
+    describe('#getSubfields', () => {
         it('works on top level', () => {
             expect(bridge.getSubfields()).to.be.deep.equal([
                 'id',
@@ -266,7 +268,7 @@ describe('GraphQLBridge', () => {
         });
     });
 
-    context('#getType', () => {
+    describe('#getType', () => {
         it('works with any type', () => {
             expect(bridge.getType('author')).to.be.equal(Object);
             expect(bridge.getType('author.decimal')).to.be.equal(Number);
@@ -291,7 +293,7 @@ describe('GraphQLBridge', () => {
         });
     });
 
-    context('#getValidator', () => {
+    describe('#getValidator', () => {
         it('calls correct validator', () => {
             expect(bridge.getValidator()).to.equal(schemaValidator);
         });

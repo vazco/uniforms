@@ -1,7 +1,10 @@
-import React    from 'react';
-import {expect} from 'chai';
-import {mount}  from 'enzyme';
-import {spy}    from 'sinon';
+import React        from 'react';
+import {beforeEach} from 'mocha';
+import {describe}   from 'mocha';
+import {expect}     from 'chai';
+import {it}         from 'mocha';
+import {mount}      from 'enzyme';
+import {spy}        from 'sinon';
 
 import connectField       from 'uniforms/connectField';
 import createSchemaBridge from 'uniforms/createSchemaBridge';
@@ -45,7 +48,7 @@ describe('injectName', () => {
         Test.reset();
     });
 
-    context('when called', () => {
+    describe('when called', () => {
         it('does nothing on normal elements', () => {
             mount(
                 <Field name="fieldA">

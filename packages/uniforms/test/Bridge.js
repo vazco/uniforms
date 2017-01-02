@@ -1,4 +1,6 @@
-import {expect} from 'chai';
+import {describe} from 'mocha';
+import {expect}   from 'chai';
+import {it}       from 'mocha';
 
 import Bridge from 'uniforms/Bridge';
 
@@ -10,7 +12,7 @@ describe('Bridge', () => {
         expect(() => new Bridge()).to.throw();
     });
 
-    context('#check', () => {
+    describe('#check', () => {
         it('throws an unimplemented error', () => {
             expect(Bridge.check).to.throw();
         });
@@ -27,7 +29,7 @@ describe('Bridge', () => {
         'getType',
         'getValidator'
     ].forEach(method => {
-        context(`#${method}`, () => {
+        describe(`#${method}`, () => {
             it('throws an unimplemented error', () => {
                 expect(() => customBridgeInstance[method]()).to.throw();
             });

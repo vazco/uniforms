@@ -1,7 +1,10 @@
-import React    from 'react';
-import {expect} from 'chai';
-import {mount}  from 'enzyme';
-import {spy}    from 'sinon';
+import React       from 'react';
+import {afterEach} from 'mocha';
+import {describe}  from 'mocha';
+import {expect}    from 'chai';
+import {it}        from 'mocha';
+import {mount}     from 'enzyme';
+import {spy}       from 'sinon';
 
 import BaseField          from 'uniforms/BaseField';
 import createSchemaBridge from 'uniforms/createSchemaBridge';
@@ -78,7 +81,7 @@ describe('BaseField', () => {
         onChange.reset();
     });
 
-    context('child context', () => {
+    describe('child context', () => {
         const wrapper = mount(
             <TestField name="a" />,
             reactContext1
@@ -120,7 +123,7 @@ describe('BaseField', () => {
         });
     });
 
-    context('when changed', () => {
+    describe('when changed', () => {
         const wrapper = mount(
             <TestField name="a" />,
             reactContext1
@@ -147,7 +150,7 @@ describe('BaseField', () => {
         });
     });
 
-    context('when nested', () => {
+    describe('when nested', () => {
         const wrapper = mount(
             <TestField name="a">
                 <TestField name="b">
@@ -172,7 +175,7 @@ describe('BaseField', () => {
         });
     });
 
-    context('when rendered', () => {
+    describe('when rendered', () => {
         const wrapper = mount(
             <TestField name="a" />,
             reactContext1
@@ -254,7 +257,7 @@ describe('BaseField', () => {
         });
     });
 
-    context('when rendered with invalid `name`', () => {
+    describe('when rendered with invalid `name`', () => {
         it('throws correct error', () => {
             expect(() => {
                 mount(
@@ -265,7 +268,7 @@ describe('BaseField', () => {
         });
     });
 
-    context('when rendered with `id`', () => {
+    describe('when rendered with `id`', () => {
         it('have correct `id`', () => {
             const wrapper = mount(
                 <TestField name="a" id="x" />,
@@ -276,7 +279,7 @@ describe('BaseField', () => {
         });
     });
 
-    context('when rendered with `label`', () => {
+    describe('when rendered with `label`', () => {
         it('have correct `label` (true)', () => {
             const wrapper = mount(
                 <TestField name="a" label />,
@@ -332,7 +335,7 @@ describe('BaseField', () => {
         });
     });
 
-    context('when rendered with `placeholder`', () => {
+    describe('when rendered with `placeholder`', () => {
         it('have correct `placeholder` (true)', () => {
             const wrapper = mount(
                 <TestField name="a" placeholder />,
@@ -379,7 +382,7 @@ describe('BaseField', () => {
         });
     });
 
-    context('when rendered without value', () => {
+    describe('when rendered without value', () => {
         it('have correct `value` (defaultValue)', () => {
             const wrapper = mount(
                 <TestField name="d" />,
@@ -390,7 +393,7 @@ describe('BaseField', () => {
         });
     });
 
-    context('when rerendered', () => {
+    describe('when rerendered', () => {
         it('have same `id`', () => {
             const wrapper = mount(
                 <TestField name="d" />,

@@ -1,8 +1,11 @@
-import React    from 'react';
-import {expect} from 'chai';
-import {mount}  from 'enzyme';
-import {spy}    from 'sinon';
-import {stub}   from 'sinon';
+import React       from 'react';
+import {afterEach} from 'mocha';
+import {describe}  from 'mocha';
+import {expect}    from 'chai';
+import {it}        from 'mocha';
+import {mount}     from 'enzyme';
+import {spy}       from 'sinon';
+import {stub}      from 'sinon';
 
 import BaseForm from 'uniforms/BaseForm';
 
@@ -32,7 +35,7 @@ describe('BaseForm', () => {
         onSubmit.reset();
     });
 
-    context('child context', () => {
+    describe('child context', () => {
         const wrapper = mount(
             <BaseForm error={error} model={model} schema={schema} />
         );
@@ -75,7 +78,7 @@ describe('BaseForm', () => {
         });
     });
 
-    context('when rendered', () => {
+    describe('when rendered', () => {
         const wrapper = mount(
             <BaseForm
                 className="name"
@@ -130,7 +133,7 @@ describe('BaseForm', () => {
         });
     });
 
-    context('when changed', () => {
+    describe('when changed', () => {
         const wrapper = mount(
             <BaseForm model={model} schema={schema} onChange={onChange} onSubmit={onSubmit} />
         );
@@ -223,7 +226,7 @@ describe('BaseForm', () => {
         });
     });
 
-    context('when reset', () => {
+    describe('when reset', () => {
         const wrapper = mount(
             <BaseForm schema={schema} />
         );
@@ -235,7 +238,7 @@ describe('BaseForm', () => {
         });
     });
 
-    context('when submitted', () => {
+    describe('when submitted', () => {
         const wrapper = mount(
             <BaseForm model={model} schema={schema} onSubmit={onSubmit} />
         );

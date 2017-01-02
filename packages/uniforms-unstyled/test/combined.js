@@ -1,8 +1,10 @@
-import React    from 'react';
-import {expect} from 'chai';
-import {mount}  from 'enzyme';
-import {spy}    from 'sinon';
-import {stub}   from 'sinon';
+import React      from 'react';
+import {describe} from 'mocha';
+import {expect}   from 'chai';
+import {it}       from 'mocha';
+import {mount}    from 'enzyme';
+import {spy}      from 'sinon';
+import {stub}     from 'sinon';
 
 import AutoFields     from 'uniforms-unstyled/AutoFields';
 import AutoForm       from 'uniforms-unstyled/AutoForm';

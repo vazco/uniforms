@@ -1,7 +1,10 @@
-import React    from 'react';
-import {expect} from 'chai';
-import {mount}  from 'enzyme';
-import {spy}    from 'sinon';
+import React        from 'react';
+import {beforeEach} from 'mocha';
+import {describe}   from 'mocha';
+import {expect}     from 'chai';
+import {it}         from 'mocha';
+import {mount}      from 'enzyme';
+import {spy}        from 'sinon';
 
 import connectField       from 'uniforms/connectField';
 import createSchemaBridge from 'uniforms/createSchemaBridge';
@@ -43,7 +46,7 @@ describe('connectField', () => {
         onChange.reset();
     });
 
-    context('when called', () => {
+    describe('when called', () => {
         it('creates component', () => {
             const Field = connectField(Test);
 
@@ -51,7 +54,7 @@ describe('connectField', () => {
         });
     });
 
-    context('when called with `baseField`', () => {
+    describe('when called with `baseField`', () => {
         it('inherits from `baseField`', () => {
             /* istanbul ignore next */
             class Class {}
@@ -66,7 +69,7 @@ describe('connectField', () => {
         });
     });
 
-    context('when called with `includeParent`', () => {
+    describe('when called with `includeParent`', () => {
         it('provides parent field (true)', () => {
             const Field = connectField(Test, {includeParent: true});
 
@@ -90,7 +93,7 @@ describe('connectField', () => {
         });
     });
 
-    context('when called with `includeInChain`', () => {
+    describe('when called with `includeInChain`', () => {
         it('is in chain (true)', () => {
             const Field1 = connectField(props => props.children, {includeInChain: true});
             const Field2 = connectField(Test);
@@ -120,7 +123,7 @@ describe('connectField', () => {
         });
     });
 
-    context('when called with `initialValue`', () => {
+    describe('when called with `initialValue`', () => {
         it('includes default value (true)', () => {
             const Field = connectField(Test, {initialValue: true, ensureValue: false});
 
@@ -155,7 +158,7 @@ describe('connectField', () => {
         });
     });
 
-    context('when called with `mapProps`', () => {
+    describe('when called with `mapProps`', () => {
         it('provides mapped props', () => {
             const Field = connectField(Test, {mapProps: () => ({a: 1})});
 
@@ -168,7 +171,7 @@ describe('connectField', () => {
         });
     });
 
-    context('when rendered with value', () => {
+    describe('when rendered with value', () => {
         it('treats value as initial value', () => {
             const Field = connectField(Test);
 

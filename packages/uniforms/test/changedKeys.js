@@ -1,4 +1,6 @@
-import {expect} from 'chai';
+import {describe} from 'mocha';
+import {expect}   from 'chai';
+import {it}       from 'mocha';
 
 import changedKeys from 'uniforms/changedKeys';
 
@@ -7,7 +9,7 @@ describe('changedKeys', () => {
         expect(changedKeys).to.be.a('function');
     });
 
-    context('(==)', () => {
+    describe('(==)', () => {
         it('works with arrays', () => {
             expect(changedKeys('a', [], [])).to.deep.equal([]);
             expect(changedKeys('a', [1], [1])).to.deep.equal([]);
@@ -34,7 +36,7 @@ describe('changedKeys', () => {
         });
     });
 
-    context('(++)', () => {
+    describe('(++)', () => {
         it('works with arrays', () => {
             expect(changedKeys('a', [], [1])).to.deep.equal(['a', 'a.0']);
             expect(changedKeys('a', [1], [1, 2])).to.deep.equal(['a', 'a.1']);
@@ -61,7 +63,7 @@ describe('changedKeys', () => {
         });
     });
 
-    context('(--)', () => {
+    describe('(--)', () => {
         it('works with arrays', () => {
             expect(changedKeys('a', [1])).to.deep.equal(['a', 'a.0']);
             expect(changedKeys('a', [1], [])).to.deep.equal(['a', 'a.0']);

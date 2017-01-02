@@ -1,4 +1,6 @@
-import {expect} from 'chai';
+import {describe} from 'mocha';
+import {expect}   from 'chai';
+import {it}       from 'mocha';
 
 import randomIds from 'uniforms/randomIds';
 

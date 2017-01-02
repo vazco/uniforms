@@ -1,9 +1,12 @@
-import React    from 'react';
-import {expect} from 'chai';
-import {match}  from 'sinon';
-import {mount}  from 'enzyme';
-import {spy}    from 'sinon';
-import {stub}   from 'sinon';
+import React        from 'react';
+import {beforeEach} from 'mocha';
+import {describe}   from 'mocha';
+import {expect}     from 'chai';
+import {it}         from 'mocha';
+import {match}      from 'sinon';
+import {mount}      from 'enzyme';
+import {spy}        from 'sinon';
+import {stub}       from 'sinon';
 
 import ValidatedForm from 'uniforms/ValidatedForm';
 
@@ -33,7 +36,7 @@ describe('ValidatedForm', () => {
         validator = stub();
     });
 
-    context('when reset', () => {
+    describe('when reset', () => {
         it('removes `error`', () => {
             const wrapper = mount(
                 <ValidatedForm model={model} schema={schema} onSubmit={onSubmit} />
@@ -52,7 +55,7 @@ describe('ValidatedForm', () => {
         });
     });
 
-    context('when submitted', () => {
+    describe('when submitted', () => {
         it('calls `onSubmit` when valid', async () => {
             const wrapper = mount(
                 <ValidatedForm model={model} schema={schema} onSubmit={onSubmit} />
@@ -259,7 +262,7 @@ describe('ValidatedForm', () => {
         });
     });
 
-    context('when validated', () => {
+    describe('when validated', () => {
         it('calls `onValidate`', () => {
             const wrapper = mount(
                 <ValidatedForm model={model} schema={schema} onValidate={onValidate} validate="onChange" />
