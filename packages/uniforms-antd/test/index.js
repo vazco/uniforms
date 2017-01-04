@@ -14,10 +14,23 @@ Object.keys(window).forEach(property => {
 require('fbjs/lib/ExecutionEnvironment').canUseDOM = true;
 
 // Mocks
-import mock from 'mock-require';
+/*import mock from 'mock-require';
 
 mock('uniforms', '../../uniforms/src');
 mock('uniforms-antd', '../src');
+
+*/
+
+const Module = require('module');
+const loader = Module._load;
+Module._load = function _load (request, parent) {
+    return loader(
+        request
+            .replace(/^uniforms-antd/, '../src')
+            .replace(/^uniforms/, '../../uniforms/src'),
+        parent
+    );
+};
 
 if (typeof window !== 'undefined') {
     const matchMediaPolyfill = function matchMediaPolyfill (mediaQuery) {

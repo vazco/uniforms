@@ -17,7 +17,7 @@ import LongTextField    from 'uniforms-antd/LongTextField';
 //import NumField         from 'uniforms-antd/NumField';
 import SelectField      from 'uniforms-antd/SelectField';
 import SubmitField      from 'uniforms-antd/SubmitField';
-import filterDOMProps   from 'uniforms';
+import filterDOMProps   from 'uniforms/filterDOMProps';
 
 filterDOMProps.register(
     '__type__',
