@@ -3,7 +3,6 @@ export {default as AutoFields}          from './AutoFields';
 export {default as AutoForm}            from './AutoForm';
 export {default as BaseForm}            from './BaseForm';
 export {default as BoolField}           from './BoolField';
-export {default as ColorPickerField}    from './ColorPickerField';
 export {default as DateField}           from './DateField';
 export {default as ErrorField}          from './ErrorField';
 export {default as ErrorsField}         from './ErrorsField';

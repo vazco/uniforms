@@ -3,7 +3,6 @@ import connectField     from 'uniforms/connectField';
 import {createElement}  from 'react';
 
 import BoolField        from './BoolField';
-import ColorPickerField from './ColorPickerField';
 import DateField        from './DateField';
 import HiddenField      from './HiddenField';
 import ListField        from './ListField';
@@ -20,7 +19,6 @@ const Auto = ({component, ...props}) => {
                 component = ListField;
             } else {
                 switch (props.fieldComponent) {
-                    case 'color'    :   component = ColorPickerField; break;
                     case 'hidden'   :   component = HiddenField; break;
                 }
                 invariant(component, 'Unsupported field component: %s', props.fieldComponent);
