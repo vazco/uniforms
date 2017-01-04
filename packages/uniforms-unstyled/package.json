@@ -1,6 +1,6 @@
 {
   "name": "uniforms-unstyled",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "main": "index.js",
   "jsnext:main": "src/index.js",
   "description": "Unstyled components for uniforms.",
@@ -46,7 +46,7 @@
     "babel-runtime": "6.20.0",
     "chai": "4.0.0-canary.1",
     "cross-env": "3.1.3",
-    "enzyme": "2.6.0",
+    "enzyme": "2.7.0",
     "eslint": "3.12.2",
     "eslint-config-vazco": "2.2.0",
     "eslint-plugin-babel": "4.0.0",
@@ -63,7 +63,7 @@
   },
   "peerDependencies": {
     "react": "^15.0.0 || ^0.14.0",
-    "uniforms": "^1.7.1"
+    "uniforms": "^1.8.1"
   },
   "babel": {
     "plugins": [
@@ -88,10 +88,7 @@
     "root": true,
     "extends": [
       "vazco"
-    ],
-    "env": {
-      "mocha": true
-    }
+    ]
   },
   "nyc": {
     "reporter": [

@@ -1,4 +1,6 @@
-import {expect} from 'chai';
+import {describe} from 'mocha';
+import {expect}   from 'chai';
+import {it}       from 'mocha';
 
 import SimpleSchemaBridge from 'uniforms/SimpleSchemaBridge';
 
@@ -60,7 +62,7 @@ describe('SimpleSchemaBridge', () => {
 
     const bridge = new SimpleSchemaBridge(schema);
 
-    context('#check()', () => {
+    describe('#check()', () => {
         it('works correctly with schema', () => {
             expect(SimpleSchemaBridge.check(schema)).to.be.ok;
         });
@@ -76,7 +78,7 @@ describe('SimpleSchemaBridge', () => {
         });
     });
 
-    context('#getError', () => {
+    describe('#getError', () => {
         it('works without error', () => {
             expect(bridge.getError('a')).to.be.not.ok;
         });
@@ -92,7 +94,7 @@ describe('SimpleSchemaBridge', () => {
         });
     });
 
-    context('#getErrorMessage', () => {
+    describe('#getErrorMessage', () => {
         it('works without error', () => {
             expect(bridge.getErrorMessage('a')).to.be.not.ok;
         });
@@ -108,7 +110,7 @@ describe('SimpleSchemaBridge', () => {
         });
     });
 
-    context('#getErrorMessages', () => {
+    describe('#getErrorMessages', () => {
         it('works without error', () => {
             expect(bridge.getErrorMessages()).to.be.deep.equal([]);
         });
@@ -128,7 +130,7 @@ describe('SimpleSchemaBridge', () => {
         });
     });
 
-    context('#getField', () => {
+    describe('#getField', () => {
         it('return correct definition', () => {
             expect(bridge.getField('a')).to.be.deep.equal(schema.getDefinition('a'));
         });
@@ -138,7 +140,7 @@ describe('SimpleSchemaBridge', () => {
         });
     });
 
-    context('#getInitialValue', () => {
+    describe('#getInitialValue', () => {
         it('works with arrays', () => {
             expect(bridge.getInitialValue('j')).to.be.deep.equal([undefined]);
             expect(bridge.getInitialValue('k')).to.be.deep.equal([]);
@@ -149,7 +151,7 @@ describe('SimpleSchemaBridge', () => {
         });
     });
 
-    context('#getProps', () => {
+    describe('#getProps', () => {
         it('works with allowedValues', () => {
             expect(bridge.getProps('o')).to.be.deep.equal({label: 'O', required: true, allowedValues: ['O']});
         });
@@ -204,7 +206,7 @@ describe('SimpleSchemaBridge', () => {
         });
     });
 
-    context('#getSubfields', () => {
+    describe('#getSubfields', () => {
         it('works with objects', () => {
             expect(bridge.getSubfields('a')).to.be.deep.equal(['b']);
             expect(bridge.getSubfields('a.b')).to.be.deep.equal(['c']);
@@ -216,7 +218,7 @@ describe('SimpleSchemaBridge', () => {
         });
     });
 
-    context('#getType', () => {
+    describe('#getType', () => {
         it('works with any type', () => {
             expect(bridge.getType('a')).to.be.equal(Object);
             expect(bridge.getType('j')).to.be.equal(Array);
@@ -226,7 +228,7 @@ describe('SimpleSchemaBridge', () => {
         });
     });
 
-    context('#getValidator', () => {
+    describe('#getValidator', () => {
         it('calls correct validator', () => {
             expect(() => bridge.getValidator()({})).to.throw();
         });

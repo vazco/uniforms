@@ -17,6 +17,10 @@
         <img src="https://img.shields.io/npm/dm/uniforms.svg?maxAge=86400" alt="Downloads">
     </a>
 
+    <a href="https://gitter.im/vazco/uniforms">
+        <img src="https://img.shields.io/gitter/room/vazco/uniforms.svg?maxAge=86400" alt="Gitter">
+    </a>
+
     <a href="https://npmjs.org/package/uniforms">
         <img src="https://img.shields.io/npm/v/uniforms.svg?maxAge=86400" alt="Version">
     </a>
