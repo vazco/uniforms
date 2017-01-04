@@ -31,7 +31,6 @@ const AntD = parent => class extends parent {
         const {
             className,
             grid,
-            fieldData,
             ...props
         } = super.getNativeFormProps();
 

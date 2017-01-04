@@ -1,12 +1,10 @@
 import connectField     from 'uniforms/connectField';
-import filterDOMProps   from 'uniforms/filterDOMProps';
 import nothing          from 'uniforms/nothing';
 import React            from 'react';
 
 const Error = ({
     children,
-    errorMessage,
-    ...props
+    errorMessage
 }) =>
     !errorMessage ? nothing : (
         <section

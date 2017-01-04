@@ -66,7 +66,7 @@ const renderSelectAD = ({
             name={name}
             onChange={value => onChange(fieldType === Array ? _.without(value,null,undefined) : value)}
             ref={inputRef}
-            value={fieldType === Array ? _.without(value,null,undefined) : value }
+            value={fieldType === Array ? _.without(value,null,undefined) : value}
         >
             {op.map(val => {
                 let v = '';

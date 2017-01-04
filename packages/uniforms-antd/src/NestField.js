@@ -1,6 +1,5 @@
 import classnames     from 'classnames';
 import connectField   from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
 import injectName     from 'uniforms/injectName';
 import joinName       from 'uniforms/joinName';
 import React          from 'react';
@@ -16,8 +15,7 @@ const Nest = ({
     fields,
     label,
     name,
-    showInlineError,
-    ...props
+    showInlineError
 }) =>
     <section className={classnames(className, {disabled, error}, 'grouped fields')} >
         {label && (

@@ -25,8 +25,9 @@ const List = ({
     fieldComponent,
     ...props
 }) => {
-    if( fieldComponent !== 'hidden'){
-        return (
+    let comp = '';
+    if (fieldComponent !== 'hidden') {
+        comp = (
             <section
                 className={classnames('ui', className, {disabled})}
                 style={{
@@ -65,7 +66,7 @@ const List = ({
                                 key: index,
                                 label: null,
                                 name: joinName(name, child.props.name && child.props.name.replace('$', index)),
-                                fieldComponent: fieldComponent
+                                fieldComponent
                             })
                         )
                     )
@@ -88,8 +89,8 @@ const List = ({
                 </div>
             </section>
         );
-    }else{
-        return(
+    } else {
+        comp = (
             <section>
                 {!!(errorMessage && showInlineError) && (
                     <section className="ui red basic label">
@@ -123,6 +124,7 @@ const List = ({
             </section>
         );
     }
+    return comp;
 };
 
 

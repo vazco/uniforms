@@ -13,7 +13,6 @@ const LongText = ({
     onChange,
     placeholder,
     showInlineError,
-    type,
     value,
     info,
     rows

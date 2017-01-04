@@ -7,8 +7,9 @@ import AutoField    from './AutoField';
 import ListDelField from './ListDelField';
 
 const ListItem = props => {
-    if(props.fieldComponent !== 'hidden'){
-        return (
+    let comp = '';
+    if (props.fieldComponent !== 'hidden') {
+        comp = (
             <section className="item">
                 <div
                     style={{
@@ -55,8 +56,8 @@ const ListItem = props => {
                 </section>
             </section>
         );
-    }else{
-        return(
+    } else {
+        comp = (
             <section>
                 {props.children ? (
                     Children.map(props.children, child =>
@@ -73,8 +74,9 @@ const ListItem = props => {
                     <AutoField {...props} style={{margin: 0}} />
                 )}
             </section>
-        )
+        );
     }
+    return comp;
 };
 
 export default connectField(ListItem, {includeInChain: false});

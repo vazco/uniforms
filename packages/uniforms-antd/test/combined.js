@@ -4,20 +4,20 @@ import {mount}  from 'enzyme';
 import {spy}    from 'sinon';
 import {stub}   from 'sinon';
 
-import {AutoFields}     from 'uniforms-antd';
-import {AutoForm}       from 'uniforms-antd';
-import {ErrorField}     from 'uniforms-antd';
-import {ErrorsField}    from 'uniforms-antd';
-import {HiddenField}    from 'uniforms-antd';
-import {ListAddField}   from 'uniforms-antd';
-import {ListDelField}   from 'uniforms-antd';
-import {ListField}      from 'uniforms-antd';
-import {ListItemField}  from 'uniforms-antd';
-import {LongTextField}  from 'uniforms-antd';
-import {NumField}       from 'uniforms-antd';
-import {SelectField}    from 'uniforms-antd';
-import {SubmitField}    from 'uniforms-antd';
-import {filterDOMProps} from 'uniforms';
+import AutoFields       from 'uniforms-antd/AutoFields';
+import AutoForm         from 'uniforms-antd/AutoForm';
+import ErrorField       from 'uniforms-antd/ErrorField';
+import ErrorsField      from 'uniforms-antd/ErrorsField';
+import HiddenField      from 'uniforms-antd/HiddenField';
+//import ListAddField     from 'uniforms-antd/ListAddField';
+//import ListDelField     from 'uniforms-antd/ListDelField';
+//import ListField        from 'uniforms-antd/ListField';
+//import ListItemField    from 'uniforms-antd/ListItemField';
+import LongTextField    from 'uniforms-antd/LongTextField';
+//import NumField         from 'uniforms-antd/NumField';
+import SelectField      from 'uniforms-antd/SelectField';
+import SubmitField      from 'uniforms-antd/SubmitField';
+import filterDOMProps   from 'uniforms';
 
 filterDOMProps.register(
     '__type__',
@@ -36,7 +36,7 @@ describe('Everything', () => {
     const onSubmit = spy();
 
     const dateA = new Date(2004, 4, 4);
-    const dateB = new Date(2005, 5, 5);
+    //const dateB = new Date(2005, 5, 5);
 
     const label         = 'label';
     const required      = true;
@@ -144,7 +144,7 @@ describe('Everything', () => {
         //console.log(wrapper.html())
         expect(wrapper.find('[name="x00"]').props()).to.have.property('value', 0);
         // this give TypeError: this.getValueFromEvent(...).trim is not a function
-        expect(wrapper.find({name: "x00" }).simulate('change', {target: {value: 0}})).to.be.ok;
+        expect(wrapper.find({name: 'x00'}).simulate('change', {target: {value: 0}})).to.be.ok;
         expect(wrapper.find('[name="x00"]').props()).to.have.property('value', 0);
 
         await new Promise(resolve => setTimeout(resolve, 5));

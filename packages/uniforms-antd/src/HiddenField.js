@@ -1,5 +1,4 @@
 import BaseField        from 'uniforms/BaseField';
-import filterDOMProps   from 'uniforms/filterDOMProps';
 import nothing          from 'uniforms/nothing';
 import React            from 'react';
 
