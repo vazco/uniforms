@@ -1,9 +1,9 @@
-import React            from 'react';
-import classnames       from 'classnames';
-import {connectField}   from 'uniforms';
-import {filterDOMProps} from 'uniforms';
-import {injectName}     from 'uniforms';
-import {joinName}       from 'uniforms';
+import classnames     from 'classnames';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
+import injectName     from 'uniforms/injectName';
+import joinName       from 'uniforms/joinName';
+import React          from 'react';
 
 import AutoField from './AutoField';
 
@@ -38,7 +38,10 @@ const Nest = ({
             injectName(name, children)
         ) : (
             fields.map(key =>
-                <AutoField key={key} name={joinName(name, key)} />
+                <AutoField
+                    key={key}
+                    name={joinName(name, key)}
+                />
             )
         )}
     </section>

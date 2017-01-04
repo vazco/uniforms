@@ -1,21 +1,7 @@
+import connectField     from 'uniforms/connectField';
 import React            from 'react';
-import {connectField}   from 'uniforms';
-import FormGroup from './FormGroup';
 
-// SCHEMA PROTOTYPE
-/*
-state: {
-    type: String
-},
-zip: {
-    type: String,
-    regEx: /^[0-9]{5}$/
-},
-field: {
-    type: String,
-    uniforms: {rows: 14, type: 'textarea' }
-}
-*/
+import FormGroup from './FormGroup';
 
 const LongText = ({
     disabled,
@@ -30,7 +16,7 @@ const LongText = ({
     type,
     value,
     info,
-    rows,
+    rows
 }) => {
     const AntD = require('antd');
     const Input = AntD.Input;
@@ -57,3 +43,18 @@ LongText.defaultProps = {
 };
 
 export default connectField(LongText);
+
+// SCHEMA PROTOTYPE
+/*
+state: {
+    type: String
+},
+zip: {
+    type: String,
+    regEx: /^[0-9]{5}$/
+},
+field: {
+    type: String,
+    uniforms: {rows: 14, type: 'textarea' }
+}
+*/

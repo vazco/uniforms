@@ -35,8 +35,5 @@
     "extends": [
       "vazco"
     ]
-  },
-  "devDependencies": {
-    "babel-plugin-import": "^1.1.0"
   }
 }

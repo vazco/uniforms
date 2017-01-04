@@ -1,66 +1,8 @@
-import React            from 'react';
-import {connectField}   from 'uniforms';
+import _              from 'lodash';
+import connectField   from 'uniforms/connectField';
+import React          from 'react';
+
 import FormGroup from './FormGroup';
-import _ from 'lodash';
-
-// SCHEMA PROTOTYPE
-/*
-"select": {
-    type: String,
-    allowedValues: ['111','2222','333','444'],
-},
-"selectOptional": {
-    type: String,
-    allowedValues: ['qqq','www','rrr','eee'],
-    optional: true
-},
-"multiselectAllowed": {
-    type: [String],
-    allowedValues: ['ggg','hhh','jjj','kkk'],
-    minCount: 1,
-    custom: function(){ return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null )}
-},
-"multiselect": {
-    type: [String],
-    minCount: 1,
-    custom: function(){ return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null )},
-    uniforms: {
-                options: [
-                    {
-                        value: 'aaa',
-                        label: 'a'
-                    },
-                    {
-                        value: 'bbb',
-                        label: 'b'
-                    },
-                    {
-                        value: 'ccc',
-                        label: 'c'
-                    },
-                    {
-                        value: 'ddd',
-                        label: 'd'
-                    }]
-                }
-},
-"checkboxes": {
-       type: [String],
-       allowedValues: ['111','2222','333','444'],
-       uniforms: {
-           checkboxes: true
-       }
-  */
-/*
-const xor = (item, array) => {
-    const index = array.indexOf(item);
-    if (index === -1) {
-        return array.concat([item]);
-    }
-
-    return array.slice(0, index).concat(array.slice(index + 1));
-};
-*/
 
 const renderCheckboxesAD = ({
     allowedValues,
@@ -86,8 +28,6 @@ const renderCheckboxesAD = ({
         />
     );
 };
-
-
 
 const renderSelectAD = ({
     allowedValues,
@@ -148,7 +88,6 @@ const renderSelectAD = ({
         </Select>
     );
 };
-
 
 export class Select extends (React.Component) {
     constructor () {
@@ -232,5 +171,63 @@ export class Select extends (React.Component) {
     }
 }
 
-
 export default connectField(Select);
+
+// SCHEMA PROTOTYPE
+/*
+"select": {
+    type: String,
+    allowedValues: ['111','2222','333','444'],
+},
+"selectOptional": {
+    type: String,
+    allowedValues: ['qqq','www','rrr','eee'],
+    optional: true
+},
+"multiselectAllowed": {
+    type: [String],
+    allowedValues: ['ggg','hhh','jjj','kkk'],
+    minCount: 1,
+    custom: function(){ return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null )}
+},
+"multiselect": {
+    type: [String],
+    minCount: 1,
+    custom: function(){ return(this.value.length === 0 ? "minCount" :  this.value[0] == null ? "minCount" : null )},
+    uniforms: {
+                options: [
+                    {
+                        value: 'aaa',
+                        label: 'a'
+                    },
+                    {
+                        value: 'bbb',
+                        label: 'b'
+                    },
+                    {
+                        value: 'ccc',
+                        label: 'c'
+                    },
+                    {
+                        value: 'ddd',
+                        label: 'd'
+                    }]
+                }
+},
+"checkboxes": {
+       type: [String],
+       allowedValues: ['111','2222','333','444'],
+       uniforms: {
+           checkboxes: true
+       }
+  */
+/*
+const xor = (item, array) => {
+    const index = array.indexOf(item);
+    if (index === -1) {
+        return array.concat([item]);
+    }
+
+    return array.slice(0, index).concat(array.slice(index + 1));
+};
+*/

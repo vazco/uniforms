@@ -1,32 +1,9 @@
+import {ChromePicker} from 'react-color';
+import connectField   from 'uniforms/connectField';
 import React          from 'react';
-import {connectField} from 'uniforms';
-import { ChromePicker } from 'react-color';
-import reactCSS from 'reactcss'
-import FormGroup from './FormGroup';
+import reactCSS       from 'reactcss'
 
-/*
-// SCHEMA PROTOTYPE
-
-colorArray: {
-      type: [String],
-      label: "Hex color value for chart text.",
-      uniforms: {
-        fieldComponent: 'color',
-        colorRatios: [0.35, 0.7, -0.2, -0.4],
-        info: "Hex color value"
-      }
-  },
-    colorOne: {
-      type: String,
-      label: "Hex color value for chart text.",
-      defaultValue: "#434d52",
-      uniforms: {
-        fieldComponent: 'color',
-        colorRatios: [0.35, 0.7, -0.2, -0.4],
-        info: "Hex color value"
-      }
-  },
-*/
+import FormGroup      from './FormGroup';
 
 const ColorPicker = ({
     errorMessage,
@@ -44,7 +21,6 @@ const ColorPicker = ({
 }
 
 export default connectField(ColorPicker);
-
 
 class RenderColorPicker extends React.Component {
   constructor(){
@@ -225,3 +201,27 @@ class RenderColorPicker extends React.Component {
     )
   }
 }
+
+/*
+// SCHEMA PROTOTYPE
+
+colorArray: {
+      type: [String],
+      label: "Hex color value for chart text.",
+      uniforms: {
+        fieldComponent: 'color',
+        colorRatios: [0.35, 0.7, -0.2, -0.4],
+        info: "Hex color value"
+      }
+  },
+    colorOne: {
+      type: String,
+      label: "Hex color value for chart text.",
+      defaultValue: "#434d52",
+      uniforms: {
+        fieldComponent: 'color',
+        colorRatios: [0.35, 0.7, -0.2, -0.4],
+        info: "Hex color value"
+      }
+  },
+*/

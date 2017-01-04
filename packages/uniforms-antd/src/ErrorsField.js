@@ -1,6 +1,6 @@
-import React            from 'react';
-import {BaseField}      from 'uniforms';
-import {nothing}        from 'uniforms';
+import BaseField  from 'uniforms/BaseField';
+import nothing    from 'uniforms/nothing';
+import React      from 'react';
 
 const ErrorsField = ({className, children, ...props}, {uniforms: {error, schema}}) =>
     (!error && !children) ? nothing : (

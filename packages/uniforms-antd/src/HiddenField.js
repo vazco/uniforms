@@ -1,7 +1,7 @@
+import BaseField        from 'uniforms/BaseField';
+import filterDOMProps   from 'uniforms/filterDOMProps';
+import nothing          from 'uniforms/nothing';
 import React            from 'react';
-import {BaseField}      from 'uniforms';
-import {filterDOMProps} from 'uniforms';
-import {nothing}        from 'uniforms';
 
 export default class HiddenField extends BaseField {
     componentWillReceiveProps ({value: valueDesired}) {

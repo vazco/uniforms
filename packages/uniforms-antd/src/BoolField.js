@@ -1,15 +1,7 @@
-import React            from 'react';
-import {connectField}   from 'uniforms';
-import FormGroup from './FormGroup';
+import connectField from 'uniforms/connectField';
+import React        from 'react';
 
-// SCHEMA PROTOTYPE
-/*
-boolfieldanttest:{
-  type: Boolean,
-  label: "Ant Boolean Field Sample",
-  defaultValue: true
-  }
-  */
+import FormGroup    from './FormGroup';
 
 const Bool = ({
     disabled,
@@ -43,3 +35,12 @@ const Bool = ({
 };
 
 export default connectField(Bool);
+
+// SCHEMA PROTOTYPE
+/*
+boolfieldanttest:{
+  type: Boolean,
+  label: "Ant Boolean Field Sample",
+  defaultValue: true
+  }
+  */

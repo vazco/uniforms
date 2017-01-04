@@ -1,25 +1,8 @@
+import connectField     from 'uniforms/connectField';
+import moment           from 'moment';
 import React            from 'react';
-import {connectField}   from 'uniforms';
-import moment from 'moment';
-import FormGroup from './FormGroup';
 
-
-
-// SCHEMA PROTOTYPE
-/*
-datesamplefield: {
-  type: Date,
-  label: "This is a date component",
-  defaultValue: "12-12-2015 16:45:45" / new Date(2015,10,2,3,4,5)
-  uniforms: {
-    showTime: true,
-    format: "DD-MM-YYYY HH:mm:ss",
-    placeholder: "Select Date",
-    disabled: false,
-    allowClear: false
-  }
-}
-*/
+import FormGroup        from './FormGroup';
 
 const dateFormat = value => value && value.toISOString().slice(0, -8);
 const dateParse = (timestamp, datestring, onChange, showTime) => {
@@ -98,3 +81,19 @@ class Date_ extends (React.Component) {
 Date_.displayName = 'Date';
 
 export default connectField(Date_);
+
+// SCHEMA PROTOTYPE
+/*
+datesamplefield: {
+  type: Date,
+  label: "This is a date component",
+  defaultValue: "12-12-2015 16:45:45" / new Date(2015,10,2,3,4,5)
+  uniforms: {
+    showTime: true,
+    format: "DD-MM-YYYY HH:mm:ss",
+    placeholder: "Select Date",
+    disabled: false,
+    allowClear: false
+  }
+}
+*/

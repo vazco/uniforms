@@ -1,7 +1,7 @@
-import {PropTypes}     from 'react';
-import {createElement} from 'react';
+import {createElement}  from 'react';
+import {PropTypes}      from 'react';
 
-import AutoField from './AutoField';
+import AutoField        from './AutoField';
 
 const AutoFields = ({autoField, element, fields, omitFields, ...props}, {uniforms: {schema}}) =>
     createElement(

@@ -1,7 +1,7 @@
-import React          from 'react';
-import {Children}     from 'react';
-import {connectField} from 'uniforms';
-import {joinName}     from 'uniforms';
+import {Children}   from 'react';
+import connectField from 'uniforms/connectField';
+import joinName     from 'uniforms/joinName';
+import React        from 'react';
 
 import AutoField    from './AutoField';
 import ListDelField from './ListDelField';

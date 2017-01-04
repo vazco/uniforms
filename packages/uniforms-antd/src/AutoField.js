@@ -1,17 +1,17 @@
-import invariant       from 'invariant';
-import {connectField}  from 'uniforms';
-import {createElement} from 'react';
+import invariant        from 'invariant';
+import connectField     from 'uniforms/connectField';
+import {createElement}  from 'react';
 
-import NumField    from './NumField';
-import BoolField   from './BoolField';
-import DateField   from './DateField';
-import ListField   from './ListField';
-import NestField   from './NestField';
-import TextField   from './TextField';
-import RadioField  from './RadioField';
-import SelectField from './SelectField';
+import BoolField        from './BoolField';
 import ColorPickerField from './ColorPickerField';
-import HiddenField from './HiddenField';
+import DateField        from './DateField';
+import HiddenField      from './HiddenField';
+import ListField        from './ListField';
+import NestField        from './NestField';
+import NumField         from './NumField';
+import RadioField       from './RadioField';
+import SelectField      from './SelectField';
+import TextField        from './TextField';
 
 const Auto = ({component, ...props}) => {
     if (component === undefined) {

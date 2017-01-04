@@ -9,7 +9,6 @@ binary-heap@1.0.10
 blaze@2.2.0
 blaze-tools@1.0.10
 boilerplate-generator@1.0.11
-caching-compiler@1.1.9
 callback-hook@1.0.10
 check@1.2.4
 chuangbo:cookie@1.1.0
@@ -35,7 +34,6 @@ jquery@1.11.10
 kadira:dochead@1.5.0
 kadira:flow-router-ssr@3.13.0
 launch-screen@1.1.0
-less@2.7.8
 livedata@1.0.18
 localstorage@1.0.12
 logging@1.1.16

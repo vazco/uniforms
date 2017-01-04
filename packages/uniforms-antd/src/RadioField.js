@@ -1,18 +1,7 @@
-import React            from 'react';
-import {connectField}   from 'uniforms';
+import connectField   from 'uniforms/connectField';
+import React          from 'react';
+
 import FormGroup from './FormGroup';
-
-// SCHEMA PROTOTYPE
-/*
-"radio": {
-    type: String,
-    allowedValues: ['111','2222','333','444'],
-    uniforms: {
-        checkboxes: true
-    }
-},
-*/
-
 
 const Radio = ({
     allowedValues,
@@ -33,8 +22,19 @@ const Radio = ({
     const RadioGroup = Radio.Group;
     const op = options ? options : allowedValues;
     return (
-        <FormGroup errorMessage={errorMessage} id={id} label={label} showInlineError={showInlineError} info={info} >
-            <RadioGroup onChange={e => onChange(e.target.value)} value={value} disabled={disabled} name={name}>
+        <FormGroup
+            errorMessage={errorMessage}
+            id={id}
+            label={label}
+            showInlineError={showInlineError}
+            info={info}
+        >
+            <RadioGroup
+                onChange={e => onChange(e.target.value)}
+                value={value}
+                disabled={disabled}
+                name={name}
+            >
                 {op.map(val => {
                     let rad = '';
                     if (val instanceof Object) {
@@ -73,5 +73,15 @@ const Radio = ({
     );
 };
 
-
 export default connectField(Radio);
+
+// SCHEMA PROTOTYPE
+/*
+"radio": {
+    type: String,
+    allowedValues: ['111','2222','333','444'],
+    uniforms: {
+        checkboxes: true
+    }
+},
+*/

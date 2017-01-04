@@ -1,7 +1,7 @@
-import React            from 'react';
 import classnames       from 'classnames';
-import {connectField}   from 'uniforms';
-import {filterDOMProps} from 'uniforms';
+import connectField     from 'uniforms/connectField';
+import filterDOMProps   from 'uniforms/filterDOMProps';
+import React            from 'react';
 
 const ListAdd = ({
     className,

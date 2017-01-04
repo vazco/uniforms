@@ -1,21 +1,7 @@
-import React            from 'react';
-import {connectField}   from 'uniforms';
-import FormGroup from './FormGroup';
+import React          from 'react';
+import connectField   from 'uniforms/connectField';
 
-// SCHEMA PROTOTYPE
-/*
-state: {
-    type: String
-},
-zip: {
-    type: String,
-    regEx: /^[0-9]{5}$/
-},
-field: {
-    type: String,
-    uniforms: {rows: 14, type: 'textarea' }
-}
-*/
+import FormGroup from './FormGroup';
 
 const Text = ({
     disabled,
@@ -57,3 +43,18 @@ Text.defaultProps = {
 };
 
 export default connectField(Text);
+
+// SCHEMA PROTOTYPE
+/*
+state: {
+    type: String
+},
+zip: {
+    type: String,
+    regEx: /^[0-9]{5}$/
+},
+field: {
+    type: String,
+    uniforms: {rows: 14, type: 'textarea' }
+}
+*/

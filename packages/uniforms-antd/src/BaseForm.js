@@ -1,6 +1,6 @@
-import classnames from 'classnames';
-import {BaseForm} from 'uniforms';
-import {PropTypes} from 'react';
+import BaseForm     from 'uniforms/BaseForm';
+import classnames   from 'classnames';
+import {PropTypes}  from 'react';
 
 const AntD = parent => class extends parent {
     static AntD = AntD;

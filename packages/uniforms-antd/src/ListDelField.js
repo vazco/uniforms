@@ -1,6 +1,6 @@
+import connectField     from 'uniforms/connectField';
+import filterDOMProps   from 'uniforms/filterDOMProps';
 import React            from 'react';
-import {connectField}   from 'uniforms';
-import {filterDOMProps} from 'uniforms';
 
 const ListDel = ({
     disabled,

@@ -1,5 +1,7 @@
-import React      from 'react';
-import {InfoMessage} from './InfoMessage';
+import React    from 'react';
+
+import InfoMessage from './InfoMessage';
+
 const FormGroup = ({
     children,
     errorMessage,      // errorMessage string of error
