@@ -1,9 +1,10 @@
-import React                            from 'react';
-import {Children}                       from 'react';
-import {connectField}                   from 'uniforms';
-import {filterDOMProps}                 from 'uniforms';
-import {joinName}                       from 'uniforms';
-import {List as ListMaterial, ListItem} from 'material-ui/List';
+import React                  from 'react';
+import connectField           from 'uniforms/connectField';
+import filterDOMProps         from 'uniforms/filterDOMProps';
+import joinName               from 'uniforms/joinName';
+import {Children}             from 'react';
+import {List as ListMaterial} from 'material-ui/List';
+import {ListItem}             from 'material-ui/List';
 
 import ListAddField  from './ListAddField';
 import ListItemField from './ListItemField';

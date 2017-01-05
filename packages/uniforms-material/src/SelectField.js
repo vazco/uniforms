@@ -1,12 +1,12 @@
-import Checkbox         from 'material-ui/Checkbox';
-import MenuItem         from 'material-ui/MenuItem';
-import RadioButton      from 'material-ui/RadioButton';
-import React            from 'react';
-import SelectField      from 'material-ui/SelectField';
-import {connectField}   from 'uniforms';
-import {filterDOMProps} from 'uniforms';
-import {ListItem}       from 'material-ui/List';
-import {List}           from 'material-ui/List';
+import Checkbox       from 'material-ui/Checkbox';
+import MenuItem       from 'material-ui/MenuItem';
+import RadioButton    from 'material-ui/RadioButton';
+import React          from 'react';
+import SelectField    from 'material-ui/SelectField';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
+import {ListItem}     from 'material-ui/List';
+import {List}         from 'material-ui/List';
 
 const xor = (item, array) => {
     const index = array.indexOf(item);

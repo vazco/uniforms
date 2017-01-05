@@ -1,7 +1,7 @@
-import React            from 'react';
-import TextField        from 'material-ui/TextField';
-import {connectField}   from 'uniforms';
-import {filterDOMProps} from 'uniforms';
+import React          from 'react';
+import TextField      from 'material-ui/TextField';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 const noneIfNaN = x => isNaN(x) ? undefined : x;
 

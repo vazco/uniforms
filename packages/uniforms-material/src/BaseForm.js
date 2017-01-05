@@ -1,4 +1,4 @@
-import {BaseForm} from 'uniforms';
+import BaseForm from 'uniforms/BaseForm';
 
 const Material = parent => class extends parent {
     static Material = Material;

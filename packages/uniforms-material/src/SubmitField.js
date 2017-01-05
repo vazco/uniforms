@@ -1,7 +1,7 @@
-import RaisedButton     from 'material-ui/RaisedButton';
-import React            from 'react';
-import {BaseField}      from 'uniforms';
-import {filterDOMProps} from 'uniforms';
+import BaseField      from 'uniforms/BaseField';
+import RaisedButton   from 'material-ui/RaisedButton';
+import React          from 'react';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 const SubmitField = ({inputRef, label, value, ...props}, {uniforms: {error, state: {disabled}}}) =>
     <RaisedButton

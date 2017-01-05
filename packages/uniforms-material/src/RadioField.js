@@ -1,9 +1,9 @@
-import RadioButton      from 'material-ui/RadioButton';
-import React            from 'react';
-import {connectField}   from 'uniforms';
-import {filterDOMProps} from 'uniforms';
-import {ListItem}       from 'material-ui/List';
-import {List}           from 'material-ui/List';
+import RadioButton    from 'material-ui/RadioButton';
+import React          from 'react';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
+import {ListItem}     from 'material-ui/List';
+import {List}         from 'material-ui/List';
 
 /*
  * TODO: Investigate why the checkboxes needed to be unpacked

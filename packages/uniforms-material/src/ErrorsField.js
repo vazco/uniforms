@@ -1,9 +1,10 @@
-import ErrorOutline     from 'material-ui/svg-icons/alert/error-outline';
-import React            from 'react';
-import {BaseField}      from 'uniforms';
-import {filterDOMProps} from 'uniforms';
-import {List, ListItem} from 'material-ui/List';
-import {nothing}        from 'uniforms';
+import BaseField      from 'uniforms/BaseField';
+import ErrorOutline   from 'material-ui/svg-icons/alert/error-outline';
+import React          from 'react';
+import filterDOMProps from 'uniforms/filterDOMProps';
+import nothing        from 'uniforms/nothing';
+import {ListItem}     from 'material-ui/List';
+import {List}         from 'material-ui/List';
 
 const ErrorsField = ({children, ...props}, {uniforms: {error, schema}}) =>
     (!error && !children) ? nothing : (

@@ -1,8 +1,8 @@
-import Add              from 'material-ui/svg-icons/content/add';
-import IconButton       from 'material-ui/IconButton';
-import React            from 'react';
-import {connectField}   from 'uniforms';
-import {filterDOMProps} from 'uniforms';
+import Add            from 'material-ui/svg-icons/content/add';
+import IconButton     from 'material-ui/IconButton';
+import React          from 'react';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 const ListAdd = ({
     disabled,

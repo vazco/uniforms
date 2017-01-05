@@ -1,7 +1,7 @@
-import React            from 'react';
-import Toggle           from 'material-ui/Toggle';
-import {connectField}   from 'uniforms';
-import {filterDOMProps} from 'uniforms';
+import React          from 'react';
+import Toggle         from 'material-ui/Toggle';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 const Bool = ({
     disabled,

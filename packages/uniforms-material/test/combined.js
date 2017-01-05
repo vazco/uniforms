@@ -1,25 +1,27 @@
 import React          from 'react';
 import getMuiTheme    from 'material-ui/styles/getMuiTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import {describe}     from 'mocha';
 import {expect}       from 'chai';
+import {it}           from 'mocha';
 import {mount}        from 'enzyme';
 import {spy}          from 'sinon';
 import {stub}         from 'sinon';
 
-import {AutoFields}     from 'uniforms-material';
-import {AutoForm}       from 'uniforms-material';
-import {ErrorField}     from 'uniforms-material';
-import {ErrorsField}    from 'uniforms-material';
-import {HiddenField}    from 'uniforms-material';
-import {ListAddField}   from 'uniforms-material';
-import {ListDelField}   from 'uniforms-material';
-import {ListField}      from 'uniforms-material';
-import {ListItemField}  from 'uniforms-material';
-import {LongTextField}  from 'uniforms-material';
-import {NumField}       from 'uniforms-material';
-import {SelectField}    from 'uniforms-material';
-import {SubmitField}    from 'uniforms-material';
-import {filterDOMProps} from 'uniforms';
+import AutoFields     from 'uniforms-material/AutoFields';
+import AutoForm       from 'uniforms-material/AutoForm';
+import ErrorField     from 'uniforms-material/ErrorField';
+import ErrorsField    from 'uniforms-material/ErrorsField';
+import HiddenField    from 'uniforms-material/HiddenField';
+import ListAddField   from 'uniforms-material/ListAddField';
+import ListDelField   from 'uniforms-material/ListDelField';
+import ListField      from 'uniforms-material/ListField';
+import ListItemField  from 'uniforms-material/ListItemField';
+import LongTextField  from 'uniforms-material/LongTextField';
+import NumField       from 'uniforms-material/NumField';
+import SelectField    from 'uniforms-material/SelectField';
+import SubmitField    from 'uniforms-material/SubmitField';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 filterDOMProps.register(
     '__type__',
