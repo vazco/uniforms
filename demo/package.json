@@ -1,5 +1,5 @@
 {
-  "name": "docs",
+  "name": "demo",
   "private": true,
   "scripts": {
     "start": "meteor run",
@@ -20,7 +20,7 @@
     "react-frame-component": "0.6.6",
     "react-mounter": "1.2.0",
     "react-panelgroup": "1.0.2",
-    "simpl-schema": "0.0.3",
+    "simpl-schema": "0.0.4",
     "uniforms": "file:../packages/uniforms",
     "uniforms-bootstrap3": "file:../packages/uniforms-bootstrap3",
     "uniforms-bootstrap4": "file:../packages/uniforms-bootstrap4",
