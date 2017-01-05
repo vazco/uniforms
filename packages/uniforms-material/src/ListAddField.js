@@ -14,8 +14,8 @@ const ListAdd = ({
 
     return (
         <IconButton
-            onTouchTap={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
             {...filterDOMProps(props)}
+            onTouchTap={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
         >
             <Add />
         </IconButton>
