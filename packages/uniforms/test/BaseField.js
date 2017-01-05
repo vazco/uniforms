@@ -322,7 +322,7 @@ describe('BaseField', () => {
                 reactContext1
             );
 
-            expect(wrapper.find(PropsComponent).props()).to.have.property('label', '');
+            expect(wrapper.find(PropsComponent).props()).to.have.property('label', null);
         });
 
         it('have correct `label` (string)', () => {

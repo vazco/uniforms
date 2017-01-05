@@ -1,3 +1,6 @@
+## [v1.8.2](https://github.com/vazco/uniforms/tree/v1.8.2) (2017-01-06)
+- **Fixed:** Propagation of labels and placeholders.
+
 ## [v1.8.1](https://github.com/vazco/uniforms/tree/v1.8.1) (2016-12-30)
 - **Fixed:** Placeholder text from schema. [\#152](https://github.com/vazco/uniforms/issues/152)
 
