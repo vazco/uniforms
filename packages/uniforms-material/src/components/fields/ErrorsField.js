@@ -11,7 +11,6 @@ const ErrorsField = ({children, ...props}, {uniforms: {error, schema}}) =>
             {!! children && (
                 <ListItem primaryText={children} disabled />
             )}
-            {/* TODO: Make leftIcon optional */}
             {schema.getErrorMessages(error).map((message, index) =>
                 <ListItem key={index} disabled primaryText={message} leftIcon={<ErrorOutline />} />
             )}
