@@ -6,14 +6,50 @@ import connectField from 'uniforms/connectField';
 import {Component}  from 'react';
 import {ListItem}   from 'material-ui/List';
 
+const noop = () => {};
+const dateFormat = date => date && date.toLocaleString();
+
 class Date_ extends Component {
+    static displayName = 'Date';
+
+    constructor () {
+        super(...arguments);
+
+        this._intermediate = null;
+
+        this.onFocus      = this.onFocus.bind(this);
+        this.onChangeDate = this.onChangeDate.bind(this);
+        this.onChangeTime = this.onChangeTime.bind(this);
+    }
+
+    onChangeDate (event, date) {
+        this._intermediate = date;
+        this.refs.timepicker.openDialog();
+    }
+
+    onChangeTime (event, date) {
+        this._intermediate.setHours(date.getHours());
+        this._intermediate.setMinutes(date.getMinutes());
+        this._intermediate.setSeconds(date.getSeconds());
+        this._intermediate.setMilliseconds(date.getMilliseconds());
+
+        this.props.onChange(this._intermediate);
+
+        this._intermediate = null;
+    }
+
+    onFocus () {
+        this.refs.datepicker.openDialog();
+    }
+
     render () {
         const {
             props: {
                 id,
                 max,
                 min,
-                onChange,
+                style,
+                timeFormat,
                 value,
                 ...props
             }
@@ -22,44 +58,40 @@ class Date_ extends Component {
         return (
             <ListItem
                 disabled
-                primaryText={<div>
-                    <TextField
-                        onChange={onChange}
-                        onFocus={() => this.refs.datepicker.openDialog()}
-                        value={value}
-                        type="datetime"
-                        {...props}
-                    />
-                    <DatePicker
-                        value={value}
-                        maxDate={max}
-                        minDate={min}
-                        onChange={(event, date) => {
-                            if (value) {
-                                date.setHours(value.getHours());
-                                date.setMinutes(value.getMinutes());
-                            }
-                            onChange(date);
-                            // TODO: Risky race?
-                            this.refs.timepicker.openDialog();
-                        }}
-                        ref="datepicker"
-                        id={`${id}-date`}
-                        textFieldStyle={{display: 'none'}}
-                    />
-                    <TimePicker
-                        value={value}
-                        onChange={(event, date) => onChange(date)}
-                        ref="timepicker"
-                        id={`${id}-time`}
-                        textFieldStyle={{display: 'none'}}
-                    />
-                </div>}
+                primaryText={(
+                    <div>
+                        <TextField
+                            id={id}
+                            onFocus={this.onFocus}
+                            style={{marginTop: -14, ...style}}
+                            value={dateFormat(value)}
+                            {...props}
+                            onChange={noop}
+                        />
+
+                        <DatePicker
+                            id={`${id}-date`}
+                            maxDate={max}
+                            minDate={min}
+                            onChange={this.onChangeDate}
+                            ref="datepicker"
+                            textFieldStyle={{display: 'none'}}
+                            value={value}
+                        />
+
+                        <TimePicker
+                            format={timeFormat}
+                            id={`${id}-time`}
+                            onChange={this.onChangeTime}
+                            ref="timepicker"
+                            textFieldStyle={{display: 'none'}}
+                            value={value}
+                        />
+                    </div>
+                )}
             />
         );
     }
 }
-
-Date_.displayName = 'Date';
 
 export default connectField(Date_, {ensureValue: false, includeInChain: false});
