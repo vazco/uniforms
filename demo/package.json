@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "babel-eslint": "7.1.1",
+    "babel-polyfill": "6.20.0",
     "eslint": "3.12.2",
     "eslint-config-vazco": "2.2.0",
     "eslint-plugin-babel": "4.0.0",

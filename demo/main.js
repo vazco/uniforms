@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import {mount} from 'react-mounter';
 
 import {Meteor}     from 'meteor/meteor';
