@@ -1,4 +1,4 @@
-## Next
+## [v1.8.3](https://github.com/vazco/uniforms/tree/v1.8.3) (2017-01-06)
 - **Fixed:** Handling of additional error in `ValidatedForm`. [\#161](https://github.com/vazco/uniforms/issues/161)
 
 ## [v1.8.2](https://github.com/vazco/uniforms/tree/v1.8.2) (2017-01-06)
