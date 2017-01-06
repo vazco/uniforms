@@ -6,7 +6,7 @@ import {PropTypes} from 'react';
 import BaseForm from './BaseForm';
 
 // Silent `Uncaught (in promise)` warnings
-const __unhandledMark = typeof Symbol === 'undefined' ? '__uniformsPromiseMark' : Symbol();
+const __unhandledMark = typeof Symbol === 'undefined' ? '__uniformsPromiseMark' : Symbol('__uniformsPromiseMark');
 const __unhandled = event =>
     event &&
     event.reason &&
@@ -149,7 +149,8 @@ const Validated = parent => class extends parent {
         }
 
         const markAndHandle = (error = catched, resolve, reject) =>
-            this.setState({error}, () => {
+            // Do not copy error from props to state.
+            this.setState({error: error === this.props.error ? null : error}, () => {
                 if (error) {
                     error[__unhandledMark] = true;
 
