@@ -3,4 +3,9 @@ node_js:
   - 6
   - 7
 
-script: npm run coveralls
+after_script:
+  - npm run cover:main
+  - npm run cover:report
+
+git:
+  depth: 1
