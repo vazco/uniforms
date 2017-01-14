@@ -1,4 +1,4 @@
-## Next
+## [v1.8.4](https://github.com/vazco/uniforms/tree/v1.8.4) (2017-01-14)
 - **Fixed:** Handling of `initialValue`. [\#164](https://github.com/vazco/uniforms/issues/164)
 
 ## [v1.8.3](https://github.com/vazco/uniforms/tree/v1.8.3) (2017-01-06)
