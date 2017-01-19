@@ -76,6 +76,7 @@ Demo: [uniforms.tools](http://uniforms.tools/).
         - [Example: `SubmitButton`](#example-submitbutton)
         - [Example: `SwapField`](#example-swapfield)
 - [API](#api)
+- [Community](#community)
 - [Contributing](#contributing)
 - [Troubleshooting](#troubleshooting)
 - [Copyright and License](#copyright-and-license)
@@ -972,6 +973,19 @@ export default SwapField;
 # API
 
 See [API.md](https://github.com/vazco/uniforms/blob/master/API.md).
+
+<br>
+
+# Community
+
+_Who's using uniforms?_
+
+* [panter/manul-admin](https://github.com/panter/manul-admin)
+* [panter/manul-i18n](https://github.com/panter/manul-i18n)
+* [zeroasterisk/react-uniforms-widgets](https://github.com/zeroasterisk/react-uniforms-widgets)
+* ...
+
+If you want your project to be listed here - let us know in [\#158](https://github.com/vazco/uniforms/issues/158) or write to [@radekmie](https://github.com/radekmie) directly.
 
 <br>
 
