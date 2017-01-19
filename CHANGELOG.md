@@ -1,4 +1,5 @@
 ## Next
+- **Added:** Online demo [uniforms.tools](http://uniforms.tools/). [\#156](https://github.com/vazco/uniforms/issues/156)
 - **Added:** Support for `step` prop in `NumField`. [\#165](https://github.com/vazco/uniforms/issues/165)
 
 ## [v1.8.4](https://github.com/vazco/uniforms/tree/v1.8.4) (2017-01-14)
