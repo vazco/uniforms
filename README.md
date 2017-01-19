@@ -78,6 +78,7 @@ Demo: [uniforms.tools](http://uniforms.tools/).
 - [API](#api)
 - [Community](#community)
 - [Contributing](#contributing)
+- [Roadmap](#roadmap)
 - [Troubleshooting](#troubleshooting)
 - [Copyright and License](#copyright-and-license)
 
@@ -992,6 +993,12 @@ If you want your project to be listed here - let us know in [\#158](https://gith
 # Contributing
 
 See [CONTRIBUTING.md](https://github.com/vazco/uniforms/blob/master/CONTRIBUTING.md).
+
+<br>
+
+# Roadmap
+
+See [Roadmap](https://github.com/vazco/uniforms/projects/1).
 
 <br>
 
