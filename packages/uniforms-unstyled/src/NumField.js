@@ -15,6 +15,7 @@ const Num = ({
     name,
     onChange,
     placeholder,
+    step,
     value,
     ...props
 }) =>
@@ -34,7 +35,7 @@ const Num = ({
             onChange={event => onChange(noneIfNaN((decimal ? parseFloat : parseInt)(event.target.value)))}
             placeholder={placeholder}
             ref={inputRef}
-            step={decimal ? 0.01 : 1}
+            step={step || (decimal ? 0.01 : 1)}
             type="number"
             value={value}
         />
