@@ -1,4 +1,4 @@
-## Next
+## [v1.9.0](https://github.com/vazco/uniforms/tree/v1.9.0) (2017-01-21)
 - **Added:** Online demo [uniforms.tools](https://uniforms.tools/). [\#156](https://github.com/vazco/uniforms/issues/156)
 - **Added:** Support for SimpleSchema2@0.1.x.
 - **Added:** Support for `step` prop in `NumField`. [\#165](https://github.com/vazco/uniforms/issues/165)
