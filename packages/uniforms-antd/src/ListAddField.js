@@ -1,23 +1,30 @@
-import connectField     from 'uniforms/connectField';
-import React            from 'react';
+import Button         from 'antd/lib/button';
+import React          from 'react';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 const ListAdd = ({
     disabled,
     parent,
-    value
+    value,
+    ...props
 }) => {
     const limitNotReached = !disabled && !(parent.maxCount <= parent.value.length);
-    const AntIn = require('antd');
-    const Button = AntIn.Button;
+
     return (
         <Button
-            size="small"
-            type="dashed"
-            icon="plus-square-o"
+            disabled={!limitNotReached || disabled}
             onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
-            style={{width: '100%'}}
+            {...filterDOMProps(props)}
         />
     );
+};
+
+ListAdd.defaultProps = {
+    icon: 'plus-square-o',
+    size: 'small',
+    style: {width: '100%'},
+    type: 'dashed'
 };
 
 export default connectField(ListAdd, {includeParent: true, initialValue: false});

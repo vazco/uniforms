@@ -260,11 +260,9 @@ export default class BaseForm extends Component {
             this.props.onSubmit(this.getModel('submit'))
         );
 
-        promise.then(
+        return promise.then(
             this.props.onSubmitSuccess,
             this.props.onSubmitFailure
         );
-
-        return promise;
     }
 }

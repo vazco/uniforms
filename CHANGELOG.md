@@ -1,3 +1,17 @@
+## [v1.9.0](https://github.com/vazco/uniforms/tree/v1.9.0) (2017-01-21)
+- **Added:** Online demo [uniforms.tools](https://uniforms.tools/). [\#156](https://github.com/vazco/uniforms/issues/156)
+- **Added:** Support for SimpleSchema2@0.1.x.
+- **Added:** Support for `step` prop in `NumField`. [\#165](https://github.com/vazco/uniforms/issues/165)
+
+## [v1.8.4](https://github.com/vazco/uniforms/tree/v1.8.4) (2017-01-14)
+- **Fixed:** Handling of `initialValue`. [\#164](https://github.com/vazco/uniforms/issues/164)
+
+## [v1.8.3](https://github.com/vazco/uniforms/tree/v1.8.3) (2017-01-06)
+- **Fixed:** Handling of additional error in `ValidatedForm`. [\#161](https://github.com/vazco/uniforms/issues/161)
+
+## [v1.8.2](https://github.com/vazco/uniforms/tree/v1.8.2) (2017-01-06)
+- **Fixed:** Propagation of labels and placeholders.
+
 ## [v1.8.1](https://github.com/vazco/uniforms/tree/v1.8.1) (2016-12-30)
 - **Fixed:** Placeholder text from schema. [\#152](https://github.com/vazco/uniforms/issues/152)
 

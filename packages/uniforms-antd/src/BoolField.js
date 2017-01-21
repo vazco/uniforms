@@ -1,46 +1,28 @@
-import connectField from 'uniforms/connectField';
-import React        from 'react';
+import Icon           from 'antd/lib/icon';
+import React          from 'react';
+import Switch         from 'antd/lib/switch';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
-import FormGroup    from './FormGroup';
+import wrapField from './wrapField';
 
-const Bool = ({
-    disabled,
-    errorMessage,
-    id,
-    inputRef,
-    label,
-    name,
-    onChange,
-    showInlineError,
-    value,
-    info
-}) => {
-    const AntD = require('antd');
-    const Switch = AntD.Switch;
-    const Icon = AntD.Icon;
-    return (
-        <FormGroup errorMessage={errorMessage} id={id} label={label} showInlineError={showInlineError} info={info} >
-            <Switch
-                id={id}
-                name={name}
-                ref={inputRef}
-                checked={value}
-                disabled={disabled}
-                onChange={() => onChange(!value)}
-                checkedChildren={<Icon type={'check'} />}
-                unCheckedChildren={<Icon type={'cross'} />}
-            />
-        </FormGroup>
-    );
+const Bool = props =>
+    wrapField(props, (
+        <Switch
+            checked={props.value}
+            disabled={props.disabled}
+            id={props.id}
+            name={name}
+            onChange={() => props.onChange(!props.value)}
+            ref={props.inputRef}
+            {...filterDOMProps(props)}
+        />
+    ))
+;
+
+Bool.defaultProps = {
+    checkedChildren:   <Icon type="check" />,
+    unCheckedChildren: <Icon type="cross" />
 };
 
 export default connectField(Bool);
-
-// SCHEMA PROTOTYPE
-/*
-boolfieldanttest:{
-  type: Boolean,
-  label: "Ant Boolean Field Sample",
-  defaultValue: true
-  }
-  */

@@ -651,6 +651,9 @@ import NumField from 'uniforms-unstyled/NumField'; // Choose your theme package.
     //   semantic
     showInlineError={true}
 
+    // Input step.
+    step={5}
+
     // Field and sourroundings wrap className.
     //   *Some description would be great, huh?*
     // Available in:

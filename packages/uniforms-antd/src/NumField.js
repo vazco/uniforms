@@ -1,59 +1,29 @@
-import connectField   from 'uniforms/connectField';
+import InputNumber    from 'antd/lib/input-number';
 import React          from 'react';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
-import FormGroup from './FormGroup';
+import wrapField from './wrapField';
 
 const noneIfNaN = x => isNaN(x) ? undefined : x;
 
-const Num = ({
-    disabled,
-    decimal,
-    errorMessage,
-    id,
-    inputRef,
-    label,
-    max,
-    min,
-    name,
-    onChange,
-    placeholder,
-    showInlineError,
-    value,
-    info,
-    step,
-}) => {
-    const AntD = require('antd');
-    const InputNumber = AntD.InputNumber;
-    return (
-        <FormGroup errorMessage={errorMessage} id={id} label={label} showInlineError={showInlineError} info={info} >
-            <InputNumber
-                disabled={disabled}
-                id={id}
-                max={max}
-                min={min}
-                name={name}
-                step={step ? step : 1}
-                onChange={value => onChange(noneIfNaN((decimal ? parseFloat : parseInt)(value)))}
-                placeholder={placeholder}
-                ref={inputRef}
-                value={value}
-            />
-        </FormGroup>
-    );
-};
+const Num = props =>
+    wrapField(props, (
+        <InputNumber
+            disabled={props.disabled}
+            id={props.id}
+            max={props.max}
+            min={props.min}
+            name={props.name}
+            onChange={value => props.onChange(noneIfNaN((props.decimal ? parseFloat : parseInt)(value)))}
+            placeholder={props.placeholder}
+            ref={props.inputRef}
+            step={props.step || (props.decimal ? 0.01 : 1)}
+            value={props.value}
+            style={{width: '100%'}}
+            {...filterDOMProps(props)}
+        />
+    ))
+;
 
 export default connectField(Num);
-
-// SCHEMA PROTOTYPE
-/*
-number: {
-    type: Number,
-    label: "Number Test"
-},
-numberDec: {
-    type: Number,
-    label: "Number Test Deci",
-    decimal: true,
-    uniforms: {step: 0.1}  // number < 1 for deci
-},
-  */

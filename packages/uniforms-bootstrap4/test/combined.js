@@ -90,7 +90,8 @@ describe('Everything', () => {
         'x30':     {...base,               __type__: String, help: 'Help', helpClassName: 'help'},
         'x31':     {...base,               __type__: Number, allowedValues, checkboxes, component: SelectField},
         'x32':     {...base, id: 'x32',    __type__: String, component: HiddenField},
-        'x33':     {...base, id: 'x33',    __type__: String, component: HiddenField, value: undefined}
+        'x33':     {...base, id: 'x33',    __type__: String, component: HiddenField, value: undefined},
+        'x34':     {...base, id: 'x34',    __type__: Number, step: 4}
     };
 
     const bridgeName = name => name.replace(/\.\d+/g, '.$');
@@ -169,6 +170,10 @@ describe('Everything', () => {
 
         expect(onChange.lastCall.calledWith('x00', undefined)).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x00: undefined})).to.be.ok;
+    });
+
+    it('works (NumField, step)', async () => {
+        expect(wrapper.find('#x34').props()).to.have.property('step', 4);
     });
 
     it('works (TextField)', async () => {

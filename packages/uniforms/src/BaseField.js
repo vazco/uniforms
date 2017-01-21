@@ -180,10 +180,10 @@ export default class BaseField extends Component {
         const errorMessage = context.schema.getErrorMessage(name, context.error);
 
         const _lProp           = this.props.label;
-        const _lPropDisabled   = _lProp === '' || _lProp === false || _lProp === null;
+        const _lPropDisabled   = _lProp === '' || _lProp === false;
         const _lPropSet        = _lProp !== undefined;
         const _lSchema         = schemaProps.label;
-        const _lSchemaDisabled = _lSchema === '' || _lSchema === false || _lSchema === null;
+        const _lSchemaDisabled = _lSchema === '' || _lSchema === false;
         const _lSchemaValue    = _lSchema === true || _lSchema === undefined ? '' : _lSchema;
         const _lStateDisabled  = !state.label;
 
@@ -199,10 +199,10 @@ export default class BaseField extends Component {
         ;
 
         const _pProp           = this.props.placeholder;
-        const _pPropDisabled   = _pProp === '' || _pProp === false || _pProp === null;
+        const _pPropDisabled   = _pProp === '' || _pProp === false;
         const _pPropSet        = _pProp !== undefined;
         const _pSchema         = schemaProps.placeholder;
-        const _pSchemaDisabled = _pSchema === '' || _pSchema === false || _pSchema === null;
+        const _pSchemaDisabled = _pSchema === '' || _pSchema === false;
         const _pSchemaValue    = _pSchema === true || _pSchema === undefined ? label || _lSchemaValue : _pSchema;
         const _pStateDisabled  = !state.placeholder;
 
