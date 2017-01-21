@@ -8,10 +8,10 @@
   },
   "dependencies": {
     "babel-eslint": "7.1.1",
-    "babel-polyfill": "6.20.0",
-    "eslint": "3.13.1",
+    "babel-polyfill": "6.22.0",
+    "eslint": "3.14.0",
     "eslint-config-vazco": "2.2.1",
-    "eslint-plugin-babel": "4.0.0",
+    "eslint-plugin-babel": "4.0.1",
     "eslint-plugin-react": "6.9.0",
     "eslint-plugin-vazco": "1.0.0",
     "graphql": "0.8.2",
