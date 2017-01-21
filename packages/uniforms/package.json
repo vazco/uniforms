@@ -67,7 +67,7 @@
     "graphql": "^0.8.2",
     "react": "^15.0.0 || ^0.14.0",
     "react-dom": "^15.0.0 || ^0.14.0",
-    "simpl-schema": "^0.0.4"
+    "simpl-schema": "^0.1.0 || ^0.0.4"
   },
   "babel": {
     "plugins": [
