@@ -1,41 +1,23 @@
+import Input          from 'antd/lib/input';
 import React          from 'react';
 import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
-import FormGroup from './FormGroup';
+import wrapField from './wrapField';
 
-const Text = ({
-    disabled,
-    errorMessage,
-    id,
-    inputRef,
-    label,
-    name,
-    onChange,
-    placeholder,
-    showInlineError,
-    type,
-    value,
-    rows,
-    info
-}) => {
-    const AntD = require('antd');
-    const Input = AntD.Input;
-    return (
-        <FormGroup errorMessage={errorMessage} id={id} label={label} showInlineError={showInlineError} info={info}>
-            <Input
-                disabled={disabled}
-                id={id}
-                name={name}
-                onChange={event => onChange(event.target.value)}
-                placeholder={placeholder}
-                ref={inputRef}
-                type={type}
-                rows={rows}
-                value={value}
-            />
-        </FormGroup>
-    );
-}
+const Text = props =>
+    wrapField(props, (
+        <Input
+            disabled={props.disabled}
+            id={props.id}
+            name={props.name}
+            onChange={event => props.onChange(event.target.value)}
+            placeholder={props.placeholder}
+            ref={props.inputRef}
+            value={props.value}
+            {...filterDOMProps(props)}
+        />
+    ))
 ;
 
 Text.defaultProps = {
@@ -43,18 +25,3 @@ Text.defaultProps = {
 };
 
 export default connectField(Text);
-
-// SCHEMA PROTOTYPE
-/*
-state: {
-    type: String
-},
-zip: {
-    type: String,
-    regEx: /^[0-9]{5}$/
-},
-field: {
-    type: String,
-    uniforms: {rows: 14, type: 'textarea' }
-}
-*/

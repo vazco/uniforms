@@ -1,33 +1,27 @@
-import classnames     from 'classnames';
-import connectField   from 'uniforms/connectField';
-import injectName     from 'uniforms/injectName';
-import joinName       from 'uniforms/joinName';
-import React          from 'react';
+import React        from 'react';
+import connectField from 'uniforms/connectField';
+import injectName   from 'uniforms/injectName';
+import joinName     from 'uniforms/joinName';
 
 import AutoField from './AutoField';
 
 const Nest = ({
     children,
-    className,
-    disabled,
-    error,
     errorMessage,
     fields,
     label,
     name,
     showInlineError
 }) =>
-    <section className={classnames(className, {disabled, error}, 'grouped fields')} >
+    <section>
         {label && (
-            <section className="field">
-                <label>
-                    {label}
-                </label>
-            </section>
+            <label>
+                {label}
+            </label>
         )}
 
         {!!(errorMessage && showInlineError) && (
-            <section className="ui red basic label">
+            <section>
                 {errorMessage}
             </section>
         )}

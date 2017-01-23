@@ -44,7 +44,7 @@ export default function connectField (component, {
                     return;
                 }
 
-                if (props.value === undefined && props.required) {
+                if (props.required && (this.options.ensureValue ? props.value === '' : props.value === undefined)) {
                     props.onChange(props.initialValue);
                 }
             }

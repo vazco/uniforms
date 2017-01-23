@@ -1,20 +1,13 @@
-import BaseField  from 'uniforms/BaseField';
-import nothing    from 'uniforms/nothing';
-import React      from 'react';
+import BaseField      from 'uniforms/BaseField';
+import React          from 'react';
+import filterDOMProps from 'uniforms/filterDOMProps';
+import nothing        from 'uniforms/nothing';
 
 const ErrorsField = ({className, children, ...props}, {uniforms: {error, schema}}) =>
     (!error && !children) ? nothing : (
-        <section
-            style={{
-                border: '1px solid rgb(255, 85, 0)',
-                margin: '20px 0px',
-                borderRadius: '7px',
-                padding: '10px',
-                backgroundColor: 'rgba(255, 85, 0, 0.2)'
-            }}
-        >
+        <section {...filterDOMProps(props)}>
             {children}
-            <ul className={'list'} >
+            <ul>
                 {schema.getErrorMessages(error).map((message, index) =>
                     <li key={index} style={{margin: '3px'}}>
                         {message}
@@ -26,5 +19,15 @@ const ErrorsField = ({className, children, ...props}, {uniforms: {error, schema}
 ;
 
 ErrorsField.contextTypes = BaseField.contextTypes;
+
+ErrorsField.defaultProps = {
+    style: {
+        backgroundColor: 'rgba(255, 85, 0, 0.2)',
+        border: '1px solid rgb(255, 85, 0)',
+        borderRadius: '7px',
+        margin: '20px 0px',
+        padding: '10px'
+    }
+};
 
 export default ErrorsField;

@@ -18,7 +18,7 @@ const Num = props =>
             onChange={event => props.onChange(noneIfNaN((props.decimal ? parseFloat : parseInt)(event.target.value)))}
             placeholder={props.placeholder}
             ref={props.inputRef}
-            step={props.decimal ? 0.01 : 1}
+            step={props.step || (props.decimal ? 0.01 : 1)}
             type="number"
             value={props.value}
         />

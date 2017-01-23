@@ -1,130 +1,82 @@
-import {Children}       from 'react';
-import classnames       from 'classnames';
-import connectField     from 'uniforms/connectField';
-import filterDOMProps   from 'uniforms/filterDOMProps';
-import joinName         from 'uniforms/joinName';
-import React            from 'react';
+import Icon           from 'antd/lib/icon';
+import React          from 'react';
+import Tooltip        from 'antd/lib/tooltip';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
+import joinName       from 'uniforms/joinName';
+import {Children}     from 'react';
 
 import ListAddField  from './ListAddField';
 import ListItemField from './ListItemField';
-import InfoMessage   from './InfoMessage';
 
 const List = ({
     children,
-    className,
-    disabled,
-    error,
     errorMessage,
+    info,
     initialCount,
     label,
     name,
-    required,
     showInlineError,
     value,
-    info,
-    fieldComponent,
     ...props
-}) => {
-    let comp = '';
-    if (fieldComponent !== 'hidden') {
-        comp = (
-            <section
-                className={classnames('ui', className, {disabled})}
-                style={{
-                    border: '1px solid #DDD',
-                    borderRadius: '7px',
-                    padding: '10px',
-                    marginBottom: '5px',
-                    marginTop: '5px'
-                }}
-            >
-                {label && (
-                    <section className={classnames({error, required}, 'field item')}>
-                        <label className="left floated">
-                            <span>
-                                {label}
-                                {info && (<span>&nbsp;<InfoMessage info={info} /></span>)}
-                            </span>
-                        </label>
-                    </section>
-                )}
-
-                {label && (
-                    <section style={{height: '18px'}}  />
-                )}
-
-                {!!(errorMessage && showInlineError) && (
-                    <section className="ui red basic label">
-                        {errorMessage}
-                    </section>
-                )}
-
-                {children ? (
-                    value.map((item, index) =>
-                        Children.map(children, child =>
-                            React.cloneElement(child, {
-                                key: index,
-                                label: null,
-                                name: joinName(name, child.props.name && child.props.name.replace('$', index)),
-                                fieldComponent
-                            })
-                        )
-                    )
-                ) : (
-                    value.map((item, index) =>
-                        <ListItemField
-                            key={index}
-                            label={null}
-                            name={joinName(name, index)}
-                            fieldComponent={fieldComponent}
-                            {...filterDOMProps(props)}
-                        />
-                    )
-                )}
-                <div>
-                    <ListAddField
-                        name={`${name}.$`}
-                        initialCount={initialCount}
-                    />
-                </div>
-            </section>
-        );
-    } else {
-        comp = (
+}) =>
+    <section {...filterDOMProps(props)}>
+        {!!label && (
             <section>
-                {!!(errorMessage && showInlineError) && (
-                    <section className="ui red basic label">
-                        {errorMessage}
-                    </section>
+                {label}
+                {!!info && (
+                    <span>
+                        &nbsp;
+                        <Tooltip title={info}>
+                            <Icon type="question-circle-o" />
+                        </Tooltip>
+                    </span>
                 )}
-
-                {children ?
-                    (
-                        value.map((item, index) =>
-                            Children.map(children, child =>
-                                React.cloneElement(child, {
-                                    key: index,
-                                    label: null,
-                                    name: joinName(name, child.props.name && child.props.name.replace('$', index))
-                                })
-                            )
-                        )
-                    ) : (
-                        value.map((item, index) =>
-                            <ListItemField
-                                key={index}
-                                label={null}
-                                name={joinName(name, index)}
-                                fieldComponent={fieldComponent}
-                                {...filterDOMProps(props)}
-                            />
-                        )
-                    )
-                }
             </section>
-        );
+        )}
+
+        {!!label && (
+            <section style={{height: '18px'}}  />
+        )}
+
+        {!!(errorMessage && showInlineError) && (
+            <section>
+                {errorMessage}
+            </section>
+        )}
+
+        {children ? (
+            value.map((item, index) =>
+                Children.map(children, child =>
+                    React.cloneElement(child, {
+                        key: index,
+                        label: null,
+                        name: joinName(name, child.props.name && child.props.name.replace('$', index))
+                    })
+                )
+            )
+        ) : (
+            value.map((item, index) =>
+                <ListItemField
+                    key={index}
+                    label={null}
+                    name={joinName(name, index)}
+                />
+            )
+        )}
+
+        <ListAddField name={`${name}.$`} initialCount={initialCount} />
+    </section>
+;
+
+List.defaultProps = {
+    style: {
+        border: '1px solid #DDD',
+        borderRadius: '7px',
+        marginBottom: '5px',
+        marginTop: '5px',
+        padding: '10px'
     }
-    return comp;
 };
 
 
