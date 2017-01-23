@@ -4,17 +4,22 @@ import {jsdom} from 'jsdom';
 global.document = jsdom('');
 global.window = document.defaultView;
 global.navigator = window.navigator;
+global.HTMLElement = window.HTMLElement;
 Object.keys(window).forEach(property => {
     if (typeof global[property] === 'undefined') {
         global[property] = window[property];
     }
 });
 
-// Dirty fix for React
-require('fbjs/lib/ExecutionEnvironment').canUseDOM = true;
-
 // Mocks
-import mock from 'mock-require';
+const Module = require('module');
+const loader = Module._load;
+Module._load = function _load (request, parent) {
+    return loader(
+        request.replace(/^uniforms/, '../src'),
+        parent
+    );
+};
 
 global.Package = {};
 
@@ -36,5 +41,3 @@ global.Package['aldeed:simple-schema'].SimpleSchema = {
         return name.replace(/\.[0-9]+(?=\.|$)/g, '.$');
     }
 };
-
-mock('uniforms', '../src');

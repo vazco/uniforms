@@ -1,23 +1,25 @@
-import React    from 'react';
-import {expect} from 'chai';
-import {mount}  from 'enzyme';
-import {spy}    from 'sinon';
-import {stub}   from 'sinon';
+import React      from 'react';
+import {describe} from 'mocha';
+import {expect}   from 'chai';
+import {it}       from 'mocha';
+import {mount}    from 'enzyme';
+import {spy}      from 'sinon';
+import {stub}     from 'sinon';
 
-import {AutoFields}     from 'uniforms-bootstrap4';
-import {AutoForm}       from 'uniforms-bootstrap4';
-import {ErrorField}     from 'uniforms-bootstrap4';
-import {ErrorsField}    from 'uniforms-bootstrap4';
-import {HiddenField}    from 'uniforms-bootstrap4';
-import {ListAddField}   from 'uniforms-bootstrap4';
-import {ListDelField}   from 'uniforms-bootstrap4';
-import {ListField}      from 'uniforms-bootstrap4';
-import {ListItemField}  from 'uniforms-bootstrap4';
-import {LongTextField}  from 'uniforms-bootstrap4';
-import {NumField}       from 'uniforms-bootstrap4';
-import {SelectField}    from 'uniforms-bootstrap4';
-import {SubmitField}    from 'uniforms-bootstrap4';
-import {filterDOMProps} from 'uniforms';
+import AutoFields     from 'uniforms-bootstrap4/AutoFields';
+import AutoForm       from 'uniforms-bootstrap4/AutoForm';
+import ErrorField     from 'uniforms-bootstrap4/ErrorField';
+import ErrorsField    from 'uniforms-bootstrap4/ErrorsField';
+import HiddenField    from 'uniforms-bootstrap4/HiddenField';
+import ListAddField   from 'uniforms-bootstrap4/ListAddField';
+import ListDelField   from 'uniforms-bootstrap4/ListDelField';
+import ListField      from 'uniforms-bootstrap4/ListField';
+import ListItemField  from 'uniforms-bootstrap4/ListItemField';
+import LongTextField  from 'uniforms-bootstrap4/LongTextField';
+import NumField       from 'uniforms-bootstrap4/NumField';
+import SelectField    from 'uniforms-bootstrap4/SelectField';
+import SubmitField    from 'uniforms-bootstrap4/SubmitField';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 filterDOMProps.register(
     '__type__',
@@ -86,11 +88,13 @@ describe('Everything', () => {
         'x28':     {...base,               __type__: String, component: ErrorField},
         'x29':     {...base,               __type__: String, help: 'Help'},
         'x30':     {...base,               __type__: String, help: 'Help', helpClassName: 'help'},
-        'x31':     {...base,               __type__: String, allowedValues, checkboxes, component: SelectField},
+        'x31':     {...base,               __type__: Number, allowedValues, checkboxes, component: SelectField},
         'x32':     {...base, id: 'x32',    __type__: String, component: HiddenField},
-        'x33':     {...base, id: 'x33',    __type__: String, component: HiddenField, value: undefined}
+        'x33':     {...base, id: 'x33',    __type__: String, component: HiddenField, value: undefined},
+        'x34':     {...base, id: 'x34',    __type__: Number, step: 4}
     };
 
+    const bridgeName = name => name.replace(/\.\d+/g, '.$');
     const bridge = {
         getError:        (name, error) => error ? {noop: 0} : undefined,
         getErrorMessage: (name, error) => error ? 'message' : undefined,
@@ -99,16 +103,18 @@ describe('Everything', () => {
             ? Object.keys(schema)
             : [],
 
-        getField: name => schema[name.replace(/\.\d+/g, '.$')],
-        getType:  name => schema[name.replace(/\.\d+/g, '.$')].__type__,
-        getProps: name => ({...schema[name.replace(/\.\d+/g, '.$')], __type__: null}),
+        getField: name => schema[bridgeName(name)],
+        getType:  name => schema[bridgeName(name)].__type__,
+        getProps: name => ({...schema[bridgeName(name)], __type__: null}),
 
-        getInitialValue: name => schema[name.replace(/\.\d+/g, '.$')].__type__ === Date
+        getInitialValue: name => schema[bridgeName(name)].__type__ === Date
             ? dateA
-            : schema[name.replace(/\.\d+/g, '.$')].__type__(),
+            : schema[bridgeName(name)].allowedValues && schema[bridgeName(name)].__type__ !== Array
+                ? schema[bridgeName(name)].allowedValues[0]
+                : schema[bridgeName(name)].__type__(),
 
         getSubfields: name => name
-            ? schema[name.replace(/\.\d+/g, '.$')].subfields || []
+            ? schema[bridgeName(name)].subfields || []
             : Object.keys(schema).filter(field => field.indexOf('.') === -1),
 
         getValidator: () => validator
@@ -158,12 +164,16 @@ describe('Everything', () => {
     it('works (NumField, invalid)', async () => {
         expect(wrapper.find('#x00').props()).to.have.property('value', 0);
         expect(wrapper.find('#x00').simulate('change', {target: {value: 'invalid'}})).to.be.ok;
-        expect(wrapper.find('#x00').props()).to.have.property('value', 0);
+        expect(wrapper.find('#x00').props()).to.have.property('value', '');
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
         expect(onChange.lastCall.calledWith('x00', undefined)).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x00: undefined})).to.be.ok;
+    });
+
+    it('works (NumField, step)', async () => {
+        expect(wrapper.find('#x34').props()).to.have.property('step', 4);
     });
 
     it('works (TextField)', async () => {
@@ -178,7 +188,7 @@ describe('Everything', () => {
     });
 
     it('works (SelectField)', async () => {
-        expect(wrapper.find('#x02').props()).to.have.property('value', 0);
+        expect(wrapper.find('#x02').props()).to.have.property('value', 1);
         expect(wrapper.find('#x02').simulate('change', {target: {value: 2}})).to.be.ok;
         expect(wrapper.find('#x02').props()).to.have.property('value', 2);
 
@@ -189,11 +199,11 @@ describe('Everything', () => {
     });
 
     it('works (RadioField, on)', async () => {
-        expect(wrapper.find('[name="x03"]').at(0)).to.be.checked;
-        expect(wrapper.find('[name="x03"]').at(1)).to.be.not.checked;
-        expect(wrapper.find('[name="x03"]').at(1).simulate('change', {target: {value: true}})).to.be.ok;
-        expect(wrapper.find('[name="x03"]').at(1)).to.be.checked;
-        expect(wrapper.find('[name="x03"]').at(0)).to.be.not.checked;
+        expect(wrapper.find('[name="x03"]').at(0).prop('checked')).to.be.true;
+        expect(wrapper.find('[name="x03"]').at(1).prop('checked')).to.be.false;
+        expect(wrapper.find('[name="x03"]').at(1).simulate('change', {target: {checked: true}})).to.be.ok;
+        expect(wrapper.find('[name="x03"]').at(1).prop('checked')).to.be.true;
+        expect(wrapper.find('[name="x03"]').at(0).prop('checked')).to.be.false;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -202,11 +212,11 @@ describe('Everything', () => {
     });
 
     it('works (RadioField, off)', async () => {
-        expect(wrapper.find('[name="x03"]').at(1)).to.be.checked;
-        expect(wrapper.find('[name="x03"]').at(0)).to.be.not.checked;
-        expect(wrapper.find('[name="x03"]').at(0).simulate('change', {target: {value: true}})).to.be.ok;
-        expect(wrapper.find('[name="x03"]').at(0)).to.be.checked;
-        expect(wrapper.find('[name="x03"]').at(1)).to.be.not.checked;
+        expect(wrapper.find('[name="x03"]').at(1).prop('checked')).to.be.true;
+        expect(wrapper.find('[name="x03"]').at(0).prop('checked')).to.be.false;
+        expect(wrapper.find('[name="x03"]').at(0).simulate('change', {target: {checked: true}})).to.be.ok;
+        expect(wrapper.find('[name="x03"]').at(0).prop('checked')).to.be.true;
+        expect(wrapper.find('[name="x03"]').at(1).prop('checked')).to.be.false;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -215,9 +225,9 @@ describe('Everything', () => {
     });
 
     it('works (SelectField, checkboxes, multiple, on)', async () => {
-        expect(wrapper.find('[name="x04"]').at(1)).to.be.not.checked;
+        expect(wrapper.find('[name="x04"]').at(1).prop('checked')).to.be.false;
         expect(wrapper.find('[name="x04"]').at(1).simulate('change', {target: {value: true}})).to.be.ok;
-        expect(wrapper.find('[name="x04"]').at(1)).to.be.checked;
+        expect(wrapper.find('[name="x04"]').at(1).prop('checked')).to.be.true;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -226,9 +236,9 @@ describe('Everything', () => {
     });
 
     it('works (SelectField, checkboxes, multiple, off)', async () => {
-        expect(wrapper.find('[name="x04"]').at(1)).to.be.checked;
+        expect(wrapper.find('[name="x04"]').at(1).prop('checked')).to.be.true;
         expect(wrapper.find('[name="x04"]').at(1).simulate('change', {target: {value: false}})).to.be.ok;
-        expect(wrapper.find('[name="x04"]').at(1)).to.be.not.checked;
+        expect(wrapper.find('[name="x04"]').at(1).prop('checked')).to.be.false;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -248,9 +258,9 @@ describe('Everything', () => {
     });
 
     it('works (BoolField)', async () => {
-        expect(wrapper.find('#x06')).to.be.not.checked;
+        expect(wrapper.find('#x06').prop('checked')).to.be.false;
         expect(wrapper.find('#x06').simulate('change', {target: {value: true}})).to.be.ok;
-        expect(wrapper.find('#x06')).to.be.checked;
+        expect(wrapper.find('#x06').prop('checked')).to.be.true;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -283,7 +293,7 @@ describe('Everything', () => {
     it('works (NumField, decimal, nullable)', async () => {
         expect(wrapper.find('#x22').props()).to.have.property('value', 0);
         expect(wrapper.find('#x22').simulate('change', {target: {value: ''}})).to.be.ok;
-        expect(wrapper.find('#x22').props()).to.have.property('value', 0);
+        expect(wrapper.find('#x22').props()).to.have.property('value', '');
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -292,7 +302,7 @@ describe('Everything', () => {
     });
 
     it('works (NumField, decimal)', async () => {
-        expect(wrapper.find('#x22').props()).to.have.property('value', 0);
+        expect(wrapper.find('#x22').props()).to.have.property('value', '');
         expect(wrapper.find('#x22').simulate('change', {target: {value: 2}})).to.be.ok;
         expect(wrapper.find('#x22').props()).to.have.property('value', 2);
 
@@ -341,16 +351,16 @@ describe('Everything', () => {
     });
 
     it('works (SelectField, checkboxes, multiple, on)', async () => {
-        expect(wrapper.find('[name="x31"]').at(1)).to.be.checked;
-        expect(wrapper.find('[name="x31"]').at(0)).to.be.not.checked;
-        expect(wrapper.find('[name="x31"]').at(0).simulate('change', {target: {value: true}})).to.be.ok;
-        expect(wrapper.find('[name="x31"]').at(0)).to.be.checked;
-        expect(wrapper.find('[name="x31"]').at(1)).to.be.not.checked;
+        expect(wrapper.find('[name="x31"]').at(0).prop('checked')).to.be.true;
+        expect(wrapper.find('[name="x31"]').at(1).prop('checked')).to.be.false;
+        expect(wrapper.find('[name="x31"]').at(1).simulate('change', {target: {value: true}})).to.be.ok;
+        expect(wrapper.find('[name="x31"]').at(1).prop('checked')).to.be.true;
+        expect(wrapper.find('[name="x31"]').at(0).prop('checked')).to.be.false;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
-        expect(onChange.lastCall.calledWith('x31', 1)).to.be.ok;
-        expect(onSubmit.lastCall.calledWithMatch({x31: 1})).to.be.ok;
+        expect(onChange.lastCall.calledWith('x31', 2)).to.be.ok;
+        expect(onSubmit.lastCall.calledWithMatch({x31: 2})).to.be.ok;
     });
 
     it('works (HiddenField)', async () => {
@@ -409,17 +419,18 @@ describe('Everything', () => {
         wrapper.update();
     });
 
+    it('works (remount)', () => {
+        wrapper.unmount();
+        wrapper.mount();
+    });
+
     it('works (rest)', () => {
         wrapper.setProps({grid:  10});
         wrapper.setProps({error: {}});
-        wrapper.setProps({model: {x09: ['', '', '']}});
+        wrapper.setProps({model: {...wrapper.state('model'), x09: ['', '', '']}});
 
         schema.x = {__type__: () => {}};
 
         expect(() => wrapper.update()).to.throw(/Unsupported field type/);
-    });
-
-    it('works (unmount)', () => {
-        wrapper.unmount();
     });
 });

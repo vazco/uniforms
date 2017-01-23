@@ -1,6 +1,11 @@
 language: node_js
 node_js:
-  - 5
   - 6
+  - 7
 
-script: npm run coveralls
+after_script:
+  - npm run cover:main
+  - npm run cover:report
+
+git:
+  depth: 1

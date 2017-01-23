@@ -1,7 +1,7 @@
 {
   "name": "uniforms",
-  "version": "1.3.0",
-  "main": "lib/index.js",
+  "version": "1.9.0",
+  "main": "index.js",
   "jsnext:main": "src/index.js",
   "description": "Core package of uniforms.",
   "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms",
@@ -20,56 +20,59 @@
     "validation"
   ],
   "files": [
-    "lib/",
+    "*.js",
     "src/"
   ],
   "scripts": {
-    "build": "babel --out-dir lib src",
-    "clean": "rimraf coverage lib .nyc_output",
+    "build": "babel --out-dir . src",
+    "clean": "rimraf *.js coverage .nyc_output",
     "cover": "cross-env NODE_ENV=cover nyc npm test",
     "lint": "eslint src test",
     "prepublish": "npm run build",
     "pretest": "npm run lint",
     "reset": "rimraf node_modules",
-    "test": "babel-node node_modules/.bin/_mocha --require test/index.js --recursive test --reporter list"
+    "test": "babel-node node_modules/.bin/_mocha --require test/index.js test --reporter list"
   },
   "devDependencies": {
-    "babel-cli": "^6.16.0",
-    "babel-eslint": "^7.0.0",
-    "babel-plugin-istanbul": "^2.0.3",
-    "babel-plugin-transform-object-assign": "^6.8.0",
-    "babel-plugin-transform-runtime": "^6.15.0",
-    "babel-preset-es2015": "^6.16.0",
-    "babel-preset-react": "^6.16.0",
-    "babel-preset-stage-0": "^6.16.0",
-    "babel-runtime": "^6.11.6",
-    "chai": "^3.5.0",
-    "cross-env": "^3.1.3",
-    "enzyme": "^2.5.1",
-    "eslint": "^3.8.1",
-    "eslint-config-vazco": "2.1.1",
-    "eslint-plugin-babel": "^3.3.0",
-    "eslint-plugin-react": "^6.4.1",
-    "eslint-plugin-vazco": "^1.0.0",
-    "jsdom": "^9.8.0",
-    "mocha": "^3.1.2",
-    "mock-require": "^1.3.0",
-    "nyc": "^8.3.1",
-    "react": "^15.0.0 || ^0.14.0",
-    "react-addons-test-utils": "^15.0.0 || ^0.14.0",
-    "react-dom": "^15.0.0 || ^0.14.0",
-    "rimraf": "^2.5.4",
-    "simpl-schema": "^0.0.3",
-    "sinon": "^2.0.0-pre.3"
+    "babel-cli": "6.22.2",
+    "babel-eslint": "7.1.1",
+    "babel-plugin-istanbul": "3.1.2",
+    "babel-plugin-transform-object-assign": "6.22.0",
+    "babel-plugin-transform-react-inline-elements": "6.22.0",
+    "babel-plugin-transform-runtime": "6.22.0",
+    "babel-preset-es2015": "6.22.0",
+    "babel-preset-react": "6.22.0",
+    "babel-preset-stage-0": "6.22.0",
+    "babel-runtime": "6.22.0",
+    "chai": "4.0.0-canary.1",
+    "cross-env": "3.1.4",
+    "enzyme": "2.7.0",
+    "eslint": "3.14.0",
+    "eslint-config-vazco": "2.2.1",
+    "eslint-plugin-babel": "4.0.1",
+    "eslint-plugin-react": "6.9.0",
+    "eslint-plugin-vazco": "1.0.0",
+    "graphql": "0.8.2",
+    "jsdom": "9.9.1",
+    "mocha": "3.2.0",
+    "nyc": "10.1.2",
+    "react": "15.4.1",
+    "react-addons-test-utils": "15.4.1",
+    "react-dom": "15.4.1",
+    "rimraf": "2.5.4",
+    "simpl-schema": "0.1.0",
+    "sinon": "2.0.0-pre.5"
   },
   "peerDependencies": {
+    "graphql": "^0.8.2",
     "react": "^15.0.0 || ^0.14.0",
     "react-dom": "^15.0.0 || ^0.14.0",
-    "simpl-schema": "^0.0.3"
+    "simpl-schema": "^0.1.0 || ^0.0.4"
   },
   "babel": {
     "plugins": [
       "transform-object-assign",
+      "transform-react-inline-elements",
       "transform-runtime"
     ],
     "presets": [
@@ -89,10 +92,7 @@
     "root": true,
     "extends": [
       "vazco"
-    ],
-    "env": {
-      "mocha": true
-    }
+    ]
   },
   "nyc": {
     "reporter": [
@@ -105,11 +105,10 @@
     "instrument": false
   },
   "dependencies": {
-    "babel-runtime": "^6.11.6",
-    "invariant": "^2.2.1",
+    "babel-runtime": "^6.20.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.get": "^4.4.2",
-    "lodash.isequal": "^4.4.0",
+    "lodash.isequal": "^4.5.0",
     "lodash.set": "^4.3.2",
     "lodash.xorwith": "^4.5.0"
   }

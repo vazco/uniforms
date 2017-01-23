@@ -24,6 +24,17 @@ Third-party patches are essential for keeping every project great. We simply can
 * Make sure your code passes *all* tests:
     * `npm test`
 
+## Styling
+
+* If you submit a PR with any code, passing ESLint should be enough _(everything else will be reported in your PR review)_.
+* If you submit a PR with any documentation, code blocks should pass ESLint and code comments should be wrapped at 80 characters.
+
+<br>
+
 # Running locally
 
-See [docs](https://github.com/vazco/uniforms/blob/master/docs).
+See [demo](https://github.com/vazco/uniforms/blob/master/demo).
+
+# _Work in progress_ PRs are welcome
+
+If you can't/couldn't/won't finish your PR, submit it anyway - maybe someone else will continue your work. Also, if you don't know, how to achieve your desired feature - file an issue for it - maybe someone else will implement it.

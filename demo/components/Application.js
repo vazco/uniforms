@@ -1,60 +1,34 @@
-import Frame      from 'react-frame-component';
-import PanelGroup from 'react-panelgroup';
-import React      from 'react';
+import React       from 'react';
+import {Component} from 'react';
 
-import {getSchemas} from '/assets/schemas';
-import {getSchema}  from '/assets/schemas';
-import {getStyles}  from '/assets/styles';
-import {getThemes}  from '/assets/themes';
-import {getTheme}   from '/assets/themes';
+import presets from '../lib/presets';
+import schema  from '../lib/schema';
 
-export class Application extends React.Component {
+import ApplicationForm         from './ApplicationForm';
+import ApplicationPreviewField from './ApplicationPreviewField';
+import ApplicationPropsField   from './ApplicationPropsField';
+import ApplicationSelectField  from './ApplicationSelectField';
+
+class Application extends Component {
     constructor () {
         super(...arguments);
 
-        this.state = {
-            doc: null,
+        this.state = schema.clean({});
 
-            schemas: getSchemas(),
-            themes:  getThemes(),
-
-            schema: getSchema(),
-            styles: getStyles(),
-            theme:  getTheme()
-        };
-
-        this.onSchema = this.onSchema.bind(this);
-        this.onTheme  = this.onTheme.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
-    onSchema ({target: {value}}) {
-        this.setState({schema: getSchema(value)});
-    }
+    onChange (key, value) {
+        if (key === 'preset') {
+            this.setState({props: {...this.state.props, schema: presets[value]}});
+        }
 
-    onTheme ({target: {value}}) {
-        this.setState({
-            styles: getStyles(value),
-            theme:  getTheme(value)
-        });
+        this.setState({[key]: value});
     }
 
     render () {
-        const {
-            state: {
-                doc,
-                schema,
-                schemas,
-                styles,
-                theme,
-                themes
-            },
-
-            onSchema,
-            onTheme
-        } = this;
-
         return (
-            <PanelGroup spacing={3}>
+            <ApplicationForm label={false} model={this.state} onChange={this.onChange} schema={schema} spacing={3}>
                 <section>
                     <nav className="panelGroupNavbar">
                         <section className="panelHeader">
@@ -64,29 +38,12 @@ export class Application extends React.Component {
                         </section>
 
                         <section className="panelHeaderInfo">
-                            <select value={theme.text} onChange={onTheme}>
-                                {themes.map(theme =>
-                                    <option key={theme} value={theme}>
-                                        Theme - {theme}
-                                    </option>
-                                )}
-                            </select>
-
-                            <select value={0} onChange={onSchema}>
-                                <option value={0}>
-                                    Select example
-                                </option>
-
-                                {schemas.map(schema =>
-                                    <option key={schema} value={schema}>
-                                        {schema}
-                                    </option>
-                                )}
-                            </select>
+                            <ApplicationSelectField name="preset" />
+                            <ApplicationSelectField name="theme" />
                         </section>
                     </nav>
 
-                    <textarea value={schema.string} onChange={onSchema} />
+                    <ApplicationPropsField name="props" spellCheck={false} />
 
                     <a href="https://github.com/vazco/uniforms">
                         {/* eslint-disable max-len */}
@@ -99,30 +56,8 @@ export class Application extends React.Component {
                     </a>
                 </section>
 
-                <Frame>
-                    {styles}
-                    {schema.object ? (
-                        <theme.components.AutoForm
-                            key={schema.string}
-                            schema={schema.object}
-                            onSubmit={doc => this.setState({doc: JSON.stringify(doc, null, 4)})}
-                        />
-                    ) : (
-                        <span>
-                            {schema.error.message}
-                        </span>
-                    )}
-
-                    {!!doc && (
-                        <br />
-                    )}
-                    {!!doc && (
-                        <pre>
-                            {doc}
-                        </pre>
-                    )}
-                </Frame>
-            </PanelGroup>
+                <ApplicationPreviewField name="props" nameTheme="theme" />
+            </ApplicationForm>
         );
     }
 }

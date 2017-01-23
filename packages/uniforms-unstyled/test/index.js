@@ -10,11 +10,14 @@ Object.keys(window).forEach(property => {
     }
 });
 
-// Dirty fix for React
-require('fbjs/lib/ExecutionEnvironment').canUseDOM = true;
-
 // Mocks
-import mock from 'mock-require';
-
-mock('uniforms', '../../uniforms/src');
-mock('uniforms-unstyled', '../src');
+const Module = require('module');
+const loader = Module._load;
+Module._load = function _load (request, parent) {
+    return loader(
+        request
+            .replace(/^uniforms-unstyled/, '../src')
+            .replace(/^uniforms/, '../../uniforms/src'),
+        parent
+    );
+};
