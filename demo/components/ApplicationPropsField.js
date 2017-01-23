@@ -1,4 +1,3 @@
-import Frame        from 'react-frame-component';
 import React        from 'react';
 import connectField from 'uniforms/connectField';
 
@@ -21,7 +20,7 @@ const ApplicationProps = ({onChange, schema, theme, value}) => {
     const NumField      = themes[theme].NumField;
 
     return (
-        <Frame>
+        <div>
             {link}
 
             <style>{`
@@ -42,7 +41,7 @@ const ApplicationProps = ({onChange, schema, theme, value}) => {
 
                 <ErrorsField />
             </AutoForm>
-        </Frame>
+        </div>
     );
 };
 
