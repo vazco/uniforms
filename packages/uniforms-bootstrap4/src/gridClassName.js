@@ -3,6 +3,16 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 filterDOMProps.register('grid');
 
 function gridClassNamePart (size, value, side) {
+    return `${gridClassNamePartNew(value, side)} ${gridClassNamePartOld(size, value, side)}`;
+}
+// bootstrap alpha > 5 now uses flexbox columns
+function gridClassNamePartNew (value, side) {
+    return side === 'label'
+        ? `col-${value}`
+        : `col-${(12 - value)}`;
+}
+// bootstrap alpha < 6 requires col-size
+function gridClassNamePartOld (size, value, side) {
     return side === 'label'
         ? `col-${size}-${value}`
         : `col-${size}-${(12 - value)}`;
