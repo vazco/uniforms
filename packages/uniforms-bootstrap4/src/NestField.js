@@ -18,7 +18,7 @@ const Nest = ({
     showInlineError,
     ...props
 }) =>
-    <section className={classnames(className, {'has-error': error})} {...filterDOMProps(props)}>
+    <div className={classnames(className, {'has-error': error})} {...filterDOMProps(props)}>
         {label && (
             <label>
                 {label}
@@ -38,7 +38,7 @@ const Nest = ({
                 <AutoField key={key} name={joinName(name, key)} />
             )
         )}
-    </section>
+    </div>
 ;
 
 export default connectField(Nest, {includeInChain: false});

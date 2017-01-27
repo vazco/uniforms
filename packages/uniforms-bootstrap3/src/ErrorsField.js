@@ -6,17 +6,17 @@ import nothing        from 'uniforms/nothing';
 
 const ErrorsField = ({className, children, ...props}, {uniforms: {error, schema}}) =>
     (!error && !children) ? nothing : (
-        <section className={classnames('panel panel-danger', className)} {...filterDOMProps(props)}>
-            <section className="panel-body">
+        <div className={classnames('panel panel-danger', className)} {...filterDOMProps(props)}>
+            <div className="panel-body">
                 {children}
 
                 {schema.getErrorMessages(error).map((message, index) =>
-                    <section key={index}>
+                    <div key={index}>
                         {message}
-                    </section>
+                    </div>
                 )}
-            </section>
-        </section>
+            </div>
+        </div>
     )
 ;
 

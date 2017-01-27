@@ -22,10 +22,10 @@ const List = ({
     value,
     ...props
 }) =>
-    <section className={classnames('card', className)} {...filterDOMProps(props)}>
-        <section className="card-block">
+    <div className={classnames('card', className)} {...filterDOMProps(props)}>
+        <div className="card-block">
             {label && (
-                <section className="card-title">
+                <div className="card-title">
                     <label className="control-label">
                         {label}&nbsp;
                     </label>
@@ -37,7 +37,7 @@ const List = ({
                             {errorMessage}
                         </span>
                     )}
-                </section>
+                </div>
             )}
 
             {children ? (
@@ -62,8 +62,8 @@ const List = ({
                     />
                 )
             )}
-        </section>
-    </section>
+        </div>
+    </div>
 ;
 
 export default connectField(List, {includeInChain: false});

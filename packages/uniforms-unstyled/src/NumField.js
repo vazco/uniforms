@@ -19,7 +19,7 @@ const Num = ({
     value,
     ...props
 }) =>
-    <section {...filterDOMProps(props)}>
+    <div {...filterDOMProps(props)}>
         {label && (
             <label htmlFor={id}>
                 {label}
@@ -39,7 +39,7 @@ const Num = ({
             type="number"
             value={value}
         />
-    </section>
+    </div>
 ;
 
 export default connectField(Num);

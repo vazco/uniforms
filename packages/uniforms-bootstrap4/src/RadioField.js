@@ -7,7 +7,7 @@ import wrapField from './wrapField';
 const Radio = props =>
     wrapField(props, (
         props.allowedValues.map(item =>
-            <section
+            <div
                 key={item}
                 className={classnames(
                     props.inputClassName,
@@ -27,7 +27,7 @@ const Radio = props =>
                     />
                     {props.transform ? props.transform(item) : item}
                 </label>
-            </section>
+            </div>
         )
     ))
 ;

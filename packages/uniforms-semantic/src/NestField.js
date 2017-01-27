@@ -19,19 +19,19 @@ const Nest = ({
     showInlineError,
     ...props
 }) =>
-    <section className={classnames(className, {disabled, error}, 'grouped fields')} {...filterDOMProps(props)}>
+    <div className={classnames(className, {disabled, error}, 'grouped fields')} {...filterDOMProps(props)}>
         {label && (
-            <section className="field">
+            <div className="field">
                 <label>
                     {label}
                 </label>
-            </section>
+            </div>
         )}
 
         {!!(errorMessage && showInlineError) && (
-            <section className="ui red basic label">
+            <div className="ui red basic label">
                 {errorMessage}
-            </section>
+            </div>
         )}
 
         {children ? (
@@ -41,7 +41,7 @@ const Nest = ({
                 <AutoField key={key} name={joinName(name, key)} />
             )
         )}
-    </section>
+    </div>
 ;
 
 export default connectField(Nest, {includeInChain: false});
