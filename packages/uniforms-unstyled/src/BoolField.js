@@ -12,7 +12,7 @@ const Bool = ({
     value,
     ...props
 }) =>
-    <section {...filterDOMProps(props)}>
+    <div {...filterDOMProps(props)}>
         <input
             checked={value}
             disabled={disabled}
@@ -28,7 +28,7 @@ const Bool = ({
                 {label}
             </label>
         )}
-    </section>
+    </div>
 ;
 
 export default connectField(Bool);

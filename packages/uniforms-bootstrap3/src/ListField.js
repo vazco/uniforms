@@ -23,13 +23,13 @@ const List = ({
     value,
     ...props
 }) =>
-    <section
+    <div
         className={classnames('panel panel-default', {'panel-danger': error}, className)}
         {...filterDOMProps(props)}
     >
-        <section className="panel-body">
+        <div className="panel-body">
             {label && (
-                <section className={classnames('panel-heading', {'has-error': error})}>
+                <div className={classnames('panel-heading', {'has-error': error})}>
                     <label className="control-label">
                         {label}&nbsp;
                     </label>
@@ -41,7 +41,7 @@ const List = ({
                             {errorMessage}
                         </span>
                     )}
-                </section>
+                </div>
             )}
 
             {children ? (
@@ -66,8 +66,8 @@ const List = ({
                     />
                 )
             )}
-        </section>
-    </section>
+        </div>
+    </div>
 ;
 
 export default connectField(List, {includeInChain: false});

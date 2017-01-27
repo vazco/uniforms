@@ -13,7 +13,7 @@ const xor = (item, array) => {
 
 const renderCheckboxes = ({allowedValues, disabled, fieldType, id, name, onChange, transform, value}) =>
     allowedValues.map(item =>
-        <section key={item}>
+        <div key={item}>
             <input
                 checked={fieldType === Array ? value.includes(item) : value === item}
                 disabled={disabled}
@@ -26,7 +26,7 @@ const renderCheckboxes = ({allowedValues, disabled, fieldType, id, name, onChang
             <label htmlFor={`${id}-${item}`}>
                 {transform ? transform(item) : item}
             </label>
-        </section>
+        </div>
     )
 ;
 
@@ -81,7 +81,7 @@ const Select = ({
     value,
     ...props
 }) =>
-    <section {...filterDOMProps(props)}>
+    <div {...filterDOMProps(props)}>
         {label && (
             <label htmlFor={id}>
                 {label}
@@ -95,7 +95,7 @@ const Select = ({
             : renderSelect    ({allowedValues, disabled, id, name, onChange, transform, value, inputRef, label, placeholder, required})
         }
         {/* eslint-enable */}
-    </section>
+    </div>
 ;
 
 export default connectField(Select);

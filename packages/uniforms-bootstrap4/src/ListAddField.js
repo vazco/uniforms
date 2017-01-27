@@ -14,13 +14,13 @@ const ListAdd = ({
     const limitNotReached = !disabled && !(parent.maxCount <= parent.value.length);
 
     return (
-        <section
+        <div
             className={classnames('label label-default label-pill float-xs-right', className)}
             onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
             {...filterDOMProps(props)}
         >
             {addIcon}
-        </section>
+        </div>
     );
 };
 

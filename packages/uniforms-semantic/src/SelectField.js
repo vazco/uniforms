@@ -14,8 +14,8 @@ const xor = (item, array) => {
 
 const renderCheckboxes = ({allowedValues, disabled, fieldType, id, name, onChange, transform, value}) =>
     allowedValues.map(item =>
-        <section className="field" key={item}>
-            <section className="ui checkbox">
+        <div className="field" key={item}>
+            <div className="ui checkbox">
                 <input
                     checked={fieldType === Array ? value.includes(item) : value === item}
                     disabled={disabled}
@@ -28,8 +28,8 @@ const renderCheckboxes = ({allowedValues, disabled, fieldType, id, name, onChang
                 <label htmlFor={`${id}-${item}`}>
                     {transform ? transform(item) : item}
                 </label>
-            </section>
-        </section>
+            </div>
+        </div>
     )
 ;
 
@@ -88,7 +88,7 @@ const Select = ({
     value,
     ...props
 }) =>
-    <section className={classnames({disabled, error, required}, className, 'field')} {...filterDOMProps(props)}>
+    <div className={classnames({disabled, error, required}, className, 'field')} {...filterDOMProps(props)}>
         {label && (
             <label htmlFor={id}>
                 {label}
@@ -104,11 +104,11 @@ const Select = ({
         {/* eslint-enable */}
 
         {!!(errorMessage && showInlineError) && (
-            <section className="ui red basic pointing label">
+            <div className="ui red basic pointing label">
                 {errorMessage}
-            </section>
+            </div>
         )}
-    </section>
+    </div>
 ;
 
 export default connectField(Select);

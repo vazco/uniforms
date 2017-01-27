@@ -7,7 +7,7 @@ import AutoField    from './AutoField';
 import ListDelField from './ListDelField';
 
 const ListItem = props =>
-    <section>
+    <div>
         <ListDelField name={props.name} />
 
         {props.children ? (
@@ -20,7 +20,7 @@ const ListItem = props =>
         ) : (
             <AutoField {...props} />
         )}
-    </section>
+    </div>
 ;
 
 export default connectField(ListItem, {includeInChain: false});

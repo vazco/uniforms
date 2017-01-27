@@ -6,7 +6,7 @@ import wrapField from './wrapField';
 
 const Bool = ({label, labelBefore, ...props}) =>
     wrapField({label: labelBefore, ...props}, (
-        <section className={classnames(props.inputClassName, `checkbox${props.inline ? '-inline' : ''}`)}>
+        <div className={classnames(props.inputClassName, `checkbox${props.inline ? '-inline' : ''}`)}>
             <label htmlFor={props.id}>
                 <input
                     checked={props.value}
@@ -20,7 +20,7 @@ const Bool = ({label, labelBefore, ...props}) =>
                 &nbsp;
                 {label}
             </label>
-        </section>
+        </div>
     ))
 ;
 

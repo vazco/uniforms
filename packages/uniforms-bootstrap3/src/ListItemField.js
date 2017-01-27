@@ -7,10 +7,10 @@ import AutoField    from './AutoField';
 import ListDelField from './ListDelField';
 
 const ListItem = ({removeIcon, ...props}) =>
-    <section className="row">
-        <section className="col-xs-1">
+    <div className="row">
+        <div className="col-xs-1">
             <ListDelField name={props.name} removeIcon={removeIcon} />
-        </section>
+        </div>
 
         {props.children ? (
             Children.map(props.children, child =>
@@ -23,7 +23,7 @@ const ListItem = ({removeIcon, ...props}) =>
         ) : (
             <AutoField {...props} className="col-xs-11" />
         )}
-    </section>
+    </div>
 ;
 
 export default connectField(ListItem, {includeInChain: false});

@@ -7,10 +7,10 @@ import AutoField    from './AutoField';
 import ListDelField from './ListDelField';
 
 const ListItem = props =>
-    <section className="item">
+    <div className="item">
         <ListDelField className="top aligned" name={props.name} />
 
-        <section className="middle aligned content" style={{width: '100%'}}>
+        <div className="middle aligned content" style={{width: '100%'}}>
             {props.children ? (
                 Children.map(props.children, child =>
                     React.cloneElement(child, {
@@ -25,8 +25,8 @@ const ListItem = props =>
             ) : (
                 <AutoField {...props} style={{margin: 0}} />
             )}
-        </section>
-    </section>
+        </div>
+    </div>
 ;
 
 export default connectField(ListItem, {includeInChain: false});

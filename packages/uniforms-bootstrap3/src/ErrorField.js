@@ -11,19 +11,19 @@ const Error = ({
     ...props
 }) =>
     !errorMessage ? nothing : (
-        <section className={classnames('panel panel-danger', className)} {...filterDOMProps(props)}>
-            <section className="panel-body">
+        <div className={classnames('panel panel-danger', className)} {...filterDOMProps(props)}>
+            <div className="panel-body">
                 {children ? (
                     children
                 ) : (
-                    <section className="panel-heading">
+                    <div className="panel-heading">
                         <h4 className="panel-title">
                             {errorMessage}
                         </h4>
-                    </section>
+                    </div>
                 )}
-            </section>
-        </section>
+            </div>
+        </div>
     )
 ;
 

@@ -6,7 +6,7 @@ import wrapField from './wrapField';
 
 const Bool = ({label, labelBefore, ...props}) =>
     wrapField({label: labelBefore, ...props}, (
-        <section
+        <div
             className={classnames(
                 props.inputClassName,
                 'form-check',
@@ -27,7 +27,7 @@ const Bool = ({label, labelBefore, ...props}) =>
                 &nbsp;
                 {label}
             </label>
-        </section>
+        </div>
     ))
 ;
 

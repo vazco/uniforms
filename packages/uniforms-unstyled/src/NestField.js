@@ -13,7 +13,7 @@ const Nest = ({
     name,
     ...props
 }) =>
-    <section {...filterDOMProps(props)}>
+    <div {...filterDOMProps(props)}>
         {label && (
             <label>
                 {label}
@@ -27,7 +27,7 @@ const Nest = ({
                 <AutoField key={key} name={joinName(name, key)} />
             )
         )}
-    </section>
+    </div>
 ;
 
 export default connectField(Nest, {includeInChain: false});

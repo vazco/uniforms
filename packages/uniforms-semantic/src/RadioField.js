@@ -20,18 +20,18 @@ const Radio = ({
     value,
     ...props
 }) =>
-    <section className={classnames(className, {disabled, error}, 'grouped fields')} {...filterDOMProps(props)}>
+    <div className={classnames(className, {disabled, error}, 'grouped fields')} {...filterDOMProps(props)}>
         {label && (
-            <section className={classnames({required}, 'field')}>
+            <div className={classnames({required}, 'field')}>
                 <label>
                     {label}
                 </label>
-            </section>
+            </div>
         )}
 
         {allowedValues.map(item =>
-            <section className="field" key={item}>
-                <section className="ui radio checkbox">
+            <div className="field" key={item}>
+                <div className="ui radio checkbox">
                     <input
                         checked={item === value}
                         disabled={disabled}
@@ -44,16 +44,16 @@ const Radio = ({
                     <label htmlFor={`${id}-${item}`}>
                         {transform ? transform(item) : item}
                     </label>
-                </section>
-            </section>
+                </div>
+            </div>
         )}
 
         {!!(errorMessage && showInlineError) && (
-            <section className="ui red basic pointing label">
+            <div className="ui red basic pointing label">
                 {errorMessage}
-            </section>
+            </div>
         )}
-    </section>
+    </div>
 ;
 
 export default connectField(Radio);

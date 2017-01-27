@@ -13,7 +13,7 @@ const Radio = ({
     value,
     ...props
 }) =>
-    <section {...filterDOMProps(props)}>
+    <div {...filterDOMProps(props)}>
         {label && (
             <label>
                 {label}
@@ -21,7 +21,7 @@ const Radio = ({
         )}
 
         {allowedValues.map(item =>
-            <section key={item}>
+            <div key={item}>
                 <input
                     checked={item === value}
                     disabled={disabled}
@@ -34,9 +34,9 @@ const Radio = ({
                 <label htmlFor={`${id}-${item}`}>
                     {transform ? transform(item) : item}
                 </label>
-            </section>
+            </div>
         )}
-    </section>
+    </div>
 ;
 
 export default connectField(Radio);
