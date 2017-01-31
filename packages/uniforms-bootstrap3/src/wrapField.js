@@ -37,7 +37,7 @@ export default function wrapField ({
     );
 
     return (
-        <section
+        <div
             className={classnames(
                 className,
                 'field',
@@ -57,18 +57,18 @@ export default function wrapField ({
             )}
 
             {hasWrap && (
-                <section className={classnames(wrapClassName, gridClassName(grid, 'input'))}>
+                <div className={classnames(wrapClassName, gridClassName(grid, 'input'))}>
                     {children}
                     {blockFeedback}
                     {blockHelp}
                     {blockError}
-                </section>
+                </div>
             )}
 
             {!hasWrap && children}
             {!hasWrap && blockFeedback}
             {!hasWrap && blockHelp}
             {!hasWrap && blockError}
-        </section>
+        </div>
     );
 }

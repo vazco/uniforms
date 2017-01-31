@@ -13,7 +13,7 @@ const LongText = ({
     value,
     ...props
 }) =>
-    <section {...filterDOMProps(props)}>
+    <div {...filterDOMProps(props)}>
         {label && (
             <label>
                 {label}
@@ -29,7 +29,7 @@ const LongText = ({
             ref={inputRef}
             value={value}
         />
-    </section>
+    </div>
 ;
 
 export default connectField(LongText);

@@ -9,9 +9,9 @@ const Error = ({
     ...props
 }) =>
     !errorMessage ? nothing : (
-        <section {...filterDOMProps(props)}>
+        <div {...filterDOMProps(props)}>
             {children || errorMessage}
-        </section>
+        </div>
     )
 ;
 

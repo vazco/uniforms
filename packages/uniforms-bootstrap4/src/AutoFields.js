@@ -25,7 +25,7 @@ AutoFields.propTypes = {
 
 AutoFields.defaultProps = {
     autoField: AutoField,
-    element: 'section',
+    element: 'div',
     omitFields: []
 };
 

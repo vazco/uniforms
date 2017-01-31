@@ -23,28 +23,28 @@ const List = ({
     value,
     ...props
 }) =>
-    <section
+    <div
         className={classnames('ui', className, {disabled}, 'grouped fitted fields list')}
         {...filterDOMProps(props)}
     >
         {label && (
-            <section className={classnames({error, required}, 'field item')}>
+            <div className={classnames({error, required}, 'field item')}>
                 <label className="left floated">
                     {label}
                 </label>
 
                 <ListAddField name={`${name}.$`} initialCount={initialCount} className="right floated" />
-            </section>
+            </div>
         )}
 
         {label && (
-            <section className="ui fitted hidden clearing divider" />
+            <div className="ui fitted hidden clearing divider" />
         )}
 
         {!!(errorMessage && showInlineError) && (
-            <section className="ui red basic label">
+            <div className="ui red basic label">
                 {errorMessage}
-            </section>
+            </div>
         )}
 
         {children ? (
@@ -62,7 +62,7 @@ const List = ({
                 <ListItemField key={index} label={null} name={joinName(name, index)} {...itemProps} />
             )
         )}
-    </section>
+    </div>
 ;
 
 export default connectField(List, {includeInChain: false});

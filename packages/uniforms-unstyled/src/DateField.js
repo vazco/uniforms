@@ -23,7 +23,7 @@ const Date_ = ({
     value,
     ...props
 }) =>
-    <section {...filterDOMProps(props)}>
+    <div {...filterDOMProps(props)}>
         {label && (
             <label htmlFor={id}>
                 {label}
@@ -42,7 +42,7 @@ const Date_ = ({
             type="datetime-local"
             value={dateFormat(value)}
         />
-    </section>
+    </div>
 ;
 
 Date_.displayName = 'Date';
