@@ -101,7 +101,8 @@ export default class GraphQLBridge extends Bridge {
             return {};
         }
 
-        return undefined;
+        let initialValue = this.extras[name] && this.extras[name].initialValue;
+        return initialValue;
     }
 
     // eslint-disable-next-line complexity

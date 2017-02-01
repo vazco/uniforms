@@ -81,10 +81,10 @@ const presets = {
                 throw {details};
             }
         }, {
-            city:   {label: 'City'},
-            state:  {label: 'State'},
-            street: {label: 'Street'},
-            zip:    {label: 'Zip'}
+            city:   {label: 'City', initialValue: 'Tucson'},
+            state:  {label: 'State', initialValue: 'AZ'},
+            street: {label: 'Street', initialValue: 'Highway 61'},
+            zip:    {label: 'Zip', initialValue: '63123'}
         })
     `,
 
