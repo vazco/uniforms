@@ -36,7 +36,6 @@ describe('GraphQLBridge', () => {
 
     const schemaData = {
         author: {
-            initialValue: 'Jobs',
             component: 'div'
         },
         id: {
@@ -52,7 +51,7 @@ describe('GraphQLBridge', () => {
             ]
         },
         votes: {
-            initialValue: '44',
+            initialValue: 44,
             options: {
                 a: 1,
                 b: 2,
@@ -158,7 +157,7 @@ describe('GraphQLBridge', () => {
         });
 
         it('works with defined primitives', () => {
-            expect(bridge.getInitialValue('votes')).to.be.equal('44');
+            expect(bridge.getInitialValue('votes')).to.be.equal(44);
         });
     });
 
@@ -183,7 +182,6 @@ describe('GraphQLBridge', () => {
             expect(bridge.getProps('author')).to.be.deep.equal({
                 label: '',
                 required: true,
-                initialValue: 'Jobs',
                 component: 'div'
             });
         });
