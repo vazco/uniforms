@@ -1,4 +1,3 @@
-import Frame        from 'react-frame-component';
 import React        from 'react';
 import connectField from 'uniforms/connectField';
 import {Component}  from 'react';
@@ -35,7 +34,7 @@ class ApplicationPreview extends Component {
         props.schema = eval(`(${props.schema})`);
 
         return (
-            <Frame>
+            <div>
                 {link}
 
                 {this.props.errorMessage ? (
@@ -46,7 +45,7 @@ class ApplicationPreview extends Component {
 
                 {this.state.model !== undefined && <br />}
                 {this.state.model !== undefined && <pre children={this.state.model} />}
-            </Frame>
+            </div>
         );
     }
 }

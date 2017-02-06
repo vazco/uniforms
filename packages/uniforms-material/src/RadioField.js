@@ -5,9 +5,6 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 import {ListItem}     from 'material-ui/List';
 import {List}         from 'material-ui/List';
 
-/*
- * TODO: Investigate why the checkboxes needed to be unpacked
- */
 const Radio = ({
     allowedValues,
     disabled,
@@ -17,7 +14,6 @@ const Radio = ({
     onChange,
     transform,
     value,
-    checkboxes, // eslint-disable-line no-unused-vars
     ...props
 }) =>
     <List {...filterDOMProps(props)}>

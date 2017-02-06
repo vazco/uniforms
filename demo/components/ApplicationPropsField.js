@@ -1,4 +1,3 @@
-import Frame        from 'react-frame-component';
 import React        from 'react';
 import connectField from 'uniforms/connectField';
 
@@ -10,6 +9,7 @@ import ApplicationField from './ApplicationField';
 const ApplicationProps = ({onChange, schema, theme, value}) => {
     const link = styles[theme];
 
+    const isAntd      = theme === 'antd';
     const isBootstrap = theme === 'bootstrap3' || theme === 'bootstrap4';
     const isMaterial  = theme === 'material';
     const isSemantic  = theme === 'semantic';
@@ -21,7 +21,7 @@ const ApplicationProps = ({onChange, schema, theme, value}) => {
     const NumField      = themes[theme].NumField;
 
     return (
-        <Frame>
+        <div>
             {link}
 
             <style>{`
@@ -37,12 +37,12 @@ const ApplicationProps = ({onChange, schema, theme, value}) => {
                 <BoolField     name="disabled" />
                 <BoolField     name="label" />
                 <BoolField     name="placeholder" />
-                <BoolField     name="showInlineError" disabled={!(isBootstrap || isMaterial || isSemantic)} />
+                <BoolField     name="showInlineError" disabled={!(isAntd || isBootstrap || isMaterial || isSemantic)} />
                 <LongTextField name="schema" {...isMaterial && {fullWidth: true, rowsMax: 20}} />
 
                 <ErrorsField />
             </AutoForm>
-        </Frame>
+        </div>
     );
 };
 

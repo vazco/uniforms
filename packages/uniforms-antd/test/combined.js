@@ -6,29 +6,28 @@ import {mount}    from 'enzyme';
 import {spy}      from 'sinon';
 import {stub}     from 'sinon';
 
-import MaterialCheckbox    from 'material-ui/Checkbox';
-import MaterialRadio       from 'material-ui/RadioButton';
-import MaterialSelectField from 'material-ui/SelectField';
-import MaterialTextField   from 'material-ui/TextField';
-import MaterialToggle      from 'material-ui/Toggle';
-import getMuiTheme         from 'material-ui/styles/getMuiTheme';
-import lightBaseTheme      from 'material-ui/styles/baseThemes/lightBaseTheme';
+import AntDCheckbox    from 'antd/lib/checkbox';
+import AntDDatePicker  from 'antd/lib/date-picker';
+import AntDInput       from 'antd/lib/input';
+import AntDInputNumber from 'antd/lib/input-number';
+import AntDRadio       from 'antd/lib/radio';
+import AntDSelect      from 'antd/lib/select';
+import AntDSwitch      from 'antd/lib/switch';
+import moment          from 'moment';
 
-import AutoFields     from 'uniforms-material/AutoFields';
-import AutoForm       from 'uniforms-material/AutoForm';
-import DateField      from 'uniforms-material/DateField';
-import ErrorField     from 'uniforms-material/ErrorField';
-import ErrorsField    from 'uniforms-material/ErrorsField';
-import HiddenField    from 'uniforms-material/HiddenField';
-import ListAddField   from 'uniforms-material/ListAddField';
-import ListDelField   from 'uniforms-material/ListDelField';
-import ListField      from 'uniforms-material/ListField';
-import ListItemField  from 'uniforms-material/ListItemField';
-import LongTextField  from 'uniforms-material/LongTextField';
-import NumField       from 'uniforms-material/NumField';
-import RadioField     from 'uniforms-material/RadioField';
-import SelectField    from 'uniforms-material/SelectField';
-import SubmitField    from 'uniforms-material/SubmitField';
+import AutoFields     from 'uniforms-antd/AutoFields';
+import AutoForm       from 'uniforms-antd/AutoForm';
+import ErrorField     from 'uniforms-antd/ErrorField';
+import ErrorsField    from 'uniforms-antd/ErrorsField';
+import HiddenField    from 'uniforms-antd/HiddenField';
+import ListAddField   from 'uniforms-antd/ListAddField';
+import ListDelField   from 'uniforms-antd/ListDelField';
+import ListField      from 'uniforms-antd/ListField';
+import ListItemField  from 'uniforms-antd/ListItemField';
+import LongTextField  from 'uniforms-antd/LongTextField';
+import NumField       from 'uniforms-antd/NumField';
+import SelectField    from 'uniforms-antd/SelectField';
+import SubmitField    from 'uniforms-antd/SubmitField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
 filterDOMProps.register(
@@ -126,22 +125,18 @@ describe('Everything', () => {
             onSubmit={onSubmit}
             placeholder
             schema={bridge}
-        />,
-        {
-            childContextTypes: {muiTheme: React.PropTypes.object.isRequired},
-            context: {muiTheme: getMuiTheme(lightBaseTheme, {userAgent: false})}
-        }
+        />
     );
 
     it('works (AutoFields, ErrorsField, SubmitField)', async function _ () {
         this.timeout(30000);
 
         const children = (
-            <section>
+            <div>
                 <AutoFields />
                 <ErrorsField />
                 <SubmitField />
-            </section>
+            </div>
         );
 
         wrapper.setProps({children});
@@ -154,10 +149,10 @@ describe('Everything', () => {
     });
 
     it('works (NumField)', async () => {
-        const find = () => wrapper.find(MaterialTextField).filterWhere(x => x.props().name === 'x00');
+        const find = () => wrapper.find(AntDInputNumber).filterWhere(x => x.props().name === 'x00');
 
         expect(find().props()).to.have.property('value', 0);
-        expect(find().props().onChange({}, 0)).to.equal(undefined);
+        expect(find().props().onChange(0)).to.equal(undefined);
         expect(find().props()).to.have.property('value', 0);
 
         await new Promise(resolve => setTimeout(resolve, 5));
@@ -167,11 +162,11 @@ describe('Everything', () => {
     });
 
     it('works (NumField, invalid)', async () => {
-        const find = () => wrapper.find(MaterialTextField).filterWhere(x => x.props().name === 'x00');
+        const find = () => wrapper.find(AntDInputNumber).filterWhere(x => x.props().name === 'x00');
 
         expect(find().props()).to.have.property('value', 0);
-        expect(find().props().onChange({}, NaN)).to.equal(undefined);
-        expect(find().props()).to.have.property('value', '');
+        expect(find().props().onChange(NaN)).to.equal(undefined);
+        expect(find().props()).to.have.property('value', undefined);
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -180,16 +175,16 @@ describe('Everything', () => {
     });
 
     it('works (NumField, step)', async () => {
-        const find = () => wrapper.find(MaterialTextField).filterWhere(x => x.props().name === 'x34');
+        const find = () => wrapper.find(AntDInputNumber).filterWhere(x => x.props().name === 'x34');
 
         expect(find().props()).to.have.property('step', 4);
     });
 
     it('works (TextField)', async () => {
-        const find = () => wrapper.find(MaterialTextField).filterWhere(x => x.props().name === 'x01');
+        const find = () => wrapper.find(AntDInput).filterWhere(x => x.props().name === 'x01');
 
         expect(find().props()).to.have.property('value', '');
-        expect(find().props().onChange({}, 'x01')).to.equal(undefined);
+        expect(find().props().onChange({target: {value: 'x01'}})).to.equal(undefined);
         expect(find().props()).to.have.property('value', 'x01');
 
         await new Promise(resolve => setTimeout(resolve, 5));
@@ -199,10 +194,10 @@ describe('Everything', () => {
     });
 
     it('works (SelectField)', async () => {
-        const find = () => wrapper.find(MaterialSelectField).filterWhere(x => x.props().name === 'x02');
+        const find = () => wrapper.find(AntDSelect).filterWhere(x => x.props().name === 'x02');
 
         expect(find().props()).to.have.property('value', '1');
-        expect(find().props().onChange({}, 1, '2')).to.equal(undefined);
+        expect(find().props().onChange('2')).to.equal(undefined);
         expect(find().props()).to.have.property('value', '2');
 
         await new Promise(resolve => setTimeout(resolve, 5));
@@ -212,15 +207,15 @@ describe('Everything', () => {
     });
 
     it('works (RadioField, on)', async () => {
-        const find = () => wrapper.find(RadioField).filterWhere(x => x.props().name === 'x03');
+        const find = () => wrapper.find(AntDRadio.Group).filterWhere(x => x.props().name === 'x03');
 
-        expect(find().find(MaterialRadio).at(0).prop('checked')).to.be.true;
-        expect(find().find(MaterialRadio).at(1).prop('checked')).to.be.false;
-        expect(find().find(MaterialRadio).at(2).prop('checked')).to.be.false;
-        expect(find().find(MaterialRadio).at(1).props().onCheck()).to.equal(undefined);
-        expect(find().find(MaterialRadio).at(0).prop('checked')).to.be.false;
-        expect(find().find(MaterialRadio).at(1).prop('checked')).to.be.true;
-        expect(find().find(MaterialRadio).at(2).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(0).prop('checked')).to.be.true;
+        expect(find().find(AntDRadio).at(1).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(2).prop('checked')).to.be.false;
+        expect(find().props().onChange({target: {value: '2'}})).to.equal(undefined);
+        expect(find().find(AntDRadio).at(0).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(1).prop('checked')).to.be.true;
+        expect(find().find(AntDRadio).at(2).prop('checked')).to.be.false;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -229,15 +224,15 @@ describe('Everything', () => {
     });
 
     it('works (RadioField, off)', async () => {
-        const find = () => wrapper.find(RadioField).filterWhere(x => x.props().name === 'x03');
+        const find = () => wrapper.find(AntDRadio.Group).filterWhere(x => x.props().name === 'x03');
 
-        expect(find().find(MaterialRadio).at(0).prop('checked')).to.be.false;
-        expect(find().find(MaterialRadio).at(1).prop('checked')).to.be.true;
-        expect(find().find(MaterialRadio).at(2).prop('checked')).to.be.false;
-        expect(find().props().onChange('1')).to.equal(undefined);
-        expect(find().find(MaterialRadio).at(0).prop('checked')).to.be.true;
-        expect(find().find(MaterialRadio).at(1).prop('checked')).to.be.false;
-        expect(find().find(MaterialRadio).at(2).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(0).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(1).prop('checked')).to.be.true;
+        expect(find().find(AntDRadio).at(2).prop('checked')).to.be.false;
+        expect(find().props().onChange({target: {value: '1'}})).to.equal(undefined);
+        expect(find().find(AntDRadio).at(0).prop('checked')).to.be.true;
+        expect(find().find(AntDRadio).at(1).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(2).prop('checked')).to.be.false;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -246,10 +241,10 @@ describe('Everything', () => {
     });
 
     it('works (SelectField, checkboxes, multiple, on)', async () => {
-        const find = () => wrapper.find(SelectField).filterWhere(x => x.props().name === 'x04');
+        const find = () => wrapper.find(AntDCheckbox.Group).filterWhere(x => x.props().name === 'x04');
 
         expect(find().props()).to.have.property('value').that.is.deep.equal([]);
-        expect(find().find(MaterialCheckbox).at(1).props().onCheck()).to.equal(undefined);
+        expect(find().props().onChange(['2'])).to.equal(undefined);
         expect(find().props()).to.have.property('value').that.is.deep.equal(['2']);
 
         await new Promise(resolve => setTimeout(resolve, 5));
@@ -259,10 +254,10 @@ describe('Everything', () => {
     });
 
     it('works (SelectField, checkboxes, multiple, off)', async () => {
-        const find = () => wrapper.find(SelectField).filterWhere(x => x.props().name === 'x04');
+        const find = () => wrapper.find(AntDCheckbox.Group).filterWhere(x => x.props().name === 'x04');
 
         expect(find().props()).to.have.property('value').that.is.deep.equal(['2']);
-        expect(find().find(MaterialCheckbox).at(1).props().onCheck()).to.equal(undefined);
+        expect(find().props().onChange([])).to.equal(undefined);
         expect(find().props()).to.have.property('value').that.is.deep.equal([]);
 
         await new Promise(resolve => setTimeout(resolve, 5));
@@ -272,15 +267,11 @@ describe('Everything', () => {
     });
 
     it('works (DateField)', async () => {
-        const find = () => wrapper.find(DateField).filterWhere(x => x.props().name === 'x05');
-        const input = find().find('TextField').filterWhere(x => x.props().name === 'x05').last();
+        const find = () => wrapper.find(AntDDatePicker).filterWhere(x => x.props().name === 'x05');
 
-        expect(find().props()).to.have.property('value').that.is.deep.equal(dateA);
-        expect(find().find('TextField').filterWhere(x => x.props().name === 'x05').last().simulate('focus')).to.be.ok;
-        expect(input.props().onFocus()).to.equal(undefined);
-        expect(find().find('DatePicker').props().onChange({}, dateB)).to.equal(undefined);
-        expect(find().find('TimePicker').props().onChange({}, dateB)).to.equal(undefined);
-        expect(find().props()).to.have.property('value').that.is.deep.equal(dateB);
+        expect(find().props()).to.have.property('value').that.is.deep.equal(moment(dateA));
+        expect(find().props().onChange(moment(dateB))).to.equal(undefined);
+        expect(find().props()).to.have.property('value').that.is.deep.equal(moment(dateB));
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -289,11 +280,11 @@ describe('Everything', () => {
     });
 
     it('works (BoolField)', async () => {
-        const find = () => wrapper.find(MaterialToggle).filterWhere(x => x.props().name === 'x06');
+        const find = () => wrapper.find(AntDSwitch).filterWhere(x => x.props().name === 'x06');
 
-        expect(find().props()).to.have.property('toggled', false);
-        expect(find().props().onToggle({}, true)).to.equal(undefined);
-        expect(find().props()).to.have.property('toggled', true);
+        expect(find().props()).to.have.property('checked', false);
+        expect(find().props().onChange(true)).to.equal(undefined);
+        expect(find().props()).to.have.property('checked', true);
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -302,10 +293,10 @@ describe('Everything', () => {
     });
 
     it('works (NestField, TextField)', async () => {
-        const find = () => wrapper.find(MaterialTextField).filterWhere(x => x.props().name === 'x08.y01');
+        const find = () => wrapper.find(AntDInput).filterWhere(x => x.props().name === 'x08.y01');
 
         expect(find().props()).to.have.property('value', '');
-        expect(find().props().onChange({}, 'x08y01')).to.equal(undefined);
+        expect(find().props().onChange({target: {value: 'x08y01'}})).to.equal(undefined);
         expect(find().props()).to.have.property('value', 'x08y01');
 
         await new Promise(resolve => setTimeout(resolve, 5));
@@ -315,10 +306,10 @@ describe('Everything', () => {
     });
 
     it('works (NestField, NumField)', async () => {
-        const find = () => wrapper.find(MaterialTextField).filterWhere(x => x.props().name === 'x08.y02');
+        const find = () => wrapper.find(AntDInputNumber).filterWhere(x => x.props().name === 'x08.y02');
 
         expect(find().props()).to.have.property('value', 0);
-        expect(find().props().onChange({}, 2)).to.equal(undefined);
+        expect(find().props().onChange(2)).to.equal(undefined);
         expect(find().props()).to.have.property('value', 2);
 
         await new Promise(resolve => setTimeout(resolve, 5));
@@ -328,11 +319,11 @@ describe('Everything', () => {
     });
 
     it('works (NumField, decimal, nullable)', async () => {
-        const find = () => wrapper.find(MaterialTextField).filterWhere(x => x.props().name === 'x22');
+        const find = () => wrapper.find(AntDInputNumber).filterWhere(x => x.props().name === 'x22');
 
         expect(find().props()).to.have.property('value', 0);
-        expect(find().props().onChange({}, undefined)).to.equal(undefined);
-        expect(find().props()).to.have.property('value', '');
+        expect(find().props().onChange(undefined)).to.equal(undefined);
+        expect(find().props()).to.have.property('value', undefined);
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -341,11 +332,11 @@ describe('Everything', () => {
     });
 
     it('works (NumField, decimal)', async () => {
-        const find = () => wrapper.find(MaterialTextField).filterWhere(x => x.props().name === 'x22');
+        const find = () => wrapper.find(AntDInputNumber).filterWhere(x => x.props().name === 'x22');
 
-        expect(find().props()).to.have.property('value', '');
-        expect(find().props().onChange({}, NaN)).to.equal(undefined);
-        expect(find().props()).to.have.property('value', '');
+        expect(find().props()).to.have.property('value', undefined);
+        expect(find().props().onChange(NaN)).to.equal(undefined);
+        expect(find().props()).to.have.property('value', undefined);
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -354,10 +345,10 @@ describe('Everything', () => {
     });
 
     it('works (LongTextField)', async () => {
-        const find = () => wrapper.find(MaterialTextField).filterWhere(x => x.props().name === 'x25');
+        const find = () => wrapper.find(AntDInput).filterWhere(x => x.props().name === 'x25');
 
         expect(find().props()).to.have.property('value', '');
-        expect(find().props().onChange({}, 'x25')).to.equal(undefined);
+        expect(find().props().onChange({target: {value: 'x25'}})).to.equal(undefined);
         expect(find().props()).to.have.property('value', 'x25');
 
         await new Promise(resolve => setTimeout(resolve, 5));
@@ -367,7 +358,7 @@ describe('Everything', () => {
     });
 
     it('works (ListAddField, one)', async () => {
-        expect(wrapper.find(ListAddField).findWhere(x => x.props().onTouchTap).last().simulate('touchTap')).to.be.ok;
+        expect(wrapper.find(ListAddField).findWhere(x => x.props().onClick).last().simulate('click')).to.be.ok;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -376,7 +367,7 @@ describe('Everything', () => {
     });
 
     it('works (ListAddField, two)', async () => {
-        expect(wrapper.find(ListAddField).findWhere(x => x.props().onClick).last().simulate('touchTap')).to.be.ok;
+        expect(wrapper.find(ListAddField).findWhere(x => x.props().onClick).last().simulate('click')).to.be.ok;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -385,7 +376,7 @@ describe('Everything', () => {
     });
 
     it('works (ListDelField)', async () => {
-        expect(wrapper.find(ListDelField).at(0).simulate('touchTap')).to.be.ok;
+        expect(wrapper.find(ListDelField).at(0).simulate('click')).to.be.ok;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -394,15 +385,15 @@ describe('Everything', () => {
     });
 
     it('works (SelectField, checkboxes, multiple, on)', async () => {
-        const find = () => wrapper.find(SelectField).filterWhere(x => x.props().name === 'x31');
+        const find = () => wrapper.find(AntDRadio.Group).filterWhere(x => x.props().name === 'x31');
 
-        expect(find().find(MaterialRadio).at(0).prop('checked')).to.be.true;
-        expect(find().find(MaterialRadio).at(1).prop('checked')).to.be.false;
-        expect(find().find(MaterialRadio).at(2).prop('checked')).to.be.false;
-        expect(find().find(MaterialRadio).at(1).props().onCheck()).to.equal(undefined);
-        expect(find().find(MaterialRadio).at(0).prop('checked')).to.be.false;
-        expect(find().find(MaterialRadio).at(1).prop('checked')).to.be.true;
-        expect(find().find(MaterialRadio).at(2).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(0).prop('checked')).to.be.true;
+        expect(find().find(AntDRadio).at(1).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(2).prop('checked')).to.be.false;
+        expect(find().props().onChange({target: {value: '2'}})).to.equal(undefined);
+        expect(find().find(AntDRadio).at(0).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(1).prop('checked')).to.be.true;
+        expect(find().find(AntDRadio).at(2).prop('checked')).to.be.false;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 

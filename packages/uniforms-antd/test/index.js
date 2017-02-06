@@ -16,13 +16,8 @@ const loader = Module._load;
 Module._load = function _load (request, parent) {
     return loader(
         request
-            .replace(/^uniforms-material/, '../src')
+            .replace(/^uniforms-antd/, '../src')
             .replace(/^uniforms/, '../../uniforms/src'),
         parent
     );
 };
-
-// MaterialUI
-import injectTapEventPlugin from 'react-tap-event-plugin';
-
-injectTapEventPlugin();

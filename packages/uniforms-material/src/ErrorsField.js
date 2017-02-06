@@ -9,7 +9,7 @@ import {List}         from 'material-ui/List';
 const ErrorsField = ({children, ...props}, {uniforms: {error, schema}}) =>
     (!error && !children) ? nothing : (
         <List {...filterDOMProps(props)}>
-            {!! children && (
+            {!!children && (
                 <ListItem primaryText={children} disabled />
             )}
             {schema.getErrorMessages(error).map((message, index) =>

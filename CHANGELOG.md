@@ -1,3 +1,9 @@
+## Next:
+- **Added:** AntD theme. [\#134](https://github.com/vazco/uniforms/issues/134)
+- **Added:** Support for Bootstrap4@alpha.6. [\#170](https://github.com/vazco/uniforms/issues/170)
+- **Added:** Support for `initialValue` in `GraphQLBridge`. [\#183](https://github.com/vazco/uniforms/issues/183)
+- **Changed:** All `<section>`s tags are now `<div>`s. [\#172](https://github.com/vazco/uniforms/issues/172)
+
 ## [v1.9.0](https://github.com/vazco/uniforms/tree/v1.9.0) (2017-01-21)
 - **Added:** Online demo [uniforms.tools](https://uniforms.tools/). [\#156](https://github.com/vazco/uniforms/issues/156)
 - **Added:** Support for SimpleSchema2@0.1.x.

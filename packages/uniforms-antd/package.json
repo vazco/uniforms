@@ -1,10 +1,10 @@
 {
-  "name": "uniforms-bootstrap3",
+  "name": "uniforms-antd",
   "version": "1.9.0",
   "main": "index.js",
   "jsnext:main": "src/index.js",
-  "description": "Bootstrap3 UI components for uniforms.",
-  "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-bootstrap3",
+  "description": "Ant Design UI components for uniforms.",
+  "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-antd",
   "homepage": "https://github.com/vazco/uniforms/",
   "license": "MIT",
   "bugs": {
@@ -34,6 +34,7 @@
     "test": "babel-node node_modules/.bin/_mocha --require test/index.js test --reporter list"
   },
   "devDependencies": {
+    "antd": "2.7.0",
     "babel-cli": "6.22.2",
     "babel-eslint": "7.1.1",
     "babel-plugin-istanbul": "3.1.2",
@@ -62,6 +63,7 @@
     "sinon": "2.0.0-pre.5"
   },
   "peerDependencies": {
+    "antd": "^2.7.0",
     "react": "^15.0.0 || ^0.14.0",
     "uniforms": "^1.9.0"
   },
@@ -101,7 +103,6 @@
     "instrument": false
   },
   "dependencies": {
-    "babel-runtime": "^6.20.0",
-    "classnames": "^2.2.5"
+    "babel-runtime": "^6.20.0"
   }
 }

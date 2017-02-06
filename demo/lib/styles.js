@@ -2,6 +2,10 @@ import React from 'react';
 
 const style = links => links.map((link, index) => <link key={index} rel="stylesheet" href={link} />);
 const styles = {
+    antd: style([
+        'https://cdnjs.cloudflare.com/ajax/libs/antd/2.7.0/antd.min.css'
+    ]),
+
     bootstrap3: style([
         'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css'
     ]),
