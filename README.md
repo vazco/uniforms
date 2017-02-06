@@ -32,7 +32,7 @@
 
 # uniforms
 
-In short: uniforms is a set of npm packages, which contains helpers and [React](https://facebook.github.io/react/) components - both unstyled and themed with [Bootstrap3](http://getbootstrap.com/), [Bootstrap4](http://v4-alpha.getbootstrap.com/) and [Semantic UI](http://semantic-ui.com/) - to easily manage, validate and even generate fully featured forms from your schemas.
+In short: uniforms is a set of npm packages, which contains helpers and [React](https://facebook.github.io/react/) components - both unstyled and themed with [AntD](https://ant.design/), [Bootstrap3](http://getbootstrap.com/), [Bootstrap4](http://v4-alpha.getbootstrap.com/) and [Semantic UI](http://semantic-ui.com/) - to easily manage, validate and even generate fully featured forms from your schemas.
 
 Demo: [uniforms.tools](https://uniforms.tools/).
 
@@ -105,6 +105,7 @@ $ meteor npm install simpl-schema
 $ meteor npm install graphql
 
 # Components (pick one)
+$ meteor npm install --save react react-dom uniforms uniforms-antd
 $ meteor npm install --save react react-dom uniforms uniforms-bootstrap3
 $ meteor npm install --save react react-dom uniforms uniforms-bootstrap4
 $ meteor npm install --save react react-dom uniforms uniforms-semantic
@@ -115,6 +116,7 @@ $ meteor npm install --save react react-dom uniforms uniforms-unstyled
 
 ```shell
 # Components (pick one)
+$ npm install --save react react-dom uniforms uniforms-antd
 $ npm install --save react react-dom uniforms uniforms-bootstrap3
 $ npm install --save react react-dom uniforms uniforms-bootstrap4
 $ npm install --save react react-dom uniforms uniforms-semantic
