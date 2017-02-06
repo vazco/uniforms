@@ -2,32 +2,32 @@
   "private": true,
   "devDependencies": {
     "babel-cli": "6.22.2",
-    "coveralls": "2.11.15",
+    "coveralls": "2.11.16",
     "cross-env": "3.1.4",
-    "lerna": "2.0.0-beta.32",
+    "lerna": "2.0.0-beta.36",
     "nyc": "10.1.2",
     "rimraf": "2.5.4"
   },
   "scripts": {
     "build": "npm run build:packages",
-    "build:packages": "lerna run --concurrency 5 build",
+    "build:packages": "lerna run build",
     "clean": "npm run clean:packages && npm run clean:main",
     "clean:main": "rimraf coverage .nyc_output",
-    "clean:packages": "lerna run --concurrency 5 clean",
+    "clean:packages": "lerna run clean",
     "cover": "npm run cover:packages && npm run cover:main",
     "cover:main": "cross-env NODE_ENV=cover nyc npm test",
-    "cover:packages": "lerna run --concurrency 5 cover",
+    "cover:packages": "lerna run cover",
     "cover:report": "nyc report --reporter=text-lcov | coveralls",
     "install": "npm run install:packages",
-    "install:packages": "lerna --concurrency 5 bootstrap",
+    "install:packages": "lerna bootstrap",
     "lint": "npm run lint:packages",
-    "lint:packages": "lerna run --concurrency 5 lint",
+    "lint:packages": "lerna run lint",
     "publish": "lerna publish",
     "reset": "npm run reset:packages && npm run reset:main",
     "reset:main": "rimraf node_modules",
-    "reset:packages": "lerna run --concurrency 5 reset",
+    "reset:packages": "lerna run reset",
     "test": "npm run test:packages",
-    "test:packages": "lerna run --concurrency 5 test"
+    "test:packages": "lerna run test"
   },
   "nyc": {
     "reporter": [
