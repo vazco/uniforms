@@ -36,4 +36,4 @@ Text.defaultProps = {
     type: 'text'
 };
 
-export default connectField(Text);
+export default connectField(Text, {ensureValue: true});
