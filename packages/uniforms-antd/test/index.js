@@ -10,17 +10,7 @@ Object.keys(window).forEach(property => {
     }
 });
 
-// Dirty fix for React
-require('fbjs/lib/ExecutionEnvironment').canUseDOM = true;
-
 // Mocks
-/*import mock from 'mock-require';
-
-mock('uniforms', '../../uniforms/src');
-mock('uniforms-antd', '../src');
-
-*/
-
 const Module = require('module');
 const loader = Module._load;
 Module._load = function _load (request, parent) {
@@ -31,15 +21,3 @@ Module._load = function _load (request, parent) {
         parent
     );
 };
-
-if (typeof window !== 'undefined') {
-    const matchMediaPolyfill = function matchMediaPolyfill (mediaQuery) {
-        return {
-            media: mediaQuery,
-            matches: false,
-            addListener: function addListener () {},
-            removeListener: function removeListener () {}
-        };
-    };
-    window.matchMedia = window.matchMedia || matchMediaPolyfill;
-}
