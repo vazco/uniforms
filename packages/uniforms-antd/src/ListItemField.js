@@ -7,7 +7,7 @@ import AutoField    from './AutoField';
 import ListDelField from './ListDelField';
 
 const ListItem = props =>
-    <section>
+    <div>
         <div
             style={{
                 float: 'right',
@@ -24,7 +24,7 @@ const ListItem = props =>
             <div style={{borderBottom: '1px solid #DDD', height: '20px', marginTop: '-8px'}} />
         </div>
 
-        <section style={{width: '100%'}}>
+        <div style={{width: '100%'}}>
             {props.children ? (
                 Children.map(props.children, child =>
                     React.cloneElement(child, {
@@ -35,8 +35,8 @@ const ListItem = props =>
             ) : (
                 <AutoField {...props} />
             )}
-        </section>
-    </section>
+        </div>
+    </div>
 ;
 
 export default connectField(ListItem, {includeInChain: false});

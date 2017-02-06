@@ -5,15 +5,15 @@ import nothing        from 'uniforms/nothing';
 
 const Error = ({children, errorMessage, ...props}) =>
     !errorMessage ? nothing : (
-        <section {...filterDOMProps(props)}>
+        <div {...filterDOMProps(props)}>
             {children ? (
                 children
             ) : (
-                <section style={{margin: '3px'}}>
+                <div style={{margin: '3px'}}>
                     {errorMessage}
-                </section>
+                </div>
             )}
-        </section>
+        </div>
     )
 ;
 

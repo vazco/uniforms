@@ -132,11 +132,11 @@ describe('Everything', () => {
         this.timeout(30000);
 
         const children = (
-            <section>
+            <div>
                 <AutoFields />
                 <ErrorsField />
                 <SubmitField />
-            </section>
+            </div>
         );
 
         wrapper.setProps({children});

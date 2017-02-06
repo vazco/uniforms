@@ -13,7 +13,7 @@ const Nest = ({
     name,
     showInlineError
 }) =>
-    <section>
+    <div>
         {label && (
             <label>
                 {label}
@@ -21,9 +21,9 @@ const Nest = ({
         )}
 
         {!!(errorMessage && showInlineError) && (
-            <section>
+            <div>
                 {errorMessage}
-            </section>
+            </div>
         )}
 
         {children ? (
@@ -36,7 +36,7 @@ const Nest = ({
                 />
             )
         )}
-    </section>
+    </div>
 ;
 
 export default connectField(Nest, {includeInChain: false});

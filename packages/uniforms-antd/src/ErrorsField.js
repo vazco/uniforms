@@ -5,7 +5,7 @@ import nothing        from 'uniforms/nothing';
 
 const ErrorsField = ({className, children, ...props}, {uniforms: {error, schema}}) =>
     (!error && !children) ? nothing : (
-        <section {...filterDOMProps(props)}>
+        <div {...filterDOMProps(props)}>
             {children}
             <ul>
                 {schema.getErrorMessages(error).map((message, index) =>
@@ -14,7 +14,7 @@ const ErrorsField = ({className, children, ...props}, {uniforms: {error, schema}
                     </li>
                 )}
             </ul>
-        </section>
+        </div>
     )
 ;
 

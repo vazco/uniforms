@@ -20,9 +20,9 @@ const List = ({
     value,
     ...props
 }) =>
-    <section {...filterDOMProps(props)}>
+    <div {...filterDOMProps(props)}>
         {!!label && (
-            <section>
+            <div>
                 {label}
                 {!!info && (
                     <span>
@@ -32,17 +32,17 @@ const List = ({
                         </Tooltip>
                     </span>
                 )}
-            </section>
+            </div>
         )}
 
         {!!label && (
-            <section style={{height: '18px'}}  />
+            <div style={{height: '18px'}}  />
         )}
 
         {!!(errorMessage && showInlineError) && (
-            <section>
+            <div>
                 {errorMessage}
-            </section>
+            </div>
         )}
 
         {children ? (
@@ -66,7 +66,7 @@ const List = ({
         )}
 
         <ListAddField name={`${name}.$`} initialCount={initialCount} />
-    </section>
+    </div>
 ;
 
 List.defaultProps = {
