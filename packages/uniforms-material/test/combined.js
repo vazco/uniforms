@@ -26,8 +26,8 @@ import ListField      from 'uniforms-material/ListField';
 import ListItemField  from 'uniforms-material/ListItemField';
 import LongTextField  from 'uniforms-material/LongTextField';
 import NumField       from 'uniforms-material/NumField';
-import SelectField    from 'uniforms-material/SelectField';
 import RadioField     from 'uniforms-material/RadioField';
+import SelectField    from 'uniforms-material/SelectField';
 import SubmitField    from 'uniforms-material/SubmitField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
