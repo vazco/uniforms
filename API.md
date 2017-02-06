@@ -202,6 +202,7 @@ import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme packag
     // Field inline error.
     //   *Some description would be great, huh?*
     // Available in:
+    //   antd
     //   bootstrap3
     //   bootstrap4
     //   semantic
@@ -301,6 +302,7 @@ import DateField from 'uniforms-unstyled/DateField'; // Choose your theme packag
     // Field inline error.
     //   *Some description would be great, huh?*
     // Available in:
+    //   antd
     //   bootstrap3
     //   bootstrap4
     //   semantic
@@ -528,6 +530,7 @@ import LongTextField from 'uniforms-unstyled/LongTextField'; // Choose your them
     // Field inline error.
     //   *Some description would be great, huh?*
     // Available in:
+    //   antd
     //   bootstrap3
     //   bootstrap4
     //   semantic
@@ -558,6 +561,7 @@ import NestField from 'uniforms-unstyled/NestField'; // Choose your theme packag
     // Field inline error.
     //   *Some description would be great, huh?*
     // Available in:
+    //   antd
     //   bootstrap3
     //   bootstrap4
     //   semantic
@@ -646,6 +650,7 @@ import NumField from 'uniforms-unstyled/NumField'; // Choose your theme package.
     // Field inline error.
     //   *Some description would be great, huh?*
     // Available in:
+    //   antd
     //   bootstrap3
     //   bootstrap4
     //   semantic
@@ -694,6 +699,9 @@ import RadioField from 'uniforms-unstyled/RadioField'; // Choose your theme pack
     // Field inline error.
     //   *Some description would be great, huh?*
     // Available in:
+    //   antd
+    //   bootstrap3
+    //   bootstrap4
     //   semantic
     showInlineError={true}
 
@@ -744,6 +752,9 @@ import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme pa
     // Field inline error.
     //   *Some description would be great, huh?*
     // Available in:
+    //   antd
+    //   bootstrap3
+    //   bootstrap4
     //   semantic
     showInlineError={true}
 
@@ -846,6 +857,7 @@ import TextField from 'uniforms-unstyled/TextField'; // Choose your theme packag
     // Field inline error.
     //   *Some description would be great, huh?*
     // Available in:
+    //   antd
     //   bootstrap3
     //   bootstrap4
     //   semantic
@@ -982,6 +994,7 @@ import BaseForm from 'uniforms/BaseForm'; // Or from the theme package.
     //   By default it's false - set it to true to enable inline errors for the
     //   whole form.
     // Available in:
+    //   antd
     //   bootstrap3
     //   bootstrap4
     //   semantic
