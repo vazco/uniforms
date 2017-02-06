@@ -5,21 +5,12 @@ import connectField from 'uniforms/connectField';
 
 import wrapField from './wrapField';
 
-const xor = (item, array) => {
-    const index = array.indexOf(item);
-    if (index === -1) {
-        return array.concat([item]);
-    }
-
-    return array.slice(0, index).concat(array.slice(index + 1));
-};
-
 const renderCheckboxes = props =>
     <Checkbox.Group
         disabled={props.disabled}
         id={props.id}
         name={props.name}
-        onChange={props.onChange}
+        onChange={value => props.onChange(value)}
         options={props.options || props.allowedValues}
         value={props.value}
     />
