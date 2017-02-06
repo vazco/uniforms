@@ -15,7 +15,7 @@ const Num = props =>
             max={props.max}
             min={props.min}
             name={props.name}
-            onChange={value => props.onChange(noneIfNaN((props.decimal ? parseFloat : parseInt)(value)))}
+            onChange={value => props.onChange(noneIfNaN(value))}
             placeholder={props.placeholder}
             ref={props.inputRef}
             step={props.step || (props.decimal ? 0.01 : 1)}
@@ -26,4 +26,4 @@ const Num = props =>
     ))
 ;
 
-export default connectField(Num);
+export default connectField(Num, {ensureValue: false});

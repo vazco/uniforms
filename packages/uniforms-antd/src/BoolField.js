@@ -12,7 +12,7 @@ const Bool = props =>
             checked={props.value}
             disabled={props.disabled}
             id={props.id}
-            name={name}
+            name={props.name}
             onChange={() => props.onChange(!props.value)}
             ref={props.inputRef}
             {...filterDOMProps(props)}
