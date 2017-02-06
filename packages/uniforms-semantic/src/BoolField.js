@@ -18,8 +18,8 @@ const Bool = ({
     value,
     ...props
 }) =>
-    <section className={classnames(className, {disabled, error, required}, 'field')} {...filterDOMProps(props)}>
-        <section className="ui checkbox">
+    <div className={classnames(className, {disabled, error, required}, 'field')} {...filterDOMProps(props)}>
+        <div className="ui checkbox">
             <input
                 checked={value}
                 className="hidden"
@@ -34,14 +34,14 @@ const Bool = ({
             <label htmlFor={id}>
                 {label}
             </label>
-        </section>
+        </div>
 
         {!!(errorMessage && showInlineError) && (
-            <section className="ui red basic pointing label">
+            <div className="ui red basic pointing label">
                 {errorMessage}
-            </section>
+            </div>
         )}
-    </section>
+    </div>
 ;
 
 export default connectField(Bool);

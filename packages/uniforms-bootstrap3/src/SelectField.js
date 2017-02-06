@@ -15,7 +15,7 @@ const xor = (item, array) => {
 
 const renderCheckboxes = props =>
     props.allowedValues.map(item =>
-        <section key={item} className={classnames(props.inputClassName, `checkbox${props.inline ? '-inline' : ''}`)}>
+        <div key={item} className={classnames(props.inputClassName, `checkbox${props.inline ? '-inline' : ''}`)}>
             <label htmlFor={`${props.id}-${item}`}>
                 <input
                     checked={props.fieldType === Array ? props.value.includes(item) : props.value === item}
@@ -27,7 +27,7 @@ const renderCheckboxes = props =>
                 />
                 {props.transform ? props.transform(item) : item}
             </label>
-        </section>
+        </div>
     )
 ;
 

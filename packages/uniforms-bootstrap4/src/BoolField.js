@@ -6,10 +6,17 @@ import wrapField from './wrapField';
 
 const Bool = ({label, labelBefore, ...props}) =>
     wrapField({label: labelBefore, ...props}, (
-        <section className={classnames(props.inputClassName, `checkbox${props.inline ? '-inline' : ''}`)}>
-            <label htmlFor={props.id}>
+        <div
+            className={classnames(
+                props.inputClassName,
+                'form-check',
+                `checkbox${props.inline ? '-inline' : ''}`, // bootstrap4 < alpha.6
+            )}
+        >
+            <label htmlFor={props.id} className="form-check-label">
                 <input
                     checked={props.value}
+                    className="form-check-input"
                     disabled={props.disabled}
                     id={props.id}
                     name={props.name}
@@ -20,7 +27,7 @@ const Bool = ({label, labelBefore, ...props}) =>
                 &nbsp;
                 {label}
             </label>
-        </section>
+        </div>
     ))
 ;
 

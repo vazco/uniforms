@@ -34,7 +34,7 @@ const SubmitField = ({
     );
 
     return (
-        <section className={classnames(className, {'has-danger': error, row: grid})} {...filterDOMProps(props)}>
+        <div className={classnames(className, {'has-danger': error, row: grid})} {...filterDOMProps(props)}>
             {hasWrap && (
                 <label className={classnames('form-control-label', gridClassName(grid, 'label'))}>
                     &nbsp;
@@ -42,13 +42,13 @@ const SubmitField = ({
             )}
 
             {hasWrap && (
-                <section className={classnames(wrapClassName, gridClassName(grid, 'input'))}>
+                <div className={classnames(wrapClassName, gridClassName(grid, 'input'))}>
                     {blockInput}
-                </section>
+                </div>
             )}
 
             {!hasWrap && blockInput}
-        </section>
+        </div>
     );
 };
 

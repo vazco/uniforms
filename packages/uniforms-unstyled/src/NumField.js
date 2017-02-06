@@ -15,10 +15,11 @@ const Num = ({
     name,
     onChange,
     placeholder,
+    step,
     value,
     ...props
 }) =>
-    <section {...filterDOMProps(props)}>
+    <div {...filterDOMProps(props)}>
         {label && (
             <label htmlFor={id}>
                 {label}
@@ -34,11 +35,11 @@ const Num = ({
             onChange={event => onChange(noneIfNaN((decimal ? parseFloat : parseInt)(event.target.value)))}
             placeholder={placeholder}
             ref={inputRef}
-            step={decimal ? 0.01 : 1}
+            step={step || (decimal ? 0.01 : 1)}
             type="number"
             value={value}
         />
-    </section>
+    </div>
 ;
 
 export default connectField(Num);

@@ -11,15 +11,15 @@ const Error = ({
     ...props
 }) =>
     !errorMessage ? nothing : (
-        <section className={classnames('ui', className, 'error message')} {...filterDOMProps(props)}>
+        <div className={classnames('ui', className, 'error message')} {...filterDOMProps(props)}>
             {children ? (
                 children
             ) : (
-                <section className="header">
+                <div className="header">
                     {errorMessage}
-                </section>
+                </div>
             )}
-        </section>
+        </div>
     )
 ;
 

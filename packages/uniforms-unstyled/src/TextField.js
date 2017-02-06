@@ -14,7 +14,7 @@ const Text = ({
     value,
     ...props
 }) =>
-    <section {...filterDOMProps(props)}>
+    <div {...filterDOMProps(props)}>
         {label && (
             <label htmlFor={id}>
                 {label}
@@ -31,7 +31,7 @@ const Text = ({
             type={type}
             value={value}
         />
-    </section>
+    </div>
 ;
 
 Text.defaultProps = {

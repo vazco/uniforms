@@ -83,7 +83,10 @@ describe('QuickForm', () => {
         });
 
         it('works with elements', () => {
-            class Code extends Component {render = () => <code />}
+            class Code extends Component {
+                render = () => <code />
+            }
+
             const wrapper = mount(
                 <TestQuickForm schema={schema} autoField={Code} />
             );

@@ -19,7 +19,7 @@ const LongText = ({
     value,
     ...props
 }) =>
-    <section className={classnames(className, {disabled, error, required}, 'field')} {...filterDOMProps(props)}>
+    <div className={classnames(className, {disabled, error, required}, 'field')} {...filterDOMProps(props)}>
         {label && (
             <label>
                 {label}
@@ -37,11 +37,11 @@ const LongText = ({
         />
 
         {!!(errorMessage && showInlineError) && (
-            <section className="ui red basic pointing label">
+            <div className="ui red basic pointing label">
                 {errorMessage}
-            </section>
+            </div>
         )}
-    </section>
+    </div>
 ;
 
 export default connectField(LongText);

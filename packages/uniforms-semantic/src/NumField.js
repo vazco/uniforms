@@ -24,17 +24,18 @@ const Num = ({
     placeholder,
     required,
     showInlineError,
+    step,
     value,
     ...props
 }) =>
-    <section className={classnames(className, {disabled, error, required}, 'field')} {...filterDOMProps(props)}>
+    <div className={classnames(className, {disabled, error, required}, 'field')} {...filterDOMProps(props)}>
         {label && (
             <label htmlFor={id}>
                 {label}
             </label>
         )}
 
-        <section className={classnames('ui', {left: iconLeft, icon: icon || iconLeft}, 'input')}>
+        <div className={classnames('ui', {left: iconLeft, icon: icon || iconLeft}, 'input')}>
             <input
                 disabled={disabled}
                 id={id}
@@ -44,7 +45,7 @@ const Num = ({
                 onChange={event => onChange(noneIfNaN((decimal ? parseFloat : parseInt)(event.target.value)))}
                 placeholder={placeholder}
                 ref={inputRef}
-                step={decimal ? 0.01 : 1}
+                step={step || (decimal ? 0.01 : 1)}
                 type="number"
                 value={value}
             />
@@ -52,14 +53,14 @@ const Num = ({
             {(icon || iconLeft) && (
                 <i className={`${icon || iconLeft} icon`} {...iconProps} />
             )}
-        </section>
+        </div>
 
         {!!(errorMessage && showInlineError) && (
-            <section className="ui red basic pointing label">
+            <div className="ui red basic pointing label">
                 {errorMessage}
-            </section>
+            </div>
         )}
-    </section>
+    </div>
 ;
 
 export default connectField(Num);

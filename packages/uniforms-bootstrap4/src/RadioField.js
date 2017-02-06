@@ -7,10 +7,18 @@ import wrapField from './wrapField';
 const Radio = props =>
     wrapField(props, (
         props.allowedValues.map(item =>
-            <section key={item} className={classnames(props.inputClassName, `radio${props.inline ? '-inline' : ''}`)}>
-                <label htmlFor={`${props.id}-${item}`}>
+            <div
+                key={item}
+                className={classnames(
+                    props.inputClassName,
+                    'form-check',
+                    `radio${props.inline ? '-inline' : ''}` // bootstrap4 < alpha.6
+                )}
+            >
+                <label htmlFor={`${props.id}-${item}`} className="form-check-label">
                     <input
                         checked={item === props.value}
+                        className="form-check-input"
                         disabled={props.disabled}
                         id={`${props.id}-${item}`}
                         name={props.name}
@@ -19,7 +27,7 @@ const Radio = props =>
                     />
                     {props.transform ? props.transform(item) : item}
                 </label>
-            </section>
+            </div>
         )
     ))
 ;
