@@ -1,5 +1,9 @@
 // DOM for React
 import {jsdom} from 'jsdom';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+injectTapEventPlugin();
+
 
 global.document = jsdom('');
 global.window = document.defaultView;
