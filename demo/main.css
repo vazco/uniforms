@@ -30,7 +30,12 @@ img {
 }
 
 .panelGroupNavbar {
-    padding: 0.75rem;
+    padding: 0.75em;
+}
+
+.panelGroupNavbar,
+.panelGroupNavbar * {
+    font-size: initial !important;
 }
 
 .panelGroup section {
@@ -63,12 +68,8 @@ img {
     flex-direction: column;
 }
 
+.panelWrapper > div,
 .panelWrapper > section > div {
-    padding: 0.75rem;
-    width: 100%;
-    overflow-y: scroll;
-}
-.panelWrapper > div {
     padding: 0.75rem;
     width: 100%;
     overflow-y: scroll;
