@@ -1,5 +1,6 @@
 ## Next:
 - **Added:** AntD theme. [\#134](https://github.com/vazco/uniforms/issues/134)
+- **Added:** Material UI theme. [\#142](https://github.com/vazco/uniforms/issues/142)
 - **Added:** Support for Bootstrap4@alpha.6. [\#170](https://github.com/vazco/uniforms/issues/170)
 - **Added:** Support for `initialValue` in `GraphQLBridge`. [\#183](https://github.com/vazco/uniforms/issues/183)
 - **Changed:** All `<section>`s tags are now `<div>`s. [\#172](https://github.com/vazco/uniforms/issues/172)
