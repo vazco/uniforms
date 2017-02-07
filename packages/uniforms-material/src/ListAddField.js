@@ -1,5 +1,5 @@
 import Add            from 'material-ui/svg-icons/content/add';
-import IconButton     from 'material-ui/IconButton';
+import RaisedButton   from 'material-ui/RaisedButton';
 import React          from 'react';
 import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
@@ -8,17 +8,21 @@ const ListAdd = ({
     disabled,
     parent,
     value,
+    addLabel = 'Add',
+    icon: Icon = Add,
+    iconVisible = false,
     ...props
 }) => {
     const limitNotReached = !disabled && !(parent.maxCount <= value.length);
 
     return (
-        <IconButton
-            {...filterDOMProps(props)}
+        <RaisedButton
+            disabled={!limitNotReached}
+            icon={iconVisible && <Icon /> || null}
+            label={addLabel}
             onTouchTap={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
-        >
-            <Add />
-        </IconButton>
+            {...filterDOMProps(props)}
+        />
     );
 };
 

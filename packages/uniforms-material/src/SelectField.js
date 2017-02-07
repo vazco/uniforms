@@ -1,11 +1,11 @@
 import Checkbox       from 'material-ui/Checkbox';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
 import MenuItem       from 'material-ui/MenuItem';
 import RadioButton    from 'material-ui/RadioButton';
 import React          from 'react';
 import SelectField    from 'material-ui/SelectField';
-import connectField   from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
-import {ListItem}     from 'material-ui/List';
+import Subheader      from 'material-ui/Subheader';
 import {List}         from 'material-ui/List';
 
 const xor = (item, array) => {
@@ -23,6 +23,7 @@ const renderCheckboxes = ({
     fieldType,
     id,
     label,
+    labelPosition,
     name,
     onChange,
     transform,
@@ -30,35 +31,31 @@ const renderCheckboxes = ({
     ...props
 }) =>
     <List {...filterDOMProps(props)}>
-        {!!label && (
-            <ListItem
-                disabled
-                primaryText={label}
-            />
-        )}
+        {!!label && <Subheader children={label} style={{paddingLeft: 0}} />}
 
-        {allowedValues.map(item =>
-            <ListItem
+        {allowedValues.map(item => fieldType === Array ? (
+            <Checkbox
+                checked={value.includes(item)}
                 disabled={disabled}
                 id={`${id}-${item}`}
                 key={item}
+                label={transform ? transform(item) : item}
+                labelPosition={labelPosition}
                 name={name}
-                primaryText={transform ? transform(item) : item}
-                rightToggle={fieldType === Array ? (
-                    <Checkbox
-                        labelPosition="left"
-                        checked={value.includes(item)}
-                        onCheck={() => onChange(xor(item, value))}
-                    />
-                ) : (
-                    <RadioButton
-                        labelPosition="left"
-                        checked={value === item}
-                        onCheck={() => onChange(item)}
-                    />
-                )}
+                onCheck={() => onChange(xor(item, value))}
             />
-        )}
+        ) : (
+            <RadioButton
+                checked={value === item}
+                disabled={disabled}
+                id={`${id}-${item}`}
+                key={item}
+                label={transform ? transform(item) : item}
+                labelPosition={labelPosition}
+                name={name}
+                onCheck={() => onChange(item)}
+            />
+        ))}
     </List>
 ;
 
@@ -66,43 +63,38 @@ const renderSelect = ({
     allowedValues,
     disabled,
     errorMessage,
+    fullWidth = true,
     id,
     inputRef,
     label,
     name,
     onChange,
     placeholder,
-    style,
     transform,
     value,
     ...props
 }) =>
-    <ListItem
-        disabled
-        primaryText={(
-            <SelectField
-                disabled={disabled}
-                errorText={errorMessage}
-                floatingLabelText={label}
-                hintText={placeholder}
-                id={id}
-                name={name}
-                onChange={(event, index, value) => onChange(value)}
-                ref={inputRef}
-                style={{marginTop: -14, ...style}}
+    <SelectField
+        disabled={disabled}
+        errorText={errorMessage}
+        floatingLabelText={label}
+        fullWidth={fullWidth}
+        hintText={placeholder}
+        id={id}
+        name={name}
+        onChange={(event, index, value) => onChange(value)}
+        ref={inputRef}
+        value={value}
+        {...filterDOMProps(props)}
+    >
+        {allowedValues.map(value =>
+            <MenuItem
+                key={value}
                 value={value}
-                {...filterDOMProps(props)}
-            >
-                {allowedValues.map(value =>
-                    <MenuItem
-                        key={value}
-                        value={value}
-                        primaryText={transform ? transform(value) : value}
-                    />
-                )}
-            </SelectField>
+                primaryText={transform ? transform(value) : value}
+            />
         )}
-    />
+    </SelectField>
 ;
 
 const Select = props =>

@@ -39,4 +39,8 @@ const Num = ({
     />
 ;
 
+Num.defaultProps = {
+    fullWidth: true
+};
+
 export default connectField(Num);

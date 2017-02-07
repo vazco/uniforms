@@ -7,10 +7,12 @@ import {spy}      from 'sinon';
 import {stub}     from 'sinon';
 
 import MaterialCheckbox    from 'material-ui/Checkbox';
+import MaterialDatePicker  from 'material-ui/DatePicker';
 import MaterialRadio       from 'material-ui/RadioButton';
+import MaterialRadioGroup  from 'material-ui/RadioButton/RadioButtonGroup';
 import MaterialSelectField from 'material-ui/SelectField';
 import MaterialTextField   from 'material-ui/TextField';
-import MaterialToggle      from 'material-ui/Toggle';
+import MaterialTimePicker  from 'material-ui/TimePicker';
 import getMuiTheme         from 'material-ui/styles/getMuiTheme';
 import lightBaseTheme      from 'material-ui/styles/baseThemes/lightBaseTheme';
 
@@ -217,7 +219,7 @@ describe('Everything', () => {
         expect(find().find(MaterialRadio).at(0).prop('checked')).to.be.true;
         expect(find().find(MaterialRadio).at(1).prop('checked')).to.be.false;
         expect(find().find(MaterialRadio).at(2).prop('checked')).to.be.false;
-        expect(find().find(MaterialRadio).at(1).props().onCheck()).to.equal(undefined);
+        expect(find().find(MaterialRadioGroup).props().onChange({}, '2')).to.equal(undefined);
         expect(find().find(MaterialRadio).at(0).prop('checked')).to.be.false;
         expect(find().find(MaterialRadio).at(1).prop('checked')).to.be.true;
         expect(find().find(MaterialRadio).at(2).prop('checked')).to.be.false;
@@ -234,7 +236,7 @@ describe('Everything', () => {
         expect(find().find(MaterialRadio).at(0).prop('checked')).to.be.false;
         expect(find().find(MaterialRadio).at(1).prop('checked')).to.be.true;
         expect(find().find(MaterialRadio).at(2).prop('checked')).to.be.false;
-        expect(find().props().onChange('1')).to.equal(undefined);
+        expect(find().find(MaterialRadioGroup).props().onChange({}, '1')).to.equal(undefined);
         expect(find().find(MaterialRadio).at(0).prop('checked')).to.be.true;
         expect(find().find(MaterialRadio).at(1).prop('checked')).to.be.false;
         expect(find().find(MaterialRadio).at(2).prop('checked')).to.be.false;
@@ -273,13 +275,13 @@ describe('Everything', () => {
 
     it('works (DateField)', async () => {
         const find = () => wrapper.find(DateField).filterWhere(x => x.props().name === 'x05');
-        const input = find().find('TextField').filterWhere(x => x.props().name === 'x05').last();
+        const input = find().find(MaterialTextField).filterWhere(x => x.props().name === 'x05').last();
 
         expect(find().props()).to.have.property('value').that.is.deep.equal(dateA);
-        expect(find().find('TextField').filterWhere(x => x.props().name === 'x05').last().simulate('focus')).to.be.ok;
+        expect(find().find(MaterialTextField).first().simulate('focus')).to.be.ok;
         expect(input.props().onFocus()).to.equal(undefined);
-        expect(find().find('DatePicker').props().onChange({}, dateB)).to.equal(undefined);
-        expect(find().find('TimePicker').props().onChange({}, dateB)).to.equal(undefined);
+        expect(find().find(MaterialDatePicker).props().onChange({}, dateB)).to.equal(undefined);
+        expect(find().find(MaterialTimePicker).props().onChange({}, dateB)).to.equal(undefined);
         expect(find().props()).to.have.property('value').that.is.deep.equal(dateB);
 
         await new Promise(resolve => setTimeout(resolve, 5));
@@ -289,11 +291,11 @@ describe('Everything', () => {
     });
 
     it('works (BoolField)', async () => {
-        const find = () => wrapper.find(MaterialToggle).filterWhere(x => x.props().name === 'x06');
+        const find = () => wrapper.find(MaterialCheckbox).filterWhere(x => x.props().name === 'x06');
 
-        expect(find().props()).to.have.property('toggled', false);
-        expect(find().props().onToggle({}, true)).to.equal(undefined);
-        expect(find().props()).to.have.property('toggled', true);
+        expect(find().props()).to.have.property('checked', false);
+        expect(find().props().onCheck({}, true)).to.equal(undefined);
+        expect(find().props()).to.have.property('checked', true);
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -385,7 +387,7 @@ describe('Everything', () => {
     });
 
     it('works (ListDelField)', async () => {
-        expect(wrapper.find(ListDelField).at(0).simulate('touchTap')).to.be.ok;
+        expect(wrapper.find(ListDelField).at(0).children().simulate('touchTap')).to.be.ok;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 

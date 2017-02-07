@@ -1,4 +1,5 @@
 import React          from 'react';
+import Subheader      from 'material-ui/Subheader';
 import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 import injectName     from 'uniforms/injectName';
@@ -15,11 +16,7 @@ const Nest = ({
     ...props
 }) =>
     <div style={{display: 'flex', flexDirection: 'column', ...style}} {...filterDOMProps(props)}>
-        {label && (
-            <label>
-                {label}
-            </label>
-        )}
+        {!!label && <Subheader children={label} style={{paddingLeft: 0}} />}
 
         {children ? (
             injectName(name, children)

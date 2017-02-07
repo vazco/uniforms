@@ -1,46 +1,44 @@
-import RadioButton    from 'material-ui/RadioButton';
-import React          from 'react';
 import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
-import {ListItem}     from 'material-ui/List';
-import {List}         from 'material-ui/List';
+import React          from 'react';
+import Subheader      from 'material-ui/Subheader';
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
 const Radio = ({
     allowedValues,
     disabled,
     id,
     label,
+    labelPosition,
     name,
     onChange,
     transform,
     value,
     ...props
 }) =>
-    <List {...filterDOMProps(props)}>
-        {!!label && (
-            <ListItem
-                disabled
-                primaryText={label}
-            />
-        )}
+    <div>
+        {!!label && <Subheader children={label} style={{paddingLeft: 0}} />}
 
-        {allowedValues.map(item =>
-            <ListItem
-                disabled={disabled}
-                id={`${id}-${item}`}
-                key={item}
-                name={name}
-                primaryText={transform ? transform(item) : item}
-                rightToggle={(
-                    <RadioButton
-                        labelPosition="left"
-                        checked={value === item}
-                        onCheck={() => onChange(item)}
-                    />
-                )}
-            />
-        )}
-    </List>
+        <RadioButtonGroup
+            disabled={disabled}
+            id={id}
+            labelPosition={labelPosition}
+            name={name}
+            valueSelected={value}
+            onChange={(event, value) => onChange(value)}
+            {...filterDOMProps(props)}
+        >
+            {allowedValues.map(item =>
+                <RadioButton
+                    disabled={disabled}
+                    key={item}
+                    label={transform ? transform(item) : item}
+                    labelPosition={labelPosition}
+                    value={item}
+                />
+            )}
+        </RadioButtonGroup>
+    </div>
 ;
 
 export default connectField(Radio);

@@ -4,13 +4,16 @@ import TextField    from './TextField';
 import TimePicker   from 'material-ui/TimePicker';
 import connectField from 'uniforms/connectField';
 import {Component}  from 'react';
-import {ListItem}   from 'material-ui/List';
 
 const noop = () => {};
 const dateFormat = date => date && date.toLocaleString();
 
 class Date_ extends Component {
     static displayName = 'Date';
+
+    static defaultProps = {
+        fullWidth: true
+    };
 
     constructor () {
         super(...arguments);
@@ -39,7 +42,7 @@ class Date_ extends Component {
     }
 
     onFocus () {
-        this.refs.datepicker.openDialog();
+        setTimeout(() => this.refs.datepicker.openDialog(), 100);
     }
 
     render () {
@@ -48,7 +51,6 @@ class Date_ extends Component {
                 id,
                 max,
                 min,
-                style,
                 timeFormat,
                 value,
                 ...props
@@ -56,40 +58,34 @@ class Date_ extends Component {
         } = this;
 
         return (
-            <ListItem
-                disabled
-                primaryText={(
-                    <div>
-                        <TextField
-                            id={id}
-                            onFocus={this.onFocus}
-                            style={{marginTop: -14, ...style}}
-                            value={dateFormat(value)}
-                            {...props}
-                            onChange={noop}
-                        />
+            <div>
+                <TextField
+                    id={id}
+                    onFocus={this.onFocus}
+                    value={dateFormat(value)}
+                    {...props}
+                    onChange={noop}
+                />
 
-                        <DatePicker
-                            id={`${id}-date`}
-                            maxDate={max}
-                            minDate={min}
-                            onChange={this.onChangeDate}
-                            ref="datepicker"
-                            textFieldStyle={{display: 'none'}}
-                            value={value}
-                        />
+                <DatePicker
+                    id={`${id}-date`}
+                    maxDate={max}
+                    minDate={min}
+                    onChange={this.onChangeDate}
+                    ref="datepicker"
+                    textFieldStyle={{display: 'none'}}
+                    value={value}
+                />
 
-                        <TimePicker
-                            format={timeFormat}
-                            id={`${id}-time`}
-                            onChange={this.onChangeTime}
-                            ref="timepicker"
-                            textFieldStyle={{display: 'none'}}
-                            value={value}
-                        />
-                    </div>
-                )}
-            />
+                <TimePicker
+                    format={timeFormat}
+                    id={`${id}-time`}
+                    onChange={this.onChangeTime}
+                    ref="timepicker"
+                    textFieldStyle={{display: 'none'}}
+                    value={value}
+                />
+            </div>
         );
     }
 }

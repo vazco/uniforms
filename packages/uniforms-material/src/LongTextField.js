@@ -3,7 +3,7 @@ import TextField      from 'material-ui/TextField';
 import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
-const Text = ({
+const LongText = ({
     disabled,
     id,
     errorMessage,
@@ -30,4 +30,8 @@ const Text = ({
     />
 ;
 
-export default connectField(Text);
+LongText.defaultProps = {
+    fullWidth: true
+};
+
+export default connectField(LongText);

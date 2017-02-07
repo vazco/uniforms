@@ -33,6 +33,7 @@ const Text = ({
 ;
 
 Text.defaultProps = {
+    fullWidth: true,
     type: 'text'
 };
 
