@@ -1,6 +1,6 @@
 {
   "name": "uniforms",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "main": "index.js",
   "jsnext:main": "src/index.js",
   "description": "Core package of uniforms.",
@@ -64,7 +64,7 @@
     "sinon": "2.0.0-pre.5"
   },
   "peerDependencies": {
-    "graphql": "^0.8.2",
+    "graphql": "^0.8.2 || ^0.9.1",
     "react": "^15.0.0 || ^0.14.0",
     "react-dom": "^15.0.0 || ^0.14.0",
     "simpl-schema": "^0.1.0 || ^0.0.4"

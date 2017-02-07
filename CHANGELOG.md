@@ -1,4 +1,4 @@
-## Next:
+## [v1.10.0](https://github.com/vazco/uniforms/tree/v1.10.0) (2017-02-07)
 - **Added:** AntD theme. [\#134](https://github.com/vazco/uniforms/issues/134)
 - **Added:** Material UI theme. [\#142](https://github.com/vazco/uniforms/issues/142)
 - **Added:** Support for Bootstrap4@alpha.6. [\#170](https://github.com/vazco/uniforms/issues/170)
