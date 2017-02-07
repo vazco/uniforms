@@ -9,9 +9,10 @@ import ApplicationField from './ApplicationField';
 const ApplicationProps = ({onChange, schema, theme, value}) => {
     const link = styles[theme];
 
+    const isAntd      = theme === 'antd';
     const isBootstrap = theme === 'bootstrap3' || theme === 'bootstrap4';
+    const isMaterial  = theme === 'material';
     const isSemantic  = theme === 'semantic';
-    const isAntd = theme === 'antd';
 
     const AutoForm      = themes[theme].AutoForm;
     const BoolField     = themes[theme].BoolField;
@@ -25,7 +26,7 @@ const ApplicationProps = ({onChange, schema, theme, value}) => {
 
             <style>{`
                 textarea {
-                    font-family: monospace;
+                    font-family: monospace !important;
                     min-height: 20em !important;
                 }
             `}</style>
@@ -36,8 +37,8 @@ const ApplicationProps = ({onChange, schema, theme, value}) => {
                 <BoolField     name="disabled" />
                 <BoolField     name="label" />
                 <BoolField     name="placeholder" />
-                <BoolField     name="showInlineError" disabled={!(isBootstrap || isSemantic || isAntd)} />
-                <LongTextField name="schema" />
+                <BoolField     name="showInlineError" disabled={!(isAntd || isBootstrap || isMaterial || isSemantic)} />
+                <LongTextField name="schema" {...isMaterial && {fullWidth: true, rowsMax: 20}} />
 
                 <ErrorsField />
             </AutoForm>

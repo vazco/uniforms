@@ -38,6 +38,5 @@
     ],
     "sourceMap": false,
     "instrument": false
-  },
-  "dependencies": {}
+  }
 }
