@@ -7,6 +7,7 @@ import {spy}      from 'sinon';
 import {stub}     from 'sinon';
 
 import MaterialCheckbox    from 'material-ui/Checkbox';
+import MaterialToggle      from 'material-ui/Toggle';
 import MaterialDatePicker  from 'material-ui/DatePicker';
 import MaterialRadio       from 'material-ui/RadioButton';
 import MaterialRadioGroup  from 'material-ui/RadioButton/RadioButtonGroup';
@@ -57,7 +58,7 @@ describe('Everything', () => {
     const transform     = x => x;
     const checkboxes    = true;
     const allowedValues = ['1', '2', '3'];
-    const base = {label, required};
+    const base          = {label, required};
 
     const schema = {
         'x00':     {...base, __type__: Number},
@@ -92,7 +93,8 @@ describe('Everything', () => {
         'x31':     {...base, __type__: String, allowedValues, checkboxes, component: SelectField},
         'x32':     {...base, __type__: String, component: HiddenField},
         'x33':     {...base, __type__: String, component: HiddenField, value: undefined},
-        'x34':     {...base, __type__: Number, step: 4}
+        'x34':     {...base, __type__: Number, step: 4},
+        'x35':     {...base, __type__: Boolean, appearance: 'toggle'}
     };
 
     const bridgeName = name => name.replace(/\.\d+/g, '.$');
@@ -446,6 +448,19 @@ describe('Everything', () => {
 
         expect(onChange.lastCall.calledWith('x32', 'x32')).to.be.ok;
         expect(onSubmit.lastCall.calledWithMatch({x32: 'x32'})).to.be.ok;
+    });
+
+    it('works (BoolField, isToggle)', async () => {
+        const find = () => wrapper.find(MaterialToggle).filterWhere(x => x.props().name === 'x35');
+
+        expect(find().props()).to.have.property('toggled', false);
+        expect(find().props().onToggle({}, true)).to.equal(undefined);
+        expect(find().props()).to.have.property('toggled', true);
+
+        await new Promise(resolve => setTimeout(resolve, 5));
+
+        expect(onChange.lastCall.calledWith('x35', true)).to.be.ok;
+        expect(onSubmit.lastCall.calledWithMatch({x35: true})).to.be.ok;
     });
 
     it('works (ListField, custom children)', async function _ () {
