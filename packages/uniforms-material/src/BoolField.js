@@ -5,7 +5,7 @@ import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
 const Bool = ({
-    appearance = 'checkbox',
+    appearance,
     disabled,
     id,
     inputRef,
@@ -17,13 +17,14 @@ const Bool = ({
 }) =>
     appearance === 'toggle' ? (
         <Toggle
-            toggled={!!value}
             disabled={disabled}
             id={id}
             label={label}
             name={name}
             onToggle={(event, value) => disabled || onChange(value)}
-            ref={inputRef}{...filterDOMProps(props)}
+            ref={inputRef}
+            toggled={!!value}
+            {...filterDOMProps(props)}
         />
     ) : (
         <Checkbox
@@ -33,8 +34,14 @@ const Bool = ({
             label={label}
             name={name}
             onCheck={(event, value) => disabled || onChange(value)}
-            ref={inputRef}{...filterDOMProps(props)}
+            ref={inputRef}
+            {...filterDOMProps(props)}
         />
-    );
+    )
+;
+
+Bool.defaultProps = {
+    appearance: 'checkbox'
+};
 
 export default connectField(Bool);

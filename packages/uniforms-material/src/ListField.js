@@ -9,13 +9,6 @@ import {List as ListMaterial} from 'material-ui/List';
 import ListAddField  from './ListAddField';
 import ListItemField from './ListItemField';
 
-const styles = {
-    actions: {
-        paddingTop: 8,
-        paddingBottom: 8
-    }
-};
-
 const List = ({
     actionsStyle,
     children,
@@ -44,7 +37,7 @@ const List = ({
                 <ListItemField key={index} label={null} name={joinName(name, index)} {...itemProps} />
             )
         )}
-        <div style={{...styles.actions, ...actionsStyle}}>
+        <div style={{paddingTop: 8, paddingBottom: 8, ...actionsStyle}}>
             <ListAddField name={`${name}.$`} initialCount={initialCount} />
         </div>
     </ListMaterial>
