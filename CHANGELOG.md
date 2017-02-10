@@ -1,3 +1,6 @@
+## Next:
+- **Added:** Support for `appearance` prop in `BoolField` in `uniforms-material`. [\#189](https://github.com/vazco/uniforms/issues/189)
+
 ## [v1.10.0](https://github.com/vazco/uniforms/tree/v1.10.0) (2017-02-07)
 - **Added:** AntD theme. [\#134](https://github.com/vazco/uniforms/issues/134)
 - **Added:** Material UI theme. [\#142](https://github.com/vazco/uniforms/issues/142)
