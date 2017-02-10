@@ -6,11 +6,10 @@ import Remove         from 'material-ui/svg-icons/content/remove';
 
 const ListDel = ({
     disabled,
+    icon: Icon,
+    iconVisible,
     name,
     parent,
-    deletationLabel = 'Remove',
-    icon: Icon = Remove,
-    iconVisible = false,
     ...props
 }) => {
     const fieldIndex      = +name.slice(1 + name.lastIndexOf('.'));
@@ -19,14 +18,19 @@ const ListDel = ({
     return (
         <RaisedButton
             disabled={!limitNotReached}
-            icon={iconVisible && <Icon /> || null}
-            label={deletationLabel}
+            icon={iconVisible ? <Icon /> : undefined}
             onTouchTap={() => limitNotReached && parent.onChange(
                 [].concat(parent.value.slice(0,  fieldIndex)).concat(parent.value.slice(1 + fieldIndex))
             )}
             {...filterDOMProps(props)}
         />
     );
+};
+
+ListDel.defaultProps = {
+    icon: Remove,
+    iconVisible: false,
+    label: 'Remove'
 };
 
 export default connectField(ListDel, {includeParent: true, initialValue: false});

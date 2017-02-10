@@ -6,24 +6,27 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 
 const ListAdd = ({
     disabled,
+    icon: Icon,
+    iconVisible,
     parent,
     value,
-    addLabel = 'Add',
-    icon: Icon = Add,
-    iconVisible = false,
     ...props
 }) => {
-    const limitNotReached = !disabled && !(parent.maxCount <= value.length);
 
     return (
         <RaisedButton
             disabled={!limitNotReached}
-            icon={iconVisible && <Icon /> || null}
-            label={addLabel}
+            icon={iconVisible ? <Icon /> : undefined}
             onTouchTap={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
             {...filterDOMProps(props)}
         />
     );
+};
+
+ListAdd.defaultProps = {
+    icon: Add,
+    iconVisible: false,
+    label: 'Add'
 };
 
 export default connectField(ListAdd, {includeParent: true, initialValue: false});
