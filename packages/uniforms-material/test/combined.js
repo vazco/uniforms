@@ -7,13 +7,13 @@ import {spy}      from 'sinon';
 import {stub}     from 'sinon';
 
 import MaterialCheckbox    from 'material-ui/Checkbox';
-import MaterialToggle      from 'material-ui/Toggle';
 import MaterialDatePicker  from 'material-ui/DatePicker';
 import MaterialRadio       from 'material-ui/RadioButton';
 import MaterialRadioGroup  from 'material-ui/RadioButton/RadioButtonGroup';
 import MaterialSelectField from 'material-ui/SelectField';
 import MaterialTextField   from 'material-ui/TextField';
 import MaterialTimePicker  from 'material-ui/TimePicker';
+import MaterialToggle      from 'material-ui/Toggle';
 import getMuiTheme         from 'material-ui/styles/getMuiTheme';
 import lightBaseTheme      from 'material-ui/styles/baseThemes/lightBaseTheme';
 
