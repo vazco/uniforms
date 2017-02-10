@@ -138,6 +138,13 @@ import BaseField from 'uniforms/BaseField';
 import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme package.
 
 <BoolField
+    //Field appearance.  Set to "toggle" to appear as a Material Toggle or to
+    // "checkbox" (or leave it undefined) to use a Checkbox appearance
+    // Available in:
+    //   material
+    appearance="toggle"   //Renders a material-ui Toggle
+    appearance="checkbox" //Renders a material-ui Checkbox
+    
     // Field feedback state.
     //   *Some description would be great, huh?*
     // Available in:
