@@ -8,7 +8,13 @@ node_js:
 cache:
   directories:
     - node_modules
-    - packages/*/node_modules
+    - packages/uniforms/node_modules
+    - packages/uniforms-antd/node_modules
+    - packages/uniforms-bootstrap3/node_modules
+    - packages/uniforms-bootstrap4/node_modules
+    - packages/uniforms-material/node_modules
+    - packages/uniforms-semantic/node_modules
+    - packages/uniforms-unstyled/node_modules
 
 after_script:
   - npm run cover:main
