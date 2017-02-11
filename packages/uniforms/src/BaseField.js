@@ -1,4 +1,5 @@
 import get         from 'lodash.get';
+import invariant   from 'fbjs/lib/invariant';
 import isEqual     from 'lodash.isequal';
 import {Component} from 'react';
 import {PropTypes} from 'react';
@@ -12,7 +13,7 @@ export default class BaseField extends Component {
     static propTypes = {
         id: PropTypes.string,
 
-        name:     PropTypes.string,
+        name:     PropTypes.string.isRequired,
         disabled: PropTypes.bool,
 
         label:       PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.node]),
@@ -24,6 +25,8 @@ export default class BaseField extends Component {
 
     constructor () {
         super(...arguments);
+
+        invariant(this.context.uniforms, '<%s /> must be rendered within a form.', this.constructor.displayName);
 
         this.options = {};
 

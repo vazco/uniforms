@@ -15,6 +15,8 @@ describe('BaseField', () => {
     const PropsComponent = () => nothing;
 
     class TestField extends BaseField {
+        static displayName = 'TestField';
+
         render () {
             return (
                 <div>
@@ -379,6 +381,12 @@ describe('BaseField', () => {
             );
 
             expect(wrapper.find(PropsComponent).props()).to.have.property('placeholder', 'A');
+        });
+    });
+
+    describe('when rendered without form', () => {
+        it('should throw an error', () => {
+            expect(() => mount(<TestField name="a" />)).to.throw('<TestField /> must be rendered within a form.');
         });
     });
 

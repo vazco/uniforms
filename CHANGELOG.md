@@ -1,4 +1,5 @@
 ## Next:
+- **Added:** Field rendered outside of a form throws an error.
 - **Added:** Support for `appearance` prop in `BoolField` in `uniforms-material`. [\#189](https://github.com/vazco/uniforms/issues/189)
 - **Changed:** Use `label` instead of specified props in `ListAddField` in `uniforms-material`.
 - **Changed:** Use `label` instead of specified props in `ListDelField` in `uniforms-material`.
