@@ -1,11 +1,15 @@
+sudo: false
+
 language: node_js
 node_js:
   - 6
   - 7
 
+cache:
+  directories:
+    - node_modules
+    - packages/*/node_modules
+
 after_script:
   - npm run cover:main
   - npm run cover:report
-
-git:
-  depth: 1
