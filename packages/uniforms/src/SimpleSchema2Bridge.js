@@ -101,7 +101,9 @@ export default class SimpleSchema2Bridge extends Bridge {
             merged.autoValue.name === 'defaultAutoValueFunction' ||
             merged.autoValue.toString().indexOf('$setOnInsert:') !== -1 // FIXME: Hack.
         )) {
-            merged.defaultValue = merged.autoValue.call({operator: null});
+            try {
+                merged.defaultValue = merged.autoValue.call({operator: null});
+            } catch (_) { /* ignore it */ }
         }
 
         return merged;
@@ -154,7 +156,7 @@ export default class SimpleSchema2Bridge extends Bridge {
                 if (itemProps.transform && !props.transform) {
                     field.transform = itemProps.transform;
                 }
-            } catch (e) { /* do nothing */ }
+            } catch (_) { /* ignore it */ }
         } else if (type === Number) {
             field = {...field, decimal: true};
         }
