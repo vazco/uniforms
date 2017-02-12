@@ -71,7 +71,7 @@ class Date_ extends Component {
                     name={name}
                     onFocus={this.onFocus}
                     ref={inputRef}
-                    value={value && value.toLocaleString()}
+                    value={value ? value.toLocaleString() : ''}
                     {...filterDOMProps(props)}
                 />
 

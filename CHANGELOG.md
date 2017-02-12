@@ -4,6 +4,7 @@
 - **Changed:** Use `label` instead of specified props in `ListAddField` in `uniforms-material`.
 - **Changed:** Use `label` instead of specified props in `ListDelField` in `uniforms-material`.
 - **Fixed:** Handling of `defaultValue` in `SimpleSchema2Bridge`. [\#182](https://github.com/vazco/uniforms/issues/182)
+- **Fixed:** Removed `DateField` warning in `uniforms-material`.
 - **Fixed:** `ListAddField` in `uniforms-material`.
 
 ## [v1.10.0](https://github.com/vazco/uniforms/tree/v1.10.0) (2017-02-07)
