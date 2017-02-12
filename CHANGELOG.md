@@ -6,6 +6,7 @@
 - **Fixed:** Handling of `defaultValue` in `SimpleSchema2Bridge`. [\#182](https://github.com/vazco/uniforms/issues/182)
 - **Fixed:** Removed `DateField` warning in `uniforms-material`.
 - **Fixed:** `ListAddField` in `uniforms-material`.
+- **Fixed:** `ListDelField` in `uniforms-material`.
 
 ## [v1.10.0](https://github.com/vazco/uniforms/tree/v1.10.0) (2017-02-07)
 - **Added:** AntD theme. [\#134](https://github.com/vazco/uniforms/issues/134)
