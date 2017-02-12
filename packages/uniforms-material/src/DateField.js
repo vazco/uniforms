@@ -1,12 +1,10 @@
-import DatePicker   from 'material-ui/DatePicker';
-import React        from 'react';
-import TextField    from './TextField';
-import TimePicker   from 'material-ui/TimePicker';
-import connectField from 'uniforms/connectField';
-import {Component}  from 'react';
-
-const noop = () => {};
-const dateFormat = date => date && date.toLocaleString();
+import DatePicker     from 'material-ui/DatePicker';
+import React          from 'react';
+import TextField      from 'material-ui/TextField';
+import TimePicker     from 'material-ui/TimePicker';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
+import {Component}    from 'react';
 
 class Date_ extends Component {
     static displayName = 'Date';
@@ -47,24 +45,34 @@ class Date_ extends Component {
 
     render () {
         const {
-            props: {
-                id,
-                max,
-                min,
-                timeFormat,
-                value,
-                ...props
-            }
-        } = this;
+            disabled,
+            errorMessage,
+            id,
+            inputRef,
+            label,
+            max,
+            min,
+            name,
+            placeholder,
+            showInlineError,
+            timeFormat,
+            value,
+            ...props
+        } = this.props;
 
         return (
             <div>
                 <TextField
+                    disabled={disabled}
+                    errorText={showInlineError ? errorMessage : undefined}
+                    floatingLabelText={label}
+                    hintText={placeholder}
                     id={id}
+                    name={name}
                     onFocus={this.onFocus}
-                    value={dateFormat(value)}
-                    {...props}
-                    onChange={noop}
+                    ref={inputRef}
+                    value={value && value.toLocaleString()}
+                    {...filterDOMProps(props)}
                 />
 
                 <DatePicker
