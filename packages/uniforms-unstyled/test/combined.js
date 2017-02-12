@@ -140,9 +140,9 @@ describe('Everything', () => {
     });
 
     it('works (NumField)', async () => {
-        expect(wrapper.find('#x00').props()).to.have.property('value', 0);
-        expect(wrapper.find('#x00').simulate('change', {target: {value: 0}})).to.be.ok;
-        expect(wrapper.find('#x00').props()).to.have.property('value', 0);
+        expect(wrapper.find('#x00').props()).to.have.property('value', '0');
+        expect(wrapper.find('#x00').simulate('change', {target: {value: '0'}})).to.be.ok;
+        expect(wrapper.find('#x00').props()).to.have.property('value', '0');
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -151,7 +151,7 @@ describe('Everything', () => {
     });
 
     it('works (NumField, invalid)', async () => {
-        expect(wrapper.find('#x00').props()).to.have.property('value', 0);
+        expect(wrapper.find('#x00').props()).to.have.property('value', '0');
         expect(wrapper.find('#x00').simulate('change', {target: {value: 'invalid'}})).to.be.ok;
         expect(wrapper.find('#x00').props()).to.have.property('value', '');
 
@@ -269,9 +269,9 @@ describe('Everything', () => {
     });
 
     it('works (NestField, NumField)', async () => {
-        expect(wrapper.find('#x08y02').props()).to.have.property('value', 0);
-        expect(wrapper.find('#x08y02').simulate('change', {target: {value: 2}})).to.be.ok;
-        expect(wrapper.find('#x08y02').props()).to.have.property('value', 2);
+        expect(wrapper.find('#x08y02').props()).to.have.property('value', '0');
+        expect(wrapper.find('#x08y02').simulate('change', {target: {value: '2'}})).to.be.ok;
+        expect(wrapper.find('#x08y02').props()).to.have.property('value', '2');
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -280,7 +280,7 @@ describe('Everything', () => {
     });
 
     it('works (NumField, decimal, nullable)', async () => {
-        expect(wrapper.find('#x22').props()).to.have.property('value', 0);
+        expect(wrapper.find('#x22').props()).to.have.property('value', '0');
         expect(wrapper.find('#x22').simulate('change', {target: {value: ''}})).to.be.ok;
         expect(wrapper.find('#x22').props()).to.have.property('value', '');
 
@@ -292,8 +292,8 @@ describe('Everything', () => {
 
     it('works (NumField, decimal)', async () => {
         expect(wrapper.find('#x22').props()).to.have.property('value', '');
-        expect(wrapper.find('#x22').simulate('change', {target: {value: 2}})).to.be.ok;
-        expect(wrapper.find('#x22').props()).to.have.property('value', 2);
+        expect(wrapper.find('#x22').simulate('change', {target: {value: '2'}})).to.be.ok;
+        expect(wrapper.find('#x22').props()).to.have.property('value', '2');
 
         await new Promise(resolve => setTimeout(resolve, 5));
 

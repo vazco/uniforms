@@ -160,9 +160,9 @@ describe('Everything', () => {
     it('works (NumField)', async () => {
         const find = () => wrapper.find(MaterialTextField).filterWhere(x => x.props().name === 'x00');
 
-        expect(find().props()).to.have.property('value', 0);
-        expect(find().props().onChange({}, 0)).to.equal(undefined);
-        expect(find().props()).to.have.property('value', 0);
+        expect(find().props()).to.have.property('value', '0');
+        expect(find().props().onChange({target: {value: '0'}}, 0)).to.equal(undefined);
+        expect(find().props()).to.have.property('value', '0');
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -173,8 +173,8 @@ describe('Everything', () => {
     it('works (NumField, invalid)', async () => {
         const find = () => wrapper.find(MaterialTextField).filterWhere(x => x.props().name === 'x00');
 
-        expect(find().props()).to.have.property('value', 0);
-        expect(find().props().onChange({}, NaN)).to.equal(undefined);
+        expect(find().props()).to.have.property('value', '0');
+        expect(find().props().onChange({target: {value: 'invalid'}}, NaN)).to.equal(undefined);
         expect(find().props()).to.have.property('value', '');
 
         await new Promise(resolve => setTimeout(resolve, 5));
@@ -321,9 +321,9 @@ describe('Everything', () => {
     it('works (NestField, NumField)', async () => {
         const find = () => wrapper.find(MaterialTextField).filterWhere(x => x.props().name === 'x08.y02');
 
-        expect(find().props()).to.have.property('value', 0);
-        expect(find().props().onChange({}, 2)).to.equal(undefined);
-        expect(find().props()).to.have.property('value', 2);
+        expect(find().props()).to.have.property('value', '0');
+        expect(find().props().onChange({target: {value: '2'}}, 2)).to.equal(undefined);
+        expect(find().props()).to.have.property('value', '2');
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -334,8 +334,8 @@ describe('Everything', () => {
     it('works (NumField, decimal, nullable)', async () => {
         const find = () => wrapper.find(MaterialTextField).filterWhere(x => x.props().name === 'x22');
 
-        expect(find().props()).to.have.property('value', 0);
-        expect(find().props().onChange({}, undefined)).to.equal(undefined);
+        expect(find().props()).to.have.property('value', '0');
+        expect(find().props().onChange({target: {value: ''}}, undefined)).to.equal(undefined);
         expect(find().props()).to.have.property('value', '');
 
         await new Promise(resolve => setTimeout(resolve, 5));
@@ -348,7 +348,7 @@ describe('Everything', () => {
         const find = () => wrapper.find(MaterialTextField).filterWhere(x => x.props().name === 'x22');
 
         expect(find().props()).to.have.property('value', '');
-        expect(find().props().onChange({}, NaN)).to.equal(undefined);
+        expect(find().props().onChange({target: {value: 'invalid'}}, NaN)).to.equal(undefined);
         expect(find().props()).to.have.property('value', '');
 
         await new Promise(resolve => setTimeout(resolve, 5));
