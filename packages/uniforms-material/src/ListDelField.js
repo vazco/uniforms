@@ -1,8 +1,8 @@
-import connectField   from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
 import RaisedButton   from 'material-ui/RaisedButton';
 import React          from 'react';
 import Remove         from 'material-ui/svg-icons/content/remove';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 const ListDel = ({
     disabled,
@@ -28,9 +28,9 @@ const ListDel = ({
 };
 
 ListDel.defaultProps = {
+    children: 'Remove',
     icon: Remove,
-    iconVisible: false,
-    label: 'Remove'
+    iconVisible: false
 };
 
 export default connectField(ListDel, {includeParent: true, initialValue: false});

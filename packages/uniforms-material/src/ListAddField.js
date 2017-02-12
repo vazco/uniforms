@@ -25,9 +25,9 @@ const ListAdd = ({
 };
 
 ListAdd.defaultProps = {
+    children: 'Add',
     icon: Add,
-    iconVisible: false,
-    label: 'Add'
+    iconVisible: false
 };
 
 export default connectField(ListAdd, {includeParent: true, initialValue: false});
