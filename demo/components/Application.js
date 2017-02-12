@@ -1,4 +1,5 @@
 import React          from 'react';
+import enUS           from 'antd/lib/locale-provider/en_US';
 import getMuiTheme    from 'material-ui/styles/getMuiTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import {Component}    from 'react';
@@ -24,7 +25,10 @@ class Application extends Component {
     }
 
     getChildContext () {
-        return {muiTheme: getMuiTheme(lightBaseTheme, {userAgent: Meteor.isServer ? false : undefined})};
+        return {
+            antLocale: {...enUS, exist: true},
+            muiTheme: getMuiTheme(lightBaseTheme, {userAgent: Meteor.isServer ? false : undefined})
+        };
     }
 
     onChange (key, value) {
@@ -72,7 +76,8 @@ class Application extends Component {
 }
 
 Application.childContextTypes = {
-    muiTheme: PropTypes.object.isRequired
+    antLocale: PropTypes.object.isRequired,
+    muiTheme:  PropTypes.object.isRequired
 };
 
 export default Application;
