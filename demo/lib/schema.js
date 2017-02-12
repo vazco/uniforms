@@ -75,8 +75,8 @@ const schema = new SimpleSchema2({
 
     theme: {
         type: String,
-        uniforms: {transform: theme => `Theme - ${theme}`},
-        defaultValue:  Object.keys(themes)[2],
+        uniforms: {transform: theme => `uniforms-${theme}`},
+        defaultValue:  Object.keys(themes)[0],
         allowedValues: Object.keys(themes)
     }
 });

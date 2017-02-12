@@ -15,8 +15,10 @@ const styles = {
         'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.min.css'
     ]),
 
+    material: style([]),
+
     semantic: style([
-        'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.css'
+        'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css'
     ]),
 
     unstyled: style([])
