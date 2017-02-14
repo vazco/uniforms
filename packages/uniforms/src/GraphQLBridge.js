@@ -5,7 +5,8 @@ import joinName from './joinName';
 
 let graphql;
 try {
-    graphql = require('graphql');
+    const r = require; // Silence Meteor missing module warning
+    graphql = r('graphql');
 } catch (_) { /* Ignore it. */ }
 
 const extractFromNonNull = x => x && x.type instanceof graphql.GraphQLNonNull ? {...x, type: x.type.ofType} : x;
