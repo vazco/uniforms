@@ -7,7 +7,8 @@ import filterDOMProps from './filterDOMProps';
 
 let SimpleSchema;
 try {
-    SimpleSchema = require('simpl-schema').default;
+    const r = require; // Silence Meteor missing module warning
+    SimpleSchema = r('simpl-schema').default;
     SimpleSchema.extendOptions(['uniforms']);
 
     // There's no possibility to retrieve them at runtime
