@@ -1,3 +1,6 @@
+## Next
+- **Fixed:** Multiple select in antd theme.
+
 ## [v1.11.1](https://github.com/vazco/uniforms/tree/v1.11.1) (2017-02-14)
 - **Fixed:** Removed Meteor missing module warning. [\#197](https://github.com/vazco/uniforms/issues/197)
 

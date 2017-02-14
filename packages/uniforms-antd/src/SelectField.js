@@ -49,7 +49,7 @@ const renderSelect = props =>
         name={props.name}
         onChange={value => props.onChange(value)}
         ref={props.inputRef}
-        value={'' + props.value}
+        value={Array.isArray(props.value) ? props.value : '' + props.value}
     >
         {props.allowedValues.map(value =>
             <Select.Option key={value} value={value}>
