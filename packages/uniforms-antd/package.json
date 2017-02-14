@@ -1,6 +1,6 @@
 {
   "name": "uniforms-antd",
-  "version": "1.11.1",
+  "version": "1.11.2",
   "main": "index.js",
   "jsnext:main": "src/index.js",
   "description": "Ant Design UI components for uniforms.",
@@ -65,7 +65,7 @@
   "peerDependencies": {
     "antd": "^2.7.0",
     "react": "^15.0.0 || ^0.14.0",
-    "uniforms": "^1.11.1"
+    "uniforms": "^1.11.2"
   },
   "babel": {
     "plugins": [

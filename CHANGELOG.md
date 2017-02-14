@@ -1,4 +1,4 @@
-## Next
+## [v1.11.2](https://github.com/vazco/uniforms/tree/v1.11.2) (2017-02-14)
 - **Fixed:** Multiple select in antd theme.
 
 ## [v1.11.1](https://github.com/vazco/uniforms/tree/v1.11.1) (2017-02-14)
