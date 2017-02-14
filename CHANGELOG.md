@@ -1,3 +1,6 @@
+## [v1.11.1](https://github.com/vazco/uniforms/tree/v1.11.1) (2017-02-14)
+- **Fixed:** Removed Meteor missing module warning. [\#197](https://github.com/vazco/uniforms/issues/197)
+
 ## [v1.11.0](https://github.com/vazco/uniforms/tree/v1.11.0) (2017-02-14)
 - **Added:** Field rendered outside of a form throws an error.
 - **Added:** Support for `appearance` prop in `BoolField` in `uniforms-material`. [\#189](https://github.com/vazco/uniforms/issues/189)
