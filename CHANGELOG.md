@@ -1,8 +1,8 @@
-## Next:
+## [v1.11.0](https://github.com/vazco/uniforms/tree/v1.11.0) (2017-02-14)
 - **Added:** Field rendered outside of a form throws an error.
 - **Added:** Support for `appearance` prop in `BoolField` in `uniforms-material`. [\#189](https://github.com/vazco/uniforms/issues/189)
-- **Changed:** Use `label` instead of specified props in `ListAddField` in `uniforms-material`.
-- **Changed:** Use `label` instead of specified props in `ListDelField` in `uniforms-material`.
+- **Changed:** Use `children` instead of specified props in `ListAddField` in `uniforms-material`.
+- **Changed:** Use `children` instead of specified props in `ListDelField` in `uniforms-material`.
 - **Fixed:** Handling of `decimal` in `NumField`. [\#167](https://github.com/vazco/uniforms/issues/167)
 - **Fixed:** Handling of `defaultValue` in `SimpleSchema2Bridge`. [\#182](https://github.com/vazco/uniforms/issues/182)
 - **Fixed:** Removed `DateField` warning in `uniforms-material`.
