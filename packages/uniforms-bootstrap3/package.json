@@ -1,6 +1,6 @@
 {
   "name": "uniforms-bootstrap3",
-  "version": "1.11.2",
+  "version": "1.11.3",
   "main": "index.js",
   "jsnext:main": "src/index.js",
   "description": "Bootstrap3 UI components for uniforms.",
@@ -63,7 +63,7 @@
   },
   "peerDependencies": {
     "react": "^15.0.0 || ^0.14.0",
-    "uniforms": "^1.11.2"
+    "uniforms": "^1.11.3"
   },
   "babel": {
     "plugins": [
