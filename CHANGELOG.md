@@ -1,3 +1,6 @@
+## Next
+- **Fixed:** Handling of arrays in SimpleSchema@2. [\#200](https://github.com/vazco/uniforms/issues/200)
+
 ## [v1.11.3](https://github.com/vazco/uniforms/tree/v1.11.3) (2017-02-16)
 - **Added:** Support for SimpleSchema2@0.2. [\#198](https://github.com/vazco/uniforms/issues/198)
 - **Fixed:** Handling of no value in multiple select in antd theme. [\#199](https://github.com/vazco/uniforms/issues/199)

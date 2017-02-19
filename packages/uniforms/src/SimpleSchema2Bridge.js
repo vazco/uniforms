@@ -187,7 +187,7 @@ export default class SimpleSchema2Bridge extends Bridge {
     }
 
     getSubfields (name) {
-        return this.schema.objectKeys(name);
+        return this.schema.objectKeys(SimpleSchema._makeGeneric(name));
     }
 
     getType (name) {
