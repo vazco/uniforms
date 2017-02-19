@@ -9,6 +9,7 @@ const Nest = ({
     children,
     errorMessage,
     fields,
+    itemProps,
     label,
     name,
     showInlineError
@@ -30,10 +31,7 @@ const Nest = ({
             injectName(name, children)
         ) : (
             fields.map(key =>
-                <AutoField
-                    key={key}
-                    name={joinName(name, key)}
-                />
+                <AutoField key={key} name={joinName(name, key)} {...itemProps} />
             )
         )}
     </div>

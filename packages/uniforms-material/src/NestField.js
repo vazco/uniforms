@@ -10,6 +10,7 @@ import AutoField from './AutoField';
 const Nest = ({
     children,
     fields,
+    itemProps,
     label,
     name,
     style,
@@ -22,7 +23,7 @@ const Nest = ({
             injectName(name, children)
         ) : (
             fields.map(key =>
-                <AutoField key={key} name={joinName(name, key)} />
+                <AutoField key={key} name={joinName(name, key)} {...itemProps} />
             )
         )}
     </div>
