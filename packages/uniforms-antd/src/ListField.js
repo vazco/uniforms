@@ -14,6 +14,7 @@ const List = ({
     errorMessage,
     info,
     initialCount,
+    itemProps,
     label,
     name,
     showInlineError,
@@ -61,6 +62,7 @@ const List = ({
                     key={index}
                     label={null}
                     name={joinName(name, index)}
+                    {...itemProps}
                 />
             )
         )}
@@ -78,6 +80,5 @@ List.defaultProps = {
         padding: '10px'
     }
 };
-
 
 export default connectField(List, {includeInChain: false});
