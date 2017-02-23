@@ -5,9 +5,6 @@
 body {
     margin:  0;
     padding: 0;
-
-    font-size:   30px !important;
-    line-height: 32px !important;
 }
 
 img {
@@ -28,23 +25,21 @@ img {
     background: #121621;
 }
 
-.panelGroup iframe,
 .panelHeaderInfo select {
     border: 0;
 }
 
-.panelGroup iframe,
 .panelGroupNavbar {
-    padding: 0.75rem;
+    padding: 0.75em;
 }
 
-.panelGroup iframe,
+.panelGroupNavbar,
+.panelGroupNavbar * {
+    font-size: initial !important;
+}
+
 .panelGroup section {
     width: 100%;
-}
-
-.panelGroup iframe {
-    flex: 1 1 100%;
 }
 
 .panelHeader,
@@ -71,4 +66,11 @@ img {
 
 .panelWrapper > section {
     flex-direction: column;
+}
+
+.panelWrapper > div,
+.panelWrapper > section > div {
+    padding: 0.75rem;
+    width: 100%;
+    overflow-y: scroll;
 }

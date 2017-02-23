@@ -43,15 +43,19 @@ describe('GraphQLBridge', () => {
             label: 'Post ID'
         },
         title: {
+            initialValue: 'Some Title',
             options: [
                 {label: 1, value: 'a'},
-                {label: 2, value: 'b'}
+                {label: 2, value: 'b'},
+                {label: 3, value: 'Some Title'}
             ]
         },
         votes: {
+            initialValue: 44,
             options: {
                 a: 1,
-                b: 2
+                b: 2,
+                c: 44
             }
         }
     };
@@ -148,8 +152,12 @@ describe('GraphQLBridge', () => {
             expect(bridge.getInitialValue('author')).to.be.deep.equal({});
         });
 
-        it('works with primitives', () => {
+        it('works with undefined primitives', () => {
             expect(bridge.getInitialValue('id')).to.be.equal(undefined);
+        });
+
+        it('works with defined primitives', () => {
+            expect(bridge.getInitialValue('votes')).to.be.equal(44);
         });
     });
 

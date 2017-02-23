@@ -185,7 +185,7 @@ export default class SimpleSchemaBridge extends Bridge {
                 if (itemProps.transform && !props.transform) {
                     field.transform = itemProps.transform;
                 }
-            } catch (e) { /* do nothing */ }
+            } catch (_) { /* ignore it */ }
         }
 
         let options = props.options || field.options;

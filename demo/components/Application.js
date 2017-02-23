@@ -1,5 +1,11 @@
-import React       from 'react';
-import {Component} from 'react';
+import React          from 'react';
+import enUS           from 'antd/lib/locale-provider/en_US';
+import getMuiTheme    from 'material-ui/styles/getMuiTheme';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import {Component}    from 'react';
+import {PropTypes}    from 'react';
+
+import {Meteor} from 'meteor/meteor';
 
 import presets from '../lib/presets';
 import schema  from '../lib/schema';
@@ -16,6 +22,13 @@ class Application extends Component {
         this.state = schema.clean({});
 
         this.onChange = this.onChange.bind(this);
+    }
+
+    getChildContext () {
+        return {
+            antLocale: {...enUS, exist: true},
+            muiTheme: getMuiTheme(lightBaseTheme, {userAgent: Meteor.isServer ? false : undefined})
+        };
     }
 
     onChange (key, value) {
@@ -61,5 +74,10 @@ class Application extends Component {
         );
     }
 }
+
+Application.childContextTypes = {
+    antLocale: PropTypes.object.isRequired,
+    muiTheme:  PropTypes.object.isRequired
+};
 
 export default Application;

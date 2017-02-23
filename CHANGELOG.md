@@ -1,3 +1,36 @@
+## [v1.12.0](https://github.com/vazco/uniforms/tree/v1.12.0) (2017-02-19)
+- **Added:** Support for `itemProps` in `ListField` in antd theme.
+- **Added:** Support for `itemProps` in `NestField`. [\#181](https://github.com/vazco/uniforms/issues/181)
+- **Fixed:** Handling of arrays in SimpleSchema@2. [\#200](https://github.com/vazco/uniforms/issues/200)
+
+## [v1.11.3](https://github.com/vazco/uniforms/tree/v1.11.3) (2017-02-16)
+- **Added:** Support for SimpleSchema2@0.2. [\#198](https://github.com/vazco/uniforms/issues/198)
+- **Fixed:** Handling of no value in multiple select in antd theme. [\#199](https://github.com/vazco/uniforms/issues/199)
+
+## [v1.11.2](https://github.com/vazco/uniforms/tree/v1.11.2) (2017-02-14)
+- **Fixed:** Multiple select in antd theme.
+
+## [v1.11.1](https://github.com/vazco/uniforms/tree/v1.11.1) (2017-02-14)
+- **Fixed:** Removed Meteor missing module warning. [\#197](https://github.com/vazco/uniforms/issues/197)
+
+## [v1.11.0](https://github.com/vazco/uniforms/tree/v1.11.0) (2017-02-14)
+- **Added:** Field rendered outside of a form throws an error.
+- **Added:** Support for `appearance` prop in `BoolField` in `uniforms-material`. [\#189](https://github.com/vazco/uniforms/issues/189)
+- **Changed:** Use `children` instead of specified props in `ListAddField` in `uniforms-material`.
+- **Changed:** Use `children` instead of specified props in `ListDelField` in `uniforms-material`.
+- **Fixed:** Handling of `decimal` in `NumField`. [\#167](https://github.com/vazco/uniforms/issues/167)
+- **Fixed:** Handling of `defaultValue` in `SimpleSchema2Bridge`. [\#182](https://github.com/vazco/uniforms/issues/182)
+- **Fixed:** Removed `DateField` warning in `uniforms-material`.
+- **Fixed:** `ListAddField` in `uniforms-material`.
+- **Fixed:** `ListDelField` in `uniforms-material`.
+
+## [v1.10.0](https://github.com/vazco/uniforms/tree/v1.10.0) (2017-02-07)
+- **Added:** AntD theme. [\#134](https://github.com/vazco/uniforms/issues/134)
+- **Added:** Material UI theme. [\#142](https://github.com/vazco/uniforms/issues/142)
+- **Added:** Support for Bootstrap4@alpha.6. [\#170](https://github.com/vazco/uniforms/issues/170)
+- **Added:** Support for `initialValue` in `GraphQLBridge`. [\#183](https://github.com/vazco/uniforms/issues/183)
+- **Changed:** All `<section>`s tags are now `<div>`s. [\#172](https://github.com/vazco/uniforms/issues/172)
+
 ## [v1.9.0](https://github.com/vazco/uniforms/tree/v1.9.0) (2017-01-21)
 - **Added:** Online demo [uniforms.tools](https://uniforms.tools/). [\#156](https://github.com/vazco/uniforms/issues/156)
 - **Added:** Support for SimpleSchema2@0.1.x.
