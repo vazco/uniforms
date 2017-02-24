@@ -1,5 +1,6 @@
 ## Next
 - **Fixed:** `HiddenField` display name.
+- **Fixed:** Handling of negative numbers in `NumField`.
 
 ## [v1.12.0](https://github.com/vazco/uniforms/tree/v1.12.0) (2017-02-19)
 - **Added:** Support for `itemProps` in `ListField` in antd theme.

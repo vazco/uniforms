@@ -141,6 +141,8 @@ describe('Everything', () => {
 
     it('works (NumField)', async () => {
         expect(wrapper.find('#x00').props()).to.have.property('value', '0');
+        expect(wrapper.find('#x00').simulate('change', {target: {value: '-10'}})).to.be.ok;
+        expect(wrapper.find('#x00').props()).to.have.property('value', '-10');
         expect(wrapper.find('#x00').simulate('change', {target: {value: '0'}})).to.be.ok;
         expect(wrapper.find('#x00').props()).to.have.property('value', '0');
 
