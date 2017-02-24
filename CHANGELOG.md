@@ -1,4 +1,4 @@
-## Next
+## [v1.12.1](https://github.com/vazco/uniforms/tree/v1.12.1) (2017-02-25)
 - **Fixed:** `HiddenField` display name.
 - **Fixed:** Handling of negative numbers in `NumField`.
 - **Fixed:** Unnecessary `onSubmit` after mount with `autosave`. [\#204](https://github.com/vazco/uniforms/issues/204)
