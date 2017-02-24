@@ -8,11 +8,11 @@
     "restart": "npm run reset && npm start"
   },
   "dependencies": {
-    "antd": "2.7.1",
+    "antd": "2.7.2",
     "babel-eslint": "7.1.1",
     "babel-polyfill": "6.23.0",
-    "eslint": "3.15.0",
-    "eslint-config-vazco": "2.2.1",
+    "eslint": "3.16.1",
+    "eslint-config-vazco": "2.3.0",
     "eslint-plugin-babel": "4.0.1",
     "eslint-plugin-react": "6.10.0",
     "eslint-plugin-vazco": "1.0.0",
