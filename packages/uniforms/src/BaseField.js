@@ -254,12 +254,11 @@ export default class BaseField extends Component {
             id,
             onChange,
             parent,
+            value,
 
-            ...value !== undefined && {value}, // Well, props could have undefined value that
-            ...props,                          // override fallback '' - this is a solution for this.
-
+            ...props,
             ...schemaProps,
-            ...overrideValue && {value},
+            ...(explicitInitialValue || overrideValue) && {value},
 
             label,
             name,

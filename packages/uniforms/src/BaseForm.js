@@ -81,7 +81,7 @@ export default class BaseForm extends Component {
 
         this.state = {bridge: createSchemaBridge(this.props.schema), resetCount: 0};
 
-        this.changed = false;
+        this.changed = null;
         this.changedMap = {};
         this.delayId = false;
         this.randomId = randomIds(this.props.id);
