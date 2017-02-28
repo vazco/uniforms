@@ -21,15 +21,8 @@ const ApplicationProps = ({onChange, schema, theme, value}) => {
     const NumField      = themes[theme].NumField;
 
     return (
-        <div id="props">
+        <div>
             {link}
-
-            <style>{`
-                #props textarea {
-                    font-family: monospace !important;
-                    min-height: 20em !important;
-                }
-            `}</style>
 
             <AutoForm autosave autosaveDelay={100} model={value} onSubmit={onChange} schema={schema}>
                 <BoolField     name="autosave" />
