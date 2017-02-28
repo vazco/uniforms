@@ -1,6 +1,7 @@
 import Radio        from 'antd/lib/radio';
 import React        from 'react';
 import connectField from 'uniforms/connectField';
+import filterDOMProps   from 'uniforms/filterDOMProps';
 
 import wrapField from './wrapField';
 
@@ -11,6 +12,7 @@ const Radio_ = props =>
             name={props.name}
             onChange={event => props.onChange(event.target.value)}
             value={props.value}
+            {...filterDOMProps(props)}
         >
             {props.allowedValues.map(value =>
                 <Radio

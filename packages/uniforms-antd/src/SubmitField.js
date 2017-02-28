@@ -1,6 +1,7 @@
-import BaseField from 'uniforms/BaseField';
-import Button    from 'antd/lib/button';
-import React     from 'react';
+import BaseField        from 'uniforms/BaseField';
+import Button           from 'antd/lib/button';
+import React            from 'react';
+import filterDOMProps   from 'uniforms/filterDOMProps';
 
 const SubmitField = ({className, inputRef, value, ...props}, {uniforms: {error, state: {disabled}}}) =>
     <Button
@@ -8,7 +9,7 @@ const SubmitField = ({className, inputRef, value, ...props}, {uniforms: {error, 
         htmlType="submit"
         ref={inputRef}
         type="primary"
-        {...props}
+        {...filterDOMProps(props)}
     >
         {value}
     </Button>
