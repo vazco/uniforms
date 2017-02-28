@@ -21,11 +21,11 @@ const ApplicationProps = ({onChange, schema, theme, value}) => {
     const NumField      = themes[theme].NumField;
 
     return (
-        <div>
+        <div id="props">
             {link}
 
             <style>{`
-                textarea {
+                #props textarea {
                     font-family: monospace !important;
                     min-height: 20em !important;
                 }
