@@ -75,7 +75,7 @@ img {
     overflow-y: scroll;
 }
 
-.left > textarea {
+.panelLeft textarea {
     font-family: monospace !important;
     min-height: 20em !important;
 }
