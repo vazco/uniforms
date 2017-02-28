@@ -4,6 +4,8 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 import nothing        from 'uniforms/nothing';
 
 export default class HiddenField extends BaseField {
+    static displayName = 'HiddenField';
+
     componentWillReceiveProps ({value: valueDesired}) {
         if (valueDesired === undefined) {
             return;

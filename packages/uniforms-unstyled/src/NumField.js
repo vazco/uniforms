@@ -62,7 +62,7 @@ class Num extends Component {
     }
 
     onChange ({target: {value}}) {
-        const change = value.replace(/[^\d\.,]/g, '');
+        const change = value.replace(/[^\d\.,-]/g, '');
         const parsed = noneIfNaN((this.props.decimal ? parseFloat : parseInt)(change));
 
         this.setState(

@@ -39,7 +39,7 @@ export default function connectField (component, {
 
                 // https://github.com/vazco/uniforms/issues/52
                 // If field is initially rendered with value, we treat it as an initial value.
-                if (this.props.value !== undefined) {
+                if (this.props.value !== undefined && this.props.value !== props.value) {
                     props.onChange(this.props.value);
                     return;
                 }

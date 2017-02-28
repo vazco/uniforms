@@ -1,6 +1,6 @@
 {
   "name": "uniforms-bootstrap4",
-  "version": "1.12.0",
+  "version": "1.12.1",
   "main": "index.js",
   "jsnext:main": "src/index.js",
   "description": "Bootstrap4 UI components for uniforms.",
@@ -47,8 +47,8 @@
     "chai": "4.0.0-canary.1",
     "cross-env": "3.1.4",
     "enzyme": "2.7.1",
-    "eslint": "3.15.0",
-    "eslint-config-vazco": "2.2.1",
+    "eslint": "3.16.1",
+    "eslint-config-vazco": "2.3.0",
     "eslint-plugin-babel": "4.0.1",
     "eslint-plugin-react": "6.10.0",
     "eslint-plugin-vazco": "1.0.0",
@@ -58,12 +58,12 @@
     "react": "15.4.2",
     "react-addons-test-utils": "15.4.2",
     "react-dom": "15.4.2",
-    "rimraf": "2.5.4",
+    "rimraf": "2.6.1",
     "sinon": "2.0.0-pre.5"
   },
   "peerDependencies": {
     "react": "^15.0.0 || ^0.14.0",
-    "uniforms": "^1.12.0"
+    "uniforms": "^1.12.1"
   },
   "babel": {
     "plugins": [

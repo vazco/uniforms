@@ -1,3 +1,11 @@
+## Next
+- **Fixed:** Removed `TextField` warning in `uniforms-material`. [\#205](https://github.com/vazco/uniforms/issues/205)
+
+## [v1.12.1](https://github.com/vazco/uniforms/tree/v1.12.1) (2017-02-25)
+- **Fixed:** `HiddenField` display name.
+- **Fixed:** Handling of negative numbers in `NumField`.
+- **Fixed:** Unnecessary `onSubmit` after mount with `autosave`. [\#204](https://github.com/vazco/uniforms/issues/204)
+
 ## [v1.12.0](https://github.com/vazco/uniforms/tree/v1.12.0) (2017-02-19)
 - **Added:** Support for `itemProps` in `ListField` in antd theme.
 - **Added:** Support for `itemProps` in `NestField`. [\#181](https://github.com/vazco/uniforms/issues/181)

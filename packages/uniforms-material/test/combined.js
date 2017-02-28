@@ -161,6 +161,8 @@ describe('Everything', () => {
         const find = () => wrapper.find(MaterialTextField).filterWhere(x => x.props().name === 'x00');
 
         expect(find().props()).to.have.property('value', '0');
+        expect(find().props().onChange({target: {value: '-10'}}, -10)).to.equal(undefined);
+        expect(find().props()).to.have.property('value', '-10');
         expect(find().props().onChange({target: {value: '0'}}, 0)).to.equal(undefined);
         expect(find().props()).to.have.property('value', '0');
 
