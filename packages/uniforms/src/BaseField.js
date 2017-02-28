@@ -222,11 +222,17 @@ export default class BaseField extends Component {
 
         const changed = !!get(context.state.changedMap, name);
 
-        let value = get(context.model, name);
-        if (value === undefined && !changed && !explicitInitialValue) {
-            value = context.schema.getInitialValue(name, this.props);
-        } else if (explicitInitialValue) {
-            props.initialValue = context.schema.getInitialValue(name, this.props);
+        let value;
+        if (props.value === undefined || explicitInitialValue || overrideValue) {
+            value = get(context.model, name);
+            if (value === undefined && !changed && !explicitInitialValue) {
+                value = context.schema.getInitialValue(name, this.props);
+            } else if (explicitInitialValue) {
+                props.initialValue = context.schema.getInitialValue(name, this.props);
+            }
+
+            // In this case, given value prop have to be overriden.
+            delete props.value;
         }
 
         // This prevents (un)controlled input change warning.
