@@ -1,8 +1,9 @@
-import Checkbox     from 'antd/lib/checkbox';
-import Radio        from 'antd/lib/radio';
-import React        from 'react';
-import Select       from 'antd/lib/select';
-import connectField from 'uniforms/connectField';
+import Checkbox       from 'antd/lib/checkbox';
+import Radio          from 'antd/lib/radio';
+import React          from 'react';
+import Select         from 'antd/lib/select';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 import wrapField from './wrapField';
 
@@ -15,6 +16,7 @@ const renderCheckboxes = props =>
             onChange={value => props.onChange(value)}
             options={props.allowedValues.map(String)}
             value={props.value.map(String).map(props.transform || String)}
+            {...filterDOMProps(props)}
         />
     ) : (
         <Radio.Group
@@ -22,6 +24,7 @@ const renderCheckboxes = props =>
             name={props.name}
             onChange={event => props.onChange(event.target.value)}
             value={props.value}
+            {...filterDOMProps(props)}
         >
             {props.allowedValues.map(value =>
                 <Radio
@@ -50,6 +53,7 @@ const renderSelect = props =>
         onChange={value => props.onChange(value)}
         ref={props.inputRef}
         value={props.fieldType === Array ? props.value || [] : '' + (props.value || '')}
+        {...filterDOMProps(props)}
     >
         {props.allowedValues.map(value =>
             <Select.Option key={value} value={value}>
