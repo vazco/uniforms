@@ -24,13 +24,6 @@ const ApplicationProps = ({onChange, schema, theme, value}) => {
         <div>
             {link}
 
-            <style>{`
-                textarea {
-                    font-family: monospace !important;
-                    min-height: 20em !important;
-                }
-            `}</style>
-
             <AutoForm autosave autosaveDelay={100} model={value} onSubmit={onChange} schema={schema}>
                 <BoolField     name="autosave" />
                 <NumField      name="autosaveDelay" disabled={!value.autosave} />

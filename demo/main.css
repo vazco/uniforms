@@ -74,3 +74,8 @@ img {
     width: 100%;
     overflow-y: scroll;
 }
+
+.panelLeft textarea {
+    font-family: monospace !important;
+    min-height: 20em !important;
+}
