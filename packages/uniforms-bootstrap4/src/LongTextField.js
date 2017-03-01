@@ -14,8 +14,8 @@ const LongText = props =>
             onChange={event => props.onChange(event.target.value)}
             placeholder={props.placeholder}
             ref={props.inputRef}
-            value={props.value}
             rows={props.rows}
+            value={props.value}
         />
     ))
 ;
