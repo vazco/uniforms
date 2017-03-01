@@ -8,6 +8,7 @@ const SubmitField = ({className, inputRef, value, ...props}, {uniforms: {error, 
         htmlType="submit"
         ref={inputRef}
         type="primary"
+        {...props}
     >
         {value}
     </Button>
