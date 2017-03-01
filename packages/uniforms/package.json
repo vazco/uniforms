@@ -49,7 +49,7 @@
     "enzyme": "2.7.1",
     "eslint": "3.16.1",
     "eslint-config-vazco": "2.3.0",
-    "eslint-plugin-babel": "4.0.1",
+    "eslint-plugin-babel": "4.1.0",
     "eslint-plugin-react": "6.10.0",
     "eslint-plugin-vazco": "1.0.0",
     "graphql": "0.9.1",
@@ -61,7 +61,7 @@
     "react-dom": "15.4.2",
     "rimraf": "2.6.1",
     "simpl-schema": "0.2.2",
-    "sinon": "2.0.0-pre.5"
+    "sinon": "2.0.0-pre.6"
   },
   "peerDependencies": {
     "graphql": "^0.8.2 || ^0.9.1",

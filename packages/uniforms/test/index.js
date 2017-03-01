@@ -3,13 +3,9 @@ import {jsdom} from 'jsdom';
 
 global.document = jsdom('');
 global.window = document.defaultView;
-global.navigator = window.navigator;
+
 global.HTMLElement = window.HTMLElement;
-Object.keys(window).forEach(property => {
-    if (typeof global[property] === 'undefined') {
-        global[property] = window[property];
-    }
-});
+global.navigator   = window.navigator;
 
 // Mocks
 const Module = require('module');
