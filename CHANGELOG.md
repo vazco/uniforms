@@ -1,3 +1,6 @@
+## [v1.13.1](https://github.com/vazco/uniforms/tree/v1.13.1) (2017-03-02)
+- **Fixed:** Peer dependencies versions.
+
 ## [v1.13.0](https://github.com/vazco/uniforms/tree/v1.13.0) (2017-03-01)
 - **Added:** Passing through all unused props in few fields in `uniforms-antd`. [\#203](https://github.com/vazco/uniforms/issues/203)
 - **Added:** Support for `rows` in `LongTextField` in `uniforms-bootstrap4`. [\#208](https://github.com/vazco/uniforms/issues/208)
