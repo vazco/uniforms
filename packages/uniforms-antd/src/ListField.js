@@ -16,9 +16,11 @@ const List = ({
     initialCount,
     itemProps,
     label,
+    labelCol,
     name,
     showInlineError,
     value,
+    wrapperCol,
     ...props
 }) =>
     <div {...filterDOMProps(props)}>
@@ -62,6 +64,8 @@ const List = ({
                     key={index}
                     label={null}
                     name={joinName(name, index)}
+                    labelCol={labelCol}
+                    wrapperCol={wrapperCol}
                     {...itemProps}
                 />
             )
