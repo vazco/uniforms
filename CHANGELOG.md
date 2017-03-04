@@ -1,4 +1,9 @@
-## Next
+## [v1.13.1](https://github.com/vazco/uniforms/tree/v1.13.1) (2017-03-02)
+- **Fixed:** Peer dependencies versions.
+
+## [v1.13.0](https://github.com/vazco/uniforms/tree/v1.13.0) (2017-03-01)
+- **Added:** Passing through all unused props in few fields in `uniforms-antd`. [\#203](https://github.com/vazco/uniforms/issues/203)
+- **Added:** Support for `rows` in `LongTextField` in `uniforms-bootstrap4`. [\#208](https://github.com/vazco/uniforms/issues/208)
 - **Fixed:** Removed `TextField` warning in `uniforms-material`. [\#205](https://github.com/vazco/uniforms/issues/205)
 
 ## [v1.12.1](https://github.com/vazco/uniforms/tree/v1.12.1) (2017-02-25)
@@ -7,16 +12,16 @@
 - **Fixed:** Unnecessary `onSubmit` after mount with `autosave`. [\#204](https://github.com/vazco/uniforms/issues/204)
 
 ## [v1.12.0](https://github.com/vazco/uniforms/tree/v1.12.0) (2017-02-19)
-- **Added:** Support for `itemProps` in `ListField` in antd theme.
+- **Added:** Support for `itemProps` in `ListField` in `uniforms-antd`.
 - **Added:** Support for `itemProps` in `NestField`. [\#181](https://github.com/vazco/uniforms/issues/181)
 - **Fixed:** Handling of arrays in SimpleSchema@2. [\#200](https://github.com/vazco/uniforms/issues/200)
 
 ## [v1.11.3](https://github.com/vazco/uniforms/tree/v1.11.3) (2017-02-16)
 - **Added:** Support for SimpleSchema2@0.2. [\#198](https://github.com/vazco/uniforms/issues/198)
-- **Fixed:** Handling of no value in multiple select in antd theme. [\#199](https://github.com/vazco/uniforms/issues/199)
+- **Fixed:** Handling of no value in multiple select in `uniforms-antd`. [\#199](https://github.com/vazco/uniforms/issues/199)
 
 ## [v1.11.2](https://github.com/vazco/uniforms/tree/v1.11.2) (2017-02-14)
-- **Fixed:** Multiple select in antd theme.
+- **Fixed:** Multiple select in `uniforms-antd`.
 
 ## [v1.11.1](https://github.com/vazco/uniforms/tree/v1.11.1) (2017-02-14)
 - **Fixed:** Removed Meteor missing module warning. [\#197](https://github.com/vazco/uniforms/issues/197)

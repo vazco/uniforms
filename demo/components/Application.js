@@ -42,7 +42,7 @@ class Application extends Component {
     render () {
         return (
             <ApplicationForm label={false} model={this.state} onChange={this.onChange} schema={schema} spacing={3}>
-                <section>
+                <section className="panelLeft" >
                     <nav className="panelGroupNavbar">
                         <section className="panelHeader">
                             <b>

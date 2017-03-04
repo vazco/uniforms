@@ -8,9 +8,9 @@ import SimpleSchema2Bridge from 'uniforms/SimpleSchema2Bridge';
 describe('SimpleSchema2Bridge', () => {
     const noop = () => {};
     const schema = new SimpleSchema({
-        'a':     {type: Object, label: name},
-        'a.b':   {type: Object, label: name},
-        'a.b.c': {type: String, label: name},
+        'a':     {type: Object},
+        'a.b':   {type: Object},
+        'a.b.c': {type: String},
         'd':     {type: String, defaultValue: 'D'},
         'e':     {type: String, allowedValues: ['E']},
         'f':     {type: Number, min: 42},
