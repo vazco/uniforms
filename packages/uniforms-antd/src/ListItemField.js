@@ -20,7 +20,7 @@ const ListItem = props =>
             <ListDelField className="top aligned" name={props.name} />
         </div>
 
-        <div style={{overflow: 'hidden', marginBottom: '12px'}}>
+        <div style={{marginBottom: '4px', overflow: 'hidden'}}>
             <div style={{borderBottom: '1px solid #DDD', height: '20px', marginTop: '-8px'}} />
         </div>
 

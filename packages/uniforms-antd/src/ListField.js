@@ -38,10 +38,6 @@ const List = ({
             </div>
         )}
 
-        {!!label && (
-            <div style={{height: '18px'}}  />
-        )}
-
         {!!(errorMessage && showInlineError) && (
             <div>
                 {errorMessage}
