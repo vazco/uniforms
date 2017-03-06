@@ -63,8 +63,8 @@ const List = ({
                 <ListItemField
                     key={index}
                     label={null}
-                    name={joinName(name, index)}
                     labelCol={labelCol}
+                    name={joinName(name, index)}
                     wrapperCol={wrapperCol}
                     {...itemProps}
                 />
