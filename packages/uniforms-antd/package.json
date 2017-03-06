@@ -34,7 +34,7 @@
     "test": "babel-node node_modules/.bin/_mocha --require test/index.js test --reporter list"
   },
   "devDependencies": {
-    "antd": "2.7.4",
+    "antd": "2.8.0",
     "babel-cli": "6.23.0",
     "babel-eslint": "7.1.1",
     "babel-plugin-istanbul": "4.0.0",
@@ -46,11 +46,11 @@
     "babel-preset-stage-0": "6.22.0",
     "babel-runtime": "6.23.0",
     "chai": "4.0.0-canary.1",
-    "cross-env": "3.1.4",
+    "cross-env": "3.2.3",
     "enzyme": "2.7.1",
-    "eslint": "3.16.1",
+    "eslint": "3.17.0",
     "eslint-config-vazco": "2.3.0",
-    "eslint-plugin-babel": "4.1.0",
+    "eslint-plugin-babel": "4.1.1",
     "eslint-plugin-react": "6.10.0",
     "eslint-plugin-vazco": "1.0.0",
     "jsdom": "9.11.0",
