@@ -16,9 +16,11 @@ const List = ({
     initialCount,
     itemProps,
     label,
+    labelCol,
     name,
     showInlineError,
     value,
+    wrapperCol,
     ...props
 }) =>
     <div {...filterDOMProps(props)}>
@@ -34,10 +36,6 @@ const List = ({
                     </span>
                 )}
             </div>
-        )}
-
-        {!!label && (
-            <div style={{height: '18px'}}  />
         )}
 
         {!!(errorMessage && showInlineError) && (
@@ -61,7 +59,9 @@ const List = ({
                 <ListItemField
                     key={index}
                     label={null}
+                    labelCol={labelCol}
                     name={joinName(name, index)}
+                    wrapperCol={wrapperCol}
                     {...itemProps}
                 />
             )
