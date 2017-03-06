@@ -1,3 +1,7 @@
+## [v1.14.0](https://github.com/vazco/uniforms/tree/v1.14.0) (2017-03-06)
+- **Added:** Additional babel transforms to reduce bundle size.
+- **Added:** Support for `labelCol` and `wrapperCol` in `uniforms-antd`. [\#207](https://github.com/vazco/uniforms/issues/207)
+
 ## [v1.13.1](https://github.com/vazco/uniforms/tree/v1.13.1) (2017-03-02)
 - **Fixed:** Peer dependencies versions.
 
