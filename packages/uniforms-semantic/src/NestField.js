@@ -17,10 +17,11 @@ const Nest = ({
     itemProps,
     label,
     name,
+    grouped = true,
     showInlineError,
     ...props
 }) =>
-    <div className={classnames(className, {disabled, error}, 'grouped fields')} {...filterDOMProps(props)}>
+    <div className={classnames(className, {disabled, error, grouped}, 'fields')} {...filterDOMProps(props)}>
         {label && (
             <div className="field">
                 <label>
