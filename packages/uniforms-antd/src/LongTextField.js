@@ -5,8 +5,8 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 
 import wrapField from './wrapField';
 
-const LongText = props =>
-    wrapField(props, (
+const LongText = ({labelCol, wrapperCol, ...props}) =>
+    wrapField({labelCol, wrapperCol, ...props}, (
         <Input
             disabled={props.disabled}
             id={props.id}

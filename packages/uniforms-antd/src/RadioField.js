@@ -5,8 +5,8 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 
 import wrapField from './wrapField';
 
-const Radio_ = props =>
-    wrapField(props, (
+const Radio_ = ({labelCol, wrapperCol, ...props}) =>
+    wrapField({labelCol, wrapperCol, ...props}, (
         <Radio.Group
             disabled={props.disabled}
             name={props.name}

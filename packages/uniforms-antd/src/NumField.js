@@ -7,8 +7,8 @@ import wrapField from './wrapField';
 
 const noneIfNaN = x => isNaN(x) ? undefined : x;
 
-const Num = props =>
-    wrapField(props, (
+const Num = ({labelCol, wrapperCol, ...props}) =>
+    wrapField({labelCol, wrapperCol, ...props}, (
         <InputNumber
             disabled={props.disabled}
             id={props.id}
