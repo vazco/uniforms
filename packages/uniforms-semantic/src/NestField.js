@@ -14,10 +14,10 @@ const Nest = ({
     error,
     errorMessage,
     fields,
+    grouped = true,
     itemProps,
     label,
     name,
-    grouped = true,
     showInlineError,
     ...props
 }) =>
