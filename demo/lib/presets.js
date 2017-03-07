@@ -7,6 +7,10 @@ const presets = {
                 defaultValue: new Date()
             },
 
+            adult: {
+                type: Boolean
+            },
+
             size: {
                 type: String,
                 defaultValue: 'm',
