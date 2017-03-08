@@ -14,7 +14,7 @@ const Nest = ({
     error,
     errorMessage,
     fields,
-    grouped = true,
+    grouped,
     itemProps,
     label,
     name,
@@ -45,5 +45,9 @@ const Nest = ({
         )}
     </div>
 ;
+
+Nest.defaultProps = {
+    grouped: true
+};
 
 export default connectField(Nest, {includeInChain: false});
