@@ -578,6 +578,13 @@ import NestField from 'uniforms-unstyled/NestField'; // Choose your theme packag
     //   bootstrap4
     //   semantic
     showInlineError={true}
+
+    // Add / remove "grouped" class from the field.
+    //   In Semantic, fields can be grouped using this class. By default,
+    //   this class is added to the NestField.
+    // Available in:
+    //   semantic
+    grouped={true}
 />
 ```
 

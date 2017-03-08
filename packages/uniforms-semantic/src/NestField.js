@@ -14,13 +14,14 @@ const Nest = ({
     error,
     errorMessage,
     fields,
+    grouped,
     itemProps,
     label,
     name,
     showInlineError,
     ...props
 }) =>
-    <div className={classnames(className, {disabled, error}, 'grouped fields')} {...filterDOMProps(props)}>
+    <div className={classnames(className, {disabled, error, grouped}, 'fields')} {...filterDOMProps(props)}>
         {label && (
             <div className="field">
                 <label>
@@ -44,5 +45,9 @@ const Nest = ({
         )}
     </div>
 ;
+
+Nest.defaultProps = {
+    grouped: true
+};
 
 export default connectField(Nest, {includeInChain: false});
