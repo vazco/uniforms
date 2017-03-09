@@ -4,12 +4,14 @@ import React   from 'react';
 import Tooltip from 'antd/lib/tooltip';
 
 export default function wrapField ({
+    colon,
     error,
     errorMessage,
     id,
     info,
     label,
     labelCol,
+    required,
     showInlineError,
     wrapperCol
 }, children) {
@@ -29,11 +31,13 @@ export default function wrapField ({
 
     return (
         <Form.Item
+            colon={colon}
             hasFeedback
             help={showInlineError && errorMessage}
             htmlFor={id}
             label={labelNode}
             labelCol={labelCol}
+            required={required}
             style={{marginBottom: '12px'}}
             validateStatus={error ? 'error' : undefined}
             wrapperCol={wrapperCol}
