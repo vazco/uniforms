@@ -6,7 +6,7 @@ Third-party patches are essential for keeping every project great. We simply can
 
 * Make sure you have a [GitHub account](https://github.com/signup/free)
 * Submit a ticket for your issue, assuming one does not already exist.
-    * Clearly describe the issue including steps to reproduce when it is a bug.
+    * Clearly describe the issue including steps to reproduce if it is a bug.
     * Make sure you fill in the earliest version that you know has the issue.
 
 ## Making changes
@@ -35,6 +35,8 @@ Third-party patches are essential for keeping every project great. We simply can
 
 See [demo](https://github.com/vazco/uniforms/blob/master/demo).
 
-# _Work in progress_ PRs are welcome
+<br>
 
-If you can't/couldn't/won't finish your PR, submit it anyway - maybe someone else will continue your work. Also, if you don't know, how to achieve your desired feature - file an issue for it - maybe someone else will implement it.
+# _Work in progress_ PRs are also welcome
+
+If you can't/couldn't/won't finish your PR, submit it anyway - maybe someone else will continue your work. Also, if you don't know how to achieve your desired feature - file an issue for it - maybe someone else will implement it.

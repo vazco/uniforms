@@ -1,6 +1,6 @@
 {
   "name": "uniforms-semantic",
-  "version": "1.13.1",
+  "version": "1.14.0",
   "main": "index.js",
   "jsnext:main": "src/index.js",
   "description": "Semantic UI components for uniforms.",
@@ -39,17 +39,18 @@
     "babel-plugin-istanbul": "4.0.0",
     "babel-plugin-transform-object-assign": "6.22.0",
     "babel-plugin-transform-react-inline-elements": "6.22.0",
+    "babel-plugin-transform-react-remove-prop-types": "0.3.2",
     "babel-plugin-transform-runtime": "6.23.0",
     "babel-preset-es2015": "6.22.0",
     "babel-preset-react": "6.23.0",
     "babel-preset-stage-0": "6.22.0",
     "babel-runtime": "6.23.0",
     "chai": "4.0.0-canary.1",
-    "cross-env": "3.1.4",
+    "cross-env": "3.2.3",
     "enzyme": "2.7.1",
-    "eslint": "3.16.1",
+    "eslint": "3.17.0",
     "eslint-config-vazco": "2.3.0",
-    "eslint-plugin-babel": "4.1.0",
+    "eslint-plugin-babel": "4.1.1",
     "eslint-plugin-react": "6.10.0",
     "eslint-plugin-vazco": "1.0.0",
     "jsdom": "9.11.0",
@@ -63,13 +64,25 @@
   },
   "peerDependencies": {
     "react": "^15.0.0 || ^0.14.0",
-    "uniforms": "^1.13.1"
+    "uniforms": "^1.14.0"
   },
   "babel": {
     "plugins": [
       "transform-object-assign",
       "transform-react-inline-elements",
-      "transform-runtime"
+      [
+        "transform-react-remove-prop-types",
+        {
+          "mode": "wrap"
+        }
+      ],
+      [
+        "transform-runtime",
+        {
+          "polyfill": false,
+          "regenerator": false
+        }
+      ]
     ],
     "presets": [
       "es2015",

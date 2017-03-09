@@ -1,8 +1,12 @@
+## [v1.14.0](https://github.com/vazco/uniforms/tree/v1.14.0) (2017-03-06)
+- **Added:** Additional babel transforms to reduce bundle size.
+- **Added:** Support for `labelCol` and `wrapperCol` in `uniforms-antd`. [\#207](https://github.com/vazco/uniforms/issues/207)
+
 ## [v1.13.1](https://github.com/vazco/uniforms/tree/v1.13.1) (2017-03-02)
 - **Fixed:** Peer dependencies versions.
 
 ## [v1.13.0](https://github.com/vazco/uniforms/tree/v1.13.0) (2017-03-01)
-- **Added:** Passing through all unused props in few fields in `uniforms-antd`. [\#203](https://github.com/vazco/uniforms/issues/203)
+- **Added:** Passing through all unused props in some fields in `uniforms-antd`. [\#203](https://github.com/vazco/uniforms/issues/203)
 - **Added:** Support for `rows` in `LongTextField` in `uniforms-bootstrap4`. [\#208](https://github.com/vazco/uniforms/issues/208)
 - **Fixed:** Removed `TextField` warning in `uniforms-material`. [\#205](https://github.com/vazco/uniforms/issues/205)
 
@@ -178,7 +182,7 @@
 
 ## [v1.0.0-rc.27](https://github.com/vazco/uniforms/tree/v1.0.0-rc.27) (2016-07-23)
 - **Added:** New `onSubmitSuccess` and `onSubmitFailure` props on forms. [\#51](https://github.com/vazco/uniforms/issues/51)
-- **Changed:**  Improved error handling - make use of `invariant` package.
+- **Changed:** Improved error handling - using `invariant` package.
 - **Changed:** Prevent validation when schema has changed and form is not submitted. [\#82](https://github.com/vazco/uniforms/issues/82)
 - **Fixed:** Regression with HTML5 inputs. [\#80](https://github.com/vazco/uniforms/issues/80)
 
@@ -205,8 +209,8 @@
 - **Changed:** `joinName` works with dots in parts.
 - **Fixed:** Got rid of unknown props warning. [\#64](https://github.com/vazco/uniforms/issues/64)
 - **Fixed:** Invalid `propTypes`.
-- **Fixed:** `HiddenField` lead to infinite loop. [\#63](https://github.com/vazco/uniforms/issues/63)
-- **Fixed:** `NestField` lead to infinite loop. [\#62](https://github.com/vazco/uniforms/issues/62)
+- **Fixed:** `HiddenField` leads to infinite loop. [\#63](https://github.com/vazco/uniforms/issues/63)
+- **Fixed:** `NestField` leads to infinite loop. [\#62](https://github.com/vazco/uniforms/issues/62)
 
 ## [v1.0.0-rc.23](https://github.com/vazco/uniforms/tree/v1.0.0-rc.23) (2016-07-05)
 - **Added:** New `HiddenField`. [\#53](https://github.com/vazco/uniforms/issues/53)

@@ -58,7 +58,7 @@ import AutoField from 'uniforms-unstyled/AutoField'; // Choose your theme packag
     //   logic.
     component={MyComponent}
 
-    // All additional props are passed to computed field component.
+    // All additional props are passed to a computed field component.
 />
 ```
 
@@ -72,11 +72,11 @@ import AutoFields from 'uniforms-unstyled/AutoFields'; // Choose your theme pack
 <AutoFields
     // AutoField component.
     //   By default, it will be your theme AutoField, but you can use your
-    //   custom component
+    //   custom component.
     autoField={MyAutoField}
 
     // Wrapping element.
-    //   It's clear, right?
+    //   It's clear, isn't it?
     element="section"
 
     // List of fields to render.
@@ -84,7 +84,7 @@ import AutoFields from 'uniforms-unstyled/AutoFields'; // Choose your theme pack
     fields={['fieldA', 'fieldB']}
 
     // List of fields to omit.
-    //   By default it's empty.
+    //   By default, it's empty.
     omitFields={['fieldA', 'fieldB']}
 />
 ```
@@ -97,35 +97,35 @@ import AutoFields from 'uniforms-unstyled/AutoFields'; // Choose your theme pack
 import BaseField from 'uniforms/BaseField';
 
 // You can't really render a BaseField because it doesn't have a render method.
-// It's a base class of all packaged fields, so all below props are available to
-// all fields.
+// It's a base class of all packaged fields, so that all props below are available
+// to all fields.
 <BaseField
     // Field disabled state.
     //   It's passed directly to the field, but it propagates same as the label.
     disabled={false}
 
     // Field label.
-    //   This prop have three modes. If you pass a string, then it will be used
+    //   This prop has three modes. If you pass a string, then it will be used
     //   as a label. If you pass a null, then it won't have a label, but nested
     //   fields will have default labels. If you pass a non-null falsy value, it
     //   won't have a label and nested fields won't have labels too.
     label={true}
 
     // Field name.
-    //   Used for identification. It should match with your schema - if not, it
-    //   will throw an error.
+    //   Used for identification. It should match your schema - if not, it will
+    //   throw an error.
     name="field"
 
     // Field placeholder.
-    //   If set to true, then label will be used. Otherwise, it's handled like
-    //   label (including propagation).
+    //   If set to true, then a label will be used. Otherwise, it's handled like
+    //   a label (including propagation).
     placeholder={false}
 
     // Field value.
-    //   Every field accept only it's specific value type.
+    //   Every field accepts its specific value type only.
     value={/* accepted value */}
 
-    // You can pass any prop, but remember, that passing onChange will "detach"
+    // You can pass any prop but remember that passing onChange will "detach"
     // the field from the form in some way - it won't change your form state.
     // Also, passing any already provided prop - like id - will override the
     // default one.
@@ -138,13 +138,13 @@ import BaseField from 'uniforms/BaseField';
 import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme package.
 
 <BoolField
-    //Field appearance.  Set to "toggle" to appear as a Material Toggle or to
-    // "checkbox" (or leave it undefined) to use a Checkbox appearance
+    // Field appearance. Set to "toggle" to appear as a Material Toggle or to
+    // "checkbox" (or leave it undefined) to use a Checkbox appearance.
     // Available in:
     //   material
-    appearance="toggle"   //Renders a material-ui Toggle
-    appearance="checkbox" //Renders a material-ui Checkbox
-    
+    appearance="toggle"   // Renders a material-ui Toggle
+    appearance="checkbox" // Renders a material-ui Checkbox
+
     // Field feedback state.
     //   *Some description would be great, huh?*
     // Available in:
@@ -177,7 +177,7 @@ import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme packag
     helpClassName="a b c"
 
     // Checkbox inline state.
-    //   In bootstrpa themes, label is rendered as a text, but in inline mode,
+    //   In bootstrap themes, a label is rendered as a text but in inline mode,
     //   it's treated as a field label.
     // Available in:
     //   bootstrap3
@@ -193,9 +193,9 @@ import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme packag
     inputClassName="a b c"
 
     // Input ref.
-    //   Setting ref prop to a field, won't work as desired, because you'll
-    //   receive field component, not HTML input. If you need an input ref, use
-    //   this prop instead.
+    //   Setting ref prop to a field won't work as desired, because you'll
+    //   receive a field component rather than an HTML input. If you need an input ref,
+    //   use this prop instead.
     inputRef={ref => {}}
 
     // Left label.
@@ -285,17 +285,17 @@ import DateField from 'uniforms-unstyled/DateField'; // Choose your theme packag
     iconProps={{onClick () {}}}
 
     // Input wrapper class name.
-    //   In bootstrap themes, passed className is used on field block. This is
-    //   used on direct field wrapper.
+    //   In bootstrap themes, passed className is used on the field block. This
+    //   is used on the direct field wrapper.
     // Available in:
     //   bootstrap3
     //   bootstrap4
     inputClassName="a b c"
 
     // Input ref.
-    //   Setting ref prop to a field, won't work as desired, because you'll
-    //   receive field component, not HTML input. If you need an input ref, use
-    //   this prop instead.
+    //   Setting ref prop to a field won't work as desired, because you'll
+    //   receive a field component rather than an HTML input. If you need an input ref,
+    //   use this prop instead.
     inputRef={ref => {}}
 
     // Maximum value.
@@ -368,13 +368,13 @@ import HiddenField from 'uniforms-unstyled/HiddenField'; // Choose your theme pa
 
 <HiddenField
     // Field name.
-    //   Used for identification. It should match with your schema - if not, it
-    //   will throw an error.
+    //   Used for identification. It should match your schema - if not, it will
+    //   throw an error.
     name="field"
 
     // Field value.
-    //   This field have completely different semantics. When a value is set,
-    //   then it's updating current model instead of being passed to the field.
+    //   This field has completely different semantics. When a value is set,
+    //   then it's updating a current model instead of being passed to the field.
     value={/* ... */}
 />
 ```
@@ -534,9 +534,9 @@ import LongTextField from 'uniforms-unstyled/LongTextField'; // Choose your them
     inputClassName="a b c"
 
     // Input ref.
-    //   Setting ref prop to a field, won't work as desired, because you'll
-    //   receive field component, not HTML input. If you need an input ref, use
-    //   this prop instead.
+    //   Setting ref prop to a field won't work as desired, because you'll
+    //   receive a field component rather than a HTML input. If you need an input ref,
+    //   use this prop instead.
     inputRef={ref => {}}
 
     // Field inline error.
@@ -578,6 +578,13 @@ import NestField from 'uniforms-unstyled/NestField'; // Choose your theme packag
     //   bootstrap4
     //   semantic
     showInlineError={true}
+
+    // Add / remove "grouped" class from the field.
+    //   In Semantic, fields can be grouped using this class. By default,
+    //   this class is added to the NestField.
+    // Available in:
+    //   semantic
+    grouped={true}
 />
 ```
 
@@ -648,9 +655,9 @@ import NumField from 'uniforms-unstyled/NumField'; // Choose your theme package.
     inputClassName="a b c"
 
     // Input ref.
-    //   Setting ref prop to a field, won't work as desired, because you'll
-    //   receive field component, not HTML input. If you need an input ref, use
-    //   this prop instead.
+    //   Setting ref prop to a field won't work as desired, because you'll
+    //   receive a field component rather than a HTML input. If you need an input ref,
+    //   use this prop instead.
     inputRef={ref => {}}
 
     // Maximum value.
@@ -694,7 +701,7 @@ import RadioField from 'uniforms-unstyled/RadioField'; // Choose your theme pack
     allowedValues={[value1, value2, ...]}
 
     // Checkbox inline state.
-    //   In bootstrpa themes, label is rendered as a text, but in inline mode,
+    //   In bootstrap themes, label is rendered as a text, but in inline mode,
     //   it's treated as a field label.
     // Available in:
     //   bootstrap3
@@ -741,7 +748,7 @@ import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme pa
     checkboxes={true}
 
     // Checkbox inline state.
-    //   In bootstrpa themes, label is rendered as a text, but in inline mode,
+    //   In bootstrap themes, label is rendered as a text, but in inline mode,
     //   it's treated as a field label.
     // Available in:
     //   bootstrap3
@@ -757,9 +764,9 @@ import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme pa
     inputClassName="a b c"
 
     // Input ref.
-    //   Setting ref prop to a field, won't work as desired, because you'll
-    //   receive field component, not HTML input. If you need an input ref, use
-    //   this prop instead.
+    //   Setting ref prop to a field won't work as desired, because you'll
+    //   receive a field component rather than a HTML input. If you need an input ref,
+    //   use this prop instead.
     inputRef={ref => {}}
 
     // Field inline error.
@@ -794,9 +801,9 @@ import SubmitField from 'uniforms-unstyled/SubmitField'; // Choose your theme pa
     inputClassName="a b c"
 
     // Input ref.
-    //   Setting ref prop to a field, won't work as desired, because you'll
-    //   receive field component, not HTML input. If you need an input ref, use
-    //   this prop instead.
+    //   Setting ref prop to a field won't work as desired, because you'll
+    //   receive a field component rather than a HTML input. If you need an input ref,
+    //   use this prop instead.
     inputRef={ref => {}}
 />
 ```
@@ -862,9 +869,9 @@ import TextField from 'uniforms-unstyled/TextField'; // Choose your theme packag
     inputClassName="a b c"
 
     // Input ref.
-    //   Setting ref prop to a field, won't work as desired, because you'll
-    //   receive field component, not HTML input. If you need an input ref, use
-    //   this prop instead.
+    //   Setting ref prop to a field won't work as desired, because you'll
+    //   receive a field component rather than a HTML input. If you need an input ref,
+    //   use this prop instead.
     inputRef={ref => {}}
 
     // Field inline error.
@@ -953,13 +960,13 @@ import BaseForm from 'uniforms/BaseForm'; // Or from the theme package.
     // Form model.
     //   An object with {field: value} structure. It doesn't matter, if it has a
     //   prototype or not, but keep in mind that in onSubmit or in onChangeModel
-    //   you'll receive a plain object. If you'll treat form as an input, then
-    //   this is value.
+    //   you'll receive a plain object. If you treat form as an input, then
+    //   this is a value.
     model={{fieldA: 1}}
 
     // Model transform.
     //   Function transforming one model into another. It's used in few
-    //   situations (modes) described below. Do not mutate given model!
+    //   situations (modes) described below. Do not mutate a given model!
     modelTransform={(mode, model) => {
         // This model will be passed to the fields.
         if (mode === 'form') {/* ... */}
@@ -976,16 +983,16 @@ import BaseForm from 'uniforms/BaseForm'; // Or from the theme package.
 
     // Field change action.
     //   It receive two arguments: key and value, where key is a dot separated
-    //   path to the changed field and value is the requested value.
+    //   path to the changed field and value is a requested value.
     onChange={(key, value) => console.log(key, value)}
 
     // Submit failure action.
-    //   If onSubmit will return a Promise, then this will be attached to it's
+    //   If onSubmit returns a Promise, then this will be attached to its
     //   .catch chain.
     onSubmitFailure={() => alert('Promise rejected!')}
 
     // Submit success action.
-    //   If onSubmit will return a Promise, then this will be attached to it's
+    //   If onSubmit returns a Promise, then this will be attached to its
     //   .then chain.
     onSubmitSuccess={() => alert('Promise resolved!')}
 
@@ -1042,15 +1049,15 @@ import QuickForm from 'uniforms/QuickForm'; // Or from the theme package.
 
 <QuickForm
     // Custom AutoField.
-    //   It should be anything, that will pass through React.createElement.
+    //   It should be anything that will pass through React.createElement.
     autoField={CustomAutoField}
 
     // Custom ErrorsField.
-    //   It should be anything, that will pass through React.createElement.
+    //   It should be anything that will pass through React.createElement.
     errorsField={CustomErrorsField}
 
     // Custom SubmitField.
-    //   It should be anything, that will pass through React.createElement.
+    //   It should be anything that will pass through React.createElement.
     submitField={CustomSubmitField}
 />
 ```
@@ -1064,7 +1071,7 @@ import ValidatedForm from 'uniforms/ValidatedForm'; // Or from the theme package
 
 <ValidatedForm
     // Additional asynchronous validation.
-    //   Schema validation have to be sync, so this is the only way to achieve
+    //   Schema validation has to be sync, so this is the only way to achieve
     //   async validation.
     onValidate={(model, error, callback) => {
         // You can either ignore validation error...
@@ -1072,19 +1079,19 @@ import ValidatedForm from 'uniforms/ValidatedForm'; // Or from the theme package
             return callback(null);
         }
 
-        // ... or any additional validation if an error is already there...
+        // ...or any additional validation if an error is already there...
         if (error) {
             return callback();
         }
 
-        // ... or feed it with another error.
+        // ...or feed it with another error.
         MyAPI.validate(model, error => callback(error || null));
     }}
 
     // Validation mode.
-    //   By default, form will start to validate from the time of the first
+    //   By default, the form will start to validate from the time of the first
     //   submit and then revalidate on every change. It's 'onChangeAfterSubmit'.
-    //   There's also 'onChange' and 'onSubmit' modes, but those are quite
+    //   There are also 'onChange' and 'onSubmit' modes, but those are quite
     //   self-explanatory.
     validate="onChangeAfterSubmit"
 
@@ -1102,7 +1109,7 @@ import ValidatedForm from 'uniforms/ValidatedForm'; // Or from the theme package
         form.validate();
 
         // Validate form with key set to value.
-        //   You can use it to check, if the given value will pass the
+        //   You can use it to check, if a given value will pass the
         //   validation or not. Returns validation Promise, as described above.
         form.validate(key, value);
 
@@ -1130,7 +1137,7 @@ import ValidatedForm from 'uniforms/ValidatedForm'; // Or from the theme package
 ```js
 import changedKeys from 'uniforms/changedKeys';
 
-// Returns array of changed keys between valueA and valueB, where root is the
+// Returns an array of changed keys between valueA and valueB, where root is the
 // root key.
 const arrayOfChangedKeys = changedKeys(root, valueA, valueB);
 ```
@@ -1155,7 +1162,7 @@ const ComponentXField = connectField(ComponentX, {
 
     // <input> helper
     //   In React, <input> can't have undefined or null value and any onChange
-    //   at once - this option fallback undefined value to ''.
+    //   at once - this option passes 'undefined' as en empty string.
     ensureValue = true,
 
     // Initial value check
@@ -1204,7 +1211,7 @@ filterDOMProps.registered; // ['propA', 'propB', ...]
 ```js
 import injectName from 'uniforms/injectName';
 
-// It's rather internal helper, but it's still exported. Injects name to all
+// It's rather an internal helper, but it's still exported. Injects name to all
 // already rendered fields.
 const componentWithInjectedName = injectName(name, component);
 ```
@@ -1214,11 +1221,11 @@ const componentWithInjectedName = injectName(name, component);
 ```js
 import joinName from 'uniforms/joinName';
 
-// Use it to safely join partial field names. If you create custom field with
+// Use it to safely join partial field names. If you create a custom field with
 // subfields, then it's better to use this helper.
 const joinedNameString = joinName(nameA, nameB, nameC, ...);
 
-// If you want to have a "raw" version of a name, then pass null as a first
+// If you want to have a "raw" version of a name, then pass null as the first
 // param.
 const joinedNameArray = joinName(null, nameA, nameB, nameC, ...);
 ```

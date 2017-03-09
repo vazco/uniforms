@@ -9,7 +9,9 @@ export default function wrapField ({
     id,
     info,
     label,
-    showInlineError
+    labelCol,
+    showInlineError,
+    wrapperCol
 }, children) {
     const labelNode = !!label && (
         <span>
@@ -31,8 +33,10 @@ export default function wrapField ({
             help={showInlineError && errorMessage}
             htmlFor={id}
             label={labelNode}
+            labelCol={labelCol}
             style={{marginBottom: '12px'}}
             validateStatus={error ? 'error' : undefined}
+            wrapperCol={wrapperCol}
         >
             {children}
         </Form.Item>
