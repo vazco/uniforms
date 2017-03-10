@@ -49,7 +49,7 @@
 # What's included?
 
 * **Automatic forms generation**
-* **Fields capable of render every schema**
+* **Fields capable of rendering every schema**
 * **Helper for creating custom fields with one line**
 * **Inline and asynchronous form validation**
 * **Integrations with various schemas:**
@@ -69,4 +69,4 @@
 
 # License
 
-**Like every [Vazco.eu](https://vazco.eu/) package, all uniforms packages are [MIT licensed](https://github.com/vazco/uniforms/blob/master/LICENSE).**
+**Like every other [Vazco.eu](https://vazco.eu/) package, all uniforms packages are [MIT licensed](https://github.com/vazco/uniforms/blob/master/LICENSE).**
