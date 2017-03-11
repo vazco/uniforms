@@ -1,3 +1,6 @@
+## Next:
+- **Added:** Support for `colon` and `required` in `uniforms-antd`. [\#229](https://github.com/vazco/uniforms/issues/229)
+
 ## [v1.14.0](https://github.com/vazco/uniforms/tree/v1.14.0) (2017-03-06)
 - **Added:** Additional babel transforms to reduce bundle size.
 - **Added:** Support for `labelCol` and `wrapperCol` in `uniforms-antd`. [\#207](https://github.com/vazco/uniforms/issues/207)
