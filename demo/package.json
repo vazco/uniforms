@@ -17,7 +17,7 @@
     "eslint-plugin-react": "6.10.0",
     "eslint-plugin-vazco": "1.0.0",
     "graphql": "0.9.1",
-    "material-ui": "0.17.0 || 0.16.7",
+    "material-ui": "0.17.0",
     "meteor-node-stubs": "0.2.5",
     "react": "15.4.2",
     "react-dom": "15.4.2",
