@@ -65,7 +65,7 @@
     "sinon": "2.0.0-pre.6"
   },
   "peerDependencies": {
-    "material-ui": "^0.16.7",
+    "material-ui": "^0.17.0",
     "react": "^15.0.0 || ^0.14.0",
     "uniforms": "^1.14.0"
   },
