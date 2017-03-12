@@ -166,15 +166,15 @@ import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme packag
     //  The layout of label. You can set span and/or offset.
     // Available in:
     //   antd
-    labelCol={span: 4}   // 'ant-col-4' on label
-    labelCol={offset: 2} // 'ant-col-offset-2' on label
+    labelCol={{span: 4}}   // 'ant-col-4' on label
+    labelCol={{offset: 2}} // 'ant-col-offset-2' on label
 
     // Field layout
     //   The layout for input controls. Same as labelCol
     // Available in:
     //   antd
-    wrapperCol={span: 4}   // 'ant-col-4' on field
-    wrapperCol={offset: 2} // 'ant-col-offset-2' on field
+    wrapperCol={{span: 4}}   // 'ant-col-4' on field
+    wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
 
     // Help text.
     //   *Some description would be great, huh?*
@@ -267,15 +267,15 @@ import DateField from 'uniforms-unstyled/DateField'; // Choose your theme packag
     //  The layout of label. You can set span and/or offset.
     // Available in:
     //   antd
-    labelCol={span: 4}   // 'ant-col-4' on label
-    labelCol={offset: 2} // 'ant-col-offset-2' on label
+    labelCol={{span: 4}}   // 'ant-col-4' on label
+    labelCol={{offset: 2}} // 'ant-col-offset-2' on label
 
     // Field layout
     //   The layout for input controls. Same as labelCol
     // Available in:
     //   antd
-    wrapperCol={span: 4}   // 'ant-col-4' on field
-    wrapperCol={offset: 2} // 'ant-col-offset-2' on field
+    wrapperCol={{span: 4}}   // 'ant-col-4' on field
+    wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
 
     // Help text.
     //   *Some description would be great, huh?*
@@ -529,15 +529,15 @@ import LongTextField from 'uniforms-unstyled/LongTextField'; // Choose your them
     //  The layout of label. You can set span and/or offset.
     // Available in:
     //   antd
-    labelCol={span: 4}   // 'ant-col-4' on label
-    labelCol={offset: 2} // 'ant-col-offset-2' on label
+    labelCol={{span: 4}}   // 'ant-col-4' on label
+    labelCol={{offset: 2}} // 'ant-col-offset-2' on label
 
     // Field layout
     //   The layout for input controls. Same as labelCol
     // Available in:
     //   antd
-    wrapperCol={span: 4}   // 'ant-col-4' on field
-    wrapperCol={offset: 2} // 'ant-col-offset-2' on field
+    wrapperCol={{span: 4}}   // 'ant-col-4' on field
+    wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
 
     // Help block className.
     //   *Some description would be great, huh?*
@@ -657,15 +657,15 @@ import NumField from 'uniforms-unstyled/NumField'; // Choose your theme package.
     //  The layout of label. You can set span and/or offset.
     // Available in:
     //   antd
-    labelCol={span: 4}   // 'ant-col-4' on label
-    labelCol={offset: 2} // 'ant-col-offset-2' on label
+    labelCol={{span: 4}}   // 'ant-col-4' on label
+    labelCol={{offset: 2}} // 'ant-col-offset-2' on label
 
     // Field layout
     //   The layout for input controls. Same as labelCol
     // Available in:
     //   antd
-    wrapperCol={span: 4}   // 'ant-col-4' on field
-    wrapperCol={offset: 2} // 'ant-col-offset-2' on field
+    wrapperCol={{span: 4}}   // 'ant-col-4' on field
+    wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
 
     // Help text.
     //   *Some description would be great, huh?*
@@ -760,15 +760,15 @@ import RadioField from 'uniforms-unstyled/RadioField'; // Choose your theme pack
     //  The layout of label. You can set span and/or offset.
     // Available in:
     //   antd
-    labelCol={span: 4}   // 'ant-col-4' on label
-    labelCol={offset: 2} // 'ant-col-offset-2' on label
+    labelCol={{span: 4}}   // 'ant-col-4' on label
+    labelCol={{offset: 2}} // 'ant-col-offset-2' on label
 
     // Field layout
     //   The layout for input controls. Same as labelCol
     // Available in:
     //   antd
-    wrapperCol={span: 4}   // 'ant-col-4' on field
-    wrapperCol={offset: 2} // 'ant-col-offset-2' on field
+    wrapperCol={{span: 4}}   // 'ant-col-4' on field
+    wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
 
     // Checkbox inline state.
     //   In bootstrap themes, label is rendered as a text, but in inline mode,
@@ -821,15 +821,15 @@ import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme pa
     //  The layout of label. You can set span and/or offset.
     // Available in:
     //   antd
-    labelCol={span: 4}   // 'ant-col-4' on label
-    labelCol={offset: 2} // 'ant-col-offset-2' on label
+    labelCol={{span: 4}}   // 'ant-col-4' on label
+    labelCol={{offset: 2}} // 'ant-col-offset-2' on label
 
     // Field layout
     //   The layout for input controls. Same as labelCol
     // Available in:
     //   antd
-    wrapperCol={span: 4}   // 'ant-col-4' on field
-    wrapperCol={offset: 2} // 'ant-col-offset-2' on field
+    wrapperCol={{span: 4}}   // 'ant-col-4' on field
+    wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
 
     // Checkbox inline state.
     //   In bootstrap themes, label is rendered as a text, but in inline mode,
@@ -913,15 +913,15 @@ import TextField from 'uniforms-unstyled/TextField'; // Choose your theme packag
     //  The layout of label. You can set span and/or offset.
     // Available in:
     //   antd
-    labelCol={span: 4}   // 'ant-col-4' on label
-    labelCol={offset: 2} // 'ant-col-offset-2' on label
+    labelCol={{span: 4}}   // 'ant-col-4' on label
+    labelCol={{offset: 2}} // 'ant-col-offset-2' on label
 
     // Field layout
     //   The layout for input controls. Same as labelCol
     // Available in:
     //   antd
-    wrapperCol={span: 4}   // 'ant-col-4' on field
-    wrapperCol={offset: 2} // 'ant-col-offset-2' on field
+    wrapperCol={{span: 4}}   // 'ant-col-4' on field
+    wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
 
     // Help text.
     //   *Some description would be great, huh?*

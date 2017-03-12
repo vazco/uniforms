@@ -6,8 +6,8 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 
 import wrapField from './wrapField';
 
-const Bool = ({labelCol, wrapperCol, ...props}) =>
-    wrapField({labelCol, wrapperCol, ...props}, (
+const Bool = props =>
+    wrapField(props, (
         <Switch
             checked={props.value}
             disabled={props.disabled}
