@@ -1,5 +1,7 @@
-## Next:
+## [v1.15.0](https://github.com/vazco/uniforms/tree/v1.15.0) (2017-03-12)
 - **Added:** Support for `colon` and `required` in `uniforms-antd`. [\#229](https://github.com/vazco/uniforms/issues/229)
+- **Added:** Support for `grouped` in `uniforms-semantic`. [\#227](https://github.com/vazco/uniforms/issues/227)
+- **Added:** Support for `material-ui@0.17` in `uniforms-material`. [\#232](https://github.com/vazco/uniforms/issues/232)
 
 ## [v1.14.0](https://github.com/vazco/uniforms/tree/v1.14.0) (2017-03-06)
 - **Added:** Additional babel transforms to reduce bundle size.
