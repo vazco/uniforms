@@ -1,7 +1,8 @@
-import Form    from 'antd/lib/form';
-import Icon    from 'antd/lib/icon';
-import React   from 'react';
-import Tooltip from 'antd/lib/tooltip';
+import Form           from 'antd/lib/form';
+import Icon           from 'antd/lib/icon';
+import React          from 'react';
+import Tooltip        from 'antd/lib/tooltip';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 export default function wrapField ({
     colon,
@@ -46,3 +47,10 @@ export default function wrapField ({
         </Form.Item>
     );
 }
+
+filterDOMProps.register(
+    'colon',
+    'labelCol',
+    'required',
+    'wrapperCol'
+);
