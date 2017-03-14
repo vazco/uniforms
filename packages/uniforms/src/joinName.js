@@ -1,9 +1,13 @@
-export default function joinName (...names) {
-    const name = names
-        .filter(name => name || name === 0)
-        .map(name => name.split ? name.split('.') : name)
-        .reduce((names, name) => names.concat(name), [])
-        .map(name => name.toString());
+export default function joinName (...parts) {
+    const name = parts.reduce((parts, part) =>
+        part || part === 0
+            ? parts.concat(typeof part === 'string' ? part.split('.') : part)
+            : parts,
+        []
+    );
 
-    return names[0] === null ? name : name.join('.');
+    return parts[0] === null
+        ? name.map(part => part.toString())
+        : name.join('.')
+    ;
 }
