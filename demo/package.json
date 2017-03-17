@@ -8,7 +8,7 @@
     "restart": "npm run reset && npm start"
   },
   "dependencies": {
-    "antd": "2.8.0",
+    "antd": "2.8.1",
     "babel-eslint": "7.1.1",
     "babel-polyfill": "6.23.0",
     "eslint": "3.17.1",
@@ -17,8 +17,8 @@
     "eslint-plugin-react": "6.10.0",
     "eslint-plugin-vazco": "1.0.0",
     "graphql": "0.9.1",
-    "material-ui": "0.17.0",
-    "meteor-node-stubs": "0.2.5",
+    "material-ui": "0.17.1",
+    "meteor-node-stubs": "0.2.6",
     "react": "15.4.2",
     "react-dom": "15.4.2",
     "react-mounter": "1.2.0",
