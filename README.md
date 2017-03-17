@@ -22,25 +22,19 @@
     <a href="https://coveralls.io/github/vazco/uniforms">
         <img src="https://img.shields.io/coveralls/vazco/uniforms.svg?style=flat-square" alt="Coverage">
     </a>
-
     <a href="https://npmjs.org/package/uniforms">
         <img src="https://img.shields.io/npm/l/uniforms.svg?style=flat-square" alt="License">
     </a>
-
     <a href="https://npmjs.org/package/uniforms">
         <img src="https://img.shields.io/npm/dm/uniforms.svg?style=flat-square" alt="Downloads">
     </a>
-
     <img src="https://img.shields.io/badge/open-source-007ec6.svg?style=flat-square" alt="Open Source">
-
     <a href="https://gitter.im/vazco/uniforms">
         <img src="https://img.shields.io/gitter/room/vazco/uniforms.svg?style=flat-square" alt="Gitter">
     </a>
-
     <a href="https://npmjs.org/package/uniforms">
         <img src="https://img.shields.io/npm/v/uniforms.svg?style=flat-square" alt="Version">
     </a>
-
     <a href="https://travis-ci.org/vazco/uniforms">
         <img src="https://img.shields.io/travis/vazco/uniforms.svg?style=flat-square" alt="Status">
     </a>
