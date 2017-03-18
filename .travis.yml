@@ -5,8 +5,14 @@ node_js:
   - 6
   - 7
 
+branches:
+  only:
+    - master
+    - /^v\d+\.\d+(\.\d+)?(-\S+)?$/
+
 cache:
   directories:
+    - demo/node_modules
     - node_modules
     - packages/uniforms/node_modules
     - packages/uniforms-antd/node_modules
@@ -15,6 +21,9 @@ cache:
     - packages/uniforms-material/node_modules
     - packages/uniforms-semantic/node_modules
     - packages/uniforms-unstyled/node_modules
+
+before_script:
+  - npm run install --prefix demo
 
 after_script:
   - npm run cover:main
