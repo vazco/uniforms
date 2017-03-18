@@ -2,21 +2,15 @@
   "name": "demo",
   "private": true,
   "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "reset": "rimraf node_modules/uniforms* && npm run install",
+    "restart": "npm run reset && npm start",
     "start": "meteor run",
-    "reset": "rm -rf node_modules/uniforms* && npm i",
-    "test": "eslint .",
-    "restart": "npm run reset && npm start"
+    "test": "true"
   },
   "dependencies": {
     "antd": "2.8.1",
-    "babel-eslint": "7.1.1",
-    "babel-polyfill": "6.23.0",
-    "eslint": "3.18.0",
-    "eslint-config-vazco": "2.4.0",
-    "eslint-plugin-babel": "4.1.1",
-    "eslint-plugin-brackets": "0.0.1",
-    "eslint-plugin-react": "6.10.0",
-    "eslint-plugin-vazco": "1.0.0",
     "graphql": "0.9.1",
     "material-ui": "0.17.1",
     "meteor-node-stubs": "0.2.6",
@@ -33,6 +27,17 @@
     "uniforms-material": "file:../packages/uniforms-material",
     "uniforms-semantic": "file:../packages/uniforms-semantic",
     "uniforms-unstyled": "file:../packages/uniforms-unstyled"
+  },
+  "devDependencies": {
+    "babel-eslint": "7.1.1",
+    "babel-polyfill": "6.23.0",
+    "eslint": "3.18.0",
+    "eslint-config-vazco": "2.4.0",
+    "eslint-plugin-babel": "4.1.1",
+    "eslint-plugin-brackets": "0.0.1",
+    "eslint-plugin-react": "6.10.0",
+    "eslint-plugin-vazco": "1.0.0",
+    "rimraf": "2.6.1"
   },
   "eslintConfig": {
     "root": true,

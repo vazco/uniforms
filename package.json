@@ -20,13 +20,15 @@
     "cover:report": "nyc report --reporter=text-lcov | coveralls",
     "install": "npm run install:packages",
     "install:packages": "lerna bootstrap",
-    "lint": "npm run lint:packages",
+    "lint": "npm run lint:demo && npm run lint:packages",
+    "lint:demo": "npm run lint --prefix demo",
     "lint:packages": "lerna run lint",
     "publish": "lerna publish",
     "reset": "npm run reset:packages && npm run reset:main",
     "reset:main": "rimraf node_modules",
     "reset:packages": "lerna run reset",
-    "test": "npm run test:packages",
+    "test": "npm run test:demo && npm run test:packages",
+    "test:demo": "npm run test --prefix demo",
     "test:packages": "lerna run test"
   },
   "nyc": {
