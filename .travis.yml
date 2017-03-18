@@ -23,7 +23,7 @@ cache:
     - packages/uniforms-unstyled/node_modules
 
 before_script:
-  - npm run install --prefix demo
+  - npm install --prefix demo
 
 after_script:
   - npm run cover:main
