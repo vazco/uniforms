@@ -30,8 +30,6 @@ const LongText = ({
     />
 ;
 
-LongText.defaultProps = {
-    fullWidth: true
-};
+LongText.defaultProps = {fullWidth: true};
 
 export default connectField(LongText);

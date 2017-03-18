@@ -52,11 +52,13 @@ describe('injectName', () => {
         it('does nothing on normal elements', () => {
             mount(
                 <Field name="fieldA">
-                    {injectName('fieldB',
+                    {injectName(
+                        'fieldB',
                         <Test />
                     )}
-                </Field>
-            , reactContext);
+                </Field>,
+                reactContext
+            );
 
             expect(Test.getCall(0).calledWithMatch({name: 'fieldA'})).to.be.ok;
             expect(Test.getCall(1).calledWithMatch({name: 'fieldA.fieldB'})).to.be.false;
@@ -65,11 +67,13 @@ describe('injectName', () => {
         it('injects name into field', () => {
             mount(
                 <Field name="fieldA">
-                    {injectName('fieldB',
+                    {injectName(
+                        'fieldB',
                         <Field />
                     )}
-                </Field>
-            , reactContext);
+                </Field>,
+                reactContext
+            );
 
             expect(Test.getCall(0).calledWithMatch({name: 'fieldA'})).to.be.ok;
             expect(Test.getCall(1).calledWithMatch({name: 'fieldA.fieldB'})).to.be.ok;
@@ -83,8 +87,9 @@ describe('injectName', () => {
                         <Field key={2} />,
                         <Field key={3} />
                     ])}
-                </Field>
-            , reactContext);
+                </Field>,
+                reactContext
+            );
 
             expect(Test.getCall(0).calledWithMatch({name: 'fieldA'})).to.be.ok;
             expect(Test.getCall(1).calledWithMatch({name: 'fieldA.fieldB'})).to.be.ok;
@@ -95,13 +100,15 @@ describe('injectName', () => {
         it('injects name into nested field', () => {
             mount(
                 <Field name="fieldA">
-                    {injectName('fieldB',
+                    {injectName(
+                        'fieldB',
                         <span>
                             <Field />
                         </span>
                     )}
-                </Field>
-            , reactContext);
+                </Field>,
+                reactContext
+            );
 
             expect(Test.getCall(0).calledWithMatch({name: 'fieldA'})).to.be.ok;
             expect(Test.getCall(1).calledWithMatch({name: 'fieldA.fieldB'})).to.be.ok;
@@ -110,15 +117,17 @@ describe('injectName', () => {
         it('injects name into nested fields', () => {
             mount(
                 <Field name="fieldA">
-                    {injectName('fieldB',
+                    {injectName(
+                        'fieldB',
                         <span>
                             <Field />
                             <Field />
                             <Field />
                         </span>
                     )}
-                </Field>
-            , reactContext);
+                </Field>,
+                reactContext
+            );
 
             expect(Test.getCall(0).calledWithMatch({name: 'fieldA'})).to.be.ok;
             expect(Test.getCall(1).calledWithMatch({name: 'fieldA.fieldB'})).to.be.ok;
@@ -129,17 +138,20 @@ describe('injectName', () => {
         it('injects joined name', () => {
             mount(
                 <Field name="fieldA">
-                    {injectName('fieldB',
+                    {injectName(
+                        'fieldB',
                         <Field name="fieldC" />
                     )}
 
-                    {injectName('fieldB',
+                    {injectName(
+                        'fieldB',
                         <span>
                             <Field name="fieldC" />
                         </span>
                     )}
-                </Field>
-            , reactContext);
+                </Field>,
+                reactContext
+            );
 
             expect(Test.getCall(0).calledWithMatch({name: 'fieldA'})).to.be.ok;
             expect(Test.getCall(1).calledWithMatch({name: 'fieldA.fieldB.fieldC'})).to.be.ok;
@@ -149,21 +161,24 @@ describe('injectName', () => {
         it('injects only the first level', () => {
             mount(
                 <Field name="fieldA">
-                    {injectName('fieldB',
+                    {injectName(
+                        'fieldB',
                         <Field name="fieldC">
                             <Test name="fieldD" />
                         </Field>
                     )}
 
-                    {injectName('fieldB',
+                    {injectName(
+                        'fieldB',
                         <span>
                             <Field name="fieldC">
                                 <Test name="fieldD" />
                             </Field>
                         </span>
                     )}
-                </Field>
-            , reactContext);
+                </Field>,
+                reactContext
+            );
 
             expect(Test.getCall(2).calledWithMatch({name: 'fieldD'})).to.be.ok;
             expect(Test.getCall(4).calledWithMatch({name: 'fieldD'})).to.be.ok;

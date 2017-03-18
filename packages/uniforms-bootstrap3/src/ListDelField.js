@@ -28,8 +28,6 @@ const ListDel = ({
     );
 };
 
-ListDel.defaultProps = {
-    removeIcon: <i className="glyphicon glyphicon-minus" />
-};
+ListDel.defaultProps = {removeIcon: <i className="glyphicon glyphicon-minus" />};
 
 export default connectField(ListDel, {includeParent: true, initialValue: false});

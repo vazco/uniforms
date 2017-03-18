@@ -21,8 +21,6 @@ const LongText = props =>
     ))
 ;
 
-LongText.defaultProps = {
-    rows: 5
-};
+LongText.defaultProps = {rows: 5};
 
 export default connectField(LongText);

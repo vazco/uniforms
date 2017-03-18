@@ -14,9 +14,9 @@ const ListDel = ({
     return (
         <span
             {...filterDOMProps(props)}
-            onClick={() => limitNotReached && parent.onChange([]
-                .concat(parent.value.slice(0,  fieldIndex))
-                .concat(parent.value.slice(1 + fieldIndex))
+            onClick={() => limitNotReached && parent.onChange(
+                [].concat(parent.value.slice(0,  fieldIndex))
+                  .concat(parent.value.slice(1 + fieldIndex))
             )}
         >
             -

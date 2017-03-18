@@ -73,8 +73,6 @@ class Num extends Component {
     }
 }
 
-Num.defaultProps = {
-    fullWidth: true
-};
+Num.defaultProps = {fullWidth: true};
 
 export default connectField(Num);

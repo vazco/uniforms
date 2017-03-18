@@ -26,6 +26,4 @@ FlowRouter.route('/', {
     }
 });
 
-FlowRouter.notFound = {
-    triggersEnter: [(context, redirect) => redirect('/')]
-};
+FlowRouter.notFound = {triggersEnter: [(context, redirect) => redirect('/')]};

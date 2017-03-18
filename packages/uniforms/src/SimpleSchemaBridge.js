@@ -167,8 +167,7 @@ export default class SimpleSchemaBridge extends Bridge {
         field = {...field, required: !optional};
 
         if (uniforms) {
-            if (typeof uniforms === 'string' ||
-                typeof uniforms === 'function') {
+            if (typeof uniforms === 'string' || typeof uniforms === 'function') {
                 field = {...field, component: uniforms};
             } else {
                 field = {...field, ...uniforms};

@@ -53,8 +53,6 @@ const SubmitField = ({
 };
 
 SubmitField.contextTypes = BaseField.contextTypes;
-SubmitField.defaultProps = {
-    inputClassName: 'btn btn-primary'
-};
+SubmitField.defaultProps = {inputClassName: 'btn btn-primary'};
 
 export default SubmitField;

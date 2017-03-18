@@ -24,8 +24,6 @@ const ListAdd = ({
     );
 };
 
-ListAdd.defaultProps = {
-    addIcon: <i className="glyphicon glyphicon-plus" />
-};
+ListAdd.defaultProps = {addIcon: <i className="glyphicon glyphicon-plus" />};
 
 export default connectField(ListAdd, {includeParent: true, initialValue: false});

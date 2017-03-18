@@ -82,29 +82,26 @@ const Validated = parent => class extends parent {
     componentWillReceiveProps ({model, schema, validate, validator}) {
         super.componentWillReceiveProps(...arguments);
 
-        if (this.props.schema    !== schema ||
-            this.props.validator !== validator) {
+        if (this.props.schema !== schema || this.props.validator !== validator) {
             this.setState({
                 validator: this
                     .getChildContextSchema()
                     .getValidator(validator)
             }, () => {
-                if (validate === 'onChange' ||
-                    validate === 'onChangeAfterSubmit' && this.state.validate) {
+                if (validate === 'onChange' || validate === 'onChangeAfterSubmit' && this.state.validate) {
                     this.onValidate();
                 }
             });
         } else if (!isEqual(this.props.model, model)) {
-            if (validate === 'onChange' ||
-                validate === 'onChangeAfterSubmit' && this.state.validate) {
+            if (validate === 'onChange' || validate === 'onChangeAfterSubmit' && this.state.validate) {
                 this.onValidateModel(model);
             }
         }
     }
 
     onChange (key, value) {
-        if (this.props.validate === 'onChange' ||
-            this.props.validate === 'onChangeAfterSubmit' && this.state.validate) {
+        // eslint-disable-next-line max-len
+        if (this.props.validate === 'onChange' || this.props.validate === 'onChangeAfterSubmit' && this.state.validate) {
             this.onValidate(key, value);
         }
 

@@ -9,9 +9,7 @@ import {Component}    from 'react';
 class Date_ extends Component {
     static displayName = 'Date';
 
-    static defaultProps = {
-        fullWidth: true
-    };
+    static defaultProps = {fullWidth: true};
 
     constructor () {
         super(...arguments);

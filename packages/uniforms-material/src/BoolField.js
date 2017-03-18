@@ -40,8 +40,6 @@ const Bool = ({
     )
 ;
 
-Bool.defaultProps = {
-    appearance: 'checkbox'
-};
+Bool.defaultProps = {appearance: 'checkbox'};
 
 export default connectField(Bool);
