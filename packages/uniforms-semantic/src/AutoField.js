@@ -1,4 +1,4 @@
-import connectField    from 'uniforms/connectField';
+import BaseField       from 'uniforms/BaseField';
 import invariant       from 'fbjs/lib/invariant';
 import {createElement} from 'react';
 
@@ -11,29 +11,37 @@ import TextField   from './TextField';
 import RadioField  from './RadioField';
 import SelectField from './SelectField';
 
-const Auto = ({component, ...props}) => {
-    if (component === undefined) {
-        if (props.allowedValues) {
-            if (props.checkboxes && props.fieldType !== Array) {
-                component = RadioField;
-            } else {
-                component = SelectField;
-            }
-        } else {
-            switch (props.fieldType) {
-                case Date:    component = DateField; break;
-                case Array:   component = ListField; break;
-                case Number:  component = NumField;  break;
-                case Object:  component = NestField; break;
-                case String:  component = TextField; break;
-                case Boolean: component = BoolField; break;
-            }
+export default class AutoField extends BaseField {
+    static displayName = 'AutoField';
 
-            invariant(component, 'Unsupported field type: %s', props.fieldType.toString());
-        }
+    getChildContextName () {
+        return this.context.uniforms.name;
     }
 
-    return createElement(component, props);
-};
+    render () {
+        const props = this.getFieldProps(undefined, {ensureValue: false});
 
-export default connectField(Auto, {ensureValue: false, includeInChain: false, initialValue: false});
+        if (props.component === undefined) {
+            if (props.allowedValues) {
+                if (props.checkboxes && props.fieldType !== Array) {
+                    props.component = RadioField;
+                } else {
+                    props.component = SelectField;
+                }
+            } else {
+                switch (props.fieldType) {
+                    case Date:    props.component = DateField; break;
+                    case Array:   props.component = ListField; break;
+                    case Number:  props.component = NumField;  break;
+                    case Object:  props.component = NestField; break;
+                    case String:  props.component = TextField; break;
+                    case Boolean: props.component = BoolField; break;
+                }
+
+                invariant(props.component, 'Unsupported field type: %s', props.fieldType.toString());
+            }
+        }
+
+        return createElement(props.component, this.props);
+    }
+}
