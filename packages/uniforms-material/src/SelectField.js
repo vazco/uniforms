@@ -71,7 +71,6 @@ const renderSelect = ({
     onChange,
     placeholder,
     transform,
-    value,
     ...props
 }) =>
     <SelectField
@@ -81,26 +80,33 @@ const renderSelect = ({
         fullWidth={fullWidth}
         hintText={placeholder}
         id={id}
+        multiple={props.fieldType === Array}
         name={name}
         onChange={(event, index, value) => onChange(value)}
         ref={inputRef}
-        value={value}
+        value={props.value}
         {...filterDOMProps(props)}
     >
         {allowedValues.map(value =>
             <MenuItem
+                insetChildren={props.fieldType === Array}
+                checked={props.fieldType === Array && props.value.includes(value)}
                 key={value}
-                value={value}
                 primaryText={transform ? transform(value) : value}
+                value={value}
             />
         )}
     </SelectField>
 ;
 
 const Select = props =>
-    props.checkboxes || props.fieldType === Array
+    props.checkboxes
         ? renderCheckboxes(props)
         : renderSelect    (props)
 ;
 
 export default connectField(Select, {ensureValue: false});
+
+filterDOMProps.register(
+    'checkboxes'
+);
