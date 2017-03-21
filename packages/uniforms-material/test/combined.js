@@ -252,7 +252,7 @@ describe('Everything', () => {
     });
 
     it('works (SelectField, checkboxes, multiple, on)', async () => {
-        const find = () => wrapper.find(SelectField).filterWhere(x => x.props().name === 'x04');
+        const find = () => wrapper.find(SelectField).filterWhere(x => x.props().name === 'x04').find('Select');
 
         expect(find().props()).to.have.property('value').that.is.deep.equal([]);
         expect(find().find(MaterialCheckbox).at(1).props().onCheck()).to.equal(undefined);
@@ -265,7 +265,7 @@ describe('Everything', () => {
     });
 
     it('works (SelectField, checkboxes, multiple, off)', async () => {
-        const find = () => wrapper.find(SelectField).filterWhere(x => x.props().name === 'x04');
+        const find = () => wrapper.find(SelectField).filterWhere(x => x.props().name === 'x04').find('Select');
 
         expect(find().props()).to.have.property('value').that.is.deep.equal(['2']);
         expect(find().find(MaterialCheckbox).at(1).props().onCheck()).to.equal(undefined);
@@ -278,7 +278,7 @@ describe('Everything', () => {
     });
 
     it('works (DateField)', async () => {
-        const find = () => wrapper.find(DateField).filterWhere(x => x.props().name === 'x05');
+        const find = () => wrapper.find(DateField).filterWhere(x => x.props().name === 'x05').find('Date');
         const input = find().find(MaterialTextField).filterWhere(x => x.props().name === 'x05').last();
 
         expect(find().props()).to.have.property('value').that.is.deep.equal(dateA);
