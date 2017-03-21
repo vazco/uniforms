@@ -1,4 +1,5 @@
 import React       from 'react';
+import cloneDeep   from 'lodash.clonedeep';
 import get         from 'lodash.get';
 import set         from 'lodash.set';
 import {Component} from 'react';
@@ -79,10 +80,8 @@ export default class BaseForm extends Component {
     constructor () {
         super(...arguments);
 
-        this.state = {bridge: createSchemaBridge(this.props.schema), resetCount: 0};
+        this.state = {bridge: createSchemaBridge(this.props.schema), changed: null, changedMap: {}, resetCount: 0};
 
-        this.changed = null;
-        this.changedMap = {};
         this.delayId = false;
         this.randomId = randomIds(this.props.id);
 
@@ -138,8 +137,8 @@ export default class BaseForm extends Component {
 
     getChildContextState () {
         return {
-            changed:  !!this.changed,
-            changedMap: this.changedMap,
+            changed:  !!this.state.changed,
+            changedMap: this.state.changedMap,
 
             label:           !!this.props.label,
             disabled:        !!this.props.disabled,
@@ -161,11 +160,7 @@ export default class BaseForm extends Component {
     }
 
     componentWillMount () {
-        this.setState({}, () => {
-            this.changed = false;
-            this.changedMap = {};
-            this.forceUpdate();
-        });
+        this.setState({}, () => this.setState({changed: false, changedMap: {}}));
     }
 
     componentWillReceiveProps ({schema}) {
@@ -215,10 +210,10 @@ export default class BaseForm extends Component {
 
     onChange (key, value) {
         // Do not set `changed` before componentDidMount
-        if (this.changed !== null) {
-            this.changed = true;
-            this.getChangedKeys(key, value, get(this.getModel(null), key)).forEach(key =>
-                set(this.changedMap, key, {})
+        if (this.state.changed !== null) {
+            this.state.changed = true;
+            this.getChangedKeys(key, value, get(this.getModel(), key)).forEach(key =>
+                this.setState(state => ({changedMap: set(cloneDeep(state.changedMap), key, {})}))
             );
         }
 
@@ -227,7 +222,7 @@ export default class BaseForm extends Component {
         }
 
         // Do not call `onSubmit` before componentDidMount
-        if (this.changed !== null && this.props.autosave) {
+        if (this.state.changed !== null && this.props.autosave) {
             if (this.delayId) {
                 this.delayId = clearTimeout(this.delayId);
             }
@@ -241,12 +236,7 @@ export default class BaseForm extends Component {
     }
 
     onReset () {
-        this.setState(state => {
-            this.changed = false;
-            this.changedMap = {};
-
-            return {resetCount: state.resetCount + 1};
-        });
+        this.setState(state => ({changed: false, changedMap: {}, resetCount: state.resetCount + 1}));
     }
 
     onSubmit (event) {
