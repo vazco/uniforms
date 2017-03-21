@@ -4,7 +4,7 @@
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",
-    "reset": "rimraf node_modules/uniforms* && npm run install",
+    "reset": "rimraf node_modules/uniforms* && npm install",
     "restart": "npm run reset && npm start",
     "start": "meteor run",
     "test": "true"
