@@ -90,7 +90,7 @@ const renderSelect = ({
         {allowedValues.map(value =>
             <MenuItem
                 insetChildren={props.fieldType === Array}
-                checked={props.fieldType === Array && props.value.includes(value)}
+                checked={props.fieldType === Array && props.value && props.value.includes(value)}
                 key={value}
                 primaryText={transform ? transform(value) : value}
                 value={value}
