@@ -63,6 +63,7 @@ const renderSelect = ({
     allowedValues,
     disabled,
     errorMessage,
+    fieldType,
     fullWidth = true,
     id,
     inputRef,
@@ -71,6 +72,7 @@ const renderSelect = ({
     onChange,
     placeholder,
     transform,
+    value,
     ...props
 }) =>
     <SelectField
@@ -80,33 +82,29 @@ const renderSelect = ({
         fullWidth={fullWidth}
         hintText={placeholder}
         id={id}
-        multiple={props.fieldType === Array}
+        multiple={fieldType === Array}
         name={name}
         onChange={(event, index, value) => onChange(value)}
         ref={inputRef}
-        value={props.value}
+        value={value}
         {...filterDOMProps(props)}
     >
-        {allowedValues.map(value =>
+        {allowedValues.map(allowedValue =>
             <MenuItem
-                insetChildren={props.fieldType === Array}
-                checked={props.fieldType === Array && props.value && props.value.includes(value)}
-                key={value}
-                primaryText={transform ? transform(value) : value}
-                value={value}
+                insetChildren={fieldType === Array || null}
+                checked={fieldType === Array && value && value.includes(allowedValue) || null}
+                key={allowedValue}
+                primaryText={transform ? transform(allowedValue) : allowedValue}
+                value={allowedValue}
             />
         )}
     </SelectField>
 ;
 
-const Select = props =>
-    props.checkboxes
+const Select = ({checkboxes, ...props}) =>
+    checkboxes
         ? renderCheckboxes(props)
         : renderSelect    (props)
 ;
 
 export default connectField(Select, {ensureValue: false});
-
-filterDOMProps.register(
-    'checkboxes'
-);
