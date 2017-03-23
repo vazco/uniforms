@@ -63,6 +63,7 @@ const renderSelect = ({
     allowedValues,
     disabled,
     errorMessage,
+    fieldType,
     fullWidth = true,
     id,
     inputRef,
@@ -81,24 +82,27 @@ const renderSelect = ({
         fullWidth={fullWidth}
         hintText={placeholder}
         id={id}
+        multiple={fieldType === Array}
         name={name}
         onChange={(event, index, value) => onChange(value)}
         ref={inputRef}
         value={value}
         {...filterDOMProps(props)}
     >
-        {allowedValues.map(value =>
+        {allowedValues.map(allowedValue =>
             <MenuItem
-                key={value}
-                value={value}
-                primaryText={transform ? transform(value) : value}
+                insetChildren={fieldType === Array || undefined}
+                checked={fieldType === Array && value && value.includes(allowedValue) || undefined}
+                key={allowedValue}
+                primaryText={transform ? transform(allowedValue) : allowedValue}
+                value={allowedValue}
             />
         )}
     </SelectField>
 ;
 
-const Select = props =>
-    props.checkboxes || props.fieldType === Array
+const Select = ({checkboxes, ...props}) =>
+    checkboxes
         ? renderCheckboxes(props)
         : renderSelect    (props)
 ;
