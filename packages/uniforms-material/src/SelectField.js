@@ -91,8 +91,8 @@ const renderSelect = ({
     >
         {allowedValues.map(allowedValue =>
             <MenuItem
-                insetChildren={fieldType === Array || null}
-                checked={fieldType === Array && value && value.includes(allowedValue) || null}
+                insetChildren={fieldType === Array || undefined}
+                checked={fieldType === Array && value && value.includes(allowedValue) || undefined}
                 key={allowedValue}
                 primaryText={transform ? transform(allowedValue) : allowedValue}
                 value={allowedValue}
