@@ -1,3 +1,9 @@
+## Next
+- **Changed:** Internal handling of `changed` and `changedMap`.
+- **Changed:** Optimized whole rendering process.
+- **Changed:** Rewritten `AutoField`.
+- **Fixed:** Autosave is no longer triggering a submit on render. [\#238](https://github.com/vazco/uniforms/issues/238)
+
 ## [v1.15.0](https://github.com/vazco/uniforms/tree/v1.15.0) (2017-03-12)
 - **Added:** Support for `colon` and `required` in `uniforms-antd`. [\#229](https://github.com/vazco/uniforms/issues/229)
 - **Added:** Support for `grouped` in `uniforms-semantic`. [\#227](https://github.com/vazco/uniforms/issues/227)

@@ -61,6 +61,10 @@ export default class BaseField extends Component {
             return true;
         }
 
+        if (!isEqual(get(prevContext.state.changedMap, prevName), get(nextContext.state.changedMap, nextName))) {
+            return true;
+        }
+
         // TODO: This might be optimized.
         if (nextName.indexOf('.') !== -1) {
             const prevParentValue = get(prevContext.model, prevName.replace(/(.+)\..+$/, '$1'));

@@ -4,8 +4,6 @@ import xorWith from 'lodash.xorwith';
 import joinName from './joinName';
 
 export default function changedKeys (root, valueA, valueB) {
-    const base = isEqual(valueA, valueB) ? [] : [root];
-
     if (valueA === Object(valueA) && !(valueA instanceof Date)) {
         if (valueB) {
             let pairsA;
@@ -19,15 +17,17 @@ export default function changedKeys (root, valueA, valueB) {
                 pairsB = Object.keys(valueB).map(key => [valueB[key], key]);
             }
 
-            return base.concat(
-                xorWith(pairsA, pairsB, isEqual)
-                    .map(pair => joinName(root, pair[1]))
-                    .filter((value, index, array) => array.indexOf(value) === index)
-            );
+            const changed = xorWith(pairsA, pairsB, isEqual).map(pair => joinName(root, pair[1]));
+
+            if (changed.length) {
+                changed.unshift(root);
+            }
+
+            return changed;
         }
 
-        return base.concat(Object.keys(valueA).map(key => joinName(root, key)));
+        return [root].concat(Object.keys(valueA).map(key => joinName(root, key)));
     }
 
-    return base;
+    return isEqual(valueA, valueB) ? [] : [root];
 }
