@@ -34,10 +34,10 @@
     "test": "babel-node node_modules/.bin/_mocha --require test/index.js test --reporter list"
   },
   "devDependencies": {
-    "antd": "2.8.1",
+    "antd": "2.8.2",
     "babel-cli": "6.24.0",
-    "babel-eslint": "7.1.1",
-    "babel-plugin-istanbul": "4.0.0",
+    "babel-eslint": "7.2.1",
+    "babel-plugin-istanbul": "4.1.1",
     "babel-plugin-transform-object-assign": "6.22.0",
     "babel-plugin-transform-react-inline-elements": "6.22.0",
     "babel-plugin-transform-react-remove-prop-types": "0.3.2",
@@ -50,10 +50,10 @@
     "cross-env": "3.2.4",
     "enzyme": "2.7.1",
     "eslint": "3.18.0",
-    "eslint-config-vazco": "2.4.0",
+    "eslint-config-vazco": "2.4.1",
     "eslint-plugin-babel": "4.1.1",
     "eslint-plugin-brackets": "0.0.1",
-    "eslint-plugin-react": "6.10.0",
+    "eslint-plugin-react": "6.10.3",
     "eslint-plugin-vazco": "1.0.0",
     "jsdom": "9.12.0",
     "mocha": "3.2.0",
@@ -62,7 +62,7 @@
     "react-addons-test-utils": "15.4.2",
     "react-dom": "15.4.2",
     "rimraf": "2.6.1",
-    "sinon": "2.0.0"
+    "sinon": "2.1.0"
   },
   "peerDependencies": {
     "antd": "^2.7.0",
