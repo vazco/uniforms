@@ -65,12 +65,12 @@ export default class BaseField extends Component {
             return true;
         }
 
-        // TODO: This might be optimized.
-        if (nextName.indexOf('.') !== -1) {
+        // Fields which are using parent props, need to be updated when parent value change
+        if (this.options.includeParent && nextName.indexOf('.') !== -1) {
             const prevParentValue = get(prevContext.model, prevName.replace(/(.+)\..+$/, '$1'));
             const nextParentValue = get(nextContext.model, nextName.replace(/(.+)\..+$/, '$1'));
 
-            if (Array.isArray(nextParentValue) && !isEqual(prevParentValue, nextParentValue)) {
+            if (!isEqual(prevParentValue, nextParentValue)) {
                 return true;
             }
         }
@@ -90,10 +90,8 @@ export default class BaseField extends Component {
                 return true;
             }
 
-            // TODO: This is a workaround for List and Nest fields
-            //       Those should update, if their child error has changed
-            // eslint-disable-next-line max-len
-            if (nextValue && typeof nextValue === 'object' && Object.prototype.toString.call(nextValue) !== '[object Date]') {
+            // Fields like List or Nest should update, whenever their children error has changed
+            if (nextValue === Object(nextValue) && !(nextValue instanceof Date)) {
                 return true;
             }
         }
