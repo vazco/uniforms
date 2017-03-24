@@ -1,4 +1,4 @@
-## Next
+## [v1.16.0](https://github.com/vazco/uniforms/tree/v1.16.0) (2017-03-24)
 - **Added:** Support for `multiple` in `SelectField` in `uniforms-material`. [\#236](https://github.com/vazco/uniforms/issues/236)
 - **Changed:** Internal handling of `changed` and `changedMap`.
 - **Changed:** Optimized whole rendering process.
