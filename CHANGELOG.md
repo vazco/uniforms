@@ -1,4 +1,5 @@
 ## Next
+- **Added:** Support for `multiple` in `SelectField` in `uniforms-material`. [\#236](https://github.com/vazco/uniforms/issues/236)
 - **Changed:** Internal handling of `changed` and `changedMap`.
 - **Changed:** Optimized whole rendering process.
 - **Changed:** Rewritten `AutoField`.
