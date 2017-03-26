@@ -1,10 +1,10 @@
-import DatePicker     from 'material-ui/DatePicker';
-import React          from 'react';
-import TextField      from 'material-ui/TextField';
-import TimePicker     from 'material-ui/TimePicker';
-import connectField   from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
-import {Component}    from 'react';
+import connectField                from 'uniforms/connectField';
+import DatePicker                  from 'material-ui/DatePicker';
+import filterDOMProps              from 'uniforms/filterDOMProps';
+import React                       from 'react';
+import TextField                   from 'material-ui/TextField';
+import TimePicker                  from 'material-ui/TimePicker';
+import {Component}                 from 'react';
 
 class Date_ extends Component {
     static displayName = 'Date';
@@ -17,6 +17,7 @@ class Date_ extends Component {
         this._intermediate = null;
 
         this.onFocus      = this.onFocus.bind(this);
+        this.onDismiss    = this.onDismiss.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onChangeTime = this.onChangeTime.bind(this);
     }
@@ -41,16 +42,28 @@ class Date_ extends Component {
         setTimeout(() => this.refs.datepicker.openDialog(), 100);
     }
 
+    onDismiss (...args) {
+        this.props.onDismiss(...args);
+    }
+
     render () {
         const {
+            autoOk,
+            cancelLabel,
+            DateTimeFormat,
             disabled,
+            disableYearSelection,
             errorMessage,
+            firstDayOfWeek,
             id,
             inputRef,
             label,
+            locale,
             max,
             min,
             name,
+            okLabel,
+            pedantic,
             placeholder,
             showInlineError,
             timeFormat,
@@ -74,19 +87,32 @@ class Date_ extends Component {
                 />
 
                 <DatePicker
+                    autoOk={autoOk}
+                    cancelLabel={cancelLabel}
+                    DateTimeFormat={DateTimeFormat}
+                    disableYearSelection={disableYearSelection}
+                    firstDayOfWeek={firstDayOfWeek}
                     id={`${id}-date`}
+                    locale={locale}
                     maxDate={max}
                     minDate={min}
+                    okLabel={okLabel}
                     onChange={this.onChangeDate}
+                    onDismiss={(...args) => this.onDismiss(true, false, ...args)}
                     ref="datepicker"
                     textFieldStyle={{display: 'none'}}
                     value={value}
                 />
 
                 <TimePicker
+                    autoOk={autoOk}
+                    cancelLabel={cancelLabel}
                     format={timeFormat}
                     id={`${id}-time`}
+                    okLabel={okLabel}
                     onChange={this.onChangeTime}
+                    onDismiss={(...args) => this.onDismiss(false, true, ...args)}
+                    pedantic={pedantic}
                     ref="timepicker"
                     textFieldStyle={{display: 'none'}}
                     value={value}
