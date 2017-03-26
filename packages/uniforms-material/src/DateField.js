@@ -55,6 +55,7 @@ class Date_ extends Component {
             disableYearSelection,
             errorMessage,
             firstDayOfWeek,
+            formatDate,
             id,
             inputRef,
             label,
@@ -92,6 +93,7 @@ class Date_ extends Component {
                     DateTimeFormat={DateTimeFormat}
                     disableYearSelection={disableYearSelection}
                     firstDayOfWeek={firstDayOfWeek}
+                    formatDate={formatDate}
                     id={`${id}-date`}
                     locale={locale}
                     maxDate={max}
