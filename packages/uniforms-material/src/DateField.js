@@ -16,9 +16,9 @@ class Date_ extends Component {
 
         this._intermediate = null;
 
-        this.onFocus      = this.onFocus.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onChangeTime = this.onChangeTime.bind(this);
+        this.onFocus      = this.onFocus.bind(this);
     }
 
     onChangeDate (event, date) {
@@ -43,14 +43,23 @@ class Date_ extends Component {
 
     render () {
         const {
+            DateTimeFormat,
+            autoOk,
+            cancelLabel,
+            disableYearSelection,
             disabled,
             errorMessage,
+            firstDayOfWeek,
+            formatDate,
             id,
             inputRef,
             label,
+            locale,
             max,
             min,
             name,
+            okLabel,
+            pedantic,
             placeholder,
             showInlineError,
             timeFormat,
@@ -74,9 +83,17 @@ class Date_ extends Component {
                 />
 
                 <DatePicker
+                    DateTimeFormat={DateTimeFormat}
+                    autoOk={autoOk}
+                    cancelLabel={cancelLabel}
+                    disableYearSelection={disableYearSelection}
+                    firstDayOfWeek={firstDayOfWeek}
+                    formatDate={formatDate}
                     id={`${id}-date`}
+                    locale={locale}
                     maxDate={max}
                     minDate={min}
+                    okLabel={okLabel}
                     onChange={this.onChangeDate}
                     ref="datepicker"
                     textFieldStyle={{display: 'none'}}
@@ -84,9 +101,13 @@ class Date_ extends Component {
                 />
 
                 <TimePicker
+                    autoOk={autoOk}
+                    cancelLabel={cancelLabel}
                     format={timeFormat}
                     id={`${id}-time`}
+                    okLabel={okLabel}
                     onChange={this.onChangeTime}
+                    pedantic={pedantic}
                     ref="timepicker"
                     textFieldStyle={{display: 'none'}}
                     value={value}
