@@ -354,13 +354,6 @@ import DateField from 'uniforms-unstyled/DateField'; // Choose your theme packag
     // Available in:
     //   material
     timeFormat="ampm"
-
-    // Callback function fired when the DatePicker or TimePicker dialog is dismissed.
-    // Signature:
-    // function(dateDismissed: bool, timeDismissed: bool, ...args) => void
-    // Available in:
-    //   material
-    onDismiss={(dateDismissed, timeDismissed, ...args) => {}}
 />
 ```
 
