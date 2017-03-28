@@ -7,6 +7,8 @@
 - [Overview](#overview)
     - [Forms components](#forms-components)
     - [Fields components](#fields-components)
+- [Theming](#theming)
+    - [Custom Theming](#custom-theming)
 - [Advanced topics](#advanced-topics)
     - [Forms](#forms)
         - [Asynchronous validation](#asynchronous-validation)
@@ -149,6 +151,51 @@ This is a guaranteed set of fields - every theme package will implement these, b
 | `TextField`     | Text (or any HTML5 compatible) input.           |
 
 <br>
+
+# Theming
+
+## Custom Theming
+
+Forms can be customized by using uniform fields. Here is an example of an `AutoForm` with custom HTML.
+
+```javascript
+import AutoField from 'uniforms-bootstrap3/AutoField';
+import AutoForm from 'uniforms-bootstrap3/AutoForm';
+import TextField from 'uniforms-bootstrap3/TextField';
+import SubmitField from 'uniforms-bootstrap3/SubmitField';
+
+export default class myForm extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      model: this.props.model
+    }
+  }
+  
+  onClickSave(doc){
+    this.props.callbacks.onSave(doc);
+  }
+ 
+  render(){
+    let formRef;
+    
+    return (
+      <div>
+        <Autoform schema={mySchema} model={this.state.model}>
+            <h2>Title</h2>
+            <AutoField name="myField"/>
+            <TextField name="otherField" />
+            <div className="pull-right">
+              <SubmitField className="btn btn-primary"/>
+            </div>
+        </Autoform>
+      </div>
+    );
+  }
+ }
+
+```
 
 # Advanced topics
 
