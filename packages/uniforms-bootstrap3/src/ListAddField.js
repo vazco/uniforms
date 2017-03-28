@@ -15,7 +15,7 @@ const ListAdd = ({
 
     return (
         <div
-            className={classnames('badge pull-right', className)}
+            className={classnames({ badge: true, 'pull-right': true}, className)}
             onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
             {...filterDOMProps(props)}
         >
