@@ -7,8 +7,6 @@
 - [Overview](#overview)
     - [Forms components](#forms-components)
     - [Fields components](#fields-components)
-- [Theming](#theming)
-    - [Custom Theming](#custom-theming)
 - [Advanced topics](#advanced-topics)
     - [Forms](#forms)
         - [Asynchronous validation](#asynchronous-validation)
@@ -107,6 +105,33 @@ const PostForm = ({model}) =>
 
 That's all! `AutoForm` will generate a complete form with labelled fields, errors list (if any) and a submit button. Also, it will take care of validation and handle model changes.
 
+If you want to use custom HTML code inside your form you can include the form content.
+
+```javascript
+// Choose your theme
+import AutoForm from 'uniforms-unstyled/AutoForm';
+import AutoField from 'uniforms-unstyled/AutoField';
+import TextField from 'uniforms-unstyled/TextField';
+import SubmitField from 'uniforms-unstyled/SubmitField';
+
+// A compatible schema
+import PostSchema from './schemas/Post';
+
+const PostForm = ({model}) =>
+    (<div>
+        <AutoForm schema={PostSchema} onSubmit={doc => db.save(doc)} model={model}>
+            <h2>Title</h2>
+            <AutoField name="myField"/>
+            <TextField name="otherField" />
+            <div className="pull-right">
+              <SubmitField className="btn btn-primary"/>
+            </div>
+        </AutoForm>
+    </div>)
+;
+
+```
+
 <br>
 
 # Overview
@@ -151,51 +176,6 @@ This is a guaranteed set of fields - every theme package will implement these, b
 | `TextField`     | Text (or any HTML5 compatible) input.           |
 
 <br>
-
-# Theming
-
-## Custom Theming
-
-Forms can be customized by using uniform fields. Here is an example of an `AutoForm` with custom HTML.
-
-```javascript
-import AutoField from 'uniforms-bootstrap3/AutoField';
-import AutoForm from 'uniforms-bootstrap3/AutoForm';
-import TextField from 'uniforms-bootstrap3/TextField';
-import SubmitField from 'uniforms-bootstrap3/SubmitField';
-
-export default class myForm extends React.Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      model: this.props.model
-    }
-  }
-  
-  onClickSave(doc){
-    this.props.callbacks.onSave(doc);
-  }
- 
-  render(){
-    let formRef;
-    
-    return (
-      <div>
-        <Autoform schema={mySchema} model={this.state.model}>
-            <h2>Title</h2>
-            <AutoField name="myField"/>
-            <TextField name="otherField" />
-            <div className="pull-right">
-              <SubmitField className="btn btn-primary"/>
-            </div>
-        </Autoform>
-      </div>
-    );
-  }
- }
-
-```
 
 # Advanced topics
 
