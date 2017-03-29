@@ -796,7 +796,7 @@ import RadioField from 'uniforms-unstyled/RadioField'; // Choose your theme pack
     showInlineError={true}
 
     // Label transform.
-    //   *Some description would be great, huh?*
+    //   Allows to transform the each value into a human-readable label
     transform={value => label}
 />
 ```
@@ -863,8 +863,14 @@ import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme pa
     showInlineError={true}
 
     // Label transform.
-    //   *Some description would be great, huh?*
+    //   Allows to transform the each value into a human-readable label
     transform={value => label}
+    
+    // Options.
+    //   Set of values that will be shown in the select.
+    //   It is optional and using `options` will override `transform` and `allowedValues`.
+    //   It can be either an object or an array (or a function, that returns it).
+    options={[{label: 'Hi', value: value1}, [{label: 'Hello', value: value1}, ...]}
 />
 ```
 
