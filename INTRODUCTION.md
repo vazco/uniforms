@@ -109,27 +109,24 @@ If you want to use custom HTML code inside your form you can include the form co
 
 ```javascript
 // Choose your theme
-import AutoForm from 'uniforms-unstyled/AutoForm';
 import AutoField from 'uniforms-unstyled/AutoField';
+import AutoForm from 'uniforms-unstyled/AutoForm';
 import TextField from 'uniforms-unstyled/TextField';
 import SubmitField from 'uniforms-unstyled/SubmitField';
 
 // A compatible schema
 import PostSchema from './schemas/Post';
 
-const PostForm = ({model}) =>
-    (<div>
-        <AutoForm schema={PostSchema} onSubmit={doc => db.save(doc)} model={model}>
-            <h2>Title</h2>
-            <AutoField name="myField"/>
-            <TextField name="otherField" />
-            <div className="pull-right">
-              <SubmitField className="btn btn-primary"/>
-            </div>
-        </AutoForm>
-    </div>)
-;
-
+const PostForm = ({ model }) => (
+    <AutoForm schema={PostSchema} onSubmit={doc => db.save(doc)} model={model}>
+        <h2>Title</h2>
+        <AutoField name="myField" />
+        <TextField name="otherField" />
+        <div className="pull-right">
+            <SubmitField className="btn btn-primary" />
+        </div>
+    </AutoForm>
+);
 ```
 
 <br>
