@@ -56,9 +56,9 @@ const renderSelect = props =>
     >
 
          {(!!props.placeholder || !props.required) && (
-            <option value="" disabled={props.required} hidden={props.required}>
+            <Select.Option value="" disabled={props.required} hidden={props.required}>
                 {props.placeholder ? props.placeholder : props.label}
-            </option>
+            </Select.Option>
         )}
 
         {props.allowedValues.map(value =>
