@@ -62,7 +62,7 @@ const renderSelect = props =>
         )}
 
         {props.allowedValues.map(value =>
-            <Select.Option value={value} >
+            <Select.Option key={value} value={value} >
                 {props.transform ? props.transform(value) : value}
             </Select.Option>
         )}
