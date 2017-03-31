@@ -4,7 +4,6 @@ import React          from 'react';
 import Select         from 'antd/lib/select';
 import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
-
 import wrapField from './wrapField';
 
 const renderCheckboxes = props =>
@@ -43,7 +42,7 @@ const renderCheckboxes = props =>
     )
 ;
 
-const renderSelect = props =>
+const renderSelect = props => 
     <Select
         allowClear={!props.required}
         disabled={props.disabled}
@@ -52,11 +51,18 @@ const renderSelect = props =>
         name={props.name}
         onChange={value => props.onChange(value)}
         ref={props.inputRef}
-        value={props.fieldType === Array ? props.value || [] : '' + (props.value || '')}
+        value={props.fieldType === Array ? props.value || [] : '' + ((props.transform ? props.transform(props.value) : props.value) || '')}
         {...filterDOMProps(props)}
     >
+
+         {(!!props.placeholder || !props.required) && (
+            <option value="" disabled={props.required} hidden={props.required}>
+                {props.placeholder ? props.placeholder : props.label}
+            </option>
+        )}
+
         {props.allowedValues.map(value =>
-            <Select.Option key={value} value={value}>
+            <Select.Option value={value} >
                 {props.transform ? props.transform(value) : value}
             </Select.Option>
         )}
