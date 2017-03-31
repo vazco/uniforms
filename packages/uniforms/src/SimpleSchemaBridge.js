@@ -202,10 +202,7 @@ export default class SimpleSchemaBridge extends Bridge {
             } else {
                 field = {
                     ...field,
-                    transform: value => {
-                        const option = options.find(option => option.value.toString() === value);
-                        return option ? option.label : '';
-                    },
+                    transform: value => options.find(option => option.value.toString() === value).label,
                     allowedValues: options.map(option => option.value.toString())
                 };
             }
