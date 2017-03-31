@@ -105,28 +105,30 @@ const PostForm = ({model}) =>
 
 That's all! `AutoForm` will generate a complete form with labelled fields, errors list (if any) and a submit button. Also, it will take care of validation and handle model changes.
 
-If you want to use custom HTML code inside your form you can include the form content.
+If you want to have custom layout and/or structure inside your form you can include the form content.
 
 ```javascript
 // Choose your theme
-import AutoField from 'uniforms-unstyled/AutoField';
-import AutoForm from 'uniforms-unstyled/AutoForm';
-import TextField from 'uniforms-unstyled/TextField';
+import AutoField   from 'uniforms-unstyled/AutoField';
+import AutoForm    from 'uniforms-unstyled/AutoForm';
 import SubmitField from 'uniforms-unstyled/SubmitField';
+import TextField   from 'uniforms-unstyled/TextField';
 
 // A compatible schema
 import PostSchema from './schemas/Post';
 
-const PostForm = ({ model }) => (
+const PostForm = ({model}) =>
     <AutoForm schema={PostSchema} onSubmit={doc => db.save(doc)} model={model}>
         <h2>Title</h2>
-        <AutoField name="myField" />
-        <TextField name="otherField" />
-        <div className="pull-right">
-            <SubmitField className="btn btn-primary" />
+
+        <AutoField name="fieldA" />
+        <TextField name="fieldB" />
+
+        <div className="super-special-class">
+            <SubmitField className="super-special-class-with-suffix" />
         </div>
     </AutoForm>
-);
+;
 ```
 
 <br>
