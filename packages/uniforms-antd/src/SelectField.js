@@ -52,7 +52,7 @@ const renderSelect = props =>
         onChange={value => props.onChange(value)}
         ref={props.inputRef}
         value={props.fieldType === Array ? props.value || [] : '' +
-            ((props.transform ? props.transform(props.value) : props.value) || '')}
+            ((props.transform ? props.transform(props.value.toString()) : props.value) || '')}
         {...filterDOMProps(props)}
     >
 
