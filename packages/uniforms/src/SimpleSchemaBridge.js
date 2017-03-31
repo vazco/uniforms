@@ -1,11 +1,10 @@
 /* global Package */
 
-import cloneDeep from 'lodash.clonedeep';
-import invariant from 'fbjs/lib/invariant';
-
 import Bridge         from './Bridge';
-import joinName       from './joinName';
+import cloneDeep from 'lodash.clonedeep';
 import filterDOMProps from './filterDOMProps';
+import invariant from 'fbjs/lib/invariant';
+import joinName       from './joinName';
 
 let Match        = (typeof global === 'object' ? global : window).Match;
 let SimpleSchema = (typeof global === 'object' ? global : window).SimpleSchema;
@@ -51,6 +50,7 @@ try {
         'exclusiveMax',
         'exclusiveMin',
         'label',
+        'placeholder',
         'max',
         'maxCount',
         'min',
