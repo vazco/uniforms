@@ -4,6 +4,7 @@ import React          from 'react';
 import Select         from 'antd/lib/select';
 import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
+
 import wrapField from './wrapField';
 
 const renderCheckboxes = props =>
@@ -63,7 +64,7 @@ const renderSelect = props =>
         )}
 
         {props.allowedValues.map(value =>
-            <Select.Option key={value} value={value} >
+            <Select.Option key={value} value={value}>
                 {props.transform ? props.transform(value) : value}
             </Select.Option>
         )}

@@ -1,9 +1,10 @@
 /* global Package */
 
-import Bridge         from './Bridge';
 import cloneDeep from 'lodash.clonedeep';
-import filterDOMProps from './filterDOMProps';
 import invariant from 'fbjs/lib/invariant';
+
+import Bridge         from './Bridge';
+import filterDOMProps from './filterDOMProps';
 import joinName       from './joinName';
 
 let Match        = (typeof global === 'object' ? global : window).Match;
