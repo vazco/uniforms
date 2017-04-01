@@ -1,6 +1,6 @@
 # Contributing
 
-We'd love your contributions! Please send us Pull Requests or open issues on [github](https://github.com/vazco/uniforms). Also, read the [contribution guidelines](https://github.com/vazco/uniforms/blob/master/CONTRIBUTING.md).
+We'd love your contributions! Please send us Pull Requests or open issues on [github](https://github.com/vazco/uniforms). Also, read the [contribution guidelines](https://github.com/vazco/uniforms/blob/master/.github/CONTRIBUTING.md).
 
 # Preparing environment
 

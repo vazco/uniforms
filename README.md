@@ -12,7 +12,7 @@
 
 <p align="center">
     <strong><a href="https://github.com/vazco/uniforms/blob/master/API.md">API</a></strong> |
-    <strong><a href="https://github.com/vazco/uniforms/blob/master/CONTRIBUTING.md">Contribute</a></strong> |
+    <strong><a href="https://github.com/vazco/uniforms/blob/master/.github/CONTRIBUTING.md">Contribute</a></strong> |
     <strong><a href="https://github.com/vazco/uniforms/blob/master/INTRODUCTION.md">Documentation</a></strong> |
     <strong><a href="https://uniforms.tools/">Playground</a></strong> |
     <strong><a href="https://github.com/vazco/uniforms/projects/1">Roadmap</a></strong>
