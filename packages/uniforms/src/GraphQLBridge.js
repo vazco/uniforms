@@ -64,9 +64,11 @@ export default class GraphQLBridge extends Bridge {
 
     getField (name, returnExtracted = true) {
         return joinName(null, name).reduce((definition, next, index, array) => {
-            if (next === '$') {
+            if (next === '$' || next === '' + parseInt(next, 10)) {
                 invariant(definition.type instanceof graphql.GraphQLList, 'Field not found in schema: "%s"', name);
                 definition = {type: extractFromNonNull(definition.type.ofType)};
+            } else if (definition.type && definition.type._fields) {
+                definition = definition.type._fields[next];
             } else {
                 definition = definition[next];
             }
@@ -95,14 +97,22 @@ export default class GraphQLBridge extends Bridge {
         const type = this.getType(name);
 
         if (type === Array) {
-            return [...Array(props.initialCount || 0)].map(() => undefined);
+            const item = this.getInitialValue(joinName(name, '0'));
+            const items = props.initialCount || 0;
+
+            return [...Array(items)].map(() => item);
         }
 
         if (type === Object) {
             return {};
         }
 
-        return this.extras[name] && this.extras[name].initialValue;
+        const defaultValue = this.getField(name).defaultValue;
+
+        return defaultValue === undefined
+            ? this.extras[name] && this.extras[name].initialValue
+            : defaultValue
+        ;
     }
 
     // eslint-disable-next-line complexity
@@ -155,7 +165,7 @@ export default class GraphQLBridge extends Bridge {
 
         const fieldType = this.getField(name).type;
 
-        if (fieldType instanceof graphql.GraphQLObjectType) {
+        if (fieldType instanceof graphql.GraphQLObjectType || fieldType instanceof graphql.GraphQLInputObjectType) {
             return Object.keys(fieldType.getFields());
         }
 
@@ -166,8 +176,9 @@ export default class GraphQLBridge extends Bridge {
         const fieldType = this.getField(name).type;
 
         return (
-            fieldType instanceof graphql.GraphQLList       ? Array  :
-            fieldType instanceof graphql.GraphQLObjectType ? Object :
+            fieldType instanceof graphql.GraphQLList            ? Array  :
+            fieldType instanceof graphql.GraphQLObjectType      ? Object :
+            fieldType instanceof graphql.GraphQLInputObjectType ? Object :
             fieldType instanceof graphql.GraphQLScalarType ?
                 fieldType.name === 'Int'    ? Number :
                 fieldType.name === 'Float'  ? Number :

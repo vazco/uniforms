@@ -9,20 +9,20 @@ import {stub}           from 'sinon';
 import GraphQLBridge from 'uniforms/GraphQLBridge';
 
 describe('GraphQLBridge', () => {
-    const schema = `
-        type Author {
+    const schemaI = `
+        input Author {
             id:        String!
             decimal:   Float
-            firstName: String
-            lastName:  String
+            firstName: String = "John"
+            lastName:  String = "Doe"
             tags:      [String]!
         }
 
-        type Category {
+        input Category {
             owners: [Author!]
         }
 
-        type Post {
+        input Post {
             id:       Int!
             author:   Author!
             title:    String
@@ -33,6 +33,8 @@ describe('GraphQLBridge', () => {
         # This is required by buildASTSchema
         type Query { anything: ID }
     `;
+
+    const schemaT = schemaI.replace(/input/g, 'type').replace(/\s*=.+/g, '');
 
     const schemaData = {
         author: {component: 'div'},
@@ -57,16 +59,18 @@ describe('GraphQLBridge', () => {
             }
         }
     };
-    const schemaType = buildASTSchema(parse(schema)).getType('Post');
+
     const schemaValidator = stub();
 
-    const bridge = new GraphQLBridge(schemaType, schemaValidator, schemaData);
+    const bridge  = new GraphQLBridge(buildASTSchema(parse(schemaI)).getType('Post'), schemaValidator, schemaData);
+    const bridgeT = new GraphQLBridge(buildASTSchema(parse(schemaT)).getType('Post'), schemaValidator, schemaData);
 
     describe('#check()', () => {
         it('always returns false', () => {
             expect(GraphQLBridge.check()).to.be.not.ok;
             expect(GraphQLBridge.check(bridge)).to.be.not.ok;
-            expect(GraphQLBridge.check(schema)).to.be.not.ok;
+            expect(GraphQLBridge.check(schemaI)).to.be.not.ok;
+            expect(GraphQLBridge.check(schemaT)).to.be.not.ok;
         });
     });
 
@@ -123,13 +127,22 @@ describe('GraphQLBridge', () => {
     });
 
     describe('#getField', () => {
-        it('return correct definition', () => {
-            expect(bridge.getField('title')).to.be.deep.equal({
+        it('return correct definition (input)', () => {
+            expect(bridge.getField('author.firstName')).to.be.deep.equal({
+                defaultValue: 'John',
+                description: '',
+                name: 'firstName',
+                type: GraphQLString
+            });
+        });
+
+        it('return correct definition (type)', () => {
+            expect(bridgeT.getField('author.firstName')).to.be.deep.equal({
                 args: [],
                 deprecationReason: undefined,
                 description: '',
                 isDeprecated: false,
-                name: 'title',
+                name: 'firstName',
                 type: GraphQLString
             });
         });
@@ -156,6 +169,10 @@ describe('GraphQLBridge', () => {
 
         it('works with defined primitives', () => {
             expect(bridge.getInitialValue('votes')).to.be.equal(44);
+        });
+
+        it('works with default values', () => {
+            expect(bridge.getInitialValue('author.firstName')).to.be.equal('John');
         });
     });
 
