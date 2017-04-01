@@ -1,5 +1,5 @@
 {
-  "name": "demo",
+  "name": "uniforms-demo",
   "private": true,
   "scripts": {
     "lint": "eslint .",

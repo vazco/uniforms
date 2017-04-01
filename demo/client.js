@@ -2,18 +2,12 @@ import 'babel-polyfill';
 import tapEvent from 'react-tap-event-plugin';
 import {mount}  from 'react-mounter';
 
-import {Meteor}     from 'meteor/meteor';
 import {DocHead}    from 'meteor/kadira:dochead';
-import {FlowRouter} from 'meteor/kadira:flow-router-ssr';
+import {FlowRouter} from 'meteor/kadira:flow-router';
 
-import Application from '/components/Application';
+import Application from '/imports/components/Application';
 
-if (Meteor.isServer) {
-    FlowRouter.setPageCacheTimeout(100000);
-    FlowRouter.setDeferScriptLoading(true);
-} else {
-    tapEvent();
-}
+tapEvent();
 
 FlowRouter.route('/', {
     action () {
