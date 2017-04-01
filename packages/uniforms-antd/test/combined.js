@@ -211,13 +211,13 @@ describe('Everything', () => {
     it('works (RadioField, on)', async () => {
         const find = () => wrapper.find(AntDRadio.Group).filterWhere(x => x.props().name === 'x03');
 
-        expect(find().find(AntDRadio).at(0).prop('checked')).to.be.true;
-        expect(find().find(AntDRadio).at(1).prop('checked')).to.be.false;
-        expect(find().find(AntDRadio).at(2).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(0).children().at(0).prop('checked')).to.be.true;
+        expect(find().find(AntDRadio).at(1).children().at(0).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(2).children().at(0).prop('checked')).to.be.false;
         expect(find().props().onChange({target: {value: '2'}})).to.equal(undefined);
-        expect(find().find(AntDRadio).at(0).prop('checked')).to.be.false;
-        expect(find().find(AntDRadio).at(1).prop('checked')).to.be.true;
-        expect(find().find(AntDRadio).at(2).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(0).children().at(0).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(1).children().at(0).prop('checked')).to.be.true;
+        expect(find().find(AntDRadio).at(2).children().at(0).prop('checked')).to.be.false;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -228,13 +228,13 @@ describe('Everything', () => {
     it('works (RadioField, off)', async () => {
         const find = () => wrapper.find(AntDRadio.Group).filterWhere(x => x.props().name === 'x03');
 
-        expect(find().find(AntDRadio).at(0).prop('checked')).to.be.false;
-        expect(find().find(AntDRadio).at(1).prop('checked')).to.be.true;
-        expect(find().find(AntDRadio).at(2).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(0).children().at(0).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(1).children().at(0).prop('checked')).to.be.true;
+        expect(find().find(AntDRadio).at(2).children().at(0).prop('checked')).to.be.false;
         expect(find().props().onChange({target: {value: '1'}})).to.equal(undefined);
-        expect(find().find(AntDRadio).at(0).prop('checked')).to.be.true;
-        expect(find().find(AntDRadio).at(1).prop('checked')).to.be.false;
-        expect(find().find(AntDRadio).at(2).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(0).children().at(0).prop('checked')).to.be.true;
+        expect(find().find(AntDRadio).at(1).children().at(0).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(2).children().at(0).prop('checked')).to.be.false;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -389,13 +389,13 @@ describe('Everything', () => {
     it('works (SelectField, checkboxes, multiple, on)', async () => {
         const find = () => wrapper.find(AntDRadio.Group).filterWhere(x => x.props().name === 'x31');
 
-        expect(find().find(AntDRadio).at(0).prop('checked')).to.be.true;
-        expect(find().find(AntDRadio).at(1).prop('checked')).to.be.false;
-        expect(find().find(AntDRadio).at(2).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(0).children().at(0).prop('checked')).to.be.true;
+        expect(find().find(AntDRadio).at(1).children().at(0).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(2).children().at(0).prop('checked')).to.be.false;
         expect(find().props().onChange({target: {value: '2'}})).to.equal(undefined);
-        expect(find().find(AntDRadio).at(0).prop('checked')).to.be.false;
-        expect(find().find(AntDRadio).at(1).prop('checked')).to.be.true;
-        expect(find().find(AntDRadio).at(2).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(0).children().at(0).prop('checked')).to.be.false;
+        expect(find().find(AntDRadio).at(1).children().at(0).prop('checked')).to.be.true;
+        expect(find().find(AntDRadio).at(2).children().at(0).prop('checked')).to.be.false;
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
