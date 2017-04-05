@@ -1,6 +1,7 @@
-## Next
+## [v1.17.0](https://github.com/vazco/uniforms/tree/v1.17.0) (2017-04-05)
 - **Added:** Support for few props in `DateField` in `uniforms-material`. [\#246](https://github.com/vazco/uniforms/issues/246)
 - **Added:** Support for GraphQL inputs in `GraphQLBridge`. [\#244](https://github.com/vazco/uniforms/issues/244)
+- **Fixed:** Removing non-edited list items.
 
 ## [v1.16.0](https://github.com/vazco/uniforms/tree/v1.16.0) (2017-03-24)
 - **Added:** Support for `multiple` in `SelectField` in `uniforms-material`. [\#236](https://github.com/vazco/uniforms/issues/236)
