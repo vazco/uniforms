@@ -27,6 +27,6 @@ const ListItem = props =>
     </Card>
 ;
 
-export default connectField(ListItem, {includeInChain: false});
+export default connectField(ListItem, {includeInChain: false, includeParent: true});
 
 

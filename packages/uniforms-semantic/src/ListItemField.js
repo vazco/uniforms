@@ -29,4 +29,4 @@ const ListItem = props =>
     </div>
 ;
 
-export default connectField(ListItem, {includeInChain: false});
+export default connectField(ListItem, {includeInChain: false, includeParent: true});
