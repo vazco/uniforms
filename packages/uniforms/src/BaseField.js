@@ -264,8 +264,8 @@ export default class BaseField extends Component {
             parent,
             value,
 
-            ...props,
             ...schemaProps,
+            ...props,
             ...(explicitInitialValue || overrideValue) && {value},
 
             label,
