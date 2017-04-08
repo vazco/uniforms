@@ -156,8 +156,7 @@ export default class BaseField extends Component {
     // eslint-disable-next-line complexity
     getFieldProps (name, options) {
         const context = this.context.uniforms;
-        const state = this.getChildContextState();
-        const props = {...state, ...this.props};
+        const state   = this.getChildContextState();
 
         const {
             ensureValue,
@@ -167,12 +166,12 @@ export default class BaseField extends Component {
         } = options ? {...this.options, ...options} : this.options;
 
         if (name === undefined) {
-            name = joinName(context.name, props.name);
+            name = joinName(context.name, this.props.name);
         }
 
         const field       = context.schema.getField(name);
         const fieldType   = context.schema.getType(name);
-        const schemaProps = context.schema.getProps(name, props);
+        const schemaProps = context.schema.getProps(name, {...state, ...this.props});
 
         const error  = context.schema.getError(name, context.error);
         const fields = context.schema.getSubfields(name);
@@ -180,7 +179,7 @@ export default class BaseField extends Component {
             ? this.getFieldProps(name.replace(/(.+)\..+$/, '$1'), {includeParent: false})
             : null;
 
-        const id = props.id || this.randomId;
+        const id = this.props.id || this.randomId;
 
         const errorMessage = context.schema.getErrorMessage(name, context.error);
 
@@ -225,16 +224,14 @@ export default class BaseField extends Component {
         const changed = !!get(context.state.changedMap, name);
 
         let value;
-        if (props.value === undefined || explicitInitialValue || overrideValue) {
+        let initialValue;
+        if (this.props.value === undefined || explicitInitialValue || overrideValue) {
             value = get(context.model, name);
             if (value === undefined && !changed && !explicitInitialValue) {
                 value = context.schema.getInitialValue(name, this.props);
             } else if (explicitInitialValue) {
-                props.initialValue = context.schema.getInitialValue(name, this.props);
+                initialValue = context.schema.getInitialValue(name, this.props);
             }
-
-            // In this case, given value prop have to be overriden.
-            delete props.value;
         }
 
         // This prevents (un)controlled input change warning.
@@ -250,6 +247,10 @@ export default class BaseField extends Component {
         const onChange = (value, key = name) => context.onChange(key, value);
 
         return {
+            // 1. Inherited form state.
+            ...state,
+
+            // 2. Calculated field props.
             changed,
             error,
             errorMessage,
@@ -264,10 +265,17 @@ export default class BaseField extends Component {
             parent,
             value,
 
+            // 3. Initial value (only if requested).
+            ...explicitInitialValue && {initialValue},
+
+            // 4. Schema props and own props.
             ...schemaProps,
-            ...props,
+            ...this.props,
+
+            // 5. Overriden value (only if requested).
             ...(explicitInitialValue || overrideValue) && {value},
 
+            // 6. Calculated _special_ field props.
             label,
             name,
             placeholder
