@@ -1,6 +1,6 @@
 {
   "name": "uniforms-material",
-  "version": "1.17.0",
+  "version": "1.17.1-beta.1",
   "main": "index.js",
   "jsnext:main": "src/index.js",
   "description": "Material UI components for uniforms.",
@@ -68,7 +68,7 @@
   "peerDependencies": {
     "material-ui": "^0.17.0 || ^0.16.7",
     "react": "^15.0.0 || ^0.14.0",
-    "uniforms": "^1.17.0"
+    "uniforms": "^1.17.1-beta.1"
   },
   "babel": {
     "plugins": [

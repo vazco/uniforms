@@ -1,3 +1,6 @@
+## [v1.17.1-beta.1](https://github.com/vazco/uniforms/tree/v1.17.1-beta.1) (2017-04-08)
+- **Fixed:** Fields props precedence. [\#262](https://github.com/vazco/uniforms/issues/262)
+
 ## [v1.17.0](https://github.com/vazco/uniforms/tree/v1.17.0) (2017-04-05)
 - **Added:** Support for few props in `DateField` in `uniforms-material`. [\#246](https://github.com/vazco/uniforms/issues/246)
 - **Added:** Support for GraphQL inputs in `GraphQLBridge`. [\#244](https://github.com/vazco/uniforms/issues/244)
