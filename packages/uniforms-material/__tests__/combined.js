@@ -1,10 +1,10 @@
-import React      from 'react';
-import {describe} from 'mocha';
-import {expect}   from 'chai';
-import {it}       from 'mocha';
-import {mount}    from 'enzyme';
-import {spy}      from 'sinon';
-import {stub}     from 'sinon';
+import React          from 'react';
+import ReactDOM       from 'react-dom';
+import ReactTestUtils from 'react-addons-test-utils';
+import {expect}       from 'chai';
+import {mount}        from 'enzyme';
+import {spy}          from 'sinon';
+import {stub}         from 'sinon';
 
 import MaterialCheckbox    from 'material-ui/Checkbox';
 import MaterialDatePicker  from 'material-ui/DatePicker';
@@ -16,6 +16,7 @@ import MaterialTimePicker  from 'material-ui/TimePicker';
 import MaterialToggle      from 'material-ui/Toggle';
 import getMuiTheme         from 'material-ui/styles/getMuiTheme';
 import lightBaseTheme      from 'material-ui/styles/baseThemes/lightBaseTheme';
+import tapEventPlugin      from 'react-tap-event-plugin';
 
 import AutoFields     from 'uniforms-material/AutoFields';
 import AutoForm       from 'uniforms-material/AutoForm';
@@ -43,6 +44,8 @@ filterDOMProps.register(
     'minCount',
     'subfields'
 );
+
+tapEventPlugin();
 
 describe('Everything', () => {
     const validator = stub();
@@ -138,8 +141,6 @@ describe('Everything', () => {
     );
 
     it('works (AutoFields, ErrorsField, SubmitField)', async function _ () {
-        this.timeout(30000);
-
         const children = (
             <section>
                 <AutoFields />
@@ -373,7 +374,9 @@ describe('Everything', () => {
     });
 
     it('works (ListAddField, one)', async () => {
-        expect(wrapper.find(ListAddField).findWhere(x => x.props().onTouchTap).last().simulate('touchTap')).to.be.ok;
+        const element = wrapper.find(ListAddField).findWhere(x => x.props().onTouchTap).last();
+        const node = ReactDOM.findDOMNode(element.node);
+        ReactTestUtils.Simulate.touchTap(node);
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -382,7 +385,9 @@ describe('Everything', () => {
     });
 
     it('works (ListAddField, two)', async () => {
-        expect(wrapper.find(ListAddField).findWhere(x => x.props().onClick).last().simulate('touchTap')).to.be.ok;
+        const element = wrapper.find(ListAddField).findWhere(x => x.props().onTouchTap).last();
+        const node = ReactDOM.findDOMNode(element.node);
+        ReactTestUtils.Simulate.touchTap(node);
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -391,7 +396,9 @@ describe('Everything', () => {
     });
 
     it('works (ListDelField)', async () => {
-        expect(wrapper.find(ListDelField).at(0).children().simulate('touchTap')).to.be.ok;
+        const element = wrapper.find(ListDelField).at(0).children();
+        const node = ReactDOM.findDOMNode(element.node);
+        ReactTestUtils.Simulate.touchTap(node);
 
         await new Promise(resolve => setTimeout(resolve, 5));
 
@@ -466,8 +473,6 @@ describe('Everything', () => {
     });
 
     it('works (ListField, custom children)', async function _ () {
-        this.timeout(30000);
-
         const children = (
             <ListField name="x04" value={[1]}>
                 <ListItemField name="$">
