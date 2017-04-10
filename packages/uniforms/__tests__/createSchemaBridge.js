@@ -1,6 +1,4 @@
-import {describe} from 'mocha';
-import {expect}   from 'chai';
-import {it}       from 'mocha';
+import {expect} from 'chai';
 
 import createSchemaBridge from 'uniforms/createSchemaBridge';
 

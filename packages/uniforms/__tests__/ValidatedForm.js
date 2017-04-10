@@ -1,14 +1,14 @@
-import React        from 'react';
-import {beforeEach} from 'mocha';
-import {describe}   from 'mocha';
-import {expect}     from 'chai';
-import {it}         from 'mocha';
-import {match}      from 'sinon';
-import {mount}      from 'enzyme';
-import {spy}        from 'sinon';
-import {stub}       from 'sinon';
+import React    from 'react';
+import {expect} from 'chai';
+import {match}  from 'sinon';
+import {mount}  from 'enzyme';
+import {spy}    from 'sinon';
+import {stub}   from 'sinon';
 
 import ValidatedForm from 'uniforms/ValidatedForm';
+
+jest.mock('meteor/aldeed:simple-schema');
+jest.mock('meteor/check');
 
 describe('ValidatedForm', () => {
     let validator = stub();

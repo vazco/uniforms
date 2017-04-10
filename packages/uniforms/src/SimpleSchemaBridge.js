@@ -1,5 +1,3 @@
-/* global Package */
-
 import cloneDeep from 'lodash.clonedeep';
 import invariant from 'fbjs/lib/invariant';
 
@@ -11,16 +9,14 @@ let Match        = (typeof global === 'object' ? global : window).Match;
 let SimpleSchema = (typeof global === 'object' ? global : window).SimpleSchema;
 
 try {
-    if (typeof Package === 'object') {
-        if (Match === undefined) {
-            Match = Package['check'];
-            Match = Match.Match;
-        }
+    const r = require; // Silence Meteor missing module warning
 
-        if (SimpleSchema === undefined) {
-            SimpleSchema = Package['aldeed:simple-schema'];
-            SimpleSchema = SimpleSchema.SimpleSchema;
-        }
+    if (Match === undefined) {
+        Match = r('meteor/check').Match;
+    }
+
+    if (SimpleSchema === undefined) {
+        SimpleSchema = r('meteor/aldeed:simple-schema').SimpleSchema;
     }
 
     SimpleSchema.extendOptions({

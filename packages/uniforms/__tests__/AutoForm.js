@@ -1,12 +1,12 @@
-import React        from 'react';
-import {beforeEach} from 'mocha';
-import {describe}   from 'mocha';
-import {expect}     from 'chai';
-import {it}         from 'mocha';
-import {mount}      from 'enzyme';
-import {spy}        from 'sinon';
+import React    from 'react';
+import {expect} from 'chai';
+import {mount}  from 'enzyme';
+import {spy}    from 'sinon';
 
 import AutoForm from 'uniforms/AutoForm';
+
+jest.mock('meteor/aldeed:simple-schema');
+jest.mock('meteor/check');
 
 describe('AutoForm', () => {
     const onChangeModel = spy();

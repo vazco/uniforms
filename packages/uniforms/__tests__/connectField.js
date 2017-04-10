@@ -1,15 +1,15 @@
-import React        from 'react';
-import {beforeEach} from 'mocha';
-import {describe}   from 'mocha';
-import {expect}     from 'chai';
-import {it}         from 'mocha';
-import {mount}      from 'enzyme';
-import {spy}        from 'sinon';
+import React    from 'react';
+import {expect} from 'chai';
+import {mount}  from 'enzyme';
+import {spy}    from 'sinon';
 
 import connectField       from 'uniforms/connectField';
 import createSchemaBridge from 'uniforms/createSchemaBridge';
 import nothing            from 'uniforms/nothing';
 import randomIds          from 'uniforms/randomIds';
+
+jest.mock('meteor/aldeed:simple-schema');
+jest.mock('meteor/check');
 
 describe('connectField', () => {
     const error = new Error();

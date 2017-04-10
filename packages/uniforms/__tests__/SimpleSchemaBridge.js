@@ -1,8 +1,9 @@
-import {describe} from 'mocha';
-import {expect}   from 'chai';
-import {it}       from 'mocha';
+import {expect} from 'chai';
 
 import SimpleSchemaBridge from 'uniforms/SimpleSchemaBridge';
+
+jest.mock('meteor/aldeed:simple-schema');
+jest.mock('meteor/check');
 
 describe('SimpleSchemaBridge', () => {
     const noop = () => {};

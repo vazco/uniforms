@@ -1,8 +1,6 @@
 import {GraphQLString}  from 'graphql';
 import {buildASTSchema} from 'graphql';
-import {describe}       from 'mocha';
 import {expect}         from 'chai';
-import {it}             from 'mocha';
 import {parse}          from 'graphql';
 import {stub}           from 'sinon';
 

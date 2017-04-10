@@ -1,11 +1,12 @@
 import React       from 'react';
 import {Component} from 'react';
-import {describe}  from 'mocha';
 import {expect}    from 'chai';
-import {it}        from 'mocha';
 import {mount}     from 'enzyme';
 
 import QuickForm from 'uniforms/QuickForm';
+
+jest.mock('meteor/aldeed:simple-schema');
+jest.mock('meteor/check');
 
 describe('QuickForm', () => {
     /* eslint-disable react/display-name */

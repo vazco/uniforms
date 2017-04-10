@@ -1,13 +1,13 @@
-import React       from 'react';
-import {afterEach} from 'mocha';
-import {describe}  from 'mocha';
-import {expect}    from 'chai';
-import {it}        from 'mocha';
-import {mount}     from 'enzyme';
-import {spy}       from 'sinon';
-import {stub}      from 'sinon';
+import React    from 'react';
+import {expect} from 'chai';
+import {mount}  from 'enzyme';
+import {spy}    from 'sinon';
+import {stub}   from 'sinon';
 
 import BaseForm from 'uniforms/BaseForm';
+
+jest.mock('meteor/aldeed:simple-schema');
+jest.mock('meteor/check');
 
 describe('BaseForm', () => {
     const noop   = () => {};

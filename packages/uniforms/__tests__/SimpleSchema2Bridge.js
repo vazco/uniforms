@@ -1,7 +1,5 @@
 import SimpleSchema from 'simpl-schema';
-import {describe}   from 'mocha';
 import {expect}     from 'chai';
-import {it}         from 'mocha';
 
 import SimpleSchema2Bridge from 'uniforms/SimpleSchema2Bridge';
 
