@@ -38,7 +38,7 @@ const List = ({
         )}
 
         {label && (
-            <div className="ui fitted hidden clearing divider" />
+            <div className="ui fitted hidden clearing horizontal divider" />
         )}
 
         {!!(errorMessage && showInlineError) && (
