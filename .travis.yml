@@ -26,5 +26,5 @@ before_script:
   - npm install --prefix demo
 
 after_script:
-  - npm run cover:main
+  - npm run cover
   - npm run cover:report

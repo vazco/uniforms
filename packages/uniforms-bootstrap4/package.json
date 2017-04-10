@@ -102,8 +102,8 @@
   "jest": {
     "coverageReporters": [
       "html",
-      "lcov",
-      "text"
+      "lcovonly",
+      "text-summary"
     ],
     "moduleNameMapper": {
       "^uniforms(.*?)(/.*)?$": "<rootDir>/../uniforms$1/src$2"

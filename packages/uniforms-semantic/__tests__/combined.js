@@ -123,7 +123,7 @@ describe('Everything', () => {
         />
     );
 
-    it('works (AutoFields, ErrorsField, SubmitField)', async function _ () {
+    it('works (AutoFields, ErrorsField, SubmitField)', async () => {
         const children = (
             <section>
                 <AutoFields />
@@ -392,7 +392,7 @@ describe('Everything', () => {
         expect(onSubmit.lastCall.calledWithMatch({x32: 'x32'})).to.be.ok;
     });
 
-    it('works (ListField, custom children)', async function _ () {
+    it('works (ListField, custom children)', async () => {
         const children = (
             <ListField name="x04" value={[1]}>
                 <ListItemField name="$">
