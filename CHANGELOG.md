@@ -1,4 +1,4 @@
-## Next
+## [v1.17.1](https://github.com/vazco/uniforms/tree/v1.17.1) (2017-04-10)
 - **Fixed:** Removed unnecessary line in `ListField` in `uniforms-semantic`.
 
 ## [v1.17.1-beta.1](https://github.com/vazco/uniforms/tree/v1.17.1-beta.1) (2017-04-08)
