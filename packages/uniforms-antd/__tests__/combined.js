@@ -1,10 +1,8 @@
-import React      from 'react';
-import {describe} from 'mocha';
-import {expect}   from 'chai';
-import {it}       from 'mocha';
-import {mount}    from 'enzyme';
-import {spy}      from 'sinon';
-import {stub}     from 'sinon';
+import React    from 'react';
+import {expect} from 'chai';
+import {mount}  from 'enzyme';
+import {spy}    from 'sinon';
+import {stub}   from 'sinon';
 
 import AntDCheckbox    from 'antd/lib/checkbox';
 import AntDDatePicker  from 'antd/lib/date-picker';
@@ -129,8 +127,6 @@ describe('Everything', () => {
     );
 
     it('works (AutoFields, ErrorsField, SubmitField)', async function _ () {
-        this.timeout(30000);
-
         const children = (
             <div>
                 <AutoFields />
@@ -440,8 +436,6 @@ describe('Everything', () => {
     });
 
     it('works (ListField, custom children)', async function _ () {
-        this.timeout(30000);
-
         const children = (
             <ListField name="x04" value={[1]}>
                 <ListItemField name="$">

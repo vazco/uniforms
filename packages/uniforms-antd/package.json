@@ -25,18 +25,19 @@
   ],
   "scripts": {
     "build": "babel --out-dir . src",
-    "clean": "rimraf *.js coverage .nyc_output",
-    "cover": "cross-env NODE_ENV=cover nyc npm test",
+    "clean": "rimraf *.js coverage",
+    "cover": "jest --coverage",
     "lint": "eslint src test",
     "prepublish": "npm run build",
     "pretest": "npm run lint",
     "reset": "rimraf node_modules",
-    "test": "babel-node node_modules/.bin/_mocha --require test/index.js test --reporter list"
+    "test": "jest"
   },
   "devDependencies": {
     "antd": "2.9.0",
     "babel-cli": "6.24.0",
     "babel-eslint": "7.2.1",
+    "babel-jest": "19.0.0",
     "babel-plugin-istanbul": "4.1.1",
     "babel-plugin-transform-object-assign": "6.22.0",
     "babel-plugin-transform-react-inline-elements": "6.22.0",
@@ -55,9 +56,7 @@
     "eslint-plugin-brackets": "0.0.1",
     "eslint-plugin-react": "6.10.3",
     "eslint-plugin-vazco": "1.0.0",
-    "jsdom": "9.12.0",
-    "mocha": "3.2.0",
-    "nyc": "10.2.0",
+    "jest": "19.0.2",
     "react": "15.4.2",
     "react-addons-test-utils": "15.4.2",
     "react-dom": "15.4.2",
@@ -91,30 +90,26 @@
       "es2015",
       "react",
       "stage-0"
-    ],
-    "env": {
-      "cover": {
-        "plugins": [
-          "istanbul"
-        ]
-      }
-    }
+    ]
   },
   "eslintConfig": {
+    "env": {
+      "jest": true
+    },
     "root": true,
     "extends": [
       "vazco"
     ]
   },
-  "nyc": {
-    "reporter": [
-      "html"
+  "jest": {
+    "coverageReporters": [
+      "html",
+      "lcov",
+      "text"
     ],
-    "require": [
-      "babel-register"
-    ],
-    "sourceMap": false,
-    "instrument": false
+    "moduleNameMapper": {
+      "^uniforms(.*?)(/.*)?$": "<rootDir>/../uniforms$1/src$2"
+    }
   },
   "dependencies": {
     "babel-runtime": "^6.20.0"
