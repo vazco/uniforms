@@ -41,7 +41,7 @@ const List = ({
             <div className="ui fitted hidden clearing horizontal divider" />
         )}
 
-        {!!(errorMessage && showInlineError) && (
+        {!!(error && showInlineError) && (
             <div className="ui red basic label">
                 {errorMessage}
             </div>

@@ -6,6 +6,7 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 const LongText = ({
     disabled,
     id,
+    error,
     errorMessage,
     inputRef,
     label,
@@ -17,7 +18,7 @@ const LongText = ({
 }) =>
     <TextField
         disabled={disabled}
-        errorText={errorMessage}
+        errorText={error && showInlineError ? errorMessage : undefined}
         floatingLabelText={label}
         id={id}
         multiLine

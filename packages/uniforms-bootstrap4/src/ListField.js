@@ -12,6 +12,7 @@ const List = ({
     addIcon,
     children,
     className,
+    error,
     errorMessage,
     initialCount,
     itemProps,
@@ -32,7 +33,7 @@ const List = ({
 
                     <ListAddField name={`${name}.$`} initialCount={initialCount} addIcon={addIcon} />
 
-                    {!!(errorMessage && showInlineError) && (
+                    {!!(error && showInlineError) && (
                         <span className="text-danger">
                             {errorMessage}
                         </span>

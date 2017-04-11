@@ -5,6 +5,7 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 
 const Text = ({
     disabled,
+    error,
     errorMessage,
     id,
     inputRef,
@@ -19,7 +20,7 @@ const Text = ({
 }) =>
     <TextField
         disabled={disabled}
-        errorText={showInlineError ? errorMessage : undefined}
+        errorText={error && showInlineError ? errorMessage : undefined}
         floatingLabelText={label}
         hintText={placeholder}
         id={id}

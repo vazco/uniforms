@@ -58,7 +58,7 @@ const Date_ = ({
             )}
         </div>
 
-        {!!(errorMessage && showInlineError) && (
+        {!!(error && showInlineError) && (
             <div className="ui red basic pointing label">
                 {errorMessage}
             </div>

@@ -26,7 +26,7 @@ const Nest = ({
             </label>
         )}
 
-        {!!(errorMessage && showInlineError) && (
+        {!!(error && showInlineError) && (
             <span className="help-block">
                 {errorMessage}
             </span>

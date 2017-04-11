@@ -19,7 +19,7 @@ export default function wrapField ({
 }, children) {
     const hasWrap = !!(grid || wrapClassName);
 
-    const blockError = !!(errorMessage && showInlineError) && (
+    const blockError = !!(error && showInlineError) && (
         <span className="form-text text-danger">
             {errorMessage}
         </span>

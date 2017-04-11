@@ -9,6 +9,7 @@ const noneIfNaN = x => isNaN(x) ? undefined : x;
 const Num_ = ({
     decimal,
     disabled,
+    error,
     errorMessage,
     id,
     inputRef,
@@ -24,7 +25,7 @@ const Num_ = ({
 }) =>
     <TextField
         disabled={disabled}
-        errorText={showInlineError ? errorMessage : undefined}
+        errorText={error && showInlineError ? errorMessage : undefined}
         floatingLabelText={label}
         hintText={placeholder}
         id={id}
