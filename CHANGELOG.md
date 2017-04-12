@@ -1,3 +1,7 @@
+## [v1.17.2](https://github.com/vazco/uniforms/tree/v1.17.2) (2017-04-12)
+- **Fixed:** Detection of SimpleSchema.
+- **Fixed:** Warning in empty `BoolField` in `uniforms-antd`.
+
 ## [v1.17.1](https://github.com/vazco/uniforms/tree/v1.17.1) (2017-04-10)
 - **Fixed:** Removed unnecessary line in `ListField` in `uniforms-semantic`.
 
