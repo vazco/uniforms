@@ -110,7 +110,7 @@
       "text-summary"
     ],
     "moduleNameMapper": {
-      "^uniforms(.*?)(/.*)?$": "<rootDir>/../uniforms$1/src$2"
+      "^uniforms([^/]*)(.*)$": "<rootDir>/../uniforms$1/src$2"
     }
   },
   "dependencies": {
