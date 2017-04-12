@@ -1,3 +1,5 @@
+/* global Package */
+
 import cloneDeep from 'lodash.clonedeep';
 import invariant from 'fbjs/lib/invariant';
 
@@ -9,6 +11,16 @@ let Match        = (typeof global === 'object' ? global : window).Match;
 let SimpleSchema = (typeof global === 'object' ? global : window).SimpleSchema;
 
 try {
+    if (Match === undefined && typeof Package === 'object') {
+        Match = Package['check'].Match;
+    }
+
+    if (SimpleSchema === undefined && typeof Package === 'object') {
+        SimpleSchema = Package['aldeed:simple-schema'].SimpleSchema;
+    }
+} catch (_) { /* Ignore it. */ }
+
+try {
     const r = require; // Silence Meteor missing module warning
 
     if (Match === undefined) {
@@ -18,7 +30,9 @@ try {
     if (SimpleSchema === undefined) {
         SimpleSchema = r('meteor/aldeed:simple-schema').SimpleSchema;
     }
+} catch (_) { /* Ignore it. */ }
 
+if (SimpleSchema) {
     SimpleSchema.extendOptions({
         uniforms: Match.Optional(
             Match.OneOf(
@@ -56,7 +70,7 @@ try {
         'trim',
         'type'
     );
-} catch (_) { /* Ignore it. */ }
+}
 
 export default class SimpleSchemaBridge extends Bridge {
     constructor (schema) {
