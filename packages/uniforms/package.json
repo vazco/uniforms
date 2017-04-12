@@ -1,6 +1,6 @@
 {
   "name": "uniforms",
-  "version": "1.17.1",
+  "version": "1.17.2",
   "main": "index.js",
   "jsnext:main": "src/index.js",
   "description": "Core package of uniforms.",
