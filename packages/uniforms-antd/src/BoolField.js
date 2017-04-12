@@ -25,4 +25,4 @@ Bool.defaultProps = {
     unCheckedChildren: <Icon type="cross" />
 };
 
-export default connectField(Bool);
+export default connectField(Bool, {ensureValue: false});
