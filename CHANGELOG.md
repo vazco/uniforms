@@ -1,3 +1,6 @@
+## Next
+- **Changed:** Inline errors are now triggered by `error`, not `errorMessage`. [\#267](https://github.com/vazco/uniforms/issues/267)
+
 ## [v1.17.2](https://github.com/vazco/uniforms/tree/v1.17.2) (2017-04-12)
 - **Fixed:** Detection of SimpleSchema.
 - **Fixed:** Warning in empty `BoolField` in `uniforms-antd`.

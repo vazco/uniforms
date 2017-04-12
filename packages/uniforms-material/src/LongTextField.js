@@ -13,6 +13,7 @@ const LongText = ({
     name,
     onChange,
     placeholder,
+    showInlineError,
     value,
     ...props
 }) =>

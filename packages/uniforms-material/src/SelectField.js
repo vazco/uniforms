@@ -72,6 +72,7 @@ const renderSelect = ({
     name,
     onChange,
     placeholder,
+    showInlineError,
     transform,
     value,
     ...props
