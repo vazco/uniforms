@@ -7,6 +7,7 @@ import AutoField from './AutoField';
 
 const Nest = ({
     children,
+    error,
     errorMessage,
     fields,
     itemProps,
@@ -21,7 +22,7 @@ const Nest = ({
             </label>
         )}
 
-        {!!(errorMessage && showInlineError) && (
+        {!!(error && showInlineError) && (
             <div>
                 {errorMessage}
             </div>

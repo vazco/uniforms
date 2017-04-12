@@ -62,6 +62,7 @@ const renderCheckboxes = ({
 const renderSelect = ({
     allowedValues,
     disabled,
+    error,
     errorMessage,
     fieldType,
     fullWidth = true,
@@ -77,7 +78,7 @@ const renderSelect = ({
 }) =>
     <SelectField
         disabled={disabled}
-        errorText={errorMessage}
+        errorText={error && showInlineError ? errorMessage : undefined}
         floatingLabelText={label}
         fullWidth={fullWidth}
         hintText={placeholder}

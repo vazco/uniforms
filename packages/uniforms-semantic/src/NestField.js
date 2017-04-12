@@ -30,7 +30,7 @@ const Nest = ({
             </div>
         )}
 
-        {!!(errorMessage && showInlineError) && (
+        {!!(error && showInlineError) && (
             <div className="ui red basic label">
                 {errorMessage}
             </div>

@@ -11,6 +11,7 @@ import ListItemField from './ListItemField';
 
 const List = ({
     children,
+    error,
     errorMessage,
     info,
     initialCount,
@@ -38,7 +39,7 @@ const List = ({
             </div>
         )}
 
-        {!!(errorMessage && showInlineError) && (
+        {!!(error && showInlineError) && (
             <div>
                 {errorMessage}
             </div>

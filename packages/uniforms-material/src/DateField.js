@@ -48,6 +48,7 @@ class Date_ extends Component {
             cancelLabel,
             disableYearSelection,
             disabled,
+            error,
             errorMessage,
             firstDayOfWeek,
             formatDate,
@@ -71,7 +72,7 @@ class Date_ extends Component {
             <div>
                 <TextField
                     disabled={disabled}
-                    errorText={showInlineError ? errorMessage : undefined}
+                    errorText={error && showInlineError ? errorMessage : undefined}
                     floatingLabelText={label}
                     hintText={placeholder}
                     id={id}

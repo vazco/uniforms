@@ -36,7 +36,7 @@ const List = ({
 
                     <ListAddField name={`${name}.$`} initialCount={initialCount} addIcon={addIcon} />
 
-                    {!!(errorMessage && showInlineError) && (
+                    {!!(error && showInlineError) && (
                         <span className="help-block">
                             {errorMessage}
                         </span>
