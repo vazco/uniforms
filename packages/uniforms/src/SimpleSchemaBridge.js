@@ -10,6 +10,7 @@ import filterDOMProps from './filterDOMProps';
 let Match        = (typeof global === 'object' ? global : window).Match;
 let SimpleSchema = (typeof global === 'object' ? global : window).SimpleSchema;
 
+/* istanbul ignore next */
 try {
     if (Match === undefined && typeof Package === 'object') {
         Match = Package['check'].Match;
