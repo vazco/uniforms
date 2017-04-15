@@ -1,9 +1,9 @@
 aldeed:simple-schema
-ecmascript@0.6.3
-es5-shim@4.6.15
+ecmascript
+es5-shim
 kadira:dochead
 kadira:flow-router
-meteor-base@1.0.4
-mobile-experience@1.0.4
+meteor-base
+mobile-experience
 standard-minifier-css
 standard-minifier-js
