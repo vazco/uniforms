@@ -1,5 +1,3 @@
-import {expect} from 'chai';
-
 import Bridge from 'uniforms/Bridge';
 
 describe('Bridge', () => {
@@ -7,12 +5,12 @@ describe('Bridge', () => {
     const customBridgeInstance = new CustomBridge();
 
     it('cannot be instantiated', () => {
-        expect(() => new Bridge()).to.throw();
+        expect(() => new Bridge()).toThrow();
     });
 
     describe('#check', () => {
         it('throws an unimplemented error', () => {
-            expect(Bridge.check).to.throw();
+            expect(Bridge.check).toThrow();
         });
     });
 
@@ -29,7 +27,7 @@ describe('Bridge', () => {
     ].forEach(method => {
         describe(`#${method}`, () => {
             it('throws an unimplemented error', () => {
-                expect(() => customBridgeInstance[method]()).to.throw();
+                expect(() => customBridgeInstance[method]()).toThrow();
             });
         });
     });
