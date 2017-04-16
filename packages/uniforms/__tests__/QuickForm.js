@@ -1,6 +1,5 @@
 import React       from 'react';
 import {Component} from 'react';
-import {expect}    from 'chai';
 import {mount}     from 'enzyme';
 
 import QuickForm from 'uniforms/QuickForm';
@@ -30,7 +29,7 @@ describe('QuickForm', () => {
                 <TestQuickForm schema={schema} />
             );
 
-            expect(wrapper.find('.auto')).to.have.length.above(0);
+            expect(wrapper.find('.auto').length).toBeGreaterThan(0);
         });
 
         it('renders `ErrorsField`', () => {
@@ -38,7 +37,7 @@ describe('QuickForm', () => {
                 <TestQuickForm schema={schema} />
             );
 
-            expect(wrapper.find('.errors')).to.have.length.above(0);
+            expect(wrapper.find('.errors').length).toBeGreaterThan(0);
         });
 
         it('renders `SubmitField`', () => {
@@ -46,7 +45,7 @@ describe('QuickForm', () => {
                 <TestQuickForm schema={schema} />
             );
 
-            expect(wrapper.find('.submit')).to.have.length.above(0);
+            expect(wrapper.find('.submit').length).toBeGreaterThan(0);
         });
     });
 
@@ -56,7 +55,7 @@ describe('QuickForm', () => {
                 <TestQuickForm schema={schema} autoField={() => <i className="autoOverride" />} />
             );
 
-            expect(wrapper.find('.autoOverride')).to.have.length.above(0);
+            expect(wrapper.find('.autoOverride').length).toBeGreaterThan(0);
         });
 
         it('renders `ErrorsField`', () => {
@@ -64,7 +63,7 @@ describe('QuickForm', () => {
                 <TestQuickForm schema={schema} errorsField={() => <i className="errorsOverride" />} />
             );
 
-            expect(wrapper.find('.errorsOverride')).to.have.length.above(0);
+            expect(wrapper.find('.errorsOverride').length).toBeGreaterThan(0);
         });
 
         it('renders `SubmitField`', () => {
@@ -72,7 +71,7 @@ describe('QuickForm', () => {
                 <TestQuickForm schema={schema} submitField={() => <i className="submitOverride" />} />
             );
 
-            expect(wrapper.find('.submitOverride')).to.have.length.above(0);
+            expect(wrapper.find('.submitOverride').length).toBeGreaterThan(0);
         });
 
         it('works with string', () => {
@@ -80,7 +79,7 @@ describe('QuickForm', () => {
                 <TestQuickForm schema={schema} autoField="code" />
             );
 
-            expect(wrapper.find('code')).to.have.length.above(0);
+            expect(wrapper.find('code').length).toBeGreaterThan(0);
         });
 
         it('works with elements', () => {
@@ -92,7 +91,7 @@ describe('QuickForm', () => {
                 <TestQuickForm schema={schema} autoField={Code} />
             );
 
-            expect(wrapper.find('code')).to.have.length.above(0);
+            expect(wrapper.find('code').length).toBeGreaterThan(0);
         });
 
         it('works with functions', () => {
@@ -100,7 +99,7 @@ describe('QuickForm', () => {
                 <TestQuickForm schema={schema} autoField={() => <code />} />
             );
 
-            expect(wrapper.find('code')).to.have.length.above(0);
+            expect(wrapper.find('code').length).toBeGreaterThan(0);
         });
     });
 
@@ -112,7 +111,7 @@ describe('QuickForm', () => {
         );
 
         it('renders children', () => {
-            expect(wrapper.find('div')).to.have.length(1);
+            expect(wrapper.find('div')).toHaveLength(1);
         });
     });
 });
