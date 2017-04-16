@@ -1,5 +1,3 @@
-import {expect} from 'chai';
-
 import SimpleSchemaBridge from 'uniforms/SimpleSchemaBridge';
 
 jest.mock('meteor/aldeed:simple-schema');
@@ -65,173 +63,173 @@ describe('SimpleSchemaBridge', () => {
 
     describe('#check()', () => {
         it('works correctly with schema', () => {
-            expect(SimpleSchemaBridge.check(schema)).to.be.ok;
+            expect(SimpleSchemaBridge.check(schema)).toBeTruthy();
         });
 
         it('works correctly without schema', () => {
-            expect(SimpleSchemaBridge.check()).to.be.not.ok;
+            expect(SimpleSchemaBridge.check()).not.toBeTruthy();
         });
 
         Object.keys(schema).forEach(method => {
             it(`works correctly without '${method}'`, () => {
-                expect(SimpleSchemaBridge.check({...schema, [method]: null})).to.be.not.ok;
+                expect(SimpleSchemaBridge.check({...schema, [method]: null})).not.toBeTruthy();
             });
         });
     });
 
     describe('#getError', () => {
         it('works without error', () => {
-            expect(bridge.getError('a')).to.be.not.ok;
+            expect(bridge.getError('a')).not.toBeTruthy();
         });
 
         it('works with invalid error', () => {
-            expect(bridge.getError('a', {})).to.be.not.ok;
-            expect(bridge.getError('a', {invalid: true})).to.be.not.ok;
+            expect(bridge.getError('a', {})).not.toBeTruthy();
+            expect(bridge.getError('a', {invalid: true})).not.toBeTruthy();
         });
 
         it('works with correct error', () => {
-            expect(bridge.getError('a', {details: [{name: 'a'}]})).to.be.deep.equal({name: 'a'});
-            expect(bridge.getError('a', {details: [{name: 'b'}]})).to.be.not.ok;
+            expect(bridge.getError('a', {details: [{name: 'a'}]})).toEqual({name: 'a'});
+            expect(bridge.getError('a', {details: [{name: 'b'}]})).not.toBeTruthy();
         });
     });
 
     describe('#getErrorMessage', () => {
         it('works without error', () => {
-            expect(bridge.getErrorMessage('a')).to.be.not.ok;
+            expect(bridge.getErrorMessage('a')).not.toBeTruthy();
         });
 
         it('works with invalid error', () => {
-            expect(bridge.getErrorMessage('a', {})).to.be.not.ok;
-            expect(bridge.getErrorMessage('a', {invalid: true})).to.be.not.ok;
+            expect(bridge.getErrorMessage('a', {})).not.toBeTruthy();
+            expect(bridge.getErrorMessage('a', {invalid: true})).not.toBeTruthy();
         });
 
         it('works with correct error', () => {
-            expect(bridge.getErrorMessage('a', {details: [{name: 'a', details: {value: 1}}]})).to.be.equal('(a)');
-            expect(bridge.getErrorMessage('a', {details: [{name: 'b', details: {value: 1}}]})).to.be.not.ok;
+            expect(bridge.getErrorMessage('a', {details: [{name: 'a', details: {value: 1}}]})).toEqual('(a)');
+            expect(bridge.getErrorMessage('a', {details: [{name: 'b', details: {value: 1}}]})).not.toBeTruthy();
         });
     });
 
     describe('#getErrorMessages', () => {
         it('works without error', () => {
-            expect(bridge.getErrorMessages()).to.be.deep.equal([]);
+            expect(bridge.getErrorMessages()).toEqual([]);
         });
 
         it('works with other errors', () => {
-            expect(bridge.getErrorMessages('correct')).to.be.deep.equal(['correct']);
-            expect(bridge.getErrorMessages(999999999)).to.be.deep.equal([999999999]);
+            expect(bridge.getErrorMessages('correct')).toEqual(['correct']);
+            expect(bridge.getErrorMessages(999999999)).toEqual([999999999]);
         });
 
         it('works with Error', () => {
-            expect(bridge.getErrorMessages(new Error('correct'))).to.be.deep.equal(['correct']);
+            expect(bridge.getErrorMessages(new Error('correct'))).toEqual(['correct']);
         });
 
         it('works with ValidationError', () => {
-            expect(bridge.getErrorMessages({details: [{name: 'a', details: {value: 1}}]})).to.be.deep.equal(['(a)']);
-            expect(bridge.getErrorMessages({details: [{name: 'b', details: {value: 1}}]})).to.be.deep.equal(['(b)']);
+            expect(bridge.getErrorMessages({details: [{name: 'a', details: {value: 1}}]})).toEqual(['(a)']);
+            expect(bridge.getErrorMessages({details: [{name: 'b', details: {value: 1}}]})).toEqual(['(b)']);
         });
     });
 
     describe('#getField', () => {
         it('return correct definition', () => {
-            expect(bridge.getField('a')).to.be.deep.equal(schema.getDefinition('a'));
+            expect(bridge.getField('a')).toEqual(schema.getDefinition('a'));
         });
 
         it('throws on not found field', () => {
-            expect(() => bridge.getField('x')).to.throw(/Field not found in schema/);
+            expect(() => bridge.getField('x')).toThrow(/Field not found in schema/);
         });
     });
 
     describe('#getInitialValue', () => {
         it('works with arrays', () => {
-            expect(bridge.getInitialValue('j')).to.be.deep.equal([undefined]);
-            expect(bridge.getInitialValue('k')).to.be.deep.equal([]);
+            expect(bridge.getInitialValue('j')).toEqual([undefined]);
+            expect(bridge.getInitialValue('k')).toEqual([]);
         });
 
         it('works with objects', () => {
-            expect(bridge.getInitialValue('a')).to.be.deep.equal({});
+            expect(bridge.getInitialValue('a')).toEqual({});
         });
     });
 
     describe('#getProps', () => {
         it('works with allowedValues', () => {
-            expect(bridge.getProps('o')).to.be.deep.equal({label: 'O', required: true, allowedValues: ['O']});
+            expect(bridge.getProps('o')).toEqual({label: 'O', required: true, allowedValues: ['O']});
         });
 
         it('works with allowedValues from props', () => {
-            expect(bridge.getProps('o', {allowedValues: ['O']})).to.be.deep.equal({label: 'O', required: true});
+            expect(bridge.getProps('o', {allowedValues: ['O']})).toEqual({label: 'O', required: true});
         });
 
         it('works with custom component', () => {
-            expect(bridge.getProps('l')).to.be.deep.equal({label: 'L', required: true, component: 'div'});
-            expect(bridge.getProps('m')).to.be.deep.equal({label: 'M', required: true, component: noop});
+            expect(bridge.getProps('l')).toEqual({label: 'L', required: true, component: 'div'});
+            expect(bridge.getProps('m')).toEqual({label: 'M', required: true, component: noop});
         });
 
         it('works with custom component (field)', () => {
-            expect(bridge.getProps('n')).to.be.deep.equal({label: 'N', required: true, component: 'div'});
+            expect(bridge.getProps('n')).toEqual({label: 'N', required: true, component: 'div'});
         });
 
         it('works with options (array)', () => {
-            expect(bridge.getProps('s').transform('a')).to.be.equal(1);
-            expect(bridge.getProps('s').transform('b')).to.be.equal(2);
-            expect(bridge.getProps('s').allowedValues[0]).to.be.equal('a');
-            expect(bridge.getProps('s').allowedValues[1]).to.be.equal('b');
+            expect(bridge.getProps('s').transform('a')).toEqual(1);
+            expect(bridge.getProps('s').transform('b')).toEqual(2);
+            expect(bridge.getProps('s').allowedValues[0]).toEqual('a');
+            expect(bridge.getProps('s').allowedValues[1]).toEqual('b');
         });
 
         it('works with options (function)', () => {
-            expect(bridge.getProps('t').transform('a')).to.be.equal(1);
-            expect(bridge.getProps('t').transform('b')).to.be.equal(2);
-            expect(bridge.getProps('t').allowedValues[0]).to.be.equal('a');
-            expect(bridge.getProps('t').allowedValues[1]).to.be.equal('b');
+            expect(bridge.getProps('t').transform('a')).toEqual(1);
+            expect(bridge.getProps('t').transform('b')).toEqual(2);
+            expect(bridge.getProps('t').allowedValues[0]).toEqual('a');
+            expect(bridge.getProps('t').allowedValues[1]).toEqual('b');
         });
 
         it('works with options (object)', () => {
-            expect(bridge.getProps('r').transform('a')).to.be.equal(1);
-            expect(bridge.getProps('r').transform('b')).to.be.equal(2);
-            expect(bridge.getProps('r').allowedValues[0]).to.be.equal('a');
-            expect(bridge.getProps('r').allowedValues[1]).to.be.equal('b');
+            expect(bridge.getProps('r').transform('a')).toEqual(1);
+            expect(bridge.getProps('r').transform('b')).toEqual(2);
+            expect(bridge.getProps('r').allowedValues[0]).toEqual('a');
+            expect(bridge.getProps('r').allowedValues[1]).toEqual('b');
         });
 
         it('works with options from props', () => {
-            expect(bridge.getProps('s', {options: {c: 1, d: 2}}).transform('c')).to.be.equal(1);
-            expect(bridge.getProps('s', {options: {c: 1, d: 2}}).transform('d')).to.be.equal(2);
-            expect(bridge.getProps('s', {options: {c: 1, d: 2}}).allowedValues[0]).to.be.equal('c');
-            expect(bridge.getProps('s', {options: {c: 1, d: 2}}).allowedValues[1]).to.be.equal('d');
+            expect(bridge.getProps('s', {options: {c: 1, d: 2}}).transform('c')).toEqual(1);
+            expect(bridge.getProps('s', {options: {c: 1, d: 2}}).transform('d')).toEqual(2);
+            expect(bridge.getProps('s', {options: {c: 1, d: 2}}).allowedValues[0]).toEqual('c');
+            expect(bridge.getProps('s', {options: {c: 1, d: 2}}).allowedValues[1]).toEqual('d');
         });
 
         it('works with transform', () => {
-            expect(bridge.getProps('p')).to.be.deep.equal({label: 'P', required: true, transform: noop});
+            expect(bridge.getProps('p')).toEqual({label: 'P', required: true, transform: noop});
         });
 
         it('works with transform from props', () => {
-            expect(bridge.getProps('p', {transform: () => {}})).to.be.deep.equal({label: 'P', required: true});
+            expect(bridge.getProps('p', {transform: () => {}})).toEqual({label: 'P', required: true});
         });
     });
 
     describe('#getSubfields', () => {
         it('works with objects', () => {
-            expect(bridge.getSubfields('a')).to.be.deep.equal(['b']);
-            expect(bridge.getSubfields('a.b')).to.be.deep.equal(['c']);
+            expect(bridge.getSubfields('a')).toEqual(['b']);
+            expect(bridge.getSubfields('a.b')).toEqual(['c']);
         });
 
         it('works with primitives', () => {
-            expect(bridge.getSubfields('d')).to.be.deep.equal([]);
-            expect(bridge.getSubfields('e')).to.be.deep.equal([]);
+            expect(bridge.getSubfields('d')).toEqual([]);
+            expect(bridge.getSubfields('e')).toEqual([]);
         });
     });
 
     describe('#getType', () => {
         it('works with any type', () => {
-            expect(bridge.getType('a')).to.be.equal(Object);
-            expect(bridge.getType('j')).to.be.equal(Array);
-            expect(bridge.getType('d')).to.be.equal(String);
-            expect(bridge.getType('f')).to.be.equal(Number);
-            expect(bridge.getType('i')).to.be.equal(Date);
+            expect(bridge.getType('a')).toEqual(Object);
+            expect(bridge.getType('j')).toEqual(Array);
+            expect(bridge.getType('d')).toEqual(String);
+            expect(bridge.getType('f')).toEqual(Number);
+            expect(bridge.getType('i')).toEqual(Date);
         });
     });
 
     describe('#getValidator', () => {
         it('calls correct validator', () => {
-            expect(() => bridge.getValidator()({})).to.throw();
+            expect(() => bridge.getValidator()({})).toThrow();
         });
     });
 });
