@@ -134,7 +134,7 @@ describe('BaseField', () => {
         it('calls `onChange` once', () => {
             props.onChange({b: 1});
 
-            expect(onChange.mock.calls.length).toBe(1);
+            expect(onChange).toHaveBeenCalledTimes(1);
         });
 
         it('calls `onChange` with correct name and value', () => {

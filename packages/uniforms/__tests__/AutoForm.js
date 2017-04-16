@@ -34,14 +34,14 @@ describe('AutoForm', () => {
         it('updates', () => {
             wrapper.instance().getChildContext().uniforms.onChange('a', 2);
 
-            expect(onChange.mock.calls.length).toBe(1);
+            expect(onChange).toHaveBeenCalledTimes(1);
             expect(onChange).lastCalledWith('a', 2);
         });
 
         it('calls `onChangeModel`', () => {
             wrapper.instance().getChildContext().uniforms.onChange('a', 2);
 
-            expect(onChangeModel.mock.calls.length).toBe(1);
+            expect(onChangeModel).toHaveBeenCalledTimes(1);
             expect(onChangeModel).lastCalledWith({a: 2});
         });
     });
@@ -57,7 +57,7 @@ describe('AutoForm', () => {
 
             await new Promise(resolve => setTimeout(resolve, 5));
 
-            expect(onSubmit.mock.calls.length).toBe(1);
+            expect(onSubmit).toHaveBeenCalledTimes(1);
             expect(onSubmit).lastCalledWith({a: 1});
         });
     });
@@ -88,7 +88,7 @@ describe('AutoForm', () => {
         it('validates', () => {
             wrapper.setProps({model, validate: 'onChange'});
 
-            expect(validator.mock.calls.length).toBe(1);
+            expect(validator).toHaveBeenCalledTimes(1);
         });
     });
 });

@@ -1,8 +1,5 @@
 import React    from 'react';
-import {expect} from 'chai';
 import {mount}  from 'enzyme';
-import {spy}    from 'sinon';
-import {stub}   from 'sinon';
 
 import BaseForm from 'uniforms/BaseForm';
 
@@ -25,14 +22,14 @@ describe('BaseForm', () => {
         getValidator:     noop
     };
 
-    const onChange        = spy();
-    const onSubmit        = stub();
-    const onSubmitSuccess = spy();
-    const onSubmitFailure = spy();
+    const onChange        = jest.fn();
+    const onSubmit        = jest.fn();
+    const onSubmitSuccess = jest.fn();
+    const onSubmitFailure = jest.fn();
 
     afterEach(() => {
-        onChange.reset();
-        onSubmit.reset();
+        onChange.mockReset();
+        onSubmit.mockReset();
     });
 
     describe('child context', () => {
@@ -43,38 +40,38 @@ describe('BaseForm', () => {
         const context = wrapper.instance().getChildContext();
 
         it('exists', () => {
-            expect(context).to.have.property('uniforms').that.is.an('object');
+            expect(context).toHaveProperty('uniforms', expect.any(Object));
         });
 
         it('have correct `error`', () => {
-            expect(context.uniforms).to.have.property('error', error);
+            expect(context.uniforms).toHaveProperty('error', error);
         });
 
         it('have correct `model`', () => {
-            expect(context.uniforms).to.have.property('model', model);
+            expect(context.uniforms).toHaveProperty('model', model);
         });
 
         it('have correct `name`', () => {
-            expect(context.uniforms).to.have.property('name').that.is.an('array');
-            expect(context.uniforms).to.have.property('name').that.is.empty;
+            expect(context.uniforms).toHaveProperty('name', expect.any(Array));
+            expect(context.uniforms.name).toHaveLength(0);
         });
 
         it('have correct `schema`', () => {
-            expect(context.uniforms).to.have.property('schema', schema);
+            expect(context.uniforms).toHaveProperty('schema', schema);
         });
 
         it('have correct `state`', () => {
-            expect(context.uniforms).to.have.property('state').that.is.an('object');
-            expect(context.uniforms.state).to.have.property('changed', false);
-            expect(context.uniforms.state).to.have.property('changedMap').that.is.deep.equal({});
-            expect(context.uniforms.state).to.have.property('label', true);
-            expect(context.uniforms.state).to.have.property('disabled', false);
-            expect(context.uniforms.state).to.have.property('placeholder', false);
-            expect(context.uniforms.state).to.have.property('showInlineError', false);
+            expect(context.uniforms).toHaveProperty('state', expect.any(Object));
+            expect(context.uniforms.state).toHaveProperty('changed', false);
+            expect(context.uniforms.state).toHaveProperty('changedMap', {});
+            expect(context.uniforms.state).toHaveProperty('label', true);
+            expect(context.uniforms.state).toHaveProperty('disabled', false);
+            expect(context.uniforms.state).toHaveProperty('placeholder', false);
+            expect(context.uniforms.state).toHaveProperty('showInlineError', false);
         });
 
         it('have correct `onChange`', () => {
-            expect(context.uniforms).to.have.property('onChange').that.is.a('function');
+            expect(context.uniforms).toHaveProperty('onChange', expect.any(Function));
         });
     });
 
@@ -95,31 +92,31 @@ describe('BaseForm', () => {
         );
 
         it('is <form>', () => {
-            expect(wrapper.find('form')).to.have.length(1);
+            expect(wrapper.find('form')).toHaveLength(1);
         });
 
         it('have correct props', () => {
-            expect(wrapper.props()).to.have.property('className', 'name');
-            expect(wrapper.props()).to.have.property('noValidate', true);
+            expect(wrapper.props()).toHaveProperty('className', 'name');
+            expect(wrapper.props()).toHaveProperty('noValidate', true);
         });
 
         it('have correct children', () => {
-            expect(wrapper).to.be.not.empty;
-            expect(wrapper.find('div')).to.have.length(3);
+            expect(wrapper).toContainEqual(expect.anything());
+            expect(wrapper.find('div')).toHaveLength(3);
         });
 
         it('have correct `resetCount`', () => {
-            expect(wrapper.state('resetCount')).to.equal(0);
+            expect(wrapper.state('resetCount')).toBe(0);
         });
 
         it('have correct `state`', () => {
             const context = wrapper.instance().getChildContext();
 
-            expect(context.uniforms).to.have.property('state').that.is.an('object');
-            expect(context.uniforms.state).to.have.property('label', false);
-            expect(context.uniforms.state).to.have.property('disabled', true);
-            expect(context.uniforms.state).to.have.property('placeholder', true);
-            expect(context.uniforms.state).to.have.property('showInlineError', true);
+            expect(context.uniforms).toHaveProperty('state', expect.any(Object));
+            expect(context.uniforms.state).toHaveProperty('label', false);
+            expect(context.uniforms.state).toHaveProperty('disabled', true);
+            expect(context.uniforms.state).toHaveProperty('placeholder', true);
+            expect(context.uniforms.state).toHaveProperty('showInlineError', true);
         });
 
         it('updates schema bridge', () => {
@@ -129,7 +126,7 @@ describe('BaseForm', () => {
 
             const context = wrapper.instance().getChildContext();
 
-            expect(context.uniforms).to.have.property('schema', schema2);
+            expect(context.uniforms).toHaveProperty('schema', schema2);
         });
     });
 
@@ -140,23 +137,25 @@ describe('BaseForm', () => {
 
         it('updates `changed` and `changedMap`', () => {
             const context1 = wrapper.instance().getChildContext().uniforms.state;
-            expect(context1).to.have.property('changed', false);
-            expect(context1).to.have.property('changedMap').that.is.deep.equal({});
+            expect(context1).toHaveProperty('changed', false);
+            expect(context1).toHaveProperty('changedMap', {});
 
             wrapper.instance().getChildContext().uniforms.onChange('$', [1, 2]);
 
             const context2 = wrapper.instance().getChildContext().uniforms.state;
-            expect(context2).to.have.property('changed', true);
-            expect(context2).to.have.nested.property('changedMap.$').that.is.ok;
-            expect(context2).to.have.nested.property('changedMap.$.1').that.is.ok;
+            expect(context2).toHaveProperty('changed', true);
+            expect(context2).toHaveProperty('changedMap.$');
+            expect(context2.changedMap.$).toBeTruthy();
+            expect(context2).toHaveProperty('changedMap.$.1');
+            expect(context2.changedMap.$[1]).toBeTruthy();
         });
 
         it('autosaves correctly (`autosave` = true)', () => {
             wrapper.setProps({autosave: true});
             wrapper.instance().getChildContext().uniforms.onChange('a', 1);
 
-            expect(onSubmit.calledOnce).to.be.ok;
-            expect(onSubmit.calledWith(model)).to.be.ok;
+            expect(onSubmit).toHaveBeenCalledTimes(1);
+            expect(onSubmit).lastCalledWith(model);
         });
 
         it('autosaves are not delayed', () => {
@@ -164,8 +163,8 @@ describe('BaseForm', () => {
             wrapper.instance().getChildContext().uniforms.onChange('a', 2);
             wrapper.instance().getChildContext().uniforms.onChange('a', 3);
 
-            expect(onSubmit.calledThrice).to.be.ok;
-            expect(onSubmit.calledWith(model)).to.be.ok;
+            expect(onSubmit).toHaveBeenCalledTimes(3);
+            expect(onSubmit).lastCalledWith(model);
         });
 
         it('autosaves can be delayed', async () => {
@@ -176,8 +175,8 @@ describe('BaseForm', () => {
 
             await new Promise(resolve => setTimeout(resolve, 25));
 
-            expect(onSubmit.calledOnce).to.be.ok;
-            expect(onSubmit.calledWith(model)).to.be.ok;
+            expect(onSubmit).toHaveBeenCalledTimes(1);
+            expect(onSubmit).lastCalledWith(model);
         });
 
         it('autosaves can be delayed (longer)', async () => {
@@ -194,35 +193,35 @@ describe('BaseForm', () => {
 
             await new Promise(resolve => setTimeout(resolve, 25));
 
-            expect(onSubmit.calledTwice).to.be.ok;
-            expect(onSubmit.calledWith(model)).to.be.ok;
+            expect(onSubmit).toHaveBeenCalledTimes(2);
+            expect(onSubmit).lastCalledWith(model);
         });
 
         it('autosaves correctly (`autosave` = false)', () => {
             wrapper.setProps({autosave: false});
             wrapper.instance().getChildContext().uniforms.onChange('a', 1);
 
-            expect(onSubmit.called).to.be.false;
+            expect(onSubmit).not.toBeCalled();
         });
 
         it('calls `onChange` with correct name and value', () => {
             wrapper.instance().getChildContext().uniforms.onChange('a', 1);
 
-            expect(onChange.calledOnce).to.be.ok;
-            expect(onChange.calledWith('a', 1)).to.be.ok;
+            expect(onChange).toHaveBeenCalledTimes(1);
+            expect(onChange).lastCalledWith('a', 1);
         });
 
         it('cancels `onChange` event', () => {
             wrapper.find('form').simulate('change');
 
-            expect(onChange.called).to.be.false;
+            expect(onChange).not.toBeCalled();
         });
 
         it('does nothing without `onChange`', () => {
             wrapper.setProps({onChange: undefined});
             wrapper.instance().getChildContext().uniforms.onChange('a', 1);
 
-            expect(onChange.called).to.be.false;
+            expect(onChange).not.toBeCalled();
         });
     });
 
@@ -234,7 +233,7 @@ describe('BaseForm', () => {
         it('increase `resetCount`', () => {
             wrapper.instance().reset();
 
-            expect(wrapper.state('resetCount')).to.equal(1);
+            expect(wrapper.state('resetCount')).toBe(1);
         });
     });
 
@@ -246,13 +245,13 @@ describe('BaseForm', () => {
         it('calls `onSubmit` once', () => {
             wrapper.find('form').simulate('submit');
 
-            expect(onSubmit.calledOnce).to.be.ok;
+            expect(onSubmit).toHaveBeenCalledTimes(1);
         });
 
         it('calls `onSubmit` with correct model', () => {
             wrapper.find('form').simulate('submit');
 
-            expect(onSubmit.calledWith(model)).to.be.ok;
+            expect(onSubmit).lastCalledWith(model);
         });
 
         it('calls `onSubmit` with correct model (`modelTransform`)', () => {
@@ -268,7 +267,7 @@ describe('BaseForm', () => {
 
             wrapper.find('form').simulate('submit');
 
-            expect(onSubmit.calledWith(1)).to.be.ok;
+            expect(onSubmit).lastCalledWith(1);
 
             wrapper.setProps({modelTransform: undefined});
         });
@@ -277,11 +276,11 @@ describe('BaseForm', () => {
             wrapper.setProps({onSubmit: undefined});
             wrapper.find('form').simulate('submit');
 
-            expect(onSubmit.called).to.be.false;
+            expect(onSubmit).not.toBeCalled();
         });
 
         it('calls `onSubmitSuccess` when `onSubmit` resolves', async () => {
-            onSubmit.onFirstCall().returns(Promise.resolve());
+            onSubmit.mockReturnValueOnce(Promise.resolve());
 
             const wrapper = mount(
                 <BaseForm model={model} schema={schema} onSubmit={onSubmit} onSubmitSuccess={onSubmitSuccess} />
@@ -291,11 +290,11 @@ describe('BaseForm', () => {
 
             await new Promise(resolve => setTimeout(resolve, 5));
 
-            expect(onSubmitSuccess.calledOnce).to.be.ok;
+            expect(onSubmitSuccess).toHaveBeenCalledTimes(1);
         });
 
         it('calls `onSubmitFailure` when `onSubmit` rejects', async () => {
-            onSubmit.onFirstCall().returns(Promise.reject());
+            onSubmit.mockReturnValueOnce(Promise.reject());
 
             const wrapper = mount(
                 <BaseForm model={model} schema={schema} onSubmit={onSubmit} onSubmitFailure={onSubmitFailure} />
@@ -305,7 +304,7 @@ describe('BaseForm', () => {
 
             await new Promise(resolve => setTimeout(resolve, 5));
 
-            expect(onSubmitFailure.calledOnce).to.be.ok;
+            expect(onSubmitFailure).toHaveBeenCalledTimes(1);
         });
     });
 });
