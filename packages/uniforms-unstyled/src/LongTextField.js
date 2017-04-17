@@ -15,7 +15,7 @@ const LongText = ({
 }) =>
     <div {...filterDOMProps(props)}>
         {label && (
-            <label>
+            <label htmlFor={id}>
                 {label}
             </label>
         )}
