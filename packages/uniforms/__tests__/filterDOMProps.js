@@ -1,25 +1,23 @@
-import {expect} from 'chai';
-
 import filterDOMProps from 'uniforms/filterDOMProps';
 
 describe('joinName', () => {
     it('is a function', () => {
-        expect(filterDOMProps).to.be.a('function');
+        expect(filterDOMProps).toBeInstanceOf(Function);
     });
 
     it('removes props', () => {
-        expect(filterDOMProps({value: 999999})).to.deep.equal({});
-        expect(filterDOMProps({changed: true})).to.deep.equal({});
+        expect(filterDOMProps({value: 999999})).toEqual({});
+        expect(filterDOMProps({changed: true})).toEqual({});
     });
 
     it('removes registered props', () => {
         filterDOMProps.register('__special__');
 
-        expect(filterDOMProps({__special__: true})).to.deep.equal({});
+        expect(filterDOMProps({__special__: true})).toEqual({});
     });
 
     it('omits rest', () => {
-        expect(filterDOMProps({a: 1})).to.deep.equal({a: 1});
-        expect(filterDOMProps({b: 2})).to.deep.equal({b: 2});
+        expect(filterDOMProps({a: 1})).toEqual({a: 1});
+        expect(filterDOMProps({b: 2})).toEqual({b: 2});
     });
 });
