@@ -60,6 +60,7 @@
     "react-addons-test-utils": "15.4.2",
     "react-dom": "15.4.2",
     "rimraf": "2.6.1",
+    "simpl-schema": "0.2.3",
     "sinon": "2.1.0"
   },
   "peerDependencies": {

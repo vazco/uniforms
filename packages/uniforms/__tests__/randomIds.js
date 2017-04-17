@@ -6,7 +6,7 @@ describe('randomIds', () => {
     });
 
     it('returns a function', () => {
-        expect(randomIds).toBeInstanceOf(Function);
+        expect(randomIds()).toBeInstanceOf(Function);
     });
 
     it('generate random id', () => {
