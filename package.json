@@ -40,6 +40,9 @@
     ],
     "moduleNameMapper": {
       "^uniforms([^/]*)(.*)$": "<rootDir>/packages/uniforms$1/src$2"
-    }
+    },
+    "testMatch": [
+      "<rootDir>/packages/*/__tests__/!(_)*.js"
+    ]
   }
 }
