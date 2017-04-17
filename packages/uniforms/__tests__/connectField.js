@@ -1,7 +1,5 @@
 import React    from 'react';
-import {expect} from 'chai';
 import {mount}  from 'enzyme';
-import {spy}    from 'sinon';
 
 import connectField       from 'uniforms/connectField';
 import createSchemaBridge from 'uniforms/createSchemaBridge';
@@ -13,7 +11,7 @@ jest.mock('meteor/check');
 
 describe('connectField', () => {
     const error = new Error();
-    const onChange = spy();
+    const onChange = jest.fn();
     const randomId = randomIds();
     const state = {changed: !1, changedMap: {}, label: !0, disabled: !1, placeholder: !1, showInlineError: !0};
     const schema = createSchemaBridge({
@@ -39,18 +37,18 @@ describe('connectField', () => {
 
     const reactContext = {context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange}}};
 
-    const Test = spy(() => nothing);
+    const Test = jest.fn(() => nothing);
 
     beforeEach(() => {
-        Test.reset();
-        onChange.reset();
+        Test.mockClear();
+        onChange.mockReset();
     });
 
     describe('when called', () => {
         it('creates component', () => {
             const Field = connectField(Test);
 
-            expect(Field).to.be.a('function');
+            expect(Field).toBeInstanceOf(Function);
         });
     });
 
@@ -64,8 +62,8 @@ describe('connectField', () => {
 
             const Field = connectField(Test, {baseField: Class});
 
-            expect(Field).to.have.property('property1', 1);
-            expect(Field).to.have.property('property2', 2);
+            expect(Field.property1).toBe(1);
+            expect(Field.property2).toBe(2);
         });
     });
 
@@ -78,7 +76,11 @@ describe('connectField', () => {
                 reactContext
             );
 
-            expect(Test.calledWithMatch({parent: {label: 'Field', field: {type: Object}}})).to.be.ok;
+            expect(Test.mock.calls[0]).toEqual(expect.arrayContaining([
+                expect.objectContaining({
+                    parent: expect.objectContaining({label: 'Field', field: expect.objectContaining({type: Object})})
+                })
+            ]));
         });
 
         it('hides parent field (false)', () => {
@@ -89,7 +91,9 @@ describe('connectField', () => {
                 reactContext
             );
 
-            expect(Test.calledWithMatch({parent: {label: 'Field', field: {type: Object}}})).to.be.false;
+            expect(Test.mock.calls[0]).not.toEqual(expect.arrayContaining([
+                expect.objectContaining({parent: {label: 'Field', field: {type: Object}}})
+            ]));
         });
     });
 
@@ -105,7 +109,9 @@ describe('connectField', () => {
                 reactContext
             );
 
-            expect(Test.calledWithMatch({name: 'field.subfield'})).to.be.ok;
+            expect(Test.mock.calls[0]).toEqual(expect.arrayContaining([
+                expect.objectContaining({name: 'field.subfield'})
+            ]));
         });
 
         it('is not in chain (false)', () => {
@@ -119,7 +125,9 @@ describe('connectField', () => {
                 reactContext
             );
 
-            expect(Test.calledWithMatch({name: 'field.subfield'})).to.be.ok;
+            expect(Test.mock.calls[0]).toEqual(expect.arrayContaining([
+                expect.objectContaining({name: 'field.subfield'})
+            ]));
         });
     });
 
@@ -132,7 +140,7 @@ describe('connectField', () => {
                 reactContext
             );
 
-            expect(onChange.calledWith('field', {})).to.be.ok;
+            expect(onChange).toBeCalledWith('field', {});
         });
 
         it('does nothing (false)', () => {
@@ -143,7 +151,7 @@ describe('connectField', () => {
                 reactContext
             );
 
-            expect(onChange.called).to.be.false;
+            expect(onChange).not.toBeCalled();
         });
 
         it('respects `required`', () => {
@@ -154,7 +162,7 @@ describe('connectField', () => {
                 reactContext
             );
 
-            expect(onChange.called).to.be.false;
+            expect(onChange).not.toBeCalled();
         });
     });
 
@@ -167,7 +175,7 @@ describe('connectField', () => {
                 reactContext
             );
 
-            expect(Test.calledWith({a: 1})).to.be.ok;
+            expect(Test.mock.calls[0]).toEqual(expect.arrayContaining([{}]));
         });
     });
 
@@ -180,7 +188,7 @@ describe('connectField', () => {
                 reactContext
             );
 
-            expect(onChange.calledWith('field', 'initialValueExample')).to.be.ok;
+            expect(onChange).toBeCalledWith('field', 'initialValueExample');
         });
     });
 });
