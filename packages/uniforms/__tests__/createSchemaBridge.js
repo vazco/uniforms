@@ -1,10 +1,8 @@
-import {expect} from 'chai';
-
 import createSchemaBridge from 'uniforms/createSchemaBridge';
 
 describe('createSchemaBridge', () => {
     it('is a function', () => {
-        expect(createSchemaBridge).to.be.a('function');
+        expect(createSchemaBridge).toBeInstanceOf(Function);
     });
 
     it('accepts a Bridge instance', () => {
@@ -20,10 +18,10 @@ describe('createSchemaBridge', () => {
             getValidator () {}
         };
 
-        expect(createSchemaBridge(bridge)).to.be.equal(bridge);
+        expect(createSchemaBridge(bridge)).toEqual(bridge);
     });
 
     it('throws on unrecognised schema', () => {
-        expect(createSchemaBridge).to.throw(/Unrecognised schema: /);
+        expect(createSchemaBridge).toThrow(/Unrecognised schema: /);
     });
 });
