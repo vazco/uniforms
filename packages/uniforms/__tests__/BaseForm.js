@@ -155,7 +155,7 @@ describe('BaseForm', () => {
             wrapper.instance().getChildContext().uniforms.onChange('a', 1);
 
             expect(onSubmit).toHaveBeenCalledTimes(1);
-            expect(onSubmit).lastCalledWith(model);
+            expect(onSubmit).toHaveBeenLastCalledWith(model);
         });
 
         it('autosaves are not delayed', () => {
@@ -164,7 +164,7 @@ describe('BaseForm', () => {
             wrapper.instance().getChildContext().uniforms.onChange('a', 3);
 
             expect(onSubmit).toHaveBeenCalledTimes(3);
-            expect(onSubmit).lastCalledWith(model);
+            expect(onSubmit).toHaveBeenLastCalledWith(model);
         });
 
         it('autosaves can be delayed', async () => {
@@ -176,7 +176,7 @@ describe('BaseForm', () => {
             await new Promise(resolve => setTimeout(resolve, 25));
 
             expect(onSubmit).toHaveBeenCalledTimes(1);
-            expect(onSubmit).lastCalledWith(model);
+            expect(onSubmit).toHaveBeenLastCalledWith(model);
         });
 
         it('autosaves can be delayed (longer)', async () => {
@@ -194,7 +194,7 @@ describe('BaseForm', () => {
             await new Promise(resolve => setTimeout(resolve, 25));
 
             expect(onSubmit).toHaveBeenCalledTimes(2);
-            expect(onSubmit).lastCalledWith(model);
+            expect(onSubmit).toHaveBeenLastCalledWith(model);
         });
 
         it('autosaves correctly (`autosave` = false)', () => {
@@ -208,7 +208,7 @@ describe('BaseForm', () => {
             wrapper.instance().getChildContext().uniforms.onChange('a', 1);
 
             expect(onChange).toHaveBeenCalledTimes(1);
-            expect(onChange).lastCalledWith('a', 1);
+            expect(onChange).toHaveBeenLastCalledWith('a', 1);
         });
 
         it('cancels `onChange` event', () => {
@@ -251,7 +251,7 @@ describe('BaseForm', () => {
         it('calls `onSubmit` with correct model', () => {
             wrapper.find('form').simulate('submit');
 
-            expect(onSubmit).lastCalledWith(model);
+            expect(onSubmit).toHaveBeenLastCalledWith(model);
         });
 
         it('calls `onSubmit` with correct model (`modelTransform`)', () => {
@@ -267,7 +267,7 @@ describe('BaseForm', () => {
 
             wrapper.find('form').simulate('submit');
 
-            expect(onSubmit).lastCalledWith(1);
+            expect(onSubmit).toHaveBeenLastCalledWith(1);
 
             wrapper.setProps({modelTransform: undefined});
         });

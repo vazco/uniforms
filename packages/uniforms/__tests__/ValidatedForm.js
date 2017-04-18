@@ -72,7 +72,7 @@ describe('ValidatedForm', () => {
 
             await new Promise(resolve => setTimeout(resolve, 5));
 
-            expect(onSubmit).lastCalledWith(model);
+            expect(onSubmit).toHaveBeenLastCalledWith(model);
         });
 
         it('skips `onSubmit` when invalid', async () => {
@@ -180,7 +180,7 @@ describe('ValidatedForm', () => {
 
             expect(validator).toHaveBeenCalledTimes(1);
             expect(onChange).toHaveBeenCalledTimes(1);
-            expect(onChange).lastCalledWith('key', 'value');
+            expect(onChange).toHaveBeenLastCalledWith('key', 'value');
         });
 
         it('validates (onChangeAfterSubmit)', async () => {
@@ -212,7 +212,7 @@ describe('ValidatedForm', () => {
 
             expect(validator).toHaveBeenCalledTimes(2);
             expect(onChange).toHaveBeenCalledTimes(1);
-            expect(onChange).lastCalledWith('key', 'value');
+            expect(onChange).toHaveBeenLastCalledWith('key', 'value');
 
             wrapper.find('form').simulate('submit');
 
@@ -220,7 +220,7 @@ describe('ValidatedForm', () => {
 
             expect(validator).toHaveBeenCalledTimes(3);
             expect(onSubmit).toHaveBeenCalledTimes(1);
-            expect(onSubmit).lastCalledWith(model);
+            expect(onSubmit).toHaveBeenLastCalledWith(model);
         });
 
         it('validates (onSubmit)', async () => {
@@ -252,7 +252,7 @@ describe('ValidatedForm', () => {
 
             expect(validator).toHaveBeenCalledTimes(1);
             expect(onChange).toHaveBeenCalledTimes(1);
-            expect(onChange).lastCalledWith('key', 'value');
+            expect(onChange).toHaveBeenLastCalledWith('key', 'value');
 
             wrapper.find('form').simulate('submit');
 
@@ -260,7 +260,7 @@ describe('ValidatedForm', () => {
 
             expect(validator).toHaveBeenCalledTimes(2);
             expect(onSubmit).toHaveBeenCalledTimes(1);
-            expect(onSubmit).lastCalledWith(model);
+            expect(onSubmit).toHaveBeenLastCalledWith(model);
         });
     });
 
@@ -274,7 +274,7 @@ describe('ValidatedForm', () => {
 
             expect(validator).toHaveBeenCalledTimes(1);
             expect(onValidate).toHaveBeenCalledTimes(1);
-            expect(onValidate).lastCalledWith({a: 2}, null, expect.any(Function));
+            expect(onValidate).toHaveBeenLastCalledWith({a: 2}, null, expect.any(Function));
         });
 
         it('calls `onValidate` (error)', () => {
@@ -290,7 +290,7 @@ describe('ValidatedForm', () => {
 
             expect(validator).toHaveBeenCalledTimes(1);
             expect(onValidate).toHaveBeenCalledTimes(1);
-            expect(onValidate).lastCalledWith({a: 2}, error, expect.any(Function));
+            expect(onValidate).toHaveBeenLastCalledWith({a: 2}, error, expect.any(Function));
         });
 
         it('calls `onValidate` (`modelTransform`)', () => {
@@ -316,7 +316,7 @@ describe('ValidatedForm', () => {
 
             expect(validator).toHaveBeenCalledTimes(1);
             expect(onValidate).toHaveBeenCalledTimes(1);
-            expect(onValidate).lastCalledWith({a: 2, b: 1}, null, expect.any(Function));
+            expect(onValidate).toHaveBeenLastCalledWith({a: 2, b: 1}, null, expect.any(Function));
         });
 
         it('works with async errors from `onValidate`', () => {

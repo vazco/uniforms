@@ -140,13 +140,13 @@ describe('BaseField', () => {
         it('calls `onChange` with correct name and value', () => {
             props.onChange({b: 1});
 
-            expect(onChange).lastCalledWith('a', {b: 1});
+            expect(onChange).toHaveBeenLastCalledWith('a', {b: 1});
         });
 
         it('calls `onChange` with correct name and value (foreign field)', () => {
             props.onChange(1, 'a.b');
 
-            expect(onChange).lastCalledWith('a.b', 1);
+            expect(onChange).toHaveBeenLastCalledWith('a.b', 1);
         });
     });
 
