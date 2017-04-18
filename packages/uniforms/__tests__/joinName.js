@@ -14,32 +14,32 @@ describe('joinName', () => {
     });
 
     it('works with arrays', () => {
-        expect(joinName(['a'], 'b')).toEqual('a.b');
-        expect(joinName('a', ['b'])).toEqual('a.b');
+        expect(joinName(['a'], 'b')).toBe('a.b');
+        expect(joinName('a', ['b'])).toBe('a.b');
     });
 
     it('works with empty strings', () => {
-        expect(joinName('', 'a', 'b')).toEqual('a.b');
-        expect(joinName('a', '', 'b')).toEqual('a.b');
-        expect(joinName('a', 'b', '')).toEqual('a.b');
+        expect(joinName('', 'a', 'b')).toBe('a.b');
+        expect(joinName('a', '', 'b')).toBe('a.b');
+        expect(joinName('a', 'b', '')).toBe('a.b');
     });
 
     it('works with falsy values', () => {
-        expect(joinName('a', null,      'b')).toEqual('a.b');
-        expect(joinName('a', false,     'b')).toEqual('a.b');
-        expect(joinName('a', undefined, 'b')).toEqual('a.b');
+        expect(joinName('a', null,      'b')).toBe('a.b');
+        expect(joinName('a', false,     'b')).toBe('a.b');
+        expect(joinName('a', undefined, 'b')).toBe('a.b');
     });
 
     it('works with numbers', () => {
-        expect(joinName(1, 'a', 'b')).toEqual('1.a.b');
-        expect(joinName('a', 1, 'b')).toEqual('a.1.b');
-        expect(joinName('a', 'b', 1)).toEqual('a.b.1');
+        expect(joinName(1, 'a', 'b')).toBe('1.a.b');
+        expect(joinName('a', 1, 'b')).toBe('a.1.b');
+        expect(joinName('a', 'b', 1)).toBe('a.b.1');
     });
 
     it('works with partials', () => {
-        expect(joinName('a', 'b.c.d')).toEqual('a.b.c.d');
-        expect(joinName('a.b', 'c.d')).toEqual('a.b.c.d');
-        expect(joinName('a.b.c', 'd')).toEqual('a.b.c.d');
+        expect(joinName('a', 'b.c.d')).toBe('a.b.c.d');
+        expect(joinName('a.b', 'c.d')).toBe('a.b.c.d');
+        expect(joinName('a.b.c', 'd')).toBe('a.b.c.d');
 
         expect(joinName(null, 'a', 'b.c.d')).toEqual(['a', 'b', 'c', 'd']);
         expect(joinName(null, 'a.b', 'c.d')).toEqual(['a', 'b', 'c', 'd']);

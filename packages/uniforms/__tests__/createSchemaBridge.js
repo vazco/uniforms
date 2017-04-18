@@ -18,7 +18,7 @@ describe('createSchemaBridge', () => {
             getValidator () {}
         };
 
-        expect(createSchemaBridge(bridge)).toEqual(bridge);
+        expect(createSchemaBridge(bridge)).toBe(bridge);
     });
 
     it('throws on unrecognised schema', () => {

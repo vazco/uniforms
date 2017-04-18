@@ -104,7 +104,7 @@ describe('SimpleSchemaBridge', () => {
         });
 
         it('works with correct error', () => {
-            expect(bridge.getErrorMessage('a', {details: [{name: 'a', details: {value: 1}}]})).toEqual('(a)');
+            expect(bridge.getErrorMessage('a', {details: [{name: 'a', details: {value: 1}}]})).toBe('(a)');
             expect(bridge.getErrorMessage('a', {details: [{name: 'b', details: {value: 1}}]})).not.toBeTruthy();
         });
     });
@@ -169,31 +169,31 @@ describe('SimpleSchemaBridge', () => {
         });
 
         it('works with options (array)', () => {
-            expect(bridge.getProps('s').transform('a')).toEqual(1);
-            expect(bridge.getProps('s').transform('b')).toEqual(2);
-            expect(bridge.getProps('s').allowedValues[0]).toEqual('a');
-            expect(bridge.getProps('s').allowedValues[1]).toEqual('b');
+            expect(bridge.getProps('s').transform('a')).toBe(1);
+            expect(bridge.getProps('s').transform('b')).toBe(2);
+            expect(bridge.getProps('s').allowedValues[0]).toBe('a');
+            expect(bridge.getProps('s').allowedValues[1]).toBe('b');
         });
 
         it('works with options (function)', () => {
-            expect(bridge.getProps('t').transform('a')).toEqual(1);
-            expect(bridge.getProps('t').transform('b')).toEqual(2);
-            expect(bridge.getProps('t').allowedValues[0]).toEqual('a');
-            expect(bridge.getProps('t').allowedValues[1]).toEqual('b');
+            expect(bridge.getProps('t').transform('a')).toBe(1);
+            expect(bridge.getProps('t').transform('b')).toBe(2);
+            expect(bridge.getProps('t').allowedValues[0]).toBe('a');
+            expect(bridge.getProps('t').allowedValues[1]).toBe('b');
         });
 
         it('works with options (object)', () => {
-            expect(bridge.getProps('r').transform('a')).toEqual(1);
-            expect(bridge.getProps('r').transform('b')).toEqual(2);
-            expect(bridge.getProps('r').allowedValues[0]).toEqual('a');
-            expect(bridge.getProps('r').allowedValues[1]).toEqual('b');
+            expect(bridge.getProps('r').transform('a')).toBe(1);
+            expect(bridge.getProps('r').transform('b')).toBe(2);
+            expect(bridge.getProps('r').allowedValues[0]).toBe('a');
+            expect(bridge.getProps('r').allowedValues[1]).toBe('b');
         });
 
         it('works with options from props', () => {
-            expect(bridge.getProps('s', {options: {c: 1, d: 2}}).transform('c')).toEqual(1);
-            expect(bridge.getProps('s', {options: {c: 1, d: 2}}).transform('d')).toEqual(2);
-            expect(bridge.getProps('s', {options: {c: 1, d: 2}}).allowedValues[0]).toEqual('c');
-            expect(bridge.getProps('s', {options: {c: 1, d: 2}}).allowedValues[1]).toEqual('d');
+            expect(bridge.getProps('s', {options: {c: 1, d: 2}}).transform('c')).toBe(1);
+            expect(bridge.getProps('s', {options: {c: 1, d: 2}}).transform('d')).toBe(2);
+            expect(bridge.getProps('s', {options: {c: 1, d: 2}}).allowedValues[0]).toBe('c');
+            expect(bridge.getProps('s', {options: {c: 1, d: 2}}).allowedValues[1]).toBe('d');
         });
 
         it('works with transform', () => {
@@ -219,11 +219,11 @@ describe('SimpleSchemaBridge', () => {
 
     describe('#getType', () => {
         it('works with any type', () => {
-            expect(bridge.getType('a')).toEqual(Object);
-            expect(bridge.getType('j')).toEqual(Array);
-            expect(bridge.getType('d')).toEqual(String);
-            expect(bridge.getType('f')).toEqual(Number);
-            expect(bridge.getType('i')).toEqual(Date);
+            expect(bridge.getType('a')).toBe(Object);
+            expect(bridge.getType('j')).toBe(Array);
+            expect(bridge.getType('d')).toBe(String);
+            expect(bridge.getType('f')).toBe(Number);
+            expect(bridge.getType('i')).toBe(Date);
         });
     });
 

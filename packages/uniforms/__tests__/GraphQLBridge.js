@@ -160,15 +160,15 @@ describe('GraphQLBridge', () => {
         });
 
         it('works with undefined primitives', () => {
-            expect(bridge.getInitialValue('id')).toEqual(undefined);
+            expect(bridge.getInitialValue('id')).toBe(undefined);
         });
 
         it('works with defined primitives', () => {
-            expect(bridge.getInitialValue('votes')).toEqual(44);
+            expect(bridge.getInitialValue('votes')).toBe(44);
         });
 
         it('works with default values', () => {
-            expect(bridge.getInitialValue('author.firstName')).toEqual('John');
+            expect(bridge.getInitialValue('author.firstName')).toBe('John');
         });
     });
 
@@ -230,24 +230,24 @@ describe('GraphQLBridge', () => {
         });
 
         it('works with options (array)', () => {
-            expect(bridge.getProps('title').transform('a')).toEqual(1);
-            expect(bridge.getProps('title').transform('b')).toEqual(2);
-            expect(bridge.getProps('title').allowedValues[0]).toEqual('a');
-            expect(bridge.getProps('title').allowedValues[1]).toEqual('b');
+            expect(bridge.getProps('title').transform('a')).toBe(1);
+            expect(bridge.getProps('title').transform('b')).toBe(2);
+            expect(bridge.getProps('title').allowedValues[0]).toBe('a');
+            expect(bridge.getProps('title').allowedValues[1]).toBe('b');
         });
 
         it('works with options (object)', () => {
-            expect(bridge.getProps('votes').transform('a')).toEqual(1);
-            expect(bridge.getProps('votes').transform('b')).toEqual(2);
-            expect(bridge.getProps('votes').allowedValues[0]).toEqual('a');
-            expect(bridge.getProps('votes').allowedValues[1]).toEqual('b');
+            expect(bridge.getProps('votes').transform('a')).toBe(1);
+            expect(bridge.getProps('votes').transform('b')).toBe(2);
+            expect(bridge.getProps('votes').allowedValues[0]).toBe('a');
+            expect(bridge.getProps('votes').allowedValues[1]).toBe('b');
         });
 
         it('works with options from props', () => {
-            expect(bridge.getProps('votes', {options: {c: 1, d: 2}}).transform('c')).toEqual(1);
-            expect(bridge.getProps('votes', {options: {c: 1, d: 2}}).transform('d')).toEqual(2);
-            expect(bridge.getProps('votes', {options: {c: 1, d: 2}}).allowedValues[0]).toEqual('c');
-            expect(bridge.getProps('votes', {options: {c: 1, d: 2}}).allowedValues[1]).toEqual('d');
+            expect(bridge.getProps('votes', {options: {c: 1, d: 2}}).transform('c')).toBe(1);
+            expect(bridge.getProps('votes', {options: {c: 1, d: 2}}).transform('d')).toBe(2);
+            expect(bridge.getProps('votes', {options: {c: 1, d: 2}}).allowedValues[0]).toBe('c');
+            expect(bridge.getProps('votes', {options: {c: 1, d: 2}}).allowedValues[1]).toBe('d');
         });
 
         it('works with other props', () => {
@@ -289,32 +289,32 @@ describe('GraphQLBridge', () => {
 
     describe('#getType', () => {
         it('works with any type', () => {
-            expect(bridge.getType('author')).toEqual(Object);
-            expect(bridge.getType('author.decimal')).toEqual(Number);
-            expect(bridge.getType('author.firstName')).toEqual(String);
-            expect(bridge.getType('author.id')).toEqual(String);
-            expect(bridge.getType('author.lastName')).toEqual(String);
-            expect(bridge.getType('author.tags')).toEqual(Array);
-            expect(bridge.getType('author.tags.$')).toEqual(String);
-            expect(bridge.getType('category')).toEqual(Array);
-            expect(bridge.getType('category.$')).toEqual(Object);
-            expect(bridge.getType('category.$.owners')).toEqual(Array);
-            expect(bridge.getType('category.$.owners.$')).toEqual(Object);
-            expect(bridge.getType('category.$.owners.$.decimal')).toEqual(Number);
-            expect(bridge.getType('category.$.owners.$.firstName')).toEqual(String);
-            expect(bridge.getType('category.$.owners.$.id')).toEqual(String);
-            expect(bridge.getType('category.$.owners.$.lastName')).toEqual(String);
-            expect(bridge.getType('category.$.owners.$.tags')).toEqual(Array);
-            expect(bridge.getType('category.$.owners.$.tags.$')).toEqual(String);
-            expect(bridge.getType('id')).toEqual(Number);
-            expect(bridge.getType('title')).toEqual(String);
-            expect(bridge.getType('votes')).toEqual(Number);
+            expect(bridge.getType('author')).toBe(Object);
+            expect(bridge.getType('author.decimal')).toBe(Number);
+            expect(bridge.getType('author.firstName')).toBe(String);
+            expect(bridge.getType('author.id')).toBe(String);
+            expect(bridge.getType('author.lastName')).toBe(String);
+            expect(bridge.getType('author.tags')).toBe(Array);
+            expect(bridge.getType('author.tags.$')).toBe(String);
+            expect(bridge.getType('category')).toBe(Array);
+            expect(bridge.getType('category.$')).toBe(Object);
+            expect(bridge.getType('category.$.owners')).toBe(Array);
+            expect(bridge.getType('category.$.owners.$')).toBe(Object);
+            expect(bridge.getType('category.$.owners.$.decimal')).toBe(Number);
+            expect(bridge.getType('category.$.owners.$.firstName')).toBe(String);
+            expect(bridge.getType('category.$.owners.$.id')).toBe(String);
+            expect(bridge.getType('category.$.owners.$.lastName')).toBe(String);
+            expect(bridge.getType('category.$.owners.$.tags')).toBe(Array);
+            expect(bridge.getType('category.$.owners.$.tags.$')).toBe(String);
+            expect(bridge.getType('id')).toBe(Number);
+            expect(bridge.getType('title')).toBe(String);
+            expect(bridge.getType('votes')).toBe(Number);
         });
     });
 
     describe('#getValidator', () => {
         it('calls correct validator', () => {
-            expect(bridge.getValidator()).toEqual(schemaValidator);
+            expect(bridge.getValidator()).toBe(schemaValidator);
         });
     });
 });
