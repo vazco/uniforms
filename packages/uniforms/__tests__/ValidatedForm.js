@@ -38,7 +38,7 @@ describe('ValidatedForm', () => {
 
             validator.mockImplementationOnce(() => {
                 throw new Error();
-            }).mockImplementationOnce(() => {});
+            });
 
             wrapper.find('form').simulate('submit');
 
@@ -90,7 +90,7 @@ describe('ValidatedForm', () => {
         it('revalidates with new model only if required', () => {
             validator.mockImplementationOnce(() => {
                 throw new Error();
-            }).mockImplementationOnce(() => {});
+            });
 
             const wrapper = mount(
                 <ValidatedForm model={{}} schema={schema} />
@@ -106,7 +106,7 @@ describe('ValidatedForm', () => {
         it('revalidates with new model', () => {
             validator.mockImplementationOnce(() => {
                 throw new Error();
-            }).mockImplementationOnce(() => {});
+            });
 
             const wrapper = mount(
                 <ValidatedForm model={{}} schema={schema} validate="onChange" />
@@ -122,7 +122,7 @@ describe('ValidatedForm', () => {
         it('revalidates with new model only when changed', () => {
             validator.mockImplementationOnce(() => {
                 throw new Error();
-            }).mockImplementationOnce(() => {});
+            });
 
             const wrapper = mount(
                 <ValidatedForm model={model} schema={schema} />
@@ -138,7 +138,7 @@ describe('ValidatedForm', () => {
         it('revalidates with new validator only if required', () => {
             validator.mockImplementationOnce(() => {
                 throw new Error();
-            }).mockImplementationOnce(() => {});
+            });
 
             const wrapper = mount(
                 <ValidatedForm model={{}} schema={schema} validate="onChange" />
@@ -154,7 +154,7 @@ describe('ValidatedForm', () => {
         it('revalidates with new validator', () => {
             validator.mockImplementationOnce(() => {
                 throw new Error();
-            }).mockImplementationOnce(() => {});
+            });
 
             const wrapper = mount(
                 <ValidatedForm model={{}} schema={schema} />
@@ -186,7 +186,7 @@ describe('ValidatedForm', () => {
         it('validates (onChangeAfterSubmit)', async () => {
             validator.mockImplementationOnce(() => {
                 throw new Error();
-            }).mockImplementation(() => {});
+            });
 
             const wrapper = mount(
                 <ValidatedForm
@@ -226,7 +226,7 @@ describe('ValidatedForm', () => {
         it('validates (onSubmit)', async () => {
             validator.mockImplementationOnce(() => {
                 throw new Error();
-            }).mockImplementation(() => {});
+            });
 
             const wrapper = mount(
                 <ValidatedForm
@@ -278,7 +278,7 @@ describe('ValidatedForm', () => {
         });
 
         it('calls `onValidate` (error)', () => {
-            validator.mockImplementationOnce(() => {
+            validator.mockImplementation(() => {
                 throw error;
             });
 
