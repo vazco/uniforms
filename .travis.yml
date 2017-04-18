@@ -5,6 +5,11 @@ node_js:
   - 6
   - 7
 
+branches:
+  only:
+    - master
+    - /^v\d+\.\d+(\.\d+)?(-\S+)?$/
+
 cache:
   directories:
     - demo/node_modules
