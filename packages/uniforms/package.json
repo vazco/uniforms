@@ -46,7 +46,6 @@
     "babel-preset-react": "6.23.0",
     "babel-preset-stage-0": "6.22.0",
     "babel-runtime": "6.23.0",
-    "chai": "4.0.0-canary.1",
     "cross-env": "4.0.0",
     "enzyme": "2.8.0",
     "eslint": "3.19.0",
@@ -61,8 +60,7 @@
     "react-addons-test-utils": "15.4.2",
     "react-dom": "15.4.2",
     "rimraf": "2.6.1",
-    "simpl-schema": "0.2.3",
-    "sinon": "2.1.0"
+    "simpl-schema": "0.2.3"
   },
   "peerDependencies": {
     "graphql": "^0.8.2 || ^0.9.1",
