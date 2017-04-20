@@ -44,6 +44,14 @@ test('<BoolField> - renders an input with correct type', () => {
     expect(wrapper.find('input').prop('type')).toBe('checkbox');
 });
 
+test('<BoolField> - renders an input with correct disabled state', () => {
+    const element = <BoolField name="x" disabled />;
+    const wrapper = mount(element, createContext({x: {type: Boolean}}));
+
+    expect(wrapper.find('input')).toHaveLength(1);
+    expect(wrapper.find('input').prop('disabled')).toBe(true);
+});
+
 test('<BoolField> - renders a input with correct label (specified)', () => {
     const element = <BoolField name="x" label="BoolFieldLabel" />;
     const wrapper = mount(element, createContext({x: {type: Boolean}}));
@@ -58,7 +66,7 @@ test('<BoolField> - renders a input with correct value (default)', () => {
     const wrapper = mount(element, createContext({x: {type: Boolean}}));
 
     expect(wrapper.find('input')).toHaveLength(1);
-    expect(wrapper.find('input').prop('value')).toBeUndefined();
+    expect(wrapper.find('input').prop('checked')).toBe('');
 });
 
 test('<BoolField> - renders a input with correct value (model)', () => {
@@ -84,7 +92,7 @@ test('<BoolField> - renders a input which correctly reacts on change', () => {
     const wrapper = mount(element, createContext({x: {type: Boolean}}, {onChange}));
 
     expect(wrapper.find('input')).toHaveLength(1);
-    expect(wrapper.find('input').simulate('change', {target: {value: true}})).toBeTruthy();
+    expect(wrapper.find('input').simulate('change')).toBeTruthy();
     expect(onChange).toHaveBeenLastCalledWith('x', true);
 });
 
