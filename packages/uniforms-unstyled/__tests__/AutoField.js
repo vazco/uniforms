@@ -71,7 +71,7 @@ describe('works without defined component', () => {
 });
 
 describe('works with defined component', () => {
-    test('<AutoField> - renders BoolField', () => {
+    test('<AutoField> - renders Component', () => {
         const Component = jest.fn(() => null);
 
         const element = <AutoField name="x" />;
