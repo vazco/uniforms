@@ -1,9 +1,9 @@
 import React   from 'react';
 import {mount} from 'enzyme';
 
+import ListAddField from 'uniforms-unstyled/ListAddField';
 import ListField from 'uniforms-unstyled/ListField';
 import ListItemField from 'uniforms-unstyled/ListItemField';
-import ListAddField from 'uniforms-unstyled/ListAddField';
 
 import createContext from './_createContext';
 
@@ -19,6 +19,7 @@ test('<ListField> - renders ListAddField', () => {
     const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
 
     expect(wrapper.find(ListAddField)).toHaveLength(1);
+    expect(wrapper.find(ListAddField).prop('name')).toBe('x.$');
 });
 
 test('<ListField> - renders correct label (specified)', () => {
