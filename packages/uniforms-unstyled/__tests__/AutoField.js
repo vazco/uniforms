@@ -17,7 +17,7 @@ test('<AutoField> - works', () => {
     const element = <AutoField name="x" />;
     const wrapper = mount(element, createContext({x: {type: String}}));
 
-    expect(wrapper.find('AutoField')).toHaveLength(1);
+    expect(wrapper.find(AutoField)).toHaveLength(1);
 });
 
 test('<AutoField> - renders RadioField', () => {
