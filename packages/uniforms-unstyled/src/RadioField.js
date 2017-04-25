@@ -4,6 +4,7 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 
 const Radio = ({
     allowedValues,
+    checkboxes, // eslint-disable-line no-unused-vars
     disabled,
     id,
     label,

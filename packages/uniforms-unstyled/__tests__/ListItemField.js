@@ -1,8 +1,8 @@
 import React   from 'react';
 import {mount} from 'enzyme';
 
-import AutoField from 'uniforms-unstyled/AutoField';
-import ListDelField from 'uniforms-unstyled/ListDelField';
+import AutoField     from 'uniforms-unstyled/AutoField';
+import ListDelField  from 'uniforms-unstyled/ListDelField';
 import ListItemField from 'uniforms-unstyled/ListItemField';
 
 import createContext from './_createContext';

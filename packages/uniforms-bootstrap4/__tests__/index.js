@@ -1,7 +1,7 @@
-import * as unstyled from 'uniforms-unstyled';
+import * as bootstrap4 from 'uniforms-bootstrap4';
 
 it('exports everything', () => {
-    expect(unstyled).toEqual({
+    expect(bootstrap4).toEqual({
         AutoFields:         expect.any(Function),
         AutoField:          expect.any(Function),
         AutoForm:           expect.any(Function),
@@ -10,6 +10,7 @@ it('exports everything', () => {
         DateField:          expect.any(Function),
         ErrorField:         expect.any(Function),
         ErrorsField:        expect.any(Function),
+        FormGroup:          expect.any(Function),
         HiddenField:        expect.any(Function),
         ListAddField:       expect.any(Function),
         ListDelField:       expect.any(Function),
@@ -24,6 +25,8 @@ it('exports everything', () => {
         SubmitField:        expect.any(Function),
         TextField:          expect.any(Function),
         ValidatedForm:      expect.any(Function),
-        ValidatedQuickForm: expect.any(Function)
+        ValidatedQuickForm: expect.any(Function),
+        gridClassName:      expect.any(Function),
+        wrapField:          expect.any(Function)
     });
 });

@@ -1,7 +1,7 @@
-import * as unstyled from 'uniforms-unstyled';
+import * as semantic from 'uniforms-semantic';
 
 it('exports everything', () => {
-    expect(unstyled).toEqual({
+    expect(semantic).toEqual({
         AutoFields:         expect.any(Function),
         AutoField:          expect.any(Function),
         AutoForm:           expect.any(Function),

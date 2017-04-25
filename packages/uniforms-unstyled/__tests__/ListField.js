@@ -1,8 +1,8 @@
 import React   from 'react';
 import {mount} from 'enzyme';
 
-import ListAddField from 'uniforms-unstyled/ListAddField';
-import ListField from 'uniforms-unstyled/ListField';
+import ListAddField  from 'uniforms-unstyled/ListAddField';
+import ListField     from 'uniforms-unstyled/ListField';
 import ListItemField from 'uniforms-unstyled/ListItemField';
 
 import createContext from './_createContext';
@@ -38,10 +38,10 @@ test('<ListField> - renders correct numer of items with initialCount (specified)
 });
 
 test('<ListField> - passes itemProps to its children', () => {
-    const element = <ListField name="x" initialCount={3} itemProps={{xyz: 1}} />;
+    const element = <ListField name="x" initialCount={3} itemProps={{'data-xyz': 1}} />;
     const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
 
-    expect(wrapper.find(ListItemField).first().prop('xyz')).toBe(1);
+    expect(wrapper.find(ListItemField).first().prop('data-xyz')).toBe(1);
 });
 
 test('<ListField> - renders children (specified)', () => {

@@ -385,7 +385,10 @@ describe('BaseField', () => {
 
     describe('when rendered without form', () => {
         it('should throw an error', () => {
+            console.error = jest.fn();
+
             expect(() => mount(<TestField name="a" />)).toThrow('<TestField /> must be rendered within a form.');
+            expect(console.error).toHaveBeenCalledTimes(1);
         });
     });
 

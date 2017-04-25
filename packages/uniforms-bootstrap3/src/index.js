@@ -22,3 +22,5 @@ export {default as SubmitField}        from './SubmitField';
 export {default as TextField}          from './TextField';
 export {default as ValidatedForm}      from './ValidatedForm';
 export {default as ValidatedQuickForm} from './ValidatedQuickForm';
+export {default as gridClassName}      from './gridClassName';
+export {default as wrapField}          from './wrapField';

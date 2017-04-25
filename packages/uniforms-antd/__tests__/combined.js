@@ -14,6 +14,7 @@ import AutoFields     from 'uniforms-antd/AutoFields';
 import AutoForm       from 'uniforms-antd/AutoForm';
 import ErrorField     from 'uniforms-antd/ErrorField';
 import ErrorsField    from 'uniforms-antd/ErrorsField';
+import FormGroup      from 'uniforms-antd/FormGroup';
 import HiddenField    from 'uniforms-antd/HiddenField';
 import ListAddField   from 'uniforms-antd/ListAddField';
 import ListDelField   from 'uniforms-antd/ListDelField';
@@ -471,4 +472,12 @@ describe('Everything', () => {
 
         expect(() => wrapper.update()).toThrow(/Unsupported field type/);
     });
+});
+
+test('FormGroup should be deprecated', () => {
+    console.error = jest.fn();
+
+    mount(<FormGroup />);
+
+    expect(console.error).toHaveBeenCalledTimes(1);
 });

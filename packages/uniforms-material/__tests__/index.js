@@ -1,7 +1,7 @@
-import * as unstyled from 'uniforms-unstyled';
+import * as material from 'uniforms-material';
 
 it('exports everything', () => {
-    expect(unstyled).toEqual({
+    expect(material).toEqual({
         AutoFields:         expect.any(Function),
         AutoField:          expect.any(Function),
         AutoForm:           expect.any(Function),

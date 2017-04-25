@@ -5,6 +5,7 @@ import AutoFields     from 'uniforms-bootstrap3/AutoFields';
 import AutoForm       from 'uniforms-bootstrap3/AutoForm';
 import ErrorField     from 'uniforms-bootstrap3/ErrorField';
 import ErrorsField    from 'uniforms-bootstrap3/ErrorsField';
+import FormGroup      from 'uniforms-bootstrap3/FormGroup';
 import HiddenField    from 'uniforms-bootstrap3/HiddenField';
 import ListAddField   from 'uniforms-bootstrap3/ListAddField';
 import ListDelField   from 'uniforms-bootstrap3/ListDelField';
@@ -428,4 +429,12 @@ describe('Everything', () => {
 
         expect(() => wrapper.update()).toThrow(/Unsupported field type/);
     });
+});
+
+test('FormGroup should be deprecated', () => {
+    console.error = jest.fn();
+
+    mount(<FormGroup />);
+
+    expect(console.error).toHaveBeenCalledTimes(1);
 });
