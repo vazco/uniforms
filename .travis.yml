@@ -25,6 +25,9 @@ cache:
 before_script:
   - npm install --prefix demo
 
+script:
+  - npm test -- --runInBand
+
 after_script:
   - npm run cover
   - npm run cover:report
