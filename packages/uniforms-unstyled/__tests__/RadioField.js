@@ -108,7 +108,7 @@ test('<RadioField> - renders a set of checkboxes which correctly reacts on chang
     const onChange = jest.fn();
 
     const element = <RadioField name="x" />;
-    const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}, {model: {x: 'b'}, onChange}));
+    const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}, {model: {x: 'b'}, onChange})); // eslint-disable-line max-len
 
     expect(wrapper.find('input')).toHaveLength(2);
     expect(wrapper.find('input').at(0).simulate('change')).toBeTruthy();

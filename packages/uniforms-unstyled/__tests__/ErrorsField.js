@@ -5,7 +5,7 @@ import ErrorsField from 'uniforms-unstyled/ErrorsField';
 
 import createContext from './_createContext';
 
-const errors = {
+const error = {
     error: 'validation-error',
     reason: 'X is required',
     details:[
@@ -25,7 +25,7 @@ test('<ErrorsField> - works', () => {
 
 test('<ErrorsField> - renders list of correct error messages (context)', () => {
     const element = <ErrorsField name="x" />;
-    const wrapper = mount(element, createContext({x: {type: String}, y: {type: String}, z: {type: String}}, {error: errors}));
+    const wrapper = mount(element, createContext({x: {type: String}, y: {type: String}, z: {type: String}}, {error}));
 
     expect(wrapper.find('li')).toHaveLength(3);
     expect(wrapper.find('li').at(0).text()).toBe('X is required');
@@ -35,7 +35,7 @@ test('<ErrorsField> - renders list of correct error messages (context)', () => {
 
 test('<ErrorsField> - renders children (specified)', () => {
     const element = <ErrorsField name="x" children="Error message list" />;
-    const wrapper = mount(element, createContext({x: {type: String}, y: {type: String}, z: {type: String}}, {error: errors}));
+    const wrapper = mount(element, createContext({x: {type: String}, y: {type: String}, z: {type: String}}, {error}));
 
     expect(wrapper.find(ErrorsField).text()).toEqual(expect.stringContaining('Error message list'));
 });

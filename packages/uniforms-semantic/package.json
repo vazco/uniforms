@@ -27,7 +27,7 @@
     "build": "babel --out-dir . src",
     "clean": "rimraf *.js coverage",
     "cover": "jest --coverage",
-    "lint": "eslint src test",
+    "lint": "eslint __mocks__ __tests__ src",
     "prepublish": "npm run build",
     "pretest": "npm run lint",
     "reset": "rimraf node_modules",

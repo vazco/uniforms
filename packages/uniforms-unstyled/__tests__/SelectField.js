@@ -136,7 +136,7 @@ test('<SelectField> - renders a select which correctly reacts on change (same va
     const onChange = jest.fn();
 
     const element = <SelectField name="x" />;
-    const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}, {model: {x: 'b'}, onChange}));
+    const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}, {model: {x: 'b'}, onChange})); // eslint-disable-line max-len
 
     expect(wrapper.find('select')).toHaveLength(1);
     expect(wrapper.find('select').simulate('change', {target: {value: 'b'}})).toBeTruthy();
@@ -265,7 +265,7 @@ test('<SelectField checkboxes> - renders a set of checkboxes which correctly rea
     const onChange = jest.fn();
 
     const element = <SelectField checkboxes name="x" />;
-    const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String, allowedValues: ['a', 'b']}}, {onChange}));
+    const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String, allowedValues: ['a', 'b']}}, {onChange})); // eslint-disable-line max-len
 
     expect(wrapper.find('input')).toHaveLength(2);
     expect(wrapper.find('input').at(1).simulate('change')).toBeTruthy();
@@ -276,7 +276,7 @@ test('<SelectField checkboxes> - renders a set of checkboxes which correctly rea
     const onChange = jest.fn();
 
     const element = <SelectField checkboxes name="x" value={['b']} />;
-    const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String, allowedValues: ['a', 'b']}}, {onChange}));
+    const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String, allowedValues: ['a', 'b']}}, {onChange})); // eslint-disable-line max-len
 
     expect(wrapper.find('input')).toHaveLength(2);
     expect(wrapper.find('input').at(1).simulate('change')).toBeTruthy();
@@ -287,7 +287,7 @@ test('<SelectField checkboxes> - renders a set of checkboxes which correctly rea
     const onChange = jest.fn();
 
     const element = <SelectField checkboxes name="x" />;
-    const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}, {model: {x: 'b'}, onChange}));
+    const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}, {model: {x: 'b'}, onChange})); // eslint-disable-line max-len
 
     expect(wrapper.find('input')).toHaveLength(2);
     expect(wrapper.find('input').at(0).simulate('change')).toBeTruthy();

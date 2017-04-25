@@ -22,7 +22,7 @@ test('<AutoField> - works', () => {
 
 test('<AutoField> - renders RadioField', () => {
     const element = <AutoField name="x" />;
-    const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['x', 'y'], uniforms: {checkboxes: true}}}));
+    const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['x', 'y'], uniforms: {checkboxes: true}}})); // eslint-disable-line max-len
 
     expect(wrapper.find(RadioField)).toHaveLength(1);
 });
