@@ -140,7 +140,7 @@ describe('Everything', () => {
 
         wrapper.setProps({children: null});
         wrapper.update();
-    });
+    }, 30000);
 
     it('works (NumField)', async () => {
         const find = () => wrapper.find(AntDInputNumber).filterWhere(x => x.props().name === 'x00');
@@ -457,7 +457,7 @@ describe('Everything', () => {
 
         wrapper.setProps({children: null});
         wrapper.update();
-    });
+    }, 30000);
 
     it('works (remount)', () => {
         wrapper.unmount();

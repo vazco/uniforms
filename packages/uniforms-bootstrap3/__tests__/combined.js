@@ -142,7 +142,7 @@ describe('Everything', () => {
 
         wrapper.setProps({children: null});
         wrapper.update();
-    });
+    }, 30000);
 
     it('works (NumField)', async () => {
         expect(wrapper.find('#x00').props()).toHaveProperty('value', '0');
@@ -413,7 +413,7 @@ describe('Everything', () => {
 
         wrapper.setProps({children: null});
         wrapper.update();
-    });
+    }, 30000);
 
     it('works (remount)', () => {
         wrapper.unmount();
