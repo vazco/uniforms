@@ -55,7 +55,7 @@ describe('AutoForm', () => {
             expect(onSubmit).not.toBeCalled();
             wrapper.instance().getChildContext().uniforms.onChange('a', 1);
 
-            await new Promise(resolve => setTimeout(resolve, 5));
+            await new Promise(resolve => process.nextTick(resolve));
 
             expect(onSubmit).toHaveBeenCalledTimes(1);
             expect(onSubmit).toHaveBeenLastCalledWith({a: 1});

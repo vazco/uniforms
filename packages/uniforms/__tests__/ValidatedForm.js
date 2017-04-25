@@ -58,7 +58,7 @@ describe('ValidatedForm', () => {
 
             wrapper.find('form').simulate('submit');
 
-            await new Promise(resolve => setTimeout(resolve, 5));
+            await new Promise(resolve => process.nextTick(resolve));
 
             expect(onSubmit).toHaveBeenCalledTimes(1);
         });
@@ -70,7 +70,7 @@ describe('ValidatedForm', () => {
 
             wrapper.find('form').simulate('submit');
 
-            await new Promise(resolve => setTimeout(resolve, 5));
+            await new Promise(resolve => process.nextTick(resolve));
 
             expect(onSubmit).toHaveBeenLastCalledWith(model);
         });
@@ -82,7 +82,7 @@ describe('ValidatedForm', () => {
 
             wrapper.find('form').simulate('submit');
 
-            await new Promise(resolve => setTimeout(resolve, 5));
+            await new Promise(resolve => process.nextTick(resolve));
 
             expect(onSubmit).not.toBeCalled();
         });
@@ -200,7 +200,7 @@ describe('ValidatedForm', () => {
 
             wrapper.find('form').simulate('submit');
 
-            await new Promise(resolve => setTimeout(resolve, 5));
+            await new Promise(resolve => process.nextTick(resolve));
 
             expect(validator).toHaveBeenCalledTimes(1);
             expect(onChange).not.toBeCalled();
@@ -208,7 +208,7 @@ describe('ValidatedForm', () => {
 
             wrapper.instance().getChildContext().uniforms.onChange('key', 'value');
 
-            await new Promise(resolve => setTimeout(resolve, 5));
+            await new Promise(resolve => process.nextTick(resolve));
 
             expect(validator).toHaveBeenCalledTimes(2);
             expect(onChange).toHaveBeenCalledTimes(1);
@@ -216,7 +216,7 @@ describe('ValidatedForm', () => {
 
             wrapper.find('form').simulate('submit');
 
-            await new Promise(resolve => setTimeout(resolve, 5));
+            await new Promise(resolve => process.nextTick(resolve));
 
             expect(validator).toHaveBeenCalledTimes(3);
             expect(onSubmit).toHaveBeenCalledTimes(1);
@@ -240,7 +240,7 @@ describe('ValidatedForm', () => {
 
             wrapper.find('form').simulate('submit');
 
-            await new Promise(resolve => setTimeout(resolve, 5));
+            await new Promise(resolve => process.nextTick(resolve));
 
             expect(validator).toHaveBeenCalledTimes(1);
             expect(onChange).not.toBeCalled();
@@ -248,7 +248,7 @@ describe('ValidatedForm', () => {
 
             wrapper.instance().getChildContext().uniforms.onChange('key', 'value');
 
-            await new Promise(resolve => setTimeout(resolve, 5));
+            await new Promise(resolve => process.nextTick(resolve));
 
             expect(validator).toHaveBeenCalledTimes(1);
             expect(onChange).toHaveBeenCalledTimes(1);
@@ -256,7 +256,7 @@ describe('ValidatedForm', () => {
 
             wrapper.find('form').simulate('submit');
 
-            await new Promise(resolve => setTimeout(resolve, 5));
+            await new Promise(resolve => process.nextTick(resolve));
 
             expect(validator).toHaveBeenCalledTimes(2);
             expect(onSubmit).toHaveBeenCalledTimes(1);

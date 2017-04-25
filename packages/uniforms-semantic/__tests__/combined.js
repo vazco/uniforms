@@ -120,24 +120,21 @@ describe('Everything', () => {
         />
     );
 
-    it('works (AutoFields, ErrorsField, SubmitField)', async () => {
-        // eslint-disable-next-line no-undef
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
-
+    it('works (AutoFields, ErrorsField, SubmitField, on)', () => {
         const children = (
-            <section>
+            <div>
                 <AutoFields />
                 <ErrorsField />
                 <SubmitField />
-            </section>
+            </div>
         );
 
         wrapper.setProps({children});
         wrapper.update();
+    });
 
-        await new Promise(resolve => setTimeout(resolve, 5));
-
-        wrapper.setProps({children: null});
+    it('works (AutoFields, ErrorsField, SubmitField, off)', () => {
+        wrapper.setProps({children: undefined});
         wrapper.update();
     });
 
@@ -148,7 +145,7 @@ describe('Everything', () => {
         expect(wrapper.find('#x00').simulate('change', {target: {value: '0'}})).toBeTruthy();
         expect(wrapper.find('#x00').props()).toHaveProperty('value', '0');
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x00', 0);
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({x00: 0}));
@@ -159,7 +156,7 @@ describe('Everything', () => {
         expect(wrapper.find('#x00').simulate('change', {target: {value: 'invalid'}})).toBeTruthy();
         expect(wrapper.find('#x00').props()).toHaveProperty('value', '');
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x00', undefined);
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({x00: undefined}));
@@ -174,7 +171,7 @@ describe('Everything', () => {
         expect(wrapper.find('#x01').simulate('change', {target: {value: 'x01'}})).toBeTruthy();
         expect(wrapper.find('#x01').props()).toHaveProperty('value', 'x01');
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x01', 'x01');
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({x01: 'x01'}));
@@ -185,7 +182,7 @@ describe('Everything', () => {
         expect(wrapper.find('#x02').simulate('change', {target: {value: 2}})).toBeTruthy();
         expect(wrapper.find('#x02').props()).toHaveProperty('value', 2);
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x02', 2);
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({x02: 2}));
@@ -198,7 +195,7 @@ describe('Everything', () => {
         expect(wrapper.find('[name="x03"]').at(1).prop('checked')).toBe(true);
         expect(wrapper.find('[name="x03"]').at(0).prop('checked')).toBe(false);
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x03', 2);
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({x03: 2}));
@@ -211,7 +208,7 @@ describe('Everything', () => {
         expect(wrapper.find('[name="x03"]').at(0).prop('checked')).toBe(true);
         expect(wrapper.find('[name="x03"]').at(1).prop('checked')).toBe(false);
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x03', 1);
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({x03: 1}));
@@ -222,7 +219,7 @@ describe('Everything', () => {
         expect(wrapper.find('[name="x04"]').at(1).simulate('change', {target: {value: true}})).toBeTruthy();
         expect(wrapper.find('[name="x04"]').at(1).prop('checked')).toBe(true);
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x04', [2]);
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({x04: [2]}));
@@ -233,7 +230,7 @@ describe('Everything', () => {
         expect(wrapper.find('[name="x04"]').at(1).simulate('change', {target: {value: false}})).toBeTruthy();
         expect(wrapper.find('[name="x04"]').at(1).prop('checked')).toBe(false);
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x04', []);
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({x04: []}));
@@ -244,7 +241,7 @@ describe('Everything', () => {
         expect(wrapper.find('#x05').simulate('change', {target: {valueAsNumber: +dateB}})).toBeTruthy();
         expect(wrapper.find('#x05').props()).toHaveProperty('value', dateB.toISOString().slice(0, -8));
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x05', dateB);
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({x05: dateB}));
@@ -255,7 +252,7 @@ describe('Everything', () => {
         expect(wrapper.find('#x06').simulate('change', {target: {value: true}})).toBeTruthy();
         expect(wrapper.find('#x06').prop('checked')).toBe(true);
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x06', true);
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({x06: true}));
@@ -266,7 +263,7 @@ describe('Everything', () => {
         expect(wrapper.find('#x08y01').simulate('change', {target: {value: 'x08y01'}})).toBeTruthy();
         expect(wrapper.find('#x08y01').props()).toHaveProperty('value', 'x08y01');
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x08.y01', 'x08y01');
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({
@@ -279,7 +276,7 @@ describe('Everything', () => {
         expect(wrapper.find('#x08y02').simulate('change', {target: {value: '2'}})).toBeTruthy();
         expect(wrapper.find('#x08y02').props()).toHaveProperty('value', '2');
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x08.y02', 2);
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({x08: expect.objectContaining({y02: 2})}));
@@ -290,7 +287,7 @@ describe('Everything', () => {
         expect(wrapper.find('#x22').simulate('change', {target: {value: ''}})).toBeTruthy();
         expect(wrapper.find('#x22').props()).toHaveProperty('value', '');
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x22', undefined);
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({x22: undefined}));
@@ -301,7 +298,7 @@ describe('Everything', () => {
         expect(wrapper.find('#x22').simulate('change', {target: {value: '2'}})).toBeTruthy();
         expect(wrapper.find('#x22').props()).toHaveProperty('value', '2');
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x22', 2);
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({x22: 2}));
@@ -312,7 +309,7 @@ describe('Everything', () => {
         expect(wrapper.find('#x25').simulate('change', {target: {value: 'x25'}})).toBeTruthy();
         expect(wrapper.find('#x25').props()).toHaveProperty('value', 'x25');
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x25', 'x25');
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({x25: 'x25'}));
@@ -321,7 +318,7 @@ describe('Everything', () => {
     it('works (ListAddField, one)', async () => {
         expect(wrapper.find(ListAddField).findWhere(x => x.props().onClick).last().simulate('click')).toBeTruthy();
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x27.0', '');
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({x27: ['']}));
@@ -330,7 +327,7 @@ describe('Everything', () => {
     it('works (ListAddField, two)', async () => {
         expect(wrapper.find(ListAddField).findWhere(x => x.props().onClick).last().simulate('click')).toBeTruthy();
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x27.1', '');
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({x27: ['', '']}));
@@ -339,7 +336,7 @@ describe('Everything', () => {
     it('works (ListDelField)', async () => {
         expect(wrapper.find(ListDelField).at(0).simulate('click')).toBeTruthy();
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x27', ['']);
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({x27: ['']}));
@@ -352,7 +349,7 @@ describe('Everything', () => {
         expect(wrapper.find('[name="x31"]').at(1).prop('checked')).toBe(true);
         expect(wrapper.find('[name="x31"]').at(0).prop('checked')).toBe(false);
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x31', 2);
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({x31: 2}));
@@ -370,7 +367,7 @@ describe('Everything', () => {
 
         expect(wrapperHidden.find('#x32').props()).toHaveProperty('value', 'x32');
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x32', 'x32');
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({x32: 'x32'}));
@@ -388,16 +385,13 @@ describe('Everything', () => {
 
         expect(wrapperHidden.find(HiddenField).props()).toHaveProperty('value', 'x32');
 
-        await new Promise(resolve => setTimeout(resolve, 5));
+        await new Promise(resolve => process.nextTick(resolve));
 
         expect(onChange).toHaveBeenLastCalledWith('x32', 'x32');
         expect(onSubmit).toHaveBeenLastCalledWith(expect.objectContaining({x32: 'x32'}));
     });
 
-    it('works (ListField, custom children)', async () => {
-        // eslint-disable-next-line no-undef
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
-
+    it('works (ListField, custom children, on)', () => {
         const children = (
             <ListField name="x04" value={[1]}>
                 <ListItemField name="$">
@@ -408,10 +402,10 @@ describe('Everything', () => {
 
         wrapper.setProps({children});
         wrapper.update();
+    });
 
-        await new Promise(resolve => setTimeout(resolve, 5));
-
-        wrapper.setProps({children: null});
+    it('works (ListField, custom children, off)', () => {
+        wrapper.setProps({children: undefined});
         wrapper.update();
     });
 

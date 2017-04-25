@@ -288,7 +288,7 @@ describe('BaseForm', () => {
 
             wrapper.find('form').simulate('submit');
 
-            await new Promise(resolve => setTimeout(resolve, 5));
+            await new Promise(resolve => process.nextTick(resolve));
 
             expect(onSubmitSuccess).toHaveBeenCalledTimes(1);
         });
@@ -302,7 +302,7 @@ describe('BaseForm', () => {
 
             wrapper.find('form').simulate('submit');
 
-            await new Promise(resolve => setTimeout(resolve, 5));
+            await new Promise(resolve => process.nextTick(resolve));
 
             expect(onSubmitFailure).toHaveBeenCalledTimes(1);
         });
