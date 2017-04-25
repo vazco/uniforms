@@ -121,6 +121,9 @@ describe('Everything', () => {
     );
 
     it('works (AutoFields, ErrorsField, SubmitField)', async () => {
+        // eslint-disable-next-line no-undef
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+
         const children = (
             <section>
                 <AutoFields />
@@ -136,7 +139,7 @@ describe('Everything', () => {
 
         wrapper.setProps({children: null});
         wrapper.update();
-    }, 30000);
+    });
 
     it('works (NumField)', async () => {
         expect(wrapper.find('#x00').props()).toHaveProperty('value', '0');
@@ -392,6 +395,9 @@ describe('Everything', () => {
     });
 
     it('works (ListField, custom children)', async () => {
+        // eslint-disable-next-line no-undef
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+
         const children = (
             <ListField name="x04" value={[1]}>
                 <ListItemField name="$">
@@ -407,7 +413,7 @@ describe('Everything', () => {
 
         wrapper.setProps({children: null});
         wrapper.update();
-    }, 30000);
+    });
 
     it('works (remount)', () => {
         wrapper.unmount();
