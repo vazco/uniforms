@@ -29,5 +29,5 @@ script:
   - npm test -- --no-cache --runInBand
 
 after_script:
-  - npm run cover
+  - npm run cover -- --no-cache --runInBand
   - npm run cover:report
