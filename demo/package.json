@@ -10,10 +10,10 @@
     "test": "true"
   },
   "dependencies": {
-    "antd": "2.9.0",
+    "antd": "2.9.3",
     "babel-polyfill": "6.23.0",
-    "graphql": "0.9.2",
-    "material-ui": "0.17.1",
+    "graphql": "0.9.3",
+    "material-ui": "0.17.4",
     "meteor-node-stubs": "0.2.6",
     "react": "15.4.2",
     "react-dom": "15.4.2",
@@ -30,9 +30,9 @@
     "uniforms-unstyled": "file:../packages/uniforms-unstyled"
   },
   "devDependencies": {
-    "babel-eslint": "7.2.1",
+    "babel-eslint": "7.2.3",
     "eslint": "3.19.0",
-    "eslint-config-vazco": "2.4.1",
+    "eslint-config-vazco": "2.5.0",
     "eslint-plugin-babel": "4.1.1",
     "eslint-plugin-brackets": "0.0.1",
     "eslint-plugin-react": "6.10.3",

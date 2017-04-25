@@ -1,7 +1,5 @@
 import React    from 'react';
-import {expect} from 'chai';
 import {mount}  from 'enzyme';
-import {spy}    from 'sinon';
 
 import AutoForm from 'uniforms/AutoForm';
 
@@ -9,10 +7,10 @@ jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
 
 describe('AutoForm', () => {
-    const onChangeModel = spy();
-    const validator = spy();
-    const onChange = spy();
-    const onSubmit = spy();
+    const onChangeModel = jest.fn();
+    const validator = jest.fn();
+    const onChange = jest.fn();
+    const onSubmit = jest.fn();
     const model = {a: 1};
     const schema = {
         getDefinition:   () => {},
@@ -22,10 +20,10 @@ describe('AutoForm', () => {
     };
 
     beforeEach(() => {
-        onChange.reset();
-        onChangeModel.reset();
-        onSubmit.reset();
-        validator.reset();
+        onChange.mockReset();
+        onChangeModel.mockReset();
+        onSubmit.mockReset();
+        validator.mockReset();
     });
 
     describe('when changed', () => {
@@ -36,15 +34,15 @@ describe('AutoForm', () => {
         it('updates', () => {
             wrapper.instance().getChildContext().uniforms.onChange('a', 2);
 
-            expect(onChange.calledOnce).to.be.ok;
-            expect(onChange.calledWith('a', 2)).to.be.ok;
+            expect(onChange).toHaveBeenCalledTimes(1);
+            expect(onChange).toHaveBeenLastCalledWith('a', 2);
         });
 
         it('calls `onChangeModel`', () => {
             wrapper.instance().getChildContext().uniforms.onChange('a', 2);
 
-            expect(onChangeModel.calledOnce).to.be.ok;
-            expect(onChangeModel.calledWith({a: 2})).to.be.ok;
+            expect(onChangeModel).toHaveBeenCalledTimes(1);
+            expect(onChangeModel).toHaveBeenLastCalledWith({a: 2});
         });
     });
 
@@ -54,13 +52,13 @@ describe('AutoForm', () => {
         );
 
         it('skips `onSubmit` until rendered (`autosave` = true)', async () => {
-            expect(onSubmit.called).to.be.false;
+            expect(onSubmit).not.toBeCalled();
             wrapper.instance().getChildContext().uniforms.onChange('a', 1);
 
-            await new Promise(resolve => setTimeout(resolve, 5));
+            await new Promise(resolve => process.nextTick(resolve));
 
-            expect(onSubmit.calledOnce).to.be.ok;
-            expect(onSubmit.calledWith({a: 1})).to.be.ok;
+            expect(onSubmit).toHaveBeenCalledTimes(1);
+            expect(onSubmit).toHaveBeenLastCalledWith({a: 1});
         });
     });
 
@@ -72,7 +70,7 @@ describe('AutoForm', () => {
         it('reset `model`', () => {
             wrapper.instance().reset();
 
-            expect(wrapper.instance().getChildContext().uniforms.model).to.be.deep.equal({});
+            expect(wrapper.instance().getChildContext().uniforms.model).toEqual({});
         });
     });
 
@@ -84,13 +82,13 @@ describe('AutoForm', () => {
         it('updates when changed', () => {
             wrapper.setProps({model: {}});
 
-            expect(wrapper.instance().getChildContext().uniforms.model).to.be.deep.equal({});
+            expect(wrapper.instance().getChildContext().uniforms.model).toEqual({});
         });
 
         it('validates', () => {
             wrapper.setProps({model, validate: 'onChange'});
 
-            expect(validator.calledOnce).to.be.ok;
+            expect(validator).toHaveBeenCalledTimes(1);
         });
     });
 });

@@ -1,7 +1,5 @@
 import React    from 'react';
-import {expect} from 'chai';
 import {mount}  from 'enzyme';
-import {spy}    from 'sinon';
 
 import BaseField          from 'uniforms/BaseField';
 import createSchemaBridge from 'uniforms/createSchemaBridge';
@@ -30,7 +28,7 @@ describe('BaseField', () => {
     const error1 = {details: [{name: 'a'}]};
     const error2 = {details: [{name: 'b'}]};
     const model = {a: {b: {c: 'example'}}};
-    const onChange = spy();
+    const onChange = jest.fn();
     const randomId = randomIds();
     const state = {changed: !1, changedMap: {}, label: !0, disabled: !1, placeholder: !0, showInlineError: !0};
     const schema = createSchemaBridge({
@@ -80,7 +78,7 @@ describe('BaseField', () => {
     const reactContext5 = {context: {uniforms: {...reactContextBase, schema: Object.create(schema)}}};
 
     afterEach(() => {
-        onChange.reset();
+        onChange.mockReset();
     });
 
     describe('child context', () => {
@@ -92,36 +90,36 @@ describe('BaseField', () => {
         const context = wrapper.instance().getChildContext();
 
         it('exists', () => {
-            expect(context).to.have.property('uniforms').that.is.an('object');
+            expect(context).toHaveProperty('uniforms', expect.any(Object));
         });
 
         it('have correct `error`', () => {
-            expect(context.uniforms).to.have.property('error', error1);
+            expect(context.uniforms).toHaveProperty('error', error1);
         });
 
         it('have correct `model`', () => {
-            expect(context.uniforms).to.have.property('model', model);
+            expect(context.uniforms).toHaveProperty('model', model);
         });
 
         it('have correct `name`', () => {
-            expect(context.uniforms).to.have.property('name').that.is.an('array');
-            expect(context.uniforms).to.have.property('name').that.have.property(0, 'a');
+            expect(context.uniforms).toHaveProperty('name', expect.any(Array));
+            expect(context.uniforms).toHaveProperty('name', expect.objectContaining({0 : 'a'}));
         });
 
         it('have correct `schema`', () => {
-            expect(context.uniforms).to.have.property('schema', schema);
+            expect(context.uniforms).toHaveProperty('schema', schema);
         });
 
         it('have correct `state`', () => {
-            expect(context.uniforms).to.have.property('state').that.is.an('object');
-            expect(context.uniforms.state).to.have.property('label', true);
-            expect(context.uniforms.state).to.have.property('disabled', false);
-            expect(context.uniforms.state).to.have.property('placeholder', true);
-            expect(context.uniforms.state).to.have.property('showInlineError', true);
+            expect(context.uniforms).toHaveProperty('state', expect.any(Object));
+            expect(context.uniforms.state).toHaveProperty('label', true);
+            expect(context.uniforms.state).toHaveProperty('disabled', false);
+            expect(context.uniforms.state).toHaveProperty('placeholder', true);
+            expect(context.uniforms.state).toHaveProperty('showInlineError', true);
         });
 
         it('have correct `onChange`', () => {
-            expect(context.uniforms).to.have.property('onChange').that.is.a('function');
+            expect(context.uniforms).toHaveProperty('onChange', expect.any(Function));
         });
     });
 
@@ -136,19 +134,19 @@ describe('BaseField', () => {
         it('calls `onChange` once', () => {
             props.onChange({b: 1});
 
-            expect(onChange.calledOnce).to.be.ok;
+            expect(onChange).toHaveBeenCalledTimes(1);
         });
 
         it('calls `onChange` with correct name and value', () => {
             props.onChange({b: 1});
 
-            expect(onChange.calledWith('a', {b: 1})).to.be.ok;
+            expect(onChange).toHaveBeenLastCalledWith('a', {b: 1});
         });
 
         it('calls `onChange` with correct name and value (foreign field)', () => {
             props.onChange(1, 'a.b');
 
-            expect(onChange.calledWith('a.b', 1)).to.be.ok;
+            expect(onChange).toHaveBeenLastCalledWith('a.b', 1);
         });
     });
 
@@ -165,15 +163,16 @@ describe('BaseField', () => {
         const props = wrapper.find(PropsComponent).last().props();
 
         it('have correct `name`', () => {
-            expect(props).to.have.property('name', 'a.b.c');
+            expect(props).toHaveProperty('name', 'a.b.c');
         });
 
         it('have correct `value`', () => {
-            expect(props).to.have.property('value', 'example');
+            expect(props).toHaveProperty('value', 'example');
         });
 
         it('have unique `id`', () => {
-            expect(props).to.have.property('id').that.is.not.equal(wrapper.find(TestField).first().props().id);
+            expect(props).toHaveProperty('id');
+            expect(props.id).not.toBe(wrapper.find(TestField).first().props().id);
         });
     });
 
@@ -186,76 +185,76 @@ describe('BaseField', () => {
         const props = wrapper.find(PropsComponent).props();
 
         it('have correct `changed`', () => {
-            expect(props).to.have.property('changed', false);
+            expect(props).toHaveProperty('changed', false);
         });
 
         it('have correct `disabled`', () => {
-            expect(props).to.have.property('disabled', false);
+            expect(props).toHaveProperty('disabled', false);
         });
 
         it('have correct `error`', () => {
-            expect(props).to.have.property('error', error1.details[0]);
+            expect(props).toHaveProperty('error', error1.details[0]);
         });
 
         it('have correct `errorMessage`', () => {
-            expect(props).to.have.property('errorMessage', 'CorrectErrorMessage');
+            expect(props).toHaveProperty('errorMessage', 'CorrectErrorMessage');
         });
 
         it('have correct `field`', () => {
-            expect(props).to.have.property('field').that.is.an('object');
-            expect(props).to.have.property('field').that.is.deep.equal(schema.getField('a'));
+            expect(props).toHaveProperty('field', expect.any(Object));
+            expect(props).toHaveProperty('field', schema.getField('a'));
         });
 
         it('have correct `findError`', () => {
-            expect(props).to.have.property('findError').that.is.a('function');
-            expect(props.findError('a')).to.deep.equal(props.error);
+            expect(props).toHaveProperty('findError', expect.any(Function));
+            expect(props.findError('a')).toEqual(props.error);
         });
 
         it('have correct `findField`', () => {
-            expect(props).to.have.property('findField').that.is.a('function');
-            expect(props.findField('a')).to.deep.equal(props.field);
+            expect(props).toHaveProperty('findField', expect.any(Function));
+            expect(props.findField('a')).toEqual(props.field);
         });
 
         it('have correct `findValue`', () => {
-            expect(props).to.have.property('findValue').that.is.a('function');
-            expect(props.findValue('a')).to.deep.equal(props.value);
+            expect(props).toHaveProperty('findValue', expect.any(Function));
+            expect(props.findValue('a')).toEqual(props.value);
         });
 
         it('have correct `fields`', () => {
-            expect(props).to.have.property('fields').that.is.an('array');
-            expect(props).to.have.property('fields').that.is.deep.equal(schema.getSubfields('a'));
+            expect(props).toHaveProperty('fields', expect.any(Array));
+            expect(props).toHaveProperty('fields', schema.getSubfields('a'));
         });
 
         it('have correct `id`', () => {
-            expect(props).to.have.property('id').that.is.an('string');
+            expect(props).toHaveProperty('id', expect.any(String));
         });
 
         it('have correct `label`', () => {
-            expect(props).to.have.property('label', 'a');
+            expect(props).toHaveProperty('label', 'a');
         });
 
         it('have correct `name`', () => {
-            expect(props).to.have.property('name', 'a');
+            expect(props).toHaveProperty('name', 'a');
         });
 
         it('have correct `onChange`', () => {
-            expect(props).to.have.property('onChange').that.is.a('function');
+            expect(props).toHaveProperty('onChange', expect.any(Function));
         });
 
         it('have correct `parent`', () => {
-            expect(props).to.have.property('parent', null);
+            expect(props).toHaveProperty('parent', null);
         });
 
         it('have correct `placeholder`', () => {
-            expect(props).to.have.property('placeholder', 'a');
+            expect(props).toHaveProperty('placeholder', 'a');
         });
 
         it('have correct `showInlineError`', () => {
-            expect(props).to.have.property('showInlineError', true);
+            expect(props).toHaveProperty('showInlineError', true);
         });
 
         it('have correct `value`', () => {
-            expect(props).to.have.property('value', model.a);
+            expect(props).toHaveProperty('value', model.a);
         });
     });
 
@@ -266,7 +265,7 @@ describe('BaseField', () => {
                     <TestField name="field" />,
                     reactContext1
                 );
-            }).to.throw(Error, /Field not found in schema: "field"/);
+            }).toThrow(Error, /Field not found in schema: "field"/);
         });
     });
 
@@ -277,7 +276,7 @@ describe('BaseField', () => {
                 reactContext1
             );
 
-            expect(wrapper.find(PropsComponent).props()).to.have.property('id', 'x');
+            expect(wrapper.find(PropsComponent).props()).toHaveProperty('id', 'x');
         });
     });
 
@@ -288,7 +287,7 @@ describe('BaseField', () => {
                 reactContext1
             );
 
-            expect(wrapper.find(PropsComponent).props()).to.have.property('label', 'a');
+            expect(wrapper.find(PropsComponent).props()).toHaveProperty('label', 'a');
         });
 
         it('have correct `label` (true and falsy value in schema)', () => {
@@ -297,7 +296,7 @@ describe('BaseField', () => {
                 reactContext1
             );
 
-            expect(wrapper.find(PropsComponent).props()).to.have.property('label', '');
+            expect(wrapper.find(PropsComponent).props()).toHaveProperty('label', '');
         });
 
         it('have correct `label` (falsy value)', () => {
@@ -306,7 +305,7 @@ describe('BaseField', () => {
                 reactContext1
             );
 
-            expect(wrapper.find(PropsComponent).props()).to.have.property('label', '');
+            expect(wrapper.find(PropsComponent).props()).toHaveProperty('label', '');
         });
 
         it('have correct `label` (falsy value in schema)', () => {
@@ -315,7 +314,7 @@ describe('BaseField', () => {
                 reactContext1
             );
 
-            expect(wrapper.find(PropsComponent).props()).to.have.property('label', '');
+            expect(wrapper.find(PropsComponent).props()).toHaveProperty('label', '');
         });
 
         it('have correct `label` (null)', () => {
@@ -324,7 +323,7 @@ describe('BaseField', () => {
                 reactContext1
             );
 
-            expect(wrapper.find(PropsComponent).props()).to.have.property('label', null);
+            expect(wrapper.find(PropsComponent).props()).toHaveProperty('label', null);
         });
 
         it('have correct `label` (string)', () => {
@@ -333,7 +332,7 @@ describe('BaseField', () => {
                 reactContext1
             );
 
-            expect(wrapper.find(PropsComponent).props()).to.have.property('label', 'A');
+            expect(wrapper.find(PropsComponent).props()).toHaveProperty('label', 'A');
         });
     });
 
@@ -344,7 +343,7 @@ describe('BaseField', () => {
                 reactContext1
             );
 
-            expect(wrapper.find(PropsComponent).props()).to.have.property('placeholder', 'a');
+            expect(wrapper.find(PropsComponent).props()).toHaveProperty('placeholder', 'a');
         });
 
         it('have correct `placeholder` (true and falsy value in schema)', () => {
@@ -353,7 +352,7 @@ describe('BaseField', () => {
                 reactContext1
             );
 
-            expect(wrapper.find(PropsComponent).props()).to.have.property('placeholder', '');
+            expect(wrapper.find(PropsComponent).props()).toHaveProperty('placeholder', '');
         });
 
         it('have correct `placeholder` (falsy value)', () => {
@@ -362,7 +361,7 @@ describe('BaseField', () => {
                 reactContext1
             );
 
-            expect(wrapper.find(PropsComponent).props()).to.have.property('placeholder', '');
+            expect(wrapper.find(PropsComponent).props()).toHaveProperty('placeholder', '');
         });
 
         it('have correct `placeholder` (falsy value in schema)', () => {
@@ -371,7 +370,7 @@ describe('BaseField', () => {
                 reactContext1
             );
 
-            expect(wrapper.find(PropsComponent).props()).to.have.property('placeholder', '');
+            expect(wrapper.find(PropsComponent).props()).toHaveProperty('placeholder', '');
         });
 
         it('have correct `placeholder` (string)', () => {
@@ -380,13 +379,16 @@ describe('BaseField', () => {
                 reactContext1
             );
 
-            expect(wrapper.find(PropsComponent).props()).to.have.property('placeholder', 'A');
+            expect(wrapper.find(PropsComponent).props()).toHaveProperty('placeholder', 'A');
         });
     });
 
     describe('when rendered without form', () => {
         it('should throw an error', () => {
-            expect(() => mount(<TestField name="a" />)).to.throw('<TestField /> must be rendered within a form.');
+            console.error = jest.fn();
+
+            expect(() => mount(<TestField name="a" />)).toThrow('<TestField /> must be rendered within a form.');
+            expect(console.error).toHaveBeenCalledTimes(1);
         });
     });
 
@@ -397,7 +399,7 @@ describe('BaseField', () => {
                 reactContext1
             );
 
-            expect(wrapper.find(PropsComponent).props()).to.have.property('value', 'D');
+            expect(wrapper.find(PropsComponent).props()).toHaveProperty('value', 'D');
         });
     });
 
@@ -409,12 +411,12 @@ describe('BaseField', () => {
             );
 
             const props1 = wrapper.find(PropsComponent).props();
-            expect(props1).to.have.property('id').that.is.an('string');
+            expect(props1).toHaveProperty('id', expect.any(String));
 
             wrapper.setProps({name: 'e'});
 
             const props2 = wrapper.find(PropsComponent).props();
-            expect(props2).to.have.property('id', props1.id);
+            expect(props2).toHaveProperty('id', props1.id);
         });
 
         it('updates on error change', () => {
@@ -424,17 +426,18 @@ describe('BaseField', () => {
             );
 
             const props1 = wrapper.find(PropsComponent).props();
-            expect(props1).to.have.property('error', error1.details[0]);
+            expect(props1).toHaveProperty('error', error1.details[0]);
 
             wrapper.setContext(reactContext2.context);
 
             const props2 = wrapper.find(PropsComponent).props();
-            expect(props2).to.have.property('error').that.is.not.ok;
+            expect(props2).toHaveProperty('error');
+            expect(props2.error).toBeFalsy();
 
             wrapper.setContext(reactContext3.context);
 
             const props3 = wrapper.find(PropsComponent).props();
-            expect(props3).to.have.property('error').that.is.not.ok;
+            expect(props3.error).toBeFalsy();
         });
 
         it('updates on name change', () => {
@@ -444,12 +447,12 @@ describe('BaseField', () => {
             );
 
             const props1 = wrapper.find(PropsComponent).props();
-            expect(props1).to.have.property('name', 'b');
+            expect(props1).toHaveProperty('name', 'b');
 
             wrapper.setContext(reactContext4.context);
 
             const props2 = wrapper.find(PropsComponent).props();
-            expect(props2).to.have.property('name', 'a.b');
+            expect(props2).toHaveProperty('name', 'a.b');
         });
 
         it('updates on schema change', () => {
@@ -485,7 +488,7 @@ describe('BaseField', () => {
                 'required',
                 'showInlineError',
                 'value'
-            ].forEach(prop => expect(props2).to.have.property(prop).that.is.deep.equal(props1[prop]));
+            ].forEach(prop => expect(props2).toHaveProperty(prop, props1[prop]));
         });
     });
 });

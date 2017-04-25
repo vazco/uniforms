@@ -1,14 +1,12 @@
-import {expect} from 'chai';
-
 import randomIds from 'uniforms/randomIds';
 
 describe('randomIds', () => {
     it('is a function', () => {
-        expect(randomIds).to.be.a('function');
+        expect(randomIds).toBeInstanceOf(Function);
     });
 
     it('returns a function', () => {
-        expect(randomIds).to.be.a('function');
+        expect(randomIds()).toBeInstanceOf(Function);
     });
 
     it('generate random id', () => {
@@ -19,6 +17,6 @@ describe('randomIds', () => {
 
         const unique = generated.filter((a, b, c) => c.indexOf(a) === b);
 
-        expect(unique).to.have.length(amount);
+        expect(unique).toHaveLength(amount);
     });
 });
