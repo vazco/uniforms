@@ -1,5 +1,5 @@
-// These props are provided by BaseField
 const unwantedProps = [
+    // These props are provided by BaseField
     'changed',
     'changedMap',
     'disabled',
@@ -18,7 +18,10 @@ const unwantedProps = [
     'parent',
     'placeholder',
     'showInlineError',
-    'value'
+    'value',
+
+    // This is used by AutoField
+    'component'
 ];
 
 // Some benchmarks

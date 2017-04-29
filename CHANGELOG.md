@@ -1,5 +1,6 @@
 ## Next
 - **Changed:** Inline errors are now triggered by `error`, not `errorMessage`. [\#267](https://github.com/vazco/uniforms/issues/267)
+- **Fixed:** Removed unknown prop warning when defining component in schema. [\#284](https://github.com/vazco/uniforms/issues/284)
 
 ## [v1.17.2](https://github.com/vazco/uniforms/tree/v1.17.2) (2017-04-12)
 - **Fixed:** Detection of SimpleSchema.
