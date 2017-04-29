@@ -12,7 +12,7 @@
   "dependencies": {
     "antd": "2.9.3",
     "babel-polyfill": "6.23.0",
-    "graphql": "0.9.3",
+    "graphql": "0.9.5",
     "material-ui": "0.17.4",
     "meteor-node-stubs": "0.2.6",
     "react": "15.4.2",

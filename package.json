@@ -1,13 +1,12 @@
 {
   "private": true,
   "dependencies": {
-    "lerna": "^2.0.0-rc.3"
+    "lerna": "2.0.0-rc.4"
   },
   "devDependencies": {
     "babel-cli": "6.24.1",
     "babel-jest": "19.0.0",
-    "coveralls": "2.13.0",
-    "cross-env": "4.0.0",
+    "coveralls": "2.13.1",
     "jest": "19.0.2",
     "rimraf": "2.6.1"
   },
