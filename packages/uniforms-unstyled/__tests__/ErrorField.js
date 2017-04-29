@@ -28,7 +28,7 @@ test('<ErrorField> - renders correct error message (context)', () => {
 });
 
 test('<ErrorField> - renders correct error message (specified)', () => {
-    const element = <ErrorField name="x" errorMessage="X is required" />;
+    const element = <ErrorField name="x" error={error.details[0]} errorMessage="X is required" />;
     const wrapper = mount(element, createContext({x: {type: String}}));
 
     expect(wrapper.find(ErrorField)).toHaveLength(1);

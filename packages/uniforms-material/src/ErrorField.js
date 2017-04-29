@@ -5,12 +5,8 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 import nothing        from 'uniforms/nothing';
 import {ListItem}     from 'material-ui/List';
 
-const Error = ({
-    children,
-    errorMessage,
-    ...props
-}) =>
-    !errorMessage ? nothing : (
+const Error = ({children, error, errorMessage, ...props}) =>
+    !error ? nothing : (
         <ListItem
             disabled
             leftIcon={<ErrorOutline />}
