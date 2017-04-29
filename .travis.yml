@@ -26,7 +26,7 @@ before_script:
   - npm install --prefix demo
 
 script:
-  - npm test -- --coverage --no-cache --runInBand
+  - npm test -- -- --coverage --no-cache --runInBand
 
 after_script:
   - npm run cover:report
