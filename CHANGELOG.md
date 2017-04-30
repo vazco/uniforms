@@ -1,4 +1,4 @@
-## Next
+## [v1.18.0](https://github.com/vazco/uniforms/tree/v1.18.0) (2017-04-30)
 - **Changed:** Inline errors are now triggered by `error`, not `errorMessage`. [\#267](https://github.com/vazco/uniforms/issues/267)
 - **Fixed:** Removed unknown prop warning when defining component in schema. [\#284](https://github.com/vazco/uniforms/issues/284)
 
