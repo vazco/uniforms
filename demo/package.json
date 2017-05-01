@@ -6,6 +6,9 @@
     "restart": "npm run reset && npm start",
     "start": "meteor run"
   },
+  "devDependencies": {
+    "rimraf": "2.6.1"
+  },
   "dependencies": {
     "antd": "2.9.3",
     "babel-polyfill": "6.23.0",
