@@ -1,5 +1,11 @@
 {
   "plugins": [
+    [
+      "transform-es2015-modules-commonjs",
+      {
+        "noInterop": true
+      }
+    ],
     "transform-object-assign",
     "transform-react-inline-elements",
     [
