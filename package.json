@@ -4,32 +4,58 @@
     "lerna": "2.0.0-rc.4"
   },
   "devDependencies": {
+    "antd": "2.9.3",
     "babel-cli": "6.24.1",
+    "babel-eslint": "7.2.3",
     "babel-jest": "19.0.0",
+    "babel-plugin-transform-object-assign": "6.22.0",
+    "babel-plugin-transform-react-inline-elements": "6.22.0",
+    "babel-plugin-transform-react-remove-prop-types": "0.4.3",
+    "babel-plugin-transform-runtime": "6.23.0",
+    "babel-preset-es2015": "6.24.1",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-stage-0": "6.24.1",
+    "babel-runtime": "^6.20.0",
     "coveralls": "2.13.1",
+    "enzyme": "2.8.2",
+    "eslint": "3.19.0",
+    "eslint-config-vazco": "2.5.0",
+    "eslint-plugin-babel": "4.1.1",
+    "eslint-plugin-brackets": "0.0.1",
+    "eslint-plugin-react": "6.10.3",
+    "eslint-plugin-vazco": "1.0.0",
+    "graphql": "0.9.5",
     "jest": "19.0.2",
-    "rimraf": "2.6.1"
+    "material-ui": "0.18.0",
+    "react": "15.4.2",
+    "react-addons-test-utils": "15.4.2",
+    "react-dom": "15.4.2",
+    "react-tap-event-plugin": "2.0.1",
+    "rimraf": "2.6.1",
+    "simpl-schema": "0.2.3"
   },
   "scripts": {
-    "build": "npm run build:packages",
-    "build:packages": "lerna run build",
-    "clean": "npm run clean:packages && npm run clean:main",
-    "clean:main": "rimraf coverage",
-    "clean:packages": "lerna run clean",
-    "cover": "jest --coverage",
-    "cover:report": "cat ./coverage/lcov.info | coveralls",
-    "install": "npm run install:packages",
-    "install:packages": "lerna bootstrap",
+    "build": "npm run build:uniforms && npm run build:uniforms-antd && npm run build:uniforms-bootstrap3 && npm run build:uniforms-bootstrap4 && npm run build:uniforms-material && npm run build:uniforms-semantic && npm run build:uniforms-unstyled",
+    "build:uniforms": "babel --out-dir packages/uniforms packages/uniforms/src",
+    "build:uniforms-antd": "babel --out-dir packages/uniforms-antd packages/uniforms-antd/src",
+    "build:uniforms-bootstrap3": "babel --out-dir packages/uniforms-bootstrap3 packages/uniforms-bootstrap3/src",
+    "build:uniforms-bootstrap4": "babel --out-dir packages/uniforms-bootstrap4 packages/uniforms-bootstrap4/src",
+    "build:uniforms-material": "babel --out-dir packages/uniforms-material packages/uniforms-material/src",
+    "build:uniforms-semantic": "babel --out-dir packages/uniforms-semantic packages/uniforms-semantic/src",
+    "build:uniforms-unstyled": "babel --out-dir packages/uniforms-unstyled packages/uniforms-unstyled/src",
+    "clean": "rimraf coverage packages/*/*.js",
+    "coverage": "jest --coverage",
+    "coverage:report": "cat ./coverage/lcov.info | coveralls",
+    "install": "lerna bootstrap",
     "lint": "npm run lint:demo && npm run lint:packages",
-    "lint:demo": "npm run lint --prefix demo",
-    "lint:packages": "lerna run lint",
+    "lint:demo": "eslint demo",
+    "lint:packages": "eslint packages",
+    "postinstall": "npm run build",
+    "prereset": "npm run clean",
+    "pretest": "npm run lint",
     "publish": "lerna publish",
-    "reset": "npm run reset:packages && npm run reset:main",
-    "reset:main": "rimraf node_modules",
-    "reset:packages": "lerna run reset",
-    "test": "npm run test:demo && npm run test:packages",
-    "test:demo": "npm run test --prefix demo",
-    "test:packages": "jest"
+    "reset": "rimraf node_modules",
+    "test": "jest"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -46,5 +72,8 @@
     "testMatch": [
       "<rootDir>/packages/*/__tests__/!(_)*.js"
     ]
+  },
+  "engines": {
+    "npm": ">=3.0.0"
   }
 }

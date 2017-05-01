@@ -1,9 +1,6 @@
-.idea
-
 /demo/.meteor/local
 /demo/node_modules
 
-/.nyc_output
 /coverage
 /node_modules
 
@@ -12,6 +9,4 @@ npm-debug.log*
 lerna-debug.log
 
 packages/*/*.js
-packages/*/.nyc_output
-packages/*/coverage
 packages/*/node_modules

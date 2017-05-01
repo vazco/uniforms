@@ -1,0 +1,5 @@
+demo/.meteor
+demo/node_modules
+
+packages/*/*.js
+packages/*/node_modules

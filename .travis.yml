@@ -14,19 +14,9 @@ cache:
   directories:
     - demo/node_modules
     - node_modules
-    - packages/uniforms/node_modules
-    - packages/uniforms-antd/node_modules
-    - packages/uniforms-bootstrap3/node_modules
-    - packages/uniforms-bootstrap4/node_modules
-    - packages/uniforms-material/node_modules
-    - packages/uniforms-semantic/node_modules
-    - packages/uniforms-unstyled/node_modules
-
-before_script:
-  - npm install --prefix demo
 
 script:
-  - npm test -- -- --coverage --no-cache --runInBand
+  - npm run coverage -- --no-cache --runInBand
 
 after_script:
-  - npm run cover:report
+  - npm run coverage:report

@@ -1,0 +1,24 @@
+{
+  "plugins": [
+    "transform-object-assign",
+    "transform-react-inline-elements",
+    [
+      "transform-react-remove-prop-types",
+      {
+        "mode": "wrap"
+      }
+    ],
+    [
+      "transform-runtime",
+      {
+        "polyfill": false,
+        "regenerator": false
+      }
+    ]
+  ],
+  "presets": [
+    "es2015",
+    "react",
+    "stage-0"
+  ]
+}

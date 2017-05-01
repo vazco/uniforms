@@ -2,18 +2,15 @@
   "name": "uniforms-demo",
   "private": true,
   "scripts": {
-    "lint": "eslint .",
-    "pretest": "npm run lint",
     "reset": "rimraf node_modules/uniforms* && npm install",
     "restart": "npm run reset && npm start",
-    "start": "meteor run",
-    "test": "true"
+    "start": "meteor run"
   },
   "dependencies": {
     "antd": "2.9.3",
     "babel-polyfill": "6.23.0",
     "graphql": "0.9.5",
-    "material-ui": "0.17.4",
+    "material-ui": "0.18.0",
     "meteor-node-stubs": "0.2.6",
     "react": "15.4.2",
     "react-dom": "15.4.2",
@@ -28,21 +25,5 @@
     "uniforms-material": "file:../packages/uniforms-material",
     "uniforms-semantic": "file:../packages/uniforms-semantic",
     "uniforms-unstyled": "file:../packages/uniforms-unstyled"
-  },
-  "devDependencies": {
-    "babel-eslint": "7.2.3",
-    "eslint": "3.19.0",
-    "eslint-config-vazco": "2.5.0",
-    "eslint-plugin-babel": "4.1.1",
-    "eslint-plugin-brackets": "0.0.1",
-    "eslint-plugin-react": "6.10.3",
-    "eslint-plugin-vazco": "1.0.0",
-    "rimraf": "2.6.1"
-  },
-  "eslintConfig": {
-    "root": true,
-    "extends": [
-      "vazco"
-    ]
   }
 }
