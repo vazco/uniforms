@@ -2,14 +2,16 @@ import {createElement} from 'react';
 
 import BaseField from './BaseField';
 
-export default function connectField (component, {
-    mapProps  = x => x,
-    baseField = BaseField,
+const identity = x => x;
 
-    ensureValue    = true,
-    includeInChain = true,
-    includeParent  = false,
-    initialValue   = true
+export default function connectField (component, {
+    baseField = BaseField,
+    mapProps  = identity,
+
+    ensureValue,
+    includeInChain,
+    includeParent,
+    initialValue
 } = {}) {
     return class extends baseField {
         static displayName = `${component.displayName || component.name}${baseField.displayName || baseField.name}`;
@@ -17,25 +19,24 @@ export default function connectField (component, {
         constructor () {
             super(...arguments);
 
-            Object.assign(this.options, {
-                ensureValue,
-                includeInChain,
-                includeParent,
-                initialValue
-            });
+            this.options.includeInChain = includeInChain === undefined ? true : includeInChain;
+            this.options.initialValue   = initialValue   === undefined ? true : initialValue;
+
+            if (ensureValue   !== undefined) this.options.ensureValue   = ensureValue;
+            if (includeParent !== undefined) this.options.includeParent = includeParent;
         }
 
         getChildContextName () {
             return this.options.includeInChain ? super.getChildContextName() : this.context.uniforms.name;
         }
 
-        render () {
-            return createElement(component, mapProps(this.getFieldProps()));
-        }
-
         componentWillMount () {
             if (this.options.initialValue) {
-                const props = this.getFieldProps(undefined, {explicitInitialValue: true, includeParent: false});
+                const props = this.getFieldProps(undefined, {
+                    ensureValue:          false,
+                    explicitInitialValue: true,
+                    includeParent:        false
+                });
 
                 // https://github.com/vazco/uniforms/issues/52
                 // If field is initially rendered with value, we treat it as an initial value.
@@ -44,10 +45,14 @@ export default function connectField (component, {
                     return;
                 }
 
-                if (props.required && (this.options.ensureValue ? props.value === '' : props.value === undefined)) {
+                if (props.required && props.initialValue !== undefined && props.value === undefined) {
                     props.onChange(props.initialValue);
                 }
             }
+        }
+
+        render () {
+            return createElement(component, mapProps(this.getFieldProps()));
         }
     };
 }

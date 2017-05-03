@@ -7,6 +7,28 @@ import {PropTypes} from 'react';
 import BaseForm from './BaseForm';
 import joinName from './joinName';
 
+// Used for calculating labels and placeholders.
+const flowingProp = (prop, schema, state, fallback) => {
+    const propDisabled   = prop === '' || prop === false;
+    const propSet        = prop !== undefined;
+    const schemaDisabled = schema === '' || schema === false;
+    const schemaValue    = schema === true || schema === undefined ? fallback : schema;
+    const stateDisabled  = !state;
+
+    const value = propDisabled || !propSet && (schemaDisabled || stateDisabled)
+        ? ''
+        : propSet
+            ? prop === true
+                ? schemaDisabled
+                    ? ''
+                    : schemaValue
+                : prop
+            : schemaValue
+    ;
+
+    return [value, schemaValue];
+};
+
 export default class BaseField extends Component {
     static displayName = 'Field';
 
@@ -28,7 +50,12 @@ export default class BaseField extends Component {
 
         invariant(this.context.uniforms, '<%s /> must be rendered within a form.', this.constructor.displayName);
 
-        this.options = {};
+        this.options = {
+            ensureValue:          true,
+            explicitInitialValue: false,
+            includeParent:        false,
+            overrideValue:        false
+        };
 
         this.randomId = this.context.uniforms.randomId();
 
@@ -156,97 +183,59 @@ export default class BaseField extends Component {
     // eslint-disable-next-line complexity
     getFieldProps (name, options) {
         const context = this.context.uniforms;
+        const props   = this.props;
         const state   = this.getChildContextState();
 
-        const {
-            ensureValue,
-            explicitInitialValue,
-            includeParent,
-            overrideValue
-        } = options ? {...this.options, ...options} : this.options;
+        options = Object.assign({}, this.options, options);
 
         if (name === undefined) {
-            name = joinName(context.name, this.props.name);
+            name = joinName(context.name, props.name);
         }
-
-        const field       = context.schema.getField(name);
-        const fieldType   = context.schema.getType(name);
-        const schemaProps = context.schema.getProps(name, {...state, ...this.props});
-
-        const error  = context.schema.getError(name, context.error);
-        const fields = context.schema.getSubfields(name);
-        const parent = includeParent && name.indexOf('.') !== -1
-            ? this.getFieldProps(name.replace(/(.+)\..+$/, '$1'), {includeParent: false})
-            : null;
-
-        const id = this.props.id || this.randomId;
-
-        const errorMessage = context.schema.getErrorMessage(name, context.error);
-
-        const _lProp           = this.props.label;
-        const _lPropDisabled   = _lProp === '' || _lProp === false;
-        const _lPropSet        = _lProp !== undefined;
-        const _lSchema         = schemaProps.label;
-        const _lSchemaDisabled = _lSchema === '' || _lSchema === false;
-        const _lSchemaValue    = _lSchema === true || _lSchema === undefined ? '' : _lSchema;
-        const _lStateDisabled  = !state.label;
-
-        const label = _lPropDisabled || !_lPropSet && (_lSchemaDisabled || _lStateDisabled)
-            ? ''
-            : _lPropSet
-                ? _lProp === true
-                    ? _lSchemaDisabled
-                        ? ''
-                        : _lSchemaValue
-                    : _lProp
-                : _lSchemaValue
-        ;
-
-        const _pProp           = this.props.placeholder;
-        const _pPropDisabled   = _pProp === '' || _pProp === false;
-        const _pPropSet        = _pProp !== undefined;
-        const _pSchema         = schemaProps.placeholder;
-        const _pSchemaDisabled = _pSchema === '' || _pSchema === false;
-        const _pSchemaValue    = _pSchema === true || _pSchema === undefined ? label || _lSchemaValue : _pSchema;
-        const _pStateDisabled  = !state.placeholder;
-
-        const placeholder = _pPropDisabled || !_pPropSet && (_pSchemaDisabled || _pStateDisabled)
-            ? ''
-            : _pPropSet
-                ? _pProp === true
-                    ? _pSchemaDisabled
-                        ? ''
-                        : _pSchemaValue
-                    : _pProp
-                : _pSchemaValue
-        ;
 
         const changed = !!get(context.state.changedMap, name);
 
+        const error        = context.schema.getError(name, context.error);
+        const errorMessage = context.schema.getErrorMessage(name, context.error);
+        const field        = context.schema.getField(name);
+        const fieldType    = context.schema.getType(name);
+        const fields       = context.schema.getSubfields(name);
+        const schemaProps  = context.schema.getProps(name, {...state, ...props});
+
+        const initialValue = options.explicitInitialValue
+            ? context.schema.getInitialValue(name, props)
+            : undefined
+        ;
+
+        const parent = options.includeParent && name.indexOf('.') !== -1
+            ? this.getFieldProps(name.replace(/(.+)\..+$/, '$1'), {includeParent: false})
+            : null
+        ;
+
+        const [label, none] = flowingProp(props.label,       schemaProps.label,       state.label,       '');
+        const [placeholder] = flowingProp(props.placeholder, schemaProps.placeholder, state.placeholder, label || none);
+
         let value;
-        let initialValue;
-        if (this.props.value === undefined || explicitInitialValue || overrideValue) {
+        if (props.value === undefined || options.overrideValue) {
             value = get(context.model, name);
-            if (value === undefined && !changed && !explicitInitialValue) {
-                value = context.schema.getInitialValue(name, this.props);
-            } else if (explicitInitialValue) {
-                initialValue = context.schema.getInitialValue(name, this.props);
+
+            if (value === undefined && !changed && !options.explicitInitialValue) {
+                value = context.schema.getInitialValue(name, props);
             }
         }
 
         // This prevents (un)controlled input change warning.
         // More info: https://fb.me/react-controlled-components.
-        if (value === undefined && ensureValue) {
+        if (value === undefined && options.ensureValue) {
             value = '';
         }
 
-        const findValue = this.findValue;
-        const findField = this.findField;
-        const findError = this.findError;
-
-        const onChange = (value, key = name) => context.onChange(key, value);
-
         return {
+            // 0. Constant props.
+            findError: this.findError,
+            findField: this.findField,
+            findValue: this.findValue,
+            id:        this.randomId,
+
             // 1. Inherited form state.
             ...state,
 
@@ -257,23 +246,19 @@ export default class BaseField extends Component {
             field,
             fieldType,
             fields,
-            findError,
-            findField,
-            findValue,
-            id,
-            onChange,
+            onChange: (value, key = name) => context.onChange(key, value),
             parent,
             value,
 
             // 3. Initial value (only if requested).
-            ...explicitInitialValue && {initialValue},
+            ...options.explicitInitialValue && {initialValue},
 
             // 4. Schema props and own props.
             ...schemaProps,
-            ...this.props,
+            ...props,
 
             // 5. Overriden value (only if requested).
-            ...(explicitInitialValue || overrideValue) && {value},
+            ...(options.explicitInitialValue || options.overrideValue) && {value},
 
             // 6. Calculated _special_ field props.
             label,
