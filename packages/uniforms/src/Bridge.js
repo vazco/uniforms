@@ -6,7 +6,7 @@ export default class Bridge {
     }
 
     static check (/* schema */) {
-        invariant(false, '%s have not implemented `check` method.', this.constructor.name);
+        invariant(false, '%s have not implemented `check` method.', this.name);
     }
 
     getError (/* name, error */) {
