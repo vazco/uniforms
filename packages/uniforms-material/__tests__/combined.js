@@ -287,6 +287,10 @@ describe('Everything', () => {
         expect(find().props().value).toEqual(dateA);
         expect(find().find(MaterialTextField).first().simulate('focus')).toBeTruthy();
         expect(input.props().onFocus()).toBe(undefined);
+
+        // Make sure, that DateField#onFocus will finish.
+        await new Promise(resolve => setTimeout(resolve, 100));
+
         expect(find().find(MaterialDatePicker).props().onChange({}, dateB)).toBe(undefined);
         expect(find().find(MaterialTimePicker).props().onChange({}, dateB)).toBe(undefined);
         expect(find().props()).toHaveProperty('value');
