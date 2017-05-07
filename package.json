@@ -1,16 +1,13 @@
 {
   "private": true,
   "dependencies": {
-    "lerna": "2.0.0-rc.4"
-  },
-  "devDependencies": {
-    "antd": "2.9.3",
+    "antd": "2.10.0",
     "babel-cli": "6.24.1",
     "babel-eslint": "7.2.3",
-    "babel-jest": "19.0.0",
+    "babel-jest": "20.0.0",
     "babel-plugin-transform-object-assign": "6.22.0",
     "babel-plugin-transform-react-inline-elements": "6.22.0",
-    "babel-plugin-transform-react-remove-prop-types": "0.4.3",
+    "babel-plugin-transform-react-remove-prop-types": "0.4.4",
     "babel-plugin-transform-runtime": "6.23.0",
     "babel-preset-es2015": "6.24.1",
     "babel-preset-react": "6.24.1",
@@ -23,15 +20,16 @@
     "eslint-plugin-brackets": "0.0.1",
     "eslint-plugin-react": "6.10.3",
     "eslint-plugin-vazco": "1.0.0",
-    "graphql": "0.9.5",
-    "jest": "19.0.2",
+    "graphql": "0.9.6",
+    "jest": "20.0.0",
+    "lerna": "2.0.0-rc.4",
     "material-ui": "0.18.0",
-    "react": "15.4.2",
-    "react-addons-test-utils": "15.4.2",
-    "react-dom": "15.4.2",
+    "react": "15.5.4",
+    "react-addons-test-utils": "15.5.1",
+    "react-dom": "15.5.4",
     "react-tap-event-plugin": "2.0.1",
     "rimraf": "2.6.1",
-    "simpl-schema": "0.2.3"
+    "simpl-schema": "0.3.0"
   },
   "scripts": {
     "build": "npm run build:uniforms & npm run build:uniforms-antd & npm run build:uniforms-bootstrap3 & npm run build:uniforms-bootstrap4 & npm run build:uniforms-material & npm run build:uniforms-semantic & npm run build:uniforms-unstyled & wait",
@@ -69,7 +67,7 @@
       "^uniforms([^/]*)(.*)$": "<rootDir>/packages/uniforms$1/src$2"
     },
     "testMatch": [
-      "<rootDir>/packages/*/__tests__/!(_)*.js"
+      "**/__tests__/**/!(_)*.js"
     ]
   },
   "engines": {
