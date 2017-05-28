@@ -1,6 +1,6 @@
 {
   "name": "uniforms-bootstrap4",
-  "version": "1.18.0",
+  "version": "1.18.1",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",
@@ -23,7 +23,7 @@
   ],
   "peerDependencies": {
     "react": "^15.0.0 || ^0.14.0",
-    "uniforms": "^1.18.0"
+    "uniforms": "^1.18.1"
   },
   "dependencies": {
     "babel-runtime": "^6.20.0",
