@@ -25,9 +25,9 @@
     "lerna": "2.0.0-rc.5",
     "material-ui": "0.18.1",
     "react": "15.5.4",
-    "react-addons-test-utils": "15.5.1",
     "react-dom": "15.5.4",
     "react-tap-event-plugin": "2.0.1",
+    "react-test-renderer": "15.5.4",
     "rimraf": "2.6.1",
     "simpl-schema": "0.3.0"
   },

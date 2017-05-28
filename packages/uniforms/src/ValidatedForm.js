@@ -1,7 +1,7 @@
-import cloneDeep   from 'lodash.clonedeep';
-import isEqual     from 'lodash.isequal';
-import set         from 'lodash.set';
-import {PropTypes} from 'react';
+import PropTypes from 'prop-types';
+import cloneDeep from 'lodash.clonedeep';
+import isEqual   from 'lodash.isequal';
+import set       from 'lodash.set';
 
 import BaseForm from './BaseForm';
 

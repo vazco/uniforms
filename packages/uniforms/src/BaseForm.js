@@ -1,9 +1,9 @@
+import PropTypes   from 'prop-types';
 import React       from 'react';
 import cloneDeep   from 'lodash.clonedeep';
 import get         from 'lodash.get';
 import set         from 'lodash.set';
 import {Component} from 'react';
-import {PropTypes} from 'react';
 
 import changedKeys        from './changedKeys';
 import createSchemaBridge from './createSchemaBridge';

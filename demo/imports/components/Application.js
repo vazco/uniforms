@@ -1,9 +1,9 @@
+import PropTypes      from 'prop-types';
 import React          from 'react';
 import enUS           from 'antd/lib/locale-provider/en_US';
 import getMuiTheme    from 'material-ui/styles/getMuiTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import {Component}    from 'react';
-import {PropTypes}    from 'react';
 
 import {Meteor} from 'meteor/meteor';
 

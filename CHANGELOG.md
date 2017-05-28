@@ -1,5 +1,6 @@
 ## Next
 - **Changed:** Optimized `BaseField` props calculation.
+- **Changed:** Switched to `prop-types`.
 - **Fixed:** `Bridge.check` error message.
 
 ## [v1.18.0](https://github.com/vazco/uniforms/tree/v1.18.0) (2017-04-30)
