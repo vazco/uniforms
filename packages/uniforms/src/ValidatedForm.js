@@ -103,6 +103,8 @@ const Validated = parent => class extends parent {
         // eslint-disable-next-line max-len
         if (this.props.validate === 'onChange' || this.props.validate === 'onChangeAfterSubmit' && this.state.validate) {
             this.onValidate(key, value);
+        } else if (this.props.validate === 'onSubmit' && this.state.validate) {
+            this.setState(() => ({error: null}));
         }
 
         super.onChange(...arguments);

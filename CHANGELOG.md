@@ -1,4 +1,5 @@
 ## Next
+- **Changed:** `ValidatedForm` with `validate="onSubmit"` clears error on first change. [\#293](https://github.com/vazco/uniforms/issues/293)
 - **Fixed:** `SubmitField` respects `disabled` prop.
 
 ## [v1.18.1](https://github.com/vazco/uniforms/tree/v1.18.1) (2017-05-28)
