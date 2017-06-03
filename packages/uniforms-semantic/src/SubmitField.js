@@ -3,10 +3,10 @@ import React          from 'react';
 import classnames     from 'classnames';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
-const SubmitField = ({className, inputRef, value, ...props}, {uniforms: {error, state: {disabled}}}) =>
+const SubmitField = ({className, disabled, inputRef, value, ...props}, {uniforms: {error, state}}) =>
     <input
         className={classnames('ui', className, 'button')}
-        disabled={!!(error || disabled)}
+        disabled={disabled === undefined ? !!(error || state.disabled) : disabled}
         ref={inputRef}
         type="submit"
         value={value}

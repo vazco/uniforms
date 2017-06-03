@@ -1,3 +1,6 @@
+## Next
+- **Fixed:** `SubmitField` respects `disabled` prop.
+
 ## [v1.18.1](https://github.com/vazco/uniforms/tree/v1.18.1) (2017-05-28)
 - **Changed:** Optimized `BaseField` props calculation.
 - **Changed:** Switched to `prop-types`.

@@ -3,9 +3,9 @@ import RaisedButton   from 'material-ui/RaisedButton';
 import React          from 'react';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
-const SubmitField = ({inputRef, label, value, ...props}, {uniforms: {error, state: {disabled}}}) =>
+const SubmitField = ({disabled, inputRef, label, value, ...props}, {uniforms: {error, state}}) =>
     <RaisedButton
-        disabled={!!(error || disabled)}
+        disabled={disabled === undefined ? !!(error || state.disabled) : disabled}
         label={label}
         ref={inputRef}
         type="submit"

@@ -7,6 +7,7 @@ import gridClassName from './gridClassName';
 
 const SubmitField = ({
     className,
+    disabled,
     inputClassName,
     inputRef,
     value,
@@ -15,18 +16,15 @@ const SubmitField = ({
 }, {
     uniforms: {
         error,
-        state: {
-            disabled,
-            grid
-        }
+        state
     }
 }) => {
-    const hasWrap = !!(grid || wrapClassName);
+    const hasWrap = !!(state.grid || wrapClassName);
 
     const blockInput = (
         <input
             className={inputClassName}
-            disabled={!!(error || disabled)}
+            disabled={disabled === undefined ? !!(error || state.disabled) : disabled}
             ref={inputRef}
             type="submit"
             value={value}
@@ -34,15 +32,15 @@ const SubmitField = ({
     );
 
     return (
-        <div className={classnames(className, {'has-danger': error, row: grid})} {...filterDOMProps(props)}>
+        <div className={classnames(className, {'has-danger': error, row: state.grid})} {...filterDOMProps(props)}>
             {hasWrap && (
-                <label className={classnames('form-control-label', gridClassName(grid, 'label'))}>
+                <label className={classnames('form-control-label', gridClassName(state.grid, 'label'))}>
                     &nbsp;
                 </label>
             )}
 
             {hasWrap && (
-                <div className={classnames(wrapClassName, gridClassName(grid, 'input'))}>
+                <div className={classnames(wrapClassName, gridClassName(state.grid, 'input'))}>
                     {blockInput}
                 </div>
             )}
