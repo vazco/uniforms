@@ -1,7 +1,7 @@
 {
   "private": true,
   "dependencies": {
-    "antd": "2.10.2",
+    "antd": "2.10.4",
     "babel-cli": "6.24.1",
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
@@ -23,7 +23,7 @@
     "graphql": "0.10.1",
     "jest": "20.0.4",
     "lerna": "2.0.0-rc.5",
-    "material-ui": "0.18.1",
+    "material-ui": "0.18.2",
     "react": "15.5.4",
     "react-dom": "15.5.4",
     "react-tap-event-plugin": "2.0.1",
@@ -32,14 +32,7 @@
     "simpl-schema": "0.3.0"
   },
   "scripts": {
-    "build": "npm run build:uniforms & npm run build:uniforms-antd & npm run build:uniforms-bootstrap3 & npm run build:uniforms-bootstrap4 & npm run build:uniforms-material & npm run build:uniforms-semantic & npm run build:uniforms-unstyled & wait",
-    "build:uniforms": "babel --quiet --out-dir packages/uniforms packages/uniforms/src",
-    "build:uniforms-antd": "babel --quiet --out-dir packages/uniforms-antd packages/uniforms-antd/src",
-    "build:uniforms-bootstrap3": "babel --quiet --out-dir packages/uniforms-bootstrap3 packages/uniforms-bootstrap3/src",
-    "build:uniforms-bootstrap4": "babel --quiet --out-dir packages/uniforms-bootstrap4 packages/uniforms-bootstrap4/src",
-    "build:uniforms-material": "babel --quiet --out-dir packages/uniforms-material packages/uniforms-material/src",
-    "build:uniforms-semantic": "babel --quiet --out-dir packages/uniforms-semantic packages/uniforms-semantic/src",
-    "build:uniforms-unstyled": "babel --quiet --out-dir packages/uniforms-unstyled packages/uniforms-unstyled/src",
+    "build": "lerna exec --parallel -- babel --out-dir . src",
     "clean": "rimraf coverage packages/*/*.js",
     "coverage": "jest --coverage",
     "coverage:report": "cat ./coverage/lcov.info | coveralls",
@@ -51,7 +44,7 @@
     "prereset": "npm run clean",
     "pretest": "npm run lint",
     "publish": "lerna publish",
-    "reset": "rimraf node_modules",
+    "reset": "rimraf node_modules packages/*/node_modules",
     "test": "jest"
   },
   "jest": {

@@ -10,11 +10,11 @@
     "rimraf": "2.6.1"
   },
   "dependencies": {
-    "antd": "2.10.2",
+    "antd": "2.10.4",
     "babel-polyfill": "6.23.0",
     "graphql": "0.10.1",
-    "material-ui": "0.18.1",
-    "meteor-node-stubs": "0.2.6",
+    "material-ui": "0.18.2",
+    "meteor-node-stubs": "0.2.11",
     "react": "15.5.4",
     "react-dom": "15.5.4",
     "react-mounter": "1.2.0",
