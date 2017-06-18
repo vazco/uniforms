@@ -10,6 +10,12 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import presets from './presets';
 import themes  from './themes';
 
+// SimpleSchema is using it
+if (Meteor.isClient) {
+    window.Buffer = () => {};
+    window.Buffer.isBuffer = () => false;
+}
+
 // Dynamic field error.
 MessageBox.defaults({messages: {en: {syntax: ''}}});
 

@@ -341,6 +341,7 @@ import DateField from 'uniforms-unstyled/DateField'; // Choose your theme packag
     //   bootstrap3
     //   bootstrap4
     //   semantic
+    //   material
     showInlineError={true}
 
     // Field and sourroundings wrap className.
@@ -588,6 +589,7 @@ import LongTextField from 'uniforms-unstyled/LongTextField'; // Choose your them
     //   bootstrap3
     //   bootstrap4
     //   semantic
+    //   material
     showInlineError={true}
 
     // Field and sourroundings wrap className.

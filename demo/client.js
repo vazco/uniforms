@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+
 import tapEvent from 'react-tap-event-plugin';
 import {mount}  from 'react-mounter';
 

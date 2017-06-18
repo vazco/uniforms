@@ -1,6 +1,6 @@
-import BaseForm    from 'uniforms/BaseForm';
-import classnames  from 'classnames';
-import {PropTypes} from 'react';
+import BaseForm   from 'uniforms/BaseForm';
+import PropTypes  from 'prop-types';
+import classnames from 'classnames';
 
 const Bootstrap4 = parent => class extends parent {
     static Bootstrap4 = Bootstrap4;

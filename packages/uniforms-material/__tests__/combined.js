@@ -1,6 +1,7 @@
+import PropTypes      from 'prop-types';
 import React          from 'react';
 import ReactDOM       from 'react-dom';
-import ReactTestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import {mount}        from 'enzyme';
 
 import MaterialCheckbox    from 'material-ui/Checkbox';
@@ -132,7 +133,7 @@ describe('Everything', () => {
             schema={bridge}
         />,
         {
-            childContextTypes: {muiTheme: React.PropTypes.object.isRequired},
+            childContextTypes: {muiTheme: PropTypes.object.isRequired},
             context: {muiTheme: getMuiTheme(lightBaseTheme, {userAgent: false})}
         }
     );
