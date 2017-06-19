@@ -4,6 +4,7 @@ import {mount} from 'enzyme';
 import ListDelField from 'uniforms-material/ListDelField';
 
 import createContext from './_createContext';
+import touchTap from './_touchTap';
 
 const parent = {
     maxCount: 3,
@@ -24,7 +25,7 @@ test('<ListDelField> - prevents onClick when disabled', () => {
     const element = <ListDelField name="x.1" disabled parent={Object.assign({}, parent, {onChange})} />;
     const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
 
-    expect(wrapper.find(ListDelField).simulate('click')).toBeTruthy();
+    touchTap(wrapper.find(ListDelField).childAt(0));
     expect(onChange).not.toHaveBeenCalled();
 });
 
@@ -34,7 +35,7 @@ test('<ListDelField> - prevents onClick when limit reached', () => {
     const element = <ListDelField name="x.1" parent={Object.assign({}, parent, {onChange, minCount: 3})} />;
     const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
 
-    expect(wrapper.find(ListDelField).simulate('click')).toBeTruthy();
+    touchTap(wrapper.find(ListDelField).childAt(0));
     expect(onChange).not.toHaveBeenCalled();
 });
 
@@ -44,6 +45,6 @@ test('<ListDelField> - correctly reacts on click', () => {
     const element = <ListDelField name="x.1" parent={Object.assign({}, parent, {onChange})} />;
     const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
 
-    expect(wrapper.find(ListDelField).simulate('click')).toBeTruthy();
+    touchTap(wrapper.find(ListDelField).childAt(0));
     expect(onChange).toHaveBeenLastCalledWith(['x', 'z']);
 });

@@ -7,7 +7,7 @@ import BaseForm from 'uniforms-material/BaseForm';
 
 import createSchema from './_createSchema';
 
-const createContext = () => ({context: {muiTheme: getMuiTheme()},childContextTypes: {muiTheme: PropTypes.object.isRequired}}); // eslint-disable-line max-len
+const createContext = () => ({context: {muiTheme: getMuiTheme()}, childContextTypes: {muiTheme: PropTypes.object.isRequired}}); // eslint-disable-line max-len
 
 test('<BaseForm> - works', () => {
     const element = <BaseForm schema={createSchema()} />;
