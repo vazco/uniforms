@@ -36,7 +36,6 @@ test('<NestField> - renders a wrapper with unknown props', () => {
     const element = <NestField name="x" data-x="x" data-y="y" data-z="z" />;
     const wrapper = mount(element, createContext({x: {type: Object}, 'x.a': {type: String}, 'x.b': {type: Number}}));
 
-    expect(wrapper.find('div')).toHaveLength(3);
     expect(wrapper.find('div').at(0).prop('data-x')).toBe('x');
     expect(wrapper.find('div').at(0).prop('data-y')).toBe('y');
     expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');

@@ -367,11 +367,11 @@ describe('Everything', () => {
             {context: wrapper.instance().getChildContext()}
         );
 
-        expect(wrapperHidden.find('#x32').props()).toHaveProperty('value', '');
+        expect(wrapperHidden.find(HiddenField).props()).toHaveProperty('value', '');
 
         wrapperHidden.setProps({value: 'x32'});
 
-        expect(wrapperHidden.find('#x32').props()).toHaveProperty('value', 'x32');
+        expect(wrapperHidden.find(HiddenField).props()).toHaveProperty('value', 'x32');
 
         await new Promise(resolve => process.nextTick(resolve));
 
