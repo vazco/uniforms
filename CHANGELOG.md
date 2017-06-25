@@ -1,3 +1,6 @@
+## Next
+- **Fixed:** `HiddenField` now behaves the same in every theme.
+
 ## [v1.18.2](https://github.com/vazco/uniforms/tree/v1.18.1) (2017-06-09)
 - **Fixed:** `SubmitField` respects `disabled` prop.
 

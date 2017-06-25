@@ -6,12 +6,21 @@ import nothing        from 'uniforms/nothing';
 export default class HiddenField extends BaseField {
     static displayName = 'HiddenField';
 
+    constructor () {
+        super(...arguments);
+
+        this.options = {
+            ensureValue:   true,
+            overrideValue: true
+        };
+    }
+
     componentWillReceiveProps ({value: valueDesired}) {
         if (valueDesired === undefined) {
             return;
         }
 
-        const props = this.getFieldProps(undefined, {overrideValue: true});
+        const props = this.getFieldProps();
         if (props.value !== valueDesired) {
             props.onChange(valueDesired);
         }
@@ -22,7 +31,15 @@ export default class HiddenField extends BaseField {
 
         return (
             props.noDOM ? nothing : (
-                <input ref={props.inputRef} type="hidden" value={props.value} {...filterDOMProps(props)} />
+                <input
+                    disabled={props.disabled}
+                    id={props.id}
+                    name={props.name}
+                    ref={props.inputRef}
+                    type="hidden"
+                    value={props.value}
+                    {...filterDOMProps(props)}
+                />
             )
         );
     }
