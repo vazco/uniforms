@@ -19,16 +19,14 @@ export default function gridClassName (grid, side) {
         return gridClassNamePart('sm', parseInt(grid), side);
     }
 
-    // Example: 'col-6-md'
+    // Example: 'col-md-6'
     if (typeof grid === 'string') {
         return grid;
     }
 
     // Example: {xs: 6, sm: 4, md: 3}
     if (typeof grid === 'object') {
-        return Object.keys(grid).map(size =>
-            gridClassNamePart(size, grid[size], side)
-        );
+        return Object.keys(grid).map(size => gridClassNamePart(size, grid[size], side)).join(' ');
     }
 
     return '';

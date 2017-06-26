@@ -1,5 +1,6 @@
 ## Next
 - **Changed:** Additional props are passed to the rendered `div` in `wrapField` in both `uniforms-bootstrap3` and `uniforms-bootstrap4`.
+- **Changed:** Now `gridClassName` always returns a string in both `uniforms-bootstrap3` and `uniforms-bootstrap4`.
 - **Fixed:** Added missing `LongTextField` label `htmlFor` in `uniforms-semantic`.
 - **Fixed:** `HiddenField` now behaves the same in every theme.
 
