@@ -15,8 +15,8 @@ const ListDel = ({
     return (
         <Button
             disabled={!limitNotReached || disabled}
-            onClick={() => limitNotReached && parent.onChange(
-              [].concat(parent.value.slice(0,  fieldIndex))
+            onClick={() => limitNotReached && parent.onChange([]
+                .concat(parent.value.slice(0,  fieldIndex))
                 .concat(parent.value.slice(1 + fieldIndex))
             )}
             {...filterDOMProps(props)}

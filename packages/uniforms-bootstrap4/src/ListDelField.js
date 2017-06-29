@@ -17,9 +17,9 @@ const ListDel = ({
     return (
         <span
             className={classnames('label label-default label-pill', className)}
-            onClick={() => limitNotReached && parent.onChange(
-                [].concat(parent.value.slice(0,  fieldIndex))
-                  .concat(parent.value.slice(1 + fieldIndex))
+            onClick={() => limitNotReached && parent.onChange([]
+                .concat(parent.value.slice(0,  fieldIndex))
+                .concat(parent.value.slice(1 + fieldIndex))
             )}
             {...filterDOMProps(props)}
         >

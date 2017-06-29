@@ -56,13 +56,13 @@ class Num extends Component {
     componentWillReceiveProps ({decimal, value}) {
         const parse = decimal ? parseFloat : parseInt;
 
-        if (noneIfNaN(parse(value)) !== noneIfNaN(parse(this.state.value.replace(/[\.,]+$/, '')))) {
+        if (noneIfNaN(parse(value)) !== noneIfNaN(parse(this.state.value.replace(/[.,]+$/, '')))) {
             this.setState({value: value === undefined || value === '' ? '' : '' + value});
         }
     }
 
     onChange ({target: {value}}) {
-        const change = value.replace(/[^\d\.,-]/g, '');
+        const change = value.replace(/[^\d.,-]/g, '');
 
         this.setState({value: change});
         this.props.onChange(noneIfNaN((this.props.decimal ? parseFloat : parseInt)(change)));
