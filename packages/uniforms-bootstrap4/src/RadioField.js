@@ -25,6 +25,7 @@ const Radio = props =>
                         onChange={() => props.onChange(item)}
                         type="radio"
                     />
+                    {' '}
                     {props.transform ? props.transform(item) : item}
                 </label>
             </div>
