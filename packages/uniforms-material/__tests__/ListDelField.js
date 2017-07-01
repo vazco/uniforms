@@ -2,6 +2,7 @@ import React   from 'react';
 import {mount} from 'enzyme';
 
 import ListDelField from 'uniforms-material/ListDelField';
+import Done         from 'material-ui/svg-icons/action/done';
 
 import createContext from './_createContext';
 import touchTap from './_touchTap';
@@ -47,4 +48,11 @@ test('<ListDelField> - correctly reacts on click', () => {
 
     touchTap(wrapper.find(ListDelField).childAt(0));
     expect(onChange).toHaveBeenLastCalledWith(['x', 'z']);
+});
+
+test('<ListDelField> - renders correct icon', () => {
+    const element = <ListDelField name="x.1" parent={parent} icon={Done} iconVisible />;
+    const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
+
+    expect(wrapper.find(Done)).toHaveLength(1);
 });

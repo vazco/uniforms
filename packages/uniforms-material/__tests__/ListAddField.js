@@ -2,6 +2,7 @@ import React   from 'react';
 import {mount} from 'enzyme';
 
 import ListAddField from 'uniforms-material/ListAddField';
+import Done         from 'material-ui/svg-icons/action/done';
 
 import createContext from './_createContext';
 import touchTap from './_touchTap';
@@ -46,4 +47,11 @@ test('<ListAddField> - correctly reacts on click', () => {
 
     touchTap(wrapper.find(ListAddField).childAt(0));
     expect(onChange).toHaveBeenLastCalledWith(['y']);
+});
+
+test('<ListAddField> - renders correct icon', () => {
+    const element = <ListAddField name="x.$" parent={parent} icon={Done} iconVisible />;
+    const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
+
+    expect(wrapper.find(Done)).toHaveLength(1);
 });
