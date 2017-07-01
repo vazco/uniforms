@@ -1,7 +1,8 @@
-import React        from 'react';
-import connectField from 'uniforms/connectField';
-import injectName   from 'uniforms/injectName';
-import joinName     from 'uniforms/joinName';
+import React          from 'react';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
+import injectName     from 'uniforms/injectName';
+import joinName       from 'uniforms/joinName';
 
 import AutoField from './AutoField';
 
@@ -13,9 +14,10 @@ const Nest = ({
     itemProps,
     label,
     name,
-    showInlineError
+    showInlineError,
+    ...props
 }) =>
-    <div>
+    <div {...filterDOMProps(props)}>
         {label && (
             <label>
                 {label}
