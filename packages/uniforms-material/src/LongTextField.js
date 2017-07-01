@@ -21,11 +21,11 @@ const LongText = ({
         disabled={disabled}
         errorText={error && showInlineError ? errorMessage : undefined}
         floatingLabelText={label}
+        hintText={placeholder}
         id={id}
         multiLine
         name={name}
         onChange={(event, value) => onChange(value)}
-        placeholder={placeholder}
         ref={inputRef}
         value={value}
         {...filterDOMProps(props)}
