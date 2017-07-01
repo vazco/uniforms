@@ -53,8 +53,8 @@ test('<RadioField> - renders a set of checkboxes with correct options', () => {
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
 
     expect(wrapper.find('label')).toHaveLength(2);
-    expect(wrapper.find('label').at(0).text()).toBe('a');
-    expect(wrapper.find('label').at(1).text()).toBe('b');
+    expect(wrapper.find('label').at(0).text()).toBe(' a');
+    expect(wrapper.find('label').at(1).text()).toBe(' b');
 });
 
 test('<RadioField> - renders a set of checkboxes with correct options (transform)', () => {
@@ -62,8 +62,8 @@ test('<RadioField> - renders a set of checkboxes with correct options (transform
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
 
     expect(wrapper.find('label')).toHaveLength(2);
-    expect(wrapper.find('label').at(0).text()).toBe('A');
-    expect(wrapper.find('label').at(1).text()).toBe('B');
+    expect(wrapper.find('label').at(0).text()).toBe(' A');
+    expect(wrapper.find('label').at(1).text()).toBe(' B');
 });
 
 test('<RadioField> - renders a set of checkboxes with correct value (default)', () => {
