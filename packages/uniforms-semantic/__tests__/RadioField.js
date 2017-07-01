@@ -131,3 +131,20 @@ test('<RadioField> - renders a wrapper with unknown props', () => {
     expect(wrapper.find('div').at(0).prop('data-y')).toBe('y');
     expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });
+
+test('<RadioField> - renders correct error text (specified)', () => {
+    const error = new Error();
+    const element = <RadioField name="x" error={error} showInlineError errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+
+    expect(wrapper.children().last().text()).toBe('Error');
+});
+
+test('<RadioField> - renders correct error text (showInlineError=false)', () => {
+    const error = new Error();
+    const element = <RadioField name="x" error={error} showInlineError={false} errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+
+    expect(wrapper.children().last().text()).not.toBe('Error');
+});
+

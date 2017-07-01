@@ -96,11 +96,29 @@ test('<BoolField> - renders a input which correctly reacts on change', () => {
     expect(onChange).toHaveBeenLastCalledWith('x', true);
 });
 
-test('<BoolField> - renders a wrapper with unknown props', () => {
-    const element = <BoolField name="x" data-x="x" data-y="y" data-z="z" />;
+test('<BoolField> - renders a input which correctly reacts on change', () => {
+    const onChange = jest.fn();
+
+    const element = <BoolField name="x" />;
+    const wrapper = mount(element, createContext({x: {type: Boolean}}, {onChange}));
+
+    expect(wrapper.find('input')).toHaveLength(1);
+    expect(wrapper.find('input').simulate('change')).toBeTruthy();
+    expect(onChange).toHaveBeenLastCalledWith('x', true);
+});
+
+test('<BoolField> - renders correct error text (specified)', () => {
+    const error = new Error();
+    const element = <BoolField name="x" error={error} showInlineError errorMessage="Error" />;
     const wrapper = mount(element, createContext({x: {type: Boolean}}));
 
-    expect(wrapper.find('div').at(0).prop('data-x')).toBe('x');
-    expect(wrapper.find('div').at(0).prop('data-y')).toBe('y');
-    expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
+    expect(wrapper.children().last().text()).toBe('Error');
+});
+
+test('<BoolField> - renders correct error text (showInlineError=false)', () => {
+    const error = new Error();
+    const element = <BoolField name="x" error={error} showInlineError={false} errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: Boolean}}));
+
+    expect(wrapper.children().last().text()).not.toBe('Error');
 });

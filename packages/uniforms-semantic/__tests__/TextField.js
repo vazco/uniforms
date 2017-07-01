@@ -134,3 +134,33 @@ test('<TextField> - renders a wrapper with unknown props', () => {
     expect(wrapper.find('div').at(0).prop('data-y')).toBe('y');
     expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });
+
+test('<TextField> - renders correct error text (specified)', () => {
+    const error = new Error();
+    const element = <TextField name="x" error={error} showInlineError errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: String}}));
+
+    expect(wrapper.children().last().text()).toBe('Error');
+});
+
+test('<TextField> - renders correct error text (showInlineError=false)', () => {
+    const error = new Error();
+    const element = <TextField name="x" error={error} showInlineError={false} errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: String}}));
+
+    expect(wrapper.children().last().text()).not.toBe('Error');
+});
+
+test('<TextField> - renders a icon', () => {
+    const element = <TextField name="x" icon="small home" />;
+    const wrapper = mount(element, createContext({x: {type: String}}));
+
+    expect(wrapper.find('i')).toHaveLength(1);
+});
+
+test('<TextField> - renders a icon', () => {
+    const element = <TextField name="x" iconLeft="small home" />;
+    const wrapper = mount(element, createContext({x: {type: String}}));
+
+    expect(wrapper.find('i')).toHaveLength(1);
+});

@@ -99,6 +99,19 @@ test('<DateField> - renders a input which correctly reacts on change', () => {
     expect(onChange).toHaveBeenLastCalledWith('x', now);
 });
 
+test('<DateField> - renders a input which correctly reacts on change', () => {
+    const onChange = jest.fn();
+
+    const now = new Date();
+    now.setFullYear(10000);
+    const element = <DateField name="x" />;
+    const wrapper = mount(element, createContext({x: {type: Date}}, {onChange}));
+
+    expect(wrapper.find('input')).toHaveLength(1);
+    expect(wrapper.find('input').simulate('change', {target: {valueAsNumber: now}})).toBeTruthy();
+    expect(onChange).not.toHaveBeenCalled();
+});
+
 test('<DateField> - renders a wrapper with unknown props', () => {
     const element = <DateField name="x" data-x="x" data-y="y" data-z="z" />;
     const wrapper = mount(element, createContext({x: {type: Date}}));
@@ -106,4 +119,34 @@ test('<DateField> - renders a wrapper with unknown props', () => {
     expect(wrapper.find('div').at(0).prop('data-x')).toBe('x');
     expect(wrapper.find('div').at(0).prop('data-y')).toBe('y');
     expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
+});
+
+test('<DateField> - renders correct error text (specified)', () => {
+    const error = new Error();
+    const element = <DateField name="x" error={error} showInlineError errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: Date}}));
+
+    expect(wrapper.children().last().text()).toBe('Error');
+});
+
+test('<DateField> - renders correct error text (showInlineError=false)', () => {
+    const error = new Error();
+    const element = <DateField name="x" error={error} showInlineError={false} errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: Date}}));
+
+    expect(wrapper.children().last().text()).not.toBe('Error');
+});
+
+test('<DateField> - renders a icon', () => {
+    const element = <DateField name="x" icon="small home" />;
+    const wrapper = mount(element, createContext({x: {type: Date}}));
+
+    expect(wrapper.find('i')).toHaveLength(1);
+});
+
+test('<DateField> - renders a icon', () => {
+    const element = <DateField name="x" iconLeft="small home" />;
+    const wrapper = mount(element, createContext({x: {type: Date}}));
+
+    expect(wrapper.find('i')).toHaveLength(1);
 });
