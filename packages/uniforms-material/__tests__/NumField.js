@@ -213,3 +213,19 @@ test('<NumField> - renders a label', () => {
     expect(wrapper.find(TextField)).toHaveLength(1);
     expect(wrapper.find(TextField).prop('floatingLabelText')).toBe('y');
 });
+
+test('<NumField> - renders a TextField with correct error text (specified)', () => {
+    const error = new Error();
+    const element = <NumField name="x" error={error} showInlineError errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: Number}}));
+
+    expect(wrapper.find(TextField).prop('errorText')).toBe('Error');
+});
+
+test('<NumField> - renders a TextField with correct error text (showInlineError=false)', () => {
+    const error = new Error();
+    const element = <NumField name="x" error={error} showInlineError={false} errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: Number}}));
+
+    expect(wrapper.find(TextField).prop('errorText')).toBeUndefined();
+});

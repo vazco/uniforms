@@ -221,7 +221,7 @@ test('<SelectField checkboxes> - renders a set of RadioButtons which correctly r
     expect(onChange).toHaveBeenLastCalledWith('x', 'b');
 });
 
-test('<SelectField checkboxes> - renders a set of RadioButtons which correctly reacts on change (array check)', () => {
+test('<SelectField checkboxes> - renders a set of Checkboxes which correctly reacts on change (array check)', () => {
     const onChange = jest.fn();
 
     const element = <SelectField checkboxes name="x" />;
@@ -232,7 +232,7 @@ test('<SelectField checkboxes> - renders a set of RadioButtons which correctly r
     expect(onChange).toHaveBeenLastCalledWith('x', ['b']);
 });
 
-test('<SelectField checkboxes> - renders a set of RadioButtons which correctly reacts on change (array uncheck)', () => { // eslint-disable-line max-len
+test('<SelectField checkboxes> - renders a set of Checkboxes which correctly reacts on change (array uncheck)', () => { // eslint-disable-line max-len
     const onChange = jest.fn();
 
     const element = <SelectField checkboxes name="x" value={['b']} />;
@@ -241,6 +241,28 @@ test('<SelectField checkboxes> - renders a set of RadioButtons which correctly r
     expect(wrapper.find(CheckboxMaterial)).toHaveLength(2);
     wrapper.find(CheckboxMaterial).at(1).find('input').simulate('change');
     expect(onChange).toHaveBeenLastCalledWith('x', []);
+});
+
+test('<SelectField checkboxes> - renders a set of Checkboxes which correct labels', () => { // eslint-disable-line max-len
+    const onChange = jest.fn();
+
+    const element = <SelectField checkboxes name="x" />;
+    const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String, allowedValues: ['a', 'b']}}, {onChange})); // eslint-disable-line max-len
+
+    expect(wrapper.find(CheckboxMaterial)).toHaveLength(2);
+    expect(wrapper.find(CheckboxMaterial).at(0).prop('label')).toBe('a');
+    expect(wrapper.find(CheckboxMaterial).at(1).prop('label')).toBe('b');
+});
+
+test('<SelectField checkboxes> - renders a set of Checkboxes which correct labels', () => { // eslint-disable-line max-len
+    const onChange = jest.fn();
+
+    const element = <SelectField checkboxes name="x" transform={x => x.toUpperCase()} />;
+    const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String, allowedValues: ['a', 'b']}}, {onChange})); // eslint-disable-line max-len
+
+    expect(wrapper.find(CheckboxMaterial)).toHaveLength(2);
+    expect(wrapper.find(CheckboxMaterial).at(0).prop('label')).toBe('A');
+    expect(wrapper.find(CheckboxMaterial).at(1).prop('label')).toBe('B');
 });
 
 test('<SelectField checkboxes> - renders a set of RadioButtons which correctly reacts on change (same value)', () => {
@@ -260,4 +282,20 @@ test('<SelectField checkboxes> - renders a label', () => {
 
     expect(wrapper.find(Subheader)).toHaveLength(1);
     expect(wrapper.find(Subheader).at(0).text()).toBe('y');
+});
+
+test('<SelectField> - renders a SelectField with correct error text (specified)', () => {
+    const error = new Error();
+    const element = <SelectField name="x" error={error} showInlineError errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+
+    expect(wrapper.find(SelectFieldMaterial).prop('errorText')).toBe('Error');
+});
+
+test('<SelectField> - renders a SelectField with correct error text (showInlineError=false)', () => {
+    const error = new Error();
+    const element = <SelectField name="x" error={error} showInlineError={false} errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+
+    expect(wrapper.find(SelectFieldMaterial).prop('errorText')).toBeUndefined();
 });
