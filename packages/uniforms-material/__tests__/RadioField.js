@@ -1,7 +1,8 @@
-import React                           from 'react';
-import Subheader                       from 'material-ui/Subheader';
-import {mount}                         from 'enzyme';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import React              from 'react';
+import Subheader          from 'material-ui/Subheader';
+import {RadioButtonGroup} from 'material-ui/RadioButton';
+import {RadioButton}      from 'material-ui/RadioButton';
+import {mount}            from 'enzyme';
 
 import RadioField from 'uniforms-material/RadioField';
 

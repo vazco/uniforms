@@ -1,6 +1,6 @@
-import React   from 'react';
+import React     from 'react';
 import TextField from 'material-ui/TextField';
-import {mount} from 'enzyme';
+import {mount}   from 'enzyme';
 
 import NumField from 'uniforms-material/NumField';
 
