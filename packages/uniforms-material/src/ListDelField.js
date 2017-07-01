@@ -19,9 +19,9 @@ const ListDel = ({
         <RaisedButton
             disabled={!limitNotReached}
             icon={iconVisible ? <Icon /> : undefined}
-            onTouchTap={() => limitNotReached && parent.onChange(
-                [].concat(parent.value.slice(0,  fieldIndex))
-                  .concat(parent.value.slice(1 + fieldIndex))
+            onTouchTap={() => limitNotReached && parent.onChange([]
+                .concat(parent.value.slice(0,  fieldIndex))
+                .concat(parent.value.slice(1 + fieldIndex))
             )}
             {...filterDOMProps(props)}
         />

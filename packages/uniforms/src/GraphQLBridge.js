@@ -175,17 +175,16 @@ export default class GraphQLBridge extends Bridge {
     getType (name) {
         const fieldType = this.getField(name).type;
 
-        return (
-            fieldType instanceof graphql.GraphQLList            ? Array  :
-            fieldType instanceof graphql.GraphQLObjectType      ? Object :
-            fieldType instanceof graphql.GraphQLInputObjectType ? Object :
-            fieldType instanceof graphql.GraphQLScalarType ?
-                fieldType.name === 'Int'    ? Number :
-                fieldType.name === 'Float'  ? Number :
-                fieldType.name === 'String' ? String :
-                fieldType :
-            fieldType
-        );
+        if (fieldType instanceof graphql.GraphQLList)            return Array;
+        if (fieldType instanceof graphql.GraphQLObjectType)      return Object;
+        if (fieldType instanceof graphql.GraphQLInputObjectType) return Object;
+        if (fieldType instanceof graphql.GraphQLScalarType) {
+            if (fieldType.name === 'Int')    return Number;
+            if (fieldType.name === 'Float')  return Number;
+            if (fieldType.name === 'String') return String;
+        }
+
+        return fieldType;
     }
 
     getValidator (/* options */) {

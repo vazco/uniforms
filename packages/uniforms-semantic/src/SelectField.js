@@ -58,13 +58,13 @@ const renderSelect = ({
             <option value="" disabled={required} hidden={required}>
                 {placeholder ? placeholder : label}
             </option>
-       )}
+        )}
 
         {allowedValues.map(value =>
             <option key={value} value={value}>
                 {transform ? transform(value) : value}
             </option>
-       )}
+        )}
     </select>
 ;
 

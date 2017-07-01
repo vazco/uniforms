@@ -1,3 +1,4 @@
+import {GraphQLID}      from 'graphql';
 import {GraphQLString}  from 'graphql';
 import {buildASTSchema} from 'graphql';
 import {parse}          from 'graphql';
@@ -23,6 +24,7 @@ describe('GraphQLBridge', () => {
             author:   Author!
             title:    String
             votes:    Int
+            example:  ID
             category: [Category!]!
         }
 
@@ -267,6 +269,7 @@ describe('GraphQLBridge', () => {
                 'author',
                 'title',
                 'votes',
+                'example',
                 'category'
             ]);
         });
@@ -288,27 +291,30 @@ describe('GraphQLBridge', () => {
     });
 
     describe('#getType', () => {
-        it('works with any type', () => {
-            expect(bridge.getType('author')).toBe(Object);
-            expect(bridge.getType('author.decimal')).toBe(Number);
-            expect(bridge.getType('author.firstName')).toBe(String);
-            expect(bridge.getType('author.id')).toBe(String);
-            expect(bridge.getType('author.lastName')).toBe(String);
-            expect(bridge.getType('author.tags')).toBe(Array);
-            expect(bridge.getType('author.tags.$')).toBe(String);
-            expect(bridge.getType('category')).toBe(Array);
-            expect(bridge.getType('category.$')).toBe(Object);
-            expect(bridge.getType('category.$.owners')).toBe(Array);
-            expect(bridge.getType('category.$.owners.$')).toBe(Object);
-            expect(bridge.getType('category.$.owners.$.decimal')).toBe(Number);
-            expect(bridge.getType('category.$.owners.$.firstName')).toBe(String);
-            expect(bridge.getType('category.$.owners.$.id')).toBe(String);
-            expect(bridge.getType('category.$.owners.$.lastName')).toBe(String);
-            expect(bridge.getType('category.$.owners.$.tags')).toBe(Array);
-            expect(bridge.getType('category.$.owners.$.tags.$')).toBe(String);
-            expect(bridge.getType('id')).toBe(Number);
-            expect(bridge.getType('title')).toBe(String);
-            expect(bridge.getType('votes')).toBe(Number);
+        [['input', bridge], ['type', bridgeT]].forEach(([mode, bridge]) => {
+            it(`works with any type (${mode})`, () => {
+                expect(bridge.getType('author')).toBe(Object);
+                expect(bridge.getType('author.decimal')).toBe(Number);
+                expect(bridge.getType('author.firstName')).toBe(String);
+                expect(bridge.getType('author.id')).toBe(String);
+                expect(bridge.getType('author.lastName')).toBe(String);
+                expect(bridge.getType('author.tags')).toBe(Array);
+                expect(bridge.getType('author.tags.$')).toBe(String);
+                expect(bridge.getType('category')).toBe(Array);
+                expect(bridge.getType('category.$')).toBe(Object);
+                expect(bridge.getType('category.$.owners')).toBe(Array);
+                expect(bridge.getType('category.$.owners.$')).toBe(Object);
+                expect(bridge.getType('category.$.owners.$.decimal')).toBe(Number);
+                expect(bridge.getType('category.$.owners.$.firstName')).toBe(String);
+                expect(bridge.getType('category.$.owners.$.id')).toBe(String);
+                expect(bridge.getType('category.$.owners.$.lastName')).toBe(String);
+                expect(bridge.getType('category.$.owners.$.tags')).toBe(Array);
+                expect(bridge.getType('category.$.owners.$.tags.$')).toBe(String);
+                expect(bridge.getType('example')).toBe(GraphQLID);
+                expect(bridge.getType('id')).toBe(Number);
+                expect(bridge.getType('title')).toBe(String);
+                expect(bridge.getType('votes')).toBe(Number);
+            });
         });
     });
 

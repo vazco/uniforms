@@ -217,8 +217,7 @@ test('<NumField> - renders a wrapper with unknown props', () => {
     const element = <NumField name="x" data-x="x" data-y="y" data-z="z" />;
     const wrapper = mount(element, createContext({x: {type: Number}}));
 
-    expect(wrapper.find('div')).toHaveLength(1);
-    expect(wrapper.find('div').prop('data-x')).toBe('x');
-    expect(wrapper.find('div').prop('data-y')).toBe('y');
-    expect(wrapper.find('div').prop('data-z')).toBe('z');
+    expect(wrapper.find('div').at(0).prop('data-x')).toBe('x');
+    expect(wrapper.find('div').at(0).prop('data-y')).toBe('y');
+    expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });

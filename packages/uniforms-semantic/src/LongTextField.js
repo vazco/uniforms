@@ -21,7 +21,7 @@ const LongText = ({
 }) =>
     <div className={classnames(className, {disabled, error, required}, 'field')} {...filterDOMProps(props)}>
         {label && (
-            <label>
+            <label htmlFor={id}>
                 {label}
             </label>
         )}

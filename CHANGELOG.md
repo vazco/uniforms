@@ -1,3 +1,14 @@
+## Next
+- **Changed:** Additional props are passed to the rendered `div` in `NestField` in `uniforms-antd`.
+- **Changed:** Additional props are passed to the rendered `div` in `wrapField` in both `uniforms-bootstrap3` and `uniforms-bootstrap4`.
+- **Changed:** Now `gridClassName` always returns a string in both `uniforms-bootstrap3` and `uniforms-bootstrap4`.
+- **Changed:** `ErrorsField` is now styled in both `uniforms-bootstrap3` and `uniforms-bootstrap4`. [\#301](https://github.com/vazco/uniforms/issues/301)
+- **Fixed:** Added missing `LongTextField` label `htmlFor` in `uniforms-semantic`.
+- **Fixed:** Added missing `placeholder` prop in `SelectField` in `uniforms-antd`.
+- **Fixed:** `HiddenField` now behaves the same in every theme.
+- **Fixed:** `RadioField` spacing in `uniforms-bootsrap4`. [\#304](https://github.com/vazco/uniforms/issues/304)
+- **Fixed:** Pass `hintText` prop instead of `placeholder` in `LongTextField` in `uniforms-material`.
+
 ## [v1.18.2](https://github.com/vazco/uniforms/tree/v1.18.1) (2017-06-09)
 - **Fixed:** `SubmitField` respects `disabled` prop.
 
