@@ -1,9 +1,8 @@
-import React      from 'react';
-import {mount}    from 'enzyme';
-
-import TextField  from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
+import React      from 'react';
+import TextField  from 'material-ui/TextField';
 import TimePicker from 'material-ui/TimePicker';
+import {mount}    from 'enzyme';
 
 import DateField from 'uniforms-material/DateField';
 

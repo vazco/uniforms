@@ -1,6 +1,6 @@
 import React     from 'react';
-import {mount}   from 'enzyme';
 import Subheader from 'material-ui/Subheader';
+import {mount}   from 'enzyme';
 
 import AutoField from 'uniforms-material/AutoField';
 import NestField from 'uniforms-material/NestField';

@@ -1,7 +1,7 @@
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import React       from 'react';
 import {mount}     from 'enzyme';
 import {PropTypes} from 'react';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import AutoForm from 'uniforms-material/AutoForm';
 

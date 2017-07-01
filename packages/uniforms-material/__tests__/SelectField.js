@@ -1,10 +1,9 @@
-import React   from 'react';
-import {mount} from 'enzyme';
-
-import Subheader           from 'material-ui/Subheader';
-import SelectFieldMaterial from 'material-ui/SelectField';
 import CheckboxMaterial    from 'material-ui/Checkbox';
 import RadioButtonMaterial from 'material-ui/RadioButton';
+import React               from 'react';
+import SelectFieldMaterial from 'material-ui/SelectField';
+import Subheader           from 'material-ui/Subheader';
+import {mount}             from 'enzyme';
 
 import SelectField from 'uniforms-material/SelectField';
 

@@ -1,8 +1,7 @@
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {PropTypes} from 'react';
 
 import randomIds from 'uniforms/randomIds';
-
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import createSchema from './_createSchema';
 

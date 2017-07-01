@@ -1,8 +1,7 @@
-import React   from 'react';
-import {mount} from 'enzyme';
-
-import Checkbox       from 'material-ui/Checkbox';
-import Toggle         from 'material-ui/Toggle';
+import Checkbox from 'material-ui/Checkbox';
+import React    from 'react';
+import Toggle   from 'material-ui/Toggle';
+import {mount}  from 'enzyme';
 
 import BoolField from 'uniforms-material/BoolField';
 

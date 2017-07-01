@@ -1,8 +1,8 @@
+import Done    from 'material-ui/svg-icons/action/done';
 import React   from 'react';
 import {mount} from 'enzyme';
 
 import ListAddField from 'uniforms-material/ListAddField';
-import Done         from 'material-ui/svg-icons/action/done';
 
 import createContext from './_createContext';
 import touchTap from './_touchTap';

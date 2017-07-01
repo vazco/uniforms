@@ -1,6 +1,6 @@
 import React      from 'react';
-import {mount}    from 'enzyme';
 import {ListItem} from 'material-ui/List';
+import {mount}    from 'enzyme';
 
 import ErrorsField from 'uniforms-material/ErrorsField';
 
