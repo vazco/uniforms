@@ -291,7 +291,7 @@ describe('GraphQLBridge', () => {
     });
 
     describe('#getType', () => {
-        Object.entries({input: bridge, type: bridgeT}).forEach(([mode, bridge]) => {
+        [['input', bridge], ['type', bridgeT]].forEach(([mode, bridge]) => {
             it(`works with any type (${mode})`, () => {
                 expect(bridge.getType('author')).toBe(Object);
                 expect(bridge.getType('author.decimal')).toBe(Number);
