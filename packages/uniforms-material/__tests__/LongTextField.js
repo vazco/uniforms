@@ -117,3 +117,19 @@ test('<LongTextField> - renders a label', () => {
 
     expect(wrapper.find(TextField).prop('floatingLabelText')).toBe('y');
 });
+
+test('<LongTextField> - renders a TextField with correct error text (specified)', () => {
+    const error = new Error();
+    const element = <LongTextField name="x" error={error} showInlineError errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: String}}));
+
+    expect(wrapper.find(TextField).at(0).prop('errorText')).toBe('Error');
+});
+
+test('<LongTextField> - renders a TextField with correct error text (showInlineError=false)', () => {
+    const error = new Error();
+    const element = <LongTextField name="x" error={error} showInlineError={false} errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: String}}));
+
+    expect(wrapper.find(TextField).at(0).prop('errorText')).toBeUndefined();
+});

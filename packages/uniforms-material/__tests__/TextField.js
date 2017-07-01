@@ -118,3 +118,19 @@ test('<TextField> - renders a label', () => {
     expect(wrapper.find(TextFieldMaterial)).toHaveLength(1);
     expect(wrapper.find(TextFieldMaterial).prop('floatingLabelText')).toBe('y');
 });
+
+test('<TextField> - renders a TextField with correct error text (specified)', () => {
+    const error = new Error();
+    const element = <TextField name="x" error={error} showInlineError errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: String}}));
+
+    expect(wrapper.find(TextFieldMaterial).at(0).prop('errorText')).toBe('Error');
+});
+
+test('<TextField> - renders a TextField with correct error text (showInlineError=false)', () => {
+    const error = new Error();
+    const element = <TextField name="x" error={error} showInlineError={false} errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: String}}));
+
+    expect(wrapper.find(TextFieldMaterial).at(0).prop('errorText')).toBeUndefined();
+});
