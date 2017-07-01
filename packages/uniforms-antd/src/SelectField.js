@@ -51,6 +51,7 @@ const renderSelect = props =>
         multiple={props.fieldType === Array}
         name={props.name}
         onChange={value => props.onChange(value)}
+        placeholder={props.placeholder}
         ref={props.inputRef}
         value={props.fieldType === Array ? props.value || [] : '' + (props.value || '')}
         {...filterDOMProps(props)}
