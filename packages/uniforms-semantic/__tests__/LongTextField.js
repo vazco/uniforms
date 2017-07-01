@@ -126,3 +126,19 @@ test('<LongTextField> - renders a wrapper with unknown props', () => {
     expect(wrapper.find('div').at(0).prop('data-y')).toBe('y');
     expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });
+
+test('<LongTextField> - renders correct error text (specified)', () => {
+    const error = new Error();
+    const element = <LongTextField name="x" error={error} showInlineError errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: String}}));
+
+    expect(wrapper.children().last().text()).toBe('Error');
+});
+
+test('<LongTextField> - renders correct error text (showInlineError=false)', () => {
+    const error = new Error();
+    const element = <LongTextField name="x" error={error} showInlineError={false} errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: String}}));
+
+    expect(wrapper.children().last().text()).not.toBe('Error');
+});

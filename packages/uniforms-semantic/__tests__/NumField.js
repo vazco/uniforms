@@ -221,3 +221,33 @@ test('<NumField> - renders a wrapper with unknown props', () => {
     expect(wrapper.find('div').at(0).prop('data-y')).toBe('y');
     expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });
+
+test('<NumField> - renders correct error text (specified)', () => {
+    const error = new Error();
+    const element = <NumField name="x" error={error} showInlineError errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: Number}}));
+
+    expect(wrapper.children().last().text()).toBe('Error');
+});
+
+test('<NumField> - renders correct error text (showInlineError=false)', () => {
+    const error = new Error();
+    const element = <NumField name="x" error={error} showInlineError={false} errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: Number}}));
+
+    expect(wrapper.children().last().text()).not.toBe('Error');
+});
+
+test('<NumField> - renders a icon', () => {
+    const element = <NumField name="x" icon="small home" />;
+    const wrapper = mount(element, createContext({x: {type: Number}}));
+
+    expect(wrapper.find('i')).toHaveLength(1);
+});
+
+test('<NumField> - renders a icon', () => {
+    const element = <NumField name="x" iconLeft="small home" />;
+    const wrapper = mount(element, createContext({x: {type: Number}}));
+
+    expect(wrapper.find('i')).toHaveLength(1);
+});
