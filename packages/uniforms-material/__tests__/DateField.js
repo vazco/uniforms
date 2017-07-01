@@ -86,7 +86,7 @@ test('<DateField> - renders a input with correct value (model)', () => {
     expect(wrapper.find(TextField)).toHaveLength(3);
     expect(wrapper.find(DatePicker)).toHaveLength(1);
     expect(wrapper.find(TimePicker)).toHaveLength(1);
-    expect(wrapper.find(TextField).at(0).prop('value')).toEqual(now.toISOString().slice(0, -8));
+    expect(wrapper.find(TextField).at(0).prop('value')).toEqual(now.toLocaleString());
 });
 
 test('<DateField> - renders a input with correct value (specified)', () => {
@@ -97,7 +97,7 @@ test('<DateField> - renders a input with correct value (specified)', () => {
     expect(wrapper.find(TextField)).toHaveLength(3);
     expect(wrapper.find(DatePicker)).toHaveLength(1);
     expect(wrapper.find(TimePicker)).toHaveLength(1);
-    expect(wrapper.find(TextField).at(0).prop('value')).toEqual(now.toISOString().slice(0, -8));
+    expect(wrapper.find(TextField).at(0).prop('value')).toEqual(now.toLocaleString());
 });
 
 test('<DateField> - renders a input which correctly reacts on change', () => {
