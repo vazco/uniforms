@@ -70,12 +70,15 @@ describe('BaseField', () => {
         validator () {}
     });
 
+    const _context = context => ({context: {uniforms: {...reactContextBase, ...context}}});
     const reactContextBase = {error: error1, model, name: [], randomId, schema, state, onChange};
-    const reactContext1 = {context: {uniforms: {...reactContextBase}}};
-    const reactContext2 = {context: {uniforms: {...reactContextBase, error: error2}}};
-    const reactContext3 = {context: {uniforms: {...reactContextBase, error: {...error2}}}};
-    const reactContext4 = {context: {uniforms: {...reactContextBase, name: ['a']}}};
-    const reactContext5 = {context: {uniforms: {...reactContextBase, schema: Object.create(schema)}}};
+    const reactContext1 = _context({});
+    const reactContext2 = _context({error: error2});
+    const reactContext3 = _context({error: {...error2}});
+    const reactContext4 = _context({name: ['a']});
+    const reactContext5 = _context({schema: Object.create(schema)});
+    const reactContext6 = _context({state: {...reactContextBase.state, changedMap: {a: {}}}});
+    const reactContext7 = _context({model: {a: {b: {c: 'example 2'}}}});
 
     afterEach(() => {
         onChange.mockReset();
@@ -404,6 +407,22 @@ describe('BaseField', () => {
     });
 
     describe('when rerendered', () => {
+        it('checks for any change', () => {
+            const wrapper = mount(
+                <TestField name="a" />,
+                reactContext1
+            );
+
+            const spy = jest.spyOn(wrapper.get(0), 'render');
+
+            wrapper.update();
+
+            expect(spy).not.toHaveBeenCalled();
+
+            spy.mockReset();
+            spy.mockRestore();
+        });
+
         it('have same `id`', () => {
             const wrapper = mount(
                 <TestField name="d" />,
@@ -438,6 +457,36 @@ describe('BaseField', () => {
 
             const props3 = wrapper.find(PropsComponent).props();
             expect(props3.error).toBeFalsy();
+        });
+
+        it('updates on map change', () => {
+            const wrapper = mount(
+                <TestField name="a" />,
+                reactContext1
+            );
+
+            const props1 = wrapper.find(PropsComponent).props();
+            expect(props1).toHaveProperty('name', 'a');
+
+            wrapper.setContext(reactContext6.context);
+
+            const props2 = wrapper.find(PropsComponent).props();
+            expect(props2).toHaveProperty('name', 'a');
+        });
+
+        it('updates on model change', () => {
+            const wrapper = mount(
+                <TestField name="a" />,
+                reactContext1
+            );
+
+            const props1 = wrapper.find(PropsComponent).props();
+            expect(props1).toHaveProperty('name', 'a');
+
+            wrapper.setContext(reactContext7.context);
+
+            const props2 = wrapper.find(PropsComponent).props();
+            expect(props2).toHaveProperty('name', 'a');
         });
 
         it('updates on name change', () => {
