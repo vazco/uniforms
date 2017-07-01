@@ -1,5 +1,6 @@
 import React      from 'react';
 import {mount}    from 'enzyme';
+
 import TextField  from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
@@ -8,7 +9,7 @@ import DateField from 'uniforms-material/DateField';
 
 import createContext from './_createContext';
 
-test('<DateField> - renders an input', () => {
+test('<DateField> - renders TextField, DatePicker and TimePicker', () => {
     const element = <DateField name="x" />;
     const wrapper = mount(element, createContext({x: {type: Date}}));
 
@@ -24,7 +25,7 @@ test('<DateField> - renders a input with correct id (inherited)', () => {
     expect(wrapper.find(TextField)).toHaveLength(3);
     expect(wrapper.find(DatePicker)).toHaveLength(1);
     expect(wrapper.find(TimePicker)).toHaveLength(1);
-    expect(wrapper.find(TextField).prop('id')).toBeTruthy();
+    expect(wrapper.find(TextField).at(0).prop('id')).toBeTruthy();
 });
 
 test('<DateField> - renders a input with correct id (specified)', () => {
@@ -34,7 +35,7 @@ test('<DateField> - renders a input with correct id (specified)', () => {
     expect(wrapper.find(TextField)).toHaveLength(3);
     expect(wrapper.find(DatePicker)).toHaveLength(1);
     expect(wrapper.find(TimePicker)).toHaveLength(1);
-    expect(wrapper.find(TextField).prop('id')).toBe('y');
+    expect(wrapper.find(TextField).at(0).prop('id')).toBe('y');
 });
 
 test('<DateField> - renders a input with correct name', () => {
@@ -44,17 +45,7 @@ test('<DateField> - renders a input with correct name', () => {
     expect(wrapper.find(TextField)).toHaveLength(3);
     expect(wrapper.find(DatePicker)).toHaveLength(1);
     expect(wrapper.find(TimePicker)).toHaveLength(1);
-    expect(wrapper.find(TextField).prop('name')).toBe('x');
-});
-
-test('<DateField> - renders an input with correct type', () => {
-    const element = <DateField name="x" />;
-    const wrapper = mount(element, createContext({x: {type: Date}}));
-
-    expect(wrapper.find(TextField)).toHaveLength(3);
-    expect(wrapper.find(DatePicker)).toHaveLength(1);
-    expect(wrapper.find(TimePicker)).toHaveLength(1);
-    expect(wrapper.find(TextField).prop('type')).toBe('datetime-local');
+    expect(wrapper.find(TextField).at(0).prop('name')).toBe('x');
 });
 
 test('<DateField> - renders an input with correct disabled state', () => {
@@ -64,7 +55,7 @@ test('<DateField> - renders an input with correct disabled state', () => {
     expect(wrapper.find(TextField)).toHaveLength(3);
     expect(wrapper.find(DatePicker)).toHaveLength(1);
     expect(wrapper.find(TimePicker)).toHaveLength(1);
-    expect(wrapper.find(TextField).prop('disabled')).toBe(true);
+    expect(wrapper.find(TextField).at(0).prop('disabled')).toBe(true);
 });
 
 test('<DateField> - renders a input with correct label (specified)', () => {
@@ -72,9 +63,9 @@ test('<DateField> - renders a input with correct label (specified)', () => {
     const wrapper = mount(element, createContext({x: {type: Date}}));
 
     expect(wrapper.find(TextField)).toHaveLength(3);
-    expect(wrapper.find(TextField).prop('floatingLabelText')).toBe('DateFieldLabel');
     expect(wrapper.find(DatePicker)).toHaveLength(1);
     expect(wrapper.find(TimePicker)).toHaveLength(1);
+    expect(wrapper.find(TextField).at(0).prop('floatingLabelText')).toBe('DateFieldLabel');
 });
 
 test('<DateField> - renders a input with correct value (default)', () => {
@@ -84,7 +75,7 @@ test('<DateField> - renders a input with correct value (default)', () => {
     expect(wrapper.find(TextField)).toHaveLength(3);
     expect(wrapper.find(DatePicker)).toHaveLength(1);
     expect(wrapper.find(TimePicker)).toHaveLength(1);
-    expect(wrapper.find(TextField).prop('value')).toBe('');
+    expect(wrapper.find(TextField).at(0).prop('value')).toBe('');
 });
 
 test('<DateField> - renders a input with correct value (model)', () => {
@@ -95,7 +86,7 @@ test('<DateField> - renders a input with correct value (model)', () => {
     expect(wrapper.find(TextField)).toHaveLength(3);
     expect(wrapper.find(DatePicker)).toHaveLength(1);
     expect(wrapper.find(TimePicker)).toHaveLength(1);
-    expect(wrapper.find(TextField).prop('value')).toEqual(now.toISOString().slice(0, -8));
+    expect(wrapper.find(TextField).at(0).prop('value')).toEqual(now.toISOString().slice(0, -8));
 });
 
 test('<DateField> - renders a input with correct value (specified)', () => {
@@ -106,7 +97,7 @@ test('<DateField> - renders a input with correct value (specified)', () => {
     expect(wrapper.find(TextField)).toHaveLength(3);
     expect(wrapper.find(DatePicker)).toHaveLength(1);
     expect(wrapper.find(TimePicker)).toHaveLength(1);
-    expect(wrapper.find(TextField).prop('value')).toEqual(now.toISOString().slice(0, -8));
+    expect(wrapper.find(TextField).at(0).prop('value')).toEqual(now.toISOString().slice(0, -8));
 });
 
 test('<DateField> - renders a input which correctly reacts on change', () => {
@@ -119,6 +110,7 @@ test('<DateField> - renders a input which correctly reacts on change', () => {
     expect(wrapper.find(TextField)).toHaveLength(3);
     expect(wrapper.find(DatePicker)).toHaveLength(1);
     expect(wrapper.find(TimePicker)).toHaveLength(1);
-    expect(wrapper.find(TextField).simulate('change', {target: {valueAsNumber: now}})).toBeTruthy();
+    wrapper.find(DatePicker).props().onChange({}, now);
+    wrapper.find(TimePicker).props().onChange({}, now);
     expect(onChange).toHaveBeenLastCalledWith('x', now);
 });

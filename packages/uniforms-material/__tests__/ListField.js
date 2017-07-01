@@ -31,11 +31,11 @@ test('<ListField> - renders correct label (specified)', () => {
     expect(wrapper.find(Subheader).at(0).text()).toBe('ListFieldLabel');
 });
 
-test('<ListField> - renders correct numer of items with initialCount (specified)', () => {
+test('<ListField> - renders correct number of items with initialCount (specified)', () => {
     const element = <ListField name="x" initialCount={3} />;
     const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
 
-    expect(wrapper.find('input')).toHaveLength(3);
+    expect(wrapper.find(ListItemField)).toHaveLength(3);
 });
 
 test('<ListField> - passes itemProps to its children', () => {
