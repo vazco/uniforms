@@ -1,7 +1,8 @@
 import React    from 'react';
 import {mount}  from 'enzyme';
 
-import AutoForm from 'uniforms/AutoForm';
+import AutoForm     from 'uniforms/AutoForm';
+import connectField from 'uniforms/connectField';
 
 jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
@@ -11,9 +12,9 @@ describe('AutoForm', () => {
     const validator = jest.fn();
     const onChange = jest.fn();
     const onSubmit = jest.fn();
-    const model = {a: 1};
+    const model = {a: '1'};
     const schema = {
-        getDefinition:   () => {},
+        getDefinition:   () => ({type: String, defaultValue: ''}),
         messageForError: () => {},
         objectKeys:      () => ['a', 'b', 'c'],
         validator:       () => validator
@@ -32,26 +33,39 @@ describe('AutoForm', () => {
         );
 
         it('updates', () => {
-            wrapper.instance().getChildContext().uniforms.onChange('a', 2);
+            wrapper.instance().getChildContext().uniforms.onChange('a', '2');
 
             expect(onChange).toHaveBeenCalledTimes(1);
-            expect(onChange).toHaveBeenLastCalledWith('a', 2);
+            expect(onChange).toHaveBeenLastCalledWith('a', '2');
         });
 
         it('calls `onChangeModel`', () => {
-            wrapper.instance().getChildContext().uniforms.onChange('a', 2);
+            wrapper.instance().getChildContext().uniforms.onChange('a', '2');
 
             expect(onChangeModel).toHaveBeenCalledTimes(1);
-            expect(onChangeModel).toHaveBeenLastCalledWith({a: 2});
+            expect(onChangeModel).toHaveBeenLastCalledWith({a: '2'});
         });
     });
 
     describe('when rendered', () => {
-        const wrapper = mount(
-            <AutoForm onSubmit={onSubmit} schema={schema} autosave />
-        );
+        it('calls `onChange` before render', () => {
+            const field = () => null;
+            const Field = connectField(field);
+
+            mount(
+                <AutoForm onChange={onChange} schema={schema} autoField={Field} model={model} />
+            );
+
+            expect(onChange).toHaveBeenCalledTimes(2);
+            expect(onChange.mock.calls[0]).toEqual(expect.arrayContaining(['b', '']));
+            expect(onChange.mock.calls[1]).toEqual(expect.arrayContaining(['c', '']));
+        });
 
         it('skips `onSubmit` until rendered (`autosave` = true)', async () => {
+            const wrapper = mount(
+                <AutoForm onSubmit={onSubmit} schema={schema} autosave />
+            );
+
             expect(onSubmit).not.toBeCalled();
             wrapper.instance().getChildContext().uniforms.onChange('a', 1);
 

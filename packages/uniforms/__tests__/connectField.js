@@ -83,6 +83,32 @@ describe('connectField', () => {
             ]));
         });
 
+        it('rerenders on parent change (true)', () => {
+            const Field = connectField(Test, {includeParent: true});
+
+            const wrapper = mount(
+                <Field name="field.subfield" />,
+                reactContext
+            );
+
+            wrapper.update();
+
+            expect(Test).toHaveBeenCalledTimes(1);
+        });
+
+        it('rerenders on parent change (if any) (true)', () => {
+            const Field = connectField(Test, {includeParent: true});
+
+            const wrapper = mount(
+                <Field name="field.subfield" />,
+                reactContext
+            );
+
+            wrapper.setContext({uniforms: {...reactContext.context.uniforms, model: {field: {field: 1}}}});
+
+            expect(Test).toHaveBeenCalledTimes(2);
+        });
+
         it('hides parent field (false)', () => {
             const Field = connectField(Test, {includeParent: false});
 
