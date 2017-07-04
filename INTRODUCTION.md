@@ -13,6 +13,7 @@
         - [Autosave](#autosave)
         - [Hierarchy](#hierarchy)
         - [Methods](#methods)
+        - [Change reactions](#change-reactions)
         - [Model transformations](#model-transformations)
         - [Post-submit handling](#post-submit-handling)
         - [Validation options and modes](#validation-options-and-modes)
@@ -254,6 +255,46 @@ All available methods:
 * `reset()`
 * `submit()`
 * `validate()` _(added in `ValidatedForm`)_
+
+### Change reactions
+
+If you want to make one field to influence others, simply extend `AutoForm` and override `onChange` method.
+
+**Example:**
+
+```js
+class ChainForm extends AutoForm {
+    onChange (key, value) {
+        if (key === 'key_to_intercept') return;
+        if (key === 'key_to_translate') return super.onChange('another_key', value);
+        if (key === 'key_to_mutate') {
+            super.onChange('another_key1', value * 2);
+            super.onChange('another_key2', value / 2);
+            return;
+        }
+
+        super.onChange(key, value);
+    }
+}
+```
+
+ It can be easily applied multiple times to make your forms even more reusable.
+
+**Example:**
+
+```js
+const withMultipliedField = (fieldA, fieldB, Form) =>
+class withMultipliedFieldForm extends Form {
+    onChange (key, value) {
+        // Multiply fieldA
+        if (key === fieldA)
+            super.onChange(fieldB, value + value);
+
+        // Pass every change
+        super.onChange(key, value);
+    }
+};
+```
 
 ### Model transformations
 
