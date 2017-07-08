@@ -12,6 +12,14 @@ test('<RadioField> - renders a set of checkboxes', () => {
     expect(wrapper.find('input')).toHaveLength(2);
 });
 
+test('<RadioField> - renders a set of inline checkboxes', () => {
+    const element = <RadioField name="x" inline />;
+    const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+
+    expect(wrapper.find('input')).toHaveLength(2);
+    expect(wrapper.find('.form-check').first().hasClass('radio-inline')).toBe(true);
+});
+
 test('<RadioField> - renders a set of checkboxes with correct disabled state', () => {
     const element = <RadioField name="x" disabled />;
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
