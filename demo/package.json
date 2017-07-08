@@ -1,19 +1,15 @@
 {
-  "name": "uniforms-demo",
   "private": true,
   "scripts": {
     "reset": "rimraf node_modules/uniforms* && npm install",
     "restart": "npm run reset && npm start",
     "start": "meteor run"
   },
-  "devDependencies": {
-    "rimraf": "2.6.1"
-  },
   "dependencies": {
-    "antd": "2.11.2",
+    "antd": "2.12.0",
     "babel-polyfill": "6.23.0",
     "graphql": "0.10.3",
-    "material-ui": "0.18.5",
+    "material-ui": "0.18.6",
     "meteor-node-stubs": "0.2.11",
     "react": "15.6.1",
     "react-dom": "15.6.1",
@@ -28,5 +24,8 @@
     "uniforms-material": "file:../packages/uniforms-material",
     "uniforms-semantic": "file:../packages/uniforms-semantic",
     "uniforms-unstyled": "file:../packages/uniforms-unstyled"
+  },
+  "devDependencies": {
+    "rimraf": "2.6.1"
   }
 }
