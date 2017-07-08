@@ -1,3 +1,6 @@
+## [v1.19.1](https://github.com/vazco/uniforms/tree/v1.19.1) (2017-07-08)
+- **Fixed:** Removed unnecessary published files.
+
 ## [v1.19.0](https://github.com/vazco/uniforms/tree/v1.19.0) (2017-07-08)
 - **Changed:** Additional props are passed to the rendered `div` in `NestField` in `uniforms-antd`.
 - **Changed:** Additional props are passed to the rendered `div` in `wrapField` in both `uniforms-bootstrap3` and `uniforms-bootstrap4`.
