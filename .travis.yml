@@ -10,10 +10,6 @@ branches:
     - master
     - /^v\d+\.\d+(\.\d+)?(-\S+)?$/
 
-cache:
-  directories:
-    - node_modules
-
 script:
   - npm run coverage -- --no-cache --runInBand
 
