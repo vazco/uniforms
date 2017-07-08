@@ -168,6 +168,14 @@ test('<SelectField checkboxes> - renders a set of checkboxes', () => {
     expect(wrapper.find('input')).toHaveLength(2);
 });
 
+test('<SelectField checkboxes> - renders a set of inline checkboxes', () => {
+    const element = <SelectField checkboxes name="x" inline />;
+    const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+
+    expect(wrapper.find('input')).toHaveLength(2);
+    expect(wrapper.find('.form-group').children().first().hasClass('checkbox-inline')).toBe(true);
+});
+
 test('<SelectField checkboxes> - renders a set of checkboxes with correct disabled state', () => {
     const element = <SelectField checkboxes name="x" disabled />;
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));

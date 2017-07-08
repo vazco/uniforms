@@ -70,3 +70,21 @@ test('<ListField> - renders children with correct name (value)', () => {
     expect(wrapper.find(ListItemField).at(0).prop('name')).toBe('x.0');
     expect(wrapper.find(ListItemField).at(1).prop('name')).toBe('x.1');
 });
+
+test('<ListField> - renders correct error text (specified)', () => {
+    const error = new Error();
+    const element =
+        <ListField name="x" initialCount={1} error={error} showInlineError errorMessage="Error" label="Label" />;
+    const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
+
+    expect(wrapper.find('.text-danger').text()).toBe('Error');
+});
+
+test('<ListField> - renders correct error text (showInlineError=false)', () => {
+    const error = new Error();
+    const element =
+        <ListField name="x" initialCount={1} error={error} showInlineError={false} errorMessage="Error" label="L" />;
+    const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
+
+    expect(wrapper.find('.text-danger')).toHaveLength(0);
+});
