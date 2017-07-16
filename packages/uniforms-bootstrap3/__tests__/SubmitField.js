@@ -27,3 +27,11 @@ test('<SubmitField> - renders enabled if error and enabled', () => {
     expect(wrapper).toHaveLength(1);
     expect(wrapper.find('input').prop('disabled')).toBe(false);
 });
+
+test('<SubmitField> - renders a wrapper with correct class', () => {
+    const element = <SubmitField wrapClassName="container" />;
+    const wrapper = mount(element, createContext());
+
+    expect(wrapper).toHaveLength(1);
+    expect(wrapper.find('.container')).toHaveLength(1);
+});
