@@ -40,3 +40,11 @@ test('<NestField> - renders a wrapper with unknown props', () => {
     expect(wrapper.find('div').at(0).prop('data-y')).toBe('y');
     expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });
+
+test('<NestField> - renders correct error text (specified)', () => {
+    const error = new Error();
+    const element = <NestField name="x" error={error} showInlineError errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: Object}, 'x.a': {type: String}, 'x.b': {type: Number}}));
+
+    expect(wrapper.find('div > div').at(0).text()).toBe('Error');
+});

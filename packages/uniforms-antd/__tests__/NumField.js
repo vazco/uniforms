@@ -155,6 +155,17 @@ test('<NumField> - renders an InputNumber which correctly reacts on change (empt
     expect(onChange).toHaveBeenLastCalledWith('x', '');
 });
 
+test('<NumField> - renders an InputNumber which correctly reacts on change (incorrect)', () => {
+    const onChange = jest.fn();
+
+    const element = <NumField name="x" />;
+    const wrapper = mount(element, createContext({x: {type: Number}}, {onChange}));
+
+    expect(wrapper.find('input')).toHaveLength(1);
+    expect(wrapper.find('input').simulate('change', {target: {value: 'xyz'}})).toBeTruthy();
+    expect(onChange).toHaveBeenLastCalledWith('x', undefined);
+});
+
 test('<NumField> - renders an InputNumber which correctly reacts on change (same value)', () => {
     const onChange = jest.fn();
 

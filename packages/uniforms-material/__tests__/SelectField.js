@@ -1,4 +1,5 @@
 import CheckboxMaterial    from 'material-ui/Checkbox';
+import MenuItemMaterial    from 'material-ui/SelectField';
 import RadioButtonMaterial from 'material-ui/RadioButton';
 import React               from 'react';
 import SelectFieldMaterial from 'material-ui/SelectField';
@@ -46,6 +47,26 @@ test('<SelectField> - renders a SelectField with correct name', () => {
 
     expect(wrapper.find(SelectFieldMaterial)).toHaveLength(1);
     expect(wrapper.find(SelectFieldMaterial).prop('name')).toBe('x');
+});
+
+test('<SelectField> - renders a SelectField with correct options', () => {
+    const element = <SelectField name="x" />;
+    const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+
+    expect(wrapper.find(SelectFieldMaterial)).toHaveLength(1);
+    expect(wrapper.find(SelectFieldMaterial).prop('children')).toHaveLength(2);
+    expect(wrapper.find(SelectFieldMaterial).prop('children')[0].props.primaryText).toBe('a');
+    expect(wrapper.find(SelectFieldMaterial).prop('children')[1].props.primaryText).toBe('b');
+});
+
+test('<SelectField> - renders a SelectField with correct options (transform)', () => {
+    const element = <SelectField name="x" transform={x => x.toUpperCase()} />;
+    const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+
+    expect(wrapper.find(SelectFieldMaterial)).toHaveLength(1);
+    expect(wrapper.find(SelectFieldMaterial).prop('children')).toHaveLength(2);
+    expect(wrapper.find(SelectFieldMaterial).prop('children')[0].props.primaryText).toBe('A');
+    expect(wrapper.find(SelectFieldMaterial).prop('children')[1].props.primaryText).toBe('B');
 });
 
 test('<SelectField> - renders a SelectField with correct placeholder (implicit)', () => {

@@ -113,6 +113,17 @@ test('<SelectField> - renders a select which correctly reacts on change', () => 
     expect(onChange).toHaveBeenLastCalledWith('x', 'b');
 });
 
+test('<SelectField> - renders a select which correctly reacts on change (array)', () => {
+    const onChange = jest.fn();
+
+    const element = <SelectField name="x" value={undefined} />;
+    const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String, allowedValues: ['a', 'b']}}, {onChange})); // eslint-disable-line max-len
+
+    expect(wrapper.find(Select)).toHaveLength(1);
+    expect(wrapper.find(Select).prop('onChange')(['b'])).toBeFalsy();
+    expect(onChange).toHaveBeenLastCalledWith('x', ['b']);
+});
+
 test('<SelectField> - renders a select which correctly reacts on change (empty)', () => {
     const onChange = jest.fn();
 

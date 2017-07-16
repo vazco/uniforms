@@ -99,6 +99,19 @@ test('<DateField> - renders a input which correctly reacts on change', () => {
     expect(onChange).toHaveBeenLastCalledWith('x', now);
 });
 
+test('<DateField> - renders a input which correctly reacts on change', () => {
+    const onChange = jest.fn();
+
+    const now = new Date();
+    now.setFullYear(10000);
+    const element = <DateField name="x" />;
+    const wrapper = mount(element, createContext({x: {type: Date}}, {onChange}));
+
+    expect(wrapper.find('input')).toHaveLength(1);
+    expect(wrapper.find('input').simulate('change', {target: {valueAsNumber: now}})).toBeTruthy();
+    expect(onChange).not.toHaveBeenCalled();
+});
+
 test('<DateField> - renders a wrapper with unknown props', () => {
     const element = <DateField name="x" data-x="x" data-y="y" data-z="z" />;
     const wrapper = mount(element, createContext({x: {type: Date}}));

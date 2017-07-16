@@ -34,3 +34,11 @@ test('<ErrorField> - renders correct error message (specified)', () => {
     expect(wrapper.find(ErrorField)).toHaveLength(1);
     expect(wrapper.find(ErrorField).text()).toBe('X is required');
 });
+
+test('<ErrorField> - renders correct children if specified', () => {
+    const element = <ErrorField name="x">Error</ErrorField>;
+    const wrapper = mount(element, createContext({x: {type: String}}, {error}));
+
+    expect(wrapper.find(ErrorField)).toHaveLength(1);
+    expect(wrapper.find(ErrorField).text()).toBe('Error');
+});

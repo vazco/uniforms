@@ -12,6 +12,14 @@ test('<BoolField> - renders an input', () => {
     expect(wrapper.find('input')).toHaveLength(1);
 });
 
+test('<BoolField> - renders an inline input', () => {
+    const element = <BoolField name="x" inline />;
+    const wrapper = mount(element, createContext({x: {type: Boolean}}));
+
+    expect(wrapper.find('input')).toHaveLength(1);
+    expect(wrapper.find('.checkbox-inline')).toHaveLength(1);
+});
+
 test('<BoolField> - renders a input with correct id (inherited)', () => {
     const element = <BoolField name="x" />;
     const wrapper = mount(element, createContext({x: {type: Boolean}}));

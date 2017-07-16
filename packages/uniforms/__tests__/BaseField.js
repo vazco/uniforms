@@ -25,7 +25,7 @@ describe('BaseField', () => {
         }
     }
 
-    const error1 = {details: [{name: 'a'}]};
+    const error1 = {details: [{name: 'a'}, {name: 'i'}]};
     const error2 = {details: [{name: 'b'}]};
     const model = {a: {b: {c: 'example'}}};
     const onChange = jest.fn();
@@ -446,6 +446,27 @@ describe('BaseField', () => {
 
             const props1 = wrapper.find(PropsComponent).props();
             expect(props1).toHaveProperty('error', error1.details[0]);
+
+            wrapper.setContext(reactContext2.context);
+
+            const props2 = wrapper.find(PropsComponent).props();
+            expect(props2).toHaveProperty('error');
+            expect(props2.error).toBeFalsy();
+
+            wrapper.setContext(reactContext3.context);
+
+            const props3 = wrapper.find(PropsComponent).props();
+            expect(props3.error).toBeFalsy();
+        });
+
+        it('updates on error change (special)', () => {
+            const wrapper = mount(
+                <TestField name="i" />,
+                reactContext1
+            );
+
+            const props1 = wrapper.find(PropsComponent).props();
+            expect(props1).toHaveProperty('error', error1.details[1]);
 
             wrapper.setContext(reactContext2.context);
 
