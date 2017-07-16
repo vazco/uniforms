@@ -1,4 +1,7 @@
-## Next
+## [v1.19.1](https://github.com/vazco/uniforms/tree/v1.19.1) (2017-07-08)
+- **Fixed:** Removed unnecessary published files.
+
+## [v1.19.0](https://github.com/vazco/uniforms/tree/v1.19.0) (2017-07-08)
 - **Changed:** Additional props are passed to the rendered `div` in `NestField` in `uniforms-antd`.
 - **Changed:** Additional props are passed to the rendered `div` in `wrapField` in both `uniforms-bootstrap3` and `uniforms-bootstrap4`.
 - **Changed:** Now `gridClassName` always returns a string in both `uniforms-bootstrap3` and `uniforms-bootstrap4`.
@@ -9,7 +12,7 @@
 - **Fixed:** `RadioField` spacing in `uniforms-bootsrap4`. [\#304](https://github.com/vazco/uniforms/issues/304)
 - **Fixed:** Pass `hintText` prop instead of `placeholder` in `LongTextField` in `uniforms-material`.
 
-## [v1.18.2](https://github.com/vazco/uniforms/tree/v1.18.1) (2017-06-09)
+## [v1.18.2](https://github.com/vazco/uniforms/tree/v1.18.2) (2017-06-09)
 - **Fixed:** `SubmitField` respects `disabled` prop.
 
 ## [v1.18.1](https://github.com/vazco/uniforms/tree/v1.18.1) (2017-05-28)

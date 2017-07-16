@@ -127,6 +127,7 @@ describe('GraphQLBridge', () => {
     describe('#getField', () => {
         it('return correct definition (input)', () => {
             expect(bridge.getField('author.firstName')).toEqual({
+                astNode: expect.any(Object),
                 defaultValue: 'John',
                 description: '',
                 name: 'firstName',
@@ -137,6 +138,7 @@ describe('GraphQLBridge', () => {
         it('return correct definition (type)', () => {
             expect(bridgeT.getField('author.firstName')).toEqual({
                 args: [],
+                astNode: expect.any(Object),
                 deprecationReason: undefined,
                 description: '',
                 isDeprecated: false,

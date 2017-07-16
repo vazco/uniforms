@@ -89,19 +89,8 @@ export default class BaseForm extends Component {
         this.onChange = this.change = this.onChange.bind(this);
         this.onSubmit = this.submit = this.onSubmit.bind(this);
 
-        this.getModel           = this.getModel.bind(this);
-        this.getChangedKeys     = this.getChangedKeys.bind(this);
-        this.getNativeFormProps = this.getNativeFormProps.bind(this);
-
-        this.getChildContextName     = this.getChildContextName.bind(this);
-        this.getChildContextError    = this.getChildContextError.bind(this);
-        this.getChildContextModel    = this.getChildContextModel.bind(this);
-        this.getChildContextState    = this.getChildContextState.bind(this);
-        this.getChildContextSchema   = this.getChildContextSchema.bind(this);
-        this.getChildContextOnChange = this.getChildContextOnChange.bind(this);
-
         // TODO: It shouldn't be here
-        const getModel = this.getModel;
+        const getModel = this.getModel.bind(this);
         this.getModel = (mode = null, model = getModel(mode)) =>
             mode !== null && this.props.modelTransform
                 ? this.props.modelTransform(mode, model)
