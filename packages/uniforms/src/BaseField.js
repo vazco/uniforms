@@ -62,15 +62,6 @@ export default class BaseField extends Component {
         this.findValue = this.findValue.bind(this);
         this.findField = this.findField.bind(this);
         this.findError = this.findError.bind(this);
-
-        this.getFieldProps = this.getFieldProps.bind(this);
-
-        this.getChildContextName     = this.getChildContextName.bind(this);
-        this.getChildContextError    = this.getChildContextError.bind(this);
-        this.getChildContextModel    = this.getChildContextModel.bind(this);
-        this.getChildContextState    = this.getChildContextState.bind(this);
-        this.getChildContextSchema   = this.getChildContextSchema.bind(this);
-        this.getChildContextOnChange = this.getChildContextOnChange.bind(this);
     }
 
     shouldComponentUpdate (nextProps, nextState, {uniforms: nextContext}) {

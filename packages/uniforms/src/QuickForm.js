@@ -17,14 +17,6 @@ const Quick = parent => class extends parent {
         submitField: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
     };
 
-    constructor () {
-        super(...arguments);
-
-        this.getAutoField   = this.getAutoField.bind(this);
-        this.getErrorsField = this.getErrorsField.bind(this);
-        this.getSubmitField = this.getSubmitField.bind(this);
-    }
-
     getNativeFormProps () {
         const {
             autoField,   // eslint-disable-line no-unused-vars
