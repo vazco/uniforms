@@ -17,7 +17,7 @@ test('<RadioField> - renders a set of inline checkboxes', () => {
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
 
     expect(wrapper.find('input')).toHaveLength(2);
-    expect(wrapper.find('.form-check').first().hasClass('radio-inline')).toBe(true);
+    expect(wrapper.find('.radio-inline')).toHaveLength(2);
 });
 
 test('<RadioField> - renders a set of checkboxes with correct disabled state', () => {

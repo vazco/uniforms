@@ -21,7 +21,7 @@ test('<wrapField> - renders help block with specified class', () => {
     const element = wrapField({help: 'Hint', helpClassName: 'text-hint'}, <div />);
     const wrapper = mount(element);
 
-    expect(wrapper.find('.text-hint')).toHaveLength(1);
+    expect(wrapper.find('.form-text.text-hint')).toHaveLength(1);
 });
 
 test('<wrapField> - renders error block', () => {

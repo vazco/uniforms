@@ -73,8 +73,7 @@ test('<ListField> - renders children with correct name (value)', () => {
 
 test('<ListField> - renders correct error text (specified)', () => {
     const error = new Error();
-    const element =
-        <ListField name="x" initialCount={1} error={error} showInlineError errorMessage="Error" label="Label" />;
+    const element = <ListField name="x" error={error} errorMessage="Error" label showInlineError />;
     const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
 
     expect(wrapper.find('.text-danger').text()).toBe('Error');
@@ -82,8 +81,7 @@ test('<ListField> - renders correct error text (specified)', () => {
 
 test('<ListField> - renders correct error text (showInlineError=false)', () => {
     const error = new Error();
-    const element =
-        <ListField name="x" initialCount={1} error={error} showInlineError={false} errorMessage="Error" label="L" />;
+    const element = <ListField name="x" error={error} errorMessage="Error" label showInlineError={false} />;
     const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
 
     expect(wrapper.find('.text-danger')).toHaveLength(0);
