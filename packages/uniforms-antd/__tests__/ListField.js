@@ -1,4 +1,5 @@
 import React   from 'react';
+import Tooltip from 'antd/lib/tooltip';
 import {mount} from 'enzyme';
 
 import ListAddField  from 'uniforms-antd/ListAddField';
@@ -20,6 +21,14 @@ test('<ListField> - renders ListAddField', () => {
 
     expect(wrapper.find(ListAddField)).toHaveLength(1);
     expect(wrapper.find(ListAddField).prop('name')).toBe('x.$');
+});
+
+test('<ListField> - renders correct label and info (specified)', () => {
+    const element = <ListField name="x" label="ListFieldLabel" info="ListFieldInfo" />;
+    const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
+
+    expect(wrapper.find(Tooltip)).toHaveLength(1);
+    expect(wrapper.find(Tooltip).prop('title')).toBe('ListFieldInfo');
 });
 
 test('<ListField> - renders correct label (specified)', () => {
@@ -68,4 +77,12 @@ test('<ListField> - renders children with correct name (value)', () => {
 
     expect(wrapper.find(ListItemField).at(0).prop('name')).toBe('x.0');
     expect(wrapper.find(ListItemField).at(1).prop('name')).toBe('x.1');
+});
+
+test('<ListField> - renders correct error text (specified)', () => {
+    const error = new Error();
+    const element = <ListField name="x" error={error} errorMessage="Error" showInlineError />;
+    const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
+
+    expect(wrapper.find('div > div').at(0).text()).toBe('Error');
 });
