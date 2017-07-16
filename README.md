@@ -20,8 +20,7 @@
 
 <p align="center">
     <a href="https://codecov.io/gh/vazco/uniforms">
-        <img src="https://img.shields.io/codecov/c/github/vazco/uniforms.svg
-?style=flat-square" alt="Coverage">
+        <img src="https://img.shields.io/codecov/c/github/vazco/uniforms.svg?style=flat-square" alt="Coverage">
     </a>
     <a href="https://npmjs.org/package/uniforms">
         <img src="https://img.shields.io/npm/l/uniforms.svg?style=flat-square" alt="License">
