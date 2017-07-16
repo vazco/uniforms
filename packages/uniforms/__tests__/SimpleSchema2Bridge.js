@@ -29,7 +29,8 @@ describe('SimpleSchema2Bridge', () => {
         's':     {type: String, uniforms: {options: [{label: 1, value: 'a'}, {label: 2, value: 'b'}]}},
         't':     {type: String, uniforms: {options: () => ({a: 1, b: 2})}},
         'u':     {type: SimpleSchema.Integer},
-        'w':     {type: new SimpleSchema({x: String})}
+        'w':     {type: new SimpleSchema({x: String})},
+        'x':     {type: String, autoValue: () => '$setOnInsert:hack!'}
     });
 
     const bridge = new SimpleSchema2Bridge(schema);
@@ -110,8 +111,15 @@ describe('SimpleSchema2Bridge', () => {
             expect(bridge.getField('a')).toEqual(definitionComposed);
         });
 
+        it('return correct definition (`autoValue` hack)', () => {
+            const definition = schema.getDefinition('x');
+            const definitionComposed = {...definition, ...definition.type[0], defaultValue: '$setOnInsert:hack!'};
+
+            expect(bridge.getField('x')).toEqual(definitionComposed);
+        });
+
         it('throws on not found field', () => {
-            expect(() => bridge.getField('x')).toThrow(/Field not found in schema/);
+            expect(() => bridge.getField('y')).toThrow(/Field not found in schema/);
         });
     });
 
@@ -206,7 +214,8 @@ describe('SimpleSchema2Bridge', () => {
                 's',
                 't',
                 'u',
-                'w'
+                'w',
+                'x'
             ]);
         });
 
