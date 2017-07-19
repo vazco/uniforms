@@ -59,7 +59,10 @@
       "text-summary"
     ],
     "moduleNameMapper": {
-      "^uniforms([^/]*)(.*)$": "<rootDir>/packages/uniforms$1/src$2"
+      "^uniforms([^/]*)(.*)$": "<rootDir>/packages/uniforms$1/src$2",
+      "meteor/([^:]*):(.*)": "<rootDir>/packages/uniforms/__mocks__/meteor/$1_$2.js",
+      "meteor/([^:]*)": "<rootDir>/packages/uniforms/__mocks__/meteor/$1.js"
+
     },
     "testMatch": [
       "**/__tests__/**/!(_)*.js"

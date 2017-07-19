@@ -1,5 +1,4 @@
 import CheckboxMaterial    from 'material-ui/Checkbox';
-import MenuItemMaterial    from 'material-ui/SelectField';
 import RadioButtonMaterial from 'material-ui/RadioButton';
 import React               from 'react';
 import SelectFieldMaterial from 'material-ui/SelectField';
