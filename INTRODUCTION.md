@@ -516,6 +516,8 @@ export default connectField(Composite);
 
 ### Example: `CustomAutoField`
 
+These are two _standard_ options to define a custom `AutoField`: either using `connectField` or simply taking the code from the [original one](https://github.com/vazco/uniforms/blob/master/packages/uniforms-unstyled/src/AutoField.js#L14-L47) _(theme doesn't matter)_ and simply apply own components and/or rules to render components. Below an example with `connectField`.
+
 **Note:** This example uses `connectField` helper. To read more see [API](https://github.com/vazco/uniforms/blob/master/API.md#connectfield).
 
 ```js
