@@ -1,5 +1,5 @@
-import isEqual from 'lodash.isequal';
-import xorWith from 'lodash.xorwith';
+import isEqual from 'lodash/isEqual';
+import xorWith from 'lodash/xorWith';
 
 import joinName from './joinName';
 

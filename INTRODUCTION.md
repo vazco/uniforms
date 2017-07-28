@@ -918,7 +918,7 @@ export default SubmitField;
 
 ```js
 import BaseField      from 'uniforms/BaseField';
-import get            from 'lodash.get';
+import get            from 'lodash/get';
 import {Children}     from 'react';
 import {cloneElement} from 'react';
 

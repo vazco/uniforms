@@ -1,7 +1,7 @@
 import PropTypes   from 'prop-types';
-import get         from 'lodash.get';
+import get         from 'lodash/get';
 import invariant   from 'fbjs/lib/invariant';
-import isEqual     from 'lodash.isequal';
+import isEqual     from 'lodash/isEqual';
 import {Component} from 'react';
 
 import BaseForm from './BaseForm';

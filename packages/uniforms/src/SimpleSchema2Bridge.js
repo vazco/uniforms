@@ -1,4 +1,4 @@
-import cloneDeep from 'lodash.clonedeep';
+import cloneDeep from 'lodash/cloneDeep';
 import invariant from 'fbjs/lib/invariant';
 
 import Bridge         from './Bridge';

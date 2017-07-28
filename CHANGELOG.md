@@ -1,3 +1,6 @@
+## Next:
+- **Changed:** Moved from `lodash.x` packages to `lodash/x`. It will increase `node_modules` size but probably reduce your bundle size as many projects are already using `lodash` which lead to having both `lodash.x` and `lodash/x` in the bundle.
+
 ## [v1.19.1](https://github.com/vazco/uniforms/tree/v1.19.1) (2017-07-08)
 - **Fixed:** Removed unnecessary published files.
 
