@@ -1,5 +1,5 @@
 aldeed:simple-schema
-ecmascript@0.8.0
+ecmascript@0.8.1
 es5-shim@4.6.15
 kadira:dochead
 kadira:flow-router

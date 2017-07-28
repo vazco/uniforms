@@ -17,7 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "antd": "2.12.0",
+    "antd": "2.12.2",
     "babel-cli": "6.24.1",
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
@@ -30,15 +30,15 @@
     "babel-preset-stage-0": "6.24.1",
     "codecov": "2.2.0",
     "enzyme": "2.9.1",
-    "eslint": "4.2.0",
+    "eslint": "4.3.0",
     "eslint-config-vazco": "3.0.0",
-    "eslint-plugin-babel": "4.1.1",
+    "eslint-plugin-babel": "4.1.2",
     "eslint-plugin-react": "7.1.0",
     "eslint-plugin-vazco": "1.0.0",
-    "graphql": "0.10.4",
+    "graphql": "0.10.5",
     "jest": "20.0.4",
     "lerna": "2.0.0",
-    "material-ui": "0.18.6",
+    "material-ui": "0.18.7",
     "react": "15.6.1",
     "react-dom": "15.6.1",
     "react-tap-event-plugin": "2.0.1",
@@ -62,7 +62,6 @@
       "^uniforms([^/]*)(.*)$": "<rootDir>/packages/uniforms$1/src$2",
       "meteor/([^:]*):(.*)": "<rootDir>/packages/uniforms/__mocks__/meteor/$1_$2.js",
       "meteor/([^:]*)": "<rootDir>/packages/uniforms/__mocks__/meteor/$1.js"
-
     },
     "testMatch": [
       "**/__tests__/**/!(_)*.js"

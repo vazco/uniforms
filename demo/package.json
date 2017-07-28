@@ -6,10 +6,10 @@
     "start": "meteor run"
   },
   "dependencies": {
-    "antd": "2.12.0",
+    "antd": "2.12.2",
     "babel-polyfill": "6.23.0",
-    "graphql": "0.10.4",
-    "material-ui": "0.18.6",
+    "graphql": "0.10.5",
+    "material-ui": "0.18.7",
     "meteor-node-stubs": "0.2.11",
     "react": "15.6.1",
     "react-dom": "15.6.1",
