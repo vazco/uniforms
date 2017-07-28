@@ -1,6 +1,6 @@
 # Contributing
 
-We'd love your contributions! Please send us Pull Requests or open issues on [github](https://github.com/vazco/uniforms). Also, read the [contribution guidelines](https://github.com/vazco/uniforms/blob/master/.github/CONTRIBUTING.md).
+We'd love your contributions! Please send us Pull Requests or open issues on [GitHub](https://github.com/vazco/uniforms). Also, read the [contribution guidelines](https://github.com/vazco/uniforms/blob/master/.github/CONTRIBUTING.md).
 
 # Preparing environment
 
@@ -8,10 +8,9 @@ We'd love your contributions! Please send us Pull Requests or open issues on [gi
 $ git clone git@github.com:vazco/uniforms.git
 $ cd uniforms
 $ npm install
-$ npm run build
 $ cd demo
-$ npm install
-$ npm start
+$ meteor npm install
+$ meteor npm start
 ```
 
 # Making changes
