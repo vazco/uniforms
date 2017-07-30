@@ -48,7 +48,7 @@ const renderSelect = props =>
         allowClear={!props.required}
         disabled={props.disabled}
         id={props.id}
-        multiple={props.fieldType === Array}
+        mode={props.fieldType === Array ? 'multiple' : undefined}
         name={props.name}
         onChange={value => props.onChange(value)}
         placeholder={props.placeholder}
