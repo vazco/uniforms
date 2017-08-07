@@ -6,7 +6,7 @@
     "start": "meteor run"
   },
   "dependencies": {
-    "antd": "2.12.2",
+    "antd": "2.12.5",
     "babel-polyfill": "6.23.0",
     "graphql": "0.10.5",
     "material-ui": "0.18.7",
@@ -16,7 +16,7 @@
     "react-mounter": "1.2.0",
     "react-panelgroup": "1.0.2",
     "react-tap-event-plugin": "2.0.1",
-    "simpl-schema": "0.3.1",
+    "simpl-schema": "0.3.2",
     "uniforms": "file:../packages/uniforms",
     "uniforms-antd": "file:../packages/uniforms-antd",
     "uniforms-bootstrap3": "file:../packages/uniforms-bootstrap3",
