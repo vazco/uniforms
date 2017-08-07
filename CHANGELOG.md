@@ -1,4 +1,4 @@
-## Next:
+## [v1.20.0](https://github.com/vazco/uniforms/tree/v1.20.0) (2017-08-07)
 - **Changed:** Moved from `lodash.x` packages to `lodash/x`. It will increase `node_modules` size but probably reduce your bundle size as many projects are already using `lodash` which lead to having both `lodash.x` and `lodash/x` in the bundle.
 - **Fixed:** Warning in `SelectField` in `uniforms-antd`.
 
