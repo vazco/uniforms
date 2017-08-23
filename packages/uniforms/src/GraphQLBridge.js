@@ -182,6 +182,7 @@ export default class GraphQLBridge extends Bridge {
             if (fieldType.name === 'Int')    return Number;
             if (fieldType.name === 'Float')  return Number;
             if (fieldType.name === 'String') return String;
+            if (fieldType.name === 'Boolean') return Boolean;
         }
 
         return fieldType;
