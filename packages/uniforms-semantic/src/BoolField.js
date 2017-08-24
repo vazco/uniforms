@@ -37,10 +37,8 @@ const Bool = ({
         </div>
 
         {!!(error && showInlineError) && (
-            <div>
-                <div className="ui red basic pointing label">
-                    {errorMessage}
-                </div>
+            <div className="ui red basic pointing label">
+                {errorMessage}
             </div>
         )}
     </div>
