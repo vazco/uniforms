@@ -1,4 +1,4 @@
-## Next
+## [v1.20.1](https://github.com/vazco/uniforms/tree/v1.20.1) (2017-08-26)
 - **Fixed:** Missing `Boolean` type in `GraphQLBridge`. [\#335](https://github.com/vazco/uniforms/issues/335)
 - **Fixed:** Position of inline error in `BoolField` in `uniforms-semantic`. [\#338](https://github.com/vazco/uniforms/issues/338)
 
