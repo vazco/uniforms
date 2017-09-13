@@ -15,6 +15,7 @@ const Text = props =>
             placeholder={props.placeholder}
             ref={props.inputRef}
             value={props.value}
+            type={props.type}
             {...filterDOMProps(props)}
         />
     ))
