@@ -14,6 +14,7 @@ const Text = props =>
             onChange={event => props.onChange(event.target.value)}
             placeholder={props.placeholder}
             ref={props.inputRef}
+            type={props.type}
             value={props.value}
             {...filterDOMProps(props)}
         />
