@@ -1,3 +1,6 @@
+## [v1.20.2](https://github.com/vazco/uniforms/tree/v1.20.2) (2017-09-16)
+- **Fixed:** Passing `type` prop in `TextField` in `uniforms-antd`. [\#345](https://github.com/vazco/uniforms/issues/345)
+
 ## [v1.20.1](https://github.com/vazco/uniforms/tree/v1.20.1) (2017-08-26)
 - **Fixed:** Missing `Boolean` type in `GraphQLBridge`. [\#335](https://github.com/vazco/uniforms/issues/335)
 - **Fixed:** Position of inline error in `BoolField` in `uniforms-semantic`. [\#338](https://github.com/vazco/uniforms/issues/338)
