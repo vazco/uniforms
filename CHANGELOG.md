@@ -1,3 +1,6 @@
+## [v1.20.3](https://github.com/vazco/uniforms/tree/v1.20.3) (2017-09-18)
+- **Fixed:** Invalid publish occurred. Sorry!
+
 ## [v1.20.2](https://github.com/vazco/uniforms/tree/v1.20.2) (2017-09-16)
 - **Fixed:** Passing `type` prop in `TextField` in `uniforms-antd`. [\#345](https://github.com/vazco/uniforms/issues/345)
 
