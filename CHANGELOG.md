@@ -1,4 +1,4 @@
-## Next
+## [v1.20.4](https://github.com/vazco/uniforms/tree/v1.20.4) (2017-09-22)
 - **Fixed:** Refreshing fields on form state change. [\#347](https://github.com/vazco/uniforms/issues/347)
 
 ## [v1.20.3](https://github.com/vazco/uniforms/tree/v1.20.3) (2017-09-18)
