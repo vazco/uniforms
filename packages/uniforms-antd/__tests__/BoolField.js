@@ -1,7 +1,7 @@
-import React   from 'react';
-import Switch  from 'antd/lib/switch';
-import Checkbox  from 'antd/lib/checkbox';
-import {mount} from 'enzyme';
+import React    from 'react';
+import Switch   from 'antd/lib/switch';
+import Checkbox from 'antd/lib/checkbox';
+import {mount}  from 'enzyme';
 
 import BoolField from 'uniforms-antd/BoolField';
 
