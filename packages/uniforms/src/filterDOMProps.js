@@ -2,6 +2,7 @@ const unwantedProps = [
     // These props are provided by BaseField
     'changed',
     'changedMap',
+    'checkbox',
     'disabled',
     'error',
     'errorMessage',
