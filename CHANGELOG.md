@@ -1,4 +1,4 @@
-## Next:
+## [v1.21.0](https://github.com/vazco/uniforms/tree/v1.21.0) (2017-09-28)
 - **Added:** Support for `checkbox` in `BoolField` in `uniforms-antd`. [\#348](https://github.com/vazco/uniforms/issues/348)
 
 ## [v1.20.4](https://github.com/vazco/uniforms/tree/v1.20.4) (2017-09-22)
