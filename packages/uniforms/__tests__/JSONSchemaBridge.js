@@ -55,5 +55,9 @@ describe('JSONSchemaBridge', () => {
                 type: 'object'
             });
         });
+
+        it('returns correct definition (nested)', () => {
+            expect(bridge.getField('shippingAddress.city')).toEqual(expect.objectContaining({type: 'string'}));
+        });
     });
 });
