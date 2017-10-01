@@ -64,11 +64,18 @@ export default class BaseField extends Component {
         this.findError = this.findError.bind(this);
     }
 
-    shouldComponentUpdate (nextProps, nextState, {uniforms: nextContext}) {
+    shouldComponentUpdate (nextProps, _, {uniforms: nextContext}) {
         const prevProps   = this.props;
         const prevContext = this.context.uniforms;
 
         if (!isEqual(prevProps, nextProps)) {
+            return true;
+        }
+
+        const {changedMap: nextMap, ...nextState} = nextContext.state;
+        const {changedMap: prevMap, ...prevState} = prevContext.state;
+
+        if (!isEqual(prevState, nextState)) {
             return true;
         }
 
@@ -79,7 +86,7 @@ export default class BaseField extends Component {
             return true;
         }
 
-        if (!isEqual(get(prevContext.state.changedMap, prevName), get(nextContext.state.changedMap, nextName))) {
+        if (!isEqual(get(prevMap, prevName), get(nextMap, nextName))) {
             return true;
         }
 

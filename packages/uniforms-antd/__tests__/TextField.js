@@ -134,3 +134,10 @@ test('<TextField> - renders a wrapper with unknown props', () => {
     expect(wrapper.find(Input).prop('data-y')).toBe('y');
     expect(wrapper.find(Input).prop('data-z')).toBe('z');
 });
+
+test('<TextField> - renders a input with correct type prop', () => {
+    const element = <TextField name="x" type="password" />;
+    const wrapper = mount(element, createContext({x: {type: String}}));
+
+    expect(wrapper.find(Input).prop('type')).toBe('password');
+});

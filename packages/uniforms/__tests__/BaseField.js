@@ -79,6 +79,7 @@ describe('BaseField', () => {
     const reactContext5 = _context({schema: Object.create(schema)});
     const reactContext6 = _context({state: {...reactContextBase.state, changedMap: {a: {}}}});
     const reactContext7 = _context({model: {a: {b: {c: 'example 2'}}}});
+    const reactContext8 = _context({state: {...reactContextBase.state, disabled: true}});
 
     afterEach(() => {
         onChange.mockReset();
@@ -559,6 +560,21 @@ describe('BaseField', () => {
                 'showInlineError',
                 'value'
             ].forEach(prop => expect(props2).toHaveProperty(prop, props1[prop]));
+        });
+
+        it('updates on state change', () => {
+            const wrapper = mount(
+                <TestField name="a" />,
+                reactContext1
+            );
+
+            const props1 = wrapper.find(PropsComponent).props();
+            expect(props1).toHaveProperty('disabled', false);
+
+            wrapper.setContext(reactContext8.context);
+
+            const props2 = wrapper.find(PropsComponent).props();
+            expect(props2).toHaveProperty('disabled', true);
         });
     });
 });
