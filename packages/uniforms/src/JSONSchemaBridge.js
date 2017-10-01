@@ -9,23 +9,6 @@ try {
     Ajv = r('ajv');
 } catch (_) { /* Ignore it. */ }
 
-const SSProperties = ['_cleanOptions','_constructorOptions','_docValidators','messageBox','omit','pick','version'];
-const SS2Properties = ['_depsMessages','_messages'];
-const SSCommonProperties = [
-    '_autoValues',
-    '_blackboxKeys',
-    '_depsLabels',
-    '_firstLevelSchemaKeys',
-    '_objectKeys',
-    '_schema',
-    '_schemaKeys',
-    '_validationContexts',
-    '_validators'
-];
-
-const isSS = schema => [...SSCommonProperties, ...SSProperties].every(property => schema[property]);
-const isSS2 = schema => [...SSCommonProperties, ...SS2Properties].every(property => schema[property]);
-
 const resolveRef = (referance, schema) => {
     invariant(
         referance.startsWith('#'),
@@ -54,7 +37,7 @@ export default class JSONSchemaBridge extends Bridge {
     }
 
     static check (schema) {
-        return Ajv && schema && new Ajv().validateSchema(schema) && !(isSS(schema) || isSS2(schema));
+        return schema && Ajv && new Ajv().validateSchema(schema);
     }
 
     getError (/* name, error */) {

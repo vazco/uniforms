@@ -7,9 +7,9 @@ import SimpleSchemaBridge  from './SimpleSchemaBridge';
 
 const bridges = [
     GraphQLBridge,
-    JSONSchemaBridge,
     SimpleSchemaBridge,
-    SimpleSchema2Bridge
+    SimpleSchema2Bridge,
+    JSONSchemaBridge // Other schemas are often valid JSON schema, so we check this at the end
 ];
 
 const isBridge = schema =>
