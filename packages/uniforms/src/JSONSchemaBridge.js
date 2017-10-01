@@ -74,9 +74,10 @@ export default class JSONSchemaBridge extends Bridge {
             (definition, next) => {
                 if (next === '$' || next === '' + parseInt(next, 10)) {
                     invariant(definition.type === 'array', 'Field not found in schema: "%s"', name);
-                }
-
-                if (definition[next]) {
+                    definition = Array.isArray(definition.items)
+                        ? definition.items[parseInt(next, 10)]
+                        : definition.items;
+                } else if (definition[next]) {
                     definition = definition[next];
                 } else if (definition.type === 'object') {
                     definition = definition.properties[next];

@@ -27,7 +27,11 @@ describe('JSONSchemaBridge', () => {
         type: 'object',
         properties: {
             age: {type: 'integer'},
-            personalData: {$ref: '#/definitions/personalData'},
+            billingAddress: {$ref: '#/definitions/address'},
+            dateOfBirth: {
+                type: 'array',
+                items: [{type: 'integer'}, {type: 'string'}, {type: 'integer'}]
+            },
             email: {
                 type: 'object',
                 properties: {
@@ -36,7 +40,13 @@ describe('JSONSchemaBridge', () => {
                 },
                 required: ['work']
             },
-            billingAddress: {$ref: '#/definitions/address'},
+            friends: {
+                type: 'array',
+                items: {
+                    $ref: '#/definitions/personalData'
+                }
+            },
+            personalData: {$ref: '#/definitions/personalData'},
             shippingAddress: {
                 allOf: [
                     {$ref: '#/definitions/address'},
@@ -86,6 +96,20 @@ describe('JSONSchemaBridge', () => {
 
         it('returns correct definition (nested with $ref)', () => {
             expect(bridge.getField('personalData.firstName')).toEqual(expect.objectContaining({type: 'string'}));
+        });
+
+        it('returns correct definition (array tuple)', () => {
+            expect(bridge.getField('dateOfBirth.1')).toEqual(expect.objectContaining({type: 'string'}));
+        });
+
+        it('returns correct definition (array flat $ref)', () => {
+            expect(bridge.getField('friends.$')).toEqual(expect.objectContaining({
+                type: expect.any(String)
+            }));
+        });
+
+        it('returns correct definition (array flat $ref, nested property)', () => {
+            expect(bridge.getField('friends.$.firstName')).toEqual(expect.objectContaining({type: 'string'}));
         });
     });
 });
