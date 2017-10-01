@@ -76,9 +76,10 @@ export default class JSONSchemaBridge extends Bridge {
                     invariant(definition.type === 'array', 'Field not found in schema: "%s"', name);
                 }
 
-
                 if (definition[next]) {
                     definition = definition[next];
+                } else if (definition.type === 'object') {
+                    definition = definition.properties[next];
                 } else {
                     const [{properties: combinedDefinition = {}} = {}] =
                         ['allOf', 'anyOf', 'oneOf'].filter(key => definition[key]).map(key =>

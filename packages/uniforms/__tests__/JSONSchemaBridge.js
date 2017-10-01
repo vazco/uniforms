@@ -12,10 +12,30 @@ describe('JSONSchemaBridge', () => {
                     street: {type: 'string'}
                 },
                 required: ['street', 'city', 'state']
-            }
+            },
+            personalData: {
+                type: 'object',
+                properties: {
+                    firstName: {$ref: '#/definitions/firstName'},
+                    lastName:  {$ref: '#/definitions/firstName'}
+                },
+                required: ['lastName']
+            },
+            firstName: {type: 'string'},
+            lastName: {type: 'string'}
         },
         type: 'object',
         properties: {
+            age: {type: 'integer'},
+            personalData: {$ref: '#/definitions/personalData'},
+            email: {
+                type: 'object',
+                properties: {
+                    work:   {type: 'string'},
+                    other:  {type: 'string'}
+                },
+                required: ['work']
+            },
             billingAddress: {$ref: '#/definitions/address'},
             shippingAddress: {
                 allOf: [
@@ -45,6 +65,10 @@ describe('JSONSchemaBridge', () => {
 
     describe('#getField', () => {
         it('returns correct definition (flat)', () => {
+            expect(bridge.getField('age')).toEqual(expect.objectContaining({type: 'integer'}));
+        });
+
+        it('returns correct definition (flat with $ref)', () => {
             expect(bridge.getField('billingAddress')).toEqual({
                 properties: expect.objectContaining({
                     city: expect.any(Object),
@@ -57,7 +81,11 @@ describe('JSONSchemaBridge', () => {
         });
 
         it('returns correct definition (nested)', () => {
-            expect(bridge.getField('shippingAddress.city')).toEqual(expect.objectContaining({type: 'string'}));
+            expect(bridge.getField('email.work')).toEqual(expect.objectContaining({type: 'string'}));
+        });
+
+        it('returns correct definition (nested with $ref)', () => {
+            expect(bridge.getField('personalData.firstName')).toEqual(expect.objectContaining({type: 'string'}));
         });
     });
 });
