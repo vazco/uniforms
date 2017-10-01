@@ -112,12 +112,16 @@ export default class JSONSchemaBridge extends Bridge {
     }
 
     getType (name) {
-        const {type: fieldType} = this.getField(name);
+        const {type: fieldType, format: fieldFormat} = this.getField(name);
 
+        if (fieldFormat === 'date-time')               return Date;
         if (fieldType === 'string')                    return String;
+        if (['number', 'integer'].includes(fieldType)) return Number;
         if (fieldType === 'object')                    return Object;
         if (fieldType === 'array')                     return Array;
-        if (['number', 'integer'].includes(fieldType)) return Number;
+        if (fieldType === 'boolean')                   return Boolean;
+
+        invariant(fieldType === 'null', 'Type null can not be represented as a field: "%s"', name);
 
         return fieldType;
     }

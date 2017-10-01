@@ -29,6 +29,10 @@ describe('JSONSchemaBridge', () => {
             age: {type: 'integer'},
             billingAddress: {$ref: '#/definitions/address'},
             dateOfBirth: {
+                type: 'string',
+                format: 'date-time'
+            },
+            dateOfBirthTuple: {
                 type: 'array',
                 items: [{type: 'integer'}, {type: 'string'}, {type: 'integer'}]
             },
@@ -99,7 +103,7 @@ describe('JSONSchemaBridge', () => {
         });
 
         it('returns correct definition (array tuple)', () => {
-            expect(bridge.getField('dateOfBirth.1')).toEqual(expect.objectContaining({type: 'string'}));
+            expect(bridge.getField('dateOfBirthTuple.1')).toEqual(expect.objectContaining({type: 'string'}));
         });
 
         it('returns correct definition (array flat $ref)', () => {
@@ -110,6 +114,27 @@ describe('JSONSchemaBridge', () => {
 
         it('returns correct definition (array flat $ref, nested property)', () => {
             expect(bridge.getField('friends.$.firstName')).toEqual(expect.objectContaining({type: 'string'}));
+        });
+    });
+
+    describe('#getType', () => {
+        it('works with any type', () => {
+            expect(bridge.getType('age')).toBe(Number);
+            expect(bridge.getType('billingAddress')).toBe(Object);
+            expect(bridge.getType('billingAddress.city')).toBe(String);
+            expect(bridge.getType('billingAddress.state')).toBe(String);
+            expect(bridge.getType('billingAddress.street')).toBe(String);
+            expect(bridge.getType('dateOfBirth')).toBe(Date);
+            expect(bridge.getType('dateOfBirthTuple')).toBe(Array);
+            expect(bridge.getType('email')).toBe(Object);
+            expect(bridge.getType('email.work')).toBe(String);
+            expect(bridge.getType('email.other')).toBe(String);
+            expect(bridge.getType('friends')).toBe(Array);
+            expect(bridge.getType('friends.$')).toBe(Object);
+            expect(bridge.getType('friends.$.firstName')).toBe(String);
+            expect(bridge.getType('friends.$.lastName')).toBe(String);
+            expect(bridge.getType('personalData')).toBe(Object);
+            // expect(bridge.getType('shippingAddress')).toBe(Array);
         });
     });
 });
