@@ -1,13 +1,12 @@
 import React        from 'react';
 import classnames   from 'classnames';
 import connectField from 'uniforms/connectField';
-import {Component}  from 'react';
 
 import wrapField from './wrapField';
 
 const noneIfNaN = x => isNaN(x) ? undefined : x;
 
-const Num_ = props =>
+const Num = props =>
     wrapField(props, (
         <input
             className={classnames(props.inputClassName, 'form-control', {'form-control-danger': props.error})}
@@ -16,7 +15,7 @@ const Num_ = props =>
             max={props.max}
             min={props.min}
             name={props.name}
-            onChange={props.onChange}
+            onChange={event => props.onChange(noneIfNaN((props.decimal ? parseFloat : parseInt)(event.target.value)))}
             placeholder={props.placeholder}
             ref={props.inputRef}
             step={props.step || (props.decimal ? 0.01 : 1)}
@@ -25,35 +24,5 @@ const Num_ = props =>
         />
     ))
 ;
-
-// TODO: Provide more generic solution.
-class Num extends Component {
-    constructor () {
-        super(...arguments);
-
-        this.state = {value: '' + this.props.value};
-
-        this.onChange = this.onChange.bind(this);
-    }
-
-    componentWillReceiveProps ({decimal, value}) {
-        const parse = decimal ? parseFloat : parseInt;
-
-        if (noneIfNaN(parse(value)) !== noneIfNaN(parse(this.state.value.replace(/[.,]+$/, '')))) {
-            this.setState({value: value === undefined || value === '' ? '' : '' + value});
-        }
-    }
-
-    onChange ({target: {value}}) {
-        const change = value.replace(/[^\d.,-]/g, '');
-
-        this.setState({value: change});
-        this.props.onChange(noneIfNaN((this.props.decimal ? parseFloat : parseInt)(change)));
-    }
-
-    render () {
-        return Num_({...this.props, onChange: this.onChange, value: this.state.value});
-    }
-}
 
 export default connectField(Num);
