@@ -117,6 +117,30 @@ describe('JSONSchemaBridge', () => {
         });
     });
 
+    describe('#getSubfields', () => {
+        it('works on top level', () => {
+            expect(bridge.getSubfields()).toEqual([
+                'age',
+                'billingAddress',
+                'dateOfBirth',
+                'dateOfBirthTuple',
+                'email',
+                'friends',
+                'personalData',
+                'shippingAddress'
+            ]);
+        });
+
+        it('works with nested types', () => {
+            expect(bridge.getSubfields('shippingAddress')).toEqual(['city', 'state', 'street', 'type']);
+        });
+
+        it('works with primitives', () => {
+            expect(bridge.getSubfields('personalData.firstName')).toEqual([]);
+            expect(bridge.getSubfields('age')).toEqual([]);
+        });
+    });
+
     describe('#getType', () => {
         it('works with any type', () => {
             expect(bridge.getType('age')).toBe(Number);
@@ -134,7 +158,7 @@ describe('JSONSchemaBridge', () => {
             expect(bridge.getType('friends.$.firstName')).toBe(String);
             expect(bridge.getType('friends.$.lastName')).toBe(String);
             expect(bridge.getType('personalData')).toBe(Object);
-            // expect(bridge.getType('shippingAddress')).toBe(Array);
+            expect(bridge.getType('shippingAddress')).toBe(Object);
         });
     });
 });

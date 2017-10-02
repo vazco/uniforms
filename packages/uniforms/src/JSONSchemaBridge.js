@@ -54,7 +54,7 @@ export default class JSONSchemaBridge extends Bridge {
 
     getField (name) {
         return joinName(null, name).reduce(
-            (definition, next) => {
+            (definition, next) => { // eslint-disable-line complexity
                 if (next === '$' || next === '' + parseInt(next, 10)) {
                     invariant(definition.type === 'array', 'Field not found in schema: "%s"', name);
                     definition = Array.isArray(definition.items)
@@ -83,6 +83,22 @@ export default class JSONSchemaBridge extends Bridge {
                     definition[key] = definition[key].map(def => def.$ref ? resolveRef(def.$ref, this.schema) : def);
                 });
 
+                if (['allOf', 'anyOf', 'oneOf'].filter(key => definition[key]).length) {
+                    // Naive computation of combined type and properties
+                    definition._type = (
+                        [].concat(
+                            definition.allOf || [],
+                            definition.anyOf || [],
+                            definition.oneOf || []
+                        ).find(def => def.type) || {}
+                    ).type;
+                    definition._properties = [].concat(
+                        definition.allOf || [],
+                        definition.anyOf || [],
+                        definition.oneOf || []
+                    ).reduce((_properties, {properties}) => Object.assign(_properties, properties), {});
+                }
+
                 return definition;
             },
             this.schema.properties
@@ -102,7 +118,12 @@ export default class JSONSchemaBridge extends Bridge {
             return Object.keys(this.schema.properties);
         }
 
-        const {type: fieldType, properties: fieldProperties} = this.getField(name);
+        const {
+            _type,
+            type: fieldType = _type,
+            _properties,
+            properties: fieldProperties = _properties
+        } = this.getField(name);
 
         if (fieldType === 'object') {
             return Object.keys(fieldProperties);
@@ -112,7 +133,11 @@ export default class JSONSchemaBridge extends Bridge {
     }
 
     getType (name) {
-        const {type: fieldType, format: fieldFormat} = this.getField(name);
+        const {
+            _type,
+            type: fieldType = _type,
+            format: fieldFormat
+        } = this.getField(name);
 
         if (fieldFormat === 'date-time')               return Date;
         if (fieldType === 'string')                    return String;
