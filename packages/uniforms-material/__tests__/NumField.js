@@ -106,10 +106,8 @@ test('<NumField> - renders a TextField with correct value (model)', () => {
     const wrapper = mount(element, createContext({x: {type: Number}}, {model: {x: '1'}}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    // TODO: Check out NumField comment.
     expect(wrapper.find(TextField).prop('value')).toBe('1');
 
-    // TODO: All following tests are here to cover hacky NumField implementation.
     expect(wrapper.find('input').simulate('change', {target: {value: '0.1'}})).toBeTruthy();
     wrapper.setProps({value: '0.1'});
     expect(wrapper.find(TextField).prop('value')).toBe('0.1');
@@ -132,8 +130,7 @@ test('<NumField> - renders a TextField with correct value (specified)', () => {
     const wrapper = mount(element, createContext({x: {type: Number}}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    // TODO: Check out NumField comment.
-    expect(wrapper.find(TextField).prop('value')).toBe('2');
+    expect(wrapper.find(TextField).prop('value')).toBe(2);
 });
 
 test('<NumField> - renders a TextField which correctly reacts on change', () => {
@@ -143,7 +140,6 @@ test('<NumField> - renders a TextField which correctly reacts on change', () => 
     const wrapper = mount(element, createContext({x: {type: Number}}, {onChange}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    // TODO: Check out NumField comment.
     expect(wrapper.find('input').simulate('change', {target: {value: '1'}})).toBeTruthy();
     expect(onChange).toHaveBeenLastCalledWith('x', 1);
 });
@@ -188,7 +184,6 @@ test('<NumField> - renders a TextField which correctly reacts on change (same va
     const wrapper = mount(element, createContext({x: {type: Number}}, {model: {x: 1}, onChange}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    // TODO: Check out NumField comment.
     expect(wrapper.find('input').simulate('change', {target: {value: '1'}})).toBeTruthy();
     expect(onChange).toHaveBeenLastCalledWith('x', 1);
 });
@@ -200,7 +195,6 @@ test('<NumField> - renders a TextField which correctly reacts on change (zero)',
     const wrapper = mount(element, createContext({x: {type: Number}}, {onChange}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    // TODO: Check out NumField comment.
     expect(wrapper.find('input').simulate('change', {target: {value: '0'}})).toBeTruthy();
     expect(onChange).toHaveBeenLastCalledWith('x', 0);
 });

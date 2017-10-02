@@ -392,7 +392,7 @@ describe('BaseField', () => {
             console.error = jest.fn();
 
             expect(() => mount(<TestField name="a" />)).toThrow('<TestField /> must be rendered within a form.');
-            expect(console.error).toHaveBeenCalledTimes(1);
+            expect(console.error).toHaveBeenCalledTimes(2);
         });
     });
 

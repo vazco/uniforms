@@ -315,7 +315,8 @@ test('<SelectField> - renders correct error text (specified)', () => {
     const element = <SelectField name="x" error={error} showInlineError errorMessage="Error" />;
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
 
-    expect(wrapper.children().last().text()).toBe('Error');
+    expect(wrapper.find('.ui.red.label').length).toBe(1);
+    expect(wrapper.find('.ui.red.label').text()).toBe('Error');
 });
 
 test('<SelectField> - renders correct error text (showInlineError=false)', () => {
@@ -323,5 +324,5 @@ test('<SelectField> - renders correct error text (showInlineError=false)', () =>
     const element = <SelectField name="x" error={error} showInlineError={false} errorMessage="Error" />;
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
 
-    expect(wrapper.children().last().text()).not.toBe('Error');
+    expect(wrapper.find('.ui.red.label').length).toBe(0);
 });
