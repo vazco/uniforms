@@ -26,7 +26,7 @@ describe('JSONSchemaBridge', () => {
         },
         type: 'object',
         properties: {
-            age: {type: 'integer'},
+            age: {type: 'integer', uniforms: {component: 'span'}},
             billingAddress: {$ref: '#/definitions/address'},
             dateOfBirth: {
                 type: 'string',
@@ -51,6 +51,7 @@ describe('JSONSchemaBridge', () => {
                 }
             },
             personalData: {$ref: '#/definitions/personalData'},
+            salary: {type: 'number'},
             shippingAddress: {
                 allOf: [
                     {$ref: '#/definitions/address'},
@@ -89,6 +90,7 @@ describe('JSONSchemaBridge', () => {
                     state: expect.any(Object),
                     street: expect.any(Object)
                 }),
+                _isRequired: expect.any(Boolean),
                 required: expect.arrayContaining(['street', 'city', 'state']),
                 type: 'object'
             });
@@ -117,6 +119,61 @@ describe('JSONSchemaBridge', () => {
         });
     });
 
+    describe('#getProps', () => {
+        it('works with allowedValues', () => {
+            expect(bridge.getProps('shippingAddress.type')).toEqual({
+                label: 'Type',
+                required: true,
+                allowedValues: ['residential', 'business']
+            });
+        });
+
+        it('works with allowedValues from props', () => {
+            expect(bridge.getProps('shippingAddress.type', {allowedValues: [1]})).toEqual({
+                label: 'Type',
+                required: true,
+                allowedValues: [1]
+            });
+        });
+
+        it('works with custom component', () => {
+            expect(bridge.getProps('age')).toEqual({
+                label: 'Age',
+                required: false,
+                component: 'span'
+            });
+        });
+
+        it('works with label (custom)', () => {
+            expect(bridge.getProps('dateOfBirth', {label: 'Date of death'})).toEqual({
+                label: 'Date of death',
+                required: false
+            });
+        });
+
+        it('works with label (true)', () => {
+            expect(bridge.getProps('dateOfBirth', {label: true})).toEqual({
+                label: 'Date of birth',
+                required: false
+            });
+        });
+
+        it('works with label (falsy)', () => {
+            expect(bridge.getProps('dateOfBirth', {label: null})).toEqual({
+                label: '',
+                required: false
+            });
+        });
+
+        it('works with Number type', () => {
+            expect(bridge.getProps('salary')).toEqual({
+                label: 'Salary',
+                required: false,
+                decimal: true
+            });
+        });
+    });
+
     describe('#getSubfields', () => {
         it('works on top level', () => {
             expect(bridge.getSubfields()).toEqual([
@@ -127,6 +184,7 @@ describe('JSONSchemaBridge', () => {
                 'email',
                 'friends',
                 'personalData',
+                'salary',
                 'shippingAddress'
             ]);
         });
@@ -159,6 +217,12 @@ describe('JSONSchemaBridge', () => {
             expect(bridge.getType('friends.$.lastName')).toBe(String);
             expect(bridge.getType('personalData')).toBe(Object);
             expect(bridge.getType('shippingAddress')).toBe(Object);
+        });
+    });
+
+    describe('#getValidator', () => {
+        it('calls correct validator', () => {
+            expect(bridge.getValidator()).toBe(bridge.validator);
         });
     });
 });

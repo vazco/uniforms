@@ -55,6 +55,7 @@ export default class JSONSchemaBridge extends Bridge {
     getField (name) {
         return joinName(null, name).reduce(
             (definition, next) => { // eslint-disable-line complexity
+                const isRequired = (definition._required || definition.required || []).includes(next);
                 if (next === '$' || next === '' + parseInt(next, 10)) {
                     invariant(definition.type === 'array', 'Field not found in schema: "%s"', name);
                     definition = Array.isArray(definition.items)
@@ -83,8 +84,8 @@ export default class JSONSchemaBridge extends Bridge {
                     definition[key] = definition[key].map(def => def.$ref ? resolveRef(def.$ref, this.schema) : def);
                 });
 
+                // Naive computation of combined type, properties and required
                 if (['allOf', 'anyOf', 'oneOf'].filter(key => definition[key]).length) {
-                    // Naive computation of combined type and properties
                     definition._type = (
                         [].concat(
                             definition.allOf || [],
@@ -92,13 +93,19 @@ export default class JSONSchemaBridge extends Bridge {
                             definition.oneOf || []
                         ).find(def => def.type) || {}
                     ).type;
-                    definition._properties = [].concat(
+                    const [properties, required] = [].concat(
                         definition.allOf || [],
                         definition.anyOf || [],
                         definition.oneOf || []
-                    ).reduce((_properties, {properties}) => Object.assign(_properties, properties), {});
+                    ).reduce(([_properties, _required], {properties, required}) =>
+                        [Object.assign(_properties, properties), _required.concat(required)],
+                    [{}, []]);
+
+                    definition._properties = properties;
+                    definition._required = required;
                 }
 
+                definition._isRequired = isRequired;
                 return definition;
             },
             this.schema.properties
@@ -109,8 +116,18 @@ export default class JSONSchemaBridge extends Bridge {
         return this.getField(name).default;
     }
 
-    getProps (/* name, props */) {
-        return 1;
+    getProps (name, {label = true, ...props} = {}) {
+        const {enum: allowedValues, _type, type = _type, uniforms, _isRequired} = this.getField(name);
+        const [fieldName] = joinName(null, name).slice(-1).map(str => str.replace(/([A-Z])/g, ' $1'));
+
+        return {
+            ...uniforms,
+            allowedValues,
+            decimal: type === 'number' || undefined,
+            label: label === true ? fieldName.charAt(0).toUpperCase() + fieldName.slice(1).toLowerCase() : label || '',
+            required: _isRequired,
+            ...props
+        };
     }
 
     getSubfields (name) {
