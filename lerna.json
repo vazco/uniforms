@@ -1,5 +1,5 @@
 {
-  "lerna": "2.0.0",
+  "lerna": "2.3.1",
   "hoist": true,
   "version": "1.21.0",
   "packages": [
