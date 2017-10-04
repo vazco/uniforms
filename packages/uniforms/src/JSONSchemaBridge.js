@@ -33,6 +33,7 @@ export default class JSONSchemaBridge extends Bridge {
         invariant(schema.properties, 'Schema does not contain properties field');
 
         this.schema = schema;
+        this._compiledSchema = {};
         this.validator = new Ajv({allErrors: true}).compile(schema);
     }
 
@@ -54,15 +55,20 @@ export default class JSONSchemaBridge extends Bridge {
 
     getField (name) {
         return joinName(null, name).reduce(
-            (definition, next) => { // eslint-disable-line complexity
-                const isRequired = (definition._required || definition.required || []).includes(next);
+            (definition, next, nextIndex, array) => { // eslint-disable-line complexity
+                const previous = joinName(array.slice(0, nextIndex));
+                const isRequired = (
+                    definition.required || (this._compiledSchema[previous] || {}).required || []
+                ).includes(next);
+
+                const _key = joinName(previous, next);
+                const _definition = this._compiledSchema[_key] || {};
+
                 if (next === '$' || next === '' + parseInt(next, 10)) {
                     invariant(definition.type === 'array', 'Field not found in schema: "%s"', name);
                     definition = Array.isArray(definition.items)
                         ? definition.items[parseInt(next, 10)]
                         : definition.items;
-                } else if (definition[next]) {
-                    definition = definition[next];
                 } else if (definition.type === 'object') {
                     definition = definition.properties[next];
                 } else {
@@ -81,34 +87,36 @@ export default class JSONSchemaBridge extends Bridge {
                 }
 
                 ['allOf', 'anyOf', 'oneOf'].filter(key => definition[key]).forEach(key => {
-                    definition[key] = definition[key].map(def => def.$ref ? resolveRef(def.$ref, this.schema) : def);
+                    _definition[key] = definition[key].map(def => def.$ref ? resolveRef(def.$ref, this.schema) : def);
                 });
 
                 // Naive computation of combined type, properties and required
                 if (['allOf', 'anyOf', 'oneOf'].filter(key => definition[key]).length) {
-                    definition._type = (
-                        [].concat(
-                            definition.allOf || [],
-                            definition.anyOf || [],
-                            definition.oneOf || []
-                        ).find(def => def.type) || {}
+                    _definition.type = (
+                        [].concat(_definition.allOf, _definition.anyOf, _definition.oneOf)
+                            .filter(def => def)
+                            .find(def => def.type)
+                        || {}
                     ).type;
-                    const [properties, required] = [].concat(
-                        definition.allOf || [],
-                        definition.anyOf || [],
-                        definition.oneOf || []
-                    ).reduce(([_properties, _required], {properties, required}) =>
-                        [Object.assign(_properties, properties), _required.concat(required)],
-                    [{}, []]);
+                    const [properties, required] = [].concat(_definition.allOf, _definition.anyOf, _definition.oneOf)
+                        .filter(def => def)
+                        .reduce(
+                            ([_properties, _required], {properties, required}) => [
+                                Object.assign(_properties, properties), _required.concat(required)
+                            ],
+                            [{}, []]
+                        );
 
-                    definition._properties = properties;
-                    definition._required = required;
+                    _definition.properties = properties;
+                    _definition.required = required;
                 }
 
-                definition._isRequired = isRequired;
+
+                this._compiledSchema[_key] = Object.assign(_definition, {isRequired});
+
                 return definition;
             },
-            this.schema.properties
+            this.schema
         );
     }
 
@@ -117,15 +125,17 @@ export default class JSONSchemaBridge extends Bridge {
     }
 
     getProps (name, {label = true, ...props} = {}) {
-        const {enum: allowedValues, _type, type = _type, uniforms, _isRequired} = this.getField(name);
+        const {enum: _enum, type: _type, uniforms} = this.getField(name);
+        const {enum: allowedValues = _enum, type: fieldType = _type, isRequired} = this._compiledSchema[name];
+
         const [fieldName] = joinName(null, name).slice(-1).map(str => str.replace(/([A-Z])/g, ' $1'));
 
         return {
             ...uniforms,
             allowedValues,
-            decimal: type === 'number' || undefined,
+            ...(fieldType === 'number' ? {decimal: true} : {}),
             label: label === true ? fieldName.charAt(0).toUpperCase() + fieldName.slice(1).toLowerCase() : label || '',
-            required: _isRequired,
+            required: isRequired,
             ...props
         };
     }
@@ -135,12 +145,8 @@ export default class JSONSchemaBridge extends Bridge {
             return Object.keys(this.schema.properties);
         }
 
-        const {
-            _type,
-            type: fieldType = _type,
-            _properties,
-            properties: fieldProperties = _properties
-        } = this.getField(name);
+        const {type: _type, properties: _properties} = this.getField(name);
+        const {type: fieldType = _type, properties: fieldProperties = _properties} = this._compiledSchema[name];
 
         if (fieldType === 'object') {
             return Object.keys(fieldProperties);
@@ -150,11 +156,8 @@ export default class JSONSchemaBridge extends Bridge {
     }
 
     getType (name) {
-        const {
-            _type,
-            type: fieldType = _type,
-            format: fieldFormat
-        } = this.getField(name);
+        const {type: _type, format: fieldFormat} = this.getField(name);
+        const {type: fieldType = _type} = this._compiledSchema[name];
 
         if (fieldFormat === 'date-time')               return Date;
         if (fieldType === 'string')                    return String;
@@ -163,7 +166,7 @@ export default class JSONSchemaBridge extends Bridge {
         if (fieldType === 'array')                     return Array;
         if (fieldType === 'boolean')                   return Boolean;
 
-        invariant(fieldType === 'null', 'Type null can not be represented as a field: "%s"', name);
+        invariant(fieldType === 'null', 'Field "%s" can not be represented as a type null', name);
 
         return fieldType;
     }

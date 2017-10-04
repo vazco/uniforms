@@ -90,7 +90,6 @@ describe('JSONSchemaBridge', () => {
                     state: expect.any(Object),
                     street: expect.any(Object)
                 }),
-                _isRequired: expect.any(Boolean),
                 required: expect.arrayContaining(['street', 'city', 'state']),
                 type: 'object'
             });
