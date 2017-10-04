@@ -8,7 +8,14 @@ describe('JSONSchemaBridge', () => {
                 type: 'object',
                 properties: {
                     city:   {type: 'string'},
-                    state:  {type: 'string'},
+                    state:  {
+                        type: 'string',
+                        options: [
+                            {label: 'Alabama',  value: 'AL'},
+                            {label: 'Alaska',   value: 'AK'},
+                            {label: 'Arkansas', value: 'AR'}
+                        ]
+                    },
                     street: {type: 'string'}
                 },
                 required: ['street', 'city', 'state']
@@ -21,12 +28,12 @@ describe('JSONSchemaBridge', () => {
                 },
                 required: ['lastName']
             },
-            firstName: {type: 'string'},
+            firstName: {type: 'string', default: 'John'},
             lastName: {type: 'string'}
         },
         type: 'object',
         properties: {
-            age: {type: 'integer', uniforms: {component: 'span'}},
+            age: {type: 'integer', uniforms: {component: 'span'}, default: 24},
             billingAddress: {$ref: '#/definitions/address'},
             dateOfBirth: {
                 type: 'string',
@@ -51,7 +58,14 @@ describe('JSONSchemaBridge', () => {
                 }
             },
             personalData: {$ref: '#/definitions/personalData'},
-            salary: {type: 'number'},
+            salary: {
+                type: 'number',
+                options: {
+                    low: 6000,
+                    medium: 12000,
+                    height: 18000
+                }
+            },
             shippingAddress: {
                 allOf: [
                     {$ref: '#/definitions/address'},
@@ -118,28 +132,42 @@ describe('JSONSchemaBridge', () => {
         });
     });
 
+    describe('#getInitialValue', () => {
+        it('works with undefined primitives', () => {
+            expect(bridge.getInitialValue('salary')).toBe(undefined);
+        });
+
+        it('works with defined primitives', () => {
+            expect(bridge.getInitialValue('age')).toBe(24);
+        });
+
+        it('works with default values', () => {
+            expect(bridge.getInitialValue('personalData.firstName')).toBe('John');
+        });
+    });
+
     describe('#getProps', () => {
         it('works with allowedValues', () => {
             expect(bridge.getProps('shippingAddress.type')).toEqual({
+                allowedValues: ['residential', 'business'],
                 label: 'Type',
-                required: true,
-                allowedValues: ['residential', 'business']
+                required: true
             });
         });
 
         it('works with allowedValues from props', () => {
             expect(bridge.getProps('shippingAddress.type', {allowedValues: [1]})).toEqual({
+                allowedValues: [1],
                 label: 'Type',
-                required: true,
-                allowedValues: [1]
+                required: true
             });
         });
 
         it('works with custom component', () => {
             expect(bridge.getProps('age')).toEqual({
+                component: 'span',
                 label: 'Age',
-                required: false,
-                component: 'span'
+                required: false
             });
         });
 
@@ -166,9 +194,43 @@ describe('JSONSchemaBridge', () => {
 
         it('works with Number type', () => {
             expect(bridge.getProps('salary')).toEqual({
+                allowedValues: ['low', 'medium', 'height'],
+                decimal: true,
                 label: 'Salary',
+                options: expect.anything(),
                 required: false,
-                decimal: true
+                transform: expect.anything()
+            });
+        });
+
+        it('works with options (array)', () => {
+            expect(bridge.getProps('billingAddress.state').transform('AL')).toBe('Alabama');
+            expect(bridge.getProps('billingAddress.state').transform('AK')).toBe('Alaska');
+            expect(bridge.getProps('billingAddress.state').allowedValues[0]).toBe('AL');
+            expect(bridge.getProps('billingAddress.state').allowedValues[1]).toBe('AK');
+        });
+
+        it('works with options (object)', () => {
+            expect(bridge.getProps('salary').transform('low')).toBe(6000);
+            expect(bridge.getProps('salary').transform('medium')).toBe(12000);
+            expect(bridge.getProps('salary').allowedValues[0]).toBe('low');
+            expect(bridge.getProps('salary').allowedValues[1]).toBe('medium');
+        });
+
+        it('works with options from props', () => {
+            const props = {options: {minimal: 4000, avarage: 8000}};
+            expect(bridge.getProps('salary', props).transform('minimal')).toBe(4000);
+            expect(bridge.getProps('salary', props).transform('avarage')).toBe(8000);
+            expect(bridge.getProps('salary', props).allowedValues[0]).toBe('minimal');
+            expect(bridge.getProps('salary', props).allowedValues[1]).toBe('avarage');
+        });
+
+        it('works with other props', () => {
+            expect(bridge.getProps('personalData.firstName', {x: 1, y: 1})).toEqual({
+                label: 'First name',
+                required: false,
+                x: 1,
+                y: 1
             });
         });
     });

@@ -34,7 +34,7 @@ export default class JSONSchemaBridge extends Bridge {
 
         this.schema = schema;
         this._compiledSchema = {};
-        this.validator = new Ajv({allErrors: true}).compile(schema);
+        this.validator = new Ajv({allErrors: true, useDefaults: true}).compile(schema);
     }
 
     static check (schema) {
@@ -121,21 +121,40 @@ export default class JSONSchemaBridge extends Bridge {
     }
 
     getInitialValue (name) {
-        return this.getField(name).default;
+        const {default: _default} = this.getField(name);
+        const {default: defaultValue = _default} = this._compiledSchema[name];
+        return defaultValue;
     }
 
-    getProps (name, {label = true, ...props} = {}) {
-        const {enum: _enum, type: _type, uniforms} = this.getField(name);
-        const {enum: allowedValues = _enum, type: fieldType = _type, isRequired} = this._compiledSchema[name];
+    getProps (name, {label = true, options: opts, ...props} = {}) {
+        const {enum: _enum, type: _type, options: _options, uniforms} = this.getField(name);
+        const {
+            enum: allowedValues = _enum, options = _options,type: fieldType = _type, isRequired
+        } = this._compiledSchema[name];
 
         const [fieldName] = joinName(null, name).slice(-1).map(str => str.replace(/([A-Z])/g, ' $1'));
 
-        return {
-            ...uniforms,
+        const ready = {
             allowedValues,
             ...(fieldType === 'number' ? {decimal: true} : {}),
+            options: opts || options,
             label: label === true ? fieldName.charAt(0).toUpperCase() + fieldName.slice(1).toLowerCase() : label || '',
-            required: isRequired,
+            required: isRequired
+        };
+
+        if (ready.options) {
+            if (!Array.isArray(ready.options)) {
+                ready.transform = value => ready.options[value];
+                ready.allowedValues = Object.keys(ready.options);
+            } else {
+                ready.transform = value => ready.options.find(option => option.value === value).label;
+                ready.allowedValues = ready.options.map(option => option.value);
+            }
+        }
+
+        return {
+            ...uniforms,
+            ...ready,
             ...props
         };
     }
