@@ -42,25 +42,26 @@ export default class JSONSchemaBridge extends Bridge {
     }
 
     getError (name, error) {
-        const details = Array.isArray(error) &&
-            error.filter(({dataPath = ''}) => dataPath.substring(1) === name)
-                .reduce((acc, {message = []}) => acc.concat(message), []);
-
-        return error && details.length > 0 && {name, details};
+        return (
+            error &&
+            error.details &&
+            error.details.find &&
+            error.details.find(({dataPath = ''}) => dataPath.substring(1) === name)
+        );
     }
 
     getErrorMessage (name, error) {
-        const {details: [errorMessage] = []} = this.getError(name, error) || {};
+        const {message} = this.getError(name, error) || {};
 
-        return errorMessage || '';
+        return message || '';
     }
 
     getErrorMessages (error) {
-        if (Array.isArray(error)) {
-            return error.reduce((acc, {message}) => acc.concat(message), []);
-        }
-
         if (error) {
+            if (Array.isArray(error.details)) {
+                return error.details.reduce((acc, {message}) => acc.concat(message), []);
+            }
+
             return [error.message || error];
         }
 
@@ -221,7 +222,7 @@ export default class JSONSchemaBridge extends Bridge {
             this.validator(model);
 
             if (this.validator.errors && this.validator.errors.length) {
-                throw this.validator.errors;
+                throw {details: this.validator.errors};
             }
         };
     }

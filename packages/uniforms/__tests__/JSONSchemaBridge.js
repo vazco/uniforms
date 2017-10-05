@@ -99,15 +99,13 @@ describe('JSONSchemaBridge', () => {
         });
 
         it('works with invalid error', () => {
-            expect(bridge.getError('age', [])).not.toBeTruthy();
-            expect(bridge.getError('age', [{invalid: true}])).not.toBeTruthy();
+            expect(bridge.getError('age', {})).not.toBeTruthy();
+            expect(bridge.getError('age', {invalid: true})).not.toBeTruthy();
         });
 
         it('works with correct error', () => {
-            expect(bridge.getError('age', [{dataPath: '.age', message: 'Zing!'}])).toEqual({
-                name: 'age', details: expect.any(Array)
-            });
-            expect(bridge.getError('age', [{dataPath: '.field'}])).not.toBeTruthy();
+            expect(bridge.getError('age', {details: [{dataPath: '.age'}]})).toEqual({dataPath: '.age'});
+            expect(bridge.getError('age', {details: [{dataPath: '.field'}]})).not.toBeTruthy();
         });
     });
 
@@ -117,13 +115,15 @@ describe('JSONSchemaBridge', () => {
         });
 
         it('works with invalid error', () => {
-            expect(bridge.getErrorMessage('age', [])).not.toBeTruthy();
-            expect(bridge.getErrorMessage('age', [{invalid: true}])).not.toBeTruthy();
+            expect(bridge.getErrorMessage('age', {})).not.toBeTruthy();
+            expect(bridge.getErrorMessage('age', {invalid: true})).not.toBeTruthy();
         });
 
         it('works with correct error', () => {
-            expect(bridge.getErrorMessage('age', [{dataPath: '.age', message: 'Zing!'}])).toBe('Zing!');
-            expect(bridge.getErrorMessage('age', [{dataPath: '.field', message: 'Ignore!'}])).not.toBeTruthy();
+            expect(bridge.getErrorMessage('age', {details: [{dataPath: '.age', message: 'Zing!'}]})).toBe('Zing!');
+            expect(
+                bridge.getErrorMessage('age', {details: [{dataPath: '.field', message: 'Ignore!'}]})
+            ).not.toBeTruthy();
         });
     });
 
@@ -142,8 +142,8 @@ describe('JSONSchemaBridge', () => {
         });
 
         it('works with ValidationError', () => {
-            expect(bridge.getErrorMessages([{dataPath: '.age', message: 'Zing!'}])).toEqual(['Zing!']);
-            expect(bridge.getErrorMessages([{dataPath: '.field', message: 'Ignore!'}])).toEqual(['Ignore!']);
+            expect(bridge.getErrorMessages({details: [{dataPath: '.age', message: 'Zing!'}]})).toEqual(['Zing!']);
+            expect(bridge.getErrorMessages({details: [{dataPath: '.field', message: 'Ignore!'}]})).toEqual(['Ignore!']);
         });
     });
 
