@@ -77,7 +77,8 @@ describe('JSONSchemaBridge', () => {
                     }
                 ]
             }
-        }
+        },
+        required: ['dateOfBirth']
     };
 
     const bridge = new JSONSchemaBridge(schema);
@@ -89,6 +90,60 @@ describe('JSONSchemaBridge', () => {
 
         it('works correctly without schema', () => {
             expect(JSONSchemaBridge.check()).not.toBeTruthy();
+        });
+    });
+
+    describe('#getError', () => {
+        it('works without error', () => {
+            expect(bridge.getError('age')).not.toBeTruthy();
+        });
+
+        it('works with invalid error', () => {
+            expect(bridge.getError('age', [])).not.toBeTruthy();
+            expect(bridge.getError('age', [{invalid: true}])).not.toBeTruthy();
+        });
+
+        it('works with correct error', () => {
+            expect(bridge.getError('age', [{dataPath: '.age', message: 'Zing!'}])).toEqual({
+                name: 'age', details: expect.any(Array)
+            });
+            expect(bridge.getError('age', [{dataPath: '.field'}])).not.toBeTruthy();
+        });
+    });
+
+    describe('#getErrorMessage', () => {
+        it('works without error', () => {
+            expect(bridge.getErrorMessage('age')).not.toBeTruthy();
+        });
+
+        it('works with invalid error', () => {
+            expect(bridge.getErrorMessage('age', [])).not.toBeTruthy();
+            expect(bridge.getErrorMessage('age', [{invalid: true}])).not.toBeTruthy();
+        });
+
+        it('works with correct error', () => {
+            expect(bridge.getErrorMessage('age', [{dataPath: '.age', message: 'Zing!'}])).toBe('Zing!');
+            expect(bridge.getErrorMessage('age', [{dataPath: '.field', message: 'Ignore!'}])).not.toBeTruthy();
+        });
+    });
+
+    describe('#getErrorMessages', () => {
+        it('works without error', () => {
+            expect(bridge.getErrorMessages()).toEqual([]);
+        });
+
+        it('works with other errors', () => {
+            expect(bridge.getErrorMessages('correct')).toEqual(['correct']);
+            expect(bridge.getErrorMessages(999999999)).toEqual([999999999]);
+        });
+
+        it('works with Error', () => {
+            expect(bridge.getErrorMessages(new Error('correct'))).toEqual(['correct']);
+        });
+
+        it('works with ValidationError', () => {
+            expect(bridge.getErrorMessages([{dataPath: '.age', message: 'Zing!'}])).toEqual(['Zing!']);
+            expect(bridge.getErrorMessages([{dataPath: '.field', message: 'Ignore!'}])).toEqual(['Ignore!']);
         });
     });
 
@@ -133,6 +188,16 @@ describe('JSONSchemaBridge', () => {
     });
 
     describe('#getInitialValue', () => {
+        it('works with arrays', () => {
+            expect(bridge.getInitialValue('friends')).toEqual([]);
+            expect(bridge.getInitialValue('friends', {initialCount: 1})).toEqual([{}]);
+            expect(bridge.getInitialValue('friends.0.firstName', {initialCount: 1})).toBe('John');
+        });
+
+        it('works with objects', () => {
+            expect(bridge.getInitialValue('billingAddress')).toEqual({});
+        });
+
         it('works with undefined primitives', () => {
             expect(bridge.getInitialValue('salary')).toBe(undefined);
         });
@@ -174,21 +239,21 @@ describe('JSONSchemaBridge', () => {
         it('works with label (custom)', () => {
             expect(bridge.getProps('dateOfBirth', {label: 'Date of death'})).toEqual({
                 label: 'Date of death',
-                required: false
+                required: true
             });
         });
 
         it('works with label (true)', () => {
             expect(bridge.getProps('dateOfBirth', {label: true})).toEqual({
                 label: 'Date of birth',
-                required: false
+                required: true
             });
         });
 
         it('works with label (falsy)', () => {
             expect(bridge.getProps('dateOfBirth', {label: null})).toEqual({
                 label: '',
-                required: false
+                required: true
             });
         });
 
@@ -283,7 +348,7 @@ describe('JSONSchemaBridge', () => {
 
     describe('#getValidator', () => {
         it('calls correct validator', () => {
-            expect(bridge.getValidator()).toBe(bridge.validator);
+            expect(() => bridge.getValidator()({})).toThrow();
         });
     });
 });

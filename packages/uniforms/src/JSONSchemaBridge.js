@@ -41,16 +41,30 @@ export default class JSONSchemaBridge extends Bridge {
         return schema && Ajv && new Ajv().validateSchema(schema);
     }
 
-    getError (/* name, error */) {
-        return;
+    getError (name, error) {
+        const details = Array.isArray(error) &&
+            error.filter(({dataPath = ''}) => dataPath.substring(1) === name)
+                .reduce((acc, {message = []}) => acc.concat(message), []);
+
+        return error && details.length > 0 && {name, details};
     }
 
-    getErrorMessage (/* name, error */) {
-        return;
+    getErrorMessage (name, error) {
+        const {details: [errorMessage] = []} = this.getError(name, error) || {};
+
+        return errorMessage || '';
     }
 
-    getErrorMessages (/* error */) {
-        return;
+    getErrorMessages (error) {
+        if (Array.isArray(error)) {
+            return error.reduce((acc, {message}) => acc.concat(message), []);
+        }
+
+        if (error) {
+            return [error.message || error];
+        }
+
+        return [];
     }
 
     getField (name) {
@@ -120,9 +134,21 @@ export default class JSONSchemaBridge extends Bridge {
         );
     }
 
-    getInitialValue (name) {
-        const {default: _default} = this.getField(name);
-        const {default: defaultValue = _default} = this._compiledSchema[name];
+    getInitialValue (name, props = {}) {
+        const {default: _default, type: _type} = this.getField(name);
+        const {default: defaultValue = _default, type = _type} = this._compiledSchema[name];
+
+        if (type === 'array') {
+            const item = this.getInitialValue(joinName(name, '0'));
+            const items = props.initialCount || 0;
+
+            return [...Array(items)].map(() => item);
+        }
+
+        if (type === 'object') {
+            return {};
+        }
+
         return defaultValue;
     }
 
@@ -191,6 +217,12 @@ export default class JSONSchemaBridge extends Bridge {
     }
 
     getValidator (/* options */) {
-        return this.validator;
+        return model => {
+            this.validator(model);
+
+            if (this.validator.errors && this.validator.errors.length) {
+                throw this.validator.errors;
+            }
+        };
     }
 }
