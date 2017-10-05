@@ -107,6 +107,22 @@ test('<NumField> - renders a TextField with correct value (model)', () => {
 
     expect(wrapper.find(TextField)).toHaveLength(1);
     expect(wrapper.find(TextField).prop('value')).toBe('1');
+
+    // NOTE: All following tests are here to cover hacky NumField implementation.
+    expect(wrapper.find('input').simulate('change', {target: {value: '0.1'}})).toBeTruthy();
+    wrapper.setProps({value: '0.1'});
+    expect(wrapper.find('input').prop('value')).toBe('0.1');
+    wrapper.setProps({value: undefined});
+    expect(wrapper.find('input').prop('value')).toBe('');
+    wrapper.setProps({value: undefined});
+    expect(wrapper.find('input').prop('value')).toBe('');
+    wrapper.setProps({value: 2});
+    expect(wrapper.find('input').prop('value')).toBe('2');
+    wrapper.setProps({value: 2});
+    expect(wrapper.find('input').prop('value')).toBe('2');
+    wrapper.setProps({value: 1, decimal: false});
+    expect(wrapper.find('input').prop('value')).toBe('1');
+    wrapper.setProps({value: 1, decimal: false});
 });
 
 test('<NumField> - renders a TextField with correct value (specified)', () => {
