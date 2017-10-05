@@ -6,6 +6,7 @@ import ValidatedForm from 'uniforms/ValidatedForm';
 jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
 
+// FIXME: This fail sometimes when ran simultaneously.
 describe('ValidatedForm', () => {
     const onChange   = jest.fn();
     const onSubmit   = jest.fn();

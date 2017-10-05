@@ -113,7 +113,7 @@ test('<NumField> - renders an input with correct value (specified)', () => {
     const wrapper = mount(element, createContext({x: {type: Number}}));
 
     expect(wrapper.find('input')).toHaveLength(1);
-    expect(wrapper.find('input').prop('value')).toBe(2);
+    expect(wrapper.find('input').prop('value')).toBe('2');
 });
 
 test('<NumField> - renders an input which correctly reacts on change', () => {

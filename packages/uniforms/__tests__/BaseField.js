@@ -414,7 +414,7 @@ describe('BaseField', () => {
                 reactContext1
             );
 
-            const spy = jest.spyOn(wrapper.get(0), 'render');
+            const spy = jest.spyOn(wrapper.instance(), 'render');
 
             wrapper.update();
 
