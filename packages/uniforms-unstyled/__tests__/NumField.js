@@ -122,6 +122,7 @@ test('<NumField> - renders an input with correct value (model)', () => {
     wrapper.setProps({value: 1, decimal: false});
     expect(wrapper.find('input').prop('value')).toBe('1');
     wrapper.setProps({value: 1, decimal: false});
+    expect(wrapper.find('input').prop('value')).toBe('1');
 });
 
 test('<NumField> - renders an input with correct value (specified)', () => {
