@@ -6,12 +6,15 @@ import GraphQLBridge from 'uniforms/GraphQLBridge';
 
 describe('GraphQLBridge', () => {
     const schemaI = `
+        scalar Scalar
+
         enum AccessLevel {
             Admin
         }
 
         input Author {
             id:        ID!
+            confirmed: Boolean
             decimal:   Float
             firstName: String = "John"
             lastName:  String = "Doe"
@@ -26,6 +29,7 @@ describe('GraphQLBridge', () => {
         input Post {
             id:       Int!
             author:   Author!
+            custom:   Scalar
             title:    String
             votes:    Int
             example:  ID
@@ -284,6 +288,7 @@ describe('GraphQLBridge', () => {
             expect(bridgeI.getSubfields()).toEqual([
                 'id',
                 'author',
+                'custom',
                 'title',
                 'votes',
                 'example',
@@ -294,6 +299,7 @@ describe('GraphQLBridge', () => {
         it('works with nested types', () => {
             expect(bridgeI.getSubfields('author')).toEqual([
                 'id',
+                'confirmed',
                 'decimal',
                 'firstName',
                 'lastName',
@@ -312,6 +318,7 @@ describe('GraphQLBridge', () => {
         [[astI, bridgeI, 'input'], [astT, bridgeT, 'type']].forEach(([ast, bridge, mode]) => {
             it(`works with any type (${mode})`, () => {
                 expect(bridge.getType('author')).toBe(Object);
+                expect(bridge.getType('author.confirmed')).toBe(Boolean);
                 expect(bridge.getType('author.decimal')).toBe(Number);
                 expect(bridge.getType('author.firstName')).toBe(String);
                 expect(bridge.getType('author.id')).toBe(String);
@@ -329,6 +336,7 @@ describe('GraphQLBridge', () => {
                 expect(bridge.getType('category.$.owners.$.lastName')).toBe(String);
                 expect(bridge.getType('category.$.owners.$.tags')).toBe(Array);
                 expect(bridge.getType('category.$.owners.$.tags.$')).toBe(String);
+                expect(bridge.getType('custom')).toBe(ast.getType('Scalar'));
                 expect(bridge.getType('example')).toBe(String);
                 expect(bridge.getType('id')).toBe(Number);
                 expect(bridge.getType('title')).toBe(String);
