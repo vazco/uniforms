@@ -1,4 +1,3 @@
-import {GraphQLID}      from 'graphql';
 import {GraphQLString}  from 'graphql';
 import {buildASTSchema} from 'graphql';
 import {parse}          from 'graphql';
@@ -12,7 +11,7 @@ describe('GraphQLBridge', () => {
         }
 
         input Author {
-            id:        String!
+            id:        ID!
             decimal:   Float
             firstName: String = "John"
             lastName:  String = "Doe"
@@ -330,7 +329,7 @@ describe('GraphQLBridge', () => {
                 expect(bridge.getType('category.$.owners.$.lastName')).toBe(String);
                 expect(bridge.getType('category.$.owners.$.tags')).toBe(Array);
                 expect(bridge.getType('category.$.owners.$.tags.$')).toBe(String);
-                expect(bridge.getType('example')).toBe(GraphQLID);
+                expect(bridge.getType('example')).toBe(String);
                 expect(bridge.getType('id')).toBe(Number);
                 expect(bridge.getType('title')).toBe(String);
                 expect(bridge.getType('votes')).toBe(Number);
