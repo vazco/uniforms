@@ -81,15 +81,15 @@ describe('JSONSchemaBridge', () => {
         required: ['dateOfBirth']
     };
 
-    const bridge = new JSONSchemaBridge(schema);
+    const validator = jest.fn();
+    const bridge = new JSONSchemaBridge(schema, validator);
 
     describe('#check()', () => {
-        it('works correctly with schema', () => {
-            expect(JSONSchemaBridge.check(schema)).toBeTruthy();
-        });
-
-        it('works correctly without schema', () => {
+        it('always returns false', () => {
             expect(JSONSchemaBridge.check()).not.toBeTruthy();
+            expect(JSONSchemaBridge.check(bridge)).not.toBeTruthy();
+            expect(JSONSchemaBridge.check(schema)).not.toBeTruthy();
+            expect(JSONSchemaBridge.check(validator)).not.toBeTruthy();
         });
     });
 
@@ -149,41 +149,47 @@ describe('JSONSchemaBridge', () => {
 
     describe('#getField', () => {
         it('returns correct definition (flat)', () => {
-            expect(bridge.getField('age')).toEqual(expect.objectContaining({type: 'integer'}));
+            expect(bridge.getField('age')).toEqual({type: 'integer', default: 24, uniforms: {component: 'span'}});
         });
 
         it('returns correct definition (flat with $ref)', () => {
             expect(bridge.getField('billingAddress')).toEqual({
                 properties: expect.objectContaining({
-                    city: expect.any(Object),
-                    state: expect.any(Object),
-                    street: expect.any(Object)
+                    city: {type: 'string'},
+                    state: {
+                        type: 'string',
+                        options: [
+                            {label: 'Alabama', value: 'AL'},
+                            {label: 'Alaska', value: 'AK'},
+                            {label: 'Arkansas', value: 'AR'}
+                        ]
+                    },
+                    street: {type: 'string'}
                 }),
-                required: expect.arrayContaining(['street', 'city', 'state']),
+                required: ['street', 'city', 'state'],
                 type: 'object'
             });
         });
 
+
         it('returns correct definition (nested)', () => {
-            expect(bridge.getField('email.work')).toEqual(expect.objectContaining({type: 'string'}));
+            expect(bridge.getField('email.work')).toEqual({type: 'string'});
         });
 
         it('returns correct definition (nested with $ref)', () => {
-            expect(bridge.getField('personalData.firstName')).toEqual(expect.objectContaining({type: 'string'}));
+            expect(bridge.getField('personalData.firstName')).toEqual({default: 'John', type: 'string'});
         });
 
         it('returns correct definition (array tuple)', () => {
-            expect(bridge.getField('dateOfBirthTuple.1')).toEqual(expect.objectContaining({type: 'string'}));
+            expect(bridge.getField('dateOfBirthTuple.1')).toEqual({type: 'string'});
         });
 
         it('returns correct definition (array flat $ref)', () => {
-            expect(bridge.getField('friends.$')).toEqual(expect.objectContaining({
-                type: expect.any(String)
-            }));
+            expect(bridge.getField('friends.$')).toEqual(expect.objectContaining({type: expect.any(String)}));
         });
 
         it('returns correct definition (array flat $ref, nested property)', () => {
-            expect(bridge.getField('friends.$.firstName')).toEqual(expect.objectContaining({type: 'string'}));
+            expect(bridge.getField('friends.$.firstName')).toEqual({default: 'John', type: 'string'});
         });
     });
 
@@ -348,7 +354,7 @@ describe('JSONSchemaBridge', () => {
 
     describe('#getValidator', () => {
         it('calls correct validator', () => {
-            expect(() => bridge.getValidator()({})).toThrow();
+            expect(bridge.getValidator()).toBe(validator);
         });
     });
 });

@@ -1,13 +1,7 @@
 import invariant from 'fbjs/lib/invariant';
-import joinName  from './joinName';
 
 import Bridge from './Bridge';
-
-let Ajv;
-try {
-    const r = require; // Silence Meteor missing module warning
-    Ajv = r('ajv');
-} catch (_) { /* Ignore it. */ }
+import joinName  from './joinName';
 
 const resolveRef = (referance, schema) => {
     invariant(
@@ -27,18 +21,16 @@ const resolveRef = (referance, schema) => {
 };
 
 export default class JSONSchemaBridge extends Bridge {
-    constructor (schema) {
+    constructor (schema, validator) {
         super();
-
-        invariant(schema.properties, 'Schema does not contain properties field');
 
         this.schema = schema;
         this._compiledSchema = {};
-        this.validator = new Ajv({allErrors: true, useDefaults: true}).compile(schema);
+        this.validator = validator;
     }
 
-    static check (schema) {
-        return schema && Ajv && new Ajv().validateSchema(schema);
+    static check () {
+        return false;
     }
 
     getError (name, error) {
@@ -46,14 +38,14 @@ export default class JSONSchemaBridge extends Bridge {
             error &&
             error.details &&
             error.details.find &&
-            error.details.find(({dataPath = ''}) => dataPath.substring(1) === name)
+            error.details.find(detail => detail.dataPath && detail.dataPath.substring(1) === name)
         );
     }
 
     getErrorMessage (name, error) {
-        const {message} = this.getError(name, error) || {};
+        const scopedError = this.getError(name, error) || {};
 
-        return message || '';
+        return scopedError && scopedError.message || '';
     }
 
     getErrorMessages (error) {
@@ -205,25 +197,20 @@ export default class JSONSchemaBridge extends Bridge {
         const {type: _type, format: fieldFormat} = this.getField(name);
         const {type: fieldType = _type} = this._compiledSchema[name];
 
-        if (fieldFormat === 'date-time')               return Date;
-        if (fieldType === 'string')                    return String;
-        if (['number', 'integer'].includes(fieldType)) return Number;
-        if (fieldType === 'object')                    return Object;
-        if (fieldType === 'array')                     return Array;
-        if (fieldType === 'boolean')                   return Boolean;
+        if (fieldFormat === 'date-time') return Date;
+        if (fieldType   === 'string')    return String;
+        if (fieldType   === 'number')    return Number;
+        if (fieldType   === 'integer')   return Number;
+        if (fieldType   === 'object')    return Object;
+        if (fieldType   === 'array')     return Array;
+        if (fieldType   === 'boolean')   return Boolean;
 
         invariant(fieldType === 'null', 'Field "%s" can not be represented as a type null', name);
 
         return fieldType;
     }
 
-    getValidator (/* options */) {
-        return model => {
-            this.validator(model);
-
-            if (this.validator.errors && this.validator.errors.length) {
-                throw {details: this.validator.errors};
-            }
-        };
+    getValidator () {
+        return this.validator;
     }
 }
