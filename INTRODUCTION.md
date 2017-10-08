@@ -29,6 +29,7 @@
         - [Example: `RatingField`](#example-ratingfield)
     - [Schemas](#schemas)
         - [GraphQL definition](#graphql-definition)
+        - [JSON schema definition](#json-schema-definition)
         - [SimpleSchema definition](#simpleschema-definition)
         - [Example: `MyLittleSchema`](#example-mylittleschema)
     - [Context data](#context-data)
@@ -700,6 +701,48 @@ const schemaValidator = model => {
 };
 
 const bridge = new GraphQLBridge(schemaType, schemaValidator, schemaData);
+
+// Later...
+
+<ValidatedForm schema={bridge} />
+```
+
+### JSON schema definition
+
+```js
+import JSONSchemaBridge from 'uniforms/JSONSchemaBridge';
+import Ajv              from 'ajv';
+
+const schema = {
+    title: 'Person',
+    type: 'object',
+    properties: {
+        firstName: {
+            type: 'string'
+        },
+        lastName: {
+            type: 'string'
+        },
+        age: {
+            description: 'Age in years',
+            type: 'integer',
+            minimum: 0
+        }
+    },
+    required: ['firstName', 'lastName']
+};
+
+const validator = new Ajv({allErrors: true, useDefaults: true}).compile(schema);
+
+const schemaValidator = model => {
+    validator(model);
+
+    if (validator.errors && validator.errors.length) {
+        throw {details: validator.errors};
+    }
+};
+
+const bridge = new JSONSchemaBridge(schema, schemaValidator);
 
 // Later...
 
