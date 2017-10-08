@@ -205,7 +205,7 @@ export default class JSONSchemaBridge extends Bridge {
         if (fieldType   === 'array')     return Array;
         if (fieldType   === 'boolean')   return Boolean;
 
-        invariant(fieldType === 'null', 'Field "%s" can not be represented as a type null', name);
+        invariant(fieldType !== 'null', 'Field "%s" can not be represented as a type null', name);
 
         return fieldType;
     }

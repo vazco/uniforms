@@ -35,6 +35,7 @@ describe('JSONSchemaBridge', () => {
         properties: {
             age: {type: 'integer', uniforms: {component: 'span'}, default: 24},
             billingAddress: {$ref: '#/definitions/address'},
+            custom: {type: 'custom'},
             dateOfBirth: {
                 type: 'string',
                 format: 'date-time'
@@ -57,6 +58,8 @@ describe('JSONSchemaBridge', () => {
                     $ref: '#/definitions/personalData'
                 }
             },
+            hasAJob: {type: 'boolean'},
+            invalid: {type: 'null'},
             personalData: {$ref: '#/definitions/personalData'},
             salary: {
                 type: 'number',
@@ -311,10 +314,13 @@ describe('JSONSchemaBridge', () => {
             expect(bridge.getSubfields()).toEqual([
                 'age',
                 'billingAddress',
+                'custom',
                 'dateOfBirth',
                 'dateOfBirthTuple',
                 'email',
                 'friends',
+                'hasAJob',
+                'invalid',
                 'personalData',
                 'salary',
                 'shippingAddress'
@@ -338,6 +344,7 @@ describe('JSONSchemaBridge', () => {
             expect(bridge.getType('billingAddress.city')).toBe(String);
             expect(bridge.getType('billingAddress.state')).toBe(String);
             expect(bridge.getType('billingAddress.street')).toBe(String);
+            expect(bridge.getType('custom')).toBe('custom');
             expect(bridge.getType('dateOfBirth')).toBe(Date);
             expect(bridge.getType('dateOfBirthTuple')).toBe(Array);
             expect(bridge.getType('email')).toBe(Object);
@@ -347,7 +354,10 @@ describe('JSONSchemaBridge', () => {
             expect(bridge.getType('friends.$')).toBe(Object);
             expect(bridge.getType('friends.$.firstName')).toBe(String);
             expect(bridge.getType('friends.$.lastName')).toBe(String);
+            expect(bridge.getType('hasAJob')).toBe(Boolean);
+            expect(() => bridge.getType('invalid')).toThrow(/can not be represented as a type null/);
             expect(bridge.getType('personalData')).toBe(Object);
+            expect(bridge.getType('salary')).toBe(Number);
             expect(bridge.getType('shippingAddress')).toBe(Object);
         });
     });
