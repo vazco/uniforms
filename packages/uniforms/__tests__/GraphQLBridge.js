@@ -93,33 +93,33 @@ describe('GraphQLBridge', () => {
 
     describe('#getError', () => {
         it('works without error', () => {
-            expect(bridgeI.getError('title')).not.toBeTruthy();
+            expect(bridgeI.getError('title')).toBe(null);
         });
 
         it('works with invalid error', () => {
-            expect(bridgeI.getError('title', {})).not.toBeTruthy();
-            expect(bridgeI.getError('title', {invalid: true})).not.toBeTruthy();
+            expect(bridgeI.getError('title', {})).toBe(null);
+            expect(bridgeI.getError('title', {invalid: true})).toBe(null);
         });
 
         it('works with correct error', () => {
             expect(bridgeI.getError('title', {details: [{name: 'title'}]})).toEqual({name: 'title'});
-            expect(bridgeI.getError('title', {details: [{name: 'field'}]})).not.toBeTruthy();
+            expect(bridgeI.getError('title', {details: [{name: 'field'}]})).toBe(null);
         });
     });
 
     describe('#getErrorMessage', () => {
         it('works without error', () => {
-            expect(bridgeI.getErrorMessage('title')).not.toBeTruthy();
+            expect(bridgeI.getErrorMessage('title')).toBe('');
         });
 
         it('works with invalid error', () => {
-            expect(bridgeI.getErrorMessage('title', {})).not.toBeTruthy();
-            expect(bridgeI.getErrorMessage('title', {invalid: true})).not.toBeTruthy();
+            expect(bridgeI.getErrorMessage('title', {})).toBe('');
+            expect(bridgeI.getErrorMessage('title', {invalid: true})).toBe('');
         });
 
         it('works with correct error', () => {
             expect(bridgeI.getErrorMessage('title', {details: [{name: 'title', message: '!'}]})).toBe('!');
-            expect(bridgeI.getErrorMessage('title', {details: [{name: 'field', message: '$'}]})).not.toBeTruthy();
+            expect(bridgeI.getErrorMessage('title', {details: [{name: 'field', message: '$'}]})).toBe('');
         });
     });
 

@@ -1,5 +1,6 @@
 ## Next:
 - **Added:** Support for `GraphQLID` in `GraphQLBridge`. [\#281](https://github.com/vazco/uniforms/issues/281)
+- **Changed:** Field `error` prop is not changing from `null` to `undefined` after validation.
 
 ## [v1.21.0](https://github.com/vazco/uniforms/tree/v1.21.0) (2017-09-28)
 - **Added:** Support for `checkbox` in `BoolField` in `uniforms-antd`. [\#348](https://github.com/vazco/uniforms/issues/348)

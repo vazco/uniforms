@@ -57,16 +57,12 @@ export default class SimpleSchema2Bridge extends Bridge {
             error.details &&
             error.details.find &&
             error.details.find(error => error.name === name)
-        );
+        ) || null;
     }
 
     getErrorMessage (name, error) {
         const scopedError = this.getError(name, error);
-        if (scopedError) {
-            return this.schema.messageForError(scopedError);
-        }
-
-        return '';
+        return !scopedError ? '' : this.schema.messageForError(scopedError);
     }
 
     getErrorMessages (error) {

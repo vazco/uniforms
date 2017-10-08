@@ -53,33 +53,33 @@ describe('SimpleSchema2Bridge', () => {
 
     describe('#getError', () => {
         it('works without error', () => {
-            expect(bridge.getError('a')).not.toBeTruthy();
+            expect(bridge.getError('a')).toBe(null);
         });
 
         it('works with invalid error', () => {
-            expect(bridge.getError('a', {})).not.toBeTruthy();
-            expect(bridge.getError('a', {invalid: true})).not.toBeTruthy();
+            expect(bridge.getError('a', {})).toBe(null);
+            expect(bridge.getError('a', {invalid: true})).toBe(null);
         });
 
         it('works with correct error', () => {
             expect(bridge.getError('a', {details: [{name: 'a'}]})).toEqual({name: 'a'});
-            expect(bridge.getError('a', {details: [{name: 'b'}]})).not.toBeTruthy();
+            expect(bridge.getError('a', {details: [{name: 'b'}]})).toBe(null);
         });
     });
 
     describe('#getErrorMessage', () => {
         it('works without error', () => {
-            expect(bridge.getErrorMessage('a')).not.toBeTruthy();
+            expect(bridge.getErrorMessage('a')).toBe('');
         });
 
         it('works with invalid error', () => {
-            expect(bridge.getErrorMessage('a', {})).not.toBeTruthy();
-            expect(bridge.getErrorMessage('a', {invalid: true})).not.toBeTruthy();
+            expect(bridge.getErrorMessage('a', {})).toBe('');
+            expect(bridge.getErrorMessage('a', {invalid: true})).toBe('');
         });
 
         it('works with correct error', () => {
-            expect(bridge.getErrorMessage('a', {details: [{name: 'a', details: {value: 1}}]})).toBeTruthy();
-            expect(bridge.getErrorMessage('a', {details: [{name: 'b', details: {value: 1}}]})).not.toBeTruthy();
+            expect(bridge.getErrorMessage('a', {details: [{name: 'a', details: {value: 1}}]})).toBe('a is invalid');
+            expect(bridge.getErrorMessage('a', {details: [{name: 'b', details: {value: 1}}]})).toBe('');
         });
     });
 
@@ -98,8 +98,8 @@ describe('SimpleSchema2Bridge', () => {
         });
 
         it('works with ValidationError', () => {
-            expect(bridge.getErrorMessages({details: [{name: 'a', details: {value: 1}}]})).toHaveLength(1);
-            expect(bridge.getErrorMessages({details: [{name: 'b', details: {value: 1}}]})).toHaveLength(1);
+            expect(bridge.getErrorMessages({details: [{name: 'a', details: {value: 1}}]})).toEqual(['a is invalid']);
+            expect(bridge.getErrorMessages({details: [{name: 'b', details: {value: 1}}]})).toEqual(['b is invalid']);
         });
     });
 
