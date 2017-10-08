@@ -109,6 +109,8 @@ test('<DateField> - renders TextField which correctly react on focus', async () 
     // Make sure, that DateField#onFocus will finish.
     await new Promise(resolve => setTimeout(resolve, 100));
 
+    wrapper.update();
+
     expect(wrapper.find(DatePicker).find('Dialog').prop('open')).toBe(true);
 });
 

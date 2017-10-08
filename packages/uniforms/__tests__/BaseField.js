@@ -392,7 +392,7 @@ describe('BaseField', () => {
             console.error = jest.fn();
 
             expect(() => mount(<TestField name="a" />)).toThrow('<TestField /> must be rendered within a form.');
-            expect(console.error).toHaveBeenCalledTimes(1);
+            expect(console.error).toHaveBeenCalledTimes(2);
         });
     });
 
@@ -414,7 +414,7 @@ describe('BaseField', () => {
                 reactContext1
             );
 
-            const spy = jest.spyOn(wrapper.get(0), 'render');
+            const spy = jest.spyOn(wrapper.instance(), 'render');
 
             wrapper.update();
 

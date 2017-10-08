@@ -43,7 +43,7 @@ const Num_ = ({
     </div>
 ;
 
-// TODO: Provide more generic solution.
+// NOTE: React < 16 workaround. Make it optional?
 class Num extends Component {
     constructor () {
         super(...arguments);
