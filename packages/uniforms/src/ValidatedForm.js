@@ -83,11 +83,9 @@ const Validated = parent => class extends parent {
         super.componentWillReceiveProps(...arguments);
 
         if (this.props.schema !== schema || this.props.validator !== validator) {
-            this.setState({
-                validator: this
-                    .getChildContextSchema()
-                    .getValidator(validator)
-            }, () => {
+            this.setState(({bridge = this.getChildContextSchema()}) => ({
+                validator: bridge.getValidator(validator)
+            }), () => {
                 if (validate === 'onChange' || validate === 'onChangeAfterSubmit' && this.state.validate) {
                     this.onValidate();
                 }
@@ -123,7 +121,7 @@ const Validated = parent => class extends parent {
         }
 
         return new Promise(resolve =>
-            this.setState({validate: true}, () =>
+            this.setState(() => ({validate: true}), () =>
                 resolve(this.onValidate().then(() => super.onSubmit()))
             )
         );
@@ -150,7 +148,7 @@ const Validated = parent => class extends parent {
 
         const markAndHandle = (error = catched, resolve, reject) =>
             // Do not copy error from props to state.
-            this.setState({error: error === this.props.error ? null : error}, () => {
+            this.setState(() => ({error: error === this.props.error ? null : error}), () => {
                 if (error) {
                     error[__unhandledMark] = true;
 

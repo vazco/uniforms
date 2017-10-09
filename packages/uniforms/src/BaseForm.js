@@ -149,12 +149,12 @@ export default class BaseForm extends Component {
     }
 
     componentWillMount () {
-        this.setState({}, () => this.setState({changed: false, changedMap: {}}));
+        this.setState(() => ({}), () => this.setState(() => ({changed: false, changedMap: {}})));
     }
 
     componentWillReceiveProps ({schema}) {
         if (this.props.schema !== schema) {
-            this.setState({bridge: createSchemaBridge(schema)});
+            this.setState(() => ({bridge: createSchemaBridge(schema)}));
         }
     }
 

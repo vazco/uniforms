@@ -33,16 +33,17 @@ describe('ValidatedForm', () => {
 
     describe('when reset', () => {
         it('removes `error`', () => {
-            const wrapper = mount(
-                <ValidatedForm model={model} schema={schema} onSubmit={onSubmit} />
-            );
-
             validator.mockImplementationOnce(() => {
                 throw new Error();
             });
 
+            const wrapper = mount(
+                <ValidatedForm model={model} schema={schema} onSubmit={onSubmit} />
+            );
+
             wrapper.find('form').simulate('submit');
 
+            expect(validator).toHaveBeenCalled();
             expect(wrapper.instance().getChildContext().uniforms.error).toBeTruthy();
 
             wrapper.instance().reset();
@@ -344,6 +345,31 @@ describe('ValidatedForm', () => {
             callArgs[2]();
 
             expect(wrapper.instance().getChildContext()).toHaveProperty('uniforms.error', null);
+        });
+    });
+
+    describe('when props changed', () => {
+        it('calls correct validator', () => {
+            const wrapper = mount(
+                <ValidatedForm model={model} schema={schema} onSubmit={onSubmit} />
+            );
+
+            const alternativeValidator  = jest.fn();
+            const alternativeSchema = {
+                getDefinition   () {},
+                messageForError () {},
+                objectKeys      () {},
+                validator () {
+                    return alternativeValidator;
+                }
+            };
+
+            wrapper.setProps({schema: alternativeSchema});
+
+            wrapper.find('form').simulate('submit');
+
+            expect(validator).toHaveBeenCalledTimes(0);
+            expect(alternativeValidator).toHaveBeenCalledTimes(1);
         });
     });
 });

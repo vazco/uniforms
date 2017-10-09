@@ -31,7 +31,7 @@ const Auto = parent => class extends parent {
         super.componentWillReceiveProps(...arguments);
 
         if (!isEqual(this.props.model, model)) {
-            this.setState({model, modelSync: model});
+            this.setState(() => ({model, modelSync: model}));
         }
     }
 
