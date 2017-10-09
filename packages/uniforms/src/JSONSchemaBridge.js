@@ -118,7 +118,6 @@ export default class JSONSchemaBridge extends Bridge {
                     _definition.required = required;
                 }
 
-
                 this._compiledSchema[_key] = Object.assign(_definition, {isRequired});
 
                 return definition;

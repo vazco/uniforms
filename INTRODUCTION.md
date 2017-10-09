@@ -710,8 +710,8 @@ const bridge = new GraphQLBridge(schemaType, schemaValidator, schemaData);
 ### JSON schema definition
 
 ```js
-import JSONSchemaBridge from 'uniforms/JSONSchemaBridge';
 import Ajv              from 'ajv';
+import JSONSchemaBridge from 'uniforms/JSONSchemaBridge';
 
 const schema = {
     title: 'Person',
