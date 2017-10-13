@@ -49,6 +49,7 @@
 * **Helper for creating custom fields with one line**
 * **Inline and asynchronous form validation**
 * **Integrations with various schemas:**
+    * **[JSON Schema](http://json-schema.org/)**
     * **[GraphQL](https://github.com/graphql/graphql-js)**
     * **[SimpleSchema](https://github.com/aldeed/meteor-simple-schema)**
     * **[SimpleSchema@2](https://github.com/aldeed/node-simple-schema)**
