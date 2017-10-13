@@ -1,5 +1,6 @@
 ## Next:
 - **Added:** Support for `GraphQLID` in `GraphQLBridge`. [\#281](https://github.com/vazco/uniforms/issues/281)
+- **Added:** Support for JSON schema. [\#353](https://github.com/vazco/uniforms/issues/353)
 - **Added:** Support for React@16. [\#351](https://github.com/vazco/uniforms/issues/351)
 - **Changed:** Field `error` prop is not changing from `null` to `undefined` after validation.
 
