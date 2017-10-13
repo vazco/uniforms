@@ -1,6 +1,6 @@
 {
   "name": "uniforms",
-  "version": "1.21.0",
+  "version": "1.22.0-rc.1",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",
