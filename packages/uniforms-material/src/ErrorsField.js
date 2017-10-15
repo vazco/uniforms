@@ -1,7 +1,7 @@
-import BaseField      from 'uniforms/BaseField';
-import React          from 'react';
-import filterDOMProps from 'uniforms/filterDOMProps';
-import nothing        from 'uniforms/nothing';
+import BaseField                     from 'uniforms/BaseField';
+import filterDOMProps                from 'uniforms/filterDOMProps';
+import nothing                       from 'uniforms/nothing';
+import React                         from 'react';
 import {FormControl, FormHelperText} from 'material-ui/Form';
 
 const ErrorsField = ({children, ...props}, {uniforms: {error, schema}}) =>
