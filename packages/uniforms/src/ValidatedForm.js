@@ -83,7 +83,7 @@ const Validated = parent => class extends parent {
         super.componentWillReceiveProps(...arguments);
 
         if (this.props.schema !== schema || this.props.validator !== validator) {
-            this.setState(({bridge = this.getChildContextSchema()}) => ({
+            this.setState(({bridge}) => ({
                 validator: bridge.getValidator(validator)
             }), () => {
                 if (validate === 'onChange' || validate === 'onChangeAfterSubmit' && this.state.validate) {
