@@ -9,10 +9,10 @@ jest.mock('meteor/check');
 describe('ValidatedForm', () => {
     const onChange   = jest.fn();
     const onSubmit   = jest.fn();
-    const onValidate = jest.fn((m, e, cb) => {
-        if (e) return;
+    const onValidate = jest.fn((model, error, next) => {
+        if (error) return;
 
-        cb();
+        next();
     });
     const validator  = jest.fn();
 
