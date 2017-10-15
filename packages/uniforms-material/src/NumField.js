@@ -7,9 +7,17 @@ import {FormControl, FormHelperText} from 'material-ui/Form';
 
 const noneIfNaN = x => isNaN(x) ? undefined : x;
 
-const Num_ = ({onChange, ...props}) => (
-    <FormControl disabled={props.disabled} error={!!props.error} required={props.required}>
-        <TextField type="number" onChange={event => onChange(event.target.value)} {...filterDOMProps(props)} />
+const Num_ = ({disabled, label, onChange, placeholder, value, ...props}) => (
+    <FormControl disabled={disabled} error={!!props.error} required={props.required}>
+        <TextField
+            disabled={disabled}
+            label={label}
+            onChange={event => onChange(event.target.value)}
+            placeholder={placeholder}
+            type="number"
+            value={value}
+            {...filterDOMProps(props)}
+        />
         {props.error && props.showInlineError && <FormHelperText>{props.errorMessage}</FormHelperText>}
     </FormControl>
 );

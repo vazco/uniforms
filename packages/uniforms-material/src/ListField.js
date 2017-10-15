@@ -1,15 +1,14 @@
-import React                  from 'react';
-import Subheader              from 'material-ui/Subheader';
 import connectField           from 'uniforms/connectField';
 import filterDOMProps         from 'uniforms/filterDOMProps';
 import joinName               from 'uniforms/joinName';
+import List, {ListSubheader}  from 'material-ui/List';
+import React                  from 'react';
 import {Children}             from 'react';
-import {List as ListMaterial} from 'material-ui/List';
 
 import ListAddField  from './ListAddField';
 import ListItemField from './ListItemField';
 
-const List = ({
+const List_ = ({
     actionsStyle,
     children,
     initialCount,
@@ -19,9 +18,7 @@ const List = ({
     value,
     ...props
 }) =>
-    <ListMaterial {...filterDOMProps(props)}>
-        {!!label && <Subheader children={label} style={{paddingLeft: 0}} />}
-
+    <List subheader={label ? <ListSubheader>{label}</ListSubheader> : undefined} {...filterDOMProps(props)}>
         {children ? (
             value.map((item, index) =>
                 Children.map(children, child =>
@@ -40,7 +37,7 @@ const List = ({
         <div style={{paddingTop: 8, paddingBottom: 8, ...actionsStyle}}>
             <ListAddField name={`${name}.$`} initialCount={initialCount} />
         </div>
-    </ListMaterial>
+    </List>
 ;
 
-export default connectField(List, {includeInChain: false});
+export default connectField(List_, {includeInChain: false});

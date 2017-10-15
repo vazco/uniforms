@@ -4,9 +4,25 @@ import React                         from 'react';
 import TextField                     from 'material-ui/TextField';
 import {FormControl, FormHelperText} from 'material-ui/Form';
 
-export const Date_ = ({onChange, ...props}) => (
-    <FormControl disabled={props.disabled} error={!!props.error} required={props.required}>
-        <TextField type="datetime-local" onChange={event => onChange(event.target.value)} {...filterDOMProps(props)} />
+const dateFormat = value => value && value.toISOString().slice(0, -8);
+const dateParse = (timestamp, onChange) => {
+    const date = new Date(timestamp);
+    if (date.getFullYear() < 10000) {
+        onChange(date);
+    }
+};
+
+export const Date_ = ({disabled, label, onChange, placeholder, value, ...props}) => (
+    <FormControl disabled={disabled} error={!!props.error} required={props.required}>
+        <TextField
+            disabled={disabled}
+            label={label}
+            onChange={event => dateParse(event.target.valueAsNumber, onChange)}
+            placeholder={placeholder}
+            type="datetime-local"
+            value={dateFormat(value)}
+            {...filterDOMProps(props)}
+        />
         {props.error && props.showInlineError && <FormHelperText>{props.errorMessage}</FormHelperText>}
     </FormControl>
 );

@@ -7,6 +7,7 @@ import {FormLabel, FormControl, FormControlLabel, FormHelperText} from 'material
 
 const Radio_ = ({
     allowedValues,
+    checkboxes, // eslint-disable-line no-unused-vars
     disabled,
     error,
     errorMessage,
@@ -27,16 +28,16 @@ const Radio_ = ({
             aria-label={name}
             name={name}
             onChange={(event, value) => onChange(value)}
-            value={value}
+            value={'' + value}
             {...filterDOMProps(props)}
         >
             {(hideFiltered && filter ? allowedValues.filter(filter) : allowedValues).map(item =>
                 <FormControlLabel
                     control={<Radio />}
-                    disabled={disabled || !filter(item)}
+                    disabled={disabled || (filter && !filter(item))}
                     key={item}
                     label={transform ? transform(item) : item}
-                    value={item}
+                    value={'' + item}
                 />
             )}
         </RadioGroup>

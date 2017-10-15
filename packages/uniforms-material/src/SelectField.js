@@ -45,10 +45,10 @@ const renderCheckboxes = ({
                         value={item}
                         {...filterDOMProps(props)}
                     />}
-                    disabled={disabled || !filter(item)}
+                    disabled={disabled || (filter && !filter(item))}
                     key={item}
                     label={transform ? transform(item) : item}
-                    value={item}
+                    value={'' + item}
                 />
             )}
         </FormGroup>
