@@ -1,21 +1,19 @@
-import BaseField      from 'uniforms/BaseField';
-import ErrorOutline   from 'material-ui/svg-icons/alert/error-outline';
-import React          from 'react';
-import filterDOMProps from 'uniforms/filterDOMProps';
-import nothing        from 'uniforms/nothing';
-import {ListItem}     from 'material-ui/List';
-import {List}         from 'material-ui/List';
+import BaseField                     from 'uniforms/BaseField';
+import filterDOMProps                from 'uniforms/filterDOMProps';
+import nothing                       from 'uniforms/nothing';
+import React                         from 'react';
+import {FormControl, FormHelperText} from 'material-ui/Form';
 
 const ErrorsField = ({children, ...props}, {uniforms: {error, schema}}) =>
     (!error && !children) ? nothing : (
-        <List {...filterDOMProps(props)}>
+        <FormControl error={!!error} {...filterDOMProps(props)}>
             {!!children && (
-                <ListItem primaryText={children} disabled />
+                <FormHelperText>{children}</FormHelperText>
             )}
-            {schema.getErrorMessages(error).map((message, index) =>
-                <ListItem key={index} disabled primaryText={message} leftIcon={<ErrorOutline />} />
+            {schema.getErrorMessages(error).map(message =>
+                <FormHelperText key={message}>{message}</FormHelperText>
             )}
-        </List>
+        </FormControl>
     )
 ;
 

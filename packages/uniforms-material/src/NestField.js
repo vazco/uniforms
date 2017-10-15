@@ -1,24 +1,25 @@
-import React          from 'react';
-import Subheader      from 'material-ui/Subheader';
-import connectField   from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
-import injectName     from 'uniforms/injectName';
-import joinName       from 'uniforms/joinName';
+import React                                    from 'react';
+import connectField                             from 'uniforms/connectField';
+import filterDOMProps                           from 'uniforms/filterDOMProps';
+import injectName                               from 'uniforms/injectName';
+import joinName                                 from 'uniforms/joinName';
+import {FormLabel, FormControl, FormHelperText} from 'material-ui/Form';
 
 import AutoField from './AutoField';
 
 const Nest = ({
     children,
+    error,
+    errorMessage,
     fields,
     itemProps,
     label,
     name,
-    style,
+    showInlineError,
     ...props
 }) =>
-    <div style={{display: 'flex', flexDirection: 'column', ...style}} {...filterDOMProps(props)}>
-        {!!label && <Subheader children={label} style={{paddingLeft: 0}} />}
-
+    <FormControl {...filterDOMProps(props)} error={!!error}>
+        {label && <FormLabel component="legend">{label}</FormLabel>}
         {children ? (
             injectName(name, children)
         ) : (
@@ -26,7 +27,8 @@ const Nest = ({
                 <AutoField key={key} name={joinName(name, key)} {...itemProps} />
             )
         )}
-    </div>
+        {error && showInlineError && <FormHelperText>{errorMessage}</FormHelperText>}
+    </FormControl>
 ;
 
 export default connectField(Nest, {includeInChain: false});

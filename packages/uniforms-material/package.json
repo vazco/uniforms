@@ -22,8 +22,8 @@
     "src/"
   ],
   "peerDependencies": {
-    "material-ui": ">=0.16.7 < 1.0.0",
-    "react": "^16.0.0 || ^15.0.0 || ^0.14.0",
+    "material-ui": "^1.0.0-beta.16",
+    "react": "^15.3.0 || ^16.0.0",
     "uniforms": "^1.22.0-rc.1"
   },
   "dependencies": {

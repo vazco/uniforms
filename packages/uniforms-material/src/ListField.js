@@ -1,16 +1,15 @@
-import React                  from 'react';
-import Subheader              from 'material-ui/Subheader';
-import connectField           from 'uniforms/connectField';
-import filterDOMProps         from 'uniforms/filterDOMProps';
-import joinName               from 'uniforms/joinName';
-import {Children}             from 'react';
-import {List as ListMaterial} from 'material-ui/List';
+import connectField                     from 'uniforms/connectField';
+import filterDOMProps                   from 'uniforms/filterDOMProps';
+import joinName                         from 'uniforms/joinName';
+import List, {ListItem, ListSubheader}  from 'material-ui/List';
+import React                            from 'react';
+import {Children}                       from 'react';
+import {CardActions}                    from 'material-ui/Card';
 
 import ListAddField  from './ListAddField';
 import ListItemField from './ListItemField';
 
-const List = ({
-    actionsStyle,
+const List_ = ({
     children,
     initialCount,
     itemProps,
@@ -19,9 +18,10 @@ const List = ({
     value,
     ...props
 }) =>
-    <ListMaterial {...filterDOMProps(props)}>
-        {!!label && <Subheader children={label} style={{paddingLeft: 0}} />}
-
+    <List
+        subheader={label ? <ListSubheader disableSticky >{label}</ListSubheader> : undefined}
+        {...filterDOMProps(props)}
+    >
         {children ? (
             value.map((item, index) =>
                 Children.map(children, child =>
@@ -37,10 +37,12 @@ const List = ({
                 <ListItemField key={index} label={null} name={joinName(name, index)} {...itemProps} />
             )
         )}
-        <div style={{paddingTop: 8, paddingBottom: 8, ...actionsStyle}}>
-            <ListAddField name={`${name}.$`} initialCount={initialCount} />
-        </div>
-    </ListMaterial>
+        <ListItem>
+            <CardActions>
+                <ListAddField name={`${name}.$`} initialCount={initialCount} />
+            </CardActions>
+        </ListItem>
+    </List>
 ;
 
-export default connectField(List, {includeInChain: false});
+export default connectField(List_, {includeInChain: false});
