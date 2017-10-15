@@ -1,44 +1,50 @@
-import connectField   from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
-import React          from 'react';
-import Subheader      from 'material-ui/Subheader';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import connectField                                               from 'uniforms/connectField';
+import filterDOMProps                                             from 'uniforms/filterDOMProps';
+import PropTypes                                                  from 'prop-types';
+import Radio, {RadioGroup}                                        from 'material-ui/Radio';
+import React                                                      from 'react';
+import {FormLabel, FormControl, FormControlLabel, FormHelperText} from 'material-ui/Form';
 
-const Radio = ({
+const Radio_ = ({
     allowedValues,
     disabled,
-    id,
+    error,
+    filter,
+    hideFiltered,
     label,
-    labelPosition,
     name,
     onChange,
+    required,
     transform,
     value,
     ...props
-}) =>
-    <div>
-        {!!label && <Subheader children={label} style={{paddingLeft: 0}} />}
-
-        <RadioButtonGroup
-            disabled={disabled}
-            id={id}
-            labelPosition={labelPosition}
+}) => (
+    <FormControl component="fieldset" error={!!error} required={required}>
+        <FormLabel component="legend">{label}</FormLabel>
+        <RadioGroup
+            aria-label={name}
             name={name}
-            valueSelected={value}
             onChange={(event, value) => onChange(value)}
+            value={value}
             {...filterDOMProps(props)}
         >
-            {allowedValues.map(item =>
-                <RadioButton
-                    disabled={disabled}
+            {(hideFiltered && filter ? allowedValues.filter(filter) : allowedValues).map(item =>
+                <FormControlLabel
+                    control={<Radio />}
+                    disabled={disabled || !filter(item)}
                     key={item}
                     label={transform ? transform(item) : item}
-                    labelPosition={labelPosition}
                     value={item}
                 />
             )}
-        </RadioButtonGroup>
-    </div>
-;
+        </RadioGroup>
+        {error && <FormHelperText>{error}</FormHelperText>}
+    </FormControl>
+);
 
-export default connectField(Radio);
+Radio_.propTypes = {
+    filter: PropTypes.func,
+    hideFiltered:   PropTypes.bool
+};
+
+export default connectField(Radio_);
