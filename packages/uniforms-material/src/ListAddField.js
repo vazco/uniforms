@@ -5,6 +5,7 @@ import React          from 'react';
 
 const ListAdd = ({
     disabled,
+    labelText,
     parent,
     value,
     ...props
@@ -17,13 +18,13 @@ const ListAdd = ({
             onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
             {...filterDOMProps(props)}
         >
-            {Button}
+            {labelText}
         </Button>
     );
 };
 
 ListAdd.defaultProps = {
-    label: 'Add'
+    labelText: 'Add'
 };
 
 export default connectField(ListAdd, {includeParent: true, initialValue: false});

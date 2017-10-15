@@ -5,6 +5,7 @@ import React          from 'react';
 
 const ListDel = ({
     disabled,
+    labelText,
     name,
     parent,
     ...props
@@ -21,13 +22,13 @@ const ListDel = ({
             )}
             {...filterDOMProps(props)}
         >
-            {Button}
+            {labelText}
         </Button>
     );
 };
 
 ListDel.defaultProps = {
-    label: 'Remove'
+    labelText: 'Remove'
 };
 
 export default connectField(ListDel, {includeParent: true, initialValue: false});
