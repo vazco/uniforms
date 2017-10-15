@@ -1,44 +1,31 @@
-import Checkbox       from 'material-ui/Checkbox';
-import React          from 'react';
-import Toggle         from 'material-ui/Toggle';
-import connectField   from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
+import Checkbox                                        from 'material-ui/Checkbox';
+import connectField                                    from 'uniforms/connectField';
+import filterDOMProps                                  from 'uniforms/filterDOMProps';
+import React                                           from 'react';
+import Switch                                          from 'material-ui/Switch';
+import {FormControl, FormControlLabel, FormHelperText} from 'material-ui/Form';
 
-const Bool = ({
-    appearance,
-    disabled,
-    id,
-    inputRef,
-    label,
-    name,
-    onChange,
-    value,
-    ...props
-}) =>
-    appearance === 'toggle' ? (
-        <Toggle
-            disabled={disabled}
-            id={id}
+const Bool = ({appearance, error, disabled, label, onChange, required, value, ...props}) => (
+    <FormControl error={!!error} required={required}>
+        <FormControlLabel
+            control={appearance === 'toggle' ? (
+                <Switch
+                    checked={!!value}
+                    onChange={(event, value) => disabled || onChange(value)}
+                    {...filterDOMProps(props)}
+                />
+            ) : (
+                <Checkbox
+                    checked={!!value}
+                    onChange={(event, value) => disabled || onChange(value)}
+                    {...filterDOMProps(props)}
+                />
+            )}
             label={label}
-            name={name}
-            onToggle={(event, value) => disabled || onChange(value)}
-            ref={inputRef}
-            toggled={!!value}
-            {...filterDOMProps(props)}
         />
-    ) : (
-        <Checkbox
-            checked={!!value}
-            disabled={disabled}
-            id={id}
-            label={label}
-            name={name}
-            onCheck={(event, value) => disabled || onChange(value)}
-            ref={inputRef}
-            {...filterDOMProps(props)}
-        />
-    )
-;
+        {error && <FormHelperText>{error}</FormHelperText>}
+    </FormControl>
+);
 
 Bool.defaultProps = {appearance: 'checkbox'};
 
