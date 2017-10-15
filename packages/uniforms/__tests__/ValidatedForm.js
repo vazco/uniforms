@@ -6,11 +6,14 @@ import ValidatedForm from 'uniforms/ValidatedForm';
 jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
 
-// FIXME: This fail sometimes when ran simultaneously.
 describe('ValidatedForm', () => {
     const onChange   = jest.fn();
     const onSubmit   = jest.fn();
-    const onValidate = jest.fn();
+    const onValidate = jest.fn((model, error, next) => {
+        if (error) return;
+
+        next();
+    });
     const validator  = jest.fn();
 
     const error = new Error();
@@ -19,36 +22,15 @@ describe('ValidatedForm', () => {
         getDefinition   () {},
         messageForError () {},
         objectKeys      () {},
-        validator () {
-            return validator;
-        }
+        validator:      () => validator
     };
 
     beforeEach(() => {
+        onValidate.mockClear();
+
         onChange.mockReset();
         onSubmit.mockReset();
-        onValidate.mockReset();
         validator.mockReset();
-    });
-
-    describe('when reset', () => {
-        it('removes `error`', () => {
-            const wrapper = mount(
-                <ValidatedForm model={model} schema={schema} onSubmit={onSubmit} />
-            );
-
-            validator.mockImplementationOnce(() => {
-                throw new Error();
-            });
-
-            wrapper.find('form').simulate('submit');
-
-            expect(wrapper.instance().getChildContext().uniforms.error).toBeTruthy();
-
-            wrapper.instance().reset();
-
-            expect(wrapper.instance().getChildContext().uniforms.error).toBeNull();
-        });
     });
 
     describe('when submitted', () => {
@@ -78,7 +60,13 @@ describe('ValidatedForm', () => {
 
         it('skips `onSubmit` when invalid', async () => {
             const wrapper = mount(
-                <ValidatedForm error={error} model={model} schema={schema} onSubmit={onSubmit} />
+                <ValidatedForm
+                    error={error}
+                    model={model}
+                    onSubmit={onSubmit}
+                    onValidate={onValidate}
+                    schema={schema}
+                />
             );
 
             wrapper.find('form').simulate('submit');
@@ -89,10 +77,6 @@ describe('ValidatedForm', () => {
         });
 
         it('revalidates with new model only if required', () => {
-            validator.mockImplementationOnce(() => {
-                throw new Error();
-            });
-
             const wrapper = mount(
                 <ValidatedForm model={{}} schema={schema} />
             );
@@ -105,10 +89,6 @@ describe('ValidatedForm', () => {
         });
 
         it('revalidates with new model', () => {
-            validator.mockImplementationOnce(() => {
-                throw new Error();
-            });
-
             const wrapper = mount(
                 <ValidatedForm model={{}} schema={schema} validate="onChange" />
             );
@@ -121,10 +101,6 @@ describe('ValidatedForm', () => {
         });
 
         it('revalidates with new model only when changed', () => {
-            validator.mockImplementationOnce(() => {
-                throw new Error();
-            });
-
             const wrapper = mount(
                 <ValidatedForm model={model} schema={schema} />
             );
@@ -137,10 +113,6 @@ describe('ValidatedForm', () => {
         });
 
         it('revalidates with new validator only if required', () => {
-            validator.mockImplementationOnce(() => {
-                throw new Error();
-            });
-
             const wrapper = mount(
                 <ValidatedForm model={{}} schema={schema} validate="onChange" />
             );
@@ -153,10 +125,6 @@ describe('ValidatedForm', () => {
         });
 
         it('revalidates with new validator', () => {
-            validator.mockImplementationOnce(() => {
-                throw new Error();
-            });
-
             const wrapper = mount(
                 <ValidatedForm model={{}} schema={schema} />
             );
@@ -169,12 +137,8 @@ describe('ValidatedForm', () => {
         });
 
         it('validates (onChange)', () => {
-            validator.mockImplementation(() => {
-                throw new Error();
-            });
-
             const wrapper = mount(
-                <ValidatedForm model={model} schema={schema} onChange={onChange} validate="onChange" />
+                <ValidatedForm model={model} onChange={onChange} schema={schema} validate="onChange" />
             );
 
             wrapper.instance().getChildContext().uniforms.onChange('key', 'value');
@@ -194,6 +158,7 @@ describe('ValidatedForm', () => {
                     model={model}
                     onChange={onChange}
                     onSubmit={onSubmit}
+                    onValidate={onValidate}
                     schema={schema}
                     validate="onChangeAfterSubmit"
                 />
@@ -234,6 +199,7 @@ describe('ValidatedForm', () => {
                     model={model}
                     onChange={onChange}
                     onSubmit={onSubmit}
+                    onValidate={onValidate}
                     schema={schema}
                     validate="onSubmit"
                 />
@@ -307,8 +273,8 @@ describe('ValidatedForm', () => {
                 <ValidatedForm
                     model={model}
                     modelTransform={modelTransform}
-                    schema={schema}
                     onValidate={onValidate}
+                    schema={schema}
                     validate="onChange"
                 />
             );
@@ -344,6 +310,49 @@ describe('ValidatedForm', () => {
             callArgs[2]();
 
             expect(wrapper.instance().getChildContext()).toHaveProperty('uniforms.error', null);
+        });
+    });
+
+    describe('when reset', () => {
+        it('removes `error`', () => {
+            validator.mockImplementationOnce(() => {
+                throw new Error();
+            });
+
+            const wrapper = mount(
+                <ValidatedForm model={model} onSubmit={onSubmit} schema={schema} />
+            );
+
+            wrapper.find('form').simulate('submit');
+
+            expect(wrapper.instance().getChildContext().uniforms.error).toBeTruthy();
+
+            wrapper.instance().reset();
+
+            expect(wrapper.instance().getChildContext().uniforms.error).toBeNull();
+        });
+    });
+
+    describe('when props changed', () => {
+        it('calls correct validator', () => {
+            const wrapper = mount(
+                <ValidatedForm model={model} onSubmit={onSubmit} schema={schema} />
+            );
+
+            const alternativeValidator  = jest.fn();
+            const alternativeSchema = {
+                getDefinition   () {},
+                messageForError () {},
+                objectKeys      () {},
+                validator:      () => alternativeValidator
+            };
+
+            wrapper.setProps({schema: alternativeSchema});
+
+            wrapper.find('form').simulate('submit');
+
+            expect(validator).toHaveBeenCalledTimes(0);
+            expect(alternativeValidator).toHaveBeenCalledTimes(1);
         });
     });
 });
