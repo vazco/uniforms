@@ -9,18 +9,20 @@ const Radio_ = ({
     allowedValues,
     disabled,
     error,
+    errorMessage,
     filter,
     hideFiltered,
     label,
     name,
     onChange,
     required,
+    showInlineError,
     transform,
     value,
     ...props
 }) => (
-    <FormControl component="fieldset" error={!!error} required={required}>
-        <FormLabel component="legend">{label}</FormLabel>
+    <FormControl component="fieldset" disabled={disabled} error={!!error} required={required}>
+        {label && <FormLabel component="legend">{label}</FormLabel>}
         <RadioGroup
             aria-label={name}
             name={name}
@@ -38,7 +40,7 @@ const Radio_ = ({
                 />
             )}
         </RadioGroup>
-        {error && <FormHelperText>{error}</FormHelperText>}
+        {error && showInlineError && <FormHelperText>{errorMessage}</FormHelperText>}
     </FormControl>
 );
 

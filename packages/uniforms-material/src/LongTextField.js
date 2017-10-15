@@ -1,37 +1,14 @@
-import React          from 'react';
-import TextField      from 'material-ui/TextField';
-import connectField   from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
+import connectField                  from 'uniforms/connectField';
+import filterDOMProps                from 'uniforms/filterDOMProps';
+import React                         from 'react';
+import TextField                     from 'material-ui/TextField';
+import {FormControl, FormHelperText} from 'material-ui/Form';
 
-const LongText = ({
-    disabled,
-    id,
-    error,
-    errorMessage,
-    inputRef,
-    label,
-    name,
-    onChange,
-    placeholder,
-    showInlineError,
-    value,
-    ...props
-}) =>
-    <TextField
-        disabled={disabled}
-        errorText={error && showInlineError ? errorMessage : undefined}
-        floatingLabelText={label}
-        hintText={placeholder}
-        id={id}
-        multiLine
-        name={name}
-        onChange={(event, value) => onChange(value)}
-        ref={inputRef}
-        value={value}
-        {...filterDOMProps(props)}
-    />
-;
-
-LongText.defaultProps = {fullWidth: true};
+const LongText = ({onChange, ...props}) => (
+    <FormControl disabled={props.disabled} error={!!props.error} required={props.required}>
+        <TextField multiline onChange={event => onChange(event.target.value)} {...filterDOMProps(props)} />
+        {props.error && props.showInlineError && <FormHelperText>{props.errorMessage}</FormHelperText>}
+    </FormControl>
+);
 
 export default connectField(LongText);

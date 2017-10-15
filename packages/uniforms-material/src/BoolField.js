@@ -1,12 +1,24 @@
 import Checkbox                                        from 'material-ui/Checkbox';
 import connectField                                    from 'uniforms/connectField';
 import filterDOMProps                                  from 'uniforms/filterDOMProps';
+import PropTypes                                       from 'prop-types';
 import React                                           from 'react';
 import Switch                                          from 'material-ui/Switch';
 import {FormControl, FormControlLabel, FormHelperText} from 'material-ui/Form';
 
-const Bool = ({appearance, error, disabled, label, onChange, required, value, ...props}) => (
-    <FormControl error={!!error} required={required}>
+const Bool = ({
+    appearance,
+    disabled,
+    error,
+    errorMessage,
+    label,
+    onChange,
+    required,
+    showInlineError,
+    value,
+    ...props
+}) => (
+    <FormControl disabled={disabled} error={!!error} required={required}>
         <FormControlLabel
             control={appearance === 'toggle' ? (
                 <Switch
@@ -23,10 +35,14 @@ const Bool = ({appearance, error, disabled, label, onChange, required, value, ..
             )}
             label={label}
         />
-        {error && <FormHelperText>{error}</FormHelperText>}
+        {error && showInlineError && <FormHelperText>{errorMessage}</FormHelperText>}
     </FormControl>
 );
 
 Bool.defaultProps = {appearance: 'checkbox'};
+
+Bool.propTypes = {
+    appearance: PropTypes.oneOf(['toggle', 'checkbox'])
+};
 
 export default connectField(Bool);
