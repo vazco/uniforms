@@ -21,6 +21,7 @@ export default function wrapField ({
     required,
     rows,            // eslint-disable-line no-unused-vars
     showInlineError, // Show inline error message?
+    transform,       // eslint-disable-line no-unused-vars
     wrapClassName,   // Input wrapper class name.
     ...props
 }, children) {

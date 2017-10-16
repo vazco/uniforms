@@ -1,3 +1,6 @@
+## Next
+- **Fixed:** Invalid prop warning in `uniforms-bootstrap3` and `uniforms-bootstrap4`. [\#350](https://github.com/vazco/uniforms/issues/350)
+
 ## [v1.22.0-rc.1](https://github.com/vazco/uniforms/tree/v1.22.0-rc.1) (2017-10-13)
 - **Added:** Support for `GraphQLID` in `GraphQLBridge`. [\#281](https://github.com/vazco/uniforms/issues/281)
 - **Added:** Support for JSON schema. [\#353](https://github.com/vazco/uniforms/issues/353)
