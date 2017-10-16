@@ -1,4 +1,4 @@
-## Next
+## [v1.22.0-rc.2](https://github.com/vazco/uniforms/tree/v1.22.0-rc.2) (2017-10-16)
 - **Fixed:** Invalid prop warning in `uniforms-bootstrap3` and `uniforms-bootstrap4`. [\#350](https://github.com/vazco/uniforms/issues/350)
 
 ## [v1.22.0-rc.1](https://github.com/vazco/uniforms/tree/v1.22.0-rc.1) (2017-10-13)
