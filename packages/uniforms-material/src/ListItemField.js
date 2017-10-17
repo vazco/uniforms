@@ -1,9 +1,11 @@
-import connectField                        from 'uniforms/connectField';
-import joinName                            from 'uniforms/joinName';
-import React                               from 'react';
-import {Children}                          from 'react';
-import {ListItem}                          from 'material-ui/List';
-import Card, {CardActions, CardContent}    from 'material-ui/Card';
+import Card          from 'material-ui/Card';
+import connectField  from 'uniforms/connectField';
+import joinName      from 'uniforms/joinName';
+import React         from 'react';
+import {CardActions} from 'material-ui/Card';
+import {CardContent} from 'material-ui/Card';
+import {Children}    from 'react';
+import {ListItem}    from 'material-ui/List';
 
 import AutoField    from './AutoField';
 import ListDelField from './ListDelField';

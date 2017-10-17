@@ -1,12 +1,17 @@
-import Checkbox                                                              from 'material-ui/Checkbox';
-import connectField                                                          from 'uniforms/connectField';
-import filterDOMProps                                                        from 'uniforms/filterDOMProps';
-import Input, {InputLabel}                                                   from 'material-ui/Input';
-import PropTypes                                                             from 'prop-types';
-import React                                                                 from 'react';
-import Select                                                                from 'material-ui/Select';
-import {FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel} from 'material-ui/Form';
-import {MenuItem}                                                            from 'material-ui/Menu';
+import Checkbox           from 'material-ui/Checkbox';
+import connectField       from 'uniforms/connectField';
+import filterDOMProps     from 'uniforms/filterDOMProps';
+import Input              from 'material-ui/Input';
+import PropTypes          from 'prop-types';
+import React              from 'react';
+import Select             from 'material-ui/Select';
+import {FormControlLabel} from 'material-ui/Form';
+import {FormControl}      from 'material-ui/Form';
+import {FormGroup}        from 'material-ui/Form';
+import {FormHelperText}   from 'material-ui/Form';
+import {FormLabel}        from 'material-ui/Form';
+import {InputLabel}       from 'material-ui/Input';
+import {MenuItem}         from 'material-ui/Menu';
 
 const xor = (item, array) => {
     const index = array.indexOf(item);

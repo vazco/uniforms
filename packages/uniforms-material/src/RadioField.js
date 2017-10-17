@@ -1,9 +1,13 @@
-import connectField                                               from 'uniforms/connectField';
-import filterDOMProps                                             from 'uniforms/filterDOMProps';
-import PropTypes                                                  from 'prop-types';
-import Radio, {RadioGroup}                                        from 'material-ui/Radio';
-import React                                                      from 'react';
-import {FormLabel, FormControl, FormControlLabel, FormHelperText} from 'material-ui/Form';
+import connectField       from 'uniforms/connectField';
+import filterDOMProps     from 'uniforms/filterDOMProps';
+import PropTypes          from 'prop-types';
+import Radio              from 'material-ui/Radio';
+import React              from 'react';
+import {FormControlLabel} from 'material-ui/Form';
+import {FormControl}      from 'material-ui/Form';
+import {FormHelperText}   from 'material-ui/Form';
+import {FormLabel}        from 'material-ui/Form';
+import {RadioGroup}       from 'material-ui/Radio';
 
 const Radio_ = ({
     allowedValues,

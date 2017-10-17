@@ -1,10 +1,12 @@
-import Checkbox                                        from 'material-ui/Checkbox';
-import connectField                                    from 'uniforms/connectField';
-import filterDOMProps                                  from 'uniforms/filterDOMProps';
-import PropTypes                                       from 'prop-types';
-import React                                           from 'react';
-import Switch                                          from 'material-ui/Switch';
-import {FormControl, FormControlLabel, FormHelperText} from 'material-ui/Form';
+import Checkbox           from 'material-ui/Checkbox';
+import connectField       from 'uniforms/connectField';
+import filterDOMProps     from 'uniforms/filterDOMProps';
+import PropTypes          from 'prop-types';
+import React              from 'react';
+import Switch             from 'material-ui/Switch';
+import {FormControlLabel} from 'material-ui/Form';
+import {FormControl}      from 'material-ui/Form';
+import {FormHelperText}   from 'material-ui/Form';
 
 const Bool = ({
     appearance,

@@ -1,9 +1,10 @@
-import connectField                  from 'uniforms/connectField';
-import filterDOMProps                from 'uniforms/filterDOMProps';
-import React                         from 'react';
-import TextField                     from 'material-ui/TextField';
-import {Component}                   from 'react';
-import {FormControl, FormHelperText} from 'material-ui/Form';
+import connectField     from 'uniforms/connectField';
+import filterDOMProps   from 'uniforms/filterDOMProps';
+import React            from 'react';
+import TextField        from 'material-ui/TextField';
+import {Component}      from 'react';
+import {FormControl}    from 'material-ui/Form';
+import {FormHelperText} from 'material-ui/Form';
 
 const noneIfNaN = x => isNaN(x) ? undefined : x;
 

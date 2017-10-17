@@ -1,10 +1,12 @@
-import connectField                     from 'uniforms/connectField';
-import filterDOMProps                   from 'uniforms/filterDOMProps';
-import joinName                         from 'uniforms/joinName';
-import List, {ListItem, ListSubheader}  from 'material-ui/List';
-import React                            from 'react';
-import {Children}                       from 'react';
-import {CardActions}                    from 'material-ui/Card';
+import connectField    from 'uniforms/connectField';
+import filterDOMProps  from 'uniforms/filterDOMProps';
+import joinName        from 'uniforms/joinName';
+import List            from 'material-ui/List';
+import React           from 'react';
+import {CardActions}   from 'material-ui/Card';
+import {Children}      from 'react';
+import {ListItem}      from 'material-ui/List';
+import {ListSubheader} from 'material-ui/List';
 
 import ListAddField  from './ListAddField';
 import ListItemField from './ListItemField';

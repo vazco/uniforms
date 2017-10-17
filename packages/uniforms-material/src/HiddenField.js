@@ -1,7 +1,7 @@
 import BaseField      from 'uniforms/BaseField';
-import React          from 'react';
 import filterDOMProps from 'uniforms/filterDOMProps';
 import nothing        from 'uniforms/nothing';
+import React          from 'react';
 
 export default class HiddenField extends BaseField {
     static displayName = 'HiddenField';
