@@ -1,17 +1,17 @@
 import Checkbox           from 'material-ui/Checkbox';
 import connectField       from 'uniforms/connectField';
 import filterDOMProps     from 'uniforms/filterDOMProps';
-import Input              from 'material-ui/Input';
 import PropTypes          from 'prop-types';
 import React              from 'react';
-import Select             from 'material-ui/Select';
+import TextField          from 'material-ui/TextField';
 import {FormControlLabel} from 'material-ui/Form';
 import {FormControl}      from 'material-ui/Form';
 import {FormGroup}        from 'material-ui/Form';
 import {FormHelperText}   from 'material-ui/Form';
 import {FormLabel}        from 'material-ui/Form';
-import {InputLabel}       from 'material-ui/Input';
 import {MenuItem}         from 'material-ui/Menu';
+
+import wrapField from './wrapField';
 
 const xor = (item, array) => {
     const index = array.indexOf(item);
@@ -22,84 +22,82 @@ const xor = (item, array) => {
     return array.slice(0, index).concat(array.slice(index + 1));
 };
 
-const renderCheckboxes = ({
-    allowedValues,
-    disabled,
-    error,
-    errorMessage,
-    filter,
-    hideFiltered,
-    id,
-    label,
-    name,
-    onChange,
-    required,
-    showInlineError,
-    transform,
-    value,
-    ...props
-}) => (
-    <FormControl component="fieldset" disabled={disabled} error={!!error} required={required}>
-        {label && <FormLabel component="legend">{label}</FormLabel>}
-        <FormGroup id={id} name={name}>
-            {(hideFiltered && filter ? allowedValues.filter(filter) : allowedValues).map(item =>
+const renderCheckboxes = props => (
+    <FormControl
+        component="fieldset"
+        disabled={props.disabled}
+        error={!!props.error}
+        fullWidth={props.fullWidth}
+        margin={props.margin}
+        required={props.required}
+    >
+        {props.label && <FormLabel component="legend">{props.label}</FormLabel>}
+        <FormGroup id={props.id} name={props.name}>
+            {(props.hideFiltered && props.filter
+                ? props.allowedValues.filter(props.filter)
+                : props.allowedValues
+            ).map(item =>
                 <FormControlLabel
                     control={<Checkbox
-                        checked={value.includes(item)}
-                        onChange={() => onChange(xor(item, value))}
+                        checked={props.value.includes(item)}
+                        onChange={() => props.onChange(xor(item, props.value))}
                         value={item}
                         {...filterDOMProps(props)}
                     />}
-                    disabled={disabled || (filter && !filter(item))}
+                    disabled={props.disabled || (props.filter && !props.filter(item))}
                     key={item}
-                    label={transform ? transform(item) : item}
+                    label={props.transform ? props.transform(item) : item}
                     value={'' + item}
                 />
             )}
         </FormGroup>
-        {error && showInlineError && <FormHelperText>{errorMessage}</FormHelperText>}
+        {props.error && props.showInlineError && <FormHelperText>{props.errorMessage}</FormHelperText>}
     </FormControl>
 );
 
-const renderSelect = ({
-    allowedValues,
-    disabled,
-    displayEmpty,
-    error,
-    errorMessage,
-    filter,
-    id,
-    label,
-    MenuProps,
-    multiple,
-    onChange,
-    renderValue,
-    required,
-    showInlineError,
-    transform,
-    value,
-    ...props
-}) => (
-    <FormControl disabled={disabled} error={!!error} required={required}>
-        {label && <InputLabel htmlFor={id}>{label}</InputLabel>}
-        <Select
-            displayEmpty={displayEmpty}
-            input={<Input id={id} {...filterDOMProps(props)} />}
-            MenuProps={MenuProps}
-            multiple={multiple}
-            onChange={event => onChange(event.target.value)}
-            renderValue={renderValue}
-            value={value}
-        >
-            {(filter ? filter.filter(filter) : allowedValues).map(item =>
-                <MenuItem key={item} value={item}>{transform ? transform(item) : item}</MenuItem>
-            )}
-        </Select>
-        {error && showInlineError && <FormHelperText>{errorMessage}</FormHelperText>}
-    </FormControl>
+const renderSelect = props => (
+    <TextField
+        autoFocus={props.autoFocus}
+        disabled={props.disabled}
+        error={!!props.error}
+        FormHelperTextProps={props.FormHelperTextProps}
+        fullWidth={props.fullWidth}
+        helperText={props.error && props.showInlineError ? props.errorMessage : props.helperText}
+        helperTextClassName={props.helperTextClassName}
+        InputLabelProps={{htmlFor: props.id}}
+        InputProps={props.InputProps}
+        inputProps={{...props.inputProps, id: props.id}}
+        inputRef={props.inputRef}
+        label={props.label}
+        margin={props.margin}
+        onChange={event => props.onChange(event.target.value)}
+        placeholder={props.placeholder}
+        select
+        SelectProps={{
+            autoWidth: props.autoWidth,
+            displayEmpty: props.displayEmpty,
+            MenuProps: props.MenuProps,
+            multiple: props.multiple,
+            native: props.native,
+            renderValue: props.renderValue
+        }}
+        value={props.value}
+        {...filterDOMProps(props)}
+    >
+        {(props.filter ? props.allowedValues.filter(props.filter) : props.allowedValues).map(item =>
+            <MenuItem key={item} value={item}>{props.transform ? props.transform(item) : item}</MenuItem>
+        )}
+    </TextField>
 );
 
-const Select_ = ({checkboxes, ...props}) => checkboxes ? renderCheckboxes(props) : renderSelect(props);
+const Select_ = ({checkboxes, ...props}) => wrapField(
+    props,
+    checkboxes ? renderCheckboxes(props) : renderSelect(props)
+);
+
+Select_.defaultProps = {
+    fullWidth: true
+};
 
 Select_.propTypes = {
     filter: PropTypes.func,

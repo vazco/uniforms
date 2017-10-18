@@ -2,8 +2,8 @@ import connectField     from 'uniforms/connectField';
 import filterDOMProps   from 'uniforms/filterDOMProps';
 import React            from 'react';
 import TextField        from 'material-ui/TextField';
-import {FormControl}    from 'material-ui/Form';
-import {FormHelperText} from 'material-ui/Form';
+
+import wrapField from './wrapField';
 
 const dateFormat = value => value && value.toISOString().slice(0, -8);
 const dateParse = (timestamp, onChange) => {
@@ -13,19 +13,30 @@ const dateParse = (timestamp, onChange) => {
     }
 };
 
-export const Date_ = ({disabled, label, onChange, placeholder, value, ...props}) => (
-    <FormControl disabled={disabled} error={!!props.error} required={props.required}>
-        <TextField
-            disabled={disabled}
-            label={label}
-            onChange={event => dateParse(event.target.valueAsNumber, onChange)}
-            placeholder={placeholder}
-            type="datetime-local"
-            value={dateFormat(value)}
-            {...filterDOMProps(props)}
-        />
-        {props.error && props.showInlineError && <FormHelperText>{props.errorMessage}</FormHelperText>}
-    </FormControl>
-);
+export const Date_ = props => wrapField(props, (
+    <TextField
+        autoFocus={props.autoFocus}
+        disabled={props.disabled}
+        error={!!props.error}
+        FormHelperTextProps={props.FormHelperTextProps}
+        fullWidth={props.fullWidth}
+        helperText={props.error && props.showInlineError ? props.errorMessage : props.helperText}
+        helperTextClassName={props.helperTextClassName}
+        InputProps={props.InputProps}
+        inputProps={{...props.inputProps, id: props.id}}
+        inputRef={props.inputRef}
+        label={props.label}
+        margin={props.margin}
+        onChange={event => dateParse(event.target.valueAsNumber, props.onChange)}
+        placeholder={props.placeholder}
+        type="datetime-local"
+        value={dateFormat(props.value)}
+        {...filterDOMProps(props)}
+    />
+));
+
+Date_.defaultProps = {
+    fullWidth: true
+};
 
 export default connectField(Date_);

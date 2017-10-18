@@ -3,25 +3,37 @@ import filterDOMProps   from 'uniforms/filterDOMProps';
 import React            from 'react';
 import TextField        from 'material-ui/TextField';
 import {Component}      from 'react';
-import {FormControl}    from 'material-ui/Form';
-import {FormHelperText} from 'material-ui/Form';
+
+import wrapField from './wrapField';
 
 const noneIfNaN = x => isNaN(x) ? undefined : x;
 
-const Num_ = ({disabled, label, onChange, placeholder, value, ...props}) => (
-    <FormControl disabled={disabled} error={!!props.error} required={props.required}>
-        <TextField
-            disabled={disabled}
-            label={label}
-            onChange={event => onChange(event.target.value)}
-            placeholder={placeholder}
-            type="number"
-            value={value}
-            {...filterDOMProps(props)}
-        />
-        {props.error && props.showInlineError && <FormHelperText>{props.errorMessage}</FormHelperText>}
-    </FormControl>
-);
+const Num_ = props => wrapField(props, (
+    <TextField
+        autoFocus={props.autoFocus}
+        disabled={props.disabled}
+        error={!!props.error}
+        FormHelperTextProps={props.FormHelperTextProps}
+        fullWidth={props.fullWidth}
+        helperText={props.error && props.showInlineError ? props.errorMessage : props.helperText}
+        helperTextClassName={props.helperTextClassName}
+        InputProps={props.InputProps}
+        inputProps={{...props.inputProps, id: props.id}}
+        inputRef={props.inputRef}
+        label={props.label}
+        margin={props.margin}
+        onChange={event => props.onChange(event.target.value)}
+        placeholder={props.placeholder}
+        type="number"
+        value={props.value}
+        {...filterDOMProps(props)}
+    />
+));
+
+Num_.defaultProps = {
+    fullWidth: true
+};
+
 
 // NOTE: React < 16 workaround. Make it optional?
 class Num extends Component {

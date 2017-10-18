@@ -9,45 +9,45 @@ import {FormHelperText}   from 'material-ui/Form';
 import {FormLabel}        from 'material-ui/Form';
 import {RadioGroup}       from 'material-ui/Radio';
 
-const Radio_ = ({
-    allowedValues,
-    checkboxes, // eslint-disable-line no-unused-vars
-    disabled,
-    error,
-    errorMessage,
-    filter,
-    hideFiltered,
-    label,
-    name,
-    onChange,
-    required,
-    showInlineError,
-    transform,
-    value,
-    ...props
-}) => (
-    <FormControl component="fieldset" disabled={disabled} error={!!error} required={required}>
-        {label && <FormLabel component="legend">{label}</FormLabel>}
+import wrapField from './wrapField';
+
+const Radio_ = props => wrapField(props, (
+    <FormControl
+        component="fieldset"
+        disabled={props.disabled}
+        error={!!props.error}
+        fullWidth={props.fullWidth}
+        margin={props.margin}
+        required={props.required}
+    >
+        {props.label && <FormLabel component="legend">{props.label}</FormLabel>}
         <RadioGroup
-            aria-label={name}
-            name={name}
-            onChange={(event, value) => onChange(value)}
-            value={'' + value}
+            aria-label={props.name}
+            name={props.name}
+            onChange={(event, value) => props.onChange(value)}
+            value={'' + props.value}
             {...filterDOMProps(props)}
         >
-            {(hideFiltered && filter ? allowedValues.filter(filter) : allowedValues).map(item =>
+            {(props.hideFiltered && props.filter
+                ? props.allowedValues.filter(props.filter)
+                : props.allowedValues
+            ).map(item =>
                 <FormControlLabel
                     control={<Radio />}
-                    disabled={disabled || (filter && !filter(item))}
+                    disabled={props.disabled || (props.filter && !props.filter(item))}
                     key={item}
-                    label={transform ? transform(item) : item}
+                    label={props.transform ? props.transform(item) : item}
                     value={'' + item}
                 />
             )}
         </RadioGroup>
-        {error && showInlineError && <FormHelperText>{errorMessage}</FormHelperText>}
+        {props.error && props.showInlineError && <FormHelperText>{props.errorMessage}</FormHelperText>}
     </FormControl>
-);
+));
+
+Radio_.propTypes = {
+    fullWidth: true
+};
 
 Radio_.propTypes = {
     filter: PropTypes.func,

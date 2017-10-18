@@ -5,9 +5,9 @@ import React            from 'react';
 import {FormControl}    from 'material-ui/Form';
 import {FormHelperText} from 'material-ui/Form';
 
-const ErrorsField = ({children, ...props}, {uniforms: {error, schema}}) =>
+const ErrorsField = ({children, fullWidth, margin, ...props}, {uniforms: {error, schema}}) =>
     (!error && !children) ? nothing : (
-        <FormControl error={!!error} {...filterDOMProps(props)}>
+        <FormControl error={!!error} fullWidth={fullWidth} margin={margin} {...filterDOMProps(props)}>
             {!!children && (
                 <FormHelperText>{children}</FormHelperText>
             )}
@@ -17,6 +17,10 @@ const ErrorsField = ({children, ...props}, {uniforms: {error, schema}}) =>
         </FormControl>
     )
 ;
+
+ErrorsField.propTypes = {
+    fullWidth: true
+};
 
 ErrorsField.contextTypes = BaseField.contextTypes;
 

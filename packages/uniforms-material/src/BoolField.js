@@ -8,40 +8,57 @@ import {FormControlLabel} from 'material-ui/Form';
 import {FormControl}      from 'material-ui/Form';
 import {FormHelperText}   from 'material-ui/Form';
 
-const Bool = ({
-    appearance,
-    disabled,
-    error,
-    errorMessage,
-    label,
-    onChange,
-    required,
-    showInlineError,
-    value,
-    ...props
-}) => (
-    <FormControl disabled={disabled} error={!!error} required={required}>
+import wrapField from './wrapField';
+
+const Bool = props => wrapField(props, (
+    <FormControl
+        disabled={props.disabled}
+        error={!!props.error}
+        fullWidth={props.fullWidth}
+        margin={props.margin}
+        required={props.required}
+    >
         <FormControlLabel
-            control={appearance === 'toggle' ? (
+            checked={!!props.value}
+            control={props.appearance === 'toggle' ? (
                 <Switch
-                    checked={!!value}
-                    onChange={(event, value) => disabled || onChange(value)}
+                    checkedClassName={props.checkedClassName}
+                    checkedIcon={props.checkedIcon}
+                    disableRipple={props.disableRipple}
+                    disabledClassName={props.disabledClassName}
+                    icon={props.icon}
+                    inputProps={{...props.inputProps, id: props.id}}
+                    inputRef={props.inputRef}
+                    name={props.name}
                     {...filterDOMProps(props)}
                 />
             ) : (
                 <Checkbox
-                    checked={!!value}
-                    onChange={(event, value) => disabled || onChange(value)}
+                    checkedClassName={props.checkedClassName}
+                    checkedIcon={props.checkedIcon}
+                    disableRipple={props.disableRipple}
+                    disabledClassName={props.disabledClassName}
+                    icon={props.icon}
+                    indeterminate={props.indeterminate}
+                    indeterminateIcon={props.indeterminateIcon}
+                    inputProps={{...props.inputProps, id: props.id}}
+                    inputRef={props.inputRef}
+                    name={props.name}
                     {...filterDOMProps(props)}
                 />
             )}
-            label={label}
+            onChange={(event, value) => props.disabled || props.onChange(value)}
+            disabled={props.disabled}
+            label={props.label}
         />
-        {error && showInlineError && <FormHelperText>{errorMessage}</FormHelperText>}
+        {props.error && props.showInlineError && <FormHelperText>{props.errorMessage}</FormHelperText>}
     </FormControl>
-);
+));
 
-Bool.defaultProps = {appearance: 'checkbox'};
+Bool.defaultProps = {
+    appearance: 'checkbox',
+    fullWidth: true
+};
 
 Bool.propTypes = {
     appearance: PropTypes.oneOf(['toggle', 'checkbox'])
