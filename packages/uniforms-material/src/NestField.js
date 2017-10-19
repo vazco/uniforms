@@ -11,16 +11,27 @@ import AutoField from './AutoField';
 
 const Nest = ({
     children,
+    disabled,
     error,
     errorMessage,
     fields,
+    fullWidth,
     itemProps,
     label,
+    margin,
     name,
+    required,
     showInlineError,
     ...props
 }) =>
-    <FormControl {...filterDOMProps(props)} error={!!error}>
+    <FormControl
+        disabled={disabled}
+        error={!!error}
+        fullWidth={fullWidth}
+        margin={margin}
+        required={required}
+        {...filterDOMProps(props)}
+    >
         {label && <FormLabel component="legend">{label}</FormLabel>}
         {children ? (
             injectName(name, children)
@@ -32,5 +43,10 @@ const Nest = ({
         {error && showInlineError && <FormHelperText>{errorMessage}</FormHelperText>}
     </FormControl>
 ;
+
+Nest.defaultProps = {
+    fullWidth: true,
+    margin: 'normal'
+};
 
 export default connectField(Nest, {includeInChain: false});

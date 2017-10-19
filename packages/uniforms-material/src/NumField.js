@@ -30,12 +30,6 @@ const Num_ = props => wrapField(props, (
     />
 ));
 
-Num_.defaultProps = {
-    fullWidth: true,
-    margin: 'normal'
-};
-
-
 // NOTE: React < 16 workaround. Make it optional?
 class Num extends Component {
     constructor () {
@@ -65,5 +59,10 @@ class Num extends Component {
         return Num_({...this.props, onChange: this.onChange, value: this.state.value});
     }
 }
+
+Num.defaultProps = {
+    fullWidth: true,
+    margin: 'normal'
+};
 
 export default connectField(Num);
