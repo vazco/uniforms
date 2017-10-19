@@ -18,8 +18,9 @@ const ErrorsField = ({children, fullWidth, margin, ...props}, {uniforms: {error,
     )
 ;
 
-ErrorsField.propTypes = {
-    fullWidth: true
+ErrorsField.defaultProps = {
+    fullWidth: true,
+    margin: 'normal'
 };
 
 ErrorsField.contextTypes = BaseField.contextTypes;

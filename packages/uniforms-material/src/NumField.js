@@ -31,7 +31,8 @@ const Num_ = props => wrapField(props, (
 ));
 
 Num_.defaultProps = {
-    fullWidth: true
+    fullWidth: true,
+    margin: 'normal'
 };
 
 

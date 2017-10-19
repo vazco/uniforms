@@ -27,7 +27,8 @@ const Text = props => wrapField(props, (
 ));
 
 Text.defaultProps = {
-    fullWidth: true
+    fullWidth: true,
+    margin: 'normal'
 };
 
 export default connectField(Text);

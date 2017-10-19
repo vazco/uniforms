@@ -45,13 +45,14 @@ const Radio_ = props => wrapField(props, (
     </FormControl>
 ));
 
-Radio_.propTypes = {
-    fullWidth: true
+Radio_.defaultProps = {
+    fullWidth: true,
+    margin: 'normal'
 };
 
 Radio_.propTypes = {
     filter: PropTypes.func,
-    hideFiltered:   PropTypes.bool
+    hideFiltered: PropTypes.bool
 };
 
 export default connectField(Radio_);

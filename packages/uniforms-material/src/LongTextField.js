@@ -28,7 +28,8 @@ const LongText = props => wrapField(props, (
 ));
 
 LongText.defaultProps = {
-    fullWidth: true
+    fullWidth: true,
+    margin: 'normal'
 };
 
 export default connectField(LongText);

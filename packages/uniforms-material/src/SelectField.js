@@ -96,7 +96,8 @@ const Select_ = ({checkboxes, ...props}) => wrapField(
 );
 
 Select_.defaultProps = {
-    fullWidth: true
+    fullWidth: true,
+    margin: 'normal'
 };
 
 Select_.propTypes = {

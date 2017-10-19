@@ -36,7 +36,8 @@ export const Date_ = props => wrapField(props, (
 ));
 
 Date_.defaultProps = {
-    fullWidth: true
+    fullWidth: true,
+    margin: 'normal'
 };
 
 export default connectField(Date_);

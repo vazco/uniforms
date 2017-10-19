@@ -57,7 +57,8 @@ const Bool = props => wrapField(props, (
 
 Bool.defaultProps = {
     appearance: 'checkbox',
-    fullWidth: true
+    fullWidth: true,
+    margin: 'normal'
 };
 
 Bool.propTypes = {
