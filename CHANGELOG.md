@@ -1,4 +1,4 @@
-## Next
+## [v1.22.0-rc.3](https://github.com/vazco/uniforms/tree/v1.22.0-rc.3) (2017-10-20)
 - **Fixed:** Clearing `DateField`. [\#357](https://github.com/vazco/uniforms/issues/357)
 
 ## [v1.22.0-rc.2](https://github.com/vazco/uniforms/tree/v1.22.0-rc.2) (2017-10-16)
