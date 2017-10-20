@@ -9,6 +9,8 @@ const dateParse = (timestamp, onChange) => {
     const date = new Date(timestamp);
     if (date.getFullYear() < 10000) {
         onChange(date);
+    } else if (isNaN(timestamp)) {
+        onChange(undefined);
     }
 };
 

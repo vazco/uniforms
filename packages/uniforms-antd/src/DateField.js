@@ -12,7 +12,7 @@ const Date_ = props =>
             disabled={props.disabled}
             id={props.id}
             name={props.name}
-            onChange={value => props.onChange(value.toDate())}
+            onChange={value => props.onChange(value && value.toDate())}
             placeholder={props.placeholder}
             ref={props.inputRef}
             value={props.value && moment(props.value)}
