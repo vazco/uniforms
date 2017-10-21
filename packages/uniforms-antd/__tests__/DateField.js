@@ -92,6 +92,17 @@ test('<DateField> - renders a input which correctly reacts on change', () => {
     expect(onChange).toHaveBeenLastCalledWith('x', now.toDate());
 });
 
+test('<DateField> - renders a input which correctly reacts on change (empty)', () => {
+    const onChange = jest.fn();
+
+    const element = <DateField name="x" />;
+    const wrapper = mount(element, createContext({x: {type: Date}}, {onChange}));
+
+    expect(wrapper.find(DatePicker)).toHaveLength(1);
+    expect(wrapper.find(DatePicker).prop('onChange')(undefined)).toBeFalsy();
+    expect(onChange).toHaveBeenLastCalledWith('x', undefined);
+});
+
 test('<DateField> - renders a wrapper with unknown props', () => {
     const element = <DateField name="x" data-x="x" data-y="y" data-z="z" />;
     const wrapper = mount(element, createContext({x: {type: Date}}));
