@@ -5,17 +5,19 @@ import React            from 'react';
 import {FormControl}    from 'material-ui/Form';
 import {FormHelperText} from 'material-ui/Form';
 
-const ErrorsField = ({children, fullWidth, margin, ...props}, {uniforms: {error, schema}}) =>
-    (!error && !children) ? nothing : (
-        <FormControl error={!!error} fullWidth={fullWidth} margin={margin} {...filterDOMProps(props)}>
-            {!!children && (
-                <FormHelperText>{children}</FormHelperText>
+import wrapField from './wrapField';
+
+const ErrorsField = (props, {uniforms: {error, schema}}) =>
+    (!error && !props.children) ? nothing : wrapField(props, (
+        <FormControl error={!!error} fullWidth={props.fullWidth} margin={props.margin} {...filterDOMProps(props)}>
+            {!!props.children && (
+                <FormHelperText>{props.children}</FormHelperText>
             )}
-            {schema.getErrorMessages(error).map(message =>
-                <FormHelperText key={message}>{message}</FormHelperText>
+            {schema.getErrorMessages(error).map((message, index) =>
+                <FormHelperText key={index}>{message}</FormHelperText>
             )}
         </FormControl>
-    )
+    ))
 ;
 
 ErrorsField.defaultProps = {

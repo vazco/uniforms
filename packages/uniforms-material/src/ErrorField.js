@@ -5,12 +5,14 @@ import React            from 'react';
 import {FormControl}    from 'material-ui/Form';
 import {FormHelperText} from 'material-ui/Form';
 
-const Error = ({children, error, errorMessage, ...props}) =>
-    !error ? nothing : (
-        <FormControl error={!!error}>
-            <FormHelperText {...filterDOMProps(props)}>{children || errorMessage}</FormHelperText>
+import wrapField from './wrapField';
+
+const Error = props =>
+    !props.error ? nothing : wrapField(props, (
+        <FormControl error={!!props.error}>
+            <FormHelperText {...filterDOMProps(props)}>{props.children || props.errorMessage}</FormHelperText>
         </FormControl>
-    )
+    ))
 ;
 
 export default connectField(Error, {initialValue: false});
