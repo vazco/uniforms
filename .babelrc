@@ -1,7 +1,6 @@
 {
   "plugins": [
     "transform-object-assign",
-    "transform-react-inline-elements",
     [
       "transform-react-remove-prop-types",
       {
