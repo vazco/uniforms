@@ -246,3 +246,10 @@ test('<NumField> - renders a icon', () => {
 
     expect(wrapper.find('i')).toHaveLength(1);
 });
+
+test('<NumField> - renders with a custom wrapClassName', () => {
+    const element = <NumField name="x" wrapClassName="test-class-name" />;
+    const wrapper = mount(element, createContext({x: {type: Number}}));
+
+    expect(wrapper.find('.ui.input.test-class-name')).toHaveLength(1);
+});

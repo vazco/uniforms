@@ -21,6 +21,7 @@ const Text = ({
     showInlineError,
     type,
     value,
+    wrapClassName,
     ...props
 }) =>
     <div className={classnames(className, {disabled, error, required}, 'field')} {...filterDOMProps(props)}>
@@ -30,7 +31,7 @@ const Text = ({
             </label>
         )}
 
-        <div className={classnames('ui', {left: iconLeft, icon: icon || iconLeft}, 'input')}>
+        <div className={classnames('ui', wrapClassName, {left: iconLeft, icon: icon || iconLeft}, 'input')}>
             <input
                 disabled={disabled}
                 id={id}
