@@ -1,7 +1,7 @@
 {
   "lerna": "2.4.0",
   "hoist": true,
-  "version": "1.22.0-rc.3",
+  "version": "1.22.0-rc.4",
   "packages": [
     "packages/*"
   ]

@@ -1,3 +1,7 @@
+## [v1.22.0-rc.4](https://github.com/vazco/uniforms/tree/v1.22.0-rc.4) (2017-10-26)
+- **Added:** Support for `wrapClassName` in `uniforms-semantic`. [\#358](https://github.com/vazco/uniforms/issues/358)
+- **Fixed:** Removed `babel-plugin-transform-react-inline-elements`. [\#359](https://github.com/vazco/uniforms/issues/359)
+
 ## [v1.22.0-rc.3](https://github.com/vazco/uniforms/tree/v1.22.0-rc.3) (2017-10-20)
 - **Fixed:** Clearing `DateField`. [\#357](https://github.com/vazco/uniforms/issues/357)
 
