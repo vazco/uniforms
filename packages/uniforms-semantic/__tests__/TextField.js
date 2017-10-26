@@ -164,3 +164,10 @@ test('<TextField> - renders a icon', () => {
 
     expect(wrapper.find('i')).toHaveLength(1);
 });
+
+test('<TextField> - renders with a custom wrapClassName', () => {
+    const element = <TextField name="x" wrapClassName="test-class-name" />;
+    const wrapper = mount(element, createContext({x: {type: String}}));
+
+    expect(wrapper.find('.ui.input.test-class-name')).toHaveLength(1);
+});

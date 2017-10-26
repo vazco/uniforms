@@ -345,10 +345,12 @@ import DateField from 'uniforms-unstyled/DateField'; // Choose your theme packag
     showInlineError={true}
 
     // Field and sourroundings wrap className.
-    //   *Some description would be great, huh?*
+    //   In SemanticUI theme, this class name is used on ui input wrapper,
+    //   so you can pass classes like small, huge, inverted, transparent etc.
     // Available in:
     //   bootstrap3
     //   bootstrap4
+    //   semantic
     wrapClassName="a b c"
 
     // Display time picker in ampm (12hr) format or 24hr format.
@@ -738,10 +740,12 @@ import NumField from 'uniforms-unstyled/NumField'; // Choose your theme package.
     step={5}
 
     // Field and sourroundings wrap className.
-    //   *Some description would be great, huh?*
+    //   In SemanticUI theme, this class name is used on ui input wrapper,
+    //   so you can pass variations like small, huge, inverted, transparent etc.
     // Available in:
     //   bootstrap3
     //   bootstrap4
+    //   semantic
     wrapClassName="a b c"
 />
 ```
@@ -995,10 +999,12 @@ import TextField from 'uniforms-unstyled/TextField'; // Choose your theme packag
     type="password"
 
     // Field and sourroundings wrap className.
-    //   *Some description would be great, huh?*
+    //   In SemanticUI theme, this class name is used on ui input wrapper,
+    //   so you can pass variations like small, huge, inverted, transparent etc.
     // Available in:
     //   bootstrap3
     //   bootstrap4
+    //   semantic
     wrapClassName="a b c"
 />
 ```

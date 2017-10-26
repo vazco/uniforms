@@ -161,3 +161,10 @@ test('<DateField> - renders a icon', () => {
 
     expect(wrapper.find('i')).toHaveLength(1);
 });
+
+test('<DateField> - renders with a custom wrapClassName', () => {
+    const element = <DateField name="x" wrapClassName="test-class-name" />;
+    const wrapper = mount(element, createContext({x: {type: Date}}));
+
+    expect(wrapper.find('.ui.input.test-class-name')).toHaveLength(1);
+});
