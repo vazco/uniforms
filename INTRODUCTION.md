@@ -86,7 +86,7 @@ $ npm install --save react react-dom uniforms uniforms-unstyled
 
 # Quick start
 
-**Note:** The following examples are designed to work out of the box in meteor with `SimpleSchema` (a very common schema in the meteor community), but it's not mandatory and you can easily use it without meteor and with different schemas (see: [Custom Schema](#schemas)). There's also GraphQL support.
+**Note:** The following examples are designed to work out of the box in meteor with `SimpleSchema` (a very common schema in the meteor community), but it's not mandatory and you can easily use it without meteor and with different schemas (see: [Custom Schema](#schemas)). There's also GraphQL and JSON Schema support.
 
 Let's start with defining an example schema:
 
