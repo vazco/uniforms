@@ -1,3 +1,5 @@
+## [v1.22.0](https://github.com/vazco/uniforms/tree/v1.22.0) (2017-10-30)
+
 ## [v1.22.0-rc.4](https://github.com/vazco/uniforms/tree/v1.22.0-rc.4) (2017-10-26)
 - **Added:** Support for `wrapClassName` in `uniforms-semantic`. [\#358](https://github.com/vazco/uniforms/issues/358)
 - **Fixed:** Removed `babel-plugin-transform-react-inline-elements`. [\#359](https://github.com/vazco/uniforms/issues/359)
