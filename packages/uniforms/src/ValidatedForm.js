@@ -5,23 +5,6 @@ import set       from 'lodash/set';
 
 import BaseForm from './BaseForm';
 
-// Silent `Uncaught (in promise)` warnings
-const __unhandledMark = typeof Symbol === 'undefined' ? '__uniformsPromiseMark' : Symbol('__uniformsPromiseMark');
-const __unhandled = event =>
-    event &&
-    event.reason &&
-    event.reason[__unhandledMark] &&
-    event.preventDefault()
-;
-
-if (typeof process !== 'undefined' && process.addListener) {
-    process.addListener('unhandledRejection', __unhandled);
-}
-
-if (typeof window !== 'undefined' && window.addEventListener) {
-    window.addEventListener('unhandledrejection', __unhandled);
-}
-
 const Validated = parent => class extends parent {
     static Validated = Validated;
 
@@ -30,13 +13,17 @@ const Validated = parent => class extends parent {
     static defaultProps = {
         ...parent.defaultProps,
 
+        onValidate (model, error, callback) {
+            callback();
+        },
+
         validate: 'onChangeAfterSubmit'
     };
 
     static propTypes = {
         ...parent.propTypes,
 
-        onValidate: PropTypes.func,
+        onValidate: PropTypes.func.isRequired,
 
         validator: PropTypes.any,
         validate:  PropTypes.oneOf([
@@ -100,11 +87,13 @@ const Validated = parent => class extends parent {
     onChange (key, value) {
         // eslint-disable-next-line max-len
         if (this.props.validate === 'onChange' || this.props.validate === 'onChangeAfterSubmit' && this.state.validate) {
-            this.onValidate(key, value);
+            this.onValidate(key, value).catch(() => {});
         }
+
         // FIXME: https://github.com/vazco/uniforms/issues/293
         // if (this.props.validate === 'onSubmit' && this.state.validate) {
         //     this.setState(() => ({error: null}));
+        // }
 
         super.onChange(...arguments);
     }
@@ -120,11 +109,11 @@ const Validated = parent => class extends parent {
             event.stopPropagation();
         }
 
-        return new Promise(resolve =>
-            this.setState(() => ({validate: true}), () =>
-                resolve(this.onValidate().then(() => super.onSubmit()))
-            )
-        );
+        return new Promise(resolve => {
+            this.setState(() => ({validate: true}), () => {
+                this.onValidate().then(() => resolve(super.onSubmit()), () => {});
+            });
+        });
     }
 
     onValidate (key, value) {
@@ -146,24 +135,18 @@ const Validated = parent => class extends parent {
             catched = error;
         }
 
-        const markAndHandle = (error = catched, resolve, reject) =>
-            // Do not copy error from props to state.
-            this.setState(() => ({error: error === this.props.error ? null : error}), () => {
-                if (error) {
-                    error[__unhandledMark] = true;
-
-                    reject(error);
-                } else {
-                    resolve();
-                }
-            })
-        ;
-
-        return new Promise((resolve, reject) =>
-            this.props.onValidate
-                ? this.props.onValidate(model, catched, error => markAndHandle(error, resolve, reject))
-                : markAndHandle(catched, resolve, reject)
-        );
+        return new Promise((resolve, reject) => {
+            this.props.onValidate(model, catched, (error = catched) => {
+                // Do not copy error from props to state.
+                this.setState(() => ({error: error === this.props.error ? null : error}), () => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve();
+                    }
+                });
+            });
+        });
     }
 };
 

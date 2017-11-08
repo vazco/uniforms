@@ -1,3 +1,6 @@
+## Next
+- **Fixed:** Hiding rejected promises. [\#362](https://github.com/vazco/uniforms/issues/362)
+
 ## [v1.22.0](https://github.com/vazco/uniforms/tree/v1.22.0) (2017-10-30)
 
 ## [v1.22.0-rc.4](https://github.com/vazco/uniforms/tree/v1.22.0-rc.4) (2017-10-26)
