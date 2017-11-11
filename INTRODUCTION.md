@@ -481,9 +481,9 @@ Few props propagate in a very special way. These are `label`, `placeholder` and 
     <TextField />
 </NestField>
 
-<ListField name="authors" disabled>   // Additions are disabled...
-    <ListItemField name="$" disabled> // ...deletion too
-        <NestField disabled={false}>  // ...but editing is not.
+<ListField name="authors" disabled>          // Additions are disabled...
+    <ListItemField name="$" disabled>        // ...deletion too
+        <NestField disabled={false} name=""> // ...but editing is not.
             <TextField name="name" />
             <NumField  name="age" />
         </NestField>
