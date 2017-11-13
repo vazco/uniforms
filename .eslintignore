@@ -1,4 +1,5 @@
 demo/.meteor
+demo/imports/components/vendor
 demo/node_modules
 
 packages/*/*.js
