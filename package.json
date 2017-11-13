@@ -1,15 +1,15 @@
 {
   "private": true,
   "scripts": {
-    "build": "lerna exec --parallel -- babel --out-dir . src",
+    "build": "lerna exec -- babel --out-dir . src",
     "clean": "rimraf coverage packages/*/*.js",
     "coverage": "jest --coverage",
     "coverage:report": "codecov",
-    "install": "lerna bootstrap",
+    "install": "npm run build",
     "lint": "eslint demo packages",
     "lint:demo": "eslint demo",
     "lint:packages": "eslint packages",
-    "postinstall": "npm run build",
+    "postinstall": "lerna bootstrap",
     "prereset": "npm run clean",
     "pretest": "npm run lint",
     "publish": "lerna publish",
@@ -47,7 +47,7 @@
     "simpl-schema": "0.5.0"
   },
   "engines": {
-    "npm": ">=3.0.0"
+    "npm": ">=5.0.0"
   },
   "jest": {
     "collectCoverageFrom": [
