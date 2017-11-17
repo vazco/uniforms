@@ -65,4 +65,4 @@ const List = ({
     </div>
 ;
 
-export default connectField(List, {includeInChain: false});
+export default connectField(List, {ensureValue: true, includeInChain: false});

@@ -1,3 +1,6 @@
+## Next
+- **Fixed:** Passing an empty string to `ListField` and `NestField`. [\#366](https://github.com/vazco/uniforms/issues/366)
+
 ## [v1.22.1](https://github.com/vazco/uniforms/tree/v1.22.1) (2017-11-08)
 - **Fixed:** Hiding rejected promises. [\#362](https://github.com/vazco/uniforms/issues/362)
 
