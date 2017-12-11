@@ -22,10 +22,10 @@
     "src/"
   ],
   "peerDependencies": {
-    "graphql": ">=0.8.2 < 1.0.0",
+    "graphql": ">=0.8.2 <1.0.0",
     "react": "^16.0.0 || ^15.0.0 || ^0.14.0",
     "react-dom": "^16.0.0 || ^15.0.0 || ^0.14.0",
-    "simpl-schema": ">=0.0.4 < 1.0.0"
+    "simpl-schema": ">=0.0.4 <2.0.0"
   },
   "dependencies": {
     "babel-runtime": "^6.20.0",
