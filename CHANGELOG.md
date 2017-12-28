@@ -1,3 +1,6 @@
+## Next:
+- **Added:** Support for `antd@3.0.0`. [\#372](https://github.com/vazco/uniforms/issues/372)
+
 ## [v1.22.2](https://github.com/vazco/uniforms/tree/v1.22.2) (2017-12-11)
 - **Fixed:** Passing an empty string to `ListField` and `NestField`. [\#366](https://github.com/vazco/uniforms/issues/366)
 

@@ -5,16 +5,20 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 
 import wrapField from './wrapField';
 
+// NOTE: Input.TextArea was introduced in 2.12.0 and removed in 3.0.0.
+const TextArea = Input.TextArea || Input;
+const textType = Input.TextArea ? undefined : 'textarea';
+
 const LongText = props =>
     wrapField(props, (
-        <Input
+        <TextArea
             disabled={props.disabled}
             id={props.id}
             name={props.name}
             onChange={event => props.onChange(event.target.value)}
             placeholder={props.placeholder}
             ref={props.inputRef}
-            type="textarea"
+            type={textType}
             value={props.value}
             {...filterDOMProps(props)}
         />

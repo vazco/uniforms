@@ -5,7 +5,7 @@
     "start": "meteor run"
   },
   "dependencies": {
-    "antd": "2.13.11",
+    "antd": "3.0.3",
     "babel-polyfill": "6.26.0",
     "graphql": "0.12.3",
     "material-ui": "0.20.0",

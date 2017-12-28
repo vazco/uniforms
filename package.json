@@ -17,7 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "antd": "2.13.11",
+    "antd": "3.0.3",
     "babel-cli": "6.26.0",
     "babel-eslint": "8.1.2",
     "babel-jest": "22.0.4",
