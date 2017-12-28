@@ -146,9 +146,9 @@ describe('GraphQLBridge', () => {
     describe('#getField', () => {
         it('return correct definition (input)', () => {
             expect(bridgeI.getField('author.firstName')).toEqual({
-                astNode: expect.any(Object),
+                astNode: expect.objectContaining({}),
                 defaultValue: 'John',
-                description: '',
+                description: undefined,
                 name: 'firstName',
                 type: GraphQLString
             });
@@ -157,9 +157,9 @@ describe('GraphQLBridge', () => {
         it('return correct definition (type)', () => {
             expect(bridgeT.getField('author.firstName')).toEqual({
                 args: [],
-                astNode: expect.any(Object),
+                astNode: expect.objectContaining({}),
                 deprecationReason: undefined,
-                description: '',
+                description: undefined,
                 isDeprecated: false,
                 name: 'firstName',
                 type: GraphQLString
