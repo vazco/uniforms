@@ -89,13 +89,20 @@ export default class BaseForm extends Component {
         this.onChange = this.change = this.onChange.bind(this);
         this.onSubmit = this.submit = this.onSubmit.bind(this);
 
-        // TODO: It shouldn't be here
-        const getModel = this.getModel.bind(this);
-        this.getModel = (mode = null, model = getModel(mode)) =>
-            mode !== null && this.props.modelTransform
-                ? this.props.modelTransform(mode, model)
-                : model
-        ;
+        this.getModel = this.getModel.bind(this);
+    }
+
+    getModel(mode = null, model){
+        let fModel = undefined;
+        if(model === undefined && this.props.modelTransform){
+            fModel = this.props.modelTransform(mode);
+        }
+
+        if(mode !== null && this.props.modelTransform){
+            return this.props.modelTransform(mode, fModel);
+        }
+
+        return fModel;
     }
 
     getChildContext () {
