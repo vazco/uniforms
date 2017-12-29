@@ -109,11 +109,27 @@ const Validated = parent => class extends parent {
             event.stopPropagation();
         }
 
-        return new Promise(resolve => {
+        const promise = new Promise((resolve, reject) => {
             this.setState(() => ({validate: true}), () => {
-                this.onValidate().then(() => resolve(super.onSubmit()), () => {});
+                this.onValidate().then(
+                    () => {
+                        super.onSubmit().then(
+                            resolve,
+                            error => {
+                                this.setState({error});
+                                reject(error);
+                            }
+                        );
+                    },
+                    reject
+                );
             });
         });
+
+        // NOTE: It's okay for this Promise to reject.
+        promise.catch(() => {});
+
+        return promise;
     }
 
     onValidate (key, value) {

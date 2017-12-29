@@ -286,6 +286,20 @@ describe('ValidatedForm', () => {
             expect(onValidate).toHaveBeenLastCalledWith({a: 2, b: 1}, null, expect.any(Function));
         });
 
+        it('works with async errors from `onSubmit`', async () => {
+            onSubmit.mockImplementationOnce(() => Promise.reject(new Error()));
+
+            const wrapper = mount(
+                <ValidatedForm model={model} schema={schema} onSubmit={onSubmit} />
+            );
+
+            wrapper.find('form').simulate('submit');
+
+            await new Promise(resolve => process.nextTick(resolve));
+
+            expect(wrapper.instance().getChildContext()).toHaveProperty('uniforms.error', error);
+        });
+
         it('works with async errors from `onValidate`', () => {
             const wrapper = mount(
                 <ValidatedForm model={model} schema={schema} onValidate={onValidate} validate="onChange" />
