@@ -1,3 +1,7 @@
+## Next:
+- **Changed:** If `onSubmit` rejects, it's treated as a form error.
+- **Fixed:** `form.submit` correctly rejects on validation error.
+
 ## [v1.23.0-rc.1](https://github.com/vazco/uniforms/tree/v1.23.0-rc.1) (2017-12-29)
 - **Added:** Support for `antd@3.0.0`. [\#372](https://github.com/vazco/uniforms/issues/372)
 

@@ -234,12 +234,10 @@ export default class BaseForm extends Component {
             event.stopPropagation();
         }
 
-        const promise = Promise.resolve(
+        return Promise.resolve(
             this.props.onSubmit &&
             this.props.onSubmit(this.getModel('submit'))
-        );
-
-        return promise.then(
+        ).then(
             this.props.onSubmitSuccess,
             this.props.onSubmitFailure
         );
