@@ -1,0 +1,10 @@
+[ignore]
+.*/.meteor/.*\.json
+
+[lints]
+all=error
+unclear-type=off
+untyped-import=off
+
+[options]
+module.name_mapper='^uniforms\([^/]*\)\(.*\)$' -> '<PROJECT_ROOT>/packages/uniforms\1/src\2'
