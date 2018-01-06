@@ -1,3 +1,5 @@
+// @flow
+
 import changedKeys from 'uniforms/changedKeys';
 
 describe('changedKeys', () => {
