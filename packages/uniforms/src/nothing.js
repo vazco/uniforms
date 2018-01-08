@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 
 // React < 15 workaround

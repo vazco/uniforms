@@ -1,3 +1,5 @@
+// @flow
+
 // Workaround for SSR
 // https://github.com/vazco/uniforms/issues/40
 // https://github.com/facebook/react/issues/4000
@@ -9,6 +11,6 @@ function randomIdsGenerator (prefix) {
 
 const randomIdPrefix = randomIdsGenerator('uniforms');
 
-export default function randomIds (prefix = randomIdPrefix()) {
+export default function randomIds (prefix: string = randomIdPrefix()) {
     return randomIdsGenerator(prefix);
 }

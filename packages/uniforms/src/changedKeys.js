@@ -1,9 +1,11 @@
+// @flow
+
 import isEqual from 'lodash/isEqual';
 import xorWith from 'lodash/xorWith';
 
 import joinName from './joinName';
 
-export default function changedKeys (root, valueA, valueB) {
+export default function changedKeys (root: string, valueA: any, valueB: any) {
     if (valueA === Object(valueA) && !(valueA instanceof Date)) {
         if (valueB) {
             let pairsA;

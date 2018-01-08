@@ -1,6 +1,8 @@
+// @flow
+
 export const SimpleSchema = {
     extendOptions () {},
-    _makeGeneric (name) {
+    _makeGeneric (name: mixed) {
         if (typeof name !== 'string') {
             return null;
         }

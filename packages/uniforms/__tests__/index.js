@@ -1,3 +1,5 @@
+// @flow
+
 import * as uniforms from 'uniforms';
 
 it('exports everything', () => {

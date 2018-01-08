@@ -1,9 +1,13 @@
+// @flow
+
 import React      from 'react';
 import {Children} from 'react';
 
 import joinName from './joinName';
 
-export default function injectName (name, children, parent) {
+import type {Element} from 'react';
+
+export default function injectName (name: string, children: Element<*>, parent?: Element<*>) {
     return Children.map(children, child =>
         child && typeof child !== 'string' && (!parent || !parent.props || !parent.props.name)
             ? !child.props

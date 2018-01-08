@@ -1,3 +1,5 @@
+// @flow
+
 const unwantedProps = [
     // These props are provided by BaseField
     'changed',
@@ -26,7 +28,7 @@ const unwantedProps = [
 
 // Some benchmarks
 // https://albertxing.com/stool/#bb5cbc0441ad7ac47602694f6c7183b4
-export default function filterDOMProps (props) {
+export default function filterDOMProps (props: {}) {
     const filteredProps = {};
 
     for (const prop in props) {
