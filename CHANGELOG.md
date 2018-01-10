@@ -1,4 +1,4 @@
-## Next:
+## [v1.23.0-rc.2](https://github.com/vazco/uniforms/tree/v1.23.0-rc.2) (2018-01-10)
 - **Changed:** If `onSubmit` rejects, it's treated as a form error.
 - **Fixed:** `form.submit` correctly rejects on validation error.
 
