@@ -1,6 +1,6 @@
 {
   "name": "uniforms-antd",
-  "version": "1.23.0-rc.2",
+  "version": "1.23.0",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",
@@ -24,7 +24,7 @@
   "peerDependencies": {
     "antd": "^3.0.0 || ^2.7.0",
     "react": "^16.0.0 || ^15.0.0 || ^0.14.0",
-    "uniforms": "^1.23.0-rc.2"
+    "uniforms": "^1.23.0"
   },
   "dependencies": {
     "babel-runtime": "^6.20.0",
