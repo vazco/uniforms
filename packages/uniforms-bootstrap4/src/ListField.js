@@ -24,7 +24,7 @@ const List = ({
     ...props
 }) =>
     <div className={classnames('card mb-3', className)} {...filterDOMProps(props)}>
-        <div className="card-block">
+        <div className="card-body">
             {label && (
                 <div className="card-title">
                     <label className="control-label">
