@@ -6,7 +6,7 @@ import nothing        from 'uniforms/nothing';
 
 const Error = ({children, className, error, errorMessage, ...props}) =>
     !error ? nothing : (
-        <div className={classnames('card', className)} {...filterDOMProps(props)}>
+        <div className={classnames('card', 'mb-3', className)} {...filterDOMProps(props)}>
             <div className="card-body">
                 {children ? (
                     children
