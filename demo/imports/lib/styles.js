@@ -12,7 +12,7 @@ const styles = {
 
     bootstrap4: style([
         'https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css',
-        'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.min.css'
+        'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'
     ]),
 
     material: style([]),
