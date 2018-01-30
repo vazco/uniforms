@@ -58,7 +58,10 @@ export default function wrapField ({
                     htmlFor={id}
                     className={classnames(
                         'form-control-label', // bootstrap4 < alpha6
-                        {'col-form-label': grid}, // bootstrap4 > alpha5
+                        {
+                            'col-form-label': grid, // bootstrap4 > alpha5
+                            'text-danger': error
+                        },
                         gridClassName(grid, 'label')
                     )}
                 >
