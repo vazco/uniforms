@@ -7,7 +7,7 @@ import wrapField from './wrapField';
 const Text = props =>
     wrapField(props, (
         <input
-            className={classnames(props.inputClassName, 'form-control', {'form-control-danger': props.error})}
+            className={classnames(props.inputClassName, 'form-control', {'is-invalid': props.error})}
             disabled={props.disabled}
             id={props.id}
             name={props.name}

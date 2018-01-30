@@ -33,7 +33,7 @@ const renderCheckboxes = props =>
 
 const renderSelect = props =>
     <select
-        className={classnames(props.inputClassName, 'c-select form-control', {'form-control-danger': props.error})}
+        className={classnames(props.inputClassName, 'c-select form-control', {'is-invalid': props.error})}
         disabled={props.disabled}
         id={props.id}
         name={props.name}
