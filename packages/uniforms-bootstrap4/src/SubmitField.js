@@ -32,9 +32,9 @@ const SubmitField = ({
     );
 
     return (
-        <div className={classnames(className, {'has-danger': error, row: state.grid})} {...filterDOMProps(props)}>
+        <div className={classnames(className, {'is-invalid': error, row: state.grid})} {...filterDOMProps(props)}>
             {hasWrap && (
-                <label className={classnames('form-control-label', gridClassName(state.grid, 'label'))}>
+                <label className={classnames('col-form-label', gridClassName(state.grid, 'label'))}>
                     &nbsp;
                 </label>
             )}

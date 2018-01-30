@@ -27,7 +27,7 @@ const List = ({
         <div className="card-body">
             {label && (
                 <div className="card-title">
-                    <label className="control-label">
+                    <label className="col-form-label">
                         {label}&nbsp;
                     </label>
 

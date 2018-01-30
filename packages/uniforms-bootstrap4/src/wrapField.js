@@ -45,7 +45,7 @@ export default function wrapField ({
                 className,
                 'form-group',
                 {
-                    'has-danger': error,
+                    'is-invalid': error,
                     disabled,
                     required,
                     row: grid
