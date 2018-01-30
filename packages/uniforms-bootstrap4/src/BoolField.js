@@ -11,6 +11,7 @@ const Bool = ({label, labelBefore, ...props}) =>
                 props.inputClassName,
                 'form-check',
                 `checkbox${props.inline ? '-inline' : ''}`, // bootstrap4 < alpha.6
+                {'text-danger': props.error}
             )}
         >
             <label htmlFor={props.id} className="form-check-label">
