@@ -12,33 +12,25 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import presets from './presets';
 import themes  from './themes';
 
+const scope = Meteor.isClient ? window : global;
+
 // SimpleSchema is using it
 if (Meteor.isClient) {
-    window.Buffer = () => {};
-    window.Buffer.isBuffer = () => false;
+    scope.Buffer = () => {};
+    scope.Buffer.isBuffer = () => false;
 }
+
+// This is required for the eval.
+scope.Ajv              = Ajv;
+scope.GraphQLBridge    = GraphQLBridge;
+scope.JSONSchemaBridge = JSONSchemaBridge;
+scope.SimpleSchema     = SimpleSchema;
+scope.SimpleSchema2    = SimpleSchema2;
+scope.buildASTSchema   = buildASTSchema;
+scope.parse            = parse;
 
 // Dynamic field error.
 MessageBox.defaults({messages: {en: {syntax: ''}}});
-
-// This is required for the eval.
-if (Meteor.isClient) {
-    window.Ajv              = Ajv;
-    window.GraphQLBridge    = GraphQLBridge;
-    window.JSONSchemaBridge = JSONSchemaBridge;
-    window.SimpleSchema     = SimpleSchema;
-    window.SimpleSchema2    = SimpleSchema2;
-    window.buildASTSchema   = buildASTSchema;
-    window.parse            = parse;
-} else {
-    global.Ajv              = Ajv;
-    global.GraphQLBridge    = GraphQLBridge;
-    global.JSONSchemaBridge = JSONSchemaBridge;
-    global.SimpleSchema     = SimpleSchema;
-    global.SimpleSchema2    = SimpleSchema2;
-    global.buildASTSchema   = buildASTSchema;
-    global.parse            = parse;
-}
 
 const schema = new SimpleSchema2({
     preset: {

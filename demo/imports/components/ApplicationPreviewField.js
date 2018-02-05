@@ -14,13 +14,13 @@ class ApplicationPreview extends Component {
         this.state = {model: undefined};
 
         this.onModel = this.onModel.bind(this);
-        this._schema = eval(`${this.props.value.schema}`);
+        this._schema = eval(`(${this.props.value.schema})`);
     }
 
     componentWillReceiveProps (props) {
         if (this.props.value.schema !== props.value.schema) {
             this.onModel({});
-            this._schema = eval(`${props.value.schema}`);
+            this._schema = eval(`(${props.value.schema})`);
         }
     }
 
