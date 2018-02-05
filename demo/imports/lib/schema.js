@@ -1,6 +1,8 @@
+import Ajv              from 'ajv';
+import GraphQLBridge    from 'uniforms/GraphQLBridge';
+import JSONSchemaBridge from 'uniforms/JSONSchemaBridge';
 import MessageBox       from 'message-box';
 import SimpleSchema2    from 'simpl-schema';
-import GraphQLBridge    from 'uniforms/GraphQLBridge';
 import {buildASTSchema} from 'graphql';
 import {parse}          from 'graphql';
 
@@ -21,17 +23,21 @@ MessageBox.defaults({messages: {en: {syntax: ''}}});
 
 // This is required for the eval.
 if (Meteor.isClient) {
-    window.GraphQLBridge  = GraphQLBridge;
-    window.SimpleSchema   = SimpleSchema;
-    window.SimpleSchema2  = SimpleSchema2;
-    window.buildASTSchema = buildASTSchema;
-    window.parse          = parse;
+    window.Ajv              = Ajv;
+    window.GraphQLBridge    = GraphQLBridge;
+    window.JSONSchemaBridge = JSONSchemaBridge;
+    window.SimpleSchema     = SimpleSchema;
+    window.SimpleSchema2    = SimpleSchema2;
+    window.buildASTSchema   = buildASTSchema;
+    window.parse            = parse;
 } else {
-    global.GraphQLBridge  = GraphQLBridge;
-    global.SimpleSchema   = SimpleSchema;
-    global.SimpleSchema2  = SimpleSchema2;
-    global.buildASTSchema = buildASTSchema;
-    global.parse          = parse;
+    global.Ajv              = Ajv;
+    global.GraphQLBridge    = GraphQLBridge;
+    global.JSONSchemaBridge = JSONSchemaBridge;
+    global.SimpleSchema     = SimpleSchema;
+    global.SimpleSchema2    = SimpleSchema2;
+    global.buildASTSchema   = buildASTSchema;
+    global.parse            = parse;
 }
 
 const schema = new SimpleSchema2({

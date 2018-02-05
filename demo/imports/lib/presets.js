@@ -92,6 +92,32 @@ const presets = {
         })
     `,
 
+    'Address (JSONSchema)': preset`
+        var schema = {
+            title: 'Address',
+            type: 'object',
+            properties: {
+                city:   {type: 'string'},
+                state:  {type: 'string'},
+                street: {type: 'string'},
+                zip:    {type: 'string', pattern: '[0-9]{5}'},
+            },
+            required: ['street', 'zip', 'state']
+        };
+
+        var validator = new Ajv({allErrors: true, useDefaults: true}).compile(schema);
+
+        var schemaValidator = model => {
+            validator(model);
+
+            if (validator.errors && validator.errors.length) {
+                throw {details: validator.errors};
+            }
+        };
+
+        new JSONSchemaBridge(schema, schemaValidator)
+    `,
+
     'Address (SimpleSchema)': preset`
         new SimpleSchema({
             city: {
