@@ -9,42 +9,16 @@ function gridClassNamePart (size, value, side) {
         : `col-${sizeInfix}${(12 - value)}`;
 }
 
+const gridOrder = {
+    xs: 1,
+    sm: 2,
+    md: 3,
+    lg: 4,
+    xl: 5
+};
+
 function compareSizeClass (a, b) {
-    if (a === 'xs') {
-        return -1;
-    }
-
-    if (a === 'sm') {
-        if (b === 'md') {
-            return -1;
-        }
-
-        if (b === 'lg') {
-            return -1;
-        }
-
-        if (b === 'xl') {
-            return -1;
-        }
-    }
-
-    if (a === 'md') {
-        if (b === 'lg') {
-            return -1;
-        }
-
-        if (b === 'xl') {
-            return -1;
-        }
-    }
-
-    if (a === 'lg') {
-        if (b === 'xl') {
-            return -1;
-        }
-    }
-
-    return 1;
+    return gridOrder[a] - gridOrder[b];
 }
 
 export default function gridClassName (grid, side) {
@@ -65,9 +39,8 @@ export default function gridClassName (grid, side) {
 
     // Example: {xs: 6, sm: 4, md: 3}
     if (typeof grid === 'object') {
-
-        if (!grid['xs']) {
-            grid['xs'] = grid['sm'] || grid['md'] || grid['lg'] || grid['xl'];
+        if (!grid.xs) {
+            grid.xs = grid.sm || grid.md || grid.lg || grid.xl;
         }
 
         return Object.keys(grid)

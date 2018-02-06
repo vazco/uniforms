@@ -10,8 +10,11 @@ const Bool = ({label, labelBefore, ...props}) =>
             className={classnames(
                 props.inputClassName,
                 'form-check',
-                `checkbox${props.inline ? ' custom-control-inline' : ''}`,
-                {'text-danger': props.error}
+                'checkbox',
+                {
+                    'text-danger': props.error,
+                    'custom-control-inline': props.inline
+                }
             )}
         >
             <label htmlFor={props.id} className="form-check-label">
