@@ -39,13 +39,13 @@ export default function gridClassName (grid, side) {
 
     // Example: {xs: 6, sm: 4, md: 3}
     if (typeof grid === 'object') {
-        const completeGrid = grid.xs
-            ? grid
-            : {xs: grid.sm || grid.md || grid.lg || grid.xl, ...grid};
+        if (!grid.xs) {
+            grid = {xs: grid.sm || grid.md || grid.lg || grid.xl, ...grid};
+        }
 
-        return Object.keys(completeGrid)
+        return Object.keys(grid)
             .sort(compareSizeClass)
-            .map(size => gridClassNamePart(size, completeGrid[size], side)).join(' ');
+            .map(size => gridClassNamePart(size, grid[size], side)).join(' ');
     }
 
     return '';
