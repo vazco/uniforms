@@ -12,7 +12,11 @@ const Radio = props =>
                 className={classnames(
                     props.inputClassName,
                     'form-check',
-                    `radio${props.inline ? '-inline' : ''}` // bootstrap4 < alpha.6
+                    'radio',
+                    {
+                        'text-danger': props.error,
+                        'custom-control-inline': props.inline
+                    }
                 )}
             >
                 <label htmlFor={`${props.id}-${item}`} className="form-check-label">

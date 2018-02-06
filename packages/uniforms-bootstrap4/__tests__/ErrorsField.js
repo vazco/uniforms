@@ -27,10 +27,10 @@ test('<ErrorsField> - renders list of correct error messages (context)', () => {
     const element = <ErrorsField name="x" />;
     const wrapper = mount(element, createContext({x: {type: String}, y: {type: String}, z: {type: String}}, {error}));
 
-    expect(wrapper.find('.card-block > div')).toHaveLength(3);
-    expect(wrapper.find('.card-block > div').at(0).text()).toBe('X is required');
-    expect(wrapper.find('.card-block > div').at(1).text()).toBe('Y is required');
-    expect(wrapper.find('.card-block > div').at(2).text()).toBe('Z is required');
+    expect(wrapper.find('.card-body > div')).toHaveLength(3);
+    expect(wrapper.find('.card-body > div').at(0).text()).toBe('X is required');
+    expect(wrapper.find('.card-body > div').at(1).text()).toBe('Y is required');
+    expect(wrapper.find('.card-body > div').at(2).text()).toBe('Z is required');
 });
 
 test('<ErrorsField> - renders children (specified)', () => {

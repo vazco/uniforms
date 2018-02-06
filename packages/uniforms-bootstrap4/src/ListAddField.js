@@ -15,7 +15,7 @@ const ListAdd = ({
 
     return (
         <div
-            className={classnames('label label-default label-pill float-xs-right', className)}
+            className={classnames('label label-default label-pill float-right', className)}
             onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
             {...filterDOMProps(props)}
         >

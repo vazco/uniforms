@@ -17,7 +17,7 @@ const dateParse = (timestamp, onChange) => {
 const Date_ = props =>
     wrapField(props, (
         <input
-            className={classnames(props.inputClassName, 'form-control', {'form-control-danger': props.error})}
+            className={classnames(props.inputClassName, 'form-control', {'is-invalid': props.error})}
             disabled={props.disabled}
             id={props.id}
             max={dateFormat(props.max)}

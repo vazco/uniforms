@@ -23,11 +23,11 @@ const List = ({
     value,
     ...props
 }) =>
-    <div className={classnames('card', className)} {...filterDOMProps(props)}>
-        <div className="card-block">
+    <div className={classnames('card mb-3', className)} {...filterDOMProps(props)}>
+        <div className="card-body">
             {label && (
                 <div className="card-title">
-                    <label className="control-label">
+                    <label className="col-form-label">
                         {label}&nbsp;
                     </label>
 
