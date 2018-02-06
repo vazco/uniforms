@@ -10,7 +10,7 @@ const Bool = ({label, labelBefore, ...props}) =>
             className={classnames(
                 props.inputClassName,
                 'form-check',
-                `checkbox${props.inline ? '-inline' : ''}`, // bootstrap4 < alpha.6
+                `checkbox${props.inline ? ' custom-control-inline' : ''}`,
                 {'text-danger': props.error}
             )}
         >
