@@ -39,7 +39,10 @@ export default function gridClassName (grid, side) {
 
     // Example: {xs: 6, sm: 4, md: 3}
     if (typeof grid === 'object') {
-        const completeGrid = {xs: grid.sm || grid.md || grid.lg || grid.xl, ...grid};
+        const completeGrid = grid.xs
+            ? grid
+            : {xs: grid.sm || grid.md || grid.lg || grid.xl, ...grid};
+
         return Object.keys(completeGrid)
             .sort(compareSizeClass)
             .map(size => gridClassNamePart(size, completeGrid[size], side)).join(' ');
