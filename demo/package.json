@@ -5,6 +5,7 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "ajv": "6.1.1",
     "antd": "3.0.3",
     "babel-polyfill": "6.26.0",
     "graphql": "0.12.3",
