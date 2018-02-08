@@ -3,21 +3,20 @@
 }
 
 body {
-    margin:  0;
+    margin: 0;
     padding: 0;
 }
 
 img {
-    position: absolute;
-
-    top:    0;
-    right:  0;
     border: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 .panelGroup {
-    width:  100vw !important;
     height: 100vh !important;
+    width: 100vw !important;
 }
 
 .panelGroup .divider,
@@ -49,10 +48,9 @@ img {
 }
 
 .panelHeaderInfo select {
-    font-size:   1rem;
-    line-height: 1rem;
-
     background: transparent;
+    font-size: 1rem;
+    line-height: 1rem;
 }
 
 .panelHeaderInfo select option {
@@ -70,9 +68,9 @@ img {
 
 .panelWrapper > div,
 .panelWrapper > section > div {
+    flex: 1;
+    overflow-y: auto;
     padding: 0.75rem;
-    width: 100%;
-    overflow-y: scroll;
 }
 
 .panelLeft textarea {

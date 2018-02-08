@@ -13,7 +13,6 @@
     "meteor-node-stubs": "0.3.2",
     "react": "16.2.0",
     "react-dom": "16.2.0",
-    "react-mounter": "1.2.0",
     "react-panelgroup": "1.0.5",
     "react-tap-event-plugin": "3.0.2",
     "simpl-schema": "1.4.2",
