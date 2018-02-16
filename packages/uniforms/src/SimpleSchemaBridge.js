@@ -33,7 +33,7 @@ try {
     }
 } catch (_) { /* Ignore it. */ }
 
-if (SimpleSchema) {
+if (SimpleSchema && Match) {
     SimpleSchema.extendOptions({
         uniforms: Match.Optional(
             Match.OneOf(
