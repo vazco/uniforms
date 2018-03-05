@@ -1,3 +1,6 @@
+## [v1.23.1](https://github.com/vazco/uniforms/tree/v1.23.1) (2018-03-05)
+- **Fixed:** Got rid of React warning triggered during form reset.
+
 ## [v1.23.0](https://github.com/vazco/uniforms/tree/v1.23.0) (2018-01-12)
 
 ## [v1.23.0-rc.2](https://github.com/vazco/uniforms/tree/v1.23.0-rc.2) (2018-01-10)

@@ -224,8 +224,12 @@ export default class BaseForm extends Component {
         }
     }
 
+    __reset (state) {
+        return {changed: false, changedMap: {}, resetCount: state.resetCount + 1};
+    }
+
     onReset () {
-        this.setState(state => ({changed: false, changedMap: {}, resetCount: state.resetCount + 1}));
+        this.setState(this.__reset);
     }
 
     onSubmit (event) {
