@@ -16,12 +16,12 @@
     "react-panelgroup": "1.0.5",
     "react-tap-event-plugin": "3.0.2",
     "simpl-schema": "1.4.2",
-    "uniforms": "1.23.1",
-    "uniforms-antd": "1.23.1",
-    "uniforms-bootstrap3": "1.23.1",
-    "uniforms-bootstrap4": "1.23.1",
-    "uniforms-material": "1.23.1",
-    "uniforms-semantic": "1.23.1",
-    "uniforms-unstyled": "1.23.1"
+    "uniforms": "1.23.2",
+    "uniforms-antd": "1.23.2",
+    "uniforms-bootstrap3": "1.23.2",
+    "uniforms-bootstrap4": "1.23.2",
+    "uniforms-material": "1.23.2",
+    "uniforms-semantic": "1.23.2",
+    "uniforms-unstyled": "1.23.2"
   }
 }
