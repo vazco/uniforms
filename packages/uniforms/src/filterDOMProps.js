@@ -20,6 +20,7 @@ const unwantedProps = [
     'parent',
     'placeholder',
     'showInlineError',
+    'transform',
     'value',
 
     // This is used by AutoField
