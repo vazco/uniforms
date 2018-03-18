@@ -1,3 +1,6 @@
+## [v1.23.2](https://github.com/vazco/uniforms/tree/v1.23.2) (2018-03-18)
+- **Fixed:** Added `transform` to `filterDOMProps` defaults. [\#399](https://github.com/vazco/uniforms/issues/399)
+
 ## [v1.23.1](https://github.com/vazco/uniforms/tree/v1.23.1) (2018-03-05)
 - **Fixed:** Got rid of React warning triggered during form reset.
 
