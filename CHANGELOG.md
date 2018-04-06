@@ -1,3 +1,7 @@
+## Next:
+- **Added:** Support for `style` in `uniforms-antd`. [\#404](https://github.com/vazco/uniforms/issues/404)
+- **Fixed:** Added `allowedValues` to `filterDOMProps` defaults. [\#403](https://github.com/vazco/uniforms/issues/403)
+
 ## [v1.23.2](https://github.com/vazco/uniforms/tree/v1.23.2) (2018-03-18)
 - **Fixed:** Added `transform` to `filterDOMProps` defaults. [\#399](https://github.com/vazco/uniforms/issues/399)
 
