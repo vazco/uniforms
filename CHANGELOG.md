@@ -1,4 +1,4 @@
-## Next:
+## [v1.24.0](https://github.com/vazco/uniforms/tree/v1.24.0) (2018-04-06)
 - **Added:** Support for `style` in `uniforms-antd`. [\#404](https://github.com/vazco/uniforms/issues/404)
 - **Fixed:** Added `allowedValues` to `filterDOMProps` defaults. [\#403](https://github.com/vazco/uniforms/issues/403)
 
