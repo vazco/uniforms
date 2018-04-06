@@ -23,7 +23,8 @@ const unwantedProps = [
     'transform',
     'value',
 
-    // This is used by AutoField
+    // These are used by AutoField
+    'allowedValues',
     'component'
 ];
 
