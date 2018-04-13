@@ -14,7 +14,7 @@
     "postinstall": "lerna bootstrap",
     "prereset": "npm run clean",
     "pretest": "npm run lint && npm run flow",
-    "publish": "lerna publish",
+    "publish": "npm run clean && npm run build && lerna publish",
     "reset": "rimraf node_modules packages/*/node_modules",
     "test": "jest"
   },
