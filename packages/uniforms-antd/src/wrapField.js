@@ -14,7 +14,7 @@ export default function wrapField ({
     labelCol,
     required,
     showInlineError,
-    style,
+    wrapperStyle,
     wrapperCol
 }, children) {
     const labelNode = !!label && (
@@ -40,7 +40,7 @@ export default function wrapField ({
             label={labelNode}
             labelCol={labelCol}
             required={required}
-            style={style || {marginBottom: '12px'}}
+            style={wrapperStyle || {marginBottom: '12px'}}
             validateStatus={error ? 'error' : undefined}
             wrapperCol={wrapperCol}
         >
