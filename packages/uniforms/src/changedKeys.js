@@ -5,7 +5,7 @@ import xorWith from 'lodash/xorWith';
 
 import joinName from './joinName';
 
-export default function changedKeys (root: string, valueA: any, valueB: any) {
+export default function changedKeys (root: string, valueA: any, valueB: any): string[] {
     if (valueA === Object(valueA) && !(valueA instanceof Date)) {
         if (valueB) {
             let pairsA;
