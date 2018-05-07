@@ -1,3 +1,6 @@
+## Next:
+- **Fixed:** `ListAddField` and `ListDelField` in `uniforms-bootstrap4` now use `.badge` instead of `.label` styling. [\#419](https://github.com/vazco/uniforms/issues/419)
+
 ## [v1.24.2](https://github.com/vazco/uniforms/tree/v1.24.2) (2018-04-25)
 - **Added:** Support for `rows` in `LongTextField` in `uniforms-bootstrap3`. [\#418](https://github.com/vazco/uniforms/issues/418)
 - **Fixed:** Prop `style` was incorrectly used in `uniforms-antd`, therefore it was renamed to `wrapperStyle`. [\#416](https://github.com/vazco/uniforms/issues/416)
