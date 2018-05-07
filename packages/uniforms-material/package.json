@@ -1,6 +1,6 @@
 {
   "name": "uniforms-material",
-  "version": "1.24.2",
+  "version": "1.24.3",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",
@@ -24,7 +24,7 @@
   "peerDependencies": {
     "material-ui": ">=0.16.7 <1.0.0",
     "react": "^16.0.0 || ^15.0.0 || ^0.14.0",
-    "uniforms": "^1.24.2"
+    "uniforms": "^1.24.3"
   },
   "dependencies": {
     "babel-runtime": "^6.20.0",

@@ -1,4 +1,4 @@
-## Next:
+## [v1.24.3](https://github.com/vazco/uniforms/tree/v1.24.3) (2018-05-07)
 - **Fixed:** `ListAddField` and `ListDelField` in `uniforms-bootstrap4` now use `.badge` instead of `.label` styling. [\#419](https://github.com/vazco/uniforms/issues/419)
 
 ## [v1.24.2](https://github.com/vazco/uniforms/tree/v1.24.2) (2018-04-25)
