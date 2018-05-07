@@ -1,5 +1,3 @@
-import 'babel-polyfill';
-
 import React    from 'react';
 import tapEvent from 'react-tap-event-plugin';
 import {render} from 'react-dom';
