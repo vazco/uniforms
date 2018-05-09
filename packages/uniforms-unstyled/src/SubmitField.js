@@ -13,5 +13,6 @@ const SubmitField = ({disabled, inputRef, value, ...props}, {uniforms: {error, s
 ;
 
 SubmitField.contextTypes = BaseField.contextTypes;
+SubmitField.defaultProps = {value: 'Submit'};
 
 export default SubmitField;
