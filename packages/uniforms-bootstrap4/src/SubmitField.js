@@ -27,7 +27,7 @@ const SubmitField = ({
             disabled={disabled === undefined ? !!(error || state.disabled) : disabled}
             ref={inputRef}
             type="submit"
-            value={value}
+            {...(value ? {value} : {})}
         />
     );
 

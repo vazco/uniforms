@@ -9,7 +9,7 @@ const SubmitField = ({className, disabled, inputRef, value, ...props}, {uniforms
         disabled={disabled === undefined ? !!(error || state.disabled) : disabled}
         ref={inputRef}
         type="submit"
-        value={value}
+        {...(value ? {value} : {})}
         {...filterDOMProps(props)}
     />
 ;
