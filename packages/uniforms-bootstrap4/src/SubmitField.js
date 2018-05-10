@@ -27,7 +27,7 @@ const SubmitField = ({
             disabled={disabled === undefined ? !!(error || state.disabled) : disabled}
             ref={inputRef}
             type="submit"
-            value={value}
+            {...(value ? {value} : {})}
         />
     );
 
@@ -51,6 +51,6 @@ const SubmitField = ({
 };
 
 SubmitField.contextTypes = BaseField.contextTypes;
-SubmitField.defaultProps = {inputClassName: 'btn btn-primary', value: 'Submit'};
+SubmitField.defaultProps = {inputClassName: 'btn btn-primary'};
 
 export default SubmitField;
