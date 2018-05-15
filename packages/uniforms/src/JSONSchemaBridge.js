@@ -159,7 +159,7 @@ export default class JSONSchemaBridge extends Bridge {
             ...(fieldType === 'number' ? {decimal: true} : {}),
             options: opts || options,
             label: label === true ? fieldNameCapitalized : label || '',
-            placeholder: placeholder === true ? fieldNameCapitalized : placeholder || '',
+            placeholder: placeholder === true ? fieldNameCapitalized : placeholder || undefined,
             required: isRequired
         };
 
