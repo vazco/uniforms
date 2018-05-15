@@ -3,7 +3,12 @@ import classnames     from 'classnames';
 import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
-const dateFormat = value => value && value.toISOString().slice(0, -8);
+const dateFormat = value => {
+  let timestamp = Date.parse(value);
+  if (Number.isNaN(timestamp)) return value;
+  value = new Date(timestamp);
+  return value.toISOString().slice(0, -8);
+}
 const dateParse = (timestamp, onChange) => {
     const date = new Date(timestamp);
     if (date.getFullYear() < 10000) {
