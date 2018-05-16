@@ -46,7 +46,8 @@ describe('GraphQLBridge', () => {
         author: {component: 'div'},
         id: {
             allowedValues: [1, 2, 3],
-            label: 'Post ID'
+            label: 'Post ID',
+            placeholder: 'Post ID'
         },
         title: {
             initialValue: 'Some Title',
@@ -199,6 +200,7 @@ describe('GraphQLBridge', () => {
         it('works with allowedValues', () => {
             expect(bridgeI.getProps('id')).toEqual({
                 label: 'Post ID',
+                placeholder: 'Post ID',
                 required: true,
                 allowedValues: [1, 2, 3]
             });
@@ -207,6 +209,7 @@ describe('GraphQLBridge', () => {
         it('works with allowedValues from props', () => {
             expect(bridgeI.getProps('id', {allowedValues: [1]})).toEqual({
                 label: 'Post ID',
+                placeholder: 'Post ID',
                 required: true,
                 allowedValues: [1]
             });
@@ -223,6 +226,7 @@ describe('GraphQLBridge', () => {
         it('works with label (custom)', () => {
             expect(bridgeI.getProps('id', {label: 'ID'})).toEqual({
                 label: 'ID',
+                placeholder: 'Post ID',
                 required: true,
                 allowedValues: [1, 2, 3]
             });
@@ -231,6 +235,7 @@ describe('GraphQLBridge', () => {
         it('works with label (true)', () => {
             expect(bridgeI.getProps('id', {label: true})).toEqual({
                 label: 'Post ID',
+                placeholder: 'Post ID',
                 required: true,
                 allowedValues: [1, 2, 3]
             });
@@ -239,6 +244,34 @@ describe('GraphQLBridge', () => {
         it('works with label (falsy)', () => {
             expect(bridgeI.getProps('id', {label: null})).toEqual({
                 label: '',
+                placeholder: 'Post ID',
+                required: true,
+                allowedValues: [1, 2, 3]
+            });
+        });
+
+        it('works with placeholder (custom)', () => {
+            expect(bridgeI.getProps('id', {placeholder: 'Post ID'})).toEqual({
+                label: 'Post ID',
+                placeholder: 'Post ID',
+                required: true,
+                allowedValues: [1, 2, 3]
+            });
+        });
+
+        it('works with placeholder (true)', () => {
+            expect(bridgeI.getProps('id', {placeholder: true})).toEqual({
+                label: 'Post ID',
+                placeholder: 'Post ID',
+                required: true,
+                allowedValues: [1, 2, 3]
+            });
+        });
+
+        it('works with placeholder (falsy)', () => {
+            expect(bridgeI.getProps('id', {placeholder: null})).toEqual({
+                label: 'Post ID',
+                placeholder: '',
                 required: true,
                 allowedValues: [1, 2, 3]
             });
