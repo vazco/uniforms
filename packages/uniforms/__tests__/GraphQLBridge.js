@@ -277,6 +277,18 @@ describe('GraphQLBridge', () => {
             });
         });
 
+        it('works with placeholder (extra.placeholedr === undefined)', () => {
+            expect(bridgeI.getProps('title', {placeholder: true})).toEqual({
+                allowedValues: ['a', 'b', 'Some Title'],
+                label: '',
+                placeholder: true,
+                required: false,
+                transform: expect.any(Function),
+                options: [{label: 1, value: 'a'}, {label: 2, value: 'b'}, {label: 3, value: 'Some Title'}],
+                initialValue: 'Some Title'
+            });
+        });
+
         it('works with Number type', () => {
             expect(bridgeI.getProps('author.decimal')).toEqual({
                 label: '',
