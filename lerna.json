@@ -3,11 +3,9 @@
   "version": "1.24.3",
   "command": {
     "bootstrap": {
-      "hoist": true,
-      "ignore": "demo"
+      "hoist": true
     },
     "exec": {
-      "ignore": "demo",
       "parallel": true
     }
   },
