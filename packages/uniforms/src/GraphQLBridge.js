@@ -139,7 +139,7 @@ export default class GraphQLBridge extends Bridge {
 
         if (props.placeholder === true && extra.placeholder) {
             ready.placeholder = extra.placeholder;
-        } else if (props.placeholder !== undefined && (props.placeholder === false || props.placeholder === null)) {
+        } else if (props.placeholder === false || props.placeholder === null) {
             ready.placeholder = '';
         }
 
