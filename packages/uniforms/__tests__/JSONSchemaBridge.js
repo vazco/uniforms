@@ -266,6 +266,54 @@ describe('JSONSchemaBridge', () => {
             });
         });
 
+        it('works with placeholder (custom)', () => {
+            expect(bridge.getProps('email.work', {placeholder: 'Work email'})).toEqual({
+                allowedValues: undefined,
+                label: 'Work',
+                options: undefined,
+                placeholder: 'Work email',
+                required: true
+            });
+        });
+
+        it('works with placeholder (true)', () => {
+            expect(bridge.getProps('email.work', {placeholder: true})).toEqual({
+                allowedValues: undefined,
+                label: 'Work',
+                options: undefined,
+                placeholder: 'Work',
+                required: true
+            });
+        });
+
+        it('works with placeholder (falsy)', () => {
+            expect(bridge.getProps('email.work', {placeholder: null})).toEqual({
+                allowedValues: undefined,
+                label: 'Work',
+                options: undefined,
+                placeholder: null,
+                required: true
+            });
+        });
+
+        it('works with placeholder (label falsy)', () => {
+            expect(bridge.getProps('email.work', {label: null, placeholder: true})).toEqual({
+                allowedValues: undefined,
+                label: '',
+                options: undefined,
+                placeholder: 'Work',
+                required: true
+            });
+
+            expect(bridge.getProps('email.work', {label: false, placeholder: true})).toEqual({
+                allowedValues: undefined,
+                label: '',
+                options: undefined,
+                placeholder: 'Work',
+                required: true
+            });
+        });
+
         it('works with Number type', () => {
             expect(bridge.getProps('salary')).toEqual({
                 allowedValues: ['low', 'medium', 'height'],

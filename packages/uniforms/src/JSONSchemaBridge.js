@@ -144,7 +144,7 @@ export default class JSONSchemaBridge extends Bridge {
         return defaultValue;
     }
 
-    getProps (name, {label = true, options: opts, ...props} = {}) {
+    getProps (name, {label = true, options: opts, placeholder, ...props} = {}) {
         const {enum: _enum, type: _type, options: _options, uniforms} = this.getField(name);
         const {
             enum: allowedValues = _enum, options = _options,type: fieldType = _type, isRequired
@@ -152,11 +152,14 @@ export default class JSONSchemaBridge extends Bridge {
 
         const [fieldName] = joinName(null, name).slice(-1).map(str => str.replace(/([A-Z])/g, ' $1'));
 
+        const fieldNameCapitalized = fieldName.charAt(0).toUpperCase() + fieldName.slice(1).toLowerCase();
+
         const ready = {
             allowedValues,
             ...(fieldType === 'number' ? {decimal: true} : {}),
             options: opts || options,
-            label: label === true ? fieldName.charAt(0).toUpperCase() + fieldName.slice(1).toLowerCase() : label || '',
+            label: label === true ? fieldNameCapitalized : label || '',
+            placeholder: placeholder === true ? fieldNameCapitalized : placeholder,
             required: isRequired
         };
 

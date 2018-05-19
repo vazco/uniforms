@@ -137,6 +137,12 @@ export default class GraphQLBridge extends Bridge {
             ready.label = '';
         }
 
+        if (props.placeholder === true && extra.placeholder) {
+            ready.placeholder = extra.placeholder;
+        } else if (props.placeholder === false || props.placeholder === null) {
+            ready.placeholder = '';
+        }
+
         if (fieldType instanceof graphql.GraphQLScalarType && fieldType.name === 'Float') {
             ready.decimal = true;
         }
