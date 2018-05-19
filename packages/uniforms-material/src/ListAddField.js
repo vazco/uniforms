@@ -1,13 +1,14 @@
-import Add            from 'material-ui/svg-icons/content/add';
-import RaisedButton   from 'material-ui/RaisedButton';
-import React          from 'react';
 import connectField   from 'uniforms/connectField';
+import AddIcon        from '@material-ui/icons/Add';
 import filterDOMProps from 'uniforms/filterDOMProps';
+import IconButton     from '@material-ui/core/IconButton';
+import React          from 'react';
+import FormControl    from '@material-ui/core/FormControl';
 
 const ListAdd = ({
     disabled,
-    icon: Icon,
-    iconVisible,
+    fullWidth,
+    margin,
     parent,
     value,
     ...props
@@ -15,19 +16,21 @@ const ListAdd = ({
     const limitNotReached = !disabled && !(parent.maxCount <= parent.value.length);
 
     return (
-        <RaisedButton
-            disabled={!limitNotReached}
-            icon={iconVisible ? <Icon /> : undefined}
-            onTouchTap={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
-            {...filterDOMProps(props)}
-        />
+        <FormControl fullWidth={!!fullWidth} margin={margin}>
+            <IconButton
+                disabled={!limitNotReached}
+                onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
+                {...filterDOMProps(props)}
+            >
+                <AddIcon />
+            </IconButton>
+        </FormControl>
     );
 };
 
 ListAdd.defaultProps = {
-    children: 'Add',
-    icon: Add,
-    iconVisible: false
+    fullWidth: true,
+    margin: 'normal'
 };
 
 export default connectField(ListAdd, {includeParent: true, initialValue: false});

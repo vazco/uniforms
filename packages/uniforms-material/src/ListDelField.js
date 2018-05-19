@@ -1,13 +1,11 @@
-import RaisedButton   from 'material-ui/RaisedButton';
-import React          from 'react';
-import Remove         from 'material-ui/svg-icons/content/remove';
 import connectField   from 'uniforms/connectField';
+import DeleteIcon     from '@material-ui/icons/Delete';
 import filterDOMProps from 'uniforms/filterDOMProps';
+import IconButton     from '@material-ui/core/IconButton';
+import React          from 'react';
 
 const ListDel = ({
     disabled,
-    icon: Icon,
-    iconVisible,
     name,
     parent,
     ...props
@@ -16,22 +14,17 @@ const ListDel = ({
     const limitNotReached = !disabled && !(parent.minCount >= parent.value.length);
 
     return (
-        <RaisedButton
+        <IconButton
             disabled={!limitNotReached}
-            icon={iconVisible ? <Icon /> : undefined}
-            onTouchTap={() => limitNotReached && parent.onChange([]
+            onClick={() => limitNotReached && parent.onChange([]
                 .concat(parent.value.slice(0,  fieldIndex))
                 .concat(parent.value.slice(1 + fieldIndex))
             )}
             {...filterDOMProps(props)}
-        />
+        >
+            <DeleteIcon />
+        </IconButton>
     );
-};
-
-ListDel.defaultProps = {
-    children: 'Remove',
-    icon: Remove,
-    iconVisible: false
 };
 
 export default connectField(ListDel, {includeParent: true, initialValue: false});

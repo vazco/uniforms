@@ -1,44 +1,63 @@
-import connectField   from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
-import React          from 'react';
-import Subheader      from 'material-ui/Subheader';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import connectField     from 'uniforms/connectField';
+import filterDOMProps   from 'uniforms/filterDOMProps';
+import FormControl      from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText   from '@material-ui/core/FormHelperText';
+import FormLabel        from '@material-ui/core/FormLabel';
+import Radio            from '@material-ui/core/Radio';
+import RadioGroup       from '@material-ui/core/RadioGroup';
+import React            from 'react';
 
-const Radio = ({
+const Radio_ = ({
     allowedValues,
+    checkboxes, // eslint-disable-line no-unused-vars
     disabled,
-    id,
+    error,
+    errorMessage,
+    fullWidth,
+    inputRef,
     label,
-    labelPosition,
     name,
+    margin,
     onChange,
+    required,
+    showInlineError,
     transform,
     value,
     ...props
-}) =>
-    <div>
-        {!!label && <Subheader children={label} style={{paddingLeft: 0}} />}
-
-        <RadioButtonGroup
-            disabled={disabled}
-            id={id}
-            labelPosition={labelPosition}
+}) => (
+    <FormControl
+        component="fieldset"
+        disabled={!!disabled}
+        error={!!error}
+        fullWidth={!!fullWidth}
+        margin={margin}
+        required={required}
+    >
+        {label && <FormLabel component="legend" htmlFor={name}>{label}</FormLabel>}
+        <RadioGroup
             name={name}
-            valueSelected={value}
-            onChange={(event, value) => onChange(value)}
-            {...filterDOMProps(props)}
+            onChange={event => disabled || onChange(event.target.value)}
+            ref={inputRef}
+            value={value}
         >
-            {allowedValues.map(item =>
-                <RadioButton
-                    disabled={disabled}
+            {allowedValues.map(item => (
+                <FormControlLabel
+                    control={<Radio {...filterDOMProps(props)} />}
                     key={item}
                     label={transform ? transform(item) : item}
-                    labelPosition={labelPosition}
-                    value={item}
+                    value={`${item}`}
                 />
-            )}
-        </RadioButtonGroup>
-    </div>
-;
+            ))}
+            {showInlineError && error && <FormHelperText>{errorMessage}</FormHelperText>}
+        </RadioGroup>
+    </FormControl>
+);
 
-export default connectField(Radio);
+
+Radio_.defaultProps = {
+    fullWidth: true,
+    margin: 'normal'
+};
+
+export default connectField(Radio_);
