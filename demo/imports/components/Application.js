@@ -1,8 +1,6 @@
 import PropTypes      from 'prop-types';
 import React          from 'react';
 import enUS           from 'antd/lib/locale-provider/en_US';
-import getMuiTheme    from 'material-ui/styles/getMuiTheme';
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import {Component}    from 'react';
 
 import {Meteor} from 'meteor/meteor';
@@ -26,8 +24,7 @@ class Application extends Component {
 
     getChildContext () {
         return {
-            antLocale: {...enUS, exist: true},
-            muiTheme: getMuiTheme(lightBaseTheme, {userAgent: Meteor.isServer ? false : undefined})
+            antLocale: {...enUS, exist: true}
         };
     }
 
@@ -76,8 +73,7 @@ class Application extends Component {
 }
 
 Application.childContextTypes = {
-    antLocale: PropTypes.object.isRequired,
-    muiTheme:  PropTypes.object.isRequired
+    antLocale: PropTypes.object.isRequired
 };
 
 export default Application;
