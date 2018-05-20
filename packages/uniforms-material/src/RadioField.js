@@ -15,10 +15,11 @@ const Radio_ = ({
     error,
     errorMessage,
     fullWidth,
+    helperText,
     inputRef,
     label,
-    name,
     margin,
+    name,
     onChange,
     required,
     showInlineError,
@@ -49,7 +50,11 @@ const Radio_ = ({
                     value={`${item}`}
                 />
             ))}
-            {showInlineError && error && <FormHelperText>{errorMessage}</FormHelperText>}
+            {showInlineError && error ? (
+                <FormHelperText>{errorMessage}</FormHelperText>
+            ) : (
+                helperText && <FormHelperText>{helperText}</FormHelperText>
+            )}
         </RadioGroup>
     </FormControl>
 );

@@ -21,6 +21,7 @@ const Date_ = ({
     error,
     errorMessage,
     fullWidth,
+    helperText,
     inputRef,
     label,
     margin,
@@ -49,7 +50,11 @@ const Date_ = ({
             value={dateFormat(value)}
             {...filterDOMProps(props)}
         />
-        {showInlineError && error && <FormHelperText>{errorMessage}</FormHelperText>}
+        {showInlineError && error ? (
+            <FormHelperText>{errorMessage}</FormHelperText>
+        ) : (
+            helperText && <FormHelperText>{helperText}</FormHelperText>
+        )}
     </FormControl>
 );
 

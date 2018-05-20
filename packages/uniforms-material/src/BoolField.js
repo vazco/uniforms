@@ -16,6 +16,7 @@ const Bool = ({
     error,
     errorMessage,
     fullWidth,
+    helperText,
     inputRef,
     label,
     legend,
@@ -53,7 +54,11 @@ const Bool = ({
                     label={transform ? transform(label) : label}
                 />
             </FormGroup>
-            {showInlineError && error && <FormHelperText>{errorMessage}</FormHelperText>}
+            {showInlineError && error ? (
+                <FormHelperText>{errorMessage}</FormHelperText>
+            ) : (
+                helperText && <FormHelperText>{helperText}</FormHelperText>
+            )}
         </FormControl>
     );
 };

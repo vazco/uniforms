@@ -1,5 +1,5 @@
 import React     from 'react';
-import TextField from 'material-ui/TextField';
+import TextField from '@material-ui/core/TextField';
 import {mount}   from 'enzyme';
 
 import NumField from 'uniforms-material/NumField';
@@ -61,12 +61,12 @@ test('<NumField> - renders a TextField with correct name', () => {
     expect(wrapper.find(TextField).prop('name')).toBe('x');
 });
 
-test('<NumField> - renders a TextField with correct hintText', () => {
+test('<NumField> - renders a TextField with correct placeholder', () => {
     const element = <NumField name="x" placeholder="y" />;
     const wrapper = mount(element, createContext({x: {type: Number}}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    expect(wrapper.find(TextField).prop('hintText')).toBe('y');
+    expect(wrapper.find(TextField).prop('placeholder')).toBe('y');
 });
 
 test('<NumField> - renders a TextField with correct step (decimal)', () => {
@@ -205,7 +205,7 @@ test('<NumField> - renders a label', () => {
     const wrapper = mount(element, createContext({x: {type: Number}}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    expect(wrapper.find(TextField).prop('floatingLabelText')).toBe('y');
+    expect(wrapper.find(TextField).prop('label')).toBe('y');
 });
 
 test('<NumField> - renders a TextField with correct error text (specified)', () => {
@@ -213,7 +213,7 @@ test('<NumField> - renders a TextField with correct error text (specified)', () 
     const element = <NumField name="x" error={error} showInlineError errorMessage="Error" />;
     const wrapper = mount(element, createContext({x: {type: Number}}));
 
-    expect(wrapper.find(TextField).prop('errorText')).toBe('Error');
+    expect(wrapper.find(TextField).prop('helperText')).toBe('Error');
 });
 
 test('<NumField> - renders a TextField with correct error text (showInlineError=false)', () => {
@@ -221,5 +221,5 @@ test('<NumField> - renders a TextField with correct error text (showInlineError=
     const element = <NumField name="x" error={error} showInlineError={false} errorMessage="Error" />;
     const wrapper = mount(element, createContext({x: {type: Number}}));
 
-    expect(wrapper.find(TextField).prop('errorText')).toBeUndefined();
+    expect(wrapper.find(TextField).prop('helperText')).toBeUndefined();
 });

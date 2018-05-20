@@ -1,8 +1,7 @@
 import connectField   from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
 import FormControl    from '@material-ui/core/FormControl';
-import FormLabel      from '@material-ui/core/FormLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import FormLabel      from '@material-ui/core/FormLabel';
 import injectName     from 'uniforms/injectName';
 import joinName       from 'uniforms/joinName';
 import React          from 'react';
@@ -17,12 +16,12 @@ const Nest = ({
     fields,
     fullWidth,
     itemProps,
+    helperText,
     label,
     margin,
     name,
     required,
-    showInlineError,
-    ...props
+    showInlineError
 }) => (
     <FormControl
         disabled={!!disabled}
@@ -39,7 +38,11 @@ const Nest = ({
                 <AutoField key={key} name={joinName(name, key)} {...itemProps} />
             )
         )}
-        {showInlineError && error && <FormHelperText>{errorMessage}</FormHelperText>}
+        {showInlineError && error ? (
+            <FormHelperText>{errorMessage}</FormHelperText>
+        ) : (
+            helperText && <FormHelperText>{helperText}</FormHelperText>
+        )}
     </FormControl>
 );
 

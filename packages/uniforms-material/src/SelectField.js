@@ -30,13 +30,15 @@ const renderSelect = ({
     errorMessage,
     fieldType,
     fullWidth,
+    helperText,
     id,
     inputProps,
     label,
-    name,
     margin,
+    name,
     native,
     onChange,
+    placeholder,
     required,
     showInlineError,
     transform,
@@ -60,13 +62,18 @@ const renderSelect = ({
                 native={native}
                 onChange={event => disabled || onChange(event.target.value)}
                 value={native && !value ? '' : value}
+                placeholder={placeholder}
                 {...filterDOMProps(props)}
             >
                 {allowedValues.map(value =>
                     <Item key={value} value={value}>{transform ? transform(value) : value}</Item>
                 )}
             </Select>
-            {showInlineError && error && <FormHelperText>{errorMessage}</FormHelperText>}
+            {showInlineError && error ? (
+                <FormHelperText>{errorMessage}</FormHelperText>
+            ) : (
+                helperText && <FormHelperText>{helperText}</FormHelperText>
+            )}
         </FormControl>
     );
 };
@@ -79,6 +86,8 @@ const renderCheckboxes = ({
     errorMessage,
     fieldType,
     fullWidth,
+    helperText,
+    id,
     inputRef,
     label,
     legend,
@@ -96,6 +105,7 @@ const renderCheckboxes = ({
     if (fieldType !== Array) {
         children = (
             <RadioGroup
+                id={id}
                 name={name}
                 onChange={event => disabled || onChange(event.target.value)}
                 ref={inputRef}
@@ -103,7 +113,7 @@ const renderCheckboxes = ({
             >
                 {allowedValues.map(item => (
                     <FormControlLabel
-                        control={<Radio {...filterDOMProps(props)} />}
+                        control={<Radio id={`${id}-${item}`} {...filterDOMProps(props)} />}
                         key={item}
                         label={transform ? transform(item) : item}
                         value={item}
@@ -112,27 +122,30 @@ const renderCheckboxes = ({
                 {showInlineError && error && <FormHelperText>{errorMessage}</FormHelperText>}
             </RadioGroup>
         );
+    } else {
+        const SelectionControl = appearance === 'checkbox' ? Checkbox : Switch;
+
+        children = (
+            <FormGroup id={id}>
+                {allowedValues.map(item => (
+                    <FormControlLabel
+                        control={<SelectionControl
+                            checked={value.includes(item)}
+                            id={`${id}-${item}`}
+                            name={name}
+                            onChange={() => disabled || onChange(xor(item, value))}
+                            ref={inputRef}
+                            value={props.name}
+                            {...filterDOMProps(props)}
+                        />}
+                        key={item}
+                        label={transform ? transform(item) : item}
+                    />
+                ))}
+            </FormGroup>
+        );
     }
 
-    const SelectionControl = appearance === 'checkbox' ? Checkbox : Switch;
-
-    children = (
-        <FormGroup>
-            {allowedValues.map(item => (
-                <FormControlLabel
-                    control={<SelectionControl
-                        checked={value.includes(item)}
-                        onChange={() => disabled || onChange(xor(item, value))}
-                        ref={inputRef}
-                        value={props.name}
-                        {...filterDOMProps(props)}
-                    />}
-                    key={item}
-                    label={transform ? transform(item) : item}
-                />
-            ))}
-        </FormGroup>
-    );
 
     return (
         <FormControl
@@ -145,7 +158,11 @@ const renderCheckboxes = ({
         >
             {(legend || label) && <FormLabel component="legend">{legend || label}</FormLabel>}
             {children}
-            {showInlineError && error && <FormHelperText>{errorMessage}</FormHelperText>}
+            {showInlineError && error ? (
+                <FormHelperText>{errorMessage}</FormHelperText>
+            ) : (
+                helperText && <FormHelperText>{helperText}</FormHelperText>
+            )}
         </FormControl>
     );
 };

@@ -1,6 +1,4 @@
 import PropTypes      from 'prop-types';
-import getMuiTheme    from 'material-ui/styles/getMuiTheme';
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import tapEventPlugin from 'react-tap-event-plugin';
 
 import randomIds from 'uniforms/randomIds';
@@ -13,7 +11,6 @@ const randomId = randomIds();
 
 const createContext = (schema, context) => ({
     context: {
-        muiTheme: getMuiTheme(lightBaseTheme, {userAgent: false}),
         uniforms: {
             error: null,
             model: {},
@@ -38,7 +35,6 @@ const createContext = (schema, context) => ({
         }
     },
     childContextTypes: {
-        muiTheme: PropTypes.object,
         uniforms: PropTypes.object
     }
 });
