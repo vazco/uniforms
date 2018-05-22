@@ -1,6 +1,6 @@
 import React     from 'react';
-import Subheader from 'material-ui/Subheader';
 import {mount}   from 'enzyme';
+import FormLabel from '@material-ui/core/FormLabel';
 
 import AutoField from 'uniforms-material/AutoField';
 import NestField from 'uniforms-material/NestField';
@@ -29,6 +29,5 @@ test('<NestField> - renders a Subheader', () => {
     const element = <NestField name="x" label="y" />;
     const wrapper = mount(element, createContext({x: {type: Object}, 'x.a': {type: String}, 'x.b': {type: Number}}));
 
-    expect(wrapper.find(Subheader)).toHaveLength(1);
-    expect(wrapper.find(Subheader).at(0).text()).toBe('y');
+    expect(wrapper.find(FormLabel).at(0).text()).toBe('y *');
 });

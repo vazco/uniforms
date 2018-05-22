@@ -1,7 +1,8 @@
-import Checkbox from '@material-ui/core/Checkbox';
-import React    from 'react';
-import Switch   from '@material-ui/core/Switch';
-import {mount}  from 'enzyme';
+import Checkbox         from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import React            from 'react';
+import Switch           from '@material-ui/core/Switch';
+import {mount}          from 'enzyme';
 
 import BoolField from 'uniforms-material/BoolField';
 
@@ -51,7 +52,7 @@ test('<BoolField> - renders a Checkbox with correct label (specified)', () => {
     const wrapper = mount(element, createContext({x: {type: Boolean}}));
 
     expect(wrapper.find(Checkbox)).toHaveLength(1);
-    expect(wrapper.find(Checkbox).prop('label')).toBe('BoolFieldLabel');
+    expect(wrapper.find(FormControlLabel).prop('label')).toBe('BoolFieldLabel');
 });
 
 test('<BoolField> - renders a Checkbox with correct value (default)', () => {
@@ -133,7 +134,7 @@ test('<BoolField> - renders a Switch with correct label (specified)', () => {
     const wrapper = mount(element, createContext({x: {type: Boolean}}));
 
     expect(wrapper.find(Switch)).toHaveLength(1);
-    expect(wrapper.find(Switch).prop('label')).toBe('BoolFieldLabel');
+    expect(wrapper.find(FormControlLabel).prop('label')).toBe('BoolFieldLabel');
 });
 
 test('<BoolField> - renders a Switch with correct value (default)', () => {
@@ -141,7 +142,7 @@ test('<BoolField> - renders a Switch with correct value (default)', () => {
     const wrapper = mount(element, createContext({x: {type: Boolean}}));
 
     expect(wrapper.find(Switch)).toHaveLength(1);
-    expect(wrapper.find(Switch).prop('toggled')).toBe(false);
+    expect(wrapper.find(Switch).prop('checked')).toBe(false);
 });
 
 test('<BoolField> - renders a Switch with correct value (model)', () => {
@@ -149,7 +150,7 @@ test('<BoolField> - renders a Switch with correct value (model)', () => {
     const wrapper = mount(element, createContext({x: {type: Boolean}}, {model: {x: true}}));
 
     expect(wrapper.find(Switch)).toHaveLength(1);
-    expect(wrapper.find(Switch).prop('toggled')).toBe(true);
+    expect(wrapper.find(Switch).prop('checked')).toBe(true);
 });
 
 test('<BoolField> - renders a Switch with correct value (specified)', () => {
@@ -157,7 +158,7 @@ test('<BoolField> - renders a Switch with correct value (specified)', () => {
     const wrapper = mount(element, createContext({x: {type: Boolean}}));
 
     expect(wrapper.find(Switch)).toHaveLength(1);
-    expect(wrapper.find(Switch).prop('toggled')).toBe(true);
+    expect(wrapper.find(Switch).prop('checked')).toBe(true);
 });
 
 test('<BoolField> - renders a Switch which correctly reacts on change', () => {

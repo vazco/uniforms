@@ -1,13 +1,14 @@
-import connectField   from 'uniforms/connectField';
 import AddIcon        from '@material-ui/icons/Add';
+import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
+import FormControl    from '@material-ui/core/FormControl';
 import IconButton     from '@material-ui/core/IconButton';
 import React          from 'react';
-import FormControl    from '@material-ui/core/FormControl';
 
 const ListAdd = ({
     disabled,
     fullWidth,
+    icon: Icon,
     margin,
     parent,
     value,
@@ -22,7 +23,7 @@ const ListAdd = ({
                 onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
                 {...filterDOMProps(props)}
             >
-                <AddIcon />
+                <Icon />
             </IconButton>
         </FormControl>
     );
@@ -30,6 +31,7 @@ const ListAdd = ({
 
 ListAdd.defaultProps = {
     fullWidth: true,
+    icon: AddIcon,
     margin: 'normal'
 };
 

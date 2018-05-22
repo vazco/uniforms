@@ -63,4 +63,4 @@ Date_.defaultProps = {
     margin: 'normal'
 };
 
-export default connectField(Date_);
+export default connectField(Date_, {ensureValue: false});

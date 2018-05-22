@@ -1,11 +1,11 @@
-import Done    from 'material-ui/svg-icons/action/done';
-import React   from 'react';
-import {mount} from 'enzyme';
+import AlarmIcon  from '@material-ui/icons/Alarm';
+import React      from 'react';
+import {mount}    from 'enzyme';
+import IconButton from '@material-ui/core/IconButton';
 
 import ListDelField from 'uniforms-material/ListDelField';
 
 import createContext from './_createContext';
-import touchTap from './_touchTap';
 
 const parent = {
     maxCount: 3,
@@ -26,7 +26,7 @@ test('<ListDelField> - prevents onClick when disabled', () => {
     const element = <ListDelField name="x.1" disabled parent={Object.assign({}, parent, {onChange})} />;
     const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
 
-    touchTap(wrapper.find(ListDelField).childAt(0));
+    expect(wrapper.find(IconButton).simulate('click')).toBeTruthy();
     expect(onChange).not.toHaveBeenCalled();
 });
 
@@ -36,7 +36,7 @@ test('<ListDelField> - prevents onClick when limit reached', () => {
     const element = <ListDelField name="x.1" parent={Object.assign({}, parent, {onChange, minCount: 3})} />;
     const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
 
-    touchTap(wrapper.find(ListDelField).childAt(0));
+    expect(wrapper.find(IconButton).simulate('click')).toBeTruthy();
     expect(onChange).not.toHaveBeenCalled();
 });
 
@@ -46,13 +46,13 @@ test('<ListDelField> - correctly reacts on click', () => {
     const element = <ListDelField name="x.1" parent={Object.assign({}, parent, {onChange})} />;
     const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
 
-    touchTap(wrapper.find(ListDelField).childAt(0));
+    expect(wrapper.find(IconButton).simulate('click')).toBeTruthy();
     expect(onChange).toHaveBeenLastCalledWith(['x', 'z']);
 });
 
 test('<ListDelField> - renders correct icon', () => {
-    const element = <ListDelField name="x.1" parent={parent} icon={Done} iconVisible />;
+    const element = <ListDelField name="x.1" parent={parent} icon={AlarmIcon} />;
     const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
 
-    expect(wrapper.find(Done)).toHaveLength(1);
+    expect(wrapper.find(AlarmIcon)).toHaveLength(1);
 });

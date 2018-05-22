@@ -1,6 +1,6 @@
-import React     from 'react';
-import Subheader from 'material-ui/Subheader';
-import {mount}   from 'enzyme';
+import React         from 'react';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import {mount}       from 'enzyme';
 
 import ListAddField  from 'uniforms-material/ListAddField';
 import ListField     from 'uniforms-material/ListField';
@@ -27,8 +27,8 @@ test('<ListField> - renders correct label (specified)', () => {
     const element = <ListField name="x" label="ListFieldLabel" />;
     const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
 
-    expect(wrapper.find(Subheader)).toHaveLength(1);
-    expect(wrapper.find(Subheader).at(0).text()).toBe('ListFieldLabel');
+    expect(wrapper.find(ListSubheader)).toHaveLength(1);
+    expect(wrapper.find(ListSubheader).text()).toBe('ListFieldLabel');
 });
 
 test('<ListField> - renders correct number of items with initialCount (specified)', () => {

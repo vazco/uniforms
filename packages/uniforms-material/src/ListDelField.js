@@ -6,6 +6,7 @@ import React          from 'react';
 
 const ListDel = ({
     disabled,
+    icon: Icon,
     name,
     parent,
     ...props
@@ -22,9 +23,13 @@ const ListDel = ({
             )}
             {...filterDOMProps(props)}
         >
-            <DeleteIcon />
+            <Icon />
         </IconButton>
     );
+};
+
+ListDel.defaultProps = {
+    icon: DeleteIcon
 };
 
 export default connectField(ListDel, {includeParent: true, initialValue: false});
