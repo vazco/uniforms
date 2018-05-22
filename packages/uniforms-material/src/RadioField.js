@@ -16,6 +16,7 @@ const Radio_ = ({
     errorMessage,
     fullWidth,
     helperText,
+    id,
     inputRef,
     label,
     margin,
@@ -37,6 +38,7 @@ const Radio_ = ({
     >
         {label && <FormLabel component="legend" htmlFor={name}>{label}</FormLabel>}
         <RadioGroup
+            id={id}
             name={name}
             onChange={event => disabled || onChange(event.target.value)}
             ref={inputRef}
