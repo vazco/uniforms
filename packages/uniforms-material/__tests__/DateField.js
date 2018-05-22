@@ -84,6 +84,16 @@ test('<DateField> - renders a Input which correctly reacts on change', () => {
     expect(onChange).toHaveBeenLastCalledWith('x', now);
 });
 
+test('<DateField> - renders a Input which correctly reacts on change (empty)', () => {
+    const onChange = jest.fn();
+
+    const element = <DateField name="x" />;
+    const wrapper = mount(element, createContext({x: {type: Date}}, {onChange}));
+
+    wrapper.find(Input).props().onChange({target: {valueAsNumber: undefined}});
+    expect(onChange).toHaveBeenLastCalledWith('x', undefined);
+});
+
 test('<DateField> - renders a Input with correct error text (specified)', () => {
     const error = new Error();
     const element = <DateField name="x" error={error} showInlineError errorMessage="Error" />;

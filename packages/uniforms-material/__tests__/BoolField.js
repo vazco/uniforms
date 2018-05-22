@@ -1,5 +1,7 @@
 import Checkbox         from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText   from '@material-ui/core/FormHelperText';
+import FormLabel        from '@material-ui/core/FormLabel';
 import React            from 'react';
 import Switch           from '@material-ui/core/Switch';
 import {mount}          from 'enzyme';
@@ -137,6 +139,23 @@ test('<BoolField> - renders a Switch with correct label (specified)', () => {
     expect(wrapper.find(FormControlLabel).prop('label')).toBe('BoolFieldLabel');
 });
 
+test('<BoolField> - renders a Switch with correct label (transform)', () => {
+    const element = <BoolField name="x" appearance="toggle" label="BoolFieldLabel" transform={x => x.toUpperCase()} />;
+    const wrapper = mount(element, createContext({x: {type: Boolean}}));
+
+    expect(wrapper.find(Switch)).toHaveLength(1);
+    expect(wrapper.find(FormControlLabel).prop('label')).toBe('BOOLFIELDLABEL');
+});
+
+
+test('<BoolField> - renders a Switch with correct legend (specified)', () => {
+    const element = <BoolField name="x" appearance="toggle" legend="BoolFieldLegend" />;
+    const wrapper = mount(element, createContext({x: {type: Boolean}}));
+
+    expect(wrapper.find(Switch)).toHaveLength(1);
+    expect(wrapper.find(FormLabel).text()).toBe('BoolFieldLegend *');
+});
+
 test('<BoolField> - renders a Switch with correct value (default)', () => {
     const element = <BoolField name="x" appearance="toggle" />;
     const wrapper = mount(element, createContext({x: {type: Boolean}}));
@@ -170,4 +189,12 @@ test('<BoolField> - renders a Switch which correctly reacts on change', () => {
     expect(wrapper.find(Switch)).toHaveLength(1);
     wrapper.find('input').simulate('change');
     expect(onChange).toHaveBeenLastCalledWith('x', false);
+});
+
+test('<BoolField> - renders a helperText', () => {
+    const element = <BoolField name="x" helperText="Helper" />;
+    const wrapper = mount(element, createContext({x: {type: Boolean}}));
+
+    expect(wrapper.find(FormHelperText)).toHaveLength(1);
+    expect(wrapper.find(FormHelperText).text()).toBe('Helper');
 });

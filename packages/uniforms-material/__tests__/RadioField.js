@@ -1,5 +1,6 @@
 import FormControl      from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText   from '@material-ui/core/FormHelperText';
 import FormLabel        from '@material-ui/core/FormLabel';
 import Radio            from '@material-ui/core/Radio';
 import RadioGroup       from '@material-ui/core/RadioGroup';
@@ -126,4 +127,20 @@ test('<RadioField> - renders a label', () => {
 
     expect(wrapper.find(FormLabel)).toHaveLength(1);
     expect(wrapper.find(FormLabel).text()).toBe('y *');
+});
+
+test('<RadioField> - renders a helperText', () => {
+    const element = <RadioField name="x" helperText="Helper" />;
+    const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+
+    expect(wrapper.find(FormHelperText)).toHaveLength(1);
+    expect(wrapper.find(FormHelperText).text()).toBe('Helper');
+});
+
+test('<RadioField> - renders a TextField with correct error text (specified)', () => {
+    const error = new Error();
+    const element = <RadioField name="x" error={error} showInlineError errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+
+    expect(wrapper.find(FormHelperText).text()).toBe('Error');
 });
