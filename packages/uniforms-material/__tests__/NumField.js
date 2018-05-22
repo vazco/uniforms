@@ -42,7 +42,7 @@ test('<NumField> - renders a TextField with correct max', () => {
     const wrapper = mount(element, createContext({x: {type: Number}}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    expect(wrapper.find(TextField).prop('max')).toBe(10);
+    expect(wrapper.find('input').prop('max')).toBe(10);
 });
 
 test('<NumField> - renders a TextField with correct min', () => {
@@ -50,7 +50,7 @@ test('<NumField> - renders a TextField with correct min', () => {
     const wrapper = mount(element, createContext({x: {type: Number}}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    expect(wrapper.find(TextField).prop('min')).toBe(10);
+    expect(wrapper.find('input').prop('min')).toBe(10);
 });
 
 test('<NumField> - renders a TextField with correct name', () => {
@@ -74,7 +74,7 @@ test('<NumField> - renders a TextField with correct step (decimal)', () => {
     const wrapper = mount(element, createContext({x: {type: Number}}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    expect(wrapper.find(TextField).prop('step')).toBe(0.01);
+    expect(wrapper.find('input').prop('step')).toBe(0.01);
 });
 
 test('<NumField> - renders a TextField with correct step (integer)', () => {
@@ -82,7 +82,7 @@ test('<NumField> - renders a TextField with correct step (integer)', () => {
     const wrapper = mount(element, createContext({x: {type: Number}}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    expect(wrapper.find(TextField).prop('step')).toBe(1);
+    expect(wrapper.find('input').prop('step')).toBe(1);
 });
 
 test('<NumField> - renders a TextField with correct type', () => {
@@ -98,32 +98,32 @@ test('<NumField> - renders a TextField with correct value (default)', () => {
     const wrapper = mount(element, createContext({x: {type: Number}}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    expect(wrapper.find(TextField).prop('value')).toBe('');
+    expect(wrapper.find(TextField).prop('value')).toBe(undefined);
 });
 
 test('<NumField> - renders a TextField with correct value (model)', () => {
     const element = <NumField name="x" />;
-    const wrapper = mount(element, createContext({x: {type: Number}}, {model: {x: '1'}}));
+    const wrapper = mount(element, createContext({x: {type: Number}}, {model: {x: 1}}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    expect(wrapper.find(TextField).prop('value')).toBe('1');
+    expect(wrapper.find(TextField).prop('value')).toBe(1);
 
     // NOTE: All following tests are here to cover hacky NumField implementation.
-    expect(wrapper.find('input').simulate('change', {target: {value: '0.1'}})).toBeTruthy();
-    wrapper.setProps({value: '0.1'});
-    expect(wrapper.find('input').prop('value')).toBe('0.1');
+    expect(wrapper.find('input').simulate('change', {target: {value: 0.1}})).toBeTruthy();
+    wrapper.setProps({value: 0.1});
+    expect(wrapper.find('input').prop('value')).toBe(0.1);
     wrapper.setProps({value: undefined});
-    expect(wrapper.find('input').prop('value')).toBe('');
+    expect(wrapper.find('input').prop('value')).toBe(undefined);
     wrapper.setProps({value: undefined});
-    expect(wrapper.find('input').prop('value')).toBe('');
+    expect(wrapper.find('input').prop('value')).toBe(undefined);
     wrapper.setProps({value: 2});
-    expect(wrapper.find('input').prop('value')).toBe('2');
+    expect(wrapper.find('input').prop('value')).toBe(2);
     wrapper.setProps({value: 2});
-    expect(wrapper.find('input').prop('value')).toBe('2');
+    expect(wrapper.find('input').prop('value')).toBe(2);
     wrapper.setProps({value: 1, decimal: false});
-    expect(wrapper.find('input').prop('value')).toBe('1');
+    expect(wrapper.find('input').prop('value')).toBe(1);
     wrapper.setProps({value: 1, decimal: false});
-    expect(wrapper.find('input').prop('value')).toBe('1');
+    expect(wrapper.find('input').prop('value')).toBe(1);
 });
 
 test('<NumField> - renders a TextField with correct value (specified)', () => {
@@ -131,7 +131,7 @@ test('<NumField> - renders a TextField with correct value (specified)', () => {
     const wrapper = mount(element, createContext({x: {type: Number}}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    expect(wrapper.find(TextField).prop('value')).toBe('2');
+    expect(wrapper.find(TextField).prop('value')).toBe(2);
 });
 
 test('<NumField> - renders a TextField which correctly reacts on change', () => {
@@ -141,7 +141,7 @@ test('<NumField> - renders a TextField which correctly reacts on change', () => 
     const wrapper = mount(element, createContext({x: {type: Number}}, {onChange}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    expect(wrapper.find('input').simulate('change', {target: {value: '1'}})).toBeTruthy();
+    wrapper.find(TextField).props().onChange({target: {value: 1}});
     expect(onChange).toHaveBeenLastCalledWith('x', 1);
 });
 
@@ -152,7 +152,7 @@ test('<NumField> - renders a TextField which correctly reacts on change (decimal
     const wrapper = mount(element, createContext({x: {type: Number}}, {onChange}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    expect(wrapper.find('input').simulate('change', {target: {value: '2.5'}})).toBeTruthy();
+    wrapper.find(TextField).props().onChange({target: {value: 2.5}});
     expect(onChange).toHaveBeenLastCalledWith('x', 2.5);
 });
 
@@ -163,8 +163,8 @@ test('<NumField> - renders a TextField which correctly reacts on change (decimal
     const wrapper = mount(element, createContext({x: {type: Number}}, {onChange}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    expect(wrapper.find('input').simulate('change', {target: {value: '2.5'}})).toBeTruthy();
-    expect(onChange).toHaveBeenLastCalledWith('x', 2);
+    wrapper.find(TextField).props().onChange({target: {value: 2.5}});
+    expect(onChange).toHaveBeenLastCalledWith('x', 2.5);
 });
 
 test('<NumField> - renders a TextField which correctly reacts on change (empty)', () => {
@@ -174,8 +174,8 @@ test('<NumField> - renders a TextField which correctly reacts on change (empty)'
     const wrapper = mount(element, createContext({x: {type: Number}}, {onChange}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    expect(wrapper.find('input').simulate('change', {target: {value: ''}})).toBeTruthy();
-    expect(onChange).toHaveBeenLastCalledWith('x', undefined);
+    wrapper.find(TextField).props().onChange({target: {value: ''}});
+    expect(onChange).toHaveBeenLastCalledWith('x', '');
 });
 
 test('<NumField> - renders a TextField which correctly reacts on change (same value)', () => {
@@ -185,7 +185,7 @@ test('<NumField> - renders a TextField which correctly reacts on change (same va
     const wrapper = mount(element, createContext({x: {type: Number}}, {model: {x: 1}, onChange}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    expect(wrapper.find('input').simulate('change', {target: {value: '1'}})).toBeTruthy();
+    wrapper.find(TextField).props().onChange({target: {value: 1}});
     expect(onChange).toHaveBeenLastCalledWith('x', 1);
 });
 
@@ -196,7 +196,7 @@ test('<NumField> - renders a TextField which correctly reacts on change (zero)',
     const wrapper = mount(element, createContext({x: {type: Number}}, {onChange}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    expect(wrapper.find('input').simulate('change', {target: {value: '0'}})).toBeTruthy();
+    wrapper.find(TextField).props().onChange({target: {value: 0}});
     expect(onChange).toHaveBeenLastCalledWith('x', 0);
 });
 

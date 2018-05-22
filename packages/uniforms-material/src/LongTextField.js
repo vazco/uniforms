@@ -18,8 +18,8 @@ const LongText = ({
     ...props
 }) =>
     <TextField
-        disabled={disabled}
-        error={error}
+        disabled={!!disabled}
+        error={!!error}
         helperText={error && showInlineError && errorMessage || helperText}
         label={label}
         multiline
