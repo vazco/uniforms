@@ -2,9 +2,6 @@
   "lerna": "2.11.0",
   "version": "1.24.3",
   "command": {
-    "bootstrap": {
-      "hoist": true
-    },
     "exec": {
       "parallel": true
     }
