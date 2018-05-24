@@ -1,4 +1,5 @@
 ## Next:
+- **Fixed:** Placeholders are now working with disabled labels on `GraphQLBridge` and `JSONSchemaBridge`. [\#421](https://github.com/vazco/uniforms/issues/421)
 - **Fixed:** `SubmitField` labels.
 
 ## [v1.24.3](https://github.com/vazco/uniforms/tree/v1.24.3) (2018-05-07)
