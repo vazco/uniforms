@@ -1,15 +1,15 @@
-import Select           from '@material-ui/core/Select';
-import React            from 'react';
-import {mount}          from 'enzyme';
 import Checkbox         from '@material-ui/core/Checkbox';
-import Radio            from '@material-ui/core/Radio';
-import InputLabel       from '@material-ui/core/InputLabel';
-import FormHelperText   from '@material-ui/core/FormHelperText';
-import SelectField      from 'uniforms-material/SelectField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl      from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText   from '@material-ui/core/FormHelperText';
 import FormLabel        from '@material-ui/core/FormLabel';
+import InputLabel       from '@material-ui/core/InputLabel';
+import Radio            from '@material-ui/core/Radio';
 import RadioGroup       from '@material-ui/core/RadioGroup';
+import React            from 'react';
+import Select           from '@material-ui/core/Select';
+import SelectField      from 'uniforms-material/SelectField';
+import {mount}          from 'enzyme';
 
 import createContext from './_createContext';
 

@@ -1,6 +1,4 @@
 import Checkbox         from '@material-ui/core/Checkbox';
-import connectField     from 'uniforms/connectField';
-import filterDOMProps   from 'uniforms/filterDOMProps';
 import FormControl      from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup        from '@material-ui/core/FormGroup';
@@ -13,6 +11,8 @@ import RadioGroup       from '@material-ui/core/RadioGroup';
 import React            from 'react';
 import Select           from '@material-ui/core/Select';
 import Switch           from '@material-ui/core/Switch';
+import connectField     from 'uniforms/connectField';
+import filterDOMProps   from 'uniforms/filterDOMProps';
 
 const xor = (item, array) => {
     const index = array.indexOf(item);

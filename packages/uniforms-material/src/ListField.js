@@ -1,9 +1,9 @@
-import connectField   from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
-import joinName       from 'uniforms/joinName';
 import List           from '@material-ui/core/List';
 import ListSubheader  from '@material-ui/core/ListSubheader';
 import React          from 'react';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
+import joinName       from 'uniforms/joinName';
 import {Children}     from 'react';
 import {Fragment}     from 'react';
 

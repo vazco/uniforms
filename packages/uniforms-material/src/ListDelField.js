@@ -1,8 +1,8 @@
-import connectField   from 'uniforms/connectField';
 import DeleteIcon     from '@material-ui/icons/Delete';
-import filterDOMProps from 'uniforms/filterDOMProps';
 import IconButton     from '@material-ui/core/IconButton';
 import React          from 'react';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 const ListDel = ({
     disabled,

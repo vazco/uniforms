@@ -1,7 +1,7 @@
-import connectField from 'uniforms/connectField';
-import joinName     from 'uniforms/joinName';
 import ListItem     from '@material-ui/core/ListItem';
 import React        from 'react';
+import connectField from 'uniforms/connectField';
+import joinName     from 'uniforms/joinName';
 import {Children}   from 'react';
 
 import AutoField    from './AutoField';

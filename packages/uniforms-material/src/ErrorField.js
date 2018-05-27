@@ -1,9 +1,9 @@
-import connectField   from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
 import FormControl    from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import nothing        from 'uniforms/nothing';
 import React          from 'react';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
+import nothing        from 'uniforms/nothing';
 
 const Error = ({children, error, errorMessage, fullWidth, margin, ...props}) =>
     !error ? nothing : (

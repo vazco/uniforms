@@ -1,9 +1,9 @@
 import AddIcon        from '@material-ui/icons/Add';
-import connectField   from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
 import FormControl    from '@material-ui/core/FormControl';
 import IconButton     from '@material-ui/core/IconButton';
 import React          from 'react';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 const ListAdd = ({
     disabled,

@@ -1,5 +1,3 @@
-import connectField     from 'uniforms/connectField';
-import filterDOMProps   from 'uniforms/filterDOMProps';
 import FormControl      from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText   from '@material-ui/core/FormHelperText';
@@ -7,6 +5,8 @@ import FormLabel        from '@material-ui/core/FormLabel';
 import Radio            from '@material-ui/core/Radio';
 import RadioGroup       from '@material-ui/core/RadioGroup';
 import React            from 'react';
+import connectField     from 'uniforms/connectField';
+import filterDOMProps   from 'uniforms/filterDOMProps';
 
 const Radio_ = ({
     allowedValues,

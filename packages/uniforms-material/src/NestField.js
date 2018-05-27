@@ -1,10 +1,10 @@
-import connectField   from 'uniforms/connectField';
 import FormControl    from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel      from '@material-ui/core/FormLabel';
+import React          from 'react';
+import connectField   from 'uniforms/connectField';
 import injectName     from 'uniforms/injectName';
 import joinName       from 'uniforms/joinName';
-import React          from 'react';
 
 import AutoField from './AutoField';
 

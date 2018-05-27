@@ -1,10 +1,10 @@
-import connectField   from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
 import FormControl    from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel      from '@material-ui/core/FormLabel';
 import Input          from '@material-ui/core/Input';
 import React          from 'react';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 const dateFormat = value => value && value.toISOString().slice(0, -8);
 const dateParse = (timestamp, onChange) => {

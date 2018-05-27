@@ -1,6 +1,4 @@
 import Checkbox         from '@material-ui/core/Checkbox';
-import connectField     from 'uniforms/connectField';
-import filterDOMProps   from 'uniforms/filterDOMProps';
 import FormControl      from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup        from '@material-ui/core/FormGroup';
@@ -9,6 +7,8 @@ import FormLabel        from '@material-ui/core/FormLabel';
 import PropTypes        from 'prop-types';
 import React            from 'react';
 import Switch           from '@material-ui/core/Switch';
+import connectField     from 'uniforms/connectField';
+import filterDOMProps   from 'uniforms/filterDOMProps';
 
 const Bool = ({
     appearance,
