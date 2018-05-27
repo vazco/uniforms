@@ -179,4 +179,6 @@ Select_.defaultProps = {
     margin: 'normal'
 };
 
+Select_.displayName = 'Select';
+
 export default connectField(Select_);

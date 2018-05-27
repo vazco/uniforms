@@ -50,4 +50,6 @@ List_.defaultProps = {
     dense: true
 };
 
+List_.displayName = 'List';
+
 export default connectField(List_, {includeInChain: false});

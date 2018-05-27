@@ -27,6 +27,8 @@ ListItem_.defaultProps = {
     dense: true
 };
 
+ListItem_.displayName = 'ListItem';
+
 export default connectField(ListItem_, {includeInChain: false, includeParent: true});
 
 

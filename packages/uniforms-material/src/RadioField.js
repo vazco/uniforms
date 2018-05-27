@@ -67,4 +67,6 @@ Radio_.defaultProps = {
     margin: 'normal'
 };
 
+Radio_.displayName = 'Radio';
+
 export default connectField(Radio_);

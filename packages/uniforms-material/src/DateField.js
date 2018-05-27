@@ -63,4 +63,6 @@ Date_.defaultProps = {
     margin: 'normal'
 };
 
+Date_.displayName = 'Date';
+
 export default connectField(Date_, {ensureValue: false});
