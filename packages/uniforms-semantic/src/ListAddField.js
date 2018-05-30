@@ -1,5 +1,6 @@
 import React          from 'react';
 import classnames     from 'classnames';
+import cloneDeep      from 'lodash/cloneDeep';
 import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
@@ -23,7 +24,7 @@ const ListAdd = ({
                     : 'disabled',
                 'fitted add icon'
             )}
-            onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
+            onClick={() => limitNotReached && parent.onChange(parent.value.concat([cloneDeep(value)]))}
         />
     );
 };

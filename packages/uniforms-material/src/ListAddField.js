@@ -1,6 +1,7 @@
 import Add            from 'material-ui/svg-icons/content/add';
 import RaisedButton   from 'material-ui/RaisedButton';
 import React          from 'react';
+import cloneDeep      from 'lodash/cloneDeep';
 import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
@@ -18,7 +19,7 @@ const ListAdd = ({
         <RaisedButton
             disabled={!limitNotReached}
             icon={iconVisible ? <Icon /> : undefined}
-            onTouchTap={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
+            onTouchTap={() => limitNotReached && parent.onChange(parent.value.concat([cloneDeep(value)]))}
             {...filterDOMProps(props)}
         />
     );

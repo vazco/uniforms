@@ -1,5 +1,6 @@
 import Button         from 'antd/lib/button';
 import React          from 'react';
+import cloneDeep      from 'lodash/cloneDeep';
 import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
@@ -14,7 +15,7 @@ const ListAdd = ({
     return (
         <Button
             disabled={!limitNotReached || disabled}
-            onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
+            onClick={() => limitNotReached && parent.onChange(parent.value.concat([cloneDeep(value)]))}
             {...filterDOMProps(props)}
         />
     );
