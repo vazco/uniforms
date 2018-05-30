@@ -52,5 +52,6 @@ export default function wrapField ({
 filterDOMProps.register(
     'colon',
     'labelCol',
-    'wrapperCol'
+    'wrapperCol',
+    'wrapperStyle'
 );
