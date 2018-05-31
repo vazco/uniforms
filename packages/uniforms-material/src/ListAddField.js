@@ -1,4 +1,4 @@
-import AddIcon        from '@material-ui/icons/Add';
+
 import FormControl    from '@material-ui/core/FormControl';
 import IconButton     from '@material-ui/core/IconButton';
 import React          from 'react';
@@ -23,7 +23,7 @@ const ListAdd = ({
                 onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
                 {...filterDOMProps(props)}
             >
-                <Icon />
+                {Icon ? <Icon /> : '+'}
             </IconButton>
         </FormControl>
     );
@@ -31,7 +31,6 @@ const ListAdd = ({
 
 ListAdd.defaultProps = {
     fullWidth: true,
-    icon: AddIcon,
     margin: 'normal'
 };
 

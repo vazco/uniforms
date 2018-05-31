@@ -1,4 +1,3 @@
-import DeleteIcon     from '@material-ui/icons/Delete';
 import IconButton     from '@material-ui/core/IconButton';
 import React          from 'react';
 import connectField   from 'uniforms/connectField';
@@ -23,13 +22,9 @@ const ListDel = ({
             )}
             {...filterDOMProps(props)}
         >
-            <Icon />
+            {Icon ? <Icon /> : '-'}
         </IconButton>
     );
-};
-
-ListDel.defaultProps = {
-    icon: DeleteIcon
 };
 
 export default connectField(ListDel, {includeParent: true, initialValue: false});

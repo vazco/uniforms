@@ -7,7 +7,7 @@ import {Children}   from 'react';
 import AutoField    from './AutoField';
 import ListDelField from './ListDelField';
 
-const ListItem_ = ({dense, divider, disableGutters, ...props}) => (
+const ListItem_ = ({dense, divider, disableGutters, removeIcon, ...props}) => (
     <ListItem dense={dense} divider={divider} disableGutters={disableGutters}>
         {props.children ? (
             Children.map(props.children, child =>
@@ -19,7 +19,7 @@ const ListItem_ = ({dense, divider, disableGutters, ...props}) => (
         ) : (
             <AutoField {...props} />
         )}
-        <ListDelField name={props.name} />
+        <ListDelField name={props.name} icon={removeIcon} />
     </ListItem>
 );
 

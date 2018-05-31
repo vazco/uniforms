@@ -54,7 +54,7 @@ test('<DateField> - renders a Input with correct value (default)', () => {
     const element = <DateField name="x" />;
     const wrapper = mount(element, createContext({x: {type: Date}}));
 
-    expect(wrapper.find(Input).prop('value')).toBe(undefined);
+    expect(wrapper.find(Input).prop('value')).toBe('');
 });
 
 test('<DateField> - renders a Input with correct value (model)', () => {

@@ -65,4 +65,4 @@ Date_.defaultProps = {
 
 Date_.displayName = 'Date';
 
-export default connectField(Date_, {ensureValue: false});
+export default connectField(Date_);

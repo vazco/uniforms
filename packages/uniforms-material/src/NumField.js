@@ -27,14 +27,14 @@ const Num = ({
         disabled={!!disabled}
         error={!!error}
         helperText={error && showInlineError && errorMessage || helperText}
+        inputProps={{min, max, step: decimal ? 0.01 : 1, ...inputProps}}
         label={label}
         name={name}
         onChange={event => disabled || onChange(noneIfNaN(event.target.value))}
         placeholder={placeholder}
         ref={inputRef}
-        inputProps={{min, max, step: decimal ? 0.01 : 1, ...inputProps}}
-        value={value}
         type="number"
+        value={value}
         {...filterDOMProps(props)}
     />
 ;
@@ -44,4 +44,4 @@ Num.defaultProps = {
     margin: 'normal'
 };
 
-export default connectField(Num, {ensureValue: false});
+export default connectField(Num);
