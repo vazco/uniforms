@@ -50,7 +50,7 @@ test('<ListAddField> - correctly reacts on click', () => {
 });
 
 test('<ListAddField> - renders correct icon', () => {
-    const element = <ListAddField name="x.$" parent={parent} icon={AlarmIcon} />;
+    const element = <ListAddField name="x.$" parent={parent} icon={<AlarmIcon />} />;
     const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
 
     expect(wrapper.find(AlarmIcon)).toHaveLength(1);

@@ -9,7 +9,7 @@ import MenuItem         from '@material-ui/core/MenuItem';
 import Radio            from '@material-ui/core/Radio';
 import RadioGroup       from '@material-ui/core/RadioGroup';
 import React            from 'react';
-import Select           from '@material-ui/core/Select';
+import SelectMaterial   from '@material-ui/core/Select';
 import Switch           from '@material-ui/core/Switch';
 import connectField     from 'uniforms/connectField';
 import filterDOMProps   from 'uniforms/filterDOMProps';
@@ -56,7 +56,7 @@ const renderSelect = ({
             required={required}
         >
             {label && <InputLabel htmlFor={name}>{label}</InputLabel>}
-            <Select
+            <SelectMaterial
                 inputProps={{name, id, ...inputProps}}
                 multiple={fieldType === Array || undefined}
                 native={native}
@@ -68,7 +68,7 @@ const renderSelect = ({
                 {allowedValues.map(value =>
                     <Item key={value} value={value}>{transform ? transform(value) : value}</Item>
                 )}
-            </Select>
+            </SelectMaterial>
             {showInlineError && error ? (
                 <FormHelperText>{errorMessage}</FormHelperText>
             ) : (
@@ -167,18 +167,16 @@ const renderCheckboxes = ({
     );
 };
 
-const Select_ = ({checkboxes, ...props}) =>
+const Select = ({checkboxes, ...props}) =>
     checkboxes
         ? renderCheckboxes(props)
         : renderSelect    (props)
 ;
 
-Select_.defaultProps = {
+Select.defaultProps = {
     appearance: 'checkbox',
     fullWidth: true,
     margin: 'normal'
 };
 
-Select_.displayName = 'Select';
-
-export default connectField(Select_);
+export default connectField(Select);

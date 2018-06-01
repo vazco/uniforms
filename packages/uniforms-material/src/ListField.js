@@ -1,4 +1,4 @@
-import List           from '@material-ui/core/List';
+import ListMaterial   from '@material-ui/core/List';
 import ListSubheader  from '@material-ui/core/ListSubheader';
 import React          from 'react';
 import connectField   from 'uniforms/connectField';
@@ -9,7 +9,7 @@ import {Children}     from 'react';
 import ListAddField  from './ListAddField';
 import ListItemField from './ListItemField';
 
-const List_ = ({
+const List = ({
     addIcon,
     children,
     dense,
@@ -20,7 +20,7 @@ const List_ = ({
     value,
     ...props
 }) => [
-    <List
+    <ListMaterial
         key="list"
         dense={dense}
         subheader={label ? <ListSubheader disableSticky>{label}</ListSubheader> : undefined}
@@ -41,14 +41,12 @@ const List_ = ({
                 <ListItemField key={index} label={null} name={joinName(name, index)} {...itemProps} />
             )
         )}
-    </List>,
+    </ListMaterial>,
     <ListAddField key="listAddField" name={`${name}.$`} icon={addIcon} initialCount={initialCount} />
 ];
 
-List_.defaultProps = {
+List.defaultProps = {
     dense: true
 };
 
-List_.displayName = 'List';
-
-export default connectField(List_, {includeInChain: false});
+export default connectField(List, {includeInChain: false});

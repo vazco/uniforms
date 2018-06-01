@@ -1,14 +1,14 @@
-import ListItem     from '@material-ui/core/ListItem';
-import React        from 'react';
-import connectField from 'uniforms/connectField';
-import joinName     from 'uniforms/joinName';
-import {Children}   from 'react';
+import ListItemMaterial from '@material-ui/core/ListItem';
+import React            from 'react';
+import connectField     from 'uniforms/connectField';
+import joinName         from 'uniforms/joinName';
+import {Children}       from 'react';
 
 import AutoField    from './AutoField';
 import ListDelField from './ListDelField';
 
-const ListItem_ = ({dense, divider, disableGutters, removeIcon, ...props}) => (
-    <ListItem dense={dense} divider={divider} disableGutters={disableGutters}>
+const ListItem = ({dense, divider, disableGutters, removeIcon, ...props}) => (
+    <ListItemMaterial dense={dense} divider={divider} disableGutters={disableGutters}>
         {props.children ? (
             Children.map(props.children, child =>
                 React.cloneElement(child, {
@@ -20,15 +20,13 @@ const ListItem_ = ({dense, divider, disableGutters, removeIcon, ...props}) => (
             <AutoField {...props} />
         )}
         <ListDelField name={props.name} icon={removeIcon} />
-    </ListItem>
+    </ListItemMaterial>
 );
 
-ListItem_.defaultProps = {
+ListItem.defaultProps = {
     dense: true
 };
 
-ListItem_.displayName = 'ListItem';
-
-export default connectField(ListItem_, {includeInChain: false, includeParent: true});
+export default connectField(ListItem, {includeInChain: false, includeParent: true});
 
 

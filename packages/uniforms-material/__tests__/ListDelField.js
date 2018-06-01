@@ -51,7 +51,7 @@ test('<ListDelField> - correctly reacts on click', () => {
 });
 
 test('<ListDelField> - renders correct icon', () => {
-    const element = <ListDelField name="x.1" parent={parent} icon={AlarmIcon} />;
+    const element = <ListDelField name="x.1" parent={parent} icon={<AlarmIcon />} />;
     const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
 
     expect(wrapper.find(AlarmIcon)).toHaveLength(1);

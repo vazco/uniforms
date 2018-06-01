@@ -1,11 +1,12 @@
 import IconButton     from '@material-ui/core/IconButton';
+import PropTypes      from 'prop-types';
 import React          from 'react';
 import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
 const ListDel = ({
     disabled,
-    icon: Icon,
+    icon,
     name,
     parent,
     ...props
@@ -22,9 +23,17 @@ const ListDel = ({
             )}
             {...filterDOMProps(props)}
         >
-            {Icon ? <Icon /> : '-'}
+            {icon}
         </IconButton>
     );
+};
+
+ListDel.propTypes = {
+    icon: PropTypes.node
+};
+
+ListDel.defaultProps = {
+    icon: '-'
 };
 
 export default connectField(ListDel, {includeParent: true, initialValue: false});
