@@ -7,7 +7,7 @@ import joinName from './joinName';
 
 import type {Element} from 'react';
 
-export default function injectName (name: string, children: Element<*>, parent?: Element<*>) {
+export default function injectName (name: string, children: Element<any>, parent?: Element<any>) {
     return Children.map(children, child =>
         child && typeof child !== 'string' && (!parent || !parent.props || !parent.props.name)
             ? !child.props

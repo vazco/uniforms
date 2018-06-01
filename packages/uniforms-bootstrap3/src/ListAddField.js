@@ -1,5 +1,6 @@
 import React          from 'react';
 import classnames     from 'classnames';
+import cloneDeep      from 'lodash/cloneDeep';
 import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
@@ -16,7 +17,7 @@ const ListAdd = ({
     return (
         <div
             className={classnames('badge pull-right', className)}
-            onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
+            onClick={() => limitNotReached && parent.onChange(parent.value.concat([cloneDeep(value)]))}
             {...filterDOMProps(props)}
         >
             {addIcon}

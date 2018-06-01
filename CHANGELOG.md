@@ -1,4 +1,9 @@
-## Next:
+## [v1.24.5](https://github.com/vazco/uniforms/tree/v1.24.5) (2018-05-30)
+- **Fixed:** Added `wrapperStyle` to `filterDOMProps` defaults. [\#430](https://github.com/vazco/uniforms/issues/430)
+- **Fixed:** `ListAddField` now clones given `value` to not keep its reference. [\#428](https://github.com/vazco/uniforms/issues/428)
+
+## [v1.24.4](https://github.com/vazco/uniforms/tree/v1.24.4) (2018-05-27)
+- **Fixed:** Placeholders are now working with disabled labels on `GraphQLBridge` and `JSONSchemaBridge`. [\#421](https://github.com/vazco/uniforms/issues/421)
 - **Fixed:** `SubmitField` labels.
 
 ## [v1.24.3](https://github.com/vazco/uniforms/tree/v1.24.3) (2018-05-07)

@@ -2,6 +2,7 @@ import FormControl    from '@material-ui/core/FormControl';
 import IconButton     from '@material-ui/core/IconButton';
 import PropTypes      from 'prop-types';
 import React          from 'react';
+import cloneDeep      from 'lodash/cloneDeep';
 import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 const ListAdd = ({
@@ -19,7 +20,7 @@ const ListAdd = ({
         <FormControl fullWidth={!!fullWidth} margin={margin}>
             <IconButton
                 disabled={!limitNotReached}
-                onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
+                onClick={() => limitNotReached && parent.onChange(parent.value.concat([cloneDeep(value)]))}
                 {...filterDOMProps(props)}
             >
                 {icon}

@@ -1,4 +1,5 @@
 import React          from 'react';
+import cloneDeep      from 'lodash/cloneDeep';
 import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
@@ -13,7 +14,7 @@ const ListAdd = ({
     return (
         <span
             {...filterDOMProps(props)}
-            onClick={() => limitNotReached && parent.onChange(parent.value.concat([value]))}
+            onClick={() => limitNotReached && parent.onChange(parent.value.concat([cloneDeep(value)]))}
         >
             +
         </span>
