@@ -9,6 +9,5 @@ $ git clone git@github.com:vazco/uniforms.git
 $ cd uniforms
 $ npm install
 $ cd demo
-$ meteor npm install
 $ meteor npm start
 ```

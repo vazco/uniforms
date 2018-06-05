@@ -15,7 +15,7 @@
     "prereset": "npm run clean",
     "pretest": "npm run lint && npm run flow",
     "publish": "npm run clean && npm run build && lerna publish",
-    "reset": "rimraf node_modules packages/*/node_modules",
+    "reset": "rimraf node_modules demo/node_modules packages/*/node_modules",
     "test": "jest"
   },
   "dependencies": {
