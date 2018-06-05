@@ -1,5 +1,5 @@
 import React     from 'react';
-import TextField from 'material-ui/TextField';
+import TextField from '@material-ui/core/TextField';
 import {mount}   from 'enzyme';
 
 import LongTextField from 'uniforms-material/LongTextField';
@@ -45,12 +45,12 @@ test('<LongTextField> - renders a TextField with correct name', () => {
     expect(wrapper.find(TextField).prop('name')).toBe('x');
 });
 
-test('<LongTextField> - renders a TextField with correct hintText', () => {
+test('<LongTextField> - renders a TextField with correct placeholder', () => {
     const element = <LongTextField name="x" placeholder="y" />;
     const wrapper = mount(element, createContext({x: {type: String}}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    expect(wrapper.find(TextField).prop('hintText')).toBe('y');
+    expect(wrapper.find(TextField).prop('placeholder')).toBe('y');
 });
 
 test('<LongTextField> - renders a TextField with correct value (default)', () => {
@@ -84,7 +84,7 @@ test('<LongTextField> - renders a TextField which correctly reacts on change', (
     const wrapper = mount(element, createContext({x: {type: String}}, {onChange}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    expect(wrapper.find('textarea').at(1).simulate('change', {target: {value: 'y'}})).toBeTruthy();
+    wrapper.find(TextField).props().onChange({target: {value: 'y'}});
     expect(onChange).toHaveBeenLastCalledWith('x', 'y');
 });
 
@@ -95,7 +95,7 @@ test('<LongTextField> - renders a TextField which correctly reacts on change (em
     const wrapper = mount(element, createContext({x: {type: String}}, {onChange}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    expect(wrapper.find('textarea').at(1).simulate('change', {target: {value: ''}})).toBeTruthy();
+    wrapper.find(TextField).props().onChange({target: {value: ''}});
     expect(onChange).toHaveBeenLastCalledWith('x', '');
 });
 
@@ -106,7 +106,7 @@ test('<LongTextField> - renders a TextField which correctly reacts on change (sa
     const wrapper = mount(element, createContext({x: {type: String}}, {model: {x: 'y'}, onChange}));
 
     expect(wrapper.find(TextField)).toHaveLength(1);
-    expect(wrapper.find('textarea').at(1).simulate('change', {target: {value: 'y'}})).toBeTruthy();
+    wrapper.find(TextField).props().onChange({target: {value: 'y'}});
     expect(onChange).toHaveBeenLastCalledWith('x', 'y');
 });
 
@@ -114,7 +114,7 @@ test('<LongTextField> - renders a label', () => {
     const element = <LongTextField name="x" label="y" />;
     const wrapper = mount(element, createContext({x: {type: String}}));
 
-    expect(wrapper.find(TextField).prop('floatingLabelText')).toBe('y');
+    expect(wrapper.find(TextField).prop('label')).toBe('y');
 });
 
 test('<LongTextField> - renders a TextField with correct error text (specified)', () => {
@@ -122,7 +122,7 @@ test('<LongTextField> - renders a TextField with correct error text (specified)'
     const element = <LongTextField name="x" error={error} showInlineError errorMessage="Error" />;
     const wrapper = mount(element, createContext({x: {type: String}}));
 
-    expect(wrapper.find(TextField).at(0).prop('errorText')).toBe('Error');
+    expect(wrapper.find(TextField).prop('helperText')).toBe('Error');
 });
 
 test('<LongTextField> - renders a TextField with correct error text (showInlineError=false)', () => {
@@ -130,5 +130,5 @@ test('<LongTextField> - renders a TextField with correct error text (showInlineE
     const element = <LongTextField name="x" error={error} showInlineError={false} errorMessage="Error" />;
     const wrapper = mount(element, createContext({x: {type: String}}));
 
-    expect(wrapper.find(TextField).at(0).prop('errorText')).toBeUndefined();
+    expect(wrapper.find(TextField).prop('helperText')).toBeUndefined();
 });

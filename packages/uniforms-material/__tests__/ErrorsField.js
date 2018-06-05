@@ -1,6 +1,6 @@
-import React      from 'react';
-import {ListItem} from 'material-ui/List';
-import {mount}    from 'enzyme';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import React          from 'react';
+import {mount}        from 'enzyme';
 
 import ErrorsField from 'uniforms-material/ErrorsField';
 
@@ -28,10 +28,10 @@ test('<ErrorsField> - renders list of correct error messages (context)', () => {
     const element = <ErrorsField name="x" />;
     const wrapper = mount(element, createContext({x: {type: String}, y: {type: String}, z: {type: String}}, {error}));
 
-    expect(wrapper.find(ListItem)).toHaveLength(3);
-    expect(wrapper.find(ListItem).at(0).text()).toBe('X is required');
-    expect(wrapper.find(ListItem).at(1).text()).toBe('Y is required');
-    expect(wrapper.find(ListItem).at(2).text()).toBe('Z is required');
+    expect(wrapper.find(FormHelperText)).toHaveLength(3);
+    expect(wrapper.find(FormHelperText).at(0).text()).toBe('X is required');
+    expect(wrapper.find(FormHelperText).at(1).text()).toBe('Y is required');
+    expect(wrapper.find(FormHelperText).at(2).text()).toBe('Z is required');
 });
 
 test('<ErrorsField> - renders children (specified)', () => {

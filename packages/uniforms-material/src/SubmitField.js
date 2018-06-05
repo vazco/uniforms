@@ -1,20 +1,22 @@
 import BaseField      from 'uniforms/BaseField';
-import RaisedButton   from 'material-ui/RaisedButton';
+import Button         from '@material-ui/core/Button';
 import React          from 'react';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
-const SubmitField = ({disabled, inputRef, label, value, ...props}, {uniforms: {error, state}}) =>
-    <RaisedButton
+const SubmitField = ({children, disabled, inputRef, label, value, ...props}, {uniforms: {error, state}}) =>
+    <Button
         disabled={disabled === undefined ? !!(error || state.disabled) : disabled}
-        label={label}
         ref={inputRef}
         type="submit"
         value={value}
         {...filterDOMProps(props)}
-    />
+    >
+        {label || children}
+    </Button>
 ;
 
 SubmitField.contextTypes = BaseField.contextTypes;
-SubmitField.defaultProps = {label: 'Submit'};
+
+SubmitField.defaultProps = {label: 'Submit', variant: 'raised'};
 
 export default SubmitField;

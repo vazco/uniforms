@@ -1,27 +1,31 @@
-import React                  from 'react';
-import Subheader              from 'material-ui/Subheader';
-import connectField           from 'uniforms/connectField';
-import filterDOMProps         from 'uniforms/filterDOMProps';
-import joinName               from 'uniforms/joinName';
-import {Children}             from 'react';
-import {List as ListMaterial} from 'material-ui/List';
+import ListMaterial   from '@material-ui/core/List';
+import ListSubheader  from '@material-ui/core/ListSubheader';
+import React          from 'react';
+import connectField   from 'uniforms/connectField';
+import filterDOMProps from 'uniforms/filterDOMProps';
+import joinName       from 'uniforms/joinName';
+import {Children}     from 'react';
 
 import ListAddField  from './ListAddField';
 import ListItemField from './ListItemField';
 
 const List = ({
-    actionsStyle,
+    addIcon,
     children,
+    dense,
     initialCount,
     itemProps,
     label,
     name,
     value,
     ...props
-}) =>
-    <ListMaterial {...filterDOMProps(props)}>
-        {!!label && <Subheader children={label} style={{paddingLeft: 0}} />}
-
+}) => [
+    <ListMaterial
+        key="list"
+        dense={dense}
+        subheader={label ? <ListSubheader disableSticky>{label}</ListSubheader> : undefined}
+        {...filterDOMProps(props)}
+    >
         {children ? (
             value.map((item, index) =>
                 Children.map(children, child =>
@@ -37,10 +41,12 @@ const List = ({
                 <ListItemField key={index} label={null} name={joinName(name, index)} {...itemProps} />
             )
         )}
-        <div style={{paddingTop: 8, paddingBottom: 8, ...actionsStyle}}>
-            <ListAddField name={`${name}.$`} initialCount={initialCount} />
-        </div>
-    </ListMaterial>
-;
+    </ListMaterial>,
+    <ListAddField key="listAddField" name={`${name}.$`} icon={addIcon} initialCount={initialCount} />
+];
 
-export default connectField(List, {ensureValue: true, includeInChain: false});
+List.defaultProps = {
+    dense: true
+};
+
+export default connectField(List, {includeInChain: false});

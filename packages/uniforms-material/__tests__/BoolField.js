@@ -1,7 +1,10 @@
-import Checkbox from 'material-ui/Checkbox';
-import React    from 'react';
-import Toggle   from 'material-ui/Toggle';
-import {mount}  from 'enzyme';
+import Checkbox         from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText   from '@material-ui/core/FormHelperText';
+import FormLabel        from '@material-ui/core/FormLabel';
+import React            from 'react';
+import Switch           from '@material-ui/core/Switch';
+import {mount}          from 'enzyme';
 
 import BoolField from 'uniforms-material/BoolField';
 
@@ -51,7 +54,7 @@ test('<BoolField> - renders a Checkbox with correct label (specified)', () => {
     const wrapper = mount(element, createContext({x: {type: Boolean}}));
 
     expect(wrapper.find(Checkbox)).toHaveLength(1);
-    expect(wrapper.find(Checkbox).prop('label')).toBe('BoolFieldLabel');
+    expect(wrapper.find(FormControlLabel).prop('label')).toBe('BoolFieldLabel');
 });
 
 test('<BoolField> - renders a Checkbox with correct value (default)', () => {
@@ -89,84 +92,109 @@ test('<BoolField> - renders a Checkbox which correctly reacts on change', () => 
     expect(onChange).toHaveBeenLastCalledWith('x', false);
 });
 
-test('<BoolField> - renders an Toggle', () => {
+test('<BoolField> - renders an Switch', () => {
     const element = <BoolField name="x" appearance="toggle" />;
     const wrapper = mount(element, createContext({x: {type: Boolean}}));
 
-    expect(wrapper.find(Toggle)).toHaveLength(1);
+    expect(wrapper.find(Switch)).toHaveLength(1);
 });
 
-test('<BoolField> - renders a Toggle with correct id (inherited)', () => {
+test('<BoolField> - renders a Switch with correct id (inherited)', () => {
     const element = <BoolField name="x" appearance="toggle" />;
     const wrapper = mount(element, createContext({x: {type: Boolean}}));
 
-    expect(wrapper.find(Toggle)).toHaveLength(1);
-    expect(wrapper.find(Toggle).prop('id')).toBeTruthy();
+    expect(wrapper.find(Switch)).toHaveLength(1);
+    expect(wrapper.find(Switch).prop('id')).toBeTruthy();
 });
 
-test('<BoolField> - renders a Toggle with correct id (specified)', () => {
+test('<BoolField> - renders a Switch with correct id (specified)', () => {
     const element = <BoolField name="x" appearance="toggle" id="y" />;
     const wrapper = mount(element, createContext({x: {type: Boolean}}));
 
-    expect(wrapper.find(Toggle)).toHaveLength(1);
-    expect(wrapper.find(Toggle).prop('id')).toBe('y');
+    expect(wrapper.find(Switch)).toHaveLength(1);
+    expect(wrapper.find(Switch).prop('id')).toBe('y');
 });
 
-test('<BoolField> - renders a Toggle with correct name', () => {
+test('<BoolField> - renders a Switch with correct name', () => {
     const element = <BoolField name="x" appearance="toggle" />;
     const wrapper = mount(element, createContext({x: {type: Boolean}}));
 
-    expect(wrapper.find(Toggle)).toHaveLength(1);
-    expect(wrapper.find(Toggle).prop('name')).toBe('x');
+    expect(wrapper.find(Switch)).toHaveLength(1);
+    expect(wrapper.find(Switch).prop('name')).toBe('x');
 });
 
-test('<BoolField> - renders an Toggle with correct disabled state', () => {
+test('<BoolField> - renders an Switch with correct disabled state', () => {
     const element = <BoolField name="x" appearance="toggle" disabled />;
     const wrapper = mount(element, createContext({x: {type: Boolean}}));
 
-    expect(wrapper.find(Toggle)).toHaveLength(1);
-    expect(wrapper.find(Toggle).prop('disabled')).toBe(true);
+    expect(wrapper.find(Switch)).toHaveLength(1);
+    expect(wrapper.find(Switch).prop('disabled')).toBe(true);
 });
 
-test('<BoolField> - renders a Toggle with correct label (specified)', () => {
+test('<BoolField> - renders a Switch with correct label (specified)', () => {
     const element = <BoolField name="x" appearance="toggle" label="BoolFieldLabel" />;
     const wrapper = mount(element, createContext({x: {type: Boolean}}));
 
-    expect(wrapper.find(Toggle)).toHaveLength(1);
-    expect(wrapper.find(Toggle).prop('label')).toBe('BoolFieldLabel');
+    expect(wrapper.find(Switch)).toHaveLength(1);
+    expect(wrapper.find(FormControlLabel).prop('label')).toBe('BoolFieldLabel');
 });
 
-test('<BoolField> - renders a Toggle with correct value (default)', () => {
+test('<BoolField> - renders a Switch with correct label (transform)', () => {
+    const element = <BoolField name="x" appearance="toggle" label="BoolFieldLabel" transform={x => x.toUpperCase()} />;
+    const wrapper = mount(element, createContext({x: {type: Boolean}}));
+
+    expect(wrapper.find(Switch)).toHaveLength(1);
+    expect(wrapper.find(FormControlLabel).prop('label')).toBe('BOOLFIELDLABEL');
+});
+
+
+test('<BoolField> - renders a Switch with correct legend (specified)', () => {
+    const element = <BoolField name="x" appearance="toggle" legend="BoolFieldLegend" />;
+    const wrapper = mount(element, createContext({x: {type: Boolean}}));
+
+    expect(wrapper.find(Switch)).toHaveLength(1);
+    expect(wrapper.find(FormLabel).text()).toBe('BoolFieldLegend *');
+});
+
+test('<BoolField> - renders a Switch with correct value (default)', () => {
     const element = <BoolField name="x" appearance="toggle" />;
     const wrapper = mount(element, createContext({x: {type: Boolean}}));
 
-    expect(wrapper.find(Toggle)).toHaveLength(1);
-    expect(wrapper.find(Toggle).prop('toggled')).toBe(false);
+    expect(wrapper.find(Switch)).toHaveLength(1);
+    expect(wrapper.find(Switch).prop('checked')).toBe(false);
 });
 
-test('<BoolField> - renders a Toggle with correct value (model)', () => {
+test('<BoolField> - renders a Switch with correct value (model)', () => {
     const element = <BoolField name="x" appearance="toggle" />;
     const wrapper = mount(element, createContext({x: {type: Boolean}}, {model: {x: true}}));
 
-    expect(wrapper.find(Toggle)).toHaveLength(1);
-    expect(wrapper.find(Toggle).prop('toggled')).toBe(true);
+    expect(wrapper.find(Switch)).toHaveLength(1);
+    expect(wrapper.find(Switch).prop('checked')).toBe(true);
 });
 
-test('<BoolField> - renders a Toggle with correct value (specified)', () => {
+test('<BoolField> - renders a Switch with correct value (specified)', () => {
     const element = <BoolField name="x" appearance="toggle" value />;
     const wrapper = mount(element, createContext({x: {type: Boolean}}));
 
-    expect(wrapper.find(Toggle)).toHaveLength(1);
-    expect(wrapper.find(Toggle).prop('toggled')).toBe(true);
+    expect(wrapper.find(Switch)).toHaveLength(1);
+    expect(wrapper.find(Switch).prop('checked')).toBe(true);
 });
 
-test('<BoolField> - renders a Toggle which correctly reacts on change', () => {
+test('<BoolField> - renders a Switch which correctly reacts on change', () => {
     const onChange = jest.fn();
 
     const element = <BoolField name="x" appearance="toggle" />;
     const wrapper = mount(element, createContext({x: {type: Boolean}}, {onChange}));
 
-    expect(wrapper.find(Toggle)).toHaveLength(1);
+    expect(wrapper.find(Switch)).toHaveLength(1);
     wrapper.find('input').simulate('change');
     expect(onChange).toHaveBeenLastCalledWith('x', false);
+});
+
+test('<BoolField> - renders a helperText', () => {
+    const element = <BoolField name="x" helperText="Helper" />;
+    const wrapper = mount(element, createContext({x: {type: Boolean}}));
+
+    expect(wrapper.find(FormHelperText)).toHaveLength(1);
+    expect(wrapper.find(FormHelperText).text()).toBe('Helper');
 });

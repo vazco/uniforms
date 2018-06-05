@@ -1,5 +1,5 @@
 import React             from 'react';
-import TextFieldMaterial from 'material-ui/TextField';
+import TextFieldMaterial from '@material-ui/core/TextField';
 import {mount}           from 'enzyme';
 
 import TextField from 'uniforms-material/TextField';
@@ -45,12 +45,12 @@ test('<TextField> - renders a TextField with correct name', () => {
     expect(wrapper.find(TextFieldMaterial).prop('name')).toBe('x');
 });
 
-test('<TextField> - renders a TextField with correct hintText', () => {
+test('<TextField> - renders a TextField with correct placeholder', () => {
     const element = <TextField name="x" placeholder="y" />;
     const wrapper = mount(element, createContext({x: {type: String}}));
 
     expect(wrapper.find(TextFieldMaterial)).toHaveLength(1);
-    expect(wrapper.find(TextFieldMaterial).prop('hintText')).toBe('y');
+    expect(wrapper.find(TextFieldMaterial).prop('placeholder')).toBe('y');
 });
 
 test('<TextField> - renders a TextField with correct value (default)', () => {
@@ -115,7 +115,7 @@ test('<TextField> - renders a label', () => {
     const wrapper = mount(element, createContext({x: {type: String}}));
 
     expect(wrapper.find(TextFieldMaterial)).toHaveLength(1);
-    expect(wrapper.find(TextFieldMaterial).prop('floatingLabelText')).toBe('y');
+    expect(wrapper.find(TextFieldMaterial).prop('label')).toBe('y');
 });
 
 test('<TextField> - renders a TextField with correct error text (specified)', () => {
@@ -123,7 +123,7 @@ test('<TextField> - renders a TextField with correct error text (specified)', ()
     const element = <TextField name="x" error={error} showInlineError errorMessage="Error" />;
     const wrapper = mount(element, createContext({x: {type: String}}));
 
-    expect(wrapper.find(TextFieldMaterial).at(0).prop('errorText')).toBe('Error');
+    expect(wrapper.find(TextFieldMaterial).prop('helperText')).toBe('Error');
 });
 
 test('<TextField> - renders a TextField with correct error text (showInlineError=false)', () => {
@@ -131,5 +131,5 @@ test('<TextField> - renders a TextField with correct error text (showInlineError
     const element = <TextField name="x" error={error} showInlineError={false} errorMessage="Error" />;
     const wrapper = mount(element, createContext({x: {type: String}}));
 
-    expect(wrapper.find(TextFieldMaterial).at(0).prop('errorText')).toBeUndefined();
+    expect(wrapper.find(TextFieldMaterial).prop('helperText')).toBeUndefined();
 });

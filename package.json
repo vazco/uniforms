@@ -19,6 +19,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@material-ui/core": "^1.0.0",
     "antd": "3.5.4",
     "babel-cli": "6.26.0",
     "babel-eslint": "8.2.3",
@@ -44,7 +45,6 @@
     "graphql": "0.13.2",
     "jest": "23.1.0",
     "lerna": "2.11.0",
-    "material-ui": "0.20.1",
     "prettier": "1.13.3",
     "react": "16.4.0",
     "react-dom": "16.4.0",

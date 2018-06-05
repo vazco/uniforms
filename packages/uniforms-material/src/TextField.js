@@ -1,5 +1,5 @@
 import React          from 'react';
-import TextField      from 'material-ui/TextField';
+import TextField      from '@material-ui/core/TextField';
 import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
@@ -7,27 +7,25 @@ const Text = ({
     disabled,
     error,
     errorMessage,
-    id,
+    helperText,
     inputRef,
     label,
     name,
     onChange,
     placeholder,
     showInlineError,
-    type,
     value,
     ...props
 }) =>
     <TextField
-        disabled={disabled}
-        errorText={error && showInlineError ? errorMessage : undefined}
-        floatingLabelText={label}
-        hintText={placeholder}
-        id={id}
+        disabled={!!disabled}
+        error={!!error}
+        helperText={error && showInlineError && errorMessage || helperText}
+        label={label}
         name={name}
-        onChange={(event, value) => onChange(value)}
+        onChange={event => disabled || onChange(event.target.value)}
+        placeholder={placeholder}
         ref={inputRef}
-        type={type}
         value={value}
         {...filterDOMProps(props)}
     />
@@ -35,6 +33,7 @@ const Text = ({
 
 Text.defaultProps = {
     fullWidth: true,
+    margin: 'normal',
     type: 'text'
 };
 

@@ -1,124 +1,123 @@
-import React              from 'react';
-import Subheader          from 'material-ui/Subheader';
-import {RadioButtonGroup} from 'material-ui/RadioButton';
-import {RadioButton}      from 'material-ui/RadioButton';
-import {mount}            from 'enzyme';
+import FormControl      from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText   from '@material-ui/core/FormHelperText';
+import FormLabel        from '@material-ui/core/FormLabel';
+import Radio            from '@material-ui/core/Radio';
+import RadioGroup       from '@material-ui/core/RadioGroup';
+import React            from 'react';
+import {mount}          from 'enzyme';
 
 import RadioField from 'uniforms-material/RadioField';
 
 import createContext from './_createContext';
 
-test('<RadioField> - renders a set of RadioButtons', () => {
+test('<RadioField> - renders a set of Radio buttons', () => {
     const element = <RadioField name="x" />;
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
 
-    expect(wrapper.find(RadioButton)).toHaveLength(2);
+    expect(wrapper.find(Radio)).toHaveLength(2);
 });
 
-test('<RadioField> - renders a set of RadioButtons wrapped with RadioButtonGroup', () => {
+test('<RadioField> - renders a set of Radio buttons wrapped with RadioGroup', () => {
     const element = <RadioField name="x" />;
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
 
-    expect(wrapper.find(RadioButtonGroup)).toHaveLength(1);
-    expect(wrapper.find(RadioButtonGroup).find(RadioButton)).toHaveLength(2);
+    expect(wrapper.find(RadioGroup)).toHaveLength(1);
+    expect(wrapper.find(RadioGroup).find(Radio)).toHaveLength(2);
 });
 
-test('<RadioField> - renders a set of RadioButtons with correct disabled state', () => {
+test('<RadioField> - renders a set of Radio buttons with correct disabled state', () => {
     const element = <RadioField name="x" disabled />;
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
 
-    expect(wrapper.find(RadioButton)).toHaveLength(2);
-    expect(wrapper.find(RadioButton).at(0).prop('disabled')).toBe(true);
-    expect(wrapper.find(RadioButton).at(1).prop('disabled')).toBe(true);
-    expect(wrapper.find(RadioButtonGroup)).toHaveLength(1);
-    expect(wrapper.find(RadioButtonGroup).prop('disabled')).toBe(true);
+    expect(wrapper.find(FormControl).prop('disabled')).toBe(true);
 });
 
-test('<RadioField> - renders a RadioButtonGroup with correct id (inherited)', () => {
+test('<RadioField> - renders a RadioGroup with correct id (inherited)', () => {
     const element = <RadioField name="x" />;
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
 
-    expect(wrapper.find(RadioButtonGroup)).toHaveLength(1);
-    expect(wrapper.find(RadioButtonGroup).prop('id')).toBeTruthy();
+    expect(wrapper.find(RadioGroup)).toHaveLength(1);
+    expect(wrapper.find(RadioGroup).prop('id')).toBeTruthy();
 });
 
-test('<RadioField> - renders a RadioButtonGroup with correct id (specified)', () => {
+test('<RadioField> - renders a RadioGroup with correct id (specified)', () => {
     const element = <RadioField name="x" id="y" />;
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
 
-    expect(wrapper.find(RadioButtonGroup)).toHaveLength(1);
-    expect(wrapper.find(RadioButtonGroup).prop('id')).toBe('y');
+    expect(wrapper.find(RadioGroup)).toHaveLength(1);
+    expect(wrapper.find(RadioGroup).prop('id')).toBe('y');
 });
 
-test('<RadioField> - renders a RadioButtonGroup with correct name', () => {
+test('<RadioField> - renders a RadioGroup with correct name', () => {
     const element = <RadioField name="x" />;
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
 
-    expect(wrapper.find(RadioButtonGroup)).toHaveLength(1);
-    expect(wrapper.find(RadioButtonGroup).prop('name')).toBe('x');
+    expect(wrapper.find(RadioGroup)).toHaveLength(1);
+    expect(wrapper.find(RadioGroup).prop('name')).toBe('x');
 });
 
-test('<RadioField> - renders a set of RadioButtons with correct options', () => {
+test('<RadioField> - renders a set of Radio buttons with correct options', () => {
     const element = <RadioField name="x" />;
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
 
-    expect(wrapper.find(RadioButton)).toHaveLength(2);
-    expect(wrapper.find(RadioButton).at(0).prop('label')).toBe('a');
-    expect(wrapper.find(RadioButton).at(1).prop('label')).toBe('b');
+    expect(wrapper.find(Radio)).toHaveLength(2);
+    expect(wrapper.find(FormControlLabel).at(0).prop('label')).toBe('a');
+    expect(wrapper.find(FormControlLabel).at(1).prop('label')).toBe('b');
 });
 
-test('<RadioField> - renders a set of RadioButtons with correct options (transform)', () => {
+test('<RadioField> - renders a set of Radio buttons with correct options (transform)', () => {
     const element = <RadioField name="x" transform={x => x.toUpperCase()} />;
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
 
-    expect(wrapper.find(RadioButton)).toHaveLength(2);
-    expect(wrapper.find(RadioButton).at(0).prop('label')).toBe('A');
-    expect(wrapper.find(RadioButton).at(1).prop('label')).toBe('B');
+    expect(wrapper.find(Radio)).toHaveLength(2);
+    expect(wrapper.find(FormControlLabel).at(0).prop('label')).toBe('A');
+    expect(wrapper.find(FormControlLabel).at(1).prop('label')).toBe('B');
 });
 
-test('<RadioField> - renders a RadioButtonGroup with correct value (default)', () => {
+test('<RadioField> - renders a RadioGroup with correct value (default)', () => {
     const element = <RadioField name="x" />;
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
 
-    expect(wrapper.find(RadioButtonGroup)).toHaveLength(1);
-    expect(wrapper.find(RadioButtonGroup).prop('valueSelected')).toBeFalsy();
+    expect(wrapper.find(RadioGroup)).toHaveLength(1);
+    expect(wrapper.find(RadioGroup).prop('value')).toBeFalsy();
 });
 
-test('<RadioField> - renders a RadioButtonGroup with correct value (model)', () => {
+test('<RadioField> - renders a RadioGroup with correct value (model)', () => {
     const element = <RadioField name="x" />;
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}, {model: {x: 'b'}}));
 
-    expect(wrapper.find(RadioButtonGroup)).toHaveLength(1);
-    expect(wrapper.find(RadioButtonGroup).prop('valueSelected')).toBe('b');
+    expect(wrapper.find(RadioGroup)).toHaveLength(1);
+    expect(wrapper.find(RadioGroup).prop('value')).toBe('b');
 });
 
-test('<RadioField> - renders a RadioButtonGroup with correct value (specified)', () => {
+test('<RadioField> - renders a RadioGroup with correct value (specified)', () => {
     const element = <RadioField name="x" value="b" />;
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
 
-    expect(wrapper.find(RadioButtonGroup)).toHaveLength(1);
-    expect(wrapper.find(RadioButtonGroup).prop('valueSelected')).toBe('b');
+    expect(wrapper.find(RadioGroup)).toHaveLength(1);
+    expect(wrapper.find(RadioGroup).prop('value')).toBe('b');
 });
 
-test('<RadioField> - renders a RadioButtonGroup which correctly reacts on change', () => {
+test('<RadioField> - renders a RadioGroup which correctly reacts on change', () => {
     const onChange = jest.fn();
 
     const element = <RadioField name="x" />;
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}, {onChange}));
 
-    expect(wrapper.find(RadioButtonGroup)).toHaveLength(1);
-    expect(wrapper.find('input').at(1).simulate('change')).toBeTruthy();
+    expect(wrapper.find(RadioGroup)).toHaveLength(1);
+    wrapper.find(RadioGroup).props().onChange({target: {value: 'b'}});
     expect(onChange).toHaveBeenLastCalledWith('x', 'b');
 });
 
-test('<RadioField> - renders a RadioButtonGroup which correctly reacts on change (same value)', () => {
+test('<RadioField> - renders a RadioGroup which correctly reacts on change (same value)', () => {
     const onChange = jest.fn();
 
     const element = <RadioField name="x" />;
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}, {model: {x: 'b'}, onChange})); // eslint-disable-line max-len
 
-    expect(wrapper.find(RadioButtonGroup)).toHaveLength(1);
-    expect(wrapper.find('input').at(0).simulate('change')).toBeTruthy();
+    expect(wrapper.find(RadioGroup)).toHaveLength(1);
+    wrapper.find(RadioGroup).props().onChange({target: {value: 'a'}});
     expect(onChange).toHaveBeenLastCalledWith('x', 'a');
 });
 
@@ -126,6 +125,22 @@ test('<RadioField> - renders a label', () => {
     const element = <RadioField name="x" label="y" />;
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
 
-    expect(wrapper.find(Subheader)).toHaveLength(1);
-    expect(wrapper.find(Subheader).at(0).text()).toBe('y');
+    expect(wrapper.find(FormLabel)).toHaveLength(1);
+    expect(wrapper.find(FormLabel).text()).toBe('y *');
+});
+
+test('<RadioField> - renders a helperText', () => {
+    const element = <RadioField name="x" helperText="Helper" />;
+    const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+
+    expect(wrapper.find(FormHelperText)).toHaveLength(1);
+    expect(wrapper.find(FormHelperText).text()).toBe('Helper');
+});
+
+test('<RadioField> - renders a TextField with correct error text (specified)', () => {
+    const error = new Error();
+    const element = <RadioField name="x" error={error} showInlineError errorMessage="Error" />;
+    const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+
+    expect(wrapper.find(FormHelperText).text()).toBe('Error');
 });
