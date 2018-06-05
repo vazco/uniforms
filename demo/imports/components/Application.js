@@ -3,8 +3,6 @@ import React          from 'react';
 import enUS           from 'antd/lib/locale-provider/en_US';
 import {Component}    from 'react';
 
-import {Meteor} from 'meteor/meteor';
-
 import presets from '../lib/presets';
 import schema  from '../lib/schema';
 

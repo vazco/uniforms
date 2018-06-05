@@ -1,4 +1,4 @@
-## Next:
+## [v1.25.0-rc.1](https://github.com/vazco/uniforms/tree/v1.25.0-rc.1) (2018-06-05)
 - **Changed:** Updated `uniforms-material` to `@material/core`. [\#349](https://github.com/vazco/uniforms/issues/349)
 
 ## [v1.24.5](https://github.com/vazco/uniforms/tree/v1.24.5) (2018-05-30)
