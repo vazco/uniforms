@@ -1,3 +1,6 @@
+## Next:
+- **Changed:** Updated `uniforms-material` to `@material/core`. [\#349](https://github.com/vazco/uniforms/issues/349)
+
 ## [v1.24.5](https://github.com/vazco/uniforms/tree/v1.24.5) (2018-05-30)
 - **Fixed:** Added `wrapperStyle` to `filterDOMProps` defaults. [\#430](https://github.com/vazco/uniforms/issues/430)
 - **Fixed:** `ListAddField` now clones given `value` to not keep its reference. [\#428](https://github.com/vazco/uniforms/issues/428)
