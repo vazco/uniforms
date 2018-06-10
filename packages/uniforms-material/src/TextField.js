@@ -14,6 +14,7 @@ const Text = ({
     onChange,
     placeholder,
     showInlineError,
+    type,
     value,
     ...props
 }) =>
@@ -26,6 +27,7 @@ const Text = ({
         onChange={event => disabled || onChange(event.target.value)}
         placeholder={placeholder}
         ref={inputRef}
+        type={type}
         value={value}
         {...filterDOMProps(props)}
     />
