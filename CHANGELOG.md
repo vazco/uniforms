@@ -1,3 +1,6 @@
+## [v1.25.0-rc.2](https://github.com/vazco/uniforms/tree/v1.25.0-rc.2) (2018-06-10)
+- **Fixed:** Explicitly pass `text` prop in `TextField` in `uniforms-material`.
+
 ## [v1.25.0-rc.1](https://github.com/vazco/uniforms/tree/v1.25.0-rc.1) (2018-06-05)
 - **Changed:** Updated `uniforms-material` to `@material/core`. [\#349](https://github.com/vazco/uniforms/issues/349)
 
