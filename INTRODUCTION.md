@@ -646,7 +646,7 @@ Currently built-in bridges:
 - `SimpleSchemaBridge`
 - `SimpleSchema2Bridge`
 
-**Note:** To read more see [API](https://github.com/vazco/uniforms/blob/master/API.md#bridge) and [`Bridge`](https://github.com/vazco/uniforms/blob/master/packages/uniforms/src/bridges/Bridge.js).
+**Note:** To read more see [API](https://github.com/vazco/uniforms/blob/master/API.md#bridge) and [`Bridge`](https://github.com/vazco/uniforms/blob/master/packages/uniforms/src/Bridge.js).
 
 ### GraphQL definition
 
