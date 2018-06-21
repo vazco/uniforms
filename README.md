@@ -58,7 +58,7 @@
     * **[AntD](https://ant.design/) theme**
     * **[Bootstrap3](http://getbootstrap.com/) theme**
     * **[Bootstrap4](http://v4-alpha.getbootstrap.com/) theme**
-    * **[Material UI](http://www.material-ui.com/) theme**
+    * **[Material-UI](https://material-ui.com/) theme**
     * **[Semantic UI](http://semantic-ui.com/) theme**
     * **plain HTML theme**
 
