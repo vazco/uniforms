@@ -48,7 +48,6 @@
     "prettier": "1.13.3",
     "react": "16.4.0",
     "react-dom": "16.4.0",
-    "react-tap-event-plugin": "3.0.3",
     "react-test-renderer": "16.4.0",
     "rimraf": "2.6.2",
     "simpl-schema": "1.5.0"
