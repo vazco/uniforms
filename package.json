@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "lerna exec --ignore demo -- babel --out-dir . src",
+    "build": "lerna exec --ignore demo -- babel --config-file ../../.babelrc --out-dir . src",
     "clean": "rimraf coverage packages/*/*.js",
     "coverage": "jest --coverage",
     "coverage:report": "codecov",
@@ -19,37 +19,39 @@
     "test": "jest"
   },
   "dependencies": {
-    "@material-ui/core": "^1.0.0",
-    "antd": "3.5.4",
-    "babel-cli": "6.26.0",
-    "babel-eslint": "8.2.3",
-    "babel-jest": "23.0.1",
-    "babel-plugin-transform-object-assign": "6.22.0",
+    "@babel/cli": "7.0.0-beta.51",
+    "@babel/core": "7.0.0-beta.51",
+    "@babel/plugin-proposal-class-properties": "7.0.0-beta.51",
+    "@babel/plugin-transform-runtime": "7.0.0-beta.51",
+    "@babel/preset-env": "7.0.0-beta.51",
+    "@babel/preset-flow": "7.0.0-beta.51",
+    "@babel/preset-react": "7.0.0-beta.51",
+    "@babel/preset-stage-0": "7.0.0-beta.51",
+    "@material-ui/core": "1.3.0",
+    "antd": "3.6.4",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "8.2.5",
+    "babel-jest": "23.2.0",
     "babel-plugin-transform-react-remove-prop-types": "0.4.13",
-    "babel-plugin-transform-runtime": "6.23.0",
-    "babel-preset-es2015": "6.24.1",
-    "babel-preset-react": "6.24.1",
-    "babel-preset-stage-0": "6.24.1",
     "codecov": "3.0.2",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",
-    "eslint": "4.19.1",
+    "eslint": "5.0.1",
     "eslint-config-prettier": "2.9.0",
     "eslint-config-vazco": "3.1.1",
     "eslint-plugin-babel": "5.1.0",
-    "eslint-plugin-prettier": "2.6.0",
-    "eslint-plugin-react": "7.8.2",
+    "eslint-plugin-prettier": "2.6.1",
+    "eslint-plugin-react": "7.10.0",
     "eslint-plugin-vazco": "1.0.0",
-    "flow-bin": "0.73.0",
+    "flow-bin": "0.75.0",
     "flow-typed": "2.4.0",
     "graphql": "0.13.2",
-    "jest": "23.1.0",
+    "jest": "23.2.0",
     "lerna": "2.11.0",
-    "prettier": "1.13.3",
-    "react": "16.4.0",
-    "react-dom": "16.4.0",
-    "react-tap-event-plugin": "3.0.3",
-    "react-test-renderer": "16.4.0",
+    "prettier": "1.13.6",
+    "react": "16.4.1",
+    "react-dom": "16.4.1",
+    "react-test-renderer": "16.4.1",
     "rimraf": "2.6.2",
     "simpl-schema": "1.5.0"
   },
@@ -75,6 +77,9 @@
     ],
     "testMatch": [
       "**/__tests__/**/!(_)*.js"
-    ]
+    ],
+    "transform": {
+      "^.+\\.jsx?$": "./scripts/transform.js"
+    }
   }
 }

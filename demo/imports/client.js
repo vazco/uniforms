@@ -1,12 +1,9 @@
 import React    from 'react';
-import tapEvent from 'react-tap-event-plugin';
 import {render} from 'react-dom';
 
 import {DocHead} from 'meteor/kadira:dochead';
 
 import Application from '/imports/components/Application';
-
-tapEvent();
 
 const root = document.createElement('div');
 

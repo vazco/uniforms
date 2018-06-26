@@ -1,11 +1,8 @@
-import PropTypes      from 'prop-types';
-import tapEventPlugin from 'react-tap-event-plugin';
+import PropTypes from 'prop-types';
 
 import randomIds from 'uniforms/randomIds';
 
 import createSchema from './_createSchema';
-
-tapEventPlugin();
 
 const randomId = randomIds();
 

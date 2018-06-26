@@ -1,3 +1,6 @@
+## Next
+- **Changed:** We are using Babel@7 now!
+
 ## [v1.25.0-rc.2](https://github.com/vazco/uniforms/tree/v1.25.0-rc.2) (2018-06-10)
 - **Fixed:** Explicitly pass `text` prop in `TextField` in `uniforms-material`.
 
