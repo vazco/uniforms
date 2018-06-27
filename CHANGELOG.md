@@ -1,4 +1,4 @@
-## Next
+## [v1.25.0-rc.3](https://github.com/vazco/uniforms/tree/v1.25.0-rc.3) (2018-06-27)
 - **Changed:** We are using Babel@7 now!
 
 ## [v1.25.0-rc.2](https://github.com/vazco/uniforms/tree/v1.25.0-rc.2) (2018-06-10)
