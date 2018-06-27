@@ -1,23 +1,13 @@
 {
   "plugins": [
-    "transform-object-assign",
-    [
-      "transform-react-remove-prop-types",
-      {
-        "mode": "wrap"
-      }
-    ],
-    [
-      "transform-runtime",
-      {
-        "polyfill": false,
-        "regenerator": false
-      }
-    ]
+    ["@babel/plugin-proposal-class-properties", {"loose": true}],
+    ["@babel/plugin-transform-runtime", {"polyfill": false, "regenerator": false}],
+    ["babel-plugin-transform-react-remove-prop-types", {"mode": "wrap"}]
   ],
   "presets": [
-    "es2015",
-    "react",
-    "stage-0"
+    ["@babel/preset-env", {"useBuiltIns": "usage"}],
+    ["@babel/preset-flow"],
+    ["@babel/preset-react"],
+    ["@babel/preset-stage-0", {"decoratorsLegacy": true}]
   ]
 }
