@@ -1,4 +1,4 @@
-const URL_KEYS = ['theme', 'props', 'preset'];
+const URL_KEYS = ['preset', 'props',  'theme'];
 
 export const updateQuery = state => {
     const query = URL_KEYS.map(key => {
@@ -12,7 +12,7 @@ export const updateQuery = state => {
 
         return key + '=' + window.encodeURIComponent(state[key]);
     })
-        .filter(value => value)
+        .filter(Boolean)
         .join('&');
 
     window.location.hash = '?' + query;
