@@ -5,7 +5,8 @@ import {Component}    from 'react';
 
 import presets from '../lib/presets';
 import schema  from '../lib/schema';
-import {parseQuery, updateQuery}  from '../lib/utils';
+import {parseQuery}  from '../lib/utils';
+import {updateQuery}  from '../lib/utils';
 
 import ApplicationForm         from './ApplicationForm';
 import ApplicationPreviewField from './ApplicationPreviewField';
