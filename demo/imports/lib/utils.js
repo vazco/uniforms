@@ -49,7 +49,6 @@ export const parseQuery = () => {
             return reduced;
         }, {});
 
-
     const state = {};
 
     mergeDefinedKeys(raw, URL_KEYS, state);

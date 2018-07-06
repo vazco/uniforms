@@ -1,12 +1,12 @@
-import PropTypes      from 'prop-types';
-import React          from 'react';
-import enUS           from 'antd/lib/locale-provider/en_US';
-import {Component}    from 'react';
+import PropTypes   from 'prop-types';
+import React       from 'react';
+import enUS        from 'antd/lib/locale-provider/en_US';
+import {Component} from 'react';
 
-import presets from '../lib/presets';
-import schema  from '../lib/schema';
+import presets       from '../lib/presets';
+import schema        from '../lib/schema';
 import {parseQuery}  from '../lib/utils';
-import {updateQuery}  from '../lib/utils';
+import {updateQuery} from '../lib/utils';
 
 import ApplicationForm         from './ApplicationForm';
 import ApplicationPreviewField from './ApplicationPreviewField';
