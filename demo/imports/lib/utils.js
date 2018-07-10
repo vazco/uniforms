@@ -6,11 +6,17 @@ export const updateQuery = state => {
             return null;
         }
 
+        let value = state[key];
+
         if (key === 'props') {
-            return key + '=' + JSON.stringify(state[key]);
+            try {
+                value = JSON.stringify(value);
+            } catch (_) {
+                value = null;
+            }
         }
 
-        return key + '=' + window.encodeURIComponent(state[key]);
+        return key + '=' + window.encodeURIComponent(value);
     })
         .filter(Boolean)
         .join('&');
@@ -41,7 +47,11 @@ export const parseQuery = () => {
             }
 
             if (name === 'props') {
-                reduced[name] = JSON.parse(value);
+                try {
+                    reduced[name] = JSON.parse(value);
+                } catch (_) {
+                    reduced[name] = null;
+                }
             } else {
                 reduced[name] = value;
             }
