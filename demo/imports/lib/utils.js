@@ -38,7 +38,6 @@ export const parseQuery = () => {
         .split('&')
         .reduce((reduced, pair) => {
             const pieces = pair.split('=');
-
             const name = window.decodeURIComponent('' + pieces[0]);
 
             let value = window.decodeURIComponent('' + pieces[1]);
@@ -53,7 +52,6 @@ export const parseQuery = () => {
                 } catch (_) {
                     reduced[name] = null;
                 }
-
             } else {
                 reduced[name] = value;
             }
