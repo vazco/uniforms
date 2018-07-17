@@ -884,6 +884,7 @@ MyComponentUsingUniformsContext.contextTypes = {
         state: PropTypes.shape({
             changed:    PropTypes.bool.isRequired,
             changedMap: PropTypes.object.isRequired,
+            submitting: PropTypes.bool.isRequired,
 
             label:       PropTypes.bool.isRequired,
             disabled:    PropTypes.bool.isRequired,
@@ -948,8 +949,8 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 // This field works as follows: render standard submit field and disable it, when
 // the form is invalid. It's a simplified version of a default SubmitField from
 // uniforms-unstyled.
-const SubmitField = (props, {uniforms: {error, state: {disabled}}}) =>
-    <input disabled={!!(error || disabled)} type="submit" />
+const SubmitField = (props, {uniforms: {error, state: {disabled, submitting}}}) =>
+    <input disabled={!!(error || disabled || submitting)} type="submit" />
 ;
 
 SubmitField.contextTypes = BaseField.contextTypes;
