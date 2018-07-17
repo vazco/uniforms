@@ -3,6 +3,7 @@ import React       from 'react';
 import cloneDeep   from 'lodash/cloneDeep';
 import get         from 'lodash/get';
 import set         from 'lodash/set';
+import isFunction  from 'lodash/isFunction';
 import {Component} from 'react';
 
 import changedKeys        from './changedKeys';
@@ -246,20 +247,25 @@ export default class BaseForm extends Component {
             event.stopPropagation();
         }
 
-        this.setState({submitting: true});
-        return Promise.resolve(
-            this.props.onSubmit &&
-            this.props.onSubmit(this.getModel('submit'))
-        ).then(
-            val => {
-                this.setState({submitting: false});
-                return val;
-            },
-            err => {
-                this.setState({submitting: false});
-                throw err;
-            }
-        ).then(
+        const res = this.props.onSubmit && this.props.onSubmit(this.getModel('submit'));
+        let submitting = Promise.resolve(res);
+
+        // Do not change the `submitting` state if onSubmit is not async
+        if (res && isFunction(res.then)) {
+            this.setState({submitting: true});
+            submitting = submitting.then(
+                val => {
+                    this.setState({submitting: false});
+                    return val;
+                },
+                err => {
+                    this.setState({submitting: false});
+                    throw err;
+                }
+            );
+        }
+
+        return submitting.then(
             this.props.onSubmitSuccess,
             this.props.onSubmitFailure
         );
