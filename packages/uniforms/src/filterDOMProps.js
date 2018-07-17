@@ -4,6 +4,7 @@ const unwantedProps = [
     // These props are provided by BaseField
     'changed',
     'changedMap',
+    'submitting',
     'disabled',
     'error',
     'errorMessage',

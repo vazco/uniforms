@@ -284,6 +284,26 @@ describe('BaseForm', () => {
             expect(onSubmitFailure).not.toBeCalled();
         });
 
+        it('sets `submitting` state', async () => {
+            let resolveSubmit = null;
+            wrapper.setProps({onSubmit: () => new Promise(resolve => resolveSubmit = resolve)});
+
+            const context1 = wrapper.instance().getChildContext().uniforms.state;
+            expect(context1).toHaveProperty('submitting', false);
+
+            wrapper.find('form').simulate('submit');
+            await new Promise(resolve => process.nextTick(resolve));
+
+            const context2 = wrapper.instance().getChildContext().uniforms.state;
+            expect(context2).toHaveProperty('submitting', true);
+
+            resolveSubmit();
+            await new Promise(resolve => process.nextTick(resolve));
+
+            const context3 = wrapper.instance().getChildContext().uniforms.state;
+            expect(context3).toHaveProperty('submitting', false);
+        });
+
         it('calls `onSubmitSuccess` with the returned value when `onSubmit` resolves', async () => {
             const onSubmitValue = 'value';
             onSubmit.mockReturnValueOnce(Promise.resolve(onSubmitValue));

@@ -17,6 +17,7 @@ describe('injectName', () => {
     const state = {
         changed: false,
         changedMap: {},
+        submitting: false,
         label: true,
         disabled: false,
         placeholder: false,

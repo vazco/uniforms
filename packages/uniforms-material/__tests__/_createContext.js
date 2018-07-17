@@ -23,6 +23,7 @@ const createContext = (schema, context) => ({
 
                 changed:         false,
                 disabled:        false,
+                submitting:      false,
                 label:           false,
                 placeholder:     false,
                 showInlineError: false,

@@ -33,6 +33,7 @@ describe('BaseField', () => {
     const state = {
         changed: false,
         changedMap: {},
+        submitting: false,
         label: true,
         disabled: false,
         placeholder: true,

@@ -65,6 +65,7 @@ export default class BaseForm extends Component {
             state: PropTypes.shape({
                 changed:    PropTypes.bool.isRequired,
                 changedMap: PropTypes.object.isRequired,
+                submitting: PropTypes.bool.isRequired,
 
                 label:           PropTypes.bool.isRequired,
                 disabled:        PropTypes.bool.isRequired,
@@ -80,7 +81,13 @@ export default class BaseForm extends Component {
     constructor () {
         super(...arguments);
 
-        this.state = {bridge: createSchemaBridge(this.props.schema), changed: null, changedMap: {}, resetCount: 0};
+        this.state = {
+            bridge: createSchemaBridge(this.props.schema),
+            changed: null,
+            changedMap: {},
+            submitting: null,
+            resetCount: 0
+        };
 
         this.delayId = false;
         this.randomId = randomIds(this.props.id);
@@ -126,8 +133,9 @@ export default class BaseForm extends Component {
 
     getChildContextState () {
         return {
-            changed:  !!this.state.changed,
-            changedMap: this.state.changedMap,
+            changed:    !!this.state.changed,
+            changedMap:   this.state.changedMap,
+            submitting: !!this.state.submitting,
 
             label:           !!this.props.label,
             disabled:        !!this.props.disabled,
@@ -149,7 +157,7 @@ export default class BaseForm extends Component {
     }
 
     componentWillMount () {
-        this.setState(() => ({}), () => this.setState(() => ({changed: false, changedMap: {}})));
+        this.setState(() => ({}), () => this.setState(() => ({changed: false, changedMap: {}, submitting: false})));
     }
 
     componentWillReceiveProps ({schema}) {
@@ -225,7 +233,7 @@ export default class BaseForm extends Component {
     }
 
     __reset (state) {
-        return {changed: false, changedMap: {}, resetCount: state.resetCount + 1};
+        return {changed: false, changedMap: {}, submitting: false, resetCount: state.resetCount + 1};
     }
 
     onReset () {
@@ -238,9 +246,19 @@ export default class BaseForm extends Component {
             event.stopPropagation();
         }
 
+        this.setState({submitting: true});
         return Promise.resolve(
             this.props.onSubmit &&
             this.props.onSubmit(this.getModel('submit'))
+        ).then(
+            val => {
+                this.setState({submitting: false});
+                return val;
+            },
+            err => {
+                this.setState({submitting: false});
+                throw err;
+            }
         ).then(
             this.props.onSubmitSuccess,
             this.props.onSubmitFailure

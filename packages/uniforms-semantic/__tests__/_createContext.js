@@ -20,6 +20,7 @@ const createContext = (schema, context) => ({
                 changedMap: {},
 
                 changed:         false,
+                submitting:      false,
                 disabled:        false,
                 label:           false,
                 placeholder:     false,
