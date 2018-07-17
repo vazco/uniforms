@@ -247,22 +247,27 @@ export default class BaseForm extends Component {
             event.stopPropagation();
         }
 
-        const res = this.props.onSubmit && this.props.onSubmit(this.getModel('submit'));
-        let submitting = Promise.resolve(res);
+        let submitting;
+        try {
+            const res = this.props.onSubmit && this.props.onSubmit(this.getModel('submit'));
+            submitting = Promise.resolve(res);
 
-        // Do not change the `submitting` state if onSubmit is not async
-        if (res && isFunction(res.then)) {
-            this.setState({submitting: true});
-            submitting = submitting.then(
-                val => {
-                    this.setState({submitting: false});
-                    return val;
-                },
-                err => {
-                    this.setState({submitting: false});
-                    throw err;
-                }
-            );
+            // Do not change the `submitting` state if onSubmit is not async
+            if (res && isFunction(res.then)) {
+                this.setState({submitting: true});
+                submitting = submitting.then(
+                    val => {
+                        this.setState({submitting: false});
+                        return val;
+                    },
+                    err => {
+                        this.setState({submitting: false});
+                        throw err;
+                    }
+                );
+            }
+        } catch (error) {
+            submitting = Promise.reject(error);
         }
 
         return submitting.then(
