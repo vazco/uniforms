@@ -66,6 +66,7 @@ describe('BaseForm', () => {
             expect(context.uniforms).toHaveProperty('state', expect.any(Object));
             expect(context.uniforms.state).toHaveProperty('changed', false);
             expect(context.uniforms.state).toHaveProperty('changedMap', {});
+            expect(context.uniforms.state).toHaveProperty('submitting', false);
             expect(context.uniforms.state).toHaveProperty('label', true);
             expect(context.uniforms.state).toHaveProperty('disabled', false);
             expect(context.uniforms.state).toHaveProperty('placeholder', false);
@@ -313,14 +314,13 @@ describe('BaseForm', () => {
             );
 
             wrapper.find('form').simulate('submit');
-
             await new Promise(resolve => process.nextTick(resolve));
 
             expect(onSubmitSuccess).toHaveBeenCalledTimes(1);
             expect(onSubmitSuccess).toHaveBeenLastCalledWith(onSubmitValue);
         });
 
-        it('calls `onSubmitFailure` with the thrown error when `onSubmit` rejects', async () => {
+        it('calls `onSubmitFailure` with the error when `onSubmit` rejects', async () => {
             const onSubmitError = 'error';
             onSubmit.mockReturnValueOnce(Promise.reject(onSubmitError));
 
@@ -329,7 +329,21 @@ describe('BaseForm', () => {
             );
 
             wrapper.find('form').simulate('submit');
+            await new Promise(resolve => process.nextTick(resolve));
 
+            expect(onSubmitFailure).toHaveBeenCalledTimes(1);
+            expect(onSubmitFailure).toHaveBeenLastCalledWith(onSubmitError);
+        });
+
+        it('calls `onSubmitFailure` with the error when `onSubmit` throws', async () => {
+            const onSubmitError = 'error';
+            wrapper.setProps({
+                onSubmit () {
+                    throw onSubmitError;
+                }
+            });
+
+            wrapper.find('form').simulate('submit');
             await new Promise(resolve => process.nextTick(resolve));
 
             expect(onSubmitFailure).toHaveBeenCalledTimes(1);
