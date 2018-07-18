@@ -249,11 +249,11 @@ export default class BaseForm extends Component {
 
         let submitting;
         try {
-            const res = this.props.onSubmit && this.props.onSubmit(this.getModel('submit'));
-            submitting = Promise.resolve(res);
+            const result = this.props.onSubmit && this.props.onSubmit(this.getModel('submit'));
+            submitting = Promise.resolve(result);
 
             // Do not change the `submitting` state if onSubmit is not async
-            if (res && isFunction(res.then)) {
+            if (result && isFunction(result.then)) {
                 this.setState({submitting: true});
                 submitting = submitting.finally(() => this.setState({submitting: false}));
             }
