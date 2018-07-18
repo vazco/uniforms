@@ -255,16 +255,7 @@ export default class BaseForm extends Component {
             // Do not change the `submitting` state if onSubmit is not async
             if (res && isFunction(res.then)) {
                 this.setState({submitting: true});
-                submitting = submitting.then(
-                    val => {
-                        this.setState({submitting: false});
-                        return val;
-                    },
-                    err => {
-                        this.setState({submitting: false});
-                        throw err;
-                    }
-                );
+                submitting = submitting.finally(() => this.setState({submitting: false}));
             }
         } catch (error) {
             submitting = Promise.reject(error);
