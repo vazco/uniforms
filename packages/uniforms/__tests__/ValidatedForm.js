@@ -75,67 +75,6 @@ describe('ValidatedForm', () => {
 
             expect(onSubmit).not.toBeCalled();
         });
-
-        it('revalidates with new model only if required', () => {
-            const wrapper = mount(
-                <ValidatedForm model={{}} schema={schema} />
-            );
-
-            expect(validator).not.toBeCalled();
-
-            wrapper.setProps({model});
-
-            expect(validator).not.toBeCalled();
-        });
-
-        it('revalidates with new model', () => {
-            const wrapper = mount(
-                <ValidatedForm model={{}} schema={schema} validate="onChange" />
-            );
-
-            expect(validator).not.toBeCalled();
-
-            wrapper.setProps({model});
-
-            expect(validator).toHaveBeenCalledTimes(1);
-        });
-
-        it('revalidates with new model only when changed', () => {
-            const wrapper = mount(
-                <ValidatedForm model={model} schema={schema} />
-            );
-
-            expect(validator).not.toBeCalled();
-
-            wrapper.setProps({model});
-
-            expect(validator).not.toBeCalled();
-        });
-
-        it('revalidates with new validator only if required', () => {
-            const wrapper = mount(
-                <ValidatedForm model={{}} schema={schema} validate="onChange" />
-            );
-
-            expect(validator).not.toBeCalled();
-
-            wrapper.setProps({model, validator: {}});
-
-            expect(validator).toHaveBeenCalledTimes(1);
-        });
-
-        it('revalidates with new validator', () => {
-            const wrapper = mount(
-                <ValidatedForm model={{}} schema={schema} />
-            );
-
-            expect(validator).not.toBeCalled();
-
-            wrapper.setProps({model, validator: {}});
-
-            expect(validator).not.toBeCalled();
-        });
-
         it('validates (onChange)', () => {
             const wrapper = mount(
                 <ValidatedForm model={model} onChange={onChange} schema={schema} validate="onChange" />
@@ -347,26 +286,85 @@ describe('ValidatedForm', () => {
         });
     });
 
-    describe('when props changed', () => {
-        it('calls correct validator', () => {
-            const wrapper = mount(
-                <ValidatedForm model={model} onSubmit={onSubmit} schema={schema} />
-            );
+    describe('when props are changed', () => {
+        const anotherModel = {x: 2};
 
-            const alternativeValidator  = jest.fn();
-            const alternativeSchema = {
-                getDefinition   () {},
-                messageForError () {},
-                objectKeys      () {},
-                validator:      () => alternativeValidator
-            };
+        describe('in "onChange" mode', () => {
+            let wrapper;
+            beforeEach(() => {
+                wrapper = mount(
+                    <ValidatedForm model={model} schema={schema} validate="onChange" />
+                );
+            });
 
-            wrapper.setProps({schema: alternativeSchema});
+            it('does not revalidate arbitrarily', () => {
+                console.log('arb', wrapper);
+                wrapper.setProps({anything: 'anything'});
 
-            wrapper.find('form').simulate('submit');
+                expect(validator).not.toBeCalled();
+            });
 
-            expect(validator).toHaveBeenCalledTimes(0);
-            expect(alternativeValidator).toHaveBeenCalledTimes(1);
+            it('revalidates if `model` changes', () => {
+                wrapper.setProps({model: anotherModel});
+
+                expect(validator).toHaveBeenCalledTimes(1);
+            });
+
+            it('revalidates if `validator` changes', () => {
+                wrapper.setProps({validator: {}});
+
+                expect(validator).toHaveBeenCalledTimes(1);
+            });
         });
+
+        describe('in "onSubmit" mode', () => {
+            let wrapper;
+            beforeEach(() => {
+                wrapper = mount(
+                    <ValidatedForm model={model} schema={schema} validate="onSubmit" />
+                );
+            });
+
+            it('does not revalidate', () => {
+                wrapper.setProps({model: anotherModel, validator: {}});
+
+                expect(validator).not.toBeCalled();
+            });
+        });
+
+        describe('in any mode', () => {
+            let wrapper;
+            beforeEach(() => {
+                wrapper = mount(
+                    <ValidatedForm model={model} schema={schema} />
+                );
+            });
+
+            // it('does not get a new validator arbitrarily', () => {
+            //     ...
+            // });
+
+            // it('gets a new validator if `validator` changes', () => {
+            //     ...
+            // });
+
+            it('calls the new validator if `schema` changes', () => {
+                const alternativeValidator  = jest.fn();
+                const alternativeSchema = {
+                    getDefinition   () {},
+                    messageForError () {},
+                    objectKeys      () {},
+                    validator:      () => alternativeValidator
+                };
+
+                wrapper.setProps({schema: alternativeSchema});
+
+                wrapper.find('form').simulate('submit');
+
+                expect(validator).not.toBeCalled();
+                expect(alternativeValidator).toHaveBeenCalledTimes(1);
+            });
+        });
+
     });
 });

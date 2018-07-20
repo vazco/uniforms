@@ -41,6 +41,7 @@ const Validated = parent => class extends parent {
 
             error: null,
             validate: false,
+            validating: false,
             validator: this
                 .getChildContextSchema()
                 .getValidator(this.props.validator)
@@ -59,6 +60,7 @@ const Validated = parent => class extends parent {
             onValidate, // eslint-disable-line no-unused-vars
             validator,  // eslint-disable-line no-unused-vars
             validate,   // eslint-disable-line no-unused-vars
+            // validating, // eslist-disable-line no-unused-vars
 
             ...props
         } = super.getNativeFormProps();
@@ -150,10 +152,14 @@ const Validated = parent => class extends parent {
             catched = error;
         }
 
+        this.setState({validating: true});
         return new Promise((resolve, reject) => {
             this.props.onValidate(model, catched, (error = catched) => {
                 // Do not copy error from props to state.
-                this.setState(() => ({error: error === this.props.error ? null : error}), () => {
+                this.setState(() => ({
+                    error: error === this.props.error ? null : error,
+                    validating: false
+                }), () => {
                     if (error) {
                         reject(error);
                     } else {
