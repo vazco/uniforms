@@ -66,6 +66,7 @@ describe('BaseForm', () => {
             expect(context.uniforms).toHaveProperty('state', expect.any(Object));
             expect(context.uniforms.state).toHaveProperty('changed', false);
             expect(context.uniforms.state).toHaveProperty('changedMap', {});
+            expect(context.uniforms.state).toHaveProperty('submitting', false);
             expect(context.uniforms.state).toHaveProperty('label', true);
             expect(context.uniforms.state).toHaveProperty('disabled', false);
             expect(context.uniforms.state).toHaveProperty('placeholder', false);
