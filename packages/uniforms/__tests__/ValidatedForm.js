@@ -11,11 +11,7 @@ jest.mock('meteor/check');
 describe('ValidatedForm', () => {
     const onChange   = jest.fn();
     const onSubmit   = jest.fn();
-    const onValidate = jest.fn((model, error, next) => {
-        if (error) return;
-
-        next();
-    });
+    const onValidate = jest.fn((model, error, next) => next());
     const validator  = jest.fn();
 
     const error = new Error();
@@ -134,6 +130,22 @@ describe('ValidatedForm', () => {
             expect(validator).toHaveBeenCalledTimes(1);
         });
 
+        it('correctly calls `validator`', () => {
+            form.validate();
+            expect(validator).toHaveBeenCalledTimes(1);
+            expect(validator).toHaveBeenLastCalledWith(model);
+        });
+
+        it('updates error state with errors from `validator`', async () => {
+            validator.mockImplementationOnce(() => {
+                throw error;
+            });
+            form.validate();
+            await new Promise(resolve => process.nextTick(resolve));
+
+            expect(wrapper.instance().getChildContext()).toHaveProperty('uniforms.error', error);
+        });
+
         it('correctly calls `onValidate` when validation succeeds', () => {
             form.validate();
             expect(onValidate).toHaveBeenCalledTimes(1);
@@ -150,22 +162,37 @@ describe('ValidatedForm', () => {
             expect(onValidate).toHaveBeenLastCalledWith(model, error, expect.any(Function));
         });
 
-        it('updates error state with async errors from `onValidate`', () => {
+        it('lets `onValidate` suppress `validator` errors', async () => {
+            validator.mockImplementationOnce(() => {
+                throw error;
+            });
+            onValidate.mockImplementationOnce((a, b, next) => {
+                next(null);
+            });
+            wrapper.find('form').simulate('submit');
+            await new Promise(resolve => process.nextTick(resolve));
+
+            expect(onSubmit).not.toHaveBeenCalled();
+        });
+
+        it('updates error state with async errors from `onValidate`', async () => {
             onValidate.mockImplementationOnce((a, b, next) => {
                 next(error);
             });
             form.validate();
+            await new Promise(resolve => process.nextTick(resolve));
 
             expect(wrapper.instance().getChildContext()).toHaveProperty('uniforms.error', error);
         });
+
 
         it('uses `modelTransform`s `validate` mode', () => {
             const transformedModel = {b: 1};
             const modelTransform = (mode, model) => mode === 'validate' ? transformedModel : model;
             wrapper.setProps({modelTransform});
             form.validate();
-            expect(onValidate).toHaveBeenLastCalledWith(transformedModel, null, expect.any(Function));
             expect(validator).toHaveBeenLastCalledWith(transformedModel);
+            expect(onValidate).toHaveBeenLastCalledWith(transformedModel, null, expect.any(Function));
         });
     });
 
