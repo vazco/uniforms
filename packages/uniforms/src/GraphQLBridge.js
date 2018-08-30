@@ -116,7 +116,7 @@ export default class GraphQLBridge extends Bridge {
         const nameGeneric = nameNormal.replace(/\.\d+/, '.$');
 
         const field = this.getField(nameGeneric, false);
-        const fieldType = extractFromNonNull(field.type);
+        const fieldType = extractFromNonNull(field);
 
         const extra = {
             ...this.extras[nameGeneric],
