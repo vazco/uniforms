@@ -15,7 +15,7 @@ describe('GraphQLBridge', () => {
         input Author {
             id:        ID!
             confirmed: Boolean
-            decimal:   Float
+            decimal:   Float!
             firstName: String = "John"
             lastName:  String = "Doe"
             level:     AccessLevel
@@ -292,7 +292,7 @@ describe('GraphQLBridge', () => {
         it('works with Number type', () => {
             expect(bridgeI.getProps('author.decimal')).toEqual({
                 label: '',
-                required: false,
+                required: true,
                 decimal: true
             });
         });
