@@ -18,12 +18,12 @@
     "react-dom": "16.4.1",
     "react-panelgroup": "1.0.7",
     "simpl-schema": "1.5.0",
-    "uniforms": "^1.25.0",
-    "uniforms-antd": "^1.25.0",
-    "uniforms-bootstrap3": "^1.25.0",
-    "uniforms-bootstrap4": "^1.25.0",
-    "uniforms-material": "^1.25.0",
-    "uniforms-semantic": "^1.25.0",
-    "uniforms-unstyled": "^1.25.0"
+    "uniforms": "file:../packages/uniforms",
+    "uniforms-antd": "file:../packages/uniforms-antd",
+    "uniforms-bootstrap3": "file:../packages/uniforms-bootstrap3",
+    "uniforms-bootstrap4": "file:../packages/uniforms-bootstrap4",
+    "uniforms-material": "file:../packages/uniforms-material",
+    "uniforms-semantic": "file:../packages/uniforms-semantic",
+    "uniforms-unstyled": "file:../packages/uniforms-unstyled"
   }
 }
