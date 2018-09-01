@@ -67,6 +67,8 @@ describe('injectName', () => {
         });
 
         it('injects name into field', () => {
+            const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+
             mount(
                 <Field name="fieldA">
                     {injectName(
@@ -77,6 +79,8 @@ describe('injectName', () => {
                 reactContext
             );
 
+            spy.mockRestore();
+
             expect(Test.mock.calls[0]).toEqual(expect.arrayContaining([
                 expect.objectContaining({name: 'fieldA'})
             ]));
@@ -86,6 +90,8 @@ describe('injectName', () => {
         });
 
         it('injects name into fields', () => {
+            const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+
             mount(
                 <Field name="fieldA">
                     {injectName('fieldB', [
@@ -96,6 +102,8 @@ describe('injectName', () => {
                 </Field>,
                 reactContext
             );
+
+            spy.mockRestore();
 
             expect(Test.mock.calls[0]).toEqual(expect.arrayContaining([
                 expect.objectContaining({name: 'fieldA'})
@@ -112,6 +120,8 @@ describe('injectName', () => {
         });
 
         it('injects name into nested field', () => {
+            const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+
             mount(
                 <Field name="fieldA">
                     {injectName(
@@ -123,6 +133,8 @@ describe('injectName', () => {
                 </Field>,
                 reactContext
             );
+
+            spy.mockRestore();
 
             expect(Test.mock.calls[0]).toEqual(expect.arrayContaining([
                 expect.objectContaining({name: 'fieldA'})
@@ -133,6 +145,8 @@ describe('injectName', () => {
         });
 
         it('injects name into nested fields', () => {
+            const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+
             mount(
                 <Field name="fieldA">
                     {injectName(
@@ -146,6 +160,8 @@ describe('injectName', () => {
                 </Field>,
                 reactContext
             );
+
+            spy.mockRestore();
 
             expect(Test.mock.calls[0]).toEqual(expect.arrayContaining([
                 expect.objectContaining({name: 'fieldA'})
@@ -162,6 +178,8 @@ describe('injectName', () => {
         });
 
         it('injects joined name', () => {
+            const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+
             mount(
                 <Field name="fieldA">
                     {injectName(
@@ -178,6 +196,8 @@ describe('injectName', () => {
                 </Field>,
                 reactContext
             );
+
+            spy.mockRestore();
 
             expect(Test.mock.calls[0]).toEqual(expect.arrayContaining([
                 expect.objectContaining({name: 'fieldA'})

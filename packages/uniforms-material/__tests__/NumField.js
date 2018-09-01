@@ -109,6 +109,8 @@ test('<NumField> - renders a TextField with correct value (model)', () => {
     expect(wrapper.find(TextField).prop('value')).toBe(1);
 
     // NOTE: All following tests are here to cover hacky NumField implementation.
+    const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+
     expect(wrapper.find('input').simulate('change', {target: {value: 0.1}})).toBeTruthy();
     wrapper.setProps({value: 0.1});
     expect(wrapper.find('input').prop('value')).toBe(0.1);
@@ -124,6 +126,8 @@ test('<NumField> - renders a TextField with correct value (model)', () => {
     expect(wrapper.find('input').prop('value')).toBe(1);
     wrapper.setProps({value: 1, decimal: false});
     expect(wrapper.find('input').prop('value')).toBe(1);
+
+    spy.mockRestore();
 });
 
 test('<NumField> - renders a TextField with correct value (specified)', () => {

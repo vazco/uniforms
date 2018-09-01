@@ -264,12 +264,12 @@ describe('BaseField', () => {
 
     describe('when rendered with invalid `name`', () => {
         it('throws correct error', () => {
-            expect(() => {
-                mount(
-                    <TestField name="field" />,
-                    reactContext1
-                );
-            }).toThrow(Error, /Field not found in schema: "field"/);
+            const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+
+            expect(() => mount(<TestField name="field" />, reactContext1))
+                .toThrow(Error, /Field not found in schema: "field"/);
+
+            spy.mockRestore();
         });
     });
 
@@ -389,7 +389,11 @@ describe('BaseField', () => {
 
     describe('when rendered without form', () => {
         it('should throw an error', () => {
+            const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+
             expect(() => mount(<TestField name="a" />)).toThrow('<TestField /> must be rendered within a form.');
+
+            spy.mockRestore();
         });
     });
 
