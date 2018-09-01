@@ -1,3 +1,6 @@
+## Next
+- **Fixed:** `RadioField` handles error and help texts without warnings in `uniforms-material`.
+
 ## [v1.25.0](https://github.com/vazco/uniforms/tree/v1.25.0) (2018-07-20)
 
 ## [v1.25.0-rc.3](https://github.com/vazco/uniforms/tree/v1.25.0-rc.3) (2018-06-27)
