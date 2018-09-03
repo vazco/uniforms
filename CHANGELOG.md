@@ -1,4 +1,5 @@
 ## Next
+- **Fixed:** Extracting `fieldType` for `GraphQLBridge`. [\#460](https://github.com/vazco/uniforms/issues/460)
 - **Fixed:** `RadioField` handles error and help texts without warnings in `uniforms-material`.
 
 ## [v1.25.0](https://github.com/vazco/uniforms/tree/v1.25.0) (2018-07-20)
