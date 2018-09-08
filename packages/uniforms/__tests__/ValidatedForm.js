@@ -220,7 +220,11 @@ describe('ValidatedForm', () => {
 
             it('revalidates if `validator` changes', () => {
                 wrapper.setProps({validator: {}});
+                expect(validator).toHaveBeenCalledTimes(1);
+            });
 
+            it('revalidate if `schema` changes', () => {
+                wrapper.setProps({schema: {...schema}});
                 expect(validator).toHaveBeenCalledTimes(1);
             });
         });
@@ -231,9 +235,18 @@ describe('ValidatedForm', () => {
                 wrapper = mount(<ValidatedForm model={model} schema={schema} validate="onSubmit" />);
             });
 
-            it('does not revalidate', () => {
-                wrapper.setProps({model: anotherModel, validator: {}});
+            it('does not revalidate when `model` changes', () => {
+                wrapper.setProps({model: {}});
+                expect(validator).not.toBeCalled();
+            });
 
+            it('does not revalidate when validator `options` change', () => {
+                wrapper.setProps({validator: {}});
+                expect(validator).not.toBeCalled();
+            });
+
+            it('does not revalidate when `schema` changes', () => {
+                wrapper.setProps({schema: {...schema}});
                 expect(validator).not.toBeCalled();
             });
         });
