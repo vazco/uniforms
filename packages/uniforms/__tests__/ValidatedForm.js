@@ -83,10 +83,11 @@ describe('ValidatedForm', () => {
             onValidate.mockImplementationOnce((m, e, next) => {
                 next(null);
             });
-            wrapper.find('form').simulate('submit');
             await new Promise(resolve => process.nextTick(resolve));
 
-            expect(onSubmit).not.toHaveBeenCalled();
+            expect(validator).toHaveBeenCalled();
+            expect(onValidate).toHaveBeenCalled();
+            expect(onSubmit).toHaveBeenCalled();
         });
 
         it('updates error state with async errors from `onValidate`', async () => {
