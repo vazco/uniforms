@@ -31,12 +31,89 @@ describe('ValidatedForm', () => {
         validator.mockReset();
     });
 
+    describe('on validation', () => {
+        let wrapper, form;
+
+        beforeEach(async () => {
+            wrapper = mount(<ValidatedForm model={model} schema={schema} onValidate={onValidate} />);
+            form = wrapper.instance();
+        });
+
+        it('validates (when `.validate` is called)', () => {
+            form.validate();
+            expect(validator).toHaveBeenCalledTimes(1);
+        });
+
+        it('correctly calls `validator`', () => {
+            form.validate();
+            expect(validator).toHaveBeenCalledTimes(1);
+            expect(validator).toHaveBeenLastCalledWith(model);
+        });
+
+        it('updates error state with errors from `validator`', async () => {
+            validator.mockImplementationOnce(() => {
+                throw error;
+            });
+            form.validate().catch(() => {});
+            await new Promise(resolve => process.nextTick(resolve));
+
+            expect(wrapper.instance().getChildContext()).toHaveProperty('uniforms.error', error);
+        });
+
+        it('correctly calls `onValidate` when validation succeeds', () => {
+            form.validate();
+            expect(onValidate).toHaveBeenCalledTimes(1);
+            expect(onValidate).toHaveBeenLastCalledWith(model, null, expect.any(Function));
+        });
+
+        it('correctly calls `onValidate` when validation fails ', () => {
+            validator.mockImplementation(() => {
+                throw error;
+            });
+            form.validate();
+
+            expect(onValidate).toHaveBeenCalledTimes(1);
+            expect(onValidate).toHaveBeenLastCalledWith(model, error, expect.any(Function));
+        });
+
+        it('lets `onValidate` suppress `validator` errors', async () => {
+            validator.mockImplementationOnce(() => {
+                throw error;
+            });
+            onValidate.mockImplementationOnce((m, e, next) => {
+                next(null);
+            });
+            wrapper.find('form').simulate('submit');
+            await new Promise(resolve => process.nextTick(resolve));
+
+            expect(onSubmit).not.toHaveBeenCalled();
+        });
+
+        it('updates error state with async errors from `onValidate`', async () => {
+            onValidate.mockImplementationOnce((m, e, next) => {
+                next(error);
+            });
+            form.validate();
+            await new Promise(resolve => process.nextTick(resolve));
+
+            expect(wrapper.instance().getChildContext()).toHaveProperty('uniforms.error', error);
+        });
+
+
+        it('uses `modelTransform`s `validate` mode', () => {
+            const transformedModel = {b: 1};
+            const modelTransform = (mode, model) => mode === 'validate' ? transformedModel : model;
+            wrapper.setProps({modelTransform});
+            form.validate();
+            expect(validator).toHaveBeenLastCalledWith(transformedModel);
+            expect(onValidate).toHaveBeenLastCalledWith(transformedModel, null, expect.any(Function));
+        });
+    });
+
     describe('when submitted', () => {
         let wrapper;
         beforeEach(() => {
-            wrapper = mount(
-                <ValidatedForm model={model} schema={schema} onSubmit={onSubmit} />
-            );
+            wrapper = mount(<ValidatedForm model={model} schema={schema} onSubmit={onSubmit} />);
         });
 
         it('calls `onSubmit` when validation succeeds', async () => {
@@ -69,10 +146,7 @@ describe('ValidatedForm', () => {
     describe('on change', () => {
         describe('in "onChange" mode', () => {
             it('validates', () => {
-                const wrapper = mount(
-                    <ValidatedForm model={model} schema={schema} validate="onChange" />
-                );
-
+                const wrapper = mount(<ValidatedForm model={model} schema={schema} validate="onChange" />);
                 wrapper.instance().getChildContext().uniforms.onChange('key', 'value');
 
                 expect(validator).toHaveBeenCalledTimes(1);
@@ -81,10 +155,7 @@ describe('ValidatedForm', () => {
 
         describe('in "onSubmit" mode', () => {
             it('does not validate', () => {
-                const wrapper = mount(
-                    <ValidatedForm model={model} schema={schema} validate="onSubmit" />
-                );
-
+                const wrapper = mount(<ValidatedForm model={model} schema={schema} validate="onSubmit" />);
                 wrapper.instance().getChildContext().uniforms.onChange('key', 'value');
 
                 expect(validator).not.toHaveBeenCalled();
@@ -94,9 +165,7 @@ describe('ValidatedForm', () => {
         describe('in "onChangeAfterSubmit" mode', () => {
             let wrapper;
             beforeEach(() => {
-                wrapper = mount(
-                    <ValidatedForm model={model} schema={schema} validate="onChangeAfterSubmit" />
-                );
+                wrapper = mount(<ValidatedForm model={model} schema={schema} validate="onChangeAfterSubmit" />);
             });
 
             it('does not validates before submit', () => {
@@ -115,97 +184,13 @@ describe('ValidatedForm', () => {
         });
     });
 
-    describe('on validation', () => {
-        let wrapper, form;
 
-        beforeEach(async () => {
-            wrapper = mount(
-                <ValidatedForm model={model} schema={schema} onValidate={onValidate} />
-            );
-            form = wrapper.instance();
-        });
-
-        it('validates (when `.validate` is called)', () => {
-            form.validate();
-            expect(validator).toHaveBeenCalledTimes(1);
-        });
-
-        it('correctly calls `validator`', () => {
-            form.validate();
-            expect(validator).toHaveBeenCalledTimes(1);
-            expect(validator).toHaveBeenLastCalledWith(model);
-        });
-
-        it('updates error state with errors from `validator`', async () => {
-            validator.mockImplementationOnce(() => {
-                throw error;
-            });
-            form.validate();
-            await new Promise(resolve => process.nextTick(resolve));
-
-            expect(wrapper.instance().getChildContext()).toHaveProperty('uniforms.error', error);
-        });
-
-        it('correctly calls `onValidate` when validation succeeds', () => {
-            form.validate();
-            expect(onValidate).toHaveBeenCalledTimes(1);
-            expect(onValidate).toHaveBeenLastCalledWith(model, null, expect.any(Function));
-        });
-
-        it('correctly calls `onValidate` when validation fails ', () => {
-            validator.mockImplementation(() => {
-                throw error;
-            });
-            form.validate();
-
-            expect(onValidate).toHaveBeenCalledTimes(1);
-            expect(onValidate).toHaveBeenLastCalledWith(model, error, expect.any(Function));
-        });
-
-        it('lets `onValidate` suppress `validator` errors', async () => {
-            validator.mockImplementationOnce(() => {
-                throw error;
-            });
-            onValidate.mockImplementationOnce((a, b, next) => {
-                next(null);
-            });
-            wrapper.find('form').simulate('submit');
-            await new Promise(resolve => process.nextTick(resolve));
-
-            expect(onSubmit).not.toHaveBeenCalled();
-        });
-
-        it('updates error state with async errors from `onValidate`', async () => {
-            onValidate.mockImplementationOnce((a, b, next) => {
-                next(error);
-            });
-            form.validate();
-            await new Promise(resolve => process.nextTick(resolve));
-
-            expect(wrapper.instance().getChildContext()).toHaveProperty('uniforms.error', error);
-        });
-
-
-        it('uses `modelTransform`s `validate` mode', () => {
-            const transformedModel = {b: 1};
-            const modelTransform = (mode, model) => mode === 'validate' ? transformedModel : model;
-            wrapper.setProps({modelTransform});
-            form.validate();
-            expect(validator).toHaveBeenLastCalledWith(transformedModel);
-            expect(onValidate).toHaveBeenLastCalledWith(transformedModel, null, expect.any(Function));
-        });
-    });
-
-    describe('when reset', () => {
+    describe('on reset', () => {
         it('removes `error`', () => {
+            const wrapper = mount(<ValidatedForm model={model} onSubmit={onSubmit} schema={schema} />);
             validator.mockImplementationOnce(() => {
                 throw new Error();
             });
-
-            const wrapper = mount(
-                <ValidatedForm model={model} onSubmit={onSubmit} schema={schema} />
-            );
-
             wrapper.find('form').simulate('submit');
             expect(wrapper.instance().getChildContext().uniforms.error).toBeTruthy();
 
@@ -220,21 +205,16 @@ describe('ValidatedForm', () => {
         describe('in "onChange" mode', () => {
             let wrapper;
             beforeEach(() => {
-                wrapper = mount(
-                    <ValidatedForm model={model} schema={schema} validate="onChange" />
-                );
+                wrapper = mount(<ValidatedForm model={model} schema={schema} validate="onChange" />);
             });
 
             it('does not revalidate arbitrarily', () => {
-                console.log('arb', wrapper);
                 wrapper.setProps({anything: 'anything'});
-
                 expect(validator).not.toBeCalled();
             });
 
             it('revalidates if `model` changes', () => {
                 wrapper.setProps({model: anotherModel});
-
                 expect(validator).toHaveBeenCalledTimes(1);
             });
 
@@ -248,9 +228,7 @@ describe('ValidatedForm', () => {
         describe('in "onSubmit" mode', () => {
             let wrapper;
             beforeEach(() => {
-                wrapper = mount(
-                    <ValidatedForm model={model} schema={schema} validate="onSubmit" />
-                );
+                wrapper = mount(<ValidatedForm model={model} schema={schema} validate="onSubmit" />);
             });
 
             it('does not revalidate', () => {
@@ -263,9 +241,7 @@ describe('ValidatedForm', () => {
         describe('in any mode', () => {
             let wrapper;
             beforeEach(() => {
-                wrapper = mount(
-                    <ValidatedForm model={model} schema={schema} />
-                );
+                wrapper = mount(<ValidatedForm model={model} schema={schema} />);
             });
 
             it.skip('Reuses the validator between validations', () => {
