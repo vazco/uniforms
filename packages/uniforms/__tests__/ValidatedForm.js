@@ -83,6 +83,7 @@ describe('ValidatedForm', () => {
             onValidate.mockImplementationOnce((m, e, next) => {
                 next(null);
             });
+            form.validate();
             await new Promise(resolve => process.nextTick(resolve));
 
             expect(validator).toHaveBeenCalled();
