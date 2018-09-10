@@ -30,10 +30,13 @@ describe('ValidatedForm', () => {
     });
 
     describe('on validation', () => {
-        let wrapper, form;
+        let wrapper;
+        let form;
 
-        beforeEach(async () => {
-            wrapper = mount(<ValidatedForm model={model} schema={schema} onValidate={onValidate} />);
+        beforeEach(() => {
+            wrapper = mount(
+                <ValidatedForm model={model} schema={schema} onValidate={onValidate} onSubmit={onSubmit} />
+            );
             form = wrapper.instance();
         });
 
@@ -78,7 +81,7 @@ describe('ValidatedForm', () => {
             validator.mockImplementationOnce(() => {
                 throw error;
             });
-            onValidate.mockImplementationOnce((m, e, next) => {
+            onValidate.mockImplementationOnce((model, existingError, next) => {
                 next(null);
             });
             form.validate();
@@ -90,7 +93,7 @@ describe('ValidatedForm', () => {
         });
 
         it('updates error state with async errors from `onValidate`', async () => {
-            onValidate.mockImplementationOnce((m, e, next) => {
+            onValidate.mockImplementationOnce((model, existingError, next) => {
                 next(error);
             });
             form.validate();
@@ -144,7 +147,7 @@ describe('ValidatedForm', () => {
     });
 
     describe('on change', () => {
-        describe('in "onChange" mode', () => {
+        describe('in `onChange` mode', () => {
             it('validates', () => {
                 const wrapper = mount(<ValidatedForm model={model} schema={schema} validate="onChange" />);
                 wrapper.instance().getChildContext().uniforms.onChange('key', 'value');
@@ -153,7 +156,7 @@ describe('ValidatedForm', () => {
             });
         });
 
-        describe('in "onSubmit" mode', () => {
+        describe('in `onSubmit` mode', () => {
             it('does not validate', () => {
                 const wrapper = mount(<ValidatedForm model={model} schema={schema} validate="onSubmit" />);
                 wrapper.instance().getChildContext().uniforms.onChange('key', 'value');
@@ -162,7 +165,7 @@ describe('ValidatedForm', () => {
             });
         });
 
-        describe('in "onChangeAfterSubmit" mode', () => {
+        describe('in `onChangeAfterSubmit` mode', () => {
             let wrapper;
             beforeEach(() => {
                 wrapper = mount(<ValidatedForm model={model} schema={schema} validate="onChangeAfterSubmit" />);
@@ -202,7 +205,7 @@ describe('ValidatedForm', () => {
     describe('when props are changed', () => {
         const anotherModel = {x: 2};
 
-        describe('in "onChange" mode', () => {
+        describe('in `onChange` mode', () => {
             let wrapper;
             beforeEach(() => {
                 wrapper = mount(<ValidatedForm model={model} schema={schema} validate="onChange" />);
@@ -229,7 +232,7 @@ describe('ValidatedForm', () => {
             });
         });
 
-        describe('in "onSubmit" mode', () => {
+        describe('in `onSubmit` mode', () => {
             let wrapper;
             beforeEach(() => {
                 wrapper = mount(<ValidatedForm model={model} schema={schema} validate="onSubmit" />);
