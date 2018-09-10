@@ -1,5 +1,3 @@
-/* eslint "no-console": 1 */
-
 import React    from 'react';
 import {mount}  from 'enzyme';
 
@@ -10,7 +8,7 @@ jest.mock('meteor/check');
 
 describe('ValidatedForm', () => {
     const onChange   = jest.fn();
-    const onSubmit   = jest.fn();
+    const onSubmit   = jest.fn(async () => {});
     const onValidate = jest.fn((model, error, next) => next());
     const validator  = jest.fn();
 
@@ -32,10 +30,13 @@ describe('ValidatedForm', () => {
     });
 
     describe('on validation', () => {
-        let wrapper, form;
+        let wrapper;
+        let form;
 
-        beforeEach(async () => {
-            wrapper = mount(<ValidatedForm model={model} schema={schema} onValidate={onValidate} />);
+        beforeEach(() => {
+            wrapper = mount(
+                <ValidatedForm model={model} schema={schema} onValidate={onValidate} />
+            );
             form = wrapper.instance();
         });
 
@@ -76,29 +77,27 @@ describe('ValidatedForm', () => {
             expect(onValidate).toHaveBeenLastCalledWith(model, error, expect.any(Function));
         });
 
-        it('lets `onValidate` suppress `validator` errors', async () => {
-            validator.mockImplementationOnce(() => {
-                throw error;
-            });
-            onValidate.mockImplementationOnce((m, e, next) => {
-                next(null);
-            });
-            form.validate();
-            await new Promise(resolve => process.nextTick(resolve));
-
-            expect(validator).toHaveBeenCalled();
-            expect(onValidate).toHaveBeenCalled();
-            expect(onSubmit).toHaveBeenCalled();
-        });
-
         it('updates error state with async errors from `onValidate`', async () => {
-            onValidate.mockImplementationOnce((m, e, next) => {
+            onValidate.mockImplementationOnce((model, existingError, next) => {
                 next(error);
             });
             form.validate();
-            await new Promise(resolve => process.nextTick(resolve));
 
             expect(wrapper.instance().getChildContext()).toHaveProperty('uniforms.error', error);
+        });
+
+        it('leaves error state alone when `onValidate` suppress `validator` errors', async () => {
+            validator.mockImplementationOnce(() => {
+                throw error;
+            });
+            onValidate.mockImplementationOnce((model, existingError, next) => {
+                next(null);
+            });
+            form.validate();
+
+            expect(validator).toHaveBeenCalled();
+            expect(onValidate).toHaveBeenCalled();
+            expect(wrapper.instance().getChildContext()).not.toHaveProperty('uniforms.error', error);
         });
 
 
@@ -146,7 +145,7 @@ describe('ValidatedForm', () => {
     });
 
     describe('on change', () => {
-        describe('in "onChange" mode', () => {
+        describe('in `onChange` mode', () => {
             it('validates', () => {
                 const wrapper = mount(<ValidatedForm model={model} schema={schema} validate="onChange" />);
                 wrapper.instance().getChildContext().uniforms.onChange('key', 'value');
@@ -155,7 +154,7 @@ describe('ValidatedForm', () => {
             });
         });
 
-        describe('in "onSubmit" mode', () => {
+        describe('in `onSubmit` mode', () => {
             it('does not validate', () => {
                 const wrapper = mount(<ValidatedForm model={model} schema={schema} validate="onSubmit" />);
                 wrapper.instance().getChildContext().uniforms.onChange('key', 'value');
@@ -164,7 +163,7 @@ describe('ValidatedForm', () => {
             });
         });
 
-        describe('in "onChangeAfterSubmit" mode', () => {
+        describe('in `onChangeAfterSubmit` mode', () => {
             let wrapper;
             beforeEach(() => {
                 wrapper = mount(<ValidatedForm model={model} schema={schema} validate="onChangeAfterSubmit" />);
@@ -204,7 +203,7 @@ describe('ValidatedForm', () => {
     describe('when props are changed', () => {
         const anotherModel = {x: 2};
 
-        describe('in "onChange" mode', () => {
+        describe('in `onChange` mode', () => {
             let wrapper;
             beforeEach(() => {
                 wrapper = mount(<ValidatedForm model={model} schema={schema} validate="onChange" />);
@@ -231,7 +230,7 @@ describe('ValidatedForm', () => {
             });
         });
 
-        describe('in "onSubmit" mode', () => {
+        describe('in `onSubmit` mode', () => {
             let wrapper;
             beforeEach(() => {
                 wrapper = mount(<ValidatedForm model={model} schema={schema} validate="onSubmit" />);
