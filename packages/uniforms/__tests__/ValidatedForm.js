@@ -8,7 +8,7 @@ jest.mock('meteor/check');
 
 describe('ValidatedForm', () => {
     const onChange   = jest.fn();
-    const onSubmit   = jest.fn();
+    const onSubmit   = jest.fn(async () => {});
     const onValidate = jest.fn((model, error, next) => next());
     const validator  = jest.fn();
 
@@ -77,7 +77,16 @@ describe('ValidatedForm', () => {
             expect(onValidate).toHaveBeenLastCalledWith(model, error, expect.any(Function));
         });
 
-        it('lets `onValidate` suppress `validator` errors', async () => {
+        it('updates error state with async errors from `onValidate`', async () => {
+            onValidate.mockImplementationOnce((model, existingError, next) => {
+                next(error);
+            });
+            form.validate();
+
+            expect(wrapper.instance().getChildContext()).toHaveProperty('uniforms.error', error);
+        });
+
+        it('leaves error state alone when `onValidate` suppress `validator` errors', async () => {
             validator.mockImplementationOnce(() => {
                 throw error;
             });
@@ -85,21 +94,10 @@ describe('ValidatedForm', () => {
                 next(null);
             });
             form.validate();
-            await new Promise(resolve => process.nextTick(resolve));
 
             expect(validator).toHaveBeenCalled();
             expect(onValidate).toHaveBeenCalled();
-            expect(onSubmit).toHaveBeenCalled();
-        });
-
-        it('updates error state with async errors from `onValidate`', async () => {
-            onValidate.mockImplementationOnce((model, existingError, next) => {
-                next(error);
-            });
-            form.validate();
-            await new Promise(resolve => process.nextTick(resolve));
-
-            expect(wrapper.instance().getChildContext()).toHaveProperty('uniforms.error', error);
+            expect(wrapper.instance().getChildContext()).not.toHaveProperty('uniforms.error', error);
         });
 
 
