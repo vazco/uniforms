@@ -35,7 +35,7 @@ describe('ValidatedForm', () => {
 
         beforeEach(() => {
             wrapper = mount(
-                <ValidatedForm model={model} schema={schema} onValidate={onValidate} onSubmit={onSubmit} />
+                <ValidatedForm model={model} schema={schema} onValidate={onValidate} />
             );
             form = wrapper.instance();
         });
