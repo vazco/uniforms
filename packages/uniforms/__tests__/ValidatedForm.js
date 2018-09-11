@@ -100,6 +100,20 @@ describe('ValidatedForm', () => {
             expect(wrapper.instance().getChildContext()).not.toHaveProperty('uniforms.error', error);
         });
 
+        it('has `validating` context variable, default `false`', () => {
+            expect(wrapper.instance().getChildContext()).toHaveProperty('uniforms.state.validating', false);
+        });
+
+        it('sets `validating` `true` while validating', async () => {
+            onValidate.mockImplementationOnce(() => {});
+            form.validate();
+            expect(wrapper.instance().getChildContext()).toHaveProperty('uniforms.state.validating', true);
+
+            // Resolve the async validation by calling the third argument of the first call to onValidate.
+            expect(onValidate).toHaveBeenCalledTimes(1);
+            onValidate.mock.calls[0][2]();
+            expect(wrapper.instance().getChildContext()).toHaveProperty('uniforms.state.validating', false);
+        });
 
         it('uses `modelTransform`s `validate` mode', () => {
             const transformedModel = {b: 1};
