@@ -55,6 +55,14 @@ const Validated = parent => class extends parent {
         return super.getChildContextError() || this.state.error;
     }
 
+    getChildContextState () {
+        return {
+            ...super.getChildContextState(),
+
+            validating: this.state.validating
+        };
+    }
+
     getNativeFormProps () {
         const {
             onValidate, // eslint-disable-line no-unused-vars
