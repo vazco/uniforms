@@ -1,5 +1,5 @@
 [ignore]
-.*/.meteor/.*\.json
+.*\.json
 
 [lints]
 all=error

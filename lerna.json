@@ -1,6 +1,5 @@
 {
-  "lerna": "2.11.0",
-  "version": "1.25.0-rc.3",
+  "version": "1.25.0",
   "command": {
     "exec": {
       "parallel": true

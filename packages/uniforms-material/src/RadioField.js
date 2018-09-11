@@ -52,12 +52,12 @@ const Radio = ({
                     value={`${item}`}
                 />
             ))}
-            {showInlineError && error ? (
-                <FormHelperText>{errorMessage}</FormHelperText>
-            ) : (
-                helperText && <FormHelperText>{helperText}</FormHelperText>
-            )}
         </RadioGroup>
+        {showInlineError && error ? (
+            <FormHelperText>{errorMessage}</FormHelperText>
+        ) : (
+            helperText && <FormHelperText>{helperText}</FormHelperText>
+        )}
     </FormControl>
 );
 

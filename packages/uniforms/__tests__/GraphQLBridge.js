@@ -15,7 +15,8 @@ describe('GraphQLBridge', () => {
         input Author {
             id:        ID!
             confirmed: Boolean
-            decimal:   Float
+            decimal1:  Float
+            decimal2:  Float!
             firstName: String = "John"
             lastName:  String = "Doe"
             level:     AccessLevel
@@ -290,9 +291,15 @@ describe('GraphQLBridge', () => {
         });
 
         it('works with Number type', () => {
-            expect(bridgeI.getProps('author.decimal')).toEqual({
+            expect(bridgeI.getProps('author.decimal1')).toEqual({
                 label: '',
                 required: false,
+                decimal: true
+            });
+
+            expect(bridgeI.getProps('author.decimal2')).toEqual({
+                label: '',
+                required: true,
                 decimal: true
             });
         });
@@ -345,7 +352,8 @@ describe('GraphQLBridge', () => {
             expect(bridgeI.getSubfields('author')).toEqual([
                 'id',
                 'confirmed',
-                'decimal',
+                'decimal1',
+                'decimal2',
                 'firstName',
                 'lastName',
                 'level',
@@ -364,7 +372,8 @@ describe('GraphQLBridge', () => {
             it(`works with any type (${mode})`, () => {
                 expect(bridge.getType('author')).toBe(Object);
                 expect(bridge.getType('author.confirmed')).toBe(Boolean);
-                expect(bridge.getType('author.decimal')).toBe(Number);
+                expect(bridge.getType('author.decimal1')).toBe(Number);
+                expect(bridge.getType('author.decimal2')).toBe(Number);
                 expect(bridge.getType('author.firstName')).toBe(String);
                 expect(bridge.getType('author.id')).toBe(String);
                 expect(bridge.getType('author.lastName')).toBe(String);
@@ -375,7 +384,8 @@ describe('GraphQLBridge', () => {
                 expect(bridge.getType('category.$')).toBe(Object);
                 expect(bridge.getType('category.$.owners')).toBe(Array);
                 expect(bridge.getType('category.$.owners.$')).toBe(Object);
-                expect(bridge.getType('category.$.owners.$.decimal')).toBe(Number);
+                expect(bridge.getType('category.$.owners.$.decimal1')).toBe(Number);
+                expect(bridge.getType('category.$.owners.$.decimal2')).toBe(Number);
                 expect(bridge.getType('category.$.owners.$.firstName')).toBe(String);
                 expect(bridge.getType('category.$.owners.$.id')).toBe(String);
                 expect(bridge.getType('category.$.owners.$.lastName')).toBe(String);

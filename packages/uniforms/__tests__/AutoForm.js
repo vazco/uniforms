@@ -77,14 +77,24 @@ describe('AutoForm', () => {
     });
 
     describe('when reset', () => {
+        const intialModel = {a: 'foo'};
         const wrapper = mount(
-            <AutoForm onSubmit={onSubmit} schema={schema} autosave />
+            <AutoForm onSubmit={onSubmit} schema={schema} autosave model={intialModel} />
         );
 
         it('reset `model`', () => {
             wrapper.instance().reset();
+            expect(wrapper.instance().getChildContext().uniforms.model).toEqual(intialModel);
+        });
 
-            expect(wrapper.instance().getChildContext().uniforms.model).toEqual({});
+        it('resets state `changedMap`', () => {
+            wrapper.instance().reset();
+            expect(wrapper.instance().getChildContext().uniforms.state.changedMap).toEqual({});
+        });
+
+        it('resets state `changed`', () => {
+            wrapper.instance().reset();
+            expect(wrapper.instance().getChildContext().uniforms.state.changed).toEqual(false);
         });
     });
 

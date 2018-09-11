@@ -1,10 +1,12 @@
-import PropTypes      from 'prop-types';
-import React          from 'react';
-import enUS           from 'antd/lib/locale-provider/en_US';
-import {Component}    from 'react';
+import PropTypes   from 'prop-types';
+import React       from 'react';
+import enUS        from 'antd/lib/locale-provider/en_US';
+import {Component} from 'react';
 
-import presets from '../lib/presets';
-import schema  from '../lib/schema';
+import presets       from '../lib/presets';
+import schema        from '../lib/schema';
+import {parseQuery}  from '../lib/utils';
+import {updateQuery} from '../lib/utils';
 
 import ApplicationForm         from './ApplicationForm';
 import ApplicationPreviewField from './ApplicationPreviewField';
@@ -15,9 +17,23 @@ class Application extends Component {
     constructor () {
         super(...arguments);
 
-        this.state = schema.clean({});
+        const state = schema.clean(parseQuery());
+
+        try {
+            schema.validate(state);
+        } catch (error) {
+            error.details.forEach(({name}) => {
+                delete state[name];
+            });
+        }
+
+        this.state = schema.clean(state);
 
         this.onChange = this.onChange.bind(this);
+    }
+
+    componentDidUpdate () {
+        updateQuery(this.state);
     }
 
     getChildContext () {
