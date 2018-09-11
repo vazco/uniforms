@@ -22,6 +22,7 @@ const unwantedProps = [
     'showInlineError',
     'submitting',
     'transform',
+    'validating',
     'value',
 
     // These are used by AutoField
