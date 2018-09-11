@@ -10,7 +10,3 @@ lerna-debug.log
 
 packages/*/*.js
 packages/*/node_modules
-
-
-.idea/*
-*package-lock.json
