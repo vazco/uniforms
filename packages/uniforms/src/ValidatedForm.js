@@ -109,7 +109,7 @@ const Validated = parent => class extends parent {
     }
 
     __reset (state) {
-        return {...super.__reset(state), error: null, validate: false};
+        return {...super.__reset(state), error: null, validate: false, validating: false};
     }
 
     onSubmit (event) {
