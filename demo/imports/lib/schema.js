@@ -49,7 +49,9 @@ const schema = new SimpleSchema2({
             label:           true,
             placeholder:     false,
             schema:          presets[Object.keys(presets)[0]],
-            showInlineError: false
+            showInlineError: false,
+            asyncOnSubmit:   false,
+            asyncOnValidate: false
         },
         uniforms: {
             schema: new SimpleSchema2({
@@ -59,6 +61,8 @@ const schema = new SimpleSchema2({
                 label:           {optional: true, type: Boolean},
                 placeholder:     {optional: true, type: Boolean},
                 showInlineError: {optional: true, type: Boolean},
+                asyncOnSubmit:   {optional: true, type: Boolean, label: 'Async onSubmit (1 sec)'},
+                asyncOnValidate: {optional: true, type: Boolean, label: 'Async onValidate (1 sec)'},
 
                 schema: {
                     optional: true,

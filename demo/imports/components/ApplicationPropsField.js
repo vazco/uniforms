@@ -31,6 +31,8 @@ const ApplicationProps = ({onChange, schema, theme, value}) => {
                 <BoolField     name="label" />
                 <BoolField     name="placeholder" />
                 <BoolField     name="showInlineError" disabled={!(isAntd || isBootstrap || isMaterial || isSemantic)} />
+                <BoolField     name="asyncOnSubmit" />
+                <BoolField     name="asyncOnValidate" />
                 <LongTextField name="schema" {...isMaterial && {fullWidth: true, rowsMax: 20}} />
 
                 <ErrorsField />
