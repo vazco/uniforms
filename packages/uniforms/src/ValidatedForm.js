@@ -70,7 +70,6 @@ const Validated = parent => class extends parent {
             onValidate, // eslint-disable-line no-unused-vars
             validator,  // eslint-disable-line no-unused-vars
             validate,   // eslint-disable-line no-unused-vars
-            // validating, // eslist-disable-line no-unused-vars
 
             ...props
         } = super.getNativeFormProps();
