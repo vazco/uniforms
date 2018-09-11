@@ -33,6 +33,8 @@ const Validated = parent => class extends parent {
         ]).isRequired
     };
 
+    // TODO add `uniforms.state.validating` to `childContextTypes`.
+
     constructor () {
         super(...arguments);
 
