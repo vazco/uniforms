@@ -949,8 +949,8 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 // This field works as follows: render standard submit field and disable it, when
 // the form is invalid. It's a simplified version of a default SubmitField from
 // uniforms-unstyled.
-const SubmitField = (props, {uniforms: {error, state: {disabled, submitting}}}) =>
-    <input disabled={!!(error || disabled || submitting)} type="submit" />
+const SubmitField = (props, {uniforms: {error, state: {disabled, submitting, validating}}}) =>
+    <input disabled={!!(error || disabled || submitting || validating)} type="submit" />
 ;
 
 SubmitField.contextTypes = BaseField.contextTypes;
