@@ -1,4 +1,5 @@
 ## Next
+- **Changed:** Updated `graphql` dependency. [\#467](https://github.com/vazco/uniforms/issues/467)
 - **Fixed:** Extracting `fieldType` for `GraphQLBridge`. [\#460](https://github.com/vazco/uniforms/issues/460)
 - **Fixed:** `RadioField` handles error and help texts without warnings in `uniforms-material`.
 
