@@ -74,12 +74,12 @@ const Validated = parent => class extends parent {
                 validator: bridge.getValidator(validator)
             }), () => {
                 if (validate === 'onChange' || validate === 'onChangeAfterSubmit' && this.state.validate) {
-                    this.onValidate();
+                    this.onValidate().catch(() => {});
                 }
             });
         } else if (!isEqual(this.props.model, model)) {
             if (validate === 'onChange' || validate === 'onChangeAfterSubmit' && this.state.validate) {
-                this.onValidateModel(model);
+                this.onValidateModel(model).catch(() => {});
             }
         }
     }
