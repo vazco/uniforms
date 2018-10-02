@@ -25,5 +25,6 @@
     "uniforms-material": "file:../packages/uniforms-material",
     "uniforms-semantic": "file:../packages/uniforms-semantic",
     "uniforms-unstyled": "file:../packages/uniforms-unstyled"
-  }
+  },
+  "version": "1.26.0"
 }
