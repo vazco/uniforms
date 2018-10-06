@@ -1,4 +1,4 @@
-## Next
+## [v1.27.0-rc.1](https://github.com/vazco/uniforms/tree/v1.27.0-rc.1) (2018-10-06)
 - **Added:** Support for `@material-ui/core@3.0.0`.
 - **Changed:** Minimum version of `@material-ui/core` is 1.5.1, due to Babel updated.
 - **Changed:** No `core-js` polyfills are automatically included.
