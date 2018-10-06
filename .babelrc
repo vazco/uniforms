@@ -5,7 +5,7 @@
     ["babel-plugin-transform-react-remove-prop-types", {"mode": "wrap"}]
   ],
   "presets": [
-    ["@babel/preset-env", {"useBuiltIns": "usage"}],
+    ["@babel/preset-env"],
     ["@babel/preset-flow"],
     ["@babel/preset-react"]
   ]
