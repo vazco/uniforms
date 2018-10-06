@@ -72,7 +72,8 @@
       "meteor/([^:]*)": "<rootDir>/packages/uniforms/__mocks__/meteor/$1.js"
     },
     "setupFiles": [
-      "./scripts/setupEnzyme.js"
+      "./scripts/setupEnzyme.js",
+      "./scripts/setupPolyfill.js"
     ],
     "testMatch": [
       "**/__tests__/**/!(_)*.js"
