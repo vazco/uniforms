@@ -44,7 +44,7 @@
     "eslint-plugin-vazco": "1.0.0",
     "flow-bin": "0.75.0",
     "flow-typed": "2.4.0",
-    "graphql": "0.13.2",
+    "graphql": "14.0.2",
     "jest": "23.2.0",
     "lerna": "3.2.1",
     "prettier": "1.13.6",

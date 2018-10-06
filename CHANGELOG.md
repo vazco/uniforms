@@ -1,3 +1,9 @@
+## [v1.26.0](https://github.com/vazco/uniforms/tree/v1.26.0) (2018-10-02)
+- **Changed:** Updated `graphql` dependency. [\#467](https://github.com/vazco/uniforms/issues/467)
+- **Fixed:** Extracting `fieldType` for `GraphQLBridge`. [\#460](https://github.com/vazco/uniforms/issues/460)
+- **Fixed:** Leaking rejections in `ValidatedForm`. [\#471](https://github.com/vazco/uniforms/issues/471)
+- **Fixed:** `RadioField` handles error and help texts without warnings in `uniforms-material`.
+
 ## [v1.25.0](https://github.com/vazco/uniforms/tree/v1.25.0) (2018-07-20)
 
 ## [v1.25.0-rc.3](https://github.com/vazco/uniforms/tree/v1.25.0-rc.3) (2018-06-27)
