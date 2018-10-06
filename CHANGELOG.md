@@ -3,6 +3,7 @@
 - **Changed:** Minimum version of `@material-ui/core` is 1.5.1, due to Babel updated.
 - **Changed:** No `core-js` polyfills are automatically included.
 - **Fixed:** Leaking `checkboxes` prop in `uniforms-antd`.
+- **Fixed:** Renamed few internals to preserve default `displayName`s.
 
 ## [v1.26.0](https://github.com/vazco/uniforms/tree/v1.26.0) (2018-10-02)
 - **Changed:** Updated `graphql` dependency. [\#467](https://github.com/vazco/uniforms/issues/467)

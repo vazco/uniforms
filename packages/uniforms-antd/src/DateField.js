@@ -6,7 +6,7 @@ import moment         from 'moment';
 
 import wrapField from './wrapField';
 
-const Date_ = props =>
+const Date = props =>
     wrapField(props, (
         <DatePicker
             disabled={props.disabled}
@@ -21,11 +21,9 @@ const Date_ = props =>
     ))
 ;
 
-Date_.displayName = 'Date';
-
-Date_.defaultProps = {
+Date.defaultProps = {
     showTime: true,
     style: {width: '100%'}
 };
 
-export default connectField(Date_, {ensureValue: false});
+export default connectField(Date, {ensureValue: false});

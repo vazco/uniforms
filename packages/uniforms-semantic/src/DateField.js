@@ -3,9 +3,10 @@ import classnames     from 'classnames';
 import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
+const DateConstructor = (typeof global === 'object' ? global : window).Date;
 const dateFormat = value => value && value.toISOString().slice(0, -8);
 const dateParse = (timestamp, onChange) => {
-    const date = new Date(timestamp);
+    const date = new DateConstructor(timestamp);
     if (date.getFullYear() < 10000) {
         onChange(date);
     } else if (isNaN(timestamp)) {
@@ -13,7 +14,7 @@ const dateParse = (timestamp, onChange) => {
     }
 };
 
-const Date_ = ({
+const Date = ({
     className,
     disabled,
     error,
@@ -69,6 +70,4 @@ const Date_ = ({
     </div>
 ;
 
-Date_.displayName = 'Date';
-
-export default connectField(Date_);
+export default connectField(Date);

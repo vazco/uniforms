@@ -1,7 +1,7 @@
 import Checkbox       from 'antd/lib/checkbox';
 import Radio          from 'antd/lib/radio';
 import React          from 'react';
-import Select         from 'antd/lib/select';
+import SelectAntD     from 'antd/lib/select';
 import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
@@ -44,7 +44,7 @@ const renderCheckboxes = props =>
 ;
 
 const renderSelect = props =>
-    <Select
+    <SelectAntD
         allowClear={!props.required}
         disabled={props.disabled}
         id={props.id}
@@ -57,14 +57,14 @@ const renderSelect = props =>
         {...filterDOMProps(props)}
     >
         {props.allowedValues.map(value =>
-            <Select.Option key={value} value={value}>
+            <SelectAntD.Option key={value} value={value}>
                 {props.transform ? props.transform(value) : value}
-            </Select.Option>
+            </SelectAntD.Option>
         )}
-    </Select>
+    </SelectAntD>
 ;
 
-const Select_ = ({checkboxes, ...props}) =>
+const Select = ({checkboxes, ...props}) =>
     wrapField(props, (
         checkboxes
             ? renderCheckboxes(props)
@@ -72,6 +72,4 @@ const Select_ = ({checkboxes, ...props}) =>
     ))
 ;
 
-Select_.displayName = 'Select';
-
-export default connectField(Select_);
+export default connectField(Select);

@@ -1,13 +1,13 @@
-import Radio          from 'antd/lib/radio';
+import RadioAntD      from 'antd/lib/radio';
 import React          from 'react';
 import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
 import wrapField from './wrapField';
 
-const Radio_ = props =>
+const Radio = props =>
     wrapField(props, (
-        <Radio.Group
+        <RadioAntD.Group
             disabled={props.disabled}
             name={props.name}
             onChange={event => props.onChange(event.target.value)}
@@ -15,7 +15,7 @@ const Radio_ = props =>
             {...filterDOMProps(props)}
         >
             {props.allowedValues.map(value =>
-                <Radio
+                <RadioAntD
                     key={value}
                     value={value}
                     style={{
@@ -25,12 +25,10 @@ const Radio_ = props =>
                     }}
                 >
                     {props.transform ? props.transform(value) : value}
-                </Radio>
+                </RadioAntD>
             )}
-        </Radio.Group>
+        </RadioAntD.Group>
     ))
 ;
 
-Radio_.displayName = 'Radio';
-
-export default connectField(Radio_);
+export default connectField(Radio);

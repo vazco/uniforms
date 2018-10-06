@@ -4,9 +4,10 @@ import connectField from 'uniforms/connectField';
 
 import wrapField from './wrapField';
 
+const DateConstructor = (typeof global === 'object' ? global : window).Date;
 const dateFormat = value => value && value.toISOString().slice(0, -8);
 const dateParse = (timestamp, onChange) => {
-    const date = new Date(timestamp);
+    const date = new DateConstructor(timestamp);
     if (date.getFullYear() < 10000) {
         onChange(date);
     } else if (isNaN(timestamp)) {
@@ -14,7 +15,7 @@ const dateParse = (timestamp, onChange) => {
     }
 };
 
-const Date_ = props =>
+const Date = props =>
     wrapField(props, (
         <input
             className={classnames(props.inputClassName, 'form-control', {'is-invalid': props.error})}
@@ -32,6 +33,4 @@ const Date_ = props =>
     ))
 ;
 
-Date_.displayName = 'Date';
-
-export default connectField(Date_);
+export default connectField(Date);
