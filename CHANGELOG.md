@@ -1,3 +1,7 @@
+## Next
+- **Changed:** Minimum version of `@material-ui/core` is 1.5.1, due to Babel updated.
+- **Changed:** No `core-js` polyfills are automatically included.
+
 ## [v1.26.0](https://github.com/vazco/uniforms/tree/v1.26.0) (2018-10-02)
 - **Changed:** Updated `graphql` dependency. [\#467](https://github.com/vazco/uniforms/issues/467)
 - **Fixed:** Extracting `fieldType` for `GraphQLBridge`. [\#460](https://github.com/vazco/uniforms/issues/460)
@@ -13,7 +17,7 @@
 - **Fixed:** Explicitly pass `text` prop in `TextField` in `uniforms-material`.
 
 ## [v1.25.0-rc.1](https://github.com/vazco/uniforms/tree/v1.25.0-rc.1) (2018-06-05)
-- **Changed:** Updated `uniforms-material` to `@material/core`. [\#349](https://github.com/vazco/uniforms/issues/349)
+- **Changed:** Updated `uniforms-material` to `@material-ui/core`. [\#349](https://github.com/vazco/uniforms/issues/349)
 
 ## [v1.24.5](https://github.com/vazco/uniforms/tree/v1.24.5) (2018-05-30)
 - **Fixed:** Added `wrapperStyle` to `filterDOMProps` defaults. [\#430](https://github.com/vazco/uniforms/issues/430)
