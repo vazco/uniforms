@@ -2,11 +2,8 @@ sudo: false
 
 language: node_js
 node_js:
-  - 6
   - 8
   - 10
-
-before_install: if [[ "5.0.0" > `npm -v` ]]; then npm i -g npm@5; fi
 
 script:
   - npm run coverage -- --no-cache --runInBand
