@@ -27,7 +27,7 @@
     "uniforms": "file:../uniforms"
   },
   "devDependencies": {
-    "@material-ui/icons": "^1.0.0"
+    "@material-ui/icons": "1.0.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0",
