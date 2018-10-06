@@ -6,8 +6,6 @@
   },
   "dependencies": {
     "@babel/core": "7.1.2",
-    "@babel/preset-env": "7.1.0",
-    "@babel/preset-react": "7.0.0",
     "@babel/runtime": "7.1.2",
     "@material-ui/core": "1.5.1",
     "ajv": "6.5.1",
@@ -25,5 +23,9 @@
     "uniforms-material": "file:../packages/uniforms-material",
     "uniforms-semantic": "file:../packages/uniforms-semantic",
     "uniforms-unstyled": "file:../packages/uniforms-unstyled"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-classes": "7.1.0",
+    "@babel/preset-react": "7.0.0"
   }
 }
