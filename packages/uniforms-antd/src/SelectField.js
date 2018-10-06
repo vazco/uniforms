@@ -64,9 +64,9 @@ const renderSelect = props =>
     </Select>
 ;
 
-const Select_ = props =>
+const Select_ = ({checkboxes, ...props}) =>
     wrapField(props, (
-        props.checkboxes
+        checkboxes
             ? renderCheckboxes(props)
             : renderSelect(props)
     ))
