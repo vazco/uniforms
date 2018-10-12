@@ -1,6 +1,6 @@
 import PropTypes   from 'prop-types';
 import get         from 'lodash/get';
-import invariant   from 'fbjs/lib/invariant';
+import invariant   from 'invariant';
 import isEqual     from 'lodash/isEqual';
 import {Component} from 'react';
 

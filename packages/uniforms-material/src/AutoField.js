@@ -1,5 +1,5 @@
 import BaseField       from 'uniforms/BaseField';
-import invariant       from 'fbjs/lib/invariant';
+import invariant       from 'invariant';
 import {createElement} from 'react';
 
 import BoolField   from './BoolField';

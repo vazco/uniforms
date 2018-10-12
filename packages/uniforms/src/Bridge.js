@@ -1,4 +1,4 @@
-import invariant from 'fbjs/lib/invariant';
+import invariant from 'invariant';
 
 export default class Bridge {
     constructor () {

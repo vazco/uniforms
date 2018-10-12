@@ -1,4 +1,4 @@
-import invariant from 'fbjs/lib/invariant';
+import invariant from 'invariant';
 
 import Bridge from './Bridge';
 import joinName  from './joinName';
