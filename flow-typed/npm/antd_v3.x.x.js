@@ -1,5 +1,5 @@
-// flow-typed signature: ffcd9cf333dc0893310ebc48453b2b35
-// flow-typed version: b0287490a6/antd_v3.x.x/flow_>=v0.25.x
+// flow-typed signature: a15307fb68f4c2723cc6a12537712e82
+// flow-typed version: 3a81b21fde/antd_v3.x.x/flow_>=v0.25.x
 
 declare module "antd" {
   import type { Node, Component } from "react";
@@ -107,8 +107,6 @@ declare module "antd" {
   };
 
   declare export class Cascader extends React$Component<CascaderProps> {}
-
-  declare export class Checkbox extends React$Component<{}> {}
 
   declare export class Col extends React$Component<{}> {}
 
