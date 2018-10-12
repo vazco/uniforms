@@ -33,6 +33,6 @@
     "@babel/runtime": "^7.0.0",
     "invariant": "^2.0.0",
     "lodash": "^4.0.0",
-    "prop-types": "^15.6.1"
+    "prop-types": "^15.5.7"
   }
 }
