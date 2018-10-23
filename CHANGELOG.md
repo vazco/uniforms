@@ -1,3 +1,5 @@
+## [v1.27.0](https://github.com/vazco/uniforms/tree/v1.27.0) (2018-10-23)
+
 ## [v1.27.0-rc.2](https://github.com/vazco/uniforms/tree/v1.27.0-rc.2) (2018-10-12)
 - **Changed:** Added necessary `invariant` and `warning` dependencies as React no longer depends on `fbjs`. [\#475](https://github.com/vazco/uniforms/issues/475)
 
