@@ -7,7 +7,8 @@ import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
-const dateFormat = value => value && value.toISOString().slice(0, -8);
+const dateFormat = value => value && value.toISOString().slice(0, -14);
+const dateTimeFormat = value => value && value.toISOString().slice(0, -8);
 const dateParse = (timestamp, onChange) => {
     const date = new DateConstructor(timestamp);
     if (date.getFullYear() < 10000) {
@@ -48,7 +49,7 @@ const Date = ({
             placeholder={placeholder}
             ref={inputRef}
             type="datetime-local"
-            value={dateFormat(value)}
+            value={props.inputProps && props.inputProps.type === 'date' ? dateFormat(value) : dateTimeFormat(value)}
             {...filterDOMProps(props)}
         />
         {showInlineError && error ? (
