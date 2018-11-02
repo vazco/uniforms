@@ -1,3 +1,6 @@
+## Next
+- **Added:** Proper styling for `SelectField` in `uniforms-semantic`. [\#482](https://github.com/vazco/uniforms/issues/482)
+
 ## [v1.27.0](https://github.com/vazco/uniforms/tree/v1.27.0) (2018-10-23)
 
 ## [v1.27.0-rc.2](https://github.com/vazco/uniforms/tree/v1.27.0-rc.2) (2018-10-12)
