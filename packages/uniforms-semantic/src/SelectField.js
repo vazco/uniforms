@@ -47,6 +47,7 @@ const renderSelect = ({
     value
 }) =>
     <select
+        className="ui selection dropdown"
         disabled={disabled}
         id={id}
         name={name}
