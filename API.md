@@ -327,7 +327,7 @@ import DateField from 'uniforms-unstyled/DateField'; // Choose your theme packag
     //   use this prop instead.
     inputRef={ref => {}}
 
-    // Props for the FormLabel
+    // Props for the InputLabel
     // Available in:
     //   material-ui
     labelProps={{ shrink: true, disableAnimation: true }}
@@ -865,7 +865,7 @@ import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme pa
     //   use this prop instead.
     inputRef={ref => {}}
 
-    // Props for the FormLabel
+    // Props for the InputLabel
     // Available in:
     //   material-ui
     labelProps={{ shrink: true, disableAnimation: true }}
