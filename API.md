@@ -1,5 +1,6 @@
 # Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [Fields](#fields)
     - [`AutoField`](#autofield)
     - [`AutoFields`](#autofields)
@@ -325,6 +326,11 @@ import DateField from 'uniforms-unstyled/DateField'; // Choose your theme packag
     //   receive a field component rather than an HTML input. If you need an input ref,
     //   use this prop instead.
     inputRef={ref => {}}
+
+    // Props for the FormLabel
+    // Available in:
+    //   material-ui
+    labelProps={{ shrink: true, disableAnimation: true }}
 
     // Maximum value.
     //   Date object.
@@ -858,6 +864,11 @@ import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme pa
     //   receive a field component rather than a HTML input. If you need an input ref,
     //   use this prop instead.
     inputRef={ref => {}}
+
+    // Props for the FormLabel
+    // Available in:
+    //   material-ui
+    labelProps={{ shrink: true, disableAnimation: true }}
 
     // Field inline error.
     //   *Some description would be great, huh?*

@@ -1,6 +1,6 @@
 import FormControl    from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import FormLabel      from '@material-ui/core/FormLabel';
+import InputLabel     from '@material-ui/core/InputLabel';
 import Input          from '@material-ui/core/Input';
 import React          from 'react';
 import connectField   from 'uniforms/connectField';
@@ -32,6 +32,7 @@ const Date = ({
     required,
     showInlineError,
     value,
+    labelProps,
     ...props
 }) => (
     <FormControl
@@ -41,7 +42,7 @@ const Date = ({
         margin={margin}
         required={required}
     >
-        {label && <FormLabel component="legend" htmlFor={name}>{label}</FormLabel>}
+        {label && <InputLabel htmlFor={name} {...labelProps}>{label}</InputLabel>}
         <Input
             name={name}
             onChange={event => dateParse(event.target.valueAsNumber, onChange)}

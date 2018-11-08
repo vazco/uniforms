@@ -43,6 +43,7 @@ const renderSelect = ({
     showInlineError,
     transform,
     value,
+    labelProps,
     ...props
 }) => {
     const Item = native ? 'option' : MenuItem;
@@ -55,7 +56,7 @@ const renderSelect = ({
             margin={margin}
             required={required}
         >
-            {label && <InputLabel htmlFor={name}>{label}</InputLabel>}
+            {label && <InputLabel htmlFor={name} {...labelProps}>{label}</InputLabel>}
             <SelectMaterial
                 inputProps={{name, id, ...inputProps}}
                 multiple={fieldType === Array || undefined}
