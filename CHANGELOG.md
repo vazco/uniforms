@@ -1,5 +1,6 @@
 ## Next
 - **Added:** Proper styling for `SelectField` in `uniforms-semantic`. [\#482](https://github.com/vazco/uniforms/issues/482)
+- **Added:** New `labelProps` props in `DateField` and `SelectField` in `uniforms-material`. [\#485](https://github.com/vazco/uniforms/issues/485)
 
 ## [v1.27.0](https://github.com/vazco/uniforms/tree/v1.27.0) (2018-10-23)
 
