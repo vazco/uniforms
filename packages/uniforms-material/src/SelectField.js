@@ -34,6 +34,7 @@ const renderSelect = ({
     id,
     inputProps,
     label,
+    labelProps,
     margin,
     name,
     native,
@@ -43,7 +44,6 @@ const renderSelect = ({
     showInlineError,
     transform,
     value,
-    labelProps,
     ...props
 }) => {
     const Item = native ? 'option' : MenuItem;
