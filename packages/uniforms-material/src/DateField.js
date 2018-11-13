@@ -1,7 +1,7 @@
 import FormControl    from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import InputLabel     from '@material-ui/core/InputLabel';
 import Input          from '@material-ui/core/Input';
+import InputLabel     from '@material-ui/core/InputLabel';
 import React          from 'react';
 import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
@@ -25,6 +25,7 @@ const Date = ({
     helperText,
     inputRef,
     label,
+    labelProps,
     margin,
     name,
     onChange,
@@ -32,7 +33,6 @@ const Date = ({
     required,
     showInlineError,
     value,
-    labelProps,
     ...props
 }) => (
     <FormControl
