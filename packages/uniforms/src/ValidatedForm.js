@@ -120,7 +120,7 @@ const Validated = parent => class extends parent {
         }
 
         const promise = new Promise((resolve, reject) => {
-            this.setState(() => ({validate: true}), () => {
+            this.setState(() => ({validate: true, submitting: true}), () => {
                 this.onValidate().then(
                     () => {
                         super.onSubmit().then(
@@ -136,8 +136,14 @@ const Validated = parent => class extends parent {
             });
         });
 
-        // NOTE: It's okay for this Promise to reject.
-        promise.catch(() => {});
+        promise
+            .catch(() => {
+                // `onSubmit` should never reject, so we ignore this rejection.
+            })
+            .finally(() => {
+                // If validation fails, or `super.onSubmit` doesn't touch `submitting`, we need to reset it.
+                this.setState(state => state.submitting ? {submitting: false} : null);
+            });
 
         return promise;
     }

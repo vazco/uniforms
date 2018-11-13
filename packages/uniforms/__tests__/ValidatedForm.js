@@ -128,7 +128,9 @@ describe('ValidatedForm', () => {
     describe('when submitted', () => {
         let wrapper;
         beforeEach(() => {
-            wrapper = mount(<ValidatedForm model={model} schema={schema} onSubmit={onSubmit} />);
+            wrapper = mount(
+                <ValidatedForm model={model} schema={schema} onSubmit={onSubmit} onValidate={onValidate} />
+            );
         });
 
         it('calls `onSubmit` when validation succeeds', async () => {
@@ -155,6 +157,27 @@ describe('ValidatedForm', () => {
 
             expect(onSubmit).toHaveBeenCalled();
             expect(wrapper.instance().getChildContext()).toHaveProperty('uniforms.error', error);
+        });
+
+        it('sets `submitting` `true` while validating, before `BaseForm#onSubmit`', async () => {
+            onValidate.mockImplementationOnce(() => {});
+            wrapper.find('form').simulate('submit');
+            await new Promise(resolve => process.nextTick(resolve));
+            expect(wrapper.instance().getChildContext()).toHaveProperty('uniforms.state.submitting', true);
+        });
+
+        it('sets `submitting` back to `false` after sync `onSubmit`', async () => {
+            onValidate.mockImplementationOnce(() => {});
+            onSubmit.mockImplementationOnce(() => {});
+            wrapper.find('form').simulate('submit');
+            await new Promise(resolve => process.nextTick(resolve));
+
+            expect(onValidate).toHaveBeenCalledTimes(1);
+            // Resolve the async validation by calling the third argument of the first call to onValidate.
+            onValidate.mock.calls[0][2]();
+
+            await new Promise(resolve => process.nextTick(resolve));
+            expect(wrapper.instance().getChildContext()).toHaveProperty('uniforms.state.submitting', false);
         });
     });
 

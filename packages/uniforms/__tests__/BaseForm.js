@@ -285,7 +285,7 @@ describe('BaseForm', () => {
             expect(onSubmitFailure).not.toBeCalled();
         });
 
-        it('sets `submitting` state', async () => {
+        it('sets `submitting` state while submitting', async () => {
             let resolveSubmit = null;
             wrapper.setProps({onSubmit: () => new Promise(resolve => resolveSubmit = resolve)});
 
