@@ -34,6 +34,7 @@ const renderSelect = ({
     id,
     inputProps,
     label,
+    labelProps,
     margin,
     name,
     native,
@@ -55,7 +56,7 @@ const renderSelect = ({
             margin={margin}
             required={required}
         >
-            {label && <InputLabel htmlFor={name}>{label}</InputLabel>}
+            {label && <InputLabel htmlFor={name} {...labelProps}>{label}</InputLabel>}
             <SelectMaterial
                 inputProps={{name, id, ...inputProps}}
                 multiple={fieldType === Array || undefined}

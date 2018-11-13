@@ -326,6 +326,11 @@ import DateField from 'uniforms-unstyled/DateField'; // Choose your theme packag
     //   use this prop instead.
     inputRef={ref => {}}
 
+    // Props for the InputLabel
+    // Available in:
+    //   material-ui
+    labelProps={{ shrink: true, disableAnimation: true }}
+
     // Maximum value.
     //   Date object.
     max={new Date(2100, 1, 1)}
@@ -858,6 +863,11 @@ import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme pa
     //   receive a field component rather than a HTML input. If you need an input ref,
     //   use this prop instead.
     inputRef={ref => {}}
+
+    // Props for the InputLabel
+    // Available in:
+    //   material-ui
+    labelProps={{ shrink: true, disableAnimation: true }}
 
     // Field inline error.
     //   *Some description would be great, huh?*

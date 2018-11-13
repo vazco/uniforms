@@ -1,7 +1,7 @@
 import FormControl    from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import FormLabel      from '@material-ui/core/FormLabel';
 import Input          from '@material-ui/core/Input';
+import InputLabel     from '@material-ui/core/InputLabel';
 import React          from 'react';
 import connectField   from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
@@ -25,6 +25,7 @@ const Date = ({
     helperText,
     inputRef,
     label,
+    labelProps,
     margin,
     name,
     onChange,
@@ -41,7 +42,7 @@ const Date = ({
         margin={margin}
         required={required}
     >
-        {label && <FormLabel component="legend" htmlFor={name}>{label}</FormLabel>}
+        {label && <InputLabel htmlFor={name} {...labelProps}>{label}</InputLabel>}
         <Input
             name={name}
             onChange={event => dateParse(event.target.valueAsNumber, onChange)}
