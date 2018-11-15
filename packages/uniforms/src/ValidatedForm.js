@@ -140,7 +140,7 @@ const Validated = parent => class extends parent {
             .catch(() => {
                 // `onSubmit` should never reject, so we ignore this rejection.
             })
-            .finally(() => {
+            .then(() => {
                 // If validation fails, or `super.onSubmit` doesn't touch `submitting`, we need to reset it.
                 this.setState(state => state.submitting ? {submitting: false} : null);
             });
