@@ -19,7 +19,7 @@ const Validated = parent => {
         parent.plainChildContextTypes
     );
 
-    return class ValidatedForm extends parent {
+    return class extends parent {
         static Validated = Validated;
 
         static displayName = `Validated${parent.displayName}`;
@@ -48,7 +48,7 @@ const Validated = parent => {
         };
 
 
-          static plainChildContextTypes = plainChildContextTypes;
+        static plainChildContextTypes = plainChildContextTypes;
         static childContextTypes = parent.shapifyPropTypes(plainChildContextTypes);
 
         constructor () {
