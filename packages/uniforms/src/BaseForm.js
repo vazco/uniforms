@@ -1,14 +1,20 @@
 import PropTypes   from 'prop-types';
 import React       from 'react';
 import cloneDeep   from 'lodash/cloneDeep';
+import mapValues   from 'lodash/mapValues';
 import get         from 'lodash/get';
 import set         from 'lodash/set';
 import isFunction  from 'lodash/isFunction';
+import isPlainObject from 'lodash/isPlainObject';
 import {Component} from 'react';
 
 import changedKeys        from './changedKeys';
 import createSchemaBridge from './createSchemaBridge';
 import randomIds          from './randomIds';
+
+function shapify (typeOrObject) {
+    return isPlainObject(typeOrObject) ? PropTypes.shape(mapValues(typeOrObject, shapify)).isRequired : typeOrObject;
+}
 
 export default class BaseForm extends Component {
     static displayName = 'Form';
@@ -44,14 +50,18 @@ export default class BaseForm extends Component {
         autosaveDelay: PropTypes.number
     };
 
-    static childContextTypes = {
-        uniforms: PropTypes.shape({
+    static shapifyPropTypes (propTypes) {
+        return mapValues(propTypes, shapify);
+    }
+
+    static plainChildContextTypes = {
+        uniforms: {
             name: PropTypes.arrayOf(PropTypes.string).isRequired,
 
             error: PropTypes.object,
             model: PropTypes.object.isRequired,
 
-            schema: PropTypes.shape({
+            schema: {
                 getError:         PropTypes.func.isRequired,
                 getErrorMessage:  PropTypes.func.isRequired,
                 getErrorMessages: PropTypes.func.isRequired,
@@ -61,9 +71,9 @@ export default class BaseForm extends Component {
                 getSubfields:     PropTypes.func.isRequired,
                 getType:          PropTypes.func.isRequired,
                 getValidator:     PropTypes.func.isRequired
-            }).isRequired,
+            },
 
-            state: PropTypes.shape({
+            state: {
                 changed:    PropTypes.bool.isRequired,
                 changedMap: PropTypes.object.isRequired,
                 submitting: PropTypes.bool.isRequired,
@@ -72,12 +82,14 @@ export default class BaseForm extends Component {
                 disabled:        PropTypes.bool.isRequired,
                 placeholder:     PropTypes.bool.isRequired,
                 showInlineError: PropTypes.bool.isRequired
-            }).isRequired,
+            },
 
             onChange: PropTypes.func.isRequired,
             randomId: PropTypes.func.isRequired
-        }).isRequired
+        }
     };
+
+    static childContextTypes = BaseForm.shapifyPropTypes(BaseForm.plainChildContextTypes);
 
     constructor () {
         super(...arguments);
