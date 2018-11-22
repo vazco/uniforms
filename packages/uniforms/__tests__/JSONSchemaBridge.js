@@ -58,7 +58,7 @@ describe('JSONSchemaBridge', () => {
                     $ref: '#/definitions/personalData'
                 }
             },
-            hasAJob: {type: 'boolean'},
+            hasAJob: {type: 'boolean', title: 'Currently Employed'},
             invalid: {type: 'null'},
             personalData: {$ref: '#/definitions/personalData'},
             salary: {
@@ -256,6 +256,16 @@ describe('JSONSchemaBridge', () => {
             expect(bridge.getProps('dateOfBirth', {label: true})).toEqual({
                 label: 'Date of birth',
                 required: true
+            });
+        });
+
+        it('works with property title as default label', () => {
+            expect(bridge.getProps('hasAJob', {label: true})).toEqual({
+                allowedValues: undefined,
+                label: 'Currently Employed',
+                options: undefined,
+                placeholder: undefined,
+                required: false
             });
         });
 
