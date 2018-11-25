@@ -14,7 +14,15 @@ describe('injectName', () => {
     const error = new Error();
     const onChange = () => {};
     const randomId = randomIds();
-    const state = {changed: !1, changedMap: {}, label: !0, disabled: !1, placeholder: !1, showInlineError: !0};
+    const state = {
+        changed: false,
+        changedMap: {},
+        submitting: false,
+        label: true,
+        disabled: false,
+        placeholder: false,
+        showInlineError: true
+    };
     const schema = createSchemaBridge({
         getDefinition (name) {
             return {

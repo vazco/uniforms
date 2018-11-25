@@ -32,8 +32,14 @@ class ApplicationPreview extends Component {
         const Form = themes[this.props.theme].AutoForm;
         const link = styles[this.props.theme];
 
-        const props = {...this.props.value};
+        const {asyncOnSubmit, asyncOnValidate, ...props} = {...this.props.value};
         props.schema = this._schema;
+        if (asyncOnSubmit) {
+            props.onSubmit = () => new Promise(resolve => setTimeout(resolve, 1000));
+        }
+        if (asyncOnValidate) {
+            props.onValidate = (model, error, next) => setTimeout(() => next(), 1000);
+        }
 
         return (
             <div>
@@ -42,7 +48,7 @@ class ApplicationPreview extends Component {
                 {this.props.errorMessage ? (
                     <span children={this.props.errorMessage} />
                 ) : (
-                    <Form key={this.props.value.schema} onChangeModel={this.onModel} {...props} />
+                    <Form key={props.schema} onChangeModel={this.onModel} {...props} />
                 )}
 
                 {this.state.model !== undefined && <br />}

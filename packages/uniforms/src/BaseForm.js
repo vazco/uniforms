@@ -1,13 +1,54 @@
 import PropTypes   from 'prop-types';
 import React       from 'react';
 import cloneDeep   from 'lodash/cloneDeep';
+import mapValues   from 'lodash/mapValues';
 import get         from 'lodash/get';
 import set         from 'lodash/set';
+import isFunction  from 'lodash/isFunction';
+import isPlainObject from 'lodash/isPlainObject';
 import {Component} from 'react';
 
 import changedKeys        from './changedKeys';
 import createSchemaBridge from './createSchemaBridge';
 import randomIds          from './randomIds';
+
+export const __childContextTypes = {
+    name: PropTypes.arrayOf(PropTypes.string).isRequired,
+
+    error: PropTypes.object,
+    model: PropTypes.object.isRequired,
+
+    schema: {
+        getError:         PropTypes.func.isRequired,
+        getErrorMessage:  PropTypes.func.isRequired,
+        getErrorMessages: PropTypes.func.isRequired,
+        getField:         PropTypes.func.isRequired,
+        getInitialValue:  PropTypes.func.isRequired,
+        getProps:         PropTypes.func.isRequired,
+        getSubfields:     PropTypes.func.isRequired,
+        getType:          PropTypes.func.isRequired,
+        getValidator:     PropTypes.func.isRequired
+    },
+
+    state: {
+        changed:    PropTypes.bool.isRequired,
+        changedMap: PropTypes.object.isRequired,
+        submitting: PropTypes.bool.isRequired,
+
+        label:           PropTypes.bool.isRequired,
+        disabled:        PropTypes.bool.isRequired,
+        placeholder:     PropTypes.bool.isRequired,
+        showInlineError: PropTypes.bool.isRequired
+    },
+
+    onChange: PropTypes.func.isRequired,
+    randomId: PropTypes.func.isRequired
+};
+
+export const __childContextTypesBuild = type =>
+    isPlainObject(type)
+        ? PropTypes.shape(mapValues(type, __childContextTypesBuild)).isRequired
+        : type;
 
 export default class BaseForm extends Component {
     static displayName = 'Form';
@@ -44,43 +85,19 @@ export default class BaseForm extends Component {
     };
 
     static childContextTypes = {
-        uniforms: PropTypes.shape({
-            name: PropTypes.arrayOf(PropTypes.string).isRequired,
-
-            error: PropTypes.object,
-            model: PropTypes.object.isRequired,
-
-            schema: PropTypes.shape({
-                getError:         PropTypes.func.isRequired,
-                getErrorMessage:  PropTypes.func.isRequired,
-                getErrorMessages: PropTypes.func.isRequired,
-                getField:         PropTypes.func.isRequired,
-                getInitialValue:  PropTypes.func.isRequired,
-                getProps:         PropTypes.func.isRequired,
-                getSubfields:     PropTypes.func.isRequired,
-                getType:          PropTypes.func.isRequired,
-                getValidator:     PropTypes.func.isRequired
-            }).isRequired,
-
-            state: PropTypes.shape({
-                changed:    PropTypes.bool.isRequired,
-                changedMap: PropTypes.object.isRequired,
-
-                label:           PropTypes.bool.isRequired,
-                disabled:        PropTypes.bool.isRequired,
-                placeholder:     PropTypes.bool.isRequired,
-                showInlineError: PropTypes.bool.isRequired
-            }).isRequired,
-
-            onChange: PropTypes.func.isRequired,
-            randomId: PropTypes.func.isRequired
-        }).isRequired
+        uniforms: __childContextTypesBuild(__childContextTypes)
     };
 
     constructor () {
         super(...arguments);
 
-        this.state = {bridge: createSchemaBridge(this.props.schema), changed: null, changedMap: {}, resetCount: 0};
+        this.state = {
+            bridge: createSchemaBridge(this.props.schema),
+            changed: null,
+            changedMap: {},
+            resetCount: 0,
+            submitting: false
+        };
 
         this.delayId = false;
         this.randomId = randomIds(this.props.id);
@@ -128,6 +145,7 @@ export default class BaseForm extends Component {
         return {
             changed:  !!this.state.changed,
             changedMap: this.state.changedMap,
+            submitting: this.state.submitting,
 
             label:           !!this.props.label,
             disabled:        !!this.props.disabled,
@@ -225,7 +243,7 @@ export default class BaseForm extends Component {
     }
 
     __reset (state) {
-        return {changed: false, changedMap: {}, resetCount: state.resetCount + 1};
+        return {changed: false, changedMap: {}, submitting: false, resetCount: state.resetCount + 1};
     }
 
     onReset () {
@@ -238,10 +256,18 @@ export default class BaseForm extends Component {
             event.stopPropagation();
         }
 
-        return Promise.resolve(
-            this.props.onSubmit &&
-            this.props.onSubmit(this.getModel('submit'))
-        ).then(
+        const result = this.props.onSubmit && this.props.onSubmit(this.getModel('submit'));
+
+        // Set the `submitting` state only if onSubmit is async so we don't cause an unnecessary re-render
+        let submitting;
+        if (result && isFunction(result.then)) {
+            this.setState({submitting: true});
+            submitting = result.finally(() => this.setState({submitting: false}));
+        } else {
+            submitting = Promise.resolve(result);
+        }
+
+        return submitting.then(
             this.props.onSubmitSuccess,
             this.props.onSubmitFailure
         );

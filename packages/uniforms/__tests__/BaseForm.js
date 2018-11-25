@@ -30,6 +30,8 @@ describe('BaseForm', () => {
     afterEach(() => {
         onChange.mockReset();
         onSubmit.mockReset();
+        onSubmitSuccess.mockReset();
+        onSubmitFailure.mockReset();
     });
 
     describe('child context', () => {
@@ -64,6 +66,7 @@ describe('BaseForm', () => {
             expect(context.uniforms).toHaveProperty('state', expect.any(Object));
             expect(context.uniforms.state).toHaveProperty('changed', false);
             expect(context.uniforms.state).toHaveProperty('changedMap', {});
+            expect(context.uniforms.state).toHaveProperty('submitting', false);
             expect(context.uniforms.state).toHaveProperty('label', true);
             expect(context.uniforms.state).toHaveProperty('disabled', false);
             expect(context.uniforms.state).toHaveProperty('placeholder', false);
@@ -254,7 +257,7 @@ describe('BaseForm', () => {
             expect(onSubmit).toHaveBeenLastCalledWith(model);
         });
 
-        it('calls `onSubmit` with correct model (`modelTransform`)', () => {
+        it('calls `onSubmit` with the correctly `modelTransform`ed model', () => {
             wrapper.setProps({
                 modelTransform (mode, model) {
                     if (mode === 'submit') {
@@ -272,15 +275,39 @@ describe('BaseForm', () => {
             wrapper.setProps({modelTransform: undefined});
         });
 
-        it('does nothing without `onSubmit`', () => {
-            wrapper.setProps({onSubmit: undefined});
+        it('without `onSubmit` calls only `onSubmitSuccess`', async () => {
+            wrapper.setProps({onSubmit: undefined, onSubmitSuccess, onSubmitFailure});
             wrapper.find('form').simulate('submit');
 
+            await new Promise(resolve => process.nextTick(resolve));
             expect(onSubmit).not.toBeCalled();
+            expect(onSubmitSuccess).toBeCalledTimes(1);
+            expect(onSubmitFailure).not.toBeCalled();
         });
 
-        it('calls `onSubmitSuccess` when `onSubmit` resolves', async () => {
-            onSubmit.mockReturnValueOnce(Promise.resolve());
+        it('sets `submitting` state while submitting', async () => {
+            let resolveSubmit = null;
+            wrapper.setProps({onSubmit: () => new Promise(resolve => resolveSubmit = resolve)});
+
+            const context1 = wrapper.instance().getChildContext().uniforms.state;
+            expect(context1).toHaveProperty('submitting', false);
+
+            wrapper.find('form').simulate('submit');
+            await new Promise(resolve => process.nextTick(resolve));
+
+            const context2 = wrapper.instance().getChildContext().uniforms.state;
+            expect(context2).toHaveProperty('submitting', true);
+
+            resolveSubmit();
+            await new Promise(resolve => process.nextTick(resolve));
+
+            const context3 = wrapper.instance().getChildContext().uniforms.state;
+            expect(context3).toHaveProperty('submitting', false);
+        });
+
+        it('calls `onSubmitSuccess` with the returned value when `onSubmit` resolves', async () => {
+            const onSubmitValue = 'value';
+            onSubmit.mockReturnValueOnce(Promise.resolve(onSubmitValue));
 
             const wrapper = mount(
                 <BaseForm model={model} schema={schema} onSubmit={onSubmit} onSubmitSuccess={onSubmitSuccess} />
@@ -291,10 +318,12 @@ describe('BaseForm', () => {
             await new Promise(resolve => process.nextTick(resolve));
 
             expect(onSubmitSuccess).toHaveBeenCalledTimes(1);
+            expect(onSubmitSuccess).toHaveBeenLastCalledWith(onSubmitValue);
         });
 
-        it('calls `onSubmitFailure` when `onSubmit` rejects', async () => {
-            onSubmit.mockReturnValueOnce(Promise.reject());
+        it('calls `onSubmitFailure` with the thrown error when `onSubmit` rejects', async () => {
+            const onSubmitError = 'error';
+            onSubmit.mockReturnValueOnce(Promise.reject(onSubmitError));
 
             const wrapper = mount(
                 <BaseForm model={model} schema={schema} onSubmit={onSubmit} onSubmitFailure={onSubmitFailure} />
@@ -305,6 +334,7 @@ describe('BaseForm', () => {
             await new Promise(resolve => process.nextTick(resolve));
 
             expect(onSubmitFailure).toHaveBeenCalledTimes(1);
+            expect(onSubmitFailure).toHaveBeenLastCalledWith(onSubmitError);
         });
     });
 });

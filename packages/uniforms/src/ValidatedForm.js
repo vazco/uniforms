@@ -1,9 +1,17 @@
 import PropTypes from 'prop-types';
 import cloneDeep from 'lodash/cloneDeep';
+import merge     from 'lodash/merge';
 import isEqual   from 'lodash/isEqual';
 import set       from 'lodash/set';
 
-import BaseForm from './BaseForm';
+import BaseForm                   from './BaseForm';
+import {__childContextTypesBuild} from './BaseForm';
+import {__childContextTypes}      from './BaseForm';
+
+const childContextTypes = __childContextTypesBuild(merge(
+    {state: {validating: PropTypes.bool.isRequired}},
+    __childContextTypes
+));
 
 const Validated = parent => class extends parent {
     static Validated = Validated;
@@ -33,6 +41,11 @@ const Validated = parent => class extends parent {
         ]).isRequired
     };
 
+    static childContextTypes = {
+        ...parent.childContextTypes || {},
+        uniforms: childContextTypes
+    };
+
     constructor () {
         super(...arguments);
 
@@ -41,6 +54,7 @@ const Validated = parent => class extends parent {
 
             error: null,
             validate: false,
+            validating: false,
             validator: this
                 .getChildContextSchema()
                 .getValidator(this.props.validator)
@@ -52,6 +66,14 @@ const Validated = parent => class extends parent {
 
     getChildContextError () {
         return super.getChildContextError() || this.state.error;
+    }
+
+    getChildContextState () {
+        return {
+            ...super.getChildContextState(),
+
+            validating: this.state.validating
+        };
     }
 
     getNativeFormProps () {
@@ -99,7 +121,7 @@ const Validated = parent => class extends parent {
     }
 
     __reset (state) {
-        return {...super.__reset(state), error: null, validate: false};
+        return {...super.__reset(state), error: null, validate: false, validating: false};
     }
 
     onSubmit (event) {
@@ -109,7 +131,7 @@ const Validated = parent => class extends parent {
         }
 
         const promise = new Promise((resolve, reject) => {
-            this.setState(() => ({validate: true}), () => {
+            this.setState(() => ({submitting: true, validate: true}), () => {
                 this.onValidate().then(
                     () => {
                         super.onSubmit().then(
@@ -125,8 +147,14 @@ const Validated = parent => class extends parent {
             });
         });
 
-        // NOTE: It's okay for this Promise to reject.
-        promise.catch(() => {});
+        promise
+            .catch(() => {
+                // `onSubmit` should never reject, so we ignore this rejection.
+            })
+            .then(() => {
+                // If validation fails, or `super.onSubmit` doesn't touch `submitting`, we need to reset it.
+                this.setState(state => state.submitting ? {submitting: false} : null);
+            });
 
         return promise;
     }
@@ -150,10 +178,11 @@ const Validated = parent => class extends parent {
             catched = error;
         }
 
+        this.setState({validating: true});
         return new Promise((resolve, reject) => {
             this.props.onValidate(model, catched, (error = catched) => {
                 // Do not copy error from props to state.
-                this.setState(() => ({error: error === this.props.error ? null : error}), () => {
+                this.setState(() => ({error: error === this.props.error ? null : error, validating: false}), () => {
                     if (error) {
                         reject(error);
                     } else {
