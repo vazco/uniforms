@@ -4,203 +4,194 @@ import merge     from 'lodash/merge';
 import isEqual   from 'lodash/isEqual';
 import set       from 'lodash/set';
 
-import BaseForm from './BaseForm';
+import BaseForm                   from './BaseForm';
+import {__childContextTypesBuild} from './BaseForm';
+import {__childContextTypes}      from './BaseForm';
 
-const Validated = parent => {
+const childContextTypes = __childContextTypesBuild(merge(
+    {state: {validating: PropTypes.bool.isRequired}},
+    __childContextTypes
+));
 
-    const plainChildContextTypes = merge(
-        {
-            uniforms: {
-                state: {
-                    validating: PropTypes.bool
-                }
-            }
+const Validated = parent => class extends parent {
+    static Validated = Validated;
+
+    static displayName = `Validated${parent.displayName}`;
+
+    static defaultProps = {
+        ...parent.defaultProps,
+
+        onValidate (model, error, callback) {
+            callback();
         },
-        parent.plainChildContextTypes
-    );
 
-    return class extends parent {
-        static Validated = Validated;
+        validate: 'onChangeAfterSubmit'
+    };
 
-        static displayName = `Validated${parent.displayName}`;
+    static propTypes = {
+        ...parent.propTypes,
 
-        static defaultProps = {
-            ...parent.defaultProps,
+        onValidate: PropTypes.func.isRequired,
 
-            onValidate (model, error, callback) {
-                callback();
-            },
+        validator: PropTypes.any,
+        validate:  PropTypes.oneOf([
+            'onChange',
+            'onChangeAfterSubmit',
+            'onSubmit'
+        ]).isRequired
+    };
 
-            validate: 'onChangeAfterSubmit'
+    static childContextTypes = {
+        ...parent.childContextTypes || {},
+        uniforms: childContextTypes
+    };
+
+    constructor () {
+        super(...arguments);
+
+        this.state = {
+            ...this.state,
+
+            error: null,
+            validate: false,
+            validating: false,
+            validator: this
+                .getChildContextSchema()
+                .getValidator(this.props.validator)
         };
 
-        static propTypes = {
-            ...parent.propTypes,
+        this.onValidate      = this.validate      = this.onValidate.bind(this);
+        this.onValidateModel = this.validateModel = this.onValidateModel.bind(this);
+    }
 
-            onValidate: PropTypes.func.isRequired,
+    getChildContextError () {
+        return super.getChildContextError() || this.state.error;
+    }
 
-            validator: PropTypes.any,
-            validate:  PropTypes.oneOf([
-                'onChange',
-                'onChangeAfterSubmit',
-                'onSubmit'
-            ]).isRequired
+    getChildContextState () {
+        return {
+            ...super.getChildContextState(),
+
+            validating: this.state.validating
         };
+    }
 
+    getNativeFormProps () {
+        const {
+            onValidate, // eslint-disable-line no-unused-vars
+            validator,  // eslint-disable-line no-unused-vars
+            validate,   // eslint-disable-line no-unused-vars
 
-        static plainChildContextTypes = plainChildContextTypes;
-        static childContextTypes = parent.shapifyPropTypes(plainChildContextTypes);
+            ...props
+        } = super.getNativeFormProps();
 
-        constructor () {
-            super(...arguments);
+        return props;
+    }
 
-            this.state = {
-                ...this.state,
+    componentWillReceiveProps ({model, schema, validate, validator}) {
+        super.componentWillReceiveProps(...arguments);
 
-                error: null,
-                validate: false,
-                validating: false,
-                validator: this
-                    .getChildContextSchema()
-                    .getValidator(this.props.validator)
-            };
+        if (this.props.schema !== schema || this.props.validator !== validator) {
+            this.setState(({bridge}) => ({
+                validator: bridge.getValidator(validator)
+            }), () => {
+                if (validate === 'onChange' || validate === 'onChangeAfterSubmit' && this.state.validate) {
+                    this.onValidate().catch(() => {});
+                }
+            });
+        } else if (!isEqual(this.props.model, model)) {
+            if (validate === 'onChange' || validate === 'onChangeAfterSubmit' && this.state.validate) {
+                this.onValidateModel(model).catch(() => {});
+            }
+        }
+    }
 
-            this.onValidate      = this.validate      = this.onValidate.bind(this);
-            this.onValidateModel = this.validateModel = this.onValidateModel.bind(this);
+    onChange (key, value) {
+        // eslint-disable-next-line max-len
+        if (this.props.validate === 'onChange' || this.props.validate === 'onChangeAfterSubmit' && this.state.validate) {
+            this.onValidate(key, value).catch(() => {});
         }
 
-        getChildContextError () {
-            return super.getChildContextError() || this.state.error;
+        // FIXME: https://github.com/vazco/uniforms/issues/293
+        // if (this.props.validate === 'onSubmit' && this.state.validate) {
+        //     this.setState(() => ({error: null}));
+        // }
+
+        super.onChange(...arguments);
+    }
+
+    __reset (state) {
+        return {...super.__reset(state), error: null, validate: false, validating: false};
+    }
+
+    onSubmit (event) {
+        if (event) {
+            event.preventDefault();
+            event.stopPropagation();
         }
 
-        getChildContextState () {
-            return {
-                ...super.getChildContextState(),
+        const promise = new Promise((resolve, reject) => {
+            this.setState(() => ({submitting: true, validate: true}), () => {
+                this.onValidate().then(
+                    () => {
+                        super.onSubmit().then(
+                            resolve,
+                            error => {
+                                this.setState({error});
+                                reject(error);
+                            }
+                        );
+                    },
+                    reject
+                );
+            });
+        });
 
-                validating: this.state.validating
-            };
+        promise
+            .catch(() => {
+                // `onSubmit` should never reject, so we ignore this rejection.
+            })
+            .then(() => {
+                // If validation fails, or `super.onSubmit` doesn't touch `submitting`, we need to reset it.
+                this.setState(state => state.submitting ? {submitting: false} : null);
+            });
+
+        return promise;
+    }
+
+    onValidate (key, value) {
+        let model = this.getChildContextModel();
+        if (model && key) {
+            model = set(cloneDeep(model), key, cloneDeep(value));
         }
 
-        getNativeFormProps () {
-            const {
-                onValidate, // eslint-disable-line no-unused-vars
-                validator,  // eslint-disable-line no-unused-vars
-                validate,   // eslint-disable-line no-unused-vars
+        return this.onValidateModel(model);
+    }
 
-                ...props
-            } = super.getNativeFormProps();
+    onValidateModel (model) {
+        model = this.getModel('validate', model);
 
-            return props;
+        let catched = this.props.error || null;
+        try {
+            this.state.validator(model);
+        } catch (error) {
+            catched = error;
         }
 
-        componentWillReceiveProps ({model, schema, validate, validator}) {
-            super.componentWillReceiveProps(...arguments);
-
-            if (this.props.schema !== schema || this.props.validator !== validator) {
-                this.setState(({bridge}) => ({
-                    validator: bridge.getValidator(validator)
-                }), () => {
-                    if (validate === 'onChange' || validate === 'onChangeAfterSubmit' && this.state.validate) {
-                        this.onValidate();
+        this.setState({validating: true});
+        return new Promise((resolve, reject) => {
+            this.props.onValidate(model, catched, (error = catched) => {
+                // Do not copy error from props to state.
+                this.setState(() => ({error: error === this.props.error ? null : error, validating: false}), () => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve();
                     }
                 });
-            } else if (!isEqual(this.props.model, model)) {
-                if (validate === 'onChange' || validate === 'onChangeAfterSubmit' && this.state.validate) {
-                    this.onValidateModel(model);
-                }
-            }
-        }
-
-        onChange (key, value) {
-            // eslint-disable-next-line max-len
-            if (this.props.validate === 'onChange' || this.props.validate === 'onChangeAfterSubmit' && this.state.validate) {
-                this.onValidate(key, value).catch(() => {});
-            }
-
-            // FIXME: https://github.com/vazco/uniforms/issues/293
-            // if (this.props.validate === 'onSubmit' && this.state.validate) {
-            //     this.setState(() => ({error: null}));
-            // }
-
-            super.onChange(...arguments);
-        }
-
-        __reset (state) {
-            return {...super.__reset(state), error: null, validate: false, validating: false};
-        }
-
-        onSubmit (event) {
-            if (event) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-
-            const promise = new Promise((resolve, reject) => {
-                this.setState(() => ({validate: true, submitting: true}), () => {
-                    this.onValidate().then(
-                        () => {
-                            super.onSubmit().then(
-                                resolve,
-                                error => {
-                                    this.setState({error});
-                                    reject(error);
-                                }
-                            );
-                        },
-                        reject
-                    );
-                });
             });
-
-            promise
-                .catch(() => {
-                    // `onSubmit` should never reject, so we ignore this rejection.
-                })
-                .then(() => {
-                    // If validation fails, or `super.onSubmit` doesn't touch `submitting`, we need to reset it.
-                    this.setState(state => state.submitting ? {submitting: false} : null);
-                });
-
-            return promise;
-        }
-
-        onValidate (key, value) {
-            let model = this.getChildContextModel();
-            if (model && key) {
-                model = set(cloneDeep(model), key, cloneDeep(value));
-            }
-
-            return this.onValidateModel(model);
-        }
-
-        onValidateModel (model) {
-            model = this.getModel('validate', model);
-
-            let catched = this.props.error || null;
-            try {
-                this.state.validator(model);
-            } catch (error) {
-                catched = error;
-            }
-
-            this.setState({validating: true});
-            return new Promise((resolve, reject) => {
-                this.props.onValidate(model, catched, (error = catched) => {
-                    // Do not copy error from props to state.
-                    this.setState(() => ({
-                        error: error === this.props.error ? null : error,
-                        validating: false
-                    }), () => {
-                        if (error) {
-                            reject(error);
-                        } else {
-                            resolve();
-                        }
-                    });
-                });
-            });
-        }
-    };
+        });
+    }
 };
 
 export default Validated(BaseForm);

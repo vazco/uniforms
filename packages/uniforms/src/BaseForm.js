@@ -12,9 +12,43 @@ import changedKeys        from './changedKeys';
 import createSchemaBridge from './createSchemaBridge';
 import randomIds          from './randomIds';
 
-function shapify (typeOrObject) {
-    return isPlainObject(typeOrObject) ? PropTypes.shape(mapValues(typeOrObject, shapify)).isRequired : typeOrObject;
-}
+export const __childContextTypes = {
+    name: PropTypes.arrayOf(PropTypes.string).isRequired,
+
+    error: PropTypes.object,
+    model: PropTypes.object.isRequired,
+
+    schema: {
+        getError:         PropTypes.func.isRequired,
+        getErrorMessage:  PropTypes.func.isRequired,
+        getErrorMessages: PropTypes.func.isRequired,
+        getField:         PropTypes.func.isRequired,
+        getInitialValue:  PropTypes.func.isRequired,
+        getProps:         PropTypes.func.isRequired,
+        getSubfields:     PropTypes.func.isRequired,
+        getType:          PropTypes.func.isRequired,
+        getValidator:     PropTypes.func.isRequired
+    },
+
+    state: {
+        changed:    PropTypes.bool.isRequired,
+        changedMap: PropTypes.object.isRequired,
+        submitting: PropTypes.bool.isRequired,
+
+        label:           PropTypes.bool.isRequired,
+        disabled:        PropTypes.bool.isRequired,
+        placeholder:     PropTypes.bool.isRequired,
+        showInlineError: PropTypes.bool.isRequired
+    },
+
+    onChange: PropTypes.func.isRequired,
+    randomId: PropTypes.func.isRequired
+};
+
+export const __childContextTypesBuild = type =>
+    isPlainObject(type)
+        ? PropTypes.shape(mapValues(type, __childContextTypesBuild)).isRequired
+        : type;
 
 export default class BaseForm extends Component {
     static displayName = 'Form';
@@ -50,46 +84,9 @@ export default class BaseForm extends Component {
         autosaveDelay: PropTypes.number
     };
 
-    static shapifyPropTypes (propTypes) {
-        return mapValues(propTypes, shapify);
-    }
-
-    static plainChildContextTypes = {
-        uniforms: {
-            name: PropTypes.arrayOf(PropTypes.string).isRequired,
-
-            error: PropTypes.object,
-            model: PropTypes.object.isRequired,
-
-            schema: {
-                getError:         PropTypes.func.isRequired,
-                getErrorMessage:  PropTypes.func.isRequired,
-                getErrorMessages: PropTypes.func.isRequired,
-                getField:         PropTypes.func.isRequired,
-                getInitialValue:  PropTypes.func.isRequired,
-                getProps:         PropTypes.func.isRequired,
-                getSubfields:     PropTypes.func.isRequired,
-                getType:          PropTypes.func.isRequired,
-                getValidator:     PropTypes.func.isRequired
-            },
-
-            state: {
-                changed:    PropTypes.bool.isRequired,
-                changedMap: PropTypes.object.isRequired,
-                submitting: PropTypes.bool.isRequired,
-
-                label:           PropTypes.bool.isRequired,
-                disabled:        PropTypes.bool.isRequired,
-                placeholder:     PropTypes.bool.isRequired,
-                showInlineError: PropTypes.bool.isRequired
-            },
-
-            onChange: PropTypes.func.isRequired,
-            randomId: PropTypes.func.isRequired
-        }
+    static childContextTypes = {
+        uniforms: __childContextTypesBuild(__childContextTypes)
     };
-
-    static childContextTypes = BaseForm.shapifyPropTypes(BaseForm.plainChildContextTypes);
 
     constructor () {
         super(...arguments);
@@ -98,8 +95,8 @@ export default class BaseForm extends Component {
             bridge: createSchemaBridge(this.props.schema),
             changed: null,
             changedMap: {},
-            submitting: false,
-            resetCount: 0
+            resetCount: 0,
+            submitting: false
         };
 
         this.delayId = false;
@@ -146,9 +143,9 @@ export default class BaseForm extends Component {
 
     getChildContextState () {
         return {
-            changed:    !!this.state.changed,
-            changedMap:   this.state.changedMap,
-            submitting: !!this.state.submitting,
+            changed:  !!this.state.changed,
+            changedMap: this.state.changedMap,
+            submitting: this.state.submitting,
 
             label:           !!this.props.label,
             disabled:        !!this.props.disabled,
