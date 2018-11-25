@@ -1,4 +1,4 @@
-## Next
+## [v1.28.0](https://github.com/vazco/uniforms/tree/v1.28.0) (2018-11-25)
 - **Added:** Field `label` now defaults to `title` in `JSONSchemaBridge`. [\#488](https://github.com/vazco/uniforms/issues/488)
 - **Added:** Proper styling for `SelectField` in `uniforms-semantic`. [\#482](https://github.com/vazco/uniforms/issues/482)
 - **Added:** New `labelProps` props in `DateField` and `SelectField` in `uniforms-material`. [\#485](https://github.com/vazco/uniforms/issues/485)
