@@ -73,11 +73,13 @@ test('<SelectField> - renders a Select with correct options (transform)', () => 
 });
 
 test('<SelectField> - renders a Select with correct placeholder (implicit)', () => {
-    const element = <SelectField name="x" placeholder="y" />;
+    const element = <SelectField name="x" placeholder="y" native />;
     const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
 
-    expect(wrapper.find(Select)).toHaveLength(1);
-    expect(wrapper.find(Select).prop('placeholder')).toBe('y');
+    expect(wrapper.find(Select).prop('value')).toBe('');
+    expect(wrapper.find(Select).find('option')).toHaveLength(3);
+    expect(wrapper.find(Select).find('option').at(0).text()).toBe('y');
+    expect(wrapper.find(Select).find('option').at(1).text()).toBe('a');
 });
 
 test('<SelectField> - renders a Select with correct value (default)', () => {
