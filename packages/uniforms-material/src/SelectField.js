@@ -58,12 +58,12 @@ const renderSelect = ({
         >
             {label && <InputLabel htmlFor={name} shrink={!!placeholder || !!value} {...labelProps}>{label}</InputLabel>}
             <SelectMaterial
+                displayEmpty={!!placeholder}
                 inputProps={{name, id, ...inputProps}}
                 multiple={fieldType === Array || undefined}
                 native={native}
                 onChange={event => disabled || onChange(event.target.value)}
                 value={native && !value ? '' : value}
-                displayEmpty={!!placeholder}
                 {...filterDOMProps(props)}
             >
                 {!!placeholder && (<Item value="" disabled={!!required}>{placeholder}</Item>)}
