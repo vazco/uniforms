@@ -66,7 +66,7 @@ const renderSelect = ({
                 displayEmpty={!!placeholder}
                 {...filterDOMProps(props)}
             >
-                {!!placeholder && (<Item value={''} disabled={!!required}>{placeholder}</Item>)}
+                {!!placeholder && (<Item value="" disabled={!!required}>{placeholder}</Item>)}
                 {allowedValues.map(value =>
                     <Item key={value} value={value}>{transform ? transform(value) : value}</Item>
                 )}
