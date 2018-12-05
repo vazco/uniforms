@@ -1,5 +1,5 @@
 {
-  "name": "uniforms",
+  "name": "uniforms-repository",
   "private": true,
   "scripts": {
     "build": "lerna exec --ignore demo -- babel --config-file ../../.babelrc --out-dir . src",
