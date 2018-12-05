@@ -100,6 +100,7 @@ export default class BaseForm extends Component {
         };
 
         this.delayId = false;
+        this.mounted = false;
         this.randomId = randomIds(this.props.id);
 
         this.onReset  = this.reset  = this.onReset.bind(this);
@@ -167,7 +168,12 @@ export default class BaseForm extends Component {
     }
 
     componentWillMount () {
+        this.mounted = true;
         this.setState(() => ({}), () => this.setState(() => ({changed: false, changedMap: {}})));
+    }
+
+    componentWillUnmount () {
+        this.mounted = false;
     }
 
     componentWillReceiveProps ({schema}) {

@@ -152,8 +152,10 @@ const Validated = parent => class extends parent {
                 // `onSubmit` should never reject, so we ignore this rejection.
             })
             .then(() => {
-                // If validation fails, or `super.onSubmit` doesn't touch `submitting`, we need to reset it.
-                this.setState(state => state.submitting ? {submitting: false} : null);
+                // It can be already unmounted.
+                if (this.mounted)
+                    // If validation fails, or `super.onSubmit` doesn't touch `submitting`, we need to reset it.
+                    this.setState(state => state.submitting ? {submitting: false} : null);
             });
 
         return promise;

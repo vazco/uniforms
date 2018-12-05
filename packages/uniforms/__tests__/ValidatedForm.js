@@ -179,6 +179,12 @@ describe('ValidatedForm', () => {
             await new Promise(resolve => process.nextTick(resolve));
             expect(wrapper.instance().getChildContext()).toHaveProperty('uniforms.state.submitting', false);
         });
+
+        it('works if unmounts on submit', async () => {
+            onSubmit.mockImplementationOnce(() => wrapper.unmount());
+            wrapper.find('form').simulate('submit');
+            await new Promise(resolve => process.nextTick(resolve));
+        });
     });
 
     describe('on change', () => {
