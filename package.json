@@ -1,4 +1,5 @@
 {
+  "name": "uniforms",
   "private": true,
   "scripts": {
     "build": "lerna exec --ignore demo -- babel --config-file ../../.babelrc --out-dir . src",
@@ -47,7 +48,7 @@
     "graphql": "14.0.2",
     "invariant": "2.2.4",
     "jest": "23.6.0",
-    "lerna": "3.4.3",
+    "lerna": "3.5.1",
     "prettier": "1.15.2",
     "react": "16.6.3",
     "react-dom": "16.6.3",
