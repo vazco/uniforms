@@ -49,4 +49,4 @@ List.defaultProps = {
     dense: true
 };
 
-export default connectField(List, {includeInChain: false});
+export default connectField(List, {ensureValue: false, includeInChain: false});

@@ -82,4 +82,4 @@ List.defaultProps = {
     }
 };
 
-export default connectField(List, {ensureValue: true, includeInChain: false});
+export default connectField(List, {ensureValue: false, includeInChain: false});
