@@ -56,8 +56,8 @@
     * **And any other - only [a small wrapper](https://github.com/vazco/uniforms/blob/master/INTRODUCTION.md#schemas) is needed!**
 * **Wide range of themes:**
     * **[AntD](https://ant.design/) theme**
-    * **[Bootstrap3](http://getbootstrap.com/) theme**
-    * **[Bootstrap4](http://v4-alpha.getbootstrap.com/) theme**
+    * **[Bootstrap3](http://getbootstrap.com/docs/3.3/) theme**
+    * **[Bootstrap4](http://getbootstrap.com/) theme**
     * **[Material-UI](https://material-ui.com/) theme**
     * **[Semantic UI](http://semantic-ui.com/) theme**
     * **plain HTML theme**
