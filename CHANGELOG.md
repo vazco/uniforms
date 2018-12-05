@@ -1,4 +1,4 @@
-## Next
+## [v1.29.0](https://github.com/vazco/uniforms/tree/v1.29.0) (2018-12-05)
 - **Added:** Support for `placeholder` in `SelectField` in `uniforms-material`. [\#489](https://github.com/vazco/uniforms/issues/489)
 - **Fixed:** Handling of default values in `ListField`.
 - **Fixed:** Warning caused by `setState` on an unmounted component. [\#490](https://github.com/vazco/uniforms/issues/490)
