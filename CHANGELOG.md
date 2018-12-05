@@ -1,3 +1,9 @@
+## Next
+- **Added:** Support for `placeholder` in `SelectField` in `uniforms-material`. [\#489](https://github.com/vazco/uniforms/issues/489)
+- **Fixed:** Handling of default values in `ListField`.
+- **Fixed:** Warning caused by `setState` on an unmounted component. [\#490](https://github.com/vazco/uniforms/issues/490)
+- **Fixed:** Versioning scheme - no more `file:../uniforms`.
+
 ## [v1.28.0](https://github.com/vazco/uniforms/tree/v1.28.0) (2018-11-25)
 - **Added:** Field `label` now defaults to `title` in `JSONSchemaBridge`. [\#488](https://github.com/vazco/uniforms/issues/488)
 - **Added:** Proper styling for `SelectField` in `uniforms-semantic`. [\#482](https://github.com/vazco/uniforms/issues/482)
