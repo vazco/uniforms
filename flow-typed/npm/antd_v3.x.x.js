@@ -1,5 +1,5 @@
-// flow-typed signature: a15307fb68f4c2723cc6a12537712e82
-// flow-typed version: 3a81b21fde/antd_v3.x.x/flow_>=v0.25.x
+// flow-typed signature: 680cf538b1052b56461a1396b25b8136
+// flow-typed version: f0bd032e5b/antd_v3.x.x/flow_>=v0.25.x
 
 declare module "antd" {
   import type { Node, Component } from "react";
@@ -34,7 +34,11 @@ declare module "antd" {
 
   declare export class Card extends React$Component<{}> {}
 
-  declare export class Checkbox extends React$Component<{}> {}
+  declare export class Checkbox extends React$Component<{}> {
+    static Group: typeof CheckboxGroup;
+  }
+
+  declare class CheckboxGroup extends React$Component<{}> {}
 
   declare export class Divider extends React$Component<{}> {}
 
@@ -268,7 +272,9 @@ declare module "antd" {
 
   declare export type ListItemProps = {};
 
-  declare export class ListItem extends React$Component<ListItemProps> {}
+  declare export class ListItem extends React$Component<ListItemProps> {
+    static Meta: typeof Meta;
+  }
 
   declare export class List extends React$Component<{}> {
     static Item: typeof ListItem;
@@ -315,6 +321,30 @@ declare module "antd" {
     static warning: typeof modalFn;
     static confirm: typeof modalFn;
   }
+
+  declare export type PaginationProps = {
+    current?: number,
+    defaultCurrent?: number,
+    defaultPageSize?: number,
+    hideOnSinglePage?: boolean,
+    itemRender?: (
+      page: number, 
+      type: "page" | "prev" | "next", 
+      originalElement: React$Node
+    ) => React$Node,
+    pageSize?: number,
+    pageSizeOptions?: string[],
+    showQuickJumper?: boolean,
+    showSizeChanger?: boolean,
+    showTotal?: (total: number, range: number[]) => React$Node,
+    simple?: boolean,
+    size?: string,
+    total?: number,
+    onChange?: (page: number, pageSize: number) => void,
+    onShowSizeChange?: (current: number, size: number) => void
+  };
+
+  declare export class Pagination extends React$Component<PaginationProps> {}
 
   declare export class Popconfirm extends React$Component<{}> {}
 

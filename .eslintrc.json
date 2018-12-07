@@ -3,5 +3,8 @@
     "jest": true
   },
   "extends": "vazco",
-  "root": true
+  "root": true,
+  "rules": {
+    "indent": [2, 4, {"SwitchCase": 1}]
+  }
 }
