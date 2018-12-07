@@ -1,6 +1,7 @@
 import PanelGroup from 'react-panelgroup';
 import React from 'react';
 import ValidatedForm from 'uniforms/ValidatedForm';
+import omit from 'lodash/omit';
 
 export class ApplicationForm extends ValidatedForm {
   getChildContextState() {
@@ -11,10 +12,7 @@ export class ApplicationForm extends ValidatedForm {
   }
 
   render() {
-    const {
-      onSubmit, // eslint-disable-line no-unused-vars
-      ...props
-    } = this.getNativeFormProps();
+    const props = omit(this.getNativeFormProps(), ['onSubmit']);
 
     return <PanelGroup {...props} />;
   }

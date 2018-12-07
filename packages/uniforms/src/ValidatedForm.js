@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import cloneDeep from 'lodash/cloneDeep';
-import merge from 'lodash/merge';
 import isEqual from 'lodash/isEqual';
+import merge from 'lodash/merge';
+import omit from 'lodash/omit';
 import set from 'lodash/set';
 
 import BaseForm from './BaseForm';
@@ -71,15 +72,7 @@ const Validated = parent =>
     }
 
     getNativeFormProps() {
-      const {
-        onValidate, // eslint-disable-line no-unused-vars
-        validator, // eslint-disable-line no-unused-vars
-        validate, // eslint-disable-line no-unused-vars
-
-        ...props
-      } = super.getNativeFormProps();
-
-      return props;
+      return omit(super.getNativeFormProps(), ['onValidate', 'validate', 'validator']);
     }
 
     componentWillReceiveProps({model, schema, validate, validator}) {

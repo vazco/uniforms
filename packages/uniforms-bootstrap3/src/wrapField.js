@@ -1,13 +1,13 @@
 import React from 'react';
 import classnames from 'classnames';
 import filterDOMProps from 'uniforms/filterDOMProps';
+import omit from 'lodash/omit';
 
 import gridClassName from './gridClassName';
 
 // eslint-disable-next-line complexity
 export default function wrapField(
   {
-    checkboxes, // eslint-disable-line no-unused-vars
     className,
     disabled,
     error,
@@ -17,25 +17,17 @@ export default function wrapField(
     help, // Help text.
     helpClassName, // Help text class name.
     id,
-    inline, // eslint-disable-line no-unused-vars
-    inputClassName, // eslint-disable-line no-unused-vars
-    inputRef, // eslint-disable-line no-unused-vars
     label,
     required,
-    rows, // eslint-disable-line no-unused-vars
     showInlineError, // Show inline error message?
-    transform, // eslint-disable-line no-unused-vars
     wrapClassName, // Input wrapper class name.
     ...props
   },
   children
 ) {
   const hasWrap = !!(grid || wrapClassName);
-
   const blockError = !!(error && showInlineError) && <span className="help-block">{errorMessage}</span>;
-
   const blockFeedback = !!(error && feedbackable) && <i className="glyphicon glyphicon-remove form-control-feedback" />;
-
   const blockHelp = !!help && <span className={classnames('help-block', helpClassName)}>{help}</span>;
 
   return (
@@ -46,7 +38,7 @@ export default function wrapField(
         disabled,
         required
       })}
-      {...filterDOMProps(props)}
+      {...filterDOMProps(omit(props, ['checkboxes', 'inline', 'inputClassName', 'inputRef', 'rows', 'transform']))}
     >
       {label && (
         <label htmlFor={id} className={classnames('control-label', gridClassName(grid, 'label'))}>

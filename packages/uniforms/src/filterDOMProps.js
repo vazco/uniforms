@@ -1,4 +1,5 @@
 // @flow
+import omit from 'lodash/omit';
 
 const unwantedProps = [
   // These props are provided by BaseField
@@ -30,18 +31,8 @@ const unwantedProps = [
   'component'
 ];
 
-// Some benchmarks
-// https://albertxing.com/stool/#bb5cbc0441ad7ac47602694f6c7183b4
 export default function filterDOMProps(props: {}) {
-  const filteredProps = {};
-
-  for (const prop in props) {
-    if (unwantedProps.indexOf(prop) === -1) {
-      filteredProps[prop] = props[prop];
-    }
-  }
-
-  return filteredProps;
+  return omit(props, unwantedProps);
 }
 
 // Bridges have to register additional props

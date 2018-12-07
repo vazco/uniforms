@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import cloneDeep from 'lodash/cloneDeep';
 import isEqual from 'lodash/isEqual';
+import omit from 'lodash/omit';
 import set from 'lodash/set';
 
 import ValidatedQuickForm from './ValidatedQuickForm';
@@ -37,13 +38,7 @@ const Auto = parent =>
     }
 
     getNativeFormProps() {
-      const {
-        onChangeModel, // eslint-disable-line no-unused-vars
-
-        ...props
-      } = super.getNativeFormProps();
-
-      return props;
+      return omit(super.getNativeFormProps(), ['onChangeModel']);
     }
 
     getModel(mode) {

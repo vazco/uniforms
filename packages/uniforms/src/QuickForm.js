@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import omit from 'lodash/omit';
 
 import BaseForm from './BaseForm';
 import nothing from './nothing';
@@ -19,15 +20,7 @@ const Quick = parent =>
     };
 
     getNativeFormProps() {
-      const {
-        autoField, // eslint-disable-line no-unused-vars
-        errorsField, // eslint-disable-line no-unused-vars
-        submitField, // eslint-disable-line no-unused-vars
-
-        ...props
-      } = super.getNativeFormProps();
-
-      return props;
+      return omit(super.getNativeFormProps(), ['autoField', 'errorsField', 'submitField']);
     }
 
     render() {

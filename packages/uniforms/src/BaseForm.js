@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cloneDeep from 'lodash/cloneDeep';
-import mapValues from 'lodash/mapValues';
 import get from 'lodash/get';
-import set from 'lodash/set';
 import isFunction from 'lodash/isFunction';
 import isPlainObject from 'lodash/isPlainObject';
+import mapValues from 'lodash/mapValues';
+import omit from 'lodash/omit';
+import set from 'lodash/set';
 import {Component} from 'react';
 
 import changedKeys from './changedKeys';
@@ -186,30 +187,26 @@ export default class BaseForm extends Component {
   }
 
   getNativeFormProps() {
-    const {
-      autosave, // eslint-disable-line no-unused-vars
-      autosaveDelay, // eslint-disable-line no-unused-vars
-      disabled, // eslint-disable-line no-unused-vars
-      error, // eslint-disable-line no-unused-vars
-      label, // eslint-disable-line no-unused-vars
-      model, // eslint-disable-line no-unused-vars
-      modelTransform, // eslint-disable-line no-unused-vars
-      onChange, // eslint-disable-line no-unused-vars
-      onSubmit, // eslint-disable-line no-unused-vars
-      onSubmitFailure, // eslint-disable-line no-unused-vars
-      onSubmitSuccess, // eslint-disable-line no-unused-vars
-      placeholder, // eslint-disable-line no-unused-vars
-      schema, // eslint-disable-line no-unused-vars
-      showInlineError, // eslint-disable-line no-unused-vars
-
-      ...props
-    } = this.props;
+    const props = omit(this.props, [
+      'autosave',
+      'autosaveDelay',
+      'disabled',
+      'error',
+      'label',
+      'model',
+      'modelTransform',
+      'onChange',
+      'onSubmit',
+      'onSubmitFailure',
+      'onSubmitSuccess',
+      'placeholder',
+      'schema',
+      'showInlineError'
+    ]);
 
     return {
       ...props,
-
       onSubmit: this.onSubmit,
-
       key: `reset-${this.state.resetCount}`
     };
   }
