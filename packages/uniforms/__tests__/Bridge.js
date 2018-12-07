@@ -1,34 +1,34 @@
 import Bridge from 'uniforms/Bridge';
 
 describe('Bridge', () => {
-    class CustomBridge extends Bridge {}
-    const customBridgeInstance = new CustomBridge();
+  class CustomBridge extends Bridge {}
+  const customBridgeInstance = new CustomBridge();
 
-    it('cannot be instantiated', () => {
-        expect(() => new Bridge()).toThrow();
-    });
+  it('cannot be instantiated', () => {
+    expect(() => new Bridge()).toThrow();
+  });
 
-    describe('#check', () => {
-        it('throws an unimplemented error', () => {
-            expect(Bridge.check).toThrow();
-        });
+  describe('#check', () => {
+    it('throws an unimplemented error', () => {
+      expect(Bridge.check).toThrow();
     });
+  });
 
-    [
-        'getError',
-        'getErrorMessage',
-        'getErrorMessages',
-        'getField',
-        'getInitialValue',
-        'getProps',
-        'getSubfields',
-        'getType',
-        'getValidator'
-    ].forEach(method => {
-        describe(`#${method}`, () => {
-            it('throws an unimplemented error', () => {
-                expect(() => customBridgeInstance[method]()).toThrow();
-            });
-        });
+  [
+    'getError',
+    'getErrorMessage',
+    'getErrorMessages',
+    'getField',
+    'getInitialValue',
+    'getProps',
+    'getSubfields',
+    'getType',
+    'getValidator'
+  ].forEach(method => {
+    describe(`#${method}`, () => {
+      it('throws an unimplemented error', () => {
+        expect(() => customBridgeInstance[method]()).toThrow();
+      });
     });
+  });
 });

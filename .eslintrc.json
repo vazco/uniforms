@@ -2,9 +2,6 @@
   "env": {
     "jest": true
   },
-  "extends": "vazco",
-  "root": true,
-  "rules": {
-    "indent": [2, 4, {"SwitchCase": 1}]
-  }
+  "extends": "vazco/prettier",
+  "root": true
 }

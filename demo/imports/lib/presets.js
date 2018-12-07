@@ -1,6 +1,6 @@
 const preset = strings => strings[0].slice(9, -5).replace(/([\r\n]+) {8}/g, '$1');
 const presets = {
-    'Welcome!': preset`
+  'Welcome!': preset`
         new SimpleSchema({
             date: {
                 type: Date,
@@ -43,7 +43,7 @@ const presets = {
         })
     `,
 
-    'Address (GraphQL)': preset`
+  'Address (GraphQL)': preset`
         new GraphQLBridge(buildASTSchema(parse(\`
             type Address {
                 city:   String
@@ -92,7 +92,7 @@ const presets = {
         })
     `,
 
-    'Address (JSONSchema)': preset`
+  'Address (JSONSchema)': preset`
         (() => {
             const schema = {
                 title: 'Address',
@@ -120,7 +120,7 @@ const presets = {
         })()
     `,
 
-    'Address (SimpleSchema)': preset`
+  'Address (SimpleSchema)': preset`
         new SimpleSchema({
             city: {
                 type: String,
@@ -144,7 +144,7 @@ const presets = {
         })
     `,
 
-    'Address (SimpleSchema2)': preset`
+  'Address (SimpleSchema2)': preset`
         new SimpleSchema2({
             city: {
                 type: String,

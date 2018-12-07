@@ -1,12 +1,12 @@
-import React   from 'react';
+import React from 'react';
 import {mount} from 'enzyme';
 
 import FormGroup from 'uniforms-antd/FormGroup';
 
 test('FormGroup should be deprecated', () => {
-    console.error = jest.fn();
+  console.error = jest.fn();
 
-    mount(<FormGroup />);
+  mount(<FormGroup />);
 
-    expect(console.error).toHaveBeenCalledTimes(1);
+  expect(console.error).toHaveBeenCalledTimes(1);
 });

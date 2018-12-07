@@ -1,43 +1,40 @@
-import BaseForm   from 'uniforms/BaseForm';
-import PropTypes  from 'prop-types';
+import BaseForm from 'uniforms/BaseForm';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-const Bootstrap4 = parent => class extends parent {
+const Bootstrap4 = parent =>
+  class extends parent {
     static Bootstrap4 = Bootstrap4;
 
     static displayName = `Bootstrap4${parent.displayName}`;
 
     static propTypes = {
-        ...parent.propTypes,
+      ...parent.propTypes,
 
-        grid: PropTypes.oneOfType([
-            PropTypes.number,
-            PropTypes.object,
-            PropTypes.string
-        ])
+      grid: PropTypes.oneOfType([PropTypes.number, PropTypes.object, PropTypes.string])
     };
 
-    getChildContextState () {
-        return {
-            ...super.getChildContextState(),
-            grid: this.props.grid
-        };
+    getChildContextState() {
+      return {
+        ...super.getChildContextState(),
+        grid: this.props.grid
+      };
     }
 
-    getNativeFormProps () {
-        const error = this.getChildContextError();
-        const {
-            className,
-            grid,      // eslint-disable-line no-unused-vars
+    getNativeFormProps() {
+      const error = this.getChildContextError();
+      const {
+        className,
+        grid, // eslint-disable-line no-unused-vars
 
-            ...props
-        } = super.getNativeFormProps();
+        ...props
+      } = super.getNativeFormProps();
 
-        return {
-            ...props,
-            className: classnames('form', {error}, className)
-        };
+      return {
+        ...props,
+        className: classnames('form', {error}, className)
+      };
     }
-};
+  };
 
 export default Bootstrap4(BaseForm);
