@@ -5,11 +5,11 @@ import React from 'react';
 import filterDOMProps from 'uniforms/filterDOMProps';
 import nothing from 'uniforms/nothing';
 
-const ErrorsField = ({children, fullWidth, margin, ...props}, {uniforms: {error, schema}}) =>
+const ErrorsField = ({children, fullWidth, margin, variant, ...props}, {uniforms: {error, schema}}) =>
   !error && !children ? (
     nothing
   ) : (
-    <FormControl error={!!error} fullWidth={!!fullWidth} margin={margin}>
+    <FormControl error={!!error} fullWidth={!!fullWidth} margin={margin} variant={variant}>
       {!!children && <FormHelperText {...filterDOMProps(props)}>{children}</FormHelperText>}
       {schema.getErrorMessages(error).map((message, index) => (
         <FormHelperText key={index} {...filterDOMProps(props)}>

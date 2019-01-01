@@ -1,5 +1,4 @@
 import Checkbox from '@material-ui/core/Checkbox';
-import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -9,10 +8,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import React from 'react';
+import {Fragment} from 'react';
 import SelectMaterial from '@material-ui/core/Select';
 import Switch from '@material-ui/core/Switch';
 import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
+
+import wrapField from './wrapField';
 
 const xor = (item, array) => {
   const index = array.indexOf(item);
@@ -26,30 +28,25 @@ const xor = (item, array) => {
 const renderSelect = ({
   allowedValues,
   disabled,
-  error,
-  errorMessage,
   fieldType,
-  fullWidth,
-  helperText,
   id,
   inputProps,
   label,
   labelProps,
-  margin,
   name,
   native,
   onChange,
   placeholder,
   required,
-  showInlineError,
   transform,
   value,
   ...props
 }) => {
   const Item = native ? 'option' : MenuItem;
 
-  return (
-    <FormControl disabled={!!disabled} error={!!error} fullWidth={!!fullWidth} margin={margin} required={required}>
+  return wrapField(
+    {...props, disabled, required},
+    <Fragment>
       {label && (
         <InputLabel htmlFor={name} shrink={!!placeholder || !!value} {...labelProps}>
           {label}
@@ -75,12 +72,7 @@ const renderSelect = ({
           </Item>
         ))}
       </SelectMaterial>
-      {showInlineError && error ? (
-        <FormHelperText>{errorMessage}</FormHelperText>
-      ) : (
-        helperText && <FormHelperText>{helperText}</FormHelperText>
-      )}
-    </FormControl>
+    </Fragment>
   );
 };
 
@@ -91,16 +83,12 @@ const renderCheckboxes = ({
   error,
   errorMessage,
   fieldType,
-  fullWidth,
-  helperText,
   id,
   inputRef,
   label,
   legend,
-  margin,
   name,
   onChange,
-  required,
   showInlineError,
   transform,
   value,
@@ -154,23 +142,12 @@ const renderCheckboxes = ({
     );
   }
 
-  return (
-    <FormControl
-      component="fieldset"
-      disabled={!!disabled}
-      error={!!error}
-      fullWidth={!!fullWidth}
-      margin={margin}
-      required={required}
-    >
+  return wrapField(
+    {...props, disabled, error, errorMessage, showInlineError, component: 'fieldset'},
+    <Fragment>
       {(legend || label) && <FormLabel component="legend">{legend || label}</FormLabel>}
       {children}
-      {showInlineError && error ? (
-        <FormHelperText>{errorMessage}</FormHelperText>
-      ) : (
-        helperText && <FormHelperText>{helperText}</FormHelperText>
-      )}
-    </FormControl>
+    </Fragment>
   );
 };
 

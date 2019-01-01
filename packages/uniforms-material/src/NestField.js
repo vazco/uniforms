@@ -1,40 +1,23 @@
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
 import React from 'react';
 import connectField from 'uniforms/connectField';
 import injectName from 'uniforms/injectName';
 import joinName from 'uniforms/joinName';
+import {Fragment} from 'react';
 
 import AutoField from './AutoField';
+import wrapField from './wrapField';
 
-const Nest = ({
-  children,
-  disabled,
-  error,
-  errorMessage,
-  fields,
-  fullWidth,
-  itemProps,
-  helperText,
-  label,
-  margin,
-  name,
-  required,
-  showInlineError
-}) => (
-  <FormControl disabled={!!disabled} error={!!error} fullWidth={!!fullWidth} margin={margin} required={required}>
-    {label && <FormLabel component="legend">{label}</FormLabel>}
-    {children
-      ? injectName(name, children)
-      : fields.map(key => <AutoField key={key} name={joinName(name, key)} {...itemProps} />)}
-    {showInlineError && error ? (
-      <FormHelperText>{errorMessage}</FormHelperText>
-    ) : (
-      helperText && <FormHelperText>{helperText}</FormHelperText>
-    )}
-  </FormControl>
-);
+const Nest = ({children, fields, itemProps, label, name, ...props}) =>
+  wrapField(
+    props,
+    <Fragment>
+      {label && <FormLabel component="legend">{label}</FormLabel>}
+      {children
+        ? injectName(name, children)
+        : fields.map(key => <AutoField key={key} name={joinName(name, key)} {...itemProps} />)}
+    </Fragment>
+  );
 
 Nest.defaultProps = {
   fullWidth: true,
