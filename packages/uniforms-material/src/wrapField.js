@@ -4,24 +4,23 @@ import React from 'react';
 
 export default function wrapField(
   {component, disabled, error, errorMessage, fullWidth, helperText, margin, required, showInlineError, variant},
-  children
+  ...children
 ) {
-  return (
-    <FormControl
-      component={component}
-      disabled={!!disabled}
-      error={!!error}
-      fullWidth={!!fullWidth}
-      margin={margin}
-      required={required}
-      variant={variant}
-    >
-      {children}
-      {showInlineError && error ? (
-        <FormHelperText>{errorMessage}</FormHelperText>
-      ) : (
-        helperText && <FormHelperText>{helperText}</FormHelperText>
-      )}
-    </FormControl>
+  const formHelperText = showInlineError && error ? errorMessage : helperText;
+  const props = {
+    component,
+    disabled: !!disabled,
+    error: !!error,
+    fullWidth: !!fullWidth,
+    margin,
+    required,
+    variant
+  };
+
+  return React.createElement(
+    FormControl,
+    props,
+    ...children,
+    !!formHelperText && <FormHelperText>{formHelperText}</FormHelperText>
   );
 }

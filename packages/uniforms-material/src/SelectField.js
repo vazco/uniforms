@@ -8,7 +8,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import React from 'react';
-import {Fragment} from 'react';
 import SelectMaterial from '@material-ui/core/Select';
 import Switch from '@material-ui/core/Switch';
 import connectField from 'uniforms/connectField';
@@ -45,34 +44,32 @@ const renderSelect = ({
   const Item = native ? 'option' : MenuItem;
 
   return wrapField(
-    {...props, disabled, required},
-    <Fragment>
-      {label && (
-        <InputLabel htmlFor={name} shrink={!!placeholder || !!value} {...labelProps}>
-          {label}
-        </InputLabel>
+    {...props, component: undefined, disabled, required},
+    label && (
+      <InputLabel htmlFor={name} shrink={!!placeholder || !!value} {...labelProps}>
+        {label}
+      </InputLabel>
+    ),
+    <SelectMaterial
+      displayEmpty={!!placeholder}
+      inputProps={{name, id, ...inputProps}}
+      multiple={fieldType === Array || undefined}
+      native={native}
+      onChange={event => disabled || onChange(event.target.value)}
+      value={native && !value ? '' : value}
+      {...filterDOMProps(props)}
+    >
+      {!!placeholder && (
+        <Item value="" disabled={!!required}>
+          {placeholder}
+        </Item>
       )}
-      <SelectMaterial
-        displayEmpty={!!placeholder}
-        inputProps={{name, id, ...inputProps}}
-        multiple={fieldType === Array || undefined}
-        native={native}
-        onChange={event => disabled || onChange(event.target.value)}
-        value={native && !value ? '' : value}
-        {...filterDOMProps(props)}
-      >
-        {!!placeholder && (
-          <Item value="" disabled={!!required}>
-            {placeholder}
-          </Item>
-        )}
-        {allowedValues.map(value => (
-          <Item key={value} value={value}>
-            {transform ? transform(value) : value}
-          </Item>
-        ))}
-      </SelectMaterial>
-    </Fragment>
+      {allowedValues.map(value => (
+        <Item key={value} value={value}>
+          {transform ? transform(value) : value}
+        </Item>
+      ))}
+    </SelectMaterial>
   );
 };
 
@@ -143,11 +140,9 @@ const renderCheckboxes = ({
   }
 
   return wrapField(
-    {...props, disabled, error, errorMessage, showInlineError, component: 'fieldset'},
-    <Fragment>
-      {(legend || label) && <FormLabel component="legend">{legend || label}</FormLabel>}
-      {children}
-    </Fragment>
+    {...props, component: 'fieldset', disabled, error, errorMessage, showInlineError},
+    (legend || label) && <FormLabel component="legend">{legend || label}</FormLabel>,
+    children
   );
 };
 
