@@ -1,10 +1,10 @@
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import React from 'react';
 import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
+
+import wrapField from './wrapField';
 
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
 const dateFormat = value => value && value.toISOString().slice(0, -8);
@@ -17,30 +17,14 @@ const dateParse = (timestamp, onChange) => {
   }
 };
 
-const Date = ({
-  disabled,
-  error,
-  errorMessage,
-  fullWidth,
-  helperText,
-  inputRef,
-  label,
-  labelProps,
-  margin,
-  name,
-  onChange,
-  placeholder,
-  required,
-  showInlineError,
-  value,
-  ...props
-}) => (
-  <FormControl disabled={!!disabled} error={!!error} fullWidth={!!fullWidth} margin={margin} required={required}>
-    {label && (
+const Date = ({inputRef, label, labelProps, name, onChange, placeholder, value, ...props}) =>
+  wrapField(
+    {...props, component: undefined},
+    label && (
       <InputLabel htmlFor={name} {...labelProps}>
         {label}
       </InputLabel>
-    )}
+    ),
     <Input
       name={name}
       onChange={event => dateParse(event.target.valueAsNumber, onChange)}
@@ -50,13 +34,7 @@ const Date = ({
       value={dateFormat(value)}
       {...filterDOMProps(props)}
     />
-    {showInlineError && error ? (
-      <FormHelperText>{errorMessage}</FormHelperText>
-    ) : (
-      helperText && <FormHelperText>{helperText}</FormHelperText>
-    )}
-  </FormControl>
-);
+  );
 
 Date.defaultProps = {
   fullWidth: true,

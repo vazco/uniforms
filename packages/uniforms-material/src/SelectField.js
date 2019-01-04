@@ -1,5 +1,4 @@
 import Checkbox from '@material-ui/core/Checkbox';
-import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -14,6 +13,8 @@ import Switch from '@material-ui/core/Switch';
 import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
+import wrapField from './wrapField';
+
 const xor = (item, array) => {
   const index = array.indexOf(item);
   if (index === -1) {
@@ -26,61 +27,49 @@ const xor = (item, array) => {
 const renderSelect = ({
   allowedValues,
   disabled,
-  error,
-  errorMessage,
   fieldType,
-  fullWidth,
-  helperText,
   id,
   inputProps,
   label,
   labelProps,
-  margin,
   name,
   native,
   onChange,
   placeholder,
   required,
-  showInlineError,
   transform,
   value,
   ...props
 }) => {
   const Item = native ? 'option' : MenuItem;
 
-  return (
-    <FormControl disabled={!!disabled} error={!!error} fullWidth={!!fullWidth} margin={margin} required={required}>
-      {label && (
-        <InputLabel htmlFor={name} shrink={!!placeholder || !!value} {...labelProps}>
-          {label}
-        </InputLabel>
+  return wrapField(
+    {...props, component: undefined, disabled, required},
+    label && (
+      <InputLabel htmlFor={name} shrink={!!placeholder || !!value} {...labelProps}>
+        {label}
+      </InputLabel>
+    ),
+    <SelectMaterial
+      displayEmpty={!!placeholder}
+      inputProps={{name, id, ...inputProps}}
+      multiple={fieldType === Array || undefined}
+      native={native}
+      onChange={event => disabled || onChange(event.target.value)}
+      value={native && !value ? '' : value}
+      {...filterDOMProps(props)}
+    >
+      {!!placeholder && (
+        <Item value="" disabled={!!required}>
+          {placeholder}
+        </Item>
       )}
-      <SelectMaterial
-        displayEmpty={!!placeholder}
-        inputProps={{name, id, ...inputProps}}
-        multiple={fieldType === Array || undefined}
-        native={native}
-        onChange={event => disabled || onChange(event.target.value)}
-        value={native && !value ? '' : value}
-        {...filterDOMProps(props)}
-      >
-        {!!placeholder && (
-          <Item value="" disabled={!!required}>
-            {placeholder}
-          </Item>
-        )}
-        {allowedValues.map(value => (
-          <Item key={value} value={value}>
-            {transform ? transform(value) : value}
-          </Item>
-        ))}
-      </SelectMaterial>
-      {showInlineError && error ? (
-        <FormHelperText>{errorMessage}</FormHelperText>
-      ) : (
-        helperText && <FormHelperText>{helperText}</FormHelperText>
-      )}
-    </FormControl>
+      {allowedValues.map(value => (
+        <Item key={value} value={value}>
+          {transform ? transform(value) : value}
+        </Item>
+      ))}
+    </SelectMaterial>
   );
 };
 
@@ -91,16 +80,12 @@ const renderCheckboxes = ({
   error,
   errorMessage,
   fieldType,
-  fullWidth,
-  helperText,
   id,
   inputRef,
   label,
   legend,
-  margin,
   name,
   onChange,
-  required,
   showInlineError,
   transform,
   value,
@@ -154,23 +139,10 @@ const renderCheckboxes = ({
     );
   }
 
-  return (
-    <FormControl
-      component="fieldset"
-      disabled={!!disabled}
-      error={!!error}
-      fullWidth={!!fullWidth}
-      margin={margin}
-      required={required}
-    >
-      {(legend || label) && <FormLabel component="legend">{legend || label}</FormLabel>}
-      {children}
-      {showInlineError && error ? (
-        <FormHelperText>{errorMessage}</FormHelperText>
-      ) : (
-        helperText && <FormHelperText>{helperText}</FormHelperText>
-      )}
-    </FormControl>
+  return wrapField(
+    {...props, component: 'fieldset', disabled, error, errorMessage, showInlineError},
+    (legend || label) && <FormLabel component="legend">{legend || label}</FormLabel>,
+    children
   );
 };
 

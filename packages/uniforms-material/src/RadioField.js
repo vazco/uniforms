@@ -1,6 +1,4 @@
-import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
 import RadioMaterial from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -8,39 +6,28 @@ import React from 'react';
 import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
+import wrapField from './wrapField';
+
 const Radio = ({
   allowedValues,
   checkboxes, // eslint-disable-line no-unused-vars
   disabled,
-  error,
-  errorMessage,
-  fullWidth,
-  helperText,
   id,
   inputRef,
   label,
-  margin,
   name,
   onChange,
-  required,
-  showInlineError,
   transform,
   value,
   ...props
-}) => (
-  <FormControl
-    component="fieldset"
-    disabled={!!disabled}
-    error={!!error}
-    fullWidth={!!fullWidth}
-    margin={margin}
-    required={required}
-  >
-    {label && (
+}) =>
+  wrapField(
+    {...props, disabled, component: 'fieldset'},
+    label && (
       <FormLabel component="legend" htmlFor={name}>
         {label}
       </FormLabel>
-    )}
+    ),
     <RadioGroup
       id={id}
       name={name}
@@ -57,13 +44,7 @@ const Radio = ({
         />
       ))}
     </RadioGroup>
-    {showInlineError && error ? (
-      <FormHelperText>{errorMessage}</FormHelperText>
-    ) : (
-      helperText && <FormHelperText>{helperText}</FormHelperText>
-    )}
-  </FormControl>
-);
+  );
 
 Radio.defaultProps = {
   fullWidth: true,
