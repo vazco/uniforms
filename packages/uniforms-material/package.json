@@ -22,7 +22,7 @@
     "src/"
   ],
   "peerDependencies": {
-    "@material-ui/core": "^3.0.0 || ^1.0.0",
+    "@material-ui/core": "^3.0.0 || ^1.2.0",
     "react": "^16.0.0 || ^15.0.0 || ^0.14.0",
     "uniforms": "^1.29.0"
   },

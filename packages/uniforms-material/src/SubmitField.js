@@ -16,6 +16,6 @@ const SubmitField = ({children, disabled, inputRef, label, value, ...props}, {un
 );
 SubmitField.contextTypes = BaseField.contextTypes;
 
-SubmitField.defaultProps = {label: 'Submit', variant: 'raised'};
+SubmitField.defaultProps = {label: 'Submit', variant: 'contained'};
 
 export default SubmitField;
