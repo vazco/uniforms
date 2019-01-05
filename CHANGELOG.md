@@ -1,4 +1,4 @@
-## Next
+## [v1.30.0](https://github.com/vazco/uniforms/tree/v1.30.0) (2019-01-05)
 - **Added:** New `variant` prop in most `uniforms-material` fields. [\#495](https://github.com/vazco/uniforms/issues/495)
 - **Changed:** Default SubmitField `variant` in uniforms-material. Minimum version of `@material-ui/core` is now `1.2.0`. [\#498](https://github.com/vazco/uniforms/issues/498)
 
