@@ -1,3 +1,7 @@
+## Next
+- **Added:** New `variant` prop in most `uniforms-material` fields. [\#495](https://github.com/vazco/uniforms/issues/495)
+- **Changed:** Default SubmitField `variant` in uniforms-material. Minimum version of `@material-ui/core` is now `1.2.0`. [\#498](https://github.com/vazco/uniforms/issues/498)
+
 ## [v1.29.0](https://github.com/vazco/uniforms/tree/v1.29.0) (2018-12-05)
 - **Added:** Support for `placeholder` in `SelectField` in `uniforms-material`. [\#489](https://github.com/vazco/uniforms/issues/489)
 - **Fixed:** Handling of default values in `ListField`.
