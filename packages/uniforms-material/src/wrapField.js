@@ -1,6 +1,7 @@
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import React from 'react';
+import omit from 'lodash/omit';
 
 export default function wrapField(
   {component, disabled, error, errorMessage, fullWidth, helperText, margin, required, showInlineError, variant},
@@ -24,3 +25,6 @@ export default function wrapField(
     !!formHelperText && <FormHelperText>{formHelperText}</FormHelperText>
   );
 }
+
+wrapField.filterDOMPropsList = ['fullWidth', 'helperText', 'margin', 'variant'];
+wrapField.filterDOMProps = props => omit(props, wrapField.filterDOMPropsList);

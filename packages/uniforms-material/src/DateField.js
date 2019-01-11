@@ -17,8 +17,10 @@ const dateParse = (timestamp, onChange) => {
   }
 };
 
-const Date = ({inputRef, label, labelProps, name, onChange, placeholder, value, ...props}) =>
-  wrapField(
+const Date = ({inputRef, label, labelProps, name, onChange, placeholder, value, ...props}) => {
+  const filteredProps = filterDOMProps(wrapField.filterDOMProps(props));
+
+  return wrapField(
     {...props, component: undefined},
     label && (
       <InputLabel htmlFor={name} {...labelProps}>
@@ -32,9 +34,10 @@ const Date = ({inputRef, label, labelProps, name, onChange, placeholder, value, 
       ref={inputRef}
       type="datetime-local"
       value={dateFormat(value)}
-      {...filterDOMProps(props)}
+      {...filteredProps}
     />
   );
+};
 
 Date.defaultProps = {
   fullWidth: true,
