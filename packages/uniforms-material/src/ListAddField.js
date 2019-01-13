@@ -29,7 +29,7 @@ ListAdd.propTypes = {
 ListAdd.defaultProps = {
   fullWidth: true,
   icon: '+',
-  margin: 'normal'
+  margin: 'dense'
 };
 
 export default connectField(ListAdd, {includeParent: true, initialValue: false});

@@ -15,7 +15,7 @@ const Error = ({children, error, errorMessage, fullWidth, margin, variant, ...pr
   );
 Error.defaultProps = {
   fullWidth: true,
-  margin: 'normal'
+  margin: 'dense'
 };
 
 export default connectField(Error, {initialValue: false});

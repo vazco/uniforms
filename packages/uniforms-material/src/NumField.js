@@ -40,7 +40,7 @@ const Num = ({
 );
 Num.defaultProps = {
   fullWidth: true,
-  margin: 'normal'
+  margin: 'dense'
 };
 
 export default connectField(Num);

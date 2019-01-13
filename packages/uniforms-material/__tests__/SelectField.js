@@ -3,12 +3,12 @@ import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
-import InputLabel from '@material-ui/core/InputLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import React from 'react';
 import Select from '@material-ui/core/Select';
 import SelectField from 'uniforms-material/SelectField';
+import TextField from '@material-ui/core/TextField';
 import {mount} from 'enzyme';
 
 import createContext from './_createContext';
@@ -150,7 +150,7 @@ test('<SelectField> - renders a Select which correctly reacts on change', () => 
 
   expect(wrapper.find(Select)).toHaveLength(1);
   wrapper
-    .find(Select)
+    .find(TextField)
     .props()
     .onChange({target: {value: 'b'}});
   expect(onChange).toHaveBeenLastCalledWith('x', 'b');
@@ -164,7 +164,7 @@ test('<SelectField> - renders a Select which correctly reacts on change (empty)'
 
   expect(wrapper.find(Select)).toHaveLength(1);
   wrapper
-    .find(Select)
+    .find(TextField)
     .props()
     .onChange({target: {value: ''}});
   expect(onChange).toHaveBeenLastCalledWith('x', '');
@@ -181,7 +181,7 @@ test('<SelectField> - renders a Select which correctly reacts on change (same va
 
   expect(wrapper.find(Select)).toHaveLength(1);
   wrapper
-    .find(Select)
+    .find(TextField)
     .props()
     .onChange({target: {value: 'b'}});
   expect(onChange).toHaveBeenLastCalledWith('x', 'b');
@@ -192,7 +192,7 @@ test('<SelectField> - renders a label', () => {
   const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
 
   expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find(InputLabel).text()).toBe('y *');
+  expect(wrapper.find(TextField).prop('label')).toBe('y');
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons', () => {

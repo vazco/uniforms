@@ -12,6 +12,8 @@ const Radio = ({
   allowedValues,
   checkboxes, // eslint-disable-line no-unused-vars
   disabled,
+  fullWidth,
+  helperText,
   id,
   inputRef,
   label,
@@ -22,7 +24,7 @@ const Radio = ({
   ...props
 }) =>
   wrapField(
-    {...props, disabled, component: 'fieldset'},
+    {...props, disabled, fullWidth, helperText, component: 'fieldset'},
     label && (
       <FormLabel component="legend" htmlFor={name}>
         {label}
@@ -48,7 +50,7 @@ const Radio = ({
 
 Radio.defaultProps = {
   fullWidth: true,
-  margin: 'normal'
+  margin: 'dense'
 };
 
 export default connectField(Radio);

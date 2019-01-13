@@ -10,11 +10,24 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 
 import wrapField from './wrapField';
 
-const Bool = ({appearance, disabled, inputRef, label, legend, name, onChange, transform, value, ...props}) => {
+const Bool = ({
+  appearance,
+  disabled,
+  fullWidth,
+  helperText,
+  inputRef,
+  label,
+  legend,
+  name,
+  onChange,
+  transform,
+  value,
+  ...props
+}) => {
   const SelectionControl = appearance === 'checkbox' ? Checkbox : Switch;
 
   return wrapField(
-    {...props, component: 'fieldset', disabled},
+    {...props, component: 'fieldset', disabled, fullWidth, helperText},
     legend && (
       <FormLabel component="legend" htmlFor={name}>
         {legend}
@@ -41,7 +54,7 @@ const Bool = ({appearance, disabled, inputRef, label, legend, name, onChange, tr
 Bool.defaultProps = {
   appearance: 'checkbox',
   fullWidth: true,
-  margin: 'normal'
+  margin: 'dense'
 };
 
 Bool.propTypes = {
