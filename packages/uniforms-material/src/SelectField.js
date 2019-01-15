@@ -42,7 +42,7 @@ const renderSelect = ({
   ...props
 }) => {
   const Item = native ? 'option' : MenuItem;
-  const filteredProps = filterDOMProps(wrapField.filterDOMProps(props));
+  const filteredProps = wrapField._filterDOMProps(filterDOMProps(props));
 
   return wrapField(
     {...props, component: undefined, disabled, required},
@@ -93,7 +93,7 @@ const renderCheckboxes = ({
   ...props
 }) => {
   let children;
-  const filteredProps = filterDOMProps(wrapField.filterDOMProps(props));
+  const filteredProps = wrapField._filterDOMProps(filterDOMProps(props));
 
   if (fieldType !== Array) {
     children = (

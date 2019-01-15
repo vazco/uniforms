@@ -26,5 +26,5 @@ export default function wrapField(
   );
 }
 
-wrapField.filterDOMPropsList = ['fullWidth', 'helperText', 'margin', 'variant'];
-wrapField.filterDOMProps = props => omit(props, wrapField.filterDOMPropsList);
+wrapField._filterDOMPropsList = ['fullWidth', 'helperText', 'margin', 'variant'];
+wrapField._filterDOMProps = props => omit(props, wrapField._filterDOMPropsList);

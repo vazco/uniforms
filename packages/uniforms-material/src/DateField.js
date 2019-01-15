@@ -18,7 +18,7 @@ const dateParse = (timestamp, onChange) => {
 };
 
 const Date = ({inputRef, label, labelProps, name, onChange, placeholder, value, ...props}) => {
-  const filteredProps = filterDOMProps(wrapField.filterDOMProps(props));
+  const filteredProps = wrapField._filterDOMProps(filterDOMProps(props));
 
   return wrapField(
     {...props, component: undefined},
