@@ -12,8 +12,6 @@ const Radio = ({
   allowedValues,
   checkboxes, // eslint-disable-line no-unused-vars
   disabled,
-  fullWidth,
-  helperText,
   id,
   inputRef,
   label,
@@ -22,9 +20,11 @@ const Radio = ({
   transform,
   value,
   ...props
-}) =>
-  wrapField(
-    {...props, disabled, fullWidth, helperText, component: 'fieldset'},
+}) => {
+  const filteredProps = wrapField._filterDOMProps(filterDOMProps(props));
+
+  return wrapField(
+    {...props, disabled, component: 'fieldset'},
     label && (
       <FormLabel component="legend" htmlFor={name}>
         {label}
@@ -39,7 +39,7 @@ const Radio = ({
     >
       {allowedValues.map(item => (
         <FormControlLabel
-          control={<RadioMaterial {...filterDOMProps(props)} />}
+          control={<RadioMaterial {...filteredProps} />}
           key={item}
           label={transform ? transform(item) : item}
           value={`${item}`}
@@ -47,6 +47,7 @@ const Radio = ({
       ))}
     </RadioGroup>
   );
+};
 
 Radio.defaultProps = {
   fullWidth: true,

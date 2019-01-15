@@ -25,6 +25,7 @@ const Bool = ({
   ...props
 }) => {
   const SelectionControl = appearance === 'checkbox' ? Checkbox : Switch;
+  const filteredProps = wrapField._filterDOMProps(filterDOMProps(props));
 
   return wrapField(
     {...props, component: 'fieldset', disabled, fullWidth, helperText},
@@ -42,7 +43,7 @@ const Bool = ({
             onChange={event => disabled || onChange(event.target.checked)}
             ref={inputRef}
             value={name}
-            {...filterDOMProps(props)}
+            {...filteredProps}
           />
         }
         label={transform ? transform(label) : label}

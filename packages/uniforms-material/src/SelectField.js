@@ -92,7 +92,6 @@ const renderCheckboxes = ({
   error,
   errorMessage,
   fieldType,
-  fullWidth,
   id,
   inputRef,
   label,
@@ -105,6 +104,7 @@ const renderCheckboxes = ({
   ...props
 }) => {
   let children;
+  const filteredProps = wrapField._filterDOMProps(filterDOMProps(props));
 
   if (fieldType !== Array) {
     children = (
@@ -117,7 +117,7 @@ const renderCheckboxes = ({
       >
         {allowedValues.map(item => (
           <FormControlLabel
-            control={<Radio id={`${id}-${item}`} {...filterDOMProps(props)} />}
+            control={<Radio id={`${id}-${item}`} {...filteredProps} />}
             key={item}
             label={transform ? transform(item) : item}
             value={item}
@@ -141,7 +141,7 @@ const renderCheckboxes = ({
                 onChange={() => disabled || onChange(xor(item, value))}
                 ref={inputRef}
                 value={props.name}
-                {...filterDOMProps(props)}
+                {...filteredProps}
               />
             }
             key={item}
@@ -153,7 +153,7 @@ const renderCheckboxes = ({
   }
 
   return wrapField(
-    {...props, component: 'fieldset', disabled, fullWidth, error, errorMessage, showInlineError},
+    {...props, component: 'fieldset', disabled, error, errorMessage, showInlineError},
     (legend || label) && <FormLabel component="legend">{legend || label}</FormLabel>,
     children
   );
