@@ -26,6 +26,7 @@ export default class JSONSchemaBridge extends Bridge {
 
     this.schema = schema;
     this._compiledSchema = {};
+    this._rootSchema = this._getRootSchema();
     this.validator = validator;
   }
 
@@ -62,7 +63,6 @@ export default class JSONSchemaBridge extends Bridge {
 
   getField(name) {
     return joinName(null, name).reduce((definition, next, nextIndex, array) => {
-      // eslint-disable-line complexity
       const previous = joinName(array.slice(0, nextIndex));
       const isRequired = (definition.required || (this._compiledSchema[previous] || {}).required || []).includes(next);
 
@@ -73,6 +73,7 @@ export default class JSONSchemaBridge extends Bridge {
         invariant(definition.type === 'array', 'Field not found in schema: "%s"', name);
         definition = Array.isArray(definition.items) ? definition.items[parseInt(next, 10)] : definition.items;
       } else if (definition.type === 'object') {
+        invariant(definition.properties, 'Field properties not found in schema: "%s"', name);
         definition = definition.properties[next];
       } else {
         const [{properties: combinedDefinition = {}} = {}] = ['allOf', 'anyOf', 'oneOf']
@@ -120,7 +121,7 @@ export default class JSONSchemaBridge extends Bridge {
       this._compiledSchema[_key] = Object.assign(_definition, {isRequired});
 
       return definition;
-    }, this.schema);
+    }, this._rootSchema);
   }
 
   getInitialValue(name, props = {}) {
@@ -182,7 +183,11 @@ export default class JSONSchemaBridge extends Bridge {
 
   getSubfields(name) {
     if (!name) {
-      return Object.keys(this.schema.properties);
+      if (this._rootSchema.properties) {
+        return Object.keys(this._rootSchema.properties);
+      }
+
+      return [];
     }
 
     const {type: _type, properties: _properties} = this.getField(name);
@@ -214,5 +219,17 @@ export default class JSONSchemaBridge extends Bridge {
 
   getValidator() {
     return this.validator;
+  }
+
+  _getRootSchema() {
+    if (this.schema.type === 'object') {
+      return this.schema;
+    }
+
+    if (this.schema.$ref) {
+      return resolveRef(this.schema.$ref, this.schema);
+    }
+
+    return {};
   }
 }

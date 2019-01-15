@@ -1,87 +1,97 @@
 import JSONSchemaBridge from 'uniforms/JSONSchemaBridge';
 
-describe('JSONSchemaBridge', () => {
-  const schema = {
-    $schema: 'http://json-schema.org/draft-06/schema#',
-    definitions: {
-      address: {
-        type: 'object',
-        properties: {
-          city: {type: 'string'},
-          state: {
-            type: 'string',
-            options: [{label: 'Alabama', value: 'AL'}, {label: 'Alaska', value: 'AK'}, {label: 'Arkansas', value: 'AR'}]
-          },
-          street: {type: 'string'}
-        },
-        required: ['street', 'city', 'state']
-      },
-      personalData: {
-        type: 'object',
-        properties: {
-          firstName: {$ref: '#/definitions/firstName'},
-          lastName: {$ref: '#/definitions/firstName'}
-        },
-        required: ['lastName']
-      },
-      firstName: {type: 'string', default: 'John'},
-      lastName: {type: 'string'}
-    },
-    type: 'object',
-    properties: {
-      age: {type: 'integer', uniforms: {component: 'span'}, default: 24},
-      billingAddress: {$ref: '#/definitions/address'},
-      custom: {type: 'custom'},
-      dateOfBirth: {
-        type: 'string',
-        format: 'date-time'
-      },
-      dateOfBirthTuple: {
-        type: 'array',
-        items: [{type: 'integer'}, {type: 'string'}, {type: 'integer'}]
-      },
-      email: {
-        type: 'object',
-        properties: {
-          work: {type: 'string'},
-          other: {type: 'string'}
-        },
-        required: ['work']
-      },
-      friends: {
-        type: 'array',
-        items: {
-          $ref: '#/definitions/personalData'
-        }
-      },
-      hasAJob: {type: 'boolean', title: 'Currently Employed'},
-      invalid: {type: 'null'},
-      personalData: {$ref: '#/definitions/personalData'},
-      salary: {
-        type: 'number',
-        options: {
-          low: 6000,
-          medium: 12000,
-          height: 18000
-        }
-      },
-      shippingAddress: {
-        allOf: [
-          {$ref: '#/definitions/address'},
-          {
-            properties: {
-              type: {enum: ['residential', 'business']}
-            },
-            required: ['type']
-          }
-        ]
-      }
-    },
-    required: ['dateOfBirth']
-  };
+let schema;
+let validator;
+let bridge;
 
-  const validator = jest.fn();
-  const bridge = new JSONSchemaBridge(schema, validator);
+describe('JSONSchemaBridge', () => {
+  beforeEach(() => {
+    schema = {
+      $schema: 'http://json-schema.org/draft-06/schema#',
+      definitions: {
+        address: {
+          type: 'object',
+          properties: {
+            city: {type: 'string'},
+            state: {
+              type: 'string',
+              options: [
+                {label: 'Alabama', value: 'AL'},
+                {label: 'Alaska', value: 'AK'},
+                {label: 'Arkansas', value: 'AR'}
+              ]
+            },
+            street: {type: 'string'}
+          },
+          required: ['street', 'city', 'state']
+        },
+        personalData: {
+          type: 'object',
+          properties: {
+            firstName: {$ref: '#/definitions/firstName'},
+            lastName: {$ref: '#/definitions/firstName'}
+          },
+          required: ['lastName']
+        },
+        firstName: {type: 'string', default: 'John'},
+        lastName: {type: 'string'}
+      },
+      type: 'object',
+      properties: {
+        age: {type: 'integer', uniforms: {component: 'span'}, default: 24},
+        billingAddress: {$ref: '#/definitions/address'},
+        custom: {type: 'custom'},
+        dateOfBirth: {
+          type: 'string',
+          format: 'date-time'
+        },
+        dateOfBirthTuple: {
+          type: 'array',
+          items: [{type: 'integer'}, {type: 'string'}, {type: 'integer'}]
+        },
+        email: {
+          type: 'object',
+          properties: {
+            work: {type: 'string'},
+            other: {type: 'string'}
+          },
+          required: ['work']
+        },
+        friends: {
+          type: 'array',
+          items: {
+            $ref: '#/definitions/personalData'
+          }
+        },
+        hasAJob: {type: 'boolean', title: 'Currently Employed'},
+        invalid: {type: 'null'},
+        personalData: {$ref: '#/definitions/personalData'},
+        salary: {
+          type: 'number',
+          options: {
+            low: 6000,
+            medium: 12000,
+            height: 18000
+          }
+        },
+        shippingAddress: {
+          allOf: [
+            {$ref: '#/definitions/address'},
+            {
+              properties: {
+                type: {enum: ['residential', 'business']}
+              },
+              required: ['type']
+            }
+          ]
+        }
+      },
+      required: ['dateOfBirth']
+    };
+
+    validator = jest.fn();
+    bridge = new JSONSchemaBridge(schema, validator);
+  });
 
   describe('#check()', () => {
     it('always returns false', () => {
@@ -182,6 +192,16 @@ describe('JSONSchemaBridge', () => {
 
     it('returns correct definition (array flat $ref, nested property)', () => {
       expect(bridge.getField('friends.$.firstName')).toEqual({default: 'John', type: 'string'});
+    });
+
+    it('returns correct definition when schema has top level $ref', () => {
+      delete schema.type;
+      delete schema.properties;
+      delete schema.required;
+      schema.$ref = '#/definitions/personalData';
+      bridge = new JSONSchemaBridge(schema, validator);
+
+      expect(bridge.getField('firstName')).toEqual({default: 'John', type: 'string'});
     });
   });
 
@@ -381,6 +401,16 @@ describe('JSONSchemaBridge', () => {
     it('works with primitives', () => {
       expect(bridge.getSubfields('personalData.firstName')).toEqual([]);
       expect(bridge.getSubfields('age')).toEqual([]);
+    });
+
+    it('works when schema has top level $ref', () => {
+      delete schema.type;
+      delete schema.properties;
+      delete schema.required;
+      schema.$ref = '#/definitions/address';
+      bridge = new JSONSchemaBridge(schema, validator);
+
+      expect(bridge.getSubfields()).toEqual(['city', 'state', 'street']);
     });
   });
 
