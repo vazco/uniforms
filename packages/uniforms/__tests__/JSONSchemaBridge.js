@@ -203,6 +203,16 @@ describe('JSONSchemaBridge', () => {
 
       expect(bridge.getField('firstName')).toEqual({default: 'John', type: 'string'});
     });
+
+    it('throws when resolving field schema is not possible', () => {
+      delete schema.type;
+      delete schema.properties;
+      delete schema.required;
+      delete schema.$ref;
+      bridge = new JSONSchemaBridge(schema, validator);
+
+      expect(() => bridge.getField('invalid')).toThrow(/Field not found in schema/);
+    });
   });
 
   describe('#getInitialValue', () => {
@@ -411,6 +421,16 @@ describe('JSONSchemaBridge', () => {
       bridge = new JSONSchemaBridge(schema, validator);
 
       expect(bridge.getSubfields()).toEqual(['city', 'state', 'street']);
+    });
+
+    it('works on top level when schema does not have properties', () => {
+      delete schema.type;
+      delete schema.properties;
+      delete schema.required;
+      schema.$ref = '#/definitions/lastName';
+      bridge = new JSONSchemaBridge(schema, validator);
+
+      expect(bridge.getSubfields()).toEqual([]);
     });
   });
 
