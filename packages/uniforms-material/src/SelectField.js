@@ -42,6 +42,7 @@ const renderSelect = ({
   ...props
 }) => {
   const Item = native ? 'option' : MenuItem;
+  const filteredProps = wrapField._filterDOMProps(filterDOMProps(props));
 
   return wrapField(
     {...props, component: undefined, disabled, required},
@@ -57,7 +58,7 @@ const renderSelect = ({
       native={native}
       onChange={event => disabled || onChange(event.target.value)}
       value={native && !value ? '' : value}
-      {...filterDOMProps(props)}
+      {...filteredProps}
     >
       {!!placeholder && (
         <Item value="" disabled={!!required}>
@@ -92,6 +93,7 @@ const renderCheckboxes = ({
   ...props
 }) => {
   let children;
+  const filteredProps = wrapField._filterDOMProps(filterDOMProps(props));
 
   if (fieldType !== Array) {
     children = (
@@ -104,7 +106,7 @@ const renderCheckboxes = ({
       >
         {allowedValues.map(item => (
           <FormControlLabel
-            control={<Radio id={`${id}-${item}`} {...filterDOMProps(props)} />}
+            control={<Radio id={`${id}-${item}`} {...filteredProps} />}
             key={item}
             label={transform ? transform(item) : item}
             value={item}
@@ -128,7 +130,7 @@ const renderCheckboxes = ({
                 onChange={() => disabled || onChange(xor(item, value))}
                 ref={inputRef}
                 value={props.name}
-                {...filterDOMProps(props)}
+                {...filteredProps}
               />
             }
             key={item}
