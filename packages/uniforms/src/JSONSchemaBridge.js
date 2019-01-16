@@ -24,9 +24,8 @@ export default class JSONSchemaBridge extends Bridge {
   constructor(schema, validator) {
     super();
 
-    this.schema = schema;
+    this.schema = this._distinctSchema(schema);
     this._compiledSchema = {};
-    this._rootSchema = this._getRootSchema();
     this.validator = validator;
   }
 
@@ -121,7 +120,7 @@ export default class JSONSchemaBridge extends Bridge {
       this._compiledSchema[_key] = Object.assign(_definition, {isRequired});
 
       return definition;
-    }, this._rootSchema);
+    }, this.schema);
   }
 
   getInitialValue(name, props = {}) {
@@ -183,8 +182,8 @@ export default class JSONSchemaBridge extends Bridge {
 
   getSubfields(name) {
     if (!name) {
-      if (this._rootSchema.properties) {
-        return Object.keys(this._rootSchema.properties);
+      if (this.schema.properties) {
+        return Object.keys(this.schema.properties);
       }
 
       return [];
@@ -221,15 +220,15 @@ export default class JSONSchemaBridge extends Bridge {
     return this.validator;
   }
 
-  _getRootSchema() {
-    if (this.schema.type === 'object') {
-      return this.schema;
+  _distinctSchema(schema) {
+    if (schema.type === 'object') {
+      return schema;
     }
 
-    if (this.schema.$ref) {
-      return resolveRef(this.schema.$ref, this.schema);
+    if (schema.$ref) {
+      return {...schema, ...resolveRef(schema.$ref, schema)};
     }
 
-    return {};
+    return schema;
   }
 }

@@ -1,97 +1,87 @@
 import JSONSchemaBridge from 'uniforms/JSONSchemaBridge';
 
-let schema;
-let validator;
-let bridge;
-
 describe('JSONSchemaBridge', () => {
-  beforeEach(() => {
-    schema = {
-      $schema: 'http://json-schema.org/draft-06/schema#',
-      definitions: {
-        address: {
-          type: 'object',
-          properties: {
-            city: {type: 'string'},
-            state: {
-              type: 'string',
-              options: [
-                {label: 'Alabama', value: 'AL'},
-                {label: 'Alaska', value: 'AK'},
-                {label: 'Arkansas', value: 'AR'}
-              ]
-            },
-            street: {type: 'string'}
+  const schema = {
+    $schema: 'http://json-schema.org/draft-06/schema#',
+    definitions: {
+      address: {
+        type: 'object',
+        properties: {
+          city: {type: 'string'},
+          state: {
+            type: 'string',
+            options: [{label: 'Alabama', value: 'AL'}, {label: 'Alaska', value: 'AK'}, {label: 'Arkansas', value: 'AR'}]
           },
-          required: ['street', 'city', 'state']
+          street: {type: 'string'}
         },
-        personalData: {
-          type: 'object',
-          properties: {
-            firstName: {$ref: '#/definitions/firstName'},
-            lastName: {$ref: '#/definitions/firstName'}
-          },
-          required: ['lastName']
-        },
-        firstName: {type: 'string', default: 'John'},
-        lastName: {type: 'string'}
+        required: ['street', 'city', 'state']
       },
-      type: 'object',
-      properties: {
-        age: {type: 'integer', uniforms: {component: 'span'}, default: 24},
-        billingAddress: {$ref: '#/definitions/address'},
-        custom: {type: 'custom'},
-        dateOfBirth: {
-          type: 'string',
-          format: 'date-time'
+      personalData: {
+        type: 'object',
+        properties: {
+          firstName: {$ref: '#/definitions/firstName'},
+          lastName: {$ref: '#/definitions/firstName'}
         },
-        dateOfBirthTuple: {
-          type: 'array',
-          items: [{type: 'integer'}, {type: 'string'}, {type: 'integer'}]
+        required: ['lastName']
+      },
+      firstName: {type: 'string', default: 'John'},
+      lastName: {type: 'string'}
+    },
+    type: 'object',
+    properties: {
+      age: {type: 'integer', uniforms: {component: 'span'}, default: 24},
+      billingAddress: {$ref: '#/definitions/address'},
+      custom: {type: 'custom'},
+      dateOfBirth: {
+        type: 'string',
+        format: 'date-time'
+      },
+      dateOfBirthTuple: {
+        type: 'array',
+        items: [{type: 'integer'}, {type: 'string'}, {type: 'integer'}]
+      },
+      email: {
+        type: 'object',
+        properties: {
+          work: {type: 'string'},
+          other: {type: 'string'}
         },
-        email: {
-          type: 'object',
-          properties: {
-            work: {type: 'string'},
-            other: {type: 'string'}
-          },
-          required: ['work']
-        },
-        friends: {
-          type: 'array',
-          items: {
-            $ref: '#/definitions/personalData'
-          }
-        },
-        hasAJob: {type: 'boolean', title: 'Currently Employed'},
-        invalid: {type: 'null'},
-        personalData: {$ref: '#/definitions/personalData'},
-        salary: {
-          type: 'number',
-          options: {
-            low: 6000,
-            medium: 12000,
-            height: 18000
-          }
-        },
-        shippingAddress: {
-          allOf: [
-            {$ref: '#/definitions/address'},
-            {
-              properties: {
-                type: {enum: ['residential', 'business']}
-              },
-              required: ['type']
-            }
-          ]
+        required: ['work']
+      },
+      friends: {
+        type: 'array',
+        items: {
+          $ref: '#/definitions/personalData'
         }
       },
-      required: ['dateOfBirth']
-    };
+      hasAJob: {type: 'boolean', title: 'Currently Employed'},
+      invalid: {type: 'null'},
+      personalData: {$ref: '#/definitions/personalData'},
+      salary: {
+        type: 'number',
+        options: {
+          low: 6000,
+          medium: 12000,
+          height: 18000
+        }
+      },
+      shippingAddress: {
+        allOf: [
+          {$ref: '#/definitions/address'},
+          {
+            properties: {
+              type: {enum: ['residential', 'business']}
+            },
+            required: ['type']
+          }
+        ]
+      }
+    },
+    required: ['dateOfBirth']
+  };
 
-    validator = jest.fn();
-    bridge = new JSONSchemaBridge(schema, validator);
-  });
+  const validator = jest.fn();
+  const bridge = new JSONSchemaBridge(schema, validator);
 
   describe('#check()', () => {
     it('always returns false', () => {
@@ -195,23 +185,21 @@ describe('JSONSchemaBridge', () => {
     });
 
     it('returns correct definition when schema has top level $ref', () => {
-      delete schema.type;
-      delete schema.properties;
-      delete schema.required;
-      schema.$ref = '#/definitions/personalData';
-      bridge = new JSONSchemaBridge(schema, validator);
+      const localBridge = new JSONSchemaBridge(
+        {definitions: schema.definitions, $ref: '#/definitions/personalData'},
+        validator
+      );
 
-      expect(bridge.getField('firstName')).toEqual({default: 'John', type: 'string'});
+      expect(localBridge.getField('firstName')).toEqual({default: 'John', type: 'string'});
     });
 
     it('throws when resolving field schema is not possible', () => {
-      delete schema.type;
-      delete schema.properties;
-      delete schema.required;
-      delete schema.$ref;
-      bridge = new JSONSchemaBridge(schema, validator);
+      const localBridge = new JSONSchemaBridge(
+        {definitions: schema.definitions, $ref: '#/definitions/personalData'},
+        validator
+      );
 
-      expect(() => bridge.getField('invalid')).toThrow(/Field not found in schema/);
+      expect(() => localBridge.getField('invalid')).toThrow(/Field not found in schema/);
     });
   });
 
@@ -414,23 +402,21 @@ describe('JSONSchemaBridge', () => {
     });
 
     it('works when schema has top level $ref', () => {
-      delete schema.type;
-      delete schema.properties;
-      delete schema.required;
-      schema.$ref = '#/definitions/address';
-      bridge = new JSONSchemaBridge(schema, validator);
+      const localBridge = new JSONSchemaBridge(
+        {definitions: schema.definitions, $ref: '#/definitions/address'},
+        validator
+      );
 
-      expect(bridge.getSubfields()).toEqual(['city', 'state', 'street']);
+      expect(localBridge.getSubfields()).toEqual(['city', 'state', 'street']);
     });
 
     it('works on top level when schema does not have properties', () => {
-      delete schema.type;
-      delete schema.properties;
-      delete schema.required;
-      schema.$ref = '#/definitions/lastName';
-      bridge = new JSONSchemaBridge(schema, validator);
+      const localBridge = new JSONSchemaBridge(
+        {definitions: schema.definitions, $ref: '#/definitions/lastName'},
+        validator
+      );
 
-      expect(bridge.getSubfields()).toEqual([]);
+      expect(localBridge.getSubfields()).toEqual([]);
     });
   });
 
