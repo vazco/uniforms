@@ -7,8 +7,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
 import Switch from '@material-ui/core/Switch';
+import TextField from '@material-ui/core/TextField';
 import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
@@ -24,6 +24,7 @@ const xor = (item, array) => {
 };
 
 const renderSelect = ({
+  InputLabelProps,
   allowedValues,
   disabled,
   error,
@@ -32,14 +33,14 @@ const renderSelect = ({
   fullWidth,
   helperText,
   id,
-  InputLabelProps,
   inputProps,
   label,
+  labelProps,
+  margin,
   name,
   native,
   onChange,
   placeholder,
-  margin,
   required,
   showInlineError,
   transform,
@@ -56,7 +57,7 @@ const renderSelect = ({
       error={!!error}
       fullWidth={fullWidth}
       helperText={(error && showInlineError && errorMessage) || helperText}
-      InputLabelProps={{shrink: label && (hasPlaceholder || value !== undefined), ...InputLabelProps}}
+      InputLabelProps={{shrink: label && (hasPlaceholder || value !== undefined), ...labelProps, ...InputLabelProps}}
       label={label}
       margin={margin}
       onChange={event => disabled || onChange(event.target.value)}

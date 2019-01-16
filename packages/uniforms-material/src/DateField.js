@@ -1,5 +1,5 @@
-import TextField from '@material-ui/core/TextField';
 import React from 'react';
+import TextField from '@material-ui/core/TextField';
 import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
@@ -15,12 +15,14 @@ const dateParse = (timestamp, onChange) => {
 };
 
 const Date = ({
+  InputLabelProps,
   disabled,
   error,
   errorMessage,
   helperText,
   inputRef,
   label,
+  labelProps,
   name,
   onChange,
   placeholder,
@@ -33,6 +35,7 @@ const Date = ({
     error={!!error}
     helperText={(error && showInlineError && errorMessage) || helperText}
     label={label}
+    InputLabelProps={{...labelProps, ...InputLabelProps}}
     name={name}
     onChange={event => disabled || dateParse(event.target.valueAsNumber, onChange)}
     placeholder={placeholder}

@@ -326,6 +326,11 @@ import DateField from 'uniforms-unstyled/DateField'; // Choose your theme packag
     //   use this prop instead.
     inputRef={ref => {}}
 
+    // Props for the InputLabel
+    // Available in:
+    //   material-ui
+    labelProps={{ shrink: true, disableAnimation: true }}
+
     // Maximum value.
     //   Date object.
     max={new Date(2100, 1, 1)}
@@ -859,6 +864,11 @@ import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme pa
     //   use this prop instead.
     inputRef={ref => {}}
 
+    // Props for the InputLabel
+    // Available in:
+    //   material-ui
+    labelProps={{ shrink: true, disableAnimation: true }}
+
     // Field inline error.
     //   *Some description would be great, huh?*
     // Available in:
@@ -871,7 +881,7 @@ import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme pa
     // Label transform.
     //   Allows to transform the each value into a human-readable label
     transform={value => label}
-
+    
     // Options.
     //   Set of values that will be shown in the select.
     //   It is optional and using `options` will override `transform` and `allowedValues`.
