@@ -83,6 +83,24 @@ describe('JSONSchemaBridge', () => {
   const validator = jest.fn();
   const bridge = new JSONSchemaBridge(schema, validator);
 
+  describe('#constructor()', () => {
+    it('sets schema correctly when has top level type of object', () => {
+      expect(bridge.schema).toEqual(schema);
+    });
+
+    it('sets schema correctly when has top level $ref', () => {
+      const localSchema = {definitions: schema.definitions, $ref: '#/definitions/personalData'};
+      const localBridge = new JSONSchemaBridge(localSchema, validator);
+      expect(localBridge.schema).toEqual({...localSchema, ...localSchema.definitions.personalData});
+    });
+
+    it('falls back to input schema', () => {
+      const localSchema = {definitions: schema.definitions};
+      const localBridge = new JSONSchemaBridge(localSchema, validator);
+      expect(localBridge.schema).toEqual(localSchema);
+    });
+  });
+
   describe('#check()', () => {
     it('always returns false', () => {
       expect(JSONSchemaBridge.check()).not.toBeTruthy();
