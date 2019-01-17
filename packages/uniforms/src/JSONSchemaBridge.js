@@ -20,11 +20,23 @@ const resolveRef = (referance, schema) => {
   return resolvedReference;
 };
 
+const distinctSchema = schema => {
+  if (schema.type === 'object') {
+    return schema;
+  }
+
+  if (schema.$ref) {
+    return {...schema, ...resolveRef(schema.$ref, schema)};
+  }
+
+  return schema;
+};
+
 export default class JSONSchemaBridge extends Bridge {
   constructor(schema, validator) {
     super();
 
-    this.schema = this._distinctSchema(schema);
+    this.schema = distinctSchema(schema);
     this._compiledSchema = {};
     this.validator = validator;
   }
@@ -218,17 +230,5 @@ export default class JSONSchemaBridge extends Bridge {
 
   getValidator() {
     return this.validator;
-  }
-
-  _distinctSchema(schema) {
-    if (schema.type === 'object') {
-      return schema;
-    }
-
-    if (schema.$ref) {
-      return {...schema, ...resolveRef(schema.$ref, schema)};
-    }
-
-    return schema;
   }
 }
