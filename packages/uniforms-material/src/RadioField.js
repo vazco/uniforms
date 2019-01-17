@@ -51,7 +51,7 @@ const Radio = ({
 
 Radio.defaultProps = {
   fullWidth: true,
-  margin: 'normal'
+  margin: 'dense'
 };
 
 export default connectField(Radio);

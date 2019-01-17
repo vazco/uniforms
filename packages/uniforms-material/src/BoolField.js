@@ -42,7 +42,7 @@ const Bool = ({appearance, disabled, inputRef, label, legend, name, onChange, tr
 Bool.defaultProps = {
   appearance: 'checkbox',
   fullWidth: true,
-  margin: 'normal'
+  margin: 'dense'
 };
 
 Bool.propTypes = {

@@ -34,7 +34,7 @@ const Text = ({
 );
 Text.defaultProps = {
   fullWidth: true,
-  margin: 'normal',
+  margin: 'dense',
   type: 'text'
 };
 

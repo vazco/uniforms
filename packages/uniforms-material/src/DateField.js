@@ -1,10 +1,7 @@
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
 import React from 'react';
+import TextField from '@material-ui/core/TextField';
 import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
-
-import wrapField from './wrapField';
 
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
 const dateFormat = value => value && value.toISOString().slice(0, -8);
@@ -17,31 +14,41 @@ const dateParse = (timestamp, onChange) => {
   }
 };
 
-const Date = ({inputRef, label, labelProps, name, onChange, placeholder, value, ...props}) => {
-  const filteredProps = wrapField._filterDOMProps(filterDOMProps(props));
-
-  return wrapField(
-    {...props, component: undefined},
-    label && (
-      <InputLabel htmlFor={name} {...labelProps}>
-        {label}
-      </InputLabel>
-    ),
-    <Input
-      name={name}
-      onChange={event => dateParse(event.target.valueAsNumber, onChange)}
-      placeholder={placeholder}
-      ref={inputRef}
-      type="datetime-local"
-      value={dateFormat(value)}
-      {...filteredProps}
-    />
-  );
-};
+const Date = ({
+  InputLabelProps,
+  disabled,
+  error,
+  errorMessage,
+  helperText,
+  inputRef,
+  label,
+  labelProps,
+  name,
+  onChange,
+  placeholder,
+  showInlineError,
+  value,
+  ...props
+}) => (
+  <TextField
+    disabled={!!disabled}
+    error={!!error}
+    helperText={(error && showInlineError && errorMessage) || helperText}
+    label={label}
+    InputLabelProps={{...labelProps, ...InputLabelProps}}
+    name={name}
+    onChange={event => disabled || dateParse(event.target.valueAsNumber, onChange)}
+    placeholder={placeholder}
+    ref={inputRef}
+    type="datetime-local"
+    value={dateFormat(value)}
+    {...filterDOMProps(props)}
+  />
+);
 
 Date.defaultProps = {
   fullWidth: true,
-  margin: 'normal'
+  margin: 'dense'
 };
 
 export default connectField(Date);

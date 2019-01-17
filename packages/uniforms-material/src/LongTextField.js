@@ -33,7 +33,7 @@ const LongText = ({
 );
 LongText.defaultProps = {
   fullWidth: true,
-  margin: 'normal',
+  margin: 'dense',
   type: 'text'
 };
 

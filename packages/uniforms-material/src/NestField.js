@@ -18,7 +18,7 @@ const Nest = ({children, fields, itemProps, label, name, ...props}) =>
 
 Nest.defaultProps = {
   fullWidth: true,
-  margin: 'none'
+  margin: 'dense'
 };
 
 export default connectField(Nest, {ensureValue: false, includeInChain: false});

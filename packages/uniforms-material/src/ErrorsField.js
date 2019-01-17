@@ -22,7 +22,7 @@ ErrorsField.contextTypes = BaseField.contextTypes;
 
 ErrorsField.defaultProps = {
   fullWidth: true,
-  margin: 'normal'
+  margin: 'dense'
 };
 
 export default ErrorsField;
