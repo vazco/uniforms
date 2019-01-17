@@ -20,11 +20,23 @@ const resolveRef = (referance, schema) => {
   return resolvedReference;
 };
 
+const distinctSchema = schema => {
+  if (schema.type === 'object') {
+    return schema;
+  }
+
+  if (schema.$ref) {
+    return {...schema, ...resolveRef(schema.$ref, schema)};
+  }
+
+  return schema;
+};
+
 export default class JSONSchemaBridge extends Bridge {
   constructor(schema, validator) {
     super();
 
-    this.schema = schema;
+    this.schema = distinctSchema(schema);
     this._compiledSchema = {};
     this.validator = validator;
   }
@@ -62,7 +74,6 @@ export default class JSONSchemaBridge extends Bridge {
 
   getField(name) {
     return joinName(null, name).reduce((definition, next, nextIndex, array) => {
-      // eslint-disable-line complexity
       const previous = joinName(array.slice(0, nextIndex));
       const isRequired = (definition.required || (this._compiledSchema[previous] || {}).required || []).includes(next);
 
@@ -73,6 +84,7 @@ export default class JSONSchemaBridge extends Bridge {
         invariant(definition.type === 'array', 'Field not found in schema: "%s"', name);
         definition = Array.isArray(definition.items) ? definition.items[parseInt(next, 10)] : definition.items;
       } else if (definition.type === 'object') {
+        invariant(definition.properties, 'Field properties not found in schema: "%s"', name);
         definition = definition.properties[next];
       } else {
         const [{properties: combinedDefinition = {}} = {}] = ['allOf', 'anyOf', 'oneOf']
@@ -182,7 +194,11 @@ export default class JSONSchemaBridge extends Bridge {
 
   getSubfields(name) {
     if (!name) {
-      return Object.keys(this.schema.properties);
+      if (this.schema.properties) {
+        return Object.keys(this.schema.properties);
+      }
+
+      return [];
     }
 
     const {type: _type, properties: _properties} = this.getField(name);

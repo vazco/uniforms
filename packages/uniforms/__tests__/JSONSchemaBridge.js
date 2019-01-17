@@ -83,6 +83,24 @@ describe('JSONSchemaBridge', () => {
   const validator = jest.fn();
   const bridge = new JSONSchemaBridge(schema, validator);
 
+  describe('#constructor()', () => {
+    it('sets schema correctly when has top level type of object', () => {
+      expect(bridge.schema).toEqual(schema);
+    });
+
+    it('sets schema correctly when has top level $ref', () => {
+      const localSchema = {definitions: schema.definitions, $ref: '#/definitions/personalData'};
+      const localBridge = new JSONSchemaBridge(localSchema, validator);
+      expect(localBridge.schema).toEqual({...localSchema, ...localSchema.definitions.personalData});
+    });
+
+    it('falls back to input schema', () => {
+      const localSchema = {definitions: schema.definitions};
+      const localBridge = new JSONSchemaBridge(localSchema, validator);
+      expect(localBridge.schema).toEqual(localSchema);
+    });
+  });
+
   describe('#check()', () => {
     it('always returns false', () => {
       expect(JSONSchemaBridge.check()).not.toBeTruthy();
@@ -182,6 +200,24 @@ describe('JSONSchemaBridge', () => {
 
     it('returns correct definition (array flat $ref, nested property)', () => {
       expect(bridge.getField('friends.$.firstName')).toEqual({default: 'John', type: 'string'});
+    });
+
+    it('returns correct definition when schema has top level $ref', () => {
+      const localBridge = new JSONSchemaBridge(
+        {definitions: schema.definitions, $ref: '#/definitions/personalData'},
+        validator
+      );
+
+      expect(localBridge.getField('firstName')).toEqual({default: 'John', type: 'string'});
+    });
+
+    it('throws when resolving field schema is not possible', () => {
+      const localBridge = new JSONSchemaBridge(
+        {definitions: schema.definitions, $ref: '#/definitions/personalData'},
+        validator
+      );
+
+      expect(() => localBridge.getField('invalid')).toThrow(/Field not found in schema/);
     });
   });
 
@@ -381,6 +417,24 @@ describe('JSONSchemaBridge', () => {
     it('works with primitives', () => {
       expect(bridge.getSubfields('personalData.firstName')).toEqual([]);
       expect(bridge.getSubfields('age')).toEqual([]);
+    });
+
+    it('works when schema has top level $ref', () => {
+      const localBridge = new JSONSchemaBridge(
+        {definitions: schema.definitions, $ref: '#/definitions/address'},
+        validator
+      );
+
+      expect(localBridge.getSubfields()).toEqual(['city', 'state', 'street']);
+    });
+
+    it('works on top level when schema does not have properties', () => {
+      const localBridge = new JSONSchemaBridge(
+        {definitions: schema.definitions, $ref: '#/definitions/lastName'},
+        validator
+      );
+
+      expect(localBridge.getSubfields()).toEqual([]);
     });
   });
 
