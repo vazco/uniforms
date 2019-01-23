@@ -1,3 +1,8 @@
+## [v1.31.0](https://github.com/vazco/uniforms/tree/v1.31.0) (2019-01-23)
+- **Added:** Support for `$ref` property in `JSONSchemaBridge`. [\#507](https://github.com/vazco/uniforms/issues/507)
+- **Fixed:** Warnings introduced in `1.30.0` in `uniforms-material` theme. [\#501](https://github.com/vazco/uniforms/issues/501)
+- **Fixed:** Few style problems, by using differents components in `uniforms-material` theme. [\#505](https://github.com/vazco/uniforms/issues/505)
+
 ## [v1.30.0](https://github.com/vazco/uniforms/tree/v1.30.0) (2019-01-05)
 - **Added:** New `variant` prop in most `uniforms-material` fields. [\#495](https://github.com/vazco/uniforms/issues/495)
 - **Changed:** Default SubmitField `variant` in uniforms-material. Minimum version of `@material-ui/core` is now `1.2.0`. [\#498](https://github.com/vazco/uniforms/issues/498)
