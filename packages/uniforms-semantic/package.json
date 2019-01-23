@@ -1,6 +1,6 @@
 {
   "name": "uniforms-semantic",
-  "version": "1.30.0",
+  "version": "1.31.0",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",
