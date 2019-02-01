@@ -1,5 +1,6 @@
 import FormControl from '@material-ui/core/FormControl';
 import IconButton from '@material-ui/core/IconButton';
+import Add from '@material-ui/icons/Add';
 import PropTypes from 'prop-types';
 import React from 'react';
 import cloneDeep from 'lodash/cloneDeep';
@@ -28,7 +29,7 @@ ListAdd.propTypes = {
 
 ListAdd.defaultProps = {
   fullWidth: true,
-  icon: '+',
+  icon: <Add />,
   margin: 'dense'
 };
 

@@ -1,4 +1,5 @@
 import IconButton from '@material-ui/core/IconButton';
+import Remove from '@material-ui/icons/Remove';
 import PropTypes from 'prop-types';
 import React from 'react';
 import connectField from 'uniforms/connectField';
@@ -27,7 +28,7 @@ ListDel.propTypes = {
 };
 
 ListDel.defaultProps = {
-  icon: '-'
+  icon: <Remove />
 };
 
 export default connectField(ListDel, {includeParent: true, initialValue: false});

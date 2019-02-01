@@ -23,11 +23,9 @@
   ],
   "peerDependencies": {
     "@material-ui/core": "^3.0.0 || ^1.2.0",
+    "@material-ui/icons": "3.0.1",
     "react": "^16.0.0 || ^15.0.0 || ^0.14.0",
     "uniforms": "^1.30.0"
-  },
-  "devDependencies": {
-    "@material-ui/icons": "3.0.1"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0",
