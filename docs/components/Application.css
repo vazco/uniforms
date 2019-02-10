@@ -14,11 +14,6 @@ img {
     top: 0;
 }
 
-.panelGroup {
-    height: 100vh !important;
-    width: 100vw !important;
-}
-
 .panelGroup .divider,
 .panelGroupNavbar {
     background: #121621;
@@ -62,6 +57,7 @@ img {
     display: flex;
 }
 
+.panelWrapper,
 .panelWrapper > section {
     flex-direction: column;
 }

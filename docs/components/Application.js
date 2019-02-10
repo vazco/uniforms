@@ -2,12 +2,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import enUS from 'antd/lib/locale-provider/en_US';
 import {Component} from 'react';
+import {Link} from 'docz';
 
 import presets from '../lib/presets';
 import schema from '../lib/schema';
 import {parseQuery} from '../lib/utils';
 import {updateQuery} from '../lib/utils';
 
+import './Application.css';
 import ApplicationForm from './ApplicationForm';
 import ApplicationPreviewField from './ApplicationPreviewField';
 import ApplicationPropsField from './ApplicationPropsField';
@@ -57,6 +59,8 @@ class Application extends Component {
           <nav className="panelGroupNavbar">
             <section className="panelHeader">
               <b>uniforms</b>
+              &nbsp;
+              <Link to="/">Go back to docs</Link>
             </section>
 
             <section className="panelHeaderInfo">
