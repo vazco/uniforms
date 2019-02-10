@@ -31,12 +31,6 @@ Third-party patches are essential for keeping every project great. We simply can
 
 <br>
 
-# Running locally
-
-See [demo](https://github.com/vazco/uniforms/blob/master/demo).
-
-<br>
-
 # _Work in progress_ PRs are also welcome
 
 If you can't/couldn't/won't finish your PR, submit it anyway - maybe someone else will continue your work. Also, if you don't know how to achieve your desired feature - file an issue for it - maybe someone else will implement it.

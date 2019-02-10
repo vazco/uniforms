@@ -1,5 +1,5 @@
-/demo/.meteor/local
-/demo/node_modules
+/docs/.docz
+/docs/node_modules
 
 /coverage
 /node_modules

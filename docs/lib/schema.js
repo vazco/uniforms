@@ -6,25 +6,25 @@ import SimpleSchema2 from 'simpl-schema';
 import {buildASTSchema} from 'graphql';
 import {parse} from 'graphql';
 
-import {Meteor} from 'meteor/meteor';
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+// import {Meteor} from 'meteor/meteor';
+// import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
 import presets from './presets';
 import themes from './themes';
 
-const scope = Meteor.isClient ? window : global;
+const scope = typeof window === 'undefined' ? global : window;
 
 // SimpleSchema is using it
-if (Meteor.isClient) {
-  scope.Buffer = () => {};
-  scope.Buffer.isBuffer = () => false;
-}
+// if (Meteor.isClient) {
+//   scope.Buffer = () => {};
+//   scope.Buffer.isBuffer = () => false;
+// }
 
 // This is required for the eval.
 scope.Ajv = Ajv;
 scope.GraphQLBridge = GraphQLBridge;
 scope.JSONSchemaBridge = JSONSchemaBridge;
-scope.SimpleSchema = SimpleSchema;
+// scope.SimpleSchema = SimpleSchema;
 scope.SimpleSchema2 = SimpleSchema2;
 scope.buildASTSchema = buildASTSchema;
 scope.parse = parse;

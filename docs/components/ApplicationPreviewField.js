@@ -42,7 +42,7 @@ class ApplicationPreview extends Component {
     }
 
     return (
-      <div>
+      <React.Fragment>
         {link}
 
         {this.props.errorMessage ? (
@@ -53,7 +53,7 @@ class ApplicationPreview extends Component {
 
         {this.state.model !== undefined && <br />}
         {this.state.model !== undefined && <pre children={this.state.model} />}
-      </div>
+      </React.Fragment>
     );
   }
 }

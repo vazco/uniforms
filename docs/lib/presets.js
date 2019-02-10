@@ -1,7 +1,7 @@
 const preset = strings => strings[0].slice(9, -5).replace(/([\r\n]+) {8}/g, '$1');
 const presets = {
   'Welcome!': preset`
-        new SimpleSchema({
+        new SimpleSchema2({
             date: {
                 type: Date,
                 defaultValue: new Date()
@@ -26,8 +26,12 @@ const presets = {
             },
 
             friends: {
-                type: [Object],
+                type: Array,
                 minCount: 1
+            },
+
+            'friends.$': {
+                type: Object
             },
 
             'friends.$.name': {
