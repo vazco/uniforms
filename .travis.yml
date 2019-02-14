@@ -11,10 +11,15 @@ script:
 after_success:
   - npm run coverage:report
 
+before_deploy:
+  -      npm --prefix docs ci
+  - CI=0 npm --prefix docs run build
+
 deploy:
-  provider: script
-  script: npm --prefix docs ci && CI=0 npm --prefix docs run deploy
+  provider: pages
+  github_token: $GITHUB_TOKEN
   skip_cleanup: true
+  local-dir: docs/.docz/dist
   on:
     all_branches: true
     condition: $TRAVIS_BRANCH =~ ^master|new-docs$
