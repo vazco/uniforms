@@ -10,3 +10,11 @@ script:
 
 after_success:
   - npm run coverage:report
+
+deploy:
+  provider: script
+  script: npm --prefix docs ci && npm --prefix docs run deploy
+  skip_cleanup: true
+  on:
+    all_branches: true
+    condition: $TRAVIS_BRANCH = ^master|new-docs$

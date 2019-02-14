@@ -3,6 +3,8 @@
   "private": true,
   "scripts": {
     "build": "docz build",
+    "deploy": "gh-pages -d .docz/dist",
+    "predeploy": "npm run build",
     "start": "docz dev"
   },
   "dependencies": {
@@ -24,6 +26,7 @@
   "devDependencies": {
     "docz": "0.13.7",
     "docz-plugin-css": "0.11.0",
+    "gh-pages": "2.0.1",
     "webpack": "4.28.4"
   }
 }
