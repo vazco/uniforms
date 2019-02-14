@@ -17,4 +17,4 @@ deploy:
   skip_cleanup: true
   on:
     all_branches: true
-    condition: $TRAVIS_BRANCH ~= ^master|new-docs$
+    condition: $TRAVIS_BRANCH =~ ^master|new-docs$
