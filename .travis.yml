@@ -13,7 +13,7 @@ after_success:
 
 deploy:
   provider: script
-  script: npm --prefix docs ci && npm --prefix docs run deploy
+  script: npm --prefix docs ci && CI=0 npm --prefix docs run deploy
   skip_cleanup: true
   on:
     all_branches: true
