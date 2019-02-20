@@ -28,6 +28,14 @@ test('<SelectField> - renders a Select with correct disabled state', () => {
   expect(wrapper.find(FormControl).prop('disabled')).toBe(true);
 });
 
+test('<SelectField> - renders a Select with correct required state', () => {
+  const element = <SelectField name="x" required />;
+  const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+
+  expect(wrapper.find(Select)).toHaveLength(1);
+  expect(wrapper.find(TextField).prop('required')).toBe(true);
+});
+
 test('<SelectField> - renders a Select with correct id (inherited)', () => {
   const element = <SelectField name="x" />;
   const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
