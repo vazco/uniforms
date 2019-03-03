@@ -11,11 +11,7 @@ const ApplicationProps = ({onChange, schema, theme, value}) => {
   const isMaterial = theme === 'material';
   const isSemantic = theme === 'semantic';
 
-  const AutoForm = themes[theme].AutoForm;
-  const BoolField = themes[theme].BoolField;
-  const ErrorsField = themes[theme].ErrorsField;
-  const LongTextField = themes[theme].LongTextField;
-  const NumField = themes[theme].NumField;
+  const {AutoForm, BoolField, ErrorsField, LongTextField, NumField} = themes[theme];
 
   return (
     <AutoForm autosave autosaveDelay={100} model={value} onSubmit={onChange} schema={schema}>

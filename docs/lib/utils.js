@@ -1,6 +1,9 @@
+const ENABLE_QUERY = false;
 const URL_KEYS = ['preset', 'props', 'theme'];
 
 export const updateQuery = state => {
+  if (!ENABLE_QUERY) return;
+
   const query = URL_KEYS.map(key => {
     if (!state[key]) {
       return null;
@@ -33,6 +36,8 @@ const mergeDefinedKeys = (raw, keys, target) => {
 };
 
 export const parseQuery = () => {
+  if (!ENABLE_QUERY) return {};
+
   const raw = document.location.hash
     .replace(/^#\?/, '')
     .split('&')

@@ -1,7 +1,7 @@
 const preset = strings => strings[0].slice(9, -5).replace(/([\r\n]+) {8}/g, '$1');
 const presets = {
   'Welcome!': preset`
-        new SimpleSchema2({
+        new SimpleSchema({
             date: {
                 type: Date,
                 defaultValue: new Date()
@@ -129,29 +129,6 @@ const presets = {
             city: {
                 type: String,
                 optional: true,
-                max: 50,
-            },
-
-            state: {
-                type: String
-            },
-
-            street: {
-                type: String,
-                max: 100
-            },
-
-            zip: {
-                type: String,
-                regEx: /^[0-9]{5}$/
-            }
-        })
-    `,
-
-  'Address (SimpleSchema2)': preset`
-        new SimpleSchema2({
-            city: {
-                type: String,
                 max: 50
             },
 

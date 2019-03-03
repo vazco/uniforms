@@ -11,10 +11,10 @@
 </p>
 
 <p align="center">
-    <strong><a href="https://github.com/vazco/uniforms/blob/master/API.md">API</a></strong> |
+    <strong><a href="https://vazco.github.io/uniforms/#/API.md">API</a></strong> |
     <strong><a href="https://github.com/vazco/uniforms/blob/master/.github/CONTRIBUTING.md">Contribute</a></strong> |
-    <strong><a href="https://github.com/vazco/uniforms/blob/master/INTRODUCTION.md">Documentation</a></strong> |
-    <strong><a href="https://uniforms.tools/">Playground</a></strong> |
+    <strong><a href="https://vazco.github.io/uniforms/#/introduction">Documentation</a></strong> |
+    <strong><a href="https://vazco.github.io/uniforms/#/playground">Playground</a></strong> |
     <strong><a href="https://github.com/vazco/uniforms/projects/1">Roadmap</a></strong>
 </p>
 
@@ -53,7 +53,7 @@
     * **[GraphQL](https://github.com/graphql/graphql-js)**
     * **[SimpleSchema](https://github.com/aldeed/meteor-simple-schema)**
     * **[SimpleSchema@2](https://github.com/aldeed/node-simple-schema)**
-    * **And any other - only [a small wrapper](https://github.com/vazco/uniforms/blob/master/INTRODUCTION.md#schemas) is needed!**
+    * **And any other - only [a small wrapper](https://vazco.github.io/uniforms/#/introduction) is needed!**
 * **Wide range of themes:**
     * **[AntD](https://ant.design/) theme**
     * **[Bootstrap3](http://getbootstrap.com/docs/3.3/) theme**
