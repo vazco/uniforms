@@ -2,37 +2,27 @@ import Ajv from 'ajv';
 import GraphQLBridge from 'uniforms/GraphQLBridge';
 import JSONSchemaBridge from 'uniforms/JSONSchemaBridge';
 import MessageBox from 'message-box';
-import SimpleSchema2 from 'simpl-schema';
+import SimpleSchema from 'simpl-schema';
 import {buildASTSchema} from 'graphql';
 import {parse} from 'graphql';
-
-// import {Meteor} from 'meteor/meteor';
-// import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
 import presets from './presets';
 import themes from './themes';
 
 const scope = typeof window === 'undefined' ? global : window;
 
-// SimpleSchema is using it
-// if (Meteor.isClient) {
-//   scope.Buffer = () => {};
-//   scope.Buffer.isBuffer = () => false;
-// }
-
 // This is required for the eval.
 scope.Ajv = Ajv;
 scope.GraphQLBridge = GraphQLBridge;
 scope.JSONSchemaBridge = JSONSchemaBridge;
-// scope.SimpleSchema = SimpleSchema;
-scope.SimpleSchema2 = SimpleSchema2;
+scope.SimpleSchema = SimpleSchema;
 scope.buildASTSchema = buildASTSchema;
 scope.parse = parse;
 
 // Dynamic field error.
 MessageBox.defaults({messages: {en: {syntax: ''}}});
 
-const schema = new SimpleSchema2({
+const schema = new SimpleSchema({
   preset: {
     type: String,
     defaultValue: Object.keys(presets)[0],
@@ -54,9 +44,9 @@ const schema = new SimpleSchema2({
       asyncOnValidate: false
     },
     uniforms: {
-      schema: new SimpleSchema2({
+      schema: new SimpleSchema({
         autosave: {optional: true, type: Boolean},
-        autosaveDelay: {optional: true, type: SimpleSchema2.Integer},
+        autosaveDelay: {optional: true, type: SimpleSchema.Integer},
         disabled: {optional: true, type: Boolean},
         label: {optional: true, type: Boolean},
         placeholder: {optional: true, type: Boolean},
