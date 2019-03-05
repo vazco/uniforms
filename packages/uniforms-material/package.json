@@ -14,6 +14,7 @@
     "meteor",
     "react",
     "react-component",
+    "material-ui",
     "schema",
     "validation"
   ],
