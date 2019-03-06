@@ -25,6 +25,7 @@ const Num_ = props =>
       value={props.value}
     />
   );
+
 // NOTE: React < 16 workaround. Make it optional?
 class Num extends Component {
   constructor() {

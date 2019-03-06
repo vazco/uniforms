@@ -54,6 +54,7 @@ const Num_ = ({
     {!!(error && showInlineError) && <div className="ui red basic pointing label">{errorMessage}</div>}
   </div>
 );
+
 // NOTE: React < 16 workaround. Make it optional?
 class Num extends Component {
   constructor() {

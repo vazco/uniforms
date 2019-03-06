@@ -3,6 +3,7 @@
 
 [lints]
 all=error
+dynamic-export=off
 unclear-type=off
 untyped-import=off
 

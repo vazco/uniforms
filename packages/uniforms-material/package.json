@@ -1,6 +1,6 @@
 {
   "name": "uniforms-material",
-  "version": "1.31.0",
+  "version": "1.31.1",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",
@@ -11,6 +11,7 @@
   "keywords": [
     "form",
     "forms",
+    "material-ui",
     "meteor",
     "react",
     "react-component",
@@ -24,7 +25,7 @@
   "peerDependencies": {
     "@material-ui/core": "^3.0.0 || ^1.2.0",
     "react": "^16.0.0 || ^15.0.0 || ^0.14.0",
-    "uniforms": "^1.30.0"
+    "uniforms": "^1.31.1"
   },
   "devDependencies": {
     "@material-ui/icons": "3.0.1"

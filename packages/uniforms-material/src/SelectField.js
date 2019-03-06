@@ -61,6 +61,7 @@ const renderSelect = ({
       label={label}
       margin={margin}
       onChange={event => disabled || onChange(event.target.value)}
+      required={required}
       select
       SelectProps={{
         displayEmpty: hasPlaceholder,

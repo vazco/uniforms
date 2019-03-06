@@ -1,6 +1,6 @@
 {
   "name": "uniforms-semantic",
-  "version": "1.31.0",
+  "version": "1.31.1",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",
@@ -15,6 +15,7 @@
     "react",
     "react-component",
     "schema",
+    "semantic-ui",
     "validation"
   ],
   "files": [
@@ -23,7 +24,7 @@
   ],
   "peerDependencies": {
     "react": "^16.0.0 || ^15.0.0 || ^0.14.0",
-    "uniforms": "^1.30.0"
+    "uniforms": "^1.31.1"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0",
