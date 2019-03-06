@@ -38,6 +38,7 @@ const Num_ = ({
     />
   </div>
 );
+
 // NOTE: React < 16 workaround. Make it optional?
 class Num extends Component {
   constructor() {

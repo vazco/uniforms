@@ -101,28 +101,37 @@ test('<NumField> - renders an input with correct value (default)', () => {
 });
 
 test('<NumField> - renders an input with correct value (model)', () => {
+  const onChange = jest.fn();
+
   const element = <NumField name="x" />;
-  const wrapper = mount(element, createContext({x: {type: Number}}, {model: {x: '1'}}));
+  const wrapper = mount(element, createContext({x: {type: Number}}, {model: {x: 1}, onChange}));
 
   expect(wrapper.find('input')).toHaveLength(1);
   expect(wrapper.find('input').prop('value')).toBe('1');
 
   // NOTE: All following tests are here to cover hacky NumField implementation.
-  expect(wrapper.find('input').simulate('change', {target: {value: '0.1'}})).toBeTruthy();
-  wrapper.setProps({value: '0.1'});
-  expect(wrapper.find('input').prop('value')).toBe('0.1');
-  wrapper.setProps({value: undefined});
-  expect(wrapper.find('input').prop('value')).toBe('');
-  wrapper.setProps({value: undefined});
-  expect(wrapper.find('input').prop('value')).toBe('');
-  wrapper.setProps({value: 2});
-  expect(wrapper.find('input').prop('value')).toBe('2');
-  wrapper.setProps({value: 2});
-  expect(wrapper.find('input').prop('value')).toBe('2');
-  wrapper.setProps({value: 1, decimal: false});
-  expect(wrapper.find('input').prop('value')).toBe('1');
-  wrapper.setProps({value: 1, decimal: false});
-  expect(wrapper.find('input').prop('value')).toBe('1');
+  const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+
+  [
+    {value: 0.1},
+    {value: undefined},
+    {value: undefined},
+    {value: 2},
+    {value: 2},
+    {value: 1, decimal: false},
+    {value: 1, decimal: false}
+  ].forEach(props => {
+    const value = props.value;
+    const valueInput = value === undefined ? '' : '' + value;
+
+    expect(wrapper.find('input').simulate('change', {target: {value: valueInput}})).toBeTruthy();
+    expect(onChange).toHaveBeenLastCalledWith('x', value);
+
+    wrapper.setProps({value});
+    expect(wrapper.find('input').prop('value')).toBe(valueInput);
+  });
+
+  spy.mockRestore();
 });
 
 test('<NumField> - renders an input with correct value (specified)', () => {
