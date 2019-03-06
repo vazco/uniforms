@@ -3,5 +3,10 @@
     "jest": true
   },
   "extends": "vazco/prettier",
-  "root": true
+  "root": true,
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }

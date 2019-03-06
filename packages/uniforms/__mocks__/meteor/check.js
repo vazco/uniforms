@@ -1,7 +1,7 @@
 // @flow
 
 export const Match = {
-  OneOf() {},
-  Optional() {},
-  ObjectIncluding() {}
+  OneOf: jest.fn<[], void>(),
+  Optional: jest.fn<[], void>(),
+  ObjectIncluding: jest.fn<[], void>()
 };
