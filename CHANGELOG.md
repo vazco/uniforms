@@ -1,3 +1,8 @@
+## [v1.31.1](https://github.com/vazco/uniforms/tree/v1.31.1) (2019-03-06)
+
+- **Fixed:** `SelectField` required state in `uniforms-material`. [\#512](https://github.com/vazco/uniforms/issues/512)
+- **Fixed:** `NumField` value parsing in `uniforms-material`. [\#516](https://github.com/vazco/uniforms/issues/516)
+
 ## [v1.31.0](https://github.com/vazco/uniforms/tree/v1.31.0) (2019-01-23)
 - **Added:** Support for `$ref` property in `JSONSchemaBridge`. [\#507](https://github.com/vazco/uniforms/issues/507)
 - **Fixed:** Warnings introduced in `1.30.0` in `uniforms-material` theme. [\#501](https://github.com/vazco/uniforms/issues/501)
