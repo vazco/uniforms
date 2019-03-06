@@ -9,6 +9,7 @@
   "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-antd",
   "bugs": "https://github.com/vazco/uniforms/issues",
   "keywords": [
+    "antd",
     "form",
     "forms",
     "meteor",

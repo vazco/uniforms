@@ -15,6 +15,7 @@
     "react",
     "react-component",
     "schema",
+    "semantic-ui",
     "validation"
   ],
   "files": [

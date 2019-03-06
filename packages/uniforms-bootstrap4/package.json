@@ -9,6 +9,7 @@
   "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-bootstrap4",
   "bugs": "https://github.com/vazco/uniforms/issues",
   "keywords": [
+    "bootstrap",
     "form",
     "forms",
     "meteor",
