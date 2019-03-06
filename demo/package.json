@@ -1,6 +1,6 @@
 {
   "name": "demo",
-  "version": "1.31.0",
+  "version": "1.31.1",
   "private": true,
   "scripts": {
     "start": "meteor run"
