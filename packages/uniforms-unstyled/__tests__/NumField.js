@@ -120,13 +120,16 @@ test('<NumField> - renders an input with correct value (model)', () => {
     {value: 2},
     {value: 1, decimal: false},
     {value: 1, decimal: false}
-  ].forEach(props => {
-    const value = props.value;
+  ].forEach(({decimal = true, value}) => {
     const valueInput = value === undefined ? '' : '' + value;
 
+    wrapper.setProps({decimal});
+
+    expect(wrapper.find('input').simulate('change', {target: {value: ''}})).toBeTruthy();
     expect(wrapper.find('input').simulate('change', {target: {value: valueInput}})).toBeTruthy();
     expect(onChange).toHaveBeenLastCalledWith('x', value);
 
+    wrapper.setProps({value: undefined});
     wrapper.setProps({value});
     expect(wrapper.find('input').prop('value')).toBe(valueInput);
   });
