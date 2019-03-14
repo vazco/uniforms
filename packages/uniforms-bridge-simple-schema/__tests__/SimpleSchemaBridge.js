@@ -1,4 +1,4 @@
-import SimpleSchemaBridge from 'uniforms-bridge-simple-schema/SimpleSchemaBridge';
+import {SimpleSchemaBridge} from 'uniforms-bridge-simple-schema';
 
 jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');

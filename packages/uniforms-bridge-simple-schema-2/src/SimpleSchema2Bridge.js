@@ -3,32 +3,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import invariant from 'invariant';
 
 import Bridge from 'uniforms/Bridge';
-import createSchemaBridge from 'uniforms/createSchemaBridge';
-import filterDOMProps from 'uniforms/filterDOMProps';
 import joinName from 'uniforms/joinName';
-
-SimpleSchema.extendOptions(['uniforms']);
-
-// There's no possibility to retrieve them at runtime
-filterDOMProps.register(
-  'allowedValues',
-  'autoValue',
-  'blackbox',
-  'custom',
-  'decimal',
-  'defaultValue',
-  'exclusiveMax',
-  'exclusiveMin',
-  'label',
-  'max',
-  'maxCount',
-  'min',
-  'minCount',
-  'optional',
-  'regEx',
-  'trim',
-  'type'
-);
 
 export default class SimpleSchema2Bridge extends Bridge {
   constructor(schema) {
@@ -39,13 +14,12 @@ export default class SimpleSchema2Bridge extends Bridge {
 
   static check(schema) {
     return (
-      SimpleSchema &&
-      (schema &&
-        schema.getDefinition &&
-        schema.messageBox &&
-        schema.objectKeys &&
-        schema.validator &&
-        schema.version === 2)
+      schema &&
+      schema.getDefinition &&
+      schema.messageBox &&
+      schema.objectKeys &&
+      schema.validator &&
+      schema.version === 2
     );
   }
 
@@ -205,5 +179,3 @@ export default class SimpleSchema2Bridge extends Bridge {
     return validator;
   }
 }
-
-createSchemaBridge.register(SimpleSchema2Bridge);

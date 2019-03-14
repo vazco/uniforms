@@ -1,6 +1,6 @@
 import SimpleSchema from 'simpl-schema';
 
-import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2/SimpleSchema2Bridge';
+import {SimpleSchema2Bridge} from 'uniforms-bridge-simple-schema-2';
 
 describe('SimpleSchema2Bridge', () => {
   const noop = () => {};

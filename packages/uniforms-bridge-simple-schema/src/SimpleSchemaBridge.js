@@ -1,77 +1,9 @@
-/* global Package */
-
+import Bridge from 'uniforms/Bridge';
 import cloneDeep from 'lodash/cloneDeep';
 import invariant from 'invariant';
-
-import Bridge from 'uniforms/Bridge';
-import createSchemaBridge from 'uniforms/createSchemaBridge';
 import joinName from 'uniforms/joinName';
-import filterDOMProps from 'uniforms/filterDOMProps';
 
-let Match = (typeof global === 'object' ? global : window).Match;
-let SimpleSchema = (typeof global === 'object' ? global : window).SimpleSchema;
-
-/* istanbul ignore next */
-try {
-  if (Match === undefined && typeof Package === 'object') {
-    Match = Package['check'].Match;
-  }
-
-  if (SimpleSchema === undefined && typeof Package === 'object') {
-    SimpleSchema = Package['aldeed:simple-schema'].SimpleSchema;
-  }
-} catch (_) {
-  /* Ignore it. */
-}
-
-try {
-  const r = require; // Silence Meteor missing module warning
-
-  if (Match === undefined) {
-    Match = r('meteor/check').Match;
-  }
-
-  if (SimpleSchema === undefined) {
-    SimpleSchema = r('meteor/aldeed:simple-schema').SimpleSchema;
-  }
-} catch (_) {
-  /* Ignore it. */
-}
-
-if (SimpleSchema && Match) {
-  SimpleSchema.extendOptions({
-    uniforms: Match.Optional(
-      Match.OneOf(
-        String,
-        Function,
-        Match.ObjectIncluding({
-          component: Match.Optional(Match.OneOf(String, Function))
-        })
-      )
-    )
-  });
-
-  // There's no possibility to retrieve them at runtime
-  filterDOMProps.register(
-    'allowedValues',
-    'autoValue',
-    'blackbox',
-    'custom',
-    'decimal',
-    'defaultValue',
-    'exclusiveMax',
-    'exclusiveMin',
-    'label',
-    'max',
-    'maxCount',
-    'min',
-    'minCount',
-    'optional',
-    'regEx',
-    'trim',
-    'type'
-  );
-}
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
 export default class SimpleSchemaBridge extends Bridge {
   constructor(schema) {
@@ -82,13 +14,12 @@ export default class SimpleSchemaBridge extends Bridge {
 
   static check(schema) {
     return (
-      SimpleSchema &&
-      (schema &&
-        schema.getDefinition &&
-        schema.messageForError &&
-        schema.objectKeys &&
-        schema.validator &&
-        schema.version !== 2)
+      schema &&
+      schema.getDefinition &&
+      schema.messageForError &&
+      schema.objectKeys &&
+      schema.validator &&
+      schema.version !== 2
     );
   }
 
@@ -227,5 +158,3 @@ export default class SimpleSchemaBridge extends Bridge {
     return validator;
   }
 }
-
-createSchemaBridge.register(SimpleSchemaBridge);

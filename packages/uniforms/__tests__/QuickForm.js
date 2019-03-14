@@ -3,6 +3,7 @@ import {Component} from 'react';
 import {mount} from 'enzyme';
 
 import QuickForm from 'uniforms/QuickForm';
+import {SimpleSchemaBridge} from 'uniforms-bridge-simple-schema';
 
 jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
@@ -16,12 +17,12 @@ describe('QuickForm', () => {
   }
   /* eslint-enable react/display-name */
 
-  const schema = {
+  const schema = new SimpleSchemaBridge({
     getDefinition: () => {},
     messageForError: () => {},
     objectKeys: () => ['a', 'b', 'c'],
     validator: () => {}
-  };
+  });
 
   describe('when rendered with custom fields', () => {
     it('renders `AutoField` for each field', () => {

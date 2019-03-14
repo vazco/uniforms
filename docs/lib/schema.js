@@ -1,8 +1,8 @@
 import Ajv from 'ajv';
-import GraphQLBridge from 'uniforms/GraphQLBridge';
-import JSONSchemaBridge from 'uniforms/JSONSchemaBridge';
 import MessageBox from 'message-box';
 import SimpleSchema from 'simpl-schema';
+import {GraphQLBridge} from 'uniforms-bridge-graphql';
+import {JSONSchemaBridge} from 'uniforms-bridge-json-schema';
 import {buildASTSchema} from 'graphql';
 import {parse} from 'graphql';
 
