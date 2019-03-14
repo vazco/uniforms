@@ -12,7 +12,6 @@ after_success:
   - npm run coverage:report
 
 before_deploy:
-  -      npm --prefix docs ci
   - CI=0 npm --prefix docs run build
 
 deploy:
