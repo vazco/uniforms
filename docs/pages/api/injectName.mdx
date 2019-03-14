@@ -1,0 +1,14 @@
+---
+name: injectName
+route: "/injectName"
+menu: "API"
+---
+# `injectName`
+
+```js
+import injectName from 'uniforms/injectName';
+
+// It's rather an internal helper, but it's still exported. Injects name to all
+// already rendered fields.
+const componentWithInjectedName = injectName(name, component);
+```

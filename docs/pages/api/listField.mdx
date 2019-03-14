@@ -1,0 +1,44 @@
+---
+name: ListField
+route: "/listField"
+menu: "API"
+---
+# `ListField`
+
+```js
+import ListField from 'uniforms-unstyled/ListField'; // Choose your theme package.
+
+<ListField
+    // Icon.
+    //   It's passed to the ListAddField.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    addIcon={<MyAddIcon />}
+
+    // Initial items count.
+    //   At least this amount of fields will be rendered at the beginning.
+    initialCount={5}
+
+    // ListItemField props.
+    //   These props are passed to the ListItemField.
+    itemProps={{/* ... /*}}
+
+    // Icon.
+    //   It's passed to the ListDelField.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    removeIcon={<MyRemoveIcon />}
+
+    // Field inline error.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    //   semantic
+    showInlineError={true}
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.

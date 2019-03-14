@@ -1,0 +1,46 @@
+---
+name: Bridge
+route: "/bridge"
+menu: "API"
+---
+# `Bridge`
+
+```js
+import Bridge from 'uniforms/Bridge';
+
+// This is a kind of abstract class. It should be extended to create custom
+// bridges. It implements all of the required methods and throws an error with
+// meaningful "method not implemented" error.
+class CustomBridge extends Bridge {
+    // Check, if this bridge is compatibile with given schema.
+    static check (schema) { /* ... */ }
+
+    // Field's scoped error.
+    getError (name, error) { /* ... */ }
+
+    // Field's scoped error message.
+    getErrorMessage (name, error) { /* ... */ }
+
+    // All error messages from error.
+    getErrorMessages (error) { /* ... */ }
+
+    // Field's definition (`field` prop).
+    getField (name) { /* ... */ }
+
+    // Field's initial value.
+    getInitialValue (name) { /* ... */ }
+
+    // Field's props.
+    getProps (name) { /* ... */ }
+
+    // Field's subfields (or first-level fields).
+    getSubfields (name) { /* ... */ }
+
+    // Field's type (ex. Number, String).
+    getType (name) { /* ... */ }
+
+    // Function with one argument - model - which throws errors when model is
+    // invalid.
+    getValidator (options) { /* ... */ }
+}
+```

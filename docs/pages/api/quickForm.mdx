@@ -1,0 +1,26 @@
+---
+name: QuickForm
+route: "/quickForm"
+menu: "API"
+---
+# `QuickForm`
+
+```js
+import QuickForm from 'uniforms/QuickForm'; // Or from the theme package.
+
+<QuickForm
+    // Custom AutoField.
+    //   It should be anything that will pass through React.createElement.
+    autoField={CustomAutoField}
+
+    // Custom ErrorsField.
+    //   It should be anything that will pass through React.createElement.
+    errorsField={CustomErrorsField}
+
+    // Custom SubmitField.
+    //   It should be anything that will pass through React.createElement.
+    submitField={CustomSubmitField}
+/>
+```
+
+**Note:** All `BaseForm` props are also accepted and all methods are available.

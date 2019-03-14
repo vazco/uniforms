@@ -1,0 +1,111 @@
+---
+name: TextField
+route: "/textField"
+menu: "API"
+---
+# `TextField`
+
+```js
+import TextField from 'uniforms-unstyled/TextField'; // Choose your theme package.
+
+<TextField
+    // Field layout.
+    //   Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object
+    //   is a {mode: size} object. Complete string is simply passed through.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    grid={3}        // 'col-3-sm' on label, 'col-9-sm' on input
+    grid="4"        // 'col-4-sm' on label, 'col-8-sm' on input
+    grid={{md: 5}}  // 'col-5-md' on label, 'col-7-md' on input
+    grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
+
+    // Field layout
+    //  The layout of label. You can set span and/or offset.
+    // Available in:
+    //   antd
+    labelCol={{span: 4}}   // 'ant-col-4' on label
+    labelCol={{offset: 2}} // 'ant-col-offset-2' on label
+
+    // Field layout
+    //   The layout for input controls. Same as labelCol
+    // Available in:
+    //   antd
+    wrapperCol={{span: 4}}   // 'ant-col-4' on field
+    wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
+
+    // Help text.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    help="Need help?"
+
+    // Help block className.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    helpClassName="a b c"
+
+    // Input icon.
+    //   Semantic inputs can have an icon. By default, it's placed on the right
+    //   side - to place it on the left, use iconLeft prop instead.
+    // Available in:
+    //   semantic
+    icon="user"
+
+    // Input left icon.
+    //   Semantic inputs can have an icon. With this prop, it's placed on the
+    //   left side - to place it on the right, use icon prop instead.
+    // Available in:
+    //   semantic
+    iconLeft="user"
+
+    // Input icon props.
+    //   Semantic inputs can have an icon. These props are passed directly to
+    //   the icon element.
+    // Available in:
+    //   semantic
+    iconProps={{onClick () {}}}
+
+    // Input wrapper class name.
+    //   In bootstrap themes, passed className is used on field block. This is
+    //   used on direct field wrapper.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    inputClassName="a b c"
+
+    // Input ref.
+    //   Setting ref prop to a field won't work as desired, because you'll
+    //   receive a field component rather than a HTML input. If you need an input ref,
+    //   use this prop instead.
+    inputRef={ref => {}}
+
+    // Field inline error.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   antd
+    //   bootstrap3
+    //   bootstrap4
+    //   material
+    //   semantic
+    showInlineError={true}
+
+    // Input type.
+    //   HTML compatible input type like password. Default is text.
+    type="password"
+
+    // Field and sourroundings wrap className.
+    //   In SemanticUI theme, this class name is used on ui input wrapper,
+    //   so you can pass variations like small, huge, inverted, transparent etc.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    //   semantic
+    wrapClassName="a b c"
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.

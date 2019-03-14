@@ -1,0 +1,21 @@
+---
+name: AutoField
+route: "/autoField"
+menu: "API"
+---
+# `AutoField`
+
+```js
+import AutoField from 'uniforms-unstyled/AutoField'; // Choose your theme package.
+
+<AutoField
+    // Field renderer.
+    //   If ommited, then default algorithm is used. Check README for the whole
+    //   logic.
+    component={MyComponent}
+
+    // All additional props are passed to a computed field component.
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.

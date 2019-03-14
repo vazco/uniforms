@@ -20,7 +20,6 @@ export default {
     {name: 'Examples', menu: []},
     {name: 'Advanced topics', menu: ['Context data']},
     {name: 'FAQ', menu: []},
-    'API'
-    // {name: 'API', menu: []}
+    {name: 'API', menu: []}
   ]
 };

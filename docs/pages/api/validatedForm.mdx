@@ -1,0 +1,63 @@
+---
+name: ValidatedForm
+route: "/validatedForm"
+menu: "API"
+---
+# `ValidatedForm`
+
+```js
+import ValidatedForm from 'uniforms/ValidatedForm'; // Or from the theme package.
+
+<ValidatedForm
+    // Additional asynchronous validation.
+    //   Schema validation has to be sync, so this is the only way to achieve
+    //   async validation.
+    onValidate={(model, error, callback) => {
+        // You can either ignore validation error...
+        if (omitValidation(model)) {
+            return callback(null);
+        }
+
+        // ...or any additional validation if an error is already there...
+        if (error) {
+            return callback();
+        }
+
+        // ...or feed it with another error.
+        MyAPI.validate(model, error => callback(error || null));
+    }}
+
+    // Validation mode.
+    //   By default, the form will start to validate from the time of the first
+    //   submit and then revalidate on every change. It's 'onChangeAfterSubmit'.
+    //   There are also 'onChange' and 'onSubmit' modes, but those are quite
+    //   self-explanatory.
+    validate="onChangeAfterSubmit"
+
+    // Validator options.
+    //   It's passed to getValidator of your schema bridge. It really depends on
+    //   your schema.
+    validator={{clean: true}}
+
+    // Form methods.
+    ref={form => {
+        // Validate form with the current model.
+        //   Returns a Promise, which rejects with an validation error or
+        //   resolves without any value. Note, that it resolves/rejects AFTER
+        //   the component is rerendered.
+        form.validate();
+
+        // Validate form with key set to value.
+        //   You can use it to check, if a given value will pass the
+        //   validation or not. Returns validation Promise, as described above.
+        form.validate(key, value);
+
+        // Validate form with the given model.
+        //   Rather internal function. Returns validation Promise, as described
+        //   above.
+        form.validateModel(model);
+    }}
+/>
+```
+
+**Note:** All `BaseForm` props are also accepted and all methods are available.

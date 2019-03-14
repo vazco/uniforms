@@ -1,0 +1,35 @@
+---
+name: NestField
+route: "/nestField"
+menu: "API"
+---
+# `NestField`
+
+```js
+import NestField from 'uniforms-unstyled/NestField'; // Choose your theme package.
+
+<NestField
+    // Array of rendered fields.
+    //   If no custom content provided, only those fields are rendered. By
+    //   default, all of nested fields are rendered.
+    fields={['fieldA', 'fieldB', ...]}
+
+    // Field inline error.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   antd
+    //   bootstrap3
+    //   bootstrap4
+    //   semantic
+    showInlineError={true}
+
+    // Add / remove "grouped" class from the field.
+    //   In Semantic, fields can be grouped using this class. By default,
+    //   this class is added to the NestField.
+    // Available in:
+    //   semantic
+    grouped={true}
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.

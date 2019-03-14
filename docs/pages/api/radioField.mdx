@@ -1,0 +1,61 @@
+---
+name: RadioField
+route: "/radioField"
+menu: "API"
+---
+## `RadioField`
+
+```js
+import RadioField from 'uniforms-unstyled/RadioField'; // Choose your theme package.
+
+<RadioField
+    // Array of allowed values.
+    //   By default, those are extracted from your schema.
+    allowedValues={[value1, value2, ...]}
+
+    // Field layout
+    //  The layout of label. You can set span and/or offset.
+    // Available in:
+    //   antd
+    labelCol={{span: 4}}   // 'ant-col-4' on label
+    labelCol={{offset: 2}} // 'ant-col-offset-2' on label
+
+    // Field layout
+    //   The layout for input controls. Same as labelCol
+    // Available in:
+    //   antd
+    wrapperCol={{span: 4}}   // 'ant-col-4' on field
+    wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
+
+    // Checkbox inline state.
+    //   In bootstrap themes, label is rendered as a text, but in inline mode,
+    //   it's treated as a field label.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    inline={true}
+
+    // Input wrapper class name.
+    //   In bootstrap themes, passed className is used on field block. This is
+    //   used on direct field wrapper.
+    // Available in:
+    //   bootstrap3
+    //   bootstrap4
+    inputClassName="a b c"
+
+    // Field inline error.
+    //   *Some description would be great, huh?*
+    // Available in:
+    //   antd
+    //   bootstrap3
+    //   bootstrap4
+    //   semantic
+    showInlineError={true}
+
+    // Label transform.
+    //   Allows to transform the each value into a human-readable label
+    transform={value => label}
+/>
+```
+
+**Note:** All `BaseField` props are also accepted.

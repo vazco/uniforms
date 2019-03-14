@@ -1,0 +1,18 @@
+---
+name: joinName
+route: "/joinName"
+menu: "API"
+---
+# `joinName`
+
+```js
+import joinName from 'uniforms/joinName';
+
+// Use it to safely join partial field names. If you create a custom field with
+// subfields, then it's better to use this helper.
+const joinedNameString = joinName(nameA, nameB, nameC, ...);
+
+// If you want to have a "raw" version of a name, then pass null as the first
+// param.
+const joinedNameArray = joinName(null, nameA, nameB, nameC, ...);
+```
