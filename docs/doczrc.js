@@ -10,5 +10,17 @@ export default {
   plugins: [css({preprocessor: 'postcss'})],
   themeConfig: {
     showPlaygroundEditor: true
-  }
+  },
+  menu: [
+    {name: 'Introduction', menu: ['Installation', 'Quick start', 'Overview']},
+    'Playground',
+    'Forms',
+    'Fields',
+    {name: 'Schemas', menu: ['Concept', 'GraphQL', 'JSON Schema', 'SimpleSchema']},
+    {name: 'Examples', menu: []},
+    {name: 'Advanced topics', menu: ['Context data']},
+    {name: 'FAQ', menu: []},
+    'API'
+    // {name: 'API', menu: []}
+  ]
 };
