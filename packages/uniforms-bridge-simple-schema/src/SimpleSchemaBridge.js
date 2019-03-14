@@ -3,9 +3,10 @@
 import cloneDeep from 'lodash/cloneDeep';
 import invariant from 'invariant';
 
-import Bridge from './Bridge';
-import joinName from './joinName';
-import filterDOMProps from './filterDOMProps';
+import Bridge from 'uniforms/Bridge';
+import createSchemaBridge from 'uniforms/createSchemaBridge';
+import joinName from 'uniforms/joinName';
+import filterDOMProps from 'uniforms/filterDOMProps';
 
 let Match = (typeof global === 'object' ? global : window).Match;
 let SimpleSchema = (typeof global === 'object' ? global : window).SimpleSchema;
@@ -226,3 +227,5 @@ export default class SimpleSchemaBridge extends Bridge {
     return validator;
   }
 }
+
+createSchemaBridge.register(SimpleSchemaBridge);
