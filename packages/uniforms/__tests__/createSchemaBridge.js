@@ -1,3 +1,4 @@
+import Bridge from 'uniforms/Bridge';
 import createSchemaBridge from 'uniforms/createSchemaBridge';
 
 describe('createSchemaBridge', () => {
@@ -19,6 +20,19 @@ describe('createSchemaBridge', () => {
     };
 
     expect(createSchemaBridge(bridge)).toBe(bridge);
+  });
+
+  it('recognizes a registered bridge', () => {
+    class TestSchema {}
+    class TestSchemaBridge extends Bridge {
+      static check(schema) {
+        return schema instanceof TestSchema;
+      }
+    }
+
+    createSchemaBridge.register(TestSchemaBridge);
+
+    expect(createSchemaBridge(new TestSchema())).toBeInstanceOf(TestSchemaBridge);
   });
 
   it('throws on unrecognised schema', () => {
