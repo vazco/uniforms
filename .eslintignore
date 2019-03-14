@@ -1,6 +1,12 @@
-demo/.meteor
-demo/imports/components/vendor
-demo/node_modules
+/docs/.docz
+/docs/node_modules
+
+/coverage
+/node_modules
+
+npm-debug.log
+npm-debug.log*
+lerna-debug.log
 
 packages/*/*.js
 packages/*/node_modules
