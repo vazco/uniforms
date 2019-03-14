@@ -43,6 +43,7 @@ export const __childContextTypes = {
   },
 
   onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
   randomId: PropTypes.func.isRequired
 };
 
@@ -121,6 +122,7 @@ export default class BaseForm extends Component {
         state: this.getChildContextState(),
         schema: this.getChildContextSchema(),
         onChange: this.getChildContextOnChange(),
+        onSubmit: this.getChildContextOnSubmit(),
         randomId: this.randomId
       }
     };
@@ -157,6 +159,10 @@ export default class BaseForm extends Component {
 
   getChildContextOnChange() {
     return this.onChange;
+  }
+
+  getChildContextOnSubmit() {
+    return this.onSubmit;
   }
 
   getModel(/* mode */) {
