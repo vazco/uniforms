@@ -11,6 +11,7 @@ const createContext = (schema, context) => ({
       model: {},
       name: [],
       onChange() {},
+      onSubmit() {},
 
       ...context,
 

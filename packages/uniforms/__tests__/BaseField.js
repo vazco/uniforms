@@ -82,7 +82,7 @@ describe('BaseField', () => {
   });
 
   const _context = context => ({context: {uniforms: {...reactContextBase, ...context}}});
-  const reactContextBase = {error: error1, model, name: [], randomId, schema, state, onChange};
+  const reactContextBase = {error: error1, model, name: [], randomId, schema, state, onChange, onSubmit() {}};
   const reactContext1 = _context({});
   const reactContext2 = _context({error: error2});
   const reactContext3 = _context({error: {...error2}});

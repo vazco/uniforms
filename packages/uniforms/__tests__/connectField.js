@@ -44,7 +44,9 @@ describe('connectField', () => {
     validator() {}
   });
 
-  const reactContext = {context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange}}};
+  const reactContext = {
+    context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange, onSubmit() {}}}
+  };
 
   const Test = jest.fn(() => nothing);
 
