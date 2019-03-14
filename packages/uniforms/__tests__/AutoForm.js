@@ -3,6 +3,7 @@ import {mount} from 'enzyme';
 
 import AutoForm from 'uniforms/AutoForm';
 import connectField from 'uniforms/connectField';
+import {SimpleSchemaBridge} from 'uniforms-bridge-simple-schema';
 
 jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
@@ -13,12 +14,12 @@ describe('AutoForm', () => {
   const onChange = jest.fn();
   const onSubmit = jest.fn();
   const model = {a: '1'};
-  const schema = {
+  const schema = new SimpleSchemaBridge({
     getDefinition: () => ({type: String, defaultValue: ''}),
     messageForError: () => {},
     objectKeys: () => ['a', 'b', 'c'],
     validator: () => validator
-  };
+  });
 
   beforeEach(() => {
     onChange.mockReset();

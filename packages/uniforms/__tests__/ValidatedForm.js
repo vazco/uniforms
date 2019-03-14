@@ -2,6 +2,7 @@ import React from 'react';
 import {mount} from 'enzyme';
 
 import ValidatedForm from 'uniforms/ValidatedForm';
+import {SimpleSchemaBridge} from 'uniforms-bridge-simple-schema';
 
 jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
@@ -14,12 +15,13 @@ describe('ValidatedForm', () => {
 
   const error = new Error();
   const model = {a: 1};
-  const schema = {
+  const schemaDefinition = {
     getDefinition() {},
     messageForError() {},
     objectKeys() {},
     validator: () => validator
   };
+  const schema = new SimpleSchemaBridge(schemaDefinition);
 
   beforeEach(() => {
     onValidate.mockClear();
@@ -275,7 +277,7 @@ describe('ValidatedForm', () => {
       });
 
       it('revalidate if `schema` changes', () => {
-        wrapper.setProps({schema: {...schema}});
+        wrapper.setProps({schema: new SimpleSchemaBridge(schemaDefinition)});
         expect(validator).toHaveBeenCalledTimes(1);
       });
     });
@@ -297,7 +299,7 @@ describe('ValidatedForm', () => {
       });
 
       it('does not revalidate when `schema` changes', () => {
-        wrapper.setProps({schema: {...schema}});
+        wrapper.setProps({schema: new SimpleSchemaBridge(schemaDefinition)});
         expect(validator).not.toBeCalled();
       });
     });
@@ -318,12 +320,13 @@ describe('ValidatedForm', () => {
 
       it('uses the new validator if `schema` changes', () => {
         const alternativeValidator = jest.fn();
-        const alternativeSchema = {
+        const alternativeSchema = new SimpleSchemaBridge({
           getDefinition() {},
           messageForError() {},
           objectKeys() {},
           validator: () => alternativeValidator
-        };
+        });
+
         wrapper.setProps({schema: alternativeSchema});
         wrapper.find('form').simulate('submit');
 

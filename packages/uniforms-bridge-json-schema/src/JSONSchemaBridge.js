@@ -1,7 +1,6 @@
 import invariant from 'invariant';
 
 import Bridge from 'uniforms/Bridge';
-import createSchemaBridge from 'uniforms/createSchemaBridge';
 import joinName from 'uniforms/joinName';
 
 const resolveRef = (referance, schema) => {
@@ -233,5 +232,3 @@ export default class JSONSchemaBridge extends Bridge {
     return this.validator;
   }
 }
-
-createSchemaBridge.register(JSONSchemaBridge);
