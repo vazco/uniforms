@@ -1,7 +1,7 @@
 import SimpleSchema from 'simpl-schema';
 
-import createSchemaBridge from 'uniforms/createSchemaBridge';
+import SimpleSchema2Bridge from 'uniforms/SimpleSchema2Bridge';
 
-const createSchema = schema => createSchemaBridge(new SimpleSchema(schema));
+const createSchema = schema => new SimpleSchema2Bridge(new SimpleSchema(schema));
 
 export default createSchema;

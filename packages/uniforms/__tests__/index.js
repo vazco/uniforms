@@ -8,7 +8,6 @@ it('exports everything', () => {
     BaseField: expect.any(Function),
     BaseForm: expect.any(Function),
     Bridge: expect.any(Function),
-    GraphQLBridge: expect.any(Function),
     QuickForm: expect.any(Function),
     SimpleSchema2Bridge: expect.any(Function),
     SimpleSchemaBridge: expect.any(Function),

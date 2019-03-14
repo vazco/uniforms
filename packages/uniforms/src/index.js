@@ -4,7 +4,6 @@ export {default as AutoForm} from './AutoForm';
 export {default as BaseField} from './BaseField';
 export {default as BaseForm} from './BaseForm';
 export {default as Bridge} from './Bridge';
-export {default as GraphQLBridge} from './GraphQLBridge';
 export {default as QuickForm} from './QuickForm';
 export {default as SimpleSchema2Bridge} from './SimpleSchema2Bridge';
 export {default as SimpleSchemaBridge} from './SimpleSchemaBridge';

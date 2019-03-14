@@ -2,7 +2,7 @@ import {GraphQLString} from 'graphql';
 import {buildASTSchema} from 'graphql';
 import {parse} from 'graphql';
 
-import GraphQLBridge from 'uniforms/GraphQLBridge';
+import GraphQLBridge from 'uniforms-bridge-graphql/GraphQLBridge';
 
 describe('GraphQLBridge', () => {
   const schemaI = `

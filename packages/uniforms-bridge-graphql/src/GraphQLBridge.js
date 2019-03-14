@@ -1,7 +1,7 @@
 import invariant from 'invariant';
 
-import Bridge from './Bridge';
-import joinName from './joinName';
+import Bridge from 'uniforms/Bridge';
+import joinName from 'uniforms/joinName';
 
 let graphql;
 try {
