@@ -22,4 +22,4 @@ deploy:
   local-dir: docs/.docz/dist
   on:
     all_branches: true
-    condition: $TRAVIS_BRANCH =~ ^master|new-docs$
+    condition: $TRAVIS_BRANCH =~ ^master|v2$
