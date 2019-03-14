@@ -1,34 +1,30 @@
 {
-  "name": "uniforms",
+  "name": "uniforms-bridge-simple-schema-2",
   "version": "1.31.1",
   "license": "MIT",
   "main": "index.js",
   "module": "src/index.js",
   "jsnext:main": "src/index.js",
-  "description": "Core package of uniforms.",
-  "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms",
+  "description": "SimpleSchema 2 bridge for uniforms.",
+  "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-bridge-simple-schema-2",
   "bugs": "https://github.com/vazco/uniforms/issues",
   "keywords": [
     "form",
     "forms",
-    "meteor",
     "react",
-    "react-component",
     "schema",
+    "simpl-schema",
     "validation"
   ],
   "files": [
     "*.js",
     "src/"
   ],
-  "peerDependencies": {
-    "react": "^16.0.0 || ^15.0.0 || ^0.14.0",
-    "react-dom": "^16.0.0 || ^15.0.0 || ^0.14.0"
-  },
   "dependencies": {
     "@babel/runtime": "^7.0.0",
     "invariant": "^2.0.0",
     "lodash": "^4.0.0",
-    "prop-types": "^15.5.7"
+    "simpl-schema": "^1.0.0 || ^0.0.4",
+    "uniforms": "^1.31.1"
   }
 }

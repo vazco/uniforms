@@ -9,7 +9,6 @@ it('exports everything', () => {
     BaseForm: expect.any(Function),
     Bridge: expect.any(Function),
     QuickForm: expect.any(Function),
-    SimpleSchema2Bridge: expect.any(Function),
     SimpleSchemaBridge: expect.any(Function),
     ValidatedForm: expect.any(Function),
     ValidatedQuickForm: expect.any(Function),
