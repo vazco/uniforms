@@ -14,7 +14,7 @@ export default class Bridge {
   }
 
   getErrorMessage(/* name, error */) {
-    invariant(false, '%s have not implemented `getError` method.', this.constructor.name);
+    invariant(false, '%s have not implemented `getErrorMessage` method.', this.constructor.name);
   }
 
   getErrorMessages(/* error */) {
