@@ -3,6 +3,7 @@ import MessageBox from 'message-box';
 import SimpleSchema from 'simpl-schema';
 import {GraphQLBridge} from 'uniforms-bridge-graphql';
 import {JSONSchemaBridge} from 'uniforms-bridge-json-schema';
+import {SimpleSchema2Bridge} from 'uniforms-bridge-simple-schema-2';
 import {buildASTSchema} from 'graphql';
 import {parse} from 'graphql';
 
@@ -16,6 +17,7 @@ scope.Ajv = Ajv;
 scope.GraphQLBridge = GraphQLBridge;
 scope.JSONSchemaBridge = JSONSchemaBridge;
 scope.SimpleSchema = SimpleSchema;
+scope.SimpleSchema2Bridge = SimpleSchema2Bridge;
 scope.buildASTSchema = buildASTSchema;
 scope.parse = parse;
 
