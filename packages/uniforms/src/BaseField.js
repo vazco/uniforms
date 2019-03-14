@@ -137,6 +137,7 @@ export default class BaseField extends Component {
         state: this.getChildContextState(),
         schema: this.getChildContextSchema(),
         onChange: this.getChildContextOnChange(),
+        onSubmit: this.getChildContextOnSubmit(),
         randomId: this.context.uniforms.randomId
       }
     };
@@ -176,6 +177,10 @@ export default class BaseField extends Component {
 
   getChildContextOnChange() {
     return this.context.uniforms.onChange;
+  }
+
+  getChildContextOnSubmit() {
+    return this.context.uniforms.onSubmit;
   }
 
   // eslint-disable-next-line complexity
