@@ -1,11 +1,6 @@
 import invariant from 'invariant';
 
-import GraphQLBridge from './GraphQLBridge';
-import JSONSchemaBridge from './JSONSchemaBridge';
-import SimpleSchema2Bridge from './SimpleSchema2Bridge';
-import SimpleSchemaBridge from './SimpleSchemaBridge';
-
-const bridges = [GraphQLBridge, JSONSchemaBridge, SimpleSchemaBridge, SimpleSchema2Bridge];
+const bridges = [];
 
 const isBridge = schema =>
   schema &&
@@ -18,6 +13,7 @@ const isBridge = schema =>
   schema.getSubfields &&
   schema.getType &&
   schema.getValidator;
+
 export default function createSchemaBridge(schema) {
   // There's no need for an extra wrapper.
   if (isBridge(schema)) {
@@ -30,3 +26,7 @@ export default function createSchemaBridge(schema) {
 
   return new Bridge(schema);
 }
+
+createSchemaBridge.register = bridge => {
+  bridges.unshift(bridge);
+};
