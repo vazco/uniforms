@@ -1,15 +1,9 @@
+import * as graphql from 'graphql';
 import invariant from 'invariant';
 
 import Bridge from 'uniforms/Bridge';
+import createSchemaBridge from 'uniforms/createSchemaBridge';
 import joinName from 'uniforms/joinName';
-
-let graphql;
-try {
-  const r = require; // Silence Meteor missing module warning
-  graphql = r('graphql');
-} catch (_) {
-  /* Ignore it. */
-}
 
 const extractFromNonNull = x => (x && x.type instanceof graphql.GraphQLNonNull ? {...x, type: x.type.ofType} : x);
 
@@ -189,3 +183,5 @@ export default class GraphQLBridge extends Bridge {
     return this.validator;
   }
 }
+
+createSchemaBridge.register(GraphQLBridge);
