@@ -20,13 +20,13 @@
     "src/"
   ],
   "peerDependencies": {
-    "react": "^16.0.0 || ^15.0.0 || ^0.14.0",
-    "uniforms": "^1.31.1"
+    "react": "^16.0.0 || ^15.0.0 || ^0.14.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0",
     "invariant": "^2.0.0",
     "lodash": "^4.0.0",
-    "prop-types": "^15.5.7"
+    "prop-types": "^15.5.7",
+    "uniforms": "^1.31.1"
   }
 }
