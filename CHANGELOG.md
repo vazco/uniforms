@@ -1,5 +1,52 @@
-## [v1.31.1](https://github.com/vazco/uniforms/tree/v1.31.1) (2019-03-06)
+## Next
+- **Breaking:** Separated schema packages. These are now:
+  ```
+  uniforms-bridge-graphql
+  uniforms-bridge-json-schema
+  uniforms-bridge-simple-schema
+  uniforms-bridge-simple-schema-2
+  ```
+  To register a new schema, import `uniforms-bridge-X` or `uniforms-bridge-X/register` directly. Named exports and file names haven't changed, so imports looks like this:
+  ```diff
+  // GraphQL
+  -import {GraphQLBridge} from 'uniforms';
+  +import {GraphQLBridge} from 'uniforms-bridge-graphql';
 
+  -import GraphQLBridge from 'uniforms/GraphQLBridge';
+  +import GraphQLBridge from 'uniforms-bridge-graphql/GraphQLBridge';
+
+  // JSON Schema
+  -import {JSONSchemaBridge} from 'uniforms';
+  +import {JSONSchemaBridge} from 'uniforms-bridge-graphql';
+
+  -import JSONSchemaBridge from 'uniforms/JSONSchemaBridge';
+  +import JSONSchemaBridge from 'uniforms-bridge-json-schema/JSONSchemaBridge';
+
+  // SimpleSchema (Atmosphere version for Meteor)
+  -import {SimpleSchemaBridge} from 'uniforms';
+  +import {SimpleSchemaBridge} from 'uniforms-bridge-simple-schema';
+
+  -import SimpleSchemaBridge from 'uniforms/SimpleSchemaBridge';
+  +import SimpleSchemaBridge from 'uniforms-bridge-simple-schema/SimpleSchemaBridge';
+
+  // SimpleSchema (npm version)
+  -import {SimpleSchema2Bridge} from 'uniforms';
+  +import {SimpleSchema2Bridge} from 'uniforms-bridge-simple-schema-2';
+
+  -import SimpleSchema2Bridge from 'uniforms/SimpleSchema2Bridge';
+  +import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2/SimpleSchema2Bridge';
+  ```
+- **Breaking:** Packages depending on the `uniforms` package are now using `dependency` instead of the `peerDependency`. Same goes for the schema packages and their schema respectives:
+  ```
+  uniforms-bridge-graphql ~> graphql
+  uniforms-bridge-simple-schema-2 ~> simpl-schema
+  ```
+- **Breaking:** Removed `jsnext:main` and `module` from `package.json` in all packages. It means that bundlers like Webpack will load the fully transpiled version now. It caused more troubles than it's worth. The original sources are still shipped in `src` directory.
+- **Breaking:** `QuickForm.render` logic was moved to `QuickForm.getNativeFormProps`. `BaseForm` is now the only form component with an explicit `render` method, what is good for custom themes and form components.
+- **Feature:** Added `createSchemaBridge.register` for registering custom bridges.
+- **Feature:** Added `onSubmit` to the context data. Now every field can trigger the submit directly, without the form ref.
+
+## [v1.31.1](https://github.com/vazco/uniforms/tree/v1.31.1) (2019-03-06)
 - **Fixed:** `SelectField` required state in `uniforms-material`. [\#512](https://github.com/vazco/uniforms/issues/512)
 - **Fixed:** `NumField` value parsing in `uniforms-material`. [\#516](https://github.com/vazco/uniforms/issues/516)
 
