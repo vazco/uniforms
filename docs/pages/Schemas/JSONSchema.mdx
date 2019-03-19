@@ -1,14 +1,14 @@
 ---
 name: JSON Schema
 menu: Schemas
-route: '/json'
+route: '/json-schema'
 ---
 
 # JSON schema definition
 
 ```js
 import Ajv from 'ajv';
-import JSONSchemaBridge from 'uniforms/JSONSchemaBridge';
+import {JSONSchemaBridge} from 'uniforms-bridge-json-schema';
 
 const schema = {
   title: 'Person',
