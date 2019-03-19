@@ -1,0 +1,16 @@
+---
+name: createSchemaBridge
+menu: API
+route: '/createSchemaBridge'
+---
+
+## createSchemaBridge
+
+```js
+import createSchemaBridge from 'uniforms/createSchemaBridge';
+
+// It's rather an internal helper, but it's still exported. Use it, if you want
+// to manually create a schema bridge or to test your bridge. It will throw on
+// an unrecognised schema.
+const bridge = createSchemaBridge(schemaOrBridge);
+```

@@ -1,4 +1,4 @@
-const fs   = require('fs');
+const fs = require('fs');
 const jest = require('babel-jest');
 const path = require('path');
 

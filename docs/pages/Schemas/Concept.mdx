@@ -1,0 +1,27 @@
+---
+name: Concept
+menu: Schemas
+route: '/concept'
+---
+
+# Concept
+
+To make use of any schema, uniforms have to create a _bridge_ of it - a unified schema mapper. A bridge is (preferably) a subclass of `Bridge`, implementing static `check(schema)` method and these instance methods:
+
+- `getError(name, error)`
+- `getErrorMessage(name, error)`
+- `getErrorMessages(error)`
+- `getField(name)`
+- `getInitialValue(name, props)`
+- `getProps(name, props)`
+- `getSubfields(name)`
+- `getType(name)`
+- `getValidator(options)`
+
+Currently built-in bridges:
+
+- `GraphQLBridge`
+- `SimpleSchemaBridge`
+- `SimpleSchema2Bridge`
+
+**Note:** To read more see [API](https://github.com/vazco/uniforms/blob/master/API.md#bridge) and [`Bridge`](https://github.com/vazco/uniforms/blob/master/packages/uniforms/src/Bridge.js).

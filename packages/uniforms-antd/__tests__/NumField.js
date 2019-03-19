@@ -139,6 +139,7 @@ test('<NumField> - renders an InputNumber which correctly reacts on change (deci
 
   expect(wrapper.find('input')).toHaveLength(1);
   expect(wrapper.find('input').simulate('change', {target: {value: '2.5'}})).toBeTruthy();
+
   // That's how AntD is doing it.
   expect(onChange).toHaveBeenLastCalledWith('x', 2.5);
 });
@@ -151,6 +152,7 @@ test('<NumField> - renders an InputNumber which correctly reacts on change (empt
 
   expect(wrapper.find('input')).toHaveLength(1);
   expect(wrapper.find('input').simulate('change', {target: {value: ''}})).toBeTruthy();
+
   // That's how AntD is doing it.
   expect(onChange).toHaveBeenLastCalledWith('x', '');
 });

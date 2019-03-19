@@ -1,0 +1,17 @@
+---
+name: changedKeys
+menu: API
+route: '/changedKeys'
+---
+
+## changedKeys
+
+```js
+import changedKeys from 'uniforms/changedKeys';
+
+// Returns an array of changed keys between valueA and valueB, where root is the
+// root key.
+const arrayOfChangedKeys = changedKeys(root, valueA, valueB);
+```
+
+**Note:** For more examples, see [`changedKeys` tests](https://github.com/vazco/uniforms/blob/master/packages/uniforms/test/helpers/changedKeys.js).

@@ -1,0 +1,19 @@
+---
+name: randomIds
+menu: API
+route: '/randomIds'
+---
+
+## randomIds
+
+```js
+import randomIds from 'uniforms/randomIds';
+
+// It's rather an internal helper, but it's still exported. Use it, if you want
+// to have some random but deterministic strings.
+const predictableRandomIdGenerator = randomIds(prefix);
+const predictableRandomIdA = predictableRandomIdGenerator();
+const predictableRandomIdB = predictableRandomIdGenerator();
+const predictableRandomIdC = predictableRandomIdGenerator();
+// ...
+```

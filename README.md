@@ -44,23 +44,23 @@
 
 # What's included?
 
-* **Automatic forms generation**
-* **Fields capable of rendering every schema**
-* **Helper for creating custom fields with one line**
-* **Inline and asynchronous form validation**
-* **Integrations with various schemas:**
-    * **[JSON Schema](http://json-schema.org/)**
-    * **[GraphQL](https://github.com/graphql/graphql-js)**
-    * **[SimpleSchema](https://github.com/aldeed/meteor-simple-schema)**
-    * **[SimpleSchema@2](https://github.com/aldeed/node-simple-schema)**
-    * **And any other - only [a small wrapper](https://vazco.github.io/uniforms/#/introduction) is needed!**
-* **Wide range of themes:**
-    * **[AntD](https://ant.design/) theme**
-    * **[Bootstrap3](http://getbootstrap.com/docs/3.3/) theme**
-    * **[Bootstrap4](http://getbootstrap.com/) theme**
-    * **[Material-UI](https://material-ui.com/) theme**
-    * **[Semantic UI](http://semantic-ui.com/) theme**
-    * **plain HTML theme**
+- **Automatic forms generation**
+- **Fields capable of rendering every schema**
+- **Helper for creating custom fields with one line**
+- **Inline and asynchronous form validation**
+- **Integrations with various schemas:**
+  - **[JSON Schema](http://json-schema.org/)**
+  - **[GraphQL](https://github.com/graphql/graphql-js)**
+  - **[SimpleSchema](https://github.com/aldeed/meteor-simple-schema)**
+  - **[SimpleSchema@2](https://github.com/aldeed/node-simple-schema)**
+  - **And any other - only [a small wrapper](https://vazco.github.io/uniforms/#/introduction) is needed!**
+- **Wide range of themes:**
+  - **[AntD](https://ant.design/) theme**
+  - **[Bootstrap3](http://getbootstrap.com/docs/3.3/) theme**
+  - **[Bootstrap4](http://getbootstrap.com/) theme**
+  - **[Material-UI](https://material-ui.com/) theme**
+  - **[Semantic UI](http://semantic-ui.com/) theme**
+  - **plain HTML theme**
 
 <br>
 

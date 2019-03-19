@@ -1,0 +1,29 @@
+---
+name: AutoFields
+menu: API
+route: '/autoFields'
+---
+
+## AutoFields
+
+```js
+import AutoFields from 'uniforms-unstyled/AutoFields'; // Choose your theme package.
+
+<AutoFields
+  // AutoField component.
+  //   By default, it will be your theme AutoField, but you can use your
+  //   custom component.
+  autoField={MyAutoField}
+  // Wrapping element.
+  //   It's clear, isn't it?
+  element="section"
+  // List of fields to render.
+  //   By default, all fields are rendered.
+  fields={['fieldA', 'fieldB']}
+  // List of fields to omit.
+  //   By default, it's empty.
+  omitFields={['fieldA', 'fieldB']}
+/>;
+```
+
+**Note:** All `BaseField` props are also accepted.
