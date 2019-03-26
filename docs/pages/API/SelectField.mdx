@@ -10,74 +10,63 @@ route: '/SelectField'
 import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme package.
 
 <SelectField
-    // Array of allowed values.
-    //   By default, those are extracted from your schema.
-    allowedValues={[value1, value2, /* ... */]}
-
-    // Turn on checkbox/radio mode.
-    //   It's always true in mutltiple (i.e. fieldType === Array) mode.
-    checkboxes={true}
-
-    // Field layout
-    //  The layout of label. You can set span and/or offset.
-    // Available in:
-    //   antd
-    labelCol={{span: 4}}   // 'ant-col-4' on label
-    labelCol={{offset: 2}} // 'ant-col-offset-2' on label
-
-    // Field layout
-    //   The layout for input controls. Same as labelCol
-    // Available in:
-    //   antd
-    wrapperCol={{span: 4}}   // 'ant-col-4' on field
-    wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
-
-    // Checkbox inline state.
-    //   In bootstrap themes, label is rendered as a text, but in inline mode,
-    //   it's treated as a field label.
-    // Available in:
-    //   bootstrap3
-    //   bootstrap4
-    inline={true}
-
-    // Input wrapper class name.
-    //   In bootstrap themes, passed className is used on field block. This is
-    //   used on direct field wrapper.
-    // Available in:
-    //   bootstrap3
-    //   bootstrap4
-    inputClassName="a b c"
-
-    // Input ref.
-    //   Setting ref prop to a field won't work as desired, because you'll
-    //   receive a field component rather than a HTML input. If you need an input ref,
-    //   use this prop instead.
-    inputRef={ref => {}}
-
-    // Props for the InputLabel
-    // Available in:
-    //   material-ui
-    labelProps={{ shrink: true, disableAnimation: true }}
-
-    // Field inline error.
-    //   *Some description would be great, huh?*
-    // Available in:
-    //   antd
-    //   bootstrap3
-    //   bootstrap4
-    //   semantic
-    showInlineError={true}
-
-    // Label transform.
-    //   Allows to transform the each value into a human-readable label
-    transform={value => label}
-
-    // Options.
-    //   Set of values that will be shown in the select.
-    //   It is optional and using `options` will override `transform` and `allowedValues`.
-    //   It can be either an object or an array (or a function, that returns it).
-    options={[{label: 'Hi', value: value1}, [{label: 'Hello', value: value1}, ...]}
-/>
+  // Array of allowed values.
+  //   By default, those are extracted from your schema.
+  allowedValues={[value1, value2 /* ... */]}
+  // Turn on checkbox/radio mode.
+  //   It's always true in mutltiple (i.e. fieldType === Array) mode.
+  checkboxes={true}
+  // Field layout
+  //  The layout of label. You can set span and/or offset.
+  // Available in:
+  //   antd
+  labelCol={{span: 4}} // 'ant-col-4' on label
+  labelCol={{offset: 2}} // 'ant-col-offset-2' on label
+  // Field layout
+  //   The layout for input controls. Same as labelCol
+  // Available in:
+  //   antd
+  wrapperCol={{span: 4}} // 'ant-col-4' on field
+  wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
+  // Checkbox inline state.
+  //   In bootstrap themes, label is rendered as a text, but in inline mode,
+  //   it's treated as a field label.
+  // Available in:
+  //   bootstrap3
+  //   bootstrap4
+  inline={true}
+  // Input wrapper class name.
+  //   In bootstrap themes, passed className is used on field block. This is
+  //   used on direct field wrapper.
+  // Available in:
+  //   bootstrap3
+  //   bootstrap4
+  inputClassName="a b c"
+  // Input ref.
+  //   Setting ref prop to a field won't work as desired, because you'll
+  //   receive a field component rather than a HTML input. If you need an input ref,
+  //   use this prop instead.
+  inputRef={ref => {}}
+  // Props for the InputLabel
+  // Available in:
+  //   material-ui
+  labelProps={{shrink: true, disableAnimation: true}}
+  // Field inline error.
+  //   *Some description would be great, huh?*
+  // Available in:
+  //   antd
+  //   bootstrap3
+  //   bootstrap4
+  //   semantic
+  showInlineError={true}
+  // Label transform.
+  //   Allows to transform the each value into a human-readable label
+  transform={value => label} //   Set of values that will be shown in the select.
+  // Options.
+  //   It is optional and using `options` will override `transform` and `allowedValues`.
+  //   It can be either an object or an array (or a function, that returns it).
+  options={[{label: 'Hi', value: value1}, {label: 'Hello', value: value1} /* ... */]}
+/>;
 ```
 
 **Note:** All `BaseField` props are also accepted.
