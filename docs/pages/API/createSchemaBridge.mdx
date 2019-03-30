@@ -14,3 +14,10 @@ import createSchemaBridge from 'uniforms/createSchemaBridge';
 // an unrecognised schema.
 const bridge = createSchemaBridge(schemaOrBridge);
 ```
+
+## createSchemaBridge.register
+
+```js
+// If you want to register a custom bridge.
+createSchemaBridge.register(propA, propB, propC /* ... */);
+```
