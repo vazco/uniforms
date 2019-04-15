@@ -40,7 +40,7 @@ const Radio = ({
       {allowedValues.map(item => (
         <FormControlLabel
           control={<RadioMaterial {...filteredProps} />}
-          key={item}
+          key={transform ? transform(item) : item}
           label={transform ? transform(item) : item}
           value={`${item}`}
         />

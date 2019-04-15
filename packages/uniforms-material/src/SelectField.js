@@ -120,7 +120,7 @@ const renderCheckboxes = ({
         {allowedValues.map(item => (
           <FormControlLabel
             control={<Radio id={`${id}-${item}`} {...filteredProps} />}
-            key={item}
+            key={transform ? transform(item) : item}
             label={transform ? transform(item) : item}
             value={item}
           />
@@ -146,7 +146,7 @@ const renderCheckboxes = ({
                 {...filteredProps}
               />
             }
-            key={item}
+            key={transform ? transform(item) : item}
             label={transform ? transform(item) : item}
           />
         ))}
