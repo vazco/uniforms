@@ -48,6 +48,7 @@
   ```
 - **Breaking:** Removed `jsnext:main` and `module` from `package.json` in all packages. It means that bundlers like Webpack will load the fully transpiled version now. It caused more troubles than it's worth. The original sources are still shipped in `src` directory.
 - **Breaking:** `QuickForm.render` logic was moved to `QuickForm.getNativeFormProps`. `BaseForm` is now the only form component with an explicit `render` method, what is good for custom themes and form components.
+- **Breaking:** `SubmitField` in `uniforms-material` now uses `children` by default and fallback to `label`. [\#523](https://github.com/vazco/uniforms/issues/523)
 - **Feature:** Added `createSchemaBridge.register` for registering custom bridges.
 - **Feature:** Added `onSubmit` to the context data. Now every field can trigger the submit directly, without the form ref.
 

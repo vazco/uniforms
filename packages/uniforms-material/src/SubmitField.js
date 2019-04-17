@@ -11,11 +11,11 @@ const SubmitField = ({children, disabled, inputRef, label, value, ...props}, {un
     value={value}
     {...filterDOMProps(props)}
   >
-    {label || children}
+    {children || label}
   </Button>
 );
-SubmitField.contextTypes = BaseField.contextTypes;
 
+SubmitField.contextTypes = BaseField.contextTypes;
 SubmitField.defaultProps = {label: 'Submit', variant: 'contained'};
 
 export default SubmitField;
