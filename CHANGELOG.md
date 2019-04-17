@@ -51,6 +51,7 @@
 - **Breaking:** `SubmitField` in `uniforms-material` now uses `children` by default and fallback to `label`. [\#523](https://github.com/vazco/uniforms/issues/523)
 - **Feature:** Added `createSchemaBridge.register` for registering custom bridges.
 - **Feature:** Added `onSubmit` to the context data. Now every field can trigger the submit directly, without the form ref.
+- **Fixed:** `SelectField` label shrink state in `uniforms-material`. [\#522](https://github.com/vazco/uniforms/issues/522)
 
 ## [v1.31.1](https://github.com/vazco/uniforms/tree/v1.31.1) (2019-03-06)
 

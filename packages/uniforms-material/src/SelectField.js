@@ -50,6 +50,7 @@ const renderSelect = ({
 }) => {
   const Item = native ? 'option' : MenuItem;
   const hasPlaceholder = !!placeholder;
+  const hasValue = value !== '' && value !== undefined;
 
   return (
     <TextField
@@ -57,7 +58,7 @@ const renderSelect = ({
       error={!!error}
       fullWidth={fullWidth}
       helperText={(error && showInlineError && errorMessage) || helperText}
-      InputLabelProps={{shrink: label && (hasPlaceholder || value !== undefined), ...labelProps, ...InputLabelProps}}
+      InputLabelProps={{shrink: !!label && (hasPlaceholder || hasValue), ...labelProps, ...InputLabelProps}}
       label={label}
       margin={margin}
       onChange={event => disabled || onChange(event.target.value)}
@@ -162,6 +163,7 @@ const renderCheckboxes = ({
 };
 
 const Select = ({checkboxes, ...props}) => (checkboxes ? renderCheckboxes(props) : renderSelect(props));
+
 Select.defaultProps = {
   appearance: 'checkbox',
   fullWidth: true,
