@@ -9,7 +9,12 @@ export default {
   propsParser: false,
   plugins: [css({preprocessor: 'postcss'})],
   themeConfig: {
-    showPlaygroundEditor: true
+    showPlaygroundEditor: true,
+    styles: {
+      h1: {
+        fontFamily: 'initial'
+      }
+    }
   },
   menu: [
     {name: 'Introduction', menu: ['Installation', 'Quick start', 'Overview']},
