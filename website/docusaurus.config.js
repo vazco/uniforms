@@ -13,8 +13,16 @@ module.exports = {
   headerIcon: 'img/uniforms.png',
   favicon: 'img/uniforms.png',
   plugins: [
-    {name: '@docusaurus/plugin-content-blog', options: {path: '../blog'}},
-    {name: '@docusaurus/plugin-content-docs', options: {path: '../docs', sidebarPath: require.resolve('./sidebars.json')}},
-    {name: '@docusaurus/plugin-content-pages'}
+    {
+      name: '@docusaurus/plugin-content-blog',
+      options: {path: '../blog'}
+    },
+    {
+      name: '@docusaurus/plugin-content-docs',
+      options: {path: '../docs', sidebarPath: require.resolve('./sidebars.json')}
+    },
+    {
+      name: '@docusaurus/plugin-content-pages'
+    }
   ]
 };

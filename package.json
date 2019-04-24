@@ -2,7 +2,7 @@
   "name": "uniforms-repository",
   "private": true,
   "scripts": {
-    "build": "lerna exec --ignore docs -- babel --config-file ../../.babelrc --out-dir . src",
+    "build": "lerna exec --ignore website -- babel --config-file ../../.babelrc --out-dir . src",
     "clean": "rimraf coverage packages/*/*.js",
     "coverage": "jest --coverage",
     "coverage:report": "codecov",
@@ -10,13 +10,13 @@
     "flow-typed": "flow-typed install",
     "install": "npm run build",
     "lint": "npm run lint:code && npm run lint:text",
-    "lint:code": "eslint docs packages",
+    "lint:code": "eslint packages website",
     "lint:text": "prettier --check **/*.md{,x}",
     "postinstall": "lerna bootstrap",
     "prereset": "npm run clean",
     "pretest": "npm run lint && npm run flow",
     "publish": "npm run clean && npm run build && lerna publish",
-    "reset": "rimraf node_modules docs/node_modules packages/*/node_modules",
+    "reset": "rimraf node_modules packages/*/node_modules website/node_modules",
     "test": "jest"
   },
   "dependencies": {

@@ -92,7 +92,7 @@ const schema = `
 
 const schemaType = buildASTSchema(parse(schema)).getType('Post');
 const schemaData = {
-  id: API-Bridges-{
+  id: {
     allowedValues: [1, 2, 3]
   },
   title: {
