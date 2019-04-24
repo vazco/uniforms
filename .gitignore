@@ -1,10 +1,11 @@
 /coverage
-/docs/.docz
-/docs/node_modules
-
 /lerna-debug.log
 /node_modules
 /npm-debug.log
 /npm-debug.log*
 /packages/*/*.js
 /packages/*/node_modules
+/website/.cache-loader
+/website/.docusaurus
+/website/build
+/website/node_modules

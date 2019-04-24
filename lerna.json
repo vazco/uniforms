@@ -6,7 +6,7 @@
     }
   },
   "packages": [
-    "docs",
-    "packages/*"
+    "packages/*",
+    "website"
   ]
 }

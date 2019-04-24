@@ -1,0 +1,36 @@
+{
+  "name": "docs",
+  "private": true,
+  "scripts": {
+    "build": "docusaurus build",
+    "start": "docusaurus start"
+  },
+  "dependencies": {
+    "@material-ui/core": "3.6.1",
+    "ajv": "6.6.1",
+    "antd": "3.11.0",
+    "graphql": "14.0.2",
+    "lz-string": "1.4.4",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "react-frame-component": "4.0.2",
+    "simpl-schema": "1.5.3",
+    "uniforms": "^1.31.1",
+    "uniforms-antd": "^1.31.1",
+    "uniforms-bootstrap3": "^1.31.1",
+    "uniforms-bootstrap4": "^1.31.1",
+    "uniforms-bridge-graphql": "^1.31.1",
+    "uniforms-bridge-json-schema": "^1.31.1",
+    "uniforms-bridge-simple-schema": "^1.31.1",
+    "uniforms-bridge-simple-schema-2": "^1.31.1",
+    "uniforms-material": "^1.31.1",
+    "uniforms-semantic": "^1.31.1",
+    "uniforms-unstyled": "^1.31.1"
+  },
+  "devDependencies": {
+    "@docusaurus/core": "^2.0.0-alpha.7",
+    "@docusaurus/plugin-content-blog": "^2.0.0-alpha.7",
+    "@docusaurus/plugin-content-docs": "^2.0.0-alpha.7",
+    "@docusaurus/plugin-content-pages": "^2.0.0-alpha.7"
+  }
+}
