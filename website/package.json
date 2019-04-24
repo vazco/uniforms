@@ -1,5 +1,5 @@
 {
-  "name": "docs",
+  "name": "website",
   "private": true,
   "scripts": {
     "build": "docusaurus build",
