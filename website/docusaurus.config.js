@@ -3,8 +3,8 @@ module.exports = {
   tagline: 'A set of React libraries for building forms.',
   organizationName: 'vazco',
   projectName: 'uniforms',
-  baseUrl: '/',
-  url: 'https://vazco.github.io/uniforms/',
+  baseUrl: '/uniforms/',
+  url: 'https://vazco.github.io/',
   headerLinks: [
     {label: 'Blog', blog: true},
     {label: 'Docs', doc: 'installation'},
