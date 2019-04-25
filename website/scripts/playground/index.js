@@ -25,7 +25,7 @@ class Playground extends Component {
       schema.validate(state);
     } catch (error) {
       error.details.forEach(({name}) => {
-        delete state[name];
+        state[name] = schema.getDefinition(name).defaultValue;
       });
     }
 
@@ -113,7 +113,8 @@ class PlaygroundPreview extends Component {
   }
 
   render() {
-    const Form = themes[this.props.theme].AutoForm;
+    // FIXME: this.props.theme is undefined during `docusaurus build`.
+    const Form = themes[this.props.theme || 'unstyled'].AutoForm;
 
     const {asyncOnSubmit, asyncOnValidate, ...props} = {...this.props.value};
     props.schema = this._schema;
@@ -150,7 +151,8 @@ class PlaygroundProps extends Component {
     const isMaterial = theme === 'material';
     const isSemantic = theme === 'semantic';
 
-    const {AutoForm, BoolField, ErrorsField, LongTextField, NumField} = themes[theme];
+    // FIXME: theme is undefined during `docusaurus build`.
+    const {AutoForm, BoolField, ErrorsField, LongTextField, NumField} = themes[theme || 'unstyled'];
 
     return (
       <PlaygroundWrap theme={theme}>
@@ -175,7 +177,8 @@ const PlaygroundPropsField = connectField(PlaygroundProps, {baseField: Playgroun
 
 class PlaygroundSelect extends Component {
   render() {
-    const {allowedValues, onChange, transform, value} = this.props;
+    // FIXME: allowedValues is undefined during `docusaurus build`.
+    const {allowedValues = [], onChange, transform, value} = this.props;
 
     return (
       <select onChange={event => onChange(event.target.value)} value={value}>

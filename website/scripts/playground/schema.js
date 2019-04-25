@@ -12,8 +12,8 @@ import themes from './themes';
 
 const scope = typeof window === 'undefined' ? global : window;
 
-// Weird, but this file is loading a different version of simpl-schema than the
-// one that uniforms-bridge-simple-schema-2 package one.
+// FIXME: This file is loading a different version of simpl-schema than the one
+//        that uniforms-bridge-simple-schema-2 package.
 SimpleSchema.extendOptions(['uniforms']);
 
 // This is required for the eval.

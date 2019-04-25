@@ -13,14 +13,14 @@ after_success:
   - npm run coverage:report
 
 before_deploy:
-  - CI=0 npm --prefix docs run build
+  - CI=0 npm --prefix website run build
 
 deploy:
   provider: pages
   github_token: $GITHUB_TOKEN
   skip_cleanup: true
-  local-dir: docs/.docz/dist
+  local-dir: website/build
   on:
     all_branches: true
-    condition: $TRAVIS_BRANCH =~ ^master|v2$
+    condition: $TRAVIS_BRANCH =~ ^master|v2|v2-docusaurus$
     node: 10

@@ -28,9 +28,9 @@
     "uniforms-unstyled": "^1.31.1"
   },
   "devDependencies": {
-    "@docusaurus/core": "^2.0.0-alpha.7",
-    "@docusaurus/plugin-content-blog": "^2.0.0-alpha.7",
-    "@docusaurus/plugin-content-docs": "^2.0.0-alpha.7",
-    "@docusaurus/plugin-content-pages": "^2.0.0-alpha.7"
+    "@docusaurus/core": "2.0.0-alpha.11",
+    "@docusaurus/plugin-content-blog": "2.0.0-alpha.11",
+    "@docusaurus/plugin-content-docs": "2.0.0-alpha.11",
+    "@docusaurus/plugin-content-pages": "2.0.0-alpha.11"
   }
 }
