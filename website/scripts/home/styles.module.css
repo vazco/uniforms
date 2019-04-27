@@ -1,0 +1,15 @@
+:global(.footer) {
+  display: none;
+}
+
+.half {
+  flex: 1;
+}
+
+.textBig {
+  font-size: 4.25rem;
+}
+
+.textSmall {
+  font-size: 1.25rem;
+}

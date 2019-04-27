@@ -13,7 +13,7 @@ after_success:
   - npm run coverage:report
 
 before_deploy:
-  - CI=0 npm --prefix website run build
+  - npm --prefix website run build
 
 deploy:
   provider: pages

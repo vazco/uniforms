@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-    <img src="uniforms.png" alt="Logo" height="300" />
+    <img src="uniforms.svg" alt="Logo" height="300" />
 </p>
 
 <p align="center">
@@ -62,7 +62,7 @@
   - **[Semantic UI](http://semantic-ui.com/) theme**
   - **plain HTML theme**
 
-<br>
+<br />
 
 # License
 

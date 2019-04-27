@@ -5,18 +5,10 @@ module.exports = {
   projectName: 'uniforms',
   baseUrl: '/uniforms/',
   url: 'https://vazco.github.io/',
-  headerLinks: [
-    {label: 'Blog', blog: true},
-    {label: 'Docs', doc: 'installation'},
-    {label: 'Playground', page: 'playground'}
-  ],
-  headerIcon: 'img/uniforms.png',
-  favicon: 'img/uniforms.png',
+  headerLinks: [{label: 'Docs', doc: 'installation'}, {label: 'Playground', page: 'playground'}],
+  headerIcon: 'img/uniforms.svg',
+  favicon: 'favicon.ico',
   plugins: [
-    {
-      name: '@docusaurus/plugin-content-blog',
-      options: {path: '../blog'}
-    },
     {
       name: '@docusaurus/plugin-content-docs',
       options: {path: '../docs', sidebarPath: require.resolve('./sidebars.json')}
