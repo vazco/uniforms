@@ -4,6 +4,7 @@ language: node_js
 node_js:
   - 8
   - 10
+  - 12
 
 script:
   - npm run lint
@@ -23,4 +24,4 @@ deploy:
   on:
     all_branches: true
     condition: $TRAVIS_BRANCH =~ ^master|v2|v2-docusaurus$
-    node: 10
+    node: 12
