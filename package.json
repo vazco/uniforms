@@ -12,7 +12,7 @@
     "lint": "npm run lint:code && npm run lint:text",
     "lint:code": "eslint packages website",
     "lint:text": "prettier --check **/*.md{,x}",
-    "postinstall": "lerna bootstrap",
+    "postinstall": "lerna bootstrap --hoist",
     "prereset": "npm run clean",
     "pretest": "npm run lint && npm run flow",
     "publish": "npm run clean && npm run build && lerna publish",
@@ -45,17 +45,17 @@
     "eslint-plugin-vazco": "1.0.0",
     "flow-bin": "0.94.0",
     "flow-typed": "2.5.1",
-    "graphql": "14.1.1",
-    "invariant": "2.2.4",
+    "graphql": "^14.0.0 || 0.8.0 - 14.0.0",
+    "invariant": "^2.0.0",
     "jest": "24.1.0",
     "lerna": "3.13.1",
     "prettier": "1.16.4",
-    "react": "16.8.4",
-    "react-dom": "16.8.4",
-    "react-test-renderer": "16.8.4",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "react-test-renderer": "16.8.6",
     "rimraf": "2.6.3",
-    "simpl-schema": "1.5.5",
-    "warning": "4.0.3"
+    "simpl-schema": "^1.0.0 || ^0.0.4",
+    "warning": "^4.0.0"
   },
   "engines": {
     "npm": ">=5.0.0"
