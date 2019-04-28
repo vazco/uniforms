@@ -3,19 +3,17 @@ id: overview
 title: Overview
 ---
 
-**Note:** For a full description of components and their props - see [API](https://github.com/vazco/uniforms/blob/master/API.md).
-
 ## Forms components
 
 Most of the time you'll be using either `AutoForm` or `ValidatedForm`, but there are also other form components (rather low-level ones) with different capabilities.
 
-|      Component       | Self-generated? | Self-managed? | Self-validated? |
-| :------------------: | :-------------: | :-----------: | :-------------: |
-|      `AutoForm`      |        ✔        |       ✔       |        ✔        |
-|      `BaseForm`      |        ✘        |       ✘       |        ✘        |
-|     `QuickForm`      |        ✔        |       ✘       |        ✘        |
-|   `ValidatedForm`    |        ✘        |       ✘       |        ✔        |
-| `ValidatedQuickForm` |        ✔        |       ✘       |        ✔        |
+|      Component       |     Self-generated?      |      Self-managed?       |     Self-validated?      |
+| :------------------: | :----------------------: | :----------------------: | :----------------------: |
+|      `AutoForm`      |    :heavy_check_mark:    |    :heavy_check_mark:    |    :heavy_check_mark:    |
+|      `BaseForm`      | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_multiplication_x: |
+|     `QuickForm`      |    :heavy_check_mark:    | :heavy_multiplication_x: | :heavy_multiplication_x: |
+|   `ValidatedForm`    | :heavy_multiplication_x: | :heavy_multiplication_x: |    :heavy_check_mark:    |
+| `ValidatedQuickForm` |    :heavy_check_mark:    | :heavy_multiplication_x: |    :heavy_check_mark:    |
 
 ## Fields components
 

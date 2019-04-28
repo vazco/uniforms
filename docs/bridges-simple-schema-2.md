@@ -1,12 +1,12 @@
 ---
-id: bridges-simple-schema
-title: SimpleSchema
+id: bridges-simple-schema-2
+title: SimpleSchema2
 ---
 
-**Note:** remember to import `uniforms-bridge-simple-schema` first.
+**Note:** remember to import `uniforms-bridge-simple-schema-2` first.
 
 ```js
-import {SimpleSchema} from 'aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 
 const PersonSchema = new SimpleSchema({
   // ...

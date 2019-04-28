@@ -3,10 +3,6 @@ id: quick-start
 title: Quick start
 ---
 
-**Note:** The following examples are designed to work out of the box in meteor with `SimpleSchema` (a very common schema in the meteor community), but it's not mandatory and you can easily use it without meteor and with different schemas (see: [Custom Schema](#schemas)). There's also GraphQL and JSON Schema support.
-
-Let's start with defining an example schema:
-
 ```js
 // Choose your theme
 import AutoForm from 'uniforms-unstyled/AutoForm';
@@ -26,10 +22,10 @@ If you want to have custom layout and/or structure inside your form you can incl
 
 ```javascript
 // Choose your theme
-import AutoField from 'uniforms-unstyled/AutoField';
-import AutoForm from 'uniforms-unstyled/AutoForm';
-import SubmitField from 'uniforms-unstyled/SubmitField';
-import TextField from 'uniforms-unstyled/TextField';
+import AutoField from 'uniforms-THEME/AutoField';
+import AutoForm from 'uniforms-THEME/AutoForm';
+import SubmitField from 'uniforms-THEME/SubmitField';
+import TextField from 'uniforms-THEME/TextField';
 
 // A compatible schema
 import PostSchema from './schemas/Post';

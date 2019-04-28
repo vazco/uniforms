@@ -3,13 +3,15 @@
     "Getting Started": [
       "installation",
       "quick-start",
-      "overview"
+      "overview",
+      "examples"
     ],
     "Bridges": [
       "bridges-concept",
       "bridges-graphql",
       "bridges-json-schema",
-      "bridges-simple-schema"
+      "bridges-simple-schema",
+      "bridges-simple-schema-2"
     ],
     "Uncategorized": [
       "uncategorized-context-data",

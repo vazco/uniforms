@@ -49,7 +49,7 @@ function Info() {
               Integrations with various schemas:
               <ul>
                 <li>
-                  <a href="http://json-schema.org/">JSON Schema</a>
+                  <a href="https://json-schema.org">JSON Schema</a>
                 </li>
                 <li>
                   <a href="https://github.com/graphql/graphql-js">GraphQL</a>
@@ -77,19 +77,19 @@ function Info() {
               Wide range of themes:
               <ul>
                 <li>
-                  <a href="https://ant.design/">AntD</a> theme
+                  <a href="https://ant.design">AntD</a> theme
                 </li>
                 <li>
-                  <a href="http://getbootstrap.com/docs/3.3/">Bootstrap3</a> theme
+                  <a href="https://getbootstrap.com/docs/3.3/">Bootstrap3</a> theme
                 </li>
                 <li>
-                  <a href="http://getbootstrap.com/">Bootstrap4</a> theme
+                  <a href="https://getbootstrap.com">Bootstrap4</a> theme
                 </li>
                 <li>
-                  <a href="https://material-ui.com/">Material-UI</a> theme
+                  <a href="https://material-ui.com">Material-UI</a> theme
                 </li>
                 <li>
-                  <a href="http://semantic-ui.com/">Semantic UI</a> theme
+                  <a href="https://semantic-ui.com">Semantic UI</a> theme
                 </li>
                 <li>plain HTML theme</li>
               </ul>
