@@ -154,7 +154,7 @@ const CustomAutoField = connectField(CustomAuto, {
 });
 
 // You can also tell your `AutoForm`/`QuickForm`/`ValidatedQuickForm` to use it.
-<AutoForm {...props} autoField={CustomAutoField} />
+<AutoForm {...props} autoField={CustomAutoField} />;
 ```
 
 ### `CycleField`
