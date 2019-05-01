@@ -15,8 +15,6 @@ after_success:
 
 before_deploy:
   - npm --prefix website run build
-  # FIXME: Workaround for baseUrl problems.
-  - cp -R website/build/uniforms/* website/build
 
 deploy:
   provider: pages
@@ -25,5 +23,5 @@ deploy:
   local-dir: website/build
   on:
     all_branches: true
-    condition: $TRAVIS_BRANCH =~ ^master|v2|v2-docusaurus$
+    condition: $TRAVIS_BRANCH =~ ^master|v2$
     node: 12
