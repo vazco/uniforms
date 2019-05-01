@@ -5,7 +5,11 @@ module.exports = {
   projectName: 'uniforms',
   baseUrl: '/uniforms/',
   url: 'https://vazco.github.io/',
-  headerLinks: [{label: 'Docs', doc: 'installation'}, {label: 'Playground', page: 'playground'}],
+  headerLinks: [
+    {label: 'Docs', url: 'docs/installation'},
+    {label: 'Playground', url: 'playground'},
+    {label: 'GitHub', href: 'https://github.com/vazco/uniforms'}
+  ],
   headerIcon: 'img/uniforms.svg',
   favicon: 'favicon.ico',
   plugins: [
