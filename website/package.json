@@ -19,16 +19,16 @@
     "react-dom": "16.8.6",
     "react-frame-component": "4.0.2",
     "simpl-schema": "^1.0.0 || ^0.0.4",
-    "uniforms": "^1.31.1",
-    "uniforms-antd": "^1.31.1",
-    "uniforms-bootstrap3": "^1.31.1",
-    "uniforms-bootstrap4": "^1.31.1",
-    "uniforms-bridge-graphql": "^1.31.1",
-    "uniforms-bridge-json-schema": "^1.31.1",
-    "uniforms-bridge-simple-schema": "^1.31.1",
-    "uniforms-bridge-simple-schema-2": "^1.31.1",
-    "uniforms-material": "^1.31.1",
-    "uniforms-semantic": "^1.31.1",
-    "uniforms-unstyled": "^1.31.1"
+    "uniforms": "^2.0.0-alpha.0",
+    "uniforms-antd": "^2.0.0-alpha.0",
+    "uniforms-bootstrap3": "^2.0.0-alpha.0",
+    "uniforms-bootstrap4": "^2.0.0-alpha.0",
+    "uniforms-bridge-graphql": "^2.0.0-alpha.0",
+    "uniforms-bridge-json-schema": "^2.0.0-alpha.0",
+    "uniforms-bridge-simple-schema": "^2.0.0-alpha.0",
+    "uniforms-bridge-simple-schema-2": "^2.0.0-alpha.0",
+    "uniforms-material": "^2.0.0-alpha.0",
+    "uniforms-semantic": "^2.0.0-alpha.0",
+    "uniforms-unstyled": "^2.0.0-alpha.0"
   }
 }
