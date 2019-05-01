@@ -11,10 +11,10 @@
 </p>
 
 <p align="center">
-    <strong><a href="https://vazco.github.io/uniforms/#/API.md">API</a></strong> |
+    <strong><a href="https://vazco.github.io/uniforms/docs/api-bridges">API</a></strong> |
     <strong><a href="https://github.com/vazco/uniforms/blob/master/.github/CONTRIBUTING.md">Contribute</a></strong> |
-    <strong><a href="https://vazco.github.io/uniforms/#/introduction">Documentation</a></strong> |
-    <strong><a href="https://vazco.github.io/uniforms/#/playground">Playground</a></strong> |
+    <strong><a href="https://vazco.github.io/uniforms/docs/quick-start">Quick Start</a></strong> |
+    <strong><a href="https://vazco.github.io/uniforms/playground">Playground</a></strong> |
     <strong><a href="https://github.com/vazco/uniforms/projects/1">Roadmap</a></strong>
 </p>
 
