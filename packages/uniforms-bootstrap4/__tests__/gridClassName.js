@@ -34,6 +34,16 @@ test('gridClassName - object', () => {
   );
   expect(gridClassName({lg: 9, xs: 8, md: 2, xl: 5}, 'label')).toBe('col-8 col-md-2 col-lg-9 col-xl-5');
   expect(gridClassName({xl: 9, lg: 2, md: 5}, 'label')).toBe('col-5 col-md-5 col-lg-2 col-xl-9');
+
+  expect(gridClassName({lg: 3}, 'label')).toBe('col-3 col-lg-3');
+  expect(gridClassName({lg: 5}, 'label')).toBe('col-5 col-lg-5');
+  expect(gridClassName({lg: 7}, 'label')).toBe('col-7 col-lg-7');
+  expect(gridClassName({lg: 9}, 'label')).toBe('col-9 col-lg-9');
+
+  expect(gridClassName({xl: 3}, 'label')).toBe('col-3 col-xl-3');
+  expect(gridClassName({xl: 5}, 'label')).toBe('col-5 col-xl-5');
+  expect(gridClassName({xl: 7}, 'label')).toBe('col-7 col-xl-7');
+  expect(gridClassName({xl: 9}, 'label')).toBe('col-9 col-xl-9');
 });
 
 test('gridClassName - number', () => {

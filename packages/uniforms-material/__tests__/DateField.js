@@ -100,6 +100,20 @@ test('<DateField> - renders a Input which correctly reacts on change (empty)', (
   expect(onChange).toHaveBeenLastCalledWith('x', undefined);
 });
 
+test('<DateField> - renders a Input which correctly reacts on change (overflow)', () => {
+  const onChange = jest.fn();
+
+  const now = new Date(1e5, 0);
+  const element = <DateField name="x" />;
+  const wrapper = mount(element, createContext({x: {type: Date}}, {onChange}));
+
+  wrapper
+    .find(Input)
+    .props()
+    .onChange({target: {valueAsNumber: now}});
+  expect(onChange).not.toHaveBeenCalled();
+});
+
 test('<DateField> - renders a Input with correct error text (specified)', () => {
   const error = new Error();
   const element = <DateField name="x" error={error} showInlineError errorMessage="Error" />;

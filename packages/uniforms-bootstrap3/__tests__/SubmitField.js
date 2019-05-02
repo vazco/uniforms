@@ -35,3 +35,11 @@ test('<SubmitField> - renders a wrapper with correct class', () => {
   expect(wrapper).toHaveLength(1);
   expect(wrapper.find('.container')).toHaveLength(1);
 });
+
+test('<SubmitField> - renders a wrapper with correct value', () => {
+  const element = <SubmitField value="Example" />;
+  const wrapper = mount(element, createContext());
+
+  expect(wrapper).toHaveLength(1);
+  expect(wrapper.find('input').prop('value')).toBe('Example');
+});
