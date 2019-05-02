@@ -1,3 +1,7 @@
+## Next
+
+- **Fixed:** `SelectField` in `uniforms-material` rendered inline error twice in certain situations.
+
 ## [v2.0.0-alpha.0](https://github.com/vazco/uniforms/tree/v2.0.0-alpha.0) (2019-05-01)
 
 - **Breaking:** Separated schema packages. These are now:

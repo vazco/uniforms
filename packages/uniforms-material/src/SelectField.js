@@ -1,7 +1,6 @@
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Radio from '@material-ui/core/Radio';
@@ -126,7 +125,6 @@ const renderCheckboxes = ({
             value={item}
           />
         ))}
-        {showInlineError && error && <FormHelperText>{errorMessage}</FormHelperText>}
       </RadioGroup>
     );
   } else {
