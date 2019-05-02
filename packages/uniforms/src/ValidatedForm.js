@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import cloneDeep from 'lodash/cloneDeep';
 import isEqual from 'lodash/isEqual';
 import merge from 'lodash/merge';
+import noop from 'lodash/noop';
 import omit from 'lodash/omit';
 import set from 'lodash/set';
 
@@ -80,29 +81,21 @@ const Validated = parent =>
 
       if (this.props.schema !== schema || this.props.validator !== validator) {
         this.setState(
-          ({bridge}) => ({
-            validator: bridge.getValidator(validator)
-          }),
+          state => ({validator: state.bridge.getValidator(validator)}),
           () => {
-            if (validate === 'onChange' || (validate === 'onChangeAfterSubmit' && this.state.validate)) {
-              this.onValidate().catch(() => {});
+            if (shouldRevalidate(validate, this.state.validate)) {
+              this.onValidate().catch(noop);
             }
           }
         );
-      } else if (!isEqual(this.props.model, model)) {
-        if (validate === 'onChange' || (validate === 'onChangeAfterSubmit' && this.state.validate)) {
-          this.onValidateModel(model).catch(() => {});
-        }
+      } else if (!isEqual(this.props.model, model) && shouldRevalidate(validate, this.state.validate)) {
+        this.onValidateModel(model).catch(noop);
       }
     }
 
     onChange(key, value) {
-      // eslint-disable-next-line max-len
-      if (
-        this.props.validate === 'onChange' ||
-        (this.props.validate === 'onChangeAfterSubmit' && this.state.validate)
-      ) {
-        this.onValidate(key, value).catch(() => {});
+      if (shouldRevalidate(this.props.validate, this.state.validate)) {
+        this.onValidate(key, value).catch(noop);
       }
 
       // FIXME: https://github.com/vazco/uniforms/issues/293
@@ -138,9 +131,8 @@ const Validated = parent =>
       });
 
       promise
-        .catch(() => {
-          // `onSubmit` should never reject, so we ignore this rejection.
-        })
+        // `onSubmit` should never reject, so we ignore this rejection.
+        .catch(noop)
         .then(() => {
           // It can be already unmounted.
           if (this.mounted)
@@ -188,5 +180,9 @@ const Validated = parent =>
       });
     }
   };
+
+function shouldRevalidate(inProps, inState) {
+  return inProps === 'onChange' || (inProps === 'onChangeAfterSubmit' && inState);
+}
 
 export default Validated(BaseForm);

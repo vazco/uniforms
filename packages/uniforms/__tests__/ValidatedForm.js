@@ -55,6 +55,7 @@ describe('ValidatedForm', () => {
       validator.mockImplementationOnce(() => {
         throw error;
       });
+
       form.validate().catch(() => {});
       await new Promise(resolve => process.nextTick(resolve));
 
@@ -71,7 +72,8 @@ describe('ValidatedForm', () => {
       validator.mockImplementation(() => {
         throw error;
       });
-      form.validate();
+
+      form.validate().catch(() => {});
 
       expect(onValidate).toHaveBeenCalledTimes(1);
       expect(onValidate).toHaveBeenLastCalledWith(model, error, expect.any(Function));
@@ -81,7 +83,8 @@ describe('ValidatedForm', () => {
       onValidate.mockImplementationOnce((model, existingError, next) => {
         next(error);
       });
-      form.validate();
+
+      form.validate().catch(() => {});
 
       expect(wrapper.instance().getChildContext()).toHaveProperty('uniforms.error', error);
     });
@@ -310,12 +313,53 @@ describe('ValidatedForm', () => {
         wrapper = mount(<ValidatedForm model={model} schema={schema} />);
       });
 
-      it.skip('Reuses the validator between validations', () => {
-        // ...
+      it('reuses the validator between validations', () => {
+        const validator = jest.fn();
+
+        wrapper.setProps({
+          schema: new SimpleSchemaBridge({
+            getDefinition() {},
+            messageForError() {},
+            objectKeys() {},
+            validator
+          })
+        });
+
+        ['1', '2', '3'].forEach(value => {
+          wrapper
+            .instance()
+            .getChildContext()
+            .uniforms.onChange('key', value);
+          wrapper.find('form').simulate('submit');
+        });
+
+        expect(validator).toHaveBeenCalledTimes(1);
       });
 
-      it.skip('uses the new validator settings if `validator` changes', () => {
-        // ...
+      it('uses the new validator settings if `validator` changes', () => {
+        const validator = jest.fn();
+
+        wrapper.setProps({
+          schema: new SimpleSchemaBridge({
+            getDefinition() {},
+            messageForError() {},
+            objectKeys() {},
+            validator
+          })
+        });
+
+        const validatorA = Symbol();
+        const validatorB = Symbol();
+
+        wrapper.setProps({validator: validatorA});
+        wrapper.setProps({validator: validatorB});
+        wrapper.setProps({validator: validatorA});
+
+        expect(validator).toHaveBeenCalledTimes(4);
+        // First call is bridge implementation specific.
+        expect(validator).toHaveBeenNthCalledWith(2, validatorA);
+        expect(validator).toHaveBeenNthCalledWith(3, validatorB);
+        expect(validator).toHaveBeenNthCalledWith(4, validatorA);
       });
 
       it('uses the new validator if `schema` changes', () => {
