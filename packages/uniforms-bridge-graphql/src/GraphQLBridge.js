@@ -100,7 +100,7 @@ export default class GraphQLBridge extends Bridge {
 
   // eslint-disable-next-line complexity
   getProps(nameNormal, props = {}) {
-    const nameGeneric = nameNormal.replace(/\.\d+/, '.$');
+    const nameGeneric = nameNormal.replace(/\.\d+/g, '.$');
 
     const field = this.getField(nameGeneric, false);
     const fieldType = extractFromNonNull(field).type;
