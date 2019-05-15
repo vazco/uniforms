@@ -5,20 +5,24 @@ module.exports = {
   projectName: 'uniforms',
   baseUrl: '/uniforms/',
   url: 'https://vazco.github.io/',
-  headerLinks: [
-    {label: 'Docs', url: 'docs/installation'},
-    {label: 'Playground', url: 'playground'},
-    {label: 'GitHub', href: 'https://github.com/vazco/uniforms'}
-  ],
+  themeConfig: {
+    headerLinks: [
+      {label: 'Docs', url: 'docs/installation'},
+      {label: 'Playground', url: 'playground'},
+      {label: 'GitHub', href: 'https://github.com/vazco/uniforms'}
+    ]
+  },
   headerIcon: 'img/uniforms.svg',
   favicon: 'favicon.ico',
-  plugins: [
-    {
-      name: '@docusaurus/plugin-content-docs',
-      options: {path: '../docs', sidebarPath: require.resolve('./sidebars.json')}
-    },
-    {
-      name: '@docusaurus/plugin-content-pages'
-    }
+  presets: [
+    [
+      '@docusaurus/preset-classic',
+      {
+        docs: {
+          path: '../docs',
+          sidebarPath: require.resolve('./sidebars.json')
+        }
+      }
+    ]
   ]
 };
