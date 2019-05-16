@@ -379,6 +379,13 @@ describe('GraphQLBridge', () => {
         expect(bridge.getType('category.$.owners.$.lastName')).toBe(String);
         expect(bridge.getType('category.$.owners.$.tags')).toBe(Array);
         expect(bridge.getType('category.$.owners.$.tags.$')).toBe(String);
+        expect(bridge.getType('category.1.owners.$.tags.$')).toBe(String);
+        expect(bridge.getType('category.$.owners.2.tags.$')).toBe(String);
+        expect(bridge.getType('category.$.owners.$.tags.3')).toBe(String);
+        expect(bridge.getType('category.4.owners.5.tags.$')).toBe(String);
+        expect(bridge.getType('category.6.owners.$.tags.7')).toBe(String);
+        expect(bridge.getType('category.$.owners.8.tags.9')).toBe(String);
+        expect(bridge.getType('category.0.owners.0.tags.0')).toBe(String);
         expect(bridge.getType('custom')).toBe(ast.getType('Scalar'));
         expect(bridge.getType('example')).toBe(String);
         expect(bridge.getType('id')).toBe(Number);
