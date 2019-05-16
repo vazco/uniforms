@@ -1,4 +1,4 @@
-## Next
+## [v2.0.0-alpha.1](https://github.com/vazco/uniforms/tree/v2.0.0-alpha.1) (2019-05-16)
 
 - **Fixed:** Nested arrays in `GraphQLBridge`. [\#535](https://github.com/vazco/uniforms/issues/535)
 - **Fixed:** `SelectField` in `uniforms-material` rendered inline error twice in certain situations.
