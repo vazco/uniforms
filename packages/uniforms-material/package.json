@@ -1,6 +1,6 @@
 {
   "name": "uniforms-material",
-  "version": "2.0.0-alpha.0",
+  "version": "2.0.0-alpha.1",
   "license": "MIT",
   "main": "index.js",
   "description": "Material UI components for uniforms.",
@@ -32,6 +32,6 @@
     "invariant": "^2.0.0",
     "lodash": "^4.0.0",
     "prop-types": "^15.5.7",
-    "uniforms": "^2.0.0-alpha.0"
+    "uniforms": "^2.0.0-alpha.1"
   }
 }
