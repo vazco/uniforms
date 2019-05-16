@@ -1,7 +1,3 @@
-.footer {
-  display: none;
-}
-
 .playground {
   height: calc(100vh - var(--ifm-navbar-height));
 }
