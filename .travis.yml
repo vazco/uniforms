@@ -21,7 +21,7 @@ deploy:
   github_token: $GITHUB_TOKEN
   skip_cleanup: true
   local-dir: website/build
+  fqdn: uniforms.tools
   on:
-    all_branches: true
-    condition: $TRAVIS_BRANCH =~ ^master|v2$
+    all_branches: master
     node: 12
