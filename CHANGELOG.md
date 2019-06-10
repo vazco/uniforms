@@ -1,3 +1,5 @@
+## [v2.0.0](https://github.com/vazco/uniforms/tree/v2.0.0) (2019-06-10)
+
 ## [v2.0.0-alpha.1](https://github.com/vazco/uniforms/tree/v2.0.0-alpha.1) (2019-05-16)
 
 - **Fixed:** Nested arrays in `GraphQLBridge`. [\#535](https://github.com/vazco/uniforms/issues/535)
