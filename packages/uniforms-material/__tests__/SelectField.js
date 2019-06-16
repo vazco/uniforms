@@ -293,12 +293,14 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct nam
     wrapper
       .find(Radio)
       .at(0)
+      .find('input')
       .prop('name')
   ).toBe('x');
   expect(
     wrapper
       .find(Radio)
       .at(1)
+      .find('input')
       .prop('name')
   ).toBe('x');
 });
@@ -350,12 +352,14 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct val
     wrapper
       .find(Radio)
       .at(0)
+      .find('input')
       .prop('checked')
   ).toBe(false);
   expect(
     wrapper
       .find(Radio)
       .at(1)
+      .find('input')
       .prop('checked')
   ).toBe(false);
 });
@@ -369,12 +373,14 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct val
     wrapper
       .find(Radio)
       .at(0)
+      .find('input')
       .prop('checked')
   ).toBe(false);
   expect(
     wrapper
       .find(Radio)
       .at(1)
+      .find('input')
       .prop('checked')
   ).toBe(true);
 });
@@ -388,12 +394,14 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct val
     wrapper
       .find(Radio)
       .at(0)
+      .find('input')
       .prop('checked')
   ).toBe(false);
   expect(
     wrapper
       .find(Radio)
       .at(1)
+      .find('input')
       .prop('checked')
   ).toBe(true);
 });
