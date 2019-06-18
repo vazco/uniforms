@@ -1,3 +1,7 @@
+## [v2.1.0](https://github.com/vazco/uniforms/tree/v2.1.0) (2019-06-18)
+
+- **Added:** Support for `@material-ui/core@4`. [\#542](https://github.com/vazco/uniforms/issues/542)
+
 ## [v2.0.0](https://github.com/vazco/uniforms/tree/v2.0.0) (2019-06-10)
 
 ## [v2.0.0-alpha.1](https://github.com/vazco/uniforms/tree/v2.0.0-alpha.1) (2019-05-16)
