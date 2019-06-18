@@ -26,9 +26,15 @@ export default function wrapField(
   children
 ) {
   const hasWrap = !!(grid || wrapClassName);
-  const blockError = !!(error && showInlineError) && <span className="help-block">{errorMessage}</span>;
-  const blockFeedback = !!(error && feedbackable) && <i className="glyphicon glyphicon-remove form-control-feedback" />;
-  const blockHelp = !!help && <span className={classnames('help-block', helpClassName)}>{help}</span>;
+  const blockError = !!(error && showInlineError) && (
+    <span className="help-block">{errorMessage}</span>
+  );
+  const blockFeedback = !!(error && feedbackable) && (
+    <i className="glyphicon glyphicon-remove form-control-feedback" />
+  );
+  const blockHelp = !!help && (
+    <span className={classnames('help-block', helpClassName)}>{help}</span>
+  );
 
   return (
     <div
@@ -38,16 +44,30 @@ export default function wrapField(
         disabled,
         required
       })}
-      {...filterDOMProps(omit(props, ['checkboxes', 'inline', 'inputClassName', 'inputRef', 'rows', 'transform']))}
+      {...filterDOMProps(
+        omit(props, [
+          'checkboxes',
+          'inline',
+          'inputClassName',
+          'inputRef',
+          'rows',
+          'transform'
+        ])
+      )}
     >
       {label && (
-        <label htmlFor={id} className={classnames('control-label', gridClassName(grid, 'label'))}>
+        <label
+          htmlFor={id}
+          className={classnames('control-label', gridClassName(grid, 'label'))}
+        >
           {label}
         </label>
       )}
 
       {hasWrap && (
-        <div className={classnames(wrapClassName, gridClassName(grid, 'input'))}>
+        <div
+          className={classnames(wrapClassName, gridClassName(grid, 'input'))}
+        >
           {children}
           {blockFeedback}
           {blockHelp}

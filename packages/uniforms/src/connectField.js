@@ -1,4 +1,4 @@
-import {createElement} from 'react';
+import { createElement } from 'react';
 
 import BaseField from './BaseField';
 
@@ -17,20 +17,26 @@ export default function connectField(
   } = {}
 ) {
   return class extends baseField {
-    static displayName = `${component.displayName || component.name}${baseField.displayName || baseField.name}`;
+    static displayName = `${component.displayName ||
+      component.name}${baseField.displayName || baseField.name}`;
 
     constructor() {
       super(...arguments);
 
-      this.options.includeInChain = includeInChain === undefined ? true : includeInChain;
-      this.options.initialValue = initialValue === undefined ? true : initialValue;
+      this.options.includeInChain =
+        includeInChain === undefined ? true : includeInChain;
+      this.options.initialValue =
+        initialValue === undefined ? true : initialValue;
 
       if (ensureValue !== undefined) this.options.ensureValue = ensureValue;
-      if (includeParent !== undefined) this.options.includeParent = includeParent;
+      if (includeParent !== undefined)
+        this.options.includeParent = includeParent;
     }
 
     getChildContextName() {
-      return this.options.includeInChain ? super.getChildContextName() : this.context.uniforms.name;
+      return this.options.includeInChain
+        ? super.getChildContextName()
+        : this.context.uniforms.name;
     }
 
     componentWillMount() {
@@ -43,12 +49,19 @@ export default function connectField(
 
         // https://github.com/vazco/uniforms/issues/52
         // If field is initially rendered with value, we treat it as an initial value.
-        if (this.props.value !== undefined && this.props.value !== props.value) {
+        if (
+          this.props.value !== undefined &&
+          this.props.value !== props.value
+        ) {
           props.onChange(this.props.value);
           return;
         }
 
-        if (props.required && props.initialValue !== undefined && props.value === undefined) {
+        if (
+          props.required &&
+          props.initialValue !== undefined &&
+          props.value === undefined
+        ) {
           props.onChange(props.initialValue);
         }
       }

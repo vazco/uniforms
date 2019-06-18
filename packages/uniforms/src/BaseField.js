@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import invariant from 'invariant';
 import isEqual from 'lodash/isEqual';
-import {Component} from 'react';
+import { Component } from 'react';
 
 import BaseForm from './BaseForm';
 import joinName from './joinName';
@@ -12,7 +12,8 @@ const flowingProp = (prop, schema, state, fallback) => {
   const propDisabled = prop === '' || prop === false;
   const propSet = prop !== undefined;
   const schemaDisabled = schema === '' || schema === false;
-  const schemaValue = schema === true || schema === undefined ? fallback : schema;
+  const schemaValue =
+    schema === true || schema === undefined ? fallback : schema;
   const stateDisabled = !state;
 
   const value =
@@ -37,7 +38,11 @@ export default class BaseField extends Component {
     name: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
 
-    label: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, PropTypes.node]),
+    label: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.string,
+      PropTypes.node
+    ]),
     placeholder: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
   };
 
@@ -47,7 +52,11 @@ export default class BaseField extends Component {
   constructor() {
     super(...arguments);
 
-    invariant(this.context.uniforms, '<%s /> must be rendered within a form.', this.constructor.displayName);
+    invariant(
+      this.context.uniforms,
+      '<%s /> must be rendered within a form.',
+      this.constructor.displayName
+    );
 
     this.options = {
       ensureValue: true,
@@ -63,8 +72,23 @@ export default class BaseField extends Component {
     this.findError = this.findError.bind(this);
   }
 
+  getChildContext() {
+    return {
+      uniforms: {
+        name: this.getChildContextName(),
+        error: this.getChildContextError(),
+        model: this.getChildContextModel(),
+        state: this.getChildContextState(),
+        schema: this.getChildContextSchema(),
+        onChange: this.getChildContextOnChange(),
+        onSubmit: this.getChildContextOnSubmit(),
+        randomId: this.context.uniforms.randomId
+      }
+    };
+  }
+
   // eslint-disable-next-line complexity
-  shouldComponentUpdate(nextProps, _, {uniforms: nextContext}) {
+  shouldComponentUpdate(nextProps, _, { uniforms: nextContext }) {
     const prevProps = this.props;
     const prevContext = this.context.uniforms;
 
@@ -72,8 +96,8 @@ export default class BaseField extends Component {
       return true;
     }
 
-    const {changedMap: nextMap, ...nextState} = nextContext.state;
-    const {changedMap: prevMap, ...prevState} = prevContext.state;
+    const { changedMap: nextMap, ...nextState } = nextContext.state;
+    const { changedMap: prevMap, ...prevState } = prevContext.state;
 
     if (!isEqual(prevState, nextState)) {
       return true;
@@ -92,8 +116,14 @@ export default class BaseField extends Component {
 
     // Fields which are using parent props, need to be updated when parent value change
     if (this.options.includeParent && nextName.indexOf('.') !== -1) {
-      const prevParentValue = get(prevContext.model, prevName.replace(/(.+)\..+$/, '$1'));
-      const nextParentValue = get(nextContext.model, nextName.replace(/(.+)\..+$/, '$1'));
+      const prevParentValue = get(
+        prevContext.model,
+        prevName.replace(/(.+)\..+$/, '$1')
+      );
+      const nextParentValue = get(
+        nextContext.model,
+        nextName.replace(/(.+)\..+$/, '$1')
+      );
 
       if (!isEqual(prevParentValue, nextParentValue)) {
         return true;
@@ -108,8 +138,12 @@ export default class BaseField extends Component {
     }
 
     if (prevContext.error !== nextContext.error) {
-      const prevError = prevContext.error && prevContext.schema.getError(prevName, prevContext.error);
-      const nextError = nextContext.error && nextContext.schema.getError(nextName, nextContext.error);
+      const prevError =
+        prevContext.error &&
+        prevContext.schema.getError(prevName, prevContext.error);
+      const nextError =
+        nextContext.error &&
+        nextContext.schema.getError(nextName, nextContext.error);
 
       if (!isEqual(prevError, nextError)) {
         return true;
@@ -128,21 +162,6 @@ export default class BaseField extends Component {
     return false;
   }
 
-  getChildContext() {
-    return {
-      uniforms: {
-        name: this.getChildContextName(),
-        error: this.getChildContextError(),
-        model: this.getChildContextModel(),
-        state: this.getChildContextState(),
-        schema: this.getChildContextSchema(),
-        onChange: this.getChildContextOnChange(),
-        onSubmit: this.getChildContextOnSubmit(),
-        randomId: this.context.uniforms.randomId
-      }
-    };
-  }
-
   getChildContextName() {
     return joinName(null, this.context.uniforms.name, this.props.name);
   }
@@ -159,7 +178,10 @@ export default class BaseField extends Component {
     const state = this.context.uniforms.state;
     const props = this.props;
 
-    const propagate = name => (props[name] === undefined || props[name] === null ? state[name] : !!props[name]);
+    const propagate = name =>
+      props[name] === undefined || props[name] === null
+        ? state[name]
+        : !!props[name];
 
     return {
       ...state,
@@ -202,15 +224,29 @@ export default class BaseField extends Component {
     const field = context.schema.getField(name);
     const fieldType = context.schema.getType(name);
     const fields = context.schema.getSubfields(name);
-    const schemaProps = context.schema.getProps(name, {...state, ...props});
+    const schemaProps = context.schema.getProps(name, { ...state, ...props });
 
-    const initialValue = options.explicitInitialValue ? context.schema.getInitialValue(name, props) : undefined;
+    const initialValue = options.explicitInitialValue
+      ? context.schema.getInitialValue(name, props)
+      : undefined;
     const parent =
       options.includeParent && name.indexOf('.') !== -1
-        ? this.getFieldProps(name.replace(/(.+)\..+$/, '$1'), {includeParent: false})
+        ? this.getFieldProps(name.replace(/(.+)\..+$/, '$1'), {
+            includeParent: false
+          })
         : null;
-    const [label, none] = flowingProp(props.label, schemaProps.label, state.label, '');
-    const [placeholder] = flowingProp(props.placeholder, schemaProps.placeholder, state.placeholder, label || none);
+    const [label, none] = flowingProp(
+      props.label,
+      schemaProps.label,
+      state.label,
+      ''
+    );
+    const [placeholder] = flowingProp(
+      props.placeholder,
+      schemaProps.placeholder,
+      state.placeholder,
+      label || none
+    );
 
     let value;
     if (props.value === undefined || options.overrideValue) {
@@ -249,14 +285,14 @@ export default class BaseField extends Component {
       value,
 
       // 3. Initial value (only if requested).
-      ...(options.explicitInitialValue && {initialValue}),
+      ...(options.explicitInitialValue && { initialValue }),
 
       // 4. Schema props and own props.
       ...schemaProps,
       ...props,
 
       // 5. Overriden value (only if requested).
-      ...((options.explicitInitialValue || options.overrideValue) && {value}),
+      ...((options.explicitInitialValue || options.overrideValue) && { value }),
 
       // 6. Calculated _special_ field props.
       label,
@@ -266,7 +302,10 @@ export default class BaseField extends Component {
   }
 
   findError(name) {
-    return this.context.uniforms.schema.getError(name, this.context.uniforms.error);
+    return this.context.uniforms.schema.getError(
+      name,
+      this.context.uniforms.error
+    );
   }
 
   findField(name) {

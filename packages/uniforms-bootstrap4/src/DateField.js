@@ -19,7 +19,9 @@ const Date = props =>
   wrapField(
     props,
     <input
-      className={classnames(props.inputClassName, 'form-control', {'is-invalid': props.error})}
+      className={classnames(props.inputClassName, 'form-control', {
+        'is-invalid': props.error
+      })}
       disabled={props.disabled}
       id={props.id}
       max={dateFormat(props.max)}

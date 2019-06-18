@@ -1,9 +1,9 @@
 import React from 'react';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 import AutoForm from 'uniforms/AutoForm';
 import connectField from 'uniforms/connectField';
-import {SimpleSchemaBridge} from 'uniforms-bridge-simple-schema';
+import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
 
 jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
@@ -13,9 +13,9 @@ describe('AutoForm', () => {
   const validator = jest.fn();
   const onChange = jest.fn();
   const onSubmit = jest.fn();
-  const model = {a: '1'};
+  const model = { a: '1' };
   const schema = new SimpleSchemaBridge({
-    getDefinition: () => ({type: String, defaultValue: ''}),
+    getDefinition: () => ({ type: String, defaultValue: '' }),
     messageForError: () => {},
     objectKeys: () => ['a', 'b', 'c'],
     validator: () => validator
@@ -29,7 +29,13 @@ describe('AutoForm', () => {
   });
 
   describe('when changed', () => {
-    const wrapper = mount(<AutoForm onChange={onChange} onChangeModel={onChangeModel} schema={schema} />);
+    const wrapper = mount(
+      <AutoForm
+        onChange={onChange}
+        onChangeModel={onChangeModel}
+        schema={schema}
+      />
+    );
 
     it('updates', () => {
       wrapper
@@ -48,7 +54,7 @@ describe('AutoForm', () => {
         .uniforms.onChange('a', '2');
 
       expect(onChangeModel).toHaveBeenCalledTimes(1);
-      expect(onChangeModel).toHaveBeenLastCalledWith({a: '2'});
+      expect(onChangeModel).toHaveBeenLastCalledWith({ a: '2' });
     });
   });
 
@@ -57,7 +63,14 @@ describe('AutoForm', () => {
       const field = () => null;
       const Field = connectField(field);
 
-      mount(<AutoForm onChange={onChange} schema={schema} autoField={Field} model={model} />);
+      mount(
+        <AutoForm
+          onChange={onChange}
+          schema={schema}
+          autoField={Field}
+          model={model}
+        />
+      );
 
       expect(onChange).toHaveBeenCalledTimes(2);
       expect(onChange.mock.calls[0]).toEqual(expect.arrayContaining(['b', '']));
@@ -65,7 +78,9 @@ describe('AutoForm', () => {
     });
 
     it('skips `onSubmit` until rendered (`autosave` = true)', async () => {
-      const wrapper = mount(<AutoForm onSubmit={onSubmit} schema={schema} autosave />);
+      const wrapper = mount(
+        <AutoForm onSubmit={onSubmit} schema={schema} autosave />
+      );
 
       expect(onSubmit).not.toBeCalled();
       wrapper
@@ -76,27 +91,40 @@ describe('AutoForm', () => {
       await new Promise(resolve => process.nextTick(resolve));
 
       expect(onSubmit).toHaveBeenCalledTimes(1);
-      expect(onSubmit).toHaveBeenLastCalledWith({a: 1});
+      expect(onSubmit).toHaveBeenLastCalledWith({ a: 1 });
     });
   });
 
   describe('when reset', () => {
-    const intialModel = {a: 'foo'};
-    const wrapper = mount(<AutoForm onSubmit={onSubmit} schema={schema} autosave model={intialModel} />);
+    const intialModel = { a: 'foo' };
+    const wrapper = mount(
+      <AutoForm
+        onSubmit={onSubmit}
+        schema={schema}
+        autosave
+        model={intialModel}
+      />
+    );
 
     it('reset `model`', () => {
       wrapper.instance().reset();
-      expect(wrapper.instance().getChildContext().uniforms.model).toEqual(intialModel);
+      expect(wrapper.instance().getChildContext().uniforms.model).toEqual(
+        intialModel
+      );
     });
 
     it('resets state `changedMap`', () => {
       wrapper.instance().reset();
-      expect(wrapper.instance().getChildContext().uniforms.state.changedMap).toEqual({});
+      expect(
+        wrapper.instance().getChildContext().uniforms.state.changedMap
+      ).toEqual({});
     });
 
     it('resets state `changed`', () => {
       wrapper.instance().reset();
-      expect(wrapper.instance().getChildContext().uniforms.state.changed).toEqual(false);
+      expect(
+        wrapper.instance().getChildContext().uniforms.state.changed
+      ).toEqual(false);
     });
   });
 
@@ -104,13 +132,13 @@ describe('AutoForm', () => {
     const wrapper = mount(<AutoForm schema={schema} />);
 
     it('updates when changed', () => {
-      wrapper.setProps({model: {}});
+      wrapper.setProps({ model: {} });
 
       expect(wrapper.instance().getChildContext().uniforms.model).toEqual({});
     });
 
     it('validates', () => {
-      wrapper.setProps({model, validate: 'onChange'});
+      wrapper.setProps({ model, validate: 'onChange' });
 
       expect(validator).toHaveBeenCalledTimes(1);
     });

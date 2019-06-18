@@ -1,10 +1,9 @@
 import Icon from 'antd/lib/icon';
-import React from 'react';
+import React, { Children } from 'react';
 import Tooltip from 'antd/lib/tooltip';
 import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 import joinName from 'uniforms/joinName';
-import {Children} from 'react';
 
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';
@@ -47,7 +46,10 @@ const List = ({
             React.cloneElement(child, {
               key: index,
               label: null,
-              name: joinName(name, child.props.name && child.props.name.replace('$', index))
+              name: joinName(
+                name,
+                child.props.name && child.props.name.replace('$', index)
+              )
             })
           )
         )
@@ -75,4 +77,7 @@ List.defaultProps = {
   }
 };
 
-export default connectField(List, {ensureValue: false, includeInChain: false});
+export default connectField(List, {
+  ensureValue: false,
+  includeInChain: false
+});

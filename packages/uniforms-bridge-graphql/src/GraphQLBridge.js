@@ -4,7 +4,10 @@ import invariant from 'invariant';
 import Bridge from 'uniforms/Bridge';
 import joinName from 'uniforms/joinName';
 
-const extractFromNonNull = x => (x && x.type instanceof graphql.GraphQLNonNull ? {...x, type: x.type.ofType} : x);
+const extractFromNonNull = x =>
+  x && x.type instanceof graphql.GraphQLNonNull
+    ? { ...x, type: x.type.ofType }
+    : x;
 
 export default class GraphQLBridge extends Bridge {
   constructor(schema, validator, extras = {}) {
@@ -22,7 +25,13 @@ export default class GraphQLBridge extends Bridge {
   }
 
   getError(name, error) {
-    return (error && error.details && error.details.find && error.details.find(error => error.name === name)) || null;
+    return (
+      (error &&
+        error.details &&
+        error.details.find &&
+        error.details.find(error => error.name === name)) ||
+      null
+    );
   }
 
   getErrorMessage(name, error) {
@@ -51,8 +60,12 @@ export default class GraphQLBridge extends Bridge {
   getField(name, returnExtracted = true) {
     return joinName(null, name).reduce((definition, next, index, array) => {
       if (next === '$' || next === '' + parseInt(next, 10)) {
-        invariant(definition.type instanceof graphql.GraphQLList, 'Field not found in schema: "%s"', name);
-        definition = {type: extractFromNonNull(definition.type.ofType)};
+        invariant(
+          definition.type instanceof graphql.GraphQLList,
+          'Field not found in schema: "%s"',
+          name
+        );
+        definition = { type: extractFromNonNull(definition.type.ofType) };
       } else if (definition.type && definition.type._fields) {
         definition = definition.type._fields[next];
       } else {
@@ -69,11 +82,18 @@ export default class GraphQLBridge extends Bridge {
 
       const extracted = extractFromNonNull(definition);
 
-      if ((isLast && returnExtracted) || !(extracted.type instanceof graphql.GraphQLObjectType)) {
+      if (
+        (isLast && returnExtracted) ||
+        !(extracted.type instanceof graphql.GraphQLObjectType)
+      ) {
         return extracted;
       }
 
-      invariant(extracted.type.getFields, 'Field not found in schema: "%s"', name);
+      invariant(
+        extracted.type.getFields,
+        'Field not found in schema: "%s"',
+        name
+      );
 
       return extracted.type.getFields();
     }, this.schema.getFields());
@@ -95,7 +115,9 @@ export default class GraphQLBridge extends Bridge {
 
     const defaultValue = this.getField(name).defaultValue;
 
-    return defaultValue === undefined ? this.extras[name] && this.extras[name].initialValue : defaultValue;
+    return defaultValue === undefined
+      ? this.extras[name] && this.extras[name].initialValue
+      : defaultValue;
   }
 
   // eslint-disable-next-line complexity
@@ -130,7 +152,10 @@ export default class GraphQLBridge extends Bridge {
       ready.placeholder = '';
     }
 
-    if (fieldType instanceof graphql.GraphQLScalarType && fieldType.name === 'Float') {
+    if (
+      fieldType instanceof graphql.GraphQLScalarType &&
+      fieldType.name === 'Float'
+    ) {
       ready.decimal = true;
     }
 
@@ -139,7 +164,8 @@ export default class GraphQLBridge extends Bridge {
         ready.transform = value => ready.options[value];
         ready.allowedValues = Object.keys(ready.options);
       } else {
-        ready.transform = value => ready.options.find(option => option.value === value).label;
+        ready.transform = value =>
+          ready.options.find(option => option.value === value).label;
         ready.allowedValues = ready.options.map(option => option.value);
       }
     }
@@ -154,7 +180,10 @@ export default class GraphQLBridge extends Bridge {
 
     const fieldType = this.getField(name).type;
 
-    if (fieldType instanceof graphql.GraphQLObjectType || fieldType instanceof graphql.GraphQLInputObjectType) {
+    if (
+      fieldType instanceof graphql.GraphQLObjectType ||
+      fieldType instanceof graphql.GraphQLInputObjectType
+    ) {
       return Object.keys(fieldType.getFields());
     }
 

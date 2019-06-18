@@ -15,14 +15,28 @@ const xor = (item, array) => {
 
 const renderCheckboxes = props =>
   props.allowedValues.map(item => (
-    <div key={item} className={classnames(props.inputClassName, `checkbox${props.inline ? '-inline' : ''}`)}>
+    <div
+      key={item}
+      className={classnames(
+        props.inputClassName,
+        `checkbox${props.inline ? '-inline' : ''}`
+      )}
+    >
       <label htmlFor={`${props.id}-${item}`}>
         <input
-          checked={props.fieldType === Array ? props.value.includes(item) : props.value === item}
+          checked={
+            props.fieldType === Array
+              ? props.value.includes(item)
+              : props.value === item
+          }
           disabled={props.disabled}
           id={`${props.id}-${item}`}
           name={props.name}
-          onChange={() => props.onChange(props.fieldType === Array ? xor(item, props.value) : item)}
+          onChange={() =>
+            props.onChange(
+              props.fieldType === Array ? xor(item, props.value) : item
+            )
+          }
           type="checkbox"
         />
         {props.transform ? props.transform(item) : item}
@@ -31,7 +45,9 @@ const renderCheckboxes = props =>
   ));
 const renderSelect = props => (
   <select
-    className={classnames(props.inputClassName, 'form-control', {'form-control-danger': props.error})}
+    className={classnames(props.inputClassName, 'form-control', {
+      'form-control-danger': props.error
+    })}
     disabled={props.disabled}
     id={props.id}
     name={props.name}
@@ -53,5 +69,10 @@ const renderSelect = props => (
   </select>
 );
 const Select = props =>
-  wrapField(props, props.checkboxes || props.fieldType === Array ? renderCheckboxes(props) : renderSelect(props));
+  wrapField(
+    props,
+    props.checkboxes || props.fieldType === Array
+      ? renderCheckboxes(props)
+      : renderSelect(props)
+  );
 export default connectField(Select);

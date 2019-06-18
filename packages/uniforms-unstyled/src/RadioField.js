@@ -28,7 +28,9 @@ const Radio = ({
           type="radio"
         />
 
-        <label htmlFor={`${id}-${item}`}>{transform ? transform(item) : item}</label>
+        <label htmlFor={`${id}-${item}`}>
+          {transform ? transform(item) : item}
+        </label>
       </div>
     ))}
   </div>

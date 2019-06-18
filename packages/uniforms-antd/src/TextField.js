@@ -20,6 +20,6 @@ const Text = props =>
       {...filterDOMProps(props)}
     />
   );
-Text.defaultProps = {type: 'text'};
+Text.defaultProps = { type: 'text' };
 
 export default connectField(Text);

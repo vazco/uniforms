@@ -1,5 +1,5 @@
 import React from 'react';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 import SubmitField from 'uniforms-bootstrap4/SubmitField';
 
@@ -14,7 +14,7 @@ test('<SubmitField> - renders', () => {
 
 test('<SubmitField> - renders disabled if error', () => {
   const element = <SubmitField />;
-  const wrapper = mount(element, createContext(undefined, {error: {}}));
+  const wrapper = mount(element, createContext(undefined, { error: {} }));
 
   expect(wrapper).toHaveLength(1);
   expect(wrapper.find('input').prop('disabled')).toBe(true);
@@ -22,7 +22,7 @@ test('<SubmitField> - renders disabled if error', () => {
 
 test('<SubmitField> - renders enabled if error and enabled', () => {
   const element = <SubmitField disabled={false} />;
-  const wrapper = mount(element, createContext(undefined, {error: {}}));
+  const wrapper = mount(element, createContext(undefined, { error: {} }));
 
   expect(wrapper).toHaveLength(1);
   expect(wrapper.find('input').prop('disabled')).toBe(false);

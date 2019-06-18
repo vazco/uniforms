@@ -7,7 +7,7 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 
 import wrapField from './wrapField';
 
-const Bool = ({checkbox, ...props}) =>
+const Bool = ({ checkbox, ...props }) =>
   wrapField(
     props,
     React.createElement(checkbox ? Checkbox : Switch, {
@@ -26,4 +26,4 @@ Bool.defaultProps = {
   unCheckedChildren: <Icon type="cross" />
 };
 
-export default connectField(Bool, {ensureValue: false});
+export default connectField(Bool, { ensureValue: false });

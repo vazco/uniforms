@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Component } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
 import isFunction from 'lodash/isFunction';
@@ -7,7 +7,6 @@ import isPlainObject from 'lodash/isPlainObject';
 import mapValues from 'lodash/mapValues';
 import omit from 'lodash/omit';
 import set from 'lodash/set';
-import {Component} from 'react';
 
 import changedKeys from './changedKeys';
 import createSchemaBridge from './createSchemaBridge';
@@ -48,7 +47,9 @@ export const __childContextTypes = {
 };
 
 export const __childContextTypesBuild = type =>
-  isPlainObject(type) ? PropTypes.shape(mapValues(type, __childContextTypesBuild)).isRequired : type;
+  isPlainObject(type)
+    ? PropTypes.shape(mapValues(type, __childContextTypesBuild)).isRequired
+    : type;
 
 export default class BaseForm extends Component {
   static displayName = 'Form';
@@ -110,7 +111,9 @@ export default class BaseForm extends Component {
     // TODO: It shouldn't be here
     const getModel = this.getModel.bind(this);
     this.getModel = (mode = null, model = getModel(mode)) =>
-      mode !== null && this.props.modelTransform ? this.props.modelTransform(mode, model) : model;
+      mode !== null && this.props.modelTransform
+        ? this.props.modelTransform(mode, model)
+        : model;
   }
 
   getChildContext() {
@@ -126,6 +129,24 @@ export default class BaseForm extends Component {
         randomId: this.randomId
       }
     };
+  }
+
+  componentWillMount() {
+    this.mounted = true;
+    this.setState(
+      () => ({}),
+      () => this.setState(() => ({ changed: false, changedMap: {} }))
+    );
+  }
+
+  componentWillReceiveProps({ schema }) {
+    if (this.props.schema !== schema) {
+      this.setState(() => ({ bridge: createSchemaBridge(schema) }));
+    }
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   getChildContextName() {
@@ -169,25 +190,6 @@ export default class BaseForm extends Component {
     return this.props.model;
   }
 
-  componentWillMount() {
-    this.mounted = true;
-    this.setState(() => ({}), () => this.setState(() => ({changed: false, changedMap: {}})));
-  }
-
-  componentWillUnmount() {
-    this.mounted = false;
-  }
-
-  componentWillReceiveProps({schema}) {
-    if (this.props.schema !== schema) {
-      this.setState(() => ({bridge: createSchemaBridge(schema)}));
-    }
-  }
-
-  render() {
-    return <form {...this.getNativeFormProps()} />;
-  }
-
   getChangedKeys(root, valueA, valueB) {
     return changedKeys(root, valueA, valueB);
   }
@@ -222,7 +224,9 @@ export default class BaseForm extends Component {
     if (this.state.changed !== null) {
       this.state.changed = true;
       this.getChangedKeys(key, value, get(this.getModel(), key)).forEach(key =>
-        this.setState(state => ({changedMap: set(cloneDeep(state.changedMap), key, {})}))
+        this.setState(state => ({
+          changedMap: set(cloneDeep(state.changedMap), key, {})
+        }))
       );
     }
 
@@ -245,7 +249,12 @@ export default class BaseForm extends Component {
   }
 
   __reset(state) {
-    return {changed: false, changedMap: {}, submitting: false, resetCount: state.resetCount + 1};
+    return {
+      changed: false,
+      changedMap: {},
+      submitting: false,
+      resetCount: state.resetCount + 1
+    };
   }
 
   onReset() {
@@ -258,17 +267,25 @@ export default class BaseForm extends Component {
       event.stopPropagation();
     }
 
-    const result = this.props.onSubmit && this.props.onSubmit(this.getModel('submit'));
+    const result =
+      this.props.onSubmit && this.props.onSubmit(this.getModel('submit'));
 
     // Set the `submitting` state only if onSubmit is async so we don't cause an unnecessary re-render
     let submitting;
     if (result && isFunction(result.then)) {
-      this.setState({submitting: true});
-      submitting = result.finally(() => this.setState({submitting: false}));
+      this.setState({ submitting: true });
+      submitting = result.finally(() => this.setState({ submitting: false }));
     } else {
       submitting = Promise.resolve(result);
     }
 
-    return submitting.then(this.props.onSubmitSuccess, this.props.onSubmitFailure);
+    return submitting.then(
+      this.props.onSubmitSuccess,
+      this.props.onSubmitFailure
+    );
+  }
+
+  render() {
+    return <form {...this.getNativeFormProps()} />;
   }
 }

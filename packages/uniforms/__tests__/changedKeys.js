@@ -22,8 +22,8 @@ describe('changedKeys', () => {
 
     it('works with objects', () => {
       expect(changedKeys('a', {}, {})).toEqual([]);
-      expect(changedKeys('a', {a: 1}, {a: 1})).toEqual([]);
-      expect(changedKeys('a', {a: 1, b: 2}, {a: 1, b: 2})).toEqual([]);
+      expect(changedKeys('a', { a: 1 }, { a: 1 })).toEqual([]);
+      expect(changedKeys('a', { a: 1, b: 2 }, { a: 1, b: 2 })).toEqual([]);
     });
 
     it('works with primitives', () => {
@@ -48,9 +48,12 @@ describe('changedKeys', () => {
     });
 
     it('works with objects', () => {
-      expect(changedKeys('a', {}, {a: 1})).toEqual(['a', 'a.a']);
-      expect(changedKeys('a', {a: 1}, {a: 1, b: 2})).toEqual(['a', 'a.b']);
-      expect(changedKeys('a', {a: 1, b: 2}, {a: 1, b: 2, c: 3})).toEqual(['a', 'a.c']);
+      expect(changedKeys('a', {}, { a: 1 })).toEqual(['a', 'a.a']);
+      expect(changedKeys('a', { a: 1 }, { a: 1, b: 2 })).toEqual(['a', 'a.b']);
+      expect(changedKeys('a', { a: 1, b: 2 }, { a: 1, b: 2, c: 3 })).toEqual([
+        'a',
+        'a.c'
+      ]);
     });
 
     it('works with primitives', () => {
@@ -77,10 +80,13 @@ describe('changedKeys', () => {
     });
 
     it('works with objects', () => {
-      expect(changedKeys('a', {a: 1})).toEqual(['a', 'a.a']);
-      expect(changedKeys('a', {a: 1}, {})).toEqual(['a', 'a.a']);
-      expect(changedKeys('a', {a: 1, b: 2}, {a: 1})).toEqual(['a', 'a.b']);
-      expect(changedKeys('a', {a: 1, b: 2, c: 3}, {a: 1, b: 2})).toEqual(['a', 'a.c']);
+      expect(changedKeys('a', { a: 1 })).toEqual(['a', 'a.a']);
+      expect(changedKeys('a', { a: 1 }, {})).toEqual(['a', 'a.a']);
+      expect(changedKeys('a', { a: 1, b: 2 }, { a: 1 })).toEqual(['a', 'a.b']);
+      expect(changedKeys('a', { a: 1, b: 2, c: 3 }, { a: 1, b: 2 })).toEqual([
+        'a',
+        'a.c'
+      ]);
     });
 
     it('works with primitives', () => {

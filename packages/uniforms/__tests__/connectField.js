@@ -1,10 +1,10 @@
 import React from 'react';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 import connectField from 'uniforms/connectField';
 import nothing from 'uniforms/nothing';
 import randomIds from 'uniforms/randomIds';
-import {SimpleSchemaBridge} from 'uniforms-bridge-simple-schema';
+import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
 
 jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
@@ -26,9 +26,9 @@ describe('connectField', () => {
   const schema = new SimpleSchemaBridge({
     getDefinition(name) {
       return {
-        field: {type: Object, label: 'Field'},
-        'field.subfield': {type: Number, label: 'Subfield'},
-        another: {type: String, optional: true}
+        field: { type: Object, label: 'Field' },
+        'field.subfield': { type: Number, label: 'Subfield' },
+        another: { type: String, optional: true }
       }[name];
     },
 
@@ -45,7 +45,18 @@ describe('connectField', () => {
   });
 
   const reactContext = {
-    context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange, onSubmit() {}}}
+    context: {
+      uniforms: {
+        error,
+        model: {},
+        name: [],
+        randomId,
+        schema,
+        state,
+        onChange,
+        onSubmit() {}
+      }
+    }
   };
 
   const Test = jest.fn(() => nothing);
@@ -71,7 +82,7 @@ describe('connectField', () => {
       Class.property1 = 1;
       Class.property2 = 2;
 
-      const Field = connectField(Test, {baseField: Class});
+      const Field = connectField(Test, { baseField: Class });
 
       expect(Field.property1).toBe(1);
       expect(Field.property2).toBe(2);
@@ -80,21 +91,24 @@ describe('connectField', () => {
 
   describe('when called with `includeParent`', () => {
     it('provides parent field (true)', () => {
-      const Field = connectField(Test, {includeParent: true});
+      const Field = connectField(Test, { includeParent: true });
 
       mount(<Field name="field.subfield" />, reactContext);
 
       expect(Test.mock.calls[0]).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
-            parent: expect.objectContaining({label: 'Field', field: expect.objectContaining({type: Object})})
+            parent: expect.objectContaining({
+              label: 'Field',
+              field: expect.objectContaining({ type: Object })
+            })
           })
         ])
       );
     });
 
     it('rerenders on parent change (true)', () => {
-      const Field = connectField(Test, {includeParent: true});
+      const Field = connectField(Test, { includeParent: true });
 
       const wrapper = mount(<Field name="field.subfield" />, reactContext);
 
@@ -104,29 +118,40 @@ describe('connectField', () => {
     });
 
     it('rerenders on parent change (if any) (true)', () => {
-      const Field = connectField(Test, {includeParent: true});
+      const Field = connectField(Test, { includeParent: true });
 
       const wrapper = mount(<Field name="field.subfield" />, reactContext);
 
-      wrapper.setContext({uniforms: {...reactContext.context.uniforms, model: {field: {field: 1}}}});
+      wrapper.setContext({
+        uniforms: {
+          ...reactContext.context.uniforms,
+          model: { field: { field: 1 } }
+        }
+      });
 
       expect(Test).toHaveBeenCalledTimes(2);
     });
 
     it('hides parent field (false)', () => {
-      const Field = connectField(Test, {includeParent: false});
+      const Field = connectField(Test, { includeParent: false });
 
       mount(<Field name="field.subfield" />, reactContext);
 
       expect(Test.mock.calls[0]).not.toEqual(
-        expect.arrayContaining([expect.objectContaining({parent: {label: 'Field', field: {type: Object}}})])
+        expect.arrayContaining([
+          expect.objectContaining({
+            parent: { label: 'Field', field: { type: Object } }
+          })
+        ])
       );
     });
   });
 
   describe('when called with `includeInChain`', () => {
     it('is in chain (true)', () => {
-      const Field1 = connectField(props => props.children, {includeInChain: true});
+      const Field1 = connectField(props => props.children, {
+        includeInChain: true
+      });
       const Field2 = connectField(Test);
 
       mount(
@@ -136,11 +161,17 @@ describe('connectField', () => {
         reactContext
       );
 
-      expect(Test.mock.calls[0]).toEqual(expect.arrayContaining([expect.objectContaining({name: 'field.subfield'})]));
+      expect(Test.mock.calls[0]).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ name: 'field.subfield' })
+        ])
+      );
     });
 
     it('is not in chain (false)', () => {
-      const Field1 = connectField(props => props.children, {includeInChain: false});
+      const Field1 = connectField(props => props.children, {
+        includeInChain: false
+      });
       const Field2 = connectField(Test);
 
       mount(
@@ -150,13 +181,20 @@ describe('connectField', () => {
         reactContext
       );
 
-      expect(Test.mock.calls[0]).toEqual(expect.arrayContaining([expect.objectContaining({name: 'field.subfield'})]));
+      expect(Test.mock.calls[0]).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ name: 'field.subfield' })
+        ])
+      );
     });
   });
 
   describe('when called with `initialValue`', () => {
     it('includes default value (true)', () => {
-      const Field = connectField(Test, {initialValue: true, ensureValue: false});
+      const Field = connectField(Test, {
+        initialValue: true,
+        ensureValue: false
+      });
 
       mount(<Field name="field" />, reactContext);
 
@@ -164,7 +202,7 @@ describe('connectField', () => {
     });
 
     it('does nothing (false)', () => {
-      const Field = connectField(Test, {initialValue: false});
+      const Field = connectField(Test, { initialValue: false });
 
       mount(<Field name="field" />, reactContext);
 
@@ -172,7 +210,7 @@ describe('connectField', () => {
     });
 
     it('respects `required`', () => {
-      const Field = connectField(Test, {initialValue: true});
+      const Field = connectField(Test, { initialValue: true });
 
       mount(<Field name="another" />, reactContext);
 
@@ -182,7 +220,7 @@ describe('connectField', () => {
 
   describe('when called with `mapProps`', () => {
     it('provides mapped props', () => {
-      const Field = connectField(Test, {mapProps: () => ({a: 1})});
+      const Field = connectField(Test, { mapProps: () => ({ a: 1 }) });
 
       mount(<Field name="field" />, reactContext);
 

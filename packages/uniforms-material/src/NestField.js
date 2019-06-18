@@ -7,13 +7,15 @@ import joinName from 'uniforms/joinName';
 import AutoField from './AutoField';
 import wrapField from './wrapField';
 
-const Nest = ({children, fields, itemProps, label, name, ...props}) =>
+const Nest = ({ children, fields, itemProps, label, name, ...props }) =>
   wrapField(
-    {...props, component: undefined},
+    { ...props, component: undefined },
     label && <FormLabel component="legend">{label}</FormLabel>,
     children
       ? injectName(name, children)
-      : fields.map(key => <AutoField key={key} name={joinName(name, key)} {...itemProps} />)
+      : fields.map(key => (
+          <AutoField key={key} name={joinName(name, key)} {...itemProps} />
+        ))
   );
 
 Nest.defaultProps = {
@@ -21,4 +23,7 @@ Nest.defaultProps = {
   margin: 'dense'
 };
 
-export default connectField(Nest, {ensureValue: false, includeInChain: false});
+export default connectField(Nest, {
+  ensureValue: false,
+  includeInChain: false
+});

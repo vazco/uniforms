@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { Children } from 'react';
 import connectField from 'uniforms/connectField';
 import joinName from 'uniforms/joinName';
-import {Children} from 'react';
 
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
@@ -22,4 +21,7 @@ const ListItem = props => (
     )}
   </div>
 );
-export default connectField(ListItem, {includeInChain: false, includeParent: true});
+export default connectField(ListItem, {
+  includeInChain: false,
+  includeParent: true
+});

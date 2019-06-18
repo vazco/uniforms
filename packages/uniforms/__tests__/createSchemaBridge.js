@@ -32,7 +32,9 @@ describe('createSchemaBridge', () => {
 
     createSchemaBridge.register(TestSchemaBridge);
 
-    expect(createSchemaBridge(new TestSchema())).toBeInstanceOf(TestSchemaBridge);
+    expect(createSchemaBridge(new TestSchema())).toBeInstanceOf(
+      TestSchemaBridge
+    );
   });
 
   it('throws on unrecognised schema', () => {

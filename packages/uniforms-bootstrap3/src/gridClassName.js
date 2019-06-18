@@ -3,7 +3,9 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 filterDOMProps.register('grid');
 
 function gridClassNamePart(size, value, side) {
-  return side === 'label' ? `col-${size}-${value}` : `col-${size}-${12 - value}`;
+  return side === 'label'
+    ? `col-${size}-${value}`
+    : `col-${size}-${12 - value}`;
 }
 
 export default function gridClassName(grid, side) {

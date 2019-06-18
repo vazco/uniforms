@@ -2,7 +2,16 @@ import React from 'react';
 import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
-const Bool = ({disabled, id, inputRef, label, name, onChange, value, ...props}) => (
+const Bool = ({
+  disabled,
+  id,
+  inputRef,
+  label,
+  name,
+  onChange,
+  value,
+  ...props
+}) => (
   <div {...filterDOMProps(props)}>
     <input
       checked={value}

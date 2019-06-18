@@ -5,7 +5,19 @@ import Tooltip from 'antd/lib/tooltip';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
 export default function wrapField(
-  {colon, error, errorMessage, id, info, label, labelCol, required, showInlineError, wrapperCol, wrapperStyle},
+  {
+    colon,
+    error,
+    errorMessage,
+    id,
+    info,
+    label,
+    labelCol,
+    required,
+    showInlineError,
+    wrapperCol,
+    wrapperStyle
+  },
   children
 ) {
   const labelNode = !!label && (
@@ -31,7 +43,7 @@ export default function wrapField(
       label={labelNode}
       labelCol={labelCol}
       required={required}
-      style={wrapperStyle || {marginBottom: '12px'}}
+      style={wrapperStyle || { marginBottom: '12px' }}
       validateStatus={error ? 'error' : undefined}
       wrapperCol={wrapperCol}
     >

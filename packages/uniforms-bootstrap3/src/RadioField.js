@@ -8,7 +8,13 @@ const Radio = props =>
   wrapField(
     props,
     props.allowedValues.map(item => (
-      <div key={item} className={classnames(props.inputClassName, `radio${props.inline ? '-inline' : ''}`)}>
+      <div
+        key={item}
+        className={classnames(
+          props.inputClassName,
+          `radio${props.inline ? '-inline' : ''}`
+        )}
+      >
         <label htmlFor={`${props.id}-${item}`}>
           <input
             checked={item === props.value}

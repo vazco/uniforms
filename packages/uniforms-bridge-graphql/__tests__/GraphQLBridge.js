@@ -1,6 +1,4 @@
-import {GraphQLString} from 'graphql';
-import {buildASTSchema} from 'graphql';
-import {parse} from 'graphql';
+import { GraphQLString, buildASTSchema, parse } from 'graphql';
 
 import GraphQLBridge from 'uniforms-bridge-graphql/GraphQLBridge';
 
@@ -44,7 +42,7 @@ describe('GraphQLBridge', () => {
   const schemaT = schemaI.replace(/input/g, 'type').replace(/\s*=.+/g, '');
 
   const schemaData = {
-    author: {component: 'div'},
+    author: { component: 'div' },
     id: {
       allowedValues: [1, 2, 3],
       label: 'Post ID',
@@ -52,7 +50,11 @@ describe('GraphQLBridge', () => {
     },
     title: {
       initialValue: 'Some Title',
-      options: [{label: 1, value: 'a'}, {label: 2, value: 'b'}, {label: 3, value: 'Some Title'}]
+      options: [
+        { label: 1, value: 'a' },
+        { label: 2, value: 'b' },
+        { label: 3, value: 'Some Title' }
+      ]
     },
     votes: {
       initialValue: 44,
@@ -69,8 +71,16 @@ describe('GraphQLBridge', () => {
   const astI = buildASTSchema(parse(schemaI));
   const astT = buildASTSchema(parse(schemaT));
 
-  const bridgeI = new GraphQLBridge(astI.getType('Post'), schemaValidator, schemaData);
-  const bridgeT = new GraphQLBridge(astT.getType('Post'), schemaValidator, schemaData);
+  const bridgeI = new GraphQLBridge(
+    astI.getType('Post'),
+    schemaValidator,
+    schemaData
+  );
+  const bridgeT = new GraphQLBridge(
+    astT.getType('Post'),
+    schemaValidator,
+    schemaData
+  );
 
   describe('#constructor()', () => {
     it('always ensures `extras`', () => {
@@ -96,12 +106,16 @@ describe('GraphQLBridge', () => {
 
     it('works with invalid error', () => {
       expect(bridgeI.getError('title', {})).toBe(null);
-      expect(bridgeI.getError('title', {invalid: true})).toBe(null);
+      expect(bridgeI.getError('title', { invalid: true })).toBe(null);
     });
 
     it('works with correct error', () => {
-      expect(bridgeI.getError('title', {details: [{name: 'title'}]})).toEqual({name: 'title'});
-      expect(bridgeI.getError('title', {details: [{name: 'field'}]})).toBe(null);
+      expect(
+        bridgeI.getError('title', { details: [{ name: 'title' }] })
+      ).toEqual({ name: 'title' });
+      expect(bridgeI.getError('title', { details: [{ name: 'field' }] })).toBe(
+        null
+      );
     });
   });
 
@@ -112,12 +126,20 @@ describe('GraphQLBridge', () => {
 
     it('works with invalid error', () => {
       expect(bridgeI.getErrorMessage('title', {})).toBe('');
-      expect(bridgeI.getErrorMessage('title', {invalid: true})).toBe('');
+      expect(bridgeI.getErrorMessage('title', { invalid: true })).toBe('');
     });
 
     it('works with correct error', () => {
-      expect(bridgeI.getErrorMessage('title', {details: [{name: 'title', message: '!'}]})).toBe('!');
-      expect(bridgeI.getErrorMessage('title', {details: [{name: 'field', message: '$'}]})).toBe('');
+      expect(
+        bridgeI.getErrorMessage('title', {
+          details: [{ name: 'title', message: '!' }]
+        })
+      ).toBe('!');
+      expect(
+        bridgeI.getErrorMessage('title', {
+          details: [{ name: 'field', message: '$' }]
+        })
+      ).toBe('');
     });
   });
 
@@ -132,12 +154,18 @@ describe('GraphQLBridge', () => {
     });
 
     it('works with Error', () => {
-      expect(bridgeI.getErrorMessages(new Error('correct'))).toEqual(['correct']);
+      expect(bridgeI.getErrorMessages(new Error('correct'))).toEqual([
+        'correct'
+      ]);
     });
 
     it('works with ValidationError', () => {
-      expect(bridgeI.getErrorMessages({details: [{name: 'title', message: '!'}]})).toEqual(['!']);
-      expect(bridgeI.getErrorMessages({details: [{name: 'field', message: '$'}]})).toEqual(['$']);
+      expect(
+        bridgeI.getErrorMessages({ details: [{ name: 'title', message: '!' }] })
+      ).toEqual(['!']);
+      expect(
+        bridgeI.getErrorMessages({ details: [{ name: 'field', message: '$' }] })
+      ).toEqual(['$']);
     });
   });
 
@@ -166,14 +194,18 @@ describe('GraphQLBridge', () => {
 
     it('throws on not found field', () => {
       expect(() => bridgeI.getField('x')).toThrow(/Field not found in schema/);
-      expect(() => bridgeI.getField('author.x')).toThrow(/Field not found in schema/);
+      expect(() => bridgeI.getField('author.x')).toThrow(
+        /Field not found in schema/
+      );
     });
   });
 
   describe('#getInitialValue', () => {
     it('works with arrays', () => {
       expect(bridgeI.getInitialValue('author.tags')).toEqual([]);
-      expect(bridgeI.getInitialValue('author.tags', {initialCount: 1})).toEqual([undefined]);
+      expect(
+        bridgeI.getInitialValue('author.tags', { initialCount: 1 })
+      ).toEqual([undefined]);
     });
 
     it('works with objects', () => {
@@ -204,7 +236,7 @@ describe('GraphQLBridge', () => {
     });
 
     it('works with allowedValues from props', () => {
-      expect(bridgeI.getProps('id', {allowedValues: [1]})).toEqual({
+      expect(bridgeI.getProps('id', { allowedValues: [1] })).toEqual({
         label: 'Post ID',
         placeholder: 'Post ID',
         required: true,
@@ -221,7 +253,7 @@ describe('GraphQLBridge', () => {
     });
 
     it('works with label (custom)', () => {
-      expect(bridgeI.getProps('id', {label: 'ID'})).toEqual({
+      expect(bridgeI.getProps('id', { label: 'ID' })).toEqual({
         label: 'ID',
         placeholder: 'Post ID',
         required: true,
@@ -230,7 +262,7 @@ describe('GraphQLBridge', () => {
     });
 
     it('works with label (true)', () => {
-      expect(bridgeI.getProps('id', {label: true})).toEqual({
+      expect(bridgeI.getProps('id', { label: true })).toEqual({
         label: 'Post ID',
         placeholder: 'Post ID',
         required: true,
@@ -239,7 +271,7 @@ describe('GraphQLBridge', () => {
     });
 
     it('works with label (falsy)', () => {
-      expect(bridgeI.getProps('id', {label: null})).toEqual({
+      expect(bridgeI.getProps('id', { label: null })).toEqual({
         label: '',
         placeholder: 'Post ID',
         required: true,
@@ -248,7 +280,7 @@ describe('GraphQLBridge', () => {
     });
 
     it('works with placeholder (custom)', () => {
-      expect(bridgeI.getProps('id', {placeholder: 'Post ID'})).toEqual({
+      expect(bridgeI.getProps('id', { placeholder: 'Post ID' })).toEqual({
         label: 'Post ID',
         placeholder: 'Post ID',
         required: true,
@@ -257,7 +289,7 @@ describe('GraphQLBridge', () => {
     });
 
     it('works with placeholder (true)', () => {
-      expect(bridgeI.getProps('id', {placeholder: true})).toEqual({
+      expect(bridgeI.getProps('id', { placeholder: true })).toEqual({
         label: 'Post ID',
         placeholder: 'Post ID',
         required: true,
@@ -266,7 +298,7 @@ describe('GraphQLBridge', () => {
     });
 
     it('works with placeholder (falsy)', () => {
-      expect(bridgeI.getProps('id', {placeholder: null})).toEqual({
+      expect(bridgeI.getProps('id', { placeholder: null })).toEqual({
         label: 'Post ID',
         placeholder: '',
         required: true,
@@ -275,13 +307,17 @@ describe('GraphQLBridge', () => {
     });
 
     it('works with placeholder (extra.placeholedr === undefined)', () => {
-      expect(bridgeI.getProps('title', {placeholder: true})).toEqual({
+      expect(bridgeI.getProps('title', { placeholder: true })).toEqual({
         allowedValues: ['a', 'b', 'Some Title'],
         label: '',
         placeholder: true,
         required: false,
         transform: expect.any(Function),
-        options: [{label: 1, value: 'a'}, {label: 2, value: 'b'}, {label: 3, value: 'Some Title'}],
+        options: [
+          { label: 1, value: 'a' },
+          { label: 2, value: 'b' },
+          { label: 3, value: 'Some Title' }
+        ],
         initialValue: 'Some Title'
       });
     });
@@ -315,14 +351,22 @@ describe('GraphQLBridge', () => {
     });
 
     it('works with options from props', () => {
-      expect(bridgeI.getProps('votes', {options: {c: 1, d: 2}}).transform('c')).toBe(1);
-      expect(bridgeI.getProps('votes', {options: {c: 1, d: 2}}).transform('d')).toBe(2);
-      expect(bridgeI.getProps('votes', {options: {c: 1, d: 2}}).allowedValues[0]).toBe('c');
-      expect(bridgeI.getProps('votes', {options: {c: 1, d: 2}}).allowedValues[1]).toBe('d');
+      expect(
+        bridgeI.getProps('votes', { options: { c: 1, d: 2 } }).transform('c')
+      ).toBe(1);
+      expect(
+        bridgeI.getProps('votes', { options: { c: 1, d: 2 } }).transform('d')
+      ).toBe(2);
+      expect(
+        bridgeI.getProps('votes', { options: { c: 1, d: 2 } }).allowedValues[0]
+      ).toBe('c');
+      expect(
+        bridgeI.getProps('votes', { options: { c: 1, d: 2 } }).allowedValues[1]
+      ).toBe('d');
     });
 
     it('works with other props', () => {
-      expect(bridgeI.getProps('category', {x: 1, y: 1})).toEqual({
+      expect(bridgeI.getProps('category', { x: 1, y: 1 })).toEqual({
         label: '',
         required: true,
         x: 1,
@@ -333,7 +377,15 @@ describe('GraphQLBridge', () => {
 
   describe('#getSubfields', () => {
     it('works on top level', () => {
-      expect(bridgeI.getSubfields()).toEqual(['id', 'author', 'custom', 'title', 'votes', 'example', 'category']);
+      expect(bridgeI.getSubfields()).toEqual([
+        'id',
+        'author',
+        'custom',
+        'title',
+        'votes',
+        'example',
+        'category'
+      ]);
     });
 
     it('works with nested types', () => {
@@ -356,43 +408,47 @@ describe('GraphQLBridge', () => {
   });
 
   describe('#getType', () => {
-    [[astI, bridgeI, 'input'], [astT, bridgeT, 'type']].forEach(([ast, bridge, mode]) => {
-      it(`works with any type (${mode})`, () => {
-        expect(bridge.getType('author')).toBe(Object);
-        expect(bridge.getType('author.confirmed')).toBe(Boolean);
-        expect(bridge.getType('author.decimal1')).toBe(Number);
-        expect(bridge.getType('author.decimal2')).toBe(Number);
-        expect(bridge.getType('author.firstName')).toBe(String);
-        expect(bridge.getType('author.id')).toBe(String);
-        expect(bridge.getType('author.lastName')).toBe(String);
-        expect(bridge.getType('author.level')).toBe(ast.getType('AccessLevel'));
-        expect(bridge.getType('author.tags')).toBe(Array);
-        expect(bridge.getType('author.tags.$')).toBe(String);
-        expect(bridge.getType('category')).toBe(Array);
-        expect(bridge.getType('category.$')).toBe(Object);
-        expect(bridge.getType('category.$.owners')).toBe(Array);
-        expect(bridge.getType('category.$.owners.$')).toBe(Object);
-        expect(bridge.getType('category.$.owners.$.decimal1')).toBe(Number);
-        expect(bridge.getType('category.$.owners.$.decimal2')).toBe(Number);
-        expect(bridge.getType('category.$.owners.$.firstName')).toBe(String);
-        expect(bridge.getType('category.$.owners.$.id')).toBe(String);
-        expect(bridge.getType('category.$.owners.$.lastName')).toBe(String);
-        expect(bridge.getType('category.$.owners.$.tags')).toBe(Array);
-        expect(bridge.getType('category.$.owners.$.tags.$')).toBe(String);
-        expect(bridge.getType('category.1.owners.$.tags.$')).toBe(String);
-        expect(bridge.getType('category.$.owners.2.tags.$')).toBe(String);
-        expect(bridge.getType('category.$.owners.$.tags.3')).toBe(String);
-        expect(bridge.getType('category.4.owners.5.tags.$')).toBe(String);
-        expect(bridge.getType('category.6.owners.$.tags.7')).toBe(String);
-        expect(bridge.getType('category.$.owners.8.tags.9')).toBe(String);
-        expect(bridge.getType('category.0.owners.0.tags.0')).toBe(String);
-        expect(bridge.getType('custom')).toBe(ast.getType('Scalar'));
-        expect(bridge.getType('example')).toBe(String);
-        expect(bridge.getType('id')).toBe(Number);
-        expect(bridge.getType('title')).toBe(String);
-        expect(bridge.getType('votes')).toBe(Number);
-      });
-    });
+    [[astI, bridgeI, 'input'], [astT, bridgeT, 'type']].forEach(
+      ([ast, bridge, mode]) => {
+        it(`works with any type (${mode})`, () => {
+          expect(bridge.getType('author')).toBe(Object);
+          expect(bridge.getType('author.confirmed')).toBe(Boolean);
+          expect(bridge.getType('author.decimal1')).toBe(Number);
+          expect(bridge.getType('author.decimal2')).toBe(Number);
+          expect(bridge.getType('author.firstName')).toBe(String);
+          expect(bridge.getType('author.id')).toBe(String);
+          expect(bridge.getType('author.lastName')).toBe(String);
+          expect(bridge.getType('author.level')).toBe(
+            ast.getType('AccessLevel')
+          );
+          expect(bridge.getType('author.tags')).toBe(Array);
+          expect(bridge.getType('author.tags.$')).toBe(String);
+          expect(bridge.getType('category')).toBe(Array);
+          expect(bridge.getType('category.$')).toBe(Object);
+          expect(bridge.getType('category.$.owners')).toBe(Array);
+          expect(bridge.getType('category.$.owners.$')).toBe(Object);
+          expect(bridge.getType('category.$.owners.$.decimal1')).toBe(Number);
+          expect(bridge.getType('category.$.owners.$.decimal2')).toBe(Number);
+          expect(bridge.getType('category.$.owners.$.firstName')).toBe(String);
+          expect(bridge.getType('category.$.owners.$.id')).toBe(String);
+          expect(bridge.getType('category.$.owners.$.lastName')).toBe(String);
+          expect(bridge.getType('category.$.owners.$.tags')).toBe(Array);
+          expect(bridge.getType('category.$.owners.$.tags.$')).toBe(String);
+          expect(bridge.getType('category.1.owners.$.tags.$')).toBe(String);
+          expect(bridge.getType('category.$.owners.2.tags.$')).toBe(String);
+          expect(bridge.getType('category.$.owners.$.tags.3')).toBe(String);
+          expect(bridge.getType('category.4.owners.5.tags.$')).toBe(String);
+          expect(bridge.getType('category.6.owners.$.tags.7')).toBe(String);
+          expect(bridge.getType('category.$.owners.8.tags.9')).toBe(String);
+          expect(bridge.getType('category.0.owners.0.tags.0')).toBe(String);
+          expect(bridge.getType('custom')).toBe(ast.getType('Scalar'));
+          expect(bridge.getType('example')).toBe(String);
+          expect(bridge.getType('id')).toBe(Number);
+          expect(bridge.getType('title')).toBe(String);
+          expect(bridge.getType('votes')).toBe(Number);
+        });
+      }
+    );
   });
 
   describe('#getValidator', () => {

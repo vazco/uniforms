@@ -4,9 +4,9 @@ import connectField from 'uniforms/connectField';
 
 import wrapField from './wrapField';
 
-const Bool = ({label, labelBefore, ...props}) =>
+const Bool = ({ label, labelBefore, ...props }) =>
   wrapField(
-    {label: labelBefore, ...props},
+    { label: labelBefore, ...props },
     <div
       className={classnames(props.inputClassName, 'form-check', 'checkbox', {
         'text-danger': props.error,

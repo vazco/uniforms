@@ -18,7 +18,10 @@ const Bool = ({
   value,
   ...props
 }) => (
-  <div className={classnames(className, {disabled, error, required}, 'field')} {...filterDOMProps(props)}>
+  <div
+    className={classnames(className, { disabled, error, required }, 'field')}
+    {...filterDOMProps(props)}
+  >
     <div className="ui checkbox">
       <input
         checked={value}

@@ -24,10 +24,20 @@ const Text = ({
   wrapClassName,
   ...props
 }) => (
-  <div className={classnames(className, {disabled, error, required}, 'field')} {...filterDOMProps(props)}>
+  <div
+    className={classnames(className, { disabled, error, required }, 'field')}
+    {...filterDOMProps(props)}
+  >
     {label && <label htmlFor={id}>{label}</label>}
 
-    <div className={classnames('ui', wrapClassName, {left: iconLeft, icon: icon || iconLeft}, 'input')}>
+    <div
+      className={classnames(
+        'ui',
+        wrapClassName,
+        { left: iconLeft, icon: icon || iconLeft },
+        'input'
+      )}
+    >
       <input
         disabled={disabled}
         id={id}
@@ -39,12 +49,16 @@ const Text = ({
         value={value}
       />
 
-      {(icon || iconLeft) && <i className={`${icon || iconLeft} icon`} {...iconProps} />}
+      {(icon || iconLeft) && (
+        <i className={`${icon || iconLeft} icon`} {...iconProps} />
+      )}
     </div>
 
-    {!!(error && showInlineError) && <div className="ui red basic pointing label">{errorMessage}</div>}
+    {!!(error && showInlineError) && (
+      <div className="ui red basic pointing label">{errorMessage}</div>
+    )}
   </div>
 );
-Text.defaultProps = {type: 'text'};
+Text.defaultProps = { type: 'text' };
 
 export default connectField(Text);

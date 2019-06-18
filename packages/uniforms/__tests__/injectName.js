@@ -1,11 +1,11 @@
 import React from 'react';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 import connectField from 'uniforms/connectField';
 import injectName from 'uniforms/injectName';
 import nothing from 'uniforms/nothing';
 import randomIds from 'uniforms/randomIds';
-import {SimpleSchemaBridge} from 'uniforms-bridge-simple-schema';
+import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
 
 jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
@@ -27,9 +27,9 @@ describe('injectName', () => {
   const schema = new SimpleSchemaBridge({
     getDefinition(name) {
       return {
-        fieldA: {type: Object, label: 'FieldA'},
-        'fieldA.fieldB': {type: Object, label: 'FieldB'},
-        'fieldA.fieldB.fieldC': {type: String, label: 'FieldC'}
+        fieldA: { type: Object, label: 'FieldA' },
+        'fieldA.fieldB': { type: Object, label: 'FieldB' },
+        'fieldA.fieldB.fieldC': { type: String, label: 'FieldC' }
       }[name];
     },
 
@@ -47,10 +47,23 @@ describe('injectName', () => {
   });
 
   const reactContext = {
-    context: {uniforms: {error, model: {}, name: [], randomId, schema, state, onChange, onSubmit() {}}}
+    context: {
+      uniforms: {
+        error,
+        model: {},
+        name: [],
+        randomId,
+        schema,
+        state,
+        onChange,
+        onSubmit() {}
+      }
+    }
   };
 
-  const Test = jest.fn(({children}) => (children ? <span>{children}</span> : nothing));
+  const Test = jest.fn(({ children }) =>
+    children ? <span>{children}</span> : nothing
+  );
   const Field = connectField(Test);
 
   beforeEach(() => {
@@ -59,43 +72,85 @@ describe('injectName', () => {
 
   describe('when called', () => {
     it('does nothing on normal elements', () => {
-      mount(<Field name="fieldA">{injectName('fieldB', <Test />)}</Field>, reactContext);
+      mount(
+        <Field name="fieldA">{injectName('fieldB', <Test />)}</Field>,
+        reactContext
+      );
 
-      expect(Test.mock.calls[0]).toEqual(expect.arrayContaining([expect.objectContaining({name: 'fieldA'})]));
+      expect(Test.mock.calls[0]).toEqual(
+        expect.arrayContaining([expect.objectContaining({ name: 'fieldA' })])
+      );
       expect(Test.mock.calls[1]).not.toEqual(
-        expect.arrayContaining([expect.objectContaining({name: 'fieldA.fieldB'})])
+        expect.arrayContaining([
+          expect.objectContaining({ name: 'fieldA.fieldB' })
+        ])
       );
     });
 
     it('injects name into field', () => {
-      const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+      const spy = jest
+        .spyOn(global.console, 'error')
+        .mockImplementation(() => {});
 
-      mount(<Field name="fieldA">{injectName('fieldB', <Field />)}</Field>, reactContext);
+      mount(
+        <Field name="fieldA">{injectName('fieldB', <Field />)}</Field>,
+        reactContext
+      );
 
       spy.mockRestore();
 
-      expect(Test.mock.calls[0]).toEqual(expect.arrayContaining([expect.objectContaining({name: 'fieldA'})]));
-      expect(Test.mock.calls[1]).toEqual(expect.arrayContaining([expect.objectContaining({name: 'fieldA.fieldB'})]));
+      expect(Test.mock.calls[0]).toEqual(
+        expect.arrayContaining([expect.objectContaining({ name: 'fieldA' })])
+      );
+      expect(Test.mock.calls[1]).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ name: 'fieldA.fieldB' })
+        ])
+      );
     });
 
     it('injects name into fields', () => {
-      const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+      const spy = jest
+        .spyOn(global.console, 'error')
+        .mockImplementation(() => {});
 
       mount(
-        <Field name="fieldA">{injectName('fieldB', [<Field key={1} />, <Field key={2} />, <Field key={3} />])}</Field>,
+        <Field name="fieldA">
+          {injectName('fieldB', [
+            <Field key={1} />,
+            <Field key={2} />,
+            <Field key={3} />
+          ])}
+        </Field>,
         reactContext
       );
 
       spy.mockRestore();
 
-      expect(Test.mock.calls[0]).toEqual(expect.arrayContaining([expect.objectContaining({name: 'fieldA'})]));
-      expect(Test.mock.calls[1]).toEqual(expect.arrayContaining([expect.objectContaining({name: 'fieldA.fieldB'})]));
-      expect(Test.mock.calls[2]).toEqual(expect.arrayContaining([expect.objectContaining({name: 'fieldA.fieldB'})]));
-      expect(Test.mock.calls[3]).toEqual(expect.arrayContaining([expect.objectContaining({name: 'fieldA.fieldB'})]));
+      expect(Test.mock.calls[0]).toEqual(
+        expect.arrayContaining([expect.objectContaining({ name: 'fieldA' })])
+      );
+      expect(Test.mock.calls[1]).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ name: 'fieldA.fieldB' })
+        ])
+      );
+      expect(Test.mock.calls[2]).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ name: 'fieldA.fieldB' })
+        ])
+      );
+      expect(Test.mock.calls[3]).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ name: 'fieldA.fieldB' })
+        ])
+      );
     });
 
     it('injects name into nested field', () => {
-      const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+      const spy = jest
+        .spyOn(global.console, 'error')
+        .mockImplementation(() => {});
 
       mount(
         <Field name="fieldA">
@@ -111,12 +166,20 @@ describe('injectName', () => {
 
       spy.mockRestore();
 
-      expect(Test.mock.calls[0]).toEqual(expect.arrayContaining([expect.objectContaining({name: 'fieldA'})]));
-      expect(Test.mock.calls[1]).toEqual(expect.arrayContaining([expect.objectContaining({name: 'fieldA.fieldB'})]));
+      expect(Test.mock.calls[0]).toEqual(
+        expect.arrayContaining([expect.objectContaining({ name: 'fieldA' })])
+      );
+      expect(Test.mock.calls[1]).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ name: 'fieldA.fieldB' })
+        ])
+      );
     });
 
     it('injects name into nested fields', () => {
-      const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+      const spy = jest
+        .spyOn(global.console, 'error')
+        .mockImplementation(() => {});
 
       mount(
         <Field name="fieldA">
@@ -134,14 +197,30 @@ describe('injectName', () => {
 
       spy.mockRestore();
 
-      expect(Test.mock.calls[0]).toEqual(expect.arrayContaining([expect.objectContaining({name: 'fieldA'})]));
-      expect(Test.mock.calls[1]).toEqual(expect.arrayContaining([expect.objectContaining({name: 'fieldA.fieldB'})]));
-      expect(Test.mock.calls[2]).toEqual(expect.arrayContaining([expect.objectContaining({name: 'fieldA.fieldB'})]));
-      expect(Test.mock.calls[3]).toEqual(expect.arrayContaining([expect.objectContaining({name: 'fieldA.fieldB'})]));
+      expect(Test.mock.calls[0]).toEqual(
+        expect.arrayContaining([expect.objectContaining({ name: 'fieldA' })])
+      );
+      expect(Test.mock.calls[1]).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ name: 'fieldA.fieldB' })
+        ])
+      );
+      expect(Test.mock.calls[2]).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ name: 'fieldA.fieldB' })
+        ])
+      );
+      expect(Test.mock.calls[3]).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ name: 'fieldA.fieldB' })
+        ])
+      );
     });
 
     it('injects joined name', () => {
-      const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+      const spy = jest
+        .spyOn(global.console, 'error')
+        .mockImplementation(() => {});
 
       mount(
         <Field name="fieldA">
@@ -159,12 +238,18 @@ describe('injectName', () => {
 
       spy.mockRestore();
 
-      expect(Test.mock.calls[0]).toEqual(expect.arrayContaining([expect.objectContaining({name: 'fieldA'})]));
+      expect(Test.mock.calls[0]).toEqual(
+        expect.arrayContaining([expect.objectContaining({ name: 'fieldA' })])
+      );
       expect(Test.mock.calls[1]).toEqual(
-        expect.arrayContaining([expect.objectContaining({name: 'fieldA.fieldB.fieldC'})])
+        expect.arrayContaining([
+          expect.objectContaining({ name: 'fieldA.fieldB.fieldC' })
+        ])
       );
       expect(Test.mock.calls[2]).toEqual(
-        expect.arrayContaining([expect.objectContaining({name: 'fieldA.fieldB.fieldC'})])
+        expect.arrayContaining([
+          expect.objectContaining({ name: 'fieldA.fieldB.fieldC' })
+        ])
       );
     });
 
@@ -190,8 +275,12 @@ describe('injectName', () => {
         reactContext
       );
 
-      expect(Test.mock.calls[2]).toEqual(expect.arrayContaining([expect.objectContaining({name: 'fieldD'})]));
-      expect(Test.mock.calls[4]).toEqual(expect.arrayContaining([expect.objectContaining({name: 'fieldD'})]));
+      expect(Test.mock.calls[2]).toEqual(
+        expect.arrayContaining([expect.objectContaining({ name: 'fieldD' })])
+      );
+      expect(Test.mock.calls[4]).toEqual(
+        expect.arrayContaining([expect.objectContaining({ name: 'fieldD' })])
+      );
     });
   });
 });

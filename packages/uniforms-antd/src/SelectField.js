@@ -51,7 +51,9 @@ const renderSelect = props => (
     onChange={value => props.onChange(value)}
     placeholder={props.placeholder}
     ref={props.inputRef}
-    value={props.fieldType === Array ? props.value || [] : '' + (props.value || '')}
+    value={
+      props.fieldType === Array ? props.value || [] : '' + (props.value || '')
+    }
     {...filterDOMProps(props)}
   >
     {props.allowedValues.map(value => (
@@ -61,5 +63,6 @@ const renderSelect = props => (
     ))}
   </SelectAntD>
 );
-const Select = ({checkboxes, ...props}) => wrapField(props, checkboxes ? renderCheckboxes(props) : renderSelect(props));
+const Select = ({ checkboxes, ...props }) =>
+  wrapField(props, checkboxes ? renderCheckboxes(props) : renderSelect(props));
 export default connectField(Select);

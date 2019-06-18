@@ -21,8 +21,8 @@ const Num = props =>
       ref={props.inputRef}
       step={props.step || (props.decimal ? 0.01 : 1)}
       value={props.value}
-      style={{width: '100%'}}
+      style={{ width: '100%' }}
       {...filterDOMProps(props)}
     />
   );
-export default connectField(Num, {ensureValue: false});
+export default connectField(Num, { ensureValue: false });

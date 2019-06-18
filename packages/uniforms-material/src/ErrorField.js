@@ -5,12 +5,27 @@ import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 import nothing from 'uniforms/nothing';
 
-const Error = ({children, error, errorMessage, fullWidth, margin, variant, ...props}) =>
+const Error = ({
+  children,
+  error,
+  errorMessage,
+  fullWidth,
+  margin,
+  variant,
+  ...props
+}) =>
   !error ? (
     nothing
   ) : (
-    <FormControl error={!!error} fullWidth={!!fullWidth} margin={margin} variant={variant}>
-      <FormHelperText {...filterDOMProps(props)}>{children || errorMessage}</FormHelperText>
+    <FormControl
+      error={!!error}
+      fullWidth={!!fullWidth}
+      margin={margin}
+      variant={variant}
+    >
+      <FormHelperText {...filterDOMProps(props)}>
+        {children || errorMessage}
+      </FormHelperText>
     </FormControl>
   );
 Error.defaultProps = {
@@ -18,4 +33,4 @@ Error.defaultProps = {
   margin: 'dense'
 };
 
-export default connectField(Error, {initialValue: false});
+export default connectField(Error, { initialValue: false });

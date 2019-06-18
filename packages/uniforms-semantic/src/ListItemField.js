@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { Children } from 'react';
 import connectField from 'uniforms/connectField';
 import joinName from 'uniforms/joinName';
-import {Children} from 'react';
 
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
@@ -10,7 +9,7 @@ const ListItem = props => (
   <div className="item">
     <ListDelField className="top aligned" name={props.name} />
 
-    <div className="middle aligned content" style={{width: '100%'}}>
+    <div className="middle aligned content" style={{ width: '100%' }}>
       {props.children ? (
         Children.map(props.children, child =>
           React.cloneElement(child, {
@@ -23,9 +22,12 @@ const ListItem = props => (
           })
         )
       ) : (
-        <AutoField {...props} style={{margin: 0}} />
+        <AutoField {...props} style={{ margin: 0 }} />
       )}
     </div>
   </div>
 );
-export default connectField(ListItem, {includeInChain: false, includeParent: true});
+export default connectField(ListItem, {
+  includeInChain: false,
+  includeParent: true
+});

@@ -19,14 +19,24 @@ const Nest = ({
   showInlineError,
   ...props
 }) => (
-  <div className={classnames(className, {'has-error': error})} {...filterDOMProps(props)}>
+  <div
+    className={classnames(className, { 'has-error': error })}
+    {...filterDOMProps(props)}
+  >
     {label && <label>{label}</label>}
 
-    {!!(error && showInlineError) && <span className="text-danger">{errorMessage}</span>}
+    {!!(error && showInlineError) && (
+      <span className="text-danger">{errorMessage}</span>
+    )}
 
     {children
       ? injectName(name, children)
-      : fields.map(key => <AutoField key={key} name={joinName(name, key)} {...itemProps} />)}
+      : fields.map(key => (
+          <AutoField key={key} name={joinName(name, key)} {...itemProps} />
+        ))}
   </div>
 );
-export default connectField(Nest, {ensureValue: false, includeInChain: false});
+export default connectField(Nest, {
+  ensureValue: false,
+  includeInChain: false
+});

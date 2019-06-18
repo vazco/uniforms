@@ -1,5 +1,5 @@
 import React from 'react';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 import ErrorsField from 'uniforms-bootstrap4/ErrorsField';
 
@@ -9,23 +9,29 @@ const error = {
   error: 'validation-error',
   reason: 'X is required',
   details: [
-    {name: 'x', type: 'required', details: {value: null}},
-    {name: 'y', type: 'required', details: {value: null}},
-    {name: 'z', type: 'required', details: {value: null}}
+    { name: 'x', type: 'required', details: { value: null } },
+    { name: 'y', type: 'required', details: { value: null } },
+    { name: 'z', type: 'required', details: { value: null } }
   ],
   message: 'X is required [validation-error]'
 };
 
 test('<ErrorsField> - works', () => {
   const element = <ErrorsField name="x" />;
-  const wrapper = mount(element, createContext({x: {type: String}}));
+  const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find(ErrorsField)).toHaveLength(1);
 });
 
 test('<ErrorsField> - renders list of correct error messages (context)', () => {
   const element = <ErrorsField name="x" />;
-  const wrapper = mount(element, createContext({x: {type: String}, y: {type: String}, z: {type: String}}, {error}));
+  const wrapper = mount(
+    element,
+    createContext(
+      { x: { type: String }, y: { type: String }, z: { type: String } },
+      { error }
+    )
+  );
 
   expect(wrapper.find('.card-body > div')).toHaveLength(3);
   expect(
@@ -50,7 +56,15 @@ test('<ErrorsField> - renders list of correct error messages (context)', () => {
 
 test('<ErrorsField> - renders children (specified)', () => {
   const element = <ErrorsField name="x" children="Error message list" />;
-  const wrapper = mount(element, createContext({x: {type: String}, y: {type: String}, z: {type: String}}, {error}));
+  const wrapper = mount(
+    element,
+    createContext(
+      { x: { type: String }, y: { type: String }, z: { type: String } },
+      { error }
+    )
+  );
 
-  expect(wrapper.find(ErrorsField).text()).toEqual(expect.stringContaining('Error message list'));
+  expect(wrapper.find(ErrorsField).text()).toEqual(
+    expect.stringContaining('Error message list')
+  );
 });

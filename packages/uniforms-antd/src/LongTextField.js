@@ -24,6 +24,6 @@ const LongText = props =>
       {...filterDOMProps(props)}
     />
   );
-LongText.defaultProps = {rows: 5};
+LongText.defaultProps = { rows: 5 };
 
 export default connectField(LongText);

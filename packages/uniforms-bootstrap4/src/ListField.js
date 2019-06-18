@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { Children } from 'react';
 import classnames from 'classnames';
 import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 import joinName from 'uniforms/joinName';
-import {Children} from 'react';
 
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';
@@ -23,15 +22,24 @@ const List = ({
   value,
   ...props
 }) => (
-  <div className={classnames('card mb-3', className)} {...filterDOMProps(props)}>
+  <div
+    className={classnames('card mb-3', className)}
+    {...filterDOMProps(props)}
+  >
     <div className="card-body">
       {label && (
         <div className="card-title">
           <label className="col-form-label">{label}&nbsp;</label>
 
-          <ListAddField name={`${name}.$`} initialCount={initialCount} addIcon={addIcon} />
+          <ListAddField
+            name={`${name}.$`}
+            initialCount={initialCount}
+            addIcon={addIcon}
+          />
 
-          {!!(error && showInlineError) && <span className="text-danger">{errorMessage}</span>}
+          {!!(error && showInlineError) && (
+            <span className="text-danger">{errorMessage}</span>
+          )}
         </div>
       )}
 
@@ -41,7 +49,10 @@ const List = ({
               React.cloneElement(child, {
                 key: index,
                 label: null,
-                name: joinName(name, child.props.name && child.props.name.replace('$', index)),
+                name: joinName(
+                  name,
+                  child.props.name && child.props.name.replace('$', index)
+                ),
                 removeIcon
               })
             )
@@ -58,4 +69,7 @@ const List = ({
     </div>
   </div>
 );
-export default connectField(List, {ensureValue: false, includeInChain: false});
+export default connectField(List, {
+  ensureValue: false,
+  includeInChain: false
+});

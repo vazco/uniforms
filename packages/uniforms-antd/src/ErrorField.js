@@ -3,11 +3,17 @@ import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 import nothing from 'uniforms/nothing';
 
-const Error = ({children, error, errorMessage, ...props}) =>
+const Error = ({ children, error, errorMessage, ...props }) =>
   !error ? (
     nothing
   ) : (
-    <div {...filterDOMProps(props)}>{children ? children : <div style={{margin: '3px'}}>{errorMessage}</div>}</div>
+    <div {...filterDOMProps(props)}>
+      {children ? (
+        children
+      ) : (
+        <div style={{ margin: '3px' }}>{errorMessage}</div>
+      )}
+    </div>
   );
 Error.defaultProps = {
   style: {
@@ -19,4 +25,4 @@ Error.defaultProps = {
   }
 };
 
-export default connectField(Error, {initialValue: false});
+export default connectField(Error, { initialValue: false });

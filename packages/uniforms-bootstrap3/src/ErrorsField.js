@@ -4,11 +4,17 @@ import classnames from 'classnames';
 import filterDOMProps from 'uniforms/filterDOMProps';
 import nothing from 'uniforms/nothing';
 
-const ErrorsField = ({className, children, ...props}, {uniforms: {error, schema}}) =>
+const ErrorsField = (
+  { className, children, ...props },
+  { uniforms: { error, schema } }
+) =>
   !error && !children ? (
     nothing
   ) : (
-    <div className={classnames('panel panel-danger', className)} {...filterDOMProps(props)}>
+    <div
+      className={classnames('panel panel-danger', className)}
+      {...filterDOMProps(props)}
+    >
       <div className="panel-body">
         {children}
 

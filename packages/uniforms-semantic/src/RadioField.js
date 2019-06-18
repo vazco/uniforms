@@ -20,9 +20,12 @@ const Radio = ({
   value,
   ...props
 }) => (
-  <div className={classnames(className, {disabled, error}, 'grouped fields')} {...filterDOMProps(props)}>
+  <div
+    className={classnames(className, { disabled, error }, 'grouped fields')}
+    {...filterDOMProps(props)}
+  >
     {label && (
-      <div className={classnames({required}, 'field')}>
+      <div className={classnames({ required }, 'field')}>
         <label>{label}</label>
       </div>
     )}
@@ -39,12 +42,16 @@ const Radio = ({
             type="radio"
           />
 
-          <label htmlFor={`${id}-${item}`}>{transform ? transform(item) : item}</label>
+          <label htmlFor={`${id}-${item}`}>
+            {transform ? transform(item) : item}
+          </label>
         </div>
       </div>
     ))}
 
-    {!!(error && showInlineError) && <div className="ui red basic pointing label">{errorMessage}</div>}
+    {!!(error && showInlineError) && (
+      <div className="ui red basic pointing label">{errorMessage}</div>
+    )}
   </div>
 );
 export default connectField(Radio);

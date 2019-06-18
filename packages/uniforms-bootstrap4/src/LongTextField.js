@@ -8,7 +8,9 @@ const LongText = props =>
   wrapField(
     props,
     <textarea
-      className={classnames(props.inputClassName, 'form-control', {'is-invalid': props.error})}
+      className={classnames(props.inputClassName, 'form-control', {
+        'is-invalid': props.error
+      })}
       disabled={props.disabled}
       id={props.id}
       name={props.name}

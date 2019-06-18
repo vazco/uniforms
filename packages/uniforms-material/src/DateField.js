@@ -35,9 +35,11 @@ const Date = ({
     error={!!error}
     helperText={(error && showInlineError && errorMessage) || helperText}
     label={label}
-    InputLabelProps={{...labelProps, ...InputLabelProps}}
+    InputLabelProps={{ ...labelProps, ...InputLabelProps }}
     name={name}
-    onChange={event => disabled || dateParse(event.target.valueAsNumber, onChange)}
+    onChange={event =>
+      disabled || dateParse(event.target.valueAsNumber, onChange)
+    }
     placeholder={placeholder}
     ref={inputRef}
     type="datetime-local"

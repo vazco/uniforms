@@ -1,9 +1,8 @@
-import React from 'react';
-import {Component} from 'react';
-import {mount} from 'enzyme';
+import React, { Component } from 'react';
+import { mount } from 'enzyme';
 
 import QuickForm from 'uniforms/QuickForm';
-import {SimpleSchemaBridge} from 'uniforms-bridge-simple-schema';
+import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
 
 jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
@@ -46,19 +45,34 @@ describe('QuickForm', () => {
 
   describe('when rendered with custom fields in `props`', () => {
     it('renders `AutoField` for each field', () => {
-      const wrapper = mount(<TestQuickForm schema={schema} autoField={() => <i className="autoOverride" />} />);
+      const wrapper = mount(
+        <TestQuickForm
+          schema={schema}
+          autoField={() => <i className="autoOverride" />}
+        />
+      );
 
       expect(wrapper.find('.autoOverride').length).toBeGreaterThan(0);
     });
 
     it('renders `ErrorsField`', () => {
-      const wrapper = mount(<TestQuickForm schema={schema} errorsField={() => <i className="errorsOverride" />} />);
+      const wrapper = mount(
+        <TestQuickForm
+          schema={schema}
+          errorsField={() => <i className="errorsOverride" />}
+        />
+      );
 
       expect(wrapper.find('.errorsOverride').length).toBeGreaterThan(0);
     });
 
     it('renders `SubmitField`', () => {
-      const wrapper = mount(<TestQuickForm schema={schema} submitField={() => <i className="submitOverride" />} />);
+      const wrapper = mount(
+        <TestQuickForm
+          schema={schema}
+          submitField={() => <i className="submitOverride" />}
+        />
+      );
 
       expect(wrapper.find('.submitOverride').length).toBeGreaterThan(0);
     });
@@ -80,7 +94,9 @@ describe('QuickForm', () => {
     });
 
     it('works with functions', () => {
-      const wrapper = mount(<TestQuickForm schema={schema} autoField={() => <code />} />);
+      const wrapper = mount(
+        <TestQuickForm schema={schema} autoField={() => <code />} />
+      );
 
       expect(wrapper.find('code').length).toBeGreaterThan(0);
     });

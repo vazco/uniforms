@@ -1,5 +1,5 @@
 import React from 'react';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 import ListDelField from 'uniforms-semantic/ListDelField';
 
@@ -13,7 +13,10 @@ const parent = {
 
 test('<ListDelField> - works', () => {
   const element = <ListDelField name="x.1" parent={parent} />;
-  const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Array }, 'x.$': { type: String } })
+  );
 
   expect(wrapper.find(ListDelField)).toHaveLength(1);
 });
@@ -21,8 +24,17 @@ test('<ListDelField> - works', () => {
 test('<ListDelField> - prevents onClick when disabled', () => {
   const onChange = jest.fn();
 
-  const element = <ListDelField name="x.1" disabled parent={Object.assign({}, parent, {onChange})} />;
-  const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
+  const element = (
+    <ListDelField
+      name="x.1"
+      disabled
+      parent={Object.assign({}, parent, { onChange })}
+    />
+  );
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Array }, 'x.$': { type: String } })
+  );
 
   expect(wrapper.find('i').simulate('click')).toBeTruthy();
   expect(onChange).not.toHaveBeenCalled();
@@ -31,8 +43,16 @@ test('<ListDelField> - prevents onClick when disabled', () => {
 test('<ListDelField> - prevents onClick when limit reached', () => {
   const onChange = jest.fn();
 
-  const element = <ListDelField name="x.1" parent={Object.assign({}, parent, {onChange, minCount: 3})} />;
-  const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
+  const element = (
+    <ListDelField
+      name="x.1"
+      parent={Object.assign({}, parent, { onChange, minCount: 3 })}
+    />
+  );
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Array }, 'x.$': { type: String } })
+  );
 
   expect(wrapper.find('i').simulate('click')).toBeTruthy();
   expect(onChange).not.toHaveBeenCalled();
@@ -41,8 +61,13 @@ test('<ListDelField> - prevents onClick when limit reached', () => {
 test('<ListDelField> - correctly reacts on click', () => {
   const onChange = jest.fn();
 
-  const element = <ListDelField name="x.1" parent={Object.assign({}, parent, {onChange})} />;
-  const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
+  const element = (
+    <ListDelField name="x.1" parent={Object.assign({}, parent, { onChange })} />
+  );
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Array }, 'x.$': { type: String } })
+  );
 
   expect(wrapper.find('i').simulate('click')).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith(['x', 'z']);

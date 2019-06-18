@@ -6,8 +6,16 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 import gridClassName from './gridClassName';
 
 const SubmitField = (
-  {className, disabled, inputClassName, inputRef, value, wrapClassName, ...props},
-  {uniforms: {error, state}}
+  {
+    className,
+    disabled,
+    inputClassName,
+    inputRef,
+    value,
+    wrapClassName,
+    ...props
+  },
+  { uniforms: { error, state } }
 ) => {
   const hasWrap = !!(state.grid || wrapClassName);
 
@@ -17,15 +25,39 @@ const SubmitField = (
       disabled={disabled === undefined ? !!(error || state.disabled) : disabled}
       ref={inputRef}
       type="submit"
-      {...(value ? {value} : {})}
+      {...(value ? { value } : {})}
     />
   );
 
   return (
-    <div className={classnames(className, {'is-invalid': error, row: state.grid})} {...filterDOMProps(props)}>
-      {hasWrap && <label className={classnames('col-form-label', gridClassName(state.grid, 'label'))}>&nbsp;</label>}
+    <div
+      className={classnames(className, {
+        'is-invalid': error,
+        row: state.grid
+      })}
+      {...filterDOMProps(props)}
+    >
+      {hasWrap && (
+        <label
+          className={classnames(
+            'col-form-label',
+            gridClassName(state.grid, 'label')
+          )}
+        >
+          &nbsp;
+        </label>
+      )}
 
-      {hasWrap && <div className={classnames(wrapClassName, gridClassName(state.grid, 'input'))}>{blockInput}</div>}
+      {hasWrap && (
+        <div
+          className={classnames(
+            wrapClassName,
+            gridClassName(state.grid, 'input')
+          )}
+        >
+          {blockInput}
+        </div>
+      )}
 
       {!hasWrap && blockInput}
     </div>
@@ -33,6 +65,6 @@ const SubmitField = (
 };
 
 SubmitField.contextTypes = BaseField.contextTypes;
-SubmitField.defaultProps = {inputClassName: 'btn btn-primary'};
+SubmitField.defaultProps = { inputClassName: 'btn btn-primary' };
 
 export default SubmitField;

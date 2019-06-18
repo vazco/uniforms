@@ -1,11 +1,10 @@
 import Ajv from 'ajv';
 import MessageBox from 'message-box';
 import SimpleSchema from 'simpl-schema';
-import {GraphQLBridge} from 'uniforms-bridge-graphql';
-import {JSONSchemaBridge} from 'uniforms-bridge-json-schema';
-import {SimpleSchema2Bridge} from 'uniforms-bridge-simple-schema-2';
-import {buildASTSchema} from 'graphql';
-import {parse} from 'graphql';
+import { GraphQLBridge } from 'uniforms-bridge-graphql';
+import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
+import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
+import { buildASTSchema, parse } from 'graphql';
 
 import presets from './presets';
 import themes from './themes';
@@ -26,7 +25,7 @@ scope.buildASTSchema = buildASTSchema;
 scope.parse = parse;
 
 // Dynamic field error.
-MessageBox.defaults({messages: {en: {syntax: ''}}});
+MessageBox.defaults({ messages: { en: { syntax: '' } } });
 
 const schema = new SimpleSchema({
   preset: {
@@ -51,14 +50,22 @@ const schema = new SimpleSchema({
     },
     uniforms: {
       schema: new SimpleSchema({
-        autosave: {optional: true, type: Boolean},
-        autosaveDelay: {optional: true, type: SimpleSchema.Integer},
-        disabled: {optional: true, type: Boolean},
-        label: {optional: true, type: Boolean},
-        placeholder: {optional: true, type: Boolean},
-        showInlineError: {optional: true, type: Boolean},
-        asyncOnSubmit: {optional: true, type: Boolean, label: 'Async onSubmit (1 sec)'},
-        asyncOnValidate: {optional: true, type: Boolean, label: 'Async onValidate (1 sec)'},
+        autosave: { optional: true, type: Boolean },
+        autosaveDelay: { optional: true, type: SimpleSchema.Integer },
+        disabled: { optional: true, type: Boolean },
+        label: { optional: true, type: Boolean },
+        placeholder: { optional: true, type: Boolean },
+        showInlineError: { optional: true, type: Boolean },
+        asyncOnSubmit: {
+          optional: true,
+          type: Boolean,
+          label: 'Async onSubmit (1 sec)'
+        },
+        asyncOnValidate: {
+          optional: true,
+          type: Boolean,
+          label: 'Async onValidate (1 sec)'
+        },
 
         schema: {
           optional: true,
@@ -68,7 +75,9 @@ const schema = new SimpleSchema({
               eval(`(${this.value})`);
               return undefined;
             } catch (error) {
-              MessageBox.defaults({messages: {en: {syntax: error.message}}});
+              MessageBox.defaults({
+                messages: { en: { syntax: error.message } }
+              });
               return 'syntax';
             }
           }
@@ -79,7 +88,7 @@ const schema = new SimpleSchema({
 
   theme: {
     type: String,
-    uniforms: {transform: theme => `uniforms-${theme}`},
+    uniforms: { transform: theme => `uniforms-${theme}` },
     defaultValue: Object.keys(themes)[0],
     allowedValues: Object.keys(themes)
   }

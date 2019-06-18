@@ -11,7 +11,11 @@ const Bootstrap3 = parent =>
     static propTypes = {
       ...parent.propTypes,
 
-      grid: PropTypes.oneOfType([PropTypes.number, PropTypes.object, PropTypes.string])
+      grid: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.object,
+        PropTypes.string
+      ])
     };
 
     getChildContextState() {
@@ -32,7 +36,11 @@ const Bootstrap3 = parent =>
 
       return {
         ...props,
-        className: classnames('form', {error, 'form-horizontal': grid}, className)
+        className: classnames(
+          'form',
+          { error, 'form-horizontal': grid },
+          className
+        )
       };
     }
   };

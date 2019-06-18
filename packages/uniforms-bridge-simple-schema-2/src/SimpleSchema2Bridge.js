@@ -24,7 +24,13 @@ export default class SimpleSchema2Bridge extends Bridge {
   }
 
   getError(name, error) {
-    return (error && error.details && error.details.find && error.details.find(error => error.name === name)) || null;
+    return (
+      (error &&
+        error.details &&
+        error.details.find &&
+        error.details.find(error => error.name === name)) ||
+      null
+    );
   }
 
   getErrorMessage(name, error) {
@@ -67,7 +73,7 @@ export default class SimpleSchema2Bridge extends Bridge {
         merged.autoValue.toString().indexOf('$setOnInsert:') !== -1) // FIXME: Hack.
     ) {
       try {
-        merged.defaultValue = merged.autoValue.call({operator: null});
+        merged.defaultValue = merged.autoValue.call({ operator: null });
       } catch (_) {
         /* ignore it */
       }
@@ -97,15 +103,15 @@ export default class SimpleSchema2Bridge extends Bridge {
   getProps(name, props = {}) {
     // Type should be omitted.
     // eslint-disable-next-line no-unused-vars, prefer-const
-    let {optional, type, uniforms, ...field} = this.getField(name);
+    let { optional, type, uniforms, ...field } = this.getField(name);
 
-    field = {...field, required: !optional};
+    field = { ...field, required: !optional };
 
     if (uniforms) {
       if (typeof uniforms === 'string' || typeof uniforms === 'function') {
-        field = {...field, component: uniforms};
+        field = { ...field, component: uniforms };
       } else {
-        field = {...field, ...uniforms};
+        field = { ...field, ...uniforms };
       }
     }
 
@@ -123,7 +129,7 @@ export default class SimpleSchema2Bridge extends Bridge {
         /* ignore it */
       }
     } else if (type === Number) {
-      field = {...field, decimal: true};
+      field = { ...field, decimal: true };
     }
 
     let options = props.options || field.options;
@@ -141,7 +147,8 @@ export default class SimpleSchema2Bridge extends Bridge {
       } else {
         field = {
           ...field,
-          transform: value => options.find(option => option.value === value).label,
+          transform: value =>
+            options.find(option => option.value === value).label,
           allowedValues: options.map(option => option.value)
         };
       }
@@ -168,12 +175,12 @@ export default class SimpleSchema2Bridge extends Bridge {
     return type;
   }
 
-  getValidator(options = {clean: true, mutate: true}) {
+  getValidator(options = { clean: true, mutate: true }) {
     const validator = this.schema.validator(options);
 
     // Clean mutate its argument, even if mutate is false.
     if (options.clean) {
-      return model => validator(cloneDeep({...model}));
+      return model => validator(cloneDeep({ ...model }));
     }
 
     return validator;

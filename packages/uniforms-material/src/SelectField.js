@@ -57,7 +57,11 @@ const renderSelect = ({
       error={!!error}
       fullWidth={fullWidth}
       helperText={(error && showInlineError && errorMessage) || helperText}
-      InputLabelProps={{shrink: !!label && (hasPlaceholder || hasValue), ...labelProps, ...InputLabelProps}}
+      InputLabelProps={{
+        shrink: !!label && (hasPlaceholder || hasValue),
+        ...labelProps,
+        ...InputLabelProps
+      }}
       label={label}
       margin={margin}
       onChange={event => disabled || onChange(event.target.value)}
@@ -65,7 +69,7 @@ const renderSelect = ({
       select
       SelectProps={{
         displayEmpty: hasPlaceholder,
-        inputProps: {name, id, ...inputProps},
+        inputProps: { name, id, ...inputProps },
         multiple: fieldType === Array || undefined,
         native,
         ...filterDOMProps(props)
@@ -154,13 +158,23 @@ const renderCheckboxes = ({
   }
 
   return wrapField(
-    {...props, component: 'fieldset', disabled, error, errorMessage, showInlineError},
-    (legend || label) && <FormLabel component="legend">{legend || label}</FormLabel>,
+    {
+      ...props,
+      component: 'fieldset',
+      disabled,
+      error,
+      errorMessage,
+      showInlineError
+    },
+    (legend || label) && (
+      <FormLabel component="legend">{legend || label}</FormLabel>
+    ),
     children
   );
 };
 
-const Select = ({checkboxes, ...props}) => (checkboxes ? renderCheckboxes(props) : renderSelect(props));
+const Select = ({ checkboxes, ...props }) =>
+  checkboxes ? renderCheckboxes(props) : renderSelect(props);
 
 Select.defaultProps = {
   appearance: 'checkbox',

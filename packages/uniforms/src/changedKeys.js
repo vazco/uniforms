@@ -5,7 +5,11 @@ import xorWith from 'lodash/xorWith';
 
 import joinName from './joinName';
 
-export default function changedKeys(root: string, valueA: any, valueB: any): string[] {
+export default function changedKeys(
+  root: string,
+  valueA: any,
+  valueB: any
+): string[] {
   if (valueA === Object(valueA) && !(valueA instanceof Date)) {
     if (valueB) {
       let pairsA;
@@ -19,7 +23,9 @@ export default function changedKeys(root: string, valueA: any, valueB: any): str
         pairsB = Object.keys(valueB).map(key => [valueB[key], key]);
       }
 
-      const changed = xorWith(pairsA, pairsB, isEqual).map(pair => joinName(root, pair[1]));
+      const changed = xorWith(pairsA, pairsB, isEqual).map(pair =>
+        joinName(root, pair[1])
+      );
 
       if (changed.length) {
         changed.unshift(root);

@@ -4,13 +4,17 @@ import cloneDeep from 'lodash/cloneDeep';
 import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
-const ListAdd = ({addIcon, className, disabled, parent, value, ...props}) => {
-  const limitNotReached = !disabled && !(parent.maxCount <= parent.value.length);
+const ListAdd = ({ addIcon, className, disabled, parent, value, ...props }) => {
+  const limitNotReached =
+    !disabled && !(parent.maxCount <= parent.value.length);
 
   return (
     <div
       className={classnames('badge pull-right', className)}
-      onClick={() => limitNotReached && parent.onChange(parent.value.concat([cloneDeep(value)]))}
+      onClick={() =>
+        limitNotReached &&
+        parent.onChange(parent.value.concat([cloneDeep(value)]))
+      }
       {...filterDOMProps(props)}
     >
       {addIcon}
@@ -18,6 +22,9 @@ const ListAdd = ({addIcon, className, disabled, parent, value, ...props}) => {
   );
 };
 
-ListAdd.defaultProps = {addIcon: <i className="glyphicon glyphicon-plus" />};
+ListAdd.defaultProps = { addIcon: <i className="glyphicon glyphicon-plus" /> };
 
-export default connectField(ListAdd, {includeParent: true, initialValue: false});
+export default connectField(ListAdd, {
+  includeParent: true,
+  initialValue: false
+});

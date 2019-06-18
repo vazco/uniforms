@@ -1,7 +1,6 @@
 import DocusaurusContext from '@docusaurus/context';
 import Link from '@docusaurus/Link';
-import React from 'react';
-import {useContext} from 'react';
+import React, { useContext } from 'react';
 
 import styles from './styles.module.css';
 
@@ -22,7 +21,8 @@ function Hero() {
           <div className={`${styles.half} ${styles.textBig}`}>
             <div className="text--primary">uniforms</div>
             <div>
-              A set of React libraries for building <span className="text--info">forms</span>.
+              A set of React libraries for building{' '}
+              <span className="text--info">forms</span>.
             </div>
           </div>
           <div className={`${styles.half} text--center`}>
@@ -35,7 +35,7 @@ function Hero() {
 }
 
 function Info() {
-  const {siteConfig} = useContext(DocusaurusContext);
+  const { siteConfig } = useContext(DocusaurusContext);
 
   return (
     <div className={`${styles.textSmall} container margin-top--lg`}>
@@ -55,14 +55,21 @@ function Info() {
                   <a href="https://github.com/graphql/graphql-js">GraphQL</a>
                 </li>
                 <li>
-                  <a href="https://github.com/aldeed/meteor-simple-schema">SimpleSchema</a>
+                  <a href="https://github.com/aldeed/meteor-simple-schema">
+                    SimpleSchema
+                  </a>
                 </li>
                 <li>
-                  <a href="https://github.com/aldeed/node-simple-schema">SimpleSchema@2</a>
+                  <a href="https://github.com/aldeed/node-simple-schema">
+                    SimpleSchema@2
+                  </a>
                 </li>
                 <li>
-                  And any other - only <Link to={`${siteConfig.baseUrl}docs/bridges-concept`}>a small wrapper</Link> is
-                  needed!
+                  And any other - only{' '}
+                  <Link to={`${siteConfig.baseUrl}docs/bridges-concept`}>
+                    a small wrapper
+                  </Link>{' '}
+                  is needed!
                 </li>
               </ul>
             </li>
@@ -80,7 +87,8 @@ function Info() {
                   <a href="https://ant.design">AntD</a> theme
                 </li>
                 <li>
-                  <a href="https://getbootstrap.com/docs/3.3/">Bootstrap3</a> theme
+                  <a href="https://getbootstrap.com/docs/3.3/">Bootstrap3</a>{' '}
+                  theme
                 </li>
                 <li>
                   <a href="https://getbootstrap.com">Bootstrap4</a> theme

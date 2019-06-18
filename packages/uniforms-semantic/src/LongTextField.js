@@ -19,7 +19,10 @@ const LongText = ({
   value,
   ...props
 }) => (
-  <div className={classnames(className, {disabled, error, required}, 'field')} {...filterDOMProps(props)}>
+  <div
+    className={classnames(className, { disabled, error, required }, 'field')}
+    {...filterDOMProps(props)}
+  >
     {label && <label htmlFor={id}>{label}</label>}
 
     <textarea
@@ -32,7 +35,9 @@ const LongText = ({
       value={value}
     />
 
-    {!!(error && showInlineError) && <div className="ui red basic pointing label">{errorMessage}</div>}
+    {!!(error && showInlineError) && (
+      <div className="ui red basic pointing label">{errorMessage}</div>
+    )}
   </div>
 );
 export default connectField(LongText);

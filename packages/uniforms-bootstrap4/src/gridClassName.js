@@ -4,7 +4,9 @@ filterDOMProps.register('grid');
 
 function gridClassNamePart(size, value, side) {
   const sizeInfix = size === 'xs' ? '' : `${size}-`;
-  return side === 'label' ? `col-${sizeInfix}${value}` : `col-${sizeInfix}${12 - value}`;
+  return side === 'label'
+    ? `col-${sizeInfix}${value}`
+    : `col-${sizeInfix}${12 - value}`;
 }
 
 const gridOrder = {
@@ -38,7 +40,7 @@ export default function gridClassName(grid, side) {
   // Example: {xs: 6, sm: 4, md: 3}
   if (typeof grid === 'object') {
     if (!grid.xs) {
-      grid = {xs: grid.sm || grid.md || grid.lg || grid.xl, ...grid};
+      grid = { xs: grid.sm || grid.md || grid.lg || grid.xl, ...grid };
     }
 
     return Object.keys(grid)

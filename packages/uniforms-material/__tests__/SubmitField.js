@@ -1,5 +1,5 @@
 import React from 'react';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 import SubmitField from 'uniforms-material/SubmitField';
 
@@ -27,7 +27,7 @@ test('<SubmitField> - renders SubmitField with correct disabled state', () => {
 test('<SubmitField> - renders SubmitField with correct disabled state when error (context)', () => {
   const error = new Error();
   const element = <SubmitField />;
-  const wrapper = mount(element, createContext({}, {error}));
+  const wrapper = mount(element, createContext({}, { error }));
 
   expect(
     wrapper

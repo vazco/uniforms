@@ -24,7 +24,7 @@ const Radio = ({
   const filteredProps = wrapField._filterDOMProps(filterDOMProps(props));
 
   return wrapField(
-    {...props, disabled, component: 'fieldset'},
+    { ...props, disabled, component: 'fieldset' },
     label && (
       <FormLabel component="legend" htmlFor={name}>
         {label}

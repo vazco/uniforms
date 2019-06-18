@@ -13,7 +13,19 @@ const dateParse = (timestamp, onChange) => {
   }
 };
 
-const Date = ({disabled, id, inputRef, label, max, min, name, onChange, placeholder, value, ...props}) => (
+const Date = ({
+  disabled,
+  id,
+  inputRef,
+  label,
+  max,
+  min,
+  name,
+  onChange,
+  placeholder,
+  value,
+  ...props
+}) => (
   <div {...filterDOMProps(props)}>
     {label && <label htmlFor={id}>{label}</label>}
 

@@ -12,7 +12,16 @@ const xor = (item, array) => {
   return array.slice(0, index).concat(array.slice(index + 1));
 };
 
-const renderCheckboxes = ({allowedValues, disabled, fieldType, id, name, onChange, transform, value}) =>
+const renderCheckboxes = ({
+  allowedValues,
+  disabled,
+  fieldType,
+  id,
+  name,
+  onChange,
+  transform,
+  value
+}) =>
   allowedValues.map(item => (
     <div className="field" key={item}>
       <div className="ui checkbox">
@@ -21,11 +30,15 @@ const renderCheckboxes = ({allowedValues, disabled, fieldType, id, name, onChang
           disabled={disabled}
           id={`${id}-${item}`}
           name={name}
-          onChange={() => onChange(fieldType === Array ? xor(item, value) : item)}
+          onChange={() =>
+            onChange(fieldType === Array ? xor(item, value) : item)
+          }
           type="checkbox"
         />
 
-        <label htmlFor={`${id}-${item}`}>{transform ? transform(item) : item}</label>
+        <label htmlFor={`${id}-${item}`}>
+          {transform ? transform(item) : item}
+        </label>
       </div>
     </div>
   ));
@@ -84,12 +97,24 @@ const Select = ({
   value,
   ...props
 }) => (
-  <div className={classnames({disabled, error, required}, className, 'field')} {...filterDOMProps(props)}>
+  <div
+    className={classnames({ disabled, error, required }, className, 'field')}
+    {...filterDOMProps(props)}
+  >
     {label && <label htmlFor={id}>{label}</label>}
 
     {/* TODO: Better handling of these props. */}
     {checkboxes || fieldType === Array
-      ? renderCheckboxes({allowedValues, disabled, id, name, onChange, transform, value, fieldType})
+      ? renderCheckboxes({
+          allowedValues,
+          disabled,
+          id,
+          name,
+          onChange,
+          transform,
+          value,
+          fieldType
+        })
       : renderSelect({
           allowedValues,
           disabled,
@@ -104,7 +129,9 @@ const Select = ({
           required
         })}
 
-    {!!(error && showInlineError) && <div className="ui red basic pointing label">{errorMessage}</div>}
+    {!!(error && showInlineError) && (
+      <div className="ui red basic pointing label">{errorMessage}</div>
+    )}
   </div>
 );
 export default connectField(Select);

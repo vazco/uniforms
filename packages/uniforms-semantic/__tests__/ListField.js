@@ -1,5 +1,5 @@
 import React from 'react';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 import ListAddField from 'uniforms-semantic/ListAddField';
 import ListField from 'uniforms-semantic/ListField';
@@ -9,14 +9,20 @@ import createContext from './_createContext';
 
 test('<ListField> - works', () => {
   const element = <ListField name="x" />;
-  const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Array }, 'x.$': { type: String } })
+  );
 
   expect(wrapper.find(ListField)).toHaveLength(1);
 });
 
 test('<ListField> - renders ListAddField', () => {
   const element = <ListField name="x" label="ListFieldLabel" />;
-  const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Array }, 'x.$': { type: String } })
+  );
 
   expect(wrapper.find(ListAddField)).toHaveLength(1);
   expect(wrapper.find(ListAddField).prop('name')).toBe('x.$');
@@ -24,22 +30,35 @@ test('<ListField> - renders ListAddField', () => {
 
 test('<ListField> - renders correct label (specified)', () => {
   const element = <ListField name="x" label="ListFieldLabel" />;
-  const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Array }, 'x.$': { type: String } })
+  );
 
   expect(wrapper.find('label')).toHaveLength(1);
-  expect(wrapper.find('label').text()).toEqual(expect.stringContaining('ListFieldLabel'));
+  expect(wrapper.find('label').text()).toEqual(
+    expect.stringContaining('ListFieldLabel')
+  );
 });
 
 test('<ListField> - renders correct numer of items with initialCount (specified)', () => {
   const element = <ListField name="x" initialCount={3} />;
-  const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Array }, 'x.$': { type: String } })
+  );
 
   expect(wrapper.find('input')).toHaveLength(3);
 });
 
 test('<ListField> - passes itemProps to its children', () => {
-  const element = <ListField name="x" initialCount={3} itemProps={{'data-xyz': 1}} />;
-  const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
+  const element = (
+    <ListField name="x" initialCount={3} itemProps={{ 'data-xyz': 1 }} />
+  );
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Array }, 'x.$': { type: String } })
+  );
 
   expect(
     wrapper
@@ -57,7 +76,10 @@ test('<ListField> - renders children (specified)', () => {
       <Child />
     </ListField>
   );
-  mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
+  mount(
+    element,
+    createContext({ x: { type: Array }, 'x.$': { type: String } })
+  );
 
   expect(Child).toHaveBeenCalledTimes(2);
 });
@@ -70,7 +92,10 @@ test('<ListField> - renders children with correct name (children)', () => {
       <Child name="$" />
     </ListField>
   );
-  const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Array }, 'x.$': { type: String } })
+  );
 
   expect(
     wrapper
@@ -88,7 +113,10 @@ test('<ListField> - renders children with correct name (children)', () => {
 
 test('<ListField> - renders children with correct name (value)', () => {
   const element = <ListField name="x" initialCount={2} />;
-  const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Array }, 'x.$': { type: String } })
+  );
 
   expect(
     wrapper
@@ -106,8 +134,19 @@ test('<ListField> - renders children with correct name (value)', () => {
 
 test('<ListField> - renders correct error text (specified)', () => {
   const error = new Error();
-  const element = <ListField name="x" initialCount={1} error={error} showInlineError errorMessage="Error" />;
-  const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
+  const element = (
+    <ListField
+      name="x"
+      initialCount={1}
+      error={error}
+      showInlineError
+      errorMessage="Error"
+    />
+  );
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Array }, 'x.$': { type: String } })
+  );
 
   expect(
     wrapper
@@ -119,8 +158,19 @@ test('<ListField> - renders correct error text (specified)', () => {
 
 test('<ListField> - renders correct error text (showInlineError=false)', () => {
   const error = new Error();
-  const element = <ListField name="x" initialCount={1} error={error} showInlineError={false} errorMessage="Error" />;
-  const wrapper = mount(element, createContext({x: {type: Array}, 'x.$': {type: String}}));
+  const element = (
+    <ListField
+      name="x"
+      initialCount={1}
+      error={error}
+      showInlineError={false}
+      errorMessage="Error"
+    />
+  );
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Array }, 'x.$': { type: String } })
+  );
 
   expect(
     wrapper

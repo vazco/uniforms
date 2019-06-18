@@ -4,10 +4,15 @@ import connectField from 'uniforms/connectField';
 
 import wrapField from './wrapField';
 
-const Bool = ({label, labelBefore, ...props}) =>
+const Bool = ({ label, labelBefore, ...props }) =>
   wrapField(
-    {label: labelBefore, ...props},
-    <div className={classnames(props.inputClassName, `checkbox${props.inline ? '-inline' : ''}`)}>
+    { label: labelBefore, ...props },
+    <div
+      className={classnames(
+        props.inputClassName,
+        `checkbox${props.inline ? '-inline' : ''}`
+      )}
+    >
       <label htmlFor={props.id}>
         <input
           checked={props.value}

@@ -30,7 +30,10 @@ const Quick = parent =>
         props.children = this.getChildContextSchema()
           .getSubfields()
           .map(key => <AutoField key={key} name={key} />)
-          .concat([<ErrorsField key="$ErrorsField" />, <SubmitField key="$SubmitField" />]);
+          .concat([
+            <ErrorsField key="$ErrorsField" />,
+            <SubmitField key="$SubmitField" />
+          ]);
       }
 
       return props;

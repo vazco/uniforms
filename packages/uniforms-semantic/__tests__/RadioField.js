@@ -1,5 +1,5 @@
 import React from 'react';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 import RadioField from 'uniforms-semantic/RadioField';
 
@@ -7,14 +7,20 @@ import createContext from './_createContext';
 
 test('<RadioField> - renders a set of checkboxes', () => {
   const element = <RadioField name="x" />;
-  const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+  );
 
   expect(wrapper.find('input')).toHaveLength(2);
 });
 
 test('<RadioField> - renders a set of checkboxes with correct disabled state', () => {
   const element = <RadioField name="x" disabled />;
-  const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+  );
 
   expect(wrapper.find('input')).toHaveLength(2);
   expect(
@@ -33,7 +39,10 @@ test('<RadioField> - renders a set of checkboxes with correct disabled state', (
 
 test('<RadioField> - renders a set of checkboxes with correct id (inherited)', () => {
   const element = <RadioField name="x" />;
-  const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+  );
 
   expect(wrapper.find('input')).toHaveLength(2);
   expect(
@@ -52,7 +61,10 @@ test('<RadioField> - renders a set of checkboxes with correct id (inherited)', (
 
 test('<RadioField> - renders a set of checkboxes with correct id (specified)', () => {
   const element = <RadioField name="x" id="y" />;
-  const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+  );
 
   expect(wrapper.find('input')).toHaveLength(2);
   expect(
@@ -71,7 +83,10 @@ test('<RadioField> - renders a set of checkboxes with correct id (specified)', (
 
 test('<RadioField> - renders a set of checkboxes with correct name', () => {
   const element = <RadioField name="x" />;
-  const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+  );
 
   expect(wrapper.find('input')).toHaveLength(2);
   expect(
@@ -90,7 +105,10 @@ test('<RadioField> - renders a set of checkboxes with correct name', () => {
 
 test('<RadioField> - renders a set of checkboxes with correct options', () => {
   const element = <RadioField name="x" />;
-  const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+  );
 
   expect(wrapper.find('label')).toHaveLength(2);
   expect(
@@ -109,7 +127,10 @@ test('<RadioField> - renders a set of checkboxes with correct options', () => {
 
 test('<RadioField> - renders a set of checkboxes with correct options (transform)', () => {
   const element = <RadioField name="x" transform={x => x.toUpperCase()} />;
-  const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+  );
 
   expect(wrapper.find('label')).toHaveLength(2);
   expect(
@@ -128,7 +149,10 @@ test('<RadioField> - renders a set of checkboxes with correct options (transform
 
 test('<RadioField> - renders a set of checkboxes with correct value (default)', () => {
   const element = <RadioField name="x" />;
-  const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+  );
 
   expect(wrapper.find('input')).toHaveLength(2);
   expect(
@@ -147,7 +171,13 @@ test('<RadioField> - renders a set of checkboxes with correct value (default)', 
 
 test('<RadioField> - renders a set of checkboxes with correct value (model)', () => {
   const element = <RadioField name="x" />;
-  const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}, {model: {x: 'b'}}));
+  const wrapper = mount(
+    element,
+    createContext(
+      { x: { type: String, allowedValues: ['a', 'b'] } },
+      { model: { x: 'b' } }
+    )
+  );
 
   expect(wrapper.find('input')).toHaveLength(2);
   expect(
@@ -166,7 +196,10 @@ test('<RadioField> - renders a set of checkboxes with correct value (model)', ()
 
 test('<RadioField> - renders a set of checkboxes with correct value (specified)', () => {
   const element = <RadioField name="x" value="b" />;
-  const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+  );
 
   expect(wrapper.find('input')).toHaveLength(2);
   expect(
@@ -187,7 +220,13 @@ test('<RadioField> - renders a set of checkboxes which correctly reacts on chang
   const onChange = jest.fn();
 
   const element = <RadioField name="x" />;
-  const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}, {onChange}));
+  const wrapper = mount(
+    element,
+    createContext(
+      { x: { type: String, allowedValues: ['a', 'b'] } },
+      { onChange }
+    )
+  );
 
   expect(wrapper.find('input')).toHaveLength(2);
   expect(
@@ -205,7 +244,10 @@ test('<RadioField> - renders a set of checkboxes which correctly reacts on chang
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
-    createContext({x: {type: String, allowedValues: ['a', 'b']}}, {model: {x: 'b'}, onChange})
+    createContext(
+      { x: { type: String, allowedValues: ['a', 'b'] } },
+      { model: { x: 'b' }, onChange }
+    )
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
@@ -220,7 +262,10 @@ test('<RadioField> - renders a set of checkboxes which correctly reacts on chang
 
 test('<RadioField> - renders a label', () => {
   const element = <RadioField name="x" label="y" />;
-  const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+  );
 
   expect(wrapper.find('label')).toHaveLength(3);
   expect(
@@ -233,7 +278,10 @@ test('<RadioField> - renders a label', () => {
 
 test('<RadioField> - renders a wrapper with unknown props', () => {
   const element = <RadioField name="x" data-x="x" data-y="y" data-z="z" />;
-  const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+  );
 
   expect(
     wrapper
@@ -257,8 +305,13 @@ test('<RadioField> - renders a wrapper with unknown props', () => {
 
 test('<RadioField> - renders correct error text (specified)', () => {
   const error = new Error();
-  const element = <RadioField name="x" error={error} showInlineError errorMessage="Error" />;
-  const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+  const element = (
+    <RadioField name="x" error={error} showInlineError errorMessage="Error" />
+  );
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+  );
 
   expect(wrapper.find('.ui.red.label').length).toBe(1);
   expect(wrapper.find('.ui.red.label').text()).toBe('Error');
@@ -266,8 +319,18 @@ test('<RadioField> - renders correct error text (specified)', () => {
 
 test('<RadioField> - renders correct error text (showInlineError=false)', () => {
   const error = new Error();
-  const element = <RadioField name="x" error={error} showInlineError={false} errorMessage="Error" />;
-  const wrapper = mount(element, createContext({x: {type: String, allowedValues: ['a', 'b']}}));
+  const element = (
+    <RadioField
+      name="x"
+      error={error}
+      showInlineError={false}
+      errorMessage="Error"
+    />
+  );
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+  );
 
   expect(wrapper.find('.ui.red.label').length).toBe(0);
 });

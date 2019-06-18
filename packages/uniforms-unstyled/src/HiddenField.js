@@ -15,7 +15,7 @@ export default class HiddenField extends BaseField {
     };
   }
 
-  componentWillReceiveProps({value: valueDesired}) {
+  componentWillReceiveProps({ value: valueDesired }) {
     if (valueDesired === undefined) {
       return;
     }

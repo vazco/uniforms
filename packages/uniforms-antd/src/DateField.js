@@ -22,7 +22,7 @@ const Date = props =>
   );
 Date.defaultProps = {
   showTime: true,
-  style: {width: '100%'}
+  style: { width: '100%' }
 };
 
-export default connectField(Date, {ensureValue: false});
+export default connectField(Date, { ensureValue: false });

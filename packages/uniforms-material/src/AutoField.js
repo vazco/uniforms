@@ -1,6 +1,6 @@
 import BaseField from 'uniforms/BaseField';
 import invariant from 'invariant';
-import {createElement} from 'react';
+import { createElement } from 'react';
 
 import BoolField from './BoolField';
 import DateField from './DateField';
@@ -19,7 +19,7 @@ export default class AutoField extends BaseField {
   }
 
   render() {
-    const props = this.getFieldProps(undefined, {ensureValue: false});
+    const props = this.getFieldProps(undefined, { ensureValue: false });
 
     if (props.component === undefined) {
       if (props.allowedValues) {
@@ -50,7 +50,11 @@ export default class AutoField extends BaseField {
             break;
         }
 
-        invariant(props.component, 'Unsupported field type: %s', props.fieldType.toString());
+        invariant(
+          props.component,
+          'Unsupported field type: %s',
+          props.fieldType.toString()
+        );
       }
     }
 

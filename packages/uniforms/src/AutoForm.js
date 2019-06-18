@@ -29,11 +29,11 @@ const Auto = parent =>
       };
     }
 
-    componentWillReceiveProps({model}) {
+    componentWillReceiveProps({ model }) {
       super.componentWillReceiveProps(...arguments);
 
       if (!isEqual(this.props.model, model)) {
-        this.setState(() => ({model, modelSync: model}));
+        this.setState(() => ({ model, modelSync: model }));
       }
     }
 
@@ -46,13 +46,15 @@ const Auto = parent =>
     }
 
     onChange(key, value) {
-      const updateState = state => ({modelSync: set(cloneDeep(state.modelSync), key, value)});
+      const updateState = state => ({
+        modelSync: set(cloneDeep(state.modelSync), key, value)
+      });
       const updateModel = state => {
         if (this.props.onChangeModel) {
           this.props.onChangeModel(state.modelSync);
         }
 
-        return {model: state.modelSync};
+        return { model: state.modelSync };
       };
 
       // Before componentDidMount, every call to onChange should call BaseForm#onChange synchronously
@@ -69,7 +71,11 @@ const Auto = parent =>
     }
 
     __reset(state) {
-      return {...super.__reset(state), model: this.props.model, modelSync: this.props.model};
+      return {
+        ...super.__reset(state),
+        model: this.props.model,
+        modelSync: this.props.model
+      };
     }
 
     onValidate() {

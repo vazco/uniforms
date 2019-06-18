@@ -1,4 +1,5 @@
-const preset = strings => strings[0].slice(9, -5).replace(/([\r\n]+) {8}/g, '$1');
+const preset = strings =>
+  strings[0].slice(9, -5).replace(/([\r\n]+) {8}/g, '$1');
 const presets = {
   'Welcome!': preset`
         new SimpleSchema({

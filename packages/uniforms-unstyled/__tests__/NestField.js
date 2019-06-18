@@ -1,5 +1,5 @@
 import React from 'react';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 import AutoField from 'uniforms-unstyled/AutoField';
 import NestField from 'uniforms-unstyled/NestField';
@@ -8,7 +8,14 @@ import createContext from './_createContext';
 
 test('<NestField> - renders an <AutoField> for each field', () => {
   const element = <NestField name="x" />;
-  const wrapper = mount(element, createContext({x: {type: Object}, 'x.a': {type: String}, 'x.b': {type: Number}}));
+  const wrapper = mount(
+    element,
+    createContext({
+      x: { type: Object },
+      'x.a': { type: String },
+      'x.b': { type: Number }
+    })
+  );
 
   expect(wrapper.find(AutoField)).toHaveLength(2);
   expect(
@@ -31,7 +38,14 @@ test('<NestField> - renders custom content if given', () => {
       <article data-test="content" />
     </NestField>
   );
-  const wrapper = mount(element, createContext({x: {type: Object}, 'x.a': {type: String}, 'x.b': {type: Number}}));
+  const wrapper = mount(
+    element,
+    createContext({
+      x: { type: Object },
+      'x.a': { type: String },
+      'x.b': { type: Number }
+    })
+  );
 
   expect(wrapper.find(AutoField)).toHaveLength(0);
   expect(wrapper.find('article')).toHaveLength(1);
@@ -40,7 +54,14 @@ test('<NestField> - renders custom content if given', () => {
 
 test('<NestField> - renders a label', () => {
   const element = <NestField name="x" label="y" />;
-  const wrapper = mount(element, createContext({x: {type: Object}, 'x.a': {type: String}, 'x.b': {type: Number}}));
+  const wrapper = mount(
+    element,
+    createContext({
+      x: { type: Object },
+      'x.a': { type: String },
+      'x.b': { type: Number }
+    })
+  );
 
   expect(wrapper.find('label')).toHaveLength(3);
   expect(
@@ -53,7 +74,14 @@ test('<NestField> - renders a label', () => {
 
 test('<NestField> - renders a wrapper with unknown props', () => {
   const element = <NestField name="x" data-x="x" data-y="y" data-z="z" />;
-  const wrapper = mount(element, createContext({x: {type: Object}, 'x.a': {type: String}, 'x.b': {type: Number}}));
+  const wrapper = mount(
+    element,
+    createContext({
+      x: { type: Object },
+      'x.a': { type: String },
+      'x.b': { type: Number }
+    })
+  );
 
   expect(
     wrapper

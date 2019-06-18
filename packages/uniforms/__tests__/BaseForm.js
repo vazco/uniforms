@@ -1,5 +1,5 @@
 import React from 'react';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 import BaseForm from 'uniforms/BaseForm';
 
@@ -9,7 +9,7 @@ jest.mock('meteor/check');
 describe('BaseForm', () => {
   const noop = () => {};
   const error = new Error();
-  const model = {$: [1], _: 1};
+  const model = { $: [1], _: 1 };
   const schema = {
     getError: noop,
     getErrorMessage: noop,
@@ -35,7 +35,9 @@ describe('BaseForm', () => {
   });
 
   describe('child context', () => {
-    const wrapper = mount(<BaseForm error={error} model={model} schema={schema} />);
+    const wrapper = mount(
+      <BaseForm error={error} model={model} schema={schema} />
+    );
 
     const context = wrapper.instance().getChildContext();
 
@@ -78,7 +80,14 @@ describe('BaseForm', () => {
 
   describe('when rendered', () => {
     const wrapper = mount(
-      <BaseForm className="name" disabled label={false} placeholder schema={schema} showInlineError>
+      <BaseForm
+        className="name"
+        disabled
+        label={false}
+        placeholder
+        schema={schema}
+        showInlineError
+      >
         <div />
         <div />
         <div />
@@ -114,9 +123,9 @@ describe('BaseForm', () => {
     });
 
     it('updates schema bridge', () => {
-      const schema2 = {...schema, getType: () => {}};
+      const schema2 = { ...schema, getType: () => {} };
 
-      wrapper.setProps({schema: schema2});
+      wrapper.setProps({ schema: schema2 });
 
       const context = wrapper.instance().getChildContext();
 
@@ -125,7 +134,14 @@ describe('BaseForm', () => {
   });
 
   describe('when changed', () => {
-    const wrapper = mount(<BaseForm model={model} schema={schema} onChange={onChange} onSubmit={onSubmit} />);
+    const wrapper = mount(
+      <BaseForm
+        model={model}
+        schema={schema}
+        onChange={onChange}
+        onSubmit={onSubmit}
+      />
+    );
 
     it('updates `changed` and `changedMap`', () => {
       const context1 = wrapper.instance().getChildContext().uniforms.state;
@@ -146,7 +162,7 @@ describe('BaseForm', () => {
     });
 
     it('autosaves correctly (`autosave` = true)', () => {
-      wrapper.setProps({autosave: true});
+      wrapper.setProps({ autosave: true });
       wrapper
         .instance()
         .getChildContext()
@@ -175,7 +191,7 @@ describe('BaseForm', () => {
     });
 
     it('autosaves can be delayed', async () => {
-      wrapper.setProps({autosaveDelay: 10});
+      wrapper.setProps({ autosaveDelay: 10 });
       wrapper
         .instance()
         .getChildContext()
@@ -196,7 +212,7 @@ describe('BaseForm', () => {
     });
 
     it('autosaves can be delayed (longer)', async () => {
-      wrapper.setProps({autosaveDelay: 10});
+      wrapper.setProps({ autosaveDelay: 10 });
       wrapper
         .instance()
         .getChildContext()
@@ -232,7 +248,7 @@ describe('BaseForm', () => {
     });
 
     it('autosaves correctly (`autosave` = false)', () => {
-      wrapper.setProps({autosave: false});
+      wrapper.setProps({ autosave: false });
       wrapper
         .instance()
         .getChildContext()
@@ -258,7 +274,7 @@ describe('BaseForm', () => {
     });
 
     it('does nothing without `onChange`', () => {
-      wrapper.setProps({onChange: undefined});
+      wrapper.setProps({ onChange: undefined });
       wrapper
         .instance()
         .getChildContext()
@@ -279,7 +295,9 @@ describe('BaseForm', () => {
   });
 
   describe('when submitted', () => {
-    const wrapper = mount(<BaseForm model={model} schema={schema} onSubmit={onSubmit} />);
+    const wrapper = mount(
+      <BaseForm model={model} schema={schema} onSubmit={onSubmit} />
+    );
 
     it('calls `onSubmit` once', () => {
       wrapper.find('form').simulate('submit');
@@ -308,11 +326,15 @@ describe('BaseForm', () => {
 
       expect(onSubmit).toHaveBeenLastCalledWith(1);
 
-      wrapper.setProps({modelTransform: undefined});
+      wrapper.setProps({ modelTransform: undefined });
     });
 
     it('without `onSubmit` calls only `onSubmitSuccess`', async () => {
-      wrapper.setProps({onSubmit: undefined, onSubmitSuccess, onSubmitFailure});
+      wrapper.setProps({
+        onSubmit: undefined,
+        onSubmitSuccess,
+        onSubmitFailure
+      });
       wrapper.find('form').simulate('submit');
 
       await new Promise(resolve => process.nextTick(resolve));
@@ -323,7 +345,9 @@ describe('BaseForm', () => {
 
     it('sets `submitting` state while submitting', async () => {
       let resolveSubmit = null;
-      wrapper.setProps({onSubmit: () => new Promise(resolve => (resolveSubmit = resolve))});
+      wrapper.setProps({
+        onSubmit: () => new Promise(resolve => (resolveSubmit = resolve))
+      });
 
       const context1 = wrapper.instance().getChildContext().uniforms.state;
       expect(context1).toHaveProperty('submitting', false);
@@ -346,7 +370,12 @@ describe('BaseForm', () => {
       onSubmit.mockReturnValueOnce(Promise.resolve(onSubmitValue));
 
       const wrapper = mount(
-        <BaseForm model={model} schema={schema} onSubmit={onSubmit} onSubmitSuccess={onSubmitSuccess} />
+        <BaseForm
+          model={model}
+          schema={schema}
+          onSubmit={onSubmit}
+          onSubmitSuccess={onSubmitSuccess}
+        />
       );
 
       wrapper.find('form').simulate('submit');
@@ -362,7 +391,12 @@ describe('BaseForm', () => {
       onSubmit.mockReturnValueOnce(Promise.reject(onSubmitError));
 
       const wrapper = mount(
-        <BaseForm model={model} schema={schema} onSubmit={onSubmit} onSubmitFailure={onSubmitFailure} />
+        <BaseForm
+          model={model}
+          schema={schema}
+          onSubmit={onSubmit}
+          onSubmitFailure={onSubmitFailure}
+        />
       );
 
       wrapper.find('form').simulate('submit');

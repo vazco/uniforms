@@ -1,7 +1,7 @@
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
 import React from 'react';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 import AutoField from 'uniforms-material/AutoField';
 import NestField from 'uniforms-material/NestField';
@@ -10,7 +10,14 @@ import createContext from './_createContext';
 
 test('<NestField> - renders an <AutoField> for each field', () => {
   const element = <NestField name="x" />;
-  const wrapper = mount(element, createContext({x: {type: Object}, 'x.a': {type: String}, 'x.b': {type: Number}}));
+  const wrapper = mount(
+    element,
+    createContext({
+      x: { type: Object },
+      'x.a': { type: String },
+      'x.b': { type: Number }
+    })
+  );
 
   expect(wrapper.find(AutoField)).toHaveLength(2);
   expect(
@@ -33,7 +40,14 @@ test('<NestField> - renders custom content if given', () => {
       <article data-test="content" />
     </NestField>
   );
-  const wrapper = mount(element, createContext({x: {type: Object}, 'x.a': {type: String}, 'x.b': {type: Number}}));
+  const wrapper = mount(
+    element,
+    createContext({
+      x: { type: Object },
+      'x.a': { type: String },
+      'x.b': { type: Number }
+    })
+  );
 
   expect(wrapper.find(AutoField)).toHaveLength(0);
   expect(wrapper.find('article')).toHaveLength(1);
@@ -42,7 +56,14 @@ test('<NestField> - renders custom content if given', () => {
 
 test('<NestField> - renders a Subheader', () => {
   const element = <NestField name="x" label="y" />;
-  const wrapper = mount(element, createContext({x: {type: Object}, 'x.a': {type: String}, 'x.b': {type: Number}}));
+  const wrapper = mount(
+    element,
+    createContext({
+      x: { type: Object },
+      'x.a': { type: String },
+      'x.b': { type: Number }
+    })
+  );
 
   expect(
     wrapper
@@ -54,7 +75,14 @@ test('<NestField> - renders a Subheader', () => {
 
 test('<NestField> - renders a helperText', () => {
   const element = <NestField name="x" helperText="Helper" />;
-  const wrapper = mount(element, createContext({x: {type: Object}, 'x.a': {type: String}, 'x.b': {type: Number}}));
+  const wrapper = mount(
+    element,
+    createContext({
+      x: { type: Object },
+      'x.a': { type: String },
+      'x.b': { type: Number }
+    })
+  );
 
   expect(wrapper.find(FormHelperText)).toHaveLength(1);
   expect(wrapper.find(FormHelperText).text()).toBe('Helper');

@@ -24,8 +24,14 @@ export default function wrapField(
   children
 ) {
   const hasWrap = !!(grid || wrapClassName);
-  const blockError = !!(error && showInlineError) && <span className="form-text text-danger">{errorMessage}</span>;
-  const blockHelp = !!help && <span className={classnames('form-text', helpClassName || 'text-muted')}>{help}</span>;
+  const blockError = !!(error && showInlineError) && (
+    <span className="form-text text-danger">{errorMessage}</span>
+  );
+  const blockHelp = !!help && (
+    <span className={classnames('form-text', helpClassName || 'text-muted')}>
+      {help}
+    </span>
+  );
 
   return (
     <div
@@ -35,7 +41,16 @@ export default function wrapField(
         required,
         row: grid
       })}
-      {...filterDOMProps(omit(props, ['checkboxes', 'inline', 'inputClassName', 'inputRef', 'rows', 'transform']))}
+      {...filterDOMProps(
+        omit(props, [
+          'checkboxes',
+          'inline',
+          'inputClassName',
+          'inputRef',
+          'rows',
+          'transform'
+        ])
+      )}
     >
       {label && (
         <label
@@ -53,7 +68,9 @@ export default function wrapField(
       )}
 
       {hasWrap && (
-        <div className={classnames(wrapClassName, gridClassName(grid, 'input'))}>
+        <div
+          className={classnames(wrapClassName, gridClassName(grid, 'input'))}
+        >
           {children}
           {blockHelp}
           {blockError}

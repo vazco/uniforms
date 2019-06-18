@@ -6,12 +6,16 @@ import noop from 'lodash/noop';
 import omit from 'lodash/omit';
 import set from 'lodash/set';
 
-import BaseForm from './BaseForm';
-import {__childContextTypesBuild} from './BaseForm';
-import {__childContextTypes} from './BaseForm';
+import BaseForm, {
+  __childContextTypes,
+  __childContextTypesBuild
+} from './BaseForm';
 
 const childContextTypes = __childContextTypesBuild(
-  merge({state: {validating: PropTypes.bool.isRequired}}, __childContextTypes)
+  merge(
+    { state: { validating: PropTypes.bool.isRequired } },
+    __childContextTypes
+  )
 );
 
 const Validated = parent =>
@@ -36,7 +40,8 @@ const Validated = parent =>
       onValidate: PropTypes.func.isRequired,
 
       validator: PropTypes.any,
-      validate: PropTypes.oneOf(['onChange', 'onChangeAfterSubmit', 'onSubmit']).isRequired
+      validate: PropTypes.oneOf(['onChange', 'onChangeAfterSubmit', 'onSubmit'])
+        .isRequired
     };
 
     static childContextTypes = {
@@ -53,11 +58,15 @@ const Validated = parent =>
         error: null,
         validate: false,
         validating: false,
-        validator: this.getChildContextSchema().getValidator(this.props.validator)
+        validator: this.getChildContextSchema().getValidator(
+          this.props.validator
+        )
       };
 
       this.onValidate = this.validate = this.onValidate.bind(this);
-      this.onValidateModel = this.validateModel = this.onValidateModel.bind(this);
+      this.onValidateModel = this.validateModel = this.onValidateModel.bind(
+        this
+      );
     }
 
     getChildContextError() {
@@ -73,22 +82,29 @@ const Validated = parent =>
     }
 
     getNativeFormProps() {
-      return omit(super.getNativeFormProps(), ['onValidate', 'validate', 'validator']);
+      return omit(super.getNativeFormProps(), [
+        'onValidate',
+        'validate',
+        'validator'
+      ]);
     }
 
-    componentWillReceiveProps({model, schema, validate, validator}) {
+    componentWillReceiveProps({ model, schema, validate, validator }) {
       super.componentWillReceiveProps(...arguments);
 
       if (this.props.schema !== schema || this.props.validator !== validator) {
         this.setState(
-          state => ({validator: state.bridge.getValidator(validator)}),
+          state => ({ validator: state.bridge.getValidator(validator) }),
           () => {
             if (shouldRevalidate(validate, this.state.validate)) {
               this.onValidate().catch(noop);
             }
           }
         );
-      } else if (!isEqual(this.props.model, model) && shouldRevalidate(validate, this.state.validate)) {
+      } else if (
+        !isEqual(this.props.model, model) &&
+        shouldRevalidate(validate, this.state.validate)
+      ) {
         this.onValidateModel(model).catch(noop);
       }
     }
@@ -107,7 +123,12 @@ const Validated = parent =>
     }
 
     __reset(state) {
-      return {...super.__reset(state), error: null, validate: false, validating: false};
+      return {
+        ...super.__reset(state),
+        error: null,
+        validate: false,
+        validating: false
+      };
     }
 
     onSubmit(event) {
@@ -118,11 +139,11 @@ const Validated = parent =>
 
       const promise = new Promise((resolve, reject) => {
         this.setState(
-          () => ({submitting: true, validate: true}),
+          () => ({ submitting: true, validate: true }),
           () => {
             this.onValidate().then(() => {
               super.onSubmit().then(resolve, error => {
-                this.setState({error});
+                this.setState({ error });
                 reject(error);
               });
             }, reject);
@@ -137,7 +158,9 @@ const Validated = parent =>
           // It can be already unmounted.
           if (this.mounted)
             // If validation fails, or `super.onSubmit` doesn't touch `submitting`, we need to reset it.
-            this.setState(state => (state.submitting ? {submitting: false} : null));
+            this.setState(state =>
+              state.submitting ? { submitting: false } : null
+            );
         });
 
       return promise;
@@ -162,12 +185,15 @@ const Validated = parent =>
         catched = error;
       }
 
-      this.setState({validating: true});
+      this.setState({ validating: true });
       return new Promise((resolve, reject) => {
         this.props.onValidate(model, catched, (error = catched) => {
           // Do not copy error from props to state.
           this.setState(
-            () => ({error: error === this.props.error ? null : error, validating: false}),
+            () => ({
+              error: error === this.props.error ? null : error,
+              validating: false
+            }),
             () => {
               if (error) {
                 reject(error);
@@ -182,7 +208,9 @@ const Validated = parent =>
   };
 
 function shouldRevalidate(inProps, inState) {
-  return inProps === 'onChange' || (inProps === 'onChangeAfterSubmit' && inState);
+  return (
+    inProps === 'onChange' || (inProps === 'onChangeAfterSubmit' && inState)
+  );
 }
 
 export default Validated(BaseForm);

@@ -1,10 +1,10 @@
 import React from 'react';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 import BaseField from 'uniforms/BaseField';
 import nothing from 'uniforms/nothing';
 import randomIds from 'uniforms/randomIds';
-import {SimpleSchemaBridge} from 'uniforms-bridge-simple-schema';
+import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
 
 jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
@@ -25,9 +25,9 @@ describe('BaseField', () => {
     }
   }
 
-  const error1 = {details: [{name: 'a'}, {name: 'i'}]};
-  const error2 = {details: [{name: 'b'}]};
-  const model = {a: {b: {c: 'example'}}};
+  const error1 = { details: [{ name: 'a' }, { name: 'i' }] };
+  const error2 = { details: [{ name: 'b' }] };
+  const model = { a: { b: { c: 'example' } } };
   const onChange = jest.fn();
   const randomId = randomIds();
   const state = {
@@ -46,22 +46,22 @@ describe('BaseField', () => {
       name = name.replace(/\d+/g, '$');
 
       return {
-        a: {type: Object, label: name},
-        'a.b': {type: Object, label: name},
-        'a.b.c': {type: String, label: name},
-        b: {type: String},
-        d: {type: String, defaultValue: 'D'},
-        e: {type: String, allowedValues: ['E']},
-        f: {type: Number, min: 42},
-        g: {type: Number, max: 42},
-        h: {type: Number},
-        i: {type: Date},
-        j: {type: Array, minCount: 3},
-        'j.$': {type: String},
-        k: {type: Array},
-        'k.$': {type: String},
-        l: {type: String, uniforms: {label: false}},
-        m: {type: String, uniforms: {placeholder: false}}
+        a: { type: Object, label: name },
+        'a.b': { type: Object, label: name },
+        'a.b.c': { type: String, label: name },
+        b: { type: String },
+        d: { type: String, defaultValue: 'D' },
+        e: { type: String, allowedValues: ['E'] },
+        f: { type: Number, min: 42 },
+        g: { type: Number, max: 42 },
+        h: { type: Number },
+        i: { type: Date },
+        j: { type: Array, minCount: 3 },
+        'j.$': { type: String },
+        k: { type: Array },
+        'k.$': { type: String },
+        l: { type: String, uniforms: { label: false } },
+        m: { type: String, uniforms: { placeholder: false } }
       }[name];
     },
 
@@ -81,16 +81,31 @@ describe('BaseField', () => {
     validator() {}
   });
 
-  const _context = context => ({context: {uniforms: {...reactContextBase, ...context}}});
-  const reactContextBase = {error: error1, model, name: [], randomId, schema, state, onChange, onSubmit() {}};
+  const _context = context => ({
+    context: { uniforms: { ...reactContextBase, ...context } }
+  });
+  const reactContextBase = {
+    error: error1,
+    model,
+    name: [],
+    randomId,
+    schema,
+    state,
+    onChange,
+    onSubmit() {}
+  };
   const reactContext1 = _context({});
-  const reactContext2 = _context({error: error2});
-  const reactContext3 = _context({error: {...error2}});
-  const reactContext4 = _context({name: ['a']});
-  const reactContext5 = _context({schema: Object.create(schema)});
-  const reactContext6 = _context({state: {...reactContextBase.state, changedMap: {a: {}}}});
-  const reactContext7 = _context({model: {a: {b: {c: 'example 2'}}}});
-  const reactContext8 = _context({state: {...reactContextBase.state, disabled: true}});
+  const reactContext2 = _context({ error: error2 });
+  const reactContext3 = _context({ error: { ...error2 } });
+  const reactContext4 = _context({ name: ['a'] });
+  const reactContext5 = _context({ schema: Object.create(schema) });
+  const reactContext6 = _context({
+    state: { ...reactContextBase.state, changedMap: { a: {} } }
+  });
+  const reactContext7 = _context({ model: { a: { b: { c: 'example 2' } } } });
+  const reactContext8 = _context({
+    state: { ...reactContextBase.state, disabled: true }
+  });
 
   afterEach(() => {
     onChange.mockReset();
@@ -115,7 +130,10 @@ describe('BaseField', () => {
 
     it('have correct `name`', () => {
       expect(context.uniforms).toHaveProperty('name', expect.any(Array));
-      expect(context.uniforms).toHaveProperty('name', expect.objectContaining({0: 'a'}));
+      expect(context.uniforms).toHaveProperty(
+        'name',
+        expect.objectContaining({ 0: 'a' })
+      );
     });
 
     it('have correct `schema`', () => {
@@ -144,15 +162,15 @@ describe('BaseField', () => {
       .props();
 
     it('calls `onChange` once', () => {
-      props.onChange({b: 1});
+      props.onChange({ b: 1 });
 
       expect(onChange).toHaveBeenCalledTimes(1);
     });
 
     it('calls `onChange` with correct name and value', () => {
-      props.onChange({b: 1});
+      props.onChange({ b: 1 });
 
-      expect(onChange).toHaveBeenLastCalledWith('a', {b: 1});
+      expect(onChange).toHaveBeenLastCalledWith('a', { b: 1 });
     });
 
     it('calls `onChange` with correct name and value (foreign field)', () => {
@@ -277,7 +295,9 @@ describe('BaseField', () => {
 
   describe('when rendered with invalid `name`', () => {
     it('throws correct error', () => {
-      const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+      const spy = jest
+        .spyOn(global.console, 'error')
+        .mockImplementation(() => {});
 
       expect(() => mount(<TestField name="field" />, reactContext1)).toThrow(
         Error,
@@ -310,7 +330,10 @@ describe('BaseField', () => {
     });
 
     it('have correct `label` (falsy value)', () => {
-      const wrapper = mount(<TestField name="a" label={false} />, reactContext1);
+      const wrapper = mount(
+        <TestField name="a" label={false} />,
+        reactContext1
+      );
 
       expect(wrapper.find(PropsComponent).props()).toHaveProperty('label', '');
     });
@@ -324,7 +347,10 @@ describe('BaseField', () => {
     it('have correct `label` (null)', () => {
       const wrapper = mount(<TestField name="a" label={null} />, reactContext1);
 
-      expect(wrapper.find(PropsComponent).props()).toHaveProperty('label', null);
+      expect(wrapper.find(PropsComponent).props()).toHaveProperty(
+        'label',
+        null
+      );
     });
 
     it('have correct `label` (string)', () => {
@@ -338,39 +364,64 @@ describe('BaseField', () => {
     it('have correct `placeholder` (true)', () => {
       const wrapper = mount(<TestField name="a" placeholder />, reactContext1);
 
-      expect(wrapper.find(PropsComponent).props()).toHaveProperty('placeholder', 'a');
+      expect(wrapper.find(PropsComponent).props()).toHaveProperty(
+        'placeholder',
+        'a'
+      );
     });
 
     it('have correct `placeholder` (true and falsy value in schema)', () => {
       const wrapper = mount(<TestField name="m" placeholder />, reactContext1);
 
-      expect(wrapper.find(PropsComponent).props()).toHaveProperty('placeholder', '');
+      expect(wrapper.find(PropsComponent).props()).toHaveProperty(
+        'placeholder',
+        ''
+      );
     });
 
     it('have correct `placeholder` (falsy value)', () => {
-      const wrapper = mount(<TestField name="a" placeholder={false} />, reactContext1);
+      const wrapper = mount(
+        <TestField name="a" placeholder={false} />,
+        reactContext1
+      );
 
-      expect(wrapper.find(PropsComponent).props()).toHaveProperty('placeholder', '');
+      expect(wrapper.find(PropsComponent).props()).toHaveProperty(
+        'placeholder',
+        ''
+      );
     });
 
     it('have correct `placeholder` (falsy value in schema)', () => {
       const wrapper = mount(<TestField name="m" />, reactContext1);
 
-      expect(wrapper.find(PropsComponent).props()).toHaveProperty('placeholder', '');
+      expect(wrapper.find(PropsComponent).props()).toHaveProperty(
+        'placeholder',
+        ''
+      );
     });
 
     it('have correct `placeholder` (string)', () => {
-      const wrapper = mount(<TestField name="a" placeholder="A" />, reactContext1);
+      const wrapper = mount(
+        <TestField name="a" placeholder="A" />,
+        reactContext1
+      );
 
-      expect(wrapper.find(PropsComponent).props()).toHaveProperty('placeholder', 'A');
+      expect(wrapper.find(PropsComponent).props()).toHaveProperty(
+        'placeholder',
+        'A'
+      );
     });
   });
 
   describe('when rendered without form', () => {
     it('should throw an error', () => {
-      const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+      const spy = jest
+        .spyOn(global.console, 'error')
+        .mockImplementation(() => {});
 
-      expect(() => mount(<TestField name="a" />)).toThrow('<TestField /> must be rendered within a form.');
+      expect(() => mount(<TestField name="a" />)).toThrow(
+        '<TestField /> must be rendered within a form.'
+      );
 
       spy.mockRestore();
     });
@@ -404,7 +455,7 @@ describe('BaseField', () => {
       const props1 = wrapper.find(PropsComponent).props();
       expect(props1).toHaveProperty('id', expect.any(String));
 
-      wrapper.setProps({name: 'e'});
+      wrapper.setProps({ name: 'e' });
 
       const props2 = wrapper.find(PropsComponent).props();
       expect(props2).toHaveProperty('id', props1.id);

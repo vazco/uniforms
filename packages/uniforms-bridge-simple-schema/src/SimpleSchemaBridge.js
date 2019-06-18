@@ -3,7 +3,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import invariant from 'invariant';
 import joinName from 'uniforms/joinName';
 
-import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 export default class SimpleSchemaBridge extends Bridge {
   constructor(schema) {
@@ -24,7 +24,13 @@ export default class SimpleSchemaBridge extends Bridge {
   }
 
   getError(name, error) {
-    return (error && error.details && error.details.find && error.details.find(error => error.name === name)) || null;
+    return (
+      (error &&
+        error.details &&
+        error.details.find &&
+        error.details.find(error => error.name === name)) ||
+      null
+    );
   }
 
   getErrorMessage(name, error) {
@@ -43,7 +49,12 @@ export default class SimpleSchemaBridge extends Bridge {
     if (error) {
       if (Array.isArray(error.details)) {
         return error.details.map(error =>
-          this.schema.messageForError(error.type, error.name, null, error.details && error.details.value)
+          this.schema.messageForError(
+            error.type,
+            error.name,
+            null,
+            error.details && error.details.value
+          )
         );
       }
 
@@ -88,15 +99,15 @@ export default class SimpleSchemaBridge extends Bridge {
   getProps(name, props = {}) {
     // Type should be omitted.
     // eslint-disable-next-line no-unused-vars, prefer-const
-    let {optional, type, uniforms, ...field} = this.getField(name);
+    let { optional, type, uniforms, ...field } = this.getField(name);
 
-    field = {...field, required: !optional};
+    field = { ...field, required: !optional };
 
     if (uniforms) {
       if (typeof uniforms === 'string' || typeof uniforms === 'function') {
-        field = {...field, component: uniforms};
+        field = { ...field, component: uniforms };
       } else {
-        field = {...field, ...uniforms};
+        field = { ...field, ...uniforms };
       }
     }
 
@@ -130,7 +141,8 @@ export default class SimpleSchemaBridge extends Bridge {
       } else {
         field = {
           ...field,
-          transform: value => options.find(option => option.value === value).label,
+          transform: value =>
+            options.find(option => option.value === value).label,
           allowedValues: options.map(option => option.value)
         };
       }
@@ -147,12 +159,12 @@ export default class SimpleSchemaBridge extends Bridge {
     return this.getField(name).type;
   }
 
-  getValidator(options = {clean: true}) {
+  getValidator(options = { clean: true }) {
     const validator = this.schema.validator(options);
 
     // Clean mutate its argument.
     if (options.clean) {
-      return model => validator(cloneDeep({...model}));
+      return model => validator(cloneDeep({ ...model }));
     }
 
     return validator;

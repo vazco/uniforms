@@ -8,7 +8,9 @@ const Text = props =>
   wrapField(
     props,
     <input
-      className={classnames(props.inputClassName, 'form-control', {'is-invalid': props.error})}
+      className={classnames(props.inputClassName, 'form-control', {
+        'is-invalid': props.error
+      })}
       disabled={props.disabled}
       id={props.id}
       name={props.name}
@@ -19,6 +21,6 @@ const Text = props =>
       value={props.value}
     />
   );
-Text.defaultProps = {type: 'text'};
+Text.defaultProps = { type: 'text' };
 
 export default connectField(Text);

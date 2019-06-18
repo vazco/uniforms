@@ -11,7 +11,16 @@ const xor = (item, array) => {
   return array.slice(0, index).concat(array.slice(index + 1));
 };
 
-const renderCheckboxes = ({allowedValues, disabled, fieldType, id, name, onChange, transform, value}) =>
+const renderCheckboxes = ({
+  allowedValues,
+  disabled,
+  fieldType,
+  id,
+  name,
+  onChange,
+  transform,
+  value
+}) =>
   allowedValues.map(item => (
     <div key={item}>
       <input
@@ -23,7 +32,9 @@ const renderCheckboxes = ({allowedValues, disabled, fieldType, id, name, onChang
         type="checkbox"
       />
 
-      <label htmlFor={`${id}-${item}`}>{transform ? transform(item) : item}</label>
+      <label htmlFor={`${id}-${item}`}>
+        {transform ? transform(item) : item}
+      </label>
     </div>
   ));
 const renderSelect = ({
@@ -81,7 +92,16 @@ const Select = ({
 
     {/* TODO: Better handling of these props. */}
     {checkboxes || fieldType === Array
-      ? renderCheckboxes({allowedValues, disabled, id, name, onChange, transform, value, fieldType})
+      ? renderCheckboxes({
+          allowedValues,
+          disabled,
+          id,
+          name,
+          onChange,
+          transform,
+          value,
+          fieldType
+        })
       : renderSelect({
           allowedValues,
           disabled,

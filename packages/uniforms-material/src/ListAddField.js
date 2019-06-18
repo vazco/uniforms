@@ -6,14 +6,27 @@ import cloneDeep from 'lodash/cloneDeep';
 import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
-const ListAdd = ({disabled, fullWidth, icon, margin, parent, value, variant, ...props}) => {
-  const limitNotReached = !disabled && !(parent.maxCount <= parent.value.length);
+const ListAdd = ({
+  disabled,
+  fullWidth,
+  icon,
+  margin,
+  parent,
+  value,
+  variant,
+  ...props
+}) => {
+  const limitNotReached =
+    !disabled && !(parent.maxCount <= parent.value.length);
 
   return (
     <FormControl fullWidth={!!fullWidth} margin={margin} variant={variant}>
       <IconButton
         disabled={!limitNotReached}
-        onClick={() => limitNotReached && parent.onChange(parent.value.concat([cloneDeep(value)]))}
+        onClick={() =>
+          limitNotReached &&
+          parent.onChange(parent.value.concat([cloneDeep(value)]))
+        }
         {...filterDOMProps(props)}
       >
         {icon}
@@ -32,4 +45,7 @@ ListAdd.defaultProps = {
   margin: 'dense'
 };
 
-export default connectField(ListAdd, {includeParent: true, initialValue: false});
+export default connectField(ListAdd, {
+  includeParent: true,
+  initialValue: false
+});
