@@ -6,13 +6,18 @@ module.exports = {
   baseUrl: '/',
   url: 'https://uniforms.tools/',
   themeConfig: {
-    headerLinks: [
-      {label: 'Docs', url: 'docs/installation'},
-      {label: 'Playground', url: 'playground'},
-      {label: 'GitHub', href: 'https://github.com/vazco/uniforms'}
-    ]
+    navbar: {
+      links: [
+        {label: 'Docs', to: 'docs/installation'},
+        {label: 'Playground', to: 'playground'},
+        {label: 'GitHub', href: 'https://github.com/vazco/uniforms'}
+      ],
+      logo: {
+        alt: 'uniforms logo',
+        src: 'img/uniforms.svg'
+      }
+    }
   },
-  headerIcon: 'img/uniforms.svg',
   favicon: 'favicon.ico',
   presets: [
     [
