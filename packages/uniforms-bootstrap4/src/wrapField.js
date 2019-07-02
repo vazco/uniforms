@@ -16,6 +16,7 @@ export default function wrapField(
     helpClassName, // Help text class name.
     id,
     label,
+    labelClassName, // Label class name (String|Array[String]).
     required,
     showInlineError, // Show inline error message?
     wrapClassName, // Input wrapper class name.
@@ -60,7 +61,8 @@ export default function wrapField(
               'col-form-label': grid,
               'text-danger': error
             },
-            gridClassName(grid, 'label')
+            gridClassName(grid, 'label'),
+            labelClassName
           )}
         >
           {label}
