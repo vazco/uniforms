@@ -59,7 +59,11 @@ export default function wrapField(
       {label && (
         <label
           htmlFor={id}
-          className={classnames('control-label', gridClassName(grid, 'label'), labelClassName)}
+          className={classnames(
+            'control-label',
+            gridClassName(grid, 'label'),
+            labelClassName
+          )}
         >
           {label}
         </label>
