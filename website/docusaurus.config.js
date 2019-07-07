@@ -8,7 +8,7 @@ module.exports = {
   themeConfig: {
     navbar: {
       links: [
-        { label: 'Docs', to: 'docs/installation' },
+        { label: 'Docs', to: 'docs/introduction' },
         { label: 'Playground', to: 'playground' },
         { label: 'GitHub', href: 'https://github.com/vazco/uniforms' }
       ],

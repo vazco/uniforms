@@ -1,5 +1,9 @@
 {
   "docs": {
+    "Introduction": [
+      "introduction",
+      "introduction-example"
+    ],
     "Getting Started": [
       "installation",
       "quick-start",
