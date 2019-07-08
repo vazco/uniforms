@@ -23,5 +23,5 @@ deploy:
   local-dir: website/build
   fqdn: uniforms.tools
   on:
-    all_branches: master
+    branch: master
     node: 12
