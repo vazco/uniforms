@@ -108,6 +108,13 @@ import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme packag
   grid="4" // 'col-4-sm' on label, 'col-8-sm' on input
   grid={{md: 5}} // 'col-5-md' on label, 'col-7-md' on input
   grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
+  // label className.
+  //   A custom className for the field's label
+  // Available in:
+  //   bootstrap3
+  //   bootstrap4
+  labelClassName="a b c" // You can either specify them as a single string
+  labelClassName=[ 'a', 'b', 'c' ] // or as an array of strings
   // Field layout
   //  The layout of label. You can set span and/or offset.
   // Available in:
@@ -198,6 +205,13 @@ import DateField from 'uniforms-unstyled/DateField'; // Choose your theme packag
   grid="4" // 'col-4-sm' on label, 'col-8-sm' on input
   grid={{md: 5}} // 'col-5-md' on label, 'col-7-md' on input
   grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
+  // label className.
+  //   A custom className for the field's label
+  // Available in:
+  //   bootstrap3
+  //   bootstrap4
+  labelClassName="a b c" // You can either specify them as a single string
+  labelClassName=[ 'a', 'b', 'c' ] // or as an array of strings
   // Field layout
   //  The layout of label. You can set span and/or offset.
   // Available in:
@@ -450,6 +464,13 @@ import LongTextField from 'uniforms-unstyled/LongTextField'; // Choose your them
   //   bootstrap3
   //   bootstrap4
   help="Need help?"
+  // label className.
+  //   A custom className for the field's label
+  // Available in:
+  //   bootstrap3
+  //   bootstrap4
+  labelClassName="a b c" // You can either specify them as a single string
+  labelClassName=[ 'a', 'b', 'c' ] // or as an array of strings
   // Field layout
   //  The layout of label. You can set span and/or offset.
   // Available in:
@@ -566,6 +587,13 @@ import NumField from 'uniforms-unstyled/NumField'; // Choose your theme package.
   grid="4" // 'col-4-sm' on label, 'col-8-sm' on input
   grid={{md: 5}} // 'col-5-md' on label, 'col-7-md' on input
   grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
+  // label className.
+  //   A custom className for the field's label
+  // Available in:
+  //   bootstrap3
+  //   bootstrap4
+  labelClassName="a b c" // You can either specify them as a single string
+  labelClassName=[ 'a', 'b', 'c' ] // or as an array of strings
   // Field layout
   //  The layout of label. You can set span and/or offset.
   // Available in:
@@ -657,6 +685,13 @@ import RadioField from 'uniforms-unstyled/RadioField'; // Choose your theme pack
   // Array of allowed values.
   //   By default, those are extracted from your schema.
   allowedValues={[value1, value2 /* ... */]}
+  // label className.
+  //   A custom className for the field's label
+  // Available in:
+  //   bootstrap3
+  //   bootstrap4
+  labelClassName="a b c" // You can either specify them as a single string
+  labelClassName=[ 'a', 'b', 'c' ] // or as an array of strings
   // Field layout
   //  The layout of label. You can set span and/or offset.
   // Available in:
@@ -711,6 +746,13 @@ import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme pa
   // Turn on checkbox/radio mode.
   //   It's always true in mutltiple (i.e. fieldType === Array) mode.
   checkboxes={true}
+  // label className.
+  //   A custom className for the field's label
+  // Available in:
+  //   bootstrap3
+  //   bootstrap4
+  labelClassName="a b c" // You can either specify them as a single string
+  labelClassName=[ 'a', 'b', 'c' ] // or as an array of strings
   // Field layout
   //  The layout of label. You can set span and/or offset.
   // Available in:
@@ -803,6 +845,13 @@ import TextField from 'uniforms-unstyled/TextField'; // Choose your theme packag
   grid="4" // 'col-4-sm' on label, 'col-8-sm' on input
   grid={{md: 5}} // 'col-5-md' on label, 'col-7-md' on input
   grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
+  // label className.
+  //   A custom className for the field's label
+  // Available in:
+  //   bootstrap3
+  //   bootstrap4
+  labelClassName="a b c" // You can either specify them as a single string
+  labelClassName=[ 'a', 'b', 'c' ] // or as an array of strings
   // Field layout
   //  The layout of label. You can set span and/or offset.
   // Available in:
