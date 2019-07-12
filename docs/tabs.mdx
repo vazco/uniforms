@@ -1,5 +1,13 @@
-import Tabs from './Tabs';
+import {TabsSelect} from './components/Tabs';
+import tabs from './components/tabsData';
 
 # This is Tabs!
 
-<Tabs title={'Test tabsów'} />
+<TabsSelect tabs={tabs}>
+  {({name, content}) => (
+    <>
+      {content}
+      <h3>{name}</h3>
+    </>
+  )}
+</TabsSelect>
