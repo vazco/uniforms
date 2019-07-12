@@ -6,21 +6,22 @@ title: 'Customizing your form'
 import FormContainer from './components/FormContainer.js';
 import GuestForm2 from './components/GuestForm2.js';
 import GuestForm3 from './components/GuestForm3.js';
+import GuestForm4 from './components/GuestForm4.js';
 
 Great! Now that we have our form up and running, it's time to think about how we can customize it and adjust to our needs.
 
 Let's say we would like to add a heading "IT meeting guest questionnaire" and change the order of the fields - the field asking for a guest's last name should come first.
 We also want to politely ask for the work experience.
 
-How can we do it? That's where Autofield and AutoFields components come into action.
+How can we do it? That's where `Autofield` and `AutoFields` components come into action.
 
-**Note:** Both AutoFields and AutoField components generate, no more and no less, only form fields.
-That means we have to manually add the submit button and the error messages.
+**Note:** Both `AutoFields` and `AutoField` components generate, no more and no less, only form fields.
+That means we have to manually add the submit button (`SubmitField`) and the error messages (`ErrorsField`).
 
 ### Adding heading to the form
 
-If you need to add heading to your form, using AutoFields seems to be a perfect solution.
-AutoFields will automatically render form fields based on the schema within the AutoForm.
+If you need to add heading to your form, using `AutoFields` seems to be a perfect solution.
+`AutoFields` will automatically render form fields based on the schema within the `AutoForm`.
 
 ```js
 import AutoFields from 'uniforms-unstyled/AutoFields';
@@ -49,10 +50,12 @@ export default function GuestForm() {
 
 ### Changing the order of the fields
 
-If you need to reorder your fields, AutoField is your best friend.
-AutoField will automatically render any field based on the field name provided in the schema.
+If you need to reorder your fields, `AutoField` is your best friend.
+`AutoField` will automatically render any field based on the field name provided in the schema.
 Using AutoFields allowes you to freely manipulate your form's layout.
-Here we've changed the order of the lastName and firstName field and added a polite question if the people filling the form would like to share with us their work experience.
+
+Here we've changed the order of the `lastName` and `firstName` field and added a polite question if the people
+filling the form would like to share with us their work experience.
 
 ```js
 import AutoField from 'uniforms-unstyled/AutoField';
@@ -80,4 +83,37 @@ export default function GuestForm() {
 
 <FormContainer>
   <GuestForm3 />
+</FormContainer>
+
+### Changing the order of the error messages
+
+Similarly to the fields, we can also change the order of the displayed errors.
+Instead of using the `ErrorsField` component, we can use the `ErrorField` and just place it directly where want in our form.
+
+```js
+import AutoField from 'uniforms-unstyled/AutoField';
+import AutoForm from 'uniforms-semantic/AutoForm';
+import ErrorsField from 'uniforms-unstyled/ErrorsField';
+import React from 'react';
+import SubmitField from 'uniforms-unstyled/SubmitField';
+
+import GuestSchema from './GuestSchema';
+
+export default function GuestForm() {
+  return (
+    <AutoForm schema={GuestSchema} onSubmit={console.log}>
+      <h4>IT meeting guest questionnaire</h4>
+      <AutoField name="lastName" />
+      <AutoField name="firstName" />
+      <span>Do you want to share your work experience with us?</span>
+      <AutoField name="workExperience" />
+      <ErrorsField />
+      <SubmitField />
+    </AutoForm>
+  );
+}
+```
+
+<FormContainer>
+  <GuestForm4 />
 </FormContainer>
