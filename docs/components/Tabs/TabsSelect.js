@@ -1,41 +1,34 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-class TabsSelect extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeKey: 0
-    };
-    this.handleSelect = this.handleSelect.bind(this);
-  }
+function TabsSelect({ tabs, children }) {
+  const [state, setState] = useState({ activeKey: 0 });
 
-  handleSelect(key) {
+  function handleSelect(key) {
     return () => {
-      this.setState({
+      setState({
         activeKey: key
       });
     };
   }
 
-  render() {
-    const { tabs, children } = this.props;
-    const { activeKey } = this.state;
-    return (
-      <>
+  const { activeKey } = state;
+  return (
+    <>
+      <div className={'Tabs'}>
         {tabs.map(({ name }, key) => (
           <span
-            className={`TabSelect ${activeKey === key ? 'active' : ''}`}
+            className={`TabsSelect ${activeKey === key ? 'active' : ''}`}
             key={name}
-            onClick={this.handleSelect(key)}
+            onClick={handleSelect(key)}
           >
             {name}
           </span>
         ))}
-        {children(tabs[activeKey])}
-      </>
-    );
-  }
+      </div>
+      <div>{children(tabs[activeKey])}</div>
+    </>
+  );
 }
 
 TabsSelect.propTypes = {
@@ -44,7 +37,7 @@ TabsSelect.propTypes = {
       content: PropTypes.element,
       name: PropTypes.string
     })
-  )
+  ).isRequired
 };
 
 export default TabsSelect;

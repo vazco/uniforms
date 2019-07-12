@@ -1,13 +1,19 @@
+---
+id: tabs
+title: Test Tabs
+---
+
 import {TabsSelect} from './components/Tabs';
-import tabs from './components/tabsData';
+import JSONMdx from './tutorials-basic-uniforms-usage.mdx';
 
-# This is Tabs!
+# This is MDX file with dynamic tabs!
 
-<TabsSelect tabs={tabs}>
-  {({name, content}) => (
-    <>
-      {content}
-      <h3>{name}</h3>
-    </>
-  )}
+<TabsSelect
+  tabs={[
+    {name: 'GraphQL', content: <h1>GraphQL</h1>},
+    {name: 'JSON', content: <JSONMdx />},
+    {name: 'SimpleSchema', content: <h1>SimpleSchema</h1>}
+  ]}
+>
+  {({name, content}) => content}
 </TabsSelect>
