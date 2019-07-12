@@ -1,0 +1,14 @@
+.Tabs {
+    display: flex;
+    margin-bottom: 1.5em;
+}
+
+.TabsSelect {
+    border: 1px solid red;
+    padding: 1em;
+    margin-right: 0.5em;
+}
+
+.TabsSelect.active {
+    border-color: aqua;
+}
