@@ -12,10 +12,11 @@ const schema = {
     lastName: {
       type: 'string'
     },
-    codingSince: {
-      description: 'Age in years',
+    workExperience: {
+      description: 'Work experience in years',
       type: 'integer',
-      minimum: 5
+      minimum: 0,
+      maximum: 100
     }
   },
   required: ['firstName', 'lastName']
