@@ -50,13 +50,21 @@ export default class JSONSchemaBridge extends Bridge {
   }
 
   getError(name, error) {
+    const nameParts = joinName(null, name);
+    const rootName = joinName(nameParts.slice(0, -1));
+    const baseName = nameParts[nameParts.length - 1];
+
     return (
       error &&
       error.details &&
       error.details.find &&
-      error.details.find(
-        detail => detail.dataPath && detail.dataPath.substring(1) === name
-      )
+      error.details.find(detail => {
+        const path = detail.dataPath.substring(1);
+        return (
+          name === path ||
+          (rootName === path && baseName === detail.params.missingProperty)
+        );
+      })
     );
   }
 
