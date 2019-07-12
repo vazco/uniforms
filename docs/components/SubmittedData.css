@@ -1,0 +1,9 @@
+.SubmittedData {
+  display: flex;
+  align-items: center;
+}
+
+.SubmittedData pre {
+  margin-left: 1em;
+  flex: 2;
+}
