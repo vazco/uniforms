@@ -1,0 +1,57 @@
+---
+id: 'tutorials-using-predefined-fields'
+title: 'Using predefined fields'
+---
+
+import FormContainer from './components/FormContainer.js';
+import GuestForm5 from './components/GuestForm5.js';
+
+We already know something about our guests, but it's not that much really, so let's ask them a few more things!
+In order to provide the best content at our meeting, we want to know what's the profession of our participants.
+It would be also a decent idea to gather their visions and opinions.
+
+To do so, we have to modify our schema.
+
+TODO dodac do schemy `notes` i `profession`. pokazac jak zrobic ze zwyklego TextFielda(z auto!) explicite long textfield i uzycie selecta w formularzu. doadtkowo zrobic to samo przy pomocy schemy.
+
+Sometimes we can't rely on the `AutoField` algorithm and have to directly provide our desired field.
+We can use predefined [fields](api-fields.md) provided by uniforms.
+
+### Replacing `AutoForm` fields
+
+In the snippet below we've replaced generic `AutoField` components from the prevoius chapter with the specialized ones: `TextField` and `NumField`.
+
+```js
+import AutoForm from 'uniforms-unstyled/AutoForm';
+import ErrorField from 'uniforms-unstyled/ErrorField';
+import NumField from 'uniforms-unstyled/NumField';
+import React from 'react';
+import SubmitField from 'uniforms-unstyled/SubmitField';
+import TextField from 'uniforms-unstyled/TextField';
+
+import GuestSchema from './GuestSchema';
+
+export default function GuestForm() {
+  return (
+    <AutoForm schema={GuestSchema} onSubmit={onSubmit}>
+      <h4>IT meeting guest questionnaire</h4>
+      <TextField name="lastName" />
+      <ErrorField name="lastName" />
+      <TextField name="firstName" />
+      <ErrorField name="firstName" />
+      <span>Do you want to share your work experience with us?</span>
+      <NumField name="workExperience" />
+      <ErrorField name="workExperience" />
+      <SubmitField />
+    </AutoForm>
+  );
+}
+```
+
+As you can see the result form remains very the same:
+
+<FormContainer>
+  <GuestForm5 />
+</FormContainer>
+
+### Manipulating the schema
