@@ -3,6 +3,9 @@ id: tutorials-basic-uniforms-usage
 title: Basic uniforms usage
 ---
 
+import FormContainer from './components/FormContainer.js';
+import GuestForm from './components/GuestForm.js';
+
 (from the idea, through the schema, to the form| customizing form layout| using connect field to manage own fields)
 
 Imagine that we're preparing an IT meeting and we want to collect the first and last name of the guests. We also want to know how old they were when they started coding, but that information is not necessary. Let's prepare a form for the guests, so they can sign up for our event!
@@ -147,6 +150,6 @@ export default function GuestForm() {
 
 And that's it! AutoForm will generate a complete form with labeled fields, errors list (if any) and a submit button. Also, it will take care of validation and handle model changes.
 
-import GuestForm from './components/GuestForm.js';
-
-<GuestForm />
+<FormContainer>
+  <GuestForm />
+</FormContainer>
