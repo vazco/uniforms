@@ -4,7 +4,7 @@
     "Getting Started": ["installation"],
     "Tutorials": [
       "tutorials-basic-uniforms-usage",
-      "tutorials-customizing-your-form",
+      "tutorials-customizing-your-form-layout",
       "tutorials-creating-custom-field",
       "tutorials-using-composite-field"
     ],
