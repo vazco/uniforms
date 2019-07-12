@@ -1,7 +1,9 @@
 ---
-id: introduction-example
-title: Example
+id: tutorials-basic-uniforms-usage
+title: Basic uniforms usage
 ---
+
+(from the idea, through the schema, to the form| customizing form layout| using connect field to manage own fields)
 
 Imagine that we're preparing an IT meeting and we want to collect the first and last name of the guests. We also want to know how old they were when they started coding, but that information is not necessary. Let's prepare a form for the guests, so they can sign up for our event!
 

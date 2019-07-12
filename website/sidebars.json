@@ -1,32 +1,21 @@
 {
   "docs": {
-    "Introduction": [
-      "introduction",
-      "introduction-example"
+    "Introduction": ["introduction"],
+    "Getting Started": ["installation"],
+    "Tutorials": [
+      "tutorials-basic-uniforms-usage",
+      "tutorials-creating-custom-field",
+      "tutorials-using-composite-field"
     ],
-    "Getting Started": [
-      "installation",
-      "quick-start",
-      "overview",
-      "examples"
+    "Examples": ["examples-custom-fields", "examples-custom-bridge", "examples-custom-form"],
+    "API Reference": ["api-forms", "api-fields", "api-bridges", "api-helpers"],
+    "Under The Hood": [
+      "uth-forms-concept",
+      "uth-forms-features",
+      "uth-autofield-algorithm",
+      "uth-context-data",
+      "uth-bridge"
     ],
-    "Bridges": [
-      "bridges-concept",
-      "bridges-graphql",
-      "bridges-json-schema",
-      "bridges-simple-schema",
-      "bridges-simple-schema-2"
-    ],
-    "Uncategorized": [
-      "uncategorized-context-data",
-      "uncategorized-fields",
-      "uncategorized-forms"
-    ],
-    "API Reference": [
-      "api-bridges",
-      "api-fields",
-      "api-forms",
-      "api-helpers"
-    ]
+    "FAQ": ["faq"]
   }
 }

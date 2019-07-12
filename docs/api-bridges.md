@@ -3,6 +3,27 @@ id: api-bridges
 title: Bridges
 ---
 
+## Concept
+
+To make use of any schema, uniforms have to create a _bridge_ of it - a unified schema mapper. A bridge is (preferably) a subclass of `Bridge`, implementing static `check(schema)` method and these instance methods:
+
+- `getError(name, error)`
+- `getErrorMessage(name, error)`
+- `getErrorMessages(error)`
+- `getField(name)`
+- `getInitialValue(name, props)`
+- `getProps(name, props)`
+- `getSubfields(name)`
+- `getType(name)`
+- `getValidator(options)`
+
+Currently available bridges:
+
+- `GraphQLBridge` in `uniforms-bridge-graphql`
+- `JSONSchemaBridge` in `uniforms-bridge-json-schema`
+- `SimpleSchema2Bridge` in `uniforms-bridge-simple-schema-2`
+- `SimpleSchemaBridge` in `uniforms-bridge-simple-schema`
+
 ## `Bridge`
 
 ```js
@@ -73,21 +94,21 @@ import {buildASTSchema} from 'graphql';
 import {parse} from 'graphql';
 
 const schema = `
-  type Author {
-    id: API-Bridges-       String!
-    firstName: String
-    lastName:  String
-  }
+    type Author {
+        id:        String!
+        firstName: String
+        lastName:  String
+    }
 
-  type Post {
-    id: API-Bridges-    Int!
-    author: Author!
-    title:  String
-    votes:  Int
-  }
+    type Post {
+        id:     Int!
+        author: Author!
+        title:  String
+        votes:  Int
+    }
 
-  # This is required by buildASTSchema
-  type Query { anything: ID }
+    # This is required by buildASTSchema
+    type Query { anything: ID }
 `;
 
 const schemaType = buildASTSchema(parse(schema)).getType('Post');
@@ -115,31 +136,94 @@ const schemaValidator = model => {
 };
 
 const bridge = new GraphQLBridge(schemaType, schemaValidator, schemaData);
+
+// Later...
+
+<ValidatedForm schema={bridge} />;
 ```
 
 ## `JSONSchemaBridge`
 
 ```js
+import Ajv from 'ajv';
 import {JSONSchemaBridge} from 'uniforms-bridge-json-schema';
 
-// SimpleSchema bridge.
+const schema = {
+  title: 'Person',
+  type: 'object',
+  properties: {
+    firstName: {
+      type: 'string'
+    },
+    lastName: {
+      type: 'string'
+    },
+    age: {
+      description: 'Age in years',
+      type: 'integer',
+      minimum: 0
+    }
+  },
+  required: ['firstName', 'lastName']
+};
+
+const validator = new Ajv({allErrors: true, useDefaults: true}).compile(schema);
+
+const schemaValidator = model => {
+  validator(model);
+
+  if (validator.errors && validator.errors.length) {
+    throw {details: validator.errors};
+  }
+};
+
 const bridge = new JSONSchemaBridge(schema, schemaValidator);
+
+// Later...
+
+<ValidatedForm schema={bridge} />;
 ```
 
 ## `SimpleSchema2Bridge`
 
-```js
-import {SimpleSchema2Bridge} from 'uniforms-bridge-simple-schema-2';
+**Note:** remember to import `uniforms-bridge-simple-schema-2` first.
 
-// SimpleSchema@2 bridge.
-const bridge = new SimpleSchema2Bridge(simpleSchema2Instance);
+```js
+import SimpleSchema from 'simpl-schema';
+
+const PersonSchema = new SimpleSchema({
+  // ...
+
+  aboutMe: {
+    type: String,
+    uniforms: MyText, // Component...
+    uniforms: {
+      // ...or object...
+      component: MyText, // ...with component...
+      propA: 1 // ...and/or extra props.
+    }
+  }
+});
 ```
 
 ## `SimpleSchemaBridge`
 
-```js
-import {SimpleSchemaBridge} from 'uniforms-bridge-simple-schema';
+**Note:** remember to import `uniforms-bridge-simple-schema` first.
 
-// SimpleSchema bridge.
-const bridge = new SimpleSchemaBridge(simpleSchemaInstance);
+```js
+import {SimpleSchema} from 'aldeed:simple-schema';
+
+const PersonSchema = new SimpleSchema({
+  // ...
+
+  aboutMe: {
+    type: String,
+    uniforms: MyText, // Component...
+    uniforms: {
+      // ...or object...
+      component: MyText, // ...with component...
+      propA: 1 // ...and/or extra props.
+    }
+  }
+});
 ```

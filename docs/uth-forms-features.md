@@ -1,6 +1,6 @@
 ---
-id: uncategorized-forms
-title: Forms
+id: 'uth-forms-features'
+title: 'Forms features'
 ---
 
 ## Asynchronous validation

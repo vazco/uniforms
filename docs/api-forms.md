@@ -3,6 +3,18 @@ id: api-forms
 title: Forms
 ---
 
+### Forms components
+
+Most of the time you'll be using either `AutoForm` or `ValidatedForm`, but there are also other form components (rather low-level ones) with different capabilities.
+
+|      Component       |     Self-generated?      |      Self-managed?       |     Self-validated?      |
+| :------------------: | :----------------------: | :----------------------: | :----------------------: |
+|      `AutoForm`      |    :heavy_check_mark:    |    :heavy_check_mark:    |    :heavy_check_mark:    |
+|      `BaseForm`      | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_multiplication_x: |
+|     `QuickForm`      |    :heavy_check_mark:    | :heavy_multiplication_x: | :heavy_multiplication_x: |
+|   `ValidatedForm`    | :heavy_multiplication_x: | :heavy_multiplication_x: |    :heavy_check_mark:    |
+| `ValidatedQuickForm` |    :heavy_check_mark:    | :heavy_multiplication_x: |    :heavy_check_mark:    |
+
 ## `AutoForm`
 
 ```js
