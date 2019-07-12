@@ -6,8 +6,7 @@
       "tutorials-basic-uniforms-usage",
       "tutorials-customizing-your-form-layout",
       "tutorials-using-predefined-fields",
-      "tutorials-creating-custom-field",
-      "tutorials-using-composite-field"
+      "tutorials-creating-custom-field"
     ],
     "Examples": ["examples-custom-fields", "examples-custom-bridge", "examples-custom-form"],
     "API Reference": ["api-forms", "api-fields", "api-bridges", "api-helpers"],
