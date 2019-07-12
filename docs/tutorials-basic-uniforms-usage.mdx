@@ -8,7 +8,9 @@ import GuestForm from './components/GuestForm.js';
 
 (from the idea, through the schema, to the form| customizing form layout| using connect field to manage own fields)
 
-Imagine that we're preparing an IT meeting and we want to collect the first and last name of the guests. We also want to know how old they were when they started coding, but that information is not necessary. Let's prepare a form for the guests, so they can sign up for our event!
+Imagine that we're preparing an IT meeting and we want to collect the first and last name of the guests.
+We also want to know how old they were when they started coding, but that information is not necessary.
+Let's prepare a form for the guests, so they can sign up for our event!
 
 ### 1. Install the required packages
 
@@ -26,7 +28,8 @@ npm install uniforms-bridge-json-schema
 npm install uniforms-semantic
 ```
 
-**Note**: When using a themed package, remember to include correct styles! If you are willing to run this example by yourself, have a read on [Semantic UI React's theme usage](https://react.semantic-ui.com/usage/#theme).
+**Note**: When using a themed package, remember to include correct styles! If you are willing to run this example by yourself,
+have a read on [Semantic UI React's theme usage](https://react.semantic-ui.com/usage/#theme).
 
 ### 2. Start by defining a schema
 
@@ -54,11 +57,14 @@ const schema = {
 };
 ```
 
-As you can see, we've defined three properties - firstName and lastName, that are of string type, and workExperience, which is an integer, with a value between 0 and 100.
+As you can see, we've defined three properties - `firstName` and `lastName`, that are of string type, and `workExperience`,
+which is an integer, with a value between 0 and 100.
 
 ### 3. Then create the bridge
 
-Now that we have the schema, we can create the uniforms bridge of it, by using the corresponding uniforms schema-to-bridge package. Creating the bridge instance is necessary - without it uniforms would not be able to process form generation and validation. As we are using the JSONSchema, we have to import the uniforms-bridge-json-schema package.
+Now that we have the schema, we can create the uniforms bridge of it, by using the corresponding uniforms schema-to-bridge package.
+Creating the bridge instance is necessary - without it uniforms would not be able to process form generation and validation.
+As we are using the JSONSchema, we have to import the uniforms-bridge-json-schema package.
 
 ```js
 import {JSONSchemaBridge} from 'uniforms-bridge-json-schema';
@@ -70,7 +76,9 @@ Now you may think that we can simply do
 const bridge = new JSONSchemaBridge(schema); // wrong usage of the JSONSchemaBridge! you have to pass a validator
 ```
 
-and we'll be fine. However, **there's small caveat with using the JSONSchemaBridge**. Because of its simplicity, JSONSchema doesn't provide any validation checkers, so in order to properly validate our submitted data, we need to **manually define a validator**, and that is required by the uniforms JSONSchemaBrigde constructor.
+and we'll be fine. However, **there's small caveat with using the JSONSchemaBridge**.
+Because of its simplicity, JSONSchema doesn't provide any validation checkers, so in order to properly validate our submitted data,
+we need to **manually define a validator**, and that is required by the uniforms `JSONSchemaBrigde` constructor.
 
 To manually create the validator, we will use the [ajv](https://github.com/epoberezkin/ajv) package:
 
@@ -137,7 +145,8 @@ export default bridge;
 
 ### 4. Finally, use it in a form!
 
-Uniforms theme packages provide the AutoForm component, which is able to generate the form based on the given schema. All we have to do now is to pass the previously created GuestSchema to the AutoForm:
+Uniforms theme packages provide the `AutoForm` component, which is able to generate the form based on the given schema.
+All we have to do now is to pass the previously created GuestSchema to the `AutoForm`:
 
 ```js
 import AutoForm from 'uniforms-semantic/AutoForm';
@@ -150,7 +159,8 @@ export default function GuestForm() {
 }
 ```
 
-And that's it! AutoForm will generate a complete form with labeled fields, errors list (if any) and a submit button. Also, it will take care of validation and handle model changes.
+And that's it! `AutoForm` will generate a complete form with labeled fields, errors list (if any) and a submit button.
+Also, it will take care of validation and handle model changes.
 
 <FormContainer>
   <GuestForm />
