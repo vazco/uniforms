@@ -2,6 +2,7 @@
 
 - **Added:** Support for `labelClassName` in `uniforms-bootstrap3` and `uniforms-bootstrap4` themes. [\#548](https://github.com/vazco/uniforms/issues/548)
 - **Fixed:** Handling of `required` validation in `JSONSchemaBridge`. [\#554](https://github.com/vazco/uniforms/issues/554)
+- **Fixed:** Weird behaviour of `SelectField` with `checkboxes` in `uniforms-antd`. [\#549](https://github.com/vazco/uniforms/issues/549)
 
 ## [v2.1.0](https://github.com/vazco/uniforms/tree/v2.1.0) (2019-06-18)
 

@@ -8,39 +8,22 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 import wrapField from './wrapField';
 
 const renderCheckboxes = props =>
-  props.fieldType === Array ? (
-    <Checkbox.Group
-      disabled={props.disabled}
-      id={props.id}
-      name={props.name}
-      onChange={value => props.onChange(value)}
-      options={props.allowedValues.map(String)}
-      value={props.value.map(String).map(props.transform || String)}
-      {...filterDOMProps(props)}
-    />
-  ) : (
-    <Radio.Group
-      disabled={props.disabled}
-      name={props.name}
-      onChange={event => props.onChange(event.target.value)}
-      value={props.value}
-      {...filterDOMProps(props)}
-    >
-      {props.allowedValues.map(value => (
-        <Radio
-          key={value}
-          value={value}
-          style={{
-            display: 'block',
-            height: '30px',
-            lineHeight: '30px'
-          }}
-        >
-          {props.transform ? props.transform(value) : value}
-        </Radio>
-      ))}
-    </Radio.Group>
-  );
+  React.createElement((props.fieldType === Array ? Checkbox : Radio).Group, {
+    disabled: props.disabled,
+    id: props.id,
+    name: props.name,
+    onChange:
+      props.fieldType === Array
+        ? value => props.onChange(value)
+        : event => props.onChange(event.target.value),
+    options: props.allowedValues.map(value => ({
+      label: props.transform ? props.transform(value) : value,
+      value
+    })),
+    value: props.value,
+    ...filterDOMProps(props)
+  });
+
 const renderSelect = props => (
   <SelectAntD
     allowClear={!props.required}
@@ -63,6 +46,7 @@ const renderSelect = props => (
     ))}
   </SelectAntD>
 );
+
 const Select = ({ checkboxes, ...props }) =>
   wrapField(props, checkboxes ? renderCheckboxes(props) : renderSelect(props));
 export default connectField(Select);
