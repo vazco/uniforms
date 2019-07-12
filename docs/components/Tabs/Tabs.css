@@ -1,0 +1,8 @@
+.TabSelect {
+    border: 1px solid red;
+    padding: 5px;
+}
+
+.TabSelect.active {
+    border-color: aqua;
+}
