@@ -130,13 +130,45 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getError('age', { invalid: true })).not.toBeTruthy();
     });
 
-    it('works with correct error', () => {
-      expect(
-        bridge.getError('age', { details: [{ dataPath: '.age' }] })
-      ).toEqual({ dataPath: '.age' });
-      expect(
-        bridge.getError('age', { details: [{ dataPath: '.field' }] })
-      ).not.toBeTruthy();
+    it('works with correct error (data path)', () => {
+      const error = { details: [{ dataPath: '.x' }] };
+      expect(bridge.getError('x', error)).toEqual(error.details[0]);
+      expect(bridge.getError('y', error)).toEqual(undefined);
+    });
+
+    it('works with correct error (data path at root)', () => {
+      const error = {
+        details: [
+          {
+            dataPath: '',
+            keyword: 'required',
+            message: "should have required property 'x'",
+            params: { missingProperty: 'x' },
+            schemaPath: '#/required'
+          }
+        ]
+      };
+
+      expect(bridge.getError('x', error)).toEqual(error.details[0]);
+      expect(bridge.getError('y', error)).toEqual(undefined);
+    });
+
+    it('works with correct error (data path of parent)', () => {
+      const error = {
+        details: [
+          {
+            dataPath: '.x',
+            keyword: 'required',
+            message: "should have required property 'y'",
+            params: { missingProperty: 'y' },
+            schemaPath: '#/properties/x/required'
+          }
+        ]
+      };
+
+      expect(bridge.getError('x.x', error)).toEqual(undefined);
+      expect(bridge.getError('x.y', error)).toEqual(error.details[0]);
+      expect(bridge.getError('y.x', error)).toEqual(undefined);
     });
   });
 
