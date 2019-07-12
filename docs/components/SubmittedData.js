@@ -6,7 +6,7 @@ export default function SubmittedData({data}) {
   return (
     <div className="SubmittedData">
       <h4>Submitted data:</h4>
-      <pre>{data && JSON.stringify(data, null, 2)}</pre>
+      <pre>{data ? JSON.stringify(data, null, 2) : 'Click submit to see the result'}</pre>
     </div>
   );
 }

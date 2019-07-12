@@ -6,4 +6,6 @@
 .SubmittedData pre {
   margin-left: 1em;
   flex: 2;
+  color: rgb(214, 222, 235);
+  background-color: rgb(1, 22, 39);
 }
