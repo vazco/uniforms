@@ -44,3 +44,10 @@ test('<wrapField> - renders wrapper with an error status (error)', () => {
 
   expect(wrapper.find(Form.Item).prop('validateStatus')).toBe('error');
 });
+
+test('<wrapField> - renders wrapper with help text', () => {
+  const element = wrapField({ help: 'Help' }, <div />);
+  const wrapper = mount(element);
+
+  expect(wrapper.find(Form.Item).prop('extra')).toBe('Help');
+});
