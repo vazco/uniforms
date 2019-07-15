@@ -6,6 +6,7 @@ title: 'Using predefined fields'
 import FormContainer from './components/FormContainer.js';
 import GuestForm6 from './components/GuestForm6.js';
 import GuestForm7 from './components/GuestForm7.js';
+import GuestForm8 from './components/GuestForm8.js';
 
 Now that we know how to ask our guests for their name, let's ask them a few more things!
 We can expect a lot of different people coming to our IT conference - they could be developers, testers, product owners, project managers, businessmen and so on.
@@ -96,4 +97,181 @@ Let's stop for a while and think of what we have. Obviously, we there is a form 
 
 ### 1. Replacing the `AutoField`
 
+Uniforms provide a set of predefined out-of-the-box [fields](api-fields) that we can use instead of the `AutoField`.
+The perfect one for a `profession` property is a `SelectField`. All we have to do to have it rendered is to provide the list of available options.
+The same thing applies to the `additionalInfo` - in order to see it as a text area we can use the `LongTextField` component.
+Let's see our changes in action:
+
+```js
+import AutoField from 'uniforms-unstyled/AutoField';
+import AutoForm from 'uniforms-unstyled/AutoForm';
+import ErrorField from 'uniforms-unstyled/ErrorField';
+import LongTextField from 'uniforms-unstyled/LongTextField';
+import React from 'react';
+import SelectField from 'uniforms-unstyled/SelectField';
+import SubmitField from 'uniforms-unstyled/SubmitField';
+
+import GuestSchema2 from './GuestSchema2';
+
+const professions = [
+  {
+    label: 'Developer',
+    value: 'Developer'
+  },
+  {
+    label: 'Tester',
+    value: 'Tester'
+  },
+  {
+    label: 'Product owner',
+    value: 'Product owner'
+  },
+  {
+    label: 'Project manager',
+    value: 'Project manager'
+  },
+  {
+    label: 'Businessman',
+    value: 'Businessman'
+  }
+];
+
+export default function GuestForm({onSubmit}) {
+  return (
+    <AutoForm schema={GuestSchema} onSubmit={console.log}>
+      <h4>IT meeting guest questionnaire</h4>
+      <AutoField name="lastName" />
+      <ErrorField name="lastName">
+        <span>You have to provide your last name!</span>
+      </ErrorField>
+      <AutoField name="firstName" />
+      <ErrorField name="firstName" errorMessage="You have to provide your first name!" />
+      <span>Do you want to share your work experience with us?</span>
+      <AutoField name="workExperience" />
+      <ErrorField
+        name="workExperience"
+        errorMessage="Your work experience cannot be lesser than 0 or greater than 100 years!"
+      />
+      <AutoField name="profession" />
+      <SelectField name="profession" options={professions} />
+      <LongTextField name="additionalInfo" />
+      <SubmitField />
+    </AutoForm>
+  );
+}
+```
+
+<FormContainer>
+  <GuestForm7 />
+</FormContainer>
+
+As you can see, now we have a beautiful select field and a text area!
+
 ### 2. Manipulating the schema
+
+Now that we know how to use predefined fields within the `AutoForm`, let's see how to do it in a more fancy way,
+without the necessity to replace the `AutoField`. That means modifying our schema and shows true magic of the uniforms.
+
+Before touching the schema, let's have a look at the React form first:
+
+```js
+import AutoField from 'uniforms-unstyled/AutoField';
+import AutoForm from 'uniforms-unstyled/AutoForm';
+import ErrorField from 'uniforms-unstyled/ErrorField';
+import React from 'react';
+import SubmitField from 'uniforms-unstyled/SubmitField';
+
+import GuestSchema from './GuestSchema';
+
+export default function GuestForm() {
+  return (
+    <AutoForm schema={GuestSchema} onSubmit={console.log}>
+      <h4>IT meeting guest questionnaire</h4>
+      <AutoField name="lastName" />
+      <ErrorField name="lastName">
+        <span>You have to provide your last name!</span>
+      </ErrorField>
+      <AutoField name="firstName" />
+      <ErrorField name="firstName" errorMessage="You have to provide your first name!" />
+      <span>Do you want to share your work experience with us?</span>
+      <AutoField name="profession" />
+      <AutoField name="workExperience" />
+      <ErrorField
+        name="workExperience"
+        errorMessage="Your work experience cannot be lesser than 0 or greater than 100 years!"
+      />
+      <AutoField name="additionalInfo" />
+      <SubmitField />
+    </AutoForm>
+  );
+}
+```
+
+As you can see, both `SelectField` and `LongTextField` have been removed in favor of the `AutoField`.
+
+Now we can focus on modifying the schema.
+Instead of having to type the React component by ourselves inside our form, we can declare it inside the schema, thanks to the `uniforms` property, as it's demonstrated below:
+
+```js
+const schema = {
+  title: 'Guest',
+  type: 'object',
+  properties: {
+    firstName: {
+      type: 'string'
+    },
+    lastName: {
+      type: 'string'
+    },
+    workExperience: {
+      description: 'Work experience in years',
+      type: 'integer',
+      minimum: 0,
+      maximum: 100
+    },
+    profession: {
+      type: 'string',
+      options: [
+        {
+          label: 'Developer',
+          value: 'Developer'
+        },
+        {
+          label: 'Tester',
+          value: 'Tester'
+        },
+        {
+          label: 'Product owner',
+          value: 'Product owner'
+        },
+        {
+          label: 'Project manager',
+          value: 'Project manager'
+        },
+        {
+          label: 'Businessman',
+          value: 'Businessman'
+        }
+      ]
+    },
+    additionalInfo: {
+      type: 'string',
+      uniforms: {
+        component: LongTextField
+      }
+    }
+  },
+  required: ['firstName', 'lastName']
+};
+```
+
+What's changed is that now we've included the available options inside the `profession` property definition -
+uniforms are smart enough to deduce result field type, thanks to the [`AutoField` algorithm](uth-autofield-algorithm).
+When it comes to the `additionalInfo`, there is a slightly different approach applied - we can explicitly tell the `AutoForm` what field should be rendered.
+Just don't forget to import the desired one!
+
+The resulting form remains very the same:
+
+<FormContainer>
+  <GuestForm8 />
+</FormContainer>

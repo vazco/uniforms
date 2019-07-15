@@ -1,39 +1,14 @@
 import AutoField from 'uniforms-unstyled/AutoField';
 import AutoForm from 'uniforms-unstyled/AutoForm';
 import ErrorField from 'uniforms-unstyled/ErrorField';
-import LongTextField from 'uniforms-unstyled/LongTextField';
 import React from 'react';
-import SelectField from 'uniforms-unstyled/SelectField';
 import SubmitField from 'uniforms-unstyled/SubmitField';
 
-import GuestSchema2 from './GuestSchema2';
-
-const professions = [
-  {
-    label: 'Developer',
-    value: 'Developer'
-  },
-  {
-    label: 'Tester',
-    value: 'Tester'
-  },
-  {
-    label: 'Product owner',
-    value: 'Product owner'
-  },
-  {
-    label: 'Project manager',
-    value: 'Project manager'
-  },
-  {
-    label: 'Businessman',
-    value: 'Businessman'
-  }
-];
+import GuestSchema3 from './GuestSchema3';
 
 export default function GuestForm7({ onSubmit }) {
   return (
-    <AutoForm schema={GuestSchema2} onSubmit={onSubmit}>
+    <AutoForm schema={GuestSchema3} onSubmit={onSubmit}>
       <h4>IT meeting guest questionnaire</h4>
       <AutoField name="lastName" />
       <ErrorField name="lastName">
@@ -50,8 +25,8 @@ export default function GuestForm7({ onSubmit }) {
         name="workExperience"
         errorMessage="Your work experience cannot be lesser than 0 or greater than 100 years!"
       />
-      <SelectField name="profession" options={professions} />
-      <LongTextField name="additionalInfo" />
+      <AutoField name="profession" />
+      <AutoField name="additionalInfo" />
       <SubmitField />
     </AutoForm>
   );

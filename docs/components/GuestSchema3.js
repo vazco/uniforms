@@ -1,5 +1,7 @@
 import Ajv from 'ajv';
+
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
+import LongTextField from 'uniforms-unstyled/LongTextField';
 
 const schema = {
   title: 'Guest',
@@ -18,10 +20,35 @@ const schema = {
       maximum: 100
     },
     profession: {
-      type: 'string'
+      type: 'string',
+      options: [
+        {
+          label: 'Developer',
+          value: 'Developer'
+        },
+        {
+          label: 'Tester',
+          value: 'Tester'
+        },
+        {
+          label: 'Product owner',
+          value: 'Product owner'
+        },
+        {
+          label: 'Project manager',
+          value: 'Project manager'
+        },
+        {
+          label: 'Businessman',
+          value: 'Businessman'
+        }
+      ]
     },
     additionalInfo: {
-      type: 'string'
+      type: 'string',
+      uniforms: {
+        component: LongTextField
+      }
     }
   },
   required: ['firstName', 'lastName']
