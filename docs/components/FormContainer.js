@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
+import FrameWrapper from './FrameWrapper';
 import SubmittedData from './SubmittedData';
 
-export default function FormContainer({ children }) {
+export default function FormContainer({ children, theme }) {
   const [data, setData] = useState(null);
 
   const childrenWithProps = React.Children.map(children, child =>
@@ -11,8 +12,10 @@ export default function FormContainer({ children }) {
 
   return (
     <div>
-      {childrenWithProps}
-      <SubmittedData data={data} />
+      <FrameWrapper theme={theme}>
+        {childrenWithProps}
+        <SubmittedData data={data} />
+      </FrameWrapper>
     </div>
   );
 }
