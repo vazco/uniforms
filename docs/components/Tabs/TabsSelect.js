@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 function TabsSelect({ tabs, children }) {
   const [state, setState] = useState({ activeKey: 0 });
+  const { activeKey } = state;
 
   function handleSelect(key) {
     return () => {
@@ -12,7 +13,6 @@ function TabsSelect({ tabs, children }) {
     };
   }
 
-  const { activeKey } = state;
   return (
     <>
       <div className={'Tabs'}>

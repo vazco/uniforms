@@ -15,22 +15,34 @@ npm install uniforms
 Now the schema package.
 
 <TabsSelect tabs={[{name: 'GraphQL'}, {name: 'JSON-Schema'}, {name: 'Simple-Schema'}, {name: 'Simple-Schema-2'}]}>
-  {({name}) => <Code language="shell">{`npm install uniforms-bridge-${name.toLowerCase()}`}</Code>}
-</TabsSelect>
-
-Finally, pick your theme.
-
-<TabsSelect
-  tabs={[
-    {name: 'AntD'},
-    {name: 'Bootstrap3'},
-    {name: 'Bootstrap4'},
-    {name: 'Material'},
-    {name: 'Semantic'},
-    {name: 'Unstyled'}
-  ]}
->
-  {({name}) => <Code language="shell">{`npm install uniforms-${name.toLowerCase()}`}</Code>}
+  {({name: bridgeName}) => (
+    <>
+      <Code language="shell">{`npm install uniforms-bridge-${bridgeName.toLowerCase()}`}</Code>
+      <p>Finally, pick your theme.</p>
+      <TabsSelect
+        tabs={[
+          {name: 'AntD'},
+          {name: 'Bootstrap3'},
+          {name: 'Bootstrap4'},
+          {name: 'Material'},
+          {name: 'Semantic'},
+          {name: 'Unstyled'}
+        ]}
+      >
+        {({name: themeName}) => (
+          <>
+            <Code language="shell">{`npm install uniforms-${themeName.toLowerCase()}`}</Code>
+            <p>TL;DR just let me copy!</p>
+            <Code language="shell">
+              {`npm install uniforms
+npm install uniforms-bridge-${bridgeName.toLowerCase()}
+npm install uniforms-${themeName.toLowerCase()}`}
+            </Code>
+          </>
+        )}
+      </TabsSelect>
+    </>
+  )}
 </TabsSelect>
 
 **Note:** If you are going to use a themed package - remember to include correct styles!
