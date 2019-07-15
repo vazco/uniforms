@@ -13,4 +13,5 @@
 
 .TabsSelect.active {
     background-color: var(--ifm-menu-color-active);
+    color: white
 }
