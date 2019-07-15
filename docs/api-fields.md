@@ -136,6 +136,7 @@ import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme packag
   // Help block className.
   //   *Some description would be great, huh?*
   // Available in:
+  //   antd
   //   bootstrap3
   //   bootstrap4
   helpClassName="a b c"
