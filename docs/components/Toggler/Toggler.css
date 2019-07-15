@@ -1,0 +1,49 @@
+.Toggler.header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Toggler.header .item {
+  margin: 0.5em 0 0.5em 1em;
+  cursor: pointer;
+}
+
+.Toggler.header .item.active {
+  color: var(--ifm-menu-color-active);
+}
+
+.Toggler .tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.Toggler .tooltip .tooltiptext {
+  font-size: .7em;
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.Toggler .tooltip .tooltiptext::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.Toggler .tooltip:hover .tooltiptext {
+  visibility: visible;
+}
