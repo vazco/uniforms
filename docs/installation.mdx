@@ -9,7 +9,7 @@ import Code from './components/Code';
 Core package first.
 
 ```shell
-npm install uniforms
+npm install --save uniforms
 ```
 
 Now the schema package.
@@ -17,26 +17,24 @@ Now the schema package.
 <TabsSelect tabs={[{name: 'GraphQL'}, {name: 'JSON-Schema'}, {name: 'Simple-Schema'}, {name: 'Simple-Schema-2'}]}>
   {({name: bridgeName}) => (
     <>
-      <Code language="shell">{`npm install uniforms-bridge-${bridgeName.toLowerCase()}`}</Code>
+      <Code language="shell">{`npm install --save uniforms-bridge-${bridgeName.toLowerCase()}`}</Code>
       <p>Finally, pick your theme.</p>
       <TabsSelect
         tabs={[
-          {name: 'AntD'},
+          {name: 'Semantic'},
+          {name: 'Material'},
           {name: 'Bootstrap3'},
           {name: 'Bootstrap4'},
-          {name: 'Material'},
-          {name: 'Semantic'},
+          {name: 'AntD'},
           {name: 'Unstyled'}
         ]}
       >
         {({name: themeName}) => (
           <>
-            <Code language="shell">{`npm install uniforms-${themeName.toLowerCase()}`}</Code>
+            <Code language="shell">{`npm install --save uniforms-${themeName.toLowerCase()}`}</Code>
             <p>TL;DR just let me copy!</p>
             <Code language="shell">
-              {`npm install uniforms
-npm install uniforms-bridge-${bridgeName.toLowerCase()}
-npm install uniforms-${themeName.toLowerCase()}`}
+              {`npm install --save uniforms uniforms-bridge-${bridgeName.toLowerCase()} uniforms-${themeName.toLowerCase()}`}
             </Code>
           </>
         )}
