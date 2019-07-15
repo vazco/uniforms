@@ -11,6 +11,7 @@ export default function wrapField(
     errorMessage,
     id,
     info,
+    help,
     label,
     labelCol,
     required,
@@ -39,6 +40,7 @@ export default function wrapField(
       colon={colon}
       hasFeedback
       help={showInlineError && error && errorMessage}
+      extra={help}
       htmlFor={id}
       label={labelNode}
       labelCol={labelCol}
