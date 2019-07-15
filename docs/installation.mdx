@@ -5,8 +5,6 @@ title: Installation
 
 import {TabsSelect} from './components/Tabs';
 import {Code} from './components/Code';
-import {Toggler} from './components/Toggler';
-import {Code as IconCode, Box} from 'react-feather';
 
 Core package first.
 
@@ -15,24 +13,6 @@ npm install --save uniforms
 ```
 
 Now the schema package.
-
-<Toggler
-  items={[
-    {
-      key: 'code',
-      tooltipText: 'Toggle source code',
-      icon: <IconCode />,
-      component: <Code language="shell">{`npm install --save uniforms`}</Code>
-    },
-    {
-      key: 'example',
-      tooltipText: 'Toggle example',
-      icon: <Box />,
-      component: <h1>Example output html</h1>,
-      active: true
-    }
-  ]}
-/>
 
 <TabsSelect tabs={[{name: 'GraphQL'}, {name: 'JSON-Schema'}, {name: 'Simple-Schema'}, {name: 'Simple-Schema-2'}]}>
   {({name: bridgeName}) => (

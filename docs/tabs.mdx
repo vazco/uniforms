@@ -5,6 +5,9 @@ title: Test Tabs
 
 import {TabsSelect} from './components/Tabs';
 import JSONMdx from './tutorials-basic-uniforms-usage.mdx';
+import {Code} from './components/Code';
+import {Toggler} from './components/Toggler';
+import {Code as IconCode, Box} from 'react-feather';
 
 # This is MDX file with dynamic tabs!
 
@@ -17,3 +20,21 @@ import JSONMdx from './tutorials-basic-uniforms-usage.mdx';
 >
   {({name, content}) => content}
 </TabsSelect>
+
+<Toggler
+  items={[
+    {
+      key: 'code',
+      tooltipText: 'Toggle source code',
+      icon: <IconCode />,
+      component: <Code language="shell">{`npm install --save uniforms`}</Code>
+    },
+    {
+      key: 'example',
+      tooltipText: 'Toggle example',
+      icon: <Box />,
+      component: <h1>Example output html</h1>,
+      active: true
+    }
+  ]}
+/>

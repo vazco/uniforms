@@ -4,11 +4,13 @@
 }
 
 .TabsSelect {
-    border: 1px solid red;
+    border: 1px solid var(--ifm-menu-color-active);
     padding: 1em;
     margin-right: 0.5em;
+    border-radius: 3px;
+    cursor: pointer;
 }
 
 .TabsSelect.active {
-    border-color: aqua;
+    background-color: var(--ifm-menu-color-active);
 }
