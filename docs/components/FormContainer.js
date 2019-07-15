@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import SubmittedData from './SubmittedData';
 
-export default function FormContainer({children}) {
+export default function FormContainer({ children }) {
   const [data, setData] = useState(null);
 
-  const childrenWithProps = React.Children.map(children, child => React.cloneElement(child, {onSubmit: setData}));
+  const childrenWithProps = React.Children.map(children, child =>
+    React.cloneElement(child, { onSubmit: setData })
+  );
 
   return (
     <div>

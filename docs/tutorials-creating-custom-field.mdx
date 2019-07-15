@@ -1,0 +1,158 @@
+---
+id: tutorials-creating-custom-field
+title: Creating a custom field
+---
+
+import FormContainer from './components/FormContainer.js';
+import GuestForm9 from './components/GuestForm9.js';
+
+Great! We have a perfect form designed for collecting the data about our guests!
+In the previous chapters, we've learned how to use the `AutoForm` and redesign its layout, by changing the order of the fields and error messages (if any).
+We've also found out how to change the fields' types, by using predefined ones, such as `SelectField` or `LongTextField`.
+
+Now we're going to learn how to define a custom field.
+
+Let's assume that our conference has a limited number of attendees.
+What we need is to prepare special passes, with the first name, last name and the photo of the person.
+Therefore, we need to add one more field to our form - an image field, which should enable our guests to choose a photo.
+As there isn't such field provided, we have to create it ourselves.
+
+Let's add a new property to our schema - `pictureUrl`, which will store an URL string containing guest's picture,
+and declare that it will be managed by our newly created custom `ImageField` component:
+
+```js
+const schema = {
+  title: 'Guest',
+  type: 'object',
+  properties: {
+    firstName: {
+      type: 'string'
+    },
+    lastName: {
+      type: 'string'
+    },
+    workExperience: {
+      description: 'Work experience in years',
+      type: 'integer',
+      minimum: 0,
+      maximum: 100
+    },
+    profession: {
+      type: 'string',
+      options: [
+        {
+          label: 'Developer',
+          value: 'Developer'
+        },
+        {
+          label: 'Tester',
+          value: 'Tester'
+        },
+        {
+          label: 'Product owner',
+          value: 'Product owner'
+        },
+        {
+          label: 'Project manager',
+          value: 'Project manager'
+        },
+        {
+          label: 'Businessman',
+          value: 'Businessman'
+        }
+      ]
+    },
+    additionalInfo: {
+      type: 'string',
+      uniforms: {
+        component: LongTextField
+      }
+    },
+    pictureUrl: {
+      type: 'string',
+      uniforms: {
+        component: ImageField
+      }
+    }
+  },
+  required: ['firstName', 'lastName']
+};
+```
+
+We can prepare the custom field by creating a React component and wrapping it in a `connectField` helper.
+`connectField` will pass various props related to the form management, such as `onChange()` function, current field's value, errors an so on.
+You can find the whole list of guaranteed props inside the [helpers](api-helpers#connectfields-and-quaranteed-props) section.
+It's worth noting, that it will also add the `Field` suffix to the name of our component.
+
+Our newly created `ImageField` looks like this:
+
+```js
+import React from 'react';
+
+import connectField from 'uniforms/connectField';
+
+function Image({onChange, value}) {
+  function onImageChange({target: {files}}) {
+    if (files && files[0]) {
+      onChange(URL.createObjectURL(files[0]));
+    }
+  }
+
+  return (
+    <div>
+      <label>Choose your photo</label>
+      <input accept="image/*" onChange={onImageChange} type="file" />
+      <img src={value} />
+    </div>
+  );
+}
+
+export default connectField(Image);
+```
+
+The component itself is a file input that accepts only images.
+After the file is selected, it is converted to the DOMString that contains a URL representing the user's picture.
+Please pay attention to what props the `Image` component uses: `onChange` and `value` are provided by a `connectField` helper.
+By using these, we don't have to worry about managing the field's state.
+
+Take a look at the form code:
+
+```js
+import AutoField from 'uniforms-unstyled/AutoField';
+import AutoForm from 'uniforms-unstyled/AutoForm';
+import ErrorField from 'uniforms-unstyled/ErrorField';
+import React from 'react';
+import SubmitField from 'uniforms-unstyled/SubmitField';
+
+import GuestSchema4 from './GuestSchema4';
+
+export default function GuestForm9({onSubmit}) {
+  return (
+    <AutoForm schema={GuestSchema4} onSubmit={onSubmit}>
+      <h4>IT meeting guest questionnaire</h4>
+      <AutoField name="lastName" />
+      <ErrorField name="lastName">
+        <span>You have to provide your last name!</span>
+      </ErrorField>
+      <AutoField name="firstName" />
+      <ErrorField name="firstName" errorMessage="You have to provide your first name!" />
+      <span>Do you want to share your work experience with us?</span>
+      <AutoField name="workExperience" />
+      <ErrorField
+        name="workExperience"
+        errorMessage="Your work experience cannot be lesser than 0 or greater than 100 years!"
+      />
+      <AutoField name="profession" />
+      <AutoField name="additionalInfo" />
+      <AutoField name="pictureUrl" />
+      <SubmitField />
+    </AutoForm>
+  );
+}
+```
+
+and the form itself:
+
+<FormContainer>
+  <GuestForm9 />
+</FormContainer>

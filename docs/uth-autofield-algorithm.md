@@ -41,30 +41,6 @@ if (component === undefined) {
 }
 ```
 
-## Guaranteed props
-
-**Note:** These are **not** the only props that a field will receive - these are guaranteed for all fields created with `connectField` helper.
-
-|      Name      |         Type          |              Description               |
-| :------------: | :-------------------: | :------------------------------------: |
-|   `changed`    |        `bool`         |           Has field changed?           |
-|   `disabled`   |        `bool`         |           Is field disabled?           |
-|    `error`     |       `object`        | Field scoped part of validation error. |
-| `errorMessage` |       `string`        | Field scoped validation error message. |
-|    `field`     |       `object`        |     Field definition from schema.      |
-|    `fields`    |   `arrayOf(string)`   |            Subfields names.            |
-|  `fieldType`   |        `func`         |              Field type.               |
-|  `findError`   |     `func(name)`      |      Request another field error.      |
-|  `findField`   |     `func(name)`      |      Request another field field.      |
-|  `findValue`   |     `func(name)`      |      Request another field value.      |
-|      `id`      |       `string`        |      Field id - given or random.       |
-|    `label`     |       `string`        |              Field label.              |
-|     `name`     |       `string`        |              Field name.               |
-|   `onChange`   | `func(value, [name])` |          Change field value.           |
-|    `parent`    |       `object`        |          Parent field props.           |
-| `placeholder`  |       `string`        |           Field placeholder.           |
-|    `value`     |         `any`         |              Field value.              |
-
 ## Props propagation
 
 Few props propagate in a very special way. These are `label`, `placeholder` and `disabled`.
