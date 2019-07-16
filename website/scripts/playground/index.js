@@ -1,5 +1,5 @@
 import BaseField from 'uniforms/BaseField';
-import Frame from 'react-frame-component';
+import Frame, { FrameContextConsumer } from 'react-frame-component';
 import React, { Component } from 'react';
 import ValidatedForm from 'uniforms/ValidatedForm';
 import connectField from 'uniforms/connectField';
@@ -10,6 +10,8 @@ import schema from './schema';
 import styles from './styles';
 import themes from './themes';
 import { parseQuery, updateQuery } from './utils';
+
+import ConfigProvider from 'antd/lib/config-provider';
 
 import './styles.css';
 
@@ -237,6 +239,24 @@ class PlaygroundWrap extends Component {
     if (theme === 'material') {
       return (
         <section children={content} className="frame-root playground-wrap" />
+      );
+    } else if (theme === 'antd') {
+      return (
+        <Frame>
+          <FrameContextConsumer>
+            {/* 
+              Provides iframe's `window` and `document` instance
+              since Ant Design appends `<div>` to default (top most) `document.body`,
+              we have to pass `getPopupContainer` `document.body` specific to
+              rendered `iframe` in order to work as intended.
+            */}
+            {({ document }) => (
+              <ConfigProvider getPopupContainer={() => document.body}>
+                {content}
+              </ConfigProvider>
+            )}
+          </FrameContextConsumer>
+        </Frame>
       );
     }
 
