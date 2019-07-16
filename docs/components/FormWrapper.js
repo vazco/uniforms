@@ -1,12 +1,16 @@
 import ConfigProvider from 'antd/lib/config-provider';
 import Frame, { FrameContextConsumer } from 'react-frame-component';
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 import './FormWrapper.css';
 import styles from './styles';
 import { themeContext } from './ThemeContext';
 
+const INITIAL_HEIGHT = 300;
+
 export default function FormWrapper({ children }) {
+  const [height, setHeight] = useState(INITIAL_HEIGHT);
+  const iframeRef = useRef();
   const theme = React.useContext(themeContext);
   const content = (
     <React.Fragment>
@@ -15,11 +19,38 @@ export default function FormWrapper({ children }) {
     </React.Fragment>
   );
 
+  function handleResize(iframeRef) {
+    if (
+      iframeRef.current &&
+      iframeRef.current.node.contentDocument &&
+      iframeRef.current.node.contentDocument.body.scrollHeight !== 0
+    ) {
+      setHeight(iframeRef.current.node.contentDocument.body.scrollHeight);
+    }
+  }
+  useEffect(() => handleResize(iframeRef), [children]);
+
+  let form = (
+    <Frame
+      children={content}
+      className="iframe"
+      onLoad={() => handleResize(iframeRef)}
+      ref={iframeRef}
+      style={{ height }}
+    />
+  );
+
   if (theme === 'material') {
-    return <section className="FormWrapper" children={content} />;
+    form = <section className="iframe" children={content} />;
   } else if (theme === 'antd') {
-    return (
-      <Frame className="FormWrapper">
+    form = (
+      <Frame
+        children={content}
+        className="iframe"
+        onLoad={() => handleResize(iframeRef)}
+        ref={iframeRef}
+        style={{ height }}
+      >
         <FrameContextConsumer>
           {/* 
             Provides iframe's `window` and `document` instance
@@ -37,5 +68,5 @@ export default function FormWrapper({ children }) {
     );
   }
 
-  return <Frame className="FormWrapper" children={content} />;
+  return <div className="FormWrapper">{form}</div>;
 }

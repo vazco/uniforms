@@ -1,6 +1,10 @@
-.FormWrapper {
+.iframe {
   display: flex;
   width: 100%;
   border: none;
-  height: 400px;
+}
+.FormWrapper {
+  border: 1px solid var(--ifm-color-emphasis-alpha-30);
+  border-radius: 5px;
+  padding: 5px;
 }
