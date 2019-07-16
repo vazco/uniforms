@@ -9,6 +9,7 @@ export default function wrapField(
     colon,
     error,
     errorMessage,
+    extra,
     id,
     info,
     help,
@@ -40,7 +41,7 @@ export default function wrapField(
       colon={colon}
       hasFeedback
       help={showInlineError && error && errorMessage}
-      extra={help}
+      extra={extra || help}
       htmlFor={id}
       label={labelNode}
       labelCol={labelCol}
