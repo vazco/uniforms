@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import TabsHeader from './TabsHeader';
 
 const state = { activeKey: 0 };
 const handlers = [];
@@ -23,17 +24,7 @@ function TabsSelect({ tabs, children }) {
 
   return (
     <>
-      <div className={'Tabs'}>
-        {tabs.map(({ name }, key) => (
-          <span
-            className={`TabsSelect ${activeKey === key ? 'active' : ''}`}
-            key={name}
-            onClick={handleSelect(key)}
-          >
-            {name}
-          </span>
-        ))}
-      </div>
+      <TabsHeader activeKey={activeKey} items={tabs} onClick={handleSelect} />
       <div>{children(tabs[activeKey])}</div>
     </>
   );

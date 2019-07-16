@@ -13,9 +13,9 @@ import {Code as IconCode, Box} from 'react-feather';
 
 <TabsSelect
   tabs={[
+    {name: 'SimpleSchema', content: <h1>SimpleSchema</h1>},
     {name: 'JSON', content: <JSONMdx />},
-    {name: 'GraphQL', content: <h1>GraphQL</h1>},
-    {name: 'SimpleSchema', content: <h1>SimpleSchema</h1>}
+    {name: 'GraphQL', content: <h1>GraphQL</h1>}
   ]}
 >
   {({name, content}) => content}
@@ -27,7 +27,7 @@ import {Code as IconCode, Box} from 'react-feather';
       key: 'code',
       tooltipText: 'Toggle source code',
       icon: <IconCode />,
-      component: <Code language="shell">{`npm install --save uniforms`}</Code>
+      component: <Code language="html">{`<h1>Example output html</h1>`}</Code>
     },
     {
       key: 'example',
