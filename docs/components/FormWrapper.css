@@ -1,6 +1,6 @@
-.FrameWrapper {
+.FormWrapper {
   display: flex;
   width: 100%;
   border: none;
-  height: 500px;
+  height: 400px;
 }

@@ -3,11 +3,11 @@ id: 'tutorials-customizing-your-form-layout'
 title: 'Customizing your form layout'
 ---
 
-import FormContainer from './components/FormContainer.js';
-import GuestForm2 from './components/GuestForm2.js';
-import GuestForm3 from './components/GuestForm3.js';
-import GuestForm4 from './components/GuestForm4.js';
-import GuestForm5 from './components/GuestForm5.js';
+import TutorialForm from './components/TutorialForm';
+import GuestFormWithHeading from './components/GuestFormWithHeading.js';
+import GuestFormWithAutoFields from './components/GuestFormWithAutoFields.js';
+import GuestFormWithErrorFields from './components/GuestFormWithErrorFields.js';
+import GuestFormWithChangedErrors from './components/GuestFormWithChangedErrors.js';
 
 Great! Now that we have our form up and running, it's time to think about how we can customize it and adjust to our needs.
 
@@ -45,9 +45,9 @@ export default function GuestForm() {
 }
 ```
 
-<FormContainer>
-  <GuestForm2 />
-</FormContainer>
+<TutorialForm>
+  <GuestFormWithHeading />
+</TutorialForm>
 
 ### Changing the order of the fields
 
@@ -82,9 +82,9 @@ export default function GuestForm() {
 }
 ```
 
-<FormContainer>
-  <GuestForm3 />
-</FormContainer>
+<TutorialForm>
+  <GuestFormWithAutoFields />
+</TutorialForm>
 
 ### Changing the order of the error messages
 
@@ -118,9 +118,9 @@ export default function GuestForm() {
 }
 ```
 
-<FormContainer>
-  <GuestForm4 />
-</FormContainer>
+<TutorialForm>
+  <GuestFormWithErrorFields />
+</TutorialForm>
 
 ### Changing the error message
 
@@ -158,6 +158,6 @@ export default function GuestForm() {
 }
 ```
 
-<FormContainer>
-  <GuestForm5 />
-</FormContainer>
+<TutorialForm>
+  <GuestFormWithChangedErrors />
+</TutorialForm>

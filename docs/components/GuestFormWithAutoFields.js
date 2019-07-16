@@ -1,14 +1,11 @@
-import AutoField from 'uniforms-unstyled/AutoField';
-import AutoForm from 'uniforms-unstyled/AutoForm';
-import ErrorsField from 'uniforms-unstyled/ErrorsField';
 import React from 'react';
-import SubmitField from 'uniforms-unstyled/SubmitField';
 
 import GuestSchema from './GuestSchema';
+import { AutoForm, AutoField, ErrorsField, SubmitField } from './universal';
 
-export default function GuestForm3({onSubmit}) {
+export default function GuestFormWithAutoFields() {
   return (
-    <AutoForm schema={GuestSchema} onSubmit={onSubmit}>
+    <AutoForm schema={GuestSchema}>
       <h4>IT meeting guest questionnaire</h4>
       <AutoField name="lastName" />
       <AutoField name="firstName" />

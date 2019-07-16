@@ -3,10 +3,10 @@ id: 'tutorials-using-predefined-fields'
 title: 'Using predefined fields'
 ---
 
-import FormContainer from './components/FormContainer.js';
-import GuestForm6 from './components/GuestForm6.js';
-import GuestForm7 from './components/GuestForm7.js';
-import GuestForm8 from './components/GuestForm8.js';
+import TutorialForm from './components/TutorialForm';
+import GuestFormProfessionAdditionalInfo from './components/GuestFormProfessionAdditionalInfo.js';
+import GuestFormPredefinedFields from './components/GuestFormPredefinedFields.js';
+import GuestFormWithFieldsInSchema from './components/GuestFormWithFieldsInSchema.js';
 
 Now that we know how to ask our guests for their name, let's ask them a few more things!
 We can expect a lot of different people coming to our IT conference - they could be developers, testers, product owners, project managers, businessmen and so on.
@@ -80,9 +80,9 @@ export default function GuestForm() {
 }
 ```
 
-<FormContainer>
-  <GuestForm6 />
-</FormContainer>
+<TutorialForm>
+  <GuestFormProfessionAdditionalInfo />
+</TutorialForm>
 
 Let's stop for a while and think of what we have. Obviously, we there is a form generated, but it's not quite what we've expected:
 
@@ -111,7 +111,7 @@ import React from 'react';
 import SelectField from 'uniforms-unstyled/SelectField';
 import SubmitField from 'uniforms-unstyled/SubmitField';
 
-import GuestSchema2 from './GuestSchema2';
+import GuestSchema from './GuestSchema';
 
 const professions = [
   {
@@ -161,9 +161,9 @@ export default function GuestForm({onSubmit}) {
 }
 ```
 
-<FormContainer>
-  <GuestForm7 />
-</FormContainer>
+<TutorialForm>
+  <GuestFormPredefinedFields />
+</TutorialForm>
 
 As you can see, now we have a beautiful select field and a text area!
 
@@ -272,6 +272,6 @@ Just don't forget to import the desired one!
 
 The resulting form remains very the same:
 
-<FormContainer>
-  <GuestForm8 />
-</FormContainer>
+<TutorialForm>
+  <GuestFormWithFieldsInSchema />
+</TutorialForm>

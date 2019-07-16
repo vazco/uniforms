@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-function TabsSelect({ tabs, children }) {
-  const [state, setState] = useState({ activeKey: 0 });
-  const { activeKey } = state;
+const state = { activeKey: 0 };
+const handlers = [];
 
-  function handleSelect(key) {
+function handleSelect(activeKey) {
+  return () => {
+    handlers.forEach(handler => {
+      handler({ activeKey });
+    });
+  };
+}
+
+function TabsSelect({ tabs, children }) {
+  const [{ activeKey }, setState] = useState(state);
+  useEffect(() => {
+    handlers.push(setState);
     return () => {
-      setState({
-        activeKey: key
-      });
+      handlers.splice(handlers.indexOf(setState), 1);
     };
-  }
+  }, []);
 
   return (
     <>

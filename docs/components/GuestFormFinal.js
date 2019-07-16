@@ -6,7 +6,7 @@ import SubmitField from 'uniforms-unstyled/SubmitField';
 
 import GuestSchema4 from './GuestSchema4';
 
-export default function GuestForm9({ onSubmit }) {
+export default function GuestFormFinal({ onSubmit }) {
   return (
     <AutoForm schema={GuestSchema4} onSubmit={onSubmit}>
       <h4>IT meeting guest questionnaire</h4>

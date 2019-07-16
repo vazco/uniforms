@@ -1,12 +1,14 @@
-import AutoField from 'uniforms-unstyled/AutoField';
-import AutoForm from 'uniforms-unstyled/AutoForm';
-import ErrorField from 'uniforms-unstyled/ErrorField';
-import LongTextField from 'uniforms-unstyled/LongTextField';
 import React from 'react';
-import SelectField from 'uniforms-unstyled/SelectField';
-import SubmitField from 'uniforms-unstyled/SubmitField';
 
 import GuestSchema2 from './GuestSchema2';
+import {
+  AutoForm,
+  AutoField,
+  ErrorField,
+  LongTextField,
+  SelectField,
+  SubmitField
+} from './universal';
 
 const professions = [
   {
@@ -31,9 +33,9 @@ const professions = [
   }
 ];
 
-export default function GuestForm7({ onSubmit }) {
+export default function GuestFormPredefinedFields() {
   return (
-    <AutoForm schema={GuestSchema2} onSubmit={onSubmit}>
+    <AutoForm schema={GuestSchema2}>
       <h4>IT meeting guest questionnaire</h4>
       <AutoField name="lastName" />
       <ErrorField name="lastName">

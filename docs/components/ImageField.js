@@ -11,7 +11,7 @@ function Image({ onChange, value }) {
   }
 
   return (
-    <div class="ImageField">
+    <div className="ImageField">
       <label htmlFor="file-input">
         <div>Choose your photo</div>
         <img
