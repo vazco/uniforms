@@ -1,14 +1,21 @@
 .Tabs {
     display: flex;
     margin-bottom: 1.5em;
+    flex-wrap: wrap;
 }
 
 .TabsSelect {
     border: 1px solid var(--ifm-menu-color-active);
     padding: 1em;
-    margin-right: 0.5em;
+    margin: 0.25em;
     border-radius: 3px;
     cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .TabsSelect {
+        flex: 1 1 0;
+    }
 }
 
 .TabsSelect.active {
