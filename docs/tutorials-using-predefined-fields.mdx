@@ -48,11 +48,11 @@ After the schema change, we must not forget to add the fields to our form.
 We will add the `profession` field above the `workExperience` field and the `additionalInfo` at the bottom:
 
 ```js
-import AutoField from 'uniforms-unstyled/AutoField';
-import AutoForm from 'uniforms-unstyled/AutoForm';
-import ErrorField from 'uniforms-unstyled/ErrorField';
+import AutoField from 'uniforms-semantic/AutoField';
+import AutoForm from 'uniforms-semantic/AutoForm';
+import ErrorField from 'uniforms-semantic/ErrorField';
 import React from 'react';
-import SubmitField from 'uniforms-unstyled/SubmitField';
+import SubmitField from 'uniforms-semantic/SubmitField';
 
 import GuestSchema from './GuestSchema';
 
@@ -103,13 +103,13 @@ The same thing applies to the `additionalInfo` - in order to see it as a text ar
 Let's see our changes in action:
 
 ```js
-import AutoField from 'uniforms-unstyled/AutoField';
-import AutoForm from 'uniforms-unstyled/AutoForm';
-import ErrorField from 'uniforms-unstyled/ErrorField';
-import LongTextField from 'uniforms-unstyled/LongTextField';
+import AutoField from 'uniforms-semantic/AutoField';
+import AutoForm from 'uniforms-semantic/AutoForm';
+import ErrorField from 'uniforms-semantic/ErrorField';
+import LongTextField from 'uniforms-semantic/LongTextField';
 import React from 'react';
-import SelectField from 'uniforms-unstyled/SelectField';
-import SubmitField from 'uniforms-unstyled/SubmitField';
+import SelectField from 'uniforms-semantic/SelectField';
+import SubmitField from 'uniforms-semantic/SubmitField';
 
 import GuestSchema from './GuestSchema';
 
@@ -175,11 +175,11 @@ without the necessity to replace the `AutoField`. That means modifying our schem
 Before touching the schema, let's have a look at the React form first:
 
 ```js
-import AutoField from 'uniforms-unstyled/AutoField';
-import AutoForm from 'uniforms-unstyled/AutoForm';
-import ErrorField from 'uniforms-unstyled/ErrorField';
+import AutoField from 'uniforms-semantic/AutoField';
+import AutoForm from 'uniforms-semantic/AutoForm';
+import ErrorField from 'uniforms-semantic/ErrorField';
 import React from 'react';
-import SubmitField from 'uniforms-unstyled/SubmitField';
+import SubmitField from 'uniforms-semantic/SubmitField';
 
 import GuestSchema from './GuestSchema';
 
