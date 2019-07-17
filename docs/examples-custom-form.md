@@ -3,15 +3,15 @@ id: examples-custom-form
 title: Custom form
 ---
 
+In uniforms, every form is just an injectable set of functionalities.
+Thus, we can live without many higher order components, using composed ones instead.
+If you want to get a deeper dive into it, we encourage you to read the source of AutoForm or QuickForm in the core package.
+
 ### `ModifierForm`
 
 ```js
 import BaseForm from 'uniforms/BaseForm';
 
-// In uniforms, every form is just an injectable set of functionalities. Thus,
-// we can live without many higher order components, using composed ones
-// instead. If you want to get a deeper dive into it, read the source of
-// AutoForm or QuickForm in the core package.
 const Modifier = parent =>
   class extends parent {
     // Expose injector.
