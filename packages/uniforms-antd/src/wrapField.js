@@ -40,8 +40,8 @@ export default function wrapField(
     <Form.Item
       colon={colon}
       hasFeedback
-      help={showInlineError && error && errorMessage}
-      extra={extra || help}
+      help={help || (showInlineError && error && errorMessage)}
+      extra={extra}
       htmlFor={id}
       label={labelNode}
       labelCol={labelCol}

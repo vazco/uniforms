@@ -130,7 +130,7 @@ import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme packag
   // Help text.
   //   *Some description would be great, huh?*
   // Available in:
-  //   antd (alias of "extra")
+  //   antd
   //   bootstrap3
   //   bootstrap4
   help="Need help?"
@@ -233,7 +233,7 @@ import DateField from 'uniforms-unstyled/DateField'; // Choose your theme packag
   // Help text.
   //   *Some description would be great, huh?*
   // Available in:
-  //   antd (alias of "extra")
+  //   antd
   //   bootstrap3
   //   bootstrap4
   help="Need help?"
@@ -492,7 +492,7 @@ import LongTextField from 'uniforms-unstyled/LongTextField'; // Choose your them
   // Help text.
   //   *Some description would be great, huh?*
   // Available in:
-  //   antd (alias of "extra")
+  //   antd
   //   bootstrap3
   //   bootstrap4
   help="Need help?"
@@ -627,7 +627,7 @@ import NumField from 'uniforms-unstyled/NumField'; // Choose your theme package.
   // Help text.
   //   *Some description would be great, huh?*
   // Available in:
-  //   antd (alias of "extra")
+  //   antd
   //   bootstrap3
   //   bootstrap4
   help="Need help?"
@@ -792,7 +792,7 @@ import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme pa
   // Help text.
   //   *Some description would be great, huh?*
   // Available in:
-  //   antd (alias of "extra")
+  //   antd
   //   bootstrap3
   //   bootstrap4
   help="Need help?"
@@ -909,7 +909,7 @@ import TextField from 'uniforms-unstyled/TextField'; // Choose your theme packag
     // Help text.
   //   *Some description would be great, huh?*
   // Available in:
-  //   antd (alias of "extra")
+  //   antd
   //   bootstrap3
   //   bootstrap4
   help="Need help?"

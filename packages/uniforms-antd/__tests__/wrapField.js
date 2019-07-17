@@ -49,7 +49,7 @@ test('<wrapField> - renders wrapper with help text', () => {
   const element = wrapField({ help: 'Help' }, <div />);
   const wrapper = mount(element);
 
-  expect(wrapper.find(Form.Item).prop('extra')).toBe('Help');
+  expect(wrapper.find(Form.Item).prop('help')).toBe('Help');
 });
 
 test('<wrapField> - renders wrapper with extra text', () => {
