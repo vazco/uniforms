@@ -6,6 +6,7 @@ module.exports = {
   baseUrl: '/',
   url: 'https://uniforms.tools/',
   themeConfig: {
+    googleAnalytics: { trackingID: 'UA-136559762-4' },
     navbar: {
       links: [
         { label: 'Docs', to: 'docs/installation' },

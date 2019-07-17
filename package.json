@@ -30,6 +30,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.0.0",
     "@docusaurus/core": "2.0.0-alpha.21",
+    "@docusaurus/plugin-google-analytics": "2.0.0-alpha.21",
     "@docusaurus/preset-classic": "2.0.0-alpha.21",
     "@material-ui/core": "4.1.1",
     "@material-ui/icons": "4.2.0",
