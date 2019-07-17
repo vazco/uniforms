@@ -1,37 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TogglerHeader, getDefaultToggle } from '../Toggler';
 import { TabsHeader } from '../Tabs';
 
-function TogglerTabs({ tabsItems, togglerItems, children }) {
-  const [{ activeTab, activeTabKey }, setStateTabs] = useState({
-    activeTab: tabsItems[0],
-    activeTabKey: 0
+const handlers = TabsHeader.__handlers;
+
+function TogglerTabs({
+  tabsItems,
+  togglerItems,
+  children,
+  groupByKey = 'default'
+}) {
+  const [
+    { activeItem: activeTab, activeKey: activeTabKey },
+    setStateTabs
+  ] = useState({
+    activeItem: tabsItems[0],
+    activeKey: 0
   });
-  const [{ activeToggle, activeToggleKey }, setStateToggler] = useState({
-    activeToggle: togglerItems[getDefaultToggle(togglerItems)],
-    activeToggleKey: getDefaultToggle(togglerItems)
+  const [
+    { activeItem: activeToggle, activeKey: activeToggleKey },
+    setStateToggler
+  ] = useState({
+    activeItem: togglerItems[getDefaultToggle(togglerItems)],
+    activeKey: getDefaultToggle(togglerItems)
   });
 
-  const handleTabsClick = (tab, key) => () => {
-    setStateTabs({
-      activeTab: tab,
-      activeTabKey: key
+  const handleTabsClick = (groupByKey, item, activeKey) => () => {
+    handlers[groupByKey].forEach(handler => {
+      handler({ activeKey });
     });
   };
 
-  const handleTogglerClick = (toggle, key) => () => {
+  const handleTogglerClick = (item, key) => () => {
     setStateToggler({
-      activeToggle: toggle,
-      activeToggleKey: key
+      activeItem: item,
+      activeKey: key
     });
   };
+
+  useEffect(() => {
+    if (handlers[groupByKey] === undefined) {
+      handlers[groupByKey] = [];
+    }
+    handlers[groupByKey].push(setStateTabs);
+    return () => {
+      handlers[groupByKey].splice(
+        handlers[groupByKey].indexOf(setStateTabs),
+        1
+      );
+    };
+  });
 
   return (
     <section className="TogglerTabs">
       <section className="header">
         <TabsHeader
           items={tabsItems}
-          onClick={handleTabsClick}
+          onClick={handleTabsClick.bind(this, groupByKey)}
           activeKey={activeTabKey}
         />
         <TogglerHeader

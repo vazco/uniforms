@@ -26,4 +26,6 @@ TabsHeader.propTypes = {
   ).isRequired
 };
 
+TabsHeader.__handlers = {};
+
 export default TabsHeader;

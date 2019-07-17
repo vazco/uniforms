@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TabsHeader from './TabsHeader';
 
 const state = { activeKey: 0 };
-const handlers = {};
+const handlers = TabsHeader.__handlers;
 
 function handleSelect(groupByKey, item, activeKey) {
   return () => {
@@ -23,7 +23,7 @@ function TabsSelect({ tabs, children, groupByKey = 'default' }) {
     return () => {
       handlers[groupByKey].splice(handlers[groupByKey].indexOf(setState), 1);
     };
-  }, {});
+  });
 
   return (
     <>
