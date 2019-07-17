@@ -1,5 +1,3 @@
 import './TogglerTabs.css';
 
-import TogglerTabs from './TogglerTabs';
-
-export { TogglerTabs };
+export { default as TogglerTabs } from './TogglerTabs';

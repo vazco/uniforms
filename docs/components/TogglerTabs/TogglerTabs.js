@@ -1,78 +1,56 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import { TogglerHeader, getDefaultToggle } from '../Toggler';
 import { TabsHeader } from '../Tabs';
+import { useTabs } from '../Tabs/state';
 
-const handlers = TabsHeader.__handlers;
+function TogglerTabs({ children, group, tabsItems, togglerItems }) {
+  const { activeTab, onTab } = useTabs(group);
 
-function TogglerTabs({
-  tabsItems,
-  togglerItems,
-  children,
-  groupByKey = 'default'
-}) {
-  const [
-    { activeItem: activeTab, activeKey: activeTabKey },
-    setStateTabs
-  ] = useState({
-    activeItem: tabsItems[0],
-    activeKey: 0
-  });
-  const [
-    { activeItem: activeToggle, activeKey: activeToggleKey },
-    setStateToggler
-  ] = useState({
-    activeItem: togglerItems[getDefaultToggle(togglerItems)],
-    activeKey: getDefaultToggle(togglerItems)
+  const [{ activeToggle }, setStateToggler] = useState({
+    activeToggle: getDefaultToggle(togglerItems)
   });
 
-  const handleTabsClick = (groupByKey, item, activeKey) => () => {
-    handlers[groupByKey].forEach(handler => {
-      handler({ activeKey });
-    });
-  };
-
-  const handleTogglerClick = (item, key) => () => {
+  const handleTogglerClick = toggle => () => {
     setStateToggler({
-      activeItem: item,
-      activeKey: key
+      activeToggle: toggle
     });
   };
-
-  useEffect(() => {
-    if (handlers[groupByKey] === undefined) {
-      handlers[groupByKey] = [];
-    }
-    handlers[groupByKey].push(setStateTabs);
-    return () => {
-      handlers[groupByKey].splice(
-        handlers[groupByKey].indexOf(setStateTabs),
-        1
-      );
-    };
-  });
 
   return (
     <section className="TogglerTabs">
       <section className="header">
-        <TabsHeader
-          items={tabsItems}
-          onClick={handleTabsClick.bind(this, groupByKey)}
-          activeKey={activeTabKey}
-        />
+        <TabsHeader items={tabsItems} onTab={onTab} activeTab={activeTab} />
         <TogglerHeader
           items={togglerItems}
           onClick={handleTogglerClick}
-          activeKey={activeToggleKey}
+          activeToggle={activeToggle}
         />
       </section>
       <section className="content">
         {children({
-          tab: activeTab,
-          toggle: activeToggle
+          tab: tabsItems[activeTab],
+          toggle: togglerItems[activeToggle]
         })}
       </section>
     </section>
   );
 }
+
+TogglerTabs.propTypes = {
+  children: PropTypes.func.isRequired,
+  group: PropTypes.string.isRequired,
+  tabsItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  togglerItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired
+    })
+  ).isRequired
+};
 
 export default TogglerTabs;

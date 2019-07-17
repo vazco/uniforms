@@ -13,6 +13,7 @@ import {TogglerTabs} from './components/TogglerTabs';
 # This is MDX file with dynamic tabs!
 
 <TabsSelect
+  group="test"
   tabs={[
     {name: 'SimpleSchema', content: <h1>SimpleSchema</h1>},
     {name: 'JSON', content: <JSONMdx />},
@@ -23,6 +24,7 @@ import {TogglerTabs} from './components/TogglerTabs';
 </TabsSelect>
 
 <TabsSelect
+  group="test"
   tabs={[
     {name: 'SimpleSchema', content: <h1>SimpleSchema</h1>},
     {name: 'JSON', content: <JSONMdx />},
@@ -33,6 +35,7 @@ import {TogglerTabs} from './components/TogglerTabs';
 </TabsSelect>
 
 <TogglerTabs
+  group="test"
   tabsItems={[{name: 'SimpleSchema'}, {name: 'JSON'}, {name: 'GraphQL'}]}
   togglerItems={[
     {

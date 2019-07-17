@@ -15,7 +15,7 @@ npm install --save uniforms
 Now the schema package.
 
 <TabsSelect
-  groupByKey="bridge"
+  group="bridge"
   tabs={[{name: 'GraphQL'}, {name: 'JSON-Schema'}, {name: 'Simple-Schema'}, {name: 'Simple-Schema-2'}]}
 >
   {({name: bridgeName}) => (
@@ -23,7 +23,7 @@ Now the schema package.
       <Code language="shell">{`npm install --save uniforms-bridge-${bridgeName.toLowerCase()}`}</Code>
       <p>Finally, pick your theme.</p>
       <TabsSelect
-        groupByKey="theme"
+        group="theme"
         tabs={[
           {name: 'Semantic'},
           {name: 'Material'},

@@ -4,27 +4,24 @@ import PropTypes from 'prop-types';
 import { getDefaultToggle } from './index.js';
 
 function Toggler({ items }) {
-  const [state, setState] = useState({
-    activeKey: getDefaultToggle(items),
-    activeComponent: items[getDefaultToggle(items)].component || items[0]
+  const [{ activeToggle }, setState] = useState({
+    activeToggle: getDefaultToggle(items)
   });
 
-  const toggleClick = ({ component }, key) => () => {
+  const toggleClick = toggle => () => {
     setState({
-      activeKey: key,
-      activeComponent: component
+      activeToggle: toggle
     });
   };
 
-  const { activeKey, activeComponent } = state;
   return (
     <>
       <TogglerHeader
         items={items}
-        activeKey={activeKey}
+        activeToggle={activeToggle}
         onClick={toggleClick}
       />
-      <section>{activeComponent}</section>
+      <section>{items[activeToggle].component}</section>
     </>
   );
 }

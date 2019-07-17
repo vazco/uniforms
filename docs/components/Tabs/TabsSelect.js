@@ -1,47 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+
 import TabsHeader from './TabsHeader';
+import { useTabs } from './state';
 
-const state = { activeKey: 0 };
-const handlers = TabsHeader.__handlers;
-
-function handleSelect(groupByKey, item, activeKey) {
-  return () => {
-    handlers[groupByKey].forEach(handler => {
-      handler({ activeKey });
-    });
-  };
-}
-
-function TabsSelect({ tabs, children, groupByKey = 'default' }) {
-  const [{ activeKey }, setState] = useState(state);
-  useEffect(() => {
-    if (handlers[groupByKey] === undefined) {
-      handlers[groupByKey] = [];
-    }
-    handlers[groupByKey].push(setState);
-    return () => {
-      handlers[groupByKey].splice(handlers[groupByKey].indexOf(setState), 1);
-    };
-  });
+function TabsSelect({ children, group, tabs }) {
+  const { activeTab, onTab } = useTabs(group);
 
   return (
     <>
-      <TabsHeader
-        activeKey={activeKey}
-        items={tabs}
-        onClick={handleSelect.bind(this, groupByKey)}
-      />
-      <div>{children(tabs[activeKey])}</div>
+      <TabsHeader activeTab={activeTab} items={tabs} onTab={onTab} />
+      {children(tabs[activeTab])}
     </>
   );
 }
 
 TabsSelect.propTypes = {
+  children: PropTypes.func,
+  group: PropTypes.string.isRequired,
   tabs: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      component: PropTypes.element
+      name: PropTypes.string.isRequired
     })
   ).isRequired
 };

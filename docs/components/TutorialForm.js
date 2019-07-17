@@ -13,7 +13,7 @@ const tabs = [
 ];
 
 const TutorialForm = ({ children }) => (
-  <TabsSelect tabs={tabs}>
+  <TabsSelect group="tutorial" tabs={tabs}>
     {({ value: theme }) => (
       <ThemeProvider value={theme}>
         <FormWrapper>{children}</FormWrapper>

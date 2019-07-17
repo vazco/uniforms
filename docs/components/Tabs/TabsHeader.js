@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TabsHeaderItem from './TabsHeaderItem';
 
-function TabsHeader({ items, activeKey, onClick }) {
+function TabsHeader({ items, activeTab, onTab }) {
   return (
-    <div className={'Tabs'}>
-      {items.map((item, key) => (
-        <span
-          className={`item ${activeKey === key ? 'active' : ''}`}
+    <div className="Tabs">
+      {items.map(({ name }, key) => (
+        <TabsHeaderItem
+          active={activeTab === key}
           key={key}
-          onClick={onClick(item, key)}
+          onClick={() => onTab(key)}
         >
-          {item.name}
-        </span>
+          {name}
+        </TabsHeaderItem>
       ))}
     </div>
   );
@@ -20,12 +21,11 @@ function TabsHeader({ items, activeKey, onClick }) {
 TabsHeader.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      component: PropTypes.element
+      name: PropTypes.string.isRequired
     })
-  ).isRequired
+  ).isRequired,
+  activeTab: PropTypes.number.isRequired,
+  onTab: PropTypes.func.isRequired
 };
-
-TabsHeader.__handlers = {};
 
 export default TabsHeader;
