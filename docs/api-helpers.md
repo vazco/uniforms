@@ -55,7 +55,7 @@ import changedKeys from 'uniforms/changedKeys';
 const arrayOfChangedKeys = changedKeys(root, valueA, valueB);
 ```
 
-**Note:** For more examples, see [`changedKeys` tests](https://github.com/vazco/uniforms/blob/78505022588cf592570d610e6456ff1751510458/packages/uniforms/__tests__/changedKeys.js).
+**Note:** For more examples, see `changedKeys` [tests](https://github.com/vazco/uniforms/blob/master/packages/uniforms/__tests__/changedKeys.js).
 
 ## `createSchemaBridge(schemaOrBridge)`
 
