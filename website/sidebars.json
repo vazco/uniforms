@@ -14,8 +14,8 @@
       "uth-forms-concept",
       "uth-forms-features",
       "uth-autofield-algorithm",
-      "uth-context-data",
-      "uth-bridge"
+      "uth-bridge-concept",
+      "uth-context-data"
     ],
     "FAQ": ["faq"]
   }
