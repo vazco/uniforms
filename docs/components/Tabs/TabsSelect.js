@@ -5,7 +5,7 @@ import TabsHeader from './TabsHeader';
 const state = { activeKey: 0 };
 const handlers = [];
 
-function handleSelect(activeKey) {
+function handleSelect(item, activeKey) {
   return () => {
     handlers.forEach(handler => {
       handler({ activeKey });
@@ -33,8 +33,8 @@ function TabsSelect({ tabs, children }) {
 TabsSelect.propTypes = {
   tabs: PropTypes.arrayOf(
     PropTypes.shape({
-      content: PropTypes.element,
-      name: PropTypes.string
+      name: PropTypes.string.isRequired,
+      component: PropTypes.element
     })
   ).isRequired
 };

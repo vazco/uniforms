@@ -8,8 +8,34 @@ import JSONMdx from './tutorials-basic-uniforms-usage.mdx';
 import {Code} from './components/Code';
 import {Toggler} from './components/Toggler';
 import {Code as IconCode, Box} from 'react-feather';
+import {TogglerTabs} from './components/TogglerTabs';
 
 # This is MDX file with dynamic tabs!
+
+<TogglerTabs
+  tabsItems={[{name: 'SimpleSchema'}, {name: 'JSON'}, {name: 'GraphQL'}]}
+  togglerItems={[
+    {
+      name: 'code',
+      tooltipText: 'Toggle source code',
+      icon: <IconCode />,
+      component: <Code language="html">{`<h1>Example output html</h1>`}</Code>
+    },
+    {
+      name: 'example',
+      tooltipText: 'Toggle example',
+      icon: <Box />,
+      component: <h1>Example output html</h1>
+    }
+  ]}
+>
+  {({tab, toggle}) => (
+    <section>
+      {tab && tab.name}
+      {toggle && toggle.name}
+    </section>
+  )}
+</TogglerTabs>
 
 <TabsSelect
   tabs={[
@@ -24,13 +50,13 @@ import {Code as IconCode, Box} from 'react-feather';
 <Toggler
   items={[
     {
-      key: 'code',
+      name: 'code',
       tooltipText: 'Toggle source code',
       icon: <IconCode />,
       component: <Code language="html">{`<h1>Example output html</h1>`}</Code>
     },
     {
-      key: 'example',
+      name: 'example',
       tooltipText: 'Toggle example',
       icon: <Box />,
       component: <h1>Example output html</h1>,

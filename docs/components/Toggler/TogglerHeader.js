@@ -2,18 +2,21 @@ import React from 'react';
 import TogglerHeaderItem from './TogglerHeaderItem';
 import PropTypes from 'prop-types';
 
-function TogglerHeader({ items, activeKey, onClick }) {
+function TogglerHeader({ items, activeKey = 0, onClick }) {
   return (
     <section className="Toggler header">
-      {items.map(({ key, tooltipText, icon, component }) => (
-        <TogglerHeaderItem
-          key={key}
-          icon={icon}
-          tooltipText={tooltipText}
-          active={activeKey === key}
-          onClick={onClick(key, component)}
-        />
-      ))}
+      {items.map((item, key) => {
+        const { tooltipText, icon } = item;
+        return (
+          <TogglerHeaderItem
+            key={key}
+            icon={icon}
+            tooltipText={tooltipText}
+            active={activeKey === key}
+            onClick={onClick(item, key)}
+          />
+        );
+      })}
     </section>
   );
 }
@@ -21,7 +24,7 @@ function TogglerHeader({ items, activeKey, onClick }) {
 TogglerHeader.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      key: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
       tooltipText: PropTypes.string.isRequired,
       icon: PropTypes.element.isRequired,
       component: PropTypes.element.isRequired

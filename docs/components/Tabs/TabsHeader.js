@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 function TabsHeader({ items, activeKey, onClick }) {
   return (
     <div className={'Tabs'}>
-      {items.map(({ name }, key) => (
+      {items.map((item, key) => (
         <span
-          className={`TabsSelect ${activeKey === key ? 'active' : ''}`}
+          className={`item ${activeKey === key ? 'active' : ''}`}
           key={key}
-          onClick={onClick(key)}
+          onClick={onClick(item, key)}
         >
-          {name}
+          {item.name}
         </span>
       ))}
     </div>
@@ -20,10 +20,8 @@ function TabsHeader({ items, activeKey, onClick }) {
 TabsHeader.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      key: PropTypes.string.isRequired,
-      tooltipText: PropTypes.string.isRequired,
-      icon: PropTypes.element.isRequired,
-      component: PropTypes.element.isRequired
+      name: PropTypes.string.isRequired,
+      component: PropTypes.element
     })
   ).isRequired
 };

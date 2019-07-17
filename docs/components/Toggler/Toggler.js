@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import TogglerHeader from './TogglerHeader';
 import PropTypes from 'prop-types';
-
-function getDefaultToggle(items) {
-  return items.find(({ active }) => active === true) || items[0] || {};
-}
+import { getDefaultToggle } from './index.js';
 
 function Toggler({ items }) {
   const [state, setState] = useState({
-    activeKey: getDefaultToggle(items).key,
-    activeComponent: getDefaultToggle(items).component
+    activeKey: getDefaultToggle(items),
+    activeComponent: items[getDefaultToggle(items)].component || items[0]
   });
 
-  const toggleClick = (key, component) => () => {
+  const toggleClick = ({ component }, key) => () => {
     setState({
       activeKey: key,
       activeComponent: component
@@ -35,7 +32,7 @@ function Toggler({ items }) {
 Toggler.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      key: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
       tooltipText: PropTypes.string.isRequired,
       icon: PropTypes.element.isRequired,
       component: PropTypes.element.isRequired
