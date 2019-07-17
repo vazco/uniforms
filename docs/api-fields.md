@@ -60,16 +60,13 @@ However, you can replace the standard `AutoField` with a custom one through the 
 The `element` property defines a fields wrapping tag.
 Eg. you want to group your fields inside a section, just do `element="section"`. The default one is `div`.
 
-**Note:** All `BaseField` props are also accepted.
-
 ##### Props:
 
-|     Name     |       Default        |           Description           |
 | :----------: | :------------------: | :-----------------------------: |
-| `autoField`  | Standard `AutoField` | `AutoField` Component to render |
-|  `element`   |        `div`         |         Fields wrapper          |
-|   `fields`   |  All schema fields   |    List of fields to render     |
-| `omitFields` |         `[]`         |     List of fields to omit      |
+| `autoField` | Standard `AutoField` | `AutoField` Component to render |
+| `element` | `div` | Fields wrapper |
+| `fields` | All schema fields | List of fields to render |
+| `omitFields` | `[]` | List of fields to omit |
 
 ##### Props usage:
 
@@ -153,6 +150,8 @@ import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme packag
   grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
   grid={3} // 'col-3-sm' on label, 'col-9-sm' on input
   grid={{md: 5}} // 'col-5-md' on label, 'col-7-md' on input
+  help="Need help?"
+  helpClassName="a b c"
   inline={true}
   inputClassName="a b c"
   inputRef={ref => {}}
@@ -513,8 +512,6 @@ import NumField from 'uniforms-unstyled/NumField'; // Choose your theme package.
 
 ## `RadioField`
 
-A numeric input field.
-
 ##### Props:
 
 |       Name        |                                                          Description                                                          |              Available in              |
@@ -627,7 +624,7 @@ import SubmitField from 'uniforms-unstyled/SubmitField'; // Choose your theme pa
 | :---------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------: |
 |      `extra`      |                                 Extra feedback text. In the antd theme, this renders addtional help text below any validation messages.                                 |                  antd                  |
 |      `grid`       |        Field layout. Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object is a {mode: size} object. Complete string is simply passed through.        |         bootstrap3, bootstrap4         |
-|      `help`       |                                                           Help text. _Some description would be great, huh?_                                                            |         bootstrap3, bootstrap4         |
+|      `help`       |                                                           Help text. _Some description would be great, huh?_                                                            |      antd, bootstrap3, bootstrap4      |
 |  `helpClassName`  |                                                      Help block className. _Some description would be great, huh?_                                                      |         bootstrap3, bootstrap4         |
 |      `icon`       |             Input icon. Semantic inputs can have an icon. By default, it's placed on the right side - to place it on the left, use `iconLeft` prop instead.             |                semantic                |
 |    `iconLeft`     |                    Semantic inputs can have an icon. With this prop, it's placed on the left side - to place it on the right, use icon prop instead.                    |                semantic                |
