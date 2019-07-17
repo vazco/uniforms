@@ -26,6 +26,9 @@ module.exports = {
         docs: {
           path: '../docs',
           sidebarPath: require.resolve('./sidebars.json')
+        },
+        pages: {
+          path: './pages'
         }
       }
     ]
