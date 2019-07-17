@@ -3,28 +3,35 @@ import PropTypes from 'prop-types';
 import TabsHeader from './TabsHeader';
 
 const state = { activeKey: 0 };
-const handlers = [];
+const handlers = {};
 
-function handleSelect(item, activeKey) {
+function handleSelect(groupByKey, item, activeKey) {
   return () => {
-    handlers.forEach(handler => {
+    handlers[groupByKey].forEach(handler => {
       handler({ activeKey });
     });
   };
 }
 
-function TabsSelect({ tabs, children }) {
+function TabsSelect({ tabs, children, groupByKey = 'default' }) {
   const [{ activeKey }, setState] = useState(state);
   useEffect(() => {
-    handlers.push(setState);
+    if (handlers[groupByKey] === undefined) {
+      handlers[groupByKey] = [];
+    }
+    handlers[groupByKey].push(setState);
     return () => {
-      handlers.splice(handlers.indexOf(setState), 1);
+      handlers[groupByKey].splice(handlers[groupByKey].indexOf(setState), 1);
     };
-  }, []);
+  }, {});
 
   return (
     <>
-      <TabsHeader activeKey={activeKey} items={tabs} onClick={handleSelect} />
+      <TabsHeader
+        activeKey={activeKey}
+        items={tabs}
+        onClick={handleSelect.bind(this, groupByKey)}
+      />
       <div>{children(tabs[activeKey])}</div>
     </>
   );
