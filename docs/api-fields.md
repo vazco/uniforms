@@ -42,13 +42,15 @@ All additional props will be passed to the result field component.
 | `component` | Field according to the `AutoField` algorithm |       Component to render       |
 |   `name`    |                      -                       | Name of the field in the schema |
 
+**Note:** All `BaseField` props are also accepted.
+
+##### Props usage:
+
 ```js
 import AutoField from 'uniforms-unstyled/AutoField';
 
 <AutoField component={MyComponent} />;
 ```
-
-**Note:** All `BaseField` props are also accepted.
 
 ## `AutoFields`
 
@@ -58,6 +60,8 @@ However, you can replace the standard `AutoField` with a custom one through the 
 The `element` property defines a fields wrapping tag.
 Eg. you want to group your fields inside a section, just do `element="section"`. The default one is `div`.
 
+**Note:** All `BaseField` props are also accepted.
+
 ##### Props:
 
 |     Name     |       Default        |           Description           |
@@ -66,6 +70,8 @@ Eg. you want to group your fields inside a section, just do `element="section"`.
 |  `element`   |        `div`         |         Fields wrapper          |
 |   `fields`   |  All schema fields   |    List of fields to render     |
 | `omitFields` |         `[]`         |     List of fields to omit      |
+
+##### Props usage:
 
 ```js
 import AutoFields from 'uniforms-unstyled/AutoFields';
@@ -77,8 +83,6 @@ import AutoFields from 'uniforms-unstyled/AutoFields';
   omitFields={['fieldA', 'fieldB']}
 />;
 ```
-
-**Note:** All `BaseField` props are also accepted.
 
 ## `BaseField`
 
@@ -100,6 +104,8 @@ default one.
 |    `name`     |    -    |                                                                                              Field name. Used for identification. It should match your schema - if not, it will throw an error.                                                                                               |
 | `placeholder` | `false` |                                                                                  Field placeholder. If set to true, then a label will be used. Otherwise, it's handled like a label (including propagation).                                                                                  |
 |    `value`    |    -    |                                                                                                                Field value. Every field accepts its specific value type only.                                                                                                                 |
+
+##### Props usage:
 
 ```js
 import BaseField from 'uniforms/BaseField';
@@ -131,6 +137,8 @@ A checkbox.
 |   `wrapperCol`    |                                                     Field layout. The layout for input controls. Same as labelCol.                                                      |                  antd                  |
 
 **Note:** All `BaseField` props are also accepted.
+
+##### Props usage:
 
 ```js
 import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme package.
@@ -187,6 +195,8 @@ import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme packag
 
 **Note:** All `BaseField` props are also accepted.
 
+##### Props usage:
+
 ```js
 import DateField from 'uniforms-unstyled/DateField'; // Choose your theme package.
 
@@ -229,6 +239,8 @@ Error message renderer.
 | `children` | Custom content. By default, it will render a block with the error message (if any), but you can customize the content. |
 |   `name`   |                                     Target field. This field error should be used.                                     |
 
+##### Props usage:
+
 ```js
 import ErrorField from 'uniforms-unstyled/ErrorField'; // Choose your theme package.
 
@@ -245,6 +257,8 @@ Error messages renderer.
 | :--------: | :---------------------------------------------------------------------------------------------------------------------: |
 | `children` | Custom content. By default, it will render a block with the error messages (if any), but you can customize the content. |
 
+##### Props usage:
+
 ```js
 import ErrorsField from 'uniforms-unstyled/ErrorsField'; // Choose your theme package.
 
@@ -259,6 +273,8 @@ import ErrorsField from 'uniforms-unstyled/ErrorsField'; // Choose your theme pa
 | :-----: | :-------------------------------------------------------------------------------------------------------------------------------------------------------: |
 | `name`  |                            Field name. Used for identification. It should match your schema - if not, it will throw an error.                             |
 | `value` | Field value. This field has completely different semantics. When a value is set, then it's updating a current model instead of being passed to the field. |
+
+##### Props usage:
 
 ```js
 import HiddenField from 'uniforms-unstyled/HiddenField'; // Choose your theme package.
@@ -277,6 +293,8 @@ import HiddenField from 'uniforms-unstyled/HiddenField'; // Choose your theme pa
 **Note:** All `BaseField` props are also accepted.<br />
 **Note:** This is one of _internal_ components of `ListField`.
 
+##### Props usage:
+
 ```js
 import ListAddField from 'uniforms-unstyled/ListAddField'; // Choose your theme package.
 
@@ -293,6 +311,8 @@ import ListAddField from 'uniforms-unstyled/ListAddField'; // Choose your theme 
 
 **Note:** All `BaseField` props are also accepted.<br />
 **Note:** This is one of _internal_ components of `ListField`.
+
+##### Props usage:
 
 ```js
 import ListDelField from 'uniforms-unstyled/ListDelField'; // Choose your theme package.
@@ -313,6 +333,8 @@ import ListDelField from 'uniforms-unstyled/ListDelField'; // Choose your theme 
 | `showInlineError` |           |              Field inline error. _Some description would be great, huh?_               | bootstrap3, bootstrap4, semantic |
 
 **Note:** All `BaseField` props are also accepted.
+
+##### Props usage:
 
 ```js
 import ListField from 'uniforms-unstyled/ListField'; // Choose your theme package.
@@ -338,6 +360,8 @@ import ListField from 'uniforms-unstyled/ListField'; // Choose your theme packag
 
 **Note:** All `BaseField` props are also accepted.<br />
 **Note:** This is one of _internal_ components of `ListField`.
+
+##### Props usage:
 
 ```js
 import ListItemField from 'uniforms-unstyled/ListItemField'; // Choose your theme package.
@@ -370,6 +394,8 @@ A textarea.
 |  `wrapClassName`  |                                             Field and sourroundings wrap className. _Some description would be great, huh?_                                             |         bootstrap3, bootstrap4         |
 
 **Note:** All `BaseField` props are also accepted.
+
+##### Props usage:
 
 ```js
 import LongTextField from 'uniforms-unstyled/LongTextField'; // Choose your theme package.
@@ -409,6 +435,8 @@ import LongTextField from 'uniforms-unstyled/LongTextField'; // Choose your them
 
 **Note:** All `BaseField` props are also accepted.
 
+##### Props usage:
+
 ```js
 import NestField from 'uniforms-unstyled/NestField'; // Choose your theme package.
 
@@ -444,6 +472,8 @@ A numeric input field.
 |  `wrapClassName`  |                                             Field and sourroundings wrap className. _Some description would be great, huh?_                                             |         bootstrap3, bootstrap4         |
 
 **Note:** All `BaseField` props are also accepted.
+
+##### Props usage:
 
 ```js
 import NumField from 'uniforms-unstyled/NumField'; // Choose your theme package.
@@ -494,6 +524,8 @@ A numeric input field.
 
 **Note:** All `BaseField` props are also accepted.
 
+##### Props usage:
+
 ```js
 import RadioField from 'uniforms-unstyled/RadioField'; // Choose your theme package.
 
@@ -534,6 +566,8 @@ import RadioField from 'uniforms-unstyled/RadioField'; // Choose your theme pack
 
 **Note:** All `BaseField` props are also accepted.
 
+##### Props usage:
+
 ```js
 import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme package.
 
@@ -565,6 +599,8 @@ import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme pa
 | `inputClassName` |                      Input wrapper class name. In bootstrap themes, passed className is used on field block. This is used on direct field wrapper.                      | bootstrap3, bootstrap4 |
 |    `inputRef`    | Setting ref prop to a field won't work as desired, because you'll receive a field component rather than an HTML input. If you need an input ref, use this prop instead. |          All           |
 
+##### Props usage:
+
 ```js
 import SubmitField from 'uniforms-unstyled/SubmitField'; // Choose your theme package.
 
@@ -593,6 +629,8 @@ import SubmitField from 'uniforms-unstyled/SubmitField'; // Choose your theme pa
 |  `wrapClassName`  |                                             Field and sourroundings wrap className. _Some description would be great, huh?_                                             |         bootstrap3, bootstrap4         |
 
 **Note:** All `BaseField` props are also accepted.
+
+##### Props usage:
 
 ```js
 import TextField from 'uniforms-unstyled/TextField'; // Choose your theme package.
