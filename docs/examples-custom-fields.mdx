@@ -13,6 +13,9 @@ import CompositeFieldSchema from './components/Examples/CustomFields/CompositeFi
 import ExamplesCycleField from './components/Examples/CustomFields/CycleField';
 import CycleFieldSchema from './components/Examples/CustomFields/CycleFieldSchema.md';
 
+import ExamplesDisplayIfField from './components/Examples/CustomFields/DisplayIfField';
+import DisplayIfFieldSchema from './components/Examples/CustomFields/DisplayIfFieldSchema.md';
+
 ### `CompositeField`
 
 This field is a kind of a shortcut for few fields. You can also access all
@@ -121,33 +124,42 @@ export default function ExamplesCycleField() {
 
 ### `DisplayIf`
 
-```js
-import BaseField from 'uniforms/BaseField';
-import nothing from 'uniforms/nothing';
-import {Children} from 'react';
+This simple field component conditionally displays other fields based on input.
 
+<ExampleCustomizer
+  code={theme => (
+    <Code language="js">
+      {`import React, { Children } from 'react';
+import BaseField from 'uniforms/BaseField';
+import nothing from 'uniforms/nothing';\n
+import {AutoForm, SubmitField, TextField} from 'uniforms-${theme}';
+import schema from './DisplayIfFieldSchema';\n
 // We have to ensure that there's only one child, because returning an array
 // from a component is prohibited.
-const DisplayIf = ({children, condition}, {uniforms}) => (condition(uniforms) ? Children.only(children) : nothing);
-DisplayIf.contextTypes = BaseField.contextTypes;
-
-// Usage.
-const ThreeStepForm = ({schema}) => (
-  <AutoForm schema={schema}>
-    <TextField name="fieldA" />
-
-    <DisplayIf condition={context => context.model.fieldA}>
-      <section>
-        <TextField name="fieldB" />
-
-        <DisplayIf condition={context => context.model.fieldB}>
-          <span>Well done!</span>
-        </DisplayIf>
-      </section>
-    </DisplayIf>
-  </AutoForm>
-);
-```
+const DisplayIf = ({ children, condition }, { uniforms }) =>
+  condition(uniforms) ? Children.only(children) : nothing;\n
+DisplayIf.contextTypes = BaseField.contextTypes;\n
+export default function ExamplesDisplayIfField() {
+  return (
+    <AutoForm schema={schema}>
+      <TextField name="fieldA" />
+      <DisplayIf condition={context => context.model.fieldA}>
+        <section>
+          <TextField name="fieldB" />
+          <DisplayIf condition={context => context.model.fieldB}>
+            <span>Well done!</span>
+          </DisplayIf>
+        </section>
+      </DisplayIf>
+      <SubmitField />
+    </AutoForm>
+  );
+}`}
+    </Code>
+  )}
+  example={<ExamplesDisplayIfField />}
+  schema={<DisplayIfFieldSchema />}
+/>
 
 ### `RangeField`
 
