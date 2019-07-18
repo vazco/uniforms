@@ -122,9 +122,10 @@ A checkbox.
 |       Name        |                                                                               Description                                                                               |                 le in                  |
 | :---------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------: |
 |   `appearance`    |                 Field appearance. Set to "toggle" to appear as a Material Toggle or to "checkbox" (or leave it undefined) to use a Checkbox appearance.                 |                material                |
+|      `extra`      |                                 Extra feedback text. In the antd theme, this renders addtional help text below any validation messages.                                 |                  antd                  |
 |  `feedbackable`   |                                                      Field feedback state. _Some description would be great, huh?_                                                      |               bootstrap4               |
 |      `grid`       |        Field layout. Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object is a {mode: size} object. Complete string is simply passed through.        |         bootstrap3, bootstrap4         |
-|      `help`       |                                                           Help text. _Some description would be great, huh?_                                                            |         bootstrap3, bootstrap4         |
+|      `help`       |                                                           Help text. _Some description would be great, huh?_                                                            |      antd, bootstrap3, bootstrap4      |
 |  `helpClassName`  |                                                      Help block className. _Some description would be great, huh?_                                                      |         bootstrap3, bootstrap4         |
 |     `inline`      |                      Checkbox inline state. In bootstrap themes, a label is rendered as a text but in inline mode, it's treated as a field label.                       |         bootstrap3, bootstrap4         |
 | `inputClassName`  |                      Input wrapper class name. In bootstrap themes, passed className is used on field block. This is used on direct field wrapper.                      |         bootstrap3, bootstrap4         |
@@ -146,13 +147,12 @@ import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme packag
 <BoolField
   appearance="checkbox" // Renders a material-ui Checkbox
   appearance="toggle" // Renders a material-ui Toggle
+  extra="Extra Feedback or Help"
   feedbackable={true}
   grid="4" // 'col-4-sm' on label, 'col-8-sm' on input
   grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
   grid={3} // 'col-3-sm' on label, 'col-9-sm' on input
   grid={{md: 5}} // 'col-5-md' on label, 'col-7-md' on input
-  help="Need help?"
-  helpClassName="a b c"
   inline={true}
   inputClassName="a b c"
   inputRef={ref => {}}
@@ -174,9 +174,10 @@ import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme packag
 
 |       Name        |                                                                                  Description                                                                                   |              Available in              |
 | :---------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------: |
+|      `extra`      |                                    Extra feedback text. In the antd theme, this renders addtional help text below any validation messages.                                     |                  antd                  |
 |  `feedbackable`   |                                                         Field feedback state. _Some description would be great, huh?_                                                          |               bootstrap4               |
 |      `grid`       |           Field layout. Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object is a {mode: size} object. Complete string is simply passed through.            |         bootstrap3, bootstrap4         |
-|      `help`       |                                                               Help text. _Some description would be great, huh?_                                                               |         bootstrap3, bootstrap4         |
+|      `help`       |                                                               Help text. _Some description would be great, huh?_                                                               |      antd,bootstrap3, bootstrap4       |
 |  `helpClassName`  |                                                         Help block className. _Some description would be great, huh?_                                                          |         bootstrap3, bootstrap4         |
 |      `icon`       |                Input icon. Semantic inputs can have an icon. By default, it's placed on the right side - to place it on the left, use `iconLeft` prop instead.                 |                semantic                |
 |    `iconLeft`     |                       Semantic inputs can have an icon. With this prop, it's placed on the left side - to place it on the right, use icon prop instead.                        |                semantic                |
@@ -201,6 +202,7 @@ import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme packag
 import DateField from 'uniforms-unstyled/DateField'; // Choose your theme package.
 
 <DateField
+  extra="Extra Feedback or Help"
   feedbackable={true}
   grid="4" // 'col-4-sm' on label, 'col-8-sm' on input
   grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
@@ -377,8 +379,9 @@ A textarea.
 
 |       Name        |                                                                               Description                                                                               |              Available in              |
 | :---------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------: |
+|      `extra`      |                                 Extra feedback text. In the antd theme, this renders addtional help text below any validation messages.                                 |                  antd                  |
 |      `grid`       |        Field layout. Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object is a {mode: size} object. Complete string is simply passed through.        |         bootstrap3, bootstrap4         |
-|      `help`       |                                                           Help text. _Some description would be great, huh?_                                                            |         bootstrap3, bootstrap4         |
+|      `help`       |                                                           Help text. _Some description would be great, huh?_                                                            |      antd, bootstrap3, bootstrap4      |
 |  `helpClassName`  |                                                      Help block className. _Some description would be great, huh?_                                                      |         bootstrap3, bootstrap4         |
 |      `icon`       |             Input icon. Semantic inputs can have an icon. By default, it's placed on the right side - to place it on the left, use `iconLeft` prop instead.             |                semantic                |
 |    `iconLeft`     |                    Semantic inputs can have an icon. With this prop, it's placed on the left side - to place it on the right, use icon prop instead.                    |                semantic                |
@@ -401,6 +404,7 @@ A textarea.
 import LongTextField from 'uniforms-unstyled/LongTextField'; // Choose your theme package.
 
 <LongTextField
+  extra="Extra Feedback or Help"
   grid="4" // 'col-4-sm' on label, 'col-8-sm' on input
   grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
   grid={3} // 'col-3-sm' on label, 'col-9-sm' on input
@@ -452,8 +456,9 @@ A numeric input field.
 |       Name        |                                                                               Description                                                                               |              Available in              |
 | :---------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------: |
 |     `decimal`     |                                                        Decimal mode. This will change value step from 1 to 0.01.                                                        |                  All                   |
+|      `extra`      |                                 Extra feedback text. In the antd theme, this renders addtional help text below any validation messages.                                 |                  antd                  |
 |      `grid`       |        Field layout. Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object is a {mode: size} object. Complete string is simply passed through.        |         bootstrap3, bootstrap4         |
-|      `help`       |                                                           Help text. _Some description would be great, huh?_                                                            |         bootstrap3, bootstrap4         |
+|      `help`       |                                                           Help text. _Some description would be great, huh?_                                                            |      antd, bootstrap3, bootstrap4      |
 |  `helpClassName`  |                                                      Help block className. _Some description would be great, huh?_                                                      |         bootstrap3, bootstrap4         |
 |      `icon`       |             Input icon. Semantic inputs can have an icon. By default, it's placed on the right side - to place it on the left, use `iconLeft` prop instead.             |                semantic                |
 |    `iconLeft`     |                    Semantic inputs can have an icon. With this prop, it's placed on the left side - to place it on the right, use icon prop instead.                    |                semantic                |
@@ -480,6 +485,7 @@ import NumField from 'uniforms-unstyled/NumField'; // Choose your theme package.
 
 <NumField
   decimal={true}
+  extra="Extra Feedback or Help"
   grid="4" // 'col-4-sm' on label, 'col-8-sm' on input
   grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
   grid={3} // 'col-3-sm' on label, 'col-9-sm' on input
@@ -552,6 +558,9 @@ import RadioField from 'uniforms-unstyled/RadioField'; // Choose your theme pack
 | :---------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------: |
 |  `allowedValues`  |                                               Array of allowed values. By default, those are extracted from your schema.                                                |                  All                   |
 |   `checkboxes`    |                                       Turn on checkbox/radio mode. It's always true in mutltiple (i.e. fieldType === Array) mode.                                       |                  All                   |
+|      `extra`      |                                 Extra feedback text. In the antd theme, this renders addtional help text below any validation messages.                                 |                  antd                  |
+|      `help`       |                                                           Help text. _Some description would be great, huh?_                                                            |      antd, bootstrap3, bootstrap4      |
+|  `helpClassName`  |                                                      Help block className. _Some description would be great, huh?_                                                      |         bootstrap3, bootstrap4         |
 |     `inline`      |                      Checkbox inline state. In bootstrap themes, a label is rendered as a text but in inline mode, it's treated as a field label.                       |         bootstrap3, bootstrap4         |
 | `inputClassName`  |                      Input wrapper class name. In bootstrap themes, passed className is used on field block. This is used on direct field wrapper.                      |         bootstrap3, bootstrap4         |
 |    `inputRef`     | Setting ref prop to a field won't work as desired, because you'll receive a field component rather than an HTML input. If you need an input ref, use this prop instead. |                  All                   |
@@ -574,6 +583,9 @@ import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme pa
 <SelectField
   allowedValues={[value1, value2 /* ... */]}
   checkboxes={true}
+  extra="Extra Feedback or Help"
+  help="Need help?"
+  helpClassName="a b c"
   inline={true}
   inputClassName="a b c"
   inputRef={ref => {}}
@@ -613,6 +625,7 @@ import SubmitField from 'uniforms-unstyled/SubmitField'; // Choose your theme pa
 
 |       Name        |                                                                               Description                                                                               |              Available in              |
 | :---------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------: |
+|      `extra`      |                                 Extra feedback text. In the antd theme, this renders addtional help text below any validation messages.                                 |                  antd                  |
 |      `grid`       |        Field layout. Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object is a {mode: size} object. Complete string is simply passed through.        |         bootstrap3, bootstrap4         |
 |      `help`       |                                                           Help text. _Some description would be great, huh?_                                                            |         bootstrap3, bootstrap4         |
 |  `helpClassName`  |                                                      Help block className. _Some description would be great, huh?_                                                      |         bootstrap3, bootstrap4         |
@@ -636,6 +649,7 @@ import SubmitField from 'uniforms-unstyled/SubmitField'; // Choose your theme pa
 import TextField from 'uniforms-unstyled/TextField'; // Choose your theme package.
 
 <TextField
+  extra="Extra Feedback or Help"
   grid="4" // 'col-4-sm' on label, 'col-8-sm' on input
   grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
   grid={3} // 'col-3-sm' on label, 'col-9-sm' on input
