@@ -3,7 +3,7 @@ id: uth-context-data
 title: Context data
 ---
 
-Some components might need to know a current form state. All this data is passed as `uniforms` in [React context](https://facebook.github.io/react/docs/context.html).
+Some components might need to know a current form state. All this data is passed as `uniforms` in [React context](https://reactjs.org/docs/legacy-context.html).
 
 ## Available context data
 
