@@ -69,10 +69,34 @@ const MyForm = ({schema, onSubmit}) => {
 
 All available methods:
 
-- `change(key, value)`
-- `reset()`
-- `submit()`
-- `validate()` _(added in `ValidatedForm`)_
+#### `change(key, value)`
+
+Triggers a form change. It's a programatic equivalent of a change event.
+
+#### `reset()`
+
+Resets a form. It will reset changed state, model state in AutoForm, validation state in ValidatedForm and rerender.
+
+#### `submit()`
+
+Submits a form. It's a programatic equivalent of a submit event. Returns a promise, which will either resolve with submitted form or reject with validation error in ValidatedForm. You can also use onSubmitFailure and onSubmitSuccess instead of doing form.submit().then().
+
+#### `validate()`
+
+_(added in `ValidatedForm`)_
+Validates a form with the current model. Returns a Promise, which rejects with an validation error or resolves without any value. Note, that it resolves/rejects AFTER the component is rerendered.
+
+#### `validate(key, value)`
+
+_(added in `ValidatedForm`)_
+
+Validates a form with key set to value. You can use it to check, if a given value will pass the validation or not. Returns validation Promise, as described above.
+
+### `validateModel(model)`
+
+_(added in `ValidatedForm`) Rather internal function._
+
+Validates a form with the given model. Returns validation Promise, as described above.
 
 ## Change reactions
 
