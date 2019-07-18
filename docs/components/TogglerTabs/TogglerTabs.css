@@ -1,9 +1,3 @@
-.TogglerTabs .content {
-    border: 1px solid var(--ifm-color-emphasis-alpha-30);
-    border-radius: 5px;
-    padding: 1em;
-}
-
 .TogglerTabs .header {
     display: flex;
     justify-content: space-between;

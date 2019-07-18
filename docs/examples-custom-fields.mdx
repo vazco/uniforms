@@ -3,25 +3,47 @@ id: examples-custom-fields
 title: Custom fields
 ---
 
+import ExampleCustomizer from './components/Examples/ExampleCustomizer';
+import TogglerTabs from './components/TogglerTabs';
+import ExamplesCustomField from './components/Examples/CustomFields/CompositeField';
+import CompositeFieldSchema from './components/Examples/CustomFields/CompositeFieldSchema.md';
+import {Code} from './components/Code';
+
 ### `CompositeField`
 
-```js
-import AutoField from 'uniforms/AutoField';
-import React from 'react';
-import connectField from 'uniforms/connectField';
+This field is a kind of a shortcut for few fields. You can also access all
+field props here, like value or onChange for some extra logic.
 
-// This field is a kind of a shortcut for few fields. You can also access all
-// field props here, like value or onChange for some extra logic.
+<ExampleCustomizer
+  code={theme => (
+    <Code language="js">
+      {`import React from 'react';
+import connectField from 'uniforms/connectField';
+import { AutoField, AutoForm, SubmitField } from 'uniforms-${theme}';
+import schema from './CompositeFieldSchema';
 const Composite = () => (
   <section>
-    <AutoField field="firstName" />
-    <AutoField field="lastName" />
-    <AutoField field="age" />
+    <AutoField name="firstName" />
+    <AutoField name="lastName" />
+    <AutoField name="workExperience" />
+    <hr />
   </section>
 );
-
 const CompositeField = connectField(Composite);
-```
+export default function ExamplesCustomField() {
+  return (
+    <AutoForm schema={schema}>
+      <CompositeField name="personA" />
+      <CompositeField name="personB" />
+      <SubmitField />
+    </AutoForm>
+  );
+}`}
+    </Code>
+  )}
+  example={<ExamplesCustomField />}
+  schema={<CompositeFieldSchema />}
+/>
 
 ### `CustomAutoField`
 

@@ -48,7 +48,9 @@ TogglerTabs.propTypes = {
   ).isRequired,
   togglerItems: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string.isRequired
+      name: PropTypes.string.isRequired,
+      tooltipText: PropTypes.string.isRequired,
+      icon: PropTypes.element.isRequired
     })
   ).isRequired
 };
