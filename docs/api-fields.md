@@ -130,6 +130,7 @@ import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme packag
   // Help text.
   //   *Some description would be great, huh?*
   // Available in:
+  //   antd
   //   bootstrap3
   //   bootstrap4
   help="Need help?"
@@ -139,6 +140,11 @@ import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme packag
   //   bootstrap3
   //   bootstrap4
   helpClassName="a b c"
+  // Extra feedback text.
+  //   In the antd theme, this renders addtional help text below any validation messages.
+  // Available in:
+  //   antd
+  extra="Extra Feedback or Help"
   // Checkbox inline state.
   //   In bootstrap themes, a label is rendered as a text but in inline mode,
   //   it's treated as a field label.
@@ -227,6 +233,7 @@ import DateField from 'uniforms-unstyled/DateField'; // Choose your theme packag
   // Help text.
   //   *Some description would be great, huh?*
   // Available in:
+  //   antd
   //   bootstrap3
   //   bootstrap4
   help="Need help?"
@@ -236,6 +243,11 @@ import DateField from 'uniforms-unstyled/DateField'; // Choose your theme packag
   //   bootstrap3
   //   bootstrap4
   helpClassName="a b c"
+  // Extra feedback text.
+  //   In the antd theme, this renders addtional help text below any validation messages.
+  // Available in:
+  //   antd
+  extra="Extra Feedback or Help"
   // Input icon.
   //   Semantic inputs can have an icon. By default, it's placed on the right
   //   side - to place it on the left, use iconLeft prop instead.
@@ -458,12 +470,6 @@ import LongTextField from 'uniforms-unstyled/LongTextField'; // Choose your them
   grid="4" // 'col-4-sm' on label, 'col-8-sm' on input
   grid={{md: 5}} // 'col-5-md' on label, 'col-7-md' on input
   grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
-  // Help text.
-  //   *Some description would be great, huh?*
-  // Available in:
-  //   bootstrap3
-  //   bootstrap4
-  help="Need help?"
   // label className.
   //   A custom className for the field's label
   // Available in:
@@ -483,12 +489,24 @@ import LongTextField from 'uniforms-unstyled/LongTextField'; // Choose your them
   //   antd
   wrapperCol={{span: 4}} // 'ant-col-4' on field
   wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
+  // Help text.
+  //   *Some description would be great, huh?*
+  // Available in:
+  //   antd
+  //   bootstrap3
+  //   bootstrap4
+  help="Need help?"
   // Help block className.
   //   *Some description would be great, huh?*
   // Available in:
   //   bootstrap3
   //   bootstrap4
   helpClassName="a b c"
+  // Extra feedback text.
+  //   In the antd theme, this renders addtional help text below any validation messages.
+  // Available in:
+  //   antd
+  extra="Extra Feedback or Help"
   // Input icon.
   //   Semantic inputs can have an icon. By default, it's placed on the right
   //   side - to place it on the left, use iconLeft prop instead.
@@ -609,6 +627,7 @@ import NumField from 'uniforms-unstyled/NumField'; // Choose your theme package.
   // Help text.
   //   *Some description would be great, huh?*
   // Available in:
+  //   antd
   //   bootstrap3
   //   bootstrap4
   help="Need help?"
@@ -618,6 +637,11 @@ import NumField from 'uniforms-unstyled/NumField'; // Choose your theme package.
   //   bootstrap3
   //   bootstrap4
   helpClassName="a b c"
+  // Extra feedback text.
+  //   In the antd theme, this renders addtional help text below any validation messages.
+  // Available in:
+  //   antd
+  extra="Extra Feedback or Help"
   // Input icon.
   //   Semantic inputs can have an icon. By default, it's placed on the right
   //   side - to place it on the left, use iconLeft prop instead.
@@ -765,6 +789,24 @@ import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme pa
   //   antd
   wrapperCol={{span: 4}} // 'ant-col-4' on field
   wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
+  // Help text.
+  //   *Some description would be great, huh?*
+  // Available in:
+  //   antd
+  //   bootstrap3
+  //   bootstrap4
+  help="Need help?"
+  // Help block className.
+  //   *Some description would be great, huh?*
+  // Available in:
+  //   bootstrap3
+  //   bootstrap4
+  helpClassName="a b c"
+  // Extra feedback text.
+  //   In the antd theme, this renders addtional help text below any validation messages.
+  // Available in:
+  //   antd
+  extra="Extra Feedback or Help"
   // Checkbox inline state.
   //   In bootstrap themes, label is rendered as a text, but in inline mode,
   //   it's treated as a field label.
@@ -864,9 +906,10 @@ import TextField from 'uniforms-unstyled/TextField'; // Choose your theme packag
   //   antd
   wrapperCol={{span: 4}} // 'ant-col-4' on field
   wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
-  // Help text.
+    // Help text.
   //   *Some description would be great, huh?*
   // Available in:
+  //   antd
   //   bootstrap3
   //   bootstrap4
   help="Need help?"
@@ -876,6 +919,11 @@ import TextField from 'uniforms-unstyled/TextField'; // Choose your theme packag
   //   bootstrap3
   //   bootstrap4
   helpClassName="a b c"
+  // Extra feedback text.
+  //   In the antd theme, this renders addtional help text below any validation messages.
+  // Available in:
+  //   antd
+  extra="Extra Feedback or Help"
   // Input icon.
   //   Semantic inputs can have an icon. By default, it's placed on the right
   //   side - to place it on the left, use iconLeft prop instead.
