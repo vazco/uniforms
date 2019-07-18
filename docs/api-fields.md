@@ -28,7 +28,9 @@ The list below contains a guaranteed set of fields, implemented in every theme p
 |  `SubmitField`  |                 Submit button.                  |
 |   `TextField`   |      Text (or any HTML5 compatible) input.      |
 
-## `AutoField`
+## Fields
+
+### `AutoField`
 
 `AutoField` is basically a field renderer - it will render a field of a type adequate to the one defined in the schema,
 according to the [`AutoField` algorithm](uth-autofield-algorithm).
@@ -52,7 +54,7 @@ import AutoField from 'uniforms-unstyled/AutoField';
 <AutoField component={MyComponent} />;
 ```
 
-## `AutoFields`
+### `AutoFields`
 
 `AutoFields` is basically a set of rendered `AutoFields`.
 By default, the rendered fields will be `AutoFields` in chosen theme.
@@ -81,7 +83,7 @@ import AutoFields from 'uniforms-unstyled/AutoFields';
 />;
 ```
 
-## `BaseField`
+### `BaseField`
 
 You can't really render a BaseField because it doesn't have a render method.
 It's a base class of All packaged fields, so that All props below are available
@@ -110,7 +112,7 @@ import BaseField from 'uniforms/BaseField';
 <BaseField disabled={false} label={true} name="field" placeholder={false} value={value} />;
 ```
 
-## `BoolField`
+### `BoolField`
 
 A checkbox.
 
@@ -167,7 +169,7 @@ import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme packag
 />;
 ```
 
-## `DateField`
+### `DateField`
 
 ##### Props:
 
@@ -229,7 +231,7 @@ import DateField from 'uniforms-unstyled/DateField'; // Choose your theme packag
 />;
 ```
 
-## `ErrorField`
+### `ErrorField`
 
 Error message renderer.
 
@@ -248,7 +250,7 @@ import ErrorField from 'uniforms-unstyled/ErrorField'; // Choose your theme pack
 <ErrorField children={children} name="field" />;
 ```
 
-## `ErrorsField`
+### `ErrorsField`
 
 Error messages renderer.
 
@@ -266,7 +268,7 @@ import ErrorsField from 'uniforms-unstyled/ErrorsField'; // Choose your theme pa
 <ErrorsField children={children} />;
 ```
 
-## `HiddenField`
+### `HiddenField`
 
 ##### Props:
 
@@ -283,7 +285,7 @@ import HiddenField from 'uniforms-unstyled/HiddenField'; // Choose your theme pa
 <HiddenField name="field" value={value} />;
 ```
 
-## `ListAddField`
+### `ListAddField`
 
 ##### Props:
 
@@ -302,7 +304,7 @@ import ListAddField from 'uniforms-unstyled/ListAddField'; // Choose your theme 
 <ListAddField addIcon={<MyAddIcon />} />;
 ```
 
-## `ListDelField`
+### `ListDelField`
 
 ##### Props:
 
@@ -321,7 +323,7 @@ import ListDelField from 'uniforms-unstyled/ListDelField'; // Choose your theme 
 <ListDelField removeIcon={<MyRemoveIcon />} />;
 ```
 
-## `ListField`
+### `ListField`
 
 ##### Props:
 
@@ -353,7 +355,7 @@ import ListField from 'uniforms-unstyled/ListField'; // Choose your theme packag
 />;
 ```
 
-## `ListItemField`
+### `ListItemField`
 
 |     Name     |  Default  |              Description               |      Available in      |
 | :----------: | :-------: | :------------------------------------: | :--------------------: |
@@ -370,7 +372,7 @@ import ListItemField from 'uniforms-unstyled/ListItemField'; // Choose your them
 <ListItemField removeIcon={<MyRemoveIcon />} />;
 ```
 
-## `LongTextField`
+### `LongTextField`
 
 A textarea.
 
@@ -426,7 +428,7 @@ import LongTextField from 'uniforms-unstyled/LongTextField'; // Choose your them
 />;
 ```
 
-## `NestField`
+### `NestField`
 
 ##### Props:
 
@@ -446,7 +448,7 @@ import NestField from 'uniforms-unstyled/NestField'; // Choose your theme packag
 <NestField fields={['fieldA', 'fieldB' /* ... */]} grouped={true} showInlineError={true} />;
 ```
 
-## `NumField`
+### `NumField`
 
 A numeric input field.
 
@@ -510,7 +512,7 @@ import NumField from 'uniforms-unstyled/NumField'; // Choose your theme package.
 />;
 ```
 
-## `RadioField`
+### `RadioField`
 
 ##### Props:
 
@@ -547,7 +549,7 @@ import RadioField from 'uniforms-unstyled/RadioField'; // Choose your theme pack
 />;
 ```
 
-## `SelectField`
+### `SelectField`
 
 ##### Props:
 
@@ -599,7 +601,7 @@ import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme pa
 />;
 ```
 
-## `SubmitField`
+### `SubmitField`
 
 ##### Props:
 
@@ -616,7 +618,7 @@ import SubmitField from 'uniforms-unstyled/SubmitField'; // Choose your theme pa
 <SubmitField inputClassName="a b c" inputRef={ref => {}} />;
 ```
 
-## `TextField`
+### `TextField`
 
 ##### Props:
 
@@ -669,3 +671,36 @@ import TextField from 'uniforms-unstyled/TextField'; // Choose your theme packag
   wrapperCol={{span: 4}} // 'ant-col-4' on field
 />;
 ```
+
+## Props propagation
+
+Few props propagate in a very special way. These are `label`, `placeholder` and `disabled`.
+
+**Example:**
+
+```js
+<TextField />                    // default label | no      placeholder
+<TextField label="Text" />       // custom  label | no      placeholder
+<TextField label={false} />      // no      label | no      placeholder
+<TextField placeholder />        // default label | default placeholder
+<TextField placeholder="Text" /> // default label | custom  placeholder
+
+<NestField label={null}> // null = no label but the children have their labels
+    <TextField />
+</NestField>
+
+<NestField label={false}> // false = no label and the children have no labels
+    <TextField />
+</NestField>
+
+<ListField name="authors" disabled>          // Additions are disabled...
+    <ListItemField name="$" disabled>        // ...deletion too
+        <NestField disabled={false} name=""> // ...but editing is not.
+            <TextField name="name" />
+            <NumField  name="age" />
+        </NestField>
+    </ListItemField>
+</ListField>
+```
+
+**Note:** `label`, `placeholder` and `disabled` are cast to `Boolean` before being passed to nested fields.
