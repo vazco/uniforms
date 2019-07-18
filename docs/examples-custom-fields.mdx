@@ -19,6 +19,9 @@ import DisplayIfFieldSchema from './components/Examples/CustomFields/DisplayIfFi
 import ExamplesRangeField from './components/Examples/CustomFields/RangeField';
 import RangeFieldSchema from './components/Examples/CustomFields/RangeFieldSchema.md';
 
+import ExamplesRatingField from './components/Examples/CustomFields/RatingField';
+import RatingFieldSchema from './components/Examples/CustomFields/RatingFieldSchema.md';
+
 ### `CompositeField`
 
 This field is a kind of a shortcut for few fields. You can also access all
@@ -211,29 +214,55 @@ export default function ExamplesRangeField() {
 
 ### `RatingField`
 
-```js
-import React from 'react';
-import classnames from 'classnames';
-import connectField from 'uniforms/connectField';
+This field works as follows: render stars for each rating and mark them as
+filled, if rating (value) is greater.
 
-// This field works as follows: render stars for each rating and mark them as
-// filled, if rating (value) is greater. This one uses Semantic-UI.
-const Rating = ({className, disabled, max = 5, required, value, onChange}) => (
-  <section className={classnames('ui', {disabled, required}, className, 'rating')}>
+<ExampleCustomizer
+  code={theme => (
+    <Code language="js">
+      {`import React from 'react';
+import classnames from 'classnames';
+import connectField from 'uniforms/connectField';\n
+import { AutoForm, SubmitField } from 'uniforms-${theme}';
+import schema from './RatingFieldSchema';\n
+const Rating = ({
+  className,
+  disabled,
+  max = 5,
+  required,
+  value,
+  onChange
+}) => (
+  <section className={classnames('ui', { disabled, required }, className)}>
     {[...Array(max)]
       .map((_, index) => index + 1)
       .map(index => (
-        <i
+        <span
+          style={{ fontSize: 40 }}
           key={index}
-          className={classnames(index <= value && 'active', 'icon')}
-          onClick={() => disabled || onChange(!required && value === index ? null : index)}
-        />
+          onClick={() =>
+            disabled || onChange(!required && value === index ? null : index)
+          }
+        >
+          {index <= value ? '★' : '☆'}
+        </span>
       ))}
   </section>
-);
-
-const RatingField = connectField(Rating);
-```
+);\n
+const RatingField = connectField(Rating);\n
+export default function ExamplesRangeField() {
+  return (
+    <AutoForm schema={schema} onSubmit={console.log}>
+      <RatingField name="rating" />
+      <SubmitField />
+    </AutoForm>
+  );
+}`}
+    </Code>
+  )}
+  example={<ExamplesRatingField />}
+  schema={<RatingFieldSchema />}
+/>
 
 ### `SubmitButton`
 
