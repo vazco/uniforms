@@ -1,6 +1,6 @@
 {
   "docs": {
-    "Introduction": ["introduction", "tabs"],
+    "Introduction": ["introduction"],
     "Getting Started": ["installation"],
     "Tutorials": [
       "tutorials-basic-uniforms-usage",
