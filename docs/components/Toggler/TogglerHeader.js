@@ -25,8 +25,7 @@ TogglerHeader.propTypes = {
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       tooltipText: PropTypes.string.isRequired,
-      icon: PropTypes.element.isRequired,
-      component: PropTypes.element.isRequired
+      icon: PropTypes.element.isRequired
     })
   ).isRequired,
   activeToggle: PropTypes.number,

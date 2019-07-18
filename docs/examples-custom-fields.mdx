@@ -16,6 +16,9 @@ import CycleFieldSchema from './components/Examples/CustomFields/CycleFieldSchem
 import ExamplesDisplayIfField from './components/Examples/CustomFields/DisplayIfField';
 import DisplayIfFieldSchema from './components/Examples/CustomFields/DisplayIfFieldSchema.md';
 
+import ExamplesRangeField from './components/Examples/CustomFields/RangeField';
+import RangeFieldSchema from './components/Examples/CustomFields/RangeFieldSchema.md';
+
 ### `CompositeField`
 
 This field is a kind of a shortcut for few fields. You can also access all
@@ -163,21 +166,48 @@ export default function ExamplesDisplayIfField() {
 
 ### `RangeField`
 
-```js
-import React from 'react';
-import connectField from 'uniforms/connectField';
+This field works as follows: two datepickers are bound to each other.
+Value is a `{start, stop}` object.
 
+<ExampleCustomizer
+  code={theme => (
+    <Code language="js">
+      {`import React from 'react';
+import connectField from 'uniforms/connectField';\n
+import { AutoForm, SubmitField, DateField } from 'uniforms-${theme}';
+import schema from './RangeFieldSchema';\n
 // This field works as follows: two datepickers are bound to each other. Value is
 // a {start, stop} object.
-const Range = ({onChange, value: {start, stop}}) => (
+const Range = ({ onChange, value: { start, stop } }) => (
   <section>
-    <DatePicker max={stop} value={start} onChange={start => onChange(start, stop)} />
-    <DatePicker min={start} value={stop} onChange={stop => onChange(start, stop)} />
+    <DateField
+      name="start"
+      max={stop}
+      value={start}
+      onChange={start => onChange({ start, stop })}
+    />
+    <DateField
+      name="stop"
+      min={start}
+      value={stop}
+      onChange={stop => onChange({ start, stop })}
+    />
   </section>
-);
-
-const RangeField = connectField(Range);
-```
+);\n
+const RangeField = connectField(Range);\n
+export default function ExamplesRangeField() {
+  return (
+    <AutoForm schema={schema}>
+      <RangeField name="range" />
+      <SubmitField />
+    </AutoForm>
+  );
+}`}
+    </Code>
+  )}
+  example={<ExamplesRangeField />}
+  schema={<RangeFieldSchema />}
+/>
 
 ### `RatingField`
 
