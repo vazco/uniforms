@@ -24,6 +24,9 @@ import RatingFieldSchema from './components/Examples/CustomFields/RatingFieldSch
 
 import ExamplesSubmitField from './components/Examples/CustomFields/SubmitField';
 
+import ExamplesImageField from './components/Examples/CustomFields/ImageField';
+import ImageFieldSchema from './components/Examples/CustomFields/ImageFieldSchema.md';
+
 ### `CompositeField`
 
 This field is a kind of a shortcut for few fields. You can also access all
@@ -355,3 +358,53 @@ function Example() {
   );
 }
 ```
+
+### ImageField
+
+<ExampleCustomizer
+  code={theme => (
+    <Code language="js">
+      {`import React from 'react';
+import connectField from 'uniforms/connectField';\n
+import schema from './ImageFieldSchema';
+import { AutoForm, SubmitField } from 'uniforms-${theme}';\n
+function Image({ onChange, value }) {
+  const imgPlaceholder = 'https://via.placeholder.com/150.png';\n
+  function onImageChange({ target: { files } }) {
+    if (files && files[0]) {
+      onChange(URL.createObjectURL(files[0]));
+    }
+  }\n
+  return (
+    <div className="ImageField">
+      <label htmlFor="file-input">
+        <div>Choose your photo</div>
+        <img
+          style={{ cursor: 'pointer', width: '150px', height: '150px' }}
+          src={value ? value : imgPlaceholder}
+        />
+      </label>
+      <input
+        accept="image/*"
+        id="file-input"
+        onChange={onImageChange}
+        style={{ display: 'none' }}
+        type="file"
+      />
+    </div>
+  );
+}
+const ImageField = connectField(Image);\n
+export default function ExamplesSubmitField() {
+  return (
+    <AutoForm schema={schema}>
+      <ImageField name="pictureUrl" />
+      <SubmitField />
+    </AutoForm>
+  );
+}`}
+    </Code>
+  )}
+  example={<ExamplesImageField />}
+  schema={<ImageFieldSchema />}
+/>
