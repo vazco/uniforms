@@ -43,12 +43,6 @@ Every form has an autosave functionality. If you set an `autosave` prop, then ev
 />
 ```
 
-## Hierarchy
-
-<p align="center">
-  <img src="img/uniforms-graph.png" />
-</p>
-
 ## Methods
 
 You can use [React `ref` prop](https://facebook.github.io/react/docs/more-about-refs.html) to manually access form methods. Example usage:
