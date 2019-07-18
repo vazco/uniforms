@@ -5,9 +5,13 @@ title: Custom fields
 
 import ExampleCustomizer from './components/Examples/ExampleCustomizer';
 import TogglerTabs from './components/TogglerTabs';
-import ExamplesCustomField from './components/Examples/CustomFields/CompositeField';
-import CompositeFieldSchema from './components/Examples/CustomFields/CompositeFieldSchema.md';
 import {Code} from './components/Code';
+
+import ExamplesCompositeField from './components/Examples/CustomFields/CompositeField';
+import CompositeFieldSchema from './components/Examples/CustomFields/CompositeFieldSchema.md';
+
+import ExamplesCycleField from './components/Examples/CustomFields/CycleField';
+import CycleFieldSchema from './components/Examples/CustomFields/CycleFieldSchema.md';
 
 ### `CompositeField`
 
@@ -41,7 +45,7 @@ export default function ExamplesCustomField() {
 }`}
     </Code>
   )}
-  example={<ExamplesCustomField />}
+  example={<ExamplesCompositeField />}
   schema={<CompositeFieldSchema />}
 />
 
@@ -73,16 +77,18 @@ const CustomAutoField = connectField(CustomAuto, {
 
 ### `CycleField`
 
-```js
-import React from 'react';
-import classnames from 'classnames';
-import connectField from 'uniforms/connectField';
+This field works as follows: iterate all allowed values and optionally no-value
+state if the field is not required. This one uses Semantic-UI.
 
-// This field works as follows: iterate all allowed values and optionally no-value
-// state if the field is not required. This one uses Semantic-UI.
-const Cycle = ({allowedValues, label, required, value, onChange}) => (
+<ExampleCustomizer
+  code={theme => (
+    <Code language="js">
+      {`import React from 'react';
+import connectField from 'uniforms/connectField';
+import schema from './CycleFieldSchema';
+import { AutoForm, SubmitField } from 'uniforms-${theme}';
+const Cycle = ({ allowedValues, label, required, value, onChange }) => (
   <a
-    className={classnames('ui', !value && 'basic', 'label')}
     onClick={() =>
       onChange(
         value
@@ -98,9 +104,20 @@ const Cycle = ({allowedValues, label, required, value, onChange}) => (
     {value || label}
   </a>
 );
-
 const CycleField = connectField(Cycle);
-```
+export default function ExamplesCycleField() {
+  return (
+    <AutoForm schema={schema}>
+      <CycleField name="cycle" allowedValues={['One', 'Two', 'Three']} />
+      <SubmitField />
+    </AutoForm>
+  );
+}`}
+    </Code>
+  )}
+  example={<ExamplesCycleField />}
+  schema={<CycleFieldSchema />}
+/>
 
 ### `DisplayIf`
 

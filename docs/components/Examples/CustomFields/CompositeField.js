@@ -17,7 +17,7 @@ const Composite = () => (
 
 const CompositeField = connectField(Composite);
 
-export default function ExamplesCustomField() {
+export default function ExamplesCompositeField() {
   return (
     <AutoForm schema={schema}>
       <CompositeField name="personA" />

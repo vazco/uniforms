@@ -23,8 +23,7 @@ const toggles = [
   {
     name: 'Example',
     tooltipText: 'Show example',
-    icon: <BoxIcon />,
-    active: true
+    icon: <BoxIcon />
   },
   { name: 'Schema', tooltipText: 'Show schema', icon: <DatabaseIcon /> }
 ];
