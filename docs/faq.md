@@ -195,7 +195,7 @@ const WithUniforms = ({children}, {uniforms}) => children(uniforms);
 WithUniforms.contextTypes = BaseField.contextTypes;
 ```
 
-`uniforms` context data consists of various properties which can be found [here](uth-context-data).
+`uniforms` context data consists of various properties which can be found [here](api-context-data).
 
 ##### Example usage:
 

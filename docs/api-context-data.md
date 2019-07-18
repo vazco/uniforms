@@ -1,11 +1,11 @@
 ---
-id: uth-context-data
+id: api-context-data
 title: Context data
 ---
 
-Some components might need to know a current form state. All this data is passed as `uniforms` in [React context](https://reactjs.org/docs/legacy-context.html).
+Some components might need to know a current form state, which is passed as `uniforms` in [React context](https://reactjs.org/docs/legacy-context.html).
 
-## Available context data
+### Available context data
 
 ```js
 MyComponentUsingUniformsContext.contextTypes = {
@@ -42,4 +42,29 @@ MyComponentUsingUniformsContext.contextTypes = {
     randomId: PropTypes.func.isRequired
   }).isRequired
 };
+```
+
+### Accessing context data
+
+A convenient way to access context is to write a helper function, eg. `WithUniforms`, that receives a context and passes it to the children:
+
+```js
+import BaseField from 'uniforms/BaseField';
+
+const WithUniforms = ({children}, {uniforms}) => children(uniforms);
+
+WithUniforms.contextTypes = BaseField.contextTypes;
+```
+
+You can also directly subscribe to the context inside your field component:
+
+```js
+import BaseField from 'uniforms/BaseField';
+
+const MyComponentUsingUniformsContext = (props, {uniforms}) => (
+  //Now I have access to the context!
+  <input />
+);
+
+MyComponentUsingUniformsContext.contextTypes = BaseField.contextTypes;
 ```

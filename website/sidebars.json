@@ -9,8 +9,8 @@
       "tutorials-creating-custom-field"
     ],
     "Examples": ["examples-custom-fields", "examples-custom-bridge", "examples-custom-form"],
-    "API Reference": ["api-forms", "api-fields", "api-bridges", "api-helpers"],
-    "Under The Hood": ["uth-forms-concept", "uth-autofield-algorithm", "uth-bridge-concept", "uth-context-data"],
+    "API Reference": ["api-forms", "api-fields", "api-bridges", "api-context-data", "api-helpers"],
+    "Under The Hood": ["uth-forms-concept", "uth-autofield-algorithm", "uth-bridge-concept"],
     "FAQ": ["faq"]
   }
 }
