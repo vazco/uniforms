@@ -1,37 +1,15 @@
 {
   "docs": {
-    "Introduction": [
-      "introduction"
-    ],
-    "Getting Started": [
-      "installation"
-    ],
+    "Introduction": ["introduction"],
+    "Getting Started": ["installation", "faq"],
     "Tutorials": [
       "tutorials-basic-uniforms-usage",
       "tutorials-customizing-your-form-layout",
       "tutorials-using-predefined-fields",
       "tutorials-creating-custom-field"
     ],
-    "Examples": [
-      "examples-common-forms",
-      "examples-custom-fields",
-      "examples-custom-bridge",
-      "examples-custom-form"
-    ],
-    "API Reference": [
-      "api-forms",
-      "api-fields",
-      "api-bridges",
-      "api-context-data",
-      "api-helpers"
-    ],
-    "Under The Hood": [
-      "uth-forms-concept",
-      "uth-autofield-algorithm",
-      "uth-bridge-concept"
-    ],
-    "FAQ": [
-      "faq"
-    ]
+    "Examples": ["examples-common-forms", "examples-custom-fields", "examples-custom-bridge", "examples-custom-form"],
+    "API Reference": ["api-forms", "api-fields", "api-bridges", "api-context-data", "api-helpers"],
+    "Under The Hood": ["uth-forms-concept", "uth-autofield-algorithm", "uth-bridge-concept"]
   }
 }
