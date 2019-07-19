@@ -1,0 +1,33 @@
+---
+id: examples-common-forms
+title: Common Forms
+---
+
+import ExampleCustomizer from './components/Examples/ExampleCustomizer';
+import TogglerTabs from './components/TogglerTabs';
+import {Code} from './components/Code';
+
+import SignUpForm from './components/Examples/CommonForms/SignUp';
+import SignUpSchema from './components/Examples/CommonForms/SignUpSchema.md';
+
+### `Sign up`
+
+<ExampleCustomizer
+  code={theme => (
+    <Code language="js">
+      {`import React from 'react';\n
+import schema from './SignUpSchema';
+import { AutoForm } from '../../universal';\n
+export default function SignUpForm() {
+  return (
+    <AutoForm
+      schema={schema}
+      onSubmit={model => alert(JSON.stringify(model, null, 2))}
+    />
+  );
+}`}
+    </Code>
+  )}
+  example={<SignUpForm />}
+  schema={<SignUpSchema />}
+/>
