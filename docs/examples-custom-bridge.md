@@ -1,13 +1,20 @@
 ---
 id: examples-custom-bridge
-title: Custom bridge
+title: Custom bridge & validator
 ---
 
-In this example we will create a custom bridge used in user login form.
+In this example, we will create an ordinary login form, with login, password, and password confirmation fields.
 
-### UserLoginSchema definition
+### Schema definition
 
-First we define our data schema:
+We'll start with defining a schema.
+It's an object with three keys, representing our fields.
+Each of them has the following self-explanatory properties:
+
+- `__type__`
+- `required`
+- `initialValue`
+- `label`
 
 ```js
 const UserLoginSchema = {
@@ -34,9 +41,14 @@ const UserLoginSchema = {
 export default UserLoginSchema;
 ```
 
-### UserLoginSchemaValidator definiton
+### Validator definiton
 
-Now that there is a schema, we can write our own validator:
+When the schema is ready, our next step is to provide a way to check if the values received from our form are correct.
+In order to do so, we prepare a validation function.
+That function, called validator, takes a model (the submitted object) as input and throws an error whether any value doesn't meet given criteria.
+
+In our case we say 'form is invalid' when there's no login or password at all,
+login has less then 5 characters, password has lass then 10 characters or given passwords mismatch:
 
 ```js
 const UserLoginSchemaValidator = model => {
@@ -66,9 +78,10 @@ const UserLoginSchemaValidator = model => {
 export default UserLoginSchemaValidator;
 ```
 
-### Extended uniforms `Bridge` class
+### The Bridge!
 
-When have both the schema and the validator, we can extend and implement the core `Bridge` class and create our own instance:
+Now that both have the schema and the validator, we can define our bridge, which will be a binder between the form and the data itself.
+All we have to do is to extend `Bridge` class and implement its methods according to the [Bridge concept](uth-bridge-concept):
 
 ```js
 import Bridge from 'uniforms/Bridge';
@@ -122,6 +135,9 @@ export default class UserLoginSchemaBridge extends Bridge {
 ```
 
 ### Usage
+
+After our custom bridge is created, we can use in the very same way as we would use predefined one -
+we have to supply the schema and validator and then we can easily take advantage of it in the AutoForm:
 
 ```js
 import UserLoginSchema from './UserLoginSchema';
