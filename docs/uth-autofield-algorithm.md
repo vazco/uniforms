@@ -3,8 +3,6 @@ id: 'uth-autofield-algorithm'
 title: 'Autofield algorithm'
 ---
 
-## `AutoField` algorithm
-
 ```js
 let component = props.component;
 if (component === undefined) {

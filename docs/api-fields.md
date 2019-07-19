@@ -64,11 +64,12 @@ Eg. you want to group your fields inside a section, just do `element="section"`.
 
 ##### Props:
 
+|     Name     |       Default        |           Description           |
 | :----------: | :------------------: | :-----------------------------: |
-| `autoField` | Standard `AutoField` | `AutoField` Component to render |
-| `element` | `div` | Fields wrapper |
-| `fields` | All schema fields | List of fields to render |
-| `omitFields` | `[]` | List of fields to omit |
+| `autoField`  | Standard `AutoField` | `AutoField` Component to render |
+|  `element`   |        `div`         |         Fields wrapper          |
+|   `fields`   |  All schema fields   |    List of fields to render     |
+| `omitFields` |         `[]`         |     List of fields to omit      |
 
 ##### Props usage:
 
@@ -141,7 +142,7 @@ A checkbox.
 ##### Props usage:
 
 ```js
-import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme package.
+import BoolField from 'uniforms-unstyled/BoolField';
 
 <BoolField
   appearance="checkbox" // Renders a material-ui Checkbox
@@ -200,7 +201,7 @@ import BoolField from 'uniforms-unstyled/BoolField'; // Choose your theme packag
 ##### Props usage:
 
 ```js
-import DateField from 'uniforms-unstyled/DateField'; // Choose your theme package.
+import DateField from 'uniforms-unstyled/DateField';
 
 <DateField
   extra="Extra Feedback or Help"
@@ -245,7 +246,7 @@ Error message renderer.
 ##### Props usage:
 
 ```js
-import ErrorField from 'uniforms-unstyled/ErrorField'; // Choose your theme package.
+import ErrorField from 'uniforms-unstyled/ErrorField';
 
 <ErrorField children={children} name="field" />;
 ```
@@ -263,7 +264,7 @@ Error messages renderer.
 ##### Props usage:
 
 ```js
-import ErrorsField from 'uniforms-unstyled/ErrorsField'; // Choose your theme package.
+import ErrorsField from 'uniforms-unstyled/ErrorsField';
 
 <ErrorsField children={children} />;
 ```
@@ -280,7 +281,7 @@ import ErrorsField from 'uniforms-unstyled/ErrorsField'; // Choose your theme pa
 ##### Props usage:
 
 ```js
-import HiddenField from 'uniforms-unstyled/HiddenField'; // Choose your theme package.
+import HiddenField from 'uniforms-unstyled/HiddenField';
 
 <HiddenField name="field" value={value} />;
 ```
@@ -299,7 +300,7 @@ import HiddenField from 'uniforms-unstyled/HiddenField'; // Choose your theme pa
 ##### Props usage:
 
 ```js
-import ListAddField from 'uniforms-unstyled/ListAddField'; // Choose your theme package.
+import ListAddField from 'uniforms-unstyled/ListAddField';
 
 <ListAddField addIcon={<MyAddIcon />} />;
 ```
@@ -318,7 +319,7 @@ import ListAddField from 'uniforms-unstyled/ListAddField'; // Choose your theme 
 ##### Props usage:
 
 ```js
-import ListDelField from 'uniforms-unstyled/ListDelField'; // Choose your theme package.
+import ListDelField from 'uniforms-unstyled/ListDelField';
 
 <ListDelField removeIcon={<MyRemoveIcon />} />;
 ```
@@ -340,7 +341,7 @@ import ListDelField from 'uniforms-unstyled/ListDelField'; // Choose your theme 
 ##### Props usage:
 
 ```js
-import ListField from 'uniforms-unstyled/ListField'; // Choose your theme package.
+import ListField from 'uniforms-unstyled/ListField';
 
 <ListField
   addIcon={<MyAddIcon />}
@@ -367,7 +368,7 @@ import ListField from 'uniforms-unstyled/ListField'; // Choose your theme packag
 ##### Props usage:
 
 ```js
-import ListItemField from 'uniforms-unstyled/ListItemField'; // Choose your theme package.
+import ListItemField from 'uniforms-unstyled/ListItemField';
 
 <ListItemField removeIcon={<MyRemoveIcon />} />;
 ```
@@ -402,7 +403,7 @@ A textarea.
 ##### Props usage:
 
 ```js
-import LongTextField from 'uniforms-unstyled/LongTextField'; // Choose your theme package.
+import LongTextField from 'uniforms-unstyled/LongTextField';
 
 <LongTextField
   extra="Extra Feedback or Help"
@@ -443,7 +444,7 @@ import LongTextField from 'uniforms-unstyled/LongTextField'; // Choose your them
 ##### Props usage:
 
 ```js
-import NestField from 'uniforms-unstyled/NestField'; // Choose your theme package.
+import NestField from 'uniforms-unstyled/NestField';
 
 <NestField fields={['fieldA', 'fieldB' /* ... */]} grouped={true} showInlineError={true} />;
 ```
@@ -482,7 +483,7 @@ A numeric input field.
 ##### Props usage:
 
 ```js
-import NumField from 'uniforms-unstyled/NumField'; // Choose your theme package.
+import NumField from 'uniforms-unstyled/NumField';
 
 <NumField
   decimal={true}
@@ -532,7 +533,7 @@ import NumField from 'uniforms-unstyled/NumField'; // Choose your theme package.
 ##### Props usage:
 
 ```js
-import RadioField from 'uniforms-unstyled/RadioField'; // Choose your theme package.
+import RadioField from 'uniforms-unstyled/RadioField';
 
 <RadioField
   allowedValues={[value1, value2 /* ... */]}
@@ -577,7 +578,7 @@ import RadioField from 'uniforms-unstyled/RadioField'; // Choose your theme pack
 ##### Props usage:
 
 ```js
-import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme package.
+import SelectField from 'uniforms-unstyled/SelectField';
 
 <SelectField
   allowedValues={[value1, value2 /* ... */]}
@@ -613,7 +614,7 @@ import SelectField from 'uniforms-unstyled/SelectField'; // Choose your theme pa
 ##### Props usage:
 
 ```js
-import SubmitField from 'uniforms-unstyled/SubmitField'; // Choose your theme package.
+import SubmitField from 'uniforms-unstyled/SubmitField';
 
 <SubmitField inputClassName="a b c" inputRef={ref => {}} />;
 ```
@@ -645,7 +646,7 @@ import SubmitField from 'uniforms-unstyled/SubmitField'; // Choose your theme pa
 ##### Props usage:
 
 ```js
-import TextField from 'uniforms-unstyled/TextField'; // Choose your theme package.
+import TextField from 'uniforms-unstyled/TextField';
 
 <TextField
   extra="Extra Feedback or Help"
