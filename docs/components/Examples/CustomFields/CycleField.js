@@ -10,7 +10,8 @@ const Cycle = ({ allowedValues, label, required, value, onChange }) => (
     style={{
       border: '1px solid black',
       padding: '1em',
-      display: 'inline-block'
+      display: 'inline-block',
+      cursor: 'pointer'
     }}
     onClick={() =>
       onChange(
