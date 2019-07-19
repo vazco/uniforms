@@ -6,11 +6,11 @@ import * as semantic from 'uniforms-semantic';
 import * as unstyled from 'uniforms-unstyled';
 
 const themes = {
-  antd,
+  semantic,
   bootstrap3,
   bootstrap4,
   material,
-  semantic,
+  antd,
   unstyled
 };
 
