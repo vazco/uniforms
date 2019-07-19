@@ -11,7 +11,7 @@ module.exports = {
     googleAnalytics: { trackingID: 'UA-136559762-4' },
     navbar: {
       links: [
-        { label: 'Docs', to: 'docs/introduction' },
+        { label: 'Docs', to: 'docs/what-are-uniforms' },
         { label: 'Playground', to: 'playground' },
         { label: 'GitHub', href: 'https://github.com/vazco/uniforms' }
       ],
