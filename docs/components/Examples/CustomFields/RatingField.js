@@ -36,6 +36,7 @@ export default function ExamplesRangeField() {
   return (
     <AutoForm
       schema={schema}
+      model={{ rating: 3 }}
       onSubmit={model => alert(JSON.stringify(model, null, 2))}
     >
       <RatingField name="rating" />

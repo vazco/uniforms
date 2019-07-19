@@ -24,6 +24,9 @@ import RatingFieldSchema from './components/Examples/CustomFields/RatingFieldSch
 
 import ExamplesSubmitField from './components/Examples/CustomFields/SubmitField';
 
+import ExamplesSwapField from './components/Examples/CustomFields/SwapField';
+import SwapFieldSchema from './components/Examples/CustomFields/SwapFieldSchema.md';
+
 import ExamplesImageField from './components/Examples/CustomFields/ImageField';
 import ImageFieldSchema from './components/Examples/CustomFields/ImageFieldSchema.md';
 
@@ -324,40 +327,54 @@ export default function ExamplesSubmitField() {
 
 ### `SwapField`
 
-```js
+This field works as follows: on click of its child (refresh icon) it swaps values of fieldA
+and fieldB. It's that simple.
+
+<ExampleCustomizer
+  code={theme => (
+    <Code language="js">
+      {`import React, { Children, cloneElement } from 'react';
 import BaseField from 'uniforms/BaseField';
 import get from 'lodash/get';
-import {Children} from 'react';
-import {cloneElement} from 'react';
-
-// This field works as follows: on click of its child it swaps values of fieldA
-// and fieldB. It's that simple.
-const SwapField = ({children, fieldA, fieldB}, {uniforms: {model, onChange}}) =>
+import { RefreshCw } from 'react-feather';\n
+import { AutoForm, TextField, SubmitField } from '../../universal';
+import schema from './SwapFieldSchema';\n
+const SwapField = (
+  { children, fieldA, fieldB },
+  { uniforms: { model, onChange } }
+) =>
   cloneElement(Children.only(children), {
     onClick() {
       const valueA = get(model, fieldA);
       const valueB = get(model, fieldB);
-
       onChange(fieldA, valueB);
       onChange(fieldB, valueA);
     }
   });
-
 SwapField.contextTypes = BaseField.contextTypes;
-
 // Usage.
-function Example() {
+export default function ExampleSwapField() {
   return (
     <section>
-      <TextField name="firstName" />
-      <SwapField fieldA="firstName" fieldB="lastName">
-        <Icon name="refresh" />
-      </SwapField>
-      <TextField name="lastName" />
+      <AutoForm
+        schema={schema}
+        onSubmit={model => alert(JSON.stringify(model, null, 2))}
+      >
+        <TextField name="firstName" />
+        <SwapField fieldA="firstName" fieldB="lastName">
+          <RefreshCw />
+        </SwapField>
+        <TextField name="lastName" />
+        <SubmitField />
+      </AutoForm>
     </section>
   );
-}
-```
+}`}
+    </Code>
+  )}
+  example={<ExamplesSwapField />}
+  schema={<SwapFieldSchema />}
+/>
 
 ### ImageField
 
