@@ -1,6 +1,6 @@
 {
   "docs": {
-    "Introduction": ["introduction"],
+    "Introduction": ["what-are-uniforms", "why-are-uniforms"],
     "Getting Started": ["installation", "faq"],
     "Tutorials": [
       "tutorials-basic-uniforms-usage",
@@ -10,6 +10,6 @@
     ],
     "Examples": ["examples-common-forms", "examples-custom-fields", "examples-custom-bridge", "examples-custom-form"],
     "API Reference": ["api-forms", "api-fields", "api-bridges", "api-context-data", "api-helpers"],
-    "Under The Hood": ["uth-forms-concept", "uth-autofield-algorithm", "uth-bridge-concept"]
+    "Under The Hood": ["uth-autofield-algorithm", "uth-bridge-concept"]
   }
 }

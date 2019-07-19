@@ -1,7 +1,9 @@
 ---
-id: 'uth-forms-concept'
-title: Forms concept
+id: 'why-are-uniforms'
+title: Why are uniforms?
 ---
+
+## Forms concept
 
 There’s a very interesting class-based inheritance concept for forms.
 Basically, there are a few types of forms with different capabilities.
@@ -14,7 +16,7 @@ Most of the time you’ll be using either AutoForm or ValidatedForm, but there a
 > **If you are not familiar with concept of HOC, read one of many posts about them first.**
 > I’m sure you’ve read at least one of _Why ES6 classes are bad_ or _class considered harmful_ posts. I’ve read them too, so why is uniforms using classes? Well, it’s all about the complexity.
 >
-> -- <cite>[Radek Miernik](https://github.com/radekmie)</cite>
+> -- <cite>[Radosław Miernik](https://github.com/radekmie)</cite>
 
 <p align="center">
   <img src="/img/hoc-hell.png" />
@@ -23,7 +25,7 @@ Most of the time you’ll be using either AutoForm or ValidatedForm, but there a
 
 > I wanted to achieve the same functionality as with multiple HOCs, but within one component. To be honest, readability is more important than performance. In short, I’ve reached (more or less) traits with ES6 clasess. The result?
 >
-> -- <cite>[Radek Miernik](https://github.com/radekmie)</cite>
+> -- <cite>[Radosław Miernik](https://github.com/radekmie)</cite>
 
 ```js
 import BaseForm from './BaseForm';
@@ -42,4 +44,4 @@ While it’s not a universal approach that will work in every situation, using i
 
 <hr />
 
-Based on [Managing forms in a Meteor/React project with the uniforms package](https://blog.meteor.com/managing-forms-in-a-meteor-react-project-with-uniforms-33d60602b43a) written by [Maciek Stasiełuk](https://github.com/MacRusher).
+Based on [Managing forms in a Meteor/React project with the uniforms package](https://blog.meteor.com/managing-forms-in-a-meteor-react-project-with-uniforms-33d60602b43a) written by [Maciej Stasiełuk](https://github.com/MacRusher).

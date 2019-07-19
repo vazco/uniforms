@@ -1,5 +1,5 @@
 ---
-id: introduction
+id: what-are-uniforms
 title: What are uniforms?
 ---
 
