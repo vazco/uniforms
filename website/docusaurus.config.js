@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   title: 'uniforms',
   tagline: 'A set of React libraries for building forms.',
@@ -30,7 +32,8 @@ module.exports = {
         },
         pages: {
           path: './pages'
-        }
+        },
+        theme: { customCss: path.join(__dirname, './theme/index.css') }
       }
     ]
   ]

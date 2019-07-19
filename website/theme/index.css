@@ -1,0 +1,14 @@
+pre {
+  overflow: auto !important;
+  white-space: pre !important;
+}
+
+table {
+  display: inline-table;
+}
+
+@media only screen and (max-width: 600px) {
+  table {
+    display: block !important;
+  }
+}
