@@ -1,6 +1,6 @@
 ---
 id: faq
-title: Frequently Asked Questions
+title: FAQ
 ---
 
 ### How can I customize/style my form fields?
