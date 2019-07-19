@@ -1,24 +1,24 @@
 import React from 'react';
 import connectField from 'uniforms/connectField';
 
-import { AutoForm, SubmitField, DateField } from '../../universal';
+import { AutoForm, SubmitField } from '../../universal';
 import schema from './RangeFieldSchema';
 
 // This field works as follows: two datepickers are bound to each other. Value is
 // a {start, stop} object.
 const Range = ({ onChange, value: { start, stop } }) => (
   <section>
-    <DateField
+    <input
+      type="date"
       name="start"
       max={stop}
-      value={start}
-      onChange={start => onChange({ start, stop })}
+      onChange={({ target: { value } }) => onChange({ start: value, stop })}
     />
-    <DateField
+    <input
+      type="date"
       name="stop"
       min={start}
-      value={stop}
-      onChange={stop => onChange({ start, stop })}
+      onChange={({ target: { value } }) => onChange({ start, stop: value })}
     />
   </section>
 );
@@ -27,7 +27,10 @@ const RangeField = connectField(Range);
 
 export default function ExamplesRangeField() {
   return (
-    <AutoForm schema={schema}>
+    <AutoForm
+      schema={schema}
+      onSubmit={model => alert(JSON.stringify(model, null, 2))}
+    >
       <RangeField name="range" />
       <SubmitField />
     </AutoForm>

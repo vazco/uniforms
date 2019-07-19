@@ -13,7 +13,10 @@ DisplayIf.contextTypes = BaseField.contextTypes;
 
 export default function ExamplesDisplayIfField() {
   return (
-    <AutoForm schema={schema}>
+    <AutoForm
+      schema={schema}
+      onSubmit={model => alert(JSON.stringify(model, null, 2))}
+    >
       <TextField name="fieldA" />
 
       <DisplayIf condition={context => context.model.fieldA}>

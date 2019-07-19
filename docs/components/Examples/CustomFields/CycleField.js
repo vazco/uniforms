@@ -7,6 +7,11 @@ import { AutoForm, SubmitField } from '../../universal';
 // state if the field is not required. This one uses Semantic-UI.
 const Cycle = ({ allowedValues, label, required, value, onChange }) => (
   <a
+    style={{
+      border: '1px solid black',
+      padding: '1em',
+      display: 'inline-block'
+    }}
     onClick={() =>
       onChange(
         value
@@ -27,8 +32,12 @@ const CycleField = connectField(Cycle);
 
 export default function ExamplesCycleField() {
   return (
-    <AutoForm schema={schema}>
+    <AutoForm
+      schema={schema}
+      onSubmit={model => alert(JSON.stringify(model, null, 2))}
+    >
       <CycleField name="cycle" allowedValues={['One', 'Two', 'Three']} />
+      <br />
       <SubmitField />
     </AutoForm>
   );

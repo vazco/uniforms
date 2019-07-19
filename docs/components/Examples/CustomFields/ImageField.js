@@ -36,7 +36,10 @@ const ImageField = connectField(Image);
 
 export default function ExamplesSubmitField() {
   return (
-    <AutoForm schema={schema}>
+    <AutoForm
+      schema={schema}
+      onSubmit={model => alert(JSON.stringify(model, null, 2))}
+    >
       <ImageField name="pictureUrl" />
       <SubmitField />
     </AutoForm>

@@ -19,7 +19,10 @@ const CompositeField = connectField(Composite);
 
 export default function ExamplesCompositeField() {
   return (
-    <AutoForm schema={schema}>
+    <AutoForm
+      schema={schema}
+      onSubmit={model => alert(JSON.stringify(model, null, 2))}
+    >
       <CompositeField name="personA" />
       <CompositeField name="personB" />
       <SubmitField />

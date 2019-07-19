@@ -34,7 +34,10 @@ const RatingField = connectField(Rating);
 
 export default function ExamplesRangeField() {
   return (
-    <AutoForm schema={schema}>
+    <AutoForm
+      schema={schema}
+      onSubmit={model => alert(JSON.stringify(model, null, 2))}
+    >
       <RatingField name="rating" />
       <SubmitField />
     </AutoForm>
