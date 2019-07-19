@@ -21,6 +21,7 @@ Now the schema package.
   {({name: bridgeName}) => (
     <>
       <Code language="shell">{`npm install --save uniforms-bridge-${bridgeName.toLowerCase()}`}</Code>
+      <br />
       <p>Finally, pick your theme.</p>
       <TabsSelect
         group="theme"
@@ -36,6 +37,7 @@ Now the schema package.
         {({name: themeName}) => (
           <>
             <Code language="shell">{`npm install --save uniforms-${themeName.toLowerCase()}`}</Code>
+            <br />
             <p>TL;DR just let me copy!</p>
             <Code language="shell">
               {`npm install --save uniforms uniforms-bridge-${bridgeName.toLowerCase()} uniforms-${themeName.toLowerCase()}`}
