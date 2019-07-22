@@ -1,12 +1,12 @@
-.iframe {
-  display: flex;
-  width: 100%;
-  border: none;
-}
-.FormWrapper {
-  background-color: #fff;
-  border: 1px solid var(--ifm-color-emphasis-alpha-30);
+.markdown .playground-wrap {
   border-radius: 5px;
-  padding: 5px;
-  margin: 0 0 1em 0;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.form-wrapper {
+  border-radius: 5px;
+  border: 1px solid var(--ifm-color-emphasis-alpha-30);
 }

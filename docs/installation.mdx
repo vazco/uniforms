@@ -4,7 +4,7 @@ title: Installation
 ---
 
 import {TabsSelect} from './components/Tabs';
-import {Code} from './components/Code';
+import {code} from './components/Code';
 
 Core package first.
 
@@ -20,8 +20,7 @@ Now the schema package.
 >
   {({name: bridgeName}) => (
     <>
-      <Code language="shell">{`npm install --save uniforms-bridge-${bridgeName.toLowerCase()}`}</Code>
-      <br />
+      {code('shell', `npm install --save uniforms-bridge-${bridgeName.toLowerCase()}`)}
       <p>Finally, pick your theme.</p>
       <TabsSelect
         group="theme"
@@ -36,12 +35,12 @@ Now the schema package.
       >
         {({name: themeName}) => (
           <>
-            <Code language="shell">{`npm install --save uniforms-${themeName.toLowerCase()}`}</Code>
-            <br />
+            {code('shell', `npm install --save uniforms-${themeName.toLowerCase()}`)}
             <p>TL;DR; Just let me copy it!</p>
-            <Code language="shell">
-              {`npm install --save uniforms uniforms-bridge-${bridgeName.toLowerCase()} uniforms-${themeName.toLowerCase()}`}
-            </Code>
+            {code(
+              'shell',
+              `npm install --save uniforms uniforms-bridge-${bridgeName.toLowerCase()} uniforms-${themeName.toLowerCase()}`
+            )}
           </>
         )}
       </TabsSelect>

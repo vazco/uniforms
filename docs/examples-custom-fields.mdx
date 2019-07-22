@@ -36,9 +36,10 @@ This field is a kind of a shortcut for few fields. You can also access all
 field props here, like value or onChange for some extra logic.
 
 <ExampleCustomizer
-  code={theme => (
-    <Code language="js">
-      {`import React from 'react';
+  code={theme =>
+    code(
+      'js',
+      `import React from 'react';
 import connectField from 'uniforms/connectField';
 import { AutoField, AutoForm, SubmitField } from 'uniforms-${theme}';
 import schema from './CompositeFieldSchema';
@@ -58,9 +59,9 @@ export default function ExamplesCustomField() {
       <SubmitField />
     </AutoForm>
   );
-}`}
-    </Code>
-  )}
+`
+    )
+  }
   example={<ExamplesCompositeField />}
   schema={<CompositeFieldSchema />}
 />
@@ -97,9 +98,10 @@ This field works as follows: iterate all allowed values and optionally no-value
 state if the field is not required. This one uses Semantic-UI.
 
 <ExampleCustomizer
-  code={theme => (
-    <Code language="js">
-      {`import React from 'react';
+  code={theme =>
+    code(
+      'js',
+      `import React from 'react';
 import connectField from 'uniforms/connectField';
 import schema from './CycleFieldSchema';
 import { AutoForm, SubmitField } from 'uniforms-${theme}';
@@ -128,9 +130,9 @@ export default function ExamplesCycleField() {
       <SubmitField />
     </AutoForm>
   );
-}`}
-    </Code>
-  )}
+`
+    )
+  }
   example={<ExamplesCycleField />}
   schema={<CycleFieldSchema />}
 />
@@ -140,9 +142,10 @@ export default function ExamplesCycleField() {
 This simple field component conditionally displays other fields based on input.
 
 <ExampleCustomizer
-  code={theme => (
-    <Code language="js">
-      {`import React, { Children } from 'react';
+  code={theme =>
+    code(
+      'js',
+      `import React, { Children } from 'react';
 import BaseField from 'uniforms/BaseField';
 import nothing from 'uniforms/nothing';\n
 import {AutoForm, SubmitField, TextField} from 'uniforms-${theme}';
@@ -167,9 +170,9 @@ export default function ExamplesDisplayIfField() {
       <SubmitField />
     </AutoForm>
   );
-}`}
-    </Code>
-  )}
+`
+    )
+  }
   example={<ExamplesDisplayIfField />}
   schema={<DisplayIfFieldSchema />}
 />
@@ -180,9 +183,10 @@ This field works as follows: two datepickers are bound to each other.
 Value is a `{start, stop}` object.
 
 <ExampleCustomizer
-  code={theme => (
-    <Code language="js">
-      {`import React from 'react';
+  code={theme =>
+    code(
+      'js',
+      `import React from 'react';
 import connectField from 'uniforms/connectField';\n
 import { AutoForm, SubmitField, DateField } from 'uniforms-${theme}';
 import schema from './RangeFieldSchema';\n
@@ -212,9 +216,9 @@ export default function ExamplesRangeField() {
       <SubmitField />
     </AutoForm>
   );
-}`}
-    </Code>
-  )}
+`
+    )
+  }
   example={<ExamplesRangeField />}
   schema={<RangeFieldSchema />}
 />
@@ -225,9 +229,10 @@ This field works as follows: render stars for each rating and mark them as
 filled, if rating (value) is greater.
 
 <ExampleCustomizer
-  code={theme => (
-    <Code language="js">
-      {`import React from 'react';
+  code={theme =>
+    code(
+      'js',
+      `import React from 'react';
 import classnames from 'classnames';
 import connectField from 'uniforms/connectField';\n
 import { AutoForm, SubmitField } from 'uniforms-${theme}';
@@ -264,9 +269,9 @@ export default function ExamplesRangeField() {
       <SubmitField />
     </AutoForm>
   );
-}`}
-    </Code>
-  )}
+`
+    )
+  }
   example={<ExamplesRatingField />}
   schema={<RatingFieldSchema />}
 />
@@ -278,9 +283,10 @@ the form is invalid. It's a simplified version of a default SubmitField from
 uniforms-unstyled. We use schema from previous examples as a template for validation.
 
 <ExampleCustomizer
-  code={theme => (
-    <Code language="js">
-      {`import React from 'react';
+  code={theme =>
+    code(
+      'js',
+      `import React from 'react';
 import BaseField from 'uniforms/BaseField';
 import connectField from 'uniforms/connectField';\n
 import schema from './CompositeFieldSchema';
@@ -316,9 +322,9 @@ export default function ExamplesSubmitField() {
       <SubmitField />
     </AutoForm>
   );
-}`}
-    </Code>
-  )}
+`
+    )
+  }
   example={<ExamplesSubmitField />}
   schema={<CompositeFieldSchema />}
 />
@@ -329,9 +335,10 @@ This field works as follows: on click of its child (refresh icon) it swaps value
 and fieldB. It's that simple.
 
 <ExampleCustomizer
-  code={theme => (
-    <Code language="js">
-      {`import React, { Children, cloneElement } from 'react';
+  code={theme =>
+    code(
+      'js',
+      `import React, { Children, cloneElement } from 'react';
 import BaseField from 'uniforms/BaseField';
 import get from 'lodash/get';
 import { RefreshCw } from 'react-feather';\n
@@ -367,9 +374,9 @@ export default function ExampleSwapField() {
       </AutoForm>
     </section>
   );
-}`}
-    </Code>
-  )}
+`
+    )
+  }
   example={<ExamplesSwapField />}
   schema={<SwapFieldSchema />}
 />
@@ -377,9 +384,10 @@ export default function ExampleSwapField() {
 ### ImageField
 
 <ExampleCustomizer
-  code={theme => (
-    <Code language="js">
-      {`import React from 'react';
+  code={theme =>
+    code(
+      'js',
+      `import React from 'react';
 import connectField from 'uniforms/connectField';\n
 import schema from './ImageFieldSchema';
 import { AutoForm, SubmitField } from 'uniforms-${theme}';\n
@@ -417,9 +425,9 @@ export default function ExamplesSubmitField() {
       <SubmitField />
     </AutoForm>
   );
-}`}
-    </Code>
-  )}
+`
+    )
+  }
   example={<ExamplesImageField />}
   schema={<ImageFieldSchema />}
 />

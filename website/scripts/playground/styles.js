@@ -1,13 +1,17 @@
 import React from 'react';
 
 const commonStyles = `
-  .frame-root {
-    padding: 1rem;
+  body {
+    margin: 0;
   }
 
   textarea[name="schema"] {
     font-family: monospace !important;
     min-height: 20em !important;
+  }
+
+  .frame-root {
+    padding: 1rem !important;
   }
 `;
 

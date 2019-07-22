@@ -1,12 +1,21 @@
 import React from 'react';
-import CodeBlock from '@theme/CodeBlock';
+import components from '@theme/MDXComponents';
 
 function Code({ children, language }) {
+  return code(language, children);
+}
+
+export function code(language, children) {
   return (
-    // TODO: Move this to outer .css, or apply class from docusaurus
-    <span style={{ fontSize: '.9em' }}>
-      <CodeBlock children={children} className={language} />
-    </span>
+    <components.pre>
+      <components.code
+        children={children}
+        className={`language-${language}`}
+        mdxType="code"
+        originalType="code"
+        parentName="pre"
+      />
+    </components.pre>
   );
 }
 

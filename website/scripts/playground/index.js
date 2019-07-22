@@ -13,8 +13,6 @@ import { parseQuery, updateQuery } from './utils';
 
 import ConfigProvider from 'antd/lib/config-provider';
 
-import './styles.css';
-
 class Playground extends Component {
   constructor() {
     super(...arguments);
@@ -225,9 +223,9 @@ class PlaygroundSelect extends Component {
 
 const PlaygroundSelectField = connectField(PlaygroundSelect);
 
-class PlaygroundWrap extends Component {
+export class PlaygroundWrap extends Component {
   render() {
-    const { children, theme } = this.props;
+    const { children, frameProps, theme } = this.props;
     const content = (
       <React.Fragment>
         {children}
@@ -235,32 +233,34 @@ class PlaygroundWrap extends Component {
       </React.Fragment>
     );
 
-    // MaterialUI injects scoped CSS classes into head.
     if (theme === 'material') {
+      // Material-UI injects scoped CSS classes into head.
       return (
         <section children={content} className="frame-root playground-wrap" />
       );
-    } else if (theme === 'antd') {
-      return (
-        <Frame>
-          <FrameContextConsumer>
-            {/* 
-              Provides iframe's `window` and `document` instance
-              since Ant Design appends `<div>` to default (top most) `document.body`,
-              we have to pass `getPopupContainer` `document.body` specific to
-              rendered `iframe` in order to work as intended.
-            */}
-            {({ document }) => (
-              <ConfigProvider getPopupContainer={() => document.body}>
-                {content}
-              </ConfigProvider>
-            )}
-          </FrameContextConsumer>
-        </Frame>
+    }
+
+    let frameContent = content;
+    if (theme === 'antd') {
+      // Make AntD popups contained within the iframe.
+      frameContent = (
+        <FrameContextConsumer>
+          {context => (
+            <ConfigProvider getPopupContainer={() => context.document.body}>
+              {content}
+            </ConfigProvider>
+          )}
+        </FrameContextConsumer>
       );
     }
 
-    return <Frame children={content} />;
+    return (
+      <Frame
+        children={frameContent}
+        className="playground-wrap"
+        {...frameProps}
+      />
+    );
   }
 }
 
