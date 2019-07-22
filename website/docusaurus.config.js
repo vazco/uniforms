@@ -8,6 +8,11 @@ module.exports = {
   baseUrl: '/',
   url: 'https://uniforms.tools/',
   themeConfig: {
+    algolia: {
+      algoliaOptions: {},
+      apiKey: '513292b2605e0bc7bfdf63163dfde1c4',
+      indexName: 'uniforms'
+    },
     googleAnalytics: { trackingID: 'UA-136559762-4' },
     navbar: {
       links: [
