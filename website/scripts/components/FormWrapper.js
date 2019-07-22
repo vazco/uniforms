@@ -9,7 +9,7 @@ import React, {
 
 import './FormWrapper.css';
 import { themeContext } from './ThemeContext';
-import { PlaygroundWrap } from '../../website/scripts/playground';
+import { PlaygroundWrap } from '../playground';
 
 function handleResize(ref, setHeight) {
   const scrollHeight = get(
