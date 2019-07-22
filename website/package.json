@@ -6,8 +6,8 @@
     "start": "docusaurus start"
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-alpha.21",
-    "@docusaurus/preset-classic": "2.0.0-alpha.21",
+    "@docusaurus/core": "^2.0.0-alpha.23",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.23",
     "@material-ui/core": "4.1.1",
     "ajv": "6.10.0",
     "antd": "3.19.5",
@@ -15,7 +15,7 @@
     "lz-string": "1.4.4",
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "react-feather": "^2.0.3",
+    "react-feather": "2.0.3",
     "react-frame-component": "4.1.0",
     "simpl-schema": "^1.0.0 || ^0.0.4",
     "uniforms": "^2.0.0-alpha.0",
