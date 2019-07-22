@@ -1,11 +1,11 @@
-# uniforms-bootstrap4
+# uniforms-bridge-graphql
 
-> Bootstrap4 UI components for `uniforms`.
+> GraphQL bridge for `uniforms`.
 
 ## Install
 
 ```sh
-$ npm install uniforms-bootstrap4
+$ npm install uniforms-bridge-graphql
 ```
 
 For more in depth documentation see [uniforms.tools](https://uniforms.tools).
