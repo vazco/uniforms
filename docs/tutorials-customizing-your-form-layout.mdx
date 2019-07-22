@@ -19,7 +19,7 @@ How can we do it? That's where `Autofield` and `AutoFields` components come into
 **Note:** Both `AutoFields` and `AutoField` components generate, no more and no less, only form fields.
 That means we have to manually add the submit button (`SubmitField`) and the error messages (`ErrorsField`).
 
-### Adding heading to the form
+### Adding a heading to the form
 
 If you need to add heading to your form, using `AutoFields` seems to be a perfect solution.
 `AutoFields` will automatically render form fields based on the schema within the `AutoForm`.
@@ -50,7 +50,7 @@ export default function GuestForm() {
 
 If you need to reorder your fields, `AutoField` is your best friend.
 `AutoField` will automatically render any field based on the field name provided in the schema.
-Using AutoFields allowes you to freely manipulate your form's layout.
+Using AutoFields allows you to freely manipulate your form's layout.
 
 Here we've changed the order of the `lastName` and `firstName` field and added a polite question,
 asking whether the people filling the form would like to share with us their work experience.

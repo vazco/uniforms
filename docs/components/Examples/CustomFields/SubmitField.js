@@ -31,7 +31,6 @@ const Composite = () => (
     <AutoField name="firstName" />
     <AutoField name="lastName" />
     <AutoField name="workExperience" />
-    <hr />
   </section>
 );
 

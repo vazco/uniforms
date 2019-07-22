@@ -7,26 +7,26 @@ Uniforms provide a set of predefined components that can be used as form fields.
 
 The list below contains a guaranteed set of fields, implemented in every theme package:
 
-|    Component    |                   Description                   |
-| :-------------: | :---------------------------------------------: |
-|   `AutoField`   |      Automatically renders a given field.       |
-|  `AutoFields`   |       Automatically renders given fields.       |
-|   `BoolField`   |                    Checkbox.                    |
-|   `DateField`   |          HTML5 `datetime-local` input.          |
-|  `ErrorField`   |        Error message for a given field.         |
-|  `ErrorsField`  | Error message with a list of validation errors. |
-|  `HiddenField`  | Hidden field (with possibility to omit in DOM). |
-| `ListAddField`  |     An icon with action to add a list item.     |
-| `ListDelField`  |   An icon with action to remove a list item.    |
-|   `ListField`   |             List of nested fields.              |
-| `ListItemField` |            Single list item wrapper.            |
-| `LongTextField` |                    Textarea.                    |
-|   `NestField`   |             Block of nested fields.             |
-|   `NumField`    |                 Numeric input.                  |
-|  `RadioField`   |                 Radio checkbox.                 |
-|  `SelectField`  |      Select (or set of radio checkboxes).       |
-|  `SubmitField`  |                 Submit button.                  |
-|   `TextField`   |      Text (or any HTML5 compatible) input.      |
+|    Component    |                    Description                    |
+| :-------------: | :-----------------------------------------------: |
+|   `AutoField`   |       Automatically renders a given field.        |
+|  `AutoFields`   |        Automatically renders given fields.        |
+|   `BoolField`   |                     Checkbox.                     |
+|   `DateField`   |           HTML5 `datetime-local` input.           |
+|  `ErrorField`   |         Error message for a given field.          |
+|  `ErrorsField`  |  Error message with a list of validation errors.  |
+|  `HiddenField`  | Hidden field (with a possibility to omit in DOM). |
+| `ListAddField`  |      An icon with action to add a list item.      |
+| `ListDelField`  |    An icon with action to remove a list item.     |
+|   `ListField`   |              List of nested fields.               |
+| `ListItemField` |             Single list item wrapper.             |
+| `LongTextField` |                     Textarea.                     |
+|   `NestField`   |              Block of nested fields.              |
+|   `NumField`    |                  Numeric input.                   |
+|  `RadioField`   |                  Radio checkbox.                  |
+|  `SelectField`  |       Select (or set of radio checkboxes).        |
+|  `SubmitField`  |                  Submit button.                   |
+|   `TextField`   |       Text (or any HTML5 compatible) input.       |
 
 ## Fields
 
@@ -57,9 +57,9 @@ import AutoField from 'uniforms-unstyled/AutoField';
 ### `AutoFields`
 
 `AutoFields` is basically a set of rendered `AutoFields`.
-By default, the rendered fields will be `AutoFields` in chosen theme.
+By default, the rendered fields will be `AutoFields` in a chosen theme.
 However, you can replace the standard `AutoField` with a custom one through the `autoField` property.
-The `element` property defines a fields wrapping tag.
+The `element` property defines a wrapping component.
 Eg. you want to group your fields inside a section, just do `element="section"`. The default one is `div`.
 
 ##### Props:
@@ -87,10 +87,10 @@ import AutoFields from 'uniforms-unstyled/AutoFields';
 ### `BaseField`
 
 You can't really render a BaseField because it doesn't have a render method.
-It's a base class of All packaged fields, so that All props below are available
+It's a base class of all packaged fields, so that all props below are available
 to All fields.
 
-You can pass any prop but remember that passing onChange will "detach"
+You can pass any prop but remember that passing `onChange` will "detach"
 the field from the form in some way - it won't change your form state.
 Also, passing any already provided prop - like `id` - will override the
 default one.
@@ -110,7 +110,7 @@ default one.
 ```js
 import BaseField from 'uniforms/BaseField';
 
-<BaseField disabled={false} label={true} name="field" placeholder={false} value={value} />;
+<BaseField disabled={false} label name="field" placeholder={false} value={value} />;
 ```
 
 ### `BoolField`
@@ -148,14 +148,14 @@ import BoolField from 'uniforms-unstyled/BoolField';
   appearance="checkbox" // Renders a material-ui Checkbox
   appearance="toggle" // Renders a material-ui Toggle
   extra="Extra Feedback or Help"
-  feedbackable={true}
+  feedbackable
   grid="4" // 'col-4-sm' on label, 'col-8-sm' on input
   grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
   grid={3} // 'col-3-sm' on label, 'col-9-sm' on input
   grid={{md: 5}} // 'col-5-md' on label, 'col-7-md' on input
   help="Need help?"
   helpClassName="a b c"
-  inline={true}
+  inline
   inputClassName="a b c"
   inputRef={ref => {}}
   labelBefore="Label"
@@ -163,7 +163,7 @@ import BoolField from 'uniforms-unstyled/BoolField';
   labelClassName=[ 'a', 'b', 'c' ] // or as an array of strings
   labelCol={{offset: 2}} // 'ant-col-offset-2' on label
   labelCol={{span: 4}} // 'ant-col-4' on label
-  showInlineError={true}
+  showInlineError
   wrapClassName="a b c"
   wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
   wrapperCol={{span: 4}} // 'ant-col-4' on field
@@ -205,7 +205,7 @@ import DateField from 'uniforms-unstyled/DateField';
 
 <DateField
   extra="Extra Feedback or Help"
-  feedbackable={true}
+  feedbackable
   grid="4" // 'col-4-sm' on label, 'col-8-sm' on input
   grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
   grid={3} // 'col-3-sm' on label, 'col-9-sm' on input
@@ -224,7 +224,7 @@ import DateField from 'uniforms-unstyled/DateField';
   labelProps={{shrink: true, disableAnimation: true}}
   max={new Date(2100, 1, 1)}
   min={new Date(2000, 1, 1)}
-  showInlineError={true}
+  showInlineError
   timeFormat="ampm"
   wrapClassName="a b c"
   wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
@@ -352,7 +352,7 @@ import ListField from 'uniforms-unstyled/ListField';
     }
   }
   removeIcon={<MyRemoveIcon />}
-  showInlineError={true}
+  showInlineError
 />;
 ```
 
@@ -422,7 +422,7 @@ import LongTextField from 'uniforms-unstyled/LongTextField';
   labelClassName=[ 'a', 'b', 'c' ] // or as an array of strings
   labelCol={{offset: 2}} // 'ant-col-offset-2' on label
   labelCol={{span: 4}} // 'ant-col-4' on label
-  showInlineError={true}
+  showInlineError
   wrapClassName="a b c"
   wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
   wrapperCol={{span: 4}} // 'ant-col-4' on field
@@ -446,7 +446,7 @@ import LongTextField from 'uniforms-unstyled/LongTextField';
 ```js
 import NestField from 'uniforms-unstyled/NestField';
 
-<NestField fields={['fieldA', 'fieldB' /* ... */]} grouped={true} showInlineError={true} />;
+<NestField fields={['fieldA', 'fieldB' /* ... */]} grouped showInlineError />;
 ```
 
 ### `NumField`
@@ -486,7 +486,7 @@ A numeric input field.
 import NumField from 'uniforms-unstyled/NumField';
 
 <NumField
-  decimal={true}
+  decimal
   extra="Extra Feedback or Help"
   grid="4" // 'col-4-sm' on label, 'col-8-sm' on input
   grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
@@ -505,7 +505,7 @@ import NumField from 'uniforms-unstyled/NumField';
   labelCol={{span: 4}} // 'ant-col-4' on label
   max={100}
   min={10}
-  showInlineError={true}
+  showInlineError
   step={5}
   wrapClassName="a b c"
   wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
@@ -537,13 +537,13 @@ import RadioField from 'uniforms-unstyled/RadioField';
 
 <RadioField
   allowedValues={[value1, value2 /* ... */]}
-  inline={true}
+  inline
   inputClassName="a b c"
   labelClassName="a b c" // You can either specify them as a single string
   labelClassName=[ 'a', 'b', 'c' ] // or as an array of strings
   labelCol={{offset: 2}} // 'ant-col-offset-2' on label
   labelCol={{span: 4}} // 'ant-col-4' on label
-  showInlineError={true}
+  showInlineError
   transform={value => label}
   wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
   wrapperCol={{span: 4}} // 'ant-col-4' on field
@@ -582,11 +582,11 @@ import SelectField from 'uniforms-unstyled/SelectField';
 
 <SelectField
   allowedValues={[value1, value2 /* ... */]}
-  checkboxes={true}
+  checkboxes
   extra="Extra Feedback or Help"
   help="Need help?"
   helpClassName="a b c"
-  inline={true}
+  inline
   inputClassName="a b c"
   inputRef={ref => {}}
   labelClassName="a b c" // You can either specify them as a single string
@@ -595,7 +595,7 @@ import SelectField from 'uniforms-unstyled/SelectField';
   labelCol={{span: 4}} // 'ant-col-4' on label
   labelProps={{shrink: true, disableAnimation: true}}
   options={[{label: 'Hi', value: value1}, {label: 'Hello', value: value1} /* ... */]}
-  showInlineError={true}
+  showInlineError
   transform={value => label} //   Set of values that will be shown in the select.
   wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
   wrapperCol={{span: 4}} // 'ant-col-4' on field
@@ -665,7 +665,7 @@ import TextField from 'uniforms-unstyled/TextField';
   labelClassName=[ 'a', 'b', 'c' ] // or as an array of strings
   labelCol={{offset: 2}} // 'ant-col-offset-2' on label
   labelCol={{span: 4}} // 'ant-col-4' on label
-  showInlineError={true}
+  showInlineError
   type="password"   // Input type. HTML compatible input type like password. Default is text.
   wrapClassName="a b c"
   wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field

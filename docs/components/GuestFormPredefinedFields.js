@@ -13,23 +13,23 @@ import {
 const professions = [
   {
     label: 'Developer',
-    value: 'Developer'
+    value: 'developer'
   },
   {
     label: 'Tester',
-    value: 'Tester'
+    value: 'tester'
   },
   {
     label: 'Product owner',
-    value: 'Product owner'
+    value: 'product-owner'
   },
   {
     label: 'Project manager',
-    value: 'Project manager'
+    value: 'project-manager'
   },
   {
     label: 'Businessman',
-    value: 'Businessman'
+    value: 'businessman'
   }
 ];
 

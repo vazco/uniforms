@@ -21,24 +21,16 @@ const schema = {
   title: 'Guest',
   type: 'object',
   properties: {
-    firstName: {
-      type: 'string'
-    },
-    lastName: {
-      type: 'string'
-    },
+    firstName: {type: 'string'},
+    lastName: {type: 'string'},
     workExperience: {
       description: 'Work experience in years',
       type: 'integer',
       minimum: 0,
       maximum: 100
     },
-    profession: {
-      type: 'string'
-    },
-    additionalInfo: {
-      type: 'string'
-    }
+    profession: {type: 'string'},
+    additionalInfo: {type: 'string'}
   },
   required: ['firstName', 'lastName']
 };
@@ -89,8 +81,8 @@ Let's stop for a while and think of what we have. Obviously, we there is a form 
 
 **We can handle it in two ways:**
 
-1. by replacing the `AutoField` inside the `AutoForm` with a desired field
-2. by manipulating the schema using the `uniforms` key
+1. By replacing the `AutoField` inside the `AutoForm` with a desired field.
+2. By manipulating the schema using the `uniforms` key.
 
 ### 1. Replacing the `AutoField`
 
@@ -108,23 +100,23 @@ import GuestSchema from './GuestSchema';
 const professions = [
   {
     label: 'Developer',
-    value: 'Developer'
+    value: 'developer'
   },
   {
     label: 'Tester',
-    value: 'Tester'
+    value: 'tester'
   },
   {
     label: 'Product owner',
-    value: 'Product owner'
+    value: 'product-owner'
   },
   {
     label: 'Project manager',
-    value: 'Project manager'
+    value: 'project-manager'
   },
   {
     label: 'Businessman',
-    value: 'Businessman'
+    value: 'businessman'
   }
 ];
 
@@ -206,12 +198,8 @@ const schema = {
   title: 'Guest',
   type: 'object',
   properties: {
-    firstName: {
-      type: 'string'
-    },
-    lastName: {
-      type: 'string'
-    },
+    firstName: {type: 'string'},
+    lastName: {type: 'string'},
     workExperience: {
       description: 'Work experience in years',
       type: 'integer',
@@ -223,23 +211,23 @@ const schema = {
       options: [
         {
           label: 'Developer',
-          value: 'Developer'
+          value: 'developer'
         },
         {
           label: 'Tester',
-          value: 'Tester'
+          value: 'tester'
         },
         {
           label: 'Product owner',
-          value: 'Product owner'
+          value: 'product-owner'
         },
         {
           label: 'Project manager',
-          value: 'Project manager'
+          value: 'project-manager'
         },
         {
           label: 'Businessman',
-          value: 'Businessman'
+          value: 'businessman'
         }
       ]
     },

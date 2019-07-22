@@ -13,11 +13,11 @@ Let's prepare a form for the guests, so they can sign up for our event, by using
 
 ### 1. Install the required packages
 
-To start using uniforms, we have to install independent three packages:
+To start using uniforms, we have to install three independent packages:
 
-1. core
-2. schema-to-bridge
-3. theme
+1. Core
+2. Bridge
+3. Theme
 
 In this example, we will use the JSONSchema to describe our desired data format and style our form using Semantic UI theme.
 
@@ -39,12 +39,8 @@ const schema = {
   title: 'Guest',
   type: 'object',
   properties: {
-    firstName: {
-      type: 'string'
-    },
-    lastName: {
-      type: 'string'
-    },
+    firstName: {type: 'string'},
+    lastName: {type: 'string'},
     workExperience: {
       description: 'Work experience in years',
       type: 'integer',
@@ -62,20 +58,22 @@ which is an integer, with a value between 0 and 100.
 ### 3. Then create the bridge
 
 Now that we have the schema, we can create the uniforms bridge of it, by using the corresponding uniforms schema-to-bridge package.
-Creating the bridge instance is necessary - without it uniforms would not be able to process form generation and validation.
-As we are using the JSONSchema, we have to import the uniforms-bridge-json-schema package.
+Creating the bridge instance is necessary - without it, uniforms would not be able to process form generation and validation.
+As we are using the JSONSchema, we have to import the `uniforms-bridge-json-schema` package.
 
 ```js
 import {JSONSchemaBridge} from 'uniforms-bridge-json-schema';
 ```
 
-Now you may think that we can simply do
+Now you may think that we can simply do:
 
 ```js
-const bridge = new JSONSchemaBridge(schema); // wrong usage of the JSONSchemaBridge! you have to pass a validator
+// Wrong usage of the JSONSchemaBridge!
+// You have to pass a validator!
+const bridge = new JSONSchemaBridge(schema);
 ```
 
-and we'll be fine. However, **there's small caveat with using the JSONSchemaBridge**.
+However, **there's small caveat with using the JSONSchemaBridge**.
 Because of its simplicity, JSONSchema doesn't provide any validation checkers, so in order to properly validate our submitted data,
 we need to **manually define a validator**, and that is required by the uniforms `JSONSchemaBrigde` constructor.
 
@@ -84,39 +82,44 @@ To manually create the validator, we will use the [ajv](https://github.com/epobe
 ```js
 import Ajv from 'ajv';
 
-const validator = new Ajv({allErrors: true, useDefaults: true}).compile(schema);
+const ajv = new Ajv({allErrors: true, useDefaults: true});
 
-const schemaValidator = model => {
-  validator(model);
+function createValidator(schema) {
+  const validator = ajv.compile(schema);
 
-  if (validator.errors && validator.errors.length) {
-    throw {details: validator.errors};
-  }
-};
+  return model => {
+    validator(model);
+
+    if (validator.errors && validator.errors.length) {
+      throw {details: validator.errors};
+    }
+  };
+}
+
+const schemaValidator = createValidator(schema);
 ```
 
 Now that we have both the schema and the validator, we can create the uniforms bridge:
 
 ```js
-const bridge = new JSONSchemaBridge(schema, schemaValidator); // right usage of the JSONSchemaBridge, with the schema and its validator
+// Correct usage of the JSONSchemaBridge.
+const bridge = new JSONSchemaBridge(schema, schemaValidator);
 ```
 
-Just to recap, the whole GuestSchema.js file looks like this:
+Just to recap, the whole `GuestSchema.js` file looks like this:
 
 ```js
 import Ajv from 'ajv';
 import {JSONSchemaBridge} from 'uniforms-bridge-json-schema';
 
+const ajv = new Ajv({allErrors: true, useDefaults: true});
+
 const schema = {
   title: 'Guest',
   type: 'object',
   properties: {
-    firstName: {
-      type: 'string'
-    },
-    lastName: {
-      type: 'string'
-    },
+    firstName: {type: 'string'},
+    lastName: {type: 'string'},
     workExperience: {
       description: 'Work experience in years',
       type: 'integer',
@@ -127,15 +130,19 @@ const schema = {
   required: ['firstName', 'lastName']
 };
 
-const validator = new Ajv({allErrors: true, useDefaults: true}).compile(schema);
+function createValidator(schema) {
+  const validator = ajv.compile(schema);
 
-const schemaValidator = model => {
-  validator(model);
+  return model => {
+    validator(model);
 
-  if (validator.errors && validator.errors.length) {
-    throw {details: validator.errors};
-  }
-};
+    if (validator.errors && validator.errors.length) {
+      throw {details: validator.errors};
+    }
+  };
+}
+
+const schemaValidator = createValidator(schema);
 
 const bridge = new JSONSchemaBridge(schema, schemaValidator);
 

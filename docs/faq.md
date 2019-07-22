@@ -7,19 +7,19 @@ title: FAQ
 
 You can style your form fields simply by passing a `className` property.
 
-### How can I create a custom fields?
+### How can I create custom fields?
 
 You can create a custom field by wrapping your component inside the [`connectField`](api-helpers#connectfieldcomponent-options).
 
-The `connectField` will pass various props related to the form management, such as `onChange()` function, current field's value, errors an so on, to your component.
+The `connectField` will pass various props related to the form management, such as `onChange()` function, current field's value, errors and so on, to your component.
 
-Please visit the ['Creating a custom field'](tutorials-creating-custom-field) tutorial to see how to create your own fields.
+Please visit the [Tutorials > Creating a custom field](tutorials-creating-custom-field) tutorial to see how to create your own fields.
 
 ### How can I use a custom field in my form?
 
 You can tell your schema to use your custom field by adding the `uniforms` property.
 
-Eg. in JSONSchema:
+Example in JSONSchema:
 
 ```js
 const schema = {
@@ -77,12 +77,12 @@ You can also leave the schema untouched and pass your custom field with props di
 </AutoForm>
 ```
 
-### How can I have a dynamic labels? (eg. handling i18n)
+### How can I have a dynamic label? (eg. handling i18n)
 
 There are few ways to handle that, depending on the level of abstraction you want to do it - schema, field or `AutoField` component.
 
 On the **schema** level, you can use `uniforms: {...}` object property to pass extra props to the field.
-A function returning it (`uniforms: () => ({...})` is also accepted. With it, dynamic labels can be fetched from any source.
+A function returning it (`uniforms: () => ({...})`) is also accepted. With it, dynamic labels can be fetched from any source.
 
 On the **field** level, you can prepare your own component set, where you will use `<Translate>{label}</Translate>` instead of `{label}`.
 
@@ -90,7 +90,7 @@ While the first one is schema-dependent and the second is theme-dependent, there
 
 ### How can I change the way my form validates?
 
-Any form can be validated in one those three styles:
+Any form can be validated in one of those three styles:
 
 - `onChange`
   Validate on every change.
@@ -138,17 +138,17 @@ const MyForm = ({schema, onSubmit}) => {
 };
 ```
 
-You can find more about form methods [here](uth-forms-features#methods).
+You can find more about form methods [here](api-forms).
 
 ### I want my form to be prefilled with data. How can I do that?
 
 You can pass the initial data to the form by using the `model` prop.
 
-The `model` is an object with `{field: value}` structure. It doesn't matter, if it has a prototype or not, but keep in mind that in `onSubmit` or in `onChangeModel` you'll receive a plain object. If you treat form as an input, then this is a value.
+The `model` is an object with `{field: value}` structure. It doesn't matter if it has a prototype or not, but keep in mind that in `onSubmit` or in `onChangeModel` you'll receive a plain object. If you treat form as an input, then this is a value.
 
 ### How can I transform my model?
 
-You should `modelTransform`. It is a function transforming one model into another. It's used in few situations (called 'modes') described below.
+You should `modelTransform`. It is a function transforming one model into another. It's used in a few situations (called 'modes') described below.
 
 **Remember not to mutate a given model!**
 
@@ -158,14 +158,17 @@ function transform(mode, model) {
   if (mode === 'form') {
     /* ... */
   }
+
   // This model will be submitted.
   if (mode === 'submit') {
     /* ... */
   }
+
   // This model will be validated.
   if (mode === 'validate') {
     /* ... */
   }
+
   // Otherwise, return unaltered model.
   return model;
 }
@@ -195,24 +198,22 @@ const WithUniforms = ({children}, {uniforms}) => children(uniforms);
 WithUniforms.contextTypes = BaseField.contextTypes;
 ```
 
-`uniforms` context data consists of various properties which can be found [here](api-context-data).
+`uniforms` context data consists of various properties which can be found in [here](api-context-data).
 
 ##### Example usage:
 
 ```js
 <AutoForm>
-  /*...*/
   <WithUniforms>
     {uniforms => (
-      //Now I have access to the context!
+      // Now I have access to the context!
       <MyField uniformsContext={uniforms} />
     )}
   </WithUniforms>
-  /*...*/
 </AutoForm>
 ```
 
-You can find out more [here](https://reactjs.org/docs/legacy-context.html#referencing-context-in-stateless-function-components).
+You can find out more about React context [here](https://reactjs.org/docs/legacy-context.html#referencing-context-in-stateless-function-components).
 
 ### I want to disable a submit button until there is a difference between the current form state and my model. How can I do it?
 
@@ -222,7 +223,6 @@ Current form state can be accessed through the context (see [How can I know a cu
 ```js
 const ChangedForm = ({model}) => (
   <AutoForm model={model}>
-    /*...*/
     <WithUniforms>{uniforms => <SubmitField disabled={isEqual(uniforms.model, model)} />}</WithUniforms>
   </AutoForm>
 );

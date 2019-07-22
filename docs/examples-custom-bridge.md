@@ -41,7 +41,7 @@ const UserLoginSchema = {
 export default UserLoginSchema;
 ```
 
-### Validator definiton
+### Validator definition
 
 When the schema is ready, our next step is to provide a way to check if the values received from our form are correct.
 In order to do so, we prepare a validation function.
@@ -137,7 +137,7 @@ export default class UserLoginSchemaBridge extends Bridge {
 ### Usage
 
 After our custom bridge is created, we can use in the very same way as we would use predefined one -
-we have to supply the schema and validator and then we can easily take advantage of it in the AutoForm:
+we have to supply the schema and validator and then we can take an advantage of it in the AutoForm:
 
 ```js
 import UserLoginSchema from './UserLoginSchema';

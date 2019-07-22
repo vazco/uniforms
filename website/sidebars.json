@@ -1,6 +1,6 @@
 {
   "docs": {
-    "Introduction": ["what-are-uniforms", "why-are-uniforms"],
+    "Introduction": ["what-are-uniforms", "motivation"],
     "Getting Started": ["installation", "faq"],
     "Tutorials": [
       "tutorials-basic-uniforms-usage",
