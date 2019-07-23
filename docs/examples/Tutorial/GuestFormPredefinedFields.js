@@ -1,9 +1,39 @@
 import React from 'react';
 
 import GuestSchema2 from './GuestSchema2';
-import { AutoForm, AutoField, ErrorField, SubmitField } from './universal';
+import {
+  AutoForm,
+  AutoField,
+  ErrorField,
+  LongTextField,
+  SelectField,
+  SubmitField
+} from '../../../website/scripts/components/universal';
 
-export default function GuestFormProfessionAdditionalInfo() {
+const professions = [
+  {
+    label: 'Developer',
+    value: 'developer'
+  },
+  {
+    label: 'Tester',
+    value: 'tester'
+  },
+  {
+    label: 'Product owner',
+    value: 'product-owner'
+  },
+  {
+    label: 'Project manager',
+    value: 'project-manager'
+  },
+  {
+    label: 'Businessman',
+    value: 'businessman'
+  }
+];
+
+export default function GuestFormPredefinedFields() {
   return (
     <AutoForm schema={GuestSchema2}>
       <h4>IT meeting guest questionnaire</h4>
@@ -22,8 +52,8 @@ export default function GuestFormProfessionAdditionalInfo() {
         name="workExperience"
         errorMessage="Your work experience cannot be lesser than 0 or greater than 100 years!"
       />
-      <AutoField name="profession" />
-      <AutoField name="additionalInfo" />
+      <SelectField name="profession" options={professions} />
+      <LongTextField name="additionalInfo" />
       <SubmitField />
     </AutoForm>
   );

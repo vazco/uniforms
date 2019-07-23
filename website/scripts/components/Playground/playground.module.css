@@ -24,7 +24,7 @@
 }
 
 .playground-toolbar {
-  background: #fff;
+  background: #eee;
 }
 
 .playground-toolbar select {
@@ -40,4 +40,12 @@
   display: block;
   flex: 1;
   overflow-y: auto;
+
+  border-radius: 5px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
+
+

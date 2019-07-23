@@ -1,11 +1,16 @@
 import React from 'react';
 
-import GuestSchema4 from './GuestSchema4';
-import { AutoField, AutoForm, ErrorField, SubmitField } from './universal';
+import GuestSchema3 from './GuestSchema3';
+import {
+  AutoForm,
+  AutoField,
+  ErrorField,
+  SubmitField
+} from '../../../website/scripts/components/universal';
 
-export default function GuestFormFinal() {
+export default function GuestFormWithFieldsInSchema() {
   return (
-    <AutoForm schema={GuestSchema4}>
+    <AutoForm schema={GuestSchema3}>
       <h4>IT meeting guest questionnaire</h4>
       <AutoField name="lastName" />
       <ErrorField name="lastName">
@@ -24,7 +29,6 @@ export default function GuestFormFinal() {
       />
       <AutoField name="profession" />
       <AutoField name="additionalInfo" />
-      <AutoField name="pictureUrl" />
       <SubmitField />
     </AutoForm>
   );

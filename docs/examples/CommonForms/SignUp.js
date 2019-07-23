@@ -1,7 +1,7 @@
 import React from 'react';
 
 import schema from './SignUpSchema';
-import { AutoForm } from '../../universal';
+import { AutoForm } from '../../../website/scripts/components/universal';
 
 export default function SignUpForm() {
   return (

@@ -2,7 +2,11 @@ import React, { Children } from 'react';
 import BaseField from 'uniforms/BaseField';
 import nothing from 'uniforms/nothing';
 
-import { AutoForm, SubmitField, TextField } from '../../universal';
+import {
+  AutoForm,
+  SubmitField,
+  TextField
+} from '../../../website/scripts/components/universal';
 import schema from './DisplayIfFieldSchema';
 
 // We have to ensure that there's only one child, because returning an array

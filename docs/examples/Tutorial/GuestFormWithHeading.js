@@ -1,7 +1,12 @@
 import React from 'react';
 
 import GuestSchema from './GuestSchema';
-import { AutoForm, AutoFields, ErrorsField, SubmitField } from './universal';
+import {
+  AutoForm,
+  AutoFields,
+  ErrorsField,
+  SubmitField
+} from '../../../website/scripts/components/universal';
 
 export default function GuestFormWithHeading() {
   return (

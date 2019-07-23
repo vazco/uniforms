@@ -2,7 +2,11 @@ import React from 'react';
 import connectField from 'uniforms/connectField';
 
 import schema from './CompositeFieldSchema';
-import { AutoField, AutoForm, SubmitField } from '../../universal';
+import {
+  AutoField,
+  AutoForm,
+  SubmitField
+} from '../../../website/scripts/components/universal';
 
 // This field is a kind of a shortcut for few fields. You can also access all
 // field props here, like value or onChange for some extra logic.

@@ -8,8 +8,8 @@ import React, {
 } from 'react';
 
 import './FormWrapper.css';
-import { themeContext } from './ThemeContext';
-import { PlaygroundWrap } from '../playground';
+import { themeContext } from '../ThemeContext';
+import { PlaygroundWrap } from '../Playground';
 
 function handleResize(ref, setHeight) {
   const scrollHeight = get(

@@ -7,4 +7,6 @@ function getDefaultToggle(items) {
   return index > 0 ? index : 0;
 }
 
-export { Toggler, TogglerHeader, getDefaultToggle };
+export { TogglerHeader, getDefaultToggle };
+
+export default Toggler;

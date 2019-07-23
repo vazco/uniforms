@@ -1,7 +1,11 @@
 import React from 'react';
 import connectField from 'uniforms/connectField';
 
-import { AutoForm, DateField, SubmitField } from '../../universal';
+import {
+  AutoForm,
+  DateField,
+  SubmitField
+} from '../../../website/scripts/components/universal';
 import schema from './RangeFieldSchema';
 
 // This field works as follows: two datepickers are bound to each other. Value is

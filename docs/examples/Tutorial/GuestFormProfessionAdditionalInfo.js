@@ -5,35 +5,10 @@ import {
   AutoForm,
   AutoField,
   ErrorField,
-  LongTextField,
-  SelectField,
   SubmitField
-} from './universal';
+} from '../../../website/scripts/components/universal';
 
-const professions = [
-  {
-    label: 'Developer',
-    value: 'developer'
-  },
-  {
-    label: 'Tester',
-    value: 'tester'
-  },
-  {
-    label: 'Product owner',
-    value: 'product-owner'
-  },
-  {
-    label: 'Project manager',
-    value: 'project-manager'
-  },
-  {
-    label: 'Businessman',
-    value: 'businessman'
-  }
-];
-
-export default function GuestFormPredefinedFields() {
+export default function GuestFormProfessionAdditionalInfo() {
   return (
     <AutoForm schema={GuestSchema2}>
       <h4>IT meeting guest questionnaire</h4>
@@ -52,8 +27,8 @@ export default function GuestFormPredefinedFields() {
         name="workExperience"
         errorMessage="Your work experience cannot be lesser than 0 or greater than 100 years!"
       />
-      <SelectField name="profession" options={professions} />
-      <LongTextField name="additionalInfo" />
+      <AutoField name="profession" />
+      <AutoField name="additionalInfo" />
       <SubmitField />
     </AutoForm>
   );

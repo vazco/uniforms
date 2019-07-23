@@ -2,7 +2,10 @@ import React from 'react';
 import connectField from 'uniforms/connectField';
 
 import schema from './ImageFieldSchema';
-import { AutoForm, SubmitField } from '../../universal';
+import {
+  AutoForm,
+  SubmitField
+} from '../../../website/scripts/components/universal';
 
 function Image({ onChange, value }) {
   const imgPlaceholder = 'https://via.placeholder.com/150.png';

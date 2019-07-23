@@ -5,9 +5,9 @@ import {
   Database as DatabaseIcon
 } from 'react-feather';
 
-import { ThemeProvider } from '../ThemeContext';
-import FormWrapper from '../FormWrapper';
-import { TogglerTabs } from '../TogglerTabs';
+import { ThemeProvider } from './ThemeContext';
+import FormWrapper from './FormWrapper';
+import TogglerTabs from './TogglerTabs';
 
 const tabs = [
   { name: 'Semantic', value: 'semantic' },

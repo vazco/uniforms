@@ -3,7 +3,11 @@ import BaseField from 'uniforms/BaseField';
 import get from 'lodash/get';
 import { RefreshCw } from 'react-feather';
 
-import { AutoForm, TextField, SubmitField } from '../../universal';
+import {
+  AutoForm,
+  TextField,
+  SubmitField
+} from '../../../website/scripts/components/universal';
 import schema from './SwapFieldSchema';
 // This field works as follows: on click of its child it swaps values of fieldA
 // and fieldB. It's that simple.

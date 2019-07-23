@@ -1,7 +1,10 @@
 import React from 'react';
 import connectField from 'uniforms/connectField';
 import schema from './CycleFieldSchema';
-import { AutoForm, SubmitField } from '../../universal';
+import {
+  AutoForm,
+  SubmitField
+} from '../../../website/scripts/components/universal';
 
 // This field works as follows: iterate all allowed values and optionally no-value
 // state if the field is not required. This one uses Semantic-UI.

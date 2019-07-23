@@ -2,7 +2,10 @@ import React from 'react';
 import classnames from 'classnames';
 import connectField from 'uniforms/connectField';
 
-import { AutoForm, SubmitField } from '../../universal';
+import {
+  AutoForm,
+  SubmitField
+} from '../../../website/scripts/components/universal';
 import schema from './RatingFieldSchema';
 
 const Rating = ({
