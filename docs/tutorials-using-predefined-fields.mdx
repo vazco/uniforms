@@ -94,7 +94,7 @@ Let's stop for a while and think of what we have. Obviously, we there is a form 
 
 ### 1. Replacing the `AutoField`
 
-Uniforms provide a set of predefined out-of-the-box [fields](api-fields) that we can use instead of the `AutoField`.
+Uniforms provide a set of predefined out-of-the-box [fields](/docs/api-fields) that we can use instead of the `AutoField`.
 The perfect one for a `profession` property is a `SelectField`. All we have to do to have it rendered is to provide the list of available options.
 The same thing applies to the `additionalInfo` - in order to see it as a text area we can use the `LongTextField` component.
 Let's see our changes in action:
@@ -269,7 +269,7 @@ const schema = {
 ```
 
 What's changed is that now we've included the available options inside the `profession` property definition -
-uniforms are smart enough to deduce result field type, thanks to the [`AutoField` algorithm](uth-autofield-algorithm).
+uniforms are smart enough to deduce result field type, thanks to the [`AutoField` algorithm](/docs/uth-autofield-algorithm).
 When it comes to the `additionalInfo`, there is a slightly different approach applied - we can explicitly tell the `AutoForm` what field should be rendered.
 Just don't forget to import the desired one!
 

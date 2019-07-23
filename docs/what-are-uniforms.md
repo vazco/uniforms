@@ -25,4 +25,4 @@ In order to do so, uniforms require you to do two things:
 To operate on the schema, uniforms will need to receive a _bridge_ of it.
 A bridge is an unified schema mapper that is used by uniforms internals in order to be able to operate on the schema data, validate it and generate errors.
 To create one, you have to use one of the predefined schema-to-bridge mappers or create one by yourself.
-To learn more about the bridge concept, please visit the [Under The Hood > Bridge concept](uth-bridge-concept) section.
+To learn more about the bridge concept, please visit the [Under The Hood > Bridge concept](/docs/uth-bridge-concept) section.

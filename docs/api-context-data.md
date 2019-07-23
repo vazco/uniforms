@@ -64,7 +64,7 @@ Access to `onSubmit` method.
 
 ### `randomId`
 
-Access to `randomId` method. Similar to [randomIds()](api-helpers#randomidsprefix).
+Access to `randomId` method. Similar to [randomIds()](/docs/api-helpers#randomidsprefix).
 
 ### `schema`
 

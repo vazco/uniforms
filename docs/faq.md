@@ -9,11 +9,11 @@ You can style your form fields simply by passing a `className` property.
 
 ### How can I create custom fields?
 
-You can create a custom field by wrapping your component inside the [`connectField`](api-helpers#connectfieldcomponent-options).
+You can create a custom field by wrapping your component inside the [`connectField`](/docs/api-helpers#connectfieldcomponent-options).
 
 The `connectField` will pass various props related to the form management, such as `onChange()` function, current field's value, errors and so on, to your component.
 
-Please visit the [Tutorials > Creating a custom field](tutorials-creating-custom-field) tutorial to see how to create your own fields.
+Please visit the [Tutorials > Creating a custom field](/docs/tutorials-creating-custom-field) tutorial to see how to create your own fields.
 
 ### How can I use a custom field in my form?
 
@@ -147,7 +147,7 @@ const MyForm = ({ schema, onSubmit }) => {
 };
 ```
 
-You can find more about form methods [here](api-forms).
+You can find more about form methods [here](/docs/api-forms).
 
 ### I want my form to be prefilled with data. How can I do that?
 
@@ -207,7 +207,7 @@ const WithUniforms = ({ children }, { uniforms }) => children(uniforms);
 WithUniforms.contextTypes = BaseField.contextTypes;
 ```
 
-`uniforms` context data consists of various properties which can be found in [here](api-context-data).
+`uniforms` context data consists of various properties which can be found in [here](/docs/api-context-data).
 
 ##### Example usage:
 
@@ -227,7 +227,7 @@ You can find out more about React context [here](https://reactjs.org/docs/legacy
 ### I want to disable a submit button until there is a difference between the current form state and my model. How can I do it?
 
 Basically, you have to find out whether there is a difference between a current form state and your model, eg. by calling lodash's `isEqual` function.
-Current form state can be accessed through the context (see [How can I know a current form state?](faq#how-can-i-know-a-current-form-state)) and form model can be passed as an ordinary prop:
+Current form state can be accessed through the context (see [How can I know a current form state?](/docs/faq#how-can-i-know-a-current-form-state)) and form model can be passed as an ordinary prop:
 
 ```js
 const ChangedForm = ({ model }) => (

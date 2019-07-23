@@ -33,7 +33,7 @@ The list below contains a guaranteed set of fields, implemented in every theme p
 ### `AutoField`
 
 `AutoField` is basically a field renderer - it will render a field of a type adequate to the one defined in the schema,
-according to the [`AutoField` algorithm](uth-autofield-algorithm).
+according to the [`AutoField` algorithm](/docs/uth-autofield-algorithm).
 You can also directly pass a component to it (by a `component` prop).
 All additional props will be passed to the result field component.
 
