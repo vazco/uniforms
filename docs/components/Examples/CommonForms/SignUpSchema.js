@@ -1,19 +1,15 @@
 import Ajv from 'ajv';
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 
+const ajv = new Ajv({ allErrors: true, useDefaults: true });
+
 const schema = {
   title: 'Guest',
   type: 'object',
   properties: {
-    fullname: {
-      type: 'string'
-    },
-    email: {
-      type: 'string'
-    },
-    reemail: {
-      type: 'string'
-    },
+    fullname: { type: 'string' },
+    email: { type: 'string' },
+    reemail: { type: 'string' },
     password: {
       type: 'string',
       uniforms: {
@@ -30,9 +26,7 @@ const schema = {
         type: 'password'
       }
     },
-    acceptTermsOfUse: {
-      type: 'boolean'
-    }
+    acceptTermsOfUse: { type: 'boolean' }
   },
   required: [
     'fullname',
@@ -44,17 +38,18 @@ const schema = {
   ]
 };
 
-const validator = new Ajv({
-  allErrors: true,
-  useDefaults: true,
-  $data: true
-}).compile(schema);
+function createValidator(schema) {
+  const validator = ajv.compile(schema);
 
-const schemaValidator = model => {
-  validator(model);
-  if (validator.errors && validator.errors.length) {
-    throw { details: validator.errors };
-  }
-};
+  return model => {
+    validator(model);
+
+    if (validator.errors && validator.errors.length) {
+      throw { details: validator.errors };
+    }
+  };
+}
+
+const schemaValidator = createValidator(schema);
 
 export default new JSONSchemaBridge(schema, schemaValidator);

@@ -99,6 +99,7 @@ const presets = {
 
   'Address (JSONSchema)': preset`
         (() => {
+            const ajv = new Ajv({allErrors: true, useDefaults: true});
             const schema = {
                 title: 'Address',
                 type: 'object',
@@ -111,17 +112,21 @@ const presets = {
                 required: ['street', 'zip', 'state']
             }
 
-            const validator = new Ajv({allErrors: true, useDefaults: true}).compile(schema)
+            function createValidator(schema) {
+              const validator = ajv.compile(schema);
 
-            const schemaValidator = model => {
+              return model => {
                 validator(model);
 
                 if (validator.errors && validator.errors.length) {
-                    throw {details: validator.errors};
+                  throw {details: validator.errors};
                 }
+              };
             }
 
-            return new JSONSchemaBridge(schema, schemaValidator)
+            const schemaValidator = createValidator(schema);
+
+            return new JSONSchemaBridge(schema, schemaValidator);
         })()
     `,
 
