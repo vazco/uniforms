@@ -1,0 +1,43 @@
+.playground {
+  height: calc(100vh - var(--ifm-navbar-height));
+}
+
+.playground,
+.playground-column,
+.playground-toolbar {
+  display: flex;
+}
+
+.playground iframe,
+.playground-toolbar select {
+  border: 0;
+}
+
+.playground-column {
+  flex-direction: column;
+}
+
+.playground iframe,
+.playground-column,
+.playground-toolbar select {
+  flex: 1;
+}
+
+.playground-toolbar {
+  background: #fff;
+}
+
+.playground-toolbar select {
+  background: transparent;
+  font-size: 1rem;
+  margin: 0.25em;
+  padding: 0.5em;
+}
+
+.playground-wrap {
+  background-color: #fff;
+  color: #0e0e0e;
+  display: block;
+  flex: 1;
+  overflow-y: auto;
+}

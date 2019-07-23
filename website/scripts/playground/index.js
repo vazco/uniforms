@@ -4,11 +4,13 @@ import React, { Component } from 'react';
 import ValidatedForm from 'uniforms/ValidatedForm';
 import connectField from 'uniforms/connectField';
 import omit from 'lodash/omit';
+import classNames from 'classnames';
 
 import presets from './presets';
 import schema from './schema';
 import styles from './styles';
 import themes from './themes';
+import playgroundStyles from './playground.module.css';
 import { parseQuery, updateQuery } from './utils';
 
 import ConfigProvider from 'antd/lib/config-provider';
@@ -53,13 +55,13 @@ class Playground extends Component {
   render() {
     return (
       <PlaygroundForm
-        className="playground"
+        className={playgroundStyles['playground']}
         model={this.state}
         onChange={this.onChange}
         schema={schema}
       >
-        <section className="playground-column">
-          <nav className="playground-toolbar">
+        <section className={playgroundStyles['playground-column']}>
+          <nav className={playgroundStyles['playground-toolbar']}>
             <PlaygroundSelectField name="preset" />
             <PlaygroundSelectField name="theme" />
           </nav>
@@ -236,7 +238,13 @@ export class PlaygroundWrap extends Component {
     if (theme === 'material') {
       // Material-UI injects scoped CSS classes into head.
       return (
-        <section children={content} className="frame-root playground-wrap" />
+        <section
+          children={content}
+          className={classNames(
+            'frame-root',
+            playgroundStyles['playground-wrap']
+          )}
+        />
       );
     }
 
@@ -257,7 +265,7 @@ export class PlaygroundWrap extends Component {
     return (
       <Frame
         children={frameContent}
-        className="playground-wrap"
+        className={playgroundStyles['playground-wrap']}
         {...frameProps}
       />
     );
