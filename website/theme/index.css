@@ -12,6 +12,12 @@ table {
   display: inline-table;
 }
 
+.markdown img {
+  background: #fff;
+  border-radius: var(--ifm-global-radius);
+  padding: var(--ifm-pre-padding);
+}
+
 .menu > .menu__list > .menu__list-item > .menu__link:hover {
   background: initial;
   cursor: default;
