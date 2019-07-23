@@ -25,8 +25,8 @@ const schema = {
   title: 'Guest',
   type: 'object',
   properties: {
-    firstName: {type: 'string'},
-    lastName: {type: 'string'},
+    firstName: { type: 'string' },
+    lastName: { type: 'string' },
     workExperience: {
       description: 'Work experience in years',
       type: 'integer',
@@ -86,10 +86,10 @@ Our newly created `ImageField` looks like this:
 import React from 'react';
 import connectField from 'uniforms/connectField';
 
-function Image({onChange, value}) {
+function Image({ onChange, value }) {
   const imgPlaceholder = 'https://via.placeholder.com/150.png';
 
-  function onImageChange({target: {files}}) {
+  function onImageChange({ target: { files } }) {
     if (files && files[0]) {
       onChange(URL.createObjectURL(files[0]));
     }
@@ -99,9 +99,18 @@ function Image({onChange, value}) {
     <div className="ImageField">
       <label htmlFor="file-input">
         <div>Choose your photo</div>
-        <img style={{cursor: 'pointer', width: '150px', height: '150px'}} src={value ? value : imgPlaceholder} />
+        <img
+          style={{ cursor: 'pointer', width: '150px', height: '150px' }}
+          src={value ? value : imgPlaceholder}
+        />
       </label>
-      <input accept="image/*" id="file-input" onChange={onImageChange} style={{display: 'none'}} type="file" />
+      <input
+        accept="image/*"
+        id="file-input"
+        onChange={onImageChange}
+        style={{ display: 'none' }}
+        type="file"
+      />
     </div>
   );
 }
@@ -117,12 +126,17 @@ By using these, we don't have to worry about managing the field's state.
 Take a look at the form code:
 
 ```js
-import {AutoField, AutoForm, ErrorField, SubmitField} from 'uniforms-semantic';
+import {
+  AutoField,
+  AutoForm,
+  ErrorField,
+  SubmitField
+} from 'uniforms-semantic';
 import React from 'react';
 
 import GuestSchema4 from './GuestSchema4';
 
-export default function GuestForm9({onSubmit}) {
+export default function GuestForm9({ onSubmit }) {
   return (
     <AutoForm schema={GuestSchema4} onSubmit={onSubmit}>
       <h4>IT meeting guest questionnaire</h4>
@@ -131,7 +145,10 @@ export default function GuestForm9({onSubmit}) {
         <span>You have to provide your last name!</span>
       </ErrorField>
       <AutoField name="firstName" />
-      <ErrorField name="firstName" errorMessage="You have to provide your first name!" />
+      <ErrorField
+        name="firstName"
+        errorMessage="You have to provide your first name!"
+      />
       <span>Do you want to share your work experience with us?</span>
       <AutoField name="workExperience" />
       <ErrorField

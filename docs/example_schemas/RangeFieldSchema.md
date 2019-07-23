@@ -1,8 +1,8 @@
 ```js
 import Ajv from 'ajv';
-import {JSONSchemaBridge} from 'uniforms-bridge-json-schema';
+import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 
-const ajv = new Ajv({allErrors: true, useDefaults: true});
+const ajv = new Ajv({ allErrors: true, useDefaults: true });
 
 const schema = {
   title: 'Date Range',
@@ -11,8 +11,8 @@ const schema = {
     range: {
       type: 'object',
       properties: {
-        start: {type: 'string'},
-        stop: {type: 'string'}
+        start: { type: 'string' },
+        stop: { type: 'string' }
       }
     }
   }
@@ -25,7 +25,7 @@ function createValidator(schema) {
     validator(model);
 
     if (validator.errors && validator.errors.length) {
-      throw {details: validator.errors};
+      throw { details: validator.errors };
     }
   };
 }

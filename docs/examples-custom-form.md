@@ -32,10 +32,13 @@ const Modifier = parent =>
         const remove = keys.filter(key => doc[key] === undefined);
 
         // It's a good idea to omit empty modifiers.
-        const $set = update.reduce((acc, key) => ({...acc, [key]: doc[key]}), {});
-        const $unset = remove.reduce((acc, key) => ({...acc, [key]: ''}), {});
+        const $set = update.reduce(
+          (acc, key) => ({ ...acc, [key]: doc[key] }),
+          {}
+        );
+        const $unset = remove.reduce((acc, key) => ({ ...acc, [key]: '' }), {});
 
-        return {$set, $unset};
+        return { $set, $unset };
       }
 
       return super.getModel(mode);

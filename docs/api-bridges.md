@@ -15,9 +15,9 @@ Currently available bridges:
 ## `GraphQLBridge`
 
 ```js
-import {GraphQLBridge} from 'uniforms-bridge-graphql';
-import {buildASTSchema} from 'graphql';
-import {parse} from 'graphql';
+import { GraphQLBridge } from 'uniforms-bridge-graphql';
+import { buildASTSchema } from 'graphql';
+import { parse } from 'graphql';
 
 const schema = `
     type Author {
@@ -43,7 +43,7 @@ const schemaData = {
     allowedValues: [1, 2, 3]
   },
   title: {
-    options: [{label: 1, value: 'a'}, {label: 2, value: 'b'}]
+    options: [{ label: 1, value: 'a' }, { label: 2, value: 'b' }]
   }
 };
 
@@ -51,13 +51,13 @@ const schemaValidator = model => {
   const details = [];
 
   if (!model.id) {
-    details.push({name: 'id', message: 'ID is required!'});
+    details.push({ name: 'id', message: 'ID is required!' });
   }
 
   // ...
 
   if (details.length) {
-    throw {details};
+    throw { details };
   }
 };
 
@@ -68,16 +68,16 @@ const bridge = new GraphQLBridge(schemaType, schemaValidator, schemaData);
 
 ```js
 import Ajv from 'ajv';
-import {JSONSchemaBridge} from 'uniforms-bridge-json-schema';
+import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 
-const ajv = new Ajv({allErrors: true, useDefaults: true});
+const ajv = new Ajv({ allErrors: true, useDefaults: true });
 
 const schema = {
   title: 'Person',
   type: 'object',
   properties: {
-    firstName: {type: 'string'},
-    lastName: {type: 'string'},
+    firstName: { type: 'string' },
+    lastName: { type: 'string' },
     age: {
       description: 'Age in years',
       type: 'integer',
@@ -94,7 +94,7 @@ function createValidator(schema) {
     validator(model);
 
     if (validator.errors && validator.errors.length) {
-      throw {details: validator.errors};
+      throw { details: validator.errors };
     }
   };
 }
@@ -131,7 +131,7 @@ const bridge = new SimpleSchema2Bridge(PersonSchema);
 
 ```js
 import SimpleSchemaBridge from 'uniforms-bridge-simple-schema';
-import {SimpleSchema} from 'aldeed:simple-schema';
+import { SimpleSchema } from 'aldeed:simple-schema';
 
 const PersonSchema = new SimpleSchema({
   // ...

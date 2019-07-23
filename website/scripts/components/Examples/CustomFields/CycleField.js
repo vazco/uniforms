@@ -8,6 +8,8 @@ import { AutoForm, SubmitField } from '../../universal';
 const Cycle = ({ allowedValues, label, required, value, onChange }) => (
   <a
     style={{
+      margin: '1em 0',
+      color: '#0e0e0e',
       border: '1px solid black',
       padding: '1em',
       display: 'inline-block',
@@ -25,7 +27,7 @@ const Cycle = ({ allowedValues, label, required, value, onChange }) => (
       )
     }
   >
-    {value || label}
+    ➡ {value || label} ➡
   </a>
 );
 

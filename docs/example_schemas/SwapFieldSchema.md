@@ -1,15 +1,15 @@
 ```js
 import Ajv from 'ajv';
-import {JSONSchemaBridge} from 'uniforms-bridge-json-schema';
+import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 
-const ajv = new Ajv({allErrors: true, useDefaults: true});
+const ajv = new Ajv({ allErrors: true, useDefaults: true });
 
 const schema = {
   title: 'Guest',
   type: 'object',
   properties: {
-    firstName: {type: 'string'},
-    lastName: {type: 'string'}
+    firstName: { type: 'string' },
+    lastName: { type: 'string' }
   },
   required: ['firstName', 'lastName']
 };
@@ -21,7 +21,7 @@ function createValidator(schema) {
     validator(model);
 
     if (validator.errors && validator.errors.length) {
-      throw {details: validator.errors};
+      throw { details: validator.errors };
     }
   };
 }

@@ -25,7 +25,12 @@ If you need to add heading to your form, using `AutoFields` seems to be a perfec
 `AutoFields` will automatically render form fields based on the schema within the `AutoForm`.
 
 ```js
-import {AutoFields, AutoForm, ErrorsField, SubmitField} from 'uniforms-semantic';
+import {
+  AutoFields,
+  AutoForm,
+  ErrorsField,
+  SubmitField
+} from 'uniforms-semantic';
 import React from 'react';
 
 import GuestSchema from './GuestSchema';
@@ -56,7 +61,12 @@ Here we've changed the order of the `lastName` and `firstName` field and added a
 asking whether the people filling the form would like to share with us their work experience.
 
 ```js
-import {AutoField, AutoForm, ErrorsField, SubmitField} from 'uniforms-semantic';
+import {
+  AutoField,
+  AutoForm,
+  ErrorsField,
+  SubmitField
+} from 'uniforms-semantic';
 import React from 'react';
 
 import GuestSchema from './GuestSchema';
@@ -87,7 +97,12 @@ Instead of using the `ErrorsField` component, which renders one stack block of e
 we can use the `ErrorField` and just place it directly where want in our form.
 
 ```js
-import {AutoField, AutoForm, ErrorField, SubmitField} from 'uniforms-semantic';
+import {
+  AutoField,
+  AutoForm,
+  ErrorField,
+  SubmitField
+} from 'uniforms-semantic';
 import React from 'react';
 
 import GuestSchema from './GuestSchema';
@@ -119,7 +134,12 @@ The default error messages are rather unfriendly. Hopefully, we can easily modif
 either by passing the `children` to the `ErrorField` or by using the `errorMessage` prop:
 
 ```js
-import {AutoField, AutoForm, ErrorField, SubmitField} from 'uniforms-semantic';
+import {
+  AutoField,
+  AutoForm,
+  ErrorField,
+  SubmitField
+} from 'uniforms-semantic';
 import React from 'react';
 
 import GuestSchema from './GuestSchema';
@@ -133,7 +153,10 @@ export default function GuestForm() {
         <span>You have to provide your last name!</span>
       </ErrorField>
       <AutoField name="firstName" />
-      <ErrorField name="firstName" errorMessage="You have to provide your first name!" />
+      <ErrorField
+        name="firstName"
+        errorMessage="You have to provide your first name!"
+      />
       <span>Do you want to share your work experience with us?</span>
       <AutoField name="workExperience" />
       <ErrorField

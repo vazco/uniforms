@@ -3,8 +3,8 @@ id: installation
 title: Installation
 ---
 
-import {TabsSelect} from '../website/scripts/components/Tabs';
-import {code} from '../website/scripts/components/Code';
+import { TabsSelect } from '../website/scripts/components/Tabs';
+import { code } from '../website/scripts/components/Code';
 
 Core package first.
 
@@ -16,26 +16,37 @@ Now the schema package.
 
 <TabsSelect
   group="bridge"
-  tabs={[{name: 'GraphQL'}, {name: 'JSON-Schema'}, {name: 'Simple-Schema'}, {name: 'Simple-Schema-2'}]}
+  tabs={[
+    { name: 'GraphQL' },
+    { name: 'JSON-Schema' },
+    { name: 'Simple-Schema' },
+    { name: 'Simple-Schema-2' }
+  ]}
 >
-  {({name: bridgeName}) => (
+  {({ name: bridgeName }) => (
     <>
-      {code('shell', `npm install --save uniforms-bridge-${bridgeName.toLowerCase()}`)}
+      {code(
+        'shell',
+        `npm install --save uniforms-bridge-${bridgeName.toLowerCase()}`
+      )}
       <p>Finally, pick your theme.</p>
       <TabsSelect
         group="theme"
         tabs={[
-          {name: 'Semantic'},
-          {name: 'Material'},
-          {name: 'Bootstrap3'},
-          {name: 'Bootstrap4'},
-          {name: 'AntD'},
-          {name: 'Unstyled'}
+          { name: 'Semantic' },
+          { name: 'Material' },
+          { name: 'Bootstrap3' },
+          { name: 'Bootstrap4' },
+          { name: 'AntD' },
+          { name: 'Unstyled' }
         ]}
       >
-        {({name: themeName}) => (
+        {({ name: themeName }) => (
           <>
-            {code('shell', `npm install --save uniforms-${themeName.toLowerCase()}`)}
+            {code(
+              'shell',
+              `npm install --save uniforms-${themeName.toLowerCase()}`
+            )}
             <p>TL;DR; Just let me copy it!</p>
             {code(
               'shell',

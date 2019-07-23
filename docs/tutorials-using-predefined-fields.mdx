@@ -21,16 +21,16 @@ const schema = {
   title: 'Guest',
   type: 'object',
   properties: {
-    firstName: {type: 'string'},
-    lastName: {type: 'string'},
+    firstName: { type: 'string' },
+    lastName: { type: 'string' },
     workExperience: {
       description: 'Work experience in years',
       type: 'integer',
       minimum: 0,
       maximum: 100
     },
-    profession: {type: 'string'},
-    additionalInfo: {type: 'string'}
+    profession: { type: 'string' },
+    additionalInfo: { type: 'string' }
   },
   required: ['firstName', 'lastName']
 };
@@ -40,7 +40,12 @@ After the schema change, we must not forget to add the fields to our form.
 We will add the `profession` field above the `workExperience` field and the `additionalInfo` at the bottom:
 
 ```js
-import {AutoField, AutoForm, ErrorField, SubmitField} from 'uniforms-semantic';
+import {
+  AutoField,
+  AutoForm,
+  ErrorField,
+  SubmitField
+} from 'uniforms-semantic';
 import React from 'react';
 
 import GuestSchema from './GuestSchema';
@@ -54,7 +59,10 @@ export default function GuestForm() {
         <span>You have to provide your last name!</span>
       </ErrorField>
       <AutoField name="firstName" />
-      <ErrorField name="firstName" errorMessage="You have to provide your first name!" />
+      <ErrorField
+        name="firstName"
+        errorMessage="You have to provide your first name!"
+      />
       <span>Do you want to share your work experience with us?</span>
       <AutoField name="profession" />
       <AutoField name="workExperience" />
@@ -92,7 +100,14 @@ The same thing applies to the `additionalInfo` - in order to see it as a text ar
 Let's see our changes in action:
 
 ```js
-import {AutoField, AutoForm, ErrorField, LongTextField, SelectField, SubmitField} from 'uniforms-semantic';
+import {
+  AutoField,
+  AutoForm,
+  ErrorField,
+  LongTextField,
+  SelectField,
+  SubmitField
+} from 'uniforms-semantic';
 import React from 'react';
 
 import GuestSchema from './GuestSchema';
@@ -120,7 +135,7 @@ const professions = [
   }
 ];
 
-export default function GuestForm({onSubmit}) {
+export default function GuestForm({ onSubmit }) {
   return (
     <AutoForm schema={GuestSchema} onSubmit={console.log}>
       <h4>IT meeting guest questionnaire</h4>
@@ -129,7 +144,10 @@ export default function GuestForm({onSubmit}) {
         <span>You have to provide your last name!</span>
       </ErrorField>
       <AutoField name="firstName" />
-      <ErrorField name="firstName" errorMessage="You have to provide your first name!" />
+      <ErrorField
+        name="firstName"
+        errorMessage="You have to provide your first name!"
+      />
       <span>Do you want to share your work experience with us?</span>
       <AutoField name="workExperience" />
       <ErrorField
@@ -159,7 +177,12 @@ without the necessity to replace the `AutoField`. That means modifying our schem
 Before touching the schema, let's have a look at the React form first:
 
 ```js
-import {AutoField, AutoForm, ErrorField, SubmitField} from 'uniforms-semantic';
+import {
+  AutoField,
+  AutoForm,
+  ErrorField,
+  SubmitField
+} from 'uniforms-semantic';
 import React from 'react';
 
 import GuestSchema from './GuestSchema';
@@ -173,7 +196,10 @@ export default function GuestForm() {
         <span>You have to provide your last name!</span>
       </ErrorField>
       <AutoField name="firstName" />
-      <ErrorField name="firstName" errorMessage="You have to provide your first name!" />
+      <ErrorField
+        name="firstName"
+        errorMessage="You have to provide your first name!"
+      />
       <span>Do you want to share your work experience with us?</span>
       <AutoField name="profession" />
       <AutoField name="workExperience" />
@@ -198,8 +224,8 @@ const schema = {
   title: 'Guest',
   type: 'object',
   properties: {
-    firstName: {type: 'string'},
-    lastName: {type: 'string'},
+    firstName: { type: 'string' },
+    lastName: { type: 'string' },
     workExperience: {
       description: 'Work experience in years',
       type: 'integer',

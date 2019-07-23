@@ -110,7 +110,13 @@ default one.
 ```js
 import BaseField from 'uniforms/BaseField';
 
-<BaseField disabled={false} label name="field" placeholder={false} value={value} />;
+<BaseField
+  disabled={false}
+  label
+  name="field"
+  placeholder={false}
+  value={value}
+/>;
 ```
 
 ### `BoolField`

@@ -5,7 +5,7 @@ title: Custom fields
 
 import ExampleCustomizer from '../website/scripts/components/Examples/ExampleCustomizer';
 import TogglerTabs from '../website/scripts/components/TogglerTabs';
-import {code} from '../website/scripts/components/Code';
+import { code } from '../website/scripts/components/Code';
 
 import ExamplesCompositeField from '../website/scripts/components/Examples/CustomFields/CompositeField';
 import CompositeFieldSchema from './example_schemas/CompositeFieldSchema.md';
@@ -104,9 +104,19 @@ state if the field is not required. This one uses Semantic-UI.
       `import React from 'react';
 import connectField from 'uniforms/connectField';
 import schema from './CycleFieldSchema';
-import { AutoForm, SubmitField } from 'uniforms-${theme}';
+import { AutoForm, SubmitField } from 'uniforms-${theme}';\n
+// This field works as follows: iterate all allowed values and optionally no-value
+// state if the field is not required. This one uses Semantic-UI.
 const Cycle = ({ allowedValues, label, required, value, onChange }) => (
   <a
+    style={{
+      margin: '1em 0',
+      color: '#0e0e0e',
+      border: '1px solid black',
+      padding: '1em',
+      display: 'inline-block',
+      cursor: 'pointer'
+    }}
     onClick={() =>
       onChange(
         value
@@ -119,18 +129,22 @@ const Cycle = ({ allowedValues, label, required, value, onChange }) => (
       )
     }
   >
-    {value || label}
+    > {value || label} >
   </a>
-);
-const CycleField = connectField(Cycle);
+);\n
+const CycleField = connectField(Cycle);\n
 export default function ExamplesCycleField() {
   return (
-    <AutoForm schema={schema}>
+    <AutoForm
+      schema={schema}
+      onSubmit={model => alert(JSON.stringify(model, null, 2))}
+    >
       <CycleField name="cycle" allowedValues={['One', 'Two', 'Three']} />
+      <br />
       <SubmitField />
     </AutoForm>
   );
-`
+}`
     )
   }
   example={<ExamplesCycleField />}
@@ -342,7 +356,7 @@ and fieldB. It's that simple.
 import BaseField from 'uniforms/BaseField';
 import get from 'lodash/get';
 import { RefreshCw } from 'react-feather';\n
-import { AutoForm, TextField, SubmitField } from '../../universal';
+import { AutoForm, TextField, SubmitField } from 'uniforms-${theme}';
 import schema from './SwapFieldSchema';\n
 const SwapField = (
   { children, fieldA, fieldB },

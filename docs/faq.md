@@ -72,7 +72,12 @@ You can also leave the schema untouched and pass your custom field with props di
 ```js
 <AutoForm schema={schema} onSubmit={onSubmit}>
   /*...*/
-  <AutoField component={MyCustomFirstNameField} name="firstName" propA={1} propB={2} />
+  <AutoField
+    component={MyCustomFirstNameField}
+    name="firstName"
+    propA={1}
+    propB={2}
+  />
   /*...*/
 </AutoForm>
 ```
@@ -125,12 +130,16 @@ These methods are:
 - `validate()` _(added in `ValidatedForm`)_
 
 ```js
-const MyForm = ({schema, onSubmit}) => {
+const MyForm = ({ schema, onSubmit }) => {
   let formRef;
 
   return (
     <section>
-      <AutoForm ref={ref => (formRef = ref)} schema={schema} onSubmit={onSubmit} />
+      <AutoForm
+        ref={ref => (formRef = ref)}
+        schema={schema}
+        onSubmit={onSubmit}
+      />
       <small onClick={() => formRef.reset()}>Reset</small>
       <small onClick={() => formRef.submit()}>Submit</small>
     </section>
@@ -193,7 +202,7 @@ A convenient way to access it is to write a helper function, eg. `WithUniforms`,
 ```js
 import BaseField from 'uniforms/BaseField';
 
-const WithUniforms = ({children}, {uniforms}) => children(uniforms);
+const WithUniforms = ({ children }, { uniforms }) => children(uniforms);
 
 WithUniforms.contextTypes = BaseField.contextTypes;
 ```
@@ -221,9 +230,11 @@ Basically, you have to find out whether there is a difference between a current 
 Current form state can be accessed through the context (see [How can I know a current form state?](faq#how-can-i-know-a-current-form-state)) and form model can be passed as an ordinary prop:
 
 ```js
-const ChangedForm = ({model}) => (
+const ChangedForm = ({ model }) => (
   <AutoForm model={model}>
-    <WithUniforms>{uniforms => <SubmitField disabled={isEqual(uniforms.model, model)} />}</WithUniforms>
+    <WithUniforms>
+      {uniforms => <SubmitField disabled={isEqual(uniforms.model, model)} />}
+    </WithUniforms>
   </AutoForm>
 );
 ```

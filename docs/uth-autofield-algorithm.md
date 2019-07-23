@@ -34,7 +34,11 @@ if (component === undefined) {
         break;
     }
 
-    invariant(component, 'Unsupported field type: %s', props.fieldType.toString());
+    invariant(
+      component,
+      'Unsupported field type: %s',
+      props.fieldType.toString()
+    );
   }
 }
 ```

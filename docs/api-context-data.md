@@ -135,7 +135,7 @@ A convenient way to access context is to write a helper function, eg. `WithUnifo
 ```js
 import BaseField from 'uniforms/BaseField';
 
-const WithUniforms = ({children}, {uniforms}) => children(uniforms);
+const WithUniforms = ({ children }, { uniforms }) => children(uniforms);
 
 WithUniforms.contextTypes = BaseField.contextTypes;
 ```
@@ -145,7 +145,7 @@ You can also directly subscribe to the context inside your field component:
 ```js
 import BaseField from 'uniforms/BaseField';
 
-const MyComponentUsingUniformsContext = (props, {uniforms}) => (
+const MyComponentUsingUniformsContext = (props, { uniforms }) => (
   //Now I have access to the uniforms context!
   <input />
 );

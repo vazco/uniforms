@@ -89,7 +89,7 @@ import ValidatedForm from 'uniforms/ValidatedForm'; // Or from the theme package
     MyAPI.validate(model, error => callback(error || null));
   }}
   validate="onChangeAfterSubmit"
-  validator={{clean: true}}
+  validator={{ clean: true }}
   ref={form => {
     // Validate form with the current model.
     //   Returns a Promise, which rejects with an validation error or
@@ -133,7 +133,11 @@ However, `QuickForm` is not self-managed, so you won't be able to type anything 
 ```js
 import QuickForm from 'uniforms/QuickForm'; // Or from the theme package.
 
-<QuickForm autoField={CustomAutoField} errorsField={CustomErrorsField} submitField={CustomSubmitField} />;
+<QuickForm
+  autoField={CustomAutoField}
+  errorsField={CustomErrorsField}
+  submitField={CustomSubmitField}
+/>;
 ```
 
 ### `BaseForm`
@@ -176,10 +180,10 @@ import BaseForm from 'uniforms/BaseForm'; // Or from the theme package.
   error={new Error('Nope.')}
   grid={3} // 'col-3-sm' on label, 'col-9-sm' on input
   grid="4" // 'col-4-sm' on label, 'col-8-sm' on input
-  grid={{md: 5}} // 'col-5-md' on label, 'col-7-md' on input
+  grid={{ md: 5 }} // 'col-5-md' on label, 'col-7-md' on input
   grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
   label
-  model={{fieldA: 1}}
+  model={{ fieldA: 1 }}
   modelTransform={(mode, model) => {
     // This model will be passed to the fields.
     if (mode === 'form') {
@@ -273,12 +277,16 @@ Every form has autosave functionality. If you set an `autosave` prop, then every
 You can use [React `ref` prop](https://facebook.github.io/react/docs/more-about-refs.html) to manually access form methods. Example usage:
 
 ```js
-const MyForm = ({schema, onSubmit}) => {
+const MyForm = ({ schema, onSubmit }) => {
   let formRef;
 
   return (
     <section>
-      <AutoForm ref={ref => (formRef = ref)} schema={schema} onSubmit={onSubmit} />
+      <AutoForm
+        ref={ref => (formRef = ref)}
+        schema={schema}
+        onSubmit={onSubmit}
+      />
       <small onClick={() => formRef.reset()}>Reset</small>
       <small onClick={() => formRef.submit()}>Submit</small>
     </section>
@@ -423,5 +431,10 @@ If your schema validator accepts any options, those can be passed in `validator`
 **Example:**
 
 ```js
-<AutoForm validate="onChange" validator={validatorOptions} schema={schema} onSubmit={onSubmit} />
+<AutoForm
+  validate="onChange"
+  validator={validatorOptions}
+  schema={schema}
+  onSubmit={onSubmit}
+/>
 ```

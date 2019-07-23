@@ -55,6 +55,7 @@ table {
 
 .playground-wrap {
   background-color: #fff;
+  display: block;
   flex: 1;
   overflow-y: auto;
 }
