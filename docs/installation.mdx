@@ -9,7 +9,7 @@ import { code } from '../website/scripts/components/Code';
 Core package first.
 
 ```shell
-npm install --save uniforms
+npm install uniforms
 ```
 
 Now the schema package.
@@ -25,10 +25,7 @@ Now the schema package.
 >
   {({ name: bridgeName }) => (
     <>
-      {code(
-        'shell',
-        `npm install --save uniforms-bridge-${bridgeName.toLowerCase()}`
-      )}
+      {code('shell', `npm install uniforms-bridge-${bridgeName.toLowerCase()}`)}
       <p>Finally, pick your theme.</p>
       <TabsSelect
         group="theme"
@@ -43,14 +40,11 @@ Now the schema package.
       >
         {({ name: themeName }) => (
           <>
-            {code(
-              'shell',
-              `npm install --save uniforms-${themeName.toLowerCase()}`
-            )}
+            {code('shell', `npm install uniforms-${themeName.toLowerCase()}`)}
             <p>TL;DR; Just let me copy it!</p>
             {code(
               'shell',
-              `npm install --save uniforms uniforms-bridge-${bridgeName.toLowerCase()} uniforms-${themeName.toLowerCase()}`
+              `npm install uniforms uniforms-bridge-${bridgeName.toLowerCase()} uniforms-${themeName.toLowerCase()}`
             )}
           </>
         )}
