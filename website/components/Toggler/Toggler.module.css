@@ -3,7 +3,6 @@
   justify-content: flex-end;
 }
 
-
 .toggler.header .item {
   margin: 0.5em 0 0.5em 1em;
   cursor: pointer;
@@ -19,7 +18,7 @@
 }
 
 .toggler .tooltip .tooltip-text {
-  font-size: .7em;
+  font-size: 0.7em;
   visibility: hidden;
   width: 120px;
   background-color: black;

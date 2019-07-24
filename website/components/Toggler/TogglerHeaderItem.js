@@ -1,9 +1,21 @@
+import classNames from 'classnames';
 import React from 'react';
+
+import styles from './Toggler.module.css';
 
 function TogglerHeaderItem({ icon, active, tooltipText, ...rest }) {
   return (
-    <span {...rest} className={`tooltip item ${active && 'active'}`}>
-      {tooltipText && <span className="tooltip-text">{tooltipText}</span>}
+    <span
+      {...rest}
+      className={classNames(
+        styles.tooltip,
+        styles.item,
+        active && styles.active
+      )}
+    >
+      {tooltipText && (
+        <span className={styles['tooltip-text']}>{tooltipText}</span>
+      )}
       {icon}
     </span>
   );

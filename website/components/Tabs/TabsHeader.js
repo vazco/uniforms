@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TabsHeaderItem from './TabsHeaderItem';
+import styles from './Tabs.module.css';
 
 function TabsHeader({ items, activeTab, onTab }) {
   return (
-    <div className="tabs">
+    <div className={styles.tabs}>
       {items.map(({ name }, key) => (
         <TabsHeaderItem
           active={activeTab === key}

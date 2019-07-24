@@ -1,10 +1,13 @@
+import classNames from 'classnames';
 import React from 'react';
-import TogglerHeaderItem from './TogglerHeaderItem';
 import PropTypes from 'prop-types';
+
+import TogglerHeaderItem from './TogglerHeaderItem';
+import styles from './Toggler.module.css';
 
 function TogglerHeader({ items, activeToggle, onClick }) {
   return (
-    <section className="toggler header">
+    <section className={classNames(styles.toggler, styles.header)}>
       {items.map(({ tooltipText, icon }, key) => {
         return (
           <TogglerHeaderItem

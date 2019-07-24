@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { TogglerHeader, getDefaultToggle } from '../Toggler';
 import { TabsHeader } from '../Tabs';
 import { useTabs } from '../Tabs/state';
+import styles from './TogglerTabs.module.css';
 
 function TogglerTabs({ children, group, tabsItems, togglerItems }) {
   const { activeTab, onTab } = useTabs(group);
@@ -19,8 +20,8 @@ function TogglerTabs({ children, group, tabsItems, togglerItems }) {
   };
 
   return (
-    <section className="toggler-tabs">
-      <section className="header">
+    <section className={styles['toggler-tabs']}>
+      <section className={styles.header}>
         <TabsHeader items={tabsItems} onTab={onTab} activeTab={activeTab} />
         <TogglerHeader
           items={togglerItems}
@@ -28,12 +29,10 @@ function TogglerTabs({ children, group, tabsItems, togglerItems }) {
           activeToggle={activeToggle}
         />
       </section>
-      <section className="content">
-        {children({
-          tab: tabsItems[activeTab],
-          toggle: togglerItems[activeToggle]
-        })}
-      </section>
+      {children({
+        tab: tabsItems[activeTab],
+        toggle: togglerItems[activeToggle]
+      })}
     </section>
   );
 }

@@ -7,7 +7,7 @@ import React, {
   useEffect
 } from 'react';
 
-import './FormWrapper.css';
+import styles from './FormWrapper.module.css';
 import { themeContext } from '../ThemeContext';
 import { PlaygroundWrap } from '../Playground';
 
@@ -47,7 +47,7 @@ export default function FormWrapper(props) {
   ]);
 
   return (
-    <div className="form-wrapper">
+    <div className={styles['form-wrapper']}>
       <PlaygroundWrap frameProps={frameProps} theme={theme} {...props} />
     </div>
   );
