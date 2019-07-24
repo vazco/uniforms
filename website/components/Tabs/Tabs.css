@@ -1,11 +1,11 @@
-.Tabs {
+.tabs {
     display: flex;
     margin: 1em 0 .25em -.2em;
     flex-wrap: wrap;
     font-weight: 700;
 }
 
-.Tabs .item {
+.tabs .item {
     font-size: .8em;
     border: 1px solid var(--ifm-menu-color-active);
     padding: 1em;
@@ -15,12 +15,12 @@
 }
 
 @media screen and (max-width: 768px) {
-    .Tabs .item {
+    .tabs .item {
         flex: 1 1 0;
     }
 }
 
-.Tabs .item.active {
+.tabs .item.active {
     background-color: var(--ifm-menu-color-active);
     color: white
 }

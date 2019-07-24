@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 function TogglerHeader({ items, activeToggle, onClick }) {
   return (
-    <section className="Toggler header">
+    <section className="toggler header">
       {items.map(({ tooltipText, icon }, key) => {
         return (
           <TogglerHeaderItem

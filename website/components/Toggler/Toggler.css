@@ -1,24 +1,24 @@
-.Toggler.header {
+.toggler.header {
   display: flex;
   justify-content: flex-end;
 }
 
 
-.Toggler.header .item {
+.toggler.header .item {
   margin: 0.5em 0 0.5em 1em;
   cursor: pointer;
 }
 
-.Toggler.header .item.active {
+.toggler.header .item.active {
   color: var(--ifm-menu-color-active);
 }
 
-.Toggler .tooltip {
+.toggler .tooltip {
   position: relative;
   display: inline-block;
 }
 
-.Toggler .tooltip .tooltiptext {
+.toggler .tooltip .tooltip-text {
   font-size: .7em;
   visibility: hidden;
   width: 120px;
@@ -34,7 +34,7 @@
   margin-left: -60px;
 }
 
-.Toggler .tooltip .tooltiptext::after {
+.toggler .tooltip .tooltip-text::after {
   content: '';
   position: absolute;
   top: 100%;
@@ -45,6 +45,6 @@
   border-color: black transparent transparent transparent;
 }
 
-.Toggler .tooltip:hover .tooltiptext {
+.toggler .tooltip:hover .tooltip-text {
   visibility: visible;
 }

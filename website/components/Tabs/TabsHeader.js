@@ -4,7 +4,7 @@ import TabsHeaderItem from './TabsHeaderItem';
 
 function TabsHeader({ items, activeTab, onTab }) {
   return (
-    <div className="Tabs">
+    <div className="tabs">
       {items.map(({ name }, key) => (
         <TabsHeaderItem
           active={activeTab === key}

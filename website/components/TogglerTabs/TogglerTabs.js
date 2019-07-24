@@ -19,7 +19,7 @@ function TogglerTabs({ children, group, tabsItems, togglerItems }) {
   };
 
   return (
-    <section className="TogglerTabs">
+    <section className="toggler-tabs">
       <section className="header">
         <TabsHeader items={tabsItems} onTab={onTab} activeTab={activeTab} />
         <TogglerHeader
