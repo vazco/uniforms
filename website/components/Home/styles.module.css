@@ -2,6 +2,14 @@
   flex: 1;
 }
 
+.column:first-child {
+  margin-right: 1em;
+}
+
+.row {
+  margin-bottom: 1.5em;
+}
+
 .textBig {
   font-size: 4.25rem;
 }

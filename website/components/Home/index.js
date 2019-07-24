@@ -4,12 +4,14 @@ import React, { useContext } from 'react';
 
 import styles from './styles.module.css';
 import { Container, Row, Column } from './Grid';
+import Examples from './Examples';
 
 export default function Home() {
   return (
     <React.Fragment>
       <Hero />
       <Container>
+        <Examples />
         <Info />
       </Container>
     </React.Fragment>

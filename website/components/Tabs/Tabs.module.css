@@ -1,6 +1,6 @@
 .tabs {
   display: flex;
-  margin: 1em 0 0.25em -0.2em;
+  margin: 0 0 .25em -0.2em;
   flex-wrap: wrap;
   font-weight: 700;
 }
