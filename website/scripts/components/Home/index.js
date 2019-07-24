@@ -3,7 +3,6 @@ import Link from '@docusaurus/Link';
 import React, { useContext } from 'react';
 
 import styles from './styles.module.css';
-import Examples from './Examples';
 import { Container, Row, Column } from './Grid';
 
 export default function Home() {
@@ -11,7 +10,6 @@ export default function Home() {
     <React.Fragment>
       <Hero />
       <Container>
-        <Examples />
         <Info />
       </Container>
     </React.Fragment>
