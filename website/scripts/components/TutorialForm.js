@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from './ThemeContext';
 import FormWrapper from './FormWrapper';
-import { TabsSelect } from './Tabs';
+import Tabs from './Tabs';
 
 const tabs = [
   { name: 'Semantic', value: 'semantic' },
@@ -13,13 +13,13 @@ const tabs = [
 ];
 
 const TutorialForm = ({ children }) => (
-  <TabsSelect group="tutorial" tabs={tabs}>
+  <Tabs group="tutorial" tabs={tabs}>
     {({ value: theme }) => (
       <ThemeProvider value={theme}>
         <FormWrapper>{children}</FormWrapper>
       </ThemeProvider>
     )}
-  </TabsSelect>
+  </Tabs>
 );
 
 export default TutorialForm;

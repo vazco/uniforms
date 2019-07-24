@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import TabsHeader from './TabsHeader';
 import { useTabs } from './state';
 
-function TabsSelect({ children, group, tabs }) {
+function Tabs({ children, group, tabs }) {
   const { activeTab, onTab } = useTabs(group);
 
   return (
@@ -15,7 +15,7 @@ function TabsSelect({ children, group, tabs }) {
   );
 }
 
-TabsSelect.propTypes = {
+Tabs.propTypes = {
   children: PropTypes.func,
   group: PropTypes.string.isRequired,
   tabs: PropTypes.arrayOf(
@@ -25,4 +25,4 @@ TabsSelect.propTypes = {
   ).isRequired
 };
 
-export default TabsSelect;
+export default Tabs;

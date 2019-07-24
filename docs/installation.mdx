@@ -3,7 +3,7 @@ id: installation
 title: Installation
 ---
 
-import { TabsSelect } from '../website/scripts/components/Tabs';
+import Tabs from '../website/scripts/components/Tabs';
 import { code } from '../website/scripts/components/Code';
 
 Core package first.
@@ -14,7 +14,7 @@ npm install uniforms
 
 Now the schema package.
 
-<TabsSelect
+<Tabs
   group="bridge"
   tabs={[
     { name: 'GraphQL' },
@@ -27,7 +27,7 @@ Now the schema package.
     <>
       {code('shell', `npm install uniforms-bridge-${bridgeName.toLowerCase()}`)}
       <p>Finally, pick your theme.</p>
-      <TabsSelect
+      <Tabs
         group="theme"
         tabs={[
           { name: 'Semantic' },
@@ -48,9 +48,9 @@ Now the schema package.
             )}
           </>
         )}
-      </TabsSelect>
+      </Tabs>
     </>
   )}
-</TabsSelect>
+</Tabs>
 
 **Note:** If you are going to use a themed package - remember to include correct styles!
