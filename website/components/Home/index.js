@@ -5,6 +5,7 @@ import React, { useContext } from 'react';
 import styles from './styles.module.css';
 import { Container, Row, Column } from './Grid';
 import Examples from './Examples';
+import Matrix from './CompareMatrix';
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <Hero />
       <Container>
         <Examples />
+        <Matrix />
         <Info />
       </Container>
     </React.Fragment>
