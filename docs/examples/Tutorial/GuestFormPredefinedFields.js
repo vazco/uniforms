@@ -8,7 +8,7 @@ import {
   LongTextField,
   SelectField,
   SubmitField
-} from '../../../website/scripts/components/universal';
+} from '../../../website/components/universal';
 
 const professions = [
   {

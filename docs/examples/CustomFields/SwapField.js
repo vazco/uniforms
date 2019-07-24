@@ -7,7 +7,7 @@ import {
   AutoForm,
   TextField,
   SubmitField
-} from '../../../website/scripts/components/universal';
+} from '../../../website/components/universal';
 import schema from './SwapFieldSchema';
 // This field works as follows: on click of its child it swaps values of fieldA
 // and fieldB. It's that simple.

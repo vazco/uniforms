@@ -6,7 +6,7 @@ import {
   AutoField,
   AutoForm,
   SubmitField
-} from '../../../website/scripts/components/universal';
+} from '../../../website/components/universal';
 
 // This field is a kind of a shortcut for few fields. You can also access all
 // field props here, like value or onChange for some extra logic.

@@ -3,10 +3,7 @@ import BaseField from 'uniforms/BaseField';
 import connectField from 'uniforms/connectField';
 
 import schema from './CompositeFieldSchema';
-import {
-  AutoField,
-  AutoForm
-} from '../../../website/scripts/components/universal';
+import { AutoField, AutoForm } from '../../../website/components/universal';
 
 // This field works as follows: render standard submit field and disable it, when
 // the form is invalid. It's a simplified version of a default SubmitField from

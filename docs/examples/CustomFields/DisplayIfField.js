@@ -6,7 +6,7 @@ import {
   AutoForm,
   SubmitField,
   TextField
-} from '../../../website/scripts/components/universal';
+} from '../../../website/components/universal';
 import schema from './DisplayIfFieldSchema';
 
 // We have to ensure that there's only one child, because returning an array

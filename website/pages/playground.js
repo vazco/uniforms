@@ -2,7 +2,7 @@ import React from 'react';
 
 import Layout from '@theme/Layout';
 
-import Playground from '../scripts/components/Playground';
+import Playground from '../components/Playground';
 
 export default function PlaygroundPage() {
   return (

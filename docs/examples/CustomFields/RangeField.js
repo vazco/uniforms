@@ -5,7 +5,7 @@ import {
   AutoForm,
   DateField,
   SubmitField
-} from '../../../website/scripts/components/universal';
+} from '../../../website/components/universal';
 import schema from './RangeFieldSchema';
 
 // This field works as follows: two datepickers are bound to each other. Value is

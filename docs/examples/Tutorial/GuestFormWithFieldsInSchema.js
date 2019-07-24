@@ -6,7 +6,7 @@ import {
   AutoField,
   ErrorField,
   SubmitField
-} from '../../../website/scripts/components/universal';
+} from '../../../website/components/universal';
 
 export default function GuestFormWithFieldsInSchema() {
   return (
