@@ -2,6 +2,10 @@
   height: calc(100vh - var(--ifm-navbar-height));
 }
 
+.playground .playground-wrap {
+  border-radius: unset;
+}
+
 .playground,
 .playground-column,
 .playground-toolbar {
