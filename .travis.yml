@@ -23,6 +23,5 @@ deploy:
   local-dir: website/build
   fqdn: uniforms.tools
   on:
-    all_branches: true
-    condition: $TRAVIS_BRANCH =~ ^master|new-docs$
+    branch: master
     node: 12
