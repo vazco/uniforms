@@ -7,6 +7,7 @@ import { Container, Row, Column } from './Grid';
 import Examples from './Examples';
 import Matrix from './CompareMatrix';
 import Stats from './Stats';
+import Footer from './Footer';
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         <Matrix />
         <Stats />
       </Container>
+      <Footer />
     </React.Fragment>
   );
 }

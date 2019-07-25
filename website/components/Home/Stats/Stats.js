@@ -32,15 +32,15 @@ export default function Stats() {
       .then(res => res.json())
       // eslint-disable-next-line camelcase
       .then(({ stargazers_count, forks_count }) => {
-        setStars(stargazers_count);
-        setForks(forks_count);
+        setStars(stargazers_count.toLocaleString('en-US'));
+        setForks(forks_count.toLocaleString('en-US'));
       });
   }, [stars, forks]);
 
   useEffect(() => {
     fetch('https://api.npmjs.org/downloads/point/last-week/uniforms')
       .then(res => res.json())
-      .then(({ downloads }) => setDownloads(downloads));
+      .then(({ downloads }) => setDownloads(downloads.toLocaleString('en-US')));
   }, [downloads]);
 
   return (
