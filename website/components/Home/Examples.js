@@ -11,7 +11,7 @@ import ImageField from '../../../docs/examples/CustomFields/ImageField';
 
 export default function Examples() {
   return (
-    <section>
+    <>
       <Row>
         <Column>
           <h2>Simple, yet powerful.</h2>
@@ -208,6 +208,6 @@ export default bridge;
           </p>
         </Column>
       </Row>
-    </section>
+    </>
   );
 }

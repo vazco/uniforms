@@ -11,7 +11,9 @@ export function Container({ children }) {
 }
 
 export function Row({ children }) {
-  return <div className={classNames('row', styles.row)}>{children}</div>;
+  return (
+    <div className={classNames('row', styles.row, styles.card)}>{children}</div>
+  );
 }
 
 export function Column({ children }) {

@@ -6,15 +6,17 @@ import styles from './styles.module.css';
 import { Container, Row, Column } from './Grid';
 import Examples from './Examples';
 import Matrix from './CompareMatrix';
+import Stats from './Stats';
 
 export default function Home() {
   return (
     <React.Fragment>
       <Hero />
       <Container>
+        <Info />
         <Examples />
         <Matrix />
-        <Info />
+        <Stats />
       </Container>
     </React.Fragment>
   );
