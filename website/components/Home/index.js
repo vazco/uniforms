@@ -76,7 +76,7 @@ function Info() {
               </li>
               <li>
                 And any other - only{' '}
-                <Link to={`${siteConfig.baseUrl}docs/bridges-concept`}>
+                <Link to={`${siteConfig.baseUrl}docs/uth-bridge-concept`}>
                   a small wrapper
                 </Link>{' '}
                 is needed!
