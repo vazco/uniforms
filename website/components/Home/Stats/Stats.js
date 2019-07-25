@@ -55,18 +55,24 @@ export default function Stats() {
               fill={'var(--ifm-link-color)'}
               color={'var(--ifm-link-color)'}
             />
-            {stars} stars
+            <a href="https://github.com/vazco/uniforms/stargazers">
+              {stars} stars
+            </a>
           </StatisticItem>
           <StatisticItem
             title="GitHub"
             icon={<GitBranch size={50} color={color} />}
           >
             <Hash color={'var(--ifm-link-color)'} />
-            {forks} forks
+            <a href="https://github.com/vazco/uniforms/network/members">
+              {forks} forks
+            </a>
           </StatisticItem>
           <StatisticItem title="NPM" icon={<Package size={50} color={color} />}>
             <Download color={'var(--ifm-link-color)'} />
-            {downloads} weekly
+            <a href="https://www.npmjs.com/package/uniforms">
+              {downloads} weekly
+            </a>
           </StatisticItem>
         </div>
       </div>
