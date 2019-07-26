@@ -3,7 +3,7 @@ import connectField from 'uniforms/connectField';
 
 import {
   AutoForm,
-  DateField,
+  AutoField,
   SubmitField
 } from '../../../website/components/universal';
 import schema from './RangeFieldSchema';
@@ -12,16 +12,34 @@ import schema from './RangeFieldSchema';
 // a {start, stop} object.
 const Range = ({ value: { start, stop } }) => (
   <section>
-    <DateField name="start" max={stop} />
-    <DateField name="stop" min={start} />
+    <AutoField name="start" max={stop} />
+    <AutoField name="stop" min={start} />
   </section>
 );
 
 const RangeField = connectField(Range);
 
 export default function ExamplesRangeField() {
+  function transform(mode, model) {
+    if (mode === 'validate') {
+      const {
+        range: { start, stop }
+      } = model;
+
+      return {
+        range: {
+          start: start && start.toISOString(),
+          stop: stop && stop.toISOString()
+        }
+      };
+    }
+
+    return model;
+  }
+
   return (
     <AutoForm
+      modelTransform={transform}
       schema={schema}
       onSubmit={model => alert(JSON.stringify(model, null, 2))}
     >
