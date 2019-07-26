@@ -14,18 +14,19 @@ export default function Examples() {
     <>
       <Row>
         <Column>
-          <h2>Simple, yet powerful.</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            lacinia justo quam, sed condimentum metus feugiat et. Cras a
-            lobortis est. Maecenas rutrum nunc eget ligula tincidunt, id maximus
-            nisl viverra. Ut ac est a lorem pellentesque tincidunt sit amet in
-            lacus. Sed nec maximus felis. Praesent malesuada lectus vel augue
-            vehicula, vitae ornare nisi convallis. Mauris eget massa feugiat,
-            finibus ligula sed, condimentum ipsum. Sed scelerisque sollicitudin
-            consectetur. Maecenas eget arcu mauris. Vestibulum ante ipsum primis
-            in faucibus orci luctus et ultrices posuere cubilia Curae;
-          </p>
+          <h2>Simple, yet powerful</h2>
+          <ul>
+            <li>Automatic form generation based on given schema</li>
+            <li>
+              Out-of-the-box built-in fields capable of rendering every schema
+            </li>
+            <li>Automatic state management</li>
+            <li>Inline and asynchronous form validation</li>
+            <li>
+              Clean-looking components while keeping extendability and
+              separation of concerns
+            </li>
+          </ul>
         </Column>
         <Column>
           <span style={{ fontSize: '.66em' }}>
@@ -194,18 +195,14 @@ export default bridge;
           </span>
         </Column>
         <Column>
-          <h2>Custom fields.</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            lacinia justo quam, sed condimentum metus feugiat et. Cras a
-            lobortis est. Maecenas rutrum nunc eget ligula tincidunt, id maximus
-            nisl viverra. Ut ac est a lorem pellentesque tincidunt sit amet in
-            lacus. Sed nec maximus felis. Praesent malesuada lectus vel augue
-            vehicula, vitae ornare nisi convallis. Mauris eget massa feugiat,
-            finibus ligula sed, condimentum ipsum. Sed scelerisque sollicitudin
-            consectetur. Maecenas eget arcu mauris. Vestibulum ante ipsum primis
-            in faucibus orci luctus et ultrices posuere cubilia Curae;
-          </p>
+          <h2>Fully customizable</h2>
+          <ul>
+            <li>One-line helper for creating custom fields</li>
+            <li>
+              Freedom of choice when defining custom fields depending on the
+              abstraction level - schema or theme dependent approach
+            </li>
+          </ul>
         </Column>
       </Row>
     </>
