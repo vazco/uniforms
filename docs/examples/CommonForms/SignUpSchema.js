@@ -9,14 +9,14 @@ const schema = {
   properties: {
     fullname: { type: 'string' },
     email: { type: 'string' },
-    reemail: { type: 'string', const: { $data: '1/email' } },
+    confirmEmail: { type: 'string', const: { $data: '1/email' } },
     password: {
       type: 'string',
       uniforms: {
         type: 'password'
       }
     },
-    repassword: {
+    confirmPassword: {
       type: 'string',
       const: { $data: '1/password' },
       uniforms: {
@@ -28,9 +28,9 @@ const schema = {
   required: [
     'fullname',
     'email',
-    'reemail',
+    'confirmEmail',
     'password',
-    'repassword',
+    'confirmPassword',
     'acceptTermsOfUse'
   ]
 };

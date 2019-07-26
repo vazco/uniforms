@@ -47,66 +47,58 @@ function Hero() {
 function Info() {
   return (
     <Row>
+      <p style={{ fontSize: '1.25em' }}>
+        Open source tool capable of generating any given form, which bridges the
+        gap. Integration with every schema keeps the code simple. Powered by
+        passion. Carried out by the global community of +50 developers. Provides
+        effortless development experience. Easy-to-use tool, ready-to-implement
+        solution.
+      </p>
       <Column>
-        <h1>What's included?</h1>
+        <b>Integrations with various schemas:</b>
         <ul>
-          <li>Automatic forms generation</li>
-          <li>Fields capable of rendering every schema</li>
           <li>
-            Integrations with various schemas:
-            <ul>
-              <li>
-                <a href="https://json-schema.org">JSON Schema</a>
-              </li>
-              <li>
-                <a href="https://github.com/graphql/graphql-js">GraphQL</a>
-              </li>
-              <li>
-                <a href="https://github.com/aldeed/meteor-simple-schema">
-                  SimpleSchema
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/aldeed/node-simple-schema">
-                  SimpleSchema@2
-                </a>
-              </li>
-              <li>
-                And any other - only{' '}
-                <Link to={'/docs/uth-bridge-concept'}>a small wrapper</Link> is
-                needed!
-              </li>
-            </ul>
+            <a href="https://json-schema.org">JSON Schema</a>
+          </li>
+          <li>
+            <a href="https://github.com/graphql/graphql-js">GraphQL</a>
+          </li>
+          <li>
+            <a href="https://github.com/aldeed/meteor-simple-schema">
+              SimpleSchema
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/aldeed/node-simple-schema">
+              SimpleSchema@2
+            </a>
+          </li>
+          <li>
+            And any other - only{' '}
+            <Link to={'/docs/uth-bridge-concept'}>a small wrapper</Link> is
+            needed!
           </li>
         </ul>
       </Column>
       <Column>
-        <h1>&nbsp;</h1>
+        <b>Wide range of themes:</b>
         <ul>
-          <li>Helper for creating custom fields with one line</li>
-          <li>Inline and asynchronous form validation</li>
           <li>
-            Wide range of themes:
-            <ul>
-              <li>
-                <a href="https://ant.design">AntD</a> theme
-              </li>
-              <li>
-                <a href="https://getbootstrap.com/docs/3.3/">Bootstrap3</a>{' '}
-                theme
-              </li>
-              <li>
-                <a href="https://getbootstrap.com">Bootstrap4</a> theme
-              </li>
-              <li>
-                <a href="https://material-ui.com">Material-UI</a> theme
-              </li>
-              <li>
-                <a href="https://semantic-ui.com">Semantic UI</a> theme
-              </li>
-              <li>plain HTML theme</li>
-            </ul>
+            <a href="https://ant.design">AntD</a> theme
           </li>
+          <li>
+            <a href="https://getbootstrap.com/docs/3.3/">Bootstrap3</a> theme
+          </li>
+          <li>
+            <a href="https://getbootstrap.com">Bootstrap4</a> theme
+          </li>
+          <li>
+            <a href="https://material-ui.com">Material-UI</a> theme
+          </li>
+          <li>
+            <a href="https://semantic-ui.com">Semantic UI</a> theme
+          </li>
+          <li>plain HTML theme</li>
         </ul>
       </Column>
     </Row>
