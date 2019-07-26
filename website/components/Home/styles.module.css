@@ -28,3 +28,11 @@
 .textSmall {
   font-size: 1.25rem;
 }
+
+table thead tr th:first-child {
+  width: 25%;
+}
+
+table thead tr th {
+  width: 13%;
+}

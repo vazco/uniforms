@@ -1,7 +1,7 @@
 import Link from '@docusaurus/Link';
 import React from 'react';
 
-import Matrix from '../../../docs/compare-matrix.md';
+import Matrix from '../../../docs/compare-matrix-landing.md';
 import { Row } from './Grid';
 
 export default function CompareMatrix() {
