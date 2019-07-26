@@ -29,7 +29,8 @@ function useStats() {
   }, [stars, forks]);
 
   useEffect(() => {
-    fetch('https://api.npmjs.org/downloads/point/last-month/uniforms')
+    const today = new Date().toISOString().replace(/T.*/, '');
+    fetch(`https://api.npmjs.org/downloads/point/2016-01-01:${today}/uniforms`)
       .then(res => res.json())
       .then(({ downloads }) => setDownloads(downloads.toLocaleString('en-US')));
   }, [downloads]);
