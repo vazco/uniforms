@@ -19,13 +19,13 @@ const tabs = [
 ];
 
 const toggles = [
-  { name: 'Code', tooltipText: 'Show source code', icon: <CodeIcon /> },
   {
     name: 'Example',
     tooltipText: 'Show example',
     icon: <BoxIcon />,
     active: true
   },
+  { name: 'Code', tooltipText: 'Show source code', icon: <CodeIcon /> },
   { name: 'Schema', tooltipText: 'Show schema', icon: <DatabaseIcon /> }
 ];
 
