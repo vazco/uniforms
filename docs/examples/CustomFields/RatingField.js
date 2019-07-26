@@ -40,6 +40,7 @@ export default function ExamplesRangeField() {
       onSubmit={model => alert(JSON.stringify(model, null, 2))}
     >
       <RatingField name="rating" />
+      <br />
       <SubmitField />
     </AutoForm>
   );
