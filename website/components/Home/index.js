@@ -1,6 +1,5 @@
-import DocusaurusContext from '@docusaurus/context';
 import Link from '@docusaurus/Link';
-import React, { useContext } from 'react';
+import React from 'react';
 
 import styles from './styles.module.css';
 import { Container, Row, Column } from './Grid';
@@ -46,8 +45,6 @@ function Hero() {
 }
 
 function Info() {
-  const { siteConfig } = useContext(DocusaurusContext);
-
   return (
     <Row>
       <Column>
@@ -76,10 +73,8 @@ function Info() {
               </li>
               <li>
                 And any other - only{' '}
-                <Link to={`${siteConfig.baseUrl}docs/uth-bridge-concept`}>
-                  a small wrapper
-                </Link>{' '}
-                is needed!
+                <Link to={'/docs/uth-bridge-concept'}>a small wrapper</Link> is
+                needed!
               </li>
             </ul>
           </li>
