@@ -13,18 +13,16 @@
   align-items: center;
 }
 
-.stats .item .icon {
-  padding: 10px 10px 0 10px;
-  border-radius: 50%;
-  background: #000;
-  margin-bottom: 1em;
-}
-
-.stats .item .content {
+.stats .item .content * {
   display: flex;
   align-items: center;
+  text-transform: uppercase;
 }
 
-.stats .item .content > svg {
+.stats .item .content svg {
   margin-right: .5em;
+}
+
+.stats .item .number {
+  font-size: 3em;
 }

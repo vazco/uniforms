@@ -1,28 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import {
-  GitHub,
-  Package,
-  GitBranch,
-  Star,
-  Hash,
-  Download
-} from 'react-feather';
+import { Star, GitBranch, Download } from 'react-feather';
 
 import { Row } from '../Grid';
 import styles from './Stats.module.css';
 
-function StatisticItem({ children, title, icon }) {
+function StatisticItem({ children, value }) {
   return (
     <div className={styles.item}>
-      <div className={styles.icon}>{icon}</div>
-      {title && <h2>{title}</h2>}
+      <div className={styles.number}>{value}</div>
       <div className={styles.content}>{children}</div>
     </div>
   );
 }
 
-export default function Stats() {
-  const color = '#fefefe';
+function useStats() {
   const [stars, setStars] = useState(null);
   const [forks, setForks] = useState(null);
   const [downloads, setDownloads] = useState(null);
@@ -38,40 +29,37 @@ export default function Stats() {
   }, [stars, forks]);
 
   useEffect(() => {
-    fetch('https://api.npmjs.org/downloads/point/last-week/uniforms')
+    fetch('https://api.npmjs.org/downloads/point/last-month/uniforms')
       .then(res => res.json())
       .then(({ downloads }) => setDownloads(downloads.toLocaleString('en-US')));
   }, [downloads]);
 
+  return {
+    stars,
+    forks,
+    downloads
+  };
+}
+
+export default function Stats() {
+  const { stars, forks, downloads } = useStats();
   return (
     <Row>
       <div style={{ width: '100%' }}>
         <div className={styles.stats}>
-          <StatisticItem
-            title="GitHub"
-            icon={<GitHub size={50} color={color} />}
-          >
-            <Star
-              fill={'var(--ifm-link-color)'}
-              color={'var(--ifm-link-color)'}
-            />
+          <StatisticItem value={stars}>
             <a href="https://github.com/vazco/uniforms/stargazers">
-              {stars} stars
+              <Star fill="var(--ifm-link-color)" /> Stars
             </a>
           </StatisticItem>
-          <StatisticItem
-            title="GitHub"
-            icon={<GitBranch size={50} color={color} />}
-          >
-            <Hash color={'var(--ifm-link-color)'} />
+          <StatisticItem value={forks}>
             <a href="https://github.com/vazco/uniforms/network/members">
-              {forks} forks
+              <GitBranch color="var(--ifm-link-color)" /> Forks
             </a>
           </StatisticItem>
-          <StatisticItem title="NPM" icon={<Package size={50} color={color} />}>
-            <Download color={'var(--ifm-link-color)'} />
+          <StatisticItem value={downloads}>
             <a href="https://www.npmjs.com/package/uniforms">
-              {downloads} weekly
+              <Download /> Downloads
             </a>
           </StatisticItem>
         </div>
