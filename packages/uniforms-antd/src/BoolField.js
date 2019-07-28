@@ -23,7 +23,7 @@ const Bool = ({ checkbox, ...props }) =>
 Bool.defaultProps = {
   checkbox: false,
   checkedChildren: <Icon type="check" />,
-  unCheckedChildren: <Icon type="cross" />
+  unCheckedChildren: <Icon type="close" />
 };
 
 export default connectField(Bool, { ensureValue: false });
