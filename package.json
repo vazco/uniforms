@@ -43,6 +43,7 @@
     "codecov": "3.5.0",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",
+    "es6-promise": "^4.2.8",
     "eslint": "5.16.0",
     "eslint-config-prettier": "5.0.0",
     "eslint-config-vazco": "4.3.0",
@@ -69,6 +70,7 @@
     "react-test-renderer": "16.8.6",
     "rimraf": "2.6.3",
     "simpl-schema": "^1.0.0 || ^0.0.4",
+    "universal-fetch": "^1.0.0",
     "warning": "^4.0.0"
   },
   "engines": {

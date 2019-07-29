@@ -5,7 +5,6 @@ import ExampleCustomizer from '../ExampleCustomizer';
 import { code } from '../Code';
 
 import SignUp from '../../../docs/examples/CommonForms/SignUp';
-// import SignUpSchema from '../../../docs/examples/CommonForms/SignUpSchema.md';
 
 import ImageField from '../../../docs/examples/CustomFields/ImageField';
 

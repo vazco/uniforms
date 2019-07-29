@@ -22,9 +22,7 @@ const RangeField = connectField(Range);
 export default function ExamplesRangeField() {
   function transform(mode, model) {
     if (mode === 'validate') {
-      const {
-        range: { start, stop }
-      } = model;
+      const { start, stop } = model.range;
 
       return {
         range: {
