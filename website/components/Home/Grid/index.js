@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from '../styles.module.css';
+import classNames from 'classnames';
 
 export function Container({ children }) {
   return (
@@ -10,9 +11,13 @@ export function Container({ children }) {
 }
 
 export function Row({ children }) {
-  return <div className="row">{children}</div>;
+  return (
+    <div className={classNames('row', styles.row, styles.card)}>{children}</div>
+  );
 }
 
 export function Column({ children }) {
-  return <div className={styles.half}>{children}</div>;
+  return (
+    <div className={classNames(styles.half, styles.column)}>{children}</div>
+  );
 }

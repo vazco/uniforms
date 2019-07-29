@@ -1,6 +1,6 @@
 {
   "docs": {
-    "Introduction": ["what-are-uniforms", "motivation"],
+    "Introduction": ["what-are-uniforms", "motivation", "compare-matrix"],
     "Getting Started": ["installation", "faq"],
     "Tutorials": [
       "tutorials-basic-uniforms-usage",

@@ -43,7 +43,9 @@ export default function ExamplesSubmitField() {
       onSubmit={model => alert(JSON.stringify(model, null, 2))}
     >
       <CompositeField name="personA" />
+      <hr />
       <CompositeField name="personB" />
+      <br />
       <SubmitField />
     </AutoForm>
   );

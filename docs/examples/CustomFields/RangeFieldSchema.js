@@ -10,8 +10,8 @@ const schema = {
     range: {
       type: 'object',
       properties: {
-        start: { type: 'string' },
-        stop: { type: 'string' }
+        start: { type: 'string', format: 'date-time' },
+        stop: { type: 'string', format: 'date-time' }
       }
     }
   }

@@ -28,6 +28,7 @@
     "uniforms-bridge-simple-schema-2": "^2.0.0-alpha.0",
     "uniforms-material": "^2.0.0-alpha.0",
     "uniforms-semantic": "^2.0.0-alpha.0",
-    "uniforms-unstyled": "^2.0.0-alpha.0"
+    "uniforms-unstyled": "^2.0.0-alpha.0",
+    "universal-fetch": "1.0.0"
   }
 }

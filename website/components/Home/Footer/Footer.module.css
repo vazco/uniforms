@@ -1,0 +1,31 @@
+.footer {
+  color: #fefefe;
+  border: 1px solid black;
+  background: #0f0f0f;
+  padding: 2em;
+}
+
+.footer .content {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.footer .sitemap {
+  flex-direction: row;
+}
+
+.footer .vertical {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.footer .copyright {
+  align-items: center;
+}
+
+.footer p.minor {
+  margin-top: 1em;
+  font-size: .5em;
+}

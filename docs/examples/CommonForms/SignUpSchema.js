@@ -1,7 +1,7 @@
 import Ajv from 'ajv';
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 
-const ajv = new Ajv({ allErrors: true, useDefaults: true });
+const ajv = new Ajv({ allErrors: true, useDefaults: true, $data: true });
 
 const schema = {
   title: 'Guest',
@@ -9,18 +9,15 @@ const schema = {
   properties: {
     fullname: { type: 'string' },
     email: { type: 'string' },
-    reemail: { type: 'string' },
+    confirmEmail: { type: 'string', const: { $data: '1/email' } },
     password: {
       type: 'string',
       uniforms: {
         type: 'password'
       }
     },
-    repassword: {
+    confirmPassword: {
       type: 'string',
-      errorMessage: {
-        type: 'Passwords must match'
-      },
       const: { $data: '1/password' },
       uniforms: {
         type: 'password'
@@ -31,9 +28,9 @@ const schema = {
   required: [
     'fullname',
     'email',
-    'reemail',
+    'confirmEmail',
     'password',
-    'repassword',
+    'confirmPassword',
     'acceptTermsOfUse'
   ]
 };
