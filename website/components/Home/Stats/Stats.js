@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Star, GitBranch, Download } from 'react-feather';
 import pick from 'lodash/pick';
-import 'es6-promise/auto';
 import 'universal-fetch';
 
 import { Row } from '../Grid';
@@ -16,29 +15,42 @@ function StatisticItem({ children, value }) {
   );
 }
 
-function cachedFetch(key, url, properties) {
-  const dataKey = `__cached-fetch-${key}`;
+function cacheKey(key) {
+  return `__cached-fetch-${key}`;
+}
+
+function cacheGet(key) {
   try {
-    const cache = JSON.parse(localStorage.getItem(dataKey)) || {};
-    const { expires, data } = cache;
-    if (expires > Date.now()) {
-      return Promise.resolve(data);
-    }
+    const { expires, data } = JSON.parse(localStorage.getItem(cacheKey(key)));
+    if (expires > Date.now()) return data;
   } catch (error) {
-    return Promise.reject(error);
+    // Nothing.
   }
+}
+
+function cacheSet(key, data) {
+  const twoMinutes = Date.now() + 2 * 60 * 1000;
+  try {
+    localStorage.setItem(
+      cacheKey(key),
+      JSON.stringify({ data, expires: twoMinutes })
+    );
+  } catch (error) {
+    // Nothing.
+  }
+}
+
+function cachedFetch(key, url, properties) {
+  const data = cacheGet(key);
+  if (data) return Promise.resolve(data);
+
   return fetch(url)
     .then(response => response.json())
-    .then(data => (properties ? pick(data, properties) : data))
     .then(data => {
-      const twoMinutesLater = Date.now() + 2 * 60 * 1000;
-      localStorage.setItem(
-        dataKey,
-        JSON.stringify({ expires: twoMinutesLater, data })
-      );
+      if (properties) data = pick(data, properties);
+      cacheSet(key, data);
       return data;
-    })
-    .catch(console.error);
+    }, console.error);
 }
 
 function useStats() {
@@ -50,12 +62,10 @@ function useStats() {
     cachedFetch('github', 'https://api.github.com/repos/vazco/uniforms', [
       'stargazers_count',
       'forks_count'
-    ])
-      // eslint-disable-next-line camelcase
-      .then(({ stargazers_count, forks_count }) => {
-        setStars(stargazers_count.toLocaleString('en-US'));
-        setForks(forks_count.toLocaleString('en-US'));
-      });
+    ]).then(({ forks_count: forks, stargazers_count: stars }) => {
+      setForks(forks.toLocaleString('en-US'));
+      setStars(stars.toLocaleString('en-US'));
+    });
   }, [stars, forks]);
 
   useEffect(() => {

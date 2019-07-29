@@ -50,7 +50,7 @@ function Info() {
       <p style={{ fontSize: '1.25em' }}>
         Open source tool capable of generating any given form, which bridges the
         gap. Integration with every schema keeps the code simple. Powered by
-        passion. Carried out by the global community of +50 developers. Provides
+        passion. Carried out by the global community of 50+ developers. Provides
         effortless development experience. Easy-to-use tool, ready-to-implement
         solution.
       </p>
