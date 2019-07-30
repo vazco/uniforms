@@ -10,7 +10,7 @@ export default function CompareMatrix() {
       <h2>Comparison with similar libraries.</h2>
       <Matrix />
       <div style={{ display: 'flex', flex: 1, justifyContent: 'flex-end' }}>
-        <Link to="/docs/api-forms">Read more</Link>
+        <Link to="/docs/compare-matrix">Read more</Link>
       </div>
     </Row>
   );
