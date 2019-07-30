@@ -12,8 +12,20 @@ import schema from './RangeFieldSchema';
 // a {start, stop} object.
 const Range = ({ value: { start, stop } }) => (
   <section>
-    <AutoField name="start" max={stop} />
-    <AutoField name="stop" min={start} />
+    <AutoField
+      InputLabelProps={{
+        shrink: true
+      }}
+      name="start"
+      max={stop}
+    />
+    <AutoField
+      InputLabelProps={{
+        shrink: true
+      }}
+      name="stop"
+      min={start}
+    />
   </section>
 );
 

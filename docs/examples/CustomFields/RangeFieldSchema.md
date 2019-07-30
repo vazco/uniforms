@@ -13,7 +13,8 @@ const schema = {
       properties: {
         start: { type: 'string', format: 'date-time' },
         stop: { type: 'string', format: 'date-time' }
-      }
+      },
+      required: ['start', 'stop']
     }
   }
 };
