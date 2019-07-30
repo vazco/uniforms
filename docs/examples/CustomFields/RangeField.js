@@ -19,10 +19,14 @@ const Range = ({ value: { start, stop } }) => (
 
 const RangeField = connectField(Range);
 
+const today = new Date();
+const tommorow = new Date();
+tommorow.setDate(today.getDate() + 1);
+
 export default function ExamplesRangeField() {
   function transform(mode, model) {
     if (mode === 'validate') {
-      const { start, stop } = model.range;
+      const { start, stop } = model.range || {};
 
       return {
         range: {
@@ -37,6 +41,9 @@ export default function ExamplesRangeField() {
 
   return (
     <AutoForm
+      model={{
+        range: { start: today, stop: tommorow }
+      }}
       modelTransform={transform}
       schema={schema}
       onSubmit={model => alert(JSON.stringify(model, null, 2))}
