@@ -76,7 +76,7 @@ describe('connectField', () => {
 
   describe('when called with `baseField`', () => {
     it('inherits from `baseField`', () => {
-      /* istanbul ignore next */
+      // istanbul ignore next
       class Class {}
 
       Class.property1 = 1;

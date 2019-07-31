@@ -3,6 +3,7 @@ import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
 const noneIfNaN = x => (isNaN(x) ? undefined : x);
+const parse = (decimal, x) => noneIfNaN((decimal ? parseFloat : parseInt)(x));
 
 const Num_ = ({
   decimal,
@@ -38,45 +39,46 @@ const Num_ = ({
   </div>
 );
 
-// NOTE: React < 16 workaround. Make it optional?
-class Num extends Component {
-  constructor() {
-    super(...arguments);
+let Num;
+// istanbul ignore next
+if (parseInt(React.version, 10) < 16) {
+  Num = class Num extends Component {
+    state = { value: '' + this.props.value };
 
-    this.state = { value: '' + this.props.value };
+    componentWillReceiveProps({ decimal, value }) {
+      if (
+        parse(decimal, value) !==
+        parse(decimal, this.state.value.replace(/[.,]+$/, ''))
+      ) {
+        this.setState({
+          value: value === undefined || value === '' ? '' : '' + value
+        });
+      }
+    }
 
-    this.onChange = this.onChange.bind(this);
-  }
+    onChange = event => {
+      const value = event.target.value.replace(/[^\d.,-]/g, '');
 
-  componentWillReceiveProps({ decimal, value }) {
-    const parse = decimal ? parseFloat : parseInt;
+      this.setState({ value });
+      this.props.onChange(parse(this.props.decimal, value));
+    };
 
-    if (
-      noneIfNaN(parse(value)) !==
-      noneIfNaN(parse(this.state.value.replace(/[.,]+$/, '')))
-    ) {
-      this.setState({
-        value: value === undefined || value === '' ? '' : '' + value
+    render() {
+      return Num_({
+        ...this.props,
+        onChange: this.onChange,
+        value: this.state.value
       });
     }
-  }
-
-  onChange({ target: { value } }) {
-    const change = value.replace(/[^\d.,-]/g, '');
-
-    this.setState({ value: change });
-    this.props.onChange(
-      noneIfNaN((this.props.decimal ? parseFloat : parseInt)(change))
-    );
-  }
-
-  render() {
-    return Num_({
-      ...this.props,
-      onChange: this.onChange,
-      value: this.state.value
+  };
+} else {
+  Num = props =>
+    Num_({
+      ...props,
+      onChange(event) {
+        props.onChange(parse(props.decimal, event.target.value));
+      }
     });
-  }
 }
 
 export default connectField(Num);

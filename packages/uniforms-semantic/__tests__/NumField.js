@@ -5,6 +5,11 @@ import NumField from 'uniforms-semantic/NumField';
 
 import createContext from './_createContext';
 
+const expectedValueTransform =
+  parseInt(React.version, 10) < 16
+    ? x => (x === undefined ? '' : '' + x)
+    : x => x;
+
 test('<NumField> - renders an input', () => {
   const element = <NumField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
@@ -110,7 +115,7 @@ test('<NumField> - renders an input with correct value (model)', () => {
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
-  expect(wrapper.find('input').prop('value')).toBe('1');
+  expect(wrapper.find('input').prop('value')).toBe(expectedValueTransform(1));
 
   // NOTE: All following tests are here to cover hacky NumField implementation.
   const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
@@ -124,7 +129,7 @@ test('<NumField> - renders an input with correct value (model)', () => {
     { value: 1, decimal: false },
     { value: 1, decimal: false }
   ].forEach(({ decimal = true, value }) => {
-    const valueInput = value === undefined ? '' : '' + value;
+    const valueInput = expectedValueTransform(value);
 
     wrapper.setProps({ decimal });
 
@@ -151,7 +156,7 @@ test('<NumField> - renders an input with correct value (specified)', () => {
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
   expect(wrapper.find('input')).toHaveLength(1);
-  expect(wrapper.find('input').prop('value')).toBe('2');
+  expect(wrapper.find('input').prop('value')).toBe(expectedValueTransform(2));
 });
 
 test('<NumField> - renders an input which correctly reacts on change', () => {
