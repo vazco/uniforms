@@ -1,4 +1,4 @@
 // @flow
 
 import './register';
-export { default as GraphQLBridge } from './GraphQLBridge';
+export { default, default as GraphQLBridge } from './GraphQLBridge';
