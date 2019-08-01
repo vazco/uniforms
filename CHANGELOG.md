@@ -1,3 +1,10 @@
+## [v2.3.0](https://github.com/vazco/uniforms/tree/v2.3.0) (2019-08-01)
+
+- **Added:** Default exports in bridge packages. [\#562](https://github.com/vazco/uniforms/issues/562)
+- **Added:** Support for `extra` and `help` in `uniforms-antd` theme. [\#559](https://github.com/vazco/uniforms/issues/559)
+- **Fixed:** Conditional wrapper of `NumFields` in most themes is now React version specific. [\#558](https://github.com/vazco/uniforms/issues/558)
+- **Fixed:** Deprecated icon in `BoolField` in `uniforms-antd`. [\#563](https://github.com/vazco/uniforms/issues/563)
+
 ## [v2.2.0](https://github.com/vazco/uniforms/tree/v2.2.0) (2019-07-12)
 
 - **Added:** Support for `labelClassName` in `uniforms-bootstrap3` and `uniforms-bootstrap4` themes. [\#548](https://github.com/vazco/uniforms/issues/548)
