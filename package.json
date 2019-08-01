@@ -6,6 +6,7 @@
     "clean": "rimraf coverage packages/*/*.js",
     "coverage": "jest --coverage",
     "coverage:report": "codecov",
+    "eslint": "eslint",
     "flow": "flow",
     "flow-typed": "flow-typed install",
     "install": "npm run build",
