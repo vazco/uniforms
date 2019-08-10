@@ -2,14 +2,15 @@
   "name": "uniforms-repository",
   "private": true,
   "scripts": {
-    "build": "lerna exec --ignore website -- babel --config-file ../../.babelrc --out-dir . src",
+    "build": "lerna exec --ignore website -- babel --config-file ../../.babelrc --out-dir . --extensions '.js,.ts,.tsx' src",
     "clean": "rimraf coverage packages/*/*.js",
     "coverage": "jest --coverage",
     "coverage:report": "codecov",
     "install": "npm run build",
-    "lint": "npm run lint:code && npm run lint:text",
+    "lint": "npm run lint:code && npm run lint:text && npm run lint:types",
     "lint:code": "eslint packages website",
     "lint:text": "prettier --check **/*.md{,x}",
+    "lint:types": "tsc --build tsconfig.json",
     "postinstall": "lerna bootstrap --hoist",
     "prereset": "npm run clean",
     "pretest": "npm run lint",
@@ -25,11 +26,17 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "7.3.3",
     "@babel/runtime": "^7.0.0",
     "@docusaurus/core": "^2.0.0-alpha.23",
     "@docusaurus/preset-classic": "^2.0.0-alpha.23",
     "@material-ui/core": "4.1.1",
     "@material-ui/icons": "4.2.0",
+    "@types/invariant": "2.2.30",
+    "@types/jest": "24.0.17",
+    "@types/lodash": "4.14.136",
+    "@typescript-eslint/eslint-plugin": "1.13.0",
+    "@typescript-eslint/parser": "1.13.0",
     "ajv": "6.10.0",
     "antd": "3.19.5",
     "babel-core": "7.0.0-bridge.0",
@@ -64,6 +71,7 @@
     "react-test-renderer": "16.8.6",
     "rimraf": "2.6.3",
     "simpl-schema": "^1.0.0 || ^0.0.4",
+    "typescript": "3.5.3",
     "universal-fetch": "1.0.0",
     "warning": "^4.0.0"
   },
@@ -72,7 +80,8 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "packages/*/src/*.js"
+      "packages/*/src/*.js",
+      "packages/*/src/*.ts"
     ],
     "coverageReporters": [
       "html",
@@ -90,10 +99,12 @@
       "./scripts/setupPolyfill.js"
     ],
     "testMatch": [
-      "**/__tests__/**/!(_)*.js"
+      "**/__tests__/**/!(_)*.js",
+      "**/__tests__/**/!(_)*.ts"
     ],
     "transform": {
-      "^.+\\.jsx?$": "./scripts/transform.js"
+      "^.+\\.jsx?$": "./scripts/transform.js",
+      "^.+\\.tsx?$": "./scripts/transform.js"
     }
   },
   "husky": {
@@ -102,7 +113,7 @@
     }
   },
   "lint-staged": {
-    "**/*.js": [
+    "**/*.{js,ts{,x}}": [
       "eslint"
     ],
     "**/*.md{,x}": [

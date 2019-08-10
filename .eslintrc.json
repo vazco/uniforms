@@ -3,6 +3,7 @@
     "jest": true
   },
   "extends": "vazco/prettier",
+  "parser": "@typescript-eslint/parser",
   "root": true,
   "settings": {
     "react": {
