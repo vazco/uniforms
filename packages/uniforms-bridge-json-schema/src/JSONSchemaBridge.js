@@ -1,3 +1,5 @@
+import cloneDeep from 'lodash/cloneDeep';
+import get from 'lodash/get';
 import invariant from 'invariant';
 
 import Bridge from 'uniforms/Bridge';
@@ -177,22 +179,23 @@ export default class JSONSchemaBridge extends Bridge {
   getInitialValue(name, props = {}) {
     const { default: _default, type: _type } = this.getField(name);
     const {
-      default: defaultValue = _default,
+      default: defaultValue = _default !== undefined
+        ? _default
+        : get(this.schema.default, name),
       type = _type
     } = this._compiledSchema[name];
+
+    if (defaultValue !== undefined) return cloneDeep(defaultValue);
 
     if (type === 'array') {
       const item = this.getInitialValue(joinName(name, '0'));
       const items = props.initialCount || 0;
-
-      return [...Array(items)].map(() => item);
+      return Array(items).fill(item);
     }
 
-    if (type === 'object') {
-      return {};
-    }
+    if (type === 'object') return {};
 
-    return defaultValue;
+    return undefined;
   }
 
   getProps(name, { label = true, options: opts, placeholder, ...props } = {}) {
