@@ -1,3 +1,7 @@
+## Next
+
+- **Fixed:** Rendering placeholder in `SelectField` in `uniforms-antd`. [\#568](https://github.com/vazco/uniforms/issues/568)
+
 ## [v2.3.0](https://github.com/vazco/uniforms/tree/v2.3.0) (2019-08-01)
 
 - **Added:** Default exports in bridge packages. [\#562](https://github.com/vazco/uniforms/issues/562)

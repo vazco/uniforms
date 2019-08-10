@@ -34,9 +34,7 @@ const renderSelect = props => (
     onChange={value => props.onChange(value)}
     placeholder={props.placeholder}
     ref={props.inputRef}
-    value={
-      props.fieldType === Array ? props.value || [] : '' + (props.value || '')
-    }
+    value={props.value || (props.fieldType === Array ? [] : undefined)}
     {...filterDOMProps(props)}
   >
     {props.allowedValues.map(value => (
@@ -49,4 +47,5 @@ const renderSelect = props => (
 
 const Select = ({ checkboxes, ...props }) =>
   wrapField(props, checkboxes ? renderCheckboxes(props) : renderSelect(props));
-export default connectField(Select);
+
+export default connectField(Select, { ensureValue: false });

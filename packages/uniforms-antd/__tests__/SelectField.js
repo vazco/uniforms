@@ -102,6 +102,7 @@ test('<SelectField> - renders a select with correct placeholder (implicit)', () 
 
   expect(wrapper.find(Select)).toHaveLength(1);
   expect(wrapper.find(Select).prop('placeholder')).toBe('y');
+  expect(wrapper.find(Select).prop('value')).toBe(undefined);
 });
 
 test('<SelectField> - renders a select with correct value (default)', () => {
@@ -112,7 +113,7 @@ test('<SelectField> - renders a select with correct value (default)', () => {
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find(Select).prop('value')).toBe('');
+  expect(wrapper.find(Select).prop('value')).toBe(undefined);
 });
 
 test('<SelectField> - renders a select with correct value (model)', () => {
