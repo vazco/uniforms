@@ -37,6 +37,7 @@ const renderCheckboxes = ({
       </label>
     </div>
   ));
+
 const renderSelect = ({
   allowedValues,
   disabled,
@@ -54,13 +55,15 @@ const renderSelect = ({
     disabled={disabled}
     id={id}
     name={name}
-    onChange={event => onChange(event.target.value)}
+    onChange={event =>
+      onChange(event.target.value !== '' ? event.target.value : undefined)
+    }
     ref={inputRef}
     value={value}
   >
-    {(!!placeholder || !required) && (
+    {(!!placeholder || !required || value === '') && (
       <option value="" disabled={required} hidden={required}>
-        {placeholder ? placeholder : label}
+        {placeholder || label}
       </option>
     )}
 
@@ -71,6 +74,7 @@ const renderSelect = ({
     ))}
   </select>
 );
+
 const Select = ({
   allowedValues,
   checkboxes,
@@ -117,4 +121,5 @@ const Select = ({
         })}
   </div>
 );
+
 export default connectField(Select);

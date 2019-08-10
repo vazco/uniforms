@@ -64,7 +64,10 @@ const renderSelect = ({
       }}
       label={label}
       margin={margin}
-      onChange={event => disabled || onChange(event.target.value)}
+      onChange={event =>
+        disabled ||
+        onChange(event.target.value !== '' ? event.target.value : undefined)
+      }
       required={required}
       select
       SelectProps={{
@@ -77,11 +80,12 @@ const renderSelect = ({
       value={native && !value ? '' : value}
       variant={variant}
     >
-      {hasPlaceholder && (
+      {(hasPlaceholder || !required || !hasValue) && (
         <Item value="" disabled={!!required}>
-          {placeholder}
+          {placeholder || label}
         </Item>
       )}
+
       {allowedValues.map(value => (
         <Item key={value} value={value}>
           {transform ? transform(value) : value}

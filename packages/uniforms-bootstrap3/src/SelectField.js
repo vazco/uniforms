@@ -43,6 +43,7 @@ const renderCheckboxes = props =>
       </label>
     </div>
   ));
+
 const renderSelect = props => (
   <select
     className={classnames(props.inputClassName, 'form-control', {
@@ -51,13 +52,15 @@ const renderSelect = props => (
     disabled={props.disabled}
     id={props.id}
     name={props.name}
-    onChange={event => props.onChange(event.target.value)}
+    onChange={event =>
+      props.onChange(event.target.value !== '' ? event.target.value : undefined)
+    }
     ref={props.inputRef}
     value={props.value}
   >
-    {(!!props.placeholder || !props.required) && (
+    {(!!props.placeholder || !props.required || props.value === '') && (
       <option value="" disabled={props.required} hidden={props.required}>
-        {props.placeholder ? props.placeholder : props.label}
+        {props.placeholder || props.label}
       </option>
     )}
 
@@ -68,6 +71,7 @@ const renderSelect = props => (
     ))}
   </select>
 );
+
 const Select = props =>
   wrapField(
     props,
@@ -75,4 +79,5 @@ const Select = props =>
       ? renderCheckboxes(props)
       : renderSelect(props)
   );
+
 export default connectField(Select);

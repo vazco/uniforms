@@ -1,6 +1,7 @@
 ## Next
 
 - **Fixed:** Handling of `default` attribute in `JSONSchemaBridge`. [\#569](https://github.com/vazco/uniforms/issues/569)
+- **Fixed:** Handling of `placeholder` and `required` props in most themes. [\#570](https://github.com/vazco/uniforms/issues/570)
 - **Fixed:** Rendering placeholder in `SelectField` in `uniforms-antd`. [\#568](https://github.com/vazco/uniforms/issues/568)
 
 ## [v2.3.0](https://github.com/vazco/uniforms/tree/v2.3.0) (2019-08-01)

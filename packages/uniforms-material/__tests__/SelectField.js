@@ -87,21 +87,12 @@ test('<SelectField> - renders a Select with correct options', () => {
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find(Select).find('option')).toHaveLength(2);
-  expect(
-    wrapper
-      .find(Select)
-      .find('option')
-      .at(0)
-      .text()
-  ).toBe('a');
-  expect(
-    wrapper
-      .find(Select)
-      .find('option')
-      .at(1)
-      .text()
-  ).toBe('b');
+  expect(wrapper.find('option')).toHaveLength(3);
+  [['', ''], ['a', 'a'], ['b', 'b']].forEach(([value, text], index) => {
+    const option = wrapper.find('option').at(index);
+    expect(option.prop('value')).toBe(value);
+    expect(option.text()).toBe(text);
+  });
 });
 
 test('<SelectField> - renders a Select with correct options (transform)', () => {
@@ -114,21 +105,12 @@ test('<SelectField> - renders a Select with correct options (transform)', () => 
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find(Select).find('option')).toHaveLength(2);
-  expect(
-    wrapper
-      .find(Select)
-      .find('option')
-      .at(0)
-      .text()
-  ).toBe('A');
-  expect(
-    wrapper
-      .find(Select)
-      .find('option')
-      .at(1)
-      .text()
-  ).toBe('B');
+  expect(wrapper.find('option')).toHaveLength(3);
+  [['', ''], ['a', 'A'], ['b', 'B']].forEach(([value, text], index) => {
+    const option = wrapper.find('option').at(index);
+    expect(option.prop('value')).toBe(value);
+    expect(option.text()).toBe(text);
+  });
 });
 
 test('<SelectField> - renders a Select with correct placeholder (implicit)', () => {
@@ -139,21 +121,12 @@ test('<SelectField> - renders a Select with correct placeholder (implicit)', () 
   );
 
   expect(wrapper.find(Select).prop('value')).toBe('');
-  expect(wrapper.find(Select).find('option')).toHaveLength(3);
-  expect(
-    wrapper
-      .find(Select)
-      .find('option')
-      .at(0)
-      .text()
-  ).toBe('y');
-  expect(
-    wrapper
-      .find(Select)
-      .find('option')
-      .at(1)
-      .text()
-  ).toBe('a');
+  expect(wrapper.find('option')).toHaveLength(3);
+  [['', 'y'], ['a', 'a'], ['b', 'b']].forEach(([value, text], index) => {
+    const option = wrapper.find('option').at(index);
+    expect(option.prop('value')).toBe(value);
+    expect(option.text()).toBe(text);
+  });
 });
 
 test('<SelectField> - renders a Select with correct value (default)', () => {
@@ -229,7 +202,7 @@ test('<SelectField> - renders a Select which correctly reacts on change (empty)'
     .find(TextField)
     .props()
     .onChange({ target: { value: '' } });
-  expect(onChange).toHaveBeenLastCalledWith('x', '');
+  expect(onChange).toHaveBeenLastCalledWith('x', undefined);
 });
 
 test('<SelectField> - renders a Select which correctly reacts on change (same value)', () => {
