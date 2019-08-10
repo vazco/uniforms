@@ -1,8 +1,8 @@
 // @flow
 
 export const SimpleSchema = {
-  extendOptions: jest.fn<[], void>(),
-  _makeGeneric: jest.fn<[mixed], string | null>((name: mixed) => {
+  extendOptions: jest.fn(),
+  _makeGeneric: jest.fn(name => {
     if (typeof name !== 'string') {
       return null;
     }
