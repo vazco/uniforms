@@ -120,26 +120,26 @@ class PlaygroundPreview extends Component {
   }
 
   render() {
-    // FIXME: this.props.theme is undefined during `docusaurus build`.
     const Form = themes[this.props.theme || 'unstyled'].AutoForm;
+    const {
+      asyncOnSubmit,
+      asyncOnValidate,
+      schema,
+      ...props
+    } = this.props.value;
 
-    const { asyncOnSubmit, asyncOnValidate, ...props } = {
-      ...this.props.value
-    };
     props.schema = this._schema;
-    if (asyncOnSubmit) {
+    if (asyncOnSubmit)
       props.onSubmit = () => new Promise(resolve => setTimeout(resolve, 1000));
-    }
-    if (asyncOnValidate) {
+    if (asyncOnValidate)
       props.onValidate = (model, error, next) => setTimeout(() => next(), 1000);
-    }
 
     return (
       <PlaygroundWrap theme={this.props.theme}>
         {this.props.errorMessage ? (
           <span children={this.props.errorMessage} />
         ) : (
-          <Form key={props.schema} onChangeModel={this.onModel} {...props} />
+          <Form key={schema} onChangeModel={this.onModel} {...props} />
         )}
 
         {this.state.model !== undefined && <br />}
