@@ -1,5 +1,0 @@
-# https://github.com/vazco/eslint-config-vazco/blob/master/configs/prettier.yaml
-bracketSpacing: true
-printWidth: 80
-singleQuote: true
-tabWidth: 2

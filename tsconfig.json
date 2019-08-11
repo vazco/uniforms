@@ -19,9 +19,15 @@
       "uniforms-bridge-json-schema": ["uniforms-bridge-json-schema/src"],
       "uniforms-bridge-json-schema/*": ["uniforms-bridge-json-schema/src/*"],
       "uniforms-bridge-simple-schema": ["uniforms-bridge-simple-schema/src"],
-      "uniforms-bridge-simple-schema/*": ["uniforms-bridge-simple-schema/src/*"],
-      "uniforms-bridge-simple-schema-2": ["uniforms-bridge-simple-schema-2/src"],
-      "uniforms-bridge-simple-schema-2/*": ["uniforms-bridge-simple-schema-2/src/*"],
+      "uniforms-bridge-simple-schema/*": [
+        "uniforms-bridge-simple-schema/src/*"
+      ],
+      "uniforms-bridge-simple-schema-2": [
+        "uniforms-bridge-simple-schema-2/src"
+      ],
+      "uniforms-bridge-simple-schema-2/*": [
+        "uniforms-bridge-simple-schema-2/src/*"
+      ],
       "uniforms-material": ["uniforms-material/src"],
       "uniforms-material/*": ["uniforms-material/src/*"],
       "uniforms-semantic": ["uniforms-semantic/src"],
@@ -31,8 +37,5 @@
     },
     "strict": true
   },
-  "includes": [
-    "packages/**/*.tsx?",
-    "website/**/*.tsx?"
-  ]
+  "includes": ["packages/**/*.tsx?", "website/**/*.tsx?"]
 }

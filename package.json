@@ -2,15 +2,15 @@
   "name": "uniforms-repository",
   "private": true,
   "scripts": {
-    "build": "lerna exec --ignore website -- babel --config-file ../../.babelrc --out-dir . --extensions '.js,.ts,.tsx' src",
+    "build": "lerna exec --ignore website -- babel --config-file ../../.babelrc.json --out-dir . --extensions '.js,.ts,.tsx' src",
     "clean": "rimraf coverage packages/*/*.js",
     "coverage": "jest --coverage",
     "coverage:report": "codecov",
     "install": "npm run build",
     "lint": "npm run lint:code && npm run lint:text && npm run lint:types",
     "lint:code": "eslint packages website",
-    "lint:text": "prettier --check **/*.md{,x}",
-    "lint:types": "tsc --build tsconfig.json",
+    "lint:text": "prettier --check **/*.{json,md,mdx,yml}",
+    "lint:types": "tsc --project .",
     "postinstall": "lerna bootstrap --hoist",
     "prereset": "npm run clean",
     "pretest": "npm run lint",
@@ -59,7 +59,7 @@
     "invariant": "^2.0.0",
     "jest": "24.8.0",
     "lerna": "3.15.0",
-    "lint-staged": "8.2.1",
+    "lint-staged": "9.2.1",
     "lodash": "^4.0.0",
     "lz-string": "1.4.4",
     "prettier": "1.18.2",
@@ -77,47 +77,5 @@
   },
   "engines": {
     "npm": ">=5.0.0"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "packages/*/src/*.js",
-      "packages/*/src/*.ts"
-    ],
-    "coverageReporters": [
-      "html",
-      "lcovonly",
-      "text-summary"
-    ],
-    "moduleNameMapper": {
-      "^meteor/([^:]*):(.*)$": "<rootDir>/packages/uniforms/__mocks__/meteor/$1_$2.js",
-      "^meteor/([^:]*)$": "<rootDir>/packages/uniforms/__mocks__/meteor/$1.js",
-      "^simpl-schema$": "<rootDir>/node_modules/simpl-schema",
-      "^uniforms([^/]*)(.*)$": "<rootDir>/packages/uniforms$1/src$2"
-    },
-    "setupFiles": [
-      "./scripts/setupEnzyme.js",
-      "./scripts/setupPolyfill.js"
-    ],
-    "testMatch": [
-      "**/__tests__/**/!(_)*.js",
-      "**/__tests__/**/!(_)*.ts"
-    ],
-    "transform": {
-      "^.+\\.jsx?$": "./scripts/transform.js",
-      "^.+\\.tsx?$": "./scripts/transform.js"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*.{js,ts{,x}}": [
-      "eslint"
-    ],
-    "**/*.md{,x}": [
-      "prettier --check"
-    ]
   }
 }

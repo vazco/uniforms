@@ -5,8 +5,5 @@
       "parallel": true
     }
   },
-  "packages": [
-    "packages/*",
-    "website"
-  ]
+  "packages": ["packages/*", "website"]
 }
