@@ -25,7 +25,7 @@ describe('createSchemaBridge', () => {
   it('recognizes a registered bridge', () => {
     class TestSchema {}
     class TestSchemaBridge extends Bridge {
-      static check(schema) {
+      static check(schema: any) {
         return schema instanceof TestSchema;
       }
     }

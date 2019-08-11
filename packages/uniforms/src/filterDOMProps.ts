@@ -1,4 +1,3 @@
-// @flow
 import omit from 'lodash/omit';
 
 const unwantedProps = [
@@ -36,7 +35,7 @@ export default function filterDOMProps(props: {}) {
 }
 
 // Bridges have to register additional props
-filterDOMProps.register = (...props) => {
+filterDOMProps.register = (...props: string[]) => {
   props.forEach(prop => {
     if (unwantedProps.indexOf(prop) === -1) {
       unwantedProps.push(prop);

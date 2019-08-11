@@ -1,5 +1,3 @@
-// @flow
-
 import randomIds from 'uniforms/randomIds';
 
 describe('randomIds', () => {

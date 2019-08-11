@@ -1,5 +1,3 @@
-// @flow
-
 import joinName from 'uniforms/joinName';
 
 describe('joinName', () => {

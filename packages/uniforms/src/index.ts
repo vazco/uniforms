@@ -1,5 +1,3 @@
-// @flow
-
 export { default as AutoForm } from './AutoForm';
 export { default as BaseField } from './BaseField';
 export { default as BaseForm } from './BaseForm';

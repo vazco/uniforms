@@ -1,5 +1,3 @@
-// @flow
-
 import filterDOMProps from 'uniforms/filterDOMProps';
 
 describe('joinName', () => {

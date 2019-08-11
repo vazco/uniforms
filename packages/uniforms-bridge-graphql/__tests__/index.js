@@ -1,5 +1,3 @@
-// @flow
-
 import * as uniformsGraphQL from 'uniforms-bridge-graphql';
 
 it('exports everything', () => {

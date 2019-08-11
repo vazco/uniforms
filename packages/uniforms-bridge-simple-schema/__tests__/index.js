@@ -1,5 +1,3 @@
-// @flow
-
 import * as uniformsSimpleSchema from 'uniforms-bridge-simple-schema';
 
 it('exports everything', () => {
