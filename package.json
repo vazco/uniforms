@@ -71,6 +71,8 @@
     "react-test-renderer": "16.8.6",
     "rimraf": "2.6.3",
     "simpl-schema": "^1.0.0 || ^0.0.4",
+    "stylelint": "10.1.0",
+    "stylelint-config-recommended": "2.2.0",
     "typescript": "3.5.3",
     "universal-fetch": "1.0.0",
     "warning": "^4.0.0"
