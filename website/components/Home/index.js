@@ -7,17 +7,20 @@ import Examples from './Examples';
 import Matrix from './CompareMatrix';
 import Stats from './Stats';
 import Footer from './Footer';
+import { SectionButton, SectionQuestions } from './CallToAction';
 
 export default function Home() {
   return (
     <React.Fragment>
       <Hero />
+      <SectionButton title="Get started" />
       <Container>
         <Info />
         <Examples />
         <Matrix />
         <Stats />
       </Container>
+      <SectionQuestions title="Questions?" subtitle="Contact us" />
       <Footer />
     </React.Fragment>
   );
