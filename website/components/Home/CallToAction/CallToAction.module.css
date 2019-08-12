@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+#get-started.container {
+  margin-top: -1.5rem;
+  margin-bottom: 3rem;
+}
+
+.questions {
+  background-color: var(--ifm-footer-background-color);
+  padding: 5rem 0;
+  margin: 0 0;
+}
+
+.questions h6 {
+  margin: -1em 0 1em 0;
+}
