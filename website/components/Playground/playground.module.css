@@ -2,6 +2,20 @@
   height: calc(100vh - var(--ifm-navbar-height));
 }
 
+.playground-wrap {
+  background-color: #fff;
+  color: #0e0e0e;
+  display: block;
+  flex: 1;
+  overflow-y: auto;
+
+  border-radius: 5px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
 .playground .playground-wrap {
   border-radius: unset;
 }
@@ -36,18 +50,4 @@
   font-size: 1rem;
   margin: 0.25em;
   padding: 0.5em;
-}
-
-.playground-wrap {
-  background-color: #fff;
-  color: #0e0e0e;
-  display: block;
-  flex: 1;
-  overflow-y: auto;
-
-  border-radius: 5px;
-  border: none;
-  margin: 0;
-  padding: 0;
-  width: 100%;
 }
