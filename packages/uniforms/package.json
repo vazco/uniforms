@@ -17,6 +17,8 @@
   ],
   "files": [
     "*.js",
+    "*.ts",
+    "*.tsx",
     "src/"
   ],
   "peerDependencies": {
