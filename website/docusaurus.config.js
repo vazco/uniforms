@@ -18,7 +18,7 @@ module.exports = {
       indexName: 'uniforms'
     },
     googleAnalytics: { trackingID: 'UA-136559762-4' },
-    hotjar: { hjid: 1434110, manual: true },
+    hotjar: { hjid: 1434110 },
     navbar: {
       links: [
         { label: 'Docs', to: '/docs/what-are-uniforms' },
