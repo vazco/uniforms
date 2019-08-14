@@ -18,6 +18,7 @@ module.exports = {
       indexName: 'uniforms'
     },
     googleAnalytics: { trackingID: 'UA-136559762-4' },
+    hotjar: { hjid: 1434110, manual: true },
     navbar: {
       links: [
         { label: 'Docs', to: '/docs/what-are-uniforms' },
@@ -32,6 +33,7 @@ module.exports = {
     }
   },
   favicon: 'favicon.ico',
+  plugins: [path.resolve(__dirname, './plugins/docusaurus-plugin-hotjar')],
   presets: [
     [
       '@docusaurus/preset-classic',
