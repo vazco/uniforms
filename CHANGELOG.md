@@ -1,4 +1,4 @@
-## Next
+## [v2.3.1](https://github.com/vazco/uniforms/tree/v2.3.1) (2019-08-14)
 
 - **Fixed:** Handling of `default` attribute in `JSONSchemaBridge`. [\#569](https://github.com/vazco/uniforms/issues/569)
 - **Fixed:** Handling of `placeholder` and `required` props in most themes. [\#570](https://github.com/vazco/uniforms/issues/570)
