@@ -226,6 +226,26 @@ describe('GraphQLBridge', () => {
   });
 
   describe('#getProps', () => {
+    it('uses graphql schema to derive default labels', () => {
+      expect(bridgeT.getProps('title')).toMatchObject({
+        label: 'Title'
+      });
+
+      expect(
+        bridgeT.getProps('title', { label: 'Overriden title' })
+      ).toMatchObject({
+        label: 'Overriden title'
+      });
+
+      expect(bridgeT.getProps('author.decimal1')).toMatchObject({
+        label: 'Decimal1'
+      });
+
+      expect(bridgeT.getProps('author.firstName')).toMatchObject({
+        label: 'First name'
+      });
+    });
+
     it('works with allowedValues', () => {
       expect(bridgeI.getProps('id')).toEqual({
         label: 'Post ID',
@@ -246,7 +266,7 @@ describe('GraphQLBridge', () => {
 
     it('works with custom component', () => {
       expect(bridgeI.getProps('author')).toEqual({
-        label: '',
+        label: 'Author',
         required: true,
         component: 'div'
       });
@@ -309,7 +329,7 @@ describe('GraphQLBridge', () => {
     it('works with placeholder (extra.placeholedr === undefined)', () => {
       expect(bridgeI.getProps('title', { placeholder: true })).toEqual({
         allowedValues: ['a', 'b', 'Some Title'],
-        label: '',
+        label: 'Title',
         placeholder: true,
         required: false,
         transform: expect.any(Function),
@@ -324,13 +344,13 @@ describe('GraphQLBridge', () => {
 
     it('works with Number type', () => {
       expect(bridgeI.getProps('author.decimal1')).toEqual({
-        label: '',
+        label: 'Decimal1',
         required: false,
         decimal: true
       });
 
       expect(bridgeI.getProps('author.decimal2')).toEqual({
-        label: '',
+        label: 'Decimal2',
         required: true,
         decimal: true
       });
@@ -367,7 +387,7 @@ describe('GraphQLBridge', () => {
 
     it('works with other props', () => {
       expect(bridgeI.getProps('category', { x: 1, y: 1 })).toEqual({
-        label: '',
+        label: 'Category',
         required: true,
         x: 1,
         y: 1

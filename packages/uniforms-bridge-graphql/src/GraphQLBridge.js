@@ -3,6 +3,7 @@ import invariant from 'invariant';
 
 import Bridge from 'uniforms/Bridge';
 import joinName from 'uniforms/joinName';
+import toHumanLabel from 'uniforms/toHumanLabel';
 
 const extractFromNonNull = x =>
   x && x.type instanceof graphql.GraphQLNonNull
@@ -126,6 +127,7 @@ export default class GraphQLBridge extends Bridge {
 
     const field = this.getField(nameGeneric, false);
     const fieldType = extractFromNonNull(field).type;
+    const defaultLabel = toHumanLabel(field.name) || '';
 
     const extra = {
       ...this.extras[nameGeneric],
@@ -133,7 +135,7 @@ export default class GraphQLBridge extends Bridge {
     };
 
     const ready = {
-      label: '',
+      label: defaultLabel,
       required: field.type instanceof graphql.GraphQLNonNull,
 
       ...extra,
