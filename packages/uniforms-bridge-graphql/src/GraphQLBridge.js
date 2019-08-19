@@ -1,6 +1,6 @@
 import * as graphql from 'graphql';
 import invariant from 'invariant';
-import _lowerCase from 'lodash/lowerCase';
+import lowerCase from 'lodash/lowerCase';
 
 import Bridge from 'uniforms/Bridge';
 import joinName from 'uniforms/joinName';
@@ -11,7 +11,7 @@ const extractFromNonNull = x =>
     : x;
 
 const toHumanLabel = label => {
-  const lowerCaseLabel = _lowerCase(label);
+  const lowerCaseLabel = lowerCase(label);
   const capitalizedLabel =
     lowerCaseLabel[0].toUpperCase() + lowerCaseLabel.slice(1);
   return capitalizedLabel;
