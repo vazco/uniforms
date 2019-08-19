@@ -1,14 +1,21 @@
 import * as graphql from 'graphql';
 import invariant from 'invariant';
+import _lowerCase from 'lodash/lowerCase';
 
 import Bridge from 'uniforms/Bridge';
 import joinName from 'uniforms/joinName';
-import toHumanLabel from 'uniforms/toHumanLabel';
 
 const extractFromNonNull = x =>
   x && x.type instanceof graphql.GraphQLNonNull
     ? { ...x, type: x.type.ofType }
     : x;
+
+const toHumanLabel = label => {
+  const lowerCaseLabel = _lowerCase(label);
+  const capitalizedLabel =
+    lowerCaseLabel[0].toUpperCase() + lowerCaseLabel.slice(1);
+  return capitalizedLabel;
+};
 
 export default class GraphQLBridge extends Bridge {
   constructor(schema, validator, extras = {}) {

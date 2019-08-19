@@ -238,7 +238,7 @@ describe('GraphQLBridge', () => {
       });
 
       expect(bridgeT.getProps('author.decimal1')).toMatchObject({
-        label: 'Decimal1'
+        label: 'Decimal 1'
       });
 
       expect(bridgeT.getProps('author.firstName')).toMatchObject({
@@ -344,13 +344,13 @@ describe('GraphQLBridge', () => {
 
     it('works with Number type', () => {
       expect(bridgeI.getProps('author.decimal1')).toEqual({
-        label: 'Decimal1',
+        label: 'Decimal 1',
         required: false,
         decimal: true
       });
 
       expect(bridgeI.getProps('author.decimal2')).toEqual({
-        label: 'Decimal2',
+        label: 'Decimal 2',
         required: true,
         decimal: true
       });
