@@ -90,10 +90,9 @@ const presets = {
                 throw {details};
             }
         }, {
-            city:   {label: 'City'},
-            state:  {label: 'State'},
-            street: {label: 'Street'},
-            zip:    {label: 'Zip'}
+            // additional props
+            // set custom label for 'zip' field, other fields will derive their labels from schema
+            zip:    {label: 'Zip code'}
         })
     `,
 

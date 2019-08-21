@@ -226,23 +226,57 @@ describe('GraphQLBridge', () => {
   });
 
   describe('#getProps', () => {
-    it('uses graphql schema to derive default labels', () => {
-      expect(bridgeT.getProps('title')).toMatchObject({
-        label: 'Title'
+    describe('labels are derived properly', () => {
+      describe('when props.label is undefined or true', () => {
+        describe('and no extra data is passed', () => {
+          it('should use AST field name', () => {
+            expect(bridgeT.getProps('title')).toMatchObject({
+              label: 'Title'
+            });
+            expect(bridgeT.getProps('author.decimal1')).toMatchObject({
+              label: 'Decimal 1'
+            });
+            expect(bridgeT.getProps('author.firstName')).toMatchObject({
+              label: 'First name'
+            });
+          });
+        });
+
+        describe('and extra data is present', () => {
+          it('should use extra data', () => {
+            expect(bridgeT.getProps('id')).toMatchObject({
+              label: 'Post ID'
+            });
+            expect(bridgeT.getProps('id', { label: true })).toMatchObject({
+              label: 'Post ID'
+            });
+          });
+        });
       });
 
-      expect(
-        bridgeT.getProps('title', { label: 'Overriden title' })
-      ).toMatchObject({
-        label: 'Overriden title'
+      describe('when props.label is a string', () => {
+        it('should use label from props', () => {
+          expect(
+            bridgeT.getProps('title', { label: 'Overriden title' })
+          ).toMatchObject({
+            label: 'Overriden title'
+          });
+          expect(bridgeT.getProps('title', { label: '' })).toMatchObject({
+            label: ''
+          });
+        });
       });
 
-      expect(bridgeT.getProps('author.decimal1')).toMatchObject({
-        label: 'Decimal 1'
-      });
+      describe('when props.label is false or null (unset)', () => {
+        it('should display empty label', () => {
+          expect(bridgeT.getProps('id', { label: false })).toMatchObject({
+            label: ''
+          });
 
-      expect(bridgeT.getProps('author.firstName')).toMatchObject({
-        label: 'First name'
+          expect(bridgeT.getProps('id', { label: null })).toMatchObject({
+            label: ''
+          });
+        });
       });
     });
 

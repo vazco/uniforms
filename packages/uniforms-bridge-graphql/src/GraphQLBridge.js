@@ -129,17 +129,23 @@ export default class GraphQLBridge extends Bridge {
   }
 
   // eslint-disable-next-line complexity
-  getProps(nameNormal, props = {}) {
+  getProps(nameNormal, { label: propsLabel, ...props } = {}) {
     const nameGeneric = nameNormal.replace(/\.\d+/g, '.$');
 
     const field = this.getField(nameGeneric, false);
     const fieldType = extractFromNonNull(field).type;
-    const defaultLabel = toHumanLabel(field.name) || '';
 
-    const extra = {
+    const { label: extraLabel, ...extra } = {
       ...this.extras[nameGeneric],
       ...this.extras[nameNormal]
     };
+
+    const defaultLabel =
+      typeof propsLabel === 'string'
+        ? propsLabel
+        : propsLabel !== false && propsLabel !== null
+        ? extraLabel || toHumanLabel(field.name)
+        : '';
 
     const ready = {
       label: defaultLabel,
@@ -148,12 +154,6 @@ export default class GraphQLBridge extends Bridge {
       ...extra,
       ...props
     };
-
-    if (props.label === true && extra.label) {
-      ready.label = extra.label;
-    } else if (props.label !== undefined && !props.label) {
-      ready.label = '';
-    }
 
     if (props.placeholder === true && extra.placeholder) {
       ready.placeholder = extra.placeholder;
