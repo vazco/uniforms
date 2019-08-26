@@ -11,10 +11,8 @@ const extractFromNonNull = x =>
     : x;
 
 const toHumanLabel = label => {
-  const lowerCaseLabel = lowerCase(label);
-  const capitalizedLabel =
-    lowerCaseLabel[0].toUpperCase() + lowerCaseLabel.slice(1);
-  return capitalizedLabel;
+  label = lowerCase(label);
+  return label[0].toUpperCase() + label.slice(1);
 };
 
 export default class GraphQLBridge extends Bridge {
@@ -129,30 +127,31 @@ export default class GraphQLBridge extends Bridge {
   }
 
   // eslint-disable-next-line complexity
-  getProps(nameNormal, { label: propsLabel, ...props } = {}) {
+  getProps(nameNormal, props = {}) {
     const nameGeneric = nameNormal.replace(/\.\d+/g, '.$');
 
     const field = this.getField(nameGeneric, false);
     const fieldType = extractFromNonNull(field).type;
 
-    const { label: extraLabel, ...extra } = {
+    const extra = {
       ...this.extras[nameGeneric],
       ...this.extras[nameNormal]
     };
 
-    const defaultLabel =
-      typeof propsLabel === 'string'
-        ? propsLabel
-        : propsLabel !== false && propsLabel !== null
-        ? extraLabel || toHumanLabel(field.name)
-        : '';
+    const extract = (x, y) =>
+      x === false || x === null ? '' : x !== true && x !== undefined ? x : y;
+    const label = extract(
+      props.label,
+      extract(extra.label, toHumanLabel(field.name))
+    );
 
     const ready = {
-      label: defaultLabel,
       required: field.type instanceof graphql.GraphQLNonNull,
 
       ...extra,
-      ...props
+      ...props, // TODO: GraphQLBridge.getProps shouldn't merge props.
+
+      label
     };
 
     if (props.placeholder === true && extra.placeholder) {
