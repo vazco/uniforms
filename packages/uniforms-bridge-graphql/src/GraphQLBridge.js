@@ -1,5 +1,6 @@
 import * as graphql from 'graphql';
 import invariant from 'invariant';
+import lowerCase from 'lodash/lowerCase';
 
 import Bridge from 'uniforms/Bridge';
 import joinName from 'uniforms/joinName';
@@ -8,6 +9,11 @@ const extractFromNonNull = x =>
   x && x.type instanceof graphql.GraphQLNonNull
     ? { ...x, type: x.type.ofType }
     : x;
+
+const toHumanLabel = label => {
+  label = lowerCase(label);
+  return label[0].toUpperCase() + label.slice(1);
+};
 
 export default class GraphQLBridge extends Bridge {
   constructor(schema, validator, extras = {}) {
@@ -132,19 +138,21 @@ export default class GraphQLBridge extends Bridge {
       ...this.extras[nameNormal]
     };
 
+    const extract = (x, y) =>
+      x === false || x === null ? '' : x !== true && x !== undefined ? x : y;
+    const label = extract(
+      props.label,
+      extract(extra.label, toHumanLabel(field.name))
+    );
+
     const ready = {
-      label: '',
       required: field.type instanceof graphql.GraphQLNonNull,
 
       ...extra,
-      ...props
-    };
+      ...props, // TODO: GraphQLBridge.getProps shouldn't merge props.
 
-    if (props.label === true && extra.label) {
-      ready.label = extra.label;
-    } else if (props.label !== undefined && !props.label) {
-      ready.label = '';
-    }
+      label
+    };
 
     if (props.placeholder === true && extra.placeholder) {
       ready.placeholder = extra.placeholder;

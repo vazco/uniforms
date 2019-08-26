@@ -90,10 +90,7 @@ const presets = {
                 throw {details};
             }
         }, {
-            city:   {label: 'City'},
-            state:  {label: 'State'},
-            street: {label: 'Street'},
-            zip:    {label: 'Zip'}
+            zip: {label: 'Zip code'}
         })
     `,
 
