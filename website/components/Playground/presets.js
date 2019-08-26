@@ -90,9 +90,7 @@ const presets = {
                 throw {details};
             }
         }, {
-            // additional props
-            // set custom label for 'zip' field, other fields will derive their labels from schema
-            zip:    {label: 'Zip code'}
+            zip: {label: 'Zip code'}
         })
     `,
 
