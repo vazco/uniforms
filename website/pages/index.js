@@ -2,12 +2,12 @@ import React from 'react';
 
 import Layout from '@theme/Layout';
 
-import Home from '../components/Home';
+import LandingPage from '../components/LandingPage';
 
 export default function HomePage() {
   return (
     <Layout>
-      <Home />
+      <LandingPage />
     </Layout>
   );
 }
