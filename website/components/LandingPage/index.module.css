@@ -1,0 +1,108 @@
+@import 'colors.css';
+@import 'fonts.css';
+
+/* [class*='col'] {
+  border: 1px solid red;
+} */
+
+.call-to-action {
+  --ifm-button-background-color: var(--periwinkle) !important;
+  --ifm-button-border-color: var(--periwinkle) !important;
+  --ifm-color-primary-darker: var(--bright-cyan) !important;
+  margin-top: 4em;
+}
+
+.theme-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 50px;
+}
+
+.theme-icon:last-child {
+  margin-right: 0;
+}
+
+.header {
+  background-color: var(--dark-blue-grey);
+  padding: 62px 0;
+}
+
+.text {
+  font-family: Poppins, sans-serif;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+.text-big {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.text-huge {
+  font-size: 2.5em;
+  font-weight: bold;
+  line-height: 1.25;
+}
+
+.supported {
+  margin-top: 3em;
+
+  opacity: 0.6;
+  font-family: Muli;
+  font-size: 0.85em;
+  font-weight: 600;
+  line-height: 2;
+  color: var(--white);
+}
+
+.title {
+  display: block;
+  color: var(--white);
+}
+
+.description {
+  display: block;
+  margin: 24px 0;
+  color: var(--bright-cyan);
+}
+
+@supports (background-clip: text) {
+  .description {
+    background-image: linear-gradient(
+      81deg,
+      var(--periwinkle),
+      var(--bright-cyan) 50%,
+      var(--sea-green)
+    );
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.bullets {
+  padding: 0;
+  opacity: 0.7;
+  font-family: Muli;
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 1.33;
+  color: var(--white);
+}
+
+.bullets li {
+  list-style: none;
+  position: relative;
+  padding-left: 1em;
+}
+
+.bullets li::before {
+  content: '';
+  position: absolute;
+  top: 0.5em;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  background-color: var(--periwinkle);
+}
