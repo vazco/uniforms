@@ -1,3 +1,7 @@
+## Next
+
+- **Added:** Default labels in `GraphQLSchemaBridge`. [\#577](https://github.com/vazco/uniforms/issues/577)
+
 ## [v2.3.1](https://github.com/vazco/uniforms/tree/v2.3.1) (2019-08-14)
 
 - **Fixed:** Handling of `default` attribute in `JSONSchemaBridge`. [\#569](https://github.com/vazco/uniforms/issues/569)
