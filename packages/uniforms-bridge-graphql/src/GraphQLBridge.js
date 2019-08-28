@@ -1,19 +1,22 @@
 import * as graphql from 'graphql';
 import invariant from 'invariant';
 import lowerCase from 'lodash/lowerCase';
+import upperFirst from 'lodash/upperFirst';
 
 import Bridge from 'uniforms/Bridge';
 import joinName from 'uniforms/joinName';
+
+const extractValue = (...xs) =>
+  xs.reduce((x, y) =>
+    x === false || x === null ? '' : x !== true && x !== undefined ? x : y
+  );
 
 const extractFromNonNull = x =>
   x && x.type instanceof graphql.GraphQLNonNull
     ? { ...x, type: x.type.ofType }
     : x;
 
-const toHumanLabel = label => {
-  label = lowerCase(label);
-  return label[0].toUpperCase() + label.slice(1);
-};
+const toHumanLabel = label => upperFirst(lowerCase(label));
 
 export default class GraphQLBridge extends Bridge {
   constructor(schema, validator, extras = {}) {
@@ -133,32 +136,11 @@ export default class GraphQLBridge extends Bridge {
     const field = this.getField(nameGeneric, false);
     const fieldType = extractFromNonNull(field).type;
 
-    const extra = {
+    const ready = {
+      required: field.type instanceof graphql.GraphQLNonNull,
       ...this.extras[nameGeneric],
       ...this.extras[nameNormal]
     };
-
-    const extract = (x, y) =>
-      x === false || x === null ? '' : x !== true && x !== undefined ? x : y;
-    const label = extract(
-      props.label,
-      extract(extra.label, toHumanLabel(field.name))
-    );
-
-    const ready = {
-      required: field.type instanceof graphql.GraphQLNonNull,
-
-      ...extra,
-      ...props, // TODO: GraphQLBridge.getProps shouldn't merge props.
-
-      label
-    };
-
-    if (props.placeholder === true && extra.placeholder) {
-      ready.placeholder = extra.placeholder;
-    } else if (props.placeholder === false || props.placeholder === null) {
-      ready.placeholder = '';
-    }
 
     if (
       fieldType instanceof graphql.GraphQLScalarType &&
@@ -167,14 +149,17 @@ export default class GraphQLBridge extends Bridge {
       ready.decimal = true;
     }
 
-    if (ready.options) {
-      if (!Array.isArray(ready.options)) {
-        ready.transform = value => ready.options[value];
-        ready.allowedValues = Object.keys(ready.options);
+    ready.label = extractValue(ready.label, toHumanLabel(field.name));
+
+    const options = props.options || ready.options;
+    if (options) {
+      if (!Array.isArray(options)) {
+        ready.transform = value => options[value];
+        ready.allowedValues = Object.keys(options);
       } else {
         ready.transform = value =>
-          ready.options.find(option => option.value === value).label;
-        ready.allowedValues = ready.options.map(option => option.value);
+          options.find(option => option.value === value).label;
+        ready.allowedValues = options.map(option => option.value);
       }
     }
 

@@ -1,6 +1,8 @@
 ## Next
 
 - **Added:** Default labels in `GraphQLSchemaBridge`. [\#577](https://github.com/vazco/uniforms/issues/577)
+- **Added:** Handling of `placeholder` and `label` in `JSONSchemaBridge`. [\#586](https://github.com/vazco/uniforms/issues/586)
+- **Fixed:** Unified logic of `getProps` between all bridges. Right now it has a clear semantic: `bridge.getProps(fieldName[, props])` should resolve all props that the schema defines, based on the field definition and given props (if applicable). Especially, it should **not** merge in given `props` nor resolve the final `label` or `placeholder` - `BaseField` handles that. It'll affect you only if you've called `getProps` directly. It also got rid of some additional `undefined` props in `JSONSchemaBridge`.
 
 ## [v2.3.1](https://github.com/vazco/uniforms/tree/v2.3.1) (2019-08-14)
 

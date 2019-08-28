@@ -1,6 +1,9 @@
 import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
 import invariant from 'invariant';
+import lowerCase from 'lodash/lowerCase';
+import omit from 'lodash/omit';
+import upperFirst from 'lodash/upperFirst';
 
 import Bridge from 'uniforms/Bridge';
 import joinName from 'uniforms/joinName';
@@ -37,6 +40,13 @@ const distinctSchema = schema => {
 
   return schema;
 };
+
+const extractValue = (...xs) =>
+  xs.reduce((x, y) =>
+    x === false || x === null ? '' : x !== true && x !== undefined ? x : y
+  );
+
+const toHumanLabel = label => upperFirst(lowerCase(label));
 
 export default class JSONSchemaBridge extends Bridge {
   constructor(schema, validator) {
@@ -198,54 +208,35 @@ export default class JSONSchemaBridge extends Bridge {
     return undefined;
   }
 
-  getProps(name, { label = true, options: opts, placeholder, ...props } = {}) {
-    const {
-      title: _title,
-      enum: _enum,
-      type: _type,
-      options: _options,
-      uniforms
-    } = this.getField(name);
-    const {
-      enum: allowedValues = _enum,
-      options = _options,
-      type: fieldType = _type,
-      isRequired
-    } = this._compiledSchema[name];
+  getProps(name, props = {}) {
+    const { uniforms, ...field } = this.getField(name);
+    const { enum: enum_, isRequired, title, type, ...ready } = omit(
+      { ...field, ...uniforms, ...this._compiledSchema[name] },
+      ['default', 'format']
+    );
 
-    const [fieldName] = joinName(null, name)
-      .slice(-1)
-      .map(str => str.replace(/([A-Z])/g, ' $1'));
+    if (enum_) ready.allowedValues = enum_;
+    if (type === 'number') ready.decimal = true;
+    if (ready.required === undefined) ready.required = isRequired;
+    ready.label = extractValue(
+      ready.label,
+      title,
+      toHumanLabel(joinName(null, name).slice(-1)[0])
+    );
 
-    const fieldNameCapitalized =
-      fieldName.charAt(0).toUpperCase() + fieldName.slice(1).toLowerCase();
-    const labelContent = _title ? _title : fieldNameCapitalized;
-
-    const ready = {
-      allowedValues,
-      ...(fieldType === 'number' ? { decimal: true } : {}),
-      options: opts || options,
-      label: label === true ? labelContent : label || '',
-      placeholder: placeholder === true ? labelContent : placeholder,
-      required: isRequired
-    };
-
-    if (ready.options) {
-      if (!Array.isArray(ready.options)) {
-        ready.transform = value => ready.options[value];
-        ready.allowedValues = Object.keys(ready.options);
+    const options = props.options || ready.options;
+    if (options) {
+      if (!Array.isArray(options)) {
+        ready.transform = value => options[value];
+        ready.allowedValues = Object.keys(options);
       } else {
         ready.transform = value =>
-          ready.options.find(option => option.value === value).label;
-        ready.allowedValues = ready.options.map(option => option.value);
+          options.find(option => option.value === value).label;
+        ready.allowedValues = options.map(option => option.value);
       }
     }
 
-    return {
-      ...uniforms,
-      ...ready,
-      ...props
-    };
+    return ready;
   }
 
   getSubfields(name) {

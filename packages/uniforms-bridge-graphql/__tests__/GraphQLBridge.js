@@ -50,6 +50,7 @@ describe('GraphQLBridge', () => {
     },
     title: {
       initialValue: 'Some Title',
+      label: false,
       options: [
         { label: 1, value: 'a' },
         { label: 2, value: 'b' },
@@ -230,25 +231,43 @@ describe('GraphQLBridge', () => {
       describe('when props.label is undefined or true', () => {
         describe('and no extra data is passed', () => {
           it('should use AST field name', () => {
-            expect(bridgeT.getProps('title')).toMatchObject({
-              label: 'Title'
+            expect(bridgeT.getProps('title')).toEqual({
+              allowedValues: ['a', 'b', 'Some Title'],
+              label: '',
+              required: false,
+              transform: expect.any(Function),
+              options: [
+                { label: 1, value: 'a' },
+                { label: 2, value: 'b' },
+                { label: 3, value: 'Some Title' }
+              ],
+              initialValue: 'Some Title'
             });
-            expect(bridgeT.getProps('author.decimal1')).toMatchObject({
-              label: 'Decimal 1'
+            expect(bridgeT.getProps('author.decimal1')).toEqual({
+              decimal: true,
+              label: 'Decimal 1',
+              required: false
             });
-            expect(bridgeT.getProps('author.firstName')).toMatchObject({
-              label: 'First name'
+            expect(bridgeT.getProps('author.firstName')).toEqual({
+              label: 'First name',
+              required: false
             });
           });
         });
 
         describe('and extra data is present', () => {
           it('should use extra data', () => {
-            expect(bridgeT.getProps('id')).toMatchObject({
-              label: 'Post ID'
+            expect(bridgeT.getProps('id')).toEqual({
+              allowedValues: [1, 2, 3],
+              label: 'Post ID',
+              placeholder: 'Post ID',
+              required: true
             });
-            expect(bridgeT.getProps('id', { label: true })).toMatchObject({
-              label: 'Post ID'
+            expect(bridgeT.getProps('id', { label: true })).toEqual({
+              allowedValues: [1, 2, 3],
+              label: 'Post ID',
+              placeholder: 'Post ID',
+              required: true
             });
           });
         });
@@ -256,25 +275,47 @@ describe('GraphQLBridge', () => {
 
       describe('when props.label is a string', () => {
         it('should use label from props', () => {
-          expect(
-            bridgeT.getProps('title', { label: 'Overriden title' })
-          ).toMatchObject({
-            label: 'Overriden title'
+          expect(bridgeT.getProps('title', { label: 'Overriden' })).toEqual({
+            allowedValues: ['a', 'b', 'Some Title'],
+            label: '',
+            required: false,
+            transform: expect.any(Function),
+            options: [
+              { label: 1, value: 'a' },
+              { label: 2, value: 'b' },
+              { label: 3, value: 'Some Title' }
+            ],
+            initialValue: 'Some Title'
           });
-          expect(bridgeT.getProps('title', { label: '' })).toMatchObject({
-            label: ''
+          expect(bridgeT.getProps('title', { label: '' })).toEqual({
+            allowedValues: ['a', 'b', 'Some Title'],
+            label: '',
+            required: false,
+            transform: expect.any(Function),
+            options: [
+              { label: 1, value: 'a' },
+              { label: 2, value: 'b' },
+              { label: 3, value: 'Some Title' }
+            ],
+            initialValue: 'Some Title'
           });
         });
       });
 
       describe('when props.label is false or null (unset)', () => {
         it('should display empty label', () => {
-          expect(bridgeT.getProps('id', { label: false })).toMatchObject({
-            label: ''
+          expect(bridgeT.getProps('id', { label: false })).toEqual({
+            allowedValues: [1, 2, 3],
+            label: 'Post ID',
+            placeholder: 'Post ID',
+            required: true
           });
 
-          expect(bridgeT.getProps('id', { label: null })).toMatchObject({
-            label: ''
+          expect(bridgeT.getProps('id', { label: null })).toEqual({
+            allowedValues: [1, 2, 3],
+            label: 'Post ID',
+            placeholder: 'Post ID',
+            required: true
           });
         });
       });
@@ -294,7 +335,7 @@ describe('GraphQLBridge', () => {
         label: 'Post ID',
         placeholder: 'Post ID',
         required: true,
-        allowedValues: [1]
+        allowedValues: [1, 2, 3]
       });
     });
 
@@ -308,7 +349,7 @@ describe('GraphQLBridge', () => {
 
     it('works with label (custom)', () => {
       expect(bridgeI.getProps('id', { label: 'ID' })).toEqual({
-        label: 'ID',
+        label: 'Post ID',
         placeholder: 'Post ID',
         required: true,
         allowedValues: [1, 2, 3]
@@ -326,7 +367,7 @@ describe('GraphQLBridge', () => {
 
     it('works with label (falsy)', () => {
       expect(bridgeI.getProps('id', { label: null })).toEqual({
-        label: '',
+        label: 'Post ID',
         placeholder: 'Post ID',
         required: true,
         allowedValues: [1, 2, 3]
@@ -354,7 +395,7 @@ describe('GraphQLBridge', () => {
     it('works with placeholder (falsy)', () => {
       expect(bridgeI.getProps('id', { placeholder: null })).toEqual({
         label: 'Post ID',
-        placeholder: '',
+        placeholder: 'Post ID',
         required: true,
         allowedValues: [1, 2, 3]
       });
@@ -363,8 +404,7 @@ describe('GraphQLBridge', () => {
     it('works with placeholder (extra.placeholedr === undefined)', () => {
       expect(bridgeI.getProps('title', { placeholder: true })).toEqual({
         allowedValues: ['a', 'b', 'Some Title'],
-        label: 'Title',
-        placeholder: true,
+        label: '',
         required: false,
         transform: expect.any(Function),
         options: [
@@ -422,9 +462,7 @@ describe('GraphQLBridge', () => {
     it('works with other props', () => {
       expect(bridgeI.getProps('category', { x: 1, y: 1 })).toEqual({
         label: 'Category',
-        required: true,
-        x: 1,
-        y: 1
+        required: true
       });
     });
   });

@@ -7,7 +7,7 @@ describe('JSONSchemaBridge', () => {
       address: {
         type: 'object',
         properties: {
-          city: { type: 'string' },
+          city: { type: 'string', uniforms: { label: false, required: false } },
           state: {
             type: 'string',
             options: [
@@ -238,7 +238,7 @@ describe('JSONSchemaBridge', () => {
     it('returns correct definition (flat with $ref)', () => {
       expect(bridge.getField('billingAddress')).toEqual({
         properties: expect.objectContaining({
-          city: { type: 'string' },
+          city: { type: 'string', uniforms: { label: false, required: false } },
           state: {
             type: 'string',
             options: [
@@ -347,7 +347,7 @@ describe('JSONSchemaBridge', () => {
       expect(
         bridge.getProps('shippingAddress.type', { allowedValues: [1] })
       ).toEqual({
-        allowedValues: [1],
+        allowedValues: ['residential', 'business'],
         label: 'Type',
         required: true
       });
@@ -362,10 +362,8 @@ describe('JSONSchemaBridge', () => {
     });
 
     it('works with label (custom)', () => {
-      expect(
-        bridge.getProps('dateOfBirth', { label: 'Date of death' })
-      ).toEqual({
-        label: 'Date of death',
+      expect(bridge.getProps('dateOfBirth', { label: 'Death' })).toEqual({
+        label: 'Date of birth',
         required: true
       });
     });
@@ -388,40 +386,34 @@ describe('JSONSchemaBridge', () => {
     });
 
     it('works with label (falsy)', () => {
-      expect(bridge.getProps('dateOfBirth', { label: null })).toEqual({
+      expect(bridge.getProps('billingAddress.city')).toEqual({
         label: '',
+        required: false
+      });
+
+      expect(bridge.getProps('dateOfBirth', { label: null })).toEqual({
+        label: 'Date of birth',
         required: true
       });
     });
 
     it('works with placeholder (custom)', () => {
-      expect(
-        bridge.getProps('email.work', { placeholder: 'Work email' })
-      ).toEqual({
-        allowedValues: undefined,
+      expect(bridge.getProps('email.work', { placeholder: 'Email' })).toEqual({
         label: 'Work',
-        options: undefined,
-        placeholder: 'Work email',
         required: true
       });
     });
 
     it('works with placeholder (true)', () => {
       expect(bridge.getProps('email.work', { placeholder: true })).toEqual({
-        allowedValues: undefined,
         label: 'Work',
-        options: undefined,
-        placeholder: 'Work',
         required: true
       });
     });
 
     it('works with placeholder (falsy)', () => {
       expect(bridge.getProps('email.work', { placeholder: null })).toEqual({
-        allowedValues: undefined,
         label: 'Work',
-        options: undefined,
-        placeholder: null,
         required: true
       });
     });
@@ -430,20 +422,14 @@ describe('JSONSchemaBridge', () => {
       expect(
         bridge.getProps('email.work', { label: null, placeholder: true })
       ).toEqual({
-        allowedValues: undefined,
-        label: '',
-        options: undefined,
-        placeholder: 'Work',
+        label: 'Work',
         required: true
       });
 
       expect(
         bridge.getProps('email.work', { label: false, placeholder: true })
       ).toEqual({
-        allowedValues: undefined,
-        label: '',
-        options: undefined,
-        placeholder: 'Work',
+        label: 'Work',
         required: true
       });
     });
@@ -493,9 +479,7 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getProps('personalData.firstName', { x: 1, y: 1 })).toEqual(
         {
           label: 'First name',
-          required: false,
-          x: 1,
-          y: 1
+          required: false
         }
       );
     });
