@@ -4,4 +4,10 @@
   --sea-green: #42ffac;
   --white: #ffffff;
   --dark-blue-grey: #211b50;
+  --dusk-blue: #412a94;
+  --dodger-blue: #3fbbfe;
+  --pale-grey: #e8e6f5;
+
+  --uni-hero-bgcolor: var(--dark-blue-grey);
+  --uni-heading-color: var(--dusk-blue);
 }

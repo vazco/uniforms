@@ -1,11 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import Section from '../common/Section';
 import styles from '../index.module.css';
 
 export default function Header() {
   return (
-    <div className={classNames('row', styles.header)}>
+    <Section className={styles.header}>
       <div className="col col--4 col--offset-2">
         <span
           className={classNames(styles.text, styles['text-big'], styles.title)}
@@ -52,10 +53,10 @@ export default function Header() {
       <div className="col col--4">
         <img
           src="assets/screens.png"
-          srcset="assets/screens@2x.png 2x, assets/screens@3x.png 3x"
-          class="screens"
+          srcSet="assets/screens@2x.png 2x, assets/screens@3x.png 3x"
+          className="screens"
         />
       </div>
-    </div>
+    </Section>
   );
 }

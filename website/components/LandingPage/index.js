@@ -1,15 +1,15 @@
 import React from 'react';
 
 import Header from './Header';
+import OpenSource from './OpenSource';
+import WhyUs from './WhyUs';
+import Gitter from './Gitter';
+import WhoUses from './WhoUses';
+import Testimonials from './Testimonials';
 // import Comparison from './Comparison';
 // import ExampleFullyCustomizable from './ExampleFullyCustomizable';
 // import ExampleSimpleYetPowerful from './ExampleSimpleYetPowerful';
 // import Footer from './Footer';
-// import Gitter from './Gitter';
-// import Statistics from './Statistics';
-// import Testimonials from './Testimonials';
-// import WhoUses from './WhoUses';
-// import WhyUs from './WhyUs';
 
 import './index.module.css';
 
@@ -17,13 +17,13 @@ export default function LandingPage() {
   return (
     <>
       <Header />
-      {/*<Statistics />
+      <OpenSource />
       <WhyUs />
-      <ExampleSimpleYetPowerful />
-      <ExampleFullyCustomizable />
       <Gitter />
       <WhoUses />
       <Testimonials />
+      {/*<ExampleSimpleYetPowerful />
+      <ExampleFullyCustomizable />
       <Comparison />
       <Footer /> */}
     </>
