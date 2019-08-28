@@ -1,4 +1,4 @@
-## Next
+## [v2.4.0](https://github.com/vazco/uniforms/tree/v2.4.0) (2019-08-28)
 
 - **Added:** Default labels in `GraphQLSchemaBridge`. [\#577](https://github.com/vazco/uniforms/issues/577)
 - **Added:** Handling of `placeholder` and `label` in `JSONSchemaBridge`. [\#586](https://github.com/vazco/uniforms/issues/586)
