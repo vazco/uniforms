@@ -5,6 +5,28 @@
   border: 1px solid red;
 } */
 
+.grid3x3 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+.item3x3 {
+  width: 33%;
+  padding: 3em 0;
+}
+
+.company {
+  height: 3em;
+  filter: grayscale(100%);
+  transition: 0.2s filter;
+}
+
+.company:hover {
+  filter: none;
+}
+
 .border-dashed {
   border: 2px dashed var(--pale-grey);
 }
