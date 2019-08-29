@@ -9,7 +9,7 @@ import Gitter from './Gitter';
 import WhoUses from './WhoUses';
 import Testimonials from './Testimonials';
 import Comparison from './Comparison';
-// import Footer from './Footer';
+import Footer from './Footer';
 
 import styles from './index.module.css';
 
@@ -25,7 +25,7 @@ export default function LandingPage() {
       <WhoUses />
       <Testimonials />
       <Comparison />
-      {/*<Footer /> */}
+      <Footer />
     </div>
   );
 }
