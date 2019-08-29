@@ -6,8 +6,14 @@
   --dark-blue-grey: #211b50;
   --dusk-blue: #412a94;
   --dodger-blue: #3fbbfe;
+  --dodger-blue-10: rgba(63, 187, 254, 0.1);
   --pale-grey: #e8e6f5;
+  --greenblue: #1fd898;
+  --greenblue-10: rgba(31, 216, 152, 0.1);
 
   --uni-hero-bgcolor: var(--dark-blue-grey);
   --uni-heading-color: var(--dusk-blue);
+
+  --uni-border-color: var(--dodger-blue);
+  --uni-box-shadow-color: var(--dodger-blue-10);
 }

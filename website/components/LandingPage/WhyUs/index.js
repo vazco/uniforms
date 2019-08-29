@@ -13,7 +13,9 @@ export default function WhyUs() {
       <div className="col col--3 col--offset-2">
         <Subtitle>Why choose us</Subtitle>
         <Heading className={styles['heading-white']}>
-          Easy and ready to implement solution
+          Easy and ready
+          <br />
+          to implement solution
         </Heading>
         <p className={styles.paragraph}>
           A set of open-source libraries capable of instantly generating any

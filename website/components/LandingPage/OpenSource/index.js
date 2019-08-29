@@ -34,7 +34,11 @@ export default function OpenSource() {
       <p className={classNames(styles.centered, styles['always-open-source'])}>
         Always Open Source.
       </p>
-      <Heading centered>Trusted by GitHub community</Heading>
+      <Heading centered>
+        Trusted by GitHub
+        <br />
+        community
+      </Heading>
       <div className="row">
         <Badge
           text="Stars"

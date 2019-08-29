@@ -1,9 +1,69 @@
 @import 'colors.css';
 @import 'fonts.css';
 
+ul {
+  padding: 0;
+  opacity: 0.7;
+  font-family: Muli;
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 1.33;
+}
+
+ul li {
+  list-style: none;
+  position: relative;
+  padding-left: 1em;
+  margin-bottom: 1em;
+}
+
+ul li::before {
+  content: '';
+  position: absolute;
+  top: 0.5em;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  background-color: #000;
+}
+
 /* [class*='col'] {
   border: 1px solid red;
 } */
+
+@media (min-width: 996px) {
+  .simple-yet-powerful-text {
+    margin-left: -5em;
+    margin-top: -8em;
+  }
+
+  .fully-customizable-text {
+    margin-right: -5em;
+    margin-top: -8em;
+  }
+}
+
+.example-border {
+  box-shadow: 0 6px 58px 0 var(--uni-box-shadow-color);
+  border: solid 1px var(--uni-border-color);
+}
+
+.example {
+  position: relative;
+  background-color: var(--white);
+  padding: 4em;
+  min-width: 740px;
+}
+
+.solid-border-box {
+  border: solid 6px var(--uni-border-color);
+  padding: 4em;
+}
+
+.border-green {
+  --uni-border-color: var(--greenblue);
+  --uni-box-shadow-color: var(--greenblue-10);
+}
 
 .grid3x3 {
   display: flex;
@@ -128,12 +188,11 @@
   font-weight: bold;
   line-height: 1.31;
   color: var(--uni-heading-color);
-  margin-bottom: 4em;
+  margin-bottom: 2em;
 }
 
 .heading-white {
   --uni-heading-color: var(--white);
-  margin-bottom: 2em;
 }
 
 .always-open-source {
@@ -280,27 +339,13 @@
 }
 
 .bullets {
-  padding: 0;
-  opacity: 0.7;
-  font-family: Muli;
-  font-size: 1em;
-  font-weight: 600;
-  line-height: 1.33;
   color: var(--white);
 }
 
 .bullets li {
-  list-style: none;
-  position: relative;
-  padding-left: 1em;
+  margin-bottom: 0;
 }
 
 .bullets li::before {
-  content: '';
-  position: absolute;
-  top: 0.5em;
-  left: 0;
-  width: 4px;
-  height: 4px;
   background-color: var(--periwinkle);
 }
