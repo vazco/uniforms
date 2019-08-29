@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 import Section from '../common/Section';
+import Button from '../common/Button';
 import styles from '../index.module.css';
 
 export default function Header() {
@@ -41,14 +42,7 @@ export default function Header() {
             )
           )}
         </div>
-        <button
-          className={classNames(
-            'button button--lg button--primary',
-            styles['call-to-action']
-          )}
-        >
-          Download on GitHub
-        </button>
+        <Button>Download on GitHub</Button>
       </div>
       <div className="col col--4">
         <img

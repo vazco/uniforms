@@ -11,10 +11,10 @@ import styles from '../index.module.css';
 
 export default function ExampleSimpleYetPowerful() {
   return (
-    <Section style={{ marginTop: '8em' }}>
+    <Section className={styles.example}>
       <div className="col col--5 col--offset-2">
         <div
-          className={classNames(styles['example-border'], styles['example'])}
+          className={classNames(styles['preview-border'], styles['preview'])}
         >
           <ExampleCustomizer
             code={theme =>

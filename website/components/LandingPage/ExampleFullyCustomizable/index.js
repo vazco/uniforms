@@ -11,7 +11,7 @@ import styles from '../index.module.css';
 
 export default function ExampleFullyCustomizable() {
   return (
-    <Section>
+    <Section className={styles.example}>
       <div className="col col--3 col--offset-2">
         <div
           className={classNames(
@@ -39,9 +39,9 @@ export default function ExampleFullyCustomizable() {
       <div className="col col--5">
         <div
           className={classNames(
-            styles['example-border'],
+            styles['preview-border'],
             styles['border-green'],
-            styles['example']
+            styles['preview']
           )}
         >
           <ExampleCustomizer

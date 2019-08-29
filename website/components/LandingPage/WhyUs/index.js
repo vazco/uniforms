@@ -9,8 +9,13 @@ import styles from '../index.module.css';
 
 export default function WhyUs() {
   return (
-    <Section className={styles.whyus}>
-      <div className="col col--3 col--offset-2">
+    <Section className={classNames(styles.whyus, styles.fluid)}>
+      <div
+        className={classNames(
+          'col col--3 col--offset-2',
+          styles['section-content']
+        )}
+      >
         <Subtitle>Why choose us</Subtitle>
         <Heading className={styles['heading-white']}>
           Easy and ready
@@ -29,7 +34,13 @@ export default function WhyUs() {
           development experience. Keeps your code simple.
         </p>
       </div>
-      <div className={classNames('col', styles['section-bgwhite'])}>
+      <div
+        className={classNames(
+          'col',
+          styles['section-content'],
+          styles['section-bgwhite']
+        )}
+      >
         <div className="row">
           <div className="col col--5">
             <Oval size="100px">

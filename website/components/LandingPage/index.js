@@ -8,14 +8,14 @@ import ExampleFullyCustomizable from './ExampleFullyCustomizable';
 import Gitter from './Gitter';
 import WhoUses from './WhoUses';
 import Testimonials from './Testimonials';
-// import Comparison from './Comparison';
+import Comparison from './Comparison';
 // import Footer from './Footer';
 
-import './index.module.css';
+import styles from './index.module.css';
 
 export default function LandingPage() {
   return (
-    <>
+    <div className={styles.landing}>
       <Header />
       <OpenSource />
       <WhyUs />
@@ -24,8 +24,8 @@ export default function LandingPage() {
       <Gitter />
       <WhoUses />
       <Testimonials />
-      {/*<Comparison />
-      <Footer /> */}
-    </>
+      <Comparison />
+      {/*<Footer /> */}
+    </div>
   );
 }
