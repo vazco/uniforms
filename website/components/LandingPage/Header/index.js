@@ -3,7 +3,75 @@ import classNames from 'classnames';
 
 import Section from '../common/Section';
 import Button from '../common/Button';
+import { code } from '../../Code';
 import styles from '../index.module.css';
+
+function SystemWindow({ children }) {
+  return (
+    <div
+      className={classNames(styles['system-window'], styles['preview-border'])}
+    >
+      <div className={styles['system-top-bar']}>
+        <span
+          className={styles['system-top-bar-circle']}
+          style={{ backgroundColor: 'var(--periwinkle)' }}
+        />
+        <span
+          className={styles['system-top-bar-circle']}
+          style={{ backgroundColor: 'var(--bright-cyan)' }}
+        />
+        <span
+          className={styles['system-top-bar-circle']}
+          style={{ backgroundColor: 'var(--sea-green)' }}
+        />
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function Showcase() {
+  return (
+    <SystemWindow>
+      {code(
+        'javascript',
+        `export const ShippingSchema = new SimpleSchema({
+    firstName: {
+      type: String
+    },
+    lastName: {
+      type: String
+    },
+    country: {
+      type: String,
+      allowedValues: ["Poland", "England", "Germany", "Russia"],
+      defaultValue: "Poland"
+    },
+    state: {
+      type: String,
+      optional: true
+    },
+    useThisAddressForPaymentDetails: {
+      type: Boolean
+    },
+    addressLine1: {
+      type: String
+    },
+    addressLine2: {
+      type: String,
+      optional: true
+    },
+    city: {
+      type: String
+    },
+    zip: {
+      type: String
+    }
+  });`
+      )}
+    </SystemWindow>
+  );
+}
 
 export default function Header() {
   return (
@@ -45,11 +113,7 @@ export default function Header() {
         <Button>Download on GitHub</Button>
       </div>
       <div className="col col--4">
-        <img
-          src="assets/screens.png"
-          srcSet="assets/screens@2x.png 2x, assets/screens@3x.png 3x"
-          className="screens"
-        />
+        <Showcase />
       </div>
     </Section>
   );

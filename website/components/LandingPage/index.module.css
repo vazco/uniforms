@@ -1,11 +1,42 @@
 @import 'colors.css';
 @import 'fonts.css';
 
+.system-window {
+  padding: 0;
+  border-radius: 1em;
+  contain: content;
+  height: 70%;
+}
+
+.system-window pre {
+  margin: 0;
+  background: none !important;
+}
+
+.system-top-bar {
+  background-image: linear-gradient(
+    to right,
+    var(--periwinkle-50),
+    var(--bright-cyan-50) 90%,
+    var(--sea-green-50)
+  );
+  padding: 0.25em 1em;
+}
+
+.system-top-bar-circle {
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-left: 0.3em;
+  border-radius: 50%;
+  filter: brightness(100%);
+}
+
 .landing table thead {
   background-image: linear-gradient(
     to right,
     var(--periwinkle),
-    var(--bright-cyan) 51%,
+    var(--bright-cyan),
     var(--sea-green)
   );
 }

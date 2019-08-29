@@ -12,6 +12,10 @@
   --greenblue-10: rgba(31, 216, 152, 0.1);
   --dark-slate-blue: #2d2665;
 
+  --periwinkle-50: rgba(136, 89, 255, 0.2);
+  --bright-cyan-50: rgba(63, 196, 254, 0.2);
+  --sea-green-50: rgba(66, 255, 172, 0.2);
+
   --uni-hero-bgcolor: var(--dark-blue-grey);
   --uni-heading-color: var(--dusk-blue);
 
