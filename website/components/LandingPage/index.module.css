@@ -1,11 +1,26 @@
 @import 'colors.css';
 @import 'fonts.css';
 
+.gitter {
+  margin-top: 0 !important;
+}
+
+.floating-example {
+  position: relative;
+  /* transform: scale(0.75) translateY(-12.5%); */
+}
+
+.floating-example > div:last-child {
+  position: absolute;
+  top: 12.5%;
+  right: -25%;
+  width: 100%;
+}
+
 .system-window {
   padding: 0;
   border-radius: 1em;
   contain: content;
-  height: 70%;
 }
 
 .system-window pre {
@@ -362,7 +377,7 @@
   position: relative;
   height: 170px;
   width: 260px;
-  margin: 0 auto;
+  margin: 0 auto 2em auto;
 }
 
 .badge-image {

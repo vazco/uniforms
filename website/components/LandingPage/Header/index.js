@@ -4,12 +4,21 @@ import classNames from 'classnames';
 import Section from '../common/Section';
 import Button from '../common/Button';
 import { code } from '../../Code';
+import FormWrapper from '../../FormWrapper';
+import { ThemeProvider } from '../../ThemeContext';
+import ShippingForm from '../../../../docs/examples/CommonForms/ShippingForm';
+
 import styles from '../index.module.css';
 
-function SystemWindow({ children }) {
+function SystemWindow({ children, className, ...props }) {
   return (
     <div
-      className={classNames(styles['system-window'], styles['preview-border'])}
+      {...props}
+      className={classNames(
+        styles['system-window'],
+        styles['preview-border'],
+        className
+      )}
     >
       <div className={styles['system-top-bar']}>
         <span
@@ -32,10 +41,11 @@ function SystemWindow({ children }) {
 
 function Showcase() {
   return (
-    <SystemWindow>
-      {code(
-        'javascript',
-        `export const ShippingSchema = new SimpleSchema({
+    <div className={classNames(styles['floating-example'])}>
+      <SystemWindow>
+        {code(
+          'javascript',
+          `export const ShippingSchema = new SimpleSchema({
     firstName: {
       type: String
     },
@@ -68,8 +78,16 @@ function Showcase() {
       type: String
     }
   });`
-      )}
-    </SystemWindow>
+        )}
+      </SystemWindow>
+      <SystemWindow>
+        <ThemeProvider value="semantic">
+          <FormWrapper>
+            <ShippingForm />
+          </FormWrapper>
+        </ThemeProvider>
+      </SystemWindow>
+    </div>
   );
 }
 
@@ -110,7 +128,9 @@ export default function Header() {
             )
           )}
         </div>
-        <Button>Download on GitHub</Button>
+        <div>
+          <Button>Download on GitHub</Button>
+        </div>
       </div>
       <div className="col col--4">
         <Showcase />

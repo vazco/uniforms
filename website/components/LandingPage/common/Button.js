@@ -4,20 +4,13 @@ import classNames from 'classnames';
 
 import styles from '../index.module.css';
 
-export default function Button({
-  children,
-  className,
-  centered,
-  to,
-  ...props
-}) {
+export default function Button({ children, className, to, ...props }) {
   return (
     <Link to={to}>
       <button
         {...props}
         className={classNames(
           'button button--lg button--primary',
-          centered && styles.centered,
           styles['call-to-action'],
           className
         )}
