@@ -7,20 +7,36 @@
 
 .floating-example {
   position: relative;
-  /* transform: scale(0.75) translateY(-12.5%); */
 }
 
-.floating-example > div:last-child {
-  position: absolute;
-  top: 12.5%;
-  right: -25%;
-  width: 100%;
+@media (max-width: 996px) {
+  .floating-example {
+    padding: 4em;
+  }
+
+  .floating-example > * {
+    margin-bottom: 4em;
+  }
+}
+
+@media (min-width: 996px) {
+  .floating-example > div:last-child {
+    position: absolute;
+    top: 12.5%;
+    right: -40%;
+    width: 80%;
+  }
 }
 
 .system-window {
   padding: 0;
   border-radius: 1em;
   contain: content;
+  background: rgb(33, 27, 80);
+}
+
+.system-window iframe {
+  border-radius: unset;
 }
 
 .system-window pre {
@@ -120,6 +136,12 @@
   margin-bottom: 1em;
 }
 
+@media (max-width: 996px) {
+  .showcase-card {
+    flex-direction: row;
+  }
+}
+
 .showcase-card img {
   height: 4em;
   margin: 1em;
@@ -164,7 +186,7 @@
   margin: 16em 0 !important;
 }
 
-@media (min-width: 996px) {
+@media (min-width: 1900px) {
   .simple-yet-powerful-text {
     margin-left: -5em;
     margin-top: -8em;
@@ -185,12 +207,17 @@
   position: relative;
   background-color: var(--white);
   padding: 4em;
-  min-width: 740px;
 }
 
 .solid-border-box {
   border: solid 6px var(--uni-border-color);
   padding: 4em;
+}
+
+@media (max-width: 996px) {
+  .solid-border-box {
+    margin: 4em 0;
+  }
 }
 
 .border-green {
@@ -211,7 +238,7 @@
 }
 
 .company {
-  height: 3em;
+  height: 4em;
   filter: grayscale(100%);
   transition: 0.2s filter;
 }
@@ -258,6 +285,13 @@
   padding: 4em;
 }
 
+@media (max-width: 996px) {
+  .testimonial {
+    display: inline-block;
+    margin: 0 auto;
+  }
+}
+
 .section-heading {
   margin: 1.5em 0;
 }
@@ -269,6 +303,12 @@
 
 .section-content {
   padding: 0 4em 4em 4em !important;
+}
+
+@media (max-width: 996px) {
+  .section-content {
+    margin-top: 0;
+  }
 }
 
 .section-bgwhite.section-content {
@@ -413,6 +453,7 @@
   width: 40px;
   height: 40px;
   margin-right: 50px;
+  display: inline-block;
 }
 
 .theme-icon:last-child {

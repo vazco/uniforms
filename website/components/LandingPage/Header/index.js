@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from '@docusaurus/Link';
 import classNames from 'classnames';
 
 import Section from '../common/Section';
@@ -118,15 +119,28 @@ export default function Header() {
           Supported design libraries:
         </p>
         <div>
-          {['semantic.svg', 'antd.png', 'material-ui.png', 'bootstrap.svg'].map(
-            (src, key) => (
-              <img
-                key={key}
-                src={`assets/${src}`}
-                className={styles['theme-icon']}
-              />
-            )
-          )}
+          {[
+            {
+              alt: 'Semantic UI',
+              src: 'semantic.svg',
+              to: 'https://semantic-ui.com/'
+            },
+            { alt: 'Ant Design', src: 'antd.png', to: 'https://ant.design/' },
+            {
+              alt: 'Material-UI',
+              src: 'material-ui.png',
+              to: 'https://material-ui.com/'
+            },
+            {
+              alt: 'Bootstrap',
+              src: 'bootstrap.svg',
+              to: 'https://getbootstrap.com/'
+            }
+          ].map(({ alt, src, to }, key) => (
+            <Link className={styles['theme-icon']} key={key} to={to}>
+              <img alt={alt} src={`assets/${src}`} />
+            </Link>
+          ))}
         </div>
         <div>
           <Button>Download on GitHub</Button>
