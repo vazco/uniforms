@@ -17,15 +17,21 @@ export default function LandingPage() {
   return (
     <div className={styles.landing}>
       <Header />
-      <OpenSource />
-      <WhyUs />
-      <ExampleSimpleYetPowerful />
-      <ExampleFullyCustomizable />
-      <Gitter />
-      <WhoUses />
-      <Testimonials />
-      <Comparison />
-      <Footer />
+      <div className="main">
+        <OpenSource />
+        <WhyUs />
+        <div className="container">
+          <ExampleSimpleYetPowerful />
+          <ExampleFullyCustomizable />
+          <Gitter />
+        </div>
+        <WhoUses />
+        <div className="container">
+          <Testimonials />
+          <Comparison />
+        </div>
+        <Footer />
+      </div>
     </div>
   );
 }

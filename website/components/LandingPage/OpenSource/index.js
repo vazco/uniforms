@@ -5,6 +5,7 @@ import pick from 'lodash/pick';
 
 import Heading from '../common/Heading';
 import Oval from '../common/Oval';
+
 import styles from '../index.module.css';
 
 function Badge({ border, number, text, icon: Icon, color }) {
@@ -101,16 +102,16 @@ function useStats() {
 export default function OpenSource() {
   const { stars, forks, downloads } = useStats();
   return (
-    <div className={classNames('container', styles.section)}>
+    <div className="container text--center">
       <p className={classNames(styles.centered, styles['always-open-source'])}>
         Always Open Source.
       </p>
-      <Heading centered>
+      <Heading>
         Trusted by GitHub
         <br />
         community
       </Heading>
-      <div className="row">
+      <div className={classNames('row', styles.badges)}>
         <Badge
           text="Stars"
           border={1}

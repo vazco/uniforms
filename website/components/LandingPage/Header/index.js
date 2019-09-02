@@ -2,7 +2,6 @@ import React from 'react';
 import Link from '@docusaurus/Link';
 import classNames from 'classnames';
 
-import Section from '../common/Section';
 import Button from '../common/Button';
 import { code } from '../../Code';
 import FormWrapper from '../../FormWrapper';
@@ -94,61 +93,73 @@ function Showcase() {
 
 export default function Header() {
   return (
-    <Section className={styles.header}>
-      <div className="col col--4 col--offset-2">
-        <span
-          className={classNames(styles.text, styles['text-big'], styles.title)}
-        >
-          uniforms
-        </span>
-        <span
-          className={classNames(
-            styles.description,
-            styles.text,
-            styles['text-huge']
-          )}
-        >
-          A React library for building forms from every schema
-        </span>
-        <ul className={classNames(styles.text, styles.bullets)}>
-          <li>support of all schemas and themes</li>
-          <li>instant prototyping</li>
-          <li>simplifies separation of contents</li>
-        </ul>
-        <p className={classNames(styles.text, styles.supported)}>
-          Supported design libraries:
-        </p>
-        <div>
-          {[
-            {
-              alt: 'Semantic UI',
-              src: 'semantic.svg',
-              to: 'https://semantic-ui.com/'
-            },
-            { alt: 'Ant Design', src: 'antd.png', to: 'https://ant.design/' },
-            {
-              alt: 'Material-UI',
-              src: 'material-ui.png',
-              to: 'https://material-ui.com/'
-            },
-            {
-              alt: 'Bootstrap',
-              src: 'bootstrap.svg',
-              to: 'https://getbootstrap.com/'
-            }
-          ].map(({ alt, src, to }, key) => (
-            <Link className={styles['theme-icon']} key={key} to={to}>
-              <img alt={alt} src={`assets/${src}`} />
-            </Link>
-          ))}
-        </div>
-        <div>
-          <Button>Download on GitHub</Button>
+    <div className="hero hero--primary">
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <span
+              className={classNames(
+                styles.text,
+                styles['text-big'],
+                styles.title
+              )}
+            >
+              uniforms
+            </span>
+            <span
+              className={classNames(
+                styles.description,
+                styles.text,
+                styles['text-huge']
+              )}
+            >
+              A React library for building forms from every schema
+            </span>
+            <ul className={classNames(styles.text, styles.bullets)}>
+              <li>support of all schemas and themes</li>
+              <li>instant prototyping</li>
+              <li>simplifies separation of contents</li>
+            </ul>
+            <div className={styles['center-if-sm']}>
+              <p className={classNames(styles.text, styles.supported)}>
+                Supported design libraries:
+              </p>
+              {[
+                {
+                  alt: 'Semantic UI',
+                  src: 'semantic.svg',
+                  to: 'https://semantic-ui.com/'
+                },
+                {
+                  alt: 'Ant Design',
+                  src: 'antd.png',
+                  to: 'https://ant.design/'
+                },
+                {
+                  alt: 'Material-UI',
+                  src: 'material-ui.png',
+                  to: 'https://material-ui.com/'
+                },
+                {
+                  alt: 'Bootstrap',
+                  src: 'bootstrap.svg',
+                  to: 'https://getbootstrap.com/'
+                }
+              ].map(({ alt, src, to }, key) => (
+                <Link className={styles['theme-icon']} key={key} to={to}>
+                  <img alt={alt} src={`assets/${src}`} />
+                </Link>
+              ))}
+            </div>
+            <div className={styles['center-if-sm']}>
+              <Button>Download on GitHub</Button>
+            </div>
+          </div>
+          <div className="col">
+            <Showcase />
+          </div>
         </div>
       </div>
-      <div className="col col--4">
-        <Showcase />
-      </div>
-    </Section>
+    </div>
   );
 }
