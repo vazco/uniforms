@@ -21,13 +21,31 @@ export default function WhyUs() {
                 )}
               />
               <div className={styles.grid3x3}>
-                {Array.from({ length: 9 }).map((_, index) => (
+                {/* {Array.from({ length: 9 }).map((_, index) => (
                   <div key={index} className={styles.item3x3}>
                     <img
                       className={styles.company}
                       src={`assets/companies/${index + 1}.png`}
                     />
                   </div>
+                ))} */}
+                {[
+                  'https://www.deskpro.com/',
+                  'https://www.nokia.com/',
+                  'https://www.redhat.com/en',
+                  'https://github.com/react-page/react-page/tree/master/packages/plugins/createPluginMaterialUi',
+                  'https://graphback.dev',
+                  'https://www.onyx-one.com/',
+                  'http://aerogear.org',
+                  'https://cleverbeagle.com/together',
+                  'http://www.orionjs.org'
+                ].map((href, index) => (
+                  <a href={href} key={index} className={styles.item3x3}>
+                    <img
+                      className={styles.company}
+                      src={`assets/companies/${index + 1}.png`}
+                    />
+                  </a>
                 ))}
               </div>
             </div>
@@ -45,7 +63,9 @@ export default function WhyUs() {
                 simple forms and sophisticated management systems.
               </p>
               <div className={styles['center-if-sm']}>
-                <Button>Add your company</Button>
+                <Button to="mailto:hello@uniforms.tools">
+                  Add your company
+                </Button>
               </div>
             </div>
           </div>

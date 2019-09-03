@@ -26,21 +26,8 @@ export default function Footer() {
         <div className="row">
           <div className="col">
             <ShowcaseCard />
-            <div className="row">
-              <div className="col">
-                <img src="assets/vazco.svg" />
-              </div>
-              <div className="col">
-                <p
-                  style={{ fontSize: '0.8em', display: 'inline-block' }}
-                  className={classNames(styles.text, styles.paragraph)}
-                >
-                  Copyright © 2019 Vazco. All Rights Reserved.
-                </p>
-              </div>
-            </div>
           </div>
-          <div className="col">
+          <div className={classNames('col', styles['offset-column'])}>
             <h2 className={classNames(styles.text, styles['footer-heading'])}>
               Always free
               <br />
@@ -58,7 +45,7 @@ export default function Footer() {
               </Link>
             </ul>
           </div>
-          <div className="col">
+          <div className={classNames('col', styles['offset-column'])}>
             <h2 className={classNames(styles.text, styles['footer-heading'])}>
               Join the Community!
             </h2>
@@ -78,12 +65,23 @@ export default function Footer() {
               </Link>
             </ul>
           </div>
-          <div className="col">
+          <div className={classNames('col', styles['offset-column'])}>
             <h2 className={classNames(styles.text, styles['footer-heading'])}>
               Start a conversation!
             </h2>
             <p className={classNames(styles.text, styles.paragraph)}>
-              hello@uniforms.tools
+              <Link to="mailto:hello@uniforms.tools">hello@uniforms.tools</Link>
+            </p>
+            <a href="https://vazco.eu">
+              <img className={styles.vazco} src="assets/vazco.svg" />
+            </a>
+            <br />
+            <p
+              style={{ fontSize: '0.8em', display: 'inline-block' }}
+              className={classNames(styles.text, styles.paragraph)}
+            >
+              Copyright © 2019 Vazco.
+              <br /> All Rights Reserved.
             </p>
           </div>
         </div>

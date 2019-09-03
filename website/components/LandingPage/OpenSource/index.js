@@ -73,6 +73,18 @@ function useStats() {
   const [forks, setForks] = useState(null);
   const [downloads, setDownloads] = useState(null);
 
+  function dateRanges(from, to) {
+    from = new Date(from);
+    to = new Date(to);
+    const length = to.getFullYear() - from.getFullYear();
+    const dates = Array.from({ length })
+      .map((_, i) => from.getFullYear() + i + '-01-01')
+      .concat([to.toISOString().slice(0, 10)]);
+    return dates
+      .reduce((acc, curr, i, arr) => acc.concat(curr + ':' + arr[i + 1]), [])
+      .slice(0, -1);
+  }
+
   useEffect(() => {
     cachedFetch('github', 'https://api.github.com/repos/vazco/uniforms', [
       'stargazers_count',
@@ -84,12 +96,21 @@ function useStats() {
   }, [stars, forks]);
 
   useEffect(() => {
+    const from = '2014-01-01';
     const today = new Date().toISOString().slice(0, 10);
-    cachedFetch(
-      'npm',
-      `https://api.npmjs.org/downloads/point/2016-01-01:${today}/uniforms`,
-      ['downloads']
-    ).then(({ downloads }) => setDownloads(downloads.toLocaleString('en-US')));
+    const dates = dateRanges(from, today);
+
+    Promise.all(
+      dates.map(range =>
+        cachedFetch(
+          `npm-${range}`,
+          `https://api.npmjs.org/downloads/point/${range}/uniforms`,
+          ['downloads']
+        ).then(({ downloads }) => downloads || 0)
+      )
+    )
+      .then(sums => sums.reduce((acc, curr) => acc + curr))
+      .then(downloads => setDownloads(downloads.toLocaleString('en-US')));
   }, [downloads]);
 
   return {

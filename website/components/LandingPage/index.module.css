@@ -213,6 +213,10 @@
   background-color: var(--dodger-blue);
 }
 
+.footer .offset-column {
+  margin-left: 2em !important;
+}
+
 .simple-yet-powerful-text {
   margin-left: -5em;
   margin-top: -8em;
@@ -286,12 +290,11 @@
 .item3x3 {
   width: 33%;
   align-self: center;
-  padding: 1em;
+  padding: 1.5em 1em;
 }
 
 .company {
   width: 100%;
-  filter: grayscale(100%);
   transition: 0.2s filter;
 }
 
@@ -606,4 +609,8 @@
 
 .bullets li::before {
   background-color: var(--periwinkle) !important;
+}
+
+.vazco {
+  margin-top: 2em;
 }
