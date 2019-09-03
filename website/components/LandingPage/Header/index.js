@@ -152,7 +152,9 @@ export default function Header() {
               ))}
             </div>
             <div className={styles['center-if-sm']}>
-              <Button>Download on GitHub</Button>
+              <Button to="/docs/tutorials-basic-uniforms-usage">
+                Get Started
+              </Button>
             </div>
           </div>
           <div className="col">

@@ -204,17 +204,6 @@
   color: var(--white);
 }
 
-.footer-heading {
-  font-family: Muli;
-  font-size: 18px;
-  font-weight: 600;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: var(--dodger-blue);
-}
-
 .footer .bullets {
   color: var(--white);
 }
@@ -347,9 +336,31 @@
   margin: 2em;
 }
 
-.testimonial > * {
+.testimonial-content {
   max-width: 320px;
-  padding: 4em;
+  height: 100%;
+  padding: 4em 2em;
+}
+
+.testimonial-description {
+  color: var(--greyish-brown);
+  font-family: Muli;
+  font-size: 16px;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: 1.75;
+  opacity: 0.8;
+  text-align: center;
+}
+
+.testimonial-description::before {
+  content: '„';
+}
+
+.testimonial-description::after {
+  content: '”';
 }
 
 .section-heading {
@@ -396,43 +407,6 @@
   }
 }
 
-.emphasis {
-  font-family: Poppins;
-  font-size: 24px;
-  font-weight: 600;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.42;
-  letter-spacing: normal;
-  color: var(--dodger-blue);
-}
-
-.paragraph {
-  opacity: 0.8;
-  font-family: Muli;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.75;
-  letter-spacing: normal;
-  color: var(--white);
-
-  margin-bottom: 0.8em;
-}
-
-.section-subtitle {
-  opacity: 0.6;
-  font-family: Muli;
-  font-size: 16px;
-  font-weight: 600;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 1px;
-  color: var(--white);
-}
-
 .fluid {
   padding: 8em 0;
 }
@@ -445,31 +419,6 @@
 .whouses {
   background-color: var(--dark-blue-grey);
   padding-bottom: 0 !important;
-}
-
-.heading {
-  font-family: Poppins;
-  font-size: 2em;
-  font-weight: bold;
-  line-height: 1.31;
-  color: var(--uni-heading-color);
-  margin-bottom: 2em;
-}
-
-.heading-white {
-  --uni-heading-color: var(--white);
-}
-
-.always-open-source {
-  opacity: 0.6;
-  font-family: Muli;
-  font-size: 16px;
-  font-weight: 600;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 1px;
-  color: var(--dusk-blue);
 }
 
 .oval {
@@ -543,12 +492,13 @@
   margin-bottom: 8em;
 }
 
+/* TEXT */
 .text {
   font-family: Poppins, sans-serif;
-  font-style: normal;
   font-stretch: normal;
-  line-height: normal;
+  font-style: normal;
   letter-spacing: normal;
+  line-height: normal;
 }
 
 .text-big {
@@ -562,26 +512,97 @@
   line-height: 1.25;
 }
 
-.supported {
-  margin-top: 3em;
-
+.always-open-source {
+  color: var(--dusk-blue);
+  font-family: Muli;
+  font-size: 16px;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: normal;
   opacity: 0.6;
+}
+
+.heading {
+  color: var(--uni-heading-color);
+  font-family: Poppins;
+  font-size: 2em;
+  font-weight: bold;
+  line-height: 1.31;
+  margin-bottom: 2em;
+}
+
+.heading-white {
+  --uni-heading-color: var(--white);
+}
+
+.emphasis {
+  color: var(--dodger-blue);
+  font-family: Poppins;
+  font-size: 24px;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: normal;
+  line-height: 1.42;
+}
+
+.paragraph {
+  color: var(--white);
+  font-family: Muli;
+  font-size: 16px;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: 1.75;
+  margin-bottom: 0.8em;
+  opacity: 0.8;
+}
+
+.section-subtitle {
+  color: var(--white);
+  font-family: Muli;
+  font-size: 16px;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: normal;
+  opacity: 0.6;
+}
+
+.footer-heading {
+  color: var(--dodger-blue);
+  font-family: Muli;
+  font-size: 18px;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: normal;
+  line-height: normal;
+}
+
+.supported {
+  color: var(--white);
   font-family: Muli;
   font-size: 0.85em;
   font-weight: 600;
   line-height: 2;
-  color: var(--white);
+  margin-top: 3em;
+  opacity: 0.6;
 }
 
 .title {
-  display: block;
   color: var(--white);
+  display: block;
 }
 
 .description {
+  color: var(--bright-cyan);
   display: block;
   margin: 24px 0;
-  color: var(--bright-cyan);
 }
 
 @supports (background-clip: text) {
@@ -589,13 +610,14 @@
     background-image: linear-gradient(
       81deg,
       var(--periwinkle),
-      var(--bright-cyan) 50%,
+      var(--bright-cyan),
       var(--sea-green)
     );
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 }
+/* END TEXT */
 
 .bullets {
   color: var(--white);

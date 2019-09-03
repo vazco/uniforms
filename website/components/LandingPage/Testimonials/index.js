@@ -18,7 +18,7 @@ function Testimonial({ who, company, position, description, mirror }) {
       <div
         className={classNames(
           'text--center',
-
+          styles['testimonial-content'],
           styles['border-gradient'],
           mirror
             ? styles['border-disable-bottom-left']
@@ -31,7 +31,7 @@ function Testimonial({ who, company, position, description, mirror }) {
           <br />
           {position}
         </p>
-        <p>{description}</p>
+        <p className={styles['testimonial-description']}>{description}</p>
       </div>
     </div>
   );
@@ -46,17 +46,17 @@ export default function Testimonials() {
       <Heading>Testimonials</Heading>
       <div className={styles.testimonials}>
         <Testimonial
-          who="Florence Boyle"
-          company="Saturn"
-          position="Accountant"
-          description="Donec vehicula, leo vulputate tincidunt pretium, mi erat tristique nisl, sed suscipit dui nulla quis felis. Cras consequat ligula eu dui consectetur cursus. Sed suscipit ac lorem eu luctus."
+          who="Wojtek Trocki"
+          company="Red Hat"
+          position="Team Lead"
+          description="uniforms it’s one and the only library that allows you to have greater flexibility on top of the React platform to building forms you like, with great robustness with advanced support of many different forms inputs."
         />
         <Testimonial
           mirror
-          who="Florence Boyle"
-          company="Saturn"
-          position="Accountant"
-          description="Donec vehicula, leo vulputate tincidunt pretium, mi erat tristique nisl, sed suscipit dui nulla quis felis. Cras consequat ligula eu dui consectetur cursus. Sed suscipit ac lorem eu luctus."
+          who="Serkan Durusoy"
+          company="Paystack"
+          position="Engineering Manager"
+          description="The simplicity with which one can dive into details and break a form apart into it's primitive provides the much-needed peace of mind."
         />
       </div>
     </div>

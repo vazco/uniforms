@@ -39,10 +39,10 @@ export default function WhyUs() {
                 Who uses uniforms
               </Heading>
               <p className={styles.paragraph}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Maecenas auctor turpis eu purus placerat, sed venenatis orci
-                hendrerit. Praesent porta tempor purus, nec consectetur ligula
-                hendrerit non. Pellentesque fermentum sit amet tortor in rhoncus
+                Our package has been used in several projects worldwide. From
+                small to the corporate business solutions and well-known
+                enterprises. Companies trusted us in the development of both
+                simple forms and sophisticated management systems.
               </p>
               <div className={styles['center-if-sm']}>
                 <Button>Add your company</Button>
