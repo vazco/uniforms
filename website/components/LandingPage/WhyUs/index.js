@@ -21,14 +21,14 @@ export default function WhyUs() {
                 <br />
                 to implement solution
               </Heading>
-              <p className={styles.paragraph}>
+              <p className={classNames(styles.text, styles.paragraph)}>
                 A set of open-source libraries capable of instantly generating
                 any given form.
               </p>
-              <h2 className={styles.emphasis}>
+              <h2 className={classNames(styles.text, styles.emphasis)}>
                 Carried out by the global community of 50+ developers.
               </h2>
-              <p className={styles.paragraph}>
+              <p className={classNames(styles.text, styles.paragraph)}>
                 Focused on providing a ready-to-implement solution, and
                 effortless development experience. Keeps your code simple.
               </p>

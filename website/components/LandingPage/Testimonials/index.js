@@ -31,7 +31,11 @@ function Testimonial({ who, company, position, description, mirror }) {
           <br />
           {position}
         </p>
-        <p className={styles['testimonial-description']}>{description}</p>
+        <p
+          className={classNames(styles.text, styles['testimonial-description'])}
+        >
+          {description}
+        </p>
       </div>
     </div>
   );
@@ -40,8 +44,14 @@ function Testimonial({ who, company, position, description, mirror }) {
 export default function Testimonials() {
   return (
     <div className="section text--center">
-      <p className={classNames(styles.centered, styles['always-open-source'])}>
-        Lorem ipsum dolor
+      <p
+        className={classNames(
+          styles.centered,
+          styles.text,
+          styles['always-open-source']
+        )}
+      >
+        They speak about us
       </p>
       <Heading>Testimonials</Heading>
       <div className={styles.testimonials}>

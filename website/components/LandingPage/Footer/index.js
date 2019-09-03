@@ -11,7 +11,7 @@ function ShowcaseCard() {
       className={classNames(styles['showcase-card'], styles['border-dashed'])}
     >
       <img src="img/uniforms.svg" />
-      <p className={styles.paragraph}>
+      <p className={classNames(styles.text, styles.paragraph)}>
         A React library for building forms. Integrates with every schema and
         wide range of themes.
       </p>
@@ -33,7 +33,7 @@ export default function Footer() {
               <div className="col">
                 <p
                   style={{ fontSize: '0.8em', display: 'inline-block' }}
-                  className={styles.paragraph}
+                  className={classNames(styles.text, styles.paragraph)}
                 >
                   Copyright © 2019 Vazco. All Rights Reserved.
                 </p>
@@ -41,7 +41,7 @@ export default function Footer() {
             </div>
           </div>
           <div className="col">
-            <h2 className={styles['footer-heading']}>
+            <h2 className={classNames(styles.text, styles['footer-heading'])}>
               Always free
               <br />
               and open source
@@ -59,7 +59,9 @@ export default function Footer() {
             </ul>
           </div>
           <div className="col">
-            <h2 className={styles['footer-heading']}>Join the Community!</h2>
+            <h2 className={classNames(styles.text, styles['footer-heading'])}>
+              Join the Community!
+            </h2>
             <GitHubButton
               href="https://github.com/vazco/uniforms"
               data-show-count="true"
@@ -77,8 +79,12 @@ export default function Footer() {
             </ul>
           </div>
           <div className="col">
-            <h2 className={styles['footer-heading']}>Start a conversation!</h2>
-            <p className={styles.paragraph}>hello@uniforms.tools</p>
+            <h2 className={classNames(styles.text, styles['footer-heading'])}>
+              Start a conversation!
+            </h2>
+            <p className={classNames(styles.text, styles.paragraph)}>
+              hello@uniforms.tools
+            </p>
           </div>
         </div>
       </div>

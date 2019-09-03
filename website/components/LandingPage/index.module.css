@@ -12,6 +12,7 @@
 }
 
 .landing table thead {
+  background-attachment: fixed;
   background-image: linear-gradient(
     to right,
     var(--periwinkle),
@@ -316,14 +317,14 @@
 
 .border-disable-top-right {
   --uni-border-gradient-degrees: 41deg;
-  border-top: none;
-  border-right: none;
+  border-top: 0;
+  border-right: 0;
 }
 
 .border-disable-bottom-left {
   --uni-border-gradient-degrees: 221deg;
-  border-bottom: none;
-  border-left: none;
+  border-bottom: 0;
+  border-left: 0;
 }
 
 .testimonials {
@@ -340,19 +341,6 @@
   max-width: 320px;
   height: 100%;
   padding: 4em 2em;
-}
-
-.testimonial-description {
-  color: var(--greyish-brown);
-  font-family: Muli;
-  font-size: 16px;
-  font-stretch: normal;
-  font-style: normal;
-  font-weight: normal;
-  letter-spacing: normal;
-  line-height: 1.75;
-  opacity: 0.8;
-  text-align: center;
 }
 
 .testimonial-description::before {
@@ -467,7 +455,6 @@
   transform: translate(-50%, -50%);
 }
 
-/* HEADER */
 .call-to-action {
   --ifm-button-background-color: var(--periwinkle) !important;
   --ifm-button-border-color: var(--periwinkle) !important;
@@ -492,7 +479,6 @@
   margin-bottom: 8em;
 }
 
-/* TEXT */
 .text {
   font-family: Poppins, sans-serif;
   font-stretch: normal;
@@ -512,15 +498,12 @@
   line-height: 1.25;
 }
 
-.always-open-source {
+.text.always-open-source {
   color: var(--dusk-blue);
   font-family: Muli;
-  font-size: 16px;
-  font-stretch: normal;
-  font-style: normal;
+  font-size: 1em;
   font-weight: 600;
   letter-spacing: 1px;
-  line-height: normal;
   opacity: 0.6;
 }
 
@@ -537,51 +520,37 @@
   --uni-heading-color: var(--white);
 }
 
-.emphasis {
+.text.emphasis {
   color: var(--dodger-blue);
   font-family: Poppins;
   font-size: 24px;
-  font-stretch: normal;
-  font-style: normal;
   font-weight: 600;
-  letter-spacing: normal;
   line-height: 1.42;
 }
 
-.paragraph {
+.text.paragraph {
   color: var(--white);
   font-family: Muli;
-  font-size: 16px;
-  font-stretch: normal;
-  font-style: normal;
-  font-weight: normal;
-  letter-spacing: normal;
+  font-size: 1em;
   line-height: 1.75;
   margin-bottom: 0.8em;
   opacity: 0.8;
 }
 
-.section-subtitle {
+.text.section-subtitle {
   color: var(--white);
   font-family: Muli;
-  font-size: 16px;
-  font-stretch: normal;
-  font-style: normal;
+  font-size: 1em;
   font-weight: 600;
   letter-spacing: 1px;
-  line-height: normal;
   opacity: 0.6;
 }
 
-.footer-heading {
+.text.footer-heading {
   color: var(--dodger-blue);
   font-family: Muli;
   font-size: 18px;
-  font-stretch: normal;
-  font-style: normal;
   font-weight: 600;
-  letter-spacing: normal;
-  line-height: normal;
 }
 
 .supported {
@@ -617,7 +586,15 @@
     -webkit-text-fill-color: transparent;
   }
 }
-/* END TEXT */
+
+.text.testimonial-description {
+  color: var(--greyish-brown);
+  font-family: Muli;
+  font-size: 1em;
+  line-height: 1.75;
+  opacity: 0.8;
+  text-align: center;
+}
 
 .bullets {
   color: var(--white);

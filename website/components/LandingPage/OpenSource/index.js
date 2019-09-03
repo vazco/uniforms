@@ -103,7 +103,13 @@ export default function OpenSource() {
   const { stars, forks, downloads } = useStats();
   return (
     <div className="container text--center">
-      <p className={classNames(styles.centered, styles['always-open-source'])}>
+      <p
+        className={classNames(
+          styles.centered,
+          styles.text,
+          styles['always-open-source']
+        )}
+      >
         Always Open Source.
       </p>
       <Heading>

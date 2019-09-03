@@ -34,11 +34,11 @@ export default function WhyUs() {
             <div
               className={classNames('col col--5', styles['section-content'])}
             >
-              <Subtitle>Lorem ipsum dolor</Subtitle>
+              <Subtitle>References</Subtitle>
               <Heading className={styles['heading-white']}>
                 Who uses uniforms
               </Heading>
-              <p className={styles.paragraph}>
+              <p className={classNames(styles.text, styles.paragraph)}>
                 Our package has been used in several projects worldwide. From
                 small to the corporate business solutions and well-known
                 enterprises. Companies trusted us in the development of both
