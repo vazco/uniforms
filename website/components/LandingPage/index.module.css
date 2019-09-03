@@ -43,8 +43,8 @@
   padding-left: 4em;
 }
 
-.landing table tr td > * {
-  filter: grayscale(100%);
+.landing table tr td > img {
+  width: 1em;
 }
 
 .landing tr:nth-child(odd) td {
