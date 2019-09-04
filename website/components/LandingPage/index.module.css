@@ -252,7 +252,7 @@
 .preview {
   position: relative;
   background-color: var(--white);
-  padding: 4em;
+  padding: 2em;
 }
 
 @media (max-width: 500px) {
