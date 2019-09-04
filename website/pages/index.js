@@ -4,13 +4,7 @@ import Layout from '@theme/Layout';
 
 import LandingPage from '../components/LandingPage';
 
-const keywords = [
-  'forms in react',
-  'react forms',
-  'react forms best practices',
-  'react forms examples',
-  'React Form Builder'
-];
+const keywords = ['forms', 'react', 'schema'];
 
 export default function HomePage() {
   return (
