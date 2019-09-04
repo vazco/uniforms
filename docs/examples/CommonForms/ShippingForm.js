@@ -7,7 +7,7 @@ import schema from './ShippingSchema';
 const model = {
   firstName: 'John',
   lastName: 'Doe',
-  addressLine1: 'Pretty st.',
+  addressLine1: 'Podwale st.',
   city: 'Wroclaw'
 };
 
@@ -38,12 +38,6 @@ export default function ShippingForm() {
         <div className="row">
           <div className="column">
             <AutoField name="addressLine1" />
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="column">
-            <AutoField name="addressLine2" />
           </div>
         </div>
 

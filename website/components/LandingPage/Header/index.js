@@ -54,7 +54,7 @@ function Showcase() {
     },
     country: {
       type: String,
-      allowedValues: ["Poland", "England", "Germany", "Russia"],
+      allowedValues: ["Poland", "England"],
       defaultValue: "Poland"
     },
     state: {
@@ -66,10 +66,6 @@ function Showcase() {
     },
     addressLine1: {
       type: String
-    },
-    addressLine2: {
-      type: String,
-      optional: true
     },
     city: {
       type: String

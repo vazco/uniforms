@@ -9,7 +9,7 @@ export default new SimpleSchema({
   },
   country: {
     type: String,
-    allowedValues: ['Poland', 'England', 'Germany', 'Russia'],
+    allowedValues: ['Poland', 'England'],
     defaultValue: 'Poland'
   },
   state: {
@@ -21,10 +21,6 @@ export default new SimpleSchema({
   },
   addressLine1: {
     type: String
-  },
-  addressLine2: {
-    type: String,
-    optional: true
   },
   city: {
     type: String

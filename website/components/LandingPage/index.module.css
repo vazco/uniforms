@@ -126,23 +126,22 @@
   .floating-example > *:first-child {
     margin-bottom: 4em;
   }
+  .floating-example .system-window {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
-@media (min-width: 996px) {
-  .floating-example {
-    transform: scale(0.8);
-    transform-origin: 0 0;
-  }
+@media (min-width: 997px) {
   .floating-example > div:last-child {
     position: absolute;
     top: 12.5%;
-    right: -40%;
-    width: 100%;
+    left: 40%;
   }
 }
 
 .system-window {
-  width: 100%;
+  width: 80%;
   padding: 0;
   border-radius: 1em;
   overflow: hidden;
