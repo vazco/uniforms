@@ -21,73 +21,73 @@ export default function ExampleSimpleYetPowerful() {
                 code(
                   'js',
                   `import React from 'react';\n
-  import schema from './SignUpSchema';
-  import { AutoForm } from 'uniforms-${theme}';\n
-  export default function SignUpForm() {
-    return (
-      <AutoForm
-        schema={schema}
-        onSubmit={model => alert(JSON.stringify(model, null, 2))}
-      />
-    );
-  }`
+import schema from './SignUpSchema';
+import { AutoForm } from 'uniforms-${theme}';\n
+export default function SignUpForm() {
+  return (
+    <AutoForm
+      schema={schema}
+      onSubmit={model => alert(JSON.stringify(model, null, 2))}
+    />
+  );
+}`
                 )
               }
               example={<SignUp />}
               schema={code(
                 'js',
                 `import Ajv from 'ajv';
-  import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
+import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 
-  const ajv = new Ajv({ allErrors: true, useDefaults: true, $data: true });
+const ajv = new Ajv({ allErrors: true, useDefaults: true, $data: true });
 
-  const schema = {
-    title: 'Guest',
-    type: 'object',
-    properties: {
-      fullname: { type: 'string' },
-      email: { type: 'string' },
-      reemail: { type: 'string', const: { $data: '1/email' } },
-      password: {
-        type: 'string',
-        uniforms: {
-          type: 'password'
-        }
-      },
-      repassword: {
-        type: 'string',
-        const: { $data: '1/password' },
-        uniforms: {
-          type: 'password'
-        }
-      },
-      acceptTermsOfUse: { type: 'boolean' }
-    },
-    required: [
-      'fullname',
-      'email',
-      'reemail',
-      'password',
-      'repassword',
-      'acceptTermsOfUse'
-    ]
-  };
-
-  function createValidator(schema) {
-    const validator = ajv.compile(schema);
-
-    return model => {
-      validator(model);
-
-      if (validator.errors && validator.errors.length) {
-        throw { details: validator.errors };
+const schema = {
+  title: 'Guest',
+  type: 'object',
+  properties: {
+    fullname: { type: 'string' },
+    email: { type: 'string' },
+    reemail: { type: 'string', const: { $data: '1/email' } },
+    password: {
+      type: 'string',
+      uniforms: {
+        type: 'password'
       }
-    };
-  }
+    },
+    repassword: {
+      type: 'string',
+      const: { $data: '1/password' },
+      uniforms: {
+        type: 'password'
+      }
+    },
+    acceptTermsOfUse: { type: 'boolean' }
+  },
+  required: [
+    'fullname',
+    'email',
+    'reemail',
+    'password',
+    'repassword',
+    'acceptTermsOfUse'
+  ]
+};
 
-  const schemaValidator = createValidator(schema);
+function createValidator(schema) {
+  const validator = ajv.compile(schema);
 
-  export default new JSONSchemaBridge(schema, schemaValidator);`
+  return model => {
+    validator(model);
+
+    if (validator.errors && validator.errors.length) {
+      throw { details: validator.errors };
+    }
+  };
+}
+
+const schemaValidator = createValidator(schema);
+
+export default new JSONSchemaBridge(schema, schemaValidator);`
               )}
             />
           </div>

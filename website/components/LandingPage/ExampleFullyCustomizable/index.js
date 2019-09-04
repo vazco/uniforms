@@ -49,80 +49,80 @@ export default function ExampleFullyCustomizable() {
                 code(
                   'js',
                   `import React from 'react';
-  import connectField from 'uniforms/connectField';\n
-  import schema from './ImageFieldSchema';
-  import { AutoForm, SubmitField } from 'uniforms-${theme}';\n
-  function Image({ onChange, value }) {
-    const imgPlaceholder = 'https://via.placeholder.com/150.png';\n
-    function onImageChange({ target: { files } }) {
-      if (files && files[0]) {
-        onChange(URL.createObjectURL(files[0]));
-      }
-    }\n
-    return (
-      <div className="ImageField">
-        <label htmlFor="file-input">
-          <div>Choose your photo</div>
-          <img
-            style={{ cursor: 'pointer', width: '150px', height: '150px' }}
-            src={value ? value : imgPlaceholder}
-          />
-        </label>
-        <input
-          accept="image/*"
-          id="file-input"
-          onChange={onImageChange}
-          style={{ display: 'none' }}
-          type="file"
+import connectField from 'uniforms/connectField';\n
+import schema from './ImageFieldSchema';
+import { AutoForm, SubmitField } from 'uniforms-${theme}';\n
+function Image({ onChange, value }) {
+  const imgPlaceholder = 'https://via.placeholder.com/150.png';\n
+  function onImageChange({ target: { files } }) {
+    if (files && files[0]) {
+      onChange(URL.createObjectURL(files[0]));
+    }
+  }\n
+  return (
+    <div className="ImageField">
+      <label htmlFor="file-input">
+        <div>Choose your photo</div>
+        <img
+          style={{ cursor: 'pointer', width: '150px', height: '150px' }}
+          src={value ? value : imgPlaceholder}
         />
-      </div>
-    );
-  }
-  const ImageField = connectField(Image);\n
-  export default function ExamplesSubmitField() {
-    return (
-      <AutoForm schema={schema}>
-        <ImageField name="pictureUrl" />
-        <SubmitField />
-      </AutoForm>
-    );
-  `
+      </label>
+      <input
+        accept="image/*"
+        id="file-input"
+        onChange={onImageChange}
+        style={{ display: 'none' }}
+        type="file"
+      />
+    </div>
+  );
+}
+const ImageField = connectField(Image);\n
+export default function ExamplesSubmitField() {
+  return (
+    <AutoForm schema={schema}>
+      <ImageField name="pictureUrl" />
+      <SubmitField />
+    </AutoForm>
+  );
+`
                 )
               }
               example={<ImageField />}
               schema={code(
                 'js',
                 `import Ajv from 'ajv';
-  import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
+import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 
-  const ajv = new Ajv({ allErrors: true, useDefaults: true });
+const ajv = new Ajv({ allErrors: true, useDefaults: true });
 
-  const schema = {
-    title: 'Guest',
-    type: 'object',
-    properties: {
-      pictureUrl: { type: 'string' }
+const schema = {
+  title: 'Guest',
+  type: 'object',
+  properties: {
+    pictureUrl: { type: 'string' }
+  }
+};
+
+function createValidator(schema) {
+  const validator = ajv.compile(schema);
+
+  return model => {
+    validator(model);
+
+    if (validator.errors && validator.errors.length) {
+      throw { details: validator.errors };
     }
   };
+}
 
-  function createValidator(schema) {
-    const validator = ajv.compile(schema);
+const schemaValidator = createValidator(schema);
 
-    return model => {
-      validator(model);
+const bridge = new JSONSchemaBridge(schema, schemaValidator);
 
-      if (validator.errors && validator.errors.length) {
-        throw { details: validator.errors };
-      }
-    };
-  }
-
-  const schemaValidator = createValidator(schema);
-
-  const bridge = new JSONSchemaBridge(schema, schemaValidator);
-
-  export default bridge;
-  `
+export default bridge;
+`
               )}
             />
           </div>
