@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   title: 'uniforms',
-  tagline: 'A set of React libraries for building forms.',
+  tagline: 'A set of libraries for building forms in React from every schema.',
   organizationName: 'vazco',
   projectName: 'uniforms',
   baseUrl: '/',
