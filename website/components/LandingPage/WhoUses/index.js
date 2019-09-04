@@ -21,14 +21,6 @@ export default function WhyUs() {
                 )}
               />
               <div className={styles.grid3x3}>
-                {/* {Array.from({ length: 9 }).map((_, index) => (
-                  <div key={index} className={styles.item3x3}>
-                    <img
-                      className={styles.company}
-                      src={`assets/companies/${index + 1}.png`}
-                    />
-                  </div>
-                ))} */}
                 {[
                   'https://www.deskpro.com/',
                   'https://www.nokia.com/',
