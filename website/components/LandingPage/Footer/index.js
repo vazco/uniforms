@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import GitHubButton from 'react-github-btn';
 import Link from '@docusaurus/Link';
 
 import styles from '../index.module.css';
@@ -49,13 +48,6 @@ export default function Footer() {
             <h2 className={classNames(styles.text, styles['footer-heading'])}>
               Join the Community!
             </h2>
-            <GitHubButton
-              href="https://github.com/vazco/uniforms"
-              data-show-count="true"
-              aria-label="Star vazco/uniforms on GitHub"
-            >
-              Star
-            </GitHubButton>
             <ul className={styles.bullets}>
               <Link to="https://gitter.im/vazco/uniforms">
                 <li>Gitter</li>
