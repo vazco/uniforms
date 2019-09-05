@@ -128,7 +128,7 @@ export default function OpenSource() {
         className={classNames(
           styles.centered,
           styles.text,
-          styles['always-open-source']
+          styles['heading-helper']
         )}
       >
         Always Open Source.

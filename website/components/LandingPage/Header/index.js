@@ -109,7 +109,7 @@ export default function Header() {
                 styles['text-huge']
               )}
             >
-              A React library for building forms from every schema
+              A React library for building forms from any schema
             </span>
             <ul className={classNames(styles.text, styles.bullets)}>
               <li>support of all schemas and themes</li>

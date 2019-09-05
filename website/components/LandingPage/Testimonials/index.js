@@ -48,7 +48,7 @@ export default function Testimonials() {
         className={classNames(
           styles.centered,
           styles.text,
-          styles['always-open-source']
+          styles['heading-helper']
         )}
       >
         They speak about us

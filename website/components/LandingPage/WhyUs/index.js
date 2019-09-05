@@ -48,7 +48,7 @@ export default function WhyUs() {
               />
               <div className={classNames('row', styles.padding)}>
                 <div className="col">
-                  <Oval size="100px">
+                  <Oval className={styles.white}>
                     <img
                       src="assets/icon-01.svg"
                       className={styles['small-image']}
@@ -66,7 +66,7 @@ export default function WhyUs() {
                   </ul>
                 </div>
                 <div className="col">
-                  <Oval size="100px">
+                  <Oval className={styles.white}>
                     <img
                       src="assets/icon-02.svg"
                       className={styles['small-image']}
