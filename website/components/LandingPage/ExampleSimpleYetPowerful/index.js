@@ -11,7 +11,13 @@ import styles from '../index.module.css';
 export default function ExampleSimpleYetPowerful() {
   return (
     <div className={classNames('section', styles.example)}>
-      <div className={classNames('row', styles['reverse-wrap'])}>
+      <div
+        className={classNames(
+          'row',
+          styles['blue-accent'],
+          styles['reverse-wrap']
+        )}
+      >
         <div className="col">
           <div
             className={classNames(styles['preview-border'], styles['preview'])}

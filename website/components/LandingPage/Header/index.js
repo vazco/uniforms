@@ -16,6 +16,7 @@ function SystemWindow({ children, className, ...props }) {
       {...props}
       className={classNames(
         styles['system-window'],
+        styles['blue-accent'],
         styles['preview-border'],
         className
       )}

@@ -23,10 +23,10 @@
   --uni-heading-helper-color: var(--dusk-blue);
   --uni-testimonial-text-color: var(--greyish-brown);
 
-  --uni-border-color: var(--dodger-blue);
-  --uni-box-shadow-color: var(--dodger-blue-10);
   --uni-background-color: var(--white);
   --uni-oval-shadow-color: var(--pale-grey);
+
+  --ifm-button-color: var(--white);
 }
 
 :root[data-theme='dark'] {

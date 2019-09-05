@@ -276,9 +276,16 @@
   }
 }
 
-.border-green {
+.green-accent {
   --uni-border-color: var(--greenblue);
   --uni-box-shadow-color: var(--greenblue-10);
+  --ifm-menu-color-active: var(--uni-border-color);
+}
+
+.blue-accent {
+  --uni-border-color: var(--dodger-blue);
+  --uni-box-shadow-color: var(--dodger-blue-10);
+  --ifm-menu-color-active: var(--uni-border-color);
 }
 
 .grid3x3 {

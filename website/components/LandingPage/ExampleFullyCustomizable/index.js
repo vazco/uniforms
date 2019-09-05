@@ -16,7 +16,7 @@ export default function ExampleFullyCustomizable() {
           <div
             className={classNames(
               styles['solid-border-box'],
-              styles['border-green'],
+              styles['green-accent'],
               styles['fully-customizable-text']
             )}
           >
@@ -40,7 +40,7 @@ export default function ExampleFullyCustomizable() {
           <div
             className={classNames(
               styles['preview-border'],
-              styles['border-green'],
+              styles['green-accent'],
               styles['preview']
             )}
           >
