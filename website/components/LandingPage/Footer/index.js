@@ -61,9 +61,11 @@ export default function Footer() {
             <h2 className={classNames(styles.text, styles['footer-heading'])}>
               Start a conversation!
             </h2>
-            <p className={classNames(styles.text, styles.paragraph)}>
-              <Link to="mailto:hello@uniforms.tools">hello@uniforms.tools</Link>
-            </p>
+            <Link to="mailto:hello@uniforms.tools">
+              <p className={classNames(styles.text, styles.paragraph)}>
+                hello@uniforms.tools
+              </p>
+            </Link>
             <a href="https://vazco.eu">
               <img className={styles.vazco} src="assets/vazco.svg" />
             </a>
