@@ -1,3 +1,4 @@
+import Link from '@docusaurus/Link';
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Star, GitBranch, Download } from 'react-feather';
@@ -8,9 +9,9 @@ import Oval from '../common/Oval';
 
 import styles from '../index.module.css';
 
-function Badge({ border, number, text, icon: Icon, color }) {
+function Badge({ border, number, text, to, icon: Icon, color }) {
   return (
-    <div className={classNames(styles.badge)}>
+    <Link to={to} className={classNames(styles.badge)}>
       <img
         className={styles['badge-image']}
         src={`assets/border-0${border}.svg`}
@@ -26,7 +27,7 @@ function Badge({ border, number, text, icon: Icon, color }) {
         </div>
         <p className={styles.text}>{text}</p>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -152,6 +153,7 @@ export default function OpenSource() {
       </Heading>
       <div className={classNames('row', styles.badges)}>
         <Badge
+          to="https://github.com/vazco/uniforms/stargazers"
           text="Stars"
           border={1}
           number={stars}
@@ -159,6 +161,7 @@ export default function OpenSource() {
           color="#723CFF"
         />
         <Badge
+          to="https://github.com/vazco/uniforms/network/members"
           text="Forks"
           border={2}
           number={forks}
@@ -166,6 +169,7 @@ export default function OpenSource() {
           color="#3FBBFE"
         />
         <Badge
+          to="https://www.npmjs.com/package/uniforms"
           text="Downloads"
           border={3}
           number={downloads}

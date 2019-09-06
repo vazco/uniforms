@@ -507,6 +507,7 @@
   font-style: normal;
   letter-spacing: normal;
   line-height: normal;
+  color: var(--ifm-font-base-color);
 }
 
 .text-big {
