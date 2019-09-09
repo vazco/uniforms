@@ -2,7 +2,6 @@ import Link from '@docusaurus/Link';
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Star, GitBranch, Download } from 'react-feather';
-import pick from 'lodash/pick';
 
 import Heading from '../common/Heading';
 import Oval from '../common/Oval';
@@ -44,49 +43,45 @@ function cacheGet(key) {
   }
 }
 
-function cacheSet(key, data) {
-  const twoMinutes = Date.now() + 2 * 60 * 1000;
+function cacheSet(key, data, length = 120000) {
+  const expires = Date.now() + length;
   try {
-    localStorage.setItem(
-      cacheKey(key),
-      JSON.stringify({ data, expires: twoMinutes })
-    );
+    localStorage.setItem(cacheKey(key), JSON.stringify({ data, expires }));
   } catch (error) {
     // Nothing.
   }
 }
 
-function cached(key, fallback, properties) {
+function cached(key, fallback, length) {
   const data = cacheGet(key);
   if (data) return Promise.resolve(data);
 
   return fallback().then(data => {
-    if (properties) data = pick(data, properties);
-    cacheSet(key, data);
+    cacheSet(key, data, length);
     return data;
   }, console.error);
 }
 
-function getNPMDownloads(from, to) {
-  function dateRanges(from, to) {
-    from = new Date(from);
-    to = new Date(to);
+function yyyymmdd(date) {
+  return date.toISOString().slice(0, 10);
+}
 
-    const length =
-      (to.getFullYear() - from.getFullYear()) * 12 +
-      (to.getMonth() - from.getMonth());
+function dateRanges(from, to) {
+  from = new Date(from);
+  to = new Date(to);
 
-    const dates = Array.from({ length })
-      .map(() =>
-        new Date(from.setMonth(from.getMonth() + 1)).toISOString().slice(0, 10)
-      )
-      .concat([to.toISOString().slice(0, 10)]);
-
-    return dates
-      .reduce((acc, curr, i, arr) => acc.concat(curr + ':' + arr[i + 1]), [])
-      .slice(0, -1);
+  const dates = [yyyymmdd(from)];
+  while (from < to) {
+    dates.push(yyyymmdd(new Date(from.setMonth(from.getMonth() + 1))));
   }
+  dates.concat([yyyymmdd(to)]);
 
+  return dates
+    .reduce((acc, curr, i, arr) => acc.concat(curr + ':' + arr[i + 1]), [])
+    .slice(0, -1);
+}
+
+function getNPMDownloads(from, to) {
   const dates = dateRanges(from, to);
 
   return Promise.all(
@@ -98,32 +93,47 @@ function getNPMDownloads(from, to) {
   ).then(sums => sums.reduce((acc, curr) => acc + curr));
 }
 
+function getGitHubStats() {
+  return fetch('https://api.github.com/repos/vazco/uniforms')
+    .then(response => response.json())
+    .then(({ stargazers_count: stars, forks_count: forks }) => ({
+      stars,
+      forks
+    }));
+}
+
 function useStats() {
   const [stars, setStars] = useState(null);
   const [forks, setForks] = useState(null);
   const [downloads, setDownloads] = useState(null);
 
   useEffect(() => {
-    cached(
-      'github',
-      () =>
-        fetch('https://api.github.com/repos/vazco/uniforms').then(response =>
-          response.json()
-        ),
-      ['stargazers_count', 'forks_count']
-    ).then(({ forks_count: forks, stargazers_count: stars }) => {
+    cached('github', getGitHubStats).then(({ forks, stars }) => {
       setForks(forks.toLocaleString('en-US'));
       setStars(stars.toLocaleString('en-US'));
     });
   }, [stars, forks]);
 
   useEffect(() => {
-    const from = '2016-01-01';
-    const today = new Date().toISOString().slice(0, 10);
+    const todayDate = new Date();
+    const memoizedMonths = 3;
 
-    cached(`npm-${from}--${today}`, () => getNPMDownloads(from, today)).then(
-      downloads => setDownloads(downloads.toLocaleString('en-US'))
+    const start = '2015-01-01';
+    const today = yyyymmdd(todayDate);
+    const mid = yyyymmdd(
+      new Date(todayDate.setMonth(todayDate.getMonth() - memoizedMonths))
     );
+
+    Promise.all([
+      cached(
+        `npm-${start}--${mid}`,
+        () => getNPMDownloads(start, mid),
+        memoizedMonths * 31 * 24 * 60 * 60 * 1000
+      ),
+      cached(`npm-${mid}--${today}`, () => getNPMDownloads(mid, today))
+    ])
+      .then(([a, b]) => a + b)
+      .then(downloads => setDownloads(downloads.toLocaleString('en-US')));
   }, [downloads]);
 
   return {
