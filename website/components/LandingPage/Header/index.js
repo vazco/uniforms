@@ -47,34 +47,34 @@ function Showcase() {
         {code(
           'javascript',
           `export const ShippingSchema = new SimpleSchema({
-    firstName: {
-      type: String
-    },
-    lastName: {
-      type: String
-    },
-    country: {
-      type: String,
-      allowedValues: ["Poland", "England"],
-      defaultValue: "Poland"
-    },
-    state: {
-      type: String,
-      optional: true
-    },
-    useThisAddressForPaymentDetails: {
-      type: Boolean
-    },
-    addressLine1: {
-      type: String
-    },
-    city: {
-      type: String
-    },
-    zip: {
-      type: String
-    }
-  });`
+  firstName: {
+    type: String
+  },
+  lastName: {
+    type: String
+  },
+  country: {
+    type: String,
+    allowedValues: ["Poland", "England"],
+    defaultValue: "Poland"
+  },
+  state: {
+    type: String,
+    optional: true
+  },
+  useThisAddressForPaymentDetails: {
+    type: Boolean
+  },
+  addressLine: {
+    type: String
+  },
+  city: {
+    type: String
+  },
+  zip: {
+    type: String
+  }
+});`
         )}
       </SystemWindow>
       <SystemWindow>

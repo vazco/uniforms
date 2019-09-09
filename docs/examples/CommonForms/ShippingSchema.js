@@ -19,7 +19,7 @@ export default new SimpleSchema({
   useThisAddressForPaymentDetails: {
     type: Boolean
   },
-  addressLine1: {
+  addressLine: {
     type: String
   },
   city: {

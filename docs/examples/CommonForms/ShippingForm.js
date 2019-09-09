@@ -37,7 +37,7 @@ export default function ShippingForm() {
 
         <div className="row">
           <div className="column">
-            <AutoField name="addressLine1" />
+            <AutoField name="addressLine" />
           </div>
         </div>
 
