@@ -7,7 +7,7 @@ import schema from './ShippingSchema';
 const model = {
   firstName: 'John',
   lastName: 'Doe',
-  addressLine1: '7 Podwale st.',
+  addressLine: '7 Podwale st.',
   city: 'Wroclaw'
 };
 
