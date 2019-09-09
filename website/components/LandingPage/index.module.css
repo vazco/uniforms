@@ -432,7 +432,7 @@
   padding: 20px;
   border-radius: 50%;
   box-shadow: 0 8px 23px 0 var(--uni-oval-shadow-color);
-  background-color: var(--uni-background-color);
+  background-color: var(--uni-oval-background-color);
 }
 
 .oval.white {

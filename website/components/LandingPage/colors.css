@@ -24,13 +24,14 @@
   --uni-testimonial-text-color: var(--greyish-brown);
 
   --uni-background-color: var(--white);
+  --uni-oval-background-color: var(--white);
   --uni-oval-shadow-color: var(--pale-grey);
 
   --ifm-button-color: var(--white);
 }
 
 :root[data-theme='dark'] {
-  --uni-oval-shadow-color: var(--greyish-brown);
+  --uni-oval-shadow-color: var(--black);
   --uni-background-color: var(--ifm-background-color);
   --uni-heading-color: var(--ifm-font-base-color);
   --uni-heading-helper-color: var(--ifm-font-base-color);
