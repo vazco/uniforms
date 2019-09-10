@@ -62,23 +62,29 @@ function cached(key, fallback, length) {
   }, console.error);
 }
 
-function yyyymmdd(date) {
+function formatDate(date) {
   return date.toISOString().slice(0, 10);
+}
+
+function formatNumber(number) {
+  return number.toLocaleString('en-US');
 }
 
 function dateRanges(from, to) {
   from = new Date(from);
   to = new Date(to);
 
-  const dates = [yyyymmdd(from)];
-  while (from < to) {
-    dates.push(yyyymmdd(new Date(from.setMonth(from.getMonth() + 1))));
+  function nextMonth(d) {
+    d.setMonth(d.getMonth() + 1);
+    return d;
   }
-  dates.concat([yyyymmdd(to)]);
 
-  return dates
-    .reduce((acc, curr, i, arr) => acc.concat(curr + ':' + arr[i + 1]), [])
-    .slice(0, -1);
+  const dates = [];
+  while (from < to) {
+    dates.push(`${formatDate(from)}:${formatDate(nextMonth(from))}`);
+  }
+
+  return dates;
 }
 
 function getNPMDownloads(from, to) {
@@ -109,8 +115,8 @@ function useStats() {
 
   useEffect(() => {
     cached('github', getGitHubStats).then(({ forks, stars }) => {
-      setForks(forks.toLocaleString('en-US'));
-      setStars(stars.toLocaleString('en-US'));
+      setForks(formatNumber(forks));
+      setStars(formatNumber(stars));
     });
   }, [stars, forks]);
 
@@ -118,9 +124,9 @@ function useStats() {
     const todayDate = new Date();
     const memoizedMonths = 3;
 
-    const start = '2015-01-01';
-    const today = yyyymmdd(todayDate);
-    const mid = yyyymmdd(
+    const start = '2016-04-01';
+    const today = formatDate(todayDate);
+    const mid = formatDate(
       new Date(todayDate.setMonth(todayDate.getMonth() - memoizedMonths))
     );
 
@@ -133,7 +139,7 @@ function useStats() {
       cached(`npm-${mid}--${today}`, () => getNPMDownloads(mid, today))
     ])
       .then(([a, b]) => a + b)
-      .then(downloads => setDownloads(downloads.toLocaleString('en-US')));
+      .then(downloads => setDownloads(formatNumber(downloads)));
   }, [downloads]);
 
   return {
