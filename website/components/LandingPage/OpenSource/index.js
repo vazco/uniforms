@@ -37,14 +37,14 @@ function cacheKey(key) {
 function cacheGet(key) {
   try {
     const { expires, data } = JSON.parse(localStorage.getItem(cacheKey(key)));
-    if (expires > Date.now()) return data;
+    return { expired: expires < Date.now(), data };
   } catch (error) {
     // Nothing.
   }
+  return {};
 }
 
-function cacheSet(key, data, length = 120000) {
-  const expires = Date.now() + length;
+function cacheSet(key, data, expires) {
   try {
     localStorage.setItem(cacheKey(key), JSON.stringify({ data, expires }));
   } catch (error) {
@@ -52,28 +52,30 @@ function cacheSet(key, data, length = 120000) {
   }
 }
 
-function cached(key, fallback, length) {
-  const data = cacheGet(key);
-  if (data) return Promise.resolve(data);
+function cached(key, fallback, expires) {
+  const { expired, data } = cacheGet(key);
 
-  return fallback().then(data => {
-    cacheSet(key, data, length);
-    return data;
-  }, console.error);
+  if (data === undefined || expired === true) {
+    return fallback()
+      .then(data => {
+        cacheSet(key, data, expires);
+        return data;
+      })
+      .catch(() => data || 0);
+  }
+
+  return Promise.resolve(data);
 }
 
 function formatDate(date) {
-  return date.toISOString().slice(0, 10);
+  return date && date.toISOString().slice(0, 10);
 }
 
 function formatNumber(number) {
-  return number.toLocaleString('en-US');
+  return number && number.toLocaleString('en-US');
 }
 
 function dateRanges(from, to) {
-  from = new Date(from);
-  to = new Date(to);
-
   function nextMonth(d) {
     d.setMonth(d.getMonth() + 1);
     return d;
@@ -88,14 +90,27 @@ function dateRanges(from, to) {
 }
 
 function getNPMDownloads(from, to) {
+  function getRange(range, expires) {
+    return cached(
+      `npm-${range}`,
+      () =>
+        fetch(`https://api.npmjs.org/downloads/point/${range}/uniforms`)
+          .then(response => response.json())
+          .then(({ downloads }) => downloads || 0),
+      expires
+    );
+  }
+
   const dates = dateRanges(from, to);
+  const lastRange = dates.pop();
+
+  const oneYear = 12 * 31 * 24 * 60 * 60 * 1000;
+  const oneDay = 1 * 24 * 60 * 60 * 1000;
 
   return Promise.all(
-    dates.map(range =>
-      fetch(`https://api.npmjs.org/downloads/point/${range}/uniforms`)
-        .then(response => response.json())
-        .then(({ downloads }) => downloads || 0)
-    )
+    dates
+      .map(range => getRange(range, Date.now() + oneYear))
+      .concat(getRange(lastRange, Date.now() + oneDay))
   ).then(sums => sums.reduce((acc, curr) => acc + curr));
 }
 
@@ -117,29 +132,16 @@ function useStats() {
     cached('github', getGitHubStats).then(({ forks, stars }) => {
       setForks(formatNumber(forks));
       setStars(formatNumber(stars));
-    });
+    }, Date.now() + 2 * 60 * 1000);
   }, [stars, forks]);
 
   useEffect(() => {
-    const todayDate = new Date();
-    const memoizedMonths = 3;
+    const start = new Date('2016-04-01');
+    const today = new Date();
 
-    const start = '2016-04-01';
-    const today = formatDate(todayDate);
-    const mid = formatDate(
-      new Date(todayDate.setMonth(todayDate.getMonth() - memoizedMonths))
+    getNPMDownloads(start, today).then(downloads =>
+      setDownloads(formatNumber(downloads))
     );
-
-    Promise.all([
-      cached(
-        `npm-${start}--${mid}`,
-        () => getNPMDownloads(start, mid),
-        memoizedMonths * 31 * 24 * 60 * 60 * 1000
-      ),
-      cached(`npm-${mid}--${today}`, () => getNPMDownloads(mid, today))
-    ])
-      .then(([a, b]) => a + b)
-      .then(downloads => setDownloads(formatNumber(downloads)));
   }, [downloads]);
 
   return {
