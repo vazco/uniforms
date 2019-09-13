@@ -8,7 +8,13 @@ import styles from '../index.module.css';
 
 export default function WhyUs() {
   return (
-    <div className={classNames('hero hero--primary', styles.whyus)}>
+    <div
+      className={classNames(
+        'hero hero--primary',
+        styles['overflow-hidden'],
+        styles.whyus
+      )}
+    >
       <div className="container">
         <div className="section">
           <div className="row">

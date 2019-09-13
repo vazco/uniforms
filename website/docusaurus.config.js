@@ -1,8 +1,12 @@
 const path = require('path');
 
 module.exports = {
+  customFields: {
+    email: 'hello@uniforms.tools',
+    keywords: ['forms', 'react', 'schema']
+  },
   title: 'uniforms',
-  tagline: 'A set of libraries for building forms in React from every schema.',
+  tagline: 'A React library for building forms from any schema',
   organizationName: 'vazco',
   projectName: 'uniforms',
   baseUrl: '/',

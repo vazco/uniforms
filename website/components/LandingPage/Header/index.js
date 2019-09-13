@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import classNames from 'classnames';
 
 import Button from '../common/Button';
@@ -89,6 +90,9 @@ function Showcase() {
 }
 
 export default function Header() {
+  const context = useDocusaurusContext();
+  const { siteConfig = {} } = context;
+  const { title, tagline } = siteConfig;
   return (
     <div className="hero hero--primary">
       <div className="container">
@@ -101,7 +105,7 @@ export default function Header() {
                 styles.title
               )}
             >
-              uniforms
+              {title}
             </span>
             <span
               className={classNames(
@@ -110,7 +114,7 @@ export default function Header() {
                 styles['text-huge']
               )}
             >
-              A React library for building forms from any schema
+              {tagline}
             </span>
             <ul className={classNames(styles.text, styles.bullets)}>
               <li>support of all schemas and themes</li>

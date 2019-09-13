@@ -9,7 +9,9 @@ import styles from '../index.module.css';
 
 export default function WhyUs() {
   return (
-    <div className="hero hero--primary">
+    <div
+      className={classNames('hero hero--primary', styles['overflow-hidden'])}
+    >
       <div className="container">
         <div className="section">
           <div className="row">
