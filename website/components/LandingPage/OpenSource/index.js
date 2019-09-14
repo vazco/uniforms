@@ -39,9 +39,8 @@ function cacheGet(key) {
     const { expires, data } = JSON.parse(localStorage.getItem(cacheKey(key)));
     return { expired: expires < Date.now(), data };
   } catch (error) {
-    // Nothing.
+    return { expired: true, data: null };
   }
-  return {};
 }
 
 function cacheSet(key, data, expires) {
@@ -55,7 +54,7 @@ function cacheSet(key, data, expires) {
 function cached(key, fallback, expires) {
   const { expired, data } = cacheGet(key);
 
-  if (data === undefined || expired === true) {
+  if (expired) {
     return fallback()
       .then(data => {
         cacheSet(key, data, expires);
@@ -68,11 +67,11 @@ function cached(key, fallback, expires) {
 }
 
 function formatDate(date) {
-  return date && date.toISOString().slice(0, 10);
+  return date.toISOString().slice(0, 10);
 }
 
 function formatNumber(number) {
-  return number && number.toLocaleString('en-US');
+  return number.toLocaleString('en-US');
 }
 
 function dateRanges(from, to) {
@@ -89,18 +88,18 @@ function dateRanges(from, to) {
   return dates;
 }
 
-function getNPMDownloads(from, to) {
-  function getRange(range, expires) {
-    return cached(
-      `npm-${range}`,
-      () =>
-        fetch(`https://api.npmjs.org/downloads/point/${range}/uniforms`)
-          .then(response => response.json())
-          .then(({ downloads }) => downloads || 0),
-      expires
-    );
-  }
+function getNPMDownloadsInRange(range, expires) {
+  return cached(
+    `npm-${range}`,
+    () =>
+      fetch(`https://api.npmjs.org/downloads/point/${range}/uniforms`)
+        .then(response => response.json())
+        .then(({ downloads }) => downloads || 0),
+    expires
+  );
+}
 
+function getNPMDownloads(from, to) {
   const dates = dateRanges(from, to);
   const lastRange = dates.pop();
 
@@ -109,8 +108,8 @@ function getNPMDownloads(from, to) {
 
   return Promise.all(
     dates
-      .map(range => getRange(range, Date.now() + oneYear))
-      .concat(getRange(lastRange, Date.now() + oneDay))
+      .map(range => getNPMDownloadsInRange(range, Date.now() + oneYear))
+      .concat(getNPMDownloadsInRange(lastRange, Date.now() + oneDay))
   ).then(sums => sums.reduce((acc, curr) => acc + curr));
 }
 
@@ -130,8 +129,8 @@ function useStats() {
 
   useEffect(() => {
     cached('github', getGitHubStats).then(({ forks, stars }) => {
-      setForks(formatNumber(forks));
-      setStars(formatNumber(stars));
+      forks && setForks(formatNumber(forks));
+      stars && setStars(formatNumber(stars));
     }, Date.now() + 2 * 60 * 1000);
   }, [stars, forks]);
 
