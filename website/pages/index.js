@@ -1,14 +1,16 @@
 import React from 'react';
 
 import Layout from '@theme/Layout';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import LandingPage from '../components/LandingPage';
 
-const keywords = ['forms', 'react', 'schema'];
-
 export default function HomePage() {
+  const context = useDocusaurusContext();
+  const { siteConfig = {} } = context;
+  const { tagline: description, customFields: { keywords } = {} } = siteConfig;
   return (
-    <Layout keywords={keywords}>
+    <Layout keywords={keywords} description={description}>
       <LandingPage />
     </Layout>
   );

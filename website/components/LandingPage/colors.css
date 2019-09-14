@@ -2,7 +2,8 @@
   --periwinkle: #8759ff;
   --bright-cyan: #3fc4fe;
   --sea-green: #42ffac;
-  --white: #ffffff;
+  --white: #fff;
+  --black: #000;
   --dark-blue-grey: #211b50;
   --dusk-blue: #412a94;
   --dodger-blue: #3fbbfe;
@@ -19,7 +20,20 @@
 
   --uni-hero-bgcolor: var(--dark-blue-grey);
   --uni-heading-color: var(--dusk-blue);
+  --uni-heading-helper-color: var(--dusk-blue);
+  --uni-testimonial-text-color: var(--greyish-brown);
 
-  --uni-border-color: var(--dodger-blue);
-  --uni-box-shadow-color: var(--dodger-blue-10);
+  --uni-background-color: var(--white);
+  --uni-oval-background-color: var(--white);
+  --uni-oval-shadow-color: var(--pale-grey);
+
+  --ifm-button-color: var(--white);
+}
+
+:root[data-theme='dark'] {
+  --uni-oval-shadow-color: var(--black);
+  --uni-background-color: var(--ifm-background-color);
+  --uni-heading-color: var(--ifm-font-base-color);
+  --uni-heading-helper-color: var(--ifm-font-base-color);
+  --uni-testimonial-text-color: var(--ifm-font-base-color);
 }

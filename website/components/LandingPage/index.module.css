@@ -7,11 +7,16 @@
   }
 }
 
+:global #__docusaurus {
+  overflow: hidden;
+}
+
 .padding {
   padding-top: 2em;
 }
 
 .landing table thead {
+  color: var(--black);
   background-attachment: fixed;
   background-image: linear-gradient(
     to right,
@@ -74,14 +79,14 @@
   left: 0;
   width: 4px;
   height: 4px;
-  background-color: #000;
+  background-color: var(--ifm-font-base-color);
 }
 
 .landing :global .hero.hero--primary {
   --ifm-hero-background-color: var(--dark-blue-grey);
 }
 
-.landing :global .hero {
+.landing .overflow-hidden {
   overflow: hidden;
 }
 
@@ -126,23 +131,22 @@
   .floating-example > *:first-child {
     margin-bottom: 4em;
   }
+  .floating-example .system-window {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
-@media (min-width: 996px) {
-  .floating-example {
-    transform: scale(0.8);
-    transform-origin: 0 0;
-  }
+@media (min-width: 997px) {
   .floating-example > div:last-child {
     position: absolute;
     top: 12.5%;
-    right: -40%;
-    width: 100%;
+    left: 40%;
   }
 }
 
 .system-window {
-  width: 100%;
+  width: 80%;
   padding: 0;
   border-radius: 1em;
   overflow: hidden;
@@ -251,7 +255,7 @@
 
 .preview {
   position: relative;
-  background-color: var(--white);
+  background-color: var(--uni-background-color);
   padding: 2em;
 }
 
@@ -272,9 +276,16 @@
   }
 }
 
-.border-green {
+.green-accent {
   --uni-border-color: var(--greenblue);
   --uni-box-shadow-color: var(--greenblue-10);
+  --ifm-menu-color-active: var(--uni-border-color);
+}
+
+.blue-accent {
+  --uni-border-color: var(--dodger-blue);
+  --uni-box-shadow-color: var(--dodger-blue-10);
+  --ifm-menu-color-active: var(--uni-border-color);
 }
 
 .grid3x3 {
@@ -338,6 +349,7 @@
 
 .testimonial {
   margin: 2em;
+  background: var(--ifm-background-surface-color);
 }
 
 .testimonial-content {
@@ -359,11 +371,10 @@
 }
 
 .section-bgwhite {
-  color: black;
+  color: var(--ifm-font-base-color);
 }
 
 .section-bgwhite-block {
-  background-color: var(--white);
   position: absolute;
   width: 200%;
   height: 100%;
@@ -372,10 +383,12 @@
 }
 
 .section-bgwhite-block-left {
+  background: var(--white);
   margin-left: -100%;
 }
 
 .section-bgwhite-block-right {
+  background: var(--uni-background-color);
   margin-right: -100%;
 }
 
@@ -407,19 +420,20 @@
   color: black;
 }
 
-.whouses {
-  background-color: var(--dark-blue-grey);
-  padding-bottom: 0 !important;
-}
-
 .oval {
   display: inline-block;
   width: 64px;
   height: 64px;
   padding: 20px;
   border-radius: 50%;
-  box-shadow: 0 8px 23px 0 var(--pale-grey);
+  box-shadow: 0 8px 23px 0 var(--uni-oval-shadow-color);
+  background-color: var(--uni-oval-background-color);
+}
+
+.oval.white {
   background-color: var(--white);
+  width: 100px;
+  height: 100px;
 }
 
 .top-right-corner {
@@ -488,6 +502,7 @@
   font-style: normal;
   letter-spacing: normal;
   line-height: normal;
+  color: var(--ifm-font-base-color);
 }
 
 .text-big {
@@ -501,8 +516,8 @@
   line-height: 1.25;
 }
 
-.text.always-open-source {
-  color: var(--dusk-blue);
+.text.heading-helper {
+  color: var(--uni-heading-helper-color);
   font-family: Muli;
   font-size: 1em;
   font-weight: 600;
@@ -591,7 +606,7 @@
 }
 
 .text.testimonial-description {
-  color: var(--greyish-brown);
+  color: var(--uni-testimonial-text-color);
   font-family: Muli;
   font-size: 1em;
   line-height: 1.75;

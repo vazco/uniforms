@@ -40,8 +40,10 @@ export default function ExamplesSubmitField() {
       schema={schema}
       onSubmit={model => alert(JSON.stringify(model, null, 2))}
     >
-      <ImageField name="pictureUrl" />
-      <SubmitField />
+      <div style={{ textAlign: 'center' }}>
+        <ImageField name="pictureUrl" />
+        <SubmitField />
+      </div>
     </AutoForm>
   );
 }

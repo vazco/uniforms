@@ -1,16 +1,16 @@
+import Link from '@docusaurus/Link';
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Star, GitBranch, Download } from 'react-feather';
-import pick from 'lodash/pick';
 
 import Heading from '../common/Heading';
 import Oval from '../common/Oval';
 
 import styles from '../index.module.css';
 
-function Badge({ border, number, text, icon: Icon, color }) {
+function Badge({ border, number, text, to, icon: Icon, color }) {
   return (
-    <div className={classNames(styles.badge)}>
+    <Link to={to} className={classNames(styles.badge)}>
       <img
         className={styles['badge-image']}
         src={`assets/border-0${border}.svg`}
@@ -26,7 +26,7 @@ function Badge({ border, number, text, icon: Icon, color }) {
         </div>
         <p className={styles.text}>{text}</p>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -37,35 +37,89 @@ function cacheKey(key) {
 function cacheGet(key) {
   try {
     const { expires, data } = JSON.parse(localStorage.getItem(cacheKey(key)));
-    if (expires > Date.now()) return data;
+    return { expired: expires < Date.now(), data };
   } catch (error) {
-    // Nothing.
+    return { expired: true, data: null };
   }
 }
 
-function cacheSet(key, data) {
-  const twoMinutes = Date.now() + 2 * 60 * 1000;
+function cacheSet(key, data, expires) {
   try {
-    localStorage.setItem(
-      cacheKey(key),
-      JSON.stringify({ data, expires: twoMinutes })
-    );
+    localStorage.setItem(cacheKey(key), JSON.stringify({ data, expires }));
   } catch (error) {
     // Nothing.
   }
 }
 
-function cachedFetch(key, url, properties) {
-  const data = cacheGet(key);
-  if (data) return Promise.resolve(data);
+function cached(key, fallback, expires) {
+  const { expired, data } = cacheGet(key);
 
-  return fetch(url)
+  if (expired) {
+    return fallback()
+      .then(data => {
+        cacheSet(key, data, expires);
+        return data;
+      })
+      .catch(() => data || 0);
+  }
+
+  return Promise.resolve(data);
+}
+
+function formatDate(date) {
+  return date.toISOString().slice(0, 10);
+}
+
+function formatNumber(number) {
+  return number.toLocaleString('en-US');
+}
+
+function dateRanges(from, to) {
+  function nextMonth(d) {
+    d.setMonth(d.getMonth() + 1);
+    return d;
+  }
+
+  const dates = [];
+  while (from < to) {
+    dates.push(`${formatDate(from)}:${formatDate(nextMonth(from))}`);
+  }
+
+  return dates;
+}
+
+function getNPMDownloadsInRange(range, expires) {
+  return cached(
+    `npm-${range}`,
+    () =>
+      fetch(`https://api.npmjs.org/downloads/point/${range}/uniforms`)
+        .then(response => response.json())
+        .then(({ downloads }) => downloads || 0),
+    expires
+  );
+}
+
+function getNPMDownloads(from, to) {
+  const dates = dateRanges(from, to);
+  const lastRange = dates.pop();
+
+  const oneYear = 12 * 31 * 24 * 60 * 60 * 1000;
+  const oneDay = 1 * 24 * 60 * 60 * 1000;
+
+  return Promise.all(
+    dates
+      .map(range => getNPMDownloadsInRange(range, Date.now() + oneYear))
+      .concat(getNPMDownloadsInRange(lastRange, Date.now() + oneDay))
+  ).then(sums => sums.reduce((acc, curr) => acc + curr));
+}
+
+function getGitHubStats() {
+  return fetch('https://api.github.com/repos/vazco/uniforms')
     .then(response => response.json())
-    .then(data => {
-      if (properties) data = pick(data, properties);
-      cacheSet(key, data);
-      return data;
-    }, console.error);
+    .then(({ stargazers_count: stars, forks_count: forks }) => ({
+      stars,
+      forks
+    }));
 }
 
 function useStats() {
@@ -73,44 +127,20 @@ function useStats() {
   const [forks, setForks] = useState(null);
   const [downloads, setDownloads] = useState(null);
 
-  function dateRanges(from, to) {
-    from = new Date(from);
-    to = new Date(to);
-    const length = to.getFullYear() - from.getFullYear();
-    const dates = Array.from({ length })
-      .map((_, i) => from.getFullYear() + i + '-01-01')
-      .concat([to.toISOString().slice(0, 10)]);
-    return dates
-      .reduce((acc, curr, i, arr) => acc.concat(curr + ':' + arr[i + 1]), [])
-      .slice(0, -1);
-  }
-
   useEffect(() => {
-    cachedFetch('github', 'https://api.github.com/repos/vazco/uniforms', [
-      'stargazers_count',
-      'forks_count'
-    ]).then(({ forks_count: forks, stargazers_count: stars }) => {
-      setForks(forks.toLocaleString('en-US'));
-      setStars(stars.toLocaleString('en-US'));
-    });
+    cached('github', getGitHubStats).then(({ forks, stars }) => {
+      forks && setForks(formatNumber(forks));
+      stars && setStars(formatNumber(stars));
+    }, Date.now() + 2 * 60 * 1000);
   }, [stars, forks]);
 
   useEffect(() => {
-    const from = '2014-01-01';
-    const today = new Date().toISOString().slice(0, 10);
-    const dates = dateRanges(from, today);
+    const start = new Date('2016-04-01');
+    const today = new Date();
 
-    Promise.all(
-      dates.map(range =>
-        cachedFetch(
-          `npm-${range}`,
-          `https://api.npmjs.org/downloads/point/${range}/uniforms`,
-          ['downloads']
-        ).then(({ downloads }) => downloads || 0)
-      )
-    )
-      .then(sums => sums.reduce((acc, curr) => acc + curr))
-      .then(downloads => setDownloads(downloads.toLocaleString('en-US')));
+    getNPMDownloads(start, today).then(downloads =>
+      setDownloads(formatNumber(downloads))
+    );
   }, [downloads]);
 
   return {
@@ -128,7 +158,7 @@ export default function OpenSource() {
         className={classNames(
           styles.centered,
           styles.text,
-          styles['always-open-source']
+          styles['heading-helper']
         )}
       >
         Always Open Source.
@@ -140,6 +170,7 @@ export default function OpenSource() {
       </Heading>
       <div className={classNames('row', styles.badges)}>
         <Badge
+          to="https://github.com/vazco/uniforms/stargazers"
           text="Stars"
           border={1}
           number={stars}
@@ -147,6 +178,7 @@ export default function OpenSource() {
           color="#723CFF"
         />
         <Badge
+          to="https://github.com/vazco/uniforms/network/members"
           text="Forks"
           border={2}
           number={forks}
@@ -154,6 +186,7 @@ export default function OpenSource() {
           color="#3FBBFE"
         />
         <Badge
+          to="https://www.npmjs.com/package/uniforms"
           text="Downloads"
           border={3}
           number={downloads}

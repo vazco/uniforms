@@ -8,7 +8,13 @@ import styles from '../index.module.css';
 
 export default function WhyUs() {
   return (
-    <div className={classNames('hero hero--primary', styles.whyus)}>
+    <div
+      className={classNames(
+        'hero hero--primary',
+        styles['overflow-hidden'],
+        styles.whyus
+      )}
+    >
       <div className="container">
         <div className="section">
           <div className="row">
@@ -48,7 +54,7 @@ export default function WhyUs() {
               />
               <div className={classNames('row', styles.padding)}>
                 <div className="col">
-                  <Oval size="100px">
+                  <Oval className={styles.white}>
                     <img
                       src="assets/icon-01.svg"
                       className={styles['small-image']}
@@ -66,7 +72,7 @@ export default function WhyUs() {
                   </ul>
                 </div>
                 <div className="col">
-                  <Oval size="100px">
+                  <Oval className={styles.white}>
                     <img
                       src="assets/icon-02.svg"
                       className={styles['small-image']}

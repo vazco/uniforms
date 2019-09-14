@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import Link from '@docusaurus/Link';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import styles from '../index.module.css';
 
@@ -19,6 +20,9 @@ function ShowcaseCard() {
 }
 
 export default function Footer() {
+  const context = useDocusaurusContext();
+  const { siteConfig = {} } = context;
+  const { customFields: { email } = {} } = siteConfig;
   return (
     <footer className={classNames('hero hero--primary', styles.footer)}>
       <div className="container">
@@ -61,9 +65,11 @@ export default function Footer() {
             <h2 className={classNames(styles.text, styles['footer-heading'])}>
               Start a conversation!
             </h2>
-            <p className={classNames(styles.text, styles.paragraph)}>
-              <Link to="mailto:hello@uniforms.tools">hello@uniforms.tools</Link>
-            </p>
+            <Link to={`mailto:${email}`}>
+              <p className={classNames(styles.text, styles.paragraph)}>
+                {email}
+              </p>
+            </Link>
             <a href="https://vazco.eu">
               <img className={styles.vazco} src="assets/vazco.svg" />
             </a>

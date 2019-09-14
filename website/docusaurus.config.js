@@ -2,11 +2,15 @@ const path = require('path');
 
 module.exports = {
   title: 'uniforms',
-  tagline: 'A set of libraries for building forms in React from every schema.',
+  tagline: 'A React library for building forms from any schema',
   organizationName: 'vazco',
   projectName: 'uniforms',
   baseUrl: '/',
   url: 'https://uniforms.tools/',
+  customFields: {
+    email: 'hello@uniforms.tools',
+    keywords: ['forms', 'react', 'schema']
+  },
   themeConfig: {
     algolia: {
       algoliaOptions: {},

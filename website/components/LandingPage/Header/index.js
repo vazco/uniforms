@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import classNames from 'classnames';
 
 import Button from '../common/Button';
@@ -16,6 +17,7 @@ function SystemWindow({ children, className, ...props }) {
       {...props}
       className={classNames(
         styles['system-window'],
+        styles['blue-accent'],
         styles['preview-border'],
         className
       )}
@@ -46,38 +48,34 @@ function Showcase() {
         {code(
           'javascript',
           `export const ShippingSchema = new SimpleSchema({
-    firstName: {
-      type: String
-    },
-    lastName: {
-      type: String
-    },
-    country: {
-      type: String,
-      allowedValues: ["Poland", "England", "Germany", "Russia"],
-      defaultValue: "Poland"
-    },
-    state: {
-      type: String,
-      optional: true
-    },
-    useThisAddressForPaymentDetails: {
-      type: Boolean
-    },
-    addressLine1: {
-      type: String
-    },
-    addressLine2: {
-      type: String,
-      optional: true
-    },
-    city: {
-      type: String
-    },
-    zip: {
-      type: String
-    }
-  });`
+  firstName: {
+    type: String
+  },
+  lastName: {
+    type: String
+  },
+  country: {
+    type: String,
+    allowedValues: ["Poland", "England"],
+    defaultValue: "Poland"
+  },
+  state: {
+    type: String,
+    optional: true
+  },
+  useThisAddressForPaymentDetails: {
+    type: Boolean
+  },
+  addressLine: {
+    type: String
+  },
+  city: {
+    type: String
+  },
+  zip: {
+    type: String
+  }
+});`
         )}
       </SystemWindow>
       <SystemWindow>
@@ -92,6 +90,9 @@ function Showcase() {
 }
 
 export default function Header() {
+  const context = useDocusaurusContext();
+  const { siteConfig = {} } = context;
+  const { title, tagline } = siteConfig;
   return (
     <div className="hero hero--primary">
       <div className="container">
@@ -104,7 +105,7 @@ export default function Header() {
                 styles.title
               )}
             >
-              uniforms
+              {title}
             </span>
             <span
               className={classNames(
@@ -113,7 +114,7 @@ export default function Header() {
                 styles['text-huge']
               )}
             >
-              A React library for building forms from every schema
+              {tagline}
             </span>
             <ul className={classNames(styles.text, styles.bullets)}>
               <li>support of all schemas and themes</li>
