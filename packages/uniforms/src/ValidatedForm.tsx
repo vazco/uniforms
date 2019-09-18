@@ -49,7 +49,7 @@ const Validated = (parent: any) =>
       uniforms: childContextTypes
     };
 
-    validate: () => Promise<unknown>;
+    validate: (key?: any, value?: any) => Promise<unknown>;
     validateModel: (model: any) => Promise<unknown>;
 
     constructor() {
