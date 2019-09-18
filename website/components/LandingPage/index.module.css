@@ -82,7 +82,6 @@
   --ifm-hero-background-color: var(--dark-blue-grey);
 }
 
-.landing .overflow-hidden,
 .overflow-hidden {
   overflow: hidden;
 }
