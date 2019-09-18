@@ -46,6 +46,21 @@ const extractValue = (...xs) =>
     x === false || x === null ? '' : x !== true && x !== undefined ? x : y
   );
 
+const pathToName = path => {
+  if (path[0] === '.')
+    path = path
+      .replace(/\['(.+?)'\]/g, '.$1')
+      .replace(/\[(.+?)\]/g, '.$1')
+      .replace(/\\'/g, "'");
+  else
+    path = path
+      .replace(/\//g, '.')
+      .replace(/~0/g, '~')
+      .replace(/~1/g, '/');
+
+  return path.slice(1);
+};
+
 const toHumanLabel = label => upperFirst(lowerCase(label));
 
 export default class JSONSchemaBridge extends Bridge {
@@ -71,7 +86,8 @@ export default class JSONSchemaBridge extends Bridge {
       error.details &&
       error.details.find &&
       error.details.find(detail => {
-        const path = detail.dataPath.substring(1);
+        const path = pathToName(detail.dataPath);
+
         return (
           name === path ||
           (rootName === path && baseName === detail.params.missingProperty)
