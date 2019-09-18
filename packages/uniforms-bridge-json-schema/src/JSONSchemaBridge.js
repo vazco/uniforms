@@ -4,7 +4,6 @@ import invariant from 'invariant';
 import lowerCase from 'lodash/lowerCase';
 import omit from 'lodash/omit';
 import upperFirst from 'lodash/upperFirst';
-
 import Bridge from 'uniforms/Bridge';
 import joinName from 'uniforms/joinName';
 

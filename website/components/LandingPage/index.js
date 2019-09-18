@@ -11,7 +11,6 @@ import WhoUses from './WhoUses';
 import Testimonials from './Testimonials';
 import Comparison from './Comparison';
 import Footer from './Footer';
-
 import styles from './index.module.css';
 
 export default function LandingPage() {

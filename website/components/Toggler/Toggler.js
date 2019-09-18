@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import TogglerHeader from './TogglerHeader';
 import PropTypes from 'prop-types';
+
+import TogglerHeader from './TogglerHeader';
 import { getDefaultToggle } from './index.js';
 
 function Toggler({ items }) {

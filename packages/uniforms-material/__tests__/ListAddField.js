@@ -4,7 +4,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import ListAddField from 'uniforms-material/ListAddField';
-
 import createContext from './_createContext';
 
 const parent = {

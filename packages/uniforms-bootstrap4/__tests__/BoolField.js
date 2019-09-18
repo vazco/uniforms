@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import BoolField from 'uniforms-bootstrap4/BoolField';
-
 import createContext from './_createContext';
 
 test('<BoolField> - renders an input', () => {

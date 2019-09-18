@@ -5,7 +5,6 @@ import { mount } from 'enzyme';
 
 import AutoField from 'uniforms-material/AutoField';
 import NestField from 'uniforms-material/NestField';
-
 import createContext from './_createContext';
 
 test('<NestField> - renders an <AutoField> for each field', () => {

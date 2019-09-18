@@ -3,7 +3,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import LongTextField from 'uniforms-antd/LongTextField';
-
 import createContext from './_createContext';
 
 const TextArea = Input.TextArea || Input;

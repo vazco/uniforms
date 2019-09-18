@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import TextField from 'uniforms-bootstrap3/TextField';
-
 import createContext from './_createContext';
 
 test('<TextField> - renders an input', () => {

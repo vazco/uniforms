@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import HiddenField from 'uniforms-unstyled/HiddenField';
-
 import createContext from './_createContext';
 
 test('<HiddenField> - renders an input', () => {

@@ -4,7 +4,6 @@ import { mount } from 'enzyme';
 import AutoField from 'uniforms-material/AutoField';
 import ListDelField from 'uniforms-material/ListDelField';
 import ListItemField from 'uniforms-material/ListItemField';
-
 import createContext from './_createContext';
 
 test('<ListItemField> - works', () => {

@@ -4,7 +4,6 @@ import moment from 'moment';
 import { mount } from 'enzyme';
 
 import DateField from 'uniforms-antd/DateField';
-
 import createContext from './_createContext';
 
 test('<DateField> - renders an input', () => {

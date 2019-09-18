@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-
 import randomIds from 'uniforms/randomIds';
 
 import createSchema from './_createSchema';

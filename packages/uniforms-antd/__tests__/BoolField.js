@@ -4,7 +4,6 @@ import Checkbox from 'antd/lib/checkbox';
 import { mount } from 'enzyme';
 
 import BoolField from 'uniforms-antd/BoolField';
-
 import createContext from './_createContext';
 
 test('<BoolField> - renders a switch input', () => {

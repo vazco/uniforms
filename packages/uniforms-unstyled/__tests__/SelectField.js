@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import SelectField from 'uniforms-unstyled/SelectField';
-
 import createContext from './_createContext';
 
 test('<SelectField> - renders a select', () => {

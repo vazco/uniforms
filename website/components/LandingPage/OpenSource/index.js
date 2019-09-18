@@ -1,11 +1,10 @@
 import Link from '@docusaurus/Link';
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { Star, GitBranch, Download } from 'react-feather';
+import { Download, GitBranch, Star } from 'react-feather';
 
 import Heading from '../common/Heading';
 import Oval from '../common/Oval';
-
 import styles from '../index.module.css';
 
 function Badge({ border, number, text, to, icon: Icon, color }) {

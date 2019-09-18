@@ -10,7 +10,6 @@ import NumField from 'uniforms-bootstrap4/NumField';
 import RadioField from 'uniforms-bootstrap4/RadioField';
 import SelectField from 'uniforms-bootstrap4/SelectField';
 import TextField from 'uniforms-bootstrap4/TextField';
-
 import createContext from './_createContext';
 
 test('<AutoField> - works', () => {

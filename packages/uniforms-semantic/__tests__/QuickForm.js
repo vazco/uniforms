@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import QuickForm from 'uniforms-semantic/QuickForm';
-
 import createSchema from './_createSchema';
 
 test('<QuickForm> - renders', () => {

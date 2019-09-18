@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import ListDelField from 'uniforms-bootstrap4/ListDelField';
-
 import createContext from './_createContext';
 
 const parent = {

@@ -5,7 +5,6 @@ import Heading from '../common/Heading';
 import ExampleCustomizer from '../../ExampleCustomizer';
 import { code } from '../../Code';
 import ImageField from '../../../../docs/examples/CustomFields/ImageField';
-
 import styles from '../index.module.css';
 
 export default function ExampleFullyCustomizable() {

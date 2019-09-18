@@ -10,7 +10,6 @@ import NumField from 'uniforms-semantic/NumField';
 import RadioField from 'uniforms-semantic/RadioField';
 import SelectField from 'uniforms-semantic/SelectField';
 import TextField from 'uniforms-semantic/TextField';
-
 import createContext from './_createContext';
 
 test('<AutoField> - works', () => {

@@ -10,7 +10,6 @@ import NumField from 'uniforms-antd/NumField';
 import RadioField from 'uniforms-antd/RadioField';
 import SelectField from 'uniforms-antd/SelectField';
 import TextField from 'uniforms-antd/TextField';
-
 import createContext from './_createContext';
 
 test('<AutoField> - works', () => {

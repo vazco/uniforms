@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-  Code as CodeIcon,
   Box as BoxIcon,
+  Code as CodeIcon,
   Database as DatabaseIcon
 } from 'react-feather';
 

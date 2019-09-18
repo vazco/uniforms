@@ -5,7 +5,6 @@ import Heading from '../common/Heading';
 import ExampleCustomizer from '../../ExampleCustomizer';
 import { code } from '../../Code';
 import SignUp from '../../../../docs/examples/CommonForms/SignUp';
-
 import styles from '../index.module.css';
 
 export default function ExampleSimpleYetPowerful() {

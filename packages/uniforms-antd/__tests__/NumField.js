@@ -3,7 +3,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import NumField from 'uniforms-antd/NumField';
-
 import createContext from './_createContext';
 
 test('<NumField> - renders an InputNumber', () => {

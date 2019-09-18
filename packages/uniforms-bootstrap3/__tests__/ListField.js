@@ -4,7 +4,6 @@ import { mount } from 'enzyme';
 import ListAddField from 'uniforms-bootstrap3/ListAddField';
 import ListField from 'uniforms-bootstrap3/ListField';
 import ListItemField from 'uniforms-bootstrap3/ListItemField';
-
 import createContext from './_createContext';
 
 test('<ListField> - works', () => {

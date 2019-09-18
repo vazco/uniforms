@@ -2,9 +2,9 @@ import get from 'lodash/get';
 import React, {
   useCallback,
   useContext,
+  useEffect,
   useRef,
-  useState,
-  useEffect
+  useState
 } from 'react';
 
 import styles from './FormWrapper.module.css';

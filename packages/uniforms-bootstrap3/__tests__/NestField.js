@@ -3,7 +3,6 @@ import { mount } from 'enzyme';
 
 import AutoField from 'uniforms-bootstrap3/AutoField';
 import NestField from 'uniforms-bootstrap3/NestField';
-
 import createContext from './_createContext';
 
 test('<NestField> - renders an <AutoField> for each field', () => {

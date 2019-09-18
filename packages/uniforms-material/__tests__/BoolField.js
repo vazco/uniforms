@@ -7,7 +7,6 @@ import Switch from '@material-ui/core/Switch';
 import { mount } from 'enzyme';
 
 import BoolField from 'uniforms-material/BoolField';
-
 import createContext from './_createContext';
 
 test('<BoolField> - renders an Checkbox', () => {

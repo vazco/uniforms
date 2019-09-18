@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import BaseForm from 'uniforms-semantic/BaseForm';
-
 import createSchema from './_createSchema';
 
 test('<BaseForm> - works', () => {

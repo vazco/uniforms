@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+
 import styles from './Tabs.module.css';
 
 export default function TabsHeaderItem({ children, active, onClick }) {

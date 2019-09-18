@@ -3,7 +3,6 @@ import TextFieldMaterial from '@material-ui/core/TextField';
 import { mount } from 'enzyme';
 
 import TextField from 'uniforms-material/TextField';
-
 import createContext from './_createContext';
 
 test('<TextField> - renders an TextField', () => {

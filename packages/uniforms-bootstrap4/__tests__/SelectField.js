@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import SelectField from 'uniforms-bootstrap4/SelectField';
-
 import createContext from './_createContext';
 
 test('<SelectField> - renders a select', () => {

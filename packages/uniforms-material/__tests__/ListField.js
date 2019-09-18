@@ -5,7 +5,6 @@ import { mount } from 'enzyme';
 import ListAddField from 'uniforms-material/ListAddField';
 import ListField from 'uniforms-material/ListField';
 import ListItemField from 'uniforms-material/ListItemField';
-
 import createContext from './_createContext';
 
 test('<ListField> - works', () => {

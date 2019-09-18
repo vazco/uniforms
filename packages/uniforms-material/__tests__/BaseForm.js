@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import BaseForm from 'uniforms-material/BaseForm';
-
 import createContext from './_createContext';
 import createSchema from './_createSchema';
 

@@ -10,7 +10,6 @@ import NumField from 'uniforms-unstyled/NumField';
 import RadioField from 'uniforms-unstyled/RadioField';
 import SelectField from 'uniforms-unstyled/SelectField';
 import TextField from 'uniforms-unstyled/TextField';
-
 import createContext from './_createContext';
 
 test('<AutoField> - works', () => {

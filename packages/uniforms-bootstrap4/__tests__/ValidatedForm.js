@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import ValidatedForm from 'uniforms-bootstrap4/ValidatedForm';
-
 import createSchema from './_createSchema';
 
 test('<ValidatedForm> - works', () => {

@@ -8,7 +8,6 @@ import { code } from '../../Code';
 import FormWrapper from '../../FormWrapper';
 import { ThemeProvider } from '../../ThemeContext';
 import ShippingForm from '../../../../docs/examples/CommonForms/ShippingForm';
-
 import styles from '../index.module.css';
 
 function SystemWindow({ children, className, ...props }) {

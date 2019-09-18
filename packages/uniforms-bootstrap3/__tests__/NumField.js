@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import NumField from 'uniforms-bootstrap3/NumField';
-
 import createContext from './_createContext';
 
 const expectedValueTransform =

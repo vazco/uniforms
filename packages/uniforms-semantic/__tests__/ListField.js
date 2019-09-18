@@ -4,7 +4,6 @@ import { mount } from 'enzyme';
 import ListAddField from 'uniforms-semantic/ListAddField';
 import ListField from 'uniforms-semantic/ListField';
 import ListItemField from 'uniforms-semantic/ListItemField';
-
 import createContext from './_createContext';
 
 test('<ListField> - works', () => {
