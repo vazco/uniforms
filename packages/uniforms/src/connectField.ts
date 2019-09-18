@@ -2,10 +2,10 @@ import { createElement } from 'react';
 
 import BaseField from './BaseField';
 
-const identity = x => x;
+const identity = (x: any) => x;
 
 export default function connectField(
-  component,
+  component: any,
   {
     baseField = BaseField,
     mapProps = identity,
@@ -14,13 +14,14 @@ export default function connectField(
     includeInChain,
     includeParent,
     initialValue
-  } = {}
+  }: any = {}
 ) {
   return class extends baseField {
     static displayName = `${component.displayName ||
       component.name}${baseField.displayName || baseField.name}`;
 
     constructor() {
+      // @ts-ignore
       super(...arguments);
 
       this.options.includeInChain =
