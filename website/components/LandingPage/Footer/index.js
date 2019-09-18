@@ -1,6 +1,6 @@
+import Link from '@docusaurus/Link';
 import React from 'react';
 import classNames from 'classnames';
-import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import styles from '../index.module.css';

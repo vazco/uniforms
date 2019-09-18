@@ -1,7 +1,7 @@
+import AutoForm from 'uniforms-material/AutoForm';
 import React from 'react';
 import { mount } from 'enzyme';
 
-import AutoForm from 'uniforms-material/AutoForm';
 import createContext from './_createContext';
 import createSchema from './_createSchema';
 

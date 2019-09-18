@@ -1,7 +1,7 @@
 import React from 'react';
+import TextField from 'uniforms-semantic/TextField';
 import { mount } from 'enzyme';
 
-import TextField from 'uniforms-semantic/TextField';
 import createContext from './_createContext';
 
 test('<TextField> - renders an input', () => {

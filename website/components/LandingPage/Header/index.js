@@ -1,14 +1,14 @@
-import React from 'react';
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import React from 'react';
 import classNames from 'classnames';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import Button from '../common/Button';
-import { code } from '../../Code';
 import FormWrapper from '../../FormWrapper';
-import { ThemeProvider } from '../../ThemeContext';
 import ShippingForm from '../../../../docs/examples/CommonForms/ShippingForm';
 import styles from '../index.module.css';
+import { ThemeProvider } from '../../ThemeContext';
+import { code } from '../../Code';
 
 function SystemWindow({ children, className, ...props }) {
   return (

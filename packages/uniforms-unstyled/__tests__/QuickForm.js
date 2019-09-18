@@ -1,7 +1,7 @@
+import QuickForm from 'uniforms-unstyled/QuickForm';
 import React from 'react';
 import { mount } from 'enzyme';
 
-import QuickForm from 'uniforms-unstyled/QuickForm';
 import createSchema from './_createSchema';
 
 test('<QuickForm> - renders', () => {

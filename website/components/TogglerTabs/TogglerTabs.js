@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
-import { TogglerHeader, getDefaultToggle } from '../Toggler';
-import { TabsHeader } from '../Tabs';
-import { useTabs } from '../Tabs/state';
 import styles from './TogglerTabs.module.css';
+import { TabsHeader } from '../Tabs';
+import { TogglerHeader, getDefaultToggle } from '../Toggler';
+import { useTabs } from '../Tabs/state';
 
 function TogglerTabs({ children, group, tabsItems, togglerItems }) {
   const { activeTab, onTab } = useTabs(group);

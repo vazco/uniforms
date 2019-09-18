@@ -1,7 +1,7 @@
+import AutoFields from 'uniforms-bootstrap4/AutoFields';
 import React from 'react';
 import { mount } from 'enzyme';
 
-import AutoFields from 'uniforms-bootstrap4/AutoFields';
 import createContext from './_createContext';
 
 test('<AutoFields> - works', () => {

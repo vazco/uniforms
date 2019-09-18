@@ -1,6 +1,3 @@
-import React from 'react';
-import { mount } from 'enzyme';
-
 import AutoField from 'uniforms-unstyled/AutoField';
 import BoolField from 'uniforms-unstyled/BoolField';
 import DateField from 'uniforms-unstyled/DateField';
@@ -8,8 +5,11 @@ import ListField from 'uniforms-unstyled/ListField';
 import NestField from 'uniforms-unstyled/NestField';
 import NumField from 'uniforms-unstyled/NumField';
 import RadioField from 'uniforms-unstyled/RadioField';
+import React from 'react';
 import SelectField from 'uniforms-unstyled/SelectField';
 import TextField from 'uniforms-unstyled/TextField';
+import { mount } from 'enzyme';
+
 import createContext from './_createContext';
 
 test('<AutoField> - works', () => {

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
 import TogglerHeader from './TogglerHeader';
 import { getDefaultToggle } from './index.js';

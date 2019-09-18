@@ -1,8 +1,8 @@
+import ErrorsField from 'uniforms-material/ErrorsField';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import React from 'react';
 import { mount } from 'enzyme';
 
-import ErrorsField from 'uniforms-material/ErrorsField';
 import createContext from './_createContext';
 
 const error = {

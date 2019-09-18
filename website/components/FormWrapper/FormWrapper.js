@@ -1,4 +1,3 @@
-import get from 'lodash/get';
 import React, {
   useCallback,
   useContext,
@@ -6,10 +5,11 @@ import React, {
   useRef,
   useState
 } from 'react';
+import get from 'lodash/get';
 
 import styles from './FormWrapper.module.css';
-import { themeContext } from '../ThemeContext';
 import { PlaygroundWrap } from '../Playground';
+import { themeContext } from '../ThemeContext';
 
 function handleResize(ref, setHeight) {
   const scrollHeight = get(

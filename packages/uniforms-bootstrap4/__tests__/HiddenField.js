@@ -1,7 +1,7 @@
+import HiddenField from 'uniforms-bootstrap4/HiddenField';
 import React from 'react';
 import { mount } from 'enzyme';
 
-import HiddenField from 'uniforms-bootstrap4/HiddenField';
 import createContext from './_createContext';
 
 test('<HiddenField> - renders an input', () => {

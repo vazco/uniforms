@@ -2,14 +2,14 @@ import BaseField from 'uniforms/BaseField';
 import invariant from 'invariant';
 import { createElement } from 'react';
 
-import NumField from './NumField';
 import BoolField from './BoolField';
 import DateField from './DateField';
 import ListField from './ListField';
 import NestField from './NestField';
-import TextField from './TextField';
+import NumField from './NumField';
 import RadioField from './RadioField';
 import SelectField from './SelectField';
+import TextField from './TextField';
 
 export default class AutoField extends BaseField {
   static displayName = 'AutoField';

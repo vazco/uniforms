@@ -1,7 +1,7 @@
+import NumField from 'uniforms-unstyled/NumField';
 import React from 'react';
 import { mount } from 'enzyme';
 
-import NumField from 'uniforms-unstyled/NumField';
 import createContext from './_createContext';
 
 const expectedValueTransform =

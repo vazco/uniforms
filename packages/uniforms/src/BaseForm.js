@@ -8,9 +8,9 @@ import mapValues from 'lodash/mapValues';
 import omit from 'lodash/omit';
 import set from 'lodash/set';
 
-import changedKeys from './changedKeys';
-import createSchemaBridge from './createSchemaBridge';
 import randomIds from './randomIds';
+import createSchemaBridge from './createSchemaBridge';
+import changedKeys from './changedKeys';
 
 export const __childContextTypes = {
   name: PropTypes.arrayOf(PropTypes.string).isRequired,

@@ -1,11 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import Heading from '../common/Heading';
 import ExampleCustomizer from '../../ExampleCustomizer';
-import { code } from '../../Code';
+import Heading from '../common/Heading';
 import SignUp from '../../../../docs/examples/CommonForms/SignUp';
 import styles from '../index.module.css';
+import { code } from '../../Code';
 
 export default function ExampleSimpleYetPowerful() {
   return (

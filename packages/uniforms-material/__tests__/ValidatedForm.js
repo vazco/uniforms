@@ -1,7 +1,7 @@
 import React from 'react';
+import ValidatedForm from 'uniforms-material/ValidatedForm';
 import { mount } from 'enzyme';
 
-import ValidatedForm from 'uniforms-material/ValidatedForm';
 import createContext from './_createContext';
 import createSchema from './_createSchema';
 

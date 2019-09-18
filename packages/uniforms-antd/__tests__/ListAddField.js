@@ -1,7 +1,7 @@
+import ListAddField from 'uniforms-antd/ListAddField';
 import React from 'react';
 import { mount } from 'enzyme';
 
-import ListAddField from 'uniforms-antd/ListAddField';
 import createContext from './_createContext';
 
 const parent = {

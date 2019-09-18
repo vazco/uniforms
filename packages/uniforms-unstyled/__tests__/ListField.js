@@ -1,9 +1,9 @@
-import React from 'react';
-import { mount } from 'enzyme';
-
 import ListAddField from 'uniforms-unstyled/ListAddField';
 import ListField from 'uniforms-unstyled/ListField';
 import ListItemField from 'uniforms-unstyled/ListItemField';
+import React from 'react';
+import { mount } from 'enzyme';
+
 import createContext from './_createContext';
 
 test('<ListField> - works', () => {

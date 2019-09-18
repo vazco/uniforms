@@ -1,7 +1,7 @@
+import ErrorsField from 'uniforms-unstyled/ErrorsField';
 import React from 'react';
 import { mount } from 'enzyme';
 
-import ErrorsField from 'uniforms-unstyled/ErrorsField';
 import createContext from './_createContext';
 
 const error = {

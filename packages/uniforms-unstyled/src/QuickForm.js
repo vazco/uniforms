@@ -1,7 +1,7 @@
 import QuickForm from 'uniforms/QuickForm';
 
-import BaseForm from './BaseForm';
 import AutoField from './AutoField';
+import BaseForm from './BaseForm';
 import ErrorsField from './ErrorsField';
 import SubmitField from './SubmitField';
 

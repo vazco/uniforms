@@ -1,7 +1,7 @@
+import DateField from 'uniforms-bootstrap4/DateField';
 import React from 'react';
 import { mount } from 'enzyme';
 
-import DateField from 'uniforms-bootstrap4/DateField';
 import createContext from './_createContext';
 
 test('<DateField> - renders an input', () => {

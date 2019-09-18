@@ -1,7 +1,7 @@
+import DateField from 'uniforms-unstyled/DateField';
 import React from 'react';
 import { mount } from 'enzyme';
 
-import DateField from 'uniforms-unstyled/DateField';
 import createContext from './_createContext';
 
 test('<DateField> - renders an input', () => {

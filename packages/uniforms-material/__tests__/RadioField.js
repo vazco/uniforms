@@ -3,11 +3,11 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
+import RadioField from 'uniforms-material/RadioField';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import React from 'react';
 import { mount } from 'enzyme';
 
-import RadioField from 'uniforms-material/RadioField';
 import createContext from './_createContext';
 
 test('<RadioField> - renders a set of Radio buttons', () => {

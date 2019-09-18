@@ -1,9 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import Button from '../common/Button';
 import Heading from '../common/Heading';
 import Subtitle from '../common/Subtitle';
-import Button from '../common/Button';
 import styles from '../index.module.css';
 
 export default function WhyUs() {

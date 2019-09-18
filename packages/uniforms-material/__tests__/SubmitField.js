@@ -1,7 +1,7 @@
 import React from 'react';
+import SubmitField from 'uniforms-material/SubmitField';
 import { mount } from 'enzyme';
 
-import SubmitField from 'uniforms-material/SubmitField';
 import createContext from './_createContext';
 
 test('<SubmitField> - renders', () => {

@@ -1,9 +1,9 @@
 import Radio from 'antd/lib/radio';
 import React from 'react';
 import Select from 'antd/lib/select';
+import SelectField from 'uniforms-antd/SelectField';
 import { mount } from 'enzyme';
 
-import SelectField from 'uniforms-antd/SelectField';
 import createContext from './_createContext';
 
 test('<SelectField> - renders a select', () => {

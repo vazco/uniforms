@@ -1,3 +1,4 @@
+import BoolField from 'uniforms-material/BoolField';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -6,7 +7,6 @@ import React from 'react';
 import Switch from '@material-ui/core/Switch';
 import { mount } from 'enzyme';
 
-import BoolField from 'uniforms-material/BoolField';
 import createContext from './_createContext';
 
 test('<BoolField> - renders an Checkbox', () => {

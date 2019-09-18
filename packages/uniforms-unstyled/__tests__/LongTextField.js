@@ -1,7 +1,7 @@
+import LongTextField from 'uniforms-unstyled/LongTextField';
 import React from 'react';
 import { mount } from 'enzyme';
 
-import LongTextField from 'uniforms-unstyled/LongTextField';
 import createContext from './_createContext';
 
 test('<LongTextField> - renders a textarea', () => {

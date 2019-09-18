@@ -1,8 +1,8 @@
 import Radio from 'antd/lib/radio';
+import RadioField from 'uniforms-antd/RadioField';
 import React from 'react';
 import { mount } from 'enzyme';
 
-import RadioField from 'uniforms-antd/RadioField';
 import createContext from './_createContext';
 
 test('<RadioField> - renders a set of checkboxes', () => {

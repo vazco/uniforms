@@ -1,3 +1,4 @@
+import DateField from 'uniforms-material/DateField';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -5,7 +6,6 @@ import Input from '@material-ui/core/Input';
 import React from 'react';
 import { mount } from 'enzyme';
 
-import DateField from 'uniforms-material/DateField';
 import createContext from './_createContext';
 
 test('<DateField> - renders Input', () => {

@@ -1,11 +1,11 @@
+import Bridge from 'uniforms/Bridge';
 import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
 import invariant from 'invariant';
+import joinName from 'uniforms/joinName';
 import lowerCase from 'lodash/lowerCase';
 import omit from 'lodash/omit';
 import upperFirst from 'lodash/upperFirst';
-import Bridge from 'uniforms/Bridge';
-import joinName from 'uniforms/joinName';
 
 const resolveRef = (referance, schema) => {
   invariant(

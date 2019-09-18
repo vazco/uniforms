@@ -1,9 +1,9 @@
+import DateField from 'uniforms-antd/DateField';
 import DatePicker from 'antd/lib/date-picker';
 import React from 'react';
 import moment from 'moment';
 import { mount } from 'enzyme';
 
-import DateField from 'uniforms-antd/DateField';
 import createContext from './_createContext';
 
 test('<DateField> - renders an input', () => {

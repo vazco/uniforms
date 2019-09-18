@@ -1,7 +1,7 @@
+import BaseForm from 'uniforms-antd/BaseForm';
 import React from 'react';
 import { mount } from 'enzyme';
 
-import BaseForm from 'uniforms-antd/BaseForm';
 import createSchema from './_createSchema';
 
 test('<BaseForm> - works', () => {

@@ -1,7 +1,6 @@
 import React from 'react';
-import { mount } from 'enzyme';
-
 import wrapField from 'uniforms-bootstrap4/wrapField';
+import { mount } from 'enzyme';
 
 test('<wrapField> - renders wrapper with correct class', () => {
   const element = wrapField({ wrapClassName: 'container' }, <div />);
