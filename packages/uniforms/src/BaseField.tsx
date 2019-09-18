@@ -8,7 +8,7 @@ import BaseForm from './BaseForm';
 import joinName from './joinName';
 
 // Used for calculating labels and placeholders.
-const flowingProp = (prop, schema, state, fallback) => {
+const flowingProp = (prop: any, schema: any, state: any, fallback: any) => {
   const propDisabled = prop === '' || prop === false;
   const propSet = prop !== undefined;
   const schemaDisabled = schema === '' || schema === false;
@@ -30,9 +30,9 @@ const flowingProp = (prop, schema, state, fallback) => {
 };
 
 export default class BaseField extends Component {
-  static displayName = 'Field';
+  static displayName: string = 'Field';
 
-  static propTypes = {
+  static propTypes: any = {
     id: PropTypes.string,
 
     name: PropTypes.string.isRequired,
@@ -49,12 +49,22 @@ export default class BaseField extends Component {
   static contextTypes = BaseForm.childContextTypes;
   static childContextTypes = BaseForm.childContextTypes;
 
+  options: {
+    ensureValue: boolean;
+    explicitInitialValue: boolean;
+    includeParent: boolean;
+    overrideValue: boolean;
+  };
+  randomId: number;
+
   constructor() {
+    // @ts-ignore
     super(...arguments);
 
     invariant(
       this.context.uniforms,
       '<%s /> must be rendered within a form.',
+      // @ts-ignore
       this.constructor.displayName
     );
 
@@ -88,7 +98,11 @@ export default class BaseField extends Component {
   }
 
   // eslint-disable-next-line complexity
-  shouldComponentUpdate(nextProps, _, { uniforms: nextContext }) {
+  shouldComponentUpdate(
+    nextProps: any,
+    _: any,
+    { uniforms: nextContext }: { uniforms: any }
+  ) {
     const prevProps = this.props;
     const prevContext = this.context.uniforms;
 
@@ -103,6 +117,7 @@ export default class BaseField extends Component {
       return true;
     }
 
+    // @ts-ignore
     const prevName = joinName(prevContext.name, prevProps.name);
     const nextName = joinName(nextContext.name, nextProps.name);
 
@@ -163,6 +178,7 @@ export default class BaseField extends Component {
   }
 
   getChildContextName() {
+    // @ts-ignore
     return joinName(null, this.context.uniforms.name, this.props.name);
   }
 
@@ -178,9 +194,11 @@ export default class BaseField extends Component {
     const state = this.context.uniforms.state;
     const props = this.props;
 
-    const propagate = name =>
+    const propagate = (name: any): any =>
+      // @ts-ignore
       props[name] === undefined || props[name] === null
         ? state[name]
+        // @ts-ignore
         : !!props[name];
 
     return {
@@ -206,7 +224,7 @@ export default class BaseField extends Component {
   }
 
   // eslint-disable-next-line complexity
-  getFieldProps(name, options) {
+  getFieldProps(name: any, options: any) {
     const context = this.context.uniforms;
     const props = this.props;
     const state = this.getChildContextState();
@@ -214,6 +232,7 @@ export default class BaseField extends Component {
     options = Object.assign({}, this.options, options);
 
     if (name === undefined) {
+      // @ts-ignore
       name = joinName(context.name, props.name);
     }
 
@@ -229,19 +248,21 @@ export default class BaseField extends Component {
     const initialValue = options.explicitInitialValue
       ? context.schema.getInitialValue(name, props)
       : undefined;
-    const parent =
+    const parent: any =
       options.includeParent && name.indexOf('.') !== -1
         ? this.getFieldProps(name.replace(/(.+)\..+$/, '$1'), {
             includeParent: false
           })
         : null;
     const [label, none] = flowingProp(
+      // @ts-ignore
       props.label,
       schemaProps.label,
       state.label,
       ''
     );
     const [placeholder] = flowingProp(
+      // @ts-ignore
       props.placeholder,
       schemaProps.placeholder,
       state.placeholder,
@@ -249,6 +270,7 @@ export default class BaseField extends Component {
     );
 
     let value;
+    // @ts-ignore
     if (props.value === undefined || options.overrideValue) {
       value = get(context.model, name);
 
@@ -280,7 +302,7 @@ export default class BaseField extends Component {
       field,
       fieldType,
       fields,
-      onChange: (value, key = name) => context.onChange(key, value),
+      onChange: (value: any, key = name) => context.onChange(key, value),
       parent,
       value,
 
@@ -301,18 +323,18 @@ export default class BaseField extends Component {
     };
   }
 
-  findError(name) {
+  findError(name: any) {
     return this.context.uniforms.schema.getError(
       name,
       this.context.uniforms.error
     );
   }
 
-  findField(name) {
+  findField(name: any) {
     return this.context.uniforms.schema.getField(name);
   }
 
-  findValue(name) {
+  findValue(name: any) {
     return get(this.context.uniforms.model, name);
   }
 }

@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import cloneDeep from 'lodash/cloneDeep';
 import isEqual from 'lodash/isEqual';
 import omit from 'lodash/omit';
@@ -19,8 +19,10 @@ const Auto = (parent: any) =>
     };
 
     constructor() {
-      super(...((arguments as unknown) as any[]));
+      // @ts-ignore
+      super(...arguments);
 
+      // @ts-ignore
       this.state = {
         ...this.state,
 
