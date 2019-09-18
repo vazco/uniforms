@@ -14,8 +14,8 @@
       "error",
       {
         "groups": [
-          ["builtin", "external"],
-          ["index", "internal", "parent", "sibling"],
+          ["builtin", "external", "internal"],
+          ["index", "parent", "sibling"],
           ["unknown"]
         ],
         "newlines-between": "always"
