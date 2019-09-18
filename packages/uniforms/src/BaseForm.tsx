@@ -46,7 +46,7 @@ export const __childContextTypes = {
   randomId: PropTypes.func.isRequired
 };
 
-export const __childContextTypesBuild = type =>
+export const __childContextTypesBuild = (type: any): any =>
   isPlainObject(type)
     ? PropTypes.shape(mapValues(type, __childContextTypesBuild)).isRequired
     : type;
@@ -89,10 +89,19 @@ export default class BaseForm extends Component {
     uniforms: __childContextTypesBuild(__childContextTypes)
   };
 
+  delayId?: number | void;
+  mounted: boolean;
+  reset: () => void;
+  change: (key: any, value: any) => void;
+  submit: (event: any) => void;
+  randomId: any;
+
   constructor() {
+    // @ts-ignore
     super(...arguments);
 
     this.state = {
+      // @ts-ignore
       bridge: createSchemaBridge(this.props.schema),
       changed: null,
       changedMap: {},
@@ -100,8 +109,8 @@ export default class BaseForm extends Component {
       submitting: false
     };
 
-    this.delayId = false;
     this.mounted = false;
+    // @ts-ignore
     this.randomId = randomIds(this.props.id);
 
     this.onReset = this.reset = this.onReset.bind(this);
@@ -111,7 +120,9 @@ export default class BaseForm extends Component {
     // TODO: It shouldn't be here
     const getModel = this.getModel.bind(this);
     this.getModel = (mode = null, model = getModel(mode)) =>
+      // @ts-ignore
       mode !== null && this.props.modelTransform
+        // @ts-ignore
         ? this.props.modelTransform(mode, model)
         : model;
   }
@@ -139,7 +150,8 @@ export default class BaseForm extends Component {
     );
   }
 
-  componentWillReceiveProps({ schema }) {
+  componentWillReceiveProps({ schema }: any) {
+    // @ts-ignore
     if (this.props.schema !== schema) {
       this.setState(() => ({ bridge: createSchemaBridge(schema) }));
     }
@@ -154,6 +166,7 @@ export default class BaseForm extends Component {
   }
 
   getChildContextError() {
+    // @ts-ignore
     return this.props.error;
   }
 
@@ -163,18 +176,26 @@ export default class BaseForm extends Component {
 
   getChildContextState() {
     return {
+      // @ts-ignore
       changed: !!this.state.changed,
+      // @ts-ignore
       changedMap: this.state.changedMap,
+      // @ts-ignore
       submitting: this.state.submitting,
 
+      // @ts-ignore
       label: !!this.props.label,
+      // @ts-ignore
       disabled: !!this.props.disabled,
+      // @ts-ignore
       placeholder: !!this.props.placeholder,
+      // @ts-ignore
       showInlineError: !!this.props.showInlineError
     };
   }
 
   getChildContextSchema() {
+    // @ts-ignore
     return this.state.bridge;
   }
 
@@ -186,11 +207,12 @@ export default class BaseForm extends Component {
     return this.onSubmit;
   }
 
-  getModel(/* mode */) {
+  getModel(mode?: any) {
+    // @ts-ignore
     return this.props.model;
   }
 
-  getChangedKeys(root, valueA, valueB) {
+  getChangedKeys(root: any, valueA: any, valueB: any) {
     return changedKeys(root, valueA, valueB);
   }
 
@@ -215,32 +237,41 @@ export default class BaseForm extends Component {
     return {
       ...props,
       onSubmit: this.onSubmit,
+      // @ts-ignore
       key: `reset-${this.state.resetCount}`
     };
   }
 
-  onChange(key, value) {
+  onChange(key: any, value: any) {
     // Do not set `changed` before componentDidMount
+    // @ts-ignore
     if (this.state.changed !== null) {
+      // @ts-ignore
       this.state.changed = true;
       this.getChangedKeys(key, value, get(this.getModel(), key)).forEach(key =>
         this.setState(state => ({
+          // @ts-ignore
           changedMap: set(cloneDeep(state.changedMap), key, {})
         }))
       );
     }
 
+    // @ts-ignore
     if (this.props.onChange) {
+      // @ts-ignore
       this.props.onChange(key, value);
     }
 
     // Do not call `onSubmit` before componentDidMount
+    // @ts-ignore
     if (this.state.changed !== null && this.props.autosave) {
       if (this.delayId) {
         this.delayId = clearTimeout(this.delayId);
       }
 
+      // @ts-ignore
       if (this.props.autosaveDelay > 0) {
+        // @ts-ignore
         this.delayId = setTimeout(this.onSubmit, this.props.autosaveDelay);
       } else {
         this.onSubmit();
@@ -248,7 +279,7 @@ export default class BaseForm extends Component {
     }
   }
 
-  __reset(state) {
+  __reset(state: any) {
     return {
       changed: false,
       changedMap: {},
@@ -261,13 +292,14 @@ export default class BaseForm extends Component {
     this.setState(this.__reset);
   }
 
-  onSubmit(event) {
+  onSubmit(event?: any) {
     if (event) {
       event.preventDefault();
       event.stopPropagation();
     }
 
     const result =
+      // @ts-ignore
       this.props.onSubmit && this.props.onSubmit(this.getModel('submit'));
 
     // Set the `submitting` state only if onSubmit is async so we don't cause an unnecessary re-render
@@ -280,7 +312,9 @@ export default class BaseForm extends Component {
     }
 
     return submitting.then(
+      // @ts-ignore
       this.props.onSubmitSuccess,
+      // @ts-ignore
       this.props.onSubmitFailure
     );
   }
