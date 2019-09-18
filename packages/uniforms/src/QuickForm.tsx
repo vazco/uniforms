@@ -4,7 +4,7 @@ import React from 'react';
 import BaseForm from './BaseForm';
 import nothing from './nothing';
 
-const Quick = parent =>
+const Quick = (parent: any) =>
   class extends parent {
     static Quick = Quick;
 
@@ -29,7 +29,7 @@ const Quick = parent =>
       if (!props.children) {
         props.children = this.getChildContextSchema()
           .getSubfields()
-          .map(key => <AutoField key={key} name={key} />)
+          .map((key: any) => <AutoField key={key} name={key} />)
           .concat([
             <ErrorsField key="$ErrorsField" />,
             <SubmitField key="$SubmitField" />
