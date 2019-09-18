@@ -7,10 +7,6 @@
   }
 }
 
-:global #__docusaurus {
-  overflow: hidden;
-}
-
 .padding {
   padding-top: 2em;
 }
@@ -86,7 +82,7 @@
   --ifm-hero-background-color: var(--dark-blue-grey);
 }
 
-.landing .overflow-hidden {
+.overflow-hidden {
   overflow: hidden;
 }
 

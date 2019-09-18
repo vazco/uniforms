@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 import Header from './Header';
 import OpenSource from './OpenSource';
@@ -15,7 +16,7 @@ import styles from './index.module.css';
 
 export default function LandingPage() {
   return (
-    <div className={styles.landing}>
+    <div className={classNames(styles.landing, styles['overflow-hidden'])}>
       <Header />
       <div className="main">
         <OpenSource />
