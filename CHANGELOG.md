@@ -1,3 +1,7 @@
+## Next
+
+- **Fixed:** Parsing of `dataPath` in `JSONSchemaBridge`. [\#593](https://github.com/vazco/uniforms/issues/593)
+
 ## [v2.4.0](https://github.com/vazco/uniforms/tree/v2.4.0) (2019-08-28)
 
 - **Added:** Default labels in `GraphQLSchemaBridge`. [\#577](https://github.com/vazco/uniforms/issues/577)

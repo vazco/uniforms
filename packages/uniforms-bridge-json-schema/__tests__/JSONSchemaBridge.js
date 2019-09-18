@@ -79,6 +79,35 @@ describe('JSONSchemaBridge', () => {
             required: ['type']
           }
         ]
+      },
+      complexNames: {
+        type: 'object',
+        properties: {
+          a: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                b: {
+                  type: 'object',
+                  properties: {
+                    'c-d': {
+                      type: 'array',
+                      items: {
+                        type: 'object',
+                        properties: {
+                          "f/'g": { type: 'string', pattern: '[0-9]{5}' },
+                          'h/"i': { type: 'string', pattern: '[0-9]{5}' },
+                          'j\'/"k': { type: 'string', pattern: '[0-9]{5}' }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     required: ['dateOfBirth']
@@ -169,6 +198,32 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getError('x.x', error)).toEqual(undefined);
       expect(bridge.getError('x.y', error)).toEqual(error.details[0]);
       expect(bridge.getError('y.x', error)).toEqual(undefined);
+    });
+
+    it('works with correct error (complex data paths)', () => {
+      const pairs = [
+        ["a.0.b.c-d.0.f/'g", ".complexNames.a[0].b['c-d'][0]['f/\\'g']"],
+        ['a.0.b.c-d.0.h/"i', ".complexNames.a[0].b['c-d'][0]['h/\"i']"],
+        ['a.0.b.c-d.0.j\'/"k~', ".complexNames.a[0].b['c-d'][0]['j\\'/\"k~']"]
+      ];
+
+      pairs.forEach(([name, dataPath]) => {
+        const error = { details: { dataPath } };
+        expect(bridge.getError(name, error)).toEqual(error.details[0]);
+      });
+    });
+
+    it('works with correct error (complex data paths - JSON pointers)', () => {
+      const pairs = [
+        ["a.0.b.c-d.0.f/'g", "/complexNames/a/0/b/c-d/0/f~1'g"],
+        ['a.0.b.c-d.0.h/"i', '/complexNames/a/0/b/c-d/0/h~1"i'],
+        ['a.0.b.c-d.0.j\'/"k~', '/complexNames/a/0/b/c-d/0/j\'~1"k~0']
+      ];
+
+      pairs.forEach(([name, dataPath]) => {
+        const error = { details: { dataPath } };
+        expect(bridge.getError(name, error)).toEqual(error.details[0]);
+      });
     });
   });
 
@@ -499,7 +554,8 @@ describe('JSONSchemaBridge', () => {
         'invalid',
         'personalData',
         'salary',
-        'shippingAddress'
+        'shippingAddress',
+        'complexNames'
       ]);
     });
 
