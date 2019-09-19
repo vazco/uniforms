@@ -6,10 +6,13 @@ import LandingPage from '../components/LandingPage';
 
 export default function HomePage() {
   const context = useDocusaurusContext();
-  const { siteConfig = {} } = context;
-  const { tagline: description, customFields: { keywords } = {} } = siteConfig;
+  const {
+    customFields: { keywords },
+    tagline
+  } = context.siteConfig;
+
   return (
-    <Layout keywords={keywords} description={description}>
+    <Layout keywords={keywords} description={tagline}>
       <LandingPage />
     </Layout>
   );

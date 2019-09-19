@@ -1,12 +1,16 @@
 import React from 'react';
 import classNames from 'classnames';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
-import Button from '../common/Button';
-import Heading from '../common/Heading';
-import Subtitle from '../common/Subtitle';
-import styles from '../index.module.css';
+import Button from './Button';
+import Heading from './Heading';
+import Subtitle from './Subtitle';
+import styles from './index.module.css';
 
 export default function WhyUs() {
+  const context = useDocusaurusContext();
+  const { companies, email } = context.siteConfig.customFields;
+
   return (
     <div
       className={classNames('hero hero--primary', styles['overflow-hidden'])}
@@ -22,21 +26,11 @@ export default function WhyUs() {
                 )}
               />
               <div className={styles.grid3x3}>
-                {[
-                  'https://www.deskpro.com/',
-                  'https://www.nokia.com/',
-                  'https://www.redhat.com/en',
-                  'https://github.com/react-page/react-page/tree/master/packages/plugins/createPluginMaterialUi',
-                  'https://graphback.dev',
-                  'https://www.onyx-one.com/',
-                  'http://aerogear.org',
-                  'https://cleverbeagle.com/together',
-                  'http://www.orionjs.org'
-                ].map((href, index) => (
-                  <a href={href} key={index} className={styles.item3x3}>
+                {companies.map(({ image, url }) => (
+                  <a className={styles.item3x3} href={url} key={image}>
                     <img
                       className={styles.company}
-                      src={`assets/companies/${index + 1}.png`}
+                      src={`assets/companies/${image}`}
                     />
                   </a>
                 ))}
@@ -56,9 +50,7 @@ export default function WhyUs() {
                 simple forms and sophisticated management systems.
               </p>
               <div className={styles['center-if-sm']}>
-                <Button to="mailto:hello@uniforms.tools">
-                  Add your company
-                </Button>
+                <Button to={`mailto:${email}`}>Add your company</Button>
               </div>
             </div>
           </div>

@@ -3,12 +3,12 @@ import React from 'react';
 import classNames from 'classnames';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
-import Button from '../common/Button';
-import FormWrapper from '../../FormWrapper';
-import ShippingForm from '../../../../docs/examples/CommonForms/ShippingForm';
-import styles from '../index.module.css';
-import { ThemeProvider } from '../../ThemeContext';
-import { code } from '../../Code';
+import Button from './Button';
+import FormWrapper from '../FormWrapper';
+import ShippingForm from '../../../docs/examples/CommonForms/ShippingForm';
+import styles from './index.module.css';
+import { ThemeProvider } from '../ThemeContext';
+import { code } from '../Code';
 
 function SystemWindow({ children, className, ...props }) {
   return (
@@ -88,6 +88,29 @@ function Showcase() {
   );
 }
 
+const themes = [
+  {
+    alt: 'Semantic UI',
+    src: 'themes/semantic.svg',
+    to: 'https://semantic-ui.com/'
+  },
+  {
+    alt: 'Ant Design',
+    src: 'themes/antd.png',
+    to: 'https://ant.design/'
+  },
+  {
+    alt: 'Material-UI',
+    src: 'themes/material-ui.png',
+    to: 'https://material-ui.com/'
+  },
+  {
+    alt: 'Bootstrap',
+    src: 'themes/bootstrap.svg',
+    to: 'https://getbootstrap.com/'
+  }
+];
+
 export default function Header() {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
@@ -124,29 +147,8 @@ export default function Header() {
               <p className={classNames(styles.text, styles.supported)}>
                 Supported design libraries:
               </p>
-              {[
-                {
-                  alt: 'Semantic UI',
-                  src: 'semantic.svg',
-                  to: 'https://semantic-ui.com/'
-                },
-                {
-                  alt: 'Ant Design',
-                  src: 'antd.png',
-                  to: 'https://ant.design/'
-                },
-                {
-                  alt: 'Material-UI',
-                  src: 'material-ui.png',
-                  to: 'https://material-ui.com/'
-                },
-                {
-                  alt: 'Bootstrap',
-                  src: 'bootstrap.svg',
-                  to: 'https://getbootstrap.com/'
-                }
-              ].map(({ alt, src, to }, key) => (
-                <Link className={styles['theme-icon']} key={key} to={to}>
+              {themes.map(({ alt, src, to }) => (
+                <Link className={styles['theme-icon']} key={alt} to={to}>
                   <img alt={alt} src={`assets/${src}`} />
                 </Link>
               ))}

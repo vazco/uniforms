@@ -1,4 +1,4 @@
-import siteConfig from '@generated/docusaurus.config';
+import siteConfig from '@generated/docusaurus.config'; // eslint-disable-line
 
 const { themeConfig } = siteConfig;
 

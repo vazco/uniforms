@@ -1,10 +1,48 @@
-@import 'colors.css';
-@import 'fonts.css';
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Muli:400,600&display=swap');
 
 @media (max-width: 996px) {
   .center-if-sm {
     text-align: center;
   }
+}
+
+:root {
+  --black: #000;
+  --bright-cyan-50: rgba(63, 196, 254, 0.2);
+  --bright-cyan: #3fc4fe;
+  --dark-blue-grey: #211b50;
+  --dark-slate-blue: #2d2665;
+  --dodger-blue-10: rgba(63, 187, 254, 0.1);
+  --dodger-blue: #3fbbfe;
+  --dusk-blue: #412a94;
+  --greenblue-10: rgba(31, 216, 152, 0.1);
+  --greenblue: #1fd898;
+  --greyish-brown: #474747;
+  --pale-grey: #e8e6f5;
+  --periwinkle-50: rgba(136, 89, 255, 0.2);
+  --periwinkle: #8759ff;
+  --sea-green-50: rgba(66, 255, 172, 0.2);
+  --sea-green: #42ffac;
+  --white: #fff;
+
+  --uni-background-color: var(--white);
+  --uni-heading-color: var(--dusk-blue);
+  --uni-heading-helper-color: var(--dusk-blue);
+  --uni-hero-bgcolor: var(--dark-blue-grey);
+  --uni-oval-background-color: var(--white);
+  --uni-oval-shadow-color: var(--pale-grey);
+  --uni-testimonial-text-color: var(--greyish-brown);
+
+  --ifm-button-color: var(--white);
+}
+
+:root[data-theme='dark'] {
+  --uni-background-color: var(--ifm-background-color);
+  --uni-heading-color: var(--ifm-font-base-color);
+  --uni-heading-helper-color: var(--ifm-font-base-color);
+  --uni-oval-shadow-color: var(--black);
+  --uni-testimonial-text-color: var(--ifm-font-base-color);
 }
 
 .padding {
@@ -272,6 +310,12 @@
   }
 }
 
+@media (max-width: 400px) {
+  .solid-border-box {
+    padding: 4em 1em;
+  }
+}
+
 .green-accent {
   --uni-border-color: var(--greenblue);
   --uni-box-shadow-color: var(--greenblue-10);
@@ -404,6 +448,13 @@
   .section-content {
     margin-top: 0;
     padding: 4em !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .section-content {
+    margin-top: 0;
+    padding: 0 1em !important;
   }
 }
 
