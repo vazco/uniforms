@@ -451,7 +451,7 @@
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 400px) {
   .section-content {
     margin-top: 0;
     padding: 0 1em !important;

@@ -1,7 +1,7 @@
 import Link from '@docusaurus/Link';
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { Star, GitBranch, Download } from 'react-feather';
+import { Download, GitBranch, Star } from 'react-feather';
 
 import Heading from './Heading';
 import Oval from './Oval';
