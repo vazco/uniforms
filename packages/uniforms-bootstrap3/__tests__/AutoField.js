@@ -1,6 +1,3 @@
-import React from 'react';
-import { mount } from 'enzyme';
-
 import AutoField from 'uniforms-bootstrap3/AutoField';
 import BoolField from 'uniforms-bootstrap3/BoolField';
 import DateField from 'uniforms-bootstrap3/DateField';
@@ -8,8 +5,10 @@ import ListField from 'uniforms-bootstrap3/ListField';
 import NestField from 'uniforms-bootstrap3/NestField';
 import NumField from 'uniforms-bootstrap3/NumField';
 import RadioField from 'uniforms-bootstrap3/RadioField';
+import React from 'react';
 import SelectField from 'uniforms-bootstrap3/SelectField';
 import TextField from 'uniforms-bootstrap3/TextField';
+import { mount } from 'enzyme';
 
 import createContext from './_createContext';
 

@@ -1,5 +1,4 @@
 import SimpleSchema from 'simpl-schema';
-
 import createSchemaBridge from 'uniforms/createSchemaBridge';
 import filterDOMProps from 'uniforms/filterDOMProps';
 

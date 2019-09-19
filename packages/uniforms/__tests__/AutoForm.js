@@ -1,9 +1,8 @@
-import React from 'react';
-import { mount } from 'enzyme';
-
 import AutoForm from 'uniforms/AutoForm';
+import React from 'react';
 import connectField from 'uniforms/connectField';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
+import { mount } from 'enzyme';
 
 jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');

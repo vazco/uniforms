@@ -1,17 +1,16 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import Comparison from './Comparison';
+import ExampleFullyCustomizable from './ExampleFullyCustomizable';
+import ExampleSimpleYetPowerful from './ExampleSimpleYetPowerful';
+import Footer from './Footer';
+import Gitter from './Gitter';
 import Header from './Header';
 import OpenSource from './OpenSource';
-import WhyUs from './WhyUs';
-import ExampleSimpleYetPowerful from './ExampleSimpleYetPowerful';
-import ExampleFullyCustomizable from './ExampleFullyCustomizable';
-import Gitter from './Gitter';
-import WhoUses from './WhoUses';
 import Testimonials from './Testimonials';
-import Comparison from './Comparison';
-import Footer from './Footer';
-
+import WhoUses from './WhoUses';
+import WhyUs from './WhyUs';
 import styles from './index.module.css';
 
 export default function LandingPage() {

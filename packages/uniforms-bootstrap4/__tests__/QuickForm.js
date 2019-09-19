@@ -1,7 +1,6 @@
+import QuickForm from 'uniforms-bootstrap4/QuickForm';
 import React from 'react';
 import { mount } from 'enzyme';
-
-import QuickForm from 'uniforms-bootstrap4/QuickForm';
 
 import createSchema from './_createSchema';
 

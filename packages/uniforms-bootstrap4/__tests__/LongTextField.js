@@ -1,7 +1,6 @@
+import LongTextField from 'uniforms-bootstrap4/LongTextField';
 import React from 'react';
 import { mount } from 'enzyme';
-
-import LongTextField from 'uniforms-bootstrap4/LongTextField';
 
 import createContext from './_createContext';
 

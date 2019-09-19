@@ -3,8 +3,8 @@ import React, { Children } from 'react';
 import connectField from 'uniforms/connectField';
 import joinName from 'uniforms/joinName';
 
-import AutoField from './AutoField';
 import ListDelField from './ListDelField';
+import AutoField from './AutoField';
 
 const ListItem = ({ dense, divider, disableGutters, removeIcon, ...props }) => (
   <ListItemMaterial

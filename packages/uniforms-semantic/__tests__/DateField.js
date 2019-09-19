@@ -1,7 +1,6 @@
+import DateField from 'uniforms-semantic/DateField';
 import React from 'react';
 import { mount } from 'enzyme';
-
-import DateField from 'uniforms-semantic/DateField';
 
 import createContext from './_createContext';
 

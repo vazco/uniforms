@@ -1,8 +1,7 @@
 import Button from 'antd/lib/button';
 import React from 'react';
-import { mount } from 'enzyme';
-
 import SubmitField from 'uniforms-antd/SubmitField';
+import { mount } from 'enzyme';
 
 import createContext from './_createContext';
 

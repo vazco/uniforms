@@ -1,7 +1,6 @@
+import ListAddField from 'uniforms-unstyled/ListAddField';
 import React from 'react';
 import { mount } from 'enzyme';
-
-import ListAddField from 'uniforms-unstyled/ListAddField';
 
 import createContext from './_createContext';
 

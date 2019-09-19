@@ -1,7 +1,6 @@
+import ListDelField from 'uniforms-semantic/ListDelField';
 import React from 'react';
 import { mount } from 'enzyme';
-
-import ListDelField from 'uniforms-semantic/ListDelField';
 
 import createContext from './_createContext';
 

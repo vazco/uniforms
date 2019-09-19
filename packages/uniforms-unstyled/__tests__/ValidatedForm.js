@@ -1,7 +1,6 @@
 import React from 'react';
-import { mount } from 'enzyme';
-
 import ValidatedForm from 'uniforms-unstyled/ValidatedForm';
+import { mount } from 'enzyme';
 
 import createSchema from './_createSchema';
 

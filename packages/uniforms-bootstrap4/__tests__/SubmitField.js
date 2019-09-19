@@ -1,7 +1,6 @@
 import React from 'react';
-import { mount } from 'enzyme';
-
 import SubmitField from 'uniforms-bootstrap4/SubmitField';
+import { mount } from 'enzyme';
 
 import createContext from './_createContext';
 

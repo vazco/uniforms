@@ -1,10 +1,9 @@
 import * as graphql from 'graphql';
+import Bridge from 'uniforms/Bridge';
 import invariant from 'invariant';
+import joinName from 'uniforms/joinName';
 import lowerCase from 'lodash/lowerCase';
 import upperFirst from 'lodash/upperFirst';
-
-import Bridge from 'uniforms/Bridge';
-import joinName from 'uniforms/joinName';
 
 const extractValue = (...xs) =>
   xs.reduce((x, y) =>

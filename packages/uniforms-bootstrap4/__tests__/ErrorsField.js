@@ -1,7 +1,6 @@
+import ErrorsField from 'uniforms-bootstrap4/ErrorsField';
 import React from 'react';
 import { mount } from 'enzyme';
-
-import ErrorsField from 'uniforms-bootstrap4/ErrorsField';
 
 import createContext from './_createContext';
 

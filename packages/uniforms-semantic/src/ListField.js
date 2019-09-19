@@ -4,8 +4,8 @@ import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 import joinName from 'uniforms/joinName';
 
-import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';
+import ListAddField from './ListAddField';
 
 const List = ({
   children,

@@ -1,8 +1,7 @@
-import React from 'react';
-import { mount } from 'enzyme';
-
 import AutoField from 'uniforms-bootstrap4/AutoField';
 import NestField from 'uniforms-bootstrap4/NestField';
+import React from 'react';
+import { mount } from 'enzyme';
 
 import createContext from './_createContext';
 

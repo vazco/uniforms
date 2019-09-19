@@ -1,7 +1,6 @@
+import BoolField from 'uniforms-unstyled/BoolField';
 import React from 'react';
 import { mount } from 'enzyme';
-
-import BoolField from 'uniforms-unstyled/BoolField';
 
 import createContext from './_createContext';
 

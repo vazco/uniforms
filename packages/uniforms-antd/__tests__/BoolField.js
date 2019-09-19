@@ -1,9 +1,8 @@
+import BoolField from 'uniforms-antd/BoolField';
+import Checkbox from 'antd/lib/checkbox';
 import React from 'react';
 import Switch from 'antd/lib/switch';
-import Checkbox from 'antd/lib/checkbox';
 import { mount } from 'enzyme';
-
-import BoolField from 'uniforms-antd/BoolField';
 
 import createContext from './_createContext';
 

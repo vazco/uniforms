@@ -1,9 +1,8 @@
-import React from 'react';
-import { mount } from 'enzyme';
-
 import AutoField from 'uniforms-bootstrap3/AutoField';
 import ListDelField from 'uniforms-bootstrap3/ListDelField';
 import ListItemField from 'uniforms-bootstrap3/ListItemField';
+import React from 'react';
+import { mount } from 'enzyme';
 
 import createContext from './_createContext';
 

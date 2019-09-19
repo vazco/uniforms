@@ -1,7 +1,6 @@
+import RadioField from 'uniforms-bootstrap3/RadioField';
 import React from 'react';
 import { mount } from 'enzyme';
-
-import RadioField from 'uniforms-bootstrap3/RadioField';
 
 import createContext from './_createContext';
 

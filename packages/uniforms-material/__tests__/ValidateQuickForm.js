@@ -1,7 +1,6 @@
 import React from 'react';
-import { mount } from 'enzyme';
-
 import ValidatedQuickForm from 'uniforms-material/ValidatedQuickForm';
+import { mount } from 'enzyme';
 
 import createContext from './_createContext';
 import createSchema from './_createSchema';

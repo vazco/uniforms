@@ -2,10 +2,36 @@
   "env": {
     "jest": true
   },
-  "extends": "vazco/prettier",
+  "extends": [
+    "plugin:import/errors",
+    "plugin:import/typescript",
+    "vazco/prettier"
+  ],
   "parser": "@typescript-eslint/parser",
   "root": true,
+  "rules": {
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          ["builtin", "external", "internal"],
+          ["index", "parent", "sibling"],
+          ["unknown"]
+        ],
+        "newlines-between": "always"
+      }
+    ]
+  },
   "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@docusaurus", "@docusaurus/core/lib/client/exports"],
+          ["@theme", "@docusaurus/theme-classic/src/theme"]
+        ]
+      },
+      "typescript": {}
+    },
     "react": {
       "version": "detect"
     }

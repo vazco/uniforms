@@ -1,7 +1,6 @@
+import AutoFields from 'uniforms-antd/AutoFields';
 import React from 'react';
 import { mount } from 'enzyme';
-
-import AutoFields from 'uniforms-antd/AutoFields';
 
 import createContext from './_createContext';
 

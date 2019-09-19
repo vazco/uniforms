@@ -1,9 +1,8 @@
 import React from 'react';
 
-import Heading from '../common/Heading';
 import Button from '../common/Button';
+import Heading from '../common/Heading';
 import Matrix from '../../../../docs/compare-matrix-landing.md';
-
 import styles from '../index.module.css';
 
 export default function Comparison() {

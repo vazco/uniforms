@@ -1,7 +1,6 @@
+import LongTextField from 'uniforms-semantic/LongTextField';
 import React from 'react';
 import { mount } from 'enzyme';
-
-import LongTextField from 'uniforms-semantic/LongTextField';
 
 import createContext from './_createContext';
 

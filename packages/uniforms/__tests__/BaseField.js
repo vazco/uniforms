@@ -1,10 +1,9 @@
-import React from 'react';
-import { mount } from 'enzyme';
-
 import BaseField from 'uniforms/BaseField';
+import React from 'react';
 import nothing from 'uniforms/nothing';
 import randomIds from 'uniforms/randomIds';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
+import { mount } from 'enzyme';
 
 jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');

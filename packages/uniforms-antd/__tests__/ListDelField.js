@@ -1,7 +1,6 @@
+import ListDelField from 'uniforms-antd/ListDelField';
 import React from 'react';
 import { mount } from 'enzyme';
-
-import ListDelField from 'uniforms-antd/ListDelField';
 
 import createContext from './_createContext';
 

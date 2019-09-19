@@ -1,8 +1,7 @@
+import NumField from 'uniforms-material/NumField';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { mount } from 'enzyme';
-
-import NumField from 'uniforms-material/NumField';
 
 import createContext from './_createContext';
 

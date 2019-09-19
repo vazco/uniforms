@@ -1,6 +1,3 @@
-import React from 'react';
-import { mount } from 'enzyme';
-
 import AutoField from 'uniforms-semantic/AutoField';
 import BoolField from 'uniforms-semantic/BoolField';
 import DateField from 'uniforms-semantic/DateField';
@@ -8,8 +5,10 @@ import ListField from 'uniforms-semantic/ListField';
 import NestField from 'uniforms-semantic/NestField';
 import NumField from 'uniforms-semantic/NumField';
 import RadioField from 'uniforms-semantic/RadioField';
+import React from 'react';
 import SelectField from 'uniforms-semantic/SelectField';
 import TextField from 'uniforms-semantic/TextField';
+import { mount } from 'enzyme';
 
 import createContext from './_createContext';
 

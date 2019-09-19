@@ -1,9 +1,8 @@
 import AlarmIcon from '@material-ui/icons/Alarm';
 import IconButton from '@material-ui/core/IconButton';
+import ListAddField from 'uniforms-material/ListAddField';
 import React from 'react';
 import { mount } from 'enzyme';
-
-import ListAddField from 'uniforms-material/ListAddField';
 
 import createContext from './_createContext';
 

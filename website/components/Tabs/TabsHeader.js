@@ -1,5 +1,6 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+
 import TabsHeaderItem from './TabsHeaderItem';
 import styles from './Tabs.module.css';
 

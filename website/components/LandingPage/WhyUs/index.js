@@ -2,8 +2,8 @@ import React from 'react';
 import classNames from 'classnames';
 
 import Heading from '../common/Heading';
-import Subtitle from '../common/Subtitle';
 import Oval from '../common/Oval';
+import Subtitle from '../common/Subtitle';
 import styles from '../index.module.css';
 
 export default function WhyUs() {

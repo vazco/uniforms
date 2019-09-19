@@ -1,7 +1,6 @@
 import React from 'react';
-import { mount } from 'enzyme';
-
 import SelectField from 'uniforms-bootstrap4/SelectField';
+import { mount } from 'enzyme';
 
 import createContext from './_createContext';
 

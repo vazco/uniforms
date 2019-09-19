@@ -1,13 +1,13 @@
 import React from 'react';
 import {
-  Code as CodeIcon,
   Box as BoxIcon,
+  Code as CodeIcon,
   Database as DatabaseIcon
 } from 'react-feather';
 
-import { ThemeProvider } from './ThemeContext';
 import FormWrapper from './FormWrapper';
 import TogglerTabs from './TogglerTabs';
+import { ThemeProvider } from './ThemeContext';
 
 const tabs = [
   { name: 'Semantic', value: 'semantic' },
