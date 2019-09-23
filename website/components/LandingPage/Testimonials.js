@@ -1,8 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import Heading from '../common/Heading';
-import styles from '../index.module.css';
+import Heading from './Heading';
+import styles from './index.module.css';
 
 function Testimonial({ who, company, position, description, mirror }) {
   return (
