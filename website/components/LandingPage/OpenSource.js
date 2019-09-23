@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Download, GitBranch, Star } from 'react-feather';
 
-import Heading from '../common/Heading';
-import Oval from '../common/Oval';
-import styles from '../index.module.css';
+import Heading from './Heading';
+import Oval from './Oval';
+import styles from './index.module.css';
 
 function Badge({ border, number, text, to, icon: Icon, color }) {
   return (
@@ -42,7 +42,7 @@ function cacheGet(key) {
   }
 }
 
-function cacheSet(key, data, expires) {
+function cacheSet(key, data, expires = 0) {
   try {
     localStorage.setItem(cacheKey(key), JSON.stringify({ data, expires }));
   } catch (error) {
@@ -113,12 +113,18 @@ function getNPMDownloads(from, to) {
 }
 
 function getGitHubStats() {
-  return fetch('https://api.github.com/repos/vazco/uniforms')
-    .then(response => response.json())
-    .then(({ stargazers_count: stars, forks_count: forks }) => ({
-      stars,
-      forks
-    }));
+  const twoMinutes = 2 * 60 * 1000;
+  return cached(
+    'github',
+    () =>
+      fetch('https://api.github.com/repos/vazco/uniforms')
+        .then(response => response.json())
+        .then(({ stargazers_count: stars, forks_count: forks }) => ({
+          stars,
+          forks
+        })),
+    Date.now() + twoMinutes
+  );
 }
 
 function useStats() {
@@ -127,10 +133,10 @@ function useStats() {
   const [downloads, setDownloads] = useState(null);
 
   useEffect(() => {
-    cached('github', getGitHubStats).then(({ forks, stars }) => {
+    getGitHubStats().then(({ forks, stars }) => {
       forks && setForks(formatNumber(forks));
       stars && setStars(formatNumber(stars));
-    }, Date.now() + 2 * 60 * 1000);
+    });
   }, [stars, forks]);
 
   useEffect(() => {

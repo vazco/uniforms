@@ -3,7 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
-import styles from '../index.module.css';
+import styles from './index.module.css';
 
 function ShowcaseCard() {
   return (
@@ -21,8 +21,8 @@ function ShowcaseCard() {
 
 export default function Footer() {
   const context = useDocusaurusContext();
-  const { siteConfig = {} } = context;
-  const { customFields: { email } = {} } = siteConfig;
+  const { email } = context.siteConfig.customFields;
+
   return (
     <footer className={classNames('hero hero--primary', styles.footer)}>
       <div className="container">

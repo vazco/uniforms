@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Button from '../common/Button';
-import Heading from '../common/Heading';
-import styles from '../index.module.css';
+import Button from './Button';
+import Heading from './Heading';
+import styles from './index.module.css';
 
 export default function Gitter() {
   return (

@@ -8,6 +8,20 @@ module.exports = {
   baseUrl: '/',
   url: 'https://uniforms.tools/',
   customFields: {
+    companies: [
+      { url: 'https://www.deskpro.com/', image: 'deskpro.png' },
+      { url: 'https://www.nokia.com/', image: 'nokia.png' },
+      {
+        url:
+          'https://github.com/react-page/react-page/tree/master/packages/plugins/createPluginMaterialUi',
+        image: 'react-page.png'
+      },
+      { url: 'https://graphback.dev', image: 'graphback.png' },
+      { url: 'https://www.onyx-one.com/', image: 'onyx-one.png' },
+      { url: 'https://aerogear.org', image: 'aerogear.png' },
+      { url: 'https://cleverbeagle.com/together', image: 'cleverbeagle.png' },
+      { url: 'http://www.orionjs.org', image: 'orionjs.png' }
+    ],
     email: 'hello@uniforms.tools',
     keywords: ['forms', 'react', 'schema']
   },
