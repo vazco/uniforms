@@ -111,7 +111,7 @@ export default new JSONSchemaBridge(schema, schemaValidator);`
               yet powerful
             </Heading>
             <ul>
-              <li>Abbrevates from code by 51%</li>
+              <li>Abbreviates form code by 51%</li>
               <li>
                 Out-of-the box built-in fields capable of rendering every schema
               </li>
