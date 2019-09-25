@@ -4,7 +4,7 @@ import connectField from 'uniforms/connectField';
 
 import wrapField from './wrapField';
 
-const xor = (item, array) => {
+const xor = (item: any, array: any) => {
   const index = array.indexOf(item);
   if (index === -1) {
     return array.concat([item]);
@@ -13,8 +13,8 @@ const xor = (item, array) => {
   return array.slice(0, index).concat(array.slice(index + 1));
 };
 
-const renderCheckboxes = props =>
-  props.allowedValues.map(item => (
+const renderCheckboxes = (props: any) =>
+  props.allowedValues.map((item: any) => (
     <div
       key={item}
       className={classnames(
@@ -44,7 +44,7 @@ const renderCheckboxes = props =>
     </div>
   ));
 
-const renderSelect = props => (
+const renderSelect = (props: any) => (
   <select
     className={classnames(props.inputClassName, 'form-control', {
       'form-control-danger': props.error

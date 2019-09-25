@@ -49,14 +49,6 @@ export default class BaseField extends Component {
   static contextTypes = BaseForm.childContextTypes;
   static childContextTypes = BaseForm.childContextTypes;
 
-  options: {
-    ensureValue: boolean;
-    explicitInitialValue: boolean;
-    includeParent: boolean;
-    overrideValue: boolean;
-  };
-  randomId: number;
-
   constructor() {
     // @ts-ignore
     super(...arguments);
@@ -177,6 +169,15 @@ export default class BaseField extends Component {
     return false;
   }
 
+  options: {
+    ensureValue: boolean;
+    explicitInitialValue?: boolean;
+    includeParent?: boolean;
+    overrideValue: boolean;
+  };
+
+  randomId: number;
+
   getChildContextName() {
     // @ts-ignore
     return joinName(null, this.context.uniforms.name, this.props.name);
@@ -198,8 +199,8 @@ export default class BaseField extends Component {
       // @ts-ignore
       props[name] === undefined || props[name] === null
         ? state[name]
-        // @ts-ignore
-        : !!props[name];
+        : // @ts-ignore
+          !!props[name];
 
     return {
       ...state,
@@ -224,7 +225,7 @@ export default class BaseField extends Component {
   }
 
   // eslint-disable-next-line complexity
-  getFieldProps(name: any, options: any) {
+  getFieldProps(name?: any, options?: any) {
     const context = this.context.uniforms;
     const props = this.props;
     const state = this.getChildContextState();

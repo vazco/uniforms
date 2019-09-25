@@ -21,7 +21,7 @@ const List = ({
   showInlineError,
   value,
   ...props
-}) => (
+}: any) => (
   <div
     className={classnames(
       'panel panel-default',
@@ -48,7 +48,7 @@ const List = ({
       )}
 
       {children
-        ? value.map((item, index) =>
+        ? value.map((item: any, index: number) =>
             Children.map(children, child =>
               React.cloneElement(child, {
                 key: index,
@@ -61,7 +61,7 @@ const List = ({
               })
             )
           )
-        : value.map((item, index) => (
+        : value.map((item: any, index: number) => (
             <ListItemField
               key={index}
               label={null}

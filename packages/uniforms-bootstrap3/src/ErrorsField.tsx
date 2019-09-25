@@ -5,8 +5,8 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 import nothing from 'uniforms/nothing';
 
 const ErrorsField = (
-  { className, children, ...props },
-  { uniforms: { error, schema } }
+  { className, children, ...props }: any,
+  { uniforms: { error, schema } }: any
 ) =>
   !error && !children ? (
     nothing
@@ -18,7 +18,7 @@ const ErrorsField = (
       <div className="panel-body">
         {children}
 
-        {schema.getErrorMessages(error).map((message, index) => (
+        {schema.getErrorMessages(error).map((message: any, index: number) => (
           <div key={index}>{message}</div>
         ))}
       </div>

@@ -4,15 +4,15 @@ import { createElement } from 'react';
 import AutoField from './AutoField';
 
 const AutoFields = (
-  { autoField, element, fields, omitFields, ...props },
-  { uniforms: { schema } }
+  { autoField, element, fields, omitFields, ...props }: any,
+  { uniforms: { schema } }: any
 ) =>
   createElement(
     element,
     props,
     (fields || schema.getSubfields())
-      .filter(field => omitFields.indexOf(field) === -1)
-      .map(field => createElement(autoField, { key: field, name: field }))
+      .filter((field: any) => omitFields.indexOf(field) === -1)
+      .map((field: any) => createElement(autoField, { key: field, name: field }))
   );
 AutoFields.contextTypes = AutoField.contextTypes;
 

@@ -4,10 +4,10 @@ import connectField from 'uniforms/connectField';
 
 import wrapField from './wrapField';
 
-const noneIfNaN = x => (isNaN(x) ? undefined : x);
-const parse = (decimal, x) => noneIfNaN((decimal ? parseFloat : parseInt)(x));
+const noneIfNaN = (x: any) => (isNaN(x) ? undefined : x);
+const parse = (decimal: any, x: any) => noneIfNaN((decimal ? parseFloat : parseInt)(x));
 
-const Num_ = props =>
+const Num_ = (props: any) =>
   wrapField(
     props,
     <input
@@ -32,9 +32,10 @@ let Num;
 // istanbul ignore next
 if (parseInt(React.version, 10) < 16) {
   Num = class Num extends Component {
+    // @ts-ignore
     state = { value: '' + this.props.value };
 
-    componentWillReceiveProps({ decimal, value }) {
+    componentWillReceiveProps({ decimal, value }: any) {
       if (
         parse(decimal, value) !==
         parse(decimal, this.state.value.replace(/[.,]+$/, ''))
@@ -45,10 +46,11 @@ if (parseInt(React.version, 10) < 16) {
       }
     }
 
-    onChange = event => {
+    onChange = (event: any) => {
       const value = event.target.value.replace(/[^\d.,-]/g, '');
 
       this.setState({ value });
+      // @ts-ignore
       this.props.onChange(parse(this.props.decimal, value));
     };
 
@@ -61,10 +63,10 @@ if (parseInt(React.version, 10) < 16) {
     }
   };
 } else {
-  Num = props =>
+  Num = (props: any) =>
     Num_({
       ...props,
-      onChange(event) {
+      onChange(event: any) {
         props.onChange(parse(props.decimal, event.target.value));
       }
     });

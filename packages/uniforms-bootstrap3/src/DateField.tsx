@@ -4,9 +4,15 @@ import connectField from 'uniforms/connectField';
 
 import wrapField from './wrapField';
 
+interface Window {
+  Date: DateConstructor
+}
+
+declare var window: Window;
+
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
-const dateFormat = value => value && value.toISOString().slice(0, -8);
-const dateParse = (timestamp, onChange) => {
+const dateFormat = (value: any) => value && value.toISOString().slice(0, -8);
+const dateParse = (timestamp: any, onChange: any) => {
   const date = new DateConstructor(timestamp);
   if (date.getFullYear() < 10000) {
     onChange(date);
@@ -15,7 +21,7 @@ const dateParse = (timestamp, onChange) => {
   }
 };
 
-const Date = props =>
+const Date = (props: any) =>
   wrapField(
     props,
     <input

@@ -4,7 +4,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
-const ListAdd = ({ addIcon, className, disabled, parent, value, ...props }) => {
+const ListAdd = ({ addIcon, className, disabled, parent, value, ...props }: any) => {
   const limitNotReached =
     !disabled && !(parent.maxCount <= parent.value.length);
 

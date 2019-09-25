@@ -4,10 +4,10 @@ import connectField from 'uniforms/connectField';
 
 import wrapField from './wrapField';
 
-const Radio = props =>
+const Radio = (props: any) =>
   wrapField(
     props,
-    props.allowedValues.map(item => (
+    props.allowedValues.map((item: any) => (
       <div
         key={item}
         className={classnames(

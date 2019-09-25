@@ -31,5 +31,9 @@
     "prop-types": "^15.5.7",
     "uniforms": "^2.4.0",
     "warning": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.2.9",
+    "@types/warning": "^3.0.0"
   }
 }

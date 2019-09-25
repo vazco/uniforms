@@ -39,15 +39,15 @@ const Quick = (parent: any) =>
       return props;
     }
 
-    getAutoField() {
+    getAutoField(): any {
       return () => nothing;
     }
 
-    getErrorsField() {
+    getErrorsField(): any {
       return () => nothing;
     }
 
-    getSubmitField() {
+    getSubmitField(): any {
       return () => nothing;
     }
   };

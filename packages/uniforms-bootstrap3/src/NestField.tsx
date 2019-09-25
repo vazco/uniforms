@@ -18,7 +18,7 @@ const Nest = ({
   name,
   showInlineError,
   ...props
-}) => (
+}: any) => (
   <div
     className={classnames(className, { 'has-error': error })}
     {...filterDOMProps(props)}
@@ -31,7 +31,7 @@ const Nest = ({
 
     {children
       ? injectName(name, children)
-      : fields.map(key => (
+      : fields.map((key: any) => (
           <AutoField key={key} name={joinName(name, key)} {...itemProps} />
         ))}
   </div>

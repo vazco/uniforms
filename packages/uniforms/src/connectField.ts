@@ -16,7 +16,7 @@ export default function connectField(
     initialValue
   }: any = {}
 ) {
-  return class extends baseField {
+  return (class extends baseField {
     static displayName = `${component.displayName ||
       component.name}${baseField.displayName || baseField.name}`;
 
@@ -71,5 +71,5 @@ export default function connectField(
     render() {
       return createElement(component, mapProps(this.getFieldProps()));
     }
-  };
+  } as unknown) as any;
 }

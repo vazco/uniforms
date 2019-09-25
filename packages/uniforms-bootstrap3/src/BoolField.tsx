@@ -4,7 +4,7 @@ import connectField from 'uniforms/connectField';
 
 import wrapField from './wrapField';
 
-const Bool = ({ label, labelBefore, ...props }) =>
+const Bool = ({ label, labelBefore, ...props }: any) =>
   wrapField(
     { label: labelBefore, ...props },
     <div
