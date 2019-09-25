@@ -32,6 +32,7 @@ let Num;
 // istanbul ignore next
 if (parseInt(React.version, 10) < 16) {
   Num = class Num extends Component {
+    // @ts-ignore
     state = { value: '' + this.props.value };
 
     componentWillReceiveProps({ decimal, value }) {
@@ -49,6 +50,7 @@ if (parseInt(React.version, 10) < 16) {
       const value = event.target.value.replace(/[^\d.,-]/g, '');
 
       this.setState({ value });
+      // @ts-ignore
       this.props.onChange(parse(this.props.decimal, value));
     };
 
