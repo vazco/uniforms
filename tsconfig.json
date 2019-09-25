@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "noImplicitAny": false,
     "allowJs": true,
     "baseUrl": "./packages",
     "esModuleInterop": true,
