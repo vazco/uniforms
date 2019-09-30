@@ -121,7 +121,7 @@ const renderCheckboxes = ({
       <RadioGroup
         id={id}
         name={name}
-        onChange={event => disabled || onChange(event.target.value)}
+        onChange={(event: any) => disabled || onChange(event.target.value)}
         ref={inputRef}
         value={value}
       >
@@ -177,7 +177,7 @@ const renderCheckboxes = ({
   );
 };
 
-const Select = ({ checkboxes, ...props }) =>
+const Select = ({ checkboxes, ...props }: any) =>
   checkboxes ? renderCheckboxes(props) : renderSelect(props);
 
 Select.defaultProps = {

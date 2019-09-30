@@ -15,7 +15,7 @@ export default function wrapField(
     required,
     showInlineError,
     variant
-  },
+  }: any,
   ...children
 ) {
   const formHelperText = showInlineError && error ? errorMessage : helperText;

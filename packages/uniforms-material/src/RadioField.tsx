@@ -33,7 +33,7 @@ const Radio = ({
     <RadioGroup
       id={id}
       name={name}
-      onChange={event => disabled || onChange(event.target.value)}
+      onChange={(event: any) => disabled || onChange(event.target.value)}
       ref={inputRef}
       value={value}
     >

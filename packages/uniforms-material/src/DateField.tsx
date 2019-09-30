@@ -38,6 +38,7 @@ const Date = ({
     InputLabelProps={{ ...labelProps, ...InputLabelProps }}
     name={name}
     onChange={event =>
+      // @ts-ignore
       disabled || dateParse(event.target.valueAsNumber, onChange)
     }
     placeholder={placeholder}

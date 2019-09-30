@@ -7,6 +7,7 @@ export default class HiddenField extends BaseField {
   static displayName = 'HiddenField';
 
   constructor() {
+    // @ts-ignore
     super(...arguments);
 
     this.options = {

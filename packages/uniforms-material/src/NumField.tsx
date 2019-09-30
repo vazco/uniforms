@@ -48,7 +48,7 @@ Num_.defaultProps = {
 let Num;
 // istanbul ignore next
 if (parseInt(React.version, 10) < 16) {
-  Num = class Num extends Component {
+  Num = class Num extends Component<any, any> {
     state = { value: '' + this.props.value };
 
     componentWillReceiveProps({ decimal, value }) {
@@ -74,7 +74,7 @@ if (parseInt(React.version, 10) < 16) {
         ...this.props,
         onChange: this.onChange,
         value: this.state.value
-      });
+      } as any);
     }
   };
 } else {
