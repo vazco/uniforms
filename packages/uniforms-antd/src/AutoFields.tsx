@@ -12,7 +12,9 @@ const AutoFields = (
     props,
     (fields || schema.getSubfields())
       .filter((field: any) => omitFields.indexOf(field) === -1)
-      .map((field: any) => createElement(autoField, { key: field, name: field }))
+      .map((field: any) =>
+        createElement(autoField, { key: field, name: field })
+      )
   );
 AutoFields.contextTypes = AutoField.contextTypes;
 

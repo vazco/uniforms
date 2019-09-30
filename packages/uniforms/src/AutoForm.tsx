@@ -18,11 +18,12 @@ const Auto = (parent: any) =>
       onChangeModel: PropTypes.func
     };
 
+    state: any;
+
     constructor() {
       // @ts-ignore
       super(...arguments);
 
-      // @ts-ignore
       this.state = {
         ...this.state,
 

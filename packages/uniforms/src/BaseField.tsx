@@ -95,7 +95,7 @@ export default class BaseField extends Component {
     _: any,
     { uniforms: nextContext }: { uniforms: any }
   ) {
-    const prevProps = this.props;
+    const prevProps: any = this.props;
     const prevContext = this.context.uniforms;
 
     if (!isEqual(prevProps, nextProps)) {
@@ -109,7 +109,6 @@ export default class BaseField extends Component {
       return true;
     }
 
-    // @ts-ignore
     const prevName = joinName(prevContext.name, prevProps.name);
     const nextName = joinName(nextContext.name, nextProps.name);
 
@@ -169,6 +168,8 @@ export default class BaseField extends Component {
     return false;
   }
 
+  props: any;
+
   options: {
     ensureValue: boolean;
     explicitInitialValue?: boolean;
@@ -179,7 +180,6 @@ export default class BaseField extends Component {
   randomId: number;
 
   getChildContextName() {
-    // @ts-ignore
     return joinName(null, this.context.uniforms.name, this.props.name);
   }
 
@@ -196,11 +196,9 @@ export default class BaseField extends Component {
     const props = this.props;
 
     const propagate = (name: any): any =>
-      // @ts-ignore
       props[name] === undefined || props[name] === null
         ? state[name]
-        : // @ts-ignore
-          !!props[name];
+        : !!props[name];
 
     return {
       ...state,
@@ -233,7 +231,6 @@ export default class BaseField extends Component {
     options = Object.assign({}, this.options, options);
 
     if (name === undefined) {
-      // @ts-ignore
       name = joinName(context.name, props.name);
     }
 
@@ -256,14 +253,12 @@ export default class BaseField extends Component {
           })
         : null;
     const [label, none] = flowingProp(
-      // @ts-ignore
       props.label,
       schemaProps.label,
       state.label,
       ''
     );
     const [placeholder] = flowingProp(
-      // @ts-ignore
       props.placeholder,
       schemaProps.placeholder,
       state.placeholder,
@@ -271,7 +266,6 @@ export default class BaseField extends Component {
     );
 
     let value;
-    // @ts-ignore
     if (props.value === undefined || options.overrideValue) {
       value = get(context.model, name);
 

@@ -3,7 +3,10 @@ import React from 'react';
 import filterDOMProps from 'uniforms/filterDOMProps';
 import nothing from 'uniforms/nothing';
 
-const ErrorsField = ({ children, ...props }: any, { uniforms: { error, schema } }: any) =>
+const ErrorsField = (
+  { children, ...props }: any,
+  { uniforms: { error, schema } }: any
+) =>
   !error && !children ? (
     nothing
   ) : (

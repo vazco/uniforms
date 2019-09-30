@@ -11,21 +11,24 @@ import wrapField from './wrapField';
 const SelectAntD: any = SelectAntDesign;
 
 const renderCheckboxes = props =>
-  React.createElement((props.fieldType === Array ? Checkbox : Radio).Group as any, {
-    disabled: props.disabled,
-    id: props.id,
-    name: props.name,
-    onChange:
-      props.fieldType === Array
-        ? value => props.onChange(value)
-        : event => props.onChange(event.target.value),
-    options: props.allowedValues.map(value => ({
-      label: props.transform ? props.transform(value) : value,
-      value
-    })),
-    value: props.value,
-    ...filterDOMProps(props)
-  });
+  React.createElement(
+    (props.fieldType === Array ? Checkbox : Radio).Group as any,
+    {
+      disabled: props.disabled,
+      id: props.id,
+      name: props.name,
+      onChange:
+        props.fieldType === Array
+          ? value => props.onChange(value)
+          : event => props.onChange(event.target.value),
+      options: props.allowedValues.map(value => ({
+        label: props.transform ? props.transform(value) : value,
+        value
+      })),
+      value: props.value,
+      ...filterDOMProps(props)
+    }
+  );
 
 const renderSelect = props => (
   <SelectAntD
