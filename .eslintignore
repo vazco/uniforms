@@ -10,3 +10,5 @@
 /website/.docusaurus
 /website/build
 /website/node_modules
+
+*.d.ts
