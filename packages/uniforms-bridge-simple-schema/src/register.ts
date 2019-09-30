@@ -1,6 +1,8 @@
 import createSchemaBridge from 'uniforms/createSchemaBridge';
 import filterDOMProps from 'uniforms/filterDOMProps';
+// @ts-ignore
 import { Match } from 'meteor/check'; // eslint-disable-line
+// @ts-ignore
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'; // eslint-disable-line
 
 import SimpleSchemaBridge from './SimpleSchemaBridge';
