@@ -10,7 +10,7 @@
     "lint": "npm run lint:code && npm run lint:text && npm run lint:types",
     "lint:code": "eslint packages website",
     "lint:text": "prettier --check **/*.{json,md,mdx,yml}",
-    "lint:types": "tsc --project .",
+    "lint:types": "tsc --noEmit --project .",
     "postinstall": "lerna bootstrap --hoist",
     "prereset": "npm run clean",
     "pretest": "npm run lint",
