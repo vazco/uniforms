@@ -63,6 +63,10 @@ const pathToName = path => {
 const toHumanLabel = label => upperFirst(lowerCase(label));
 
 export default class JSONSchemaBridge extends Bridge {
+  schema: any;
+  _compiledSchema: {};
+  validator: any;
+
   constructor(schema, validator) {
     super();
 
@@ -174,12 +178,10 @@ export default class JSONSchemaBridge extends Bridge {
 
       // Naive computation of combined type, properties and required
       if (['allOf', 'anyOf', 'oneOf'].filter(key => definition[key]).length) {
-        _definition.type = (
-          []
-            .concat(_definition.allOf, _definition.anyOf, _definition.oneOf)
-            .filter(def => def)
-            .find(def => def.type) || {}
-        ).type;
+        _definition.type = (([]
+          .concat(_definition.allOf, _definition.anyOf, _definition.oneOf)
+          .filter((def: any) => def)
+          .find((def: any) => def.type) || {}) as any).type;
         const [properties, required] = []
           .concat(_definition.allOf, _definition.anyOf, _definition.oneOf)
           .filter(def => def)
@@ -201,7 +203,7 @@ export default class JSONSchemaBridge extends Bridge {
     }, this.schema);
   }
 
-  getInitialValue(name, props = {}) {
+  getInitialValue(name, props: any = {}) {
     const { default: _default, type: _type } = this.getField(name);
     const {
       default: defaultValue = _default !== undefined
@@ -223,7 +225,7 @@ export default class JSONSchemaBridge extends Bridge {
     return undefined;
   }
 
-  getProps(name, props = {}) {
+  getProps(name, props: any = {}) {
     const { uniforms, ...field } = this.getField(name);
     const { enum: enum_, isRequired, title, type, ...ready } = omit(
       { ...field, ...uniforms, ...this._compiledSchema[name] },
