@@ -8,6 +8,8 @@ import joinName from 'uniforms/joinName';
 import ListItemField from './ListItemField';
 import ListAddField from './ListAddField';
 
+const lif = ListItemField;
+
 const List = ({
   children,
   error,
@@ -22,7 +24,7 @@ const List = ({
   value,
   wrapperCol,
   ...props
-}) => (
+}: any) => (
   <div {...filterDOMProps(props)}>
     {!!label && (
       <div>
@@ -41,7 +43,7 @@ const List = ({
     {!!(error && showInlineError) && <div>{errorMessage}</div>}
 
     {children
-      ? value.map((item, index) =>
+      ? value.map((item: any, index: number) =>
           Children.map(children, child =>
             React.cloneElement(child, {
               key: index,
@@ -53,7 +55,7 @@ const List = ({
             })
           )
         )
-      : value.map((item, index) => (
+      : value.map((item: any, index: number) => (
           <ListItemField
             key={index}
             label={null}

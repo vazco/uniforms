@@ -1,14 +1,17 @@
 import Checkbox from 'antd/lib/checkbox';
 import Radio from 'antd/lib/radio';
 import React from 'react';
-import SelectAntD from 'antd/lib/select';
+import SelectAntDesign from 'antd/lib/select';
 import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
 import wrapField from './wrapField';
 
+// SelectAntD does not recognize prop 'name'
+const SelectAntD: any = SelectAntDesign;
+
 const renderCheckboxes = props =>
-  React.createElement((props.fieldType === Array ? Checkbox : Radio).Group, {
+  React.createElement((props.fieldType === Array ? Checkbox : Radio).Group as any, {
     disabled: props.disabled,
     id: props.id,
     name: props.name,
@@ -45,7 +48,7 @@ const renderSelect = props => (
   </SelectAntD>
 );
 
-const Select = ({ checkboxes, ...props }) =>
+const Select = ({ checkboxes, ...props }: any) =>
   wrapField(props, checkboxes ? renderCheckboxes(props) : renderSelect(props));
 
 export default connectField(Select, { ensureValue: false });

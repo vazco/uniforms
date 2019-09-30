@@ -6,7 +6,7 @@ import moment from 'moment';
 
 import wrapField from './wrapField';
 
-const Date = props =>
+const Date = (props: any) =>
   wrapField(
     props,
     <DatePicker

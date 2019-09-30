@@ -3,7 +3,7 @@ import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 import nothing from 'uniforms/nothing';
 
-const Error = ({ children, error, errorMessage, ...props }) =>
+const Error = ({ children, error, errorMessage, ...props }: any) =>
   !error ? (
     nothing
   ) : (

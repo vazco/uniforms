@@ -15,31 +15,26 @@ export default function connectField(
     includeParent,
     initialValue
   }: any = {}
-) {
-  return (class extends baseField {
+): any {
+  return class extends baseField {
     static displayName = `${component.displayName ||
       component.name}${baseField.displayName || baseField.name}`;
-
     constructor() {
       // @ts-ignore
       super(...arguments);
-
       this.options.includeInChain =
         includeInChain === undefined ? true : includeInChain;
       this.options.initialValue =
         initialValue === undefined ? true : initialValue;
-
       if (ensureValue !== undefined) this.options.ensureValue = ensureValue;
       if (includeParent !== undefined)
         this.options.includeParent = includeParent;
     }
-
     getChildContextName() {
       return this.options.includeInChain
         ? super.getChildContextName()
         : this.context.uniforms.name;
     }
-
     componentWillMount() {
       if (this.options.initialValue) {
         const props = this.getFieldProps(undefined, {
@@ -47,7 +42,6 @@ export default function connectField(
           explicitInitialValue: true,
           includeParent: false
         });
-
         // https://github.com/vazco/uniforms/issues/52
         // If field is initially rendered with value, we treat it as an initial value.
         if (
@@ -57,7 +51,6 @@ export default function connectField(
           props.onChange(this.props.value);
           return;
         }
-
         if (
           props.required &&
           props.initialValue !== undefined &&
@@ -67,9 +60,8 @@ export default function connectField(
         }
       }
     }
-
     render() {
       return createElement(component, mapProps(this.getFieldProps()));
     }
-  } as unknown) as any;
+  };
 }

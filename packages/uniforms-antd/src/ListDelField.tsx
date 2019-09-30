@@ -3,7 +3,7 @@ import React from 'react';
 import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
-const ListDel = ({ disabled, name, parent, ...props }) => {
+const ListDel = ({ disabled, name, parent, ...props }: any) => {
   const fieldIndex = +name.slice(1 + name.lastIndexOf('.'));
   const limitNotReached =
     !disabled && !(parent.minCount >= parent.value.length);

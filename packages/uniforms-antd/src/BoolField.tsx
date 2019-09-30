@@ -7,10 +7,10 @@ import filterDOMProps from 'uniforms/filterDOMProps';
 
 import wrapField from './wrapField';
 
-const Bool = ({ checkbox, ...props }) =>
+const Bool = ({ checkbox, ...props }: any) =>
   wrapField(
     props,
-    React.createElement(checkbox ? Checkbox : Switch, {
+    React.createElement(checkbox ? Checkbox as any : Switch, {
       checked: props.value,
       disabled: props.disabled,
       id: props.id,

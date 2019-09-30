@@ -7,15 +7,16 @@ export default class HiddenField extends BaseField {
   static displayName = 'HiddenField';
 
   constructor() {
+    // @ts-ignore
     super(...arguments);
 
     this.options = {
       ensureValue: true,
       overrideValue: true
-    };
+    } as any;
   }
 
-  componentWillReceiveProps({ value: valueDesired }) {
+  componentWillReceiveProps({ value: valueDesired }: any) {
     if (valueDesired === undefined) {
       return;
     }

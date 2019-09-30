@@ -3,14 +3,14 @@ import React from 'react';
 import filterDOMProps from 'uniforms/filterDOMProps';
 import nothing from 'uniforms/nothing';
 
-const ErrorsField = ({ children, ...props }, { uniforms: { error, schema } }) =>
+const ErrorsField = ({ children, ...props }: any, { uniforms: { error, schema } }: any) =>
   !error && !children ? (
     nothing
   ) : (
     <div {...filterDOMProps(props)}>
       {children}
       <ul>
-        {schema.getErrorMessages(error).map((message, index) => (
+        {schema.getErrorMessages(error).map((message: any, index: any) => (
           <li key={index} style={{ margin: '3px' }}>
             {message}
           </li>

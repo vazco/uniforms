@@ -5,7 +5,7 @@ import joinName from 'uniforms/joinName';
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
 
-const ListItem = props => (
+const ListItem = (props: any) => (
   <div>
     <div
       style={{
