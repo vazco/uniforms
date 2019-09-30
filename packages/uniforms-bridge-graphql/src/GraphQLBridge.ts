@@ -15,9 +15,13 @@ const extractFromNonNull = x =>
     ? { ...x, type: x.type.ofType }
     : x;
 
-const toHumanLabel = label => upperFirst(lowerCase(label));
+const toHumanLabel = (label: string): string => upperFirst(lowerCase(label));
 
 export default class GraphQLBridge extends Bridge {
+  extras: any;
+  schema: any;
+  validator: any;
+
   constructor(schema, validator, extras = {}) {
     super();
 
@@ -107,7 +111,7 @@ export default class GraphQLBridge extends Bridge {
     }, this.schema.getFields());
   }
 
-  getInitialValue(name, props = {}) {
+  getInitialValue(name, props: any = {}) {
     const type = this.getType(name);
 
     if (type === Array) {
@@ -129,7 +133,7 @@ export default class GraphQLBridge extends Bridge {
   }
 
   // eslint-disable-next-line complexity
-  getProps(nameNormal, props = {}) {
+  getProps(nameNormal, props: any = {}) {
     const nameGeneric = nameNormal.replace(/\.\d+/g, '.$');
 
     const field = this.getField(nameGeneric, false);
