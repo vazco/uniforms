@@ -38,20 +38,23 @@ declare module "uniforms/src/Bridge" {
 }
 declare module "uniforms/src/createSchemaBridge" {
     import Bridge from "uniforms/src/Bridge";
-    function createSchemaBridge(schema: any): Bridge;
-    namespace createSchemaBridge {
-        var register: (bridge: typeof Bridge) => void;
-    }
-    export default createSchemaBridge;
+    function create(schema: any): Bridge;
+    function register(bridge: typeof Bridge): void;
+    const _default: typeof create & {
+        register: typeof register;
+        registered: (typeof Bridge)[];
+    };
+    export default _default;
 }
 declare module "uniforms/__tests__/createSchemaBridge" { }
 declare module "uniforms/src/filterDOMProps" {
-    function filterDOMProps(props: {}): Partial<{}>;
-    namespace filterDOMProps {
-        var register: (...props: string[]) => void;
-        var registered: string[];
-    }
-    export default filterDOMProps;
+    function filter(props: {}): Partial<{}>;
+    function register(...props: string[]): void;
+    const _default_1: typeof filter & {
+        register: typeof register;
+        registered: string[];
+    };
+    export default _default_1;
 }
 declare module "uniforms/__tests__/filterDOMProps" { }
 declare module "uniforms/src/randomIds" {
@@ -181,11 +184,11 @@ declare module "uniforms/src/BaseForm" {
     }
 }
 declare module "uniforms/src/nothing" {
-    const _default: JSX.Element | null;
-    export default _default;
+    const _default_2: JSX.Element | null;
+    export default _default_2;
 }
 declare module "uniforms/src/QuickForm" {
-    const _default_1: {
+    const _default_3: {
         new (): {
             [x: string]: any;
             getNativeFormProps(): any;
@@ -198,60 +201,60 @@ declare module "uniforms/src/QuickForm" {
         displayName: string;
         propTypes: any;
     };
-    export default _default_1;
-}
-declare module "uniforms/src/ValidatedForm" {
-    const _default_2: {
-        new (): {
-            [x: string]: any;
-            validate: (key?: any, value?: any) => Promise<unknown>;
-            validateModel: (model: any) => Promise<unknown>;
-            getChildContextError(): any;
-            getChildContextState(): any;
-            getNativeFormProps(): Pick<any, string | number | symbol>;
-            componentWillReceiveProps({ model, schema, validate, validator }: any): void;
-            onChange(key: any, value: any): void;
-            __reset(state: any): any;
-            onSubmit(event: any): Promise<unknown>;
-            onValidate(key?: any, value?: any): Promise<unknown>;
-            onValidateModel(model: any): Promise<unknown>;
-        };
-        [x: string]: any;
-        Validated: (parent: any) => any;
-        displayName: string;
-        defaultProps: any;
-        propTypes: any;
-        childContextTypes: any;
-    };
-    export default _default_2;
-}
-declare module "uniforms/src/ValidatedQuickForm" {
-    const _default_3: {
-        new (): {
-            [x: string]: any;
-            validate: (key?: any, value?: any) => Promise<unknown>;
-            validateModel: (model: any) => Promise<unknown>;
-            getChildContextError(): any;
-            getChildContextState(): any;
-            getNativeFormProps(): Pick<any, string | number | symbol>;
-            componentWillReceiveProps({ model, schema, validate, validator }: any): void;
-            onChange(key: any, value: any): void;
-            __reset(state: any): any;
-            onSubmit(event: any): Promise<unknown>;
-            onValidate(key?: any, value?: any): Promise<unknown>;
-            onValidateModel(model: any): Promise<unknown>;
-        };
-        [x: string]: any;
-        Validated: (parent: any) => any;
-        displayName: string;
-        defaultProps: any;
-        propTypes: any;
-        childContextTypes: any;
-    };
     export default _default_3;
 }
-declare module "uniforms/src/AutoForm" {
+declare module "uniforms/src/ValidatedForm" {
     const _default_4: {
+        new (): {
+            [x: string]: any;
+            validate: (key?: any, value?: any) => Promise<unknown>;
+            validateModel: (model: any) => Promise<unknown>;
+            getChildContextError(): any;
+            getChildContextState(): any;
+            getNativeFormProps(): Pick<any, string | number | symbol>;
+            componentWillReceiveProps({ model, schema, validate, validator }: any): void;
+            onChange(key: any, value: any): void;
+            __reset(state: any): any;
+            onSubmit(event: any): Promise<unknown>;
+            onValidate(key?: any, value?: any): Promise<unknown>;
+            onValidateModel(model: any): Promise<unknown>;
+        };
+        [x: string]: any;
+        Validated: (parent: any) => any;
+        displayName: string;
+        defaultProps: any;
+        propTypes: any;
+        childContextTypes: any;
+    };
+    export default _default_4;
+}
+declare module "uniforms/src/ValidatedQuickForm" {
+    const _default_5: {
+        new (): {
+            [x: string]: any;
+            validate: (key?: any, value?: any) => Promise<unknown>;
+            validateModel: (model: any) => Promise<unknown>;
+            getChildContextError(): any;
+            getChildContextState(): any;
+            getNativeFormProps(): Pick<any, string | number | symbol>;
+            componentWillReceiveProps({ model, schema, validate, validator }: any): void;
+            onChange(key: any, value: any): void;
+            __reset(state: any): any;
+            onSubmit(event: any): Promise<unknown>;
+            onValidate(key?: any, value?: any): Promise<unknown>;
+            onValidateModel(model: any): Promise<unknown>;
+        };
+        [x: string]: any;
+        Validated: (parent: any) => any;
+        displayName: string;
+        defaultProps: any;
+        propTypes: any;
+        childContextTypes: any;
+    };
+    export default _default_5;
+}
+declare module "uniforms/src/AutoForm" {
+    const _default_6: {
         new (): {
             [x: string]: any;
             componentWillReceiveProps({ model }: {
@@ -268,7 +271,7 @@ declare module "uniforms/src/AutoForm" {
         displayName: string;
         propTypes: any;
     };
-    export default _default_4;
+    export default _default_6;
 }
 declare module "uniforms/src/BaseField" {
     import { Component } from 'react';
@@ -362,48 +365,48 @@ declare module "uniforms-antd/src/wrapField" {
     }, children: any): JSX.Element;
 }
 declare module "uniforms-antd/src/BoolField" {
-    const _default_5: any;
-    export default _default_5;
-}
-declare module "uniforms-antd/src/DateField" {
-    const _default_6: any;
-    export default _default_6;
-}
-declare module "uniforms-antd/src/ListDelField" {
     const _default_7: any;
     export default _default_7;
 }
-declare module "uniforms-antd/src/ListItemField" {
+declare module "uniforms-antd/src/DateField" {
     const _default_8: any;
     export default _default_8;
 }
-declare module "uniforms-antd/src/ListAddField" {
+declare module "uniforms-antd/src/ListDelField" {
     const _default_9: any;
     export default _default_9;
 }
-declare module "uniforms-antd/src/ListField" {
+declare module "uniforms-antd/src/ListItemField" {
     const _default_10: any;
     export default _default_10;
 }
-declare module "uniforms-antd/src/NestField" {
+declare module "uniforms-antd/src/ListAddField" {
     const _default_11: any;
     export default _default_11;
 }
-declare module "uniforms-antd/src/NumField" {
+declare module "uniforms-antd/src/ListField" {
     const _default_12: any;
     export default _default_12;
 }
-declare module "uniforms-antd/src/RadioField" {
+declare module "uniforms-antd/src/NestField" {
     const _default_13: any;
     export default _default_13;
 }
-declare module "uniforms-antd/src/SelectField" {
+declare module "uniforms-antd/src/NumField" {
     const _default_14: any;
     export default _default_14;
 }
-declare module "uniforms-antd/src/TextField" {
+declare module "uniforms-antd/src/RadioField" {
     const _default_15: any;
     export default _default_15;
+}
+declare module "uniforms-antd/src/SelectField" {
+    const _default_16: any;
+    export default _default_16;
+}
+declare module "uniforms-antd/src/TextField" {
+    const _default_17: any;
+    export default _default_17;
 }
 declare module "uniforms-antd/src/AutoField" {
     import BaseField from "uniforms/src/BaseField";
@@ -436,7 +439,7 @@ declare module "uniforms-antd/src/AutoFields" {
     export default AutoFields;
 }
 declare module "uniforms-antd/src/BaseForm" {
-    const _default_16: {
+    const _default_18: {
         new (): {
             [x: string]: any;
         };
@@ -444,7 +447,7 @@ declare module "uniforms-antd/src/BaseForm" {
         AntD: (parent: any) => any;
         displayName: string;
     };
-    export default _default_16;
+    export default _default_18;
 }
 declare module "uniforms-antd/src/ErrorsField" {
     const ErrorsField: {
@@ -489,7 +492,7 @@ declare module "uniforms-antd/src/SubmitField" {
 }
 declare module "uniforms-antd/src/QuickForm" {
     import AutoField from "uniforms-antd/src/AutoField";
-    const _default_17: {
+    const _default_19: {
         new (): {
             [x: string]: any;
             getAutoField(): typeof AutoField;
@@ -534,69 +537,69 @@ declare module "uniforms-antd/src/QuickForm" {
         displayName: string;
         propTypes: any;
     };
-    export default _default_17;
-}
-declare module "uniforms-antd/src/ValidatedForm" {
-    const _default_18: {
-        new (): {
-            [x: string]: any;
-            validate: (key?: any, value?: any) => Promise<unknown>;
-            validateModel: (model: any) => Promise<unknown>;
-            getChildContextError(): any;
-            getChildContextState(): any;
-            getNativeFormProps(): Pick<any, string | number | symbol>;
-            componentWillReceiveProps({ model, schema, validate, validator }: any): void;
-            onChange(key: any, value: any): void;
-            __reset(state: any): any;
-            onSubmit(event: any): Promise<unknown>;
-            onValidate(key?: any, value?: any): Promise<unknown>;
-            onValidateModel(model: any): Promise<unknown>;
-        };
-        Validated: (parent: any) => any;
-        displayName: string;
-        defaultProps: any;
-        propTypes: any;
-        childContextTypes: any;
-    };
-    export default _default_18;
-}
-declare module "uniforms-antd/src/ValidatedQuickForm" {
-    const _default_19: {
-        new (): {
-            [x: string]: any;
-            validate: (key?: any, value?: any) => Promise<unknown>;
-            validateModel: (model: any) => Promise<unknown>;
-            getChildContextError(): any;
-            getChildContextState(): any;
-            getNativeFormProps(): Pick<any, string | number | symbol>;
-            componentWillReceiveProps({ model, schema, validate, validator }: any): void;
-            onChange(key: any, value: any): void;
-            __reset(state: any): any;
-            onSubmit(event: any): Promise<unknown>;
-            onValidate(key?: any, value?: any): Promise<unknown>;
-            onValidateModel(model: any): Promise<unknown>;
-        };
-        Validated: (parent: any) => any;
-        displayName: string;
-        defaultProps: any;
-        propTypes: any;
-        childContextTypes: any;
-    };
     export default _default_19;
 }
-declare module "uniforms-antd/src/AutoForm" {
+declare module "uniforms-antd/src/ValidatedForm" {
     const _default_20: {
+        new (): {
+            [x: string]: any;
+            validate: (key?: any, value?: any) => Promise<unknown>;
+            validateModel: (model: any) => Promise<unknown>;
+            getChildContextError(): any;
+            getChildContextState(): any;
+            getNativeFormProps(): Pick<any, string | number | symbol>;
+            componentWillReceiveProps({ model, schema, validate, validator }: any): void;
+            onChange(key: any, value: any): void;
+            __reset(state: any): any;
+            onSubmit(event: any): Promise<unknown>;
+            onValidate(key?: any, value?: any): Promise<unknown>;
+            onValidateModel(model: any): Promise<unknown>;
+        };
+        Validated: (parent: any) => any;
+        displayName: string;
+        defaultProps: any;
+        propTypes: any;
+        childContextTypes: any;
+    };
+    export default _default_20;
+}
+declare module "uniforms-antd/src/ValidatedQuickForm" {
+    const _default_21: {
+        new (): {
+            [x: string]: any;
+            validate: (key?: any, value?: any) => Promise<unknown>;
+            validateModel: (model: any) => Promise<unknown>;
+            getChildContextError(): any;
+            getChildContextState(): any;
+            getNativeFormProps(): Pick<any, string | number | symbol>;
+            componentWillReceiveProps({ model, schema, validate, validator }: any): void;
+            onChange(key: any, value: any): void;
+            __reset(state: any): any;
+            onSubmit(event: any): Promise<unknown>;
+            onValidate(key?: any, value?: any): Promise<unknown>;
+            onValidateModel(model: any): Promise<unknown>;
+        };
+        Validated: (parent: any) => any;
+        displayName: string;
+        defaultProps: any;
+        propTypes: any;
+        childContextTypes: any;
+    };
+    export default _default_21;
+}
+declare module "uniforms-antd/src/AutoForm" {
+    const _default_22: {
         new (): {
             [x: string]: any;
         };
         [x: string]: any;
         Auto: (parent: any) => any;
     };
-    export default _default_20;
+    export default _default_22;
 }
 declare module "uniforms-antd/src/ErrorField" {
-    const _default_21: any;
-    export default _default_21;
+    const _default_23: any;
+    export default _default_23;
 }
 declare module "uniforms-antd/src/FormGroup" {
     const FormGroup: ({ children, ...props }: any) => JSX.Element;
@@ -612,8 +615,8 @@ declare module "uniforms-antd/src/HiddenField" {
     }
 }
 declare module "uniforms-antd/src/LongTextField" {
-    const _default_22: any;
-    export default _default_22;
+    const _default_24: any;
+    export default _default_24;
 }
 declare module "uniforms-antd/src/index" {
     export { default as AutoFields } from "uniforms-antd/src/AutoFields";
@@ -672,48 +675,48 @@ declare module "uniforms-bootstrap3/src/wrapField" {
     }, children: any): JSX.Element;
 }
 declare module "uniforms-bootstrap3/src/BoolField" {
-    const _default_23: any;
-    export default _default_23;
-}
-declare module "uniforms-bootstrap3/src/DateField" {
-    const _default_24: any;
-    export default _default_24;
-}
-declare module "uniforms-bootstrap3/src/ListDelField" {
     const _default_25: any;
     export default _default_25;
 }
-declare module "uniforms-bootstrap3/src/ListItemField" {
+declare module "uniforms-bootstrap3/src/DateField" {
     const _default_26: any;
     export default _default_26;
 }
-declare module "uniforms-bootstrap3/src/ListAddField" {
+declare module "uniforms-bootstrap3/src/ListDelField" {
     const _default_27: any;
     export default _default_27;
 }
-declare module "uniforms-bootstrap3/src/ListField" {
+declare module "uniforms-bootstrap3/src/ListItemField" {
     const _default_28: any;
     export default _default_28;
 }
-declare module "uniforms-bootstrap3/src/NestField" {
+declare module "uniforms-bootstrap3/src/ListAddField" {
     const _default_29: any;
     export default _default_29;
 }
-declare module "uniforms-bootstrap3/src/NumField" {
+declare module "uniforms-bootstrap3/src/ListField" {
     const _default_30: any;
     export default _default_30;
 }
-declare module "uniforms-bootstrap3/src/RadioField" {
+declare module "uniforms-bootstrap3/src/NestField" {
     const _default_31: any;
     export default _default_31;
 }
-declare module "uniforms-bootstrap3/src/SelectField" {
+declare module "uniforms-bootstrap3/src/NumField" {
     const _default_32: any;
     export default _default_32;
 }
-declare module "uniforms-bootstrap3/src/TextField" {
+declare module "uniforms-bootstrap3/src/RadioField" {
     const _default_33: any;
     export default _default_33;
+}
+declare module "uniforms-bootstrap3/src/SelectField" {
+    const _default_34: any;
+    export default _default_34;
+}
+declare module "uniforms-bootstrap3/src/TextField" {
+    const _default_35: any;
+    export default _default_35;
 }
 declare module "uniforms-bootstrap3/src/AutoField" {
     import BaseField from "uniforms/src/BaseField";
@@ -746,7 +749,7 @@ declare module "uniforms-bootstrap3/src/AutoFields" {
     export default AutoFields;
 }
 declare module "uniforms-bootstrap3/src/BaseForm" {
-    const _default_34: {
+    const _default_36: {
         new (): {
             [x: string]: any;
             getChildContextState(): any;
@@ -757,7 +760,7 @@ declare module "uniforms-bootstrap3/src/BaseForm" {
         displayName: string;
         propTypes: any;
     };
-    export default _default_34;
+    export default _default_36;
 }
 declare module "uniforms-bootstrap3/src/ErrorsField" {
     const ErrorsField: {
@@ -795,7 +798,7 @@ declare module "uniforms-bootstrap3/src/SubmitField" {
 }
 declare module "uniforms-bootstrap3/src/QuickForm" {
     import AutoField from "uniforms-bootstrap3/src/AutoField";
-    const _default_35: {
+    const _default_37: {
         new (): {
             [x: string]: any;
             getAutoField(): typeof AutoField;
@@ -833,69 +836,69 @@ declare module "uniforms-bootstrap3/src/QuickForm" {
         displayName: string;
         propTypes: any;
     };
-    export default _default_35;
-}
-declare module "uniforms-bootstrap3/src/ValidatedForm" {
-    const _default_36: {
-        new (): {
-            [x: string]: any;
-            validate: (key?: any, value?: any) => Promise<unknown>;
-            validateModel: (model: any) => Promise<unknown>;
-            getChildContextError(): any;
-            getChildContextState(): any;
-            getNativeFormProps(): Pick<any, string | number | symbol>;
-            componentWillReceiveProps({ model, schema, validate, validator }: any): void;
-            onChange(key: any, value: any): void;
-            __reset(state: any): any;
-            onSubmit(event: any): Promise<unknown>;
-            onValidate(key?: any, value?: any): Promise<unknown>;
-            onValidateModel(model: any): Promise<unknown>;
-        };
-        Validated: (parent: any) => any;
-        displayName: string;
-        defaultProps: any;
-        propTypes: any;
-        childContextTypes: any;
-    };
-    export default _default_36;
-}
-declare module "uniforms-bootstrap3/src/ValidatedQuickForm" {
-    const _default_37: {
-        new (): {
-            [x: string]: any;
-            validate: (key?: any, value?: any) => Promise<unknown>;
-            validateModel: (model: any) => Promise<unknown>;
-            getChildContextError(): any;
-            getChildContextState(): any;
-            getNativeFormProps(): Pick<any, string | number | symbol>;
-            componentWillReceiveProps({ model, schema, validate, validator }: any): void;
-            onChange(key: any, value: any): void;
-            __reset(state: any): any;
-            onSubmit(event: any): Promise<unknown>;
-            onValidate(key?: any, value?: any): Promise<unknown>;
-            onValidateModel(model: any): Promise<unknown>;
-        };
-        Validated: (parent: any) => any;
-        displayName: string;
-        defaultProps: any;
-        propTypes: any;
-        childContextTypes: any;
-    };
     export default _default_37;
 }
-declare module "uniforms-bootstrap3/src/AutoForm" {
+declare module "uniforms-bootstrap3/src/ValidatedForm" {
     const _default_38: {
+        new (): {
+            [x: string]: any;
+            validate: (key?: any, value?: any) => Promise<unknown>;
+            validateModel: (model: any) => Promise<unknown>;
+            getChildContextError(): any;
+            getChildContextState(): any;
+            getNativeFormProps(): Pick<any, string | number | symbol>;
+            componentWillReceiveProps({ model, schema, validate, validator }: any): void;
+            onChange(key: any, value: any): void;
+            __reset(state: any): any;
+            onSubmit(event: any): Promise<unknown>;
+            onValidate(key?: any, value?: any): Promise<unknown>;
+            onValidateModel(model: any): Promise<unknown>;
+        };
+        Validated: (parent: any) => any;
+        displayName: string;
+        defaultProps: any;
+        propTypes: any;
+        childContextTypes: any;
+    };
+    export default _default_38;
+}
+declare module "uniforms-bootstrap3/src/ValidatedQuickForm" {
+    const _default_39: {
+        new (): {
+            [x: string]: any;
+            validate: (key?: any, value?: any) => Promise<unknown>;
+            validateModel: (model: any) => Promise<unknown>;
+            getChildContextError(): any;
+            getChildContextState(): any;
+            getNativeFormProps(): Pick<any, string | number | symbol>;
+            componentWillReceiveProps({ model, schema, validate, validator }: any): void;
+            onChange(key: any, value: any): void;
+            __reset(state: any): any;
+            onSubmit(event: any): Promise<unknown>;
+            onValidate(key?: any, value?: any): Promise<unknown>;
+            onValidateModel(model: any): Promise<unknown>;
+        };
+        Validated: (parent: any) => any;
+        displayName: string;
+        defaultProps: any;
+        propTypes: any;
+        childContextTypes: any;
+    };
+    export default _default_39;
+}
+declare module "uniforms-bootstrap3/src/AutoForm" {
+    const _default_40: {
         new (): {
             [x: string]: any;
         };
         [x: string]: any;
         Auto: (parent: any) => any;
     };
-    export default _default_38;
+    export default _default_40;
 }
 declare module "uniforms-bootstrap3/src/ErrorField" {
-    const _default_39: any;
-    export default _default_39;
+    const _default_41: any;
+    export default _default_41;
 }
 declare module "uniforms-bootstrap3/src/FormGroup" {
     const FormGroup: ({ children, ...props }: any) => JSX.Element;
@@ -911,8 +914,8 @@ declare module "uniforms-bootstrap3/src/HiddenField" {
     }
 }
 declare module "uniforms-bootstrap3/src/LongTextField" {
-    const _default_40: any;
-    export default _default_40;
+    const _default_42: any;
+    export default _default_42;
 }
 declare module "uniforms-bootstrap3/src/index" {
     export { default as AutoFields } from "uniforms-bootstrap3/src/AutoFields";
@@ -970,8 +973,8 @@ declare module "uniforms-bootstrap4/src/wrapField" {
     }, children: any): JSX.Element;
 }
 declare module "uniforms-bootstrap4/src/BoolField" {
-    const _default_41: any;
-    export default _default_41;
+    const _default_43: any;
+    export default _default_43;
 }
 declare module "uniforms-bootstrap4/src/DateField" {
     global {
@@ -979,44 +982,44 @@ declare module "uniforms-bootstrap4/src/DateField" {
             Date: DateConstructor;
         }
     }
-    const _default_42: any;
-    export default _default_42;
-}
-declare module "uniforms-bootstrap4/src/ListDelField" {
-    const _default_43: any;
-    export default _default_43;
-}
-declare module "uniforms-bootstrap4/src/ListItemField" {
     const _default_44: any;
     export default _default_44;
 }
-declare module "uniforms-bootstrap4/src/ListAddField" {
+declare module "uniforms-bootstrap4/src/ListDelField" {
     const _default_45: any;
     export default _default_45;
 }
-declare module "uniforms-bootstrap4/src/ListField" {
+declare module "uniforms-bootstrap4/src/ListItemField" {
     const _default_46: any;
     export default _default_46;
 }
-declare module "uniforms-bootstrap4/src/NestField" {
+declare module "uniforms-bootstrap4/src/ListAddField" {
     const _default_47: any;
     export default _default_47;
 }
-declare module "uniforms-bootstrap4/src/NumField" {
+declare module "uniforms-bootstrap4/src/ListField" {
     const _default_48: any;
     export default _default_48;
 }
-declare module "uniforms-bootstrap4/src/RadioField" {
+declare module "uniforms-bootstrap4/src/NestField" {
     const _default_49: any;
     export default _default_49;
 }
-declare module "uniforms-bootstrap4/src/SelectField" {
+declare module "uniforms-bootstrap4/src/NumField" {
     const _default_50: any;
     export default _default_50;
 }
-declare module "uniforms-bootstrap4/src/TextField" {
+declare module "uniforms-bootstrap4/src/RadioField" {
     const _default_51: any;
     export default _default_51;
+}
+declare module "uniforms-bootstrap4/src/SelectField" {
+    const _default_52: any;
+    export default _default_52;
+}
+declare module "uniforms-bootstrap4/src/TextField" {
+    const _default_53: any;
+    export default _default_53;
 }
 declare module "uniforms-bootstrap4/src/AutoField" {
     import BaseField from "uniforms/src/BaseField";
@@ -1059,7 +1062,7 @@ declare module "uniforms-bootstrap4/src/AutoFields" {
     export default AutoFields;
 }
 declare module "uniforms-bootstrap4/src/BaseForm" {
-    const _default_52: {
+    const _default_54: {
         new (): {
             [x: string]: any;
             getChildContextState(): any;
@@ -1070,7 +1073,7 @@ declare module "uniforms-bootstrap4/src/BaseForm" {
         displayName: string;
         propTypes: any;
     };
-    export default _default_52;
+    export default _default_54;
 }
 declare module "uniforms-bootstrap4/src/ErrorsField" {
     const ErrorsField: {
@@ -1117,7 +1120,7 @@ declare module "uniforms-bootstrap4/src/SubmitField" {
 }
 declare module "uniforms-bootstrap4/src/QuickForm" {
     import AutoField from "uniforms-bootstrap4/src/AutoField";
-    const _default_53: {
+    const _default_55: {
         new (): {
             [x: string]: any;
             getAutoField(): typeof AutoField;
@@ -1164,69 +1167,69 @@ declare module "uniforms-bootstrap4/src/QuickForm" {
         displayName: string;
         propTypes: any;
     };
-    export default _default_53;
-}
-declare module "uniforms-bootstrap4/src/ValidatedForm" {
-    const _default_54: {
-        new (): {
-            [x: string]: any;
-            validate: (key?: any, value?: any) => Promise<unknown>;
-            validateModel: (model: any) => Promise<unknown>;
-            getChildContextError(): any;
-            getChildContextState(): any;
-            getNativeFormProps(): Pick<any, string | number | symbol>;
-            componentWillReceiveProps({ model, schema, validate, validator }: any): void;
-            onChange(key: any, value: any): void;
-            __reset(state: any): any;
-            onSubmit(event: any): Promise<unknown>;
-            onValidate(key?: any, value?: any): Promise<unknown>;
-            onValidateModel(model: any): Promise<unknown>;
-        };
-        Validated: (parent: any) => any;
-        displayName: string;
-        defaultProps: any;
-        propTypes: any;
-        childContextTypes: any;
-    };
-    export default _default_54;
-}
-declare module "uniforms-bootstrap4/src/ValidatedQuickForm" {
-    const _default_55: {
-        new (): {
-            [x: string]: any;
-            validate: (key?: any, value?: any) => Promise<unknown>;
-            validateModel: (model: any) => Promise<unknown>;
-            getChildContextError(): any;
-            getChildContextState(): any;
-            getNativeFormProps(): Pick<any, string | number | symbol>;
-            componentWillReceiveProps({ model, schema, validate, validator }: any): void;
-            onChange(key: any, value: any): void;
-            __reset(state: any): any;
-            onSubmit(event: any): Promise<unknown>;
-            onValidate(key?: any, value?: any): Promise<unknown>;
-            onValidateModel(model: any): Promise<unknown>;
-        };
-        Validated: (parent: any) => any;
-        displayName: string;
-        defaultProps: any;
-        propTypes: any;
-        childContextTypes: any;
-    };
     export default _default_55;
 }
-declare module "uniforms-bootstrap4/src/AutoForm" {
+declare module "uniforms-bootstrap4/src/ValidatedForm" {
     const _default_56: {
+        new (): {
+            [x: string]: any;
+            validate: (key?: any, value?: any) => Promise<unknown>;
+            validateModel: (model: any) => Promise<unknown>;
+            getChildContextError(): any;
+            getChildContextState(): any;
+            getNativeFormProps(): Pick<any, string | number | symbol>;
+            componentWillReceiveProps({ model, schema, validate, validator }: any): void;
+            onChange(key: any, value: any): void;
+            __reset(state: any): any;
+            onSubmit(event: any): Promise<unknown>;
+            onValidate(key?: any, value?: any): Promise<unknown>;
+            onValidateModel(model: any): Promise<unknown>;
+        };
+        Validated: (parent: any) => any;
+        displayName: string;
+        defaultProps: any;
+        propTypes: any;
+        childContextTypes: any;
+    };
+    export default _default_56;
+}
+declare module "uniforms-bootstrap4/src/ValidatedQuickForm" {
+    const _default_57: {
+        new (): {
+            [x: string]: any;
+            validate: (key?: any, value?: any) => Promise<unknown>;
+            validateModel: (model: any) => Promise<unknown>;
+            getChildContextError(): any;
+            getChildContextState(): any;
+            getNativeFormProps(): Pick<any, string | number | symbol>;
+            componentWillReceiveProps({ model, schema, validate, validator }: any): void;
+            onChange(key: any, value: any): void;
+            __reset(state: any): any;
+            onSubmit(event: any): Promise<unknown>;
+            onValidate(key?: any, value?: any): Promise<unknown>;
+            onValidateModel(model: any): Promise<unknown>;
+        };
+        Validated: (parent: any) => any;
+        displayName: string;
+        defaultProps: any;
+        propTypes: any;
+        childContextTypes: any;
+    };
+    export default _default_57;
+}
+declare module "uniforms-bootstrap4/src/AutoForm" {
+    const _default_58: {
         new (): {
             [x: string]: any;
         };
         [x: string]: any;
         Auto: (parent: any) => any;
     };
-    export default _default_56;
+    export default _default_58;
 }
 declare module "uniforms-bootstrap4/src/ErrorField" {
-    const _default_57: any;
-    export default _default_57;
+    const _default_59: any;
+    export default _default_59;
 }
 declare module "uniforms-bootstrap4/src/FormGroup" {
     const FormGroup: ({ children, ...props }: any) => JSX.Element;
@@ -1244,8 +1247,8 @@ declare module "uniforms-bootstrap4/src/HiddenField" {
     }
 }
 declare module "uniforms-bootstrap4/src/LongTextField" {
-    const _default_58: any;
-    export default _default_58;
+    const _default_60: any;
+    export default _default_60;
 }
 declare module "uniforms-bootstrap4/src/index" {
     export { default as AutoFields } from "uniforms-bootstrap4/src/AutoFields";
@@ -1377,7 +1380,7 @@ declare module "uniforms-bridge-simple-schema-2/src/index" {
 }
 declare module "uniforms-material/src/wrapField" {
     import React from 'react';
-    function wrapField({ component, disabled, error, errorMessage, fullWidth, helperText, margin, required, showInlineError, variant }: any, ...children: any[]): React.FunctionComponentElement<import("@material-ui/core/OverridableComponent").DefaultComponentProps<{
+    function wrap({ component, disabled, error, errorMessage, fullWidth, helperText, margin, required, showInlineError, variant }: any, ...children: any[]): React.FunctionComponentElement<import("@material-ui/core/OverridableComponent").DefaultComponentProps<{
         props: {
             disabled?: boolean | undefined;
             error?: boolean | undefined;
@@ -1391,55 +1394,55 @@ declare module "uniforms-material/src/wrapField" {
         defaultComponent: "div";
         classKey: import("@material-ui/core/FormControl").FormControlClassKey;
     }>>;
-    namespace wrapField {
-        var _filterDOMPropsList: string[];
-        var _filterDOMProps: (props: any) => Pick<any, number | symbol>;
-    }
-    export default wrapField;
-}
-declare module "uniforms-material/src/BoolField" {
-    const _default_59: any;
-    export default _default_59;
-}
-declare module "uniforms-material/src/DateField" {
-    const _default_60: any;
-    export default _default_60;
-}
-declare module "uniforms-material/src/ListDelField" {
-    const _default_61: any;
+    const _default_61: typeof wrap & {
+        _filterDOMProps: (props: any) => Pick<any, number | symbol>;
+        _filterDOMPropsList: string[];
+    };
     export default _default_61;
 }
-declare module "uniforms-material/src/ListItemField" {
+declare module "uniforms-material/src/BoolField" {
     const _default_62: any;
     export default _default_62;
 }
-declare module "uniforms-material/src/ListAddField" {
+declare module "uniforms-material/src/DateField" {
     const _default_63: any;
     export default _default_63;
 }
-declare module "uniforms-material/src/ListField" {
+declare module "uniforms-material/src/ListDelField" {
     const _default_64: any;
     export default _default_64;
 }
-declare module "uniforms-material/src/NestField" {
+declare module "uniforms-material/src/ListItemField" {
     const _default_65: any;
     export default _default_65;
 }
-declare module "uniforms-material/src/NumField" {
+declare module "uniforms-material/src/ListAddField" {
     const _default_66: any;
     export default _default_66;
 }
-declare module "uniforms-material/src/RadioField" {
+declare module "uniforms-material/src/ListField" {
     const _default_67: any;
     export default _default_67;
 }
-declare module "uniforms-material/src/SelectField" {
+declare module "uniforms-material/src/NestField" {
     const _default_68: any;
     export default _default_68;
 }
-declare module "uniforms-material/src/TextField" {
+declare module "uniforms-material/src/NumField" {
     const _default_69: any;
     export default _default_69;
+}
+declare module "uniforms-material/src/RadioField" {
+    const _default_70: any;
+    export default _default_70;
+}
+declare module "uniforms-material/src/SelectField" {
+    const _default_71: any;
+    export default _default_71;
+}
+declare module "uniforms-material/src/TextField" {
+    const _default_72: any;
+    export default _default_72;
 }
 declare module "uniforms-material/src/AutoField" {
     import BaseField from "uniforms/src/BaseField";
@@ -1482,7 +1485,7 @@ declare module "uniforms-material/src/AutoFields" {
     export default AutoFields;
 }
 declare module "uniforms-material/src/BaseForm" {
-    const _default_70: {
+    const _default_73: {
         new (): {
             [x: string]: any;
         };
@@ -1490,7 +1493,7 @@ declare module "uniforms-material/src/BaseForm" {
         Material: (parent: any) => any;
         displayName: string;
     };
-    export default _default_70;
+    export default _default_73;
 }
 declare module "uniforms-material/src/ErrorsField" {
     const ErrorsField: {
@@ -1543,7 +1546,7 @@ declare module "uniforms-material/src/SubmitField" {
 }
 declare module "uniforms-material/src/QuickForm" {
     import AutoField from "uniforms-material/src/AutoField";
-    const _default_71: {
+    const _default_74: {
         new (): {
             [x: string]: any;
             getAutoField(): typeof AutoField;
@@ -1596,10 +1599,10 @@ declare module "uniforms-material/src/QuickForm" {
         displayName: string;
         propTypes: any;
     };
-    export default _default_71;
+    export default _default_74;
 }
 declare module "uniforms-material/src/ValidatedForm" {
-    const _default_72: {
+    const _default_75: {
         new (): {
             [x: string]: any;
             validate: (key?: any, value?: any) => Promise<unknown>;
@@ -1620,10 +1623,10 @@ declare module "uniforms-material/src/ValidatedForm" {
         propTypes: any;
         childContextTypes: any;
     };
-    export default _default_72;
+    export default _default_75;
 }
 declare module "uniforms-material/src/ValidatedQuickForm" {
-    const _default_73: {
+    const _default_76: {
         new (): {
             [x: string]: any;
             validate: (key?: any, value?: any) => Promise<unknown>;
@@ -1644,21 +1647,21 @@ declare module "uniforms-material/src/ValidatedQuickForm" {
         propTypes: any;
         childContextTypes: any;
     };
-    export default _default_73;
+    export default _default_76;
 }
 declare module "uniforms-material/src/AutoForm" {
-    const _default_74: {
+    const _default_77: {
         new (): {
             [x: string]: any;
         };
         [x: string]: any;
         Auto: (parent: any) => any;
     };
-    export default _default_74;
+    export default _default_77;
 }
 declare module "uniforms-material/src/ErrorField" {
-    const _default_75: any;
-    export default _default_75;
+    const _default_78: any;
+    export default _default_78;
 }
 declare module "uniforms-material/src/HiddenField" {
     import BaseField from "uniforms/src/BaseField";
@@ -1672,8 +1675,8 @@ declare module "uniforms-material/src/HiddenField" {
     }
 }
 declare module "uniforms-material/src/LongTextField" {
-    const _default_76: any;
-    export default _default_76;
+    const _default_79: any;
+    export default _default_79;
 }
 declare module "uniforms-material/src/index" {
     export { default as AutoFields } from "uniforms-material/src/AutoFields";
@@ -1701,48 +1704,48 @@ declare module "uniforms-material/src/index" {
     export { default as ValidatedQuickForm } from "uniforms-material/src/ValidatedQuickForm";
 }
 declare module "uniforms-semantic/src/BoolField" {
-    const _default_77: any;
-    export default _default_77;
-}
-declare module "uniforms-semantic/src/DateField" {
-    const _default_78: any;
-    export default _default_78;
-}
-declare module "uniforms-semantic/src/ListDelField" {
-    const _default_79: any;
-    export default _default_79;
-}
-declare module "uniforms-semantic/src/ListItemField" {
     const _default_80: any;
     export default _default_80;
 }
-declare module "uniforms-semantic/src/ListAddField" {
+declare module "uniforms-semantic/src/DateField" {
     const _default_81: any;
     export default _default_81;
 }
-declare module "uniforms-semantic/src/ListField" {
+declare module "uniforms-semantic/src/ListDelField" {
     const _default_82: any;
     export default _default_82;
 }
-declare module "uniforms-semantic/src/NestField" {
+declare module "uniforms-semantic/src/ListItemField" {
     const _default_83: any;
     export default _default_83;
 }
-declare module "uniforms-semantic/src/NumField" {
+declare module "uniforms-semantic/src/ListAddField" {
     const _default_84: any;
     export default _default_84;
 }
-declare module "uniforms-semantic/src/RadioField" {
+declare module "uniforms-semantic/src/ListField" {
     const _default_85: any;
     export default _default_85;
 }
-declare module "uniforms-semantic/src/SelectField" {
+declare module "uniforms-semantic/src/NestField" {
     const _default_86: any;
     export default _default_86;
 }
-declare module "uniforms-semantic/src/TextField" {
+declare module "uniforms-semantic/src/NumField" {
     const _default_87: any;
     export default _default_87;
+}
+declare module "uniforms-semantic/src/RadioField" {
+    const _default_88: any;
+    export default _default_88;
+}
+declare module "uniforms-semantic/src/SelectField" {
+    const _default_89: any;
+    export default _default_89;
+}
+declare module "uniforms-semantic/src/TextField" {
+    const _default_90: any;
+    export default _default_90;
 }
 declare module "uniforms-semantic/src/AutoField" {
     import BaseField from "uniforms/src/BaseField";
@@ -1785,7 +1788,7 @@ declare module "uniforms-semantic/src/AutoFields" {
     export default AutoFields;
 }
 declare module "uniforms-semantic/src/BaseForm" {
-    const _default_88: {
+    const _default_91: {
         new (): {
             [x: string]: any;
             getNativeFormProps(): any;
@@ -1794,7 +1797,7 @@ declare module "uniforms-semantic/src/BaseForm" {
         Semantic: (parent: any) => any;
         displayName: string;
     };
-    export default _default_88;
+    export default _default_91;
 }
 declare module "uniforms-semantic/src/ErrorsField" {
     const ErrorsField: {
@@ -1836,7 +1839,7 @@ declare module "uniforms-semantic/src/SubmitField" {
 }
 declare module "uniforms-semantic/src/QuickForm" {
     import AutoField from "uniforms-semantic/src/AutoField";
-    const _default_89: {
+    const _default_92: {
         new (): {
             [x: string]: any;
             getAutoField(): typeof AutoField;
@@ -1878,10 +1881,10 @@ declare module "uniforms-semantic/src/QuickForm" {
         displayName: string;
         propTypes: any;
     };
-    export default _default_89;
+    export default _default_92;
 }
 declare module "uniforms-semantic/src/ValidatedForm" {
-    const _default_90: {
+    const _default_93: {
         new (): {
             [x: string]: any;
             validate: (key?: any, value?: any) => Promise<unknown>;
@@ -1902,10 +1905,10 @@ declare module "uniforms-semantic/src/ValidatedForm" {
         propTypes: any;
         childContextTypes: any;
     };
-    export default _default_90;
+    export default _default_93;
 }
 declare module "uniforms-semantic/src/ValidatedQuickForm" {
-    const _default_91: {
+    const _default_94: {
         new (): {
             [x: string]: any;
             validate: (key?: any, value?: any) => Promise<unknown>;
@@ -1926,21 +1929,21 @@ declare module "uniforms-semantic/src/ValidatedQuickForm" {
         propTypes: any;
         childContextTypes: any;
     };
-    export default _default_91;
+    export default _default_94;
 }
 declare module "uniforms-semantic/src/AutoForm" {
-    const _default_92: {
+    const _default_95: {
         new (): {
             [x: string]: any;
         };
         [x: string]: any;
         Auto: (parent: any) => any;
     };
-    export default _default_92;
+    export default _default_95;
 }
 declare module "uniforms-semantic/src/ErrorField" {
-    const _default_93: any;
-    export default _default_93;
+    const _default_96: any;
+    export default _default_96;
 }
 declare module "uniforms-semantic/src/HiddenField" {
     import BaseField from "uniforms/src/BaseField";
@@ -1954,8 +1957,8 @@ declare module "uniforms-semantic/src/HiddenField" {
     }
 }
 declare module "uniforms-semantic/src/LongTextField" {
-    const _default_94: any;
-    export default _default_94;
+    const _default_97: any;
+    export default _default_97;
 }
 declare module "uniforms-semantic/src/index" {
     export { default as AutoFields } from "uniforms-semantic/src/AutoFields";
@@ -1983,48 +1986,48 @@ declare module "uniforms-semantic/src/index" {
     export { default as ValidatedQuickForm } from "uniforms-semantic/src/ValidatedQuickForm";
 }
 declare module "uniforms-unstyled/src/BoolField" {
-    const _default_95: any;
-    export default _default_95;
-}
-declare module "uniforms-unstyled/src/DateField" {
-    const _default_96: any;
-    export default _default_96;
-}
-declare module "uniforms-unstyled/src/ListDelField" {
-    const _default_97: any;
-    export default _default_97;
-}
-declare module "uniforms-unstyled/src/ListItemField" {
     const _default_98: any;
     export default _default_98;
 }
-declare module "uniforms-unstyled/src/ListAddField" {
+declare module "uniforms-unstyled/src/DateField" {
     const _default_99: any;
     export default _default_99;
 }
-declare module "uniforms-unstyled/src/ListField" {
+declare module "uniforms-unstyled/src/ListDelField" {
     const _default_100: any;
     export default _default_100;
 }
-declare module "uniforms-unstyled/src/NestField" {
+declare module "uniforms-unstyled/src/ListItemField" {
     const _default_101: any;
     export default _default_101;
 }
-declare module "uniforms-unstyled/src/NumField" {
+declare module "uniforms-unstyled/src/ListAddField" {
     const _default_102: any;
     export default _default_102;
 }
-declare module "uniforms-unstyled/src/RadioField" {
+declare module "uniforms-unstyled/src/ListField" {
     const _default_103: any;
     export default _default_103;
 }
-declare module "uniforms-unstyled/src/SelectField" {
+declare module "uniforms-unstyled/src/NestField" {
     const _default_104: any;
     export default _default_104;
 }
-declare module "uniforms-unstyled/src/TextField" {
+declare module "uniforms-unstyled/src/NumField" {
     const _default_105: any;
     export default _default_105;
+}
+declare module "uniforms-unstyled/src/RadioField" {
+    const _default_106: any;
+    export default _default_106;
+}
+declare module "uniforms-unstyled/src/SelectField" {
+    const _default_107: any;
+    export default _default_107;
+}
+declare module "uniforms-unstyled/src/TextField" {
+    const _default_108: any;
+    export default _default_108;
 }
 declare module "uniforms-unstyled/src/AutoField" {
     import BaseField from "uniforms/src/BaseField";
@@ -2067,7 +2070,7 @@ declare module "uniforms-unstyled/src/AutoFields" {
     export default AutoFields;
 }
 declare module "uniforms-unstyled/src/BaseForm" {
-    const _default_106: {
+    const _default_109: {
         new (): {
             [x: string]: any;
         };
@@ -2075,7 +2078,7 @@ declare module "uniforms-unstyled/src/BaseForm" {
         Unstyled: (parent: any) => any;
         displayName: string;
     };
-    export default _default_106;
+    export default _default_109;
 }
 declare module "uniforms-unstyled/src/ErrorsField" {
     const ErrorsField: {
@@ -2115,7 +2118,7 @@ declare module "uniforms-unstyled/src/SubmitField" {
 }
 declare module "uniforms-unstyled/src/QuickForm" {
     import AutoField from "uniforms-unstyled/src/AutoField";
-    const _default_107: {
+    const _default_110: {
         new (): {
             [x: string]: any;
             getAutoField(): typeof AutoField;
@@ -2155,10 +2158,10 @@ declare module "uniforms-unstyled/src/QuickForm" {
         displayName: string;
         propTypes: any;
     };
-    export default _default_107;
+    export default _default_110;
 }
 declare module "uniforms-unstyled/src/ValidatedForm" {
-    const _default_108: {
+    const _default_111: {
         new (): {
             [x: string]: any;
             validate: (key?: any, value?: any) => Promise<unknown>;
@@ -2179,10 +2182,10 @@ declare module "uniforms-unstyled/src/ValidatedForm" {
         propTypes: any;
         childContextTypes: any;
     };
-    export default _default_108;
+    export default _default_111;
 }
 declare module "uniforms-unstyled/src/ValidatedQuickForm" {
-    const _default_109: {
+    const _default_112: {
         new (): {
             [x: string]: any;
             validate: (key?: any, value?: any) => Promise<unknown>;
@@ -2203,21 +2206,21 @@ declare module "uniforms-unstyled/src/ValidatedQuickForm" {
         propTypes: any;
         childContextTypes: any;
     };
-    export default _default_109;
+    export default _default_112;
 }
 declare module "uniforms-unstyled/src/AutoForm" {
-    const _default_110: {
+    const _default_113: {
         new (): {
             [x: string]: any;
         };
         [x: string]: any;
         Auto: (parent: any) => any;
     };
-    export default _default_110;
+    export default _default_113;
 }
 declare module "uniforms-unstyled/src/ErrorField" {
-    const _default_111: any;
-    export default _default_111;
+    const _default_114: any;
+    export default _default_114;
 }
 declare module "uniforms-unstyled/src/HiddenField" {
     import BaseField from "uniforms/src/BaseField";
@@ -2231,8 +2234,8 @@ declare module "uniforms-unstyled/src/HiddenField" {
     }
 }
 declare module "uniforms-unstyled/src/LongTextField" {
-    const _default_112: any;
-    export default _default_112;
+    const _default_115: any;
+    export default _default_115;
 }
 declare module "uniforms-unstyled/src/index" {
     export { default as AutoFields } from "uniforms-unstyled/src/AutoFields";

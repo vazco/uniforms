@@ -3,7 +3,10 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import React from 'react';
 import omit from 'lodash/omit';
 
-export default function wrapField(
+const _filterDOMPropsList = ['fullWidth', 'helperText', 'margin', 'variant'];
+const _filterDOMProps = props => omit(props, _filterDOMPropsList);
+
+function wrap(
   {
     component,
     disabled,
@@ -37,10 +40,4 @@ export default function wrapField(
   );
 }
 
-wrapField._filterDOMPropsList = [
-  'fullWidth',
-  'helperText',
-  'margin',
-  'variant'
-];
-wrapField._filterDOMProps = props => omit(props, wrapField._filterDOMPropsList);
+export default Object.assign(wrap, { _filterDOMProps, _filterDOMPropsList });
