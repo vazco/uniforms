@@ -51,12 +51,12 @@ const Validated = (parent: any) =>
 
     validate: (key?: any, value?: any) => Promise<unknown>;
     validateModel: (model: any) => Promise<unknown>;
-    state: any;
 
     constructor() {
       // @ts-ignore
       super(...arguments);
 
+      // @ts-ignore
       this.state = {
         ...this.state,
 

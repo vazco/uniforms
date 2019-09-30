@@ -118,7 +118,6 @@ declare module "uniforms/src/BaseForm" {
             uniforms: any;
         };
         constructor();
-        state: any;
         getChildContext(): {
             uniforms: {
                 name: never[];
@@ -207,7 +206,6 @@ declare module "uniforms/src/ValidatedForm" {
             [x: string]: any;
             validate: (key?: any, value?: any) => Promise<unknown>;
             validateModel: (model: any) => Promise<unknown>;
-            state: any;
             getChildContextError(): any;
             getChildContextState(): any;
             getNativeFormProps(): Pick<any, string | number | symbol>;
@@ -233,7 +231,6 @@ declare module "uniforms/src/ValidatedQuickForm" {
             [x: string]: any;
             validate: (key?: any, value?: any) => Promise<unknown>;
             validateModel: (model: any) => Promise<unknown>;
-            state: any;
             getChildContextError(): any;
             getChildContextState(): any;
             getNativeFormProps(): Pick<any, string | number | symbol>;
@@ -257,7 +254,6 @@ declare module "uniforms/src/AutoForm" {
     const _default_4: {
         new (): {
             [x: string]: any;
-            state: any;
             componentWillReceiveProps({ model }: {
                 model: any;
             }): void;
@@ -546,7 +542,6 @@ declare module "uniforms-antd/src/ValidatedForm" {
             [x: string]: any;
             validate: (key?: any, value?: any) => Promise<unknown>;
             validateModel: (model: any) => Promise<unknown>;
-            state: any;
             getChildContextError(): any;
             getChildContextState(): any;
             getNativeFormProps(): Pick<any, string | number | symbol>;
@@ -571,7 +566,6 @@ declare module "uniforms-antd/src/ValidatedQuickForm" {
             [x: string]: any;
             validate: (key?: any, value?: any) => Promise<unknown>;
             validateModel: (model: any) => Promise<unknown>;
-            state: any;
             getChildContextError(): any;
             getChildContextState(): any;
             getNativeFormProps(): Pick<any, string | number | symbol>;
@@ -847,7 +841,6 @@ declare module "uniforms-bootstrap3/src/ValidatedForm" {
             [x: string]: any;
             validate: (key?: any, value?: any) => Promise<unknown>;
             validateModel: (model: any) => Promise<unknown>;
-            state: any;
             getChildContextError(): any;
             getChildContextState(): any;
             getNativeFormProps(): Pick<any, string | number | symbol>;
@@ -872,7 +865,6 @@ declare module "uniforms-bootstrap3/src/ValidatedQuickForm" {
             [x: string]: any;
             validate: (key?: any, value?: any) => Promise<unknown>;
             validateModel: (model: any) => Promise<unknown>;
-            state: any;
             getChildContextError(): any;
             getChildContextState(): any;
             getNativeFormProps(): Pick<any, string | number | symbol>;
@@ -1180,7 +1172,6 @@ declare module "uniforms-bootstrap4/src/ValidatedForm" {
             [x: string]: any;
             validate: (key?: any, value?: any) => Promise<unknown>;
             validateModel: (model: any) => Promise<unknown>;
-            state: any;
             getChildContextError(): any;
             getChildContextState(): any;
             getNativeFormProps(): Pick<any, string | number | symbol>;
@@ -1205,7 +1196,6 @@ declare module "uniforms-bootstrap4/src/ValidatedQuickForm" {
             [x: string]: any;
             validate: (key?: any, value?: any) => Promise<unknown>;
             validateModel: (model: any) => Promise<unknown>;
-            state: any;
             getChildContextError(): any;
             getChildContextState(): any;
             getNativeFormProps(): Pick<any, string | number | symbol>;
@@ -1614,7 +1604,6 @@ declare module "uniforms-material/src/ValidatedForm" {
             [x: string]: any;
             validate: (key?: any, value?: any) => Promise<unknown>;
             validateModel: (model: any) => Promise<unknown>;
-            state: any;
             getChildContextError(): any;
             getChildContextState(): any;
             getNativeFormProps(): Pick<any, string | number | symbol>;
@@ -1639,7 +1628,6 @@ declare module "uniforms-material/src/ValidatedQuickForm" {
             [x: string]: any;
             validate: (key?: any, value?: any) => Promise<unknown>;
             validateModel: (model: any) => Promise<unknown>;
-            state: any;
             getChildContextError(): any;
             getChildContextState(): any;
             getNativeFormProps(): Pick<any, string | number | symbol>;
@@ -1898,7 +1886,6 @@ declare module "uniforms-semantic/src/ValidatedForm" {
             [x: string]: any;
             validate: (key?: any, value?: any) => Promise<unknown>;
             validateModel: (model: any) => Promise<unknown>;
-            state: any;
             getChildContextError(): any;
             getChildContextState(): any;
             getNativeFormProps(): Pick<any, string | number | symbol>;
@@ -1923,7 +1910,6 @@ declare module "uniforms-semantic/src/ValidatedQuickForm" {
             [x: string]: any;
             validate: (key?: any, value?: any) => Promise<unknown>;
             validateModel: (model: any) => Promise<unknown>;
-            state: any;
             getChildContextError(): any;
             getChildContextState(): any;
             getNativeFormProps(): Pick<any, string | number | symbol>;
@@ -2177,7 +2163,6 @@ declare module "uniforms-unstyled/src/ValidatedForm" {
             [x: string]: any;
             validate: (key?: any, value?: any) => Promise<unknown>;
             validateModel: (model: any) => Promise<unknown>;
-            state: any;
             getChildContextError(): any;
             getChildContextState(): any;
             getNativeFormProps(): Pick<any, string | number | symbol>;
@@ -2202,7 +2187,6 @@ declare module "uniforms-unstyled/src/ValidatedQuickForm" {
             [x: string]: any;
             validate: (key?: any, value?: any) => Promise<unknown>;
             validateModel: (model: any) => Promise<unknown>;
-            state: any;
             getChildContextError(): any;
             getChildContextState(): any;
             getNativeFormProps(): Pick<any, string | number | symbol>;

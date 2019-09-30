@@ -116,8 +116,6 @@ export default class BaseForm extends Component<any, any> {
         : model;
   }
 
-  state: any;
-
   getChildContext() {
     return {
       uniforms: {
@@ -231,6 +229,7 @@ export default class BaseForm extends Component<any, any> {
   onChange(key: any, value: any) {
     // Do not set `changed` before componentDidMount
     if (this.state.changed !== null) {
+      // @ts-ignore
       this.state.changed = true;
       this.getChangedKeys(key, value, get(this.getModel(), key)).forEach(key =>
         this.setState(state => ({
