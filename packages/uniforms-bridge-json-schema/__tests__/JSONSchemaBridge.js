@@ -108,7 +108,9 @@ describe('JSONSchemaBridge', () => {
             }
           }
         }
-      }
+      },
+      password: { type: 'string', uniforms: { type: 'password' } },
+      passwordNumeric: { type: 'number', uniforms: { type: 'password' } }
     },
     required: ['dateOfBirth']
   };
@@ -530,6 +532,21 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getProps('salary', props).allowedValues[1]).toBe('avarage');
     });
 
+    it('works with type', () => {
+      expect(bridge.getProps('password')).toEqual({
+        label: 'Password',
+        required: false,
+        type: 'password'
+      });
+
+      expect(bridge.getProps('passwordNumeric')).toEqual({
+        label: 'Password numeric',
+        required: false,
+        decimal: true,
+        type: 'password'
+      });
+    });
+
     it('works with other props', () => {
       expect(bridge.getProps('personalData.firstName', { x: 1, y: 1 })).toEqual(
         {
@@ -555,7 +572,9 @@ describe('JSONSchemaBridge', () => {
         'personalData',
         'salary',
         'shippingAddress',
-        'complexNames'
+        'complexNames',
+        'password',
+        'passwordNumeric'
       ]);
     });
 
