@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import connectField from 'uniforms/connectField';
 import filterDOMProps from 'uniforms/filterDOMProps';
 
-const DateConstructor = (typeof global === 'object' ? global : window).Date;
+const DateConstructor = globalThis.Date;
 const dateFormat = value => value && value.toISOString().slice(0, -8);
 const dateParse = (timestamp, onChange) => {
   const date = new DateConstructor(timestamp);

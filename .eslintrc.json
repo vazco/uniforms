@@ -7,6 +7,9 @@
     "plugin:import/typescript",
     "vazco/prettier"
   ],
+  "globals": {
+    "globalThis": "readonly"
+  },
   "parser": "@typescript-eslint/parser",
   "root": true,
   "rules": {
