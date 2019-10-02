@@ -36,5 +36,5 @@
     },
     "strict": true
   },
-  "includes": ["packages/**/*.tsx?", "website/**/*.tsx?"]
+  "include": ["packages", "website"]
 }
