@@ -1,16 +1,42 @@
 {
-  "files": [],
-  "references": [
-    { "path": "packages/uniforms" },
-    { "path": "packages/uniforms-antd" },
-    { "path": "packages/uniforms-bootstrap3" },
-    { "path": "packages/uniforms-bootstrap4" },
-    { "path": "packages/uniforms-bridge-graphql" },
-    { "path": "packages/uniforms-bridge-json-schema" },
-    { "path": "packages/uniforms-bridge-simple-schema" },
-    { "path": "packages/uniforms-bridge-simple-schema-2" },
-    { "path": "packages/uniforms-material" },
-    { "path": "packages/uniforms-semantic" },
-    { "path": "packages/uniforms-unstyled" }
-  ]
+  "compilerOptions": {
+    "baseUrl": "packages",
+    "composite": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "jsx": "react",
+    "noImplicitAny": false,
+    "paths": {
+      "uniforms": ["uniforms/src"],
+      "uniforms/*": ["uniforms/src/*"],
+      "uniforms-antd": ["uniforms-antd/src"],
+      "uniforms-antd/*": ["uniforms-antd/src/*"],
+      "uniforms-bootstrap3": ["uniforms-bootstrap3/src"],
+      "uniforms-bootstrap3/*": ["uniforms-bootstrap3/src/*"],
+      "uniforms-bootstrap4": ["uniforms-bootstrap4/src"],
+      "uniforms-bootstrap4/*": ["uniforms-bootstrap4/src/*"],
+      "uniforms-bridge-graphql": ["uniforms-bridge-graphql/src"],
+      "uniforms-bridge-graphql/*": ["uniforms-bridge-graphql/src/*"],
+      "uniforms-bridge-json-schema": ["uniforms-bridge-json-schema/src"],
+      "uniforms-bridge-json-schema/*": ["uniforms-bridge-json-schema/src/*"],
+      "uniforms-bridge-simple-schema": ["uniforms-bridge-simple-schema/src"],
+      "uniforms-bridge-simple-schema/*": [
+        "uniforms-bridge-simple-schema/src/*"
+      ],
+      "uniforms-bridge-simple-schema-2": [
+        "uniforms-bridge-simple-schema-2/src"
+      ],
+      "uniforms-bridge-simple-schema-2/*": [
+        "uniforms-bridge-simple-schema-2/src/*"
+      ],
+      "uniforms-material": ["uniforms-material/src"],
+      "uniforms-material/*": ["uniforms-material/src/*"],
+      "uniforms-semantic": ["uniforms-semantic/src"],
+      "uniforms-semantic/*": ["uniforms-semantic/src/*"],
+      "uniforms-unstyled": ["uniforms-unstyled/src"],
+      "uniforms-unstyled/*": ["uniforms-unstyled/src/*"]
+    },
+    "strict": true
+  }
 }

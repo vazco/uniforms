@@ -8,8 +8,6 @@ import joinName from 'uniforms/joinName';
 import ListItemField from './ListItemField';
 import ListAddField from './ListAddField';
 
-const lif = ListItemField;
-
 const List = ({
   children,
   error,
@@ -69,6 +67,7 @@ const List = ({
     <ListAddField name={`${name}.$`} initialCount={initialCount} />
   </div>
 );
+
 List.defaultProps = {
   style: {
     border: '1px solid #DDD',
