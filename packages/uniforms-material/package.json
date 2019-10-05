@@ -17,8 +17,10 @@
     "validation"
   ],
   "files": [
+    "*.d.ts",
     "*.js",
-    "src/"
+    "src/*.ts",
+    "src/*.tsx"
   ],
   "peerDependencies": {
     "@material-ui/core": "^4.0.0 || ^3.0.0 || ^1.2.0",

@@ -15,8 +15,10 @@
     "validation"
   ],
   "files": [
+    "*.d.ts",
     "*.js",
-    "src/"
+    "src/*.ts",
+    "src/*.tsx"
   ],
   "dependencies": {
     "@babel/runtime": "^7.0.0",

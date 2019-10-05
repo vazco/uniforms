@@ -4,6 +4,7 @@
 /node_modules
 /npm-debug.log
 /npm-debug.log*
+/packages/*/*.d.ts
 /packages/*/*.js
 /packages/*/node_modules
 /website/.cache-loader

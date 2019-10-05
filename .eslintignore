@@ -4,11 +4,10 @@
 /node_modules
 /npm-debug.log
 /npm-debug.log*
+/packages/*/*.d.ts
 /packages/*/*.js
 /packages/*/node_modules
 /website/.cache-loader
 /website/.docusaurus
 /website/build
 /website/node_modules
-
-*.d.ts

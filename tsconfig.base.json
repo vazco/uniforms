@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl": "./packages",
+    "baseUrl": "packages",
+    "composite": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
     "esModuleInterop": true,
     "jsx": "react",
-    "noEmit": true,
     "noImplicitAny": false,
     "paths": {
       "uniforms": ["uniforms/src"],

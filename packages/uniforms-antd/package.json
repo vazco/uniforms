@@ -17,8 +17,10 @@
     "validation"
   ],
   "files": [
+    "*.d.ts",
     "*.js",
-    "src/"
+    "src/*.ts",
+    "src/*.tsx"
   ],
   "peerDependencies": {
     "antd": "^3.0.0 || ^2.7.0",

@@ -1,4 +1,21 @@
 {
   "extends": "./tsconfig.base.json",
-  "include": ["packages", "website"]
+  "compilerOptions": {
+    "emitDeclarationOnly": false,
+    "noEmit": true
+  },
+  "include": ["packages", "website"],
+  "references": [
+    { "path": "packages/uniforms" },
+    { "path": "packages/uniforms-antd" },
+    { "path": "packages/uniforms-bootstrap3" },
+    { "path": "packages/uniforms-bootstrap4" },
+    { "path": "packages/uniforms-bridge-graphql" },
+    { "path": "packages/uniforms-bridge-json-schema" },
+    { "path": "packages/uniforms-bridge-simple-schema" },
+    { "path": "packages/uniforms-bridge-simple-schema-2" },
+    { "path": "packages/uniforms-material" },
+    { "path": "packages/uniforms-semantic" },
+    { "path": "packages/uniforms-unstyled" }
+  ]
 }
