@@ -3,8 +3,8 @@
     "baseUrl": "packages",
     "composite": true,
     "declaration": true,
-    "emitDeclarationOnly": true,
     "esModuleInterop": true,
+    "importHelpers": true,
     "jsx": "react",
     "noImplicitAny": false,
     "paths": {
