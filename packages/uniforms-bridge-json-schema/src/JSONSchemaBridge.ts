@@ -227,13 +227,14 @@ export default class JSONSchemaBridge extends Bridge {
 
   getProps(name, props: any = {}) {
     const { uniforms, ...field } = this.getField(name);
-    const { enum: enum_, isRequired, title, type, ...ready } = omit(
+    const { enum: enum_, isRequired, title, ...ready } = omit(
       { ...field, ...uniforms, ...this._compiledSchema[name] },
-      ['default', 'format']
+      ['default', 'format', 'type']
     );
 
     if (enum_) ready.allowedValues = enum_;
-    if (type === 'number') ready.decimal = true;
+    if (field.type === 'number') ready.decimal = true;
+    if (uniforms && uniforms.type !== undefined) ready.type = uniforms.type;
     if (ready.required === undefined) ready.required = isRequired;
     ready.label = extractValue(
       ready.label,

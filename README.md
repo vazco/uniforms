@@ -15,7 +15,7 @@
     <strong><a href="https://github.com/vazco/uniforms/blob/master/.github/CONTRIBUTING.md">Contribute</a></strong> |
     <strong><a href="https://uniforms.tools/docs/tutorials-basic-uniforms-usage">Quick Start</a></strong> |
     <strong><a href="https://vazco.github.io/uniforms/playground">Playground</a></strong> |
-    <strong><a href="https://github.com/vazco/uniforms/projects/1">Roadmap</a></strong>
+    <strong><a href="https://github.com/orgs/vazco/projects/1">Roadmap</a></strong>
 </p>
 
 <p align="center">
