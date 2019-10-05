@@ -1,13 +1,14 @@
 import NumField from 'uniforms-bootstrap4/NumField';
 import React from 'react';
+import identity from 'lodash/identity';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';
 
 const expectedValueTransform =
-  parseInt(React.version, 10) < 16
-    ? x => (x === undefined ? '' : '' + x)
-    : x => x;
+  parseInt(React.version, 10) >= 16
+    ? identity
+    : x => (x === undefined ? '' : '' + x);
 
 test('<NumField> - renders an input', () => {
   const element = <NumField name="x" />;

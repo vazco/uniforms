@@ -1,14 +1,15 @@
 import NumField from 'uniforms-material/NumField';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
+import identity from 'lodash/identity';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';
 
 const expectedValueTransform =
-  parseInt(React.version, 10) < 16
-    ? x => (x === undefined ? '' : '' + x)
-    : x => x;
+  parseInt(React.version, 10) >= 16
+    ? identity
+    : x => (x === undefined ? '' : '' + x);
 
 test('<NumField> - renders a TextField', () => {
   const element = <NumField name="x" />;
