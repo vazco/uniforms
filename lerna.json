@@ -1,10 +1,5 @@
 {
   "version": "2.4.1",
-  "command": {
-    "exec": {
-      "ignore": "website"
-    }
-  },
   "packages": [
     "packages/*",
     "website"
