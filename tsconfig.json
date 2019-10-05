@@ -1,10 +1,5 @@
 {
-  "extends": "./tsconfig.base.json",
-  "compilerOptions": {
-    "emitDeclarationOnly": false,
-    "noEmit": true
-  },
-  "include": ["packages", "website"],
+  "files": [],
   "references": [
     { "path": "packages/uniforms" },
     { "path": "packages/uniforms-antd" },
