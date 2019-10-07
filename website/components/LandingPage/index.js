@@ -18,7 +18,10 @@ export default function LandingPage() {
     <div className={classNames(styles.landing, styles['overflow-hidden'])}>
       <Header />
       <div className="main">
-        <OpenSource />
+        <div className="container">
+          <OpenSource />
+          <Testimonials />
+        </div>
         <WhyUs />
         <div className="container">
           <ExampleSimpleYetPowerful />
@@ -27,7 +30,6 @@ export default function LandingPage() {
         </div>
         <WhoUses />
         <div className="container">
-          <Testimonials />
           <Comparison />
         </div>
         <Footer />
