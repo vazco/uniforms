@@ -7,7 +7,7 @@ import Heading from './Heading';
 import Subtitle from './Subtitle';
 import styles from './index.module.css';
 
-export default function WhyUs() {
+export default function WhoUses() {
   const context = useDocusaurusContext();
   const { companies, email } = context.siteConfig.customFields;
 
@@ -18,7 +18,13 @@ export default function WhyUs() {
       <div className="container">
         <div className="section">
           <div className="row">
-            <div className={classNames('col', styles['section-content'])}>
+            <div
+              className={classNames(
+                'col',
+                styles['section-content'],
+                styles.logos
+              )}
+            >
               <span
                 className={classNames(
                   styles['section-bgwhite-block'],
