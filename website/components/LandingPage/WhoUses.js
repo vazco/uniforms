@@ -26,9 +26,10 @@ export default function WhyUs() {
                 )}
               />
               <div className={styles.grid3x3}>
-                {companies.map(({ image, url }) => (
+                {companies.map(({ image, url, alt }) => (
                   <a className={styles.item3x3} href={url} key={image}>
                     <img
+                      alt={alt}
                       className={styles.company}
                       src={`assets/companies/${image}`}
                     />

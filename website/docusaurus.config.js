@@ -9,18 +9,32 @@ module.exports = {
   url: 'https://uniforms.tools/',
   customFields: {
     companies: [
-      { url: 'https://www.deskpro.com/', image: 'deskpro.png' },
-      { url: 'https://www.nokia.com/', image: 'nokia.png' },
+      { url: 'https://www.deskpro.com/', image: 'deskpro.png', alt: 'Deskpro' },
+      { url: 'https://www.nokia.com/', image: 'nokia.png', alt: 'Nokia' },
       {
         url:
           'https://github.com/react-page/react-page/tree/master/packages/plugins/createPluginMaterialUi',
-        image: 'react-page.png'
+        image: 'react-page.png',
+        alt: 'React Page'
       },
-      { url: 'https://graphback.dev', image: 'graphback.png' },
-      { url: 'https://www.onyx-one.com/', image: 'onyx-one.png' },
-      { url: 'https://aerogear.org', image: 'aerogear.png' },
-      { url: 'https://cleverbeagle.com/together', image: 'cleverbeagle.png' },
-      { url: 'http://www.orionjs.org', image: 'orionjs.png' }
+      {
+        url: 'https://graphback.dev',
+        image: 'graphback.png',
+        alt: 'Graphback'
+      },
+      {
+        url: 'https://www.onyx-one.com/',
+        image: 'onyx-one.png',
+        alt: 'Onyx one'
+      },
+      { url: 'https://aerogear.org', image: 'aerogear.png', alt: 'Aerogear' },
+      {
+        url: 'https://cleverbeagle.com/together',
+        image: 'cleverbeagle.png',
+        alt: 'Clever Beagle'
+      },
+      { url: 'http://www.orionjs.org', image: 'orionjs.png', alt: 'Orion.js' },
+      { url: 'https://boulder.care', image: 'boulder.svg', alt: 'Boulder Care' }
     ],
     email: 'hello@uniforms.tools',
     keywords: ['forms', 'react', 'schema']
