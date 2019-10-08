@@ -444,8 +444,13 @@
   padding: 0 4em !important;
 }
 
+.section-content.logos {
+  padding-left: unset !important;
+}
+
 @media (max-width: 996px) {
-  .section-content {
+  .section-content,
+  .section-content.logos {
     margin-top: 0;
     padding: 4em !important;
   }

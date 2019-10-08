@@ -158,7 +158,7 @@ function useStats() {
 export default function OpenSource() {
   const { stars, forks, downloads } = useStats();
   return (
-    <div className="container text--center">
+    <div className="section text--center">
       <p
         className={classNames(
           styles.centered,
