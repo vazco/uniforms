@@ -15,14 +15,16 @@
     "validation"
   ],
   "files": [
+    "*.d.ts",
     "*.js",
-    "src/"
+    "src/*.ts",
+    "src/*.tsx"
   ],
   "dependencies": {
-    "@babel/runtime": "^7.0.0",
     "invariant": "^2.0.0",
     "lodash": "^4.0.0",
     "simpl-schema": "^1.0.0 || ^0.0.4",
+    "tslib": "^1.0.0",
     "uniforms": "^2.4.1"
   }
 }

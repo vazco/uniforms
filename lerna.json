@@ -1,10 +1,5 @@
 {
   "version": "2.4.1",
-  "command": {
-    "exec": {
-      "parallel": true
-    }
-  },
   "packages": [
     "packages/*",
     "website"

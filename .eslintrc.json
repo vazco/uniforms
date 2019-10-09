@@ -1,13 +1,30 @@
 {
-  "env": {
-    "jest": true
-  },
   "extends": [
     "plugin:import/errors",
     "plugin:import/typescript",
     "vazco/prettier"
   ],
-  "parser": "@typescript-eslint/parser",
+  "globals": {
+    "globalThis": "readonly"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"],
+      "settings": {
+        "import/resolver": {
+          "typescript": {}
+        }
+      }
+    },
+    {
+      "files": ["**/__mocks__/**/*", "**/__tests__/*"],
+      "env": {
+        "jest": true
+      }
+    }
+  ],
   "root": true,
   "rules": {
     "import/order": [
@@ -29,8 +46,7 @@
           ["@docusaurus", "@docusaurus/core/lib/client/exports"],
           ["@theme", "@docusaurus/theme-classic/src/theme"]
         ]
-      },
-      "typescript": {}
+      }
     },
     "react": {
       "version": "detect"

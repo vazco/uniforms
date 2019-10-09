@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "baseUrl": "./packages",
+    "baseUrl": "packages",
+    "composite": true,
+    "declaration": true,
     "esModuleInterop": true,
+    "importHelpers": true,
     "jsx": "react",
-    "noEmit": true,
+    "noImplicitAny": false,
     "paths": {
       "uniforms": ["uniforms/src"],
       "uniforms/*": ["uniforms/src/*"],
@@ -36,6 +38,5 @@
       "uniforms-unstyled/*": ["uniforms-unstyled/src/*"]
     },
     "strict": true
-  },
-  "includes": ["packages/**/*.tsx?", "website/**/*.tsx?"]
+  }
 }

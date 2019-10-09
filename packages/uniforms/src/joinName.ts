@@ -1,6 +1,6 @@
-export default function joinName(flag: null, ...parts: unknown[]): string[];
-export default function joinName(...parts: unknown[]): string;
-export default function joinName(...parts: unknown[]) {
+function joinName(flag: null, ...parts: unknown[]): string[];
+function joinName(...parts: unknown[]): string;
+function joinName(...parts: unknown[]) {
   const name = parts.reduce(
     (parts: unknown[], part: unknown) =>
       part || part === 0
@@ -11,3 +11,5 @@ export default function joinName(...parts: unknown[]) {
 
   return parts[0] === null ? name.map(part => '' + part) : name.join('.');
 }
+
+export default joinName;

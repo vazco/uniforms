@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "src",
+    "outDir": ".",
+    "rootDir": "src",
+    "tsBuildInfoFile": "../../node_modules/.cache/uniforms-unstyled.tsbuildinfo"
+  },
+  "exclude": ["node_modules"],
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../uniforms"
+    }
+  ]
+}

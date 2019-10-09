@@ -1,6 +1,6 @@
 import omit from 'lodash/omit';
 
-const unwantedProps = [
+const registered = [
   // These props are provided by BaseField
   'changed',
   'changedMap',
@@ -30,18 +30,16 @@ const unwantedProps = [
   'component'
 ];
 
-export default function filterDOMProps(props: {}) {
-  return omit(props, unwantedProps);
+function filter(props: {}) {
+  return omit(props, registered);
 }
 
-// Bridges have to register additional props
-filterDOMProps.register = (...props: string[]) => {
+function register(...props: string[]) {
   props.forEach(prop => {
-    if (unwantedProps.indexOf(prop) === -1) {
-      unwantedProps.push(prop);
+    if (registered.indexOf(prop) === -1) {
+      registered.push(prop);
     }
   });
-};
+}
 
-// It might be handy at some point
-filterDOMProps.registered = unwantedProps;
+export default Object.assign(filter, { register, registered });
