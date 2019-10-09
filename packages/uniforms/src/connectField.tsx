@@ -1,11 +1,14 @@
-import { createElement } from 'react';
+import React from 'react';
+import identity from 'lodash/identity';
 
 import BaseField from './BaseField';
+import context from './context';
 
-const identity = (x: any) => x;
+const getDisplayName = (component: React.ComponentType) =>
+  component.displayName || component.name;
 
 export default function connectField(
-  component: any,
+  Component: React.ComponentType,
   {
     baseField = BaseField,
     mapProps = identity,
@@ -17,11 +20,12 @@ export default function connectField(
   }: any = {}
 ): any {
   return class extends baseField {
-    static displayName = `${component.displayName ||
-      component.name}${baseField.displayName || baseField.name}`;
+    static displayName = getDisplayName(Component) + getDisplayName(baseField);
+
     constructor() {
       // @ts-ignore
       super(...arguments);
+
       this.options.includeInChain =
         includeInChain === undefined ? true : includeInChain;
       this.options.initialValue =
@@ -30,11 +34,13 @@ export default function connectField(
       if (includeParent !== undefined)
         this.options.includeParent = includeParent;
     }
-    getChildContextName() {
+
+    getContextName() {
       return this.options.includeInChain
-        ? super.getChildContextName()
+        ? super.getContextName()
         : this.context.uniforms.name;
     }
+
     componentWillMount() {
       if (this.options.initialValue) {
         const props = this.getFieldProps(undefined, {
@@ -60,8 +66,13 @@ export default function connectField(
         }
       }
     }
+
     render() {
-      return createElement(component, mapProps(this.getFieldProps()));
+      return (
+        <context.Provider value={this.getContext()}>
+          <Component {...mapProps(this.getFieldProps())} />
+        </context.Provider>
+      );
     }
   };
 }

@@ -7,6 +7,7 @@ export { default as ValidatedForm } from './ValidatedForm';
 export { default as ValidatedQuickForm } from './ValidatedQuickForm';
 export { default as changedKeys } from './changedKeys';
 export { default as connectField } from './connectField';
+export { default as context } from './context';
 export { default as createSchemaBridge } from './createSchemaBridge';
 export { default as filterDOMProps } from './filterDOMProps';
 export { default as injectName } from './injectName';

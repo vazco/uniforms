@@ -9,7 +9,7 @@ const Semantic = parent =>
 
     getNativeFormProps() {
       const props = super.getNativeFormProps();
-      const error = this.getChildContextError();
+      const error = this.getContextError();
 
       return {
         ...props,

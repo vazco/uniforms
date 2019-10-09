@@ -81,7 +81,7 @@ const Auto = (parent: any) =>
     }
 
     onValidate() {
-      return this.onValidateModel(this.getChildContextModel());
+      return this.onValidateModel(this.getContextModel());
     }
   };
 

@@ -84,9 +84,9 @@ class PlaygroundField extends BaseField {
 }
 
 class PlaygroundForm extends ValidatedForm {
-  getChildContextState() {
+  getContextState() {
     return {
-      ...super.getChildContextState(),
+      ...super.getContextState(),
       theme: this.props.model.theme
     };
   }

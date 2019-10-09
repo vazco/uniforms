@@ -26,7 +26,7 @@ const Modifier = parent =>
     getModel(mode) {
       if (mode === 'submit') {
         const doc = super.getModel('submit');
-        const keys = this.getChildContextSchema().getSubfields();
+        const keys = this.getContextSchema().getSubfields();
 
         const update = keys.filter(key => doc[key] !== undefined);
         const remove = keys.filter(key => doc[key] === undefined);

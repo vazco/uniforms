@@ -27,7 +27,7 @@ const Quick = (parent: any) =>
       } = super.getNativeFormProps();
 
       if (!props.children) {
-        props.children = this.getChildContextSchema()
+        props.children = this.getContextSchema()
           .getSubfields()
           .map((key: any) => <AutoField key={key} name={key} />)
           .concat([

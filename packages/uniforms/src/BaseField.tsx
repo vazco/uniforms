@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import invariant from 'invariant';
-import isEqual from 'lodash/isEqual';
 import { Component } from 'react';
 
-import BaseForm from './BaseForm';
+import context from './context';
 import joinName from './joinName';
 
 // Used for calculating labels and placeholders.
@@ -46,15 +45,14 @@ export default class BaseField extends Component {
     placeholder: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
   };
 
-  static contextTypes = BaseForm.childContextTypes;
-  static childContextTypes = BaseForm.childContextTypes;
+  static contextType = context;
 
   constructor() {
     // @ts-ignore
     super(...arguments);
 
     invariant(
-      this.context.uniforms,
+      this.context && this.context.uniforms,
       '<%s /> must be rendered within a form.',
       // @ts-ignore
       this.constructor.displayName
@@ -74,100 +72,6 @@ export default class BaseField extends Component {
     this.findError = this.findError.bind(this);
   }
 
-  getChildContext() {
-    return {
-      uniforms: {
-        name: this.getChildContextName(),
-        error: this.getChildContextError(),
-        model: this.getChildContextModel(),
-        state: this.getChildContextState(),
-        schema: this.getChildContextSchema(),
-        onChange: this.getChildContextOnChange(),
-        onSubmit: this.getChildContextOnSubmit(),
-        randomId: this.context.uniforms.randomId
-      }
-    };
-  }
-
-  // eslint-disable-next-line complexity
-  shouldComponentUpdate(
-    nextProps: any,
-    _: any,
-    { uniforms: nextContext }: { uniforms: any }
-  ) {
-    const prevProps: any = this.props;
-    const prevContext = this.context.uniforms;
-
-    if (!isEqual(prevProps, nextProps)) {
-      return true;
-    }
-
-    const { changedMap: nextMap, ...nextState } = nextContext.state;
-    const { changedMap: prevMap, ...prevState } = prevContext.state;
-
-    if (!isEqual(prevState, nextState)) {
-      return true;
-    }
-
-    const prevName = joinName(prevContext.name, prevProps.name);
-    const nextName = joinName(nextContext.name, nextProps.name);
-
-    if (prevName !== nextName) {
-      return true;
-    }
-
-    if (!isEqual(get(prevMap, prevName), get(nextMap, nextName))) {
-      return true;
-    }
-
-    // Fields which are using parent props, need to be updated when parent value change
-    if (this.options.includeParent && nextName.indexOf('.') !== -1) {
-      const prevParentValue = get(
-        prevContext.model,
-        prevName.replace(/(.+)\..+$/, '$1')
-      );
-      const nextParentValue = get(
-        nextContext.model,
-        nextName.replace(/(.+)\..+$/, '$1')
-      );
-
-      if (!isEqual(prevParentValue, nextParentValue)) {
-        return true;
-      }
-    }
-
-    const prevValue = get(prevContext.model, prevName);
-    const nextValue = get(nextContext.model, nextName);
-
-    if (!isEqual(prevValue, nextValue)) {
-      return true;
-    }
-
-    if (prevContext.error !== nextContext.error) {
-      const prevError =
-        prevContext.error &&
-        prevContext.schema.getError(prevName, prevContext.error);
-      const nextError =
-        nextContext.error &&
-        nextContext.schema.getError(nextName, nextContext.error);
-
-      if (!isEqual(prevError, nextError)) {
-        return true;
-      }
-
-      // Fields like List or Nest should update, whenever their children error has changed
-      if (nextValue === Object(nextValue) && !(nextValue instanceof Date)) {
-        return true;
-      }
-    }
-
-    if (nextContext.schema !== prevContext.schema) {
-      return true;
-    }
-
-    return false;
-  }
-
   props: any;
 
   options: {
@@ -179,19 +83,34 @@ export default class BaseField extends Component {
 
   randomId: number;
 
-  getChildContextName() {
+  getContext() {
+    return {
+      uniforms: {
+        name: this.getContextName(),
+        error: this.getContextError(),
+        model: this.getContextModel(),
+        state: this.getContextState(),
+        schema: this.getContextSchema(),
+        onChange: this.getContextOnChange(),
+        onSubmit: this.getContextOnSubmit(),
+        randomId: this.context.uniforms.randomId
+      }
+    };
+  }
+
+  getContextName() {
     return joinName(null, this.context.uniforms.name, this.props.name);
   }
 
-  getChildContextError() {
+  getContextError() {
     return this.context.uniforms.error;
   }
 
-  getChildContextModel() {
+  getContextModel() {
     return this.context.uniforms.model;
   }
 
-  getChildContextState() {
+  getContextState() {
     const state = this.context.uniforms.state;
     const props = this.props;
 
@@ -210,15 +129,15 @@ export default class BaseField extends Component {
     };
   }
 
-  getChildContextSchema() {
+  getContextSchema() {
     return this.context.uniforms.schema;
   }
 
-  getChildContextOnChange() {
+  getContextOnChange() {
     return this.context.uniforms.onChange;
   }
 
-  getChildContextOnSubmit() {
+  getContextOnSubmit() {
     return this.context.uniforms.onSubmit;
   }
 
@@ -226,7 +145,7 @@ export default class BaseField extends Component {
   getFieldProps(name?: any, options?: any) {
     const context = this.context.uniforms;
     const props = this.props;
-    const state = this.getChildContextState();
+    const state = this.getContextState();
 
     options = Object.assign({}, this.options, options);
 

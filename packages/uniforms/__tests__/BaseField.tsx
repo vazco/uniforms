@@ -113,7 +113,7 @@ describe('BaseField', () => {
   describe('child context', () => {
     const wrapper = mount(<TestField name="a" />, reactContext1);
 
-    const context = wrapper.instance().getChildContext();
+    const context = wrapper.instance().getContext();
 
     it('exists', () => {
       expect(context).toHaveProperty('uniforms', expect.any(Object));

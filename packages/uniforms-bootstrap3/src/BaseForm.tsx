@@ -18,15 +18,15 @@ const Bootstrap3 = (parent: any) =>
       ])
     };
 
-    getChildContextState() {
+    getContextState() {
       return {
-        ...super.getChildContextState(),
+        ...super.getContextState(),
         grid: this.props.grid
       };
     }
 
     getNativeFormProps() {
-      const error = this.getChildContextError();
+      const error = this.getContextError();
       const {
         className,
         grid,

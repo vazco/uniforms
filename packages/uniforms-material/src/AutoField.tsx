@@ -14,7 +14,7 @@ import TextField from './TextField';
 export default class AutoField extends BaseField {
   static displayName = 'AutoField';
 
-  getChildContextName() {
+  getContextName() {
     return this.context.uniforms.name;
   }
 

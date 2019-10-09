@@ -1,22 +1,11 @@
 import PropTypes from 'prop-types';
 import cloneDeep from 'lodash/cloneDeep';
 import isEqual from 'lodash/isEqual';
-import merge from 'lodash/merge';
 import noop from 'lodash/noop';
 import omit from 'lodash/omit';
 import set from 'lodash/set';
 
-import BaseForm, {
-  __childContextTypes,
-  __childContextTypesBuild
-} from './BaseForm';
-
-const childContextTypes = __childContextTypesBuild(
-  merge(
-    { state: { validating: PropTypes.bool.isRequired } },
-    __childContextTypes
-  )
-);
+import BaseForm from './BaseForm';
 
 const Validated = (parent: any) =>
   class extends parent {
@@ -44,11 +33,6 @@ const Validated = (parent: any) =>
         .isRequired
     };
 
-    static childContextTypes = {
-      ...(parent.childContextTypes || {}),
-      uniforms: childContextTypes
-    };
-
     validate: (key?: any, value?: any) => Promise<unknown>;
     validateModel: (model: any) => Promise<unknown>;
 
@@ -63,9 +47,7 @@ const Validated = (parent: any) =>
         error: null,
         validate: false,
         validating: false,
-        validator: this.getChildContextSchema().getValidator(
-          this.props.validator
-        )
+        validator: this.getContextSchema().getValidator(this.props.validator)
       };
 
       this.onValidate = this.validate = this.onValidate.bind(this);
@@ -74,13 +56,13 @@ const Validated = (parent: any) =>
       );
     }
 
-    getChildContextError() {
-      return super.getChildContextError() || this.state.error;
+    getContextError() {
+      return super.getContextError() || this.state.error;
     }
 
-    getChildContextState() {
+    getContextState() {
       return {
-        ...super.getChildContextState(),
+        ...super.getContextState(),
 
         validating: this.state.validating
       };
@@ -174,7 +156,7 @@ const Validated = (parent: any) =>
     }
 
     onValidate(key?: any, value?: any) {
-      let model = this.getChildContextModel();
+      let model = this.getContextModel();
       if (model && key) {
         model = set(cloneDeep(model), key, cloneDeep(value));
       }
