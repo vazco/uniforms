@@ -4,7 +4,8 @@ import injectName from 'uniforms/injectName';
 import nothing from 'uniforms/nothing';
 import randomIds from 'uniforms/randomIds';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
-import { mount } from 'enzyme';
+
+import mount from './_mount';
 
 jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');

@@ -11,6 +11,7 @@ it('exports everything', () => {
     ValidatedQuickForm: expect.any(Function),
     changedKeys: expect.any(Function),
     connectField: expect.any(Function),
+    context: expect.any(Object),
     createSchemaBridge: expect.any(Function),
     filterDOMProps: expect.any(Function),
     injectName: expect.any(Function),

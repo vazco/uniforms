@@ -1,9 +1,11 @@
 import BaseField from 'uniforms/BaseField';
+import context from 'uniforms/context';
 import React from 'react';
 import nothing from 'uniforms/nothing';
 import randomIds from 'uniforms/randomIds';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
-import { mount } from 'enzyme';
+
+import mount from './_mount';
 
 jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
@@ -16,10 +18,12 @@ describe('BaseField', () => {
 
     render() {
       return (
-        <div>
-          <PropsComponent {...this.getFieldProps()} />
-          {this.props.children}
-        </div>
+        <context.Provider value={this.getContext()}>
+          <div>
+            <PropsComponent {...this.getFieldProps()} />
+            {this.props.children}
+          </div>
+        </context.Provider>
       );
     }
   }
@@ -80,7 +84,7 @@ describe('BaseField', () => {
     validator() {}
   });
 
-  const _context = context => ({
+  const makeContext = context => ({
     context: { uniforms: { ...reactContextBase, ...context } }
   });
   const reactContextBase = {
@@ -93,16 +97,18 @@ describe('BaseField', () => {
     onChange,
     onSubmit() {}
   };
-  const reactContext1 = _context({});
-  const reactContext2 = _context({ error: error2 });
-  const reactContext3 = _context({ error: { ...error2 } });
-  const reactContext4 = _context({ name: ['a'] });
-  const reactContext5 = _context({ schema: Object.create(schema) });
-  const reactContext6 = _context({
+  const reactContext1 = makeContext({});
+  const reactContext2 = makeContext({ error: error2 });
+  const reactContext3 = makeContext({ error: { ...error2 } });
+  const reactContext4 = makeContext({ name: ['a'] });
+  const reactContext5 = makeContext({ schema: Object.create(schema) });
+  const reactContext6 = makeContext({
     state: { ...reactContextBase.state, changedMap: { a: {} } }
   });
-  const reactContext7 = _context({ model: { a: { b: { c: 'example 2' } } } });
-  const reactContext8 = _context({
+  const reactContext7 = makeContext({
+    model: { a: { b: { c: 'example 2' } } }
+  });
+  const reactContext8 = makeContext({
     state: { ...reactContextBase.state, disabled: true }
   });
 
@@ -466,13 +472,13 @@ describe('BaseField', () => {
       const props1 = wrapper.find(PropsComponent).props();
       expect(props1).toHaveProperty('error', error1.details[0]);
 
-      wrapper.setContext(reactContext2.context);
+      wrapper.setProps({ value: reactContext2.context });
 
       const props2 = wrapper.find(PropsComponent).props();
       expect(props2).toHaveProperty('error');
       expect(props2.error).toBeFalsy();
 
-      wrapper.setContext(reactContext3.context);
+      wrapper.setProps({ value: reactContext3.context });
 
       const props3 = wrapper.find(PropsComponent).props();
       expect(props3.error).toBeFalsy();
@@ -484,13 +490,13 @@ describe('BaseField', () => {
       const props1 = wrapper.find(PropsComponent).props();
       expect(props1).toHaveProperty('error', error1.details[1]);
 
-      wrapper.setContext(reactContext2.context);
+      wrapper.setProps({ value: reactContext2.context });
 
       const props2 = wrapper.find(PropsComponent).props();
       expect(props2).toHaveProperty('error');
       expect(props2.error).toBeFalsy();
 
-      wrapper.setContext(reactContext3.context);
+      wrapper.setProps({ value: reactContext3.context });
 
       const props3 = wrapper.find(PropsComponent).props();
       expect(props3.error).toBeFalsy();
@@ -502,7 +508,7 @@ describe('BaseField', () => {
       const props1 = wrapper.find(PropsComponent).props();
       expect(props1).toHaveProperty('name', 'a');
 
-      wrapper.setContext(reactContext6.context);
+      wrapper.setProps({ value: reactContext6.context });
 
       const props2 = wrapper.find(PropsComponent).props();
       expect(props2).toHaveProperty('name', 'a');
@@ -514,7 +520,7 @@ describe('BaseField', () => {
       const props1 = wrapper.find(PropsComponent).props();
       expect(props1).toHaveProperty('name', 'a');
 
-      wrapper.setContext(reactContext7.context);
+      wrapper.setProps({ value: reactContext7.context });
 
       const props2 = wrapper.find(PropsComponent).props();
       expect(props2).toHaveProperty('name', 'a');
@@ -526,7 +532,7 @@ describe('BaseField', () => {
       const props1 = wrapper.find(PropsComponent).props();
       expect(props1).toHaveProperty('name', 'b');
 
-      wrapper.setContext(reactContext4.context);
+      wrapper.setProps({ value: reactContext4.context });
 
       const props2 = wrapper.find(PropsComponent).props();
       expect(props2).toHaveProperty('name', 'a.b');
@@ -537,7 +543,7 @@ describe('BaseField', () => {
 
       const props1 = wrapper.find(PropsComponent).props();
 
-      wrapper.setContext(reactContext5.context);
+      wrapper.setProps({ value: reactContext5.context });
 
       const props2 = wrapper.find(PropsComponent).props();
 
@@ -571,7 +577,7 @@ describe('BaseField', () => {
       const props1 = wrapper.find(PropsComponent).props();
       expect(props1).toHaveProperty('disabled', false);
 
-      wrapper.setContext(reactContext8.context);
+      wrapper.setProps({ value: reactContext8.context });
 
       const props2 = wrapper.find(PropsComponent).props();
       expect(props2).toHaveProperty('disabled', true);

@@ -2,7 +2,8 @@ import AutoForm from 'uniforms/AutoForm';
 import React from 'react';
 import connectField from 'uniforms/connectField';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
-import { mount } from 'enzyme';
+
+import mount from './_mount';
 
 jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
@@ -114,16 +115,16 @@ describe('AutoForm', () => {
 
     it('resets state `changedMap`', () => {
       wrapper.instance().reset();
-      expect(
-        wrapper.instance().getContext().uniforms.state.changedMap
-      ).toEqual({});
+      expect(wrapper.instance().getContext().uniforms.state.changedMap).toEqual(
+        {}
+      );
     });
 
     it('resets state `changed`', () => {
       wrapper.instance().reset();
-      expect(
-        wrapper.instance().getContext().uniforms.state.changed
-      ).toEqual(false);
+      expect(wrapper.instance().getContext().uniforms.state.changed).toEqual(
+        false
+      );
     });
   });
 

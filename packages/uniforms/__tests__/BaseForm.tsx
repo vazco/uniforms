@@ -1,6 +1,7 @@
 import BaseForm from 'uniforms/BaseForm';
 import React from 'react';
-import { mount } from 'enzyme';
+
+import mount from './_mount';
 
 jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
