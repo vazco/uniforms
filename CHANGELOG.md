@@ -1,3 +1,7 @@
+## [v2.5.0](https://github.com/vazco/uniforms/tree/v2.5.0) (2019-10-16)
+
+- **Changed:** We've migrated to TypeScript! There should be no impact on plain JavaScript code and the runtime. We are still working on proper (not `any`) typings.
+
 ## [v2.4.1](https://github.com/vazco/uniforms/tree/v2.4.1) (2019-10-02)
 
 - **Fixed:** Name conflict of `type` in `JSONSchemaBridge`. [\#604](https://github.com/vazco/uniforms/issues/604)
