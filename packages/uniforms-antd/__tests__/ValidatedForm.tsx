@@ -1,6 +1,7 @@
 import React from 'react';
 import ValidatedForm from 'uniforms-antd/ValidatedForm';
-import { mount } from 'enzyme';
+
+import mount from './_mount';
 
 import createSchema from './_createSchema';
 

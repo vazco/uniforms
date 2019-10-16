@@ -1,6 +1,7 @@
 import AutoForm from 'uniforms-antd/AutoForm';
 import React from 'react';
-import { mount } from 'enzyme';
+
+import mount from './_mount';
 
 import createSchema from './_createSchema';
 

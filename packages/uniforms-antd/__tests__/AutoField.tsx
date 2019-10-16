@@ -8,7 +8,8 @@ import RadioField from 'uniforms-antd/RadioField';
 import React from 'react';
 import SelectField from 'uniforms-antd/SelectField';
 import TextField from 'uniforms-antd/TextField';
-import { mount } from 'enzyme';
+
+import mount from './_mount';
 
 import createContext from './_createContext';
 

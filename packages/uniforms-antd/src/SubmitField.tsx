@@ -1,27 +1,26 @@
-import BaseField from 'uniforms/BaseField';
 import Button from 'antd/lib/button';
-import React from 'react';
+import React, { useContext } from 'react';
+import context from 'uniforms/context';
 
-const SubmitField = (
-  { inputRef, value, ...props },
-  {
-    uniforms: {
-      error,
-      state: { disabled }
-    }
-  }
-) => (
-  <Button
-    disabled={!!(error || disabled)}
-    htmlType="submit"
-    ref={inputRef}
-    type="primary"
-    {...props}
-  >
-    {value}
-  </Button>
-);
-SubmitField.contextTypes = BaseField.contextTypes;
+function SubmitField({ inputRef, value, ...props }) {
+  const {
+    error,
+    state: { disabled }
+  } = useContext(context).uniforms;
+
+  return (
+    <Button
+      disabled={!!(error || disabled)}
+      htmlType="submit"
+      ref={inputRef}
+      type="primary"
+      {...props}
+    >
+      {value}
+    </Button>
+  );
+}
+
 SubmitField.defaultProps = { value: 'Submit' };
 
 export default SubmitField;

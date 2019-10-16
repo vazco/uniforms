@@ -3,7 +3,8 @@ import ListField from 'uniforms-antd/ListField';
 import ListItemField from 'uniforms-antd/ListItemField';
 import React from 'react';
 import Tooltip from 'antd/lib/tooltip';
-import { mount } from 'enzyme';
+
+import mount from './_mount';
 
 import createContext from './_createContext';
 

@@ -1,7 +1,8 @@
 import Radio from 'antd/lib/radio';
 import RadioField from 'uniforms-antd/RadioField';
 import React from 'react';
-import { mount } from 'enzyme';
+
+import mount from './_mount';
 
 import createContext from './_createContext';
 

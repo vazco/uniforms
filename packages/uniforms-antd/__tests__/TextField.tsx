@@ -1,7 +1,8 @@
 import Input from 'antd/lib/input';
 import React from 'react';
 import TextField from 'uniforms-antd/TextField';
-import { mount } from 'enzyme';
+
+import mount from './_mount';
 
 import createContext from './_createContext';
 

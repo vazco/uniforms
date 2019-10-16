@@ -2,7 +2,8 @@ import AutoField from 'uniforms-antd/AutoField';
 import ListDelField from 'uniforms-antd/ListDelField';
 import ListItemField from 'uniforms-antd/ListItemField';
 import React from 'react';
-import { mount } from 'enzyme';
+
+import mount from './_mount';
 
 import createContext from './_createContext';
 

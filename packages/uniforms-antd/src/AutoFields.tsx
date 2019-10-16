@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
-import { createElement } from 'react';
+import context from 'uniforms/context';
+import { createElement, useContext } from 'react';
 
 import AutoField from './AutoField';
 
-const AutoFields = (
-  { autoField, element, fields, omitFields, ...props }: any,
-  { uniforms: { schema } }: any
-) =>
-  createElement(
+function AutoFields({ autoField, element, fields, omitFields, ...props }) {
+  const { schema } = useContext(context).uniforms;
+
+  return createElement(
     element,
     props,
     (fields || schema.getSubfields())
@@ -16,7 +16,7 @@ const AutoFields = (
         createElement(autoField, { key: field, name: field })
       )
   );
-AutoFields.contextTypes = AutoField.contextTypes;
+}
 
 AutoFields.propTypes = {
   autoField: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),

@@ -1,6 +1,7 @@
 import ErrorField from 'uniforms-antd/ErrorField';
 import React from 'react';
-import { mount } from 'enzyme';
+
+import mount from './_mount';
 
 import createContext from './_createContext';
 

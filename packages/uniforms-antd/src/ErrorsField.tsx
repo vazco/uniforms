@@ -1,13 +1,12 @@
-import BaseField from 'uniforms/BaseField';
-import React from 'react';
+import React, { useContext } from 'react';
+import context from 'uniforms/context';
 import filterDOMProps from 'uniforms/filterDOMProps';
 import nothing from 'uniforms/nothing';
 
-const ErrorsField = (
-  { children, ...props }: any,
-  { uniforms: { error, schema } }: any
-) =>
-  !error && !children ? (
+function ErrorsField({ children, ...props }) {
+  const { error, schema } = useContext(context).uniforms;
+
+  return !error && !children ? (
     nothing
   ) : (
     <div {...filterDOMProps(props)}>
@@ -21,7 +20,7 @@ const ErrorsField = (
       </ul>
     </div>
   );
-ErrorsField.contextTypes = BaseField.contextTypes;
+}
 
 ErrorsField.defaultProps = {
   style: {
