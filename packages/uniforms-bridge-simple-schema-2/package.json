@@ -3,6 +3,7 @@
   "version": "2.5.0",
   "license": "MIT",
   "main": "index.js",
+  "module": "es6/index.js",
   "description": "SimpleSchema 2 bridge for uniforms.",
   "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-bridge-simple-schema-2",
   "bugs": "https://github.com/vazco/uniforms/issues",

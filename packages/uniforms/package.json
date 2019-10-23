@@ -3,6 +3,7 @@
   "version": "2.5.0",
   "license": "MIT",
   "main": "index.js",
+  "module": "es6/index.js",
   "description": "Core package of uniforms.",
   "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms",
   "bugs": "https://github.com/vazco/uniforms/issues",
