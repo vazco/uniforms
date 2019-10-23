@@ -6,6 +6,7 @@
     "esModuleInterop": true,
     "importHelpers": true,
     "jsx": "react",
+    "moduleResolution": "node",
     "noImplicitAny": false,
     "paths": {
       "uniforms": ["uniforms/src"],
@@ -37,6 +38,7 @@
       "uniforms-unstyled": ["uniforms-unstyled/src"],
       "uniforms-unstyled/*": ["uniforms-unstyled/src/*"]
     },
-    "strict": true
+    "strict": true,
+    "target": "es5"
   }
 }
