@@ -38,7 +38,7 @@
         <img src="https://img.shields.io/npm/v/uniforms.svg" alt="Version" />
     </a>
     <a href="https://github.com/vazco/uniforms/actions">
-        <img src="https://github.com/vazco/uniforms/workflows/.github/workflows/main.yml/badge.svg" alt="Status" />
+        <img src="https://github.com/vazco/uniforms/workflows/CI/badge.svg" alt="Status" />
     </a>
 </p>
 

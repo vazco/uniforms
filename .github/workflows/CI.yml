@@ -1,9 +1,9 @@
-name: main
+name: CI
 on: [pull_request, push]
 env:
   CI: true
 jobs:
-  main:
+  CI:
     runs-on: ubuntu-latest
     strategy:
       matrix:
