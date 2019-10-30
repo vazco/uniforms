@@ -61,7 +61,10 @@ module.exports = {
     }
   },
   favicon: 'favicon.ico',
-  plugins: [path.resolve(__dirname, './plugins/docusaurus-plugin-hotjar')],
+  plugins: [
+    path.resolve(__dirname, './plugins/docusaurus-plugin-hotjar'),
+    path.resolve(__dirname, './plugins/docusaurus-plugin-polyfill')
+  ],
   presets: [
     [
       '@docusaurus/preset-classic',
