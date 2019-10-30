@@ -8,7 +8,7 @@ const getDisplayName = (component: React.ComponentType) =>
   component.displayName || component.name;
 
 export default function connectField(
-  Component: React.ComponentType,
+  Component: React.ComponentType<any>,
   {
     baseField = BaseField,
     mapProps = identity,

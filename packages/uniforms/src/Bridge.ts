@@ -9,8 +9,8 @@ export default abstract class Bridge {
     );
   }
 
-  static check(schema: any) {
-    invariant(
+  static check(schema: unknown): boolean {
+    return invariant(
       false,
       '%s have not implemented `check` method (args=%o).',
       this.name,
@@ -18,8 +18,8 @@ export default abstract class Bridge {
     );
   }
 
-  getError(name: string, error: any) {
-    invariant(
+  getError(name: string, error: unknown): unknown {
+    return invariant(
       false,
       '%s have not implemented `getError` method (args=%o).',
       this.constructor.name,
@@ -27,8 +27,8 @@ export default abstract class Bridge {
     );
   }
 
-  getErrorMessage(name: string, error: any) {
-    invariant(
+  getErrorMessage(name: string, error: unknown): string | void {
+    return invariant(
       false,
       '%s have not implemented `getErrorMessage` method (args=%o).',
       this.constructor.name,
@@ -36,8 +36,8 @@ export default abstract class Bridge {
     );
   }
 
-  getErrorMessages(error: any) {
-    invariant(
+  getErrorMessages(error: unknown): string[] {
+    return invariant(
       false,
       '%s have not implemented `getErrorMessages` method (args=%o).',
       this.constructor.name,
@@ -45,8 +45,8 @@ export default abstract class Bridge {
     );
   }
 
-  getField(name: string) {
-    invariant(
+  getField(name: string): unknown {
+    return invariant(
       false,
       '%s have not implemented `getField` method (args=%o).',
       this.constructor.name,
@@ -54,8 +54,8 @@ export default abstract class Bridge {
     );
   }
 
-  getInitialValue(name: string, props: {}) {
-    invariant(
+  getInitialValue(name: string, props: object): unknown {
+    return invariant(
       false,
       '%s have not implemented `getInitialValue` method (args=%o).',
       this.constructor.name,
@@ -63,8 +63,8 @@ export default abstract class Bridge {
     );
   }
 
-  getProps(name: string, props: {}) {
-    invariant(
+  getProps(name: string, props: object): object {
+    return invariant(
       false,
       '%s have not implemented `getProps` method (args=%o).',
       this.constructor.name,
@@ -72,8 +72,8 @@ export default abstract class Bridge {
     );
   }
 
-  getSubfields(name: string) {
-    invariant(
+  getSubfields(name?: string): string[] {
+    return invariant(
       false,
       '%s have not implemented `getSubfields` method (args=%o).',
       this.constructor.name,
@@ -81,8 +81,8 @@ export default abstract class Bridge {
     );
   }
 
-  getType(name: string) {
-    invariant(
+  getType(name: string): unknown {
+    return invariant(
       false,
       '%s have not implemented `getType` method (args=%o).',
       this.constructor.name,
@@ -90,8 +90,8 @@ export default abstract class Bridge {
     );
   }
 
-  getValidator(options?: {}) {
-    invariant(
+  getValidator(options?: unknown): (model: object) => void {
+    return invariant(
       false,
       '%s have not implemented `getValidator` method (args=%o).',
       this.constructor.name,

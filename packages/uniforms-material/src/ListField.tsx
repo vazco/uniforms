@@ -61,6 +61,8 @@ List.defaultProps = {
   dense: true
 };
 
+// FIXME: Use React.Fragment instead of returning an array if possible.
+// @ts-ignore
 export default connectField(List, {
   ensureValue: false,
   includeInChain: false

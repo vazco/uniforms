@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+// FIXME: Finish ESLint configuration for TypeScript.
+// eslint-disable-next-line no-unused-vars
+import React, { Component, SyntheticEvent } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
 import isFunction from 'lodash/isFunction';
@@ -93,9 +95,9 @@ export default class BaseForm extends Component<any, any> {
   delayId?: any;
   mounted: boolean;
   reset: () => void;
-  change: (key: any, value: any) => void;
-  submit: (event: any) => void;
-  randomId: any;
+  change: (key: string, value: unknown) => void;
+  submit: (event?: SyntheticEvent) => Promise<unknown>;
+  randomId: () => string;
 
   getContext() {
     return {
@@ -182,7 +184,7 @@ export default class BaseForm extends Component<any, any> {
     };
   }
 
-  onChange(key: any, value: any) {
+  onChange(key: string, value: unknown) {
     // Do not set `changed` before componentDidMount
     if (this.state.changed !== null) {
       // @ts-ignore
@@ -225,7 +227,7 @@ export default class BaseForm extends Component<any, any> {
     this.setState(this.__reset);
   }
 
-  onSubmit(event?: any) {
+  onSubmit(event?: SyntheticEvent): Promise<unknown> {
     if (event) {
       event.preventDefault();
       event.stopPropagation();
