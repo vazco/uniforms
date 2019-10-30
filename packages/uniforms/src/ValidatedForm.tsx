@@ -18,8 +18,16 @@ const childContextTypes = __childContextTypesBuild(
   )
 );
 
-const Validated = (parent: any) =>
-  class extends parent {
+function Validated<
+  T extends {
+    new (...args: any[]): BaseForm;
+    childContextTypes?: {};
+    defaultProps?: {};
+    displayName?: string;
+    propTypes?: {};
+  }
+>(parent: T): T & { Validated: typeof Validated } {
+  return class extends parent {
     static Validated = Validated;
 
     static displayName = `Validated${parent.displayName}`;
@@ -52,11 +60,9 @@ const Validated = (parent: any) =>
     validate: (key?: any, value?: any) => Promise<unknown>;
     validateModel: (model: any) => Promise<unknown>;
 
-    constructor() {
-      // @ts-ignore
-      super(...arguments);
+    constructor(...args: any[]) {
+      super(...args);
 
-      // @ts-ignore
       this.state = {
         ...this.state,
 
@@ -183,6 +189,7 @@ const Validated = (parent: any) =>
     }
 
     onValidateModel(model: any) {
+      // @ts-ignore
       model = this.getModel('validate', model);
 
       let catched = this.props.error || null;
@@ -213,6 +220,7 @@ const Validated = (parent: any) =>
       });
     }
   };
+}
 
 function shouldRevalidate(inProps: any, inState: any) {
   return (

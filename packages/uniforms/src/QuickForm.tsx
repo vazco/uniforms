@@ -4,8 +4,16 @@ import React from 'react';
 import BaseForm from './BaseForm';
 import nothing from './nothing';
 
-const Quick = (parent: any) =>
-  class extends parent {
+function Quick<
+  T extends {
+    new (...args: any[]): BaseForm;
+    childContextTypes?: {};
+    defaultProps?: {};
+    displayName?: string;
+    propTypes?: {};
+  }
+>(parent: T): T & { Quick: typeof Quick } {
+  return class extends parent {
     static Quick = Quick;
 
     static displayName = `Quick${parent.displayName}`;
@@ -51,5 +59,6 @@ const Quick = (parent: any) =>
       return () => nothing;
     }
   };
+}
 
 export default Quick(BaseForm);

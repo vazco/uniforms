@@ -4,10 +4,21 @@ import isEqual from 'lodash/isEqual';
 import omit from 'lodash/omit';
 import set from 'lodash/set';
 
+// FIXME: Fix configuration of ESLint in TypeScript files.
+// eslint-disable-next-line no-unused-vars
+import BaseForm from './BaseForm';
 import ValidatedQuickForm from './ValidatedQuickForm';
 
-const Auto = (parent: any) =>
-  class extends parent {
+function Auto<
+  T extends {
+    new (...args: any[]): BaseForm;
+    childContextTypes?: {};
+    defaultProps?: {};
+    displayName?: string;
+    propTypes?: {};
+  }
+>(parent: T): T & { Auto: typeof Auto } {
+  return class extends parent {
     static Auto: any = Auto;
 
     static displayName: string = `Auto${parent.displayName}`;
@@ -18,11 +29,9 @@ const Auto = (parent: any) =>
       onChangeModel: PropTypes.func
     };
 
-    constructor() {
-      // @ts-ignore
-      super(...arguments);
+    constructor(...args: any[]) {
+      super(...args);
 
-      // @ts-ignore
       this.state = {
         ...this.state,
 
@@ -32,7 +41,8 @@ const Auto = (parent: any) =>
     }
 
     componentWillReceiveProps({ model }: { model: any }) {
-      super.componentWillReceiveProps(...((arguments as unknown) as any[]));
+      // @ts-ignore
+      super.componentWillReceiveProps(...arguments);
 
       if (!isEqual(this.props.model, model)) {
         this.setState(() => ({ model, modelSync: model }));
@@ -81,8 +91,10 @@ const Auto = (parent: any) =>
     }
 
     onValidate() {
+      // @ts-ignore
       return this.onValidateModel(this.getChildContextModel());
     }
   };
+}
 
 export default Auto(ValidatedQuickForm);
