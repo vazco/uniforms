@@ -4,21 +4,10 @@ import isEqual from 'lodash/isEqual';
 import omit from 'lodash/omit';
 import set from 'lodash/set';
 
-// FIXME: Fix configuration of ESLint in TypeScript files.
-// eslint-disable-next-line no-unused-vars
-import BaseForm from './BaseForm';
 import ValidatedQuickForm from './ValidatedQuickForm';
 
-function Auto<
-  T extends {
-    new (...args: any[]): BaseForm;
-    childContextTypes?: {};
-    defaultProps?: {};
-    displayName?: string;
-    propTypes?: {};
-  }
->(parent: T): T & { Auto: typeof Auto } {
-  return class extends parent {
+const Auto = (parent: any): any =>
+  class extends parent {
     static Auto = Auto;
 
     static displayName: string = `Auto${parent.displayName}`;
@@ -32,6 +21,7 @@ function Auto<
     constructor(...args: any[]) {
       super(...args);
 
+      // @ts-ignore
       this.state = {
         ...this.state,
 
@@ -95,6 +85,5 @@ function Auto<
       return this.onValidateModel(this.getChildContextModel());
     }
   };
-}
 
 export default Auto(ValidatedQuickForm);

@@ -18,16 +18,8 @@ const childContextTypes = __childContextTypesBuild(
   )
 );
 
-function Validated<
-  T extends {
-    new (...args: any[]): BaseForm;
-    childContextTypes?: {};
-    defaultProps?: {};
-    displayName?: string;
-    propTypes?: {};
-  }
->(parent: T): T & { Validated: typeof Validated } {
-  return class extends parent {
+const Validated = (parent: any): any =>
+  class extends parent {
     static Validated = Validated;
 
     static displayName = `Validated${parent.displayName}`;
@@ -63,6 +55,7 @@ function Validated<
     constructor(...args: any[]) {
       super(...args);
 
+      // @ts-ignore
       this.state = {
         ...this.state,
 
@@ -220,7 +213,6 @@ function Validated<
       });
     }
   };
-}
 
 function shouldRevalidate(inProps: any, inState: any) {
   return (
