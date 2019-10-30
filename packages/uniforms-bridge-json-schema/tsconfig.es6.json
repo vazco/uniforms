@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "es6",
+    "target": "es6",
+    "tsBuildInfoFile": "../../node_modules/.cache/uniforms-bridge-json-schema.es6.tsbuildinfo"
+  }
+}

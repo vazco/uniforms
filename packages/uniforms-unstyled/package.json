@@ -1,8 +1,9 @@
 {
   "name": "uniforms-unstyled",
-  "version": "2.4.1",
+  "version": "2.5.0",
   "license": "MIT",
   "main": "index.js",
+  "module": "es6/index.js",
   "description": "Unstyled components for uniforms.",
   "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-unstyled",
   "bugs": "https://github.com/vazco/uniforms/issues",
@@ -18,6 +19,8 @@
   "files": [
     "*.d.ts",
     "*.js",
+    "es6/*.d.ts",
+    "es6/*.js",
     "src/*.ts",
     "src/*.tsx"
   ],
@@ -29,6 +32,6 @@
     "lodash": "^4.0.0",
     "prop-types": "^15.5.7",
     "tslib": "^1.0.0",
-    "uniforms": "^2.4.1"
+    "uniforms": "^2.5.0"
   }
 }

@@ -1,0 +1,39 @@
+name: CI
+on: [pull_request, push]
+env:
+  CI: true
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Test
+        run: npm run coverage -- --no-cache --runInBand
+      - name: Report coverage
+        uses: codecov/codecov-action@v1.0.3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Build docs
+        run: npm --prefix website run build
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '12.x'
+      - name: Deploy docs
+        uses: peaceiris/actions-gh-pages@v2.6.0-rc0
+        with:
+          forceOrphan: true
+        env:
+          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: ./website/build
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '12.x'
