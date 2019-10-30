@@ -1,15 +1,14 @@
-import BaseField from 'uniforms/BaseField';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import React from 'react';
+import React, { useContext } from 'react';
+import context from 'uniforms/context';
 import filterDOMProps from 'uniforms/filterDOMProps';
 import nothing from 'uniforms/nothing';
 
-const ErrorsField = (
-  { children, fullWidth, margin, variant, ...props },
-  { uniforms: { error, schema } }
-) =>
-  !error && !children ? (
+const ErrorsField = ({ children, fullWidth, margin, variant, ...props }) => {
+  const { error, schema } = useContext(context).uniforms;
+
+  return !error && !children ? (
     nothing
   ) : (
     <FormControl
@@ -28,7 +27,7 @@ const ErrorsField = (
       ))}
     </FormControl>
   );
-ErrorsField.contextTypes = BaseField.contextTypes;
+};
 
 ErrorsField.defaultProps = {
   fullWidth: true,

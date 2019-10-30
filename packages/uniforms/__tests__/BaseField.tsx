@@ -472,13 +472,13 @@ describe('BaseField', () => {
       const props1 = wrapper.find(PropsComponent).props();
       expect(props1).toHaveProperty('error', error1.details[0]);
 
-      wrapper.setProps({ value: reactContext2.context });
+      wrapper.getWrappingComponent().setProps({ value: reactContext2.context });
 
       const props2 = wrapper.find(PropsComponent).props();
       expect(props2).toHaveProperty('error');
       expect(props2.error).toBeFalsy();
 
-      wrapper.setProps({ value: reactContext3.context });
+      wrapper.getWrappingComponent().setProps({ value: reactContext3.context });
 
       const props3 = wrapper.find(PropsComponent).props();
       expect(props3.error).toBeFalsy();
@@ -490,13 +490,13 @@ describe('BaseField', () => {
       const props1 = wrapper.find(PropsComponent).props();
       expect(props1).toHaveProperty('error', error1.details[1]);
 
-      wrapper.setProps({ value: reactContext2.context });
+      wrapper.getWrappingComponent().setProps({ value: reactContext2.context });
 
       const props2 = wrapper.find(PropsComponent).props();
       expect(props2).toHaveProperty('error');
       expect(props2.error).toBeFalsy();
 
-      wrapper.setProps({ value: reactContext3.context });
+      wrapper.getWrappingComponent().setProps({ value: reactContext3.context });
 
       const props3 = wrapper.find(PropsComponent).props();
       expect(props3.error).toBeFalsy();
@@ -508,7 +508,7 @@ describe('BaseField', () => {
       const props1 = wrapper.find(PropsComponent).props();
       expect(props1).toHaveProperty('name', 'a');
 
-      wrapper.setProps({ value: reactContext6.context });
+      wrapper.getWrappingComponent().setProps({ value: reactContext6.context });
 
       const props2 = wrapper.find(PropsComponent).props();
       expect(props2).toHaveProperty('name', 'a');
@@ -520,7 +520,7 @@ describe('BaseField', () => {
       const props1 = wrapper.find(PropsComponent).props();
       expect(props1).toHaveProperty('name', 'a');
 
-      wrapper.setProps({ value: reactContext7.context });
+      wrapper.getWrappingComponent().setProps({ value: reactContext7.context });
 
       const props2 = wrapper.find(PropsComponent).props();
       expect(props2).toHaveProperty('name', 'a');
@@ -532,7 +532,7 @@ describe('BaseField', () => {
       const props1 = wrapper.find(PropsComponent).props();
       expect(props1).toHaveProperty('name', 'b');
 
-      wrapper.setProps({ value: reactContext4.context });
+      wrapper.getWrappingComponent().setProps({ value: reactContext4.context });
 
       const props2 = wrapper.find(PropsComponent).props();
       expect(props2).toHaveProperty('name', 'a.b');
@@ -543,7 +543,7 @@ describe('BaseField', () => {
 
       const props1 = wrapper.find(PropsComponent).props();
 
-      wrapper.setProps({ value: reactContext5.context });
+      wrapper.getWrappingComponent().setProps({ value: reactContext5.context });
 
       const props2 = wrapper.find(PropsComponent).props();
 
@@ -577,7 +577,7 @@ describe('BaseField', () => {
       const props1 = wrapper.find(PropsComponent).props();
       expect(props1).toHaveProperty('disabled', false);
 
-      wrapper.setProps({ value: reactContext8.context });
+      wrapper.getWrappingComponent().setProps({ value: reactContext8.context });
 
       const props2 = wrapper.find(PropsComponent).props();
       expect(props2).toHaveProperty('disabled', true);

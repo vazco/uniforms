@@ -2,15 +2,12 @@ import Button from 'antd/lib/button';
 import React, { useContext } from 'react';
 import context from 'uniforms/context';
 
-function SubmitField({ inputRef, value, ...props }) {
-  const {
-    error,
-    state: { disabled }
-  } = useContext(context).uniforms;
+function SubmitField({ disabled, inputRef, value, ...props }) {
+  const { error, state } = useContext(context).uniforms;
 
   return (
     <Button
-      disabled={!!(error || disabled)}
+      disabled={disabled === undefined ? !!(error || state.disabled) : disabled}
       htmlType="submit"
       ref={inputRef}
       type="primary"
