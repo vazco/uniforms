@@ -92,7 +92,7 @@ function Validated<
       };
     }
 
-    getNativeFormProps() {
+    getNativeFormProps(): Record<string, unknown> {
       return omit(super.getNativeFormProps(), [
         'onValidate',
         'validate',

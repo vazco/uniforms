@@ -26,7 +26,7 @@ function Quick<
       submitField: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
     };
 
-    getNativeFormProps() {
+    getNativeFormProps(): Record<string, unknown> {
       const {
         autoField: AutoField = this.getAutoField(),
         errorsField: ErrorsField = this.getErrorsField(),

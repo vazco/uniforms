@@ -201,7 +201,7 @@ export default class BaseForm extends Component<any, any> {
     return changedKeys(root, valueA, valueB);
   }
 
-  getNativeFormProps(): { [prop: string]: unknown } {
+  getNativeFormProps(): Record<string, unknown> {
     const props = omit(this.props, [
       'autosave',
       'autosaveDelay',

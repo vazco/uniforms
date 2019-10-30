@@ -19,7 +19,7 @@ function Auto<
   }
 >(parent: T): T & { Auto: typeof Auto } {
   return class extends parent {
-    static Auto: any = Auto;
+    static Auto = Auto;
 
     static displayName: string = `Auto${parent.displayName}`;
 
@@ -49,7 +49,7 @@ function Auto<
       }
     }
 
-    getNativeFormProps() {
+    getNativeFormProps(): Record<string, unknown> {
       return omit(super.getNativeFormProps(), ['onChangeModel']);
     }
 
