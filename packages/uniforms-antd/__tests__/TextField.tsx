@@ -2,9 +2,8 @@ import Input from 'antd/lib/input';
 import React from 'react';
 import TextField from 'uniforms-antd/TextField';
 
-import mount from './_mount';
-
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<TextField> - renders an input', () => {
   const element = <TextField name="x" />;

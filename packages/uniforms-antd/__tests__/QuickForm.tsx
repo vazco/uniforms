@@ -1,9 +1,8 @@
 import QuickForm from 'uniforms-antd/QuickForm';
 import React from 'react';
 
-import mount from './_mount';
-
 import createSchema from './_createSchema';
+import mount from './_mount';
 
 test('<QuickForm> - renders', () => {
   const element = <QuickForm schema={createSchema()} />;

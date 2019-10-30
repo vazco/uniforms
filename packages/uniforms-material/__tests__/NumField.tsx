@@ -2,9 +2,9 @@ import NumField from 'uniforms-material/NumField';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import identity from 'lodash/identity';
-import { mount } from 'enzyme';
 
 import createContext from './_createContext';
+import mount from './_mount';
 
 const expectedValueTransform =
   parseInt(React.version, 10) >= 16

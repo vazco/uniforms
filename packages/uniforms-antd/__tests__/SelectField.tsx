@@ -3,9 +3,8 @@ import React from 'react';
 import Select from 'antd/lib/select';
 import SelectField from 'uniforms-antd/SelectField';
 
-import mount from './_mount';
-
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<SelectField> - renders a select', () => {
   const element = <SelectField name="x" />;

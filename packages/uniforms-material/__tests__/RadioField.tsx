@@ -6,9 +6,9 @@ import Radio from '@material-ui/core/Radio';
 import RadioField from 'uniforms-material/RadioField';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import React from 'react';
-import { mount } from 'enzyme';
 
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<RadioField> - renders a set of Radio buttons', () => {
   const element = <RadioField name="x" />;

@@ -3,9 +3,9 @@ import ListField from 'uniforms-material/ListField';
 import ListItemField from 'uniforms-material/ListItemField';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import React from 'react';
-import { mount } from 'enzyme';
 
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<ListField> - works', () => {
   const element = <ListField name="x" />;

@@ -2,9 +2,8 @@ import AutoField from 'uniforms-antd/AutoField';
 import NestField from 'uniforms-antd/NestField';
 import React from 'react';
 
-import mount from './_mount';
-
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<NestField> - renders an <AutoField> for each field', () => {
   const element = <NestField name="x" />;

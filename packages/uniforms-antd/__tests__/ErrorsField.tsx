@@ -1,9 +1,8 @@
 import ErrorsField from 'uniforms-antd/ErrorsField';
 import React from 'react';
 
-import mount from './_mount';
-
 import createContext from './_createContext';
+import mount from './_mount';
 
 const error = {
   error: 'validation-error',

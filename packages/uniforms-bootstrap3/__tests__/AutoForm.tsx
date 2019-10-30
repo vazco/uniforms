@@ -1,8 +1,8 @@
 import AutoForm from 'uniforms-bootstrap3/AutoForm';
 import React from 'react';
-import { mount } from 'enzyme';
 
 import createSchema from './_createSchema';
+import mount from './_mount';
 
 test('<AutoForm> - works', () => {
   const element = <AutoForm schema={createSchema()} />;

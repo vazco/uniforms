@@ -1,9 +1,8 @@
 import AutoFields from 'uniforms-antd/AutoFields';
 import React from 'react';
 
-import mount from './_mount';
-
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<AutoFields> - works', () => {
   const element = <AutoFields name="x" />;

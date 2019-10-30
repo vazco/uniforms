@@ -1,8 +1,8 @@
 import ListDelField from 'uniforms-unstyled/ListDelField';
 import React from 'react';
-import { mount } from 'enzyme';
 
 import createContext from './_createContext';
+import mount from './_mount';
 
 const parent = {
   maxCount: 3,

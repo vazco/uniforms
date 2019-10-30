@@ -1,9 +1,9 @@
 import BaseForm from 'uniforms-material/BaseForm';
 import React from 'react';
-import { mount } from 'enzyme';
 
 import createContext from './_createContext';
 import createSchema from './_createSchema';
+import mount from './_mount';
 
 test('<BaseForm> - works', () => {
   const element = <BaseForm schema={createSchema()} />;

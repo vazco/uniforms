@@ -1,8 +1,8 @@
 import AutoFields from 'uniforms-material/AutoFields';
 import React from 'react';
-import { mount } from 'enzyme';
 
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<AutoFields> - works', () => {
   const element = <AutoFields name="x" />;

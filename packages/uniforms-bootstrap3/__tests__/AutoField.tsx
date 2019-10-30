@@ -8,9 +8,9 @@ import RadioField from 'uniforms-bootstrap3/RadioField';
 import React from 'react';
 import SelectField from 'uniforms-bootstrap3/SelectField';
 import TextField from 'uniforms-bootstrap3/TextField';
-import { mount } from 'enzyme';
 
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<AutoField> - works', () => {
   const element = <AutoField name="x" />;

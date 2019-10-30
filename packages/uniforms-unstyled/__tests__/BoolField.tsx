@@ -1,8 +1,8 @@
 import BoolField from 'uniforms-unstyled/BoolField';
 import React from 'react';
-import { mount } from 'enzyme';
 
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<BoolField> - renders an input', () => {
   const element = <BoolField name="x" />;

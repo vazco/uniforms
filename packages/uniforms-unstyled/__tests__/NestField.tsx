@@ -1,9 +1,9 @@
 import AutoField from 'uniforms-unstyled/AutoField';
 import NestField from 'uniforms-unstyled/NestField';
 import React from 'react';
-import { mount } from 'enzyme';
 
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<NestField> - renders an <AutoField> for each field', () => {
   const element = <NestField name="x" />;

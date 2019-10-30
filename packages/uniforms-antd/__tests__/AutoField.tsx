@@ -9,9 +9,8 @@ import React from 'react';
 import SelectField from 'uniforms-antd/SelectField';
 import TextField from 'uniforms-antd/TextField';
 
-import mount from './_mount';
-
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<AutoField> - works', () => {
   const element = <AutoField name="x" />;

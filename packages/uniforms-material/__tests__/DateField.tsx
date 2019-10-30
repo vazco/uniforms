@@ -4,9 +4,9 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
 import Input from '@material-ui/core/Input';
 import React from 'react';
-import { mount } from 'enzyme';
 
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<DateField> - renders Input', () => {
   const element = <DateField name="x" />;

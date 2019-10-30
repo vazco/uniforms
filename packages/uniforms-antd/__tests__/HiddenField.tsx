@@ -1,9 +1,8 @@
 import HiddenField from 'uniforms-antd/HiddenField';
 import React from 'react';
 
-import mount from './_mount';
-
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<HiddenField> - renders an input', () => {
   const element = <HiddenField name="x" />;

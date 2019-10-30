@@ -1,8 +1,8 @@
 import RadioField from 'uniforms-bootstrap4/RadioField';
 import React from 'react';
-import { mount } from 'enzyme';
 
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<RadioField> - renders a set of checkboxes', () => {
   const element = <RadioField name="x" />;

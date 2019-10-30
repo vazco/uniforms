@@ -1,8 +1,8 @@
 import HiddenField from 'uniforms-material/HiddenField';
 import React from 'react';
-import { mount } from 'enzyme';
 
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<HiddenField> - renders an input', () => {
   const element = <HiddenField name="x" />;

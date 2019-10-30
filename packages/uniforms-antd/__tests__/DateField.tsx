@@ -3,9 +3,8 @@ import DatePicker from 'antd/lib/date-picker';
 import React from 'react';
 import moment from 'moment';
 
-import mount from './_mount';
-
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<DateField> - renders an input', () => {
   const element = <DateField name="x" />;

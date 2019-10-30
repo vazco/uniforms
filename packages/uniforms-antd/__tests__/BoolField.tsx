@@ -3,9 +3,8 @@ import Checkbox from 'antd/lib/checkbox';
 import React from 'react';
 import Switch from 'antd/lib/switch';
 
-import mount from './_mount';
-
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<BoolField> - renders a switch input', () => {
   const element = <BoolField name="x" />;

@@ -1,8 +1,8 @@
 import React from 'react';
 import SelectField from 'uniforms-bootstrap3/SelectField';
-import { mount } from 'enzyme';
 
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<SelectField> - renders a select', () => {
   const element = <SelectField name="x" />;

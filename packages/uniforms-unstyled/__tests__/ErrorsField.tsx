@@ -1,8 +1,8 @@
 import ErrorsField from 'uniforms-unstyled/ErrorsField';
 import React from 'react';
-import { mount } from 'enzyme';
 
 import createContext from './_createContext';
+import mount from './_mount';
 
 const error = {
   error: 'validation-error',

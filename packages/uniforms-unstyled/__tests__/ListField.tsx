@@ -2,9 +2,9 @@ import ListAddField from 'uniforms-unstyled/ListAddField';
 import ListField from 'uniforms-unstyled/ListField';
 import ListItemField from 'uniforms-unstyled/ListItemField';
 import React from 'react';
-import { mount } from 'enzyme';
 
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<ListField> - works', () => {
   const element = <ListField name="x" />;

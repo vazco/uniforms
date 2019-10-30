@@ -1,8 +1,8 @@
 import React from 'react';
 import ValidatedQuickForm from 'uniforms-bootstrap3/ValidatedQuickForm';
-import { mount } from 'enzyme';
 
 import createSchema from './_createSchema';
+import mount from './_mount';
 
 test('<ValidatedQuickForm> - works', () => {
   const element = <ValidatedQuickForm schema={createSchema()} />;

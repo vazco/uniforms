@@ -1,8 +1,8 @@
 import ListAddField from 'uniforms-bootstrap3/ListAddField';
 import React from 'react';
-import { mount } from 'enzyme';
 
 import createContext from './_createContext';
+import mount from './_mount';
 
 const parent = {
   maxCount: 3,

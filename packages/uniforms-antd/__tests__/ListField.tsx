@@ -4,9 +4,8 @@ import ListItemField from 'uniforms-antd/ListItemField';
 import React from 'react';
 import Tooltip from 'antd/lib/tooltip';
 
-import mount from './_mount';
-
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<ListField> - works', () => {
   const element = <ListField name="x" />;

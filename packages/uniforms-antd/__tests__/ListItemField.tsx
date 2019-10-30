@@ -3,9 +3,8 @@ import ListDelField from 'uniforms-antd/ListDelField';
 import ListItemField from 'uniforms-antd/ListItemField';
 import React from 'react';
 
-import mount from './_mount';
-
 import createContext from './_createContext';
+import mount from './_mount';
 
 test('<ListItemField> - works', () => {
   const element = <ListItemField name="x.1" />;
