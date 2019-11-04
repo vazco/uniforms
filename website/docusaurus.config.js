@@ -58,7 +58,8 @@ module.exports = {
         alt: 'uniforms logo',
         src: 'img/uniforms.svg'
       }
-    }
+    },
+    sidebarCollapsible: false
   },
   favicon: 'favicon.ico',
   plugins: [
