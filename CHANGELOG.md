@@ -58,29 +58,29 @@
 
   ```diff
   // GraphQL
-  -import {GraphQLBridge} from 'uniforms';
-  +import {GraphQLBridge} from 'uniforms-bridge-graphql';
+  -import { GraphQLBridge } from 'uniforms';
+  +import { GraphQLBridge } from 'uniforms-bridge-graphql';
 
   -import GraphQLBridge from 'uniforms/GraphQLBridge';
   +import GraphQLBridge from 'uniforms-bridge-graphql/GraphQLBridge';
 
   // JSON Schema
-  -import {JSONSchemaBridge} from 'uniforms';
-  +import {JSONSchemaBridge} from 'uniforms-bridge-graphql';
+  -import { JSONSchemaBridge } from 'uniforms';
+  +import { JSONSchemaBridge } from 'uniforms-bridge-graphql';
 
   -import JSONSchemaBridge from 'uniforms/JSONSchemaBridge';
   +import JSONSchemaBridge from 'uniforms-bridge-json-schema/JSONSchemaBridge';
 
   // SimpleSchema (Atmosphere version for Meteor)
-  -import {SimpleSchemaBridge} from 'uniforms';
-  +import {SimpleSchemaBridge} from 'uniforms-bridge-simple-schema';
+  -import { SimpleSchemaBridge } from 'uniforms';
+  +import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
 
   -import SimpleSchemaBridge from 'uniforms/SimpleSchemaBridge';
   +import SimpleSchemaBridge from 'uniforms-bridge-simple-schema/SimpleSchemaBridge';
 
   // SimpleSchema (npm version)
-  -import {SimpleSchema2Bridge} from 'uniforms';
-  +import {SimpleSchema2Bridge} from 'uniforms-bridge-simple-schema-2';
+  -import { SimpleSchema2Bridge } from 'uniforms';
+  +import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 
   -import SimpleSchema2Bridge from 'uniforms/SimpleSchema2Bridge';
   +import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2/SimpleSchema2Bridge';

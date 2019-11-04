@@ -1,6 +1,6 @@
 import InputNumber from 'antd/lib/input-number';
-import NumField from 'uniforms-antd/NumField';
 import React from 'react';
+import { NumField } from 'uniforms-antd';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

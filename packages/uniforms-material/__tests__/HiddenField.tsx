@@ -1,5 +1,5 @@
-import HiddenField from 'uniforms-material/HiddenField';
 import React from 'react';
+import { HiddenField } from 'uniforms-material';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

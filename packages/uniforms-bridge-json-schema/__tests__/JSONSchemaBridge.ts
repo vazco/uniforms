@@ -1,4 +1,4 @@
-import JSONSchemaBridge from 'uniforms-bridge-json-schema/JSONSchemaBridge';
+import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 
 describe('JSONSchemaBridge', () => {
   const schema = {

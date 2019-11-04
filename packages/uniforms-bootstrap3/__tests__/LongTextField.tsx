@@ -1,5 +1,5 @@
-import LongTextField from 'uniforms-bootstrap3/LongTextField';
 import React from 'react';
+import { LongTextField } from 'uniforms-bootstrap3';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

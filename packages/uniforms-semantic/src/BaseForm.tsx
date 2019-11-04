@@ -1,5 +1,5 @@
-import BaseForm from 'uniforms/BaseForm';
 import classnames from 'classnames';
+import { BaseForm } from 'uniforms';
 
 const Semantic = parent =>
   class extends parent {

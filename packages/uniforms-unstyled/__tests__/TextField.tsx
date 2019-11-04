@@ -1,5 +1,5 @@
 import React from 'react';
-import TextField from 'uniforms-unstyled/TextField';
+import { TextField } from 'uniforms-unstyled';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

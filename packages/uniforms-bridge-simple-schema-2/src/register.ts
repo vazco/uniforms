@@ -1,6 +1,5 @@
 import SimpleSchema from 'simpl-schema';
-import createSchemaBridge from 'uniforms/createSchemaBridge';
-import filterDOMProps from 'uniforms/filterDOMProps';
+import { createSchemaBridge, filterDOMProps } from 'uniforms';
 
 import SimpleSchema2Bridge from './SimpleSchema2Bridge';
 

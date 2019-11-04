@@ -5,8 +5,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Switch from '@material-ui/core/Switch';
-import connectField from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
+import { connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 

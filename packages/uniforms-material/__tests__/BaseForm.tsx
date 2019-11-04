@@ -1,5 +1,5 @@
-import BaseForm from 'uniforms-material/BaseForm';
 import React from 'react';
+import { BaseForm } from 'uniforms-material';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

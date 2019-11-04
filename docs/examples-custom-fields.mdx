@@ -39,9 +39,9 @@ field props here, like value or onChange for some extra logic.
     code(
       'js',
       `import React from 'react';
-import connectField from 'uniforms/connectField';
 import { AutoField, AutoForm, SubmitField } from 'uniforms-${theme}';
-import schema from './CompositeFieldSchema';
+import { connectField } from 'uniforms';\n
+import schema from './CompositeFieldSchema';\n
 const Composite = () => (
   <section>
     <AutoField name="firstName" />
@@ -71,7 +71,7 @@ These are two _standard_ options to define a custom `AutoField`: either using `c
 
 ```js
 // Remember to choose a correct theme package
-import AutoField from 'uniforms-unstyled/AutoField';
+import { AutoField } from 'uniforms-unstyled';
 
 const CustomAuto = props => {
   // This way we don't care about unhandled cases - we use default
@@ -101,9 +101,9 @@ state if the field is not required. This one uses Semantic-UI.
     code(
       'js',
       `import React from 'react';
-import connectField from 'uniforms/connectField';
-import schema from './CycleFieldSchema';
-import { AutoForm, SubmitField } from 'uniforms-${theme}';\n
+import { AutoForm, SubmitField } from 'uniforms-${theme}';
+import { connectField } from 'uniforms';\n
+import schema from './CycleFieldSchema';\n
 // This field works as follows: iterate all allowed values and optionally no-value
 // state if the field is not required. This one uses Semantic-UI.
 const Cycle = ({ allowedValues, label, required, value, onChange }) => (
@@ -159,9 +159,8 @@ This simple field component conditionally displays other fields based on input.
     code(
       'js',
       `import React, { Children } from 'react';
-import BaseField from 'uniforms/BaseField';
-import nothing from 'uniforms/nothing';\n
-import {AutoForm, SubmitField, TextField} from 'uniforms-${theme}';
+import { AutoForm, SubmitField, TextField } from 'uniforms-${theme}';
+import { BaseField, nothing } from 'uniforms';\n
 import schema from './DisplayIfFieldSchema';\n
 // We have to ensure that there's only one child, because returning an array
 // from a component is prohibited.
@@ -200,8 +199,8 @@ Value is a `{start, stop}` object.
     code(
       'js',
       `import React from 'react';
-import connectField from 'uniforms/connectField';\n
 import { AutoForm, AutoField, SubmitField } from 'uniforms-${theme}';
+import { connectField } from 'uniforms';\n
 import schema from './RangeFieldSchema';\n
 // This field works as follows: two datepickers are bound to each other. Value is
 // a {start, stop} object.
@@ -271,8 +270,8 @@ filled, if rating (value) is greater.
       'js',
       `import React from 'react';
 import classnames from 'classnames';
-import connectField from 'uniforms/connectField';\n
 import { AutoForm, SubmitField } from 'uniforms-${theme}';
+import { connectField } from 'uniforms';\n
 import schema from './RatingFieldSchema';\n
 const Rating = ({
   className,
@@ -324,10 +323,9 @@ uniforms-unstyled. We use schema from previous examples as a template for valida
     code(
       'js',
       `import React from 'react';
-import BaseField from 'uniforms/BaseField';
-import connectField from 'uniforms/connectField';\n
-import schema from './CompositeFieldSchema';
-import {AutoField, AutoForm} from 'uniforms-${theme}';\n
+import { AutoField, AutoForm } from 'uniforms-${theme}';
+import { BaseField, connectField } from 'uniforms';\n
+import schema from './CompositeFieldSchema';\n
 const SubmitField = (
   props,
   {
@@ -376,10 +374,10 @@ and fieldB. It's that simple.
     code(
       'js',
       `import React, { Children, cloneElement } from 'react';
-import BaseField from 'uniforms/BaseField';
 import get from 'lodash/get';
-import { RefreshCw } from 'react-feather';\n
+import { RefreshCw } from 'react-feather';
 import { AutoForm, TextField, SubmitField } from 'uniforms-${theme}';
+import { BaseField } from 'uniforms';\n
 import schema from './SwapFieldSchema';\n
 const SwapField = (
   { children, fieldA, fieldB },
@@ -393,7 +391,7 @@ const SwapField = (
       onChange(fieldB, valueA);
     }
   });
-SwapField.contextTypes = BaseField.contextTypes;
+SwapField.contextTypes = BaseField.contextTypes;\n
 // Usage.
 export default function ExampleSwapField() {
   return (
@@ -425,9 +423,9 @@ export default function ExampleSwapField() {
     code(
       'js',
       `import React from 'react';
-import connectField from 'uniforms/connectField';\n
-import schema from './ImageFieldSchema';
-import { AutoForm, SubmitField } from 'uniforms-${theme}';\n
+import { AutoForm, SubmitField } from 'uniforms-${theme}';
+import { connectField } from 'uniforms';\n
+import schema from './ImageFieldSchema';\n
 function Image({ onChange, value }) {
   const imgPlaceholder = 'https://via.placeholder.com/150.png';\n
   function onImageChange({ target: { files } }) {

@@ -1,6 +1,10 @@
 import React from 'react';
-import { AutoForm, SubmitField, ErrorsField } from 'uniforms-semantic';
-import AutoField from 'uniforms-semantic/AutoField';
+import {
+  AutoField,
+  AutoForm,
+  ErrorsField,
+  SubmitField
+} from 'uniforms-semantic';
 
 import schema from './ShippingSchema';
 

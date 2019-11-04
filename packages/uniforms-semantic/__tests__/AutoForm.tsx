@@ -1,5 +1,5 @@
-import AutoForm from 'uniforms-semantic/AutoForm';
 import React from 'react';
+import { AutoForm } from 'uniforms-semantic';
 import { mount } from 'enzyme';
 
 import createSchema from './_createSchema';

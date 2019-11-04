@@ -10,7 +10,7 @@ If you want to get a deeper dive into it, we encourage you to read the source of
 ### `ModifierForm`
 
 ```js
-import BaseForm from 'uniforms/BaseForm';
+import { BaseForm } from 'uniforms';
 
 const Modifier = parent =>
   class extends parent {

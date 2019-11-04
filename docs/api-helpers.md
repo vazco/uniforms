@@ -50,7 +50,7 @@ The table below lists all available options:
 Returns an array of changed keys between `valueA` and `valueB`, where `root` is the root key.
 
 ```js
-import changedKeys from 'uniforms/changedKeys';
+import { changedKeys } from 'uniforms';
 
 const arrayOfChangedKeys = changedKeys(root, valueA, valueB);
 ```
@@ -65,7 +65,7 @@ Use it, if you want to manually create a schema bridge or to test your bridge.
 It will throw on an unrecognised schema.
 
 ```js
-import createSchemaBridge from 'uniforms/createSchemaBridge';
+import { createSchemaBridge } from 'uniforms';
 
 const bridge = createSchemaBridge(schemaOrBridge);
 ```
@@ -75,7 +75,7 @@ const bridge = createSchemaBridge(schemaOrBridge);
 Registers a custom bridge.
 
 ```js
-import createSchemaBridge from 'uniforms/createSchemaBridge';
+import { createSchemaBridge } from 'uniforms';
 
 createSchemaBridge.register(propA, propB, propC /* ... */);
 ```
@@ -85,7 +85,7 @@ createSchemaBridge.register(propA, propB, propC /* ... */);
 Removes all uniforms-related props.
 
 ```js
-import filterDOMProps from 'uniforms/filterDOMProps';
+import { filterDOMProps } from 'uniforms';
 
 const nonUniformsProps = filterDOMProps(props);
 ```
@@ -97,7 +97,7 @@ Registers additional props to be filtered.
 If you want to filter additional props, then you have to register it.
 
 ```js
-import filterDOMProps from 'uniforms/filterDOMProps';
+import { filterDOMProps } from 'uniforms';
 
 filterDOMProps.register(propA, propB, propC /* ... */);
 ```
@@ -107,7 +107,7 @@ filterDOMProps.register(propA, propB, propC /* ... */);
 Returns an array containing already registered props.
 
 ```js
-import filterDOMProps from 'uniforms/filterDOMProps';
+import { filterDOMProps } from 'uniforms';
 
 filterDOMProps.register(propA, propB, propC /* ... */);
 filterDOMProps.registered; // ['propA', 'propB', ...]
@@ -118,7 +118,7 @@ filterDOMProps.registered; // ['propA', 'propB', ...]
 Injects name to all already rendered fields. (_It's rather an internal helper, but it's still exported._)
 
 ```js
-import injectName from 'uniforms/injectName';
+import { injectName } from 'uniforms';
 
 const componentWithInjectedName = injectName(name, component);
 ```
@@ -130,7 +130,7 @@ Safely joins partial field names. When the first param is null, returns a string
 If you create a custom field with subfields, then it's better to use this helper.
 
 ```js
-import joinName from 'uniforms/joinName';
+import { joinName } from 'uniforms';
 
 const joinedNameString = joinName(nameA, nameB, nameC /* ... */);
 const joinedNameArray = joinName(null, nameA, nameB, nameC /* ... */);
@@ -145,7 +145,7 @@ In React@0.14 you can't return null from functional component, but in React@15 y
 Basically it's a `<noscript />` in @0.14 and null in @15.
 
 ```js
-import nothing from 'uniforms/nothing';
+import { nothing } from 'uniforms';
 
 const emptyJSX = () => nothing;
 ```
@@ -157,7 +157,7 @@ Generates random ID, based on given prefix. (_It's rather an internal helper, bu
 Use it, if you want to have some random but deterministic strings. If no prefix is provided, the 'uniforms' prefix will be applied.
 
 ```js
-import randomIds from 'uniforms/randomIds';
+import { randomIds } from 'uniforms';
 
 const predictableRandomIdGenerator = randomIds(prefix);
 

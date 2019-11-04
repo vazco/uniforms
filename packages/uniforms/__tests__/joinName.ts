@@ -1,4 +1,4 @@
-import joinName from 'uniforms/joinName';
+import { joinName } from 'uniforms';
 
 describe('joinName', () => {
   it('is a function', () => {

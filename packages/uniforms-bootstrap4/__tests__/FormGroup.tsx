@@ -1,5 +1,5 @@
-import FormGroup from 'uniforms-bootstrap4/FormGroup';
 import React from 'react';
+import { FormGroup } from 'uniforms-bootstrap4';
 import { mount } from 'enzyme';
 
 test('FormGroup should be deprecated', () => {

@@ -84,7 +84,7 @@ Now that both have the schema and the validator, we can define our bridge, which
 All we have to do is to extend `Bridge` class and implement its methods according to the [Bridge concept](/docs/uth-bridge-concept):
 
 ```js
-import Bridge from 'uniforms/Bridge';
+import { Bridge } from 'uniforms';
 
 export default class UserLoginSchemaBridge extends Bridge {
   constructor(schema, validator) {

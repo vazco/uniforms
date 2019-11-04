@@ -1,8 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import cloneDeep from 'lodash/cloneDeep';
-import connectField from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
+import { connectField, filterDOMProps } from 'uniforms';
 
 const ListAdd = ({ addIcon, className, disabled, parent, value, ...props }) => {
   const limitNotReached =

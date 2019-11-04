@@ -1,4 +1,4 @@
-import ValidatedForm from 'uniforms/ValidatedForm';
+import { ValidatedForm } from 'uniforms';
 
 import BaseForm from './BaseForm';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import SubmitField from 'uniforms-unstyled/SubmitField';
+import { SubmitField } from 'uniforms-unstyled';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

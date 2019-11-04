@@ -1,5 +1,5 @@
-import RadioField from 'uniforms-semantic/RadioField';
 import React from 'react';
+import { RadioField } from 'uniforms-semantic';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

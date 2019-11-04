@@ -1,9 +1,7 @@
-import BaseField from 'uniforms/BaseField';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import React from 'react';
-import filterDOMProps from 'uniforms/filterDOMProps';
-import nothing from 'uniforms/nothing';
+import { BaseField, filterDOMProps, nothing } from 'uniforms';
 
 const ErrorsField = (
   { children, fullWidth, margin, variant, ...props },

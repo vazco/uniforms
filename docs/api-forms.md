@@ -35,7 +35,7 @@ In other words, that means that `AutoForm` receives all props listed on this pag
 ##### Props usage:
 
 ```js
-import AutoForm from 'uniforms/AutoForm'; // Or from the theme package.
+import { AutoForm } from 'uniforms'; // Or from the theme package.
 
 <AutoForm onChangeModel={model => console.log(model)} />;
 ```
@@ -71,7 +71,7 @@ however, there will be validation checks.
 ##### Props usage:
 
 ```js
-import ValidatedForm from 'uniforms/ValidatedForm'; // Or from the theme package.
+import { ValidatedForm } from 'uniforms'; // Or from the theme package.
 
 <ValidatedForm
   onValidate={(model, error, callback) => {
@@ -131,7 +131,7 @@ However, `QuickForm` is not self-managed, so you won't be able to type anything 
 ##### Props usage:
 
 ```js
-import QuickForm from 'uniforms/QuickForm'; // Or from the theme package.
+import { QuickForm } from 'uniforms'; // Or from the theme package.
 
 <QuickForm
   autoField={CustomAutoField}
@@ -171,7 +171,7 @@ However, `BaseForm` is not self-managed, so you won't be able to type anything u
 ##### Props usage:
 
 ```js
-import BaseForm from 'uniforms/BaseForm'; // Or from the theme package.
+import { BaseForm } from 'uniforms'; // Or from the theme package.
 
 <BaseForm
   autosaveDelay={0}

@@ -1,7 +1,5 @@
-import ListAddField from 'uniforms-bootstrap4/ListAddField';
-import ListField from 'uniforms-bootstrap4/ListField';
-import ListItemField from 'uniforms-bootstrap4/ListItemField';
 import React from 'react';
+import { ListAddField, ListField, ListItemField } from 'uniforms-bootstrap4';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

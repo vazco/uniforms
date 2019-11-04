@@ -1,7 +1,6 @@
-import Bridge from 'uniforms/Bridge';
 import cloneDeep from 'lodash/cloneDeep';
 import invariant from 'invariant';
-import joinName from 'uniforms/joinName';
+import { Bridge, joinName } from 'uniforms';
 // @ts-ignore
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'; // eslint-disable-line
 

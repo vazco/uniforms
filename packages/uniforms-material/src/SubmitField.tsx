@@ -1,7 +1,6 @@
-import BaseField from 'uniforms/BaseField';
 import Button from '@material-ui/core/Button';
 import React from 'react';
-import filterDOMProps from 'uniforms/filterDOMProps';
+import { BaseField, filterDOMProps } from 'uniforms';
 
 const SubmitField = (
   { children, disabled, inputRef, label, value, ...props },

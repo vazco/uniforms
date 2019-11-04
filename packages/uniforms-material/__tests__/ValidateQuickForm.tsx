@@ -1,5 +1,5 @@
 import React from 'react';
-import ValidatedQuickForm from 'uniforms-material/ValidatedQuickForm';
+import { ValidatedQuickForm } from 'uniforms-material';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

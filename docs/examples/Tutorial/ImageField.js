@@ -1,5 +1,5 @@
 import React from 'react';
-import connectField from 'uniforms/connectField';
+import { connectField } from 'uniforms';
 
 function Image({ onChange, value }) {
   const imgPlaceholder = 'https://via.placeholder.com/150.png';

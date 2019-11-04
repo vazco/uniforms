@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
-import filterDOMProps from 'uniforms/filterDOMProps';
 import omit from 'lodash/omit';
+import { filterDOMProps } from 'uniforms';
 
 import gridClassName from './gridClassName';
 

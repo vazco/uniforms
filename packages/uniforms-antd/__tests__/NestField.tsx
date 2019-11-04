@@ -1,6 +1,5 @@
-import AutoField from 'uniforms-antd/AutoField';
-import NestField from 'uniforms-antd/NestField';
 import React from 'react';
+import { AutoField, NestField } from 'uniforms-antd';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

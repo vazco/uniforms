@@ -1,8 +1,7 @@
-import AutoField from 'uniforms-material/AutoField';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
-import NestField from 'uniforms-material/NestField';
 import React from 'react';
+import { AutoField, NestField } from 'uniforms-material';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

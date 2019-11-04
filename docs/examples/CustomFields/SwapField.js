@@ -1,6 +1,6 @@
 import React, { Children, cloneElement } from 'react';
-import BaseField from 'uniforms/BaseField';
 import get from 'lodash/get';
+import { BaseField } from 'uniforms';
 import { RefreshCw } from 'react-feather';
 
 import {
