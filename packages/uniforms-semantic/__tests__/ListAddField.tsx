@@ -1,5 +1,5 @@
-import ListAddField from 'uniforms-semantic/ListAddField';
 import React from 'react';
+import { ListAddField } from 'uniforms-semantic';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

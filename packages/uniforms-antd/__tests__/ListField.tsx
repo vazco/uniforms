@@ -1,8 +1,6 @@
-import ListAddField from 'uniforms-antd/ListAddField';
-import ListField from 'uniforms-antd/ListField';
-import ListItemField from 'uniforms-antd/ListItemField';
 import React from 'react';
 import Tooltip from 'antd/lib/tooltip';
+import { ListAddField, ListField, ListItemField } from 'uniforms-antd';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

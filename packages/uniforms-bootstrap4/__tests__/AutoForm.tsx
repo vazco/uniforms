@@ -1,5 +1,5 @@
-import AutoForm from 'uniforms-bootstrap4/AutoForm';
 import React from 'react';
+import { AutoForm } from 'uniforms-bootstrap4';
 import { mount } from 'enzyme';
 
 import createSchema from './_createSchema';

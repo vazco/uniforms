@@ -1,5 +1,5 @@
-import HiddenField from 'uniforms-antd/HiddenField';
 import React from 'react';
+import { HiddenField } from 'uniforms-antd';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

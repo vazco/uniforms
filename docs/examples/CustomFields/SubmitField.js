@@ -1,6 +1,5 @@
 import React from 'react';
-import BaseField from 'uniforms/BaseField';
-import connectField from 'uniforms/connectField';
+import { BaseField, connectField } from 'uniforms';
 
 import schema from './CompositeFieldSchema';
 import { AutoField, AutoForm } from '../../../website/components/universal';

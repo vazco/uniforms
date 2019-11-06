@@ -1,5 +1,5 @@
-import BaseForm from 'uniforms-antd/BaseForm';
 import React from 'react';
+import { BaseForm } from 'uniforms-antd';
 import { mount } from 'enzyme';
 
 import createSchema from './_createSchema';

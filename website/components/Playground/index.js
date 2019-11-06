@@ -1,18 +1,16 @@
-import BaseField from 'uniforms/BaseField';
 import ConfigProvider from 'antd/lib/config-provider';
 import Frame, { FrameContextConsumer } from 'react-frame-component';
 import React, { Component } from 'react';
-import ValidatedForm from 'uniforms/ValidatedForm';
 import classNames from 'classnames';
-import connectField from 'uniforms/connectField';
 import omit from 'lodash/omit';
+import { BaseField, ValidatedForm, connectField } from 'uniforms';
 
 import playgroundStyles from './playground.module.css';
 import presets from './presets';
 import schema from './schema';
 import styles from './styles';
-import themes from './themes';
 import { parseQuery, updateQuery } from './utils';
+import { themes } from '../universal';
 
 class Playground extends Component {
   constructor() {

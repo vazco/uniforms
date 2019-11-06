@@ -1,4 +1,4 @@
-import createSchemaBridge from 'uniforms/createSchemaBridge';
+import { createSchemaBridge } from 'uniforms';
 
 import JSONSchemaBridge from './JSONSchemaBridge';
 

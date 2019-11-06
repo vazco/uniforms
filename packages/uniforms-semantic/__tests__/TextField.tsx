@@ -1,5 +1,5 @@
 import React from 'react';
-import TextField from 'uniforms-semantic/TextField';
+import { TextField } from 'uniforms-semantic';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

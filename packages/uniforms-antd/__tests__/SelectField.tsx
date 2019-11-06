@@ -1,7 +1,7 @@
 import Radio from 'antd/lib/radio';
 import React from 'react';
 import Select from 'antd/lib/select';
-import SelectField from 'uniforms-antd/SelectField';
+import { SelectField } from 'uniforms-antd';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

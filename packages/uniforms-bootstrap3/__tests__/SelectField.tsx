@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectField from 'uniforms-bootstrap3/SelectField';
+import { SelectField } from 'uniforms-bootstrap3';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

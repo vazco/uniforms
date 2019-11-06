@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import connectField from 'uniforms/connectField';
+import { connectField } from 'uniforms';
 
 import wrapField from './wrapField';
 

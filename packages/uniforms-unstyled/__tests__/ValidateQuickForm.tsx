@@ -1,5 +1,5 @@
 import React from 'react';
-import ValidatedQuickForm from 'uniforms-unstyled/ValidatedQuickForm';
+import { ValidatedQuickForm } from 'uniforms-unstyled';
 import { mount } from 'enzyme';
 
 import createSchema from './_createSchema';

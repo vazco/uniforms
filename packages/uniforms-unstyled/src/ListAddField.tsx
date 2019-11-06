@@ -1,7 +1,6 @@
 import React from 'react';
 import cloneDeep from 'lodash/cloneDeep';
-import connectField from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
+import { connectField, filterDOMProps } from 'uniforms';
 
 const ListAdd = ({ disabled, parent, value, ...props }) => {
   const limitNotReached = !disabled && !(parent.maxCount <= value.length);

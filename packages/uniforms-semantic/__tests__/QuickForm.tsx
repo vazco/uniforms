@@ -1,5 +1,5 @@
-import QuickForm from 'uniforms-semantic/QuickForm';
 import React from 'react';
+import { QuickForm } from 'uniforms-semantic';
 import { mount } from 'enzyme';
 
 import createSchema from './_createSchema';

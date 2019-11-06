@@ -1,6 +1,5 @@
-import AutoField from 'uniforms-semantic/AutoField';
-import NestField from 'uniforms-semantic/NestField';
 import React from 'react';
+import { AutoField, NestField } from 'uniforms-semantic';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

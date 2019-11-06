@@ -1,5 +1,5 @@
-import ErrorField from 'uniforms-unstyled/ErrorField';
 import React from 'react';
+import { ErrorField } from 'uniforms-unstyled';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

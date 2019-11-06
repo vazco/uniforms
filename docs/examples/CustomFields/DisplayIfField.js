@@ -1,6 +1,5 @@
 import React, { Children } from 'react';
-import BaseField from 'uniforms/BaseField';
-import nothing from 'uniforms/nothing';
+import { BaseField, nothing } from 'uniforms';
 
 import {
   AutoForm,

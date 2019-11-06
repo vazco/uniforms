@@ -1,6 +1,6 @@
-import BaseField from 'uniforms/BaseField';
 import Button from 'antd/lib/button';
 import React from 'react';
+import { BaseField } from 'uniforms';
 
 const SubmitField = (
   { inputRef, value, ...props },

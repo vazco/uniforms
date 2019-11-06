@@ -1,5 +1,4 @@
-import Bridge from 'uniforms/Bridge';
-import createSchemaBridge from 'uniforms/createSchemaBridge';
+import { Bridge, createSchemaBridge } from 'uniforms';
 
 describe('createSchemaBridge', () => {
   it('is a function', () => {

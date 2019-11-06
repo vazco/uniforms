@@ -1,7 +1,8 @@
 import Ajv from 'ajv';
-import ImageField from './ImageField.js';
-import LongTextField from 'uniforms-unstyled/LongTextField';
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
+import { LongTextField } from 'uniforms-unstyled';
+
+import ImageField from './ImageField.js';
 
 const ajv = new Ajv({ allErrors: true, useDefaults: true });
 

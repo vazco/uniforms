@@ -1,5 +1,5 @@
-import BoolField from 'uniforms-bootstrap4/BoolField';
 import React from 'react';
+import { BoolField } from 'uniforms-bootstrap4';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

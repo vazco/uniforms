@@ -1,5 +1,5 @@
-import BaseForm from 'uniforms-semantic/BaseForm';
 import React from 'react';
+import { BaseForm } from 'uniforms-semantic';
 import { mount } from 'enzyme';
 
 import createSchema from './_createSchema';

@@ -1,6 +1,6 @@
-import LongTextField from 'uniforms-material/LongTextField';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
+import { LongTextField } from 'uniforms-material';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

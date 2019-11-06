@@ -1,6 +1,6 @@
-import NumField from 'uniforms-unstyled/NumField';
 import React from 'react';
 import identity from 'lodash/identity';
+import { NumField } from 'uniforms-unstyled';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

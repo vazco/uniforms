@@ -1,6 +1,6 @@
 import Input from 'antd/lib/input';
-import LongTextField from 'uniforms-antd/LongTextField';
 import React from 'react';
+import { LongTextField } from 'uniforms-antd';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

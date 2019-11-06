@@ -1,5 +1,5 @@
-import BaseForm from 'uniforms-bootstrap3/BaseForm';
 import React from 'react';
+import { BaseForm } from 'uniforms-bootstrap3';
 import { mount } from 'enzyme';
 
 import createSchema from './_createSchema';

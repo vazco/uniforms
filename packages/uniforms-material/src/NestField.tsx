@@ -1,8 +1,6 @@
 import FormLabel from '@material-ui/core/FormLabel';
 import React from 'react';
-import connectField from 'uniforms/connectField';
-import injectName from 'uniforms/injectName';
-import joinName from 'uniforms/joinName';
+import { connectField, injectName, joinName } from 'uniforms';
 
 import AutoField from './AutoField';
 import wrapField from './wrapField';

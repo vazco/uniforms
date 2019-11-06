@@ -1,4 +1,4 @@
-import changedKeys from 'uniforms/changedKeys';
+import { changedKeys } from 'uniforms';
 
 describe('changedKeys', () => {
   it('is a function', () => {

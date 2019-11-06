@@ -1,7 +1,5 @@
-import BaseField from 'uniforms/BaseField';
 import React from 'react';
-import nothing from 'uniforms/nothing';
-import randomIds from 'uniforms/randomIds';
+import { BaseField, nothing, randomIds } from 'uniforms';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
 import { mount } from 'enzyme';
 

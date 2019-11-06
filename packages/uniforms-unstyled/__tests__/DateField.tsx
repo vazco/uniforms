@@ -1,5 +1,5 @@
-import DateField from 'uniforms-unstyled/DateField';
 import React from 'react';
+import { DateField } from 'uniforms-unstyled';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

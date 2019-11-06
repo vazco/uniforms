@@ -1,5 +1,5 @@
-import AutoForm from 'uniforms-material/AutoForm';
 import React from 'react';
+import { AutoForm } from 'uniforms-material';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

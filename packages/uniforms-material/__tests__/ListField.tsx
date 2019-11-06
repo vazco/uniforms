@@ -1,8 +1,6 @@
-import ListAddField from 'uniforms-material/ListAddField';
-import ListField from 'uniforms-material/ListField';
-import ListItemField from 'uniforms-material/ListItemField';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import React from 'react';
+import { ListAddField, ListField, ListItemField } from 'uniforms-material';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

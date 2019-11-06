@@ -1,10 +1,10 @@
-import BoolField from 'uniforms-material/BoolField';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
 import React from 'react';
 import Switch from '@material-ui/core/Switch';
+import { BoolField } from 'uniforms-material';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

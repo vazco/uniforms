@@ -1,4 +1,4 @@
-import BaseForm from 'uniforms/BaseForm';
+import { BaseForm } from 'uniforms';
 
 const AntD = (parent: any): any =>
   class extends parent {

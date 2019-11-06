@@ -133,7 +133,7 @@ MyComponentUsingUniformsContext.contextTypes = {
 A convenient way to access context is to write a helper function, eg. `WithUniforms`, that receives a context and passes it to the children:
 
 ```js
-import BaseField from 'uniforms/BaseField';
+import { BaseField } from 'uniforms';
 
 const WithUniforms = ({ children }, { uniforms }) => children(uniforms);
 
@@ -143,7 +143,7 @@ WithUniforms.contextTypes = BaseField.contextTypes;
 You can also directly subscribe to the context inside your field component:
 
 ```js
-import BaseField from 'uniforms/BaseField';
+import { BaseField } from 'uniforms';
 
 const MyComponentUsingUniformsContext = (props, { uniforms }) => (
   //Now I have access to the uniforms context!

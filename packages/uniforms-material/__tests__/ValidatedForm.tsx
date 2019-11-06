@@ -1,5 +1,5 @@
 import React from 'react';
-import ValidatedForm from 'uniforms-material/ValidatedForm';
+import { ValidatedForm } from 'uniforms-material';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

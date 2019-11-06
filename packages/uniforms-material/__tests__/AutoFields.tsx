@@ -1,5 +1,5 @@
-import AutoFields from 'uniforms-material/AutoFields';
 import React from 'react';
+import { AutoFields } from 'uniforms-material';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

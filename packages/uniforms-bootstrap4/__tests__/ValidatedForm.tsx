@@ -1,5 +1,5 @@
 import React from 'react';
-import ValidatedForm from 'uniforms-bootstrap4/ValidatedForm';
+import { ValidatedForm } from 'uniforms-bootstrap4';
 import { mount } from 'enzyme';
 
 import createSchema from './_createSchema';

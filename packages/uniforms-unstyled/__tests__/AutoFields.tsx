@@ -1,5 +1,5 @@
-import AutoFields from 'uniforms-unstyled/AutoFields';
 import React from 'react';
+import { AutoFields } from 'uniforms-unstyled';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

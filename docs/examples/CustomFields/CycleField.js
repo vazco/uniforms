@@ -1,5 +1,6 @@
 import React from 'react';
-import connectField from 'uniforms/connectField';
+import { connectField } from 'uniforms';
+
 import schema from './CycleFieldSchema';
 import { AutoForm, SubmitField } from '../../../website/components/universal';
 

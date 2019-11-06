@@ -1,8 +1,6 @@
 import React from 'react';
-import connectField from 'uniforms/connectField';
-import nothing from 'uniforms/nothing';
-import randomIds from 'uniforms/randomIds';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
+import { connectField, nothing, randomIds } from 'uniforms';
 import { mount } from 'enzyme';
 
 jest.mock('meteor/aldeed:simple-schema');

@@ -1,7 +1,5 @@
-import BaseField from 'uniforms/BaseField';
 import React from 'react';
-import filterDOMProps from 'uniforms/filterDOMProps';
-import nothing from 'uniforms/nothing';
+import { BaseField, filterDOMProps, nothing } from 'uniforms';
 
 const ErrorsField = ({ children, ...props }, { uniforms: { error, schema } }) =>
   !error && !children ? (

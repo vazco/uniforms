@@ -1,4 +1,4 @@
-import filterDOMProps from 'uniforms/filterDOMProps';
+import { filterDOMProps } from 'uniforms';
 
 describe('joinName', () => {
   it('is a function', () => {

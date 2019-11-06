@@ -1,5 +1,5 @@
-import ListDelField from 'uniforms-bootstrap3/ListDelField';
 import React from 'react';
+import { ListDelField } from 'uniforms-bootstrap3';
 import { mount } from 'enzyme';
 
 import createContext from './_createContext';

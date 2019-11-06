@@ -200,7 +200,7 @@ A current form state is stored inside `uniforms` in [React context](https://reac
 A convenient way to access it is to write a helper function, eg. `WithUniforms`, that receives a context and passes it to the children:
 
 ```js
-import BaseField from 'uniforms/BaseField';
+import { BaseField } from 'uniforms';
 
 const WithUniforms = ({ children }, { uniforms }) => children(uniforms);
 

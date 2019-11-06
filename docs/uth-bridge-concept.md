@@ -19,7 +19,7 @@ Bridge is a kind of abstract class, which should be extended to create custom br
 It implements all of the required methods and throws an error with meaningful "method not implemented" error.
 
 ```js
-import Bridge from 'uniforms/Bridge';
+import { Bridge } from 'uniforms';
 
 class CustomBridge extends Bridge {
   // Check, if this bridge is compatibile with given schema.

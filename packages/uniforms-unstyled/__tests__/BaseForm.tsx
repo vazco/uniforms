@@ -1,5 +1,5 @@
-import BaseForm from 'uniforms-unstyled/BaseForm';
 import React from 'react';
+import { BaseForm } from 'uniforms-unstyled';
 import { mount } from 'enzyme';
 
 import createSchema from './_createSchema';

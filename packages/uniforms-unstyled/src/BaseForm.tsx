@@ -1,4 +1,4 @@
-import BaseForm from 'uniforms/BaseForm';
+import { BaseForm } from 'uniforms';
 
 const Unstyled = (parent: any): any =>
   class extends parent {
