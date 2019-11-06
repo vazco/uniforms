@@ -1,6 +1,6 @@
 import BaseForm from 'uniforms/BaseForm';
 
-const AntD = (parent: any) =>
+const AntD = (parent: any): any =>
   class extends parent {
     static AntD = AntD;
 

@@ -4,7 +4,7 @@ import React from 'react';
 import BaseForm from './BaseForm';
 import nothing from './nothing';
 
-const Quick = (parent: any) =>
+const Quick = (parent: any): any =>
   class extends parent {
     static Quick = Quick;
 
@@ -18,7 +18,7 @@ const Quick = (parent: any) =>
       submitField: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
     };
 
-    getNativeFormProps() {
+    getNativeFormProps(): Record<string, unknown> {
       const {
         autoField: AutoField = this.getAutoField(),
         errorsField: ErrorsField = this.getErrorsField(),

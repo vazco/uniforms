@@ -6,9 +6,9 @@ import set from 'lodash/set';
 
 import ValidatedQuickForm from './ValidatedQuickForm';
 
-const Auto = (parent: any) =>
+const Auto = (parent: any): any =>
   class extends parent {
-    static Auto: any = Auto;
+    static Auto = Auto;
 
     static displayName: string = `Auto${parent.displayName}`;
 
@@ -18,9 +18,8 @@ const Auto = (parent: any) =>
       onChangeModel: PropTypes.func
     };
 
-    constructor() {
-      // @ts-ignore
-      super(...arguments);
+    constructor(...args: any[]) {
+      super(...args);
 
       // @ts-ignore
       this.state = {
@@ -32,14 +31,15 @@ const Auto = (parent: any) =>
     }
 
     componentWillReceiveProps({ model }: { model: any }) {
-      super.componentWillReceiveProps(...((arguments as unknown) as any[]));
+      // @ts-ignore
+      super.componentWillReceiveProps(...arguments);
 
       if (!isEqual(this.props.model, model)) {
         this.setState(() => ({ model, modelSync: model }));
       }
     }
 
-    getNativeFormProps() {
+    getNativeFormProps(): Record<string, unknown> {
       return omit(super.getNativeFormProps(), ['onChangeModel']);
     }
 
@@ -81,6 +81,7 @@ const Auto = (parent: any) =>
     }
 
     onValidate() {
+      // @ts-ignore
       return this.onValidateModel(this.getChildContextModel());
     }
   };

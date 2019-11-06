@@ -1,7 +1,7 @@
 import BaseForm from 'uniforms/BaseForm';
 import classnames from 'classnames';
 
-const Semantic = parent =>
+const Semantic = (parent: any): any =>
   class extends parent {
     static Semantic = Semantic;
 

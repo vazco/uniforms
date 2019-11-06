@@ -2,7 +2,7 @@ import BaseForm from 'uniforms/BaseForm';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-const Bootstrap4 = parent =>
+const Bootstrap4 = (parent: any): any =>
   class extends parent {
     static Bootstrap4 = Bootstrap4;
 
