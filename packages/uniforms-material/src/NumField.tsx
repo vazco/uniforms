@@ -40,11 +40,6 @@ const Num_ = ({
   />
 );
 
-Num_.defaultProps = {
-  fullWidth: true,
-  margin: 'dense'
-};
-
 let Num;
 // istanbul ignore next
 if (parseInt(React.version, 10) < 16) {
@@ -86,5 +81,10 @@ if (parseInt(React.version, 10) < 16) {
       }
     });
 }
+
+Num.defaultProps = {
+  fullWidth: true,
+  margin: 'dense'
+};
 
 export default connectField(Num);
