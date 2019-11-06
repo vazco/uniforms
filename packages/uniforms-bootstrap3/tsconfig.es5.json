@@ -4,13 +4,14 @@
     "baseUrl": "src",
     "outDir": ".",
     "rootDir": "src",
-    "tsBuildInfoFile": "../../node_modules/.cache/uniforms-antd.tsbuildinfo"
+    "target": "es5",
+    "tsBuildInfoFile": "../../node_modules/.cache/uniforms-bootstrap3.es5.tsbuildinfo"
   },
   "exclude": ["node_modules"],
   "include": ["src"],
   "references": [
     {
-      "path": "../uniforms"
+      "path": "../uniforms/tsconfig.es5.json"
     }
   ]
 }
