@@ -14,7 +14,7 @@ const gridOrder = {
   sm: 2,
   md: 3,
   lg: 4,
-  xl: 5
+  xl: 5,
 };
 
 function compareSizeClass(a, b) {

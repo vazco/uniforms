@@ -58,7 +58,7 @@ test('<DateField> - renders a input with correct label (specified)', () => {
   expect(wrapper.find('label')).toHaveLength(1);
   expect(wrapper.find('label').text()).toBe('DateFieldLabel');
   expect(wrapper.find('label').prop('htmlFor')).toBe(
-    wrapper.find('input').prop('id')
+    wrapper.find('input').prop('id'),
   );
 });
 
@@ -75,12 +75,12 @@ test('<DateField> - renders a input with correct value (model)', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Date } }, { model: { x: now } })
+    createContext({ x: { type: Date } }, { model: { x: now } }),
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
   expect(wrapper.find('input').prop('value')).toEqual(
-    now.toISOString().slice(0, -8)
+    now.toISOString().slice(0, -8),
   );
 });
 
@@ -91,7 +91,7 @@ test('<DateField> - renders a input with correct value (specified)', () => {
 
   expect(wrapper.find('input')).toHaveLength(1);
   expect(wrapper.find('input').prop('value')).toEqual(
-    now.toISOString().slice(0, -8)
+    now.toISOString().slice(0, -8),
   );
 });
 
@@ -102,12 +102,14 @@ test('<DateField> - renders a input which correctly reacts on change', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Date } }, { onChange })
+    createContext({ x: { type: Date } }, { onChange }),
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
   expect(
-    wrapper.find('input').simulate('change', { target: { valueAsNumber: now } })
+    wrapper
+      .find('input')
+      .simulate('change', { target: { valueAsNumber: now } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', now);
 });
@@ -118,14 +120,14 @@ test('<DateField> - renders a input which correctly reacts on change (empty)', (
   const element = <DateField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Date } }, { onChange })
+    createContext({ x: { type: Date } }, { onChange }),
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
   expect(
     wrapper
       .find('input')
-      .simulate('change', { target: { valueAsNumber: undefined } })
+      .simulate('change', { target: { valueAsNumber: undefined } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', undefined);
 });
@@ -137,12 +139,14 @@ test('<DateField> - renders a input which correctly reacts on change (overflow)'
   const element = <DateField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Date } }, { onChange })
+    createContext({ x: { type: Date } }, { onChange }),
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
   expect(
-    wrapper.find('input').simulate('change', { target: { valueAsNumber: now } })
+    wrapper
+      .find('input')
+      .simulate('change', { target: { valueAsNumber: now } }),
   ).toBeTruthy();
   expect(onChange).not.toHaveBeenCalled();
 });
@@ -155,19 +159,19 @@ test('<DateField> - renders a wrapper with unknown props', () => {
     wrapper
       .find('div')
       .at(0)
-      .prop('data-x')
+      .prop('data-x'),
   ).toBe('x');
   expect(
     wrapper
       .find('div')
       .at(0)
-      .prop('data-y')
+      .prop('data-y'),
   ).toBe('y');
   expect(
     wrapper
       .find('div')
       .at(0)
-      .prop('data-z')
+      .prop('data-z'),
   ).toBe('z');
 });
 
@@ -182,7 +186,7 @@ test('<DateField> - renders correct error text (specified)', () => {
     wrapper
       .children()
       .last()
-      .text()
+      .text(),
   ).toBe('Error');
 });
 
@@ -202,7 +206,7 @@ test('<DateField> - renders correct error text (showInlineError=false)', () => {
     wrapper
       .children()
       .last()
-      .text()
+      .text(),
   ).not.toBe('Error');
 });
 

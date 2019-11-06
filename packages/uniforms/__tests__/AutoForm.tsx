@@ -16,7 +16,7 @@ describe('AutoForm', () => {
     getDefinition: () => ({ type: String, defaultValue: '' }),
     messageForError: () => {},
     objectKeys: () => ['a', 'b', 'c'],
-    validator: () => validator
+    validator: () => validator,
   });
 
   beforeEach(() => {
@@ -32,7 +32,7 @@ describe('AutoForm', () => {
         onChange={onChange}
         onChangeModel={onChangeModel}
         schema={schema}
-      />
+      />,
     );
 
     it('updates', () => {
@@ -67,7 +67,7 @@ describe('AutoForm', () => {
           schema={schema}
           autoField={Field}
           model={model}
-        />
+        />,
       );
 
       expect(onChange).toHaveBeenCalledTimes(2);
@@ -77,7 +77,7 @@ describe('AutoForm', () => {
 
     it('skips `onSubmit` until rendered (`autosave` = true)', async () => {
       const wrapper = mount(
-        <AutoForm onSubmit={onSubmit} schema={schema} autosave />
+        <AutoForm onSubmit={onSubmit} schema={schema} autosave />,
       );
 
       expect(onSubmit).not.toBeCalled();
@@ -101,27 +101,27 @@ describe('AutoForm', () => {
         schema={schema}
         autosave
         model={intialModel}
-      />
+      />,
     );
 
     it('reset `model`', () => {
       wrapper.instance().reset();
       expect(wrapper.instance().getChildContext().uniforms.model).toEqual(
-        intialModel
+        intialModel,
       );
     });
 
     it('resets state `changedMap`', () => {
       wrapper.instance().reset();
       expect(
-        wrapper.instance().getChildContext().uniforms.state.changedMap
+        wrapper.instance().getChildContext().uniforms.state.changedMap,
       ).toEqual({});
     });
 
     it('resets state `changed`', () => {
       wrapper.instance().reset();
       expect(
-        wrapper.instance().getChildContext().uniforms.state.changed
+        wrapper.instance().getChildContext().uniforms.state.changed,
       ).toEqual(false);
     });
   });

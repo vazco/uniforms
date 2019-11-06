@@ -20,7 +20,7 @@ const Date = props =>
     props,
     <input
       className={classnames(props.inputClassName, 'form-control', {
-        'is-invalid': props.error
+        'is-invalid': props.error,
       })}
       disabled={props.disabled}
       id={props.id}
@@ -32,6 +32,6 @@ const Date = props =>
       ref={props.inputRef}
       type="datetime-local"
       value={dateFormat(props.value)}
-    />
+    />,
   );
 export default connectField(Date);

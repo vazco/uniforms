@@ -34,7 +34,7 @@ describe('BaseField', () => {
     label: true,
     disabled: false,
     placeholder: true,
-    showInlineError: true
+    showInlineError: true,
   };
 
   const schema = new SimpleSchemaBridge({
@@ -58,7 +58,7 @@ describe('BaseField', () => {
         k: { type: Array },
         'k.$': { type: String },
         l: { type: String, uniforms: { label: false } },
-        m: { type: String, uniforms: { placeholder: false } }
+        m: { type: String, uniforms: { placeholder: false } },
       }[name];
     },
 
@@ -70,16 +70,16 @@ describe('BaseField', () => {
       return (
         {
           a: ['b'],
-          'a.b': ['c']
+          'a.b': ['c'],
         }[name] || []
       );
     },
 
-    validator() {}
+    validator() {},
   });
 
   const _context = context => ({
-    context: { uniforms: { ...reactContextBase, ...context } }
+    context: { uniforms: { ...reactContextBase, ...context } },
   });
   const reactContextBase = {
     error: error1,
@@ -89,7 +89,7 @@ describe('BaseField', () => {
     schema,
     state,
     onChange,
-    onSubmit() {}
+    onSubmit() {},
   };
   const reactContext1 = _context({});
   const reactContext2 = _context({ error: error2 });
@@ -97,11 +97,11 @@ describe('BaseField', () => {
   const reactContext4 = _context({ name: ['a'] });
   const reactContext5 = _context({ schema: Object.create(schema) });
   const reactContext6 = _context({
-    state: { ...reactContextBase.state, changedMap: { a: {} } }
+    state: { ...reactContextBase.state, changedMap: { a: {} } },
   });
   const reactContext7 = _context({ model: { a: { b: { c: 'example 2' } } } });
   const reactContext8 = _context({
-    state: { ...reactContextBase.state, disabled: true }
+    state: { ...reactContextBase.state, disabled: true },
   });
 
   afterEach(() => {
@@ -129,7 +129,7 @@ describe('BaseField', () => {
       expect(context.uniforms).toHaveProperty('name', expect.any(Array));
       expect(context.uniforms).toHaveProperty(
         'name',
-        expect.objectContaining({ 0: 'a' })
+        expect.objectContaining({ 0: 'a' }),
       );
     });
 
@@ -184,7 +184,7 @@ describe('BaseField', () => {
           <TestField name="c" />
         </TestField>
       </TestField>,
-      reactContext1
+      reactContext1,
     );
 
     const props = wrapper
@@ -206,7 +206,7 @@ describe('BaseField', () => {
         wrapper
           .find(TestField)
           .first()
-          .props().id
+          .props().id,
       );
     });
   });
@@ -298,7 +298,7 @@ describe('BaseField', () => {
 
       expect(() => mount(<TestField name="field" />, reactContext1)).toThrow(
         Error,
-        /Field not found in schema: "field"/
+        /Field not found in schema: "field"/,
       );
 
       spy.mockRestore();
@@ -329,7 +329,7 @@ describe('BaseField', () => {
     it('have correct `label` (falsy value)', () => {
       const wrapper = mount(
         <TestField name="a" label={false} />,
-        reactContext1
+        reactContext1,
       );
 
       expect(wrapper.find(PropsComponent).props()).toHaveProperty('label', '');
@@ -346,7 +346,7 @@ describe('BaseField', () => {
 
       expect(wrapper.find(PropsComponent).props()).toHaveProperty(
         'label',
-        null
+        null,
       );
     });
 
@@ -363,7 +363,7 @@ describe('BaseField', () => {
 
       expect(wrapper.find(PropsComponent).props()).toHaveProperty(
         'placeholder',
-        'a'
+        'a',
       );
     });
 
@@ -372,19 +372,19 @@ describe('BaseField', () => {
 
       expect(wrapper.find(PropsComponent).props()).toHaveProperty(
         'placeholder',
-        ''
+        '',
       );
     });
 
     it('have correct `placeholder` (falsy value)', () => {
       const wrapper = mount(
         <TestField name="a" placeholder={false} />,
-        reactContext1
+        reactContext1,
       );
 
       expect(wrapper.find(PropsComponent).props()).toHaveProperty(
         'placeholder',
-        ''
+        '',
       );
     });
 
@@ -393,19 +393,19 @@ describe('BaseField', () => {
 
       expect(wrapper.find(PropsComponent).props()).toHaveProperty(
         'placeholder',
-        ''
+        '',
       );
     });
 
     it('have correct `placeholder` (string)', () => {
       const wrapper = mount(
         <TestField name="a" placeholder="A" />,
-        reactContext1
+        reactContext1,
       );
 
       expect(wrapper.find(PropsComponent).props()).toHaveProperty(
         'placeholder',
-        'A'
+        'A',
       );
     });
   });
@@ -417,7 +417,7 @@ describe('BaseField', () => {
         .mockImplementation(() => {});
 
       expect(() => mount(<TestField name="a" />)).toThrow(
-        '<TestField /> must be rendered within a form.'
+        '<TestField /> must be rendered within a form.',
       );
 
       spy.mockRestore();
@@ -559,7 +559,7 @@ describe('BaseField', () => {
         'placeholder',
         'required',
         'showInlineError',
-        'value'
+        'value',
       ].forEach(prop => expect(props2).toHaveProperty(prop, props1[prop]));
     });
 

@@ -14,14 +14,14 @@ const Bootstrap3 = (parent: any): any =>
       grid: PropTypes.oneOfType([
         PropTypes.number,
         PropTypes.object,
-        PropTypes.string
-      ])
+        PropTypes.string,
+      ]),
     };
 
     getChildContextState() {
       return {
         ...super.getChildContextState(),
-        grid: this.props.grid
+        grid: this.props.grid,
       };
     }
 
@@ -39,8 +39,8 @@ const Bootstrap3 = (parent: any): any =>
         className: classnames(
           'form',
           { error, 'form-horizontal': grid },
-          className
-        )
+          className,
+        ),
       };
     }
   };

@@ -17,7 +17,7 @@ describe('connectField', () => {
     label: true,
     disabled: false,
     placeholder: false,
-    showInlineError: true
+    showInlineError: true,
   };
 
   const schema = new SimpleSchemaBridge({
@@ -25,7 +25,7 @@ describe('connectField', () => {
       return {
         field: { type: Object, label: 'Field' },
         'field.subfield': { type: Number, label: 'Subfield' },
-        another: { type: String, optional: true }
+        another: { type: String, optional: true },
       }[name];
     },
 
@@ -34,11 +34,11 @@ describe('connectField', () => {
     objectKeys(name) {
       return {
         field: ['subfield'],
-        'field.subfield': []
+        'field.subfield': [],
       }[name];
     },
 
-    validator() {}
+    validator() {},
   });
 
   const reactContext = {
@@ -51,9 +51,9 @@ describe('connectField', () => {
         schema,
         state,
         onChange,
-        onSubmit() {}
-      }
-    }
+        onSubmit() {},
+      },
+    },
   };
 
   const Test = jest.fn(() => nothing);
@@ -97,10 +97,10 @@ describe('connectField', () => {
           expect.objectContaining({
             parent: expect.objectContaining({
               label: 'Field',
-              field: expect.objectContaining({ type: Object })
-            })
-          })
-        ])
+              field: expect.objectContaining({ type: Object }),
+            }),
+          }),
+        ]),
       );
     });
 
@@ -122,8 +122,8 @@ describe('connectField', () => {
       wrapper.setContext({
         uniforms: {
           ...reactContext.context.uniforms,
-          model: { field: { field: 1 } }
-        }
+          model: { field: { field: 1 } },
+        },
       });
 
       expect(Test).toHaveBeenCalledTimes(2);
@@ -137,9 +137,9 @@ describe('connectField', () => {
       expect(Test.mock.calls[0]).not.toEqual(
         expect.arrayContaining([
           expect.objectContaining({
-            parent: { label: 'Field', field: { type: Object } }
-          })
-        ])
+            parent: { label: 'Field', field: { type: Object } },
+          }),
+        ]),
       );
     });
   });
@@ -147,7 +147,7 @@ describe('connectField', () => {
   describe('when called with `includeInChain`', () => {
     it('is in chain (true)', () => {
       const Field1 = connectField(props => props.children, {
-        includeInChain: true
+        includeInChain: true,
       });
       const Field2 = connectField(Test);
 
@@ -155,19 +155,19 @@ describe('connectField', () => {
         <Field1 name="field">
           <Field2 name="subfield" />
         </Field1>,
-        reactContext
+        reactContext,
       );
 
       expect(Test.mock.calls[0]).toEqual(
         expect.arrayContaining([
-          expect.objectContaining({ name: 'field.subfield' })
-        ])
+          expect.objectContaining({ name: 'field.subfield' }),
+        ]),
       );
     });
 
     it('is not in chain (false)', () => {
       const Field1 = connectField(props => props.children, {
-        includeInChain: false
+        includeInChain: false,
       });
       const Field2 = connectField(Test);
 
@@ -175,13 +175,13 @@ describe('connectField', () => {
         <Field1 name="field">
           <Field2 name="field.subfield" />
         </Field1>,
-        reactContext
+        reactContext,
       );
 
       expect(Test.mock.calls[0]).toEqual(
         expect.arrayContaining([
-          expect.objectContaining({ name: 'field.subfield' })
-        ])
+          expect.objectContaining({ name: 'field.subfield' }),
+        ]),
       );
     });
   });
@@ -190,7 +190,7 @@ describe('connectField', () => {
     it('includes default value (true)', () => {
       const Field = connectField(Test, {
         initialValue: true,
-        ensureValue: false
+        ensureValue: false,
       });
 
       mount(<Field name="field" />, reactContext);

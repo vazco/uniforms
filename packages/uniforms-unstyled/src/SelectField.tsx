@@ -18,7 +18,7 @@ const renderCheckboxes = ({
   name,
   onChange,
   transform,
-  value
+  value,
 }) =>
   allowedValues.map(item => (
     <div key={item}>
@@ -48,7 +48,7 @@ const renderSelect = ({
   placeholder,
   required,
   transform,
-  value
+  value,
 }) => (
   <select
     disabled={disabled}
@@ -103,7 +103,7 @@ const Select = ({
           onChange,
           transform,
           value,
-          fieldType
+          fieldType,
         })
       : renderSelect({
           allowedValues,
@@ -116,7 +116,7 @@ const Select = ({
           inputRef,
           label,
           placeholder,
-          required
+          required,
         })}
   </div>
 );

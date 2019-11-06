@@ -12,7 +12,7 @@ const Radio = props =>
         key={item}
         className={classnames(props.inputClassName, 'form-check', 'radio', {
           'text-danger': props.error,
-          'custom-control-inline': props.inline
+          'custom-control-inline': props.inline,
         })}
       >
         <label htmlFor={`${props.id}-${item}`} className="form-check-label">
@@ -28,6 +28,6 @@ const Radio = props =>
           {props.transform ? props.transform(item) : item}
         </label>
       </div>
-    ))
+    )),
   );
 export default connectField(Radio);

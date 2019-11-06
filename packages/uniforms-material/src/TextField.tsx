@@ -34,7 +34,7 @@ const Text = ({
 Text.defaultProps = {
   fullWidth: true,
   margin: 'dense',
-  type: 'text'
+  type: 'text',
 };
 
 export default connectField(Text);

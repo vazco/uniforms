@@ -17,7 +17,7 @@ function wrap(
     margin,
     required,
     showInlineError,
-    variant
+    variant,
   }: any,
   ...children
 ) {
@@ -29,14 +29,14 @@ function wrap(
     fullWidth: !!fullWidth,
     margin,
     required,
-    variant
+    variant,
   };
 
   return React.createElement(
     FormControl,
     props,
     ...children,
-    !!formHelperText && <FormHelperText>{formHelperText}</FormHelperText>
+    !!formHelperText && <FormHelperText>{formHelperText}</FormHelperText>,
   );
 }
 

@@ -112,7 +112,7 @@ test('<NumField> - renders a TextField with correct value (model)', () => {
   const element = <NumField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Number } }, { model: { x: 1 }, onChange })
+    createContext({ x: { type: Number } }, { model: { x: 1 }, onChange }),
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);
@@ -128,19 +128,19 @@ test('<NumField> - renders a TextField with correct value (model)', () => {
     { value: 2 },
     { value: 2 },
     { value: 1, decimal: false },
-    { value: 1, decimal: false }
+    { value: 1, decimal: false },
   ].forEach(({ decimal = true, value }) => {
     const valueInput = expectedValueTransform(value);
 
     wrapper.setProps({ decimal });
 
     expect(
-      wrapper.find('input').simulate('change', { target: { value: '' } })
+      wrapper.find('input').simulate('change', { target: { value: '' } }),
     ).toBeTruthy();
     expect(
       wrapper
         .find('input')
-        .simulate('change', { target: { value: valueInput } })
+        .simulate('change', { target: { value: valueInput } }),
     ).toBeTruthy();
     expect(onChange).toHaveBeenLastCalledWith('x', value);
 
@@ -166,7 +166,7 @@ test('<NumField> - renders a TextField which correctly reacts on change', () => 
   const element = <NumField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Number } }, { onChange })
+    createContext({ x: { type: Number } }, { onChange }),
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);
@@ -183,7 +183,7 @@ test('<NumField> - renders a TextField which correctly reacts on change (decimal
   const element = <NumField name="x" decimal />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Number } }, { onChange })
+    createContext({ x: { type: Number } }, { onChange }),
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);
@@ -200,7 +200,7 @@ test('<NumField> - renders a TextField which correctly reacts on change (decimal
   const element = <NumField name="x" decimal={false} />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Number } }, { onChange })
+    createContext({ x: { type: Number } }, { onChange }),
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);
@@ -217,7 +217,7 @@ test('<NumField> - renders a TextField which correctly reacts on change (empty)'
   const element = <NumField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Number } }, { onChange })
+    createContext({ x: { type: Number } }, { onChange }),
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);
@@ -234,7 +234,7 @@ test('<NumField> - renders a TextField which correctly reacts on change (same va
   const element = <NumField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Number } }, { model: { x: 1 }, onChange })
+    createContext({ x: { type: Number } }, { model: { x: 1 }, onChange }),
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);
@@ -251,7 +251,7 @@ test('<NumField> - renders a TextField which correctly reacts on change (zero)',
   const element = <NumField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Number } }, { onChange })
+    createContext({ x: { type: Number } }, { onChange }),
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);

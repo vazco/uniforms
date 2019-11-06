@@ -23,7 +23,7 @@ describe('Bridge', () => {
     'getProps',
     'getSubfields',
     'getType',
-    'getValidator'
+    'getValidator',
   ].forEach(method => {
     describe(`#${method}`, () => {
       it('throws an unimplemented error', () => {

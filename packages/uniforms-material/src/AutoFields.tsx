@@ -5,14 +5,14 @@ import AutoField from './AutoField';
 
 const AutoFields = (
   { autoField, element, fields, omitFields, ...props },
-  { uniforms: { schema } }
+  { uniforms: { schema } },
 ) =>
   createElement(
     element,
     props,
     (fields || schema.getSubfields())
       .filter(field => omitFields.indexOf(field) === -1)
-      .map(field => createElement(autoField, { key: field, name: field }))
+      .map(field => createElement(autoField, { key: field, name: field })),
   );
 AutoFields.contextTypes = AutoField.contextTypes;
 
@@ -21,13 +21,13 @@ AutoFields.propTypes = {
   element: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
 
   fields: PropTypes.arrayOf(PropTypes.string),
-  omitFields: PropTypes.arrayOf(PropTypes.string)
+  omitFields: PropTypes.arrayOf(PropTypes.string),
 };
 
 AutoFields.defaultProps = {
   autoField: AutoField,
   element: 'div',
-  omitFields: []
+  omitFields: [],
 };
 
 export default AutoFields;

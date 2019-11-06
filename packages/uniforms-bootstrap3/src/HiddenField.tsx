@@ -10,7 +10,7 @@ export default class HiddenField extends BaseField {
 
     this.options = {
       ensureValue: true,
-      overrideValue: true
+      overrideValue: true,
     };
   }
 

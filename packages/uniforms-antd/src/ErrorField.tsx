@@ -19,8 +19,8 @@ Error.defaultProps = {
     border: '1px solid rgb(255, 85, 0)',
     borderRadius: '7px',
     margin: '20px 0px',
-    padding: '10px'
-  }
+    padding: '10px',
+  },
 };
 
 export default connectField(Error, { initialValue: false });

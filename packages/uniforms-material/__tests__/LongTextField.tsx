@@ -64,7 +64,7 @@ test('<LongTextField> - renders a TextField with correct value (model)', () => {
   const element = <LongTextField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { model: { x: 'y' } })
+    createContext({ x: { type: String } }, { model: { x: 'y' } }),
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);
@@ -85,7 +85,7 @@ test('<LongTextField> - renders a TextField which correctly reacts on change', (
   const element = <LongTextField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { onChange })
+    createContext({ x: { type: String } }, { onChange }),
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);
@@ -102,7 +102,7 @@ test('<LongTextField> - renders a TextField which correctly reacts on change (em
   const element = <LongTextField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { onChange })
+    createContext({ x: { type: String } }, { onChange }),
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);
@@ -119,7 +119,7 @@ test('<LongTextField> - renders a TextField which correctly reacts on change (sa
   const element = <LongTextField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { model: { x: 'y' }, onChange })
+    createContext({ x: { type: String } }, { model: { x: 'y' }, onChange }),
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);

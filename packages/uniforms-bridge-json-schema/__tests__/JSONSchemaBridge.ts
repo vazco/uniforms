@@ -13,23 +13,23 @@ describe('JSONSchemaBridge', () => {
             options: [
               { label: 'Alabama', value: 'AL' },
               { label: 'Alaska', value: 'AK' },
-              { label: 'Arkansas', value: 'AR' }
-            ]
+              { label: 'Arkansas', value: 'AR' },
+            ],
           },
-          street: { type: 'string' }
+          street: { type: 'string' },
         },
-        required: ['street', 'city', 'state']
+        required: ['street', 'city', 'state'],
       },
       personalData: {
         type: 'object',
         properties: {
           firstName: { $ref: '#/definitions/firstName' },
-          lastName: { $ref: '#/definitions/firstName' }
+          lastName: { $ref: '#/definitions/firstName' },
         },
-        required: ['lastName']
+        required: ['lastName'],
       },
       firstName: { type: 'string', default: 'John' },
-      lastName: { type: 'string' }
+      lastName: { type: 'string' },
     },
     type: 'object',
     properties: {
@@ -38,25 +38,25 @@ describe('JSONSchemaBridge', () => {
       custom: { type: 'custom' },
       dateOfBirth: {
         type: 'string',
-        format: 'date-time'
+        format: 'date-time',
       },
       dateOfBirthTuple: {
         type: 'array',
-        items: [{ type: 'integer' }, { type: 'string' }, { type: 'integer' }]
+        items: [{ type: 'integer' }, { type: 'string' }, { type: 'integer' }],
       },
       email: {
         type: 'object',
         properties: {
           work: { type: 'string' },
-          other: { type: 'string' }
+          other: { type: 'string' },
         },
-        required: ['work']
+        required: ['work'],
       },
       friends: {
         type: 'array',
         items: {
-          $ref: '#/definitions/personalData'
-        }
+          $ref: '#/definitions/personalData',
+        },
       },
       hasAJob: { type: 'boolean', title: 'Currently Employed' },
       invalid: { type: 'null' },
@@ -66,19 +66,19 @@ describe('JSONSchemaBridge', () => {
         options: {
           low: 6000,
           medium: 12000,
-          height: 18000
-        }
+          height: 18000,
+        },
       },
       shippingAddress: {
         allOf: [
           { $ref: '#/definitions/address' },
           {
             properties: {
-              type: { enum: ['residential', 'business'] }
+              type: { enum: ['residential', 'business'] },
             },
-            required: ['type']
-          }
-        ]
+            required: ['type'],
+          },
+        ],
       },
       complexNames: {
         type: 'object',
@@ -98,21 +98,21 @@ describe('JSONSchemaBridge', () => {
                         properties: {
                           "f/'g": { type: 'string', pattern: '[0-9]{5}' },
                           'h/"i': { type: 'string', pattern: '[0-9]{5}' },
-                          'j\'/"k': { type: 'string', pattern: '[0-9]{5}' }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+                          'j\'/"k': { type: 'string', pattern: '[0-9]{5}' },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
       },
       password: { type: 'string', uniforms: { type: 'password' } },
-      passwordNumeric: { type: 'number', uniforms: { type: 'password' } }
+      passwordNumeric: { type: 'number', uniforms: { type: 'password' } },
     },
-    required: ['dateOfBirth']
+    required: ['dateOfBirth'],
   };
 
   const validator = jest.fn();
@@ -126,12 +126,12 @@ describe('JSONSchemaBridge', () => {
     it('sets schema correctly when has top level $ref', () => {
       const localSchema = {
         definitions: schema.definitions,
-        $ref: '#/definitions/personalData'
+        $ref: '#/definitions/personalData',
       };
       const localBridge = new JSONSchemaBridge(localSchema, validator);
       expect(localBridge.schema).toEqual({
         ...localSchema,
-        ...localSchema.definitions.personalData
+        ...localSchema.definitions.personalData,
       });
     });
 
@@ -175,9 +175,9 @@ describe('JSONSchemaBridge', () => {
             keyword: 'required',
             message: "should have required property 'x'",
             params: { missingProperty: 'x' },
-            schemaPath: '#/required'
-          }
-        ]
+            schemaPath: '#/required',
+          },
+        ],
       };
 
       expect(bridge.getError('x', error)).toEqual(error.details[0]);
@@ -192,9 +192,9 @@ describe('JSONSchemaBridge', () => {
             keyword: 'required',
             message: "should have required property 'y'",
             params: { missingProperty: 'y' },
-            schemaPath: '#/properties/x/required'
-          }
-        ]
+            schemaPath: '#/properties/x/required',
+          },
+        ],
       };
 
       expect(bridge.getError('x.x', error)).toEqual(undefined);
@@ -206,7 +206,7 @@ describe('JSONSchemaBridge', () => {
       const pairs = [
         ["a.0.b.c-d.0.f/'g", ".complexNames.a[0].b['c-d'][0]['f/\\'g']"],
         ['a.0.b.c-d.0.h/"i', ".complexNames.a[0].b['c-d'][0]['h/\"i']"],
-        ['a.0.b.c-d.0.j\'/"k~', ".complexNames.a[0].b['c-d'][0]['j\\'/\"k~']"]
+        ['a.0.b.c-d.0.j\'/"k~', ".complexNames.a[0].b['c-d'][0]['j\\'/\"k~']"],
       ];
 
       pairs.forEach(([name, dataPath]) => {
@@ -219,7 +219,7 @@ describe('JSONSchemaBridge', () => {
       const pairs = [
         ["a.0.b.c-d.0.f/'g", "/complexNames/a/0/b/c-d/0/f~1'g"],
         ['a.0.b.c-d.0.h/"i', '/complexNames/a/0/b/c-d/0/h~1"i'],
-        ['a.0.b.c-d.0.j\'/"k~', '/complexNames/a/0/b/c-d/0/j\'~1"k~0']
+        ['a.0.b.c-d.0.j\'/"k~', '/complexNames/a/0/b/c-d/0/j\'~1"k~0'],
       ];
 
       pairs.forEach(([name, dataPath]) => {
@@ -242,13 +242,13 @@ describe('JSONSchemaBridge', () => {
     it('works with correct error', () => {
       expect(
         bridge.getErrorMessage('age', {
-          details: [{ dataPath: '.age', message: 'Zing!' }]
-        })
+          details: [{ dataPath: '.age', message: 'Zing!' }],
+        }),
       ).toBe('Zing!');
       expect(
         bridge.getErrorMessage('age', {
-          details: [{ dataPath: '.field', message: 'Ignore!' }]
-        })
+          details: [{ dataPath: '.field', message: 'Ignore!' }],
+        }),
       ).not.toBeTruthy();
     });
   });
@@ -265,20 +265,20 @@ describe('JSONSchemaBridge', () => {
 
     it('works with Error', () => {
       expect(bridge.getErrorMessages(new Error('correct'))).toEqual([
-        'correct'
+        'correct',
       ]);
     });
 
     it('works with ValidationError', () => {
       expect(
         bridge.getErrorMessages({
-          details: [{ dataPath: '.age', message: 'Zing!' }]
-        })
+          details: [{ dataPath: '.age', message: 'Zing!' }],
+        }),
       ).toEqual(['Zing!']);
       expect(
         bridge.getErrorMessages({
-          details: [{ dataPath: '.field', message: 'Ignore!' }]
-        })
+          details: [{ dataPath: '.field', message: 'Ignore!' }],
+        }),
       ).toEqual(['Ignore!']);
     });
   });
@@ -288,7 +288,7 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getField('age')).toEqual({
         type: 'integer',
         default: 24,
-        uniforms: { component: 'span' }
+        uniforms: { component: 'span' },
       });
     });
 
@@ -301,13 +301,13 @@ describe('JSONSchemaBridge', () => {
             options: [
               { label: 'Alabama', value: 'AL' },
               { label: 'Alaska', value: 'AK' },
-              { label: 'Arkansas', value: 'AR' }
-            ]
+              { label: 'Arkansas', value: 'AR' },
+            ],
           },
-          street: { type: 'string' }
+          street: { type: 'string' },
         }),
         required: ['street', 'city', 'state'],
-        type: 'object'
+        type: 'object',
       });
     });
 
@@ -318,7 +318,7 @@ describe('JSONSchemaBridge', () => {
     it('returns correct definition (nested with $ref)', () => {
       expect(bridge.getField('personalData.firstName')).toEqual({
         default: 'John',
-        type: 'string'
+        type: 'string',
       });
     });
 
@@ -328,37 +328,37 @@ describe('JSONSchemaBridge', () => {
 
     it('returns correct definition (array flat $ref)', () => {
       expect(bridge.getField('friends.$')).toEqual(
-        expect.objectContaining({ type: expect.any(String) })
+        expect.objectContaining({ type: expect.any(String) }),
       );
     });
 
     it('returns correct definition (array flat $ref, nested property)', () => {
       expect(bridge.getField('friends.$.firstName')).toEqual({
         default: 'John',
-        type: 'string'
+        type: 'string',
       });
     });
 
     it('returns correct definition when schema has top level $ref', () => {
       const localBridge = new JSONSchemaBridge(
         { definitions: schema.definitions, $ref: '#/definitions/personalData' },
-        validator
+        validator,
       );
 
       expect(localBridge.getField('firstName')).toEqual({
         default: 'John',
-        type: 'string'
+        type: 'string',
       });
     });
 
     it('throws when resolving field schema is not possible', () => {
       const localBridge = new JSONSchemaBridge(
         { definitions: schema.definitions, $ref: '#/definitions/personalData' },
-        validator
+        validator,
       );
 
       expect(() => localBridge.getField('invalid')).toThrow(
-        /Field not found in schema/
+        /Field not found in schema/,
       );
     });
   });
@@ -367,10 +367,10 @@ describe('JSONSchemaBridge', () => {
     it('works with arrays', () => {
       expect(bridge.getInitialValue('friends')).toEqual([]);
       expect(bridge.getInitialValue('friends', { initialCount: 1 })).toEqual([
-        {}
+        {},
       ]);
       expect(
-        bridge.getInitialValue('friends.0.firstName', { initialCount: 1 })
+        bridge.getInitialValue('friends.0.firstName', { initialCount: 1 }),
       ).toBe('John');
     });
 
@@ -396,17 +396,17 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getProps('shippingAddress.type')).toEqual({
         allowedValues: ['residential', 'business'],
         label: 'Type',
-        required: true
+        required: true,
       });
     });
 
     it('works with allowedValues from props', () => {
       expect(
-        bridge.getProps('shippingAddress.type', { allowedValues: [1] })
+        bridge.getProps('shippingAddress.type', { allowedValues: [1] }),
       ).toEqual({
         allowedValues: ['residential', 'business'],
         label: 'Type',
-        required: true
+        required: true,
       });
     });
 
@@ -414,21 +414,21 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getProps('age')).toEqual({
         component: 'span',
         label: 'Age',
-        required: false
+        required: false,
       });
     });
 
     it('works with label (custom)', () => {
       expect(bridge.getProps('dateOfBirth', { label: 'Death' })).toEqual({
         label: 'Date of birth',
-        required: true
+        required: true,
       });
     });
 
     it('works with label (true)', () => {
       expect(bridge.getProps('dateOfBirth', { label: true })).toEqual({
         label: 'Date of birth',
-        required: true
+        required: true,
       });
     });
 
@@ -438,56 +438,56 @@ describe('JSONSchemaBridge', () => {
         label: 'Currently Employed',
         options: undefined,
         placeholder: undefined,
-        required: false
+        required: false,
       });
     });
 
     it('works with label (falsy)', () => {
       expect(bridge.getProps('billingAddress.city')).toEqual({
         label: '',
-        required: false
+        required: false,
       });
 
       expect(bridge.getProps('dateOfBirth', { label: null })).toEqual({
         label: 'Date of birth',
-        required: true
+        required: true,
       });
     });
 
     it('works with placeholder (custom)', () => {
       expect(bridge.getProps('email.work', { placeholder: 'Email' })).toEqual({
         label: 'Work',
-        required: true
+        required: true,
       });
     });
 
     it('works with placeholder (true)', () => {
       expect(bridge.getProps('email.work', { placeholder: true })).toEqual({
         label: 'Work',
-        required: true
+        required: true,
       });
     });
 
     it('works with placeholder (falsy)', () => {
       expect(bridge.getProps('email.work', { placeholder: null })).toEqual({
         label: 'Work',
-        required: true
+        required: true,
       });
     });
 
     it('works with placeholder (label falsy)', () => {
       expect(
-        bridge.getProps('email.work', { label: null, placeholder: true })
+        bridge.getProps('email.work', { label: null, placeholder: true }),
       ).toEqual({
         label: 'Work',
-        required: true
+        required: true,
       });
 
       expect(
-        bridge.getProps('email.work', { label: false, placeholder: true })
+        bridge.getProps('email.work', { label: false, placeholder: true }),
       ).toEqual({
         label: 'Work',
-        required: true
+        required: true,
       });
     });
 
@@ -498,22 +498,22 @@ describe('JSONSchemaBridge', () => {
         label: 'Salary',
         options: expect.anything(),
         required: false,
-        transform: expect.anything()
+        transform: expect.anything(),
       });
     });
 
     it('works with options (array)', () => {
       expect(bridge.getProps('billingAddress.state').transform('AL')).toBe(
-        'Alabama'
+        'Alabama',
       );
       expect(bridge.getProps('billingAddress.state').transform('AK')).toBe(
-        'Alaska'
+        'Alaska',
       );
       expect(bridge.getProps('billingAddress.state').allowedValues[0]).toBe(
-        'AL'
+        'AL',
       );
       expect(bridge.getProps('billingAddress.state').allowedValues[1]).toBe(
-        'AK'
+        'AK',
       );
     });
 
@@ -536,14 +536,14 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getProps('password')).toEqual({
         label: 'Password',
         required: false,
-        type: 'password'
+        type: 'password',
       });
 
       expect(bridge.getProps('passwordNumeric')).toEqual({
         label: 'Password numeric',
         required: false,
         decimal: true,
-        type: 'password'
+        type: 'password',
       });
     });
 
@@ -551,8 +551,8 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getProps('personalData.firstName', { x: 1, y: 1 })).toEqual(
         {
           label: 'First name',
-          required: false
-        }
+          required: false,
+        },
       );
     });
   });
@@ -574,7 +574,7 @@ describe('JSONSchemaBridge', () => {
         'shippingAddress',
         'complexNames',
         'password',
-        'passwordNumeric'
+        'passwordNumeric',
       ]);
     });
 
@@ -583,7 +583,7 @@ describe('JSONSchemaBridge', () => {
         'city',
         'state',
         'street',
-        'type'
+        'type',
       ]);
     });
 
@@ -595,7 +595,7 @@ describe('JSONSchemaBridge', () => {
     it('works when schema has top level $ref', () => {
       const localBridge = new JSONSchemaBridge(
         { definitions: schema.definitions, $ref: '#/definitions/address' },
-        validator
+        validator,
       );
 
       expect(localBridge.getSubfields()).toEqual(['city', 'state', 'street']);
@@ -604,7 +604,7 @@ describe('JSONSchemaBridge', () => {
     it('works on top level when schema does not have properties', () => {
       const localBridge = new JSONSchemaBridge(
         { definitions: schema.definitions, $ref: '#/definitions/lastName' },
-        validator
+        validator,
       );
 
       expect(localBridge.getSubfields()).toEqual([]);
@@ -630,7 +630,7 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getType('friends.$.lastName')).toBe(String);
       expect(bridge.getType('hasAJob')).toBe(Boolean);
       expect(() => bridge.getType('invalid')).toThrow(
-        /can not be represented as a type null/
+        /can not be represented as a type null/,
       );
       expect(bridge.getType('personalData')).toBe(Object);
       expect(bridge.getType('salary')).toBe(Number);

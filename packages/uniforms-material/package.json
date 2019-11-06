@@ -30,7 +30,7 @@
     "react": "^16.0.0 || ^15.0.0 || ^0.14.0"
   },
   "devDependencies": {
-    "@material-ui/icons": "4.2.0"
+    "@material-ui/icons": "4.5.1"
   },
   "dependencies": {
     "invariant": "^2.0.0",

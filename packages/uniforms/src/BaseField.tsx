@@ -30,7 +30,7 @@ const flowingProp = (prop: any, schema: any, state: any, fallback: any) => {
 };
 
 export default class BaseField extends Component {
-  static displayName: string = 'Field';
+  static displayName = 'Field';
 
   static propTypes: any = {
     id: PropTypes.string,
@@ -41,9 +41,9 @@ export default class BaseField extends Component {
     label: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.string,
-      PropTypes.node
+      PropTypes.node,
     ]),
-    placeholder: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
+    placeholder: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   };
 
   static contextTypes = BaseForm.childContextTypes;
@@ -57,14 +57,14 @@ export default class BaseField extends Component {
       this.context.uniforms,
       '<%s /> must be rendered within a form.',
       // @ts-ignore
-      this.constructor.displayName
+      this.constructor.displayName,
     );
 
     this.options = {
       ensureValue: true,
       explicitInitialValue: false,
       includeParent: false,
-      overrideValue: false
+      overrideValue: false,
     };
 
     this.randomId = this.context.uniforms.randomId();
@@ -84,8 +84,8 @@ export default class BaseField extends Component {
         schema: this.getChildContextSchema(),
         onChange: this.getChildContextOnChange(),
         onSubmit: this.getChildContextOnSubmit(),
-        randomId: this.context.uniforms.randomId
-      }
+        randomId: this.context.uniforms.randomId,
+      },
     };
   }
 
@@ -93,7 +93,7 @@ export default class BaseField extends Component {
   shouldComponentUpdate(
     nextProps: any,
     _: any,
-    { uniforms: nextContext }: { uniforms: any }
+    { uniforms: nextContext }: { uniforms: any },
   ) {
     const prevProps: any = this.props;
     const prevContext = this.context.uniforms;
@@ -121,14 +121,14 @@ export default class BaseField extends Component {
     }
 
     // Fields which are using parent props, need to be updated when parent value change
-    if (this.options.includeParent && nextName.indexOf('.') !== -1) {
+    if (this.options.includeParent && nextName.includes('.')) {
       const prevParentValue = get(
         prevContext.model,
-        prevName.replace(/(.+)\..+$/, '$1')
+        prevName.replace(/(.+)\..+$/, '$1'),
       );
       const nextParentValue = get(
         nextContext.model,
-        nextName.replace(/(.+)\..+$/, '$1')
+        nextName.replace(/(.+)\..+$/, '$1'),
       );
 
       if (!isEqual(prevParentValue, nextParentValue)) {
@@ -206,7 +206,7 @@ export default class BaseField extends Component {
       label: propagate('label'),
       disabled: propagate('disabled'),
       placeholder: propagate('placeholder'),
-      showInlineError: propagate('showInlineError')
+      showInlineError: propagate('showInlineError'),
     };
   }
 
@@ -249,20 +249,20 @@ export default class BaseField extends Component {
     const parent: any =
       options.includeParent && name.indexOf('.') !== -1
         ? this.getFieldProps(name.replace(/(.+)\..+$/, '$1'), {
-            includeParent: false
+            includeParent: false,
           })
         : null;
     const [label, none] = flowingProp(
       props.label,
       schemaProps.label,
       state.label,
-      ''
+      '',
     );
     const [placeholder] = flowingProp(
       props.placeholder,
       schemaProps.placeholder,
       state.placeholder,
-      label || none
+      label || none,
     );
 
     let value;
@@ -314,14 +314,14 @@ export default class BaseField extends Component {
       // 6. Calculated _special_ field props.
       label,
       name,
-      placeholder
+      placeholder,
     };
   }
 
   findError(name: any) {
     return this.context.uniforms.schema.getError(
       name,
-      this.context.uniforms.error
+      this.context.uniforms.error,
     );
   }
 

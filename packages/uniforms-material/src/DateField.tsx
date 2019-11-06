@@ -49,7 +49,7 @@ const Date = ({
 
 Date.defaultProps = {
   fullWidth: true,
-  margin: 'dense'
+  margin: 'dense',
 };
 
 export default connectField(Date);

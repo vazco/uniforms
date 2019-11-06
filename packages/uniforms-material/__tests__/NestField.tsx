@@ -13,8 +13,8 @@ test('<NestField> - renders an <AutoField> for each field', () => {
     createContext({
       x: { type: Object },
       'x.a': { type: String },
-      'x.b': { type: Number }
-    })
+      'x.b': { type: Number },
+    }),
   );
 
   expect(wrapper.find(AutoField)).toHaveLength(2);
@@ -22,13 +22,13 @@ test('<NestField> - renders an <AutoField> for each field', () => {
     wrapper
       .find(AutoField)
       .at(0)
-      .prop('name')
+      .prop('name'),
   ).toBe('x.a');
   expect(
     wrapper
       .find(AutoField)
       .at(1)
-      .prop('name')
+      .prop('name'),
   ).toBe('x.b');
 });
 
@@ -43,8 +43,8 @@ test('<NestField> - renders custom content if given', () => {
     createContext({
       x: { type: Object },
       'x.a': { type: String },
-      'x.b': { type: Number }
-    })
+      'x.b': { type: Number },
+    }),
   );
 
   expect(wrapper.find(AutoField)).toHaveLength(0);
@@ -59,15 +59,15 @@ test('<NestField> - renders a Subheader', () => {
     createContext({
       x: { type: Object },
       'x.a': { type: String },
-      'x.b': { type: Number }
-    })
+      'x.b': { type: Number },
+    }),
   );
 
   expect(
     wrapper
       .find(FormLabel)
       .at(0)
-      .text()
+      .text(),
   ).toBe('y *');
 });
 
@@ -78,8 +78,8 @@ test('<NestField> - renders a helperText', () => {
     createContext({
       x: { type: Object },
       'x.a': { type: String },
-      'x.b': { type: Number }
-    })
+      'x.b': { type: Number },
+    }),
   );
 
   expect(wrapper.find(FormHelperText)).toHaveLength(1);

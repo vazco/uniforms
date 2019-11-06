@@ -53,7 +53,7 @@ export default class AutoField extends BaseField {
         invariant(
           props.component,
           'Unsupported field type: %s',
-          props.fieldType.toString()
+          props.fieldType.toString(),
         );
       }
     }

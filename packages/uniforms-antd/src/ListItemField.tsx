@@ -12,7 +12,7 @@ const ListItem = (props: any) => (
         marginBottom: '10px',
         marginLeft: '10px',
         marginRight: '6px',
-        width: '20px'
+        width: '20px',
       }}
     >
       <ListDelField className="top aligned" name={props.name} />
@@ -23,7 +23,7 @@ const ListItem = (props: any) => (
         style={{
           borderBottom: '1px solid #DDD',
           height: '20px',
-          marginTop: '-8px'
+          marginTop: '-8px',
         }}
       />
     </div>
@@ -33,8 +33,8 @@ const ListItem = (props: any) => (
         Children.map(props.children, child =>
           React.cloneElement(child, {
             name: joinName(props.name, child.props.name),
-            label: null
-          })
+            label: null,
+          }),
         )
       ) : (
         <AutoField {...props} />
@@ -44,5 +44,5 @@ const ListItem = (props: any) => (
 );
 export default connectField(ListItem, {
   includeInChain: false,
-  includeParent: true
+  includeParent: true,
 });

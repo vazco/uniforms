@@ -35,16 +35,16 @@ const ListAdd = ({
 };
 
 ListAdd.propTypes = {
-  icon: PropTypes.node
+  icon: PropTypes.node,
 };
 
 ListAdd.defaultProps = {
   fullWidth: true,
   icon: '+',
-  margin: 'dense'
+  margin: 'dense',
 };
 
 export default connectField(ListAdd, {
   includeParent: true,
-  initialValue: false
+  initialValue: false,
 });

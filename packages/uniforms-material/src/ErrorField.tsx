@@ -28,7 +28,7 @@ const Error = ({
   );
 Error.defaultProps = {
   fullWidth: true,
-  margin: 'dense'
+  margin: 'dense',
 };
 
 export default connectField(Error, { initialValue: false });

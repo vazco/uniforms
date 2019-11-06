@@ -64,7 +64,7 @@ test('<TextField> - renders a TextField with correct value (model)', () => {
   const element = <TextField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { model: { x: 'y' } })
+    createContext({ x: { type: String } }, { model: { x: 'y' } }),
   );
 
   expect(wrapper.find(TextFieldMaterial)).toHaveLength(1);
@@ -85,12 +85,12 @@ test('<TextField> - renders a TextField which correctly reacts on change', () =>
   const element = <TextField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { onChange })
+    createContext({ x: { type: String } }, { onChange }),
   );
 
   expect(wrapper.find(TextFieldMaterial)).toHaveLength(1);
   expect(
-    wrapper.find('input').simulate('change', { target: { value: 'y' } })
+    wrapper.find('input').simulate('change', { target: { value: 'y' } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', 'y');
 });
@@ -101,12 +101,12 @@ test('<TextField> - renders a TextField which correctly reacts on change (empty)
   const element = <TextField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { onChange })
+    createContext({ x: { type: String } }, { onChange }),
   );
 
   expect(wrapper.find(TextFieldMaterial)).toHaveLength(1);
   expect(
-    wrapper.find('input').simulate('change', { target: { value: '' } })
+    wrapper.find('input').simulate('change', { target: { value: '' } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', '');
 });
@@ -117,12 +117,12 @@ test('<TextField> - renders a TextField which correctly reacts on change (same v
   const element = <TextField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { model: { x: 'y' }, onChange })
+    createContext({ x: { type: String } }, { model: { x: 'y' }, onChange }),
   );
 
   expect(wrapper.find(TextFieldMaterial)).toHaveLength(1);
   expect(
-    wrapper.find('input').simulate('change', { target: { value: 'y' } })
+    wrapper.find('input').simulate('change', { target: { value: 'y' } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', 'y');
 });

@@ -19,7 +19,7 @@ test('<SubmitField> - renders SubmitField with correct disabled state', () => {
     wrapper
       .children()
       .first()
-      .prop('disabled')
+      .prop('disabled'),
   ).toBe(true);
 });
 
@@ -32,6 +32,6 @@ test('<SubmitField> - renders SubmitField with correct disabled state when error
     wrapper
       .children()
       .first()
-      .prop('disabled')
+      .prop('disabled'),
   ).toBe(true);
 });

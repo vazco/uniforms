@@ -15,7 +15,7 @@ const ListDel = ({ disabled, name, parent, ...props }: any) => {
         parent.onChange(
           []
             .concat(parent.value.slice(0, fieldIndex))
-            .concat(parent.value.slice(1 + fieldIndex))
+            .concat(parent.value.slice(1 + fieldIndex)),
         )
       }
       {...filterDOMProps(props)}
@@ -27,10 +27,10 @@ ListDel.defaultProps = {
   icon: 'delete',
   shape: 'circle-outline',
   size: 'small',
-  type: 'ghost'
+  type: 'ghost',
 };
 
 export default connectField(ListDel, {
   includeParent: true,
-  initialValue: false
+  initialValue: false,
 });

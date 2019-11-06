@@ -14,7 +14,7 @@ test('<RadioField> - renders a set of Radio buttons', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
@@ -24,7 +24,7 @@ test('<RadioField> - renders a set of Radio buttons wrapped with RadioGroup', ()
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(RadioGroup)).toHaveLength(1);
@@ -35,7 +35,7 @@ test('<RadioField> - renders a set of Radio buttons with correct disabled state'
   const element = <RadioField name="x" disabled />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(FormControl).prop('disabled')).toBe(true);
@@ -45,7 +45,7 @@ test('<RadioField> - renders a RadioGroup with correct id (inherited)', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(RadioGroup)).toHaveLength(1);
@@ -56,7 +56,7 @@ test('<RadioField> - renders a RadioGroup with correct id (specified)', () => {
   const element = <RadioField name="x" id="y" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(RadioGroup)).toHaveLength(1);
@@ -67,7 +67,7 @@ test('<RadioField> - renders a RadioGroup with correct name', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(RadioGroup)).toHaveLength(1);
@@ -78,7 +78,7 @@ test('<RadioField> - renders a set of Radio buttons with correct options', () =>
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
@@ -86,13 +86,13 @@ test('<RadioField> - renders a set of Radio buttons with correct options', () =>
     wrapper
       .find(FormControlLabel)
       .at(0)
-      .prop('label')
+      .prop('label'),
   ).toBe('a');
   expect(
     wrapper
       .find(FormControlLabel)
       .at(1)
-      .prop('label')
+      .prop('label'),
   ).toBe('b');
 });
 
@@ -100,7 +100,7 @@ test('<RadioField> - renders a set of Radio buttons with correct options (transf
   const element = <RadioField name="x" transform={x => x.toUpperCase()} />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
@@ -108,13 +108,13 @@ test('<RadioField> - renders a set of Radio buttons with correct options (transf
     wrapper
       .find(FormControlLabel)
       .at(0)
-      .prop('label')
+      .prop('label'),
   ).toBe('A');
   expect(
     wrapper
       .find(FormControlLabel)
       .at(1)
-      .prop('label')
+      .prop('label'),
   ).toBe('B');
 });
 
@@ -122,7 +122,7 @@ test('<RadioField> - renders a RadioGroup with correct value (default)', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(RadioGroup)).toHaveLength(1);
@@ -135,8 +135,8 @@ test('<RadioField> - renders a RadioGroup with correct value (model)', () => {
     element,
     createContext(
       { x: { type: String, allowedValues: ['a', 'b'] } },
-      { model: { x: 'b' } }
-    )
+      { model: { x: 'b' } },
+    ),
   );
 
   expect(wrapper.find(RadioGroup)).toHaveLength(1);
@@ -147,7 +147,7 @@ test('<RadioField> - renders a RadioGroup with correct value (specified)', () =>
   const element = <RadioField name="x" value="b" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(RadioGroup)).toHaveLength(1);
@@ -162,8 +162,8 @@ test('<RadioField> - renders a RadioGroup which correctly reacts on change', () 
     element,
     createContext(
       { x: { type: String, allowedValues: ['a', 'b'] } },
-      { onChange }
-    )
+      { onChange },
+    ),
   );
 
   expect(wrapper.find(RadioGroup)).toHaveLength(1);
@@ -182,8 +182,8 @@ test('<RadioField> - renders a RadioGroup which correctly reacts on change (same
     element,
     createContext(
       { x: { type: String, allowedValues: ['a', 'b'] } },
-      { model: { x: 'b' }, onChange }
-    )
+      { model: { x: 'b' }, onChange },
+    ),
   );
 
   expect(wrapper.find(RadioGroup)).toHaveLength(1);
@@ -198,7 +198,7 @@ test('<RadioField> - renders a label', () => {
   const element = <RadioField name="x" label="y" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(FormLabel)).toHaveLength(1);
@@ -209,7 +209,7 @@ test('<RadioField> - renders a helperText', () => {
   const element = <RadioField name="x" helperText="Helper" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(FormHelperText)).toHaveLength(1);
@@ -223,7 +223,7 @@ test('<RadioField> - renders a TextField with correct error text (specified)', (
   );
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(FormHelperText).text()).toBe('Error');

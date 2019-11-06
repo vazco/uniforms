@@ -9,7 +9,7 @@ const LongText = props =>
     props,
     <textarea
       className={classnames(props.inputClassName, 'form-control', {
-        'is-invalid': props.error
+        'is-invalid': props.error,
       })}
       disabled={props.disabled}
       id={props.id}
@@ -19,6 +19,6 @@ const LongText = props =>
       ref={props.inputRef}
       rows={props.rows}
       value={props.value}
-    />
+    />,
   );
 export default connectField(LongText);

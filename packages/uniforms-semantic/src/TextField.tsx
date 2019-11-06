@@ -34,7 +34,7 @@ const Text = ({
         'ui',
         wrapClassName,
         { left: iconLeft, icon: icon || iconLeft },
-        'input'
+        'input',
       )}
     >
       <input

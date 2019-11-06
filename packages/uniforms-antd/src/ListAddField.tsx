@@ -23,10 +23,10 @@ ListAdd.defaultProps = {
   icon: 'plus-square-o',
   size: 'small',
   style: { width: '100%' },
-  type: 'dashed'
+  type: 'dashed',
 };
 
 export default connectField(ListAdd, {
   includeParent: true,
-  initialValue: false
+  initialValue: false,
 });

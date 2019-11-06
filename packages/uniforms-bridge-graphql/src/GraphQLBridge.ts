@@ -6,7 +6,7 @@ import { Bridge, joinName } from 'uniforms';
 
 const extractValue = (...xs) =>
   xs.reduce((x, y) =>
-    x === false || x === null ? '' : x !== true && x !== undefined ? x : y
+    x === false || x === null ? '' : x !== true && x !== undefined ? x : y,
   );
 
 const extractFromNonNull = x =>
@@ -74,7 +74,7 @@ export default class GraphQLBridge extends Bridge {
         invariant(
           definition.type instanceof graphql.GraphQLList,
           'Field not found in schema: "%s"',
-          name
+          name,
         );
         definition = { type: extractFromNonNull(definition.type.ofType) };
       } else if (definition.type && definition.type._fields) {
@@ -103,7 +103,7 @@ export default class GraphQLBridge extends Bridge {
       invariant(
         extracted.type.getFields,
         'Field not found in schema: "%s"',
-        name
+        name,
       );
 
       return extracted.type.getFields();
@@ -141,7 +141,7 @@ export default class GraphQLBridge extends Bridge {
     const ready = {
       required: field.type instanceof graphql.GraphQLNonNull,
       ...this.extras[nameGeneric],
-      ...this.extras[nameNormal]
+      ...this.extras[nameNormal],
     };
 
     if (

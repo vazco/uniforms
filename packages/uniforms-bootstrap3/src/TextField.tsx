@@ -9,7 +9,7 @@ const Text = props =>
     { feedbackable: true, ...props },
     <input
       className={classnames(props.inputClassName, 'form-control', {
-        'form-control-danger': props.error
+        'form-control-danger': props.error,
       })}
       disabled={props.disabled}
       id={props.id}
@@ -19,7 +19,7 @@ const Text = props =>
       ref={props.inputRef}
       type={props.type}
       value={props.value}
-    />
+    />,
   );
 Text.defaultProps = { type: 'text' };
 

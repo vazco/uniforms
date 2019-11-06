@@ -23,7 +23,7 @@ const LongText = props =>
       value={props.value}
       {...textAreaProps}
       {...filterDOMProps(props)}
-    />
+    />,
   );
 
 LongText.defaultProps = { rows: 5 };

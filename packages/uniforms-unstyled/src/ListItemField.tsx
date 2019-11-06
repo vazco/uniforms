@@ -12,8 +12,8 @@ const ListItem = props => (
       Children.map(props.children, child =>
         React.cloneElement(child, {
           name: joinName(props.name, child.props.name),
-          label: null
-        })
+          label: null,
+        }),
       )
     ) : (
       <AutoField {...props} />
@@ -22,5 +22,5 @@ const ListItem = props => (
 );
 export default connectField(ListItem, {
   includeInChain: false,
-  includeParent: true
+  includeParent: true,
 });

@@ -15,7 +15,7 @@ const Quick = (parent: any): any =>
 
       autoField: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
       errorsField: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-      submitField: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+      submitField: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     };
 
     getNativeFormProps(): Record<string, unknown> {
@@ -32,7 +32,7 @@ const Quick = (parent: any): any =>
           .map((key: any) => <AutoField key={key} name={key} />)
           .concat([
             <ErrorsField key="$ErrorsField" />,
-            <SubmitField key="$SubmitField" />
+            <SubmitField key="$SubmitField" />,
           ]);
       }
 

@@ -15,7 +15,7 @@ describe('createSchemaBridge', () => {
       getProps() {},
       getSubfields() {},
       getType() {},
-      getValidator() {}
+      getValidator() {},
     };
 
     expect(createSchemaBridge(bridge)).toBe(bridge);
@@ -32,7 +32,7 @@ describe('createSchemaBridge', () => {
     createSchemaBridge.register(TestSchemaBridge);
 
     expect(createSchemaBridge(new TestSchema())).toBeInstanceOf(
-      TestSchemaBridge
+      TestSchemaBridge,
     );
   });
 

@@ -17,11 +17,11 @@ const Date = (props: any) =>
       ref={props.inputRef}
       value={props.value && moment(props.value)}
       {...filterDOMProps(props)}
-    />
+    />,
   );
 Date.defaultProps = {
   showTime: true,
-  style: { width: '100%' }
+  style: { width: '100%' },
 };
 
 export default connectField(Date, { ensureValue: false });

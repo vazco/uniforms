@@ -14,7 +14,7 @@ const SubmitField = (
     wrapClassName,
     ...props
   },
-  { uniforms: { error, state } }
+  { uniforms: { error, state } },
 ) => {
   const hasWrap = !!(state.grid || wrapClassName);
 
@@ -32,7 +32,7 @@ const SubmitField = (
     <div
       className={classnames(className, {
         'has-danger': error,
-        row: state.grid
+        row: state.grid,
       })}
       {...filterDOMProps(props)}
     >
@@ -40,7 +40,7 @@ const SubmitField = (
         <label
           className={classnames(
             'form-control-label',
-            gridClassName(state.grid, 'label')
+            gridClassName(state.grid, 'label'),
           )}
         >
           &nbsp;
@@ -51,7 +51,7 @@ const SubmitField = (
         <div
           className={classnames(
             wrapClassName,
-            gridClassName(state.grid, 'input')
+            gridClassName(state.grid, 'input'),
           )}
         >
           {blockInput}
