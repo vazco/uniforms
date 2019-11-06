@@ -1,8 +1,7 @@
 import DatePicker from 'antd/lib/date-picker';
 import React from 'react';
-import connectField from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
 import moment from 'moment';
+import { connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 

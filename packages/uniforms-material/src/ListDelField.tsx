@@ -1,8 +1,7 @@
 import IconButton from '@material-ui/core/IconButton';
 import PropTypes from 'prop-types';
 import React from 'react';
-import connectField from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
+import { connectField, filterDOMProps } from 'uniforms';
 
 const ListDel = ({ disabled, icon, name, parent, ...props }) => {
   const fieldIndex = +name.slice(1 + name.lastIndexOf('.'));

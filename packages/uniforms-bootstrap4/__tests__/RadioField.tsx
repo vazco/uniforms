@@ -1,5 +1,5 @@
-import RadioField from 'uniforms-bootstrap4/RadioField';
 import React from 'react';
+import { RadioField } from 'uniforms-bootstrap4';
 
 import createContext from './_createContext';
 import mount from './_mount';

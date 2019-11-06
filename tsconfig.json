@@ -38,7 +38,6 @@
       "uniforms-unstyled": ["uniforms-unstyled/src"],
       "uniforms-unstyled/*": ["uniforms-unstyled/src/*"]
     },
-    "strict": true,
-    "target": "es5"
+    "strict": true
   }
 }

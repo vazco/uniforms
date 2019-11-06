@@ -1,6 +1,6 @@
-import NumField from 'uniforms-semantic/NumField';
 import React from 'react';
 import identity from 'lodash/identity';
+import { NumField } from 'uniforms-semantic';
 
 import createContext from './_createContext';
 import mount from './_mount';

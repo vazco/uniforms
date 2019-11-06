@@ -1,5 +1,5 @@
-import ErrorsField from 'uniforms-antd/ErrorsField';
 import React from 'react';
+import { ErrorsField } from 'uniforms-antd';
 
 import createContext from './_createContext';
 import mount from './_mount';

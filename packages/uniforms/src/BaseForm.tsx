@@ -159,7 +159,7 @@ export default class BaseForm extends Component<any, any> {
     return changedKeys(root, valueA, valueB);
   }
 
-  getNativeFormProps() {
+  getNativeFormProps(): Record<string, unknown> {
     const props = omit(this.props, [
       'autosave',
       'autosaveDelay',

@@ -1,5 +1,5 @@
-import BaseForm from 'uniforms-antd/BaseForm';
 import React from 'react';
+import { BaseForm } from 'uniforms-antd';
 
 import createSchema from './_createSchema';
 import mount from './_mount';

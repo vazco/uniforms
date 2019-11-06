@@ -1,4 +1,4 @@
-import gridClassName from 'uniforms-bootstrap3/gridClassName';
+import { gridClassName } from 'uniforms-bootstrap3';
 
 test('gridClassName - object', () => {
   expect(gridClassName({ md: 3 }, 'input')).toBe('col-md-9');

@@ -1,5 +1,5 @@
-import DateField from 'uniforms-semantic/DateField';
 import React from 'react';
+import { DateField } from 'uniforms-semantic';
 
 import createContext from './_createContext';
 import mount from './_mount';

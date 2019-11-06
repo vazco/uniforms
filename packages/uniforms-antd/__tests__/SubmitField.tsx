@@ -1,6 +1,6 @@
 import Button from 'antd/lib/button';
 import React from 'react';
-import SubmitField from 'uniforms-antd/SubmitField';
+import { SubmitField } from 'uniforms-antd';
 
 import createContext from './_createContext';
 import mount from './_mount';

@@ -1,9 +1,7 @@
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import React, { useContext } from 'react';
-import context from 'uniforms/context';
-import filterDOMProps from 'uniforms/filterDOMProps';
-import nothing from 'uniforms/nothing';
+import { context, filterDOMProps, nothing } from 'uniforms';
 
 const ErrorsField = ({ children, fullWidth, margin, variant, ...props }) => {
   const { error, schema } = useContext(context).uniforms;

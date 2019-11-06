@@ -48,9 +48,9 @@ export default function ExampleFullyCustomizable() {
                 code(
                   'js',
                   `import React from 'react';
-import connectField from 'uniforms/connectField';\n
-import schema from './ImageFieldSchema';
-import { AutoForm, SubmitField } from 'uniforms-${theme}';\n
+import { AutoForm, SubmitField } from 'uniforms-${theme}';
+import { connectField } from 'uniforms';\n
+import schema from './ImageFieldSchema';\n
 function Image({ onChange, value }) {
   const imgPlaceholder = 'https://via.placeholder.com/150.png';\n
   function onImageChange({ target: { files } }) {

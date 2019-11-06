@@ -1,5 +1,5 @@
 import React from 'react';
-import ValidatedForm from 'uniforms-material/ValidatedForm';
+import { ValidatedForm } from 'uniforms-material';
 
 import createContext from './_createContext';
 import createSchema from './_createSchema';

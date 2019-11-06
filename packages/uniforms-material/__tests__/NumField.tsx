@@ -1,7 +1,7 @@
-import NumField from 'uniforms-material/NumField';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import identity from 'lodash/identity';
+import { NumField } from 'uniforms-material';
 
 import createContext from './_createContext';
 import mount from './_mount';

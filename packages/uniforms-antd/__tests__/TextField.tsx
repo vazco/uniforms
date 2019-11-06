@@ -1,6 +1,6 @@
 import Input from 'antd/lib/input';
 import React from 'react';
-import TextField from 'uniforms-antd/TextField';
+import { TextField } from 'uniforms-antd';
 
 import createContext from './_createContext';
 import mount from './_mount';

@@ -1,13 +1,15 @@
-import AutoField from 'uniforms-antd/AutoField';
-import BoolField from 'uniforms-antd/BoolField';
-import DateField from 'uniforms-antd/DateField';
-import ListField from 'uniforms-antd/ListField';
-import NestField from 'uniforms-antd/NestField';
-import NumField from 'uniforms-antd/NumField';
-import RadioField from 'uniforms-antd/RadioField';
 import React from 'react';
-import SelectField from 'uniforms-antd/SelectField';
-import TextField from 'uniforms-antd/TextField';
+import {
+  AutoField,
+  BoolField,
+  DateField,
+  ListField,
+  NestField,
+  NumField,
+  RadioField,
+  SelectField,
+  TextField
+} from 'uniforms-antd';
 
 import createContext from './_createContext';
 import mount from './_mount';

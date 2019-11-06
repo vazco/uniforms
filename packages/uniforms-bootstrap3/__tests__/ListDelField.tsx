@@ -1,5 +1,5 @@
-import ListDelField from 'uniforms-bootstrap3/ListDelField';
 import React from 'react';
+import { ListDelField } from 'uniforms-bootstrap3';
 
 import createContext from './_createContext';
 import mount from './_mount';

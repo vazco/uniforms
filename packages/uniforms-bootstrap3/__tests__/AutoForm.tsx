@@ -1,5 +1,5 @@
-import AutoForm from 'uniforms-bootstrap3/AutoForm';
 import React from 'react';
+import { AutoForm } from 'uniforms-bootstrap3';
 
 import createSchema from './_createSchema';
 import mount from './_mount';

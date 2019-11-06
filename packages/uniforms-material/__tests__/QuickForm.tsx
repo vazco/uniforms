@@ -1,5 +1,5 @@
-import QuickForm from 'uniforms-material/QuickForm';
 import React from 'react';
+import { QuickForm } from 'uniforms-material';
 
 import createContext from './_createContext';
 import createSchema from './_createSchema';

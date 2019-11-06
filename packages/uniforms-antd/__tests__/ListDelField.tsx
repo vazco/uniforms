@@ -1,5 +1,5 @@
-import ListDelField from 'uniforms-antd/ListDelField';
 import React from 'react';
+import { ListDelField } from 'uniforms-antd';
 
 import createContext from './_createContext';
 import mount from './_mount';

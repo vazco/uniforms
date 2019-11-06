@@ -1,6 +1,6 @@
-import ErrorsField from 'uniforms-material/ErrorsField';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import React from 'react';
+import { ErrorsField } from 'uniforms-material';
 
 import createContext from './_createContext';
 import mount from './_mount';

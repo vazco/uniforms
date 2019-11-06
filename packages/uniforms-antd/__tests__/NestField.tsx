@@ -1,6 +1,5 @@
-import AutoField from 'uniforms-antd/AutoField';
-import NestField from 'uniforms-antd/NestField';
 import React from 'react';
+import { AutoField, NestField } from 'uniforms-antd';
 
 import createContext from './_createContext';
 import mount from './_mount';

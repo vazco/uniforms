@@ -2,8 +2,7 @@ import Checkbox from 'antd/lib/checkbox';
 import Radio from 'antd/lib/radio';
 import React from 'react';
 import SelectAntDesign from 'antd/lib/select';
-import connectField from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
+import { connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 

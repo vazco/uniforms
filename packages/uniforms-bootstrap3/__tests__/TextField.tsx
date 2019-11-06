@@ -1,5 +1,5 @@
 import React from 'react';
-import TextField from 'uniforms-bootstrap3/TextField';
+import { TextField } from 'uniforms-bootstrap3';
 
 import createContext from './_createContext';
 import mount from './_mount';

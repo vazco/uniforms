@@ -1,5 +1,5 @@
 import React from 'react';
-import ValidatedQuickForm from 'uniforms-bootstrap3/ValidatedQuickForm';
+import { ValidatedQuickForm } from 'uniforms-bootstrap3';
 
 import createSchema from './_createSchema';
 import mount from './_mount';

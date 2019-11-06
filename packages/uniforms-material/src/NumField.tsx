@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
-import connectField from 'uniforms/connectField';
-import filterDOMProps from 'uniforms/filterDOMProps';
+import { connectField, filterDOMProps } from 'uniforms';
 
 const noneIfNaN = x => (isNaN(x) ? undefined : x);
 const parse = (decimal, x) => noneIfNaN((decimal ? parseFloat : parseInt)(x));
@@ -39,11 +38,6 @@ const Num_ = ({
     {...filterDOMProps(props)}
   />
 );
-
-Num_.defaultProps = {
-  fullWidth: true,
-  margin: 'dense'
-};
 
 let Num;
 // istanbul ignore next
@@ -86,5 +80,10 @@ if (parseInt(React.version, 10) < 16) {
       }
     });
 }
+
+Num.defaultProps = {
+  fullWidth: true,
+  margin: 'dense'
+};
 
 export default connectField(Num);

@@ -1,7 +1,7 @@
-import BoolField from 'uniforms-antd/BoolField';
 import Checkbox from 'antd/lib/checkbox';
 import React from 'react';
 import Switch from 'antd/lib/switch';
+import { BoolField } from 'uniforms-antd';
 
 import createContext from './_createContext';
 import mount from './_mount';

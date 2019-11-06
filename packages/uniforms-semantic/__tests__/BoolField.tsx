@@ -1,5 +1,5 @@
-import BoolField from 'uniforms-semantic/BoolField';
 import React from 'react';
+import { BoolField } from 'uniforms-semantic';
 
 import createContext from './_createContext';
 import mount from './_mount';

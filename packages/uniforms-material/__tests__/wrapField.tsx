@@ -1,7 +1,7 @@
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import React from 'react';
-import wrapField from 'uniforms-material/wrapField';
+import { wrapField } from 'uniforms-material';
 
 import mount from './_mount';
 

@@ -1,5 +1,5 @@
-import QuickForm from 'uniforms/QuickForm';
 import React, { Component } from 'react';
+import { QuickForm } from 'uniforms';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
 
 import mount from './_mount';

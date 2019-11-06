@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
-import context from 'uniforms/context';
-import filterDOMProps from 'uniforms/filterDOMProps';
-import nothing from 'uniforms/nothing';
+import { context, filterDOMProps, nothing } from 'uniforms';
 
 function ErrorsField({ children, ...props }) {
   const { error, schema } = useContext(context).uniforms;

@@ -1,5 +1,5 @@
-import FormGroup from 'uniforms-bootstrap3/FormGroup';
 import React from 'react';
+import { FormGroup } from 'uniforms-bootstrap3';
 
 import mount from './_mount';
 

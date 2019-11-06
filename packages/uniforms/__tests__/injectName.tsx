@@ -1,9 +1,6 @@
 import React from 'react';
-import connectField from 'uniforms/connectField';
-import injectName from 'uniforms/injectName';
-import nothing from 'uniforms/nothing';
-import randomIds from 'uniforms/randomIds';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
+import { connectField, injectName, nothing, randomIds } from 'uniforms';
 
 import mount from './_mount';
 

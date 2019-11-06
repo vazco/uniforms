@@ -1,5 +1,5 @@
-import HiddenField from 'uniforms-semantic/HiddenField';
 import React from 'react';
+import { HiddenField } from 'uniforms-semantic';
 
 import createContext from './_createContext';
 import mount from './_mount';

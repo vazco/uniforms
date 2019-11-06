@@ -1,6 +1,5 @@
-import AutoForm from 'uniforms/AutoForm';
 import React from 'react';
-import connectField from 'uniforms/connectField';
+import { AutoForm, connectField } from 'uniforms';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
 
 import mount from './_mount';

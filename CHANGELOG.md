@@ -1,3 +1,10 @@
+## [v2.6.0](https://github.com/vazco/uniforms/tree/v2.6.0) (2019-11-06)
+
+- **Added:** ES6 compilation targets and `module` keyword in `package.json`. If your bundler supports tree shaking, you no longer have to use direct imports manually - simply use `import { X } from 'uniforms'`. [\#612](https://github.com/vazco/uniforms/issues/612)
+- **Changed:** Internal structure of imports to stay in align with the ES5/ES6 bundles. [\#629](https://github.com/vazco/uniforms/issues/629)
+- **Fixed:** Handling of default props of `NumField` in `uniforms-material`. [\#631](https://github.com/vazco/uniforms/issues/631).
+- **Fixed:** Missing `wrapField` export in `uniforms-material`. [\#629](https://github.com/vazco/uniforms/issues/629).
+
 ## [v2.5.0](https://github.com/vazco/uniforms/tree/v2.5.0) (2019-10-16)
 
 - **Changed:** We've migrated to TypeScript! There should be no impact on plain JavaScript code and the runtime. We are still working on proper (not `any`) typings.
@@ -58,29 +65,29 @@
 
   ```diff
   // GraphQL
-  -import {GraphQLBridge} from 'uniforms';
-  +import {GraphQLBridge} from 'uniforms-bridge-graphql';
+  -import { GraphQLBridge } from 'uniforms';
+  +import { GraphQLBridge } from 'uniforms-bridge-graphql';
 
   -import GraphQLBridge from 'uniforms/GraphQLBridge';
   +import GraphQLBridge from 'uniforms-bridge-graphql/GraphQLBridge';
 
   // JSON Schema
-  -import {JSONSchemaBridge} from 'uniforms';
-  +import {JSONSchemaBridge} from 'uniforms-bridge-graphql';
+  -import { JSONSchemaBridge } from 'uniforms';
+  +import { JSONSchemaBridge } from 'uniforms-bridge-graphql';
 
   -import JSONSchemaBridge from 'uniforms/JSONSchemaBridge';
   +import JSONSchemaBridge from 'uniforms-bridge-json-schema/JSONSchemaBridge';
 
   // SimpleSchema (Atmosphere version for Meteor)
-  -import {SimpleSchemaBridge} from 'uniforms';
-  +import {SimpleSchemaBridge} from 'uniforms-bridge-simple-schema';
+  -import { SimpleSchemaBridge } from 'uniforms';
+  +import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
 
   -import SimpleSchemaBridge from 'uniforms/SimpleSchemaBridge';
   +import SimpleSchemaBridge from 'uniforms-bridge-simple-schema/SimpleSchemaBridge';
 
   // SimpleSchema (npm version)
-  -import {SimpleSchema2Bridge} from 'uniforms';
-  +import {SimpleSchema2Bridge} from 'uniforms-bridge-simple-schema-2';
+  -import { SimpleSchema2Bridge } from 'uniforms';
+  +import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 
   -import SimpleSchema2Bridge from 'uniforms/SimpleSchema2Bridge';
   +import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2/SimpleSchema2Bridge';

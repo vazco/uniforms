@@ -3,9 +3,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
-import RadioField from 'uniforms-material/RadioField';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import React from 'react';
+import { RadioField } from 'uniforms-material';
 
 import createContext from './_createContext';
 import mount from './_mount';

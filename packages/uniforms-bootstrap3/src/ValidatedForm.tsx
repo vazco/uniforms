@@ -1,8 +1,8 @@
-import ValidatedForm from 'uniforms/ValidatedForm';
+import { ValidatedForm } from 'uniforms';
 
 import BaseForm from './BaseForm';
 
-const Validated = parent =>
+const Validated = (parent: any): any =>
   class extends ValidatedForm.Validated(parent) {
     static Validated = Validated;
   };

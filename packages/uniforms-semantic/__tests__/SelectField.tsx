@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectField from 'uniforms-semantic/SelectField';
+import { SelectField } from 'uniforms-semantic';
 
 import createContext from './_createContext';
 import mount from './_mount';

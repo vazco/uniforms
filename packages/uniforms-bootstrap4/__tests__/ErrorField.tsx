@@ -1,5 +1,5 @@
-import ErrorField from 'uniforms-bootstrap4/ErrorField';
 import React from 'react';
+import { ErrorField } from 'uniforms-bootstrap4';
 
 import createContext from './_createContext';
 import mount from './_mount';

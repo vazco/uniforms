@@ -1,7 +1,5 @@
-import AutoField from 'uniforms-semantic/AutoField';
-import ListDelField from 'uniforms-semantic/ListDelField';
-import ListItemField from 'uniforms-semantic/ListItemField';
 import React from 'react';
+import { AutoField, ListDelField, ListItemField } from 'uniforms-semantic';
 
 import createContext from './_createContext';
 import mount from './_mount';

@@ -1,5 +1,5 @@
-import BaseField from 'uniforms/BaseField';
 import invariant from 'invariant';
+import { BaseField } from 'uniforms';
 import { createElement } from 'react';
 
 import BoolField from './BoolField';

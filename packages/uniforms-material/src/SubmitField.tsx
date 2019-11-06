@@ -1,7 +1,6 @@
 import Button from '@material-ui/core/Button';
 import React, { useContext } from 'react';
-import context from 'uniforms/context';
-import filterDOMProps from 'uniforms/filterDOMProps';
+import { context, filterDOMProps } from 'uniforms';
 
 const SubmitField = ({
   children,

@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectField from 'uniforms-bootstrap4/SelectField';
+import { SelectField } from 'uniforms-bootstrap4';
 
 import createContext from './_createContext';
 import mount from './_mount';

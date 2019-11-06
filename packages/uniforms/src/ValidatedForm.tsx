@@ -7,7 +7,7 @@ import set from 'lodash/set';
 
 import BaseForm from './BaseForm';
 
-const Validated = (parent: any) =>
+const Validated = (parent: any): any =>
   class extends parent {
     static Validated = Validated;
 
@@ -36,9 +36,8 @@ const Validated = (parent: any) =>
     validate: (key?: any, value?: any) => Promise<unknown>;
     validateModel: (model: any) => Promise<unknown>;
 
-    constructor() {
-      // @ts-ignore
-      super(...arguments);
+    constructor(...args: any[]) {
+      super(...args);
 
       // @ts-ignore
       this.state = {
@@ -68,7 +67,7 @@ const Validated = (parent: any) =>
       };
     }
 
-    getNativeFormProps() {
+    getNativeFormProps(): Record<string, unknown> {
       return omit(super.getNativeFormProps(), [
         'onValidate',
         'validate',
@@ -165,6 +164,7 @@ const Validated = (parent: any) =>
     }
 
     onValidateModel(model: any) {
+      // @ts-ignore
       model = this.getModel('validate', model);
 
       let catched = this.props.error || null;

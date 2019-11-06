@@ -1,7 +1,5 @@
-import AutoField from 'uniforms-material/AutoField';
-import ListDelField from 'uniforms-material/ListDelField';
-import ListItemField from 'uniforms-material/ListItemField';
 import React from 'react';
+import { AutoField, ListDelField, ListItemField } from 'uniforms-material';
 
 import createContext from './_createContext';
 import mount from './_mount';

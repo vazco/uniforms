@@ -7,9 +7,9 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import React from 'react';
 import Select from '@material-ui/core/Select';
-import SelectField from 'uniforms-material/SelectField';
 import Switch from '@material-ui/core/Switch';
 import TextField from '@material-ui/core/TextField';
+import { SelectField } from 'uniforms-material';
 
 import createContext from './_createContext';
 import mount from './_mount';

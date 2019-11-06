@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import connectField from 'uniforms/connectField';
+import { connectField } from 'uniforms';
 
 import { AutoForm, SubmitField } from '../../../website/components/universal';
 import schema from './RatingFieldSchema';

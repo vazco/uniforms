@@ -7,7 +7,7 @@ import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 import { buildASTSchema, parse } from 'graphql';
 
 import presets from './presets';
-import themes from './themes';
+import { themes } from '../universal';
 
 const scope = typeof window === 'undefined' ? global : window;
 

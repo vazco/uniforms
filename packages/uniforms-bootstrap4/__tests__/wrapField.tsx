@@ -1,5 +1,5 @@
 import React from 'react';
-import wrapField from 'uniforms-bootstrap4/wrapField';
+import { wrapField } from 'uniforms-bootstrap4';
 
 import mount from './_mount';
 

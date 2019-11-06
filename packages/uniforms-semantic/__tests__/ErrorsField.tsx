@@ -1,5 +1,5 @@
-import ErrorsField from 'uniforms-semantic/ErrorsField';
 import React from 'react';
+import { ErrorsField } from 'uniforms-semantic';
 
 import createContext from './_createContext';
 import mount from './_mount';

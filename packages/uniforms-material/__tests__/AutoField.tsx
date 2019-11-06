@@ -1,13 +1,15 @@
-import AutoField from 'uniforms-material/AutoField';
-import BoolField from 'uniforms-material/BoolField';
-import DateField from 'uniforms-material/DateField';
-import ListField from 'uniforms-material/ListField';
-import NestField from 'uniforms-material/NestField';
-import NumField from 'uniforms-material/NumField';
-import RadioField from 'uniforms-material/RadioField';
 import React from 'react';
-import SelectField from 'uniforms-material/SelectField';
-import TextField from 'uniforms-material/TextField';
+import {
+  AutoField,
+  BoolField,
+  DateField,
+  ListField,
+  NestField,
+  NumField,
+  RadioField,
+  SelectField,
+  TextField
+} from 'uniforms-material';
 
 import createContext from './_createContext';
 import mount from './_mount';

@@ -1,5 +1,5 @@
-import AutoFields from 'uniforms-semantic/AutoFields';
 import React from 'react';
+import { AutoFields } from 'uniforms-semantic';
 
 import createContext from './_createContext';
 import mount from './_mount';

@@ -1,6 +1,5 @@
-import AutoField from 'uniforms-unstyled/AutoField';
-import NestField from 'uniforms-unstyled/NestField';
 import React from 'react';
+import { AutoField, NestField } from 'uniforms-unstyled';
 
 import createContext from './_createContext';
 import mount from './_mount';

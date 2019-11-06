@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import classnames from 'classnames';
-import context from 'uniforms/context';
-import filterDOMProps from 'uniforms/filterDOMProps';
+import { context, filterDOMProps } from 'uniforms';
 
 import gridClassName from './gridClassName';
 

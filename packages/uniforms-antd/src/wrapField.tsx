@@ -2,7 +2,7 @@ import Form from 'antd/lib/form';
 import Icon from 'antd/lib/icon';
 import React from 'react';
 import Tooltip from 'antd/lib/tooltip';
-import filterDOMProps from 'uniforms/filterDOMProps';
+import { filterDOMProps } from 'uniforms';
 
 export default function wrapField(
   {

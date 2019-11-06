@@ -1,4 +1,4 @@
-import Bridge from 'uniforms/Bridge';
+import { Bridge } from 'uniforms';
 
 describe('Bridge', () => {
   class CustomBridge extends Bridge {}

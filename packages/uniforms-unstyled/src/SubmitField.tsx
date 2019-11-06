@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import context from 'uniforms/context';
-import filterDOMProps from 'uniforms/filterDOMProps';
+import { context, filterDOMProps } from 'uniforms';
 
 function SubmitField({ disabled, inputRef, value, ...props }) {
   const { error, state } = useContext(context).uniforms;

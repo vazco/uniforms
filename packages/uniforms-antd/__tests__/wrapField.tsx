@@ -1,7 +1,7 @@
 import Form from 'antd/lib/form';
 import React from 'react';
 import Tooltip from 'antd/lib/tooltip';
-import wrapField from 'uniforms-antd/wrapField';
+import { wrapField } from 'uniforms-antd';
 
 import mount from './_mount';
 

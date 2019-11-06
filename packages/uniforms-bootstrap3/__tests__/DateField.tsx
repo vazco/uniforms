@@ -1,5 +1,5 @@
-import DateField from 'uniforms-bootstrap3/DateField';
 import React from 'react';
+import { DateField } from 'uniforms-bootstrap3';
 
 import createContext from './_createContext';
 import mount from './_mount';

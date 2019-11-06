@@ -1,6 +1,6 @@
 import Radio from 'antd/lib/radio';
-import RadioField from 'uniforms-antd/RadioField';
 import React from 'react';
+import { RadioField } from 'uniforms-antd';
 
 import createContext from './_createContext';
 import mount from './_mount';

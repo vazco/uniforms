@@ -1,5 +1,5 @@
-import BaseForm from 'uniforms-bootstrap4/BaseForm';
 import React from 'react';
+import { BaseForm } from 'uniforms-bootstrap4';
 
 import createSchema from './_createSchema';
 import mount from './_mount';

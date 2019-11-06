@@ -1,5 +1,5 @@
-import LongTextField from 'uniforms-bootstrap3/LongTextField';
 import React from 'react';
+import { LongTextField } from 'uniforms-bootstrap3';
 
 import createContext from './_createContext';
 import mount from './_mount';

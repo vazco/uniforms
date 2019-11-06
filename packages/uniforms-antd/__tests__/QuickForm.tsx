@@ -1,5 +1,5 @@
-import QuickForm from 'uniforms-antd/QuickForm';
 import React from 'react';
+import { QuickForm } from 'uniforms-antd';
 
 import createSchema from './_createSchema';
 import mount from './_mount';

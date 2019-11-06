@@ -1,5 +1,5 @@
-import ListAddField from 'uniforms-antd/ListAddField';
 import React from 'react';
+import { ListAddField } from 'uniforms-antd';
 
 import createContext from './_createContext';
 import mount from './_mount';

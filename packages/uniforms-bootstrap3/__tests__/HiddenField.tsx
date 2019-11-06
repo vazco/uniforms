@@ -1,5 +1,5 @@
-import HiddenField from 'uniforms-bootstrap3/HiddenField';
 import React from 'react';
+import { HiddenField } from 'uniforms-bootstrap3';
 
 import createContext from './_createContext';
 import mount from './_mount';

@@ -1,5 +1,5 @@
-import ListAddField from 'uniforms-bootstrap4/ListAddField';
 import React from 'react';
+import { ListAddField } from 'uniforms-bootstrap4';
 
 import createContext from './_createContext';
 import mount from './_mount';

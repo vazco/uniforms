@@ -1,6 +1,6 @@
 import Ajv from 'ajv';
-import LongTextField from 'uniforms-unstyled/LongTextField';
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
+import { LongTextField } from 'uniforms-unstyled';
 
 const ajv = new Ajv({ allErrors: true, useDefaults: true });
 

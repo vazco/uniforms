@@ -1,5 +1,5 @@
-import QuickForm from 'uniforms-bootstrap4/QuickForm';
 import React from 'react';
+import { QuickForm } from 'uniforms-bootstrap4';
 
 import createSchema from './_createSchema';
 import mount from './_mount';

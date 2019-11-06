@@ -1,5 +1,5 @@
-import ListAddField from 'uniforms-unstyled/ListAddField';
 import React from 'react';
+import { ListAddField } from 'uniforms-unstyled';
 
 import createContext from './_createContext';
 import mount from './_mount';

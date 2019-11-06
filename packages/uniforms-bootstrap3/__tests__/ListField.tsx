@@ -1,7 +1,5 @@
-import ListAddField from 'uniforms-bootstrap3/ListAddField';
-import ListField from 'uniforms-bootstrap3/ListField';
-import ListItemField from 'uniforms-bootstrap3/ListItemField';
 import React from 'react';
+import { ListAddField, ListField, ListItemField } from 'uniforms-bootstrap3';
 
 import createContext from './_createContext';
 import mount from './_mount';

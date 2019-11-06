@@ -1,5 +1,5 @@
-import BaseForm from 'uniforms/BaseForm';
 import React from 'react';
+import { BaseForm } from 'uniforms';
 
 import mount from './_mount';
 

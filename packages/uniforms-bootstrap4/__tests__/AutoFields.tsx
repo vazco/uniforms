@@ -1,5 +1,5 @@
-import AutoFields from 'uniforms-bootstrap4/AutoFields';
 import React from 'react';
+import { AutoFields } from 'uniforms-bootstrap4';
 
 import createContext from './_createContext';
 import mount from './_mount';

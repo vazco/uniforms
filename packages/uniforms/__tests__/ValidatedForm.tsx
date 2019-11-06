@@ -1,6 +1,6 @@
 import React from 'react';
-import ValidatedForm from 'uniforms/ValidatedForm';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
+import { ValidatedForm } from 'uniforms';
 
 import mount from './_mount';
 

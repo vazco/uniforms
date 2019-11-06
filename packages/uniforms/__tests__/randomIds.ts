@@ -1,4 +1,4 @@
-import randomIds from 'uniforms/randomIds';
+import { randomIds } from 'uniforms';
 
 describe('randomIds', () => {
   it('is a function', () => {

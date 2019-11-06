@@ -1,5 +1,5 @@
 import React from 'react';
-import SubmitField from 'uniforms-material/SubmitField';
+import { SubmitField } from 'uniforms-material';
 
 import createContext from './_createContext';
 import mount from './_mount';

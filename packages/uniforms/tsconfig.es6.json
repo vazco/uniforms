@@ -1,8 +1,12 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "baseUrl": "src",
     "outDir": "es6",
+    "rootDir": "src",
     "target": "es6",
     "tsBuildInfoFile": "../../node_modules/.cache/uniforms.es6.tsbuildinfo"
-  }
+  },
+  "exclude": ["node_modules"],
+  "include": ["src"]
 }
