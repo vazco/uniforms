@@ -1,3 +1,10 @@
+## [v2.6.0](https://github.com/vazco/uniforms/tree/v2.6.0) (2019-11-06)
+
+- **Added:** ES6 compilation targets and `module` keyword in `package.json`. If your bundler supports tree shaking, you no longer have to use direct imports manually - simply use `import { X } from 'uniforms'`. [\#612](https://github.com/vazco/uniforms/issues/612)
+- **Changed:** Internal structure of imports to stay in align with the ES5/ES6 bundles. [\#629](https://github.com/vazco/uniforms/issues/629)
+- **Fixed:** Handling of default props of `NumField` in `uniforms-material`. [\#631](https://github.com/vazco/uniforms/issues/631).
+- **Fixed:** Missing `wrapField` export in `uniforms-material`. [\#629](https://github.com/vazco/uniforms/issues/629).
+
 ## [v2.5.0](https://github.com/vazco/uniforms/tree/v2.5.0) (2019-10-16)
 
 - **Changed:** We've migrated to TypeScript! There should be no impact on plain JavaScript code and the runtime. We are still working on proper (not `any`) typings.
