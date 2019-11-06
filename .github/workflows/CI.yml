@@ -22,9 +22,9 @@ jobs:
       - name: Test
         run: npm run coverage -- --no-cache --runInBand
       - name: Report coverage
-        uses: codecov/codecov-action@v1.0.3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+        run: bash <(curl -s https://codecov.io/bash)
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: Build docs
         run: npm --prefix website run build
         if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '12.x'
