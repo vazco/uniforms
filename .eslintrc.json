@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "plugin:import/errors",
-    "vazco"
-  ],
+  "extends": ["plugin:import/errors", "vazco"],
   "overrides": [
     {
       "files": ["**/*.ts", "**/*.tsx"],
