@@ -43,5 +43,5 @@ Nest.defaultProps = { grouped: true };
 
 export default connectField(Nest, {
   ensureValue: false,
-  includeInChain: false
+  includeInChain: false,
 });

@@ -16,13 +16,13 @@ const Bool = ({ checkbox, ...props }: any) =>
       name: props.name,
       onChange: () => props.onChange(!props.value),
       ref: props.inputRef,
-      ...filterDOMProps(props)
-    })
+      ...filterDOMProps(props),
+    }),
   );
 Bool.defaultProps = {
   checkbox: false,
   checkedChildren: <Icon type="check" />,
-  unCheckedChildren: <Icon type="close" />
+  unCheckedChildren: <Icon type="close" />,
 };
 
 export default connectField(Bool, { ensureValue: false });

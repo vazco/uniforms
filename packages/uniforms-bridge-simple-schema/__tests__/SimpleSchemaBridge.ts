@@ -35,10 +35,10 @@ describe('SimpleSchemaBridge', () => {
         s: {
           type: String,
           uniforms: {
-            options: [{ label: 1, value: 'a' }, { label: 2, value: 'b' }]
-          }
+            options: [{ label: 1, value: 'a' }, { label: 2, value: 'b' }],
+          },
         },
-        t: { type: String, uniforms: { options: () => ({ a: 1, b: 2 }) } }
+        t: { type: String, uniforms: { options: () => ({ a: 1, b: 2 }) } },
       }[name];
 
       if (field) {
@@ -47,7 +47,7 @@ describe('SimpleSchemaBridge', () => {
             .split('.')
             .join(' ')
             .toUpperCase(),
-          ...field
+          ...field,
         };
       }
 
@@ -62,14 +62,14 @@ describe('SimpleSchemaBridge', () => {
       return (
         {
           a: ['b'],
-          'a.b': ['c']
+          'a.b': ['c'],
         }[name] || []
       );
     },
 
     validator() {
       throw 'ValidationError';
-    }
+    },
   };
 
   const bridge = new SimpleSchemaBridge(schema);
@@ -86,7 +86,7 @@ describe('SimpleSchemaBridge', () => {
     Object.keys(schema).forEach(method => {
       it(`works correctly without '${method}'`, () => {
         expect(
-          SimpleSchemaBridge.check({ ...schema, [method]: null })
+          SimpleSchemaBridge.check({ ...schema, [method]: null }),
         ).not.toBeTruthy();
       });
     });
@@ -104,7 +104,7 @@ describe('SimpleSchemaBridge', () => {
 
     it('works with correct error', () => {
       expect(bridge.getError('a', { details: [{ name: 'a' }] })).toEqual({
-        name: 'a'
+        name: 'a',
       });
       expect(bridge.getError('a', { details: [{ name: 'b' }] })).toBe(null);
     });
@@ -123,13 +123,13 @@ describe('SimpleSchemaBridge', () => {
     it('works with correct error', () => {
       expect(
         bridge.getErrorMessage('a', {
-          details: [{ name: 'a', details: { value: 1 } }]
-        })
+          details: [{ name: 'a', details: { value: 1 } }],
+        }),
       ).toBe('(a)');
       expect(
         bridge.getErrorMessage('a', {
-          details: [{ name: 'b', details: { value: 1 } }]
-        })
+          details: [{ name: 'b', details: { value: 1 } }],
+        }),
       ).toBe('');
     });
   });
@@ -146,20 +146,20 @@ describe('SimpleSchemaBridge', () => {
 
     it('works with Error', () => {
       expect(bridge.getErrorMessages(new Error('correct'))).toEqual([
-        'correct'
+        'correct',
       ]);
     });
 
     it('works with ValidationError', () => {
       expect(
         bridge.getErrorMessages({
-          details: [{ name: 'a', details: { value: 1 } }]
-        })
+          details: [{ name: 'a', details: { value: 1 } }],
+        }),
       ).toEqual(['(a)']);
       expect(
         bridge.getErrorMessages({
-          details: [{ name: 'b', details: { value: 1 } }]
-        })
+          details: [{ name: 'b', details: { value: 1 } }],
+        }),
       ).toEqual(['(b)']);
     });
   });
@@ -190,14 +190,14 @@ describe('SimpleSchemaBridge', () => {
       expect(bridge.getProps('o')).toEqual({
         label: 'O',
         required: true,
-        allowedValues: ['O']
+        allowedValues: ['O'],
       });
     });
 
     it('works with allowedValues from props', () => {
       expect(bridge.getProps('o', { allowedValues: ['O'] })).toEqual({
         label: 'O',
-        required: true
+        required: true,
       });
     });
 
@@ -205,12 +205,12 @@ describe('SimpleSchemaBridge', () => {
       expect(bridge.getProps('l')).toEqual({
         label: 'L',
         required: true,
-        component: 'div'
+        component: 'div',
       });
       expect(bridge.getProps('m')).toEqual({
         label: 'M',
         required: true,
-        component: noop
+        component: noop,
       });
     });
 
@@ -218,7 +218,7 @@ describe('SimpleSchemaBridge', () => {
       expect(bridge.getProps('n')).toEqual({
         label: 'N',
         required: true,
-        component: 'div'
+        component: 'div',
       });
     });
 
@@ -245,16 +245,16 @@ describe('SimpleSchemaBridge', () => {
 
     it('works with options from props', () => {
       expect(
-        bridge.getProps('s', { options: { c: 1, d: 2 } }).transform('c')
+        bridge.getProps('s', { options: { c: 1, d: 2 } }).transform('c'),
       ).toBe(1);
       expect(
-        bridge.getProps('s', { options: { c: 1, d: 2 } }).transform('d')
+        bridge.getProps('s', { options: { c: 1, d: 2 } }).transform('d'),
       ).toBe(2);
       expect(
-        bridge.getProps('s', { options: { c: 1, d: 2 } }).allowedValues[0]
+        bridge.getProps('s', { options: { c: 1, d: 2 } }).allowedValues[0],
       ).toBe('c');
       expect(
-        bridge.getProps('s', { options: { c: 1, d: 2 } }).allowedValues[1]
+        bridge.getProps('s', { options: { c: 1, d: 2 } }).allowedValues[1],
       ).toBe('d');
     });
 
@@ -262,14 +262,14 @@ describe('SimpleSchemaBridge', () => {
       expect(bridge.getProps('p')).toEqual({
         label: 'P',
         required: true,
-        transform: noop
+        transform: noop,
       });
     });
 
     it('works with transform from props', () => {
       expect(bridge.getProps('p', { transform: () => {} })).toEqual({
         label: 'P',
-        required: true
+        required: true,
       });
     });
   });

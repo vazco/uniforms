@@ -4,7 +4,7 @@ import { BaseField, filterDOMProps } from 'uniforms';
 
 const SubmitField = (
   { className, disabled, inputRef, value, ...props },
-  { uniforms: { error, state } }
+  { uniforms: { error, state } },
 ) => (
   <input
     className={classnames('ui', className, 'button')}

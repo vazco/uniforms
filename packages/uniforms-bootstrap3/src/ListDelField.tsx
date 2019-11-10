@@ -22,7 +22,7 @@ const ListDel = ({
         parent.onChange(
           []
             .concat(parent.value.slice(0, fieldIndex))
-            .concat(parent.value.slice(1 + fieldIndex))
+            .concat(parent.value.slice(1 + fieldIndex)),
         )
       }
       {...filterDOMProps(props)}
@@ -33,10 +33,10 @@ const ListDel = ({
 };
 
 ListDel.defaultProps = {
-  removeIcon: <i className="glyphicon glyphicon-minus" />
+  removeIcon: <i className="glyphicon glyphicon-minus" />,
 };
 
 export default connectField(ListDel, {
   includeParent: true,
-  initialValue: false
+  initialValue: false,
 });

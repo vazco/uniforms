@@ -12,7 +12,7 @@ export default function changedKeys<T>(root: string, valueA?: T, valueB?: T) {
   const changed = xorWith(
     Object.entries(valueA),
     Object.entries(valueB),
-    isEqual
+    isEqual,
   ).map(pair => joinName(root, pair[0]));
 
   if (changed.length) changed.unshift(root);

@@ -28,13 +28,13 @@ const createContext = (schema, context) => ({
         placeholder: false,
         showInlineError: false,
 
-        ...(context && context.state)
-      }
-    }
+        ...(context && context.state),
+      },
+    },
   },
   childContextTypes: {
-    uniforms: PropTypes.object
-  }
+    uniforms: PropTypes.object,
+  },
 });
 
 export default createContext;

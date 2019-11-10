@@ -22,6 +22,6 @@ const Num = props =>
       value={props.value}
       style={{ width: '100%' }}
       {...filterDOMProps(props)}
-    />
+    />,
   );
 export default connectField(Num, { ensureValue: false });

@@ -16,9 +16,9 @@ const ListItem = props => (
             label: null,
             style: {
               margin: 0,
-              ...child.props.style
-            }
-          })
+              ...child.props.style,
+            },
+          }),
         )
       ) : (
         <AutoField {...props} style={{ margin: 0 }} />
@@ -28,5 +28,5 @@ const ListItem = props => (
 );
 export default connectField(ListItem, {
   includeInChain: false,
-  includeParent: true
+  includeParent: true,
 });

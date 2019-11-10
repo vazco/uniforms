@@ -9,14 +9,14 @@ import createContext from './_createContext';
 const parent = {
   maxCount: 3,
   minCount: 0,
-  value: ['x', 'y', 'z']
+  value: ['x', 'y', 'z'],
 };
 
 test('<ListDelField> - works', () => {
   const element = <ListDelField name="x.1" parent={parent} />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Array }, 'x.$': { type: String } })
+    createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
   expect(wrapper.find(ListDelField)).toHaveLength(1);
@@ -34,7 +34,7 @@ test('<ListDelField> - prevents onClick when disabled', () => {
   );
   const wrapper = mount(
     element,
-    createContext({ x: { type: Array }, 'x.$': { type: String } })
+    createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
   expect(wrapper.find(IconButton).simulate('click')).toBeTruthy();
@@ -52,7 +52,7 @@ test('<ListDelField> - prevents onClick when limit reached', () => {
   );
   const wrapper = mount(
     element,
-    createContext({ x: { type: Array }, 'x.$': { type: String } })
+    createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
   expect(wrapper.find(IconButton).simulate('click')).toBeTruthy();
@@ -67,7 +67,7 @@ test('<ListDelField> - correctly reacts on click', () => {
   );
   const wrapper = mount(
     element,
-    createContext({ x: { type: Array }, 'x.$': { type: String } })
+    createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
   expect(wrapper.find(IconButton).simulate('click')).toBeTruthy();
@@ -80,7 +80,7 @@ test('<ListDelField> - renders correct icon', () => {
   );
   const wrapper = mount(
     element,
-    createContext({ x: { type: Array }, 'x.$': { type: String } })
+    createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
   expect(wrapper.find(AlarmIcon)).toHaveLength(1);

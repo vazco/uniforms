@@ -14,14 +14,14 @@ const ListDel = ({ className, disabled, name, parent, ...props }) => {
         'ui',
         className,
         limitNotReached ? 'link' : 'disabled',
-        'fitted close icon'
+        'fitted close icon',
       )}
       onClick={() =>
         limitNotReached &&
         parent.onChange(
           []
             .concat(parent.value.slice(0, fieldIndex))
-            .concat(parent.value.slice(1 + fieldIndex))
+            .concat(parent.value.slice(1 + fieldIndex)),
         )
       }
     />
@@ -30,5 +30,5 @@ const ListDel = ({ className, disabled, name, parent, ...props }) => {
 
 export default connectField(ListDel, {
   includeParent: true,
-  initialValue: false
+  initialValue: false,
 });

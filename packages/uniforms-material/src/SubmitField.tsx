@@ -4,7 +4,7 @@ import { BaseField, filterDOMProps } from 'uniforms';
 
 const SubmitField = (
   { children, disabled, inputRef, label, value, ...props },
-  { uniforms: { error, state } }
+  { uniforms: { error, state } },
 ) => (
   <Button
     disabled={disabled === undefined ? !!(error || state.disabled) : disabled}

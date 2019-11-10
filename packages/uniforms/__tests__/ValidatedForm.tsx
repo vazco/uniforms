@@ -18,7 +18,7 @@ describe('ValidatedForm', () => {
     getDefinition() {},
     messageForError() {},
     objectKeys() {},
-    validator: () => validator
+    validator: () => validator,
   };
   const schema = new SimpleSchemaBridge(schemaDefinition);
 
@@ -36,7 +36,7 @@ describe('ValidatedForm', () => {
 
     beforeEach(() => {
       wrapper = mount(
-        <ValidatedForm model={model} schema={schema} onValidate={onValidate} />
+        <ValidatedForm model={model} schema={schema} onValidate={onValidate} />,
       );
       form = wrapper.instance();
     });
@@ -62,7 +62,7 @@ describe('ValidatedForm', () => {
 
       expect(wrapper.instance().getChildContext()).toHaveProperty(
         'uniforms.error',
-        error
+        error,
       );
     });
 
@@ -72,7 +72,7 @@ describe('ValidatedForm', () => {
       expect(onValidate).toHaveBeenLastCalledWith(
         model,
         null,
-        expect.any(Function)
+        expect.any(Function),
       );
     });
 
@@ -87,7 +87,7 @@ describe('ValidatedForm', () => {
       expect(onValidate).toHaveBeenLastCalledWith(
         model,
         error,
-        expect.any(Function)
+        expect.any(Function),
       );
     });
 
@@ -100,7 +100,7 @@ describe('ValidatedForm', () => {
 
       expect(wrapper.instance().getChildContext()).toHaveProperty(
         'uniforms.error',
-        error
+        error,
       );
     });
 
@@ -117,14 +117,14 @@ describe('ValidatedForm', () => {
       expect(onValidate).toHaveBeenCalled();
       expect(wrapper.instance().getChildContext()).not.toHaveProperty(
         'uniforms.error',
-        error
+        error,
       );
     });
 
     it('has `validating` context variable, default `false`', () => {
       expect(wrapper.instance().getChildContext()).toHaveProperty(
         'uniforms.state.validating',
-        false
+        false,
       );
     });
 
@@ -133,7 +133,7 @@ describe('ValidatedForm', () => {
       form.validate();
       expect(wrapper.instance().getChildContext()).toHaveProperty(
         'uniforms.state.validating',
-        true
+        true,
       );
 
       // Resolve the async validation by calling the third argument of the first call to onValidate.
@@ -141,7 +141,7 @@ describe('ValidatedForm', () => {
       onValidate.mock.calls[0][2]();
       expect(wrapper.instance().getChildContext()).toHaveProperty(
         'uniforms.state.validating',
-        false
+        false,
       );
     });
 
@@ -155,7 +155,7 @@ describe('ValidatedForm', () => {
       expect(onValidate).toHaveBeenLastCalledWith(
         transformedModel,
         null,
-        expect.any(Function)
+        expect.any(Function),
       );
     });
   });
@@ -169,7 +169,7 @@ describe('ValidatedForm', () => {
           schema={schema}
           onSubmit={onSubmit}
           onValidate={onValidate}
-        />
+        />,
       );
     });
 
@@ -198,7 +198,7 @@ describe('ValidatedForm', () => {
       expect(onSubmit).toHaveBeenCalled();
       expect(wrapper.instance().getChildContext()).toHaveProperty(
         'uniforms.error',
-        error
+        error,
       );
     });
 
@@ -208,7 +208,7 @@ describe('ValidatedForm', () => {
       await new Promise(resolve => process.nextTick(resolve));
       expect(wrapper.instance().getChildContext()).toHaveProperty(
         'uniforms.state.submitting',
-        true
+        true,
       );
     });
 
@@ -225,7 +225,7 @@ describe('ValidatedForm', () => {
       await new Promise(resolve => process.nextTick(resolve));
       expect(wrapper.instance().getChildContext()).toHaveProperty(
         'uniforms.state.submitting',
-        false
+        false,
       );
     });
 
@@ -240,7 +240,7 @@ describe('ValidatedForm', () => {
     describe('in `onChange` mode', () => {
       it('validates', () => {
         const wrapper = mount(
-          <ValidatedForm model={model} schema={schema} validate="onChange" />
+          <ValidatedForm model={model} schema={schema} validate="onChange" />,
         );
         wrapper
           .instance()
@@ -254,7 +254,7 @@ describe('ValidatedForm', () => {
     describe('in `onSubmit` mode', () => {
       it('does not validate', () => {
         const wrapper = mount(
-          <ValidatedForm model={model} schema={schema} validate="onSubmit" />
+          <ValidatedForm model={model} schema={schema} validate="onSubmit" />,
         );
         wrapper
           .instance()
@@ -273,7 +273,7 @@ describe('ValidatedForm', () => {
             model={model}
             schema={schema}
             validate="onChangeAfterSubmit"
-          />
+          />,
         );
       });
 
@@ -302,7 +302,7 @@ describe('ValidatedForm', () => {
   describe('on reset', () => {
     it('removes `error`', () => {
       const wrapper = mount(
-        <ValidatedForm model={model} onSubmit={onSubmit} schema={schema} />
+        <ValidatedForm model={model} onSubmit={onSubmit} schema={schema} />,
       );
       validator.mockImplementationOnce(() => {
         throw new Error();
@@ -322,7 +322,7 @@ describe('ValidatedForm', () => {
       let wrapper;
       beforeEach(() => {
         wrapper = mount(
-          <ValidatedForm model={model} schema={schema} validate="onChange" />
+          <ValidatedForm model={model} schema={schema} validate="onChange" />,
         );
       });
 
@@ -351,7 +351,7 @@ describe('ValidatedForm', () => {
       let wrapper;
       beforeEach(() => {
         wrapper = mount(
-          <ValidatedForm model={model} schema={schema} validate="onSubmit" />
+          <ValidatedForm model={model} schema={schema} validate="onSubmit" />,
         );
       });
 
@@ -385,8 +385,8 @@ describe('ValidatedForm', () => {
             getDefinition() {},
             messageForError() {},
             objectKeys() {},
-            validator
-          })
+            validator,
+          }),
         });
 
         ['1', '2', '3'].forEach(value => {
@@ -408,8 +408,8 @@ describe('ValidatedForm', () => {
             getDefinition() {},
             messageForError() {},
             objectKeys() {},
-            validator
-          })
+            validator,
+          }),
         });
 
         const validatorA = Symbol();
@@ -432,7 +432,7 @@ describe('ValidatedForm', () => {
           getDefinition() {},
           messageForError() {},
           objectKeys() {},
-          validator: () => alternativeValidator
+          validator: () => alternativeValidator,
         });
 
         wrapper.setProps({ schema: alternativeSchema });

@@ -6,14 +6,14 @@ import createContext from './_createContext';
 
 const parent = {
   maxCount: 3,
-  value: []
+  value: [],
 };
 
 test('<ListAddField> - works', () => {
   const element = <ListAddField name="x.$" parent={parent} />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Array }, 'x.$': { type: String } })
+    createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
   expect(wrapper.find(ListAddField)).toHaveLength(1);
@@ -31,7 +31,7 @@ test('<ListAddField> - prevents onClick when disabled', () => {
   );
   const wrapper = mount(
     element,
-    createContext({ x: { type: Array }, 'x.$': { type: String } })
+    createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
   expect(wrapper.find('span').simulate('click')).toBeTruthy();
@@ -49,7 +49,7 @@ test('<ListAddField> - prevents onClick when limit reached', () => {
   );
   const wrapper = mount(
     element,
-    createContext({ x: { type: Array }, 'x.$': { type: String } })
+    createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
   expect(wrapper.find('span').simulate('click')).toBeTruthy();
@@ -68,7 +68,7 @@ test('<ListAddField> - correctly reacts on click', () => {
   );
   const wrapper = mount(
     element,
-    createContext({ x: { type: Array }, 'x.$': { type: String } })
+    createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
   expect(wrapper.find('span').simulate('click')).toBeTruthy();

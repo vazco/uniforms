@@ -18,9 +18,9 @@ export default function wrapField(
     required,
     showInlineError,
     wrapperCol,
-    wrapperStyle
+    wrapperStyle,
   },
-  children
+  children,
 ) {
   const labelNode = !!label && (
     <span>

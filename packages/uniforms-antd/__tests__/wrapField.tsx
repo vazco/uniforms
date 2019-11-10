@@ -22,7 +22,7 @@ test('<wrapField> - renders wrapper with an error message', () => {
   const error = new Error();
   const element = wrapField(
     { error, showInlineError: true, errorMessage: 'Error' },
-    <div />
+    <div />,
   );
   const wrapper = mount(element);
 

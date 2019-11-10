@@ -22,11 +22,11 @@ const renderCheckboxes = props =>
           : event => props.onChange(event.target.value),
       options: props.allowedValues.map(value => ({
         label: props.transform ? props.transform(value) : value,
-        value
+        value,
       })),
       value: props.value,
-      ...filterDOMProps(props)
-    }
+      ...filterDOMProps(props),
+    },
   );
 
 const renderSelect = props => (

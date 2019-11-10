@@ -11,8 +11,8 @@ test('<NestField> - renders an <AutoField> for each field', () => {
     createContext({
       x: { type: Object },
       'x.a': { type: String },
-      'x.b': { type: Number }
-    })
+      'x.b': { type: Number },
+    }),
   );
 
   expect(wrapper.find(AutoField)).toHaveLength(2);
@@ -20,13 +20,13 @@ test('<NestField> - renders an <AutoField> for each field', () => {
     wrapper
       .find(AutoField)
       .at(0)
-      .prop('name')
+      .prop('name'),
   ).toBe('x.a');
   expect(
     wrapper
       .find(AutoField)
       .at(1)
-      .prop('name')
+      .prop('name'),
   ).toBe('x.b');
 });
 
@@ -41,8 +41,8 @@ test('<NestField> - renders custom content if given', () => {
     createContext({
       x: { type: Object },
       'x.a': { type: String },
-      'x.b': { type: Number }
-    })
+      'x.b': { type: Number },
+    }),
   );
 
   expect(wrapper.find(AutoField)).toHaveLength(0);
@@ -57,8 +57,8 @@ test('<NestField> - renders a label', () => {
     createContext({
       x: { type: Object },
       'x.a': { type: String },
-      'x.b': { type: Number }
-    })
+      'x.b': { type: Number },
+    }),
   );
 
   expect(wrapper.find('label')).toHaveLength(3);
@@ -66,7 +66,7 @@ test('<NestField> - renders a label', () => {
     wrapper
       .find('label')
       .at(0)
-      .text()
+      .text(),
   ).toBe('y');
 });
 
@@ -77,27 +77,27 @@ test('<NestField> - renders a wrapper with unknown props', () => {
     createContext({
       x: { type: Object },
       'x.a': { type: String },
-      'x.b': { type: Number }
-    })
+      'x.b': { type: Number },
+    }),
   );
 
   expect(
     wrapper
       .find('div')
       .at(0)
-      .prop('data-x')
+      .prop('data-x'),
   ).toBe('x');
   expect(
     wrapper
       .find('div')
       .at(0)
-      .prop('data-y')
+      .prop('data-y'),
   ).toBe('y');
   expect(
     wrapper
       .find('div')
       .at(0)
-      .prop('data-z')
+      .prop('data-z'),
   ).toBe('z');
 });
 
@@ -111,14 +111,14 @@ test('<NestField> - renders correct error text (specified)', () => {
     createContext({
       x: { type: Object },
       'x.a': { type: String },
-      'x.b': { type: Number }
-    })
+      'x.b': { type: Number },
+    }),
   );
 
   expect(
     wrapper
       .find('div > div')
       .at(0)
-      .text()
+      .text(),
   ).toBe('Error');
 });

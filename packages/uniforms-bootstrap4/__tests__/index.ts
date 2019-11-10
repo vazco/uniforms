@@ -27,6 +27,6 @@ it('exports everything', () => {
     ValidatedForm: expect.any(Function),
     ValidatedQuickForm: expect.any(Function),
     gridClassName: expect.any(Function),
-    wrapField: expect.any(Function)
+    wrapField: expect.any(Function),
   });
 });

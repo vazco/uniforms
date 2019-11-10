@@ -63,7 +63,7 @@ export default class SimpleSchema2Bridge extends Bridge {
 
     const merged = {
       ...definition,
-      ...definition.type[0]
+      ...definition.type[0],
     };
 
     // aldeed/node-simple-schema#27
@@ -142,14 +142,14 @@ export default class SimpleSchema2Bridge extends Bridge {
         field = {
           ...field,
           transform: value => options[value],
-          allowedValues: Object.keys(options)
+          allowedValues: Object.keys(options),
         };
       } else {
         field = {
           ...field,
           transform: value =>
             options.find(option => option.value === value).label,
-          allowedValues: options.map(option => option.value)
+          allowedValues: options.map(option => option.value),
         };
       }
     }

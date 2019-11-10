@@ -24,7 +24,7 @@ const List = ({
     className={classnames(
       'panel panel-default',
       { 'panel-danger': error },
-      className
+      className,
     )}
     {...filterDOMProps(props)}
   >
@@ -53,11 +53,11 @@ const List = ({
                 label: null,
                 name: joinName(
                   name,
-                  child.props.name && child.props.name.replace('$', index)
+                  child.props.name && child.props.name.replace('$', index),
                 ),
-                removeIcon
-              })
-            )
+                removeIcon,
+              }),
+            ),
           )
         : value.map((item: any, index: number) => (
             <ListItemField
@@ -73,5 +73,5 @@ const List = ({
 );
 export default connectField(List, {
   ensureValue: false,
-  includeInChain: false
+  includeInChain: false,
 });

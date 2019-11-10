@@ -25,7 +25,7 @@ const List = ({
       'ui',
       className,
       { disabled },
-      'grouped fitted fields list'
+      'grouped fitted fields list',
     )}
     {...filterDOMProps(props)}
   >
@@ -55,10 +55,10 @@ const List = ({
               label: null,
               name: joinName(
                 name,
-                child.props.name && child.props.name.replace('$', index)
-              )
-            })
-          )
+                child.props.name && child.props.name.replace('$', index),
+              ),
+            }),
+          ),
         )
       : value.map((item, index) => (
           <ListItemField
@@ -72,5 +72,5 @@ const List = ({
 );
 export default connectField(List, {
   ensureValue: false,
-  includeInChain: false
+  includeInChain: false,
 });

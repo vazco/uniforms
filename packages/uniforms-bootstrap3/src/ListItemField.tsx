@@ -15,8 +15,8 @@ const ListItem = ({ removeIcon, ...props }: any) => (
         React.cloneElement(child, {
           className: 'col-xs-11',
           name: joinName(props.name, child.props.name),
-          label: null
-        })
+          label: null,
+        }),
       )
     ) : (
       <AutoField {...props} className="col-xs-11" />
@@ -25,5 +25,5 @@ const ListItem = ({ removeIcon, ...props }: any) => (
 );
 export default connectField(ListItem, {
   includeInChain: false,
-  includeParent: true
+  includeParent: true,
 });

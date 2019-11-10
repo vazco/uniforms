@@ -7,9 +7,9 @@ const SubmitField = (
   {
     uniforms: {
       error,
-      state: { disabled }
-    }
-  }
+      state: { disabled },
+    },
+  },
 ) => (
   <Button
     disabled={!!(error || disabled)}

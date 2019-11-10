@@ -55,7 +55,7 @@ test('<HiddenField> - renders an input with correct value (model)', () => {
   const element = <HiddenField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { model: { x: 'y' } })
+    createContext({ x: { type: String } }, { model: { x: 'y' } }),
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
@@ -68,7 +68,7 @@ test('<HiddenField> - renders an input which correctly reacts on model change', 
   const element = <HiddenField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { onChange })
+    createContext({ x: { type: String } }, { onChange }),
   );
 
   wrapper.setProps({ value: 'y' });
@@ -82,7 +82,7 @@ test('<HiddenField> - renders an input which correctly reacts on model change (e
   const element = <HiddenField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { onChange })
+    createContext({ x: { type: String } }, { onChange }),
   );
 
   wrapper.setProps({ value: undefined });
@@ -96,7 +96,7 @@ test('<HiddenField> - renders an input which correctly reacts on model change (s
   const element = <HiddenField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { model: { x: 'y' }, onChange })
+    createContext({ x: { type: String } }, { model: { x: 'y' }, onChange }),
   );
 
   wrapper.setProps({ value: 'y' });
@@ -117,7 +117,7 @@ test('<HiddenField noDOM> - renders nothing which correctly reacts on model chan
   const element = <HiddenField noDOM name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { onChange })
+    createContext({ x: { type: String } }, { onChange }),
   );
 
   wrapper.setProps({ value: 'y' });
@@ -131,7 +131,7 @@ test('<HiddenField noDOM> - renders nothing which correctly reacts on model chan
   const element = <HiddenField noDOM name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { onChange })
+    createContext({ x: { type: String } }, { onChange }),
   );
 
   wrapper.setProps({ value: undefined });
@@ -145,7 +145,7 @@ test('<HiddenField noDOM> - renders nothing which correctly reacts on model chan
   const element = <HiddenField noDOM name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { model: { x: 'y' }, onChange })
+    createContext({ x: { type: String } }, { model: { x: 'y' }, onChange }),
   );
 
   wrapper.setProps({ value: 'y' });

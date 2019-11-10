@@ -14,7 +14,7 @@ const ListAdd = ({ className, disabled, parent, value, ...props }) => {
         'ui',
         className,
         limitNotReached ? 'link' : 'disabled',
-        'fitted add icon'
+        'fitted add icon',
       )}
       onClick={() =>
         limitNotReached &&
@@ -26,5 +26,5 @@ const ListAdd = ({ className, disabled, parent, value, ...props }) => {
 
 export default connectField(ListAdd, {
   includeParent: true,
-  initialValue: false
+  initialValue: false,
 });

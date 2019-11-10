@@ -10,7 +10,7 @@ const resolveRef = (referance, schema) => {
   invariant(
     referance.startsWith('#'),
     'Reference is not an internal reference, and only such are allowed: "%s"',
-    referance
+    referance,
   );
 
   const resolvedReference = referance
@@ -21,7 +21,7 @@ const resolveRef = (referance, schema) => {
   invariant(
     resolvedReference,
     'Reference not found in schema: "%s"',
-    referance
+    referance,
   );
 
   return resolvedReference;
@@ -41,7 +41,7 @@ const distinctSchema = schema => {
 
 const extractValue = (...xs) =>
   xs.reduce((x, y) =>
-    x === false || x === null ? '' : x !== true && x !== undefined ? x : y
+    x === false || x === null ? '' : x !== true && x !== undefined ? x : y,
   );
 
 const pathToName = path => {
@@ -109,7 +109,7 @@ export default class JSONSchemaBridge extends Bridge {
       if (Array.isArray(error.details)) {
         return error.details.reduce(
           (acc, { message }) => acc.concat(message),
-          []
+          [],
         );
       }
 
@@ -135,7 +135,7 @@ export default class JSONSchemaBridge extends Bridge {
         invariant(
           definition.type === 'array',
           'Field not found in schema: "%s"',
-          name
+          name,
         );
         definition = Array.isArray(definition.items)
           ? definition.items[parseInt(next, 10)]
@@ -144,18 +144,18 @@ export default class JSONSchemaBridge extends Bridge {
         invariant(
           definition.properties,
           'Field properties not found in schema: "%s"',
-          name
+          name,
         );
         definition = definition.properties[next];
       } else {
         const [{ properties: combinedDefinition = {} } = {}] = [
           'allOf',
           'anyOf',
-          'oneOf'
+          'oneOf',
         ]
           .filter(key => definition[key])
           .map(key =>
-            definition[key].find(({ properties = {} }) => properties[next])
+            definition[key].find(({ properties = {} }) => properties[next]),
           );
 
         definition = combinedDefinition[next];
@@ -171,7 +171,7 @@ export default class JSONSchemaBridge extends Bridge {
         .filter(key => definition[key])
         .forEach(key => {
           _definition[key] = definition[key].map(def =>
-            def.$ref ? resolveRef(def.$ref, this.schema) : def
+            def.$ref ? resolveRef(def.$ref, this.schema) : def,
           );
         });
 
@@ -187,9 +187,9 @@ export default class JSONSchemaBridge extends Bridge {
           .reduce(
             ([_properties, _required], { properties, required }) => [
               Object.assign(_properties, properties),
-              _required.concat(required)
+              _required.concat(required),
             ],
-            [{}, []]
+            [{}, []],
           );
 
         _definition.properties = properties;
@@ -208,7 +208,7 @@ export default class JSONSchemaBridge extends Bridge {
       default: defaultValue = _default !== undefined
         ? _default
         : get(this.schema.default, name),
-      type = _type
+      type = _type,
     } = this._compiledSchema[name];
 
     if (defaultValue !== undefined) return cloneDeep(defaultValue);
@@ -228,7 +228,7 @@ export default class JSONSchemaBridge extends Bridge {
     const { uniforms, ...field } = this.getField(name);
     const { enum: enum_, isRequired, title, ...ready } = omit(
       { ...field, ...uniforms, ...this._compiledSchema[name] },
-      ['default', 'format', 'type']
+      ['default', 'format', 'type'],
     );
 
     if (enum_) ready.allowedValues = enum_;
@@ -238,7 +238,7 @@ export default class JSONSchemaBridge extends Bridge {
     ready.label = extractValue(
       ready.label,
       title,
-      toHumanLabel(joinName(null, name).slice(-1)[0])
+      toHumanLabel(joinName(null, name).slice(-1)[0]),
     );
 
     const options = props.options || ready.options;
@@ -268,7 +268,7 @@ export default class JSONSchemaBridge extends Bridge {
     const { type: _type, properties: _properties } = this.getField(name);
     const {
       type: fieldType = _type,
-      properties: fieldProperties = _properties
+      properties: fieldProperties = _properties,
     } = this._compiledSchema[name];
 
     if (fieldType === 'object') {
@@ -293,7 +293,7 @@ export default class JSONSchemaBridge extends Bridge {
     invariant(
       fieldType !== 'null',
       'Field "%s" can not be represented as a type null',
-      name
+      name,
     );
 
     return fieldType;

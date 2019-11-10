@@ -45,18 +45,18 @@ const Bool = ({
         }
         label={transform ? transform(label) : label}
       />
-    </FormGroup>
+    </FormGroup>,
   );
 };
 
 Bool.defaultProps = {
   appearance: 'checkbox',
   fullWidth: true,
-  margin: 'dense'
+  margin: 'dense',
 };
 
 Bool.propTypes = {
-  appearance: PropTypes.oneOf(['toggle', 'checkbox'])
+  appearance: PropTypes.oneOf(['toggle', 'checkbox']),
 };
 
 export default connectField(Bool);

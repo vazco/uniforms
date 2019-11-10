@@ -5,7 +5,7 @@ import { BaseField, filterDOMProps, nothing } from 'uniforms';
 
 const ErrorsField = (
   { children, fullWidth, margin, variant, ...props },
-  { uniforms: { error, schema } }
+  { uniforms: { error, schema } },
 ) =>
   !error && !children ? (
     nothing
@@ -30,7 +30,7 @@ ErrorsField.contextTypes = BaseField.contextTypes;
 
 ErrorsField.defaultProps = {
   fullWidth: true,
-  margin: 'dense'
+  margin: 'dense',
 };
 
 export default ErrorsField;

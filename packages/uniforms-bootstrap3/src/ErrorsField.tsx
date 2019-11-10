@@ -4,7 +4,7 @@ import { BaseField, filterDOMProps, nothing } from 'uniforms';
 
 const ErrorsField = (
   { className, children, ...props }: any,
-  { uniforms: { error, schema } }: any
+  { uniforms: { error, schema } }: any,
 ) =>
   !error && !children ? (
     nothing

@@ -59,7 +59,7 @@ const renderSelect = ({
       InputLabelProps={{
         shrink: !!label && (hasPlaceholder || hasValue),
         ...labelProps,
-        ...InputLabelProps
+        ...InputLabelProps,
       }}
       label={label}
       margin={margin}
@@ -74,7 +74,7 @@ const renderSelect = ({
         inputProps: { name, id, ...inputProps },
         multiple: fieldType === Array || undefined,
         native,
-        ...filterDOMProps(props)
+        ...filterDOMProps(props),
       }}
       value={native && !value ? '' : value}
       variant={variant}
@@ -167,12 +167,12 @@ const renderCheckboxes = ({
       disabled,
       error,
       errorMessage,
-      showInlineError
+      showInlineError,
     },
     (legend || label) && (
       <FormLabel component="legend">{legend || label}</FormLabel>
     ),
-    children
+    children,
   );
 };
 
@@ -182,7 +182,7 @@ const Select = ({ checkboxes, ...props }: any) =>
 Select.defaultProps = {
   appearance: 'checkbox',
   fullWidth: true,
-  margin: 'dense'
+  margin: 'dense',
 };
 
 export default connectField(Select);

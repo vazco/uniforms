@@ -17,7 +17,7 @@ const Text = props =>
       type={props.type}
       value={props.value}
       {...filterDOMProps(props)}
-    />
+    />,
   );
 Text.defaultProps = { type: 'text' };
 

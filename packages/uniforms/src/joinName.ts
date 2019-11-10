@@ -6,7 +6,7 @@ function joinName(...parts: unknown[]) {
       part || part === 0
         ? parts.concat(typeof part === 'string' ? part.split('.') : part)
         : parts,
-    []
+    [],
   );
 
   return parts[0] === null ? name.map(part => '' + part) : name.join('.');

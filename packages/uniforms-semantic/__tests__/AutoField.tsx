@@ -8,7 +8,7 @@ import {
   NumField,
   RadioField,
   SelectField,
-  TextField
+  TextField,
 } from 'uniforms-semantic';
 import { mount } from 'enzyme';
 
@@ -29,9 +29,9 @@ test('<AutoField> - renders RadioField', () => {
       x: {
         type: String,
         allowedValues: ['x', 'y'],
-        uniforms: { checkboxes: true }
-      }
-    })
+        uniforms: { checkboxes: true },
+      },
+    }),
   );
 
   expect(wrapper.find(RadioField)).toHaveLength(1);
@@ -43,8 +43,8 @@ test('<AutoField> - renders SelectField', () => {
     element,
     createContext({
       x: { type: Array, allowedValues: ['x', 'y'] },
-      'x.$': { type: String }
-    })
+      'x.$': { type: String },
+    }),
   );
 
   expect(wrapper.find(SelectField)).toHaveLength(1);
@@ -61,7 +61,7 @@ test('<AutoField> - renders ListField', () => {
   const element = <AutoField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Array }, 'x.$': { type: String } })
+    createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
   expect(wrapper.find(ListField)).toHaveLength(1);
@@ -101,7 +101,7 @@ test('<AutoField> - renders Component (model)', () => {
   const element = <AutoField name="x" />;
   mount(
     element,
-    createContext({ x: { type: String, uniforms: { component: Component } } })
+    createContext({ x: { type: String, uniforms: { component: Component } } }),
   );
 
   expect(Component).toHaveBeenCalledTimes(1);

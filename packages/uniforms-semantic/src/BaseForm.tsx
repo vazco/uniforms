@@ -13,7 +13,7 @@ const Semantic = (parent: any): any =>
 
       return {
         ...props,
-        className: classnames('ui', props.className, { error }, 'form')
+        className: classnames('ui', props.className, { error }, 'form'),
       };
     }
   };
