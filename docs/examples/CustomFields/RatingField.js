@@ -14,11 +14,10 @@ const Rating = ({
   onChange
 }) => (
   <section className={classnames('ui', { disabled, required }, className)}>
-    {[...Array(max)]
-      .map((_, index) => index + 1)
+    {Array.from({length: max}, (_, index) => index + 1)
       .map(index => (
         <span
-          style={{ fontSize: 40 }}
+          style={{ fontSize: 40, cursor: 'pointer' }}
           key={index}
           onClick={() =>
             disabled || onChange(!required && value === index ? null : index)
