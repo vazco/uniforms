@@ -4,7 +4,7 @@ import { connectField } from 'uniforms';
 
 import wrapField from './wrapField';
 
-const DateConstructor = globalThis.Date;
+const DateConstructor = (typeof global === 'object' ? global : window).Date;
 const dateFormat = (value: any) => value && value.toISOString().slice(0, -8);
 const dateParse = (timestamp: any, onChange: any) => {
   const date = new DateConstructor(timestamp);

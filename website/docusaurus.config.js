@@ -62,10 +62,7 @@ module.exports = {
     sidebarCollapsible: false
   },
   favicon: 'favicon.ico',
-  plugins: [
-    path.resolve(__dirname, './plugins/docusaurus-plugin-hotjar'),
-    path.resolve(__dirname, './plugins/docusaurus-plugin-polyfill')
-  ],
+  plugins: [path.resolve(__dirname, './plugins/docusaurus-plugin-hotjar')],
   presets: [
     [
       '@docusaurus/preset-classic',

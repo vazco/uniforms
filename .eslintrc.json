@@ -4,9 +4,6 @@
     {
       "files": ["**/*.ts", "**/*.tsx"],
       "extends": ["plugin:import/typescript", "vazco/typescript"],
-      "globals": {
-        "globalThis": "readonly"
-      },
       "rules": {
         "@typescript-eslint/ban-ts-ignore": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
