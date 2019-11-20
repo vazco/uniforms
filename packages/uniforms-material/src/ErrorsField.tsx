@@ -29,7 +29,7 @@ const ErrorsField = ({ children, fullWidth, margin, variant, ...props }) => {
 
 ErrorsField.defaultProps = {
   fullWidth: true,
-  margin: 'dense'
+  margin: 'dense',
 };
 
 export default ErrorsField;

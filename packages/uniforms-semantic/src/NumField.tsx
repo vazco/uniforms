@@ -40,7 +40,7 @@ const Num_ = ({
         'ui',
         wrapClassName,
         { left: iconLeft, icon: icon || iconLeft },
-        'input'
+        'input',
       )}
     >
       <input
@@ -80,7 +80,7 @@ if (parseInt(React.version, 10) < 16) {
         parse(decimal, this.state.value.replace(/[.,]+$/, ''))
       ) {
         this.setState({
-          value: value === undefined || value === '' ? '' : '' + value
+          value: value === undefined || value === '' ? '' : '' + value,
         });
       }
     }
@@ -96,7 +96,7 @@ if (parseInt(React.version, 10) < 16) {
       return Num_({
         ...this.props,
         onChange: this.onChange,
-        value: this.state.value
+        value: this.state.value,
       } as any);
     }
   };
@@ -106,7 +106,7 @@ if (parseInt(React.version, 10) < 16) {
       ...props,
       onChange(event) {
         props.onChange(parse(props.decimal, event.target.value));
-      }
+      },
     });
 }
 

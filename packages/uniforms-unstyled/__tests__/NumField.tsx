@@ -111,7 +111,7 @@ test('<NumField> - renders an input with correct value (model)', () => {
   const element = <NumField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Number } }, { model: { x: 1 }, onChange })
+    createContext({ x: { type: Number } }, { model: { x: 1 }, onChange }),
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
@@ -127,19 +127,19 @@ test('<NumField> - renders an input with correct value (model)', () => {
     { value: 2 },
     { value: 2 },
     { value: 1, decimal: false },
-    { value: 1, decimal: false }
+    { value: 1, decimal: false },
   ].forEach(({ decimal = true, value }) => {
     const valueInput = expectedValueTransform(value);
 
     wrapper.setProps({ decimal });
 
     expect(
-      wrapper.find('input').simulate('change', { target: { value: '' } })
+      wrapper.find('input').simulate('change', { target: { value: '' } }),
     ).toBeTruthy();
     expect(
       wrapper
         .find('input')
-        .simulate('change', { target: { value: valueInput } })
+        .simulate('change', { target: { value: valueInput } }),
     ).toBeTruthy();
     expect(onChange).toHaveBeenLastCalledWith('x', value);
 
@@ -165,12 +165,12 @@ test('<NumField> - renders an input which correctly reacts on change', () => {
   const element = <NumField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Number } }, { onChange })
+    createContext({ x: { type: Number } }, { onChange }),
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
   expect(
-    wrapper.find('input').simulate('change', { target: { value: '1' } })
+    wrapper.find('input').simulate('change', { target: { value: '1' } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', 1);
 });
@@ -181,12 +181,12 @@ test('<NumField> - renders an input which correctly reacts on change (decimal on
   const element = <NumField name="x" decimal />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Number } }, { onChange })
+    createContext({ x: { type: Number } }, { onChange }),
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
   expect(
-    wrapper.find('input').simulate('change', { target: { value: '2.5' } })
+    wrapper.find('input').simulate('change', { target: { value: '2.5' } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', 2.5);
 });
@@ -197,12 +197,12 @@ test('<NumField> - renders an input which correctly reacts on change (decimal on
   const element = <NumField name="x" decimal={false} />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Number } }, { onChange })
+    createContext({ x: { type: Number } }, { onChange }),
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
   expect(
-    wrapper.find('input').simulate('change', { target: { value: '2.5' } })
+    wrapper.find('input').simulate('change', { target: { value: '2.5' } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', 2);
 });
@@ -213,12 +213,12 @@ test('<NumField> - renders an input which correctly reacts on change (empty)', (
   const element = <NumField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Number } }, { onChange })
+    createContext({ x: { type: Number } }, { onChange }),
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
   expect(
-    wrapper.find('input').simulate('change', { target: { value: '' } })
+    wrapper.find('input').simulate('change', { target: { value: '' } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', undefined);
 });
@@ -229,12 +229,12 @@ test('<NumField> - renders an input which correctly reacts on change (same value
   const element = <NumField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Number } }, { model: { x: 1 }, onChange })
+    createContext({ x: { type: Number } }, { model: { x: 1 }, onChange }),
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
   expect(
-    wrapper.find('input').simulate('change', { target: { value: '1' } })
+    wrapper.find('input').simulate('change', { target: { value: '1' } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', 1);
 });
@@ -245,12 +245,12 @@ test('<NumField> - renders an input which correctly reacts on change (zero)', ()
   const element = <NumField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Number } }, { onChange })
+    createContext({ x: { type: Number } }, { onChange }),
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
   expect(
-    wrapper.find('input').simulate('change', { target: { value: '0' } })
+    wrapper.find('input').simulate('change', { target: { value: '0' } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', 0);
 });
@@ -262,7 +262,7 @@ test('<NumField> - renders a label', () => {
   expect(wrapper.find('label')).toHaveLength(1);
   expect(wrapper.find('label').text()).toBe('y');
   expect(wrapper.find('label').prop('htmlFor')).toBe(
-    wrapper.find('input').prop('id')
+    wrapper.find('input').prop('id'),
   );
 });
 
@@ -274,18 +274,18 @@ test('<NumField> - renders a wrapper with unknown props', () => {
     wrapper
       .find('div')
       .at(0)
-      .prop('data-x')
+      .prop('data-x'),
   ).toBe('x');
   expect(
     wrapper
       .find('div')
       .at(0)
-      .prop('data-y')
+      .prop('data-y'),
   ).toBe('y');
   expect(
     wrapper
       .find('div')
       .at(0)
-      .prop('data-z')
+      .prop('data-z'),
   ).toBe('z');
 });

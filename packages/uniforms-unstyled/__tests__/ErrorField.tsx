@@ -8,7 +8,7 @@ const error = {
   error: 'validation-error',
   reason: 'X is required',
   details: [{ name: 'x', type: 'required', details: { value: null } }],
-  message: 'X is required [validation-error]'
+  message: 'X is required [validation-error]',
 };
 
 test('<ErrorField> - works', () => {
@@ -22,7 +22,7 @@ test('<ErrorField> - renders correct error message (context)', () => {
   const element = <ErrorField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { error })
+    createContext({ x: { type: String } }, { error }),
   );
 
   expect(wrapper.find(ErrorField)).toHaveLength(1);

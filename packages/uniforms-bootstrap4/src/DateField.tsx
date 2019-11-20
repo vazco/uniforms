@@ -4,7 +4,7 @@ import { connectField } from 'uniforms';
 
 import wrapField from './wrapField';
 
-const DateConstructor = globalThis.Date;
+const DateConstructor = (typeof global === 'object' ? global : window).Date;
 const dateFormat = value => value && value.toISOString().slice(0, -8);
 const dateParse = (timestamp, onChange) => {
   const date = new DateConstructor(timestamp);
@@ -20,7 +20,7 @@ const Date = props =>
     props,
     <input
       className={classnames(props.inputClassName, 'form-control', {
-        'is-invalid': props.error
+        'is-invalid': props.error,
       })}
       disabled={props.disabled}
       id={props.id}
@@ -32,6 +32,6 @@ const Date = props =>
       ref={props.inputRef}
       type="datetime-local"
       value={dateFormat(props.value)}
-    />
+    />,
   );
 export default connectField(Date);

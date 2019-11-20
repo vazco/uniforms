@@ -19,7 +19,7 @@ describe('BaseForm', () => {
     getProps: noop,
     getSubfields: noop,
     getType: noop,
-    getValidator: noop
+    getValidator: noop,
   };
 
   const onChange = jest.fn();
@@ -36,7 +36,7 @@ describe('BaseForm', () => {
 
   describe('child context', () => {
     const wrapper = mount(
-      <BaseForm error={error} model={model} schema={schema} />
+      <BaseForm error={error} model={model} schema={schema} />,
     );
 
     const context = wrapper.instance().getContext();
@@ -91,7 +91,7 @@ describe('BaseForm', () => {
         <div />
         <div />
         <div />
-      </BaseForm>
+      </BaseForm>,
     );
 
     it('is <form>', () => {
@@ -140,7 +140,7 @@ describe('BaseForm', () => {
         schema={schema}
         onChange={onChange}
         onSubmit={onSubmit}
-      />
+      />,
     );
 
     it('updates `changed` and `changedMap`', () => {
@@ -296,7 +296,7 @@ describe('BaseForm', () => {
 
   describe('when submitted', () => {
     const wrapper = mount(
-      <BaseForm model={model} schema={schema} onSubmit={onSubmit} />
+      <BaseForm model={model} schema={schema} onSubmit={onSubmit} />,
     );
 
     it('calls `onSubmit` once', () => {
@@ -319,7 +319,7 @@ describe('BaseForm', () => {
           }
 
           return model;
-        }
+        },
       });
 
       wrapper.find('form').simulate('submit');
@@ -333,7 +333,7 @@ describe('BaseForm', () => {
       wrapper.setProps({
         onSubmit: undefined,
         onSubmitSuccess,
-        onSubmitFailure
+        onSubmitFailure,
       });
       wrapper.find('form').simulate('submit');
 
@@ -346,7 +346,7 @@ describe('BaseForm', () => {
     it('sets `submitting` state while submitting', async () => {
       let resolveSubmit = null;
       wrapper.setProps({
-        onSubmit: () => new Promise(resolve => (resolveSubmit = resolve))
+        onSubmit: () => new Promise(resolve => (resolveSubmit = resolve)),
       });
 
       const context1 = wrapper.instance().getContext().uniforms.state;
@@ -375,7 +375,7 @@ describe('BaseForm', () => {
           schema={schema}
           onSubmit={onSubmit}
           onSubmitSuccess={onSubmitSuccess}
-        />
+        />,
       );
 
       wrapper.find('form').simulate('submit');
@@ -396,7 +396,7 @@ describe('BaseForm', () => {
           schema={schema}
           onSubmit={onSubmit}
           onSubmitFailure={onSubmitFailure}
-        />
+        />,
       );
 
       wrapper.find('form').simulate('submit');

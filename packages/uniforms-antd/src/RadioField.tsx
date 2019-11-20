@@ -21,12 +21,12 @@ const Radio = props =>
           style={{
             display: 'block',
             height: '30px',
-            lineHeight: '30px'
+            lineHeight: '30px',
           }}
         >
           {props.transform ? props.transform(value) : value}
         </RadioAntD>
       ))}
-    </RadioAntD.Group>
+    </RadioAntD.Group>,
   );
 export default connectField(Radio);

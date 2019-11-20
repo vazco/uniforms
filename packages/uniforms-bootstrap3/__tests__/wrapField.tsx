@@ -20,7 +20,7 @@ test('<wrapField> - renders help block', () => {
 test('<wrapField> - renders help block with specified class', () => {
   const element = wrapField(
     { help: 'Hint', helpClassName: 'text-hint' },
-    <div />
+    <div />,
   );
   const wrapper = mount(element);
 
@@ -31,7 +31,7 @@ test('<wrapField> - renders error block', () => {
   const error = new Error();
   const element = wrapField(
     { error, showInlineError: true, errorMessage: 'Error' },
-    <div />
+    <div />,
   );
   const wrapper = mount(element);
 
@@ -50,7 +50,7 @@ test('<wrapField> - renders error block (showInlineError=false)', () => {
   const error = new Error();
   const element = wrapField(
     { error, showInlineError: false, errorMessage: 'Error' },
-    <div />
+    <div />,
   );
   const wrapper = mount(element);
 
@@ -61,9 +61,9 @@ test('<wrapField> - label has custom class (String)', () => {
   const element = wrapField(
     {
       label: 'A field label',
-      labelClassName: 'custom-label-class'
+      labelClassName: 'custom-label-class',
     },
-    <div />
+    <div />,
   );
   const wrapper = mount(element);
 
@@ -74,9 +74,9 @@ test('<wrapField> - label has custom class (Array[String])', () => {
   const element = wrapField(
     {
       label: 'A field label',
-      labelClassName: ['custom-1', 'custom-2']
+      labelClassName: ['custom-1', 'custom-2'],
     },
-    <div />
+    <div />,
   );
   const wrapper = mount(element);
 

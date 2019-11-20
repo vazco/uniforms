@@ -10,7 +10,7 @@ const Bool = ({ label, labelBefore, ...props }: any) =>
     <div
       className={classnames(props.inputClassName, 'form-check', 'checkbox', {
         'text-danger': props.error,
-        'custom-control-inline': props.inline
+        'custom-control-inline': props.inline,
       })}
     >
       <label htmlFor={props.id} className="form-check-label">
@@ -27,6 +27,6 @@ const Bool = ({ label, labelBefore, ...props }: any) =>
         &nbsp;
         {label}
       </label>
-    </div>
+    </div>,
   );
 export default connectField(Bool);

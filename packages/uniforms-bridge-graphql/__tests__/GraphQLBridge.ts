@@ -45,7 +45,7 @@ describe('GraphQLBridge', () => {
     id: {
       allowedValues: [1, 2, 3],
       label: 'Post ID',
-      placeholder: 'Post ID'
+      placeholder: 'Post ID',
     },
     title: {
       initialValue: 'Some Title',
@@ -53,17 +53,17 @@ describe('GraphQLBridge', () => {
       options: [
         { label: 1, value: 'a' },
         { label: 2, value: 'b' },
-        { label: 3, value: 'Some Title' }
-      ]
+        { label: 3, value: 'Some Title' },
+      ],
     },
     votes: {
       initialValue: 44,
       options: {
         a: 1,
         b: 2,
-        c: 44
-      }
-    }
+        c: 44,
+      },
+    },
   };
 
   const schemaValidator = jest.fn();
@@ -74,12 +74,12 @@ describe('GraphQLBridge', () => {
   const bridgeI = new GraphQLBridge(
     astI.getType('Post'),
     schemaValidator,
-    schemaData
+    schemaData,
   );
   const bridgeT = new GraphQLBridge(
     astT.getType('Post'),
     schemaValidator,
-    schemaData
+    schemaData,
   );
 
   describe('#constructor()', () => {
@@ -111,10 +111,10 @@ describe('GraphQLBridge', () => {
 
     it('works with correct error', () => {
       expect(
-        bridgeI.getError('title', { details: [{ name: 'title' }] })
+        bridgeI.getError('title', { details: [{ name: 'title' }] }),
       ).toEqual({ name: 'title' });
       expect(bridgeI.getError('title', { details: [{ name: 'field' }] })).toBe(
-        null
+        null,
       );
     });
   });
@@ -132,13 +132,13 @@ describe('GraphQLBridge', () => {
     it('works with correct error', () => {
       expect(
         bridgeI.getErrorMessage('title', {
-          details: [{ name: 'title', message: '!' }]
-        })
+          details: [{ name: 'title', message: '!' }],
+        }),
       ).toBe('!');
       expect(
         bridgeI.getErrorMessage('title', {
-          details: [{ name: 'field', message: '$' }]
-        })
+          details: [{ name: 'field', message: '$' }],
+        }),
       ).toBe('');
     });
   });
@@ -155,16 +155,20 @@ describe('GraphQLBridge', () => {
 
     it('works with Error', () => {
       expect(bridgeI.getErrorMessages(new Error('correct'))).toEqual([
-        'correct'
+        'correct',
       ]);
     });
 
     it('works with ValidationError', () => {
       expect(
-        bridgeI.getErrorMessages({ details: [{ name: 'title', message: '!' }] })
+        bridgeI.getErrorMessages({
+          details: [{ name: 'title', message: '!' }],
+        }),
       ).toEqual(['!']);
       expect(
-        bridgeI.getErrorMessages({ details: [{ name: 'field', message: '$' }] })
+        bridgeI.getErrorMessages({
+          details: [{ name: 'field', message: '$' }],
+        }),
       ).toEqual(['$']);
     });
   });
@@ -176,7 +180,7 @@ describe('GraphQLBridge', () => {
         defaultValue: 'John',
         description: undefined,
         name: 'firstName',
-        type: GraphQLString
+        type: GraphQLString,
       });
     });
 
@@ -188,14 +192,14 @@ describe('GraphQLBridge', () => {
         description: undefined,
         isDeprecated: false,
         name: 'firstName',
-        type: GraphQLString
+        type: GraphQLString,
       });
     });
 
     it('throws on not found field', () => {
       expect(() => bridgeI.getField('x')).toThrow(/Field not found in schema/);
       expect(() => bridgeI.getField('author.x')).toThrow(
-        /Field not found in schema/
+        /Field not found in schema/,
       );
     });
   });
@@ -204,7 +208,7 @@ describe('GraphQLBridge', () => {
     it('works with arrays', () => {
       expect(bridgeI.getInitialValue('author.tags')).toEqual([]);
       expect(
-        bridgeI.getInitialValue('author.tags', { initialCount: 1 })
+        bridgeI.getInitialValue('author.tags', { initialCount: 1 }),
       ).toEqual([undefined]);
     });
 
@@ -238,18 +242,18 @@ describe('GraphQLBridge', () => {
               options: [
                 { label: 1, value: 'a' },
                 { label: 2, value: 'b' },
-                { label: 3, value: 'Some Title' }
+                { label: 3, value: 'Some Title' },
               ],
-              initialValue: 'Some Title'
+              initialValue: 'Some Title',
             });
             expect(bridgeT.getProps('author.decimal1')).toEqual({
               decimal: true,
               label: 'Decimal 1',
-              required: false
+              required: false,
             });
             expect(bridgeT.getProps('author.firstName')).toEqual({
               label: 'First name',
-              required: false
+              required: false,
             });
           });
         });
@@ -260,13 +264,13 @@ describe('GraphQLBridge', () => {
               allowedValues: [1, 2, 3],
               label: 'Post ID',
               placeholder: 'Post ID',
-              required: true
+              required: true,
             });
             expect(bridgeT.getProps('id', { label: true })).toEqual({
               allowedValues: [1, 2, 3],
               label: 'Post ID',
               placeholder: 'Post ID',
-              required: true
+              required: true,
             });
           });
         });
@@ -282,9 +286,9 @@ describe('GraphQLBridge', () => {
             options: [
               { label: 1, value: 'a' },
               { label: 2, value: 'b' },
-              { label: 3, value: 'Some Title' }
+              { label: 3, value: 'Some Title' },
             ],
-            initialValue: 'Some Title'
+            initialValue: 'Some Title',
           });
           expect(bridgeT.getProps('title', { label: '' })).toEqual({
             allowedValues: ['a', 'b', 'Some Title'],
@@ -294,9 +298,9 @@ describe('GraphQLBridge', () => {
             options: [
               { label: 1, value: 'a' },
               { label: 2, value: 'b' },
-              { label: 3, value: 'Some Title' }
+              { label: 3, value: 'Some Title' },
             ],
-            initialValue: 'Some Title'
+            initialValue: 'Some Title',
           });
         });
       });
@@ -307,14 +311,14 @@ describe('GraphQLBridge', () => {
             allowedValues: [1, 2, 3],
             label: 'Post ID',
             placeholder: 'Post ID',
-            required: true
+            required: true,
           });
 
           expect(bridgeT.getProps('id', { label: null })).toEqual({
             allowedValues: [1, 2, 3],
             label: 'Post ID',
             placeholder: 'Post ID',
-            required: true
+            required: true,
           });
         });
       });
@@ -325,7 +329,7 @@ describe('GraphQLBridge', () => {
         label: 'Post ID',
         placeholder: 'Post ID',
         required: true,
-        allowedValues: [1, 2, 3]
+        allowedValues: [1, 2, 3],
       });
     });
 
@@ -334,7 +338,7 @@ describe('GraphQLBridge', () => {
         label: 'Post ID',
         placeholder: 'Post ID',
         required: true,
-        allowedValues: [1, 2, 3]
+        allowedValues: [1, 2, 3],
       });
     });
 
@@ -342,7 +346,7 @@ describe('GraphQLBridge', () => {
       expect(bridgeI.getProps('author')).toEqual({
         label: 'Author',
         required: true,
-        component: 'div'
+        component: 'div',
       });
     });
 
@@ -351,7 +355,7 @@ describe('GraphQLBridge', () => {
         label: 'Post ID',
         placeholder: 'Post ID',
         required: true,
-        allowedValues: [1, 2, 3]
+        allowedValues: [1, 2, 3],
       });
     });
 
@@ -360,7 +364,7 @@ describe('GraphQLBridge', () => {
         label: 'Post ID',
         placeholder: 'Post ID',
         required: true,
-        allowedValues: [1, 2, 3]
+        allowedValues: [1, 2, 3],
       });
     });
 
@@ -369,7 +373,7 @@ describe('GraphQLBridge', () => {
         label: 'Post ID',
         placeholder: 'Post ID',
         required: true,
-        allowedValues: [1, 2, 3]
+        allowedValues: [1, 2, 3],
       });
     });
 
@@ -378,7 +382,7 @@ describe('GraphQLBridge', () => {
         label: 'Post ID',
         placeholder: 'Post ID',
         required: true,
-        allowedValues: [1, 2, 3]
+        allowedValues: [1, 2, 3],
       });
     });
 
@@ -387,7 +391,7 @@ describe('GraphQLBridge', () => {
         label: 'Post ID',
         placeholder: 'Post ID',
         required: true,
-        allowedValues: [1, 2, 3]
+        allowedValues: [1, 2, 3],
       });
     });
 
@@ -396,7 +400,7 @@ describe('GraphQLBridge', () => {
         label: 'Post ID',
         placeholder: 'Post ID',
         required: true,
-        allowedValues: [1, 2, 3]
+        allowedValues: [1, 2, 3],
       });
     });
 
@@ -409,9 +413,9 @@ describe('GraphQLBridge', () => {
         options: [
           { label: 1, value: 'a' },
           { label: 2, value: 'b' },
-          { label: 3, value: 'Some Title' }
+          { label: 3, value: 'Some Title' },
         ],
-        initialValue: 'Some Title'
+        initialValue: 'Some Title',
       });
     });
 
@@ -419,13 +423,13 @@ describe('GraphQLBridge', () => {
       expect(bridgeI.getProps('author.decimal1')).toEqual({
         label: 'Decimal 1',
         required: false,
-        decimal: true
+        decimal: true,
       });
 
       expect(bridgeI.getProps('author.decimal2')).toEqual({
         label: 'Decimal 2',
         required: true,
-        decimal: true
+        decimal: true,
       });
     });
 
@@ -445,23 +449,23 @@ describe('GraphQLBridge', () => {
 
     it('works with options from props', () => {
       expect(
-        bridgeI.getProps('votes', { options: { c: 1, d: 2 } }).transform('c')
+        bridgeI.getProps('votes', { options: { c: 1, d: 2 } }).transform('c'),
       ).toBe(1);
       expect(
-        bridgeI.getProps('votes', { options: { c: 1, d: 2 } }).transform('d')
+        bridgeI.getProps('votes', { options: { c: 1, d: 2 } }).transform('d'),
       ).toBe(2);
       expect(
-        bridgeI.getProps('votes', { options: { c: 1, d: 2 } }).allowedValues[0]
+        bridgeI.getProps('votes', { options: { c: 1, d: 2 } }).allowedValues[0],
       ).toBe('c');
       expect(
-        bridgeI.getProps('votes', { options: { c: 1, d: 2 } }).allowedValues[1]
+        bridgeI.getProps('votes', { options: { c: 1, d: 2 } }).allowedValues[1],
       ).toBe('d');
     });
 
     it('works with other props', () => {
       expect(bridgeI.getProps('category', { x: 1, y: 1 })).toEqual({
         label: 'Category',
-        required: true
+        required: true,
       });
     });
   });
@@ -475,7 +479,7 @@ describe('GraphQLBridge', () => {
         'title',
         'votes',
         'example',
-        'category'
+        'category',
       ]);
     });
 
@@ -488,7 +492,7 @@ describe('GraphQLBridge', () => {
         'firstName',
         'lastName',
         'level',
-        'tags'
+        'tags',
       ]);
     });
 
@@ -510,7 +514,7 @@ describe('GraphQLBridge', () => {
           expect(bridge.getType('author.id')).toBe(String);
           expect(bridge.getType('author.lastName')).toBe(String);
           expect(bridge.getType('author.level')).toBe(
-            ast.getType('AccessLevel')
+            ast.getType('AccessLevel'),
           );
           expect(bridge.getType('author.tags')).toBe(Array);
           expect(bridge.getType('author.tags.$')).toBe(String);
@@ -538,7 +542,7 @@ describe('GraphQLBridge', () => {
           expect(bridge.getType('title')).toBe(String);
           expect(bridge.getType('votes')).toBe(Number);
         });
-      }
+      },
     );
   });
 

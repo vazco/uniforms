@@ -18,8 +18,8 @@ test('<AutoFields> - render all fields by default', () => {
     createContext({
       x: { type: String },
       y: { type: String },
-      z: { type: String }
-    })
+      z: { type: String },
+    }),
   );
 
   expect(wrapper.find('input')).toHaveLength(3);
@@ -32,12 +32,12 @@ test('<AutoFields> - renders only specified fields', () => {
     createContext({
       x: { type: String },
       y: { type: String },
-      z: { type: String }
-    })
+      z: { type: String },
+    }),
   );
 
   expect(wrapper.find('input').someWhere(e => e.prop('name') === 'z')).toBe(
-    false
+    false,
   );
 });
 
@@ -48,12 +48,12 @@ test('<AutoFields> - does not render ommited fields', () => {
     createContext({
       x: { type: String },
       y: { type: String },
-      z: { type: String }
-    })
+      z: { type: String },
+    }),
   );
 
   expect(wrapper.find('input').someWhere(e => e.prop('name') === 'x')).toBe(
-    false
+    false,
   );
 });
 
@@ -66,8 +66,8 @@ test('<AutoFields> - works with custom component', () => {
     createContext({
       x: { type: String },
       y: { type: String },
-      z: { type: String }
-    })
+      z: { type: String },
+    }),
   );
 
   expect(Component).toHaveBeenCalledTimes(3);
@@ -80,8 +80,8 @@ test('<AutoFields> - wraps fields in specified element', () => {
     createContext({
       x: { type: String },
       y: { type: String },
-      z: { type: String }
-    })
+      z: { type: String },
+    }),
   );
 
   expect(wrapper.find('section').find('input')).toHaveLength(3);

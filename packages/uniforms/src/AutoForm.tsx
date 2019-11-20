@@ -10,12 +10,12 @@ const Auto = (parent: any): any =>
   class extends parent {
     static Auto = Auto;
 
-    static displayName: string = `Auto${parent.displayName}`;
+    static displayName = `Auto${parent.displayName}`;
 
     static propTypes: any = {
       ...parent.propTypes,
 
-      onChangeModel: PropTypes.func
+      onChangeModel: PropTypes.func,
     };
 
     constructor(...args: any[]) {
@@ -26,7 +26,7 @@ const Auto = (parent: any): any =>
         ...this.state,
 
         model: this.props.model,
-        modelSync: this.props.model
+        modelSync: this.props.model,
       };
     }
 
@@ -49,7 +49,7 @@ const Auto = (parent: any): any =>
 
     onChange(key: any, value: any) {
       const updateState = (state: any) => ({
-        modelSync: set(cloneDeep(state.modelSync), key, value)
+        modelSync: set(cloneDeep(state.modelSync), key, value),
       });
       const updateModel = (state: any) => {
         if (this.props.onChangeModel) {
@@ -76,7 +76,7 @@ const Auto = (parent: any): any =>
       return {
         ...super.__reset(state),
         model: this.props.model,
-        modelSync: this.props.model
+        modelSync: this.props.model,
       };
     }
 

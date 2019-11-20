@@ -58,7 +58,7 @@ test('<BoolField> - renders a input with correct label (specified)', () => {
   expect(wrapper.find('label')).toHaveLength(1);
   expect(wrapper.find('label').text()).toBe('BoolFieldLabel');
   expect(wrapper.find('label').prop('htmlFor')).toBe(
-    wrapper.find('input').prop('id')
+    wrapper.find('input').prop('id'),
   );
 });
 
@@ -74,7 +74,7 @@ test('<BoolField> - renders a input with correct value (model)', () => {
   const element = <BoolField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Boolean } }, { model: { x: true } })
+    createContext({ x: { type: Boolean } }, { model: { x: true } }),
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
@@ -95,7 +95,7 @@ test('<BoolField> - renders a input which correctly reacts on change', () => {
   const element = <BoolField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Boolean } }, { onChange })
+    createContext({ x: { type: Boolean } }, { onChange }),
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
@@ -109,7 +109,7 @@ test('<BoolField> - renders a input which correctly reacts on change', () => {
   const element = <BoolField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Boolean } }, { onChange })
+    createContext({ x: { type: Boolean } }, { onChange }),
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
@@ -125,19 +125,19 @@ test('<BoolField> - renders a wrapper with unknown props', () => {
     wrapper
       .find('div')
       .at(0)
-      .prop('data-x')
+      .prop('data-x'),
   ).toBe('x');
   expect(
     wrapper
       .find('div')
       .at(0)
-      .prop('data-y')
+      .prop('data-y'),
   ).toBe('y');
   expect(
     wrapper
       .find('div')
       .at(0)
-      .prop('data-z')
+      .prop('data-z'),
   ).toBe('z');
 });
 
@@ -152,7 +152,7 @@ test('<BoolField> - renders correct error text (specified)', () => {
     wrapper
       .children()
       .last()
-      .text()
+      .text(),
   ).toBe('Error');
 });
 
@@ -172,6 +172,6 @@ test('<BoolField> - renders correct error text (showInlineError=false)', () => {
     wrapper
       .children()
       .last()
-      .text()
+      .text(),
   ).not.toBe('Error');
 });

@@ -30,7 +30,7 @@ const SubmitField = ({
     <div
       className={classnames(className, {
         'is-invalid': error,
-        row: state.grid
+        row: state.grid,
       })}
       {...filterDOMProps(props)}
     >
@@ -38,7 +38,7 @@ const SubmitField = ({
         <label
           className={classnames(
             'col-form-label',
-            gridClassName(state.grid, 'label')
+            gridClassName(state.grid, 'label'),
           )}
         >
           &nbsp;
@@ -49,7 +49,7 @@ const SubmitField = ({
         <div
           className={classnames(
             wrapClassName,
-            gridClassName(state.grid, 'input')
+            gridClassName(state.grid, 'input'),
           )}
         >
           {blockInput}

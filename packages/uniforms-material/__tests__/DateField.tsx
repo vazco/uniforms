@@ -62,11 +62,11 @@ test('<DateField> - renders a Input with correct value (model)', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Date } }, { model: { x: now } })
+    createContext({ x: { type: Date } }, { model: { x: now } }),
   );
 
   expect(wrapper.find(Input).prop('value')).toEqual(
-    now.toISOString().slice(0, -8)
+    now.toISOString().slice(0, -8),
   );
 });
 
@@ -76,7 +76,7 @@ test('<DateField> - renders a Input with correct value (specified)', () => {
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
   expect(wrapper.find(Input).prop('value')).toEqual(
-    now.toISOString().slice(0, -8)
+    now.toISOString().slice(0, -8),
   );
 });
 
@@ -87,7 +87,7 @@ test('<DateField> - renders a Input which correctly reacts on change', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Date } }, { onChange })
+    createContext({ x: { type: Date } }, { onChange }),
   );
 
   wrapper
@@ -103,7 +103,7 @@ test('<DateField> - renders a Input which correctly reacts on change (empty)', (
   const element = <DateField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Date } }, { onChange })
+    createContext({ x: { type: Date } }, { onChange }),
   );
 
   wrapper
@@ -120,7 +120,7 @@ test('<DateField> - renders a Input which correctly reacts on change (overflow)'
   const element = <DateField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Date } }, { onChange })
+    createContext({ x: { type: Date } }, { onChange }),
   );
 
   wrapper

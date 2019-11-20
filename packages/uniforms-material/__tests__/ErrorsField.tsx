@@ -11,9 +11,9 @@ const error = {
   details: [
     { name: 'x', type: 'required', details: { value: null } },
     { name: 'y', type: 'required', details: { value: null } },
-    { name: 'z', type: 'required', details: { value: null } }
+    { name: 'z', type: 'required', details: { value: null } },
   ],
-  message: 'X is required [validation-error]'
+  message: 'X is required [validation-error]',
 };
 
 test('<ErrorsField> - works', () => {
@@ -29,8 +29,8 @@ test('<ErrorsField> - renders list of correct error messages (context)', () => {
     element,
     createContext(
       { x: { type: String }, y: { type: String }, z: { type: String } },
-      { error }
-    )
+      { error },
+    ),
   );
 
   expect(wrapper.find(FormHelperText)).toHaveLength(3);
@@ -38,19 +38,19 @@ test('<ErrorsField> - renders list of correct error messages (context)', () => {
     wrapper
       .find(FormHelperText)
       .at(0)
-      .text()
+      .text(),
   ).toBe('X is required');
   expect(
     wrapper
       .find(FormHelperText)
       .at(1)
-      .text()
+      .text(),
   ).toBe('Y is required');
   expect(
     wrapper
       .find(FormHelperText)
       .at(2)
-      .text()
+      .text(),
   ).toBe('Z is required');
 });
 
@@ -60,11 +60,11 @@ test('<ErrorsField> - renders children (specified)', () => {
     element,
     createContext(
       { x: { type: String }, y: { type: String }, z: { type: String } },
-      { error }
-    )
+      { error },
+    ),
   );
 
   expect(wrapper.find(ErrorsField).text()).toEqual(
-    expect.stringContaining('Error message list')
+    expect.stringContaining('Error message list'),
   );
 });

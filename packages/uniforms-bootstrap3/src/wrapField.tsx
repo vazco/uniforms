@@ -24,7 +24,7 @@ export default function wrapField(
     wrapClassName, // Input wrapper class name.
     ...props
   },
-  children
+  children,
 ) {
   const hasWrap = !!(grid || wrapClassName);
   const blockError = !!(error && showInlineError) && (
@@ -43,7 +43,7 @@ export default function wrapField(
         'has-feedback': error && feedbackable,
         'has-error': error,
         disabled,
-        required
+        required,
       })}
       {...filterDOMProps(
         omit(props, [
@@ -52,8 +52,8 @@ export default function wrapField(
           'inputClassName',
           'inputRef',
           'rows',
-          'transform'
-        ])
+          'transform',
+        ]),
       )}
     >
       {label && (
@@ -62,7 +62,7 @@ export default function wrapField(
           className={classnames(
             'control-label',
             gridClassName(grid, 'label'),
-            labelClassName
+            labelClassName,
           )}
         >
           {label}

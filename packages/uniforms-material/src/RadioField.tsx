@@ -44,13 +44,13 @@ const Radio = ({
           value={`${item}`}
         />
       ))}
-    </RadioGroup>
+    </RadioGroup>,
   );
 };
 
 Radio.defaultProps = {
   fullWidth: true,
-  margin: 'dense'
+  margin: 'dense',
 };
 
 export default connectField(Radio);

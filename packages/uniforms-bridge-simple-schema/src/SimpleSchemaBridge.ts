@@ -42,7 +42,7 @@ export default class SimpleSchemaBridge extends Bridge {
           scopedError.type,
           scopedError.name,
           null,
-          scopedError.details && scopedError.details.value
+          scopedError.details && scopedError.details.value,
         );
   }
 
@@ -54,8 +54,8 @@ export default class SimpleSchemaBridge extends Bridge {
             error.type,
             error.name,
             null,
-            error.details && error.details.value
-          )
+            error.details && error.details.value,
+          ),
         );
       }
 
@@ -137,14 +137,14 @@ export default class SimpleSchemaBridge extends Bridge {
         field = {
           ...field,
           transform: value => options[value],
-          allowedValues: Object.keys(options)
+          allowedValues: Object.keys(options),
         };
       } else {
         field = {
           ...field,
           transform: value =>
             options.find(option => option.value === value).label,
-          allowedValues: options.map(option => option.value)
+          allowedValues: options.map(option => option.value),
         };
       }
     }

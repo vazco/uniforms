@@ -17,6 +17,6 @@ it('exports everything', () => {
     injectName: expect.any(Function),
     joinName: expect.any(Function),
     nothing: expect.any(Object),
-    randomIds: expect.any(Function)
+    randomIds: expect.any(Function),
   });
 });

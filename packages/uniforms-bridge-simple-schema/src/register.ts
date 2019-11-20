@@ -16,10 +16,10 @@ SimpleSchema.extendOptions({
       String,
       Function,
       Match.ObjectIncluding({
-        component: Match.Optional(Match.OneOf(String, Function))
-      })
-    )
-  )
+        component: Match.Optional(Match.OneOf(String, Function)),
+      }),
+    ),
+  ),
 });
 
 // There's no possibility to retrieve them at runtime
@@ -40,5 +40,5 @@ filterDOMProps.register(
   'optional',
   'regEx',
   'trim',
-  'type'
+  'type',
 );

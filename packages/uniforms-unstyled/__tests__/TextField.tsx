@@ -71,7 +71,7 @@ test('<TextField> - renders an input with correct value (model)', () => {
   const element = <TextField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { model: { x: 'y' } })
+    createContext({ x: { type: String } }, { model: { x: 'y' } }),
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
@@ -92,12 +92,12 @@ test('<TextField> - renders an input which correctly reacts on change', () => {
   const element = <TextField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { onChange })
+    createContext({ x: { type: String } }, { onChange }),
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
   expect(
-    wrapper.find('input').simulate('change', { target: { value: 'y' } })
+    wrapper.find('input').simulate('change', { target: { value: 'y' } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', 'y');
 });
@@ -108,12 +108,12 @@ test('<TextField> - renders an input which correctly reacts on change (empty)', 
   const element = <TextField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { onChange })
+    createContext({ x: { type: String } }, { onChange }),
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
   expect(
-    wrapper.find('input').simulate('change', { target: { value: '' } })
+    wrapper.find('input').simulate('change', { target: { value: '' } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', '');
 });
@@ -124,12 +124,12 @@ test('<TextField> - renders an input which correctly reacts on change (same valu
   const element = <TextField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { model: { x: 'y' }, onChange })
+    createContext({ x: { type: String } }, { model: { x: 'y' }, onChange }),
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
   expect(
-    wrapper.find('input').simulate('change', { target: { value: 'y' } })
+    wrapper.find('input').simulate('change', { target: { value: 'y' } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', 'y');
 });
@@ -141,7 +141,7 @@ test('<TextField> - renders a label', () => {
   expect(wrapper.find('label')).toHaveLength(1);
   expect(wrapper.find('label').text()).toBe('y');
   expect(wrapper.find('label').prop('htmlFor')).toBe(
-    wrapper.find('input').prop('id')
+    wrapper.find('input').prop('id'),
   );
 });
 
@@ -153,18 +153,18 @@ test('<TextField> - renders a wrapper with unknown props', () => {
     wrapper
       .find('div')
       .at(0)
-      .prop('data-x')
+      .prop('data-x'),
   ).toBe('x');
   expect(
     wrapper
       .find('div')
       .at(0)
-      .prop('data-y')
+      .prop('data-y'),
   ).toBe('y');
   expect(
     wrapper
       .find('div')
       .at(0)
-      .prop('data-z')
+      .prop('data-z'),
   ).toBe('z');
 });

@@ -33,10 +33,10 @@ const List = ({
               label: null,
               name: joinName(
                 name,
-                child.props.name && child.props.name.replace('$', index)
-              )
-            })
-          )
+                child.props.name && child.props.name.replace('$', index),
+              ),
+            }),
+          ),
         )
       : value.map((item, index) => (
           <ListItemField
@@ -52,16 +52,16 @@ const List = ({
     name={`${name}.$`}
     icon={addIcon}
     initialCount={initialCount}
-  />
+  />,
 ];
 
 List.defaultProps = {
-  dense: true
+  dense: true,
 };
 
 // FIXME: Use React.Fragment instead of returning an array if possible.
 // @ts-ignore
 export default connectField(List, {
   ensureValue: false,
-  includeInChain: false
+  includeInChain: false,
 });

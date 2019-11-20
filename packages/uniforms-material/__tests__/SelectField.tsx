@@ -18,7 +18,7 @@ test('<SelectField> - renders a Select', () => {
   const element = <SelectField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
@@ -28,7 +28,7 @@ test('<SelectField> - renders a Select with correct disabled state', () => {
   const element = <SelectField name="x" disabled />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
@@ -39,7 +39,7 @@ test('<SelectField> - renders a Select with correct required state', () => {
   const element = <SelectField name="x" required />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
@@ -50,7 +50,7 @@ test('<SelectField> - renders a Select with correct id (inherited)', () => {
   const element = <SelectField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
@@ -61,7 +61,7 @@ test('<SelectField> - renders a Select with correct id (specified)', () => {
   const element = <SelectField name="x" id="y" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
@@ -72,7 +72,7 @@ test('<SelectField> - renders a Select with correct name', () => {
   const element = <SelectField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
@@ -83,7 +83,7 @@ test('<SelectField> - renders a Select with correct options', () => {
   const element = <SelectField name="x" native />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
@@ -101,7 +101,7 @@ test('<SelectField> - renders a Select with correct options (transform)', () => 
   );
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
@@ -117,7 +117,7 @@ test('<SelectField> - renders a Select with correct placeholder (implicit)', () 
   const element = <SelectField name="x" placeholder="y" native />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Select).prop('value')).toBe('');
@@ -133,7 +133,7 @@ test('<SelectField> - renders a Select with correct value (default)', () => {
   const element = <SelectField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
@@ -146,8 +146,8 @@ test('<SelectField> - renders a Select with correct value (model)', () => {
     element,
     createContext(
       { x: { type: String, allowedValues: ['a', 'b'] } },
-      { model: { x: 'b' } }
-    )
+      { model: { x: 'b' } },
+    ),
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
@@ -158,7 +158,7 @@ test('<SelectField> - renders a Select with correct value (specified)', () => {
   const element = <SelectField name="x" value="b" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
@@ -173,8 +173,8 @@ test('<SelectField> - renders a Select which correctly reacts on change', () => 
     element,
     createContext(
       { x: { type: String, allowedValues: ['a', 'b'] } },
-      { onChange }
-    )
+      { onChange },
+    ),
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
@@ -193,8 +193,8 @@ test('<SelectField> - renders a Select which correctly reacts on change (empty)'
     element,
     createContext(
       { x: { type: String, allowedValues: ['a', 'b'] } },
-      { onChange }
-    )
+      { onChange },
+    ),
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
@@ -213,8 +213,8 @@ test('<SelectField> - renders a Select which correctly reacts on change (same va
     element,
     createContext(
       { x: { type: String, allowedValues: ['a', 'b'] } },
-      { model: { x: 'b' }, onChange }
-    )
+      { model: { x: 'b' }, onChange },
+    ),
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
@@ -229,7 +229,7 @@ test('<SelectField> - renders a label', () => {
   const element = <SelectField name="x" label="y" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
@@ -243,7 +243,7 @@ test('<SelectField> - renders a SelectField with correct error text (showInlineE
   );
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(FormHelperText).text()).toBe('Error');
@@ -261,7 +261,7 @@ test('<SelectField> - renders a SelectField with correct error text (showInlineE
   );
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(FormHelperText)).toHaveLength(0);
@@ -271,7 +271,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons', () => {
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
@@ -281,7 +281,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct dis
   const element = <SelectField checkboxes name="x" disabled />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
@@ -289,13 +289,13 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct dis
     wrapper
       .find(Radio)
       .at(0)
-      .prop('disabled')
+      .prop('disabled'),
   ).toBe(true);
   expect(
     wrapper
       .find(Radio)
       .at(1)
-      .prop('disabled')
+      .prop('disabled'),
   ).toBe(true);
 });
 
@@ -303,7 +303,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct id 
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
@@ -311,13 +311,13 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct id 
     wrapper
       .find(Radio)
       .at(0)
-      .prop('id')
+      .prop('id'),
   ).toBeTruthy();
   expect(
     wrapper
       .find(Radio)
       .at(1)
-      .prop('id')
+      .prop('id'),
   ).toBeTruthy();
 });
 
@@ -325,7 +325,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct id 
   const element = <SelectField checkboxes name="x" id="y" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
@@ -333,13 +333,13 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct id 
     wrapper
       .find(Radio)
       .at(0)
-      .prop('id')
+      .prop('id'),
   ).toBe('y-a');
   expect(
     wrapper
       .find(Radio)
       .at(1)
-      .prop('id')
+      .prop('id'),
   ).toBe('y-b');
 });
 
@@ -347,7 +347,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct nam
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
@@ -356,14 +356,14 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct nam
       .find(Radio)
       .at(0)
       .find('input')
-      .prop('name')
+      .prop('name'),
   ).toBe('x');
   expect(
     wrapper
       .find(Radio)
       .at(1)
       .find('input')
-      .prop('name')
+      .prop('name'),
   ).toBe('x');
 });
 
@@ -371,7 +371,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct opt
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find('label')).toHaveLength(2);
@@ -379,13 +379,13 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct opt
     wrapper
       .find(FormControlLabel)
       .at(0)
-      .prop('label')
+      .prop('label'),
   ).toBe('a');
   expect(
     wrapper
       .find(FormControlLabel)
       .at(1)
-      .prop('label')
+      .prop('label'),
   ).toBe('b');
 });
 
@@ -395,7 +395,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct opt
   );
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find('label')).toHaveLength(2);
@@ -403,13 +403,13 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct opt
     wrapper
       .find(FormControlLabel)
       .at(0)
-      .prop('label')
+      .prop('label'),
   ).toBe('A');
   expect(
     wrapper
       .find(FormControlLabel)
       .at(1)
-      .prop('label')
+      .prop('label'),
   ).toBe('B');
 });
 
@@ -417,7 +417,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct val
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
@@ -426,14 +426,14 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct val
       .find(Radio)
       .at(0)
       .find('input')
-      .prop('checked')
+      .prop('checked'),
   ).toBe(false);
   expect(
     wrapper
       .find(Radio)
       .at(1)
       .find('input')
-      .prop('checked')
+      .prop('checked'),
   ).toBe(false);
 });
 
@@ -443,8 +443,8 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct val
     element,
     createContext(
       { x: { type: String, allowedValues: ['a', 'b'] } },
-      { model: { x: 'b' } }
-    )
+      { model: { x: 'b' } },
+    ),
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
@@ -453,14 +453,14 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct val
       .find(Radio)
       .at(0)
       .find('input')
-      .prop('checked')
+      .prop('checked'),
   ).toBe(false);
   expect(
     wrapper
       .find(Radio)
       .at(1)
       .find('input')
-      .prop('checked')
+      .prop('checked'),
   ).toBe(true);
 });
 
@@ -468,7 +468,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct val
   const element = <SelectField checkboxes name="x" value="b" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
@@ -477,14 +477,14 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct val
       .find(Radio)
       .at(0)
       .find('input')
-      .prop('checked')
+      .prop('checked'),
   ).toBe(false);
   expect(
     wrapper
       .find(Radio)
       .at(1)
       .find('input')
-      .prop('checked')
+      .prop('checked'),
   ).toBe(true);
 });
 
@@ -496,8 +496,8 @@ test('<SelectField checkboxes> - renders a set of Radio buttons which correctly 
     element,
     createContext(
       { x: { type: String, allowedValues: ['a', 'b'] } },
-      { onChange }
-    )
+      { onChange },
+    ),
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
@@ -517,10 +517,10 @@ test('<SelectField checkboxes> - renders a set of Checkboxes which correctly rea
     createContext(
       {
         x: { type: Array },
-        'x.$': { type: String, allowedValues: ['a', 'b'] }
+        'x.$': { type: String, allowedValues: ['a', 'b'] },
       },
-      { onChange }
-    )
+      { onChange },
+    ),
   );
 
   expect(wrapper.find(Checkbox)).toHaveLength(2);
@@ -540,10 +540,10 @@ test('<SelectField checkboxes> - renders a set of Checkboxes which correctly rea
     createContext(
       {
         x: { type: Array },
-        'x.$': { type: String, allowedValues: ['a', 'b'] }
+        'x.$': { type: String, allowedValues: ['a', 'b'] },
       },
-      { onChange }
-    )
+      { onChange },
+    ),
   );
 
   expect(wrapper.find(Checkbox)).toHaveLength(2);
@@ -563,10 +563,10 @@ test('<SelectField checkboxes> - renders a set of Checkboxes with correct labels
     createContext(
       {
         x: { type: Array },
-        'x.$': { type: String, allowedValues: ['a', 'b'] }
+        'x.$': { type: String, allowedValues: ['a', 'b'] },
       },
-      { onChange }
-    )
+      { onChange },
+    ),
   );
 
   expect(wrapper.find(Checkbox)).toHaveLength(2);
@@ -574,13 +574,13 @@ test('<SelectField checkboxes> - renders a set of Checkboxes with correct labels
     wrapper
       .find(FormControlLabel)
       .at(0)
-      .text()
+      .text(),
   ).toBe('a');
   expect(
     wrapper
       .find(FormControlLabel)
       .at(1)
-      .text()
+      .text(),
   ).toBe('b');
 });
 
@@ -594,10 +594,10 @@ test('<SelectField checkboxes> - renders a set of Checkboxes which correct label
     createContext(
       {
         x: { type: Array },
-        'x.$': { type: String, allowedValues: ['a', 'b'] }
+        'x.$': { type: String, allowedValues: ['a', 'b'] },
       },
-      { onChange }
-    )
+      { onChange },
+    ),
   );
 
   expect(wrapper.find(Checkbox)).toHaveLength(2);
@@ -605,13 +605,13 @@ test('<SelectField checkboxes> - renders a set of Checkboxes which correct label
     wrapper
       .find(FormControlLabel)
       .at(0)
-      .text()
+      .text(),
   ).toBe('A');
   expect(
     wrapper
       .find(FormControlLabel)
       .at(1)
-      .text()
+      .text(),
   ).toBe('B');
 });
 
@@ -623,8 +623,8 @@ test('<SelectField checkboxes> - renders a set of Radio buttons which correctly 
     element,
     createContext(
       { x: { type: String, allowedValues: ['a', 'b'] } },
-      { model: { x: 'b' }, onChange }
-    )
+      { model: { x: 'b' }, onChange },
+    ),
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
@@ -641,7 +641,7 @@ test('<SelectField checkboxes> - renders a label', () => {
   const element = <SelectField checkboxes name="x" label="y" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(FormLabel).text()).toBe('y *');
@@ -660,7 +660,7 @@ test('<SelectField checkboxes> - renders a SelectField with correct error text (
   );
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(FormHelperText).text()).toBe('Error');
@@ -679,7 +679,7 @@ test('<SelectField checkboxes> - renders a SelectField with correct error text (
   );
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find(FormHelperText)).toHaveLength(0);
@@ -691,8 +691,8 @@ test('<SelectField checkboxes> - renders Checkbox with appearance=checkbox', () 
     element,
     createContext({
       x: { type: Array },
-      'x.$': { type: String, allowedValues: ['a', 'b'] }
-    })
+      'x.$': { type: String, allowedValues: ['a', 'b'] },
+    }),
   );
 
   expect(wrapper.find(Checkbox)).toHaveLength(2);
@@ -705,8 +705,8 @@ test('<SelectField checkboxes> - renders Switch with appearance=switch', () => {
     element,
     createContext({
       x: { type: Array },
-      'x.$': { type: String, allowedValues: ['a', 'b'] }
-    })
+      'x.$': { type: String, allowedValues: ['a', 'b'] },
+    }),
   );
 
   expect(wrapper.find(Checkbox)).toHaveLength(0);

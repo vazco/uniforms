@@ -101,7 +101,7 @@ test('<BoolField> - renders a checkbox input with correct label (specified)', ()
     wrapper
       .find('label')
       .first()
-      .text()
+      .text(),
   ).toBe('BoolFieldLabel'); // Label is prefixed with a &nbsp;.
 });
 
@@ -125,7 +125,7 @@ test('<BoolField> - renders a switch input with correct value (model)', () => {
   const element = <BoolField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Boolean } }, { model: { x: true } })
+    createContext({ x: { type: Boolean } }, { model: { x: true } }),
   );
 
   expect(wrapper.find(Switch)).toHaveLength(1);
@@ -136,7 +136,7 @@ test('<BoolField> - renders a checkbox input with correct value (model)', () => 
   const element = <BoolField checkbox name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Boolean } }, { model: { x: true } })
+    createContext({ x: { type: Boolean } }, { model: { x: true } }),
   );
 
   expect(wrapper.find(Checkbox)).toHaveLength(1);
@@ -165,7 +165,7 @@ test('<BoolField> - renders a switch input which correctly reacts on change', ()
   const element = <BoolField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Boolean } }, { onChange })
+    createContext({ x: { type: Boolean } }, { onChange }),
   );
 
   expect(wrapper.find(Switch)).toHaveLength(1);
@@ -179,7 +179,7 @@ test('<BoolField> - renders a checkbox input which correctly reacts on change', 
   const element = <BoolField checkbox name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Boolean } }, { onChange })
+    createContext({ x: { type: Boolean } }, { onChange }),
   );
 
   expect(wrapper.find(Checkbox)).toHaveLength(1);

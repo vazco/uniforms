@@ -12,7 +12,7 @@ const Radio = (props: any) =>
         key={item}
         className={classnames(
           props.inputClassName,
-          `radio${props.inline ? '-inline' : ''}`
+          `radio${props.inline ? '-inline' : ''}`,
         )}
       >
         <label htmlFor={`${props.id}-${item}`}>
@@ -27,6 +27,6 @@ const Radio = (props: any) =>
           {props.transform ? props.transform(item) : item}
         </label>
       </div>
-    ))
+    )),
   );
 export default connectField(Radio);

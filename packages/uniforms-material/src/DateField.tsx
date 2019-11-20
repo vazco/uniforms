@@ -2,7 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { connectField, filterDOMProps } from 'uniforms';
 
-const DateConstructor = globalThis.Date;
+const DateConstructor = (typeof global === 'object' ? global : window).Date;
 const dateFormat = value => value && value.toISOString().slice(0, -8);
 const dateParse = (timestamp, onChange) => {
   const date = new DateConstructor(timestamp);
@@ -49,7 +49,7 @@ const Date = ({
 
 Date.defaultProps = {
   fullWidth: true,
-  margin: 'dense'
+  margin: 'dense',
 };
 
 export default connectField(Date);

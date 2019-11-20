@@ -29,7 +29,7 @@ const flowingProp = (prop: any, schema: any, state: any, fallback: any) => {
 };
 
 export default class BaseField extends Component {
-  static displayName: string = 'Field';
+  static displayName = 'Field';
 
   static propTypes: any = {
     id: PropTypes.string,
@@ -40,12 +40,10 @@ export default class BaseField extends Component {
     label: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.string,
-      PropTypes.node
+      PropTypes.node,
     ]),
-    placeholder: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
+    placeholder: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   };
-
-  static contextType = context;
 
   constructor() {
     // @ts-ignore
@@ -55,14 +53,14 @@ export default class BaseField extends Component {
       this.context && this.context.uniforms,
       '<%s /> must be rendered within a form.',
       // @ts-ignore
-      this.constructor.displayName
+      this.constructor.displayName,
     );
 
     this.options = {
       ensureValue: true,
       explicitInitialValue: false,
       includeParent: false,
-      overrideValue: false
+      overrideValue: false,
     };
 
     this.randomId = this.context.uniforms.randomId();
@@ -71,6 +69,8 @@ export default class BaseField extends Component {
     this.findField = this.findField.bind(this);
     this.findError = this.findError.bind(this);
   }
+
+  static contextType = context;
 
   props: any;
 
@@ -93,8 +93,8 @@ export default class BaseField extends Component {
         schema: this.getContextSchema(),
         onChange: this.getContextOnChange(),
         onSubmit: this.getContextOnSubmit(),
-        randomId: this.context.uniforms.randomId
-      }
+        randomId: this.context.uniforms.randomId,
+      },
     };
   }
 
@@ -125,7 +125,7 @@ export default class BaseField extends Component {
       label: propagate('label'),
       disabled: propagate('disabled'),
       placeholder: propagate('placeholder'),
-      showInlineError: propagate('showInlineError')
+      showInlineError: propagate('showInlineError'),
     };
   }
 
@@ -168,20 +168,20 @@ export default class BaseField extends Component {
     const parent: any =
       options.includeParent && name.indexOf('.') !== -1
         ? this.getFieldProps(name.replace(/(.+)\..+$/, '$1'), {
-            includeParent: false
+            includeParent: false,
           })
         : null;
     const [label, none] = flowingProp(
       props.label,
       schemaProps.label,
       state.label,
-      ''
+      '',
     );
     const [placeholder] = flowingProp(
       props.placeholder,
       schemaProps.placeholder,
       state.placeholder,
-      label || none
+      label || none,
     );
 
     let value;
@@ -233,14 +233,14 @@ export default class BaseField extends Component {
       // 6. Calculated _special_ field props.
       label,
       name,
-      placeholder
+      placeholder,
     };
   }
 
   findError(name: any) {
     return this.context.uniforms.schema.getError(
       name,
-      this.context.uniforms.error
+      this.context.uniforms.error,
     );
   }
 

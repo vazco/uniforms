@@ -66,7 +66,7 @@ test('<DateField> - renders a input with correct value (model)', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Date } }, { model: { x: now } })
+    createContext({ x: { type: Date } }, { model: { x: now } }),
   );
 
   expect(wrapper.find(DatePicker)).toHaveLength(1);
@@ -89,7 +89,7 @@ test('<DateField> - renders a input which correctly reacts on change', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Date } }, { onChange })
+    createContext({ x: { type: Date } }, { onChange }),
   );
 
   expect(wrapper.find(DatePicker)).toHaveLength(1);
@@ -103,7 +103,7 @@ test('<DateField> - renders a input which correctly reacts on change (empty)', (
   const element = <DateField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Date } }, { onChange })
+    createContext({ x: { type: Date } }, { onChange }),
   );
 
   expect(wrapper.find(DatePicker)).toHaveLength(1);

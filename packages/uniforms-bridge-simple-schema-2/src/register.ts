@@ -27,5 +27,5 @@ filterDOMProps.register(
   'optional',
   'regEx',
   'trim',
-  'type'
+  'type',
 );

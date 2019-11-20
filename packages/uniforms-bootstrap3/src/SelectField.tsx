@@ -19,7 +19,7 @@ const renderCheckboxes = (props: any) =>
       key={item}
       className={classnames(
         props.inputClassName,
-        `checkbox${props.inline ? '-inline' : ''}`
+        `checkbox${props.inline ? '-inline' : ''}`,
       )}
     >
       <label htmlFor={`${props.id}-${item}`}>
@@ -34,7 +34,7 @@ const renderCheckboxes = (props: any) =>
           name={props.name}
           onChange={() =>
             props.onChange(
-              props.fieldType === Array ? xor(item, props.value) : item
+              props.fieldType === Array ? xor(item, props.value) : item,
             )
           }
           type="checkbox"
@@ -47,7 +47,7 @@ const renderCheckboxes = (props: any) =>
 const renderSelect = (props: any) => (
   <select
     className={classnames(props.inputClassName, 'form-control', {
-      'form-control-danger': props.error
+      'form-control-danger': props.error,
     })}
     disabled={props.disabled}
     id={props.id}
@@ -77,7 +77,7 @@ const Select = props =>
     props,
     props.checkboxes || props.fieldType === Array
       ? renderCheckboxes(props)
-      : renderSelect(props)
+      : renderSelect(props),
   );
 
 export default connectField(Select);

@@ -66,7 +66,7 @@ test('<LongTextField> - renders a textarea with correct value (model)', () => {
   const element = <LongTextField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { model: { x: 'y' } })
+    createContext({ x: { type: String } }, { model: { x: 'y' } }),
   );
 
   expect(wrapper.find(TextArea)).toHaveLength(1);
@@ -87,12 +87,12 @@ test('<LongTextField> - renders a textarea which correctly reacts on change', ()
   const element = <LongTextField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { onChange })
+    createContext({ x: { type: String } }, { onChange }),
   );
 
   expect(wrapper.find(TextArea)).toHaveLength(1);
   expect(
-    wrapper.find(TextArea).simulate('change', { target: { value: 'y' } })
+    wrapper.find(TextArea).simulate('change', { target: { value: 'y' } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', 'y');
 });
@@ -103,12 +103,12 @@ test('<LongTextField> - renders a textarea which correctly reacts on change (emp
   const element = <LongTextField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { onChange })
+    createContext({ x: { type: String } }, { onChange }),
   );
 
   expect(wrapper.find(TextArea)).toHaveLength(1);
   expect(
-    wrapper.find(TextArea).simulate('change', { target: { value: '' } })
+    wrapper.find(TextArea).simulate('change', { target: { value: '' } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', '');
 });
@@ -119,12 +119,12 @@ test('<LongTextField> - renders a textarea which correctly reacts on change (sam
   const element = <LongTextField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { model: { x: 'y' }, onChange })
+    createContext({ x: { type: String } }, { model: { x: 'y' }, onChange }),
   );
 
   expect(wrapper.find(TextArea)).toHaveLength(1);
   expect(
-    wrapper.find(TextArea).simulate('change', { target: { value: 'y' } })
+    wrapper.find(TextArea).simulate('change', { target: { value: 'y' } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', 'y');
 });

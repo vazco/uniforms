@@ -33,7 +33,7 @@ const LongText = ({
 LongText.defaultProps = {
   fullWidth: true,
   margin: 'dense',
-  type: 'text'
+  type: 'text',
 };
 
 export default connectField(LongText);

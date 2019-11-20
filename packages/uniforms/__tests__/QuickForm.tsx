@@ -20,7 +20,7 @@ describe('QuickForm', () => {
     getDefinition: () => {},
     messageForError: () => {},
     objectKeys: () => ['a', 'b', 'c'],
-    validator: () => {}
+    validator: () => {},
   });
 
   describe('when rendered with custom fields', () => {
@@ -49,7 +49,7 @@ describe('QuickForm', () => {
         <TestQuickForm
           schema={schema}
           autoField={() => <i className="autoOverride" />}
-        />
+        />,
       );
 
       expect(wrapper.find('.autoOverride').length).toBeGreaterThan(0);
@@ -60,7 +60,7 @@ describe('QuickForm', () => {
         <TestQuickForm
           schema={schema}
           errorsField={() => <i className="errorsOverride" />}
-        />
+        />,
       );
 
       expect(wrapper.find('.errorsOverride').length).toBeGreaterThan(0);
@@ -71,7 +71,7 @@ describe('QuickForm', () => {
         <TestQuickForm
           schema={schema}
           submitField={() => <i className="submitOverride" />}
-        />
+        />,
       );
 
       expect(wrapper.find('.submitOverride').length).toBeGreaterThan(0);
@@ -95,7 +95,7 @@ describe('QuickForm', () => {
 
     it('works with functions', () => {
       const wrapper = mount(
-        <TestQuickForm schema={schema} autoField={() => <code />} />
+        <TestQuickForm schema={schema} autoField={() => <code />} />,
       );
 
       expect(wrapper.find('code').length).toBeGreaterThan(0);
@@ -106,7 +106,7 @@ describe('QuickForm', () => {
     const wrapper = mount(
       <QuickForm schema={schema}>
         <div />
-      </QuickForm>
+      </QuickForm>,
     );
 
     it('renders children', () => {

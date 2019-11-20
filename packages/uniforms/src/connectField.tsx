@@ -16,8 +16,8 @@ export default function connectField(
     ensureValue,
     includeInChain,
     includeParent,
-    initialValue
-  }: any = {}
+    initialValue,
+  }: any = {},
 ): any {
   return class extends baseField {
     static displayName = getDisplayName(Component) + getDisplayName(baseField);
@@ -46,7 +46,7 @@ export default function connectField(
         const props = this.getFieldProps(undefined, {
           ensureValue: false,
           explicitInitialValue: true,
-          includeParent: false
+          includeParent: false,
         });
         // https://github.com/vazco/uniforms/issues/52
         // If field is initially rendered with value, we treat it as an initial value.

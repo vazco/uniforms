@@ -13,15 +13,15 @@ const Nest = ({ children, fields, itemProps, label, name, ...props }) =>
       ? injectName(name, children)
       : fields.map(key => (
           <AutoField key={key} name={joinName(name, key)} {...itemProps} />
-        ))
+        )),
   );
 
 Nest.defaultProps = {
   fullWidth: true,
-  margin: 'dense'
+  margin: 'dense',
 };
 
 export default connectField(Nest, {
   ensureValue: false,
-  includeInChain: false
+  includeInChain: false,
 });

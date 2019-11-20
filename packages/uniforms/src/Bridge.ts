@@ -5,7 +5,7 @@ export default abstract class Bridge {
     invariant(
       this.constructor !== Bridge,
       'Bridge cannot be instantiated (args=%o).',
-      { args }
+      { args },
     );
   }
 
@@ -14,7 +14,7 @@ export default abstract class Bridge {
       false,
       '%s have not implemented `check` method (args=%o).',
       this.name,
-      { schema }
+      { schema },
     );
   }
 
@@ -23,7 +23,7 @@ export default abstract class Bridge {
       false,
       '%s have not implemented `getError` method (args=%o).',
       this.constructor.name,
-      { name, error }
+      { name, error },
     );
   }
 
@@ -32,7 +32,7 @@ export default abstract class Bridge {
       false,
       '%s have not implemented `getErrorMessage` method (args=%o).',
       this.constructor.name,
-      { name, error }
+      { name, error },
     );
   }
 
@@ -41,7 +41,7 @@ export default abstract class Bridge {
       false,
       '%s have not implemented `getErrorMessages` method (args=%o).',
       this.constructor.name,
-      { error }
+      { error },
     );
   }
 
@@ -50,7 +50,7 @@ export default abstract class Bridge {
       false,
       '%s have not implemented `getField` method (args=%o).',
       this.constructor.name,
-      { name }
+      { name },
     );
   }
 
@@ -59,7 +59,7 @@ export default abstract class Bridge {
       false,
       '%s have not implemented `getInitialValue` method (args=%o).',
       this.constructor.name,
-      { name, props }
+      { name, props },
     );
   }
 
@@ -68,7 +68,7 @@ export default abstract class Bridge {
       false,
       '%s have not implemented `getProps` method (args=%o).',
       this.constructor.name,
-      { name, props }
+      { name, props },
     );
   }
 
@@ -77,7 +77,7 @@ export default abstract class Bridge {
       false,
       '%s have not implemented `getSubfields` method (args=%o).',
       this.constructor.name,
-      { name }
+      { name },
     );
   }
 
@@ -86,7 +86,7 @@ export default abstract class Bridge {
       false,
       '%s have not implemented `getType` method (args=%o).',
       this.constructor.name,
-      { name }
+      { name },
     );
   }
 
@@ -95,7 +95,7 @@ export default abstract class Bridge {
       false,
       '%s have not implemented `getValidator` method (args=%o).',
       this.constructor.name,
-      { options }
+      { options },
     );
   }
 }

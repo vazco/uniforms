@@ -5,6 +5,6 @@ export default function mount(children, value) {
   if (value === undefined) return enzyme(children);
   return enzyme(children, {
     wrappingComponent: context.Provider,
-    wrappingComponentProps: { value: value.context }
+    wrappingComponentProps: { value: value.context },
   });
 }

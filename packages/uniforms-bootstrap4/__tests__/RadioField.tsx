@@ -8,7 +8,7 @@ test('<RadioField> - renders a set of checkboxes', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
@@ -18,7 +18,7 @@ test('<RadioField> - renders a set of inline checkboxes', () => {
   const element = <RadioField name="x" inline />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
@@ -30,7 +30,7 @@ test('<RadioField> - renders a set of checkboxes with correct disabled state', (
   const element = <RadioField name="x" disabled />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
@@ -38,13 +38,13 @@ test('<RadioField> - renders a set of checkboxes with correct disabled state', (
     wrapper
       .find('input')
       .at(0)
-      .prop('disabled')
+      .prop('disabled'),
   ).toBe(true);
   expect(
     wrapper
       .find('input')
       .at(1)
-      .prop('disabled')
+      .prop('disabled'),
   ).toBe(true);
 });
 
@@ -52,7 +52,7 @@ test('<RadioField> - renders a set of checkboxes with correct id (inherited)', (
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
@@ -60,13 +60,13 @@ test('<RadioField> - renders a set of checkboxes with correct id (inherited)', (
     wrapper
       .find('input')
       .at(0)
-      .prop('id')
+      .prop('id'),
   ).toBeTruthy();
   expect(
     wrapper
       .find('input')
       .at(1)
-      .prop('id')
+      .prop('id'),
   ).toBeTruthy();
 });
 
@@ -74,7 +74,7 @@ test('<RadioField> - renders a set of checkboxes with correct id (specified)', (
   const element = <RadioField name="x" id="y" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
@@ -82,13 +82,13 @@ test('<RadioField> - renders a set of checkboxes with correct id (specified)', (
     wrapper
       .find('input')
       .at(0)
-      .prop('id')
+      .prop('id'),
   ).toBe('y-a');
   expect(
     wrapper
       .find('input')
       .at(1)
-      .prop('id')
+      .prop('id'),
   ).toBe('y-b');
 });
 
@@ -96,7 +96,7 @@ test('<RadioField> - renders a set of checkboxes with correct name', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
@@ -104,13 +104,13 @@ test('<RadioField> - renders a set of checkboxes with correct name', () => {
     wrapper
       .find('input')
       .at(0)
-      .prop('name')
+      .prop('name'),
   ).toBe('x');
   expect(
     wrapper
       .find('input')
       .at(1)
-      .prop('name')
+      .prop('name'),
   ).toBe('x');
 });
 
@@ -118,7 +118,7 @@ test('<RadioField> - renders a set of checkboxes with correct options', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find('label')).toHaveLength(2);
@@ -126,13 +126,13 @@ test('<RadioField> - renders a set of checkboxes with correct options', () => {
     wrapper
       .find('label')
       .at(0)
-      .text()
+      .text(),
   ).toBe(' a');
   expect(
     wrapper
       .find('label')
       .at(1)
-      .text()
+      .text(),
   ).toBe(' b');
 });
 
@@ -140,7 +140,7 @@ test('<RadioField> - renders a set of checkboxes with correct options (transform
   const element = <RadioField name="x" transform={x => x.toUpperCase()} />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find('label')).toHaveLength(2);
@@ -148,13 +148,13 @@ test('<RadioField> - renders a set of checkboxes with correct options (transform
     wrapper
       .find('label')
       .at(0)
-      .text()
+      .text(),
   ).toBe(' A');
   expect(
     wrapper
       .find('label')
       .at(1)
-      .text()
+      .text(),
   ).toBe(' B');
 });
 
@@ -162,7 +162,7 @@ test('<RadioField> - renders a set of checkboxes with correct value (default)', 
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
@@ -170,13 +170,13 @@ test('<RadioField> - renders a set of checkboxes with correct value (default)', 
     wrapper
       .find('input')
       .at(0)
-      .prop('checked')
+      .prop('checked'),
   ).toBe(false);
   expect(
     wrapper
       .find('input')
       .at(1)
-      .prop('checked')
+      .prop('checked'),
   ).toBe(false);
 });
 
@@ -186,8 +186,8 @@ test('<RadioField> - renders a set of checkboxes with correct value (model)', ()
     element,
     createContext(
       { x: { type: String, allowedValues: ['a', 'b'] } },
-      { model: { x: 'b' } }
-    )
+      { model: { x: 'b' } },
+    ),
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
@@ -195,13 +195,13 @@ test('<RadioField> - renders a set of checkboxes with correct value (model)', ()
     wrapper
       .find('input')
       .at(0)
-      .prop('checked')
+      .prop('checked'),
   ).toBe(false);
   expect(
     wrapper
       .find('input')
       .at(1)
-      .prop('checked')
+      .prop('checked'),
   ).toBe(true);
 });
 
@@ -209,7 +209,7 @@ test('<RadioField> - renders a set of checkboxes with correct value (specified)'
   const element = <RadioField name="x" value="b" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
@@ -217,13 +217,13 @@ test('<RadioField> - renders a set of checkboxes with correct value (specified)'
     wrapper
       .find('input')
       .at(0)
-      .prop('checked')
+      .prop('checked'),
   ).toBe(false);
   expect(
     wrapper
       .find('input')
       .at(1)
-      .prop('checked')
+      .prop('checked'),
   ).toBe(true);
 });
 
@@ -235,8 +235,8 @@ test('<RadioField> - renders a set of checkboxes which correctly reacts on chang
     element,
     createContext(
       { x: { type: String, allowedValues: ['a', 'b'] } },
-      { onChange }
-    )
+      { onChange },
+    ),
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
@@ -244,7 +244,7 @@ test('<RadioField> - renders a set of checkboxes which correctly reacts on chang
     wrapper
       .find('input')
       .at(1)
-      .simulate('change')
+      .simulate('change'),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', 'b');
 });
@@ -257,8 +257,8 @@ test('<RadioField> - renders a set of checkboxes which correctly reacts on chang
     element,
     createContext(
       { x: { type: String, allowedValues: ['a', 'b'] } },
-      { model: { x: 'b' }, onChange }
-    )
+      { model: { x: 'b' }, onChange },
+    ),
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
@@ -266,7 +266,7 @@ test('<RadioField> - renders a set of checkboxes which correctly reacts on chang
     wrapper
       .find('input')
       .at(0)
-      .simulate('change')
+      .simulate('change'),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', 'a');
 });
@@ -275,7 +275,7 @@ test('<RadioField> - renders a label', () => {
   const element = <RadioField name="x" label="y" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(wrapper.find('label')).toHaveLength(3);
@@ -283,7 +283,7 @@ test('<RadioField> - renders a label', () => {
     wrapper
       .find('label')
       .at(0)
-      .text()
+      .text(),
   ).toBe('y');
 });
 
@@ -291,25 +291,25 @@ test('<RadioField> - renders a wrapper with unknown props', () => {
   const element = <RadioField name="x" data-x="x" data-y="y" data-z="z" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } })
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
   expect(
     wrapper
       .find('div')
       .at(0)
-      .prop('data-x')
+      .prop('data-x'),
   ).toBe('x');
   expect(
     wrapper
       .find('div')
       .at(0)
-      .prop('data-y')
+      .prop('data-y'),
   ).toBe('y');
   expect(
     wrapper
       .find('div')
       .at(0)
-      .prop('data-z')
+      .prop('data-z'),
   ).toBe('z');
 });

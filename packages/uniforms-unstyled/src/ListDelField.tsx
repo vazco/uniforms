@@ -14,7 +14,7 @@ const ListDel = ({ disabled, name, parent, ...props }) => {
         parent.onChange(
           []
             .concat(parent.value.slice(0, fieldIndex))
-            .concat(parent.value.slice(1 + fieldIndex))
+            .concat(parent.value.slice(1 + fieldIndex)),
         )
       }
     >
@@ -25,5 +25,5 @@ const ListDel = ({ disabled, name, parent, ...props }) => {
 
 export default connectField(ListDel, {
   includeParent: true,
-  initialValue: false
+  initialValue: false,
 });

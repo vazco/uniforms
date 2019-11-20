@@ -27,10 +27,10 @@ const createContext = (schema, context) => ({
         placeholder: false,
         showInlineError: false,
 
-        ...(context && context.state)
-      }
-    }
-  }
+        ...(context && context.state),
+      },
+    },
+  },
 });
 
 export default createContext;

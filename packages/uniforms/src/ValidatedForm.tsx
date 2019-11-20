@@ -20,7 +20,7 @@ const Validated = (parent: any): any =>
         callback();
       },
 
-      validate: 'onChangeAfterSubmit'
+      validate: 'onChangeAfterSubmit',
     };
 
     static propTypes = {
@@ -30,7 +30,7 @@ const Validated = (parent: any): any =>
 
       validator: PropTypes.any,
       validate: PropTypes.oneOf(['onChange', 'onChangeAfterSubmit', 'onSubmit'])
-        .isRequired
+        .isRequired,
     };
 
     validate: (key?: any, value?: any) => Promise<unknown>;
@@ -46,12 +46,12 @@ const Validated = (parent: any): any =>
         error: null,
         validate: false,
         validating: false,
-        validator: this.getContextSchema().getValidator(this.props.validator)
+        validator: this.getContextSchema().getValidator(this.props.validator),
       };
 
       this.onValidate = this.validate = this.onValidate.bind(this);
       this.onValidateModel = this.validateModel = this.onValidateModel.bind(
-        this
+        this,
       );
     }
 
@@ -63,7 +63,7 @@ const Validated = (parent: any): any =>
       return {
         ...super.getContextState(),
 
-        validating: this.state.validating
+        validating: this.state.validating,
       };
     }
 
@@ -71,7 +71,7 @@ const Validated = (parent: any): any =>
       return omit(super.getNativeFormProps(), [
         'onValidate',
         'validate',
-        'validator'
+        'validator',
       ]);
     }
 
@@ -86,7 +86,7 @@ const Validated = (parent: any): any =>
             if (shouldRevalidate(validate, this.state.validate)) {
               this.onValidate().catch(noop);
             }
-          }
+          },
         );
       } else if (
         !isEqual(this.props.model, model) &&
@@ -115,7 +115,7 @@ const Validated = (parent: any): any =>
         ...super.__reset(state),
         error: null,
         validate: false,
-        validating: false
+        validating: false,
       };
     }
 
@@ -135,7 +135,7 @@ const Validated = (parent: any): any =>
                 reject(error);
               });
             }, reject);
-          }
+          },
         );
       });
 
@@ -147,7 +147,7 @@ const Validated = (parent: any): any =>
           if (this.mounted)
             // If validation fails, or `super.onSubmit` doesn't touch `submitting`, we need to reset it.
             this.setState((state: any) =>
-              state.submitting ? { submitting: false } : null
+              state.submitting ? { submitting: false } : null,
             );
         });
 
@@ -181,7 +181,7 @@ const Validated = (parent: any): any =>
           this.setState(
             () => ({
               error: error === this.props.error ? null : error,
-              validating: false
+              validating: false,
             }),
             () => {
               if (error) {
@@ -189,7 +189,7 @@ const Validated = (parent: any): any =>
               } else {
                 resolve();
               }
-            }
+            },
           );
         });
       });

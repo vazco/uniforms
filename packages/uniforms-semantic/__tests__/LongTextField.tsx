@@ -63,7 +63,7 @@ test('<LongTextField> - renders a textarea with correct value (model)', () => {
   const element = <LongTextField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { model: { x: 'y' } })
+    createContext({ x: { type: String } }, { model: { x: 'y' } }),
   );
 
   expect(wrapper.find('textarea')).toHaveLength(1);
@@ -84,12 +84,12 @@ test('<LongTextField> - renders a textarea which correctly reacts on change', ()
   const element = <LongTextField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { onChange })
+    createContext({ x: { type: String } }, { onChange }),
   );
 
   expect(wrapper.find('textarea')).toHaveLength(1);
   expect(
-    wrapper.find('textarea').simulate('change', { target: { value: 'y' } })
+    wrapper.find('textarea').simulate('change', { target: { value: 'y' } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', 'y');
 });
@@ -100,12 +100,12 @@ test('<LongTextField> - renders a textarea which correctly reacts on change (emp
   const element = <LongTextField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { onChange })
+    createContext({ x: { type: String } }, { onChange }),
   );
 
   expect(wrapper.find('textarea')).toHaveLength(1);
   expect(
-    wrapper.find('textarea').simulate('change', { target: { value: '' } })
+    wrapper.find('textarea').simulate('change', { target: { value: '' } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', '');
 });
@@ -116,12 +116,12 @@ test('<LongTextField> - renders a textarea which correctly reacts on change (sam
   const element = <LongTextField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String } }, { model: { x: 'y' }, onChange })
+    createContext({ x: { type: String } }, { model: { x: 'y' }, onChange }),
   );
 
   expect(wrapper.find('textarea')).toHaveLength(1);
   expect(
-    wrapper.find('textarea').simulate('change', { target: { value: 'y' } })
+    wrapper.find('textarea').simulate('change', { target: { value: 'y' } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', 'y');
 });
@@ -133,7 +133,7 @@ test('<LongTextField> - renders a label', () => {
   expect(wrapper.find('label')).toHaveLength(1);
   expect(wrapper.find('label').text()).toBe('y');
   expect(wrapper.find('label').prop('htmlFor')).toBe(
-    wrapper.find('textarea').prop('id')
+    wrapper.find('textarea').prop('id'),
   );
 });
 
@@ -145,19 +145,19 @@ test('<LongTextField> - renders a wrapper with unknown props', () => {
     wrapper
       .find('div')
       .at(0)
-      .prop('data-x')
+      .prop('data-x'),
   ).toBe('x');
   expect(
     wrapper
       .find('div')
       .at(0)
-      .prop('data-y')
+      .prop('data-y'),
   ).toBe('y');
   expect(
     wrapper
       .find('div')
       .at(0)
-      .prop('data-z')
+      .prop('data-z'),
   ).toBe('z');
 });
 
@@ -177,7 +177,7 @@ test('<LongTextField> - renders correct error text (specified)', () => {
     wrapper
       .children()
       .last()
-      .text()
+      .text(),
   ).toBe('Error');
 });
 
@@ -197,6 +197,6 @@ test('<LongTextField> - renders correct error text (showInlineError=false)', () 
     wrapper
       .children()
       .last()
-      .text()
+      .text(),
   ).not.toBe('Error');
 });

@@ -12,7 +12,7 @@ const Num_ = props =>
     props,
     <input
       className={classnames(props.inputClassName, 'form-control', {
-        'is-invalid': props.error
+        'is-invalid': props.error,
       })}
       disabled={props.disabled}
       id={props.id}
@@ -25,7 +25,7 @@ const Num_ = props =>
       step={props.step || (props.decimal ? 0.01 : 1)}
       type="number"
       value={props.value}
-    />
+    />,
   );
 
 let Num;
@@ -40,7 +40,7 @@ if (parseInt(React.version, 10) < 16) {
         parse(decimal, this.state.value.replace(/[.,]+$/, ''))
       ) {
         this.setState({
-          value: value === undefined || value === '' ? '' : '' + value
+          value: value === undefined || value === '' ? '' : '' + value,
         });
       }
     }
@@ -56,7 +56,7 @@ if (parseInt(React.version, 10) < 16) {
       return Num_({
         ...this.props,
         onChange: this.onChange,
-        value: this.state.value
+        value: this.state.value,
       });
     }
   };
@@ -66,7 +66,7 @@ if (parseInt(React.version, 10) < 16) {
       ...props,
       onChange(event) {
         props.onChange(parse(props.decimal, event.target.value));
-      }
+      },
     });
 }
 

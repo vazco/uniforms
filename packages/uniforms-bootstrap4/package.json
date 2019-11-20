@@ -1,6 +1,6 @@
 {
   "name": "uniforms-bootstrap4",
-  "version": "2.6.0",
+  "version": "2.6.1",
   "license": "MIT",
   "main": "index.js",
   "module": "es6/index.js",
@@ -34,7 +34,7 @@
     "lodash": "^4.0.0",
     "prop-types": "^15.5.7",
     "tslib": "^1.0.0",
-    "uniforms": "^2.6.0",
+    "uniforms": "^2.6.1",
     "warning": "^4.0.0"
   }
 }

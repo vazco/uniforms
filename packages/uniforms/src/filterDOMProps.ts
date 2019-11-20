@@ -27,7 +27,7 @@ const registered = [
 
   // These are used by AutoField
   'allowedValues',
-  'component'
+  'component',
 ];
 
 function filter(props: {}) {
@@ -36,7 +36,7 @@ function filter(props: {}) {
 
 function register(...props: string[]) {
   props.forEach(prop => {
-    if (registered.indexOf(prop) === -1) {
+    if (!registered.includes(prop)) {
       registered.push(prop);
     }
   });

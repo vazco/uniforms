@@ -1,9 +1,5 @@
-// FIXME: Finish ESLint configuration for TypeScript.
-// eslint-disable-next-line no-unused-vars
 import { SyntheticEvent, createContext } from 'react';
 
-// FIXME: Finish ESLint configuration for TypeScript.
-// eslint-disable-next-line no-unused-vars
 import Bridge from './Bridge';
 
 // TODO: Think about externalizing these types.

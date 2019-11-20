@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { connectField, filterDOMProps } from 'uniforms';
 
-const DateConstructor = globalThis.Date;
+const DateConstructor = (typeof global === 'object' ? global : window).Date;
 const dateFormat = value => value && value.toISOString().slice(0, -8);
 const dateParse = (timestamp, onChange) => {
   const date = new DateConstructor(timestamp);
@@ -46,7 +46,7 @@ const Date = ({
         'ui',
         wrapClassName,
         { left: iconLeft, icon: icon || iconLeft },
-        'input'
+        'input',
       )}
     >
       <input

@@ -22,7 +22,7 @@ export default function wrapField(
     wrapClassName, // Input wrapper class name.
     ...props
   },
-  children
+  children,
 ) {
   const hasWrap = !!(grid || wrapClassName);
   const blockError = !!(error && showInlineError) && (
@@ -40,7 +40,7 @@ export default function wrapField(
         'is-invalid': error,
         disabled,
         required,
-        row: grid
+        row: grid,
       })}
       {...filterDOMProps(
         omit(props, [
@@ -49,8 +49,8 @@ export default function wrapField(
           'inputClassName',
           'inputRef',
           'rows',
-          'transform'
-        ])
+          'transform',
+        ]),
       )}
     >
       {label && (
@@ -59,10 +59,10 @@ export default function wrapField(
           className={classnames(
             {
               'col-form-label': grid,
-              'text-danger': error
+              'text-danger': error,
             },
             gridClassName(grid, 'label'),
-            labelClassName
+            labelClassName,
           )}
         >
           {label}

@@ -46,10 +46,10 @@ const List = ({
               label: null,
               name: joinName(
                 name,
-                child.props.name && child.props.name.replace('$', index)
-              )
-            })
-          )
+                child.props.name && child.props.name.replace('$', index),
+              ),
+            }),
+          ),
         )
       : value.map((item: any, index: number) => (
           <ListItemField
@@ -72,11 +72,11 @@ List.defaultProps = {
     borderRadius: '7px',
     marginBottom: '5px',
     marginTop: '5px',
-    padding: '10px'
-  }
+    padding: '10px',
+  },
 };
 
 export default connectField(List, {
   ensureValue: false,
-  includeInChain: false
+  includeInChain: false,
 });

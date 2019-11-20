@@ -1,6 +1,4 @@
 import PropTypes from 'prop-types';
-// FIXME: Finish ESLint configuration for TypeScript.
-// eslint-disable-next-line no-unused-vars
 import React, { Component, SyntheticEvent } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
@@ -15,16 +13,6 @@ import randomIds from './randomIds';
 
 export default class BaseForm extends Component<any, any> {
   static displayName = 'Form';
-
-  static defaultProps = {
-    model: {},
-    label: true,
-
-    autosave: false,
-    autosaveDelay: 0,
-
-    noValidate: true
-  };
 
   static propTypes = {
     error: PropTypes.object,
@@ -44,7 +32,15 @@ export default class BaseForm extends Component<any, any> {
     showInlineError: PropTypes.bool,
 
     autosave: PropTypes.bool,
-    autosaveDelay: PropTypes.number
+    autosaveDelay: PropTypes.number,
+  };
+
+  static defaultProps = {
+    autosave: false,
+    autosaveDelay: 0,
+    label: true,
+    model: {},
+    noValidate: true,
   };
 
   constructor() {
@@ -56,7 +52,7 @@ export default class BaseForm extends Component<any, any> {
       changed: null,
       changedMap: {},
       resetCount: 0,
-      submitting: false
+      submitting: false,
     };
 
     this.mounted = false;
@@ -78,7 +74,7 @@ export default class BaseForm extends Component<any, any> {
     this.mounted = true;
     this.setState(
       () => ({}),
-      () => this.setState(() => ({ changed: false, changedMap: {} }))
+      () => this.setState(() => ({ changed: false, changedMap: {} })),
     );
   }
 
@@ -109,8 +105,8 @@ export default class BaseForm extends Component<any, any> {
         schema: this.getContextSchema(),
         onChange: this.getContextOnChange(),
         onSubmit: this.getContextOnSubmit(),
-        randomId: this.randomId
-      }
+        randomId: this.randomId,
+      },
     };
   }
 
@@ -135,7 +131,7 @@ export default class BaseForm extends Component<any, any> {
       label: !!this.props.label,
       disabled: !!this.props.disabled,
       placeholder: !!this.props.placeholder,
-      showInlineError: !!this.props.showInlineError
+      showInlineError: !!this.props.showInlineError,
     };
   }
 
@@ -174,13 +170,13 @@ export default class BaseForm extends Component<any, any> {
       'onSubmitSuccess',
       'placeholder',
       'schema',
-      'showInlineError'
+      'showInlineError',
     ]);
 
     return {
       ...props,
       onSubmit: this.onSubmit,
-      key: `reset-${this.state.resetCount}`
+      key: `reset-${this.state.resetCount}`,
     };
   }
 
@@ -188,11 +184,11 @@ export default class BaseForm extends Component<any, any> {
     // Do not set `changed` before componentDidMount
     if (this.state.changed !== null) {
       // @ts-ignore
-      this.state.changed = true;
+      this.state.changed = true; // eslint-disable-line react/no-direct-mutation-state
       this.getChangedKeys(key, value, get(this.getModel(), key)).forEach(key =>
         this.setState(state => ({
-          changedMap: set(cloneDeep(state.changedMap), key, {})
-        }))
+          changedMap: set(cloneDeep(state.changedMap), key, {}),
+        })),
       );
     }
 
@@ -207,7 +203,9 @@ export default class BaseForm extends Component<any, any> {
       }
 
       if (this.props.autosaveDelay > 0) {
-        this.delayId = setTimeout(this.onSubmit, this.props.autosaveDelay);
+        this.delayId = setTimeout(() => {
+          this.onSubmit();
+        }, this.props.autosaveDelay);
       } else {
         this.onSubmit();
       }
@@ -219,7 +217,7 @@ export default class BaseForm extends Component<any, any> {
       changed: false,
       changedMap: {},
       submitting: false,
-      resetCount: state.resetCount + 1
+      resetCount: state.resetCount + 1,
     };
   }
 
@@ -247,7 +245,7 @@ export default class BaseForm extends Component<any, any> {
 
     return submitting.then(
       this.props.onSubmitSuccess,
-      this.props.onSubmitFailure
+      this.props.onSubmitFailure,
     );
   }
 

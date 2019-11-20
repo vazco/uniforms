@@ -22,7 +22,7 @@ const ListDel = ({
         parent.onChange(
           []
             .concat(parent.value.slice(0, fieldIndex))
-            .concat(parent.value.slice(1 + fieldIndex))
+            .concat(parent.value.slice(1 + fieldIndex)),
         )
       }
       {...filterDOMProps(props)}
@@ -36,5 +36,5 @@ ListDel.defaultProps = { removeIcon: <i className="octicon octicon-dash" /> };
 
 export default connectField(ListDel, {
   includeParent: true,
-  initialValue: false
+  initialValue: false,
 });

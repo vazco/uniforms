@@ -9,7 +9,7 @@ const Text = props =>
     props,
     <input
       className={classnames(props.inputClassName, 'form-control', {
-        'is-invalid': props.error
+        'is-invalid': props.error,
       })}
       disabled={props.disabled}
       id={props.id}
@@ -19,7 +19,7 @@ const Text = props =>
       ref={props.inputRef}
       type={props.type}
       value={props.value}
-    />
+    />,
   );
 Text.defaultProps = { type: 'text' };
 

@@ -1,3 +1,7 @@
+## [v2.6.1](https://github.com/vazco/uniforms/tree/v2.6.1) (2019-11-13)
+
+- **Changed:** Reverted introduction of `globalThis`. [\#641](https://github.com/vazco/uniforms/issues/641)
+
 ## [v2.6.0](https://github.com/vazco/uniforms/tree/v2.6.0) (2019-11-06)
 
 - **Added:** ES6 compilation targets and `module` keyword in `package.json`. If your bundler supports tree shaking, you no longer have to use direct imports manually - simply use `import { X } from 'uniforms'`. [\#612](https://github.com/vazco/uniforms/issues/612)
