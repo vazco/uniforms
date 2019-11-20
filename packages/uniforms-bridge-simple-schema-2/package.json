@@ -27,7 +27,7 @@
     "invariant": "^2.0.0",
     "lodash": "^4.0.0",
     "simpl-schema": "^1.0.0 || ^0.0.4",
-    "tslib": "^1.0.0",
+    "tslib": "^1.10.0",
     "uniforms": "^2.6.1"
   }
 }
