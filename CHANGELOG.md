@@ -1,3 +1,7 @@
+## [v2.6.2](https://github.com/vazco/uniforms/tree/v2.6.2) (2019-11-21)
+
+- **Changed:** Fixed minimal required version of `tslib`. [\#648](https://github.com/vazco/uniforms/issues/648)
+
 ## [v2.6.1](https://github.com/vazco/uniforms/tree/v2.6.1) (2019-11-13)
 
 - **Changed:** Reverted introduction of `globalThis`. [\#641](https://github.com/vazco/uniforms/issues/641)
