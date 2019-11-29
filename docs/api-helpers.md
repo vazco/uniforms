@@ -125,15 +125,15 @@ const componentWithInjectedName = injectName(name, component);
 
 ## `joinName([null, ] nameA, nameB, nameC, ...)`
 
-Safely joins partial field names. When the first param is null, returns a string. Otherwise, returns an array.
+Safely joins partial field names. When the first param is null, returns an array. Otherwise, returns a string.
 
 If you create a custom field with subfields, then it's better to use this helper.
 
 ```js
 import { joinName } from 'uniforms';
 
-const joinedNameString = joinName(nameA, nameB, nameC /* ... */);
 const joinedNameArray = joinName(null, nameA, nameB, nameC /* ... */);
+const joinedNameString = joinName(nameA, nameB, nameC /* ... */);
 ```
 
 ## `nothing`
