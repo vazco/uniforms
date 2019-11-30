@@ -48,7 +48,7 @@ export default class BaseForm extends Component<any, any> {
         : model;
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.mounted = true;
     this.setState(
       () => ({}),
@@ -56,7 +56,7 @@ export default class BaseForm extends Component<any, any> {
     );
   }
 
-  componentWillReceiveProps({ schema }: any) {
+  UNSAFE_componentWillReceiveProps({ schema }: any) {
     if (this.props.schema !== schema) {
       this.setState(() => ({ bridge: createSchemaBridge(schema) }));
     }

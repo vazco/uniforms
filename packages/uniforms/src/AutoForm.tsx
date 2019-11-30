@@ -23,9 +23,9 @@ const Auto = (parent: any): any =>
       };
     }
 
-    componentWillReceiveProps({ model }: { model: any }) {
+    UNSAFE_componentWillReceiveProps({ model }: { model: any }) {
       // @ts-ignore
-      super.componentWillReceiveProps(...arguments);
+      super.UNSAFE_componentWillReceiveProps(...arguments);
 
       if (!isEqual(this.props.model, model)) {
         this.setState(() => ({ model, modelSync: model }));

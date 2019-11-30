@@ -41,7 +41,7 @@ export default function connectField(
         : this.context.uniforms.name;
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
       if (this.options.initialValue) {
         const props = this.getFieldProps(undefined, {
           ensureValue: false,

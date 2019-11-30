@@ -64,9 +64,14 @@ const Validated = (parent: any): any =>
       ]);
     }
 
-    componentWillReceiveProps({ model, schema, validate, validator }: any) {
+    UNSAFE_componentWillReceiveProps({
+      model,
+      schema,
+      validate,
+      validator,
+    }: any) {
       // @ts-ignore
-      super.componentWillReceiveProps(...arguments);
+      super.UNSAFE_componentWillReceiveProps(...arguments);
 
       if (this.props.schema !== schema || this.props.validator !== validator) {
         this.setState(

@@ -105,7 +105,7 @@ class PlaygroundPreview extends Component {
     this._schema = eval(`(${this.props.value.schema})`);
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     if (this.props.value.schema !== props.value.schema) {
       this.onModel({});
       this._schema = eval(`(${props.value.schema})`);

@@ -4,6 +4,7 @@
 - **Breaking:** Removed workaround for React < 16 in `NumField`.
 - **Breaking:** Removed `nothing` from `uniforms` as it's not needed in React >= 15.
 - **Changed:** Removed `prop-types` entirely in favor of incoming typings.
+- **Changed:** Renamed deprecated lifecycle methods.
 
 ## [v2.6.2](https://github.com/vazco/uniforms/tree/v2.6.2) (2019-11-21)
 
