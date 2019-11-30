@@ -1,5 +1,6 @@
 ## [v3.0.0-alpha.0](https://github.com/vazco/uniforms/tree/v3.0.0-alpha.0) (2019-11-30)
 
+- **Breaking:** Migrated from the legacy context API. This change should be transparent for `connectField` but will break all components using context directly. As there's no documentation yet, see [this](https://github.com/vazco/uniforms/commit/1ec3b5393ad59890cadcdf96c0cf2cab90b8164f) commit to see what changed. To have an idea on how to proceed, see [this](https://github.com/vazco/uniforms/commit/46174f5507268db760fc1eef9f4fd43cb3760916) commit.
 - **Breaking:** Raised minimum version of React to 16.8.0.
 - **Breaking:** Removed workaround for React < 16 in `NumField`.
 - **Breaking:** Removed `nothing` from `uniforms` as it's not needed in React >= 15.
