@@ -27,7 +27,7 @@
   ],
   "peerDependencies": {
     "antd": "^3.0.0 || ^2.7.0",
-    "react": "^16.0.0 || ^15.0.0 || ^0.14.0"
+    "react": "^16.8.0"
   },
   "dependencies": {
     "invariant": "^2.0.0",
