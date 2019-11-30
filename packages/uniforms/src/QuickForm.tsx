@@ -1,7 +1,6 @@
 import React from 'react';
 
 import BaseForm from './BaseForm';
-import nothing from './nothing';
 
 const Quick = (parent: any): any =>
   class extends parent {
@@ -31,15 +30,15 @@ const Quick = (parent: any): any =>
     }
 
     getAutoField(): any {
-      return () => nothing;
+      return () => null;
     }
 
     getErrorsField(): any {
-      return () => nothing;
+      return () => null;
     }
 
     getSubmitField(): any {
-      return () => nothing;
+      return () => null;
     }
   };
 

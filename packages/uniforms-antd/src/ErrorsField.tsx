@@ -1,12 +1,10 @@
 import React, { useContext } from 'react';
-import { context, filterDOMProps, nothing } from 'uniforms';
+import { context, filterDOMProps } from 'uniforms';
 
 function ErrorsField({ children, ...props }) {
   const { error, schema } = useContext(context).uniforms;
 
-  return !error && !children ? (
-    nothing
-  ) : (
+  return !error && !children ? null : (
     <div {...filterDOMProps(props)}>
       {children}
       <ul>

@@ -1,11 +1,9 @@
 import React from 'react';
 import classnames from 'classnames';
-import { connectField, filterDOMProps, nothing } from 'uniforms';
+import { connectField, filterDOMProps } from 'uniforms';
 
 const Error = ({ children, className, error, errorMessage, ...props }) =>
-  !error ? (
-    nothing
-  ) : (
+  !error ? null : (
     <div
       className={classnames('ui', className, 'error message')}
       {...filterDOMProps(props)}

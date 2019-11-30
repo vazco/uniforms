@@ -1,6 +1,6 @@
 import React from 'react';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
-import { connectField, injectName, nothing, randomIds } from 'uniforms';
+import { connectField, injectName, randomIds } from 'uniforms';
 
 import mount from './_mount';
 
@@ -59,7 +59,7 @@ describe('injectName', () => {
   };
 
   const Test = jest.fn(({ children }) =>
-    children ? <span>{children}</span> : nothing,
+    children ? <span>{children}</span> : null,
   );
   const Field = connectField(Test);
 

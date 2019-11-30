@@ -136,20 +136,6 @@ const joinedNameString = joinName(nameA, nameB, nameC /* ... */);
 const joinedNameArray = joinName(null, nameA, nameB, nameC /* ... */);
 ```
 
-## `nothing`
-
-A safe `null` or `<noscript/>` tag.
-
-In React@0.14 you can't return null from functional component, but in React@15 you should use null.
-
-Basically it's a `<noscript />` in @0.14 and null in @15.
-
-```js
-import { nothing } from 'uniforms';
-
-const emptyJSX = () => nothing;
-```
-
 ## `randomIds([prefix])`
 
 Generates random ID, based on given prefix. (_It's rather an internal helper, but it's still exported._)

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BaseField, filterDOMProps, nothing } from 'uniforms';
+import { BaseField, filterDOMProps } from 'uniforms';
 
 export default class HiddenField extends BaseField {
   static displayName = 'HiddenField';
@@ -28,9 +28,7 @@ export default class HiddenField extends BaseField {
   render() {
     const props = this.getFieldProps();
 
-    return props.noDOM ? (
-      nothing
-    ) : (
+    return props.noDOM ? null : (
       <input
         disabled={props.disabled}
         id={props.id}

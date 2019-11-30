@@ -1,5 +1,5 @@
 import React from 'react';
-import { BaseField, context, nothing, randomIds } from 'uniforms';
+import { BaseField, context, randomIds } from 'uniforms';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
 
 import mount from './_mount';
@@ -8,7 +8,7 @@ jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
 
 describe('BaseField', () => {
-  const PropsComponent = () => nothing;
+  const PropsComponent = () => null;
 
   class TestField extends BaseField {
     static displayName = 'TestField';

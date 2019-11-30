@@ -1,6 +1,6 @@
 import React from 'react';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
-import { connectField, nothing, randomIds } from 'uniforms';
+import { connectField, randomIds } from 'uniforms';
 
 import mount from './_mount';
 
@@ -57,7 +57,7 @@ describe('connectField', () => {
     },
   };
 
-  const Test = jest.fn(() => nothing);
+  const Test = jest.fn(() => null);
 
   beforeEach(() => {
     Test.mockClear();

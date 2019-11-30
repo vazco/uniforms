@@ -1,13 +1,11 @@
 import React, { useContext } from 'react';
 import classnames from 'classnames';
-import { context, filterDOMProps, nothing } from 'uniforms';
+import { context, filterDOMProps } from 'uniforms';
 
 const ErrorsField = ({ className, children, ...props }) => {
   const { error, schema } = useContext(context).uniforms;
 
-  return !error && !children ? (
-    nothing
-  ) : (
+  return !error && !children ? null : (
     <div
       className={classnames('ui', className, 'error message')}
       {...filterDOMProps(props)}

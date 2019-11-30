@@ -1,10 +1,8 @@
 import React from 'react';
-import { connectField, filterDOMProps, nothing } from 'uniforms';
+import { connectField, filterDOMProps } from 'uniforms';
 
 const Error = ({ children, error, errorMessage, ...props }: any) =>
-  !error ? (
-    nothing
-  ) : (
+  !error ? null : (
     <div {...filterDOMProps(props)}>
       {children ? (
         children

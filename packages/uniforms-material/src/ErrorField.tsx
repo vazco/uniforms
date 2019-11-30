@@ -1,7 +1,7 @@
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import React from 'react';
-import { connectField, filterDOMProps, nothing } from 'uniforms';
+import { connectField, filterDOMProps } from 'uniforms';
 
 const Error = ({
   children,
@@ -12,9 +12,7 @@ const Error = ({
   variant,
   ...props
 }) =>
-  !error ? (
-    nothing
-  ) : (
+  !error ? null : (
     <FormControl
       error={!!error}
       fullWidth={!!fullWidth}

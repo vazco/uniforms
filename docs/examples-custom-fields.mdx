@@ -160,12 +160,12 @@ This simple field component conditionally displays other fields based on input.
       'js',
       `import React, { Children } from 'react';
 import { AutoForm, SubmitField, TextField } from 'uniforms-${theme}';
-import { BaseField, nothing } from 'uniforms';\n
+import { BaseField } from 'uniforms';\n
 import schema from './DisplayIfFieldSchema';\n
 // We have to ensure that there's only one child, because returning an array
 // from a component is prohibited.
 const DisplayIf = ({ children, condition }, { uniforms }) =>
-  condition(uniforms) ? Children.only(children) : nothing;\n
+  condition(uniforms) ? Children.only(children) : null;\n
 DisplayIf.contextTypes = BaseField.contextTypes;\n
 export default function ExamplesDisplayIfField() {
   return (

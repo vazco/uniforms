@@ -1,5 +1,6 @@
 ## Next:
 
+- **Breaking:** Removed `nothing` from `uniforms` as it's not needed in React >= 15.
 - **Changed:** Removed `prop-types` entirely in favor of incoming typings.
 
 ## [v2.6.1](https://github.com/vazco/uniforms/tree/v2.6.1) (2019-11-13)

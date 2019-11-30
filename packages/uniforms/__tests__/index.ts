@@ -16,7 +16,6 @@ it('exports everything', () => {
     filterDOMProps: expect.any(Function),
     injectName: expect.any(Function),
     joinName: expect.any(Function),
-    nothing: expect.any(Object),
     randomIds: expect.any(Function),
   });
 });

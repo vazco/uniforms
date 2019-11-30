@@ -12,5 +12,4 @@ export { default as createSchemaBridge } from './createSchemaBridge';
 export { default as filterDOMProps } from './filterDOMProps';
 export { default as injectName } from './injectName';
 export { default as joinName } from './joinName';
-export { default as nothing } from './nothing';
 export { default as randomIds } from './randomIds';
