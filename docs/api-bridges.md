@@ -43,7 +43,10 @@ const schemaData = {
     allowedValues: [1, 2, 3]
   },
   title: {
-    options: [{ label: 1, value: 'a' }, { label: 2, value: 'b' }]
+    options: [
+      { label: 1, value: 'a' },
+      { label: 2, value: 'b' }
+    ]
   }
 };
 

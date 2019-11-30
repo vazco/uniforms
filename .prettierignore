@@ -12,3 +12,8 @@
 /website/.docusaurus
 /website/build
 /website/node_modules
+
+# Broke with Prettier upgrade.
+/docs/examples-common-forms.mdx
+/docs/examples-custom-fields.mdx
+/docs/installation.mdx
