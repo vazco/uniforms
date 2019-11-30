@@ -1,4 +1,3 @@
-import AlarmIcon from '@material-ui/icons/Alarm';
 import IconButton from '@material-ui/core/IconButton';
 import React from 'react';
 import { ListDelField } from 'uniforms-material';
@@ -6,6 +5,7 @@ import { ListDelField } from 'uniforms-material';
 import createContext from './_createContext';
 import mount from './_mount';
 
+const Icon = () => <i />;
 const parent = {
   maxCount: 3,
   minCount: 0,
@@ -75,13 +75,11 @@ test('<ListDelField> - correctly reacts on click', () => {
 });
 
 test('<ListDelField> - renders correct icon', () => {
-  const element = (
-    <ListDelField name="x.1" parent={parent} icon={<AlarmIcon />} />
-  );
+  const element = <ListDelField name="x.1" parent={parent} icon={<Icon />} />;
   const wrapper = mount(
     element,
     createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
-  expect(wrapper.find(AlarmIcon)).toHaveLength(1);
+  expect(wrapper.find(Icon)).toHaveLength(1);
 });
