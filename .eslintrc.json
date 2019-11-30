@@ -16,6 +16,7 @@
         "import/default": "off",
         "prefer-rest-params": "off",
         "react/no-children-prop": "off",
+        "react/no-deprecated": "warn",
         "react/prop-types": "off"
       },
       "settings": {
@@ -58,6 +59,7 @@
         "newlines-between": "always"
       }
     ],
+    "react/no-deprecated": "warn",
     "react/prop-types": "off"
   },
   "settings": {
