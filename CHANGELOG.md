@@ -1,4 +1,4 @@
-## Next:
+## [v3.0.0-alpha.0](https://github.com/vazco/uniforms/tree/v3.0.0-alpha.0) (2019-11-30)
 
 - **Breaking:** Raised minimum version of React to 16.8.0.
 - **Breaking:** Removed workaround for React < 16 in `NumField`.
