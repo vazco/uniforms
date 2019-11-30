@@ -6,7 +6,8 @@
       "tutorials-basic-uniforms-usage",
       "tutorials-customizing-your-form-layout",
       "tutorials-using-predefined-fields",
-      "tutorials-creating-custom-field"
+      "tutorials-creating-custom-field",
+      "tutorials-creating-custom-theme"
     ],
     "Examples": [
       "examples-common-forms",
