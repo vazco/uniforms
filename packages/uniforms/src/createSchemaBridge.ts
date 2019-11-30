@@ -2,7 +2,7 @@ import invariant from 'invariant';
 
 import Bridge from './Bridge';
 
-const registered: (typeof Bridge)[] = [];
+const registered: typeof Bridge[] = [];
 
 function create(schema: any): Bridge {
   // There's no need for an extra wrapper.

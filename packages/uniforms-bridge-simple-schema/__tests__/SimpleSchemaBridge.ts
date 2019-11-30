@@ -35,7 +35,10 @@ describe('SimpleSchemaBridge', () => {
         s: {
           type: String,
           uniforms: {
-            options: [{ label: 1, value: 'a' }, { label: 2, value: 'b' }],
+            options: [
+              { label: 1, value: 'a' },
+              { label: 2, value: 'b' },
+            ],
           },
         },
         t: { type: String, uniforms: { options: () => ({ a: 1, b: 2 }) } },

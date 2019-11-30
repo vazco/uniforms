@@ -503,47 +503,46 @@ describe('GraphQLBridge', () => {
   });
 
   describe('#getType', () => {
-    [[astI, bridgeI, 'input'], [astT, bridgeT, 'type']].forEach(
-      ([ast, bridge, mode]) => {
-        it(`works with any type (${mode})`, () => {
-          expect(bridge.getType('author')).toBe(Object);
-          expect(bridge.getType('author.confirmed')).toBe(Boolean);
-          expect(bridge.getType('author.decimal1')).toBe(Number);
-          expect(bridge.getType('author.decimal2')).toBe(Number);
-          expect(bridge.getType('author.firstName')).toBe(String);
-          expect(bridge.getType('author.id')).toBe(String);
-          expect(bridge.getType('author.lastName')).toBe(String);
-          expect(bridge.getType('author.level')).toBe(
-            ast.getType('AccessLevel'),
-          );
-          expect(bridge.getType('author.tags')).toBe(Array);
-          expect(bridge.getType('author.tags.$')).toBe(String);
-          expect(bridge.getType('category')).toBe(Array);
-          expect(bridge.getType('category.$')).toBe(Object);
-          expect(bridge.getType('category.$.owners')).toBe(Array);
-          expect(bridge.getType('category.$.owners.$')).toBe(Object);
-          expect(bridge.getType('category.$.owners.$.decimal1')).toBe(Number);
-          expect(bridge.getType('category.$.owners.$.decimal2')).toBe(Number);
-          expect(bridge.getType('category.$.owners.$.firstName')).toBe(String);
-          expect(bridge.getType('category.$.owners.$.id')).toBe(String);
-          expect(bridge.getType('category.$.owners.$.lastName')).toBe(String);
-          expect(bridge.getType('category.$.owners.$.tags')).toBe(Array);
-          expect(bridge.getType('category.$.owners.$.tags.$')).toBe(String);
-          expect(bridge.getType('category.1.owners.$.tags.$')).toBe(String);
-          expect(bridge.getType('category.$.owners.2.tags.$')).toBe(String);
-          expect(bridge.getType('category.$.owners.$.tags.3')).toBe(String);
-          expect(bridge.getType('category.4.owners.5.tags.$')).toBe(String);
-          expect(bridge.getType('category.6.owners.$.tags.7')).toBe(String);
-          expect(bridge.getType('category.$.owners.8.tags.9')).toBe(String);
-          expect(bridge.getType('category.0.owners.0.tags.0')).toBe(String);
-          expect(bridge.getType('custom')).toBe(ast.getType('Scalar'));
-          expect(bridge.getType('example')).toBe(String);
-          expect(bridge.getType('id')).toBe(Number);
-          expect(bridge.getType('title')).toBe(String);
-          expect(bridge.getType('votes')).toBe(Number);
-        });
-      },
-    );
+    [
+      [astI, bridgeI, 'input'],
+      [astT, bridgeT, 'type'],
+    ].forEach(([ast, bridge, mode]) => {
+      it(`works with any type (${mode})`, () => {
+        expect(bridge.getType('author')).toBe(Object);
+        expect(bridge.getType('author.confirmed')).toBe(Boolean);
+        expect(bridge.getType('author.decimal1')).toBe(Number);
+        expect(bridge.getType('author.decimal2')).toBe(Number);
+        expect(bridge.getType('author.firstName')).toBe(String);
+        expect(bridge.getType('author.id')).toBe(String);
+        expect(bridge.getType('author.lastName')).toBe(String);
+        expect(bridge.getType('author.level')).toBe(ast.getType('AccessLevel'));
+        expect(bridge.getType('author.tags')).toBe(Array);
+        expect(bridge.getType('author.tags.$')).toBe(String);
+        expect(bridge.getType('category')).toBe(Array);
+        expect(bridge.getType('category.$')).toBe(Object);
+        expect(bridge.getType('category.$.owners')).toBe(Array);
+        expect(bridge.getType('category.$.owners.$')).toBe(Object);
+        expect(bridge.getType('category.$.owners.$.decimal1')).toBe(Number);
+        expect(bridge.getType('category.$.owners.$.decimal2')).toBe(Number);
+        expect(bridge.getType('category.$.owners.$.firstName')).toBe(String);
+        expect(bridge.getType('category.$.owners.$.id')).toBe(String);
+        expect(bridge.getType('category.$.owners.$.lastName')).toBe(String);
+        expect(bridge.getType('category.$.owners.$.tags')).toBe(Array);
+        expect(bridge.getType('category.$.owners.$.tags.$')).toBe(String);
+        expect(bridge.getType('category.1.owners.$.tags.$')).toBe(String);
+        expect(bridge.getType('category.$.owners.2.tags.$')).toBe(String);
+        expect(bridge.getType('category.$.owners.$.tags.3')).toBe(String);
+        expect(bridge.getType('category.4.owners.5.tags.$')).toBe(String);
+        expect(bridge.getType('category.6.owners.$.tags.7')).toBe(String);
+        expect(bridge.getType('category.$.owners.8.tags.9')).toBe(String);
+        expect(bridge.getType('category.0.owners.0.tags.0')).toBe(String);
+        expect(bridge.getType('custom')).toBe(ast.getType('Scalar'));
+        expect(bridge.getType('example')).toBe(String);
+        expect(bridge.getType('id')).toBe(Number);
+        expect(bridge.getType('title')).toBe(String);
+        expect(bridge.getType('votes')).toBe(Number);
+      });
+    });
   });
 
   describe('#getValidator', () => {

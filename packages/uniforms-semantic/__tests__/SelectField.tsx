@@ -67,7 +67,11 @@ test('<SelectField> - renders a select with correct options', () => {
 
   expect(wrapper.find('select')).toHaveLength(1);
   expect(wrapper.find('option')).toHaveLength(3);
-  [['', ''], ['a', 'a'], ['b', 'b']].forEach(([value, text], index) => {
+  [
+    ['', ''],
+    ['a', 'a'],
+    ['b', 'b'],
+  ].forEach(([value, text], index) => {
     const option = wrapper.find('option').at(index);
     expect(option.prop('value')).toBe(value);
     expect(option.text()).toBe(text);
@@ -83,7 +87,11 @@ test('<SelectField> - renders a select with correct options (transform)', () => 
 
   expect(wrapper.find('select')).toHaveLength(1);
   expect(wrapper.find('option')).toHaveLength(3);
-  [['', ''], ['a', 'A'], ['b', 'B']].forEach(([value, text], index) => {
+  [
+    ['', ''],
+    ['a', 'A'],
+    ['b', 'B'],
+  ].forEach(([value, text], index) => {
     const option = wrapper.find('option').at(index);
     expect(option.prop('value')).toBe(value);
     expect(option.text()).toBe(text);
@@ -101,7 +109,11 @@ test('<SelectField> - renders a select with correct placeholder (fallback)', () 
 
   expect(wrapper.find('select')).toHaveLength(1);
   expect(wrapper.find('option')).toHaveLength(3);
-  [['', 'y'], ['a', 'a'], ['b', 'b']].forEach(([value, text], index) => {
+  [
+    ['', 'y'],
+    ['a', 'a'],
+    ['b', 'b'],
+  ].forEach(([value, text], index) => {
     const option = wrapper.find('option').at(index);
     expect(option.prop('value')).toBe(value);
     expect(option.text()).toBe(text);
@@ -117,7 +129,11 @@ test('<SelectField> - renders a select with correct placeholder (implicit)', () 
 
   expect(wrapper.find('select')).toHaveLength(1);
   expect(wrapper.find('option')).toHaveLength(3);
-  [['', 'y'], ['a', 'a'], ['b', 'b']].forEach(([value, text], index) => {
+  [
+    ['', 'y'],
+    ['a', 'a'],
+    ['b', 'b'],
+  ].forEach(([value, text], index) => {
     const option = wrapper.find('option').at(index);
     expect(option.prop('value')).toBe(value);
     expect(option.text()).toBe(text);
