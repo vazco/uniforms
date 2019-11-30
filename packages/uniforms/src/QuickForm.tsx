@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import BaseForm from './BaseForm';
@@ -9,14 +8,6 @@ const Quick = (parent: any): any =>
     static Quick = Quick;
 
     static displayName = `Quick${parent.displayName}`;
-
-    static propTypes = {
-      ...parent.propTypes,
-
-      autoField: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-      errorsField: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-      submitField: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    };
 
     getNativeFormProps(): Record<string, unknown> {
       const {

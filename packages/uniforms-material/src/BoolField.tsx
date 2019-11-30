@@ -2,7 +2,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
-import PropTypes from 'prop-types';
 import React from 'react';
 import Switch from '@material-ui/core/Switch';
 import { connectField, filterDOMProps } from 'uniforms';
@@ -53,10 +52,6 @@ Bool.defaultProps = {
   appearance: 'checkbox',
   fullWidth: true,
   margin: 'dense',
-};
-
-Bool.propTypes = {
-  appearance: PropTypes.oneOf(['toggle', 'checkbox']),
 };
 
 export default connectField(Bool);

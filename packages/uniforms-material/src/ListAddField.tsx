@@ -1,6 +1,5 @@
 import FormControl from '@material-ui/core/FormControl';
 import IconButton from '@material-ui/core/IconButton';
-import PropTypes from 'prop-types';
 import React from 'react';
 import cloneDeep from 'lodash/cloneDeep';
 import { connectField, filterDOMProps } from 'uniforms';
@@ -32,10 +31,6 @@ const ListAdd = ({
       </IconButton>
     </FormControl>
   );
-};
-
-ListAdd.propTypes = {
-  icon: PropTypes.node,
 };
 
 ListAdd.defaultProps = {

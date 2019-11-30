@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import TogglerHeader from './TogglerHeader';
@@ -26,16 +25,5 @@ function Toggler({ items }) {
     </>
   );
 }
-
-Toggler.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      tooltipText: PropTypes.string.isRequired,
-      icon: PropTypes.element.isRequired,
-      component: PropTypes.element.isRequired
-    })
-  ).isRequired
-};
 
 export default Toggler;

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { randomIds } from 'uniforms';
 
 import createSchema from './_createSchema';
@@ -31,9 +30,6 @@ const createContext = (schema, context) => ({
         ...(context && context.state),
       },
     },
-  },
-  childContextTypes: {
-    uniforms: PropTypes.object,
   },
 });
 

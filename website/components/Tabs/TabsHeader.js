@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import TabsHeaderItem from './TabsHeaderItem';
@@ -19,15 +18,5 @@ function TabsHeader({ items, activeTab, onTab }) {
     </div>
   );
 }
-
-TabsHeader.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired
-    })
-  ).isRequired,
-  activeTab: PropTypes.number.isRequired,
-  onTab: PropTypes.func.isRequired
-};
 
 export default TabsHeader;

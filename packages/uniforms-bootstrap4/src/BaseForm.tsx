@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { BaseForm } from 'uniforms';
 
@@ -7,16 +6,6 @@ const Bootstrap4 = (parent: any): any =>
     static Bootstrap4 = Bootstrap4;
 
     static displayName = `Bootstrap4${parent.displayName}`;
-
-    static propTypes = {
-      ...parent.propTypes,
-
-      grid: PropTypes.oneOfType([
-        PropTypes.number,
-        PropTypes.object,
-        PropTypes.string,
-      ]),
-    };
 
     getContextState() {
       return {

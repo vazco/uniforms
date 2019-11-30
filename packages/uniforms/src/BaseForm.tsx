@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { Component, SyntheticEvent } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
@@ -13,27 +12,6 @@ import randomIds from './randomIds';
 
 export default class BaseForm extends Component<any, any> {
   static displayName = 'Form';
-
-  static propTypes = {
-    error: PropTypes.object,
-    model: PropTypes.object,
-    schema: PropTypes.any.isRequired,
-
-    modelTransform: PropTypes.func,
-
-    onChange: PropTypes.func,
-    onSubmit: PropTypes.func,
-    onSubmitFailure: PropTypes.func,
-    onSubmitSuccess: PropTypes.func,
-
-    label: PropTypes.bool,
-    disabled: PropTypes.bool,
-    placeholder: PropTypes.bool,
-    showInlineError: PropTypes.bool,
-
-    autosave: PropTypes.bool,
-    autosaveDelay: PropTypes.number,
-  };
 
   static defaultProps = {
     autosave: false,

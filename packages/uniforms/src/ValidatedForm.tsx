@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import cloneDeep from 'lodash/cloneDeep';
 import isEqual from 'lodash/isEqual';
 import noop from 'lodash/noop';
@@ -21,16 +20,6 @@ const Validated = (parent: any): any =>
       },
 
       validate: 'onChangeAfterSubmit',
-    };
-
-    static propTypes = {
-      ...parent.propTypes,
-
-      onValidate: PropTypes.func.isRequired,
-
-      validator: PropTypes.any,
-      validate: PropTypes.oneOf(['onChange', 'onChangeAfterSubmit', 'onSubmit'])
-        .isRequired,
     };
 
     validate: (key?: any, value?: any) => Promise<unknown>;

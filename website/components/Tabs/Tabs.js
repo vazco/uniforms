@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import TabsHeader from './TabsHeader';
@@ -14,15 +13,5 @@ function Tabs({ children, group, tabs }) {
     </>
   );
 }
-
-Tabs.propTypes = {
-  children: PropTypes.func,
-  group: PropTypes.string.isRequired,
-  tabs: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired
-    })
-  ).isRequired
-};
 
 export default Tabs;

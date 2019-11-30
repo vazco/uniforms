@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import styles from './TogglerTabs.module.css';
@@ -36,22 +35,5 @@ function TogglerTabs({ children, group, tabsItems, togglerItems }) {
     </section>
   );
 }
-
-TogglerTabs.propTypes = {
-  children: PropTypes.func.isRequired,
-  group: PropTypes.string.isRequired,
-  tabsItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired
-    })
-  ).isRequired,
-  togglerItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      tooltipText: PropTypes.string.isRequired,
-      icon: PropTypes.element.isRequired
-    })
-  ).isRequired
-};
 
 export default TogglerTabs;

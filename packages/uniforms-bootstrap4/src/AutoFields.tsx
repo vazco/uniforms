@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import context from 'uniforms/context';
 import { createElement, useContext } from 'react';
 
@@ -17,14 +16,6 @@ function AutoFields({ autoField, element, fields, omitFields, ...props }) {
       ),
   );
 }
-
-AutoFields.propTypes = {
-  autoField: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  element: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-
-  fields: PropTypes.arrayOf(PropTypes.string),
-  omitFields: PropTypes.arrayOf(PropTypes.string),
-};
 
 AutoFields.defaultProps = {
   autoField: AutoField,

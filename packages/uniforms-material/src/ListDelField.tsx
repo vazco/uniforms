@@ -1,5 +1,4 @@
 import IconButton from '@material-ui/core/IconButton';
-import PropTypes from 'prop-types';
 import React from 'react';
 import { connectField, filterDOMProps } from 'uniforms';
 
@@ -24,10 +23,6 @@ const ListDel = ({ disabled, icon, name, parent, ...props }) => {
       {icon}
     </IconButton>
   );
-};
-
-ListDel.propTypes = {
-  icon: PropTypes.node,
 };
 
 ListDel.defaultProps = {

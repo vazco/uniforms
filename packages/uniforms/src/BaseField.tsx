@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import invariant from 'invariant';
 import { Component } from 'react';
@@ -30,20 +29,6 @@ const flowingProp = (prop: any, schema: any, state: any, fallback: any) => {
 
 export default class BaseField extends Component {
   static displayName = 'Field';
-
-  static propTypes: any = {
-    id: PropTypes.string,
-
-    name: PropTypes.string.isRequired,
-    disabled: PropTypes.bool,
-
-    label: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.string,
-      PropTypes.node,
-    ]),
-    placeholder: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  };
 
   constructor() {
     // @ts-ignore

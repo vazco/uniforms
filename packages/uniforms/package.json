@@ -31,7 +31,6 @@
   "dependencies": {
     "invariant": "^2.0.0",
     "lodash": "^4.0.0",
-    "prop-types": "^15.5.7",
     "tslib": "^1.0.0"
   }
 }

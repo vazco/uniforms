@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
@@ -22,17 +21,5 @@ function TogglerHeader({ items, activeToggle, onClick }) {
     </section>
   );
 }
-
-TogglerHeader.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      tooltipText: PropTypes.string.isRequired,
-      icon: PropTypes.element.isRequired
-    })
-  ).isRequired,
-  activeToggle: PropTypes.number,
-  onClick: PropTypes.func
-};
 
 export default TogglerHeader;

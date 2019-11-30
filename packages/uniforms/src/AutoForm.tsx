@@ -1,4 +1,3 @@
-import * as PropTypes from 'prop-types';
 import cloneDeep from 'lodash/cloneDeep';
 import isEqual from 'lodash/isEqual';
 import omit from 'lodash/omit';
@@ -11,12 +10,6 @@ const Auto = (parent: any): any =>
     static Auto = Auto;
 
     static displayName = `Auto${parent.displayName}`;
-
-    static propTypes: any = {
-      ...parent.propTypes,
-
-      onChangeModel: PropTypes.func,
-    };
 
     constructor(...args: any[]) {
       super(...args);

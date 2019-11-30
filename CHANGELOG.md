@@ -1,3 +1,7 @@
+## Next:
+
+- **Changed:** Removed `prop-types` entirely in favor of incoming typings.
+
 ## [v2.6.1](https://github.com/vazco/uniforms/tree/v2.6.1) (2019-11-13)
 
 - **Changed:** Reverted introduction of `globalThis`. [\#641](https://github.com/vazco/uniforms/issues/641)
