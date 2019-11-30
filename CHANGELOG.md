@@ -1,6 +1,7 @@
 ## Next:
 
 - **Breaking:** Raised minimum version of React to 16.8.0.
+- **Breaking:** Removed workaround for React < 16 in `NumField`.
 - **Breaking:** Removed `nothing` from `uniforms` as it's not needed in React >= 15.
 - **Changed:** Removed `prop-types` entirely in favor of incoming typings.
 

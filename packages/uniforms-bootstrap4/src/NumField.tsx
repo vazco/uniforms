@@ -4,10 +4,7 @@ import { connectField } from 'uniforms';
 
 import wrapField from './wrapField';
 
-const noneIfNaN = x => (isNaN(x) ? undefined : x);
-const parse = (decimal, x) => noneIfNaN((decimal ? parseFloat : parseInt)(x));
-
-const Num_ = props =>
+const Num = props =>
   wrapField(
     props,
     <input
@@ -19,7 +16,11 @@ const Num_ = props =>
       max={props.max}
       min={props.min}
       name={props.name}
-      onChange={props.onChange}
+      onChange={event => {
+        const parse = props.decimal ? parseFloat : parseInt;
+        const value = parse(event.target.value);
+        props.onChange(isNaN(value) ? undefined : value);
+      }}
       placeholder={props.placeholder}
       ref={props.inputRef}
       step={props.step || (props.decimal ? 0.01 : 1)}
@@ -27,47 +28,5 @@ const Num_ = props =>
       value={props.value}
     />,
   );
-
-let Num;
-// istanbul ignore next
-if (parseInt(React.version, 10) < 16) {
-  Num = class Num extends Component<any, any> {
-    state = { value: '' + this.props.value };
-
-    componentWillReceiveProps({ decimal, value }) {
-      if (
-        parse(decimal, value) !==
-        parse(decimal, this.state.value.replace(/[.,]+$/, ''))
-      ) {
-        this.setState({
-          value: value === undefined || value === '' ? '' : '' + value,
-        });
-      }
-    }
-
-    onChange = event => {
-      const value = event.target.value.replace(/[^\d.,-]/g, '');
-
-      this.setState({ value });
-      this.props.onChange(parse(this.props.decimal, value));
-    };
-
-    render() {
-      return Num_({
-        ...this.props,
-        onChange: this.onChange,
-        value: this.state.value,
-      });
-    }
-  };
-} else {
-  Num = props =>
-    Num_({
-      ...props,
-      onChange(event) {
-        props.onChange(parse(props.decimal, event.target.value));
-      },
-    });
-}
 
 export default connectField(Num);
