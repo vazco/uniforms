@@ -63,7 +63,8 @@ function Showcase() {
     optional: true
   },
   useThisAddressForPaymentDetails: {
-    type: Boolean
+    type: Boolean,
+    defaultValue: false
   },
   addressLine: {
     type: String
