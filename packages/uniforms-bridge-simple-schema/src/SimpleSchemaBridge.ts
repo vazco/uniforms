@@ -86,7 +86,7 @@ export default class SimpleSchemaBridge extends Bridge {
       const item = this.getInitialValue(joinName(name, '0'));
       const items = Math.max(props.initialCount || 0, field.minCount || 0);
 
-      return [...Array(items)].map(() => item);
+      return Array.from({ length: items }, () => item);
     }
 
     if (field.type === Object) {

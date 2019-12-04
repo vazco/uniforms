@@ -1,3 +1,7 @@
+## Next:
+
+- **Fixed:** Problems with `initialCount` and `minCount` in `GraphQLBridge`, `SimpleSchemaBridge` and `SimpleSchema2Bridge`. [\#656](https://github.com/vazco/uniforms/issues/656)
+
 ## [v2.6.2](https://github.com/vazco/uniforms/tree/v2.6.2) (2019-11-21)
 
 - **Changed:** Fixed minimal required version of `tslib`. [\#648](https://github.com/vazco/uniforms/issues/648)
