@@ -3,8 +3,28 @@ import React from 'react';
 import { BaseField, filterDOMProps } from 'uniforms';
 
 const SubmitField = (
-  { children, disabled, inputRef, label, value, ...props },
-  { uniforms: { error, state } },
+  {
+    children,
+    disabled,
+    inputRef,
+    label,
+    value,
+    ...props
+  }: {
+    children?: any;
+    disabled?: any;
+    inputRef?: any;
+    label?: string;
+    value?: string;
+  },
+  {
+    uniforms: { error, state }
+  }: {
+    uniforms: {
+      error: any;
+      state: any;
+    };
+  }
 ) => (
   <Button
     disabled={disabled === undefined ? !!(error || state.disabled) : disabled}
