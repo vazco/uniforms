@@ -4,11 +4,10 @@ import { connectField } from 'uniforms';
 
 import wrapField from './wrapField';
 
-const noneIfNaN = (x: any) => (isNaN(x) ? undefined : x);
-const parse = (decimal: any, x: any) =>
-  noneIfNaN((decimal ? parseFloat : parseInt)(x));
+const noneIfNaN = x => (isNaN(x) ? undefined : x);
+const parse = (decimal, x) => noneIfNaN((decimal ? parseFloat : parseInt)(x));
 
-const Num_ = (props: any) =>
+const Num_ = props =>
   wrapField(
     props,
     <input

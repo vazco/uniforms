@@ -30,6 +30,7 @@ const LongText = ({
     {...filterDOMProps(props)}
   />
 );
+
 LongText.defaultProps = {
   fullWidth: true,
   margin: 'dense',

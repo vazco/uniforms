@@ -21,4 +21,5 @@ const LongText = props =>
       value={props.value}
     />,
   );
+
 export default connectField(LongText);

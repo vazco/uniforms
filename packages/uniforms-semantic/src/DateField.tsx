@@ -72,4 +72,5 @@ const Date = ({
     )}
   </div>
 );
+
 export default connectField(Date);

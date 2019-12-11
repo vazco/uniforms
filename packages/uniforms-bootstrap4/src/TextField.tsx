@@ -21,6 +21,7 @@ const Text = props =>
       value={props.value}
     />,
   );
+
 Text.defaultProps = { type: 'text' };
 
 export default connectField(Text);

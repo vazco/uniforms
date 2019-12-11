@@ -4,7 +4,7 @@ import { createElement } from 'react';
 import AutoField from './AutoField';
 
 const AutoFields = (
-  { autoField, element, fields, omitFields, ...props },
+  { autoField, element, fields, omitFields, ...props }: any,
   { uniforms: { schema } },
 ) =>
   createElement(
@@ -14,8 +14,8 @@ const AutoFields = (
       .filter(field => omitFields.indexOf(field) === -1)
       .map(field => createElement(autoField, { key: field, name: field })),
   );
-AutoFields.contextTypes = AutoField.contextTypes;
 
+AutoFields.contextTypes = AutoField.contextTypes;
 AutoFields.propTypes = {
   autoField: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   element: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),

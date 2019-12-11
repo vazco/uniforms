@@ -30,4 +30,5 @@ const Radio = props =>
       </div>
     )),
   );
+
 export default connectField(Radio);

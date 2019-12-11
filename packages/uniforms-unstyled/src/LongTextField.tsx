@@ -26,4 +26,5 @@ const LongText = ({
     />
   </div>
 );
+
 export default connectField(LongText);

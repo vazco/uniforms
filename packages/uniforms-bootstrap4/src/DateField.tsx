@@ -34,4 +34,5 @@ const Date = props =>
       value={dateFormat(props.value)}
     />,
   );
+
 export default connectField(Date);

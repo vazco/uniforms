@@ -3,7 +3,7 @@ import { BaseField, filterDOMProps, nothing } from 'uniforms';
 
 const ErrorsField = (
   { children, ...props }: any,
-  { uniforms: { error, schema } }: any,
+  { uniforms: { error, schema } },
 ) =>
   !error && !children ? (
     nothing
@@ -11,7 +11,7 @@ const ErrorsField = (
     <div {...filterDOMProps(props)}>
       {children}
       <ul>
-        {schema.getErrorMessages(error).map((message: any, index: any) => (
+        {schema.getErrorMessages(error).map((message, index) => (
           <li key={index} style={{ margin: '3px' }}>
             {message}
           </li>
@@ -19,8 +19,8 @@ const ErrorsField = (
       </ul>
     </div>
   );
-ErrorsField.contextTypes = BaseField.contextTypes;
 
+ErrorsField.contextTypes = BaseField.contextTypes;
 ErrorsField.defaultProps = {
   style: {
     backgroundColor: 'rgba(255, 85, 0, 0.2)',

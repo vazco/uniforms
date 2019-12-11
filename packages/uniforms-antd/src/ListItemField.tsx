@@ -4,7 +4,7 @@ import { connectField, joinName } from 'uniforms';
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
 
-const ListItem = (props: any) => (
+const ListItem = props => (
   <div>
     <div
       style={{
@@ -42,6 +42,7 @@ const ListItem = (props: any) => (
     </div>
   </div>
 );
+
 export default connectField(ListItem, {
   includeInChain: false,
   includeParent: true,

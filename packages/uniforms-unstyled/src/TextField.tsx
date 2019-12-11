@@ -28,6 +28,7 @@ const Text = ({
     />
   </div>
 );
+
 Text.defaultProps = { type: 'text' };
 
 export default connectField(Text);

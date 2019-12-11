@@ -5,7 +5,7 @@ import AutoField from './AutoField';
 
 const AutoFields = (
   { autoField, element, fields, omitFields, ...props }: any,
-  { uniforms: { schema } }: any,
+  { uniforms: { schema } },
 ) =>
   createElement(
     element,
@@ -16,8 +16,8 @@ const AutoFields = (
         createElement(autoField, { key: field, name: field }),
       ),
   );
-AutoFields.contextTypes = AutoField.contextTypes;
 
+AutoFields.contextTypes = AutoField.contextTypes;
 AutoFields.propTypes = {
   autoField: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   element: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),

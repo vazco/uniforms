@@ -2,7 +2,7 @@ import React from 'react';
 import { BaseField, filterDOMProps } from 'uniforms';
 
 const SubmitField = (
-  { disabled, inputRef, value, ...props },
+  { disabled, inputRef, value, ...props }: any,
   { uniforms: { error, state } },
 ) => (
   <input
@@ -13,6 +13,7 @@ const SubmitField = (
     {...filterDOMProps(props)}
   />
 );
+
 SubmitField.contextTypes = BaseField.contextTypes;
 
 export default SubmitField;

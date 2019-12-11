@@ -31,6 +31,7 @@ const Text = ({
     {...filterDOMProps(props)}
   />
 );
+
 Text.defaultProps = {
   fullWidth: true,
   margin: 'dense',

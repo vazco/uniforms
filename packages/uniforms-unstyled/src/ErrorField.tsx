@@ -7,4 +7,5 @@ const Error = ({ children, error, errorMessage, ...props }) =>
   ) : (
     <div {...filterDOMProps(props)}>{children || errorMessage}</div>
   );
+
 export default connectField(Error, { initialValue: false });
