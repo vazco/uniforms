@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { BaseField, filterDOMProps } from 'uniforms';
 
 const SubmitField = (
-  { className, disabled, inputRef, value, ...props },
+  { className, disabled, inputRef, value, ...props }: any,
   { uniforms: { error, state } },
 ) => (
   <input
@@ -15,6 +15,7 @@ const SubmitField = (
     {...filterDOMProps(props)}
   />
 );
+
 SubmitField.contextTypes = BaseField.contextTypes;
 
 export default SubmitField;

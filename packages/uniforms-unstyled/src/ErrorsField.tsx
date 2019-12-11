@@ -1,7 +1,10 @@
 import React from 'react';
 import { BaseField, filterDOMProps, nothing } from 'uniforms';
 
-const ErrorsField = ({ children, ...props }, { uniforms: { error, schema } }) =>
+const ErrorsField = (
+  { children, ...props }: any,
+  { uniforms: { error, schema } },
+) =>
   !error && !children ? (
     nothing
   ) : (
@@ -15,6 +18,7 @@ const ErrorsField = ({ children, ...props }, { uniforms: { error, schema } }) =>
       </ul>
     </div>
   );
+
 ErrorsField.contextTypes = BaseField.contextTypes;
 
 export default ErrorsField;

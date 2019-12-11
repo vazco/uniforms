@@ -29,4 +29,5 @@ const Bool = ({ label, labelBefore, ...props }: any) =>
       </label>
     </div>,
   );
+
 export default connectField(Bool);

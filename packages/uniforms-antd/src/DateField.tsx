@@ -19,6 +19,7 @@ const Date = (props: any) =>
       {...filterDOMProps(props)}
     />,
   );
+
 Date.defaultProps = {
   showTime: true,
   style: { width: '100%' },

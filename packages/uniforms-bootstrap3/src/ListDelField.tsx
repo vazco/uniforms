@@ -9,7 +9,7 @@ const ListDel = ({
   parent,
   removeIcon,
   ...props
-}: any) => {
+}) => {
   const fieldIndex = +name.slice(1 + name.lastIndexOf('.'));
   const limitNotReached =
     !disabled && !(parent.minCount >= parent.value.length);

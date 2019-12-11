@@ -3,7 +3,7 @@ import React from 'react';
 import { BaseField, filterDOMProps } from 'uniforms';
 
 const SubmitField = (
-  { children, disabled, inputRef, label, value, ...props },
+  { children, disabled, inputRef, label, value, ...props }: any,
   { uniforms: { error, state } },
 ) => (
   <Button

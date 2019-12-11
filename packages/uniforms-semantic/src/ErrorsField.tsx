@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { BaseField, filterDOMProps, nothing } from 'uniforms';
 
 const ErrorsField = (
-  { className, children, ...props },
+  { className, children, ...props }: any,
   { uniforms: { error, schema } },
 ) =>
   !error && !children ? (
@@ -22,6 +22,7 @@ const ErrorsField = (
       </ul>
     </div>
   );
+
 ErrorsField.contextTypes = BaseField.contextTypes;
 
 export default ErrorsField;

@@ -4,7 +4,7 @@ import { BaseField, filterDOMProps, nothing } from 'uniforms';
 
 const ErrorsField = (
   { className, children, ...props }: any,
-  { uniforms: { error, schema } }: any,
+  { uniforms: { error, schema } },
 ) =>
   !error && !children ? (
     nothing
@@ -16,12 +16,13 @@ const ErrorsField = (
       <div className="panel-body">
         {children}
 
-        {schema.getErrorMessages(error).map((message: any, index: number) => (
+        {schema.getErrorMessages(error).map((message, index) => (
           <div key={index}>{message}</div>
         ))}
       </div>
     </div>
   );
+
 ErrorsField.contextTypes = BaseField.contextTypes;
 
 export default ErrorsField;

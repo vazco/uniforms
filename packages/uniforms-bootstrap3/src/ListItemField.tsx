@@ -23,6 +23,7 @@ const ListItem = ({ removeIcon, ...props }: any) => (
     )}
   </div>
 );
+
 export default connectField(ListItem, {
   includeInChain: false,
   includeParent: true,

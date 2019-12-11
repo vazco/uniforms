@@ -4,7 +4,7 @@ import React from 'react';
 import { BaseField, filterDOMProps, nothing } from 'uniforms';
 
 const ErrorsField = (
-  { children, fullWidth, margin, variant, ...props },
+  { children, fullWidth, margin, variant, ...props }: any,
   { uniforms: { error, schema } },
 ) =>
   !error && !children ? (
@@ -26,8 +26,8 @@ const ErrorsField = (
       ))}
     </FormControl>
   );
-ErrorsField.contextTypes = BaseField.contextTypes;
 
+ErrorsField.contextTypes = BaseField.contextTypes;
 ErrorsField.defaultProps = {
   fullWidth: true,
   margin: 'dense',

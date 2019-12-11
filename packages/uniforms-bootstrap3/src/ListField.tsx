@@ -19,7 +19,7 @@ const List = ({
   showInlineError,
   value,
   ...props
-}: any) => (
+}) => (
   <div
     className={classnames(
       'panel panel-default',
@@ -71,6 +71,7 @@ const List = ({
     </div>
   </div>
 );
+
 export default connectField(List, {
   ensureValue: false,
   includeInChain: false,

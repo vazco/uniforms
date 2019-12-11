@@ -3,7 +3,7 @@ import React from 'react';
 import { BaseField } from 'uniforms';
 
 const SubmitField = (
-  { inputRef, value, ...props },
+  { inputRef, value, ...props }: any,
   {
     uniforms: {
       error,
@@ -21,6 +21,7 @@ const SubmitField = (
     {value}
   </Button>
 );
+
 SubmitField.contextTypes = BaseField.contextTypes;
 SubmitField.defaultProps = { value: 'Submit' };
 

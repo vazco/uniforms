@@ -13,7 +13,7 @@ const SubmitField = (
     value,
     wrapClassName,
     ...props
-  },
+  }: any,
   { uniforms: { error, state } },
 ) => {
   const hasWrap = !!(state.grid || wrapClassName);

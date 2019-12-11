@@ -24,4 +24,5 @@ const Num = props =>
       {...filterDOMProps(props)}
     />,
   );
+
 export default connectField(Num, { ensureValue: false });

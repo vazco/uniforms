@@ -25,4 +25,5 @@ const Bool = ({
     {label && <label htmlFor={id}>{label}</label>}
   </div>
 );
+
 export default connectField(Bool);
