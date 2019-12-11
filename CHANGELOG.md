@@ -1,6 +1,7 @@
-## Next:
+## [v2.6.3](https://github.com/vazco/uniforms/tree/v2.6.3) (2019-12-11)
 
 - **Fixed:** Problems with `initialCount` and `minCount` in `GraphQLBridge`, `SimpleSchemaBridge` and `SimpleSchema2Bridge`. [\#656](https://github.com/vazco/uniforms/issues/656)
+- **Fixed:** Problems with incorrectly inferred types of some props. [\#661](https://github.com/vazco/uniforms/issues/661)
 
 ## [v2.6.2](https://github.com/vazco/uniforms/tree/v2.6.2) (2019-11-21)
 
