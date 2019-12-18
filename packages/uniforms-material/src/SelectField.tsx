@@ -12,6 +12,12 @@ import { connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
+const base64 =
+  typeof btoa !== 'undefined'
+    ? btoa
+    : (x: string) => Buffer.from(x).toString('base64');
+const escape = (x: string) => base64(x).replace(/=+$/, '');
+
 const xor = (item, array) => {
   const index = array.indexOf(item);
   if (index === -1) {
@@ -126,7 +132,7 @@ const renderCheckboxes = ({
       >
         {allowedValues.map(item => (
           <FormControlLabel
-            control={<Radio id={`${id}-${item}`} {...filteredProps} />}
+            control={<Radio id={`${id}-${escape(item)}`} {...filteredProps} />}
             key={item}
             label={transform ? transform(item) : item}
             value={item}
@@ -144,7 +150,7 @@ const renderCheckboxes = ({
             control={
               <SelectionControl
                 checked={value.includes(item)}
-                id={`${id}-${item}`}
+                id={`${id}-${escape(item)}`}
                 name={name}
                 onChange={() => disabled || onChange(xor(item, value))}
                 ref={inputRef}
