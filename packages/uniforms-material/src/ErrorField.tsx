@@ -24,6 +24,7 @@ const Error = ({
       </FormHelperText>
     </FormControl>
   );
+
 Error.defaultProps = {
   fullWidth: true,
   margin: 'dense',

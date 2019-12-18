@@ -14,6 +14,7 @@ const Nest = ({ children, fields, itemProps, label, name, ...props }) => (
         ))}
   </div>
 );
+
 export default connectField(Nest, {
   ensureValue: false,
   includeInChain: false,

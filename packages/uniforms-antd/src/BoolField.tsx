@@ -19,6 +19,7 @@ const Bool = ({ checkbox, ...props }: any) =>
       ...filterDOMProps(props),
     }),
   );
+
 Bool.defaultProps = {
   checkbox: false,
   checkedChildren: <Icon type="check" />,

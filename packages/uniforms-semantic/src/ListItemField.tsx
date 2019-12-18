@@ -26,6 +26,7 @@ const ListItem = props => (
     </div>
   </div>
 );
+
 export default connectField(ListItem, {
   includeInChain: false,
   includeParent: true,

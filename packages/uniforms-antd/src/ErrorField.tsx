@@ -11,6 +11,7 @@ const Error = ({ children, error, errorMessage, ...props }: any) =>
       )}
     </div>
   );
+
 Error.defaultProps = {
   style: {
     backgroundColor: 'rgba(255, 85, 0, 0.2)',

@@ -3,7 +3,7 @@ import { createElement, useContext } from 'react';
 
 import AutoField from './AutoField';
 
-function AutoFields({ autoField, element, fields, omitFields, ...props }) {
+function AutoFields({ autoField, element, fields, omitFields, ...props }: any) {
   const { schema } = useContext(context).uniforms;
 
   return createElement(

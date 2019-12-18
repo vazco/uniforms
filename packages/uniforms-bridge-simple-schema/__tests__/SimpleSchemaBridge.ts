@@ -20,7 +20,7 @@ describe('SimpleSchemaBridge', () => {
         g: { type: Number, max: 42 },
         h: { type: Number },
         i: { type: Date },
-        j: { type: Array, minCount: 1 },
+        j: { type: Array, minCount: 3 },
         'j.$': { type: String },
         k: { type: Array },
         'k.$': { type: String },
@@ -179,8 +179,21 @@ describe('SimpleSchemaBridge', () => {
 
   describe('#getInitialValue', () => {
     it('works with arrays', () => {
-      expect(bridge.getInitialValue('j')).toEqual([undefined]);
       expect(bridge.getInitialValue('k')).toEqual([]);
+    });
+
+    it('works with arrays (initialCount)', () => {
+      expect(bridge.getInitialValue('k', { initialCount: 1 })).toEqual([
+        undefined,
+      ]);
+    });
+
+    it('works with arrays (minCount)', () => {
+      expect(bridge.getInitialValue('j')).toEqual([
+        undefined,
+        undefined,
+        undefined,
+      ]);
     });
 
     it('works with objects', () => {

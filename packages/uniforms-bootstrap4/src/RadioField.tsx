@@ -4,6 +4,12 @@ import { connectField } from 'uniforms';
 
 import wrapField from './wrapField';
 
+const base64 =
+  typeof btoa !== 'undefined'
+    ? btoa
+    : (x: string) => Buffer.from(x).toString('base64');
+const escape = (x: string) => base64(x).replace(/=+$/, '');
+
 const Radio = props =>
   wrapField(
     props,
@@ -15,12 +21,15 @@ const Radio = props =>
           'custom-control-inline': props.inline,
         })}
       >
-        <label htmlFor={`${props.id}-${item}`} className="form-check-label">
+        <label
+          htmlFor={`${props.id}-${escape(item)}`}
+          className="form-check-label"
+        >
           <input
             checked={item === props.value}
             className="form-check-input"
             disabled={props.disabled}
-            id={`${props.id}-${item}`}
+            id={`${props.id}-${escape(item)}`}
             name={props.name}
             onChange={() => props.onChange(item)}
             type="radio"
@@ -30,4 +39,5 @@ const Radio = props =>
       </div>
     )),
   );
+
 export default connectField(Radio);

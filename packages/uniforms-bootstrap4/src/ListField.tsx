@@ -67,6 +67,7 @@ const List = ({
     </div>
   </div>
 );
+
 export default connectField(List, {
   ensureValue: false,
   includeInChain: false,

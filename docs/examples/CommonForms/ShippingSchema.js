@@ -17,7 +17,8 @@ export default new SimpleSchema({
     optional: true
   },
   useThisAddressForPaymentDetails: {
-    type: Boolean
+    type: Boolean,
+    defaultValue: false
   },
   addressLine: {
     type: String

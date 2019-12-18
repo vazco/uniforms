@@ -2,6 +2,12 @@ import React from 'react';
 import classnames from 'classnames';
 import { connectField, filterDOMProps } from 'uniforms';
 
+const base64 =
+  typeof btoa !== 'undefined'
+    ? btoa
+    : (x: string) => Buffer.from(x).toString('base64');
+const escape = (x: string) => base64(x).replace(/=+$/, '');
+
 const Radio = ({
   allowedValues,
   checkboxes, // eslint-disable-line no-unused-vars
@@ -35,13 +41,13 @@ const Radio = ({
           <input
             checked={item === value}
             disabled={disabled}
-            id={`${id}-${item}`}
+            id={`${id}-${escape(item)}`}
             name={name}
             onChange={() => onChange(item)}
             type="radio"
           />
 
-          <label htmlFor={`${id}-${item}`}>
+          <label htmlFor={`${id}-${escape(item)}`}>
             {transform ? transform(item) : item}
           </label>
         </div>
@@ -53,4 +59,5 @@ const Radio = ({
     )}
   </div>
 );
+
 export default connectField(Radio);

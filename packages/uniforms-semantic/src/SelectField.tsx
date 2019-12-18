@@ -2,6 +2,12 @@ import React from 'react';
 import classnames from 'classnames';
 import { connectField, filterDOMProps } from 'uniforms';
 
+const base64 =
+  typeof btoa !== 'undefined'
+    ? btoa
+    : (x: string) => Buffer.from(x).toString('base64');
+const escape = (x: string) => base64(x).replace(/=+$/, '');
+
 const xor = (item, array) => {
   const index = array.indexOf(item);
   if (index === -1) {
@@ -27,7 +33,7 @@ const renderCheckboxes = ({
         <input
           checked={fieldType === Array ? value.includes(item) : value === item}
           disabled={disabled}
-          id={`${id}-${item}`}
+          id={`${id}-${escape(item)}`}
           name={name}
           onChange={() =>
             onChange(fieldType === Array ? xor(item, value) : item)
@@ -35,7 +41,7 @@ const renderCheckboxes = ({
           type="checkbox"
         />
 
-        <label htmlFor={`${id}-${item}`}>
+        <label htmlFor={`${id}-${escape(item)}`}>
           {transform ? transform(item) : item}
         </label>
       </div>

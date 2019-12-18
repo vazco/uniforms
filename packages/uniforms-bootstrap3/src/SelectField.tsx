@@ -4,7 +4,13 @@ import { connectField } from 'uniforms';
 
 import wrapField from './wrapField';
 
-const xor = (item: any, array: any) => {
+const base64 =
+  typeof btoa !== 'undefined'
+    ? btoa
+    : (x: string) => Buffer.from(x).toString('base64');
+const escape = (x: string) => base64(x).replace(/=+$/, '');
+
+const xor = (item, array) => {
   const index = array.indexOf(item);
   if (index === -1) {
     return array.concat([item]);
@@ -13,8 +19,8 @@ const xor = (item: any, array: any) => {
   return array.slice(0, index).concat(array.slice(index + 1));
 };
 
-const renderCheckboxes = (props: any) =>
-  props.allowedValues.map((item: any) => (
+const renderCheckboxes = props =>
+  props.allowedValues.map(item => (
     <div
       key={item}
       className={classnames(
@@ -22,7 +28,7 @@ const renderCheckboxes = (props: any) =>
         `checkbox${props.inline ? '-inline' : ''}`,
       )}
     >
-      <label htmlFor={`${props.id}-${item}`}>
+      <label htmlFor={`${props.id}-${escape(item)}`}>
         <input
           checked={
             props.fieldType === Array
@@ -30,7 +36,7 @@ const renderCheckboxes = (props: any) =>
               : props.value === item
           }
           disabled={props.disabled}
-          id={`${props.id}-${item}`}
+          id={`${props.id}-${escape(item)}`}
           name={props.name}
           onChange={() =>
             props.onChange(
@@ -44,7 +50,7 @@ const renderCheckboxes = (props: any) =>
     </div>
   ));
 
-const renderSelect = (props: any) => (
+const renderSelect = props => (
   <select
     className={classnames(props.inputClassName, 'form-control', {
       'form-control-danger': props.error,

@@ -2,13 +2,13 @@ import { filterDOMProps } from 'uniforms';
 
 filterDOMProps.register('grid');
 
-function gridClassNamePart(size: any, value: any, side: any) {
+function gridClassNamePart(size, value, side) {
   return side === 'label'
     ? `col-${size}-${value}`
     : `col-${size}-${12 - value}`;
 }
 
-export default function gridClassName(grid: any, side: any) {
+export default function gridClassName(grid, side) {
   // Example: 6
   if (typeof grid === 'number') {
     return gridClassNamePart('sm', grid, side);

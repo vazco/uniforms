@@ -20,7 +20,7 @@ const List = ({
   value,
   wrapperCol,
   ...props
-}: any) => (
+}) => (
   <div {...filterDOMProps(props)}>
     {!!label && (
       <div>

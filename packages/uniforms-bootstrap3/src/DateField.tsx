@@ -15,7 +15,7 @@ const dateParse = (timestamp: any, onChange: any) => {
   }
 };
 
-const Date = (props: any) =>
+const Date = props =>
   wrapField(
     props,
     <input
@@ -34,4 +34,5 @@ const Date = (props: any) =>
       value={dateFormat(props.value)}
     />,
   );
+
 export default connectField(Date);

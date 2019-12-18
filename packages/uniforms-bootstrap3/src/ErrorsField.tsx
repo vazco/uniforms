@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import classnames from 'classnames';
 import { context, filterDOMProps } from 'uniforms';
 
-const ErrorsField = ({ className, children, ...props }) => {
+const ErrorsField = ({ className, children, ...props }: any) => {
   const { error, schema } = useContext(context).uniforms;
 
   return !error && !children ? null : (
@@ -13,7 +13,7 @@ const ErrorsField = ({ className, children, ...props }) => {
       <div className="panel-body">
         {children}
 
-        {schema.getErrorMessages(error).map((message: any, index: number) => (
+        {schema.getErrorMessages(error).map((message, index) => (
           <div key={index}>{message}</div>
         ))}
       </div>

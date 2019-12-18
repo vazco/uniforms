@@ -346,13 +346,13 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct id 
       .find(Radio)
       .at(0)
       .prop('id'),
-  ).toBe('y-a');
+  ).toBe('y-YQ');
   expect(
     wrapper
       .find(Radio)
       .at(1)
       .prop('id'),
-  ).toBe('y-b');
+  ).toBe('y-Yg');
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct name', () => {

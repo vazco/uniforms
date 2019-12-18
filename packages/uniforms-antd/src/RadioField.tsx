@@ -29,4 +29,5 @@ const Radio = props =>
       ))}
     </RadioAntD.Group>,
   );
+
 export default connectField(Radio);

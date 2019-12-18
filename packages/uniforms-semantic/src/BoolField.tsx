@@ -43,4 +43,5 @@ const Bool = ({
     )}
   </div>
 );
+
 export default connectField(Bool);

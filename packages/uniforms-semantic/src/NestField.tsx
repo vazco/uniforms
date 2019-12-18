@@ -39,6 +39,7 @@ const Nest = ({
         ))}
   </div>
 );
+
 Nest.defaultProps = { grouped: true };
 
 export default connectField(Nest, {

@@ -4,6 +4,12 @@ import { connectField } from 'uniforms';
 
 import wrapField from './wrapField';
 
+const base64 =
+  typeof btoa !== 'undefined'
+    ? btoa
+    : (x: string) => Buffer.from(x).toString('base64');
+const escape = (x: string) => base64(x).replace(/=+$/, '');
+
 const xor = (item, array) => {
   const index = array.indexOf(item);
   if (index === -1) {
@@ -22,7 +28,7 @@ const renderCheckboxes = props =>
         `checkbox${props.inline ? '-inline' : ''}`,
       )}
     >
-      <label htmlFor={`${props.id}-${item}`}>
+      <label htmlFor={`${props.id}-${escape(item)}`}>
         <input
           checked={
             props.fieldType === Array
@@ -30,7 +36,7 @@ const renderCheckboxes = props =>
               : props.value === item
           }
           disabled={props.disabled}
-          id={`${props.id}-${item}`}
+          id={`${props.id}-${escape(item)}`}
           name={props.name}
           onChange={() =>
             props.onChange(

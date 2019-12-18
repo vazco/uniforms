@@ -4,7 +4,7 @@ import { connectField } from 'uniforms';
 
 import wrapField from './wrapField';
 
-const LongText = (props: any) =>
+const LongText = props =>
   wrapField(
     props,
     <textarea
@@ -21,4 +21,5 @@ const LongText = (props: any) =>
       value={props.value}
     />,
   );
+
 export default connectField(LongText);

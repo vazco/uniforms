@@ -3,7 +3,13 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import React, { useContext } from 'react';
 import { context, filterDOMProps } from 'uniforms';
 
-const ErrorsField = ({ children, fullWidth, margin, variant, ...props }) => {
+const ErrorsField = ({
+  children,
+  fullWidth,
+  margin,
+  variant,
+  ...props
+}: any) => {
   const { error, schema } = useContext(context).uniforms;
 
   return !error && !children ? null : (

@@ -9,7 +9,7 @@ const SubmitField = ({
   label,
   value,
   ...props
-}) => {
+}: any) => {
   const { error, state } = useContext(context).uniforms;
 
   return (

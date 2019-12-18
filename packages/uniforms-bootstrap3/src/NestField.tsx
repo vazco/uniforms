@@ -15,7 +15,7 @@ const Nest = ({
   name,
   showInlineError,
   ...props
-}: any) => (
+}) => (
   <div
     className={classnames(className, { 'has-error': error })}
     {...filterDOMProps(props)}
@@ -33,6 +33,7 @@ const Nest = ({
         ))}
   </div>
 );
+
 export default connectField(Nest, {
   ensureValue: false,
   includeInChain: false,

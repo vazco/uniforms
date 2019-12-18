@@ -4,10 +4,16 @@ import { connectField } from 'uniforms';
 
 import wrapField from './wrapField';
 
-const Radio = (props: any) =>
+const base64 =
+  typeof btoa !== 'undefined'
+    ? btoa
+    : (x: string) => Buffer.from(x).toString('base64');
+const escape = (x: string) => base64(x).replace(/=+$/, '');
+
+const Radio = props =>
   wrapField(
     props,
-    props.allowedValues.map((item: any) => (
+    props.allowedValues.map(item => (
       <div
         key={item}
         className={classnames(
@@ -15,11 +21,11 @@ const Radio = (props: any) =>
           `radio${props.inline ? '-inline' : ''}`,
         )}
       >
-        <label htmlFor={`${props.id}-${item}`}>
+        <label htmlFor={`${props.id}-${escape(item)}`}>
           <input
             checked={item === props.value}
             disabled={props.disabled}
-            id={`${props.id}-${item}`}
+            id={`${props.id}-${escape(item)}`}
             name={props.name}
             onChange={() => props.onChange(item)}
             type="radio"
@@ -29,4 +35,5 @@ const Radio = (props: any) =>
       </div>
     )),
   );
+
 export default connectField(Radio);

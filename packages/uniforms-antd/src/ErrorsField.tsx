@@ -8,7 +8,7 @@ function ErrorsField({ children, ...props }) {
     <div {...filterDOMProps(props)}>
       {children}
       <ul>
-        {schema.getErrorMessages(error).map((message: any, index: any) => (
+        {schema.getErrorMessages(error).map((message, index) => (
           <li key={index} style={{ margin: '3px' }}>
             {message}
           </li>

@@ -13,7 +13,7 @@ describe('randomIds', () => {
     const amount = 100;
 
     const generator = randomIds();
-    const generated = [...Array(amount)].map(generator);
+    const generated = Array.from({ length: amount }, generator);
 
     const unique = generated.filter((a, b, c) => c.indexOf(a) === b);
 

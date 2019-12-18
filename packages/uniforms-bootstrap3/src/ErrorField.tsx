@@ -19,4 +19,5 @@ const Error = ({ children, className, error, errorMessage, ...props }: any) =>
       </div>
     </div>
   );
+
 export default connectField(Error, { initialValue: false });
