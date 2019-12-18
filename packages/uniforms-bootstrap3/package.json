@@ -1,6 +1,6 @@
 {
   "name": "uniforms-bootstrap3",
-  "version": "2.6.3",
+  "version": "2.6.4",
   "license": "MIT",
   "main": "index.js",
   "module": "es6/index.js",
