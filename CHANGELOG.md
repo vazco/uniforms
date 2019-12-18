@@ -1,3 +1,7 @@
+## [v2.6.4](https://github.com/vazco/uniforms/tree/v2.6.4) (2019-12-18)
+
+- **Fixed:** Problems with unescaped `id` attributes. [\#671](https://github.com/vazco/uniforms/issues/671)
+
 ## [v2.6.3](https://github.com/vazco/uniforms/tree/v2.6.3) (2019-12-11)
 
 - **Fixed:** Problems with `initialCount` and `minCount` in `GraphQLBridge`, `SimpleSchemaBridge` and `SimpleSchema2Bridge`. [\#656](https://github.com/vazco/uniforms/issues/656)
