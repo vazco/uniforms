@@ -1,0 +1,36 @@
+{
+  "name": "uniforms-reproductions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@material-ui/core": "4.5.1",
+    "ajv": "6.10.2",
+    "antd": "3.24.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "3.1.1",
+    "simpl-schema": "1.5.5",
+    "uniforms": "2.6.5",
+    "uniforms-antd": "2.4.0",
+    "uniforms-bootstrap3": "2.6.5",
+    "uniforms-bootstrap4": "2.4.0",
+    "uniforms-bridge-graphql": "2.4.0",
+    "uniforms-bridge-json-schema": "^2.4.0",
+    "uniforms-bridge-simple-schema": "2.6.5",
+    "uniforms-bridge-simple-schema-2": "2.6.5",
+    "uniforms-material": "2.4.0",
+    "uniforms-semantic": "^2.4.0"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}
