@@ -5,8 +5,8 @@ import set from 'lodash/set';
 
 import ValidatedQuickForm from './ValidatedQuickForm';
 
-const Auto = (parent: any): any =>
-  class extends parent {
+const Auto = (parent: any): any => {
+  class _ extends parent {
     static Auto = Auto;
 
     static displayName = `Auto${parent.displayName}`;
@@ -78,6 +78,9 @@ const Auto = (parent: any): any =>
       // @ts-ignore
       return this.onValidateModel(this.getContextModel());
     }
-  };
+  }
+
+  return _;
+};
 
 export default Auto(ValidatedQuickForm);

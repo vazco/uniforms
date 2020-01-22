@@ -6,8 +6,8 @@ import set from 'lodash/set';
 
 import BaseForm from './BaseForm';
 
-const Validated = (parent: any): any =>
-  class extends parent {
+const Validated = (parent: any): any => {
+  class _ extends parent {
     static Validated = Validated;
 
     static displayName = `Validated${parent.displayName}`;
@@ -185,7 +185,10 @@ const Validated = (parent: any): any =>
         });
       });
     }
-  };
+  }
+
+  return _;
+};
 
 function shouldRevalidate(inProps: any, inState: any) {
   return (
