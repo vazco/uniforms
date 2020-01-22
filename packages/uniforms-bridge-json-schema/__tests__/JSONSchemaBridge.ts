@@ -30,6 +30,13 @@ describe('JSONSchemaBridge', () => {
       },
       firstName: { type: 'string', default: 'John' },
       lastName: { type: 'string' },
+      recursive: {
+        type: 'object',
+        properties: {
+          field: { type: 'string' },
+          recursive: { $ref: '#/definitions/recursive' },
+        },
+      },
     },
     type: 'object',
     properties: {
@@ -111,6 +118,7 @@ describe('JSONSchemaBridge', () => {
       },
       password: { type: 'string', uniforms: { type: 'password' } },
       passwordNumeric: { type: 'number', uniforms: { type: 'password' } },
+      recursive: { $ref: '#/definitions/recursive' },
     },
     required: ['dateOfBirth'],
   };
@@ -575,6 +583,7 @@ describe('JSONSchemaBridge', () => {
         'complexNames',
         'password',
         'passwordNumeric',
+        'recursive',
       ]);
     });
 
@@ -584,6 +593,14 @@ describe('JSONSchemaBridge', () => {
         'state',
         'street',
         'type',
+      ]);
+    });
+
+    it('works with recursive types', () => {
+      expect(bridge.getSubfields('recursive')).toEqual(['field', 'recursive']);
+      expect(bridge.getSubfields('recursive.recursive')).toEqual([
+        'field',
+        'recursive',
       ]);
     });
 
