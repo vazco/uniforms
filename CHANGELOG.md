@@ -1,11 +1,6 @@
-## [v3.0.0-alpha.0](https://github.com/vazco/uniforms/tree/v3.0.0-alpha.0) (2019-11-30)
+## [v3.0.0-alpha.1](https://github.com/vazco/uniforms/tree/v3.0.0-alpha.1) (2020-01-22)
 
-- **Breaking:** Migrated from the legacy context API. This change should be transparent for `connectField` but will break all components using context directly. As there's no documentation yet, see [this](https://github.com/vazco/uniforms/commit/1ec3b5393ad59890cadcdf96c0cf2cab90b8164f) commit to see what changed. To have an idea on how to proceed, see [this](https://github.com/vazco/uniforms/commit/46174f5507268db760fc1eef9f4fd43cb3760916) commit.
-- **Breaking:** Raised minimum version of React to 16.8.0.
-- **Breaking:** Removed workaround for React < 16 in `NumField`.
-- **Breaking:** Removed `nothing` from `uniforms` as it's not needed in React >= 15.
-- **Changed:** Removed `prop-types` entirely in favor of incoming typings.
-- **Changed:** Renamed deprecated lifecycle methods.
+- **Breaking:** Removed deprecated lifecycle methods in favor of the new ones. It may break custom form components using `componentWillReceiveProps` and `componentWillMount`.
 
 ## [v2.6.6](https://github.com/vazco/uniforms/tree/v2.6.6) (2020-01-22)
 
@@ -23,6 +18,15 @@
 
 - **Fixed:** Problems with `initialCount` and `minCount` in `GraphQLBridge`, `SimpleSchemaBridge` and `SimpleSchema2Bridge`. [\#656](https://github.com/vazco/uniforms/issues/656)
 - **Fixed:** Problems with incorrectly inferred types of some props. [\#661](https://github.com/vazco/uniforms/issues/661)
+
+## [v3.0.0-alpha.0](https://github.com/vazco/uniforms/tree/v3.0.0-alpha.0) (2019-11-30)
+
+- **Breaking:** Migrated from the legacy context API. This change should be transparent for `connectField` but will break all components using context directly. As there's no documentation yet, see [this](https://github.com/vazco/uniforms/commit/1ec3b5393ad59890cadcdf96c0cf2cab90b8164f) commit to see what changed. To have an idea on how to proceed, see [this](https://github.com/vazco/uniforms/commit/46174f5507268db760fc1eef9f4fd43cb3760916) commit.
+- **Breaking:** Raised minimum version of React to 16.8.0.
+- **Breaking:** Removed workaround for React < 16 in `NumField`.
+- **Breaking:** Removed `nothing` from `uniforms` as it's not needed in React >= 15.
+- **Changed:** Removed `prop-types` entirely in favor of incoming typings.
+- **Changed:** Renamed deprecated lifecycle methods.
 
 ## [v2.6.2](https://github.com/vazco/uniforms/tree/v2.6.2) (2019-11-21)
 
