@@ -27,7 +27,7 @@ export default class BaseForm extends Component<any, any> {
 
     this.state = {
       bridge: createSchemaBridge(this.props.schema),
-      changed: null,
+      changed: false,
       changedMap: {},
       resetCount: 0,
       submitting: false,
@@ -48,19 +48,16 @@ export default class BaseForm extends Component<any, any> {
         : model;
   }
 
-  UNSAFE_componentWillMount() {
-    this.mounted = true;
-    this.setState(
-      () => ({}),
-      () => this.setState(() => ({ changed: false, changedMap: {} })),
-    );
+  static getDerivedStateFromProps({ schema }, { bridge }) {
+    // TODO: It updates the state each time. Add bridge.isSame(schema)?
+    return { bridge: createSchemaBridge(schema) };
   }
 
-  UNSAFE_componentWillReceiveProps({ schema }: any) {
-    if (this.props.schema !== schema) {
-      this.setState(() => ({ bridge: createSchemaBridge(schema) }));
-    }
+  componentDidMount() {
+    this.mounted = true;
   }
+
+  componentDidUpdate() {}
 
   componentWillUnmount() {
     this.mounted = false;
@@ -102,7 +99,7 @@ export default class BaseForm extends Component<any, any> {
 
   getContextState() {
     return {
-      changed: !!this.state.changed,
+      changed: this.state.changed,
       changedMap: this.state.changedMap,
       submitting: this.state.submitting,
 
@@ -160,14 +157,17 @@ export default class BaseForm extends Component<any, any> {
 
   onChange(key: string, value: unknown) {
     // Do not set `changed` before componentDidMount
-    if (this.state.changed !== null) {
-      // @ts-ignore
-      this.state.changed = true; // eslint-disable-line react/no-direct-mutation-state
-      this.getChangedKeys(key, value, get(this.getModel(), key)).forEach(key =>
+    if (this.mounted) {
+      const keys = this.getChangedKeys(key, value, get(this.getModel(), key));
+      if (keys.length !== 0) {
         this.setState(state => ({
-          changedMap: set(cloneDeep(state.changedMap), key, {}),
-        })),
-      );
+          changed: true,
+          changedMap: keys.reduce(
+            (changedMap, key) => set(changedMap, key, {}),
+            cloneDeep(state.changedMap),
+          ),
+        }));
+      }
     }
 
     if (this.props.onChange) {
@@ -175,7 +175,7 @@ export default class BaseForm extends Component<any, any> {
     }
 
     // Do not call `onSubmit` before componentDidMount
-    if (this.state.changed !== null && this.props.autosave) {
+    if (this.mounted && this.props.autosave) {
       if (this.delayId) {
         this.delayId = clearTimeout(this.delayId);
       }

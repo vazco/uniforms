@@ -23,13 +23,14 @@ const Auto = (parent: any): any =>
       };
     }
 
-    UNSAFE_componentWillReceiveProps({ model }: { model: any }) {
-      // @ts-ignore
-      super.UNSAFE_componentWillReceiveProps(...arguments);
-
-      if (!isEqual(this.props.model, model)) {
-        this.setState(() => ({ model, modelSync: model }));
+    componentDidUpdate(prevProps) {
+      const { model } = this.props;
+      if (!isEqual(model, prevProps.model)) {
+        this.setState({ model, modelSync: model });
       }
+
+      // @ts-ignore
+      super.componentDidUpdate(...arguments);
     }
 
     getNativeFormProps(): Record<string, unknown> {

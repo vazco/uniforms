@@ -14,14 +14,13 @@ export default class HiddenField extends BaseField {
     };
   }
 
-  UNSAFE_componentWillReceiveProps({ value: valueDesired }) {
-    if (valueDesired === undefined) {
-      return;
-    }
-
-    const props = this.getFieldProps();
-    if (props.value !== valueDesired) {
-      props.onChange(valueDesired);
+  componentDidUpdate() {
+    const { value } = this.props;
+    if (value !== undefined) {
+      const props = this.getFieldProps();
+      if (props.value !== value) {
+        props.onChange(value);
+      }
     }
   }
 

@@ -130,15 +130,13 @@ describe('AutoForm', () => {
   describe('when updated', () => {
     const wrapper = mount(<AutoForm schema={schema} />);
 
-    it('updates when changed', () => {
+    it('updates', () => {
       wrapper.setProps({ model: {} });
-
       expect(wrapper.instance().getContext().uniforms.model).toEqual({});
     });
 
     it('validates', () => {
       wrapper.setProps({ model, validate: 'onChange' });
-
       expect(validator).toHaveBeenCalledTimes(1);
     });
   });

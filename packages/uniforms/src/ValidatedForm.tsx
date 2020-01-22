@@ -64,18 +64,14 @@ const Validated = (parent: any): any =>
       ]);
     }
 
-    UNSAFE_componentWillReceiveProps({
-      model,
-      schema,
-      validate,
-      validator,
-    }: any) {
+    componentDidUpdate(prevProps) {
       // @ts-ignore
-      super.UNSAFE_componentWillReceiveProps(...arguments);
+      super.componentDidUpdate(...arguments);
 
-      if (this.props.schema !== schema || this.props.validator !== validator) {
+      const { model, schema, validate, validator } = this.props;
+      if (schema !== prevProps.schema || validator !== prevProps.validator) {
         this.setState(
-          (state: any) => ({ validator: state.bridge.getValidator(validator) }),
+          state => ({ validator: state.bridge.getValidator(validator) }),
           () => {
             if (shouldRevalidate(validate, this.state.validate)) {
               this.onValidate().catch(noop);
@@ -83,7 +79,7 @@ const Validated = (parent: any): any =>
           },
         );
       } else if (
-        !isEqual(this.props.model, model) &&
+        !isEqual(model, prevProps.model) &&
         shouldRevalidate(validate, this.state.validate)
       ) {
         this.onValidateModel(model).catch(noop);
@@ -138,11 +134,12 @@ const Validated = (parent: any): any =>
         .catch(noop)
         .then(() => {
           // It can be already unmounted.
-          if (this.mounted)
+          if (this.mounted) {
             // If validation fails, or `super.onSubmit` doesn't touch `submitting`, we need to reset it.
             this.setState((state: any) =>
               state.submitting ? { submitting: false } : null,
             );
+          }
         });
 
       return promise;
