@@ -1,5 +1,5 @@
 import { mount as enzyme } from 'enzyme';
-import context from 'uniforms/context';
+import { context } from 'uniforms';
 
 export default function mount(children, value) {
   if (value === undefined) return enzyme(children);

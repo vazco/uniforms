@@ -1,4 +1,4 @@
-import context from 'uniforms/context';
+import { context } from 'uniforms';
 import { createElement, useContext } from 'react';
 
 import AutoField from './AutoField';

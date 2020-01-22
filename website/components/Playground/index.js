@@ -3,7 +3,7 @@ import Frame, { FrameContextConsumer } from 'react-frame-component';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
-import { BaseField, ValidatedForm, connectField } from 'uniforms';
+import { BaseField, ValidatedForm, connectField, context } from 'uniforms';
 
 import playgroundStyles from './playground.module.css';
 import presets from './presets';
@@ -90,8 +90,11 @@ class PlaygroundForm extends ValidatedForm {
   }
 
   render() {
-    const props = omit(this.getNativeFormProps(), ['onSubmit']);
-    return <section {...props} />;
+    return (
+      <context.Provider value={this.getContext()}>
+        <section {...omit(this.getNativeFormProps(), ['onSubmit'])} />
+      </context.Provider>
+    );
   }
 }
 
