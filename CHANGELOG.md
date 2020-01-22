@@ -1,3 +1,7 @@
+## [v2.6.6](https://github.com/vazco/uniforms/tree/v2.6.6) (2020-01-22)
+
+- **Fixed:** Mitigated [babel/babel\#10693](https://github.com/babel/babel/issues/10693). [\#638](https://github.com/vazco/uniforms/issues/638)
+
 ## [v2.6.5](https://github.com/vazco/uniforms/tree/v2.6.5) (2019-12-18)
 
 - **Fixed:** Invalid publish occurred. Sorry!

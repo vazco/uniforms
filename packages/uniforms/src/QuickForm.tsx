@@ -4,8 +4,8 @@ import React from 'react';
 import BaseForm from './BaseForm';
 import nothing from './nothing';
 
-const Quick = (parent: any): any =>
-  class extends parent {
+const Quick = (parent: any): any => {
+  class _ extends parent {
     static Quick = Quick;
 
     static displayName = `Quick${parent.displayName}`;
@@ -50,6 +50,9 @@ const Quick = (parent: any): any =>
     getSubmitField(): any {
       return () => nothing;
     }
-  };
+  }
+
+  return _;
+};
 
 export default Quick(BaseForm);
