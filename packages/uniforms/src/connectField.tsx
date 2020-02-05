@@ -1,78 +1,47 @@
 import React from 'react';
 import identity from 'lodash/identity';
+import mapValues from 'lodash/mapValues';
+import some from 'lodash/some';
 
-import BaseField from './BaseField';
-import context from './context';
+import contextReference from './context';
+import useField from './useField';
 
-const getDisplayName = (component: React.ComponentType) =>
-  component.displayName || component.name;
+type GuaranteedProps = ReturnType<typeof useField>[0];
 
-export default function connectField(
-  Component: React.ComponentType<any>,
-  {
-    baseField = BaseField,
-    mapProps = identity,
+export default function connectField<Props extends {}>(
+  Component: React.ComponentType<Props & GuaranteedProps>,
+  { includeInChain = false }: { includeInChain?: boolean } = {},
+) {
+  type FieldProps = Props & { name: string };
+  function Field(props: FieldProps) {
+    const [fieldProps, context] = useField(props.name, props);
+    const anyFlowingPropertySet = some(
+      context.state,
+      (_, key) => props[key] !== null && props[key] !== undefined,
+    );
 
-    ensureValue,
-    includeInChain,
-    includeParent,
-    initialValue,
-  }: any = {},
-): any {
-  return class extends baseField {
-    static displayName = getDisplayName(Component) + getDisplayName(baseField);
+    if (!anyFlowingPropertySet && !includeInChain)
+      return <Component {...props} {...fieldProps} />;
 
-    constructor() {
-      // @ts-ignore
-      super(...arguments);
-
-      this.options.includeInChain =
-        includeInChain === undefined ? true : includeInChain;
-      this.options.initialValue =
-        initialValue === undefined ? true : initialValue;
-      if (ensureValue !== undefined) this.options.ensureValue = ensureValue;
-      if (includeParent !== undefined)
-        this.options.includeParent = includeParent;
-    }
-
-    getContextName() {
-      return this.options.includeInChain
-        ? super.getContextName()
-        : this.context.uniforms.name;
-    }
-
-    componentDidMount() {
-      if (this.options.initialValue) {
-        const props = this.getFieldProps(undefined, {
-          ensureValue: false,
-          explicitInitialValue: true,
-          includeParent: false,
-        });
-        // https://github.com/vazco/uniforms/issues/52
-        // If field is initially rendered with value, we treat it as an initial value.
-        if (
-          this.props.value !== undefined &&
-          this.props.value !== props.value
-        ) {
-          props.onChange(this.props.value);
-          return;
-        }
-        if (
-          props.required &&
-          props.initialValue !== undefined &&
-          props.value === undefined
-        ) {
-          props.onChange(props.initialValue);
-        }
-      }
-    }
-
-    render() {
-      return (
-        <context.Provider value={this.getContext()}>
-          <Component {...mapProps(this.getFieldProps())} />
-        </context.Provider>
+    const nextContext = { ...context };
+    if (anyFlowingPropertySet) {
+      nextContext.state = mapValues(nextContext.state, (value, key) =>
+        props[key] !== null && props[key] !== undefined ? !!props[key] : value,
       );
     }
-  };
+
+    if (includeInChain) {
+      nextContext.name = nextContext.name.concat(props.name);
+    }
+
+    return (
+      <contextReference.Provider value={nextContext}>
+        <Component {...props} {...fieldProps} />
+      </contextReference.Provider>
+    );
+  }
+
+  Field.displayName = `${Component.displayName || Component.name}Field`;
+
+  return Field as React.FC<FieldProps>;
 }

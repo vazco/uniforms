@@ -11,15 +11,6 @@ describe('connectField', () => {
   const error = new Error();
   const onChange = jest.fn();
   const randomId = randomIds();
-  const state = {
-    changed: false,
-    changedMap: {},
-    submitting: false,
-    label: true,
-    disabled: false,
-    placeholder: false,
-    showInlineError: true,
-  };
 
   const schema = new SimpleSchemaBridge({
     getDefinition(name) {
@@ -44,16 +35,23 @@ describe('connectField', () => {
 
   const reactContext = {
     context: {
-      uniforms: {
-        error,
-        model: {},
-        name: [],
-        randomId,
-        schema,
-        state,
-        onChange,
-        onSubmit() {},
+      changed: false,
+      changedMap: {},
+      error,
+      model: {},
+      name: [],
+      randomId,
+      schema,
+      state: {
+        disabled: false,
+        label: true,
+        placeholder: false,
+        showInlineError: true,
       },
+      onChange,
+      onSubmit() {},
+      submitting: false,
+      validating: false,
     },
   };
 

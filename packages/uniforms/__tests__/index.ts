@@ -1,9 +1,8 @@
 import * as uniforms from 'uniforms';
 
 it('exports everything', () => {
-  expect(uniforms).toEqual({
+  expect(uniforms).toMatchObject({
     AutoForm: expect.any(Function),
-    BaseField: expect.any(Function),
     BaseForm: expect.any(Function),
     Bridge: expect.any(Function),
     QuickForm: expect.any(Function),
@@ -17,5 +16,6 @@ it('exports everything', () => {
     injectName: expect.any(Function),
     joinName: expect.any(Function),
     randomIds: expect.any(Function),
+    useField: expect.any(Function),
   });
 });

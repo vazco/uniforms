@@ -1,5 +1,7 @@
 import invariant from 'invariant';
 
+type UnknownObject = Record<string, unknown>;
+
 export default abstract class Bridge {
   constructor(...args: any[]) {
     invariant(
@@ -54,7 +56,7 @@ export default abstract class Bridge {
     );
   }
 
-  getInitialValue(name: string, props: object): unknown {
+  getInitialValue(name: string, props: UnknownObject): unknown {
     return invariant(
       false,
       '%s have not implemented `getInitialValue` method (args=%o).',
@@ -63,7 +65,7 @@ export default abstract class Bridge {
     );
   }
 
-  getProps(name: string, props: object): object {
+  getProps(name: string, props: UnknownObject): UnknownObject {
     return invariant(
       false,
       '%s have not implemented `getProps` method (args=%o).',
@@ -90,7 +92,7 @@ export default abstract class Bridge {
     );
   }
 
-  getValidator(options?: unknown): (model: object) => void {
+  getValidator(options?: unknown): (model: UnknownObject) => void {
     return invariant(
       false,
       '%s have not implemented `getValidator` method (args=%o).',

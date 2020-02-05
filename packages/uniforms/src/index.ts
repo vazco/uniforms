@@ -1,5 +1,5 @@
+export * from './types';
 export { default as AutoForm } from './AutoForm';
-export { default as BaseField } from './BaseField';
 export { default as BaseForm } from './BaseForm';
 export { default as Bridge } from './Bridge';
 export { default as QuickForm } from './QuickForm';
@@ -13,3 +13,4 @@ export { default as filterDOMProps } from './filterDOMProps';
 export { default as injectName } from './injectName';
 export { default as joinName } from './joinName';
 export { default as randomIds } from './randomIds';
+export { default as useField } from './useField';

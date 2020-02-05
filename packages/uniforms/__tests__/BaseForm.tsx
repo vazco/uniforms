@@ -35,51 +35,64 @@ describe('BaseForm', () => {
   });
 
   describe('child context', () => {
-    const wrapper = mount(
+    const wrapper = mount<BaseForm>(
       <BaseForm error={error} model={model} schema={schema} />,
     );
 
     const context = wrapper.instance().getContext();
 
     it('exists', () => {
-      expect(context).toHaveProperty('uniforms', expect.any(Object));
+      expect(context).toEqual(expect.any(Object));
+    });
+
+    it('have correct `changed`', () => {
+      expect(context).toHaveProperty('changed', false);
+    });
+
+    it('have correct `changedMap`', () => {
+      expect(context).toHaveProperty('changedMap', {});
     });
 
     it('have correct `error`', () => {
-      expect(context.uniforms).toHaveProperty('error', error);
-    });
-
-    it('have correct `model`', () => {
-      expect(context.uniforms).toHaveProperty('model', model);
-    });
-
-    it('have correct `name`', () => {
-      expect(context.uniforms).toHaveProperty('name', expect.any(Array));
-      expect(context.uniforms.name).toHaveLength(0);
-    });
-
-    it('have correct `schema`', () => {
-      expect(context.uniforms).toHaveProperty('schema', schema);
-    });
-
-    it('have correct `state`', () => {
-      expect(context.uniforms).toHaveProperty('state', expect.any(Object));
-      expect(context.uniforms.state).toHaveProperty('changed', false);
-      expect(context.uniforms.state).toHaveProperty('changedMap', {});
-      expect(context.uniforms.state).toHaveProperty('submitting', false);
-      expect(context.uniforms.state).toHaveProperty('label', true);
-      expect(context.uniforms.state).toHaveProperty('disabled', false);
-      expect(context.uniforms.state).toHaveProperty('placeholder', false);
-      expect(context.uniforms.state).toHaveProperty('showInlineError', false);
+      expect(context).toHaveProperty('error', error);
     });
 
     it('have correct `onChange`', () => {
-      expect(context.uniforms).toHaveProperty('onChange', expect.any(Function));
+      expect(context).toHaveProperty('onChange', expect.any(Function));
+    });
+
+    it('have correct `model`', () => {
+      expect(context).toHaveProperty('model', model);
+    });
+
+    it('have correct `name`', () => {
+      expect(context).toHaveProperty('name', expect.any(Array));
+      expect(context.name).toHaveLength(0);
+    });
+
+    it('have correct `schema`', () => {
+      expect(context).toHaveProperty('schema', schema);
+    });
+
+    it('have correct `state`', () => {
+      expect(context).toHaveProperty('state', expect.any(Object));
+      expect(context.state).toHaveProperty('disabled', false);
+      expect(context.state).toHaveProperty('label', true);
+      expect(context.state).toHaveProperty('placeholder', false);
+      expect(context.state).toHaveProperty('showInlineError', false);
+    });
+
+    it('have correct `submitting`', () => {
+      expect(context).toHaveProperty('submitting', false);
+    });
+
+    it('have correct `validating`', () => {
+      expect(context).toHaveProperty('validating', false);
     });
   });
 
   describe('when rendered', () => {
-    const wrapper = mount(
+    const wrapper = mount<BaseForm>(
       <BaseForm
         className="name"
         disabled
@@ -115,11 +128,11 @@ describe('BaseForm', () => {
     it('have correct `state`', () => {
       const context = wrapper.instance().getContext();
 
-      expect(context.uniforms).toHaveProperty('state', expect.any(Object));
-      expect(context.uniforms.state).toHaveProperty('label', false);
-      expect(context.uniforms.state).toHaveProperty('disabled', true);
-      expect(context.uniforms.state).toHaveProperty('placeholder', true);
-      expect(context.uniforms.state).toHaveProperty('showInlineError', true);
+      expect(context).toHaveProperty('state', expect.any(Object));
+      expect(context.state).toHaveProperty('disabled', true);
+      expect(context.state).toHaveProperty('label', false);
+      expect(context.state).toHaveProperty('placeholder', true);
+      expect(context.state).toHaveProperty('showInlineError', true);
     });
 
     it('updates schema bridge', () => {
@@ -129,12 +142,12 @@ describe('BaseForm', () => {
 
       const context = wrapper.instance().getContext();
 
-      expect(context.uniforms).toHaveProperty('schema', schema2);
+      expect(context).toHaveProperty('schema', schema2);
     });
   });
 
   describe('when changed', () => {
-    const wrapper = mount(
+    const wrapper = mount<BaseForm>(
       <BaseForm
         model={model}
         schema={schema}
@@ -144,16 +157,16 @@ describe('BaseForm', () => {
     );
 
     it('updates `changed` and `changedMap`', () => {
-      const context1 = wrapper.instance().getContext().uniforms.state;
+      const context1 = wrapper.instance().getContext().state;
       expect(context1).toHaveProperty('changed', false);
       expect(context1).toHaveProperty('changedMap', {});
 
       wrapper
         .instance()
         .getContext()
-        .uniforms.onChange('$', [1, 2]);
+        .onChange('$', [1, 2]);
 
-      const context2 = wrapper.instance().getContext().uniforms.state;
+      const context2 = wrapper.instance().getContext();
       expect(context2).toHaveProperty('changed', true);
       expect(context2).toHaveProperty('changedMap.$');
       expect(context2.changedMap.$).toBeTruthy();
@@ -166,7 +179,7 @@ describe('BaseForm', () => {
       wrapper
         .instance()
         .getContext()
-        .uniforms.onChange('a', 1);
+        .onChange('a', 1);
 
       expect(onSubmit).toHaveBeenCalledTimes(1);
       expect(onSubmit).toHaveBeenLastCalledWith(model);
@@ -176,15 +189,15 @@ describe('BaseForm', () => {
       wrapper
         .instance()
         .getContext()
-        .uniforms.onChange('a', 1);
+        .onChange('a', 1);
       wrapper
         .instance()
         .getContext()
-        .uniforms.onChange('a', 2);
+        .onChange('a', 2);
       wrapper
         .instance()
         .getContext()
-        .uniforms.onChange('a', 3);
+        .onChange('a', 3);
 
       expect(onSubmit).toHaveBeenCalledTimes(3);
       expect(onSubmit).toHaveBeenLastCalledWith(model);
@@ -195,15 +208,15 @@ describe('BaseForm', () => {
       wrapper
         .instance()
         .getContext()
-        .uniforms.onChange('a', 1);
+        .onChange('a', 1);
       wrapper
         .instance()
         .getContext()
-        .uniforms.onChange('a', 2);
+        .onChange('a', 2);
       wrapper
         .instance()
         .getContext()
-        .uniforms.onChange('a', 3);
+        .onChange('a', 3);
 
       await new Promise(resolve => setTimeout(resolve, 25));
 
@@ -216,30 +229,30 @@ describe('BaseForm', () => {
       wrapper
         .instance()
         .getContext()
-        .uniforms.onChange('a', 1);
+        .onChange('a', 1);
       wrapper
         .instance()
         .getContext()
-        .uniforms.onChange('a', 2);
+        .onChange('a', 2);
       wrapper
         .instance()
         .getContext()
-        .uniforms.onChange('a', 3);
+        .onChange('a', 3);
 
       await new Promise(resolve => setTimeout(resolve, 25));
 
       wrapper
         .instance()
         .getContext()
-        .uniforms.onChange('a', 1);
+        .onChange('a', 1);
       wrapper
         .instance()
         .getContext()
-        .uniforms.onChange('a', 2);
+        .onChange('a', 2);
       wrapper
         .instance()
         .getContext()
-        .uniforms.onChange('a', 3);
+        .onChange('a', 3);
 
       await new Promise(resolve => setTimeout(resolve, 25));
 
@@ -252,7 +265,7 @@ describe('BaseForm', () => {
       wrapper
         .instance()
         .getContext()
-        .uniforms.onChange('a', 1);
+        .onChange('a', 1);
 
       expect(onSubmit).not.toBeCalled();
     });
@@ -261,7 +274,7 @@ describe('BaseForm', () => {
       wrapper
         .instance()
         .getContext()
-        .uniforms.onChange('a', 1);
+        .onChange('a', 1);
 
       expect(onChange).toHaveBeenCalledTimes(1);
       expect(onChange).toHaveBeenLastCalledWith('a', 1);
@@ -278,14 +291,14 @@ describe('BaseForm', () => {
       wrapper
         .instance()
         .getContext()
-        .uniforms.onChange('a', 1);
+        .onChange('a', 1);
 
       expect(onChange).not.toBeCalled();
     });
   });
 
   describe('when reset', () => {
-    const wrapper = mount(<BaseForm schema={schema} />);
+    const wrapper = mount<BaseForm>(<BaseForm schema={schema} />);
 
     it('increase `resetCount`', () => {
       wrapper.instance().reset();
@@ -295,7 +308,7 @@ describe('BaseForm', () => {
   });
 
   describe('when submitted', () => {
-    const wrapper = mount(
+    const wrapper = mount<BaseForm>(
       <BaseForm model={model} schema={schema} onSubmit={onSubmit} />,
     );
 
@@ -344,24 +357,24 @@ describe('BaseForm', () => {
     });
 
     it('sets `submitting` state while submitting', async () => {
-      let resolveSubmit = null;
+      let resolveSubmit = () => {};
       wrapper.setProps({
         onSubmit: () => new Promise(resolve => (resolveSubmit = resolve)),
       });
 
-      const context1 = wrapper.instance().getContext().uniforms.state;
+      const context1 = wrapper.instance().getContext().state;
       expect(context1).toHaveProperty('submitting', false);
 
       wrapper.find('form').simulate('submit');
       await new Promise(resolve => process.nextTick(resolve));
 
-      const context2 = wrapper.instance().getContext().uniforms.state;
+      const context2 = wrapper.instance().getContext().state;
       expect(context2).toHaveProperty('submitting', true);
 
       resolveSubmit();
       await new Promise(resolve => process.nextTick(resolve));
 
-      const context3 = wrapper.instance().getContext().uniforms.state;
+      const context3 = wrapper.instance().getContext().state;
       expect(context3).toHaveProperty('submitting', false);
     });
 

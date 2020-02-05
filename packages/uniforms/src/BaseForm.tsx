@@ -9,6 +9,7 @@ import changedKeys from './changedKeys';
 import context from './context';
 import createSchemaBridge from './createSchemaBridge';
 import randomIds from './randomIds';
+import { Context } from './types';
 
 export default class BaseForm extends Component<any, any> {
   static displayName = 'Form';
@@ -70,18 +71,20 @@ export default class BaseForm extends Component<any, any> {
   submit: (event?: SyntheticEvent) => Promise<unknown>;
   randomId: () => string;
 
-  getContext() {
+  getContext(): Context {
     return {
-      uniforms: {
-        name: this.getContextName(),
-        error: this.getContextError(),
-        model: this.getContextModel(),
-        state: this.getContextState(),
-        schema: this.getContextSchema(),
-        onChange: this.getContextOnChange(),
-        onSubmit: this.getContextOnSubmit(),
-        randomId: this.randomId,
-      },
+      changed: this.state.changed,
+      changedMap: this.state.changedMap,
+      error: this.getContextError(),
+      model: this.getContextModel(),
+      name: this.getContextName(),
+      onChange: this.getContextOnChange(),
+      onSubmit: this.getContextOnSubmit(),
+      randomId: this.randomId,
+      schema: this.getContextSchema(),
+      state: this.getContextState(),
+      submitting: this.state.submitting,
+      validating: false,
     };
   }
 
@@ -99,12 +102,8 @@ export default class BaseForm extends Component<any, any> {
 
   getContextState() {
     return {
-      changed: this.state.changed,
-      changedMap: this.state.changedMap,
-      submitting: this.state.submitting,
-
-      label: !!this.props.label,
       disabled: !!this.props.disabled,
+      label: !!this.props.label,
       placeholder: !!this.props.placeholder,
       showInlineError: !!this.props.showInlineError,
     };

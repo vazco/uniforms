@@ -1,10 +1,13 @@
-import { mount as enzyme } from 'enzyme';
-import { context } from 'uniforms';
+import { Component, ReactElement } from 'react';
+import { context, Context } from 'uniforms';
+import { ReactWrapper, mount as enzyme } from 'enzyme';
 
-export default function mount(children, value) {
-  if (value === undefined) return enzyme(children);
-  return enzyme(children, {
+const mount: typeof enzyme = (node, options) => {
+  if (options === undefined) return enzyme(node);
+  return enzyme(node, {
     wrappingComponent: context.Provider,
-    wrappingComponentProps: { value: value.context },
+    wrappingComponentProps: { value: options.context },
   });
-}
+};
+
+export default mount;
