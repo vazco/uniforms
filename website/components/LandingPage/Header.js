@@ -142,7 +142,7 @@ export default function Header() {
             <ul className={classNames(styles.text, styles.bullets)}>
               <li>support of all schemas and themes</li>
               <li>instant prototyping</li>
-              <li>simplifies separation of contents</li>
+              <li>simplifies separation of concerns</li>
             </ul>
             <div className={styles['center-if-sm']}>
               <p className={classNames(styles.text, styles.supported)}>
