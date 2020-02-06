@@ -13,6 +13,7 @@ function Badge({ border, number, text, to, icon: Icon, color }) {
       <img
         className={styles['badge-image']}
         src={`assets/border-0${border}.svg`}
+        alt="border-image"
       />
       {Icon && (
         <Oval className={styles['top-right-corner']}>
@@ -36,7 +37,7 @@ function cacheKey(key) {
 function cacheGet(key) {
   try {
     const { expires, data } = JSON.parse(localStorage.getItem(cacheKey(key)));
-    return { expired: expires < Date.now(), data };
+    return { expired: !expires || expires < Date.now(), data };
   } catch (error) {
     return { expired: true, data: null };
   }
