@@ -22,7 +22,14 @@ const Bool = ({
     className={classnames(className, { disabled, error, required }, 'field')}
     {...filterDOMProps(props)}
   >
-    <div className={classnames('ui', wrapClassName, 'checkbox')}>
+    <div
+      className={classnames(
+        'ui',
+        wrapClassName,
+        !label && label !== true && 'fitted',
+        'checkbox',
+      )}
+    >
       <input
         checked={value}
         className="hidden"
