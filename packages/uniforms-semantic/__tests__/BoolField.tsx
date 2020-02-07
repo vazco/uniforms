@@ -175,3 +175,10 @@ test('<BoolField> - renders correct error text (showInlineError=false)', () => {
       .text(),
   ).not.toBe('Error');
 });
+
+test('<BoolField> - renders with a custom wrapClassName', () => {
+  const element = <BoolField name="x" wrapClassName="test-class-name" />;
+  const wrapper = mount(element, createContext({ x: { type: String } }));
+
+  expect(wrapper.find('.ui.test-class-name')).toHaveLength(1);
+});

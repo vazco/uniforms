@@ -15,13 +15,14 @@ const Bool = ({
   required,
   showInlineError,
   value,
+  wrapClassName,
   ...props
 }) => (
   <div
     className={classnames(className, { disabled, error, required }, 'field')}
     {...filterDOMProps(props)}
   >
-    <div className="ui checkbox">
+    <div className={classnames('ui', wrapClassName, 'checkbox')}>
       <input
         checked={value}
         className="hidden"
@@ -33,7 +34,7 @@ const Bool = ({
         type="checkbox"
       />
 
-      <label htmlFor={id}>{label}</label>
+      {label && <label htmlFor={id}>{label}</label>}
     </div>
 
     {!!(error && showInlineError) && (
