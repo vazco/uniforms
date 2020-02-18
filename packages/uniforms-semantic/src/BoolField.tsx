@@ -26,7 +26,7 @@ const Bool = ({
       className={classnames(
         'ui',
         wrapClassName,
-        !label && label !== true && 'fitted',
+        !label && 'fitted',
         'checkbox',
       )}
     >
@@ -41,7 +41,7 @@ const Bool = ({
         type="checkbox"
       />
 
-      {label && <label htmlFor={id}>{label}</label>}
+      {!!label && <label htmlFor={id}>{label}</label>}
     </div>
 
     {!!(error && showInlineError) && (

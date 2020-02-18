@@ -183,55 +183,18 @@ test('<BoolField> - renders with a custom wrapClassName', () => {
   expect(wrapper.find('.ui.test-class-name')).toHaveLength(1);
 });
 
-test('<BoolField> - renders with a `fitted` className when no `label` prop is passed', () => {
+test('<BoolField> - renders with a `fitted` className when `label` is disabled', () => {
   const element = <BoolField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
   const found = wrapper.find('.ui');
-  expect(wrapper.props().label).not.toBeDefined();
   expect(found.hasClass('fitted')).toEqual(true);
 });
 
-test('<BoolField> - renders with a `fitted` className when `label` prop is falsy', () => {
-  /**
-   * NOTE: According to https://react.semantic-ui.com/modules/checkbox/#variations-fitted
-   * `fitted` should only be passed if `label` is undefined:
-   * > The fitted class is automatically applied if there is no label prop.
-   * This test takes into account uniforms behaviour of putting empty string into label
-   */
-  const labels = [false, '', undefined, null];
-
-  labels.forEach(label => {
-    const element = <BoolField name="x" label={label} />;
-    const wrapper = mount(element, createContext({ x: { type: String } }));
-
-    const found = wrapper.find('.ui');
-    expect(wrapper.props().label).not.toBeTruthy();
-    expect(found.hasClass('fitted')).toEqual(true);
-  });
-});
-
-test('<BoolField> - renders with a `fitted` className when `label` prop equals true', () => {
-  /**
-   * NOTE: According to https://react.semantic-ui.com/modules/checkbox/#variations-fitted
-   * `fitted` should only be passed if `label` is undefined:
-   * > The fitted class is automatically applied if there is no label prop.
-   * This test takes into account uniforms behaviour of putting empty string into label
-   */
-
+test('<BoolField> - renders without a `fitted` className when `label` is enabled', () => {
   const element = <BoolField name="x" label />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
   const found = wrapper.find('.ui');
-  expect(wrapper.props().label).toEqual(true);
-  expect(found.hasClass('fitted')).toEqual(false);
-});
-
-test('<BoolField> - renders without a `fitted` className when `label` prop is passed', () => {
-  const element = <BoolField name="x" label="test label" />;
-  const wrapper = mount(element, createContext({ x: { type: String } }));
-
-  const found = wrapper.find('.ui');
-  expect(wrapper.props().label).toBeDefined();
   expect(found.hasClass('fitted')).toEqual(false);
 });
