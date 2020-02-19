@@ -56,7 +56,7 @@ The `name` array of the nested `AutoFields` will store a `personA` value.
 
 ### `onChange`
 
-You can directly access Access to the `onChange` method. Eg. `onChange(field, value)`.
+You can directly access to the `onChange` method. Eg. `onChange(field, value)`.
 
 ### `onSubmit`
 
