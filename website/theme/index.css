@@ -28,3 +28,7 @@ table {
     display: block !important;
   }
 }
+
+body > div:last-child:not(:first-child) {
+  height: 0 !important;
+}
