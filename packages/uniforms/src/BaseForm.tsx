@@ -5,31 +5,62 @@ import isFunction from 'lodash/isFunction';
 import omit from 'lodash/omit';
 import set from 'lodash/set';
 
+import Bridge from './Bridge';
 import changedKeys from './changedKeys';
 import context from './context';
 import createSchemaBridge from './createSchemaBridge';
 import randomIds from './randomIds';
-import { Context } from './types';
+import { ChangedMap, Context, DeepPartial, ModelTransformMode } from './types';
 
-export default class BaseForm extends Component<any, any> {
+export interface BaseFormProps<Model> {
+  autosave: boolean;
+  autosaveDelay: number;
+  disabled?: boolean;
+  error?: unknown;
+  id?: string;
+  label: boolean;
+  model: DeepPartial<Model>;
+  modelTransform?: (
+    mode: ModelTransformMode,
+    model: DeepPartial<Model>,
+  ) => DeepPartial<Model>;
+  noValidate: boolean;
+  onChange?: (key: string, value: unknown) => void;
+  onSubmit?: (model: DeepPartial<Model>) => unknown;
+  onSubmitSuccess?: (result: unknown) => void;
+  onSubmitFailure?: (result: unknown) => void;
+  placeholder?: boolean;
+  schema: unknown;
+  showInlineError?: boolean;
+}
+
+export interface BaseFormState<Model> {
+  bridge: Bridge;
+  changed: boolean;
+  changedMap: ChangedMap<Model>;
+  resetCount: number;
+  submitting: boolean;
+}
+
+export default class BaseForm<
+  Model extends object = Record<string, unknown>
+> extends Component<BaseFormProps<Model>, BaseFormState<Model>> {
   static displayName = 'Form';
-
   static defaultProps = {
     autosave: false,
     autosaveDelay: 0,
     label: true,
-    model: {},
+    model: Object.create(null),
     noValidate: true,
   };
 
-  constructor() {
-    // @ts-ignore
-    super(...arguments);
+  constructor(props) {
+    super(props);
 
     this.state = {
       bridge: createSchemaBridge(this.props.schema),
       changed: false,
-      changedMap: {},
+      changedMap: Object.create(null),
       resetCount: 0,
       submitting: false,
     };
@@ -43,8 +74,8 @@ export default class BaseForm extends Component<any, any> {
 
     // TODO: It shouldn't be here
     const getModel = this.getModel.bind(this);
-    this.getModel = (mode = null, model = getModel(mode)) =>
-      mode !== null && this.props.modelTransform
+    this.getModel = (mode, model = getModel(mode)) =>
+      mode !== undefined && this.props.modelTransform
         ? this.props.modelTransform(mode, model)
         : model;
   }
@@ -121,11 +152,14 @@ export default class BaseForm extends Component<any, any> {
     return this.onSubmit;
   }
 
-  getModel(mode?: any) { // eslint-disable-line
-    return this.props.model;
+  getModel(
+    mode?: ModelTransformMode,
+    model: DeepPartial<Model> = this.props.model
+  ) {
+    return model;
   }
 
-  getChangedKeys(root: any, valueA: any, valueB: any) {
+  getChangedKeys<T>(root: string, valueA?: T, valueB?: T) {
     return changedKeys(root, valueA, valueB);
   }
 
@@ -189,10 +223,10 @@ export default class BaseForm extends Component<any, any> {
     }
   }
 
-  __reset(state: any) {
+  __reset(state: BaseFormState<Model>) {
     return {
       changed: false,
-      changedMap: {},
+      changedMap: Object.create(null),
       submitting: false,
       resetCount: state.resetCount + 1,
     };
@@ -202,7 +236,7 @@ export default class BaseForm extends Component<any, any> {
     this.setState(this.__reset);
   }
 
-  onSubmit(event?: SyntheticEvent): Promise<unknown> {
+  onSubmit(event?: SyntheticEvent): Promise<void> {
     if (event) {
       event.preventDefault();
       event.stopPropagation();
@@ -213,7 +247,7 @@ export default class BaseForm extends Component<any, any> {
 
     // Set the `submitting` state only if onSubmit is async so we don't cause an unnecessary re-render
     let submitting;
-    if (result && isFunction(result.then)) {
+    if (isPromiseLike(result)) {
       this.setState({ submitting: true });
       submitting = result.finally(() => this.setState({ submitting: false }));
     } else {
@@ -233,4 +267,9 @@ export default class BaseForm extends Component<any, any> {
       </context.Provider>
     );
   }
+}
+
+function isPromiseLike(value: unknown): value is Promise<unknown> {
+  // @ts-ignore
+  return !!value && isFunction(value.then);
 }

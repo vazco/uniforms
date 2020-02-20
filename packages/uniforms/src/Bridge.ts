@@ -3,7 +3,7 @@ import invariant from 'invariant';
 type UnknownObject = Record<string, unknown>;
 
 export default abstract class Bridge {
-  constructor(...args: any[]) {
+  constructor(...args: unknown[]) {
     invariant(
       this.constructor !== Bridge,
       'Bridge cannot be instantiated (args=%o).',
