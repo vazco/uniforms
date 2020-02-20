@@ -89,7 +89,7 @@ export default class BaseForm<
     this.mounted = true;
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate(prevProps, prevState, snapshot) {}
 
   componentWillUnmount() {
     this.mounted = false;
@@ -131,7 +131,7 @@ export default class BaseForm<
     return this.getModel('form');
   }
 
-  getContextState() {
+  getContextState(): Context['state'] {
     return {
       disabled: !!this.props.disabled,
       label: !!this.props.label,
@@ -154,7 +154,7 @@ export default class BaseForm<
 
   getModel(
     mode?: ModelTransformMode,
-    model: DeepPartial<Model> = this.props.model
+    model: DeepPartial<Model> = this.props.model,
   ) {
     return model;
   }
@@ -236,7 +236,7 @@ export default class BaseForm<
     this.setState(this.__reset);
   }
 
-  onSubmit(event?: SyntheticEvent): Promise<void> {
+  onSubmit(event?: SyntheticEvent) {
     if (event) {
       event.preventDefault();
       event.stopPropagation();
@@ -246,10 +246,12 @@ export default class BaseForm<
       this.props.onSubmit && this.props.onSubmit(this.getModel('submit'));
 
     // Set the `submitting` state only if onSubmit is async so we don't cause an unnecessary re-render
-    let submitting;
+    let submitting: Promise<unknown>;
     if (isPromiseLike(result)) {
       this.setState({ submitting: true });
-      submitting = result.finally(() => this.setState({ submitting: false }));
+      submitting = result.finally(() => {
+        this.setState({ submitting: false });
+      });
     } else {
       submitting = Promise.resolve(result);
     }

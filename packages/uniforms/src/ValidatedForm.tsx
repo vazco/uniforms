@@ -3,32 +3,61 @@ import isEqual from 'lodash/isEqual';
 import noop from 'lodash/noop';
 import omit from 'lodash/omit';
 import set from 'lodash/set';
+import { Component, SyntheticEvent } from 'react';
 
 import BaseForm from './BaseForm';
+import { DeepPartial, Partialize, ValidateMode } from './types';
 
-const Validated = (parent: any): any => {
-  class _ extends parent {
+type ValidatedFormProps<Model extends object> = BaseForm<Model>['props'] & {
+  onValidate: (
+    model: DeepPartial<Model>,
+    error: unknown,
+    callback: (error?: unknown) => void,
+  ) => void;
+  validate: ValidateMode;
+  validator: unknown;
+};
+
+type ValidatedFormState<Model extends object> = BaseForm<Model>['state'] & {
+  error: unknown;
+  validate: boolean;
+  validating: boolean;
+  validator: (model: DeepPartial<Model>) => void | never;
+};
+
+function Validated<Model extends object>(parent: typeof BaseForm) {
+  type ValidatedForm<DefaultProps extends keyof ValidatedFormProps<Model>> = {
+    new (props: ValidatedFormProps<Model>): BaseForm<Model> &
+      Component<
+        Partialize<ValidatedFormProps<Model>, DefaultProps>,
+        ValidatedFormState<Model>
+      >;
+  };
+
+  // @ts-ignore
+  class _ extends (parent as ValidatedForm<never>) {
     static Validated = Validated;
-
     static displayName = `Validated${parent.displayName}`;
 
-    static defaultProps = {
+    static defaultProps: Pick<
+      ValidatedFormProps<Model>,
+      keyof typeof parent.defaultProps | 'onValidate' | 'validate'
+    > = {
       ...parent.defaultProps,
 
-      onValidate(model: any, error: any, callback: any) {
+      onValidate(model, error, callback) {
         callback();
       },
 
       validate: 'onChangeAfterSubmit',
     };
 
-    validate: (key?: any, value?: any) => Promise<unknown>;
-    validateModel: (model: any) => Promise<unknown>;
+    validate: typeof _.prototype.onValidate;
+    validateModel: typeof _.prototype.onValidateModel;
 
-    constructor(...args: any[]) {
-      super(...args);
+    constructor(props: ValidatedFormProps<Model>) {
+      super(props);
 
-      // @ts-ignore
       this.state = {
         ...this.state,
 
@@ -64,9 +93,8 @@ const Validated = (parent: any): any => {
       ]);
     }
 
-    componentDidUpdate(prevProps) {
-      // @ts-ignore
-      super.componentDidUpdate(...arguments);
+    componentDidUpdate(prevProps, prevState, snapshot) {
+      super.componentDidUpdate(prevProps, prevState, snapshot);
 
       const { model, schema, validate, validator } = this.props;
       if (schema !== prevProps.schema || validator !== prevProps.validator) {
@@ -86,7 +114,7 @@ const Validated = (parent: any): any => {
       }
     }
 
-    onChange(key: any, value: any) {
+    onChange(key: string, value: unknown) {
       if (shouldRevalidate(this.props.validate, this.state.validate)) {
         this.onValidate(key, value).catch(noop);
       }
@@ -96,11 +124,10 @@ const Validated = (parent: any): any => {
       //     this.setState(() => ({error: null}));
       // }
 
-      // @ts-ignore
-      super.onChange(...arguments);
+      super.onChange(key, value);
     }
 
-    __reset(state: any) {
+    __reset(state: ValidatedFormState<Model>) {
       return {
         ...super.__reset(state),
         error: null,
@@ -109,13 +136,13 @@ const Validated = (parent: any): any => {
       };
     }
 
-    onSubmit(event: any) {
+    onSubmit(event?: SyntheticEvent) {
       if (event) {
         event.preventDefault();
         event.stopPropagation();
       }
 
-      const promise = new Promise((resolve, reject) => {
+      const promise: Promise<void> = new Promise((resolve, reject) => {
         this.setState(
           () => ({ submitting: true, validate: true }),
           () => {
@@ -136,7 +163,7 @@ const Validated = (parent: any): any => {
           // It can be already unmounted.
           if (this.mounted) {
             // If validation fails, or `super.onSubmit` doesn't touch `submitting`, we need to reset it.
-            this.setState((state: any) =>
+            this.setState(state =>
               state.submitting ? { submitting: false } : null,
             );
           }
@@ -155,7 +182,6 @@ const Validated = (parent: any): any => {
     }
 
     onValidateModel(model: any) {
-      // @ts-ignore
       model = this.getModel('validate', model);
 
       let catched = this.props.error || null;
@@ -187,10 +213,10 @@ const Validated = (parent: any): any => {
     }
   }
 
-  return _;
-};
+  return _ as ValidatedForm<keyof typeof _.defaultProps>;
+}
 
-function shouldRevalidate(inProps: any, inState: any) {
+function shouldRevalidate(inProps: ValidateMode, inState: boolean) {
   return (
     inProps === 'onChange' || (inProps === 'onChangeAfterSubmit' && inState)
   );

@@ -28,7 +28,7 @@ describe('AutoForm', () => {
   });
 
   describe('when changed', () => {
-    const wrapper = mount(
+    const wrapper = mount<AutoForm>(
       <AutoForm
         onChange={onChange}
         onChangeModel={onChangeModel}
