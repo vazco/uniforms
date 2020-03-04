@@ -4,31 +4,34 @@ import createSchema from './_createSchema';
 
 const randomId = randomIds();
 
-const createContext = (schema, context) => ({
+type createContextProps = { state?: any; [key: string]: any; model?: any };
+
+const createContext = (
+  schema,
+  context: createContextProps = { state: {} },
+) => ({
   context: {
-    uniforms: {
-      error: null,
-      model: {},
-      name: [],
-      onChange() {},
-      onSubmit() {},
+    error: null,
+    model: {},
+    name: [],
+    onChange() {},
+    onSubmit() {},
 
-      ...context,
+    ...context,
 
-      randomId,
-      schema: createSchema(schema),
-      state: {
-        changedMap: {},
+    randomId,
+    schema: createSchema(schema),
+    state: {
+      changedMap: {},
 
-        changed: false,
-        submitting: false,
-        disabled: false,
-        label: false,
-        placeholder: false,
-        showInlineError: false,
+      changed: false,
+      submitting: false,
+      disabled: false,
+      label: false,
+      placeholder: false,
+      showInlineError: false,
 
-        ...(context && context.state),
-      },
+      ...(context && context.state),
     },
   },
 });

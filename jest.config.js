@@ -1,5 +1,5 @@
 module.exports = {
-  collectCoverageFrom: ['packages/*/src/*.{js,ts,tsx}'],
+  collectCoverageFrom: ['packages/*/src/*.{ts,tsx}'],
   coverageReporters: ['html', 'lcovonly', 'text-summary'],
   moduleNameMapper: {
     '^meteor/([^:]*):(.*)$':
@@ -9,7 +9,7 @@ module.exports = {
     '^uniforms([^/]*)(.*)$': '<rootDir>/packages/uniforms$1/src$2'
   },
   setupFiles: ['./scripts/setupEnzyme.js'],
-  testMatch: ['**/__tests__/**/!(_)*.{js,ts,tsx}'],
+  testMatch: ['**/__tests__/**/!(_)*.{ts,tsx}', '!**/*.d.ts'],
   transform: {
     '^.+\\.(js|ts|tsx)$': './scripts/transform.js'
   }

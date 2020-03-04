@@ -28,7 +28,7 @@ describe('AutoForm', () => {
   });
 
   describe('when changed', () => {
-    const wrapper = mount<AutoForm>(
+    const wrapper = mount<typeof AutoForm>(
       <AutoForm
         onChange={onChange}
         onChangeModel={onChangeModel}
@@ -40,7 +40,7 @@ describe('AutoForm', () => {
       wrapper
         .instance()
         .getContext()
-        .uniforms.onChange('a', '2');
+        .onChange('a', '2');
 
       expect(onChange).toHaveBeenCalledTimes(1);
       expect(onChange).toHaveBeenLastCalledWith('a', '2');
@@ -50,7 +50,7 @@ describe('AutoForm', () => {
       wrapper
         .instance()
         .getContext()
-        .uniforms.onChange('a', '2');
+        .onChange('a', '2');
 
       expect(onChangeModel).toHaveBeenCalledTimes(1);
       expect(onChangeModel).toHaveBeenLastCalledWith({ a: '2' });
@@ -85,7 +85,7 @@ describe('AutoForm', () => {
       wrapper
         .instance()
         .getContext()
-        .uniforms.onChange('a', 1);
+        .onChange('a', 1);
 
       await new Promise(resolve => process.nextTick(resolve));
 
@@ -107,23 +107,17 @@ describe('AutoForm', () => {
 
     it('reset `model`', () => {
       wrapper.instance().reset();
-      expect(wrapper.instance().getContext().uniforms.model).toEqual(
-        intialModel,
-      );
+      expect(wrapper.instance().props.model).toEqual(intialModel);
     });
 
     it('resets state `changedMap`', () => {
       wrapper.instance().reset();
-      expect(wrapper.instance().getContext().uniforms.state.changedMap).toEqual(
-        {},
-      );
+      expect(wrapper.instance().state.changedMap).toEqual({});
     });
 
     it('resets state `changed`', () => {
       wrapper.instance().reset();
-      expect(wrapper.instance().getContext().uniforms.state.changed).toEqual(
-        false,
-      );
+      expect(wrapper.instance().state.changed).toEqual(false);
     });
   });
 
@@ -132,7 +126,7 @@ describe('AutoForm', () => {
 
     it('updates', () => {
       wrapper.setProps({ model: {} });
-      expect(wrapper.instance().getContext().uniforms.model).toEqual({});
+      expect(wrapper.instance().props.model).toEqual({});
     });
 
     it('validates', () => {
