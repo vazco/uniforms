@@ -1,7 +1,7 @@
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import React, { useContext } from 'react';
-import { context, filterDOMProps } from 'uniforms';
+import React from 'react';
+import { filterDOMProps, useField } from 'uniforms';
 
 const ErrorsField = ({
   children,
@@ -10,7 +10,7 @@ const ErrorsField = ({
   variant,
   ...props
 }: any) => {
-  const { error, schema } = useContext(context).uniforms;
+  const { error, schema } = useField(props.name, props)[1];
 
   return !error && !children ? null : (
     <FormControl

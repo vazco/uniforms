@@ -27,6 +27,7 @@ const xor = (item, array) => {
   return array.slice(0, index).concat(array.slice(index + 1));
 };
 
+// eslint-disable-next-line complexity
 const renderSelect = ({
   InputLabelProps,
   allowedValues,

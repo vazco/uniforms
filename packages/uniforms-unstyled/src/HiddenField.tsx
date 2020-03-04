@@ -1,42 +1,36 @@
-import React from 'react';
-import { BaseField, filterDOMProps } from 'uniforms';
+import React, { useEffect } from 'react';
+import { connectField, filterDOMProps, useField } from 'uniforms';
 
-export default class HiddenField extends BaseField {
-  static displayName = 'HiddenField';
-
-  constructor() {
+const HiddenField = ({ name, ...props }) => {
+  [props] = useField(
+    name,
     // @ts-ignore
-    super(...arguments);
+    ...arguments,
+  );
 
-    this.options = {
-      ensureValue: true,
-      overrideValue: true,
-    };
-  }
-
-  componentDidUpdate() {
-    const { value } = this.props;
+  useEffect(() => {
+    const { value } = props;
     if (value !== undefined) {
-      const props = this.getFieldProps();
       if (props.value !== value) {
         props.onChange(value);
       }
     }
-  }
+  });
 
-  render() {
-    const props = this.getFieldProps();
+  return props.noDOM ? null : (
+    <input
+      disabled={props.disabled}
+      id={props.id}
+      name={props.name}
+      ref={props.inputRef}
+      type="hidden"
+      value={props.value}
+      {...filterDOMProps(props)}
+    />
+  );
+};
 
-    return props.noDOM ? null : (
-      <input
-        disabled={props.disabled}
-        id={props.id}
-        name={props.name}
-        ref={props.inputRef}
-        type="hidden"
-        value={props.value}
-        {...filterDOMProps(props)}
-      />
-    );
-  }
-}
+export default connectField(HiddenField, {
+  ensureValue: false,
+  includeInChain: false,
+});

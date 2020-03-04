@@ -32,6 +32,7 @@ function Validated<Model extends object>(parent: typeof BaseForm) {
         Partialize<ValidatedFormProps<Model>, DefaultProps>,
         ValidatedFormState<Model>
       >;
+    Validated: (parent: typeof BaseForm) => ValidatedForm<DefaultProps>;
   };
 
   // @ts-ignore
@@ -56,6 +57,7 @@ function Validated<Model extends object>(parent: typeof BaseForm) {
     validateModel: typeof _.prototype.onValidateModel;
 
     constructor(props: ValidatedFormProps<Model>) {
+      // eslint-disable-next-line constructor-super
       super(props);
 
       this.state = {

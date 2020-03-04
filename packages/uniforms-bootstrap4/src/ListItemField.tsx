@@ -4,10 +4,17 @@ import { connectField, joinName } from 'uniforms';
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
 
-const ListItem = ({ removeIcon, ...props }) => (
+const ListItem = ({
+  name,
+  removeIcon,
+  ...props
+}: {
+  name: string;
+  [key: string]: any;
+}) => (
   <div className="row">
     <div className="col-1">
-      <ListDelField name={props.name} removeIcon={removeIcon} />
+      <ListDelField name={name} removeIcon={removeIcon} />
     </div>
 
     {props.children ? (
@@ -19,7 +26,7 @@ const ListItem = ({ removeIcon, ...props }) => (
         }),
       )
     ) : (
-      <AutoField {...props} className="col-11" />
+      <AutoField {...props} className="col-11" name={name} />
     )}
   </div>
 );

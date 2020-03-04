@@ -13,6 +13,12 @@ const ListAdd = ({
   value,
   variant,
   ...props
+}: {
+  disabled?: boolean;
+  parent?: any;
+  value?: any;
+  name: string;
+  [key: string]: any;
 }) => {
   const limitNotReached =
     !disabled && !(parent.maxCount <= parent.value.length);

@@ -1,6 +1,6 @@
 import Button from '@material-ui/core/Button';
-import React, { useContext } from 'react';
-import { context, filterDOMProps } from 'uniforms';
+import React from 'react';
+import { filterDOMProps, useField } from 'uniforms';
 
 const SubmitField = ({
   children,
@@ -10,7 +10,7 @@ const SubmitField = ({
   value,
   ...props
 }: any) => {
-  const { error, state } = useContext(context).uniforms;
+  const { error, state } = useField(props.name, props)[1];
 
   return (
     <Button

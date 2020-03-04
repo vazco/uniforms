@@ -1,5 +1,4 @@
 import React from 'react';
-import identity from 'lodash/identity';
 import mapValues from 'lodash/mapValues';
 import some from 'lodash/some';
 
@@ -10,9 +9,16 @@ type GuaranteedProps = ReturnType<typeof useField>[0];
 
 export default function connectField<Props extends {}>(
   Component: React.ComponentType<Props & GuaranteedProps>,
-  { includeInChain = false }: { includeInChain?: boolean } = {},
+  props: {
+    includeInChain?: boolean;
+    initialValue?: any;
+    ensureValue?: boolean;
+    includeParent?: boolean;
+    initialCount?: number | undefined;
+  } = {},
 ) {
   type FieldProps = Props & { name: string };
+  const { includeInChain } = props;
   function Field(props: FieldProps) {
     const [fieldProps, context] = useField(props.name, props);
     const anyFlowingPropertySet = some(

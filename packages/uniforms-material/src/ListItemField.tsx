@@ -5,7 +5,16 @@ import { connectField, joinName } from 'uniforms';
 import ListDelField from './ListDelField';
 import AutoField from './AutoField';
 
-const ListItem = ({ dense, divider, disableGutters, removeIcon, ...props }) => (
+const ListItem = ({
+  dense,
+  divider,
+  disableGutters,
+  removeIcon,
+  ...props
+}: {
+  name: string;
+  [key: string]: any;
+}) => (
   <ListItemMaterial
     dense={dense}
     divider={divider}

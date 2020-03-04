@@ -19,54 +19,57 @@ const List = ({
   showInlineError,
   value,
   ...props
-}) => (
-  <div
-    className={classnames('card mb-3', className)}
-    {...filterDOMProps(props)}
-  >
-    <div className="card-body">
-      {label && (
-        <div className="card-title">
-          <label className="col-form-label">{label}&nbsp;</label>
+}) => {
+  const listAddProps = {
+    name: `${name}.$`,
+    initialCount: props.initialCount,
+    addIcon,
+  };
+  return (
+    <div
+      className={classnames('card mb-3', className)}
+      {...filterDOMProps(props)}
+    >
+      <div className="card-body">
+        {label && (
+          <div className="card-title">
+            <label className="col-form-label">{label}&nbsp;</label>
 
-          <ListAddField
-            name={`${name}.$`}
-            initialCount={initialCount}
-            addIcon={addIcon}
-          />
+            <ListAddField {...listAddProps} />
 
-          {!!(error && showInlineError) && (
-            <span className="text-danger">{errorMessage}</span>
-          )}
-        </div>
-      )}
+            {!!(error && showInlineError) && (
+              <span className="text-danger">{errorMessage}</span>
+            )}
+          </div>
+        )}
 
-      {children
-        ? value.map((item, index) =>
-            Children.map(children, child =>
-              React.cloneElement(child, {
-                key: index,
-                label: null,
-                name: joinName(
-                  name,
-                  child.props.name && child.props.name.replace('$', index),
-                ),
-                removeIcon,
-              }),
-            ),
-          )
-        : value.map((item, index) => (
-            <ListItemField
-              key={index}
-              label={null}
-              name={joinName(name, index)}
-              removeIcon={removeIcon}
-              {...itemProps}
-            />
-          ))}
+        {children
+          ? value.map((item, index) =>
+              Children.map(children, child =>
+                React.cloneElement(child, {
+                  key: index,
+                  label: null,
+                  name: joinName(
+                    name,
+                    child.props.name && child.props.name.replace('$', index),
+                  ),
+                  removeIcon,
+                }),
+              ),
+            )
+          : value.map((item, index) => (
+              <ListItemField
+                key={index}
+                label={null}
+                name={joinName(name, index)}
+                removeIcon={removeIcon}
+                {...itemProps}
+              />
+            ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default connectField(List, {
   ensureValue: false,

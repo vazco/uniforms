@@ -1,42 +1,32 @@
-import React from 'react';
-import { BaseField, filterDOMProps } from 'uniforms';
+import React, { Ref, useEffect } from 'react';
+import { connectField, filterDOMProps, useField } from 'uniforms';
 
-export default class HiddenField extends BaseField {
-  static displayName = 'HiddenField';
+type HiddenFieldProps = {
+  inputRef?: Ref<HTMLInputElement>;
+  name: string;
+  noDOM?: boolean;
+  value?: unknown;
+};
 
-  constructor() {
-    // @ts-ignore
-    super(...arguments);
+export default function HiddenField(originialProps: HiddenFieldProps) {
+  const props = useField(originialProps.name, originialProps)[0];
 
-    this.options = {
-      ensureValue: true,
-      overrideValue: true,
-    } as any;
-  }
-
-  componentDidUpdate() {
-    const { value } = this.props;
-    if (value !== undefined) {
-      const props = this.getFieldProps();
-      if (props.value !== value) {
-        props.onChange(value);
-      }
+  useEffect(() => {
+    const { value } = props;
+    if (value !== undefined && originialProps.value !== value) {
+      props.onChange(originialProps.value);
     }
-  }
+  });
 
-  render() {
-    const props = this.getFieldProps();
-
-    return props.noDOM ? null : (
-      <input
-        disabled={props.disabled}
-        id={props.id}
-        name={props.name}
-        ref={props.inputRef}
-        type="hidden"
-        value={props.value}
-        {...filterDOMProps(props)}
-      />
-    );
-  }
+  return props.noDOM ? null : (
+    <input
+      disabled={props.disabled}
+      id={props.id}
+      name={props.name}
+      ref={props.inputRef}
+      type="hidden"
+      value={props.value as string}
+      {...filterDOMProps(props)}
+    />
+  );
 }

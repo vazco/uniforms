@@ -23,5 +23,4 @@ const ListItem = props => (
 
 export default connectField(ListItem, {
   includeInChain: false,
-  includeParent: true,
 });

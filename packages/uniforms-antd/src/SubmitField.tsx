@@ -1,9 +1,9 @@
 import Button from 'antd/lib/button';
-import React, { useContext } from 'react';
-import { context } from 'uniforms';
+import React from 'react';
+import { useField } from 'uniforms';
 
 function SubmitField({ disabled, inputRef, value, ...props }) {
-  const { error, state } = useContext(context).uniforms;
+  const { error, state } = useField(props.name, props)[1];
 
   return (
     <Button

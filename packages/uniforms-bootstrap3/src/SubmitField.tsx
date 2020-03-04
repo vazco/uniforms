@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import classnames from 'classnames';
-import { context, filterDOMProps } from 'uniforms';
+import { filterDOMProps, useField } from 'uniforms';
 
 import gridClassName from './gridClassName';
 
@@ -13,7 +13,8 @@ const SubmitField = ({
   wrapClassName,
   ...props
 }: any) => {
-  const { error, state } = useContext(context).uniforms;
+  const { error, state: anyState } = useField(props.name, props)[1];
+  const state = (anyState as unknown) as { disabled: boolean; grid: any };
   const hasWrap = !!(state.grid || wrapClassName);
 
   const blockInput = (

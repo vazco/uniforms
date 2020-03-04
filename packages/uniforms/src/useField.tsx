@@ -25,9 +25,9 @@ function propagate(
   return [resultValue, schemaValue];
 }
 
-export default function useField(
+export default function useField<Props extends Record<string, unknown>>(
   fieldName: string,
-  props: Record<string, unknown>,
+  props: Props,
 ) {
   const context = useContext(contextReference) as Context;
   invariant(context !== null, 'useField must be used within a form.');
@@ -98,5 +98,5 @@ export default function useField(
     placeholder,
   };
 
-  return [fieldProps, context] as [typeof fieldProps, typeof context];
+  return [fieldProps, context] as [typeof fieldProps & Props, typeof context];
 }

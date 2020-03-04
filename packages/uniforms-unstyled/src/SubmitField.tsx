@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
-import { context, filterDOMProps } from 'uniforms';
+import React from 'react';
+import { filterDOMProps, useField } from 'uniforms';
 
 function SubmitField({ disabled, inputRef, value, ...props }: any) {
-  const { error, state } = useContext(context).uniforms;
+  const { error, state } = useField(props.name, props)[1];
 
   return (
     <input
       disabled={disabled === undefined ? !!(error || state.disabled) : disabled}
       ref={inputRef}
-      type="submit"
+      type={'submit'}
       {...(value ? { value } : {})}
       {...filterDOMProps(props)}
     />

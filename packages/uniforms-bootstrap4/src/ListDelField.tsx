@@ -9,6 +9,12 @@ const ListDel = ({
   parent,
   removeIcon,
   ...props
+}: {
+  disabled?: boolean;
+  parent?: any;
+  name: string;
+  className?: string;
+  removeIcon?: any;
 }) => {
   const fieldIndex = +name.slice(1 + name.lastIndexOf('.'));
   const limitNotReached =

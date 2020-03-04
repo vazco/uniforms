@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import classnames from 'classnames';
-import { context, filterDOMProps } from 'uniforms';
+import { filterDOMProps, useField } from 'uniforms';
 
 const SubmitField = ({
   className,
@@ -9,7 +9,7 @@ const SubmitField = ({
   value,
   ...props
 }: any) => {
-  const { error, state } = useContext(context).uniforms;
+  const { error, state } = useField(props.name, props)[1];
 
   return (
     <input

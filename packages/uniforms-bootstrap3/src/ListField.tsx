@@ -19,58 +19,61 @@ const List = ({
   showInlineError,
   value,
   ...props
-}) => (
-  <div
-    className={classnames(
-      'panel panel-default',
-      { 'panel-danger': error },
-      className,
-    )}
-    {...filterDOMProps(props)}
-  >
-    <div className="panel-body">
-      {label && (
-        <div className={classnames('panel-heading', { 'has-error': error })}>
-          <label className="control-label">{label}&nbsp;</label>
-
-          <ListAddField
-            name={`${name}.$`}
-            initialCount={initialCount}
-            addIcon={addIcon}
-          />
-
-          {!!(error && showInlineError) && (
-            <span className="help-block">{errorMessage}</span>
-          )}
-        </div>
+}) => {
+  const listAddProps = {
+    name: `${name}.$`,
+    initialCount: props.initialCount,
+    addIcon,
+  };
+  return (
+    <div
+      className={classnames(
+        'panel panel-default',
+        { 'panel-danger': error },
+        className,
       )}
+      {...filterDOMProps(props)}
+    >
+      <div className="panel-body">
+        {label && (
+          <div className={classnames('panel-heading', { 'has-error': error })}>
+            <label className="control-label">{label}&nbsp;</label>
 
-      {children
-        ? value.map((item: any, index: number) =>
-            Children.map(children, child =>
-              React.cloneElement(child, {
-                key: index,
-                label: null,
-                name: joinName(
-                  name,
-                  child.props.name && child.props.name.replace('$', index),
-                ),
-                removeIcon,
-              }),
-            ),
-          )
-        : value.map((item: any, index: number) => (
-            <ListItemField
-              key={index}
-              label={null}
-              name={joinName(name, index)}
-              removeIcon={removeIcon}
-              {...itemProps}
-            />
-          ))}
+            <ListAddField {...listAddProps} />
+
+            {!!(error && showInlineError) && (
+              <span className="help-block">{errorMessage}</span>
+            )}
+          </div>
+        )}
+
+        {children
+          ? value.map((item: any, index: number) =>
+              Children.map(children, child =>
+                React.cloneElement(child, {
+                  key: index,
+                  label: null,
+                  name: joinName(
+                    name,
+                    child.props.name && child.props.name.replace('$', index),
+                  ),
+                  removeIcon,
+                }),
+              ),
+            )
+          : value.map((item: any, index: number) => (
+              <ListItemField
+                key={index}
+                label={null}
+                name={joinName(name, index)}
+                removeIcon={removeIcon}
+                {...itemProps}
+              />
+            ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default connectField(List, {
   ensureValue: false,

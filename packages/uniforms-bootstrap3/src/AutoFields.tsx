@@ -1,10 +1,10 @@
-import { context } from 'uniforms';
-import { createElement, useContext } from 'react';
+import { useField } from 'uniforms';
+import { createElement } from 'react';
 
 import AutoField from './AutoField';
 
 function AutoFields({ autoField, element, fields, omitFields, ...props }: any) {
-  const { schema } = useContext(context).uniforms;
+  const { schema } = useField(props.name, props)[1];
 
   return createElement(
     element,

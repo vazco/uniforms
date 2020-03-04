@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import { context, filterDOMProps } from 'uniforms';
+import React from 'react';
+import { filterDOMProps, useField } from 'uniforms';
 
 function ErrorsField({ children, ...props }) {
-  const { error, schema } = useContext(context).uniforms;
+  const { error, schema } = useField(name, props)[1];
 
   return !error && !children ? null : (
     <div {...filterDOMProps(props)}>
