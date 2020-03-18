@@ -1,36 +1,34 @@
-import { randomIds } from 'uniforms';
+import { Context, randomIds } from 'uniforms';
 
 import createSchema from './_createSchema';
 
-type createContextProps = { state?: any; [key: string]: any; model?: any };
-
 const randomId = randomIds();
 
-const createContext = (schema, context: createContextProps) => ({
-  context: {
-    error: null,
-    model: {},
-    name: [],
-    onChange() {},
-    onSubmit() {},
-
-    ...context,
-
-    randomId,
-    schema: createSchema(schema),
-    state: {
-      changedMap: {},
-
+export default function createContext(
+  schema: any,
+  context?: Partial<Context>,
+): { context: Context } {
+  return {
+    context: {
       changed: false,
-      disabled: false,
+      changedMap: {},
+      error: null,
+      model: {},
+      name: [],
+      onChange() {},
+      onSubmit() {},
+      randomId,
       submitting: false,
-      label: false,
-      placeholder: false,
-      showInlineError: false,
-
-      ...(context && context.state),
-    },
-  },
-});
-
-export default createContext;
+      validating: false,
+      ...context,
+      schema: createSchema(schema),
+      state: {
+        disabled: false,
+        label: false,
+        placeholder: false,
+        showInlineError: false,
+        ...context?.state,
+      },
+    }
+  };
+}
