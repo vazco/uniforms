@@ -1,3 +1,7 @@
+## Next:
+
+- **Fixed:** Mitigated [babel/babel\#10693](https://github.com/babel/babel/issues/10693) in all remaining cases. [\#692](https://github.com/vazco/uniforms/issues/692)
+
 ## [v2.6.6](https://github.com/vazco/uniforms/tree/v2.6.6) (2020-01-22)
 
 - **Fixed:** Mitigated [babel/babel\#10693](https://github.com/babel/babel/issues/10693). [\#638](https://github.com/vazco/uniforms/issues/638)

@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { BaseForm } from 'uniforms';
 
-const Bootstrap3 = (parent: any): any =>
-  class extends parent {
+const Bootstrap3 = (parent: any): any => {
+  class _ extends parent {
     static Bootstrap3 = Bootstrap3;
 
     static displayName = `Bootstrap3${parent.displayName}`;
@@ -43,6 +43,9 @@ const Bootstrap3 = (parent: any): any =>
         ),
       };
     }
-  };
+  }
+
+  return _;
+};
 
 export default Bootstrap3(BaseForm);

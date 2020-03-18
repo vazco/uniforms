@@ -1,8 +1,8 @@
 import classnames from 'classnames';
 import { BaseForm } from 'uniforms';
 
-const Semantic = (parent: any): any =>
-  class extends parent {
+const Semantic = (parent: any): any => {
+  class _ extends parent {
     static Semantic = Semantic;
 
     static displayName = `Semantic${parent.displayName}`;
@@ -16,6 +16,9 @@ const Semantic = (parent: any): any =>
         className: classnames('ui', props.className, { error }, 'form'),
       };
     }
-  };
+  }
+
+  return _;
+};
 
 export default Semantic(BaseForm);
