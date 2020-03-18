@@ -53,4 +53,4 @@ const renderSelect = props => (
 const Select = ({ checkboxes, ...props }: any) =>
   wrapField(props, checkboxes ? renderCheckboxes(props) : renderSelect(props));
 
-export default connectField(Select, { ensureValue: false });
+export default connectField(Select);

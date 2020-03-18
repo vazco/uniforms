@@ -25,4 +25,4 @@ Date.defaultProps = {
   style: { width: '100%' },
 };
 
-export default connectField(Date, { ensureValue: false });
+export default connectField(Date);

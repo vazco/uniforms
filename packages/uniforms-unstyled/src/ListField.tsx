@@ -45,7 +45,4 @@ const List = ({ children, itemProps, label, name, value, ...props }) => {
   );
 };
 
-export default connectField(List, {
-  ensureValue: false,
-  includeInChain: false,
-});
+export default connectField(List, { includeInChain: false });

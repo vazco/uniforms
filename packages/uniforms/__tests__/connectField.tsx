@@ -87,7 +87,7 @@ describe('connectField', () => {
 
   describe('when called with `includeParent`', () => {
     it('provides parent field (true)', () => {
-      const Field = connectField(Test, { includeParent: true });
+      const Field = connectField(Test);
 
       mount(<Field name="field.subfield" />, reactContext);
 
@@ -104,7 +104,7 @@ describe('connectField', () => {
     });
 
     it('rerenders on parent change (true)', () => {
-      const Field = connectField(Test, { includeParent: true });
+      const Field = connectField(Test);
 
       const wrapper = mount(<Field name="field.subfield" />, reactContext);
 
@@ -114,7 +114,7 @@ describe('connectField', () => {
     });
 
     it('rerenders on parent change (if any) (true)', () => {
-      const Field = connectField(Test, { includeParent: true });
+      const Field = connectField(Test);
 
       const wrapper = mount(<Field name="field.subfield" />, reactContext);
 
@@ -189,10 +189,7 @@ describe('connectField', () => {
 
   describe('when called with `initialValue`', () => {
     it('includes default value (true)', () => {
-      const Field = connectField(Test, {
-        initialValue: true,
-        ensureValue: false,
-      });
+      const Field = connectField(Test, { initialValue: true });
 
       mount(<Field name="field" />, reactContext);
 

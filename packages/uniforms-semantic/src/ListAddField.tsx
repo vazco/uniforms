@@ -36,7 +36,4 @@ const ListAdd = ({
   );
 };
 
-export default connectField(ListAdd, {
-  includeParent: true,
-  initialValue: false,
-});
+export default connectField(ListAdd, { initialValue: false });

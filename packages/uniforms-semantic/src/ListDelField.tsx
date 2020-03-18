@@ -40,7 +40,4 @@ const ListDel = ({
   );
 };
 
-export default connectField(ListDel, {
-  includeParent: true,
-  initialValue: false,
-});
+export default connectField(ListDel, { initialValue: false });

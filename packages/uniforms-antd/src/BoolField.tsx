@@ -26,4 +26,4 @@ Bool.defaultProps = {
   unCheckedChildren: <Icon type="close" />,
 };
 
-export default connectField(Bool, { ensureValue: false });
+export default connectField(Bool);

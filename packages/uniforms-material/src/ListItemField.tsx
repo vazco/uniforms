@@ -38,7 +38,4 @@ ListItem.defaultProps = {
   dense: true,
 };
 
-export default connectField(ListItem, {
-  includeInChain: false,
-  includeParent: true,
-});
+export default connectField(ListItem, { includeInChain: false });

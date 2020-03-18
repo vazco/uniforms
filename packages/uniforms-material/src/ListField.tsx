@@ -61,7 +61,4 @@ List.defaultProps = {
 
 // FIXME: Use React.Fragment instead of returning an array if possible.
 // @ts-ignore
-export default connectField(List, {
-  ensureValue: false,
-  includeInChain: false,
-});
+export default connectField(List, { includeInChain: false });

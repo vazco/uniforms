@@ -21,7 +21,4 @@ Nest.defaultProps = {
   margin: 'dense',
 };
 
-export default connectField(Nest, {
-  ensureValue: false,
-  includeInChain: false,
-});
+export default connectField(Nest, { includeInChain: false });

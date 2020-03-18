@@ -25,4 +25,4 @@ const Num = props =>
     />,
   );
 
-export default connectField(Num, { ensureValue: false });
+export default connectField(Num);
