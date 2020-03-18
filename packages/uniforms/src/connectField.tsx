@@ -1,33 +1,26 @@
-import React from 'react';
+import React, { ComponentType, FunctionComponent } from 'react';
 import mapValues from 'lodash/mapValues';
 import some from 'lodash/some';
 
 import contextReference from './context';
 import useField from './useField';
+import { GuaranteedProps } from './types';
 
-type GuaranteedProps = ReturnType<typeof useField>[0];
-
-export default function connectField<Props extends {}>(
-  Component: React.ComponentType<Props & GuaranteedProps>,
-  props: {
-    includeInChain?: boolean;
-    initialValue?: any;
-    ensureValue?: boolean;
-    includeParent?: boolean;
-    initialCount?: number | undefined;
-  } = {},
+export default function connectField<Props extends Partial<GuaranteedProps>>(
+  Component: ComponentType<Props>,
+  options?: { includeInChain?: boolean; initialValue?: boolean },
 ) {
-  type FieldProps = Props & { name: string };
-  const { includeInChain } = props;
+  type FieldProps = { name: string } & Omit<Props, keyof GuaranteedProps>;
   function Field(props: FieldProps) {
-    const [fieldProps, context] = useField(props.name, props);
+    const [fieldProps, context] = useField(props.name, props, options);
     const anyFlowingPropertySet = some(
       context.state,
       (_, key) => props[key] !== null && props[key] !== undefined,
     );
 
-    if (!anyFlowingPropertySet && !includeInChain)
-      return <Component {...props} {...fieldProps} />;
+    if (!anyFlowingPropertySet && !options?.includeInChain) {
+      return <Component {...((props as unknown) as Props)} {...fieldProps} />;
+    }
 
     const nextContext = { ...context };
     if (anyFlowingPropertySet) {
@@ -36,18 +29,17 @@ export default function connectField<Props extends {}>(
       );
     }
 
-    if (includeInChain) {
+    if (options?.includeInChain)
       nextContext.name = nextContext.name.concat(props.name);
-    }
 
     return (
       <contextReference.Provider value={nextContext}>
-        <Component {...props} {...fieldProps} />
+        <Component {...((props as unknown) as Props)} {...fieldProps} />
       </contextReference.Provider>
     );
   }
 
   Field.displayName = `${Component.displayName || Component.name}Field`;
 
-  return Field as React.FC<FieldProps>;
+  return Field as FunctionComponent<FieldProps>;
 }

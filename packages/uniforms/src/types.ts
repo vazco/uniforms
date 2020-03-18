@@ -1,6 +1,7 @@
 import { SyntheticEvent } from 'react';
 
 import Bridge from './Bridge';
+import useField from './useField';
 
 export type ChangedMap<T> = T extends object
   ? { [P in keyof T]?: ChangedMap<T[P]> }
@@ -29,6 +30,24 @@ export interface Context<Model extends object = Record<string, unknown>> {
 export type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>;
 };
+
+export type GuaranteedProps = Pick<
+  ReturnType<typeof useField>[0],
+  | 'changed'
+  | 'disabled'
+  | 'error'
+  | 'errorMessage'
+  | 'field'
+  | 'fieldType'
+  | 'fields'
+  | 'id'
+  | 'label'
+  | 'name'
+  | 'onChange'
+  | 'placeholder'
+  | 'showInlineError'
+  | 'value'
+>;
 
 export type ModelTransformMode = 'form' | 'submit' | 'validate';
 

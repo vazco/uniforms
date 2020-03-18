@@ -136,10 +136,7 @@ describe('BaseForm', () => {
     });
 
     it('updates schema bridge', () => {
-      const schema2 = {
-        ...schema,
-        getType: () => {},
-      };
+      const schema2 = { schema, getType: () => {} };
 
       wrapper.setProps({ schema: schema2 });
 
@@ -160,7 +157,7 @@ describe('BaseForm', () => {
     );
 
     it('updates `changed` and `changedMap`', () => {
-      const context1 = wrapper.instance().state;
+      const context1 = wrapper.instance().getContext().state;
       expect(context1).toHaveProperty('changed', false);
       expect(context1).toHaveProperty('changedMap', {});
 
@@ -365,19 +362,19 @@ describe('BaseForm', () => {
         onSubmit: () => new Promise(resolve => (resolveSubmit = resolve)),
       });
 
-      const context1 = wrapper.instance().state;
+      const context1 = wrapper.instance().getContext().state;
       expect(context1).toHaveProperty('submitting', false);
 
       wrapper.find('form').simulate('submit');
       await new Promise(resolve => process.nextTick(resolve));
 
-      const context2 = wrapper.instance().state;
+      const context2 = wrapper.instance().getContext().state;
       expect(context2).toHaveProperty('submitting', true);
 
       resolveSubmit();
       await new Promise(resolve => process.nextTick(resolve));
 
-      const context3 = wrapper.instance().state;
+      const context3 = wrapper.instance().getContext().state;
       expect(context3).toHaveProperty('submitting', false);
     });
 

@@ -28,6 +28,7 @@ function propagate(
 export default function useField<Props extends Record<string, unknown>>(
   fieldName: string,
   props: Props,
+  options?: { initialValue?: boolean },
 ) {
   const context = useContext(contextReference) as Context;
   invariant(context !== null, 'useField must be used within a form.');
@@ -69,6 +70,7 @@ export default function useField<Props extends Record<string, unknown>>(
 
   let value = props.value ?? get(context.model, name);
   useEffect(() => {
+    if (!options?.initialValue) return;
     if ((schemaProps.required ?? props.required) && value === undefined) {
       const initialValue = context.schema.getInitialValue(name, props);
       if (initialValue !== undefined) {

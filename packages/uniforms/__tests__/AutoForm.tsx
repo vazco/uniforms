@@ -77,7 +77,7 @@ describe('AutoForm', () => {
     });
 
     it('skips `onSubmit` until rendered (`autosave` = true)', async () => {
-      const wrapper = mount(
+      const wrapper = mount<typeof AutoForm>(
         <AutoForm onSubmit={onSubmit} schema={schema} autosave />,
       );
 
@@ -96,7 +96,7 @@ describe('AutoForm', () => {
 
   describe('when reset', () => {
     const intialModel = { a: 'foo' };
-    const wrapper = mount(
+    const wrapper = mount<typeof AutoForm>(
       <AutoForm
         onSubmit={onSubmit}
         schema={schema}
@@ -107,22 +107,22 @@ describe('AutoForm', () => {
 
     it('reset `model`', () => {
       wrapper.instance().reset();
-      expect(wrapper.instance().props.model).toEqual(intialModel);
+      expect(wrapper.instance().getContext().model).toEqual(intialModel);
     });
 
     it('resets state `changedMap`', () => {
       wrapper.instance().reset();
-      expect(wrapper.instance().state.changedMap).toEqual({});
+      expect(wrapper.instance().getContext().state.changedMap).toEqual({});
     });
 
     it('resets state `changed`', () => {
       wrapper.instance().reset();
-      expect(wrapper.instance().state.changed).toEqual(false);
+      expect(wrapper.instance().getContext().state.changed).toEqual(false);
     });
   });
 
   describe('when updated', () => {
-    const wrapper = mount(<AutoForm schema={schema} />);
+    const wrapper = mount<typeof AutoForm>(<AutoForm schema={schema} />);
 
     it('updates', () => {
       wrapper.setProps({ model: {} });
