@@ -69,18 +69,20 @@ export default function useField<Props extends Record<string, unknown>>(
   );
 
   let value = props.value ?? get(context.model, name);
-  useEffect(() => {
-    if (!options?.initialValue) return;
+  if (options?.initialValue !== false) {
+    let initialValue;
+
     if ((schemaProps.required ?? props.required) && value === undefined) {
-      const initialValue = context.schema.getInitialValue(name, props);
-      if (initialValue !== undefined) {
-        onChange(initialValue);
-        value = initialValue;
-      }
+      value = context.schema.getInitialValue(name, props);
+      initialValue = value;
     } else if (props.value !== undefined && props.value !== value) {
-      onChange(props.value);
+      initialValue = props.value;
     }
-  }, []);
+
+    useEffect(() => {
+      if (initialValue !== undefined) onChange(initialValue);
+    }, []);
+  }
 
   const fieldProps = {
     id,
