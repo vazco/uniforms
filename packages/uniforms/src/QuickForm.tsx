@@ -8,7 +8,7 @@ const Quick = (parent: any): any => {
 
     static displayName = `Quick${parent.displayName}`;
 
-    getNativeFormProps(): Record<string, unknown> {
+    getNativeFormProps(): Record<string, any> {
       const {
         autoField: AutoField = this.getAutoField(),
         errorsField: ErrorsField = this.getErrorsField(),

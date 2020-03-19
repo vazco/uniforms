@@ -1,9 +1,7 @@
 import invariant from 'invariant';
 
-type UnknownObject = Record<string, unknown>;
-
 export default abstract class Bridge {
-  constructor(...args: unknown[]) {
+  constructor(...args: any[]) {
     invariant(
       this.constructor !== Bridge,
       'Bridge cannot be instantiated (args=%o).',
@@ -11,7 +9,7 @@ export default abstract class Bridge {
     );
   }
 
-  static check(schema: unknown): boolean {
+  static check(schema: any): boolean {
     return invariant(
       false,
       '%s have not implemented `check` method (args=%o).',
@@ -20,7 +18,7 @@ export default abstract class Bridge {
     );
   }
 
-  getError(name: string, error: unknown): unknown {
+  getError(name: string, error: any): any {
     return invariant(
       false,
       '%s have not implemented `getError` method (args=%o).',
@@ -29,7 +27,7 @@ export default abstract class Bridge {
     );
   }
 
-  getErrorMessage(name: string, error: unknown): string | void {
+  getErrorMessage(name: string, error: any): string | undefined {
     return invariant(
       false,
       '%s have not implemented `getErrorMessage` method (args=%o).',
@@ -38,7 +36,7 @@ export default abstract class Bridge {
     );
   }
 
-  getErrorMessages(error: unknown): string[] {
+  getErrorMessages(error: any): string[] {
     return invariant(
       false,
       '%s have not implemented `getErrorMessages` method (args=%o).',
@@ -47,7 +45,7 @@ export default abstract class Bridge {
     );
   }
 
-  getField(name: string): unknown {
+  getField(name: string): any {
     return invariant(
       false,
       '%s have not implemented `getField` method (args=%o).',
@@ -56,7 +54,7 @@ export default abstract class Bridge {
     );
   }
 
-  getInitialValue(name: string, props: UnknownObject): unknown {
+  getInitialValue(name: string, props: Record<string, any>): any {
     return invariant(
       false,
       '%s have not implemented `getInitialValue` method (args=%o).',
@@ -65,7 +63,7 @@ export default abstract class Bridge {
     );
   }
 
-  getProps(name: string, props: UnknownObject): UnknownObject {
+  getProps(name: string, props: Record<string, any>): Record<string, any> {
     return invariant(
       false,
       '%s have not implemented `getProps` method (args=%o).',
@@ -83,7 +81,7 @@ export default abstract class Bridge {
     );
   }
 
-  getType(name: string): unknown {
+  getType(name: string): any {
     return invariant(
       false,
       '%s have not implemented `getType` method (args=%o).',
@@ -92,7 +90,7 @@ export default abstract class Bridge {
     );
   }
 
-  getValidator(options?: unknown): (model: UnknownObject) => void {
+  getValidator(options?: any): (model: Record<string, any>) => void {
     return invariant(
       false,
       '%s have not implemented `getValidator` method (args=%o).',

@@ -6,11 +6,19 @@ import contextReference from './context';
 import useField from './useField';
 import { GuaranteedProps } from './types';
 
-export default function connectField<Props extends Partial<GuaranteedProps>>(
+export default function connectField<
+  Props extends Partial<GuaranteedProps<Value>>,
+  Value = Props['value']
+>(
   Component: ComponentType<Props>,
   options?: { includeInChain?: boolean; initialValue?: boolean },
 ) {
-  type FieldProps = { name: string } & Omit<Props, keyof GuaranteedProps>;
+  // prettier-ignore
+  type FieldProps =
+    & { name: string }
+    & Partial<GuaranteedProps<Value>>
+    & Omit<Props, keyof GuaranteedProps<Value>>;
+
   function Field(props: FieldProps) {
     const [fieldProps, context] = useField(props.name, props, options);
     const anyFlowingPropertySet = some(

@@ -30,7 +30,7 @@ const registered = [
   'component',
 ];
 
-function filter(props: {}) {
+function filter<T extends {}>(props: T) {
   return omit(props, registered);
 }
 

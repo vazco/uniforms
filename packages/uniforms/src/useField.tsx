@@ -5,7 +5,7 @@ import { useCallback, useContext, useEffect, useMemo } from 'react';
 
 import contextReference from './context';
 import joinName from './joinName';
-import { Context } from './types';
+import { Context, GuaranteedProps } from './types';
 
 function propagate(
   prop: unknown,
@@ -25,7 +25,10 @@ function propagate(
   return [resultValue, schemaValue];
 }
 
-export default function useField<Props extends Record<string, unknown>>(
+export default function useField<
+  Props extends Record<string, any>,
+  Value = Props['value'],
+>(
   fieldName: string,
   props: Props,
   options?: { initialValue?: boolean },
@@ -62,13 +65,13 @@ export default function useField<Props extends Record<string, unknown>>(
 
   const id = useMemo(() => context.randomId(), []);
   const onChange = useCallback(
-    (value: unknown, key: string = name) => {
+    (value?: Value, key: string = name) => {
       context.onChange(key, value);
     },
     [context.onChange, name],
   );
 
-  let value = props.value ?? get(context.model, name);
+  let value: Value | undefined = props.value ?? get(context.model, name);
   if (options?.initialValue !== false) {
     let initialValue;
 
@@ -84,7 +87,7 @@ export default function useField<Props extends Record<string, unknown>>(
     }, []);
   }
 
-  const fieldProps = {
+  const fieldProps: GuaranteedProps<Value> & Props = {
     id,
     ...state,
     changed,
@@ -102,5 +105,5 @@ export default function useField<Props extends Record<string, unknown>>(
     placeholder,
   };
 
-  return [fieldProps, context] as [typeof fieldProps & Props, typeof context];
+  return [fieldProps, context] as [typeof fieldProps, typeof context];
 }

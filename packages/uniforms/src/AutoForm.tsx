@@ -33,7 +33,7 @@ const Auto = (parent: any): any => {
       super.componentDidUpdate(...arguments);
     }
 
-    getNativeFormProps(): Record<string, unknown> {
+    getNativeFormProps(): Record<string, any> {
       return omit(super.getNativeFormProps(), ['onChangeModel']);
     }
 

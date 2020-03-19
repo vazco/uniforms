@@ -7,14 +7,14 @@ export type ChangedMap<T> = T extends object
   ? { [P in keyof T]?: ChangedMap<T[P]> }
   : Record<string, void>;
 
-export interface Context<Model extends object = Record<string, unknown>> {
+export interface Context<Model extends object = Record<string, any>> {
   changed: boolean;
   changedMap: ChangedMap<Model>;
-  error: unknown;
+  error: any;
   model: DeepPartial<Model>;
   name: string[];
-  onChange(key: string, value: unknown): void;
-  onSubmit(event?: SyntheticEvent): unknown | Promise<unknown>;
+  onChange(key: string, value?: any): void;
+  onSubmit(event?: SyntheticEvent): any | Promise<any>;
   randomId(): string;
   schema: Bridge;
   state: {
@@ -28,26 +28,25 @@ export interface Context<Model extends object = Record<string, unknown>> {
 }
 
 export type DeepPartial<T> = {
-  [P in keyof T]?: DeepPartial<T[P]>;
+  [P in keyof T]?: T[P] extends {} ? DeepPartial<T[P]> : T[P];
 };
 
-export type GuaranteedProps = Pick<
-  ReturnType<typeof useField>[0],
-  | 'changed'
-  | 'disabled'
-  | 'error'
-  | 'errorMessage'
-  | 'field'
-  | 'fieldType'
-  | 'fields'
-  | 'id'
-  | 'label'
-  | 'name'
-  | 'onChange'
-  | 'placeholder'
-  | 'showInlineError'
-  | 'value'
->;
+export type GuaranteedProps<Value> = {
+  changed: boolean;
+  disabled: boolean;
+  error?: any;
+  errorMessage?: string;
+  field: any;
+  fieldType: any;
+  fields: string[];
+  id: string;
+  label: string;
+  name: string;
+  onChange: (value?: Value, name?: string) => void;
+  placeholder: string;
+  showInlineError: boolean;
+  value?: Value;
+};
 
 export type ModelTransformMode = 'form' | 'submit' | 'validate';
 

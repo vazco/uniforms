@@ -16,7 +16,7 @@ export interface BaseFormProps<Model> {
   autosave: boolean;
   autosaveDelay: number;
   disabled?: boolean;
-  error?: unknown;
+  error?: any;
   id?: string;
   label: boolean;
   model: DeepPartial<Model>;
@@ -25,12 +25,12 @@ export interface BaseFormProps<Model> {
     model: DeepPartial<Model>,
   ) => DeepPartial<Model>;
   noValidate: boolean;
-  onChange?: (key: string, value: unknown) => void;
-  onSubmit?: (model: DeepPartial<Model>) => unknown;
-  onSubmitSuccess?: (result: unknown) => void;
-  onSubmitFailure?: (result: unknown) => void;
+  onChange?: (key: string, value: any) => void;
+  onSubmit?: (model: DeepPartial<Model>) => any;
+  onSubmitSuccess?: (result: any) => void;
+  onSubmitFailure?: (result: any) => void;
   placeholder?: boolean;
-  schema: unknown;
+  schema: any;
   showInlineError?: boolean;
 }
 
@@ -43,7 +43,7 @@ export interface BaseFormState<Model> {
 }
 
 export default class BaseForm<
-  Model extends object = Record<string, unknown>
+  Model extends object = Record<string, any>
 > extends Component<BaseFormProps<Model>, BaseFormState<Model>> {
   static displayName = 'Form';
   static defaultProps = {
@@ -98,8 +98,8 @@ export default class BaseForm<
   delayId?: any;
   mounted: boolean;
   reset: () => void;
-  change: (key: string, value: unknown) => void;
-  submit: (event?: SyntheticEvent) => Promise<unknown>;
+  change: (key: string, value: any) => void;
+  submit: (event?: SyntheticEvent) => Promise<any>;
   randomId: () => string;
 
   getContext(): Context {
@@ -163,7 +163,7 @@ export default class BaseForm<
     return changedKeys(root, valueA, valueB);
   }
 
-  getNativeFormProps(): Record<string, unknown> {
+  getNativeFormProps(): Record<string, any> {
     const props = omit(this.props, [
       'autosave',
       'autosaveDelay',
@@ -188,7 +188,7 @@ export default class BaseForm<
     };
   }
 
-  onChange(key: string, value: unknown) {
+  onChange(key: string, value: any) {
     // Do not set `changed` before componentDidMount
     if (this.mounted) {
       const keys = this.getChangedKeys(key, value, get(this.getModel(), key));
@@ -246,7 +246,7 @@ export default class BaseForm<
       this.props.onSubmit && this.props.onSubmit(this.getModel('submit'));
 
     // Set the `submitting` state only if onSubmit is async so we don't cause an unnecessary re-render
-    let submitting: Promise<unknown>;
+    let submitting: Promise<any>;
     if (isPromiseLike(result)) {
       this.setState({ submitting: true });
       submitting = result.finally(() => {
@@ -271,7 +271,7 @@ export default class BaseForm<
   }
 }
 
-function isPromiseLike(value: unknown): value is Promise<unknown> {
+function isPromiseLike(value: any): value is Promise<any> {
   // @ts-ignore
   return !!value && isFunction(value.then);
 }

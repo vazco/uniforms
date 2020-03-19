@@ -11,15 +11,15 @@ import { DeepPartial, Partialize, ValidateMode } from './types';
 type ValidatedFormProps<Model extends object> = BaseForm<Model>['props'] & {
   onValidate: (
     model: DeepPartial<Model>,
-    error: unknown,
-    callback: (error?: unknown) => void,
+    error: any,
+    callback: (error?: any) => void,
   ) => void;
   validate: ValidateMode;
-  validator: unknown;
+  validator: any;
 };
 
 type ValidatedFormState<Model extends object> = BaseForm<Model>['state'] & {
-  error: unknown;
+  error: any;
   validate: boolean;
   validating: boolean;
   validator: (model: DeepPartial<Model>) => void | never;
@@ -87,7 +87,7 @@ function Validated<Model extends object>(parent: typeof BaseForm) {
       };
     }
 
-    getNativeFormProps(): Record<string, unknown> {
+    getNativeFormProps(): Record<string, any> {
       return omit(super.getNativeFormProps(), [
         'onValidate',
         'validate',
@@ -116,7 +116,7 @@ function Validated<Model extends object>(parent: typeof BaseForm) {
       }
     }
 
-    onChange(key: string, value: unknown) {
+    onChange(key: string, value: any) {
       if (shouldRevalidate(this.props.validate, this.state.validate)) {
         this.onValidate(key, value).catch(noop);
       }
