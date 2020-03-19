@@ -5,7 +5,7 @@ import createSchema from './_createSchema';
 const randomId = randomIds();
 
 export default function createContext(
-  schema: any,
+  schema?: {},
   context?: Partial<Context>,
 ): { context: Context } {
   return {
@@ -29,6 +29,6 @@ export default function createContext(
         showInlineError: false,
         ...context?.state,
       },
-    }
+    },
   };
 }
