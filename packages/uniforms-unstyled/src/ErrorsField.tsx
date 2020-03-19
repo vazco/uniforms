@@ -1,12 +1,13 @@
-import React from 'react';
-import { filterDOMProps, useField } from 'uniforms';
+import React, { HTMLProps } from 'react';
+import { filterDOMProps, useForm } from 'uniforms';
 
-function ErrorsField({ children, name, ...props }: any) {
-  const { error, schema } = useField(name, props)[1];
+type ErrorsFieldProps = HTMLProps<HTMLDivElement>;
 
-  return !error && !children ? null : (
+export default function ErrorsField(props: ErrorsFieldProps) {
+  const { error, schema } = useForm();
+  return !error && !props.children ? null : (
     <div {...filterDOMProps(props)}>
-      {children}
+      {props.children}
 
       <ul>
         {schema.getErrorMessages(error).map((message, index) => (
@@ -16,5 +17,3 @@ function ErrorsField({ children, name, ...props }: any) {
     </div>
   );
 }
-
-export default ErrorsField;
