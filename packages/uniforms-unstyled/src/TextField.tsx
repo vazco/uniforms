@@ -1,5 +1,17 @@
-import React from 'react';
+import React, { HTMLProps, Ref } from 'react';
 import { connectField, filterDOMProps } from 'uniforms';
+
+type TextFieldProps = {
+  disabled: boolean;
+  id: string;
+  inputRef?: Ref<HTMLInputElement>;
+  label: string;
+  name: string;
+  onChange: (value?: string) => void;
+  placeholder: string;
+  type?: string;
+  value?: string;
+} & HTMLProps<HTMLDivElement>;
 
 const Text = ({
   disabled,
@@ -12,7 +24,7 @@ const Text = ({
   type,
   value,
   ...props
-}) => (
+}: TextFieldProps) => (
   <div {...filterDOMProps(props)}>
     {label && <label htmlFor={id}>{label}</label>}
 
@@ -24,11 +36,11 @@ const Text = ({
       placeholder={placeholder}
       ref={inputRef}
       type={type}
-      value={value}
+      value={value ?? ''}
     />
   </div>
 );
 
 Text.defaultProps = { type: 'text' };
 
-export default connectField(Text);
+export default connectField<TextFieldProps>(Text);
