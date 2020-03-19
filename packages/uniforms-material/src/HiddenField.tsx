@@ -5,7 +5,7 @@ type HiddenFieldProps = {
   inputRef?: Ref<HTMLInputElement>;
   name: string;
   noDOM?: boolean;
-  value?: unknown;
+  value?: any;
 };
 
 export default function HiddenField(originalProps: HiddenFieldProps) {
@@ -25,7 +25,7 @@ export default function HiddenField(originalProps: HiddenFieldProps) {
       name={props.name}
       ref={props.inputRef}
       type="hidden"
-      value={props.value as string}
+      value={props.value}
       {...filterDOMProps(props)}
     />
   );
