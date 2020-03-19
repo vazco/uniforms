@@ -5,14 +5,14 @@ import createContext from './_createContext';
 import mount from './_mount';
 
 test('<AutoFields> - works', () => {
-  const element = <AutoFields name="x" />;
+  const element = <AutoFields />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find('AutoFields')).toHaveLength(1);
 });
 
 test('<AutoFields> - render all fields by default', () => {
-  const element = <AutoFields name="x" />;
+  const element = <AutoFields />;
   const wrapper = mount(
     element,
     createContext({
