@@ -3,11 +3,11 @@ import { SyntheticEvent } from 'react';
 import Bridge from './Bridge';
 import useField from './useField';
 
-export type ChangedMap<T> = T extends object
+export type ChangedMap<T> = T extends {}
   ? { [P in keyof T]?: ChangedMap<T[P]> }
   : Record<string, void>;
 
-export interface Context<Model extends object = Record<string, any>> {
+export interface Context<Model extends {} = Record<string, any>> {
   changed: boolean;
   changedMap: ChangedMap<Model>;
   error: any;

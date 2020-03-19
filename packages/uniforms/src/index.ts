@@ -14,3 +14,4 @@ export { default as injectName } from './injectName';
 export { default as joinName } from './joinName';
 export { default as randomIds } from './randomIds';
 export { default as useField } from './useField';
+export { default as useForm } from './useForm';

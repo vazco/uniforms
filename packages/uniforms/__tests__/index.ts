@@ -17,5 +17,6 @@ it('exports everything', () => {
     joinName: expect.any(Function),
     randomIds: expect.any(Function),
     useField: expect.any(Function),
+    useForm: expect.any(Function),
   });
 });

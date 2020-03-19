@@ -1,11 +1,10 @@
 import get from 'lodash/get';
-import invariant from 'invariant';
 import mapValues from 'lodash/mapValues';
-import { useCallback, useContext, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 
-import contextReference from './context';
 import joinName from './joinName';
-import { Context, GuaranteedProps } from './types';
+import useForm from './useForm';
+import { GuaranteedProps } from './types';
 
 function propagate(
   prop: unknown,
@@ -28,13 +27,9 @@ function propagate(
 export default function useField<
   Props extends Record<string, any>,
   Value = Props['value'],
->(
-  fieldName: string,
-  props: Props,
-  options?: { initialValue?: boolean },
-) {
-  const context = useContext(contextReference) as Context;
-  invariant(context !== null, 'useField must be used within a form.');
+  Model = Record<string, any>
+>(fieldName: string, props: Props, options?: { initialValue?: boolean }) {
+  const context = useForm<Model>();
 
   const name = joinName(context.name, fieldName);
   const state = mapValues(context.state, (prev, key) => {
