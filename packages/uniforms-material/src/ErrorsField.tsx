@@ -1,16 +1,26 @@
 import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
+import FormHelperText, {
+  FormHelperTextProps,
+} from '@material-ui/core/FormHelperText';
 import React from 'react';
 import { filterDOMProps, useField } from 'uniforms';
+
+type ErrorsFieldProps = {
+  fullWidth?: boolean;
+  margin?: 'none' | 'dense' | 'normal';
+  variant?: 'standard' | 'outlined' | 'filled';
+  name: string;
+} & FormHelperTextProps;
 
 const ErrorsField = ({
   children,
   fullWidth,
   margin,
   variant,
+  name,
   ...props
-}: any) => {
-  const { error, schema } = useField(props.name, props)[1];
+}: ErrorsFieldProps) => {
+  const { error, schema } = useField(name, props)[1];
 
   return !error && !children ? null : (
     <FormControl
