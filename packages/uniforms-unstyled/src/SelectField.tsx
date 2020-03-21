@@ -64,7 +64,7 @@ const renderSelect = ({
       onChange(event.target.value !== '' ? event.target.value : undefined)
     }
     ref={inputRef}
-    value={value}
+    value={value ?? ''}
   >
     {(!!placeholder || !required || value === '') && (
       <option value="" disabled={required} hidden={required}>
