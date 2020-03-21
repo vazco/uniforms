@@ -9,7 +9,7 @@ type BoolFieldProps = {
   name: string;
   onChange: (value?: boolean) => void;
   value?: boolean;
-} & HTMLProps<HTMLDivElement>;
+} & Omit<HTMLProps<HTMLDivElement>, 'value'>;
 
 const Bool = ({
   disabled,
@@ -23,7 +23,7 @@ const Bool = ({
 }: BoolFieldProps) => (
   <div {...filterDOMProps(props)}>
     <input
-      checked={value ?? ''}
+      checked={value || false}
       disabled={disabled}
       id={id}
       name={name}
