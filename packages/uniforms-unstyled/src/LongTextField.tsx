@@ -1,5 +1,17 @@
-import React from 'react';
+import React, { HTMLProps, Ref } from 'react';
 import { connectField, filterDOMProps } from 'uniforms';
+
+type LongTextFieldProps = {
+  disabled: boolean;
+  id: string;
+  inputRef?: Ref<HTMLTextAreaElement>;
+  label: string;
+  name: string;
+  onChange: (value?: string) => void;
+  placeholder: string;
+  type?: string;
+  value?: string;
+} & HTMLProps<HTMLDivElement>;
 
 const LongText = ({
   disabled,
@@ -11,7 +23,7 @@ const LongText = ({
   placeholder,
   value,
   ...props
-}) => (
+}: LongTextFieldProps) => (
   <div {...filterDOMProps(props)}>
     {label && <label htmlFor={id}>{label}</label>}
 
@@ -22,7 +34,7 @@ const LongText = ({
       onChange={event => onChange(event.target.value)}
       placeholder={placeholder}
       ref={inputRef}
-      value={value}
+      value={value ?? ''}
     />
   </div>
 );
