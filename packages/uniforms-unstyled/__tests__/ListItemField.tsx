@@ -36,7 +36,7 @@ test('<ListItemField> - renders AutoField', () => {
 });
 
 test('<ListItemField> - renders children if specified', () => {
-  const Child = jest.fn(() => null);
+  const Child: () => null = jest.fn(() => null);
 
   const element = (
     <ListItemField name="x.1">

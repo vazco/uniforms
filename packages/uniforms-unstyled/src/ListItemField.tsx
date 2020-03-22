@@ -1,24 +1,30 @@
-import React, { Children } from 'react';
-import { connectField, joinName } from 'uniforms';
+import React, { Children, ReactNode, cloneElement } from 'react';
+import { joinName } from 'uniforms';
 
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
 
-const ListItem = props => (
-  <div>
-    <ListDelField name={props.name} />
+type ListItemProps = {
+  children?: ReactNode;
+  label: null | string;
+  name: string;
+};
 
-    {props.children ? (
-      Children.map(props.children, child =>
-        React.cloneElement(child, {
-          name: joinName(props.name, child.props.name),
-          label: null,
-        }),
-      )
-    ) : (
-      <AutoField {...props} />
-    )}
-  </div>
-);
+export default function ListItem(props: ListItemProps) {
+  return (
+    <div>
+      <ListDelField name={props.name} />
 
-export default connectField(ListItem, { includeInChain: false });
+      {props.children ? (
+        Children.map(props.children as JSX.Element, child =>
+          cloneElement(child, {
+            name: joinName(props.name, child.props.name),
+            label: null,
+          }),
+        )
+      ) : (
+        <AutoField {...props} />
+      )}
+    </div>
+  );
+}
