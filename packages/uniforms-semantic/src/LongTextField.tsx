@@ -1,6 +1,22 @@
-import React from 'react';
+import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
 import { connectField, filterDOMProps } from 'uniforms';
+
+type LongTextFieldProps = {
+  className?: string;
+  disabled: boolean;
+  error: unknown;
+  errorMessage: string;
+  id: string;
+  inputRef?: Ref<HTMLTextAreaElement>;
+  label: string;
+  name: string;
+  onChange: (value?: string) => void;
+  placeholder: string;
+  required?: boolean;
+  showInlineError: boolean;
+  value?: string;
+} & HTMLProps<HTMLDivElement>;
 
 const LongText = ({
   className,
@@ -17,7 +33,7 @@ const LongText = ({
   showInlineError,
   value,
   ...props
-}) => (
+}: LongTextFieldProps) => (
   <div
     className={classnames(className, { disabled, error, required }, 'field')}
     {...filterDOMProps(props)}
@@ -31,7 +47,7 @@ const LongText = ({
       onChange={event => onChange(event.target.value)}
       placeholder={placeholder}
       ref={inputRef}
-      value={value}
+      value={value ?? ''}
     />
 
     {!!(error && showInlineError) && (
@@ -40,4 +56,4 @@ const LongText = ({
   </div>
 );
 
-export default connectField(LongText);
+export default connectField<LongTextFieldProps>(LongText);
