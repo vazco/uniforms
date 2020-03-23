@@ -110,7 +110,7 @@ test('<BoolField> - renders a switch input with correct value (default)', () => 
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
   expect(wrapper.find(Switch)).toHaveLength(1);
-  expect(wrapper.find(Switch).prop('checked')).toBe(undefined);
+  expect(wrapper.find(Switch).prop('checked')).toBe(false);
 });
 
 test('<BoolField> - renders a checkbox input with correct value (default)', () => {
@@ -118,7 +118,7 @@ test('<BoolField> - renders a checkbox input with correct value (default)', () =
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
   expect(wrapper.find(Checkbox)).toHaveLength(1);
-  expect(wrapper.find(Checkbox).prop('checked')).toBe(undefined);
+  expect(wrapper.find(Checkbox).prop('checked')).toBe(false);
 });
 
 test('<BoolField> - renders a switch input with correct value (model)', () => {
