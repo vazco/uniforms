@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
-import { filterDOMProps, useField } from 'uniforms';
+import { filterDOMProps, useForm } from 'uniforms';
 
-const SubmitField = ({
+type SubmitFieldProps = {
+  className?: string;
+  disabled?: boolean;
+  inputRef?: Ref<HTMLInputElement>;
+  value?: string;
+} & HTMLProps<HTMLInputElement>;
+
+export default function SubmitField({
   className,
   disabled,
   inputRef,
   value,
   ...props
-}: any) => {
-  const { error, state } = useField(props.name, props)[1];
+}: SubmitFieldProps) {
+  const { error, state } = useForm();
 
   return (
     <input
@@ -21,6 +28,4 @@ const SubmitField = ({
       {...filterDOMProps(props)}
     />
   );
-};
-
-export default SubmitField;
+}
