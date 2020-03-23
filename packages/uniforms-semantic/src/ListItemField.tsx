@@ -3,16 +3,21 @@ import { connectField, joinName } from 'uniforms';
 
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
+import { AutoFieldProps } from './Types';
 
-const ListItem = props => (
+type ListItemProps = {
+  name: string;
+} & AutoFieldProps;
+
+const ListItem = ({ children, name, ...props }: ListItemProps) => (
   <div className="item">
-    <ListDelField className="top aligned" name={props.name} />
+    <ListDelField className="top aligned" name={name} />
 
     <div className="middle aligned content" style={{ width: '100%' }}>
-      {props.children ? (
-        Children.map(props.children, child =>
+      {children ? (
+        Children.map(children as JSX.Element, child =>
           React.cloneElement(child, {
-            name: joinName(props.name, child.props.name),
+            name: joinName(name, child.props.name),
             label: null,
             style: {
               margin: 0,
@@ -21,10 +26,10 @@ const ListItem = props => (
           }),
         )
       ) : (
-        <AutoField {...props} style={{ margin: 0 }} />
+        <AutoField name={name} {...props} style={{ margin: 0 }} />
       )}
     </div>
   </div>
 );
 
-export default connectField(ListItem, { includeInChain: false });
+export default connectField<ListItemProps>(ListItem, { includeInChain: false });
