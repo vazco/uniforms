@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
 import { connectField, filterDOMProps } from 'uniforms';
 
@@ -17,6 +17,37 @@ const xor = (item, array) => {
   return array.slice(0, index).concat(array.slice(index + 1));
 };
 
+type renderProps = {
+  allowedValues?: string[];
+  disabled: boolean;
+  fieldType?: unknown;
+  id: string;
+  name: string;
+  onChange: (value?: string | string[]) => void;
+  transform?: (value?: string) => string;
+  value?: string | string[];
+} & HTMLProps<HTMLDivElement>;
+
+type renderCheckboxesProps = renderProps;
+
+type renderSelectProps = {
+  inputRef?: Ref<HTMLSelectElement>;
+  label: string;
+  placeholder: string;
+  required?: boolean;
+} & renderProps;
+
+type SelectFieldProps = {
+  checkboxes?: boolean;
+  error: unknown;
+  errorMessage: string;
+  inputRef?: Ref<HTMLSelectElement>;
+  label: string;
+  placeholder: string;
+  required?: boolean;
+  showInlineError: boolean;
+} & (renderCheckboxesProps | renderSelectProps);
+
 const renderCheckboxes = ({
   allowedValues,
   disabled,
@@ -26,12 +57,12 @@ const renderCheckboxes = ({
   onChange,
   transform,
   value,
-}) =>
-  allowedValues.map(item => (
+}: renderCheckboxesProps) =>
+  allowedValues?.map(item => (
     <div className="field" key={item}>
       <div className="ui checkbox">
         <input
-          checked={fieldType === Array ? value.includes(item) : value === item}
+          checked={fieldType === Array ? value?.includes(item) : value === item}
           disabled={disabled}
           id={`${id}-${escape(item)}`}
           name={name}
@@ -60,7 +91,7 @@ const renderSelect = ({
   required,
   transform,
   value,
-}) => (
+}: renderSelectProps) => (
   <select
     className="ui selection dropdown"
     disabled={disabled}
@@ -78,7 +109,7 @@ const renderSelect = ({
       </option>
     )}
 
-    {allowedValues.map(value => (
+    {allowedValues?.map(value => (
       <option key={value} value={value}>
         {transform ? transform(value) : value}
       </option>
@@ -105,7 +136,7 @@ const Select = ({
   transform,
   value,
   ...props
-}) => (
+}: SelectFieldProps) => (
   <div
     className={classnames({ disabled, error, required }, className, 'field')}
     {...filterDOMProps(props)}
