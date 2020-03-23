@@ -32,7 +32,7 @@ const Bool = ({
   >
     <div className="ui checkbox">
       <input
-        checked={value}
+        checked={value || false}
         className="hidden"
         disabled={disabled}
         id={id}

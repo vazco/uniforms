@@ -25,7 +25,7 @@ const Bool = ({
   wrapField(
     props,
     React.createElement(checkbox ? (Checkbox as any) : Switch, {
-      checked: value,
+      checked: value || false,
       disabled,
       id: props.id,
       name,

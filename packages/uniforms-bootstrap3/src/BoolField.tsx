@@ -35,7 +35,7 @@ const Bool = ({
     >
       <label htmlFor={props.id}>
         <input
-          checked={value}
+          checked={value || false}
           disabled={disabled}
           id={props.id}
           name={name}
