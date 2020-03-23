@@ -1,6 +1,27 @@
-import React from 'react';
+import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
 import { connectField, filterDOMProps } from 'uniforms';
+
+type TextFieldProps = {
+  className?: string;
+  disabled: boolean;
+  error: unknown;
+  errorMessage: string;
+  icon?: string;
+  iconLeft?: string;
+  iconProps?: object;
+  id: string;
+  inputRef?: Ref<HTMLInputElement>;
+  label: string;
+  name: string;
+  onChange: (value?: string) => void;
+  placeholder: string;
+  required?: boolean;
+  showInlineError: boolean;
+  type?: string;
+  value?: string;
+  wrapClassName?: string;
+} & HTMLProps<HTMLDivElement>;
 
 const Text = ({
   className,
@@ -22,7 +43,7 @@ const Text = ({
   value,
   wrapClassName,
   ...props
-}) => (
+}: TextFieldProps) => (
   <div
     className={classnames(className, { disabled, error, required }, 'field')}
     {...filterDOMProps(props)}
@@ -45,7 +66,7 @@ const Text = ({
         placeholder={placeholder}
         ref={inputRef}
         type={type}
-        value={value}
+        value={value ?? ''}
       />
 
       {(icon || iconLeft) && (
@@ -61,4 +82,4 @@ const Text = ({
 
 Text.defaultProps = { type: 'text' };
 
-export default connectField(Text);
+export default connectField<TextFieldProps>(Text);
