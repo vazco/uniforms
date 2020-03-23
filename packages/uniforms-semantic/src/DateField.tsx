@@ -1,17 +1,31 @@
-import React from 'react';
+import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
 import { connectField, filterDOMProps } from 'uniforms';
 
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
-const dateFormat = value => value && value.toISOString().slice(0, -8);
-const dateParse = (timestamp, onChange) => {
-  const date = new DateConstructor(timestamp);
-  if (date.getFullYear() < 10000) {
-    onChange(date);
-  } else if (isNaN(timestamp)) {
-    onChange(undefined);
-  }
-};
+const dateFormat = (value?: Date) => value?.toISOString().slice(0, -8);
+
+type DateFieldProps = {
+  className: string;
+  disabled: boolean;
+  error: unknown;
+  errorMessage: string;
+  icon?: string;
+  iconLeft?: string;
+  iconProps?: object;
+  id: string;
+  inputRef?: Ref<HTMLInputElement>;
+  label: string;
+  max?: Date;
+  min?: Date;
+  name: string;
+  onChange: (value?: Date) => void;
+  placeholder: string;
+  required?: boolean;
+  showInlineError: boolean;
+  value?: Date;
+  wrapClassName?: string;
+} & HTMLProps<HTMLDivElement>;
 
 const Date = ({
   className,
@@ -34,7 +48,7 @@ const Date = ({
   value,
   wrapClassName,
   ...props
-}) => (
+}: DateFieldProps) => (
   <div
     className={classnames(className, { disabled, error, required }, 'field')}
     {...filterDOMProps(props)}
@@ -55,11 +69,18 @@ const Date = ({
         max={dateFormat(max)}
         min={dateFormat(min)}
         name={name}
-        onChange={event => dateParse(event.target.valueAsNumber, onChange)}
+        onChange={event => {
+          const date = new DateConstructor(event.target.valueAsNumber);
+          if (date.getFullYear() < 10000) {
+            onChange(date);
+          } else if (isNaN(event.target.valueAsNumber)) {
+            onChange(undefined);
+          }
+        }}
         placeholder={placeholder}
         ref={inputRef}
         type="datetime-local"
-        value={dateFormat(value)}
+        value={dateFormat(value) ?? ''}
       />
 
       {(icon || iconLeft) && (
