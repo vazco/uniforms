@@ -1,21 +1,36 @@
 import Checkbox from 'antd/lib/checkbox';
 import Icon from 'antd/lib/icon';
-import React from 'react';
+import React, { HTMLProps, Ref } from 'react';
 import Switch from 'antd/lib/switch';
 import { connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
-const Bool = ({ checkbox, ...props }: any) =>
+type BoolFieldProps = {
+  value?: boolean;
+  inputRef?: Ref<HTMLInputElement>;
+  onChange: (value?: boolean) => void;
+  checkbox?: boolean;
+} & Omit<HTMLProps<HTMLDivElement>, 'value'>;
+
+const Bool = ({
+  checkbox,
+  value,
+  disabled,
+  name,
+  onChange,
+  inputRef,
+  ...props
+}: BoolFieldProps) =>
   wrapField(
     props,
     React.createElement(checkbox ? (Checkbox as any) : Switch, {
-      checked: props.value,
-      disabled: props.disabled,
+      checked: value,
+      disabled,
       id: props.id,
-      name: props.name,
-      onChange: () => props.onChange(!props.value),
-      ref: props.inputRef,
+      name,
+      onChange: () => onChange(!value),
+      ref: inputRef,
       ...filterDOMProps(props),
     }),
   );
