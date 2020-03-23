@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
-import { filterDOMProps, useField } from 'uniforms';
+import { filterDOMProps, useForm } from 'uniforms';
 
 import gridClassName from './gridClassName';
+
+type SubmitFieldProps = {
+  inputClassName?: string;
+  inputRef?: Ref<HTMLInputElement>;
+  wrapClassName?: string;
+} & HTMLProps<HTMLInputElement>;
 
 const SubmitField = ({
   className,
@@ -13,8 +19,8 @@ const SubmitField = ({
   name,
   wrapClassName,
   ...props
-}: any) => {
-  const { error, state: anyState } = useField(name, props)[1];
+}: SubmitFieldProps) => {
+  const { error, state: anyState } = useForm();
   const state = (anyState as unknown) as { disabled: boolean; grid: any };
   const hasWrap = !!(state.grid || wrapClassName);
 
