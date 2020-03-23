@@ -29,26 +29,34 @@ const renderCheckboxes = props =>
     },
   );
 
-const renderSelect = props => (
-  <SelectAntD
-    allowClear={!props.required}
-    disabled={props.disabled}
-    id={props.id}
-    mode={props.fieldType === Array ? 'multiple' : undefined}
-    name={props.name}
-    onChange={value => props.onChange(value)}
-    placeholder={props.placeholder}
-    ref={props.inputRef}
-    value={props.value || (props.fieldType === Array ? [] : undefined)}
-    {...filterDOMProps(props)}
-  >
-    {props.allowedValues.map(value => (
-      <SelectAntD.Option key={value} value={value}>
-        {props.transform ? props.transform(value) : value}
-      </SelectAntD.Option>
-    ))}
-  </SelectAntD>
-);
+const renderSelect = props => {
+  const value =
+    props.fieldType === Array
+      ? props.value instanceof Array
+        ? props.value.filter(value => value !== undefined)
+        : []
+      : props.value;
+  return (
+    <SelectAntD
+      allowClear={!props.required}
+      disabled={props.disabled}
+      id={props.id}
+      mode={props.fieldType === Array ? 'multiple' : undefined}
+      name={props.name}
+      onChange={value => props.onChange(value)}
+      placeholder={props.placeholder}
+      ref={props.inputRef}
+      value={value}
+      {...filterDOMProps(props)}
+    >
+      {props.allowedValues.map(value => (
+        <SelectAntD.Option key={value} value={value}>
+          {props.transform ? props.transform(value) : value}
+        </SelectAntD.Option>
+      ))}
+    </SelectAntD>
+  );
+};
 
 const Select = ({ checkboxes, ...props }: any) =>
   wrapField(props, checkboxes ? renderCheckboxes(props) : renderSelect(props));
