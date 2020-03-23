@@ -3,22 +3,20 @@ import { connectField, joinName } from 'uniforms';
 
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
+import { AutoFieldProps } from './Types';
 
-const ListItem = ({
-  name,
-  removeIcon,
-  ...props
-}: {
+type ListItemProps = {
   name: string;
-  [key: string]: any;
-}) => (
+} & AutoFieldProps;
+
+const ListItem = ({ name, children, removeIcon, ...props }: ListItemProps) => (
   <div className="row">
     <div className="col-1">
       <ListDelField name={name} removeIcon={removeIcon} />
     </div>
 
     {props.children ? (
-      Children.map(props.children, child =>
+      Children.map(children as JSX.Element, child =>
         React.cloneElement(child, {
           className: 'col-11',
           name: joinName(props.name, child.props.name),
