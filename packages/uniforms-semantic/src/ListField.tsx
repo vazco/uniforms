@@ -1,11 +1,22 @@
-import React, { Children } from 'react';
+import React, { Children, HTMLProps, ReactNode } from 'react';
 import classnames from 'classnames';
 import { connectField, filterDOMProps, joinName } from 'uniforms';
 
 import ListItemField from './ListItemField';
 import ListAddField from './ListAddField';
 
-const List = ({
+type ListFieldProps<T> = {
+  children?: ReactNode;
+  name: string;
+  error?: boolean;
+  errorMessage?: string;
+  initialCount?: number;
+  value: T[];
+  itemProps?: {};
+  showInlineError?: boolean;
+} & Omit<HTMLProps<HTMLUListElement>, 'children' | 'name'>;
+
+function List<T>({
   children,
   className,
   disabled,
@@ -19,14 +30,14 @@ const List = ({
   showInlineError,
   value,
   ...props
-}) => {
+}: ListFieldProps<T>) {
   const listAddFieldProps = {
     name: `${name}.$`,
     initialCount,
     className: 'right floated',
   };
   return (
-    <div
+    <ul
       className={classnames(
         'ui',
         className,
@@ -53,7 +64,7 @@ const List = ({
 
       {children
         ? value.map((item, index) =>
-            Children.map(children, child =>
+            Children.map(children as JSX.Element, child =>
               React.cloneElement(child, {
                 key: index,
                 label: null,
@@ -67,13 +78,15 @@ const List = ({
         : value.map((item, index) => (
             <ListItemField
               key={index}
-              label={null}
+              label={undefined}
               name={joinName(name, index)}
               {...itemProps}
             />
           ))}
-    </div>
+    </ul>
   );
-};
+}
 
-export default connectField(List, { includeInChain: false });
+export default connectField<ListFieldProps<any>>(List, {
+  includeInChain: false,
+});
