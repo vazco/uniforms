@@ -1,6 +1,29 @@
-import React, { Component } from 'react';
+import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
 import { connectField, filterDOMProps } from 'uniforms';
+
+type NumFieldProps = {
+  className?: string;
+  decimal?: boolean;
+  disabled: boolean;
+  error: unknown;
+  errorMessage: string;
+  icon?: string;
+  iconLeft?: string;
+  iconProps?: object;
+  id: string;
+  inputRef?: Ref<HTMLInputElement>;
+  label: string;
+  max?: number;
+  min?: number;
+  name: string;
+  onChange: (value?: number) => void;
+  placeholder: string;
+  showInlineError: boolean;
+  step?: number;
+  value?: number;
+  wrapClassName?: string;
+} & HTMLProps<HTMLDivElement>;
 
 const Num = ({
   className,
@@ -25,7 +48,7 @@ const Num = ({
   value,
   wrapClassName,
   ...props
-}) => (
+}: NumFieldProps) => (
   <div
     className={classnames(className, { disabled, error, required }, 'field')}
     {...filterDOMProps(props)}
@@ -55,7 +78,7 @@ const Num = ({
         ref={inputRef}
         step={step || (decimal ? 0.01 : 1)}
         type="number"
-        value={value}
+        value={value ?? ''}
       />
 
       {(icon || iconLeft) && (
