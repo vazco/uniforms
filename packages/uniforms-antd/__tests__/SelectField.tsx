@@ -177,6 +177,21 @@ test('<SelectField> - renders a select which correctly reacts on change (array)'
   expect(onChange).toHaveBeenLastCalledWith('x', ['b']);
 });
 
+test('<SelectField> - renders a select (undefined values)', () => {
+  const element = <SelectField name="x" value={[undefined, 'a', undefined]} />;
+  const wrapper = mount(
+    element,
+    createContext({
+      x: { type: Array },
+      'x.$': { type: String, allowedValues: ['a', 'b'] },
+    }),
+  );
+
+  expect(wrapper.find(Select)).toHaveLength(1);
+  expect(wrapper.find(Select).prop('value')).not.toContain(undefined);
+  expect(wrapper.find(Select).prop('value')).toContain('a');
+});
+
 test('<SelectField> - renders a select which correctly reacts on change (empty)', () => {
   const onChange = jest.fn();
 
