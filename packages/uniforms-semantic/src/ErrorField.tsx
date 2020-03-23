@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
 import { connectField, filterDOMProps } from 'uniforms';
 
-const Error = ({ children, className, error, errorMessage, ...props }) =>
+type ErrorFieldProps = { error?: boolean; errorMessage?: string } & HTMLProps<
+  HTMLDivElement
+>;
+
+const Error = ({
+  children,
+  className,
+  error,
+  errorMessage,
+  ...props
+}: ErrorFieldProps) =>
   !error ? null : (
     <div
       className={classnames('ui', className, 'error message')}
