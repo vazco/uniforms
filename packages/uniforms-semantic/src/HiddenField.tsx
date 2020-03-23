@@ -1,4 +1,4 @@
-import React, { Ref, useEffect } from 'react';
+import React, { HTMLProps, Ref, useEffect } from 'react';
 import { filterDOMProps, useField } from 'uniforms';
 
 type HiddenFieldProps = {
@@ -6,16 +6,13 @@ type HiddenFieldProps = {
   name: string;
   noDOM?: boolean;
   value?: any;
-};
+} & HTMLProps<HTMLInputElement>;
 
-export default function HiddenField(originalProps: HiddenFieldProps) {
-  const props = useField(originalProps.name, originalProps)[0];
+export default function HiddenField({ value, ...rawProps }: HiddenFieldProps) {
+  const props = useField(rawProps.name, rawProps, { initialValue: false })[0];
 
   useEffect(() => {
-    const { value } = props;
-    if (value !== undefined && originalProps.value !== value) {
-      props.onChange(originalProps.value);
-    }
+    if (value !== undefined && value !== props.value) props.onChange(value);
   });
 
   return props.noDOM ? null : (
@@ -25,7 +22,7 @@ export default function HiddenField(originalProps: HiddenFieldProps) {
       name={props.name}
       ref={props.inputRef}
       type="hidden"
-      value={props.value}
+      value={value ?? props.value ?? ''}
       {...filterDOMProps(props)}
     />
   );

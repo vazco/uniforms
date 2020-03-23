@@ -1,5 +1,20 @@
-import React from 'react';
+import React, { HTMLProps, Ref } from 'react';
 import { connectField, filterDOMProps } from 'uniforms';
+
+type NumFieldProps = {
+  decimal?: boolean;
+  disabled: boolean;
+  id: string;
+  inputRef?: Ref<HTMLInputElement>;
+  label: string;
+  max?: number;
+  min?: number;
+  name: string;
+  onChange: (value?: number) => void;
+  placeholder: string;
+  step?: number;
+  value?: number;
+} & HTMLProps<HTMLDivElement>;
 
 const Num = ({
   decimal,
@@ -15,7 +30,7 @@ const Num = ({
   step,
   value,
   ...props
-}) => (
+}: NumFieldProps) => (
   <div {...filterDOMProps(props)}>
     {label && <label htmlFor={id}>{label}</label>}
 
@@ -34,7 +49,7 @@ const Num = ({
       ref={inputRef}
       step={step || (decimal ? 0.01 : 1)}
       type="number"
-      value={value}
+      value={value ?? ''}
     />
   </div>
 );

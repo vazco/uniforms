@@ -1,13 +1,12 @@
-import { mount as enzyme } from 'enzyme';
 import { context } from 'uniforms';
+import { mount as enzyme } from 'enzyme';
 
-export default function mount(
-  children,
-  value: { context: any } = { context: undefined },
-) {
-  if (value === undefined) return enzyme(children);
-  return enzyme(children, {
+function mount(node, options) {
+  if (options === undefined) return enzyme(node);
+  return enzyme(node, {
     wrappingComponent: context.Provider,
-    wrappingComponentProps: { value: value.context },
+    wrappingComponentProps: { value: options.context },
   });
 }
+
+export default mount as typeof enzyme;
