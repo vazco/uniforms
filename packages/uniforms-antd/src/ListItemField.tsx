@@ -3,8 +3,13 @@ import { connectField, joinName } from 'uniforms';
 
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
+import { AutoFieldProps } from './Types';
 
-const ListItem = props => (
+type ListItemProps = {
+  name: string;
+} & AutoFieldProps;
+
+const ListItem = ({ children, name, ...props }: ListItemProps) => (
   <div>
     <div
       style={{
@@ -15,7 +20,7 @@ const ListItem = props => (
         width: '20px',
       }}
     >
-      <ListDelField className="top aligned" name={props.name} />
+      <ListDelField className="top aligned" name={name} />
     </div>
 
     <div style={{ marginBottom: '4px', overflow: 'hidden' }}>
@@ -30,14 +35,14 @@ const ListItem = props => (
 
     <div style={{ width: '100%' }}>
       {props.children ? (
-        Children.map(props.children, child =>
+        Children.map(children as JSX.Element, child =>
           React.cloneElement(child, {
             name: joinName(props.name, child.props.name),
             label: null,
           }),
         )
       ) : (
-        <AutoField {...props} />
+        <AutoField {...props} name={name} />
       )}
     </div>
   </div>
