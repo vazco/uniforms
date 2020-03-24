@@ -23,7 +23,7 @@ export default function wrapField(
     showInlineError, // Show inline error message?
     wrapClassName, // Input wrapper class name.
     ...props
-  },
+  }: Record<string, any>,
   children,
 ) {
   const hasWrap = !!(grid || wrapClassName);
