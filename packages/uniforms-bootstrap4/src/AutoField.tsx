@@ -1,5 +1,5 @@
 import invariant from 'invariant';
-import { ComponentType, createElement } from 'react';
+import { createElement } from 'react';
 import { useField } from 'uniforms';
 
 import BoolField from './BoolField';

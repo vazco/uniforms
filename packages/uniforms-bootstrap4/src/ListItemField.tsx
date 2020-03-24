@@ -7,6 +7,7 @@ import { AutoFieldProps } from './Types';
 
 type ListItemProps = {
   name: string;
+  removeIcon?: any;
 } & AutoFieldProps;
 
 const ListItem = ({ name, children, removeIcon, ...props }: ListItemProps) => (
@@ -15,7 +16,7 @@ const ListItem = ({ name, children, removeIcon, ...props }: ListItemProps) => (
       <ListDelField name={name} removeIcon={removeIcon} />
     </div>
 
-    {props.children ? (
+    {children ? (
       Children.map(children as JSX.Element, child =>
         React.cloneElement(child, {
           className: 'col-11',

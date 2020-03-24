@@ -6,16 +6,16 @@ import ListItemField from './ListItemField';
 import ListAddField from './ListAddField';
 
 type ListFieldProps<T> = {
-  value: T[];
-  name: string;
-  children?: ReactNode;
   addIcon?: any;
+  children?: ReactNode;
   error?: boolean;
   errorMessage?: string;
   initialCount?: number;
   itemProps?: {};
+  name: string;
   removeIcon?: any;
   showInlineError?: boolean;
+  value: T[];
 } & Omit<HTMLProps<HTMLUListElement>, 'children' | 'name'>;
 
 function List<T>({
