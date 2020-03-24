@@ -1,6 +1,6 @@
 import Button from 'antd/lib/button';
 import React from 'react';
-import { useField } from 'uniforms';
+import { useForm } from 'uniforms';
 import { ButtonProps } from 'antd/lib/button/button';
 
 type SubmitFieldProps = {
@@ -14,7 +14,7 @@ function SubmitField({
   value,
   ...props
 }: SubmitFieldProps) {
-  const { error, state } = useField(name, props)[1];
+  const { error, state } = useForm();
 
   return (
     <Button

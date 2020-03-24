@@ -1,6 +1,6 @@
 import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
-import { filterDOMProps, useField } from 'uniforms';
+import { filterDOMProps, useForm } from 'uniforms';
 
 type SubmitFieldProps = {
   disabled?: boolean;
@@ -17,7 +17,7 @@ const SubmitField = ({
   name,
   ...props
 }: SubmitFieldProps) => {
-  const { error, state } = useField(name, props)[1];
+  const { error, state } = useForm();
 
   return (
     <input

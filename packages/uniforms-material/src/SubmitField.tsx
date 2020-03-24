@@ -1,6 +1,6 @@
 import Button from '@material-ui/core/Button';
 import React, { HTMLProps, Ref } from 'react';
-import { filterDOMProps, useField } from 'uniforms';
+import { filterDOMProps, useForm } from 'uniforms';
 import { OverrideProps } from '@material-ui/core/OverridableComponent';
 import { ExtendButtonBaseTypeMap } from '@material-ui/core/ButtonBase/ButtonBase';
 
@@ -23,7 +23,7 @@ const SubmitField = ({
   name,
   ...props
 }: SubmitFieldProps) => {
-  const { error, state } = useField(name, props)[1];
+  const { error, state } = useForm();
 
   return (
     <Button
