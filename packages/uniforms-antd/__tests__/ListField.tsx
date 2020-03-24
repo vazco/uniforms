@@ -48,7 +48,7 @@ test('<ListField> - renders correct label (specified)', () => {
 
   expect(
     wrapper
-      .find('div > div')
+      .find('ul > div')
       .at(0)
       .text(),
   ).toEqual(expect.stringContaining('ListFieldLabel'));
@@ -157,7 +157,7 @@ test('<ListField> - renders correct error text (specified)', () => {
 
   expect(
     wrapper
-      .find('div > div')
+      .find('ul > div')
       .at(0)
       .text(),
   ).toBe('Error');

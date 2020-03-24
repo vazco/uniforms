@@ -16,6 +16,7 @@ type ListFieldProps<T> = {
   initialCount?: number;
   itemProps?: {};
   labelCol?: any;
+  label: string;
   wrapperCol?: any;
   name: string;
   showInlineError?: boolean;
@@ -38,7 +39,7 @@ function List<T>({
 }: ListFieldProps<T>) {
   return (
     <ul {...filterDOMProps(props)}>
-      {!!label && (
+      {label && (
         <div>
           {label}
           {!!info && (
