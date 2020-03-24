@@ -1,39 +1,40 @@
-import React from 'react';
+import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
 import cloneDeep from 'lodash/cloneDeep';
-import { connectField, filterDOMProps } from 'uniforms';
+import { filterDOMProps, joinName, useField } from 'uniforms';
 
-const ListAdd = ({
-  className,
-  disabled,
-  parent,
-  value,
-  ...props
-}: {
+type ListAddProps<T> = {
   className?: string;
-  disabled?: boolean;
-  parent?: any;
-  value?: any;
   name: string;
-}) => {
+  parent?: any;
+  value?: T;
+} & HTMLProps<HTMLSpanElement>;
+
+export default function ListAdd<T>(rawProps: ListAddProps<T>) {
+  const props = useField<ListAddProps<T>, T>(rawProps.name, rawProps, {
+    initialValue: false,
+  })[0];
+
+  const parentName = joinName(joinName(null, props.name).slice(0, -1));
+  const parent = useField<{ maxCount?: number }, T[]>(parentName, {})[0];
+  if (rawProps.parent) Object.assign(parent, rawProps.parent);
+
   const limitNotReached =
-    !disabled && !(parent.maxCount <= parent.value.length);
+    !props.disabled && !(parent.maxCount! <= parent.value!.length);
 
   return (
     <i
       {...filterDOMProps(props)}
       className={classnames(
         'ui',
-        className,
+        rawProps.className,
         limitNotReached ? 'link' : 'disabled',
         'fitted add icon',
       )}
       onClick={() =>
         limitNotReached &&
-        parent.onChange(parent.value.concat([cloneDeep(value)]))
+        parent.onChange(parent.value!.concat([cloneDeep(props.value!)]))
       }
     />
   );
-};
-
-export default connectField(ListAdd, { initialValue: false });
+}

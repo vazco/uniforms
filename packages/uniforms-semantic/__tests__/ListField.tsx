@@ -38,7 +38,7 @@ test('<ListField> - renders correct label (specified)', () => {
   );
 });
 
-test('<ListField> - renders correct numer of items with initialCount (specified)', () => {
+test('<ListField> - renders correct number of items with initialCount (specified)', () => {
   const element = <ListField name="x" initialCount={3} />;
   const wrapper = mount(
     element,
