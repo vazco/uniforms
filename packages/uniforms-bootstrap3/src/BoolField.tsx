@@ -22,6 +22,7 @@ const Bool = ({
   inputClassName,
   onChange,
   labelBefore,
+  name,
   value,
   ...props
 }: BoolFieldProps) =>
