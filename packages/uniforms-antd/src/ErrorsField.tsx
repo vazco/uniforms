@@ -1,10 +1,10 @@
 import React, { HTMLProps } from 'react';
-import { filterDOMProps, useField } from 'uniforms';
+import { filterDOMProps, useForm } from 'uniforms';
 
 type ErrorsFieldProps = HTMLProps<HTMLDivElement>;
 
 function ErrorsField({ children, ...props }: ErrorsFieldProps) {
-  const { error, schema } = useField(name, props)[1];
+  const { error, schema } = useForm();
 
   return !error && !children ? null : (
     <div {...filterDOMProps(props)}>

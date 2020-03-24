@@ -3,7 +3,7 @@ import FormHelperText, {
   FormHelperTextProps,
 } from '@material-ui/core/FormHelperText';
 import React from 'react';
-import { filterDOMProps, useField } from 'uniforms';
+import { filterDOMProps, useForm } from 'uniforms';
 
 type ErrorsFieldProps = {
   fullWidth?: boolean;
@@ -20,7 +20,7 @@ const ErrorsField = ({
   name,
   ...props
 }: ErrorsFieldProps) => {
-  const { error, schema } = useField(name, props)[1];
+  const { error, schema } = useForm();
 
   return !error && !children ? null : (
     <FormControl
