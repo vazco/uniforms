@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
 import { connectField } from 'uniforms';
 
@@ -19,71 +19,163 @@ const xor = (item, array) => {
   return array.slice(0, index).concat(array.slice(index + 1));
 };
 
-const renderCheckboxes = props =>
-  props.allowedValues.map(item => (
+type renderProps = {
+  allowedValues?: string[];
+  disabled: boolean;
+  fieldType?: unknown;
+  id: string;
+  inputClassName?: string;
+  name: string;
+  onChange: (value?: string | string[]) => void;
+  transform?: (value?: string) => string;
+  value?: string | string[];
+} & HTMLProps<HTMLDivElement>;
+
+type renderCheckboxesProps = { inline?: string } & renderProps;
+
+type renderSelectProps = {
+  error?: string;
+  inputRef?: Ref<HTMLSelectElement>;
+  label: string;
+  placeholder: string;
+  required?: boolean;
+} & renderProps;
+
+type SelectFieldProps = {
+  checkboxes?: boolean;
+  error: unknown;
+  errorMessage: string;
+  inputRef?: Ref<HTMLSelectElement>;
+  label: string;
+  placeholder: string;
+  required?: boolean;
+  showInlineError: boolean;
+} & (renderCheckboxesProps | renderSelectProps);
+
+const renderCheckboxes = ({
+  allowedValues,
+  disabled,
+  fieldType,
+  id,
+  inline,
+  inputClassName,
+  name,
+  onChange,
+  transform,
+  value,
+}: renderCheckboxesProps) =>
+  allowedValues?.map(item => (
     <div
       key={item}
       className={classnames(
-        props.inputClassName,
-        `checkbox${props.inline ? '-inline' : ''}`,
+        inputClassName,
+        `checkbox${inline ? '-inline' : ''}`,
       )}
     >
-      <label htmlFor={`${props.id}-${escape(item)}`}>
+      <label htmlFor={`${id}-${escape(item)}`}>
         <input
-          checked={
-            props.fieldType === Array
-              ? props.value.includes(item)
-              : props.value === item
-          }
-          disabled={props.disabled}
-          id={`${props.id}-${escape(item)}`}
-          name={props.name}
+          checked={fieldType === Array ? value?.includes(item) : value === item}
+          disabled={disabled}
+          id={`${id}-${escape(item)}`}
+          name={name}
           onChange={() =>
-            props.onChange(
-              props.fieldType === Array ? xor(item, props.value) : item,
-            )
+            onChange(fieldType === Array ? xor(item, value) : item)
           }
           type="checkbox"
         />
-        {props.transform ? props.transform(item) : item}
+        {transform ? transform(item) : item}
       </label>
     </div>
   ));
 
-const renderSelect = props => (
+const renderSelect = ({
+  allowedValues,
+  disabled,
+  error,
+  id,
+  inputClassName,
+  inputRef,
+  label,
+  name,
+  onChange,
+  placeholder,
+  required,
+  transform,
+  value,
+}: renderSelectProps) => (
   <select
-    className={classnames(props.inputClassName, 'c-select form-control', {
-      'is-invalid': props.error,
+    className={classnames(inputClassName, 'c-select form-control', {
+      'is-invalid': error,
     })}
-    disabled={props.disabled}
-    id={props.id}
-    name={props.name}
+    disabled={disabled}
+    id={id}
+    name={name}
     onChange={event =>
-      props.onChange(event.target.value !== '' ? event.target.value : undefined)
+      onChange(event.target.value !== '' ? event.target.value : undefined)
     }
-    ref={props.inputRef}
-    value={props.value}
+    ref={inputRef}
+    value={value ?? ''}
   >
-    {(!!props.placeholder || !props.required || props.value === '') && (
-      <option value="" disabled={props.required} hidden={props.required}>
-        {props.placeholder || props.label}
+    {(!!placeholder || !required || value === '') && (
+      <option value="" disabled={required} hidden={required}>
+        {placeholder || label}
       </option>
     )}
 
-    {props.allowedValues.map(value => (
+    {allowedValues?.map(value => (
       <option key={value} value={value}>
-        {props.transform ? props.transform(value) : value}
+        {transform ? transform(value) : value}
       </option>
     ))}
   </select>
 );
 
-const Select = props =>
+const Select = ({
+  allowedValues,
+  checkboxes,
+  className,
+  disabled,
+  error,
+  errorMessage,
+  fieldType,
+  id,
+  inputRef,
+  label,
+  name,
+  onChange,
+  placeholder,
+  required,
+  showInlineError,
+  transform,
+  value,
+  ...props
+}: SelectFieldProps) =>
   wrapField(
-    props,
-    props.checkboxes || props.fieldType === Array
-      ? renderCheckboxes(props)
-      : renderSelect(props),
+    { ...props, id, label },
+    checkboxes || fieldType === Array
+      ? renderCheckboxes({
+          allowedValues,
+          disabled,
+          id,
+          name,
+          onChange,
+          transform,
+          value,
+          fieldType,
+        })
+      : renderSelect({
+          allowedValues,
+          disabled,
+          id,
+          name,
+          onChange,
+          transform,
+          value,
+          inputRef,
+          label,
+          placeholder,
+          required,
+        }),
   );
 
-export default connectField(Select);
+export default connectField<SelectFieldProps>(Select);
