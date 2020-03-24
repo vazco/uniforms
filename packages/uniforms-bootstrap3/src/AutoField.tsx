@@ -1,5 +1,5 @@
 import invariant from 'invariant';
-import { ComponentType, createElement } from 'react';
+import { createElement } from 'react';
 import { useField } from 'uniforms';
 
 import BoolField from './BoolField';
@@ -13,7 +13,7 @@ import TextField from './TextField';
 import { AutoFieldProps } from './Types';
 
 export default function AutoField(originalProps: AutoFieldProps) {
-  const props = useField(name, originalProps)[0];
+  const props = useField(originalProps.name, originalProps)[0];
   const { checkboxes, allowedValues, fieldType } = props;
   let { component } = props;
 
