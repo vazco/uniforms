@@ -29,7 +29,7 @@ const Bool = (props: BoolFieldProps) => {
     inline,
   } = props;
   return wrapField(
-    { label: labelBefore, ...props },
+    { ...props, label: labelBefore },
     <div
       className={classnames(inputClassName, 'form-check', 'checkbox', {
         'text-danger': error,
