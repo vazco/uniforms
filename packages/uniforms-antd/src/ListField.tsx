@@ -20,7 +20,7 @@ type ListFieldProps<T> = {
   wrapperCol?: any;
   name: string;
   showInlineError?: boolean;
-} & Omit<HTMLProps<HTMLUListElement>, 'children' | 'name'>;
+} & Omit<HTMLProps<HTMLDivElement>, 'children' | 'name'>;
 
 function List<T>({
   children,
@@ -38,7 +38,7 @@ function List<T>({
   ...props
 }: ListFieldProps<T>) {
   return (
-    <ul {...filterDOMProps(props)}>
+    <div {...filterDOMProps(props)}>
       {label && (
         <div>
           {label}
@@ -80,7 +80,7 @@ function List<T>({
           ))}
 
       <ListAddField name={`${name}.$`} initialCount={initialCount} />
-    </ul>
+    </div>
   );
 }
 
