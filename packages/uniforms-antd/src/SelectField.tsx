@@ -39,7 +39,13 @@ const renderSelect = props => (
     onChange={value => props.onChange(value)}
     placeholder={props.placeholder}
     ref={props.inputRef}
-    value={props.value || (props.fieldType === Array ? [] : undefined)}
+    value={
+      props.fieldType === Array
+        ? props.value
+          ? props.value.filter(value => value !== undefined)
+          : []
+        : props.value
+    }
     {...filterDOMProps(props)}
   >
     {props.allowedValues.map(value => (
