@@ -14,7 +14,7 @@ type ListFieldProps<T> = {
   value: T[];
   itemProps?: {};
   showInlineError?: boolean;
-} & Omit<HTMLProps<HTMLUListElement>, 'children' | 'name'>;
+} & Omit<HTMLProps<HTMLDivElement>, 'children' | 'name'>;
 
 function List<T>({
   children,
@@ -37,7 +37,7 @@ function List<T>({
     className: 'right floated',
   };
   return (
-    <ul
+    <div
       className={classnames(
         'ui',
         className,
@@ -83,7 +83,7 @@ function List<T>({
               {...itemProps}
             />
           ))}
-    </ul>
+    </div>
   );
 }
 
