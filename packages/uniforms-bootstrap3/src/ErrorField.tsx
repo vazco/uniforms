@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
 import { connectField, filterDOMProps } from 'uniforms';
 
-const Error = ({ children, className, error, errorMessage, ...props }: any) =>
+type ErrorFieldProps = { error?: any; errorMessage?: string } & HTMLProps<
+  HTMLDivElement
+>;
+
+const Error = ({
+  children,
+  className,
+  error,
+  errorMessage,
+  ...props
+}: ErrorFieldProps) =>
   !error ? null : (
     <div
       className={classnames('panel panel-danger text-danger', className)}

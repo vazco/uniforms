@@ -19,7 +19,7 @@ export default function wrapField(
     showInlineError,
     wrapperCol,
     wrapperStyle,
-  },
+  }: Record<string, any>,
   children,
 ) {
   const labelNode = !!label && (

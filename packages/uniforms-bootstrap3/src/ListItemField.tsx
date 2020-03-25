@@ -1,25 +1,31 @@
-import React, { Children } from 'react';
+import React, { Children, ReactNode } from 'react';
 import { connectField, joinName } from 'uniforms';
 
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
 
-const ListItem = ({ removeIcon, ...props }: any) => (
+type ListItemProps = {
+  children?: ReactNode;
+  name: string;
+  removeIcon?: any;
+};
+
+const ListItem = ({ removeIcon, children, name }: ListItemProps) => (
   <div className="row">
     <div className="col-xs-1">
-      <ListDelField name={props.name} removeIcon={removeIcon} />
+      <ListDelField name={name} removeIcon={removeIcon} />
     </div>
 
-    {props.children ? (
-      Children.map(props.children, child =>
+    {children ? (
+      Children.map(children as JSX.Element, child =>
         React.cloneElement(child, {
           className: 'col-xs-11',
-          name: joinName(props.name, child.props.name),
+          name: joinName(name, child.props.name),
           label: null,
         }),
       )
     ) : (
-      <AutoField {...props} className="col-xs-11" />
+      <AutoField children={children} className="col-xs-11" name={name} />
     )}
   </div>
 );

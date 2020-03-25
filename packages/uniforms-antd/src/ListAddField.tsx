@@ -1,23 +1,38 @@
-import Button from 'antd/lib/button';
+import Button, { ButtonProps } from 'antd/lib/button';
 import React from 'react';
 import cloneDeep from 'lodash/cloneDeep';
-import { connectField, filterDOMProps } from 'uniforms';
+import { filterDOMProps, joinName, useField } from 'uniforms';
 
-const ListAdd = ({ disabled, parent, value, ...props }: any) => {
+type ListAddProps<T> = {
+  initialCount?: number;
+  parent?: any;
+  name: string;
+  disabled?: boolean;
+  value?: T;
+} & ButtonProps;
+
+function ListAdd<T>(rawProps: ListAddProps<T>) {
+  const props = useField<ListAddProps<T>, T>(rawProps.name, rawProps, {
+    initialValue: false,
+  })[0];
+
+  const parentName = joinName(joinName(null, props.name).slice(0, -1));
+  const parent = useField<{ maxCount?: number }, T[]>(parentName, {})[0];
+  if (rawProps.parent) Object.assign(parent, rawProps.parent);
+
   const limitNotReached =
-    !disabled && !(parent.maxCount <= parent.value.length);
-
+    !props.disabled && !(parent.maxCount! <= parent.value!.length);
   return (
     <Button
-      disabled={!limitNotReached || disabled}
-      onClick={() =>
-        limitNotReached &&
-        parent.onChange(parent.value.concat([cloneDeep(value)]))
-      }
+      disabled={!limitNotReached || rawProps.disabled}
+      onClick={() => {
+        if (limitNotReached)
+          parent.onChange(parent.value!.concat([cloneDeep(props.value!)]));
+      }}
       {...filterDOMProps(props)}
     />
   );
-};
+}
 
 ListAdd.defaultProps = {
   icon: 'plus-square-o',
@@ -26,4 +41,4 @@ ListAdd.defaultProps = {
   type: 'dashed',
 };
 
-export default connectField(ListAdd, { initialValue: false });
+export default ListAdd;

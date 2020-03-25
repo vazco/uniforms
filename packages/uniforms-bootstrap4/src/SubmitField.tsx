@@ -7,6 +7,7 @@ import gridClassName from './gridClassName';
 type SubmitFieldProps = {
   inputClassName?: string;
   inputRef?: Ref<HTMLInputElement>;
+  name: string;
   wrapClassName?: string;
 } & HTMLProps<HTMLInputElement>;
 

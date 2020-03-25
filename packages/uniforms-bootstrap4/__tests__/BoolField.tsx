@@ -76,7 +76,7 @@ test('<BoolField> - renders a input with correct value (default)', () => {
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
   expect(wrapper.find('input')).toHaveLength(1);
-  expect(wrapper.find('input').prop('checked')).toBe('');
+  expect(wrapper.find('input').prop('checked')).toBe(false);
 });
 
 test('<BoolField> - renders a input with correct value (model)', () => {

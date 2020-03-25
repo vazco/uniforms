@@ -3,7 +3,6 @@ import classnames from 'classnames';
 import { filterDOMProps, useForm } from 'uniforms';
 
 type SubmitFieldProps = {
-  className?: string;
   disabled?: boolean;
   inputRef?: Ref<HTMLInputElement>;
   value?: string;
@@ -14,6 +13,7 @@ export default function SubmitField({
   disabled,
   inputRef,
   value,
+  name,
   ...props
 }: SubmitFieldProps) {
   const { error, state } = useForm();

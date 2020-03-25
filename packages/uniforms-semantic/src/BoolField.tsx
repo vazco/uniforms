@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
 import { connectField, filterDOMProps } from 'uniforms';
+
+type BoolFieldProps = {
+  error?: boolean;
+  errorMessage?: string;
+  showInlineError?: boolean;
+  value?: boolean;
+  onChange: (value?: boolean) => void;
+  inputRef?: Ref<HTMLInputElement>;
+} & Omit<HTMLProps<HTMLDivElement>, 'value'>;
 
 const Bool = ({
   className,
@@ -16,14 +25,14 @@ const Bool = ({
   showInlineError,
   value,
   ...props
-}) => (
+}: BoolFieldProps) => (
   <div
     className={classnames(className, { disabled, error, required }, 'field')}
     {...filterDOMProps(props)}
   >
     <div className="ui checkbox">
       <input
-        checked={value}
+        checked={value || false}
         className="hidden"
         disabled={disabled}
         id={id}
