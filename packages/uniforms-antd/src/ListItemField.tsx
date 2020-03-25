@@ -3,12 +3,14 @@ import { joinName } from 'uniforms';
 
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
-import { AutoFieldProps } from './Types';
 
 type ListItemProps = {
   children?: ReactNode;
   name: string;
-} & AutoFieldProps;
+  labelCol?: string;
+  label?: any;
+  wrapperCol?: any;
+};
 
 export default function ListItem(props: ListItemProps) {
   return (
