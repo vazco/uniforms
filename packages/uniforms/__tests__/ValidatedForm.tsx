@@ -37,7 +37,7 @@ describe('ValidatedForm', () => {
     let form;
 
     beforeEach(() => {
-      wrapper = mount(
+      wrapper = mount<typeof ValidatedForm>(
         <ValidatedForm model={model} schema={schema} onValidate={onValidate} />,
       );
       form = wrapper.instance();
@@ -62,7 +62,7 @@ describe('ValidatedForm', () => {
       form.validate().catch(() => {});
       await new Promise(resolve => process.nextTick(resolve));
 
-      expect(wrapper.instance().getContext().state.error).toBe(error);
+      expect(wrapper.instance().getContext().error).toBe(error);
     });
 
     it('correctly calls `onValidate` when validation succeeds', () => {
@@ -97,7 +97,7 @@ describe('ValidatedForm', () => {
 
       form.validate().catch(() => {});
 
-      expect(wrapper.instance().getContext().state.error).toBe(error);
+      expect(wrapper.instance().getContext().error).toBe(error);
     });
 
     it('leaves error state alone when `onValidate` suppress `validator` errors', async () => {
@@ -118,18 +118,18 @@ describe('ValidatedForm', () => {
     });
 
     it('has `validating` context variable, default `false`', () => {
-      expect(wrapper.instance().getContext().state.validating).toBe(false);
+      expect(wrapper.instance().getContext().validating).toBe(false);
     });
 
     it('sets `validating` `true` while validating', async () => {
       onValidate.mockImplementationOnce(() => {});
       form.validate();
-      expect(wrapper.instance().getContext().state.validating).toBe(true);
+      expect(wrapper.instance().getContext().validating).toBe(true);
 
       // Resolve the async validation by calling the third argument of the first call to onValidate.
       expect(onValidate).toHaveBeenCalledTimes(1);
       onValidate.mock.calls[0][2]();
-      expect(wrapper.instance().getContext().state.validating).toBe(false);
+      expect(wrapper.instance().getContext().validating).toBe(false);
     });
 
     it('uses `modelTransform`s `validate` mode', () => {
@@ -150,7 +150,7 @@ describe('ValidatedForm', () => {
   describe('when submitted', () => {
     let wrapper;
     beforeEach(() => {
-      wrapper = mount(
+      wrapper = mount<typeof ValidatedForm>(
         <ValidatedForm
           model={model}
           schema={schema}
@@ -183,14 +183,14 @@ describe('ValidatedForm', () => {
       await new Promise(resolve => process.nextTick(resolve));
 
       expect(onSubmit).toHaveBeenCalled();
-      expect(wrapper.instance().getContext().state.error).toBe(error);
+      expect(wrapper.instance().getContext().error).toBe(error);
     });
 
     it('sets `submitting` `true` while validating, before `BaseForm#onSubmit`', async () => {
       onValidate.mockImplementationOnce(() => {});
       wrapper.find('form').simulate('submit');
       await new Promise(resolve => process.nextTick(resolve));
-      expect(wrapper.instance().getContext().state.submitting).toBe(true);
+      expect(wrapper.instance().getContext().submitting).toBe(true);
     });
 
     it('sets `submitting` back to `false` after sync `onSubmit`', async () => {
@@ -204,7 +204,7 @@ describe('ValidatedForm', () => {
       onValidate.mock.calls[0][2]();
 
       await new Promise(resolve => process.nextTick(resolve));
-      expect(wrapper.instance().getContext().state.submitting).toBe(false);
+      expect(wrapper.instance().getContext().submitting).toBe(false);
     });
 
     it('works if unmounts on submit', async () => {
@@ -286,10 +286,10 @@ describe('ValidatedForm', () => {
         throw new Error();
       });
       wrapper.find('form').simulate('submit');
-      expect(wrapper.instance().getContext().state.error).toBeTruthy();
+      expect(wrapper.instance().getContext().error).toBeTruthy();
 
       wrapper.instance().reset();
-      expect(wrapper.instance().getContext().state.error).toBeNull();
+      expect(wrapper.instance().getContext().error).toBeNull();
     });
   });
 

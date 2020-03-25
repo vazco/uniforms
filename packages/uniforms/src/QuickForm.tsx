@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 
-import BaseForm from './BaseForm';
+import BaseForm, { BaseFormProps, BaseFormState } from './BaseForm';
+import { DeepPartial } from './types';
 
-const Quick = (parent: any): any => {
-  class _ extends parent {
+export type QuickFormProps<Model extends {}> = BaseFormProps<Model> & {
+  autoField?: ComponentType<{ name?: string }>;
+  errorsField?: ComponentType;
+  submitField?: ComponentType;
+};
+
+export type QuickFormState<Model extends {}> = BaseFormState<Model>;
+
+function Quick<Base extends typeof BaseForm>(base: Base) {
+  // @ts-ignore: Mixin class problem.
+  return class QuickForm<
+    Model extends {} = Record<string, any>,
+    Props extends QuickFormProps<Model> = QuickFormProps<Model>,
+    State extends QuickFormState<Model> = QuickFormState<Model>
+  > extends base<Model, Props, State> {
     static Quick = Quick;
-
-    static displayName = `Quick${parent.displayName}`;
+    static displayName = `Quick${base.displayName}`;
 
     getNativeFormProps(): Record<string, any> {
       const {
@@ -29,20 +42,18 @@ const Quick = (parent: any): any => {
       return props;
     }
 
-    getAutoField(): any {
+    getAutoField(): ComponentType<{ name?: string }> {
       return () => null;
     }
 
-    getErrorsField(): any {
+    getErrorsField(): ComponentType {
       return () => null;
     }
 
-    getSubmitField(): any {
+    getSubmitField(): ComponentType {
       return () => null;
     }
-  }
-
-  return _;
-};
+  };
+}
 
 export default Quick(BaseForm);

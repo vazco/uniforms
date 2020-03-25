@@ -3,27 +3,45 @@ import isEqual from 'lodash/isEqual';
 import omit from 'lodash/omit';
 import set from 'lodash/set';
 
-import ValidatedQuickForm from './ValidatedQuickForm';
+// FIXME: This import is needed to correctly build AutoForm.d.ts file.
+import BaseForm from './BaseForm';
+import ValidatedQuickForm, {
+  ValidatedQuickFormProps,
+  ValidatedQuickFormState,
+} from './ValidatedQuickForm';
+import { DeepPartial } from './types';
 
-const Auto = (parent: any): any => {
-  class _ extends parent {
+export type AutoFormProps<Model extends {}> = ValidatedQuickFormProps<Model> & {
+  onChangeModel?: (model: DeepPartial<Model>) => void;
+};
+
+export type AutoFormState<Model extends {}> = ValidatedQuickFormState<Model> & {
+  model: DeepPartial<Model>;
+  modelSync: DeepPartial<Model>;
+};
+
+function Auto<Base extends typeof ValidatedQuickForm>(base: Base) {
+  // @ts-ignore: Mixin class problem.
+  return class AutoForm<
+    Model extends {} = Record<string, any>,
+    Props extends AutoFormProps<Model> = AutoFormProps<Model>,
+    State extends AutoFormState<Model> = AutoFormState<Model>
+  > extends base<Model, Props, State> {
     static Auto = Auto;
+    static displayName = `Auto${base.displayName}`;
 
-    static displayName = `Auto${parent.displayName}`;
+    constructor(props: Props) {
+      super(props);
 
-    constructor(...args: any[]) {
-      super(...args);
-
-      // @ts-ignore
       this.state = {
         ...this.state,
 
-        model: this.props.model,
-        modelSync: this.props.model,
+        model: props.model,
+        modelSync: props.model,
       };
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps: Props) {
       const { model } = this.props;
       if (!isEqual(model, prevProps.model)) {
         this.setState({ model, modelSync: model });
@@ -75,12 +93,9 @@ const Auto = (parent: any): any => {
     }
 
     onValidate() {
-      // @ts-ignore
       return this.onValidateModel(this.getContextModel());
     }
-  }
-
-  return _;
-};
+  };
+}
 
 export default Auto(ValidatedQuickForm);

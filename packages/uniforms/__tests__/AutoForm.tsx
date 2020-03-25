@@ -62,7 +62,7 @@ describe('AutoForm', () => {
       const field = () => null;
       const Field = connectField(field);
 
-      mount(
+      mount<typeof AutoForm>(
         <AutoForm
           onChange={onChange}
           schema={schema}

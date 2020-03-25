@@ -12,7 +12,7 @@ import createSchemaBridge from './createSchemaBridge';
 import randomIds from './randomIds';
 import { ChangedMap, Context, DeepPartial, ModelTransformMode } from './types';
 
-export type BaseFormProps<Model> = {
+export type BaseFormProps<Model extends {}> = {
   autosave: boolean;
   autosaveDelay: number;
   disabled?: boolean;
@@ -34,7 +34,7 @@ export type BaseFormProps<Model> = {
   showInlineError?: boolean;
 };
 
-export type BaseFormState<Model> = {
+export type BaseFormState<Model extends {}> = {
   bridge: Bridge;
   changed: boolean;
   changedMap: ChangedMap<Model>;
@@ -43,8 +43,10 @@ export type BaseFormState<Model> = {
 };
 
 export default class BaseForm<
-  Model extends object = Record<string, any>
-> extends Component<BaseFormProps<Model>, BaseFormState<Model>> {
+  Model extends {} = Record<string, any>,
+  Props extends BaseFormProps<Model> = BaseFormProps<Model>,
+  State extends BaseFormState<Model> = BaseFormState<Model>
+> extends Component<Props, State> {
   static displayName = 'Form';
   static defaultProps = {
     autosave: false,
@@ -54,9 +56,10 @@ export default class BaseForm<
     noValidate: true,
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
+    // @ts-ignore: State may be bigger, but it'll be covered by the subclasses.
     this.state = {
       bridge: createSchemaBridge(this.props.schema),
       changed: false,
@@ -80,7 +83,10 @@ export default class BaseForm<
         : model;
   }
 
-  static getDerivedStateFromProps({ schema }, { bridge }) {
+  static getDerivedStateFromProps(
+    { schema }: BaseFormProps<any>,
+    { bridge }: BaseFormState<any>,
+  ) {
     // TODO: It updates the state each time. Add bridge.isSame(schema)?
     return { bridge: createSchemaBridge(schema) };
   }
@@ -272,6 +278,5 @@ export default class BaseForm<
 }
 
 function isPromiseLike(value: any): value is Promise<any> {
-  // @ts-ignore
   return !!value && isFunction(value.then);
 }

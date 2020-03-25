@@ -5,46 +5,38 @@ import omit from 'lodash/omit';
 import set from 'lodash/set';
 import { Component, SyntheticEvent } from 'react';
 
-import BaseForm from './BaseForm';
-import { DeepPartial, Partialize, ValidateMode } from './types';
+import BaseForm, { BaseFormProps, BaseFormState } from './BaseForm';
+import { DeepPartial, ValidateMode } from './types';
 
-type ValidatedFormProps<Model extends object> = BaseForm<Model>['props'] & {
+export type ValidatedFormProps<Model extends {}> = BaseFormProps<Model> & {
   onValidate: (
     model: DeepPartial<Model>,
     error: any,
     callback: (error?: any) => void,
   ) => void;
   validate: ValidateMode;
-  validator: any;
+  validator?: any;
 };
 
-type ValidatedFormState<Model extends object> = BaseForm<Model>['state'] & {
+export type ValidatedFormState<Model extends {}> = BaseFormState<Model> & {
   error: any;
   validate: boolean;
   validating: boolean;
   validator: (model: DeepPartial<Model>) => void | never;
 };
 
-function Validated<Model extends object>(parent: typeof BaseForm) {
-  type ValidatedForm<DefaultProps extends keyof ValidatedFormProps<Model>> = {
-    new (props: ValidatedFormProps<Model>): BaseForm<Model> &
-      Component<
-        Partialize<ValidatedFormProps<Model>, DefaultProps>,
-        ValidatedFormState<Model>
-      >;
-    Validated: (parent: typeof BaseForm) => ValidatedForm<DefaultProps>;
-  };
-
-  // @ts-ignore
-  class _ extends (parent as ValidatedForm<never>) {
+function Validated<Base extends typeof BaseForm>(base: Base) {
+  // @ts-ignore: Mixin class problem.
+  return class ValidatedForm<
+    Model extends {} = Record<string, any>,
+    Props extends ValidatedFormProps<Model> = ValidatedFormProps<Model>,
+    State extends ValidatedFormState<Model> = ValidatedFormState<Model>
+  > extends base<Model, Props, State> {
     static Validated = Validated;
-    static displayName = `Validated${parent.displayName}`;
+    static displayName = `Validated${base.displayName}`;
 
-    static defaultProps: Pick<
-      ValidatedFormProps<Model>,
-      keyof typeof parent.defaultProps | 'onValidate' | 'validate'
-    > = {
-      ...parent.defaultProps,
+    static defaultProps = {
+      ...base.defaultProps,
 
       onValidate(model, error, callback) {
         callback();
@@ -53,11 +45,10 @@ function Validated<Model extends object>(parent: typeof BaseForm) {
       validate: 'onChangeAfterSubmit',
     };
 
-    validate: typeof _.prototype.onValidate;
-    validateModel: typeof _.prototype.onValidateModel;
+    validate: typeof ValidatedForm.prototype.onValidate;
+    validateModel: typeof ValidatedForm.prototype.onValidateModel;
 
-    constructor(props: ValidatedFormProps<Model>) {
-      // eslint-disable-next-line constructor-super
+    constructor(props: Props) {
       super(props);
 
       this.state = {
@@ -95,7 +86,7 @@ function Validated<Model extends object>(parent: typeof BaseForm) {
       ]);
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps: Props, prevState: State, snapshot: never) {
       super.componentDidUpdate(prevProps, prevState, snapshot);
 
       const { model, schema, validate, validator } = this.props;
@@ -149,7 +140,7 @@ function Validated<Model extends object>(parent: typeof BaseForm) {
           () => ({ submitting: true, validate: true }),
           () => {
             this.onValidate().then(() => {
-              super.onSubmit().then(resolve, (error: any) => {
+              super.onSubmit().then(resolve, error => {
                 this.setState({ error });
                 reject(error);
               });
@@ -174,7 +165,7 @@ function Validated<Model extends object>(parent: typeof BaseForm) {
       return promise;
     }
 
-    onValidate(key?: any, value?: any) {
+    onValidate(key?: string, value?: any) {
       let model = this.getContextModel();
       if (model && key) {
         model = set(cloneDeep(model), key, cloneDeep(value));
@@ -183,7 +174,7 @@ function Validated<Model extends object>(parent: typeof BaseForm) {
       return this.onValidateModel(model);
     }
 
-    onValidateModel(model: any) {
+    onValidateModel(model: Props['model']) {
       model = this.getModel('validate', model);
 
       let catched = this.props.error || null;
@@ -195,7 +186,7 @@ function Validated<Model extends object>(parent: typeof BaseForm) {
 
       this.setState({ validating: true });
       return new Promise((resolve, reject) => {
-        this.props.onValidate(model, catched, (error: any = catched) => {
+        this.props.onValidate(model, catched, (error = catched) => {
           // Do not copy error from props to state.
           this.setState(
             () => ({
@@ -213,9 +204,7 @@ function Validated<Model extends object>(parent: typeof BaseForm) {
         });
       });
     }
-  }
-
-  return _ as ValidatedForm<keyof typeof _.defaultProps>;
+  };
 }
 
 function shouldRevalidate(inProps: ValidateMode, inState: boolean) {

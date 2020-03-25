@@ -25,19 +25,19 @@ describe('QuickForm', () => {
 
   describe('when rendered with custom fields', () => {
     it('renders `AutoField` for each field', () => {
-      const wrapper = mount(<TestQuickForm schema={schema} />);
+      const wrapper = mount<TestQuickForm>(<TestQuickForm schema={schema} />);
 
       expect(wrapper.find('.auto').length).toBeGreaterThan(0);
     });
 
     it('renders `ErrorsField`', () => {
-      const wrapper = mount(<TestQuickForm schema={schema} />);
+      const wrapper = mount<TestQuickForm>(<TestQuickForm schema={schema} />);
 
       expect(wrapper.find('.errors').length).toBeGreaterThan(0);
     });
 
     it('renders `SubmitField`', () => {
-      const wrapper = mount(<TestQuickForm schema={schema} />);
+      const wrapper = mount<TestQuickForm>(<TestQuickForm schema={schema} />);
 
       expect(wrapper.find('.submit').length).toBeGreaterThan(0);
     });
@@ -45,7 +45,7 @@ describe('QuickForm', () => {
 
   describe('when rendered with custom fields in `props`', () => {
     it('renders `AutoField` for each field', () => {
-      const wrapper = mount(
+      const wrapper = mount<TestQuickForm>(
         <TestQuickForm
           schema={schema}
           autoField={() => <i className="autoOverride" />}
@@ -56,7 +56,7 @@ describe('QuickForm', () => {
     });
 
     it('renders `ErrorsField`', () => {
-      const wrapper = mount(
+      const wrapper = mount<TestQuickForm>(
         <TestQuickForm
           schema={schema}
           errorsField={() => <i className="errorsOverride" />}
@@ -67,7 +67,7 @@ describe('QuickForm', () => {
     });
 
     it('renders `SubmitField`', () => {
-      const wrapper = mount(
+      const wrapper = mount<TestQuickForm>(
         <TestQuickForm
           schema={schema}
           submitField={() => <i className="submitOverride" />}
@@ -77,24 +77,20 @@ describe('QuickForm', () => {
       expect(wrapper.find('.submitOverride').length).toBeGreaterThan(0);
     });
 
-    it('works with string', () => {
-      const wrapper = mount(<TestQuickForm schema={schema} autoField="code" />);
-
-      expect(wrapper.find('code').length).toBeGreaterThan(0);
-    });
-
     it('works with elements', () => {
       class Code extends Component {
         render = () => <code />;
       }
 
-      const wrapper = mount(<TestQuickForm schema={schema} autoField={Code} />);
+      const wrapper = mount<TestQuickForm>(
+        <TestQuickForm schema={schema} autoField={Code} />,
+      );
 
       expect(wrapper.find('code').length).toBeGreaterThan(0);
     });
 
     it('works with functions', () => {
-      const wrapper = mount(
+      const wrapper = mount<TestQuickForm>(
         <TestQuickForm schema={schema} autoField={() => <code />} />,
       );
 
@@ -103,7 +99,7 @@ describe('QuickForm', () => {
   });
 
   describe('when rendered with children', () => {
-    const wrapper = mount(
+    const wrapper = mount<typeof QuickForm>(
       <QuickForm schema={schema}>
         <div />
       </QuickForm>,
