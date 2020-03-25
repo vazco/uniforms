@@ -16,7 +16,7 @@ type ListFieldProps<T> = {
   itemProps?: {};
   removeIcon?: any;
   showInlineError?: boolean;
-} & Omit<HTMLProps<HTMLUListElement>, 'children' | 'name'>;
+} & Omit<HTMLProps<HTMLDivElement>, 'children' | 'name'>;
 
 function List<T>({
   addIcon,
@@ -39,7 +39,7 @@ function List<T>({
     addIcon,
   };
   return (
-    <ul
+    <div
       className={classnames(
         'panel panel-default',
         { 'panel-danger': error },
@@ -84,7 +84,7 @@ function List<T>({
               />
             ))}
       </div>
-    </ul>
+    </div>
   );
 }
 
