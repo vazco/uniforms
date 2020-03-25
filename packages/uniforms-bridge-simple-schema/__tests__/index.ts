@@ -4,5 +4,6 @@ it('exports everything', () => {
   expect(uniformsSimpleSchema).toEqual({
     default: expect.any(Function),
     SimpleSchemaBridge: expect.any(Function),
+    __esModule: true,
   });
 });

@@ -4,5 +4,6 @@ it('exports everything', () => {
   expect(uniformsJSONSchema).toEqual({
     default: expect.any(Function),
     JSONSchemaBridge: expect.any(Function),
+    __esModule: true,
   });
 });
