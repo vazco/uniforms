@@ -12,7 +12,7 @@ import createSchemaBridge from './createSchemaBridge';
 import randomIds from './randomIds';
 import { ChangedMap, Context, DeepPartial, ModelTransformMode } from './types';
 
-export interface BaseFormProps<Model> {
+export type BaseFormProps<Model> = {
   autosave: boolean;
   autosaveDelay: number;
   disabled?: boolean;
@@ -32,15 +32,15 @@ export interface BaseFormProps<Model> {
   placeholder?: boolean;
   schema: any;
   showInlineError?: boolean;
-}
+};
 
-export interface BaseFormState<Model> {
+export type BaseFormState<Model> = {
   bridge: Bridge;
   changed: boolean;
   changedMap: ChangedMap<Model>;
   resetCount: number;
   submitting: boolean;
-}
+};
 
 export default class BaseForm<
   Model extends object = Record<string, any>

@@ -7,7 +7,7 @@ export type ChangedMap<T> = T extends {}
   ? { [P in keyof T]?: ChangedMap<T[P]> }
   : Record<string, void>;
 
-export interface Context<Model extends {} = Record<string, any>> {
+export type Context<Model extends {} = Record<string, any>> = {
   changed: boolean;
   changedMap: ChangedMap<Model>;
   error: any;
@@ -25,7 +25,7 @@ export interface Context<Model extends {} = Record<string, any>> {
   };
   submitting: boolean;
   validating: boolean;
-}
+};
 
 export type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends {} ? DeepPartial<T[P]> : T[P];

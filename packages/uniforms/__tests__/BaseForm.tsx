@@ -34,67 +34,36 @@ describe('BaseForm', () => {
     onSubmitFailure.mockReset();
   });
 
-  describe('child context', () => {
+  it('have correct context', () => {
     const wrapper = mount<BaseForm>(
       <BaseForm error={error} model={model} schema={schema} />,
     );
 
     const context = wrapper.instance().getContext();
-
-    it('exists', () => {
-      expect(context).toEqual(expect.any(Object));
-    });
-
-    it('have correct `changed`', () => {
-      expect(context).toHaveProperty('changed', false);
-    });
-
-    it('have correct `changedMap`', () => {
-      expect(context).toHaveProperty('changedMap', {});
-    });
-
-    it('have correct `error`', () => {
-      expect(context).toHaveProperty('error', error);
-    });
-
-    it('have correct `onChange`', () => {
-      expect(context).toHaveProperty('onChange', expect.any(Function));
-    });
-
-    it('have correct `model`', () => {
-      expect(context).toHaveProperty('model', model);
-    });
-
-    it('have correct `name`', () => {
-      expect(context).toHaveProperty('name', expect.any(Array));
-      expect(context.name).toHaveLength(0);
-    });
-
-    it('have correct `schema`', () => {
-      expect(context).toHaveProperty('schema', schema);
-    });
-
-    it('have correct `state`', () => {
-      expect(context).toHaveProperty('state', expect.any(Object));
-      expect(context.state).toHaveProperty('disabled', false);
-      expect(context.state).toHaveProperty('label', true);
-      expect(context.state).toHaveProperty('placeholder', false);
-      expect(context.state).toHaveProperty('showInlineError', false);
-    });
-
-    it('have correct `submitting`', () => {
-      expect(context).toHaveProperty('submitting', false);
-    });
-
-    it('have correct `validating`', () => {
-      expect(context).toHaveProperty('validating', false);
+    expect(context).toEqual({
+      changed: false,
+      changedMap: {},
+      error,
+      model,
+      name: [],
+      onChange: expect.any(Function),
+      onSubmit: expect.any(Function),
+      randomId: expect.any(Function),
+      schema,
+      state: {
+        disabled: false,
+        label: true,
+        placeholder: false,
+        showInlineError: false,
+      },
+      submitting: false,
+      validating: false,
     });
   });
 
   describe('when rendered', () => {
     const wrapper = mount<BaseForm>(
       <BaseForm
-        className="name"
         disabled
         label={false}
         placeholder
@@ -112,7 +81,6 @@ describe('BaseForm', () => {
     });
 
     it('have correct props', () => {
-      expect(wrapper.props()).toHaveProperty('className', 'name');
       expect(wrapper.props()).toHaveProperty('noValidate', true);
     });
 
@@ -127,16 +95,16 @@ describe('BaseForm', () => {
 
     it('have correct `state`', () => {
       const context = wrapper.instance().getContext();
-
-      expect(context).toHaveProperty('state', expect.any(Object));
-      expect(context.state).toHaveProperty('disabled', true);
-      expect(context.state).toHaveProperty('label', false);
-      expect(context.state).toHaveProperty('placeholder', true);
-      expect(context.state).toHaveProperty('showInlineError', true);
+      expect(context.state).toEqual({
+        disabled: true,
+        label: false,
+        placeholder: true,
+        showInlineError: true,
+      });
     });
 
     it('updates schema bridge', () => {
-      const schema2 = { schema, getType: () => {} };
+      const schema2 = { ...schema, getType: () => {} };
 
       wrapper.setProps({ schema: schema2 });
 
@@ -157,7 +125,7 @@ describe('BaseForm', () => {
     );
 
     it('updates `changed` and `changedMap`', () => {
-      const context1 = wrapper.instance().getContext().state;
+      const context1 = wrapper.instance().getContext();
       expect(context1).toHaveProperty('changed', false);
       expect(context1).toHaveProperty('changedMap', {});
 
@@ -171,7 +139,7 @@ describe('BaseForm', () => {
       expect(context2).toHaveProperty('changedMap.$');
       expect(context2.changedMap.$).toBeTruthy();
       expect(context2).toHaveProperty('changedMap.$.1');
-      expect(context2.changedMap.$[1]).toBeTruthy();
+      expect(context2.changedMap.$?.[1]).toBeTruthy();
     });
 
     it('autosaves correctly (`autosave` = true)', () => {
@@ -327,17 +295,13 @@ describe('BaseForm', () => {
     it('calls `onSubmit` with the correctly `modelTransform`ed model', () => {
       wrapper.setProps({
         modelTransform(mode, model) {
-          if (mode === 'submit') {
-            return 1;
-          }
-
-          return model;
+          return mode === 'submit' ? { submit: 1 } : model;
         },
       });
 
       wrapper.find('form').simulate('submit');
 
-      expect(onSubmit).toHaveBeenLastCalledWith(1);
+      expect(onSubmit).toHaveBeenLastCalledWith({ submit: 1 });
 
       wrapper.setProps({ modelTransform: undefined });
     });
@@ -362,19 +326,19 @@ describe('BaseForm', () => {
         onSubmit: () => new Promise(resolve => (resolveSubmit = resolve)),
       });
 
-      const context1 = wrapper.instance().getContext().state;
+      const context1 = wrapper.instance().getContext();
       expect(context1).toHaveProperty('submitting', false);
 
       wrapper.find('form').simulate('submit');
       await new Promise(resolve => process.nextTick(resolve));
 
-      const context2 = wrapper.instance().getContext().state;
+      const context2 = wrapper.instance().getContext();
       expect(context2).toHaveProperty('submitting', true);
 
       resolveSubmit();
       await new Promise(resolve => process.nextTick(resolve));
 
-      const context3 = wrapper.instance().getContext().state;
+      const context3 = wrapper.instance().getContext();
       expect(context3).toHaveProperty('submitting', false);
     });
 
@@ -382,7 +346,7 @@ describe('BaseForm', () => {
       const onSubmitValue = 'value';
       onSubmit.mockReturnValueOnce(Promise.resolve(onSubmitValue));
 
-      const wrapper = mount(
+      const wrapper = mount<BaseForm>(
         <BaseForm
           model={model}
           schema={schema}
@@ -403,7 +367,7 @@ describe('BaseForm', () => {
       const onSubmitError = 'error';
       onSubmit.mockReturnValueOnce(Promise.reject(onSubmitError));
 
-      const wrapper = mount(
+      const wrapper = mount<BaseForm>(
         <BaseForm
           model={model}
           schema={schema}
