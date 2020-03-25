@@ -1,6 +1,16 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
+import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
 import { connectField, filterDOMProps } from 'uniforms';
+
+type TextFieldProps = {
+  decimal?: boolean;
+  errorMessage?: string;
+  max?: number;
+  min?: number;
+  showInlineError?: boolean;
+  onChange: (value?: string) => void;
+  value?: string;
+} & StandardTextFieldProps;
 
 const Text = ({
   disabled,
@@ -16,7 +26,7 @@ const Text = ({
   type,
   value,
   ...props
-}) => (
+}: TextFieldProps) => (
   <TextField
     disabled={!!disabled}
     error={!!error}
@@ -27,15 +37,15 @@ const Text = ({
     placeholder={placeholder}
     ref={inputRef}
     type={type}
-    value={value}
+    value={value ?? ''}
     {...filterDOMProps(props)}
   />
 );
 
 Text.defaultProps = {
   fullWidth: true,
-  margin: 'dense',
+  // margin: 'dense', 
   type: 'text',
 };
 
-export default connectField(Text);
+export default connectField<TextFieldProps>(Text);
