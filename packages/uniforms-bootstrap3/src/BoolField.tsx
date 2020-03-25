@@ -23,10 +23,11 @@ const Bool = (props: BoolFieldProps) => {
     inputClassName,
     onChange,
     name,
+    labelBefore,
     value,
   } = props;
   return wrapField(
-    props,
+    { ...props, label: labelBefore },
     <div
       className={classnames(
         inputClassName,
