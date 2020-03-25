@@ -16,7 +16,7 @@ type ListFieldProps<T> = {
   removeIcon?: any;
   showInlineError?: boolean;
   value: T[];
-} & Omit<HTMLProps<HTMLUListElement>, 'children' | 'name'>;
+} & Omit<HTMLProps<HTMLDivElement>, 'children' | 'name'>;
 
 function List<T>({
   addIcon,
@@ -39,7 +39,7 @@ function List<T>({
     addIcon,
   };
   return (
-    <ul
+    <div
       className={classnames('card mb-3', className)}
       {...filterDOMProps(props)}
     >
@@ -80,7 +80,7 @@ function List<T>({
               />
             ))}
       </div>
-    </ul>
+    </div>
   );
 }
 
