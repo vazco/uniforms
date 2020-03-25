@@ -19,116 +19,26 @@ const xor = (item, array) => {
   return array.slice(0, index).concat(array.slice(index + 1));
 };
 
-type renderProps = {
+type SelectFieldProps = {
   allowedValues?: string[];
+  checkboxes?: boolean;
   disabled: boolean;
-  fieldType?: unknown;
+  error?: unknown;
+  errorMessage?: string;
+  fieldType: unknown;
   id: string;
+  inline?: string;
   inputClassName?: string;
+  inputRef?: Ref<HTMLSelectElement>;
+  label: string;
   name: string;
   onChange: (value?: string | string[]) => void;
+  placeholder: string;
+  showInlineError?: boolean;
+  required?: boolean;
   transform?: (value?: string) => string;
   value?: string | string[];
 } & HTMLProps<HTMLDivElement>;
-
-type renderCheckboxesProps = { inline?: string } & renderProps;
-
-type renderSelectProps = {
-  error?: string;
-  inputRef?: Ref<HTMLSelectElement>;
-  label: string;
-  placeholder: string;
-  required?: boolean;
-} & renderProps;
-
-type SelectFieldProps = {
-  checkboxes?: boolean;
-  error: unknown;
-  errorMessage: string;
-  inputRef?: Ref<HTMLSelectElement>;
-  label: string;
-  placeholder: string;
-  required?: boolean;
-  showInlineError: boolean;
-} & (renderCheckboxesProps | renderSelectProps);
-
-const renderCheckboxes = ({
-  allowedValues,
-  disabled,
-  fieldType,
-  id,
-  inline,
-  inputClassName,
-  name,
-  onChange,
-  transform,
-  value,
-}: renderCheckboxesProps) =>
-  allowedValues?.map(item => (
-    <div
-      key={item}
-      className={classnames(
-        inputClassName,
-        `checkbox${inline ? '-inline' : ''}`,
-      )}
-    >
-      <label htmlFor={`${id}-${escape(item)}`}>
-        <input
-          checked={fieldType === Array ? value?.includes(item) : value === item}
-          disabled={disabled}
-          id={`${id}-${escape(item)}`}
-          name={name}
-          onChange={() =>
-            onChange(fieldType === Array ? xor(item, value) : item)
-          }
-          type="checkbox"
-        />
-        {transform ? transform(item) : item}
-      </label>
-    </div>
-  ));
-
-const renderSelect = ({
-  allowedValues,
-  disabled,
-  error,
-  id,
-  inputClassName,
-  inputRef,
-  label,
-  name,
-  onChange,
-  placeholder,
-  required,
-  transform,
-  value,
-}: renderSelectProps) => (
-  <select
-    className={classnames(inputClassName, 'form-control', {
-      'form-control-danger': error,
-    })}
-    disabled={disabled}
-    id={id}
-    name={name}
-    onChange={event =>
-      onChange(event.target.value !== '' ? event.target.value : undefined)
-    }
-    ref={inputRef}
-    value={value ?? ''}
-  >
-    {(!!placeholder || !required || value === '') && (
-      <option value="" disabled={required} hidden={required}>
-        {placeholder || label}
-      </option>
-    )}
-
-    {allowedValues?.map(value => (
-      <option key={value} value={value}>
-        {transform ? transform(value) : value}
-      </option>
-    ))}
-  </select>
-);
 
 const Select = ({
   allowedValues,
@@ -139,6 +49,8 @@ const Select = ({
   errorMessage,
   fieldType,
   id,
+  inline,
+  inputClassName,
   inputRef,
   label,
   name,
@@ -152,30 +64,59 @@ const Select = ({
 }: SelectFieldProps) =>
   wrapField(
     { ...props, id, label },
-    checkboxes || fieldType === Array
-      ? renderCheckboxes({
-          allowedValues,
-          disabled,
-          id,
-          name,
-          onChange,
-          transform,
-          value,
-          fieldType,
-        })
-      : renderSelect({
-          allowedValues,
-          disabled,
-          id,
-          name,
-          onChange,
-          transform,
-          value,
-          inputRef,
-          label,
-          placeholder,
-          required,
-        }),
+    checkboxes || fieldType === Array ? (
+      allowedValues?.map(item => (
+        <div
+          key={item}
+          className={classnames(
+            inputClassName,
+            `checkbox${inline ? '-inline' : ''}`,
+          )}
+        >
+          <label htmlFor={`${id}-${escape(item)}`}>
+            <input
+              checked={
+                fieldType === Array ? value?.includes(item) : value === item
+              }
+              disabled={disabled}
+              id={`${id}-${escape(item)}`}
+              name={name}
+              onChange={() =>
+                onChange(fieldType === Array ? xor(item, value) : item)
+              }
+              type="checkbox"
+            />
+            {transform ? transform(item) : item}
+          </label>
+        </div>
+      ))
+    ) : (
+      <select
+        className={classnames(inputClassName, 'form-control', {
+          'form-control-danger': error,
+        })}
+        disabled={disabled}
+        id={id}
+        name={name}
+        onChange={event =>
+          onChange(event.target.value !== '' ? event.target.value : undefined)
+        }
+        ref={inputRef}
+        value={value ?? ''}
+      >
+        {(!!placeholder || !required || value === '') && (
+          <option value="" disabled={required} hidden={required}>
+            {placeholder || label}
+          </option>
+        )}
+
+        {allowedValues?.map(value => (
+          <option key={value} value={value}>
+            {transform ? transform(value) : value}
+          </option>
+        ))}
+      </select>
+    ),
   );
 
 export default connectField(Select);
