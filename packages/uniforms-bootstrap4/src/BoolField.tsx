@@ -15,20 +15,20 @@ type BoolFieldProps = {
   disabled?: boolean;
 } & Omit<HTMLProps<HTMLDivElement>, 'value'>;
 
-const Bool = ({
-  label,
-  labelBefore,
-  inputClassName,
-  disabled,
-  name,
-  error,
-  inputRef,
-  value,
-  onChange,
-  inline,
-  ...props
-}: BoolFieldProps) =>
-  wrapField(
+const Bool = (props: BoolFieldProps) => {
+  const {
+    label,
+    labelBefore,
+    inputClassName,
+    disabled,
+    name,
+    error,
+    inputRef,
+    value,
+    onChange,
+    inline,
+  } = props;
+  return wrapField(
     { label: labelBefore, ...props },
     <div
       className={classnames(inputClassName, 'form-check', 'checkbox', {
@@ -52,5 +52,6 @@ const Bool = ({
       </label>
     </div>,
   );
+};
 
 export default connectField(Bool);
