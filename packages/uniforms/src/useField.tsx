@@ -66,14 +66,16 @@ export default function useField<
     [context.onChange, name],
   );
 
-  let value: Value | undefined = props.value ?? get(context.model, name);
+  const valueFromModel: Value | undefined = get(context.model, name);
+  let value: Value | undefined = props.value ?? valueFromModel;
+
   if (options?.initialValue !== false) {
     let initialValue;
 
     if ((schemaProps.required ?? props.required) && value === undefined) {
       value = context.schema.getInitialValue(name, props);
       initialValue = value;
-    } else if (props.value !== undefined && props.value !== value) {
+    } else if (props.value !== undefined && props.value !== valueFromModel) {
       initialValue = props.value;
     }
 

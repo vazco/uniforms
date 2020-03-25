@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { FC, ReactNode } from 'react';
+import { Context, connectField, injectName, randomIds } from 'uniforms';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
-import { connectField, injectName, randomIds } from 'uniforms';
 
 import mount from './_mount';
 
@@ -8,19 +8,6 @@ jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
 
 describe('injectName', () => {
-  const error = new Error();
-  const onChange = () => {};
-  const randomId = randomIds();
-  const state = {
-    changed: false,
-    changedMap: {},
-    submitting: false,
-    label: true,
-    disabled: false,
-    placeholder: false,
-    showInlineError: true,
-  };
-
   const schema = new SimpleSchemaBridge({
     getDefinition(name) {
       return {
@@ -45,22 +32,30 @@ describe('injectName', () => {
 
   const reactContext = {
     context: {
-      uniforms: {
-        error,
-        model: {},
-        name: [],
-        randomId,
-        schema,
-        state,
-        onChange,
-        onSubmit() {},
+      changed: false,
+      changedMap: {},
+      error: undefined,
+      model: {},
+      name: [],
+      onChange() {},
+      onSubmit() {},
+      randomId: randomIds(),
+      schema,
+      state: {
+        label: true,
+        disabled: false,
+        placeholder: false,
+        showInlineError: true,
       },
-    },
+      submitting: false,
+      validating: false,
+    } as Context,
   };
 
-  const Test = jest.fn(({ children }) =>
-    children ? <span>{children}</span> : null,
-  );
+  type TestProps = { children?: ReactNode };
+  const Test: jest.Mock & FC<TestProps> = jest.fn((props: TestProps) => (
+    <span>{props.children}</span>
+  ));
   const Field = connectField(Test);
 
   beforeEach(() => {
@@ -90,7 +85,7 @@ describe('injectName', () => {
         .mockImplementation(() => {});
 
       mount(
-        <Field name="fieldA">{injectName('fieldB', <Field />)}</Field>,
+        <Field name="fieldA">{injectName('fieldB', <Field name="" />)}</Field>,
         reactContext,
       );
 
@@ -114,9 +109,9 @@ describe('injectName', () => {
       mount(
         <Field name="fieldA">
           {injectName('fieldB', [
-            <Field key={1} />,
-            <Field key={2} />,
-            <Field key={3} />,
+            <Field name="" key={1} />,
+            <Field name="" key={2} />,
+            <Field name="" key={3} />,
           ])}
         </Field>,
         reactContext,
@@ -154,7 +149,7 @@ describe('injectName', () => {
           {injectName(
             'fieldB',
             <span>
-              <Field />
+              <Field name="" />
             </span>,
           )}
         </Field>,
@@ -183,9 +178,9 @@ describe('injectName', () => {
           {injectName(
             'fieldB',
             <span>
-              <Field />
-              <Field />
-              <Field />
+              <Field name="" />
+              <Field name="" />
+              <Field name="" />
             </span>,
           )}
         </Field>,

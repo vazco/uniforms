@@ -112,12 +112,12 @@ describe('AutoForm', () => {
 
     it('resets state `changedMap`', () => {
       wrapper.instance().reset();
-      expect(wrapper.instance().getContext().state.changedMap).toEqual({});
+      expect(wrapper.instance().getContext().changedMap).toEqual({});
     });
 
     it('resets state `changed`', () => {
       wrapper.instance().reset();
-      expect(wrapper.instance().getContext().state.changed).toEqual(false);
+      expect(wrapper.instance().getContext().changed).toEqual(false);
     });
   });
 

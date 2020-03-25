@@ -1,20 +1,22 @@
 import get from 'lodash/get';
-import { Children, cloneElement } from 'react';
+import { Children, ReactElement, ReactNode, cloneElement } from 'react';
 
 import joinName from './joinName';
 
 export default function injectName(
   name: string,
-  children: JSX.Element | JSX.Element[],
-  parent?: JSX.Element,
-): JSX.Element[] {
+  children: ReactNode,
+  parent?: ReactNode,
+): ReactNode[] {
   return Children.map(children, child => {
-    if (!child || typeof child === 'string' || get(parent, 'props.name'))
+    if (!child || typeof child !== 'object' || get(parent, 'props.name'))
       return child;
 
-    return cloneElement(child, {
-      children: injectName(name, child.props.children, child),
-      name: joinName(name, child.props.name),
+    // TODO: It's probably the only case left.
+    const element = child as ReactElement;
+    return cloneElement(element, {
+      children: injectName(name, element.props.children, child),
+      name: joinName(name, element.props.name),
     });
   });
 }

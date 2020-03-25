@@ -1,6 +1,6 @@
 import React from 'react';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
-import { connectField, randomIds } from 'uniforms';
+import { Context, connectField, randomIds } from 'uniforms';
 
 import mount from './_mount';
 
@@ -8,10 +8,7 @@ jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
 
 describe('connectField', () => {
-  const error = new Error();
   const onChange = jest.fn();
-  const randomId = randomIds();
-
   const schema = new SimpleSchemaBridge({
     getDefinition(name) {
       return {
@@ -37,10 +34,12 @@ describe('connectField', () => {
     context: {
       changed: false,
       changedMap: {},
-      error,
+      error: undefined,
       model: {},
       name: [],
-      randomId,
+      onChange,
+      onSubmit() {},
+      randomId: randomIds(),
       schema,
       state: {
         disabled: false,
@@ -48,11 +47,9 @@ describe('connectField', () => {
         placeholder: false,
         showInlineError: true,
       },
-      onChange,
-      onSubmit() {},
       submitting: false,
       validating: false,
-    },
+    } as Context,
   };
 
   const Test = jest.fn(() => null);
@@ -70,84 +67,9 @@ describe('connectField', () => {
     });
   });
 
-  describe('when called with `baseField`', () => {
-    it('inherits from `baseField`', () => {
-      // istanbul ignore next
-      class Class {}
-
-      Class.property1 = 1;
-      Class.property2 = 2;
-
-      const Field = connectField(Test, { baseField: Class });
-
-      expect(Field.property1).toBe(1);
-      expect(Field.property2).toBe(2);
-    });
-  });
-
-  describe('when called with `includeParent`', () => {
-    it('provides parent field (true)', () => {
-      const Field = connectField(Test);
-
-      mount(<Field name="field.subfield" />, reactContext);
-
-      expect(Test.mock.calls[0]).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            parent: expect.objectContaining({
-              label: 'Field',
-              field: expect.objectContaining({ type: Object }),
-            }),
-          }),
-        ]),
-      );
-    });
-
-    it('rerenders on parent change (true)', () => {
-      const Field = connectField(Test);
-
-      const wrapper = mount(<Field name="field.subfield" />, reactContext);
-
-      wrapper.update();
-
-      expect(Test).toHaveBeenCalledTimes(1);
-    });
-
-    it('rerenders on parent change (if any) (true)', () => {
-      const Field = connectField(Test);
-
-      const wrapper = mount(<Field name="field.subfield" />, reactContext);
-
-      wrapper.setProps({
-        value: {
-          uniforms: {
-            ...reactContext.context.uniforms,
-            model: { field: { field: 1 } },
-          },
-        },
-      });
-
-      expect(Test).toHaveBeenCalledTimes(2);
-    });
-
-    it('hides parent field (false)', () => {
-      const Field = connectField(Test, { includeParent: false });
-
-      mount(<Field name="field.subfield" />, reactContext);
-
-      expect(Test.mock.calls[0]).not.toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            parent: { label: 'Field', field: { type: Object } },
-          }),
-        ]),
-      );
-    });
-  });
-
   describe('when called with `includeInChain`', () => {
     it('is in chain (true)', () => {
-      const Field1 = connectField(props => props.children, {
+      const Field1 = connectField(props => <>{props.children}</>, {
         includeInChain: true,
       });
       const Field2 = connectField(Test);
@@ -167,7 +89,7 @@ describe('connectField', () => {
     });
 
     it('is not in chain (false)', () => {
-      const Field1 = connectField(props => props.children, {
+      const Field1 = connectField(props => <>{props.children}</>, {
         includeInChain: false,
       });
       const Field2 = connectField(Test);
@@ -213,21 +135,12 @@ describe('connectField', () => {
     });
   });
 
-  describe('when called with `mapProps`', () => {
-    it('provides mapped props', () => {
-      const Field = connectField(Test, { mapProps: () => ({ a: 1 }) });
-
-      mount(<Field name="field" />, reactContext);
-
-      expect(Test.mock.calls[0]).toEqual(expect.arrayContaining([{}]));
-    });
-  });
-
   describe('when rendered with value', () => {
-    it('treats value as initial value', () => {
+    it('treats value as initial value', async () => {
       const Field = connectField(Test);
 
       mount(<Field name="field" value="initialValueExample" />, reactContext);
+      await new Promise(resolve => setTimeout(resolve, 10));
 
       expect(onChange).toBeCalledWith('field', 'initialValueExample');
     });

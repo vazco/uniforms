@@ -26,7 +26,7 @@ export default function connectField<
       (_, key) => props[key] !== null && props[key] !== undefined,
     );
 
-    if (!anyFlowingPropertySet && !options?.includeInChain) {
+    if (!anyFlowingPropertySet && options?.includeInChain === false) {
       return <Component {...((props as unknown) as Props)} {...fieldProps} />;
     }
 
@@ -37,7 +37,7 @@ export default function connectField<
       );
     }
 
-    if (options?.includeInChain)
+    if (options?.includeInChain !== false)
       nextContext.name = nextContext.name.concat(props.name);
 
     return (

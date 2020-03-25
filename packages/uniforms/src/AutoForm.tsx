@@ -60,31 +60,20 @@ function Auto<Base extends typeof ValidatedQuickForm>(base: Base) {
     }
 
     onChange(key: any, value: any) {
-      const updateState = (state: any) => ({
-        modelSync: set(cloneDeep(state.modelSync), key, value),
-      });
-      const updateModel = (state: any) => {
-        if (this.props.onChangeModel) {
-          this.props.onChangeModel(state.modelSync);
-        }
-
-        return { model: state.modelSync };
-      };
-
-      // Before componentDidMount, every call to onChange should call BaseForm#onChange synchronously
-      if (this.state.changed === null) {
-        this.setState(updateState);
-        super.onChange(key, value);
-        this.setState(updateModel);
-      } else {
-        this.setState(updateState, () => {
+      this.setState(
+        state => ({ modelSync: set(cloneDeep(state.modelSync), key, value) }),
+        () => {
           super.onChange(key, value);
-          this.setState(updateModel);
-        });
-      }
+          this.setState(state => {
+            if (this.props.onChangeModel)
+              this.props.onChangeModel(state.modelSync);
+            return { model: state.modelSync };
+          });
+        },
+      );
     }
 
-    __reset(state: any) {
+    __reset(state: State) {
       return {
         ...super.__reset(state),
         model: this.props.model,

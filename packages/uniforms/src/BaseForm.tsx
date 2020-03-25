@@ -229,7 +229,7 @@ export default class BaseForm<
     }
   }
 
-  __reset(state: BaseFormState<Model>) {
+  __reset(state: State) {
     return {
       changed: false,
       changedMap: Object.create(null),

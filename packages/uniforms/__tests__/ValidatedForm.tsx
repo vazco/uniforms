@@ -1,4 +1,5 @@
 import React from 'react';
+import { ReactWrapper } from 'enzyme';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
 import { ValidatedForm } from 'uniforms';
 
@@ -33,7 +34,7 @@ describe('ValidatedForm', () => {
   });
 
   describe('on validation', () => {
-    let wrapper;
+    let wrapper: ReactWrapper<typeof ValidatedForm>;
     let form;
 
     beforeEach(() => {

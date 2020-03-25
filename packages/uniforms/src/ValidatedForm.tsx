@@ -70,10 +70,9 @@ function Validated<Base extends typeof BaseForm>(base: Base) {
       return super.getContextError() || this.state.error;
     }
 
-    getContextState() {
+    getContext() {
       return {
-        ...super.getContextState(),
-
+        ...super.getContext(),
         validating: this.state.validating,
       };
     }
@@ -120,7 +119,7 @@ function Validated<Base extends typeof BaseForm>(base: Base) {
       super.onChange(key, value);
     }
 
-    __reset(state: ValidatedFormState<Model>) {
+    __reset(state: State) {
       return {
         ...super.__reset(state),
         error: null,
