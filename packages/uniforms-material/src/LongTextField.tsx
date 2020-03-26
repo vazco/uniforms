@@ -1,6 +1,14 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
+import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
 import { connectField, filterDOMProps } from 'uniforms';
+
+type LongTextFieldProps = {
+  errorMessage?: string;
+  showInlineError?: boolean;
+  label: string;
+  onChange: (value?: string) => void;
+  value?: string;
+} & StandardTextFieldProps;
 
 const LongText = ({
   disabled,
@@ -15,26 +23,26 @@ const LongText = ({
   showInlineError,
   value,
   ...props
-}) => (
+}: LongTextFieldProps) => (
   <TextField
     disabled={!!disabled}
     error={!!error}
     helperText={(error && showInlineError && errorMessage) || helperText}
     label={label}
+    margin={props.margin ?? 'dense'}
     multiline
     name={name}
     onChange={event => disabled || onChange(event.target.value)}
     placeholder={placeholder}
     ref={inputRef}
-    value={value}
+    value={value ?? ''}
     {...filterDOMProps(props)}
   />
 );
 
 LongText.defaultProps = {
   fullWidth: true,
-  margin: 'dense',
   type: 'text',
 };
 
-export default connectField(LongText);
+export default connectField<LongTextFieldProps>(LongText);
