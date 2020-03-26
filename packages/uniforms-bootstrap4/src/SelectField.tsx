@@ -104,7 +104,7 @@ const Select = ({
         ref={inputRef}
         value={value ?? ''}
       >
-        {(!!placeholder || !required || value === '') && (
+        {(!!placeholder || !required || value === undefined) && (
           <option value="" disabled={required} hidden={required}>
             {placeholder || label}
           </option>
