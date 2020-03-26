@@ -1,14 +1,8 @@
 import React from 'react';
-import identity from 'lodash/identity';
 import { NumField } from 'uniforms-bootstrap4';
 
 import createContext from './_createContext';
 import mount from './_mount';
-
-const expectedValueTransform =
-  parseInt(React.version, 10) >= 16
-    ? identity
-    : x => (x === undefined ? '' : '' + x);
 
 test('<NumField> - renders an input', () => {
   const element = <NumField name="x" />;
@@ -115,7 +109,7 @@ test('<NumField> - renders an input with correct value (model)', () => {
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
-  expect(wrapper.find('input').prop('value')).toBe(expectedValueTransform(1));
+  expect(wrapper.find('input').prop('value')).toBe(1);
 
   // NOTE: All following tests are here to cover hacky NumField implementation.
   const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
@@ -129,23 +123,19 @@ test('<NumField> - renders an input with correct value (model)', () => {
     { value: 1, decimal: false },
     { value: 1, decimal: false },
   ].forEach(({ decimal = true, value }) => {
-    const valueInput = expectedValueTransform(value);
-
     wrapper.setProps({ decimal });
 
     expect(
       wrapper.find('input').simulate('change', { target: { value: '' } }),
     ).toBeTruthy();
     expect(
-      wrapper
-        .find('input')
-        .simulate('change', { target: { value: valueInput } }),
+      wrapper.find('input').simulate('change', { target: { value } }),
     ).toBeTruthy();
     expect(onChange).toHaveBeenLastCalledWith('x', value);
 
     wrapper.setProps({ value: undefined });
     wrapper.setProps({ value });
-    expect(wrapper.find('input').prop('value')).toBe(valueInput);
+    expect(wrapper.find('input').prop('value')).toBe(value ?? '');
   });
 
   spy.mockRestore();
@@ -156,7 +146,7 @@ test('<NumField> - renders an input with correct value (specified)', () => {
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
   expect(wrapper.find('input')).toHaveLength(1);
-  expect(wrapper.find('input').prop('value')).toBe(expectedValueTransform(2));
+  expect(wrapper.find('input').prop('value')).toBe(2);
 });
 
 test('<NumField> - renders an input which correctly reacts on change', () => {
