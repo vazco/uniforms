@@ -1,13 +1,19 @@
-import React, { Component } from 'react';
+import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
 import { connectField } from 'uniforms';
 
 import wrapField from './wrapField';
 
-const noneIfNaN = x => (isNaN(x) ? undefined : x);
-const parse = (decimal, x) => noneIfNaN((decimal ? parseFloat : parseInt)(x));
+type NumFieldProps = {
+  inputRef?: Ref<HTMLInputElement>;
+  onChange: (value?: number) => void;
+  inputClassName?: string;
+  decimal?: boolean;
+  error?: boolean;
+  value?: number;
+} & HTMLProps<HTMLDivElement>;
 
-const Num = (props: any) =>
+const Num = (props: NumFieldProps) =>
   wrapField(
     props,
     <input
@@ -28,8 +34,8 @@ const Num = (props: any) =>
       ref={props.inputRef}
       step={props.step || (props.decimal ? 0.01 : 1)}
       type="number"
-      value={props.value}
+      value={props.value ?? ''}
     />,
   );
 
-export default connectField(Num);
+export default connectField<NumFieldProps>(Num);
