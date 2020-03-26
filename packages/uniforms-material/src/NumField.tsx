@@ -1,6 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { connectField, filterDOMProps } from 'uniforms';
+import { StandardTextFieldProps } from '@material-ui/core/TextField/TextField';
+
+type NumFieldProps = {
+  decimal?: boolean;
+  errorMessage?: string;
+  max?: number;
+  min?: number;
+  showInlineError?: boolean;
+  onChange: (value?: number) => void;
+  value?: number;
+} & StandardTextFieldProps;
 
 const Num = ({
   decimal,
@@ -19,7 +30,7 @@ const Num = ({
   showInlineError,
   value,
   ...props
-}) => (
+}: NumFieldProps) => (
   <TextField
     disabled={!!disabled}
     error={!!error}
@@ -35,14 +46,11 @@ const Num = ({
     placeholder={placeholder}
     ref={inputRef}
     type="number"
-    value={value}
+    margin={props.margin ?? 'dense'}
+    fullWidth={props.fullWidth ?? true}
+    value={value ?? ''}
     {...filterDOMProps(props)}
   />
 );
 
-Num.defaultProps = {
-  fullWidth: true,
-  margin: 'dense',
-};
-
-export default connectField(Num);
+export default connectField<NumFieldProps>(Num);

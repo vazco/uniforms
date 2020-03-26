@@ -1,15 +1,9 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import identity from 'lodash/identity';
 import { NumField } from 'uniforms-material';
 
 import createContext from './_createContext';
 import mount from './_mount';
-
-const expectedValueTransform =
-  parseInt(React.version, 10) >= 16
-    ? identity
-    : x => (x === undefined ? '' : '' + x);
 
 test('<NumField> - renders a TextField', () => {
   const element = <NumField name="x" />;
@@ -116,7 +110,7 @@ test('<NumField> - renders a TextField with correct value (model)', () => {
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);
-  expect(wrapper.find(TextField).prop('value')).toBe(expectedValueTransform(1));
+  expect(wrapper.find(TextField).prop('value')).toBe(1);
 
   // NOTE: All following tests are here to cover hacky NumField implementation.
   const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
@@ -130,23 +124,19 @@ test('<NumField> - renders a TextField with correct value (model)', () => {
     { value: 1, decimal: false },
     { value: 1, decimal: false },
   ].forEach(({ decimal = true, value }) => {
-    const valueInput = expectedValueTransform(value);
-
     wrapper.setProps({ decimal });
 
     expect(
       wrapper.find('input').simulate('change', { target: { value: '' } }),
     ).toBeTruthy();
     expect(
-      wrapper
-        .find('input')
-        .simulate('change', { target: { value: valueInput } }),
+      wrapper.find('input').simulate('change', { target: { value } }),
     ).toBeTruthy();
     expect(onChange).toHaveBeenLastCalledWith('x', value);
 
     wrapper.setProps({ value: undefined });
     wrapper.setProps({ value });
-    expect(wrapper.find('input').prop('value')).toBe(valueInput);
+    expect(wrapper.find('input').prop('value')).toBe(value ?? '');
   });
 
   spy.mockRestore();
@@ -157,7 +147,7 @@ test('<NumField> - renders a TextField with correct value (specified)', () => {
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
   expect(wrapper.find(TextField)).toHaveLength(1);
-  expect(wrapper.find(TextField).prop('value')).toBe(expectedValueTransform(2));
+  expect(wrapper.find(TextField).prop('value')).toBe(2);
 });
 
 test('<NumField> - renders a TextField which correctly reacts on change', () => {
