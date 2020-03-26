@@ -37,6 +37,7 @@ const Text = ({
     placeholder={placeholder}
     ref={inputRef}
     type={type}
+    margin={props.margin ?? 'dense'}
     value={value ?? ''}
     {...filterDOMProps(props)}
   />
@@ -44,7 +45,6 @@ const Text = ({
 
 Text.defaultProps = {
   fullWidth: true,
-  // margin: 'dense', 
   type: 'text',
 };
 
