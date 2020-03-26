@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
 import { connectField } from 'uniforms';
 
 import wrapField from './wrapField';
 
-const Text = props =>
+type TextFieldProps = {
+  inputClassName?: string;
+  error?: boolean;
+  inputRef?: Ref<HTMLInputElement>;
+  onChange: (value?: string) => void;
+  value?: string;
+} & HTMLProps<HTMLInputElement>;
+
+const Text = (props: TextFieldProps) =>
   wrapField(
     { feedbackable: true, ...props },
     <input
@@ -17,11 +25,9 @@ const Text = props =>
       onChange={event => props.onChange(event.target.value)}
       placeholder={props.placeholder}
       ref={props.inputRef}
-      type={props.type}
+      type={props.type ?? 'text'}
       value={props.value ?? ''}
     />,
   );
 
-Text.defaultProps = { type: 'text' };
-
-export default connectField(Text);
+export default connectField<TextFieldProps>(Text);
