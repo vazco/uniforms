@@ -1,10 +1,15 @@
-import Input from 'antd/lib/input';
-import React from 'react';
+import Input, { InputProps } from 'antd/lib/input';
+import React, { Ref } from 'react';
 import { connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
-const Text = props =>
+type TextFieldProps = {
+  onChange: (value?: string) => void;
+  value?: string;
+  inputRef?: Ref<Input>;
+} & InputProps;
+const Text = (props: TextFieldProps) =>
   wrapField(
     props,
     <Input
@@ -14,12 +19,10 @@ const Text = props =>
       onChange={event => props.onChange(event.target.value)}
       placeholder={props.placeholder}
       ref={props.inputRef}
-      type={props.type}
+      type={props.type ?? 'text'}
       value={props.value ?? ''}
       {...filterDOMProps(props)}
     />,
   );
 
-Text.defaultProps = { type: 'text' };
-
-export default connectField(Text);
+export default connectField<TextFieldProps>(Text);
