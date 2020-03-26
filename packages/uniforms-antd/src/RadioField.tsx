@@ -1,17 +1,26 @@
-import RadioAntD from 'antd/lib/radio';
+import RadioAntD, { RadioProps } from 'antd/lib/radio';
 import React from 'react';
 import { connectField, filterDOMProps } from 'uniforms';
+import { GroupProps } from 'antd/lib/input';
 
 import wrapField from './wrapField';
 
-const Radio = props =>
+type RadioFieldProps = {
+  transform?: (string?: string) => string;
+  allowedValues: string[];
+  onChange: (string) => void;
+  value?: string;
+} & GroupProps &
+  RadioProps;
+
+const Radio = (props: RadioFieldProps) =>
   wrapField(
     props,
     <RadioAntD.Group
       disabled={props.disabled}
       name={props.name}
       onChange={event => props.onChange(event.target.value)}
-      value={props.value}
+      value={props.value ?? ''}
       {...filterDOMProps(props)}
     >
       {props.allowedValues.map(value => (
