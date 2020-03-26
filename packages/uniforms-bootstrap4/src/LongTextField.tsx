@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
 import { connectField } from 'uniforms';
 
 import wrapField from './wrapField';
 
-const LongText = props =>
+type LongTextFieldProps = {
+  inputClassName?: string;
+  error?: boolean;
+  onChange: (value?: string) => void;
+  inputRef?: Ref<HTMLTextAreaElement>;
+  value?: string;
+} & HTMLProps<HTMLDivElement>;
+
+const LongText = (props: LongTextFieldProps) =>
   wrapField(
     props,
     <textarea
@@ -18,8 +26,8 @@ const LongText = props =>
       placeholder={props.placeholder}
       ref={props.inputRef}
       rows={props.rows}
-      value={props.value}
+      value={props.value ?? ''}
     />,
   );
 
-export default connectField(LongText);
+export default connectField<LongTextFieldProps>(LongText);
