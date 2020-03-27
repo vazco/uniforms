@@ -1,5 +1,5 @@
-import Input from 'antd/lib/input';
-import React from 'react';
+import Input, { InputProps, TextAreaProps } from 'antd/lib/input';
+import React, { Ref } from 'react';
 import { connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
@@ -10,9 +10,17 @@ const [TextArea, textAreaProps] = Input.TextArea
   ? [Input.TextArea, {}]
   : [Input, { type: 'textarea' }];
 
-const LongText = props =>
+type LongTextFieldProps = {
+  onChange: (value?: any) => void;
+  inputRef: Ref<Input>;
+  value?: string;
+  prefix?: string;
+} & (InputProps | TextAreaProps);
+
+const LongText = (props: LongTextFieldProps) =>
   wrapField(
     props,
+    // @ts-ignore
     <TextArea
       disabled={props.disabled}
       id={props.id}
@@ -20,7 +28,7 @@ const LongText = props =>
       onChange={event => props.onChange(event.target.value)}
       placeholder={props.placeholder}
       ref={props.inputRef}
-      value={props.value}
+      value={props.value ?? ''}
       {...textAreaProps}
       {...filterDOMProps(props)}
     />,
@@ -28,4 +36,4 @@ const LongText = props =>
 
 LongText.defaultProps = { rows: 5 };
 
-export default connectField(LongText);
+export default connectField<LongTextFieldProps>(LongText);
