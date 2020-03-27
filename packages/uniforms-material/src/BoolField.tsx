@@ -1,30 +1,39 @@
-import Checkbox from '@material-ui/core/Checkbox';
+import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import React from 'react';
-import Switch from '@material-ui/core/Switch';
+import Switch, { SwitchProps } from '@material-ui/core/Switch';
 import { connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
-const Bool = ({
-  appearance,
-  disabled,
-  inputRef,
-  label,
-  legend,
-  name,
-  onChange,
-  transform,
-  value,
-  ...props
-}) => {
-  const SelectionControl = appearance === 'checkbox' ? Checkbox : Switch;
+type BoolFieldProps = {
+  appearance?: 'checkbox' | 'switch';
+  label?: string;
+  legend?: string;
+  onChange?: (value: any) => void;
+  transform?: (label?: string) => string;
+} & (CheckboxProps | SwitchProps);
+
+const Bool = (props: BoolFieldProps) => {
+  const {
+    appearance,
+    disabled,
+    inputRef,
+    label,
+    legend,
+    name,
+    onChange,
+    transform,
+    value,
+  } = props;
+  const SelectionControl =
+    appearance === 'checkbox' || appearance === undefined ? Checkbox : Switch;
   const filteredProps = wrapField._filterDOMProps(filterDOMProps(props));
 
   return wrapField(
-    { ...props, component: 'fieldset', disabled },
+    { fullWidth: true, margin: 'dense', ...props, component: 'fieldset' },
     legend && (
       <FormLabel component="legend" htmlFor={name}>
         {legend}
@@ -36,7 +45,9 @@ const Bool = ({
           <SelectionControl
             checked={!!value}
             name={name}
-            onChange={event => disabled || onChange(event.target.checked)}
+            onChange={event =>
+              !disabled && onChange && onChange(event.target.checked)
+            }
             ref={inputRef}
             value={name}
             {...filteredProps}
@@ -46,12 +57,6 @@ const Bool = ({
       />
     </FormGroup>,
   );
-};
-
-Bool.defaultProps = {
-  appearance: 'checkbox',
-  fullWidth: true,
-  margin: 'dense',
 };
 
 export default connectField(Bool);
