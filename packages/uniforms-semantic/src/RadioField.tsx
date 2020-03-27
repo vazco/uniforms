@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
 import { connectField, filterDOMProps } from 'uniforms';
 
@@ -7,6 +7,16 @@ const base64 =
     ? btoa
     : (x: string) => Buffer.from(x).toString('base64');
 const escape = (x: string) => base64(x).replace(/=+$/, '');
+
+type RadioFieldProps = {
+  allowedValues: string[];
+  checkboxes?: boolean;
+  onChange: (string) => void;
+  transform?: (string?: string) => string;
+  error?: boolean;
+  showInlineError?: boolean;
+  errorMessage?: string;
+} & HTMLProps<HTMLDivElement>;
 
 const Radio = ({
   allowedValues,
@@ -24,7 +34,7 @@ const Radio = ({
   transform,
   value,
   ...props
-}) => (
+}: RadioFieldProps) => (
   <div
     className={classnames(className, { disabled, error }, 'grouped fields')}
     {...filterDOMProps(props)}
@@ -60,4 +70,4 @@ const Radio = ({
   </div>
 );
 
-export default connectField(Radio);
+export default connectField<RadioFieldProps>(Radio);

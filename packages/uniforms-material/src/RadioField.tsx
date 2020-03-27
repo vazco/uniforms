@@ -1,11 +1,21 @@
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import RadioMaterial from '@material-ui/core/Radio';
+import RadioMaterial, {
+  RadioProps as RadioMaterialProps,
+} from '@material-ui/core/Radio';
 import React from 'react';
 import { connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
+
+type RadioFieldProps = {
+  allowedValues: string[];
+  checkboxes?: boolean;
+  onChange: (string) => void;
+  transform?: (string?: string) => string;
+  label?: string;
+} & RadioMaterialProps;
 
 const Radio = ({
   allowedValues,
@@ -19,7 +29,7 @@ const Radio = ({
   transform,
   value,
   ...props
-}) => {
+}: RadioFieldProps) => {
   const filteredProps = wrapField._filterDOMProps(filterDOMProps(props));
 
   return wrapField(
@@ -48,9 +58,4 @@ const Radio = ({
   );
 };
 
-Radio.defaultProps = {
-  fullWidth: true,
-  margin: 'dense',
-};
-
-export default connectField(Radio);
+export default connectField<RadioFieldProps>(Radio);

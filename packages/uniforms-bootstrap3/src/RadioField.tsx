@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
 import { connectField } from 'uniforms';
 
@@ -10,7 +10,16 @@ const base64 =
     : (x: string) => Buffer.from(x).toString('base64');
 const escape = (x: string) => base64(x).replace(/=+$/, '');
 
-const Radio = props =>
+type RadioFieldProps = {
+  allowedValues: string[];
+  inputClassName?: string;
+  error?: boolean;
+  inline?: boolean;
+  onChange: (string) => void;
+  transform?: (string?: string) => string;
+} & HTMLProps<HTMLDivElement>;
+
+const Radio = (props: RadioFieldProps) =>
   wrapField(
     props,
     props.allowedValues.map(item => (
@@ -36,4 +45,4 @@ const Radio = props =>
     )),
   );
 
-export default connectField(Radio);
+export default connectField<RadioFieldProps>(Radio);

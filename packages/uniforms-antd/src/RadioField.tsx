@@ -39,4 +39,4 @@ const Radio = (props: RadioFieldProps) =>
     </RadioAntD.Group>,
   );
 
-export default connectField(Radio);
+export default connectField<RadioFieldProps>(Radio);
