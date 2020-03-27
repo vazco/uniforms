@@ -1,16 +1,54 @@
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
+import FormControlLabel, {
+  FormControlLabelProps,
+} from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import React from 'react';
-import Switch from '@material-ui/core/Switch';
-import TextField from '@material-ui/core/TextField';
+import Switch, { SwitchProps } from '@material-ui/core/Switch';
+import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import { connectField, filterDOMProps } from 'uniforms';
+import { SelectProps as MaterialSelectProps } from '@material-ui/core/Select';
 
 import wrapField from './wrapField';
+
+type SelectFieldProps = { checkboxes?: boolean } & (
+  | CheckboxesProps
+  | SelectProps
+);
+
+type SelectionControlProps = CheckboxProps | SwitchProps;
+
+type CheckboxesProps = {
+  showInlineError?: boolean;
+  error?: boolean;
+  errorMessage?: string;
+  label?: string;
+  appearance?: 'checkbox' | 'switch';
+  fieldType?: typeof Array | any; //?
+  legend?: string;
+  onChange: (value?: string | string[]) => void;
+  transform?: (item?: string) => string;
+  allowedValues: string[];
+  value: string | string[];
+} & (FormControlLabelProps | SelectionControlProps);
+
+type SelectProps = {
+  allowedValues: string[];
+  error?: boolean;
+  errorMessage?: string;
+  fieldType?: typeof Array | any; //?
+  labelProps?: object;
+  onChange: (value?: string | string[]) => void;
+  showInlineError?: boolean;
+  transform?: (item?: string) => string;
+  native?: boolean;
+  value: string | string[];
+} & TextFieldProps &
+  MaterialSelectProps;
 
 const base64 =
   typeof btoa !== 'undefined'
@@ -52,7 +90,7 @@ const renderSelect = ({
   value,
   variant,
   ...props
-}) => {
+}: SelectProps) => {
   const Item = native ? 'option' : MenuItem;
   const hasPlaceholder = !!placeholder;
   const hasValue = value !== '' && value !== undefined;
@@ -101,7 +139,7 @@ const renderSelect = ({
   );
 };
 
-const renderCheckboxes = ({
+function renderCheckboxes({
   allowedValues,
   appearance,
   disabled,
@@ -118,7 +156,7 @@ const renderCheckboxes = ({
   transform,
   value,
   ...props
-}) => {
+}: CheckboxesProps) {
   let children;
   const filteredProps = wrapField._filterDOMProps(filterDOMProps(props));
 
@@ -129,7 +167,7 @@ const renderCheckboxes = ({
         name={name}
         onChange={(event: any) => disabled || onChange(event.target.value)}
         ref={inputRef}
-        value={value}
+        value={value ?? ''}
       >
         {allowedValues.map(item => (
           <FormControlLabel
@@ -155,7 +193,7 @@ const renderCheckboxes = ({
                 name={name}
                 onChange={() => disabled || onChange(xor(item, value))}
                 ref={inputRef}
-                value={props.name}
+                value={name}
                 {...filteredProps}
               />
             }
@@ -181,15 +219,21 @@ const renderCheckboxes = ({
     ),
     children,
   );
+}
+
+const Select = (props: SelectFieldProps) => {
+  return props.checkboxes
+    ? renderCheckboxes({
+        ...props,
+        value: props.value ?? '',
+        appearance: (props as CheckboxesProps).appearance ?? 'checkbox',
+      } as CheckboxesProps)
+    : renderSelect({
+        ...props,
+        value: props.value ?? '',
+        fullWidth: (props as SelectProps).fullWidth ?? true,
+        margin: (props as SelectProps).margin ?? 'dense',
+      } as SelectProps);
 };
 
-const Select = ({ checkboxes, ...props }: any) =>
-  checkboxes ? renderCheckboxes(props) : renderSelect(props);
-
-Select.defaultProps = {
-  appearance: 'checkbox',
-  fullWidth: true,
-  margin: 'dense',
-};
-
-export default connectField(Select);
+export default connectField<SelectFieldProps>(Select);
