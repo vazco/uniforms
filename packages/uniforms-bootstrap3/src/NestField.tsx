@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
 import { connectField, filterDOMProps, injectName, joinName } from 'uniforms';
 
 import AutoField from './AutoField';
+
+type NestFieldProps = {
+  error?: boolean;
+  errorMessage?: string;
+  fields?: any[];
+  itemProps?: object;
+  name: string;
+  showInlineError?: boolean;
+  label?: string;
+} & HTMLProps<HTMLDivElement>;
 
 const Nest = ({
   children,
@@ -15,7 +25,7 @@ const Nest = ({
   name,
   showInlineError,
   ...props
-}) => (
+}: NestFieldProps) => (
   <div
     className={classnames(className, { 'has-error': error })}
     {...filterDOMProps(props)}
@@ -28,10 +38,10 @@ const Nest = ({
 
     {children
       ? injectName(name, children)
-      : fields.map((key: any) => (
+      : fields?.map((key: any) => (
           <AutoField key={key} name={joinName(name, key)} {...itemProps} />
         ))}
   </div>
 );
 
-export default connectField(Nest, { includeInChain: false });
+export default connectField<NestFieldProps>(Nest, { includeInChain: false });

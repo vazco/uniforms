@@ -1,18 +1,31 @@
-import React from 'react';
+import React, { HTMLProps } from 'react';
 import { connectField, filterDOMProps, injectName, joinName } from 'uniforms';
 
 import AutoField from './AutoField';
 
-const Nest = ({ children, fields, itemProps, label, name, ...props }) => (
+type NestFieldProps = {
+  itemProps?: object;
+  name: string;
+  fields?: any[];
+} & HTMLProps<HTMLDivElement>;
+
+const Nest = ({
+  children,
+  itemProps,
+  fields,
+  label,
+  name,
+  ...props
+}: NestFieldProps) => (
   <div {...filterDOMProps(props)}>
     {label && <label>{label}</label>}
 
     {children
       ? injectName(name, children)
-      : fields.map(key => (
+      : fields?.map(key => (
           <AutoField key={key} name={joinName(name, key)} {...itemProps} />
         ))}
   </div>
 );
 
-export default connectField(Nest, { includeInChain: false });
+export default connectField<NestFieldProps>(Nest, { includeInChain: false });
