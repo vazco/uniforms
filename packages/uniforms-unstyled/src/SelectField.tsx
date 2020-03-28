@@ -41,10 +41,12 @@ const Select = ({
   <div {...filterDOMProps(props)}>
     {label && <label htmlFor={id}>{label}</label>}
     {checkboxes || fieldType === Array ? (
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       allowedValues!.map(item => (
         <div key={item}>
           <input
             checked={
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
               fieldType === Array ? value!.includes(item) : value === item
             }
             disabled={disabled}
@@ -78,6 +80,7 @@ const Select = ({
           </option>
         )}
 
+        {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
         {allowedValues!.map(value => (
           <option key={value} value={value}>
             {transform ? transform(value) : value}

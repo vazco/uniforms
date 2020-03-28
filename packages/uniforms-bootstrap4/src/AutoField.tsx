@@ -50,5 +50,6 @@ export default function AutoField(originalProps: AutoFieldProps) {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return createElement(component!, props);
 }

@@ -22,6 +22,7 @@ export default function ListDel<T>(rawProps: ListDelProps<T>) {
 
   const fieldIndex = +nameParts[nameParts.length - 1];
   const limitNotReached =
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     !props.disabled && !(parent.minCount! >= parent.value!.length);
   return (
     <i
@@ -34,6 +35,7 @@ export default function ListDel<T>(rawProps: ListDelProps<T>) {
       )}
       onClick={() => {
         if (limitNotReached) {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           const value = parent.value!.slice();
           value.splice(fieldIndex, 1);
           parent.onChange(value);

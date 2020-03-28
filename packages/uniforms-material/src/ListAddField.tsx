@@ -23,6 +23,7 @@ function ListAdd<T>(rawProps: ListAddProps<T>) {
   if (rawProps.parent) Object.assign(parent, rawProps.parent);
 
   const limitNotReached =
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     !props.disabled && !(parent.maxCount! <= parent.value!.length);
   return (
     <FormControl
@@ -34,6 +35,7 @@ function ListAdd<T>(rawProps: ListAddProps<T>) {
         disabled={!limitNotReached}
         onClick={() => {
           if (limitNotReached)
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             parent.onChange(parent.value!.concat([cloneDeep(props.value!)]));
         }}
         {...filterDOMProps(props)}

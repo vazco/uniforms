@@ -20,6 +20,7 @@ export default function ListAdd<T>(rawProps: ListAddProps<T>) {
   if (rawProps.parent) Object.assign(parent, rawProps.parent);
 
   const limitNotReached =
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     !props.disabled && !(parent.maxCount! <= parent.value!.length);
 
   return (
@@ -33,6 +34,7 @@ export default function ListAdd<T>(rawProps: ListAddProps<T>) {
       )}
       onClick={() =>
         limitNotReached &&
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         parent.onChange(parent.value!.concat([cloneDeep(props.value!)]))
       }
     />

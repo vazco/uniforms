@@ -49,5 +49,6 @@ export default function AutoField(originalProps: AutoFieldProps) {
       invariant(component, 'Unsupported field type: %s', fieldType);
     }
   }
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return createElement(component!, props);
 }
