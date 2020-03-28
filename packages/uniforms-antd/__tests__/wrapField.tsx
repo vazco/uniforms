@@ -5,6 +5,22 @@ import { wrapField } from 'uniforms-antd';
 
 import mount from './_mount';
 
+beforeAll(() => {
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: jest.fn().mockImplementation(query => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(), // deprecated
+      removeListener: jest.fn(), // deprecated
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    })),
+  });
+});
+
 test('<wrapField> - renders wrapper with label', () => {
   const element = wrapField({ label: 'Label' }, <div />);
   const wrapper = mount(element);

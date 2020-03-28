@@ -35,7 +35,7 @@ test('<ListDelField> - prevents onClick when disabled', () => {
     createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
-  expect(wrapper.find('i').simulate('click')).toBeTruthy();
+  expect(wrapper.find('span').simulate('click')).toBeTruthy();
   expect(onChange).not.toHaveBeenCalled();
 });
 
@@ -53,7 +53,7 @@ test('<ListDelField> - prevents onClick when limit reached', () => {
     createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
-  expect(wrapper.find('i').simulate('click')).toBeTruthy();
+  expect(wrapper.find('span').simulate('click')).toBeTruthy();
   expect(onChange).not.toHaveBeenCalled();
 });
 
@@ -68,6 +68,6 @@ test('<ListDelField> - correctly reacts on click', () => {
     createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
-  expect(wrapper.find('i').simulate('click')).toBeTruthy();
+  expect(wrapper.find('span').simulate('click')).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith(['x', 'z']);
 });

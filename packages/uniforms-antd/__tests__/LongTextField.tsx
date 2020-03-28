@@ -7,6 +7,22 @@ import mount from './_mount';
 
 const TextArea = Input.TextArea || Input;
 
+beforeAll(() => {
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: jest.fn().mockImplementation(query => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(), // deprecated
+      removeListener: jest.fn(), // deprecated
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    })),
+  });
+});
+
 test('<LongTextField> - renders a textarea', () => {
   const element = <LongTextField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));

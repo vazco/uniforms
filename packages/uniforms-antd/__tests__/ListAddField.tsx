@@ -34,7 +34,7 @@ test('<ListAddField> - prevents onClick when disabled', () => {
     createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
-  expect(wrapper.find('i').simulate('click')).toBeTruthy();
+  expect(wrapper.find('span').simulate('click')).toBeTruthy();
   expect(onChange).not.toHaveBeenCalled();
 });
 
@@ -52,7 +52,7 @@ test('<ListAddField> - prevents onClick when limit reached', () => {
     createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
-  expect(wrapper.find('i').simulate('click')).toBeTruthy();
+  expect(wrapper.find('span').simulate('click')).toBeTruthy();
   expect(onChange).not.toHaveBeenCalled();
 });
 
@@ -71,6 +71,6 @@ test('<ListAddField> - correctly reacts on click', () => {
     createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
-  expect(wrapper.find('i').simulate('click')).toBeTruthy();
+  expect(wrapper.find('span').simulate('click')).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith(['y']);
 });
