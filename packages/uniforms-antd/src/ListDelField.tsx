@@ -1,6 +1,7 @@
 import Button, { ButtonProps } from 'antd/lib/button';
 import React from 'react';
 import { filterDOMProps, joinName, useField } from 'uniforms';
+import { DeleteOutlined } from '@ant-design/icons';
 
 type ListDelProps<T> = {
   name: string;
@@ -20,12 +21,14 @@ function ListDel<T>(rawProps: ListDelProps<T>) {
 
   const fieldIndex = +nameParts[nameParts.length - 1];
   const limitNotReached =
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     !props.disabled && !(parent.minCount! >= parent.value!.length);
   return (
     <Button
       disabled={!limitNotReached || rawProps.disabled}
       onClick={() => {
         if (limitNotReached) {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           const value = parent.value!.slice();
           value.splice(fieldIndex, 1);
           parent.onChange(value);
@@ -37,7 +40,7 @@ function ListDel<T>(rawProps: ListDelProps<T>) {
 }
 
 ListDel.defaultProps = {
-  icon: 'delete',
+  icon: <DeleteOutlined />,
   shape: 'circle-outline',
   size: 'small',
   type: 'ghost',

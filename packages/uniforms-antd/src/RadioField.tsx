@@ -1,7 +1,6 @@
 import RadioAntD, { RadioProps } from 'antd/lib/radio';
 import React from 'react';
 import { connectField, filterDOMProps } from 'uniforms';
-import { GroupProps } from 'antd/lib/input';
 
 import wrapField from './wrapField';
 
@@ -10,8 +9,7 @@ type RadioFieldProps = {
   allowedValues: string[];
   onChange: (string) => void;
   value?: string;
-} & GroupProps &
-  RadioProps;
+} & RadioProps;
 
 const Radio = (props: RadioFieldProps) =>
   wrapField(

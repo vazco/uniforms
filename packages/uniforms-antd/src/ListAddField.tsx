@@ -2,6 +2,7 @@ import Button, { ButtonProps } from 'antd/lib/button';
 import React from 'react';
 import cloneDeep from 'lodash/cloneDeep';
 import { filterDOMProps, joinName, useField } from 'uniforms';
+import { PlusSquareOutlined } from '@ant-design/icons';
 
 type ListAddProps<T> = {
   initialCount?: number;
@@ -21,12 +22,14 @@ function ListAdd<T>(rawProps: ListAddProps<T>) {
   if (rawProps.parent) Object.assign(parent, rawProps.parent);
 
   const limitNotReached =
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     !props.disabled && !(parent.maxCount! <= parent.value!.length);
   return (
     <Button
       disabled={!limitNotReached || rawProps.disabled}
       onClick={() => {
         if (limitNotReached)
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           parent.onChange(parent.value!.concat([cloneDeep(props.value!)]));
       }}
       {...filterDOMProps(props)}
@@ -35,7 +38,7 @@ function ListAdd<T>(rawProps: ListAddProps<T>) {
 }
 
 ListAdd.defaultProps = {
-  icon: 'plus-square-o',
+  icon: <PlusSquareOutlined />,
   size: 'small',
   style: { width: '100%' },
   type: 'dashed',

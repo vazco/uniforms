@@ -51,5 +51,6 @@ export default function AutoField(originalProps: AutoFieldProps) {
   }
 
   // TODO: The flow along with the invariant above ensures its existence.
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return createElement(component!, originalProps);
 }

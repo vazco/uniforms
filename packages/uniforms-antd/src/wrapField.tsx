@@ -1,8 +1,8 @@
 import Form from 'antd/lib/form';
-import Icon from 'antd/lib/icon';
 import React from 'react';
 import Tooltip from 'antd/lib/tooltip';
 import { filterDOMProps } from 'uniforms';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 
 export default function wrapField(
   {
@@ -29,7 +29,7 @@ export default function wrapField(
         <span>
           &nbsp;
           <Tooltip title={info}>
-            <Icon type="question-circle-o" />
+            <QuestionCircleOutlined />
           </Tooltip>
         </span>
       )}

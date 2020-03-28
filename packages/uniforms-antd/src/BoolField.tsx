@@ -1,8 +1,8 @@
 import Checkbox from 'antd/lib/checkbox';
-import Icon from 'antd/lib/icon';
 import React, { HTMLProps, Ref } from 'react';
 import Switch from 'antd/lib/switch';
 import { connectField, filterDOMProps } from 'uniforms';
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 
 import wrapField from './wrapField';
 
@@ -31,8 +31,8 @@ const Bool = (props: BoolFieldProps) => {
 
 Bool.defaultProps = {
   checkbox: false,
-  checkedChildren: <Icon type="check" />,
-  unCheckedChildren: <Icon type="close" />,
+  checkedChildren: <CheckOutlined />,
+  unCheckedChildren: <CloseOutlined />,
 };
 
 export default connectField(Bool);

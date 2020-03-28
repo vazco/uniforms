@@ -10,7 +10,6 @@ const Date = (props: any) =>
     props,
     <DatePicker
       disabled={props.disabled}
-      id={props.id}
       name={props.name}
       onChange={value => props.onChange(value && value.toDate())}
       placeholder={props.placeholder}
