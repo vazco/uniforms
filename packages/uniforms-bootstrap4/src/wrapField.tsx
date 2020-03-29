@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { HTMLProps, ReactNode } from 'react';
 import classnames from 'classnames';
 import omit from 'lodash/omit';
 import { filterDOMProps } from 'uniforms';
 
 import gridClassName from './gridClassName';
+
+type WrapperProps = {
+  error?: boolean;
+  errorMessage?: string;
+  grid?: object | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+  help?: string;
+  helpClassName?: string;
+  labelClassName?: string;
+  showInlineError?: boolean;
+  wrapClassName?: string;
+  value?: boolean | string | number | string[] | undefined;
+} & Omit<HTMLProps<HTMLDivElement>, 'value'>;
 
 export default function wrapField(
   {
@@ -21,8 +33,8 @@ export default function wrapField(
     showInlineError, // Show inline error message?
     wrapClassName, // Input wrapper class name.
     ...props
-  }: Record<string, any>,
-  children,
+  }: WrapperProps,
+  children: ReactNode,
 ) {
   const hasWrap = !!(grid || wrapClassName);
   const blockError = !!(error && showInlineError) && (
