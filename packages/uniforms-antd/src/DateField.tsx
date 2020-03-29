@@ -1,18 +1,26 @@
 import DatePicker from 'antd/lib/date-picker';
-import React from 'react';
+import React, { Ref } from 'react';
 import moment from 'moment';
 import { connectField, filterDOMProps } from 'uniforms';
+import { DatePickerProps } from 'antd/lib/date-picker/interface';
 
 import wrapField from './wrapField';
 
-const Date = (props: any) =>
+type DateFieldProps = {
+  inputRef?: Ref<any>;
+  onChange?: (value?: any) => void;
+} & DatePickerProps;
+
+const Date = (props: DateFieldProps) =>
   wrapField(
     props,
     <DatePicker
       disabled={props.disabled}
       id={props.id}
       name={props.name}
-      onChange={value => props.onChange(value && value.toDate())}
+      onChange={value => {
+        props.onChange && props.onChange(value && value.toDate());
+      }}
       placeholder={props.placeholder}
       ref={props.inputRef}
       value={props.value && moment(props.value)}
