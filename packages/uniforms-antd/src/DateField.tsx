@@ -9,7 +9,8 @@ import wrapField from './wrapField';
 type DateFieldProps = {
   inputRef?: Ref<any>;
   onChange?: (value?: any) => void;
-} & DatePickerProps;
+  id: string;
+} & Omit<DatePickerProps, 'id'>;
 
 const Date = (props: DateFieldProps) =>
   wrapField(

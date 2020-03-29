@@ -1,8 +1,16 @@
-import Form from 'antd/lib/form';
+import Form, { FormItemProps } from 'antd/lib/form';
 import Icon from 'antd/lib/icon';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Tooltip from 'antd/lib/tooltip';
 import { filterDOMProps } from 'uniforms';
+
+type WrapperProps = {
+  error?: boolean;
+  errorMessage?: string;
+  info?: string;
+  showInlineError?: boolean;
+  wrapperStyle?: object;
+} & FormItemProps;
 
 export default function wrapField(
   {
@@ -19,8 +27,8 @@ export default function wrapField(
     showInlineError,
     wrapperCol,
     wrapperStyle,
-  }: Record<string, any>,
-  children,
+  }: WrapperProps,
+  children: ReactNode,
 ) {
   const labelNode = !!label && (
     <span>
