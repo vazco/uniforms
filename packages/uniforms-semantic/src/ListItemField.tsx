@@ -1,13 +1,13 @@
-import React, { Children } from 'react';
+import React, { Children, ReactNode } from 'react';
 import { connectField, joinName } from 'uniforms';
 
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
-import { AutoFieldProps } from './Types';
 
 type ListItemProps = {
   name: string;
-} & AutoFieldProps;
+  children?: ReactNode;
+};
 
 const ListItem = (props: ListItemProps) => {
   const { children, name } = props;
