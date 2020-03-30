@@ -10,8 +10,8 @@ type ListItemProps = {
   removeIcon?: any;
 };
 
-const ListItem = (props: ListItemProps) => {
-  const { name, children, removeIcon } = props;
+const ListItem = ({ removeIcon, ...props }: ListItemProps) => {
+  const { name, children } = props;
   return (
     <div className="row">
       <div className="col-1">
