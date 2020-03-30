@@ -2,7 +2,8 @@ import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
 import IconButton, { IconButtonProps } from '@material-ui/core/IconButton';
 import React from 'react';
 import cloneDeep from 'lodash/cloneDeep';
-import { connectField, filterDOMProps, joinName, useField } from 'uniforms';
+import { filterDOMProps, joinName, useField } from 'uniforms';
+import omit from 'lodash/omit';
 
 type ListAddProps<T> = {
   initialCount?: number;
@@ -14,9 +15,13 @@ type ListAddProps<T> = {
   Pick<FormControlProps, 'fullWidth' | 'margin' | 'variant'>;
 
 function ListAdd<T>(rawProps: ListAddProps<T>) {
-  const props = useField<ListAddProps<T>, T>(rawProps.name, rawProps, {
-    initialValue: false,
-  })[0];
+  const props = useField<ListAddProps<T>, T>(
+    rawProps.name,
+    omit(rawProps, 'fullWidth'),
+    {
+      initialValue: false,
+    },
+  )[0];
 
   const parentName = joinName(joinName(null, props.name).slice(0, -1));
   const parent = useField<{ maxCount?: number }, T[]>(parentName, {})[0];
