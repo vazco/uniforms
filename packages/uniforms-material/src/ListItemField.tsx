@@ -13,8 +13,15 @@ type ListItemProps = {
   name: string;
 } & Pick<ListItemMaterialProps, 'dense' | 'divider' | 'disableGutters'>;
 
-const ListItem = (props: ListItemProps) => {
-  const { dense, children, divider, disableGutters, name, removeIcon } = props;
+const ListItem = ({
+  dense,
+  children,
+  divider,
+  disableGutters,
+  name,
+  removeIcon,
+  ...props
+}: ListItemProps) => {
   return (
     <ListItemMaterial
       dense={dense}
@@ -29,7 +36,7 @@ const ListItem = (props: ListItemProps) => {
           }),
         )
       ) : (
-        <AutoField {...props} />
+        <AutoField children={children} name={name} {...props} />
       )}
       <ListDelField name={name} icon={removeIcon} />
     </ListItemMaterial>
