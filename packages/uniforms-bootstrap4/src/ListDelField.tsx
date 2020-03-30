@@ -1,4 +1,4 @@
-import React, { HTMLProps, ReactElement } from 'react';
+import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
 import { filterDOMProps, joinName, useField } from 'uniforms';
 
@@ -9,7 +9,7 @@ type ListDelProps<T> = {
   value?: T;
 } & HTMLProps<HTMLSpanElement>;
 
-function ListDel<T>(rawProps: ListDelProps<T>) {
+function ListDel<T>({ removeIcon, ...rawProps }: ListDelProps<T>) {
   const props = useField<ListDelProps<T>, T>(rawProps.name, rawProps, {
     initialValue: false,
   })[0];
@@ -35,7 +35,7 @@ function ListDel<T>(rawProps: ListDelProps<T>) {
       }}
       {...filterDOMProps(props)}
     >
-      {rawProps.removeIcon}
+      {removeIcon}
     </span>
   );
 }
