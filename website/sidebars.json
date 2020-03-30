@@ -13,7 +13,8 @@
       "examples-common-forms",
       "examples-custom-fields",
       "examples-custom-bridge",
-      "examples-custom-form"
+      "examples-custom-form",
+      "examples-more"
     ],
     "API Reference": [
       "api-forms",

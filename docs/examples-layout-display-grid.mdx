@@ -1,0 +1,49 @@
+---
+id: examples-layout-display-grid
+title: Custom form layout with css display grid
+---
+
+import ExampleCustomizer from '../website/components/ExampleCustomizer';
+import { code, escapedChars } from '../website/components/Code';
+
+import LayoutDisplayGrid from './examples/LayoutDisplayGrid/LayoutDisplayGrid';
+import SampleLayoutSchema from './examples/LayoutDisplayGrid/SampleLayoutSchema.md';
+
+### Using `grid-template-areas`
+
+<ExampleCustomizer
+  code={theme =>
+    code(
+      'js',
+      `import React from 'react';\n
+import schema from './SampleLayoutSchema';
+import { AutoForm, AutoFields } from 'uniforms-${theme}';\n
+export default function SignUpForm() {
+  return (
+    <AutoForm schema={schema}>
+      <AutoFields
+        autoField={AutoLayoutField}
+        style={{
+          display: 'grid',
+          gridTemplateAreas: ${escapedChars.templateStringQuote}
+            "firstName lastName"
+            "workExperience ."
+            ${escapedChars.templateStringQuote},
+          columnGap: '1em',
+          rowGap: '.5em'
+        }}
+      />
+    </AutoForm>
+  );
+}\n
+${escapedChars.function} AutoLayoutField({ name, ...rest }) {
+  const splitByDots = name.split('.');
+  const lastName = splitByDots[splitByDots.length - 1];
+  return <AutoField name={name} style={{ gridArea: lastName }} {...rest} />;
+}
+`
+    )
+  }
+  example={<LayoutDisplayGrid />}
+  schema={<SampleLayoutSchema />}
+/>
