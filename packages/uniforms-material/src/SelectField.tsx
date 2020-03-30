@@ -221,8 +221,8 @@ function renderCheckboxes({
   );
 }
 
-const Select = (props: SelectFieldProps) => {
-  return props.checkboxes
+const Select = ({ checkboxes, ...props }: SelectFieldProps) => {
+  return checkboxes
     ? renderCheckboxes({
         ...props,
         value: props.value ?? '',
