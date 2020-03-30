@@ -80,10 +80,10 @@ type SelectFieldProps = { checkboxes?: boolean } & (
   | SelectProps
 );
 
-const Select = (props: SelectFieldProps) =>
+const Select = ({ checkboxes, ...props }: SelectFieldProps) =>
   wrapField(
     props,
-    props.checkboxes
+    checkboxes
       ? renderCheckboxes(props as CheckboxesProps)
       : renderSelect(props as SelectProps),
   );
