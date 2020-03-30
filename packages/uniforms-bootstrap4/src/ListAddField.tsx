@@ -10,7 +10,7 @@ type ListAddProps<T> = {
   addIcon?: any;
 } & HTMLProps<HTMLDivElement>;
 
-function ListAdd<T>(rawProps: ListAddProps<T>) {
+function ListAdd<T>({ addIcon, ...rawProps }: ListAddProps<T>) {
   const props = useField<ListAddProps<T>, T>(rawProps.name, rawProps, {
     initialValue: false,
   })[0];
@@ -31,7 +31,7 @@ function ListAdd<T>(rawProps: ListAddProps<T>) {
       }}
       {...filterDOMProps(props)}
     >
-      {rawProps.addIcon}
+      {addIcon}
     </div>
   );
 }
