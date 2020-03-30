@@ -26,6 +26,5 @@ it('exports everything', () => {
     ValidatedForm: expect.any(Function),
     ValidatedQuickForm: expect.any(Function),
     wrapField: expect.any(Function),
-    __esModule: true,
   });
 });
