@@ -13,8 +13,15 @@ type BoolFieldProps = {
   checkbox?: boolean;
 } & Omit<HTMLProps<HTMLDivElement>, 'value'>;
 
-const Bool = (props: BoolFieldProps) => {
-  const { checkbox, value, disabled, name, onChange, inputRef } = props;
+const Bool = ({
+  checkbox,
+  disabled,
+  value,
+  name,
+  onChange,
+  inputRef,
+  ...props
+}: BoolFieldProps) => {
   return wrapField(
     props,
     React.createElement(checkbox ? (Checkbox as any) : Switch, {
