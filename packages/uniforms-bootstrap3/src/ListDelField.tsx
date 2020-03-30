@@ -9,7 +9,7 @@ type ListDelProps<T> = {
   removeIcon?: any;
 } & HTMLProps<HTMLDivElement>;
 
-function ListDel<T>(rawProps: ListDelProps<T>) {
+function ListDel<T>({ removeIcon, ...rawProps }: ListDelProps<T>) {
   const props = useField<ListDelProps<T>, T>(rawProps.name, rawProps, {
     initialValue: false,
   })[0];
@@ -34,7 +34,7 @@ function ListDel<T>(rawProps: ListDelProps<T>) {
       }}
       {...filterDOMProps(props)}
     >
-      {rawProps.removeIcon}
+      {removeIcon}
     </span>
   );
 }
