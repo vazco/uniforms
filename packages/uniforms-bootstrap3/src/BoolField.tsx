@@ -4,7 +4,7 @@ import { connectField } from 'uniforms';
 
 import wrapField from './wrapField';
 
-type BoolFieldProps = {
+export type BoolFieldProps = {
   labelBefore: string;
   inputClassName?: string;
   error?: boolean;

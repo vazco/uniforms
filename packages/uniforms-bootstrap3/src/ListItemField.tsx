@@ -4,13 +4,13 @@ import { connectField, joinName } from 'uniforms';
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
 
-type ListItemProps = {
+export type ListItemFieldProps = {
   children?: ReactNode;
   name: string;
   removeIcon?: any;
 };
 
-const ListItem = ({ removeIcon, children, name }: ListItemProps) => (
+const ListItem = ({ removeIcon, children, name }: ListItemFieldProps) => (
   <div className="row">
     <div className="col-xs-1">
       <ListDelField name={name} removeIcon={removeIcon} />

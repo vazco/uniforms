@@ -4,7 +4,7 @@ import { filterDOMProps, useForm } from 'uniforms';
 
 import gridClassName from './gridClassName';
 
-type SubmitFieldProps = {
+export type SubmitFieldProps = {
   inputRef?: Ref<HTMLInputElement>;
   inputClassName?: string;
   wrapClassName?: string;

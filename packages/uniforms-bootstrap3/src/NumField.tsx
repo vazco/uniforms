@@ -4,7 +4,7 @@ import { connectField } from 'uniforms';
 
 import wrapField from './wrapField';
 
-type NumFieldProps = {
+export type NumFieldProps = {
   inputRef?: Ref<HTMLInputElement>;
   onChange: (value?: number) => void;
   inputClassName?: string;

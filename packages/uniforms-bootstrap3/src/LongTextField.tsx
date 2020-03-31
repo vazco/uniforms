@@ -4,7 +4,7 @@ import { connectField } from 'uniforms';
 
 import wrapField from './wrapField';
 
-type LongTextFieldProps = {
+export type LongTextFieldProps = {
   inputClassName?: string;
   error?: boolean;
   onChange: (value?: string) => void;

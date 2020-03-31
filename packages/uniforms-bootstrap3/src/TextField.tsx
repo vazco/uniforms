@@ -4,7 +4,7 @@ import { connectField } from 'uniforms';
 
 import wrapField from './wrapField';
 
-type TextFieldProps = {
+export type TextFieldProps = {
   inputClassName?: string;
   error?: boolean;
   inputRef?: Ref<HTMLInputElement>;

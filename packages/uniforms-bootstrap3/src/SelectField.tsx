@@ -19,7 +19,7 @@ const xor = (item, array) => {
   return array.slice(0, index).concat(array.slice(index + 1));
 };
 
-type SelectFieldProps = {
+export type SelectFieldProps = {
   allowedValues?: string[];
   checkboxes?: boolean;
   disabled: boolean;

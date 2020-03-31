@@ -7,7 +7,7 @@ import wrapField from './wrapField';
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
 const dateFormat = (value?: Date) => value?.toISOString().slice(0, -8);
 
-type DateFieldProps = {
+export type DateFieldProps = {
   disabled: boolean;
   error: unknown;
   id: string;
