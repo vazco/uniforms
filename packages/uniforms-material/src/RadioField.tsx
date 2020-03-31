@@ -9,7 +9,7 @@ import { connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
-type RadioFieldProps = {
+export type RadioFieldProps = {
   allowedValues: string[];
   checkboxes?: boolean;
   onChange: (string) => void;

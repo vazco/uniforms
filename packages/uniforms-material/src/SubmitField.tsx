@@ -4,7 +4,7 @@ import { filterDOMProps, useForm } from 'uniforms';
 import { OverrideProps } from '@material-ui/core/OverridableComponent';
 import { ExtendButtonBaseTypeMap } from '@material-ui/core/ButtonBase/ButtonBase';
 
-type SubmitFieldProps = {
+export type SubmitFieldProps = {
   disabled?: boolean;
   inputRef?: Ref<HTMLInputElement>;
   value?: string;

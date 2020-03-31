@@ -2,7 +2,7 @@ import IconButton, { IconButtonProps } from '@material-ui/core/IconButton';
 import React from 'react';
 import { filterDOMProps, joinName, useField } from 'uniforms';
 
-type ListDelProps<T> = {
+export type ListDelFieldProps<T> = {
   disabled?: boolean;
   icon: any;
   parent?: any;
@@ -11,8 +11,8 @@ type ListDelProps<T> = {
   value?: T;
 } & IconButtonProps;
 
-function ListDel<T>(rawProps: ListDelProps<T>) {
-  const props = useField<ListDelProps<T>, T>(rawProps.name, rawProps, {
+function ListDel<T>(rawProps: ListDelFieldProps<T>) {
+  const props = useField<ListDelFieldProps<T>, T>(rawProps.name, rawProps, {
     initialValue: false,
   })[0];
 

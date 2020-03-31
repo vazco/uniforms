@@ -5,7 +5,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import { filterDOMProps, joinName, useField } from 'uniforms';
 import omit from 'lodash/omit';
 
-type ListAddProps<T> = {
+export type ListAddFieldProps<T> = {
   initialCount?: number;
   name: string;
   parent?: any;
@@ -14,8 +14,8 @@ type ListAddProps<T> = {
 } & IconButtonProps &
   Pick<FormControlProps, 'fullWidth' | 'margin' | 'variant'>;
 
-function ListAdd<T>(rawProps: ListAddProps<T>) {
-  const props = useField<ListAddProps<T>, T>(
+function ListAdd<T>(rawProps: ListAddFieldProps<T>) {
+  const props = useField<ListAddFieldProps<T>, T>(
     rawProps.name,
     omit(rawProps, 'fullWidth'),
     {

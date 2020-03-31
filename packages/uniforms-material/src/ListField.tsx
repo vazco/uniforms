@@ -8,7 +8,7 @@ import { connectField, filterDOMProps, joinName } from 'uniforms';
 import ListItemField from './ListItemField';
 import ListAddField from './ListAddField';
 
-type ListFieldProps<T> = {
+export type ListFieldProps<T> = {
   addIcon?: any;
   initialCount?: number;
   itemProps?: {};

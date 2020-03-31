@@ -15,7 +15,7 @@ import { SelectProps as MaterialSelectProps } from '@material-ui/core/Select';
 
 import wrapField from './wrapField';
 
-type SelectFieldProps = { checkboxes?: boolean } & (
+export type SelectFieldProps = { checkboxes?: boolean } & (
   | CheckboxesProps
   | SelectProps
 );

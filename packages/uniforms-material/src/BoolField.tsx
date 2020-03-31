@@ -8,7 +8,7 @@ import { connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
-type BoolFieldProps = {
+export type BoolFieldProps = {
   appearance?: 'checkbox' | 'switch';
   label?: string;
   legend?: string;

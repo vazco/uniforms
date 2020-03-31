@@ -14,7 +14,7 @@ const dateParse = (timestamp, onChange) => {
   }
 };
 
-type DateFieldProps = {
+export type DateFieldProps = {
   errorMessage?: string;
   error?: boolean;
   labelProps?: object;

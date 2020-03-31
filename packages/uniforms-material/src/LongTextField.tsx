@@ -2,7 +2,7 @@ import React from 'react';
 import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
 import { connectField, filterDOMProps } from 'uniforms';
 
-type LongTextFieldProps = {
+export type LongTextFieldProps = {
   errorMessage?: string;
   showInlineError?: boolean;
   label: string;

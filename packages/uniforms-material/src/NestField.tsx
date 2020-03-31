@@ -5,7 +5,7 @@ import { connectField, injectName, joinName } from 'uniforms';
 import AutoField from './AutoField';
 import wrapField from './wrapField';
 
-type NestFieldProps = {
+export type NestFieldProps = {
   name: string;
   fields?: any[];
   itemProps?: object;

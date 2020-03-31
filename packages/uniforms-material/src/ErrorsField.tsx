@@ -5,7 +5,7 @@ import FormHelperText, {
 import React from 'react';
 import { filterDOMProps, useForm } from 'uniforms';
 
-type ErrorsFieldProps = {
+export type ErrorsFieldProps = {
   fullWidth?: boolean;
   margin?: 'none' | 'dense' | 'normal';
   variant?: 'standard' | 'outlined' | 'filled';

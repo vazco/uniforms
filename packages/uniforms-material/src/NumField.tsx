@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import { connectField, filterDOMProps } from 'uniforms';
 import { StandardTextFieldProps } from '@material-ui/core/TextField/TextField';
 
-type NumFieldProps = {
+export type NumFieldProps = {
   decimal?: boolean;
   errorMessage?: string;
   max?: number;

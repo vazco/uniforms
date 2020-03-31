@@ -5,7 +5,7 @@ import FormHelperText, {
 import React from 'react';
 import { connectField, filterDOMProps } from 'uniforms';
 
-type ErrorFieldProps = {
+export type ErrorFieldProps = {
   errorMessage?: string;
   margin: string;
 } & Omit<FormControlProps, 'margin'> &

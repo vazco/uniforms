@@ -7,7 +7,7 @@ import { connectField, joinName } from 'uniforms';
 import ListDelField from './ListDelField';
 import AutoField from './AutoField';
 
-type ListItemProps = {
+export type ListItemFieldProps = {
   children?: ReactNode;
   removeIcon?: any;
   name: string;
@@ -21,7 +21,7 @@ const ListItem = ({
   name,
   removeIcon,
   ...props
-}: ListItemProps) => {
+}: ListItemFieldProps) => {
   return (
     <ListItemMaterial
       dense={dense}
