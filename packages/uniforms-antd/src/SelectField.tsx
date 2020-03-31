@@ -75,7 +75,7 @@ const renderSelect = (props: SelectProps) => (
   </SelectAntD>
 );
 
-type SelectFieldProps = { checkboxes?: boolean } & (
+export type SelectFieldProps = { checkboxes?: boolean } & (
   | CheckboxesProps
   | SelectProps
 );

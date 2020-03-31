@@ -6,7 +6,7 @@ import { connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
-type BoolFieldProps = {
+export type BoolFieldProps = {
   value?: boolean;
   inputRef?: Ref<HTMLInputElement>;
   onChange: (value?: boolean) => void;

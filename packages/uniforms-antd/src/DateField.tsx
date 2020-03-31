@@ -6,7 +6,7 @@ import { DatePickerProps } from 'antd/lib/date-picker/interface';
 
 import wrapField from './wrapField';
 
-type DateFieldProps = {
+export type DateFieldProps = {
   inputRef?: Ref<any>;
   onChange?: (value?: any) => void;
   id: string;

@@ -6,7 +6,7 @@ import wrapField from './wrapField';
 
 const noneIfNaN = x => (isNaN(x) ? undefined : x);
 
-type NumFieldProps = {
+export type NumFieldProps = {
   decimal?: boolean;
   inputRef: (instance: InputNumber | null) => void;
   onChange: (value?: number) => void;

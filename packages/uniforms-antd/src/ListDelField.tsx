@@ -2,14 +2,14 @@ import Button, { ButtonProps } from 'antd/lib/button';
 import React from 'react';
 import { filterDOMProps, joinName, useField } from 'uniforms';
 
-type ListDelProps<T> = {
+export type ListDelFieldProps<T> = {
   name: string;
   parent?: any;
   value?: T;
 } & ButtonProps;
 
-function ListDel<T>(rawProps: ListDelProps<T>) {
-  const props = useField<ListDelProps<T>, T>(rawProps.name, rawProps, {
+function ListDel<T>(rawProps: ListDelFieldProps<T>) {
+  const props = useField<ListDelFieldProps<T>, T>(rawProps.name, rawProps, {
     initialValue: false,
   })[0];
 

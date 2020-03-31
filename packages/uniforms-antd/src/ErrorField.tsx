@@ -1,7 +1,7 @@
 import React, { HTMLProps } from 'react';
 import { connectField, filterDOMProps } from 'uniforms';
 
-type ErrorFieldProps = {
+export type ErrorFieldProps = {
   error?: any;
   errorMessage?: string;
 } & HTMLProps<HTMLDivElement>;

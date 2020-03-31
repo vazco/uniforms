@@ -10,7 +10,7 @@ const [TextArea, textAreaProps] = Input.TextArea
   ? [Input.TextArea, {}]
   : [Input, { type: 'textarea' }];
 
-type LongTextFieldProps = {
+export type LongTextFieldProps = {
   onChange: (value?: any) => void;
   inputRef: Ref<Input>;
   value?: string;

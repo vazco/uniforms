@@ -4,7 +4,7 @@ import { connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
-type TextFieldProps = {
+export type TextFieldProps = {
   onChange: (value?: string) => void;
   value?: string;
   inputRef?: Ref<Input>;

@@ -3,7 +3,7 @@ import React from 'react';
 import cloneDeep from 'lodash/cloneDeep';
 import { filterDOMProps, joinName, useField } from 'uniforms';
 
-type ListAddProps<T> = {
+export type ListAddFieldProps<T> = {
   initialCount?: number;
   parent?: any;
   name: string;
@@ -11,8 +11,8 @@ type ListAddProps<T> = {
   value?: T;
 } & ButtonProps;
 
-function ListAdd<T>(rawProps: ListAddProps<T>) {
-  const props = useField<ListAddProps<T>, T>(rawProps.name, rawProps, {
+function ListAdd<T>(rawProps: ListAddFieldProps<T>) {
+  const props = useField<ListAddFieldProps<T>, T>(rawProps.name, rawProps, {
     initialValue: false,
   })[0];
 

@@ -4,7 +4,7 @@ import { joinName } from 'uniforms';
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
 
-type ListItemProps = {
+export type ListItemFieldProps = {
   children?: ReactNode;
   name: string;
   labelCol?: string;
@@ -12,7 +12,7 @@ type ListItemProps = {
   wrapperCol?: any;
 };
 
-export default function ListItem(props: ListItemProps) {
+export default function ListItem(props: ListItemFieldProps) {
   return (
     <div>
       <div

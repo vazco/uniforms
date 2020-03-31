@@ -5,7 +5,7 @@ import { GroupProps } from 'antd/lib/input';
 
 import wrapField from './wrapField';
 
-type RadioFieldProps = {
+export type RadioFieldProps = {
   transform?: (string?: string) => string;
   allowedValues: string[];
   onChange: (string) => void;

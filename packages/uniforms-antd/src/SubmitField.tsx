@@ -3,7 +3,7 @@ import React from 'react';
 import { useForm } from 'uniforms';
 import { ButtonProps } from 'antd/lib/button/button';
 
-type SubmitFieldProps = {
+export type SubmitFieldProps = {
   inputRef: undefined;
   name: string;
 } & ButtonProps;
