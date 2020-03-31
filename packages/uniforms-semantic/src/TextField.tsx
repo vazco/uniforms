@@ -2,7 +2,7 @@ import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
 import { connectField, filterDOMProps } from 'uniforms';
 
-type TextFieldProps = {
+export type TextFieldProps = {
   className?: string;
   disabled: boolean;
   error: unknown;

@@ -8,7 +8,7 @@ const base64 =
     : (x: string) => Buffer.from(x).toString('base64');
 const escape = (x: string) => base64(x).replace(/=+$/, '');
 
-type RadioFieldProps = {
+export type RadioFieldProps = {
   allowedValues: string[];
   checkboxes?: boolean;
   onChange: (string) => void;

@@ -4,12 +4,12 @@ import { connectField, joinName } from 'uniforms';
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
 
-type ListItemProps = {
+export type ListItemFieldProps = {
   name: string;
   children?: ReactNode;
 };
 
-const ListItem = (props: ListItemProps) => {
+const ListItem = (props: ListItemFieldProps) => {
   const { children, name } = props;
   return (
     <div className="item">
@@ -35,4 +35,6 @@ const ListItem = (props: ListItemProps) => {
   );
 };
 
-export default connectField<ListItemProps>(ListItem, { includeInChain: false });
+export default connectField<ListItemFieldProps>(ListItem, {
+  includeInChain: false,
+});

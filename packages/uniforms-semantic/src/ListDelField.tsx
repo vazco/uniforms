@@ -2,7 +2,7 @@ import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
 import { filterDOMProps, joinName, useField } from 'uniforms';
 
-type ListDelProps<T> = {
+export type ListDelFieldProps<T> = {
   disabled?: boolean;
   parent?: any;
   value?: any;
@@ -10,8 +10,8 @@ type ListDelProps<T> = {
   className: string;
 } & HTMLProps<HTMLSpanElement>;
 
-export default function ListDel<T>(rawProps: ListDelProps<T>) {
-  const props = useField<ListDelProps<T>, T>(rawProps.name, rawProps, {
+export default function ListDel<T>(rawProps: ListDelFieldProps<T>) {
+  const props = useField<ListDelFieldProps<T>, T>(rawProps.name, rawProps, {
     initialValue: false,
   })[0];
 
