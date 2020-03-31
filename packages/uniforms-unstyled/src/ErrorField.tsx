@@ -1,7 +1,7 @@
 import React, { HTMLProps, ReactNode } from 'react';
 import { connectField, filterDOMProps } from 'uniforms';
 
-type ErrorFieldProps = {
+export type ErrorFieldProps = {
   children?: ReactNode;
   error?: any;
   errorMessage?: string;

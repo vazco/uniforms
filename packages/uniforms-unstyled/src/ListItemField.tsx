@@ -4,13 +4,13 @@ import { joinName } from 'uniforms';
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
 
-type ListItemProps = {
+export type ListItemFieldProps = {
   children?: ReactNode;
   label: null | string;
   name: string;
 };
 
-export default function ListItem(props: ListItemProps) {
+export default function ListItem(props: ListItemFieldProps) {
   return (
     <div>
       <ListDelField name={props.name} />

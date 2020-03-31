@@ -1,7 +1,7 @@
 import React, { HTMLProps, Ref } from 'react';
 import { filterDOMProps, useForm } from 'uniforms';
 
-type SubmitFieldProps = {
+export type SubmitFieldProps = {
   disabled?: boolean;
   inputRef?: Ref<HTMLInputElement>;
   value?: string;

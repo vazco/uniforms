@@ -3,7 +3,7 @@ import { connectField, filterDOMProps, injectName, joinName } from 'uniforms';
 
 import AutoField from './AutoField';
 
-type NestFieldProps = {
+export type NestFieldProps = {
   itemProps?: object;
   name: string;
   fields?: any[];

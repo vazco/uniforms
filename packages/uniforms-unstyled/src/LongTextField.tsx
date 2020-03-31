@@ -1,7 +1,7 @@
 import React, { HTMLProps, Ref } from 'react';
 import { connectField, filterDOMProps } from 'uniforms';
 
-type LongTextFieldProps = {
+export type LongTextFieldProps = {
   disabled: boolean;
   id: string;
   inputRef?: Ref<HTMLTextAreaElement>;

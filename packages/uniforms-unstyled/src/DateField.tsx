@@ -4,7 +4,7 @@ import { connectField, filterDOMProps } from 'uniforms';
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
 const dateFormat = (value?: Date) => value?.toISOString().slice(0, -8);
 
-type DateFieldProps = {
+export type DateFieldProps = {
   disabled: boolean;
   id: string;
   inputRef?: Ref<HTMLInputElement>;

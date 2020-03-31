@@ -1,7 +1,7 @@
 import React, { HTMLProps, Ref } from 'react';
 import { connectField, filterDOMProps } from 'uniforms';
 
-type NumFieldProps = {
+export type NumFieldProps = {
   decimal?: boolean;
   disabled: boolean;
   id: string;

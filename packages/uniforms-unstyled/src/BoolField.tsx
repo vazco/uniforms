@@ -1,7 +1,7 @@
 import React, { HTMLProps, Ref } from 'react';
 import { connectField, filterDOMProps } from 'uniforms';
 
-type BoolFieldProps = {
+export type BoolFieldProps = {
   disabled: boolean;
   id: string;
   inputRef?: Ref<HTMLInputElement>;

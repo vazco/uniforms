@@ -3,7 +3,7 @@ import { useForm } from 'uniforms';
 
 import AutoField from './AutoField';
 
-type AutoFieldsProps = {
+export type AutoFieldsProps = {
   autoField?: ComponentType<{ name: string }>;
   element?: ComponentType | string;
   fields?: string[];

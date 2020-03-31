@@ -6,7 +6,7 @@ const base64: typeof btoa =
   typeof btoa !== 'undefined' ? btoa : x => Buffer.from(x).toString('base64');
 const escape = (x: string) => base64(x).replace(/=+$/, '');
 
-type SelectFieldProps = {
+export type SelectFieldProps = {
   allowedValues?: string[];
   checkboxes?: boolean;
   disabled: boolean;
