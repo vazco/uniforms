@@ -2,7 +2,7 @@ import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
 import { filterDOMProps, useForm } from 'uniforms';
 
-type ErrorsFieldProps = {
+export type ErrorsFieldProps = {
   name: string;
 } & HTMLProps<HTMLDivElement>;
 

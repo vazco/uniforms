@@ -3,15 +3,15 @@ import classnames from 'classnames';
 import cloneDeep from 'lodash/cloneDeep';
 import { filterDOMProps, joinName, useField } from 'uniforms';
 
-type ListAddProps<T> = {
+export type ListAddFieldProps<T> = {
   name: string;
   parent?: any;
   value?: T;
   addIcon?: any;
 } & HTMLProps<HTMLDivElement>;
 
-function ListAdd<T>({ addIcon, ...rawProps }: ListAddProps<T>) {
-  const props = useField<ListAddProps<T>, T>(rawProps.name, rawProps, {
+function ListAdd<T>({ addIcon, ...rawProps }: ListAddFieldProps<T>) {
+  const props = useField<ListAddFieldProps<T>, T>(rawProps.name, rawProps, {
     initialValue: false,
   })[0];
 

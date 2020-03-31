@@ -2,9 +2,10 @@ import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
 import { connectField, filterDOMProps } from 'uniforms';
 
-type ErrorFieldProps = { error?: any; errorMessage?: string } & HTMLProps<
-  HTMLDivElement
->;
+export type ErrorFieldProps = {
+  error?: any;
+  errorMessage?: string;
+} & HTMLProps<HTMLDivElement>;
 
 const Error = ({
   children,

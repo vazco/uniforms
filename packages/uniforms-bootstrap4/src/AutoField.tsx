@@ -11,7 +11,7 @@ import RadioField from './RadioField';
 import SelectField from './SelectField';
 import TextField from './TextField';
 
-type AutoFieldProps = {
+export type AutoFieldProps = {
   component?: ComponentType<any>;
   name: string;
 } & Record<string, unknown>;
