@@ -61,6 +61,7 @@
     "lz-string": "1.4.4",
     "prettier": "1.18.2",
     "prop-types": "^15.5.7",
+    "raw-loader": "4.0.0",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-feather": "2.0.3",
