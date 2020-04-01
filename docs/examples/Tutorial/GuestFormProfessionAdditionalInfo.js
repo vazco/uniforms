@@ -1,6 +1,4 @@
 import React from 'react';
-
-import GuestSchema2 from './GuestSchema2';
 import {
   AutoForm,
   AutoField,
@@ -8,9 +6,11 @@ import {
   SubmitField
 } from '../../../website/components/universal';
 
-export default function GuestFormProfessionAdditionalInfo() {
+import GuestSchema from './GuestSchema2';
+
+export default function GuestForm() {
   return (
-    <AutoForm schema={GuestSchema2}>
+    <AutoForm schema={GuestSchema} onSubmit={console.log}>
       <h4>IT meeting guest questionnaire</h4>
       <AutoField name="lastName" />
       <ErrorField name="lastName">

@@ -3,8 +3,8 @@ id: examples-common-forms
 title: Common forms
 ---
 
+import CodeSection from '../website/components/CodeSection';
 import ExampleCustomizer from '../website/components/ExampleCustomizer';
-import { code } from '../website/components/Code';
 
 import SignUpForm from './examples/CommonForms/SignUp';
 import SignUpSchema from './examples/CommonForms/SignUpSchema.md';
@@ -12,22 +12,15 @@ import SignUpSchema from './examples/CommonForms/SignUpSchema.md';
 ### `Sign up`
 
 <ExampleCustomizer
-  code={theme =>
-    code(
-      'js',
-      `import React from 'react';\n
-import schema from './SignUpSchema';
-import { AutoForm } from 'uniforms-${theme}';\n
-export default function SignUpForm() {
-  return (
-    <AutoForm
-      schema={schema}
-      onSubmit={model => alert(JSON.stringify(model, null, 2))}
+  code={theme => (
+    <CodeSection
+      language="js"
+      replace={{
+        '../../../website/components/universal': `uniforms-${theme}`
+      }}
+      source={require('!!raw-loader!./examples/CommonForms/SignUp')}
     />
-  );
-}`
-    )
-  }
+  )}
   example={<SignUpForm />}
   schema={<SignUpSchema />}
 />
