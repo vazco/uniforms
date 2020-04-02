@@ -1,10 +1,10 @@
+import React from 'react';
 import {
   AutoField,
   AutoForm,
   ErrorField,
   SubmitField
 } from '../../../website/components/universal';
-import React from 'react';
 
 import GuestSchema from './GuestSchema';
 

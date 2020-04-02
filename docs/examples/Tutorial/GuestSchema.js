@@ -1,10 +1,9 @@
-// <form>
+// <validator>
+import Ajv from 'ajv';
+// </validator>
 // <bridgeImport>
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 // </bridgeImport>
-// <ajvImport>
-import Ajv from 'ajv';
-// </ajvImport>
 
 // <schema>
 const schema = {
@@ -38,6 +37,7 @@ function createValidator(schema) {
     }
   };
 }
+
 const schemaValidator = createValidator(schema);
 // </validator>
 
@@ -47,4 +47,3 @@ const bridge = new JSONSchemaBridge(schema, schemaValidator);
 // </bridge>
 
 export default bridge;
-// </form>

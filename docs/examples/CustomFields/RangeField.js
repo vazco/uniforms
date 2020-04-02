@@ -1,31 +1,17 @@
 import React from 'react';
-import { connectField } from 'uniforms';
-
 import {
   AutoForm,
   AutoField,
   SubmitField
 } from '../../../website/components/universal';
+import { connectField } from 'uniforms';
+
 import schema from './RangeFieldSchema';
 
-// This field works as follows: two datepickers are bound to each other. Value is
-// a {start, stop} object.
 const Range = ({ value: { start, stop } }) => (
   <section>
-    <AutoField
-      InputLabelProps={{
-        shrink: true
-      }}
-      name="start"
-      max={stop}
-    />
-    <AutoField
-      InputLabelProps={{
-        shrink: true
-      }}
-      name="stop"
-      min={start}
-    />
+    <AutoField InputLabelProps={{ shrink: true }} name="start" max={stop} />
+    <AutoField InputLabelProps={{ shrink: true }} name="stop" min={start} />
   </section>
 );
 

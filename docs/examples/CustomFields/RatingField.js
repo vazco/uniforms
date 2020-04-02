@@ -1,8 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
+import { AutoForm, SubmitField } from '../../../website/components/universal';
 import { connectField } from 'uniforms';
 
-import { AutoForm, SubmitField } from '../../../website/components/universal';
 import schema from './RatingFieldSchema';
 
 const Rating = ({

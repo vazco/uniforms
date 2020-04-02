@@ -1,8 +1,8 @@
 import React from 'react';
+import { AutoForm, SubmitField } from '../../../website/components/universal';
 import { connectField } from 'uniforms';
 
 import schema from './ImageFieldSchema';
-import { AutoForm, SubmitField } from '../../../website/components/universal';
 
 function Image({ onChange, value }) {
   const imgPlaceholder = 'https://via.placeholder.com/150.png';

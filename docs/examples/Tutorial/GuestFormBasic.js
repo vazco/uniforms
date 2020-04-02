@@ -1,5 +1,5 @@
-import { AutoForm } from '../../../website/components/universal';
 import React from 'react';
+import { AutoForm } from '../../../website/components/universal';
 
 import GuestSchema from './GuestSchema';
 

@@ -72,11 +72,6 @@ To manually create the validator, we will use the [ajv](https://github.com/epobe
 
 <CodeSection
   language="js"
-  section="ajvImport"
-  source={require('!!raw-loader!./examples/Tutorial/GuestSchema')}
-/>
-<CodeSection
-  language="js"
   section="validator"
   source={require('!!raw-loader!./examples/Tutorial/GuestSchema')}
 />
@@ -93,7 +88,7 @@ Just to recap, the whole `GuestSchema.js` file looks like this:
 
 <CodeSection
   language="js"
-  section="form"
+  replace={{ '//.*?\n': '' }}
   source={require('!!raw-loader!./examples/Tutorial/GuestSchema')}
 />
 
@@ -104,7 +99,7 @@ All we have to do now is to pass the previously created GuestSchema to the `Auto
 
 <CodeSection
   language="js"
-  section="bridge"
+  replace={{ '../../../website/components/universal': 'uniforms-semantic' }}
   source={require('!!raw-loader!./examples/Tutorial/GuestFormBasic')}
 />
 

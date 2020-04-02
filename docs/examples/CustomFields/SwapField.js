@@ -1,16 +1,15 @@
 import React, { Children, cloneElement } from 'react';
 import get from 'lodash/get';
-import { BaseField } from 'uniforms';
-import { RefreshCw } from 'react-feather';
-
 import {
   AutoForm,
   TextField,
   SubmitField
 } from '../../../website/components/universal';
+import { BaseField } from 'uniforms';
+import { RefreshCw } from 'react-feather';
+
 import schema from './SwapFieldSchema';
-// This field works as follows: on click of its child it swaps values of fieldA
-// and fieldB. It's that simple.
+
 const SwapField = (
   { children, fieldA, fieldB },
   { uniforms: { model, onChange } }
@@ -27,7 +26,7 @@ const SwapField = (
   </span>
 );
 SwapField.contextTypes = BaseField.contextTypes;
-// Usage.
+
 export default function ExampleSwapField() {
   return (
     <section>

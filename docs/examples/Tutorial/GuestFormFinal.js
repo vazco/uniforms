@@ -1,10 +1,10 @@
+import React from 'react';
 import {
   AutoField,
   AutoForm,
   ErrorField,
   SubmitField
 } from '../../../website/components/universal';
-import React from 'react';
 
 import GuestSchema from './GuestSchema4';
 
@@ -25,7 +25,8 @@ export default function GuestFormFinal() {
       <AutoField name="workExperience" />
       <ErrorField
         name="workExperience"
-        errorMessage="Your work experience cannot be lesser than 0 or greater than 100 years!"
+        errorMessage="Your work experience cannot be \
+                      lesser than 0 or greater than 100 years!"
       />
       <AutoField name="profession" />
       <AutoField name="additionalInfo" />
