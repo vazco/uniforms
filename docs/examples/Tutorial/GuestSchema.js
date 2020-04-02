@@ -1,10 +1,10 @@
-import Ajv from 'ajv';
+// <form>
+// <bridgeImport>
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
-
-// ATTENTION!: This file cannot be automatically imported into docs text files.
-// Please remember to update those files manually!
-
-const ajv = new Ajv({ allErrors: true, useDefaults: true });
+// </bridgeImport>
+// <ajvImport>
+import Ajv from 'ajv';
+// </ajvImport>
 
 // <schema>
 const schema = {
@@ -24,6 +24,9 @@ const schema = {
 };
 // </schema>
 
+// <validator>
+const ajv = new Ajv({ allErrors: true, useDefaults: true });
+
 function createValidator(schema) {
   const validator = ajv.compile(schema);
 
@@ -35,9 +38,13 @@ function createValidator(schema) {
     }
   };
 }
-
 const schemaValidator = createValidator(schema);
+// </validator>
 
+// <bridge>
+// Correct usage of the JSONSchemaBridge.
 const bridge = new JSONSchemaBridge(schema, schemaValidator);
+// </bridge>
 
 export default bridge;
+// </form>

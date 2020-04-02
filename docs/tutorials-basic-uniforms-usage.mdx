@@ -35,23 +35,11 @@ have a read on [Semantic UI React's theme usage](https://react.semantic-ui.com/u
 
 After we've installed required packages, it's time to define our Guest schema. We can do it in a plain JSON, which is a valid JSONSchema instance:
 
-```js
-const schema = {
-  title: 'Guest',
-  type: 'object',
-  properties: {
-    firstName: { type: 'string' },
-    lastName: { type: 'string' },
-    workExperience: {
-      description: 'Work experience in years',
-      type: 'integer',
-      minimum: 0,
-      maximum: 100
-    }
-  },
-  required: ['firstName', 'lastName']
-};
-```
+<CodeSection
+  language="js"
+  section="schema"
+  source={require('!!raw-loader!./examples/Tutorial/GuestSchema')}
+/>
 
 As you can see, we've defined three properties - `firstName` and `lastName`, that are of string type, and `workExperience`,
 which is an integer, with a value between 0 and 100.
@@ -62,9 +50,11 @@ Now that we have the schema, we can create the uniforms bridge of it, by using t
 Creating the bridge instance is necessary - without it, uniforms would not be able to process form generation and validation.
 As we are using the JSONSchema, we have to import the `uniforms-bridge-json-schema` package.
 
-```js
-import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
-```
+<CodeSection
+  language="js"
+  section="bridgeImport"
+  source={require('!!raw-loader!./examples/Tutorial/GuestSchema')}
+/>
 
 Now you may think that we can simply do:
 
@@ -80,75 +70,33 @@ we need to **manually define a validator**, and that is required by the uniforms
 
 To manually create the validator, we will use the [ajv](https://github.com/epoberezkin/ajv) package:
 
-```js
-import Ajv from 'ajv';
-
-const ajv = new Ajv({ allErrors: true, useDefaults: true });
-
-function createValidator(schema) {
-  const validator = ajv.compile(schema);
-
-  return model => {
-    validator(model);
-
-    if (validator.errors && validator.errors.length) {
-      throw { details: validator.errors };
-    }
-  };
-}
-
-const schemaValidator = createValidator(schema);
-```
+<CodeSection
+  language="js"
+  section="ajvImport"
+  source={require('!!raw-loader!./examples/Tutorial/GuestSchema')}
+/>
+<CodeSection
+  language="js"
+  section="validator"
+  source={require('!!raw-loader!./examples/Tutorial/GuestSchema')}
+/>
 
 Now that we have both the schema and the validator, we can create the uniforms bridge:
 
-```js
-// Correct usage of the JSONSchemaBridge.
-const bridge = new JSONSchemaBridge(schema, schemaValidator);
-```
+<CodeSection
+  language="js"
+  section="bridge"
+  source={require('!!raw-loader!./examples/Tutorial/GuestSchema')}
+/>
 
 Just to recap, the whole `GuestSchema.js` file looks like this:
 
-```js
-import Ajv from 'ajv';
-import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
-
-const ajv = new Ajv({ allErrors: true, useDefaults: true });
-
-const schema = {
-  title: 'Guest',
-  type: 'object',
-  properties: {
-    firstName: { type: 'string' },
-    lastName: { type: 'string' },
-    workExperience: {
-      description: 'Work experience in years',
-      type: 'integer',
-      minimum: 0,
-      maximum: 100
-    }
-  },
-  required: ['firstName', 'lastName']
-};
-
-function createValidator(schema) {
-  const validator = ajv.compile(schema);
-
-  return model => {
-    validator(model);
-
-    if (validator.errors && validator.errors.length) {
-      throw { details: validator.errors };
-    }
-  };
-}
-
-const schemaValidator = createValidator(schema);
-
-const bridge = new JSONSchemaBridge(schema, schemaValidator);
-
-export default bridge;
-```
+<CodeSection
+  language="js"
+  section="form"
+  removeComments
+  source={require('!!raw-loader!./examples/Tutorial/GuestSchema')}
+/>
 
 ### 4. Finally, use it in a form!
 
@@ -157,10 +105,7 @@ All we have to do now is to pass the previously created GuestSchema to the `Auto
 
 <CodeSection
   language="js"
-  replace={{
-    '../../../website/components/universal': 'uniforms-semantic'
-  }}
-  section="form"
+  section="bridge"
   source={require('!!raw-loader!./examples/Tutorial/GuestFormBasic')}
 />
 

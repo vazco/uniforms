@@ -1,7 +1,13 @@
 import React from 'react';
 import components from '@theme/MDXComponents';
 
-export default function CodeSection({ language, replace, section, source }) {
+export default function CodeSection({
+  language,
+  replace,
+  section,
+  source,
+  removeComments
+}) {
   // Unwrap ES module.
   if (typeof source === 'object' && 'default' in source) {
     source = source.default;
@@ -15,6 +21,14 @@ export default function CodeSection({ language, replace, section, source }) {
     );
 
     source = source.replace(pattern, '$1');
+  }
+
+  if (removeComments) {
+    const pattern = new RegExp(
+      `\\/\\*[\\s\\S]*?\\*\\/|([^:]|^)\\/\\/.*$`,
+      'gm'
+    );
+    source = source.replace(pattern, '');
   }
 
   // Replace all mapped things.
