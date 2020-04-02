@@ -1,6 +1,6 @@
 import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
 const base64 =
   typeof btoa !== 'undefined'
@@ -17,24 +17,27 @@ const xor = (item, array) => {
   return array.slice(0, index).concat(array.slice(index + 1));
 };
 
-export type SelectFieldProps = {
-  allowedValues?: string[];
-  checkboxes?: boolean;
-  disabled: boolean;
-  error?: unknown;
-  errorMessage?: string;
-  fieldType: unknown;
-  id: string;
-  inputRef?: Ref<HTMLSelectElement>;
-  label: string;
-  name: string;
-  onChange: (value?: string | string[]) => void;
-  placeholder: string;
-  showInlineError?: boolean;
-  required?: boolean;
-  transform?: (value?: string) => string;
-  value?: string | string[];
-} & HTMLProps<HTMLDivElement>;
+export type SelectFieldProps = Override<
+  HTMLProps<HTMLDivElement>,
+  {
+    allowedValues?: string[];
+    checkboxes?: boolean;
+    disabled: boolean;
+    error?: unknown;
+    errorMessage?: string;
+    fieldType: unknown;
+    id: string;
+    inputRef?: Ref<HTMLSelectElement>;
+    label: string;
+    name: string;
+    onChange: (value?: string | string[]) => void;
+    placeholder: string;
+    showInlineError?: boolean;
+    required?: boolean;
+    transform?: (value?: string) => string;
+    value?: string | string[];
+  }
+>;
 
 const Select = ({
   allowedValues,

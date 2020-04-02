@@ -1,12 +1,15 @@
 import Button from 'antd/lib/button';
 import React from 'react';
-import { useForm } from 'uniforms';
+import { Override, useForm } from 'uniforms';
 import { ButtonProps } from 'antd/lib/button/button';
 
-export type SubmitFieldProps = {
-  inputRef: undefined;
-  name: string;
-} & ButtonProps;
+export type SubmitFieldProps = Override<
+  ButtonProps,
+  {
+    inputRef: undefined;
+    name: string;
+  }
+>;
 
 function SubmitField({
   disabled,

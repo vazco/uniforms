@@ -1,6 +1,6 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 import { StandardTextFieldProps } from '@material-ui/core/TextField/TextField';
 
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
@@ -14,12 +14,15 @@ const dateParse = (timestamp, onChange) => {
   }
 };
 
-export type DateFieldProps = {
-  errorMessage?: string;
-  error?: boolean;
-  labelProps?: object;
-  showInlineError?: boolean;
-} & StandardTextFieldProps;
+export type DateFieldProps = Override<
+  StandardTextFieldProps,
+  {
+    errorMessage?: string;
+    error?: boolean;
+    labelProps?: object;
+    showInlineError?: boolean;
+  }
+>;
 
 const Date = ({
   InputLabelProps,

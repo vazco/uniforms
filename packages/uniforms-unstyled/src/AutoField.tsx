@@ -1,5 +1,5 @@
 import invariant from 'invariant';
-import { useField } from 'uniforms';
+import { Override, useField } from 'uniforms';
 import React, { ComponentType, createElement } from 'react';
 
 import BoolField from './BoolField';
@@ -11,10 +11,13 @@ import RadioField from './RadioField';
 import SelectField from './SelectField';
 import TextField from './TextField';
 
-export type AutoFieldProps = {
-  component?: ComponentType<any>;
-  name: string;
-} & Record<string, unknown>;
+export type AutoFieldProps = Override<
+  Record<string, unknown>,
+  {
+    component?: ComponentType<any>;
+    name: string;
+  }
+>;
 
 export default function AutoField(originalProps: AutoFieldProps) {
   const props = useField(originalProps.name, originalProps)[0];

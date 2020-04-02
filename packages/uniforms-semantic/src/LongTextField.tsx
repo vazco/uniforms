@@ -1,22 +1,25 @@
 import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
-export type LongTextFieldProps = {
-  className?: string;
-  disabled: boolean;
-  error: unknown;
-  errorMessage: string;
-  id: string;
-  inputRef?: Ref<HTMLTextAreaElement>;
-  label: string;
-  name: string;
-  onChange: (value?: string) => void;
-  placeholder: string;
-  required?: boolean;
-  showInlineError: boolean;
-  value?: string;
-} & HTMLProps<HTMLDivElement>;
+export type LongTextFieldProps = Override<
+  HTMLProps<HTMLDivElement>,
+  {
+    className?: string;
+    disabled: boolean;
+    error: unknown;
+    errorMessage: string;
+    id: string;
+    inputRef?: Ref<HTMLTextAreaElement>;
+    label: string;
+    name: string;
+    onChange: (value?: string) => void;
+    placeholder: string;
+    required?: boolean;
+    showInlineError: boolean;
+    value?: string;
+  }
+>;
 
 const LongText = ({
   className,

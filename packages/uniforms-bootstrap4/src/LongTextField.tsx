@@ -1,20 +1,24 @@
 import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
-import { connectField } from 'uniforms';
+import { connectField, Override } from 'uniforms';
+import omit from 'lodash/omit';
 
 import wrapField from './wrapField';
 
-export type LongTextFieldProps = {
-  inputClassName?: string;
-  error?: boolean;
-  onChange: (value?: string) => void;
-  inputRef?: Ref<HTMLTextAreaElement>;
-  value?: string;
-} & HTMLProps<HTMLDivElement>;
+export type LongTextFieldProps = Override<
+  HTMLProps<HTMLDivElement>,
+  {
+    inputClassName?: string;
+    error?: boolean;
+    onChange: (value?: string) => void;
+    inputRef?: Ref<HTMLTextAreaElement>;
+    value?: string;
+  }
+>;
 
 const LongText = (props: LongTextFieldProps) =>
   wrapField(
-    props,
+    omit(props, ['value', 'onChange']),
     <textarea
       className={classnames(props.inputClassName, 'form-control', {
         'is-invalid': props.error,

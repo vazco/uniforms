@@ -2,16 +2,19 @@ import Checkbox from 'antd/lib/checkbox';
 import Icon from 'antd/lib/icon';
 import React, { HTMLProps, Ref, createElement } from 'react';
 import Switch from 'antd/lib/switch';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
 import wrapField from './wrapField';
 
-export type BoolFieldProps = {
-  value?: boolean;
-  inputRef?: Ref<HTMLInputElement>;
-  onChange: (value?: boolean) => void;
-  checkbox?: boolean;
-} & Omit<HTMLProps<HTMLDivElement>, 'value'>;
+export type BoolFieldProps = Override<
+  HTMLProps<HTMLDivElement>,
+  {
+    value?: boolean;
+    inputRef?: Ref<HTMLInputElement>;
+    onChange: (value?: boolean) => void;
+    checkbox?: boolean;
+  }
+>;
 
 const Bool = ({
   checkbox,

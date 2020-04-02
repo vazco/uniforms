@@ -1,27 +1,29 @@
 import Icon from 'antd/lib/icon';
 import React, { Children, HTMLProps, ReactNode, cloneElement } from 'react';
 import Tooltip from 'antd/lib/tooltip';
-import { connectField, filterDOMProps, joinName } from 'uniforms';
+import { connectField, filterDOMProps, joinName, Override } from 'uniforms';
 
 import ListItemField from './ListItemField';
 import ListAddField from './ListAddField';
 
-export type ListFieldProps<T> = {
-  value: T[];
-  children?: ReactNode;
-  addIcon?: any;
-  error?: boolean;
-  info?: boolean;
-  errorMessage?: string;
-  initialCount?: number;
-  itemProps?: {};
-  labelCol?: any;
-  label: string;
-  wrapperCol?: any;
-  name: string;
-  showInlineError?: boolean;
-} & Omit<HTMLProps<HTMLDivElement>, 'children' | 'name'>;
-
+export type ListFieldProps<T> = Override<
+  HTMLProps<HTMLDivElement>,
+  {
+    value: T[];
+    children?: ReactNode;
+    addIcon?: any;
+    error?: boolean;
+    info?: boolean;
+    errorMessage?: string;
+    initialCount?: number;
+    itemProps?: {};
+    labelCol?: any;
+    label: string;
+    wrapperCol?: any;
+    name: string;
+    showInlineError?: boolean;
+  }
+>;
 function List<T>({
   children,
   error,

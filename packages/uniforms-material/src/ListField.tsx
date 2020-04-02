@@ -3,19 +3,22 @@ import ListMaterial, {
 } from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import React, { Children, cloneElement } from 'react';
-import { connectField, filterDOMProps, joinName } from 'uniforms';
+import { connectField, filterDOMProps, joinName, Override } from 'uniforms';
 
 import ListItemField from './ListItemField';
 import ListAddField from './ListAddField';
 
-export type ListFieldProps<T> = {
-  addIcon?: any;
-  initialCount?: number;
-  itemProps?: {};
-  label: string;
-  name: string;
-  value: T[];
-} & MaterialListProps;
+export type ListFieldProps<T> = Override<
+  MaterialListProps,
+  {
+    addIcon?: any;
+    initialCount?: number;
+    itemProps?: {};
+    label: string;
+    name: string;
+    value: T[];
+  }
+>;
 
 function List<T>({
   addIcon,

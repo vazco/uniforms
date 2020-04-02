@@ -1,16 +1,19 @@
 import InputNumber, { InputNumberProps } from 'antd/lib/input-number';
 import React from 'react';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
 import wrapField from './wrapField';
 
 const noneIfNaN = x => (isNaN(x) ? undefined : x);
 
-export type NumFieldProps = {
-  decimal?: boolean;
-  inputRef: (instance: InputNumber | null) => void;
-  onChange: (value?: number) => void;
-} & InputNumberProps;
+export type NumFieldProps = Override<
+  InputNumberProps,
+  {
+    decimal?: boolean;
+    inputRef: (instance: InputNumber | null) => void;
+    onChange: (value?: number) => void;
+  }
+>;
 
 const Num = (props: NumFieldProps) =>
   wrapField(

@@ -1,16 +1,19 @@
 import React from 'react';
 import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
-export type TextFieldProps = {
-  decimal?: boolean;
-  errorMessage?: string;
-  max?: number;
-  min?: number;
-  showInlineError?: boolean;
-  onChange: (value?: string) => void;
-  value?: string;
-} & StandardTextFieldProps;
+export type TextFieldProps = Override<
+  StandardTextFieldProps,
+  {
+    decimal?: boolean;
+    errorMessage?: string;
+    max?: number;
+    min?: number;
+    showInlineError?: boolean;
+    onChange: (value?: string) => void;
+    value?: string;
+  }
+>;
 
 const Text = ({
   disabled,

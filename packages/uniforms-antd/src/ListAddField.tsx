@@ -1,15 +1,19 @@
 import Button, { ButtonProps } from 'antd/lib/button';
 import React from 'react';
 import cloneDeep from 'lodash/cloneDeep';
-import { filterDOMProps, joinName, useField } from 'uniforms';
+import { filterDOMProps, joinName, Override, useField } from 'uniforms';
+import omit from 'lodash/omit';
 
-export type ListAddFieldProps<T> = {
-  initialCount?: number;
-  parent?: any;
-  name: string;
-  disabled?: boolean;
-  value?: T;
-} & ButtonProps;
+export type ListAddFieldProps<T> = Override<
+  ButtonProps,
+  {
+    initialCount?: number;
+    parent?: any;
+    name: string;
+    disabled?: boolean;
+    value?: T;
+  }
+>;
 
 function ListAdd<T>(rawProps: ListAddFieldProps<T>) {
   const props = useField<ListAddFieldProps<T>, T>(rawProps.name, rawProps, {
@@ -29,7 +33,7 @@ function ListAdd<T>(rawProps: ListAddFieldProps<T>) {
         if (limitNotReached)
           parent.onChange(parent.value!.concat([cloneDeep(props.value!)]));
       }}
-      {...filterDOMProps(props)}
+      {...filterDOMProps(omit(props, ['value']))}
     />
   );
 }

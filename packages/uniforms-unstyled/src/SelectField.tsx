@@ -1,26 +1,29 @@
 import React, { HTMLProps, Ref } from 'react';
 import xor from 'lodash/xor';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
 const base64: typeof btoa =
   typeof btoa !== 'undefined' ? btoa : x => Buffer.from(x).toString('base64');
 const escape = (x: string) => base64(x).replace(/=+$/, '');
 
-export type SelectFieldProps = {
-  allowedValues?: string[];
-  checkboxes?: boolean;
-  disabled: boolean;
-  fieldType: unknown;
-  id: string;
-  inputRef?: Ref<HTMLSelectElement>;
-  label: string;
-  name: string;
-  onChange: (value?: string | string[]) => void;
-  placeholder: string;
-  required?: boolean;
-  transform?: (value?: string) => string;
-  value?: string | string[];
-} & HTMLProps<HTMLDivElement>;
+export type SelectFieldProps = Override<
+  HTMLProps<HTMLDivElement>,
+  {
+    allowedValues?: string[];
+    checkboxes?: boolean;
+    disabled: boolean;
+    fieldType: unknown;
+    id: string;
+    inputRef?: Ref<HTMLSelectElement>;
+    label: string;
+    name: string;
+    onChange: (value?: string | string[]) => void;
+    placeholder: string;
+    required?: boolean;
+    transform?: (value?: string) => string;
+    value?: string | string[];
+  }
+>;
 
 const Select = ({
   allowedValues,

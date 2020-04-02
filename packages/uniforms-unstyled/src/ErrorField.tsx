@@ -1,11 +1,14 @@
 import React, { HTMLProps, ReactNode } from 'react';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
-export type ErrorFieldProps = {
-  children?: ReactNode;
-  error?: any;
-  errorMessage?: string;
-} & HTMLProps<HTMLDivElement>;
+export type ErrorFieldProps = Override<
+  HTMLProps<HTMLDivElement>,
+  {
+    children?: ReactNode;
+    error?: any;
+    errorMessage?: string;
+  }
+>;
 
 function Error({ children, error, errorMessage, ...props }: ErrorFieldProps) {
   return !error ? null : (

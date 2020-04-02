@@ -1,15 +1,19 @@
 import IconButton, { IconButtonProps } from '@material-ui/core/IconButton';
 import React from 'react';
-import { filterDOMProps, joinName, useField } from 'uniforms';
+import { filterDOMProps, joinName, Override, useField } from 'uniforms';
+import omit from 'lodash/omit';
 
-export type ListDelFieldProps<T> = {
-  disabled?: boolean;
-  icon: any;
-  parent?: any;
-  name: string;
-  initialCount?: number;
-  value?: T;
-} & IconButtonProps;
+export type ListDelFieldProps<T> = Override<
+  IconButtonProps,
+  {
+    disabled?: boolean;
+    icon: any;
+    parent?: any;
+    name: string;
+    initialCount?: number;
+    value?: T;
+  }
+>;
 
 function ListDel<T>(rawProps: ListDelFieldProps<T>) {
   const props = useField<ListDelFieldProps<T>, T>(rawProps.name, rawProps, {
@@ -35,7 +39,7 @@ function ListDel<T>(rawProps: ListDelFieldProps<T>) {
           parent.onChange(value);
         }
       }}
-      {...filterDOMProps(props)}
+      {...filterDOMProps(omit(props, 'value'))}
     >
       {rawProps.icon}
     </IconButton>

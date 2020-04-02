@@ -1,17 +1,20 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 import { StandardTextFieldProps } from '@material-ui/core/TextField/TextField';
 
-export type NumFieldProps = {
-  decimal?: boolean;
-  errorMessage?: string;
-  max?: number;
-  min?: number;
-  showInlineError?: boolean;
-  onChange: (value?: number) => void;
-  value?: number;
-} & StandardTextFieldProps;
+export type NumFieldProps = Override<
+  StandardTextFieldProps,
+  {
+    decimal?: boolean;
+    errorMessage?: string;
+    max?: number;
+    min?: number;
+    showInlineError?: boolean;
+    onChange: (value?: number) => void;
+    value?: number;
+  }
+>;
 
 const Num = ({
   decimal,

@@ -1,15 +1,18 @@
 import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
-export type BoolFieldProps = {
-  error?: boolean;
-  errorMessage?: string;
-  showInlineError?: boolean;
-  value?: boolean;
-  onChange: (value?: boolean) => void;
-  inputRef?: Ref<HTMLInputElement>;
-} & Omit<HTMLProps<HTMLDivElement>, 'value'>;
+export type BoolFieldProps = Override<
+  HTMLProps<HTMLDivElement>,
+  {
+    error?: boolean;
+    errorMessage?: string;
+    showInlineError?: boolean;
+    value?: boolean;
+    onChange: (value?: boolean) => void;
+    inputRef?: Ref<HTMLInputElement>;
+  }
+>;
 
 const Bool = ({
   className,

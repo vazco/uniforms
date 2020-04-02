@@ -1,13 +1,16 @@
 import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
-import { filterDOMProps, joinName, useField } from 'uniforms';
+import { filterDOMProps, joinName, useField, Override } from 'uniforms';
 
-export type ListDelFieldProps<T> = {
-  parent?: any;
-  name: string;
-  className?: string;
-  removeIcon?: any;
-} & HTMLProps<HTMLDivElement>;
+export type ListDelFieldProps<T> = Override<
+  HTMLProps<HTMLDivElement>,
+  {
+    parent?: any;
+    name: string;
+    className?: string;
+    removeIcon?: any;
+  }
+>;
 
 function ListDel<T>({ removeIcon, ...rawProps }: ListDelFieldProps<T>) {
   const props = useField<ListDelFieldProps<T>, T>(rawProps.name, rawProps, {

@@ -1,14 +1,17 @@
 import Input, { InputProps } from 'antd/lib/input';
 import React, { Ref } from 'react';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
 import wrapField from './wrapField';
 
-export type TextFieldProps = {
-  onChange: (value?: string) => void;
-  value?: string;
-  inputRef?: Ref<Input>;
-} & InputProps;
+export type TextFieldProps = Override<
+  InputProps,
+  {
+    onChange: (value?: string) => void;
+    value?: string;
+    inputRef?: Ref<Input>;
+  }
+>;
 const Text = (props: TextFieldProps) =>
   wrapField(
     props,
@@ -16,6 +19,7 @@ const Text = (props: TextFieldProps) =>
       disabled={props.disabled}
       id={props.id}
       name={props.name}
+      // @ts-ignore FIXME
       onChange={event => props.onChange(event.target.value)}
       placeholder={props.placeholder}
       ref={props.inputRef}

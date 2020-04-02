@@ -1,17 +1,18 @@
 import RadioAntD, { RadioProps } from 'antd/lib/radio';
 import React from 'react';
-import { connectField, filterDOMProps } from 'uniforms';
-import { GroupProps } from 'antd/lib/input';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
 import wrapField from './wrapField';
 
-export type RadioFieldProps = {
-  transform?: (string?: string) => string;
-  allowedValues: string[];
-  onChange: (string) => void;
-  value?: string;
-} & GroupProps &
-  RadioProps;
+export type RadioFieldProps = Override<
+  RadioProps,
+  {
+    transform?: (string?: string) => string;
+    allowedValues: string[];
+    onChange: (string) => void;
+    value?: string;
+  }
+>;
 
 const Radio = (props: RadioFieldProps) =>
   wrapField(

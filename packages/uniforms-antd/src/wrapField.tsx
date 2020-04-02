@@ -2,15 +2,18 @@ import Form, { FormItemProps } from 'antd/lib/form';
 import Icon from 'antd/lib/icon';
 import React, { ReactNode } from 'react';
 import Tooltip from 'antd/lib/tooltip';
-import { filterDOMProps } from 'uniforms';
+import { filterDOMProps, Override } from 'uniforms';
 
-type WrapperProps = {
-  error?: boolean;
-  errorMessage?: string;
-  info?: string;
-  showInlineError?: boolean;
-  wrapperStyle?: object;
-} & FormItemProps;
+type WrapperProps = Override<
+  FormItemProps,
+  {
+    error?: boolean;
+    errorMessage?: string;
+    info?: string;
+    showInlineError?: boolean;
+    wrapperStyle?: object;
+  }
+>;
 
 export default function wrapField(
   {

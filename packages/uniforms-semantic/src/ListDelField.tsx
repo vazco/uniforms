@@ -1,14 +1,17 @@
 import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
-import { filterDOMProps, joinName, useField } from 'uniforms';
+import { filterDOMProps, joinName, Override, useField } from 'uniforms';
 
-export type ListDelFieldProps<T> = {
-  disabled?: boolean;
-  parent?: any;
-  value?: any;
-  name: string;
-  className: string;
-} & HTMLProps<HTMLSpanElement>;
+export type ListDelFieldProps<T> = Override<
+  HTMLProps<HTMLSpanElement>,
+  {
+    disabled?: boolean;
+    parent?: any;
+    value?: any;
+    name: string;
+    className: string;
+  }
+>;
 
 export default function ListDel<T>(rawProps: ListDelFieldProps<T>) {
   const props = useField<ListDelFieldProps<T>, T>(rawProps.name, rawProps, {

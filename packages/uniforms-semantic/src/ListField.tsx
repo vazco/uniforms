@@ -1,20 +1,23 @@
 import React, { Children, HTMLProps, ReactNode, cloneElement } from 'react';
 import classnames from 'classnames';
-import { connectField, filterDOMProps, joinName } from 'uniforms';
+import { connectField, filterDOMProps, joinName, Override } from 'uniforms';
 
 import ListItemField from './ListItemField';
 import ListAddField from './ListAddField';
 
-export type ListFieldProps<T> = {
-  children?: ReactNode;
-  name: string;
-  error?: boolean;
-  errorMessage?: string;
-  initialCount?: number;
-  value: T[];
-  itemProps?: {};
-  showInlineError?: boolean;
-} & Omit<HTMLProps<HTMLDivElement>, 'children' | 'name'>;
+export type ListFieldProps<T> = Override<
+  HTMLProps<HTMLDivElement>,
+  {
+    children?: ReactNode;
+    name: string;
+    error?: boolean;
+    errorMessage?: string;
+    initialCount?: number;
+    value: T[];
+    itemProps?: {};
+    showInlineError?: boolean;
+  }
+>;
 
 function List<T>({
   children,

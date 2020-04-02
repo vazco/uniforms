@@ -1,6 +1,6 @@
 import Input, { InputProps, TextAreaProps } from 'antd/lib/input';
 import React, { Ref } from 'react';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
 import wrapField from './wrapField';
 
@@ -10,12 +10,15 @@ const [TextArea, textAreaProps] = Input.TextArea
   ? [Input.TextArea, {}]
   : [Input, { type: 'textarea' }];
 
-export type LongTextFieldProps = {
-  onChange: (value?: any) => void;
-  inputRef: Ref<Input>;
-  value?: string;
-  prefix?: string;
-} & (InputProps | TextAreaProps);
+export type LongTextFieldProps = Override<
+  (InputProps & { rows?: never }) | TextAreaProps,
+  {
+    onChange: (value?: any) => void;
+    inputRef: Ref<Input>;
+    value?: string;
+    prefix?: string;
+  }
+>;
 
 const LongText = (props: LongTextFieldProps) =>
   wrapField(

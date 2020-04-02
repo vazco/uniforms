@@ -2,17 +2,19 @@ import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
 import IconButton, { IconButtonProps } from '@material-ui/core/IconButton';
 import React from 'react';
 import cloneDeep from 'lodash/cloneDeep';
-import { filterDOMProps, joinName, useField } from 'uniforms';
+import { filterDOMProps, joinName, Override, useField } from 'uniforms';
 import omit from 'lodash/omit';
 
-export type ListAddFieldProps<T> = {
-  initialCount?: number;
-  name: string;
-  parent?: any;
-  icon?: any;
-  value?: T;
-} & IconButtonProps &
-  Pick<FormControlProps, 'fullWidth' | 'margin' | 'variant'>;
+export type ListAddFieldProps<T> = Override<
+  IconButtonProps,
+  {
+    initialCount?: number;
+    name: string;
+    parent?: any;
+    icon?: any;
+    value?: T;
+  } & Pick<FormControlProps, 'fullWidth' | 'margin' | 'variant'>
+>;
 
 function ListAdd<T>(rawProps: ListAddFieldProps<T>) {
   const props = useField<ListAddFieldProps<T>, T>(
@@ -41,7 +43,7 @@ function ListAdd<T>(rawProps: ListAddFieldProps<T>) {
           if (limitNotReached)
             parent.onChange(parent.value!.concat([cloneDeep(props.value!)]));
         }}
-        {...filterDOMProps(props)}
+        {...filterDOMProps(omit(props, 'value'))}
       >
         {rawProps.icon}
       </IconButton>

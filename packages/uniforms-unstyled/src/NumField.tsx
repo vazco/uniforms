@@ -1,20 +1,23 @@
 import React, { HTMLProps, Ref } from 'react';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
-export type NumFieldProps = {
-  decimal?: boolean;
-  disabled: boolean;
-  id: string;
-  inputRef?: Ref<HTMLInputElement>;
-  label: string;
-  max?: number;
-  min?: number;
-  name: string;
-  onChange: (value?: number) => void;
-  placeholder: string;
-  step?: number;
-  value?: number;
-} & HTMLProps<HTMLDivElement>;
+export type NumFieldProps = Override<
+  HTMLProps<HTMLDivElement>,
+  {
+    decimal?: boolean;
+    disabled: boolean;
+    id: string;
+    inputRef?: Ref<HTMLInputElement>;
+    label: string;
+    max?: number;
+    min?: number;
+    name: string;
+    onChange: (value?: number) => void;
+    placeholder: string;
+    step?: number;
+    value?: number;
+  }
+>;
 
 const Num = ({
   decimal,

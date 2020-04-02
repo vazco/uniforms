@@ -1,17 +1,20 @@
 import React, { HTMLProps, Ref } from 'react';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
-export type LongTextFieldProps = {
-  disabled: boolean;
-  id: string;
-  inputRef?: Ref<HTMLTextAreaElement>;
-  label: string;
-  name: string;
-  onChange: (value?: string) => void;
-  placeholder: string;
-  type?: string;
-  value?: string;
-} & HTMLProps<HTMLDivElement>;
+export type LongTextFieldProps = Override<
+  HTMLProps<HTMLDivElement>,
+  {
+    disabled: boolean;
+    id: string;
+    inputRef?: Ref<HTMLTextAreaElement>;
+    label: string;
+    name: string;
+    onChange: (value?: string) => void;
+    placeholder: string;
+    type?: string;
+    value?: string;
+  }
+>;
 
 const LongText = ({
   disabled,

@@ -52,3 +52,5 @@ export type ModelTransformMode = 'form' | 'submit' | 'validate';
 export type Partialize<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
 export type ValidateMode = 'onChange' | 'onChangeAfterSubmit' | 'onSubmit';
+
+export type Override<T, U> = U & Omit<T, keyof U>;

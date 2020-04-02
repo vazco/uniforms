@@ -1,6 +1,6 @@
 import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
 const base64 =
   typeof btoa !== 'undefined'
@@ -8,15 +8,18 @@ const base64 =
     : (x: string) => Buffer.from(x).toString('base64');
 const escape = (x: string) => base64(x).replace(/=+$/, '');
 
-export type RadioFieldProps = {
-  allowedValues: string[];
-  checkboxes?: boolean;
-  onChange: (string) => void;
-  transform?: (string?: string) => string;
-  error?: boolean;
-  showInlineError?: boolean;
-  errorMessage?: string;
-} & HTMLProps<HTMLDivElement>;
+export type RadioFieldProps = Override<
+  HTMLProps<HTMLDivElement>,
+  {
+    allowedValues: string[];
+    checkboxes?: boolean;
+    onChange: (string) => void;
+    transform?: (string?: string) => string;
+    error?: boolean;
+    showInlineError?: boolean;
+    errorMessage?: string;
+  }
+>;
 
 const Radio = ({
   allowedValues,

@@ -1,10 +1,13 @@
 import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
-import { filterDOMProps, useForm } from 'uniforms';
+import { filterDOMProps, Override, useForm } from 'uniforms';
 
-export type ErrorsFieldProps = {
-  name: string;
-} & HTMLProps<HTMLDivElement>;
+export type ErrorsFieldProps = Override<
+  HTMLProps<HTMLDivElement>,
+  {
+    name: string;
+  }
+>;
 
 const ErrorsField = ({
   className,

@@ -1,15 +1,18 @@
 import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
 import cloneDeep from 'lodash/cloneDeep';
-import { filterDOMProps, joinName, useField } from 'uniforms';
+import { filterDOMProps, joinName, Override, useField } from 'uniforms';
 
-export type ListAddFieldProps<T> = {
-  addIcon?: any;
-  disabled?: boolean;
-  parent?: any;
-  value?: T;
-  name: string;
-} & HTMLProps<HTMLDivElement>;
+export type ListAddFieldProps<T> = Override<
+  HTMLProps<HTMLDivElement>,
+  {
+    addIcon?: any;
+    disabled?: boolean;
+    parent?: any;
+    value?: T;
+    name: string;
+  }
+>;
 
 function ListAdd<T>({ addIcon, ...rawProps }: ListAddFieldProps<T>) {
   const props = useField<ListAddFieldProps<T>, T>(rawProps.name, rawProps, {

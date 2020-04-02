@@ -1,29 +1,32 @@
 import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
-export type NumFieldProps = {
-  className?: string;
-  decimal?: boolean;
-  disabled: boolean;
-  error: unknown;
-  errorMessage: string;
-  icon?: string;
-  iconLeft?: string;
-  iconProps?: object;
-  id: string;
-  inputRef?: Ref<HTMLInputElement>;
-  label: string;
-  max?: number;
-  min?: number;
-  name: string;
-  onChange: (value?: number) => void;
-  placeholder: string;
-  showInlineError: boolean;
-  step?: number;
-  value?: number;
-  wrapClassName?: string;
-} & HTMLProps<HTMLDivElement>;
+export type NumFieldProps = Override<
+  HTMLProps<HTMLDivElement>,
+  {
+    className?: string;
+    decimal?: boolean;
+    disabled: boolean;
+    error: unknown;
+    errorMessage: string;
+    icon?: string;
+    iconLeft?: string;
+    iconProps?: object;
+    id: string;
+    inputRef?: Ref<HTMLInputElement>;
+    label: string;
+    max?: number;
+    min?: number;
+    name: string;
+    onChange: (value?: number) => void;
+    placeholder: string;
+    showInlineError: boolean;
+    step?: number;
+    value?: number;
+    wrapClassName?: string;
+  }
+>;
 
 const Num = ({
   className,

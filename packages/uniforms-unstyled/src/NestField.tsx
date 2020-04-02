@@ -1,13 +1,22 @@
 import React, { HTMLProps } from 'react';
-import { connectField, filterDOMProps, injectName, joinName } from 'uniforms';
+import {
+  connectField,
+  filterDOMProps,
+  injectName,
+  joinName,
+  Override,
+} from 'uniforms';
 
 import AutoField from './AutoField';
 
-export type NestFieldProps = {
-  itemProps?: object;
-  name: string;
-  fields?: any[];
-} & HTMLProps<HTMLDivElement>;
+export type NestFieldProps = Override<
+  HTMLProps<HTMLDivElement>,
+  {
+    itemProps?: object;
+    name: string;
+    fields?: any[];
+  }
+>;
 
 const Nest = ({
   children,

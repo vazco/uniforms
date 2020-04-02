@@ -1,20 +1,24 @@
 import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
-import { connectField } from 'uniforms';
+import { connectField, Override } from 'uniforms';
+import omit from 'lodash/omit';
 
 import wrapField from './wrapField';
 
-export type TextFieldProps = {
-  inputClassName?: string;
-  error?: boolean;
-  inputRef?: Ref<HTMLInputElement>;
-  onChange: (value?: string) => void;
-  value?: string;
-} & HTMLProps<HTMLInputElement>;
+export type TextFieldProps = Override<
+  HTMLProps<HTMLInputElement>,
+  {
+    inputClassName?: string;
+    error?: boolean;
+    inputRef?: Ref<HTMLInputElement>;
+    onChange: (value?: string) => void;
+    value?: string;
+  }
+>;
 
 const Text = (props: TextFieldProps) =>
   wrapField(
-    props,
+    omit(props, ['value', 'onChange']),
     <input
       className={classnames(props.inputClassName, 'form-control', {
         'is-invalid': props.error,

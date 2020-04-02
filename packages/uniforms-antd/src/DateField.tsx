@@ -1,16 +1,19 @@
 import DatePicker from 'antd/lib/date-picker';
 import React, { Ref } from 'react';
 import moment from 'moment';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 import { DatePickerProps } from 'antd/lib/date-picker/interface';
 
 import wrapField from './wrapField';
 
-export type DateFieldProps = {
-  inputRef?: Ref<any>;
-  onChange?: (value?: any) => void;
-  id: string;
-} & Omit<DatePickerProps, 'id'>;
+export type DateFieldProps = Override<
+  DatePickerProps,
+  {
+    inputRef?: Ref<any>;
+    onChange?: (value?: any) => void;
+    id: string;
+  }
+>;
 
 const Date = (props: DateFieldProps) =>
   wrapField(

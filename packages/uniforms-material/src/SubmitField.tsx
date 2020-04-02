@@ -1,18 +1,20 @@
 import Button from '@material-ui/core/Button';
 import React, { HTMLProps, Ref } from 'react';
-import { filterDOMProps, useForm } from 'uniforms';
+import { filterDOMProps, Override, useForm } from 'uniforms';
 import { OverrideProps } from '@material-ui/core/OverridableComponent';
 import { ExtendButtonBaseTypeMap } from '@material-ui/core/ButtonBase/ButtonBase';
 
-export type SubmitFieldProps = {
-  disabled?: boolean;
-  inputRef?: Ref<HTMLInputElement>;
-  value?: string;
-  name: string;
-} & HTMLProps<HTMLInputElement> & { href: string } & OverrideProps<
-    ExtendButtonBaseTypeMap<any>,
-    'a'
-  >;
+export type SubmitFieldProps = Override<
+  HTMLProps<HTMLInputElement>,
+  {
+    disabled?: boolean;
+    inputRef?: Ref<HTMLInputElement>;
+    value?: string;
+    name: string;
+    href: string;
+  }
+> &
+  OverrideProps<ExtendButtonBaseTypeMap<any>, 'a'>;
 
 const SubmitField = ({
   children,

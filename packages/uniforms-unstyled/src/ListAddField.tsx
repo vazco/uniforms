@@ -1,13 +1,16 @@
 import React, { HTMLProps } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
-import { filterDOMProps, joinName, useField } from 'uniforms';
+import { filterDOMProps, joinName, useField, Override } from 'uniforms';
 
-export type ListAddFieldProps<T> = {
-  initialCount?: number;
-  name: string;
-  parent?: any;
-  value?: T;
-} & HTMLProps<HTMLSpanElement>;
+export type ListAddFieldProps<T> = Override<
+  HTMLProps<HTMLSpanElement>,
+  {
+    initialCount?: number;
+    name: string;
+    parent?: any;
+    value?: T;
+  }
+>;
 
 export default function ListAdd<T>(rawProps: ListAddFieldProps<T>) {
   const props = useField<ListAddFieldProps<T>, T>(rawProps.name, rawProps, {

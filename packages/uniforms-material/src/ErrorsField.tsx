@@ -3,14 +3,17 @@ import FormHelperText, {
   FormHelperTextProps,
 } from '@material-ui/core/FormHelperText';
 import React from 'react';
-import { filterDOMProps, useForm } from 'uniforms';
+import { filterDOMProps, Override, useForm } from 'uniforms';
 
-export type ErrorsFieldProps = {
-  fullWidth?: boolean;
-  margin?: 'none' | 'dense' | 'normal';
-  variant?: 'standard' | 'outlined' | 'filled';
-  name: string;
-} & FormHelperTextProps;
+export type ErrorsFieldProps = Override<
+  FormHelperTextProps,
+  {
+    fullWidth?: boolean;
+    margin?: 'none' | 'dense' | 'normal';
+    variant?: 'standard' | 'outlined' | 'filled';
+    name: string;
+  }
+>;
 
 const ErrorsField = ({
   children,

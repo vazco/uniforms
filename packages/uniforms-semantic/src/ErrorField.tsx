@@ -1,11 +1,14 @@
 import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
-export type ErrorFieldProps = {
-  error?: boolean;
-  errorMessage?: string;
-} & HTMLProps<HTMLDivElement>;
+export type ErrorFieldProps = Override<
+  HTMLProps<HTMLDivElement>,
+  {
+    error?: boolean;
+    errorMessage?: string;
+  }
+>;
 
 const Error = ({
   children,

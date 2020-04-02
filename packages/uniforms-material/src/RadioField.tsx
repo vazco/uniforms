@@ -5,17 +5,20 @@ import RadioMaterial, {
   RadioProps as RadioMaterialProps,
 } from '@material-ui/core/Radio';
 import React from 'react';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
 import wrapField from './wrapField';
 
-export type RadioFieldProps = {
-  allowedValues: string[];
-  checkboxes?: boolean;
-  onChange: (string) => void;
-  transform?: (string?: string) => string;
-  label?: string;
-} & RadioMaterialProps;
+export type RadioFieldProps = Override<
+  RadioMaterialProps,
+  {
+    allowedValues: string[];
+    checkboxes?: boolean;
+    onChange: (string) => void;
+    transform?: (string?: string) => string;
+    label?: string;
+  }
+>;
 
 const Radio = ({
   allowedValues,

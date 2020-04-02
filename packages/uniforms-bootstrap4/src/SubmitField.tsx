@@ -1,15 +1,18 @@
 import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
-import { filterDOMProps, useForm } from 'uniforms';
+import { filterDOMProps, Override, useForm } from 'uniforms';
 
 import gridClassName from './gridClassName';
 
-export type SubmitFieldProps = {
-  inputClassName?: string;
-  inputRef?: Ref<HTMLInputElement>;
-  name: string;
-  wrapClassName?: string;
-} & HTMLProps<HTMLInputElement>;
+export type SubmitFieldProps = Override<
+  HTMLProps<HTMLInputElement>,
+  {
+    inputClassName?: string;
+    inputRef?: Ref<HTMLInputElement>;
+    name: string;
+    wrapClassName?: string;
+  }
+>;
 
 const SubmitField = ({
   className,

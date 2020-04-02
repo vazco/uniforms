@@ -1,27 +1,30 @@
 import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
-export type TextFieldProps = {
-  className?: string;
-  disabled: boolean;
-  error: unknown;
-  errorMessage: string;
-  icon?: string;
-  iconLeft?: string;
-  iconProps?: object;
-  id: string;
-  inputRef?: Ref<HTMLInputElement>;
-  label: string;
-  name: string;
-  onChange: (value?: string) => void;
-  placeholder: string;
-  required?: boolean;
-  showInlineError: boolean;
-  type?: string;
-  value?: string;
-  wrapClassName?: string;
-} & HTMLProps<HTMLDivElement>;
+export type TextFieldProps = Override<
+  HTMLProps<HTMLDivElement>,
+  {
+    className?: string;
+    disabled: boolean;
+    error: unknown;
+    errorMessage: string;
+    icon?: string;
+    iconLeft?: string;
+    iconProps?: object;
+    id: string;
+    inputRef?: Ref<HTMLInputElement>;
+    label: string;
+    name: string;
+    onChange: (value?: string) => void;
+    placeholder: string;
+    required?: boolean;
+    showInlineError: boolean;
+    type?: string;
+    value?: string;
+    wrapClassName?: string;
+  }
+>;
 
 const Text = ({
   className,

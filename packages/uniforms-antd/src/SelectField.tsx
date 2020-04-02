@@ -2,7 +2,7 @@ import { CheckboxGroupProps } from 'antd/lib/checkbox';
 import { RadioGroupProps } from 'antd/lib/radio';
 import React from 'react';
 import SelectAntDesign from 'antd/lib/select';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 import RadioGroup from 'antd/lib/radio/group';
 import CheckboxGroup from 'antd/lib/checkbox/Group';
 import { SelectInputProps } from '@material-ui/core/Select/SelectInput';
@@ -12,15 +12,18 @@ import wrapField from './wrapField';
 // SelectAntD does not recognize prop 'name'
 const SelectAntD: any = SelectAntDesign;
 
-type CheckboxesProps = {
-  fieldType?: typeof Array | any;
-  onChange: (
-    value?: string | boolean[] | number | { [key: string]: any },
-  ) => void;
-  transform?: (value?: string) => string;
-  allowedValues: string[];
-  id: string;
-} & (CheckboxGroupProps | RadioGroupProps);
+type CheckboxesProps = Override<
+  CheckboxGroupProps | RadioGroupProps,
+  {
+    fieldType?: typeof Array | any;
+    onChange: (
+      value?: string | boolean[] | number | { [key: string]: any },
+    ) => void;
+    transform?: (value?: string) => string;
+    allowedValues: string[];
+    id: string;
+  }
+>;
 
 const renderCheckboxes = (props: CheckboxesProps) => {
   const Group = props.fieldType === Array ? CheckboxGroup : RadioGroup;

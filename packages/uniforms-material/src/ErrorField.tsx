@@ -3,13 +3,16 @@ import FormHelperText, {
   FormHelperTextProps,
 } from '@material-ui/core/FormHelperText';
 import React from 'react';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
-export type ErrorFieldProps = {
-  errorMessage?: string;
-  margin: string;
-} & Omit<FormControlProps, 'margin'> &
-  Omit<FormHelperTextProps, 'margin'>;
+export type ErrorFieldProps = Override<
+  FormHelperTextProps,
+  {
+    fullWidth?: boolean;
+    errorMessage?: string;
+    margin: string;
+  }
+>;
 
 const Error = ({
   children,

@@ -4,17 +4,20 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import React from 'react';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
 import wrapField from './wrapField';
 
-export type BoolFieldProps = {
-  appearance?: 'checkbox' | 'switch';
-  label?: string;
-  legend?: string;
-  onChange?: (value: any) => void;
-  transform?: (label?: string) => string;
-} & (CheckboxProps | SwitchProps);
+export type BoolFieldProps = Override<
+  CheckboxProps | SwitchProps,
+  {
+    appearance?: 'checkbox' | 'switch';
+    label?: string;
+    legend?: string;
+    onChange?: (value: any) => void;
+    transform?: (label?: string) => string;
+  }
+>;
 
 const Bool = (props: BoolFieldProps) => {
   const {

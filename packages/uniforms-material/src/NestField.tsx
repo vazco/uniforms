@@ -1,15 +1,18 @@
 import FormLabel from '@material-ui/core/FormLabel';
 import React, { HTMLProps } from 'react';
-import { connectField, injectName, joinName } from 'uniforms';
+import { connectField, injectName, joinName, Override } from 'uniforms';
 
 import AutoField from './AutoField';
 import wrapField from './wrapField';
 
-export type NestFieldProps = {
-  name: string;
-  fields?: any[];
-  itemProps?: object;
-} & HTMLProps<HTMLDivElement>;
+export type NestFieldProps = Override<
+  HTMLProps<HTMLDivElement>,
+  {
+    name: string;
+    fields?: any[];
+    itemProps?: object;
+  }
+>;
 
 const Nest = ({
   children,
