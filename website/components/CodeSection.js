@@ -10,15 +10,21 @@ export default function CodeSection({ language, replace, section, source }) {
   // Cut out only desired section.
   if (section) {
     const pattern = new RegExp(
-      `^.*// <${section}>\\s(.*?)\\s// </${section}>\\s.*$`,
-      's'
+      `// <${section}>\\s(.*?)\\s// </${section}>\\s`,
+      'gs'
     );
 
-    source = source.replace(pattern, '$1');
+    source = source
+      .split(pattern)
+      .reduce(
+        (source, part, index) =>
+          index % 2 === 0 ? source : `${source}\n\n${part}`,
+        ''
+      );
   }
 
-  const pattern = new RegExp(`// <.*?\\n`, 'gm');
-  source = source.replace(pattern, '');
+  // Remove remaining section tags.
+  source = source.replace(/\/\/ <.*?\n/g, '');
 
   // Replace all mapped things.
   if (replace)
