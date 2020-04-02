@@ -9,9 +9,6 @@ import ExampleCustomizer from '../website/components/ExampleCustomizer';
 import ExamplesCompositeField from './examples/CustomFields/CompositeField';
 import CompositeFieldSchema from './examples/CustomFields/CompositeFieldSchema.md';
 
-import ExamplesCycleField from './examples/CustomFields/CycleField';
-import CycleFieldSchema from './examples/CustomFields/CycleFieldSchema.md';
-
 import ExamplesDisplayIfField from './examples/CustomFields/DisplayIfField';
 import DisplayIfFieldSchema from './examples/CustomFields/DisplayIfFieldSchema.md';
 
@@ -80,17 +77,9 @@ This field works as follows: iterate all allowed values and optionally no-value
 state if the field is not required. This one uses Semantic-UI.
 
 <ExampleCustomizer
-  code={theme => (
-    <CodeSection
-      language="js"
-      replace={{
-        '../../../website/components/universal': `uniforms-${theme}`
-      }}
-      source={require('!!raw-loader!./examples/CustomFields/CycleField')}
-    />
-  )}
-  example={<ExamplesCycleField />}
-  schema={<CycleFieldSchema />}
+  code={require('!!raw-loader!./examples/CustomFields/CycleField')}
+  example={require('./examples/CustomFields/CycleField')}
+  schema={require('!!raw-loader!./examples/CustomFields/CycleFieldSchema')}
 />
 
 ### `DisplayIf`
