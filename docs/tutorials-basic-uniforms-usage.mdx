@@ -3,6 +3,7 @@ id: tutorials-basic-uniforms-usage
 title: Basic uniforms usage
 ---
 
+import CodeSection from '../website/components/CodeSection';
 import TutorialForm from '../website/components/TutorialForm';
 import GuestFormBasic from './examples/Tutorial/GuestFormBasic.js';
 
@@ -154,16 +155,14 @@ export default bridge;
 Uniforms theme packages provide the `AutoForm` component, which is able to generate the form based on the given schema.
 All we have to do now is to pass the previously created GuestSchema to the `AutoForm`:
 
-```js
-import { AutoForm } from 'uniforms-semantic';
-import React from 'react';
-
-import GuestSchema from './GuestSchema';
-
-export default function GuestForm() {
-  return <AutoForm schema={GuestSchema} onSubmit={console.log} />;
-}
-```
+<CodeSection
+  language="js"
+  replace={{
+    '../../../website/components/universal': 'uniforms-semantic'
+  }}
+  section="form"
+  source={require('!!raw-loader!./examples/Tutorial/GuestFormBasic')}
+/>
 
 And that's it! `AutoForm` will generate a complete form with labeled fields, errors list (if any) and a submit button.
 Also, it will take care of validation and handle model changes.

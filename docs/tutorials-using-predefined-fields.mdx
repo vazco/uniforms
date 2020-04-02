@@ -57,69 +57,14 @@ The perfect one for a `profession` property is a `SelectField`. All we have to d
 The same thing applies to the `additionalInfo` - in order to see it as a text area we can use the `LongTextField` component.
 Let's see our changes in action:
 
-```js
-import {
-  AutoField,
-  AutoForm,
-  ErrorField,
-  LongTextField,
-  SelectField,
-  SubmitField
-} from 'uniforms-semantic';
-import React from 'react';
-
-import GuestSchema from './GuestSchema';
-
-const professions = [
-  {
-    label: 'Developer',
-    value: 'developer'
-  },
-  {
-    label: 'Tester',
-    value: 'tester'
-  },
-  {
-    label: 'Product owner',
-    value: 'product-owner'
-  },
-  {
-    label: 'Project manager',
-    value: 'project-manager'
-  },
-  {
-    label: 'Businessman',
-    value: 'businessman'
-  }
-];
-
-export default function GuestForm({ onSubmit }) {
-  return (
-    <AutoForm schema={GuestSchema} onSubmit={console.log}>
-      <h4>IT meeting guest questionnaire</h4>
-      <AutoField name="lastName" />
-      <ErrorField name="lastName">
-        <span>You have to provide your last name!</span>
-      </ErrorField>
-      <AutoField name="firstName" />
-      <ErrorField
-        name="firstName"
-        errorMessage="You have to provide your first name!"
-      />
-      <span>Do you want to share your work experience with us?</span>
-      <AutoField name="workExperience" />
-      <ErrorField
-        name="workExperience"
-        errorMessage="Your work experience cannot be lesser than 0 or greater than 100 years!"
-      />
-      <AutoField name="profession" />
-      <SelectField name="profession" options={professions} />
-      <LongTextField name="additionalInfo" />
-      <SubmitField />
-    </AutoForm>
-  );
-}
-```
+<CodeSection
+  language="js"
+  replace={{
+    '../../../website/components/universal': 'uniforms-semantic'
+  }}
+  section="form"
+  source={require('!!raw-loader!./examples/Tutorial/GuestFormPredefinedFields')}
+/>
 
 <TutorialForm>
   <GuestFormPredefinedFields />
@@ -134,97 +79,25 @@ without the necessity to replace the `AutoField`. That means modifying our schem
 
 Before touching the schema, let's have a look at the React form first:
 
-```js
-import {
-  AutoField,
-  AutoForm,
-  ErrorField,
-  SubmitField
-} from 'uniforms-semantic';
-import React from 'react';
-
-import GuestSchema from './GuestSchema';
-
-export default function GuestForm() {
-  return (
-    <AutoForm schema={GuestSchema} onSubmit={console.log}>
-      <h4>IT meeting guest questionnaire</h4>
-      <AutoField name="lastName" />
-      <ErrorField name="lastName">
-        <span>You have to provide your last name!</span>
-      </ErrorField>
-      <AutoField name="firstName" />
-      <ErrorField
-        name="firstName"
-        errorMessage="You have to provide your first name!"
-      />
-      <span>Do you want to share your work experience with us?</span>
-      <AutoField name="profession" />
-      <AutoField name="workExperience" />
-      <ErrorField
-        name="workExperience"
-        errorMessage="Your work experience cannot be lesser than 0 or greater than 100 years!"
-      />
-      <AutoField name="additionalInfo" />
-      <SubmitField />
-    </AutoForm>
-  );
-}
-```
+<CodeSection
+  language="js"
+  replace={{
+    '../../../website/components/universal': 'uniforms-semantic'
+  }}
+  section="form"
+  source={require('!!raw-loader!./examples/Tutorial/GuestFormWithFieldsInSchema')}
+/>
 
 As you can see, both `SelectField` and `LongTextField` have been removed in favor of the `AutoField`.
 
 Now we can focus on modifying the schema.
 Instead of having to type the React component by ourselves inside our form, we can declare it inside the schema, thanks to the `uniforms` property, as it's demonstrated below:
 
-```js
-const schema = {
-  title: 'Guest',
-  type: 'object',
-  properties: {
-    firstName: { type: 'string' },
-    lastName: { type: 'string' },
-    workExperience: {
-      description: 'Work experience in years',
-      type: 'integer',
-      minimum: 0,
-      maximum: 100
-    },
-    profession: {
-      type: 'string',
-      options: [
-        {
-          label: 'Developer',
-          value: 'developer'
-        },
-        {
-          label: 'Tester',
-          value: 'tester'
-        },
-        {
-          label: 'Product owner',
-          value: 'product-owner'
-        },
-        {
-          label: 'Project manager',
-          value: 'project-manager'
-        },
-        {
-          label: 'Businessman',
-          value: 'businessman'
-        }
-      ]
-    },
-    additionalInfo: {
-      type: 'string',
-      uniforms: {
-        component: LongTextField
-      }
-    }
-  },
-  required: ['firstName', 'lastName']
-};
-```
+<CodeSection
+  language="js"
+  section="schema"
+  source={require('!!raw-loader!./examples/Tutorial/GuestSchema3')}
+/>
 
 What's changed is that now we've included the available options inside the `profession` property definition -
 uniforms are smart enough to deduce result field type, thanks to the [`AutoField` algorithm](/docs/uth-autofield-algorithm).
