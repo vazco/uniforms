@@ -2,7 +2,7 @@
   "name": "uniforms-unstyled",
   "version": "3.0.0-alpha.1",
   "license": "MIT",
-  "main": "index.js",
+  "main": "es5/index.js",
   "module": "es6/index.js",
   "description": "Unstyled components for uniforms.",
   "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-unstyled",
@@ -17,8 +17,8 @@
     "validation"
   ],
   "files": [
-    "*.d.ts",
-    "*.js",
+    "es5/*.d.ts",
+    "es5/*.js",
     "es6/*.d.ts",
     "es6/*.js",
     "src/*.ts",

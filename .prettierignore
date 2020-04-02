@@ -1,12 +1,11 @@
-/coverage
 /.idea
+/coverage
 /lerna-debug.log
 /lerna.json
 /node_modules
 /npm-debug.log
 /npm-debug.log*
-/packages/**/*.d.ts
-/packages/**/*.js
+/packages/*/es5
 /packages/*/es6
 /packages/*/node_modules
 /website/.cache-loader
