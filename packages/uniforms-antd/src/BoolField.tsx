@@ -1,6 +1,6 @@
 import Checkbox from 'antd/lib/checkbox';
 import Icon from 'antd/lib/icon';
-import React, { HTMLProps, Ref } from 'react';
+import React, { HTMLProps, Ref, createElement } from 'react';
 import Switch from 'antd/lib/switch';
 import { connectField, filterDOMProps } from 'uniforms';
 
@@ -24,7 +24,7 @@ const Bool = ({
 }: BoolFieldProps) => {
   return wrapField(
     props,
-    React.createElement(checkbox ? (Checkbox as any) : Switch, {
+    createElement(checkbox ? (Checkbox as any) : Switch, {
       checked: value || false,
       disabled,
       id: props.id,

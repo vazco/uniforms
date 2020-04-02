@@ -1,7 +1,6 @@
 import React, { ComponentType } from 'react';
 
 import BaseForm, { BaseFormProps, BaseFormState } from './BaseForm';
-import { DeepPartial } from './types';
 
 export type QuickFormProps<Model extends {}> = BaseFormProps<Model> & {
   autoField?: ComponentType<{ name?: string }>;

@@ -1,4 +1,4 @@
-import React, { Children, ReactNode } from 'react';
+import React, { Children, ReactNode, cloneElement } from 'react';
 import { connectField, joinName } from 'uniforms';
 
 import AutoField from './AutoField';
@@ -20,7 +20,7 @@ const ListItem = ({ removeIcon, ...props }: ListItemFieldProps) => {
 
       {children ? (
         Children.map(children as JSX.Element, child =>
-          React.cloneElement(child, {
+          cloneElement(child, {
             className: 'col-11',
             name: joinName(name, child.props.name),
             label: null,

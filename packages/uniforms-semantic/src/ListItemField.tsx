@@ -1,4 +1,4 @@
-import React, { Children, ReactNode } from 'react';
+import React, { Children, ReactNode, cloneElement } from 'react';
 import { connectField, joinName } from 'uniforms';
 
 import AutoField from './AutoField';
@@ -18,7 +18,7 @@ const ListItem = (props: ListItemFieldProps) => {
       <div className="middle aligned content" style={{ width: '100%' }}>
         {children ? (
           Children.map(children as JSX.Element, child =>
-            React.cloneElement(child, {
+            cloneElement(child, {
               name: joinName(name, child.props.name),
               label: null,
               style: {

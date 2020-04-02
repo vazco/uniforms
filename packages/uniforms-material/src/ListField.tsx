@@ -2,7 +2,7 @@ import ListMaterial, {
   ListProps as MaterialListProps,
 } from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import React, { Children } from 'react';
+import React, { Children, cloneElement } from 'react';
 import { connectField, filterDOMProps, joinName } from 'uniforms';
 
 import ListItemField from './ListItemField';
@@ -40,7 +40,7 @@ function List<T>({
       {children
         ? value.map((item, index) =>
             Children.map(children as JSX.Element, child =>
-              React.cloneElement(child, {
+              cloneElement(child, {
                 key: index,
                 label: null,
                 name: joinName(

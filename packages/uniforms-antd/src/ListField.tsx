@@ -1,5 +1,5 @@
 import Icon from 'antd/lib/icon';
-import React, { Children, HTMLProps, ReactNode } from 'react';
+import React, { Children, HTMLProps, ReactNode, cloneElement } from 'react';
 import Tooltip from 'antd/lib/tooltip';
 import { connectField, filterDOMProps, joinName } from 'uniforms';
 
@@ -58,7 +58,7 @@ function List<T>({
       {children
         ? value.map((item: any, index: number) =>
             Children.map(children as JSX.Element, child =>
-              React.cloneElement(child, {
+              cloneElement(child, {
                 key: index,
                 label: null,
                 name: joinName(

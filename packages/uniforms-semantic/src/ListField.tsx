@@ -1,4 +1,4 @@
-import React, { Children, HTMLProps, ReactNode } from 'react';
+import React, { Children, HTMLProps, ReactNode, cloneElement } from 'react';
 import classnames from 'classnames';
 import { connectField, filterDOMProps, joinName } from 'uniforms';
 
@@ -65,7 +65,7 @@ function List<T>({
       {children
         ? value.map((item, index) =>
             Children.map(children as JSX.Element, child =>
-              React.cloneElement(child, {
+              cloneElement(child, {
                 key: index,
                 label: null,
                 name: joinName(

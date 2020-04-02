@@ -1,4 +1,4 @@
-import React, { Children, ReactNode } from 'react';
+import React, { Children, ReactNode, cloneElement } from 'react';
 import { joinName } from 'uniforms';
 
 import AutoField from './AutoField';
@@ -40,7 +40,7 @@ export default function ListItem(props: ListItemFieldProps) {
       <div style={{ width: '100%' }}>
         {props.children ? (
           Children.map(props.children as JSX.Element, child =>
-            React.cloneElement(child, {
+            cloneElement(child, {
               name: joinName(props.name, child.props.name),
               label: null,
             }),

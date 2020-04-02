@@ -3,7 +3,7 @@ import isEqual from 'lodash/isEqual';
 import noop from 'lodash/noop';
 import omit from 'lodash/omit';
 import set from 'lodash/set';
-import { Component, SyntheticEvent } from 'react';
+import { SyntheticEvent } from 'react';
 
 import BaseForm, { BaseFormProps, BaseFormState } from './BaseForm';
 import { DeepPartial, ValidateMode } from './types';

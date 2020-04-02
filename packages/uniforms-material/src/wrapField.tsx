@@ -1,6 +1,6 @@
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import React from 'react';
+import React, { createElement } from 'react';
 import omit from 'lodash/omit';
 
 const _filterDOMPropsList = ['fullWidth', 'helperText', 'margin', 'variant'];
@@ -32,7 +32,7 @@ function wrap(
     variant,
   };
 
-  return React.createElement(
+  return createElement(
     FormControl,
     props,
     ...children,

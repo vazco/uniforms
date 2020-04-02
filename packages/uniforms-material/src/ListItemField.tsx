@@ -1,7 +1,7 @@
 import ListItemMaterial, {
   ListItemProps as ListItemMaterialProps,
 } from '@material-ui/core/ListItem';
-import React, { Children, ReactNode } from 'react';
+import React, { Children, ReactNode, cloneElement } from 'react';
 import { connectField, joinName } from 'uniforms';
 
 import ListDelField from './ListDelField';
@@ -30,7 +30,7 @@ const ListItem = ({
     >
       {children ? (
         Children.map(children as JSX.Element, child =>
-          React.cloneElement(child, {
+          cloneElement(child, {
             name: joinName(name, child.props.name),
             label: null,
           }),
