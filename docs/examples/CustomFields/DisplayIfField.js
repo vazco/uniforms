@@ -8,6 +8,8 @@ import { BaseField, nothing } from 'uniforms';
 
 import schema from './DisplayIfFieldSchema';
 
+// We have to ensure that there's only one child, because returning an array
+// from a component is prohibited.
 const DisplayIf = ({ children, condition }, { uniforms }) =>
   condition(uniforms) ? Children.only(children) : nothing;
 DisplayIf.contextTypes = BaseField.contextTypes;

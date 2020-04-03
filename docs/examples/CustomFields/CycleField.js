@@ -4,6 +4,8 @@ import { connectField } from 'uniforms';
 
 import schema from './CycleFieldSchema';
 
+// This field works as follows: iterate all allowed values and optionally no-value
+// state if the field is not required. This one uses Semantic-UI.
 const Cycle = ({ allowedValues, label, required, value, onChange }) => (
   <a
     style={{

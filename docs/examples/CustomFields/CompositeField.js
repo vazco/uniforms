@@ -25,7 +25,7 @@ export default function ExamplesCompositeField() {
       onSubmit={model => alert(JSON.stringify(model, null, 2))}
     >
       <CompositeField name="personA" />
-      <br />
+      <hr />
       <CompositeField name="personB" />
       <br />
       <SubmitField />
