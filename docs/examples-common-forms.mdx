@@ -3,24 +3,12 @@ id: examples-common-forms
 title: Common forms
 ---
 
-import CodeSection from '../website/components/CodeSection';
 import ExampleCustomizer from '../website/components/ExampleCustomizer';
-
-import SignUpForm from './examples/CommonForms/SignUp';
-import SignUpSchema from './examples/CommonForms/SignUpSchema.md';
 
 ### `Sign up`
 
 <ExampleCustomizer
-  code={theme => (
-    <CodeSection
-      language="js"
-      replace={{
-        '../../../website/components/universal': `uniforms-${theme}`
-      }}
-      source={require('!!raw-loader!./examples/CommonForms/SignUp')}
-    />
-  )}
-  example={<SignUpForm />}
-  schema={<SignUpSchema />}
+  code={require('!!raw-loader!./examples/CommonForms/SignUp')}
+  example={require('./examples/CommonForms/SignUp')}
+  schema={require('!!raw-loader!./examples/CommonForms/SignUpSchema')}
 />

@@ -3,28 +3,7 @@ id: examples-custom-fields
 title: Custom fields
 ---
 
-import CodeSection from '../website/components/CodeSection';
 import ExampleCustomizer from '../website/components/ExampleCustomizer';
-
-import ExamplesCompositeField from './examples/CustomFields/CompositeField';
-import CompositeFieldSchema from './examples/CustomFields/CompositeFieldSchema.md';
-
-import ExamplesDisplayIfField from './examples/CustomFields/DisplayIfField';
-import DisplayIfFieldSchema from './examples/CustomFields/DisplayIfFieldSchema.md';
-
-import ExamplesRangeField from './examples/CustomFields/RangeField';
-import RangeFieldSchema from './examples/CustomFields/RangeFieldSchema.md';
-
-import ExamplesRatingField from './examples/CustomFields/RatingField';
-import RatingFieldSchema from './examples/CustomFields/RatingFieldSchema.md';
-
-import ExamplesSubmitField from './examples/CustomFields/SubmitField';
-
-import ExamplesSwapField from './examples/CustomFields/SwapField';
-import SwapFieldSchema from './examples/CustomFields/SwapFieldSchema.md';
-
-import ExamplesImageField from './examples/CustomFields/ImageField';
-import ImageFieldSchema from './examples/CustomFields/ImageFieldSchema.md';
 
 ### `CompositeField`
 
@@ -32,17 +11,9 @@ This field is a kind of a shortcut for few fields. You can also access all
 field props here, like value or onChange for some extra logic.
 
 <ExampleCustomizer
-  code={theme => (
-    <CodeSection
-      language="js"
-      replace={{
-        '../../../website/components/universal': `uniforms-${theme}`
-      }}
-      source={require('!!raw-loader!./examples/CustomFields/CompositeField')}
-    />
-  )}
-  example={<ExamplesCompositeField />}
-  schema={<CompositeFieldSchema />}
+  code={require('!!raw-loader!./examples/CustomFields/CompositeField')}
+  example={require('./examples/CustomFields/CompositeField')}
+  schema={require('!!raw-loader!./examples/CustomFields/CompositeFieldSchema')}
 />
 
 ### `CustomAutoField`
@@ -87,17 +58,9 @@ state if the field is not required. This one uses Semantic-UI.
 This simple field component conditionally displays other fields based on input.
 
 <ExampleCustomizer
-  code={theme => (
-    <CodeSection
-      language="js"
-      replace={{
-        '../../../website/components/universal': `uniforms-${theme}`
-      }}
-      source={require('!!raw-loader!./examples/CustomFields/DisplayIfField')}
-    />
-  )}
-  example={<ExamplesDisplayIfField />}
-  schema={<DisplayIfFieldSchema />}
+  code={require('!!raw-loader!./examples/CustomFields/DisplayIfField')}
+  example={require('./examples/CustomFields/DisplayIfField')}
+  schema={require('!!raw-loader!./examples/CustomFields/DisplayIfFieldSchema')}
 />
 
 ### `RangeField`
@@ -106,17 +69,9 @@ This field works as follows: two datepickers are bound to each other.
 Value is a `{start, stop}` object.
 
 <ExampleCustomizer
-  code={theme => (
-    <CodeSection
-      language="js"
-      replace={{
-        '../../../website/components/universal': `uniforms-${theme}`
-      }}
-      source={require('!!raw-loader!./examples/CustomFields/RangeField')}
-    />
-  )}
-  example={<ExamplesRangeField />}
-  schema={<RangeFieldSchema />}
+  code={require('!!raw-loader!./examples/CustomFields/RangeField')}
+  example={require('./examples/CustomFields/RangeField')}
+  schema={require('!!raw-loader!./examples/CustomFields/RangeFieldSchema')}
 />
 
 ### `RatingField`
@@ -125,17 +80,9 @@ This field works as follows: render stars for each rating and mark them as
 filled, if rating (value) is greater.
 
 <ExampleCustomizer
-  code={theme => (
-    <CodeSection
-      language="js"
-      replace={{
-        '../../../website/components/universal': `uniforms-${theme}`
-      }}
-      source={require('!!raw-loader!./examples/CustomFields/RatingField')}
-    />
-  )}
-  example={<ExamplesRatingField />}
-  schema={<RatingFieldSchema />}
+  code={require('!!raw-loader!./examples/CustomFields/RatingField')}
+  example={require('./examples/CustomFields/RatingField')}
+  schema={require('!!raw-loader!./examples/CustomFields/RatingFieldSchema')}
 />
 
 ### `SubmitButton`
@@ -145,17 +92,9 @@ the form is invalid. It's a simplified version of a default SubmitField from
 uniforms-unstyled. We use schema from previous examples as a template for validation.
 
 <ExampleCustomizer
-  code={theme => (
-    <CodeSection
-      language="js"
-      replace={{
-        '../../../website/components/universal': `uniforms-${theme}`
-      }}
-      source={require('!!raw-loader!./examples/CustomFields/CompositeField')}
-    />
-  )}
-  example={<ExamplesSubmitField />}
-  schema={<CompositeFieldSchema />}
+  code={require('!!raw-loader!./examples/CustomFields/CompositeField')}
+  example={require('./examples/CustomFields/SubmitField')}
+  schema={require('!!raw-loader!./examples/CustomFields/CompositeFieldSchema')}
 />
 
 ### `SwapField`
@@ -164,31 +103,15 @@ This field works as follows: on click of its child (refresh icon) it swaps value
 and fieldB. It's that simple.
 
 <ExampleCustomizer
-  code={theme => (
-    <CodeSection
-      language="js"
-      replace={{
-        '../../../website/components/universal': `uniforms-${theme}`
-      }}
-      source={require('!!raw-loader!./examples/CustomFields/SwapField')}
-    />
-  )}
-  example={<ExamplesSwapField />}
-  schema={<SwapFieldSchema />}
+  code={require('!!raw-loader!./examples/CustomFields/SwapField')}
+  example={require('./examples/CustomFields/SwapField')}
+  schema={require('!!raw-loader!./examples/CustomFields/SwapFieldSchema')}
 />
 
 ### ImageField
 
 <ExampleCustomizer
-  code={theme => (
-    <CodeSection
-      language="js"
-      replace={{
-        '../../../website/components/universal': `uniforms-${theme}`
-      }}
-      source={require('!!raw-loader!./examples/CustomFields/ImageField')}
-    />
-  )}
-  example={<ExamplesImageField />}
-  schema={<ImageFieldSchema />}
+  code={require('!!raw-loader!./examples/CustomFields/ImageField')}
+  example={require('./examples/CustomFields/ImageField')}
+  schema={require('!!raw-loader!./examples/CustomFields/ImageFieldSchema.md')}
 />
