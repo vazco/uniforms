@@ -1,5 +1,5 @@
-import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
+import React, { HTMLProps } from 'react';
 import {
   connectField,
   filterDOMProps,
@@ -15,11 +15,11 @@ export type NestFieldProps = Override<
   {
     error?: boolean;
     errorMessage?: string;
-    name: string;
     fields?: any[];
-    itemProps?: object;
-    showInlineError?: boolean;
     grouped?: boolean;
+    itemProps?: object;
+    name: string;
+    showInlineError?: boolean;
   }
 >;
 

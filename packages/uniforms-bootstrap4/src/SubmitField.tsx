@@ -1,5 +1,5 @@
-import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
+import React, { HTMLProps, Ref } from 'react';
 import { filterDOMProps, Override, useForm } from 'uniforms';
 
 import gridClassName from './gridClassName';
@@ -19,8 +19,8 @@ const SubmitField = ({
   disabled,
   inputClassName,
   inputRef,
-  value,
   name,
+  value,
   wrapClassName,
   ...props
 }: SubmitFieldProps) => {

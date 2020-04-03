@@ -25,11 +25,11 @@ export type DateFieldProps = Override<
 >;
 
 const Date = ({
-  InputLabelProps,
   disabled,
   error,
   errorMessage,
   helperText,
+  InputLabelProps,
   inputRef,
   label,
   labelProps,

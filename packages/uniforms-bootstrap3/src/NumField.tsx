@@ -1,18 +1,18 @@
-import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
-import { connectField, Override } from 'uniforms';
 import omit from 'lodash/omit';
+import React, { HTMLProps, Ref } from 'react';
+import { connectField, Override } from 'uniforms';
 
 import wrapField from './wrapField';
 
 export type NumFieldProps = Override<
   HTMLProps<HTMLDivElement>,
   {
-    inputRef?: Ref<HTMLInputElement>;
-    onChange: (value?: number) => void;
-    inputClassName?: string;
     decimal?: boolean;
     error?: boolean;
+    inputClassName?: string;
+    inputRef?: Ref<HTMLInputElement>;
+    onChange: (value?: number) => void;
     value?: number;
   }
 >;

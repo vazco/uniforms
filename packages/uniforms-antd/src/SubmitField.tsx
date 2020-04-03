@@ -1,7 +1,7 @@
 import Button from 'antd/lib/button';
 import React from 'react';
-import { Override, useForm } from 'uniforms';
 import { ButtonProps } from 'antd/lib/button/button';
+import { Override, useForm } from 'uniforms';
 
 export type SubmitFieldProps = Override<
   ButtonProps,

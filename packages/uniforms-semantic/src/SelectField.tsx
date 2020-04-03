@@ -1,5 +1,5 @@
-import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
+import React, { HTMLProps, Ref } from 'react';
 import { connectField, filterDOMProps, Override } from 'uniforms';
 
 const base64 =
@@ -32,8 +32,8 @@ export type SelectFieldProps = Override<
     name: string;
     onChange: (value?: string | string[]) => void;
     placeholder: string;
-    showInlineError?: boolean;
     required?: boolean;
+    showInlineError?: boolean;
     transform?: (value?: string) => string;
     value?: string | string[];
   }

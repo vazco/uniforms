@@ -1,5 +1,5 @@
-import React, { HTMLProps } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
+import React, { HTMLProps } from 'react';
 import { filterDOMProps, joinName, useField, Override } from 'uniforms';
 
 export type ListAddFieldProps<T> = Override<

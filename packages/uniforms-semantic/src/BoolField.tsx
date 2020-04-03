@@ -1,5 +1,5 @@
-import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
+import React, { HTMLProps, Ref } from 'react';
 import { connectField, filterDOMProps, Override } from 'uniforms';
 
 export type BoolFieldProps = Override<
@@ -7,10 +7,10 @@ export type BoolFieldProps = Override<
   {
     error?: boolean;
     errorMessage?: string;
+    inputRef?: Ref<HTMLInputElement>;
+    onChange: (value?: boolean) => void;
     showInlineError?: boolean;
     value?: boolean;
-    onChange: (value?: boolean) => void;
-    inputRef?: Ref<HTMLInputElement>;
   }
 >;
 

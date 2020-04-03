@@ -1,6 +1,6 @@
-import React, { ReactNode, HTMLProps } from 'react';
 import classnames from 'classnames';
 import omit from 'lodash/omit';
+import React, { ReactNode, HTMLProps } from 'react';
 import { filterDOMProps } from 'uniforms';
 
 import gridClassName from './gridClassName';
@@ -14,8 +14,8 @@ type WrapperProps = {
   helpClassName?: string;
   labelClassName?: string;
   showInlineError?: boolean;
-  wrapClassName?: string;
   value?: boolean | string | number | string[] | undefined;
+  wrapClassName?: string;
 } & Omit<HTMLProps<HTMLDivElement>, 'value'>;
 
 // eslint-disable-next-line complexity

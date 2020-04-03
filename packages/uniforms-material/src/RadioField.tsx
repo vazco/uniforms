@@ -14,9 +14,9 @@ export type RadioFieldProps = Override<
   {
     allowedValues: string[];
     checkboxes?: boolean;
+    label?: string;
     onChange: (string) => void;
     transform?: (string?: string) => string;
-    label?: string;
   }
 >;
 

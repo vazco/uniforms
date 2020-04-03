@@ -9,9 +9,9 @@ import wrapField from './wrapField';
 export type DateFieldProps = Override<
   DatePickerProps,
   {
+    id: string;
     inputRef?: Ref<any>;
     onChange?: (value?: any) => void;
-    id: string;
   }
 >;
 

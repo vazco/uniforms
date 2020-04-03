@@ -23,16 +23,16 @@ export type SelectFieldProps = { checkboxes?: boolean } & (
 type SelectionControlProps = CheckboxProps | SwitchProps;
 
 type CheckboxesProps = {
-  showInlineError?: boolean;
+  allowedValues: string[];
+  appearance?: 'checkbox' | 'switch';
   error?: boolean;
   errorMessage?: string;
-  label?: string;
-  appearance?: 'checkbox' | 'switch';
   fieldType?: typeof Array | any; //?
+  label?: string;
   legend?: string;
   onChange: (value?: string | string[]) => void;
+  showInlineError?: boolean;
   transform?: (item?: string) => string;
-  allowedValues: string[];
   value: string | string[];
 } & (FormControlLabelProps | SelectionControlProps);
 
@@ -42,10 +42,10 @@ type SelectProps = {
   errorMessage?: string;
   fieldType?: typeof Array | any; //?
   labelProps?: object;
+  native?: boolean;
   onChange: (value?: string | string[]) => void;
   showInlineError?: boolean;
   transform?: (item?: string) => string;
-  native?: boolean;
   value: string | string[];
 } & TextFieldProps &
   MaterialSelectProps;
@@ -67,7 +67,6 @@ const xor = (item, array) => {
 
 // eslint-disable-next-line complexity
 const renderSelect = ({
-  InputLabelProps,
   allowedValues,
   disabled,
   error,
@@ -76,6 +75,7 @@ const renderSelect = ({
   fullWidth,
   helperText,
   id,
+  InputLabelProps,
   inputProps,
   label,
   labelProps,

@@ -3,25 +3,25 @@ import React, { Children, HTMLProps, ReactNode, cloneElement } from 'react';
 import Tooltip from 'antd/lib/tooltip';
 import { connectField, filterDOMProps, joinName, Override } from 'uniforms';
 
-import ListItemField from './ListItemField';
 import ListAddField from './ListAddField';
+import ListItemField from './ListItemField';
 
 export type ListFieldProps<T> = Override<
   HTMLProps<HTMLDivElement>,
   {
-    value: T[];
-    children?: ReactNode;
     addIcon?: any;
+    children?: ReactNode;
     error?: boolean;
-    info?: boolean;
     errorMessage?: string;
+    info?: boolean;
     initialCount?: number;
     itemProps?: {};
-    labelCol?: any;
     label: string;
-    wrapperCol?: any;
+    labelCol?: any;
     name: string;
     showInlineError?: boolean;
+    value: T[];
+    wrapperCol?: any;
   }
 >;
 function List<T>({

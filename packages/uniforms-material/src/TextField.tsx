@@ -9,8 +9,8 @@ export type TextFieldProps = Override<
     errorMessage?: string;
     max?: number;
     min?: number;
-    showInlineError?: boolean;
     onChange: (value?: string) => void;
+    showInlineError?: boolean;
     value?: string;
   }
 >;

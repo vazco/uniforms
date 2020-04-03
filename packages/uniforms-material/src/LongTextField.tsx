@@ -6,9 +6,9 @@ export type LongTextFieldProps = Override<
   StandardTextFieldProps,
   {
     errorMessage?: string;
-    showInlineError?: boolean;
     label: string;
     onChange: (value?: string) => void;
+    showInlineError?: boolean;
     value?: string;
   }
 >;

@@ -17,9 +17,9 @@ export type NestFieldProps = Override<
     errorMessage?: string;
     fields?: any[];
     itemProps?: object;
+    label?: string;
     name: string;
     showInlineError?: boolean;
-    label?: string;
   }
 >;
 

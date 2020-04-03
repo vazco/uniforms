@@ -10,8 +10,8 @@ export type ErrorsFieldProps = Override<
   {
     fullWidth?: boolean;
     margin?: 'none' | 'dense' | 'normal';
-    variant?: 'standard' | 'outlined' | 'filled';
     name: string;
+    variant?: 'standard' | 'outlined' | 'filled';
   }
 >;
 
@@ -19,8 +19,8 @@ const ErrorsField = ({
   children,
   fullWidth,
   margin,
-  variant,
   name,
+  variant,
   ...props
 }: ErrorsFieldProps) => {
   const { error, schema } = useForm();

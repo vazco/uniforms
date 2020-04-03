@@ -9,20 +9,20 @@ import wrapField from './wrapField';
 export type BoolFieldProps = Override<
   HTMLProps<HTMLDivElement>,
   {
-    value?: boolean;
+    checkbox?: boolean;
     inputRef?: Ref<HTMLInputElement>;
     onChange: (value?: boolean) => void;
-    checkbox?: boolean;
+    value?: boolean;
   }
 >;
 
 const Bool = ({
   checkbox,
   disabled,
-  value,
+  inputRef,
   name,
   onChange,
-  inputRef,
+  value,
   ...props
 }: BoolFieldProps) => {
   return wrapField(

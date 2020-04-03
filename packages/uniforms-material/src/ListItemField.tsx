@@ -4,20 +4,20 @@ import ListItemMaterial, {
 import React, { Children, ReactNode, cloneElement } from 'react';
 import { connectField, joinName } from 'uniforms';
 
-import ListDelField from './ListDelField';
 import AutoField from './AutoField';
+import ListDelField from './ListDelField';
 
 export type ListItemFieldProps = {
   children?: ReactNode;
-  removeIcon?: any;
   name: string;
+  removeIcon?: any;
 } & Pick<ListItemMaterialProps, 'dense' | 'divider' | 'disableGutters'>;
 
 const ListItem = ({
-  dense,
   children,
-  divider,
+  dense,
   disableGutters,
+  divider,
   name,
   removeIcon,
   ...props

@@ -7,9 +7,9 @@ import wrapField from './wrapField';
 export type RadioFieldProps = Override<
   RadioProps,
   {
-    transform?: (string?: string) => string;
     allowedValues: string[];
     onChange: (string) => void;
+    transform?: (string?: string) => string;
     value?: string;
   }
 >;

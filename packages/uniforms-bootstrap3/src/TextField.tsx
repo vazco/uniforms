@@ -1,15 +1,15 @@
-import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
-import { connectField, Override } from 'uniforms';
 import omit from 'lodash/omit';
+import React, { HTMLProps, Ref } from 'react';
+import { connectField, Override } from 'uniforms';
 
 import wrapField from './wrapField';
 
 export type TextFieldProps = Override<
   HTMLProps<HTMLInputElement>,
   {
-    inputClassName?: string;
     error?: boolean;
+    inputClassName?: string;
     inputRef?: Ref<HTMLInputElement>;
     onChange: (value?: string) => void;
     value?: string;

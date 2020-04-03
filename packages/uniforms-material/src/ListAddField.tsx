@@ -1,17 +1,17 @@
+import cloneDeep from 'lodash/cloneDeep';
 import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
 import IconButton, { IconButtonProps } from '@material-ui/core/IconButton';
-import React from 'react';
-import cloneDeep from 'lodash/cloneDeep';
-import { filterDOMProps, joinName, Override, useField } from 'uniforms';
 import omit from 'lodash/omit';
+import React from 'react';
+import { filterDOMProps, joinName, Override, useField } from 'uniforms';
 
 export type ListAddFieldProps<T> = Override<
   IconButtonProps,
   {
+    icon?: any;
     initialCount?: number;
     name: string;
     parent?: any;
-    icon?: any;
     value?: T;
   } & Pick<FormControlProps, 'fullWidth' | 'margin' | 'variant'>
 >;

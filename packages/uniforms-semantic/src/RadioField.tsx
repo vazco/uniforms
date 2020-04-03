@@ -1,5 +1,5 @@
-import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
+import React, { HTMLProps } from 'react';
 import { connectField, filterDOMProps, Override } from 'uniforms';
 
 const base64 =
@@ -13,11 +13,11 @@ export type RadioFieldProps = Override<
   {
     allowedValues: string[];
     checkboxes?: boolean;
-    onChange: (string) => void;
-    transform?: (string?: string) => string;
     error?: boolean;
-    showInlineError?: boolean;
     errorMessage?: string;
+    onChange: (string) => void;
+    showInlineError?: boolean;
+    transform?: (string?: string) => string;
   }
 >;
 

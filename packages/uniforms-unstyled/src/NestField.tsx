@@ -12,16 +12,16 @@ import AutoField from './AutoField';
 export type NestFieldProps = Override<
   HTMLProps<HTMLDivElement>,
   {
+    fields?: any[];
     itemProps?: object;
     name: string;
-    fields?: any[];
   }
 >;
 
 const Nest = ({
   children,
-  itemProps,
   fields,
+  itemProps,
   label,
   name,
   ...props

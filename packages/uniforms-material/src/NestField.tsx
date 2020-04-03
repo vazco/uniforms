@@ -8,9 +8,9 @@ import wrapField from './wrapField';
 export type NestFieldProps = Override<
   HTMLProps<HTMLDivElement>,
   {
-    name: string;
     fields?: any[];
     itemProps?: object;
+    name: string;
   }
 >;
 

@@ -13,10 +13,10 @@ const [TextArea, textAreaProps] = Input.TextArea
 export type LongTextFieldProps = Override<
   (InputProps & { rows?: never }) | TextAreaProps,
   {
-    onChange: (value?: any) => void;
     inputRef: Ref<Input>;
-    value?: string;
+    onChange: (value?: any) => void;
     prefix?: string;
+    value?: string;
   }
 >;
 

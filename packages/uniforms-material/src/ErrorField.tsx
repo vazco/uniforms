@@ -1,4 +1,4 @@
-import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
+import FormControl from '@material-ui/core/FormControl';
 import FormHelperText, {
   FormHelperTextProps,
 } from '@material-ui/core/FormHelperText';
@@ -8,8 +8,8 @@ import { connectField, filterDOMProps, Override } from 'uniforms';
 export type ErrorFieldProps = Override<
   FormHelperTextProps,
   {
-    fullWidth?: boolean;
     errorMessage?: string;
+    fullWidth?: boolean;
     margin: string;
   }
 >;

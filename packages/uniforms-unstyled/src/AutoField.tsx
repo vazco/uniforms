@@ -1,6 +1,6 @@
 import invariant from 'invariant';
-import { Override, useField } from 'uniforms';
 import React, { ComponentType, createElement } from 'react';
+import { Override, useField } from 'uniforms';
 
 import BoolField from './BoolField';
 import DateField from './DateField';

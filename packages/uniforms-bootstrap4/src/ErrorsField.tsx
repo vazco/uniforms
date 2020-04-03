@@ -1,5 +1,5 @@
-import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
+import React, { HTMLProps } from 'react';
 import { filterDOMProps, Override, useForm } from 'uniforms';
 
 export type ErrorsFieldProps = Override<
@@ -10,9 +10,9 @@ export type ErrorsFieldProps = Override<
 >;
 
 const ErrorsField = ({
+  children,
   className,
   name,
-  children,
   ...props
 }: ErrorsFieldProps) => {
   const { error, schema } = useForm();

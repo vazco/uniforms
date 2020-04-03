@@ -1,5 +1,5 @@
-import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
+import React, { HTMLProps, Ref } from 'react';
 import { connectField, Override } from 'uniforms';
 
 import wrapField from './wrapField';
@@ -7,28 +7,28 @@ import wrapField from './wrapField';
 export type BoolFieldProps = Override<
   HTMLProps<HTMLDivElement>,
   {
-    labelBefore: string;
-    inputClassName?: string;
-    error?: boolean;
-    onChange: (value?: boolean) => void;
-    inputRef?: Ref<HTMLInputElement>;
-    inline?: boolean;
-    value?: boolean;
     disabled?: boolean;
+    error?: boolean;
+    inline?: boolean;
+    inputClassName?: string;
+    inputRef?: Ref<HTMLInputElement>;
+    labelBefore: string;
+    onChange: (value?: boolean) => void;
+    value?: boolean;
   }
 >;
 
 const Bool = ({ onChange, ...props }: BoolFieldProps) => {
   const {
+    disabled,
+    error,
+    inline,
+    inputClassName,
+    inputRef,
     label,
     labelBefore,
-    inputClassName,
-    disabled,
     name,
-    error,
-    inputRef,
     value,
-    inline,
   } = props;
   return wrapField(
     { ...props, label: labelBefore, value: props.value },

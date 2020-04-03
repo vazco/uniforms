@@ -7,9 +7,9 @@ import wrapField from './wrapField';
 export type TextFieldProps = Override<
   InputProps,
   {
+    inputRef?: Ref<Input>;
     onChange: (value?: string) => void;
     value?: string;
-    inputRef?: Ref<Input>;
   }
 >;
 const Text = (props: TextFieldProps) =>

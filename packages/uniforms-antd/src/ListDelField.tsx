@@ -1,7 +1,7 @@
 import Button, { ButtonProps } from 'antd/lib/button';
+import omit from 'lodash/omit';
 import React from 'react';
 import { filterDOMProps, joinName, Override, useField } from 'uniforms';
-import omit from 'lodash/omit';
 
 export type ListDelFieldProps<T> = Override<
   ButtonProps,

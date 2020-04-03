@@ -1,5 +1,5 @@
-import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
+import React, { HTMLProps } from 'react';
 import { connectField, Override } from 'uniforms';
 
 import wrapField from './wrapField';
@@ -14,9 +14,9 @@ export type RadioFieldProps = Override<
   HTMLProps<HTMLDivElement>,
   {
     allowedValues: string[];
-    inputClassName?: string;
     error?: boolean;
     inline?: boolean;
+    inputClassName?: string;
     onChange: (string) => void;
     transform?: (string?: string) => string;
   }

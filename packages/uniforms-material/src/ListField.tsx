@@ -5,8 +5,8 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import React, { Children, cloneElement } from 'react';
 import { connectField, filterDOMProps, joinName, Override } from 'uniforms';
 
-import ListItemField from './ListItemField';
 import ListAddField from './ListAddField';
+import ListItemField from './ListItemField';
 
 export type ListFieldProps<T> = Override<
   MaterialListProps,

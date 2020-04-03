@@ -1,6 +1,6 @@
-import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
 import cloneDeep from 'lodash/cloneDeep';
+import React, { HTMLProps } from 'react';
 import { filterDOMProps, joinName, Override, useField } from 'uniforms';
 
 export type ListAddFieldProps<T> = Override<
@@ -8,9 +8,9 @@ export type ListAddFieldProps<T> = Override<
   {
     addIcon?: any;
     disabled?: boolean;
+    name: string;
     parent?: any;
     value?: T;
-    name: string;
   }
 >;
 

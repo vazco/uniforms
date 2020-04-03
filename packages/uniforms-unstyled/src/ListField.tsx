@@ -10,8 +10,8 @@ export type ListFieldProps<T> = Override<
     children?: ReactNode;
     initialCount?: number;
     itemProps?: {};
-    name: string;
     label: string;
+    name: string;
     value: T[];
   }
 >;

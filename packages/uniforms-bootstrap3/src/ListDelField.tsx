@@ -1,13 +1,13 @@
-import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
+import React, { HTMLProps } from 'react';
 import { filterDOMProps, joinName, useField, Override } from 'uniforms';
 
 export type ListDelFieldProps<T> = Override<
   HTMLProps<HTMLDivElement>,
   {
-    parent?: any;
-    name: string;
     className?: string;
+    name: string;
+    parent?: any;
     removeIcon?: any;
   }
 >;

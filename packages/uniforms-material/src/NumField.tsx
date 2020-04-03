@@ -10,8 +10,8 @@ export type NumFieldProps = Override<
     errorMessage?: string;
     max?: number;
     min?: number;
-    showInlineError?: boolean;
     onChange: (value?: number) => void;
+    showInlineError?: boolean;
     value?: number;
   }
 >;

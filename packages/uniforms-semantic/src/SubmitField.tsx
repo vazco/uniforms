@@ -1,5 +1,5 @@
-import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
+import React, { HTMLProps, Ref } from 'react';
 import { filterDOMProps, Override, useForm } from 'uniforms';
 
 export type SubmitFieldProps = Override<
@@ -15,8 +15,8 @@ export default function SubmitField({
   className,
   disabled,
   inputRef,
-  value,
   name,
+  value,
   ...props
 }: SubmitFieldProps) {
   const { error, state } = useForm();

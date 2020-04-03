@@ -1,33 +1,33 @@
-import React, { HTMLProps, Ref } from 'react';
 import classnames from 'classnames';
-import { connectField, Override } from 'uniforms';
 import omit from 'lodash/omit';
+import React, { HTMLProps, Ref } from 'react';
+import { connectField, Override } from 'uniforms';
 
 import wrapField from './wrapField';
 
 export type BoolFieldProps = Override<
   HTMLProps<HTMLDivElement>,
   {
-    labelBefore: string;
-    inputClassName?: string;
-    error?: boolean;
-    onChange: (value?: boolean) => void;
-    inputRef?: Ref<HTMLInputElement>;
-    inline?: boolean;
-    value?: boolean;
     disabled?: boolean;
+    error?: boolean;
+    inline?: boolean;
+    inputClassName?: string;
+    inputRef?: Ref<HTMLInputElement>;
+    labelBefore: string;
+    onChange: (value?: boolean) => void;
+    value?: boolean;
   }
 >;
 
 const Bool = (props: BoolFieldProps) => {
   const {
     disabled,
-    label,
     inline,
     inputClassName,
-    onChange,
-    name,
+    label,
     labelBefore,
+    name,
+    onChange,
     value,
   } = props;
   return wrapField(

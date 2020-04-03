@@ -1,7 +1,7 @@
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import React, { createElement } from 'react';
 import omit from 'lodash/omit';
+import React, { createElement } from 'react';
 
 const _filterDOMPropsList = ['fullWidth', 'helperText', 'margin', 'variant'];
 const _filterDOMProps = props => omit(props, _filterDOMPropsList);

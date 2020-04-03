@@ -1,16 +1,16 @@
 import Button, { ButtonProps } from 'antd/lib/button';
-import React from 'react';
 import cloneDeep from 'lodash/cloneDeep';
-import { filterDOMProps, joinName, Override, useField } from 'uniforms';
 import omit from 'lodash/omit';
+import React from 'react';
+import { filterDOMProps, joinName, Override, useField } from 'uniforms';
 
 export type ListAddFieldProps<T> = Override<
   ButtonProps,
   {
-    initialCount?: number;
-    parent?: any;
-    name: string;
     disabled?: boolean;
+    initialCount?: number;
+    name: string;
+    parent?: any;
     value?: T;
   }
 >;

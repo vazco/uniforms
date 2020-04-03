@@ -1,5 +1,5 @@
-import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
+import React, { HTMLProps } from 'react';
 import { filterDOMProps, Override, useForm } from 'uniforms';
 
 export type ErrorsFieldProps = Override<
@@ -8,8 +8,8 @@ export type ErrorsFieldProps = Override<
 >;
 
 const ErrorsField = ({
-  className,
   children,
+  className,
   name,
   ...props
 }: ErrorsFieldProps) => {

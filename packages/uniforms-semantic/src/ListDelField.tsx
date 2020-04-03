@@ -1,15 +1,15 @@
-import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
+import React, { HTMLProps } from 'react';
 import { filterDOMProps, joinName, Override, useField } from 'uniforms';
 
 export type ListDelFieldProps<T> = Override<
   HTMLProps<HTMLSpanElement>,
   {
+    className: string;
     disabled?: boolean;
+    name: string;
     parent?: any;
     value?: any;
-    name: string;
-    className: string;
   }
 >;
 

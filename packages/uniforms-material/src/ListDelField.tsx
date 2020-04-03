@@ -1,16 +1,16 @@
 import IconButton, { IconButtonProps } from '@material-ui/core/IconButton';
+import omit from 'lodash/omit';
 import React from 'react';
 import { filterDOMProps, joinName, Override, useField } from 'uniforms';
-import omit from 'lodash/omit';
 
 export type ListDelFieldProps<T> = Override<
   IconButtonProps,
   {
     disabled?: boolean;
     icon: any;
-    parent?: any;
-    name: string;
     initialCount?: number;
+    name: string;
+    parent?: any;
     value?: T;
   }
 >;

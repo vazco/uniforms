@@ -1,10 +1,10 @@
-import { CheckboxGroupProps } from 'antd/lib/checkbox';
-import { RadioGroupProps } from 'antd/lib/radio';
+import CheckboxGroup from 'antd/lib/checkbox/Group';
+import RadioGroup from 'antd/lib/radio/group';
 import React from 'react';
 import SelectAntDesign from 'antd/lib/select';
+import { CheckboxGroupProps } from 'antd/lib/checkbox';
 import { connectField, filterDOMProps, Override } from 'uniforms';
-import RadioGroup from 'antd/lib/radio/group';
-import CheckboxGroup from 'antd/lib/checkbox/Group';
+import { RadioGroupProps } from 'antd/lib/radio';
 import { SelectInputProps } from '@material-ui/core/Select/SelectInput';
 
 import wrapField from './wrapField';
@@ -15,13 +15,13 @@ const SelectAntD: any = SelectAntDesign;
 type CheckboxesProps = Override<
   CheckboxGroupProps | RadioGroupProps,
   {
+    allowedValues: string[];
     fieldType?: typeof Array | any;
+    id: string;
     onChange: (
       value?: string | boolean[] | number | { [key: string]: any },
     ) => void;
     transform?: (value?: string) => string;
-    allowedValues: string[];
-    id: string;
   }
 >;
 
@@ -48,12 +48,12 @@ const renderCheckboxes = (props: CheckboxesProps) => {
 };
 
 type SelectProps = {
-  required?: boolean;
-  id: string;
+  allowedValues?: string[];
   fieldType?: typeof Array | any;
+  id: string;
   onChange: (value?: string | string[]) => void;
   placeholder: string;
-  allowedValues?: string[];
+  required?: boolean;
   transform?: (value?: string) => string;
 } & SelectInputProps;
 
