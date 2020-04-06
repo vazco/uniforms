@@ -6,7 +6,6 @@ export { default as BoolField, BoolFieldProps } from './BoolField';
 export { default as DateField, DateFieldProps } from './DateField';
 export { default as ErrorField, ErrorFieldProps } from './ErrorField';
 export { default as ErrorsField, ErrorsFieldProps } from './ErrorsField';
-export { default as FormGroup } from './FormGroup';
 export { default as HiddenField, HiddenFieldProps } from './HiddenField';
 export { default as ListAddField, ListAddFieldProps } from './ListAddField';
 export { default as ListDelField, ListDelFieldProps } from './ListDelField';
