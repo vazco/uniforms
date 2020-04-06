@@ -19,7 +19,7 @@ import wrapField from './wrapField';
 export type SelectFieldProps = { checkboxes?: boolean } & (
   | CheckboxesProps
   | SelectProps
-  );
+);
 
 type SelectionControlProps = CheckboxProps | SwitchProps;
 

@@ -1,118 +1,90 @@
-import CheckboxGroup from 'antd/lib/checkbox/Group';
+import CheckboxGroup, { CheckboxGroupProps } from 'antd/lib/checkbox/Group';
 import RadioGroup from 'antd/lib/radio/group';
-import React from 'react';
-import SelectAntDesign from 'antd/lib/select';
-import { CheckboxGroupProps } from 'antd/lib/checkbox';
-import { connectField, filterDOMProps, Override } from 'uniforms';
-import { RadioGroupProps as RadioGroupMaterialProps } from 'antd/lib/radio';
-import { SelectInputProps } from '@material-ui/core/Select/SelectInput';
+import React, { Ref } from 'react';
+import SelectAntD, { SelectProps as SelectAntDProps } from 'antd/lib/select';
+import { Override, connectField, filterDOMProps } from 'uniforms';
+import { RadioGroupProps } from 'antd/lib/radio/interface';
 
 import wrapField from './wrapField';
 
-// SelectAntD does not recognize prop 'name'
-const SelectAntD: any = SelectAntDesign;
+type CommonProps<Value> = {
+  allowedValues?: CommonPropsValueElement<Value>[];
+  fieldType?: typeof Array | unknown;
+  id: string;
+  name: string;
+  onChange(value?: Value): void;
+  placeholder: string;
+  required: boolean;
+  transform?(value: CommonPropsValueElement<Value>): string;
+  value?: Value;
+};
+
+type CommonPropsValueElement<Value> = NonNullable<
+  Value extends Array<infer Element> ? Element : Value
+>;
 
 type CheckboxesProps = Override<
   CheckboxGroupProps | RadioGroupProps,
-  {
-    allowedValues: string[];
-    fieldType?: typeof Array | any;
-    id: string;
-    onChange: (
-      value?: string | boolean[] | number | { [key: string]: any },
-    ) => void;
-    transform?: (value?: string) => string;
+  CommonProps<CheckboxGroupProps['value']> & {
+    checkboxes: true;
+    inputRef?: Ref<CheckboxGroup | RadioGroup>;
   }
-  >;
+>;
 
-type RadioGroupProps = {
-  required?: boolean;
-  placeholder: string;
-} & RadioGroupMaterialProps;
+type SelectProps = Override<
+  SelectAntDProps,
+  CommonProps<string | string[]> & {
+    checkboxes?: false;
+    inputRef?: Ref<SelectAntD<any>>;
+  }
+>;
 
-type SelectProps = {
-  allowedValues?: string[];
-  fieldType?: typeof Array | any;
-  id: string;
-  onChange: (value?: string | string[]) => void;
-  placeholder: string;
-  required?: boolean;
-  transform?: (value?: string) => string;
-} & SelectInputProps;
+export type SelectFieldProps = CheckboxesProps | SelectProps;
 
-export type SelectFieldProps = { checkboxes?: boolean } & (
-  | CheckboxesProps
-  | SelectProps
-  );
-
-function Select({ checkboxes, ...props }: SelectFieldProps) {
-  let children;
-  if (checkboxes) {
-    const {
-      allowedValues,
-      disabled,
-      id,
-      transform,
-      name,
-      value,
-      fieldType,
-      onChange,
-    } = props as CheckboxesProps;
-    const Group = fieldType === Array ? CheckboxGroup : RadioGroup;
-    const checkboxProps = {
-      disabled,
-      id,
-      name,
-      onChange:
-        fieldType === Array
-          ? value => onChange && onChange(value)
-          : event => onChange && onChange(event.target.value),
-      options: allowedValues.map(value => {
-        return {
-          label: transform ? transform(value) : value,
-          value,
-        };
-      }),
-      value,
-      ...filterDOMProps(props as CheckboxesProps),
-    };
-    children = <Group {...checkboxProps} />;
-  } else {
-    const {
-      allowedValues,
-      required,
-      transform,
-      disabled,
-      placeholder,
-      inputRef,
-      name,
-      fieldType,
-      value,
-    } = props as SelectProps;
-    // eslint-disable-next-line prefer-const
-    children = (
-      <SelectAntD
-        allowClear={!required}
-        disabled={disabled}
+function Select(props: SelectFieldProps) {
+  const Group = props.fieldType === Array ? CheckboxGroup : RadioGroup;
+  return wrapField(
+    props,
+    props.checkboxes ? (
+      <Group
+        disabled={props.disabled}
         id={props.id}
-        mode={fieldType === Array ? 'multiple' : undefined}
-        name={name}
+        name={props.name}
+        // @ts-ignore: Different value and onChange based on fieldType.
+        onChange={
+          props.fieldType === Array
+            ? value => props.onChange(value)
+            : event => props.onChange(event.target.value)
+        }
+        options={props.allowedValues!.map(value => ({
+          label: props.transform ? props.transform(value) : value,
+          value,
+        }))}
+        value={props.value}
+        {...filterDOMProps(props)}
+      />
+    ) : (
+      // @ts-ignore: We can do better than any.
+      <SelectAntD<any>
+        allowClear={!props.required}
+        disabled={props.disabled}
+        id={props.id}
+        mode={props.fieldType === Array ? 'multiple' : undefined}
+        name={props.name}
         onChange={value => props.onChange(value)}
-        placeholder={placeholder}
-        ref={inputRef}
-        value={value || (fieldType === Array ? [] : undefined)}
-        {...filterDOMProps(props as SelectProps)}
+        placeholder={props.placeholder}
+        ref={props.inputRef}
+        value={props.value || (props.fieldType === Array ? [] : undefined)}
+        {...filterDOMProps(props)}
       >
-        {allowedValues!.map(value => (
+        {props.allowedValues!.map(value => (
           <SelectAntD.Option key={value} value={value}>
-            {transform ? transform(value) : value}
+            {props.transform ? props.transform(value) : value}
           </SelectAntD.Option>
         ))}
       </SelectAntD>
-    );
-  }
-
-  return wrapField(props, children);
+    ),
+  );
 }
 
-export default connectField<SelectFieldProps>(Select);
+export default connectField(Select);
