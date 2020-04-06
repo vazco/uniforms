@@ -2,7 +2,7 @@ import React from 'react';
 import { connectField } from 'uniforms';
 
 function Image({ onChange, value }) {
-  const imgPlaceholder = 'https://via.placeholder.com/150.png';
+  const imgPlaceholder = 'https://picsum.photos/150?grayscale';
 
   function onImageChange({ target: { files } }) {
     if (files && files[0]) {
