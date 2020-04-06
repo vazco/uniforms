@@ -48,4 +48,4 @@ LongText.defaultProps = {
   type: 'text',
 };
 
-export default connectField<LongTextFieldProps>(LongText);
+export default connectField(LongText);

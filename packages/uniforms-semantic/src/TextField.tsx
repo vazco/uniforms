@@ -87,4 +87,4 @@ function Text({
 
 Text.defaultProps = { type: 'text' };
 
-export default connectField<TextFieldProps>(Text);
+export default connectField(Text);

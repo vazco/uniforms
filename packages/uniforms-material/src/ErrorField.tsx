@@ -42,4 +42,4 @@ Error.defaultProps = {
   margin: 'dense',
 };
 
-export default connectField<ErrorFieldProps>(Error, { initialValue: false });
+export default connectField(Error, { initialValue: false });

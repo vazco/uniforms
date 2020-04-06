@@ -54,4 +54,4 @@ function Nest({
   );
 }
 
-export default connectField<NestFieldProps>(Nest, { includeInChain: false });
+export default connectField(Nest, { includeInChain: false });

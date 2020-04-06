@@ -35,4 +35,4 @@ function Num(props: NumFieldProps) {
   );
 }
 
-export default connectField<NumFieldProps>(Num);
+export default connectField(Num);

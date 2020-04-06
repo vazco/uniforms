@@ -61,4 +61,4 @@ function Radio({
   );
 }
 
-export default connectField<RadioFieldProps>(Radio);
+export default connectField(Radio);

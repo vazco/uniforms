@@ -53,4 +53,4 @@ const Nest = ({
   </div>
 );
 
-export default connectField<NestFieldProps>(Nest, { includeInChain: false });
+export default connectField(Nest, { includeInChain: false });

@@ -65,4 +65,4 @@ Date.defaultProps = {
   fullWidth: true,
 };
 
-export default connectField<DateFieldProps>(Date);
+export default connectField(Date);

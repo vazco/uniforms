@@ -73,6 +73,6 @@ function List<T>({
 
 // FIXME: Use React.Fragment instead of returning an array if possible.
 // @ts-ignore
-export default connectField<ListFieldProps<any>>(List, {
+export default connectField(List, {
   includeInChain: false,
 });

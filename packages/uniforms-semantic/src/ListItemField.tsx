@@ -35,6 +35,6 @@ function ListItem(props: ListItemFieldProps) {
   );
 }
 
-export default connectField<ListItemFieldProps>(ListItem, {
+export default connectField(ListItem, {
   includeInChain: false,
 });

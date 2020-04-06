@@ -96,6 +96,6 @@ List.defaultProps = {
   },
 };
 
-export default connectField<ListFieldProps<any>>(List, {
+export default connectField(List, {
   includeInChain: false,
 });

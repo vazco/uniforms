@@ -57,4 +57,4 @@ function Num({
     />
   );
 }
-export default connectField<NumFieldProps>(Num);
+export default connectField(Num);

@@ -123,4 +123,4 @@ function Select({
   );
 }
 
-export default connectField<SelectFieldProps>(Select);
+export default connectField(Select);

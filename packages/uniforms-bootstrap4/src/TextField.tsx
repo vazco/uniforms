@@ -35,4 +35,4 @@ function Text(props: TextFieldProps) {
   );
 }
 
-export default connectField<TextFieldProps>(Text);
+export default connectField(Text);

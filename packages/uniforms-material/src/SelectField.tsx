@@ -236,4 +236,4 @@ function Select({ checkboxes, ...props }: SelectFieldProps) {
       } as SelectProps);
 }
 
-export default connectField<SelectFieldProps>(Select);
+export default connectField(Select);

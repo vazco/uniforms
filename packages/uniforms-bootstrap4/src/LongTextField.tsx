@@ -35,4 +35,4 @@ function LongText(props: LongTextFieldProps) {
   );
 }
 
-export default connectField<LongTextFieldProps>(LongText);
+export default connectField(LongText);

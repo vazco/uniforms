@@ -61,4 +61,4 @@ function LongText({
   );
 }
 
-export default connectField<LongTextFieldProps>(LongText);
+export default connectField(LongText);
