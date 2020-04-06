@@ -14,7 +14,7 @@ const DisplayIf = ({ children, condition }, { uniforms }) =>
   condition(uniforms) ? Children.only(children) : nothing;
 DisplayIf.contextTypes = BaseField.contextTypes;
 
-export default function ExamplesDisplayIfField() {
+export default function ExampleOfDisplayIfField() {
   return (
     <AutoForm
       schema={schema}

@@ -33,7 +33,7 @@ const professions = [
   }
 ];
 
-export default function GuestFormPredefinedFields() {
+export default function GuestForm() {
   return (
     <AutoForm schema={GuestSchema} onSubmit={console.log}>
       <h4>IT meeting guest questionnaire</h4>

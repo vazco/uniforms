@@ -1,10 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import CodeSection from '../CodeSection';
 import ExampleCustomizer from '../ExampleCustomizer';
 import Heading from './Heading';
-import ImageField from '../../../docs/examples/CustomFields/ImageField';
 import styles from './index.module.css';
 
 export default function ExampleFullyCustomizable() {
@@ -44,22 +42,9 @@ export default function ExampleFullyCustomizable() {
             )}
           >
             <ExampleCustomizer
-              code={theme => (
-                <CodeSection
-                  language="js"
-                  replace={{
-                    '../../../website/components/universal': `uniforms-${theme}`
-                  }}
-                  source={require('!!raw-loader!../../../docs/examples/CustomFields/ImageField')}
-                />
-              )}
-              example={<ImageField />}
-              schema={
-                <CodeSection
-                  language="js"
-                  source={require('!!raw-loader!../../../docs/examples/CustomFields/ImageFieldSchema')}
-                />
-              }
+              code={require('!!raw-loader!../../../docs/examples/CustomFields/ImageField')}
+              example={require('../../../docs/examples/CustomFields/ImageField')}
+              schema={require('!!raw-loader!../../../docs/examples/CustomFields/ImageFieldSchema')}
             />
           </div>
         </div>

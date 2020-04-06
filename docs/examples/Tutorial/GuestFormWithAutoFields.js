@@ -8,7 +8,7 @@ import {
 
 import GuestSchema from './GuestSchema';
 
-export default function GuestFormWithAutoFields() {
+export default function GuestForm() {
   return (
     <AutoForm schema={GuestSchema} onSubmit={console.log}>
       <h4>IT meeting guest questionnaire</h4>

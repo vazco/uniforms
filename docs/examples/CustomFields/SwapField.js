@@ -27,7 +27,7 @@ const SwapField = (
 );
 SwapField.contextTypes = BaseField.contextTypes;
 
-export default function ExampleSwapField() {
+export default function ExampleOfSwapField() {
   return (
     <section>
       <AutoForm

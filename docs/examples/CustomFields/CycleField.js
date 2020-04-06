@@ -32,7 +32,7 @@ const Cycle = ({ allowedValues, label, required, value, onChange }) => (
 
 const CycleField = connectField(Cycle);
 
-export default function ExamplesCycleField() {
+export default function ExampleOfCycleField() {
   return (
     <AutoForm
       schema={schema}

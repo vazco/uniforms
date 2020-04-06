@@ -30,49 +30,33 @@ const toggles = [
   { name: 'Schema', tooltipText: 'Show schema', icon: <DatabaseIcon /> }
 ];
 
-export default function ExampleCustomizer({ code, example, schema }) {
-  function Code({ theme }) {
-    if (!('default' in code)) return code(theme);
-    return (
-      <CodeSection
-        language="js"
-        replace={{ "'[^']*?/universal'": `'uniforms-${theme}'` }}
-        source={code.default}
-      />
-    );
-  }
-
-  function Example({ theme }) {
-    let content;
-    if ('default' in example) {
-      const ExampleComponent = example.default;
-      content = <ExampleComponent />;
-    } else {
-      content = example;
-    }
-
-    return (
-      <ThemeProvider value={theme}>
-        <FormWrapper>{content}</FormWrapper>
-      </ThemeProvider>
-    );
-  }
-
-  function Schema() {
-    if (!('default' in schema)) return schema;
-    return <CodeSection language="js" source={schema.default} />;
-  }
-
+export default function ExampleCustomizer({
+  code: { default: code },
+  example: { default: Example },
+  schema: { default: schema }
+}) {
   return (
     <TogglerTabs group="examples" tabsItems={tabs} togglerItems={toggles}>
       {({ tab: { value: theme }, toggle: { name } }) => {
         switch (name) {
           case 'Code':
-            return <Code theme={theme} />;
+            return (
+              <CodeSection
+                language="js"
+                replace={{ "'[^']*?/universal'": `'uniforms-${theme}'` }}
+                source={code}
+              />
+            );
           case 'Example':
-            return <Example theme={theme} />;
+            return (
+              <ThemeProvider value={theme}>
+                <FormWrapper>
+                  <Example />
+                </FormWrapper>
+              </ThemeProvider>
+            );
           case 'Schema':
-            return <Schema />;
+            return <CodeSection language="js" source={schema} />;
           default:
             return null;
         }

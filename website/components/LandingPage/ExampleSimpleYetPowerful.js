@@ -1,10 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import CodeSection from '../CodeSection';
 import ExampleCustomizer from '../ExampleCustomizer';
 import Heading from './Heading';
-import SignUp from '../../../docs/examples/CommonForms/SignUp';
 import styles from './index.module.css';
 
 export default function ExampleSimpleYetPowerful() {
@@ -22,22 +20,9 @@ export default function ExampleSimpleYetPowerful() {
             className={classNames(styles['preview-border'], styles['preview'])}
           >
             <ExampleCustomizer
-              code={theme => (
-                <CodeSection
-                  language="js"
-                  replace={{
-                    '../../../website/components/universal': `uniforms-${theme}`
-                  }}
-                  source={require('!!raw-loader!../../../docs/examples/CommonForms/SignUp')}
-                />
-              )}
-              example={<SignUp />}
-              schema={
-                <CodeSection
-                  language="js"
-                  source={require('!!raw-loader!../../../docs/examples/CommonForms/SignUpSchema')}
-                />
-              }
+              code={require('!!raw-loader!../../../docs/examples/CommonForms/SignUp')}
+              example={require('../../../docs/examples/CommonForms/SignUp')}
+              schema={require('!!raw-loader!../../../docs/examples/CommonForms/SignUpSchema')}
             />
           </div>
         </div>

@@ -32,9 +32,10 @@ function Image({ onChange, value }) {
     </div>
   );
 }
+
 const ImageField = connectField(Image);
 
-export default function ExamplesSubmitField() {
+export default function ExampleOfSubmitField() {
   return (
     <AutoForm
       schema={schema}

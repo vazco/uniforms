@@ -30,7 +30,7 @@ const Composite = () => (
 
 const CompositeField = connectField(Composite);
 
-export default function ExamplesSubmitField() {
+export default function ExampleOfSubmitField() {
   return (
     <AutoForm
       schema={schema}

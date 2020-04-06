@@ -21,7 +21,7 @@ const model = {
   range: { start: new Date(2019, 7, 10), stop: new Date(2019, 7, 20) }
 };
 
-export default function ExamplesRangeField() {
+export default function ExampleOfRangeField() {
   function transform(mode, model) {
     if (mode === 'validate') {
       const { start, stop } = model.range || {};
