@@ -10,7 +10,7 @@ export type ListItemFieldProps = {
   removeIcon?: any;
 };
 
-const ListItem = ({ removeIcon, ...props }: ListItemFieldProps) => {
+function ListItem({ removeIcon, ...props }: ListItemFieldProps) {
   const { name, children } = props;
   return (
     <div className="row">
@@ -31,6 +31,6 @@ const ListItem = ({ removeIcon, ...props }: ListItemFieldProps) => {
       )}
     </div>
   );
-};
+}
 
 export default connectField(ListItem, { includeInChain: false });

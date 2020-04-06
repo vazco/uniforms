@@ -15,14 +15,14 @@ export type ErrorsFieldProps = Override<
   }
 >;
 
-const ErrorsField = ({
+function ErrorsField({
   children,
   fullWidth,
   margin,
   name,
   variant,
   ...props
-}: ErrorsFieldProps) => {
+}: ErrorsFieldProps) {
   const { error, schema } = useForm();
 
   return !error && !children ? null : (
@@ -42,7 +42,7 @@ const ErrorsField = ({
       ))}
     </FormControl>
   );
-};
+}
 
 ErrorsField.defaultProps = {
   fullWidth: true,

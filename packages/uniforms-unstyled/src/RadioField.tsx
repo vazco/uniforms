@@ -12,12 +12,12 @@ export type RadioFieldProps = Override<
   {
     allowedValues: string[];
     checkboxes?: boolean;
-    onChange: (string) => void;
-    transform?: (string?: string) => string;
+    onChange(string): void;
+    transform?(string?: string): string;
   }
 >;
 
-const Radio = ({
+function Radio({
   allowedValues,
   checkboxes, // eslint-disable-line no-unused-vars
   disabled,
@@ -28,27 +28,29 @@ const Radio = ({
   transform,
   value,
   ...props
-}: RadioFieldProps) => (
-  <div {...filterDOMProps(props)}>
-    {label && <label>{label}</label>}
+}: RadioFieldProps) {
+  return (
+    <div {...filterDOMProps(props)}>
+      {label && <label>{label}</label>}
 
-    {allowedValues.map(item => (
-      <div key={item}>
-        <input
-          checked={item === value}
-          disabled={disabled}
-          id={`${id}-${escape(item)}`}
-          name={name}
-          onChange={() => onChange(item)}
-          type="radio"
-        />
+      {allowedValues.map(item => (
+        <div key={item}>
+          <input
+            checked={item === value}
+            disabled={disabled}
+            id={`${id}-${escape(item)}`}
+            name={name}
+            onChange={() => onChange(item)}
+            type="radio"
+          />
 
-        <label htmlFor={`${id}-${escape(item)}`}>
-          {transform ? transform(item) : item}
-        </label>
-      </div>
-    ))}
-  </div>
-);
+          <label htmlFor={`${id}-${escape(item)}`}>
+            {transform ? transform(item) : item}
+          </label>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default connectField<RadioFieldProps>(Radio);

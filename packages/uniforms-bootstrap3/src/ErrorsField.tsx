@@ -4,7 +4,7 @@ import { filterDOMProps, useForm } from 'uniforms';
 
 export type ErrorsFieldProps = HTMLProps<HTMLDivElement>;
 
-const ErrorsField = ({ className, children, ...props }: ErrorsFieldProps) => {
+function ErrorsField({ className, children, ...props }: ErrorsFieldProps) {
   const { error, schema } = useForm();
 
   return !error && !children ? null : (
@@ -21,6 +21,6 @@ const ErrorsField = ({ className, children, ...props }: ErrorsFieldProps) => {
       </div>
     </div>
   );
-};
+}
 
 export default ErrorsField;

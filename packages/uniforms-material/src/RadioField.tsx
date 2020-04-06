@@ -15,12 +15,12 @@ export type RadioFieldProps = Override<
     allowedValues: string[];
     checkboxes?: boolean;
     label?: string;
-    onChange: (string) => void;
-    transform?: (string?: string) => string;
+    onChange(string): void;
+    transform?(string?: string): string;
   }
 >;
 
-const Radio = ({
+function Radio({
   allowedValues,
   checkboxes, // eslint-disable-line no-unused-vars
   disabled,
@@ -32,7 +32,7 @@ const Radio = ({
   transform,
   value,
   ...props
-}: RadioFieldProps) => {
+}: RadioFieldProps) {
   const filteredProps = wrapField._filterDOMProps(filterDOMProps(props));
 
   return wrapField(
@@ -59,6 +59,6 @@ const Radio = ({
       ))}
     </RadioGroup>,
   );
-};
+}
 
 export default connectField<RadioFieldProps>(Radio);

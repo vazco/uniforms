@@ -9,12 +9,12 @@ export type ErrorsFieldProps = Override<
   }
 >;
 
-const ErrorsField = ({
+function ErrorsField({
   children,
   className,
   name,
   ...props
-}: ErrorsFieldProps) => {
+}: ErrorsFieldProps) {
   const { error, schema } = useForm();
 
   return !error && !children ? null : (
@@ -33,6 +33,6 @@ const ErrorsField = ({
       </div>
     </div>
   );
-};
+}
 
 export default ErrorsField;

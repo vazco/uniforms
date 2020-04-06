@@ -8,12 +8,12 @@ export type TextFieldProps = Override<
   InputProps,
   {
     inputRef?: Ref<Input>;
-    onChange: (value?: string) => void;
+    onChange(value?: string): void;
     value?: string;
   }
 >;
-const Text = (props: TextFieldProps) =>
-  wrapField(
+function Text(props: TextFieldProps) {
+  return wrapField(
     props,
     <Input
       disabled={props.disabled}
@@ -28,5 +28,6 @@ const Text = (props: TextFieldProps) =>
       {...filterDOMProps(props)}
     />,
   );
+}
 
 export default connectField<TextFieldProps>(Text);

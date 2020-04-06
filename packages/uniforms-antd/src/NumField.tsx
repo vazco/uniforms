@@ -11,12 +11,12 @@ export type NumFieldProps = Override<
   {
     decimal?: boolean;
     inputRef: (instance: InputNumber | null) => void;
-    onChange: (value?: number) => void;
+    onChange(value?: number): void;
   }
 >;
 
-const Num = (props: NumFieldProps) =>
-  wrapField(
+function Num(props: NumFieldProps) {
+  return wrapField(
     props,
     <InputNumber
       disabled={props.disabled}
@@ -33,5 +33,6 @@ const Num = (props: NumFieldProps) =>
       {...filterDOMProps(props)}
     />,
   );
+}
 
 export default connectField<NumFieldProps>(Num);

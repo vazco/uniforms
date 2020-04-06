@@ -17,13 +17,13 @@ export type RadioFieldProps = Override<
     error?: boolean;
     inline?: boolean;
     inputClassName?: string;
-    onChange: (string) => void;
+    onChange(string): void;
     transform?: (string?: string) => string;
   }
 >;
 
-const Radio = (props: RadioFieldProps) =>
-  wrapField(
+function Radio(props: RadioFieldProps) {
+  return wrapField(
     props,
     props.allowedValues.map(item => (
       <div
@@ -47,5 +47,6 @@ const Radio = (props: RadioFieldProps) =>
       </div>
     )),
   );
+}
 
 export default connectField<RadioFieldProps>(Radio);

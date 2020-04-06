@@ -14,15 +14,15 @@ export type NestFieldProps = Override<
   }
 >;
 
-const Nest = ({
+function Nest({
   children,
   fields,
   itemProps,
   label,
   name,
   ...props
-}: NestFieldProps) =>
-  wrapField(
+}: NestFieldProps) {
+  return wrapField(
     { ...props, component: undefined },
     label && <FormLabel component="legend">{label}</FormLabel>,
     children
@@ -31,5 +31,6 @@ const Nest = ({
           <AutoField key={key} name={joinName(name, key)} {...itemProps} />
         )),
   );
+}
 
 export default connectField<NestFieldProps>(Nest, { includeInChain: false });

@@ -34,16 +34,16 @@ export type SelectFieldProps = Override<
     inputRef?: Ref<HTMLSelectElement>;
     label: string;
     name: string;
-    onChange: (value?: string | string[]) => void;
+    onChange(value?: string | string[]): void;
     placeholder: string;
     required?: boolean;
     showInlineError?: boolean;
-    transform?: (value?: string) => string;
+    transform?(value?: string): string;
     value?: string | string[];
   }
 >;
 
-const Select = ({
+function Select({
   allowedValues,
   checkboxes,
   className,
@@ -64,8 +64,8 @@ const Select = ({
   transform,
   value,
   ...props
-}: SelectFieldProps) =>
-  wrapField(
+}: SelectFieldProps) {
+  return wrapField(
     { ...props, id, label },
     checkboxes || fieldType === Array ? (
       allowedValues?.map(item => (
@@ -121,5 +121,6 @@ const Select = ({
       </select>
     ),
   );
+}
 
 export default connectField<SelectFieldProps>(Select);

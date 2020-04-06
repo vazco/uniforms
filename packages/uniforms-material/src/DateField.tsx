@@ -24,7 +24,7 @@ export type DateFieldProps = Override<
   }
 >;
 
-const Date = ({
+function Date({
   disabled,
   error,
   errorMessage,
@@ -39,25 +39,27 @@ const Date = ({
   showInlineError,
   value,
   ...props
-}: DateFieldProps) => (
-  <TextField
-    disabled={!!disabled}
-    error={!!error}
-    helperText={(error && showInlineError && errorMessage) || helperText}
-    label={label}
-    InputLabelProps={{ ...labelProps, ...InputLabelProps }}
-    name={name}
-    margin={props.margin ?? 'dense'}
-    onChange={(event: any) =>
-      disabled || dateParse(event.target.valueAsNumber, onChange)
-    }
-    placeholder={placeholder}
-    ref={inputRef}
-    type="datetime-local"
-    value={dateFormat(value) ?? ''}
-    {...filterDOMProps(props)}
-  />
-);
+}: DateFieldProps) {
+  return (
+    <TextField
+      disabled={!!disabled}
+      error={!!error}
+      helperText={(error && showInlineError && errorMessage) || helperText}
+      label={label}
+      InputLabelProps={{ ...labelProps, ...InputLabelProps }}
+      name={name}
+      margin={props.margin ?? 'dense'}
+      onChange={(event: any) =>
+        disabled || dateParse(event.target.valueAsNumber, onChange)
+      }
+      placeholder={placeholder}
+      ref={inputRef}
+      type="datetime-local"
+      value={dateFormat(value) ?? ''}
+      {...filterDOMProps(props)}
+    />
+  );
+}
 
 Date.defaultProps = {
   fullWidth: true,

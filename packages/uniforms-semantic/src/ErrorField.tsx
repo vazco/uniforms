@@ -10,14 +10,14 @@ export type ErrorFieldProps = Override<
   }
 >;
 
-const Error = ({
+function Error({
   children,
   className,
   error,
   errorMessage,
   ...props
-}: ErrorFieldProps) =>
-  !error ? null : (
+}: ErrorFieldProps) {
+  return !error ? null : (
     <div
       className={classnames('ui', className, 'error message')}
       {...filterDOMProps(props)}
@@ -25,5 +25,6 @@ const Error = ({
       {children ? children : <div className="header">{errorMessage}</div>}
     </div>
   );
+}
 
 export default connectField(Error, { initialValue: false });

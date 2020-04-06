@@ -1,8 +1,8 @@
 import classnames from 'classnames';
 import { BaseForm } from 'uniforms';
 
-const Bootstrap3 = (parent: any): any =>
-  class extends parent {
+function Bootstrap3(parent: any): any {
+  return class extends parent {
     static Bootstrap3 = Bootstrap3;
 
     static displayName = `Bootstrap3${parent.displayName}`;
@@ -33,5 +33,6 @@ const Bootstrap3 = (parent: any): any =>
       };
     }
   };
+}
 
 export default Bootstrap3(BaseForm);

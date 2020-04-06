@@ -23,7 +23,7 @@ export type NestFieldProps = Override<
   }
 >;
 
-const Nest = ({
+function Nest({
   children,
   className,
   disabled,
@@ -36,28 +36,30 @@ const Nest = ({
   name,
   showInlineError,
   ...props
-}: NestFieldProps) => (
-  <div
-    className={classnames(className, { disabled, error, grouped }, 'fields')}
-    {...filterDOMProps(props)}
-  >
-    {label && (
-      <div className="field">
-        <label>{label}</label>
-      </div>
-    )}
+}: NestFieldProps) {
+  return (
+    <div
+      className={classnames(className, { disabled, error, grouped }, 'fields')}
+      {...filterDOMProps(props)}
+    >
+      {label && (
+        <div className="field">
+          <label>{label}</label>
+        </div>
+      )}
 
-    {!!(error && showInlineError) && (
-      <div className="ui red basic label">{errorMessage}</div>
-    )}
+      {!!(error && showInlineError) && (
+        <div className="ui red basic label">{errorMessage}</div>
+      )}
 
-    {children
-      ? injectName(name, children)
-      : fields?.map(key => (
-          <AutoField key={key} name={joinName(name, key)} {...itemProps} />
-        ))}
-  </div>
-);
+      {children
+        ? injectName(name, children)
+        : fields?.map(key => (
+            <AutoField key={key} name={joinName(name, key)} {...itemProps} />
+          ))}
+    </div>
+  );
+}
 
 Nest.defaultProps = { grouped: true };
 

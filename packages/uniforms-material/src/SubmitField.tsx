@@ -16,7 +16,7 @@ export type SubmitFieldProps = Override<
 > &
   OverrideProps<ExtendButtonBaseTypeMap<any>, 'a'>;
 
-const SubmitField = ({
+function SubmitField({
   children,
   disabled,
   inputRef,
@@ -24,7 +24,7 @@ const SubmitField = ({
   name,
   value,
   ...props
-}: SubmitFieldProps) => {
+}: SubmitFieldProps) {
   const { error, state } = useForm();
 
   return (
@@ -38,7 +38,7 @@ const SubmitField = ({
       {children || label}
     </Button>
   );
-};
+}
 
 SubmitField.defaultProps = { label: 'Submit', variant: 'contained' };
 

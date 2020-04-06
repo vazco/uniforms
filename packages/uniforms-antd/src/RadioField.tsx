@@ -8,14 +8,14 @@ export type RadioFieldProps = Override<
   RadioProps,
   {
     allowedValues: string[];
-    onChange: (string) => void;
+    onChange(string): void;
     transform?: (string?: string) => string;
     value?: string;
   }
 >;
 
-const Radio = (props: RadioFieldProps) =>
-  wrapField(
+function Radio(props: RadioFieldProps) {
+  return wrapField(
     props,
     <RadioAntD.Group
       disabled={props.disabled}
@@ -39,5 +39,6 @@ const Radio = (props: RadioFieldProps) =>
       ))}
     </RadioAntD.Group>,
   );
+}
 
 export default connectField<RadioFieldProps>(Radio);

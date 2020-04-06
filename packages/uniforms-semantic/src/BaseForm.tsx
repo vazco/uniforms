@@ -1,8 +1,8 @@
 import classnames from 'classnames';
 import { BaseForm } from 'uniforms';
 
-const Semantic = (parent: any): any =>
-  class extends parent {
+function Semantic(parent: any): any {
+  return class extends parent {
     static Semantic = Semantic;
 
     static displayName = `Semantic${parent.displayName}`;
@@ -17,5 +17,6 @@ const Semantic = (parent: any): any =>
       };
     }
   };
+}
 
 export default Semantic(BaseForm);

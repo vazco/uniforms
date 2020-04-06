@@ -13,12 +13,12 @@ export type BoolFieldProps = Override<
     inputClassName?: string;
     inputRef?: Ref<HTMLInputElement>;
     labelBefore: string;
-    onChange: (value?: boolean) => void;
+    onChange(value?: boolean): void;
     value?: boolean;
   }
 >;
 
-const Bool = ({ onChange, ...props }: BoolFieldProps) => {
+function Bool({ onChange, ...props }: BoolFieldProps) {
   const {
     disabled,
     error,
@@ -54,6 +54,6 @@ const Bool = ({ onChange, ...props }: BoolFieldProps) => {
       </label>
     </div>,
   );
-};
+}
 
 export default connectField(Bool);

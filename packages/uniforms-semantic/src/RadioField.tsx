@@ -15,13 +15,13 @@ export type RadioFieldProps = Override<
     checkboxes?: boolean;
     error?: boolean;
     errorMessage?: string;
-    onChange: (string) => void;
+    onChange(string): void;
     showInlineError?: boolean;
     transform?: (string?: string) => string;
   }
 >;
 
-const Radio = ({
+function Radio({
   allowedValues,
   checkboxes, // eslint-disable-line no-unused-vars
   className,
@@ -37,40 +37,42 @@ const Radio = ({
   transform,
   value,
   ...props
-}: RadioFieldProps) => (
-  <div
-    className={classnames(className, { disabled, error }, 'grouped fields')}
-    {...filterDOMProps(props)}
-  >
-    {label && (
-      <div className={classnames({ required }, 'field')}>
-        <label>{label}</label>
-      </div>
-    )}
-
-    {allowedValues.map(item => (
-      <div className="field" key={item}>
-        <div className="ui radio checkbox">
-          <input
-            checked={item === value}
-            disabled={disabled}
-            id={`${id}-${escape(item)}`}
-            name={name}
-            onChange={() => onChange(item)}
-            type="radio"
-          />
-
-          <label htmlFor={`${id}-${escape(item)}`}>
-            {transform ? transform(item) : item}
-          </label>
+}: RadioFieldProps) {
+  return (
+    <div
+      className={classnames(className, { disabled, error }, 'grouped fields')}
+      {...filterDOMProps(props)}
+    >
+      {label && (
+        <div className={classnames({ required }, 'field')}>
+          <label>{label}</label>
         </div>
-      </div>
-    ))}
+      )}
 
-    {!!(error && showInlineError) && (
-      <div className="ui red basic pointing label">{errorMessage}</div>
-    )}
-  </div>
-);
+      {allowedValues.map(item => (
+        <div className="field" key={item}>
+          <div className="ui radio checkbox">
+            <input
+              checked={item === value}
+              disabled={disabled}
+              id={`${id}-${escape(item)}`}
+              name={name}
+              onChange={() => onChange(item)}
+              type="radio"
+            />
+
+            <label htmlFor={`${id}-${escape(item)}`}>
+              {transform ? transform(item) : item}
+            </label>
+          </div>
+        </div>
+      ))}
+
+      {!!(error && showInlineError) && (
+        <div className="ui red basic pointing label">{errorMessage}</div>
+      )}
+    </div>
+  );
+}
 
 export default connectField<RadioFieldProps>(Radio);

@@ -17,8 +17,8 @@ export type NumFieldProps = Override<
   }
 >;
 
-const Num = (props: NumFieldProps) =>
-  wrapField(
+function Num(props: NumFieldProps) {
+  return wrapField(
     omit(props, ['value', 'onChange']),
     <input
       className={classnames(props.inputClassName, 'form-control', {
@@ -41,5 +41,6 @@ const Num = (props: NumFieldProps) =>
       value={props.value ?? ''}
     />,
   );
+}
 
 export default connectField<NumFieldProps>(Num);

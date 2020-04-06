@@ -16,7 +16,7 @@ export type TextFieldProps = Override<
     inputRef?: Ref<HTMLInputElement>;
     label: string;
     name: string;
-    onChange: (value?: string) => void;
+    onChange(value?: string): void;
     placeholder: string;
     required?: boolean;
     showInlineError: boolean;
@@ -26,7 +26,7 @@ export type TextFieldProps = Override<
   }
 >;
 
-const Text = ({
+function Text({
   className,
   disabled,
   error,
@@ -46,42 +46,44 @@ const Text = ({
   value,
   wrapClassName,
   ...props
-}: TextFieldProps) => (
-  <div
-    className={classnames(className, { disabled, error, required }, 'field')}
-    {...filterDOMProps(props)}
-  >
-    {label && <label htmlFor={id}>{label}</label>}
-
+}: TextFieldProps) {
+  return (
     <div
-      className={classnames(
-        'ui',
-        wrapClassName,
-        { left: iconLeft, icon: icon || iconLeft },
-        'input',
-      )}
+      className={classnames(className, { disabled, error, required }, 'field')}
+      {...filterDOMProps(props)}
     >
-      <input
-        disabled={disabled}
-        id={id}
-        name={name}
-        onChange={event => onChange(event.target.value)}
-        placeholder={placeholder}
-        ref={inputRef}
-        type={type}
-        value={value ?? ''}
-      />
+      {label && <label htmlFor={id}>{label}</label>}
 
-      {(icon || iconLeft) && (
-        <i className={`${icon || iconLeft} icon`} {...iconProps} />
+      <div
+        className={classnames(
+          'ui',
+          wrapClassName,
+          { left: iconLeft, icon: icon || iconLeft },
+          'input',
+        )}
+      >
+        <input
+          disabled={disabled}
+          id={id}
+          name={name}
+          onChange={event => onChange(event.target.value)}
+          placeholder={placeholder}
+          ref={inputRef}
+          type={type}
+          value={value ?? ''}
+        />
+
+        {(icon || iconLeft) && (
+          <i className={`${icon || iconLeft} icon`} {...iconProps} />
+        )}
+      </div>
+
+      {!!(error && showInlineError) && (
+        <div className="ui red basic pointing label">{errorMessage}</div>
       )}
     </div>
-
-    {!!(error && showInlineError) && (
-      <div className="ui red basic pointing label">{errorMessage}</div>
-    )}
-  </div>
-);
+  );
+}
 
 Text.defaultProps = { type: 'text' };
 

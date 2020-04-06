@@ -18,14 +18,14 @@ type CheckboxesProps = Override<
     allowedValues: string[];
     fieldType?: typeof Array | any;
     id: string;
-    onChange: (
+    onChange(
       value?: string | boolean[] | number | { [key: string]: any },
-    ) => void;
+    ): void;
     transform?: (value?: string) => string;
   }
 >;
 
-const renderCheckboxes = (props: CheckboxesProps) => {
+function renderCheckboxes(props: CheckboxesProps) {
   const Group = props.fieldType === Array ? CheckboxGroup : RadioGroup;
   const checkboxProps = {
     disabled: props.disabled,
@@ -45,7 +45,7 @@ const renderCheckboxes = (props: CheckboxesProps) => {
     ...filterDOMProps(props),
   };
   return <Group {...checkboxProps} />;
-};
+}
 
 type SelectProps = {
   allowedValues?: string[];
@@ -57,38 +57,41 @@ type SelectProps = {
   transform?: (value?: string) => string;
 } & SelectInputProps;
 
-const renderSelect = (props: SelectProps) => (
-  <SelectAntD
-    allowClear={!props.required}
-    disabled={props.disabled}
-    id={props.id}
-    mode={props.fieldType === Array ? 'multiple' : undefined}
-    name={props.name}
-    onChange={value => props.onChange(value)}
-    placeholder={props.placeholder}
-    ref={props.inputRef}
-    value={props.value || (props.fieldType === Array ? [] : undefined)}
-    {...filterDOMProps(props)}
-  >
-    {props.allowedValues!.map(value => (
-      <SelectAntD.Option key={value} value={value}>
-        {props.transform ? props.transform(value) : value}
-      </SelectAntD.Option>
-    ))}
-  </SelectAntD>
-);
+function renderSelect(props: SelectProps) {
+  return (
+    <SelectAntD
+      allowClear={!props.required}
+      disabled={props.disabled}
+      id={props.id}
+      mode={props.fieldType === Array ? 'multiple' : undefined}
+      name={props.name}
+      onChange={value => props.onChange(value)}
+      placeholder={props.placeholder}
+      ref={props.inputRef}
+      value={props.value || (props.fieldType === Array ? [] : undefined)}
+      {...filterDOMProps(props)}
+    >
+      {props.allowedValues!.map(value => (
+        <SelectAntD.Option key={value} value={value}>
+          {props.transform ? props.transform(value) : value}
+        </SelectAntD.Option>
+      ))}
+    </SelectAntD>
+  );
+}
 
 export type SelectFieldProps = { checkboxes?: boolean } & (
   | CheckboxesProps
   | SelectProps
 );
 
-const Select = ({ checkboxes, ...props }: SelectFieldProps) =>
-  wrapField(
+function Select({ checkboxes, ...props }: SelectFieldProps) {
+  return wrapField(
     props,
     checkboxes
       ? renderCheckboxes(props as CheckboxesProps)
       : renderSelect(props as SelectProps),
   );
+}
 
 export default connectField(Select);

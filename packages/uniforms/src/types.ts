@@ -41,7 +41,7 @@ export type GuaranteedProps<Value> = {
   id: string;
   label: string;
   name: string;
-  onChange: (value?: Value, name?: string) => void;
+  onChange(value?: Value, name?: string): void;
   placeholder: string;
   showInlineError: boolean;
   value?: Value;

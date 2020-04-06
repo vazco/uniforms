@@ -9,12 +9,12 @@ export type BoolFieldProps = Override<
     inputRef?: Ref<HTMLInputElement>;
     label: string;
     name: string;
-    onChange: (value?: boolean) => void;
+    onChange(value?: boolean): void;
     value?: boolean;
   }
 >;
 
-const Bool = ({
+function Bool({
   disabled,
   id,
   inputRef,
@@ -23,26 +23,28 @@ const Bool = ({
   onChange,
   value,
   ...props
-}: BoolFieldProps) => (
-  <div {...filterDOMProps(props)}>
-    <input
-      checked={value || false}
-      disabled={disabled}
-      id={id}
-      name={name}
-      onChange={
-        disabled
-          ? undefined
-          : () => {
-              onChange(!value);
-            }
-      }
-      ref={inputRef}
-      type="checkbox"
-    />
+}: BoolFieldProps) {
+  return (
+    <div {...filterDOMProps(props)}>
+      <input
+        checked={value || false}
+        disabled={disabled}
+        id={id}
+        name={name}
+        onChange={
+          disabled
+            ? undefined
+            : () => {
+                onChange(!value);
+              }
+        }
+        ref={inputRef}
+        type="checkbox"
+      />
 
-    {label && <label htmlFor={id}>{label}</label>}
-  </div>
-);
+      {label && <label htmlFor={id}>{label}</label>}
+    </div>
+  );
+}
 
 export default connectField(Bool);

@@ -19,7 +19,7 @@ export type NumFieldProps = Override<
     max?: number;
     min?: number;
     name: string;
-    onChange: (value?: number) => void;
+    onChange(value?: number): void;
     placeholder: string;
     showInlineError: boolean;
     step?: number;
@@ -28,7 +28,7 @@ export type NumFieldProps = Override<
   }
 >;
 
-const Num = ({
+function Num({
   className,
   decimal,
   disabled,
@@ -51,48 +51,50 @@ const Num = ({
   value,
   wrapClassName,
   ...props
-}: NumFieldProps) => (
-  <div
-    className={classnames(className, { disabled, error, required }, 'field')}
-    {...filterDOMProps(props)}
-  >
-    {label && <label htmlFor={id}>{label}</label>}
-
+}: NumFieldProps) {
+  return (
     <div
-      className={classnames(
-        'ui',
-        wrapClassName,
-        { left: iconLeft, icon: icon || iconLeft },
-        'input',
-      )}
+      className={classnames(className, { disabled, error, required }, 'field')}
+      {...filterDOMProps(props)}
     >
-      <input
-        disabled={disabled}
-        id={id}
-        max={max}
-        min={min}
-        name={name}
-        onChange={event => {
-          const parse = decimal ? parseFloat : parseInt;
-          const value = parse(event.target.value);
-          onChange(isNaN(value) ? undefined : value);
-        }}
-        placeholder={placeholder}
-        ref={inputRef}
-        step={step || (decimal ? 0.01 : 1)}
-        type="number"
-        value={value ?? ''}
-      />
+      {label && <label htmlFor={id}>{label}</label>}
 
-      {(icon || iconLeft) && (
-        <i className={`${icon || iconLeft} icon`} {...iconProps} />
+      <div
+        className={classnames(
+          'ui',
+          wrapClassName,
+          { left: iconLeft, icon: icon || iconLeft },
+          'input',
+        )}
+      >
+        <input
+          disabled={disabled}
+          id={id}
+          max={max}
+          min={min}
+          name={name}
+          onChange={event => {
+            const parse = decimal ? parseFloat : parseInt;
+            const value = parse(event.target.value);
+            onChange(isNaN(value) ? undefined : value);
+          }}
+          placeholder={placeholder}
+          ref={inputRef}
+          step={step || (decimal ? 0.01 : 1)}
+          type="number"
+          value={value ?? ''}
+        />
+
+        {(icon || iconLeft) && (
+          <i className={`${icon || iconLeft} icon`} {...iconProps} />
+        )}
+      </div>
+
+      {!!(error && showInlineError) && (
+        <div className="ui red basic pointing label">{errorMessage}</div>
       )}
     </div>
-
-    {!!(error && showInlineError) && (
-      <div className="ui red basic pointing label">{errorMessage}</div>
-    )}
-  </div>
-);
+  );
+}
 
 export default connectField(Num);

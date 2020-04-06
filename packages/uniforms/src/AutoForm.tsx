@@ -12,7 +12,7 @@ import ValidatedQuickForm, {
 import { DeepPartial } from './types';
 
 export type AutoFormProps<Model extends {}> = ValidatedQuickFormProps<Model> & {
-  onChangeModel?: (model: DeepPartial<Model>) => void;
+  onChangeModel?(model: DeepPartial<Model>): void;
 };
 
 export type AutoFormState<Model extends {}> = ValidatedQuickFormState<Model> & {

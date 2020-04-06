@@ -14,7 +14,7 @@ export type SubmitFieldProps = Override<
   }
 >;
 
-const SubmitField = ({
+function SubmitField({
   className,
   disabled,
   inputClassName,
@@ -22,7 +22,7 @@ const SubmitField = ({
   value,
   wrapClassName,
   ...props
-}: SubmitFieldProps) => {
+}: SubmitFieldProps) {
   const { error, state: anyState } = useForm();
   const state = (anyState as unknown) as { disabled: boolean; grid: any };
   const hasWrap = !!(state.grid || wrapClassName);
@@ -70,7 +70,7 @@ const SubmitField = ({
       {!hasWrap && blockInput}
     </div>
   );
-};
+}
 
 SubmitField.defaultProps = { inputClassName: 'btn btn-primary' };
 

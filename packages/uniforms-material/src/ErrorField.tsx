@@ -14,7 +14,7 @@ export type ErrorFieldProps = Override<
   }
 >;
 
-const Error = ({
+function Error({
   children,
   error,
   errorMessage,
@@ -22,8 +22,8 @@ const Error = ({
   margin,
   variant,
   ...props
-}: ErrorFieldProps) =>
-  !error ? null : (
+}: ErrorFieldProps) {
+  return !error ? null : (
     <FormControl
       error={!!error}
       fullWidth={!!fullWidth}
@@ -35,6 +35,7 @@ const Error = ({
       </FormHelperText>
     </FormControl>
   );
+}
 
 Error.defaultProps = {
   fullWidth: true,

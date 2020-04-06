@@ -11,12 +11,12 @@ export type BoolFieldProps = Override<
   {
     checkbox?: boolean;
     inputRef?: Ref<HTMLInputElement>;
-    onChange: (value?: boolean) => void;
+    onChange(value?: boolean): void;
     value?: boolean;
   }
 >;
 
-const Bool = ({
+function Bool({
   checkbox,
   disabled,
   inputRef,
@@ -24,7 +24,7 @@ const Bool = ({
   onChange,
   value,
   ...props
-}: BoolFieldProps) => {
+}: BoolFieldProps) {
   return wrapField(
     props,
     createElement(checkbox ? (Checkbox as any) : Switch, {
@@ -37,7 +37,7 @@ const Bool = ({
       ...filterDOMProps(props),
     }),
   );
-};
+}
 
 Bool.defaultProps = {
   checkbox: false,

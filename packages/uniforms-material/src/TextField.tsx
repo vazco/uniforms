@@ -9,13 +9,13 @@ export type TextFieldProps = Override<
     errorMessage?: string;
     max?: number;
     min?: number;
-    onChange: (value?: string) => void;
+    onChange(value?: string): void;
     showInlineError?: boolean;
     value?: string;
   }
 >;
 
-const Text = ({
+function Text({
   disabled,
   error,
   errorMessage,
@@ -29,22 +29,24 @@ const Text = ({
   type,
   value,
   ...props
-}: TextFieldProps) => (
-  <TextField
-    disabled={!!disabled}
-    error={!!error}
-    helperText={(error && showInlineError && errorMessage) || helperText}
-    label={label}
-    name={name}
-    onChange={event => disabled || onChange(event.target.value)}
-    placeholder={placeholder}
-    ref={inputRef}
-    type={type}
-    margin={props.margin ?? 'dense'}
-    value={value ?? ''}
-    {...filterDOMProps(props)}
-  />
-);
+}: TextFieldProps) {
+  return (
+    <TextField
+      disabled={!!disabled}
+      error={!!error}
+      helperText={(error && showInlineError && errorMessage) || helperText}
+      label={label}
+      name={name}
+      onChange={event => disabled || onChange(event.target.value)}
+      placeholder={placeholder}
+      ref={inputRef}
+      type={type}
+      margin={props.margin ?? 'dense'}
+      value={value ?? ''}
+      {...filterDOMProps(props)}
+    />
+  );
+}
 
 Text.defaultProps = {
   fullWidth: true,

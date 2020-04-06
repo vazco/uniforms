@@ -9,7 +9,7 @@ export type ListItemFieldProps = {
   children?: ReactNode;
 };
 
-const ListItem = (props: ListItemFieldProps) => {
+function ListItem(props: ListItemFieldProps) {
   const { children, name } = props;
   return (
     <div className="item">
@@ -33,7 +33,7 @@ const ListItem = (props: ListItemFieldProps) => {
       </div>
     </div>
   );
-};
+}
 
 export default connectField<ListItemFieldProps>(ListItem, {
   includeInChain: false,

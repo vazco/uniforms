@@ -12,14 +12,14 @@ export type NumFieldProps = Override<
     max?: number;
     min?: number;
     name: string;
-    onChange: (value?: number) => void;
+    onChange(value?: number): void;
     placeholder: string;
     step?: number;
     value?: number;
   }
 >;
 
-const Num = ({
+function Num({
   decimal,
   disabled,
   id,
@@ -33,28 +33,30 @@ const Num = ({
   step,
   value,
   ...props
-}: NumFieldProps) => (
-  <div {...filterDOMProps(props)}>
-    {label && <label htmlFor={id}>{label}</label>}
+}: NumFieldProps) {
+  return (
+    <div {...filterDOMProps(props)}>
+      {label && <label htmlFor={id}>{label}</label>}
 
-    <input
-      disabled={disabled}
-      id={id}
-      max={max}
-      min={min}
-      name={name}
-      onChange={event => {
-        const parse = decimal ? parseFloat : parseInt;
-        const value = parse(event.target.value);
-        onChange(isNaN(value) ? undefined : value);
-      }}
-      placeholder={placeholder}
-      ref={inputRef}
-      step={step || (decimal ? 0.01 : 1)}
-      type="number"
-      value={value ?? ''}
-    />
-  </div>
-);
+      <input
+        disabled={disabled}
+        id={id}
+        max={max}
+        min={min}
+        name={name}
+        onChange={event => {
+          const parse = decimal ? parseFloat : parseInt;
+          const value = parse(event.target.value);
+          onChange(isNaN(value) ? undefined : value);
+        }}
+        placeholder={placeholder}
+        ref={inputRef}
+        step={step || (decimal ? 0.01 : 1)}
+        type="number"
+        value={value ?? ''}
+      />
+    </div>
+  );
+}
 
 export default connectField(Num);

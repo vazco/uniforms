@@ -14,13 +14,13 @@ export type DateFieldProps = Override<
     max?: Date;
     min?: Date;
     name: string;
-    onChange: (value?: Date) => void;
+    onChange(value?: Date): void;
     placeholder: string;
     value?: Date;
   }
 >;
 
-const Date = ({
+function Date({
   disabled,
   id,
   inputRef,
@@ -32,30 +32,32 @@ const Date = ({
   placeholder,
   value,
   ...props
-}: DateFieldProps) => (
-  <div {...filterDOMProps(props)}>
-    {label && <label htmlFor={id}>{label}</label>}
+}: DateFieldProps) {
+  return (
+    <div {...filterDOMProps(props)}>
+      {label && <label htmlFor={id}>{label}</label>}
 
-    <input
-      disabled={disabled}
-      id={id}
-      max={dateFormat(max)}
-      min={dateFormat(min)}
-      name={name}
-      onChange={event => {
-        const date = new DateConstructor(event.target.valueAsNumber);
-        if (date.getFullYear() < 10000) {
-          onChange(date);
-        } else if (isNaN(event.target.valueAsNumber)) {
-          onChange(undefined);
-        }
-      }}
-      placeholder={placeholder}
-      ref={inputRef}
-      type="datetime-local"
-      value={dateFormat(value) ?? ''}
-    />
-  </div>
-);
+      <input
+        disabled={disabled}
+        id={id}
+        max={dateFormat(max)}
+        min={dateFormat(min)}
+        name={name}
+        onChange={event => {
+          const date = new DateConstructor(event.target.valueAsNumber);
+          if (date.getFullYear() < 10000) {
+            onChange(date);
+          } else if (isNaN(event.target.valueAsNumber)) {
+            onChange(undefined);
+          }
+        }}
+        placeholder={placeholder}
+        ref={inputRef}
+        type="datetime-local"
+        value={dateFormat(value) ?? ''}
+      />
+    </div>
+  );
+}
 
 export default connectField(Date);

@@ -11,13 +11,13 @@ export type LongTextFieldProps = Override<
     error?: boolean;
     inputClassName?: string;
     inputRef?: Ref<HTMLTextAreaElement>;
-    onChange: (value?: string) => void;
+    onChange(value?: string): void;
     value?: string;
   }
 >;
 
-const LongText = (props: LongTextFieldProps) =>
-  wrapField(
+function LongText(props: LongTextFieldProps) {
+  return wrapField(
     omit(props, ['value', 'onChange']),
     <textarea
       className={classnames(props.inputClassName, 'form-control', {
@@ -33,5 +33,6 @@ const LongText = (props: LongTextFieldProps) =>
       value={props.value ?? ''}
     />,
   );
+}
 
 export default connectField<LongTextFieldProps>(LongText);

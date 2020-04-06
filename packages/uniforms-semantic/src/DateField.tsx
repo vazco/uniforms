@@ -21,7 +21,7 @@ export type DateFieldProps = Override<
     max?: Date;
     min?: Date;
     name: string;
-    onChange: (value?: Date) => void;
+    onChange(value?: Date): void;
     placeholder: string;
     required?: boolean;
     showInlineError: boolean;
@@ -30,7 +30,7 @@ export type DateFieldProps = Override<
   }
 >;
 
-const Date = ({
+function Date({
   className,
   disabled,
   error,
@@ -51,50 +51,52 @@ const Date = ({
   value,
   wrapClassName,
   ...props
-}: DateFieldProps) => (
-  <div
-    className={classnames(className, { disabled, error, required }, 'field')}
-    {...filterDOMProps(props)}
-  >
-    {label && <label htmlFor={id}>{label}</label>}
-
+}: DateFieldProps) {
+  return (
     <div
-      className={classnames(
-        'ui',
-        wrapClassName,
-        { left: iconLeft, icon: icon || iconLeft },
-        'input',
-      )}
+      className={classnames(className, { disabled, error, required }, 'field')}
+      {...filterDOMProps(props)}
     >
-      <input
-        disabled={disabled}
-        id={id}
-        max={dateFormat(max)}
-        min={dateFormat(min)}
-        name={name}
-        onChange={event => {
-          const date = new DateConstructor(event.target.valueAsNumber);
-          if (date.getFullYear() < 10000) {
-            onChange(date);
-          } else if (isNaN(event.target.valueAsNumber)) {
-            onChange(undefined);
-          }
-        }}
-        placeholder={placeholder}
-        ref={inputRef}
-        type="datetime-local"
-        value={dateFormat(value) ?? ''}
-      />
+      {label && <label htmlFor={id}>{label}</label>}
 
-      {(icon || iconLeft) && (
-        <i className={`${icon || iconLeft} icon`} {...iconProps} />
+      <div
+        className={classnames(
+          'ui',
+          wrapClassName,
+          { left: iconLeft, icon: icon || iconLeft },
+          'input',
+        )}
+      >
+        <input
+          disabled={disabled}
+          id={id}
+          max={dateFormat(max)}
+          min={dateFormat(min)}
+          name={name}
+          onChange={event => {
+            const date = new DateConstructor(event.target.valueAsNumber);
+            if (date.getFullYear() < 10000) {
+              onChange(date);
+            } else if (isNaN(event.target.valueAsNumber)) {
+              onChange(undefined);
+            }
+          }}
+          placeholder={placeholder}
+          ref={inputRef}
+          type="datetime-local"
+          value={dateFormat(value) ?? ''}
+        />
+
+        {(icon || iconLeft) && (
+          <i className={`${icon || iconLeft} icon`} {...iconProps} />
+        )}
+      </div>
+
+      {!!(error && showInlineError) && (
+        <div className="ui red basic pointing label">{errorMessage}</div>
       )}
     </div>
-
-    {!!(error && showInlineError) && (
-      <div className="ui red basic pointing label">{errorMessage}</div>
-    )}
-  </div>
-);
+  );
+}
 
 export default connectField(Date);

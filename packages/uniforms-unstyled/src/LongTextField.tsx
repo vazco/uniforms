@@ -9,14 +9,14 @@ export type LongTextFieldProps = Override<
     inputRef?: Ref<HTMLTextAreaElement>;
     label: string;
     name: string;
-    onChange: (value?: string) => void;
+    onChange(value?: string): void;
     placeholder: string;
     type?: string;
     value?: string;
   }
 >;
 
-const LongText = ({
+function LongText({
   disabled,
   id,
   inputRef,
@@ -26,20 +26,22 @@ const LongText = ({
   placeholder,
   value,
   ...props
-}: LongTextFieldProps) => (
-  <div {...filterDOMProps(props)}>
-    {label && <label htmlFor={id}>{label}</label>}
+}: LongTextFieldProps) {
+  return (
+    <div {...filterDOMProps(props)}>
+      {label && <label htmlFor={id}>{label}</label>}
 
-    <textarea
-      disabled={disabled}
-      id={id}
-      name={name}
-      onChange={event => onChange(event.target.value)}
-      placeholder={placeholder}
-      ref={inputRef}
-      value={value ?? ''}
-    />
-  </div>
-);
+      <textarea
+        disabled={disabled}
+        id={id}
+        name={name}
+        onChange={event => onChange(event.target.value)}
+        placeholder={placeholder}
+        ref={inputRef}
+        value={value ?? ''}
+      />
+    </div>
+  );
+}
 
 export default connectField(LongText);

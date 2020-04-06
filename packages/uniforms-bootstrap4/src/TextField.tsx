@@ -11,13 +11,13 @@ export type TextFieldProps = Override<
     error?: boolean;
     inputClassName?: string;
     inputRef?: Ref<HTMLInputElement>;
-    onChange: (value?: string) => void;
+    onChange(value?: string): void;
     value?: string;
   }
 >;
 
-const Text = (props: TextFieldProps) =>
-  wrapField(
+function Text(props: TextFieldProps) {
+  return wrapField(
     omit(props, ['value', 'onChange']),
     <input
       className={classnames(props.inputClassName, 'form-control', {
@@ -33,5 +33,6 @@ const Text = (props: TextFieldProps) =>
       value={props.value ?? ''}
     />,
   );
+}
 
 export default connectField<TextFieldProps>(Text);

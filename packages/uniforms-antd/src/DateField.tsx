@@ -11,12 +11,12 @@ export type DateFieldProps = Override<
   {
     id: string;
     inputRef?: Ref<any>;
-    onChange?: (value?: any) => void;
+    onChange?(value?: any): void;
   }
 >;
 
-const Date = (props: DateFieldProps) =>
-  wrapField(
+function Date(props: DateFieldProps) {
+  return wrapField(
     props,
     <DatePicker
       disabled={props.disabled}
@@ -31,6 +31,7 @@ const Date = (props: DateFieldProps) =>
       {...filterDOMProps(props)}
     />,
   );
+}
 
 Date.defaultProps = {
   showTime: true,

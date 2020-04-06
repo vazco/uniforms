@@ -21,7 +21,7 @@ export type NestFieldProps = Override<
   }
 >;
 
-const Nest = ({
+function Nest({
   children,
   error,
   errorMessage,
@@ -31,18 +31,20 @@ const Nest = ({
   name,
   showInlineError,
   ...props
-}: NestFieldProps) => (
-  <div {...filterDOMProps(props)}>
-    {label && <label>{label}</label>}
+}: NestFieldProps) {
+  return (
+    <div {...filterDOMProps(props)}>
+      {label && <label>{label}</label>}
 
-    {!!(error && showInlineError) && <div>{errorMessage}</div>}
+      {!!(error && showInlineError) && <div>{errorMessage}</div>}
 
-    {children
-      ? injectName(name, children)
-      : fields?.map(key => (
-          <AutoField key={key} name={joinName(name, key)} {...itemProps} />
-        ))}
-  </div>
-);
+      {children
+        ? injectName(name, children)
+        : fields?.map(key => (
+            <AutoField key={key} name={joinName(name, key)} {...itemProps} />
+          ))}
+    </div>
+  );
+}
 
 export default connectField<NestFieldProps>(Nest, { includeInChain: false });

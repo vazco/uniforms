@@ -9,14 +9,14 @@ export type TextFieldProps = Override<
     inputRef?: Ref<HTMLInputElement>;
     label: string;
     name: string;
-    onChange: (value?: string) => void;
+    onChange(value?: string): void;
     placeholder: string;
     type?: string;
     value?: string;
   }
 >;
 
-const Text = ({
+function Text({
   disabled,
   id,
   inputRef,
@@ -27,22 +27,24 @@ const Text = ({
   type,
   value,
   ...props
-}: TextFieldProps) => (
-  <div {...filterDOMProps(props)}>
-    {label && <label htmlFor={id}>{label}</label>}
+}: TextFieldProps) {
+  return (
+    <div {...filterDOMProps(props)}>
+      {label && <label htmlFor={id}>{label}</label>}
 
-    <input
-      disabled={disabled}
-      id={id}
-      name={name}
-      onChange={event => onChange(event.target.value)}
-      placeholder={placeholder}
-      ref={inputRef}
-      type={type}
-      value={value ?? ''}
-    />
-  </div>
-);
+      <input
+        disabled={disabled}
+        id={id}
+        name={name}
+        onChange={event => onChange(event.target.value)}
+        placeholder={placeholder}
+        ref={inputRef}
+        type={type}
+        value={value ?? ''}
+      />
+    </div>
+  );
+}
 
 Text.defaultProps = { type: 'text' };
 

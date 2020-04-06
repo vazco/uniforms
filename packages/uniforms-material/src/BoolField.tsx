@@ -14,12 +14,12 @@ export type BoolFieldProps = Override<
     appearance?: 'checkbox' | 'switch';
     label?: string;
     legend?: string;
-    onChange?: (value: any) => void;
-    transform?: (label?: string) => string;
+    onChange?(value: any): void;
+    transform?(label?: string): string;
   }
 >;
 
-const Bool = (props: BoolFieldProps) => {
+function Bool(props: BoolFieldProps) {
   const {
     appearance,
     disabled,
@@ -60,6 +60,6 @@ const Bool = (props: BoolFieldProps) => {
       />
     </FormGroup>,
   );
-};
+}
 
 export default connectField(Bool);

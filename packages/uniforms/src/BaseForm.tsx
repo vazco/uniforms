@@ -25,10 +25,10 @@ export type BaseFormProps<Model extends {}> = {
     model: DeepPartial<Model>,
   ) => DeepPartial<Model>;
   noValidate: boolean;
-  onChange?: (key: string, value: any) => void;
-  onSubmit?: (model: DeepPartial<Model>) => any;
-  onSubmitSuccess?: (result: any) => void;
-  onSubmitFailure?: (result: any) => void;
+  onChange?(key: string, value: any): void;
+  onSubmit?(model: DeepPartial<Model>): any;
+  onSubmitSuccess?(result: any): void;
+  onSubmitFailure?(result: any): void;
   placeholder?: boolean;
   schema: any;
   showInlineError?: boolean;

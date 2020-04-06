@@ -30,9 +30,9 @@ type CheckboxesProps = {
   fieldType?: typeof Array | any; //?
   label?: string;
   legend?: string;
-  onChange: (value?: string | string[]) => void;
+  onChange(value?: string | string[]): void;
   showInlineError?: boolean;
-  transform?: (item?: string) => string;
+  transform?(item?: string): string;
   value: string | string[];
 } & (FormControlLabelProps | SelectionControlProps);
 
@@ -43,9 +43,9 @@ type SelectProps = {
   fieldType?: typeof Array | any; //?
   labelProps?: object;
   native?: boolean;
-  onChange: (value?: string | string[]) => void;
+  onChange(value?: string | string[]): void;
   showInlineError?: boolean;
-  transform?: (item?: string) => string;
+  transform?(item?: string): string;
   value: string | string[];
 } & TextFieldProps &
   MaterialSelectProps;
@@ -66,7 +66,7 @@ const xor = (item, array) => {
 };
 
 // eslint-disable-next-line complexity
-const renderSelect = ({
+function renderSelect({
   allowedValues,
   disabled,
   error,
@@ -90,7 +90,7 @@ const renderSelect = ({
   value,
   variant,
   ...props
-}: SelectProps) => {
+}: SelectProps) {
   const Item = native ? 'option' : MenuItem;
   const hasPlaceholder = !!placeholder;
   const hasValue = value !== '' && value !== undefined;
@@ -137,7 +137,7 @@ const renderSelect = ({
       ))}
     </TextField>
   );
-};
+}
 
 function renderCheckboxes({
   allowedValues,
@@ -221,7 +221,7 @@ function renderCheckboxes({
   );
 }
 
-const Select = ({ checkboxes, ...props }: SelectFieldProps) => {
+function Select({ checkboxes, ...props }: SelectFieldProps) {
   return checkboxes
     ? renderCheckboxes({
         ...props,
@@ -234,6 +234,6 @@ const Select = ({ checkboxes, ...props }: SelectFieldProps) => {
         fullWidth: (props as SelectProps).fullWidth ?? true,
         margin: (props as SelectProps).margin ?? 'dense',
       } as SelectProps);
-};
+}
 
 export default connectField<SelectFieldProps>(Select);

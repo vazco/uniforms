@@ -18,7 +18,7 @@ export type DateFieldProps = Override<
     max?: Date;
     min?: Date;
     name: string;
-    onChange: (value?: Date) => void;
+    onChange(value?: Date): void;
     placeholder: string;
     showInlineError: boolean;
     value?: Date;
@@ -26,7 +26,7 @@ export type DateFieldProps = Override<
   }
 >;
 
-const Date = ({
+function Date({
   disabled,
   error,
   id,
@@ -41,8 +41,8 @@ const Date = ({
   value,
   wrapClassName,
   ...props
-}: DateFieldProps) =>
-  wrapField(
+}: DateFieldProps) {
+  return wrapField(
     { ...props, id },
     <input
       className={classnames(inputClassName, 'form-control', {
@@ -67,5 +67,6 @@ const Date = ({
       value={dateFormat(value) ?? ''}
     />,
   );
+}
 
 export default connectField(Date);

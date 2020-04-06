@@ -13,7 +13,7 @@ export type LongTextFieldProps = Override<
     inputRef?: Ref<HTMLTextAreaElement>;
     label: string;
     name: string;
-    onChange: (value?: string) => void;
+    onChange(value?: string): void;
     placeholder: string;
     required?: boolean;
     showInlineError: boolean;
@@ -21,7 +21,7 @@ export type LongTextFieldProps = Override<
   }
 >;
 
-const LongText = ({
+function LongText({
   className,
   disabled,
   error,
@@ -36,27 +36,29 @@ const LongText = ({
   showInlineError,
   value,
   ...props
-}: LongTextFieldProps) => (
-  <div
-    className={classnames(className, { disabled, error, required }, 'field')}
-    {...filterDOMProps(props)}
-  >
-    {label && <label htmlFor={id}>{label}</label>}
+}: LongTextFieldProps) {
+  return (
+    <div
+      className={classnames(className, { disabled, error, required }, 'field')}
+      {...filterDOMProps(props)}
+    >
+      {label && <label htmlFor={id}>{label}</label>}
 
-    <textarea
-      disabled={disabled}
-      id={id}
-      name={name}
-      onChange={event => onChange(event.target.value)}
-      placeholder={placeholder}
-      ref={inputRef}
-      value={value ?? ''}
-    />
+      <textarea
+        disabled={disabled}
+        id={id}
+        name={name}
+        onChange={event => onChange(event.target.value)}
+        placeholder={placeholder}
+        ref={inputRef}
+        value={value ?? ''}
+      />
 
-    {!!(error && showInlineError) && (
-      <div className="ui red basic pointing label">{errorMessage}</div>
-    )}
-  </div>
-);
+      {!!(error && showInlineError) && (
+        <div className="ui red basic pointing label">{errorMessage}</div>
+      )}
+    </div>
+  );
+}
 
 export default connectField<LongTextFieldProps>(LongText);

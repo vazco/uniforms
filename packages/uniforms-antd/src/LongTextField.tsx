@@ -14,14 +14,14 @@ export type LongTextFieldProps = Override<
   (InputProps & { rows?: never }) | TextAreaProps,
   {
     inputRef: Ref<Input>;
-    onChange: (value?: any) => void;
+    onChange(value?: any): void;
     prefix?: string;
     value?: string;
   }
 >;
 
-const LongText = (props: LongTextFieldProps) =>
-  wrapField(
+function LongText(props: LongTextFieldProps) {
+  return wrapField(
     props,
     // @ts-ignore
     <TextArea
@@ -36,6 +36,7 @@ const LongText = (props: LongTextFieldProps) =>
       {...filterDOMProps(props)}
     />,
   );
+}
 
 LongText.defaultProps = { rows: 5 };
 
