@@ -49,10 +49,18 @@ module.exports = {
     hotjar: { hjid: 1434110 },
     navbar: {
       links: [
-        { label: 'Docs', to: '/docs/what-are-uniforms' },
-        { label: 'Tutorial', to: '/docs/tutorials-basic-uniforms-usage' },
-        { label: 'Playground', to: '/playground' },
-        { label: 'GitHub', href: 'https://github.com/vazco/uniforms' }
+        { label: 'Docs', to: '/docs/what-are-uniforms', position: 'left' },
+        {
+          label: 'Tutorial',
+          to: '/docs/tutorials-basic-uniforms-usage',
+          position: 'left'
+        },
+        { label: 'Playground', to: '/playground', position: 'left' },
+        {
+          label: 'GitHub',
+          href: 'https://github.com/vazco/uniforms',
+          position: 'left'
+        }
       ],
       logo: {
         alt: 'uniforms logo',
