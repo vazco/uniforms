@@ -4,30 +4,11 @@ title: Common forms
 ---
 
 import ExampleCustomizer from '../website/components/ExampleCustomizer';
-import { code } from '../website/components/Code';
-
-import SignUpForm from './examples/CommonForms/SignUp';
-import SignUpSchema from './examples/CommonForms/SignUpSchema.md';
 
 ### `Sign up`
 
 <ExampleCustomizer
-  code={theme =>
-    code(
-      'js',
-      `import React from 'react';\n
-import schema from './SignUpSchema';
-import { AutoForm } from 'uniforms-${theme}';\n
-export default function SignUpForm() {
-  return (
-    <AutoForm
-      schema={schema}
-      onSubmit={model => alert(JSON.stringify(model, null, 2))}
-    />
-  );
-}`
-    )
-  }
-  example={<SignUpForm />}
-  schema={<SignUpSchema />}
+  code={require('!!raw-loader!./examples/CommonForms/SignUp')}
+  example={require('./examples/CommonForms/SignUp')}
+  schema={require('!!raw-loader!./examples/CommonForms/SignUpSchema')}
 />

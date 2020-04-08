@@ -3,9 +3,7 @@ import classNames from 'classnames';
 
 import ExampleCustomizer from '../ExampleCustomizer';
 import Heading from './Heading';
-import SignUp from '../../../docs/examples/CommonForms/SignUp';
 import styles from './index.module.css';
-import { code } from '../Code';
 
 export default function ExampleSimpleYetPowerful() {
   return (
@@ -22,78 +20,9 @@ export default function ExampleSimpleYetPowerful() {
             className={classNames(styles['preview-border'], styles['preview'])}
           >
             <ExampleCustomizer
-              code={theme =>
-                code(
-                  'js',
-                  `import React from 'react';\n
-import schema from './SignUpSchema';
-import { AutoForm } from 'uniforms-${theme}';\n
-export default function SignUpForm() {
-  return (
-    <AutoForm
-      schema={schema}
-      onSubmit={model => alert(JSON.stringify(model, null, 2))}
-    />
-  );
-}`
-                )
-              }
-              example={<SignUp />}
-              schema={code(
-                'js',
-                `import Ajv from 'ajv';
-import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
-
-const ajv = new Ajv({ allErrors: true, useDefaults: true, $data: true });
-
-const schema = {
-  title: 'Guest',
-  type: 'object',
-  properties: {
-    fullname: { type: 'string' },
-    email: { type: 'string' },
-    reemail: { type: 'string', const: { $data: '1/email' } },
-    password: {
-      type: 'string',
-      uniforms: {
-        type: 'password'
-      }
-    },
-    repassword: {
-      type: 'string',
-      const: { $data: '1/password' },
-      uniforms: {
-        type: 'password'
-      }
-    },
-    acceptTermsOfUse: { type: 'boolean' }
-  },
-  required: [
-    'fullname',
-    'email',
-    'reemail',
-    'password',
-    'repassword',
-    'acceptTermsOfUse'
-  ]
-};
-
-function createValidator(schema) {
-  const validator = ajv.compile(schema);
-
-  return model => {
-    validator(model);
-
-    if (validator.errors && validator.errors.length) {
-      throw { details: validator.errors };
-    }
-  };
-}
-
-const schemaValidator = createValidator(schema);
-
-export default new JSONSchemaBridge(schema, schemaValidator);`
-              )}
+              code={require('!!raw-loader!../../../docs/examples/CommonForms/SignUp')}
+              example={require('../../../docs/examples/CommonForms/SignUp')}
+              schema={require('!!raw-loader!../../../docs/examples/CommonForms/SignUpSchema')}
             />
           </div>
         </div>

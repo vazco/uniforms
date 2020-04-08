@@ -22,7 +22,7 @@ export type AutoFormState<Model extends {}> = ValidatedQuickFormState<Model> & {
 
 function Auto<Base extends typeof ValidatedQuickForm>(base: Base) {
   // @ts-ignore: Mixin class problem.
-  return class AutoForm<
+  class AutoForm<
     Model extends {} = Record<string, any>,
     Props extends AutoFormProps<Model> = AutoFormProps<Model>,
     State extends AutoFormState<Model> = AutoFormState<Model>
@@ -84,7 +84,9 @@ function Auto<Base extends typeof ValidatedQuickForm>(base: Base) {
     onValidate() {
       return this.onValidateModel(this.getContextModel());
     }
-  };
+  }
+
+  return AutoForm;
 }
 
 export default Auto(ValidatedQuickForm);

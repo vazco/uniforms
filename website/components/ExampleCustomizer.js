@@ -5,6 +5,7 @@ import {
   Database as DatabaseIcon
 } from 'react-feather';
 
+import CodeSection from './CodeSection';
 import FormWrapper from './FormWrapper';
 import TogglerTabs from './TogglerTabs';
 import { ThemeProvider } from './ThemeContext';
@@ -29,25 +30,37 @@ const toggles = [
   { name: 'Schema', tooltipText: 'Show schema', icon: <DatabaseIcon /> }
 ];
 
-const ExampleCustomizer = ({ code, example, schema }) => (
-  <TogglerTabs group="examples" tabsItems={tabs} togglerItems={toggles}>
-    {({ tab: { value: theme }, toggle: { name } }) => {
-      switch (name) {
-        case 'Example':
-          return (
-            <ThemeProvider value={theme}>
-              <FormWrapper>{example}</FormWrapper>
-            </ThemeProvider>
-          );
-        case 'Code':
-          return code(theme);
-        case 'Schema':
-          return schema;
-        default:
-          return <p>Nothing selected</p>;
-      }
-    }}
-  </TogglerTabs>
-);
-
-export default ExampleCustomizer;
+export default function ExampleCustomizer({
+  code: { default: code },
+  example: { default: Example },
+  schema: { default: schema }
+}) {
+  return (
+    <TogglerTabs group="examples" tabsItems={tabs} togglerItems={toggles}>
+      {({ tab: { value: theme }, toggle: { name } }) => {
+        switch (name) {
+          case 'Code':
+            return (
+              <CodeSection
+                language="js"
+                replace={{ "'[^']*?/universal'": `'uniforms-${theme}'` }}
+                source={code}
+              />
+            );
+          case 'Example':
+            return (
+              <ThemeProvider value={theme}>
+                <FormWrapper>
+                  <Example />
+                </FormWrapper>
+              </ThemeProvider>
+            );
+          case 'Schema':
+            return <CodeSection language="js" source={schema} />;
+          default:
+            return null;
+        }
+      }}
+    </TogglerTabs>
+  );
+}

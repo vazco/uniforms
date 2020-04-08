@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import { BaseForm } from 'uniforms';
 
 function Semantic(parent: any): any {
-  return class extends parent {
+  class _ extends parent {
     static Semantic = Semantic;
 
     static displayName = `Semantic${parent.displayName}`;
@@ -16,7 +16,9 @@ function Semantic(parent: any): any {
         className: classnames('ui', props.className, { error }, 'form'),
       };
     }
-  };
+  }
+
+  return _;
 }
 
 export default Semantic(BaseForm);

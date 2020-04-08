@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import { BaseForm } from 'uniforms';
 
 function Bootstrap4(parent: any): any {
-  return class extends parent {
+  class _ extends parent {
     static Bootstrap4 = Bootstrap4;
 
     static displayName = `Bootstrap4${parent.displayName}`;
@@ -28,7 +28,9 @@ function Bootstrap4(parent: any): any {
         className: classnames('form', { error }, className),
       };
     }
-  };
+  }
+
+  return _;
 }
 
 export default Bootstrap4(BaseForm);

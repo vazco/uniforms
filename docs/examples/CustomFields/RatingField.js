@@ -1,8 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
+import { AutoForm, SubmitField } from '../../../website/components/universal';
 import { connectField } from 'uniforms';
 
-import { AutoForm, SubmitField } from '../../../website/components/universal';
 import schema from './RatingFieldSchema';
 
 const Rating = ({
@@ -30,7 +30,7 @@ const Rating = ({
 
 const RatingField = connectField(Rating);
 
-export default function ExamplesRangeField() {
+export default function ExampleOfRangeField() {
   return (
     <AutoForm
       schema={schema}

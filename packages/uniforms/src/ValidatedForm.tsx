@@ -27,7 +27,7 @@ export type ValidatedFormState<Model extends {}> = BaseFormState<Model> & {
 
 function Validated<Base extends typeof BaseForm>(base: Base) {
   // @ts-ignore: Mixin class problem.
-  return class ValidatedForm<
+  class ValidatedForm<
     Model extends {} = Record<string, any>,
     Props extends ValidatedFormProps<Model> = ValidatedFormProps<Model>,
     State extends ValidatedFormState<Model> = ValidatedFormState<Model>
@@ -203,7 +203,9 @@ function Validated<Base extends typeof BaseForm>(base: Base) {
         });
       });
     }
-  };
+  }
+
+  return ValidatedForm;
 }
 
 function shouldRevalidate(inProps: ValidateMode, inState: boolean) {

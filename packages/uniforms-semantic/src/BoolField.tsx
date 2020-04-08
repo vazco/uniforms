@@ -11,6 +11,7 @@ export type BoolFieldProps = Override<
     onChange(value?: boolean): void;
     showInlineError?: boolean;
     value?: boolean;
+    wrapClassName?: string;
   }
 >;
 
@@ -27,6 +28,7 @@ function Bool({
   required,
   showInlineError,
   value,
+  wrapClassName,
   ...props
 }: BoolFieldProps) {
   return (
@@ -34,7 +36,14 @@ function Bool({
       className={classnames(className, { disabled, error, required }, 'field')}
       {...filterDOMProps(props)}
     >
-      <div className="ui checkbox">
+      <div
+        className={classnames(
+          'ui',
+          wrapClassName,
+          !label && 'fitted',
+          'checkbox',
+        )}
+      >
         <input
           checked={value || false}
           className="hidden"
@@ -46,7 +55,7 @@ function Bool({
           type="checkbox"
         />
 
-        <label htmlFor={id}>{label}</label>
+        {!!label && <label htmlFor={id}>{label}</label>}
       </div>
 
       {!!(error && showInlineError) && (

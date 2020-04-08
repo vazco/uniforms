@@ -1,8 +1,11 @@
+// <validator>
 import Ajv from 'ajv';
+// </validator>
+// <bridgeImport>
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
+// </bridgeImport>
 
-const ajv = new Ajv({ allErrors: true, useDefaults: true });
-
+// <schema>
 const schema = {
   title: 'Guest',
   type: 'object',
@@ -18,6 +21,10 @@ const schema = {
   },
   required: ['firstName', 'lastName']
 };
+// </schema>
+
+// <validator>
+const ajv = new Ajv({ allErrors: true, useDefaults: true });
 
 function createValidator(schema) {
   const validator = ajv.compile(schema);
@@ -32,7 +39,11 @@ function createValidator(schema) {
 }
 
 const schemaValidator = createValidator(schema);
+// </validator>
 
+// <bridge>
+// Correct usage of the JSONSchemaBridge.
 const bridge = new JSONSchemaBridge(schema, schemaValidator);
+// </bridge>
 
 export default bridge;

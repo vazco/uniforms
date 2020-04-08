@@ -6,7 +6,7 @@ import ErrorsField from './ErrorsField';
 import SubmitField from './SubmitField';
 
 function Quick(parent: any): any {
-  return class extends QuickForm.Quick(parent) {
+  class _ extends QuickForm.Quick(parent) {
     static Quick = Quick;
 
     getAutoField() {
@@ -20,6 +20,9 @@ function Quick(parent: any): any {
     getSubmitField() {
       return SubmitField;
     }
-  };
+  }
+
+  return _;
 }
+
 export default Quick(BaseForm);

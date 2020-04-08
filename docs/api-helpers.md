@@ -22,7 +22,7 @@ The table below lists all of the **guaranteed** props that will be passed to the
 |    `fields`    |   `arrayOf(string)`   |            Subfields names.            |
 |  `fieldType`   |        `func`         |              Field type.               |
 |  `findError`   |     `func(name)`      |      Request another field error.      |
-|  `findField`   |     `func(name)`      |      Request another field field.      |
+|  `findField`   |     `func(name)`      |         Request another field.         |
 |  `findValue`   |     `func(name)`      |      Request another field value.      |
 |      `id`      |       `string`        |      Field id - given or random.       |
 |    `label`     |       `string`        |              Field label.              |

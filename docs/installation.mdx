@@ -3,8 +3,8 @@ id: installation
 title: Installation
 ---
 
+import CodeSection from '../website/components/CodeSection';
 import Tabs from '../website/components/Tabs';
-import { code } from '../website/components/Code';
 
 Core package first.
 
@@ -25,7 +25,10 @@ Now the schema package.
 >
   {({ name: bridgeName }) => (
     <>
-      {code('shell', `npm install uniforms-bridge-${bridgeName.toLowerCase()}`)}
+      <CodeSection
+        language="shell"
+        source={`npm install uniforms-bridge-${bridgeName.toLowerCase()}`}
+      />
       <p>Finally, pick your theme.</p>
       <Tabs
         group="theme"
@@ -40,12 +43,15 @@ Now the schema package.
       >
         {({ name: themeName }) => (
           <>
-            {code('shell', `npm install uniforms-${themeName.toLowerCase()}`)}
+            <CodeSection
+              language="shell"
+              source={`npm install uniforms-${themeName.toLowerCase()}`}
+            />
             <p>TL;DR; Just let me copy it!</p>
-            {code(
-              'shell',
-              `npm install uniforms uniforms-bridge-${bridgeName.toLowerCase()} uniforms-${themeName.toLowerCase()}`
-            )}
+            <CodeSection
+              language="shell"
+              source={`npm install uniforms uniforms-bridge-${bridgeName.toLowerCase()} uniforms-${themeName.toLowerCase()}`}
+            />
           </>
         )}
       </Tabs>

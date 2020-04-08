@@ -12,7 +12,7 @@ export type QuickFormState<Model extends {}> = BaseFormState<Model>;
 
 function Quick<Base extends typeof BaseForm>(base: Base) {
   // @ts-ignore: Mixin class problem.
-  return class QuickForm<
+  class QuickForm<
     Model extends {} = Record<string, any>,
     Props extends QuickFormProps<Model> = QuickFormProps<Model>,
     State extends QuickFormState<Model> = QuickFormState<Model>
@@ -52,7 +52,9 @@ function Quick<Base extends typeof BaseForm>(base: Base) {
     getSubmitField(): ComponentType {
       return () => null;
     }
-  };
+  }
+
+  return QuickForm;
 }
 
 export default Quick(BaseForm);

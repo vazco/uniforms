@@ -6,14 +6,15 @@
     "start": "docusaurus start"
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-alpha.32",
-    "@docusaurus/preset-classic": "2.0.0-alpha.32",
-    "@material-ui/core": "4.7.0",
+    "@docusaurus/core": "2.0.0-alpha.43",
+    "@docusaurus/preset-classic": "2.0.0-alpha.43",
+    "@material-ui/core": "4.9.0",
     "ajv": "6.10.2",
     "antd": "3.25.3",
     "core-js": "3.4.5",
     "graphql": "^14.0.0 || 0.8.0 - 14.0.0",
     "lz-string": "1.4.4",
+    "raw-loader": "4.0.0",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-feather": "2.0.3",

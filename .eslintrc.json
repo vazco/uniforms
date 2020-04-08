@@ -35,6 +35,21 @@
       }
     },
     {
+      "files": ["docs/**/*"],
+      "rules": {
+        "import/no-unresolved": "off",
+        "import/order": "off",
+        "no-console": "off",
+        "vazco/no-console": "off"
+      }
+    },
+    {
+      "files": ["reproductions/**/*"],
+      "rules": {
+        "import/no-unresolved": "off"
+      }
+    },
+    {
       "files": ["website/**/*"],
       "settings": {
         "import/resolver": {

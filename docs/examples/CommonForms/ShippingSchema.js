@@ -1,5 +1,6 @@
 import SimpleSchema from 'simpl-schema';
 
+// <schema>
 export default new SimpleSchema({
   firstName: {
     type: String
@@ -30,3 +31,4 @@ export default new SimpleSchema({
     type: String
   }
 });
+// </schema>

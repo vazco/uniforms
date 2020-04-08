@@ -175,3 +175,26 @@ test('<BoolField> - renders correct error text (showInlineError=false)', () => {
       .text(),
   ).not.toBe('Error');
 });
+
+test('<BoolField> - renders with a custom wrapClassName', () => {
+  const element = <BoolField name="x" wrapClassName="test-class-name" />;
+  const wrapper = mount(element, createContext({ x: { type: String } }));
+
+  expect(wrapper.find('.ui.test-class-name')).toHaveLength(1);
+});
+
+test('<BoolField> - renders with a `fitted` className when `label` is disabled', () => {
+  const element = <BoolField name="x" />;
+  const wrapper = mount(element, createContext({ x: { type: String } }));
+
+  const found = wrapper.find('.ui');
+  expect(found.hasClass('fitted')).toEqual(true);
+});
+
+test('<BoolField> - renders without a `fitted` className when `label` is enabled', () => {
+  const element = <BoolField name="x" label />;
+  const wrapper = mount(element, createContext({ x: { type: String } }));
+
+  const found = wrapper.find('.ui');
+  expect(found.hasClass('fitted')).toEqual(false);
+});

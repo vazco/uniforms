@@ -1,11 +1,13 @@
 import { BaseForm } from 'uniforms';
 
 function AntD(parent: any): any {
-  return class extends parent {
+  class _ extends parent {
     static AntD = AntD;
 
     static displayName = `AntD${parent.displayName}`;
-  };
+  }
+
+  return _;
 }
 
 export default AntD(BaseForm);

@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import { BaseForm } from 'uniforms';
 
 function Bootstrap3(parent: any): any {
-  return class extends parent {
+  class _ extends parent {
     static Bootstrap3 = Bootstrap3;
 
     static displayName = `Bootstrap3${parent.displayName}`;
@@ -32,7 +32,9 @@ function Bootstrap3(parent: any): any {
         ),
       };
     }
-  };
+  }
+
+  return _;
 }
 
 export default Bootstrap3(BaseForm);

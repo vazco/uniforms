@@ -3,6 +3,7 @@ id: 'tutorials-customizing-your-form-layout'
 title: 'Customizing your form layout'
 ---
 
+import CodeSection from '../website/components/CodeSection';
 import TutorialForm from '../website/components/TutorialForm';
 import GuestFormWithHeading from './examples/Tutorial/GuestFormWithHeading.js';
 import GuestFormWithAutoFields from './examples/Tutorial/GuestFormWithAutoFields.js';
@@ -24,28 +25,11 @@ That means we have to manually add the submit button (`SubmitField`) and the err
 If you need to add heading to your form, using `AutoFields` seems to be a perfect solution.
 `AutoFields` will automatically render form fields based on the schema within the `AutoForm`.
 
-```js
-import {
-  AutoFields,
-  AutoForm,
-  ErrorsField,
-  SubmitField
-} from 'uniforms-semantic';
-import React from 'react';
-
-import GuestSchema from './GuestSchema';
-
-export default function GuestForm() {
-  return (
-    <AutoForm schema={GuestSchema} onSubmit={console.log}>
-      <h4>IT meeting guest questionnaire</h4>
-      <AutoFields />
-      <ErrorsField />
-      <SubmitField />
-    </AutoForm>
-  );
-}
-```
+<CodeSection
+  language="js"
+  replace={{ "'[^']*?/universal'": 'uniforms-semantic' }}
+  source={require('!!raw-loader!./examples/Tutorial/GuestFormWithHeading')}
+/>
 
 <TutorialForm>
   <GuestFormWithHeading />
@@ -60,31 +44,11 @@ Using AutoFields allows you to freely manipulate your form's layout.
 Here we've changed the order of the `lastName` and `firstName` field and added a polite question,
 asking whether the people filling the form would like to share with us their work experience.
 
-```js
-import {
-  AutoField,
-  AutoForm,
-  ErrorsField,
-  SubmitField
-} from 'uniforms-semantic';
-import React from 'react';
-
-import GuestSchema from './GuestSchema';
-
-export default function GuestForm() {
-  return (
-    <AutoForm schema={GuestSchema} onSubmit={console.log}>
-      <h4>IT meeting guest questionnaire</h4>
-      <AutoField name="lastName" />
-      <AutoField name="firstName" />
-      <span>Do you want to share your work experience with us?</span>
-      <AutoField name="workExperience" />
-      <ErrorsField />
-      <SubmitField />
-    </AutoForm>
-  );
-}
-```
+<CodeSection
+  language="js"
+  replace={{ "'[^']*?/universal'": 'uniforms-semantic' }}
+  source={require('!!raw-loader!./examples/Tutorial/GuestFormWithAutoFields')}
+/>
 
 <TutorialForm>
   <GuestFormWithAutoFields />
@@ -96,33 +60,11 @@ Similarly to the fields, we can also change the order of the displayed errors.
 Instead of using the `ErrorsField` component, which renders one stack block of errors,
 we can use the `ErrorField` and just place it directly where want in our form.
 
-```js
-import {
-  AutoField,
-  AutoForm,
-  ErrorField,
-  SubmitField
-} from 'uniforms-semantic';
-import React from 'react';
-
-import GuestSchema from './GuestSchema';
-
-export default function GuestForm() {
-  return (
-    <AutoForm schema={GuestSchema} onSubmit={console.log}>
-      <h4>IT meeting guest questionnaire</h4>
-      <AutoField name="lastName" />
-      <ErrorField name="lastName" />
-      <AutoField name="firstName" />
-      <ErrorField name="firstName" />
-      <span>Do you want to share your work experience with us?</span>
-      <AutoField name="workExperience" />
-      <ErrorField name="workExperience" />
-      <SubmitField />
-    </AutoForm>
-  );
-}
-```
+<CodeSection
+  language="js"
+  replace={{ "'[^']*?/universal'": 'uniforms-semantic' }}
+  source={require('!!raw-loader!./examples/Tutorial/GuestFormWithErrorFields')}
+/>
 
 <TutorialForm>
   <GuestFormWithErrorFields />
@@ -133,41 +75,11 @@ export default function GuestForm() {
 The default error messages are rather unfriendly. Hopefully, we can easily modify them,
 either by passing the `children` to the `ErrorField` or by using the `errorMessage` prop:
 
-```js
-import {
-  AutoField,
-  AutoForm,
-  ErrorField,
-  SubmitField
-} from 'uniforms-semantic';
-import React from 'react';
-
-import GuestSchema from './GuestSchema';
-
-export default function GuestForm() {
-  return (
-    <AutoForm schema={GuestSchema} onSubmit={console.log}>
-      <h4>IT meeting guest questionnaire</h4>
-      <AutoField name="lastName" />
-      <ErrorField name="lastName">
-        <span>You have to provide your last name!</span>
-      </ErrorField>
-      <AutoField name="firstName" />
-      <ErrorField
-        name="firstName"
-        errorMessage="You have to provide your first name!"
-      />
-      <span>Do you want to share your work experience with us?</span>
-      <AutoField name="workExperience" />
-      <ErrorField
-        name="workExperience"
-        errorMessage="Your work experience cannot be lesser than 0 or greater than 100 years!"
-      />
-      <SubmitField />
-    </AutoForm>
-  );
-}
-```
+<CodeSection
+  language="js"
+  replace={{ "'[^']*?/universal'": 'uniforms-semantic' }}
+  source={require('!!raw-loader!./examples/Tutorial/GuestFormWithChangedErrors')}
+/>
 
 <TutorialForm>
   <GuestFormWithChangedErrors />
