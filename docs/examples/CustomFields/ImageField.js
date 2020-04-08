@@ -1,11 +1,11 @@
 import React from 'react';
+import { AutoForm, SubmitField } from '../../../website/components/universal';
 import { connectField } from 'uniforms';
 
 import schema from './ImageFieldSchema';
-import { AutoForm, SubmitField } from '../../../website/components/universal';
 
 function Image({ onChange, value }) {
-  const imgPlaceholder = 'https://via.placeholder.com/150.png';
+  const imgPlaceholder = 'https://picsum.photos/150?grayscale';
 
   function onImageChange({ target: { files } }) {
     if (files && files[0]) {
@@ -32,9 +32,10 @@ function Image({ onChange, value }) {
     </div>
   );
 }
+
 const ImageField = connectField(Image);
 
-export default function ExamplesSubmitField() {
+export default function ExampleOfSubmitField() {
   return (
     <AutoForm
       schema={schema}

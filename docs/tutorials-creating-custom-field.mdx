@@ -3,6 +3,7 @@ id: tutorials-creating-custom-field
 title: Creating a custom field
 ---
 
+import CodeSection from '../website/components/CodeSection';
 import TutorialForm from '../website/components/TutorialForm.js';
 import GuestFormFinal from './examples/Tutorial/GuestFormFinal.js';
 
@@ -20,60 +21,11 @@ As there isn't such field provided, we have to create it ourselves.
 Let's add a new property to our schema - `pictureUrl`, which will store an URL string containing guest's picture,
 and declare that it will be managed by our newly created custom `ImageField` component:
 
-```js
-const schema = {
-  title: 'Guest',
-  type: 'object',
-  properties: {
-    firstName: { type: 'string' },
-    lastName: { type: 'string' },
-    workExperience: {
-      description: 'Work experience in years',
-      type: 'integer',
-      minimum: 0,
-      maximum: 100
-    },
-    profession: {
-      type: 'string',
-      options: [
-        {
-          label: 'Developer',
-          value: 'developer'
-        },
-        {
-          label: 'Tester',
-          value: 'tester'
-        },
-        {
-          label: 'Product owner',
-          value: 'product-owner'
-        },
-        {
-          label: 'Project manager',
-          value: 'project-manager'
-        },
-        {
-          label: 'Businessman',
-          value: 'businessman'
-        }
-      ]
-    },
-    additionalInfo: {
-      type: 'string',
-      uniforms: {
-        component: LongTextField
-      }
-    },
-    pictureUrl: {
-      type: 'string',
-      uniforms: {
-        component: ImageField
-      }
-    }
-  },
-  required: ['firstName', 'lastName']
-};
-```
+<CodeSection
+  language="js"
+  section="schema"
+  source={require('!!raw-loader!./examples/Tutorial/GuestSchema4')}
+/>
 
 We can prepare the custom field by creating a React component and wrapping it in a `connectField` helper.
 `connectField` will pass various props related to the form management, such as `onChange()` function, current field's value, errors an so on.
@@ -82,41 +34,11 @@ It's worth noting, that it will also add the `Field` suffix to the name of our c
 
 Our newly created `ImageField` looks like this:
 
-```js
-import React from 'react';
-import { connectField } from 'uniforms';
-
-function Image({ onChange, value }) {
-  const imgPlaceholder = 'https://via.placeholder.com/150.png';
-
-  function onImageChange({ target: { files } }) {
-    if (files && files[0]) {
-      onChange(URL.createObjectURL(files[0]));
-    }
-  }
-
-  return (
-    <div className="ImageField">
-      <label htmlFor="file-input">
-        <div>Choose your photo</div>
-        <img
-          style={{ cursor: 'pointer', width: '150px', height: '150px' }}
-          src={value ? value : imgPlaceholder}
-        />
-      </label>
-      <input
-        accept="image/*"
-        id="file-input"
-        onChange={onImageChange}
-        style={{ display: 'none' }}
-        type="file"
-      />
-    </div>
-  );
-}
-
-export default connectField(Image);
-```
+<CodeSection
+  language="js"
+  replace={{ "'[^']*?/universal'": 'uniforms-semantic' }}
+  source={require('!!raw-loader!./examples/Tutorial/ImageField')}
+/>
 
 The component itself is a file input that accepts only images.
 After the file is selected, it is converted to the DOMString that contains a URL representing the user's picture.
@@ -125,45 +47,14 @@ By using these, we don't have to worry about managing the field's state.
 
 Take a look at the form code:
 
-```js
-import {
-  AutoField,
-  AutoForm,
-  ErrorField,
-  SubmitField
-} from 'uniforms-semantic';
-import React from 'react';
-
-import GuestSchema4 from './GuestSchema4';
-
-export default function GuestForm9({ onSubmit }) {
-  return (
-    <AutoForm schema={GuestSchema4} onSubmit={onSubmit}>
-      <h4>IT meeting guest questionnaire</h4>
-      <AutoField name="lastName" />
-      <ErrorField name="lastName">
-        <span>You have to provide your last name!</span>
-      </ErrorField>
-      <AutoField name="firstName" />
-      <ErrorField
-        name="firstName"
-        errorMessage="You have to provide your first name!"
-      />
-      <span>Do you want to share your work experience with us?</span>
-      <AutoField name="workExperience" />
-      <ErrorField
-        name="workExperience"
-        errorMessage="Your work experience cannot be \
-                      lesser than 0 or greater than 100 years!"
-      />
-      <AutoField name="profession" />
-      <AutoField name="additionalInfo" />
-      <AutoField name="pictureUrl" />
-      <SubmitField />
-    </AutoForm>
-  );
-}
-```
+<CodeSection
+  language="js"
+  replace={{
+    "'[^']*?/universal'": 'uniforms-semantic',
+    './GuestSchema\\d': './GuestSchema'
+  }}
+  source={require('!!raw-loader!./examples/Tutorial/GuestFormFinal')}
+/>
 
 and the form itself:
 

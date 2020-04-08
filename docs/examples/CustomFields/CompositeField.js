@@ -1,15 +1,13 @@
 import React from 'react';
-import { connectField } from 'uniforms';
-
-import schema from './CompositeFieldSchema';
 import {
   AutoField,
   AutoForm,
   SubmitField
 } from '../../../website/components/universal';
+import { connectField } from 'uniforms';
 
-// This field is a kind of a shortcut for few fields. You can also access all
-// field props here, like value or onChange for some extra logic.
+import schema from './CompositeFieldSchema';
+
 const Composite = () => (
   <section>
     <AutoField name="firstName" />
@@ -20,7 +18,7 @@ const Composite = () => (
 
 const CompositeField = connectField(Composite);
 
-export default function ExamplesCompositeField() {
+export default function ExampleOfCompositeField() {
   return (
     <AutoForm
       schema={schema}

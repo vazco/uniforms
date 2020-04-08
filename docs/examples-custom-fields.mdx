@@ -4,30 +4,6 @@ title: Custom fields
 ---
 
 import ExampleCustomizer from '../website/components/ExampleCustomizer';
-import { code } from '../website/components/Code';
-
-import ExamplesCompositeField from './examples/CustomFields/CompositeField';
-import CompositeFieldSchema from './examples/CustomFields/CompositeFieldSchema.md';
-
-import ExamplesCycleField from './examples/CustomFields/CycleField';
-import CycleFieldSchema from './examples/CustomFields/CycleFieldSchema.md';
-
-import ExamplesDisplayIfField from './examples/CustomFields/DisplayIfField';
-import DisplayIfFieldSchema from './examples/CustomFields/DisplayIfFieldSchema.md';
-
-import ExamplesRangeField from './examples/CustomFields/RangeField';
-import RangeFieldSchema from './examples/CustomFields/RangeFieldSchema.md';
-
-import ExamplesRatingField from './examples/CustomFields/RatingField';
-import RatingFieldSchema from './examples/CustomFields/RatingFieldSchema.md';
-
-import ExamplesSubmitField from './examples/CustomFields/SubmitField';
-
-import ExamplesSwapField from './examples/CustomFields/SwapField';
-import SwapFieldSchema from './examples/CustomFields/SwapFieldSchema.md';
-
-import ExamplesImageField from './examples/CustomFields/ImageField';
-import ImageFieldSchema from './examples/CustomFields/ImageFieldSchema.md';
 
 ### `CompositeField`
 
@@ -35,34 +11,9 @@ This field is a kind of a shortcut for few fields. You can also access all
 field props here, like value or onChange for some extra logic.
 
 <ExampleCustomizer
-  code={theme =>
-    code(
-      'js',
-      `import React from 'react';
-import { AutoField, AutoForm, SubmitField } from 'uniforms-${theme}';
-import { connectField } from 'uniforms';\n
-import schema from './CompositeFieldSchema';\n
-const Composite = () => (
-  <section>
-    <AutoField name="firstName" />
-    <AutoField name="lastName" />
-    <AutoField name="workExperience" />
-  </section>
-);
-const CompositeField = connectField(Composite);
-export default function ExamplesCustomField() {
-  return (
-    <AutoForm schema={schema}>
-      <CompositeField name="personA" />
-      <CompositeField name="personB" />
-      <SubmitField />
-    </AutoForm>
-  );
-`
-    )
-  }
-  example={<ExamplesCompositeField />}
-  schema={<CompositeFieldSchema />}
+  code={require('!!raw-loader!./examples/CustomFields/CompositeField')}
+  example={require('./examples/CustomFields/CompositeField')}
+  schema={require('!!raw-loader!./examples/CustomFields/CompositeFieldSchema')}
 />
 
 ### `CustomAutoField`
@@ -97,57 +48,9 @@ This field works as follows: iterate all allowed values and optionally no-value
 state if the field is not required. This one uses Semantic-UI.
 
 <ExampleCustomizer
-  code={theme =>
-    code(
-      'js',
-      `import React from 'react';
-import { AutoForm, SubmitField } from 'uniforms-${theme}';
-import { connectField } from 'uniforms';\n
-import schema from './CycleFieldSchema';\n
-// This field works as follows: iterate all allowed values and optionally no-value
-// state if the field is not required. This one uses Semantic-UI.
-const Cycle = ({ allowedValues, label, required, value, onChange }) => (
-  <a
-    style={{
-      margin: '1em 0',
-      color: '#0e0e0e',
-      border: '1px solid black',
-      padding: '1em',
-      display: 'inline-block',
-      cursor: 'pointer'
-    }}
-    onClick={() =>
-      onChange(
-        value
-          ? allowedValues.indexOf(value) === allowedValues.length - 1
-            ? required
-              ? allowedValues[0]
-              : null
-            : allowedValues[allowedValues.indexOf(value) + 1]
-          : allowedValues[0]
-      )
-    }
-  >
-    > {value || label} >
-  </a>
-);\n
-const CycleField = connectField(Cycle);\n
-export default function ExamplesCycleField() {
-  return (
-    <AutoForm
-      schema={schema}
-      onSubmit={model => alert(JSON.stringify(model, null, 2))}
-    >
-      <CycleField name="cycle" allowedValues={['One', 'Two', 'Three']} />
-      <br />
-      <SubmitField />
-    </AutoForm>
-  );
-}`
-    )
-  }
-  example={<ExamplesCycleField />}
-  schema={<CycleFieldSchema />}
+  code={require('!!raw-loader!./examples/CustomFields/CycleField')}
+  example={require('./examples/CustomFields/CycleField')}
+  schema={require('!!raw-loader!./examples/CustomFields/CycleFieldSchema')}
 />
 
 ### `DisplayIf`
@@ -155,38 +58,17 @@ export default function ExamplesCycleField() {
 This simple field component conditionally displays other fields based on input.
 
 <ExampleCustomizer
-  code={theme =>
-    code(
-      'js',
-      `import React, { Children } from 'react';
-import { AutoForm, SubmitField, TextField } from 'uniforms-${theme}';
-import { BaseField, nothing } from 'uniforms';\n
-import schema from './DisplayIfFieldSchema';\n
-// We have to ensure that there's only one child, because returning an array
-// from a component is prohibited.
-const DisplayIf = ({ children, condition }, { uniforms }) =>
-  condition(uniforms) ? Children.only(children) : nothing;\n
-DisplayIf.contextTypes = BaseField.contextTypes;\n
-export default function ExamplesDisplayIfField() {
-  return (
-    <AutoForm schema={schema}>
-      <TextField name="fieldA" />
-      <DisplayIf condition={context => context.model.fieldA}>
-        <section>
-          <TextField name="fieldB" />
-          <DisplayIf condition={context => context.model.fieldB}>
-            <span>Well done!</span>
-          </DisplayIf>
-        </section>
-      </DisplayIf>
-      <SubmitField />
-    </AutoForm>
-  );
-`
-    )
-  }
-  example={<ExamplesDisplayIfField />}
-  schema={<DisplayIfFieldSchema />}
+  code={require('!!raw-loader!./examples/CustomFields/DisplayIfField')}
+  example={require('./examples/CustomFields/DisplayIfField')}
+  schema={require('!!raw-loader!./examples/CustomFields/DisplayIfFieldSchema')}
+/>
+
+### `ImageField`
+
+<ExampleCustomizer
+  code={require('!!raw-loader!./examples/CustomFields/ImageField')}
+  example={require('./examples/CustomFields/ImageField')}
+  schema={require('!!raw-loader!./examples/CustomFields/ImageFieldSchema')}
 />
 
 ### `RangeField`
@@ -195,68 +77,9 @@ This field works as follows: two datepickers are bound to each other.
 Value is a `{start, stop}` object.
 
 <ExampleCustomizer
-  code={theme =>
-    code(
-      'js',
-      `import React from 'react';
-import { AutoForm, AutoField, SubmitField } from 'uniforms-${theme}';
-import { connectField } from 'uniforms';\n
-import schema from './RangeFieldSchema';\n
-// This field works as follows: two datepickers are bound to each other. Value is
-// a {start, stop} object.
-const Range = ({ value: { start, stop } }) => (
-  <section>
-    <AutoField
-      InputLabelProps={{
-        shrink: true
-      }}
-      name="start"
-      max={stop}
-    />
-    <AutoField
-      InputLabelProps={{
-        shrink: true
-      }}
-      name="stop"
-      min={start}
-    />
-  </section>
-);\n
-const RangeField = connectField(Range);\n
-const model = {
-  range: { start: new Date(2019, 7, 10), stop: new Date(2019, 7, 20) }
-};\n
-export default function ExamplesRangeField() {
-  function transform(mode, model) {
-    if (mode === 'validate') {
-      const { start, stop } = model.range || {};\n
-      return {
-        range: {
-          start: start && start.toISOString(),
-          stop: stop && stop.toISOString()
-        }
-      };
-    }\n
-    return model;
-  }\n
-  return (
-    <AutoForm
-      model={model}
-      modelTransform={transform}
-      schema={schema}
-      onSubmit={model => alert(JSON.stringify(model, null, 2))}
-    >
-      <RangeField name="range" />
-      <br />
-      <SubmitField />
-    </AutoForm>
-  );
-}
-`
-    )
-  }
-  example={<ExamplesRangeField />}
-  schema={<RangeFieldSchema />}
+  code={require('!!raw-loader!./examples/CustomFields/RangeField')}
+  example={require('./examples/CustomFields/RangeField')}
+  schema={require('!!raw-loader!./examples/CustomFields/RangeFieldSchema')}
 />
 
 ### `RatingField`
@@ -265,49 +88,9 @@ This field works as follows: render stars for each rating and mark them as
 filled, if rating (value) is greater.
 
 <ExampleCustomizer
-  code={theme =>
-    code(
-      'js',
-      `import React from 'react';
-import classnames from 'classnames';
-import { AutoForm, SubmitField } from 'uniforms-${theme}';
-import { connectField } from 'uniforms';\n
-import schema from './RatingFieldSchema';\n
-const Rating = ({
-  className,
-  disabled,
-  max = 5,
-  required,
-  value,
-  onChange
-}) => (
-  <section className={classnames('ui', { disabled, required }, className)}>
-    {Array.from({ length: max }, (_, index) => index + 1).map(index => (
-      <span
-        style={{ fontSize: 40, cursor: 'pointer' }}
-        key={index}
-        onClick={() =>
-          disabled || onChange(!required && value === index ? null : index)
-        }
-      >
-        {index <= value ? '★' : '☆'}
-      </span>
-    ))}
-  </section>
-);\n
-const RatingField = connectField(Rating);\n
-export default function ExamplesRangeField() {
-  return (
-    <AutoForm schema={schema} onSubmit={console.log}>
-      <RatingField name="rating" />
-      <SubmitField />
-    </AutoForm>
-  );
-`
-    )
-  }
-  example={<ExamplesRatingField />}
-  schema={<RatingFieldSchema />}
+  code={require('!!raw-loader!./examples/CustomFields/RatingField')}
+  example={require('./examples/CustomFields/RatingField')}
+  schema={require('!!raw-loader!./examples/CustomFields/RatingFieldSchema')}
 />
 
 ### `SubmitButton`
@@ -317,49 +100,9 @@ the form is invalid. It's a simplified version of a default SubmitField from
 uniforms-unstyled. We use schema from previous examples as a template for validation.
 
 <ExampleCustomizer
-  code={theme =>
-    code(
-      'js',
-      `import React from 'react';
-import { AutoField, AutoForm } from 'uniforms-${theme}';
-import { BaseField, connectField } from 'uniforms';\n
-import schema from './CompositeFieldSchema';\n
-const SubmitField = (
-  props,
-  {
-    uniforms: {
-      error,
-      state: {disabled, submitting, validating}
-    }
-  }
-) => (
-  <input
-    disabled={!!(error || disabled || submitting || validating)}
-    type="submit"
-  />
-);
-SubmitField.contextTypes = BaseField.contextTypes;\n
-const Composite = () => (
-  <section>
-    <AutoField name="firstName" />
-    <AutoField name="lastName" />
-    <AutoField name="workExperience" />
-  </section>
-);\n
-const CompositeField = connectField(Composite);\n
-export default function ExamplesSubmitField() {
-  return (
-    <AutoForm schema={schema}>
-      <CompositeField name="personA" />
-      <CompositeField name="personB" />
-      <SubmitField />
-    </AutoForm>
-  );
-`
-    )
-  }
-  example={<ExamplesSubmitField />}
-  schema={<CompositeFieldSchema />}
+  code={require('!!raw-loader!./examples/CustomFields/CompositeField')}
+  example={require('./examples/CustomFields/SubmitField')}
+  schema={require('!!raw-loader!./examples/CustomFields/CompositeFieldSchema')}
 />
 
 ### `SwapField`
@@ -368,99 +111,7 @@ This field works as follows: on click of its child (refresh icon) it swaps value
 and fieldB. It's that simple.
 
 <ExampleCustomizer
-  code={theme =>
-    code(
-      'js',
-      `import React, { Children, cloneElement } from 'react';
-import get from 'lodash/get';
-import { RefreshCw } from 'react-feather';
-import { AutoForm, TextField, SubmitField } from 'uniforms-${theme}';
-import { BaseField } from 'uniforms';\n
-import schema from './SwapFieldSchema';\n
-const SwapField = (
-  { children, fieldA, fieldB },
-  { uniforms: { model, onChange } }
-) =>
-  cloneElement(Children.only(children), {
-    onClick() {
-      const valueA = get(model, fieldA);
-      const valueB = get(model, fieldB);
-      onChange(fieldA, valueB);
-      onChange(fieldB, valueA);
-    }
-  });
-SwapField.contextTypes = BaseField.contextTypes;\n
-// Usage.
-export default function ExampleSwapField() {
-  return (
-    <section>
-      <AutoForm
-        schema={schema}
-        onSubmit={model => alert(JSON.stringify(model, null, 2))}
-      >
-        <TextField name="firstName" />
-        <SwapField fieldA="firstName" fieldB="lastName">
-          <RefreshCw />
-        </SwapField>
-        <TextField name="lastName" />
-        <SubmitField />
-      </AutoForm>
-    </section>
-  );
-`
-    )
-  }
-  example={<ExamplesSwapField />}
-  schema={<SwapFieldSchema />}
-/>
-
-### ImageField
-
-<ExampleCustomizer
-  code={theme =>
-    code(
-      'js',
-      `import React from 'react';
-import { AutoForm, SubmitField } from 'uniforms-${theme}';
-import { connectField } from 'uniforms';\n
-import schema from './ImageFieldSchema';\n
-function Image({ onChange, value }) {
-  const imgPlaceholder = 'https://via.placeholder.com/150.png';\n
-  function onImageChange({ target: { files } }) {
-    if (files && files[0]) {
-      onChange(URL.createObjectURL(files[0]));
-    }
-  }\n
-  return (
-    <div className="ImageField">
-      <label htmlFor="file-input">
-        <div>Choose your photo</div>
-        <img
-          style={{ cursor: 'pointer', width: '150px', height: '150px' }}
-          src={value ? value : imgPlaceholder}
-        />
-      </label>
-      <input
-        accept="image/*"
-        id="file-input"
-        onChange={onImageChange}
-        style={{ display: 'none' }}
-        type="file"
-      />
-    </div>
-  );
-}
-const ImageField = connectField(Image);\n
-export default function ExamplesSubmitField() {
-  return (
-    <AutoForm schema={schema}>
-      <ImageField name="pictureUrl" />
-      <SubmitField />
-    </AutoForm>
-  );
-`
-    )
-  }
-  example={<ExamplesImageField />}
-  schema={<ImageFieldSchema />}
+  code={require('!!raw-loader!./examples/CustomFields/SwapField')}
+  example={require('./examples/CustomFields/SwapField')}
+  schema={require('!!raw-loader!./examples/CustomFields/SwapFieldSchema')}
 />

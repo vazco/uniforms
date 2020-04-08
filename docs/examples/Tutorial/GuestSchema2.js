@@ -3,6 +3,7 @@ import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 
 const ajv = new Ajv({ allErrors: true, useDefaults: true });
 
+// <schema>
 const schema = {
   title: 'Guest',
   type: 'object',
@@ -20,6 +21,7 @@ const schema = {
   },
   required: ['firstName', 'lastName']
 };
+// </schema>
 
 function createValidator(schema) {
   const validator = ajv.compile(schema);

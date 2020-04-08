@@ -4,11 +4,11 @@ import classNames from 'classnames';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import Button from './Button';
+import CodeSection from '../CodeSection';
 import FormWrapper from '../FormWrapper';
 import ShippingForm from '../../../docs/examples/CommonForms/ShippingForm';
 import styles from './index.module.css';
 import { ThemeProvider } from '../ThemeContext';
-import { code } from '../Code';
 
 function SystemWindow({ children, className, ...props }) {
   return (
@@ -44,39 +44,11 @@ function Showcase() {
   return (
     <div className={classNames(styles['floating-example'])}>
       <SystemWindow>
-        {code(
-          'javascript',
-          `export const ShippingSchema = new SimpleSchema({
-  firstName: {
-    type: String
-  },
-  lastName: {
-    type: String
-  },
-  country: {
-    type: String,
-    allowedValues: ["Poland", "England"],
-    defaultValue: "Poland"
-  },
-  state: {
-    type: String,
-    optional: true
-  },
-  useThisAddressForPaymentDetails: {
-    type: Boolean,
-    defaultValue: false
-  },
-  addressLine: {
-    type: String
-  },
-  city: {
-    type: String
-  },
-  zip: {
-    type: String
-  }
-});`
-        )}
+        <CodeSection
+          language="js"
+          section="schema"
+          source={require('!!raw-loader!../../../docs/examples/CommonForms/ShippingSchema')}
+        />
       </SystemWindow>
       <SystemWindow>
         <ThemeProvider value="semantic">

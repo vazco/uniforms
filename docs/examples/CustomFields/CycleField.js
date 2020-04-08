@@ -1,11 +1,9 @@
 import React from 'react';
+import { AutoForm, SubmitField } from '../../../website/components/universal';
 import { connectField } from 'uniforms';
 
 import schema from './CycleFieldSchema';
-import { AutoForm, SubmitField } from '../../../website/components/universal';
 
-// This field works as follows: iterate all allowed values and optionally no-value
-// state if the field is not required. This one uses Semantic-UI.
 const Cycle = ({ allowedValues, label, required, value, onChange }) => (
   <a
     style={{
@@ -34,7 +32,7 @@ const Cycle = ({ allowedValues, label, required, value, onChange }) => (
 
 const CycleField = connectField(Cycle);
 
-export default function ExamplesCycleField() {
+export default function ExampleOfCycleField() {
   return (
     <AutoForm
       schema={schema}

@@ -1,12 +1,9 @@
 import React from 'react';
+import { AutoField, AutoForm } from '../../../website/components/universal';
 import { BaseField, connectField } from 'uniforms';
 
 import schema from './CompositeFieldSchema';
-import { AutoField, AutoForm } from '../../../website/components/universal';
 
-// This field works as follows: render standard submit field and disable it, when
-// the form is invalid. It's a simplified version of a default SubmitField from
-// uniforms-unstyled.
 const SubmitField = (
   props,
   {
@@ -23,8 +20,6 @@ const SubmitField = (
 );
 SubmitField.contextTypes = BaseField.contextTypes;
 
-// This field is a kind of a shortcut for few fields. You can also access all
-// field props here, like value or onChange for some extra logic.
 const Composite = () => (
   <section>
     <AutoField name="firstName" />
@@ -35,7 +30,7 @@ const Composite = () => (
 
 const CompositeField = connectField(Composite);
 
-export default function ExamplesSubmitField() {
+export default function ExampleOfSubmitField() {
   return (
     <AutoForm
       schema={schema}

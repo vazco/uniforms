@@ -3,9 +3,7 @@ import classNames from 'classnames';
 
 import ExampleCustomizer from '../ExampleCustomizer';
 import Heading from './Heading';
-import ImageField from '../../../docs/examples/CustomFields/ImageField';
 import styles from './index.module.css';
-import { code } from '../Code';
 
 export default function ExampleFullyCustomizable() {
   return (
@@ -44,85 +42,9 @@ export default function ExampleFullyCustomizable() {
             )}
           >
             <ExampleCustomizer
-              code={theme =>
-                code(
-                  'js',
-                  `import React from 'react';
-import { AutoForm, SubmitField } from 'uniforms-${theme}';
-import { connectField } from 'uniforms';\n
-import schema from './ImageFieldSchema';\n
-function Image({ onChange, value }) {
-  const imgPlaceholder = 'https://via.placeholder.com/150.png';\n
-  function onImageChange({ target: { files } }) {
-    if (files && files[0]) {
-      onChange(URL.createObjectURL(files[0]));
-    }
-  }\n
-  return (
-    <div className="ImageField">
-      <label htmlFor="file-input">
-        <div>Choose your photo</div>
-        <img
-          style={{ cursor: 'pointer', width: '150px', height: '150px' }}
-          src={value ? value : imgPlaceholder}
-        />
-      </label>
-      <input
-        accept="image/*"
-        id="file-input"
-        onChange={onImageChange}
-        style={{ display: 'none' }}
-        type="file"
-      />
-    </div>
-  );
-}
-const ImageField = connectField(Image);\n
-export default function ExamplesSubmitField() {
-  return (
-    <AutoForm schema={schema}>
-      <ImageField name="pictureUrl" />
-      <SubmitField />
-    </AutoForm>
-  );
-`
-                )
-              }
-              example={<ImageField />}
-              schema={code(
-                'js',
-                `import Ajv from 'ajv';
-import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
-
-const ajv = new Ajv({ allErrors: true, useDefaults: true });
-
-const schema = {
-  title: 'Guest',
-  type: 'object',
-  properties: {
-    pictureUrl: { type: 'string' }
-  }
-};
-
-function createValidator(schema) {
-  const validator = ajv.compile(schema);
-
-  return model => {
-    validator(model);
-
-    if (validator.errors && validator.errors.length) {
-      throw { details: validator.errors };
-    }
-  };
-}
-
-const schemaValidator = createValidator(schema);
-
-const bridge = new JSONSchemaBridge(schema, schemaValidator);
-
-export default bridge;
-`
-              )}
+              code={require('!!raw-loader!../../../docs/examples/CustomFields/ImageField')}
+              example={require('../../../docs/examples/CustomFields/ImageField')}
+              schema={require('!!raw-loader!../../../docs/examples/CustomFields/ImageFieldSchema')}
             />
           </div>
         </div>
