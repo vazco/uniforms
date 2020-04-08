@@ -40,9 +40,10 @@ type CheckboxesProps = Override<
   }
 >;
 
+// TODO: separate appearance allowed values based on SelectionControlProps type.
 type SelectionControlProps =
-  | (CheckboxProps & { appearance: 'checkbox' })
-  | (SwitchProps & { appearance?: Omit<unknown, 'checkbox'> });
+  | (CheckboxProps & { appearance?: 'checkbox' | 'switch' })
+  | (SwitchProps & { appearance?: 'checkbox' | 'switch' });
 
 type SelectProps = Override<
   TextFieldProps & MaterialSelectProps,
