@@ -5,50 +5,56 @@ import FormControlLabel, {
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import omit from 'lodash/omit';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import React from 'react';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
 import TextField, { TextFieldProps } from '@material-ui/core/TextField';
-import { connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 import { SelectProps as MaterialSelectProps } from '@material-ui/core/Select';
 
 import wrapField from './wrapField';
 
-export type SelectFieldProps = { checkboxes?: boolean } & (
-  | CheckboxesProps
-  | SelectProps
-);
-
-type SelectionControlProps = CheckboxProps | SwitchProps;
-
-type CheckboxesProps = {
-  allowedValues: string[];
-  appearance?: 'checkbox' | 'switch';
+type CommonProps<Value> = {
+  allowedValues?: CommonPropsValueElement<Value>[];
   error?: boolean;
   errorMessage?: string;
-  fieldType?: typeof Array | any; //?
-  label?: string;
-  legend?: string;
-  onChange(value?: string | string[]): void;
+  fieldType?: typeof Array | unknown;
+  onChange(value?: Value): void;
   showInlineError?: boolean;
-  transform?(item?: string): string;
-  value: string | string[];
-} & (FormControlLabelProps | SelectionControlProps);
+  transform?: (item?: string) => string;
+  value?: Value;
+};
 
-type SelectProps = {
-  allowedValues: string[];
-  error?: boolean;
-  errorMessage?: string;
-  fieldType?: typeof Array | any; //?
-  labelProps?: object;
-  native?: boolean;
-  onChange(value?: string | string[]): void;
-  showInlineError?: boolean;
-  transform?(item?: string): string;
-  value: string | string[];
-} & TextFieldProps &
-  MaterialSelectProps;
+type CommonPropsValueElement<Value> = NonNullable<
+  Value extends Array<infer Element> ? Element : Value
+>;
+
+type CheckboxesProps = Override<
+  Override<FormControlLabelProps, SelectionControlProps>,
+  CommonProps<string | string[]> & {
+    checkboxes: true;
+    label?: string;
+    legend?: string;
+  }
+>;
+
+// TODO: separate appearance allowed values based on SelectionControlProps type.
+type SelectionControlProps =
+  | (CheckboxProps & { appearance?: 'checkbox' | 'switch' })
+  | (SwitchProps & { appearance?: 'checkbox' | 'switch' });
+
+type SelectProps = Override<
+  TextFieldProps & MaterialSelectProps,
+  CommonProps<string | string[]> & {
+    checkboxes?: false;
+    labelProps?: object;
+    native?: boolean;
+  }
+>;
+
+export type SelectFieldProps = CheckboxesProps | SelectProps;
 
 const base64 =
   typeof btoa !== 'undefined'
@@ -65,32 +71,108 @@ const xor = (item, array) => {
   return array.slice(0, index).concat(array.slice(index + 1));
 };
 
-// eslint-disable-next-line complexity
-function renderSelect({
-  allowedValues,
-  disabled,
-  error,
-  errorMessage,
-  fieldType,
-  fullWidth,
-  helperText,
-  id,
-  InputLabelProps,
-  inputProps,
-  label,
-  labelProps,
-  margin,
-  name,
-  native,
-  onChange,
-  placeholder,
-  required,
-  showInlineError,
-  transform,
-  value,
-  variant,
-  ...props
-}: SelectProps) {
+function Select(props: SelectFieldProps) {
+  const value = props.value ?? '';
+  if (props.checkboxes) {
+    const {
+      allowedValues,
+      disabled,
+      error,
+      errorMessage,
+      fieldType,
+      id,
+      inputRef,
+      label,
+      legend,
+      name,
+      onChange,
+      showInlineError,
+      transform,
+    } = props;
+    const appearance = props.appearance ?? 'checkbox';
+    const filteredProps = wrapField._filterDOMProps(
+      filterDOMProps(omit(props, ['id'])),
+    );
+    const SelectionControl = appearance === 'checkbox' ? Checkbox : Switch;
+    const children =
+      fieldType !== Array ? (
+        <RadioGroup
+          id={id}
+          name={name}
+          onChange={(event: any) => disabled || onChange(event.target.value)}
+          ref={inputRef}
+          value={value ?? ''}
+        >
+          {allowedValues!.map(item => (
+            <FormControlLabel
+              control={
+                <Radio id={`${id}-${escape(item)}`} {...filteredProps} />
+              }
+              key={item}
+              label={transform ? transform(item) : item}
+              value={item}
+            />
+          ))}
+        </RadioGroup>
+      ) : (
+        <FormGroup id={id}>
+          {allowedValues!.map(item => (
+            <FormControlLabel
+              control={
+                <SelectionControl
+                  checked={value.includes(item)}
+                  id={`${id}-${escape(item)}`}
+                  name={name}
+                  onChange={() => disabled || onChange(xor(item, value))}
+                  ref={inputRef}
+                  value={name}
+                  {...filteredProps}
+                />
+              }
+              key={item}
+              label={transform ? transform(item) : item}
+            />
+          ))}
+        </FormGroup>
+      );
+    return wrapField(
+      {
+        ...props,
+        component: 'fieldset',
+        disabled,
+        error,
+        errorMessage,
+        showInlineError,
+      },
+      (legend || label) && (
+        <FormLabel component="legend">{legend || label}</FormLabel>
+      ),
+      children,
+    );
+  }
+  const fullWidth = props.fullWidth ?? true;
+  const margin = props.margin ?? 'dense';
+  const {
+    allowedValues,
+    disabled,
+    error,
+    errorMessage,
+    fieldType,
+    helperText,
+    id,
+    InputLabelProps,
+    inputProps,
+    label,
+    labelProps,
+    name,
+    native,
+    onChange,
+    placeholder,
+    required,
+    showInlineError,
+    transform,
+    variant,
+  } = props;
   const Item = native ? 'option' : MenuItem;
   const hasPlaceholder = !!placeholder;
   const hasValue = value !== '' && value !== undefined;
@@ -114,6 +196,7 @@ function renderSelect({
       }
       required={required}
       select
+      // @ts-ignore Different value and event based on fieldType.
       SelectProps={{
         displayEmpty: hasPlaceholder,
         inputProps: { name, id, ...inputProps },
@@ -130,110 +213,13 @@ function renderSelect({
         </Item>
       )}
 
-      {allowedValues.map(value => (
+      {allowedValues!.map(value => (
         <Item key={value} value={value}>
           {transform ? transform(value) : value}
         </Item>
       ))}
     </TextField>
   );
-}
-
-function renderCheckboxes({
-  allowedValues,
-  appearance,
-  disabled,
-  error,
-  errorMessage,
-  fieldType,
-  id,
-  inputRef,
-  label,
-  legend,
-  name,
-  onChange,
-  showInlineError,
-  transform,
-  value,
-  ...props
-}: CheckboxesProps) {
-  let children;
-  const filteredProps = wrapField._filterDOMProps(filterDOMProps(props));
-
-  if (fieldType !== Array) {
-    children = (
-      <RadioGroup
-        id={id}
-        name={name}
-        onChange={(event: any) => disabled || onChange(event.target.value)}
-        ref={inputRef}
-        value={value ?? ''}
-      >
-        {allowedValues.map(item => (
-          <FormControlLabel
-            control={<Radio id={`${id}-${escape(item)}`} {...filteredProps} />}
-            key={item}
-            label={transform ? transform(item) : item}
-            value={item}
-          />
-        ))}
-      </RadioGroup>
-    );
-  } else {
-    const SelectionControl = appearance === 'checkbox' ? Checkbox : Switch;
-
-    children = (
-      <FormGroup id={id}>
-        {allowedValues.map(item => (
-          <FormControlLabel
-            control={
-              <SelectionControl
-                checked={value.includes(item)}
-                id={`${id}-${escape(item)}`}
-                name={name}
-                onChange={() => disabled || onChange(xor(item, value))}
-                ref={inputRef}
-                value={name}
-                {...filteredProps}
-              />
-            }
-            key={item}
-            label={transform ? transform(item) : item}
-          />
-        ))}
-      </FormGroup>
-    );
-  }
-
-  return wrapField(
-    {
-      ...props,
-      component: 'fieldset',
-      disabled,
-      error,
-      errorMessage,
-      showInlineError,
-    },
-    (legend || label) && (
-      <FormLabel component="legend">{legend || label}</FormLabel>
-    ),
-    children,
-  );
-}
-
-function Select({ checkboxes, ...props }: SelectFieldProps) {
-  return checkboxes
-    ? renderCheckboxes({
-        ...props,
-        value: props.value ?? '',
-        appearance: (props as CheckboxesProps).appearance ?? 'checkbox',
-      } as CheckboxesProps)
-    : renderSelect({
-        ...props,
-        value: props.value ?? '',
-        fullWidth: (props as SelectProps).fullWidth ?? true,
-        margin: (props as SelectProps).margin ?? 'dense',
-      } as SelectProps);
 }
 
 export default connectField(Select);
