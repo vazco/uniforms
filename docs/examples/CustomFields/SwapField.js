@@ -5,7 +5,6 @@ import {
   TextField,
   SubmitField
 } from '../../../website/components/universal';
-import { BaseField } from 'uniforms';
 import { RefreshCw } from 'react-feather';
 
 import schema from './SwapFieldSchema';
@@ -25,7 +24,6 @@ const SwapField = (
     })}
   </span>
 );
-SwapField.contextTypes = BaseField.contextTypes;
 
 export default function ExampleOfSwapField() {
   return (

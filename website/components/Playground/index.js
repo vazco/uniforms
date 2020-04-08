@@ -3,7 +3,7 @@ import Frame, { FrameContextConsumer } from 'react-frame-component';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
-import { BaseField, ValidatedForm, connectField, context } from 'uniforms';
+import { ValidatedForm, connectField, context } from 'uniforms';
 
 import playgroundStyles from './playground.module.css';
 import presets from './presets';
@@ -72,7 +72,7 @@ class Playground extends Component {
   }
 }
 
-class PlaygroundField extends BaseField {
+class PlaygroundField {
   shouldComponentUpdate(props, state, context) {
     return (
       this.context.uniforms.state.theme !== context.uniforms.state.theme ||

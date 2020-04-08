@@ -4,7 +4,6 @@ import {
   SubmitField,
   TextField
 } from '../../../website/components/universal';
-import { BaseField } from 'uniforms';
 
 import schema from './DisplayIfFieldSchema';
 
@@ -12,7 +11,6 @@ import schema from './DisplayIfFieldSchema';
 // from a component is prohibited.
 const DisplayIf = ({ children, condition }, { uniforms }) =>
   condition(uniforms) ? Children.only(children) : null;
-DisplayIf.contextTypes = BaseField.contextTypes;
 
 export default function ExampleOfDisplayIfField() {
   return (

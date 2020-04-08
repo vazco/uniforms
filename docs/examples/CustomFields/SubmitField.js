@@ -1,6 +1,6 @@
 import React from 'react';
 import { AutoField, AutoForm } from '../../../website/components/universal';
-import { BaseField, connectField } from 'uniforms';
+import { connectField } from 'uniforms';
 
 import schema from './CompositeFieldSchema';
 
@@ -18,7 +18,6 @@ const SubmitField = (
     type="submit"
   />
 );
-SubmitField.contextTypes = BaseField.contextTypes;
 
 const Composite = () => (
   <section>
