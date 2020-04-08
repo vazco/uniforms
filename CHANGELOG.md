@@ -1,3 +1,13 @@
+## [v3.0.0-alpha.2](https://github.com/vazco/uniforms/tree/v3.0.0-alpha.2) (2020-04-08)
+
+- **Breaking:** Moved transpiled files from the packages roots (e.g. `import BaseForm from 'uniforms/BaseForm'`) to `es5` directories. Try not to rely on that and use let your bundler do its best (e.g. `import { BaseForm } from 'uniforms'`).
+- **Breaking:** Removed `BaseField` from `uniforms`. Migrate to `useField`.
+- **Breaking:** Removed `ensureValue` from `connectField`. You have to do it manually (e.g. do `value ?? ''` instead of `value`).
+- **Breaking:** Removed `includeParent` from `connectField`. Use `useField` as many types as needed.
+- **Breaking:** Shape of the context changed - `changed`, `changedMap`, `submitting`, and `validating` were lifted from `state` to the root.
+- **Breaking:** A lot of types changed.
+- **Added:** `useField` and `useForm` in `uniforms`.
+
 ## [v2.6.7](https://github.com/vazco/uniforms/tree/v2.6.7) (2020-03-25)
 
 - **Fixed:** Empty boxes in `SlectField` in `uniforms-antd`.[\#691](https://github.com/vazco/uniforms/issues/691)
