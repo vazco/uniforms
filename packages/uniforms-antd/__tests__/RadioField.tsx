@@ -67,18 +67,8 @@ test('<RadioField> - renders a set of checkboxes with correct options', () => {
   );
 
   expect(wrapper.find('label')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('label')
-      .at(0)
-      .text(),
-  ).toBe('a');
-  expect(
-    wrapper
-      .find('label')
-      .at(1)
-      .text(),
-  ).toBe('b');
+  expect(wrapper.find('label').at(0).text()).toBe('a');
+  expect(wrapper.find('label').at(1).text()).toBe('b');
 });
 
 test('<RadioField> - renders a set of checkboxes with correct options (transform)', () => {
@@ -89,18 +79,8 @@ test('<RadioField> - renders a set of checkboxes with correct options (transform
   );
 
   expect(wrapper.find('label')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('label')
-      .at(0)
-      .text(),
-  ).toBe('A');
-  expect(
-    wrapper
-      .find('label')
-      .at(1)
-      .text(),
-  ).toBe('B');
+  expect(wrapper.find('label').at(0).text()).toBe('A');
+  expect(wrapper.find('label').at(1).text()).toBe('B');
 });
 
 test('<RadioField> - renders a set of checkboxes with correct value (default)', () => {
@@ -185,12 +165,7 @@ test('<RadioField> - renders a label', () => {
   );
 
   expect(wrapper.find('label')).toHaveLength(3);
-  expect(
-    wrapper
-      .find('label')
-      .at(0)
-      .text(),
-  ).toBe('y');
+  expect(wrapper.find('label').at(0).text()).toBe('y');
 });
 
 test('<RadioField> - renders a wrapper with unknown props', () => {

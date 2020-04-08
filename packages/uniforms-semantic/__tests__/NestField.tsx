@@ -16,18 +16,8 @@ test('<NestField> - renders an <AutoField> for each field', () => {
   );
 
   expect(wrapper.find(AutoField)).toHaveLength(2);
-  expect(
-    wrapper
-      .find(AutoField)
-      .at(0)
-      .prop('name'),
-  ).toBe('x.a');
-  expect(
-    wrapper
-      .find(AutoField)
-      .at(1)
-      .prop('name'),
-  ).toBe('x.b');
+  expect(wrapper.find(AutoField).at(0).prop('name')).toBe('x.a');
+  expect(wrapper.find(AutoField).at(1).prop('name')).toBe('x.b');
 });
 
 test('<NestField> - renders custom content if given', () => {
@@ -62,12 +52,7 @@ test('<NestField> - renders a label', () => {
   );
 
   expect(wrapper.find('label')).toHaveLength(3);
-  expect(
-    wrapper
-      .find('label')
-      .at(0)
-      .text(),
-  ).toBe('y');
+  expect(wrapper.find('label').at(0).text()).toBe('y');
 });
 
 test('<NestField> - renders a wrapper with unknown props', () => {
@@ -81,24 +66,9 @@ test('<NestField> - renders a wrapper with unknown props', () => {
     }),
   );
 
-  expect(
-    wrapper
-      .find('div')
-      .at(0)
-      .prop('data-x'),
-  ).toBe('x');
-  expect(
-    wrapper
-      .find('div')
-      .at(0)
-      .prop('data-y'),
-  ).toBe('y');
-  expect(
-    wrapper
-      .find('div')
-      .at(0)
-      .prop('data-z'),
-  ).toBe('z');
+  expect(wrapper.find('div').at(0).prop('data-x')).toBe('x');
+  expect(wrapper.find('div').at(0).prop('data-y')).toBe('y');
+  expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });
 
 test('<NestField> - renders correct error text (specified)', () => {
@@ -115,12 +85,7 @@ test('<NestField> - renders correct error text (specified)', () => {
     }),
   );
 
-  expect(
-    wrapper
-      .children()
-      .at(0)
-      .text(),
-  ).toBe('Error');
+  expect(wrapper.children().at(0).text()).toBe('Error');
 });
 
 test('<NestField> - renders correct error text (showInlineError=false)', () => {
@@ -142,10 +107,5 @@ test('<NestField> - renders correct error text (showInlineError=false)', () => {
     }),
   );
 
-  expect(
-    wrapper
-      .children()
-      .at(0)
-      .text(),
-  ).not.toBe('Error');
+  expect(wrapper.children().at(0).text()).not.toBe('Error');
 });

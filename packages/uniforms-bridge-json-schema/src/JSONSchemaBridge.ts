@@ -50,11 +50,7 @@ const pathToName = path => {
       .replace(/\['(.+?)'\]/g, '.$1')
       .replace(/\[(.+?)\]/g, '.$1')
       .replace(/\\'/g, "'");
-  else
-    path = path
-      .replace(/\//g, '.')
-      .replace(/~0/g, '~')
-      .replace(/~1/g, '/');
+  else path = path.replace(/\//g, '.').replace(/~0/g, '~').replace(/~1/g, '/');
 
   return path.slice(1);
 };

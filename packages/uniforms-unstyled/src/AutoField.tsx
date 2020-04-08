@@ -57,5 +57,5 @@ export default function AutoField(originalProps: AutoFieldProps) {
     }
   }
 
-  return createElement(component!, props);
+  return createElement(component, props);
 }

@@ -12,6 +12,3 @@
 /website/.docusaurus
 /website/build
 /website/node_modules
-
-# Broke with Prettier upgrade.
-/docs/**/*.mdx

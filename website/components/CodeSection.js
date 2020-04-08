@@ -27,9 +27,11 @@ export default function CodeSection({ language, replace, section, source }) {
   source = source.replace(/\/\/ <.*?\n/g, '');
 
   // Replace all mapped things.
-  if (replace)
-    for (const [pattern, value] of Object.entries(replace))
+  if (replace) {
+    for (const [pattern, value] of Object.entries(replace)) {
       source = source.replace(new RegExp(pattern, 'gs'), value);
+    }
+  }
 
   return (
     <components.pre>

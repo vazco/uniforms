@@ -37,20 +37,14 @@ describe('AutoForm', () => {
     );
 
     it('updates', () => {
-      wrapper
-        .instance()
-        .getContext()
-        .onChange('a', '2');
+      wrapper.instance().getContext().onChange('a', '2');
 
       expect(onChange).toHaveBeenCalledTimes(1);
       expect(onChange).toHaveBeenLastCalledWith('a', '2');
     });
 
     it('calls `onChangeModel`', () => {
-      wrapper
-        .instance()
-        .getContext()
-        .onChange('a', '2');
+      wrapper.instance().getContext().onChange('a', '2');
 
       expect(onChangeModel).toHaveBeenCalledTimes(1);
       expect(onChangeModel).toHaveBeenLastCalledWith({ a: '2' });
@@ -82,10 +76,7 @@ describe('AutoForm', () => {
       );
 
       expect(onSubmit).not.toBeCalled();
-      wrapper
-        .instance()
-        .getContext()
-        .onChange('a', 1);
+      wrapper.instance().getContext().onChange('a', 1);
 
       await new Promise(resolve => process.nextTick(resolve));
 

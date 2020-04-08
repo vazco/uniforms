@@ -56,12 +56,7 @@ test('<ListField> - passes itemProps to its children', () => {
     createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
-  expect(
-    wrapper
-      .find(ListItemField)
-      .first()
-      .prop('data-xyz'),
-  ).toBe(1);
+  expect(wrapper.find(ListItemField).first().prop('data-xyz')).toBe(1);
 });
 
 test('<ListField> - renders children (specified)', () => {
@@ -93,18 +88,8 @@ test('<ListField> - renders children with correct name (children)', () => {
     createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
-  expect(
-    wrapper
-      .find(Child)
-      .at(0)
-      .prop('name'),
-  ).toBe('x.0');
-  expect(
-    wrapper
-      .find(Child)
-      .at(1)
-      .prop('name'),
-  ).toBe('x.1');
+  expect(wrapper.find(Child).at(0).prop('name')).toBe('x.0');
+  expect(wrapper.find(Child).at(1).prop('name')).toBe('x.1');
 });
 
 test('<ListField> - renders children with correct name (value)', () => {
@@ -114,16 +99,6 @@ test('<ListField> - renders children with correct name (value)', () => {
     createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
-  expect(
-    wrapper
-      .find(ListItemField)
-      .at(0)
-      .prop('name'),
-  ).toBe('x.0');
-  expect(
-    wrapper
-      .find(ListItemField)
-      .at(1)
-      .prop('name'),
-  ).toBe('x.1');
+  expect(wrapper.find(ListItemField).at(0).prop('name')).toBe('x.0');
+  expect(wrapper.find(ListItemField).at(1).prop('name')).toBe('x.1');
 });

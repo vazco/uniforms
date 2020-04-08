@@ -129,10 +129,12 @@ class PlaygroundPreview extends Component {
     } = this.props.value;
 
     props.schema = this._schema;
-    if (asyncOnSubmit)
+    if (asyncOnSubmit) {
       props.onSubmit = () => new Promise(resolve => setTimeout(resolve, 1000));
-    if (asyncOnValidate)
+    }
+    if (asyncOnValidate) {
       props.onValidate = (model, error, next) => setTimeout(() => next(), 1000);
+    }
 
     return (
       <PlaygroundWrap theme={this.props.theme}>

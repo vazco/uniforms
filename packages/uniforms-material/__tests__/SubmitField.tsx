@@ -15,12 +15,7 @@ test('<SubmitField> - renders SubmitField with correct disabled state', () => {
   const element = <SubmitField disabled />;
   const wrapper = mount(element, createContext());
 
-  expect(
-    wrapper
-      .children()
-      .first()
-      .prop('disabled'),
-  ).toBe(true);
+  expect(wrapper.children().first().prop('disabled')).toBe(true);
 });
 
 test('<SubmitField> - renders SubmitField with correct disabled state when error (context)', () => {
@@ -28,10 +23,5 @@ test('<SubmitField> - renders SubmitField with correct disabled state when error
   const element = <SubmitField />;
   const wrapper = mount(element, createContext({}, { error }));
 
-  expect(
-    wrapper
-      .children()
-      .first()
-      .prop('disabled'),
-  ).toBe(true);
+  expect(wrapper.children().first().prop('disabled')).toBe(true);
 });

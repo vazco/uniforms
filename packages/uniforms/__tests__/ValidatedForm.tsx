@@ -221,10 +221,7 @@ describe('ValidatedForm', () => {
         const wrapper = mount<typeof ValidatedForm>(
           <ValidatedForm model={model} schema={schema} validate="onChange" />,
         );
-        wrapper
-          .instance()
-          .getContext()
-          .onChange('key', 'value');
+        wrapper.instance().getContext().onChange('key', 'value');
 
         expect(validator).toHaveBeenCalledTimes(1);
       });
@@ -235,10 +232,7 @@ describe('ValidatedForm', () => {
         const wrapper = mount<typeof ValidatedForm>(
           <ValidatedForm model={model} schema={schema} validate="onSubmit" />,
         );
-        wrapper
-          .instance()
-          .getContext()
-          .onChange('key', 'value');
+        wrapper.instance().getContext().onChange('key', 'value');
 
         expect(validator).not.toHaveBeenCalled();
       });
@@ -257,10 +251,7 @@ describe('ValidatedForm', () => {
       });
 
       it('does not validates before submit', () => {
-        wrapper
-          .instance()
-          .getContext()
-          .onChange('key', 'value');
+        wrapper.instance().getContext().onChange('key', 'value');
         expect(validator).not.toHaveBeenCalled();
       });
 
@@ -269,10 +260,7 @@ describe('ValidatedForm', () => {
         await new Promise(resolve => process.nextTick(resolve));
 
         validator.mockReset();
-        wrapper
-          .instance()
-          .getContext()
-          .onChange('key', 'value');
+        wrapper.instance().getContext().onChange('key', 'value');
         expect(validator).toHaveBeenCalledTimes(1);
       });
     });
@@ -360,10 +348,7 @@ describe('ValidatedForm', () => {
 
       it('reuses the validator between validations', () => {
         ['1', '2', '3'].forEach(value => {
-          wrapper
-            .instance()
-            .getContext()
-            .onChange('key', value);
+          wrapper.instance().getContext().onChange('key', value);
           wrapper.find('form').simulate('submit');
         });
 

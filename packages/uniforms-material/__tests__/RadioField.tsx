@@ -82,18 +82,8 @@ test('<RadioField> - renders a set of Radio buttons with correct options', () =>
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
-  expect(
-    wrapper
-      .find(FormControlLabel)
-      .at(0)
-      .prop('label'),
-  ).toBe('a');
-  expect(
-    wrapper
-      .find(FormControlLabel)
-      .at(1)
-      .prop('label'),
-  ).toBe('b');
+  expect(wrapper.find(FormControlLabel).at(0).prop('label')).toBe('a');
+  expect(wrapper.find(FormControlLabel).at(1).prop('label')).toBe('b');
 });
 
 test('<RadioField> - renders a set of Radio buttons with correct options (transform)', () => {
@@ -104,18 +94,8 @@ test('<RadioField> - renders a set of Radio buttons with correct options (transf
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
-  expect(
-    wrapper
-      .find(FormControlLabel)
-      .at(0)
-      .prop('label'),
-  ).toBe('A');
-  expect(
-    wrapper
-      .find(FormControlLabel)
-      .at(1)
-      .prop('label'),
-  ).toBe('B');
+  expect(wrapper.find(FormControlLabel).at(0).prop('label')).toBe('A');
+  expect(wrapper.find(FormControlLabel).at(1).prop('label')).toBe('B');
 });
 
 test('<RadioField> - renders a RadioGroup with correct value (default)', () => {

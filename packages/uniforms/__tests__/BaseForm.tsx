@@ -129,10 +129,7 @@ describe('BaseForm', () => {
       expect(context1).toHaveProperty('changed', false);
       expect(context1).toHaveProperty('changedMap', {});
 
-      wrapper
-        .instance()
-        .getContext()
-        .onChange('$', [1, 2]);
+      wrapper.instance().getContext().onChange('$', [1, 2]);
 
       const context2 = wrapper.instance().getContext();
       expect(context2).toHaveProperty('changed', true);
@@ -144,28 +141,16 @@ describe('BaseForm', () => {
 
     it('autosaves correctly (`autosave` = true)', () => {
       wrapper.setProps({ autosave: true });
-      wrapper
-        .instance()
-        .getContext()
-        .onChange('a', 1);
+      wrapper.instance().getContext().onChange('a', 1);
 
       expect(onSubmit).toHaveBeenCalledTimes(1);
       expect(onSubmit).toHaveBeenLastCalledWith(model);
     });
 
     it('autosaves are not delayed', () => {
-      wrapper
-        .instance()
-        .getContext()
-        .onChange('a', 1);
-      wrapper
-        .instance()
-        .getContext()
-        .onChange('a', 2);
-      wrapper
-        .instance()
-        .getContext()
-        .onChange('a', 3);
+      wrapper.instance().getContext().onChange('a', 1);
+      wrapper.instance().getContext().onChange('a', 2);
+      wrapper.instance().getContext().onChange('a', 3);
 
       expect(onSubmit).toHaveBeenCalledTimes(3);
       expect(onSubmit).toHaveBeenLastCalledWith(model);
@@ -173,18 +158,9 @@ describe('BaseForm', () => {
 
     it('autosaves can be delayed', async () => {
       wrapper.setProps({ autosaveDelay: 10 });
-      wrapper
-        .instance()
-        .getContext()
-        .onChange('a', 1);
-      wrapper
-        .instance()
-        .getContext()
-        .onChange('a', 2);
-      wrapper
-        .instance()
-        .getContext()
-        .onChange('a', 3);
+      wrapper.instance().getContext().onChange('a', 1);
+      wrapper.instance().getContext().onChange('a', 2);
+      wrapper.instance().getContext().onChange('a', 3);
 
       await new Promise(resolve => setTimeout(resolve, 25));
 
@@ -194,33 +170,15 @@ describe('BaseForm', () => {
 
     it('autosaves can be delayed (longer)', async () => {
       wrapper.setProps({ autosaveDelay: 10 });
-      wrapper
-        .instance()
-        .getContext()
-        .onChange('a', 1);
-      wrapper
-        .instance()
-        .getContext()
-        .onChange('a', 2);
-      wrapper
-        .instance()
-        .getContext()
-        .onChange('a', 3);
+      wrapper.instance().getContext().onChange('a', 1);
+      wrapper.instance().getContext().onChange('a', 2);
+      wrapper.instance().getContext().onChange('a', 3);
 
       await new Promise(resolve => setTimeout(resolve, 25));
 
-      wrapper
-        .instance()
-        .getContext()
-        .onChange('a', 1);
-      wrapper
-        .instance()
-        .getContext()
-        .onChange('a', 2);
-      wrapper
-        .instance()
-        .getContext()
-        .onChange('a', 3);
+      wrapper.instance().getContext().onChange('a', 1);
+      wrapper.instance().getContext().onChange('a', 2);
+      wrapper.instance().getContext().onChange('a', 3);
 
       await new Promise(resolve => setTimeout(resolve, 25));
 
@@ -230,19 +188,13 @@ describe('BaseForm', () => {
 
     it('autosaves correctly (`autosave` = false)', () => {
       wrapper.setProps({ autosave: false });
-      wrapper
-        .instance()
-        .getContext()
-        .onChange('a', 1);
+      wrapper.instance().getContext().onChange('a', 1);
 
       expect(onSubmit).not.toBeCalled();
     });
 
     it('calls `onChange` with correct name and value', () => {
-      wrapper
-        .instance()
-        .getContext()
-        .onChange('a', 1);
+      wrapper.instance().getContext().onChange('a', 1);
 
       expect(onChange).toHaveBeenCalledTimes(1);
       expect(onChange).toHaveBeenLastCalledWith('a', 1);
@@ -256,10 +208,7 @@ describe('BaseForm', () => {
 
     it('does nothing without `onChange`', () => {
       wrapper.setProps({ onChange: undefined });
-      wrapper
-        .instance()
-        .getContext()
-        .onChange('a', 1);
+      wrapper.instance().getContext().onChange('a', 1);
 
       expect(onChange).not.toBeCalled();
     });

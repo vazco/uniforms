@@ -46,10 +46,7 @@ describe('SimpleSchemaBridge', () => {
 
       if (field) {
         return {
-          label: name
-            .split('.')
-            .join(' ')
-            .toUpperCase(),
+          label: name.split('.').join(' ').toUpperCase(),
           ...field,
         };
       }

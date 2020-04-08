@@ -18,18 +18,8 @@ test('<NestField> - renders an <AutoField> for each field', () => {
   );
 
   expect(wrapper.find(AutoField)).toHaveLength(2);
-  expect(
-    wrapper
-      .find(AutoField)
-      .at(0)
-      .prop('name'),
-  ).toBe('x.a');
-  expect(
-    wrapper
-      .find(AutoField)
-      .at(1)
-      .prop('name'),
-  ).toBe('x.b');
+  expect(wrapper.find(AutoField).at(0).prop('name')).toBe('x.a');
+  expect(wrapper.find(AutoField).at(1).prop('name')).toBe('x.b');
 });
 
 test('<NestField> - renders custom content if given', () => {
@@ -63,12 +53,7 @@ test('<NestField> - renders a Subheader', () => {
     }),
   );
 
-  expect(
-    wrapper
-      .find(FormLabel)
-      .at(0)
-      .text(),
-  ).toBe('y *');
+  expect(wrapper.find(FormLabel).at(0).text()).toBe('y *');
 });
 
 test('<NestField> - renders a helperText', () => {

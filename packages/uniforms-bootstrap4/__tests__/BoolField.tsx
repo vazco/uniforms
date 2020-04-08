@@ -116,22 +116,7 @@ test('<BoolField> - renders a wrapper with unknown props', () => {
   const element = <BoolField name="x" data-x="x" data-y="y" data-z="z" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
-  expect(
-    wrapper
-      .find('div')
-      .at(0)
-      .prop('data-x'),
-  ).toBe('x');
-  expect(
-    wrapper
-      .find('div')
-      .at(0)
-      .prop('data-y'),
-  ).toBe('y');
-  expect(
-    wrapper
-      .find('div')
-      .at(0)
-      .prop('data-z'),
-  ).toBe('z');
+  expect(wrapper.find('div').at(0).prop('data-x')).toBe('x');
+  expect(wrapper.find('div').at(0).prop('data-y')).toBe('y');
+  expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });

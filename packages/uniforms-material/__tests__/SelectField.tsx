@@ -297,18 +297,8 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct dis
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
-  expect(
-    wrapper
-      .find(Radio)
-      .at(0)
-      .prop('disabled'),
-  ).toBe(true);
-  expect(
-    wrapper
-      .find(Radio)
-      .at(1)
-      .prop('disabled'),
-  ).toBe(true);
+  expect(wrapper.find(Radio).at(0).prop('disabled')).toBe(true);
+  expect(wrapper.find(Radio).at(1).prop('disabled')).toBe(true);
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct id (inherited)', () => {
@@ -319,18 +309,8 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct id 
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
-  expect(
-    wrapper
-      .find(Radio)
-      .at(0)
-      .prop('id'),
-  ).toBeTruthy();
-  expect(
-    wrapper
-      .find(Radio)
-      .at(1)
-      .prop('id'),
-  ).toBeTruthy();
+  expect(wrapper.find(Radio).at(0).prop('id')).toBeTruthy();
+  expect(wrapper.find(Radio).at(1).prop('id')).toBeTruthy();
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct id (specified)', () => {
@@ -341,18 +321,8 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct id 
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
-  expect(
-    wrapper
-      .find(Radio)
-      .at(0)
-      .prop('id'),
-  ).toBe('y-YQ');
-  expect(
-    wrapper
-      .find(Radio)
-      .at(1)
-      .prop('id'),
-  ).toBe('y-Yg');
+  expect(wrapper.find(Radio).at(0).prop('id')).toBe('y-YQ');
+  expect(wrapper.find(Radio).at(1).prop('id')).toBe('y-Yg');
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct name', () => {
@@ -363,20 +333,8 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct nam
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
-  expect(
-    wrapper
-      .find(Radio)
-      .at(0)
-      .find('input')
-      .prop('name'),
-  ).toBe('x');
-  expect(
-    wrapper
-      .find(Radio)
-      .at(1)
-      .find('input')
-      .prop('name'),
-  ).toBe('x');
+  expect(wrapper.find(Radio).at(0).find('input').prop('name')).toBe('x');
+  expect(wrapper.find(Radio).at(1).find('input').prop('name')).toBe('x');
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct options', () => {
@@ -387,18 +345,8 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct opt
   );
 
   expect(wrapper.find('label')).toHaveLength(2);
-  expect(
-    wrapper
-      .find(FormControlLabel)
-      .at(0)
-      .prop('label'),
-  ).toBe('a');
-  expect(
-    wrapper
-      .find(FormControlLabel)
-      .at(1)
-      .prop('label'),
-  ).toBe('b');
+  expect(wrapper.find(FormControlLabel).at(0).prop('label')).toBe('a');
+  expect(wrapper.find(FormControlLabel).at(1).prop('label')).toBe('b');
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct options (transform)', () => {
@@ -411,18 +359,8 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct opt
   );
 
   expect(wrapper.find('label')).toHaveLength(2);
-  expect(
-    wrapper
-      .find(FormControlLabel)
-      .at(0)
-      .prop('label'),
-  ).toBe('A');
-  expect(
-    wrapper
-      .find(FormControlLabel)
-      .at(1)
-      .prop('label'),
-  ).toBe('B');
+  expect(wrapper.find(FormControlLabel).at(0).prop('label')).toBe('A');
+  expect(wrapper.find(FormControlLabel).at(1).prop('label')).toBe('B');
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct value (default)', () => {
@@ -433,20 +371,8 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct val
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
-  expect(
-    wrapper
-      .find(Radio)
-      .at(0)
-      .find('input')
-      .prop('checked'),
-  ).toBe(false);
-  expect(
-    wrapper
-      .find(Radio)
-      .at(1)
-      .find('input')
-      .prop('checked'),
-  ).toBe(false);
+  expect(wrapper.find(Radio).at(0).find('input').prop('checked')).toBe(false);
+  expect(wrapper.find(Radio).at(1).find('input').prop('checked')).toBe(false);
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct value (model)', () => {
@@ -460,20 +386,8 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct val
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
-  expect(
-    wrapper
-      .find(Radio)
-      .at(0)
-      .find('input')
-      .prop('checked'),
-  ).toBe(false);
-  expect(
-    wrapper
-      .find(Radio)
-      .at(1)
-      .find('input')
-      .prop('checked'),
-  ).toBe(true);
+  expect(wrapper.find(Radio).at(0).find('input').prop('checked')).toBe(false);
+  expect(wrapper.find(Radio).at(1).find('input').prop('checked')).toBe(true);
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct value (specified)', () => {
@@ -484,20 +398,8 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct val
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
-  expect(
-    wrapper
-      .find(Radio)
-      .at(0)
-      .find('input')
-      .prop('checked'),
-  ).toBe(false);
-  expect(
-    wrapper
-      .find(Radio)
-      .at(1)
-      .find('input')
-      .prop('checked'),
-  ).toBe(true);
+  expect(wrapper.find(Radio).at(0).find('input').prop('checked')).toBe(false);
+  expect(wrapper.find(Radio).at(1).find('input').prop('checked')).toBe(true);
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons which correctly reacts on change', () => {
@@ -536,11 +438,7 @@ test('<SelectField checkboxes> - renders a set of Checkboxes which correctly rea
   );
 
   expect(wrapper.find(Checkbox)).toHaveLength(2);
-  wrapper
-    .find(Checkbox)
-    .at(1)
-    .find('input')
-    .simulate('change');
+  wrapper.find(Checkbox).at(1).find('input').simulate('change');
   expect(onChange).toHaveBeenLastCalledWith('x', ['b']);
 });
 
@@ -559,11 +457,7 @@ test('<SelectField checkboxes> - renders a set of Checkboxes which correctly rea
   );
 
   expect(wrapper.find(Checkbox)).toHaveLength(2);
-  wrapper
-    .find(Checkbox)
-    .at(1)
-    .find('input')
-    .simulate('change');
+  wrapper.find(Checkbox).at(1).find('input').simulate('change');
   expect(onChange).toHaveBeenLastCalledWith('x', []);
 });
 
@@ -582,18 +476,8 @@ test('<SelectField checkboxes> - renders a set of Checkboxes with correct labels
   );
 
   expect(wrapper.find(Checkbox)).toHaveLength(2);
-  expect(
-    wrapper
-      .find(FormControlLabel)
-      .at(0)
-      .text(),
-  ).toBe('a');
-  expect(
-    wrapper
-      .find(FormControlLabel)
-      .at(1)
-      .text(),
-  ).toBe('b');
+  expect(wrapper.find(FormControlLabel).at(0).text()).toBe('a');
+  expect(wrapper.find(FormControlLabel).at(1).text()).toBe('b');
 });
 
 test('<SelectField checkboxes> - renders a set of Checkboxes which correct labels (transform)', () => {
@@ -613,18 +497,8 @@ test('<SelectField checkboxes> - renders a set of Checkboxes which correct label
   );
 
   expect(wrapper.find(Checkbox)).toHaveLength(2);
-  expect(
-    wrapper
-      .find(FormControlLabel)
-      .at(0)
-      .text(),
-  ).toBe('A');
-  expect(
-    wrapper
-      .find(FormControlLabel)
-      .at(1)
-      .text(),
-  ).toBe('B');
+  expect(wrapper.find(FormControlLabel).at(0).text()).toBe('A');
+  expect(wrapper.find(FormControlLabel).at(1).text()).toBe('B');
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons which correctly reacts on change (same value)', () => {

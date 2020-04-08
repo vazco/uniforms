@@ -246,18 +246,8 @@ test('<SelectField checkboxes> - renders a set of checkboxes', () => {
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
-  expect(
-    wrapper
-      .find(Radio)
-      .at(0)
-      .prop('value'),
-  ).toBe('a');
-  expect(
-    wrapper
-      .find(Radio)
-      .at(1)
-      .prop('value'),
-  ).toBe('b');
+  expect(wrapper.find(Radio).at(0).prop('value')).toBe('a');
+  expect(wrapper.find(Radio).at(1).prop('value')).toBe('b');
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes with correct disabled state', () => {
@@ -312,18 +302,8 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct option
   );
 
   expect(wrapper.find('label')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('label')
-      .at(0)
-      .text(),
-  ).toBe('a');
-  expect(
-    wrapper
-      .find('label')
-      .at(1)
-      .text(),
-  ).toBe('b');
+  expect(wrapper.find('label').at(0).text()).toBe('a');
+  expect(wrapper.find('label').at(1).text()).toBe('b');
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes with correct options (transform)', () => {
@@ -336,18 +316,8 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct option
   );
 
   expect(wrapper.find('label')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('label')
-      .at(0)
-      .text(),
-  ).toBe('A');
-  expect(
-    wrapper
-      .find('label')
-      .at(1)
-      .text(),
-  ).toBe('B');
+  expect(wrapper.find('label').at(0).text()).toBe('A');
+  expect(wrapper.find('label').at(1).text()).toBe('B');
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes with correct value (default)', () => {
@@ -358,18 +328,8 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct value 
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('input')
-      .at(0)
-      .prop('checked'),
-  ).toBe(false);
-  expect(
-    wrapper
-      .find('input')
-      .at(1)
-      .prop('checked'),
-  ).toBe(false);
+  expect(wrapper.find('input').at(0).prop('checked')).toBe(false);
+  expect(wrapper.find('input').at(1).prop('checked')).toBe(false);
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes with correct value (model)', () => {
@@ -383,18 +343,8 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct value 
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('input')
-      .at(0)
-      .prop('checked'),
-  ).toBe(false);
-  expect(
-    wrapper
-      .find('input')
-      .at(1)
-      .prop('checked'),
-  ).toBe(true);
+  expect(wrapper.find('input').at(0).prop('checked')).toBe(false);
+  expect(wrapper.find('input').at(1).prop('checked')).toBe(true);
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes with correct value (specified)', () => {
@@ -405,18 +355,8 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct value 
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('input')
-      .at(0)
-      .prop('checked'),
-  ).toBe(false);
-  expect(
-    wrapper
-      .find('input')
-      .at(1)
-      .prop('checked'),
-  ).toBe(true);
+  expect(wrapper.find('input').at(0).prop('checked')).toBe(false);
+  expect(wrapper.find('input').at(1).prop('checked')).toBe(true);
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes which correctly reacts on change', () => {
@@ -432,12 +372,7 @@ test('<SelectField checkboxes> - renders a set of checkboxes which correctly rea
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('input')
-      .at(1)
-      .simulate('change'),
-  ).toBeTruthy();
+  expect(wrapper.find('input').at(1).simulate('change')).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', 'b');
 });
 
@@ -457,12 +392,7 @@ test('<SelectField checkboxes> - renders a set of checkboxes which correctly rea
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('input')
-      .at(1)
-      .simulate('change'),
-  ).toBeTruthy();
+  expect(wrapper.find('input').at(1).simulate('change')).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', ['b']);
 });
 
@@ -482,12 +412,7 @@ test('<SelectField checkboxes> - renders a set of checkboxes which correctly rea
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('input')
-      .at(1)
-      .simulate('change'),
-  ).toBeTruthy();
+  expect(wrapper.find('input').at(1).simulate('change')).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', []);
 });
 
@@ -504,12 +429,7 @@ test('<SelectField checkboxes> - renders a set of checkboxes which correctly rea
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('input')
-      .at(0)
-      .simulate('change'),
-  ).toBeTruthy();
+  expect(wrapper.find('input').at(0).simulate('change')).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', 'a');
 });
 
@@ -521,12 +441,7 @@ test('<SelectField checkboxes> - renders a label', () => {
   );
 
   expect(wrapper.find('label')).toHaveLength(3);
-  expect(
-    wrapper
-      .find('label')
-      .at(0)
-      .text(),
-  ).toBe('y');
+  expect(wrapper.find('label').at(0).text()).toBe('y');
 });
 
 test('<SelectField checkboxes> - renders a wrapper with unknown props', () => {

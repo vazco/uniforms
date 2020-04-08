@@ -155,24 +155,9 @@ test('<DateField> - renders a wrapper with unknown props', () => {
   const element = <DateField name="x" data-x="x" data-y="y" data-z="z" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
-  expect(
-    wrapper
-      .find('div')
-      .at(0)
-      .prop('data-x'),
-  ).toBe('x');
-  expect(
-    wrapper
-      .find('div')
-      .at(0)
-      .prop('data-y'),
-  ).toBe('y');
-  expect(
-    wrapper
-      .find('div')
-      .at(0)
-      .prop('data-z'),
-  ).toBe('z');
+  expect(wrapper.find('div').at(0).prop('data-x')).toBe('x');
+  expect(wrapper.find('div').at(0).prop('data-y')).toBe('y');
+  expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });
 
 test('<DateField> - renders correct error text (specified)', () => {
@@ -182,12 +167,7 @@ test('<DateField> - renders correct error text (specified)', () => {
   );
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
-  expect(
-    wrapper
-      .children()
-      .last()
-      .text(),
-  ).toBe('Error');
+  expect(wrapper.children().last().text()).toBe('Error');
 });
 
 test('<DateField> - renders correct error text (showInlineError=false)', () => {
@@ -202,12 +182,7 @@ test('<DateField> - renders correct error text (showInlineError=false)', () => {
   );
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
-  expect(
-    wrapper
-      .children()
-      .last()
-      .text(),
-  ).not.toBe('Error');
+  expect(wrapper.children().last().text()).not.toBe('Error');
 });
 
 test('<DateField> - renders a icon', () => {

@@ -33,24 +33,9 @@ test('<ErrorsField> - renders list of correct error messages (context)', () => {
   );
 
   expect(wrapper.find('.card-body > div')).toHaveLength(3);
-  expect(
-    wrapper
-      .find('.card-body > div')
-      .at(0)
-      .text(),
-  ).toBe('X is required');
-  expect(
-    wrapper
-      .find('.card-body > div')
-      .at(1)
-      .text(),
-  ).toBe('Y is required');
-  expect(
-    wrapper
-      .find('.card-body > div')
-      .at(2)
-      .text(),
-  ).toBe('Z is required');
+  expect(wrapper.find('.card-body > div').at(0).text()).toBe('X is required');
+  expect(wrapper.find('.card-body > div').at(1).text()).toBe('Y is required');
+  expect(wrapper.find('.card-body > div').at(2).text()).toBe('Z is required');
 });
 
 test('<ErrorsField> - renders children (specified)', () => {

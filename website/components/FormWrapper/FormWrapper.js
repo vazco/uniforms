@@ -18,7 +18,9 @@ function handleResize(ref, setHeight) {
     0
   );
 
-  if (scrollHeight !== 0) setHeight(scrollHeight);
+  if (scrollHeight !== 0) {
+    setHeight(scrollHeight);
+  }
 }
 
 function useFrameAutoResize(initialHeight, refreshInterval, watch) {

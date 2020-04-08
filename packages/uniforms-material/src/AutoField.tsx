@@ -56,5 +56,5 @@ export default function AutoField(originalProps: AutoFieldProps) {
       invariant(component, 'Unsupported field type: %s', fieldType);
     }
   }
-  return createElement(component!, props);
+  return createElement(component, props);
 }

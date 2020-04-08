@@ -97,12 +97,7 @@ test('<BoolField> - renders a checkbox input with correct label (specified)', ()
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
   expect(wrapper.find('label')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('label')
-      .first()
-      .text(),
-  ).toBe('BoolFieldLabel'); // Label is prefixed with a &nbsp;.
+  expect(wrapper.find('label').first().text()).toBe('BoolFieldLabel'); // Label is prefixed with a &nbsp;.
 });
 
 test('<BoolField> - renders a switch input with correct value (default)', () => {

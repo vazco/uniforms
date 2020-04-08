@@ -254,24 +254,9 @@ test('<SelectField> - renders a wrapper with unknown props', () => {
     createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
-  expect(
-    wrapper
-      .find('div')
-      .at(0)
-      .prop('data-x'),
-  ).toBe('x');
-  expect(
-    wrapper
-      .find('div')
-      .at(0)
-      .prop('data-y'),
-  ).toBe('y');
-  expect(
-    wrapper
-      .find('div')
-      .at(0)
-      .prop('data-z'),
-  ).toBe('z');
+  expect(wrapper.find('div').at(0).prop('data-x')).toBe('x');
+  expect(wrapper.find('div').at(0).prop('data-y')).toBe('y');
+  expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes', () => {
@@ -292,18 +277,8 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct disabl
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('input')
-      .at(0)
-      .prop('disabled'),
-  ).toBe(true);
-  expect(
-    wrapper
-      .find('input')
-      .at(1)
-      .prop('disabled'),
-  ).toBe(true);
+  expect(wrapper.find('input').at(0).prop('disabled')).toBe(true);
+  expect(wrapper.find('input').at(1).prop('disabled')).toBe(true);
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes with correct id (inherited)', () => {
@@ -314,18 +289,8 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct id (in
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('input')
-      .at(0)
-      .prop('id'),
-  ).toBeTruthy();
-  expect(
-    wrapper
-      .find('input')
-      .at(1)
-      .prop('id'),
-  ).toBeTruthy();
+  expect(wrapper.find('input').at(0).prop('id')).toBeTruthy();
+  expect(wrapper.find('input').at(1).prop('id')).toBeTruthy();
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes with correct id (specified)', () => {
@@ -336,18 +301,8 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct id (sp
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('input')
-      .at(0)
-      .prop('id'),
-  ).toBe('y-YQ');
-  expect(
-    wrapper
-      .find('input')
-      .at(1)
-      .prop('id'),
-  ).toBe('y-Yg');
+  expect(wrapper.find('input').at(0).prop('id')).toBe('y-YQ');
+  expect(wrapper.find('input').at(1).prop('id')).toBe('y-Yg');
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes with correct name', () => {
@@ -358,18 +313,8 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct name',
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('input')
-      .at(0)
-      .prop('name'),
-  ).toBe('x');
-  expect(
-    wrapper
-      .find('input')
-      .at(1)
-      .prop('name'),
-  ).toBe('x');
+  expect(wrapper.find('input').at(0).prop('name')).toBe('x');
+  expect(wrapper.find('input').at(1).prop('name')).toBe('x');
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes with correct options', () => {
@@ -380,18 +325,8 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct option
   );
 
   expect(wrapper.find('label')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('label')
-      .at(0)
-      .text(),
-  ).toBe('a');
-  expect(
-    wrapper
-      .find('label')
-      .at(1)
-      .text(),
-  ).toBe('b');
+  expect(wrapper.find('label').at(0).text()).toBe('a');
+  expect(wrapper.find('label').at(1).text()).toBe('b');
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes with correct options (transform)', () => {
@@ -404,18 +339,8 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct option
   );
 
   expect(wrapper.find('label')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('label')
-      .at(0)
-      .text(),
-  ).toBe('A');
-  expect(
-    wrapper
-      .find('label')
-      .at(1)
-      .text(),
-  ).toBe('B');
+  expect(wrapper.find('label').at(0).text()).toBe('A');
+  expect(wrapper.find('label').at(1).text()).toBe('B');
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes with correct value (default)', () => {
@@ -426,18 +351,8 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct value 
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('input')
-      .at(0)
-      .prop('checked'),
-  ).toBe(false);
-  expect(
-    wrapper
-      .find('input')
-      .at(1)
-      .prop('checked'),
-  ).toBe(false);
+  expect(wrapper.find('input').at(0).prop('checked')).toBe(false);
+  expect(wrapper.find('input').at(1).prop('checked')).toBe(false);
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes with correct value (model)', () => {
@@ -451,18 +366,8 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct value 
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('input')
-      .at(0)
-      .prop('checked'),
-  ).toBe(false);
-  expect(
-    wrapper
-      .find('input')
-      .at(1)
-      .prop('checked'),
-  ).toBe(true);
+  expect(wrapper.find('input').at(0).prop('checked')).toBe(false);
+  expect(wrapper.find('input').at(1).prop('checked')).toBe(true);
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes with correct value (specified)', () => {
@@ -473,18 +378,8 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct value 
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('input')
-      .at(0)
-      .prop('checked'),
-  ).toBe(false);
-  expect(
-    wrapper
-      .find('input')
-      .at(1)
-      .prop('checked'),
-  ).toBe(true);
+  expect(wrapper.find('input').at(0).prop('checked')).toBe(false);
+  expect(wrapper.find('input').at(1).prop('checked')).toBe(true);
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes which correctly reacts on change', () => {
@@ -500,12 +395,7 @@ test('<SelectField checkboxes> - renders a set of checkboxes which correctly rea
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('input')
-      .at(1)
-      .simulate('change'),
-  ).toBeTruthy();
+  expect(wrapper.find('input').at(1).simulate('change')).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', 'b');
 });
 
@@ -525,12 +415,7 @@ test('<SelectField checkboxes> - renders a set of checkboxes which correctly rea
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('input')
-      .at(1)
-      .simulate('change'),
-  ).toBeTruthy();
+  expect(wrapper.find('input').at(1).simulate('change')).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', ['b']);
 });
 
@@ -550,12 +435,7 @@ test('<SelectField checkboxes> - renders a set of checkboxes which correctly rea
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('input')
-      .at(1)
-      .simulate('change'),
-  ).toBeTruthy();
+  expect(wrapper.find('input').at(1).simulate('change')).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', []);
 });
 
@@ -572,12 +452,7 @@ test('<SelectField checkboxes> - renders a set of checkboxes which correctly rea
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(
-    wrapper
-      .find('input')
-      .at(0)
-      .simulate('change'),
-  ).toBeTruthy();
+  expect(wrapper.find('input').at(0).simulate('change')).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', 'a');
 });
 
@@ -589,12 +464,7 @@ test('<SelectField checkboxes> - renders a label', () => {
   );
 
   expect(wrapper.find('label')).toHaveLength(3);
-  expect(
-    wrapper
-      .find('label')
-      .at(0)
-      .text(),
-  ).toBe('y');
+  expect(wrapper.find('label').at(0).text()).toBe('y');
 });
 
 test('<SelectField checkboxes> - renders a wrapper with unknown props', () => {
@@ -606,24 +476,9 @@ test('<SelectField checkboxes> - renders a wrapper with unknown props', () => {
     createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
 
-  expect(
-    wrapper
-      .find('div')
-      .at(0)
-      .prop('data-x'),
-  ).toBe('x');
-  expect(
-    wrapper
-      .find('div')
-      .at(0)
-      .prop('data-y'),
-  ).toBe('y');
-  expect(
-    wrapper
-      .find('div')
-      .at(0)
-      .prop('data-z'),
-  ).toBe('z');
+  expect(wrapper.find('div').at(0).prop('data-x')).toBe('x');
+  expect(wrapper.find('div').at(0).prop('data-y')).toBe('y');
+  expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });
 
 test('<SelectField> - renders correct error text (specified)', () => {
