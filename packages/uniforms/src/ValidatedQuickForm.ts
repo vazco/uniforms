@@ -1,6 +1,7 @@
-import BaseForm from './BaseForm';
-import QuickForm, { QuickFormProps, QuickFormState } from './QuickForm';
-import ValidatedForm, {
+import { BaseForm } from './BaseForm';
+import { Quick, QuickFormProps, QuickFormState } from './QuickForm';
+import {
+  Validated,
   ValidatedFormProps,
   ValidatedFormState,
 } from './ValidatedForm';
@@ -11,4 +12,5 @@ export type ValidatedQuickFormProps<Model> = QuickFormProps<Model> &
 export type ValidatedQuickFormState<Model> = QuickFormState<Model> &
   ValidatedFormState<Model>;
 
-export default ValidatedForm.Validated(QuickForm.Quick(BaseForm));
+export const ValidatedQuickForm = Validated(Quick(BaseForm));
+export type ValidatedQuickForm = typeof ValidatedQuickForm;

@@ -1,11 +1,11 @@
 import invariant from 'invariant';
 import { useContext } from 'react';
 
-import contextReference from './context';
 import { Context } from './types';
+import { context as contextReference } from './context';
 
-export default function useForm<Model extends {}>() {
-  const context = useContext(contextReference) as Context<Model>;
+export function useForm<Model>(): Context<Model> {
+  const context = useContext(contextReference);
   invariant(context !== null, 'useForm must be used within a form.');
   return context;
 }

@@ -9,6 +9,6 @@ function randomIdsGenerator(prefix: string) {
 
 const randomIdPrefix = randomIdsGenerator('uniforms');
 
-export default function randomIds(prefix = randomIdPrefix()) {
+export function randomIds(prefix = randomIdPrefix()) {
   return randomIdsGenerator(prefix);
 }

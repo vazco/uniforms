@@ -1,24 +1,24 @@
 import React, { ComponentType } from 'react';
 
-import BaseForm, { BaseFormProps, BaseFormState } from './BaseForm';
+import { BaseForm, BaseFormProps, BaseFormState } from './BaseForm';
 
-export type QuickFormProps<Model extends {}> = BaseFormProps<Model> & {
-  autoField?: ComponentType<{ name?: string }>;
+export type QuickFormProps<Model> = BaseFormProps<Model> & {
+  autoField?: ComponentType<{ name: string }>;
   errorsField?: ComponentType;
   submitField?: ComponentType;
 };
 
-export type QuickFormState<Model extends {}> = BaseFormState<Model>;
+export type QuickFormState<Model> = BaseFormState<Model>;
 
-function Quick<Base extends typeof BaseForm>(base: Base) {
+export function Quick<Base extends typeof BaseForm>(Base: Base) {
   // @ts-ignore: Mixin class problem.
   class QuickForm<
-    Model extends {} = Record<string, any>,
+    Model,
     Props extends QuickFormProps<Model> = QuickFormProps<Model>,
     State extends QuickFormState<Model> = QuickFormState<Model>
-  > extends base<Model, Props, State> {
+  > extends Base<Model, Props, State> {
     static Quick = Quick;
-    static displayName = `Quick${base.displayName}`;
+    static displayName = `Quick${Base.displayName}`;
 
     getNativeFormProps(): Record<string, any> {
       const {
@@ -31,7 +31,7 @@ function Quick<Base extends typeof BaseForm>(base: Base) {
       if (!props.children) {
         props.children = this.getContextSchema()
           .getSubfields()
-          .map((key: any) => <AutoField key={key} name={key} />)
+          .map(key => <AutoField key={key} name={key} />)
           .concat([
             <ErrorsField key="$ErrorsField" />,
             <SubmitField key="$SubmitField" />,
@@ -41,7 +41,7 @@ function Quick<Base extends typeof BaseForm>(base: Base) {
       return props;
     }
 
-    getAutoField(): ComponentType<{ name?: string }> {
+    getAutoField(): ComponentType<{ name: string }> {
       return () => null;
     }
 
@@ -57,4 +57,5 @@ function Quick<Base extends typeof BaseForm>(base: Base) {
   return QuickForm;
 }
 
-export default Quick(BaseForm);
+export const QuickForm = Quick(BaseForm);
+export type QuickForm = typeof QuickForm;

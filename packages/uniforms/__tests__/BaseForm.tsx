@@ -35,7 +35,7 @@ describe('BaseForm', () => {
   });
 
   it('have correct context', () => {
-    const wrapper = mount<BaseForm>(
+    const wrapper = mount<BaseForm<any>>(
       <BaseForm error={error} model={model} schema={schema} />,
     );
 
@@ -62,7 +62,7 @@ describe('BaseForm', () => {
   });
 
   describe('when rendered', () => {
-    const wrapper = mount<BaseForm>(
+    const wrapper = mount<BaseForm<any>>(
       <BaseForm
         disabled
         label={false}
@@ -115,7 +115,7 @@ describe('BaseForm', () => {
   });
 
   describe('when changed', () => {
-    const wrapper = mount<BaseForm>(
+    const wrapper = mount<BaseForm<any>>(
       <BaseForm
         model={model}
         schema={schema}
@@ -215,7 +215,7 @@ describe('BaseForm', () => {
   });
 
   describe('when reset', () => {
-    const wrapper = mount<BaseForm>(<BaseForm schema={schema} />);
+    const wrapper = mount<BaseForm<any>>(<BaseForm schema={schema} />);
 
     it('increase `resetCount`', () => {
       wrapper.instance().reset();
@@ -225,7 +225,7 @@ describe('BaseForm', () => {
   });
 
   describe('when submitted', () => {
-    const wrapper = mount<BaseForm>(
+    const wrapper = mount<BaseForm<any>>(
       <BaseForm model={model} schema={schema} onSubmit={onSubmit} />,
     );
 
@@ -295,7 +295,7 @@ describe('BaseForm', () => {
       const onSubmitValue = 'value';
       onSubmit.mockReturnValueOnce(Promise.resolve(onSubmitValue));
 
-      const wrapper = mount<BaseForm>(
+      const wrapper = mount<BaseForm<any>>(
         <BaseForm
           model={model}
           schema={schema}
@@ -316,7 +316,7 @@ describe('BaseForm', () => {
       const onSubmitError = 'error';
       onSubmit.mockReturnValueOnce(Promise.reject(onSubmitError));
 
-      const wrapper = mount<BaseForm>(
+      const wrapper = mount<BaseForm<any>>(
         <BaseForm
           model={model}
           schema={schema}

@@ -42,4 +42,7 @@ function register(...props: string[]) {
   });
 }
 
-export default Object.assign(filter, { register, registered });
+export const filterDOMProps = Object.assign(filter, {
+  register,
+  registered,
+});

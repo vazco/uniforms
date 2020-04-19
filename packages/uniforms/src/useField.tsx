@@ -2,9 +2,9 @@ import get from 'lodash/get';
 import mapValues from 'lodash/mapValues';
 import { useCallback, useEffect, useMemo } from 'react';
 
-import joinName from './joinName';
-import useForm from './useForm';
 import { GuaranteedProps } from './types';
+import { joinName } from './joinName';
+import { useForm } from './useForm';
 
 function propagate(
   prop: unknown,
@@ -24,7 +24,7 @@ function propagate(
   return [resultValue, schemaValue];
 }
 
-export default function useField<
+export function useField<
   Props extends Record<string, any>,
   Value = Props['value'],
   Model = Record<string, any>

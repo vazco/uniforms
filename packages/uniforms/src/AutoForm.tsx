@@ -4,51 +4,50 @@ import omit from 'lodash/omit';
 import set from 'lodash/set';
 
 // FIXME: This import is needed to correctly build AutoForm.d.ts file.
-import BaseForm from './BaseForm';
-import ValidatedQuickForm, {
+import { BaseForm } from './BaseForm';
+import { DeepPartial } from './types';
+import {
+  ValidatedQuickForm,
   ValidatedQuickFormProps,
   ValidatedQuickFormState,
 } from './ValidatedQuickForm';
-import { DeepPartial } from './types';
 
-export type AutoFormProps<Model extends {}> = ValidatedQuickFormProps<Model> & {
+export type AutoFormProps<Model> = ValidatedQuickFormProps<Model> & {
   onChangeModel?(model: DeepPartial<Model>): void;
 };
 
-export type AutoFormState<Model extends {}> = ValidatedQuickFormState<Model> & {
+export type AutoFormState<Model> = ValidatedQuickFormState<Model> & {
   model: DeepPartial<Model>;
   modelSync: DeepPartial<Model>;
 };
 
-function Auto<Base extends typeof ValidatedQuickForm>(base: Base) {
+export function Auto<Base extends typeof ValidatedQuickForm>(Base: Base) {
   // @ts-ignore: Mixin class problem.
   class AutoForm<
-    Model extends {} = Record<string, any>,
+    Model,
     Props extends AutoFormProps<Model> = AutoFormProps<Model>,
     State extends AutoFormState<Model> = AutoFormState<Model>
-  > extends base<Model, Props, State> {
+  > extends Base<Model, Props, State> {
     static Auto = Auto;
-    static displayName = `Auto${base.displayName}`;
+    static displayName = `Auto${Base.displayName}`;
 
     constructor(props: Props) {
       super(props);
 
       this.state = {
         ...this.state,
-
         model: props.model,
         modelSync: props.model,
       };
     }
 
-    componentDidUpdate(prevProps: Props) {
+    componentDidUpdate(prevProps: Props, prevState: State, snapshot: never) {
       const { model } = this.props;
       if (!isEqual(model, prevProps.model)) {
         this.setState({ model, modelSync: model });
       }
 
-      // @ts-ignore
-      super.componentDidUpdate(...arguments);
+      super.componentDidUpdate(prevProps, prevState, snapshot);
     }
 
     getNativeFormProps(): Record<string, any> {
@@ -78,7 +77,7 @@ function Auto<Base extends typeof ValidatedQuickForm>(base: Base) {
         ...super.__reset(state),
         model: this.props.model,
         modelSync: this.props.model,
-      };
+      } as Partial<State>;
     }
 
     onValidate() {
@@ -89,4 +88,5 @@ function Auto<Base extends typeof ValidatedQuickForm>(base: Base) {
   return AutoForm;
 }
 
-export default Auto(ValidatedQuickForm);
+export const AutoForm = Auto(ValidatedQuickForm);
+export type AutoForm = typeof AutoForm;

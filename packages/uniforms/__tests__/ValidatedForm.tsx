@@ -34,11 +34,11 @@ describe('ValidatedForm', () => {
   });
 
   describe('on validation', () => {
-    let wrapper: ReactWrapper<typeof ValidatedForm>;
-    let form;
+    let wrapper = mount<ValidatedForm>(<ValidatedForm schema={schema} />);
+    let form = wrapper.instance();
 
     beforeEach(() => {
-      wrapper = mount<typeof ValidatedForm>(
+      wrapper = mount<ValidatedForm>(
         <ValidatedForm model={model} schema={schema} onValidate={onValidate} />,
       );
       form = wrapper.instance();
@@ -151,7 +151,7 @@ describe('ValidatedForm', () => {
   describe('when submitted', () => {
     let wrapper;
     beforeEach(() => {
-      wrapper = mount<typeof ValidatedForm>(
+      wrapper = mount<ValidatedForm>(
         <ValidatedForm
           model={model}
           schema={schema}
@@ -218,7 +218,7 @@ describe('ValidatedForm', () => {
   describe('on change', () => {
     describe('in `onChange` mode', () => {
       it('validates', () => {
-        const wrapper = mount<typeof ValidatedForm>(
+        const wrapper = mount<ValidatedForm>(
           <ValidatedForm model={model} schema={schema} validate="onChange" />,
         );
         wrapper.instance().getContext().onChange('key', 'value');
@@ -229,7 +229,7 @@ describe('ValidatedForm', () => {
 
     describe('in `onSubmit` mode', () => {
       it('does not validate', () => {
-        const wrapper = mount<typeof ValidatedForm>(
+        const wrapper = mount<ValidatedForm>(
           <ValidatedForm model={model} schema={schema} validate="onSubmit" />,
         );
         wrapper.instance().getContext().onChange('key', 'value');
@@ -241,7 +241,7 @@ describe('ValidatedForm', () => {
     describe('in `onChangeAfterSubmit` mode', () => {
       let wrapper;
       beforeEach(() => {
-        wrapper = mount<typeof ValidatedForm>(
+        wrapper = mount<ValidatedForm>(
           <ValidatedForm
             model={model}
             schema={schema}
@@ -268,7 +268,7 @@ describe('ValidatedForm', () => {
 
   describe('on reset', () => {
     it('removes `error`', () => {
-      const wrapper = mount<typeof ValidatedForm>(
+      const wrapper = mount<ValidatedForm>(
         <ValidatedForm model={model} onSubmit={onSubmit} schema={schema} />,
       );
       validator.mockImplementationOnce(() => {
@@ -288,7 +288,7 @@ describe('ValidatedForm', () => {
     describe('in `onChange` mode', () => {
       let wrapper;
       beforeEach(() => {
-        wrapper = mount<typeof ValidatedForm>(
+        wrapper = mount<ValidatedForm>(
           <ValidatedForm model={model} schema={schema} validate="onChange" />,
         );
       });
@@ -317,7 +317,7 @@ describe('ValidatedForm', () => {
     describe('in `onSubmit` mode', () => {
       let wrapper;
       beforeEach(() => {
-        wrapper = mount<typeof ValidatedForm>(
+        wrapper = mount<ValidatedForm>(
           <ValidatedForm model={model} schema={schema} validate="onSubmit" />,
         );
       });
@@ -341,7 +341,7 @@ describe('ValidatedForm', () => {
     describe('in any mode', () => {
       let wrapper;
       beforeEach(() => {
-        wrapper = mount<typeof ValidatedForm>(
+        wrapper = mount<ValidatedForm>(
           <ValidatedForm model={model} schema={schema} />,
         );
       });

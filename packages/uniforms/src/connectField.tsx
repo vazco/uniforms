@@ -2,11 +2,11 @@ import React, { ComponentType, FunctionComponent } from 'react';
 import mapValues from 'lodash/mapValues';
 import some from 'lodash/some';
 
-import contextReference from './context';
-import useField from './useField';
 import { GuaranteedProps } from './types';
+import { context as contextReference } from './context';
+import { useField } from './useField';
 
-export default function connectField<
+export function connectField<
   Props extends Partial<GuaranteedProps<Value>>,
   Value = Props['value']
 >(

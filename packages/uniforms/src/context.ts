@@ -2,4 +2,4 @@ import { createContext } from 'react';
 
 import { Context } from './types';
 
-export default createContext<Context | null>(null);
+export const context = createContext<Context<any> | null>(null);

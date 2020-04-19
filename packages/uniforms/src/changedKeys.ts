@@ -1,9 +1,9 @@
 import isEqual from 'lodash/isEqual';
 import xorWith from 'lodash/xorWith';
 
-import joinName from './joinName';
+import { joinName } from './joinName';
 
-export default function changedKeys<T>(root: string, valueA?: T, valueB?: T) {
+export function changedKeys<T>(root: string, valueA?: T, valueB?: T) {
   if (!valueA || valueA !== Object(valueA) || valueA instanceof Date)
     return isEqual(valueA, valueB) ? [] : [root];
   if (!valueB)

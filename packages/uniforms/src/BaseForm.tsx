@@ -5,14 +5,14 @@ import isFunction from 'lodash/isFunction';
 import omit from 'lodash/omit';
 import set from 'lodash/set';
 
-import Bridge from './Bridge';
-import changedKeys from './changedKeys';
-import context from './context';
-import createSchemaBridge from './createSchemaBridge';
-import randomIds from './randomIds';
+import { Bridge } from './Bridge';
 import { ChangedMap, Context, DeepPartial, ModelTransformMode } from './types';
+import { changedKeys } from './changedKeys';
+import { context } from './context';
+import { createSchemaBridge } from './createSchemaBridge';
+import { randomIds } from './randomIds';
 
-export type BaseFormProps<Model extends {}> = {
+export type BaseFormProps<Model> = {
   autosave: boolean;
   autosaveDelay: number;
   disabled?: boolean;
@@ -27,14 +27,14 @@ export type BaseFormProps<Model extends {}> = {
   noValidate: boolean;
   onChange?(key: string, value: any): void;
   onSubmit?(model: DeepPartial<Model>): any;
-  onSubmitSuccess?(result: any): void;
   onSubmitFailure?(result: any): void;
+  onSubmitSuccess?(result: any): void;
   placeholder?: boolean;
   schema: any;
   showInlineError?: boolean;
 };
 
-export type BaseFormState<Model extends {}> = {
+export type BaseFormState<Model> = {
   bridge: Bridge;
   changed: boolean;
   changedMap: ChangedMap<Model>;
@@ -42,8 +42,8 @@ export type BaseFormState<Model extends {}> = {
   submitting: boolean;
 };
 
-export default class BaseForm<
-  Model extends {} = Record<string, any>,
+export class BaseForm<
+  Model,
   Props extends BaseFormProps<Model> = BaseFormProps<Model>,
   State extends BaseFormState<Model> = BaseFormState<Model>
 > extends Component<Props, State> {
@@ -83,10 +83,10 @@ export default class BaseForm<
         : model;
   }
 
-  static getDerivedStateFromProps(
-    { schema }: BaseFormProps<any>,
-    { bridge }: BaseFormState<any>,
-  ) {
+  static getDerivedStateFromProps<Model>(
+    { schema }: BaseFormProps<Model>,
+    { bridge }: BaseFormState<Model>,
+  ): Partial<BaseFormState<Model>> {
     // TODO: It updates the state each time. Add bridge.isSame(schema)?
     return { bridge: createSchemaBridge(schema) };
   }
@@ -95,7 +95,7 @@ export default class BaseForm<
     this.mounted = true;
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {}
+  componentDidUpdate(prevProps: Props, prevState: State, snapshot: never) {}
 
   componentWillUnmount() {
     this.mounted = false;
@@ -108,7 +108,7 @@ export default class BaseForm<
   submit: (event?: SyntheticEvent) => Promise<any>;
   randomId: () => string;
 
-  getContext(): Context {
+  getContext(): Context<Model> {
     return {
       changed: this.state.changed,
       changedMap: this.state.changedMap,
@@ -125,19 +125,19 @@ export default class BaseForm<
     };
   }
 
-  getContextName() {
+  getContextName(): Context<Model>['name'] {
     return [];
   }
 
-  getContextError() {
+  getContextError(): Context<Model>['error'] {
     return this.props.error;
   }
 
-  getContextModel() {
+  getContextModel(): Context<Model>['model'] {
     return this.getModel('form');
   }
 
-  getContextState(): Context['state'] {
+  getContextState(): Context<Model>['state'] {
     return {
       disabled: !!this.props.disabled,
       label: !!this.props.label,
@@ -146,22 +146,22 @@ export default class BaseForm<
     };
   }
 
-  getContextSchema() {
+  getContextSchema(): Context<Model>['schema'] {
     return this.state.bridge;
   }
 
-  getContextOnChange() {
+  getContextOnChange(): Context<Model>['onChange'] {
     return this.onChange;
   }
 
-  getContextOnSubmit() {
+  getContextOnSubmit(): Context<Model>['onSubmit'] {
     return this.onSubmit;
   }
 
   getModel(
     mode?: ModelTransformMode,
     model: DeepPartial<Model> = this.props.model,
-  ) {
+  ): Context<Model>['model'] {
     return model;
   }
 
@@ -229,12 +229,13 @@ export default class BaseForm<
     return {
       changed: false,
       changedMap: Object.create(null),
-      submitting: false,
       resetCount: state.resetCount + 1,
-    };
+      submitting: false,
+    } as Partial<State>;
   }
 
   onReset() {
+    // @ts-ignore
     this.setState(this.__reset);
   }
 

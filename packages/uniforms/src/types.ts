@@ -1,12 +1,12 @@
 import { SyntheticEvent } from 'react';
 
-import Bridge from './Bridge';
+import { Bridge } from './Bridge';
 
 export type ChangedMap<T> = T extends {}
   ? { [P in keyof T]?: ChangedMap<T[P]> }
   : Record<string, void>;
 
-export type Context<Model extends {} = Record<string, any>> = {
+export type Context<Model> = {
   changed: boolean;
   changedMap: ChangedMap<Model>;
   error: any;
@@ -49,8 +49,8 @@ export type GuaranteedProps<Value> = {
 
 export type ModelTransformMode = 'form' | 'submit' | 'validate';
 
+export type Override<T, U> = U & Omit<T, keyof U>;
+
 export type Partialize<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
 export type ValidateMode = 'onChange' | 'onChangeAfterSubmit' | 'onSubmit';
-
-export type Override<T, U> = U & Omit<T, keyof U>;

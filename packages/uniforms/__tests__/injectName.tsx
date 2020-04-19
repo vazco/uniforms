@@ -49,7 +49,7 @@ describe('injectName', () => {
       },
       submitting: false,
       validating: false,
-    } as Context,
+    } as Context<any>,
   };
 
   type TestProps = { children?: ReactNode };

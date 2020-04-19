@@ -1,9 +1,9 @@
 import get from 'lodash/get';
 import { Children, ReactElement, ReactNode, cloneElement } from 'react';
 
-import joinName from './joinName';
+import { joinName } from './joinName';
 
-export default function injectName(
+export function injectName(
   name: string,
   children: ReactNode,
   parent?: ReactNode,

@@ -1,6 +1,6 @@
 import invariant from 'invariant';
 
-import Bridge from './Bridge';
+import { Bridge } from './Bridge';
 
 const registered: typeof Bridge[] = [];
 
@@ -36,4 +36,7 @@ function register(bridge: typeof Bridge) {
   registered.unshift(bridge);
 }
 
-export default Object.assign(create, { register, registered });
+export const createSchemaBridge = Object.assign(create, {
+  register,
+  registered,
+});

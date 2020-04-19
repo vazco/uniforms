@@ -28,7 +28,7 @@ describe('AutoForm', () => {
   });
 
   describe('when changed', () => {
-    const wrapper = mount<typeof AutoForm>(
+    const wrapper = mount<AutoForm>(
       <AutoForm
         onChange={onChange}
         onChangeModel={onChangeModel}
@@ -56,7 +56,7 @@ describe('AutoForm', () => {
       const field = () => null;
       const Field = connectField(field);
 
-      mount<typeof AutoForm>(
+      mount<AutoForm>(
         <AutoForm
           onChange={onChange}
           schema={schema}
@@ -71,7 +71,7 @@ describe('AutoForm', () => {
     });
 
     it('skips `onSubmit` until rendered (`autosave` = true)', async () => {
-      const wrapper = mount<typeof AutoForm>(
+      const wrapper = mount<AutoForm>(
         <AutoForm onSubmit={onSubmit} schema={schema} autosave />,
       );
 
@@ -87,7 +87,7 @@ describe('AutoForm', () => {
 
   describe('when reset', () => {
     const intialModel = { a: 'foo' };
-    const wrapper = mount<typeof AutoForm>(
+    const wrapper = mount<AutoForm>(
       <AutoForm
         onSubmit={onSubmit}
         schema={schema}
@@ -113,7 +113,7 @@ describe('AutoForm', () => {
   });
 
   describe('when updated', () => {
-    const wrapper = mount<typeof AutoForm>(<AutoForm schema={schema} />);
+    const wrapper = mount<AutoForm>(<AutoForm schema={schema} />);
 
     it('updates', () => {
       wrapper.setProps({ model: {} });

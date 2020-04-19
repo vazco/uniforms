@@ -5,10 +5,10 @@ import omit from 'lodash/omit';
 import set from 'lodash/set';
 import { SyntheticEvent } from 'react';
 
-import BaseForm, { BaseFormProps, BaseFormState } from './BaseForm';
-import { DeepPartial, ValidateMode } from './types';
+import { BaseForm, BaseFormProps, BaseFormState } from './BaseForm';
+import { Context, DeepPartial, ValidateMode } from './types';
 
-export type ValidatedFormProps<Model extends {}> = BaseFormProps<Model> & {
+export type ValidatedFormProps<Model> = BaseFormProps<Model> & {
   onValidate: (
     model: DeepPartial<Model>,
     error: any,
@@ -18,25 +18,24 @@ export type ValidatedFormProps<Model extends {}> = BaseFormProps<Model> & {
   validator?: any;
 };
 
-export type ValidatedFormState<Model extends {}> = BaseFormState<Model> & {
+export type ValidatedFormState<Model> = BaseFormState<Model> & {
   error: any;
   validate: boolean;
   validating: boolean;
   validator: (model: DeepPartial<Model>) => void | never;
 };
 
-function Validated<Base extends typeof BaseForm>(base: Base) {
+export function Validated<Base extends typeof BaseForm>(Base: Base) {
   // @ts-ignore: Mixin class problem.
   class ValidatedForm<
-    Model extends {} = Record<string, any>,
+    Model,
     Props extends ValidatedFormProps<Model> = ValidatedFormProps<Model>,
     State extends ValidatedFormState<Model> = ValidatedFormState<Model>
-  > extends base<Model, Props, State> {
+  > extends Base<Model, Props, State> {
     static Validated = Validated;
-    static displayName = `Validated${base.displayName}`;
-
+    static displayName = `Validated${Base.displayName}`;
     static defaultProps = {
-      ...base.defaultProps,
+      ...Base.defaultProps,
 
       onValidate(model, error, callback) {
         callback();
@@ -53,11 +52,10 @@ function Validated<Base extends typeof BaseForm>(base: Base) {
 
       this.state = {
         ...this.state,
-
         error: null,
         validate: false,
         validating: false,
-        validator: this.getContextSchema().getValidator(this.props.validator),
+        validator: this.getContextSchema().getValidator(props.validator),
       };
 
       this.onValidate = this.validate = this.onValidate.bind(this);
@@ -66,11 +64,11 @@ function Validated<Base extends typeof BaseForm>(base: Base) {
       );
     }
 
-    getContextError() {
+    getContextError(): Context<Model>['error'] {
       return super.getContextError() || this.state.error;
     }
 
-    getContext() {
+    getContext(): Context<Model> {
       return {
         ...super.getContext(),
         validating: this.state.validating,
@@ -125,7 +123,7 @@ function Validated<Base extends typeof BaseForm>(base: Base) {
         error: null,
         validate: false,
         validating: false,
-      };
+      } as Partial<State>;
     }
 
     onSubmit(event?: SyntheticEvent) {
@@ -214,4 +212,5 @@ function shouldRevalidate(inProps: ValidateMode, inState: boolean) {
   );
 }
 
-export default Validated(BaseForm);
+export const ValidatedForm = Validated(BaseForm);
+export type ValidatedForm = typeof ValidatedForm;

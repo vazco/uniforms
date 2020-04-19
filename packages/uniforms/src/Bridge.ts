@@ -1,6 +1,6 @@
 import invariant from 'invariant';
 
-export default abstract class Bridge {
+export abstract class Bridge {
   constructor(...args: any[]) {
     invariant(
       this.constructor !== Bridge,
