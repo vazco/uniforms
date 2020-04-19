@@ -1,3 +1,7 @@
+## Next
+
+- **Breaking:** Removed `BaseForm.getChangedKeys`. Use `changedKeys` directly.
+
 ## [v3.0.0-alpha.2](https://github.com/vazco/uniforms/tree/v3.0.0-alpha.2) (2020-04-08)
 
 - **Breaking:** Moved transpiled files from the packages roots (e.g. `import BaseForm from 'uniforms/BaseForm'`) to `es5` directories. Try not to rely on that and use let your bundler do its best (e.g. `import { BaseForm } from 'uniforms'`).

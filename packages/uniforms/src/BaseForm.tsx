@@ -165,10 +165,6 @@ export default class BaseForm<
     return model;
   }
 
-  getChangedKeys<T>(root: string, valueA?: T, valueB?: T) {
-    return changedKeys(root, valueA, valueB);
-  }
-
   getNativeFormProps(): Record<string, any> {
     const props = omit(this.props, [
       'autosave',
@@ -197,7 +193,7 @@ export default class BaseForm<
   onChange(key: string, value: any) {
     // Do not set `changed` before componentDidMount
     if (this.mounted) {
-      const keys = this.getChangedKeys(key, value, get(this.getModel(), key));
+      const keys = changedKeys(key, value, get(this.getModel(), key));
       if (keys.length !== 0) {
         this.setState(state => ({
           changed: true,
