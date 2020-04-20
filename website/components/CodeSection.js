@@ -10,8 +10,8 @@ export default function CodeSection({ language, replace, section, source }) {
   // Cut out only desired section.
   if (section) {
     const pattern = new RegExp(
-      `// <${section}>\\s(.*?)\\s// </${section}>\\s`,
-      'gs'
+      `// <${section}>\\s([\\s\\S]*?)\\s// </${section}>\\s`,
+      'g'
     );
 
     source = source
@@ -29,7 +29,7 @@ export default function CodeSection({ language, replace, section, source }) {
   // Replace all mapped things.
   if (replace)
     for (const [pattern, value] of Object.entries(replace))
-      source = source.replace(new RegExp(pattern, 'gs'), value);
+      source = source.replace(new RegExp(pattern, 'g'), value);
 
   return (
     <components.pre>
