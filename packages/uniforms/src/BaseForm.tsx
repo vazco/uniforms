@@ -26,9 +26,7 @@ export type BaseFormProps<Model> = {
   ) => DeepPartial<Model>;
   noValidate: boolean;
   onChange?(key: string, value: any): void;
-  onSubmit?(model: DeepPartial<Model>): any;
-  onSubmitFailure?(result: any): void;
-  onSubmitSuccess?(result: any): void;
+  onSubmit(model: DeepPartial<Model>): Promise<any>;
   placeholder?: boolean;
   schema: any;
   showInlineError?: boolean;
@@ -54,6 +52,9 @@ export class BaseForm<
     label: true,
     model: Object.create(null),
     noValidate: true,
+    onSubmit() {
+      return Promise.resolve();
+    },
   };
 
   constructor(props: Props) {
@@ -245,24 +246,10 @@ export class BaseForm<
       event.stopPropagation();
     }
 
-    const result =
-      this.props.onSubmit && this.props.onSubmit(this.getModel('submit'));
-
-    // Set the `submitting` state only if onSubmit is async so we don't cause an unnecessary re-render
-    let submitting: Promise<any>;
-    if (isPromiseLike(result)) {
-      this.setState({ submitting: true });
-      submitting = result.finally(() => {
-        this.setState({ submitting: false });
-      });
-    } else {
-      submitting = Promise.resolve(result);
-    }
-
-    return submitting.then(
-      this.props.onSubmitSuccess,
-      this.props.onSubmitFailure,
-    );
+    this.setState({ submitting: true });
+    return this.props.onSubmit(this.getModel('submit')).finally(() => {
+      this.setState({ submitting: false });
+    });
   }
 
   render() {
@@ -272,8 +259,4 @@ export class BaseForm<
       </context.Provider>
     );
   }
-}
-
-function isPromiseLike(value: any): value is Promise<any> {
-  return !!value && isFunction(value.then);
 }

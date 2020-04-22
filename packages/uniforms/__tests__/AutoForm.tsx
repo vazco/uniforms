@@ -9,7 +9,7 @@ jest.mock('meteor/check');
 
 describe('AutoForm', () => {
   const onChangeModel = jest.fn();
-  const validator = jest.fn();
+  const validator = jest.fn(() => Promise.resolve());
   const onChange = jest.fn();
   const onSubmit = jest.fn();
   const model = { a: '1' };
@@ -21,10 +21,10 @@ describe('AutoForm', () => {
   });
 
   beforeEach(() => {
-    onChange.mockReset();
-    onChangeModel.mockReset();
-    onSubmit.mockReset();
-    validator.mockReset();
+    onChange.mockClear();
+    onChangeModel.mockClear();
+    onSubmit.mockClear();
+    validator.mockClear();
   });
 
   describe('when changed', () => {

@@ -1,19 +1,16 @@
 import cloneDeep from 'lodash/cloneDeep';
+import identity from 'lodash/identity';
 import isEqual from 'lodash/isEqual';
 import noop from 'lodash/noop';
 import omit from 'lodash/omit';
 import set from 'lodash/set';
-import { SyntheticEvent } from 'react';
+import { Component, SyntheticEvent } from 'react';
 
 import { BaseForm, BaseFormProps, BaseFormState } from './BaseForm';
 import { Context, DeepPartial, ValidateMode } from './types';
 
 export type ValidatedFormProps<Model> = BaseFormProps<Model> & {
-  onValidate: (
-    model: DeepPartial<Model>,
-    error: any,
-    callback: (error?: any) => void,
-  ) => void;
+  onValidate(model: DeepPartial<Model>, error: any | null): Promise<void>;
   validate: ValidateMode;
   validator?: any;
 };
@@ -22,7 +19,7 @@ export type ValidatedFormState<Model> = BaseFormState<Model> & {
   error: any;
   validate: boolean;
   validating: boolean;
-  validator: (model: DeepPartial<Model>) => void | never;
+  validator(model: DeepPartial<Model>): Promise<void>;
 };
 
 export function Validated<Base extends typeof BaseForm>(Base: Base) {
@@ -36,11 +33,9 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
     static displayName = `Validated${Base.displayName}`;
     static defaultProps = {
       ...Base.defaultProps,
-
-      onValidate(model, error, callback) {
-        callback();
+      onValidate(model, error) {
+        return error ? Promise.reject(error) : Promise.resolve();
       },
-
       validate: 'onChangeAfterSubmit',
     };
 
@@ -92,7 +87,7 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
           state => ({ validator: state.bridge.getValidator(validator) }),
           () => {
             if (shouldRevalidate(validate, this.state.validate)) {
-              this.onValidate().catch(noop);
+              this.onValidate();
             }
           },
         );
@@ -100,19 +95,14 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
         !isEqual(model, prevProps.model) &&
         shouldRevalidate(validate, this.state.validate)
       ) {
-        this.onValidateModel(model).catch(noop);
+        this.onValidateModel(model);
       }
     }
 
     onChange(key: string, value: any) {
       if (shouldRevalidate(this.props.validate, this.state.validate)) {
-        this.onValidate(key, value).catch(noop);
+        this.onValidate(key, value);
       }
-
-      // FIXME: https://github.com/vazco/uniforms/issues/293
-      // if (this.props.validate === 'onSubmit' && this.state.validate) {
-      //     this.setState(() => ({error: null}));
-      // }
 
       super.onChange(key, value);
     }
@@ -132,32 +122,17 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
         event.stopPropagation();
       }
 
-      const promise: Promise<void> = new Promise((resolve, reject) => {
-        this.setState(
-          () => ({ submitting: true, validate: true }),
-          () => {
-            this.onValidate().then(() => {
-              super.onSubmit().then(resolve, error => {
-                this.setState({ error });
-                reject(error);
-              });
-            }, reject);
-          },
+      this.setState({ validate: true });
+
+      const promise = this.onValidate().then(() => super.onSubmit());
+
+      promise.catch(error => {
+        this.setState((state, props) =>
+          state.error === error
+            ? null
+            : { error: props.error === error ? null : error },
         );
       });
-
-      promise
-        // `onSubmit` should never reject, so we ignore this rejection.
-        .catch(noop)
-        .then(() => {
-          // It can be already unmounted.
-          if (this.mounted) {
-            // If validation fails, or `super.onSubmit` doesn't touch `submitting`, we need to reset it.
-            this.setState(state =>
-              state.submitting ? { submitting: false } : null,
-            );
-          }
-        });
 
       return promise;
     }
@@ -171,35 +146,23 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
       return this.onValidateModel(model);
     }
 
-    onValidateModel(model: Props['model']) {
-      model = this.getModel('validate', model);
-
-      let catched = this.props.error || null;
-      try {
-        this.state.validator(model);
-      } catch (error) {
-        catched = error;
-      }
-
+    onValidateModel(originalModel: Props['model']) {
       this.setState({ validating: true });
-      return new Promise((resolve, reject) => {
-        this.props.onValidate(model, catched, (error = catched) => {
-          // Do not copy error from props to state.
-          this.setState(
-            () => ({
-              error: error === this.props.error ? null : error,
-              validating: false,
-            }),
-            () => {
-              if (error) {
-                reject(error);
-              } else {
-                resolve();
-              }
-            },
-          );
-        });
+
+      const model = this.getModel('validate', originalModel);
+      const promise = this.state
+        .validator(model)
+        .catch(identity)
+        .then(error => this.props.onValidate(model, error || null));
+
+      promise.catch(identity).then(error => {
+        this.setState((state, props) => ({
+          error: props.error === error ? null : error || null,
+          validating: false,
+        }));
       });
+
+      return promise;
     }
   }
 

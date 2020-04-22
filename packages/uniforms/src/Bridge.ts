@@ -90,7 +90,7 @@ export abstract class Bridge {
     );
   }
 
-  getValidator(options?: any): (model: Record<string, any>) => void {
+  getValidator(options?: any): (model: Record<string, any>) => Promise<void> {
     return invariant(
       false,
       '%s have not implemented `getValidator` method (args=%o).',

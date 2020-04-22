@@ -23,15 +23,11 @@ describe('BaseForm', () => {
   };
 
   const onChange = jest.fn();
-  const onSubmit = jest.fn();
-  const onSubmitSuccess = jest.fn();
-  const onSubmitFailure = jest.fn();
+  const onSubmit = jest.fn(() => Promise.resolve());
 
   afterEach(() => {
-    onChange.mockReset();
-    onSubmit.mockReset();
-    onSubmitSuccess.mockReset();
-    onSubmitFailure.mockReset();
+    onChange.mockClear();
+    onSubmit.mockClear();
   });
 
   it('have correct context', () => {
@@ -255,20 +251,6 @@ describe('BaseForm', () => {
       wrapper.setProps({ modelTransform: undefined });
     });
 
-    it('without `onSubmit` calls only `onSubmitSuccess`', async () => {
-      wrapper.setProps({
-        onSubmit: undefined,
-        onSubmitSuccess,
-        onSubmitFailure,
-      });
-      wrapper.find('form').simulate('submit');
-
-      await new Promise(resolve => process.nextTick(resolve));
-      expect(onSubmit).not.toBeCalled();
-      expect(onSubmitSuccess).toBeCalledTimes(1);
-      expect(onSubmitFailure).not.toBeCalled();
-    });
-
     it('sets `submitting` state while submitting', async () => {
       let resolveSubmit = () => {};
       wrapper.setProps({
@@ -289,48 +271,6 @@ describe('BaseForm', () => {
 
       const context3 = wrapper.instance().getContext();
       expect(context3).toHaveProperty('submitting', false);
-    });
-
-    it('calls `onSubmitSuccess` with the returned value when `onSubmit` resolves', async () => {
-      const onSubmitValue = 'value';
-      onSubmit.mockReturnValueOnce(Promise.resolve(onSubmitValue));
-
-      const wrapper = mount<BaseForm<any>>(
-        <BaseForm
-          model={model}
-          schema={schema}
-          onSubmit={onSubmit}
-          onSubmitSuccess={onSubmitSuccess}
-        />,
-      );
-
-      wrapper.find('form').simulate('submit');
-
-      await new Promise(resolve => process.nextTick(resolve));
-
-      expect(onSubmitSuccess).toHaveBeenCalledTimes(1);
-      expect(onSubmitSuccess).toHaveBeenLastCalledWith(onSubmitValue);
-    });
-
-    it('calls `onSubmitFailure` with the thrown error when `onSubmit` rejects', async () => {
-      const onSubmitError = 'error';
-      onSubmit.mockReturnValueOnce(Promise.reject(onSubmitError));
-
-      const wrapper = mount<BaseForm<any>>(
-        <BaseForm
-          model={model}
-          schema={schema}
-          onSubmit={onSubmit}
-          onSubmitFailure={onSubmitFailure}
-        />,
-      );
-
-      wrapper.find('form').simulate('submit');
-
-      await new Promise(resolve => process.nextTick(resolve));
-
-      expect(onSubmitFailure).toHaveBeenCalledTimes(1);
-      expect(onSubmitFailure).toHaveBeenLastCalledWith(onSubmitError);
     });
   });
 });

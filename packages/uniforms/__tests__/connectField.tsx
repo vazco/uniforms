@@ -56,7 +56,7 @@ describe('connectField', () => {
 
   beforeEach(() => {
     Test.mockClear();
-    onChange.mockReset();
+    onChange.mockClear();
   });
 
   describe('when called', () => {
