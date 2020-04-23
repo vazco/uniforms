@@ -10,7 +10,7 @@ import { BaseForm, BaseFormProps, BaseFormState } from './BaseForm';
 import { Context, DeepPartial, ValidateMode } from './types';
 
 export type ValidatedFormProps<Model> = BaseFormProps<Model> & {
-  onValidate(model: DeepPartial<Model>, error: any | null): Promise<void>;
+  onValidate(model: DeepPartial<Model>, error: any): any;
   validate: ValidateMode;
   validator?: any;
 };
@@ -19,7 +19,7 @@ export type ValidatedFormState<Model> = BaseFormState<Model> & {
   error: any;
   validate: boolean;
   validating: boolean;
-  validator(model: DeepPartial<Model>): Promise<void>;
+  validator(model: DeepPartial<Model>): any;
 };
 
 export function Validated<Base extends typeof BaseForm>(Base: Base) {
@@ -33,8 +33,9 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
     static displayName = `Validated${Base.displayName}`;
     static defaultProps = {
       ...Base.defaultProps,
+      error: null,
       onValidate(model, error) {
-        return error ? Promise.reject(error) : Promise.resolve();
+        return error;
       },
       validate: 'onChangeAfterSubmit',
     };
@@ -124,17 +125,25 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
 
       this.setState({ validate: true });
 
-      const promise = this.onValidate().then(() => super.onSubmit());
+      const result = this.onValidate().then(error => {
+        if (error) {
+          return Promise.reject(error);
+        }
 
-      promise.catch(error => {
-        this.setState((state, props) =>
-          state.error === error
-            ? null
-            : { error: props.error === error ? null : error },
-        );
+        return super.onSubmit().catch(error => {
+          this.setState((state, props) =>
+            state.error === error
+              ? null
+              : { error: props.error === error ? null : error || null },
+          );
+
+          throw error;
+        });
       });
 
-      return promise;
+      result.catch(noop);
+
+      return result;
     }
 
     onValidate(key?: string, value?: any) {
@@ -147,22 +156,35 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
     }
 
     onValidateModel(originalModel: Props['model']) {
-      this.setState({ validating: true });
-
       const model = this.getModel('validate', originalModel);
-      const promise = this.state
-        .validator(model)
-        .catch(identity)
-        .then(error => this.props.onValidate(model, error || null));
 
-      promise.catch(identity).then(error => {
+      let result = this.state.validator(model) || null;
+      if (!(result instanceof Promise)) {
+        result = this.props.onValidate(model, result) || null;
+        if (!(result instanceof Promise)) {
+          this.setState((state, props) =>
+            state.error === result
+              ? null
+              : { error: props.error === result ? null : result },
+          );
+
+          return Promise.resolve(result);
+        }
+      } else {
+        result = result.then(error =>
+          this.props.onValidate(model, error || null),
+        );
+      }
+
+      this.setState({ validating: true });
+      return result.then(error => {
         this.setState((state, props) => ({
-          error: props.error === error ? null : error || null,
+          error: props.error === error ? null : error,
           validating: false,
         }));
-      });
 
-      return promise;
+        return error;
+      });
     }
   }
 

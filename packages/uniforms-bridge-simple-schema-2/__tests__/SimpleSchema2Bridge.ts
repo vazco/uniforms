@@ -331,9 +331,9 @@ describe('SimpleSchema2Bridge', () => {
   });
 
   describe('#getValidator', () => {
-    it('calls correct validator', async () => {
-      await expect(bridge.getValidator()({})).rejects.toThrow();
-      await expect(bridge.getValidator({})({})).rejects.toThrow();
+    it('calls correct validator', () => {
+      expect(bridge.getValidator()({})).not.toEqual(null);
+      expect(bridge.getValidator({})({})).not.toEqual(null);
     });
   });
 });

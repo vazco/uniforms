@@ -10,10 +10,8 @@ jest.mock('meteor/check');
 
 describe('ValidatedForm', () => {
   const onChange = jest.fn();
-  const onSubmit = jest.fn(async () => {});
-  const onValidate = jest.fn((model, error) =>
-    error ? Promise.reject(error) : Promise.resolve(),
-  );
+  const onSubmit = jest.fn();
+  const onValidate = jest.fn((model, error) => error);
   const validator = jest.fn();
   const validatorForSchema = jest.fn(() => validator);
 
@@ -58,7 +56,9 @@ describe('ValidatedForm', () => {
     });
 
     it('updates error state with errors from `validator`', async () => {
-      validator.mockImplementationOnce(() => Promise.reject(error));
+      validator.mockImplementationOnce(() => {
+        throw error;
+      });
 
       form.validate();
       await new Promise(resolve => process.nextTick(resolve));
@@ -66,38 +66,37 @@ describe('ValidatedForm', () => {
       expect(wrapper.instance().getContext().error).toBe(error);
     });
 
-    it('correctly calls `onValidate` when validation succeeds', async () => {
+    it('correctly calls `onValidate` when validation succeeds', () => {
       form.validate();
-      await new Promise(resolve => process.nextTick(resolve));
-
       expect(onValidate).toHaveBeenCalledTimes(1);
       expect(onValidate).toHaveBeenLastCalledWith(model, null);
     });
 
-    it('correctly calls `onValidate` when validation fails ', async () => {
-      validator.mockImplementationOnce(() => Promise.reject(error));
+    it('correctly calls `onValidate` when validation fails ', () => {
+      validator.mockImplementationOnce(() => {
+        throw error;
+      });
 
       form.validate();
-      await new Promise(resolve => process.nextTick(resolve));
 
       expect(onValidate).toHaveBeenCalledTimes(1);
       expect(onValidate).toHaveBeenLastCalledWith(model, error);
     });
 
     it('updates error state with async errors from `onValidate`', async () => {
-      onValidate.mockImplementationOnce(() => Promise.reject(error));
+      onValidate.mockImplementationOnce(() => error);
 
       form.validate();
-      await new Promise(resolve => process.nextTick(resolve));
 
       expect(wrapper.instance().getContext().error).toBe(error);
     });
 
     it('leaves error state alone when `onValidate` suppress `validator` errors', async () => {
-      validator.mockImplementationOnce(() => Promise.reject(error));
-      onValidate.mockImplementationOnce(() => Promise.resolve());
+      validator.mockImplementationOnce(() => {
+        throw error;
+      });
+      onValidate.mockImplementationOnce(() => null);
       form.validate();
-      await new Promise(resolve => process.nextTick(resolve));
 
       expect(validator).toHaveBeenCalled();
       expect(onValidate).toHaveBeenCalled();
@@ -127,13 +126,12 @@ describe('ValidatedForm', () => {
       expect(wrapper.instance().getContext().validating).toBe(false);
     });
 
-    it('uses `modelTransform`s `validate` mode', async () => {
+    it('uses `modelTransform`s `validate` mode', () => {
       const transformedModel = { b: 1 };
       const modelTransform = (mode, model) =>
         mode === 'validate' ? transformedModel : model;
       wrapper.setProps({ modelTransform });
       form.validate();
-      await new Promise(resolve => process.nextTick(resolve));
       expect(validator).toHaveBeenLastCalledWith(transformedModel);
       expect(onValidate).toHaveBeenLastCalledWith(transformedModel, null);
     });
@@ -160,7 +158,9 @@ describe('ValidatedForm', () => {
     });
 
     it('skips `onSubmit` when validation fails', async () => {
-      validator.mockImplementationOnce(() => Promise.reject(error));
+      validator.mockImplementationOnce(() => {
+        throw error;
+      });
       wrapper.find('form').simulate('submit');
       await new Promise(resolve => process.nextTick(resolve));
 
@@ -240,26 +240,26 @@ describe('ValidatedForm', () => {
         expect(validator).not.toHaveBeenCalled();
       });
 
-      it.only('validates after submit', async () => {
+      it('validates after submit', async () => {
         wrapper.find('form').simulate('submit');
         await new Promise(resolve => process.nextTick(resolve));
 
         validator.mockClear();
         wrapper.instance().getContext().onChange('key', 'value');
-        await new Promise(resolve => process.nextTick(resolve));
         expect(validator).toHaveBeenCalledTimes(1);
       });
     });
   });
 
   describe('on reset', () => {
-    it('removes `error`', async () => {
+    it('removes `error`', () => {
       const wrapper = mount<ValidatedForm>(
         <ValidatedForm model={model} onSubmit={onSubmit} schema={schema} />,
       );
-      validator.mockImplementationOnce(() => Promise.reject(new Error()));
+      validator.mockImplementationOnce(() => {
+        throw new Error();
+      });
       wrapper.find('form').simulate('submit');
-      await new Promise(resolve => process.nextTick(resolve));
       expect(wrapper.instance().getContext().error).toBeTruthy();
 
       wrapper.instance().reset();

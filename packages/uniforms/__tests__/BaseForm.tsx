@@ -23,7 +23,7 @@ describe('BaseForm', () => {
   };
 
   const onChange = jest.fn();
-  const onSubmit = jest.fn(() => Promise.resolve());
+  const onSubmit = jest.fn();
 
   afterEach(() => {
     onChange.mockClear();

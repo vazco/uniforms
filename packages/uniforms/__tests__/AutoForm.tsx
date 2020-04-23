@@ -9,7 +9,7 @@ jest.mock('meteor/check');
 
 describe('AutoForm', () => {
   const onChangeModel = jest.fn();
-  const validator = jest.fn(() => Promise.resolve());
+  const validator = jest.fn();
   const onChange = jest.fn();
   const onSubmit = jest.fn();
   const model = { a: '1' };

@@ -68,7 +68,9 @@ describe('SimpleSchemaBridge', () => {
     },
 
     validator() {
-      throw 'ValidationError';
+      return () => {
+        throw 'ValidationError';
+      };
     },
   };
 
@@ -311,7 +313,8 @@ describe('SimpleSchemaBridge', () => {
 
   describe('#getValidator', () => {
     it('calls correct validator', () => {
-      expect(() => bridge.getValidator()({})).toThrow();
+      expect(bridge.getValidator()({})).not.toEqual(null);
+      expect(bridge.getValidator({})({})).not.toEqual(null);
     });
   });
 });

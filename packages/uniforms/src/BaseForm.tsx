@@ -26,7 +26,7 @@ export type BaseFormProps<Model> = {
   ) => DeepPartial<Model>;
   noValidate: boolean;
   onChange?(key: string, value: any): void;
-  onSubmit(model: DeepPartial<Model>): Promise<any>;
+  onSubmit(model: DeepPartial<Model>): any;
   placeholder?: boolean;
   schema: any;
   showInlineError?: boolean;
@@ -52,9 +52,7 @@ export class BaseForm<
     label: true,
     model: Object.create(null),
     noValidate: true,
-    onSubmit() {
-      return Promise.resolve();
-    },
+    onSubmit() {},
   };
 
   constructor(props: Props) {
@@ -246,8 +244,13 @@ export class BaseForm<
       event.stopPropagation();
     }
 
+    const result = this.props.onSubmit(this.getModel('submit'));
+    if (!(result instanceof Promise)) {
+      return Promise.resolve(result);
+    }
+
     this.setState({ submitting: true });
-    return this.props.onSubmit(this.getModel('submit')).finally(() => {
+    return result.finally(() => {
       this.setState({ submitting: false });
     });
   }

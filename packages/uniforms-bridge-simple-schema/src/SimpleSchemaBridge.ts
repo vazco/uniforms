@@ -162,10 +162,14 @@ export default class SimpleSchemaBridge extends Bridge {
 
   getValidator(options = { clean: true }) {
     const validator = this.schema.validator(options);
-
-    // Clean mutate its argument.
-    return options.clean
-      ? async model => validator(cloneDeep({ ...model }))
-      : async model => validator(model);
+    return model => {
+      try {
+        // Clean mutate its argument.
+        validator(options.clean ? cloneDeep({ ...model }) : model);
+        return null;
+      } catch (error) {
+        return error;
+      }
+    };
   }
 }
