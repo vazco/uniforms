@@ -179,7 +179,7 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
       this.setState({ validating: true });
       return result.then(error => {
         this.setState((state, props) => ({
-          error: props.error === error ? null : error,
+          error: props.error === error ? null : error || null,
           validating: false,
         }));
 

@@ -374,4 +374,103 @@ describe('ValidatedForm', () => {
       });
     });
   });
+
+  describe('validation flow', () => {
+    beforeAll(jest.useFakeTimers);
+    afterAll(jest.useRealTimers);
+
+    const variantGroups = [
+      {
+        'fail async': () => Promise.resolve(error),
+        'fail  sync': () => error,
+        'good async': () => Promise.resolve(null),
+        'good  sync': () => null,
+      },
+      {
+        'fail async': () => Promise.resolve(error),
+        'fail  sync': () => error,
+        'good async': () => Promise.resolve(null),
+        'good  sync': () => null,
+        'pass async': (_, error) => Promise.resolve(error),
+        'pass  sync': (_, error) => error,
+      },
+      {
+        'fail async': () =>
+          new Promise((_, reject) => setTimeout(() => reject(error))),
+        'good async': () => new Promise(resolve => setTimeout(resolve)),
+        'good  sync': () => {},
+      },
+    ] as const;
+
+    function cartesian<X, Y>(xs: X[], ys: Y[]) {
+      return xs.reduce<[X, Y][]>(
+        (xys, x) => ys.reduce((xys, y) => [...xys, [x, y]], xys),
+        [],
+      );
+    }
+
+    function keys<X>(x: X) {
+      return Object.keys(x) as (keyof X)[];
+    }
+
+    const cases = cartesian(
+      keys(variantGroups[0]),
+      cartesian(keys(variantGroups[1]), keys(variantGroups[2])),
+    ).map(([x, [y, z]]) => [x, y, z] as const);
+
+    const schema = new SimpleSchemaBridge(schemaDefinition);
+    schema.getValidator = () => validator;
+
+    it.each(cases)('works for %p/%p/%p', async (...modes) => {
+      const wrapper = mount<ValidatedForm>(
+        <ValidatedForm
+          onSubmit={onSubmit}
+          onValidate={onValidate}
+          schema={schema}
+        />,
+      );
+
+      const [validatorMode, onValidateMode, onSubmitMode] = modes;
+      validator.mockImplementationOnce(variantGroups[0][validatorMode]);
+      onValidate.mockImplementationOnce(variantGroups[1][onValidateMode]);
+      onSubmit.mockImplementationOnce(variantGroups[2][onSubmitMode]);
+
+      const asyncSubmission = onSubmitMode.includes('async');
+      const asyncValidation =
+        validatorMode.includes('async') || onValidateMode.includes('async');
+      const hasValidationError = validatorMode.includes('good')
+        ? onValidateMode.includes('fail')
+        : !onValidateMode.includes('good');
+      const hasSubmissionError =
+        hasValidationError || onSubmitMode.includes('fail');
+
+      wrapper.instance().submit();
+      expect(validator).toHaveBeenCalledTimes(1);
+
+      if (asyncValidation) {
+        expect(wrapper.instance().getContext().validating).toBe(true);
+        await new Promise(resolve => process.nextTick(resolve));
+        expect(wrapper.instance().getContext().validating).toBe(false);
+      }
+
+      await new Promise(resolve => process.nextTick(resolve));
+
+      expect(onValidate).toHaveBeenCalledTimes(1);
+      expect(onSubmit).toHaveBeenCalledTimes(hasValidationError ? 0 : 1);
+      expect(wrapper.instance().getContext().error).toBe(
+        hasValidationError ? error : null,
+      );
+
+      if (!hasValidationError && asyncSubmission) {
+        expect(wrapper.instance().getContext().submitting).toBe(true);
+        jest.runAllTimers();
+        await new Promise(resolve => process.nextTick(resolve));
+        expect(wrapper.instance().getContext().submitting).toBe(false);
+      }
+
+      expect(wrapper.instance().getContext().error).toBe(
+        hasSubmissionError ? error : null,
+      );
+    });
+  });
 });
