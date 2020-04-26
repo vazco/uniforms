@@ -126,16 +126,14 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
       this.setState({ validate: true });
 
       const result = this.onValidate().then(error => {
-        if (error) {
+        if (error !== null) {
           return Promise.reject(error);
         }
 
         return super.onSubmit().catch(error => {
-          this.setState((state, props) =>
-            state.error === error
-              ? null
-              : { error: props.error === error ? null : error || null },
-          );
+          this.setState({
+            error: this.props.error === error ? null : error || null,
+          });
 
           throw error;
         });

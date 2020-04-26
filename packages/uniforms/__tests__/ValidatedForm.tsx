@@ -110,22 +110,6 @@ describe('ValidatedForm', () => {
       expect(wrapper.instance().getContext().validating).toBe(false);
     });
 
-    it('sets `validating` `true` while validating', async () => {
-      let resolveValidation = () => {};
-      onValidate.mockImplementationOnce(
-        () => new Promise(resolve => (resolveValidation = resolve)),
-      );
-
-      form.validate();
-      await new Promise(resolve => process.nextTick(resolve));
-      expect(wrapper.instance().getContext().validating).toBe(true);
-      expect(onValidate).toHaveBeenCalledTimes(1);
-
-      resolveValidation();
-      await new Promise(resolve => process.nextTick(resolve));
-      expect(wrapper.instance().getContext().validating).toBe(false);
-    });
-
     it('uses `modelTransform`s `validate` mode', () => {
       const transformedModel = { b: 1 };
       const modelTransform = (mode, model) =>
@@ -174,23 +158,6 @@ describe('ValidatedForm', () => {
 
       expect(onSubmit).toHaveBeenCalled();
       expect(wrapper.instance().getContext().error).toBe(error);
-    });
-
-    it('sets `submitting` during  `onSubmit`', async () => {
-      let resolveSubmit = () => {};
-      onSubmit.mockImplementationOnce(
-        () => new Promise(resolve => (resolveSubmit = resolve)),
-      );
-
-      wrapper.find('form').simulate('submit');
-      await new Promise(resolve => process.nextTick(resolve));
-      expect(wrapper.instance().getContext().submitting).toBe(true);
-
-      expect(onValidate).toHaveBeenCalledTimes(1);
-      resolveSubmit();
-
-      await new Promise(resolve => process.nextTick(resolve));
-      expect(wrapper.instance().getContext().submitting).toBe(false);
     });
 
     it('works if unmounts on submit', async () => {
@@ -381,24 +348,24 @@ describe('ValidatedForm', () => {
 
     const variantGroups = [
       {
-        'fail async': () => Promise.resolve(error),
-        'fail  sync': () => error,
-        'good async': () => Promise.resolve(null),
-        'good  sync': () => null,
+        'fail-async': () => Promise.resolve(error),
+        'fail-sync': () => error,
+        'good-async': () => Promise.resolve(null),
+        'good-sync': () => null,
       },
       {
-        'fail async': () => Promise.resolve(error),
-        'fail  sync': () => error,
-        'good async': () => Promise.resolve(null),
-        'good  sync': () => null,
-        'pass async': (_, error) => Promise.resolve(error),
-        'pass  sync': (_, error) => error,
+        'fail-async': () => Promise.resolve(error),
+        'fail-sync': () => error,
+        'good-async': () => Promise.resolve(null),
+        'good-sync': () => null,
+        'pass-async': (_, error) => Promise.resolve(error),
+        'pass-sync': (_, error) => error,
       },
       {
-        'fail async': () =>
+        'fail-async': () =>
           new Promise((_, reject) => setTimeout(() => reject(error))),
-        'good async': () => new Promise(resolve => setTimeout(resolve)),
-        'good  sync': () => {},
+        'good-async': () => new Promise(resolve => setTimeout(resolve)),
+        'good-sync': () => {},
       },
     ] as const;
 
@@ -431,10 +398,6 @@ describe('ValidatedForm', () => {
       );
 
       const [validatorMode, onValidateMode, onSubmitMode] = modes;
-      validator.mockImplementationOnce(variantGroups[0][validatorMode]);
-      onValidate.mockImplementationOnce(variantGroups[1][onValidateMode]);
-      onSubmit.mockImplementationOnce(variantGroups[2][onSubmitMode]);
-
       const asyncSubmission = onSubmitMode.includes('async');
       const asyncValidation =
         validatorMode.includes('async') || onValidateMode.includes('async');
@@ -444,33 +407,39 @@ describe('ValidatedForm', () => {
       const hasSubmissionError =
         hasValidationError || onSubmitMode.includes('fail');
 
-      wrapper.instance().submit();
-      expect(validator).toHaveBeenCalledTimes(1);
+      for (let run = 1; run <= 3; ++run) {
+        validator.mockImplementationOnce(variantGroups[0][validatorMode]);
+        onValidate.mockImplementationOnce(variantGroups[1][onValidateMode]);
+        onSubmit.mockImplementationOnce(variantGroups[2][onSubmitMode]);
 
-      if (asyncValidation) {
-        expect(wrapper.instance().getContext().validating).toBe(true);
+        wrapper.instance().submit();
+        expect(validator).toHaveBeenCalledTimes(run);
+
+        if (asyncValidation) {
+          expect(wrapper.instance().getContext().validating).toBe(true);
+          await new Promise(resolve => process.nextTick(resolve));
+          expect(wrapper.instance().getContext().validating).toBe(false);
+        }
+
         await new Promise(resolve => process.nextTick(resolve));
-        expect(wrapper.instance().getContext().validating).toBe(false);
+
+        expect(onValidate).toHaveBeenCalledTimes(run);
+        expect(onSubmit).toHaveBeenCalledTimes(hasValidationError ? 0 : run);
+        expect(wrapper.instance().getContext().error).toBe(
+          hasValidationError ? error : null,
+        );
+
+        if (!hasValidationError && asyncSubmission) {
+          expect(wrapper.instance().getContext().submitting).toBe(true);
+          jest.runAllTimers();
+          await new Promise(resolve => process.nextTick(resolve));
+          expect(wrapper.instance().getContext().submitting).toBe(false);
+        }
+
+        expect(wrapper.instance().getContext().error).toBe(
+          hasSubmissionError ? error : null,
+        );
       }
-
-      await new Promise(resolve => process.nextTick(resolve));
-
-      expect(onValidate).toHaveBeenCalledTimes(1);
-      expect(onSubmit).toHaveBeenCalledTimes(hasValidationError ? 0 : 1);
-      expect(wrapper.instance().getContext().error).toBe(
-        hasValidationError ? error : null,
-      );
-
-      if (!hasValidationError && asyncSubmission) {
-        expect(wrapper.instance().getContext().submitting).toBe(true);
-        jest.runAllTimers();
-        await new Promise(resolve => process.nextTick(resolve));
-        expect(wrapper.instance().getContext().submitting).toBe(false);
-      }
-
-      expect(wrapper.instance().getContext().error).toBe(
-        hasSubmissionError ? error : null,
-      );
     });
   });
 });
