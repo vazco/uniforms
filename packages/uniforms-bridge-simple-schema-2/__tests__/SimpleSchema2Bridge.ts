@@ -336,7 +336,9 @@ describe('SimpleSchema2Bridge', () => {
       const bridge = new SimpleSchema2Bridge(schema);
 
       expect(bridge.getValidator()({})).not.toEqual(null);
+      expect(bridge.getValidator({})({})).not.toEqual(null);
       expect(bridge.getValidator()({ x: 1 })).toEqual(null);
+      expect(bridge.getValidator({})({ x: 1 })).toEqual(null);
     });
   });
 });
