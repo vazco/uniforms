@@ -313,8 +313,19 @@ describe('SimpleSchemaBridge', () => {
 
   describe('#getValidator', () => {
     it('calls correct validator', () => {
+      const bridge = new SimpleSchemaBridge({
+        ...schema,
+        validator() {
+          return model => {
+            if (typeof model.x !== 'number') {
+              throw new Error();
+            }
+          };
+        },
+      });
+
       expect(bridge.getValidator()({})).not.toEqual(null);
-      expect(bridge.getValidator({})({})).not.toEqual(null);
+      expect(bridge.getValidator()({ x: 1 })).toEqual(null);
     });
   });
 });
