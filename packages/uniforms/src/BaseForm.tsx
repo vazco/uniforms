@@ -16,7 +16,7 @@ export type BaseFormProps<Model> = {
   autosave: boolean;
   autosaveDelay: number;
   disabled?: boolean;
-  error?: any;
+  error: any;
   id?: string;
   label: boolean;
   model: DeepPartial<Model>;
@@ -49,6 +49,7 @@ export class BaseForm<
   static defaultProps = {
     autosave: false,
     autosaveDelay: 0,
+    error: null,
     label: true,
     model: Object.create(null),
     noValidate: true,
