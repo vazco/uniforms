@@ -343,29 +343,31 @@ describe('ValidatedForm', () => {
   });
 
   describe('validation flow', () => {
-    beforeAll(jest.useFakeTimers);
-    afterAll(jest.useRealTimers);
-
     const variantGroups = [
       {
         'fail-async': () => Promise.resolve(error),
         'fail-sync': () => error,
         'good-async': () => Promise.resolve(null),
+        'good-async-silent': () => Promise.resolve(),
         'good-sync': () => null,
+        'good-sync-silent': () => {},
       },
       {
         'fail-async': () => Promise.resolve(error),
         'fail-sync': () => error,
         'good-async': () => Promise.resolve(null),
+        'good-async-silent': () => Promise.resolve(),
         'good-sync': () => null,
+        'good-sync-silent': () => {},
         'pass-async': (_, error) => Promise.resolve(error),
         'pass-sync': (_, error) => error,
       },
       {
         'fail-async': () =>
           new Promise((_, reject) => setTimeout(() => reject(error))),
-        'good-async': () => new Promise(resolve => setTimeout(resolve)),
-        'good-sync': () => {},
+        'good-async': () =>
+          new Promise(resolve => setTimeout(() => resolve('ok'))),
+        'good-sync': () => 'ok',
       },
     ] as const;
 
@@ -381,29 +383,35 @@ describe('ValidatedForm', () => {
     }
 
     const cases = cartesian(
-      keys(variantGroups[0]),
-      cartesian(keys(variantGroups[1]), keys(variantGroups[2])),
-    ).map(([x, [y, z]]) => [x, y, z] as const);
+      [true, false] as [true, false],
+      cartesian(
+        keys(variantGroups[0]),
+        cartesian(keys(variantGroups[1]), keys(variantGroups[2])),
+      ),
+    ).map(([a, [b, [c, d]]]) => [a, b, c, d] as const);
 
     const schema = new SimpleSchemaBridge(schemaDefinition);
     schema.getValidator = () => validator;
 
-    it.each(cases)('works for %p/%p/%p', async (...modes) => {
+    it.each(cases)('works for %p/%p/%p/%p', async (...modes) => {
+      const [hasError, validatorMode, onValidateMode, onSubmitMode] = modes;
       const wrapper = mount<ValidatedForm>(
         <ValidatedForm
+          error={hasError ? error : null}
           onSubmit={onSubmit}
           onValidate={onValidate}
           schema={schema}
         />,
       );
 
-      const [validatorMode, onValidateMode, onSubmitMode] = modes;
       const asyncSubmission = onSubmitMode.includes('async');
       const asyncValidation =
         validatorMode.includes('async') || onValidateMode.includes('async');
-      const hasValidationError = validatorMode.includes('good')
-        ? onValidateMode.includes('fail')
-        : !onValidateMode.includes('good');
+      const hasValidationError =
+        hasError ||
+        (validatorMode.includes('good')
+          ? onValidateMode.includes('fail')
+          : !onValidateMode.includes('good'));
       const hasSubmissionError =
         hasValidationError || onSubmitMode.includes('fail');
 
@@ -412,7 +420,7 @@ describe('ValidatedForm', () => {
         onValidate.mockImplementationOnce(variantGroups[1][onValidateMode]);
         onSubmit.mockImplementationOnce(variantGroups[2][onSubmitMode]);
 
-        wrapper.instance().submit();
+        const result = wrapper.instance().submit();
         expect(validator).toHaveBeenCalledTimes(run);
 
         if (asyncValidation) {
@@ -424,21 +432,30 @@ describe('ValidatedForm', () => {
         await new Promise(resolve => process.nextTick(resolve));
 
         expect(onValidate).toHaveBeenCalledTimes(run);
-        expect(onSubmit).toHaveBeenCalledTimes(hasValidationError ? 0 : run);
-        expect(wrapper.instance().getContext().error).toBe(
-          hasValidationError ? error : null,
-        );
+
+        if (hasValidationError) {
+          expect(onSubmit).toHaveBeenCalledTimes(0);
+          expect(wrapper.instance().getContext().error).toBe(error);
+        } else {
+          expect(onSubmit).toHaveBeenCalledTimes(run);
+          expect(wrapper.instance().getContext().error).toBe(null);
+        }
 
         if (!hasValidationError && asyncSubmission) {
           expect(wrapper.instance().getContext().submitting).toBe(true);
-          jest.runAllTimers();
-          await new Promise(resolve => process.nextTick(resolve));
+          await new Promise(resolve => setTimeout(resolve));
           expect(wrapper.instance().getContext().submitting).toBe(false);
         }
 
-        expect(wrapper.instance().getContext().error).toBe(
-          hasSubmissionError ? error : null,
-        );
+        await new Promise(resolve => setTimeout(resolve));
+
+        if (hasSubmissionError) {
+          expect(wrapper.instance().getContext().error).toBe(error);
+          await expect(result).rejects.toEqual(error);
+        } else {
+          expect(wrapper.instance().getContext().error).toBe(null);
+          await expect(result).resolves.toEqual('ok');
+        }
       }
     });
   });

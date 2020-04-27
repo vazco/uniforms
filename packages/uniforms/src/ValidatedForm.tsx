@@ -59,7 +59,7 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
     }
 
     getContextError(): Context<Model>['error'] {
-      return super.getContextError() || this.state.error;
+      return super.getContextError() ?? this.state.error;
     }
 
     getContext(): Context<Model> {
@@ -128,11 +128,10 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
           return Promise.reject(error);
         }
 
+        // Validation failed (i.e. returned an error), so no error is present
+        // both in the props nor the state.
         return super.onSubmit().catch(error => {
-          this.setState({
-            error: this.props.error === error ? null : error || null,
-          });
-
+          this.setState({ error });
           throw error;
         });
       });
@@ -154,37 +153,49 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
     onValidateModel(originalModel: Props['model']) {
       const model = this.getModel('validate', originalModel);
 
-      let result = this.state.validator(model) || null;
-      if (!(result instanceof Promise)) {
-        result = this.props.onValidate(model, result) || null;
-        if (!(result instanceof Promise)) {
-          this.setState((state, props) =>
-            state.error === result
+      // Using `then` allows using the same code for both synchronous and
+      // asynchronous cases. We could use `await` here, but it would make all
+      // calls asynchronous, unnecessary delaying synchronous validation.
+      const then = makeThen(() => {
+        this.setState({ validating: true });
+      });
+
+      return then(this.state.validator(model), (error = null) =>
+        then(this.props.onValidate(model, error), (error = null) => {
+          // Do not copy the error from props to the state.
+          error = this.props.error === error ? null : error;
+
+          // If the whole operation was synchronous and resulted in the same
+          // error, we can skip the re-render.
+          this.setState(state =>
+            state.error === error && !state.validating
               ? null
-              : { error: props.error === result ? null : result },
+              : { error, validating: false },
           );
 
-          return Promise.resolve(result);
-        }
-      } else {
-        result = result.then(error =>
-          this.props.onValidate(model, error || null),
-        );
-      }
-
-      this.setState({ validating: true });
-      return result.then(error => {
-        this.setState((state, props) => ({
-          error: props.error === error ? null : error || null,
-          validating: false,
-        }));
-
-        return error;
-      });
+          // A predefined error takes precedence over the validation one.
+          return Promise.resolve(this.props.error ?? error);
+        }),
+      );
     }
   }
 
   return ValidatedForm;
+}
+
+function makeThen(callIfAsync: () => void) {
+  function then<T, U>(value: Promise<T>, fn: (value: T) => U): Promise<U>;
+  function then<T, U>(value: T, fn: (value: T) => U): U;
+  function then<T, U>(value: Promise<T> | T, fn: (value: T) => U) {
+    if (value instanceof Promise) {
+      callIfAsync();
+      return value.then(fn);
+    }
+
+    return fn(value);
+  }
+
+  return then;
 }
 
 function shouldRevalidate(inProps: ValidateMode, inState: boolean) {
