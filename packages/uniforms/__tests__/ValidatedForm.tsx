@@ -388,12 +388,13 @@ describe('ValidatedForm', () => {
         keys(variantGroups[0]),
         cartesian(keys(variantGroups[1]), keys(variantGroups[2])),
       ),
-    ).map(([a, [b, [c, d]]]) => [a, b, c, d] as const);
+    );
 
     const schema = new SimpleSchemaBridge(schemaDefinition);
     schema.getValidator = () => validator;
 
-    it.each(cases)('works for %p/%p/%p/%p', async (...modes) => {
+    const flatPair4 = ([a, [b, [c, d]]]) => [a, b, c, d] as const;
+    it.each(cases.map(flatPair4))('works for %p/%p/%p/%p', async (...modes) => {
       const [hasError, validatorMode, onValidateMode, onSubmitMode] = modes;
       const wrapper = mount<ValidatedForm>(
         <ValidatedForm
