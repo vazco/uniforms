@@ -88,14 +88,11 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
 
       const { model, schema, validate, validator } = this.props;
       if (schema !== prevProps.schema || validator !== prevProps.validator) {
-        this.setState(
-          state => ({ validator: state.bridge.getValidator(validator) }),
-          () => {
-            if (shouldRevalidate(validate, this.state.validate)) {
-              this.onValidate().catch(noop);
-            }
-          },
-        );
+        this.setState({ validator: schema.getValidator(validator) }, () => {
+          if (shouldRevalidate(validate, this.state.validate)) {
+            this.onValidate().catch(noop);
+          }
+        });
       } else if (
         !isEqual(model, prevProps.model) &&
         shouldRevalidate(validate, this.state.validate)

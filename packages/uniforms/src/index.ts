@@ -7,7 +7,6 @@ export * from './ValidatedQuickForm';
 export * from './changedKeys';
 export * from './connectField';
 export * from './context';
-export * from './createSchemaBridge';
 export * from './filterDOMProps';
 export * from './injectName';
 export * from './joinName';

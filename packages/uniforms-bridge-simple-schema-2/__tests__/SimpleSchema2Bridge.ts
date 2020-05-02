@@ -42,24 +42,6 @@ describe('SimpleSchema2Bridge', () => {
 
   const bridge = new SimpleSchema2Bridge(schema);
 
-  describe('#check()', () => {
-    it('works correctly with schema', () => {
-      expect(SimpleSchema2Bridge.check(schema)).toBeTruthy();
-    });
-
-    it('works correctly without schema', () => {
-      expect(SimpleSchema2Bridge.check()).not.toBeTruthy();
-    });
-
-    Object.keys(schema).forEach(method => {
-      it(`works correctly without '${method}'`, () => {
-        expect(
-          SimpleSchema2Bridge.check({ ...schema, [method]: null }),
-        ).not.toBeTruthy();
-      });
-    });
-  });
-
   describe('#getError', () => {
     it('works without error', () => {
       expect(bridge.getError('a')).toBe(null);

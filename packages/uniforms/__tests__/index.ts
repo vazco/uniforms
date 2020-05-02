@@ -11,7 +11,6 @@ it('exports everything', () => {
     changedKeys: expect.any(Function),
     connectField: expect.any(Function),
     context: expect.any(Object),
-    createSchemaBridge: expect.any(Function),
     filterDOMProps: expect.any(Function),
     injectName: expect.any(Function),
     joinName: expect.any(Function),

@@ -2,6 +2,7 @@
 
 - **Breaking:** Removed `BaseForm.getChangedKeys`. Use `changedKeys` directly.
 - **Breaking:** Removed default exports in the `uniforms` package. Use named imports instead (e.g. `import { BaseForm } from 'uniforms'`). This allows to effectively export types along with values.
+- **Breaking:** Removed `createSchemaBridge`. This includes removal of `BaseForm.state.bridge`, `check` on all bridges, and the automatic bridge creation for SimpleSchema.
 
 ## [v3.0.0-alpha.2](https://github.com/vazco/uniforms/tree/v3.0.0-alpha.2) (2020-04-08)
 

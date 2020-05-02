@@ -9,15 +9,6 @@ export abstract class Bridge {
     );
   }
 
-  static check(schema: any): boolean {
-    return invariant(
-      false,
-      '%s have not implemented `check` method (args=%o).',
-      this.name,
-      { schema },
-    );
-  }
-
   getError(name: string, error: any): any {
     return invariant(
       false,

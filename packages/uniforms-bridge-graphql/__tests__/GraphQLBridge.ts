@@ -90,15 +90,6 @@ describe('GraphQLBridge', () => {
     });
   });
 
-  describe('#check()', () => {
-    it('always returns false', () => {
-      expect(GraphQLBridge.check()).not.toBeTruthy();
-      expect(GraphQLBridge.check(bridgeI)).not.toBeTruthy();
-      expect(GraphQLBridge.check(schemaI)).not.toBeTruthy();
-      expect(GraphQLBridge.check(schemaT)).not.toBeTruthy();
-    });
-  });
-
   describe('#getError', () => {
     it('works without error', () => {
       expect(bridgeI.getError('title')).toBe(null);

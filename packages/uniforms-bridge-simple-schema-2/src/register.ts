@@ -1,10 +1,5 @@
 import SimpleSchema from 'simpl-schema';
-import { createSchemaBridge, filterDOMProps } from 'uniforms';
-
-import SimpleSchema2Bridge from './SimpleSchema2Bridge';
-
-// Register bridge.
-createSchemaBridge.register(SimpleSchema2Bridge);
+import { filterDOMProps } from 'uniforms';
 
 // Register custom property.
 SimpleSchema.extendOptions(['uniforms']);

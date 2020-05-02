@@ -12,17 +12,6 @@ export default class SimpleSchema2Bridge extends Bridge {
     this.schema = schema;
   }
 
-  static check(schema) {
-    return (
-      schema &&
-      schema.getDefinition &&
-      schema.messageBox &&
-      schema.objectKeys &&
-      schema.validator &&
-      schema.version === 2
-    );
-  }
-
   getError(name, error) {
     return (
       (error &&
@@ -92,7 +81,7 @@ export default class SimpleSchema2Bridge extends Bridge {
       return Array.from({ length: items }, () => item);
     }
 
-    if (field.type === Object || SimpleSchema2Bridge.check(field.type)) {
+    if (field.type === Object || field.type instanceof SimpleSchema) {
       return {};
     }
 
@@ -168,7 +157,7 @@ export default class SimpleSchema2Bridge extends Bridge {
       return Number;
     }
 
-    if (SimpleSchema2Bridge.check(type)) {
+    if (type instanceof SimpleSchema) {
       return Object;
     }
 
