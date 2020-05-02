@@ -13,6 +13,10 @@ import { parseQuery, updateQuery } from './utils';
 import { themes } from '../universal';
 
 class Playground extends Component {
+  static getDerivedStateFromError(error) {
+    return { error };
+  }
+
   constructor() {
     super(...arguments);
 
@@ -46,7 +50,7 @@ class Playground extends Component {
       }));
     }
 
-    this.setState({ [key]: value });
+    this.setState({ error: undefined, [key]: value });
   }
 
   render() {
@@ -66,7 +70,11 @@ class Playground extends Component {
           <PlaygroundPropsField name="props" spellCheck={false} />
         </section>
 
-        <PlaygroundPreviewField name="props" nameTheme="theme" />
+        {this.state.error ? (
+          <pre children={'' + this.state.error} />
+        ) : (
+          <PlaygroundPreviewField name="props" nameTheme="theme" />
+        )}
       </PlaygroundForm>
     );
   }
