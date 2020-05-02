@@ -1,6 +1,7 @@
 import SimpleSchema from 'simpl-schema';
 import cloneDeep from 'lodash/cloneDeep';
 import invariant from 'invariant';
+import memoize from 'lodash/memoize';
 import { Bridge, joinName } from 'uniforms';
 
 export default class SimpleSchema2Bridge extends Bridge {
@@ -10,6 +11,11 @@ export default class SimpleSchema2Bridge extends Bridge {
     super();
 
     this.schema = schema;
+
+    // Memoize for performance and referential equality.
+    this.getField = memoize(this.getField);
+    this.getSubfields = memoize(this.getSubfields);
+    this.getType = memoize(this.getType);
   }
 
   static check(schema) {

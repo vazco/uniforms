@@ -2,6 +2,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
 import invariant from 'invariant';
 import lowerCase from 'lodash/lowerCase';
+import memoize from 'lodash/memoize';
 import omit from 'lodash/omit';
 import upperFirst from 'lodash/upperFirst';
 import { Bridge, joinName } from 'uniforms';
@@ -68,6 +69,11 @@ export default class JSONSchemaBridge extends Bridge {
     this.schema = distinctSchema(schema);
     this._compiledSchema = {};
     this.validator = validator;
+
+    // Memoize for performance and referential equality.
+    this.getField = memoize(this.getField);
+    this.getSubfields = memoize(this.getSubfields);
+    this.getType = memoize(this.getType);
   }
 
   static check() {

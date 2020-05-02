@@ -1,5 +1,6 @@
 import cloneDeep from 'lodash/cloneDeep';
 import invariant from 'invariant';
+import memoize from 'lodash/memoize';
 import { Bridge, joinName } from 'uniforms';
 // @ts-ignore
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'; // eslint-disable-line
@@ -11,6 +12,11 @@ export default class SimpleSchemaBridge extends Bridge {
     super();
 
     this.schema = schema;
+
+    // Memoize for performance and referential equality.
+    this.getField = memoize(this.getField);
+    this.getSubfields = memoize(this.getSubfields);
+    this.getType = memoize(this.getType);
   }
 
   static check(schema) {
