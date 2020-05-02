@@ -3,6 +3,7 @@
 - **Breaking:** Removed `BaseForm.getChangedKeys`. Use `changedKeys` directly.
 - **Breaking:** Removed default exports in the `uniforms` package. Use named imports instead (e.g. `import { BaseForm } from 'uniforms'`). This allows to effectively export types along with values.
 - **Changed:** For performance reasons `getField`, `getSubfields`, and `getType` of all bridges are now memoized.
+- **Changed:** For performance reasons `filterDOMProps.registered` is now `readonly string[]` instead of `string[]`. Internally, `omit` got replaced with `pickBy` and `filterDOMProps.registered` is now sorted. `filterDOMProps.register` behavior remains unchanged.
 
 ## [v3.0.0-alpha.2](https://github.com/vazco/uniforms/tree/v3.0.0-alpha.2) (2020-04-08)
 
