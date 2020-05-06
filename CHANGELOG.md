@@ -15,6 +15,8 @@
   +  return result;
   +}}`
   ```
+- **Changed:** For performance reasons `getField`, `getSubfields`, and `getType` of all bridges are now memoized.
+- **Changed:** For performance reasons `filterDOMProps.registered` is now `readonly string[]` instead of `string[]`. Internally, `omit` got replaced with `pickBy` and `filterDOMProps.registered` is now sorted. `filterDOMProps.register` behavior remains unchanged.
 
 ## [v3.0.0-alpha.2](https://github.com/vazco/uniforms/tree/v3.0.0-alpha.2) (2020-04-08)
 

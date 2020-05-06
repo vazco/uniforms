@@ -1,6 +1,7 @@
 import * as graphql from 'graphql';
 import invariant from 'invariant';
 import lowerCase from 'lodash/lowerCase';
+import memoize from 'lodash/memoize';
 import upperFirst from 'lodash/upperFirst';
 import { Bridge, joinName } from 'uniforms';
 
@@ -27,6 +28,14 @@ export default class GraphQLBridge extends Bridge {
     this.extras = extras;
     this.schema = schema;
     this.validator = validator;
+
+    // Memoize for performance and referential equality.
+    this.getField = memoize(
+      this.getField,
+      (name, returnExtracted = true) => `${name}:${returnExtracted}`,
+    );
+    this.getSubfields = memoize(this.getSubfields);
+    this.getType = memoize(this.getType);
   }
 
   // This bridge has 3 arguments, so it cannot be constructed implicite in the

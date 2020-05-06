@@ -1,9 +1,9 @@
 import React, { Component, SyntheticEvent } from 'react';
-import cloneDeep from 'lodash/cloneDeep';
+import clone from 'lodash/clone';
 import get from 'lodash/get';
 import isFunction from 'lodash/isFunction';
 import omit from 'lodash/omit';
-import set from 'lodash/set';
+import setWith from 'lodash/setWith';
 
 import { Bridge } from './Bridge';
 import { ChangedMap, Context, DeepPartial, ModelTransformMode } from './types';
@@ -195,13 +195,18 @@ export class BaseForm<
     if (this.mounted) {
       const keys = changedKeys(key, value, get(this.getModel(), key));
       if (keys.length !== 0) {
-        this.setState(state => ({
-          changed: true,
-          changedMap: keys.reduce(
-            (changedMap, key) => set(changedMap, key, {}),
-            cloneDeep(state.changedMap),
-          ),
-        }));
+        this.setState(state =>
+          // If all are already marked, we can skip the update completely.
+          state.changed && keys.every(key => !!get(state.changedMap, key))
+            ? null
+            : {
+                changed: true,
+                changedMap: keys.reduce(
+                  (changedMap, key) => setWith(changedMap, key, {}, clone),
+                  clone(state.changedMap),
+                ),
+              },
+        );
       }
     }
 

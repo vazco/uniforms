@@ -2,6 +2,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
 import invariant from 'invariant';
 import lowerCase from 'lodash/lowerCase';
+import memoize from 'lodash/memoize';
 import omit from 'lodash/omit';
 import upperFirst from 'lodash/upperFirst';
 import { Bridge, joinName } from 'uniforms';
@@ -68,6 +69,11 @@ export default class JSONSchemaBridge extends Bridge {
     this.schema = distinctSchema(schema);
     this._compiledSchema = {};
     this.validator = validator;
+
+    // Memoize for performance and referential equality.
+    this.getField = memoize(this.getField);
+    this.getSubfields = memoize(this.getSubfields);
+    this.getType = memoize(this.getType);
   }
 
   static check() {
@@ -118,10 +124,10 @@ export default class JSONSchemaBridge extends Bridge {
   getField(name) {
     return joinName(null, name).reduce((definition, next, nextIndex, array) => {
       const previous = joinName(array.slice(0, nextIndex));
-      const isRequired = (
-        definition.required ||
-        (this._compiledSchema[previous] || {}).required ||
-        []
+      const isRequired = get(
+        definition,
+        'required',
+        get(this._compiledSchema, [previous, 'required'], []),
       ).includes(next);
 
       const _key = joinName(previous, next);
@@ -144,17 +150,13 @@ export default class JSONSchemaBridge extends Bridge {
         );
         definition = definition.properties[next];
       } else {
-        const [{ properties: combinedDefinition = {} } = {}] = [
-          'allOf',
-          'anyOf',
-          'oneOf',
-        ]
-          .filter(key => definition[key])
+        definition = ['allOf', 'anyOf', 'oneOf']
           .map(key =>
-            definition[key].find(({ properties = {} }) => properties[next]),
-          );
-
-        definition = combinedDefinition[next];
+            get(definition, key, [])
+              .map(definition => get(definition, ['properties', next]))
+              .find(Boolean),
+          )
+          .find(Boolean);
       }
 
       invariant(definition, 'Field not found in schema: "%s"', name);
@@ -163,33 +165,28 @@ export default class JSONSchemaBridge extends Bridge {
         definition = resolveRef(definition.$ref, this.schema);
       }
 
-      ['allOf', 'anyOf', 'oneOf']
-        .filter(key => definition[key])
-        .forEach(key => {
+      ['allOf', 'anyOf', 'oneOf'].forEach(key => {
+        if (definition[key]) {
           _definition[key] = definition[key].map(def =>
             def.$ref ? resolveRef(def.$ref, this.schema) : def,
           );
-        });
+        }
+      });
 
       // Naive computation of combined type, properties and required
-      if (['allOf', 'anyOf', 'oneOf'].filter(key => definition[key]).length) {
-        _definition.type = (([]
-          .concat(_definition.allOf, _definition.anyOf, _definition.oneOf)
-          .filter((def: any) => def)
-          .find((def: any) => def.type) || {}) as any).type;
-        const [properties, required] = []
-          .concat(_definition.allOf, _definition.anyOf, _definition.oneOf)
-          .filter(def => def)
-          .reduce(
-            ([_properties, _required], { properties, required }) => [
-              Object.assign(_properties, properties),
-              _required.concat(required),
-            ],
-            [{}, []],
-          );
+      const combinedPartials: any[] = []
+        .concat(_definition.allOf, _definition.anyOf, _definition.oneOf)
+        .filter(Boolean);
 
-        _definition.properties = properties;
-        _definition.required = required;
+      if (combinedPartials.length) {
+        _definition.properties = {};
+        _definition.required = [];
+
+        combinedPartials.forEach(({ properties, required, type }) => {
+          if (properties) Object.assign(_definition.properties, properties);
+          if (required) _definition.required.push(...required);
+          if (type && !_definition.type) _definition.type = type;
+        });
       }
 
       this._compiledSchema[_key] = Object.assign(_definition, { isRequired });

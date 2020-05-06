@@ -1,8 +1,9 @@
+import clone from 'lodash/clone';
 import cloneDeep from 'lodash/cloneDeep';
 import isEqual from 'lodash/isEqual';
 import noop from 'lodash/noop';
 import omit from 'lodash/omit';
-import set from 'lodash/set';
+import setWith from 'lodash/setWith';
 import { SyntheticEvent } from 'react';
 
 import { BaseForm, BaseFormProps, BaseFormState } from './BaseForm';
@@ -144,7 +145,7 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
     onValidate(key?: string, value?: any) {
       let model = this.getContextModel();
       if (model && key) {
-        model = set(cloneDeep(model), key, cloneDeep(value));
+        model = setWith(clone(model), key, cloneDeep(value), clone);
       }
 
       return this.onValidateModel(model);
