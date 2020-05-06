@@ -7,8 +7,8 @@ import { ValidatedForm, connectField, context } from 'uniforms';
 
 import playgroundStyles from './playground.module.css';
 import presets from './presets';
-import schema from './schema';
 import styles from './styles';
+import { bridge, schema } from './schema';
 import { parseQuery, updateQuery } from './utils';
 import { themes } from '../universal';
 
@@ -55,7 +55,7 @@ class Playground extends Component {
         className={playgroundStyles['playground']}
         model={this.state}
         onChange={this.onChange}
-        schema={schema}
+        schema={bridge}
       >
         <section className={playgroundStyles['playground-column']}>
           <nav className={playgroundStyles['playground-toolbar']}>
@@ -130,10 +130,18 @@ class PlaygroundPreview extends Component {
 
     props.schema = this._schema;
     if (asyncOnSubmit) {
-      props.onSubmit = () => new Promise(resolve => setTimeout(resolve, 1000));
+      props.onSubmit = () =>
+        new Promise(resolve => {
+          setTimeout(resolve, 1000);
+        });
     }
     if (asyncOnValidate) {
-      props.onValidate = (model, error, next) => setTimeout(() => next(), 1000);
+      props.onValidate = (model, error) =>
+        new Promise(resolve => {
+          setTimeout(() => {
+            resolve(error);
+          }, 1000);
+        });
     }
 
     return (

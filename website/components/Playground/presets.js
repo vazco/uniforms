@@ -2,50 +2,52 @@ const preset = strings =>
   strings[0].slice(9, -5).replace(/([\r\n]+) {8}/g, '$1');
 const presets = {
   'Welcome!': preset`
-        new SimpleSchema({
-            date: {
-                type: Date,
-                defaultValue: new Date()
-            },
+        new SimpleSchema2Bridge(
+            new SimpleSchema({
+                date: {
+                    type: Date,
+                    defaultValue: new Date()
+                },
 
-            adult: {
-                type: Boolean
-            },
+                adult: {
+                    type: Boolean
+                },
 
-            size: {
-                type: String,
-                defaultValue: 'm',
-                allowedValues: ['xs', 's', 'm', 'l', 'xl']
-            },
+                size: {
+                    type: String,
+                    defaultValue: 'm',
+                    allowedValues: ['xs', 's', 'm', 'l', 'xl']
+                },
 
-            rating: {
-                type: Number,
-                allowedValues: [1, 2, 3, 4, 5],
-                uniforms: {
-                    checkboxes: true
+                rating: {
+                    type: Number,
+                    allowedValues: [1, 2, 3, 4, 5],
+                    uniforms: {
+                        checkboxes: true
+                    }
+                },
+
+                friends: {
+                    type: Array,
+                    minCount: 1
+                },
+
+                'friends.$': {
+                    type: Object
+                },
+
+                'friends.$.name': {
+                    type: String,
+                    min: 3
+                },
+
+                'friends.$.age': {
+                    type: Number,
+                    min: 0,
+                    max: 150
                 }
-            },
-
-            friends: {
-                type: Array,
-                minCount: 1
-            },
-
-            'friends.$': {
-                type: Object
-            },
-
-            'friends.$.name': {
-                type: String,
-                min: 3
-            },
-
-            'friends.$.age': {
-                type: Number,
-                min: 0,
-                max: 150
-            }
-        })
+            })
+        )
     `,
 
   'Address (GraphQL)': preset`
@@ -128,25 +130,27 @@ const presets = {
     `,
 
   'Address (SimpleSchema)': preset`
-        new SimpleSchema({
-            city: {
-                type: String,
-                optional: true,
-                max: 50
-            },
+        new SimpleSchema2Bridge(
+            new SimpleSchema({
+                city: {
+                    type: String,
+                    optional: true,
+                    max: 50
+                },
 
-            state: String,
+                state: String,
 
-            street: {
-                type: String,
-                max: 100
-            },
+                street: {
+                    type: String,
+                    max: 100
+                },
 
-            zip: {
-                type: String,
-                regEx: /^[0-9]{5}$/
-            }
-        })
+                zip: {
+                    type: String,
+                    regEx: /^[0-9]{5}$/
+                }
+            })
+        )
     `
 };
 

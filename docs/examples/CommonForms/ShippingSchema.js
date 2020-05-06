@@ -1,7 +1,8 @@
 import SimpleSchema from 'simpl-schema';
+import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 
 // <schema>
-export default new SimpleSchema({
+const schema = new SimpleSchema({
   firstName: {
     type: String
   },
@@ -31,4 +32,6 @@ export default new SimpleSchema({
     type: String
   }
 });
+
+export default new SimpleSchema2Bridge(schema);
 // </schema>

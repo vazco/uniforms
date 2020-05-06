@@ -27,7 +27,44 @@ scope.parse = parse;
 // Dynamic field error.
 MessageBox.defaults({ messages: { en: { syntax: '' } } });
 
-const schema = new SimpleSchema({
+const propsSchema = new SimpleSchema({
+  autosave: { optional: true, type: Boolean },
+  autosaveDelay: { optional: true, type: SimpleSchema.Integer },
+  disabled: { optional: true, type: Boolean },
+  label: { optional: true, type: Boolean },
+  placeholder: { optional: true, type: Boolean },
+  showInlineError: { optional: true, type: Boolean },
+  asyncOnSubmit: {
+    optional: true,
+    type: Boolean,
+    label: 'Async onSubmit (1 sec)'
+  },
+  asyncOnValidate: {
+    optional: true,
+    type: Boolean,
+    label: 'Async onValidate (1 sec)'
+  },
+
+  schema: {
+    optional: true,
+    type: String,
+    custom() {
+      try {
+        eval(`(${this.value})`);
+        return undefined;
+      } catch (error) {
+        MessageBox.defaults({
+          messages: { en: { syntax: error.message } }
+        });
+        return 'syntax';
+      }
+    }
+  }
+});
+
+const propsBridge = new SimpleSchema2Bridge(propsSchema);
+
+export const schema = new SimpleSchema({
   preset: {
     type: String,
     defaultValue: Object.keys(presets)[0],
@@ -48,42 +85,7 @@ const schema = new SimpleSchema({
       asyncOnSubmit: false,
       asyncOnValidate: false
     },
-    uniforms: {
-      schema: new SimpleSchema({
-        autosave: { optional: true, type: Boolean },
-        autosaveDelay: { optional: true, type: SimpleSchema.Integer },
-        disabled: { optional: true, type: Boolean },
-        label: { optional: true, type: Boolean },
-        placeholder: { optional: true, type: Boolean },
-        showInlineError: { optional: true, type: Boolean },
-        asyncOnSubmit: {
-          optional: true,
-          type: Boolean,
-          label: 'Async onSubmit (1 sec)'
-        },
-        asyncOnValidate: {
-          optional: true,
-          type: Boolean,
-          label: 'Async onValidate (1 sec)'
-        },
-
-        schema: {
-          optional: true,
-          type: String,
-          custom() {
-            try {
-              eval(`(${this.value})`);
-              return undefined;
-            } catch (error) {
-              MessageBox.defaults({
-                messages: { en: { syntax: error.message } }
-              });
-              return 'syntax';
-            }
-          }
-        }
-      })
-    }
+    uniforms: { schema: propsBridge }
   },
 
   theme: {
@@ -94,4 +96,4 @@ const schema = new SimpleSchema({
   }
 });
 
-export default schema;
+export const bridge = new SimpleSchema2Bridge(schema);
