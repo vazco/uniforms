@@ -1,48 +1,51 @@
-import omit from 'lodash/omit';
+import pickBy from 'lodash/pickBy';
+import sortedIndex from 'lodash/sortedIndex';
+import sortedIndexOf from 'lodash/sortedIndexOf';
 
 const registered = [
-  // These props are provided by BaseField
+  // These props are provided by useField directly.
   'changed',
-  'changedMap',
-  'disabled',
   'error',
   'errorMessage',
   'field',
   'fieldType',
   'fields',
-  'findError',
-  'findField',
-  'findValue',
   'initialCount',
-  'label',
   'name',
   'onChange',
-  'parent',
-  'placeholder',
-  'showInlineError',
-  'submitting',
   'transform',
-  'validating',
   'value',
 
-  // These are used by AutoField
-  'allowedValues',
-  'component',
-];
+  // These props are provided by useField through context.state.
+  'disabled',
+  'label',
+  'placeholder',
+  'showInlineError',
 
-function filter<T extends {}>(props: T) {
-  return omit(props, registered);
+  // This is used by AutoField.
+  'component',
+
+  // These is used by AutoField and bridges.
+  'allowedValues',
+].sort();
+
+function filter<T extends object>(props: T) {
+  return pickBy(props, filterOne);
+}
+
+function filterOne(value: unknown, prop: string) {
+  return sortedIndexOf(registered, prop) === -1;
 }
 
 function register(...props: string[]) {
   props.forEach(prop => {
-    if (!registered.includes(prop)) {
-      registered.push(prop);
+    if (sortedIndexOf(registered, prop) === -1) {
+      registered.splice(sortedIndex(registered, prop), 0, prop);
     }
   });
 }
 
 export const filterDOMProps = Object.assign(filter, {
   register,
-  registered,
+  registered: registered as readonly string[],
 });

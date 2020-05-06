@@ -1,7 +1,7 @@
-import cloneDeep from 'lodash/cloneDeep';
+import clone from 'lodash/clone';
 import isEqual from 'lodash/isEqual';
 import omit from 'lodash/omit';
-import set from 'lodash/set';
+import setWith from 'lodash/setWith';
 
 // FIXME: This import is needed to correctly build AutoForm.d.ts file.
 import { BaseForm } from './BaseForm';
@@ -60,7 +60,9 @@ export function Auto<Base extends typeof ValidatedQuickForm>(Base: Base) {
 
     onChange(key: any, value: any) {
       this.setState(
-        state => ({ modelSync: set(cloneDeep(state.modelSync), key, value) }),
+        state => ({
+          modelSync: setWith(clone(state.modelSync), key, value, clone),
+        }),
         () => {
           super.onChange(key, value);
           this.setState(state => {

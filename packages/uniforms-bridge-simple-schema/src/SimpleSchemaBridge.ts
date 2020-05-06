@@ -1,5 +1,6 @@
 import cloneDeep from 'lodash/cloneDeep';
 import invariant from 'invariant';
+import memoize from 'lodash/memoize';
 import { Bridge, joinName } from 'uniforms';
 // @ts-ignore
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'; // eslint-disable-line
@@ -11,6 +12,11 @@ export default class SimpleSchemaBridge extends Bridge {
     super();
 
     this.schema = schema;
+
+    // Memoize for performance and referential equality.
+    this.getField = memoize(this.getField);
+    this.getSubfields = memoize(this.getSubfields);
+    this.getType = memoize(this.getType);
   }
 
   getError(name, error) {
@@ -151,12 +157,14 @@ export default class SimpleSchemaBridge extends Bridge {
 
   getValidator(options = { clean: true }) {
     const validator = this.schema.validator(options);
-
-    // Clean mutate its argument.
-    if (options.clean) {
-      return model => validator(cloneDeep({ ...model }));
-    }
-
-    return validator;
+    return model => {
+      try {
+        // Clean mutate its argument.
+        validator(options.clean ? cloneDeep({ ...model }) : model);
+        return null;
+      } catch (error) {
+        return error;
+      }
+    };
   }
 }

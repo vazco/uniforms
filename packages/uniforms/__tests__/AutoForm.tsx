@@ -21,10 +21,10 @@ describe('AutoForm', () => {
   });
 
   beforeEach(() => {
-    onChange.mockReset();
-    onChangeModel.mockReset();
-    onSubmit.mockReset();
-    validator.mockReset();
+    onChange.mockClear();
+    onChangeModel.mockClear();
+    onSubmit.mockClear();
+    validator.mockClear();
   });
 
   describe('when changed', () => {
