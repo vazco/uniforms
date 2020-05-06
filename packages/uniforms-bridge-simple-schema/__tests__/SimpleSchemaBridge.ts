@@ -68,7 +68,9 @@ describe('SimpleSchemaBridge', () => {
     },
 
     validator() {
-      throw 'ValidationError';
+      return () => {
+        throw 'ValidationError';
+      };
     },
   };
 
@@ -311,7 +313,21 @@ describe('SimpleSchemaBridge', () => {
 
   describe('#getValidator', () => {
     it('calls correct validator', () => {
-      expect(() => bridge.getValidator()({})).toThrow();
+      const bridge = new SimpleSchemaBridge({
+        ...schema,
+        validator() {
+          return model => {
+            if (typeof model.x !== 'number') {
+              throw new Error();
+            }
+          };
+        },
+      });
+
+      expect(bridge.getValidator()({})).not.toEqual(null);
+      expect(bridge.getValidator({})({})).not.toEqual(null);
+      expect(bridge.getValidator()({ x: 1 })).toEqual(null);
+      expect(bridge.getValidator({})({ x: 1 })).toEqual(null);
     });
   });
 });

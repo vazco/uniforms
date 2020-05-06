@@ -2,6 +2,19 @@
 
 - **Breaking:** Removed `BaseForm.getChangedKeys`. Use `changedKeys` directly.
 - **Breaking:** Removed default exports in the `uniforms` package. Use named imports instead (e.g. `import { BaseForm } from 'uniforms'`). This allows to effectively export types along with values.
+- **Breaking:** Reworked validation flow. For motivation and more insigths see [\#711](https://github.com/vazco/uniforms/issues/711).
+  - `onValidate` is no longer using callbacks. The error (or the lack of it) has to be returned either synchronously or asynchronously (i.e. wrapped in a promise).
+  - `onSubmitSuccess` and `onSubmitFailure` got removed. To preserve the current behavior, simply combine them into the `onSubmit`:
+  ```diff
+  -onSubmit={onSubmit}
+  -onSubmitSuccess={onSubmitSuccess}
+  -onSubmitFailure={onSubmitFailure}
+  +onSubmit={model => {
+  +  const result = onSubmit(model);
+  +  result.then(onSubmitSuccess, onSubmitFailure);
+  +  return result;
+  +}}`
+  ```
 - **Changed:** For performance reasons `getField`, `getSubfields`, and `getType` of all bridges are now memoized.
 - **Changed:** For performance reasons `filterDOMProps.registered` is now `readonly string[]` instead of `string[]`. Internally, `omit` got replaced with `pickBy` and `filterDOMProps.registered` is now sorted. `filterDOMProps.register` behavior remains unchanged.
 

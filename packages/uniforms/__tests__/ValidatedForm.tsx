@@ -10,8 +10,8 @@ jest.mock('meteor/check');
 
 describe('ValidatedForm', () => {
   const onChange = jest.fn();
-  const onSubmit = jest.fn(async () => {});
-  const onValidate = jest.fn((model, error, next) => next());
+  const onSubmit = jest.fn();
+  const onValidate = jest.fn((model, error) => error);
   const validator = jest.fn();
   const validatorForSchema = jest.fn(() => validator);
 
@@ -26,10 +26,10 @@ describe('ValidatedForm', () => {
   const schema = new SimpleSchemaBridge(schemaDefinition);
 
   beforeEach(() => {
-    onChange.mockReset();
-    onSubmit.mockReset();
+    onChange.mockClear();
+    onSubmit.mockClear();
     onValidate.mockClear();
-    validator.mockReset();
+    validator.mockClear();
     validatorForSchema.mockClear();
   });
 
@@ -60,7 +60,7 @@ describe('ValidatedForm', () => {
         throw error;
       });
 
-      form.validate().catch(() => {});
+      form.validate();
       await new Promise(resolve => process.nextTick(resolve));
 
       expect(wrapper.instance().getContext().error).toBe(error);
@@ -69,34 +69,24 @@ describe('ValidatedForm', () => {
     it('correctly calls `onValidate` when validation succeeds', () => {
       form.validate();
       expect(onValidate).toHaveBeenCalledTimes(1);
-      expect(onValidate).toHaveBeenLastCalledWith(
-        model,
-        null,
-        expect.any(Function),
-      );
+      expect(onValidate).toHaveBeenLastCalledWith(model, null);
     });
 
     it('correctly calls `onValidate` when validation fails ', () => {
-      validator.mockImplementation(() => {
+      validator.mockImplementationOnce(() => {
         throw error;
       });
 
-      form.validate().catch(() => {});
+      form.validate();
 
       expect(onValidate).toHaveBeenCalledTimes(1);
-      expect(onValidate).toHaveBeenLastCalledWith(
-        model,
-        error,
-        expect.any(Function),
-      );
+      expect(onValidate).toHaveBeenLastCalledWith(model, error);
     });
 
     it('updates error state with async errors from `onValidate`', async () => {
-      onValidate.mockImplementationOnce((model, existingError, next) => {
-        next(error);
-      });
+      onValidate.mockImplementationOnce(() => error);
 
-      form.validate().catch(() => {});
+      form.validate();
 
       expect(wrapper.instance().getContext().error).toBe(error);
     });
@@ -105,9 +95,7 @@ describe('ValidatedForm', () => {
       validator.mockImplementationOnce(() => {
         throw error;
       });
-      onValidate.mockImplementationOnce((model, existingError, next) => {
-        next(null);
-      });
+      onValidate.mockImplementationOnce(() => null);
       form.validate();
 
       expect(validator).toHaveBeenCalled();
@@ -122,17 +110,6 @@ describe('ValidatedForm', () => {
       expect(wrapper.instance().getContext().validating).toBe(false);
     });
 
-    it('sets `validating` `true` while validating', async () => {
-      onValidate.mockImplementationOnce(() => {});
-      form.validate();
-      expect(wrapper.instance().getContext().validating).toBe(true);
-
-      // Resolve the async validation by calling the third argument of the first call to onValidate.
-      expect(onValidate).toHaveBeenCalledTimes(1);
-      onValidate.mock.calls[0][2]();
-      expect(wrapper.instance().getContext().validating).toBe(false);
-    });
-
     it('uses `modelTransform`s `validate` mode', () => {
       const transformedModel = { b: 1 };
       const modelTransform = (mode, model) =>
@@ -140,11 +117,7 @@ describe('ValidatedForm', () => {
       wrapper.setProps({ modelTransform });
       form.validate();
       expect(validator).toHaveBeenLastCalledWith(transformedModel);
-      expect(onValidate).toHaveBeenLastCalledWith(
-        transformedModel,
-        null,
-        expect.any(Function),
-      );
+      expect(onValidate).toHaveBeenLastCalledWith(transformedModel, null);
     });
   });
 
@@ -169,7 +142,7 @@ describe('ValidatedForm', () => {
     });
 
     it('skips `onSubmit` when validation fails', async () => {
-      validator.mockImplementation(() => {
+      validator.mockImplementationOnce(() => {
         throw error;
       });
       wrapper.find('form').simulate('submit');
@@ -185,27 +158,6 @@ describe('ValidatedForm', () => {
 
       expect(onSubmit).toHaveBeenCalled();
       expect(wrapper.instance().getContext().error).toBe(error);
-    });
-
-    it('sets `submitting` `true` while validating, before `BaseForm#onSubmit`', async () => {
-      onValidate.mockImplementationOnce(() => {});
-      wrapper.find('form').simulate('submit');
-      await new Promise(resolve => process.nextTick(resolve));
-      expect(wrapper.instance().getContext().submitting).toBe(true);
-    });
-
-    it('sets `submitting` back to `false` after sync `onSubmit`', async () => {
-      onValidate.mockImplementationOnce(() => {});
-      onSubmit.mockImplementationOnce(async () => {});
-      wrapper.find('form').simulate('submit');
-      await new Promise(resolve => process.nextTick(resolve));
-
-      expect(onValidate).toHaveBeenCalledTimes(1);
-      // Resolve the async validation by calling the third argument of the first call to onValidate.
-      onValidate.mock.calls[0][2]();
-
-      await new Promise(resolve => process.nextTick(resolve));
-      expect(wrapper.instance().getContext().submitting).toBe(false);
     });
 
     it('works if unmounts on submit', async () => {
@@ -259,7 +211,7 @@ describe('ValidatedForm', () => {
         wrapper.find('form').simulate('submit');
         await new Promise(resolve => process.nextTick(resolve));
 
-        validator.mockReset();
+        validator.mockClear();
         wrapper.instance().getContext().onChange('key', 'value');
         expect(validator).toHaveBeenCalledTimes(1);
       });
@@ -387,6 +339,125 @@ describe('ValidatedForm', () => {
         expect(validator).not.toBeCalled();
         expect(alternativeValidator).toHaveBeenCalledTimes(1);
       });
+    });
+  });
+
+  describe('validation flow', () => {
+    const variantGroups = [
+      {
+        'fail-async': () => Promise.resolve(error),
+        'fail-sync': () => error,
+        'good-async': () => Promise.resolve(null),
+        'good-async-silent': () => Promise.resolve(),
+        'good-sync': () => null,
+        'good-sync-silent': () => {},
+      },
+      {
+        'fail-async': () => Promise.resolve(error),
+        'fail-sync': () => error,
+        'good-async': () => Promise.resolve(null),
+        'good-async-silent': () => Promise.resolve(),
+        'good-sync': () => null,
+        'good-sync-silent': () => {},
+        'pass-async': (_, error) => Promise.resolve(error),
+        'pass-sync': (_, error) => error,
+      },
+      {
+        'fail-async': () =>
+          new Promise((_, reject) => setTimeout(() => reject(error))),
+        'good-async': () =>
+          new Promise(resolve => setTimeout(() => resolve('ok'))),
+        'good-sync': () => 'ok',
+      },
+    ] as const;
+
+    function cartesian<X, Y>(xs: X[], ys: Y[]) {
+      return xs.reduce<[X, Y][]>(
+        (xys, x) => ys.reduce((xys, y) => [...xys, [x, y]], xys),
+        [],
+      );
+    }
+
+    function keys<X>(x: X) {
+      return Object.keys(x) as (keyof X)[];
+    }
+
+    const cases = cartesian(
+      [true, false] as [true, false],
+      cartesian(
+        keys(variantGroups[0]),
+        cartesian(keys(variantGroups[1]), keys(variantGroups[2])),
+      ),
+    );
+
+    const schema = new SimpleSchemaBridge(schemaDefinition);
+    schema.getValidator = () => validator;
+
+    const flatPair4 = ([a, [b, [c, d]]]) => [a, b, c, d] as const;
+    it.each(cases.map(flatPair4))('works for %p/%p/%p/%p', async (...modes) => {
+      const [hasError, validatorMode, onValidateMode, onSubmitMode] = modes;
+      const wrapper = mount<ValidatedForm>(
+        <ValidatedForm
+          error={hasError ? error : null}
+          onSubmit={onSubmit}
+          onValidate={onValidate}
+          schema={schema}
+        />,
+      );
+
+      const asyncSubmission = onSubmitMode.includes('async');
+      const asyncValidation =
+        validatorMode.includes('async') || onValidateMode.includes('async');
+      const hasValidationError =
+        hasError ||
+        (validatorMode.includes('good')
+          ? onValidateMode.includes('fail')
+          : !onValidateMode.includes('good'));
+      const hasSubmissionError =
+        hasValidationError || onSubmitMode.includes('fail');
+
+      for (let run = 1; run <= 3; ++run) {
+        validator.mockImplementationOnce(variantGroups[0][validatorMode]);
+        onValidate.mockImplementationOnce(variantGroups[1][onValidateMode]);
+        onSubmit.mockImplementationOnce(variantGroups[2][onSubmitMode]);
+
+        const result = wrapper.instance().submit();
+        expect(validator).toHaveBeenCalledTimes(run);
+
+        if (asyncValidation) {
+          expect(wrapper.instance().getContext().validating).toBe(true);
+          await new Promise(resolve => process.nextTick(resolve));
+          expect(wrapper.instance().getContext().validating).toBe(false);
+        }
+
+        await new Promise(resolve => process.nextTick(resolve));
+
+        expect(onValidate).toHaveBeenCalledTimes(run);
+
+        if (hasValidationError) {
+          expect(onSubmit).toHaveBeenCalledTimes(0);
+          expect(wrapper.instance().getContext().error).toBe(error);
+        } else {
+          expect(onSubmit).toHaveBeenCalledTimes(run);
+          expect(wrapper.instance().getContext().error).toBe(null);
+        }
+
+        if (!hasValidationError && asyncSubmission) {
+          expect(wrapper.instance().getContext().submitting).toBe(true);
+          await new Promise(resolve => setTimeout(resolve));
+          expect(wrapper.instance().getContext().submitting).toBe(false);
+        }
+
+        await new Promise(resolve => setTimeout(resolve));
+
+        if (hasSubmissionError) {
+          expect(wrapper.instance().getContext().error).toBe(error);
+          await expect(result).rejects.toEqual(error);
+        } else {
+          expect(wrapper.instance().getContext().error).toBe(null);
+          await expect(result).resolves.toEqual('ok');
+        }
+      }
     });
   });
 });
