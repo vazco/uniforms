@@ -38,12 +38,6 @@ export default class GraphQLBridge extends Bridge {
     this.getType = memoize(this.getType);
   }
 
-  // This bridge has 3 arguments, so it cannot be constructed implicite in the
-  // createSchemaBridge.
-  static check(/* schema */) {
-    return false;
-  }
-
   getError(name, error) {
     return (
       (error &&

@@ -8,12 +8,6 @@ describe('Bridge', () => {
     expect(() => new Bridge()).toThrow();
   });
 
-  describe('#check', () => {
-    it('throws an unimplemented error', () => {
-      expect(Bridge.check).toThrow();
-    });
-  });
-
   [
     'getError',
     'getErrorMessage',

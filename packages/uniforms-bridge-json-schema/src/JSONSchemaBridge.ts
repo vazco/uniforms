@@ -76,10 +76,6 @@ export default class JSONSchemaBridge extends Bridge {
     this.getType = memoize(this.getType);
   }
 
-  static check() {
-    return false;
-  }
-
   getError(name, error) {
     const nameParts = joinName(null, name);
     const rootName = joinName(nameParts.slice(0, -1));

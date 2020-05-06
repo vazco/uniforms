@@ -2,12 +2,7 @@
 import { Match } from 'meteor/check'; // eslint-disable-line
 // @ts-ignore
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'; // eslint-disable-line
-import { createSchemaBridge, filterDOMProps } from 'uniforms';
-
-import SimpleSchemaBridge from './SimpleSchemaBridge';
-
-// Register bridge.
-createSchemaBridge.register(SimpleSchemaBridge);
+import { filterDOMProps } from 'uniforms';
 
 // Register custom property.
 SimpleSchema.extendOptions({

@@ -9,7 +9,6 @@ import { Bridge } from './Bridge';
 import { ChangedMap, Context, DeepPartial, ModelTransformMode } from './types';
 import { changedKeys } from './changedKeys';
 import { context } from './context';
-import { createSchemaBridge } from './createSchemaBridge';
 import { randomIds } from './randomIds';
 
 export type BaseFormProps<Model> = {
@@ -28,12 +27,11 @@ export type BaseFormProps<Model> = {
   onChange?(key: string, value: any): void;
   onSubmit(model: DeepPartial<Model>): any;
   placeholder?: boolean;
-  schema: any;
+  schema: Bridge;
   showInlineError?: boolean;
 };
 
 export type BaseFormState<Model> = {
-  bridge: Bridge;
   changed: boolean;
   changedMap: ChangedMap<Model>;
   resetCount: number;
@@ -61,7 +59,6 @@ export class BaseForm<
 
     // @ts-ignore: State may be bigger, but it'll be covered by the subclasses.
     this.state = {
-      bridge: createSchemaBridge(this.props.schema),
       changed: false,
       changedMap: Object.create(null),
       resetCount: 0,
@@ -81,14 +78,6 @@ export class BaseForm<
       mode !== undefined && this.props.modelTransform
         ? this.props.modelTransform(mode, model)
         : model;
-  }
-
-  static getDerivedStateFromProps<Model>(
-    { schema }: BaseFormProps<Model>,
-    { bridge }: BaseFormState<Model>,
-  ): Partial<BaseFormState<Model>> {
-    // TODO: It updates the state each time. Add bridge.isSame(schema)?
-    return { bridge: createSchemaBridge(schema) };
   }
 
   componentDidMount() {
@@ -147,7 +136,7 @@ export class BaseForm<
   }
 
   getContextSchema(): Context<Model>['schema'] {
-    return this.state.bridge;
+    return this.props.schema;
   }
 
   getContextOnChange(): Context<Model>['onChange'] {

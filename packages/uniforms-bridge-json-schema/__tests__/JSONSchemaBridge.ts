@@ -150,15 +150,6 @@ describe('JSONSchemaBridge', () => {
     });
   });
 
-  describe('#check()', () => {
-    it('always returns false', () => {
-      expect(JSONSchemaBridge.check()).not.toBeTruthy();
-      expect(JSONSchemaBridge.check(bridge)).not.toBeTruthy();
-      expect(JSONSchemaBridge.check(schema)).not.toBeTruthy();
-      expect(JSONSchemaBridge.check(validator)).not.toBeTruthy();
-    });
-  });
-
   describe('#getError', () => {
     it('works without error', () => {
       expect(bridge.getError('age')).not.toBeTruthy();

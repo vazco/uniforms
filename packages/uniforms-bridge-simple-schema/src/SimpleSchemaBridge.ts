@@ -19,17 +19,6 @@ export default class SimpleSchemaBridge extends Bridge {
     this.getType = memoize(this.getType);
   }
 
-  static check(schema) {
-    return (
-      schema &&
-      schema.getDefinition &&
-      schema.messageForError &&
-      schema.objectKeys &&
-      schema.validator &&
-      schema.version !== 2
-    );
-  }
-
   getError(name, error) {
     return (
       (error &&
