@@ -1,5 +1,5 @@
 import invariant from 'invariant';
-import React, { ComponentType, createElement } from 'react';
+import { ComponentType, createElement } from 'react';
 import { Override, useField } from 'uniforms';
 
 import BoolField from './BoolField';
@@ -33,11 +33,14 @@ export default function AutoField(originalProps: AutoFieldProps) {
       }
     } else {
       switch (fieldType) {
-        case Date:
-          component = DateField;
-          break;
         case Array:
           component = ListField;
+          break;
+        case Boolean:
+          component = BoolField;
+          break;
+        case Date:
+          component = DateField;
           break;
         case Number:
           component = NumField;
@@ -48,14 +51,11 @@ export default function AutoField(originalProps: AutoFieldProps) {
         case String:
           component = TextField;
           break;
-        case Boolean:
-          component = BoolField;
-          break;
       }
 
       invariant(component, 'Unsupported field type: %s', fieldType);
     }
   }
 
-  return createElement(component, props);
+  return createElement(component, originalProps);
 }

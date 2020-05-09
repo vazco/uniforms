@@ -57,6 +57,5 @@ export default function AutoField(originalProps: AutoFieldProps) {
     }
   }
 
-  // TODO: The flow along with the invariant above ensures its existence.
   return createElement(component, originalProps);
 }
