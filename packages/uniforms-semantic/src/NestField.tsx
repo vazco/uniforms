@@ -1,12 +1,6 @@
-import classnames from 'classnames';
 import React, { HTMLProps } from 'react';
-import {
-  connectField,
-  filterDOMProps,
-  injectName,
-  joinName,
-  Override,
-} from 'uniforms';
+import classnames from 'classnames';
+import { Override, connectField, filterDOMProps } from 'uniforms';
 
 import AutoField from './AutoField';
 
@@ -52,15 +46,14 @@ function Nest({
         <div className="ui red basic label">{errorMessage}</div>
       )}
 
-      {children
-        ? injectName(name, children)
-        : fields?.map(key => (
-            <AutoField key={key} name={joinName(name, key)} {...itemProps} />
-          ))}
+      {children ||
+        fields?.map(field => (
+          <AutoField key={field} name={field} {...itemProps} />
+        ))}
     </div>
   );
 }
 
 Nest.defaultProps = { grouped: true };
 
-export default connectField(Nest, { includeInChain: false });
+export default connectField(Nest);
