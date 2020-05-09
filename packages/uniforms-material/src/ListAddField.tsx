@@ -1,9 +1,8 @@
-import cloneDeep from 'lodash/cloneDeep';
 import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
 import IconButton, { IconButtonProps } from '@material-ui/core/IconButton';
-import omit from 'lodash/omit';
 import React from 'react';
-import { filterDOMProps, joinName, Override, useField } from 'uniforms';
+import cloneDeep from 'lodash/cloneDeep';
+import { Override, filterDOMProps, joinName, useField } from 'uniforms';
 
 export type ListAddFieldProps<T> = Override<
   IconButtonProps,
@@ -16,45 +15,44 @@ export type ListAddFieldProps<T> = Override<
   } & Pick<FormControlProps, 'fullWidth' | 'margin' | 'variant'>
 >;
 
-function ListAdd<T>(rawProps: ListAddFieldProps<T>) {
-  const props = useField<ListAddFieldProps<T>, T>(
-    rawProps.name,
-    omit(rawProps, 'fullWidth'),
-    {
-      initialValue: false,
-    },
-  )[0];
+export default function ListAddField<T>(rawProps: ListAddFieldProps<T>) {
+  const {
+    disabled,
+    fullWidth,
+    icon,
+    margin,
+    parent: parentFromProps,
+    value,
+    variant,
+    ...props
+  } = useField<ListAddFieldProps<T>, T>(rawProps.name, rawProps)[0];
 
-  const parentName = joinName(joinName(null, props.name).slice(0, -1));
+  const nameParts = joinName(null, rawProps.name);
+  const parentName = joinName(nameParts.slice(0, -1));
   const parent = useField<{ maxCount?: number }, T[]>(parentName, {})[0];
-  if (rawProps.parent) Object.assign(parent, rawProps.parent);
+  if (parentFromProps) Object.assign(parent, parentFromProps);
 
   const limitNotReached =
-    !props.disabled && !(parent.maxCount! <= parent.value!.length);
+    !disabled && !(parent.maxCount! <= parent.value!.length);
+
   return (
-    <FormControl
-      fullWidth={rawProps.fullWidth}
-      margin={rawProps.margin}
-      variant={rawProps.variant}
-    >
+    <FormControl fullWidth={fullWidth} margin={margin} variant={variant}>
       <IconButton
+        {...filterDOMProps(props)}
         disabled={!limitNotReached}
         onClick={() => {
           if (limitNotReached)
-            parent.onChange(parent.value!.concat([cloneDeep(props.value!)]));
+            parent.onChange(parent.value!.concat([cloneDeep(value!)]));
         }}
-        {...filterDOMProps(omit(props, 'value'))}
       >
-        {rawProps.icon}
+        {icon}
       </IconButton>
     </FormControl>
   );
 }
 
-ListAdd.defaultProps = {
+ListAddField.defaultProps = {
   fullWidth: true,
   icon: '+',
   margin: 'dense',
 };
-
-export default ListAdd;

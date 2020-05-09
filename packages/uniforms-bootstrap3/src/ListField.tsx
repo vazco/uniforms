@@ -1,5 +1,11 @@
+import React, {
+  Children,
+  HTMLProps,
+  ReactNode,
+  cloneElement,
+  isValidElement,
+} from 'react';
 import classnames from 'classnames';
-import React, { Children, HTMLProps, ReactNode, cloneElement } from 'react';
 import { connectField, filterDOMProps, joinName, Override } from 'uniforms';
 
 import ListAddField from './ListAddField';
@@ -36,11 +42,6 @@ function List<T>({
   value,
   ...props
 }: ListFieldProps<T>) {
-  const listAddProps = {
-    name: `${name}.$`,
-    initialCount,
-    addIcon,
-  };
   return (
     <div
       className={classnames(
@@ -55,7 +56,11 @@ function List<T>({
           <div className={classnames('panel-heading', { 'has-error': error })}>
             <label className="control-label">{label}&nbsp;</label>
 
-            <ListAddField {...listAddProps} />
+            <ListAddField
+              addIcon={addIcon}
+              initialCount={initialCount}
+              name="$"
+            />
 
             {!!(error && showInlineError) && (
               <span className="help-block">{errorMessage}</span>
@@ -64,24 +69,21 @@ function List<T>({
         )}
 
         {children
-          ? value.map((item: any, index: number) =>
-              Children.map(children as JSX.Element, child =>
-                cloneElement(child, {
-                  key: index,
-                  label: null,
-                  name: joinName(
-                    name,
-                    child.props.name && child.props.name.replace('$', index),
-                  ),
-                  removeIcon,
-                }),
+          ? value.map((item, index) =>
+              Children.map(children, child =>
+                isValidElement(child) && child.props.name
+                  ? cloneElement(child, {
+                      key: index,
+                      name: child.props.name.replace('$', '' + index),
+                      removeIcon,
+                    })
+                  : child,
               ),
             )
-          : value.map((item: any, index: number) => (
+          : value.map((item, index) => (
               <ListItemField
                 key={index}
-                label={undefined}
-                name={joinName(name, index)}
+                name={'' + index}
                 removeIcon={removeIcon}
                 {...itemProps}
               />
@@ -91,6 +93,4 @@ function List<T>({
   );
 }
 
-export default connectField(List, {
-  includeInChain: false,
-});
+export default connectField(List);

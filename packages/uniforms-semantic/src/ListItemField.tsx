@@ -1,5 +1,10 @@
-import React, { Children, ReactNode, cloneElement } from 'react';
-import { connectField, joinName } from 'uniforms';
+import React, {
+  Children,
+  ReactNode,
+  cloneElement,
+  isValidElement,
+} from 'react';
+import { joinName } from 'uniforms';
 
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
@@ -9,7 +14,7 @@ export type ListItemFieldProps = {
   children?: ReactNode;
 };
 
-function ListItem(props: ListItemFieldProps) {
+export default function ListItemField(props: ListItemFieldProps) {
   const { children, name } = props;
   return (
     <div className="item">
@@ -17,15 +22,17 @@ function ListItem(props: ListItemFieldProps) {
 
       <div className="middle aligned content" style={{ width: '100%' }}>
         {children ? (
-          Children.map(children as JSX.Element, child =>
-            cloneElement(child, {
-              name: joinName(name, child.props.name),
-              label: null,
-              style: {
-                margin: 0,
-                ...child.props.style,
-              },
-            }),
+          Children.map(props.children, child =>
+            isValidElement(child)
+              ? cloneElement(child, {
+                  name: joinName(props.name, child.props.name),
+                  label: null,
+                  style: {
+                    margin: 0,
+                    ...child.props.style,
+                  },
+                })
+              : child,
           )
         ) : (
           <AutoField {...props} style={{ margin: 0 }} />
@@ -34,7 +41,3 @@ function ListItem(props: ListItemFieldProps) {
     </div>
   );
 }
-
-export default connectField(ListItem, {
-  includeInChain: false,
-});

@@ -1,15 +1,19 @@
-import ListMaterial, {
-  ListProps as MaterialListProps,
-} from '@material-ui/core/List';
+import ListMaterial, { ListProps } from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import React, { Children, cloneElement } from 'react';
-import { connectField, filterDOMProps, joinName, Override } from 'uniforms';
+import React, {
+  Children,
+  HTMLProps,
+  ReactNode,
+  cloneElement,
+  isValidElement,
+} from 'react';
+import { Override, connectField, filterDOMProps } from 'uniforms';
 
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';
 
 export type ListFieldProps<T> = Override<
-  MaterialListProps,
+  ListProps,
   {
     addIcon?: any;
     initialCount?: number;
@@ -42,37 +46,28 @@ function List<T>({
     >
       {children
         ? value.map((item, index) =>
-            Children.map(children as JSX.Element, child =>
-              cloneElement(child, {
-                key: index,
-                label: null,
-                name: joinName(
-                  name,
-                  child.props.name && child.props.name.replace('$', index),
-                ),
-              }),
+            Children.map(children, child =>
+              isValidElement(child) && child.props.name
+                ? cloneElement(child, {
+                    key: index,
+                    name: child.props.name.replace('$', '' + index),
+                  })
+                : child,
             ),
           )
         : value.map((item, index) => (
-            <ListItemField
-              key={index}
-              label={undefined}
-              name={joinName(name, index)}
-              {...itemProps}
-            />
+            <ListItemField key={index} name={'' + index} {...itemProps} />
           ))}
     </ListMaterial>,
     <ListAddField
-      key="listAddField"
-      name={`${name}.$`}
       icon={addIcon}
       initialCount={initialCount}
+      key="listAddField"
+      name="$"
     />,
   ];
 }
 
 // FIXME: Use React.Fragment instead of returning an array if possible.
 // @ts-ignore
-export default connectField(List, {
-  includeInChain: false,
-});
+export default connectField(List);

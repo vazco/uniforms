@@ -1,8 +1,11 @@
-import ListItemMaterial, {
-  ListItemProps as ListItemMaterialProps,
-} from '@material-ui/core/ListItem';
-import React, { Children, ReactNode, cloneElement } from 'react';
-import { connectField, joinName } from 'uniforms';
+import ListItemMaterial, { ListItemProps } from '@material-ui/core/ListItem';
+import React, {
+  Children,
+  ReactNode,
+  cloneElement,
+  isValidElement,
+} from 'react';
+import { joinName } from 'uniforms';
 
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
@@ -11,9 +14,9 @@ export type ListItemFieldProps = {
   children?: ReactNode;
   name: string;
   removeIcon?: any;
-} & Pick<ListItemMaterialProps, 'dense' | 'divider' | 'disableGutters'>;
+} & Pick<ListItemProps, 'dense' | 'divider' | 'disableGutters'>;
 
-const ListItem = ({
+export default function ListItemField({
   children,
   dense,
   disableGutters,
@@ -21,7 +24,7 @@ const ListItem = ({
   name,
   removeIcon,
   ...props
-}: ListItemFieldProps) => {
+}: ListItemFieldProps) {
   return (
     <ListItemMaterial
       dense={dense}
@@ -29,11 +32,13 @@ const ListItem = ({
       disableGutters={disableGutters}
     >
       {children ? (
-        Children.map(children as JSX.Element, child =>
-          cloneElement(child, {
-            name: joinName(name, child.props.name),
-            label: null,
-          }),
+        Children.map(children, child =>
+          isValidElement(child)
+            ? cloneElement(child, {
+                name: joinName(name, child.props.name),
+                label: null,
+              })
+            : child,
         )
       ) : (
         <AutoField children={children} name={name} {...props} />
@@ -41,10 +46,8 @@ const ListItem = ({
       <ListDelField name={name} icon={removeIcon} />
     </ListItemMaterial>
   );
-};
+}
 
-ListItem.defaultProps = {
+ListItemField.defaultProps = {
   dense: true,
 };
-
-export default connectField(ListItem, { includeInChain: false });

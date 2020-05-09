@@ -1,4 +1,9 @@
-import React, { Children, ReactNode, cloneElement } from 'react';
+import React, {
+  Children,
+  ReactNode,
+  cloneElement,
+  isValidElement,
+} from 'react';
 import { joinName } from 'uniforms';
 
 import AutoField from './AutoField';
@@ -12,7 +17,7 @@ export type ListItemFieldProps = {
   wrapperCol?: any;
 };
 
-export default function ListItem(props: ListItemFieldProps) {
+export default function ListItemField(props: ListItemFieldProps) {
   return (
     <div>
       <div
@@ -39,11 +44,13 @@ export default function ListItem(props: ListItemFieldProps) {
 
       <div style={{ width: '100%' }}>
         {props.children ? (
-          Children.map(props.children as JSX.Element, child =>
-            cloneElement(child, {
-              name: joinName(props.name, child.props.name),
-              label: null,
-            }),
+          Children.map(props.children, child =>
+            isValidElement(child)
+              ? cloneElement(child, {
+                  name: joinName(props.name, child.props.name),
+                  label: null,
+                })
+              : child,
           )
         ) : (
           <AutoField {...props} />

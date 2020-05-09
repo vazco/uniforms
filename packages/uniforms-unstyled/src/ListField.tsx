@@ -1,5 +1,11 @@
-import React, { Children, HTMLProps, ReactNode, cloneElement } from 'react';
-import { connectField, filterDOMProps, joinName, Override } from 'uniforms';
+import React, {
+  Children,
+  HTMLProps,
+  ReactNode,
+  cloneElement,
+  isValidElement,
+} from 'react';
+import { Override, connectField, filterDOMProps } from 'uniforms';
 
 import ListItemField from './ListItemField';
 import ListAddField from './ListAddField';
@@ -30,35 +36,26 @@ function List<T>({
       {label && (
         <label>
           {label}
-          <ListAddField initialCount={initialCount} name={`${name}.$`} />
+          <ListAddField initialCount={initialCount} name="$" />
         </label>
       )}
 
       {children
         ? value.map((item, index) =>
-            Children.map(children as JSX.Element, child =>
-              cloneElement(child, {
-                key: index,
-                label: null,
-                name: joinName(
-                  name,
-                  child.props.name && child.props.name.replace('$', index),
-                ),
-              }),
+            Children.map(children, child =>
+              isValidElement(child) && child.props.name
+                ? cloneElement(child, {
+                    key: index,
+                    name: child.props.name.replace('$', '' + index),
+                  })
+                : child,
             ),
           )
         : value.map((item, index) => (
-            <ListItemField
-              key={index}
-              label={null}
-              name={joinName(name, index)}
-              {...itemProps}
-            />
+            <ListItemField key={index} name={'' + index} {...itemProps} />
           ))}
     </ul>
   );
 }
 
-export default connectField(List, {
-  includeInChain: false,
-});
+export default connectField(List);

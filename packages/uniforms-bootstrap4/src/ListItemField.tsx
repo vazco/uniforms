@@ -1,5 +1,10 @@
-import React, { Children, ReactNode, cloneElement } from 'react';
-import { connectField, joinName } from 'uniforms';
+import React, {
+  Children,
+  ReactNode,
+  cloneElement,
+  isValidElement,
+} from 'react';
+import { joinName } from 'uniforms';
 
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
@@ -10,21 +15,25 @@ export type ListItemFieldProps = {
   removeIcon?: any;
 };
 
-function ListItem({ removeIcon, ...props }: ListItemFieldProps) {
-  const { name, children } = props;
+export default function ListItemField({
+  children,
+  removeIcon,
+  ...props
+}: ListItemFieldProps) {
   return (
     <div className="row">
       <div className="col-1">
-        <ListDelField name={name} removeIcon={removeIcon} />
+        <ListDelField name={props.name} removeIcon={removeIcon} />
       </div>
 
       {children ? (
-        Children.map(children as JSX.Element, child =>
-          cloneElement(child, {
-            className: 'col-11',
-            name: joinName(name, child.props.name),
-            label: null,
-          }),
+        Children.map(children, child =>
+          isValidElement(child)
+            ? cloneElement(child, {
+                name: joinName(props.name, child.props.name),
+                label: null,
+              })
+            : child,
         )
       ) : (
         <AutoField {...props} className="col-11" />
@@ -32,5 +41,3 @@ function ListItem({ removeIcon, ...props }: ListItemFieldProps) {
     </div>
   );
 }
-
-export default connectField(ListItem, { includeInChain: false });

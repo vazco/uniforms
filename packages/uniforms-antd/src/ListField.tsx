@@ -1,5 +1,11 @@
 import Icon from 'antd/lib/icon';
-import React, { Children, HTMLProps, ReactNode, cloneElement } from 'react';
+import React, {
+  Children,
+  HTMLProps,
+  ReactNode,
+  cloneElement,
+  isValidElement,
+} from 'react';
 import Tooltip from 'antd/lib/tooltip';
 import { connectField, filterDOMProps, joinName, Override } from 'uniforms';
 
@@ -58,30 +64,27 @@ function List<T>({
       {!!(error && showInlineError) && <div>{errorMessage}</div>}
 
       {children
-        ? value.map((item: any, index: number) =>
-            Children.map(children as JSX.Element, child =>
-              cloneElement(child, {
-                key: index,
-                label: null,
-                name: joinName(
-                  name,
-                  child.props.name && child.props.name.replace('$', index),
-                ),
-              }),
+        ? value.map((item, index) =>
+            Children.map(children, child =>
+              isValidElement(child) && child.props.name
+                ? cloneElement(child, {
+                    key: index,
+                    name: child.props.name.replace('$', '' + index),
+                  })
+                : child,
             ),
           )
-        : value.map((item: any, index: number) => (
+        : value.map((item, index) => (
             <ListItemField
               key={index}
-              label={undefined}
               labelCol={labelCol}
-              name={joinName(name, index)}
+              name={'' + index}
               wrapperCol={wrapperCol}
               {...itemProps}
             />
           ))}
 
-      <ListAddField name={`${name}.$`} initialCount={initialCount} />
+      <ListAddField name="$" initialCount={initialCount} />
     </div>
   );
 }
@@ -96,6 +99,4 @@ List.defaultProps = {
   },
 };
 
-export default connectField(List, {
-  includeInChain: false,
-});
+export default connectField(List);
