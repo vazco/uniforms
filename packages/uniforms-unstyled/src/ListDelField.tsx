@@ -1,24 +1,29 @@
 import React, { HTMLProps } from 'react';
-import { Override, filterDOMProps, joinName, useField } from 'uniforms';
+import {
+  Override,
+  connectField,
+  filterDOMProps,
+  joinName,
+  useField,
+} from 'uniforms';
 
-export type ListDelFieldProps<T> = Override<
-  HTMLProps<HTMLSpanElement>,
-  {
-    name: string;
-    parent?: any;
-  }
+export type ListDelFieldProps = Override<
+  Omit<HTMLProps<HTMLSpanElement>, 'onChange'>,
+  { name: string }
 >;
 
-export default function ListDelField<T>(rawProps: ListDelFieldProps<T>) {
-  const props = useField<ListDelFieldProps<T>, T>(rawProps.name, rawProps)[0];
-
-  const nameParts = joinName(null, rawProps.name);
+function ListDel({ disabled, name, ...props }: ListDelFieldProps) {
+  const nameParts = joinName(null, name);
+  const nameIndex = +nameParts[nameParts.length - 1];
   const parentName = joinName(nameParts.slice(0, -1));
-  const parent = useField<{ minCount?: number }, T[]>(parentName, {})[0];
-  if (props.parent) Object.assign(parent, props.parent);
+  const parent = useField<{ minCount?: number }, unknown[]>(
+    parentName,
+    {},
+    { absoluteName: true },
+  )[0];
 
   const limitNotReached =
-    !props.disabled && !(parent.minCount! >= parent.value!.length);
+    !disabled && !(parent.minCount! >= parent.value!.length);
 
   return (
     <span
@@ -26,7 +31,7 @@ export default function ListDelField<T>(rawProps: ListDelFieldProps<T>) {
       onClick={() => {
         if (limitNotReached) {
           const value = parent.value!.slice();
-          value.splice(+nameParts[nameParts.length - 1], 1);
+          value.splice(nameIndex, 1);
           parent.onChange(value);
         }
       }}
@@ -35,3 +40,5 @@ export default function ListDelField<T>(rawProps: ListDelFieldProps<T>) {
     </span>
   );
 }
+
+export default connectField(ListDel);
