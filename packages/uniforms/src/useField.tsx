@@ -28,10 +28,14 @@ export function useField<
   Props extends Record<string, any>,
   Value = Props['value'],
   Model = Record<string, any>
->(fieldName: string, props: Props, options?: { initialValue?: boolean }) {
+>(
+  fieldName: string,
+  props: Props,
+  options?: { absoluteName?: boolean; initialValue?: boolean },
+) {
   const context = useForm<Model>();
 
-  const name = joinName(context.name, fieldName);
+  const name = joinName(options?.absoluteName ? '' : context.name, fieldName);
   const state = mapValues(context.state, (prev, key) => {
     const next = props[key];
     return next === null || next === undefined ? prev : !!next;
