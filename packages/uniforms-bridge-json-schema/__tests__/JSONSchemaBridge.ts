@@ -369,6 +369,12 @@ describe('JSONSchemaBridge', () => {
         /Field not found in schema/,
       );
     });
+
+    it('returns correct definition (allOf with $ref)', () => {
+      expect(bridge.getField('shippingAddress.street')).toEqual({
+        type: 'string',
+      });
+    });
   });
 
   describe('#getInitialValue', () => {
