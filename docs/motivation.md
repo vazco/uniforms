@@ -40,7 +40,7 @@ const ValidatedQuickForm = ValidatedForm.Validated(QuickForm.Quick(BaseForm));
   <small style={{display: 'block'}}>AutoValidatedQuickSemanticForm (using 5 "traits") viewed in React DevTools.</small>
 </p>
 
-While it’s not a universal approach that will work in every situation, using it in uniforms allows us to deliver clean-looking components while keeping extendability and separation of concerns.
+While it’s not a universal approach that will work in every situation, using it in uniforms allows us to deliver clean-looking components while keeping extensibility and separation of concerns.
 
 <hr />
 
