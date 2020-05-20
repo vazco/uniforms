@@ -1,6 +1,6 @@
 import FormLabel from '@material-ui/core/FormLabel';
 import React, { HTMLProps } from 'react';
-import { connectField, injectName, joinName, Override } from 'uniforms';
+import { Override, connectField } from 'uniforms';
 
 import AutoField from './AutoField';
 import wrapField from './wrapField';
@@ -25,12 +25,11 @@ function Nest({
   return wrapField(
     { ...props, component: undefined },
     label && <FormLabel component="legend">{label}</FormLabel>,
-    children
-      ? injectName(name, children)
-      : fields?.map(key => (
-          <AutoField key={key} name={joinName(name, key)} {...itemProps} />
-        )),
+    children ||
+      fields?.map(field => (
+        <AutoField key={field} name={field} {...itemProps} />
+      )),
   );
 }
 
-export default connectField(Nest, { includeInChain: false });
+export default connectField(Nest);

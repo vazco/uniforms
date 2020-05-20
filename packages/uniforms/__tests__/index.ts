@@ -12,7 +12,6 @@ it('exports everything', () => {
     connectField: expect.any(Function),
     context: expect.any(Object),
     filterDOMProps: expect.any(Function),
-    injectName: expect.any(Function),
     joinName: expect.any(Function),
     randomIds: expect.any(Function),
     useField: expect.any(Function),

@@ -18,8 +18,8 @@ test('<NestField> - renders an <AutoField> for each field', () => {
   );
 
   expect(wrapper.find(AutoField)).toHaveLength(2);
-  expect(wrapper.find(AutoField).at(0).prop('name')).toBe('x.a');
-  expect(wrapper.find(AutoField).at(1).prop('name')).toBe('x.b');
+  expect(wrapper.find(AutoField).at(0).prop('name')).toBe('a');
+  expect(wrapper.find(AutoField).at(1).prop('name')).toBe('b');
 });
 
 test('<NestField> - renders custom content if given', () => {

@@ -8,7 +8,6 @@ export * from './changedKeys';
 export * from './connectField';
 export * from './context';
 export * from './filterDOMProps';
-export * from './injectName';
 export * from './joinName';
 export * from './randomIds';
 export * from './types';
