@@ -47,7 +47,7 @@ export default function ExampleSimpleYetPowerful() {
               <li>Automatic state management</li>
               <li>Inline and asynchronous form validation</li>
               <li>
-                Clean-looking components while keeping extendability and
+                Clean-looking components while keeping extensibility and
                 separation of concerns
               </li>
             </ul>
