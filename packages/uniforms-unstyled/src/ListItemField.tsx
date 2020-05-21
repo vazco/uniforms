@@ -1,10 +1,5 @@
-import React, {
-  Children,
-  ReactNode,
-  cloneElement,
-  isValidElement,
-} from 'react';
-import { connectField, joinName } from 'uniforms';
+import React, { ReactNode } from 'react';
+import { connectField } from 'uniforms';
 
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
@@ -25,4 +20,4 @@ function ListItem({ children }: ListItemFieldProps) {
 
 ListItem.defaultProps = { children: <AutoField label={null} name="" /> };
 
-export default connectField(ListItem);
+export default connectField(ListItem, { initialValue: false });

@@ -15,7 +15,6 @@ export type ListAddFieldProps = Override<
 
 function ListAdd({ disabled, name, value, ...props }: ListAddFieldProps) {
   const nameParts = joinName(null, name);
-  const nameIndex = +nameParts[nameParts.length - 1];
   const parentName = joinName(nameParts.slice(0, -1));
   const parent = useField<{ maxCount?: number }, unknown[]>(
     parentName,
