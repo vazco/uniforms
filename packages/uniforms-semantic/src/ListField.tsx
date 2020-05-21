@@ -11,7 +11,7 @@ import { Override, connectField, filterDOMProps } from 'uniforms';
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';
 
-export type ListFieldProps<T> = Override<
+export type ListFieldProps = Override<
   HTMLProps<HTMLDivElement>,
   {
     children?: ReactNode;
@@ -21,11 +21,11 @@ export type ListFieldProps<T> = Override<
     itemProps?: {};
     name: string;
     showInlineError?: boolean;
-    value: T[];
+    value: unknown[];
   }
 >;
 
-function List<T>({
+function List({
   children,
   className,
   disabled,
@@ -39,7 +39,7 @@ function List<T>({
   showInlineError,
   value,
   ...props
-}: ListFieldProps<T>) {
+}: ListFieldProps) {
   return (
     <div
       className={classnames(
@@ -70,22 +70,21 @@ function List<T>({
         <div className="ui red basic label">{errorMessage}</div>
       )}
 
-      {children
-        ? value.map((item, index) =>
-            Children.map(children, child =>
-              isValidElement(child) && child.props.name
-                ? cloneElement(child, {
-                    key: index,
-                    name: child.props.name.replace('$', '' + index),
-                  })
-                : child,
-            ),
-          )
-        : value.map((item, index) => (
-            <ListItemField key={index} name={'' + index} {...itemProps} />
-          ))}
+      {value.map((item, itemIndex) =>
+        Children.map(children, (child, childIndex) =>
+          isValidElement(child)
+            ? cloneElement(child, {
+                key: `${itemIndex}-${childIndex}`,
+                name: child.props.name?.replace('$', '' + itemIndex),
+                ...itemProps,
+              })
+            : child,
+        ),
+      )}
     </div>
   );
 }
+
+List.defaultProps = { children: <ListItemField name="$" /> };
 
 export default connectField(List);

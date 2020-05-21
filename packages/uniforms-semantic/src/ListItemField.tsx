@@ -1,43 +1,26 @@
-import React, {
-  Children,
-  ReactNode,
-  cloneElement,
-  isValidElement,
-} from 'react';
-import { joinName } from 'uniforms';
+import React, { ReactNode } from 'react';
+import { connectField } from 'uniforms';
 
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
 
 export type ListItemFieldProps = {
+  children: ReactNode;
   name: string;
-  children?: ReactNode;
 };
 
-export default function ListItemField(props: ListItemFieldProps) {
-  const { children, name } = props;
+function ListItem({ children }: ListItemFieldProps) {
   return (
     <div className="item">
-      <ListDelField className="top aligned" name={name} />
+      <ListDelField className="top aligned" name="" />
 
       <div className="middle aligned content" style={{ width: '100%' }}>
-        {children ? (
-          Children.map(props.children, child =>
-            isValidElement(child)
-              ? cloneElement(child, {
-                  name: joinName(props.name, child.props.name),
-                  label: null,
-                  style: {
-                    margin: 0,
-                    ...child.props.style,
-                  },
-                })
-              : child,
-          )
-        ) : (
-          <AutoField {...props} style={{ margin: 0 }} />
-        )}
+        {children}
       </div>
     </div>
   );
 }
+
+ListItem.defaultProps = { children: <AutoField label={null} name="" /> };
+
+export default connectField(ListItem, { initialValue: false });
