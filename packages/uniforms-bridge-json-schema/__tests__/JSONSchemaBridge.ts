@@ -370,6 +370,34 @@ describe('JSONSchemaBridge', () => {
       );
     });
 
+    it('throws when resolving field schema is not possible (with allOf with $ref field)', () => {
+      expect(() => bridge.getField('shippingAddress.street.invalid')).toThrow(
+        /Field not found in schema/,
+      );
+    });
+
+    it('throws when resolving field schema is not possible (with allOf with $ref field without properties prop)', () => {
+      const localBridge = new JSONSchemaBridge(
+        {
+          definitions: schema.definitions,
+          properties: {
+            container: {
+              allOf: [
+                {
+                  required: ['type'],
+                },
+              ],
+            },
+          },
+        },
+        validator,
+      );
+
+      expect(() => localBridge.getField('container.invalid')).toThrow(
+        /Field not found in schema/,
+      );
+    });
+
     it('returns correct definition (allOf with $ref)', () => {
       expect(bridge.getField('shippingAddress.street')).toEqual({
         type: 'string',
