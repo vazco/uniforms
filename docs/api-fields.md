@@ -125,7 +125,7 @@ A checkbox.
 
 ##### Props:
 
-|       Name        |                                                                               Description                                                                               |                 le in                  |
+|       Name        |                                                                               Description                                                                               |              Available in              |
 | :---------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------: |
 |   `appearance`    |                 Field appearance. Set to "toggle" to appear as a Material Toggle or to "checkbox" (or leave it undefined) to use a Checkbox appearance.                 |                material                |
 |      `extra`      |                                 Extra feedback text. In the antd theme, this renders addtional help text below any validation messages.                                 |                  antd                  |
