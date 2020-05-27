@@ -154,9 +154,14 @@ export default class JSONSchemaBridge extends Bridge {
           'oneOf',
         ]
           .filter(key => definition[key])
-          .map(key =>
-            definition[key].find(({ properties = {} }) => properties[next]),
-          );
+          .map(key => {
+            const localDef = definition[key].map(subSchema =>
+              subSchema.$ref
+                ? resolveRef(subSchema.$ref, this.schema)
+                : subSchema,
+            );
+            return localDef.find(({ properties = {} }) => properties[next]);
+          });
 
         definition = combinedDefinition[next];
       }
