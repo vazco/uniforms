@@ -125,7 +125,7 @@ A checkbox.
 
 ##### Props:
 
-|       Name        |                                                                               Description                                                                               |                 le in                  |
+|       Name        |                                                                               Description                                                                               |              Available in              |
 | :---------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------: |
 |   `appearance`    |                 Field appearance. Set to "toggle" to appear as a Material Toggle or to "checkbox" (or leave it undefined) to use a Checkbox appearance.                 |                material                |
 |      `extra`      |                                 Extra feedback text. In the antd theme, this renders addtional help text below any validation messages.                                 |                  antd                  |
@@ -563,6 +563,7 @@ import { RadioField } from 'uniforms-unstyled';
 |       Name        |                                                                               Description                                                                               |              Available in              |
 | :---------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------: |
 |  `allowedValues`  |                                               Array of allowed values. By default, those are extracted from your schema.                                                |                  All                   |
+|   `appearance`    |                 Field appearance. Set to "toggle" to appear as a Material Toggle or to "checkbox" (or leave it undefined) to use a Checkbox appearance.                 |                material                |
 |   `checkboxes`    |                                       Turn on checkbox/radio mode. It's always true in mutltiple (i.e. fieldType === Array) mode.                                       |                  All                   |
 |      `extra`      |                                 Extra feedback text. In the antd theme, this renders addtional help text below any validation messages.                                 |                  antd                  |
 |      `help`       |                                                           Help text. _Some description would be great, huh?_                                                            |      antd, bootstrap3, bootstrap4      |
