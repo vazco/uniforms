@@ -1,36 +1,45 @@
 import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
 import IconButton, { IconButtonProps } from '@material-ui/core/IconButton';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
-import { Override, filterDOMProps, joinName, useField } from 'uniforms';
+import {
+  Override,
+  connectField,
+  filterDOMProps,
+  joinName,
+  useField,
+} from 'uniforms';
 
-export type ListAddFieldProps<T> = Override<
+export type ListAddFieldProps = Override<
   IconButtonProps,
   {
-    icon?: any;
+    fullWidth?: FormControlProps['fullWidth'];
+    icon: ReactNode;
     initialCount?: number;
+    margin?: FormControlProps['margin'];
     name: string;
-    parent?: any;
-    value?: T;
-  } & Pick<FormControlProps, 'fullWidth' | 'margin' | 'variant'>
+    value: unknown;
+    variant?: FormControlProps['variant'];
+  }
 >;
 
-export default function ListAddField<T>(rawProps: ListAddFieldProps<T>) {
-  const {
-    disabled,
-    fullWidth,
-    icon,
-    margin,
-    parent: parentFromProps,
-    value,
-    variant,
-    ...props
-  } = useField<ListAddFieldProps<T>, T>(rawProps.name, rawProps)[0];
-
-  const nameParts = joinName(null, rawProps.name);
+function ListAdd({
+  disabled,
+  fullWidth,
+  icon,
+  margin,
+  name,
+  value,
+  variant,
+  ...props
+}: ListAddFieldProps) {
+  const nameParts = joinName(null, name);
   const parentName = joinName(nameParts.slice(0, -1));
-  const parent = useField<{ maxCount?: number }, T[]>(parentName, {})[0];
-  if (parentFromProps) Object.assign(parent, parentFromProps);
+  const parent = useField<{ maxCount?: number }, unknown[]>(
+    parentName,
+    {},
+    { absoluteName: true },
+  )[0];
 
   const limitNotReached =
     !disabled && !(parent.maxCount! <= parent.value!.length);
@@ -41,8 +50,9 @@ export default function ListAddField<T>(rawProps: ListAddFieldProps<T>) {
         {...filterDOMProps(props)}
         disabled={!limitNotReached}
         onClick={() => {
-          if (limitNotReached)
-            parent.onChange(parent.value!.concat([cloneDeep(value!)]));
+          if (limitNotReached) {
+            parent.onChange(parent.value!.concat([cloneDeep(value)]));
+          }
         }}
       >
         {icon}
@@ -51,8 +61,10 @@ export default function ListAddField<T>(rawProps: ListAddFieldProps<T>) {
   );
 }
 
-ListAddField.defaultProps = {
+ListAdd.defaultProps = {
   fullWidth: true,
   icon: '+',
-  margin: 'dense',
+  margin: 'dense' as 'dense',
 };
+
+export default connectField(ListAdd, { initialValue: false });

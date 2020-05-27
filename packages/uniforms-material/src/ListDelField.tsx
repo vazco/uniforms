@@ -1,26 +1,30 @@
 import IconButton, { IconButtonProps } from '@material-ui/core/IconButton';
-import React from 'react';
-import { Override, filterDOMProps, joinName, useField } from 'uniforms';
+import React, { ReactNode } from 'react';
+import {
+  Override,
+  connectField,
+  filterDOMProps,
+  joinName,
+  useField,
+} from 'uniforms';
 
-export type ListDelFieldProps<T> = Override<
-  IconButtonProps,
-  {
-    icon: any;
-    name: string;
-    parent?: any;
-  }
+export type ListDelFieldProps = Override<
+  Omit<IconButtonProps, 'value'>,
+  { icon: ReactNode; name: string }
 >;
 
-export default function ListDelField<T>(rawProps: ListDelFieldProps<T>) {
-  const props = useField<ListDelFieldProps<T>, T>(rawProps.name, rawProps)[0];
-
-  const nameParts = joinName(null, rawProps.name);
+function ListDel({ disabled, icon, name, ...props }: ListDelFieldProps) {
+  const nameParts = joinName(null, name);
+  const nameIndex = +nameParts[nameParts.length - 1];
   const parentName = joinName(nameParts.slice(0, -1));
-  const parent = useField<{ minCount?: number }, T[]>(parentName, {})[0];
-  if (props.parent) Object.assign(parent, props.parent);
+  const parent = useField<{ minCount?: number }, unknown[]>(
+    parentName,
+    {},
+    { absoluteName: true },
+  )[0];
 
   const limitNotReached =
-    !props.disabled && !(parent.minCount! >= parent.value!.length);
+    !disabled && !(parent.minCount! >= parent.value!.length);
 
   return (
     <IconButton
@@ -29,16 +33,18 @@ export default function ListDelField<T>(rawProps: ListDelFieldProps<T>) {
       onClick={() => {
         if (limitNotReached) {
           const value = parent.value!.slice();
-          value.splice(+nameParts[nameParts.length - 1], 1);
+          value.splice(nameIndex, 1);
           parent.onChange(value);
         }
       }}
     >
-      {props.icon}
+      {icon}
     </IconButton>
   );
 }
 
-ListDelField.defaultProps = {
-  icon: '-',
+ListDel.defaultProps = {
+  icon: '-' as ReactNode,
 };
+
+export default connectField(ListDel, { initialValue: false });

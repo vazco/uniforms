@@ -5,49 +5,42 @@ import React, {
   cloneElement,
   isValidElement,
 } from 'react';
-import { joinName } from 'uniforms';
+import { connectField } from 'uniforms';
 
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
 
 export type ListItemFieldProps = {
-  children?: ReactNode;
+  children: ReactNode;
+  dense?: ListItemProps['dense'];
+  disableGutters?: ListItemProps['disableGutters'];
+  divider?: ListItemProps['divider'];
   name: string;
-  removeIcon?: any;
-} & Pick<ListItemProps, 'dense' | 'divider' | 'disableGutters'>;
+  removeIcon?: ReactNode;
+};
 
-export default function ListItemField({
+function ListItem({
   children,
   dense,
   disableGutters,
   divider,
-  name,
   removeIcon,
-  ...props
 }: ListItemFieldProps) {
   return (
     <ListItemMaterial
       dense={dense}
-      divider={divider}
       disableGutters={disableGutters}
+      divider={divider}
     >
-      {children ? (
-        Children.map(children, child =>
-          isValidElement(child)
-            ? cloneElement(child, {
-                name: joinName(name, child.props.name),
-                label: null,
-              })
-            : child,
-        )
-      ) : (
-        <AutoField children={children} name={name} {...props} />
-      )}
-      <ListDelField name={name} icon={removeIcon} />
+      {children}
+      <ListDelField name="" icon={removeIcon} />
     </ListItemMaterial>
   );
 }
 
-ListItemField.defaultProps = {
+ListItem.defaultProps = {
+  children: <AutoField label={null} name="" />,
   dense: true,
 };
+
+export default connectField(ListItem, { initialValue: false });
