@@ -11,11 +11,11 @@ import { Override, connectField, filterDOMProps } from 'uniforms';
 import ListItemField from './ListItemField';
 import ListAddField from './ListAddField';
 
-export type ListFieldProps<T> = Override<
-  HTMLProps<HTMLDivElement>,
+export type ListFieldProps = Override<
+  Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
     addIcon?: any;
-    children?: ReactNode;
+    children: ReactNode;
     error?: boolean;
     errorMessage?: string;
     initialCount?: number;
@@ -23,11 +23,11 @@ export type ListFieldProps<T> = Override<
     name: string;
     removeIcon?: any;
     showInlineError?: boolean;
-    value: T[];
+    value: unknown[];
   }
 >;
 
-function List<T>({
+function List({
   addIcon,
   children,
   className,
@@ -36,12 +36,11 @@ function List<T>({
   initialCount,
   itemProps,
   label,
-  name,
   removeIcon,
   showInlineError,
   value,
   ...props
-}: ListFieldProps<T>) {
+}: ListFieldProps) {
   return (
     <div
       className={classnames('card mb-3', className)}
@@ -64,29 +63,23 @@ function List<T>({
           </div>
         )}
 
-        {children
-          ? value.map((item, index) =>
-              Children.map(children, child =>
-                isValidElement(child) && child.props.name
-                  ? cloneElement(child, {
-                      key: index,
-                      name: child.props.name.replace('$', '' + index),
-                      removeIcon,
-                    })
-                  : child,
-              ),
-            )
-          : value.map((item, index) => (
-              <ListItemField
-                key={index}
-                name={'' + index}
-                removeIcon={removeIcon}
-                {...itemProps}
-              />
-            ))}
+        {value.map((item, itemIndex) =>
+          Children.map(children, (child, childIndex) =>
+            isValidElement(child)
+              ? cloneElement(child, {
+                  key: `${itemIndex}-${childIndex}`,
+                  name: child.props.name?.replace('$', '' + itemIndex),
+                  ...itemProps,
+                  removeIcon,
+                })
+              : child,
+          ),
+        )}
       </div>
     </div>
   );
 }
+
+List.defaultProps = { children: <ListItemField name="$" /> };
 
 export default connectField(List);
