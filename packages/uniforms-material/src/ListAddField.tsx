@@ -50,9 +50,7 @@ function ListAdd({
         {...filterDOMProps(props)}
         disabled={!limitNotReached}
         onClick={() => {
-          if (limitNotReached) {
-            parent.onChange(parent.value!.concat([cloneDeep(value)]));
-          }
+          parent.onChange(parent.value!.concat([cloneDeep(value)]));
         }}
       >
         {icon}

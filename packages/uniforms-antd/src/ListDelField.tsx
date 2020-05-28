@@ -37,11 +37,9 @@ function ListDel({ disabled, name, ...props }: ListDelFieldProps) {
       {...(filterDOMProps(props) as Omit<typeof props, 'value'>)}
       disabled={!limitNotReached}
       onClick={() => {
-        if (limitNotReached) {
-          const value = parent.value!.slice();
-          value.splice(nameIndex, 1);
-          parent.onChange(value);
-        }
+        const value = parent.value!.slice();
+        value.splice(nameIndex, 1);
+        parent.onChange(value);
       }}
     />
   );

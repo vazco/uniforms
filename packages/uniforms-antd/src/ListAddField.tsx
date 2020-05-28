@@ -32,9 +32,7 @@ function ListAdd({ disabled, name, value, ...props }: ListAddFieldProps) {
       {...(filterDOMProps(props) as Omit<typeof props, 'value'>)}
       disabled={!limitNotReached}
       onClick={() => {
-        if (limitNotReached) {
-          parent.onChange(parent.value!.concat([cloneDeep(value)]));
-        }
+        parent.onChange(parent.value!.concat([cloneDeep(value)]));
       }}
     />
   );

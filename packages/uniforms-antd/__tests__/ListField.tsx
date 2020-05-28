@@ -79,6 +79,7 @@ test('<ListField> - renders children (specified)', () => {
   const element = (
     <ListField name="x" initialCount={2}>
       <Child />
+      PlainText
     </ListField>
   );
   mount(

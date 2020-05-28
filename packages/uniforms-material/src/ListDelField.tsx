@@ -31,11 +31,9 @@ function ListDel({ disabled, icon, name, ...props }: ListDelFieldProps) {
       {...filterDOMProps(props)}
       disabled={!limitNotReached}
       onClick={() => {
-        if (limitNotReached) {
-          const value = parent.value!.slice();
-          value.splice(nameIndex, 1);
-          parent.onChange(value);
-        }
+        const value = parent.value!.slice();
+        value.splice(nameIndex, 1);
+        parent.onChange(value);
       }}
     >
       {icon}
@@ -44,7 +42,7 @@ function ListDel({ disabled, icon, name, ...props }: ListDelFieldProps) {
 }
 
 ListDel.defaultProps = {
-  icon: '-' as ReactNode,
+  icon: '-',
 };
 
 export default connectField(ListDel, { initialValue: false });
