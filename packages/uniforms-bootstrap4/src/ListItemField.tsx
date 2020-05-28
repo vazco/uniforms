@@ -5,9 +5,9 @@ import AutoField from './AutoField';
 import ListDelField from './ListDelField';
 
 export type ListItemFieldProps = {
-  children?: ReactNode;
+  children: ReactNode;
   name: string;
-  removeIcon?: any;
+  removeIcon?: ReactNode;
 };
 
 function ListItem({ children, removeIcon, ...props }: ListItemFieldProps) {

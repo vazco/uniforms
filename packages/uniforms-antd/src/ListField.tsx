@@ -15,7 +15,7 @@ import ListItemField from './ListItemField';
 export type ListFieldProps = Override<
   Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
-    addIcon?: any;
+    addIcon?: ReactNode;
     children: ReactNode;
     error?: boolean;
     errorMessage?: string;

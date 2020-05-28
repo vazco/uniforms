@@ -14,7 +14,7 @@ import ListItemField from './ListItemField';
 export type ListFieldProps = Override<
   HTMLProps<HTMLDivElement>,
   {
-    children?: ReactNode;
+    children: ReactNode;
     error?: boolean;
     errorMessage?: string;
     initialCount?: number;

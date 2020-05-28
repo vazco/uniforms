@@ -1,4 +1,4 @@
-import React, { HTMLProps } from 'react';
+import React, { HTMLProps, ReactNode } from 'react';
 import classnames from 'classnames';
 import {
   Override,
@@ -13,7 +13,7 @@ export type ListDelFieldProps = Override<
   {
     name: string;
     parent?: any;
-    removeIcon?: any;
+    removeIcon?: ReactNode;
   }
 >;
 

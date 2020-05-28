@@ -14,14 +14,14 @@ import ListAddField from './ListAddField';
 export type ListFieldProps = Override<
   Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
-    addIcon?: any;
+    addIcon?: ReactNode;
     children: ReactNode;
     error?: boolean;
     errorMessage?: string;
     initialCount?: number;
     itemProps?: {};
     name: string;
-    removeIcon?: any;
+    removeIcon?: ReactNode;
     showInlineError?: boolean;
     value: unknown[];
   }

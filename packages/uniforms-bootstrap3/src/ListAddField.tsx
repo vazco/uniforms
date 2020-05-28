@@ -1,4 +1,4 @@
-import React, { HTMLProps } from 'react';
+import React, { HTMLProps, ReactNode } from 'react';
 import classnames from 'classnames';
 import cloneDeep from 'lodash/cloneDeep';
 import {
@@ -12,7 +12,7 @@ import {
 export type ListAddFieldProps = Override<
   Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
-    addIcon?: any;
+    addIcon?: ReactNode;
     initialCount?: number;
     name: string;
     parent?: any;
