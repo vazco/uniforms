@@ -5,7 +5,7 @@ import AutoField from './AutoField';
 import ListDelField from './ListDelField';
 
 export type ListItemFieldProps = {
-  children: ReactNode;
+  children?: ReactNode;
   name: string;
 };
 
