@@ -1,33 +1,40 @@
 import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
 import cloneDeep from 'lodash/cloneDeep';
-import { Override, filterDOMProps, joinName, useField } from 'uniforms';
+import {
+  Override,
+  filterDOMProps,
+  joinName,
+  useField,
+  connectField,
+} from 'uniforms';
 
-export type ListAddFieldProps<T> = Override<
-  HTMLProps<HTMLDivElement>,
+export type ListAddFieldProps = Override<
+  Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
     addIcon?: any;
     initialCount?: number;
     name: string;
     parent?: any;
-    value?: T;
+    value?: unknown;
   }
 >;
 
-export default function ListAddField<T>(rawProps: ListAddFieldProps<T>) {
-  const {
-    addIcon,
-    className,
-    disabled,
-    parent: parentFromProps,
-    value,
-    ...props
-  } = useField<ListAddFieldProps<T>, T>(rawProps.name, rawProps)[0];
-
-  const nameParts = joinName(null, rawProps.name);
+function ListAdd({
+  name,
+  addIcon,
+  className,
+  disabled,
+  value,
+  ...props
+}: ListAddFieldProps) {
+  const nameParts = joinName(null, name);
   const parentName = joinName(nameParts.slice(0, -1));
-  const parent = useField<{ maxCount?: number }, T[]>(parentName, {})[0];
-  if (parentFromProps) Object.assign(parent, parentFromProps);
+  const parent = useField<{ maxCount?: number }, unknown[]>(
+    parentName,
+    {},
+    { absoluteName: true },
+  )[0];
 
   const limitNotReached =
     !disabled && !(parent.maxCount! <= parent.value!.length);
@@ -38,7 +45,7 @@ export default function ListAddField<T>(rawProps: ListAddFieldProps<T>) {
       className={classnames('badge pull-right', className)}
       onClick={() => {
         if (limitNotReached)
-          parent.onChange(parent.value!.concat([cloneDeep(value!)]));
+          parent.onChange(parent.value!.concat([cloneDeep(value)]));
       }}
     >
       {addIcon}
@@ -46,6 +53,8 @@ export default function ListAddField<T>(rawProps: ListAddFieldProps<T>) {
   );
 }
 
-ListAddField.defaultProps = {
+ListAdd.defaultProps = {
   addIcon: <i className="glyphicon glyphicon-plus" />,
 };
+
+export default connectField(ListAdd, { initialValue: false });

@@ -22,7 +22,7 @@ test('<ListItemField> - renders ListDelField', () => {
   );
 
   expect(wrapper.find(ListDelField)).toHaveLength(1);
-  expect(wrapper.find(ListDelField).prop('name')).toBe('x.1');
+  expect(wrapper.find(ListDelField).childAt(0).prop('name')).toBe('x.1');
 });
 
 test('<ListItemField> - renders AutoField', () => {
