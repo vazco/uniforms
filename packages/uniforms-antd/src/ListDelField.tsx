@@ -1,25 +1,35 @@
-import Button, { ButtonProps } from 'antd/lib/button';
-import React from 'react';
-import { Override, filterDOMProps, joinName, useField } from 'uniforms';
-
-export type ListDelFieldProps<T> = Override<
+import Button, {
   ButtonProps,
-  {
-    name: string;
-    parent?: any;
-  }
+  ButtonType,
+  ButtonSize,
+  ButtonShape,
+} from 'antd/lib/button';
+import React from 'react';
+import {
+  Override,
+  filterDOMProps,
+  joinName,
+  useField,
+  connectField,
+} from 'uniforms';
+
+export type ListDelFieldProps = Override<
+  Omit<ButtonProps, 'onChange'>,
+  { name: string }
 >;
 
-export default function ListDelField<T>(rawProps: ListDelFieldProps<T>) {
-  const props = useField<ListDelFieldProps<T>, T>(rawProps.name, rawProps)[0];
-
-  const nameParts = joinName(null, rawProps.name);
+function ListDel({ disabled, name, ...props }: ListDelFieldProps) {
+  const nameParts = joinName(null, name);
+  const nameIndex = +nameParts[nameParts.length - 1];
   const parentName = joinName(nameParts.slice(0, -1));
-  const parent = useField<{ minCount?: number }, T[]>(parentName, {})[0];
-  if (props.parent) Object.assign(parent, props.parent);
+  const parent = useField<{ minCount?: number }, unknown[]>(
+    parentName,
+    {},
+    { absoluteName: true },
+  )[0];
 
   const limitNotReached =
-    !props.disabled && !(parent.minCount! >= parent.value!.length);
+    !disabled && !(parent.minCount! >= parent.value!.length);
 
   return (
     <Button
@@ -29,7 +39,7 @@ export default function ListDelField<T>(rawProps: ListDelFieldProps<T>) {
       onClick={() => {
         if (limitNotReached) {
           const value = parent.value!.slice();
-          value.splice(+nameParts[nameParts.length - 1], 1);
+          value.splice(nameIndex, 1);
           parent.onChange(value);
         }
       }}
@@ -37,9 +47,11 @@ export default function ListDelField<T>(rawProps: ListDelFieldProps<T>) {
   );
 }
 
-ListDelField.defaultProps = {
+ListDel.defaultProps = {
   icon: 'delete',
-  shape: 'circle-outline',
-  size: 'small',
-  type: 'ghost',
+  shape: 'circle-outline' as ButtonShape,
+  size: 'small' as ButtonSize,
+  type: 'ghost' as ButtonType,
 };
+
+export default connectField(ListDel);

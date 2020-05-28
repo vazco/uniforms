@@ -7,16 +7,16 @@ import React, {
   isValidElement,
 } from 'react';
 import Tooltip from 'antd/lib/tooltip';
-import { connectField, filterDOMProps, joinName, Override } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';
 
-export type ListFieldProps<T> = Override<
-  HTMLProps<HTMLDivElement>,
+export type ListFieldProps = Override<
+  Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
     addIcon?: any;
-    children?: ReactNode;
+    children: ReactNode;
     error?: boolean;
     errorMessage?: string;
     info?: boolean;
@@ -26,11 +26,11 @@ export type ListFieldProps<T> = Override<
     labelCol?: any;
     name: string;
     showInlineError?: boolean;
-    value: T[];
+    value: unknown[];
     wrapperCol?: any;
   }
 >;
-function List<T>({
+function List({
   children,
   error,
   errorMessage,
@@ -39,12 +39,11 @@ function List<T>({
   itemProps,
   label,
   labelCol,
-  name,
   showInlineError,
   value,
   wrapperCol,
   ...props
-}: ListFieldProps<T>) {
+}: ListFieldProps) {
   return (
     <div {...filterDOMProps(props)}>
       {label && (
@@ -63,26 +62,19 @@ function List<T>({
 
       {!!(error && showInlineError) && <div>{errorMessage}</div>}
 
-      {children
-        ? value.map((item, index) =>
-            Children.map(children, child =>
-              isValidElement(child) && child.props.name
-                ? cloneElement(child, {
-                    key: index,
-                    name: child.props.name.replace('$', '' + index),
-                  })
-                : child,
-            ),
-          )
-        : value.map((item, index) => (
-            <ListItemField
-              key={index}
-              labelCol={labelCol}
-              name={'' + index}
-              wrapperCol={wrapperCol}
-              {...itemProps}
-            />
-          ))}
+      {value.map((item, itemIndex) =>
+        Children.map(children, (child, childIndex) =>
+          isValidElement(child)
+            ? cloneElement(child, {
+                key: `${itemIndex}-${childIndex}`,
+                name: child.props.name?.replace('$', '' + itemIndex),
+                labelCol,
+                wrapperCol,
+                ...itemProps,
+              })
+            : child,
+        ),
+      )}
 
       <ListAddField name="$" initialCount={initialCount} />
     </div>
@@ -97,6 +89,7 @@ List.defaultProps = {
     marginTop: '5px',
     padding: '10px',
   },
+  children: <ListItemField name="$" />,
 };
 
 export default connectField(List);
