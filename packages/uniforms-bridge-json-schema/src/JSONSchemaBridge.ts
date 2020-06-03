@@ -146,13 +146,22 @@ export default class JSONSchemaBridge extends Bridge {
         );
         definition = definition.properties[next];
       } else {
-        definition = ['allOf', 'anyOf', 'oneOf']
-          .map(key =>
-            get(definition, key, [])
-              .map(definition => get(definition, ['properties', next]))
-              .find(Boolean),
-          )
-          .find(Boolean);
+        const [{ properties: combinedDefinition = {} } = {}] = [
+          'allOf',
+          'anyOf',
+          'oneOf',
+        ]
+          .filter(key => definition[key])
+          .map(key => {
+            const localDef = definition[key].map(subSchema =>
+              subSchema.$ref
+                ? resolveRef(subSchema.$ref, this.schema)
+                : subSchema,
+            );
+            return localDef.find(({ properties = {} }) => properties[next]);
+          });
+
+        definition = combinedDefinition[next];
       }
 
       invariant(definition, 'Field not found in schema: "%s"', name);

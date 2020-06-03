@@ -10,8 +10,8 @@ export default function CodeSection({ language, replace, section, source }) {
   // Cut out only desired section.
   if (section) {
     const pattern = new RegExp(
-      `// <${section}>\\s(.*?)\\s// </${section}>\\s`,
-      'gs'
+      `// <${section}>\\s([\\s\\S]*?)\\s// </${section}>\\s`,
+      'g'
     );
 
     source = source
