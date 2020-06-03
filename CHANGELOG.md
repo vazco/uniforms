@@ -8,6 +8,8 @@
 - **Breaking:** Removed default exports in the `uniforms` package. Use named imports instead (e.g. `import { BaseForm } from 'uniforms'`). This allows to effectively export types along with values.
 - **Breaking:** Removed `createSchemaBridge`. This includes removal of `BaseForm.state.bridge`, `check` on all bridges, and the automatic bridge creation for SimpleSchema. For motivation and more insigths see [\#718](https://github.com/vazco/uniforms/issues/718).
 - **Breaking:** Reworked validation flow. For motivation and more insigths see [\#711](https://github.com/vazco/uniforms/issues/711).
+  - Bridge validators can be asynchronous.
+  - Bridge validators have to return errors instead of throwing them.
   - `onValidate` is no longer using callbacks. The error (or the lack of it) has to be returned either synchronously or asynchronously (i.e. wrapped in a promise).
   - `onSubmitSuccess` and `onSubmitFailure` got removed. To preserve the current behavior, simply combine them into the `onSubmit`:
   ```diff
