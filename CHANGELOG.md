@@ -1,6 +1,7 @@
 ## Next
 
 - **Breaking:** Removed `injectName` helper. It was used to force context updates and got replaced by the new context directly. [\#720](https://github.com/vazco/uniforms/issues/720)
+- **Breaking:** Reworked `ListField` components family. [\#721](https://github.com/vazco/uniforms/issues/721)
 
 ## [v3.0.0-alpha.3](https://github.com/vazco/uniforms/tree/v3.0.0-alpha.3) (2020-05-06)
 
