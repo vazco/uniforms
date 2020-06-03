@@ -6,7 +6,7 @@ import AutoField from './AutoField';
 import wrapField from './wrapField';
 
 export type NestFieldProps = Override<
-  HTMLProps<HTMLDivElement>,
+  Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
     fields?: any[];
     itemProps?: object;
@@ -31,5 +31,11 @@ function Nest({
       )),
   );
 }
+
+// FIXME: wrapField is not typed correctly.
+Nest.defaultProps = {
+  fullWidth: true,
+  margin: 'dense',
+} as any;
 
 export default connectField(Nest);

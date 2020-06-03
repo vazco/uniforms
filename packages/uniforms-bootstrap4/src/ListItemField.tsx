@@ -21,6 +21,8 @@ function ListItem({ children, removeIcon, ...props }: ListItemFieldProps) {
   );
 }
 
-ListItem.defaultProps = { children: <AutoField label={null} name="" /> };
+ListItem.defaultProps = {
+  children: <AutoField className="col-11" label={null} name="" />,
+};
 
 export default connectField(ListItem, { initialValue: false });
