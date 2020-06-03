@@ -5,7 +5,7 @@ import setWith from 'lodash/setWith';
 
 // FIXME: This import is needed to correctly build AutoForm.d.ts file.
 import { BaseForm } from './BaseForm';
-import { DeepPartial } from './types';
+import { DeepPartial, ModelTransformMode } from './types';
 import {
   ValidatedQuickForm,
   ValidatedQuickFormProps,
@@ -37,14 +37,13 @@ export function Auto<Base extends typeof ValidatedQuickForm>(Base: Base) {
       this.state = {
         ...this.state,
         model: props.model,
-        modelSync: props.model,
       };
     }
 
     componentDidUpdate(prevProps: Props, prevState: State, snapshot: never) {
       const { model } = this.props;
       if (!isEqual(model, prevProps.model)) {
-        this.setState({ model, modelSync: model });
+        this.setState({ model });
       }
 
       super.componentDidUpdate(prevProps, prevState, snapshot);
@@ -54,22 +53,17 @@ export function Auto<Base extends typeof ValidatedQuickForm>(Base: Base) {
       return omit(super.getNativeFormProps(), ['onChangeModel']);
     }
 
-    getModel(mode: any) {
-      return mode === 'form' ? this.state.modelSync : this.state.model;
+    getModel(mode: ModelTransformMode) {
+      return this.state.model;
     }
 
-    onChange(key: any, value: any) {
+    onChange(key: string, value: any) {
       this.setState(
-        state => ({
-          modelSync: setWith(clone(state.modelSync), key, value, clone),
-        }),
+        state => ({ model: setWith(clone(state.model), key, value, clone) }),
         () => {
           super.onChange(key, value);
-          this.setState(state => {
-            if (this.props.onChangeModel)
-              this.props.onChangeModel(state.modelSync);
-            return { model: state.modelSync };
-          });
+          if (this.props.onChangeModel)
+            this.props.onChangeModel(this.state.model);
         },
       );
     }
@@ -78,7 +72,6 @@ export function Auto<Base extends typeof ValidatedQuickForm>(Base: Base) {
       return {
         ...super.__reset(state),
         model: this.props.model,
-        modelSync: this.props.model,
       } as Partial<State>;
     }
 
