@@ -3,6 +3,10 @@
 - **Breaking:** Removed `injectName` helper. It was used to force context updates and got replaced by the new context directly. [\#720](https://github.com/vazco/uniforms/issues/720)
 - **Breaking:** Reworked `ListField` components family. [\#721](https://github.com/vazco/uniforms/issues/721)
 
+## [v2.6.8](https://github.com/vazco/uniforms/tree/v2.6.8) (2020-06-03)
+
+- **Fixed:** Resolving some `$ref`s in `JSONSchemaBridge`. [\#722](https://github.com/vazco/uniforms/issues/722)
+
 ## [v3.0.0-alpha.3](https://github.com/vazco/uniforms/tree/v3.0.0-alpha.3) (2020-05-06)
 
 - **Breaking:** Removed `BaseForm.getChangedKeys`. Use `changedKeys` directly.
@@ -38,7 +42,7 @@
 
 ## [v2.6.7](https://github.com/vazco/uniforms/tree/v2.6.7) (2020-03-25)
 
-- **Fixed:** Empty boxes in `SlectField` in `uniforms-antd`.[\#691](https://github.com/vazco/uniforms/issues/691)
+- **Fixed:** Empty boxes in `SlectField` in `uniforms-antd`. [\#691](https://github.com/vazco/uniforms/issues/691)
 - **Fixed:** Mitigated [babel/babel\#10693](https://github.com/babel/babel/issues/10693) in all remaining cases. [\#692](https://github.com/vazco/uniforms/issues/692)
 
 ## [v3.0.0-alpha.1](https://github.com/vazco/uniforms/tree/v3.0.0-alpha.1) (2020-01-22)
