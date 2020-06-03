@@ -1,26 +1,31 @@
-import ListMaterial, {
-  ListProps as MaterialListProps,
-} from '@material-ui/core/List';
+import ListMaterial, { ListProps } from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import React, { Children, cloneElement } from 'react';
-import { connectField, filterDOMProps, joinName, Override } from 'uniforms';
+import React, {
+  Children,
+  HTMLProps,
+  ReactNode,
+  cloneElement,
+  isValidElement,
+} from 'react';
+import { Override, connectField, filterDOMProps } from 'uniforms';
 
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';
 
-export type ListFieldProps<T> = Override<
-  MaterialListProps,
+export type ListFieldProps = Override<
+  Omit<ListProps, 'onChange'>,
   {
-    addIcon?: any;
+    addIcon?: ReactNode;
+    children: ReactNode;
     initialCount?: number;
     itemProps?: {};
-    label: string;
+    label?: string;
     name: string;
-    value: T[];
+    value: unknown[];
   }
 >;
 
-function List<T>({
+function List({
   addIcon,
   children,
   dense,
@@ -30,49 +35,35 @@ function List<T>({
   name,
   value,
   ...props
-}: ListFieldProps<T>) {
-  return [
-    <ListMaterial
-      key="list"
-      dense={dense ?? true}
-      subheader={
-        label ? <ListSubheader disableSticky>{label}</ListSubheader> : undefined
-      }
-      {...filterDOMProps(props)}
-    >
-      {children
-        ? value.map((item, index) =>
-            Children.map(children as JSX.Element, child =>
-              cloneElement(child, {
-                key: index,
-                label: null,
-                name: joinName(
-                  name,
-                  child.props.name && child.props.name.replace('$', index),
-                ),
-              }),
-            ),
-          )
-        : value.map((item, index) => (
-            <ListItemField
-              key={index}
-              label={undefined}
-              name={joinName(name, index)}
-              {...itemProps}
-            />
-          ))}
-    </ListMaterial>,
-    <ListAddField
-      key="listAddField"
-      name={`${name}.$`}
-      icon={addIcon}
-      initialCount={initialCount}
-    />,
-  ];
+}: ListFieldProps) {
+  return (
+    <>
+      <ListMaterial
+        dense={dense ?? true}
+        subheader={
+          label ? (
+            <ListSubheader disableSticky>{label}</ListSubheader>
+          ) : undefined
+        }
+        {...filterDOMProps(props)}
+      >
+        {value.map((item, itemIndex) =>
+          Children.map(children, (child, childIndex) =>
+            isValidElement(child)
+              ? cloneElement(child, {
+                  key: `${itemIndex}-${childIndex}`,
+                  name: child.props.name?.replace('$', '' + itemIndex),
+                  ...itemProps,
+                })
+              : child,
+          ),
+        )}
+      </ListMaterial>
+      <ListAddField icon={addIcon} initialCount={initialCount} name="$" />
+    </>
+  );
 }
 
-// FIXME: Use React.Fragment instead of returning an array if possible.
-// @ts-ignore
-export default connectField(List, {
-  includeInChain: false,
-});
+List.defaultProps = { children: <ListItemField name="$" /> };
+
+export default connectField(List);

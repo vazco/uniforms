@@ -1,38 +1,52 @@
+import React, { HTMLProps, ReactNode } from 'react';
 import classnames from 'classnames';
 import cloneDeep from 'lodash/cloneDeep';
-import React, { HTMLProps } from 'react';
-import { filterDOMProps, joinName, Override, useField } from 'uniforms';
+import {
+  Override,
+  filterDOMProps,
+  joinName,
+  useField,
+  connectField,
+} from 'uniforms';
 
-export type ListAddFieldProps<T> = Override<
-  HTMLProps<HTMLDivElement>,
+export type ListAddFieldProps = Override<
+  Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
-    addIcon?: any;
+    addIcon?: ReactNode;
+    initialCount?: number;
     name: string;
     parent?: any;
-    value?: T;
+    value?: unknown;
   }
 >;
 
-function ListAdd<T>({ addIcon, ...rawProps }: ListAddFieldProps<T>) {
-  const props = useField<ListAddFieldProps<T>, T>(rawProps.name, rawProps, {
-    initialValue: false,
-  })[0];
-
-  const parentName = joinName(joinName(null, props.name).slice(0, -1));
-  const parent = useField<{ maxCount?: number }, T[]>(parentName, {})[0];
-  if (rawProps.parent) Object.assign(parent, rawProps.parent);
+function ListAdd({
+  name,
+  addIcon,
+  className,
+  disabled,
+  value,
+  ...props
+}: ListAddFieldProps) {
+  const nameParts = joinName(null, name);
+  const parentName = joinName(nameParts.slice(0, -1));
+  const parent = useField<{ maxCount?: number }, unknown[]>(
+    parentName,
+    {},
+    { absoluteName: true },
+  )[0];
 
   const limitNotReached =
-    !props.disabled && !(parent.maxCount! <= parent.value!.length);
+    !disabled && !(parent.maxCount! <= parent.value!.length);
 
   return (
     <div
-      className={classnames('badge badge-pill float-right', rawProps.className)}
+      {...filterDOMProps(props)}
+      className={classnames('badge badge-pill float-right', className)}
       onClick={() => {
         if (limitNotReached)
-          parent.onChange(parent.value!.concat([cloneDeep(props.value!)]));
+          parent.onChange(parent.value!.concat([cloneDeep(value)]));
       }}
-      {...filterDOMProps(props)}
     >
       {addIcon}
     </div>
@@ -41,4 +55,4 @@ function ListAdd<T>({ addIcon, ...rawProps }: ListAddFieldProps<T>) {
 
 ListAdd.defaultProps = { addIcon: <i className="octicon octicon-plus" /> };
 
-export default ListAdd;
+export default connectField(ListAdd, { initialValue: false });

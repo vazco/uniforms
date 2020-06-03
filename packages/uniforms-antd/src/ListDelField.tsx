@@ -1,50 +1,55 @@
-import Button, { ButtonProps } from 'antd/lib/button';
-import omit from 'lodash/omit';
-import React from 'react';
-import { filterDOMProps, joinName, Override, useField } from 'uniforms';
-
-export type ListDelFieldProps<T> = Override<
+import Button, {
   ButtonProps,
-  {
-    name: string;
-    parent?: any;
-    value?: T;
-  }
+  ButtonType,
+  ButtonSize,
+  ButtonShape,
+} from 'antd/lib/button';
+import React from 'react';
+import {
+  Override,
+  filterDOMProps,
+  joinName,
+  useField,
+  connectField,
+} from 'uniforms';
+
+export type ListDelFieldProps = Override<
+  Omit<ButtonProps, 'onChange'>,
+  { name: string }
 >;
 
-function ListDel<T>(rawProps: ListDelFieldProps<T>) {
-  const props = useField<ListDelFieldProps<T>, T>(rawProps.name, rawProps, {
-    initialValue: false,
-  })[0];
-
-  const nameParts = joinName(null, props.name);
+function ListDel({ disabled, name, ...props }: ListDelFieldProps) {
+  const nameParts = joinName(null, name);
+  const nameIndex = +nameParts[nameParts.length - 1];
   const parentName = joinName(nameParts.slice(0, -1));
-  const parent = useField<{ minCount?: number }, T[]>(parentName, {})[0];
-  if (rawProps.parent) Object.assign(parent, rawProps.parent);
+  const parent = useField<{ minCount?: number }, unknown[]>(
+    parentName,
+    {},
+    { absoluteName: true },
+  )[0];
 
-  const fieldIndex = +nameParts[nameParts.length - 1];
   const limitNotReached =
-    !props.disabled && !(parent.minCount! >= parent.value!.length);
+    !disabled && !(parent.minCount! >= parent.value!.length);
+
   return (
     <Button
-      disabled={!limitNotReached || rawProps.disabled}
+      // FIXME: filterDOMProps will remove value.
+      {...(filterDOMProps(props) as Omit<typeof props, 'value'>)}
+      disabled={!limitNotReached}
       onClick={() => {
-        if (limitNotReached) {
-          const value = parent.value!.slice();
-          value.splice(fieldIndex, 1);
-          parent.onChange(value);
-        }
+        const value = parent.value!.slice();
+        value.splice(nameIndex, 1);
+        parent.onChange(value);
       }}
-      {...filterDOMProps(omit(props, ['value']))}
     />
   );
 }
 
 ListDel.defaultProps = {
   icon: 'delete',
-  shape: 'circle-outline',
-  size: 'small',
-  type: 'ghost',
+  shape: 'circle-outline' as ButtonShape,
+  size: 'small' as ButtonSize,
+  type: 'ghost' as ButtonType,
 };
 
-export default ListDel;
+export default connectField(ListDel);

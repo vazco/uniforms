@@ -6,8 +6,8 @@ const randomId = randomIds();
 
 export default function createContext(
   schema?: {},
-  context?: Partial<Context>,
-): { context: Context } {
+  context?: Partial<Context<any>>,
+): { context: Context<any> } {
   return {
     context: {
       changed: false,

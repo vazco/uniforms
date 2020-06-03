@@ -1,48 +1,48 @@
-import Button, { ButtonProps } from 'antd/lib/button';
-import cloneDeep from 'lodash/cloneDeep';
-import omit from 'lodash/omit';
+import Button, { ButtonProps, ButtonSize, ButtonType } from 'antd/lib/button';
 import React from 'react';
-import { filterDOMProps, joinName, Override, useField } from 'uniforms';
+import cloneDeep from 'lodash/cloneDeep';
+import {
+  Override,
+  filterDOMProps,
+  joinName,
+  useField,
+  connectField,
+} from 'uniforms';
 
-export type ListAddFieldProps<T> = Override<
-  ButtonProps,
-  {
-    disabled?: boolean;
-    initialCount?: number;
-    name: string;
-    parent?: any;
-    value?: T;
-  }
+export type ListAddFieldProps = Override<
+  Omit<ButtonProps, 'onChange'>,
+  { initialCount?: number; name: string; value: unknown }
 >;
 
-function ListAdd<T>(rawProps: ListAddFieldProps<T>) {
-  const props = useField<ListAddFieldProps<T>, T>(rawProps.name, rawProps, {
-    initialValue: false,
-  })[0];
-
-  const parentName = joinName(joinName(null, props.name).slice(0, -1));
-  const parent = useField<{ maxCount?: number }, T[]>(parentName, {})[0];
-  if (rawProps.parent) Object.assign(parent, rawProps.parent);
+function ListAdd({ disabled, name, value, ...props }: ListAddFieldProps) {
+  const nameParts = joinName(null, name);
+  const parentName = joinName(nameParts.slice(0, -1));
+  const parent = useField<{ maxCount?: number }, unknown[]>(
+    parentName,
+    {},
+    { absoluteName: true },
+  )[0];
 
   const limitNotReached =
-    !props.disabled && !(parent.maxCount! <= parent.value!.length);
+    !disabled && !(parent.maxCount! <= parent.value!.length);
+
   return (
     <Button
-      disabled={!limitNotReached || rawProps.disabled}
+      // FIXME: filterDOMProps will remove value.
+      {...(filterDOMProps(props) as Omit<typeof props, 'value'>)}
+      disabled={!limitNotReached}
       onClick={() => {
-        if (limitNotReached)
-          parent.onChange(parent.value!.concat([cloneDeep(props.value!)]));
+        parent.onChange(parent.value!.concat([cloneDeep(value)]));
       }}
-      {...filterDOMProps(omit(props, ['value']))}
     />
   );
 }
 
 ListAdd.defaultProps = {
   icon: 'plus-square-o',
-  size: 'small',
+  size: 'small' as ButtonSize,
   style: { width: '100%' },
-  type: 'dashed',
+  type: 'dashed' as ButtonType,
 };
 
-export default ListAdd;
+export default connectField(ListAdd, { initialValue: false });

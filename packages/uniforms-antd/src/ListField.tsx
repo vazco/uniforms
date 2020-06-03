@@ -1,16 +1,22 @@
 import Icon from 'antd/lib/icon';
-import React, { Children, HTMLProps, ReactNode, cloneElement } from 'react';
+import React, {
+  Children,
+  HTMLProps,
+  ReactNode,
+  cloneElement,
+  isValidElement,
+} from 'react';
 import Tooltip from 'antd/lib/tooltip';
-import { connectField, filterDOMProps, joinName, Override } from 'uniforms';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';
 
-export type ListFieldProps<T> = Override<
-  HTMLProps<HTMLDivElement>,
+export type ListFieldProps = Override<
+  Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
-    addIcon?: any;
-    children?: ReactNode;
+    addIcon?: ReactNode;
+    children: ReactNode;
     error?: boolean;
     errorMessage?: string;
     info?: boolean;
@@ -20,11 +26,11 @@ export type ListFieldProps<T> = Override<
     labelCol?: any;
     name: string;
     showInlineError?: boolean;
-    value: T[];
+    value: unknown[];
     wrapperCol?: any;
   }
 >;
-function List<T>({
+function List({
   children,
   error,
   errorMessage,
@@ -33,12 +39,11 @@ function List<T>({
   itemProps,
   label,
   labelCol,
-  name,
   showInlineError,
   value,
   wrapperCol,
   ...props
-}: ListFieldProps<T>) {
+}: ListFieldProps) {
   return (
     <div {...filterDOMProps(props)}>
       {label && (
@@ -57,31 +62,21 @@ function List<T>({
 
       {!!(error && showInlineError) && <div>{errorMessage}</div>}
 
-      {children
-        ? value.map((item: any, index: number) =>
-            Children.map(children as JSX.Element, child =>
-              cloneElement(child, {
-                key: index,
-                label: null,
-                name: joinName(
-                  name,
-                  child.props.name && child.props.name.replace('$', index),
-                ),
-              }),
-            ),
-          )
-        : value.map((item: any, index: number) => (
-            <ListItemField
-              key={index}
-              label={undefined}
-              labelCol={labelCol}
-              name={joinName(name, index)}
-              wrapperCol={wrapperCol}
-              {...itemProps}
-            />
-          ))}
+      {value.map((item, itemIndex) =>
+        Children.map(children, (child, childIndex) =>
+          isValidElement(child)
+            ? cloneElement(child, {
+                key: `${itemIndex}-${childIndex}`,
+                name: child.props.name?.replace('$', '' + itemIndex),
+                labelCol,
+                wrapperCol,
+                ...itemProps,
+              })
+            : child,
+        ),
+      )}
 
-      <ListAddField name={`${name}.$`} initialCount={initialCount} />
+      <ListAddField name="$" initialCount={initialCount} />
     </div>
   );
 }
@@ -94,8 +89,7 @@ List.defaultProps = {
     marginTop: '5px',
     padding: '10px',
   },
+  children: <ListItemField name="$" />,
 };
 
-export default connectField(List, {
-  includeInChain: false,
-});
+export default connectField(List);

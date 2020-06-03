@@ -1,43 +1,46 @@
+import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
 import cloneDeep from 'lodash/cloneDeep';
-import React, { HTMLProps } from 'react';
-import { filterDOMProps, joinName, Override, useField } from 'uniforms';
+import {
+  filterDOMProps,
+  joinName,
+  Override,
+  useField,
+  connectField,
+} from 'uniforms';
 
-export type ListAddFieldProps<T> = Override<
-  HTMLProps<HTMLSpanElement>,
-  {
-    className?: string;
-    name: string;
-    parent?: any;
-    value?: T;
-  }
+export type ListAddFieldProps = Override<
+  Omit<HTMLProps<HTMLSpanElement>, 'onChange'>,
+  { initialCount?: number; name: string; value: unknown }
 >;
 
-export default function ListAdd<T>(rawProps: ListAddFieldProps<T>) {
-  const props = useField<ListAddFieldProps<T>, T>(rawProps.name, rawProps, {
-    initialValue: false,
-  })[0];
-
-  const parentName = joinName(joinName(null, props.name).slice(0, -1));
-  const parent = useField<{ maxCount?: number }, T[]>(parentName, {})[0];
-  if (rawProps.parent) Object.assign(parent, rawProps.parent);
+function ListAdd({ disabled, name, value, ...props }: ListAddFieldProps) {
+  const nameParts = joinName(null, name);
+  const parentName = joinName(nameParts.slice(0, -1));
+  const parent = useField<{ maxCount?: number }, unknown[]>(
+    parentName,
+    {},
+    { absoluteName: true },
+  )[0];
 
   const limitNotReached =
-    !props.disabled && !(parent.maxCount! <= parent.value!.length);
+    !disabled && !(parent.maxCount! <= parent.value!.length);
 
   return (
     <i
       {...filterDOMProps(props)}
       className={classnames(
         'ui',
-        rawProps.className,
+        props.className,
         limitNotReached ? 'link' : 'disabled',
         'fitted add icon',
       )}
-      onClick={() =>
-        limitNotReached &&
-        parent.onChange(parent.value!.concat([cloneDeep(props.value!)]))
-      }
+      onClick={() => {
+        if (limitNotReached)
+          parent.onChange(parent.value!.concat([cloneDeep(value)]));
+      }}
     />
   );
 }
+
+export default connectField(ListAdd, { initialValue: false });

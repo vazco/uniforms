@@ -22,7 +22,7 @@ test('<ListField> - renders ListAddField', () => {
   );
 
   expect(wrapper.find(ListAddField)).toHaveLength(1);
-  expect(wrapper.find(ListAddField).prop('name')).toBe('x.$');
+  expect(wrapper.find(ListAddField).prop('name')).toBe('$');
 });
 
 test('<ListField> - renders correct label (specified)', () => {
@@ -66,6 +66,7 @@ test('<ListField> - renders children (specified)', () => {
   const element = (
     <ListField name="x" initialCount={2}>
       <Child />
+      PlainText
     </ListField>
   );
   mount(
@@ -89,8 +90,8 @@ test('<ListField> - renders children with correct name (children)', () => {
     createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
-  expect(wrapper.find(Child).at(0).prop('name')).toBe('x.0');
-  expect(wrapper.find(Child).at(1).prop('name')).toBe('x.1');
+  expect(wrapper.find(Child).at(0).prop('name')).toBe('0');
+  expect(wrapper.find(Child).at(1).prop('name')).toBe('1');
 });
 
 test('<ListField> - renders children with correct name (value)', () => {
@@ -100,6 +101,6 @@ test('<ListField> - renders children with correct name (value)', () => {
     createContext({ x: { type: Array }, 'x.$': { type: String } }),
   );
 
-  expect(wrapper.find(ListItemField).at(0).prop('name')).toBe('x.0');
-  expect(wrapper.find(ListItemField).at(1).prop('name')).toBe('x.1');
+  expect(wrapper.find(ListItemField).at(0).prop('name')).toBe('0');
+  expect(wrapper.find(ListItemField).at(1).prop('name')).toBe('1');
 });

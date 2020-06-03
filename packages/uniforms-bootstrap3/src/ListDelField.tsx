@@ -1,41 +1,51 @@
+import React, { HTMLProps, ReactNode } from 'react';
 import classnames from 'classnames';
-import React, { HTMLProps } from 'react';
-import { filterDOMProps, joinName, useField, Override } from 'uniforms';
+import {
+  Override,
+  filterDOMProps,
+  joinName,
+  useField,
+  connectField,
+} from 'uniforms';
 
-export type ListDelFieldProps<T> = Override<
-  HTMLProps<HTMLDivElement>,
+export type ListDelFieldProps = Override<
+  Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
-    className?: string;
     name: string;
     parent?: any;
-    removeIcon?: any;
+    removeIcon?: ReactNode;
   }
 >;
 
-function ListDel<T>({ removeIcon, ...rawProps }: ListDelFieldProps<T>) {
-  const props = useField<ListDelFieldProps<T>, T>(rawProps.name, rawProps, {
-    initialValue: false,
-  })[0];
-
-  const nameParts = joinName(null, props.name);
+function ListDel({
+  name,
+  className,
+  disabled,
+  removeIcon,
+  ...props
+}: ListDelFieldProps) {
+  const nameParts = joinName(null, name);
+  const nameIndex = +nameParts[nameParts.length - 1];
   const parentName = joinName(nameParts.slice(0, -1));
-  const parent = useField<{ minCount?: number }, T[]>(parentName, {})[0];
-  if (rawProps.parent) Object.assign(parent, rawProps.parent);
-
-  const fieldIndex = +nameParts[nameParts.length - 1];
+  const parent = useField<{ minCount?: number }, unknown[]>(
+    parentName,
+    {},
+    { absoluteName: true },
+  )[0];
   const limitNotReached =
-    !props.disabled && !(parent.minCount! >= parent.value!.length);
+    !disabled && !(parent.minCount! >= parent.value!.length);
+
   return (
     <span
-      className={classnames('badge', rawProps.className)}
+      {...filterDOMProps(props)}
+      className={classnames('badge', className)}
       onClick={() => {
         if (limitNotReached) {
           const value = parent.value!.slice();
-          value.splice(fieldIndex, 1);
+          value.splice(nameIndex, 1);
           parent.onChange(value);
         }
       }}
-      {...filterDOMProps(props)}
     >
       {removeIcon}
     </span>
@@ -46,4 +56,4 @@ ListDel.defaultProps = {
   removeIcon: <i className="glyphicon glyphicon-minus" />,
 };
 
-export default ListDel;
+export default connectField(ListDel, { initialValue: false });

@@ -1,47 +1,42 @@
 import IconButton, { IconButtonProps } from '@material-ui/core/IconButton';
-import omit from 'lodash/omit';
-import React from 'react';
-import { filterDOMProps, joinName, Override, useField } from 'uniforms';
+import React, { ReactNode } from 'react';
+import {
+  Override,
+  connectField,
+  filterDOMProps,
+  joinName,
+  useField,
+} from 'uniforms';
 
-export type ListDelFieldProps<T> = Override<
-  IconButtonProps,
-  {
-    disabled?: boolean;
-    icon: any;
-    initialCount?: number;
-    name: string;
-    parent?: any;
-    value?: T;
-  }
+export type ListDelFieldProps = Override<
+  Omit<IconButtonProps, 'value'>,
+  { icon: ReactNode; name: string }
 >;
 
-function ListDel<T>(rawProps: ListDelFieldProps<T>) {
-  const props = useField<ListDelFieldProps<T>, T>(rawProps.name, rawProps, {
-    initialValue: false,
-  })[0];
-
-  const nameParts = joinName(null, props.name);
+function ListDel({ disabled, icon, name, ...props }: ListDelFieldProps) {
+  const nameParts = joinName(null, name);
+  const nameIndex = +nameParts[nameParts.length - 1];
   const parentName = joinName(nameParts.slice(0, -1));
-  const parent = useField<{ minCount?: number }, T[]>(parentName, {})[0];
-  if (rawProps.parent) Object.assign(parent, rawProps.parent);
+  const parent = useField<{ minCount?: number }, unknown[]>(
+    parentName,
+    {},
+    { absoluteName: true },
+  )[0];
 
-  const fieldIndex = +nameParts[nameParts.length - 1];
   const limitNotReached =
-    !props.disabled && !(parent.minCount! >= parent.value!.length);
+    !disabled && !(parent.minCount! >= parent.value!.length);
 
   return (
     <IconButton
+      {...filterDOMProps(props)}
       disabled={!limitNotReached}
       onClick={() => {
-        if (limitNotReached) {
-          const value = parent.value!.slice();
-          value.splice(fieldIndex, 1);
-          parent.onChange(value);
-        }
+        const value = parent.value!.slice();
+        value.splice(nameIndex, 1);
+        parent.onChange(value);
       }}
-      {...filterDOMProps(omit(props, 'value'))}
     >
-      {rawProps.icon}
+      {icon}
     </IconButton>
   );
 }
@@ -50,4 +45,4 @@ ListDel.defaultProps = {
   icon: '-',
 };
 
-export default ListDel;
+export default connectField(ListDel, { initialValue: false });

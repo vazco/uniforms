@@ -2,7 +2,7 @@ import React, { ComponentType, FunctionComponent } from 'react';
 import mapValues from 'lodash/mapValues';
 import some from 'lodash/some';
 
-import { GuaranteedProps } from './types';
+import { GuaranteedProps, Override } from './types';
 import { context as contextReference } from './context';
 import { useField } from './useField';
 
@@ -13,20 +13,28 @@ export function connectField<
   Component: ComponentType<Props>,
   options?: { includeInChain?: boolean; initialValue?: boolean },
 ) {
-  // prettier-ignore
-  type FieldProps =
-    & { name: string }
-    & Partial<GuaranteedProps<Value>>
-    & Omit<Props, keyof GuaranteedProps<Value>>;
+  type FieldProps = Override<
+    Props,
+    Override<
+      Partial<GuaranteedProps<Value> & typeof Component['defaultProps']>,
+      {
+        label?: Props['label'] | boolean | null | string;
+        name: string;
+        placeholder?: Props['placeholder'] | boolean | null | string;
+      }
+    >
+  >;
 
   function Field(props: FieldProps) {
     const [fieldProps, context] = useField(props.name, props, options);
+
+    const hasChainName = options?.includeInChain !== false && props.name !== '';
     const anyFlowingPropertySet = some(
       context.state,
       (_, key) => props[key] !== null && props[key] !== undefined,
     );
 
-    if (!anyFlowingPropertySet && options?.includeInChain === false) {
+    if (!anyFlowingPropertySet && !hasChainName) {
       return <Component {...((props as unknown) as Props)} {...fieldProps} />;
     }
 
@@ -37,8 +45,9 @@ export function connectField<
       );
     }
 
-    if (options?.includeInChain !== false)
+    if (hasChainName) {
       nextContext.name = nextContext.name.concat(props.name);
+    }
 
     return (
       <contextReference.Provider value={nextContext}>

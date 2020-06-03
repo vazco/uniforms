@@ -1,18 +1,18 @@
-import React, { Children, ReactNode, cloneElement } from 'react';
-import { joinName } from 'uniforms';
+import React, { ReactNode } from 'react';
+import { connectField } from 'uniforms';
 
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
 
 export type ListItemFieldProps = {
-  children?: ReactNode;
+  children: ReactNode;
   label?: any;
   labelCol?: string;
   name: string;
   wrapperCol?: any;
 };
 
-export default function ListItem(props: ListItemFieldProps) {
+function ListItem({ children }: ListItemFieldProps) {
   return (
     <div>
       <div
@@ -24,7 +24,7 @@ export default function ListItem(props: ListItemFieldProps) {
           width: '20px',
         }}
       >
-        <ListDelField className="top aligned" name={props.name} />
+        <ListDelField className="top aligned" name="" />
       </div>
 
       <div style={{ marginBottom: '4px', overflow: 'hidden' }}>
@@ -37,18 +37,11 @@ export default function ListItem(props: ListItemFieldProps) {
         />
       </div>
 
-      <div style={{ width: '100%' }}>
-        {props.children ? (
-          Children.map(props.children as JSX.Element, child =>
-            cloneElement(child, {
-              name: joinName(props.name, child.props.name),
-              label: null,
-            }),
-          )
-        ) : (
-          <AutoField {...props} />
-        )}
-      </div>
+      <div style={{ width: '100%' }}>{children}</div>
     </div>
   );
 }
+
+ListItem.defaultProps = { children: <AutoField label={null} name="" /> };
+
+export default connectField(ListItem);
