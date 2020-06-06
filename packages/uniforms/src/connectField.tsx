@@ -11,7 +11,11 @@ export function connectField<
   Value = Props['value']
 >(
   Component: ComponentType<Props>,
-  options?: { includeInChain?: boolean; initialValue?: boolean },
+  options?: {
+    includeInChain?: boolean;
+    initialValue?: boolean;
+    kind?: 'leaf' | 'node';
+  },
 ) {
   type FieldProps = Override<
     Props,
@@ -58,5 +62,8 @@ export function connectField<
 
   Field.displayName = `${Component.displayName || Component.name}Field`;
 
-  return Field as FunctionComponent<FieldProps>;
+  return Object.assign(Field as FunctionComponent<FieldProps>, {
+    Component,
+    options,
+  });
 }
