@@ -92,7 +92,7 @@ describe('GraphQLBridge', () => {
 
   describe('#getError', () => {
     it('works without error', () => {
-      expect(bridgeI.getError('title')).toBe(null);
+      expect(bridgeI.getError('title', undefined)).toBe(null);
     });
 
     it('works with invalid error', () => {
@@ -112,7 +112,7 @@ describe('GraphQLBridge', () => {
 
   describe('#getErrorMessage', () => {
     it('works without error', () => {
-      expect(bridgeI.getErrorMessage('title')).toBe('');
+      expect(bridgeI.getErrorMessage('title', undefined)).toBe('');
     });
 
     it('works with invalid error', () => {
@@ -136,7 +136,7 @@ describe('GraphQLBridge', () => {
 
   describe('#getErrorMessages', () => {
     it('works without error', () => {
-      expect(bridgeI.getErrorMessages()).toEqual([]);
+      expect(bridgeI.getErrorMessages(undefined)).toEqual([]);
     });
 
     it('works with other errors', () => {
@@ -495,8 +495,8 @@ describe('GraphQLBridge', () => {
 
   describe('#getType', () => {
     [
-      [astI, bridgeI, 'input'],
-      [astT, bridgeT, 'type'],
+      [astI, bridgeI, 'input'] as const,
+      [astT, bridgeT, 'type'] as const,
     ].forEach(([ast, bridge, mode]) => {
       it(`works with any type (${mode})`, () => {
         expect(bridge.getType('author')).toBe(Object);

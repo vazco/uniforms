@@ -12,10 +12,11 @@ export type BoolFieldProps = Override<
   CheckboxProps | SwitchProps,
   {
     appearance?: 'checkbox' | 'switch';
-    label?: string;
+    helperText?: string;
+    label: string;
     legend?: string;
     onChange?(value: any): void;
-    transform?(label?: string): string;
+    transform?(label: string): string;
   }
 >;
 

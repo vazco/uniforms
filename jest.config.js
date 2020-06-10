@@ -8,9 +8,7 @@ module.exports = {
     '^simpl-schema$': '<rootDir>/node_modules/simpl-schema',
     '^uniforms([^/]*)(.*)$': '<rootDir>/packages/uniforms$1/src$2'
   },
-  setupFiles: ['./scripts/setupEnzyme.js'],
-  testMatch: ['**/__tests__/**/!(_)*.{ts,tsx}', '!**/*.d.ts'],
-  transform: {
-    '^.+\\.(js|ts|tsx)$': './scripts/transform.js'
-  }
+  preset: 'ts-jest',
+  setupFiles: ['./scripts/setupEnzyme.ts'],
+  testPathIgnorePatterns: ['/node_modules/', '/_[^/]*$', '\\.d\\.ts$']
 };

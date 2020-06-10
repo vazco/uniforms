@@ -10,7 +10,7 @@ export type ErrorFieldProps = Override<
   {
     errorMessage?: string;
     fullWidth?: boolean;
-    margin: string;
+    margin?: string;
   }
 >;
 

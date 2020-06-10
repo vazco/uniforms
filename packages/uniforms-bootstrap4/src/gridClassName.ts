@@ -2,7 +2,11 @@ import { filterDOMProps } from 'uniforms';
 
 filterDOMProps.register('grid');
 
-function gridClassNamePart(size, value, side) {
+function gridClassNamePart(
+  size: string,
+  value: number,
+  side?: 'input' | 'label',
+) {
   const sizeInfix = size === 'xs' ? '' : `${size}-`;
   return side === 'label'
     ? `col-${sizeInfix}${value}`
@@ -21,7 +25,10 @@ function compareSizeClass(a, b) {
   return gridOrder[a] - gridOrder[b];
 }
 
-export default function gridClassName(grid, side) {
+export default function gridClassName(
+  grid?: number | string | Record<string, number>,
+  side?: 'input' | 'label',
+) {
   // Example: 6
   if (typeof grid === 'number') {
     return gridClassNamePart('xs', grid, side);
@@ -43,10 +50,13 @@ export default function gridClassName(grid, side) {
       grid = { xs: grid.sm || grid.md || grid.lg || grid.xl, ...grid };
     }
 
-    return Object.keys(grid)
-      .sort(compareSizeClass)
-      .map(size => gridClassNamePart(size, grid[size], side))
-      .join(' ');
+    return (
+      Object.keys(grid)
+        .sort(compareSizeClass)
+        // @ts-ignore Weird type refinement problem.
+        .map(size => gridClassNamePart(size, grid[size], side))
+        .join(' ')
+    );
   }
 
   return '';

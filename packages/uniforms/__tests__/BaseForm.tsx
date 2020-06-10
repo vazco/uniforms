@@ -1,5 +1,5 @@
 import React from 'react';
-import { BaseForm } from 'uniforms';
+import { BaseForm, Bridge } from 'uniforms';
 
 import mount from './_mount';
 
@@ -7,19 +7,18 @@ jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
 
 describe('BaseForm', () => {
-  const noop = () => {};
   const error = new Error();
   const model = { $: [1], _: 1 };
-  const schema = {
-    getError: noop,
-    getErrorMessage: noop,
-    getErrorMessages: noop,
-    getField: noop,
-    getInitialValue: noop,
-    getProps: noop,
-    getSubfields: noop,
-    getType: noop,
-    getValidator: noop,
+  const schema: Bridge = {
+    getError() {},
+    getErrorMessage: () => '',
+    getErrorMessages: () => [],
+    getField() {},
+    getInitialValue() {},
+    getProps: () => ({}),
+    getSubfields: () => [],
+    getType() {},
+    getValidator: () => () => {},
   };
 
   const onChange = jest.fn();
@@ -100,7 +99,7 @@ describe('BaseForm', () => {
     });
 
     it('updates schema bridge', () => {
-      const schema2 = { ...schema, getType: () => {} };
+      const schema2 = { ...(schema as Omit<Bridge, never>), getType: () => {} };
 
       wrapper.setProps({ schema: schema2 });
 

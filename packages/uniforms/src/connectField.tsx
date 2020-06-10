@@ -13,7 +13,7 @@ export function connectField<
   type FieldProps = Override<
     Props,
     Override<
-      Partial<GuaranteedProps<Value> & typeof Component['defaultProps']>,
+      Partial<GuaranteedProps<Value>>,
       {
         label?: Props['label'] | boolean | null | string;
         name: string;

@@ -78,7 +78,7 @@ describe('SimpleSchemaBridge', () => {
 
   describe('#getError', () => {
     it('works without error', () => {
-      expect(bridge.getError('a')).toBe(null);
+      expect(bridge.getError('a', null)).toBe(null);
     });
 
     it('works with invalid error', () => {
@@ -96,7 +96,7 @@ describe('SimpleSchemaBridge', () => {
 
   describe('#getErrorMessage', () => {
     it('works without error', () => {
-      expect(bridge.getErrorMessage('a')).toBe('');
+      expect(bridge.getErrorMessage('a', undefined)).toBe('');
     });
 
     it('works with invalid error', () => {
@@ -120,7 +120,7 @@ describe('SimpleSchemaBridge', () => {
 
   describe('#getErrorMessages', () => {
     it('works without error', () => {
-      expect(bridge.getErrorMessages()).toEqual([]);
+      expect(bridge.getErrorMessages(undefined)).toEqual([]);
     });
 
     it('works with other errors', () => {

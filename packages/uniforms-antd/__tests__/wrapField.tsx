@@ -9,6 +9,7 @@ test('<wrapField> - renders wrapper with label', () => {
   const element = wrapField({ label: 'Label' }, <div />);
   const wrapper = mount(element);
 
+  // @ts-ignore Correct label type.
   expect(wrapper.find(Form.Item).prop('label').props.children[0]).toBe('Label');
 });
 

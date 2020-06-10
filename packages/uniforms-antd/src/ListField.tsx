@@ -16,10 +16,10 @@ export type ListFieldProps = Override<
   Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
     addIcon?: ReactNode;
-    children: ReactNode;
+    children?: ReactNode;
     error?: boolean;
     errorMessage?: string;
-    info?: boolean;
+    info?: string;
     initialCount?: number;
     itemProps?: {};
     label: string;
@@ -30,8 +30,9 @@ export type ListFieldProps = Override<
     wrapperCol?: any;
   }
 >;
+
 function List({
-  children,
+  children = <ListItemField name="$" />,
   error,
   errorMessage,
   info,
@@ -89,7 +90,6 @@ List.defaultProps = {
     marginTop: '5px',
     padding: '10px',
   },
-  children: <ListItemField name="$" />,
 };
 
 export default connectField(List);

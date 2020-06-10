@@ -98,14 +98,14 @@ test('<BoolField> - renders a Checkbox which correctly reacts on change', () => 
 });
 
 test('<BoolField> - renders an Switch', () => {
-  const element = <BoolField name="x" appearance="toggle" />;
+  const element = <BoolField name="x" appearance="switch" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
   expect(wrapper.find(Switch)).toHaveLength(1);
 });
 
 test('<BoolField> - renders a Switch with correct id (inherited)', () => {
-  const element = <BoolField name="x" appearance="toggle" />;
+  const element = <BoolField name="x" appearance="switch" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
   expect(wrapper.find(Switch)).toHaveLength(1);
@@ -113,7 +113,7 @@ test('<BoolField> - renders a Switch with correct id (inherited)', () => {
 });
 
 test('<BoolField> - renders a Switch with correct id (specified)', () => {
-  const element = <BoolField name="x" appearance="toggle" id="y" />;
+  const element = <BoolField name="x" appearance="switch" id="y" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
   expect(wrapper.find(Switch)).toHaveLength(1);
@@ -121,7 +121,7 @@ test('<BoolField> - renders a Switch with correct id (specified)', () => {
 });
 
 test('<BoolField> - renders a Switch with correct name', () => {
-  const element = <BoolField name="x" appearance="toggle" />;
+  const element = <BoolField name="x" appearance="switch" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
   expect(wrapper.find(Switch)).toHaveLength(1);
@@ -129,7 +129,7 @@ test('<BoolField> - renders a Switch with correct name', () => {
 });
 
 test('<BoolField> - renders an Switch with correct disabled state', () => {
-  const element = <BoolField name="x" appearance="toggle" disabled />;
+  const element = <BoolField name="x" appearance="switch" disabled />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
   expect(wrapper.find(Switch)).toHaveLength(1);
@@ -138,7 +138,7 @@ test('<BoolField> - renders an Switch with correct disabled state', () => {
 
 test('<BoolField> - renders a Switch with correct label (specified)', () => {
   const element = (
-    <BoolField name="x" appearance="toggle" label="BoolFieldLabel" />
+    <BoolField name="x" appearance="switch" label="BoolFieldLabel" />
   );
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -150,7 +150,7 @@ test('<BoolField> - renders a Switch with correct label (transform)', () => {
   const element = (
     <BoolField
       name="x"
-      appearance="toggle"
+      appearance="switch"
       label="BoolFieldLabel"
       transform={x => x.toUpperCase()}
     />
@@ -163,7 +163,7 @@ test('<BoolField> - renders a Switch with correct label (transform)', () => {
 
 test('<BoolField> - renders a Switch with correct legend (specified)', () => {
   const element = (
-    <BoolField name="x" appearance="toggle" legend="BoolFieldLegend" />
+    <BoolField name="x" appearance="switch" legend="BoolFieldLegend" />
   );
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -172,7 +172,7 @@ test('<BoolField> - renders a Switch with correct legend (specified)', () => {
 });
 
 test('<BoolField> - renders a Switch with correct value (default)', () => {
-  const element = <BoolField name="x" appearance="toggle" />;
+  const element = <BoolField name="x" appearance="switch" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
   expect(wrapper.find(Switch)).toHaveLength(1);
@@ -180,7 +180,7 @@ test('<BoolField> - renders a Switch with correct value (default)', () => {
 });
 
 test('<BoolField> - renders a Switch with correct value (model)', () => {
-  const element = <BoolField name="x" appearance="toggle" />;
+  const element = <BoolField name="x" appearance="switch" />;
   const wrapper = mount(
     element,
     createContext({ x: { type: Boolean } }, { model: { x: true } }),
@@ -191,7 +191,7 @@ test('<BoolField> - renders a Switch with correct value (model)', () => {
 });
 
 test('<BoolField> - renders a Switch with correct value (specified)', () => {
-  const element = <BoolField name="x" appearance="toggle" value />;
+  const element = <BoolField name="x" appearance="switch" value />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
   expect(wrapper.find(Switch)).toHaveLength(1);
@@ -201,7 +201,7 @@ test('<BoolField> - renders a Switch with correct value (specified)', () => {
 test('<BoolField> - renders a Switch which correctly reacts on change', () => {
   const onChange = jest.fn();
 
-  const element = <BoolField name="x" appearance="toggle" />;
+  const element = <BoolField name="x" appearance="switch" />;
   const wrapper = mount(
     element,
     createContext({ x: { type: Boolean } }, { onChange }),

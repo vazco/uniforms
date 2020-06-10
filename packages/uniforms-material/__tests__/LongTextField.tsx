@@ -89,10 +89,8 @@ test('<LongTextField> - renders a TextField which correctly reacts on change', (
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);
-  wrapper
-    .find(TextField)
-    .props()
-    .onChange({ target: { value: 'y' } });
+  // @ts-ignore Provide a valid EventTarget.
+  wrapper.find(TextField).props().onChange!({ target: { value: 'y' } });
   expect(onChange).toHaveBeenLastCalledWith('x', 'y');
 });
 
@@ -106,10 +104,8 @@ test('<LongTextField> - renders a TextField which correctly reacts on change (em
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);
-  wrapper
-    .find(TextField)
-    .props()
-    .onChange({ target: { value: '' } });
+  // @ts-ignore Provide a valid EventTarget.
+  wrapper.find(TextField).props().onChange!({ target: { value: '' } });
   expect(onChange).toHaveBeenLastCalledWith('x', '');
 });
 
@@ -123,10 +119,8 @@ test('<LongTextField> - renders a TextField which correctly reacts on change (sa
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);
-  wrapper
-    .find(TextField)
-    .props()
-    .onChange({ target: { value: 'y' } });
+  // @ts-ignore Provide a valid EventTarget.
+  wrapper.find(TextField).props().onChange!({ target: { value: 'y' } });
   expect(onChange).toHaveBeenLastCalledWith('x', 'y');
 });
 

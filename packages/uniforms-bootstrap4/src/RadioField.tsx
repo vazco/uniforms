@@ -13,19 +13,19 @@ const escape = (x: string) => base64(x).replace(/=+$/, '');
 export type RadioFieldProps = Override<
   HTMLProps<HTMLDivElement>,
   {
-    allowedValues: string[];
+    allowedValues?: string[];
     error?: boolean;
     inline?: boolean;
     inputClassName?: string;
     onChange: (string) => void;
-    transform?: (string?: string) => string;
+    transform?(value: string): string;
   }
 >;
 
 function Radio(props: RadioFieldProps) {
   return wrapField(
     props,
-    props.allowedValues.map(item => (
+    props.allowedValues?.map(item => (
       <div
         key={item}
         className={classnames(props.inputClassName, 'form-check', 'radio', {

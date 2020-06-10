@@ -74,7 +74,7 @@ test('<ListField> - passes itemProps to its children', () => {
 });
 
 test('<ListField> - renders children (specified)', () => {
-  const Child = jest.fn(() => null);
+  const Child = jest.fn(() => <div />) as React.FC<any>;
 
   const element = (
     <ListField name="x" initialCount={2}>
@@ -91,7 +91,7 @@ test('<ListField> - renders children (specified)', () => {
 });
 
 test('<ListField> - renders children with correct name (children)', () => {
-  const Child = jest.fn(() => <div />);
+  const Child = jest.fn(() => <div />) as React.FC<any>;
 
   const element = (
     <ListField name="x" initialCount={2}>
