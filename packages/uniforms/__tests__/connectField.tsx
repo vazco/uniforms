@@ -67,48 +67,6 @@ describe('connectField', () => {
     });
   });
 
-  describe('when called with `includeInChain`', () => {
-    it('is in chain (true)', () => {
-      const Field1 = connectField(props => <>{props.children}</>, {
-        includeInChain: true,
-      });
-      const Field2 = connectField(Test);
-
-      mount(
-        <Field1 name="field">
-          <Field2 name="subfield" />
-        </Field1>,
-        reactContext,
-      );
-
-      expect(Test.mock.calls[0]).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({ name: 'field.subfield' }),
-        ]),
-      );
-    });
-
-    it('is not in chain (false)', () => {
-      const Field1 = connectField(props => <>{props.children}</>, {
-        includeInChain: false,
-      });
-      const Field2 = connectField(Test);
-
-      mount(
-        <Field1 name="field">
-          <Field2 name="field.subfield" />
-        </Field1>,
-        reactContext,
-      );
-
-      expect(Test.mock.calls[0]).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({ name: 'field.subfield' }),
-        ]),
-      );
-    });
-  });
-
   describe('when called with `initialValue`', () => {
     it('includes default value (true)', () => {
       const Field = connectField(Test, { initialValue: true });
