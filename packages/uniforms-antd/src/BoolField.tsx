@@ -45,4 +45,4 @@ Bool.defaultProps = {
   unCheckedChildren: <Icon type="close" />,
 };
 
-export default connectField(Bool);
+export default connectField(Bool, { kind: 'leaf' });

@@ -41,4 +41,4 @@ function ListDel({ disabled, icon = '-', name, ...props }: ListDelFieldProps) {
   );
 }
 
-export default connectField(ListDel, { initialValue: false });
+export default connectField(ListDel, { initialValue: false, kind: 'leaf' });

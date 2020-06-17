@@ -60,4 +60,4 @@ function Date({
   );
 }
 
-export default connectField(Date);
+export default connectField(Date, { kind: 'leaf' });

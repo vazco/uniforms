@@ -38,4 +38,4 @@ Date.defaultProps = {
   style: { width: '100%' },
 };
 
-export default connectField(Date);
+export default connectField(Date, { kind: 'leaf' });

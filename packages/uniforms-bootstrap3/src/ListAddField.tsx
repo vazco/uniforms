@@ -57,4 +57,4 @@ ListAdd.defaultProps = {
   addIcon: <i className="glyphicon glyphicon-plus" />,
 };
 
-export default connectField(ListAdd, { initialValue: false });
+export default connectField(ListAdd, { initialValue: false, kind: 'leaf' });
