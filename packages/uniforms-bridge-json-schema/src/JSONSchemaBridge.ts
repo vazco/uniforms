@@ -254,7 +254,7 @@ export default class JSONSchemaBridge extends Bridge {
     return ready;
   }
 
-  getSubfields(name) {
+  getSubfields(name?: string) {
     if (!name) {
       if (this.schema.properties) {
         return Object.keys(this.schema.properties);

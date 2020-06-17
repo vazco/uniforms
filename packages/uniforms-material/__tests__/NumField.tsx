@@ -160,10 +160,8 @@ test('<NumField> - renders a TextField which correctly reacts on change', () => 
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);
-  wrapper
-    .find(TextField)
-    .props()
-    .onChange({ target: { value: '1' } });
+  // @ts-ignore Provide a valid EventTarget.
+  wrapper.find(TextField).props().onChange!({ target: { value: '1' } });
   expect(onChange).toHaveBeenLastCalledWith('x', 1);
 });
 
@@ -177,10 +175,8 @@ test('<NumField> - renders a TextField which correctly reacts on change (decimal
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);
-  wrapper
-    .find(TextField)
-    .props()
-    .onChange({ target: { value: '2.5' } });
+  // @ts-ignore Provide a valid EventTarget.
+  wrapper.find(TextField).props().onChange!({ target: { value: '2.5' } });
   expect(onChange).toHaveBeenLastCalledWith('x', 2.5);
 });
 
@@ -194,10 +190,8 @@ test('<NumField> - renders a TextField which correctly reacts on change (decimal
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);
-  wrapper
-    .find(TextField)
-    .props()
-    .onChange({ target: { value: '2.5' } });
+  // @ts-ignore Provide a valid EventTarget.
+  wrapper.find(TextField).props().onChange!({ target: { value: '2.5' } });
   expect(onChange).toHaveBeenLastCalledWith('x', 2);
 });
 
@@ -211,10 +205,8 @@ test('<NumField> - renders a TextField which correctly reacts on change (empty)'
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);
-  wrapper
-    .find(TextField)
-    .props()
-    .onChange({ target: { value: '' } });
+  // @ts-ignore Provide a valid EventTarget.
+  wrapper.find(TextField).props().onChange!({ target: { value: '' } });
   expect(onChange).toHaveBeenLastCalledWith('x', undefined);
 });
 
@@ -228,10 +220,8 @@ test('<NumField> - renders a TextField which correctly reacts on change (same va
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);
-  wrapper
-    .find(TextField)
-    .props()
-    .onChange({ target: { value: '1' } });
+  // @ts-ignore Provide a valid EventTarget.
+  wrapper.find(TextField).props().onChange!({ target: { value: '1' } });
   expect(onChange).toHaveBeenLastCalledWith('x', 1);
 });
 
@@ -245,10 +235,8 @@ test('<NumField> - renders a TextField which correctly reacts on change (zero)',
   );
 
   expect(wrapper.find(TextField)).toHaveLength(1);
-  wrapper
-    .find(TextField)
-    .props()
-    .onChange({ target: { value: '0' } });
+  // @ts-ignore Provide a valid EventTarget.
+  wrapper.find(TextField).props().onChange!({ target: { value: '0' } });
   expect(onChange).toHaveBeenLastCalledWith('x', 0);
 });
 

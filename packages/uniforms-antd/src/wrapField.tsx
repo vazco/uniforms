@@ -7,7 +7,7 @@ import { filterDOMProps, Override } from 'uniforms';
 type WrapperProps = Override<
   FormItemProps,
   {
-    error?: boolean;
+    error?: unknown;
     errorMessage?: string;
     info?: string;
     showInlineError?: boolean;
@@ -51,7 +51,7 @@ export default function wrapField(
     <Form.Item
       colon={colon}
       hasFeedback
-      help={help || (showInlineError && error && errorMessage)}
+      help={help || (showInlineError && !!error && errorMessage)}
       extra={extra}
       htmlFor={id}
       label={labelNode}

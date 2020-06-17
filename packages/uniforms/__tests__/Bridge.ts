@@ -5,6 +5,7 @@ describe('Bridge', () => {
   const customBridgeInstance = new CustomBridge();
 
   it('cannot be instantiated', () => {
+    // @ts-ignore We could use @ts-expect-error in TypeScript 3.9.
     expect(() => new Bridge()).toThrow();
   });
 

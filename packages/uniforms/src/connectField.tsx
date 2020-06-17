@@ -11,16 +11,12 @@ export function connectField<
   Value = Props['value']
 >(
   Component: ComponentType<Props>,
-  options?: {
-    includeInChain?: boolean;
-    initialValue?: boolean;
-    kind?: 'leaf' | 'node';
-  },
+  options?: { initialValue?: boolean; kind?: 'leaf' | 'node' },
 ) {
   type FieldProps = Override<
     Props,
     Override<
-      Partial<GuaranteedProps<Value> & typeof Component['defaultProps']>,
+      Partial<GuaranteedProps<Value>>,
       {
         label?: Props['label'] | boolean | null | string;
         name: string;
@@ -32,7 +28,7 @@ export function connectField<
   function Field(props: FieldProps) {
     const [fieldProps, context] = useField(props.name, props, options);
 
-    const hasChainName = options?.includeInChain !== false && props.name !== '';
+    const hasChainName = props.name !== '';
     const anyFlowingPropertySet = some(
       context.state,
       (_, key) => props[key] !== null && props[key] !== undefined,

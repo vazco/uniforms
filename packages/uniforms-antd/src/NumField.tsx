@@ -1,5 +1,5 @@
 import InputNumber, { InputNumberProps } from 'antd/lib/input-number';
-import React from 'react';
+import React, { Ref } from 'react';
 import { connectField, filterDOMProps, Override } from 'uniforms';
 
 import wrapField from './wrapField';
@@ -10,7 +10,7 @@ export type NumFieldProps = Override<
   InputNumberProps,
   {
     decimal?: boolean;
-    inputRef: (instance: InputNumber | null) => void;
+    inputRef?: Ref<InputNumber>;
     onChange(value?: number): void;
   }
 >;

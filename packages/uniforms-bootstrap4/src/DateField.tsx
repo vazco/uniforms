@@ -13,7 +13,7 @@ export type DateFieldProps = Override<
     disabled: boolean;
     error: unknown;
     id: string;
-    inputClassName: string;
+    inputClassName?: string;
     inputRef?: Ref<HTMLInputElement>;
     max?: Date;
     min?: Date;

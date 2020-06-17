@@ -16,7 +16,7 @@ export type ListFieldProps = Override<
   Omit<ListProps, 'onChange'>,
   {
     addIcon?: ReactNode;
-    children: ReactNode;
+    children?: ReactNode;
     initialCount?: number;
     itemProps?: {};
     label?: string;
@@ -27,7 +27,7 @@ export type ListFieldProps = Override<
 
 function List({
   addIcon,
-  children,
+  children = <ListItemField name="$" />,
   dense,
   initialCount,
   itemProps,
@@ -63,7 +63,5 @@ function List({
     </>
   );
 }
-
-List.defaultProps = { children: <ListItemField name="$" /> };
 
 export default connectField(List);

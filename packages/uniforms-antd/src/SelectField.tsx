@@ -14,7 +14,7 @@ type CommonProps<Value> = {
   name: string;
   onChange(value?: Value): void;
   placeholder: string;
-  required: boolean;
+  required?: boolean;
   transform?(value: CommonPropsValueElement<Value>): string;
   value?: Value;
 };
@@ -33,7 +33,7 @@ type CheckboxesProps = Override<
 
 type SelectProps = Override<
   SelectAntDProps,
-  CommonProps<string | string[]> & {
+  CommonProps<string | (string | undefined)[]> & {
     checkboxes?: false;
     inputRef?: Ref<SelectAntD<any>>;
   }

@@ -1,10 +1,12 @@
 ## Next
 
+- **Breaking:** Removed `modelSync` from `AutoForm` state. [\#739](https://github.com/vazco/uniforms/issues/739)
 - **Added:** New `kind: 'leaf' | 'node'` flag for `connectField`. [\#741](https://github.com/vazco/uniforms/issues/741)
 
 ## [v3.0.0-alpha.4](https://github.com/vazco/uniforms/tree/v3.0.0-alpha.4) (2020-06-03)
 
 - **Breaking:** Removed `injectName` helper. It was used to force context updates and got replaced by the new context directly. [\#720](https://github.com/vazco/uniforms/issues/720)
+- **Breaking:** Removed `includeInChain` option of `connectField`. [\#738](https://github.com/vazco/uniforms/issues/738)
 - **Breaking:** Reworked `ListField` components family. [\#721](https://github.com/vazco/uniforms/issues/721)
 
 ## [v2.6.8](https://github.com/vazco/uniforms/tree/v2.6.8) (2020-06-03)

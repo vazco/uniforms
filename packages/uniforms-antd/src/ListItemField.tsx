@@ -5,14 +5,16 @@ import AutoField from './AutoField';
 import ListDelField from './ListDelField';
 
 export type ListItemFieldProps = {
-  children: ReactNode;
+  children?: ReactNode;
   label?: any;
   labelCol?: string;
   name: string;
   wrapperCol?: any;
 };
 
-function ListItem({ children }: ListItemFieldProps) {
+function ListItem({
+  children = <AutoField label={null} name="" />,
+}: ListItemFieldProps) {
   return (
     <div>
       <div
@@ -41,7 +43,5 @@ function ListItem({ children }: ListItemFieldProps) {
     </div>
   );
 }
-
-ListItem.defaultProps = { children: <AutoField label={null} name="" /> };
 
 export default connectField(ListItem);

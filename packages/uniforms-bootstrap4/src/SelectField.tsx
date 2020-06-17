@@ -29,7 +29,7 @@ export type SelectFieldProps = Override<
     errorMessage?: string;
     fieldType: unknown;
     id: string;
-    inline?: string;
+    inline?: boolean;
     inputClassName?: string;
     inputRef?: Ref<HTMLSelectElement>;
     label: string;
@@ -38,7 +38,7 @@ export type SelectFieldProps = Override<
     placeholder: string;
     required?: boolean;
     showInlineError?: boolean;
-    transform?(value?: string): string;
+    transform?(value: string): string;
     value?: string | string[];
   }
 >;

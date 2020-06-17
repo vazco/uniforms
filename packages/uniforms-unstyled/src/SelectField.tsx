@@ -20,7 +20,7 @@ export type SelectFieldProps = Override<
     onChange(value?: string | string[]): void;
     placeholder: string;
     required?: boolean;
-    transform?(value?: string): string;
+    transform?(value: string): string;
     value?: string | string[];
   }
 >;

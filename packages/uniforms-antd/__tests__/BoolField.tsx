@@ -164,7 +164,8 @@ test('<BoolField> - renders a switch input which correctly reacts on change', ()
   );
 
   expect(wrapper.find(Switch)).toHaveLength(1);
-  expect(wrapper.find(Switch).prop('onChange')()).toBeFalsy();
+  // FIXME: Provide a valid MouseEvent.
+  expect(wrapper.find(Switch).prop('onChange')!(true, null as any)).toBeFalsy();
   expect(onChange).toHaveBeenLastCalledWith('x', true);
 });
 
@@ -178,7 +179,8 @@ test('<BoolField> - renders a checkbox input which correctly reacts on change', 
   );
 
   expect(wrapper.find(Checkbox)).toHaveLength(1);
-  expect(wrapper.find(Checkbox).prop('onChange')()).toBeFalsy();
+  // FIXME: Provide a valid CheckboxChangeEvent.
+  expect(wrapper.find(Checkbox).prop('onChange')!(null as any)).toBeFalsy();
   expect(onChange).toHaveBeenLastCalledWith('x', true);
 });
 

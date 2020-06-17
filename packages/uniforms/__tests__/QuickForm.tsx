@@ -8,8 +8,8 @@ jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
 
 describe('QuickForm', () => {
-  // @ts-ignore QuickForm cannot be a superclass.
-  class TestForm<Model> extends QuickForm {
+  // @ts-ignore QuickForm is not a valid Component.
+  class TestForm extends QuickForm<any> {
     getAutoField = () => () => <i className="auto" />;
     getErrorsField = () => () => <i className="errors" />;
     getSubmitField = () => () => <i className="submit" />;
@@ -24,19 +24,19 @@ describe('QuickForm', () => {
 
   describe('when rendered with custom fields', () => {
     it('renders `AutoField` for each field', () => {
-      const wrapper = mount<TestForm<any>>(<TestForm schema={schema} />);
+      const wrapper = mount<TestForm>(<TestForm schema={schema} />);
 
       expect(wrapper.find('.auto').length).toBeGreaterThan(0);
     });
 
     it('renders `ErrorsField`', () => {
-      const wrapper = mount<TestForm<any>>(<TestForm schema={schema} />);
+      const wrapper = mount<TestForm>(<TestForm schema={schema} />);
 
       expect(wrapper.find('.errors').length).toBeGreaterThan(0);
     });
 
     it('renders `SubmitField`', () => {
-      const wrapper = mount<TestForm<any>>(<TestForm schema={schema} />);
+      const wrapper = mount<TestForm>(<TestForm schema={schema} />);
 
       expect(wrapper.find('.submit').length).toBeGreaterThan(0);
     });
@@ -44,8 +44,8 @@ describe('QuickForm', () => {
 
   describe('when rendered with custom fields in `props`', () => {
     it('renders `AutoField` for each field', () => {
-      const wrapper = mount<TestForm<any>>(
-        <TestForm<any>
+      const wrapper = mount<TestForm>(
+        <TestForm
           schema={schema}
           autoField={() => <i className="autoOverride" />}
         />,
@@ -55,8 +55,8 @@ describe('QuickForm', () => {
     });
 
     it('renders `ErrorsField`', () => {
-      const wrapper = mount<TestForm<any>>(
-        <TestForm<any>
+      const wrapper = mount<TestForm>(
+        <TestForm
           schema={schema}
           errorsField={() => <i className="errorsOverride" />}
         />,
@@ -66,8 +66,8 @@ describe('QuickForm', () => {
     });
 
     it('renders `SubmitField`', () => {
-      const wrapper = mount<TestForm<any>>(
-        <TestForm<any>
+      const wrapper = mount<TestForm>(
+        <TestForm
           schema={schema}
           submitField={() => <i className="submitOverride" />}
         />,
@@ -81,7 +81,7 @@ describe('QuickForm', () => {
         render = () => <code />;
       }
 
-      const wrapper = mount<TestForm<any>>(
+      const wrapper = mount<TestForm>(
         <TestForm schema={schema} autoField={Code} />,
       );
 
@@ -89,7 +89,7 @@ describe('QuickForm', () => {
     });
 
     it('works with functions', () => {
-      const wrapper = mount<TestForm<any>>(
+      const wrapper = mount<TestForm>(
         <TestForm schema={schema} autoField={() => <code />} />,
       );
 

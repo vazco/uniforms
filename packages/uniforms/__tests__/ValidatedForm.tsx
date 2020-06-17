@@ -34,7 +34,8 @@ describe('ValidatedForm', () => {
   });
 
   describe('on validation', () => {
-    let wrapper = mount<ValidatedForm>(<ValidatedForm schema={schema} />);
+    // FIXME: ValidatedForm is not a valid Component.
+    let wrapper = mount<ValidatedForm | any>(<ValidatedForm schema={schema} />);
     let form = wrapper.instance();
 
     beforeEach(() => {
@@ -170,7 +171,8 @@ describe('ValidatedForm', () => {
   describe('on change', () => {
     describe('in `onChange` mode', () => {
       it('validates', () => {
-        const wrapper = mount<ValidatedForm>(
+        // FIXME: ValidatedForm is not a valid Component.
+        const wrapper = mount<ValidatedForm | any>(
           <ValidatedForm model={model} schema={schema} validate="onChange" />,
         );
         wrapper.instance().getContext().onChange('key', 'value');
@@ -181,7 +183,8 @@ describe('ValidatedForm', () => {
 
     describe('in `onSubmit` mode', () => {
       it('does not validate', () => {
-        const wrapper = mount<ValidatedForm>(
+        // FIXME: ValidatedForm is not a valid Component.
+        const wrapper = mount<ValidatedForm | any>(
           <ValidatedForm model={model} schema={schema} validate="onSubmit" />,
         );
         wrapper.instance().getContext().onChange('key', 'value');
@@ -220,7 +223,8 @@ describe('ValidatedForm', () => {
 
   describe('on reset', () => {
     it('removes `error`', () => {
-      const wrapper = mount<ValidatedForm>(
+      // FIXME: ValidatedForm is not a valid Component.
+      const wrapper = mount<ValidatedForm | any>(
         <ValidatedForm model={model} onSubmit={onSubmit} schema={schema} />,
       );
       validator.mockImplementationOnce(() => {
@@ -396,7 +400,8 @@ describe('ValidatedForm', () => {
     const flatPair4 = ([a, [b, [c, d]]]) => [a, b, c, d] as const;
     it.each(cases.map(flatPair4))('works for %p/%p/%p/%p', async (...modes) => {
       const [hasError, validatorMode, onValidateMode, onSubmitMode] = modes;
-      const wrapper = mount<ValidatedForm>(
+      // FIXME: ValidatedForm is not a valid Component.
+      const wrapper = mount<ValidatedForm | any>(
         <ValidatedForm
           error={hasError ? error : null}
           onSubmit={onSubmit}

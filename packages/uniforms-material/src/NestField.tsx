@@ -9,6 +9,7 @@ export type NestFieldProps = Override<
   Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
     fields?: any[];
+    helperText?: string;
     itemProps?: object;
     name: string;
   }

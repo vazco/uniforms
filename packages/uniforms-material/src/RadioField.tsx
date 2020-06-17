@@ -10,17 +10,18 @@ import wrapField from './wrapField';
 export type RadioFieldProps = Override<
   RadioProps,
   {
-    allowedValues: string[];
+    allowedValues?: string[];
     checkboxes?: boolean;
+    helperText?: string;
     label?: string;
-    onChange(string): void;
-    transform?(string?: string): string;
+    onChange(value?: string): void;
+    transform?(value: string): string;
   }
 >;
 
 function Radio({
   allowedValues,
-  checkboxes, // eslint-disable-line no-unused-vars
+  checkboxes,
   disabled,
   id,
   inputRef,
@@ -47,7 +48,7 @@ function Radio({
       ref={inputRef}
       value={value}
     >
-      {allowedValues.map(item => (
+      {allowedValues?.map(item => (
         <FormControlLabel
           control={<RadioMaterial {...filteredProps} />}
           key={item}

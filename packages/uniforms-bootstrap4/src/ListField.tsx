@@ -15,7 +15,7 @@ export type ListFieldProps = Override<
   Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
     addIcon?: ReactNode;
-    children: ReactNode;
+    children?: ReactNode;
     error?: boolean;
     errorMessage?: string;
     initialCount?: number;
@@ -29,7 +29,7 @@ export type ListFieldProps = Override<
 
 function List({
   addIcon,
-  children,
+  children = <ListItemField name="$" />,
   className,
   error,
   errorMessage,
@@ -79,7 +79,5 @@ function List({
     </div>
   );
 }
-
-List.defaultProps = { children: <ListItemField name="$" /> };
 
 export default connectField(List);

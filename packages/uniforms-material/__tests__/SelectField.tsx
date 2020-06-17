@@ -36,6 +36,7 @@ test('<SelectField> - renders a Select with correct disabled state', () => {
 });
 
 test('<SelectField> - renders a Select with correct required state', () => {
+  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField name="x" required />;
   const wrapper = mount(
     element,
@@ -54,7 +55,8 @@ test('<SelectField> - renders a Select with correct id (inherited)', () => {
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find(Select).prop('inputProps').id).toBeTruthy();
+  // FIXME: inputProps is nullable.
+  expect(wrapper.find(Select).prop('inputProps')!.id).toBeTruthy();
 });
 
 test('<SelectField> - renders a Select with correct id (specified)', () => {
@@ -65,7 +67,8 @@ test('<SelectField> - renders a Select with correct id (specified)', () => {
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find(Select).prop('inputProps').id).toBe('y');
+  // FIXME: inputProps is nullable.
+  expect(wrapper.find(Select).prop('inputProps')!.id).toBe('y');
 });
 
 test('<SelectField> - renders a Select with correct name', () => {
@@ -76,10 +79,12 @@ test('<SelectField> - renders a Select with correct name', () => {
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find(Select).prop('inputProps').name).toBe('x');
+  // FIXME: inputProps is nullable.
+  expect(wrapper.find(Select).prop('inputProps')!.name).toBe('x');
 });
 
 test('<SelectField> - renders a Select with correct options', () => {
+  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField name="x" native />;
   const wrapper = mount(
     element,
@@ -101,6 +106,7 @@ test('<SelectField> - renders a Select with correct options', () => {
 
 test('<SelectField> - renders a Select with correct options (transform)', () => {
   const element = (
+    // @ts-ignore Fix SelectFieldProps.
     <SelectField name="x" transform={x => x.toUpperCase()} native />
   );
   const wrapper = mount(
@@ -122,6 +128,7 @@ test('<SelectField> - renders a Select with correct options (transform)', () => 
 });
 
 test('<SelectField> - renders a Select with correct placeholder (implicit)', () => {
+  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField name="x" placeholder="y" native />;
   const wrapper = mount(
     element,
@@ -190,10 +197,8 @@ test('<SelectField> - renders a Select which correctly reacts on change', () => 
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
-  wrapper
-    .find(TextField)
-    .props()
-    .onChange({ target: { value: 'b' } });
+  // @ts-ignore Provide a valid EventTarget.
+  wrapper.find(TextField).props().onChange!({ target: { value: 'b' } });
   expect(onChange).toHaveBeenLastCalledWith('x', 'b');
 });
 
@@ -210,10 +215,8 @@ test('<SelectField> - renders a Select which correctly reacts on change (empty)'
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
-  wrapper
-    .find(TextField)
-    .props()
-    .onChange({ target: { value: '' } });
+  // @ts-ignore Provide a valid EventTarget.
+  wrapper.find(TextField).props().onChange!({ target: { value: '' } });
   expect(onChange).toHaveBeenLastCalledWith('x', undefined);
 });
 
@@ -230,10 +233,8 @@ test('<SelectField> - renders a Select which correctly reacts on change (same va
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
-  wrapper
-    .find(TextField)
-    .props()
-    .onChange({ target: { value: 'b' } });
+  // @ts-ignore Provide a valid EventTarget.
+  wrapper.find(TextField).props().onChange!({ target: { value: 'b' } });
   expect(onChange).toHaveBeenLastCalledWith('x', 'b');
 });
 
@@ -280,6 +281,7 @@ test('<SelectField> - renders a SelectField with correct error text (showInlineE
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons', () => {
+  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -290,6 +292,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons', () => {
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct disabled state', () => {
+  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" disabled />;
   const wrapper = mount(
     element,
@@ -302,6 +305,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct dis
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct id (inherited)', () => {
+  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -314,6 +318,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct id 
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct id (specified)', () => {
+  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" id="y" />;
   const wrapper = mount(
     element,
@@ -326,6 +331,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct id 
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct name', () => {
+  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -338,6 +344,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct nam
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct options', () => {
+  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -351,6 +358,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct opt
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct options (transform)', () => {
   const element = (
+    // @ts-ignore Fix SelectFieldProps.
     <SelectField checkboxes name="x" transform={x => x.toUpperCase()} />
   );
   const wrapper = mount(
@@ -364,6 +372,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct opt
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct value (default)', () => {
+  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -376,6 +385,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct val
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct value (model)', () => {
+  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -391,6 +401,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct val
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct value (specified)', () => {
+  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" value="b" />;
   const wrapper = mount(
     element,
@@ -405,6 +416,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct val
 test('<SelectField checkboxes> - renders a set of Radio buttons which correctly reacts on change', () => {
   const onChange = jest.fn();
 
+  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -415,16 +427,15 @@ test('<SelectField checkboxes> - renders a set of Radio buttons which correctly 
   );
 
   expect(wrapper.find(Radio)).toHaveLength(2);
-  wrapper
-    .find(RadioGroup)
-    .props()
-    .onChange({ target: { value: 'b' } });
+  // @ts-ignore Provide a valid value.
+  wrapper.find(RadioGroup).props().onChange!({ target: { value: 'b' } });
   expect(onChange).toHaveBeenLastCalledWith('x', 'b');
 });
 
 test('<SelectField checkboxes> - renders a set of Checkboxes which correctly reacts on change (array check)', () => {
   const onChange = jest.fn();
 
+  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -444,6 +455,7 @@ test('<SelectField checkboxes> - renders a set of Checkboxes which correctly rea
 
 test('<SelectField checkboxes> - renders a set of Checkboxes which correctly reacts on change (array uncheck)', () => {
   const onChange = jest.fn();
+  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" value={['b']} />;
   const wrapper = mount(
     element,
@@ -463,6 +475,7 @@ test('<SelectField checkboxes> - renders a set of Checkboxes which correctly rea
 
 test('<SelectField checkboxes> - renders a set of Checkboxes with correct labels', () => {
   const onChange = jest.fn();
+  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -483,6 +496,7 @@ test('<SelectField checkboxes> - renders a set of Checkboxes with correct labels
 test('<SelectField checkboxes> - renders a set of Checkboxes which correct labels (transform)', () => {
   const onChange = jest.fn();
   const element = (
+    // @ts-ignore Fix SelectFieldProps.
     <SelectField checkboxes name="x" transform={x => x.toUpperCase()} />
   );
   const wrapper = mount(
@@ -504,6 +518,7 @@ test('<SelectField checkboxes> - renders a set of Checkboxes which correct label
 test('<SelectField checkboxes> - renders a set of Radio buttons which correctly reacts on change (same value)', () => {
   const onChange = jest.fn();
 
+  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -515,15 +530,14 @@ test('<SelectField checkboxes> - renders a set of Radio buttons which correctly 
 
   expect(wrapper.find(Radio)).toHaveLength(2);
 
-  wrapper
-    .find(RadioGroup)
-    .props()
-    .onChange({ target: { value: 'a' } });
+  // @ts-ignore Provide a valid value.
+  wrapper.find(RadioGroup).props().onChange!({ target: { value: 'a' } });
 
   expect(onChange).toHaveBeenLastCalledWith('x', 'a');
 });
 
 test('<SelectField checkboxes> - renders a label', () => {
+  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" label="y" />;
   const wrapper = mount(
     element,
@@ -537,6 +551,7 @@ test('<SelectField checkboxes> - renders a SelectField with correct error text (
   const error = new Error();
   const element = (
     <SelectField
+      // @ts-ignore Fix SelectFieldProps.
       checkboxes
       name="x"
       error={error}
@@ -556,6 +571,7 @@ test('<SelectField checkboxes> - renders a SelectField with correct error text (
   const error = new Error();
   const element = (
     <SelectField
+      // @ts-ignore Fix SelectFieldProps.
       checkboxes
       name="x"
       error={error}
@@ -572,6 +588,7 @@ test('<SelectField checkboxes> - renders a SelectField with correct error text (
 });
 
 test('<SelectField checkboxes> - renders Checkbox with appearance=checkbox', () => {
+  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField appearance="checkbox" checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -586,6 +603,7 @@ test('<SelectField checkboxes> - renders Checkbox with appearance=checkbox', () 
 });
 
 test('<SelectField checkboxes> - renders Switch with appearance=switch', () => {
+  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField appearance="switch" checkboxes name="x" />;
   const wrapper = mount(
     element,

@@ -21,7 +21,7 @@ type CommonProps<Value> = {
   error?: boolean;
   errorMessage?: string;
   fieldType?: typeof Array | unknown;
-  onChange(value?: Value): void;
+  onChange?(value?: Value): void;
   showInlineError?: boolean;
   transform?: (item?: string) => string;
   value?: Value;
@@ -99,7 +99,8 @@ function Select(props: SelectFieldProps) {
         <RadioGroup
           id={id}
           name={name}
-          onChange={(event: any) => disabled || onChange(event.target.value)}
+          // FIXME: There's a problem with SelectFieldProps.
+          onChange={(event: any) => disabled || onChange!(event.target.value)}
           ref={inputRef}
           value={value ?? ''}
         >
@@ -123,7 +124,8 @@ function Select(props: SelectFieldProps) {
                   checked={value.includes(item)}
                   id={`${id}-${escape(item)}`}
                   name={name}
-                  onChange={() => disabled || onChange(xor(item, value))}
+                  // FIXME: There's a problem with SelectFieldProps.
+                  onChange={() => disabled || onChange!(xor(item, value))}
                   ref={inputRef}
                   value={name}
                   {...filteredProps}
@@ -192,7 +194,8 @@ function Select(props: SelectFieldProps) {
       margin={margin}
       onChange={event =>
         disabled ||
-        onChange(event.target.value !== '' ? event.target.value : undefined)
+        // FIXME: There's a problem with SelectFieldProps.
+        onChange!(event.target.value !== '' ? event.target.value : undefined)
       }
       required={required}
       select

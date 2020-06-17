@@ -10,16 +10,14 @@ export type ErrorsFieldProps = Override<
   {
     fullWidth?: boolean;
     margin?: 'none' | 'dense' | 'normal';
-    name: string;
     variant?: 'standard' | 'outlined' | 'filled';
   }
 >;
 
 function ErrorsField({
   children,
-  fullWidth,
-  margin,
-  name,
+  fullWidth = true,
+  margin = 'dense',
   variant,
   ...props
 }: ErrorsFieldProps) {
@@ -43,10 +41,5 @@ function ErrorsField({
     </FormControl>
   );
 }
-
-ErrorsField.defaultProps = {
-  fullWidth: true,
-  margin: 'dense',
-};
 
 export default ErrorsField;

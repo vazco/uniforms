@@ -49,7 +49,7 @@ describe('connectField', () => {
       },
       submitting: false,
       validating: false,
-    } as Context,
+    } as Context<any>,
   };
 
   const Test = jest.fn(() => null);
