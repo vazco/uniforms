@@ -119,6 +119,14 @@ describe('JSONSchemaBridge', () => {
       password: { type: 'string', uniforms: { type: 'password' } },
       passwordNumeric: { type: 'number', uniforms: { type: 'password' } },
       recursive: { $ref: '#/definitions/recursive' },
+      arrayWithAllOf: {
+        type: 'array',
+        items: {
+          type: 'object',
+          allOf: [{ required: ['child'] }],
+          properties: { child: { type: 'string' } },
+        },
+      },
     },
     required: ['dateOfBirth'],
   };
@@ -597,6 +605,13 @@ describe('JSONSchemaBridge', () => {
         },
       );
     });
+
+    it('works with allOf in items', () => {
+      expect(bridge.getProps('arrayWithAllOf.0.child')).toEqual({
+        label: 'Child',
+        required: true,
+      });
+    });
   });
 
   describe('#getSubfields', () => {
@@ -618,10 +633,12 @@ describe('JSONSchemaBridge', () => {
         'password',
         'passwordNumeric',
         'recursive',
+        'arrayWithAllOf',
       ]);
     });
 
     it('works with nested types', () => {
+      expect(bridge.getSubfields('arrayWithAllOf.0')).toEqual(['child']);
       expect(bridge.getSubfields('shippingAddress')).toEqual([
         'city',
         'state',

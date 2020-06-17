@@ -1,3 +1,7 @@
+## Next
+
+- **Fixed:** Resolving parallel `properties` and `required` in `JSONSchemaBridge`. [\#746](https://github.com/vazco/uniforms/issues/746)
+
 ## [v2.6.8](https://github.com/vazco/uniforms/tree/v2.6.8) (2020-06-03)
 
 - **Fixed:** Resolving some `$ref`s in `JSONSchemaBridge`. [\#722](https://github.com/vazco/uniforms/issues/722)
