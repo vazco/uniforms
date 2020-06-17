@@ -109,6 +109,26 @@ describe('connectField', () => {
     });
   });
 
+  describe('when called with `kind`', () => {
+    it('does not set default value', () => {
+      const Field = connectField(Test);
+
+      expect(Field.options).toEqual(undefined);
+    });
+
+    it('passes kind option (leaf)', () => {
+      const Field = connectField(Test, { kind: 'leaf' });
+
+      expect(Field.options).toEqual({ kind: 'leaf' });
+    });
+
+    it('passes kind option (node)', () => {
+      const Field = connectField(Test, { kind: 'node' });
+
+      expect(Field.options).toEqual({ kind: 'node' });
+    });
+  });
+
   describe('when called with `initialValue`', () => {
     it('includes default value (true)', () => {
       const Field = connectField(Test, { initialValue: true });
