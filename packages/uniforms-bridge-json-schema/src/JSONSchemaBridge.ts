@@ -7,14 +7,14 @@ import omit from 'lodash/omit';
 import upperFirst from 'lodash/upperFirst';
 import { Bridge, joinName } from 'uniforms';
 
-const resolveRef = (referance, schema) => {
+const resolveRef = (reference, schema) => {
   invariant(
-    referance.startsWith('#'),
+    reference.startsWith('#'),
     'Reference is not an internal reference, and only such are allowed: "%s"',
-    referance,
+    reference,
   );
 
-  const resolvedReference = referance
+  const resolvedReference = reference
     .split('/')
     .filter(part => part && part !== '#')
     .reduce((definition, next) => definition[next], schema);
@@ -22,7 +22,7 @@ const resolveRef = (referance, schema) => {
   invariant(
     resolvedReference,
     'Reference not found in schema: "%s"',
-    referance,
+    reference,
   );
 
   return resolvedReference;
@@ -184,8 +184,8 @@ export default class JSONSchemaBridge extends Bridge {
         .filter(Boolean);
 
       if (combinedPartials.length) {
-        _definition.properties = {};
-        _definition.required = [];
+        _definition.properties = definition.properties ?? {};
+        _definition.required = definition.required ?? [];
 
         combinedPartials.forEach(({ properties, required, type }) => {
           if (properties) Object.assign(_definition.properties, properties);
