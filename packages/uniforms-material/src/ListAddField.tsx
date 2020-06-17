@@ -65,4 +65,4 @@ ListAdd.defaultProps = {
   margin: 'dense' as 'dense',
 };
 
-export default connectField(ListAdd, { initialValue: false });
+export default connectField(ListAdd, { initialValue: false, kind: 'leaf' });

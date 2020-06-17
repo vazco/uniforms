@@ -45,4 +45,4 @@ ListDel.defaultProps = {
   icon: '-',
 };
 
-export default connectField(ListDel, { initialValue: false });
+export default connectField(ListDel, { initialValue: false, kind: 'leaf' });

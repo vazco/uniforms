@@ -222,4 +222,4 @@ function Select(props: SelectFieldProps) {
   );
 }
 
-export default connectField(Select);
+export default connectField(Select, { kind: 'leaf' });

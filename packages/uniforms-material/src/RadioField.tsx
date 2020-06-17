@@ -65,4 +65,4 @@ Radio.defaultProps = {
   margin: 'dense',
 } as any;
 
-export default connectField(Radio);
+export default connectField(Radio, { kind: 'leaf' });
