@@ -28,7 +28,8 @@ describe('AutoForm', () => {
   });
 
   describe('when changed', () => {
-    const wrapper = mount<AutoForm>(
+    // FIXME: AutoForm is not a valid Component.
+    const wrapper = mount<AutoForm | any>(
       <AutoForm
         onChange={onChange}
         onChangeModel={onChangeModel}
@@ -71,7 +72,8 @@ describe('AutoForm', () => {
     });
 
     it('skips `onSubmit` until rendered (`autosave` = true)', async () => {
-      const wrapper = mount<AutoForm>(
+      // FIXME: AutoForm is not a valid Component.
+      const wrapper = mount<AutoForm | any>(
         <AutoForm onSubmit={onSubmit} schema={schema} autosave />,
       );
 
@@ -87,7 +89,8 @@ describe('AutoForm', () => {
 
   describe('when reset', () => {
     const intialModel = { a: 'foo' };
-    const wrapper = mount<AutoForm>(
+    // FIXME: AutoForm is not a valid Component.
+    const wrapper = mount<AutoForm | any>(
       <AutoForm
         onSubmit={onSubmit}
         schema={schema}
@@ -113,7 +116,8 @@ describe('AutoForm', () => {
   });
 
   describe('when updated', () => {
-    const wrapper = mount<AutoForm>(<AutoForm schema={schema} />);
+    // FIXME: AutoForm is not a valid Component.
+    const wrapper = mount<AutoForm | any>(<AutoForm schema={schema} />);
 
     it('updates', () => {
       wrapper.setProps({ model: {} });

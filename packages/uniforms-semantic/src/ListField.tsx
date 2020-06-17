@@ -14,7 +14,7 @@ import ListItemField from './ListItemField';
 export type ListFieldProps = Override<
   HTMLProps<HTMLDivElement>,
   {
-    children: ReactNode;
+    children?: ReactNode;
     error?: boolean;
     errorMessage?: string;
     initialCount?: number;
@@ -26,7 +26,7 @@ export type ListFieldProps = Override<
 >;
 
 function List({
-  children,
+  children = <ListItemField name="$" />,
   className,
   disabled,
   error,
@@ -84,7 +84,5 @@ function List({
     </div>
   );
 }
-
-List.defaultProps = { children: <ListItemField name="$" /> };
 
 export default connectField(List);

@@ -152,7 +152,7 @@ describe('JSONSchemaBridge', () => {
 
   describe('#getError', () => {
     it('works without error', () => {
-      expect(bridge.getError('age')).not.toBeTruthy();
+      expect(bridge.getError('age', undefined)).not.toBeTruthy();
     });
 
     it('works with invalid error', () => {
@@ -230,7 +230,7 @@ describe('JSONSchemaBridge', () => {
 
   describe('#getErrorMessage', () => {
     it('works without error', () => {
-      expect(bridge.getErrorMessage('age')).not.toBeTruthy();
+      expect(bridge.getErrorMessage('age', undefined)).not.toBeTruthy();
     });
 
     it('works with invalid error', () => {
@@ -254,7 +254,7 @@ describe('JSONSchemaBridge', () => {
 
   describe('#getErrorMessages', () => {
     it('works without error', () => {
-      expect(bridge.getErrorMessages()).toEqual([]);
+      expect(bridge.getErrorMessages(undefined)).toEqual([]);
     });
 
     it('works with other errors', () => {

@@ -11,25 +11,19 @@ export type AutoFieldsProps = {
 };
 
 export default function AutoFields({
-  autoField,
-  element,
+  autoField = AutoField,
+  element = 'div',
   fields,
-  omitFields,
+  omitFields = [],
   ...props
 }: AutoFieldsProps) {
   const { schema } = useForm();
 
   return createElement(
-    element!,
+    element,
     props,
     (fields ?? schema.getSubfields())
-      .filter(field => !omitFields!.includes(field))
-      .map(field => createElement(autoField!, { key: field, name: field })),
+      .filter(field => !omitFields.includes(field))
+      .map(field => createElement(autoField, { key: field, name: field })),
   );
 }
-
-AutoFields.defaultProps = {
-  autoField: AutoField,
-  element: 'div',
-  omitFields: [],
-};

@@ -6,16 +6,16 @@ import { filterDOMProps } from 'uniforms';
 import gridClassName from './gridClassName';
 
 type WrapperProps = {
-  error?: boolean;
+  error?: unknown;
   errorMessage?: string;
-  grid?: object | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+  grid?: number | string | Record<string, number>;
   help?: string;
   helpClassName?: string;
-  labelClassName?: string;
+  labelClassName?: string | string[];
   showInlineError?: boolean;
   value?: boolean | string | number | string[] | undefined;
   wrapClassName?: string;
-} & Omit<HTMLProps<HTMLDivElement>, 'value'>;
+} & Omit<HTMLProps<HTMLDivElement>, 'onChange' | 'value'>;
 
 export default function wrapField(
   {

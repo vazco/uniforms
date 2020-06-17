@@ -10,7 +10,7 @@ export type NumFieldProps = Override<
     errorMessage?: string;
     max?: number;
     min?: number;
-    onChange(value?: number): void;
+    onChange?(value?: number): void;
     showInlineError?: boolean;
     value?: number;
   }
@@ -45,7 +45,8 @@ function Num({
       onChange={event => {
         const parse = decimal ? parseFloat : parseInt;
         const value = parse(event.target.value);
-        onChange(isNaN(value) ? undefined : value);
+        // FIXME: There's a problem with NumFieldProps.
+        onChange!(isNaN(value) ? undefined : value);
       }}
       placeholder={placeholder}
       ref={inputRef}
@@ -57,4 +58,5 @@ function Num({
     />
   );
 }
+
 export default connectField(Num);

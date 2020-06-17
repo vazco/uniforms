@@ -7,9 +7,9 @@ import wrapField from './wrapField';
 export type RadioFieldProps = Override<
   RadioProps,
   {
-    allowedValues: string[];
-    onChange(string): void;
-    transform?: (string?: string) => string;
+    allowedValues?: string[];
+    onChange(value?: string): void;
+    transform?(value: string): string;
     value?: string;
   }
 >;
@@ -20,11 +20,12 @@ function Radio(props: RadioFieldProps) {
     <RadioAntD.Group
       disabled={props.disabled}
       name={props.name}
+      // @ts-ignore filterDOMProps will remove onChange
       onChange={event => props.onChange(event.target.value)}
       value={props.value ?? ''}
       {...filterDOMProps(props)}
     >
-      {props.allowedValues.map(value => (
+      {props.allowedValues?.map(value => (
         <RadioAntD
           key={value}
           value={value}

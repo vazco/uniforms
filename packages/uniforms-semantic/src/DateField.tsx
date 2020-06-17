@@ -8,7 +8,6 @@ const dateFormat = (value?: Date) => value?.toISOString().slice(0, -8);
 export type DateFieldProps = Override<
   HTMLProps<HTMLDivElement>,
   {
-    className: string;
     disabled: boolean;
     error: unknown;
     errorMessage: string;

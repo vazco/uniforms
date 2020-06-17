@@ -9,7 +9,6 @@ export type SubmitFieldProps = Override<
   {
     inputClassName?: string;
     inputRef?: Ref<HTMLInputElement>;
-    name: string;
     wrapClassName?: string;
   }
 >;

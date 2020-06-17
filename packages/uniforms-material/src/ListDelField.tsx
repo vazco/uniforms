@@ -10,10 +10,10 @@ import {
 
 export type ListDelFieldProps = Override<
   Omit<IconButtonProps, 'value'>,
-  { icon: ReactNode; name: string }
+  { icon?: ReactNode; name: string }
 >;
 
-function ListDel({ disabled, icon, name, ...props }: ListDelFieldProps) {
+function ListDel({ disabled, icon = '-', name, ...props }: ListDelFieldProps) {
   const nameParts = joinName(null, name);
   const nameIndex = +nameParts[nameParts.length - 1];
   const parentName = joinName(nameParts.slice(0, -1));
@@ -40,9 +40,5 @@ function ListDel({ disabled, icon, name, ...props }: ListDelFieldProps) {
     </IconButton>
   );
 }
-
-ListDel.defaultProps = {
-  icon: '-',
-};
 
 export default connectField(ListDel, { initialValue: false });

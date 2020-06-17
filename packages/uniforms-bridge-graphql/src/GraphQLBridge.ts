@@ -171,7 +171,7 @@ export default class GraphQLBridge extends Bridge {
     return ready;
   }
 
-  getSubfields(name) {
+  getSubfields(name?: string) {
     if (!name) {
       return Object.keys(this.schema.getFields());
     }

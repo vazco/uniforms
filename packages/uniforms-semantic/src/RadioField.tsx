@@ -11,13 +11,13 @@ const escape = (x: string) => base64(x).replace(/=+$/, '');
 export type RadioFieldProps = Override<
   HTMLProps<HTMLDivElement>,
   {
-    allowedValues: string[];
+    allowedValues?: string[];
     checkboxes?: boolean;
     error?: boolean;
     errorMessage?: string;
-    onChange(string): void;
+    onChange(value: string): void;
     showInlineError?: boolean;
-    transform?: (string?: string) => string;
+    transform?(value: string): string;
   }
 >;
 
@@ -49,7 +49,7 @@ function Radio({
         </div>
       )}
 
-      {allowedValues.map(item => (
+      {allowedValues?.map(item => (
         <div className="field" key={item}>
           <div className="ui radio checkbox">
             <input

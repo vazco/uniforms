@@ -13,7 +13,7 @@ export type BoolFieldProps = Override<
     inline?: boolean;
     inputClassName?: string;
     inputRef?: Ref<HTMLInputElement>;
-    labelBefore: string;
+    labelBefore?: string;
     onChange(value?: boolean): void;
     value?: boolean;
   }

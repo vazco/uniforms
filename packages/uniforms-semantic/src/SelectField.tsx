@@ -34,7 +34,7 @@ export type SelectFieldProps = Override<
     placeholder: string;
     required?: boolean;
     showInlineError?: boolean;
-    transform?(value?: string): string;
+    transform?(value: string): string;
     value?: string | string[];
   }
 >;

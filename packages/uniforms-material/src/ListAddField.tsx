@@ -14,7 +14,7 @@ export type ListAddFieldProps = Override<
   IconButtonProps,
   {
     fullWidth?: FormControlProps['fullWidth'];
-    icon: ReactNode;
+    icon?: ReactNode;
     initialCount?: number;
     margin?: FormControlProps['margin'];
     name: string;
@@ -25,9 +25,9 @@ export type ListAddFieldProps = Override<
 
 function ListAdd({
   disabled,
-  fullWidth,
-  icon,
-  margin,
+  fullWidth = true,
+  icon = '+',
+  margin = 'dense',
   name,
   value,
   variant,
@@ -58,11 +58,5 @@ function ListAdd({
     </FormControl>
   );
 }
-
-ListAdd.defaultProps = {
-  fullWidth: true,
-  icon: '+',
-  margin: 'dense' as 'dense',
-};
 
 export default connectField(ListAdd, { initialValue: false });

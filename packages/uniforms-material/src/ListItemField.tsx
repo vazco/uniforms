@@ -11,7 +11,7 @@ import AutoField from './AutoField';
 import ListDelField from './ListDelField';
 
 export type ListItemFieldProps = {
-  children: ReactNode;
+  children?: ReactNode;
   dense?: ListItemProps['dense'];
   disableGutters?: ListItemProps['disableGutters'];
   divider?: ListItemProps['divider'];
@@ -20,7 +20,7 @@ export type ListItemFieldProps = {
 };
 
 function ListItem({
-  children,
+  children = <AutoField label={null} name="" />,
   dense,
   disableGutters,
   divider,
@@ -39,7 +39,6 @@ function ListItem({
 }
 
 ListItem.defaultProps = {
-  children: <AutoField label={null} name="" />,
   dense: true,
 };
 

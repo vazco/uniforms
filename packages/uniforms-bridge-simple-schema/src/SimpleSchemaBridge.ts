@@ -155,7 +155,7 @@ export default class SimpleSchemaBridge extends Bridge {
     return this.getField(name).type;
   }
 
-  getValidator(options = { clean: true }) {
+  getValidator(options = { clean: true } as any) {
     const validator = this.schema.validator(options);
     return model => {
       try {

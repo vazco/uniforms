@@ -152,7 +152,7 @@ export default class SimpleSchema2Bridge extends Bridge {
     return field;
   }
 
-  getSubfields(name) {
+  getSubfields(name?: string) {
     return this.schema.objectKeys(SimpleSchema._makeGeneric(name));
   }
 
@@ -170,7 +170,7 @@ export default class SimpleSchema2Bridge extends Bridge {
     return type;
   }
 
-  getValidator(options = { clean: true, mutate: true }) {
+  getValidator(options = { clean: true, mutate: true } as any) {
     const validator = this.schema.validator(options);
     return model => {
       try {
