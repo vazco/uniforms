@@ -16,4 +16,4 @@ function Error({ children, error, errorMessage, ...props }: ErrorFieldProps) {
   );
 }
 
-export default connectField(Error, { initialValue: false });
+export default connectField(Error, { initialValue: false, kind: 'leaf' });
