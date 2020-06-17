@@ -116,13 +116,13 @@ describe('connectField', () => {
       expect(Field.options).toEqual(undefined);
     });
 
-    it('passes kind option (leaf)', () => {
+    it('includes options object with `kind` value (leaf)', () => {
       const Field = connectField(Test, { kind: 'leaf' });
 
       expect(Field.options).toEqual({ kind: 'leaf' });
     });
 
-    it('passes kind option (node)', () => {
+    it('includes options object with `kind` value (node)', () => {
       const Field = connectField(Test, { kind: 'node' });
 
       expect(Field.options).toEqual({ kind: 'node' });
