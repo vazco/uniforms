@@ -1,4 +1,4 @@
-## Next
+## [v3.0.0-alpha.5](https://github.com/vazco/uniforms/tree/v3.0.0-alpha.5) (2020-06-17)
 
 - **Breaking:** Removed `modelSync` from `AutoForm` state. [\#739](https://github.com/vazco/uniforms/issues/739)
 - **Added:** New `kind: 'leaf' | 'node'` flag for `connectField`. [\#741](https://github.com/vazco/uniforms/issues/741)
