@@ -1,4 +1,4 @@
-## Next
+## [v2.6.9](https://github.com/vazco/uniforms/tree/v2.6.9) (2020-06-17)
 
 - **Fixed:** Resolving parallel `properties` and `required` in `JSONSchemaBridge`. [\#746](https://github.com/vazco/uniforms/issues/746)
 
