@@ -52,4 +52,4 @@ ListDel.defaultProps = {
   type: 'ghost' as ButtonType,
 };
 
-export default connectField(ListDel);
+export default connectField(ListDel, { initialValue: false, kind: 'leaf' });

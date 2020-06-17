@@ -30,4 +30,4 @@ function Text(props: TextFieldProps) {
   );
 }
 
-export default connectField(Text);
+export default connectField(Text, { kind: 'leaf' });

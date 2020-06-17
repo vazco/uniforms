@@ -45,4 +45,4 @@ ListAdd.defaultProps = {
   type: 'dashed' as ButtonType,
 };
 
-export default connectField(ListAdd, { initialValue: false });
+export default connectField(ListAdd, { initialValue: false, kind: 'leaf' });

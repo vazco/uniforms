@@ -40,4 +40,4 @@ function LongText(props: LongTextFieldProps) {
 
 LongText.defaultProps = { rows: 5 };
 
-export default connectField(LongText);
+export default connectField(LongText, { kind: 'leaf' });
