@@ -34,7 +34,7 @@ test('<AutoField> - detects RadioField', () => {
     }),
   );
 
-  expect(wrapper.find(RadioField)).toHaveLength(1);
+  expect(wrapper.find(RadioField.Component)).toHaveLength(1);
 });
 
 test('<AutoField> - detects SelectField', () => {
@@ -54,7 +54,7 @@ test('<AutoField> - detects DateField', () => {
   const element = <AutoField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
-  expect(wrapper.find(DateField)).toHaveLength(1);
+  expect(wrapper.find(DateField.Component)).toHaveLength(1);
 });
 
 test('<AutoField> - detects ListField', () => {
