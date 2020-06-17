@@ -1,6 +1,6 @@
 import invariant from 'invariant';
 import { ComponentType, createElement } from 'react';
-import { Override, useField } from 'uniforms';
+import { Override, connectField, useField } from 'uniforms';
 
 import BoolField from './BoolField';
 import DateField from './DateField';
@@ -14,7 +14,7 @@ import TextField from './TextField';
 export type AutoFieldProps = Override<
   Record<string, unknown>,
   {
-    component?: ComponentType<any>;
+    component?: ComponentType<any> | ReturnType<typeof connectField>;
     name: string;
   }
 >;
@@ -57,5 +57,7 @@ export default function AutoField(originalProps: AutoFieldProps) {
     }
   }
 
-  return createElement(component, originalProps);
+  return 'options' in component && component.options?.kind === 'leaf'
+    ? createElement(component.Component, props)
+    : createElement(component, originalProps);
 }

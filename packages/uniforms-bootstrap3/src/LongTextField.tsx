@@ -34,4 +34,4 @@ function LongText(props: LongTextFieldProps) {
     />,
   );
 }
-export default connectField(LongText);
+export default connectField(LongText, { kind: 'leaf' });
