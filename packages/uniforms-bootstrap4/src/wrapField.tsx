@@ -15,7 +15,7 @@ type WrapperProps = {
   showInlineError?: boolean;
   value?: boolean | string | number | string[] | undefined;
   wrapClassName?: string;
-} & Omit<HTMLProps<HTMLDivElement>, 'value'>;
+} & Omit<HTMLProps<HTMLDivElement>, 'onChange' | 'value'>;
 
 export default function wrapField(
   {

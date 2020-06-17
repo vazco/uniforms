@@ -17,8 +17,9 @@ export type RadioFieldProps = Override<
     error?: boolean;
     inline?: boolean;
     inputClassName?: string;
-    onChange: (string) => void;
+    onChange(value?: string): void;
     transform?(value: string): string;
+    value?: number | string;
   }
 >;
 
