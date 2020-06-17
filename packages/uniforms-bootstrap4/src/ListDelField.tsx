@@ -57,4 +57,4 @@ ListDel.defaultProps = {
   removeIcon: <i className="octicon octicon-dash" />,
 };
 
-export default connectField(ListDel, { initialValue: false });
+export default connectField(ListDel, { initialValue: false, kind: 'leaf' });
