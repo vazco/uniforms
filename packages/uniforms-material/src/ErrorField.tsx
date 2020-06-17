@@ -18,8 +18,8 @@ function Error({
   children,
   error,
   errorMessage,
-  fullWidth,
-  margin,
+  fullWidth = true,
+  margin = 'dense',
   variant,
   ...props
 }: ErrorFieldProps) {
@@ -36,10 +36,5 @@ function Error({
     </FormControl>
   );
 }
-
-Error.defaultProps = {
-  fullWidth: true,
-  margin: 'dense',
-};
 
 export default connectField(Error, { initialValue: false });
