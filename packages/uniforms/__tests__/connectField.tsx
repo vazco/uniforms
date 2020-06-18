@@ -64,6 +64,7 @@ describe('connectField', () => {
       const Field = connectField(Test);
 
       expect(Field).toBeInstanceOf(Function);
+      expect(Field.Component).toEqual(Test);
     });
   });
 
