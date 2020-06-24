@@ -48,7 +48,7 @@ You can also leave the schema untouched and pass your custom field directly to t
 
 You can pass any additional props to your custom field, by converting the `uniforms` property to the type of object, with the `component` key. Any other keys will be treated as props.
 
-Eg. in JSONSchema:
+E.g. in JSONSchema:
 
 ```js
 const schema = {
@@ -82,7 +82,7 @@ You can also leave the schema untouched and pass your custom field with props di
 </AutoForm>
 ```
 
-### How can I have a dynamic label? (eg. handling i18n)
+### How can I have a dynamic label? (e.g. handling i18n)
 
 There are few ways to handle that, depending on the level of abstraction you want to do it - schema, field or `AutoField` component.
 
@@ -195,46 +195,37 @@ You can take a reference to the field and manually trigger `.focus()`:
 
 ### How can I know a current form state?
 
-A current form state is stored inside `uniforms` in [React context](https://reactjs.org/docs/legacy-context.html), emitted by a `BaseField`.
+A current form state is available in [React context](https://reactjs.org/docs/context.html), accessible through `useForm` and `useField(name)` hooks.
 
-A convenient way to access it is to write a helper function, eg. `WithUniforms`, that receives a context and passes it to the children:
-
-```js
-import { BaseField } from 'uniforms';
-
-const WithUniforms = ({ children }, { uniforms }) => children(uniforms);
-
-WithUniforms.contextTypes = BaseField.contextTypes;
-```
-
-`uniforms` context data consists of various properties which can be found in [here](/docs/api-context-data).
+The context data consists of various properties which can be found in [here](/docs/api-context-data).
 
 ##### Example usage:
 
 ```js
-<AutoForm>
-  <WithUniforms>
-    {uniforms => (
-      // Now I have access to the context!
-      <MyField uniformsContext={uniforms} />
-    )}
-  </WithUniforms>
-</AutoForm>
-```
+function SubmittingState() {
+  const uniforms = useForm();
+  return uniforms.submitting ? 'Submitting...' : null;
+}
 
-You can find out more about React context [here](https://reactjs.org/docs/legacy-context.html#referencing-context-in-stateless-function-components).
+<AutoForm>
+  <SubmittingState />
+</AutoForm>;
+```
 
 ### I want to disable a submit button until there is a difference between the current form state and my model. How can I do it?
 
-Basically, you have to find out whether there is a difference between a current form state and your model, eg. by calling lodash's `isEqual` function.
+Basically, you have to find out whether there is a difference between a current form state and your model, e.g. by calling lodash's `isEqual` function.
 Current form state can be accessed through the context (see [How can I know a current form state?](/docs/faq#how-can-i-know-a-current-form-state)) and form model can be passed as an ordinary prop:
 
 ```js
+function DifferentSubmitField(initialModel) {
+  const { model } = useForm();
+  return <SubmitField disabled={isEqual(uniforms.model, initialModel)} />;
+}
+
 const ChangedForm = ({ model }) => (
   <AutoForm model={model}>
-    <WithUniforms>
-      {uniforms => <SubmitField disabled={isEqual(uniforms.model, model)} />}
-    </WithUniforms>
+    <DifferentSubmitField />
   </AutoForm>
 );
 ```

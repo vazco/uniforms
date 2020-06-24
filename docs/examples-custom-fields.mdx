@@ -29,12 +29,11 @@ const CustomAuto = props => {
   // AutoField as a fallback component.
   const Component = determineComponentFromProps(props) || AutoField;
 
-  return <Component {...props} />;
+  return <Component {...props} name="" />;
 };
 
 const CustomAutoField = connectField(CustomAuto, {
   ensureValue: false,
-  includeInChain: false,
   initialValue: false
 });
 

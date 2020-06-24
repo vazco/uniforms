@@ -19,7 +19,7 @@ function createValidator(schema) {
     validator(model);
 
     if (validator.errors && validator.errors.length) {
-      throw { details: validator.errors };
+      return { details: validator.errors };
     }
   };
 }

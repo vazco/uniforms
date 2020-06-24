@@ -12,38 +12,31 @@ It also adds the 'Field' suffix to the name of the wrapped component.
 
 The table below lists all of the **guaranteed** props that will be passed to the wrapped component:
 
-|      Name      |         Type          |              Description               |
-| :------------: | :-------------------: | :------------------------------------: |
-|   `changed`    |        `bool`         |           Has field changed?           |
-|   `disabled`   |        `bool`         |           Is field disabled?           |
-|    `error`     |       `object`        | Field scoped part of validation error. |
-| `errorMessage` |       `string`        | Field scoped validation error message. |
-|    `field`     |       `object`        |     Field definition from schema.      |
-|    `fields`    |   `arrayOf(string)`   |            Subfields names.            |
-|  `fieldType`   |        `func`         |              Field type.               |
-|  `findError`   |     `func(name)`      |      Request another field error.      |
-|  `findField`   |     `func(name)`      |         Request another field.         |
-|  `findValue`   |     `func(name)`      |      Request another field value.      |
-|      `id`      |       `string`        |      Field id - given or random.       |
-|    `label`     |       `string`        |              Field label.              |
-|     `name`     |       `string`        |              Field name.               |
-|   `onChange`   | `func(value, [name])` |          Change field value.           |
-|    `parent`    |       `object`        |          Parent field props.           |
-| `placeholder`  |       `string`        |           Field placeholder.           |
-|    `value`     |         `any`         |              Field value.              |
+|       Name        |         Type          |              Description               |
+| :---------------: | :-------------------: | :------------------------------------: |
+|     `changed`     |        `bool`         |           Has field changed?           |
+|    `disabled`     |        `bool`         |           Is field disabled?           |
+|      `error`      |       `object`        | Field scoped part of validation error. |
+|  `errorMessage`   |       `string`        | Field scoped validation error message. |
+|      `field`      |       `object`        |     Field definition from schema.      |
+|     `fields`      |   `arrayOf(string)`   |            Subfields names.            |
+|    `fieldType`    |        `func`         |              Field type.               |
+|       `id`        |       `string`        |      Field id - given or random.       |
+|      `label`      |       `string`        |              Field label.              |
+|      `name`       |       `string`        |              Field name.               |
+|    `onChange`     | `func(value, [name])` |          Change field value.           |
+|   `placeholder`   |       `string`        |           Field placeholder.           |
+| `showInlineError` |       `boolean`       |           Show inline error?           |
+|      `value`      |         `any`         |              Field value.              |
 
 The `connectField` function accepts two arguments: the first one is a component and the second one is an options object.
 
 The table below lists all available options:
 
-|       Name       |             Type             |                                                                           Description                                                                           |
-| :--------------: | :--------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|    `mapProps`    |        `func(props)`         | Props mapper. Useful for integration with third-party components. For example, you can rename specific props instead of doing mapping by hand in the component. |
-|   `baseField`    | `element` (React compponent) |                                      Base field class. It's reserved for the future - right now there's no useful usecase.                                      |
-|  `ensureValue`   |            `bool`            |     `<input>` helper. In React, `<input>` can't have undefined or null value and any onChange at once - this option passes 'undefined' as en empty string.      |
-|  `initialValue`  |            `bool`            |                  Initial value check. If truthy, then after the first render defaultValue is set as value if no value is provided (undefined).                  |
-| `includeParent`  |            `bool`            |                      Additional parent prop. If truthy, additional parent prop is provided (if any). Useful for nested or complex fields.                       |
-| `includeInChain` |            `bool`            |                             Field name chain visibility. If truthy, then every nested field name will be prefixed with parent name.                             |
+|      Name      |       Type        |                                                          Description                                                          |
+| :------------: | :---------------: | :---------------------------------------------------------------------------------------------------------------------------: |
+| `initialValue` |      `bool`       | Initial value check. If truthy, then after the first render defaultValue is set as value if no value is provided (undefined). |
+|     `kind`     | `'leaf' | 'node'` |                             Defines field type. If you are not sure which one to use, use `node`.                             |
 
 ## `changedKeys(root, valueA, valueB)`
 
@@ -56,29 +49,6 @@ const arrayOfChangedKeys = changedKeys(root, valueA, valueB);
 ```
 
 **Note:** For more examples, see `changedKeys` [tests](https://github.com/vazco/uniforms/blob/master/packages/uniforms/__tests__/changedKeys.js).
-
-## `createSchemaBridge(schemaOrBridge)`
-
-Retuns a bridge. (_It's rather an internal helper, but it's still exported._)
-
-Use it, if you want to manually create a schema bridge or to test your bridge.
-It will throw on an unrecognised schema.
-
-```js
-import { createSchemaBridge } from 'uniforms';
-
-const bridge = createSchemaBridge(schemaOrBridge);
-```
-
-## `createSchemaBridge.register(bridge)`
-
-Registers a custom bridge.
-
-```js
-import { createSchemaBridge } from 'uniforms';
-
-createSchemaBridge.register(propA, propB, propC /* ... */);
-```
 
 ## `filterDOMProps(props)`
 
@@ -111,16 +81,6 @@ import { filterDOMProps } from 'uniforms';
 
 filterDOMProps.register(propA, propB, propC /* ... */);
 filterDOMProps.registered; // ['propA', 'propB', ...]
-```
-
-## `injectName(name, component)`
-
-Injects name to all already rendered fields. (_It's rather an internal helper, but it's still exported._)
-
-```js
-import { injectName } from 'uniforms';
-
-const componentWithInjectedName = injectName(name, component);
 ```
 
 ## `joinName([null, ] nameA, nameB, nameC, ...)`

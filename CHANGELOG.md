@@ -44,8 +44,10 @@
 
 - **Breaking:** Moved transpiled files from the packages roots (e.g. `import BaseForm from 'uniforms/BaseForm'`) to `es5` directories. Try not to rely on that and use let your bundler do its best (e.g. `import { BaseForm } from 'uniforms'`).
 - **Breaking:** Removed `BaseField` from `uniforms`. Migrate to `useField`.
+- **Breaking:** Removed `baseField` from `connectField`. Migrate to `useField`.
 - **Breaking:** Removed `ensureValue` from `connectField`. You have to do it manually (e.g. do `value ?? ''` instead of `value`).
 - **Breaking:** Removed `includeParent` from `connectField`. Use `useField` as many types as needed.
+- **Breaking:** Removed `mapProps` from `uniforms`. Migrate to `useField`.
 - **Breaking:** Shape of the context changed - `changed`, `changedMap`, `submitting`, and `validating` were lifted from `state` to the root.
 - **Breaking:** A lot of types changed.
 - **Added:** `useField` and `useForm` in `uniforms`.

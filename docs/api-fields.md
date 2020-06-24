@@ -60,7 +60,7 @@ import { AutoField } from 'uniforms-unstyled';
 By default, the rendered fields will be `AutoFields` in a chosen theme.
 However, you can replace the standard `AutoField` with a custom one through the `autoField` property.
 The `element` property defines a wrapping component.
-Eg. you want to group your fields inside a section, just do `element="section"`. The default one is `div`.
+E.g. you want to group your fields inside a section, just do `element="section"`. The default one is `div`.
 
 ##### Props:
 
@@ -81,41 +81,6 @@ import { AutoFields } from 'uniforms-unstyled';
   element="section"
   fields={['fieldA', 'fieldB']}
   omitFields={['fieldA', 'fieldB']}
-/>;
-```
-
-### `BaseField`
-
-You can't really render a BaseField because it doesn't have a render method.
-It's a base class of all packaged fields, so that all props below are available
-to All fields.
-
-You can pass any prop but remember that passing `onChange` will "detach"
-the field from the form in some way - it won't change your form state.
-Also, passing any already provided prop - like `id` - will override the
-default one.
-
-##### Props:
-
-|     Name      | Default |                                                                                                                                          Description                                                                                                                                          |
-| :-----------: | :-----: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|  `disabled`   | `false` |                                                                                                 Field disabled state. It's passed directly to the field, but it propagates same as the label.                                                                                                 |
-|    `label`    | `true`  | Field label. This prop has three modes. If you pass a string, then it will be used as a label. If you pass a null, then it won't have a label, but nested fields will have default labels. If you pass a non-null falsy value, it won't have a label and nested fields won't have labels too. |
-|    `name`     |    -    |                                                                                              Field name. Used for identification. It should match your schema - if not, it will throw an error.                                                                                               |
-| `placeholder` | `false` |                                                                                  Field placeholder. If set to true, then a label will be used. Otherwise, it's handled like a label (including propagation).                                                                                  |
-|    `value`    |    -    |                                                                                                                Field value. Every field accepts its specific value type only.                                                                                                                 |
-
-##### Props usage:
-
-```js
-import { BaseField } from 'uniforms';
-
-<BaseField
-  disabled={false}
-  label
-  name="field"
-  placeholder={false}
-  value={value}
 />;
 ```
 
@@ -678,6 +643,21 @@ import { TextField } from 'uniforms-unstyled';
   wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
   wrapperCol={{span: 4}} // 'ant-col-4' on field
 />;
+```
+
+## Common props
+
+|     Name      | Default |                                                                                                                                          Description                                                                                                                                          |
+| :-----------: | :-----: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|  `disabled`   | `false` |                                                                                                 Field disabled state. It's passed directly to the field, but it propagates same as the label.                                                                                                 |
+|    `label`    | `true`  | Field label. This prop has three modes. If you pass a string, then it will be used as a label. If you pass a null, then it won't have a label, but nested fields will have default labels. If you pass a non-null falsy value, it won't have a label and nested fields won't have labels too. |
+|    `name`     |    -    |                                                                                              Field name. Used for identification. It should match your schema - if not, it will throw an error.                                                                                               |
+| `placeholder` | `false` |                                                                                  Field placeholder. If set to true, then a label will be used. Otherwise, it's handled like a label (including propagation).                                                                                  |
+
+##### Props usage:
+
+```js
+<SomeField disabled={false} label name="field" placeholder={false} />
 ```
 
 ## Props propagation

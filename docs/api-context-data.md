@@ -3,12 +3,45 @@ id: api-context-data
 title: Context data
 ---
 
-Some components might need to know a current form state, which is passed as `uniforms` in [React context](https://reactjs.org/docs/legacy-context.html).
+Some components might need to know a current form state, which is passed as [React context](https://reactjs.org/docs/context.html).
 Properties stored in the context relates either to the form values or the form instance itself.
-That means, besides current form state, you can access form methods or encounter some metadata, eg. about the used schema.
+That means, besides current form state, you can access form methods or encounter some metadata, e.g. about the used schema.
 Some of them were designed for internal use, but you can still take advantage of them.
 
+## Accessing context data
+
+A convenient way to access context is to use the `useForm` hook:
+
+```js
+import { useForm } from 'uniforms';
+
+function MyComponent() {
+  const uniforms = useForm();
+}
+```
+
+If you want to access only field-relevant part, use `useField(name)` hook:
+
+```js
+import { useField } from 'uniforms';
+
+function ArePasswordsEqual() {
+  const { value: passwordA } = useField('passwordA');
+  const { value: passwordB } = useField('passwordB');
+  const areEqual = passwordA === passwordB;
+  return <div>{`Passwords are ${areEqual ? 'equal' : 'not equal'}`}</div>;
+}
+```
+
 ## Available context data
+
+### `changed`
+
+Indicates whether there was a change on form.
+
+### `changedMap`
+
+A map of changed fields. Rather internal one, used for checking if _other_ fields has changed.
 
 ### `error`
 
@@ -56,7 +89,7 @@ The `name` array of the nested `AutoFields` will store a `personA` value.
 
 ### `onChange`
 
-You can directly access to the `onChange` method. Eg. `onChange(field, value)`.
+You can directly access to the `onChange` method. E.g. `onChange(field, value)`.
 
 ### `onSubmit`
 
@@ -78,77 +111,17 @@ The `state` is an object representing your current form status.
 
 The state properties are:
 
-| Name              | Description                                                                                                                                                                                    |
-| :---------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `changed`         | Indicates whether there was a change on form.                                                                                                                                                  |
-| `changedMap`      | A map of changed fields. Rather internal one, used for checking if _other_ fields has changed. [Usage](https://github.com/vazco/uniforms/blob/master/packages/uniforms/src/BaseField.js#L220). |
-| `disabled`        | Indicates whether the form is disabled.                                                                                                                                                        |
-| `label`           | Indicates whether the labels should be shown.                                                                                                                                                  |
-| `placeholder`     | Indicates whether the placeholders should be shown.                                                                                                                                            |
-| `showInlineError` | Indicates whether the inline errors should be shown.                                                                                                                                           |
-| `submitting`      | Indicates whether the form is in the `submitting` state.                                                                                                                                       |
-| `validating`      | Indicates whether the form is in the `validating` state. Helpful when handling asynchronous validation.                                                                                        |
+| Name              | Description                                          |
+| :---------------- | :--------------------------------------------------- |
+| `disabled`        | Indicates whether the form is disabled.              |
+| `label`           | Indicates whether the labels should be shown.        |
+| `placeholder`     | Indicates whether the placeholders should be shown.  |
+| `showInlineError` | Indicates whether the inline errors should be shown. |
 
-## Context properties' structure
+### `submitting`
 
-```js
-MyComponentUsingUniformsContext.contextTypes = {
-  uniforms: PropTypes.shape({
-    name: PropTypes.arrayOf(PropTypes.string).isRequired,
+Indicates whether the form is in the `submitting` state. Helpful when handling asynchronous submission.
 
-    error: PropTypes.any,
-    model: PropTypes.object.isRequired,
+### `validating`
 
-    schema: PropTypes.shape({
-      getError: PropTypes.func.isRequired,
-      getErrorMessage: PropTypes.func.isRequired,
-      getErrorMessages: PropTypes.func.isRequired,
-      getField: PropTypes.func.isRequired,
-      getInitialValue: PropTypes.func.isRequired,
-      getProps: PropTypes.func.isRequired,
-      getSubfields: PropTypes.func.isRequired,
-      getType: PropTypes.func.isRequired,
-      getValidator: PropTypes.func.isRequired
-    }).isRequired,
-
-    state: PropTypes.shape({
-      changed: PropTypes.bool.isRequired,
-      changedMap: PropTypes.object.isRequired,
-      submitting: PropTypes.bool.isRequired,
-
-      label: PropTypes.bool.isRequired,
-      disabled: PropTypes.bool.isRequired,
-      placeholder: PropTypes.bool.isRequired
-    }).isRequired,
-
-    onChange: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-    randomId: PropTypes.func.isRequired
-  }).isRequired
-};
-```
-
-## Accessing context data
-
-A convenient way to access context is to write a helper function, eg. `WithUniforms`, that receives a context and passes it to the children:
-
-```js
-import { BaseField } from 'uniforms';
-
-const WithUniforms = ({ children }, { uniforms }) => children(uniforms);
-
-WithUniforms.contextTypes = BaseField.contextTypes;
-```
-
-You can also directly subscribe to the context inside your field component:
-
-```js
-import { BaseField } from 'uniforms';
-
-const MyComponentUsingUniformsContext = (props, { uniforms }) => (
-  //Now I have access to the uniforms context!
-  <input />
-);
-
-MyComponentUsingUniformsContext.contextTypes = BaseField.contextTypes;
-```
+Indicates whether the form is in the `validating` state. Helpful when handling asynchronous validation.

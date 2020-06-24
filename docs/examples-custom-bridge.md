@@ -71,7 +71,7 @@ const UserLoginSchemaValidator = model => {
   }
 
   if (Object.keys(error).length) {
-    throw error;
+    return error;
   }
 };
 

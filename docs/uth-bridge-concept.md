@@ -67,7 +67,7 @@ class CustomBridge extends Bridge {
     /* ... */
   }
 
-  // Function with one argument - model - which throws errors when model is
+  // Function with one argument - model - which return errors when model is
   // invalid.
   getValidator(options) {
     /* ... */
