@@ -33,6 +33,12 @@ export default function CodeSection({ language, replace, section, source }) {
     }
   }
 
+  // At least one newline is required for non-inline view.
+  source = source.trim();
+  if (!source.includes('\n')) {
+    source += '\n';
+  }
+
   return (
     <components.pre>
       <components.code
