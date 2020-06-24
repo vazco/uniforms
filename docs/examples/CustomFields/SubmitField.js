@@ -1,23 +1,24 @@
 import React from 'react';
 import { AutoField, AutoForm } from '../../../website/components/universal';
-import { connectField } from 'uniforms';
+import { connectField, useForm } from 'uniforms';
 
 import schema from './CompositeFieldSchema';
 
-const SubmitField = (
-  props,
-  {
-    uniforms: {
-      error,
-      state: { disabled, submitting, validating }
-    }
-  }
-) => (
-  <input
-    disabled={!!(error || disabled || submitting || validating)}
-    type="submit"
-  />
-);
+function SubmitField() {
+  const {
+    error,
+    state: { disabled },
+    submitting,
+    validating
+  } = useForm();
+
+  return (
+    <input
+      disabled={!!error || disabled || submitting || validating}
+      type="submit"
+    />
+  );
+}
 
 const Composite = () => (
   <section>

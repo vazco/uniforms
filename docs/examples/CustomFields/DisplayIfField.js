@@ -4,13 +4,16 @@ import {
   SubmitField,
   TextField
 } from '../../../website/components/universal';
+import { useForm } from 'uniforms';
 
 import schema from './DisplayIfFieldSchema';
 
 // We have to ensure that there's only one child, because returning an array
 // from a component is prohibited.
-const DisplayIf = ({ children, condition }, { uniforms }) =>
-  condition(uniforms) ? Children.only(children) : null;
+function DisplayIf({ children, condition }) {
+  const uniforms = useForm();
+  return condition(uniforms) ? Children.only(children) : null;
+}
 
 export default function ExampleOfDisplayIfField() {
   return (
