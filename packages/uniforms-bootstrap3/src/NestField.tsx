@@ -1,17 +1,17 @@
-import React, { HTMLProps } from 'react';
+import React, { HTMLProps, ReactNode } from 'react';
 import classnames from 'classnames';
 import { Override, connectField, filterDOMProps } from 'uniforms';
 
 import AutoField from './AutoField';
 
 export type NestFieldProps = Override<
-  HTMLProps<HTMLDivElement>,
+  Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
     error?: boolean;
     errorMessage?: string;
     fields?: any[];
     itemProps?: object;
-    label?: string;
+    label?: ReactNode;
     name: string;
     showInlineError?: boolean;
   }

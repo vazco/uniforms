@@ -2,7 +2,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import RadioMaterial, { RadioProps } from '@material-ui/core/Radio';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { connectField, filterDOMProps, Override } from 'uniforms';
 
 import wrapField from './wrapField';
@@ -13,7 +13,7 @@ export type RadioFieldProps = Override<
     allowedValues?: string[];
     checkboxes?: boolean;
     helperText?: string;
-    label?: string;
+    label?: ReactNode;
     onChange(value?: string): void;
     transform?(value: string): string;
   }

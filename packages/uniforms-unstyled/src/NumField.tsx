@@ -1,4 +1,4 @@
-import React, { HTMLProps, Ref } from 'react';
+import React, { HTMLProps, ReactNode, Ref } from 'react';
 import { connectField, filterDOMProps, Override } from 'uniforms';
 
 export type NumFieldProps = Override<
@@ -8,7 +8,7 @@ export type NumFieldProps = Override<
     disabled: boolean;
     id: string;
     inputRef?: Ref<HTMLInputElement>;
-    label: string;
+    label?: ReactNode;
     max?: number;
     min?: number;
     name: string;

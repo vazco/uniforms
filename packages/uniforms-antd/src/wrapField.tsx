@@ -2,7 +2,7 @@ import Form, { FormItemProps } from 'antd/lib/form';
 import Icon from 'antd/lib/icon';
 import React, { ReactNode } from 'react';
 import Tooltip from 'antd/lib/tooltip';
-import { filterDOMProps, Override } from 'uniforms';
+import { Override, filterDOMProps } from 'uniforms';
 
 type WrapperProps = Override<
   FormItemProps,

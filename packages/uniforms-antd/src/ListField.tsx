@@ -22,7 +22,7 @@ export type ListFieldProps = Override<
     info?: string;
     initialCount?: number;
     itemProps?: {};
-    label: string;
+    label?: ReactNode;
     labelCol?: any;
     name: string;
     showInlineError?: boolean;

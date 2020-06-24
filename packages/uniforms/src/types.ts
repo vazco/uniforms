@@ -1,4 +1,4 @@
-import { SyntheticEvent } from 'react';
+import { ReactNode, SyntheticEvent } from 'react';
 
 import { Bridge } from './Bridge';
 
@@ -39,7 +39,7 @@ export type GuaranteedProps<Value> = {
   fieldType: any;
   fields: string[];
   id: string;
-  label: string;
+  label: ReactNode;
   name: string;
   onChange(value?: Value, name?: string): void;
   placeholder: string;

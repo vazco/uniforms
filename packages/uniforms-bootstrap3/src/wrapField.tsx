@@ -1,22 +1,26 @@
 import classnames from 'classnames';
 import omit from 'lodash/omit';
-import React, { ReactNode, HTMLProps } from 'react';
-import { filterDOMProps } from 'uniforms';
+import React, { HTMLProps, ReactNode } from 'react';
+import { Override, filterDOMProps } from 'uniforms';
 
 import gridClassName from './gridClassName';
 
-type WrapperProps = {
-  error?: unknown;
-  errorMessage?: string;
-  feedbackable?: boolean;
-  grid?: number | string | Record<string, number>;
-  help?: string;
-  helpClassName?: string;
-  labelClassName?: string | string[];
-  showInlineError?: boolean;
-  value?: boolean | string | number | string[] | undefined;
-  wrapClassName?: string;
-} & Omit<HTMLProps<HTMLDivElement>, 'onChange' | 'value'>;
+type WrapperProps = Override<
+  Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
+  {
+    error?: unknown;
+    errorMessage?: string;
+    feedbackable?: boolean;
+    grid?: number | string | Record<string, number>;
+    help?: string;
+    helpClassName?: string;
+    label?: ReactNode;
+    labelClassName?: string | string[];
+    showInlineError?: boolean;
+    value?: boolean | string | number | string[] | undefined;
+    wrapClassName?: string;
+  }
+>;
 
 // eslint-disable-next-line complexity
 export default function wrapField(

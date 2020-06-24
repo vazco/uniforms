@@ -8,7 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import omit from 'lodash/omit';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
 import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import { connectField, filterDOMProps, Override } from 'uniforms';
@@ -35,7 +35,7 @@ type CheckboxesProps = Override<
   Override<FormControlLabelProps, SelectionControlProps>,
   CommonProps<string | string[]> & {
     checkboxes: true;
-    label?: string;
+    label?: ReactNode;
     legend?: string;
   }
 >;

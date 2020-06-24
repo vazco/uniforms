@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, { HTMLProps, Ref } from 'react';
+import React, { HTMLProps, ReactNode, Ref } from 'react';
 import { connectField, filterDOMProps, Override } from 'uniforms';
 
 export type LongTextFieldProps = Override<
@@ -11,7 +11,7 @@ export type LongTextFieldProps = Override<
     errorMessage: string;
     id: string;
     inputRef?: Ref<HTMLTextAreaElement>;
-    label: string;
+    label?: ReactNode;
     name: string;
     onChange(value?: string): void;
     placeholder: string;

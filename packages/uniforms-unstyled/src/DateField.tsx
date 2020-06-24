@@ -1,4 +1,4 @@
-import React, { HTMLProps, Ref } from 'react';
+import React, { HTMLProps, ReactNode, Ref } from 'react';
 import { connectField, filterDOMProps, Override } from 'uniforms';
 
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
@@ -10,7 +10,7 @@ export type DateFieldProps = Override<
     disabled: boolean;
     id: string;
     inputRef?: Ref<HTMLInputElement>;
-    label: string;
+    label?: ReactNode;
     max?: Date;
     min?: Date;
     name: string;

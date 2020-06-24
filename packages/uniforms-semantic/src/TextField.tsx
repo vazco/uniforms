@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, { HTMLProps, Ref } from 'react';
+import React, { HTMLProps, ReactNode, Ref } from 'react';
 import { connectField, filterDOMProps, Override } from 'uniforms';
 
 export type TextFieldProps = Override<
@@ -14,7 +14,7 @@ export type TextFieldProps = Override<
     iconProps?: object;
     id: string;
     inputRef?: Ref<HTMLInputElement>;
-    label: string;
+    label?: ReactNode;
     name: string;
     onChange(value?: string): void;
     placeholder: string;

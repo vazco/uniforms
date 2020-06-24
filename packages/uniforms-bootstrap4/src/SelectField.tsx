@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, { HTMLProps, Ref } from 'react';
+import React, { HTMLProps, ReactNode, Ref } from 'react';
 import { connectField, Override } from 'uniforms';
 
 import wrapField from './wrapField';
@@ -32,7 +32,7 @@ export type SelectFieldProps = Override<
     inline?: boolean;
     inputClassName?: string;
     inputRef?: Ref<HTMLSelectElement>;
-    label: string;
+    label?: ReactNode;
     name: string;
     onChange(value?: string | string[]): void;
     placeholder: string;
