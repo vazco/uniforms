@@ -2,7 +2,7 @@ import React, { HTMLProps, ReactNode } from 'react';
 import { connectField, filterDOMProps, Override } from 'uniforms';
 
 export type ErrorFieldProps = Override<
-  HTMLProps<HTMLDivElement>,
+  Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
     children?: ReactNode;
     error?: any;

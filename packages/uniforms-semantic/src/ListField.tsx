@@ -12,7 +12,7 @@ import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';
 
 export type ListFieldProps = Override<
-  HTMLProps<HTMLDivElement>,
+  Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
     children?: ReactNode;
     error?: boolean;

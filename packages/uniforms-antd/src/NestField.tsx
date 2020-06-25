@@ -4,7 +4,7 @@ import { Override, connectField, filterDOMProps } from 'uniforms';
 import AutoField from './AutoField';
 
 export type NestFieldProps = Override<
-  HTMLProps<HTMLDivElement>,
+  Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
     error?: boolean;
     errorMessage?: string;
