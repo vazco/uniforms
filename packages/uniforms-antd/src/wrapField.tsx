@@ -1,8 +1,8 @@
 import Form, { FormItemProps } from 'antd/lib/form';
-import Icon from 'antd/lib/icon';
 import React, { ReactNode } from 'react';
 import Tooltip from 'antd/lib/tooltip';
-import { Override, filterDOMProps } from 'uniforms';
+import { filterDOMProps, Override } from 'uniforms';
+import { QuestionCircleOutlined } from '@ant-design/icons/lib';
 
 type WrapperProps = Override<
   FormItemProps,
@@ -40,7 +40,7 @@ export default function wrapField(
         <span>
           &nbsp;
           <Tooltip title={info}>
-            <Icon type="question-circle-o" />
+            <QuestionCircleOutlined />
           </Tooltip>
         </span>
       )}

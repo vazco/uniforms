@@ -9,6 +9,7 @@ export type TextFieldProps = Override<
   {
     inputRef?: Ref<Input>;
     onChange(value?: string): void;
+    onReset?: () => void;
     value?: string;
   }
 >;
@@ -19,7 +20,7 @@ function Text(props: TextFieldProps) {
       disabled={props.disabled}
       id={props.id}
       name={props.name}
-      // @ts-ignore FIXME
+      // @ts-ignore filterDOMProps will remove onChange
       onChange={event => props.onChange(event.target.value)}
       placeholder={props.placeholder}
       ref={props.inputRef}

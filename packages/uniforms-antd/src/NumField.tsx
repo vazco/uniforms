@@ -10,8 +10,9 @@ export type NumFieldProps = Override<
   InputNumberProps,
   {
     decimal?: boolean;
-    inputRef?: Ref<InputNumber>;
-    onChange(value?: number): void;
+    inputRef?: Ref<typeof InputNumber>;
+    onChange(value: number | undefined): void;
+    onReset?: () => void;
   }
 >;
 
@@ -24,6 +25,7 @@ function Num(props: NumFieldProps) {
       max={props.max}
       min={props.min}
       name={props.name}
+      // @ts-ignore filterDOMProps will remove onChange
       onChange={value => props.onChange(noneIfNaN(value))}
       placeholder={props.placeholder}
       ref={props.inputRef}

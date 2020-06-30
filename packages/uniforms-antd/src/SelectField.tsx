@@ -27,12 +27,12 @@ type CheckboxesProps = Override<
   CheckboxGroupProps | RadioGroupProps,
   CommonProps<CheckboxGroupProps['value']> & {
     checkboxes: true;
-    inputRef?: Ref<CheckboxGroup | RadioGroup>;
+    inputRef?: Ref<CheckboxGroup | typeof RadioGroup>;
   }
 >;
 
 type SelectProps = Override<
-  SelectAntDProps,
+  SelectAntDProps<any>,
   CommonProps<string | (string | undefined)[]> & {
     checkboxes?: false;
     inputRef?: Ref<SelectAntD<any>>;

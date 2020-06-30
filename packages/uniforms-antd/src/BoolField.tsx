@@ -1,8 +1,8 @@
 import Checkbox from 'antd/lib/checkbox';
-import Icon from 'antd/lib/icon';
-import React, { HTMLProps, Ref, createElement } from 'react';
+import React, { createElement, HTMLProps, Ref } from 'react';
 import Switch from 'antd/lib/switch';
 import { connectField, filterDOMProps, Override } from 'uniforms';
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons/lib';
 
 import wrapField from './wrapField';
 
@@ -12,6 +12,7 @@ export type BoolFieldProps = Override<
     checkbox?: boolean;
     inputRef?: Ref<HTMLInputElement>;
     onChange(value?: boolean): void;
+    onReset?: () => void;
     value?: boolean;
   }
 >;
@@ -41,8 +42,8 @@ function Bool({
 
 Bool.defaultProps = {
   checkbox: false,
-  checkedChildren: <Icon type="check" />,
-  unCheckedChildren: <Icon type="close" />,
+  checkedChildren: <CheckOutlined />,
+  unCheckedChildren: <CloseOutlined />,
 };
 
 export default connectField(Bool, { kind: 'leaf' });
