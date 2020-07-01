@@ -1,4 +1,4 @@
-import Input, { TextAreaProps } from 'antd/lib/input';
+import { TextAreaProps } from 'antd/lib/input';
 import React, { Ref } from 'react';
 import { connectField, filterDOMProps, Override } from 'uniforms';
 import TextArea from 'antd/lib/input/TextArea';
@@ -19,7 +19,7 @@ export type LongTextFieldProps = Override<
 function LongText(props: LongTextFieldProps) {
   return wrapField(
     props,
-    <Input.TextArea
+    <TextArea
       disabled={props.disabled}
       id={props.id}
       name={props.name}

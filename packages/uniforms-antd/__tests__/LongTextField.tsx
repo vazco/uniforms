@@ -1,11 +1,9 @@
-import Input from 'antd/lib/input';
 import React from 'react';
 import { LongTextField } from 'uniforms-antd';
+import TextArea from 'antd/lib/input/TextArea';
 
 import createContext from './_createContext';
 import mount from './_mount';
-
-const TextArea = Input.TextArea || Input;
 
 test('<LongTextField> - renders a textarea', () => {
   const element = <LongTextField name="x" />;
