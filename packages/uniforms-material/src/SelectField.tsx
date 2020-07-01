@@ -71,6 +71,7 @@ const xor = (item, array) => {
   return array.slice(0, index).concat(array.slice(index + 1));
 };
 
+// eslint-disable-next-line complexity
 function Select(props: SelectFieldProps) {
   const value = props.value ?? '';
   if (props.checkboxes) {
@@ -126,7 +127,7 @@ function Select(props: SelectFieldProps) {
                   name={name}
                   // FIXME: There's a problem with SelectFieldProps.
                   onChange={() => disabled || onChange!(xor(item, value))}
-                  ref={inputRef}
+                  inputRef={inputRef}
                   value={name}
                   {...filteredProps}
                 />

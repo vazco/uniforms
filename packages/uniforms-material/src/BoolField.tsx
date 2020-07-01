@@ -52,7 +52,7 @@ function Bool(props: BoolFieldProps) {
             onChange={event =>
               !disabled && onChange && onChange(event.target.checked)
             }
-            ref={inputRef}
+            inputRef={inputRef}
             value={name}
             {...filteredProps}
           />
