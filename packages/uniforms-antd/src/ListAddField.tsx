@@ -8,6 +8,7 @@ import {
   useField,
   connectField,
 } from 'uniforms';
+import { PlusSquareOutlined } from '@ant-design/icons/lib';
 
 export type ListAddFieldProps = Override<
   Omit<ButtonProps, 'onChange'>,
@@ -39,7 +40,7 @@ function ListAdd({ disabled, name, value, ...props }: ListAddFieldProps) {
 }
 
 ListAdd.defaultProps = {
-  icon: 'plus-square-o',
+  icon: <PlusSquareOutlined />,
   size: 'small' as ButtonSize,
   style: { width: '100%' },
   type: 'dashed' as ButtonType,
