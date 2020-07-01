@@ -2,7 +2,7 @@ import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, RefObject } from 'react';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
 import { connectField, filterDOMProps, Override } from 'uniforms';
 
@@ -17,6 +17,7 @@ export type BoolFieldProps = Override<
     legend?: string;
     onChange?(value: any): void;
     transform?(label: string): string;
+    inputRef?: RefObject<HTMLButtonElement>;
   }
 >;
 
@@ -52,7 +53,7 @@ function Bool(props: BoolFieldProps) {
             onChange={event =>
               !disabled && onChange && onChange(event.target.checked)
             }
-            inputRef={inputRef}
+            ref={inputRef}
             value={name}
             {...filteredProps}
           />
