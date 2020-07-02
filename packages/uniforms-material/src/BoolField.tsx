@@ -2,7 +2,7 @@ import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
-import React, { ReactNode, RefObject } from 'react';
+import React, { ReactNode, Ref } from 'react';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
 import { connectField, filterDOMProps, Override } from 'uniforms';
 
@@ -13,11 +13,11 @@ export type BoolFieldProps = Override<
   {
     appearance?: 'checkbox' | 'switch';
     helperText?: string;
+    inputRef?: Ref<HTMLButtonElement>;
     label?: ReactNode;
     legend?: string;
     onChange?(value: any): void;
     transform?(label: string): string;
-    inputRef?: RefObject<HTMLButtonElement>;
   }
 >;
 

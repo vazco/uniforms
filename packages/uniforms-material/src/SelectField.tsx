@@ -8,7 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import omit from 'lodash/omit';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, Ref } from 'react';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
 import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import { connectField, filterDOMProps, Override } from 'uniforms';
@@ -21,6 +21,7 @@ type CommonProps<Value> = {
   error?: boolean;
   errorMessage?: string;
   fieldType?: typeof Array | unknown;
+  inputRef?: Ref<HTMLButtonElement>;
   onChange?(value?: Value): void;
   showInlineError?: boolean;
   transform?: (item?: string) => string;
@@ -127,7 +128,7 @@ function Select(props: SelectFieldProps) {
                   name={name}
                   // FIXME: There's a problem with SelectFieldProps.
                   onChange={() => disabled || onChange!(xor(item, value))}
-                  inputRef={inputRef}
+                  ref={inputRef}
                   value={name}
                   {...filteredProps}
                 />
