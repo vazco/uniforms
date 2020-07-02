@@ -204,3 +204,10 @@ test('<RadioField> - renders a TextField with correct error text (specified)', (
 
   expect(wrapper.find(FormHelperText).text()).toBe('Error');
 });
+
+test('<RadioField> - works with special characters', () => {
+  mount(
+    <RadioField name="x" />,
+    createContext({ x: { type: String, allowedValues: ['ă', 'ș'] } }),
+  );
+});
