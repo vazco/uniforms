@@ -1,5 +1,5 @@
-import { BaseForm } from 'uniforms';
 import classnames from 'classnames';
+import { BaseForm } from 'uniforms';
 
 function AntD(parent: any): any {
   class _ extends parent {

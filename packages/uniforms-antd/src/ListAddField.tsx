@@ -1,14 +1,14 @@
 import Button, { ButtonProps, ButtonSize, ButtonType } from 'antd/lib/button';
-import React from 'react';
 import cloneDeep from 'lodash/cloneDeep';
+import PlusSquareOutlined from '@ant-design/icons/PlusSquareOutlined';
+import React from 'react';
 import {
-  Override,
+  connectField,
   filterDOMProps,
   joinName,
+  Override,
   useField,
-  connectField,
 } from 'uniforms';
-import PlusSquareOutlined from '@ant-design/icons/PlusSquareOutlined';
 
 export type ListAddFieldProps = Override<
   Omit<ButtonProps, 'onChange'>,

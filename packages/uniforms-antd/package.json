@@ -27,6 +27,7 @@
   ],
   "peerDependencies": {
     "antd": "^4.0.0",
+    "@ant-design/icons": "^4.0.0",
     "react": "^16.8.0"
   },
   "dependencies": {

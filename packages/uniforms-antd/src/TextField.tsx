@@ -5,11 +5,10 @@ import { connectField, filterDOMProps, Override } from 'uniforms';
 import wrapField from './wrapField';
 
 export type TextFieldProps = Override<
-  InputProps,
+  Omit<InputProps, 'onReset'>,
   {
     inputRef?: Ref<Input>;
     onChange(value?: string): void;
-    onReset?: () => void;
     value?: string;
   }
 >;

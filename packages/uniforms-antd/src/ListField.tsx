@@ -5,9 +5,9 @@ import React, {
   cloneElement,
   isValidElement,
 } from 'react';
+import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined';
 import Tooltip from 'antd/lib/tooltip';
 import { connectField, filterDOMProps, Override } from 'uniforms';
-import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined';
 
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';

@@ -1,19 +1,18 @@
 import Checkbox from 'antd/lib/checkbox';
+import CheckOutlined from '@ant-design/icons/CheckOutlined';
+import CloseOutlined from '@ant-design/icons/CloseOutlined';
 import React, { createElement, HTMLProps, Ref } from 'react';
 import Switch from 'antd/lib/switch';
 import { connectField, filterDOMProps, Override } from 'uniforms';
-import CheckOutlined from '@ant-design/icons/CheckOutlined';
-import CloseOutlined from '@ant-design/icons/CloseOutlined';
 
 import wrapField from './wrapField';
 
 export type BoolFieldProps = Override<
-  HTMLProps<HTMLDivElement>,
+  Omit<HTMLProps<HTMLDivElement>, 'onReset'>,
   {
     checkbox?: boolean;
     inputRef?: Ref<HTMLInputElement>;
     onChange(value?: boolean): void;
-    onReset?: () => void;
     value?: boolean;
   }
 >;

@@ -7,12 +7,11 @@ import wrapField from './wrapField';
 const noneIfNaN = x => (isNaN(x) ? undefined : x);
 
 export type NumFieldProps = Override<
-  InputNumberProps,
+  Omit<InputNumberProps, 'onReset'>,
   {
     decimal?: boolean;
     inputRef?: Ref<typeof InputNumber>;
     onChange(value: number | undefined): void;
-    onReset?: () => void;
   }
 >;
 

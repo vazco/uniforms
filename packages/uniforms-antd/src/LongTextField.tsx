@@ -1,16 +1,15 @@
-import { TextAreaProps } from 'antd/lib/input';
 import React, { Ref } from 'react';
-import { connectField, filterDOMProps, Override } from 'uniforms';
 import TextArea from 'antd/lib/input/TextArea';
+import { connectField, filterDOMProps, Override } from 'uniforms';
+import { TextAreaProps } from 'antd/lib/input';
 
 import wrapField from './wrapField';
 
 export type LongTextFieldProps = Override<
-  TextAreaProps,
+  Omit<TextAreaProps, 'onReset'>,
   {
     inputRef?: Ref<TextArea>;
     onChange(value?: any): void;
-    onReset?: () => void;
     prefix?: string;
     value?: string;
   }

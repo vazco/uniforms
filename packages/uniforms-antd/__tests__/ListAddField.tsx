@@ -1,6 +1,6 @@
+import merge from 'lodash/merge';
 import React from 'react';
 import { ListAddField } from 'uniforms-antd';
-import merge from 'lodash/merge';
 
 import createContext from './_createContext';
 import mount from './_mount';
