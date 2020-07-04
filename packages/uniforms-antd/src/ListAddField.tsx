@@ -8,7 +8,7 @@ import {
   useField,
   connectField,
 } from 'uniforms';
-import { PlusSquareOutlined } from '@ant-design/icons/lib';
+import PlusSquareOutlined from '@ant-design/icons/PlusSquareOutlined';
 
 export type ListAddFieldProps = Override<
   Omit<ButtonProps, 'onChange'>,

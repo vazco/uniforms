@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import Tooltip from 'antd/lib/tooltip';
 import { connectField, filterDOMProps, Override } from 'uniforms';
-import { QuestionCircleOutlined } from '@ant-design/icons/lib';
+import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined';
 
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';

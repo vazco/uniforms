@@ -2,7 +2,7 @@ import Form, { FormItemProps } from 'antd/lib/form';
 import React, { ReactNode } from 'react';
 import Tooltip from 'antd/lib/tooltip';
 import { filterDOMProps, Override } from 'uniforms';
-import { QuestionCircleOutlined } from '@ant-design/icons/lib';
+import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined';
 
 type WrapperProps = Override<
   FormItemProps,

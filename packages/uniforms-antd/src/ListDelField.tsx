@@ -12,7 +12,7 @@ import {
   useField,
   connectField,
 } from 'uniforms';
-import { DeleteOutlined } from '@ant-design/icons';
+import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
 
 export type ListDelFieldProps = Override<
   Omit<ButtonProps, 'onChange'>,
