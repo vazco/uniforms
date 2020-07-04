@@ -1,6 +1,6 @@
 import DatePicker, { DatePickerProps } from 'antd/lib/date-picker';
-import moment from 'moment';
 import React, { Ref } from 'react';
+import moment from 'moment';
 import { connectField, filterDOMProps, Override } from 'uniforms';
 
 import wrapField from './wrapField';
