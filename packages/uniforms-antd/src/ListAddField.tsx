@@ -1,7 +1,7 @@
 import Button, { ButtonProps, ButtonSize, ButtonType } from 'antd/lib/button';
-import cloneDeep from 'lodash/cloneDeep';
 import PlusSquareOutlined from '@ant-design/icons/PlusSquareOutlined';
 import React from 'react';
+import cloneDeep from 'lodash/cloneDeep';
 import {
   connectField,
   filterDOMProps,

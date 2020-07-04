@@ -1,7 +1,7 @@
 import React, { Ref } from 'react';
 import TextArea from 'antd/lib/input/TextArea';
-import { connectField, filterDOMProps, Override } from 'uniforms';
 import { TextAreaProps } from 'antd/lib/input';
+import { connectField, filterDOMProps, Override } from 'uniforms';
 
 import wrapField from './wrapField';
 
