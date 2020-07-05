@@ -48,9 +48,7 @@ function Select(props: SelectFieldProps) {
     props.checkboxes ? (
       <Group
         disabled={props.disabled}
-        id={props.id}
         name={props.name}
-        // @ts-ignore: Different value and onChange based on fieldType.
         onChange={
           props.fieldType === Array
             ? value => props.onChange(value)
@@ -64,12 +62,11 @@ function Select(props: SelectFieldProps) {
         {...filterDOMProps(props)}
       />
     ) : (
-      // @ts-ignore: We can do better than any.
       <SelectAntD<any>
         allowClear={!props.required}
         disabled={props.disabled}
-        id={props.id}
         mode={props.fieldType === Array ? 'multiple' : undefined}
+        // @ts-ignore: There's no `name` property on Select?
         name={props.name}
         onChange={value => props.onChange(value)}
         placeholder={props.placeholder}

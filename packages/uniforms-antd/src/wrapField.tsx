@@ -66,4 +66,13 @@ export default function wrapField(
   );
 }
 
+declare module 'uniforms' {
+  interface FilterDOMProps {
+    colon: never;
+    labelCol: never;
+    wrapperCol: never;
+    wrapperStyle: never;
+  }
+}
+
 filterDOMProps.register('colon', 'labelCol', 'wrapperCol', 'wrapperStyle');
