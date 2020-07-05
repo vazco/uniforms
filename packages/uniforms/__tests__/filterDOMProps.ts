@@ -17,6 +17,12 @@ describe('joinName', () => {
     expect(filterDOMProps({ __special__: true })).toEqual({});
   });
 
+  it('ignores double registers', () => {
+    const { length } = filterDOMProps.registered;
+    filterDOMProps.register('value');
+    expect(filterDOMProps.registered).toHaveLength(length);
+  });
+
   it('omits rest', () => {
     expect(filterDOMProps({ a: 1 })).toEqual({ a: 1 });
     expect(filterDOMProps({ b: 2 })).toEqual({ b: 2 });
