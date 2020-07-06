@@ -1,23 +1,13 @@
-import React, { HTMLProps, ReactNode, Ref } from 'react';
-import { connectField, filterDOMProps, Override } from 'uniforms';
+import React, { Ref } from 'react';
+import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
 const dateFormat = (value?: Date) => value?.toISOString().slice(0, -8);
 
-export type DateFieldProps = Override<
-  HTMLProps<HTMLDivElement>,
-  {
-    disabled: boolean;
-    id: string;
-    inputRef?: Ref<HTMLInputElement>;
-    label?: ReactNode;
-    max?: Date;
-    min?: Date;
-    name: string;
-    onChange(value?: Date): void;
-    placeholder: string;
-    value?: Date;
-  }
+export type DateFieldProps = HTMLFieldProps<
+  Date,
+  HTMLDivElement,
+  { inputRef?: Ref<HTMLInputElement>; max?: Date; min?: Date }
 >;
 
 function Date({

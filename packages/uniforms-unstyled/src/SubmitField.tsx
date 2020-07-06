@@ -1,13 +1,9 @@
 import React, { HTMLProps, Ref } from 'react';
-import { filterDOMProps, Override, useForm } from 'uniforms';
+import { Override, filterDOMProps, useForm } from 'uniforms';
 
 export type SubmitFieldProps = Override<
   HTMLProps<HTMLInputElement>,
-  {
-    disabled?: boolean;
-    inputRef?: Ref<HTMLInputElement>;
-    value?: string;
-  }
+  { inputRef?: Ref<HTMLInputElement>; value?: string }
 >;
 
 export default function SubmitField({
