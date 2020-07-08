@@ -12,6 +12,7 @@ import {
   useField,
   connectField,
 } from 'uniforms';
+import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
 
 export type ListDelFieldProps = Override<
   Omit<ButtonProps, 'onChange'>,
@@ -46,7 +47,7 @@ function ListDel({ disabled, name, ...props }: ListDelFieldProps) {
 }
 
 ListDel.defaultProps = {
-  icon: 'delete',
+  icon: <DeleteOutlined />,
   shape: 'circle-outline' as ButtonShape,
   size: 'small' as ButtonSize,
   type: 'ghost' as ButtonType,

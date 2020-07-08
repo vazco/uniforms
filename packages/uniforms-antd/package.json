@@ -26,7 +26,8 @@
     "src/*.tsx"
   ],
   "peerDependencies": {
-    "antd": "^3.0.0 || ^2.7.0",
+    "@ant-design/icons": "^4.0.0",
+    "antd": "^4.0.0",
     "react": "^16.8.0"
   },
   "dependencies": {

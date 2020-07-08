@@ -1,12 +1,13 @@
 import Button, { ButtonProps, ButtonSize, ButtonType } from 'antd/lib/button';
+import PlusSquareOutlined from '@ant-design/icons/PlusSquareOutlined';
 import React from 'react';
 import cloneDeep from 'lodash/cloneDeep';
 import {
-  Override,
+  connectField,
   filterDOMProps,
   joinName,
+  Override,
   useField,
-  connectField,
 } from 'uniforms';
 
 export type ListAddFieldProps = Override<
@@ -39,7 +40,7 @@ function ListAdd({ disabled, name, value, ...props }: ListAddFieldProps) {
 }
 
 ListAdd.defaultProps = {
-  icon: 'plus-square-o',
+  icon: <PlusSquareOutlined />,
   size: 'small' as ButtonSize,
   style: { width: '100%' },
   type: 'dashed' as ButtonType,
