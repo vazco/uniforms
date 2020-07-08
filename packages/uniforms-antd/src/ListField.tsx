@@ -1,4 +1,3 @@
-import Icon from 'antd/lib/icon';
 import React, {
   Children,
   HTMLProps,
@@ -6,6 +5,7 @@ import React, {
   cloneElement,
   isValidElement,
 } from 'react';
+import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined';
 import Tooltip from 'antd/lib/tooltip';
 import { connectField, filterDOMProps, Override } from 'uniforms';
 
@@ -54,7 +54,7 @@ function List({
             <span>
               &nbsp;
               <Tooltip title={info}>
-                <Icon type="question-circle-o" />
+                <QuestionCircleOutlined />
               </Tooltip>
             </span>
           )}

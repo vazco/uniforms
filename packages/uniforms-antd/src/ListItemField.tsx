@@ -29,7 +29,7 @@ function ListItem({
         <ListDelField className="top aligned" name="" />
       </div>
 
-      <div style={{ marginBottom: '4px', overflow: 'hidden' }}>
+      <div style={{ marginBottom: '24px', overflow: 'hidden' }}>
         <div
           style={{
             borderBottom: '1px solid #DDD',

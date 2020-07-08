@@ -213,3 +213,10 @@ test('<RadioField> - renders correct error text (showInlineError=false)', () => 
 
   expect(wrapper.find('.ui.red.label').length).toBe(0);
 });
+
+test('<RadioField> - works with special characters', () => {
+  mount(
+    <RadioField name="x" />,
+    createContext({ x: { type: String, allowedValues: ['ă', 'ș'] } }),
+  );
+});

@@ -1,6 +1,6 @@
+import merge from 'lodash/merge';
 import React from 'react';
 import { ListAddField } from 'uniforms-antd';
-import merge from 'lodash/merge';
 
 import createContext from './_createContext';
 import mount from './_mount';
@@ -27,7 +27,7 @@ test('<ListAddField> - prevents onClick when disabled', () => {
   const element = <ListAddField name="x.1" disabled />;
   const wrapper = mount(element, context());
 
-  expect(wrapper.find('i').simulate('click')).toBeTruthy();
+  expect(wrapper.find('span').simulate('click')).toBeTruthy();
   expect(onChange).not.toHaveBeenCalled();
 });
 
@@ -35,7 +35,7 @@ test('<ListAddField> - prevents onClick when limit reached', () => {
   const element = <ListAddField name="x.1" />;
   const wrapper = mount(element, context({ x: { maxCount: 0 } }));
 
-  expect(wrapper.find('i').simulate('click')).toBeTruthy();
+  expect(wrapper.find('span').simulate('click')).toBeTruthy();
   expect(onChange).not.toHaveBeenCalled();
 });
 
@@ -43,6 +43,6 @@ test('<ListAddField> - correctly reacts on click', () => {
   const element = <ListAddField name="x.1" value="y" />;
   const wrapper = mount(element, context());
 
-  expect(wrapper.find('i').simulate('click')).toBeTruthy();
+  expect(wrapper.find('span').simulate('click')).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', ['y']);
 });

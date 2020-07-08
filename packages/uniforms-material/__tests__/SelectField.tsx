@@ -280,6 +280,13 @@ test('<SelectField> - renders a SelectField with correct error text (showInlineE
   expect(wrapper.find(FormHelperText)).toHaveLength(0);
 });
 
+test('<SelectField> - works with special characters', () => {
+  mount(
+    <SelectField name="x" />,
+    createContext({ x: { type: String, allowedValues: ['ă', 'ș'] } }),
+  );
+});
+
 test('<SelectField checkboxes> - renders a set of Radio buttons', () => {
   // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
@@ -615,4 +622,11 @@ test('<SelectField checkboxes> - renders Switch with appearance=switch', () => {
 
   expect(wrapper.find(Checkbox)).toHaveLength(0);
   expect(wrapper.find(Switch)).toHaveLength(2);
+});
+
+test('<SelectField checkboxes> - works with special characters', () => {
+  mount(
+    <SelectField checkboxes name="x" />,
+    createContext({ x: { type: String, allowedValues: ['ă', 'ș'] } }),
+  );
 });

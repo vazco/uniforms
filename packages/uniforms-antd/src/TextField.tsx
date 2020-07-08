@@ -5,7 +5,7 @@ import { connectField, filterDOMProps, Override } from 'uniforms';
 import wrapField from './wrapField';
 
 export type TextFieldProps = Override<
-  InputProps,
+  Omit<InputProps, 'onReset'>,
   {
     inputRef?: Ref<Input>;
     onChange(value?: string): void;
@@ -19,7 +19,7 @@ function Text(props: TextFieldProps) {
       disabled={props.disabled}
       id={props.id}
       name={props.name}
-      // @ts-ignore FIXME
+      // @ts-ignore filterDOMProps will remove onChange
       onChange={event => props.onChange(event.target.value)}
       placeholder={props.placeholder}
       ref={props.inputRef}
