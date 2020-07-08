@@ -61,7 +61,7 @@ const base64 =
   typeof btoa !== 'undefined'
     ? btoa
     : (x: string) => Buffer.from(x).toString('base64');
-const escape = (x: string) => base64(x).replace(/=+$/, '');
+const escape = (x: string) => base64(encodeURIComponent(x)).replace(/=+$/, '');
 
 const xor = (item, array) => {
   const index = array.indexOf(item);

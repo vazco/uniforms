@@ -4,7 +4,7 @@ import { connectField, filterDOMProps, Override } from 'uniforms';
 
 const base64: typeof btoa =
   typeof btoa !== 'undefined' ? btoa : x => Buffer.from(x).toString('base64');
-const escape = (x: string) => base64(x).replace(/=+$/, '');
+const escape = (x: string) => base64(encodeURIComponent(x)).replace(/=+$/, '');
 
 export type SelectFieldProps = Override<
   HTMLProps<HTMLDivElement>,
