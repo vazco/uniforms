@@ -1,18 +1,16 @@
+import React, { Ref } from 'react';
 import classnames from 'classnames';
 import omit from 'lodash/omit';
-import React, { HTMLProps, Ref } from 'react';
-import { connectField, Override } from 'uniforms';
+import { connectField, HTMLFieldProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
-export type LongTextFieldProps = Override<
-  HTMLProps<HTMLDivElement>,
+export type LongTextFieldProps = HTMLFieldProps<
+  string,
+  HTMLDivElement,
   {
-    error?: boolean;
     inputClassName?: string;
     inputRef?: Ref<HTMLTextAreaElement>;
-    onChange(value?: string): void;
-    value?: string;
   }
 >;
 

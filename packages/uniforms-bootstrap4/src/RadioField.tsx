@@ -1,6 +1,6 @@
+import React from 'react';
 import classnames from 'classnames';
-import React, { HTMLProps } from 'react';
-import { connectField, Override } from 'uniforms';
+import { connectField, HTMLFieldProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
@@ -10,16 +10,14 @@ const base64 =
     : (x: string) => Buffer.from(x).toString('base64');
 const escape = (x: string) => base64(encodeURIComponent(x)).replace(/=+$/, '');
 
-export type RadioFieldProps = Override<
-  HTMLProps<HTMLDivElement>,
+export type RadioFieldProps = HTMLFieldProps<
+  string,
+  HTMLDivElement,
   {
     allowedValues?: string[];
-    error?: boolean;
     inline?: boolean;
     inputClassName?: string;
-    onChange(value?: string): void;
     transform?(value: string): string;
-    value?: number | string;
   }
 >;
 
