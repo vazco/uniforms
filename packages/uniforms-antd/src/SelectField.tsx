@@ -1,41 +1,35 @@
-import CheckboxGroup, { CheckboxGroupProps } from 'antd/lib/checkbox/Group';
-import RadioGroup from 'antd/lib/radio/group';
+import CheckboxGroup, {
+  CheckboxGroupProps,
+  CheckboxValueType,
+} from 'antd/lib/checkbox/Group';
+import RadioGroup, { RadioGroupProps } from 'antd/lib/radio';
 import React, { Ref } from 'react';
 import SelectAntD, { SelectProps as SelectAntDProps } from 'antd/lib/select';
-import { Override, connectField, filterDOMProps } from 'uniforms';
-import { RadioGroupProps } from 'antd/lib/radio/interface';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
-type CommonProps<Value> = {
-  allowedValues?: CommonPropsValueElement<Value>[];
-  fieldType?: typeof Array | unknown;
-  id: string;
-  name: string;
-  onChange(value?: Value): void;
-  placeholder: string;
-  required?: boolean;
-  transform?(value: CommonPropsValueElement<Value>): string;
-  value?: Value;
-};
-
-type CommonPropsValueElement<Value> = NonNullable<
-  Value extends Array<infer Element> ? Element : Value
->;
-
-type CheckboxesProps = Override<
+type CheckboxesProps = FieldProps<
+  CheckboxValueType,
   CheckboxGroupProps | RadioGroupProps,
-  CommonProps<CheckboxGroupProps['value']> & {
+  {
+    allowedValues?: CheckboxValueType[];
     checkboxes: true;
     inputRef?: Ref<CheckboxGroup | typeof RadioGroup>;
+    required?: boolean;
+    transform?(value: CheckboxValueType): string;
   }
 >;
 
-type SelectProps = Override<
-  SelectAntDProps<any>,
-  CommonProps<string | (string | undefined)[]> & {
+type SelectProps = FieldProps<
+  string | string[],
+  SelectAntDProps<string | string[]>,
+  {
+    allowedValues?: string[];
     checkboxes?: false;
-    inputRef?: Ref<SelectAntD<any>>;
+    inputRef?: Ref<SelectAntD<string | string[]>>;
+    required?: boolean;
+    transform?(value: string): string;
   }
 >;
 

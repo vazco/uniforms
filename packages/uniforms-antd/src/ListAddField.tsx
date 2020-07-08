@@ -3,16 +3,17 @@ import PlusSquareOutlined from '@ant-design/icons/PlusSquareOutlined';
 import React from 'react';
 import cloneDeep from 'lodash/cloneDeep';
 import {
+  FieldProps,
   connectField,
   filterDOMProps,
   joinName,
-  Override,
   useField,
 } from 'uniforms';
 
-export type ListAddFieldProps = Override<
-  Omit<ButtonProps, 'onChange'>,
-  { initialCount?: number; name: string; value: unknown }
+export type ListAddFieldProps = FieldProps<
+  unknown,
+  ButtonProps,
+  { initialCount?: number }
 >;
 
 function ListAdd({ disabled, name, value, ...props }: ListAddFieldProps) {
@@ -29,8 +30,7 @@ function ListAdd({ disabled, name, value, ...props }: ListAddFieldProps) {
 
   return (
     <Button
-      // FIXME: filterDOMProps will remove value.
-      {...(filterDOMProps(props) as Omit<typeof props, 'value'>)}
+      {...filterDOMProps(props)}
       disabled={!limitNotReached}
       onClick={() => {
         parent.onChange(parent.value!.concat([cloneDeep(value)]));

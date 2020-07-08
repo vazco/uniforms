@@ -1,32 +1,26 @@
 import React, {
   Children,
-  HTMLProps,
   ReactNode,
   cloneElement,
   isValidElement,
 } from 'react';
 import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined';
 import Tooltip from 'antd/lib/tooltip';
-import { connectField, filterDOMProps, Override } from 'uniforms';
+import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';
 
-export type ListFieldProps = Override<
-  Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
+export type ListFieldProps = HTMLFieldProps<
+  unknown[],
+  HTMLDivElement,
   {
     addIcon?: ReactNode;
     children?: ReactNode;
-    error?: boolean;
-    errorMessage?: string;
     info?: string;
     initialCount?: number;
     itemProps?: {};
-    label?: ReactNode;
     labelCol?: any;
-    name: string;
-    showInlineError?: boolean;
-    value: unknown[];
     wrapperCol?: any;
   }
 >;
@@ -63,7 +57,7 @@ function List({
 
       {!!(error && showInlineError) && <div>{errorMessage}</div>}
 
-      {value.map((item, itemIndex) =>
+      {value?.map((item, itemIndex) =>
         Children.map(children, (child, childIndex) =>
           isValidElement(child)
             ? cloneElement(child, {

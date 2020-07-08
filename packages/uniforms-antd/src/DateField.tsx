@@ -1,17 +1,14 @@
 import DatePicker, { DatePickerProps } from 'antd/lib/date-picker';
 import React, { Ref } from 'react';
 import moment from 'moment';
-import { connectField, filterDOMProps, Override } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
-export type DateFieldProps = Override<
+export type DateFieldProps = FieldProps<
+  Date,
   DatePickerProps,
-  {
-    id: string;
-    inputRef?: Ref<any>;
-    onChange?(value?: any): void;
-  }
+  { inputRef?: Ref<typeof DatePicker> }
 >;
 
 function Date(props: DateFieldProps) {
@@ -21,9 +18,10 @@ function Date(props: DateFieldProps) {
       disabled={props.disabled}
       name={props.name}
       onChange={value => {
-        props.onChange && props.onChange(value && value.toDate());
+        props.onChange(value ? value.toDate() : undefined);
       }}
       placeholder={props.placeholder}
+      // @ts-ignore: `DatePicker` is an intersection.
       ref={props.inputRef}
       value={props.value && moment(props.value)}
       {...filterDOMProps(props)}

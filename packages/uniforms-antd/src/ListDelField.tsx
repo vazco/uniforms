@@ -4,20 +4,17 @@ import Button, {
   ButtonSize,
   ButtonShape,
 } from 'antd/lib/button';
+import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
 import React from 'react';
 import {
-  Override,
+  FieldProps,
   filterDOMProps,
   joinName,
   useField,
   connectField,
 } from 'uniforms';
-import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
 
-export type ListDelFieldProps = Override<
-  Omit<ButtonProps, 'onChange'>,
-  { name: string }
->;
+export type ListDelFieldProps = FieldProps<unknown, ButtonProps>;
 
 function ListDel({ disabled, name, ...props }: ListDelFieldProps) {
   const nameParts = joinName(null, name);
@@ -34,8 +31,7 @@ function ListDel({ disabled, name, ...props }: ListDelFieldProps) {
 
   return (
     <Button
-      // FIXME: filterDOMProps will remove value.
-      {...(filterDOMProps(props) as Omit<typeof props, 'value'>)}
+      {...filterDOMProps(props)}
       disabled={!limitNotReached}
       onClick={() => {
         const value = parent.value!.slice();
