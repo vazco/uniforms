@@ -2,10 +2,11 @@ import CheckboxGroup, {
   CheckboxGroupProps,
   CheckboxValueType,
 } from 'antd/lib/checkbox/Group';
-import RadioGroup, { RadioGroupProps } from 'antd/lib/radio';
+import RadioGroup from 'antd/lib/radio/group';
 import React, { Ref } from 'react';
 import SelectAntD, { SelectProps as SelectAntDProps } from 'antd/lib/select';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
+import { RadioGroupProps } from 'antd/lib/radio';
 
 import wrapField from './wrapField';
 
@@ -22,7 +23,7 @@ type CheckboxesProps = FieldProps<
 >;
 
 type SelectProps = FieldProps<
-  string | string[],
+  string | (string | undefined)[],
   SelectAntDProps<string | string[]>,
   {
     allowedValues?: string[];

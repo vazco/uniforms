@@ -1,12 +1,12 @@
 import DatePicker, { DatePickerProps } from 'antd/lib/date-picker';
 import React, { Ref } from 'react';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
 export type DateFieldProps = FieldProps<
-  Date,
+  Date | Moment,
   DatePickerProps,
   { inputRef?: Ref<typeof DatePicker> }
 >;
