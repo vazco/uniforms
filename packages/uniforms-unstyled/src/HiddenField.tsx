@@ -24,8 +24,8 @@ export default function HiddenField({ value, ...rawProps }: HiddenFieldProps) {
       name={props.name}
       ref={props.inputRef}
       type="hidden"
-      {...filterDOMProps(props)}
       value={value ?? props.value ?? ''}
+      {...filterDOMProps(props)}
     />
   );
 }
