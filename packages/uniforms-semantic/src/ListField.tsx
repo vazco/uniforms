@@ -8,10 +8,7 @@ import ListItemField from './ListItemField';
 export type ListFieldProps = HTMLFieldProps<
   unknown[],
   HTMLDivElement,
-  {
-    initialCount?: number;
-    itemProps?: {};
-  }
+  { initialCount?: number; itemProps?: {} }
 >;
 
 function List({

@@ -5,10 +5,7 @@ import { connectField, filterDOMProps, HTMLFieldProps } from 'uniforms';
 export type BoolFieldProps = HTMLFieldProps<
   boolean,
   HTMLDivElement,
-  {
-    inputRef?: Ref<HTMLInputElement>;
-    wrapClassName?: string;
-  }
+  { inputRef?: Ref<HTMLInputElement>; wrapClassName?: string }
 >;
 
 function Bool({

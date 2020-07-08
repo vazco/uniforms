@@ -11,9 +11,7 @@ import {
 export type ListDelFieldProps = HTMLFieldProps<
   unknown,
   HTMLSpanElement,
-  {
-    name: string;
-  }
+  { name: string }
 >;
 
 function ListDel({ disabled, name, ...props }: ListDelFieldProps) {

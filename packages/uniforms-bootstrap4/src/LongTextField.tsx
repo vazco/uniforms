@@ -8,10 +8,7 @@ import wrapField from './wrapField';
 export type LongTextFieldProps = HTMLFieldProps<
   string,
   HTMLDivElement,
-  {
-    inputClassName?: string;
-    inputRef?: Ref<HTMLTextAreaElement>;
-  }
+  { inputClassName?: string; inputRef?: Ref<HTMLTextAreaElement> }
 >;
 
 function LongText(props: LongTextFieldProps) {

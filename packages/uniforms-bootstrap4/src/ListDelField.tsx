@@ -11,9 +11,7 @@ import {
 export type ListDelFieldProps = HTMLFieldProps<
   unknown,
   HTMLSpanElement,
-  {
-    removeIcon?: ReactNode;
-  }
+  { removeIcon?: ReactNode }
 >;
 
 function ListDel({

@@ -5,9 +5,7 @@ import { connectField, filterDOMProps, HTMLFieldProps } from 'uniforms';
 export type LongTextFieldProps = HTMLFieldProps<
   string,
   HTMLDivElement,
-  {
-    inputRef?: Ref<HTMLTextAreaElement>;
-  }
+  { inputRef?: Ref<HTMLTextAreaElement> }
 >;
 
 function LongText({

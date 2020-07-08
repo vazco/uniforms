@@ -8,10 +8,7 @@ import wrapField from './wrapField';
 export type TextFieldProps = HTMLFieldProps<
   string,
   HTMLInputElement,
-  {
-    inputClassName?: string;
-    inputRef?: Ref<HTMLInputElement>;
-  }
+  { inputClassName?: string; inputRef?: Ref<HTMLInputElement> }
 >;
 
 function Text(props: TextFieldProps) {

@@ -12,10 +12,7 @@ import {
 export type ListAddFieldProps = HTMLFieldProps<
   unknown,
   HTMLDivElement,
-  {
-    addIcon?: ReactNode;
-    initialCount?: number;
-  }
+  { addIcon?: ReactNode; initialCount?: number }
 >;
 
 function ListAdd({

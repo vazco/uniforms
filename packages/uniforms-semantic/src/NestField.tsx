@@ -7,10 +7,7 @@ import AutoField from './AutoField';
 export type NestFieldProps = HTMLFieldProps<
   object,
   HTMLDivElement,
-  {
-    grouped?: boolean;
-    itemProps?: object;
-  }
+  { grouped?: boolean; itemProps?: object }
 >;
 
 function Nest({

@@ -7,9 +7,7 @@ import AutoField from './AutoField';
 export type NestFieldProps = HTMLFieldProps<
   object,
   HTMLDivElement,
-  {
-    itemProps?: object;
-  }
+  { itemProps?: object }
 >;
 
 function Nest({

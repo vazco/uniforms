@@ -12,9 +12,7 @@ import {
 export type ListAddFieldProps = HTMLFieldProps<
   unknown,
   HTMLSpanElement,
-  {
-    initialCount?: number;
-  }
+  { initialCount?: number }
 >;
 
 function ListAdd({ disabled, name, value, ...props }: ListAddFieldProps) {
