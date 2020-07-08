@@ -19,7 +19,6 @@ function Date(props: DateFieldProps) {
     props,
     <DatePicker
       disabled={props.disabled}
-      id={props.id}
       name={props.name}
       onChange={value => {
         props.onChange && props.onChange(value && value.toDate());

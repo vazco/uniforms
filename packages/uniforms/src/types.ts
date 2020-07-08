@@ -30,6 +30,9 @@ export type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends {} ? DeepPartial<T[P]> : T[P];
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface FilterDOMProps {}
+
 export type GuaranteedProps<Value> = {
   changed: boolean;
   disabled: boolean;
@@ -54,3 +57,27 @@ export type Override<T, U> = U & Omit<T, keyof U>;
 export type Partialize<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
 export type ValidateMode = 'onChange' | 'onChangeAfterSubmit' | 'onSubmit';
+
+// Explicit declaration to allow users extend it directly.
+// Would it be possible not to use `declare` here?
+declare module '.' {
+  interface FilterDOMProps {
+    allowedValues: never;
+    changed: never;
+    component: never;
+    disabled: never;
+    error: never;
+    errorMessage: never;
+    field: never;
+    fieldType: never;
+    fields: never;
+    initialCount: never;
+    label: never;
+    name: never;
+    onChange: never;
+    placeholder: never;
+    showInlineError: never;
+    transform: never;
+    value: never;
+  }
+}
