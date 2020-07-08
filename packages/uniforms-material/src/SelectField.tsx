@@ -5,53 +5,42 @@ import FormControlLabel, {
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import omit from 'lodash/omit';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import React, { ReactNode, Ref } from 'react';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
 import TextField, { TextFieldProps } from '@material-ui/core/TextField';
-import { connectField, filterDOMProps, Override } from 'uniforms';
+import omit from 'lodash/omit';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 import { SelectProps as MaterialSelectProps } from '@material-ui/core/Select';
 
 import wrapField from './wrapField';
 
-type CommonProps<Value> = {
-  allowedValues?: CommonPropsValueElement<Value>[];
-  error?: boolean;
-  errorMessage?: string;
-  fieldType?: typeof Array | unknown;
-  inputRef?: Ref<HTMLButtonElement>;
-  onChange?(value?: Value): void;
-  showInlineError?: boolean;
-  transform?: (item?: string) => string;
-  value?: Value;
-};
-
-type CommonPropsValueElement<Value> = NonNullable<
-  Value extends Array<infer Element> ? Element : Value
->;
-
-type CheckboxesProps = Override<
-  Override<FormControlLabelProps, SelectionControlProps>,
-  CommonProps<string | string[]> & {
+type CheckboxesProps = FieldProps<
+  string | string[],
+  CheckboxProps | SwitchProps,
+  {
+    allowedValues?: string[];
+    appearance?: 'checkbox' | 'switch';
     checkboxes: true;
-    label?: ReactNode;
+    inputRef?: Ref<HTMLButtonElement>;
     legend?: string;
+    required?: boolean;
+    transform?(value: string): string;
   }
 >;
 
-// TODO: separate appearance allowed values based on SelectionControlProps type.
-type SelectionControlProps =
-  | (CheckboxProps & { appearance?: 'checkbox' | 'switch' })
-  | (SwitchProps & { appearance?: 'checkbox' | 'switch' });
-
-type SelectProps = Override<
+type SelectProps = FieldProps<
+  string | string[],
   TextFieldProps & MaterialSelectProps,
-  CommonProps<string | string[]> & {
+  {
+    allowedValues?: string[];
+    appearance?: 'checkbox' | 'switch';
     checkboxes?: false;
+    inputRef?: Ref<HTMLButtonElement>;
     labelProps?: object;
-    native?: boolean;
+    required?: boolean;
+    transform?(value: string): string;
   }
 >;
 
@@ -101,8 +90,7 @@ function Select(props: SelectFieldProps) {
         <RadioGroup
           id={id}
           name={name}
-          // FIXME: There's a problem with SelectFieldProps.
-          onChange={(event: any) => disabled || onChange!(event.target.value)}
+          onChange={event => disabled || onChange(event.target.value)}
           ref={inputRef}
           value={value ?? ''}
         >
@@ -126,8 +114,7 @@ function Select(props: SelectFieldProps) {
                   checked={value.includes(item)}
                   id={`${id}-${escape(item)}`}
                   name={name}
-                  // FIXME: There's a problem with SelectFieldProps.
-                  onChange={() => disabled || onChange!(xor(item, value))}
+                  onChange={() => disabled || onChange(xor(item, value))}
                   ref={inputRef}
                   value={name}
                   {...filteredProps}
@@ -196,8 +183,7 @@ function Select(props: SelectFieldProps) {
       margin={margin}
       onChange={event =>
         disabled ||
-        // FIXME: There's a problem with SelectFieldProps.
-        onChange!(event.target.value !== '' ? event.target.value : undefined)
+        onChange(event.target.value !== '' ? event.target.value : undefined)
       }
       required={required}
       select

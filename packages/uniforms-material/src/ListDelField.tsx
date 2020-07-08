@@ -1,16 +1,17 @@
 import IconButton, { IconButtonProps } from '@material-ui/core/IconButton';
 import React, { ReactNode } from 'react';
 import {
-  Override,
+  FieldProps,
   connectField,
   filterDOMProps,
   joinName,
   useField,
 } from 'uniforms';
 
-export type ListDelFieldProps = Override<
-  Omit<IconButtonProps, 'value'>,
-  { icon?: ReactNode; name: string }
+export type ListDelFieldProps = FieldProps<
+  unknown,
+  IconButtonProps,
+  { icon?: ReactNode }
 >;
 
 function ListDel({ disabled, icon = '-', name, ...props }: ListDelFieldProps) {

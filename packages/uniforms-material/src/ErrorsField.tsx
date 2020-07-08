@@ -3,7 +3,7 @@ import FormHelperText, {
   FormHelperTextProps,
 } from '@material-ui/core/FormHelperText';
 import React from 'react';
-import { filterDOMProps, Override, useForm } from 'uniforms';
+import { Override, filterDOMProps, useForm } from 'uniforms';
 
 export type ErrorsFieldProps = Override<
   FormHelperTextProps,

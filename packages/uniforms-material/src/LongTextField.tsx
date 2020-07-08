@@ -1,17 +1,8 @@
 import React, { ReactNode } from 'react';
 import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
-import { connectField, filterDOMProps, Override } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
-export type LongTextFieldProps = Override<
-  StandardTextFieldProps,
-  {
-    errorMessage?: string;
-    label?: ReactNode;
-    onChange(value?: string): void;
-    showInlineError?: boolean;
-    value?: string;
-  }
->;
+export type LongTextFieldProps = FieldProps<string, StandardTextFieldProps>;
 
 const LongText = ({
   disabled,

@@ -1,11 +1,10 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import { connectField, filterDOMProps, Override } from 'uniforms';
-import { StandardTextFieldProps } from '@material-ui/core/TextField/TextField';
+import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
-const dateFormat = value => value && value.toISOString().slice(0, -8);
-const dateParse = (timestamp, onChange) => {
+const dateFormat = (value?: Date) => value && value.toISOString().slice(0, -8);
+const dateParse = (timestamp: number, onChange: DateFieldProps['onChange']) => {
   const date = new DateConstructor(timestamp);
   if (date.getFullYear() < 10000) {
     onChange(date);
@@ -14,14 +13,10 @@ const dateParse = (timestamp, onChange) => {
   }
 };
 
-export type DateFieldProps = Override<
+export type DateFieldProps = FieldProps<
+  Date,
   StandardTextFieldProps,
-  {
-    errorMessage?: string;
-    error?: boolean;
-    labelProps?: object;
-    showInlineError?: boolean;
-  }
+  { labelProps?: object }
 >;
 
 function Date({
@@ -49,8 +44,9 @@ function Date({
       InputLabelProps={{ ...labelProps, ...InputLabelProps }}
       name={name}
       margin={props.margin ?? 'dense'}
-      onChange={(event: any) =>
-        disabled || dateParse(event.target.valueAsNumber, onChange)
+      onChange={event =>
+        // FIXME: `valueAsNumber` is not available in `EventTarget`.
+        disabled || dateParse((event.target as any).valueAsNumber, onChange)
       }
       placeholder={placeholder}
       ref={inputRef}
