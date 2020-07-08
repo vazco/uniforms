@@ -1,27 +1,15 @@
+import React, { Ref } from 'react';
 import classnames from 'classnames';
-import React, { HTMLProps, ReactNode, Ref } from 'react';
-import { connectField, filterDOMProps, Override } from 'uniforms';
+import { connectField, filterDOMProps, HTMLFieldProps } from 'uniforms';
 
-export type TextFieldProps = Override<
-  HTMLProps<HTMLDivElement>,
+export type TextFieldProps = HTMLFieldProps<
+  string,
+  HTMLDivElement,
   {
-    className?: string;
-    disabled: boolean;
-    error: unknown;
-    errorMessage: string;
     icon?: string;
     iconLeft?: string;
     iconProps?: object;
-    id: string;
     inputRef?: Ref<HTMLInputElement>;
-    label?: ReactNode;
-    name: string;
-    onChange(value?: string): void;
-    placeholder: string;
-    required?: boolean;
-    showInlineError: boolean;
-    type?: string;
-    value?: string;
     wrapClassName?: string;
   }
 >;

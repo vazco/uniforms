@@ -1,16 +1,19 @@
-import React, { HTMLProps } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import {
-  Override,
+  HTMLFieldProps,
+  connectField,
   filterDOMProps,
   joinName,
   useField,
-  connectField,
 } from 'uniforms';
 
-export type ListDelFieldProps = Override<
-  Omit<HTMLProps<HTMLSpanElement>, 'onChange'>,
-  { name: string }
+export type ListDelFieldProps = HTMLFieldProps<
+  unknown,
+  HTMLSpanElement,
+  {
+    name: string;
+  }
 >;
 
 function ListDel({ disabled, name, ...props }: ListDelFieldProps) {

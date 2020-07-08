@@ -1,23 +1,12 @@
+import React, { Ref } from 'react';
 import classnames from 'classnames';
-import React, { HTMLProps, ReactNode, Ref } from 'react';
-import { connectField, filterDOMProps, Override } from 'uniforms';
+import { connectField, filterDOMProps, HTMLFieldProps } from 'uniforms';
 
-export type LongTextFieldProps = Override<
-  HTMLProps<HTMLDivElement>,
+export type LongTextFieldProps = HTMLFieldProps<
+  string,
+  HTMLDivElement,
   {
-    className?: string;
-    disabled: boolean;
-    error: unknown;
-    errorMessage: string;
-    id: string;
     inputRef?: Ref<HTMLTextAreaElement>;
-    label?: ReactNode;
-    name: string;
-    onChange(value?: string): void;
-    placeholder: string;
-    required?: boolean;
-    showInlineError: boolean;
-    value?: string;
   }
 >;
 

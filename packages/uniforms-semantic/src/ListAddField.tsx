@@ -1,17 +1,20 @@
-import React, { HTMLProps } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import cloneDeep from 'lodash/cloneDeep';
 import {
+  HTMLFieldProps,
+  connectField,
   filterDOMProps,
   joinName,
-  Override,
   useField,
-  connectField,
 } from 'uniforms';
 
-export type ListAddFieldProps = Override<
-  Omit<HTMLProps<HTMLSpanElement>, 'onChange'>,
-  { initialCount?: number; name: string; value: unknown }
+export type ListAddFieldProps = HTMLFieldProps<
+  unknown,
+  HTMLSpanElement,
+  {
+    initialCount?: number;
+  }
 >;
 
 function ListAdd({ disabled, name, value, ...props }: ListAddFieldProps) {
