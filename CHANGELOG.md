@@ -11,6 +11,7 @@
 
   filterDOMProps.register('customPropToFilter');
   ```
+
 - **Fixed:** Escaping special characters. [\#753](https://github.com/vazco/uniforms/issues/753)
 
 ## [v3.0.0-alpha.5](https://github.com/vazco/uniforms/tree/v3.0.0-alpha.5) (2020-06-17)
