@@ -46,7 +46,7 @@ function Radio({
       name={name}
       onChange={(event: any) => disabled || onChange(event.target.value)}
       ref={inputRef}
-      value={value}
+      value={value ?? ''}
     >
       {allowedValues?.map(item => (
         <FormControlLabel

@@ -181,3 +181,10 @@ test('<RadioField> - renders a wrapper with unknown props', () => {
   expect(wrapper.find('div').at(0).prop('data-y')).toBe('y');
   expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });
+
+test('<RadioField> - works with special characters', () => {
+  mount(
+    <RadioField name="x" />,
+    createContext({ x: { type: String, allowedValues: ['ă', 'ș'] } }),
+  );
+});

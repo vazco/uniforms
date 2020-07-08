@@ -8,7 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import omit from 'lodash/omit';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, Ref } from 'react';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
 import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import { connectField, filterDOMProps, Override } from 'uniforms';
@@ -21,6 +21,7 @@ type CommonProps<Value> = {
   error?: boolean;
   errorMessage?: string;
   fieldType?: typeof Array | unknown;
+  inputRef?: Ref<HTMLButtonElement>;
   onChange?(value?: Value): void;
   showInlineError?: boolean;
   transform?: (item?: string) => string;
@@ -60,7 +61,7 @@ const base64 =
   typeof btoa !== 'undefined'
     ? btoa
     : (x: string) => Buffer.from(x).toString('base64');
-const escape = (x: string) => base64(x).replace(/=+$/, '');
+const escape = (x: string) => base64(encodeURIComponent(x)).replace(/=+$/, '');
 
 const xor = (item, array) => {
   const index = array.indexOf(item);
@@ -71,6 +72,7 @@ const xor = (item, array) => {
   return array.slice(0, index).concat(array.slice(index + 1));
 };
 
+// eslint-disable-next-line complexity
 function Select(props: SelectFieldProps) {
   const value = props.value ?? '';
   if (props.checkboxes) {

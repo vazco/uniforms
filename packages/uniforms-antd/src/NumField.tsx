@@ -7,11 +7,11 @@ import wrapField from './wrapField';
 const noneIfNaN = x => (isNaN(x) ? undefined : x);
 
 export type NumFieldProps = Override<
-  InputNumberProps,
+  Omit<InputNumberProps, 'onReset'>,
   {
     decimal?: boolean;
-    inputRef?: Ref<InputNumber>;
-    onChange(value?: number): void;
+    inputRef?: Ref<typeof InputNumber>;
+    onChange(value: number | undefined): void;
   }
 >;
 
@@ -24,6 +24,7 @@ function Num(props: NumFieldProps) {
       max={props.max}
       min={props.min}
       name={props.name}
+      // @ts-ignore filterDOMProps will remove onChange
       onChange={value => props.onChange(noneIfNaN(value))}
       placeholder={props.placeholder}
       ref={props.inputRef}

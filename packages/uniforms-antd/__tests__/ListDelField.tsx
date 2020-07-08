@@ -1,5 +1,5 @@
-import React from 'react';
 import merge from 'lodash/merge';
+import React from 'react';
 import { ListDelField } from 'uniforms-antd';
 
 import createContext from './_createContext';
@@ -27,7 +27,7 @@ test('<ListDelField> - prevents onClick when disabled', () => {
   const element = <ListDelField name="x.1" disabled />;
   const wrapper = mount(element, context());
 
-  expect(wrapper.find('i').simulate('click')).toBeTruthy();
+  expect(wrapper.find('span').simulate('click')).toBeTruthy();
   expect(onChange).not.toHaveBeenCalled();
 });
 
@@ -35,7 +35,7 @@ test('<ListDelField> - prevents onClick when limit reached', () => {
   const element = <ListDelField name="x.1" />;
   const wrapper = mount(element, context({ x: { minCount: 3 } }));
 
-  expect(wrapper.find('i').simulate('click')).toBeTruthy();
+  expect(wrapper.find('span').simulate('click')).toBeTruthy();
   expect(onChange).not.toHaveBeenCalled();
 });
 
@@ -43,6 +43,6 @@ test('<ListDelField> - correctly reacts on click', () => {
   const element = <ListDelField name="x.1" />;
   const wrapper = mount(element, context());
 
-  expect(wrapper.find('i').simulate('click')).toBeTruthy();
+  expect(wrapper.find('span').simulate('click')).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', ['x', 'z']);
 });

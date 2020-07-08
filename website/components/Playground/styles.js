@@ -23,7 +23,7 @@ const style = links =>
     .concat(common);
 const styles = {
   antd: style([
-    'https://cdnjs.cloudflare.com/ajax/libs/antd/3.19.0/antd.min.css'
+    'https://cdnjs.cloudflare.com/ajax/libs/antd/4.4.0/antd.min.css'
   ]),
 
   bootstrap3: style([

@@ -259,6 +259,13 @@ test('<SelectField> - renders a wrapper with unknown props', () => {
   expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });
 
+test('<SelectField> - works with special characters', () => {
+  mount(
+    <SelectField name="x" />,
+    createContext({ x: { type: String, allowedValues: ['ă', 'ș'] } }),
+  );
+});
+
 test('<SelectField checkboxes> - renders a set of checkboxes', () => {
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
@@ -479,4 +486,11 @@ test('<SelectField checkboxes> - renders a wrapper with unknown props', () => {
   expect(wrapper.find('div').at(0).prop('data-x')).toBe('x');
   expect(wrapper.find('div').at(0).prop('data-y')).toBe('y');
   expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
+});
+
+test('<SelectField checkboxes> - works with special characters', () => {
+  mount(
+    <SelectField checkboxes name="x" />,
+    createContext({ x: { type: String, allowedValues: ['ă', 'ș'] } }),
+  );
 });

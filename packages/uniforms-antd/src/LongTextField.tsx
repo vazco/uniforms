@@ -1,19 +1,14 @@
-import Input, { InputProps, TextAreaProps } from 'antd/lib/input';
 import React, { Ref } from 'react';
+import TextArea from 'antd/lib/input/TextArea';
+import { TextAreaProps } from 'antd/lib/input';
 import { connectField, filterDOMProps, Override } from 'uniforms';
 
 import wrapField from './wrapField';
 
-// NOTE: Input.TextArea was introduced in 2.12.0 and removed in 3.0.0.
-// istanbul ignore next
-const [TextArea, textAreaProps] = Input.TextArea
-  ? [Input.TextArea, {}]
-  : [Input, { type: 'textarea' }];
-
 export type LongTextFieldProps = Override<
-  (InputProps & { rows?: never }) | TextAreaProps,
+  Omit<TextAreaProps, 'onReset'>,
   {
-    inputRef?: Ref<Input>;
+    inputRef?: Ref<TextArea>;
     onChange(value?: any): void;
     prefix?: string;
     value?: string;
@@ -23,7 +18,6 @@ export type LongTextFieldProps = Override<
 function LongText(props: LongTextFieldProps) {
   return wrapField(
     props,
-    // @ts-ignore
     <TextArea
       disabled={props.disabled}
       id={props.id}
@@ -32,7 +26,6 @@ function LongText(props: LongTextFieldProps) {
       placeholder={props.placeholder}
       ref={props.inputRef}
       value={props.value ?? ''}
-      {...textAreaProps}
       {...filterDOMProps(props)}
     />,
   );
