@@ -28,16 +28,12 @@ describe('AutoForm', () => {
   });
 
   describe('when changed', () => {
-    // FIXME: AutoForm is not a valid Component.
-    const wrapper = mount<AutoForm | any>(
-      <AutoForm
-        onChange={onChange}
-        onChangeModel={onChangeModel}
-        schema={schema}
-      />,
-    );
-
     it('updates', () => {
+      // FIXME: AutoForm is not a valid Component.
+      const wrapper = mount<AutoForm | any>(
+        <AutoForm onChange={onChange} schema={schema} />,
+      );
+
       wrapper.instance().getContext().onChange('a', '2');
 
       expect(onChange).toHaveBeenCalledTimes(1);
@@ -45,6 +41,11 @@ describe('AutoForm', () => {
     });
 
     it('calls `onChangeModel`', () => {
+      // FIXME: AutoForm is not a valid Component.
+      const wrapper = mount<AutoForm | any>(
+        <AutoForm onChangeModel={onChangeModel} schema={schema} />,
+      );
+
       wrapper.instance().getContext().onChange('a', '2');
 
       expect(onChangeModel).toHaveBeenCalledTimes(1);
@@ -57,12 +58,13 @@ describe('AutoForm', () => {
       const field = () => null;
       const Field = connectField(field);
 
-      mount<AutoForm>(
+      // FIXME: AutoForm is not a valid Component.
+      mount<AutoForm | any>(
         <AutoForm
-          onChange={onChange}
-          schema={schema}
           autoField={Field}
           model={model}
+          onChange={onChange}
+          schema={schema}
         />,
       );
 
@@ -74,7 +76,7 @@ describe('AutoForm', () => {
     it('skips `onSubmit` until rendered (`autosave` = true)', async () => {
       // FIXME: AutoForm is not a valid Component.
       const wrapper = mount<AutoForm | any>(
-        <AutoForm onSubmit={onSubmit} schema={schema} autosave />,
+        <AutoForm autosave onSubmit={onSubmit} schema={schema} />,
       );
 
       expect(onSubmit).not.toBeCalled();
@@ -88,43 +90,50 @@ describe('AutoForm', () => {
   });
 
   describe('when reset', () => {
-    const intialModel = { a: 'foo' };
-    // FIXME: AutoForm is not a valid Component.
-    const wrapper = mount<AutoForm | any>(
-      <AutoForm
-        onSubmit={onSubmit}
-        schema={schema}
-        autosave
-        model={intialModel}
-      />,
-    );
-
     it('reset `model`', () => {
+      // FIXME: AutoForm is not a valid Component.
+      const wrapper = mount<AutoForm | any>(
+        <AutoForm autosave model={model} schema={schema} />,
+      );
+
       wrapper.instance().reset();
-      expect(wrapper.instance().getContext().model).toEqual(intialModel);
+      expect(wrapper.instance().getContext().model).toEqual(model);
     });
 
     it('resets state `changedMap`', () => {
+      // FIXME: AutoForm is not a valid Component.
+      const wrapper = mount<AutoForm | any>(
+        <AutoForm autosave model={model} onSubmit={onSubmit} schema={schema} />,
+      );
+
       wrapper.instance().reset();
       expect(wrapper.instance().getContext().changedMap).toEqual({});
     });
 
     it('resets state `changed`', () => {
+      // FIXME: AutoForm is not a valid Component.
+      const wrapper = mount<AutoForm | any>(
+        <AutoForm autosave model={model} onSubmit={onSubmit} schema={schema} />,
+      );
+
       wrapper.instance().reset();
       expect(wrapper.instance().getContext().changed).toEqual(false);
     });
   });
 
   describe('when updated', () => {
-    // FIXME: AutoForm is not a valid Component.
-    const wrapper = mount<AutoForm | any>(<AutoForm schema={schema} />);
-
     it('updates', () => {
+      // FIXME: AutoForm is not a valid Component.
+      const wrapper = mount<AutoForm | any>(<AutoForm schema={schema} />);
+
       wrapper.setProps({ model: {} });
       expect(wrapper.instance().props.model).toEqual({});
     });
 
     it('validates', () => {
+      // FIXME: AutoForm is not a valid Component.
+      const wrapper = mount<AutoForm | any>(<AutoForm schema={schema} />);
+
       wrapper.setProps({ model, validate: 'onChange' });
       expect(validator).toHaveBeenCalledTimes(1);
     });
