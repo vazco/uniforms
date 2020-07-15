@@ -51,6 +51,22 @@ describe('AutoForm', () => {
       expect(onChangeModel).toHaveBeenCalledTimes(1);
       expect(onChangeModel).toHaveBeenLastCalledWith({ a: '2' });
     });
+
+    it('updates `changed` and `changedMap`', () => {
+      // FIXME: AutoForm is not a valid Component.
+      const wrapper = mount<AutoForm | any>(<AutoForm schema={schema} />);
+
+      const context1 = wrapper.instance().getContext();
+      expect(context1).toHaveProperty('changed', false);
+      expect(context1).toHaveProperty('changedMap', {});
+
+      wrapper.instance().getContext().onChange('a', '2');
+
+      const context2 = wrapper.instance().getContext();
+      expect(context2).toHaveProperty('changed', true);
+      expect(context2).toHaveProperty('changedMap.a');
+      expect(context2.changedMap.a).toBeTruthy();
+    });
   });
 
   describe('when rendered', () => {
