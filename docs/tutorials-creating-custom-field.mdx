@@ -36,7 +36,7 @@ Our newly created `ImageField` looks like this:
 
 <CodeSection
   language="js"
-  replace={{ "'[^']*?/universal'": 'uniforms-semantic' }}
+  replace={{ "'[^']*?/universal'": "'uniforms-semantic'" }}
   source={require('!!raw-loader!./examples/Tutorial/ImageField')}
 />
 
@@ -50,7 +50,7 @@ Take a look at the form code:
 <CodeSection
   language="js"
   replace={{
-    "'[^']*?/universal'": 'uniforms-semantic',
+    "'[^']*?/universal'": "'uniforms-semantic'",
     './GuestSchema\\d': './GuestSchema'
   }}
   source={require('!!raw-loader!./examples/Tutorial/GuestFormFinal')}

@@ -3,7 +3,7 @@ import Frame, { FrameContextConsumer } from 'react-frame-component';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
-import { ValidatedForm, connectField, context } from 'uniforms';
+import { ValidatedForm, connectField, context, useForm } from 'uniforms';
 
 import playgroundStyles from './playground.module.css';
 import presets from './presets';
@@ -106,29 +106,37 @@ class PlaygroundForm extends ValidatedForm {
   }
 }
 
+const PlaygroundModelDebug = () => {
+  const { model } = useForm();
+  return (
+    <>
+      <br />
+      <br />
+      <pre>
+        <code>{`const model = ${JSON.stringify(model, null, 2)};`}</code>
+      </pre>
+    </>
+  );
+};
+
 class PlaygroundPreview extends Component {
   constructor() {
     super(...arguments);
 
-    this.state = { model: undefined };
-
-    this.onModel = this.onModel.bind(this);
     this._schema = eval(`(${this.props.value.schema})`);
   }
 
   UNSAFE_componentWillReceiveProps(props) {
     if (this.props.value.schema !== props.value.schema) {
-      this.onModel({});
       this._schema = eval(`(${props.value.schema})`);
     }
   }
 
-  onModel(model) {
-    this.setState({ model: JSON.stringify(model, null, 4) });
-  }
-
   render() {
-    const Form = themes[this.props.theme || 'unstyled'].AutoForm;
+    const { AutoFields, AutoForm, ErrorsField, SubmitField } = themes[
+      this.props.theme || 'unstyled'
+    ];
+
     const {
       asyncOnSubmit,
       asyncOnValidate,
@@ -157,11 +165,13 @@ class PlaygroundPreview extends Component {
         {this.props.errorMessage ? (
           <span children={this.props.errorMessage} />
         ) : (
-          <Form key={schema} onChangeModel={this.onModel} {...props} />
+          <AutoForm key={schema} {...props}>
+            <AutoFields />
+            <ErrorsField />
+            <SubmitField />
+            <PlaygroundModelDebug />
+          </AutoForm>
         )}
-
-        {this.state.model !== undefined && <br />}
-        {this.state.model !== undefined && <pre children={this.state.model} />}
       </PlaygroundWrap>
     );
   }

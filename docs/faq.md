@@ -218,14 +218,14 @@ Basically, you have to find out whether there is a difference between a current 
 Current form state can be accessed through the context (see [How can I know a current form state?](/docs/faq#how-can-i-know-a-current-form-state)) and form model can be passed as an ordinary prop:
 
 ```js
-function DifferentSubmitField(initialModel) {
+function DifferentSubmitField({ initialModel }) {
   const { model } = useForm();
   return <SubmitField disabled={isEqual(uniforms.model, initialModel)} />;
 }
 
 const ChangedForm = ({ model }) => (
   <AutoForm model={model}>
-    <DifferentSubmitField />
+    <DifferentSubmitField initialModel={model} />
   </AutoForm>
 );
 ```

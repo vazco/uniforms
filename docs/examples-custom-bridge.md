@@ -141,10 +141,13 @@ we have to supply the schema and validator and then we can take an advantage of 
 
 ```js
 import UserLoginSchema from './UserLoginSchema';
-import UserLoginSchemaBridge from './UserLoginSchemaBridge;
+import UserLoginSchemaBridge from './UserLoginSchemaBridge';
 import UserLoginSchemaValidator from './UserLoginSchemaValidator';
 
-const bridge = new UserLoginSchemaBridge(UserLoginSchema, UserLoginSchemaValidator);
+const bridge = new UserLoginSchemaBridge(
+  UserLoginSchema,
+  UserLoginSchemaValidator
+);
 
 <AutoForm schema={bridge} />;
 ```

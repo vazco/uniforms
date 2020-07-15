@@ -33,10 +33,10 @@ The `connectField` function accepts two arguments: the first one is a component 
 
 The table below lists all available options:
 
-|      Name      |       Type        |                                                          Description                                                          |
-| :------------: | :---------------: | :---------------------------------------------------------------------------------------------------------------------------: |
-| `initialValue` |      `bool`       | Initial value check. If truthy, then after the first render defaultValue is set as value if no value is provided (undefined). |
-|     `kind`     | `'leaf' | 'node'` |                             Defines field type. If you are not sure which one to use, use `node`.                             |
+|      Name      |         Type         |                                                          Description                                                          |
+| :------------: | :------------------: | :---------------------------------------------------------------------------------------------------------------------------: |
+| `initialValue` |        `bool`        | Initial value check. If truthy, then after the first render defaultValue is set as value if no value is provided (undefined). |
+|     `kind`     | `'leaf'` or `'node'` |                             Defines field type. If you are not sure which one to use, use `node`.                             |
 
 ## `changedKeys(root, valueA, valueB)`
 
