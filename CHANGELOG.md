@@ -1,5 +1,8 @@
 ## Next
 
+- **Breaking:** Minimum `antd` version for `uniforms-antd` is `4.0.0`. [\#696](https://github.com/vazco/uniforms/issues/696)
+- **Breaking:** Minimum `@material-ui/core` version for `uniforms-material` is `4.0.0`. [\#758](https://github.com/vazco/uniforms/issues/758)
+- **Added:** New `FieldProps` and `HTMLFieldProps` utility types. [\#760](https://github.com/vazco/uniforms/issues/760)
 - **Added:** Improved typing of `filterDOMProps`. To properly register a new property, extend `FilterDOMProps` interface. [\#763](https://github.com/vazco/uniforms/issues/763)
 
   ```ts
@@ -13,6 +16,7 @@
   ```
 
 - **Fixed:** Escaping special characters. [\#753](https://github.com/vazco/uniforms/issues/753)
+- **Fixed:** Changed state of `AutoForm` regression. [\#765](https://github.com/vazco/uniforms/issues/765)
 
 ## [v3.0.0-alpha.5](https://github.com/vazco/uniforms/tree/v3.0.0-alpha.5) (2020-06-17)
 
