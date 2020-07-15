@@ -4,13 +4,7 @@ import { connectField } from 'uniforms';
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
 
-export type ListItemFieldProps = {
-  children?: ReactNode;
-  label?: ReactNode;
-  labelCol?: string;
-  name: string;
-  wrapperCol?: any;
-};
+export type ListItemFieldProps = { children?: ReactNode };
 
 function ListItem({
   children = <AutoField label={null} name="" />,

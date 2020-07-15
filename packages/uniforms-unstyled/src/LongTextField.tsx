@@ -1,19 +1,10 @@
-import React, { HTMLProps, ReactNode, Ref } from 'react';
-import { connectField, filterDOMProps, Override } from 'uniforms';
+import React, { Ref } from 'react';
+import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
-export type LongTextFieldProps = Override<
-  HTMLProps<HTMLDivElement>,
-  {
-    disabled: boolean;
-    id: string;
-    inputRef?: Ref<HTMLTextAreaElement>;
-    label?: ReactNode;
-    name: string;
-    onChange(value?: string): void;
-    placeholder: string;
-    type?: string;
-    value?: string;
-  }
+export type LongTextFieldProps = HTMLFieldProps<
+  string,
+  HTMLDivElement,
+  { inputRef?: Ref<HTMLTextAreaElement> }
 >;
 
 function LongText({

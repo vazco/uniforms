@@ -1,27 +1,18 @@
-import Button from '@material-ui/core/Button';
-import React, { HTMLProps, Ref } from 'react';
-import { ExtendButtonBaseTypeMap } from '@material-ui/core/ButtonBase/ButtonBase';
-import { filterDOMProps, Override, useForm } from 'uniforms';
-import { OverrideProps } from '@material-ui/core/OverridableComponent';
+import Button, { ButtonProps } from '@material-ui/core/Button';
+import React, { ReactNode, Ref } from 'react';
+import { Override, filterDOMProps, useForm } from 'uniforms';
 
 export type SubmitFieldProps = Override<
-  HTMLProps<HTMLInputElement>,
-  {
-    disabled?: boolean;
-    href: string;
-    inputRef?: Ref<HTMLInputElement>;
-    name: string;
-    value?: string;
-  }
-> &
-  OverrideProps<ExtendButtonBaseTypeMap<any>, 'a'>;
+  ButtonProps,
+  // FIXME: What kind of `ref` is it?
+  { inputRef?: Ref<any>; label?: ReactNode }
+>;
 
 function SubmitField({
   children,
   disabled,
   inputRef,
   label,
-  name,
   value,
   ...props
 }: SubmitFieldProps) {

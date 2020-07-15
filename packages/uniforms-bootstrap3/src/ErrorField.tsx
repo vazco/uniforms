@@ -1,13 +1,10 @@
-import classnames from 'classnames';
 import React, { HTMLProps } from 'react';
+import classnames from 'classnames';
 import { connectField, filterDOMProps, Override } from 'uniforms';
 
 export type ErrorFieldProps = Override<
   Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
-  {
-    error?: any;
-    errorMessage?: string;
-  }
+  { error?: any; errorMessage?: string }
 >;
 
 function Error({

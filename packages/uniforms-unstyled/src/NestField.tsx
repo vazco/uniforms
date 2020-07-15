@@ -1,15 +1,12 @@
-import React, { HTMLProps } from 'react';
-import { Override, connectField, filterDOMProps } from 'uniforms';
+import React from 'react';
+import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import AutoField from './AutoField';
 
-export type NestFieldProps = Override<
-  Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
-  {
-    fields?: any[];
-    itemProps?: object;
-    name: string;
-  }
+export type NestFieldProps = HTMLFieldProps<
+  object,
+  HTMLDivElement,
+  { itemProps?: object }
 >;
 
 function Nest({
@@ -24,7 +21,7 @@ function Nest({
     <div {...filterDOMProps(props)}>
       {label && <label>{label}</label>}
       {children ||
-        fields?.map(field => (
+        fields.map(field => (
           <AutoField key={field} name={field} {...itemProps} />
         ))}
     </div>

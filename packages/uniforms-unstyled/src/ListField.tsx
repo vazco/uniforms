@@ -1,25 +1,13 @@
-import React, {
-  Children,
-  HTMLProps,
-  ReactNode,
-  cloneElement,
-  isValidElement,
-} from 'react';
-import { Override, connectField, filterDOMProps } from 'uniforms';
+import React, { Children, cloneElement, isValidElement } from 'react';
+import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';
 
-export type ListFieldProps = Override<
-  Omit<HTMLProps<HTMLUListElement>, 'onChange'>,
-  {
-    children?: ReactNode;
-    initialCount?: number;
-    itemProps?: {};
-    label?: ReactNode;
-    name: string;
-    value: unknown[];
-  }
+export type ListFieldProps = HTMLFieldProps<
+  unknown[],
+  HTMLUListElement,
+  { initialCount?: number; itemProps?: object }
 >;
 
 function List({
@@ -39,7 +27,7 @@ function List({
         </label>
       )}
 
-      {value.map((item, itemIndex) =>
+      {value?.map((item, itemIndex) =>
         Children.map(children, (child, childIndex) =>
           isValidElement(child)
             ? cloneElement(child, {

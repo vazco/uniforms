@@ -1,28 +1,14 @@
-import React, {
-  Children,
-  HTMLProps,
-  ReactNode,
-  cloneElement,
-  isValidElement,
-} from 'react';
+import React, { Children, cloneElement, isValidElement } from 'react';
 import classnames from 'classnames';
-import { Override, connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, HTMLFieldProps } from 'uniforms';
 
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';
 
-export type ListFieldProps = Override<
-  Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
-  {
-    children?: ReactNode;
-    error?: boolean;
-    errorMessage?: string;
-    initialCount?: number;
-    itemProps?: {};
-    name: string;
-    showInlineError?: boolean;
-    value: unknown[];
-  }
+export type ListFieldProps = HTMLFieldProps<
+  unknown[],
+  HTMLDivElement,
+  { initialCount?: number; itemProps?: {} }
 >;
 
 function List({
@@ -70,7 +56,7 @@ function List({
         <div className="ui red basic label">{errorMessage}</div>
       )}
 
-      {value.map((item, itemIndex) =>
+      {value?.map((item, itemIndex) =>
         Children.map(children, (child, childIndex) =>
           isValidElement(child)
             ? cloneElement(child, {

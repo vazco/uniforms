@@ -2,27 +2,19 @@ import ListMaterial, { ListProps } from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import React, {
   Children,
-  HTMLProps,
   ReactNode,
   cloneElement,
   isValidElement,
 } from 'react';
-import { Override, connectField, filterDOMProps } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';
 
-export type ListFieldProps = Override<
-  Omit<ListProps, 'onChange'>,
-  {
-    addIcon?: ReactNode;
-    children?: ReactNode;
-    initialCount?: number;
-    itemProps?: {};
-    label?: ReactNode;
-    name: string;
-    value: unknown[];
-  }
+export type ListFieldProps = FieldProps<
+  unknown[],
+  ListProps,
+  { addIcon?: ReactNode; initialCount?: number; itemProps?: {} }
 >;
 
 function List({
@@ -47,7 +39,7 @@ function List({
         }
         {...filterDOMProps(props)}
       >
-        {value.map((item, itemIndex) =>
+        {value?.map((item, itemIndex) =>
           Children.map(children, (child, childIndex) =>
             isValidElement(child)
               ? cloneElement(child, {

@@ -1,29 +1,16 @@
 import classnames from 'classnames';
-import React, { HTMLProps, ReactNode, Ref } from 'react';
-import { connectField, filterDOMProps, Override } from 'uniforms';
+import React, { Ref } from 'react';
+import { connectField, filterDOMProps, HTMLFieldProps } from 'uniforms';
 
-export type NumFieldProps = Override<
-  HTMLProps<HTMLDivElement>,
+export type NumFieldProps = HTMLFieldProps<
+  number,
+  HTMLDivElement,
   {
-    className?: string;
     decimal?: boolean;
-    disabled: boolean;
-    error: unknown;
-    errorMessage: string;
     icon?: string;
     iconLeft?: string;
     iconProps?: object;
-    id: string;
     inputRef?: Ref<HTMLInputElement>;
-    label?: ReactNode;
-    max?: number;
-    min?: number;
-    name: string;
-    onChange(value?: number): void;
-    placeholder: string;
-    showInlineError: boolean;
-    step?: number;
-    value?: number;
     wrapClassName?: string;
   }
 >;

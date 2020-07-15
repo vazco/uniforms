@@ -1,6 +1,6 @@
+import React, { Ref } from 'react';
 import classnames from 'classnames';
-import React, { HTMLProps, ReactNode, Ref } from 'react';
-import { connectField, Override } from 'uniforms';
+import { connectField, HTMLFieldProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
@@ -19,27 +19,16 @@ const xor = (item, array) => {
   return array.slice(0, index).concat(array.slice(index + 1));
 };
 
-export type SelectFieldProps = Override<
-  HTMLProps<HTMLDivElement>,
+export type SelectFieldProps = HTMLFieldProps<
+  string | string[],
+  HTMLDivElement,
   {
     allowedValues?: string[];
     checkboxes?: boolean;
-    disabled: boolean;
-    error?: unknown;
-    errorMessage?: string;
-    fieldType: unknown;
-    id: string;
     inline?: boolean;
     inputClassName?: string;
     inputRef?: Ref<HTMLSelectElement>;
-    label?: ReactNode;
-    name: string;
-    onChange(value?: string | string[]): void;
-    placeholder: string;
-    required?: boolean;
-    showInlineError?: boolean;
     transform?(value: string): string;
-    value?: string | string[];
   }
 >;
 

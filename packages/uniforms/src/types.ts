@@ -1,4 +1,4 @@
-import { ReactNode, SyntheticEvent } from 'react';
+import { HTMLProps, ReactNode, SyntheticEvent } from 'react';
 
 import { Bridge } from './Bridge';
 
@@ -30,6 +30,11 @@ export type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends {} ? DeepPartial<T[P]> : T[P];
 };
 
+export type FieldProps<Value, Base, Extension = {}> = Override<
+  Base,
+  GuaranteedProps<Value> & Extension
+>;
+
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FilterDOMProps {}
 
@@ -49,6 +54,12 @@ export type GuaranteedProps<Value> = {
   showInlineError: boolean;
   value?: Value;
 };
+
+export type HTMLFieldProps<Value, Element, Extension = {}> = FieldProps<
+  Value,
+  HTMLProps<Element>,
+  Extension
+>;
 
 export type ModelTransformMode = 'form' | 'submit' | 'validate';
 

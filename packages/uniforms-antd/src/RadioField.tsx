@@ -1,17 +1,13 @@
 import RadioAntD, { RadioProps } from 'antd/lib/radio';
 import React from 'react';
-import { connectField, filterDOMProps, Override } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
-export type RadioFieldProps = Override<
+export type RadioFieldProps = FieldProps<
+  string,
   RadioProps,
-  {
-    allowedValues?: string[];
-    onChange(value?: string): void;
-    transform?(value: string): string;
-    value?: string;
-  }
+  { allowedValues?: string[]; transform?(value: string): string }
 >;
 
 function Radio(props: RadioFieldProps) {
@@ -20,7 +16,6 @@ function Radio(props: RadioFieldProps) {
     <RadioAntD.Group
       disabled={props.disabled}
       name={props.name}
-      // @ts-ignore filterDOMProps will remove onChange
       onChange={event => props.onChange(event.target.value)}
       value={props.value ?? ''}
       {...filterDOMProps(props)}

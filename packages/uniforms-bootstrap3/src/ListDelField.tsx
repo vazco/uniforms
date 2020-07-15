@@ -1,20 +1,17 @@
-import React, { HTMLProps, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import classnames from 'classnames';
 import {
-  Override,
+  HTMLFieldProps,
+  connectField,
   filterDOMProps,
   joinName,
   useField,
-  connectField,
 } from 'uniforms';
 
-export type ListDelFieldProps = Override<
-  Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
-  {
-    name: string;
-    parent?: any;
-    removeIcon?: ReactNode;
-  }
+export type ListDelFieldProps = HTMLFieldProps<
+  unknown,
+  HTMLDivElement,
+  { removeIcon?: ReactNode }
 >;
 
 function ListDel({

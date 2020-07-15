@@ -1,20 +1,17 @@
+import React, { Ref } from 'react';
 import classnames from 'classnames';
-import React, { HTMLProps, Ref } from 'react';
-import { connectField, Override } from 'uniforms';
+import { connectField, HTMLFieldProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
-export type BoolFieldProps = Override<
-  HTMLProps<HTMLDivElement>,
+export type BoolFieldProps = HTMLFieldProps<
+  boolean,
+  HTMLDivElement,
   {
-    disabled?: boolean;
-    error?: boolean;
     inline?: boolean;
     inputClassName?: string;
     inputRef?: Ref<HTMLInputElement>;
     labelBefore?: string;
-    onChange(value?: boolean): void;
-    value?: boolean;
   }
 >;
 

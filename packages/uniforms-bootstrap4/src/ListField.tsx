@@ -1,29 +1,23 @@
 import React, {
   Children,
-  HTMLProps,
-  ReactNode,
   cloneElement,
   isValidElement,
+  ReactNode,
 } from 'react';
 import classnames from 'classnames';
-import { Override, connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, HTMLFieldProps } from 'uniforms';
 
-import ListItemField from './ListItemField';
 import ListAddField from './ListAddField';
+import ListItemField from './ListItemField';
 
-export type ListFieldProps = Override<
-  Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
+export type ListFieldProps = HTMLFieldProps<
+  unknown[],
+  HTMLDivElement,
   {
     addIcon?: ReactNode;
-    children?: ReactNode;
-    error?: boolean;
-    errorMessage?: string;
     initialCount?: number;
     itemProps?: {};
-    name: string;
     removeIcon?: ReactNode;
-    showInlineError?: boolean;
-    value: unknown[];
   }
 >;
 
@@ -63,7 +57,7 @@ function List({
           </div>
         )}
 
-        {value.map((item, itemIndex) =>
+        {value?.map((item, itemIndex) =>
           Children.map(children, (child, childIndex) =>
             isValidElement(child)
               ? cloneElement(child, {

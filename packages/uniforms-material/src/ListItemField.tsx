@@ -15,13 +15,12 @@ export type ListItemFieldProps = {
   dense?: ListItemProps['dense'];
   disableGutters?: ListItemProps['disableGutters'];
   divider?: ListItemProps['divider'];
-  name: string;
   removeIcon?: ReactNode;
 };
 
 function ListItem({
   children = <AutoField label={null} name="" />,
-  dense,
+  dense = true,
   disableGutters,
   divider,
   removeIcon,
@@ -37,9 +36,5 @@ function ListItem({
     </ListItemMaterial>
   );
 }
-
-ListItem.defaultProps = {
-  dense: true,
-};
 
 export default connectField(ListItem, { initialValue: false });

@@ -3,22 +3,21 @@ import IconButton, { IconButtonProps } from '@material-ui/core/IconButton';
 import React, { ReactNode } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
 import {
-  Override,
+  FieldProps,
   connectField,
   filterDOMProps,
   joinName,
   useField,
 } from 'uniforms';
 
-export type ListAddFieldProps = Override<
+export type ListAddFieldProps = FieldProps<
+  unknown,
   IconButtonProps,
   {
     fullWidth?: FormControlProps['fullWidth'];
     icon?: ReactNode;
     initialCount?: number;
     margin?: FormControlProps['margin'];
-    name: string;
-    value: unknown;
     variant?: FormControlProps['variant'];
   }
 >;

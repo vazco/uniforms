@@ -4,11 +4,7 @@ import { filterDOMProps, Override, useForm } from 'uniforms';
 
 export type SubmitFieldProps = Override<
   HTMLProps<HTMLInputElement>,
-  {
-    disabled?: boolean;
-    inputRef?: Ref<HTMLInputElement>;
-    value?: string;
-  }
+  { disabled?: boolean; inputRef?: Ref<HTMLInputElement>; value?: string }
 >;
 
 export default function SubmitField({

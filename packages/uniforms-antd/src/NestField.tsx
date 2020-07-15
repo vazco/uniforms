@@ -1,18 +1,12 @@
 import React, { HTMLProps } from 'react';
-import { Override, connectField, filterDOMProps } from 'uniforms';
+import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import AutoField from './AutoField';
 
-export type NestFieldProps = Override<
-  Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
-  {
-    error?: boolean;
-    errorMessage?: string;
-    fields?: any[];
-    itemProps?: object;
-    name: string;
-    showInlineError?: boolean;
-  }
+export type NestFieldProps = HTMLFieldProps<
+  object,
+  HTMLDivElement,
+  { itemProps?: object }
 >;
 
 function Nest({
@@ -33,7 +27,7 @@ function Nest({
       {!!(error && showInlineError) && <div>{errorMessage}</div>}
 
       {children ||
-        fields?.map(field => (
+        fields.map(field => (
           <AutoField key={field} name={field} {...itemProps} />
         ))}
     </div>

@@ -1,23 +1,18 @@
-import React, { HTMLProps, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import classnames from 'classnames';
 import cloneDeep from 'lodash/cloneDeep';
 import {
-  Override,
+  HTMLFieldProps,
+  connectField,
   filterDOMProps,
   joinName,
   useField,
-  connectField,
 } from 'uniforms';
 
-export type ListAddFieldProps = Override<
-  Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
-  {
-    addIcon?: ReactNode;
-    initialCount?: number;
-    name: string;
-    parent?: any;
-    value?: unknown;
-  }
+export type ListAddFieldProps = HTMLFieldProps<
+  unknown,
+  HTMLDivElement,
+  { addIcon?: ReactNode; initialCount?: number }
 >;
 
 function ListAdd({

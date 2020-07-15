@@ -1,19 +1,11 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import { connectField, filterDOMProps, Override } from 'uniforms';
-import { StandardTextFieldProps } from '@material-ui/core/TextField/TextField';
+import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
-export type NumFieldProps = Override<
+export type NumFieldProps = FieldProps<
+  number,
   StandardTextFieldProps,
-  {
-    decimal?: boolean;
-    errorMessage?: string;
-    max?: number;
-    min?: number;
-    onChange?(value?: number): void;
-    showInlineError?: boolean;
-    value?: number;
-  }
+  { decimal?: boolean; max?: number; min?: number }
 >;
 
 function Num({
@@ -45,8 +37,7 @@ function Num({
       onChange={event => {
         const parse = decimal ? parseFloat : parseInt;
         const value = parse(event.target.value);
-        // FIXME: There's a problem with NumFieldProps.
-        onChange!(isNaN(value) ? undefined : value);
+        onChange(isNaN(value) ? undefined : value);
       }}
       placeholder={placeholder}
       ref={inputRef}

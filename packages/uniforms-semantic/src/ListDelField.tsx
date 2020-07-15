@@ -1,15 +1,16 @@
-import React, { HTMLProps } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import {
-  Override,
+  HTMLFieldProps,
+  connectField,
   filterDOMProps,
   joinName,
   useField,
-  connectField,
 } from 'uniforms';
 
-export type ListDelFieldProps = Override<
-  Omit<HTMLProps<HTMLSpanElement>, 'onChange'>,
+export type ListDelFieldProps = HTMLFieldProps<
+  unknown,
+  HTMLSpanElement,
   { name: string }
 >;
 
