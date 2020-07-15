@@ -1,4 +1,4 @@
-## Next
+## [v3.0.0-rc.0](https://github.com/vazco/uniforms/tree/v3.0.0-rc.0) (2020-07-15)
 
 - **Breaking:** Minimum `antd` version for `uniforms-antd` is `4.0.0`. [\#696](https://github.com/vazco/uniforms/issues/696)
 - **Breaking:** Minimum `@material-ui/core` version for `uniforms-material` is `4.0.0`. [\#758](https://github.com/vazco/uniforms/issues/758)
