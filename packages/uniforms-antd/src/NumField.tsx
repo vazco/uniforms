@@ -4,7 +4,7 @@ import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
-const noneIfNaN = x => (isNaN(x) ? undefined : x);
+const noneIfNaN = (x: number) => (isNaN(x) ? undefined : x);
 
 export type NumFieldProps = FieldProps<
   number,
@@ -21,7 +21,7 @@ function Num(props: NumFieldProps) {
       max={props.max}
       min={props.min}
       name={props.name}
-      onChange={value => props.onChange(noneIfNaN(value))}
+      onChange={value => props.onChange(noneIfNaN(value as number))}
       placeholder={props.placeholder}
       ref={props.inputRef}
       step={props.step || (props.decimal ? 0.01 : 1)}

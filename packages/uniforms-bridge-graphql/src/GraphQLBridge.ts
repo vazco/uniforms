@@ -5,29 +5,28 @@ import memoize from 'lodash/memoize';
 import upperFirst from 'lodash/upperFirst';
 import { Bridge, joinName } from 'uniforms';
 
-const extractValue = (...xs) =>
-  xs.reduce((x, y) =>
-    x === false || x === null ? '' : x !== true && x !== undefined ? x : y,
-  );
+function extractValue(x: boolean | null | string | undefined, y: string) {
+  return x === false || x === null ? '' : x !== true && x !== undefined ? x : y;
+}
 
-const extractFromNonNull = x =>
-  x && x.type instanceof graphql.GraphQLNonNull
+// FIXME: What type is it? Maybe there's a helper in `graphql` for that?
+function extractFromNonNull(x: any) {
+  return x && x.type instanceof graphql.GraphQLNonNull
     ? { ...x, type: x.type.ofType }
     : x;
+}
 
-const toHumanLabel = (label: string): string => upperFirst(lowerCase(label));
+function toHumanLabel(label: string) {
+  return upperFirst(lowerCase(label));
+}
 
 export default class GraphQLBridge extends Bridge {
-  extras: any;
-  schema: any;
-  validator: any;
-
-  constructor(schema, validator, extras = {}) {
+  constructor(
+    public schema: graphql.GraphQLInputObjectType | graphql.GraphQLObjectType,
+    public validator: (model: Record<string, any>) => any,
+    public extras: Record<string, any> = {},
+  ) {
     super();
-
-    this.extras = extras;
-    this.schema = schema;
-    this.validator = validator;
 
     // Memoize for performance and referential equality.
     this.getField = memoize(
@@ -38,25 +37,23 @@ export default class GraphQLBridge extends Bridge {
     this.getType = memoize(this.getType);
   }
 
-  getError(name, error) {
+  getError(name: string, error: any) {
     return (
-      (error &&
-        error.details &&
-        error.details.find &&
-        error.details.find(error => error.name === name)) ||
-      null
+      // FIXME: Correct type for `error`.
+      error?.details?.find?.((error: any) => error.name === name) || null
     );
   }
 
-  getErrorMessage(name, error) {
+  getErrorMessage(name: string, error: any) {
     const scopedError = this.getError(name, error);
     return !scopedError ? '' : scopedError.message;
   }
 
-  getErrorMessages(error) {
+  getErrorMessages(error: any) {
     if (error) {
       if (Array.isArray(error.details)) {
-        return error.details.map(error => error.message);
+        // FIXME: Correct type for `error`.
+        return (error.details as any[]).map(error => error.message);
       }
 
       if (error.message) {
@@ -71,7 +68,7 @@ export default class GraphQLBridge extends Bridge {
     return [];
   }
 
-  getField(name, returnExtracted = true) {
+  getField(name: string, returnExtracted = true) {
     return joinName(null, name).reduce((definition, next, index, array) => {
       if (next === '$' || next === '' + parseInt(next, 10)) {
         invariant(
@@ -80,9 +77,12 @@ export default class GraphQLBridge extends Bridge {
           name,
         );
         definition = { type: extractFromNonNull(definition.type.ofType) };
+        // @ts-ignore: Not public API.
       } else if (definition.type && definition.type._fields) {
+        // @ts-ignore: Not public API.
         definition = definition.type._fields[next];
       } else {
+        // @ts-ignore: Incorrect `definition` type.
         definition = definition[next];
       }
 
@@ -113,12 +113,12 @@ export default class GraphQLBridge extends Bridge {
     }, this.schema.getFields());
   }
 
-  getInitialValue(name, props: any = {}) {
+  getInitialValue(name: string, props: Record<string, any> = {}): any {
     const type = this.getType(name);
 
     if (type === Array) {
       const item = this.getInitialValue(joinName(name, '0'));
-      const items = props.initialCount || 0;
+      const items = (props.initialCount as number) || 0;
 
       return Array.from({ length: items }, () => item);
     }
@@ -130,12 +130,12 @@ export default class GraphQLBridge extends Bridge {
     const defaultValue = this.getField(name).defaultValue;
 
     return defaultValue === undefined
-      ? this.extras[name] && this.extras[name].initialValue
+      ? this.extras[name]?.initialValue
       : defaultValue;
   }
 
   // eslint-disable-next-line complexity
-  getProps(nameNormal, props: any = {}) {
+  getProps(nameNormal: string, props: Record<string, any> = {}) {
     const nameGeneric = nameNormal.replace(/\.\d+/g, '.$');
 
     const field = this.getField(nameGeneric, false);
@@ -154,15 +154,16 @@ export default class GraphQLBridge extends Bridge {
       ready.decimal = true;
     }
 
+    // @ts-ignore: `field.name` is not a string?
     ready.label = extractValue(ready.label, toHumanLabel(field.name));
 
     const options = props.options || ready.options;
     if (options) {
       if (!Array.isArray(options)) {
-        ready.transform = value => options[value];
+        ready.transform = (value: any) => options[value];
         ready.allowedValues = Object.keys(options);
       } else {
-        ready.transform = value =>
+        ready.transform = (value: any) =>
           options.find(option => option.value === value).label;
         ready.allowedValues = options.map(option => option.value);
       }
@@ -188,7 +189,7 @@ export default class GraphQLBridge extends Bridge {
     return [];
   }
 
-  getType(name) {
+  getType(name: string) {
     const fieldType = this.getField(name).type;
 
     if (fieldType instanceof graphql.GraphQLList) return Array;

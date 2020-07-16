@@ -7,7 +7,6 @@
     "importHelpers": true,
     "jsx": "react",
     "moduleResolution": "node",
-    "noImplicitAny": false,
     "paths": {
       "uniforms": ["uniforms/src"],
       "uniforms/*": ["uniforms/src/*"],

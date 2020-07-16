@@ -113,7 +113,7 @@ describe('ValidatedForm', () => {
 
     it('uses `modelTransform`s `validate` mode', () => {
       const transformedModel = { b: 1 };
-      const modelTransform = (mode, model) =>
+      const modelTransform = (mode: string, model: Record<string, any>) =>
         mode === 'validate' ? transformedModel : model;
       wrapper.setProps({ modelTransform });
       form.validate();
@@ -123,9 +123,18 @@ describe('ValidatedForm', () => {
   });
 
   describe('when submitted', () => {
-    let wrapper;
+    // FIXME: ValidatedForm is not a valid Component.
+    let wrapper = mount<ValidatedForm | any>(
+      <ValidatedForm
+        model={model}
+        schema={schema}
+        onSubmit={onSubmit}
+        onValidate={onValidate}
+      />,
+    );
+
     beforeEach(() => {
-      wrapper = mount<ValidatedForm>(
+      wrapper = mount<ValidatedForm | any>(
         <ValidatedForm
           model={model}
           schema={schema}
@@ -194,9 +203,17 @@ describe('ValidatedForm', () => {
     });
 
     describe('in `onChangeAfterSubmit` mode', () => {
-      let wrapper;
+      // FIXME: ValidatedForm is not a valid Component.
+      let wrapper = mount<ValidatedForm | any>(
+        <ValidatedForm
+          model={model}
+          schema={schema}
+          validate="onChangeAfterSubmit"
+        />,
+      );
+
       beforeEach(() => {
-        wrapper = mount<ValidatedForm>(
+        wrapper = mount<ValidatedForm | any>(
           <ValidatedForm
             model={model}
             schema={schema}
@@ -242,9 +259,13 @@ describe('ValidatedForm', () => {
     const anotherModel = { x: 2 };
 
     describe('in `onChange` mode', () => {
-      let wrapper;
+      // FIXME: ValidatedForm is not a valid Component.
+      let wrapper = mount<ValidatedForm | any>(
+        <ValidatedForm model={model} schema={schema} validate="onChange" />,
+      );
+
       beforeEach(() => {
-        wrapper = mount<ValidatedForm>(
+        wrapper = mount<ValidatedForm | any>(
           <ValidatedForm model={model} schema={schema} validate="onChange" />,
         );
       });
@@ -271,9 +292,13 @@ describe('ValidatedForm', () => {
     });
 
     describe('in `onSubmit` mode', () => {
-      let wrapper;
+      // FIXME: ValidatedForm is not a valid Component.
+      let wrapper = mount<ValidatedForm | any>(
+        <ValidatedForm model={model} schema={schema} validate="onSubmit" />,
+      );
+
       beforeEach(() => {
-        wrapper = mount<ValidatedForm>(
+        wrapper = mount<ValidatedForm | any>(
           <ValidatedForm model={model} schema={schema} validate="onSubmit" />,
         );
       });
@@ -295,9 +320,13 @@ describe('ValidatedForm', () => {
     });
 
     describe('in any mode', () => {
-      let wrapper;
+      // FIXME: ValidatedForm is not a valid Component.
+      let wrapper = mount<ValidatedForm | any>(
+        <ValidatedForm model={model} schema={schema} />,
+      );
+
       beforeEach(() => {
-        wrapper = mount<ValidatedForm>(
+        wrapper = mount<ValidatedForm | any>(
           <ValidatedForm model={model} schema={schema} />,
         );
       });
@@ -363,8 +392,8 @@ describe('ValidatedForm', () => {
         'good-async-silent': () => Promise.resolve(),
         'good-sync': () => null,
         'good-sync-silent': () => {},
-        'pass-async': (_, error) => Promise.resolve(error),
-        'pass-sync': (_, error) => error,
+        'pass-async': (_: string, error: any) => Promise.resolve(error),
+        'pass-sync': (_: string, error: any) => error,
       },
       {
         'fail-async': () =>
@@ -397,7 +426,10 @@ describe('ValidatedForm', () => {
     const schema = new SimpleSchemaBridge(schemaDefinition);
     schema.getValidator = () => validator;
 
-    const flatPair4 = ([a, [b, [c, d]]]) => [a, b, c, d] as const;
+    function flatPair4<A, B, C, D>([a, [b, [c, d]]]: [A, [B, [C, D]]]) {
+      return [a, b, c, d] as const;
+    }
+
     it.each(cases.map(flatPair4))('works for %p/%p/%p/%p', async (...modes) => {
       const [hasError, validatorMode, onValidateMode, onSubmitMode] = modes;
       // FIXME: ValidatedForm is not a valid Component.

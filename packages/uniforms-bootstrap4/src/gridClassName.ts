@@ -19,20 +19,15 @@ function gridClassNamePart(
     : `col-${sizeInfix}${12 - value}`;
 }
 
-const gridOrder = {
-  xs: 1,
-  sm: 2,
-  md: 3,
-  lg: 4,
-  xl: 5,
-};
+type GridSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+const gridOrder = { xs: 1, sm: 2, md: 3, lg: 4, xl: 5 };
 
-function compareSizeClass(a, b) {
+function compareSizeClass(a: GridSize, b: GridSize) {
   return gridOrder[a] - gridOrder[b];
 }
 
 export default function gridClassName(
-  grid?: number | string | Record<string, number>,
+  grid?: number | string | Partial<Record<GridSize, number>>,
   side?: 'input' | 'label',
 ) {
   // Example: 6
@@ -57,7 +52,7 @@ export default function gridClassName(
     }
 
     return (
-      Object.keys(grid)
+      (Object.keys(grid) as GridSize[])
         .sort(compareSizeClass)
         // @ts-ignore Weird type refinement problem.
         .map(size => gridClassNamePart(size, grid[size], side))

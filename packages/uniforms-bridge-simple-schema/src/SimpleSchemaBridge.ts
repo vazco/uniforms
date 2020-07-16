@@ -6,12 +6,8 @@ import { Bridge, joinName } from 'uniforms';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'; // eslint-disable-line
 
 export default class SimpleSchemaBridge extends Bridge {
-  schema: any;
-
-  constructor(schema) {
+  constructor(public schema: SimpleSchema) {
     super();
-
-    this.schema = schema;
 
     // Memoize for performance and referential equality.
     this.getField = memoize(this.getField);
@@ -19,32 +15,28 @@ export default class SimpleSchemaBridge extends Bridge {
     this.getType = memoize(this.getType);
   }
 
-  getError(name, error) {
-    return (
-      (error &&
-        error.details &&
-        error.details.find &&
-        error.details.find(error => error.name === name)) ||
-      null
-    );
+  getError(name: string, error: any) {
+    // FIXME: Correct type for `error`.
+    return error?.details?.find?.((error: any) => error.name === name) || null;
   }
 
-  getErrorMessage(name, error) {
+  getErrorMessage(name: string, error: any) {
     const scopedError = this.getError(name, error);
     return !scopedError
       ? ''
-      : this.schema.messageForError(
+      : (this.schema.messageForError(
           scopedError.type,
           scopedError.name,
           null,
           scopedError.details && scopedError.details.value,
-        );
+        ) as string);
   }
 
-  getErrorMessages(error) {
+  getErrorMessages(error: any) {
     if (error) {
       if (Array.isArray(error.details)) {
-        return error.details.map(error =>
+        // FIXME: Correct type for `error`.
+        return (error.details as any[]).map(error =>
           this.schema.messageForError(
             error.type,
             error.name,
@@ -66,7 +58,7 @@ export default class SimpleSchemaBridge extends Bridge {
     return [];
   }
 
-  getField(name) {
+  getField(name: string) {
     const definition = this.schema.getDefinition(name);
 
     invariant(definition, 'Field not found in schema: "%s"', name);
@@ -74,7 +66,7 @@ export default class SimpleSchemaBridge extends Bridge {
     return definition;
   }
 
-  getInitialValue(name, props: any = {}) {
+  getInitialValue(name: string, props: Record<string, any> = {}): any {
     const field = this.getField(name);
 
     if (field.type === Array) {
@@ -92,7 +84,7 @@ export default class SimpleSchemaBridge extends Bridge {
   }
 
   // eslint-disable-next-line complexity
-  getProps(name, props: any = {}) {
+  getProps(name: string, props: Record<string, any> = {}) {
     // Type should be omitted.
     // eslint-disable-next-line no-unused-vars, prefer-const
     let { optional, type, uniforms, ...field } = this.getField(name);
@@ -131,14 +123,14 @@ export default class SimpleSchemaBridge extends Bridge {
       if (!Array.isArray(options)) {
         field = {
           ...field,
-          transform: value => options[value],
+          transform: (value: any) => options[value],
           allowedValues: Object.keys(options),
         };
       } else {
         field = {
           ...field,
-          transform: value =>
-            options.find(option => option.value === value).label,
+          transform: (value: any) =>
+            (options as any[]).find(option => option.value === value).label,
           allowedValues: options.map(option => option.value),
         };
       }
@@ -147,17 +139,17 @@ export default class SimpleSchemaBridge extends Bridge {
     return field;
   }
 
-  getSubfields(name) {
+  getSubfields(name?: string) {
     return this.schema.objectKeys(SimpleSchema._makeGeneric(name));
   }
 
-  getType(name) {
+  getType(name: string) {
     return this.getField(name).type;
   }
 
-  getValidator(options = { clean: true } as any) {
+  getValidator(options: Record<string, any> = { clean: true }) {
     const validator = this.schema.validator(options);
-    return model => {
+    return (model: any) => {
       try {
         // Clean mutate its argument.
         validator(options.clean ? cloneDeep({ ...model }) : model);

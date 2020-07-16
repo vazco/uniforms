@@ -1,5 +1,11 @@
 import { GraphQLBridge } from 'uniforms-bridge-graphql';
-import { GraphQLString, buildASTSchema, parse } from 'graphql';
+import {
+  GraphQLInputObjectType,
+  GraphQLObjectType,
+  GraphQLString,
+  buildASTSchema,
+  parse,
+} from 'graphql';
 
 describe('GraphQLBridge', () => {
   const schemaI = `
@@ -72,19 +78,22 @@ describe('GraphQLBridge', () => {
   const astT = buildASTSchema(parse(schemaT));
 
   const bridgeI = new GraphQLBridge(
-    astI.getType('Post'),
+    astI.getType('Post') as GraphQLInputObjectType,
     schemaValidator,
     schemaData,
   );
   const bridgeT = new GraphQLBridge(
-    astT.getType('Post'),
+    astT.getType('Post') as GraphQLObjectType,
     schemaValidator,
     schemaData,
   );
 
   describe('#constructor()', () => {
     it('always ensures `extras`', () => {
-      const bridge = new GraphQLBridge(astI.getType('Post'), schemaValidator);
+      const bridge = new GraphQLBridge(
+        astI.getType('Post') as GraphQLInputObjectType,
+        schemaValidator,
+      );
 
       expect(bridge.extras).toEqual({});
     });
