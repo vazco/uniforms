@@ -97,7 +97,7 @@ export default class JSONSchemaBridge extends Bridge {
   }
 
   getErrorMessage(name: string, error: any) {
-    const scopedError = this.getError(name, error) || {};
+    const scopedError = this.getError(name, error);
     return scopedError?.message || '';
   }
 

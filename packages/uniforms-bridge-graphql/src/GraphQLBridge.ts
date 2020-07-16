@@ -46,7 +46,7 @@ export default class GraphQLBridge extends Bridge {
 
   getErrorMessage(name: string, error: any) {
     const scopedError = this.getError(name, error);
-    return !scopedError ? '' : scopedError.message;
+    return scopedError?.message || '';
   }
 
   getErrorMessages(error: any) {
