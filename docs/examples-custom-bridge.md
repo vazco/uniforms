@@ -99,7 +99,7 @@ export default class UserLoginSchemaBridge extends Bridge {
   }
 
   getErrorMessage(name, error) {
-    return error && error[name];
+    return (error && error[name]) || '';
   }
 
   getErrorMessages(error) {
