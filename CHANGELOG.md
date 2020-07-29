@@ -1,3 +1,7 @@
+## [v3.0.0-rc.1](https://github.com/vazco/uniforms/tree/v3.0.0-rc.1) (2020-07-29)
+
+- **Fixed:** Delay in `AutoForm` validation. [\#769](https://github.com/vazco/uniforms/issues/769)
+
 ## [v3.0.0-rc.0](https://github.com/vazco/uniforms/tree/v3.0.0-rc.0) (2020-07-15)
 
 - **Breaking:** Minimum `antd` version for `uniforms-antd` is `4.0.0`. [\#696](https://github.com/vazco/uniforms/issues/696)
