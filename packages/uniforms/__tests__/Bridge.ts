@@ -5,11 +5,11 @@ describe('Bridge', () => {
   const customBridgeInstance = new CustomBridge();
 
   it('cannot be instantiated', () => {
-    // @ts-ignore We could use @ts-expect-error in TypeScript 3.9.
+    // @ts-expect-error
     expect(() => new Bridge()).toThrow();
   });
 
-  [
+  ([
     'getError',
     'getErrorMessage',
     'getErrorMessages',
@@ -19,9 +19,10 @@ describe('Bridge', () => {
     'getSubfields',
     'getType',
     'getValidator',
-  ].forEach(method => {
+  ] as const).forEach(method => {
     describe(`#${method}`, () => {
       it('throws an unimplemented error', () => {
+        // @ts-expect-error
         expect(() => customBridgeInstance[method]()).toThrow();
       });
     });

@@ -1,10 +1,11 @@
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import omit from 'lodash/omit';
-import React, { createElement } from 'react';
+import React, { ReactNode, createElement } from 'react';
 
 const _filterDOMPropsList = ['fullWidth', 'helperText', 'margin', 'variant'];
-const _filterDOMProps = props => omit(props, _filterDOMPropsList);
+const _filterDOMProps = (props: Record<string, any>) =>
+  omit(props, _filterDOMPropsList);
 
 function wrap(
   {
@@ -19,7 +20,7 @@ function wrap(
     showInlineError,
     variant,
   }: any,
-  ...children
+  ...children: ReactNode[]
 ) {
   const formHelperText = showInlineError && error ? errorMessage : helperText;
   const props = {

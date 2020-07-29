@@ -1,5 +1,6 @@
 import React, { Ref } from 'react';
 import classnames from 'classnames';
+import xor from 'lodash/xor';
 import { connectField, HTMLFieldProps } from 'uniforms';
 
 import wrapField from './wrapField';
@@ -9,15 +10,6 @@ const base64 =
     ? btoa
     : (x: string) => Buffer.from(x).toString('base64');
 const escape = (x: string) => base64(encodeURIComponent(x)).replace(/=+$/, '');
-
-const xor = (item, array) => {
-  const index = array.indexOf(item);
-  if (index === -1) {
-    return array.concat([item]);
-  }
-
-  return array.slice(0, index).concat(array.slice(index + 1));
-};
 
 export type SelectFieldProps = HTMLFieldProps<
   string | string[],
@@ -74,7 +66,7 @@ function Select({
               id={`${id}-${escape(item)}`}
               name={name}
               onChange={() =>
-                onChange(fieldType === Array ? xor(item, value) : item)
+                onChange(fieldType === Array ? xor([item], value) : item)
               }
               type="checkbox"
             />

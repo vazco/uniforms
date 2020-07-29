@@ -46,8 +46,9 @@ function Select(props: SelectFieldProps) {
         name={props.name}
         onChange={
           props.fieldType === Array
-            ? value => props.onChange(value)
-            : event => props.onChange(event.target.value)
+            ? // FIXME: Argument type depends on `props.fieldType`.
+              (value: any) => props.onChange(value)
+            : (event: any) => props.onChange(event.target.value)
         }
         options={props.allowedValues!.map(value => ({
           label: props.transform ? props.transform(value) : value,

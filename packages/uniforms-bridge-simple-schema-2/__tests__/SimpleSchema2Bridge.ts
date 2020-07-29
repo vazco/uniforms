@@ -38,7 +38,8 @@ describe('SimpleSchema2Bridge', () => {
     u: { type: SimpleSchema.Integer },
     w: { type: new SimpleSchema({ x: String }) },
     x: { type: String, autoValue: () => '$setOnInsert:hack!' },
-  });
+    // FIXME: `SimpleSchemaDefinition` ignores `extendOptions`.
+  } as any);
 
   const bridge = new SimpleSchema2Bridge(schema);
 
