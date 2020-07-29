@@ -40,6 +40,23 @@ describe('AutoForm', () => {
       expect(onChange).toHaveBeenLastCalledWith('a', '2');
     });
 
+    it('validates', () => {
+      // FIXME: AutoForm is not a valid Component.
+      const wrapper = mount<AutoForm | any>(
+        <AutoForm onChange={onChange} schema={schema} />,
+      );
+
+      wrapper.instance().submit();
+
+      expect(validator).toHaveBeenCalledTimes(1);
+      expect(validator).toHaveBeenLastCalledWith({});
+
+      wrapper.instance().getContext().onChange('a', '1');
+
+      expect(validator).toHaveBeenCalledTimes(2);
+      expect(validator).toHaveBeenLastCalledWith({ a: '1' });
+    });
+
     it('calls `onChangeModel`', () => {
       // FIXME: AutoForm is not a valid Component.
       const wrapper = mount<AutoForm | any>(

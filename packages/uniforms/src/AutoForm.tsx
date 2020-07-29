@@ -74,10 +74,6 @@ export function Auto<Base extends typeof ValidatedQuickForm>(Base: Base) {
         model: this.props.model,
       } as Partial<State>;
     }
-
-    onValidate() {
-      return this.onValidateModel(this.getContextModel());
-    }
   }
 
   return AutoForm;
