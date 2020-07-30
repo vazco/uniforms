@@ -23,10 +23,7 @@ function createValidator(schema) {
 
   return model => {
     validator(model);
-
-    if (validator.errors && validator.errors.length) {
-      return { details: validator.errors };
-    }
+    return validator.errors?.length ? { details: validator.errors } : null;
   };
 }
 
