@@ -1,18 +1,20 @@
 name: CI
-on: [pull_request, push]
-env:
-  CI: true
+on:
+  pull_request:
+  push:
+    branches:
+      - master
 jobs:
   CI:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        node-version: [10.x, 12.x, 14.x]
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install
@@ -22,18 +24,14 @@ jobs:
       - name: Test
         run: npm run coverage -- --no-cache --runInBand
       - name: Report coverage
-        run: bash <(curl -s https://codecov.io/bash)
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        uses: codecov/codecov-action@v1
       - name: Build docs
         run: npm --prefix website run build
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '12.x'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '14.x'
       - name: Deploy docs
-        uses: peaceiris/actions-gh-pages@v2.6.0-rc0
+        uses: peaceiris/actions-gh-pages@v3
         with:
           forceOrphan: true
-        env:
-          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: ./website/build
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '12.x'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./website/build
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '14.x'
