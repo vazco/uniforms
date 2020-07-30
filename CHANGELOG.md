@@ -1,3 +1,7 @@
+## [v3.0.0-rc.2](https://github.com/vazco/uniforms/tree/v3.0.0-rc.2) (2020-07-30)
+
+- **Fixed:** Fixed inferred type in `ListItemField`.
+
 ## [v3.0.0-rc.1](https://github.com/vazco/uniforms/tree/v3.0.0-rc.1) (2020-07-29)
 
 - **Fixed:** Delay in `AutoForm` validation. [\#769](https://github.com/vazco/uniforms/issues/769)
