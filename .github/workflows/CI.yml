@@ -31,7 +31,9 @@ jobs:
       - name: Deploy docs
         uses: peaceiris/actions-gh-pages@v3.6.4
         with:
-          forceOrphan: true
+          allow_empty_commit: true
+          cname: uniforms.tools
+          force_orphan: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./website/build
         if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '14.x'
