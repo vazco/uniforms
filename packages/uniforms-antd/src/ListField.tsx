@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined';
 import Tooltip from 'antd/lib/tooltip';
+import classNames from 'classnames';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import ListAddField from './ListAddField';
@@ -40,7 +41,10 @@ function List({
   ...props
 }: ListFieldProps) {
   return (
-    <div {...filterDOMProps(props)}>
+    <div
+      {...filterDOMProps(props)}
+      className={classNames([props.className, 'ant-list', 'ant-list-bordered'])}
+    >
       {label && (
         <div>
           {label}
@@ -78,8 +82,6 @@ function List({
 
 List.defaultProps = {
   style: {
-    border: '1px solid #DDD',
-    borderRadius: '7px',
     marginBottom: '5px',
     marginTop: '5px',
     padding: '10px',
