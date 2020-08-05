@@ -1,38 +1,38 @@
-<svg version="1.1" baseProfile="full" width="400" height="446" viewbox="0 0 400 446" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" style="font-weight:italic bold; font-size:14pt; font-family:'monospace', Helvetica, sans-serif;;stroke-width:3;stroke-linejoin:round;stroke-linecap:round">
-  <title >nomnoml</title>
-  <desc >#edges: hard
-#fontSize: 14
-#padding: 18
-#edgeMargin: 8
-#font: monospace
+<svg version="1.1" baseProfile="full" width="395" height="427" viewbox="0 0 395 427" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" style="font-weight:bold; font-size:14pt; font-family:monospace;stroke-width:3;stroke-linejoin:round;stroke-linecap:round">
+  <title >uniforms-graph</title>
+  <desc >#edgeMargin: 5
 #fill: transparent
+#font: monospace
+#fontSize: 14
+#padding: 20
+#spacing: 35
+#stroke: #333
+#title: uniforms-graph
 
-[BaseForm]-&gt;[QuickForm]
-[BaseForm]-&gt;[ValidatedForm]
-[QuickForm]-&gt; [ValidatedQuickForm]
-[ValidatedForm]-&gt; [ValidatedQuickForm]
-[ValidatedQuickForm]-&gt;[AutoForm]
-
-</desc>
-  <rect x="0" y="0" height="446" width="400" style="stroke:none; fill:transparent;"></rect>
-  <path d="M128.3 93.5 L92.5 113.5 L92.5 133.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
-  <path d="M87.2 120.2 L92.5 126.8 L97.8 120.2 L92.5 133.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
-  <path d="M253.7 93.5 L289.5 113.5 L289.5 133.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
-  <path d="M284.2 120.2 L289.5 126.8 L294.8 120.2 L289.5 133.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
-  <path d="M92.5 203.5 L92.5 223.5 L128.3 243.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
-  <path d="M114.1 241.7 L122.5 240.2 L119.3 232.3 L128.3 243.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
-  <path d="M289.5 203.5 L289.5 223.5 L253.7 243.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
-  <path d="M262.7 232.3 L259.5 240.2 L267.9 241.7 L253.7 243.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
-  <path d="M191 313.5 L191 333.5 L191 353.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
-  <path d="M185.7 340.2 L191 346.8 L196.3 340.2 L191 353.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
-  <rect x="135.5" y="31.5" height="54" width="112" style="stroke:#33322E;fill:transparent;stroke-dasharray:none;"></rect>
-  <text x="191.5" y="65.3" style="fill: #33322E;text-anchor: middle;">BaseForm</text>
-  <rect x="31.5" y="141.5" height="54" width="122" style="stroke:#33322E;fill:transparent;stroke-dasharray:none;"></rect>
-  <text x="92.5" y="175.3" style="fill: #33322E;text-anchor: middle;">QuickForm</text>
-  <rect x="209.5" y="141.5" height="54" width="160" style="stroke:#33322E;fill:transparent;stroke-dasharray:none;"></rect>
-  <text x="289.5" y="175.3" style="fill: #33322E;text-anchor: middle;">ValidatedForm</text>
-  <rect x="87.5" y="251.5" height="54" width="207" style="stroke:#33322E;fill:transparent;stroke-dasharray:none;"></rect>
-  <text x="191" y="285.3" style="fill: #33322E;text-anchor: middle;">ValidatedQuickForm</text>
-  <rect x="135.5" y="361.5" height="54" width="112" style="stroke:#33322E;fill:transparent;stroke-dasharray:none;"></rect>
-  <text x="191.5" y="395.3" style="fill: #33322E;text-anchor: middle;">AutoForm</text>
+[BaseForm] -&gt; [QuickForm]
+[BaseForm] -&gt; [ValidatedForm]
+[QuickForm] -&gt;  [ValidatedQuickForm]
+[ValidatedForm] -&gt;  [ValidatedQuickForm]
+[ValidatedQuickForm] -&gt; [AutoForm]</desc>
+  <rect x="0" y="0" height="427" width="395" style="stroke:none; fill:transparent;"></rect>
+  <path d="M125.8 93.5 L93.5 111 L93.5 128.5 L93.5 128.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M88.8 116.8 L93.5 122.7 L98.2 116.8 L93.5 128.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M251.2 93.5 L283.5 111 L283.5 128.5 L283.5 128.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M278.8 116.8 L283.5 122.7 L288.2 116.8 L283.5 128.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M93.5 196.5 L93.5 214 L125.8 231.5 L125.8 231.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M113.3 230 L120.7 228.7 L117.7 221.8 L125.8 231.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M283.5 196.5 L283.5 214 L251.2 231.5 L251.2 231.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M259.3 221.8 L256.3 228.7 L263.7 230 L251.2 231.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M188.5 299.5 L188.5 317 L188.5 334.5 L188.5 334.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M183.8 322.8 L188.5 328.7 L193.2 322.8 L188.5 334.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <rect x="130.5" y="30.5" height="58" width="116" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="188.5" y="66.3" style="fill: #333;text-anchor: middle;">BaseForm</text>
+  <rect x="30.5" y="133.5" height="58" width="126" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="93.5" y="169.3" style="fill: #333;text-anchor: middle;">QuickForm</text>
+  <rect x="201.5" y="133.5" height="58" width="164" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="283.5" y="169.3" style="fill: #333;text-anchor: middle;">ValidatedForm</text>
+  <rect x="83.5" y="236.5" height="58" width="211" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="189" y="272.3" style="fill: #333;text-anchor: middle;">ValidatedQuickForm</text>
+  <rect x="130.5" y="339.5" height="58" width="116" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="188.5" y="375.3" style="fill: #333;text-anchor: middle;">AutoForm</text>
 </svg>
