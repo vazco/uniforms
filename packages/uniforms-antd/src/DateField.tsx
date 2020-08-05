@@ -5,7 +5,7 @@ import { connectField, FieldProps, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
-// FIXME: Seems like DatePickerProps doesn't contain all needed types, i.e. 'showTime'
+// FIXME: Seems like DatePickerProps doesn't contain 'showTime'.
 export type DateFieldProps = FieldProps<
   Date | Moment,
   DatePickerProps,
