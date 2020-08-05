@@ -35,16 +35,16 @@ function ListDel({
   return (
     <Button
       {...filterDOMProps(props)}
-      icon={icon}
-      shape={shape}
-      size={size}
-      type={type}
       disabled={!limitNotReached}
+      icon={icon}
       onClick={() => {
         const value = parent.value!.slice();
         value.splice(nameIndex, 1);
         parent.onChange(value);
       }}
+      shape={shape}
+      size={size}
+      type={type}
     />
   );
 }

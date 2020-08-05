@@ -5,18 +5,18 @@ import { connectField, FieldProps, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
-// FIXME: Seems like DatePickerProps doesn't contain 'showTime'.
 export type DateFieldProps = FieldProps<
   Date | Moment,
   DatePickerProps,
+  // FIXME: Seems like DatePickerProps doesn't contain 'showTime'.
   { inputRef?: Ref<typeof DatePicker>; showTime?: boolean }
 >;
 
-const defaultWrapperStyle = { width: '100%' };
+const defaultStyle = { width: '100%' };
 
 function Date({
   showTime = true,
-  style = defaultWrapperStyle,
+  style = defaultStyle,
   ...props
 }: DateFieldProps) {
   return wrapField(

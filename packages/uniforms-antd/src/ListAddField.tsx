@@ -3,8 +3,8 @@ import PlusSquareOutlined from '@ant-design/icons/PlusSquareOutlined';
 import React from 'react';
 import cloneDeep from 'lodash/cloneDeep';
 import {
-  connectField,
   FieldProps,
+  connectField,
   filterDOMProps,
   joinName,
   useField,
@@ -42,14 +42,14 @@ function ListAdd({
   return (
     <Button
       {...filterDOMProps(props)}
-      icon={icon}
-      size={size}
-      style={style}
-      type={type}
       disabled={!limitNotReached}
+      icon={icon}
       onClick={() => {
         parent.onChange(parent.value!.concat([cloneDeep(value)]));
       }}
+      size={size}
+      style={style}
+      type={type}
     />
   );
 }
