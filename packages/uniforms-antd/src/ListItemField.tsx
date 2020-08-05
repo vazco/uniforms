@@ -14,10 +14,7 @@ const delStyle = {
   width: '20px',
 };
 
-const itemStyle = {
-  marginBottom: '24px',
-  overflow: 'hidden',
-};
+const itemStyle = { marginBottom: '24px', overflow: 'hidden' };
 
 const dividerStyle = {
   borderBottom: '1px solid #DDD',

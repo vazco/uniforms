@@ -20,8 +20,8 @@ function LongText({ rows = 5, ...props }: LongTextFieldProps) {
       onChange={event => props.onChange(event.target.value)}
       placeholder={props.placeholder}
       ref={props.inputRef}
-      value={props.value ?? ''}
       rows={rows}
+      value={props.value ?? ''}
       {...filterDOMProps(props)}
     />,
   );

@@ -11,7 +11,7 @@ const defaultStyle = {
   padding: '10px',
 };
 
-const messageRowStyle = { margin: '3px' };
+const rowStyle = { margin: '3px' };
 
 function ErrorsField({
   children,
@@ -25,7 +25,7 @@ function ErrorsField({
       {children}
       <ul>
         {schema.getErrorMessages(error).map((message, index) => (
-          <li key={index} style={messageRowStyle}>
+          <li key={index} style={rowStyle}>
             {message}
           </li>
         ))}

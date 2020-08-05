@@ -14,7 +14,7 @@ const defaultStyle = {
   padding: '10px',
 };
 
-const messageWrapperStyle = { margin: '3px' };
+const messageStyle = { margin: '3px' };
 
 function Error({
   children,
@@ -25,11 +25,7 @@ function Error({
 }: ErrorFieldProps) {
   return !error ? null : (
     <div {...filterDOMProps({ style, ...props })}>
-      {children ? (
-        children
-      ) : (
-        <div style={messageWrapperStyle}>{errorMessage}</div>
-      )}
+      {children || <div style={messageStyle}>{errorMessage}</div>}
     </div>
   );
 }
