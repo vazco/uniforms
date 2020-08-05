@@ -26,8 +26,6 @@ function Radio(props: RadioFieldProps) {
           value={value}
           style={{
             display: 'block',
-            height: '30px',
-            lineHeight: '30px',
           }}
         >
           {props.transform ? props.transform(value) : value}

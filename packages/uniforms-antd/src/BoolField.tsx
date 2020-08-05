@@ -1,7 +1,7 @@
 import CheckOutlined from '@ant-design/icons/CheckOutlined';
 import Checkbox, { CheckboxProps } from 'antd/lib/checkbox';
 import CloseOutlined from '@ant-design/icons/CloseOutlined';
-import React, { Ref, createElement } from 'react';
+import React, { Ref } from 'react';
 import Switch, { SwitchProps } from 'antd/lib/switch';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
