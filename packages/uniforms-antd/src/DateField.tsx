@@ -9,7 +9,7 @@ import wrapField from './wrapField';
 export type DateFieldProps = FieldProps<
   Date | Moment,
   DatePickerProps,
-  { inputRef?: Ref<typeof DatePicker>; showTime: boolean }
+  { inputRef?: Ref<typeof DatePicker>; showTime?: boolean }
 >;
 
 const defaultWrapperStyle = { width: '100%' };

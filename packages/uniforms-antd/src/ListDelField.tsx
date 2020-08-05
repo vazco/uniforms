@@ -11,11 +11,9 @@ import {
 
 export type ListDelFieldProps = FieldProps<unknown, ButtonProps>;
 
-const defaultIcon = <DeleteOutlined />;
-
 function ListDel({
   disabled,
-  icon = defaultIcon,
+  icon = <DeleteOutlined />,
   name,
   shape = 'circle-outline',
   size = 'small',

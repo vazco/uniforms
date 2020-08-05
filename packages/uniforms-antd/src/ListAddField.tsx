@@ -16,12 +16,11 @@ export type ListAddFieldProps = FieldProps<
   { initialCount?: number }
 >;
 
-const defaultIcon = <PlusSquareOutlined />;
 const defaultStyle = { width: '100%' };
 
 function ListAdd({
   disabled,
-  icon = defaultIcon,
+  icon = <PlusSquareOutlined />,
   name,
   size = 'small',
   style = defaultStyle,

@@ -1,7 +1,9 @@
 import Checkbox, { CheckboxProps } from 'antd/lib/checkbox';
-import React, { Ref } from 'react';
+import React, { ReactNode, Ref } from 'react';
 import Switch, { SwitchProps } from 'antd/lib/switch';
 import { connectField, FieldProps, filterDOMProps } from 'uniforms';
+import CheckOutlined from '@ant-design/icons/CheckOutlined';
+import CloseOutlined from '@ant-design/icons/CloseOutlined';
 
 import wrapField from './wrapField';
 
@@ -10,7 +12,12 @@ export type BoolFieldProps = FieldProps<
   // FIXME: `onClick` uses instance type.
   Omit<CheckboxProps | SwitchProps, 'onClick'>,
   // FIXME: `Switch` is a value and exporting `typeof Switch` type is impossible.
-  { checkbox?: boolean; inputRef?: Ref<Checkbox | typeof Switch | any> }
+  {
+    checkbox?: boolean;
+    inputRef?: Ref<Checkbox | typeof Switch | any>;
+    checkedChildren?: string | ReactNode;
+    unCheckedChildren?: string | ReactNode;
+  }
 >;
 
 function Bool({
@@ -20,9 +27,12 @@ function Bool({
   name,
   onChange,
   value,
+  checkedChildren = <CheckOutlined />,
+  unCheckedChildren = <CloseOutlined />,
   ...props
 }: BoolFieldProps) {
   const Component = checkbox ? Checkbox : Switch;
+  const componentProps = checkbox ? {} : { checkedChildren, unCheckedChildren };
   return wrapField(
     props,
     <Component
@@ -31,6 +41,7 @@ function Bool({
       name={name}
       onChange={() => onChange(!value)}
       ref={inputRef}
+      {...componentProps}
       {...filterDOMProps(props)}
     />,
   );
