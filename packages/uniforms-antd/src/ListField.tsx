@@ -26,12 +26,10 @@ export type ListFieldProps = HTMLFieldProps<
   }
 >;
 
-const defaultProps = {
-  style: {
-    marginBottom: '5px',
-    marginTop: '5px',
-    padding: '10px',
-  },
+const defaultStyle = {
+  marginBottom: '5px',
+  marginTop: '5px',
+  padding: '10px',
 };
 
 function List({
@@ -44,14 +42,15 @@ function List({
   label,
   labelCol,
   showInlineError,
-  style = defaultProps.style,
+  style = defaultStyle,
   value,
   wrapperCol,
   ...props
 }: ListFieldProps) {
   return (
     <div
-      {...filterDOMProps({ style, ...props })}
+      {...filterDOMProps(props)}
+      style={style}
       className={classNames([props.className, 'ant-list', 'ant-list-bordered'])}
     >
       {label && (

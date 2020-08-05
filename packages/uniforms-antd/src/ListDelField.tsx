@@ -1,35 +1,25 @@
-import Button, {
-  ButtonProps,
-  ButtonType,
-  ButtonSize,
-  ButtonShape,
-} from 'antd/lib/button';
+import Button, { ButtonProps } from 'antd/lib/button';
 import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
 import React from 'react';
 import {
+  connectField,
   FieldProps,
   filterDOMProps,
   joinName,
   useField,
-  connectField,
 } from 'uniforms';
 
 export type ListDelFieldProps = FieldProps<unknown, ButtonProps>;
 
-const defaultProps = {
-  icon: <DeleteOutlined />,
-  shape: 'circle-outline' as ButtonShape,
-  size: 'small' as ButtonSize,
-  type: 'ghost' as ButtonType,
-};
+const defaultIcon = <DeleteOutlined />;
 
 function ListDel({
   disabled,
-  icon = defaultProps.icon,
+  icon = defaultIcon,
   name,
-  shape = defaultProps.shape,
-  size = defaultProps.size,
-  type = defaultProps.type,
+  shape = 'circle-outline',
+  size = 'small',
+  type = 'ghost',
   ...props
 }: ListDelFieldProps) {
   const nameParts = joinName(null, name);

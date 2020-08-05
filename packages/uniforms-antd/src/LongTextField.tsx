@@ -21,7 +21,8 @@ function LongText({ rows = 5, ...props }: LongTextFieldProps) {
       placeholder={props.placeholder}
       ref={props.inputRef}
       value={props.value ?? ''}
-      {...filterDOMProps({ rows, ...props })}
+      rows={rows}
+      {...filterDOMProps(props)}
     />,
   );
 }

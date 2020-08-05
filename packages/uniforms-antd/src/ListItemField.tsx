@@ -27,9 +27,9 @@ const listItemDividerStyle = {
 
 const listItemChildrenWrapperStyle = { width: '100%' };
 
-function ListItem({
-  children = <AutoField label={null} name="" />,
-}: ListItemFieldProps) {
+const defaultChildren = <AutoField label={null} name="" />;
+
+function ListItem({ children = defaultChildren }: ListItemFieldProps) {
   return (
     <div>
       <div style={listDelFieldWrapperStyle}>
