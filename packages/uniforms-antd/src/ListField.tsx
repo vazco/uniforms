@@ -34,6 +34,7 @@ const defaultStyle = {
 
 function List({
   children = <ListItemField name="$" />,
+  className,
   error,
   errorMessage,
   info,
@@ -51,7 +52,7 @@ function List({
     <div
       {...filterDOMProps(props)}
       style={style}
-      className={classNames([props.className, 'ant-list', 'ant-list-bordered'])}
+      className={classNames([className, 'ant-list', 'ant-list-bordered'])}
     >
       {label && (
         <div>

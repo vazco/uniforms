@@ -7,7 +7,7 @@ import ListDelField from './ListDelField';
 export type ListItemFieldProps = { children?: ReactNode; value?: unknown };
 
 const listDelFieldWrapperStyle = {
-  float: 'right' as any,
+  float: 'right' as const,
   marginBottom: '10px',
   marginLeft: '10px',
   marginRight: '6px',

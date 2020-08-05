@@ -42,13 +42,11 @@ function ListAdd({
 
   return (
     <Button
-      {...filterDOMProps({
-        icon,
-        size,
-        style,
-        type,
-        ...props,
-      })}
+      {...filterDOMProps(props)}
+      icon={icon}
+      size={size}
+      style={style}
+      type={type}
       disabled={!limitNotReached}
       onClick={() => {
         parent.onChange(parent.value!.concat([cloneDeep(value)]));

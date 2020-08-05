@@ -36,13 +36,11 @@ function ListDel({
 
   return (
     <Button
-      {...filterDOMProps({
-        icon,
-        shape,
-        size,
-        type,
-        ...props,
-      })}
+      {...filterDOMProps(props)}
+      icon={icon}
+      shape={shape}
+      size={size}
+      type={type}
       disabled={!limitNotReached}
       onClick={() => {
         const value = parent.value!.slice();
