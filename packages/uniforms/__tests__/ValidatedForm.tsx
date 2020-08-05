@@ -23,7 +23,7 @@ describe('ValidatedForm', () => {
     objectKeys() {},
     validator: validatorForSchema,
   };
-  const schema = new SimpleSchemaBridge(schemaDefinition);
+  const schema = new SimpleSchemaBridge(schemaDefinition as any);
 
   beforeEach(() => {
     onChange.mockClear();
@@ -286,7 +286,9 @@ describe('ValidatedForm', () => {
       });
 
       it('revalidate if `schema` changes', () => {
-        wrapper.setProps({ schema: new SimpleSchemaBridge(schemaDefinition) });
+        wrapper.setProps({
+          schema: new SimpleSchemaBridge(schemaDefinition as any),
+        });
         expect(validator).toHaveBeenCalledTimes(1);
       });
     });
@@ -314,7 +316,9 @@ describe('ValidatedForm', () => {
       });
 
       it('does not revalidate when `schema` changes', () => {
-        wrapper.setProps({ schema: new SimpleSchemaBridge(schemaDefinition) });
+        wrapper.setProps({
+          schema: new SimpleSchemaBridge(schemaDefinition as any),
+        });
         expect(validator).not.toBeCalled();
       });
     });
@@ -364,7 +368,7 @@ describe('ValidatedForm', () => {
           messageForError() {},
           objectKeys() {},
           validator: () => alternativeValidator,
-        });
+        } as any);
 
         wrapper.setProps({ schema: alternativeSchema });
         wrapper.find('form').simulate('submit');
@@ -423,7 +427,7 @@ describe('ValidatedForm', () => {
       ),
     );
 
-    const schema = new SimpleSchemaBridge(schemaDefinition);
+    const schema = new SimpleSchemaBridge(schemaDefinition as any);
     schema.getValidator = () => validator;
 
     function flatPair4<A, B, C, D>([a, [b, [c, d]]]: [A, [B, [C, D]]]) {

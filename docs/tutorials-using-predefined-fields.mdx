@@ -3,11 +3,11 @@ id: 'tutorials-using-predefined-fields'
 title: 'Using predefined fields'
 ---
 
-import CodeSection from '../website/components/CodeSection';
-import TutorialForm from '../website/components/TutorialForm';
-import GuestFormProfessionAdditionalInfo from './examples/Tutorial/GuestFormProfessionAdditionalInfo.js';
-import GuestFormPredefinedFields from './examples/Tutorial/GuestFormPredefinedFields.js';
-import GuestFormWithFieldsInSchema from './examples/Tutorial/GuestFormWithFieldsInSchema.js';
+import { CodeSection } from '../website/components/CodeSection';
+import { GuestFormPredefinedFields } from '../website/pages-parts/Tutorial/GuestFormPredefinedFields';
+import { GuestFormProfessionAdditionalInfo } from '../website/pages-parts/Tutorial/GuestFormProfessionAdditionalInfo';
+import { GuestFormWithFieldsInSchema } from '../website/pages-parts/Tutorial/GuestFormWithFieldsInSchema';
+import { TutorialForm } from '../website/components/TutorialForm';
 
 Now that we know how to ask our guests for their name, let's ask them a few more things!
 We can expect a lot of different people coming to our IT conference - they could be developers, testers, product owners, project managers, businessmen and so on.
@@ -20,7 +20,7 @@ Let's modify our schema by adding two new properties: `profession` and `addition
 <CodeSection
   language="js"
   section="schema"
-  source={require('!!raw-loader!./examples/Tutorial/GuestSchema2')}
+  source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestSchema2')}
 />
 
 After the schema change, we must not forget to add the fields to our form.
@@ -32,7 +32,7 @@ We will add the `profession` field above the `workExperience` field and the `add
     "'[^']*?/universal'": "'uniforms-semantic'",
     './GuestSchema\\d': './GuestSchema'
   }}
-  source={require('!!raw-loader!./examples/Tutorial/GuestFormProfessionAdditionalInfo')}
+  source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestFormProfessionAdditionalInfo')}
 />
 
 <TutorialForm>
@@ -52,7 +52,7 @@ Let's stop for a while and think of what we have. Obviously, we there is a form 
 
 ### 1. Replacing the `AutoField`
 
-Uniforms provide a set of predefined out-of-the-box [fields](/docs/api-fields) that we can use instead of the `AutoField`.
+uniforms provide a set of predefined out-of-the-box [fields](/docs/api-fields) that we can use instead of the `AutoField`.
 The perfect one for a `profession` property is a `SelectField`. All we have to do to have it rendered is to provide the list of available options.
 The same thing applies to the `additionalInfo` - in order to see it as a text area we can use the `LongTextField` component.
 Let's see our changes in action:
@@ -63,7 +63,7 @@ Let's see our changes in action:
     "'[^']*?/universal'": "'uniforms-semantic'",
     './GuestSchema\\d': './GuestSchema'
   }}
-  source={require('!!raw-loader!./examples/Tutorial/GuestFormPredefinedFields')}
+  source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestFormPredefinedFields')}
 />
 
 <TutorialForm>
@@ -85,7 +85,7 @@ Before touching the schema, let's have a look at the React form first:
     "'[^']*?/universal'": "'uniforms-semantic'",
     './GuestSchema\\d': './GuestSchema'
   }}
-  source={require('!!raw-loader!./examples/Tutorial/GuestFormWithFieldsInSchema')}
+  source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestFormWithFieldsInSchema')}
 />
 
 As you can see, both `SelectField` and `LongTextField` have been removed in favor of the `AutoField`.
@@ -96,7 +96,7 @@ Instead of having to type the React component by ourselves inside our form, we c
 <CodeSection
   language="js"
   section="schema"
-  source={require('!!raw-loader!./examples/Tutorial/GuestSchema3')}
+  source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestSchema3')}
 />
 
 What's changed is that now we've included the available options inside the `profession` property definition -

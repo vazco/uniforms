@@ -1,6 +1,7 @@
 {
   "files": [],
   "references": [
+    { "path": "tsconfig.global.json" },
     { "path": "packages/uniforms/tsconfig.es5.json" },
     { "path": "packages/uniforms/tsconfig.es6.json" },
     { "path": "packages/uniforms-antd/tsconfig.es5.json" },

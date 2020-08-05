@@ -3,9 +3,9 @@ id: tutorials-basic-uniforms-usage
 title: Basic uniforms usage
 ---
 
-import CodeSection from '../website/components/CodeSection';
-import TutorialForm from '../website/components/TutorialForm';
-import GuestFormBasic from './examples/Tutorial/GuestFormBasic.js';
+import { CodeSection } from '../website/components/CodeSection';
+import { GuestFormBasic } from '../website/pages-parts/Tutorial/GuestFormBasic';
+import { TutorialForm } from '../website/components/TutorialForm';
 
 Imagine that we host an IT conference and want to make a list of guests.
 Obviously, we want to collect their first name and last name.
@@ -38,7 +38,7 @@ After we've installed required packages, it's time to define our Guest schema. W
 <CodeSection
   language="js"
   section="schema"
-  source={require('!!raw-loader!./examples/Tutorial/GuestSchema')}
+  source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestSchema')}
 />
 
 As you can see, we've defined three properties - `firstName` and `lastName`, that are of string type, and `workExperience`,
@@ -53,7 +53,7 @@ As we are using the JSONSchema, we have to import the `uniforms-bridge-json-sche
 <CodeSection
   language="js"
   section="bridgeImport"
-  source={require('!!raw-loader!./examples/Tutorial/GuestSchema')}
+  source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestSchema')}
 />
 
 Now you may think that we can simply do:
@@ -73,7 +73,7 @@ To manually create the validator, we will use the [ajv](https://github.com/epobe
 <CodeSection
   language="js"
   section="validator"
-  source={require('!!raw-loader!./examples/Tutorial/GuestSchema')}
+  source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestSchema')}
 />
 
 Now that we have both the schema and the validator, we can create the uniforms bridge:
@@ -81,7 +81,7 @@ Now that we have both the schema and the validator, we can create the uniforms b
 <CodeSection
   language="js"
   section="bridge"
-  source={require('!!raw-loader!./examples/Tutorial/GuestSchema')}
+  source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestSchema')}
 />
 
 Just to recap, the whole `GuestSchema.js` file looks like this:
@@ -89,18 +89,18 @@ Just to recap, the whole `GuestSchema.js` file looks like this:
 <CodeSection
   language="js"
   replace={{ '//.*?\n': '' }}
-  source={require('!!raw-loader!./examples/Tutorial/GuestSchema')}
+  source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestSchema')}
 />
 
 ### 4. Finally, use it in a form!
 
-Uniforms theme packages provide the `AutoForm` component, which is able to generate the form based on the given schema.
+uniforms theme packages provide the `AutoForm` component, which is able to generate the form based on the given schema.
 All we have to do now is to pass the previously created GuestSchema to the `AutoForm`:
 
 <CodeSection
   language="js"
   replace={{ "'[^']*?/universal'": "'uniforms-semantic'" }}
-  source={require('!!raw-loader!./examples/Tutorial/GuestFormBasic')}
+  source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestFormBasic')}
 />
 
 And that's it! `AutoForm` will generate a complete form with labeled fields, errors list (if any) and a submit button.

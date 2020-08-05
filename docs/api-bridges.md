@@ -90,10 +90,10 @@ const schema = {
   required: ['firstName', 'lastName']
 };
 
-function createValidator(schema) {
+function createValidator(schema: object) {
   const validator = ajv.compile(schema);
 
-  return model => {
+  return (model: object) => {
     validator(model);
     return validator.errors?.length ? { details: validator.errors } : null;
   };
