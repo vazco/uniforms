@@ -9,7 +9,9 @@ export type RadioFieldProps = FieldProps<
   RadioProps,
   { allowedValues?: string[]; transform?(value: string): string }
 >;
-
+const radioItemsStyle = {
+  display: 'block',
+};
 function Radio(props: RadioFieldProps) {
   return wrapField(
     props,
@@ -21,13 +23,7 @@ function Radio(props: RadioFieldProps) {
       {...filterDOMProps(props)}
     >
       {props.allowedValues?.map(value => (
-        <RadioAntD
-          key={value}
-          value={value}
-          style={{
-            display: 'block',
-          }}
-        >
+        <RadioAntD key={value} value={value} style={radioItemsStyle}>
           {props.transform ? props.transform(value) : value}
         </RadioAntD>
       ))}

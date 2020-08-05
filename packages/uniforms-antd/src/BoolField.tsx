@@ -1,9 +1,7 @@
-import CheckOutlined from '@ant-design/icons/CheckOutlined';
 import Checkbox, { CheckboxProps } from 'antd/lib/checkbox';
-import CloseOutlined from '@ant-design/icons/CloseOutlined';
 import React, { Ref } from 'react';
 import Switch, { SwitchProps } from 'antd/lib/switch';
-import { FieldProps, connectField, filterDOMProps } from 'uniforms';
+import { connectField, FieldProps, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
@@ -16,7 +14,7 @@ export type BoolFieldProps = FieldProps<
 >;
 
 function Bool({
-  checkbox,
+  checkbox = false,
   disabled,
   inputRef,
   name,
@@ -37,11 +35,5 @@ function Bool({
     />,
   );
 }
-
-Bool.defaultProps = {
-  checkbox: false,
-  checkedChildren: <CheckOutlined />,
-  unCheckedChildren: <CloseOutlined />,
-};
 
 export default connectField(Bool, { kind: 'leaf' });

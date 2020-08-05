@@ -10,7 +10,7 @@ export type SubmitFieldProps = Override<
 function SubmitField({
   disabled,
   inputRef,
-  value,
+  value = 'Submit',
   ...props
 }: SubmitFieldProps) {
   const { error, state } = useForm();
@@ -27,7 +27,5 @@ function SubmitField({
     </Button>
   );
 }
-
-SubmitField.defaultProps = { value: 'Submit' };
 
 export default SubmitField;

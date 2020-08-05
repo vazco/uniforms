@@ -26,6 +26,14 @@ export type ListFieldProps = HTMLFieldProps<
   }
 >;
 
+const defaultProps = {
+  style: {
+    marginBottom: '5px',
+    marginTop: '5px',
+    padding: '10px',
+  },
+};
+
 function List({
   children = <ListItemField name="$" />,
   error,
@@ -36,13 +44,14 @@ function List({
   label,
   labelCol,
   showInlineError,
+  style = defaultProps.style,
   value,
   wrapperCol,
   ...props
 }: ListFieldProps) {
   return (
     <div
-      {...filterDOMProps(props)}
+      {...filterDOMProps({ style, ...props })}
       className={classNames([props.className, 'ant-list', 'ant-list-bordered'])}
     >
       {label && (
@@ -79,13 +88,5 @@ function List({
     </div>
   );
 }
-
-List.defaultProps = {
-  style: {
-    marginBottom: '5px',
-    marginTop: '5px',
-    padding: '10px',
-  },
-};
 
 export default connectField(List);

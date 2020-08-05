@@ -16,7 +16,23 @@ export type ListAddFieldProps = FieldProps<
   { initialCount?: number }
 >;
 
-function ListAdd({ disabled, name, value, ...props }: ListAddFieldProps) {
+const defaultProps = {
+  icon: <PlusSquareOutlined />,
+  size: 'small' as ButtonSize,
+  style: { width: '100%' },
+  type: 'dashed' as ButtonType,
+};
+
+function ListAdd({
+  disabled,
+  icon = defaultProps.icon,
+  name,
+  size = defaultProps.size,
+  style = defaultProps.style,
+  type = defaultProps.type,
+  value,
+  ...props
+}: ListAddFieldProps) {
   const nameParts = joinName(null, name);
   const parentName = joinName(nameParts.slice(0, -1));
   const parent = useField<{ maxCount?: number }, unknown[]>(
@@ -30,7 +46,13 @@ function ListAdd({ disabled, name, value, ...props }: ListAddFieldProps) {
 
   return (
     <Button
-      {...filterDOMProps(props)}
+      {...filterDOMProps({
+        icon,
+        size,
+        style,
+        type,
+        ...props,
+      })}
       disabled={!limitNotReached}
       onClick={() => {
         parent.onChange(parent.value!.concat([cloneDeep(value)]));
@@ -38,12 +60,5 @@ function ListAdd({ disabled, name, value, ...props }: ListAddFieldProps) {
     />
   );
 }
-
-ListAdd.defaultProps = {
-  icon: <PlusSquareOutlined />,
-  size: 'small' as ButtonSize,
-  style: { width: '100%' },
-  type: 'dashed' as ButtonType,
-};
 
 export default connectField(ListAdd, { initialValue: false, kind: 'leaf' });

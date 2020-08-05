@@ -29,7 +29,7 @@ export default function wrapField(
     required,
     showInlineError,
     wrapperCol,
-    wrapperStyle,
+    wrapperStyle = { marginBottom: '12px' },
   }: WrapperProps,
   children: ReactNode,
 ) {
@@ -57,7 +57,7 @@ export default function wrapField(
       label={labelNode}
       labelCol={labelCol}
       required={required}
-      style={wrapperStyle || { marginBottom: '12px' }}
+      style={wrapperStyle}
       validateStatus={error ? 'error' : undefined}
       wrapperCol={wrapperCol}
     >

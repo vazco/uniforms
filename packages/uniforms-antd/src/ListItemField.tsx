@@ -6,34 +6,41 @@ import ListDelField from './ListDelField';
 
 export type ListItemFieldProps = { children?: ReactNode; value?: unknown };
 
+const listDelFieldWrapperStyle = {
+  float: 'right' as any,
+  marginBottom: '10px',
+  marginLeft: '10px',
+  marginRight: '6px',
+  width: '20px',
+};
+
+const listItemDividerWrapperStyle = {
+  marginBottom: '24px',
+  overflow: 'hidden',
+};
+
+const listItemDividerStyle = {
+  borderBottom: '1px solid #DDD',
+  height: '20px',
+  marginTop: '-8px',
+};
+
+const listItemChildrenWrapperStyle = { width: '100%' };
+
 function ListItem({
   children = <AutoField label={null} name="" />,
 }: ListItemFieldProps) {
   return (
     <div>
-      <div
-        style={{
-          float: 'right',
-          marginBottom: '10px',
-          marginLeft: '10px',
-          marginRight: '6px',
-          width: '20px',
-        }}
-      >
+      <div style={listDelFieldWrapperStyle}>
         <ListDelField className="top aligned" name="" />
       </div>
 
-      <div style={{ marginBottom: '24px', overflow: 'hidden' }}>
-        <div
-          style={{
-            borderBottom: '1px solid #DDD',
-            height: '20px',
-            marginTop: '-8px',
-          }}
-        />
+      <div style={listItemDividerWrapperStyle}>
+        <div style={listItemDividerStyle} />
       </div>
 
-      <div style={{ width: '100%' }}>{children}</div>
+      <div style={listItemChildrenWrapperStyle}>{children}</div>
     </div>
   );
 }

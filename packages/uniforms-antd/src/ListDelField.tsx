@@ -16,7 +16,22 @@ import {
 
 export type ListDelFieldProps = FieldProps<unknown, ButtonProps>;
 
-function ListDel({ disabled, name, ...props }: ListDelFieldProps) {
+const defaultProps = {
+  icon: <DeleteOutlined />,
+  shape: 'circle-outline' as ButtonShape,
+  size: 'small' as ButtonSize,
+  type: 'ghost' as ButtonType,
+};
+
+function ListDel({
+  disabled,
+  icon = defaultProps.icon,
+  name,
+  shape = defaultProps.shape,
+  size = defaultProps.size,
+  type = defaultProps.type,
+  ...props
+}: ListDelFieldProps) {
   const nameParts = joinName(null, name);
   const nameIndex = +nameParts[nameParts.length - 1];
   const parentName = joinName(nameParts.slice(0, -1));
@@ -31,7 +46,13 @@ function ListDel({ disabled, name, ...props }: ListDelFieldProps) {
 
   return (
     <Button
-      {...filterDOMProps(props)}
+      {...filterDOMProps({
+        icon,
+        shape,
+        size,
+        type,
+        ...props,
+      })}
       disabled={!limitNotReached}
       onClick={() => {
         const value = parent.value!.slice();
@@ -41,12 +62,5 @@ function ListDel({ disabled, name, ...props }: ListDelFieldProps) {
     />
   );
 }
-
-ListDel.defaultProps = {
-  icon: <DeleteOutlined />,
-  shape: 'circle-outline' as ButtonShape,
-  size: 'small' as ButtonSize,
-  type: 'ghost' as ButtonType,
-};
 
 export default connectField(ListDel, { initialValue: false, kind: 'leaf' });

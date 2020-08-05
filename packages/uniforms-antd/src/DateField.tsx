@@ -29,9 +29,4 @@ function Date(props: DateFieldProps) {
   );
 }
 
-Date.defaultProps = {
-  showTime: true,
-  style: { width: '100%' },
-};
-
 export default connectField(Date, { kind: 'leaf' });
