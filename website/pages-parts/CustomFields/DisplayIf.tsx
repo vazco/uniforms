@@ -2,7 +2,7 @@ import React, { Children, ReactElement } from 'react';
 import { AutoForm, SubmitField, TextField } from '../../lib/universal';
 import { Context, useForm } from 'uniforms';
 
-import { bridge as schema } from './DisplayIfFieldSchema';
+import { bridge as schema } from './DisplayIfSchema';
 
 type DisplayIfProps<T> = {
   children: ReactElement;
@@ -16,7 +16,7 @@ function DisplayIf<T = any>({ children, condition }: DisplayIfProps<T>) {
   return condition(uniforms) ? Children.only(children) : null;
 }
 
-export default function ExampleOfDisplayIfField() {
+export function DisplayIfForm() {
   return (
     <AutoForm
       schema={schema}

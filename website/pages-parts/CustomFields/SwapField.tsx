@@ -28,7 +28,7 @@ function SwapField({ children, fieldA, fieldB }: SwapFieldProps) {
   );
 }
 
-export default function ExampleOfSwapField() {
+export function SwapFieldForm() {
   return (
     <section>
       <AutoForm

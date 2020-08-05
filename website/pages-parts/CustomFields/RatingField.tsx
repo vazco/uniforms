@@ -34,7 +34,7 @@ function Rating({
 
 const RatingField = connectField(Rating);
 
-export default function ExampleOfRangeField() {
+export function RatingFieldForm() {
   return (
     <AutoForm
       schema={schema}

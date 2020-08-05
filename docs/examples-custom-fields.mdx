@@ -12,7 +12,10 @@ field props here, like value or onChange for some extra logic.
 
 <ExampleCustomizer
   code={require('!!raw-loader!../website/pages-parts/CustomFields/CompositeField')}
-  example={require('../website/pages-parts/CustomFields/CompositeField')}
+  example={
+    require('../website/pages-parts/CustomFields/CompositeField')
+      .CompositeFieldForm
+  }
   schema={require('!!raw-loader!../website/pages-parts/CustomFields/CompositeFieldSchema')}
 />
 
@@ -48,7 +51,9 @@ state if the field is not required. This one uses Semantic-UI.
 
 <ExampleCustomizer
   code={require('!!raw-loader!../website/pages-parts/CustomFields/CycleField')}
-  example={require('../website/pages-parts/CustomFields/CycleField')}
+  example={
+    require('../website/pages-parts/CustomFields/CycleField').CycleFieldForm
+  }
   schema={require('!!raw-loader!../website/pages-parts/CustomFields/CycleFieldSchema')}
 />
 
@@ -57,16 +62,20 @@ state if the field is not required. This one uses Semantic-UI.
 This simple field component conditionally displays other fields based on input.
 
 <ExampleCustomizer
-  code={require('!!raw-loader!../website/pages-parts/CustomFields/DisplayIfField')}
-  example={require('../website/pages-parts/CustomFields/DisplayIfField')}
-  schema={require('!!raw-loader!../website/pages-parts/CustomFields/DisplayIfFieldSchema')}
+  code={require('!!raw-loader!../website/pages-parts/CustomFields/DisplayIf')}
+  example={
+    require('../website/pages-parts/CustomFields/DisplayIf').DisplayIfForm
+  }
+  schema={require('!!raw-loader!../website/pages-parts/CustomFields/DisplayIfSchema')}
 />
 
 ### `ImageField`
 
 <ExampleCustomizer
   code={require('!!raw-loader!../website/pages-parts/CustomFields/ImageField')}
-  example={require('../website/pages-parts/CustomFields/ImageField')}
+  example={
+    require('../website/pages-parts/CustomFields/ImageField').ImageFieldForm
+  }
   schema={require('!!raw-loader!../website/pages-parts/CustomFields/ImageFieldSchema')}
 />
 
@@ -77,7 +86,9 @@ Value is a `{start, stop}` object.
 
 <ExampleCustomizer
   code={require('!!raw-loader!../website/pages-parts/CustomFields/RangeField')}
-  example={require('../website/pages-parts/CustomFields/RangeField')}
+  example={
+    require('../website/pages-parts/CustomFields/RangeField').RangeFieldForm
+  }
   schema={require('!!raw-loader!../website/pages-parts/CustomFields/RangeFieldSchema')}
 />
 
@@ -88,7 +99,9 @@ filled, if rating (value) is greater.
 
 <ExampleCustomizer
   code={require('!!raw-loader!../website/pages-parts/CustomFields/RatingField')}
-  example={require('../website/pages-parts/CustomFields/RatingField')}
+  example={
+    require('../website/pages-parts/CustomFields/RatingField').RatingFieldForm
+  }
   schema={require('!!raw-loader!../website/pages-parts/CustomFields/RatingFieldSchema')}
 />
 
@@ -100,7 +113,9 @@ uniforms-unstyled. We use schema from previous examples as a template for valida
 
 <ExampleCustomizer
   code={require('!!raw-loader!../website/pages-parts/CustomFields/SubmitField')}
-  example={require('../website/pages-parts/CustomFields/SubmitField')}
+  example={
+    require('../website/pages-parts/CustomFields/SubmitField').SubmitFieldForm
+  }
   schema={require('!!raw-loader!../website/pages-parts/CustomFields/SubmitFieldSchema')}
 />
 
@@ -111,6 +126,8 @@ and fieldB. It's that simple.
 
 <ExampleCustomizer
   code={require('!!raw-loader!../website/pages-parts/CustomFields/SwapField')}
-  example={require('../website/pages-parts/CustomFields/SwapField')}
+  example={
+    require('../website/pages-parts/CustomFields/SwapField').SwapFieldForm
+  }
   schema={require('!!raw-loader!../website/pages-parts/CustomFields/SwapFieldSchema')}
 />

@@ -8,7 +8,7 @@ import {
 
 import { bridge as schema } from './GuestSchema4';
 
-export default function GuestFormFinal() {
+export function GuestFormFinal() {
   return (
     <AutoForm schema={schema} onSubmit={console.log}>
       <h4>IT meeting guest questionnaire</h4>

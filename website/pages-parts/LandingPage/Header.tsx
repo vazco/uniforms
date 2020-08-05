@@ -49,7 +49,7 @@ function Showcase() {
         <CodeSection
           language="js"
           section="schema"
-          source={require('!!raw-loader!../../docs/examples/CommonForms/ShippingSchema')}
+          source={require('!!raw-loader!../CommonForms/ShippingSchema')}
         />
       </SystemWindow>
       <SystemWindow>

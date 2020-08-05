@@ -4,17 +4,19 @@ import { connectField } from 'uniforms';
 
 import { bridge as schema } from './CompositeFieldSchema';
 
-const Composite = () => (
-  <section>
-    <AutoField name="firstName" />
-    <AutoField name="lastName" />
-    <AutoField name="workExperience" />
-  </section>
-);
+function Composite() {
+  return (
+    <section>
+      <AutoField name="firstName" />
+      <AutoField name="lastName" />
+      <AutoField name="workExperience" />
+    </section>
+  );
+}
 
 const CompositeField = connectField(Composite);
 
-export default function ExampleOfCompositeField() {
+export function CompositeFieldForm() {
   return (
     <AutoForm
       schema={schema}

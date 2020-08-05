@@ -46,7 +46,7 @@ function Cycle({
 
 const CycleField = connectField(Cycle);
 
-export default function ExampleOfCycleField() {
+export function CycleFieldForm() {
   return (
     <AutoForm
       schema={schema}

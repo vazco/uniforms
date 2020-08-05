@@ -3,7 +3,7 @@ import { AutoForm } from '../../lib/universal';
 
 import { bridge as schema } from './SignUpSchema';
 
-export function SignUpForm() {
+export function SignUp() {
   return (
     <AutoForm
       schema={schema}

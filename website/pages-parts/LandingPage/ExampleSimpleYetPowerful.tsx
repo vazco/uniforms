@@ -20,9 +20,9 @@ export function ExampleSimpleYetPowerful() {
             className={classNames(styles['preview-border'], styles['preview'])}
           >
             <ExampleCustomizer
-              code={require('!!raw-loader!../../docs/examples/CommonForms/SignUp')}
-              example={require('../../docs/examples/CommonForms/SignUp')}
-              schema={require('!!raw-loader!../../docs/examples/CommonForms/SignUpSchema')}
+              code={require('!!raw-loader!../CommonForms/SignUp')}
+              example={require('../CommonForms/SignUp').SignUp}
+              schema={require('!!raw-loader!../CommonForms/SignUpSchema')}
             />
           </div>
         </div>

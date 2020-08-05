@@ -42,9 +42,9 @@ export function ExampleFullyCustomizable() {
             )}
           >
             <ExampleCustomizer
-              code={require('!!raw-loader!../../docs/examples/CustomFields/ImageField')}
-              example={require('../../docs/examples/CustomFields/ImageField')}
-              schema={require('!!raw-loader!../../docs/examples/CustomFields/ImageFieldSchema')}
+              code={require('!!raw-loader!../CustomFields/ImageField')}
+              example={require('../CustomFields/ImageField').ImageFieldForm}
+              schema={require('!!raw-loader!../CustomFields/ImageFieldSchema')}
             />
           </div>
         </div>

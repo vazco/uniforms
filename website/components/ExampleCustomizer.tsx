@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 import { Box, Code, Database } from 'react-feather';
 
 import { CodeSection } from './CodeSection';
@@ -23,13 +23,13 @@ const toggles = [
 
 export type ExampleCustomizerProps = {
   code: { default: string };
-  example: { default: string };
+  example: ComponentType;
   schema: { default: string };
 };
 
 export function ExampleCustomizer({
   code: { default: code },
-  example: { default: Example },
+  example: Example,
   schema: { default: schema },
 }: ExampleCustomizerProps) {
   return (

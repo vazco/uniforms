@@ -23,7 +23,7 @@ const model = {
   range: { start: new Date(2019, 7, 10), stop: new Date(2019, 7, 20) },
 };
 
-export default function ExampleOfRangeField() {
+export function RangeFieldForm() {
   function transform(mode: ModelTransformMode, model: any) {
     if (mode === 'validate') {
       const { start, stop } = model.range || {};
