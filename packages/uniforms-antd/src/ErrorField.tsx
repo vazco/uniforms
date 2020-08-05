@@ -22,7 +22,7 @@ Error.defaultProps = {
   style: {
     backgroundColor: 'rgba(255, 85, 0, 0.2)',
     border: '1px solid rgb(255, 85, 0)',
-    borderRadius: '7px',
+    borderRadius: '2px',
     margin: '20px 0px',
     padding: '10px',
   },
