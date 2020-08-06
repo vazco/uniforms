@@ -20,7 +20,7 @@ function Date({
   ...props
 }: DateFieldProps) {
   return wrapField(
-    { style, ...props },
+    props,
     <DatePicker
       disabled={props.disabled}
       name={props.name}
@@ -31,6 +31,7 @@ function Date({
       // @ts-ignore: `DatePicker` is an intersection.
       ref={props.inputRef}
       showTime={showTime}
+      style={style}
       value={props.value && moment(props.value)}
       {...filterDOMProps(props)}
     />,

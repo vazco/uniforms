@@ -18,6 +18,17 @@ test('<ErrorField> - works', () => {
   expect(wrapper.find(ErrorField)).toHaveLength(1);
 });
 
+test('<ErrorField> - default props override', () => {
+  const divProps = { style: {} };
+
+  const element = <ErrorField name="x" {...divProps} />;
+  const wrapper = mount(element, createContext({ x: { type: String } }));
+
+  expect(wrapper.find(ErrorField).childAt(0).props()).toEqual(
+    expect.objectContaining(divProps),
+  );
+});
+
 test('<ErrorField> - renders correct error message (context)', () => {
   const element = <ErrorField name="x" />;
   const wrapper = mount(
