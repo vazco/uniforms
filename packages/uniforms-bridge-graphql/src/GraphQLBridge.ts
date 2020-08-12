@@ -1,4 +1,4 @@
-import * as graphql from 'graphql';
+import * as graphql from 'graphql/type/definition';
 import invariant from 'invariant';
 import lowerCase from 'lodash/lowerCase';
 import memoize from 'lodash/memoize';
@@ -11,9 +11,7 @@ function extractValue(x: boolean | null | string | undefined, y: string) {
 
 // FIXME: What type is it? Maybe there's a helper in `graphql` for that?
 function extractFromNonNull(x: any) {
-  return x && x.type instanceof graphql.GraphQLNonNull
-    ? { ...x, type: x.type.ofType }
-    : x;
+  return x && graphql.isNonNullType(x.type) ? { ...x, type: x.type.ofType } : x;
 }
 
 function toHumanLabel(label: string) {
@@ -72,7 +70,7 @@ export default class GraphQLBridge extends Bridge {
     return joinName(null, name).reduce((definition, next, index, array) => {
       if (next === '$' || next === '' + parseInt(next, 10)) {
         invariant(
-          definition.type instanceof graphql.GraphQLList,
+          graphql.isListType(definition.type),
           'Field not found in schema: "%s"',
           name,
         );
@@ -89,7 +87,6 @@ export default class GraphQLBridge extends Bridge {
       invariant(definition, 'Field not found in schema: "%s"', name);
 
       const isLast = array.length - 1 === index;
-
       if (isLast && !returnExtracted) {
         return definition;
       }
@@ -98,7 +95,7 @@ export default class GraphQLBridge extends Bridge {
 
       if (
         (isLast && returnExtracted) ||
-        !(extracted.type instanceof graphql.GraphQLObjectType)
+        !graphql.isObjectType(extracted.type)
       ) {
         return extracted;
       }
@@ -142,15 +139,12 @@ export default class GraphQLBridge extends Bridge {
     const fieldType = extractFromNonNull(field).type;
 
     const ready = {
-      required: field.type instanceof graphql.GraphQLNonNull,
+      required: graphql.isNonNullType(field.type),
       ...this.extras[nameGeneric],
       ...this.extras[nameNormal],
     };
 
-    if (
-      fieldType instanceof graphql.GraphQLScalarType &&
-      fieldType.name === 'Float'
-    ) {
+    if (graphql.isScalarType(fieldType) && fieldType.name === 'Float') {
       ready.decimal = true;
     }
 
@@ -180,8 +174,8 @@ export default class GraphQLBridge extends Bridge {
     const fieldType = this.getField(name).type;
 
     if (
-      fieldType instanceof graphql.GraphQLObjectType ||
-      fieldType instanceof graphql.GraphQLInputObjectType
+      graphql.isObjectType(fieldType) ||
+      graphql.isInputObjectType(fieldType)
     ) {
       return Object.keys(fieldType.getFields());
     }
@@ -192,10 +186,10 @@ export default class GraphQLBridge extends Bridge {
   getType(name: string) {
     const fieldType = this.getField(name).type;
 
-    if (fieldType instanceof graphql.GraphQLList) return Array;
-    if (fieldType instanceof graphql.GraphQLObjectType) return Object;
-    if (fieldType instanceof graphql.GraphQLInputObjectType) return Object;
-    if (fieldType instanceof graphql.GraphQLScalarType) {
+    if (graphql.isListType(fieldType)) return Array;
+    if (graphql.isObjectType(fieldType)) return Object;
+    if (graphql.isInputObjectType(fieldType)) return Object;
+    if (graphql.isScalarType(fieldType)) {
       if (fieldType.name === 'ID') return String;
       if (fieldType.name === 'Int') return Number;
       if (fieldType.name === 'Float') return Number;
