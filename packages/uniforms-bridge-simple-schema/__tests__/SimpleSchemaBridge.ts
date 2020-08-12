@@ -75,7 +75,7 @@ describe('SimpleSchemaBridge', () => {
     },
   };
 
-  const bridge = new SimpleSchemaBridge(schema);
+  const bridge = new SimpleSchemaBridge(schema as any);
 
   describe('#getError', () => {
     it('works without error', () => {
@@ -305,7 +305,7 @@ describe('SimpleSchemaBridge', () => {
             }
           };
         },
-      });
+      } as any);
 
       expect(bridge.getValidator()({})).not.toEqual(null);
       expect(bridge.getValidator({})({})).not.toEqual(null);

@@ -3,12 +3,12 @@ id: 'tutorials-customizing-your-form-layout'
 title: 'Customizing your form layout'
 ---
 
-import CodeSection from '../website/components/CodeSection';
-import TutorialForm from '../website/components/TutorialForm';
-import GuestFormWithHeading from './examples/Tutorial/GuestFormWithHeading.js';
-import GuestFormWithAutoFields from './examples/Tutorial/GuestFormWithAutoFields.js';
-import GuestFormWithErrorFields from './examples/Tutorial/GuestFormWithErrorFields.js';
-import GuestFormWithChangedErrors from './examples/Tutorial/GuestFormWithChangedErrors.js';
+import { CodeSection } from '../website/components/CodeSection';
+import { GuestFormWithAutoFields } from '../website/pages-parts/Tutorial/GuestFormWithAutoFields';
+import { GuestFormWithChangedErrors } from '../website/pages-parts/Tutorial/GuestFormWithChangedErrors';
+import { GuestFormWithErrorFields } from '../website/pages-parts/Tutorial/GuestFormWithErrorFields';
+import { GuestFormWithHeading } from '../website/pages-parts/Tutorial/GuestFormWithHeading';
+import { TutorialForm } from '../website/components/TutorialForm';
 
 Great! Now that we have our form up and running, it's time to think about how we can customize it and adjust to our needs.
 
@@ -28,7 +28,7 @@ If you need to add heading to your form, using `AutoFields` seems to be a perfec
 <CodeSection
   language="js"
   replace={{ "'[^']*?/universal'": "'uniforms-semantic'" }}
-  source={require('!!raw-loader!./examples/Tutorial/GuestFormWithHeading')}
+  source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestFormWithHeading')}
 />
 
 <TutorialForm>
@@ -47,7 +47,7 @@ asking whether the people filling the form would like to share with us their wor
 <CodeSection
   language="js"
   replace={{ "'[^']*?/universal'": "'uniforms-semantic'" }}
-  source={require('!!raw-loader!./examples/Tutorial/GuestFormWithAutoFields')}
+  source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestFormWithAutoFields')}
 />
 
 <TutorialForm>
@@ -63,7 +63,7 @@ we can use the `ErrorField` and just place it directly where want in our form.
 <CodeSection
   language="js"
   replace={{ "'[^']*?/universal'": "'uniforms-semantic'" }}
-  source={require('!!raw-loader!./examples/Tutorial/GuestFormWithErrorFields')}
+  source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestFormWithErrorFields')}
 />
 
 <TutorialForm>
@@ -78,7 +78,7 @@ either by passing the `children` to the `ErrorField` or by using the `errorMessa
 <CodeSection
   language="js"
   replace={{ "'[^']*?/universal'": "'uniforms-semantic'" }}
-  source={require('!!raw-loader!./examples/Tutorial/GuestFormWithChangedErrors')}
+  source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestFormWithChangedErrors')}
 />
 
 <TutorialForm>

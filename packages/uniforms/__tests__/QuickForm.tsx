@@ -20,7 +20,7 @@ describe('QuickForm', () => {
     messageForError: () => {},
     objectKeys: () => ['a', 'b', 'c'],
     validator: () => {},
-  });
+  } as any);
 
   describe('when rendered with custom fields', () => {
     it('renders `AutoField` for each field', () => {

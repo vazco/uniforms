@@ -1,0 +1,38 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "rootDir": ".",
+    "tsBuildInfoFile": "node_modules/.cache/global.tsbuildinfo"
+  },
+  "include": [
+    "packages/*/__mocks__",
+    "packages/*/__tests__",
+    "scripts",
+    "website"
+  ],
+  "references": [
+    { "path": "packages/uniforms/tsconfig.es5.json" },
+    { "path": "packages/uniforms/tsconfig.es6.json" },
+    { "path": "packages/uniforms-antd/tsconfig.es5.json" },
+    { "path": "packages/uniforms-antd/tsconfig.es6.json" },
+    { "path": "packages/uniforms-bootstrap3/tsconfig.es5.json" },
+    { "path": "packages/uniforms-bootstrap3/tsconfig.es6.json" },
+    { "path": "packages/uniforms-bootstrap4/tsconfig.es5.json" },
+    { "path": "packages/uniforms-bootstrap4/tsconfig.es6.json" },
+    { "path": "packages/uniforms-bridge-graphql/tsconfig.es5.json" },
+    { "path": "packages/uniforms-bridge-graphql/tsconfig.es6.json" },
+    { "path": "packages/uniforms-bridge-json-schema/tsconfig.es5.json" },
+    { "path": "packages/uniforms-bridge-json-schema/tsconfig.es6.json" },
+    { "path": "packages/uniforms-bridge-simple-schema/tsconfig.es5.json" },
+    { "path": "packages/uniforms-bridge-simple-schema/tsconfig.es6.json" },
+    { "path": "packages/uniforms-bridge-simple-schema-2/tsconfig.es5.json" },
+    { "path": "packages/uniforms-bridge-simple-schema-2/tsconfig.es6.json" },
+    { "path": "packages/uniforms-material/tsconfig.es5.json" },
+    { "path": "packages/uniforms-material/tsconfig.es6.json" },
+    { "path": "packages/uniforms-semantic/tsconfig.es5.json" },
+    { "path": "packages/uniforms-semantic/tsconfig.es6.json" },
+    { "path": "packages/uniforms-unstyled/tsconfig.es5.json" },
+    { "path": "packages/uniforms-unstyled/tsconfig.es6.json" }
+  ]
+}

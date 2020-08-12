@@ -24,12 +24,12 @@ export default class SimpleSchemaBridge extends Bridge {
     const scopedError = this.getError(name, error);
     return !scopedError
       ? ''
-      : (this.schema.messageForError(
+      : this.schema.messageForError(
           scopedError.type,
           scopedError.name,
           null,
           scopedError.details && scopedError.details.value,
-        ) as string);
+        );
   }
 
   getErrorMessages(error: any) {

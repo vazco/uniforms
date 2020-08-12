@@ -49,7 +49,7 @@ export type GuaranteedProps<Value> = {
   id: string;
   label: ReactNode;
   name: string;
-  onChange(value?: Value, name?: string): void;
+  onChange(value?: Value | null, name?: string): void;
   placeholder: string;
   showInlineError: boolean;
   value?: Value;

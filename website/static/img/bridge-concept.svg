@@ -1,0 +1,88 @@
+<svg version="1.1" baseProfile="full" width="1138.75" height="427" viewbox="0 0 1138.75 427" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" style="font-weight:bold; font-size:14pt; font-family:monospace;stroke-width:3;stroke-linejoin:round;stroke-linecap:round">
+  <title >bridge-concept</title>
+  <desc >#edgeMargin: 5
+#fill: transparent
+#font: monospace
+#fontSize: 14
+#padding: 20
+#spacing: 35
+#stroke: #333
+#title: bridge-concept
+
+[GraphQL] -&gt; [GraphQLBridge]
+[JSONSchema] -&gt; [JSONSchemaBridge]
+[SimpleSchema2 (npm)] -&gt; [SimpleSchema2Bridge]
+[SimpleSchema] -&gt; [SimpleSchemaBridge]
+
+[GraphQLBridge] -&gt; [uniforms]
+[SimpleSchemaBridge] -&gt; [uniforms]
+[JSONSchemaBridge] -&gt; [uniforms]
+[SimpleSchema2Bridge] -&gt; [uniforms]
+[SimpleSchemaBridge] -&gt; [uniforms]
+
+[uniforms] -&gt; [Ant Design]
+[uniforms] -&gt; [Bootstrap 3]
+[uniforms] -&gt; [Bootstrap 4]
+[uniforms] -&gt; [Material-UI]
+[uniforms] -&gt; [Semantic UI]
+[uniforms] -&gt; [unstyled]</desc>
+  <rect x="0" y="0" height="427" width="1138.75" style="stroke:none; fill:transparent;"></rect>
+  <path d="M200 93.5 L200 111 L200 128.5 L200 128.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M195.3 116.8 L200 122.7 L204.7 116.8 L200 128.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M679 93.5 L679 111 L679 128.5 L679 128.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M674.3 116.8 L679 122.7 L683.7 116.8 L679 128.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M930.5 93.5 L930.5 111 L930.5 128.5 L930.5 128.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M925.8 116.8 L930.5 122.7 L935.2 116.8 L930.5 128.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M432.5 93.5 L432.5 111 L432.5 128.5 L432.5 128.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M427.8 116.8 L432.5 122.7 L437.2 116.8 L432.5 128.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M200 196.5 L200 214 L506 256.7 L506 256.7 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M493.8 259.7 L500.2 255.9 L495.1 250.5 L506 256.7 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M432.5 196.5 L432.5 214 L506 241.7 L506 241.7 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M493.4 242 L500.5 239.7 L496.7 233.2 L506 241.7 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M679 196.5 L679 214 L632 236 L632 236 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M640.6 226.8 L637.3 233.5 L644.5 235.3 L632 236 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M930.5 196.5 L930.5 214 L632 256.5 L632 256.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M642.9 250.3 L637.8 255.7 L644.2 259.5 L632 256.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M506 272.4 L98 317 L98 334.5 L98 334.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M93.3 322.8 L98 328.7 L102.7 322.8 L98 334.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M506 276.8 L283 317 L283 334.5 L283 334.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M278.3 322.8 L283 328.7 L287.7 322.8 L283 334.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M506 299.3 L473 317 L473 334.5 L473 334.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M468.3 322.8 L473 328.7 L477.7 322.8 L473 334.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M632 299.3 L665 317 L665 334.5 L665 334.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M660.3 322.8 L665 328.7 L669.7 322.8 L665 334.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M632 276.8 L857 317 L857 334.5 L857 334.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M852.3 322.8 L857 328.7 L861.7 322.8 L857 334.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M632 272.5 L1032.5 317 L1032.5 334.5 L1032.5 334.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M1027.8 322.8 L1032.5 328.7 L1037.2 322.8 L1032.5 334.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <rect x="146.5" y="30.5" height="58" width="107" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="200" y="66.3" style="fill: #333;text-anchor: middle;">GraphQL</text>
+  <rect x="118.5" y="133.5" height="58" width="164" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="200.5" y="169.3" style="fill: #333;text-anchor: middle;">GraphQLBridge</text>
+  <rect x="611.5" y="30.5" height="58" width="135" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="679" y="66.3" style="fill: #333;text-anchor: middle;">JSONSchema</text>
+  <rect x="583.5" y="133.5" height="58" width="192" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="679.5" y="169.3" style="fill: #333;text-anchor: middle;">JSONSchemaBridge</text>
+  <rect x="820.5" y="30.5" height="58" width="221" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="931" y="66.3" style="fill: #333;text-anchor: middle;">SimpleSchema2 (npm)</text>
+  <rect x="820.5" y="133.5" height="58" width="221" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="931" y="169.3" style="fill: #333;text-anchor: middle;">SimpleSchema2Bridge</text>
+  <rect x="355.5" y="30.5" height="58" width="154" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="432.5" y="66.3" style="fill: #333;text-anchor: middle;">SimpleSchema</text>
+  <rect x="327.5" y="133.5" height="58" width="211" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="433" y="169.3" style="fill: #333;text-anchor: middle;">SimpleSchemaBridge</text>
+  <rect x="511.5" y="236.5" height="58" width="116" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="569.5" y="272.3" style="fill: #333;text-anchor: middle;">uniforms</text>
+  <rect x="30.5" y="339.5" height="58" width="135" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="98" y="375.3" style="fill: #333;text-anchor: middle;">Ant Design</text>
+  <rect x="210.5" y="339.5" height="58" width="145" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="283" y="375.3" style="fill: #333;text-anchor: middle;">Bootstrap 3</text>
+  <rect x="400.5" y="339.5" height="58" width="145" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="473" y="375.3" style="fill: #333;text-anchor: middle;">Bootstrap 4</text>
+  <rect x="590.5" y="339.5" height="58" width="149" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="665" y="375.3" style="fill: #333;text-anchor: middle;">Material-UI</text>
+  <rect x="784.5" y="339.5" height="58" width="145" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="857" y="375.3" style="fill: #333;text-anchor: middle;">Semantic UI</text>
+  <rect x="974.5" y="339.5" height="58" width="116" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="1032.5" y="375.3" style="fill: #333;text-anchor: middle;">unstyled</text>
+</svg>

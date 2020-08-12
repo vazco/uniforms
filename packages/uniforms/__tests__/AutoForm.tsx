@@ -18,7 +18,7 @@ describe('AutoForm', () => {
     messageForError: () => {},
     objectKeys: () => ['a', 'b', 'c'],
     validator: () => validator,
-  });
+  } as any);
 
   beforeEach(() => {
     onChange.mockClear();
