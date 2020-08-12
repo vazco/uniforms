@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined';
 import Tooltip from 'antd/lib/tooltip';
+import classNames from 'classnames';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import ListAddField from './ListAddField';
@@ -25,8 +26,15 @@ export type ListFieldProps = HTMLFieldProps<
   }
 >;
 
+const defaultStyle = {
+  marginBottom: '5px',
+  marginTop: '5px',
+  padding: '10px',
+};
+
 function List({
   children = <ListItemField name="$" />,
+  className,
   error,
   errorMessage,
   info,
@@ -35,12 +43,17 @@ function List({
   label,
   labelCol,
   showInlineError,
+  style = defaultStyle,
   value,
   wrapperCol,
   ...props
 }: ListFieldProps) {
   return (
-    <div {...filterDOMProps(props)}>
+    <div
+      {...filterDOMProps(props)}
+      style={style}
+      className={classNames([className, 'ant-list', 'ant-list-bordered'])}
+    >
       {label && (
         <div>
           {label}
@@ -75,15 +88,5 @@ function List({
     </div>
   );
 }
-
-List.defaultProps = {
-  style: {
-    border: '1px solid #DDD',
-    borderRadius: '7px',
-    marginBottom: '5px',
-    marginTop: '5px',
-    padding: '10px',
-  },
-};
 
 export default connectField(List);

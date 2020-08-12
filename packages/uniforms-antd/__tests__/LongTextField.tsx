@@ -12,6 +12,17 @@ test('<LongTextField> - renders a textarea', () => {
   expect(wrapper.find(TextArea)).toHaveLength(1);
 });
 
+test('<LongTextField> - default props override', () => {
+  const textareaProps = { rows: 1 };
+
+  const element = <LongTextField name="x" {...textareaProps} />;
+  const wrapper = mount(element, createContext({ x: { type: String } }));
+
+  expect(wrapper.find(TextArea).props()).toEqual(
+    expect.objectContaining(textareaProps),
+  );
+});
+
 test('<LongTextField> - renders a textarea with correct disabled state', () => {
   const element = <LongTextField name="x" disabled />;
   const wrapper = mount(element, createContext({ x: { type: String } }));

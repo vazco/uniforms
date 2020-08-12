@@ -13,6 +13,16 @@ test('<DateField> - renders an input', () => {
   expect(wrapper.find(DatePicker)).toHaveLength(1);
 });
 
+test('<DateField> - default props override', () => {
+  const pickerProps = { showTime: false, style: {} };
+  const element = <DateField name="x" {...pickerProps} />;
+  const wrapper = mount(element, createContext({ x: { type: Date } }));
+
+  expect(wrapper.find(DatePicker).props()).toEqual(
+    expect.objectContaining(pickerProps),
+  );
+});
+
 test('<DateField> - renders a input with correct id (inherited)', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));

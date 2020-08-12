@@ -11,7 +11,7 @@ export type LongTextFieldProps = FieldProps<
   { inputRef?: Ref<TextArea> }
 >;
 
-function LongText(props: LongTextFieldProps) {
+function LongText({ rows = 5, ...props }: LongTextFieldProps) {
   return wrapField(
     props,
     <TextArea
@@ -20,12 +20,11 @@ function LongText(props: LongTextFieldProps) {
       onChange={event => props.onChange(event.target.value)}
       placeholder={props.placeholder}
       ref={props.inputRef}
+      rows={rows}
       value={props.value ?? ''}
       {...filterDOMProps(props)}
     />,
   );
 }
-
-LongText.defaultProps = { rows: 5 };
 
 export default connectField(LongText, { kind: 'leaf' });

@@ -13,6 +13,20 @@ test('<BoolField> - renders a switch input', () => {
   expect(wrapper.find(Switch)).toHaveLength(1);
 });
 
+test('<BoolField> - default props override', () => {
+  const switchProps = {
+    checkedChildren: <span id="checked" />,
+    unCheckedChildren: <span id="unchecked" />,
+  };
+
+  const element = <BoolField name="x" {...switchProps} />;
+  const wrapper = mount(element, createContext({ x: { type: Boolean } }));
+
+  expect(wrapper.find(Switch).props()).toEqual(
+    expect.objectContaining(switchProps),
+  );
+});
+
 test('<BoolField> - renders a checkbox input', () => {
   const element = <BoolField checkbox name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));

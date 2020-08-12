@@ -15,6 +15,8 @@ type WrapperProps = Override<
   }
 >;
 
+const defaultWrapperStyle = { marginBottom: '12px' };
+
 export default function wrapField(
   {
     colon,
@@ -29,7 +31,7 @@ export default function wrapField(
     required,
     showInlineError,
     wrapperCol,
-    wrapperStyle,
+    wrapperStyle = defaultWrapperStyle,
   }: WrapperProps,
   children: ReactNode,
 ) {
@@ -57,7 +59,7 @@ export default function wrapField(
       label={labelNode}
       labelCol={labelCol}
       required={required}
-      style={wrapperStyle || { marginBottom: '12px' }}
+      style={wrapperStyle}
       validateStatus={error ? 'error' : undefined}
       wrapperCol={wrapperCol}
     >
