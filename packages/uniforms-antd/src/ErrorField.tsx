@@ -24,7 +24,7 @@ function Error({
   ...props
 }: ErrorFieldProps) {
   return !error ? null : (
-    <div {...filterDOMProps({ style, ...props })}>
+    <div style={style} {...filterDOMProps(props)}>
       {children || <div style={messageStyle}>{errorMessage}</div>}
     </div>
   );
