@@ -78,23 +78,19 @@ describe('GraphQLBridge', () => {
   const astT = buildASTSchema(parse(schemaT));
 
   const bridgeI = new GraphQLBridge(
-    astI.getType('Post') as GraphQLInputObjectType,
+    astI.getType('Post')!,
     schemaValidator,
     schemaData,
   );
   const bridgeT = new GraphQLBridge(
-    astT.getType('Post') as GraphQLObjectType,
+    astT.getType('Post')!,
     schemaValidator,
     schemaData,
   );
 
   describe('#constructor()', () => {
     it('always ensures `extras`', () => {
-      const bridge = new GraphQLBridge(
-        astI.getType('Post') as GraphQLInputObjectType,
-        schemaValidator,
-      );
-
+      const bridge = new GraphQLBridge(astI.getType('Post')!, schemaValidator);
       expect(bridge.extras).toEqual({});
     });
   });

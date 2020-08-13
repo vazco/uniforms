@@ -25,7 +25,6 @@ const args = {
   title: { label: 'Horse A', placeholder: 'Horse B' },
 };
 
-const type = buildASTSchema(parse(schema)).getType('Address');
-if (!(type instanceof GraphQLObjectType)) throw new Error('Invalid type.');
+const type = buildASTSchema(parse(schema)).getType('Address')!;
 
 export const bridge = new GraphQLBridge(type, validator, args);
