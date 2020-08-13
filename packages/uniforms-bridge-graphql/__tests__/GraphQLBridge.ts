@@ -193,10 +193,10 @@ describe('GraphQLBridge', () => {
     });
 
     it('throws on not found field', () => {
-      expect(() => bridgeI.getField('x')).toThrow(/Field not found in schema/);
-      expect(() => bridgeI.getField('author.x')).toThrow(
-        /Field not found in schema/,
-      );
+      const error = /Field not found in schema/;
+      expect(() => bridgeI.getField('x')).toThrow(error);
+      expect(() => bridgeI.getField('author.x')).toThrow(error);
+      expect(() => bridgeI.getField('author.tags.x')).toThrow(error);
     });
   });
 
