@@ -1,6 +1,7 @@
 ## Next:
 
 - **Breaking:** Minimum `graphql` version for `uniforms-bridge-graphql` is now `15.0.0`. [\#781](https://github.com/vazco/uniforms/issues/781)
+- **Fixed:** Styling mismatch in some `uniforms-antd` fields. [\#773](https://github.com/vazco/uniforms/issues/773)
 
 ## [v3.0.0-rc.2](https://github.com/vazco/uniforms/tree/v3.0.0-rc.2) (2020-07-30)
 
