@@ -1,4 +1,13 @@
-import * as graphql from 'graphql/type/definition';
+import {
+  GraphQLInputField,
+  GraphQLType,
+  getNullableType,
+  isInputObjectType,
+  isListType,
+  isNonNullType,
+  isObjectType,
+  isScalarType,
+} from 'graphql/type/definition';
 import invariant from 'invariant';
 import lowerCase from 'lodash/lowerCase';
 import memoize from 'lodash/memoize';
@@ -9,28 +18,20 @@ function extractValue(x: boolean | null | string | undefined, y: string) {
   return x === false || x === null ? '' : x !== true && x !== undefined ? x : y;
 }
 
-// FIXME: What type is it? Maybe there's a helper in `graphql` for that?
-function extractFromNonNull(x: any) {
-  return x && graphql.isNonNullType(x.type) ? { ...x, type: x.type.ofType } : x;
-}
-
 function toHumanLabel(label: string) {
   return upperFirst(lowerCase(label));
 }
 
 export default class GraphQLBridge extends Bridge {
   constructor(
-    public schema: graphql.GraphQLInputObjectType | graphql.GraphQLObjectType,
+    public schema: GraphQLType,
     public validator: (model: Record<string, any>) => any,
     public extras: Record<string, any> = {},
   ) {
     super();
 
     // Memoize for performance and referential equality.
-    this.getField = memoize(
-      this.getField,
-      (name, returnExtracted = true) => `${name}:${returnExtracted}`,
-    );
+    this.getField = memoize(this.getField);
     this.getSubfields = memoize(this.getSubfields);
     this.getType = memoize(this.getType);
   }
@@ -66,53 +67,34 @@ export default class GraphQLBridge extends Bridge {
     return [];
   }
 
-  getField(name: string, returnExtracted = true) {
-    return joinName(null, name).reduce((definition, next, index, array) => {
-      if (next === '$' || next === '' + parseInt(next, 10)) {
+  getField(name: string) {
+    const root = { name: '', type: this.schema } as GraphQLInputField;
+
+    return joinName(null, name).reduce((field, namePart) => {
+      const fieldType = getNullableType(field.type);
+
+      if (namePart === '$' || namePart === '' + parseInt(namePart, 10)) {
         invariant(
-          graphql.isListType(definition.type),
+          isListType(fieldType),
           'Field not found in schema: "%s"',
           name,
         );
-        definition = { type: extractFromNonNull(definition.type.ofType) };
-        // @ts-ignore: Not public API.
-      } else if (definition.type && definition.type._fields) {
-        // @ts-ignore: Not public API.
-        definition = definition.type._fields[next];
-      } else {
-        // @ts-ignore: Incorrect `definition` type.
-        definition = definition[next];
+
+        return { ...field, type: fieldType.ofType };
       }
 
-      invariant(definition, 'Field not found in schema: "%s"', name);
-
-      const isLast = array.length - 1 === index;
-      if (isLast && !returnExtracted) {
-        return definition;
+      if (isInputObjectType(fieldType) || isObjectType(fieldType)) {
+        const fields = fieldType.getFields();
+        invariant(namePart in fields, 'Field not found in schema: "%s"', name);
+        return fields[namePart] as GraphQLInputField;
       }
 
-      const extracted = extractFromNonNull(definition);
-
-      if (
-        (isLast && returnExtracted) ||
-        !graphql.isObjectType(extracted.type)
-      ) {
-        return extracted;
-      }
-
-      invariant(
-        extracted.type.getFields,
-        'Field not found in schema: "%s"',
-        name,
-      );
-
-      return extracted.type.getFields();
-    }, this.schema.getFields());
+      invariant(false, 'Field not found in schema: "%s"', name);
+    }, root);
   }
 
   getInitialValue(name: string, props: Record<string, any> = {}): any {
     const type = this.getType(name);
-
     if (type === Array) {
       const item = this.getInitialValue(joinName(name, '0'));
       const items = (props.initialCount as number) || 0;
@@ -124,32 +106,26 @@ export default class GraphQLBridge extends Bridge {
       return {};
     }
 
-    const defaultValue = this.getField(name).defaultValue;
-
-    return defaultValue === undefined
-      ? this.extras[name]?.initialValue
-      : defaultValue;
+    const { defaultValue } = this.getField(name);
+    return defaultValue ?? this.extras[name]?.initialValue;
   }
 
-  // eslint-disable-next-line complexity
   getProps(nameNormal: string, props: Record<string, any> = {}) {
     const nameGeneric = nameNormal.replace(/\.\d+/g, '.$');
 
-    const field = this.getField(nameGeneric, false);
-    const fieldType = extractFromNonNull(field).type;
-
+    const { name, type } = this.getField(nameGeneric);
     const ready = {
-      required: graphql.isNonNullType(field.type),
+      required: isNonNullType(type),
       ...this.extras[nameGeneric],
       ...this.extras[nameNormal],
     };
 
-    if (graphql.isScalarType(fieldType) && fieldType.name === 'Float') {
+    const fieldType = getNullableType(type);
+    if (isScalarType(fieldType) && fieldType.name === 'Float') {
       ready.decimal = true;
     }
 
-    // @ts-ignore: `field.name` is not a string?
-    ready.label = extractValue(ready.label, toHumanLabel(field.name));
+    ready.label = extractValue(ready.label, toHumanLabel(name));
 
     const options = props.options || ready.options;
     if (options) {
@@ -166,38 +142,27 @@ export default class GraphQLBridge extends Bridge {
     return ready;
   }
 
-  getSubfields(name?: string) {
-    if (!name) {
-      return Object.keys(this.schema.getFields());
-    }
-
-    const fieldType = this.getField(name).type;
-
-    if (
-      graphql.isObjectType(fieldType) ||
-      graphql.isInputObjectType(fieldType)
-    ) {
-      return Object.keys(fieldType.getFields());
-    }
-
-    return [];
+  getSubfields(name = '') {
+    const type = getNullableType(this.getField(name).type);
+    return isInputObjectType(type) || isObjectType(type)
+      ? Object.keys(type.getFields())
+      : [];
   }
 
   getType(name: string) {
-    const fieldType = this.getField(name).type;
+    const type = getNullableType(this.getField(name).type);
 
-    if (graphql.isListType(fieldType)) return Array;
-    if (graphql.isObjectType(fieldType)) return Object;
-    if (graphql.isInputObjectType(fieldType)) return Object;
-    if (graphql.isScalarType(fieldType)) {
-      if (fieldType.name === 'ID') return String;
-      if (fieldType.name === 'Int') return Number;
-      if (fieldType.name === 'Float') return Number;
-      if (fieldType.name === 'String') return String;
-      if (fieldType.name === 'Boolean') return Boolean;
+    if (isInputObjectType(type) || isObjectType(type)) return Object;
+    if (isListType(type)) return Array;
+    if (isScalarType(type)) {
+      if (type.name === 'Boolean') return Boolean;
+      if (type.name === 'Float') return Number;
+      if (type.name === 'ID') return String;
+      if (type.name === 'Int') return Number;
+      if (type.name === 'String') return String;
     }
 
-    return fieldType;
+    return type;
   }
 
   getValidator(/* options */) {
