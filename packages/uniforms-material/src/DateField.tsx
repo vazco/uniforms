@@ -23,6 +23,7 @@ function Date({
   disabled,
   error,
   errorMessage,
+  fullWidth = true,
   helperText,
   InputLabelProps,
   inputRef,
@@ -37,13 +38,14 @@ function Date({
 }: DateFieldProps) {
   return (
     <TextField
-      disabled={!!disabled}
+      disabled={disabled}
       error={!!error}
+      fullWidth={fullWidth}
       helperText={(error && showInlineError && errorMessage) || helperText}
       label={label}
       InputLabelProps={{ ...labelProps, ...InputLabelProps }}
-      name={name}
       margin={props.margin ?? 'dense'}
+      name={name}
       onChange={event =>
         // FIXME: `valueAsNumber` is not available in `EventTarget`.
         disabled || dateParse((event.target as any).valueAsNumber, onChange)

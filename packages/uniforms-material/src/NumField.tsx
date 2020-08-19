@@ -28,11 +28,13 @@ function Num({
 }: NumFieldProps) {
   return (
     <TextField
-      disabled={!!disabled}
+      disabled={disabled}
       error={!!error}
+      fullWidth={props.fullWidth ?? true}
       helperText={(error && showInlineError && errorMessage) || helperText}
       inputProps={{ min, max, step: decimal ? 0.01 : 1, ...inputProps }}
       label={label}
+      margin={props.margin ?? 'dense'}
       name={name}
       onChange={event => {
         const parse = decimal ? parseFloat : parseInt;
@@ -42,8 +44,6 @@ function Num({
       placeholder={placeholder}
       ref={inputRef}
       type="number"
-      margin={props.margin ?? 'dense'}
-      fullWidth={props.fullWidth ?? true}
       value={value ?? ''}
       {...filterDOMProps(props)}
     />
