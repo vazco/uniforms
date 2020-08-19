@@ -1,6 +1,6 @@
 import React from 'react';
 import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
-import { connectField, FieldProps, filterDOMProps } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 export type LongTextFieldProps = FieldProps<string, StandardTextFieldProps>;
 

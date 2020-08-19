@@ -59,8 +59,4 @@ function Date({
   );
 }
 
-Date.defaultProps = {
-  fullWidth: true,
-};
-
 export default connectField(Date, { kind: 'leaf' });

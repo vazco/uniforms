@@ -13,10 +13,12 @@ function Num({
   disabled,
   error,
   errorMessage,
+  fullWidth = true,
   helperText,
   inputProps,
   inputRef,
   label,
+  margin = 'dense',
   max,
   min,
   name,
@@ -30,11 +32,11 @@ function Num({
     <TextField
       disabled={disabled}
       error={!!error}
-      fullWidth={props.fullWidth ?? true}
+      fullWidth={fullWidth}
       helperText={(error && showInlineError && errorMessage) || helperText}
       inputProps={{ min, max, step: decimal ? 0.01 : 1, ...inputProps }}
       label={label}
-      margin={props.margin ?? 'dense'}
+      margin={margin}
       name={name}
       onChange={event => {
         const parse = decimal ? parseFloat : parseInt;

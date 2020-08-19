@@ -17,8 +17,8 @@ function Text({
   onChange,
   placeholder,
   showInlineError,
-  type,
-  value = 'text',
+  type = 'text',
+  value = '',
   ...props
 }: TextFieldProps) {
   return (
@@ -34,7 +34,7 @@ function Text({
       placeholder={placeholder}
       ref={inputRef}
       type={type}
-      value={value ?? ''}
+      value={value}
       {...filterDOMProps(props)}
     />
   );
