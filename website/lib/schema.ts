@@ -1,11 +1,11 @@
 import Ajv from 'ajv';
+import { buildASTSchema, parse } from 'graphql';
 // @ts-ignore: Typings.
 import MessageBox from 'message-box';
 import SimpleSchema from 'simpl-schema';
 import { GraphQLBridge } from 'uniforms-bridge-graphql';
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
-import { buildASTSchema, parse } from 'graphql';
 
 import presets from './presets';
 import { themes } from './universal';

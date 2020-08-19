@@ -1,3 +1,4 @@
+import get from 'lodash/get';
 import React, {
   RefObject,
   useCallback,
@@ -5,7 +6,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import get from 'lodash/get';
 
 function handleResize(
   ref: RefObject<HTMLIFrameElement | undefined>,
@@ -33,7 +33,8 @@ export function useFrameAutoResize(watch: unknown[]) {
   useEffect(() => {
     const id = setInterval(onLoad, 1000);
     return () => clearInterval(id);
-  }, watch);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [onLoad, ...watch]);
 
   return { onLoad, ref, style: { height } };
 }

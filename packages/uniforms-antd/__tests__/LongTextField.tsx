@@ -1,5 +1,5 @@
-import React from 'react';
 import TextArea from 'antd/lib/input/TextArea';
+import React from 'react';
 import { LongTextField } from 'uniforms-antd';
 
 import createContext from './_createContext';

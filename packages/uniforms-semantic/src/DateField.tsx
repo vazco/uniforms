@@ -1,5 +1,5 @@
-import React, { Ref } from 'react';
 import classnames from 'classnames';
+import React, { Ref } from 'react';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
 const DateConstructor = (typeof global === 'object' ? global : window).Date;

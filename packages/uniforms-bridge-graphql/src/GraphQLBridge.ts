@@ -152,14 +152,28 @@ export default class GraphQLBridge extends Bridge {
   getType(name: string) {
     const type = getNullableType(this.getField(name).type);
 
-    if (isInputObjectType(type) || isObjectType(type)) return Object;
-    if (isListType(type)) return Array;
+    if (isInputObjectType(type) || isObjectType(type)) {
+      return Object;
+    }
+    if (isListType(type)) {
+      return Array;
+    }
     if (isScalarType(type)) {
-      if (type.name === 'Boolean') return Boolean;
-      if (type.name === 'Float') return Number;
-      if (type.name === 'ID') return String;
-      if (type.name === 'Int') return Number;
-      if (type.name === 'String') return String;
+      if (type.name === 'Boolean') {
+        return Boolean;
+      }
+      if (type.name === 'Float') {
+        return Number;
+      }
+      if (type.name === 'ID') {
+        return String;
+      }
+      if (type.name === 'Int') {
+        return Number;
+      }
+      if (type.name === 'String') {
+        return String;
+      }
     }
 
     return type;

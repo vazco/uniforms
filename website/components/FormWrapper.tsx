@@ -1,9 +1,9 @@
 import React, { ReactNode, useContext } from 'react';
 
 import styles from '../index.module.css';
-import { PlaygroundWrap } from './Playground';
-import { themeContext } from '../lib/universal';
 import { useFrameAutoResize } from '../lib/autoresize';
+import { themeContext } from '../lib/universal';
+import { PlaygroundWrap } from './Playground';
 
 export type FormWrapperProps = {
   children: ReactNode;

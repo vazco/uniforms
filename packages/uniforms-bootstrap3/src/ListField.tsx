@@ -1,10 +1,10 @@
+import classnames from 'classnames';
 import React, {
   Children,
   ReactNode,
   cloneElement,
   isValidElement,
 } from 'react';
-import classnames from 'classnames';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import ListAddField from './ListAddField';

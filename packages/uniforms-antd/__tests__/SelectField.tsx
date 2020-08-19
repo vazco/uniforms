@@ -1,6 +1,6 @@
 import Radio from 'antd/lib/radio';
-import React from 'react';
 import Select from 'antd/lib/select';
+import React from 'react';
 import { SelectField } from 'uniforms-antd';
 
 import createContext from './_createContext';

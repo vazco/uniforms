@@ -1,6 +1,6 @@
 import Link from '@docusaurus/Link';
-import React, { ElementType, ReactNode } from 'react';
 import classNames from 'classnames';
+import React, { ElementType, ReactNode } from 'react';
 
 import styles from '../index.module.css';
 

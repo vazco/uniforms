@@ -1,9 +1,9 @@
 import React, { ReactNode, useState } from 'react';
 
 import styles from '../index.module.css';
+import { useTabs } from '../lib/tabs';
 import { TabsHeader, TabsItem } from './Tabs';
 import { TogglerHeader, TogglerItem } from './Toggler';
-import { useTabs } from '../lib/tabs';
 
 export type TogglerTabsProps<T extends TabsItem, U extends TogglerItem> = {
   children(args: { tab: T; toggle: U }): ReactNode;

@@ -1,10 +1,10 @@
+import React, { createContext, useContext } from 'react';
 import * as antd from 'uniforms-antd';
 import * as bootstrap3 from 'uniforms-bootstrap3';
 import * as bootstrap4 from 'uniforms-bootstrap4';
 import * as material from 'uniforms-material';
 import * as semantic from 'uniforms-semantic';
 import * as unstyled from 'uniforms-unstyled';
-import React, { createContext, useContext } from 'react';
 
 export const AutoFields = _createThemedComponent('AutoFields');
 export const AutoField = _createThemedComponent('AutoField');
@@ -42,7 +42,7 @@ export const themes = {
 export const themeContext = createContext<keyof typeof themes>('unstyled');
 
 function _createThemedComponent(component: keyof typeof unstyled) {
-  return function renderThemedComponent(props: Record<string, any>) {
+  return function ThemedComponent(props: Record<string, any>) {
     const theme = useContext(themeContext);
     const Component = themes[theme][component];
     return <Component key={theme} {...props} />;

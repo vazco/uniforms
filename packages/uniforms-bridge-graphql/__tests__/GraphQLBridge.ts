@@ -1,4 +1,3 @@
-import { GraphQLBridge } from 'uniforms-bridge-graphql';
 import {
   GraphQLInputObjectType,
   GraphQLObjectType,
@@ -6,6 +5,7 @@ import {
   buildASTSchema,
   parse,
 } from 'graphql';
+import { GraphQLBridge } from 'uniforms-bridge-graphql';
 
 describe('GraphQLBridge', () => {
   const schemaI = `

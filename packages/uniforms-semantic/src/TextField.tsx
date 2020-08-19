@@ -1,5 +1,5 @@
-import React, { Ref } from 'react';
 import classnames from 'classnames';
+import React, { Ref } from 'react';
 import { connectField, filterDOMProps, HTMLFieldProps } from 'uniforms';
 
 export type TextFieldProps = HTMLFieldProps<

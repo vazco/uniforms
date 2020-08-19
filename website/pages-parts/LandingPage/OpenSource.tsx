@@ -1,10 +1,10 @@
-import React, { ComponentType } from 'react';
 import classNames from 'classnames';
+import React, { ComponentType } from 'react';
 import { Download, GitBranch, Star } from 'react-feather';
 
-import styles from '../../index.module.css';
 import { Badge } from '../../components/Badge';
 import { Heading } from '../../components/Heading';
+import styles from '../../index.module.css';
 import { useStats } from '../../lib/stats';
 
 export function OpenSource() {

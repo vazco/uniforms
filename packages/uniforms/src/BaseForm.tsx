@@ -1,15 +1,15 @@
-import React, { Component, SyntheticEvent } from 'react';
 import clone from 'lodash/clone';
 import get from 'lodash/get';
 import isFunction from 'lodash/isFunction';
 import omit from 'lodash/omit';
 import setWith from 'lodash/setWith';
+import React, { Component, SyntheticEvent } from 'react';
 
 import { Bridge } from './Bridge';
-import { ChangedMap, Context, DeepPartial, ModelTransformMode } from './types';
 import { changedKeys } from './changedKeys';
 import { context } from './context';
 import { randomIds } from './randomIds';
+import { ChangedMap, Context, DeepPartial, ModelTransformMode } from './types';
 
 export type BaseFormProps<Model> = {
   autosave: boolean;

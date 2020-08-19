@@ -1,8 +1,8 @@
 import invariant from 'invariant';
 import { useContext } from 'react';
 
-import { Context } from './types';
 import { context as contextReference } from './context';
+import { Context } from './types';
 
 export function useForm<Model>(): Context<Model> {
   const context = useContext(contextReference);

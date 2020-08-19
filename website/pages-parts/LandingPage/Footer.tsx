@@ -1,7 +1,7 @@
 import Link from '@docusaurus/Link';
-import React from 'react';
-import classNames from 'classnames';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import classNames from 'classnames';
+import React from 'react';
 
 import styles from '../../index.module.css';
 import { ShowcaseCard } from './ShowcaseCard';

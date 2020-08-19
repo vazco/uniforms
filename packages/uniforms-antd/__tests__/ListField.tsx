@@ -1,5 +1,5 @@
-import React from 'react';
 import Tooltip from 'antd/lib/tooltip';
+import React from 'react';
 import { ListAddField, ListField, ListItemField } from 'uniforms-antd';
 
 import createContext from './_createContext';

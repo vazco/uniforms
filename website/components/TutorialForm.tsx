@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
 
+import { themeContext } from '../lib/universal';
 import { FormWrapper } from './FormWrapper';
 import { Tabs } from './Tabs';
-import { themeContext } from '../lib/universal';
 
 const tabs = [
   { name: 'Semantic', value: 'semantic' as const },

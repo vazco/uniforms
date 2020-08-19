@@ -1,6 +1,6 @@
 import Checkbox from 'antd/lib/checkbox';
-import React from 'react';
 import Switch from 'antd/lib/switch';
+import React from 'react';
 import { BoolField } from 'uniforms-antd';
 
 import createContext from './_createContext';

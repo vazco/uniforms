@@ -1,9 +1,9 @@
-import React, { ComponentType, FunctionComponent } from 'react';
 import mapValues from 'lodash/mapValues';
 import some from 'lodash/some';
+import React, { ComponentType, FunctionComponent } from 'react';
 
-import { GuaranteedProps, Override } from './types';
 import { context as contextReference } from './context';
+import { GuaranteedProps, Override } from './types';
 import { useField } from './useField';
 
 export function connectField<

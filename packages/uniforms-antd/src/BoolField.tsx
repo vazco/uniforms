@@ -1,8 +1,8 @@
 import CheckOutlined from '@ant-design/icons/CheckOutlined';
-import Checkbox, { CheckboxProps } from 'antd/lib/checkbox';
 import CloseOutlined from '@ant-design/icons/CloseOutlined';
-import React, { ReactNode, Ref } from 'react';
+import Checkbox, { CheckboxProps } from 'antd/lib/checkbox';
 import Switch, { SwitchProps } from 'antd/lib/switch';
+import React, { ReactNode, Ref } from 'react';
 import { connectField, FieldProps, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';

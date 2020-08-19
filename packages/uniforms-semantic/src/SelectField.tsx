@@ -1,6 +1,6 @@
-import React, { Ref } from 'react';
 import classnames from 'classnames';
 import xor from 'lodash/xor';
+import React, { Ref } from 'react';
 import { connectField, filterDOMProps, HTMLFieldProps } from 'uniforms';
 
 const base64 =

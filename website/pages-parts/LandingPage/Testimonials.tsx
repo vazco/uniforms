@@ -1,8 +1,8 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
 
-import styles from '../../index.module.css';
 import { Heading } from '../../components/Heading';
+import styles from '../../index.module.css';
 
 export type TestimonialProps = {
   company: string;

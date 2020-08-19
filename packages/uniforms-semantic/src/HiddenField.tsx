@@ -15,7 +15,9 @@ export default function HiddenField({ value, ...rawProps }: HiddenFieldProps) {
   const props = useField(rawProps.name, rawProps, { initialValue: false })[0];
 
   useEffect(() => {
-    if (value !== undefined && value !== props.value) props.onChange(value);
+    if (value !== undefined && value !== props.value) {
+      props.onChange(value);
+    }
   });
 
   return props.noDOM ? null : (

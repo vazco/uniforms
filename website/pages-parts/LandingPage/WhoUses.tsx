@@ -1,11 +1,11 @@
-import React from 'react';
-import classNames from 'classnames';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import classNames from 'classnames';
+import React from 'react';
 
-import styles from '../../index.module.css';
 import { Button } from '../../components/Button';
 import { Heading } from '../../components/Heading';
 import { Subtitle } from '../../components/Subtitle';
+import styles from '../../index.module.css';
 
 export function WhoUses() {
   const context = useDocusaurusContext();

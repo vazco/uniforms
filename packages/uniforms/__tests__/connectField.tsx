@@ -1,6 +1,6 @@
 import React from 'react';
-import { Context, connectField, randomIds } from 'uniforms';
 import { SimpleSchema } from 'simpl-schema';
+import { Context, connectField, randomIds } from 'uniforms';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
 
 import mount from './_mount';

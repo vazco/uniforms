@@ -1,7 +1,7 @@
-import SimpleSchema from 'simpl-schema';
-import cloneDeep from 'lodash/cloneDeep';
 import invariant from 'invariant';
+import cloneDeep from 'lodash/cloneDeep';
 import memoize from 'lodash/memoize';
+import SimpleSchema from 'simpl-schema';
 import { Bridge, joinName } from 'uniforms';
 
 export default class SimpleSchema2Bridge extends Bridge {
