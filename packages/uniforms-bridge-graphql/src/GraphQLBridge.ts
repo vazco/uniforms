@@ -114,7 +114,7 @@ export default class GraphQLBridge extends Bridge {
     const nameGeneric = nameNormal.replace(/\.\d+/g, '.$');
 
     const { name, type } = this.getField(nameGeneric);
-    const ready = {
+    const result = {
       required: isNonNullType(type),
       ...this.extras[nameGeneric],
       ...this.extras[nameNormal],
@@ -122,24 +122,24 @@ export default class GraphQLBridge extends Bridge {
 
     const fieldType = getNullableType(type);
     if (isScalarType(fieldType) && fieldType.name === 'Float') {
-      ready.decimal = true;
+      result.decimal = true;
     }
 
-    ready.label = extractValue(ready.label, toHumanLabel(name));
+    result.label = extractValue(result.label, toHumanLabel(name));
 
-    const options = props.options || ready.options;
+    const options = props.options || result.options;
     if (options) {
       if (!Array.isArray(options)) {
-        ready.transform = (value: any) => options[value];
-        ready.allowedValues = Object.keys(options);
+        result.transform = (value: any) => options[value];
+        result.allowedValues = Object.keys(options);
       } else {
-        ready.transform = (value: any) =>
+        result.transform = (value: any) =>
           options.find(option => option.value === value).label;
-        ready.allowedValues = options.map(option => option.value);
+        result.allowedValues = options.map(option => option.value);
       }
     }
 
-    return ready;
+    return result;
   }
 
   getSubfields(name = '') {
