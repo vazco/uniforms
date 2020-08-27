@@ -10,7 +10,7 @@ node {
       bat "npm run lint"
     }
     catch(err) {
-      echo "Lint: ${err}" 
+      echo "Lint Error: ${err}" 
     }
   }
   stage('Test') {
@@ -27,7 +27,7 @@ node {
       bat "npm --prefix website run build"
     }
     catch(err) {
-      echo "Build: ${err}" 
+      echo "Build Error: ${err}" 
     }
   }
   stage('Deploy') {
