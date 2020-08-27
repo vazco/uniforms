@@ -64,7 +64,7 @@
 
 <br />
 
-# License
+# Licenses
 
 <img src="https://vazco.eu/banner.png" align="right" />
 
