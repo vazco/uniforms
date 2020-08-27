@@ -42,7 +42,7 @@ module.exports = {
       },
     ],
     email: 'hello@uniforms.tools',
-    keywords: ['forms', 'react', 'schema'],
+    keywords: [ 'forms', 'react', 'schema' ],
   },
   themeConfig: {
     algolia: {
@@ -53,7 +53,7 @@ module.exports = {
     googleAnalytics: { trackingID: 'UA-136559762-4' },
     hotjar: { hjid: 1434110 },
     navbar: {
-      links: [
+      items: [
         { label: 'Docs', to: '/docs/what-are-uniforms', position: 'left' },
         {
           label: 'Tutorial',
@@ -72,7 +72,7 @@ module.exports = {
     sidebarCollapsible: false,
   },
   favicon: 'favicon.ico',
-  plugins: [path.resolve(__dirname, './plugins/docusaurus-plugin-hotjar')],
+  plugins: [ path.resolve(__dirname, './plugins/docusaurus-plugin-hotjar') ],
   presets: [
     [
       '@docusaurus/preset-classic',
