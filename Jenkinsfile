@@ -28,5 +28,6 @@ node {
   }
   stage('Deploy') {
     bat "echo Deployed"
+    currentBuild.result = 'SUCCESS'
   }
 }
