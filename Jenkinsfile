@@ -6,10 +6,12 @@ node {
     bat "npm ci"
   }
   stage('Lint') {
-    catchError {
+    try {
       bat "npm run lint"
     }
-    echo currentBuild.result
+    catch(err) {
+      echo "Lint: ${err}" 
+    }
   }
   stage('Test') {
     bat "npm run coverage -- --no-cache --runInBand --watchAll=false --testResultsProcessor \"jest-sonar-reporter\""
@@ -21,13 +23,14 @@ node {
     }
   }
   stage('Build') {
-    catchError {
+    try {
       bat "npm --prefix website run build"
     }
-    echo currentBuild.result
+    catch(err) {
+      echo "Build: ${err}" 
+    }
   }
   stage('Deploy') {
     bat "echo Deployed"
-    currentBuild.result = 'SUCCESS'
   }
 }
