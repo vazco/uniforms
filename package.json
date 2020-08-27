@@ -55,6 +55,7 @@
     "husky": "4.2.5",
     "invariant": "^2.0.0",
     "jest": "26.4.0",
+    "jest-sonar-reporter": "^2.0.0",
     "lerna": "3.22.1",
     "lint-staged": "10.2.11",
     "lodash": "^4.0.0",
