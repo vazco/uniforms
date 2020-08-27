@@ -9,6 +9,7 @@ node {
     catchError {
       bat "npm run lint"
     }
+    echo currentBuild.result
   }
   stage('Test') {
     bat "npm run coverage -- --no-cache --runInBand --watchAll=false --testResultsProcessor \"jest-sonar-reporter\""
@@ -20,7 +21,10 @@ node {
     }
   }
   stage('Build') {
-    bat "npm --prefix website run build"
+    catchError {
+      bat "npm --prefix website run build"
+    }
+    echo currentBuild.result
   }
   stage('Deploy') {
     bat "echo Deployed"
