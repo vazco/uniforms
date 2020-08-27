@@ -7,37 +7,7 @@
     "importHelpers": true,
     "jsx": "react",
     "moduleResolution": "node",
-    "noImplicitAny": false,
-    "paths": {
-      "uniforms": ["uniforms/src"],
-      "uniforms/*": ["uniforms/src/*"],
-      "uniforms-antd": ["uniforms-antd/src"],
-      "uniforms-antd/*": ["uniforms-antd/src/*"],
-      "uniforms-bootstrap3": ["uniforms-bootstrap3/src"],
-      "uniforms-bootstrap3/*": ["uniforms-bootstrap3/src/*"],
-      "uniforms-bootstrap4": ["uniforms-bootstrap4/src"],
-      "uniforms-bootstrap4/*": ["uniforms-bootstrap4/src/*"],
-      "uniforms-bridge-graphql": ["uniforms-bridge-graphql/src"],
-      "uniforms-bridge-graphql/*": ["uniforms-bridge-graphql/src/*"],
-      "uniforms-bridge-json-schema": ["uniforms-bridge-json-schema/src"],
-      "uniforms-bridge-json-schema/*": ["uniforms-bridge-json-schema/src/*"],
-      "uniforms-bridge-simple-schema": ["uniforms-bridge-simple-schema/src"],
-      "uniforms-bridge-simple-schema/*": [
-        "uniforms-bridge-simple-schema/src/*"
-      ],
-      "uniforms-bridge-simple-schema-2": [
-        "uniforms-bridge-simple-schema-2/src"
-      ],
-      "uniforms-bridge-simple-schema-2/*": [
-        "uniforms-bridge-simple-schema-2/src/*"
-      ],
-      "uniforms-material": ["uniforms-material/src"],
-      "uniforms-material/*": ["uniforms-material/src/*"],
-      "uniforms-semantic": ["uniforms-semantic/src"],
-      "uniforms-semantic/*": ["uniforms-semantic/src/*"],
-      "uniforms-unstyled": ["uniforms-unstyled/src"],
-      "uniforms-unstyled/*": ["uniforms-unstyled/src/*"]
-    },
+    "paths": { "uniforms": ["uniforms/src"], "uniforms-*": ["uniforms-*/src"] },
     "strict": true
   }
 }

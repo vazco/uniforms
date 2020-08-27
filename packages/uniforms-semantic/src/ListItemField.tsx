@@ -6,7 +6,7 @@ import ListDelField from './ListDelField';
 
 export type ListItemFieldProps = {
   children?: ReactNode;
-  name: string;
+  value?: unknown;
 };
 
 function ListItem({

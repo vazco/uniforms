@@ -1,13 +1,13 @@
+import invariant from 'invariant';
 import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
-import invariant from 'invariant';
 import lowerCase from 'lodash/lowerCase';
 import memoize from 'lodash/memoize';
 import omit from 'lodash/omit';
 import upperFirst from 'lodash/upperFirst';
 import { Bridge, joinName } from 'uniforms';
 
-const resolveRef = (reference, schema) => {
+function resolveRef(reference: string, schema: Record<string, any>) {
   invariant(
     reference.startsWith('#'),
     'Reference is not an internal reference, and only such are allowed: "%s"',
@@ -26,9 +26,9 @@ const resolveRef = (reference, schema) => {
   );
 
   return resolvedReference;
-};
+}
 
-const distinctSchema = schema => {
+function distinctSchema(schema: Record<string, any>) {
   if (schema.type === 'object') {
     return schema;
   }
@@ -38,37 +38,39 @@ const distinctSchema = schema => {
   }
 
   return schema;
-};
+}
 
-const extractValue = (...xs) =>
-  xs.reduce((x, y) =>
+function extractValue(...xs: (boolean | null | string | undefined)[]) {
+  return xs.reduce((x, y) =>
     x === false || x === null ? '' : x !== true && x !== undefined ? x : y,
   );
+}
 
-const pathToName = path => {
-  if (path[0] === '.')
-    path = path
-      .replace(/\['(.+?)'\]/g, '.$1')
-      .replace(/\[(.+?)\]/g, '.$1')
-      .replace(/\\'/g, "'");
-  else path = path.replace(/\//g, '.').replace(/~0/g, '~').replace(/~1/g, '/');
+function pathToName(path: string) {
+  path = path.startsWith('.')
+    ? path
+        .replace(/\['(.+?)'\]/g, '.$1')
+        .replace(/\[(.+?)\]/g, '.$1')
+        .replace(/\\'/g, "'")
+    : path.replace(/\//g, '.').replace(/~0/g, '~').replace(/~1/g, '/');
 
   return path.slice(1);
-};
+}
 
-const toHumanLabel = label => upperFirst(lowerCase(label));
+function toHumanLabel(label: string) {
+  return upperFirst(lowerCase(label));
+}
 
 export default class JSONSchemaBridge extends Bridge {
-  schema: any;
-  _compiledSchema: {};
-  validator: any;
+  _compiledSchema: Record<string, any> = {};
 
-  constructor(schema, validator) {
+  constructor(
+    public schema: Record<string, any>,
+    public validator: (model: Record<string, any>) => any,
+  ) {
     super();
 
     this.schema = distinctSchema(schema);
-    this._compiledSchema = {};
-    this.validator = validator;
 
     // Memoize for performance and referential equality.
     this.getField = memoize(this.getField);
@@ -76,36 +78,34 @@ export default class JSONSchemaBridge extends Bridge {
     this.getType = memoize(this.getType);
   }
 
-  getError(name, error) {
+  getError(name: string, error: any) {
     const nameParts = joinName(null, name);
     const rootName = joinName(nameParts.slice(0, -1));
     const baseName = nameParts[nameParts.length - 1];
 
     return (
-      error &&
-      error.details &&
-      error.details.find &&
-      error.details.find(detail => {
+      // FIXME: Correct type for `error`.
+      error?.details?.find?.((detail: any) => {
         const path = pathToName(detail.dataPath);
 
         return (
           name === path ||
           (rootName === path && baseName === detail.params.missingProperty)
         );
-      })
+      }) || null
     );
   }
 
-  getErrorMessage(name, error) {
-    const scopedError = this.getError(name, error) || {};
-
-    return (scopedError && scopedError.message) || '';
+  getErrorMessage(name: string, error: any) {
+    const scopedError = this.getError(name, error);
+    return scopedError?.message || '';
   }
 
-  getErrorMessages(error) {
+  getErrorMessages(error: any) {
     if (error) {
       if (Array.isArray(error.details)) {
-        return error.details.reduce(
+        // FIXME: Correct type for `error`.
+        return (error.details as any[]).reduce(
           (acc, { message }) => acc.concat(message),
           [],
         );
@@ -117,7 +117,7 @@ export default class JSONSchemaBridge extends Bridge {
     return [];
   }
 
-  getField(name) {
+  getField(name: string) {
     return joinName(null, name).reduce((definition, next, nextIndex, array) => {
       const previous = joinName(array.slice(0, nextIndex));
       const isRequired = get(
@@ -153,7 +153,8 @@ export default class JSONSchemaBridge extends Bridge {
         ]
           .filter(key => definition[key])
           .map(key => {
-            const localDef = definition[key].map(subSchema =>
+            // FIXME: Correct type for `definition`.
+            const localDef = (definition[key] as any[]).map(subSchema =>
               subSchema.$ref
                 ? resolveRef(subSchema.$ref, this.schema)
                 : subSchema,
@@ -172,7 +173,8 @@ export default class JSONSchemaBridge extends Bridge {
 
       ['allOf', 'anyOf', 'oneOf'].forEach(key => {
         if (definition[key]) {
-          _definition[key] = definition[key].map(def =>
+          // FIXME: Correct type for `definition`.
+          _definition[key] = (definition[key] as any[]).map(def =>
             def.$ref ? resolveRef(def.$ref, this.schema) : def,
           );
         }
@@ -188,9 +190,15 @@ export default class JSONSchemaBridge extends Bridge {
         _definition.required = definition.required ?? [];
 
         combinedPartials.forEach(({ properties, required, type }) => {
-          if (properties) Object.assign(_definition.properties, properties);
-          if (required) _definition.required.push(...required);
-          if (type && !_definition.type) _definition.type = type;
+          if (properties) {
+            Object.assign(_definition.properties, properties);
+          }
+          if (required) {
+            _definition.required.push(...required);
+          }
+          if (type && !_definition.type) {
+            _definition.type = type;
+          }
         });
       }
 
@@ -200,7 +208,7 @@ export default class JSONSchemaBridge extends Bridge {
     }, this.schema);
   }
 
-  getInitialValue(name, props: any = {}) {
+  getInitialValue(name: string, props: Record<string, any> = {}): any {
     const { default: _default, type: _type } = this.getField(name);
     const {
       default: defaultValue = _default !== undefined
@@ -209,7 +217,9 @@ export default class JSONSchemaBridge extends Bridge {
       type = _type,
     } = this._compiledSchema[name];
 
-    if (defaultValue !== undefined) return cloneDeep(defaultValue);
+    if (defaultValue !== undefined) {
+      return cloneDeep(defaultValue);
+    }
 
     if (type === 'array') {
       const item = this.getInitialValue(joinName(name, '0'));
@@ -217,22 +227,32 @@ export default class JSONSchemaBridge extends Bridge {
       return Array(items).fill(item);
     }
 
-    if (type === 'object') return {};
+    if (type === 'object') {
+      return {};
+    }
 
     return undefined;
   }
 
-  getProps(name, props: any = {}) {
+  getProps(name: string, props: Record<string, any> = {}) {
     const { uniforms, ...field } = this.getField(name);
     const { enum: enum_, isRequired, title, ...ready } = omit(
       { ...field, ...uniforms, ...this._compiledSchema[name] },
       ['default', 'format', 'type'],
     );
 
-    if (enum_) ready.allowedValues = enum_;
-    if (field.type === 'number') ready.decimal = true;
-    if (uniforms && uniforms.type !== undefined) ready.type = uniforms.type;
-    if (ready.required === undefined) ready.required = isRequired;
+    if (enum_) {
+      ready.allowedValues = enum_;
+    }
+    if (field.type === 'number') {
+      ready.decimal = true;
+    }
+    if (uniforms && uniforms.type !== undefined) {
+      ready.type = uniforms.type;
+    }
+    if (ready.required === undefined) {
+      ready.required = isRequired;
+    }
     ready.label = extractValue(
       ready.label,
       title,
@@ -242,10 +262,10 @@ export default class JSONSchemaBridge extends Bridge {
     const options = props.options || ready.options;
     if (options) {
       if (!Array.isArray(options)) {
-        ready.transform = value => options[value];
+        ready.transform = (value: any) => options[value];
         ready.allowedValues = Object.keys(options);
       } else {
-        ready.transform = value =>
+        ready.transform = (value: any) =>
           options.find(option => option.value === value).label;
         ready.allowedValues = options.map(option => option.value);
       }
@@ -276,17 +296,31 @@ export default class JSONSchemaBridge extends Bridge {
     return [];
   }
 
-  getType(name) {
+  getType(name: string) {
     const { type: _type, format: fieldFormat } = this.getField(name);
     const { type: fieldType = _type } = this._compiledSchema[name];
 
-    if (fieldFormat === 'date-time') return Date;
-    if (fieldType === 'string') return String;
-    if (fieldType === 'number') return Number;
-    if (fieldType === 'integer') return Number;
-    if (fieldType === 'object') return Object;
-    if (fieldType === 'array') return Array;
-    if (fieldType === 'boolean') return Boolean;
+    if (fieldFormat === 'date-time') {
+      return Date;
+    }
+    if (fieldType === 'string') {
+      return String;
+    }
+    if (fieldType === 'number') {
+      return Number;
+    }
+    if (fieldType === 'integer') {
+      return Number;
+    }
+    if (fieldType === 'object') {
+      return Object;
+    }
+    if (fieldType === 'array') {
+      return Array;
+    }
+    if (fieldType === 'boolean') {
+      return Boolean;
+    }
 
     invariant(
       fieldType !== 'null',

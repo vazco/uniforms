@@ -1,5 +1,5 @@
-import React from 'react';
 import merge from 'lodash/merge';
+import React from 'react';
 import { ListAddField } from 'uniforms-semantic';
 
 import createContext from './_createContext';

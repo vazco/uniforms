@@ -1,4 +1,4 @@
-import React, { HTMLProps } from 'react';
+import React from 'react';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import AutoField from './AutoField';

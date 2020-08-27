@@ -16,6 +16,7 @@ export type ListItemFieldProps = {
   disableGutters?: ListItemProps['disableGutters'];
   divider?: ListItemProps['divider'];
   removeIcon?: ReactNode;
+  value?: unknown;
 };
 
 function ListItem({

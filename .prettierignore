@@ -8,6 +8,8 @@
 /packages/*/es5
 /packages/*/es6
 /packages/*/node_modules
+/reproductions/.cache
+/reproductions/node_modules
 /website/.cache-loader
 /website/.docusaurus
 /website/build

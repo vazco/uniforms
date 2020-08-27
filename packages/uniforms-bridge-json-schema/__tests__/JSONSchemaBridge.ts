@@ -160,18 +160,18 @@ describe('JSONSchemaBridge', () => {
 
   describe('#getError', () => {
     it('works without error', () => {
-      expect(bridge.getError('age', undefined)).not.toBeTruthy();
+      expect(bridge.getError('age', undefined)).toEqual(null);
     });
 
     it('works with invalid error', () => {
-      expect(bridge.getError('age', {})).not.toBeTruthy();
-      expect(bridge.getError('age', { invalid: true })).not.toBeTruthy();
+      expect(bridge.getError('age', {})).toEqual(null);
+      expect(bridge.getError('age', { invalid: true })).toEqual(null);
     });
 
     it('works with correct error (data path)', () => {
       const error = { details: [{ dataPath: '.x' }] };
       expect(bridge.getError('x', error)).toEqual(error.details[0]);
-      expect(bridge.getError('y', error)).toEqual(undefined);
+      expect(bridge.getError('y', error)).toEqual(null);
     });
 
     it('works with correct error (data path at root)', () => {
@@ -188,7 +188,7 @@ describe('JSONSchemaBridge', () => {
       };
 
       expect(bridge.getError('x', error)).toEqual(error.details[0]);
-      expect(bridge.getError('y', error)).toEqual(undefined);
+      expect(bridge.getError('y', error)).toEqual(null);
     });
 
     it('works with correct error (data path of parent)', () => {
@@ -204,33 +204,33 @@ describe('JSONSchemaBridge', () => {
         ],
       };
 
-      expect(bridge.getError('x.x', error)).toEqual(undefined);
+      expect(bridge.getError('x.x', error)).toEqual(null);
       expect(bridge.getError('x.y', error)).toEqual(error.details[0]);
-      expect(bridge.getError('y.x', error)).toEqual(undefined);
+      expect(bridge.getError('y.x', error)).toEqual(null);
     });
 
     it('works with correct error (complex data paths)', () => {
       const pairs = [
-        ["a.0.b.c-d.0.f/'g", ".complexNames.a[0].b['c-d'][0]['f/\\'g']"],
-        ['a.0.b.c-d.0.h/"i', ".complexNames.a[0].b['c-d'][0]['h/\"i']"],
-        ['a.0.b.c-d.0.j\'/"k~', ".complexNames.a[0].b['c-d'][0]['j\\'/\"k~']"],
+        ["a.0.b.c-d.0.f/'g", ".a[0].b['c-d'][0]['f/\\'g']"],
+        ['a.0.b.c-d.0.h/"i', ".a[0].b['c-d'][0]['h/\"i']"],
+        ['a.0.b.c-d.0.j\'/"k~', ".a[0].b['c-d'][0]['j\\'/\"k~']"],
       ];
 
       pairs.forEach(([name, dataPath]) => {
-        const error = { details: { dataPath } };
+        const error = { details: [{ dataPath }] };
         expect(bridge.getError(name, error)).toEqual(error.details[0]);
       });
     });
 
     it('works with correct error (complex data paths - JSON pointers)', () => {
       const pairs = [
-        ["a.0.b.c-d.0.f/'g", "/complexNames/a/0/b/c-d/0/f~1'g"],
-        ['a.0.b.c-d.0.h/"i', '/complexNames/a/0/b/c-d/0/h~1"i'],
-        ['a.0.b.c-d.0.j\'/"k~', '/complexNames/a/0/b/c-d/0/j\'~1"k~0'],
+        ["a.0.b.c-d.0.f/'g", "/a/0/b/c-d/0/f~1'g"],
+        ['a.0.b.c-d.0.h/"i', '/a/0/b/c-d/0/h~1"i'],
+        ['a.0.b.c-d.0.j\'/"k~', '/a/0/b/c-d/0/j\'~1"k~0'],
       ];
 
       pairs.forEach(([name, dataPath]) => {
-        const error = { details: { dataPath } };
+        const error = { details: [{ dataPath }] };
         expect(bridge.getError(name, error)).toEqual(error.details[0]);
       });
     });
@@ -238,12 +238,12 @@ describe('JSONSchemaBridge', () => {
 
   describe('#getErrorMessage', () => {
     it('works without error', () => {
-      expect(bridge.getErrorMessage('age', undefined)).not.toBeTruthy();
+      expect(bridge.getErrorMessage('age', undefined)).toBe('');
     });
 
     it('works with invalid error', () => {
-      expect(bridge.getErrorMessage('age', {})).not.toBeTruthy();
-      expect(bridge.getErrorMessage('age', { invalid: true })).not.toBeTruthy();
+      expect(bridge.getErrorMessage('age', {})).toBe('');
+      expect(bridge.getErrorMessage('age', { invalid: true })).toBe('');
     });
 
     it('works with correct error', () => {
@@ -256,7 +256,7 @@ describe('JSONSchemaBridge', () => {
         bridge.getErrorMessage('age', {
           details: [{ dataPath: '.field', message: 'Ignore!' }],
         }),
-      ).not.toBeTruthy();
+      ).toBe('');
     });
   });
 

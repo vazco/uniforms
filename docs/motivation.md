@@ -10,7 +10,7 @@ Basically, there are a few types of forms with different capabilities.
 Most of the time you’ll be using either AutoForm or ValidatedForm, but there are quite a few more to choose from:
 
 <p align="center">
-  <img src="/img/uniforms-graph.png" />
+  <img src="/img/uniforms-graph.svg" />
 </p>
 
 > **If you are not familiar with concept of HOC, read one of many posts about them first.**

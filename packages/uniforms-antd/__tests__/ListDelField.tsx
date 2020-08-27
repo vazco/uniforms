@@ -1,3 +1,4 @@
+import Button from 'antd/lib/button';
 import merge from 'lodash/merge';
 import React from 'react';
 import { ListDelField } from 'uniforms-antd';
@@ -21,6 +22,23 @@ test('<ListDelField> - works', () => {
   const wrapper = mount(element, context());
 
   expect(wrapper.find(ListDelField)).toHaveLength(1);
+});
+
+test('<ListDelField> - default props override', () => {
+  const buttonProps = {
+    icon: <span id="icon" />,
+    size: 'large' as const,
+    shape: 'circle' as const,
+    style: {},
+    type: 'default' as const,
+  };
+
+  const element = <ListDelField name="x.1" {...buttonProps} />;
+  const wrapper = mount(element, context());
+
+  expect(wrapper.find(Button).props()).toEqual(
+    expect.objectContaining(buttonProps),
+  );
 });
 
 test('<ListDelField> - prevents onClick when disabled', () => {

@@ -1,4 +1,5 @@
-import siteConfig from '@generated/docusaurus.config'; // eslint-disable-line
+// eslint-disable-next-line import/no-unresolved
+import siteConfig from '@generated/docusaurus.config';
 
 const { themeConfig } = siteConfig;
 
@@ -13,13 +14,13 @@ export default (function hotjar() {
       console.warn(
         'You specified the `hotjar` object in `themeConfig` with field `manual` set to true. ' +
           'This plugin will fire `stateChange` event on every route update. ' +
-          'Please ensure that you set `URL changes` to `manual` on your hotjar site settings.'
+          'Please ensure that you set `URL changes` to `manual` on your hotjar site settings.',
       );
     }
     if (!hjid) {
       console.warn(
         'You specified the `hotjar` object in `themeConfig` but the `hjid` field was missing. ' +
-          'Please ensure this is not a mistake.'
+          'Please ensure this is not a mistake.',
       );
       return null;
     }
@@ -34,10 +35,10 @@ export default (function hotjar() {
   }
 
   /* eslint-disable */
-  (function(h, o, t, j, a, r) {
+  (function (h, o, t, j, a, r) {
     h.hj =
       h.hj ||
-      function() {
+      function () {
         (h.hj.q = h.hj.q || []).push(arguments);
       };
     h._hjSettings = { hjid, hjsv: 6 };
@@ -56,7 +57,7 @@ export default (function hotjar() {
           // to this page. This is recommended for Single-page Applications.
           window.hj('stateChange', location.pathname);
           // Always refer to the variable on window in-case it gets overridden elsewhere.
-        }
+        },
       }
     : {};
 })();

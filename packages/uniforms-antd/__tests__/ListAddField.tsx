@@ -1,3 +1,4 @@
+import Button from 'antd/lib/button';
 import merge from 'lodash/merge';
 import React from 'react';
 import { ListAddField } from 'uniforms-antd';
@@ -21,6 +22,22 @@ test('<ListAddField> - works', () => {
   const wrapper = mount(element, context());
 
   expect(wrapper.find(ListAddField)).toHaveLength(1);
+});
+
+test('<ListAddField> - default props override', () => {
+  const buttonProps = {
+    icon: <span id="icon" />,
+    size: 'large' as const,
+    style: {},
+    type: 'default' as const,
+  };
+
+  const element = <ListAddField name="x.$" {...buttonProps} />;
+  const wrapper = mount(element, context());
+
+  expect(wrapper.find(Button).props()).toEqual(
+    expect.objectContaining(buttonProps),
+  );
 });
 
 test('<ListAddField> - prevents onClick when disabled', () => {

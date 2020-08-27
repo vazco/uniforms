@@ -1,6 +1,6 @@
 import IconButton from '@material-ui/core/IconButton';
-import React from 'react';
 import merge from 'lodash/merge';
+import React from 'react';
 import { ListDelField } from 'uniforms-material';
 
 import createContext from './_createContext';

@@ -33,7 +33,7 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
     static displayName = `Validated${Base.displayName}`;
     static defaultProps = {
       ...Base.defaultProps,
-      onValidate(model, error) {
+      onValidate(model: unknown, error: any) {
         return error;
       },
       validate: 'onChangeAfterSubmit',

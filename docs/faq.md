@@ -193,6 +193,22 @@ You can take a reference to the field and manually trigger `.focus()`:
 <AutoField name="firstName" inputRef={field => field.focus()} />
 ```
 
+### How can I create a multi-step form?
+
+What is a multi-step form? Well, one can imagine at least two completely separate definitions:
+
+1. **A set of independent forms with a shared state.** That's the _easier_ one as it's always possible. Each step renders a separate form, with a different schema/validator/style and moves to the next one when submitted, accumulating submitted data.
+
+   This handles not only multi-step forms but also <s>forms</s> wizards with a tree-like structure (i.e. next step bases on the answers). Optional steps (_skip step 2 if age < 40_) and contextual validation (_field Y in step 2 has to be greater than the value of X in step 1_) is also possible.
+
+   But it gets even better - each step may use a different forms library! It makes no sense but is definitely possible - each form is independent, and the orchestration happens in the application.
+
+2. **A single form displayed in parts.** It is, of course, possible to implement it, but the number of all configurations and options is _massive_. But let's skip that and see where a bigger problem is: the validation. In **1.** each step is validated separately (i.e. can have a separate schema). Here, we have only one schema, and the schema itself has to know that _some_ fields were not yet visible.
+
+   Let's make an example. The schema is very basic: `{ a: string, b: string }` (TypeScript notation). Now, as both `a` and `b` are required, a _valid_ model has to have both. If the first step will render only the `a` field (`b` is on the next page), it's impossible to validate the form. This leads to a situation where the schema (logic) depends on the steps (UI). On the other hand, the form could be validated only at the end. The UX of this solution is terrible though - imagine a _there's an error ten pages back_ error!
+
+We are not planning to provide any out-of-the-box support for multi-step forms as option **1.** is most of the time the best. It's not only the cleanest but also less complicated as well as doesn't rely on any library.
+
 ### How can I know a current form state?
 
 A current form state is available in [React context](https://reactjs.org/docs/context.html), accessible through `useForm` and `useField(name)` hooks.

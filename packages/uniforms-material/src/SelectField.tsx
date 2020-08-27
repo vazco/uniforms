@@ -7,12 +7,13 @@ import FormLabel from '@material-ui/core/FormLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import React, { ReactNode, Ref } from 'react';
+import { SelectProps as MaterialSelectProps } from '@material-ui/core/Select';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
 import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import omit from 'lodash/omit';
+import xor from 'lodash/xor';
+import React, { ReactNode, Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
-import { SelectProps as MaterialSelectProps } from '@material-ui/core/Select';
 
 import wrapField from './wrapField';
 
@@ -51,15 +52,6 @@ const base64 =
     ? btoa
     : (x: string) => Buffer.from(x).toString('base64');
 const escape = (x: string) => base64(encodeURIComponent(x)).replace(/=+$/, '');
-
-const xor = (item, array) => {
-  const index = array.indexOf(item);
-  if (index === -1) {
-    return array.concat([item]);
-  }
-
-  return array.slice(0, index).concat(array.slice(index + 1));
-};
 
 // eslint-disable-next-line complexity
 function Select(props: SelectFieldProps) {
@@ -114,7 +106,7 @@ function Select(props: SelectFieldProps) {
                   checked={value.includes(item)}
                   id={`${id}-${escape(item)}`}
                   name={name}
-                  onChange={() => disabled || onChange(xor(item, value))}
+                  onChange={() => disabled || onChange(xor([item], value))}
                   ref={inputRef}
                   value={name}
                   {...filteredProps}

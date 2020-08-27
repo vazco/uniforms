@@ -1,5 +1,5 @@
-import React from 'react';
 import TextArea from 'antd/lib/input/TextArea';
+import React from 'react';
 import { LongTextField } from 'uniforms-antd';
 
 import createContext from './_createContext';
@@ -10,6 +10,17 @@ test('<LongTextField> - renders a textarea', () => {
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find(TextArea)).toHaveLength(1);
+});
+
+test('<LongTextField> - default props override', () => {
+  const textareaProps = { rows: 1 };
+
+  const element = <LongTextField name="x" {...textareaProps} />;
+  const wrapper = mount(element, createContext({ x: { type: String } }));
+
+  expect(wrapper.find(TextArea).props()).toEqual(
+    expect.objectContaining(textareaProps),
+  );
 });
 
 test('<LongTextField> - renders a textarea with correct disabled state', () => {

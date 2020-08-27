@@ -1,6 +1,6 @@
 import Form from 'antd/lib/form';
-import React from 'react';
 import Tooltip from 'antd/lib/tooltip';
+import React from 'react';
 import { wrapField } from 'uniforms-antd';
 
 import mount from './_mount';
@@ -58,4 +58,11 @@ test('<wrapField> - renders wrapper with extra text', () => {
   const wrapper = mount(element);
 
   expect(wrapper.find(Form.Item).prop('extra')).toBe('Extra');
+});
+
+test('<wrapField> - renders wrapper with extra style', () => {
+  const element = wrapField({ wrapperStyle: {} }, <div />);
+  const wrapper = mount(element);
+
+  expect(wrapper.find(Form.Item).prop('style')).toEqual({});
 });

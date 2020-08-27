@@ -2,8 +2,8 @@ import get from 'lodash/get';
 import mapValues from 'lodash/mapValues';
 import { useCallback, useEffect, useMemo } from 'react';
 
-import { GuaranteedProps } from './types';
 import { joinName } from './joinName';
+import { GuaranteedProps } from './types';
 import { useForm } from './useForm';
 
 function propagate(
@@ -65,11 +65,13 @@ export function useField<
     label || labelFallback,
   );
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const id = useMemo(() => context.randomId(), []);
   const onChange = useCallback(
     (value?: Value, key: string = name) => {
       context.onChange(key, value);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [context.onChange, name],
   );
 
@@ -85,11 +87,13 @@ export function useField<
   }
 
   if (options?.initialValue !== false) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
       const required = props.required ?? schemaProps.required;
       if (required && initialValue !== undefined) {
         onChange(initialValue);
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
   }
 

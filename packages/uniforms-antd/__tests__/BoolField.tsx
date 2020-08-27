@@ -1,6 +1,6 @@
 import Checkbox from 'antd/lib/checkbox';
-import React from 'react';
 import Switch from 'antd/lib/switch';
+import React from 'react';
 import { BoolField } from 'uniforms-antd';
 
 import createContext from './_createContext';
@@ -11,6 +11,20 @@ test('<BoolField> - renders a switch input', () => {
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
   expect(wrapper.find(Switch)).toHaveLength(1);
+});
+
+test('<BoolField> - default props override', () => {
+  const switchProps = {
+    checkedChildren: <span id="checked" />,
+    unCheckedChildren: <span id="unchecked" />,
+  };
+
+  const element = <BoolField name="x" {...switchProps} />;
+  const wrapper = mount(element, createContext({ x: { type: Boolean } }));
+
+  expect(wrapper.find(Switch).props()).toEqual(
+    expect.objectContaining(switchProps),
+  );
 });
 
 test('<BoolField> - renders a checkbox input', () => {

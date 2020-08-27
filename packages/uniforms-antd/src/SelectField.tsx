@@ -2,11 +2,11 @@ import CheckboxGroup, {
   CheckboxGroupProps,
   CheckboxValueType,
 } from 'antd/lib/checkbox/Group';
-import RadioGroup from 'antd/lib/radio/group';
-import React, { Ref } from 'react';
-import SelectAntD, { SelectProps as SelectAntDProps } from 'antd/lib/select';
-import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 import { RadioGroupProps } from 'antd/lib/radio';
+import RadioGroup from 'antd/lib/radio/group';
+import SelectAntD, { SelectProps as SelectAntDProps } from 'antd/lib/select';
+import React, { Ref } from 'react';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
@@ -46,8 +46,9 @@ function Select(props: SelectFieldProps) {
         name={props.name}
         onChange={
           props.fieldType === Array
-            ? value => props.onChange(value)
-            : event => props.onChange(event.target.value)
+            ? // FIXME: Argument type depends on `props.fieldType`.
+              (value: any) => props.onChange(value)
+            : (event: any) => props.onChange(event.target.value)
         }
         options={props.allowedValues!.map(value => ({
           label: props.transform ? props.transform(value) : value,

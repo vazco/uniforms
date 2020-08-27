@@ -1,7 +1,7 @@
-import Button, { ButtonProps, ButtonSize, ButtonType } from 'antd/lib/button';
 import PlusSquareOutlined from '@ant-design/icons/PlusSquareOutlined';
-import React from 'react';
+import Button, { ButtonProps } from 'antd/lib/button';
 import cloneDeep from 'lodash/cloneDeep';
+import React from 'react';
 import {
   FieldProps,
   connectField,
@@ -16,7 +16,18 @@ export type ListAddFieldProps = FieldProps<
   { initialCount?: number }
 >;
 
-function ListAdd({ disabled, name, value, ...props }: ListAddFieldProps) {
+const defaultStyle = { width: '100%' };
+
+function ListAdd({
+  disabled,
+  icon = <PlusSquareOutlined />,
+  name,
+  size = 'small',
+  style = defaultStyle,
+  type = 'dashed',
+  value,
+  ...props
+}: ListAddFieldProps) {
   const nameParts = joinName(null, name);
   const parentName = joinName(nameParts.slice(0, -1));
   const parent = useField<{ maxCount?: number }, unknown[]>(
@@ -32,18 +43,15 @@ function ListAdd({ disabled, name, value, ...props }: ListAddFieldProps) {
     <Button
       {...filterDOMProps(props)}
       disabled={!limitNotReached}
+      icon={icon}
       onClick={() => {
         parent.onChange(parent.value!.concat([cloneDeep(value)]));
       }}
+      size={size}
+      style={style}
+      type={type}
     />
   );
 }
-
-ListAdd.defaultProps = {
-  icon: <PlusSquareOutlined />,
-  size: 'small' as ButtonSize,
-  style: { width: '100%' },
-  type: 'dashed' as ButtonType,
-};
 
 export default connectField(ListAdd, { initialValue: false, kind: 'leaf' });

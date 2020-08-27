@@ -1,5 +1,5 @@
-import React, { Children, cloneElement, isValidElement } from 'react';
 import classnames from 'classnames';
+import React, { Children, cloneElement, isValidElement } from 'react';
 import { connectField, filterDOMProps, HTMLFieldProps } from 'uniforms';
 
 import ListAddField from './ListAddField';

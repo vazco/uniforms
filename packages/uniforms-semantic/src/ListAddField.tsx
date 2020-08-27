@@ -1,6 +1,6 @@
-import React from 'react';
 import classnames from 'classnames';
 import cloneDeep from 'lodash/cloneDeep';
+import React from 'react';
 import {
   HTMLFieldProps,
   connectField,
@@ -37,8 +37,9 @@ function ListAdd({ disabled, name, value, ...props }: ListAddFieldProps) {
         'fitted add icon',
       )}
       onClick={() => {
-        if (limitNotReached)
+        if (limitNotReached) {
           parent.onChange(parent.value!.concat([cloneDeep(value)]));
+        }
       }}
     />
   );

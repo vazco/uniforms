@@ -1,16 +1,12 @@
-import SimpleSchema from 'simpl-schema';
-import cloneDeep from 'lodash/cloneDeep';
 import invariant from 'invariant';
+import cloneDeep from 'lodash/cloneDeep';
 import memoize from 'lodash/memoize';
+import SimpleSchema from 'simpl-schema';
 import { Bridge, joinName } from 'uniforms';
 
 export default class SimpleSchema2Bridge extends Bridge {
-  schema: any;
-
-  constructor(schema) {
+  constructor(public schema: SimpleSchema) {
     super();
-
-    this.schema = schema;
 
     // Memoize for performance and referential equality.
     this.getField = memoize(this.getField);
@@ -18,25 +14,25 @@ export default class SimpleSchema2Bridge extends Bridge {
     this.getType = memoize(this.getType);
   }
 
-  getError(name, error) {
-    return (
-      (error &&
-        error.details &&
-        error.details.find &&
-        error.details.find(error => error.name === name)) ||
-      null
-    );
+  getError(name: string, error: any) {
+    // FIXME: Correct type for `error`.
+    return error?.details?.find?.((error: any) => error.name === name) || null;
   }
 
-  getErrorMessage(name, error) {
+  getErrorMessage(name: string, error: any) {
     const scopedError = this.getError(name, error);
+    // @ts-ignore: `messageForError` has incorrect typing.
     return !scopedError ? '' : this.schema.messageForError(scopedError);
   }
 
-  getErrorMessages(error) {
+  getErrorMessages(error: any) {
     if (error) {
       if (Array.isArray(error.details)) {
-        return error.details.map(error => this.schema.messageForError(error));
+        // FIXME: Correct type for `error`.
+        return (error.details as any[]).map(error =>
+          // @ts-ignore: `messageForError` has incorrect typing.
+          this.schema.messageForError(error),
+        );
       }
 
       if (error.message) {
@@ -51,7 +47,7 @@ export default class SimpleSchema2Bridge extends Bridge {
     return [];
   }
 
-  getField(name) {
+  getField(name: string) {
     const definition = this.schema.getDefinition(name);
 
     invariant(definition, 'Field not found in schema: "%s"', name);
@@ -77,7 +73,7 @@ export default class SimpleSchema2Bridge extends Bridge {
     return merged;
   }
 
-  getInitialValue(name, props: any = {}) {
+  getInitialValue(name: string, props: Record<string, any> = {}): any {
     const field = this.getField(name);
 
     if (field.type === Array) {
@@ -95,7 +91,7 @@ export default class SimpleSchema2Bridge extends Bridge {
   }
 
   // eslint-disable-next-line complexity
-  getProps(name, props: any = {}) {
+  getProps(name: string, props: Record<string, any> = {}) {
     // Type should be omitted.
     // eslint-disable-next-line no-unused-vars, prefer-const
     let { optional, type, uniforms, ...field } = this.getField(name);
@@ -136,14 +132,14 @@ export default class SimpleSchema2Bridge extends Bridge {
       if (!Array.isArray(options)) {
         field = {
           ...field,
-          transform: value => options[value],
+          transform: (value: any) => options[value],
           allowedValues: Object.keys(options),
         };
       } else {
         field = {
           ...field,
-          transform: value =>
-            options.find(option => option.value === value).label,
+          transform: (value: any) =>
+            (options as any[]).find(option => option.value === value).label,
           allowedValues: options.map(option => option.value),
         };
       }
@@ -153,10 +149,11 @@ export default class SimpleSchema2Bridge extends Bridge {
   }
 
   getSubfields(name?: string) {
+    // @ts-ignore: Typing for `_makeGeneric` is missing.
     return this.schema.objectKeys(SimpleSchema._makeGeneric(name));
   }
 
-  getType(name) {
+  getType(name: string) {
     const type = this.getField(name).type;
 
     if (type === SimpleSchema.Integer) {
@@ -170,9 +167,10 @@ export default class SimpleSchema2Bridge extends Bridge {
     return type;
   }
 
-  getValidator(options = { clean: true, mutate: true } as any) {
+  // TODO: `ValidationOption` is not exported.
+  getValidator(options: Record<string, any> = { clean: true, mutate: true }) {
     const validator = this.schema.validator(options);
-    return model => {
+    return (model: Record<string, any>) => {
       try {
         // Clean mutate its argument, even if mutate is false.
         validator(options.clean ? cloneDeep({ ...model }) : model);

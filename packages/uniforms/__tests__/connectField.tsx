@@ -1,6 +1,7 @@
 import React from 'react';
-import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
+import { SimpleSchema } from 'simpl-schema';
 import { Context, connectField, randomIds } from 'uniforms';
+import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
 
 import mount from './_mount';
 
@@ -9,8 +10,8 @@ jest.mock('meteor/check');
 
 describe('connectField', () => {
   const onChange = jest.fn();
-  const schema = new SimpleSchemaBridge({
-    getDefinition(name) {
+  const schema = new SimpleSchemaBridge(({
+    getDefinition(name: 'another' | 'field' | 'field.subfield') {
       return {
         field: { type: Object, label: 'Field' },
         'field.subfield': { type: Number, label: 'Subfield' },
@@ -20,7 +21,7 @@ describe('connectField', () => {
 
     messageForError() {},
 
-    objectKeys(name) {
+    objectKeys(name: 'field' | 'field.subfield') {
       return {
         field: ['subfield'],
         'field.subfield': [],
@@ -28,7 +29,7 @@ describe('connectField', () => {
     },
 
     validator() {},
-  });
+  } as any) as SimpleSchema);
 
   const reactContext = {
     context: {

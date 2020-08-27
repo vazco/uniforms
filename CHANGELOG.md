@@ -1,3 +1,20 @@
+## Next:
+
+- **Breaking:** Reworked `GraphQLBridge.getField`. [\#769](https://github.com/vazco/uniforms/issues/769)
+
+## [v3.0.0-rc.3](https://github.com/vazco/uniforms/tree/v3.0.0-rc.3) (2020-08-13)
+
+- **Breaking:** Minimum `graphql` version for `uniforms-bridge-graphql` is now `15.0.0`. [\#781](https://github.com/vazco/uniforms/issues/781)
+- **Fixed:** Styling mismatch in some `uniforms-antd` fields. [\#773](https://github.com/vazco/uniforms/issues/773)
+
+## [v3.0.0-rc.2](https://github.com/vazco/uniforms/tree/v3.0.0-rc.2) (2020-07-30)
+
+- **Fixed:** Fixed inferred type in `ListItemField`.
+
+## [v3.0.0-rc.1](https://github.com/vazco/uniforms/tree/v3.0.0-rc.1) (2020-07-29)
+
+- **Fixed:** Delay in `AutoForm` validation. [\#769](https://github.com/vazco/uniforms/issues/769)
+
 ## [v3.0.0-rc.0](https://github.com/vazco/uniforms/tree/v3.0.0-rc.0) (2020-07-15)
 
 - **Breaking:** Minimum `antd` version for `uniforms-antd` is `4.0.0`. [\#696](https://github.com/vazco/uniforms/issues/696)

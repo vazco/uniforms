@@ -1,7 +1,7 @@
 import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
 import IconButton, { IconButtonProps } from '@material-ui/core/IconButton';
-import React, { ReactNode } from 'react';
 import cloneDeep from 'lodash/cloneDeep';
+import React, { ReactNode } from 'react';
 import {
   FieldProps,
   connectField,

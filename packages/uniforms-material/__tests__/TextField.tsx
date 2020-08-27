@@ -1,5 +1,5 @@
-import React from 'react';
 import TextFieldMaterial from '@material-ui/core/TextField';
+import React from 'react';
 import { TextField } from 'uniforms-material';
 
 import createContext from './_createContext';

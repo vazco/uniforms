@@ -1,5 +1,5 @@
-import React, { Ref } from 'react';
 import classnames from 'classnames';
+import React, { Ref } from 'react';
 import { connectField, HTMLFieldProps } from 'uniforms';
 
 import wrapField from './wrapField';

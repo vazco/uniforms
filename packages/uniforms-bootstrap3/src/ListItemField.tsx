@@ -8,6 +8,7 @@ export type ListItemFieldProps = {
   children?: ReactNode;
   name: string;
   removeIcon?: ReactNode;
+  value?: unknown;
 };
 
 function ListItem({

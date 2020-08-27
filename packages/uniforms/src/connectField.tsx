@@ -1,9 +1,9 @@
-import React, { ComponentType, FunctionComponent } from 'react';
 import mapValues from 'lodash/mapValues';
 import some from 'lodash/some';
+import React, { ComponentType, FunctionComponent } from 'react';
 
-import { GuaranteedProps, Override } from './types';
 import { context as contextReference } from './context';
+import { GuaranteedProps, Override } from './types';
 import { useField } from './useField';
 
 export function connectField<
@@ -31,6 +31,7 @@ export function connectField<
     const hasChainName = props.name !== '';
     const anyFlowingPropertySet = some(
       context.state,
+      // @ts-ignore: `props` has no index signature.
       (_, key) => props[key] !== null && props[key] !== undefined,
     );
 
@@ -41,6 +42,7 @@ export function connectField<
     const nextContext = { ...context };
     if (anyFlowingPropertySet) {
       nextContext.state = mapValues(nextContext.state, (value, key) =>
+        // @ts-ignore: `props` has no index signature.
         props[key] !== null && props[key] !== undefined ? !!props[key] : value,
       );
     }

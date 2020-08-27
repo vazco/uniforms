@@ -4,10 +4,12 @@ import xorWith from 'lodash/xorWith';
 import { joinName } from './joinName';
 
 export function changedKeys<T>(root: string, valueA?: T, valueB?: T) {
-  if (!valueA || valueA !== Object(valueA) || valueA instanceof Date)
+  if (!valueA || valueA !== Object(valueA) || valueA instanceof Date) {
     return isEqual(valueA, valueB) ? [] : [root];
-  if (!valueB)
+  }
+  if (!valueB) {
     return [root, ...Object.keys(valueA).map(key => joinName(root, key))];
+  }
 
   const changed = xorWith(
     Object.entries(valueA),
@@ -15,6 +17,8 @@ export function changedKeys<T>(root: string, valueA?: T, valueB?: T) {
     isEqual,
   ).map(pair => joinName(root, pair[0]));
 
-  if (changed.length) changed.unshift(root);
+  if (changed.length) {
+    changed.unshift(root);
+  }
   return changed;
 }

@@ -1,6 +1,6 @@
 import Radio from 'antd/lib/radio';
-import React from 'react';
 import Select from 'antd/lib/select';
+import React from 'react';
 import { SelectField } from 'uniforms-antd';
 
 import createContext from './_createContext';
@@ -331,7 +331,11 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct option
 
 test('<SelectField checkboxes> - renders a set of checkboxes with correct options (transform)', () => {
   const element = (
-    <SelectField checkboxes name="x" transform={x => x.toUpperCase()} />
+    <SelectField
+      checkboxes
+      name="x"
+      transform={(x: string) => x.toUpperCase()}
+    />
   );
   const wrapper = mount(
     element,

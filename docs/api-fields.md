@@ -3,7 +3,7 @@ id: api-fields
 title: Fields
 ---
 
-Uniforms provide a set of predefined components that can be used as form fields.
+uniforms provide a set of predefined components that can be used as form fields.
 
 The list below contains a guaranteed set of fields, implemented in every theme package:
 

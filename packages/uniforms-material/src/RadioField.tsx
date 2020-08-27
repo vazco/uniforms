@@ -1,7 +1,7 @@
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
-import RadioGroup from '@material-ui/core/RadioGroup';
 import RadioMaterial, { RadioProps } from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 import React, { ReactNode } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 

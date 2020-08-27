@@ -1,6 +1,6 @@
 import DatePicker from 'antd/lib/date-picker';
-import React from 'react';
 import moment from 'moment';
+import React from 'react';
 import { DateField } from 'uniforms-antd';
 
 import createContext from './_createContext';
@@ -11,6 +11,16 @@ test('<DateField> - renders an input', () => {
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
   expect(wrapper.find(DatePicker)).toHaveLength(1);
+});
+
+test('<DateField> - default props override', () => {
+  const pickerProps = { showTime: false, style: {} };
+  const element = <DateField name="x" {...pickerProps} />;
+  const wrapper = mount(element, createContext({ x: { type: Date } }));
+
+  expect(wrapper.find(DatePicker).props()).toEqual(
+    expect.objectContaining(pickerProps),
+  );
 });
 
 test('<DateField> - renders a input with correct id (inherited)', () => {

@@ -1,17 +1,24 @@
 import DatePicker, { DatePickerProps } from 'antd/lib/date-picker';
-import React, { Ref } from 'react';
 import moment, { Moment } from 'moment';
-import { FieldProps, connectField, filterDOMProps } from 'uniforms';
+import React, { Ref } from 'react';
+import { connectField, FieldProps, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
 export type DateFieldProps = FieldProps<
   Date | Moment,
   DatePickerProps,
-  { inputRef?: Ref<typeof DatePicker> }
+  // FIXME: Seems like DatePickerProps doesn't contain 'showTime'.
+  { inputRef?: Ref<typeof DatePicker>; showTime?: boolean }
 >;
 
-function Date(props: DateFieldProps) {
+const defaultStyle = { width: '100%' };
+
+function Date({
+  showTime = true,
+  style = defaultStyle,
+  ...props
+}: DateFieldProps) {
   return wrapField(
     props,
     <DatePicker
@@ -23,15 +30,12 @@ function Date(props: DateFieldProps) {
       placeholder={props.placeholder}
       // @ts-ignore: `DatePicker` is an intersection.
       ref={props.inputRef}
+      showTime={showTime}
+      style={style}
       value={props.value && moment(props.value)}
       {...filterDOMProps(props)}
     />,
   );
 }
-
-Date.defaultProps = {
-  showTime: true,
-  style: { width: '100%' },
-};
 
 export default connectField(Date, { kind: 'leaf' });

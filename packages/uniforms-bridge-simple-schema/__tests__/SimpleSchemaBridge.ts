@@ -6,10 +6,11 @@ jest.mock('meteor/check');
 describe('SimpleSchemaBridge', () => {
   const noop = () => {};
   const schema = {
-    getDefinition(name) {
+    getDefinition(name: string) {
       // Simulate SimpleSchema.
       name = name.replace(/\d+/g, '$');
 
+      // @ts-ignore: Dynamic `name`.
       const field = {
         a: { type: Object, label: name },
         'a.b': { type: Object, label: name },
@@ -54,11 +55,11 @@ describe('SimpleSchemaBridge', () => {
       return undefined;
     },
 
-    messageForError(type, name) {
+    messageForError(type: string, name: string) {
       return `(${name})`;
     },
 
-    objectKeys(name) {
+    objectKeys(name: 'a' | 'a.b') {
       return (
         {
           a: ['b'],
@@ -74,7 +75,7 @@ describe('SimpleSchemaBridge', () => {
     },
   };
 
-  const bridge = new SimpleSchemaBridge(schema);
+  const bridge = new SimpleSchemaBridge(schema as any);
 
   describe('#getError', () => {
     it('works without error', () => {
@@ -298,13 +299,13 @@ describe('SimpleSchemaBridge', () => {
       const bridge = new SimpleSchemaBridge({
         ...schema,
         validator() {
-          return model => {
+          return (model: Record<string, any>) => {
             if (typeof model.x !== 'number') {
               throw new Error();
             }
           };
         },
-      });
+      } as any);
 
       expect(bridge.getValidator()({})).not.toEqual(null);
       expect(bridge.getValidator({})({})).not.toEqual(null);

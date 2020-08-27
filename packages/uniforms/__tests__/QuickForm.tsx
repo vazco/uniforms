@@ -10,8 +10,11 @@ jest.mock('meteor/check');
 describe('QuickForm', () => {
   // @ts-ignore QuickForm is not a valid Component.
   class TestForm extends QuickForm<any> {
+    // eslint-disable-next-line react/display-name
     getAutoField = () => () => <i className="auto" />;
+    // eslint-disable-next-line react/display-name
     getErrorsField = () => () => <i className="errors" />;
+    // eslint-disable-next-line react/display-name
     getSubmitField = () => () => <i className="submit" />;
   }
 
@@ -20,7 +23,7 @@ describe('QuickForm', () => {
     messageForError: () => {},
     objectKeys: () => ['a', 'b', 'c'],
     validator: () => {},
-  });
+  } as any);
 
   describe('when rendered with custom fields', () => {
     it('renders `AutoField` for each field', () => {

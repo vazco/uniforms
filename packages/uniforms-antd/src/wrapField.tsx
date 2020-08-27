@@ -1,7 +1,7 @@
-import Form, { FormItemProps } from 'antd/lib/form';
 import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined';
-import React, { ReactNode } from 'react';
+import Form, { FormItemProps } from 'antd/lib/form';
 import Tooltip from 'antd/lib/tooltip';
+import React, { ReactNode } from 'react';
 import { filterDOMProps, Override } from 'uniforms';
 
 type WrapperProps = Override<
@@ -14,6 +14,8 @@ type WrapperProps = Override<
     wrapperStyle?: object;
   }
 >;
+
+const defaultWrapperStyle = { marginBottom: '12px' };
 
 export default function wrapField(
   {
@@ -29,7 +31,7 @@ export default function wrapField(
     required,
     showInlineError,
     wrapperCol,
-    wrapperStyle,
+    wrapperStyle = defaultWrapperStyle,
   }: WrapperProps,
   children: ReactNode,
 ) {
@@ -57,7 +59,7 @@ export default function wrapField(
       label={labelNode}
       labelCol={labelCol}
       required={required}
-      style={wrapperStyle || { marginBottom: '12px' }}
+      style={wrapperStyle}
       validateStatus={error ? 'error' : undefined}
       wrapperCol={wrapperCol}
     >

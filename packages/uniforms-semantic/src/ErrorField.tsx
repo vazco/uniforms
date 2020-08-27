@@ -1,5 +1,5 @@
-import React, { HTMLProps } from 'react';
 import classnames from 'classnames';
+import React, { HTMLProps } from 'react';
 import { Override, connectField, filterDOMProps } from 'uniforms';
 
 export type ErrorFieldProps = Override<

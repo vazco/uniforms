@@ -3,9 +3,9 @@ id: tutorials-creating-custom-field
 title: Creating a custom field
 ---
 
-import CodeSection from '../website/components/CodeSection';
-import TutorialForm from '../website/components/TutorialForm.js';
-import GuestFormFinal from './examples/Tutorial/GuestFormFinal.js';
+import { CodeSection } from '../website/components/CodeSection';
+import { GuestFormFinal } from '../website/pages-parts/Tutorial/GuestFormFinal';
+import { TutorialForm } from '../website/components/TutorialForm';
 
 Great! We have a perfect form designed for collecting the data about our guests!
 In the previous chapters, we've learned how to use the `AutoForm` and redesign its layout, by changing the order of the fields and error messages (if any).
@@ -24,7 +24,7 @@ and declare that it will be managed by our newly created custom `ImageField` com
 <CodeSection
   language="js"
   section="schema"
-  source={require('!!raw-loader!./examples/Tutorial/GuestSchema4')}
+  source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestSchema4')}
 />
 
 We can prepare the custom field by creating a React component and wrapping it in a `connectField` helper.
@@ -37,7 +37,7 @@ Our newly created `ImageField` looks like this:
 <CodeSection
   language="js"
   replace={{ "'[^']*?/universal'": "'uniforms-semantic'" }}
-  source={require('!!raw-loader!./examples/Tutorial/ImageField')}
+  source={require('!!raw-loader!../website/pages-parts/Tutorial/ImageField')}
 />
 
 The component itself is a file input that accepts only images.
@@ -53,7 +53,7 @@ Take a look at the form code:
     "'[^']*?/universal'": "'uniforms-semantic'",
     './GuestSchema\\d': './GuestSchema'
   }}
-  source={require('!!raw-loader!./examples/Tutorial/GuestFormFinal')}
+  source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestFormFinal')}
 />
 
 and the form itself:
