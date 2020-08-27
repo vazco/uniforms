@@ -1,6 +1,9 @@
 node {
+  stage('SCM') {
+    git 'https://github.com/LeongXianJun/uniforms.git'
+  }
   stage('Install') {
-    bat "npm i"
+    bat "npm ci"
   }
   stage('Lint') {
     bat "npm run lint"
