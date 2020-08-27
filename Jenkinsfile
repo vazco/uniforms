@@ -1,6 +1,6 @@
 node {
   stage('Install') {
-    bat "npm ci"
+    bat "npm i"
   }
   stage('Lint') {
     bat "npm run lint"
