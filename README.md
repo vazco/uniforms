@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-    <strong>A set of React libraries for building forms from every schema.</strong>
+    <h1><strong>A set of React libraries for building forms from every schema.</strong></h1>
 </p>
 
 <p align="center">
