@@ -31,6 +31,6 @@ node {
     }
   }
   stage('Deploy') {
-    bat "echo Deployed"
+    echo "Deployed"
   }
 }
