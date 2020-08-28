@@ -247,6 +247,15 @@ test('<SelectField> - renders a label', () => {
   );
 });
 
+test('<SelectField> - renders a select with class "bg-red" beside "form-group"', () => {
+  const element = <SelectField name="x" className="bg-red" />;
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
+  );
+  expect(wrapper.find('.bg-red.form-group')).toHaveLength(1);
+});
+
 test('<SelectField> - renders a wrapper with unknown props', () => {
   const element = <SelectField name="x" data-x="x" data-y="y" data-z="z" />;
   const wrapper = mount(
