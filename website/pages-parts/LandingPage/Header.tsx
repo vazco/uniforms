@@ -1,14 +1,14 @@
 import Link from '@docusaurus/Link';
-import React from 'react';
-import classNames from 'classnames';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import classNames from 'classnames';
+import React from 'react';
 
-import styles from '../../index.module.css';
 import { Button } from '../../components/Button';
 import { CodeSection } from '../../components/CodeSection';
 import { FormWrapper } from '../../components/FormWrapper';
-import { ShippingForm } from '../CommonForms/ShippingForm';
+import styles from '../../index.module.css';
 import { themeContext } from '../../lib/universal';
+import { ShippingForm } from '../CommonForms/ShippingForm';
 
 type SystemWindowProps = JSX.IntrinsicElements['div'];
 

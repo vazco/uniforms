@@ -1,6 +1,6 @@
+import merge from 'lodash/merge';
 import React from 'react';
 import { ListDelField } from 'uniforms-semantic';
-import merge from 'lodash/merge';
 
 import createContext from './_createContext';
 import mount from './_mount';

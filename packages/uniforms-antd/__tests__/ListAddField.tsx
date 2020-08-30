@@ -1,6 +1,6 @@
 import Button from 'antd/lib/button';
-import React from 'react';
 import merge from 'lodash/merge';
+import React from 'react';
 import { ListAddField } from 'uniforms-antd';
 
 import createContext from './_createContext';

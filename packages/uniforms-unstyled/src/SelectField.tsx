@@ -1,5 +1,5 @@
-import React, { Ref } from 'react';
 import xor from 'lodash/xor';
+import React, { Ref } from 'react';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
 const base64: typeof btoa =

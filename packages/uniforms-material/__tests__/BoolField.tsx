@@ -2,8 +2,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
-import React from 'react';
 import Switch from '@material-ui/core/Switch';
+import React from 'react';
 import { BoolField } from 'uniforms-material';
 
 import createContext from './_createContext';

@@ -1,7 +1,7 @@
-import React from 'react';
 import { ReactWrapper } from 'enzyme';
-import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
+import React from 'react';
 import { ValidatedForm } from 'uniforms';
+import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
 
 import mount from './_mount';
 

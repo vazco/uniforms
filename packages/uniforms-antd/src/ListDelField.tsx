@@ -1,5 +1,5 @@
-import Button, { ButtonProps } from 'antd/lib/button';
 import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
+import Button, { ButtonProps } from 'antd/lib/button';
 import React from 'react';
 import {
   connectField,

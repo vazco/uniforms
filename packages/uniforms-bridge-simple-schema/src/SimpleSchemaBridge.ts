@@ -1,5 +1,5 @@
-import cloneDeep from 'lodash/cloneDeep';
 import invariant from 'invariant';
+import cloneDeep from 'lodash/cloneDeep';
 import memoize from 'lodash/memoize';
 import { Bridge, joinName } from 'uniforms';
 // @ts-ignore

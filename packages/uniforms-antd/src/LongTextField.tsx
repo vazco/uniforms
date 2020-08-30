@@ -1,5 +1,5 @@
-import React, { Ref } from 'react';
 import TextArea, { TextAreaProps } from 'antd/lib/input/TextArea';
+import React, { Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';

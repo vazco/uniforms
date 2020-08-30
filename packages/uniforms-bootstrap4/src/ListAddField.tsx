@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
 import classnames from 'classnames';
 import cloneDeep from 'lodash/cloneDeep';
+import React, { ReactNode } from 'react';
 import {
   connectField,
   filterDOMProps,
@@ -39,8 +39,9 @@ function ListAdd({
       {...filterDOMProps(props)}
       className={classnames('badge badge-pill float-right', className)}
       onClick={() => {
-        if (limitNotReached)
+        if (limitNotReached) {
           parent.onChange(parent.value!.concat([cloneDeep(value)]));
+        }
       }}
     >
       {addIcon}

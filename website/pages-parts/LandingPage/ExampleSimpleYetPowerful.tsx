@@ -1,9 +1,9 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
 
-import styles from '../../index.module.css';
 import { ExampleCustomizer } from '../../components/ExampleCustomizer';
 import { Heading } from '../../components/Heading';
+import styles from '../../index.module.css';
 
 export function ExampleSimpleYetPowerful() {
   return (

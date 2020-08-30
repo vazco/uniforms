@@ -1,5 +1,5 @@
-import React from 'react';
 import components from '@theme/MDXComponents';
+import React from 'react';
 
 export type CodeSectionProps = {
   language: string;

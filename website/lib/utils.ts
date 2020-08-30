@@ -1,5 +1,5 @@
-import LZString from 'lz-string';
 import pick from 'lodash/pick';
+import LZString from 'lz-string';
 
 const URL_KEYS = ['preset', 'props', 'theme'];
 

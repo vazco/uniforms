@@ -1,17 +1,17 @@
 import ConfigProvider from 'antd/lib/config-provider';
-// @ts-ignore
-import Frame, { FrameContextConsumer } from 'react-frame-component';
-import React, { Component } from 'react';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
+import React, { Component } from 'react';
+// @ts-ignore
+import Frame, { FrameContextConsumer } from 'react-frame-component';
 import { ValidatedForm, connectField, context, useForm } from 'uniforms';
 
 import playgroundStyles from '../index.module.css';
 import presets from '../lib/presets';
-import styles from '../lib/styles';
 import { bridge, schema } from '../lib/schema';
-import { parseQuery, updateQuery } from '../lib/utils';
+import styles from '../lib/styles';
 import { themes } from '../lib/universal';
+import { parseQuery, updateQuery } from '../lib/utils';
 
 export class Playground extends Component<any, any> {
   static getDerivedStateFromError(error: Error) {

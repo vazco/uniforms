@@ -5,13 +5,13 @@ import FormLabel from '@material-ui/core/FormLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import React, { Ref } from 'react';
+import { SelectProps as MaterialSelectProps } from '@material-ui/core/Select';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
 import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import omit from 'lodash/omit';
 import xor from 'lodash/xor';
+import React, { ReactNode, Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
-import { SelectProps as MaterialSelectProps } from '@material-ui/core/Select';
 
 import wrapField from './wrapField';
 

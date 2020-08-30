@@ -1,10 +1,10 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
 
-import styles from '../../index.module.css';
 import { Heading } from '../../components/Heading';
 import { Oval } from '../../components/Oval';
 import { Subtitle } from '../../components/Subtitle';
+import styles from '../../index.module.css';
 
 export function WhyUs() {
   return (

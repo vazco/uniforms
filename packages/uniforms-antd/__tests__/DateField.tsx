@@ -1,6 +1,6 @@
 import DatePicker from 'antd/lib/date-picker';
-import React from 'react';
 import moment from 'moment';
+import React from 'react';
 import { DateField } from 'uniforms-antd';
 
 import createContext from './_createContext';

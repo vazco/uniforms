@@ -5,12 +5,12 @@ import setWith from 'lodash/setWith';
 
 // FIXME: This import is needed to correctly build AutoForm.d.ts file.
 import { BaseForm } from './BaseForm';
-import { DeepPartial, ModelTransformMode } from './types';
 import {
   ValidatedQuickForm,
   ValidatedQuickFormProps,
   ValidatedQuickFormState,
 } from './ValidatedQuickForm';
+import { DeepPartial, ModelTransformMode } from './types';
 
 export type AutoFormProps<Model> = ValidatedQuickFormProps<Model> & {
   onChangeModel?(model: DeepPartial<Model>): void;
@@ -62,8 +62,9 @@ export function Auto<Base extends typeof ValidatedQuickForm>(Base: Base) {
       this.setState(
         state => ({ model: setWith(clone(state.model), key, value, clone) }),
         () => {
-          if (this.props.onChangeModel)
+          if (this.props.onChangeModel) {
             this.props.onChangeModel(this.state.model);
+          }
         },
       );
     }

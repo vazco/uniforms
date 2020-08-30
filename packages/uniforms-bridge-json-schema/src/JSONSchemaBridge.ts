@@ -1,6 +1,6 @@
+import invariant from 'invariant';
 import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
-import invariant from 'invariant';
 import lowerCase from 'lodash/lowerCase';
 import memoize from 'lodash/memoize';
 import omit from 'lodash/omit';
@@ -190,9 +190,15 @@ export default class JSONSchemaBridge extends Bridge {
         _definition.required = definition.required ?? [];
 
         combinedPartials.forEach(({ properties, required, type }) => {
-          if (properties) Object.assign(_definition.properties, properties);
-          if (required) _definition.required.push(...required);
-          if (type && !_definition.type) _definition.type = type;
+          if (properties) {
+            Object.assign(_definition.properties, properties);
+          }
+          if (required) {
+            _definition.required.push(...required);
+          }
+          if (type && !_definition.type) {
+            _definition.type = type;
+          }
         });
       }
 
@@ -211,7 +217,9 @@ export default class JSONSchemaBridge extends Bridge {
       type = _type,
     } = this._compiledSchema[name];
 
-    if (defaultValue !== undefined) return cloneDeep(defaultValue);
+    if (defaultValue !== undefined) {
+      return cloneDeep(defaultValue);
+    }
 
     if (type === 'array') {
       const item = this.getInitialValue(joinName(name, '0'));
@@ -219,7 +227,9 @@ export default class JSONSchemaBridge extends Bridge {
       return Array(items).fill(item);
     }
 
-    if (type === 'object') return {};
+    if (type === 'object') {
+      return {};
+    }
 
     return undefined;
   }
@@ -231,10 +241,18 @@ export default class JSONSchemaBridge extends Bridge {
       ['default', 'format', 'type'],
     );
 
-    if (enum_) ready.allowedValues = enum_;
-    if (field.type === 'number') ready.decimal = true;
-    if (uniforms && uniforms.type !== undefined) ready.type = uniforms.type;
-    if (ready.required === undefined) ready.required = isRequired;
+    if (enum_) {
+      ready.allowedValues = enum_;
+    }
+    if (field.type === 'number') {
+      ready.decimal = true;
+    }
+    if (uniforms && uniforms.type !== undefined) {
+      ready.type = uniforms.type;
+    }
+    if (ready.required === undefined) {
+      ready.required = isRequired;
+    }
     ready.label = extractValue(
       ready.label,
       title,
@@ -282,13 +300,27 @@ export default class JSONSchemaBridge extends Bridge {
     const { type: _type, format: fieldFormat } = this.getField(name);
     const { type: fieldType = _type } = this._compiledSchema[name];
 
-    if (fieldFormat === 'date-time') return Date;
-    if (fieldType === 'string') return String;
-    if (fieldType === 'number') return Number;
-    if (fieldType === 'integer') return Number;
-    if (fieldType === 'object') return Object;
-    if (fieldType === 'array') return Array;
-    if (fieldType === 'boolean') return Boolean;
+    if (fieldFormat === 'date-time') {
+      return Date;
+    }
+    if (fieldType === 'string') {
+      return String;
+    }
+    if (fieldType === 'number') {
+      return Number;
+    }
+    if (fieldType === 'integer') {
+      return Number;
+    }
+    if (fieldType === 'object') {
+      return Object;
+    }
+    if (fieldType === 'array') {
+      return Array;
+    }
+    if (fieldType === 'boolean') {
+      return Boolean;
+    }
 
     invariant(
       fieldType !== 'null',

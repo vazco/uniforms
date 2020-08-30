@@ -1,6 +1,6 @@
 import Link from '@docusaurus/Link';
-import React, { ComponentType } from 'react';
 import classNames from 'classnames';
+import React, { ComponentType } from 'react';
 
 import styles from '../index.module.css';
 import { Oval } from './Oval';

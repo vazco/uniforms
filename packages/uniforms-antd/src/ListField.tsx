@@ -1,12 +1,12 @@
+import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined';
+import Tooltip from 'antd/lib/tooltip';
+import classNames from 'classnames';
 import React, {
   Children,
   ReactNode,
   cloneElement,
   isValidElement,
 } from 'react';
-import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined';
-import Tooltip from 'antd/lib/tooltip';
-import classNames from 'classnames';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import ListAddField from './ListAddField';

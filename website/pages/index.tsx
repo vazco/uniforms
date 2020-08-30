@@ -1,6 +1,6 @@
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import React from 'react';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 import { LandingPage } from '../pages-parts/LandingPage/LandingPage';
 
