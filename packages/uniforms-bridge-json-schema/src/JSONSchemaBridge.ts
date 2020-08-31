@@ -28,6 +28,33 @@ function resolveRef(reference: string, schema: Record<string, any>) {
   return resolvedReference;
 }
 
+const propMapper = {
+  maxItems(props: Record<string, any> = {}) {
+    props.maxCount = props.maxItems;
+    delete props['maxItems'];
+  },
+  minItems(props: Record<string, any> = {}) {
+    props.minCount = props.minItems;
+    delete props['minItems'];
+  },
+  maximum(props: Record<string, any> = {}) {
+    props.max = props.maximum;
+    delete props['maximum'];
+  },
+  minimum(props: Record<string, any> = {}) {
+    props.min = props.minimum;
+    delete props['minimum'];
+  },
+  multipleOf(props: Record<string, any> = {}) {
+    props.step = props.multipleOf;
+    delete props['multipleOf'];
+  },
+};
+
+const isKey = (candidate: string): candidate is keyof typeof propMapper => {
+  return candidate in propMapper;
+};
+
 function distinctSchema(schema: Record<string, any>) {
   if (schema.type === 'object') {
     return schema;
@@ -270,6 +297,12 @@ export default class JSONSchemaBridge extends Bridge {
         ready.allowedValues = options.map(option => option.value);
       }
     }
+
+    Object.keys(ready).forEach(key => {
+      if (isKey(key)) {
+        propMapper[key](ready);
+      }
+    });
 
     return ready;
   }
