@@ -40,7 +40,7 @@ export function CommercialServices() {
                 <li>Solutions built on top of uniforms&nbsp;➤</li>
               </ul>
               <div className={styles['center-if-sm']}>
-                <Button to={`mailto:${email}`}>Contact us</Button>
+                <Button to="https://www.vazco.eu/contact/">Contact us</Button>
               </div>
             </div>
             <div
