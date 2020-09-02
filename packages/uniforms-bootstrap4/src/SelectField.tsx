@@ -24,28 +24,34 @@ export type SelectFieldProps = HTMLFieldProps<
   }
 >;
 
-function Select(props: SelectFieldProps) {
-  const {
-    allowedValues,
-    checkboxes,
-    disabled,
-    error,
-    fieldType,
-    id,
-    inline,
-    inputClassName,
-    inputRef,
-    label,
-    name,
-    onChange,
-    placeholder,
-    required,
-    transform,
-    value,
-  } = props;
-
+function Select({
+  allowedValues,
+  checkboxes,
+  disabled,
+  error,
+  fieldType,
+  id,
+  inline,
+  inputClassName,
+  inputRef,
+  label,
+  name,
+  onChange,
+  placeholder,
+  required,
+  transform,
+  value,
+  ...props
+}: SelectFieldProps) {
   return wrapField(
-    props,
+    {
+      ...props,
+      disabled,
+      error,
+      id,
+      label,
+      required,
+    },
     checkboxes || fieldType === Array ? (
       allowedValues?.map(item => (
         <div
