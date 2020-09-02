@@ -28,16 +28,12 @@ function resolveRef(reference: string, schema: Record<string, any>) {
   return resolvedReference;
 }
 
-const propMapper = {
+const propMapper: Record<string, string> = {
   maxItems: 'maxCount',
   minItems: 'minCount',
   maximum: 'max',
   minimum: 'min',
   multipleOf: 'step',
-};
-
-const isKey = (candidate: string): candidate is keyof typeof propMapper => {
-  return candidate in propMapper;
 };
 
 function distinctSchema(schema: Record<string, any>) {
@@ -284,7 +280,7 @@ export default class JSONSchemaBridge extends Bridge {
     }
 
     Object.keys(ready).forEach(key => {
-      if (isKey(key)) {
+      if (key in propMapper) {
         const newKey = propMapper[key];
         ready[newKey] = ready[key];
         delete ready[key];
