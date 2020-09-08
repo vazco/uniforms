@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 
 import styles from '../../index.module.css';
+import { CommercialServices } from './CommercialServices';
 import { Comparison } from './Comparison';
 import { ExampleFullyCustomizable } from './ExampleFullyCustomizable';
 import { ExampleSimpleYetPowerful } from './ExampleSimpleYetPowerful';
@@ -32,6 +33,7 @@ export function LandingPage() {
         <div className="container">
           <Comparison />
         </div>
+        <CommercialServices />
         <Footer />
       </div>
     </div>
