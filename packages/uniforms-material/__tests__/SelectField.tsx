@@ -287,6 +287,29 @@ test('<SelectField> - works with special characters', () => {
   );
 });
 
+test('<SelectField> - disabled items (options) based on predicate', () => {
+  const allowedValues = ['a', 'b'];
+
+  const element = (
+    <SelectField
+      native
+      name="x"
+      disableItem={value => value === allowedValues[0]}
+    />
+  );
+  const wrapper = mount(
+    element,
+    createContext({
+      x: { type: Array },
+      'x.$': { type: String, allowedValues },
+    }),
+  );
+
+  expect(wrapper.find(Select)).toHaveLength(1);
+  expect(wrapper.find('option').at(0).prop('disabled')).toBe(true);
+  expect(wrapper.find('option').at(1).prop('disabled')).toBe(false);
+});
+
 test('<SelectField checkboxes> - renders a set of Radio buttons', () => {
   // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
@@ -629,4 +652,28 @@ test('<SelectField checkboxes> - works with special characters', () => {
     <SelectField checkboxes name="x" />,
     createContext({ x: { type: String, allowedValues: ['ă', 'ș'] } }),
   );
+});
+
+test('<SelectField checkboxes> - disabled items (checkboxes) based on predicate', () => {
+  const allowedValues = ['a', 'b'];
+
+  const element = (
+    <SelectField
+      appearance="checkbox"
+      checkboxes
+      name="x"
+      disableItem={value => value === allowedValues[0]}
+    />
+  );
+  const wrapper = mount(
+    element,
+    createContext({
+      x: { type: Array },
+      'x.$': { type: String, allowedValues },
+    }),
+  );
+
+  expect(wrapper.find(Checkbox)).toHaveLength(2);
+  expect(wrapper.find(FormControlLabel).at(0).prop('disabled')).toBe(true);
+  expect(wrapper.find(FormControlLabel).at(1).prop('disabled')).toBe(false);
 });
