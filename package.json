@@ -18,8 +18,8 @@
   },
   "dependencies": {
     "@ant-design/icons": "4.2.2",
-    "@docusaurus/core": "2.0.0-alpha.58",
-    "@docusaurus/preset-classic": "2.0.0-alpha.58",
+    "@docusaurus/core": "2.0.0-alpha.63",
+    "@docusaurus/preset-classic": "2.0.0-alpha.63",
     "@material-ui/core": "4.11.0",
     "@material-ui/icons": "4.9.1",
     "@types/classnames": "2.2.10",

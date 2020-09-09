@@ -53,7 +53,7 @@ module.exports = {
     googleAnalytics: { trackingID: 'UA-136559762-4' },
     hotjar: { hjid: 1434110 },
     navbar: {
-      links: [
+      items: [
         { label: 'Docs', to: '/docs/what-are-uniforms', position: 'left' },
         {
           label: 'Tutorial',
