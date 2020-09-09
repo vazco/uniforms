@@ -1,6 +1,8 @@
-## Next:
+## [v3.0.0-rc.4](https://github.com/vazco/uniforms/tree/v3.0.0-rc.4) (2020-09-09)
 
 - **Breaking:** Reworked `GraphQLBridge.getField`. [\#769](https://github.com/vazco/uniforms/issues/769)
+- **Added:** More JSON Schema properties are handled automatically in `JSONSchemaBridge`. [\#748](https://github.com/vazco/uniforms/issues/748)
+- **Fixed:** Missing props of `SelectField` in `uniforms-bootstrap4`. [\#785](https://github.com/vazco/uniforms/issues/785), [\#793](https://github.com/vazco/uniforms/issues/793)
 
 ## [v3.0.0-rc.3](https://github.com/vazco/uniforms/tree/v3.0.0-rc.3) (2020-08-13)
 
