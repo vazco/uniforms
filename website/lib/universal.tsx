@@ -44,6 +44,7 @@ export const themeContext = createContext<keyof typeof themes>('unstyled');
 function _createThemedComponent(component: keyof typeof unstyled) {
   return function ThemedComponent(props: Record<string, any>) {
     const theme = useContext(themeContext);
+    // @ts-expect-error: AutoFieldContext available only in uniforms-unstyled right now.
     const Component = themes[theme][component];
     return <Component key={theme} {...props} />;
   };

@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   AutoField,
+  AutoFieldContext,
   BoolField,
   DateField,
   ListField,
@@ -114,4 +115,24 @@ test('<AutoField> - uses Component (props)', () => {
   mount(element, createContext({ x: { type: String } }));
 
   expect(Component).toHaveBeenCalledTimes(1);
+});
+
+test('<AutoField> - uses Component (context)', () => {
+  const FieldA = jest.fn(() => null);
+  const FieldB = jest.fn(() => null);
+
+  const element = (
+    <AutoFieldContext.Provider
+      value={props => (props['data-component'] === 'A' ? FieldA : FieldB)}
+    >
+      <>
+        <AutoField name="x" data-component="A" />
+        <AutoField name="x" data-component="B" />
+      </>
+    </AutoFieldContext.Provider>
+  );
+  mount(element, createContext({ x: { type: String } }));
+
+  expect(FieldA).toHaveBeenCalledTimes(1);
+  expect(FieldB).toHaveBeenCalledTimes(1);
 });
