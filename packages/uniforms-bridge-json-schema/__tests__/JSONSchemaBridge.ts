@@ -117,7 +117,13 @@ describe('JSONSchemaBridge', () => {
         },
       },
       password: { type: 'string', uniforms: { type: 'password' } },
-      passwordNumeric: { type: 'number', uniforms: { type: 'password' } },
+      passwordNumeric: {
+        type: 'number',
+        uniforms: { type: 'password' },
+        maximum: 9999,
+        minimum: 1000,
+        multipleOf: 3,
+      },
       recursive: { $ref: '#/definitions/recursive' },
       arrayWithAllOf: {
         type: 'array',
@@ -126,6 +132,8 @@ describe('JSONSchemaBridge', () => {
           allOf: [{ required: ['child'] }],
           properties: { child: { type: 'string' } },
         },
+        maxItems: 3,
+        minItems: 1,
       },
     },
     required: ['dateOfBirth'],
@@ -585,6 +593,9 @@ describe('JSONSchemaBridge', () => {
         required: false,
         decimal: true,
         type: 'password',
+        max: 9999,
+        min: 1000,
+        step: 3,
       });
     });
 
@@ -602,6 +613,26 @@ describe('JSONSchemaBridge', () => {
         label: 'Child',
         required: true,
       });
+    });
+
+    it('works with maxItems in props', () => {
+      expect(bridge.getProps('arrayWithAllOf')).toHaveProperty('maxCount', 3);
+    });
+
+    it('works with minItems in props', () => {
+      expect(bridge.getProps('arrayWithAllOf')).toHaveProperty('minCount', 1);
+    });
+
+    it('works with maximum in props', () => {
+      expect(bridge.getProps('passwordNumeric')).toHaveProperty('max', 9999);
+    });
+
+    it('works with minimum in props', () => {
+      expect(bridge.getProps('passwordNumeric')).toHaveProperty('min', 1000);
+    });
+
+    it('works with multipleOf in props', () => {
+      expect(bridge.getProps('passwordNumeric')).toHaveProperty('step', 3);
     });
   });
 
