@@ -287,6 +287,18 @@ test('<SelectField> - works with special characters', () => {
   );
 });
 
+test('<SelectField> - renders with correct classnames', () => {
+  const wrapper = mount(
+    // @ts-ignore Fix SelectFieldProps.
+    <SelectField name="x" textFieldProps={{ className: 'select-class' }} />,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
+  );
+  expect(wrapper.find(TextField).props()).toHaveProperty(
+    'className',
+    'select-class',
+  );
+});
+
 test('<SelectField checkboxes> - renders a set of Radio buttons', () => {
   // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
