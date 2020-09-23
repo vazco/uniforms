@@ -4,10 +4,7 @@ import CheckboxGroup, {
 } from 'antd/lib/checkbox/Group';
 import { RadioGroupProps } from 'antd/lib/radio';
 import RadioGroup from 'antd/lib/radio/group';
-import SelectAntD, {
-  SelectProps as SelectAntDProps,
-  SelectValue,
-} from 'antd/lib/select';
+import SelectAntD, { SelectProps as SelectAntDProps } from 'antd/lib/select';
 import React, { Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
