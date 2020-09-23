@@ -13,7 +13,9 @@ export type RadioFieldProps = FieldProps<
   {
     allowedValues?: string[];
     checkboxes?: boolean;
+    fullWidth?: boolean;
     helperText?: string;
+    margin?: any;
     transform?(value: string): string;
   }
 >;
@@ -22,9 +24,11 @@ function Radio({
   allowedValues,
   checkboxes,
   disabled,
+  fullWidth = true,
   id,
   inputRef,
   label,
+  margin = 'dense',
   name,
   onChange,
   transform,
@@ -34,7 +38,7 @@ function Radio({
   const filteredProps = wrapField._filterDOMProps(filterDOMProps(props));
 
   return wrapField(
-    { ...props, disabled, component: 'fieldset' },
+    { ...props, disabled, component: 'fieldset', fullWidth, margin },
     label && (
       <FormLabel component="legend" htmlFor={name}>
         {label}
@@ -58,11 +62,5 @@ function Radio({
     </RadioGroup>,
   );
 }
-
-// FIXME: wrapField is not typed correctly.
-Radio.defaultProps = {
-  fullWidth: true,
-  margin: 'dense',
-} as any;
 
 export default connectField(Radio, { kind: 'leaf' });
