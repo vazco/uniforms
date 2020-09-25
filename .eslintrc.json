@@ -22,6 +22,7 @@
       "settings": {
         "import/resolver": {
           "alias": {
+            "extensions": [".js", ".json", ".jsx", ".ts", ".tsx"],
             "map": [
               ["@docusaurus", "@docusaurus/core/lib/client/exports"],
               ["@theme", "@docusaurus/theme-classic/src/theme"]

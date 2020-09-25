@@ -247,6 +247,49 @@ test('<SelectField> - renders a label', () => {
   );
 });
 
+test('<SelectField> - renders a select with class "bg-red" beside "form-group"', () => {
+  const element = <SelectField name="x" className="bg-red" />;
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
+  );
+  expect(wrapper.find('.bg-red.form-group')).toHaveLength(1);
+});
+
+test('<SelectField> - renders a disabled select', () => {
+  const element = <SelectField name="x" disabled />;
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
+  );
+  expect(wrapper.find('select').prop('disabled')).toEqual(true);
+});
+
+test('<SelectField> - renders a required select', () => {
+  const element = <SelectField name="x" required />;
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
+  );
+  expect(wrapper.find('.form-group.required')).toHaveLength(1);
+});
+
+test('<SelectField> - renders am error massge in select', () => {
+  const element = (
+    <SelectField
+      name="x"
+      showInlineError
+      error={new Error()}
+      errorMessage="Error"
+    />
+  );
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
+  );
+  expect(wrapper.find('.form-text.text-danger')).toHaveLength(1);
+});
+
 test('<SelectField> - renders a wrapper with unknown props', () => {
   const element = <SelectField name="x" data-x="x" data-y="y" data-z="z" />;
   const wrapper = mount(

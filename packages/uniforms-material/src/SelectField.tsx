@@ -1,7 +1,5 @@
 import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
-import FormControlLabel, {
-  FormControlLabelProps,
-} from '@material-ui/core/FormControlLabel';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -44,6 +42,7 @@ type SelectProps = FieldProps<
   {
     checkboxes?: false;
     labelProps?: object;
+    textFieldProps: TextFieldProps;
   }
 >;
 
@@ -63,8 +62,6 @@ function Select(props: SelectFieldProps) {
     const {
       allowedValues,
       disabled,
-      error,
-      errorMessage,
       fieldType,
       id,
       inputRef,
@@ -72,7 +69,6 @@ function Select(props: SelectFieldProps) {
       legend,
       name,
       onChange,
-      showInlineError,
       transform,
     } = props;
 
@@ -127,10 +123,6 @@ function Select(props: SelectFieldProps) {
       {
         ...props,
         component: 'fieldset',
-        disabled,
-        error,
-        errorMessage,
-        showInlineError,
       },
       (legend || label) && (
         <FormLabel component="legend">{legend || label}</FormLabel>
@@ -138,21 +130,20 @@ function Select(props: SelectFieldProps) {
       children,
     );
   }
-
-  const fullWidth = props.fullWidth ?? true;
-  const margin = props.margin ?? 'dense';
   const {
     allowedValues,
     disabled,
     error,
     errorMessage,
     fieldType,
+    fullWidth = true,
     helperText,
     id,
     InputLabelProps,
     inputProps,
     label,
     labelProps,
+    margin = 'dense',
     name,
     native,
     onChange,
@@ -161,6 +152,7 @@ function Select(props: SelectFieldProps) {
     showInlineError,
     transform,
     variant,
+    textFieldProps,
   } = props;
   const Item = native ? 'option' : MenuItem;
   const hasPlaceholder = !!placeholder;
@@ -168,7 +160,7 @@ function Select(props: SelectFieldProps) {
 
   return (
     <TextField
-      disabled={!!disabled}
+      disabled={disabled}
       error={!!error}
       fullWidth={fullWidth}
       helperText={(error && showInlineError && errorMessage) || helperText}
@@ -195,6 +187,7 @@ function Select(props: SelectFieldProps) {
       }}
       value={native && !value ? '' : value}
       variant={variant}
+      {...textFieldProps}
     >
       {(hasPlaceholder || !required || !hasValue) && (
         <Item value="" disabled={!!required}>

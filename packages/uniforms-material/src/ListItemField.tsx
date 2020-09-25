@@ -1,10 +1,5 @@
 import ListItemMaterial, { ListItemProps } from '@material-ui/core/ListItem';
-import React, {
-  Children,
-  ReactNode,
-  cloneElement,
-  isValidElement,
-} from 'react';
+import React, { ReactNode } from 'react';
 import { connectField } from 'uniforms';
 
 import AutoField from './AutoField';

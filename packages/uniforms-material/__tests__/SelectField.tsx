@@ -310,8 +310,19 @@ test('<SelectField> - disabled items (options) based on predicate', () => {
   expect(wrapper.find('option').at(1).prop('disabled')).toBe(false);
 });
 
+test('<SelectField> - renders with correct classnames', () => {
+  const wrapper = mount(
+    // @ts-ignore Fix SelectFieldProps.
+    <SelectField name="x" textFieldProps={{ className: 'select-class' }} />,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
+  );
+  expect(wrapper.find(TextField).props()).toHaveProperty(
+    'className',
+    'select-class',
+  );
+});
+
 test('<SelectField checkboxes> - renders a set of Radio buttons', () => {
-  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -322,7 +333,6 @@ test('<SelectField checkboxes> - renders a set of Radio buttons', () => {
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct disabled state', () => {
-  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" disabled />;
   const wrapper = mount(
     element,
@@ -335,7 +345,6 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct dis
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct id (inherited)', () => {
-  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -348,7 +357,6 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct id 
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct id (specified)', () => {
-  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" id="y" />;
   const wrapper = mount(
     element,
@@ -361,7 +369,6 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct id 
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct name', () => {
-  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -374,7 +381,6 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct nam
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct options', () => {
-  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -388,7 +394,6 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct opt
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct options (transform)', () => {
   const element = (
-    // @ts-ignore Fix SelectFieldProps.
     <SelectField checkboxes name="x" transform={x => x.toUpperCase()} />
   );
   const wrapper = mount(
@@ -402,7 +407,6 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct opt
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct value (default)', () => {
-  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -415,7 +419,6 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct val
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct value (model)', () => {
-  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -431,7 +434,6 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct val
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct value (specified)', () => {
-  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" value="b" />;
   const wrapper = mount(
     element,
@@ -446,7 +448,6 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct val
 test('<SelectField checkboxes> - renders a set of Radio buttons which correctly reacts on change', () => {
   const onChange = jest.fn();
 
-  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -465,7 +466,6 @@ test('<SelectField checkboxes> - renders a set of Radio buttons which correctly 
 test('<SelectField checkboxes> - renders a set of Checkboxes which correctly reacts on change (array check)', () => {
   const onChange = jest.fn();
 
-  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -485,7 +485,6 @@ test('<SelectField checkboxes> - renders a set of Checkboxes which correctly rea
 
 test('<SelectField checkboxes> - renders a set of Checkboxes which correctly reacts on change (array uncheck)', () => {
   const onChange = jest.fn();
-  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" value={['b']} />;
   const wrapper = mount(
     element,
@@ -526,7 +525,6 @@ test('<SelectField checkboxes> - renders a set of Checkboxes with correct labels
 test('<SelectField checkboxes> - renders a set of Checkboxes which correct labels (transform)', () => {
   const onChange = jest.fn();
   const element = (
-    // @ts-ignore Fix SelectFieldProps.
     <SelectField checkboxes name="x" transform={x => x.toUpperCase()} />
   );
   const wrapper = mount(
@@ -548,7 +546,6 @@ test('<SelectField checkboxes> - renders a set of Checkboxes which correct label
 test('<SelectField checkboxes> - renders a set of Radio buttons which correctly reacts on change (same value)', () => {
   const onChange = jest.fn();
 
-  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -567,7 +564,6 @@ test('<SelectField checkboxes> - renders a set of Radio buttons which correctly 
 });
 
 test('<SelectField checkboxes> - renders a label', () => {
-  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField checkboxes name="x" label="y" />;
   const wrapper = mount(
     element,
@@ -581,7 +577,6 @@ test('<SelectField checkboxes> - renders a SelectField with correct error text (
   const error = new Error();
   const element = (
     <SelectField
-      // @ts-ignore Fix SelectFieldProps.
       checkboxes
       name="x"
       error={error}
@@ -601,7 +596,6 @@ test('<SelectField checkboxes> - renders a SelectField with correct error text (
   const error = new Error();
   const element = (
     <SelectField
-      // @ts-ignore Fix SelectFieldProps.
       checkboxes
       name="x"
       error={error}
@@ -618,7 +612,6 @@ test('<SelectField checkboxes> - renders a SelectField with correct error text (
 });
 
 test('<SelectField checkboxes> - renders Checkbox with appearance=checkbox', () => {
-  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField appearance="checkbox" checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -633,7 +626,6 @@ test('<SelectField checkboxes> - renders Checkbox with appearance=checkbox', () 
 });
 
 test('<SelectField checkboxes> - renders Switch with appearance=switch', () => {
-  // @ts-ignore Fix SelectFieldProps.
   const element = <SelectField appearance="switch" checkboxes name="x" />;
   const wrapper = mount(
     element,

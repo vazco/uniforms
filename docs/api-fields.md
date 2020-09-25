@@ -529,9 +529,9 @@ import { RadioField } from 'uniforms-unstyled';
 | :---------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------: |
 |  `allowedValues`  |                                               Array of allowed values. By default, those are extracted from your schema.                                                |                  All                   |
 |   `appearance`    |                 Field appearance. Set to "toggle" to appear as a Material Toggle or to "checkbox" (or leave it undefined) to use a Checkbox appearance.                 |                material                |
-|   `checkboxes`    |                                       Turn on checkbox/radio mode. It's always true in mutltiple (i.e. fieldType === Array) mode.                                       |                  All                   |
+|   `checkboxes`    |                                       Turn on checkbox/radio mode. It's always true in multiple (i.e. fieldType === Array) mode.                                        |                  All                   |
 |   `disableItem`   |                                                           Disable items (options) based on a given predicate.                                                           |                  All                   |
-|      `extra`      |                                 Extra feedback text. In the antd theme, this renders addtional help text below any validation messages.                                 |                  antd                  |
+|      `extra`      |                                Extra feedback text. In the antd theme, this renders additional help text below any validation messages.                                 |                  antd                  |
 |      `help`       |                                                           Help text. _Some description would be great, huh?_                                                            |      antd, bootstrap3, bootstrap4      |
 |  `helpClassName`  |                                                      Help block className. _Some description would be great, huh?_                                                      |         bootstrap3, bootstrap4         |
 |     `inline`      |                      Checkbox inline state. In bootstrap themes, a label is rendered as a text but in inline mode, it's treated as a field label.                       |         bootstrap3, bootstrap4         |
@@ -544,7 +544,8 @@ import { RadioField } from 'uniforms-unstyled';
 | `showInlineError` |                                                       Field inline error. _Some description would be great, huh?_                                                       | antd, bootstrap3, bootstrap4, semantic |
 |    `transform`    |                                             Label transform. Allows to transform the each value into a human-readable label                                             |                  All                   |
 |   `wrapperCol`    |                                                     Field layout. The layout for input controls. Same as labelCol.                                                      |                  antd                  |
-|  `wrapClassName`  |                                             Field and sourroundings wrap className. _Some description would be great, huh?_                                             |         bootstrap3, bootstrap4         |
+|  `wrapClassName`  |                                             Field and surroundings wrap className. _Some description would be great, huh?_                                              |         bootstrap3, bootstrap4         |
+| `textFieldProps`  |                                          Props injected directly to `TextField` ( valid only for non-checkbox `SelectField` ).                                          |                material                |
 
 **Note:** All `BaseField` props are also accepted.
 

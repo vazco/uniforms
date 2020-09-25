@@ -19,7 +19,7 @@ const schema = {
       const: { $data: '1/password' },
       uniforms: { type: 'password' },
     },
-    acceptTermsOfUse: { type: 'boolean' },
+    acceptTermsOfUse: { type: 'boolean', const: true },
   },
   required: [
     'fullname',
