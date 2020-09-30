@@ -15,17 +15,24 @@ import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
+type SelectFieldCommonProps = {
+  allowedValues?: string[];
+  appearance?: 'checkbox' | 'switch';
+  checkboxes?: boolean;
+  disableItem?(value: string): boolean;
+  inputRef?: Ref<HTMLButtonElement>;
+  native?: boolean;
+  required?: boolean;
+  transform?(value: string): string;
+};
+
 type CheckboxesProps = FieldProps<
   string | string[],
   CheckboxProps | SwitchProps,
   {
-    allowedValues?: string[];
-    appearance?: 'checkbox' | 'switch';
     checkboxes: true;
-    inputRef?: Ref<HTMLButtonElement>;
     legend?: string;
-    required?: boolean;
-    transform?(value: string): string;
+    native: false;
   }
 >;
 
@@ -33,18 +40,14 @@ type SelectProps = FieldProps<
   string | string[],
   TextFieldProps & MaterialSelectProps,
   {
-    allowedValues?: string[];
-    appearance?: 'checkbox' | 'switch';
     checkboxes?: false;
-    inputRef?: Ref<HTMLButtonElement>;
     labelProps?: object;
-    required?: boolean;
-    transform?(value: string): string;
     textFieldProps: TextFieldProps;
   }
 >;
 
-export type SelectFieldProps = CheckboxesProps | SelectProps;
+export type SelectFieldProps = (CheckboxesProps | SelectProps) &
+  SelectFieldCommonProps;
 
 const base64 =
   typeof btoa !== 'undefined'
@@ -68,11 +71,11 @@ function Select(props: SelectFieldProps) {
       onChange,
       transform,
     } = props;
+
     const appearance = props.appearance ?? 'checkbox';
-    const filteredProps = wrapField._filterDOMProps(
-      filterDOMProps(omit(props, ['id'])),
-    );
     const SelectionControl = appearance === 'checkbox' ? Checkbox : Switch;
+    const filteredProps = filterDOMProps(omit(props, ['id']));
+
     const children =
       fieldType !== Array ? (
         <RadioGroup
@@ -87,6 +90,7 @@ function Select(props: SelectFieldProps) {
               control={
                 <Radio id={`${id}-${escape(item)}`} {...filteredProps} />
               }
+              disabled={props.disableItem?.(item) || disabled}
               key={item}
               label={transform ? transform(item) : item}
               value={item}
@@ -108,6 +112,7 @@ function Select(props: SelectFieldProps) {
                   {...filteredProps}
                 />
               }
+              disabled={props.disableItem?.(item) || disabled}
               key={item}
               label={transform ? transform(item) : item}
             />
@@ -191,7 +196,7 @@ function Select(props: SelectFieldProps) {
       )}
 
       {allowedValues!.map(value => (
-        <Item key={value} value={value}>
+        <Item disabled={props.disableItem?.(value)} key={value} value={value}>
           {transform ? transform(value) : value}
         </Item>
       ))}

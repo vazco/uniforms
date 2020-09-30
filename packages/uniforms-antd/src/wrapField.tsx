@@ -70,11 +70,20 @@ export default function wrapField(
 
 declare module 'uniforms' {
   interface FilterDOMProps {
+    checkboxes: never;
     colon: never;
+    disableItem: never;
     labelCol: never;
     wrapperCol: never;
     wrapperStyle: never;
   }
 }
 
-filterDOMProps.register('colon', 'labelCol', 'wrapperCol', 'wrapperStyle');
+filterDOMProps.register(
+  'checkboxes',
+  'colon',
+  'disableItem',
+  'labelCol',
+  'wrapperCol',
+  'wrapperStyle',
+);
