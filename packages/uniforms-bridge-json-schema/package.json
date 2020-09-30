@@ -1,6 +1,6 @@
 {
   "name": "uniforms-bridge-json-schema",
-  "version": "3.0.0-rc.4",
+  "version": "3.0.0-rc.5",
   "license": "MIT",
   "main": "es5/index.js",
   "module": "es6/index.js",
@@ -27,6 +27,6 @@
     "invariant": "^2.0.0",
     "lodash": "^4.0.0",
     "tslib": "^1.10.0",
-    "uniforms": "^3.0.0-rc.4"
+    "uniforms": "^3.0.0-rc.5"
   }
 }
