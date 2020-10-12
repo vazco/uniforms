@@ -5,6 +5,7 @@ import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 export type TextFieldProps = FieldProps<string, StandardTextFieldProps>;
 
 function Text({
+  autocomplete,
   disabled,
   error,
   errorMessage,
@@ -23,6 +24,7 @@ function Text({
 }: TextFieldProps) {
   return (
     <TextField
+      autocomplete={autocomplete}
       disabled={disabled}
       error={!!error}
       fullWidth={fullWidth}

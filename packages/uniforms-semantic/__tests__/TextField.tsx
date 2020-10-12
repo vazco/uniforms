@@ -199,3 +199,10 @@ test('<TextField> - renders with a custom wrapClassName', () => {
 
   expect(wrapper.find('.ui.input.test-class-name')).toHaveLength(1);
 });
+
+test('<TextField> - renders a input with autocomplete turned off', () => {
+  const element = <TextField name="x" autocomplete="off" />;
+  const wrapper = mount(element, createContext({ x: { type: String } }));
+
+  expect(wrapper.find('input').prop('autocomplete')).toBe('off');
+});
