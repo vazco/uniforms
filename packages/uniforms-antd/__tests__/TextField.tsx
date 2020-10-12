@@ -160,8 +160,8 @@ test('<TextField> - renders a input with correct type prop', () => {
 });
 
 test('<TextField> - renders a input with autocomplete turned off', () => {
-  const element = <TextField name="x" autocomplete="off" />;
+  const element = <TextField name="x" autoComplete="off" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
-  expect(wrapper.find(Input).prop('autocomplete')).toBe('off');
+  expect(wrapper.find(Input).prop('autoComplete')).toBe('off');
 });

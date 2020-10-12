@@ -15,7 +15,7 @@ export type TextFieldProps = HTMLFieldProps<
 >;
 
 function Text({
-  autocomplete,
+  autoComplete,
   className,
   disabled,
   error,
@@ -52,7 +52,7 @@ function Text({
         )}
       >
         <input
-          autocomplete={autocomplete}
+          autoComplete={autoComplete}
           disabled={disabled}
           id={id}
           name={name}
