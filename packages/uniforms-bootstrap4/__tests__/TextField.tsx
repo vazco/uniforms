@@ -153,3 +153,10 @@ test('<TextField> - renders a wrapper with unknown props', () => {
   expect(wrapper.find('div').at(0).prop('data-y')).toBe('y');
   expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });
+
+test('<TextField> - renders a input with autocomplete turned off', () => {
+  const element = <TextField name="x" autoComplete="off" />;
+  const wrapper = mount(element, createContext({ x: { type: String } }));
+
+  expect(wrapper.find(Input).prop('autoComplete')).toBe('off');
+});

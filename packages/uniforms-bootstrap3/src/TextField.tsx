@@ -18,6 +18,7 @@ function Text(props: TextFieldProps) {
       className={classnames(props.inputClassName, 'form-control', {
         'form-control-danger': props.error,
       })}
+      autoComplete={props.autoComplete}
       disabled={props.disabled}
       id={props.id}
       name={props.name}

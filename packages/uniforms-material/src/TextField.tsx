@@ -24,7 +24,6 @@ function Text({
 }: TextFieldProps) {
   return (
     <TextField
-      autoComplete={autoComplete}
       disabled={disabled}
       error={!!error}
       fullWidth={fullWidth}

@@ -14,7 +14,6 @@ function Text(props: TextFieldProps) {
   return wrapField(
     props,
     <Input
-      autoComplete={props.autoComplete}
       disabled={props.disabled}
       name={props.name}
       onChange={event => props.onChange(event.target.value)}
