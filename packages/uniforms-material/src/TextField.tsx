@@ -5,7 +5,6 @@ import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 export type TextFieldProps = FieldProps<string, StandardTextFieldProps>;
 
 function Text({
-  autoComplete,
   disabled,
   error,
   errorMessage,
