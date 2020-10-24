@@ -12,9 +12,9 @@ jobs:
         node-version: [10.x, 12.x, 14.x]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.1
+        uses: actions/checkout@v2.3.3
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2.1.1
+        uses: actions/setup-node@v2.1.2
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install
@@ -24,12 +24,12 @@ jobs:
       - name: Test
         run: npm run coverage -- --no-cache --runInBand
       - name: Report coverage
-        uses: codecov/codecov-action@v1.0.12
+        uses: codecov/codecov-action@v1.0.14
       - name: Build docs
         run: npm --prefix website run build
         if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '14.x'
       - name: Deploy docs
-        uses: peaceiris/actions-gh-pages@v3.6.4
+        uses: peaceiris/actions-gh-pages@v3.7.3
         with:
           allow_empty_commit: true
           cname: uniforms.tools
