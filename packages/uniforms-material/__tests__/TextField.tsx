@@ -159,3 +159,11 @@ test('<TextField> - renders a TextField with correct error text (showInlineError
 
   expect(wrapper.find(TextFieldMaterial).prop('helperText')).toBeUndefined();
 });
+
+test('<TextField> - renders a input with autocomplete off', () => {
+  const element = <TextField name="x" autoComplete="off" />;
+  const wrapper = mount(element, createContext({ x: { type: String } }));
+
+  expect(wrapper.find(TextFieldMaterial)).toHaveLength(1);
+  expect(wrapper.find(TextFieldMaterial).prop('autoComplete')).toBe('off');
+});
