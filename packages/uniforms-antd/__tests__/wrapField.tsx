@@ -66,3 +66,10 @@ test('<wrapField> - renders wrapper with extra style', () => {
 
   expect(wrapper.find(Form.Item).prop('style')).toEqual({});
 });
+
+test('<wrapField> - renders wrapper with a custom validateStatus', () => {
+  const element = wrapField({ validateStatus: 'success' }, <div />);
+  const wrapper = mount(element);
+
+  expect(wrapper.find(Form.Item).prop('validateStatus')).toBe('success');
+});
