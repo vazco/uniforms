@@ -1,5 +1,7 @@
-## Next
+## [v3.0.0-rc.6](https://github.com/vazco/uniforms/tree/v3.0.0-rc.6) (2020-10-26)
 
+- **Added:** The `autoComplete` prop is now correctly used in `TextField`. [\#809](https://github.com/vazco/uniforms/issues/809)
+- **Added:** The `validateStatus` prop is now correctly handled in `wrapField` in `uniforms-antd`. [\#817](https://github.com/vazco/uniforms/issues/817)
 - **Fixed:** Regression of accepting non-string labels in `useField` and `connectField`. [\#816](https://github.com/vazco/uniforms/issues/816)
 
 ## [v3.0.0-rc.5](https://github.com/vazco/uniforms/tree/v3.0.0-rc.5) (2020-09-30)
