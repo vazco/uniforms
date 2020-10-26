@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { SimpleSchema } from 'simpl-schema';
 import { Context, connectField, randomIds } from 'uniforms';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
@@ -124,5 +124,62 @@ describe('connectField', () => {
 
       expect(onChange).toBeCalledWith('field', 'initialValueExample');
     });
+  });
+
+  // TODO: Write tests for `placeholder`.
+  describe('when rendered with label', () => {
+    const labelA = <span style={{ color: 'red' }}>Error</span>;
+    const labelB = <span style={{ color: 'green' }}>OK</span>;
+
+    it.each([
+      ['Props', '', false, 'Props'],
+      ['Props', '', true, 'Props'],
+      ['Props', 'Schema', false, 'Props'],
+      ['Props', 'Schema', true, 'Props'],
+      ['Props', labelB, false, 'Props'],
+      ['Props', labelB, true, 'Props'],
+      [false, '', false, ''],
+      [false, '', true, ''],
+      [false, 'Schema', false, ''],
+      [false, 'Schema', true, ''],
+      [false, labelB, false, ''],
+      [false, labelB, true, ''],
+      [labelA, '', false, labelA],
+      [labelA, '', true, labelA],
+      [labelA, 'Schema', false, labelA],
+      [labelA, 'Schema', true, labelA],
+      [labelA, labelB, false, labelA],
+      [labelA, labelB, true, labelA],
+      [true, '', false, ''],
+      [true, '', true, ''],
+      [true, 'Schema', false, 'Schema'],
+      [true, 'Schema', true, 'Schema'],
+      [true, labelB, false, labelB],
+      [true, labelB, true, labelB],
+      [undefined, '', false, ''],
+      [undefined, '', true, ''],
+      [undefined, 'Schema', false, ''],
+      [undefined, 'Schema', true, 'Schema'],
+      [undefined, labelB, false, ''],
+      [undefined, labelB, true, labelB],
+    ] as [ReactNode, ReactNode, boolean, ReactNode][])(
+      'resolves it correctly (%#)',
+      (prop, schema, state, result) => {
+        const context: typeof reactContext = {
+          context: {
+            ...reactContext.context,
+            state: { ...reactContext.context.state, label: state },
+          },
+        };
+
+        jest
+          .spyOn(context.context.schema, 'getProps')
+          .mockReturnValueOnce({ label: schema });
+
+        const Field = connectField(Test);
+        const wrapper = mount(<Field name="field" label={prop} />, context);
+        expect(wrapper.find(Test).prop('label')).toBe(result);
+      },
+    );
   });
 });

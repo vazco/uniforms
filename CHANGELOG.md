@@ -1,3 +1,7 @@
+## Next
+
+- **Fixed:** Regression of accepting non-string labels in `useField` and `connectField`. [\#816](https://github.com/vazco/uniforms/issues/816)
+
 ## [v3.0.0-rc.5](https://github.com/vazco/uniforms/tree/v3.0.0-rc.5) (2020-09-30)
 
 - **Added:** New `disableItem` prop in `SelectField`. [\#736](https://github.com/vazco/uniforms/issues/736)
