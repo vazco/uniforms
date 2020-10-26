@@ -158,5 +158,6 @@ test('<TextField> - renders a input with autocomplete turned off', () => {
   const element = <TextField name="x" autoComplete="off" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
+  expect(wrapper.find('div').at(0).prop('autoComplete')).toBeFalsy();
   expect(wrapper.find('input').prop('autoComplete')).toBe('off');
 });

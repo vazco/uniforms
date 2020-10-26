@@ -13,7 +13,7 @@ export type TextFieldProps = HTMLFieldProps<
 
 function Text(props: TextFieldProps) {
   return wrapField(
-    { feedbackable: true, ...omit(props, ['onChange']) },
+    { feedbackable: true, ...omit(props, ['onChange', 'autoComplete']) },
     <input
       className={classnames(props.inputClassName, 'form-control', {
         'form-control-danger': props.error,
