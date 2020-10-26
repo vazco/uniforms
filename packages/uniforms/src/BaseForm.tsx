@@ -165,8 +165,6 @@ export class BaseForm<
       'modelTransform',
       'onChange',
       'onSubmit',
-      'onSubmitFailure',
-      'onSubmitSuccess',
       'placeholder',
       'schema',
       'showInlineError',
