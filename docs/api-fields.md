@@ -44,8 +44,6 @@ All additional props will be passed to the result field component.
 | `component` | Field according to the `AutoField` algorithm |       Component to render       |
 |   `name`    |                      -                       | Name of the field in the schema |
 
-**Note:** All `BaseField` props are also accepted.
-
 ##### Props usage:
 
 ```js
@@ -108,8 +106,6 @@ A checkbox.
 |  `wrapClassName`  |                                             Field and sourroundings wrap className. _Some description would be great, huh?_                                             |         bootstrap3, bootstrap4         |
 |   `wrapperCol`    |                                                     Field layout. The layout for input controls. Same as labelCol.                                                      |                  antd                  |
 
-**Note:** All `BaseField` props are also accepted.
-
 ##### Props usage:
 
 ```js
@@ -166,8 +162,6 @@ import { BoolField } from 'uniforms-unstyled';
 |   `timeFormat`    |                                                           Display time picker in ampm (12hr) format or 24hr format.                                                            |                material                |
 |  `wrapClassName`  | Field and sourroundings wrap className. In SemanticUI theme, this class name is used on ui input wrapper, so you can pass classes like small, huge, inverted, transparent etc. |    bootstrap3, bootstrap4, semantic    |
 |   `wrapperCol`    |                                                         Field layout. The layout for input controls. Same as labelCol.                                                         |                  antd                  |
-
-**Note:** All `BaseField` props are also accepted.
 
 ##### Props usage:
 
@@ -265,7 +259,6 @@ import { HiddenField } from 'uniforms-unstyled';
 | :-------: | :----------------------------------: | :--------------------: |
 | `addIcon` | Icon. By default, glyphicon is used. | bootstrap3, bootstrap4 |
 
-**Note:** All `BaseField` props are also accepted.<br />
 **Note:** This is one of _internal_ components of `ListField`.
 
 ##### Props usage:
@@ -284,7 +277,6 @@ import { ListAddField } from 'uniforms-unstyled';
 | :----------: | :----------------------------------: | :--------------------: |
 | `removeIcon` | Icon. By default, glyphicon is used. | bootstrap3, bootstrap4 |
 
-**Note:** All `BaseField` props are also accepted.<br />
 **Note:** This is one of _internal_ components of `ListField`.
 
 ##### Props usage:
@@ -306,8 +298,6 @@ import { ListDelField } from 'uniforms-unstyled';
 |    `itemProps`    |     -     |           ListItemField props. These props are passed to the ListItemField.            |               All                |
 |   `removeIcon`    | glyphicon |                         Icon. It's passed to the ListDelField.                         |      bootstrap3, bootstrap4      |
 | `showInlineError` |           |              Field inline error. _Some description would be great, huh?_               | bootstrap3, bootstrap4, semantic |
-
-**Note:** All `BaseField` props are also accepted.
 
 ##### Props usage:
 
@@ -333,7 +323,6 @@ import { ListField } from 'uniforms-unstyled';
 | :----------: | :-------: | :------------------------------------: | :--------------------: |
 | `removeIcon` | glyphicon | Icon. It's passed to the ListDelField. | bootstrap3, bootstrap4 |
 
-**Note:** All `BaseField` props are also accepted.<br />
 **Note:** This is one of _internal_ components of `ListField`.
 
 ##### Props usage:
@@ -368,8 +357,6 @@ A textarea.
 | `showInlineError` |                                                       Field inline error. _Some description would be great, huh?_                                                       | antd, bootstrap3, bootstrap4, semantic |
 |   `wrapperCol`    |                                                     Field layout. The layout for input controls. Same as labelCol.                                                      |                  antd                  |
 |  `wrapClassName`  |                                             Field and sourroundings wrap className. _Some description would be great, huh?_                                             |         bootstrap3, bootstrap4         |
-
-**Note:** All `BaseField` props are also accepted.
 
 ##### Props usage:
 
@@ -410,8 +397,6 @@ import { LongTextField } from 'uniforms-unstyled';
 |     `grouped`     | Add / remove "grouped" class from the field. In Semantic, fields can be grouped using this class. By default, this class is added to the NestField. |                semantic                |
 | `showInlineError` |                                             Field inline error. _Some description would be great, huh?_                                             | antd, bootstrap3, bootstrap4, semantic |
 
-**Note:** All `BaseField` props are also accepted.
-
 ##### Props usage:
 
 ```js
@@ -448,8 +433,6 @@ A numeric input field.
 |      `step`       |                                                                               Input step.                                                                               |                  All                   |
 |   `wrapperCol`    |                                                     Field layout. The layout for input controls. Same as labelCol.                                                      |                  antd                  |
 |  `wrapClassName`  |                                             Field and sourroundings wrap className. _Some description would be great, huh?_                                             |         bootstrap3, bootstrap4         |
-
-**Note:** All `BaseField` props are also accepted.
 
 ##### Props usage:
 
@@ -499,8 +482,6 @@ import { NumField } from 'uniforms-unstyled';
 |    `transform`    |                        Label transform. Allows to transform the each value into a human-readable label                        |                  All                   |
 |   `wrapperCol`    |                                Field layout. The layout for input controls. Same as labelCol.                                 |                  antd                  |
 
-**Note:** All `BaseField` props are also accepted.
-
 ##### Props usage:
 
 ```js
@@ -546,8 +527,6 @@ import { RadioField } from 'uniforms-unstyled';
 |   `wrapperCol`    |                                                     Field layout. The layout for input controls. Same as labelCol.                                                      |                  antd                  |
 |  `wrapClassName`  |                                             Field and surroundings wrap className. _Some description would be great, huh?_                                              |         bootstrap3, bootstrap4         |
 | `textFieldProps`  |                                          Props injected directly to `TextField` ( valid only for non-checkbox `SelectField` ).                                          |                material                |
-
-**Note:** All `BaseField` props are also accepted.
 
 ##### Props usage:
 
@@ -615,8 +594,6 @@ import { SubmitField } from 'uniforms-unstyled';
 |      `type`       |                                                 Input type. HTML compatible input type like password. Default is text.                                                  |                  All                   |
 |   `wrapperCol`    |                                                     Field layout. The layout for input controls. Same as labelCol.                                                      |                  antd                  |
 |  `wrapClassName`  |                                             Field and sourroundings wrap className. _Some description would be great, huh?_                                             |         bootstrap3, bootstrap4         |
-
-**Note:** All `BaseField` props are also accepted.
 
 ##### Props usage:
 
