@@ -54,7 +54,7 @@ function Select({
       label,
       required,
     },
-    checkboxes || fieldType === Array ? (
+    checkboxes ? (
       allowedValues?.map(item => (
         <div
           key={item}
@@ -87,22 +87,38 @@ function Select({
         })}
         disabled={disabled}
         id={id}
+        multiple={fieldType === Array}
         name={name}
-        onChange={event =>
-          onChange(event.target.value !== '' ? event.target.value : undefined)
-        }
+        onChange={event => {
+          if (fieldType === Array) {
+            return;
+          }
+          const item = event.target.value;
+          onChange(item !== '' ? item : undefined);
+        }}
         ref={inputRef}
         value={value ?? ''}
       >
-        {(!!placeholder || !required || value === undefined) && (
-          <option value="" disabled={required} hidden={required}>
-            {placeholder || label}
-          </option>
-        )}
+        {(!!placeholder || !required || value === undefined) &&
+          fieldType !== Array && (
+            <option value="" disabled={required} hidden={required}>
+              {placeholder || label}
+            </option>
+          )}
 
-        {allowedValues?.map(value => (
-          <option disabled={disableItem?.(value)} key={value} value={value}>
-            {transform ? transform(value) : value}
+        {allowedValues?.map(allowedValue => (
+          <option
+            disabled={disableItem?.(allowedValue)}
+            key={allowedValue}
+            value={allowedValue}
+            onClick={event => {
+              if (fieldType === Array) {
+                const item = event.currentTarget.value;
+                onChange(fieldType === Array ? xor([item], value) : item);
+              }
+            }}
+          >
+            {transform ? transform(allowedValue) : allowedValue}
           </option>
         ))}
       </select>
