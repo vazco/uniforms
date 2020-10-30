@@ -386,7 +386,9 @@ test('<SelectField> - renders a select which correctly reacts on change (first v
   );
 
   expect(wrapper.find('select')).toHaveLength(1);
-  expect(wrapper.find('select').childAt(0).simulate('click', {})).toBeTruthy();
+  expect(
+    wrapper.find('select').simulate('change', { target: { value: 'a' } }),
+  ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', ['a']);
 });
 
@@ -406,7 +408,9 @@ test('<SelectField> - renders a select which correctly reacts on change (next va
   );
 
   expect(wrapper.find('select')).toHaveLength(1);
-  expect(wrapper.find('select').childAt(0).simulate('click', {})).toBeTruthy();
+  expect(
+    wrapper.find('select').simulate('change', { target: { value: 'a' } }),
+  ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', ['a', 'b']);
 });
 
@@ -426,7 +430,9 @@ test('<SelectField> - renders a select which correctly reacts on change (uncheck
   );
 
   expect(wrapper.find('select')).toHaveLength(1);
-  expect(wrapper.find('select').childAt(0).simulate('click')).toBeTruthy();
+  expect(
+    wrapper.find('select').simulate('change', { target: { value: 'a' } }),
+  ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', []);
 });
 
