@@ -282,7 +282,7 @@ describe('BaseForm', () => {
       });
 
       try {
-        await wrapper.instance().submit();
+        wrapper.instance().submit();
         throw new Error('Unreachable.');
       } catch (catched) {
         expect(catched).toBe(error);
