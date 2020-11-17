@@ -481,12 +481,12 @@ describe('ValidatedForm', () => {
         } else {
           expect(onSubmit).toHaveBeenCalledTimes(run);
           expect(wrapper.instance().getContext().error).toBe(null);
-        }
 
-        if (!hasValidationError && asyncSubmission) {
-          expect(wrapper.instance().getContext().submitting).toBe(true);
-          await new Promise(resolve => setTimeout(resolve));
-          expect(wrapper.instance().getContext().submitting).toBe(false);
+          if (asyncSubmission) {
+            expect(wrapper.instance().getContext().submitting).toBe(true);
+            await new Promise(resolve => setTimeout(resolve));
+            expect(wrapper.instance().getContext().submitting).toBe(false);
+          }
         }
 
         await new Promise(resolve => setTimeout(resolve));
@@ -496,7 +496,8 @@ describe('ValidatedForm', () => {
           await expect(result).rejects.toEqual(error);
         } else {
           expect(wrapper.instance().getContext().error).toBe(null);
-          await expect(result).resolves.toEqual('ok');
+          const submissionResult = asyncSubmission ? 'ok' : undefined;
+          await expect(result).resolves.toEqual(submissionResult);
         }
       }
     });

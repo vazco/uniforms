@@ -272,5 +272,32 @@ describe('BaseForm', () => {
       const context3 = wrapper.instance().getContext();
       expect(context3).toHaveProperty('submitting', false);
     });
+
+    it('ignores synchronous errors', async () => {
+      const error = new Error();
+      wrapper.setProps({
+        onSubmit() {
+          throw error;
+        },
+      });
+
+      try {
+        await wrapper.instance().submit();
+        throw new Error('Unreachable.');
+      } catch (catched) {
+        expect(catched).toBe(error);
+      }
+    });
+
+    it('returns asynchronous results', async () => {
+      const value = 42;
+      wrapper.setProps({
+        async onSubmit() {
+          return value;
+        },
+      });
+
+      await expect(wrapper.instance().submit()).resolves.toBe(value);
+    });
   });
 });
