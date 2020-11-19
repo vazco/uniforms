@@ -414,7 +414,7 @@ test('<SelectField> - renders a select which correctly reacts on change (next va
   expect(onChange).toHaveBeenLastCalledWith('x', ['a', 'b']);
 });
 
-test('<SelectField> - renders a select which correctly reacts on change (uncheck)', () => {
+test('<SelectField> - renders a select which correctly reacts on change (uncheck) by value', () => {
   const onChange = jest.fn();
 
   const element = <SelectField name="x" value={['a']} />;
@@ -432,6 +432,30 @@ test('<SelectField> - renders a select which correctly reacts on change (uncheck
   expect(wrapper.find('select')).toHaveLength(1);
   expect(
     wrapper.find('select').simulate('change', { target: { value: 'a' } }),
+  ).toBeTruthy();
+  expect(onChange).toHaveBeenLastCalledWith('x', []);
+});
+
+test('<SelectField> - renders a select which correctly reacts on change (uncheck) by selectedIndex', () => {
+  const onChange = jest.fn();
+
+  const element = <SelectField name="x" value={['a']} />;
+  const wrapper = mount(
+    element,
+    createContext(
+      {
+        x: { type: Array, allowedValues: ['a', 'b'] },
+        'x.$': { type: String },
+      },
+      { onChange },
+    ),
+  );
+
+  expect(wrapper.find('select')).toHaveLength(1);
+  expect(
+    wrapper
+      .find('select')
+      .simulate('change', { target: { selectedIndex: -1 } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', []);
 });

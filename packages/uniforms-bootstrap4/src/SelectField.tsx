@@ -90,7 +90,7 @@ function Select({
           const item = event.target.value;
           if (multiple) {
             const clear = event.target.selectedIndex === -1;
-            onChange(multiple ? (clear ? [] : xor([item], value)) : item);
+            onChange(clear ? [] : xor([item], value));
           } else {
             onChange(item !== '' ? item : undefined);
           }
