@@ -282,6 +282,141 @@ test('<SelectField> - disabled items (options) based on predicate', () => {
   expect(wrapper.find('option[value="b"]').at(0).prop('disabled')).toBe(false);
 });
 
+test('<SelectField> - renders a select with correct value (default)', () => {
+  const element = <SelectField name="x" />;
+  const wrapper = mount(
+    element,
+    createContext({
+      x: { type: Array, allowedValues: ['a', 'b'] },
+      'x.$': { type: String },
+    }),
+  );
+
+  expect(wrapper.find('select')).toHaveLength(1);
+  expect(wrapper.find('select').prop('value')).toStrictEqual([]);
+});
+
+test('<SelectField> - renders a select with correct value (model)', () => {
+  const element = <SelectField name="x" />;
+  const wrapper = mount(
+    element,
+    createContext(
+      {
+        x: { type: Array, allowedValues: ['a', 'b'] },
+        'x.$': { type: String },
+      },
+      { model: { x: ['b'] } },
+    ),
+  );
+
+  expect(wrapper.find('select')).toHaveLength(1);
+  expect(wrapper.find('select').prop('value')).toStrictEqual(['b']);
+});
+
+test('<SelectField> - renders a select with correct value (specified)', () => {
+  const element = <SelectField name="x" value={['b']} />;
+  const wrapper = mount(
+    element,
+    createContext({
+      x: { type: Array, allowedValues: ['a', 'b'] },
+      'x.$': { type: String },
+    }),
+  );
+
+  expect(wrapper.find('select')).toHaveLength(1);
+  expect(wrapper.find('select').prop('value')).toStrictEqual(['b']);
+});
+
+test('<SelectField> - renders a select which correctly reacts on change (first value)', () => {
+  const onChange = jest.fn();
+
+  const element = <SelectField name="x" />;
+  const wrapper = mount(
+    element,
+    createContext(
+      {
+        x: { type: Array, allowedValues: ['a', 'b'] },
+        'x.$': { type: String },
+      },
+      { onChange },
+    ),
+  );
+
+  expect(wrapper.find('select')).toHaveLength(1);
+  expect(
+    wrapper.find('select').simulate('change', { target: { value: 'a' } }),
+  ).toBeTruthy();
+  expect(onChange).toHaveBeenLastCalledWith('x', ['a']);
+});
+
+test('<SelectField> - renders a select which correctly reacts on change (next value)', () => {
+  const onChange = jest.fn();
+
+  const element = <SelectField name="x" value={['b']} />;
+  const wrapper = mount(
+    element,
+    createContext(
+      {
+        x: { type: Array, allowedValues: ['a', 'b'] },
+        'x.$': { type: String },
+      },
+      { onChange },
+    ),
+  );
+
+  expect(wrapper.find('select')).toHaveLength(1);
+  expect(
+    wrapper.find('select').simulate('change', { target: { value: 'a' } }),
+  ).toBeTruthy();
+  expect(onChange).toHaveBeenLastCalledWith('x', ['a', 'b']);
+});
+
+test('<SelectField> - renders a select which correctly reacts on change (uncheck) by value', () => {
+  const onChange = jest.fn();
+
+  const element = <SelectField name="x" value={['a']} />;
+  const wrapper = mount(
+    element,
+    createContext(
+      {
+        x: { type: Array, allowedValues: ['a', 'b'] },
+        'x.$': { type: String },
+      },
+      { onChange },
+    ),
+  );
+
+  expect(wrapper.find('select')).toHaveLength(1);
+  expect(
+    wrapper.find('select').simulate('change', { target: { value: 'a' } }),
+  ).toBeTruthy();
+  expect(onChange).toHaveBeenLastCalledWith('x', []);
+});
+
+test('<SelectField> - renders a select which correctly reacts on change (uncheck) by selectedIndex', () => {
+  const onChange = jest.fn();
+
+  const element = <SelectField name="x" value={['a']} />;
+  const wrapper = mount(
+    element,
+    createContext(
+      {
+        x: { type: Array, allowedValues: ['a', 'b'] },
+        'x.$': { type: String },
+      },
+      { onChange },
+    ),
+  );
+
+  expect(wrapper.find('select')).toHaveLength(1);
+  expect(
+    wrapper
+      .find('select')
+      .simulate('change', { target: { selectedIndex: -1 } }),
+  ).toBeTruthy();
+  expect(onChange).toHaveBeenLastCalledWith('x', []);
+});
+
 test('<SelectField checkboxes> - renders a set of checkboxes', () => {
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
