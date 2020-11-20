@@ -1,3 +1,7 @@
+## Next
+
+- **Breaking:** Synchronous `return` and `throw` in `onSubmit` are no longer allowed. To return an error or some result, return `Promise` instead. [\#819](https://github.com/vazco/uniforms/issues/819)
+
 ## [v3.0.0-rc.6](https://github.com/vazco/uniforms/tree/v3.0.0-rc.6) (2020-10-26)
 
 - **Added:** The `autoComplete` prop is now correctly used in `TextField`. [\#809](https://github.com/vazco/uniforms/issues/809)
