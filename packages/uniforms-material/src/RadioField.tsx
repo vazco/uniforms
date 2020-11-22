@@ -35,7 +35,7 @@ function Radio({
   value,
   ...props
 }: RadioFieldProps) {
-  const filteredProps = filterDOMProps(props);
+  const filteredProps = wrapField.__filterProps(filterDOMProps(props));
 
   return wrapField(
     { ...props, disabled, component: 'fieldset', fullWidth, margin },

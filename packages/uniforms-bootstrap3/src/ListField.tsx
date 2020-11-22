@@ -9,6 +9,7 @@ import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';
+import wrapField from './wrapField';
 
 export type ListFieldProps = HTMLFieldProps<
   unknown[],
@@ -42,7 +43,7 @@ function List({
         { 'panel-danger': error },
         className,
       )}
-      {...filterDOMProps(props)}
+      {...wrapField.__filterProps(filterDOMProps(props))}
     >
       <div className="panel-body">
         {label && (

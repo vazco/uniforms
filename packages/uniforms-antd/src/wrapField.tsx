@@ -1,8 +1,23 @@
 import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined';
 import Form, { FormItemProps } from 'antd/lib/form';
 import Tooltip from 'antd/lib/tooltip';
+import omit from 'lodash/omit';
 import React, { ReactNode } from 'react';
 import { filterDOMProps, Override } from 'uniforms';
+
+const filteredProps = [
+  'checkboxes',
+  'colon',
+  'disableItem',
+  'labelCol',
+  'validateStatus',
+  'wrapperCol',
+  'wrapperStyle',
+] as const;
+
+function __filterProps<T extends object>(props: T) {
+  return omit(props, filteredProps) as Omit<T, typeof filteredProps[number]>;
+}
 
 type WrapperProps = Override<
   FormItemProps,
@@ -17,7 +32,7 @@ type WrapperProps = Override<
 
 const defaultWrapperStyle = { marginBottom: '12px' };
 
-export default function wrapField(
+function wrapField(
   {
     colon,
     error,
@@ -69,24 +84,4 @@ export default function wrapField(
   );
 }
 
-declare module 'uniforms' {
-  interface FilterDOMProps {
-    checkboxes: never;
-    colon: never;
-    disableItem: never;
-    labelCol: never;
-    validateStatus: never;
-    wrapperCol: never;
-    wrapperStyle: never;
-  }
-}
-
-filterDOMProps.register(
-  'checkboxes',
-  'colon',
-  'disableItem',
-  'labelCol',
-  'validateStatus',
-  'wrapperCol',
-  'wrapperStyle',
-);
+export default Object.assign(wrapField, { __filterProps });

@@ -2,6 +2,8 @@ import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
+import wrapField from './wrapField';
+
 export type NumFieldProps = FieldProps<
   number,
   StandardTextFieldProps,
@@ -47,7 +49,7 @@ function Num({
       ref={inputRef}
       type="number"
       value={value ?? ''}
-      {...filterDOMProps(props)}
+      {...wrapField.__filterProps(filterDOMProps(props))}
     />
   );
 }

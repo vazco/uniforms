@@ -33,7 +33,7 @@ function Bool(props: BoolFieldProps) {
   } = props;
   const SelectionControl =
     appearance === 'checkbox' || appearance === undefined ? Checkbox : Switch;
-  const filteredProps = filterDOMProps(props);
+  const filteredProps = wrapField.__filterProps(filterDOMProps(props));
 
   return wrapField(
     { fullWidth: true, margin: 'dense', ...props, component: 'fieldset' },

@@ -2,6 +2,7 @@ import React from 'react';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import AutoField from './AutoField';
+import wrapField from './wrapField';
 
 export type NestFieldProps = HTMLFieldProps<
   object,
@@ -21,7 +22,7 @@ function Nest({
   ...props
 }: NestFieldProps) {
   return (
-    <div {...filterDOMProps(props)}>
+    <div {...wrapField.__filterProps(filterDOMProps(props))}>
       {label && <label>{label}</label>}
 
       {!!(error && showInlineError) && <div>{errorMessage}</div>}

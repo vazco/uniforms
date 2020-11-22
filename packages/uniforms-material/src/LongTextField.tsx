@@ -2,6 +2,8 @@ import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
 import React, { ReactNode } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
+import wrapField from './wrapField';
+
 export type LongTextFieldProps = FieldProps<string, StandardTextFieldProps>;
 
 const LongText = ({
@@ -34,7 +36,7 @@ const LongText = ({
     ref={inputRef}
     type={type}
     value={value ?? ''}
-    {...filterDOMProps(props)}
+    {...wrapField.__filterProps(filterDOMProps(props))}
   />
 );
 

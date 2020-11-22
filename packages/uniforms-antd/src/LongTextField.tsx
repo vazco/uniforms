@@ -22,7 +22,7 @@ function LongText({ rows = 5, ...props }: LongTextFieldProps) {
       ref={props.inputRef}
       rows={rows}
       value={props.value ?? ''}
-      {...filterDOMProps(props)}
+      {...wrapField.__filterProps(filterDOMProps(props))}
     />,
   );
 }

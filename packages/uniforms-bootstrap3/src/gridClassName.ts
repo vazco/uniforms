@@ -1,13 +1,3 @@
-import { filterDOMProps } from 'uniforms';
-
-declare module 'uniforms' {
-  interface FilterDOMProps {
-    grid: never;
-  }
-}
-
-filterDOMProps.register('grid');
-
 function gridClassNamePart(
   size: string,
   value: number,

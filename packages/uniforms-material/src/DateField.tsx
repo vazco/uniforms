@@ -2,6 +2,8 @@ import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
+import wrapField from './wrapField';
+
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
 const dateFormat = (value?: Date) => value && value.toISOString().slice(0, -8);
 const dateParse = (timestamp: number, onChange: DateFieldProps['onChange']) => {
@@ -54,7 +56,7 @@ function Date({
       ref={inputRef}
       type="datetime-local"
       value={dateFormat(value) ?? ''}
-      {...filterDOMProps(props)}
+      {...wrapField.__filterProps(filterDOMProps(props))}
     />
   );
 }

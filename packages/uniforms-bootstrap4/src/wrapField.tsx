@@ -5,6 +5,20 @@ import { Override, filterDOMProps } from 'uniforms';
 
 import gridClassName from './gridClassName';
 
+const filteredProps = [
+  'checkboxes',
+  'grid',
+  'inline',
+  'inputClassName',
+  'inputRef',
+  'rows',
+  'transform',
+] as const;
+
+function __filterProps<T extends object>(props: T) {
+  return omit(props, filteredProps) as Omit<T, typeof filteredProps[number]>;
+}
+
 type WrapperProps = Override<
   Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
@@ -21,7 +35,7 @@ type WrapperProps = Override<
   }
 >;
 
-export default function wrapField(
+function wrapField(
   {
     className,
     disabled,
@@ -58,16 +72,7 @@ export default function wrapField(
         required,
         row: grid,
       })}
-      {...filterDOMProps(
-        omit(props, [
-          'checkboxes',
-          'inline',
-          'inputClassName',
-          'inputRef',
-          'rows',
-          'transform',
-        ]),
-      )}
+      {...__filterProps(filterDOMProps(props))}
     >
       {label && (
         <label
@@ -101,3 +106,5 @@ export default function wrapField(
     </div>
   );
 }
+
+export default Object.assign(wrapField, { __filterProps });

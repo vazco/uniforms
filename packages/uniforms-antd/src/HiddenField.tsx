@@ -1,6 +1,8 @@
 import React, { HTMLProps, Ref, useEffect } from 'react';
 import { Override, filterDOMProps, useField } from 'uniforms';
 
+import wrapField from './wrapField';
+
 export type HiddenFieldProps = Override<
   HTMLProps<HTMLInputElement>,
   {
@@ -27,7 +29,7 @@ export default function HiddenField({ value, ...rawProps }: HiddenFieldProps) {
       ref={props.inputRef}
       type="hidden"
       value={value ?? props.value ?? ''}
-      {...filterDOMProps(props)}
+      {...wrapField.__filterProps(filterDOMProps(props))}
     />
   );
 }

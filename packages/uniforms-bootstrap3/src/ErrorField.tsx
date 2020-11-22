@@ -2,6 +2,8 @@ import classnames from 'classnames';
 import React, { HTMLProps } from 'react';
 import { connectField, filterDOMProps, Override } from 'uniforms';
 
+import wrapField from './wrapField';
+
 export type ErrorFieldProps = Override<
   Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   { error?: any; errorMessage?: string }
@@ -17,7 +19,7 @@ function Error({
   return !error ? null : (
     <div
       className={classnames('panel panel-danger text-danger', className)}
-      {...filterDOMProps(props)}
+      {...wrapField.__filterProps(filterDOMProps(props))}
     >
       <div className="panel-body">
         {children ? (

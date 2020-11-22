@@ -42,7 +42,7 @@ type SelectProps = FieldProps<
   {
     checkboxes?: false;
     labelProps?: object;
-    textFieldProps: TextFieldProps;
+    textFieldProps: Omit<TextFieldProps, 'value'>;
   }
 >;
 
@@ -58,6 +58,7 @@ const escape = (x: string) => base64(encodeURIComponent(x)).replace(/=+$/, '');
 // eslint-disable-next-line complexity
 function Select(props: SelectFieldProps) {
   const value = props.value ?? '';
+
   if (props.checkboxes) {
     const {
       allowedValues,
@@ -74,7 +75,10 @@ function Select(props: SelectFieldProps) {
 
     const appearance = props.appearance ?? 'checkbox';
     const SelectionControl = appearance === 'checkbox' ? Checkbox : Switch;
-    const filteredProps = filterDOMProps(omit(props, ['id']));
+    const filteredProps = omit(wrapField.__filterProps(filterDOMProps(props)), [
+      'id',
+      'textFieldProps',
+    ]);
 
     const children =
       fieldType !== Array ? (
@@ -119,6 +123,7 @@ function Select(props: SelectFieldProps) {
           ))}
         </FormGroup>
       );
+
     return wrapField(
       {
         ...props,
@@ -130,6 +135,7 @@ function Select(props: SelectFieldProps) {
       children,
     );
   }
+
   const {
     allowedValues,
     disabled,
@@ -154,9 +160,13 @@ function Select(props: SelectFieldProps) {
     variant,
     textFieldProps,
   } = props;
+
   const Item = native ? 'option' : MenuItem;
   const hasPlaceholder = !!placeholder;
   const hasValue = value !== '' && value !== undefined;
+  const filteredProps = omit(wrapField.__filterProps(filterDOMProps(props)), [
+    'textFieldProps',
+  ]);
 
   return (
     <TextField
@@ -177,13 +187,12 @@ function Select(props: SelectFieldProps) {
       }
       required={required}
       select
-      // @ts-ignore Different value and event based on fieldType.
       SelectProps={{
         displayEmpty: hasPlaceholder,
         inputProps: { name, id, ...inputProps },
         multiple: fieldType === Array || undefined,
         native,
-        ...filterDOMProps(props),
+        ...filteredProps,
       }}
       value={native && !value ? '' : value}
       variant={variant}

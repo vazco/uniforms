@@ -11,6 +11,7 @@ import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';
+import wrapField from './wrapField';
 
 export type ListFieldProps = HTMLFieldProps<
   unknown[],
@@ -50,7 +51,7 @@ function List({
 }: ListFieldProps) {
   return (
     <div
-      {...filterDOMProps(props)}
+      {...wrapField.__filterProps(filterDOMProps(props))}
       style={style}
       className={classNames([className, 'ant-list', 'ant-list-bordered'])}
     >

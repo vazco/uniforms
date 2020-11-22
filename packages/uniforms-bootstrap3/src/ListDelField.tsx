@@ -8,6 +8,8 @@ import {
   useField,
 } from 'uniforms';
 
+import wrapField from './wrapField';
+
 export type ListDelFieldProps = HTMLFieldProps<
   unknown,
   HTMLDivElement,
@@ -34,7 +36,7 @@ function ListDel({
 
   return (
     <span
-      {...filterDOMProps(props)}
+      {...wrapField.__filterProps(filterDOMProps(props))}
       className={classnames('badge', className)}
       onClick={() => {
         if (limitNotReached) {

@@ -42,7 +42,7 @@ function Bool({
       onChange={() => onChange(!value)}
       ref={inputRef}
       unCheckedChildren={unCheckedChildren}
-      {...filterDOMProps(props)}
+      {...wrapField.__filterProps(filterDOMProps(props))}
     />,
   );
 }

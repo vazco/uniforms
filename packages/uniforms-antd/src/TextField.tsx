@@ -21,7 +21,7 @@ function Text(props: TextFieldProps) {
       ref={props.inputRef}
       type={props.type ?? 'text'}
       value={props.value ?? ''}
-      {...filterDOMProps(props)}
+      {...wrapField.__filterProps(filterDOMProps(props))}
     />,
   );
 }

@@ -20,7 +20,7 @@ function Radio(props: RadioFieldProps) {
       name={props.name}
       onChange={event => props.onChange(event.target.value)}
       value={props.value ?? ''}
-      {...filterDOMProps(props)}
+      {...wrapField.__filterProps(filterDOMProps(props))}
     >
       {props.allowedValues?.map(value => (
         <RadioAntD key={value} style={radioStyle} value={value}>

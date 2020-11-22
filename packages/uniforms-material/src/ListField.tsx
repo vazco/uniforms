@@ -10,6 +10,7 @@ import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';
+import wrapField from './wrapField';
 
 export type ListFieldProps = FieldProps<
   unknown[],
@@ -37,7 +38,7 @@ function List({
             <ListSubheader disableSticky>{label}</ListSubheader>
           ) : undefined
         }
-        {...filterDOMProps(props)}
+        {...wrapField.__filterProps(filterDOMProps(props))}
       >
         {value?.map((item, itemIndex) =>
           Children.map(children, (child, childIndex) =>

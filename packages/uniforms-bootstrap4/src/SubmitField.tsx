@@ -3,6 +3,7 @@ import React, { HTMLProps, Ref } from 'react';
 import { filterDOMProps, Override, useForm } from 'uniforms';
 
 import gridClassName from './gridClassName';
+import wrapField from './wrapField';
 
 export type SubmitFieldProps = Override<
   HTMLProps<HTMLInputElement>,
@@ -43,7 +44,7 @@ function SubmitField({
         'is-invalid': error,
         row: state.grid,
       })}
-      {...filterDOMProps(props)}
+      {...wrapField.__filterProps(filterDOMProps(props))}
     >
       {hasWrap && (
         <label

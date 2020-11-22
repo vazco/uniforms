@@ -10,6 +10,8 @@ import {
   useField,
 } from 'uniforms';
 
+import wrapField from './wrapField';
+
 export type ListAddFieldProps = FieldProps<
   unknown,
   ButtonProps,
@@ -41,7 +43,7 @@ function ListAdd({
 
   return (
     <Button
-      {...filterDOMProps(props)}
+      {...wrapField.__filterProps(filterDOMProps(props))}
       disabled={!limitNotReached}
       icon={icon}
       onClick={() => {

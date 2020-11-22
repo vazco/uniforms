@@ -2,6 +2,8 @@ import Button, { ButtonProps } from '@material-ui/core/Button';
 import React, { ReactNode, Ref } from 'react';
 import { Override, filterDOMProps, useForm } from 'uniforms';
 
+import wrapField from './wrapField';
+
 export type SubmitFieldProps = Override<
   ButtonProps,
   // FIXME: What kind of `ref` is it?
@@ -26,7 +28,7 @@ function SubmitField({
       type="submit"
       value={value}
       variant={variant}
-      {...filterDOMProps(props)}
+      {...wrapField.__filterProps(filterDOMProps(props))}
     >
       {children || label}
     </Button>

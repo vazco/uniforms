@@ -1,9 +1,22 @@
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import omit from 'lodash/omit';
 import React, { ReactNode, createElement } from 'react';
-import { filterDOMProps } from 'uniforms';
 
-export default function wrap(
+const filteredProps = [
+  'checkboxes',
+  'disableItem',
+  'fullWidth',
+  'helperText',
+  'margin',
+  'variant',
+] as const;
+
+function __filterProps<T extends object>(props: T) {
+  return omit(props, filteredProps) as Omit<T, typeof filteredProps[number]>;
+}
+
+function wrapField(
   {
     component,
     disabled,
@@ -37,22 +50,4 @@ export default function wrap(
   );
 }
 
-declare module 'uniforms' {
-  interface FilterDOMProps {
-    checkboxes: never;
-    disableItem: never;
-    fullWidth: never;
-    helperText: never;
-    margin: never;
-    variant: never;
-  }
-}
-
-filterDOMProps.register(
-  'checkboxes',
-  'disableItem',
-  'fullWidth',
-  'helperText',
-  'margin',
-  'variant',
-);
+export default Object.assign(wrapField, { __filterProps });
