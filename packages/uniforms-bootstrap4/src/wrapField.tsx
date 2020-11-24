@@ -6,6 +6,7 @@ import { Override, filterDOMProps } from 'uniforms';
 import gridClassName from './gridClassName';
 
 const filteredProps = [
+  'autoComplete',
   'checkboxes',
   'grid',
   'inline',

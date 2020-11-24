@@ -17,8 +17,9 @@ export type NumFieldProps = HTMLFieldProps<
 
 function Num(props: NumFieldProps) {
   return wrapField(
-    omit(props, ['value', 'onChange']),
+    Object.assign({ feedbackable: true }, props),
     <input
+      autoComplete={props.autoComplete}
       className={classnames(props.inputClassName, 'form-control', {
         'form-control-danger': props.error,
       })}
