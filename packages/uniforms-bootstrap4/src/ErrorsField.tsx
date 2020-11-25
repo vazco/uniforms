@@ -2,8 +2,6 @@ import classnames from 'classnames';
 import React, { HTMLProps } from 'react';
 import { filterDOMProps, useForm } from 'uniforms';
 
-import wrapField from './wrapField';
-
 export type ErrorsFieldProps = HTMLProps<HTMLDivElement>;
 
 function ErrorsField({ children, className, ...props }: ErrorsFieldProps) {
@@ -12,7 +10,7 @@ function ErrorsField({ children, className, ...props }: ErrorsFieldProps) {
   return !error && !children ? null : (
     <div
       className={classnames('card border-danger mb-3 text-danger', className)}
-      {...wrapField.__filterProps(filterDOMProps(props))}
+      {...filterDOMProps(props)}
     >
       <div className="card-body">
         {children}

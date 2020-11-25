@@ -10,8 +10,6 @@ import {
   useField,
 } from 'uniforms';
 
-import wrapField from './wrapField';
-
 export type ListAddFieldProps = FieldProps<
   unknown,
   IconButtonProps,
@@ -48,7 +46,7 @@ function ListAdd({
   return (
     <FormControl fullWidth={fullWidth} margin={margin} variant={variant}>
       <IconButton
-        {...wrapField.__filterProps(filterDOMProps(props))}
+        {...filterDOMProps(props)}
         disabled={!limitNotReached}
         onClick={() => {
           parent.onChange(parent.value!.concat([cloneDeep(value)]));

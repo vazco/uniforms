@@ -9,8 +9,6 @@ import {
   useField,
 } from 'uniforms';
 
-import wrapField from './wrapField';
-
 export type ListAddFieldProps = HTMLFieldProps<
   unknown,
   HTMLDivElement,
@@ -38,7 +36,7 @@ function ListAdd({
 
   return (
     <div
-      {...wrapField.__filterProps(filterDOMProps(props))}
+      {...filterDOMProps(props)}
       className={classnames('badge pull-right', className)}
       onClick={() => {
         if (limitNotReached) {

@@ -58,7 +58,7 @@ function Select(props: SelectFieldProps) {
           value,
         }))}
         value={props.value}
-        {...wrapField.__filterProps(filterDOMProps(props))}
+        {...filterDOMProps(props)}
       />
     ) : (
       <SelectAntD<any>
@@ -77,7 +77,7 @@ function Select(props: SelectFieldProps) {
               : []
             : props.value
         }
-        {...wrapField.__filterProps(filterDOMProps(props))}
+        {...filterDOMProps(props)}
       >
         {props.allowedValues!.map(value => (
           <SelectAntD.Option

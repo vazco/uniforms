@@ -10,7 +10,6 @@ import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';
-import wrapField from './wrapField';
 
 export type ListFieldProps = FieldProps<
   unknown[],
@@ -21,7 +20,6 @@ export type ListFieldProps = FieldProps<
 function List({
   addIcon,
   children = <ListItemField name="$" />,
-  dense,
   initialCount,
   itemProps,
   label,
@@ -32,13 +30,13 @@ function List({
   return (
     <>
       <ListMaterial
-        dense={dense ?? true}
+        dense
         subheader={
           label ? (
             <ListSubheader disableSticky>{label}</ListSubheader>
           ) : undefined
         }
-        {...wrapField.__filterProps(filterDOMProps(props))}
+        {...filterDOMProps(props)}
       >
         {value?.map((item, itemIndex) =>
           Children.map(children, (child, childIndex) =>

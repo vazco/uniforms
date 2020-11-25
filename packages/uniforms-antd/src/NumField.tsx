@@ -27,7 +27,7 @@ function Num(props: NumFieldProps) {
       step={props.step || (props.decimal ? 0.01 : 1)}
       style={{ width: '100%' }}
       value={props.value}
-      {...wrapField.__filterProps(filterDOMProps(props))}
+      {...filterDOMProps(props)}
     />,
   );
 }

@@ -75,9 +75,15 @@ function Select(props: SelectFieldProps) {
 
     const appearance = props.appearance ?? 'checkbox';
     const SelectionControl = appearance === 'checkbox' ? Checkbox : Switch;
-    const filteredProps = omit(wrapField.__filterProps(filterDOMProps(props)), [
+    const filteredProps = omit(filterDOMProps(props), [
+      'checkboxes',
+      'disableItem',
+      'fullWidth',
+      'helperText',
       'id',
+      'margin',
       'textFieldProps',
+      'variant',
     ]);
 
     const children =
@@ -125,10 +131,7 @@ function Select(props: SelectFieldProps) {
       );
 
     return wrapField(
-      {
-        ...props,
-        component: 'fieldset',
-      },
+      { ...props, component: 'fieldset' },
       (legend || label) && (
         <FormLabel component="legend">{legend || label}</FormLabel>
       ),
@@ -164,8 +167,14 @@ function Select(props: SelectFieldProps) {
   const Item = native ? 'option' : MenuItem;
   const hasPlaceholder = !!placeholder;
   const hasValue = value !== '' && value !== undefined;
-  const filteredProps = omit(wrapField.__filterProps(filterDOMProps(props)), [
+  const filteredProps = omit(filterDOMProps(props), [
+    'checkboxes',
+    'disableItem',
+    'fullWidth',
+    'helperText',
+    'margin',
     'textFieldProps',
+    'variant',
   ]);
 
   return (

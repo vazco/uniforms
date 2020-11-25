@@ -9,7 +9,6 @@ import { connectField, filterDOMProps, HTMLFieldProps } from 'uniforms';
 
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';
-import wrapField from './wrapField';
 
 export type ListFieldProps = HTMLFieldProps<
   unknown[],
@@ -39,7 +38,7 @@ function List({
   return (
     <div
       className={classnames('card mb-3', className)}
-      {...wrapField.__filterProps(filterDOMProps(props))}
+      {...filterDOMProps(props)}
     >
       <div className="card-body">
         {label && (

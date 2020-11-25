@@ -5,8 +5,6 @@ import FormHelperText, {
 import React from 'react';
 import { Override, filterDOMProps, useForm } from 'uniforms';
 
-import wrapField from './wrapField';
-
 export type ErrorsFieldProps = Override<
   FormHelperTextProps,
   {
@@ -33,9 +31,7 @@ function ErrorsField({
       variant={variant}
     >
       {!!children && (
-        <FormHelperText {...wrapField.__filterProps(filterDOMProps(props))}>
-          {children}
-        </FormHelperText>
+        <FormHelperText {...filterDOMProps(props)}>{children}</FormHelperText>
       )}
       {schema.getErrorMessages(error).map((message, index) => (
         <FormHelperText key={index} {...filterDOMProps(props)}>

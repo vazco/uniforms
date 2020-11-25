@@ -2,19 +2,15 @@ import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
-import wrapField from './wrapField';
-
 export type TextFieldProps = FieldProps<string, StandardTextFieldProps>;
 
 function Text({
   disabled,
   error,
   errorMessage,
-  fullWidth = true,
   helperText,
   inputRef,
   label,
-  margin = 'dense',
   name,
   onChange,
   placeholder,
@@ -27,17 +23,17 @@ function Text({
     <TextField
       disabled={disabled}
       error={!!error}
-      fullWidth={fullWidth}
+      fullWidth
       helperText={(error && showInlineError && errorMessage) || helperText}
       label={label}
-      margin={margin}
+      margin="dense"
       name={name}
       onChange={event => disabled || onChange(event.target.value)}
       placeholder={placeholder}
       ref={inputRef}
       type={type}
       value={value}
-      {...wrapField.__filterProps(filterDOMProps(props))}
+      {...filterDOMProps(props)}
     />
   );
 }

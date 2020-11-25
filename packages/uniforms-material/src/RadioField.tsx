@@ -35,10 +35,8 @@ function Radio({
   value,
   ...props
 }: RadioFieldProps) {
-  const filteredProps = wrapField.__filterProps(filterDOMProps(props));
-
   return wrapField(
-    { ...props, disabled, component: 'fieldset', fullWidth, margin },
+    { ...props, component: 'fieldset', disabled, fullWidth, margin },
     label && (
       <FormLabel component="legend" htmlFor={name}>
         {label}
@@ -53,7 +51,7 @@ function Radio({
     >
       {allowedValues?.map(item => (
         <FormControlLabel
-          control={<RadioMaterial {...filteredProps} />}
+          control={<RadioMaterial {...filterDOMProps(props)} />}
           key={item}
           label={transform ? transform(item) : item}
           value={`${item}`}

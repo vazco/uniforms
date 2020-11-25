@@ -1,8 +1,6 @@
 import React, { HTMLProps } from 'react';
 import { filterDOMProps, useForm } from 'uniforms';
 
-import wrapField from './wrapField';
-
 export type ErrorsFieldProps = HTMLProps<HTMLDivElement>;
 
 const defaultStyle = {
@@ -23,7 +21,7 @@ function ErrorsField({
   const { error, schema } = useForm();
 
   return !error && !children ? null : (
-    <div style={style} {...wrapField.__filterProps(filterDOMProps(props))}>
+    <div style={style} {...filterDOMProps(props)}>
       {children}
       <ul>
         {schema.getErrorMessages(error).map((message, index) => (

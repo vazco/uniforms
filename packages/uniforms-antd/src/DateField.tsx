@@ -33,7 +33,7 @@ function Date({
       showTime={showTime}
       style={style}
       value={props.value && moment(props.value)}
-      {...wrapField.__filterProps(filterDOMProps(props))}
+      {...filterDOMProps(props)}
     />,
   );
 }

@@ -13,9 +13,8 @@ export type LongTextFieldProps = HTMLFieldProps<
 
 function LongText(props: LongTextFieldProps) {
   return wrapField(
-    Object.assign({ feedbackable: true }, props),
+    props,
     <textarea
-      autoComplete={props.autoComplete}
       className={classnames(props.inputClassName, 'form-control', {
         'form-control-danger': props.error,
       })}

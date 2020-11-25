@@ -1,8 +1,6 @@
 import React, { HTMLProps } from 'react';
 import { Override, connectField, filterDOMProps } from 'uniforms';
 
-import wrapField from './wrapField';
-
 export type ErrorFieldProps = Override<
   Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   { error?: any; errorMessage?: string }
@@ -26,7 +24,7 @@ function Error({
   ...props
 }: ErrorFieldProps) {
   return !error ? null : (
-    <div style={style} {...wrapField.__filterProps(filterDOMProps(props))}>
+    <div style={style} {...filterDOMProps(props)}>
       {children || <div style={messageStyle}>{errorMessage}</div>}
     </div>
   );

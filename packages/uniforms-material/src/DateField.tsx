@@ -2,8 +2,6 @@ import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
-import wrapField from './wrapField';
-
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
 const dateFormat = (value?: Date) => value && value.toISOString().slice(0, -8);
 const dateParse = (timestamp: number, onChange: DateFieldProps['onChange']) => {
@@ -25,7 +23,6 @@ function Date({
   disabled,
   error,
   errorMessage,
-  fullWidth = true,
   helperText,
   InputLabelProps,
   inputRef,
@@ -42,11 +39,11 @@ function Date({
     <TextField
       disabled={disabled}
       error={!!error}
-      fullWidth={fullWidth}
+      fullWidth
       helperText={(error && showInlineError && errorMessage) || helperText}
       label={label}
       InputLabelProps={{ ...labelProps, ...InputLabelProps }}
-      margin={props.margin ?? 'dense'}
+      margin="dense"
       name={name}
       onChange={event =>
         // FIXME: `valueAsNumber` is not available in `EventTarget`.
@@ -56,7 +53,7 @@ function Date({
       ref={inputRef}
       type="datetime-local"
       value={dateFormat(value) ?? ''}
-      {...wrapField.__filterProps(filterDOMProps(props))}
+      {...filterDOMProps(props)}
     />
   );
 }

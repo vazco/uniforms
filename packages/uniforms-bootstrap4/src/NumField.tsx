@@ -19,7 +19,6 @@ function Num(props: NumFieldProps) {
   return wrapField(
     props,
     <input
-      autoComplete={props.autoComplete}
       className={classnames(props.inputClassName, 'form-control', {
         'is-invalid': props.error,
       })}

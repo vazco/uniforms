@@ -5,8 +5,6 @@ import FormHelperText, {
 import React from 'react';
 import { Override, connectField, filterDOMProps } from 'uniforms';
 
-import wrapField from './wrapField';
-
 export type ErrorFieldProps = Override<
   FormHelperTextProps,
   { errorMessage?: string; fullWidth?: boolean; margin?: string }
@@ -28,7 +26,7 @@ function Error({
       margin={margin === 'dense' ? margin : undefined}
       variant={variant}
     >
-      <FormHelperText {...wrapField.__filterProps(filterDOMProps(props))}>
+      <FormHelperText {...filterDOMProps(props)}>
         {children || errorMessage}
       </FormHelperText>
     </FormControl>

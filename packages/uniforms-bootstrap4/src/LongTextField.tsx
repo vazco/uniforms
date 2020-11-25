@@ -15,7 +15,6 @@ function LongText(props: LongTextFieldProps) {
   return wrapField(
     props,
     <textarea
-      autoComplete={props.autoComplete}
       className={classnames(props.inputClassName, 'form-control', {
         'is-invalid': props.error,
       })}

@@ -8,8 +8,6 @@ import {
   useField,
 } from 'uniforms';
 
-import wrapField from './wrapField';
-
 export type ListDelFieldProps = FieldProps<
   unknown,
   IconButtonProps,
@@ -31,7 +29,7 @@ function ListDel({ disabled, icon = '-', name, ...props }: ListDelFieldProps) {
 
   return (
     <IconButton
-      {...wrapField.__filterProps(filterDOMProps(props))}
+      {...filterDOMProps(props)}
       disabled={!limitNotReached}
       onClick={() => {
         const value = parent.value!.slice();

@@ -2,15 +2,12 @@ import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
 import React, { ReactNode } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
-import wrapField from './wrapField';
-
 export type LongTextFieldProps = FieldProps<string, StandardTextFieldProps>;
 
 const LongText = ({
   disabled,
   error,
   errorMessage,
-  fullWidth = true,
   helperText,
   inputRef,
   label,
@@ -25,10 +22,10 @@ const LongText = ({
   <TextField
     disabled={disabled}
     error={!!error}
-    fullWidth={fullWidth}
+    fullWidth
     helperText={(error && showInlineError && errorMessage) || helperText}
     label={label}
-    margin={props.margin ?? 'dense'}
+    margin="dense"
     multiline
     name={name}
     onChange={event => disabled || onChange(event.target.value)}
@@ -36,7 +33,7 @@ const LongText = ({
     ref={inputRef}
     type={type}
     value={value ?? ''}
-    {...wrapField.__filterProps(filterDOMProps(props))}
+    {...filterDOMProps(props)}
   />
 );
 

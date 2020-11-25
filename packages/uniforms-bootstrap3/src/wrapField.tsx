@@ -5,21 +5,6 @@ import { Override, filterDOMProps } from 'uniforms';
 
 import gridClassName from './gridClassName';
 
-const filteredProps = [
-  'autoComplete',
-  'checkboxes',
-  'grid',
-  'inline',
-  'inputClassName',
-  'inputRef',
-  'rows',
-  'transform',
-] as const;
-
-function __filterProps<T extends object>(props: T) {
-  return omit(props, filteredProps) as Omit<T, typeof filteredProps[number]>;
-}
-
 type WrapperProps = Override<
   Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
@@ -38,7 +23,7 @@ type WrapperProps = Override<
 >;
 
 // eslint-disable-next-line complexity
-function wrapField(
+export default function wrapField(
   {
     className,
     disabled,
@@ -77,7 +62,14 @@ function wrapField(
         disabled,
         required,
       })}
-      {...__filterProps(filterDOMProps(props))}
+      {...omit(filterDOMProps(props), [
+        'checkboxes',
+        'inline',
+        'inputClassName',
+        'inputRef',
+        'rows',
+        'transform',
+      ])}
     >
       {label && (
         <label
@@ -111,4 +103,8 @@ function wrapField(
   );
 }
 
-export default Object.assign(wrapField, { __filterProps });
+declare module 'uniforms' {
+  interface FilterDOMProps {
+    grid: never;
+  }
+}
