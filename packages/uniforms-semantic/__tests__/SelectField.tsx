@@ -287,8 +287,8 @@ test('<SelectField> - renders a select with correct value (default)', () => {
   const wrapper = mount(
     element,
     createContext({
-      x: { type: Array, allowedValues: ['a', 'b'] },
-      'x.$': { type: String },
+      x: { type: Array },
+      'x.$': { type: String, allowedValues: ['a', 'b'] },
     }),
   );
 
@@ -302,8 +302,8 @@ test('<SelectField> - renders a select with correct value (model)', () => {
     element,
     createContext(
       {
-        x: { type: Array, allowedValues: ['a', 'b'] },
-        'x.$': { type: String },
+        x: { type: Array },
+        'x.$': { type: String, allowedValues: ['a', 'b'] },
       },
       { model: { x: ['b'] } },
     ),
@@ -318,8 +318,8 @@ test('<SelectField> - renders a select with correct value (specified)', () => {
   const wrapper = mount(
     element,
     createContext({
-      x: { type: Array, allowedValues: ['a', 'b'] },
-      'x.$': { type: String },
+      x: { type: Array },
+      'x.$': { type: String, allowedValues: ['a', 'b'] },
     }),
   );
 
@@ -335,8 +335,8 @@ test('<SelectField> - renders a select which correctly reacts on change (first v
     element,
     createContext(
       {
-        x: { type: Array, allowedValues: ['a', 'b'] },
-        'x.$': { type: String },
+        x: { type: Array },
+        'x.$': { type: String, allowedValues: ['a', 'b'] },
       },
       { onChange },
     ),
@@ -357,8 +357,8 @@ test('<SelectField> - renders a select which correctly reacts on change (next va
     element,
     createContext(
       {
-        x: { type: Array, allowedValues: ['a', 'b'] },
-        'x.$': { type: String },
+        x: { type: Array },
+        'x.$': { type: String, allowedValues: ['a', 'b'] },
       },
       { onChange },
     ),
@@ -379,8 +379,8 @@ test('<SelectField> - renders a select which correctly reacts on change (uncheck
     element,
     createContext(
       {
-        x: { type: Array, allowedValues: ['a', 'b'] },
-        'x.$': { type: String },
+        x: { type: Array },
+        'x.$': { type: String, allowedValues: ['a', 'b'] },
       },
       { onChange },
     ),
@@ -401,8 +401,8 @@ test('<SelectField> - renders a select which correctly reacts on change (uncheck
     element,
     createContext(
       {
-        x: { type: Array, allowedValues: ['a', 'b'] },
-        'x.$': { type: String },
+        x: { type: Array },
+        'x.$': { type: String, allowedValues: ['a', 'b'] },
       },
       { onChange },
     ),
