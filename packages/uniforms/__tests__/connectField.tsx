@@ -46,6 +46,7 @@ describe('connectField', () => {
         disabled: false,
         label: true,
         placeholder: false,
+        readOnly: false,
         showInlineError: true,
       },
       submitting: false,

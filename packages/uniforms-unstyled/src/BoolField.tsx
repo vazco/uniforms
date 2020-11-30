@@ -14,6 +14,7 @@ function Bool({
   label,
   name,
   onChange,
+  readOnly,
   value,
   ...props
 }: BoolFieldProps) {
@@ -31,6 +32,7 @@ function Bool({
                 onChange(!value);
               }
         }
+        readOnly={readOnly}
         ref={inputRef}
         type="checkbox"
       />

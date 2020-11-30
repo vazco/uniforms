@@ -20,6 +20,7 @@ export type Context<Model> = {
     disabled: boolean;
     label: boolean;
     placeholder: boolean;
+    readOnly: boolean;
     showInlineError: boolean;
   };
   submitting: boolean;
@@ -51,6 +52,7 @@ export type GuaranteedProps<Value> = {
   name: string;
   onChange(value?: Value | null, name?: string): void;
   placeholder: string;
+  readOnly: boolean;
   showInlineError: boolean;
   value?: Value;
 };
@@ -87,6 +89,7 @@ declare module '.' {
     name: never;
     onChange: never;
     placeholder: never;
+    readOnly: never;
     showInlineError: never;
     transform: never;
     value: never;
