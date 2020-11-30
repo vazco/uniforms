@@ -14,7 +14,6 @@ function SubmitField({
   inputRef,
   label = 'Submit',
   value,
-  variant = 'contained',
   ...props
 }: SubmitFieldProps) {
   const { error, state } = useForm();
@@ -25,7 +24,7 @@ function SubmitField({
       ref={inputRef}
       type="submit"
       value={value}
-      variant={variant}
+      variant="contained"
       {...filterDOMProps(props)}
     >
       {children || label}

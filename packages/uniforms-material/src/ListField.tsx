@@ -20,7 +20,6 @@ export type ListFieldProps = FieldProps<
 function List({
   addIcon,
   children = <ListItemField name="$" />,
-  dense,
   initialCount,
   itemProps,
   label,
@@ -31,7 +30,7 @@ function List({
   return (
     <>
       <ListMaterial
-        dense={dense ?? true}
+        dense
         subheader={
           label ? (
             <ListSubheader disableSticky>{label}</ListSubheader>

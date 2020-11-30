@@ -8,7 +8,6 @@ const LongText = ({
   disabled,
   error,
   errorMessage,
-  fullWidth = true,
   helperText,
   inputRef,
   label,
@@ -23,10 +22,10 @@ const LongText = ({
   <TextField
     disabled={disabled}
     error={!!error}
-    fullWidth={fullWidth}
+    fullWidth
     helperText={(error && showInlineError && errorMessage) || helperText}
     label={label}
-    margin={props.margin ?? 'dense'}
+    margin="dense"
     multiline
     name={name}
     onChange={event => disabled || onChange(event.target.value)}

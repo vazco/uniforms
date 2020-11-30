@@ -17,7 +17,7 @@ export type NumFieldProps = HTMLFieldProps<
 
 function Num(props: NumFieldProps) {
   return wrapField(
-    omit(props, ['value', 'onChange']),
+    props,
     <input
       className={classnames(props.inputClassName, 'form-control', {
         'is-invalid': props.error,

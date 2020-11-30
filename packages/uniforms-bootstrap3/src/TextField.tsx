@@ -13,12 +13,12 @@ export type TextFieldProps = HTMLFieldProps<
 
 function Text(props: TextFieldProps) {
   return wrapField(
-    { feedbackable: true, ...omit(props, ['onChange', 'autoComplete']) },
+    Object.assign({ feedbackable: true }, omit(props, ['autoComplete'])),
     <input
+      autoComplete={props.autoComplete}
       className={classnames(props.inputClassName, 'form-control', {
         'form-control-danger': props.error,
       })}
-      autoComplete={props.autoComplete}
       disabled={props.disabled}
       id={props.id}
       name={props.name}

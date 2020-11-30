@@ -1,5 +1,4 @@
 import classnames from 'classnames';
-import omit from 'lodash/omit';
 import React, { Ref } from 'react';
 import { connectField, HTMLFieldProps } from 'uniforms';
 
@@ -28,7 +27,7 @@ function Bool(props: BoolFieldProps) {
     value,
   } = props;
   return wrapField(
-    { ...omit(props, ['value', 'onChange']), label: labelBefore },
+    { ...props, label: labelBefore },
     <div
       className={classnames(
         inputClassName,
