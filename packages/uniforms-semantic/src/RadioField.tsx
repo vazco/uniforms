@@ -29,6 +29,7 @@ function Radio({
   label,
   name,
   onChange,
+  readOnly,
   required,
   showInlineError,
   transform,
@@ -55,6 +56,7 @@ function Radio({
               id={`${id}-${escape(item)}`}
               name={name}
               onChange={() => onChange(item)}
+              readOnly={readOnly}
               type="radio"
             />
 

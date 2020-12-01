@@ -29,6 +29,7 @@ function Text({
   name,
   onChange,
   placeholder,
+  readOnly,
   required,
   showInlineError,
   type,
@@ -58,6 +59,7 @@ function Text({
           name={name}
           onChange={event => onChange(event.target.value)}
           placeholder={placeholder}
+          readOnly={readOnly}
           ref={inputRef}
           type={type}
           value={value ?? ''}
