@@ -207,13 +207,17 @@ export class BaseForm<
         this.delayId = clearTimeout(this.delayId);
       }
 
-      if (this.props.autosaveDelay > 0) {
-        this.delayId = setTimeout(() => {
-          this.onSubmit();
-        }, this.props.autosaveDelay);
-      } else {
-        this.onSubmit();
-      }
+      // Delay autosave by `autosaveDelay` milliseconds...
+      this.delayId = setTimeout(() => {
+        // ...and wait for all scheduled `setState`s to commit. This is required
+        // for AutoForm to validate correct model, waiting in `onChange`.
+        this.setState(
+          () => null,
+          () => {
+            this.onSubmit();
+          },
+        );
+      }, this.props.autosaveDelay);
     }
   }
 
