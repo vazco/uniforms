@@ -42,6 +42,7 @@ function Select({
   name,
   onChange,
   placeholder,
+  readOnly,
   required,
   showInlineError,
   transform,
@@ -70,6 +71,7 @@ function Select({
               onChange={() =>
                 onChange(fieldType === Array ? xor([item], value) : item)
               }
+              readOnly={readOnly}
               type="checkbox"
             />
             {transform ? transform(item) : item}

@@ -23,6 +23,7 @@ function LongText(props: LongTextFieldProps) {
       name={props.name}
       onChange={event => props.onChange(event.target.value)}
       placeholder={props.placeholder}
+      readOnly={props.readOnly}
       ref={props.inputRef}
       rows={props.rows}
       value={props.value ?? ''}

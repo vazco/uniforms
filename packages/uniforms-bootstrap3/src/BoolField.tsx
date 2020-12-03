@@ -25,6 +25,7 @@ function Bool(props: BoolFieldProps) {
     labelBefore,
     name,
     onChange,
+    readOnly,
     value,
   } = props;
   return wrapField(
@@ -42,6 +43,7 @@ function Bool(props: BoolFieldProps) {
           id={props.id}
           name={name}
           onChange={() => onChange(!value)}
+          readOnly={readOnly}
           ref={props.inputRef}
           type="checkbox"
         />

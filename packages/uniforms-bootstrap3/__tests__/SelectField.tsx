@@ -315,6 +315,18 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct disabl
   expect(wrapper.find('input').at(1).prop('disabled')).toBe(true);
 });
 
+test('<SelectField checkboxes> - renders a set of checkboxes with correct readOnly state', () => {
+  const element = <SelectField checkboxes name="x" readOnly />;
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
+  );
+
+  expect(wrapper.find('input')).toHaveLength(2);
+  expect(wrapper.find('input').at(0).prop('readOnly')).toBe(true);
+  expect(wrapper.find('input').at(1).prop('readOnly')).toBe(true);
+});
+
 test('<SelectField checkboxes> - renders a set of checkboxes with correct id (inherited)', () => {
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(

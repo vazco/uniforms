@@ -33,6 +33,7 @@ function Num(props: NumFieldProps) {
         props.onChange(isNaN(value) ? undefined : value);
       }}
       placeholder={props.placeholder}
+      readOnly={props.readOnly}
       ref={props.inputRef}
       step={props.step || (props.decimal ? 0.01 : 1)}
       type="number"
