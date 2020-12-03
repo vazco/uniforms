@@ -12,6 +12,7 @@ export default function wrap(
     fullWidth,
     helperText,
     margin,
+    readOnly,
     required,
     showInlineError,
     variant,
@@ -25,6 +26,7 @@ export default function wrap(
     error: !!error,
     fullWidth: !!fullWidth,
     margin,
+    readOnly: !!readOnly,
     required,
     variant,
   };

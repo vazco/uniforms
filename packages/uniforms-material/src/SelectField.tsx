@@ -148,6 +148,7 @@ function Select(props: SelectFieldProps) {
     native,
     onChange,
     placeholder,
+    readOnly,
     required,
     showInlineError,
     transform,
@@ -169,6 +170,7 @@ function Select(props: SelectFieldProps) {
         ...labelProps,
         ...InputLabelProps,
       }}
+      inputProps={{ readOnly }}
       label={label}
       margin={margin}
       onChange={event =>

@@ -20,6 +20,16 @@ test('<TextField> - renders a TextField with correct disabled state', () => {
   expect(wrapper.find(TextFieldMaterial).prop('disabled')).toBe(true);
 });
 
+test('<TextField> - renders a TextField with correct readOnly state', () => {
+  const element = <TextField name="x" inputProps={{ readOnly: true }} />;
+  const wrapper = mount(element, createContext({ x: { type: String } }));
+
+  expect(wrapper.find(TextFieldMaterial)).toHaveLength(1);
+  expect(wrapper.find(TextFieldMaterial).prop('inputProps')!.readOnly).toBe(
+    true,
+  );
+});
+
 test('<TextField> - renders a TextField with correct id (inherited)', () => {
   const element = <TextField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));

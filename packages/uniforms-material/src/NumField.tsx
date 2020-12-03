@@ -23,6 +23,7 @@ function Num({
   min,
   name,
   onChange,
+  readOnly,
   placeholder,
   showInlineError,
   value,
@@ -34,7 +35,13 @@ function Num({
       error={!!error}
       fullWidth={fullWidth}
       helperText={(error && showInlineError && errorMessage) || helperText}
-      inputProps={{ min, max, step: decimal ? 0.01 : 1, ...inputProps }}
+      inputProps={{
+        min,
+        max,
+        readOnly,
+        step: decimal ? 0.01 : 1,
+        ...inputProps,
+      }}
       label={label}
       margin={margin}
       name={name}

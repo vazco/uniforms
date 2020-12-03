@@ -32,6 +32,7 @@ function Date({
   name,
   onChange,
   placeholder,
+  readOnly,
   showInlineError,
   value,
   ...props
@@ -44,6 +45,7 @@ function Date({
       helperText={(error && showInlineError && errorMessage) || helperText}
       label={label}
       InputLabelProps={{ ...labelProps, ...InputLabelProps }}
+      inputProps={{ readOnly }}
       margin={props.margin ?? 'dense'}
       name={name}
       onChange={event =>

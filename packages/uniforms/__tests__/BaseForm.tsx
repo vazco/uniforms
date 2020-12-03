@@ -49,6 +49,7 @@ describe('BaseForm', () => {
         disabled: false,
         label: true,
         placeholder: false,
+        readOnly: false,
         showInlineError: false,
       },
       submitting: false,
@@ -94,6 +95,7 @@ describe('BaseForm', () => {
         disabled: true,
         label: false,
         placeholder: true,
+        readOnly: false,
         showInlineError: true,
       });
     });

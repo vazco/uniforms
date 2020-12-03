@@ -16,6 +16,7 @@ function Text({
   name,
   onChange,
   placeholder,
+  readOnly,
   showInlineError,
   type = 'text',
   value = '',
@@ -27,6 +28,7 @@ function Text({
       error={!!error}
       fullWidth={fullWidth}
       helperText={(error && showInlineError && errorMessage) || helperText}
+      inputProps={{ readOnly }}
       label={label}
       margin={margin}
       name={name}
