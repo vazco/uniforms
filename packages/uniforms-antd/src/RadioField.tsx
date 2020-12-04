@@ -18,7 +18,9 @@ function Radio(props: RadioFieldProps) {
     <RadioAntD.Group
       disabled={props.disabled}
       name={props.name}
-      onChange={event => props.onChange(event.target.value)}
+      onChange={event =>
+        props.readOnly ? undefined : props.onChange(event.target.value)
+      }
       value={props.value ?? ''}
       {...filterDOMProps(props)}
     >

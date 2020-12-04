@@ -47,7 +47,9 @@ function Select(props: SelectFieldProps) {
         disabled={props.disabled}
         name={props.name}
         onChange={
-          props.fieldType === Array
+          props.readOnly
+            ? undefined
+            : props.fieldType === Array
             ? // FIXME: Argument type depends on `props.fieldType`.
               (value: any) => props.onChange(value)
             : (event: any) => props.onChange(event.target.value)
@@ -67,7 +69,7 @@ function Select(props: SelectFieldProps) {
         mode={props.fieldType === Array ? 'multiple' : undefined}
         // @ts-ignore: There's no `name` property on Select?
         name={props.name}
-        onChange={value => props.onChange(value)}
+        onChange={value => (props.readOnly ? undefined : props.onChange(value))}
         placeholder={props.placeholder}
         ref={props.inputRef}
         value={

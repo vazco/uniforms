@@ -27,6 +27,7 @@ function Bool({
   inputRef,
   name,
   onChange,
+  readOnly,
   unCheckedChildren = <CloseOutlined />,
   value,
   ...props
@@ -39,7 +40,7 @@ function Bool({
       checkedChildren={checkedChildren}
       disabled={disabled}
       name={name}
-      onChange={() => onChange(!value)}
+      onChange={() => (readOnly ? undefined : onChange(!value))}
       ref={inputRef}
       unCheckedChildren={unCheckedChildren}
       {...filterDOMProps(props)}

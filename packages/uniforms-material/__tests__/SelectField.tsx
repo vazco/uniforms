@@ -344,20 +344,6 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct dis
   expect(wrapper.find(Radio).at(1).prop('disabled')).toBe(true);
 });
 
-test('<SelectField checkboxes> - renders a set of Radio buttons with correct readOnly state', () => {
-  const element = (
-    <SelectField checkboxes name="x" inputProps={{ readOnly: true }} />
-  );
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
-
-  expect(wrapper.find(Radio)).toHaveLength(2);
-  expect(wrapper.find(Radio).at(0).prop('inputProps')!.readOnly).toBe(true);
-  expect(wrapper.find(Radio).at(1).prop('inputProps')!.readOnly).toBe(true);
-});
-
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct id (inherited)', () => {
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(

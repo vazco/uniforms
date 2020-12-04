@@ -38,8 +38,7 @@ function Radio(props: RadioFieldProps) {
             disabled={props.disabled}
             id={`${props.id}-${escape(item)}`}
             name={props.name}
-            onChange={() => props.onChange(item)}
-            readOnly={props.readOnly}
+            onChange={() => (props.readOnly ? undefined : props.onChange(item))}
             type="radio"
           />
           {props.transform ? props.transform(item) : item}

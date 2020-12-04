@@ -60,14 +60,6 @@ test('<BoolField> - renders an input with correct disabled state', () => {
   expect(wrapper.find('input').prop('disabled')).toBe(true);
 });
 
-test('<BoolField> - renders an input with correct readOnly state', () => {
-  const element = <BoolField name="x" readOnly />;
-  const wrapper = mount(element, createContext({ x: { type: Boolean } }));
-
-  expect(wrapper.find('input')).toHaveLength(1);
-  expect(wrapper.find('input').prop('readOnly')).toBe(true);
-});
-
 test('<BoolField> - renders a input with correct label (specified)', () => {
   const element = <BoolField name="x" label="BoolFieldLabel" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));

@@ -44,8 +44,7 @@ function Bool({
           disabled={disabled}
           id={id}
           name={name}
-          onChange={() => onChange(!value)}
-          readOnly={readOnly}
+          onChange={() => (readOnly ? undefined : onChange(!value))}
           ref={inputRef}
           type="checkbox"
         />

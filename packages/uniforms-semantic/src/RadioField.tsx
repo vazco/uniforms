@@ -55,8 +55,7 @@ function Radio({
               disabled={disabled}
               id={`${id}-${escape(item)}`}
               name={name}
-              onChange={() => onChange(item)}
-              readOnly={readOnly}
+              onChange={() => (readOnly ? undefined : onChange(item))}
               type="radio"
             />
 

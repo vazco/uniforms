@@ -31,6 +31,7 @@ function Radio({
   margin = 'dense',
   name,
   onChange,
+  readOnly,
   transform,
   value,
   ...props
@@ -47,7 +48,9 @@ function Radio({
     <RadioGroup
       id={id}
       name={name}
-      onChange={(event: any) => disabled || onChange(event.target.value)}
+      onChange={(event: any) =>
+        disabled || readOnly || onChange(event.target.value)
+      }
       ref={inputRef}
       value={value ?? ''}
     >
