@@ -28,6 +28,7 @@ function Date({
         props.onChange(value ? value.toDate() : undefined);
       }}
       placeholder={props.placeholder}
+      readOnly={props.readOnly}
       // @ts-ignore: `DatePicker` is an intersection.
       ref={props.inputRef}
       showTime={showTime}

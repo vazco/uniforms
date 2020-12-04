@@ -55,6 +55,14 @@ test('<DateField> - renders an input with correct disabled state', () => {
   expect(wrapper.find(DatePicker).prop('disabled')).toBe(true);
 });
 
+test('<DateField> - renders an input with correct readOnly state', () => {
+  const element = <DateField name="x" readOnly />;
+  const wrapper = mount(element, createContext({ x: { type: Date } }));
+
+  expect(wrapper.find(DatePicker)).toHaveLength(1);
+  expect(wrapper.find(DatePicker).prop('readOnly')).toBe(true);
+});
+
 test('<DateField> - renders a input with correct label (specified)', () => {
   const element = <DateField name="x" label="DateFieldLabel" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));

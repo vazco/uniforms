@@ -23,6 +23,7 @@ function Num(props: NumFieldProps) {
       name={props.name}
       onChange={value => props.onChange(noneIfNaN(value as number))}
       placeholder={props.placeholder}
+      readOnly={props.readOnly}
       ref={props.inputRef}
       step={props.step || (props.decimal ? 0.01 : 1)}
       style={{ width: '100%' }}
