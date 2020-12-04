@@ -35,6 +35,7 @@ const propsSchema = new SimpleSchema({
   disabled: { optional: true, type: Boolean },
   label: { optional: true, type: Boolean },
   placeholder: { optional: true, type: Boolean },
+  readOnly: { optional: true, type: Boolean },
   showInlineError: { optional: true, type: Boolean },
   asyncOnSubmit: {
     optional: true,
@@ -82,6 +83,7 @@ export const schema = new SimpleSchema({
       disabled: false,
       label: true,
       placeholder: false,
+      readOnly: false,
       schema: presets[Object.keys(presets)[0] as keyof typeof presets],
       showInlineError: false,
       asyncOnSubmit: false,

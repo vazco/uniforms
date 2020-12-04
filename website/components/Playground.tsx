@@ -213,6 +213,7 @@ class PlaygroundProps extends Component<any, any> {
           <BoolField name="autosave" />
           <NumField name="autosaveDelay" disabled={!value.autosave} />
           <BoolField name="disabled" />
+          <BoolField name="readOnly" />
           <BoolField name="label" />
           <BoolField name="placeholder" />
           <BoolField
