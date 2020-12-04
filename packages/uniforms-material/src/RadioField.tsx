@@ -1,21 +1,22 @@
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import RadioMaterial, { RadioProps } from '@material-ui/core/Radio';
-import RadioGroup, { RadioGroupProps } from '@material-ui/core/RadioGroup';
-import React, { ReactNode } from 'react';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
 export type RadioFieldProps = FieldProps<
   string,
-  RadioProps & RadioGroupProps,
+  RadioProps,
   {
     allowedValues?: string[];
     checkboxes?: boolean;
     fullWidth?: boolean;
     helperText?: string;
     margin?: any;
+    row?: boolean;
     transform?(value: string): string;
   }
 >;
@@ -48,8 +49,8 @@ function Radio({
       name={name}
       onChange={(event: any) => disabled || onChange(event.target.value)}
       ref={inputRef}
-      value={value ?? ''}
       row={row}
+      value={value ?? ''}
     >
       {allowedValues?.map(item => (
         <FormControlLabel
