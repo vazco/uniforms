@@ -1,6 +1,7 @@
-## Next
+## [v3.0.0-rc.8](https://github.com/vazco/uniforms/tree/v3.0.0-rc.8) (2020-12-05)
 
 - **Breaking:** Due to synchronization of `AutoForm` `model`, autosave is now **always** asynchronous. [\#832](https://github.com/vazco/uniforms/issues/832)
+- **Added:** The `row` for `RadioField` in `uniforms-material`. [\#834](https://github.com/vazco/uniforms/issues/834)
 
 ## [v3.0.0-rc.7](https://github.com/vazco/uniforms/tree/v3.0.0-rc.7) (2020-11-30)
 
