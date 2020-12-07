@@ -22,6 +22,7 @@ function ListAdd({
   disabled,
   icon = <PlusSquareOutlined />,
   name,
+  readOnly,
   size = 'small',
   style = defaultStyle,
   type = 'dashed',
@@ -44,9 +45,11 @@ function ListAdd({
       {...filterDOMProps(props)}
       disabled={!limitNotReached}
       icon={icon}
-      onClick={() => {
-        parent.onChange(parent.value!.concat([cloneDeep(value)]));
-      }}
+      onClick={() =>
+        readOnly
+          ? undefined
+          : parent.onChange(parent.value!.concat([cloneDeep(value)]))
+      }
       size={size}
       style={style}
       type={type}

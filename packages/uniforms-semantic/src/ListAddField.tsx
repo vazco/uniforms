@@ -15,7 +15,13 @@ export type ListAddFieldProps = HTMLFieldProps<
   { initialCount?: number }
 >;
 
-function ListAdd({ disabled, name, value, ...props }: ListAddFieldProps) {
+function ListAdd({
+  disabled,
+  name,
+  readOnly,
+  value,
+  ...props
+}: ListAddFieldProps) {
   const nameParts = joinName(null, name);
   const parentName = joinName(nameParts.slice(0, -1));
   const parent = useField<{ maxCount?: number }, unknown[]>(
@@ -37,7 +43,7 @@ function ListAdd({ disabled, name, value, ...props }: ListAddFieldProps) {
         'fitted add icon',
       )}
       onClick={() => {
-        if (limitNotReached) {
+        if (limitNotReached && !readOnly) {
           parent.onChange(parent.value!.concat([cloneDeep(value)]));
         }
       }}

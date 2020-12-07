@@ -9,7 +9,7 @@ import {
 
 export type ListDelFieldProps = HTMLFieldProps<unknown, HTMLSpanElement>;
 
-function ListDel({ disabled, name, ...props }: ListDelFieldProps) {
+function ListDel({ disabled, name, readOnly, ...props }: ListDelFieldProps) {
   const nameParts = joinName(null, name);
   const nameIndex = +nameParts[nameParts.length - 1];
   const parentName = joinName(nameParts.slice(0, -1));
@@ -26,7 +26,7 @@ function ListDel({ disabled, name, ...props }: ListDelFieldProps) {
     <span
       {...filterDOMProps(props)}
       onClick={() => {
-        if (limitNotReached) {
+        if (limitNotReached && !readOnly) {
           const value = parent.value!.slice();
           value.splice(nameIndex, 1);
           parent.onChange(value);

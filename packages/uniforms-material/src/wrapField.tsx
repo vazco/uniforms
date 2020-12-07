@@ -26,7 +26,7 @@ export default function wrap(
     error: !!error,
     fullWidth: !!fullWidth,
     margin,
-    readOnly: !!readOnly,
+    readOnly,
     required,
     variant,
   };

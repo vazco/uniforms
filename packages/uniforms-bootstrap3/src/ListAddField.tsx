@@ -16,10 +16,11 @@ export type ListAddFieldProps = HTMLFieldProps<
 >;
 
 function ListAdd({
-  name,
   addIcon,
   className,
   disabled,
+  name,
+  readOnly,
   value,
   ...props
 }: ListAddFieldProps) {
@@ -39,7 +40,7 @@ function ListAdd({
       {...filterDOMProps(props)}
       className={classnames('badge pull-right', className)}
       onClick={() => {
-        if (limitNotReached) {
+        if (limitNotReached && !readOnly) {
           parent.onChange(parent.value!.concat([cloneDeep(value)]));
         }
       }}

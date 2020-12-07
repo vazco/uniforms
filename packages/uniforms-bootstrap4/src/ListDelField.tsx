@@ -15,9 +15,10 @@ export type ListDelFieldProps = HTMLFieldProps<
 >;
 
 function ListDel({
-  name,
   className,
   disabled,
+  name,
+  readOnly,
   removeIcon,
   ...props
 }: ListDelFieldProps) {
@@ -38,7 +39,7 @@ function ListDel({
       {...filterDOMProps(props)}
       className={classnames('badge badge-pill', className)}
       onClick={() => {
-        if (limitNotReached) {
+        if (limitNotReached && !readOnly) {
           const value = parent.value!.slice();
           value.splice(nameIndex, 1);
           parent.onChange(value);
