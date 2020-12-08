@@ -58,16 +58,14 @@ export default function wrapField(
         required,
         row: grid,
       })}
-      {...filterDOMProps(
-        omit(props, [
-          'checkboxes',
-          'inline',
-          'inputClassName',
-          'inputRef',
-          'rows',
-          'transform',
-        ]),
-      )}
+      {...omit(filterDOMProps(props), [
+        'checkboxes',
+        'inline',
+        'inputClassName',
+        'inputRef',
+        'rows',
+        'transform',
+      ])}
     >
       {label && (
         <label
@@ -100,4 +98,10 @@ export default function wrapField(
       {!hasWrap && blockError}
     </div>
   );
+}
+
+declare module 'uniforms' {
+  interface FilterDOMProps {
+    grid: never;
+  }
 }

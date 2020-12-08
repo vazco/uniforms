@@ -8,11 +8,9 @@ function Text({
   disabled,
   error,
   errorMessage,
-  fullWidth = true,
   helperText,
   inputRef,
   label,
-  margin = 'dense',
   name,
   onChange,
   placeholder,
@@ -26,11 +24,11 @@ function Text({
     <TextField
       disabled={disabled}
       error={!!error}
-      fullWidth={fullWidth}
+      fullWidth
       helperText={(error && showInlineError && errorMessage) || helperText}
       inputProps={{ readOnly }}
       label={label}
-      margin={margin}
+      margin="dense"
       name={name}
       onChange={event => disabled || onChange(event.target.value)}
       placeholder={placeholder}

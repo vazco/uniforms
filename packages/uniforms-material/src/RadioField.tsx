@@ -2,7 +2,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import RadioMaterial, { RadioProps } from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
@@ -16,6 +16,7 @@ export type RadioFieldProps = FieldProps<
     fullWidth?: boolean;
     helperText?: string;
     margin?: any;
+    row?: boolean;
     transform?(value: string): string;
   }
 >;
@@ -32,14 +33,13 @@ function Radio({
   name,
   onChange,
   readOnly,
+  row,
   transform,
   value,
   ...props
 }: RadioFieldProps) {
-  const filteredProps = filterDOMProps(props);
-
   return wrapField(
-    { ...props, disabled, component: 'fieldset', fullWidth, margin },
+    { ...props, component: 'fieldset', disabled, fullWidth, margin },
     label && (
       <FormLabel component="legend" htmlFor={name}>
         {label}
@@ -52,11 +52,12 @@ function Radio({
         disabled || readOnly || onChange(event.target.value)
       }
       ref={inputRef}
+      row={row}
       value={value ?? ''}
     >
       {allowedValues?.map(item => (
         <FormControlLabel
-          control={<RadioMaterial {...filteredProps} />}
+          control={<RadioMaterial {...filterDOMProps(props)} />}
           key={item}
           label={transform ? transform(item) : item}
           value={`${item}`}

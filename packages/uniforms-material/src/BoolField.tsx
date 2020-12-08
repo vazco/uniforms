@@ -34,7 +34,6 @@ function Bool(props: BoolFieldProps) {
   } = props;
   const SelectionControl =
     appearance === 'checkbox' || appearance === undefined ? Checkbox : Switch;
-  const filteredProps = filterDOMProps(props);
 
   return wrapField(
     { fullWidth: true, margin: 'dense', ...props, component: 'fieldset' },
@@ -57,7 +56,7 @@ function Bool(props: BoolFieldProps) {
             }
             ref={inputRef as Ref<HTMLButtonElement>}
             value={name}
-            {...filteredProps}
+            {...filterDOMProps(props)}
           />
         }
         label={transform ? transform(label as string) : label}
