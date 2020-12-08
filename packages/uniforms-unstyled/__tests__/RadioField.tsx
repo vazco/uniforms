@@ -26,6 +26,23 @@ test('<RadioField> - renders a set of checkboxes with correct disabled state', (
   expect(wrapper.find('input').at(1).prop('disabled')).toBe(true);
 });
 
+test('<RadioField> - renders a set of checkboxes with correct readOnly state', () => {
+  const onChange = jest.fn();
+
+  const element = <RadioField name="x" readOnly />;
+  const wrapper = mount(
+    element,
+    createContext(
+      { x: { type: String, allowedValues: ['a', 'b'] } },
+      { onChange },
+    ),
+  );
+
+  expect(wrapper.find('input')).toHaveLength(2);
+  expect(wrapper.find('input').at(1).simulate('change')).toBeTruthy();
+  expect(onChange).not.toHaveBeenCalled();
+});
+
 test('<RadioField> - renders a set of checkboxes with correct id (inherited)', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(

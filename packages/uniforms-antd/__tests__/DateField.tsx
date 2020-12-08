@@ -56,11 +56,19 @@ test('<DateField> - renders an input with correct disabled state', () => {
 });
 
 test('<DateField> - renders an input with correct readOnly state', () => {
+  const onChange = jest.fn();
+
+  const now = moment();
   const element = <DateField name="x" readOnly />;
-  const wrapper = mount(element, createContext({ x: { type: Date } }));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Date } }, { onChange }),
+  );
 
   expect(wrapper.find(DatePicker)).toHaveLength(1);
-  expect(wrapper.find(DatePicker).prop('readOnly')).toBe(true);
+  // @ts-ignore
+  expect(wrapper.find(DatePicker).prop('onChange')(now)).toBeFalsy();
+  expect(onChange).not.toHaveBeenCalled();
 });
 
 test('<DateField> - renders a input with correct label (specified)', () => {

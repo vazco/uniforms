@@ -49,6 +49,14 @@ test('<ListDelField> - prevents onClick when disabled', () => {
   expect(onChange).not.toHaveBeenCalled();
 });
 
+test('<ListDelField> - prevents onClick when readOnly', () => {
+  const element = <ListDelField name="x.1" readOnly />;
+  const wrapper = mount(element, context());
+
+  expect(wrapper.find('span').simulate('click')).toBeTruthy();
+  expect(onChange).not.toHaveBeenCalled();
+});
+
 test('<ListDelField> - prevents onClick when limit reached', () => {
   const element = <ListDelField name="x.1" />;
   const wrapper = mount(element, context({ x: { minCount: 3 } }));

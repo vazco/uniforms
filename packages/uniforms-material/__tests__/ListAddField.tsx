@@ -29,6 +29,14 @@ test('<ListAddField> - prevents onClick when disabled', () => {
   expect(onChange).not.toHaveBeenCalled();
 });
 
+test('<ListAddField> - prevents onClick when readOnly', () => {
+  const element = <ListAddField name="x.1" readOnly />;
+  const wrapper = mount(element, context());
+
+  expect(wrapper.find(IconButton).simulate('click')).toBeTruthy();
+  expect(onChange).not.toHaveBeenCalled();
+});
+
 test('<ListAddField> - prevents onClick when limit reached', () => {
   const element = <ListAddField name="x.1" />;
   const wrapper = mount(element, context({ x: { maxCount: 0 } }));

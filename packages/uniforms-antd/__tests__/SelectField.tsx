@@ -27,6 +27,24 @@ test('<SelectField> - renders a select with correct disabled state', () => {
   expect(wrapper.find(Select).prop('disabled')).toBe(true);
 });
 
+test('<SelectField> - renders a select with correct readOnly state', () => {
+  const onChange = jest.fn();
+
+  const element = <SelectField name="x" readOnly />;
+  const wrapper = mount(
+    element,
+    createContext(
+      { x: { type: String, allowedValues: ['a', 'b'] } },
+      { onChange },
+    ),
+  );
+
+  expect(wrapper.find(Select)).toHaveLength(1);
+  // FIXME: Provide a valid option.
+  expect(wrapper.find(Select).prop('onChange')!('b', null as any)).toBeFalsy();
+  expect(onChange).not.toHaveBeenCalled();
+});
+
 test('<SelectField> - renders a select with correct id (inherited)', () => {
   const element = <SelectField name="x" />;
   const wrapper = mount(
@@ -301,6 +319,23 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct disabl
 
   expect(wrapper.find(Radio.Group)).toHaveLength(1);
   expect(wrapper.find(Radio.Group).prop('disabled')).toBe(true);
+});
+
+test('<SelectField checkboxes> - renders a set of checkboxes with correct readOnly state', () => {
+  const onChange = jest.fn();
+
+  const element = <SelectField checkboxes name="x" readOnly />;
+  const wrapper = mount(
+    element,
+    createContext(
+      { x: { type: String, allowedValues: ['a', 'b'] } },
+      { onChange },
+    ),
+  );
+
+  expect(wrapper.find('input')).toHaveLength(2);
+  expect(wrapper.find('input').at(1).simulate('change')).toBeTruthy();
+  expect(onChange).not.toHaveBeenCalled();
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes with correct id (inherited)', () => {

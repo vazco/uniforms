@@ -98,6 +98,36 @@ test('<BoolField> - renders a checkbox input with correct disabled state', () =>
   expect(wrapper.find(Checkbox).prop('disabled')).toBe(true);
 });
 
+test('<BoolField> - renders a switch input with correct readOnly state', () => {
+  const onChange = jest.fn();
+
+  const element = <BoolField name="x" readOnly />;
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Boolean } }, { onChange }),
+  );
+
+  expect(wrapper.find(Switch)).toHaveLength(1);
+  // FIXME: Provide a valid MouseEvent.
+  expect(wrapper.find(Switch).prop('onChange')!(true, null as any)).toBeFalsy();
+  expect(onChange).not.toHaveBeenCalled();
+});
+
+test('<BoolField> - renders a checkbox input with correct readOnly state', () => {
+  const onChange = jest.fn();
+
+  const element = <BoolField checkbox name="x" readOnly />;
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Boolean } }, { onChange }),
+  );
+
+  expect(wrapper.find(Checkbox)).toHaveLength(1);
+  // FIXME: Provide a valid CheckboxChangeEvent.
+  expect(wrapper.find(Checkbox).prop('onChange')!(null as any)).toBeFalsy();
+  expect(onChange).not.toHaveBeenCalled();
+});
+
 test('<BoolField> - renders a switch input with correct label (specified)', () => {
   const element = <BoolField name="x" label="BoolFieldLabel" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));

@@ -51,6 +51,20 @@ test('<BoolField> - renders an input with correct disabled state', () => {
   expect(wrapper.find('input').prop('disabled')).toBe(true);
 });
 
+test('<BoolField> - renders an input with correct readOnly state', () => {
+  const onChange = jest.fn();
+
+  const element = <BoolField name="x" readOnly />;
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Boolean } }, { onChange }),
+  );
+
+  expect(wrapper.find('input')).toHaveLength(1);
+  expect(wrapper.find('input').simulate('change')).toBeTruthy();
+  expect(onChange).not.toHaveBeenCalled();
+});
+
 test('<BoolField> - renders a input with correct label (specified)', () => {
   const element = <BoolField name="x" label="BoolFieldLabel" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
