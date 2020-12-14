@@ -72,11 +72,11 @@ function Select({
               disabled={disableItem?.(item) || disabled}
               id={`${id}-${escape(item)}`}
               name={name}
-              onChange={() =>
-                readOnly
-                  ? undefined
-                  : onChange(fieldType === Array ? xor([item], value) : item)
-              }
+              onChange={() => {
+                if (!readOnly) {
+                  onChange(fieldType === Array ? xor([item], value) : item);
+                }
+              }}
               type="checkbox"
             />
             {transform ? transform(item) : item}
@@ -91,13 +91,13 @@ function Select({
         disabled={disabled}
         id={id}
         name={name}
-        onChange={event =>
-          readOnly
-            ? undefined
-            : onChange(
-                event.target.value !== '' ? event.target.value : undefined,
-              )
-        }
+        onChange={event => {
+          if (!readOnly) {
+            onChange(
+              event.target.value !== '' ? event.target.value : undefined,
+            );
+          }
+        }}
         ref={inputRef}
         value={value ?? ''}
       >

@@ -49,11 +49,11 @@ function ListAdd({
       <IconButton
         {...filterDOMProps(props)}
         disabled={!limitNotReached}
-        onClick={() =>
-          readOnly
-            ? undefined
-            : parent.onChange(parent.value!.concat([cloneDeep(value)]))
-        }
+        onClick={() => {
+          if (!readOnly) {
+            parent.onChange(parent.value!.concat([cloneDeep(value)]));
+          }
+        }}
       >
         {icon}
       </IconButton>

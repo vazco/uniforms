@@ -25,9 +25,9 @@ function Date({
       disabled={props.disabled}
       name={props.name}
       onChange={value => {
-        props.readOnly
-          ? undefined
-          : props.onChange(value ? value.toDate() : undefined);
+        if (!props.readOnly) {
+          props.onChange(value ? value.toDate() : undefined);
+        }
       }}
       placeholder={props.placeholder}
       // @ts-ignore: `DatePicker` is an intersection.

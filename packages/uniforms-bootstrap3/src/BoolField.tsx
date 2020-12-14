@@ -41,7 +41,11 @@ function Bool(props: BoolFieldProps) {
           disabled={disabled}
           id={props.id}
           name={name}
-          onChange={() => (readOnly ? undefined : onChange(!value))}
+          onChange={() => {
+            if (!readOnly) {
+              onChange(!value);
+            }
+          }}
           ref={props.inputRef}
           type="checkbox"
         />

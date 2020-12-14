@@ -39,9 +39,7 @@ function ListDel({
       disabled={!limitNotReached}
       icon={icon}
       onClick={() => {
-        if (readOnly) {
-          undefined;
-        } else {
+        if (!readOnly) {
           const value = parent.value!.slice();
           value.splice(nameIndex, 1);
           parent.onChange(value);

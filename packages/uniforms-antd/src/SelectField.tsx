@@ -69,7 +69,11 @@ function Select(props: SelectFieldProps) {
         mode={props.fieldType === Array ? 'multiple' : undefined}
         // @ts-ignore: There's no `name` property on Select?
         name={props.name}
-        onChange={value => (props.readOnly ? undefined : props.onChange(value))}
+        onChange={value => {
+          if (!props.readOnly) {
+            props.onChange(value);
+          }
+        }}
         placeholder={props.placeholder}
         ref={props.inputRef}
         value={

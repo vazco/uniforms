@@ -45,11 +45,11 @@ function ListAdd({
       {...filterDOMProps(props)}
       disabled={!limitNotReached}
       icon={icon}
-      onClick={() =>
-        readOnly
-          ? undefined
-          : parent.onChange(parent.value!.concat([cloneDeep(value)]))
-      }
+      onClick={() => {
+        if (!readOnly) {
+          parent.onChange(parent.value!.concat([cloneDeep(value)]));
+        }
+      }}
       size={size}
       style={style}
       type={type}
