@@ -12,7 +12,7 @@ import TextField from './TextField';
 
 export type AutoFieldProps = Parameters<typeof AutoField>[0];
 
-export const { AutoField, AutoFieldContext } = createAutoField(props => {
+const AutoField = createAutoField(props => {
   if (props.allowedValues) {
     return props.checkboxes && props.fieldType !== Array
       ? RadioField

@@ -4,7 +4,6 @@ it('exports everything', () => {
   expect(unstyled).toEqual({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),
-    AutoFieldContext: expect.any(Object),
     AutoForm: expect.any(Function),
     BaseForm: expect.any(Function),
     BoolField: expect.any(Function),

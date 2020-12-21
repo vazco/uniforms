@@ -1,4 +1,4 @@
-export * from './AutoField';
+export { default as AutoField, AutoFieldProps } from './AutoField';
 export { default as AutoFields, AutoFieldsProps } from './AutoFields';
 export { default as AutoForm } from './AutoForm';
 export { default as BaseForm } from './BaseForm';
