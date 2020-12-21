@@ -95,7 +95,7 @@ function Select({
             </option>
           )}
 
-          {allowedValues?.map(value => (
+          {allowedValues!.map(value => (
             <option disabled={disableItem?.(value)} key={value} value={value}>
               {transform ? transform(value) : value}
             </option>
