@@ -51,6 +51,7 @@ module.exports = {
       indexName: 'uniforms',
     },
     googleAnalytics: { trackingID: 'UA-136559762-4' },
+    hideableSidebar: true,
     hotjar: { hjid: 1434110 },
     navbar: {
       items: [
