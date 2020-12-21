@@ -633,6 +633,7 @@ import { TextField } from 'uniforms-unstyled';
 |    `label`    | `true`  | Field label. This prop has three modes. If you pass a string, then it will be used as a label. If you pass a null, then it won't have a label, but nested fields will have default labels. If you pass a non-null falsy value, it won't have a label and nested fields won't have labels too. |
 |    `name`     |    -    |                                                                                              Field name. Used for identification. It should match your schema - if not, it will throw an error.                                                                                               |
 | `placeholder` | `false` |                                                                                  Field placeholder. If set to true, then a label will be used. Otherwise, it's handled like a label (including propagation).                                                                                  |
+|  `readOnly`   | `false` |                                                                                                Field read-only state. It's passed directly to the field, but it propagates same as the label.                                                                                                 |
 
 ##### Props usage:
 
@@ -642,7 +643,7 @@ import { TextField } from 'uniforms-unstyled';
 
 ## Props propagation
 
-Few props propagate in a very special way. These are `label`, `placeholder` and `disabled`.
+Few props propagate in a very special way. These are `disabled`, `label`, `placeholder`, and `readOnly`.
 
 **Example:**
 
@@ -671,4 +672,4 @@ Few props propagate in a very special way. These are `label`, `placeholder` and 
 </ListField>
 ```
 
-**Note:** `label`, `placeholder` and `disabled` are cast to `Boolean` before being passed to nested fields.
+**Note:** `disabled`, `label`, `placeholder`, and `readOnly` are casted to `Boolean` before being passed to nested fields.
