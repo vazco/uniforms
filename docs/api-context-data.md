@@ -20,18 +20,35 @@ function MyComponent() {
 }
 ```
 
-If you want to access only field-relevant part, use `useField(name)` hook:
+If you want to access only field-relevant part, use `useField(name, props)` hook, where `name` is the target field name and `props` are the props of it:
+
+```js
+import { useField } from 'uniforms';
+
+function MyCustomField(rawProps) {
+  const [props, uniforms] = useField(rawProps.name, rawProps);
+}
+```
+
+Using `useField` allows you to create components that combine values of multiple fields:
 
 ```js
 import { useField } from 'uniforms';
 
 function ArePasswordsEqual() {
-  const { value: passwordA } = useField('passwordA');
-  const { value: passwordB } = useField('passwordB');
+  const [{ value: passwordA }] = useField('passwordA', {});
+  const [{ value: passwordB }] = useField('passwordB', {});
   const areEqual = passwordA === passwordB;
   return <div>{`Passwords are ${areEqual ? 'equal' : 'not equal'}`}</div>;
 }
 ```
+
+Additionally, `useField` accept third, optional parameter: `options`:
+
+|     Option     | Default |                                                             Description                                                              |
+| :------------: | :-----: | :----------------------------------------------------------------------------------------------------------------------------------: |
+| `absoluteName` | `false` |                         Whether the field name should be treated as a top-level one, ignoring parent fields.                         |
+| `initialValue` | `true`  | Initial value check. If `true`, then after the first render the default value is set as value if no value is provided (`undefined`). |
 
 ## Available context data
 
