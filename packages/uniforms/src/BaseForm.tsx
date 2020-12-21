@@ -25,7 +25,7 @@ export type BaseFormProps<Model> = {
   ) => DeepPartial<Model>;
   noValidate: boolean;
   onChange?(key: string, value: any): void;
-  onSubmit(model: DeepPartial<Model>): any;
+  onSubmit(model: DeepPartial<Model>): void | Promise<any>;
   placeholder?: boolean;
   schema: Bridge;
   showInlineError?: boolean;
@@ -165,8 +165,6 @@ export class BaseForm<
       'modelTransform',
       'onChange',
       'onSubmit',
-      'onSubmitFailure',
-      'onSubmitSuccess',
       'placeholder',
       'schema',
       'showInlineError',
@@ -209,13 +207,17 @@ export class BaseForm<
         this.delayId = clearTimeout(this.delayId);
       }
 
-      if (this.props.autosaveDelay > 0) {
-        this.delayId = setTimeout(() => {
-          this.onSubmit();
-        }, this.props.autosaveDelay);
-      } else {
-        this.onSubmit();
-      }
+      // Delay autosave by `autosaveDelay` milliseconds...
+      this.delayId = setTimeout(() => {
+        // ...and wait for all scheduled `setState`s to commit. This is required
+        // for AutoForm to validate correct model, waiting in `onChange`.
+        this.setState(
+          () => null,
+          () => {
+            this.onSubmit();
+          },
+        );
+      }, this.props.autosaveDelay);
     }
   }
 
@@ -241,7 +243,7 @@ export class BaseForm<
 
     const result = this.props.onSubmit(this.getModel('submit'));
     if (!(result instanceof Promise)) {
-      return Promise.resolve(result);
+      return Promise.resolve();
     }
 
     this.setState({ submitting: true });

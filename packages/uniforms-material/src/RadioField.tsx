@@ -2,7 +2,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import RadioMaterial, { RadioProps } from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
@@ -13,7 +13,10 @@ export type RadioFieldProps = FieldProps<
   {
     allowedValues?: string[];
     checkboxes?: boolean;
+    fullWidth?: boolean;
     helperText?: string;
+    margin?: any;
+    row?: boolean;
     transform?(value: string): string;
   }
 >;
@@ -22,19 +25,20 @@ function Radio({
   allowedValues,
   checkboxes,
   disabled,
+  fullWidth = true,
   id,
   inputRef,
   label,
+  margin = 'dense',
   name,
   onChange,
+  row,
   transform,
   value,
   ...props
 }: RadioFieldProps) {
-  const filteredProps = wrapField._filterDOMProps(filterDOMProps(props));
-
   return wrapField(
-    { ...props, disabled, component: 'fieldset' },
+    { ...props, component: 'fieldset', disabled, fullWidth, margin },
     label && (
       <FormLabel component="legend" htmlFor={name}>
         {label}
@@ -45,11 +49,12 @@ function Radio({
       name={name}
       onChange={(event: any) => disabled || onChange(event.target.value)}
       ref={inputRef}
+      row={row}
       value={value ?? ''}
     >
       {allowedValues?.map(item => (
         <FormControlLabel
-          control={<RadioMaterial {...filteredProps} />}
+          control={<RadioMaterial {...filterDOMProps(props)} />}
           key={item}
           label={transform ? transform(item) : item}
           value={`${item}`}
@@ -58,11 +63,5 @@ function Radio({
     </RadioGroup>,
   );
 }
-
-// FIXME: wrapField is not typed correctly.
-Radio.defaultProps = {
-  fullWidth: true,
-  margin: 'dense',
-} as any;
 
 export default connectField(Radio, { kind: 'leaf' });

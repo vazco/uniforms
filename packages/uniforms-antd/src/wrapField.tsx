@@ -30,6 +30,7 @@ export default function wrapField(
     labelCol,
     required,
     showInlineError,
+    validateStatus,
     wrapperCol,
     wrapperStyle = defaultWrapperStyle,
   }: WrapperProps,
@@ -60,7 +61,7 @@ export default function wrapField(
       labelCol={labelCol}
       required={required}
       style={wrapperStyle}
-      validateStatus={error ? 'error' : undefined}
+      validateStatus={error ? 'error' : validateStatus}
       wrapperCol={wrapperCol}
     >
       {children}
@@ -70,11 +71,22 @@ export default function wrapField(
 
 declare module 'uniforms' {
   interface FilterDOMProps {
+    checkboxes: never;
     colon: never;
+    disableItem: never;
     labelCol: never;
+    validateStatus: never;
     wrapperCol: never;
     wrapperStyle: never;
   }
 }
 
-filterDOMProps.register('colon', 'labelCol', 'wrapperCol', 'wrapperStyle');
+filterDOMProps.register(
+  'checkboxes',
+  'colon',
+  'disableItem',
+  'labelCol',
+  'validateStatus',
+  'wrapperCol',
+  'wrapperStyle',
+);

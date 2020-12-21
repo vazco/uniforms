@@ -161,9 +161,7 @@ However, `BaseForm` is not self-managed, so you won't be able to type anything u
 |      `model`      | Form model. An object with `{field: value}` structure. It doesn't matter if it has a prototype or not, but keep in mind that in `onSubmit` or in `onChangeModel` you'll receive a plain object. If you treat form as an input, then this is a value. |
 | `modelTransform`  |                                                  Model transform. Function transforming one model into another. It's used in a few situations (modes) described below. Do not mutate a given model!                                                  |
 |    `onChange`     |                                              Field change action. It receives two arguments: key and value, where the key is a dot-separated path to the changed field and value is a requested value.                                               |
-| `onSubmitFailure` |                                                                      Submit failure action. If `onSubmit` returns a Promise, then this will be attached to its `.catch` chain.                                                                       |
-| `onSubmitSuccess` |                                                                       Submit success action. If `onSubmit` returns a Promise, then this will be attached to its `.then` chain.                                                                       |
-|    `onSubmit`     |                                                                  Submit action. When the form is submitted manually or by an HTML5 event, then it's called with the current model.                                                                   |
+|    `onSubmit`     |               Submit action. When the form is submitted manually or by an HTML5 event, then it's called with the current model. **Note:** use `Promise` to return values and errors - synchronous `return` and `throw` are disallowed.               |
 |   `placeholder`   |                                                              Default placeholder prop for all fields. By default it's false - set it to true to enable placeholders for the whole form.                                                              |
 |     `schema`      |                                                                               Form schema. It's used for form generation in QuickForm and validation in ValidatedForm.                                                                               |
 | `showInlineError` |                               Default `showInlineError` prop for all fields. By default it's false - set it to true to enable inline errors for the whole form. Available in: antd, bootstrap3, bootstrap4, semantic.                                |
@@ -204,8 +202,6 @@ import { BaseForm } from 'uniforms'; // Or from the theme package.
     return model;
   }}
   onChange={(key, value) => console.log(key, value)}
-  onSubmitFailure={() => alert('Promise rejected!')}
-  onSubmitSuccess={() => alert('Promise resolved!')}
   onSubmit={model => db.saveThatReturnsPromiseOrNothing(model)}
   placeholder={false}
   schema={myFormSchema}
@@ -223,8 +219,7 @@ import { BaseForm } from 'uniforms'; // Or from the theme package.
     // Submit form.
     //   It's a programmatic equivalent of a submit event. Returns a promise,
     //   which will either resolve with submitted form or reject with
-    //   validation error in ValidatedForm. You can also use onSubmitFailure
-    //   and onSubmitSuccess instead of doing form.submit().then().
+    //   validation error in ValidatedForm.
     form.submit();
   }}
 />;
@@ -306,7 +301,7 @@ Resets a form. It will also reset changed state, model state (only in AutoForm),
 
 #### `submit()`
 
-Submits a form. It's a programmatic equivalent of a submit event. Returns a promise, which will either resolve with a submitted model or reject with validation error in ValidatedForm. You can also use `onSubmitFailure` and `onSubmitSuccess` instead of doing `form.submit().then()`.
+Submits a form. It's a programmatic equivalent of a submit event. Returns a promise, which will either resolve with a submitted model or reject with validation error in ValidatedForm.
 
 #### `validate()`
 
@@ -395,21 +390,6 @@ If you need to transform model before it will be validated, submitted or passed 
   }}
   onSubmit={onSubmit}
   schema={schema}
-/>
-```
-
-### Post-submit handling
-
-It's a good UX practice to tell your users that something failed or succeed. To make it simpler, there are `onSubmitFailure` and `onSubmitSuccess` props.
-
-**Example:**
-
-```js
-<AutoForm
-  schema={schema}
-  onSubmit={doc => db.saveThatReturnsPromise(doc)}
-  onSubmitSuccess={() => alert('Promise resolved!')}
-  onSubmitFailure={() => alert('Promise rejected!')}
 />
 ```
 

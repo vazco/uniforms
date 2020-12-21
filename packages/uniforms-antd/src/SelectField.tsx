@@ -16,6 +16,7 @@ type CheckboxesProps = FieldProps<
   {
     allowedValues?: CheckboxValueType[];
     checkboxes: true;
+    disableItem?(value: CheckboxValueType): boolean;
     inputRef?: Ref<CheckboxGroup | typeof RadioGroup>;
     required?: boolean;
     transform?(value: CheckboxValueType): string;
@@ -28,6 +29,7 @@ type SelectProps = FieldProps<
   {
     allowedValues?: string[];
     checkboxes?: false;
+    disableItem?(value: CheckboxValueType): boolean;
     inputRef?: Ref<SelectAntD<string | string[]>>;
     required?: boolean;
     transform?(value: string): string;
@@ -51,6 +53,7 @@ function Select(props: SelectFieldProps) {
             : (event: any) => props.onChange(event.target.value)
         }
         options={props.allowedValues!.map(value => ({
+          disabled: props.disableItem?.(value),
           label: props.transform ? props.transform(value) : value,
           value,
         }))}
@@ -77,7 +80,11 @@ function Select(props: SelectFieldProps) {
         {...filterDOMProps(props)}
       >
         {props.allowedValues!.map(value => (
-          <SelectAntD.Option key={value} value={value}>
+          <SelectAntD.Option
+            disabled={props.disableItem?.(value)}
+            key={value}
+            value={value}
+          >
             {props.transform ? props.transform(value) : value}
           </SelectAntD.Option>
         ))}

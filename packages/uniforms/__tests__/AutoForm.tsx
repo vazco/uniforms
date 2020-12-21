@@ -115,10 +115,12 @@ describe('AutoForm', () => {
       expect(onSubmit).not.toBeCalled();
       wrapper.instance().getContext().onChange('a', 1);
 
-      await new Promise(resolve => process.nextTick(resolve));
+      await new Promise(resolve => setTimeout(resolve));
 
       expect(onSubmit).toHaveBeenCalledTimes(1);
       expect(onSubmit).toHaveBeenLastCalledWith({ a: 1 });
+      expect(validator).toHaveBeenCalledTimes(1);
+      expect(validator).toHaveBeenLastCalledWith({ a: 1 });
     });
   });
 

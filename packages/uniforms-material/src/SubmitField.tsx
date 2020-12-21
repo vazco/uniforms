@@ -12,7 +12,7 @@ function SubmitField({
   children,
   disabled,
   inputRef,
-  label,
+  label = 'Submit',
   value,
   ...props
 }: SubmitFieldProps) {
@@ -24,13 +24,12 @@ function SubmitField({
       ref={inputRef}
       type="submit"
       value={value}
+      variant="contained"
       {...filterDOMProps(props)}
     >
       {children || label}
     </Button>
   );
 }
-
-SubmitField.defaultProps = { label: 'Submit', variant: 'contained' };
 
 export default SubmitField;

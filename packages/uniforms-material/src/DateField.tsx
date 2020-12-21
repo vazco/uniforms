@@ -37,13 +37,14 @@ function Date({
 }: DateFieldProps) {
   return (
     <TextField
-      disabled={!!disabled}
+      disabled={disabled}
       error={!!error}
+      fullWidth
       helperText={(error && showInlineError && errorMessage) || helperText}
       label={label}
       InputLabelProps={{ ...labelProps, ...InputLabelProps }}
+      margin="dense"
       name={name}
-      margin={props.margin ?? 'dense'}
       onChange={event =>
         // FIXME: `valueAsNumber` is not available in `EventTarget`.
         disabled || dateParse((event.target as any).valueAsNumber, onChange)
@@ -56,9 +57,5 @@ function Date({
     />
   );
 }
-
-Date.defaultProps = {
-  fullWidth: true,
-};
 
 export default connectField(Date, { kind: 'leaf' });

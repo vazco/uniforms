@@ -1,3 +1,24 @@
+## [v3.0.0-rc.8](https://github.com/vazco/uniforms/tree/v3.0.0-rc.8) (2020-12-05)
+
+- **Breaking:** Due to synchronization of `AutoForm` `model`, autosave is now **always** asynchronous. [\#832](https://github.com/vazco/uniforms/issues/832)
+- **Added:** The `row` for `RadioField` in `uniforms-material`. [\#834](https://github.com/vazco/uniforms/issues/834)
+
+## [v3.0.0-rc.7](https://github.com/vazco/uniforms/tree/v3.0.0-rc.7) (2020-11-30)
+
+- **Breaking:** Synchronous `return` and `throw` in `onSubmit` are no longer allowed. To return an error or some result, return `Promise` instead. [\#819](https://github.com/vazco/uniforms/issues/819)
+- **Fixed:** Reverted some `filterDOMProps.register` calls added in [\#803](https://github.com/vazco/uniforms/issues/803). [\#815](https://github.com/vazco/uniforms/issues/815)
+
+## [v3.0.0-rc.6](https://github.com/vazco/uniforms/tree/v3.0.0-rc.6) (2020-10-26)
+
+- **Added:** The `autoComplete` prop is now correctly used in `TextField`. [\#809](https://github.com/vazco/uniforms/issues/809)
+- **Added:** The `validateStatus` prop is now correctly handled in `wrapField` in `uniforms-antd`. [\#817](https://github.com/vazco/uniforms/issues/817)
+- **Fixed:** Regression of accepting non-string labels in `useField` and `connectField`. [\#816](https://github.com/vazco/uniforms/issues/816)
+
+## [v3.0.0-rc.5](https://github.com/vazco/uniforms/tree/v3.0.0-rc.5) (2020-09-30)
+
+- **Added:** New `disableItem` prop in `SelectField`. [\#736](https://github.com/vazco/uniforms/issues/736)
+- **Added:** New `textFieldProps` prop in `SelectField` in `uniforms-material`. [\#700](https://github.com/vazco/uniforms/issues/700)
+
 ## [v3.0.0-rc.4](https://github.com/vazco/uniforms/tree/v3.0.0-rc.4) (2020-09-09)
 
 - **Breaking:** Reworked `GraphQLBridge.getField`. [\#769](https://github.com/vazco/uniforms/issues/769)
@@ -93,7 +114,7 @@
 
 ## [v2.6.7](https://github.com/vazco/uniforms/tree/v2.6.7) (2020-03-25)
 
-- **Fixed:** Empty boxes in `SlectField` in `uniforms-antd`. [\#691](https://github.com/vazco/uniforms/issues/691)
+- **Fixed:** Empty boxes in `SelectField` in `uniforms-antd`. [\#691](https://github.com/vazco/uniforms/issues/691)
 - **Fixed:** Mitigated [babel/babel\#10693](https://github.com/babel/babel/issues/10693) in all remaining cases. [\#692](https://github.com/vazco/uniforms/issues/692)
 
 ## [v3.0.0-alpha.1](https://github.com/vazco/uniforms/tree/v3.0.0-alpha.1) (2020-01-22)

@@ -1,26 +1,29 @@
 import FormLabel from '@material-ui/core/FormLabel';
-import React, { HTMLProps } from 'react';
-import { HTMLFieldProps, connectField } from 'uniforms';
+import React from 'react';
+import { connectField, HTMLFieldProps } from 'uniforms';
 
 import AutoField from './AutoField';
 import wrapField from './wrapField';
 
+// FIXME: wrapField is not typed correctly.
 export type NestFieldProps = HTMLFieldProps<
   object,
   HTMLDivElement,
-  { helperText?: string; itemProps?: object }
+  { helperText?: string; itemProps?: object; fullWidth?: boolean; margin?: any }
 >;
 
 function Nest({
   children,
   fields,
+  fullWidth = true,
   itemProps,
   label,
+  margin = 'dense',
   name,
   ...props
 }: NestFieldProps) {
   return wrapField(
-    { ...props, component: undefined },
+    { ...props, component: undefined, fullWidth, margin },
     label && <FormLabel component="legend">{label}</FormLabel>,
     children ||
       fields?.map(field => (
@@ -28,11 +31,5 @@ function Nest({
       )),
   );
 }
-
-// FIXME: wrapField is not typed correctly.
-Nest.defaultProps = {
-  fullWidth: true,
-  margin: 'dense',
-} as any;
 
 export default connectField(Nest);

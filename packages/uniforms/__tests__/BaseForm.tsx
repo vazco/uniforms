@@ -135,28 +135,31 @@ describe('BaseForm', () => {
       expect(context2.changedMap.$?.[1]).toBeTruthy();
     });
 
-    it('autosaves correctly (`autosave` = true)', () => {
+    it('autosaves correctly (`autosave` = true)', async () => {
       wrapper.setProps({ autosave: true });
       wrapper.instance().getContext().onChange('a', 1);
+      await new Promise(resolve => setTimeout(resolve));
 
       expect(onSubmit).toHaveBeenCalledTimes(1);
       expect(onSubmit).toHaveBeenLastCalledWith(model);
     });
 
-    it('autosaves are not delayed', () => {
+    it('autosaves are not delayed', async () => {
       wrapper.instance().getContext().onChange('a', 1);
-      wrapper.instance().getContext().onChange('a', 2);
-      wrapper.instance().getContext().onChange('a', 3);
+      await new Promise(resolve => setTimeout(resolve));
 
-      expect(onSubmit).toHaveBeenCalledTimes(3);
+      expect(onSubmit).toHaveBeenCalledTimes(1);
       expect(onSubmit).toHaveBeenLastCalledWith(model);
     });
 
     it('autosaves can be delayed', async () => {
-      wrapper.setProps({ autosaveDelay: 10 });
+      wrapper.setProps({ autosaveDelay: 25 });
       wrapper.instance().getContext().onChange('a', 1);
       wrapper.instance().getContext().onChange('a', 2);
       wrapper.instance().getContext().onChange('a', 3);
+      await new Promise(resolve => setTimeout(resolve));
+
+      expect(onSubmit).not.toHaveBeenCalled();
 
       await new Promise(resolve => setTimeout(resolve, 25));
 
@@ -271,6 +274,33 @@ describe('BaseForm', () => {
 
       const context3 = wrapper.instance().getContext();
       expect(context3).toHaveProperty('submitting', false);
+    });
+
+    it('ignores synchronous errors', async () => {
+      const error = new Error();
+      wrapper.setProps({
+        onSubmit() {
+          throw error;
+        },
+      });
+
+      try {
+        wrapper.instance().submit();
+        throw new Error('Unreachable.');
+      } catch (catched) {
+        expect(catched).toBe(error);
+      }
+    });
+
+    it('returns asynchronous results', async () => {
+      const value = 42;
+      wrapper.setProps({
+        async onSubmit() {
+          return value;
+        },
+      });
+
+      await expect(wrapper.instance().submit()).resolves.toBe(value);
     });
   });
 });

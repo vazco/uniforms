@@ -12,6 +12,7 @@ export type SelectFieldProps = HTMLFieldProps<
   {
     allowedValues?: string[];
     checkboxes?: boolean;
+    disableItem?(value: string): boolean;
     inputRef?: Ref<HTMLSelectElement>;
     transform?(value: string): string;
   }
@@ -29,6 +30,7 @@ function Select({
   onChange,
   placeholder,
   required,
+  disableItem,
   transform,
   value,
   ...props
@@ -43,7 +45,7 @@ function Select({
               checked={
                 fieldType === Array ? value!.includes(item) : value === item
               }
-              disabled={disabled}
+              disabled={disableItem?.(item) ?? disabled}
               id={`${id}-${escape(item)}`}
               name={name}
               onChange={() => {
@@ -77,7 +79,7 @@ function Select({
           )}
 
           {allowedValues!.map(value => (
-            <option key={value} value={value}>
+            <option disabled={disableItem?.(value)} key={value} value={value}>
               {transform ? transform(value) : value}
             </option>
           ))}

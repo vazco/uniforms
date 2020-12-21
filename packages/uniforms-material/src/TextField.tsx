@@ -15,31 +15,27 @@ function Text({
   onChange,
   placeholder,
   showInlineError,
-  type,
-  value,
+  type = 'text',
+  value = '',
   ...props
 }: TextFieldProps) {
   return (
     <TextField
-      disabled={!!disabled}
+      disabled={disabled}
       error={!!error}
+      fullWidth
       helperText={(error && showInlineError && errorMessage) || helperText}
       label={label}
+      margin="dense"
       name={name}
       onChange={event => disabled || onChange(event.target.value)}
       placeholder={placeholder}
       ref={inputRef}
       type={type}
-      margin={props.margin ?? 'dense'}
-      value={value ?? ''}
+      value={value}
       {...filterDOMProps(props)}
     />
   );
 }
-
-Text.defaultProps = {
-  fullWidth: true,
-  type: 'text',
-};
 
 export default connectField(Text, { kind: 'leaf' });

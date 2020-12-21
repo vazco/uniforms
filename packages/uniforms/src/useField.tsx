@@ -1,30 +1,31 @@
 import get from 'lodash/get';
 import mapValues from 'lodash/mapValues';
-import { useCallback, useEffect, useMemo } from 'react';
+import { ReactNode, useCallback, useEffect, useMemo } from 'react';
 
 import { joinName } from './joinName';
 import { GuaranteedProps } from './types';
 import { useForm } from './useForm';
 
 function propagate(
-  prop: unknown,
-  schema: unknown,
+  prop: ReactNode,
+  schema: ReactNode,
   state: boolean,
-  fallback: string,
-): [string, string] {
-  const schemaDisabled = schema === false || schema === '';
-  const schemaValue =
-    typeof schema === 'string' ? schema : schemaDisabled ? '' : fallback;
-  const resultValue =
-    typeof prop === 'string'
-      ? prop
-      : prop === null ||
-        prop === false ||
-        (prop === undefined && !state) ||
-        schemaDisabled
+  fallback: ReactNode,
+): [ReactNode, ReactNode] {
+  const forcedFallbackInProp = prop === true || prop === undefined;
+  const forcedFallbackInSchema = schema === true || schema === undefined;
+
+  const schemaValue = forcedFallbackInSchema ? fallback : schema;
+  const value =
+    prop === '' ||
+    prop === false ||
+    (forcedFallbackInProp && (forcedFallbackInSchema || !state))
       ? ''
-      : schemaValue;
-  return [resultValue, schemaValue];
+      : forcedFallbackInProp
+      ? schemaValue
+      : prop;
+
+  return [value, schemaValue];
 }
 
 export function useField<
@@ -112,7 +113,8 @@ export function useField<
     ...props,
     label,
     name,
-    placeholder,
+    // TODO: Should we assert `typeof placeholder === 'string'`?
+    placeholder: placeholder as string,
   };
 
   return [fieldProps, context] as [typeof fieldProps, typeof context];

@@ -494,3 +494,23 @@ test('<SelectField checkboxes> - works with special characters', () => {
     createContext({ x: { type: String, allowedValues: ['ă', 'ș'] } }),
   );
 });
+
+test('<SelectField checkboxes> - renders a set of checkboxes with per-item props', () => {
+  const allowedValues = ['a', 'b'];
+
+  const element = (
+    <SelectField
+      checkboxes
+      name="x"
+      disableItem={value => value === allowedValues[0]}
+    />
+  );
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, allowedValues } }),
+  );
+
+  expect(wrapper.find('input')).toHaveLength(2);
+  expect(wrapper.find('input').at(0).prop('disabled')).toBe(true);
+  expect(wrapper.find('input').at(1).prop('disabled')).toBe(false);
+});
