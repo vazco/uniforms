@@ -688,7 +688,7 @@
 }
 
 .bullets {
-  color: var(--white);
+  color: var(--white) !important;
 }
 
 .bullets li {
