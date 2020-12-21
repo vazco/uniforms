@@ -23,6 +23,7 @@ function Date({
     props,
     <DatePicker
       disabled={props.disabled}
+      inputReadOnly={props.readOnly}
       name={props.name}
       onChange={value => {
         if (!props.readOnly) {
