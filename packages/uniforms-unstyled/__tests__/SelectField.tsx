@@ -338,6 +338,22 @@ test('<SelectField> - renders a select with correct value (default)', () => {
   expect(wrapper.find('select').prop('value')).toStrictEqual([]);
 });
 
+test('<SelectField> - renders a multiselect with disabled options', () => {
+  const element = <SelectField name="x" disableItem={value => value === 'b'} />;
+  const wrapper = mount(
+    element,
+    createContext({
+      x: { type: Array },
+      'x.$': { type: String, allowedValues: ['a', 'b'] },
+    }),
+  );
+
+  expect(wrapper.find('select')).toHaveLength(1);
+  expect(wrapper.find('select').prop('value')).toStrictEqual([]);
+  expect(wrapper.find('option').at(0).prop('disabled')).toBe(false);
+  expect(wrapper.find('option').at(1).prop('disabled')).toBe(true);
+});
+
 test('<SelectField> - renders a select with correct value (model)', () => {
   const element = <SelectField name="x" />;
   const wrapper = mount(
