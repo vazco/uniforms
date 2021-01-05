@@ -1,10 +1,4 @@
-import {
-  GraphQLInputObjectType,
-  GraphQLObjectType,
-  GraphQLString,
-  buildASTSchema,
-  parse,
-} from 'graphql';
+import { GraphQLString, buildASTSchema, parse } from 'graphql';
 import { GraphQLBridge } from 'uniforms-bridge-graphql';
 
 describe('GraphQLBridge', () => {

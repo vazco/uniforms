@@ -28,11 +28,9 @@ export type SelectFieldProps = HTMLFieldProps<
 function Select({
   allowedValues,
   checkboxes,
-  className,
   disableItem,
   disabled,
   error,
-  errorMessage,
   fieldType,
   id,
   inline,
@@ -43,7 +41,6 @@ function Select({
   onChange,
   placeholder,
   required,
-  showInlineError,
   transform,
   value,
   ...props

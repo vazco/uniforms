@@ -2,6 +2,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import RadioMaterial, { RadioProps } from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import omit from 'lodash/omit';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
@@ -23,7 +24,6 @@ export type RadioFieldProps = FieldProps<
 
 function Radio({
   allowedValues,
-  checkboxes,
   disabled,
   fullWidth = true,
   id,
@@ -54,7 +54,11 @@ function Radio({
     >
       {allowedValues?.map(item => (
         <FormControlLabel
-          control={<RadioMaterial {...filterDOMProps(props)} />}
+          control={
+            <RadioMaterial
+              {...omit(filterDOMProps(props), ['checkboxes', 'helperText'])}
+            />
+          }
           key={item}
           label={transform ? transform(item) : item}
           value={`${item}`}

@@ -14,7 +14,7 @@ function cacheGet(key: string) {
   }
 }
 
-function cacheSet(key: string, data: {}, expires: number) {
+function cacheSet(key: string, data: unknown, expires: number) {
   try {
     localStorage.setItem(cacheKey(key), JSON.stringify({ data, expires }));
   } catch (error) {

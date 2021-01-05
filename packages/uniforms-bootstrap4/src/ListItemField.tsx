@@ -14,7 +14,6 @@ export type ListItemFieldProps = {
 function ListItem({
   children = <AutoField className="col-11" label={null} name="" />,
   removeIcon,
-  ...props
 }: ListItemFieldProps) {
   return (
     <div className="row">

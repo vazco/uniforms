@@ -20,7 +20,7 @@ export type ListFieldProps = HTMLFieldProps<
     children?: ReactNode;
     info?: string;
     initialCount?: number;
-    itemProps?: {};
+    itemProps?: object;
     labelCol?: any;
     wrapperCol?: any;
   }

@@ -16,7 +16,6 @@ function Nest({
   fields,
   itemProps,
   label,
-  name,
   showInlineError,
   ...props
 }: NestFieldProps) {

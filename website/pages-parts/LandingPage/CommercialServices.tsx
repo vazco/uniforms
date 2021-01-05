@@ -1,4 +1,3 @@
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import classNames from 'classnames';
 import React from 'react';
 
@@ -8,9 +7,6 @@ import { Subtitle } from '../../components/Subtitle';
 import styles from '../../index.module.css';
 
 export function CommercialServices() {
-  const context = useDocusaurusContext();
-  const { email } = context.siteConfig.customFields;
-
   return (
     <div
       className={classNames(

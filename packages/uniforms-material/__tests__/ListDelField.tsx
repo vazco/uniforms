@@ -8,7 +8,7 @@ import mount from './_mount';
 
 const Icon = () => <i />;
 const onChange = jest.fn();
-const context = (schema?: {}) =>
+const context = (schema?: object) =>
   createContext(
     merge({ x: { type: Array, maxCount: 3 }, 'x.$': String }, schema),
     { onChange, model: { x: ['x', 'y', 'z'] } },

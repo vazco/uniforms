@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import omit from 'lodash/omit';
 import React from 'react';
 import { connectField, filterDOMProps, HTMLFieldProps } from 'uniforms';
 
@@ -20,7 +21,6 @@ export type RadioFieldProps = HTMLFieldProps<
 
 function Radio({
   allowedValues,
-  checkboxes, // eslint-disable-line no-unused-vars
   className,
   disabled,
   error,
@@ -38,7 +38,7 @@ function Radio({
   return (
     <div
       className={classnames(className, { disabled, error }, 'grouped fields')}
-      {...filterDOMProps(props)}
+      {...omit(filterDOMProps(props), ['checkboxes'])}
     >
       {label && (
         <div className={classnames({ required }, 'field')}>
