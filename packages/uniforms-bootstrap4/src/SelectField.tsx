@@ -104,7 +104,7 @@ function Select({
           </option>
         )}
 
-        {allowedValues!.map(allowedValue => (
+        {allowedValues?.map(allowedValue => (
           <option
             disabled={disableItem?.(allowedValue)}
             key={allowedValue}
