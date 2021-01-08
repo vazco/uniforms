@@ -48,7 +48,7 @@ import { changedKeys } from 'uniforms';
 const arrayOfChangedKeys = changedKeys(root, valueA, valueB);
 ```
 
-**Note:** For more examples, see `changedKeys` [tests](https://github.com/vazco/uniforms/blob/master/packages/uniforms/__tests__/changedKeys.js).
+**Note:** For more examples, see `changedKeys` [tests](https://github.com/vazco/uniforms/blob/master/packages/uniforms/__tests__/changedKeys.ts).
 
 ## `filterDOMProps(props)`
 
