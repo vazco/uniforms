@@ -92,10 +92,8 @@ export default class SimpleSchema2Bridge extends Bridge {
 
   // eslint-disable-next-line complexity
   getProps(name: string, props: Record<string, any> = {}) {
-    // eslint-disable-next-line prefer-const
     const { optional, type, uniforms, ...contextField } = this.getField(name);
-
-    const field = { ...contextField, required: !optional };
+    let field = { ...contextField, required: !optional };
 
     if (uniforms) {
       if (typeof uniforms === 'string' || typeof uniforms === 'function') {
