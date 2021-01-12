@@ -30,9 +30,7 @@ function Date({
   name,
   onChange,
   placeholder,
-  showInlineError,
   value,
-  wrapClassName,
   ...props
 }: DateFieldProps) {
   return wrapField(

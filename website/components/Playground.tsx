@@ -156,7 +156,7 @@ class PlaygroundPreview extends Component<any, any> {
         });
     }
     if (asyncOnValidate) {
-      props.onValidate = (model: {}, error: Error) =>
+      props.onValidate = (model: object, error: Error) =>
         new Promise(resolve => {
           setTimeout(() => {
             resolve(error);

@@ -19,7 +19,6 @@ function Nest({
   itemProps,
   label,
   margin = 'dense',
-  name,
   ...props
 }: NestFieldProps) {
   return wrapField(

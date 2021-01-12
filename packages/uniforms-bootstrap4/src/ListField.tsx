@@ -16,7 +16,7 @@ export type ListFieldProps = HTMLFieldProps<
   {
     addIcon?: ReactNode;
     initialCount?: number;
-    itemProps?: {};
+    itemProps?: object;
     removeIcon?: ReactNode;
   }
 >;

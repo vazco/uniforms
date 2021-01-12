@@ -1,7 +1,7 @@
 // @ts-ignore
-import { Match } from 'meteor/check'; // eslint-disable-line
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 // @ts-ignore
-import { SimpleSchema } from 'meteor/aldeed:simple-schema'; // eslint-disable-line
+import { Match } from 'meteor/check';
 import { filterDOMProps } from 'uniforms';
 
 // Register custom property.

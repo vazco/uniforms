@@ -1,6 +1,5 @@
 import clone from 'lodash/clone';
 import get from 'lodash/get';
-import isFunction from 'lodash/isFunction';
 import omit from 'lodash/omit';
 import setWith from 'lodash/setWith';
 import React, { Component, SyntheticEvent } from 'react';
@@ -84,6 +83,7 @@ export class BaseForm<
     this.mounted = true;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   componentDidUpdate(prevProps: Props, prevState: State, snapshot: never) {}
 
   componentWillUnmount() {

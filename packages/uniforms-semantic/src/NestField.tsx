@@ -20,7 +20,6 @@ function Nest({
   grouped,
   itemProps,
   label,
-  name,
   showInlineError,
   ...props
 }: NestFieldProps) {

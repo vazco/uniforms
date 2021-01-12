@@ -11,7 +11,7 @@ declare module '@theme/*' {
 declare module '*.md' {
   // eslint-disable-next-line import/order
   import { ComponentType } from 'react';
-  const Component: ComponentType<{}>;
+  const Component: ComponentType<object>;
   export = Component;
 }
 

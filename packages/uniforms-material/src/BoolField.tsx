@@ -3,6 +3,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
+import omit from 'lodash/omit';
 import React, { Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
@@ -52,7 +53,7 @@ function Bool(props: BoolFieldProps) {
             }
             ref={inputRef as Ref<HTMLButtonElement>}
             value={name}
-            {...filterDOMProps(props)}
+            {...omit(filterDOMProps(props), ['helperText'])}
           />
         }
         label={transform ? transform(label as string) : label}
