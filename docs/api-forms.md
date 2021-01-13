@@ -81,8 +81,8 @@ import { ValidatedForm } from 'uniforms'; // Or from the theme package.
     }
 
     // ...or any additional validation if an error is already there...
-    if (error) {
-      return;
+    if (isSomeSpecialCase(error)) {
+      return MyAPI.checkOtherCondition(model);
     }
 
     // ...or feed it with another error.
@@ -239,12 +239,12 @@ const onValidate = async (model, error) => {
   }
 
   // ...or any additional validation if an error is already there...
-  if (error) {
-    return;
+  if (isSomeSpecialCase(error)) {
+    return MyAPI.checkOtherCondition(model);
   }
 
   // ...or feed it with another error.
-  MyAPI.validate(model, error => callback(error || null));
+  MyAPI.validate(model);
 };
 
 // Later...
