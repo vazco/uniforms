@@ -36,7 +36,9 @@ export function CommercialServices() {
                 <li>Solutions built on top of uniforms&nbsp;➤</li>
               </ul>
               <div className={styles['center-if-sm']}>
-                <Button to="https://www.vazco.eu/contact/">Contact us</Button>
+                <Button to="https://www.vazco.eu/form-heavy-workflow-management-apps">
+                  Contact us
+                </Button>
               </div>
             </div>
             <div
