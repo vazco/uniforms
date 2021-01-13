@@ -76,8 +76,8 @@ This guide is designed to help you through the migration. If you went through it
   ```
 - `onValidate` is no longer using callbacks. The error (or the lack of it) has to be returned either synchronously or asynchronously (i.e. wrapped in a promise).
   ```diff
-  - onValidate={(error, done) => done(error)}
-  + onValidate={async error => error}
+  - onValidate={(model, error, done) => done(error)}
+  + onValidate={async (model, error) => error}
   ```
 
 ## React Context API
