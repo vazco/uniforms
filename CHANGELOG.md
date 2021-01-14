@@ -1,3 +1,5 @@
+## [v3.0.0](https://github.com/vazco/uniforms/tree/v3.0.0) (2021-01-14)
+
 ## [v3.0.0-rc.8](https://github.com/vazco/uniforms/tree/v3.0.0-rc.8) (2020-12-05)
 
 - **Breaking:** Due to synchronization of `AutoForm` `model`, autosave is now **always** asynchronous. [\#832](https://github.com/vazco/uniforms/issues/832)
