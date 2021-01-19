@@ -1,3 +1,7 @@
+## Next:
+
+- **Fixed:** Unified `NumField` behavior across themes. [\#856](https://github.com/vazco/uniforms/issues/856)
+
 ## [v3.0.0](https://github.com/vazco/uniforms/tree/v3.0.0) (2021-01-14)
 
 ## [v3.0.0-rc.8](https://github.com/vazco/uniforms/tree/v3.0.0-rc.8) (2020-12-05)

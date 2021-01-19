@@ -4,8 +4,6 @@ import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
-const noneIfNaN = (x: number) => (isNaN(x) ? undefined : x);
-
 export type NumFieldProps = FieldProps<
   number,
   // FIXME: Why `onReset` fails with `wrapField`?
@@ -21,7 +19,11 @@ function Num(props: NumFieldProps) {
       max={props.max}
       min={props.min}
       name={props.name}
-      onChange={value => props.onChange(noneIfNaN(value as number))}
+      onChange={event => {
+        const parse = props.decimal ? parseFloat : parseInt;
+        const value = parse('' + event);
+        props.onChange(isNaN(value) ? undefined : value);
+      }}
       placeholder={props.placeholder}
       ref={props.inputRef}
       step={props.step || (props.decimal ? 0.01 : 1)}
