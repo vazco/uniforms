@@ -1,4 +1,4 @@
-import TextArea, { TextAreaProps } from 'antd/lib/input/TextArea';
+import TextArea, { TextAreaProps, TextAreaRef } from 'antd/lib/input/TextArea';
 import React, { Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
@@ -8,7 +8,7 @@ export type LongTextFieldProps = FieldProps<
   string,
   // FIXME: Why `onReset` fails with `wrapField`?
   Omit<TextAreaProps, 'onReset'>,
-  { inputRef?: Ref<TextArea> }
+  { inputRef?: Ref<TextAreaRef> }
 >;
 
 function LongText({ rows = 5, ...props }: LongTextFieldProps) {
