@@ -5,6 +5,7 @@ import { LongTextField } from 'uniforms-unstyled';
 import ImageField from './ImageField';
 
 const ajv = new Ajv({ allErrors: true, useDefaults: true });
+ajv.addVocabulary(['options', 'uniforms']);
 
 // <schema>
 const schema = {

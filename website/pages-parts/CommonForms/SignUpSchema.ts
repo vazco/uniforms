@@ -2,6 +2,7 @@ import Ajv from 'ajv';
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 
 const ajv = new Ajv({ allErrors: true, useDefaults: true, $data: true });
+ajv.addKeyword('uniforms');
 
 const schema = {
   title: 'Guest',

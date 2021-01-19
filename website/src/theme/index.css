@@ -1,7 +1,3 @@
-code {
-  color: unset;
-}
-
 pre {
   border-radius: var(--ifm-global-radius) !important;
   overflow: auto !important;

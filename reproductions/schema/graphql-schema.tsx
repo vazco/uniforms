@@ -1,5 +1,6 @@
+import { parse } from 'graphql/language/parser';
+import { buildASTSchema } from 'graphql/utilities';
 import { GraphQLBridge } from 'uniforms-bridge-graphql';
-import { GraphQLObjectType, buildASTSchema, parse } from 'graphql';
 
 const schema = `
   type Address {
