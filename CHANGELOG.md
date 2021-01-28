@@ -1,3 +1,7 @@
+## Next
+
+- **Fixed:** Missing `step` prop in `NumField` in `uniforms-material`. [\#855](https://github.com/vazco/uniforms/issues/855)
+
 ## [v3.0.0](https://github.com/vazco/uniforms/tree/v3.0.0) (2021-01-14)
 
 ## [v3.0.0-rc.8](https://github.com/vazco/uniforms/tree/v3.0.0-rc.8) (2020-12-05)
