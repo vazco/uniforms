@@ -1,4 +1,4 @@
-## Next:
+## Next
 
 - **Fixed:** Missing `step` prop in `NumField` in `uniforms-material`. [\#855](https://github.com/vazco/uniforms/issues/855)
 - **Fixed:** Unified `NumField` behavior across themes. [\#856](https://github.com/vazco/uniforms/issues/856)
