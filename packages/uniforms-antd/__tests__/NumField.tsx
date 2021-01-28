@@ -164,9 +164,7 @@ test('<NumField> - renders an InputNumber which correctly reacts on change (deci
   expect(
     wrapper.find('input').simulate('change', { target: { value: '2.5' } }),
   ).toBeTruthy();
-
-  // That's how AntD is doing it.
-  expect(onChange).toHaveBeenLastCalledWith('x', 2.5);
+  expect(onChange).toHaveBeenLastCalledWith('x', 2);
 });
 
 test('<NumField> - renders an InputNumber which correctly reacts on change (empty)', () => {
@@ -181,24 +179,6 @@ test('<NumField> - renders an InputNumber which correctly reacts on change (empt
   expect(wrapper.find('input')).toHaveLength(1);
   expect(
     wrapper.find('input').simulate('change', { target: { value: '' } }),
-  ).toBeTruthy();
-
-  // That's how AntD is doing it.
-  expect(onChange).toHaveBeenLastCalledWith('x', '');
-});
-
-test('<NumField> - renders an InputNumber which correctly reacts on change (incorrect)', () => {
-  const onChange = jest.fn();
-
-  const element = <NumField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: Number } }, { onChange }),
-  );
-
-  expect(wrapper.find('input')).toHaveLength(1);
-  expect(
-    wrapper.find('input').simulate('change', { target: { value: 'xyz' } }),
   ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', undefined);
 });
