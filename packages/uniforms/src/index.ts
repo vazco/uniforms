@@ -7,6 +7,7 @@ export * from './ValidatedQuickForm';
 export * from './changedKeys';
 export * from './connectField';
 export * from './context';
+export * from './createAutoField';
 export * from './filterDOMProps';
 export * from './joinName';
 export * from './randomIds';

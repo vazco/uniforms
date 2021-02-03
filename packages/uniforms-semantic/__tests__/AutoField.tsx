@@ -107,11 +107,40 @@ test('<AutoField> - detects Component (model)', () => {
   expect(Component).toHaveBeenCalledTimes(1);
 });
 
-test('<AutoField> - detects Component (specified)', () => {
+test('<AutoField> - uses Component (props)', () => {
   const Component = jest.fn(() => null);
 
   const element = <AutoField name="x" component={Component} />;
   mount(element, createContext({ x: { type: String } }));
 
   expect(Component).toHaveBeenCalledTimes(1);
+});
+
+test('<AutoField> - uses Component (context)', () => {
+  const FieldA = jest.fn(() => null);
+  const FieldB = jest.fn(() => null);
+
+  const element = (
+    <AutoField.componentDetectorContext.Provider
+      value={props => (props['data-component'] === 'A' ? FieldA : FieldB)}
+    >
+      <>
+        <AutoField name="x" data-component="A" />
+        <AutoField name="x" data-component="B" />
+      </>
+    </AutoField.componentDetectorContext.Provider>
+  );
+  mount(element, createContext({ x: { type: String } }));
+
+  expect(FieldA).toHaveBeenCalledTimes(1);
+  expect(FieldB).toHaveBeenCalledTimes(1);
+});
+
+test('<AutoField> - uses Component (invalid)', () => {
+  const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+  expect(() => {
+    const element = <AutoField name="x" />;
+    mount(element, createContext({ x: { type: Symbol } }));
+  }).toThrow(/Unsupported field type:/);
+  spy.mockRestore();
 });
