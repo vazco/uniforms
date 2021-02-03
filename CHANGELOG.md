@@ -1,6 +1,8 @@
-## Next
+## [v3.1.0](https://github.com/vazco/uniforms/tree/v3.1.0) (2021-02-03)
 
 - **Added:** New `readOnly` prop in all form and field components. [\#674](https://github.com/vazco/uniforms/issues/674)
+- **Added:** Replacable `AutoField` component. [\#640](https://github.com/vazco/uniforms/issues/640)
+- **Added:** Support for HTML multiselects in `SelectField` prop in all themes. [\#737](https://github.com/vazco/uniforms/issues/737)
 
 ## [v3.0.1](https://github.com/vazco/uniforms/tree/v3.0.1) (2021-01-28)
 
