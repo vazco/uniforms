@@ -1,13 +1,14 @@
 import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined';
+import Form from 'antd/lib/form';
 import Tooltip from 'antd/lib/tooltip';
 import classNames from 'classnames';
 import React, {
   Children,
-  ReactNode,
   cloneElement,
   isValidElement,
+  ReactNode,
 } from 'react';
-import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
+import { connectField, filterDOMProps, HTMLFieldProps } from 'uniforms';
 
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';
@@ -48,43 +49,57 @@ function List({
   wrapperCol,
   ...props
 }: ListFieldProps) {
+  const labelNode = !!label && (
+    <div>
+      {label}
+      {!!info && (
+        <span>
+          &nbsp;
+          <Tooltip title={info}>
+            <QuestionCircleOutlined />
+          </Tooltip>
+        </span>
+      )}
+    </div>
+  );
+
+  const borderStyle = {
+    ...(error ? { borderColor: 'rgb(255, 85, 0)' } : {}),
+    ...style,
+  };
+
   return (
     <div
       {...filterDOMProps(props)}
-      style={style}
+      style={borderStyle}
       className={classNames([className, 'ant-list', 'ant-list-bordered'])}
     >
-      {label && (
-        <div>
-          {label}
-          {!!info && (
-            <span>
-              &nbsp;
-              <Tooltip title={info}>
-                <QuestionCircleOutlined />
-              </Tooltip>
-            </span>
+      <Form.Item
+        label={labelNode}
+        hasFeedback
+        style={{ marginBottom: 0 }}
+        validateStatus={error ? 'error' : ''}
+      >
+        <div style={{ ...(error ? { marginRight: '32px' } : {}) }}>
+          {!!(error && showInlineError) && <div>{errorMessage}</div>}
+
+          {value?.map((item, itemIndex) =>
+            Children.map(children, (child, childIndex) =>
+              isValidElement(child)
+                ? cloneElement(child, {
+                    key: `${itemIndex}-${childIndex}`,
+                    name: child.props.name?.replace('$', '' + itemIndex),
+                    labelCol,
+                    wrapperCol,
+                    ...itemProps,
+                  })
+                : child,
+            ),
           )}
+
+          <ListAddField name="$" initialCount={initialCount} />
         </div>
-      )}
-
-      {!!(error && showInlineError) && <div>{errorMessage}</div>}
-
-      {value?.map((item, itemIndex) =>
-        Children.map(children, (child, childIndex) =>
-          isValidElement(child)
-            ? cloneElement(child, {
-                key: `${itemIndex}-${childIndex}`,
-                name: child.props.name?.replace('$', '' + itemIndex),
-                labelCol,
-                wrapperCol,
-                ...itemProps,
-              })
-            : child,
-        ),
-      )}
-
-      <ListAddField name="$" initialCount={initialCount} />
+      </Form.Item>
     </div>
   );
 }
