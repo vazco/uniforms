@@ -28,6 +28,7 @@ function ListAdd({
   icon = '+',
   margin = 'dense',
   name,
+  readOnly,
   value,
   variant,
   ...props
@@ -49,7 +50,9 @@ function ListAdd({
         {...filterDOMProps(props)}
         disabled={!limitNotReached}
         onClick={() => {
-          parent.onChange(parent.value!.concat([cloneDeep(value)]));
+          if (!readOnly) {
+            parent.onChange(parent.value!.concat([cloneDeep(value)]));
+          }
         }}
       >
         {icon}

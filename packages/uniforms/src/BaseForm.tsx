@@ -26,6 +26,7 @@ export type BaseFormProps<Model> = {
   onChange?(key: string, value: any): void;
   onSubmit(model: DeepPartial<Model>): void | Promise<any>;
   placeholder?: boolean;
+  readOnly?: boolean;
   schema: Bridge;
   showInlineError?: boolean;
 };
@@ -131,6 +132,7 @@ export class BaseForm<
       disabled: !!this.props.disabled,
       label: !!this.props.label,
       placeholder: !!this.props.placeholder,
+      readOnly: !!this.props.readOnly,
       showInlineError: !!this.props.showInlineError,
     };
   }
@@ -166,6 +168,7 @@ export class BaseForm<
       'onChange',
       'onSubmit',
       'placeholder',
+      'readOnly',
       'schema',
       'showInlineError',
     ]);

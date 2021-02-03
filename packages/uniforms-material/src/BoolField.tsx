@@ -29,6 +29,7 @@ function Bool(props: BoolFieldProps) {
     legend,
     name,
     onChange,
+    readOnly,
     transform,
     value,
   } = props;
@@ -49,7 +50,10 @@ function Bool(props: BoolFieldProps) {
             checked={!!value}
             name={name}
             onChange={event =>
-              !disabled && onChange && onChange(event.target.checked)
+              !disabled &&
+              !readOnly &&
+              onChange &&
+              onChange(event.target.checked)
             }
             ref={inputRef as Ref<HTMLButtonElement>}
             value={name}

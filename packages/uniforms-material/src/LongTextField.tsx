@@ -14,6 +14,7 @@ const LongText = ({
   name,
   onChange,
   placeholder,
+  readOnly,
   showInlineError,
   type = 'text',
   value,
@@ -24,6 +25,7 @@ const LongText = ({
     error={!!error}
     fullWidth
     helperText={(error && showInlineError && errorMessage) || helperText}
+    inputProps={{ readOnly }}
     label={label}
     margin="dense"
     multiline

@@ -18,6 +18,7 @@ function SubmitField({
   disabled,
   inputClassName,
   inputRef,
+  readOnly,
   value,
   wrapClassName,
   ...props
@@ -30,6 +31,7 @@ function SubmitField({
     <input
       className={inputClassName}
       disabled={disabled === undefined ? !!(error || state.disabled) : disabled}
+      readOnly={readOnly}
       ref={inputRef}
       type="submit"
       {...(value ? { value } : {})}

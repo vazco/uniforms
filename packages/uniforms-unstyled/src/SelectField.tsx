@@ -29,6 +29,7 @@ function Select({
   name,
   onChange,
   placeholder,
+  readOnly,
   required,
   disableItem,
   transform,
@@ -50,7 +51,9 @@ function Select({
               id={`${id}-${escape(item)}`}
               name={name}
               onChange={() => {
-                onChange(fieldType === Array ? xor([item], value) : item);
+                if (!readOnly) {
+                  onChange(fieldType === Array ? xor([item], value) : item);
+                }
               }}
               type="checkbox"
             />
@@ -67,12 +70,14 @@ function Select({
           multiple={multiple}
           name={name}
           onChange={event => {
-            const item = event.target.value;
-            if (multiple) {
-              const clear = event.target.selectedIndex === -1;
-              onChange(clear ? [] : xor([item], value));
-            } else {
-              onChange(item !== '' ? item : undefined);
+            if (!readOnly) {
+              const item = event.target.value;
+              if (multiple) {
+                const clear = event.target.selectedIndex === -1;
+                onChange(clear ? [] : xor([item], value));
+              } else {
+                onChange(item !== '' ? item : undefined);
+              }
             }
           }}
           ref={inputRef}

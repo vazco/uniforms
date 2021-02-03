@@ -11,6 +11,7 @@ export default function wrapField(
     fullWidth,
     helperText,
     margin,
+    readOnly,
     required,
     showInlineError,
     variant,
@@ -24,6 +25,7 @@ export default function wrapField(
     error: !!error,
     fullWidth: !!fullWidth,
     margin,
+    readOnly,
     required,
     variant,
   };

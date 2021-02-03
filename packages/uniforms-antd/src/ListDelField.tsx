@@ -15,6 +15,7 @@ function ListDel({
   disabled,
   icon = <DeleteOutlined />,
   name,
+  readOnly,
   shape = 'circle',
   size = 'small',
   type = 'ghost',
@@ -38,9 +39,11 @@ function ListDel({
       disabled={!limitNotReached}
       icon={icon}
       onClick={() => {
-        const value = parent.value!.slice();
-        value.splice(nameIndex, 1);
-        parent.onChange(value);
+        if (!readOnly) {
+          const value = parent.value!.slice();
+          value.splice(nameIndex, 1);
+          parent.onChange(value);
+        }
       }}
       shape={shape}
       size={size}

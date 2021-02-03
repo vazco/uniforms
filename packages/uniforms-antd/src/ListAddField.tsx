@@ -22,6 +22,7 @@ function ListAdd({
   disabled,
   icon = <PlusSquareOutlined />,
   name,
+  readOnly,
   size = 'small',
   style = defaultStyle,
   type = 'dashed',
@@ -45,7 +46,9 @@ function ListAdd({
       disabled={!limitNotReached}
       icon={icon}
       onClick={() => {
-        parent.onChange(parent.value!.concat([cloneDeep(value)]));
+        if (!readOnly) {
+          parent.onChange(parent.value!.concat([cloneDeep(value)]));
+        }
       }}
       size={size}
       style={style}

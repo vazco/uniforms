@@ -24,6 +24,7 @@ export default function HiddenField({ value, ...rawProps }: HiddenFieldProps) {
     <input
       disabled={props.disabled}
       name={props.name}
+      readOnly={props.readOnly}
       ref={props.inputRef}
       type="hidden"
       value={value ?? props.value ?? ''}

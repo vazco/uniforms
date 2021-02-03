@@ -128,11 +128,12 @@ The `state` is an object representing your current form status.
 
 The state properties are:
 
-| Name              | Description                                          |
-| :---------------- | :--------------------------------------------------- |
-| `disabled`        | Indicates whether the form is disabled.              |
-| `label`           | Indicates whether the labels should be shown.        |
-| `placeholder`     | Indicates whether the placeholders should be shown.  |
+|       Name        |                     Description                      |
+| :---------------: | :--------------------------------------------------: |
+|    `disabled`     |       Indicates whether the form is disabled.        |
+|      `label`      |    Indicates whether the labels should be shown.     |
+|   `placeholder`   | Indicates whether the placeholders should be shown.  |
+|    `readOnly`     |       Indicates whether the form is read-only.       |
 | `showInlineError` | Indicates whether the inline errors should be shown. |
 
 ### `submitting`

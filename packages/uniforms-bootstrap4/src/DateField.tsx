@@ -30,6 +30,7 @@ function Date({
   name,
   onChange,
   placeholder,
+  readOnly,
   value,
   ...props
 }: DateFieldProps) {
@@ -53,6 +54,7 @@ function Date({
         }
       }}
       placeholder={placeholder}
+      readOnly={readOnly}
       ref={inputRef}
       type="datetime-local"
       value={dateFormat(value) ?? ''}

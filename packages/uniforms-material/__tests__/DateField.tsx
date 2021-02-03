@@ -43,6 +43,13 @@ test('<DateField> - renders an Input with correct disabled state', () => {
   expect(wrapper.find(FormControl).prop('disabled')).toBe(true);
 });
 
+test('<DateField> - renders an Input with correct readOnly state', () => {
+  const element = <DateField name="x" inputProps={{ readOnly: true }} />;
+  const wrapper = mount(element, createContext({ x: { type: Date } }));
+
+  expect(wrapper.find(Input).prop('inputProps')!.readOnly).toBe(true);
+});
+
 test('<DateField> - renders a Input with correct label (specified)', () => {
   const element = <DateField name="x" label="DateFieldLabel" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));

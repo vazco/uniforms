@@ -1,3 +1,7 @@
+## Next
+
+- **Added:** New `readOnly` prop in all form and field components. [\#674](https://github.com/vazco/uniforms/issues/674)
+
 ## [v3.0.1](https://github.com/vazco/uniforms/tree/v3.0.1) (2021-01-28)
 
 - **Fixed:** Missing `step` prop in `NumField` in `uniforms-material`. [\#855](https://github.com/vazco/uniforms/issues/855)

@@ -163,6 +163,7 @@ However, `BaseForm` is not self-managed, so you won't be able to type anything u
 |    `onChange`     |                                              Field change action. It receives two arguments: key and value, where the key is a dot-separated path to the changed field and value is a requested value.                                               |
 |    `onSubmit`     |               Submit action. When the form is submitted manually or by an HTML5 event, then it's called with the current model. **Note:** use `Promise` to return values and errors - synchronous `return` and `throw` are disallowed.               |
 |   `placeholder`   |                                                              Default placeholder prop for all fields. By default it's false - set it to true to enable placeholders for the whole form.                                                              |
+|    `readOnly`     |                                                                   Default `readOnly` prop for all fields. By default it's false - set it to true to make the whole form read-only.                                                                   |
 |     `schema`      |                                                                               Form schema. It's used for form generation in QuickForm and validation in ValidatedForm.                                                                               |
 | `showInlineError` |                               Default `showInlineError` prop for all fields. By default it's false - set it to true to enable inline errors for the whole form. Available in: antd, bootstrap3, bootstrap4, semantic.                                |
 
@@ -204,6 +205,7 @@ import { BaseForm } from 'uniforms'; // Or from the theme package.
   onChange={(key, value) => console.log(key, value)}
   onSubmit={model => db.saveThatReturnsPromiseOrNothing(model)}
   placeholder={false}
+  readOnly={false}
   schema={myFormSchema}
   showInlineError
   ref={form => {

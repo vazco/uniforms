@@ -47,12 +47,16 @@ function Select(props: SelectFieldProps) {
       <Group
         disabled={props.disabled}
         name={props.name}
-        onChange={
-          props.fieldType === Array
-            ? // FIXME: Argument type depends on `props.fieldType`.
-              (value: any) => props.onChange(value)
-            : (event: any) => props.onChange(event.target.value)
-        }
+        onChange={(eventOrValue: any) => {
+          if (!props.readOnly) {
+            props.onChange(
+              // FIXME: Argument type depends on `props.fieldType`.
+              props.fieldType === Array
+                ? eventOrValue
+                : eventOrValue.target.value,
+            );
+          }
+        }}
         options={props.allowedValues!.map(value => ({
           disabled: props.disableItem?.(value),
           label: props.transform ? props.transform(value) : value,
@@ -67,7 +71,11 @@ function Select(props: SelectFieldProps) {
         disabled={props.disabled}
         mode={props.fieldType === Array ? 'multiple' : undefined}
         name={props.name}
-        onChange={value => props.onChange(value)}
+        onChange={value => {
+          if (!props.readOnly) {
+            props.onChange(value);
+          }
+        }}
         placeholder={props.placeholder}
         // @ts-ignore: Incorrect `inputRef` type.
         ref={props.inputRef}

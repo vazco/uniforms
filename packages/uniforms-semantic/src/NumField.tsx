@@ -32,6 +32,7 @@ function Num({
   name,
   onChange,
   placeholder,
+  readOnly,
   required,
   showInlineError,
   step,
@@ -66,6 +67,7 @@ function Num({
             onChange(isNaN(value) ? undefined : value);
           }}
           placeholder={placeholder}
+          readOnly={readOnly}
           ref={inputRef}
           step={step || (decimal ? 0.01 : 1)}
           type="number"

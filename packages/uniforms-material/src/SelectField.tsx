@@ -70,6 +70,7 @@ function Select(props: SelectFieldProps) {
       legend,
       name,
       onChange,
+      readOnly,
       transform,
     } = props;
 
@@ -91,7 +92,9 @@ function Select(props: SelectFieldProps) {
         <RadioGroup
           id={id}
           name={name}
-          onChange={event => disabled || onChange(event.target.value)}
+          onChange={event =>
+            disabled || readOnly || onChange(event.target.value)
+          }
           ref={inputRef}
           value={value ?? ''}
         >
@@ -116,7 +119,9 @@ function Select(props: SelectFieldProps) {
                   checked={value.includes(item)}
                   id={`${id}-${escape(item)}`}
                   name={name}
-                  onChange={() => disabled || onChange(xor([item], value))}
+                  onChange={() =>
+                    disabled || readOnly || onChange(xor([item], value))
+                  }
                   ref={inputRef}
                   value={name}
                   {...filteredProps}
@@ -157,6 +162,7 @@ function Select(props: SelectFieldProps) {
     native,
     onChange,
     placeholder,
+    readOnly,
     required,
     showInlineError,
     transform,
@@ -192,6 +198,7 @@ function Select(props: SelectFieldProps) {
       margin={margin}
       onChange={event =>
         disabled ||
+        readOnly ||
         onChange(event.target.value !== '' ? event.target.value : undefined)
       }
       required={required}

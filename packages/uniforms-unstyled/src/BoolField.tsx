@@ -14,6 +14,7 @@ function Bool({
   label,
   name,
   onChange,
+  readOnly,
   value,
   ...props
 }: BoolFieldProps) {
@@ -24,13 +25,7 @@ function Bool({
         disabled={disabled}
         id={id}
         name={name}
-        onChange={
-          disabled
-            ? undefined
-            : () => {
-                onChange(!value);
-              }
-        }
+        onChange={() => !disabled && !readOnly && onChange(!value)}
         ref={inputRef}
         type="checkbox"
       />

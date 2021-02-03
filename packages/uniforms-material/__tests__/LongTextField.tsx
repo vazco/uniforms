@@ -20,6 +20,14 @@ test('<LongTextField> - renders a TextField with correct disabled state', () => 
   expect(wrapper.find(TextField).prop('disabled')).toBe(true);
 });
 
+test('<LongTextField> - renders a TextField with correct readOnly state', () => {
+  const element = <LongTextField name="x" inputProps={{ readOnly: true }} />;
+  const wrapper = mount(element, createContext({ x: { type: String } }));
+
+  expect(wrapper.find(TextField)).toHaveLength(1);
+  expect(wrapper.find(TextField).prop('inputProps')!.readOnly).toBe(true);
+});
+
 test('<LongTextField> - renders a TextField with correct id (inherited)', () => {
   const element = <LongTextField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));

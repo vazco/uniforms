@@ -9,6 +9,7 @@ export type SubmitFieldProps = Override<
 export default function SubmitField({
   disabled,
   inputRef,
+  readOnly,
   value,
   ...props
 }: SubmitFieldProps) {
@@ -17,6 +18,7 @@ export default function SubmitField({
   return (
     <input
       disabled={disabled === undefined ? !!(error || state.disabled) : disabled}
+      readOnly={readOnly}
       ref={inputRef}
       type="submit"
       {...(value ? { value } : {})}

@@ -14,7 +14,13 @@ export type ListDelFieldProps = FieldProps<
   { icon?: ReactNode }
 >;
 
-function ListDel({ disabled, icon = '-', name, ...props }: ListDelFieldProps) {
+function ListDel({
+  disabled,
+  icon = '-',
+  name,
+  readOnly,
+  ...props
+}: ListDelFieldProps) {
   const nameParts = joinName(null, name);
   const nameIndex = +nameParts[nameParts.length - 1];
   const parentName = joinName(nameParts.slice(0, -1));
@@ -32,9 +38,11 @@ function ListDel({ disabled, icon = '-', name, ...props }: ListDelFieldProps) {
       {...filterDOMProps(props)}
       disabled={!limitNotReached}
       onClick={() => {
-        const value = parent.value!.slice();
-        value.splice(nameIndex, 1);
-        parent.onChange(value);
+        if (!readOnly) {
+          const value = parent.value!.slice();
+          value.splice(nameIndex, 1);
+          parent.onChange(value);
+        }
       }}
     >
       {icon}

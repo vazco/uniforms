@@ -19,6 +19,14 @@ test('<LongTextField> - renders a textarea with correct disabled state', () => {
   expect(wrapper.find('textarea').prop('disabled')).toBe(true);
 });
 
+test('<LongTextField> - renders a textarea with correct readOnly state', () => {
+  const element = <LongTextField name="x" readOnly />;
+  const wrapper = mount(element, createContext({ x: { type: String } }));
+
+  expect(wrapper.find('textarea')).toHaveLength(1);
+  expect(wrapper.find('textarea').prop('readOnly')).toBe(true);
+});
+
 test('<LongTextField> - renders a textarea with correct id (inherited)', () => {
   const element = <LongTextField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));

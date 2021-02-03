@@ -19,6 +19,7 @@ function LongText({
   name,
   onChange,
   placeholder,
+  readOnly,
   required,
   showInlineError,
   value,
@@ -37,6 +38,7 @@ function LongText({
         name={name}
         onChange={event => onChange(event.target.value)}
         placeholder={placeholder}
+        readOnly={readOnly}
         ref={inputRef}
         value={value ?? ''}
       />
