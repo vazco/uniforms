@@ -135,3 +135,12 @@ test('<AutoField> - uses Component (context)', () => {
   expect(FieldA).toHaveBeenCalledTimes(1);
   expect(FieldB).toHaveBeenCalledTimes(1);
 });
+
+test('<AutoField> - uses Component (invalid)', () => {
+  const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+  expect(() => {
+    const element = <AutoField name="x" />;
+    mount(element, createContext({ x: { type: Symbol } }));
+  }).toThrow(/Unsupported field type:/);
+  spy.mockRestore();
+});
