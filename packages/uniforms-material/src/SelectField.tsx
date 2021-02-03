@@ -10,7 +10,7 @@ import Switch, { SwitchProps } from '@material-ui/core/Switch';
 import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import omit from 'lodash/omit';
 import xor from 'lodash/xor';
-import React, { ReactNode, Ref } from 'react';
+import React, { Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';

@@ -6,7 +6,7 @@
   ],
   "overrides": [
     {
-      "files": ["**/__mocks__/**/*", "**/__tests__/*"],
+      "files": ["**/__mocks__/**/*", "**/__tests__/**/*"],
       "env": {
         "jest": true
       }
@@ -57,7 +57,6 @@
     "@typescript-eslint/no-unsafe-call": "off",
     "@typescript-eslint/no-unsafe-member-access": "off",
     "@typescript-eslint/no-unsafe-return": "off",
-    "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-use-before-define": "off",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/require-await": "off",
@@ -70,6 +69,7 @@
     "react/prop-types": "off"
   },
   "settings": {
+    "import/core-modules": ["meteor/aldeed:simple-schema", "meteor/check"],
     "import/resolver": {
       "typescript": {}
     },

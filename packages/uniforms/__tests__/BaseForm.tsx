@@ -257,7 +257,8 @@ describe('BaseForm', () => {
     });
 
     it('sets `submitting` state while submitting', async () => {
-      let resolveSubmit = () => {};
+      // FIXME: It should say `() => void`.
+      let resolveSubmit: (...args: any[]) => void = () => {};
       wrapper.setProps({
         onSubmit: () => new Promise(resolve => (resolveSubmit = resolve)),
       });

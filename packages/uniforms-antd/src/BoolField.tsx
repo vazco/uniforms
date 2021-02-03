@@ -14,8 +14,7 @@ export type BoolFieldProps = FieldProps<
   {
     checkbox?: boolean;
     checkedChildren?: ReactNode;
-    // FIXME: `Switch` is a value and exporting `typeof Switch` type is impossible.
-    inputRef?: Ref<Checkbox | typeof Switch | any>;
+    inputRef?: Ref<typeof Checkbox | typeof Switch | any>;
     unCheckedChildren?: ReactNode;
   }
 >;

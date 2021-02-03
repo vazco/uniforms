@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { ComponentType } from 'react';
+import React from 'react';
 import { Download, GitBranch, Star } from 'react-feather';
 
 import { Badge } from '../../components/Badge';

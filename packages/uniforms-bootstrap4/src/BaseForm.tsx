@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import omit from 'lodash/omit';
 import { BaseForm } from 'uniforms';
 
 function Bootstrap4(parent: any): any {
@@ -8,24 +9,16 @@ function Bootstrap4(parent: any): any {
     static displayName = `Bootstrap4${parent.displayName}`;
 
     getContextState() {
-      return {
-        ...super.getContextState(),
-        grid: this.props.grid,
-      };
+      return { ...super.getContextState(), grid: this.props.grid };
     }
 
     getNativeFormProps() {
       const error = this.getContextError();
-      const {
-        className,
-        grid, // eslint-disable-line no-unused-vars
-
-        ...props
-      } = super.getNativeFormProps();
+      const props = super.getNativeFormProps();
 
       return {
-        ...props,
-        className: classnames('form', { error }, className),
+        ...omit(props, ['grid']),
+        className: classnames('form', { error }, props.className),
       };
     }
   }

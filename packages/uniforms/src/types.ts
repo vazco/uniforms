@@ -2,7 +2,7 @@ import { HTMLProps, ReactNode, SyntheticEvent } from 'react';
 
 import { Bridge } from './Bridge';
 
-export type ChangedMap<T> = T extends {}
+export type ChangedMap<T> = T extends object
   ? { [P in keyof T]?: ChangedMap<T[P]> }
   : Record<string, void>;
 
@@ -28,10 +28,10 @@ export type Context<Model> = {
 };
 
 export type DeepPartial<T> = {
-  [P in keyof T]?: T[P] extends {} ? DeepPartial<T[P]> : T[P];
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
 };
 
-export type FieldProps<Value, Base, Extension = {}> = Override<
+export type FieldProps<Value, Base, Extension = object> = Override<
   Base,
   GuaranteedProps<Value> & Extension
 >;
@@ -57,7 +57,7 @@ export type GuaranteedProps<Value> = {
   value?: Value;
 };
 
-export type HTMLFieldProps<Value, Element, Extension = {}> = FieldProps<
+export type HTMLFieldProps<Value, Element, Extension = object> = FieldProps<
   Value,
   HTMLProps<Element>,
   Extension

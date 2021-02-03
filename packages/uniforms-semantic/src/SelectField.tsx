@@ -43,6 +43,7 @@ function Select({
   value,
   ...props
 }: SelectFieldProps) {
+  const multiple = fieldType === Array;
   return (
     <div
       className={classnames({ disabled, error, required }, className, 'field')}
@@ -51,20 +52,18 @@ function Select({
       {label && <label htmlFor={id}>{label}</label>}
 
       {/* TODO: Better handling of these props. */}
-      {checkboxes || fieldType === Array ? (
+      {checkboxes ? (
         allowedValues?.map(item => (
           <div className="field" key={item}>
             <div className="ui checkbox">
               <input
-                checked={
-                  fieldType === Array ? value?.includes(item) : value === item
-                }
+                checked={multiple ? value?.includes(item) : value === item}
                 disabled={disableItem?.(item) || disabled}
                 id={`${id}-${escape(item)}`}
                 name={name}
                 onChange={() => {
                   if (!readOnly) {
-                    onChange(fieldType === Array ? xor([item], value) : item);
+                    onChange(multiple ? xor([item], value) : item);
                   }
                 }}
                 type="checkbox"
@@ -81,18 +80,23 @@ function Select({
           className="ui selection dropdown"
           disabled={disabled}
           id={id}
+          multiple={multiple}
           name={name}
           onChange={event => {
             if (!readOnly) {
-              onChange(
-                event.target.value !== '' ? event.target.value : undefined,
-              );
+              const item = event.target.value;
+              if (multiple) {
+                const clear = event.target.selectedIndex === -1;
+                onChange(clear ? [] : xor([item], value));
+              } else {
+                onChange(item !== '' ? item : undefined);
+              }
             }
           }}
           ref={inputRef}
           value={value ?? ''}
         >
-          {(!!placeholder || !required || value === undefined) && (
+          {(!!placeholder || !required || value === undefined) && !multiple && (
             <option value="" disabled={required} hidden={required}>
               {placeholder || label}
             </option>

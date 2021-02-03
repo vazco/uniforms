@@ -16,7 +16,7 @@ function ListDel({
   icon = <DeleteOutlined />,
   name,
   readOnly,
-  shape = 'circle-outline',
+  shape = 'circle',
   size = 'small',
   type = 'ghost',
   ...props

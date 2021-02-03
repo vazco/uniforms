@@ -14,7 +14,6 @@ function Nest({
   fields,
   itemProps,
   label,
-  name,
   ...props
 }: NestFieldProps) {
   return (

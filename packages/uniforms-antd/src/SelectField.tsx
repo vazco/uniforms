@@ -17,7 +17,7 @@ type CheckboxesProps = FieldProps<
     allowedValues?: CheckboxValueType[];
     checkboxes: true;
     disableItem?(value: CheckboxValueType): boolean;
-    inputRef?: Ref<CheckboxGroup | typeof RadioGroup>;
+    inputRef?: Ref<typeof CheckboxGroup | typeof RadioGroup>;
     required?: boolean;
     transform?(value: CheckboxValueType): string;
   }
@@ -30,7 +30,7 @@ type SelectProps = FieldProps<
     allowedValues?: string[];
     checkboxes?: false;
     disableItem?(value: CheckboxValueType): boolean;
-    inputRef?: Ref<SelectAntD<string | string[]>>;
+    inputRef?: Ref<typeof SelectAntD>;
     required?: boolean;
     transform?(value: string): string;
   }
@@ -43,6 +43,7 @@ function Select(props: SelectFieldProps) {
   return wrapField(
     props,
     props.checkboxes ? (
+      // @ts-ignore: Incorrect `value` type.
       <Group
         disabled={props.disabled}
         name={props.name}
@@ -69,7 +70,6 @@ function Select(props: SelectFieldProps) {
         allowClear={!props.required}
         disabled={props.disabled}
         mode={props.fieldType === Array ? 'multiple' : undefined}
-        // @ts-ignore: There's no `name` property on Select?
         name={props.name}
         onChange={value => {
           if (!props.readOnly) {
@@ -77,6 +77,7 @@ function Select(props: SelectFieldProps) {
           }
         }}
         placeholder={props.placeholder}
+        // @ts-ignore: Incorrect `inputRef` type.
         ref={props.inputRef}
         value={
           props.fieldType === Array
@@ -87,7 +88,7 @@ function Select(props: SelectFieldProps) {
         }
         {...filterDOMProps(props)}
       >
-        {props.allowedValues!.map(value => (
+        {props.allowedValues?.map(value => (
           <SelectAntD.Option
             disabled={props.disableItem?.(value)}
             key={value}

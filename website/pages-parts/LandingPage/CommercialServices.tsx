@@ -1,4 +1,3 @@
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import classNames from 'classnames';
 import React from 'react';
 
@@ -8,9 +7,6 @@ import { Subtitle } from '../../components/Subtitle';
 import styles from '../../index.module.css';
 
 export function CommercialServices() {
-  const context = useDocusaurusContext();
-  const { email } = context.siteConfig.customFields;
-
   return (
     <div
       className={classNames(
@@ -40,7 +36,9 @@ export function CommercialServices() {
                 <li>Solutions built on top of uniforms&nbsp;➤</li>
               </ul>
               <div className={styles['center-if-sm']}>
-                <Button to="https://www.vazco.eu/contact/">Contact us</Button>
+                <Button to="https://www.vazco.eu/form-heavy-workflow-management-apps">
+                  Contact us
+                </Button>
               </div>
             </div>
             <div

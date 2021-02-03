@@ -23,7 +23,7 @@ Most of the time you’ll be using either AutoForm or ValidatedForm, but there a
   <small style={{display: 'block'}}>Screenshot of React DevTools when lots of HOC’s are applied to a component.</small>
 </p>
 
-> I wanted to achieve the same functionality as with multiple HOCs, but within one component. To be honest, readability is more important than performance. In short, I’ve reached (more or less) traits with ES6 clasess. The result?
+> I wanted to achieve the same functionality as with multiple HOCs, but within one component. To be honest, readability is more important than performance. In short, I’ve reached (more or less) traits with ES6 classes. The result?
 >
 > -- <cite>[Radosław Miernik](https://github.com/radekmie)</cite>
 

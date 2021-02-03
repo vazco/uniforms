@@ -18,7 +18,6 @@ function SubmitField({
   disabled,
   inputClassName,
   inputRef,
-  name,
   readOnly,
   value,
   wrapClassName,

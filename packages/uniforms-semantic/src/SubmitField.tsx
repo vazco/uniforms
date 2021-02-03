@@ -11,7 +11,6 @@ export default function SubmitField({
   className,
   disabled,
   inputRef,
-  name,
   readOnly,
   value,
   ...props

@@ -74,25 +74,25 @@ however, there will be validation checks.
 import { ValidatedForm } from 'uniforms'; // Or from the theme package.
 
 <ValidatedForm
-  onValidate={(model, error, callback) => {
+  onValidate={async (model, error) => {
     // You can either ignore validation error...
     if (omitValidation(model)) {
-      return callback(null);
+      return null;
     }
 
     // ...or any additional validation if an error is already there...
-    if (error) {
-      return callback();
+    if (isSomeSpecialCase(error)) {
+      return MyAPI.checkOtherCondition(model);
     }
 
     // ...or feed it with another error.
-    MyAPI.validate(model, error => callback(error || null));
+    return MyAPI.validate(model);
   }}
   validate="onChangeAfterSubmit"
   validator={{ clean: true }}
   ref={form => {
     // Validate form with the current model.
-    //   Returns a Promise, which rejects with an validation error or
+    //   Returns a Promise, which rejects with a validation error or
     //   resolves without any value. Note, that it resolves/rejects AFTER
     //   the component is rerendered.
     form.validate();
@@ -234,19 +234,19 @@ import { BaseForm } from 'uniforms'; // Or from the theme package.
 `AutoForm` and `ValidatedForm` both accept an `onValidate` prop. It can be used to create an asynchronous validation:
 
 ```js
-const onValidate = (model, error, callback) => {
+const onValidate = async (model, error) => {
   // You can either ignore validation error...
   if (omitValidation(model)) {
-    return callback(null);
+    return null;
   }
 
   // ...or any additional validation if an error is already there...
-  if (error) {
-    return callback();
+  if (isSomeSpecialCase(error)) {
+    return MyAPI.checkOtherCondition(model);
   }
 
   // ...or feed it with another error.
-  MyAPI.validate(model, error => callback(error || null));
+  MyAPI.validate(model);
 };
 
 // Later...

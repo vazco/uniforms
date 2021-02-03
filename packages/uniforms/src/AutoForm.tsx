@@ -4,6 +4,7 @@ import omit from 'lodash/omit';
 import setWith from 'lodash/setWith';
 
 // FIXME: This import is needed to correctly build AutoForm.d.ts file.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { BaseForm } from './BaseForm';
 import {
   ValidatedQuickForm,
@@ -53,6 +54,7 @@ export function Auto<Base extends typeof ValidatedQuickForm>(Base: Base) {
       return omit(super.getNativeFormProps(), ['onChangeModel']);
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     getModel(mode: ModelTransformMode) {
       return this.state.model;
     }

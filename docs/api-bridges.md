@@ -20,8 +20,8 @@ Currently available bridges:
 
 ```js
 import { GraphQLBridge } from 'uniforms-bridge-graphql';
-import { buildASTSchema } from 'graphql';
-import { parse } from 'graphql';
+import { buildASTSchema } from 'graphql/utilities';
+import { parse } from 'graphql/language/parser';
 
 const schema = `
     type Author {

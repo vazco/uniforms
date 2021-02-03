@@ -34,10 +34,10 @@ The `connectField` function accepts two arguments: the first one is a component 
 
 The table below lists all available options:
 
-|      Name      |         Type         |                                                          Description                                                          |
-| :------------: | :------------------: | :---------------------------------------------------------------------------------------------------------------------------: |
-| `initialValue` |        `bool`        | Initial value check. If truthy, then after the first render defaultValue is set as value if no value is provided (undefined). |
-|     `kind`     | `'leaf'` or `'node'` |                             Defines field type. If you are not sure which one to use, use `node`.                             |
+|      Name      |         Type         |                                                             Description                                                              |
+| :------------: | :------------------: | :----------------------------------------------------------------------------------------------------------------------------------: |
+| `initialValue` |        `bool`        | Initial value check. If `true`, then after the first render the default value is set as value if no value is provided (`undefined`). |
+|     `kind`     | `'leaf'` or `'node'` |                                Defines field type. If you are not sure which one to use, use `node`.                                 |
 
 ## `changedKeys(root, valueA, valueB)`
 
@@ -49,7 +49,7 @@ import { changedKeys } from 'uniforms';
 const arrayOfChangedKeys = changedKeys(root, valueA, valueB);
 ```
 
-**Note:** For more examples, see `changedKeys` [tests](https://github.com/vazco/uniforms/blob/master/packages/uniforms/__tests__/changedKeys.js).
+**Note:** For more examples, see `changedKeys` [tests](https://github.com/vazco/uniforms/blob/master/packages/uniforms/__tests__/changedKeys.ts).
 
 ## `filterDOMProps(props)`
 

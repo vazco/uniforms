@@ -1,9 +1,9 @@
 import invariant from 'invariant';
 import cloneDeep from 'lodash/cloneDeep';
 import memoize from 'lodash/memoize';
-import { Bridge, joinName } from 'uniforms';
 // @ts-ignore
-import { SimpleSchema } from 'meteor/aldeed:simple-schema'; // eslint-disable-line
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Bridge, joinName } from 'uniforms';
 
 export default class SimpleSchemaBridge extends Bridge {
   constructor(public schema: SimpleSchema) {
@@ -85,8 +85,7 @@ export default class SimpleSchemaBridge extends Bridge {
 
   // eslint-disable-next-line complexity
   getProps(name: string, props: Record<string, any> = {}) {
-    // Type should be omitted.
-    // eslint-disable-next-line no-unused-vars, prefer-const
+    // eslint-disable-next-line prefer-const
     let { optional, type, uniforms, ...field } = this.getField(name);
 
     field = { ...field, required: !optional };

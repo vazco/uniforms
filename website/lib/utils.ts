@@ -12,7 +12,7 @@ const compress = (string: string) =>
 const decompress = (string: string) =>
   LZString.decompressFromBase64(string.replace(/-/g, '+').replace(/_/g, '/'));
 
-export function updateQuery(state: {}) {
+export function updateQuery(state: object) {
   try {
     const query = pick(state, URL_KEYS);
     const serialized = JSON.stringify(query);

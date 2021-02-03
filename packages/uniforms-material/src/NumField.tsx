@@ -5,7 +5,7 @@ import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 export type NumFieldProps = FieldProps<
   number,
   StandardTextFieldProps,
-  { decimal?: boolean; max?: number; min?: number }
+  { decimal?: boolean; max?: number; min?: number; step?: number }
 >;
 
 function Num({
@@ -24,6 +24,7 @@ function Num({
   readOnly,
   placeholder,
   showInlineError,
+  step = decimal ? 0.01 : 1,
   value,
   ...props
 }: NumFieldProps) {
@@ -37,7 +38,7 @@ function Num({
         min,
         max,
         readOnly,
-        step: decimal ? 0.01 : 1,
+        step,
         ...inputProps,
       }}
       label={label}

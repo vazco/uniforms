@@ -293,9 +293,11 @@ test('<SelectField> - disabled items (options) based on predicate', () => {
     }),
   );
 
-  expect(wrapper.find(Select).prop('children')).toHaveLength(2);
-  expect(wrapper.find(Select).prop('children')[0].props.disabled).toBe(true);
-  expect(wrapper.find(Select).prop('children')[1].props.disabled).toBe(false);
+  // FIXME: The `children` prop is not indexable on its own.
+  const children: any = wrapper.find(Select).prop('children');
+  expect(children).toHaveLength(2);
+  expect(children[0].props.disabled).toBe(true);
+  expect(children[1].props.disabled).toBe(false);
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes', () => {

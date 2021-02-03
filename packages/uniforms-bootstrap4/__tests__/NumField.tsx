@@ -91,6 +91,14 @@ test('<NumField> - renders an input with correct step (integer)', () => {
   expect(wrapper.find('input').prop('step')).toBe(1);
 });
 
+test('<NumField> - renders an input with correct step (set)', () => {
+  const element = <NumField name="x" decimal={false} step={3} />;
+  const wrapper = mount(element, createContext({ x: { type: Number } }));
+
+  expect(wrapper.find('input')).toHaveLength(1);
+  expect(wrapper.find('input').prop('step')).toBe(3);
+});
+
 test('<NumField> - renders an input with correct type', () => {
   const element = <NumField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));

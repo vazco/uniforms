@@ -28,11 +28,9 @@ export type SelectFieldProps = HTMLFieldProps<
 function Select({
   allowedValues,
   checkboxes,
-  className,
   disableItem,
   disabled,
   error,
-  errorMessage,
   fieldType,
   id,
   inline,
@@ -44,14 +42,14 @@ function Select({
   placeholder,
   readOnly,
   required,
-  showInlineError,
   transform,
   value,
   ...props
 }: SelectFieldProps) {
+  const multiple = fieldType === Array;
   return wrapField(
     { ...props, id, label },
-    checkboxes || fieldType === Array ? (
+    checkboxes ? (
       allowedValues?.map(item => (
         <div
           key={item}
@@ -86,18 +84,23 @@ function Select({
         })}
         disabled={disabled}
         id={id}
+        multiple={multiple}
         name={name}
         onChange={event => {
           if (!readOnly) {
-            onChange(
-              event.target.value !== '' ? event.target.value : undefined,
-            );
+            const item = event.target.value;
+            if (multiple) {
+              const clear = event.target.selectedIndex === -1;
+              onChange(clear ? [] : xor([item], value));
+            } else {
+              onChange(item !== '' ? item : undefined);
+            }
           }
         }}
         ref={inputRef}
         value={value ?? ''}
       >
-        {(!!placeholder || !required || value === undefined) && (
+        {(!!placeholder || !required || value === undefined) && !multiple && (
           <option value="" disabled={required} hidden={required}>
             {placeholder || label}
           </option>

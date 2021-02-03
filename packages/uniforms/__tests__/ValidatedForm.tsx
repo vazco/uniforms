@@ -1,4 +1,3 @@
-import { ReactWrapper } from 'enzyme';
 import React from 'react';
 import { ValidatedForm } from 'uniforms';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
