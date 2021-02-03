@@ -45,6 +45,7 @@ function Select({
   value,
   ...props
 }: SelectFieldProps) {
+  const multiple = fieldType === Array;
   return wrapField(
     {
       ...props,
@@ -54,7 +55,7 @@ function Select({
       label,
       required,
     },
-    checkboxes || fieldType === Array ? (
+    checkboxes ? (
       allowedValues?.map(item => (
         <div
           key={item}
@@ -65,15 +66,11 @@ function Select({
         >
           <label htmlFor={`${id}-${escape(item)}`}>
             <input
-              checked={
-                fieldType === Array ? value?.includes(item) : value === item
-              }
+              checked={multiple ? value?.includes(item) : value === item}
               disabled={disableItem?.(item) || disabled}
               id={`${id}-${escape(item)}`}
               name={name}
-              onChange={() =>
-                onChange(fieldType === Array ? xor([item], value) : item)
-              }
+              onChange={() => onChange(multiple ? xor([item], value) : item)}
               type="checkbox"
             />
             {transform ? transform(item) : item}
@@ -87,22 +84,33 @@ function Select({
         })}
         disabled={disabled}
         id={id}
+        multiple={multiple}
         name={name}
-        onChange={event =>
-          onChange(event.target.value !== '' ? event.target.value : undefined)
-        }
+        onChange={event => {
+          const item = event.target.value;
+          if (multiple) {
+            const clear = event.target.selectedIndex === -1;
+            onChange(clear ? [] : xor([item], value));
+          } else {
+            onChange(item !== '' ? item : undefined);
+          }
+        }}
         ref={inputRef}
         value={value ?? ''}
       >
-        {(!!placeholder || !required || value === undefined) && (
+        {(!!placeholder || !required || value === undefined) && !multiple && (
           <option value="" disabled={required} hidden={required}>
             {placeholder || label}
           </option>
         )}
 
-        {allowedValues?.map(value => (
-          <option disabled={disableItem?.(value)} key={value} value={value}>
-            {transform ? transform(value) : value}
+        {allowedValues?.map(allowedValue => (
+          <option
+            disabled={disableItem?.(allowedValue)}
+            key={allowedValue}
+            value={allowedValue}
+          >
+            {transform ? transform(allowedValue) : allowedValue}
           </option>
         ))}
       </select>

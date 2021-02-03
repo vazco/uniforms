@@ -80,7 +80,7 @@ function Select(props: SelectFieldProps) {
         }
         {...filterDOMProps(props)}
       >
-        {props.allowedValues!.map(value => (
+        {props.allowedValues?.map(value => (
           <SelectAntD.Option
             disabled={props.disableItem?.(value)}
             key={value}

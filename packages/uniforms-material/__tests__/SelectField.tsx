@@ -322,6 +322,51 @@ test('<SelectField> - renders with correct classnames', () => {
   );
 });
 
+test('<SelectField> - renders a multiselect with correct value (default)', () => {
+  const element = <SelectField name="x" />;
+  const wrapper = mount(
+    element,
+    createContext({
+      x: { type: Array, allowedValues: ['a', 'b'] },
+      'x.$': { type: String },
+    }),
+  );
+
+  expect(wrapper.find(Select)).toHaveLength(1);
+  expect(wrapper.find(Select).prop('value')).toStrictEqual([]);
+});
+
+test('<SelectField> - renders a multiselect with correct value (model)', () => {
+  const element = <SelectField name="x" />;
+  const wrapper = mount(
+    element,
+    createContext(
+      {
+        x: { type: Array, allowedValues: ['a', 'b'] },
+        'x.$': { type: String },
+      },
+      { model: { x: ['b'] } },
+    ),
+  );
+
+  expect(wrapper.find(Select)).toHaveLength(1);
+  expect(wrapper.find(Select).prop('value')).toStrictEqual(['b']);
+});
+
+test('<SelectField> - renders a multiselect with correct value (specified)', () => {
+  const element = <SelectField name="x" value={['b']} />;
+  const wrapper = mount(
+    element,
+    createContext({
+      x: { type: Array, allowedValues: ['a', 'b'] },
+      'x.$': { type: String },
+    }),
+  );
+
+  expect(wrapper.find(Select)).toHaveLength(1);
+  expect(wrapper.find(Select).prop('value')).toStrictEqual(['b']);
+});
+
 test('<SelectField checkboxes> - renders a set of Radio buttons', () => {
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
