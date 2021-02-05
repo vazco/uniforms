@@ -241,8 +241,6 @@ class PlaygroundSelect extends Component<any, any> {
     const { allowedValues = [], onChange, transform, value } = this.props;
 
     return (
-      // TODO[jsx-a11y]
-      // eslint-disable-next-line jsx-a11y/no-onchange
       <select onChange={event => onChange(event.target.value)} value={value}>
         {allowedValues.map((value: any) => (
           <option key={value} value={value}>

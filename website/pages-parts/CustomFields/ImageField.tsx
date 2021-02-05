@@ -11,8 +11,6 @@ function Image({ onChange, value }: ImageProps) {
     <div className="ImageField">
       <label htmlFor="file-input">
         <div>Choose your photo</div>
-        {/* TODO[jsx-a11y] */}
-        {/* eslint-disable-next-line jsx-a11y/alt-text */}
         <img
           style={{ cursor: 'pointer', width: '150px', height: '150px' }}
           src={value || 'https://picsum.photos/150?grayscale'}

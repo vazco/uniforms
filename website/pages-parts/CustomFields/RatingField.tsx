@@ -18,8 +18,6 @@ function Rating({
   return (
     <div className={classnames('ui', { disabled, required }, className)}>
       {Array.from({ length: max }, (_, index) => index + 1).map(index => (
-        // TODO[jsx-a11y]
-        // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
         <span
           style={{ fontSize: 40, cursor: 'pointer' }}
           key={index}

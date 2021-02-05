@@ -24,8 +24,6 @@ export function Badge({
 }: BadgeProps) {
   return (
     <Link to={to} className={classNames(styles.badge)}>
-      {/* TODO[jsx-a11y] */}
-      {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
       <img
         className={styles['badge-image']}
         src={`assets/border-0${border}.svg`}
