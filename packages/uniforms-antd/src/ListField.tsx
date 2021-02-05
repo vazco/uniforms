@@ -1,5 +1,4 @@
 import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined';
-import Form from 'antd/lib/form';
 import Tooltip from 'antd/lib/tooltip';
 import classNames from 'classnames';
 import React, {
@@ -49,14 +48,14 @@ function List({
   wrapperCol,
   ...props
 }: ListFieldProps) {
-  const borderStyle = error
+  const wrapperStyle = error
     ? { borderColor: 'rgb(255, 85, 0)', ...style }
     : style;
 
   return (
     <div
       {...filterDOMProps(props)}
-      style={borderStyle}
+      style={wrapperStyle}
       className={classNames([className, 'ant-list', 'ant-list-bordered'])}
     >
       {!!label && (
@@ -72,6 +71,7 @@ function List({
           )}
         </div>
       )}
+
       {!!(error && showInlineError) && <div>{errorMessage}</div>}
 
       {value?.map((item, itemIndex) =>
