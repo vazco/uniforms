@@ -49,24 +49,9 @@ function List({
   wrapperCol,
   ...props
 }: ListFieldProps) {
-  const labelNode = !!label && (
-    <div>
-      {label}
-      {!!info && (
-        <span>
-          &nbsp;
-          <Tooltip title={info}>
-            <QuestionCircleOutlined />
-          </Tooltip>
-        </span>
-      )}
-    </div>
-  );
-
-  const borderStyle = {
-    ...(error ? { borderColor: 'rgb(255, 85, 0)' } : {}),
-    ...style,
-  };
+  const borderStyle = error
+    ? { borderColor: 'rgb(255, 85, 0)', ...style }
+    : style;
 
   return (
     <div
@@ -74,32 +59,36 @@ function List({
       style={borderStyle}
       className={classNames([className, 'ant-list', 'ant-list-bordered'])}
     >
-      <Form.Item
-        label={labelNode}
-        hasFeedback
-        style={{ marginBottom: 0 }}
-        validateStatus={error ? 'error' : ''}
-      >
-        <div style={{ ...(error ? { marginRight: '32px' } : {}) }}>
-          {!!(error && showInlineError) && <div>{errorMessage}</div>}
-
-          {value?.map((item, itemIndex) =>
-            Children.map(children, (child, childIndex) =>
-              isValidElement(child)
-                ? cloneElement(child, {
-                    key: `${itemIndex}-${childIndex}`,
-                    name: child.props.name?.replace('$', '' + itemIndex),
-                    labelCol,
-                    wrapperCol,
-                    ...itemProps,
-                  })
-                : child,
-            ),
+      {!!label && (
+        <div>
+          {label}
+          {!!info && (
+            <span>
+              &nbsp;
+              <Tooltip title={info}>
+                <QuestionCircleOutlined />
+              </Tooltip>
+            </span>
           )}
-
-          <ListAddField name="$" initialCount={initialCount} />
         </div>
-      </Form.Item>
+      )}
+      {!!(error && showInlineError) && <div>{errorMessage}</div>}
+
+      {value?.map((item, itemIndex) =>
+        Children.map(children, (child, childIndex) =>
+          isValidElement(child)
+            ? cloneElement(child, {
+                key: `${itemIndex}-${childIndex}`,
+                name: child.props.name?.replace('$', '' + itemIndex),
+                labelCol,
+                wrapperCol,
+                ...itemProps,
+              })
+            : child,
+        ),
+      )}
+
+      <ListAddField name="$" initialCount={initialCount} />
     </div>
   );
 }
