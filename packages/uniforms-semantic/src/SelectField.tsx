@@ -76,6 +76,8 @@ function Select({
           </div>
         ))
       ) : (
+        // TODO[jsx-a11y]
+        // eslint-disable-next-line jsx-a11y/no-onchange
         <select
           className="ui selection dropdown"
           disabled={disabled}

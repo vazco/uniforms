@@ -55,6 +55,8 @@ export function WhyUs() {
               <div className={classNames('row', styles.padding)}>
                 <div className="col">
                   <Oval className={styles.white}>
+                    {/* TODO[jsx-a11y] */}
+                    {/* eslint-disable-next-line jsx-a11y/alt-text */}
                     <img
                       src="assets/icon-01.svg"
                       className={styles['small-image']}
@@ -73,6 +75,8 @@ export function WhyUs() {
                 </div>
                 <div className="col">
                   <Oval className={styles.white}>
+                    {/* TODO[jsx-a11y] */}
+                    {/* eslint-disable-next-line jsx-a11y/alt-text */}
                     <img
                       src="assets/icon-02.svg"
                       className={styles['small-image']}

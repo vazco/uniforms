@@ -58,6 +58,8 @@ export function Footer() {
               </p>
             </Link>
             <a href="https://vazco.eu">
+              {/* TODO[jsx-a11y] */}
+              {/* eslint-disable-next-line jsx-a11y/alt-text */}
               <img className={styles.vazco} src="assets/vazco.svg" />
             </a>
             <br />

@@ -47,6 +47,8 @@ function SubmitField({
       {...filterDOMProps(props)}
     >
       {hasWrap && (
+        // TODO[jsx-a11y]
+        // eslint-disable-next-line jsx-a11y/label-has-associated-control
         <label
           className={classnames(
             'col-form-label',

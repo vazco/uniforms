@@ -8,6 +8,8 @@ export function ShowcaseCard() {
     <div
       className={classNames(styles['showcase-card'], styles['border-dashed'])}
     >
+      {/* TODO[jsx-a11y] */}
+      {/* eslint-disable-next-line jsx-a11y/alt-text */}
       <img src="img/uniforms.svg" />
       <p className={classNames(styles.text, styles.paragraph)}>
         A React library for building forms. Integrates with every schema and

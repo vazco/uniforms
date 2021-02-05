@@ -78,6 +78,8 @@ function Select({
         </div>
       ))
     ) : (
+      // TODO[jsx-a11y]
+      // eslint-disable-next-line jsx-a11y/no-onchange
       <select
         className={classnames(inputClassName, 'form-control', {
           'form-control-danger': error,

@@ -35,6 +35,8 @@ function ListDel({
     !disabled && !(parent.minCount! >= parent.value!.length);
 
   return (
+    // TODO[jsx-a11y]
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <span
       {...filterDOMProps(props)}
       className={classnames('badge badge-pill', className)}
