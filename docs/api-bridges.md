@@ -108,6 +108,34 @@ const schemaValidator = createValidator(schema);
 const bridge = new JSONSchemaBridge(schema, schemaValidator);
 ```
 
+### Note on `allOf`/`anyOf`/`oneOf`
+
+The current handling of `allOf`/`anyOf`/`oneOf` is not complete and does not work with all possible cases. For an in-detail discussion, see [\#863](https://github.com/vazco/uniforms/issues/863). How it works, is that only a few properties are being used:
+
+- `properties`, where all subfields are merged (last definition wins),
+- `required`, where all properties are accumulated, and
+- `type`, where the first one is being used.
+
+Below is an example of these implications:
+
+```json
+{
+  "type": "object",
+  "properties": {
+    // This will render `NumField` WITHOUT `min` nor `max` properties.
+    // It will be properly validated, but without any UI guidelines.
+    "foo": {
+      "type": "number",
+      "allOf": [{ "minimum": 0 }, { "maximum": 10 }]
+    },
+    // This will render as `TextField`.
+    "bar": {
+      "oneOf": [{ "type": "string" }, { "type": "number" }]
+    }
+  }
+}
+```
+
 ## `SimpleSchema2Bridge`
 
 ```js
