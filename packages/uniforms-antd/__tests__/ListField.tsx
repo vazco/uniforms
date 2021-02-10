@@ -118,6 +118,19 @@ test('<ListField> - renders children with correct name (value)', () => {
   expect(wrapper.find(ListItemField).at(1).prop('name')).toBe('1');
 });
 
+test('<ListField> - renders correct error text (specified)', () => {
+  const error = new Error();
+  const element = (
+    <ListField name="x" error={error} errorMessage="Error" showInlineError />
+  );
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Array }, 'x.$': { type: String } }),
+  );
+
+  expect(wrapper.find('div > div').at(0).text()).toBe('Error');
+});
+
 test('<ListField> - renders correct error style', () => {
   const error = new Error();
   const element = <ListField name="x" error={error} />;
