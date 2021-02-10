@@ -144,3 +144,19 @@ test('<ListField> - renders correct error style', () => {
     'rgb(255, 85, 0)',
   );
 });
+
+test('<ListField> - renders correct error style (with specified style prop)', () => {
+  const error = new Error();
+  const element = (
+    <ListField name="x" error={error} style={{ marginLeft: '8px' }} />
+  );
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Array }, 'x.$': { type: String } }),
+  );
+
+  expect(wrapper.find('div').at(0).prop('style')).toHaveProperty(
+    'marginLeft',
+    '8px',
+  );
+});
