@@ -4,6 +4,14 @@
   "license": "MIT",
   "main": "es5/index.js",
   "module": "es6/index.js",
+  "sideEffects": [
+    "es5/filterDOMProps.js",
+    "es5/randomIds.js",
+    "es6/filterDOMProps.js",
+    "es6/randomIds.js",
+    "src/filterDOMProps.ts",
+    "src/randomIds.ts"
+  ],
   "description": "Core package of uniforms.",
   "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms",
   "bugs": "https://github.com/vazco/uniforms/issues",

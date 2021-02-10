@@ -4,6 +4,11 @@
   "license": "MIT",
   "main": "es5/index.js",
   "module": "es6/index.js",
+  "sideEffects": [
+    "es5/register.js",
+    "es6/register.js",
+    "src/register.ts"
+  ],
   "description": "SimpleSchema bridge for uniforms.",
   "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-bridge-simple-schema",
   "bugs": "https://github.com/vazco/uniforms/issues",

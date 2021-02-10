@@ -1,3 +1,7 @@
+## Next
+
+- **Added:** The [`sideEffects`](https://webpack.js.org/guides/tree-shaking/) flag to let bundlers do better at tree shaking. [\#843](https://github.com/vazco/uniforms/issues/843)
+
 ## [v3.1.0](https://github.com/vazco/uniforms/tree/v3.1.0) (2021-02-03)
 
 - **Added:** New `readOnly` prop in all form and field components. [\#674](https://github.com/vazco/uniforms/issues/674)
