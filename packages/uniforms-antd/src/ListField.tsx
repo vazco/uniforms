@@ -32,6 +32,8 @@ const defaultStyle = {
   padding: '10px',
 };
 
+const errorStyle = { borderColor: 'rgb(255, 85, 0)' };
+
 function List({
   children = <ListItemField name="$" />,
   className,
@@ -49,7 +51,9 @@ function List({
   ...props
 }: ListFieldProps) {
   const wrapperStyle = error
-    ? { borderColor: 'rgb(255, 85, 0)', ...style }
+    ? style
+      ? { ...errorStyle, ...style }
+      : errorStyle
     : style;
 
   return (
