@@ -1,5 +1,7 @@
-## Next
+## [v3.2.0](https://github.com/vazco/uniforms/tree/v3.2.0) (2021-02-17)
 
+- **Added:** Error styling to `ListField` in `uniforms-antd`. [\#844](https://github.com/vazco/uniforms/issues/844)
+- **Added:** New `layout` prop in `BaseForm` in `uniforms-antd` to match AntD capabilities. [\#861](https://github.com/vazco/uniforms/issues/861)
 - **Added:** The [`sideEffects`](https://webpack.js.org/guides/tree-shaking/) flag to let bundlers do better at tree shaking. [\#843](https://github.com/vazco/uniforms/issues/843)
 
 ## [v3.1.0](https://github.com/vazco/uniforms/tree/v3.1.0) (2021-02-03)
