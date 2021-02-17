@@ -4,6 +4,7 @@
   "license": "MIT",
   "main": "es5/index.js",
   "module": "es6/index.js",
+  "sideEffects": false,
   "description": "Semantic UI components for uniforms.",
   "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-semantic",
   "bugs": "https://github.com/vazco/uniforms/issues",
