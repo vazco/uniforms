@@ -8,11 +8,15 @@ function AntD(parent: any): any {
     static displayName = `AntD${parent.displayName}`;
 
     getNativeFormProps() {
-      const { className, ...props } = super.getNativeFormProps();
+      const {
+        className,
+        layout = 'vertical',
+        ...props
+      } = super.getNativeFormProps();
 
       return {
         ...props,
-        className: classnames('ant-form', 'ant-form-vertical', className),
+        className: classnames('ant-form', 'ant-form-' + layout, className),
       };
     }
   }
