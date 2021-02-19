@@ -22,7 +22,6 @@ test('<RadioField> - renders a set of inline checkboxes', () => {
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(wrapper.find('.radio')).toHaveLength(2);
   expect(wrapper.find('.form-check-inline')).toHaveLength(2);
 });
 
