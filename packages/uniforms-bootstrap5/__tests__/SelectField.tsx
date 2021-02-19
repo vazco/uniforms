@@ -266,13 +266,13 @@ test('<SelectField> - renders a label', () => {
   );
 });
 
-test('<SelectField> - renders a select with class "bg-red" beside "form-group"', () => {
+test('<SelectField> - renders a select with class "bg-red" beside "mb-3"', () => {
   const element = <SelectField name="x" className="bg-red" />;
   const wrapper = mount(
     element,
     createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
-  expect(wrapper.find('.bg-red.form-group')).toHaveLength(1);
+  expect(wrapper.find('.bg-red.mb-3')).toHaveLength(1);
 });
 
 test('<SelectField> - renders a disabled select', () => {
@@ -290,7 +290,7 @@ test('<SelectField> - renders a required select', () => {
     element,
     createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );
-  expect(wrapper.find('.form-group.required')).toHaveLength(1);
+  expect(wrapper.find('.mb-3.required')).toHaveLength(1);
 });
 
 test('<SelectField> - renders am error massge in select', () => {

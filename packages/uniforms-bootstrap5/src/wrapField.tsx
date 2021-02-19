@@ -52,7 +52,7 @@ export default function wrapField(
 
   return (
     <div
-      className={classnames(className, 'form-group mb-3', {
+      className={classnames(className, 'mb-3', {
         'is-invalid': error,
         disabled,
         required,
