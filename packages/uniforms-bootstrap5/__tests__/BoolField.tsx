@@ -16,7 +16,6 @@ test('<BoolField> - renders an inline input', () => {
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
   expect(wrapper.find('input')).toHaveLength(1);
-  expect(wrapper.find('.checkbox')).toHaveLength(1);
   expect(wrapper.find('.form-check-inline')).toHaveLength(1);
 });
 
