@@ -12,7 +12,7 @@ Our kanban board is public and available [here](https://github.com/orgs/vazco/pr
     - If needed, we'll reopen it or open a new one.
   - Clearly describe the issue, including steps to reproduce if it is a bug.
     - If possible, include a reproduction using our [playground](https://uniforms.tools/playground) or [CodeSandbox template](https://codesandbox.io/s/github/vazco/uniforms/tree/master/reproductions).
-  - Affected versions of the core, bridge, and theme packages you are aware of.
+  - Add a list of affected versions of the core, bridge, and theme packages you are aware of.
     - Include other versions as well, if you think it may help (React, browser, etc.).
 
 ## Making changes
