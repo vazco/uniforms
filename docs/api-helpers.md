@@ -37,7 +37,18 @@ The table below lists all available options:
 |      Name      |         Type         |                                                             Description                                                              |
 | :------------: | :------------------: | :----------------------------------------------------------------------------------------------------------------------------------: |
 | `initialValue` |        `bool`        | Initial value check. If `true`, then after the first render the default value is set as value if no value is provided (`undefined`). |
-|     `kind`     | `'leaf'` or `'node'` |                                Defines field type. If you are not sure which one to use, use `node`.                                 |
+|     `kind`     | `'leaf'` or `'node'` |                                                   See [Field kinds](#field-kinds).                                                   |
+
+### Field kinds
+
+Every field is either a _leaf_ or _node_ field. In the future, we could introduce new kinds to enable even more optimizations.
+
+- _Leaf_ fields cannot have subfields. This allows us to perform some optimizations, like skipping the extra `Provider` from `connectField`, effectively reducing the overhead down to a single `useField` call.
+  - It includes all input fields, like `NumField`, `SelectField` or `TextField`.
+- _Node_ fields can have subfields. Fields of the _leaf_ kind cannot have subfields.
+  - It includes all combined and layout fields, like `ListField` or `NestField`.
+
+If you are not sure which one to use, do not use the `kind` option at all - it'll default to the safest option (right now it's `node`).
 
 ## `changedKeys(root, valueA, valueB)`
 
