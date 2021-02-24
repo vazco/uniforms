@@ -63,7 +63,7 @@ const presets = {
 
   'Address (JSONSchema)': preset`
     (() => {
-      const ajv = new Ajv({ allErrors: true, useDefaults: true });
+      const ajv = new Ajv({ allErrors: true, useDefaults: true, keywords: ["uniforms"] });
       const schema = {
         title: 'Address',
         type: 'object',
