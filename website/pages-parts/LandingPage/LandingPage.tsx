@@ -4,10 +4,10 @@ import React from 'react';
 import styles from '../../index.module.css';
 import { CommercialServices } from './CommercialServices';
 import { Comparison } from './Comparison';
+import { Discussions } from './Discussions';
 import { ExampleFullyCustomizable } from './ExampleFullyCustomizable';
 import { ExampleSimpleYetPowerful } from './ExampleSimpleYetPowerful';
 import { Footer } from './Footer';
-import { Gitter } from './Gitter';
 import { Header } from './Header';
 import { OpenSource } from './OpenSource';
 import { Testimonials } from './Testimonials';
@@ -27,7 +27,7 @@ export function LandingPage() {
         <div className="container">
           <ExampleSimpleYetPowerful />
           <ExampleFullyCustomizable />
-          <Gitter />
+          <Discussions />
         </div>
         <WhoUses />
         <div className="container">
