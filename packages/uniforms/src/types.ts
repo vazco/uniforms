@@ -50,11 +50,16 @@ export type GuaranteedProps<Value> = {
   id: string;
   label: ReactNode;
   name: string;
-  onChange: (value: any, name?: string) => void;
+  onChange: OnChange<Value | undefined>;
   placeholder: string;
   readOnly: boolean;
   showInlineError: boolean;
   value?: Value;
+};
+
+type OnChange<Value> = {
+  (value: Value): void;
+  (value: any, name: string): void;
 };
 
 export type HTMLFieldProps<Value, Element, Extension = object> = FieldProps<
