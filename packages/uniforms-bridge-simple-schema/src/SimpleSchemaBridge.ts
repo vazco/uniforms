@@ -1,7 +1,7 @@
 import invariant from 'invariant';
 import cloneDeep from 'lodash/cloneDeep';
 import memoize from 'lodash/memoize';
-// @ts-expect-error
+// @ts-ignore
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Bridge, joinName } from 'uniforms';
 
