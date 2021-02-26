@@ -12,7 +12,7 @@ export type Context<Model> = {
   error: any;
   model: DeepPartial<Model>;
   name: string[];
-  onChange: (key: string, value?: any) => void;
+  onChange: (key: string, value: any) => void;
   onSubmit: (event?: SyntheticEvent) => any | Promise<any>;
   randomId: () => string;
   schema: Bridge;
@@ -50,7 +50,7 @@ export type GuaranteedProps<Value> = {
   id: string;
   label: ReactNode;
   name: string;
-  onChange: (value?: Value | null, name?: string) => void;
+  onChange: (value: any, name?: string) => void;
   placeholder: string;
   readOnly: boolean;
   showInlineError: boolean;
