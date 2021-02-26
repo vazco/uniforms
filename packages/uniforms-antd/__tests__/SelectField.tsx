@@ -79,7 +79,7 @@ test('<SelectField> - renders a select with correct name', () => {
 });
 
 test('<SelectField> - renders a select with correct options', () => {
-  // @ts-ignore Is open a valid prop?
+  // @ts-expect-error Is open a valid prop?
   const element = <SelectField name="x" open />;
   const wrapper = mount(
     element,
@@ -88,19 +88,19 @@ test('<SelectField> - renders a select with correct options', () => {
 
   expect(wrapper.find(Select)).toHaveLength(1);
   expect(wrapper.find(Select).prop('children')).toHaveLength(2);
-  // @ts-ignore Check children type.
+  // @ts-expect-error Check children type.
   expect(wrapper.find(Select).prop('children')[0].props.value).toBe('a');
-  // @ts-ignore Check children type.
+  // @ts-expect-error Check children type.
   expect(wrapper.find(Select).prop('children')[0].props.children).toBe('a');
-  // @ts-ignore Check children type.
+  // @ts-expect-error Check children type.
   expect(wrapper.find(Select).prop('children')[1].props.value).toBe('b');
-  // @ts-ignore Check children type.
+  // @ts-expect-error Check children type.
   expect(wrapper.find(Select).prop('children')[1].props.children).toBe('b');
 });
 
 test('<SelectField> - renders a select with correct options (transform)', () => {
   const element = (
-    // @ts-ignore Is open a valid prop?
+    // @ts-expect-error Is open a valid prop?
     <SelectField name="x" open transform={x => x.toUpperCase()} />
   );
   const wrapper = mount(
@@ -110,13 +110,13 @@ test('<SelectField> - renders a select with correct options (transform)', () => 
 
   expect(wrapper.find(Select)).toHaveLength(1);
   expect(wrapper.find(Select).prop('children')).toHaveLength(2);
-  // @ts-ignore Check children type.
+  // @ts-expect-error Check children type.
   expect(wrapper.find(Select).prop('children')[0].props.value).toBe('a');
-  // @ts-ignore Check children type.
+  // @ts-expect-error Check children type.
   expect(wrapper.find(Select).prop('children')[0].props.children).toBe('A');
-  // @ts-ignore Check children type.
+  // @ts-expect-error Check children type.
   expect(wrapper.find(Select).prop('children')[1].props.value).toBe('b');
-  // @ts-ignore Check children type.
+  // @ts-expect-error Check children type.
   expect(wrapper.find(Select).prop('children')[1].props.children).toBe('B');
 });
 

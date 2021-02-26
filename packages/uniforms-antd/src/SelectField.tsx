@@ -47,7 +47,7 @@ function Select(props: SelectFieldProps) {
   return wrapField(
     props,
     props.checkboxes ? (
-      // @ts-ignore: Incorrect `value` type.
+      // @ts-expect-error: Incorrect `value` type.
       <Group
         disabled={props.disabled}
         name={props.name}
@@ -81,7 +81,7 @@ function Select(props: SelectFieldProps) {
           }
         }}
         placeholder={props.placeholder}
-        // @ts-ignore: Incorrect `inputRef` type.
+        // @ts-expect-error: Incorrect `inputRef` type.
         ref={props.inputRef}
         value={
           props.fieldType === Array

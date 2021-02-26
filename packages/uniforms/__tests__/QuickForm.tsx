@@ -8,7 +8,7 @@ jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
 
 describe('QuickForm', () => {
-  // @ts-ignore QuickForm is not a valid Component.
+  // @ts-expect-error QuickForm is not a valid Component.
   class TestForm extends QuickForm<any> {
     // eslint-disable-next-line react/display-name
     getAutoField = () => () => <i className="auto" />;

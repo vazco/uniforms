@@ -1,6 +1,6 @@
-// @ts-ignore
+// @ts-expect-error
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-// @ts-ignore
+// @ts-expect-error
 import { Match } from 'meteor/check';
 import { filterDOMProps } from 'uniforms';
 

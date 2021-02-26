@@ -133,7 +133,7 @@ describe('BaseForm', () => {
       expect(context2).toHaveProperty('changedMap.$');
       expect(context2.changedMap.$).toBeTruthy();
       expect(context2).toHaveProperty('changedMap.$.1');
-      // @ts-ignore: Dynamic `changedMap` structure.
+      // @ts-expect-error: Dynamic `changedMap` structure.
       expect(context2.changedMap.$?.[1]).toBeTruthy();
     });
 

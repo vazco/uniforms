@@ -57,7 +57,7 @@ export class BaseForm<
   constructor(props: Props) {
     super(props);
 
-    // @ts-ignore: State may be bigger, but it'll be covered by the subclasses.
+    // @ts-expect-error: State may be bigger, but it'll be covered by the subclasses.
     this.state = {
       changed: false,
       changedMap: Object.create(null),
@@ -240,7 +240,7 @@ export class BaseForm<
   }
 
   onReset() {
-    // @ts-ignore
+    // @ts-expect-error
     // It's bound in constructor.
     // eslint-disable-next-line @typescript-eslint/unbound-method
     this.setState(this.__reset);

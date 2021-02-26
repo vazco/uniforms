@@ -23,7 +23,7 @@ export type ValidatedFormState<Model> = BaseFormState<Model> & {
 };
 
 export function Validated<Base extends typeof BaseForm>(Base: Base) {
-  // @ts-ignore: Mixin class problem.
+  // @ts-expect-error: Mixin class problem.
   class ValidatedForm<
     Model,
     Props extends ValidatedFormProps<Model> = ValidatedFormProps<Model>,

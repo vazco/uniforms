@@ -2,7 +2,7 @@ import ConfigProvider from 'antd/lib/config-provider';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
 import React, { Component } from 'react';
-// @ts-ignore
+// @ts-expect-error
 import Frame, { FrameContextConsumer } from 'react-frame-component';
 import { ValidatedForm, connectField, context, useForm } from 'uniforms';
 
@@ -19,7 +19,7 @@ export class Playground extends Component<any, any> {
   }
 
   constructor() {
-    // @ts-ignore: Types.
+    // @ts-expect-error: Types.
     super(...arguments);
 
     const state = schema.clean(parseQuery());
@@ -60,7 +60,7 @@ export class Playground extends Component<any, any> {
 
   render() {
     return (
-      // @ts-ignore: Types.
+      // @ts-expect-error: Types.
       <PlaygroundForm
         className={playgroundStyles['playground']}
         model={this.state}
@@ -119,7 +119,7 @@ const PlaygroundModelDebug = () => {
 
 class PlaygroundPreview extends Component<any, any> {
   constructor() {
-    // @ts-ignore: Types.
+    // @ts-expect-error: Types.
     super(...arguments);
 
     this._schema = eval(`(${this.props.value.schema})`);
