@@ -23,8 +23,8 @@ export type BaseFormProps<Model> = {
     model: DeepPartial<Model>,
   ) => DeepPartial<Model>;
   noValidate: boolean;
-  onChange?(key: string, value: any): void;
-  onSubmit(model: DeepPartial<Model>): void | Promise<any>;
+  onChange?: (key: string, value: any) => void;
+  onSubmit: (model: DeepPartial<Model>) => void | Promise<any>;
   placeholder?: boolean;
   readOnly?: boolean;
   schema: Bridge;
@@ -142,10 +142,14 @@ export class BaseForm<
   }
 
   getContextOnChange(): Context<Model>['onChange'] {
+    // It's bound in constructor.
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     return this.onChange;
   }
 
   getContextOnSubmit(): Context<Model>['onSubmit'] {
+    // It's bound in constructor.
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     return this.onSubmit;
   }
 
@@ -175,6 +179,8 @@ export class BaseForm<
 
     return {
       ...props,
+      // It's bound in constructor.
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       onSubmit: this.onSubmit,
       key: `reset-${this.state.resetCount}`,
     };
@@ -235,6 +241,8 @@ export class BaseForm<
 
   onReset() {
     // @ts-ignore
+    // It's bound in constructor.
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     this.setState(this.__reset);
   }
 

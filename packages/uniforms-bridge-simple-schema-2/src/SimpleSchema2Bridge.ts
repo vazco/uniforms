@@ -9,9 +9,9 @@ export default class SimpleSchema2Bridge extends Bridge {
     super();
 
     // Memoize for performance and referential equality.
-    this.getField = memoize(this.getField);
-    this.getSubfields = memoize(this.getSubfields);
-    this.getType = memoize(this.getType);
+    this.getField = memoize(this.getField.bind(this));
+    this.getSubfields = memoize(this.getSubfields.bind(this));
+    this.getType = memoize(this.getType.bind(this));
   }
 
   getError(name: string, error: any) {

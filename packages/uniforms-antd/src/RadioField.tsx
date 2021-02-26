@@ -7,7 +7,7 @@ import wrapField from './wrapField';
 export type RadioFieldProps = FieldProps<
   string,
   RadioProps,
-  { allowedValues?: string[]; transform?(value: string): string }
+  { allowedValues?: string[]; transform?: (value: string) => string }
 >;
 
 const radioStyle = { display: 'block' };

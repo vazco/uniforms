@@ -6,7 +6,7 @@ import { bridge as schema } from './DisplayIfSchema';
 
 type DisplayIfProps<T> = {
   children: ReactElement;
-  condition(context: Context<T>): boolean;
+  condition: (context: Context<T>) => boolean;
 };
 
 // We have to ensure that there's only one child, because returning an array

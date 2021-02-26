@@ -11,30 +11,34 @@ import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 import wrapField from './wrapField';
 
 type CheckboxesProps = FieldProps<
-  CheckboxValueType,
+  SelectFieldValue,
   CheckboxGroupProps | RadioGroupProps,
   {
     allowedValues?: CheckboxValueType[];
     checkboxes: true;
-    disableItem?(value: CheckboxValueType): boolean;
+    disableItem?: (value: CheckboxValueType) => boolean;
     inputRef?: Ref<typeof CheckboxGroup | typeof RadioGroup>;
     required?: boolean;
-    transform?(value: CheckboxValueType): string;
+    transform?: (value: CheckboxValueType) => string;
   }
 >;
 
 type SelectProps = FieldProps<
-  string | (string | undefined)[],
+  SelectFieldValue,
   SelectAntDProps<string | string[]>,
   {
     allowedValues?: string[];
     checkboxes?: false;
-    disableItem?(value: CheckboxValueType): boolean;
+    disableItem?: (value: CheckboxValueType) => boolean;
     inputRef?: Ref<typeof SelectAntD>;
     required?: boolean;
-    transform?(value: string): string;
+    transform?: (value: string) => string;
   }
 >;
+
+// This type is needed for the `SelectFieldProps` union to be a proper subtype
+// of `Partial<GuaranteedProps<Value>>` - otherwise `connectField` goes wild.
+type SelectFieldValue = CheckboxValueType | (string | undefined)[];
 
 export type SelectFieldProps = CheckboxesProps | SelectProps;
 

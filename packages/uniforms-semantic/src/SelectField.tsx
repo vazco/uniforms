@@ -17,7 +17,7 @@ export type SelectFieldProps = HTMLFieldProps<
     checkboxes?: boolean;
     disableItem?: (value: string) => boolean;
     inputRef?: Ref<HTMLSelectElement>;
-    transform?(value: string): string;
+    transform?: (value: string) => string;
   }
 >;
 

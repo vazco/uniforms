@@ -38,7 +38,7 @@ export function TogglerHeaderItem({
 export type TogglerHeaderProps<T extends TogglerItem> = {
   activeToggle: number;
   items: T[];
-  onClick(tab: number): () => void;
+  onClick: (tab: number) => () => void;
 };
 
 export function TogglerHeader<T extends TogglerItem>({

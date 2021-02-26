@@ -14,7 +14,7 @@ import {
 import { DeepPartial, ModelTransformMode } from './types';
 
 export type AutoFormProps<Model> = ValidatedQuickFormProps<Model> & {
-  onChangeModel?(model: DeepPartial<Model>): void;
+  onChangeModel?: (model: DeepPartial<Model>) => void;
 };
 
 export type AutoFormState<Model> = ValidatedQuickFormState<Model> & {

@@ -19,11 +19,11 @@ type SelectFieldCommonProps = {
   allowedValues?: string[];
   appearance?: 'checkbox' | 'switch';
   checkboxes?: boolean;
-  disableItem?(value: string): boolean;
+  disableItem?: (value: string) => boolean;
   inputRef?: Ref<HTMLButtonElement>;
   native?: boolean;
   required?: boolean;
-  transform?(value: string): string;
+  transform?: (value: string) => string;
 };
 
 type CheckboxesProps = FieldProps<

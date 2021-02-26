@@ -34,8 +34,6 @@ export class Playground extends Component<any, any> {
     }
 
     this.state = state;
-
-    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
@@ -46,7 +44,7 @@ export class Playground extends Component<any, any> {
     updateQuery(this.state);
   }
 
-  onChange(key: string, value: unknown) {
+  onChange = (key: string, value: unknown) => {
     if (key === 'preset') {
       // FIXME: Types.
       this.setState((state: any) => ({
@@ -58,7 +56,7 @@ export class Playground extends Component<any, any> {
     }
 
     this.setState({ error: undefined, [key]: value });
-  }
+  };
 
   render() {
     return (
