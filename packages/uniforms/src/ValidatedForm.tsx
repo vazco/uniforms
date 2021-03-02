@@ -67,6 +67,7 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
       return {
         ...super.getContext(),
         validating: this.state.validating,
+        validate: this.state.validate
       };
     }
 
