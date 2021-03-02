@@ -25,6 +25,7 @@ export type Context<Model> = {
   };
   submitting: boolean;
   validating: boolean;
+  validate?: boolean;
 };
 
 export type DeepPartial<T> = {
