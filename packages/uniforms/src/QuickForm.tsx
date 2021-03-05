@@ -11,7 +11,7 @@ export type QuickFormProps<Model> = BaseFormProps<Model> & {
 export type QuickFormState<Model> = BaseFormState<Model>;
 
 export function Quick<Base extends typeof BaseForm>(Base: Base) {
-  // @ts-ignore: Mixin class problem.
+  // @ts-expect-error: Mixin class problem.
   class QuickForm<
     Model,
     Props extends QuickFormProps<Model> = QuickFormProps<Model>,

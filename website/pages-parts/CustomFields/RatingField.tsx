@@ -22,7 +22,8 @@ function Rating({
           style={{ fontSize: 40, cursor: 'pointer' }}
           key={index}
           onClick={() =>
-            disabled || onChange(!required && value === index ? null : index)
+            disabled ||
+            onChange(!required && value === index ? undefined : index)
           }
         >
           {index <= value ? '★' : '☆'}

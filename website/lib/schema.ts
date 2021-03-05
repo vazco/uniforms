@@ -1,6 +1,6 @@
 import Ajv from 'ajv';
 import { buildASTSchema, parse } from 'graphql';
-// @ts-ignore: Typings.
+// @ts-expect-error: Typings.
 import MessageBox from 'message-box';
 import SimpleSchema from 'simpl-schema';
 import { GraphQLBridge } from 'uniforms-bridge-graphql';
@@ -89,13 +89,13 @@ export const schema = new SimpleSchema({
       asyncOnSubmit: false,
       asyncOnValidate: false,
     },
-    // @ts-ignore: SimpleSchema extensibility.
+    // @ts-expect-error: SimpleSchema extensibility.
     uniforms: { schema: propsBridge },
   },
 
   theme: {
     type: String,
-    // @ts-ignore: SimpleSchema extensibility.
+    // @ts-expect-error: SimpleSchema extensibility.
     uniforms: { transform: (theme: string) => `uniforms-${theme}` },
     defaultValue: Object.keys(themes)[0],
     allowedValues: Object.keys(themes),

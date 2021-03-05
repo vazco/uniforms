@@ -6,7 +6,7 @@ import { TabsHeader, TabsItem } from './Tabs';
 import { TogglerHeader, TogglerItem } from './Toggler';
 
 export type TogglerTabsProps<T extends TabsItem, U extends TogglerItem> = {
-  children(args: { tab: T; toggle: U }): ReactNode;
+  children: (args: { tab: T; toggle: U }) => ReactNode;
   group: string;
   tabsItems: T[];
   togglerItems: U[];

@@ -31,7 +31,7 @@ export function connectField<
     const hasChainName = props.name !== '';
     const anyFlowingPropertySet = some(
       context.state,
-      // @ts-ignore: `props` has no index signature.
+      // @ts-expect-error: `props` has no index signature.
       (_, key) => props[key] !== null && props[key] !== undefined,
     );
 
@@ -42,7 +42,7 @@ export function connectField<
     const nextContext = { ...context };
     if (anyFlowingPropertySet) {
       nextContext.state = mapValues(nextContext.state, (value, key) =>
-        // @ts-ignore: `props` has no index signature.
+        // @ts-expect-error: `props` has no index signature.
         props[key] !== null && props[key] !== undefined ? !!props[key] : value,
       );
     }

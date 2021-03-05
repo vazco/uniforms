@@ -11,7 +11,7 @@ describe('joinName', () => {
   });
 
   it('removes registered props', () => {
-    // @ts-ignore: Do not register its type not to pollute it.
+    // @ts-expect-error: Do not register its type not to pollute it.
     filterDOMProps.register('__special__');
 
     expect(filterDOMProps({ __special__: true })).toEqual({});

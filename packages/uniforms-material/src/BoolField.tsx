@@ -16,7 +16,7 @@ export type BoolFieldProps = FieldProps<
     appearance?: 'checkbox' | 'switch';
     helperText?: string;
     legend?: string;
-    transform?(label: string): string;
+    transform?: (label: string) => string;
   }
 >;
 

@@ -40,7 +40,7 @@ test('<RadioField> - renders a set of checkboxes with correct readOnly state', (
 
   expect(wrapper.find(Radio.Group)).toHaveLength(1);
   expect(
-    // @ts-ignore
+    // @ts-expect-error
     wrapper.find(Radio.Group).prop('onChange')({ target: { value: 'b' } }),
   ).toBeFalsy();
   expect(onChange).not.toHaveBeenCalled();
@@ -153,7 +153,7 @@ test('<RadioField> - renders a set of checkboxes which correctly reacts on chang
 
   expect(wrapper.find(Radio.Group)).toHaveLength(1);
   expect(
-    // @ts-ignore
+    // @ts-expect-error
     wrapper.find(Radio.Group).prop('onChange')({ target: { value: 'b' } }),
   ).toBeFalsy();
   expect(onChange).toHaveBeenLastCalledWith('x', 'b');
@@ -173,7 +173,7 @@ test('<RadioField> - renders a set of checkboxes which correctly reacts on chang
 
   expect(wrapper.find(Radio.Group)).toHaveLength(1);
   expect(
-    // @ts-ignore
+    // @ts-expect-error
     wrapper.find(Radio.Group).prop('onChange')({ target: { value: 'a' } }),
   ).toBeFalsy();
   expect(onChange).toHaveBeenLastCalledWith('x', 'a');

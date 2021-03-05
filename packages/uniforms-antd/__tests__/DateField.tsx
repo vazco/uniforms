@@ -66,7 +66,7 @@ test('<DateField> - renders an input with correct readOnly state', () => {
   );
 
   expect(wrapper.find(DatePicker)).toHaveLength(1);
-  // @ts-ignore
+  // @ts-expect-error
   expect(wrapper.find(DatePicker).prop('onChange')(now)).toBeFalsy();
   expect(onChange).not.toHaveBeenCalled();
 });
@@ -119,7 +119,7 @@ test('<DateField> - renders a input which correctly reacts on change', () => {
   );
 
   expect(wrapper.find(DatePicker)).toHaveLength(1);
-  // @ts-ignore
+  // @ts-expect-error
   expect(wrapper.find(DatePicker).prop('onChange')(now)).toBeFalsy();
   expect(onChange).toHaveBeenLastCalledWith('x', now.toDate());
 });
@@ -134,7 +134,7 @@ test('<DateField> - renders a input which correctly reacts on change (empty)', (
   );
 
   expect(wrapper.find(DatePicker)).toHaveLength(1);
-  // @ts-ignore
+  // @ts-expect-error
   expect(wrapper.find(DatePicker).prop('onChange')(undefined)).toBeFalsy();
   expect(onChange).toHaveBeenLastCalledWith('x', undefined);
 });

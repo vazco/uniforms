@@ -33,7 +33,7 @@ function Cycle({
             ? allowedValues.indexOf(value) === allowedValues.length - 1
               ? required
                 ? allowedValues[0]
-                : null
+                : undefined
               : allowedValues[allowedValues.indexOf(value) + 1]
             : allowedValues[0],
         )

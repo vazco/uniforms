@@ -10,7 +10,7 @@ describe('SimpleSchemaBridge', () => {
       // Simulate SimpleSchema.
       name = name.replace(/\d+/g, '$');
 
-      // @ts-ignore: Dynamic `name`.
+      // @ts-expect-error: Dynamic `name`.
       const field = {
         a: { type: Object, label: name },
         'a.b': { type: Object, label: name },
