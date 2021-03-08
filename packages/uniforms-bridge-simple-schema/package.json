@@ -5,8 +5,11 @@
   "main": "es5/index.js",
   "module": "es6/index.js",
   "sideEffects": [
+    "es5/index.js",
     "es5/register.js",
+    "es6/index.js",
     "es6/register.js",
+    "src/index.ts",
     "src/register.ts"
   ],
   "description": "SimpleSchema bridge for uniforms.",

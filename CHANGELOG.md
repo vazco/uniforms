@@ -1,3 +1,7 @@
+## Next
+
+- **Fixed:** Invalid `sideEffect` configuration in `uniforms-bridge-simple-schema` and `uniforms-bridge-simple-schema-2`. [\#888](https://github.com/vazco/uniforms/issues/888)
+
 ## [v3.2.0](https://github.com/vazco/uniforms/tree/v3.2.0) (2021-02-17)
 
 - **Added:** Error styling to `ListField` in `uniforms-antd`. [\#844](https://github.com/vazco/uniforms/issues/844)
