@@ -9,6 +9,8 @@ const base64 =
     : (x: string) => Buffer.from(x).toString('base64');
 const escape = (x: string) => base64(encodeURIComponent(x)).replace(/=+$/, '');
 
+const selectStyle = { paddingBottom: 0, paddingTop: 0 };
+
 export type SelectFieldProps = HTMLFieldProps<
   string | string[],
   HTMLDivElement,
@@ -94,6 +96,7 @@ function Select({
             }
           }}
           ref={inputRef}
+          style={selectStyle}
           value={value ?? ''}
         >
           {(!!placeholder || !required || value === undefined) && !multiple && (
