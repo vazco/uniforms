@@ -35,13 +35,22 @@ function ListAdd({
   const limitNotReached =
     !disabled && !(parent.maxCount! <= parent.value!.length);
 
+  const onClickHandler = () => {
+    if (limitNotReached && !readOnly) {
+      parent.onChange(parent.value!.concat([cloneDeep(value)]));
+    }
+  };
+
   return (
     <div
       {...filterDOMProps(props)}
+      role="button"
+      tabIndex={0}
       className={classnames('badge pull-right', className)}
-      onClick={() => {
-        if (limitNotReached && !readOnly) {
-          parent.onChange(parent.value!.concat([cloneDeep(value)]));
+      onClick={onClickHandler}
+      onKeyDown={event => {
+        if (event.code === 'Enter') {
+          onClickHandler();
         }
       }}
     >

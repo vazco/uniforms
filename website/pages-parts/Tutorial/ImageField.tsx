@@ -9,6 +9,7 @@ function Image({ onChange, value }: ImageProps) {
       <label htmlFor="file-input">
         <div>Choose your photo</div>
         <img
+          alt=""
           style={{ cursor: 'pointer', width: '150px', height: '150px' }}
           src={value || 'https://picsum.photos/150?grayscale'}
         />
