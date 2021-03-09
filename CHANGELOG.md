@@ -1,5 +1,6 @@
 ## Next
 
+- **Fixed:** Invalid `sideEffect` configuration in `uniforms-bridge-simple-schema` and `uniforms-bridge-simple-schema-2`. [\#888](https://github.com/vazco/uniforms/issues/888)
 - **Fixed:** Styling of `SelectField` in `uniforms-semantic`. [\#873](https://github.com/vazco/uniforms/issues/873)
 
 ## [v3.2.0](https://github.com/vazco/uniforms/tree/v3.2.0) (2021-02-17)
