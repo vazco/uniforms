@@ -497,7 +497,8 @@ test('<SelectField checkboxes> - renders a set of inline checkboxes', () => {
   );
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(wrapper.find('.checkbox-inline')).toHaveLength(2);
+  expect(wrapper.find('.form-check')).toHaveLength(2);
+  expect(wrapper.find('.form-check-inline')).toHaveLength(2);
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes with correct disabled state', () => {
