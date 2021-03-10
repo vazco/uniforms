@@ -1,5 +1,6 @@
-## Next
+## [v3.2.1](https://github.com/vazco/uniforms/tree/v3.2.1) (2021-03-10)
 
+- **Fixed:** Incorrect typings of some functions as methods. [\#887](https://github.com/vazco/uniforms/issues/887)
 - **Fixed:** Invalid `sideEffect` configuration in `uniforms-bridge-simple-schema` and `uniforms-bridge-simple-schema-2`. [\#888](https://github.com/vazco/uniforms/issues/888)
 - **Fixed:** Styling of `SelectField` in `uniforms-semantic`. [\#873](https://github.com/vazco/uniforms/issues/873)
 
