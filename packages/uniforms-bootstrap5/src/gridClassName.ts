@@ -38,7 +38,7 @@ export default function gridClassName(
   // Example: {xs: 6, sm: 4, md: 3}
   if (typeof grid === 'object') {
     if (!grid.xs) {
-      grid = { xs: grid.sm || grid.md || grid.lg || grid.xl, ...grid };
+      grid = { xs: grid.sm || grid.md || grid.lg || grid.xl || grid.xxl, ...grid };
     }
 
     return (
