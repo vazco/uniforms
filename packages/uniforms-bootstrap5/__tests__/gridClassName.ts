@@ -9,12 +9,12 @@ test('gridClassName - object', () => {
   expect(gridClassName({ md: 5, xs: 4 }, 'input')).toBe('col-8 col-md-7');
   expect(gridClassName({ md: 7, xs: 6 }, 'input')).toBe('col-6 col-md-5');
   expect(gridClassName({ md: 9, xs: 8 }, 'input')).toBe('col-4 col-md-3');
-  expect(gridClassName({ sm: 11, md: 9, xs: 8, xl: 2, xxl: 3, lg: 5 }, 'input')).toBe(
-    'col-4 col-sm-1 col-md-3 col-lg-7 col-xl-10 col-xxl-9',
-  );
-  expect(gridClassName({ xl: 2, xxl: 3, lg: 5, md: 9, sm: 11, xs: 8 }, 'input')).toBe(
-    'col-4 col-sm-1 col-md-3 col-lg-7 col-xl-10 col-xxl-9',
-  );
+  expect(
+    gridClassName({ sm: 11, md: 9, xs: 8, xl: 2, xxl: 3, lg: 5 }, 'input'),
+  ).toBe('col-4 col-sm-1 col-md-3 col-lg-7 col-xl-10 col-xxl-9');
+  expect(
+    gridClassName({ xl: 2, xxl: 3, lg: 5, md: 9, sm: 11, xs: 8 }, 'input'),
+  ).toBe('col-4 col-sm-1 col-md-3 col-lg-7 col-xl-10 col-xxl-9');
   expect(gridClassName({ lg: 9, xs: 8, md: 2, xl: 5, xxl: 3 }, 'input')).toBe(
     'col-4 col-md-10 col-lg-3 col-xl-7 col-xxl-9',
   );
@@ -30,12 +30,12 @@ test('gridClassName - object', () => {
   expect(gridClassName({ md: 5, xs: 4 }, 'label')).toBe('col-4 col-md-5');
   expect(gridClassName({ md: 7, xs: 6 }, 'label')).toBe('col-6 col-md-7');
   expect(gridClassName({ md: 9, xs: 8 }, 'label')).toBe('col-8 col-md-9');
-  expect(gridClassName({ sm: 11, md: 9, xs: 8, xl: 2, lg: 5, xxl: 3 }, 'label')).toBe(
-    'col-8 col-sm-11 col-md-9 col-lg-5 col-xl-2 col-xxl-3',
-  );
-  expect(gridClassName({ xxl: 3, xl: 2, lg: 5, md: 9, sm: 11, xs: 8 }, 'label')).toBe(
-    'col-8 col-sm-11 col-md-9 col-lg-5 col-xl-2 col-xxl-3',
-  );
+  expect(
+    gridClassName({ sm: 11, md: 9, xs: 8, xl: 2, lg: 5, xxl: 3 }, 'label'),
+  ).toBe('col-8 col-sm-11 col-md-9 col-lg-5 col-xl-2 col-xxl-3');
+  expect(
+    gridClassName({ xxl: 3, xl: 2, lg: 5, md: 9, sm: 11, xs: 8 }, 'label'),
+  ).toBe('col-8 col-sm-11 col-md-9 col-lg-5 col-xl-2 col-xxl-3');
   expect(gridClassName({ lg: 9, xs: 8, md: 2, xl: 5, xxl: 3 }, 'label')).toBe(
     'col-8 col-md-2 col-lg-9 col-xl-5 col-xxl-3',
   );
