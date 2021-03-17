@@ -119,7 +119,7 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
         event.stopPropagation();
       }
 
-      this.setState({ validate: true });
+      this.setState({ submitted: true, validate: true });
 
       const result = this.onValidate().then(error => {
         if (error !== null) {
