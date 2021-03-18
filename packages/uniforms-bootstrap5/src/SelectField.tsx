@@ -62,7 +62,7 @@ function Select({
           key={item}
           className={classnames(
             inputClassName,
-            `form-check ${inline ? 'form-check-inline' : ''}`,
+            `form-check${inline ? ' form-check-inline' : ''}`,
           )}
         >
           <label htmlFor={`${id}-${escape(item)}`}>
