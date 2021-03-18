@@ -36,22 +36,21 @@ function Bool({ onChange, ...props }: BoolFieldProps) {
         'form-check-inline': inline,
       })}
     >
+      <input
+        checked={value || false}
+        className="form-check-input"
+        disabled={disabled}
+        id={props.id}
+        name={name}
+        onChange={() => {
+          if (!readOnly) {
+            onChange(!value);
+          }
+        }}
+        ref={inputRef}
+        type="checkbox"
+      />
       <label htmlFor={props.id} className="form-check-label">
-        <input
-          checked={value || false}
-          className="form-check-input"
-          disabled={disabled}
-          id={props.id}
-          name={name}
-          onChange={() => {
-            if (!readOnly) {
-              onChange(!value);
-            }
-          }}
-          ref={inputRef}
-          type="checkbox"
-        />
-        &nbsp;
         {label}
       </label>
     </div>,

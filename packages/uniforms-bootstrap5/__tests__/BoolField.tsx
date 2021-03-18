@@ -78,7 +78,7 @@ test('<BoolField> - renders a input with correct label (specified)', () => {
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
   expect(wrapper.find('label')).toHaveLength(1);
-  expect(wrapper.find('label').text()).toBe(' BoolFieldLabel'); // Label is prefixed with a &nbsp;.
+  expect(wrapper.find('label').text()).toBe('BoolFieldLabel');
   expect(wrapper.find('label').prop('htmlFor')).toBe(
     wrapper.find('input').prop('id'),
   );
