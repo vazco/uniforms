@@ -21,7 +21,7 @@ const defaultStyle = { width: '100%' };
 function ListAdd({
   disabled,
   icon = <PlusSquareOutlined />,
-  initialCount = 0,
+  initialCount,
   name,
   readOnly,
   size = 'small',
@@ -33,7 +33,7 @@ function ListAdd({
   const nameParts = joinName(null, name);
   const parentName = joinName(nameParts.slice(0, -1));
   const parent = useField<
-    { maxCount?: number; initialCount: number },
+    { initialCount?: number; maxCount?: number },
     unknown[]
   >(parentName, { initialCount }, { absoluteName: true })[0];
 

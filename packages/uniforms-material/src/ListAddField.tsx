@@ -26,7 +26,7 @@ function ListAdd({
   disabled,
   fullWidth = true,
   icon = '+',
-  initialCount = 0,
+  initialCount,
   margin = 'dense',
   name,
   readOnly,
@@ -37,7 +37,7 @@ function ListAdd({
   const nameParts = joinName(null, name);
   const parentName = joinName(nameParts.slice(0, -1));
   const parent = useField<
-    { maxCount?: number; initialCount: number },
+    { initialCount?: number; maxCount?: number },
     unknown[]
   >(parentName, { initialCount }, { absoluteName: true })[0];
 
