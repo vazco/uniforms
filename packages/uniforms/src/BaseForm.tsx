@@ -36,6 +36,7 @@ export type BaseFormState<Model> = {
   changedMap: ChangedMap<Model>;
   resetCount: number;
   submitting: boolean;
+  submitted: boolean;
 };
 
 export class BaseForm<
@@ -62,6 +63,7 @@ export class BaseForm<
       changed: false,
       changedMap: Object.create(null),
       resetCount: 0,
+      submitted: false,
       submitting: false,
     };
 
@@ -112,6 +114,7 @@ export class BaseForm<
       state: this.getContextState(),
       submitting: this.state.submitting,
       validating: false,
+      submitted: this.state.submitted,
     };
   }
 
@@ -235,6 +238,7 @@ export class BaseForm<
       changed: false,
       changedMap: Object.create(null),
       resetCount: state.resetCount + 1,
+      submitted: false,
       submitting: false,
     } as Partial<State>;
   }
@@ -251,6 +255,8 @@ export class BaseForm<
       event.preventDefault();
       event.stopPropagation();
     }
+
+    this.setState(state => (state.submitted ? null : { submitted: true }));
 
     const result = this.props.onSubmit(this.getModel('submit'));
     if (!(result instanceof Promise)) {

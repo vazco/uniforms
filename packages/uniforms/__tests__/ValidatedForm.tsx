@@ -160,6 +160,23 @@ describe('ValidatedForm', () => {
       expect(onSubmit).not.toBeCalled();
     });
 
+    it('sets submitted to true, when form is submitted and validation succeeds', () => {
+      const instance = wrapper.instance();
+      expect(instance.getContext().submitted).toBe(false);
+      wrapper.find('form').simulate('submit');
+      expect(instance.getContext().submitted).toBe(true);
+    });
+
+    it('sets submitted to true, when form is submitted and validation fails', () => {
+      validator.mockImplementationOnce(() => {
+        throw error;
+      });
+      const instance = wrapper.instance();
+      expect(instance.getContext().submitted).toBe(false);
+      wrapper.find('form').simulate('submit');
+      expect(instance.getContext().submitted).toBe(true);
+    });
+
     it('updates error state with async errors from `onSubmit`', async () => {
       onSubmit.mockImplementationOnce(() => Promise.reject(error));
       wrapper.find('form').simulate('submit');
