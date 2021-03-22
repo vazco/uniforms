@@ -52,6 +52,9 @@ module.exports = {
     },
     footer: { links: [] },
     googleAnalytics: { trackingID: 'UA-136559762-4' },
+    gtag: {
+      trackingID: 'GTM-5RFDRMB',
+    },
     hideableSidebar: true,
     hotjar: { hjid: 1434110 },
     navbar: {
