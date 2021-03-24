@@ -64,7 +64,6 @@
     "@typescript-eslint/restrict-template-expressions": "off",
     "@typescript-eslint/unbound-method": "off",
     "import/default": "off",
-    "jsx-a11y/no-onchange": "off",
     "prefer-rest-params": "off",
     "react/no-children-prop": "off",
     "react/prop-types": "off"

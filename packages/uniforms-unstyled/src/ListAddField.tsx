@@ -32,14 +32,27 @@ function ListAdd({
   const limitNotReached =
     !disabled && !(parent.maxCount! <= parent.value!.length);
 
+  function onAction(
+    event:
+      | React.KeyboardEvent<HTMLSpanElement>
+      | React.MouseEvent<HTMLSpanElement, MouseEvent>,
+  ) {
+    if (
+      limitNotReached &&
+      !readOnly &&
+      (!('key' in event) || event.key === 'Enter')
+    ) {
+      parent.onChange(parent.value!.concat([cloneDeep(value)]));
+    }
+  }
+
   return (
     <span
       {...filterDOMProps(props)}
-      onClick={() => {
-        if (limitNotReached && !readOnly) {
-          parent.onChange(parent.value!.concat([cloneDeep(value)]));
-        }
-      }}
+      onClick={onAction}
+      onKeyDown={onAction}
+      role="button"
+      tabIndex={0}
     >
       +
     </span>

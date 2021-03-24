@@ -35,24 +35,28 @@ function ListAdd({
   const limitNotReached =
     !disabled && !(parent.maxCount! <= parent.value!.length);
 
-  const onClickHandler = () => {
-    if (limitNotReached && !readOnly) {
+  function onAction(
+    event:
+      | React.KeyboardEvent<HTMLDivElement>
+      | React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) {
+    if (
+      limitNotReached &&
+      !readOnly &&
+      (!('key' in event) || event.key === 'Enter')
+    ) {
       parent.onChange(parent.value!.concat([cloneDeep(value)]));
     }
-  };
+  }
 
   return (
     <div
       {...filterDOMProps(props)}
+      className={classnames('badge pull-right', className)}
+      onClick={onAction}
+      onKeyDown={onAction}
       role="button"
       tabIndex={0}
-      className={classnames('badge pull-right', className)}
-      onClick={onClickHandler}
-      onKeyDown={event => {
-        if (event.code === 'Enter') {
-          onClickHandler();
-        }
-      }}
     >
       {addIcon}
     </div>

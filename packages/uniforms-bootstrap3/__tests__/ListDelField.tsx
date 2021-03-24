@@ -46,3 +46,11 @@ test('<ListDelField> - correctly reacts on click', () => {
   expect(wrapper.find('i').simulate('click')).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', ['x', 'z']);
 });
+
+test('<ListDelField> - correctly reacts on keyboard enter key', () => {
+  const element = <ListDelField name="x.1" />;
+  const wrapper = mount(element, context());
+
+  wrapper.find('[role="button"]').props().onKeyDown?.({ key: 'Enter' } as any);
+  expect(onChange).toHaveBeenLastCalledWith('x', ['x', 'z']);
+});

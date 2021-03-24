@@ -37,7 +37,7 @@
     "core-js": "3.8.3",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.5",
-    "eslint-config-vazco": "6.1.0",
+    "eslint-config-vazco": "6.1.1",
     "eslint-import-resolver-alias": "1.1.2",
     "eslint-import-resolver-typescript": "2.3.0",
     "graphql": "^15.0.0",

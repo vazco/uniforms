@@ -27,6 +27,22 @@ function ListDel({ disabled, name, readOnly, ...props }: ListDelFieldProps) {
   const limitNotReached =
     !disabled && !(parent.minCount! >= parent.value!.length);
 
+  function onAction(
+    event:
+      | React.KeyboardEvent<HTMLElement>
+      | React.MouseEvent<HTMLElement, MouseEvent>,
+  ) {
+    if (
+      limitNotReached &&
+      !readOnly &&
+      (!('key' in event) || event.key === 'Enter')
+    ) {
+      const value = parent.value!.slice();
+      value.splice(nameIndex, 1);
+      parent.onChange(value);
+    }
+  }
+
   return (
     <i
       {...filterDOMProps(props)}
@@ -36,13 +52,10 @@ function ListDel({ disabled, name, readOnly, ...props }: ListDelFieldProps) {
         limitNotReached ? 'link' : 'disabled',
         'fitted close icon',
       )}
-      onClick={() => {
-        if (limitNotReached && !readOnly) {
-          const value = parent.value!.slice();
-          value.splice(nameIndex, 1);
-          parent.onChange(value);
-        }
-      }}
+      onClick={onAction}
+      onKeyDown={onAction}
+      role="button"
+      tabIndex={0}
     />
   );
 }
