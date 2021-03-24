@@ -1,3 +1,7 @@
+## Next
+
+- **Fixed:** Handling of `JSONSchemaBridge` errors with top-level fields containing spaces. [\#909](https://github.com/vazco/uniforms/issues/909)
+
 ## [v3.2.1](https://github.com/vazco/uniforms/tree/v3.2.1) (2021-03-10)
 
 - **Fixed:** Incorrect typings of some functions as methods. [\#887](https://github.com/vazco/uniforms/issues/887)
