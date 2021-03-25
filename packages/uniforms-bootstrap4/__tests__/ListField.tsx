@@ -142,3 +142,25 @@ test('<ListField> - renders correct error text (showInlineError=false)', () => {
 
   expect(wrapper.find('.text-danger')).toHaveLength(0);
 });
+
+test('<ListField> - renders proper number of optional values after add new value (with initialCount)', () => {
+  const element = (
+    <ListField name="x" initialCount={3} addIcon="+" label="ListFieldLabel" />
+  );
+  const onChange = jest.fn();
+  const wrapper = mount(
+    element,
+    createContext(
+      { x: { type: Array, optional: true }, 'x.$': { type: String } },
+      { onChange },
+    ),
+  );
+
+  expect(wrapper.find(ListAddField).simulate('click')).toBeTruthy();
+  expect(onChange).toHaveBeenNthCalledWith(1, 'x', [
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+  ]); // renders ( initialCount + 1 ) default values
+});

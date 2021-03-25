@@ -104,3 +104,24 @@ test('<ListField> - renders children with correct name (value)', () => {
   expect(wrapper.find(ListItemField).at(0).prop('name')).toBe('0');
   expect(wrapper.find(ListItemField).at(1).prop('name')).toBe('1');
 });
+
+test('<ListField> - renders proper number of optional values after add new value (with initialCount)', () => {
+  const element = (
+    <ListField name="x" initialCount={3} label="ListFieldLabel" />
+  );
+  const onChange = jest.fn();
+  const wrapper = mount(
+    element,
+    createContext(
+      { x: { type: Array, optional: true }, 'x.$': { type: String } },
+      { onChange },
+    ),
+  );
+  expect(wrapper.find(ListAddField).simulate('click')).toBeTruthy();
+  expect(onChange).toHaveBeenNthCalledWith(1, 'x', [
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+  ]); // renders ( initialCount + 1 ) default values
+});
