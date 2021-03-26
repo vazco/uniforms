@@ -55,12 +55,12 @@ function extractValue(...xs: (boolean | null | string | undefined)[]) {
 }
 
 function pathToName(path: string) {
-  path = path.startsWith('.')
-    ? path
-        .replace(/\['(.+?)'\]/g, '.$1')
+  path = path.startsWith('/')
+    ? path.replace(/\//g, '.').replace(/~0/g, '~').replace(/~1/g, '/')
+    : path
+        .replace(/\[('|")(.+?)\1\]/g, '.$2')
         .replace(/\[(.+?)\]/g, '.$1')
-        .replace(/\\'/g, "'")
-    : path.replace(/\//g, '.').replace(/~0/g, '~').replace(/~1/g, '/');
+        .replace(/\\'/g, "'");
 
   return path.slice(1);
 }
