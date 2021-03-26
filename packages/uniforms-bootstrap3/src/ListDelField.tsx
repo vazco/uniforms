@@ -38,7 +38,6 @@ function ListDel({
       | React.KeyboardEvent<HTMLSpanElement>
       | React.MouseEvent<HTMLSpanElement, MouseEvent>,
   ) {
-    // eslint-disable-next-line no-console
     if (
       limitNotReached &&
       !readOnly &&
