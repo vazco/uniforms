@@ -31,7 +31,8 @@ const AutoField = createAutoField(props => {
     case Object:
       return NestField;
     case String:
-      return TextField;}
+      return TextField;
+  }
 
   return invariant(false, 'Unsupported field type: %s', props.fieldType);
 });
