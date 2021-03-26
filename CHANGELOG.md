@@ -1,3 +1,16 @@
+## Next
+
+- **Added:** Compatibility with React v17. [\#859](https://github.com/vazco/uniforms/issues/859)
+- **Added:** New context property: `submitted`. [\#889](https://github.com/vazco/uniforms/issues/889)
+- **Added:** New theme: `uniforms-bootstrap5`. [\#874](https://github.com/vazco/uniforms/issues/874)
+- **Fixed:** Handling of `JSONSchemaBridge` errors with top-level fields containing spaces. [\#909](https://github.com/vazco/uniforms/issues/909)
+
+## [v3.2.1](https://github.com/vazco/uniforms/tree/v3.2.1) (2021-03-10)
+
+- **Fixed:** Incorrect typings of some functions as methods. [\#887](https://github.com/vazco/uniforms/issues/887)
+- **Fixed:** Invalid `sideEffect` configuration in `uniforms-bridge-simple-schema` and `uniforms-bridge-simple-schema-2`. [\#888](https://github.com/vazco/uniforms/issues/888)
+- **Fixed:** Styling of `SelectField` in `uniforms-semantic`. [\#873](https://github.com/vazco/uniforms/issues/873)
+
 ## [v3.2.0](https://github.com/vazco/uniforms/tree/v3.2.0) (2021-02-17)
 
 - **Added:** Error styling to `ListField` in `uniforms-antd`. [\#844](https://github.com/vazco/uniforms/issues/844)

@@ -8,7 +8,7 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "@docusaurus/core": "^2.0.0"
+    "@docusaurus/core": "^2.0.0-alpha.0"
   },
   "engines": {
     "node": ">=8"

@@ -22,7 +22,7 @@ function Rating({
     index: number,
   ) {
     if (!disabled && (!('key' in event) || event.key === 'Enter')) {
-      onChange(!required && value === index ? null : index);
+      onChange(!required && value === index ? undefined : index);
     }
   }
 

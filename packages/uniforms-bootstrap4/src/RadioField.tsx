@@ -17,7 +17,7 @@ export type RadioFieldProps = HTMLFieldProps<
     allowedValues?: string[];
     inline?: boolean;
     inputClassName?: string;
-    transform?(value: string): string;
+    transform?: (value: string) => string;
   }
 >;
 

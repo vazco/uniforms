@@ -49,6 +49,7 @@ describe('connectField', () => {
         readOnly: false,
         showInlineError: true,
       },
+      submitted: false,
       submitting: false,
       validating: false,
     } as Context<any>,

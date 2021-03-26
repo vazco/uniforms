@@ -44,7 +44,7 @@ export default function gridClassName(
     return (
       (Object.keys(grid) as GridSize[])
         .sort(compareSizeClass)
-        // @ts-ignore Weird type refinement problem.
+        // @ts-expect-error Weird type refinement problem.
         .map(size => gridClassNamePart(size, grid[size], side))
         .join(' ')
     );

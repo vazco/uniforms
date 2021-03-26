@@ -1,5 +1,5 @@
 import React from 'react';
-import { BaseForm, Bridge } from 'uniforms';
+import { BaseForm, Bridge, Context } from 'uniforms';
 
 import mount from './_mount';
 
@@ -35,7 +35,7 @@ describe('BaseForm', () => {
     );
 
     const context = wrapper.instance().getContext();
-    expect(context).toEqual({
+    expect(context).toEqual<Context<any>>({
       changed: false,
       changedMap: {},
       error,
@@ -52,6 +52,7 @@ describe('BaseForm', () => {
         readOnly: false,
         showInlineError: false,
       },
+      submitted: false,
       submitting: false,
       validating: false,
     });
@@ -91,7 +92,7 @@ describe('BaseForm', () => {
 
     it('have correct `state`', () => {
       const context = wrapper.instance().getContext();
-      expect(context.state).toEqual({
+      expect(context.state).toEqual<Context<any>['state']>({
         disabled: true,
         label: false,
         placeholder: true,
@@ -133,7 +134,7 @@ describe('BaseForm', () => {
       expect(context2).toHaveProperty('changedMap.$');
       expect(context2.changedMap.$).toBeTruthy();
       expect(context2).toHaveProperty('changedMap.$.1');
-      // @ts-ignore: Dynamic `changedMap` structure.
+      // @ts-expect-error: Dynamic `changedMap` structure.
       expect(context2.changedMap.$?.[1]).toBeTruthy();
     });
 
@@ -141,8 +142,9 @@ describe('BaseForm', () => {
       wrapper.setProps({ autosave: true });
       wrapper.instance().getContext().onChange('a', 1);
       await new Promise(resolve => setTimeout(resolve));
-
+      const context = wrapper.instance().getContext();
       expect(onSubmit).toHaveBeenCalledTimes(1);
+      expect(context.submitted).toBe(true);
       expect(onSubmit).toHaveBeenLastCalledWith(model);
     });
 
@@ -216,33 +218,51 @@ describe('BaseForm', () => {
   });
 
   describe('when reset', () => {
-    const wrapper = mount<BaseForm<any>>(<BaseForm schema={schema} />);
+    const createWrapper = () =>
+      mount<BaseForm<any>>(
+        <BaseForm model={model} schema={schema} onSubmit={onSubmit} />,
+      );
 
     it('increase `resetCount`', () => {
+      const wrapper = createWrapper();
       wrapper.instance().reset();
 
       expect(wrapper.state('resetCount')).toBe(1);
     });
+
+    it('sets submitted back to false', async () => {
+      const wrapper = createWrapper();
+      const instance = wrapper.instance();
+      expect(instance.getContext().submitted).toBe(false);
+      wrapper.find('form').simulate('submit');
+      expect(instance.getContext().submitted).toBe(true);
+      instance.reset();
+      expect(instance.getContext().submitted).toBe(false);
+    });
   });
 
   describe('when submitted', () => {
-    const wrapper = mount<BaseForm<any>>(
-      <BaseForm model={model} schema={schema} onSubmit={onSubmit} />,
-    );
+    const createWrapper = () =>
+      mount<BaseForm<any>>(
+        <BaseForm model={model} schema={schema} onSubmit={onSubmit} />,
+      );
 
     it('calls `onSubmit` once', () => {
+      const wrapper = createWrapper();
       wrapper.find('form').simulate('submit');
 
       expect(onSubmit).toHaveBeenCalledTimes(1);
     });
 
     it('calls `onSubmit` with correct model', () => {
+      const wrapper = createWrapper();
       wrapper.find('form').simulate('submit');
 
       expect(onSubmit).toHaveBeenLastCalledWith(model);
     });
 
     it('calls `onSubmit` with the correctly `modelTransform`ed model', () => {
+      const wrapper = createWrapper();
       wrapper.setProps({
         modelTransform(mode, model) {
           return mode === 'submit' ? { submit: 1 } : model;
@@ -256,7 +276,16 @@ describe('BaseForm', () => {
       wrapper.setProps({ modelTransform: undefined });
     });
 
+    it('sets `submitted` to true', async () => {
+      const wrapper = createWrapper();
+      const instance = wrapper.instance();
+      expect(instance.getContext().submitted).toBe(false);
+      wrapper.find('form').simulate('submit');
+      expect(instance.getContext().submitted).toBe(true);
+    });
+
     it('sets `submitting` state while submitting', async () => {
+      const wrapper = createWrapper();
       // FIXME: It should say `() => void`.
       let resolveSubmit: (...args: any[]) => void = () => {};
       wrapper.setProps({
@@ -280,6 +309,7 @@ describe('BaseForm', () => {
     });
 
     it('ignores synchronous errors', async () => {
+      const wrapper = createWrapper();
       const error = new Error();
       wrapper.setProps({
         onSubmit() {
@@ -296,6 +326,7 @@ describe('BaseForm', () => {
     });
 
     it('returns asynchronous results', async () => {
+      const wrapper = createWrapper();
       const value = 42;
       wrapper.setProps({
         async onSubmit() {

@@ -21,7 +21,7 @@ export type SelectFieldProps = HTMLFieldProps<
     inline?: boolean;
     inputClassName?: string;
     inputRef?: Ref<HTMLSelectElement>;
-    transform?(value: string): string;
+    transform?: (value: string) => string;
   }
 >;
 

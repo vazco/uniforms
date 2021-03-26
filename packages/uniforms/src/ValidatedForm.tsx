@@ -10,7 +10,7 @@ import { BaseForm, BaseFormProps, BaseFormState } from './BaseForm';
 import { Context, DeepPartial, ValidateMode } from './types';
 
 export type ValidatedFormProps<Model> = BaseFormProps<Model> & {
-  onValidate(model: DeepPartial<Model>, error: any): any;
+  onValidate: (model: DeepPartial<Model>, error: any) => any;
   validate: ValidateMode;
   validator?: any;
 };
@@ -19,11 +19,11 @@ export type ValidatedFormState<Model> = BaseFormState<Model> & {
   error: any;
   validate: boolean;
   validating: boolean;
-  validator(model: DeepPartial<Model>): any;
+  validator: (model: DeepPartial<Model>) => any;
 };
 
 export function Validated<Base extends typeof BaseForm>(Base: Base) {
-  // @ts-ignore: Mixin class problem.
+  // @ts-expect-error: Mixin class problem.
   class ValidatedForm<
     Model,
     Props extends ValidatedFormProps<Model> = ValidatedFormProps<Model>,
@@ -119,7 +119,7 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
         event.stopPropagation();
       }
 
-      this.setState({ validate: true });
+      this.setState({ submitted: true, validate: true });
 
       const result = this.onValidate().then(error => {
         if (error !== null) {

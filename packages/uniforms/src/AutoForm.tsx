@@ -14,7 +14,7 @@ import {
 import { DeepPartial, ModelTransformMode } from './types';
 
 export type AutoFormProps<Model> = ValidatedQuickFormProps<Model> & {
-  onChangeModel?(model: DeepPartial<Model>): void;
+  onChangeModel?: (model: DeepPartial<Model>) => void;
 };
 
 export type AutoFormState<Model> = ValidatedQuickFormState<Model> & {
@@ -23,7 +23,7 @@ export type AutoFormState<Model> = ValidatedQuickFormState<Model> & {
 };
 
 export function Auto<Base extends typeof ValidatedQuickForm>(Base: Base) {
-  // @ts-ignore: Mixin class problem.
+  // @ts-expect-error: Mixin class problem.
   class AutoForm<
     Model,
     Props extends AutoFormProps<Model> = AutoFormProps<Model>,

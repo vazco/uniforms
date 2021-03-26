@@ -11,7 +11,7 @@ export type TabsItem = {
 export type TabsHeaderProps<T extends TabsItem> = {
   activeTab: number;
   items: T[];
-  onTab(tab: number): void;
+  onTab: (tab: number) => void;
 };
 
 export function TabsHeader<T extends TabsItem>({
@@ -37,7 +37,7 @@ export function TabsHeader<T extends TabsItem>({
 export type TabsHeaderItemProps = {
   active: boolean;
   children: ReactNode;
-  onClick(): void;
+  onClick: () => void;
 };
 
 export function TabsHeaderItem({
@@ -59,7 +59,7 @@ export function TabsHeaderItem({
 }
 
 export type TabsProps<T extends TabsItem> = {
-  children(tab: T): ReactNode;
+  children: (tab: T) => ReactNode;
   group: string;
   tabs: T[];
 };

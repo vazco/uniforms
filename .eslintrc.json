@@ -62,7 +62,6 @@
     "@typescript-eslint/require-await": "off",
     "@typescript-eslint/restrict-plus-operands": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
-    "@typescript-eslint/unbound-method": "off",
     "import/default": "off",
     "prefer-rest-params": "off",
     "react/no-children-prop": "off",

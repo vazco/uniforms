@@ -12,9 +12,9 @@ export type Context<Model> = {
   error: any;
   model: DeepPartial<Model>;
   name: string[];
-  onChange(key: string, value?: any): void;
-  onSubmit(event?: SyntheticEvent): any | Promise<any>;
-  randomId(): string;
+  onChange: (key: string, value: any) => void;
+  onSubmit: (event?: SyntheticEvent) => any | Promise<any>;
+  randomId: () => string;
   schema: Bridge;
   state: {
     disabled: boolean;
@@ -24,6 +24,7 @@ export type Context<Model> = {
     showInlineError: boolean;
   };
   submitting: boolean;
+  submitted: boolean;
   validating: boolean;
 };
 
@@ -50,11 +51,16 @@ export type GuaranteedProps<Value> = {
   id: string;
   label: ReactNode;
   name: string;
-  onChange(value?: Value | null, name?: string): void;
+  onChange: OnChange<Value | undefined>;
   placeholder: string;
   readOnly: boolean;
   showInlineError: boolean;
   value?: Value;
+};
+
+type OnChange<Value> = {
+  (value: Value): void;
+  (value: any, name: string): void;
 };
 
 export type HTMLFieldProps<Value, Element, Extension = object> = FieldProps<

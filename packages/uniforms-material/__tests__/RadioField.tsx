@@ -147,7 +147,7 @@ test('<RadioField> - renders a RadioGroup which correctly reacts on change', () 
   );
 
   expect(wrapper.find(RadioGroup)).toHaveLength(1);
-  // @ts-ignore Provide a valid value.
+  // @ts-expect-error Provide a valid value.
   wrapper.find(RadioGroup).props().onChange!({ target: { value: 'b' } });
   expect(onChange).toHaveBeenLastCalledWith('x', 'b');
 });
@@ -165,7 +165,7 @@ test('<RadioField> - renders a RadioGroup which correctly reacts on change (same
   );
 
   expect(wrapper.find(RadioGroup)).toHaveLength(1);
-  // @ts-ignore Provide a valid value.
+  // @ts-expect-error Provide a valid value.
   wrapper.find(RadioGroup).props().onChange!({ target: { value: 'a' } });
   expect(onChange).toHaveBeenLastCalledWith('x', 'a');
 });

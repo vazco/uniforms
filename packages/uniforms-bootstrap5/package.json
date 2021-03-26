@@ -1,0 +1,41 @@
+{
+  "name": "uniforms-bootstrap5",
+  "version": "3.2.1",
+  "license": "MIT",
+  "main": "es5/index.js",
+  "module": "es6/index.js",
+  "sideEffects": false,
+  "description": "Bootstrap5 UI components for uniforms.",
+  "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-bootstrap5",
+  "bugs": "https://github.com/vazco/uniforms/issues",
+  "funding": "https://github.com/vazco/uniforms?sponsor=1",
+  "keywords": [
+    "bootstrap",
+    "form",
+    "forms",
+    "meteor",
+    "react",
+    "react-component",
+    "schema",
+    "validation"
+  ],
+  "files": [
+    "es5/*.d.ts",
+    "es5/*.js",
+    "es6/*.d.ts",
+    "es6/*.js",
+    "src/*.ts",
+    "src/*.tsx"
+  ],
+  "peerDependencies": {
+    "react": "^17.0.0 || ^16.8.0"
+  },
+  "dependencies": {
+    "classnames": "^2.0.0",
+    "invariant": "^2.0.0",
+    "lodash": "^4.0.0",
+    "tslib": "^1.10.0",
+    "uniforms": "^3.2.1",
+    "warning": "^4.0.0"
+  }
+}

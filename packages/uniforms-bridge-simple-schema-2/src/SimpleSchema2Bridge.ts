@@ -9,9 +9,9 @@ export default class SimpleSchema2Bridge extends Bridge {
     super();
 
     // Memoize for performance and referential equality.
-    this.getField = memoize(this.getField);
-    this.getSubfields = memoize(this.getSubfields);
-    this.getType = memoize(this.getType);
+    this.getField = memoize(this.getField.bind(this));
+    this.getSubfields = memoize(this.getSubfields.bind(this));
+    this.getType = memoize(this.getType.bind(this));
   }
 
   getError(name: string, error: any) {
@@ -21,7 +21,7 @@ export default class SimpleSchema2Bridge extends Bridge {
 
   getErrorMessage(name: string, error: any) {
     const scopedError = this.getError(name, error);
-    // @ts-ignore: `messageForError` has incorrect typing.
+    // @ts-expect-error: `messageForError` has incorrect typing.
     return !scopedError ? '' : this.schema.messageForError(scopedError);
   }
 
@@ -30,7 +30,7 @@ export default class SimpleSchema2Bridge extends Bridge {
       if (Array.isArray(error.details)) {
         // FIXME: Correct type for `error`.
         return (error.details as any[]).map(error =>
-          // @ts-ignore: `messageForError` has incorrect typing.
+          // @ts-expect-error: `messageForError` has incorrect typing.
           this.schema.messageForError(error),
         );
       }
@@ -146,7 +146,7 @@ export default class SimpleSchema2Bridge extends Bridge {
   }
 
   getSubfields(name?: string) {
-    // @ts-ignore: Typing for `_makeGeneric` is missing.
+    // @ts-expect-error: Typing for `_makeGeneric` is missing.
     return this.schema.objectKeys(SimpleSchema._makeGeneric(name));
   }
 

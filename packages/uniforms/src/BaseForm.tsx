@@ -23,8 +23,8 @@ export type BaseFormProps<Model> = {
     model: DeepPartial<Model>,
   ) => DeepPartial<Model>;
   noValidate: boolean;
-  onChange?(key: string, value: any): void;
-  onSubmit(model: DeepPartial<Model>): void | Promise<any>;
+  onChange?: (key: string, value: any) => void;
+  onSubmit: (model: DeepPartial<Model>) => void | Promise<any>;
   placeholder?: boolean;
   readOnly?: boolean;
   schema: Bridge;
@@ -36,6 +36,7 @@ export type BaseFormState<Model> = {
   changedMap: ChangedMap<Model>;
   resetCount: number;
   submitting: boolean;
+  submitted: boolean;
 };
 
 export class BaseForm<
@@ -57,11 +58,12 @@ export class BaseForm<
   constructor(props: Props) {
     super(props);
 
-    // @ts-ignore: State may be bigger, but it'll be covered by the subclasses.
+    // @ts-expect-error: State may be bigger, but it'll be covered by the subclasses.
     this.state = {
       changed: false,
       changedMap: Object.create(null),
       resetCount: 0,
+      submitted: false,
       submitting: false,
     };
 
@@ -112,6 +114,7 @@ export class BaseForm<
       state: this.getContextState(),
       submitting: this.state.submitting,
       validating: false,
+      submitted: this.state.submitted,
     };
   }
 
@@ -142,10 +145,14 @@ export class BaseForm<
   }
 
   getContextOnChange(): Context<Model>['onChange'] {
+    // It's bound in constructor.
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     return this.onChange;
   }
 
   getContextOnSubmit(): Context<Model>['onSubmit'] {
+    // It's bound in constructor.
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     return this.onSubmit;
   }
 
@@ -175,6 +182,8 @@ export class BaseForm<
 
     return {
       ...props,
+      // It's bound in constructor.
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       onSubmit: this.onSubmit,
       key: `reset-${this.state.resetCount}`,
     };
@@ -229,12 +238,15 @@ export class BaseForm<
       changed: false,
       changedMap: Object.create(null),
       resetCount: state.resetCount + 1,
+      submitted: false,
       submitting: false,
     } as Partial<State>;
   }
 
   onReset() {
-    // @ts-ignore
+    // @ts-expect-error
+    // It's bound in constructor.
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     this.setState(this.__reset);
   }
 
@@ -243,6 +255,8 @@ export class BaseForm<
       event.preventDefault();
       event.stopPropagation();
     }
+
+    this.setState(state => (state.submitted ? null : { submitted: true }));
 
     const result = this.props.onSubmit(this.getModel('submit'));
     if (!(result instanceof Promise)) {

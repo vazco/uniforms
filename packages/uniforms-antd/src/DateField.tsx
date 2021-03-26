@@ -31,7 +31,7 @@ function Date({
         }
       }}
       placeholder={props.placeholder}
-      // @ts-ignore: `DatePicker` is an intersection.
+      // @ts-expect-error: `DatePicker` is an intersection.
       ref={props.inputRef}
       showTime={showTime}
       style={style}

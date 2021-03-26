@@ -18,7 +18,7 @@ export type RadioFieldProps = FieldProps<
     helperText?: string;
     margin?: any;
     row?: boolean;
-    transform?(value: string): string;
+    transform?: (value: string) => string;
   }
 >;
 
