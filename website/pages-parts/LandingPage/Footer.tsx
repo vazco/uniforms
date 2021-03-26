@@ -59,7 +59,7 @@ export function Footer() {
             </Link>
             <a href="https://vazco.eu">
               <img
-                alt="Vazco Home"
+                alt="Vazco homepage"
                 className={styles.vazco}
                 src="assets/vazco.svg"
               />
