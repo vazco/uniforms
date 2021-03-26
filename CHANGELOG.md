@@ -1,5 +1,8 @@
 ## Next
 
+- **Added:** Compatibility with React v17. [\#859](https://github.com/vazco/uniforms/issues/859)
+- **Added:** New context property: `submitted`. [\#889](https://github.com/vazco/uniforms/issues/889)
+- **Added:** New theme: `uniforms-bootstrap5`. [\#874](https://github.com/vazco/uniforms/issues/874)
 - **Fixed:** Handling of `JSONSchemaBridge` errors with top-level fields containing spaces. [\#909](https://github.com/vazco/uniforms/issues/909)
 
 ## [v3.2.1](https://github.com/vazco/uniforms/tree/v3.2.1) (2021-03-10)
