@@ -32,11 +32,7 @@ function ListAdd({
   const limitNotReached =
     !disabled && !(parent.maxCount! <= parent.value!.length);
 
-  function onAction(
-    event:
-      | React.KeyboardEvent<HTMLSpanElement>
-      | React.MouseEvent<HTMLSpanElement, MouseEvent>,
-  ) {
+  function onAction(event: React.KeyboardEvent | React.MouseEvent) {
     if (
       limitNotReached &&
       !readOnly &&
