@@ -180,5 +180,5 @@ test('<ListField> - renders proper number of optional values after add new value
     undefined,
     undefined,
     undefined,
-  ]); // renders ( initialCount + 1 ) default values
+  ]);
 });
