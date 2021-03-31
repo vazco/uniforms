@@ -8,6 +8,7 @@
   "description": "GraphQL schema bridge for uniforms.",
   "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-bridge-graphql",
   "bugs": "https://github.com/vazco/uniforms/issues",
+  "funding": "https://github.com/vazco/uniforms?sponsor=1",
   "keywords": [
     "form",
     "forms",

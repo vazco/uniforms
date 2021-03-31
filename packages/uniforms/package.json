@@ -15,6 +15,7 @@
   "description": "Core package of uniforms.",
   "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms",
   "bugs": "https://github.com/vazco/uniforms/issues",
+  "funding": "https://github.com/vazco/uniforms?sponsor=1",
   "keywords": [
     "form",
     "forms",
@@ -33,7 +34,7 @@
     "src/*.tsx"
   ],
   "peerDependencies": {
-    "react": "^16.8.0"
+    "react": "^17.0.0 || ^16.8.0"
   },
   "dependencies": {
     "invariant": "^2.0.0",

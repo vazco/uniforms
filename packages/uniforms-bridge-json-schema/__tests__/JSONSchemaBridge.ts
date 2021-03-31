@@ -222,6 +222,7 @@ describe('JSONSchemaBridge', () => {
         ["a.0.b.c-d.0.f/'g", ".a[0].b['c-d'][0]['f/\\'g']"],
         ['a.0.b.c-d.0.h/"i', ".a[0].b['c-d'][0]['h/\"i']"],
         ['a.0.b.c-d.0.j\'/"k~', ".a[0].b['c-d'][0]['j\\'/\"k~']"],
+        ['a b', '["a b"]'],
       ];
 
       pairs.forEach(([name, dataPath]) => {
@@ -235,6 +236,7 @@ describe('JSONSchemaBridge', () => {
         ["a.0.b.c-d.0.f/'g", "/a/0/b/c-d/0/f~1'g"],
         ['a.0.b.c-d.0.h/"i', '/a/0/b/c-d/0/h~1"i'],
         ['a.0.b.c-d.0.j\'/"k~', '/a/0/b/c-d/0/j\'~1"k~0'],
+        ['a b', '/a b'],
       ];
 
       pairs.forEach(([name, dataPath]) => {

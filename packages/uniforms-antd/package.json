@@ -12,6 +12,7 @@
   "description": "Ant Design UI components for uniforms.",
   "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-antd",
   "bugs": "https://github.com/vazco/uniforms/issues",
+  "funding": "https://github.com/vazco/uniforms?sponsor=1",
   "keywords": [
     "antd",
     "form",
@@ -33,7 +34,7 @@
   "peerDependencies": {
     "@ant-design/icons": "^4.0.0",
     "antd": "^4.0.0",
-    "react": "^16.8.0"
+    "react": "^17.0.0 || ^16.8.0"
   },
   "dependencies": {
     "invariant": "^2.0.0",

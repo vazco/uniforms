@@ -18,6 +18,7 @@ export default function createContext(
       onChange() {},
       onSubmit() {},
       randomId,
+      submitted: false,
       submitting: false,
       validating: false,
       ...context,

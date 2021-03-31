@@ -24,6 +24,7 @@ export type Context<Model> = {
     showInlineError: boolean;
   };
   submitting: boolean;
+  submitted: boolean;
   validating: boolean;
 };
 

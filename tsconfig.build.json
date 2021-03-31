@@ -10,6 +10,8 @@
     { "path": "packages/uniforms-bootstrap3/tsconfig.es6.json" },
     { "path": "packages/uniforms-bootstrap4/tsconfig.es5.json" },
     { "path": "packages/uniforms-bootstrap4/tsconfig.es6.json" },
+    { "path": "packages/uniforms-bootstrap5/tsconfig.es5.json" },
+    { "path": "packages/uniforms-bootstrap5/tsconfig.es6.json" },
     { "path": "packages/uniforms-bridge-graphql/tsconfig.es5.json" },
     { "path": "packages/uniforms-bridge-graphql/tsconfig.es6.json" },
     { "path": "packages/uniforms-bridge-json-schema/tsconfig.es5.json" },

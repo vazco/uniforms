@@ -15,6 +15,7 @@
   "description": "SimpleSchema 2 bridge for uniforms.",
   "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-bridge-simple-schema-2",
   "bugs": "https://github.com/vazco/uniforms/issues",
+  "funding": "https://github.com/vazco/uniforms?sponsor=1",
   "keywords": [
     "form",
     "forms",
