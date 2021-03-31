@@ -26,6 +26,7 @@
     "uniforms-antd": "^3.0.0",
     "uniforms-bootstrap3": "^3.0.0",
     "uniforms-bootstrap4": "^3.0.0",
+    "uniforms-bootstrap5": "^3.0.0",
     "uniforms-bridge-graphql": "^3.0.0",
     "uniforms-bridge-json-schema": "^3.0.0",
     "uniforms-bridge-simple-schema": "^3.0.0",
