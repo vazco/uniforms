@@ -15,16 +15,27 @@ function Rating({
   required,
   value = 0,
 }: RatingProps) {
+  function onAction(
+    event:
+      | React.KeyboardEvent<HTMLSpanElement>
+      | React.MouseEvent<HTMLSpanElement, MouseEvent>,
+    index: number,
+  ) {
+    if (!disabled && (!('key' in event) || event.key === 'Enter')) {
+      onChange(!required && value === index ? undefined : index);
+    }
+  }
+
   return (
     <div className={classnames('ui', { disabled, required }, className)}>
       {Array.from({ length: max }, (_, index) => index + 1).map(index => (
         <span
           style={{ fontSize: 40, cursor: 'pointer' }}
           key={index}
-          onClick={() =>
-            disabled ||
-            onChange(!required && value === index ? undefined : index)
-          }
+          onClick={event => onAction(event, index)}
+          onKeyDown={event => onAction(event, index)}
+          role="button"
+          tabIndex={0}
         >
           {index <= value ? '★' : '☆'}
         </span>

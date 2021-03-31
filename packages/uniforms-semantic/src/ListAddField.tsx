@@ -33,6 +33,16 @@ function ListAdd({
   const limitNotReached =
     !disabled && !(parent.maxCount! <= parent.value!.length);
 
+  function onAction(event: React.KeyboardEvent | React.MouseEvent) {
+    if (
+      limitNotReached &&
+      !readOnly &&
+      (!('key' in event) || event.key === 'Enter')
+    ) {
+      parent.onChange(parent.value!.concat([cloneDeep(value)]));
+    }
+  }
+
   return (
     <i
       {...filterDOMProps(props)}
@@ -42,11 +52,10 @@ function ListAdd({
         limitNotReached ? 'link' : 'disabled',
         'fitted add icon',
       )}
-      onClick={() => {
-        if (limitNotReached && !readOnly) {
-          parent.onChange(parent.value!.concat([cloneDeep(value)]));
-        }
-      }}
+      onClick={onAction}
+      onKeyDown={onAction}
+      role="button"
+      tabIndex={0}
     />
   );
 }

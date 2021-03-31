@@ -47,14 +47,14 @@ function SubmitField({
       {...filterDOMProps(props)}
     >
       {hasWrap && (
-        <label
+        <span
           className={classnames(
             'form-control-label',
             gridClassName(state.grid, 'label'),
           )}
         >
           &nbsp;
-        </label>
+        </span>
       )}
 
       {hasWrap && (

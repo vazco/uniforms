@@ -49,6 +49,9 @@ export function TabsHeaderItem({
     <span
       className={classNames(styles.item, active && styles.active)}
       onClick={onClick}
+      onKeyDown={event => event.key === 'Enter' && onClick()}
+      role="button"
+      tabIndex={0}
     >
       {children}
     </span>

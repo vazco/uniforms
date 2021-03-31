@@ -27,7 +27,7 @@ export function Badge({
       <img
         className={styles['badge-image']}
         src={`assets/border-0${border}.svg`}
-        alt="border-image"
+        alt=""
       />
       {Icon && (
         <Oval className={styles['top-right-corner']}>

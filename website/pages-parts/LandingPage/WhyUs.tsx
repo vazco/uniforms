@@ -56,6 +56,7 @@ export function WhyUs() {
                 <div className="col">
                   <Oval className={styles.white}>
                     <img
+                      alt=""
                       src="assets/icon-01.svg"
                       className={styles['small-image']}
                     />
@@ -74,6 +75,7 @@ export function WhyUs() {
                 <div className="col">
                   <Oval className={styles.white}>
                     <img
+                      alt=""
                       src="assets/icon-02.svg"
                       className={styles['small-image']}
                     />

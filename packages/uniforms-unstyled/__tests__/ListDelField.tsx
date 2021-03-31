@@ -27,7 +27,7 @@ test('<ListDelField> - prevents onClick when disabled', () => {
   const element = <ListDelField name="x.1" disabled />;
   const wrapper = mount(element, context());
 
-  expect(wrapper.find('span').simulate('click')).toBeTruthy();
+  expect(wrapper.find('[role="button"]').simulate('click')).toBeTruthy();
   expect(onChange).not.toHaveBeenCalled();
 });
 
@@ -35,7 +35,7 @@ test('<ListDelField> - prevents onClick when limit reached', () => {
   const element = <ListDelField name="x.1" />;
   const wrapper = mount(element, context({ x: { minCount: 3 } }));
 
-  expect(wrapper.find('span').simulate('click')).toBeTruthy();
+  expect(wrapper.find('[role="button"]').simulate('click')).toBeTruthy();
   expect(onChange).not.toHaveBeenCalled();
 });
 
@@ -43,6 +43,16 @@ test('<ListDelField> - correctly reacts on click', () => {
   const element = <ListDelField name="x.1" />;
   const wrapper = mount(element, context());
 
-  expect(wrapper.find('span').simulate('click')).toBeTruthy();
+  expect(wrapper.find('[role="button"]').simulate('click')).toBeTruthy();
+  expect(onChange).toHaveBeenLastCalledWith('x', ['x', 'z']);
+});
+
+test('<ListDelField> - correctly reacts on keyboard enter key', () => {
+  const element = <ListDelField name="x.1" />;
+  const wrapper = mount(element, context());
+
+  expect(
+    wrapper.find('[role="button"]').simulate('keydown', { key: 'Enter' }),
+  ).toBeTruthy();
   expect(onChange).toHaveBeenLastCalledWith('x', ['x', 'z']);
 });

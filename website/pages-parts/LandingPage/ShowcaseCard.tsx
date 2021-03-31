@@ -8,7 +8,7 @@ export function ShowcaseCard() {
     <div
       className={classNames(styles['showcase-card'], styles['border-dashed'])}
     >
-      <img src="img/uniforms.svg" />
+      <img alt="" src="img/uniforms.svg" />
       <p className={classNames(styles.text, styles.paragraph)}>
         A React library for building forms. Integrates with every schema and
         wide range of themes.

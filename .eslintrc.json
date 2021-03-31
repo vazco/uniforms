@@ -63,13 +63,6 @@
     "@typescript-eslint/restrict-plus-operands": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
     "import/default": "off",
-    "jsx-a11y/alt-text": "off",
-    "jsx-a11y/anchor-is-valid": "off",
-    "jsx-a11y/click-events-have-key-events": "off",
-    "jsx-a11y/label-has-associated-control": "off",
-    "jsx-a11y/img-redundant-alt": "off",
-    "jsx-a11y/no-onchange": "off",
-    "jsx-a11y/no-static-element-interactions": "off",
     "prefer-rest-params": "off",
     "react/no-children-prop": "off",
     "react/prop-types": "off"
