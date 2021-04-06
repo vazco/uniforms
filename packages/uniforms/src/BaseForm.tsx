@@ -84,6 +84,9 @@ export class BaseForm<
 
   componentDidMount() {
     this.mounted = true;
+    if (this.delayId) {
+      clearTimeout(this.delayId);
+    }
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
