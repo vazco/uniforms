@@ -16,6 +16,8 @@ Currently available bridges:
 - `SimpleSchema2Bridge` in `uniforms-bridge-simple-schema-2`
 - `SimpleSchemaBridge` in `uniforms-bridge-simple-schema`
 
+If you see a lot of [`Warning: Unknown props...`](https://fb.me/react-unknown-prop) logs, check if your schema or theme doesn't provide extra props. If so, consider [registering it for `filterDOMProps`](api-helpers#filterdomprops).
+
 ## `GraphQLBridge`
 
 ```js
