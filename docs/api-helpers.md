@@ -3,19 +3,16 @@ id: api-helpers
 title: Helpers
 ---
 
-## `connectField(component[, options])`
+## `connectField`
 
-Provides form management related props.
-
-The `connectField` helper is a component wrapper, that provides various props related to the form management.
-It also adds the 'Field' suffix to the name of the wrapped component.
+Provides form management related props. The `connectField` helper is a component wrapper, that provides various props related to the form management. It also adds the `Field` suffix to the name of the wrapped component.
 
 The table below lists all of the **guaranteed** props that will be passed to the wrapped component:
 
 |       Name        |         Type          |              Description               |
 | :---------------: | :-------------------: | :------------------------------------: |
-|     `changed`     |        `bool`         |           Has field changed?           |
-|    `disabled`     |        `bool`         |           Is field disabled?           |
+|     `changed`     |       `boolean`       |           Has field changed?           |
+|    `disabled`     |       `boolean`       |           Is field disabled?           |
 |      `error`      |       `object`        | Field scoped part of validation error. |
 |  `errorMessage`   |       `string`        | Field scoped validation error message. |
 |      `field`      |       `object`        |     Field definition from schema.      |
@@ -26,17 +23,25 @@ The table below lists all of the **guaranteed** props that will be passed to the
 |      `name`       |       `string`        |              Field name.               |
 |    `onChange`     | `func(value, [name])` |          Change field value.           |
 |   `placeholder`   |       `string`        |           Field placeholder.           |
-|    `readOnly`     |        `bool`         |          Is field read-only?           |
+|    `readOnly`     |       `boolean`       |          Is field read-only?           |
 | `showInlineError` |       `boolean`       |           Show inline error?           |
 |      `value`      |         `any`         |              Field value.              |
 
-The `connectField` function accepts two arguments: the first one is a component and the second one is an options object.
+The `connectField` function accepts two arguments: the first one is a component and the second one is an `options` object.
+
+```ts
+function Example(props) {
+  /* ... */
+}
+
+const ExampleField = connectField(Example, options);
+```
 
 The table below lists all available options:
 
 |      Name      |         Type         |                                                             Description                                                              |
 | :------------: | :------------------: | :----------------------------------------------------------------------------------------------------------------------------------: |
-| `initialValue` |        `bool`        | Initial value check. If `true`, then after the first render the default value is set as value if no value is provided (`undefined`). |
+| `initialValue` |      `boolean`       | Initial value check. If `true`, then after the first render the default value is set as value if no value is provided (`undefined`). |
 |     `kind`     | `'leaf'` or `'node'` |                                                   See [Field kinds](#field-kinds).                                                   |
 
 ### Field kinds
@@ -50,75 +55,101 @@ Every field is either a _leaf_ or _node_ field. In the future, we could introduc
 
 If you are not sure which one to use, do not use the `kind` option at all - it'll default to the safest option (right now it's `node`).
 
-## `changedKeys(root, valueA, valueB)`
+## `changedKeys`
 
-Returns an array of changed keys between `valueA` and `valueB`, where `root` is the root key.
+Returns an array of changed keys between `valueA` and `valueB`, where `root` is the root key. For examples see [`changedKeys` tests](https://github.com/vazco/uniforms/blob/master/packages/uniforms/__tests__/changedKeys.ts).
 
-```js
+```ts
 import { changedKeys } from 'uniforms';
 
-const arrayOfChangedKeys = changedKeys(root, valueA, valueB);
+changedKeys('a', { b: 1, c: 2 }, { b: 1 }); // ['a', 'a.c']
 ```
 
-**Note:** For more examples, see `changedKeys` [tests](https://github.com/vazco/uniforms/blob/master/packages/uniforms/__tests__/changedKeys.ts).
+## `filterDOMProps`
 
-## `filterDOMProps(props)`
+Removes all uniforms-related props, registered with `filterDOMProps.register`. Use it in all places where you'd like to pass all unrelated props down and `useField` or `connectField` provide you with the props.
 
-Removes all uniforms-related props.
-
-```js
+```ts
 import { filterDOMProps } from 'uniforms';
 
-const nonUniformsProps = filterDOMProps(props);
+const filteredProps = filterDOMProps(props);
 ```
 
-## `filterDOMProps.register(propA, propB, propC ...)`
+### Custom props
 
-Registers additional props to be filtered.
+It's often the case that your custom components will have a bunch of known properties, like `locale` or `userType`. To ease the process of using them across the project, you can register them to make `filterDOMProps` remove them as well. For example, [`SimpleSchemaBridge`](https://github.com/vazco/uniforms/blob/master/packages/uniforms-bridge-simple-schema/src/register.ts) registers all of the SimpleSchema-specific options.
 
-If you want to filter additional props, then you have to register it.
-
-```js
+```ts
 import { filterDOMProps } from 'uniforms';
 
-filterDOMProps.register(propA, propB, propC /* ... */);
+filterDOMProps({ example: 42 }); // { example: 42 }
+filterDOMProps.registered.includes('example'); // false
+filterDOMProps.register('example');
+filterDOMProps.registered.includes('example'); // true
+filterDOMProps({ example: 42 }); // {}
 ```
 
-## `filterDOMProps.registered`
+As `filterDOMProps` is fully typed, if you'd like to make it work with TypeScript, you have to extend the `FilterDOMProps` interface as well.
 
-Returns an array containing already registered props.
+```ts
+declare module 'uniforms' {
+  interface FilterDOMProps {
+    propA: never;
+    propB: never;
+  }
+}
 
-```js
-import { filterDOMProps } from 'uniforms';
-
-filterDOMProps.register(propA, propB, propC /* ... */);
-filterDOMProps.registered; // ['propA', 'propB', ...]
+filterDOMProps.register('propA', 'propB');
 ```
 
-## `joinName([null, ] nameA, nameB, nameC, ...)`
+## `joinName`
 
-Safely joins partial field names. When the first param is null, returns an array. Otherwise, returns a string.
+Safely joins partial field names. When the first param is null, returns an array of strings. Otherwise, returns a string. If you create a custom field with subfields, then it's better to use this helper than manually concatenating them.
 
-If you create a custom field with subfields, then it's better to use this helper.
-
-```js
+```ts
 import { joinName } from 'uniforms';
 
-const joinedNameArray = joinName(null, nameA, nameB, nameC /* ... */);
-const joinedNameString = joinName(nameA, nameB, nameC /* ... */);
+joinName(null, 'a', 'b.c', 'd'); // ['a', 'b', 'c', 'd']
+joinName('a', 'b.c', 'd'); // 'a.b.c.d'
 ```
 
-## `randomIds([prefix])`
+## `randomIds`
 
-Generates random ID, based on given prefix. (_It's rather an internal helper, but it's still exported._)
+Generates random ID, based on given prefix. Use it, if you want to have random but deterministic strings. If no prefix is provided, a unique 'uniforms-X' prefix will be used generated.
 
-Use it, if you want to have some random but deterministic strings. If no prefix is provided, the 'uniforms' prefix will be applied.
-
-```js
+```ts
 import { randomIds } from 'uniforms';
 
-const predictableRandomIdGenerator = randomIds(prefix);
+const randomId1 = randomIds();
+randomId1(); // uniforms-0000-0000
+randomId1(); // uniforms-0000-0001
+randomId1(); // uniforms-0000-0002
 
-const predictableRandomIdA = predictableRandomIdGenerator();
-const predictableRandomIdB = predictableRandomIdGenerator();
+const randomId2 = randomIds();
+randomId2(); // uniforms-0001-0000
+randomId2(); // uniforms-0001-0001
+randomId2(); // uniforms-0001-0002
+
+const randomId3 = randomIds('prefix');
+randomId3(); // prefix-0000
+randomId3(); // prefix-0001
+randomId3(); // prefix-0002
 ```
+
+## `useField`
+
+A hook version of [`connectField`](#connectfield). It receives three arguments: field name (string), field props (object), and optional options.
+
+```ts
+function Example(props) {
+  const [fieldProps, context] = useField(props.name, props, options);
+  return <input {...filterDOMProps(fieldProps)} />;
+}
+```
+
+The table below lists all available options:
+
+|      Name      |   Type    |                                                             Description                                                              |
+| :------------: | :-------: | :----------------------------------------------------------------------------------------------------------------------------------: |
+| `absoluteName` | `boolean` |                                              If `true`, ignores the name from context.                                               |
+| `initialValue` | `boolean` | Initial value check. If `true`, then after the first render the default value is set as value if no value is provided (`undefined`). |
