@@ -38,7 +38,7 @@ const styles = {
 
   bootstrap5: style([
     'https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css',
-    'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css',
+    'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta3/css/bootstrap.min.css',
   ]),
 
   material: style([]),
