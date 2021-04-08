@@ -79,8 +79,7 @@ test('<SelectField> - renders a select with correct name', () => {
 });
 
 test('<SelectField> - renders a select with correct options', () => {
-  // @ts-expect-error Is open a valid prop?
-  const element = <SelectField name="x" open />;
+  const element = <SelectField name="x" />;
   const wrapper = mount(
     element,
     createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
@@ -100,8 +99,7 @@ test('<SelectField> - renders a select with correct options', () => {
 
 test('<SelectField> - renders a select with correct options (transform)', () => {
   const element = (
-    // @ts-expect-error Is open a valid prop?
-    <SelectField name="x" open transform={x => x.toUpperCase()} />
+    <SelectField name="x" transform={(x: string) => x.toUpperCase()} />
   );
   const wrapper = mount(
     element,
