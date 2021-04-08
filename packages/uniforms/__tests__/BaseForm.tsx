@@ -1,3 +1,4 @@
+import { ReactWrapper } from 'enzyme';
 import React from 'react';
 import { BaseForm, Bridge, Context } from 'uniforms';
 
@@ -113,14 +114,19 @@ describe('BaseForm', () => {
   });
 
   describe('when changed', () => {
-    const wrapper = mount<BaseForm<any>>(
-      <BaseForm
-        model={model}
-        schema={schema}
-        onChange={onChange}
-        onSubmit={onSubmit}
-      />,
-    );
+    type Form = BaseForm<any>;
+    let wrapper: ReactWrapper<Form['props'], Form['state'], Form>;
+
+    beforeEach(() => {
+      wrapper = mount(
+        <BaseForm
+          model={model}
+          schema={schema}
+          onChange={onChange}
+          onSubmit={onSubmit}
+        />,
+      );
+    });
 
     it('updates `changed` and `changedMap`', () => {
       const context1 = wrapper.instance().getContext();
@@ -149,6 +155,7 @@ describe('BaseForm', () => {
     });
 
     it('autosaves are not delayed', async () => {
+      wrapper.setProps({ autosave: true });
       wrapper.instance().getContext().onChange('a', 1);
       await new Promise(resolve => setTimeout(resolve));
 
@@ -157,7 +164,7 @@ describe('BaseForm', () => {
     });
 
     it('autosaves can be delayed', async () => {
-      wrapper.setProps({ autosaveDelay: 25 });
+      wrapper.setProps({ autosave: true, autosaveDelay: 25 });
       wrapper.instance().getContext().onChange('a', 1);
       wrapper.instance().getContext().onChange('a', 2);
       wrapper.instance().getContext().onChange('a', 3);
@@ -172,7 +179,7 @@ describe('BaseForm', () => {
     });
 
     it('autosaves can be delayed (longer)', async () => {
-      wrapper.setProps({ autosaveDelay: 10 });
+      wrapper.setProps({ autosave: true, autosaveDelay: 10 });
       wrapper.instance().getContext().onChange('a', 1);
       wrapper.instance().getContext().onChange('a', 2);
       wrapper.instance().getContext().onChange('a', 3);
@@ -190,6 +197,7 @@ describe('BaseForm', () => {
     });
 
     it('autosaves correctly (`autosave` = false)', () => {
+      wrapper.setProps({ autosave: true });
       wrapper.setProps({ autosave: false });
       wrapper.instance().getContext().onChange('a', 1);
 

@@ -91,6 +91,9 @@ export class BaseForm<
 
   componentWillUnmount() {
     this.mounted = false;
+    if (this.delayId) {
+      clearTimeout(this.delayId);
+    }
   }
 
   delayId?: any;
