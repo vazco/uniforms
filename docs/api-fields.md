@@ -88,23 +88,23 @@ A checkbox.
 
 ##### Props:
 
-|       Name        |                                                                               Description                                                                               |                   Available in                    |
-| :---------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------: |
-|   `appearance`    |                 Field appearance. Set to "toggle" to appear as a Material Toggle or to "checkbox" (or leave it undefined) to use a Checkbox appearance.                 |                     material                      |
-|      `extra`      |                                 Extra feedback text. In the antd theme, this renders addtional help text below any validation messages.                                 |                       antd                        |
-|  `feedbackable`   |                                                      Field feedback state. _Some description would be great, huh?_                                                      |                    bootstrap4                     |
-|      `grid`       |        Field layout. Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object is a {mode: size} object. Complete string is simply passed through.        |        bootstrap3, bootstrap4, bootstrap5         |
-|      `help`       |                                                           Help text. _Some description would be great, huh?_                                                            |     antd, bootstrap3, bootstrap4, bootstrap5      |
-|  `helpClassName`  |                                                      Help block className. _Some description would be great, huh?_                                                      |        bootstrap3, bootstrap4, bootstrap5         |
-|     `inline`      |                      Checkbox inline state. In bootstrap themes, a label is rendered as a text but in inline mode, it's treated as a field label.                       |         bootstrap3, bootstrap4,bootstrap5         |
-| `inputClassName`  |                      Input wrapper class name. In bootstrap themes, passed className is used on field block. This is used on direct field wrapper.                      |         bootstrap3, bootstrap4,bootstrap5         |
-|    `inputRef`     | Setting ref prop to a field won't work as desired, because you'll receive a field component rather than an HTML input. If you need an input ref, use this prop instead. |                        All                        |
-|   `labelBefore`   |                       Left label. In bootstrap themes, label is rendered on the right side of a checkbox. This label is rendered above the field.                       |         bootstrap3, bootstrap4,bootstrap5         |
-| `labelClassName`  |                                                       Label className. A custom className for the field's label.                                                        |        bootstrap3, bootstrap4, bootstrap5         |
-|    `labelCol`     |                                                   Field layout. The layout of label. You can set span and/or offset.                                                    |                       antd                        |
-| `showInlineError` |                                                       Field inline error. _Some description would be great, huh?_                                                       | antd, bootstrap3, bootstrap4,bootstrap5, semantic |
-|  `wrapClassName`  |                                             Field and sourroundings wrap className. _Some description would be great, huh?_                                             |         bootstrap3, bootstrap4,bootstrap5         |
-|   `wrapperCol`    |                                                     Field layout. The layout for input controls. Same as labelCol.                                                      |                       antd                        |
+|       Name        |                                                                               Description                                                                               |                    Available in                    |
+| :---------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------: |
+|   `appearance`    |                 Field appearance. Set to "toggle" to appear as a Material Toggle or to "checkbox" (or leave it undefined) to use a Checkbox appearance.                 |                      material                      |
+|      `extra`      |                                 Extra feedback text. In the antd theme, this renders addtional help text below any validation messages.                                 |                        antd                        |
+|  `feedbackable`   |                                                      Field feedback state. _Some description would be great, huh?_                                                      |                     bootstrap4                     |
+|      `grid`       |        Field layout. Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object is a {mode: size} object. Complete string is simply passed through.        |         bootstrap3, bootstrap4, bootstrap5         |
+|      `help`       |                                                           Help text. _Some description would be great, huh?_                                                            |      antd, bootstrap3, bootstrap4, bootstrap5      |
+|  `helpClassName`  |                                                      Help block className. _Some description would be great, huh?_                                                      |         bootstrap3, bootstrap4, bootstrap5         |
+|     `inline`      |                      Checkbox inline state. In bootstrap themes, a label is rendered as a text but in inline mode, it's treated as a field label.                       |         bootstrap3, bootstrap4, bootstrap5         |
+| `inputClassName`  |                      Input wrapper class name. In bootstrap themes, passed className is used on field block. This is used on direct field wrapper.                      |         bootstrap3, bootstrap4, bootstrap5         |
+|    `inputRef`     | Setting ref prop to a field won't work as desired, because you'll receive a field component rather than an HTML input. If you need an input ref, use this prop instead. |                        All                         |
+|   `labelBefore`   |                       Left label. In bootstrap themes, label is rendered on the right side of a checkbox. This label is rendered above the field.                       |         bootstrap3, bootstrap4, bootstrap5         |
+| `labelClassName`  |                                                       Label className. A custom className for the field's label.                                                        |         bootstrap3, bootstrap4, bootstrap5         |
+|    `labelCol`     |                                                   Field layout. The layout of label. You can set span and/or offset.                                                    |                        antd                        |
+| `showInlineError` |                                                       Field inline error. _Some description would be great, huh?_                                                       | antd, bootstrap3, bootstrap4, bootstrap5, semantic |
+|  `wrapClassName`  |                                             Field and sourroundings wrap className. _Some description would be great, huh?_                                             |         bootstrap3, bootstrap4, bootstrap5         |
+|   `wrapperCol`    |                                                     Field layout. The layout for input controls. Same as labelCol.                                                      |                        antd                        |
 
 ##### Props usage:
 
@@ -141,27 +141,27 @@ import { BoolField } from 'uniforms-unstyled';
 
 ##### Props:
 
-|       Name        |                                                                                  Description                                                                                   |                   Available in                    |
-| :---------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------: |
-|      `extra`      |                                    Extra feedback text. In the antd theme, this renders addtional help text below any validation messages.                                     |                       antd                        |
-|  `feedbackable`   |                                                         Field feedback state. _Some description would be great, huh?_                                                          |                    bootstrap4                     |
-|      `grid`       |           Field layout. Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object is a {mode: size} object. Complete string is simply passed through.            |         bootstrap3, bootstrap4,bootstrap5         |
-|      `help`       |                                                               Help text. _Some description would be great, huh?_                                                               |      antd,bootstrap3, bootstrap4,bootstrap5       |
-|  `helpClassName`  |                                                         Help block className. _Some description would be great, huh?_                                                          |         bootstrap3, bootstrap4,bootstrap5         |
-|      `icon`       |                Input icon. Semantic inputs can have an icon. By default, it's placed on the right side - to place it on the left, use `iconLeft` prop instead.                 |                     semantic                      |
-|    `iconLeft`     |                       Semantic inputs can have an icon. With this prop, it's placed on the left side - to place it on the right, use icon prop instead.                        |                     semantic                      |
-|    `iconProps`    |                                    Input icon props. Semantic inputs can have an icon. These props are passed directly to the icon element.                                    |                     semantic                      |
-| `inputClassName`  |                         Input wrapper class name. In bootstrap themes, passed className is used on field block. This is used on direct field wrapper.                          |         bootstrap3, bootstrap4,bootstrap5         |
-|    `inputRef`     |    Setting ref prop to a field won't work as desired, because you'll receive a field component rather than an HTML input. If you need an input ref, use this prop instead.     |                        All                        |
-| `labelClassName`  |                                                           Label className. A custom className for the field's label.                                                           |         bootstrap3, bootstrap4,bootstrap5         |
-|    `labelCol`     |                                                       Field layout. The layout of label. You can set span and/or offset.                                                       |                       antd                        |
-|   `labelProps`    |                                                                            Props for the InputLabel                                                                            |                     material                      |
-|       `max`       |                                                                          Maximum value. Date object.                                                                           |                        All                        |
-|       `min`       |                                                                          Minimal value. Date object.                                                                           |                        All                        |
-| `showInlineError` |                                                          Field inline error. _Some description would be great, huh?_                                                           | antd, bootstrap3, bootstrap4,bootstrap5, semantic |
-|   `timeFormat`    |                                                           Display time picker in ampm (12hr) format or 24hr format.                                                            |                     material                      |
-|  `wrapClassName`  | Field and sourroundings wrap className. In SemanticUI theme, this class name is used on ui input wrapper, so you can pass classes like small, huge, inverted, transparent etc. |    bootstrap3, bootstrap4,bootstrap5, semantic    |
-|   `wrapperCol`    |                                                         Field layout. The layout for input controls. Same as labelCol.                                                         |                       antd                        |
+|       Name        |                                                                                  Description                                                                                   |                    Available in                    |
+| :---------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------: |
+|      `extra`      |                                    Extra feedback text. In the antd theme, this renders addtional help text below any validation messages.                                     |                        antd                        |
+|  `feedbackable`   |                                                         Field feedback state. _Some description would be great, huh?_                                                          |                     bootstrap4                     |
+|      `grid`       |           Field layout. Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object is a {mode: size} object. Complete string is simply passed through.            |         bootstrap3, bootstrap4, bootstrap5         |
+|      `help`       |                                                               Help text. _Some description would be great, huh?_                                                               |      antd, bootstrap3, bootstrap4, bootstrap5      |
+|  `helpClassName`  |                                                         Help block className. _Some description would be great, huh?_                                                          |         bootstrap3, bootstrap4, bootstrap5         |
+|      `icon`       |                Input icon. Semantic inputs can have an icon. By default, it's placed on the right side - to place it on the left, use `iconLeft` prop instead.                 |                      semantic                      |
+|    `iconLeft`     |                       Semantic inputs can have an icon. With this prop, it's placed on the left side - to place it on the right, use icon prop instead.                        |                      semantic                      |
+|    `iconProps`    |                                    Input icon props. Semantic inputs can have an icon. These props are passed directly to the icon element.                                    |                      semantic                      |
+| `inputClassName`  |                         Input wrapper class name. In bootstrap themes, passed className is used on field block. This is used on direct field wrapper.                          |         bootstrap3, bootstrap4, bootstrap5         |
+|    `inputRef`     |    Setting ref prop to a field won't work as desired, because you'll receive a field component rather than an HTML input. If you need an input ref, use this prop instead.     |                        All                         |
+| `labelClassName`  |                                                           Label className. A custom className for the field's label.                                                           |         bootstrap3, bootstrap4, bootstrap5         |
+|    `labelCol`     |                                                       Field layout. The layout of label. You can set span and/or offset.                                                       |                        antd                        |
+|   `labelProps`    |                                                                            Props for the InputLabel                                                                            |                      material                      |
+|       `max`       |                                                                          Maximum value. Date object.                                                                           |                        All                         |
+|       `min`       |                                                                          Minimal value. Date object.                                                                           |                        All                         |
+| `showInlineError` |                                                          Field inline error. _Some description would be great, huh?_                                                           | antd, bootstrap3, bootstrap4, bootstrap5, semantic |
+|   `timeFormat`    |                                                           Display time picker in ampm (12hr) format or 24hr format.                                                            |                      material                      |
+|  `wrapClassName`  | Field and sourroundings wrap className. In SemanticUI theme, this class name is used on ui input wrapper, so you can pass classes like small, huge, inverted, transparent etc. |    bootstrap3, bootstrap4, bootstrap5, semantic    |
+|   `wrapperCol`    |                                                         Field layout. The layout for input controls. Same as labelCol.                                                         |                        antd                        |
 
 ##### Props usage:
 
@@ -255,9 +255,9 @@ import { HiddenField } from 'uniforms-unstyled';
 
 ##### Props:
 
-|   Name    |             Description              |           Available in            |
-| :-------: | :----------------------------------: | :-------------------------------: |
-| `addIcon` | Icon. By default, glyphicon is used. | bootstrap3, bootstrap4,bootstrap5 |
+|   Name    |             Description              |            Available in            |
+| :-------: | :----------------------------------: | :--------------------------------: |
+| `addIcon` | Icon. By default, glyphicon is used. | bootstrap3, bootstrap4, bootstrap5 |
 
 **Note:** This is one of _internal_ components of `ListField`.
 
@@ -273,9 +273,9 @@ import { ListAddField } from 'uniforms-unstyled';
 
 ##### Props:
 
-|     Name     |             Description              |           Available in            |
-| :----------: | :----------------------------------: | :-------------------------------: |
-| `removeIcon` | Icon. By default, glyphicon is used. | bootstrap3, bootstrap4,bootstrap5 |
+|     Name     |             Description              |            Available in            |
+| :----------: | :----------------------------------: | :--------------------------------: |
+| `removeIcon` | Icon. By default, glyphicon is used. | bootstrap3, bootstrap4, bootstrap5 |
 
 **Note:** This is one of _internal_ components of `ListField`.
 
@@ -293,10 +293,10 @@ import { ListDelField } from 'uniforms-unstyled';
 
 |       Name        |  Default  |                                      Description                                       |                 Available in                 |
 | :---------------: | :-------: | :------------------------------------------------------------------------------------: | :------------------------------------------: |
-|     `addIcon`     | glyphicon |                         Icon. It's passed to the ListAddField.                         |      bootstrap3, bootstrap4,bootstrap5       |
+|     `addIcon`     | glyphicon |                         Icon. It's passed to the ListAddField.                         |      bootstrap3, bootstrap4, bootstrap5      |
 |  `initialCount`   |     -     | Initial items count. At least this amount of fields will be rendered at the beginning. |                     All                      |
 |    `itemProps`    |     -     |           ListItemField props. These props are passed to the ListItemField.            |                     All                      |
-|   `removeIcon`    | glyphicon |                         Icon. It's passed to the ListDelField.                         |      bootstrap3, bootstrap4,bootstrap5       |
+|   `removeIcon`    | glyphicon |                         Icon. It's passed to the ListDelField.                         |      bootstrap3, bootstrap4, bootstrap5      |
 | `showInlineError` |           |              Field inline error. _Some description would be great, huh?_               | bootstrap3, bootstrap4, bootstrap5, semantic |
 
 ##### Props usage:
@@ -339,24 +339,24 @@ A textarea.
 
 ##### Props:
 
-|       Name        |                                                                               Description                                                                               |                   Available in                    |
-| :---------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------: |
-|      `extra`      |                                 Extra feedback text. In the antd theme, this renders addtional help text below any validation messages.                                 |                       antd                        |
-|      `grid`       |        Field layout. Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object is a {mode: size} object. Complete string is simply passed through.        |         bootstrap3, bootstrap4,bootstrap5         |
-|      `help`       |                                                           Help text. _Some description would be great, huh?_                                                            |      antd, bootstrap3, bootstrap4,bootstrap5      |
-|  `helpClassName`  |                                                      Help block className. _Some description would be great, huh?_                                                      |         bootstrap3, bootstrap4,bootstrap5         |
-|      `icon`       |             Input icon. Semantic inputs can have an icon. By default, it's placed on the right side - to place it on the left, use `iconLeft` prop instead.             |                     semantic                      |
-|    `iconLeft`     |                    Semantic inputs can have an icon. With this prop, it's placed on the left side - to place it on the right, use icon prop instead.                    |                     semantic                      |
-|    `iconProps`    |                                Input icon props. Semantic inputs can have an icon. These props are passed directly to the icon element.                                 |                     semantic                      |
-| `inputClassName`  |                      Input wrapper class name. In bootstrap themes, passed className is used on field block. This is used on direct field wrapper.                      |         bootstrap3, bootstrap4,bootstrap5         |
-|     `inline`      |                      Checkbox inline state. In bootstrap themes, a label is rendered as a text but in inline mode, it's treated as a field label.                       |              bootstrap3, bootstrap4               |
-|    `inputRef`     | Setting ref prop to a field won't work as desired, because you'll receive a field component rather than an HTML input. If you need an input ref, use this prop instead. |                        All                        |
-|   `labelBefore`   |                       Left label. In bootstrap themes, label is rendered on the right side of a checkbox. This label is rendered above the field.                       |         bootstrap3, bootstrap4,bootstrap5         |
-| `labelClassName`  |                                                       Label className. A custom className for the field's label.                                                        |         bootstrap3, bootstrap4,bootstrap5         |
-|    `labelCol`     |                                                   Field layout. The layout of label. You can set span and/or offset.                                                    |                       antd                        |
-| `showInlineError` |                                                       Field inline error. _Some description would be great, huh?_                                                       | antd, bootstrap3, bootstrap4,bootstrap5, semantic |
-|   `wrapperCol`    |                                                     Field layout. The layout for input controls. Same as labelCol.                                                      |                       antd                        |
-|  `wrapClassName`  |                                             Field and sourroundings wrap className. _Some description would be great, huh?_                                             |         bootstrap3, bootstrap4,bootstrap5         |
+|       Name        |                                                                               Description                                                                               |                    Available in                    |
+| :---------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------: |
+|      `extra`      |                                 Extra feedback text. In the antd theme, this renders addtional help text below any validation messages.                                 |                        antd                        |
+|      `grid`       |        Field layout. Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object is a {mode: size} object. Complete string is simply passed through.        |         bootstrap3, bootstrap4, bootstrap5         |
+|      `help`       |                                                           Help text. _Some description would be great, huh?_                                                            |      antd, bootstrap3, bootstrap4, bootstrap5      |
+|  `helpClassName`  |                                                      Help block className. _Some description would be great, huh?_                                                      |         bootstrap3, bootstrap4, bootstrap5         |
+|      `icon`       |             Input icon. Semantic inputs can have an icon. By default, it's placed on the right side - to place it on the left, use `iconLeft` prop instead.             |                      semantic                      |
+|    `iconLeft`     |                    Semantic inputs can have an icon. With this prop, it's placed on the left side - to place it on the right, use icon prop instead.                    |                      semantic                      |
+|    `iconProps`    |                                Input icon props. Semantic inputs can have an icon. These props are passed directly to the icon element.                                 |                      semantic                      |
+| `inputClassName`  |                      Input wrapper class name. In bootstrap themes, passed className is used on field block. This is used on direct field wrapper.                      |         bootstrap3, bootstrap4, bootstrap5         |
+|     `inline`      |                      Checkbox inline state. In bootstrap themes, a label is rendered as a text but in inline mode, it's treated as a field label.                       |               bootstrap3, bootstrap4               |
+|    `inputRef`     | Setting ref prop to a field won't work as desired, because you'll receive a field component rather than an HTML input. If you need an input ref, use this prop instead. |                        All                         |
+|   `labelBefore`   |                       Left label. In bootstrap themes, label is rendered on the right side of a checkbox. This label is rendered above the field.                       |         bootstrap3, bootstrap4, bootstrap5         |
+| `labelClassName`  |                                                       Label className. A custom className for the field's label.                                                        |         bootstrap3, bootstrap4, bootstrap5         |
+|    `labelCol`     |                                                   Field layout. The layout of label. You can set span and/or offset.                                                    |                        antd                        |
+| `showInlineError` |                                                       Field inline error. _Some description would be great, huh?_                                                       | antd, bootstrap3, bootstrap4, bootstrap5, semantic |
+|   `wrapperCol`    |                                                     Field layout. The layout for input controls. Same as labelCol.                                                      |                        antd                        |
+|  `wrapClassName`  |                                             Field and sourroundings wrap className. _Some description would be great, huh?_                                             |         bootstrap3, bootstrap4, bootstrap5         |
 
 ##### Props usage:
 
@@ -391,11 +391,11 @@ import { LongTextField } from 'uniforms-unstyled';
 
 ##### Props:
 
-|       Name        |                                                                     Description                                                                     |                   Available in                    |
-| :---------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------: |
-|     `fields`      |       Array of rendered fields. If no custom content provided, only those fields are rendered. By default, All of nested fields are rendered.       |                        All                        |
-|     `grouped`     | Add / remove "grouped" class from the field. In Semantic, fields can be grouped using this class. By default, this class is added to the NestField. |                     semantic                      |
-| `showInlineError` |                                             Field inline error. _Some description would be great, huh?_                                             | antd, bootstrap3, bootstrap4,bootstrap5, semantic |
+|       Name        |                                                                     Description                                                                     |                    Available in                    |
+| :---------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------: |
+|     `fields`      |       Array of rendered fields. If no custom content provided, only those fields are rendered. By default, All of nested fields are rendered.       |                        All                         |
+|     `grouped`     | Add / remove "grouped" class from the field. In Semantic, fields can be grouped using this class. By default, this class is added to the NestField. |                      semantic                      |
+| `showInlineError` |                                             Field inline error. _Some description would be great, huh?_                                             | antd, bootstrap3, bootstrap4, bootstrap5, semantic |
 
 ##### Props usage:
 
@@ -415,17 +415,17 @@ A numeric input field.
 | :---------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------: |
 |     `decimal`     |                                                        Decimal mode. This will change value step from 1 to 0.01.                                                        |                        All                         |
 |      `extra`      |                                 Extra feedback text. In the antd theme, this renders addtional help text below any validation messages.                                 |                        antd                        |
-|      `grid`       |        Field layout. Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object is a {mode: size} object. Complete string is simply passed through.        |         bootstrap3, bootstrap4,bootstrap5          |
-|      `help`       |                                                           Help text. _Some description would be great, huh?_                                                            |      antd, bootstrap3, bootstrap4,bootstrap5       |
-|  `helpClassName`  |                                                      Help block className. _Some description would be great, huh?_                                                      |         bootstrap3, bootstrap4,bootstrap5          |
+|      `grid`       |        Field layout. Bootstrap grid layout style. Number is an equivalent of {sm: n}. Object is a {mode: size} object. Complete string is simply passed through.        |         bootstrap3, bootstrap4, bootstrap5         |
+|      `help`       |                                                           Help text. _Some description would be great, huh?_                                                            |      antd, bootstrap3, bootstrap4, bootstrap5      |
+|  `helpClassName`  |                                                      Help block className. _Some description would be great, huh?_                                                      |         bootstrap3, bootstrap4, bootstrap5         |
 |      `icon`       |             Input icon. Semantic inputs can have an icon. By default, it's placed on the right side - to place it on the left, use `iconLeft` prop instead.             |                      semantic                      |
 |    `iconLeft`     |                    Semantic inputs can have an icon. With this prop, it's placed on the left side - to place it on the right, use icon prop instead.                    |                      semantic                      |
 |    `iconProps`    |                                Input icon props. Semantic inputs can have an icon. These props are passed directly to the icon element.                                 |                      semantic                      |
-| `inputClassName`  |                      Input wrapper class name. In bootstrap themes, passed className is used on field block. This is used on direct field wrapper.                      |         bootstrap3, bootstrap4,bootstrap5          |
+| `inputClassName`  |                      Input wrapper class name. In bootstrap themes, passed className is used on field block. This is used on direct field wrapper.                      |         bootstrap3, bootstrap4, bootstrap5         |
 |     `inline`      |                      Checkbox inline state. In bootstrap themes, a label is rendered as a text but in inline mode, it's treated as a field label.                       |               bootstrap3, bootstrap4               |
 |    `inputRef`     | Setting ref prop to a field won't work as desired, because you'll receive a field component rather than an HTML input. If you need an input ref, use this prop instead. |                        All                         |
 |   `labelBefore`   |                       Left label. In bootstrap themes, label is rendered on the right side of a checkbox. This label is rendered above the field.                       |               bootstrap3, bootstrap4               |
-| `labelClassName`  |                                                       Label className. A custom className for the field's label.                                                        |         bootstrap3, bootstrap4,bootstrap5          |
+| `labelClassName`  |                                                       Label className. A custom className for the field's label.                                                        |         bootstrap3, bootstrap4, bootstrap5         |
 |    `labelCol`     |                                                   Field layout. The layout of label. You can set span and/or offset.                                                    |                        antd                        |
 |       `max`       |                                                                       Maximum value. Date object.                                                                       |                        All                         |
 |       `min`       |                                                                       Minimal value. Date object.                                                                       |                        All                         |
@@ -474,9 +474,9 @@ import { NumField } from 'uniforms-unstyled';
 |       Name        |                                                          Description                                                          |                    Available in                    |
 | :---------------: | :---------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------: |
 |  `allowedValues`  |                          Array of allowed values. By default, those are extracted from your schema.                           |                        All                         |
-|     `inline`      | Checkbox inline state. In bootstrap themes, a label is rendered as a text but in inline mode, it's treated as a field label.  |         bootstrap3, bootstrap4,bootstrap5          |
-| `inputClassName`  | Input wrapper class name. In bootstrap themes, passed className is used on field block. This is used on direct field wrapper. |         bootstrap3, bootstrap4,bootstrap5          |
-| `labelClassName`  |                                  Label className. A custom className for the field's label.                                   |         bootstrap3, bootstrap4,bootstrap5          |
+|     `inline`      | Checkbox inline state. In bootstrap themes, a label is rendered as a text but in inline mode, it's treated as a field label.  |         bootstrap3, bootstrap4, bootstrap5         |
+| `inputClassName`  | Input wrapper class name. In bootstrap themes, passed className is used on field block. This is used on direct field wrapper. |         bootstrap3, bootstrap4, bootstrap5         |
+| `labelClassName`  |                                  Label className. A custom className for the field's label.                                   |         bootstrap3, bootstrap4, bootstrap5         |
 |    `labelCol`     |                              Field layout. The layout of label. You can set span and/or offset.                               |                        antd                        |
 | `showInlineError` |                                  Field inline error. _Some description would be great, huh?_                                  | antd, bootstrap3, bootstrap4, bootstrap5, semantic |
 |    `transform`    |                        Label transform. Allows to transform the each value into a human-readable label                        |                        All                         |
@@ -506,27 +506,27 @@ import { RadioField } from 'uniforms-unstyled';
 
 ##### Props:
 
-|       Name        |                                                                               Description                                                                               |                   Available in                    |
-| :---------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------: |
-|  `allowedValues`  |                                               Array of allowed values. By default, those are extracted from your schema.                                                |                        All                        |
-|   `appearance`    |                 Field appearance. Set to "toggle" to appear as a Material Toggle or to "checkbox" (or leave it undefined) to use a Checkbox appearance.                 |                     material                      |
-|   `checkboxes`    |                                       Turn on checkbox/radio mode. It's always true in multiple (i.e. fieldType === Array) mode.                                        |                        All                        |
-|   `disableItem`   |                                                           Disable items (options) based on a given predicate.                                                           |                        All                        |
-|      `extra`      |                                Extra feedback text. In the antd theme, this renders additional help text below any validation messages.                                 |                       antd                        |
-|      `help`       |                                                           Help text. _Some description would be great, huh?_                                                            |      antd, bootstrap3, bootstrap4,bootstrap5      |
-|  `helpClassName`  |                                                      Help block className. _Some description would be great, huh?_                                                      |         bootstrap3, bootstrap4,bootstrap5         |
-|     `inline`      |                      Checkbox inline state. In bootstrap themes, a label is rendered as a text but in inline mode, it's treated as a field label.                       |         bootstrap3, bootstrap4,bootstrap5         |
-| `inputClassName`  |                      Input wrapper class name. In bootstrap themes, passed className is used on field block. This is used on direct field wrapper.                      |         bootstrap3, bootstrap4,bootstrap5         |
-|    `inputRef`     | Setting ref prop to a field won't work as desired, because you'll receive a field component rather than an HTML input. If you need an input ref, use this prop instead. |                        All                        |
-| `labelClassName`  |                                                       Label className. A custom className for the field's label.                                                        |        bootstrap3, bootstrap4, bootstrap5         |
-|    `labelCol`     |                                                   Field layout. The layout of label. You can set span and/or offset.                                                    |                       antd                        |
-|   `labelProps`    |                                                                        Props for the InputLabel                                                                         |                     material                      |
-|     `options`     |   Options. It is optional and using `options` will override `transform` and `allowedValues`. It can be either an object or an array (or a function, that returns it).   |                        All                        |
-| `showInlineError` |                                                       Field inline error. _Some description would be great, huh?_                                                       | antd, bootstrap3, bootstrap4,bootstrap5, semantic |
-|    `transform`    |                                             Label transform. Allows to transform the each value into a human-readable label                                             |                        All                        |
-|   `wrapperCol`    |                                                     Field layout. The layout for input controls. Same as labelCol.                                                      |                       antd                        |
-|  `wrapClassName`  |                                             Field and surroundings wrap className. _Some description would be great, huh?_                                              |         bootstrap3, bootstrap4,bootstrap5         |
-| `textFieldProps`  |                                          Props injected directly to `TextField` ( valid only for non-checkbox `SelectField` ).                                          |                     material                      |
+|       Name        |                                                                               Description                                                                               |                    Available in                    |
+| :---------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------: |
+|  `allowedValues`  |                                               Array of allowed values. By default, those are extracted from your schema.                                                |                        All                         |
+|   `appearance`    |                 Field appearance. Set to "toggle" to appear as a Material Toggle or to "checkbox" (or leave it undefined) to use a Checkbox appearance.                 |                      material                      |
+|   `checkboxes`    |                                       Turn on checkbox/radio mode. It's always true in multiple (i.e. fieldType === Array) mode.                                        |                        All                         |
+|   `disableItem`   |                                                           Disable items (options) based on a given predicate.                                                           |                        All                         |
+|      `extra`      |                                Extra feedback text. In the antd theme, this renders additional help text below any validation messages.                                 |                        antd                        |
+|      `help`       |                                                           Help text. _Some description would be great, huh?_                                                            |      antd, bootstrap3, bootstrap4, bootstrap5      |
+|  `helpClassName`  |                                                      Help block className. _Some description would be great, huh?_                                                      |         bootstrap3, bootstrap4, bootstrap5         |
+|     `inline`      |                      Checkbox inline state. In bootstrap themes, a label is rendered as a text but in inline mode, it's treated as a field label.                       |         bootstrap3, bootstrap4, bootstrap5         |
+| `inputClassName`  |                      Input wrapper class name. In bootstrap themes, passed className is used on field block. This is used on direct field wrapper.                      |         bootstrap3, bootstrap4, bootstrap5         |
+|    `inputRef`     | Setting ref prop to a field won't work as desired, because you'll receive a field component rather than an HTML input. If you need an input ref, use this prop instead. |                        All                         |
+| `labelClassName`  |                                                       Label className. A custom className for the field's label.                                                        |         bootstrap3, bootstrap4, bootstrap5         |
+|    `labelCol`     |                                                   Field layout. The layout of label. You can set span and/or offset.                                                    |                        antd                        |
+|   `labelProps`    |                                                                        Props for the InputLabel                                                                         |                      material                      |
+|     `options`     |   Options. It is optional and using `options` will override `transform` and `allowedValues`. It can be either an object or an array (or a function, that returns it).   |                        All                         |
+| `showInlineError` |                                                       Field inline error. _Some description would be great, huh?_                                                       | antd, bootstrap3, bootstrap4, bootstrap5, semantic |
+|    `transform`    |                                             Label transform. Allows to transform the each value into a human-readable label                                             |                        All                         |
+|   `wrapperCol`    |                                                     Field layout. The layout for input controls. Same as labelCol.                                                      |                        antd                        |
+|  `wrapClassName`  |                                             Field and surroundings wrap className. _Some description would be great, huh?_                                              |         bootstrap3, bootstrap4, bootstrap5         |
+| `textFieldProps`  |                                          Props injected directly to `TextField` ( valid only for non-checkbox `SelectField` ).                                          |                      material                      |
 
 ##### Props usage:
 
@@ -560,10 +560,10 @@ import { SelectField } from 'uniforms-unstyled';
 
 ##### Props:
 
-|       Name       |                                                                               Description                                                                               |           Available in            |
-| :--------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------: |
-| `inputClassName` |                      Input wrapper class name. In bootstrap themes, passed className is used on field block. This is used on direct field wrapper.                      | bootstrap3, bootstrap4,bootstrap5 |
-|    `inputRef`    | Setting ref prop to a field won't work as desired, because you'll receive a field component rather than an HTML input. If you need an input ref, use this prop instead. |                All                |
+|       Name       |                                                                               Description                                                                               |            Available in            |
+| :--------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------: |
+| `inputClassName` |                      Input wrapper class name. In bootstrap themes, passed className is used on field block. This is used on direct field wrapper.                      | bootstrap3, bootstrap4, bootstrap5 |
+|    `inputRef`    | Setting ref prop to a field won't work as desired, because you'll receive a field component rather than an HTML input. If you need an input ref, use this prop instead. |                All                 |
 
 ##### Props usage:
 
