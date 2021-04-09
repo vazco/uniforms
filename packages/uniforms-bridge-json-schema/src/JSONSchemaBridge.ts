@@ -94,7 +94,7 @@ export default class JSONSchemaBridge extends Bridge {
     return (
       // FIXME: Correct type for `error`.
       error?.details?.find?.((detail: any) => {
-        const path = pathToName(detail.dataPath);
+        const path = pathToName(detail.instancePath);
 
         return (
           name === path ||
