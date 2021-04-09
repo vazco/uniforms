@@ -8,6 +8,7 @@ export type AutoFieldsProps = {
   element?: ComponentType | string;
   fields?: string[];
   omitFields?: string[];
+  showInlineError?: boolean;
 };
 
 export default function AutoFields({
@@ -15,6 +16,7 @@ export default function AutoFields({
   element = 'div',
   fields,
   omitFields = [],
+  showInlineError,
   ...props
 }: AutoFieldsProps) {
   const { schema } = useForm();
@@ -24,6 +26,12 @@ export default function AutoFields({
     props,
     (fields ?? schema.getSubfields())
       .filter(field => !omitFields.includes(field))
-      .map(field => createElement(autoField, { key: field, name: field })),
+      .map(field =>
+        createElement(autoField, {
+          key: field,
+          name: field,
+          ...(showInlineError !== null ? { showInlineError } : {}),
+        }),
+      ),
   );
 }
