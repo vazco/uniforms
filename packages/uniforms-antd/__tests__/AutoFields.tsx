@@ -1,5 +1,5 @@
 import React from 'react';
-import { AutoFields } from 'uniforms-antd';
+import { AutoField, AutoFields } from 'uniforms-antd';
 
 import createContext from './_createContext';
 import mount from './_mount';
@@ -85,4 +85,20 @@ test('<AutoFields> - wraps fields in specified element', () => {
   );
 
   expect(wrapper.find('section').find('input')).toHaveLength(3);
+});
+
+test('<AutoFields> - pass props to the children', () => {
+  const element = <AutoFields showInlineError />;
+  const wrapper = mount(
+    element,
+    createContext({
+      x: { type: String },
+      y: { type: String },
+      z: { type: String },
+    }),
+  );
+
+  expect(wrapper.find(AutoField).at(0).prop('showInlineError')).toBeTruthy();
+  expect(wrapper.find(AutoField).at(1).prop('showInlineError')).toBeTruthy();
+  expect(wrapper.find(AutoField).at(2).prop('showInlineError')).toBeTruthy();
 });
