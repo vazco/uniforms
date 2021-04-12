@@ -42,7 +42,6 @@ function Bool({ onChange, ...props }: BoolFieldProps) {
         <input
           checked={value || false}
           className={classnames('form-check-input', {
-            'form-check-input': props.error,
             'is-valid': !props.error && props.changed,
           })}
           disabled={disabled}
