@@ -39,7 +39,7 @@ function Date({
     <input
       className={classnames(inputClassName, 'form-control', {
         'is-invalid': error,
-        'is-valid': !error && !!value && props.changed,
+        'is-valid': !error && props.changed,
       })}
       disabled={disabled}
       id={id}

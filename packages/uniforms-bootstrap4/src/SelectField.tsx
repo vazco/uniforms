@@ -86,7 +86,7 @@ function Select({
       <select
         className={classnames(inputClassName, 'c-select form-control', {
           'is-invalid': error,
-          'is-valid': !error && !!value && props.changed,
+          'is-valid': !error && props.changed,
         })}
         disabled={disabled}
         id={id}
