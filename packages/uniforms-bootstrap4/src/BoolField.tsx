@@ -32,14 +32,19 @@ function Bool({ onChange, ...props }: BoolFieldProps) {
     { ...props, label: labelBefore, value: props.value },
     <div
       className={classnames(inputClassName, 'form-check', 'checkbox', {
-        'text-danger': error,
         'custom-control-inline': inline,
+        'text-danger': error,
+        'text-success':
+          !props.error && props.value !== undefined && props.changed,
       })}
     >
       <label htmlFor={props.id} className="form-check-label">
         <input
           checked={value || false}
-          className="form-check-input"
+          className={classnames('form-check-input', {
+            'form-check-input': props.error,
+            'is-valid': !props.error && props.changed,
+          })}
           disabled={disabled}
           id={props.id}
           name={name}

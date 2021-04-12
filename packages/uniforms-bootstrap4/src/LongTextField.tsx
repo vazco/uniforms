@@ -16,6 +16,7 @@ function LongText(props: LongTextFieldProps) {
     <textarea
       className={classnames(props.inputClassName, 'form-control', {
         'is-invalid': props.error,
+        'is-valid': !props.error && !!props.value && props.changed,
       })}
       disabled={props.disabled}
       id={props.id}

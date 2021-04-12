@@ -54,6 +54,7 @@ export default function wrapField(
     <div
       className={classnames(className, 'form-group', {
         'is-invalid': error,
+        'is-valid': !error && !!props.value,
         disabled,
         required,
         row: grid,
@@ -74,6 +75,7 @@ export default function wrapField(
             {
               'col-form-label': grid,
               'text-danger': error,
+              'text-success': !error && props.value !== undefined,
             },
             gridClassName(grid, 'label'),
             labelClassName,
