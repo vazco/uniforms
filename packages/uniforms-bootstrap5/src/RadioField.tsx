@@ -29,6 +29,7 @@ function Radio(props: RadioFieldProps) {
         key={item}
         className={classnames(props.inputClassName, 'form-check', {
           'text-danger': props.error,
+          'text-success': !props.error && props.changed,
           'form-check-inline': props.inline,
         })}
       >

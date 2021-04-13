@@ -32,7 +32,8 @@ function Bool({ onChange, ...props }: BoolFieldProps) {
     { ...props, label: labelBefore, value: props.value },
     <div
       className={classnames(inputClassName, 'form-check', {
-        'is-invalid': error,
+        'text-danger': error,
+        'text-success': !error && props.changed,
         'form-check-inline': inline,
       })}
     >
