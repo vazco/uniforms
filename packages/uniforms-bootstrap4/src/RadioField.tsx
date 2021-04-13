@@ -30,8 +30,7 @@ function Radio(props: RadioFieldProps) {
         className={classnames(props.inputClassName, 'form-check', 'radio', {
           'custom-control-inline': props.inline,
           'text-danger': props.error,
-          'text-success':
-            !props.error && props.value !== undefined && props.changed,
+          'text-success': !props.error && props.changed,
         })}
       >
         <label
