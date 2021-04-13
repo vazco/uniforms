@@ -8,6 +8,7 @@ import gridClassName from './gridClassName';
 type WrapperProps = Override<
   Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
+    changed?: boolean;
     error?: unknown;
     errorMessage?: string;
     feedbackable?: boolean;
@@ -25,6 +26,7 @@ type WrapperProps = Override<
 // eslint-disable-next-line complexity
 export default function wrapField(
   {
+    changed = false,
     className,
     disabled,
     error,
@@ -59,6 +61,7 @@ export default function wrapField(
       className={classnames(className, 'field', 'form-group', {
         'has-feedback': error && feedbackable,
         'has-error': error,
+        'has-success': !error && changed,
         disabled,
         required,
       })}
