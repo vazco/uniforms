@@ -9,6 +9,7 @@ const tabs = [
   { name: 'Material', value: 'material' as const },
   { name: 'Bootstrap3', value: 'bootstrap3' as const },
   { name: 'Bootstrap4', value: 'bootstrap4' as const },
+  { name: 'Bootstrap5', value: 'bootstrap5' as const },
   { name: 'AntD', value: 'antd' as const },
   { name: 'Unstyled', value: 'unstyled' as const },
 ];

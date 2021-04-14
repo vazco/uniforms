@@ -36,6 +36,11 @@ const styles = {
     'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css',
   ]),
 
+  bootstrap5: style([
+    'https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css',
+    'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta3/css/bootstrap.min.css',
+  ]),
+
   material: style([]),
 
   semantic: style([
