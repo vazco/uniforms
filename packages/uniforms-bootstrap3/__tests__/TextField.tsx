@@ -1,171 +1,165 @@
+import '@testing-library/jest-dom/extend-expect';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
+import { context } from 'uniforms';
 import { TextField } from 'uniforms-bootstrap3';
 
 import createContext from './_createContext';
-import mount from './_mount';
 
-test('<TextField> - renders an input', () => {
-  const element = <TextField name="x" />;
-  const wrapper = mount(element, createContext({ x: { type: String } }));
+const renderWithContext = (element: any, customContext: any) => {
+  const Wrapper: React.ComponentType = ({ children }) => (
+    <context.Provider value={customContext.context}>
+      {children}
+    </context.Provider>
+  );
+  return render(element, { wrapper: Wrapper });
+};
 
-  expect(wrapper.find('input')).toHaveLength(1);
+test('<TextField> - renders an input with correct disabled state', async () => {
+  renderWithContext(
+    <TextField name="x" disabled />,
+    createContext({ x: { type: String } }),
+  );
+
+  expect(screen.getByRole('textbox')).toBeDisabled();
 });
 
-test('<TextField> - renders an input with correct disabled state', () => {
-  const element = <TextField name="x" disabled />;
-  const wrapper = mount(element, createContext({ x: { type: String } }));
+test('<TextField> - renders an input with correct readOnly state', async () => {
+  renderWithContext(
+    <TextField name="x" readOnly />,
+    createContext({ x: { type: String } }),
+  );
 
-  expect(wrapper.find('input')).toHaveLength(1);
-  expect(wrapper.find('input').prop('disabled')).toBe(true);
+  expect(screen.getByRole('textbox').getAttribute('readonly')).toEqual('');
 });
 
-test('<TextField> - renders an input with correct readOnly state', () => {
-  const element = <TextField name="x" readOnly />;
-  const wrapper = mount(element, createContext({ x: { type: String } }));
+test('<TextField> - renders an input with correct id (inherited)', async () => {
+  renderWithContext(
+    <TextField name="x" />,
+    createContext({ x: { type: String } }),
+  );
 
-  expect(wrapper.find('input')).toHaveLength(1);
-  expect(wrapper.find('input').prop('readOnly')).toBe(true);
+  expect(screen.getByRole('textbox').getAttribute('id')).toBeTruthy();
 });
 
-test('<TextField> - renders an input with correct id (inherited)', () => {
-  const element = <TextField name="x" />;
-  const wrapper = mount(element, createContext({ x: { type: String } }));
+test('<TextField> - renders an input with correct id (specified)', async () => {
+  const id = 'y';
+  renderWithContext(
+    <TextField name="x" id={id} />,
+    createContext({ x: { type: String } }),
+  );
 
-  expect(wrapper.find('input')).toHaveLength(1);
-  expect(wrapper.find('input').prop('id')).toBeTruthy();
+  expect(screen.getByRole('textbox').getAttribute('id')).toBe(id);
 });
 
-test('<TextField> - renders an input with correct id (specified)', () => {
-  const element = <TextField name="x" id="y" />;
-  const wrapper = mount(element, createContext({ x: { type: String } }));
+test('<TextField> - renders an input with correct name', async () => {
+  const name = 'x';
+  renderWithContext(
+    <TextField name={name} />,
+    createContext({ x: { type: String } }),
+  );
 
-  expect(wrapper.find('input')).toHaveLength(1);
-  expect(wrapper.find('input').prop('id')).toBe('y');
+  expect(screen.getByRole('textbox').getAttribute('name')).toBe(name);
 });
 
-test('<TextField> - renders an input with correct name', () => {
-  const element = <TextField name="x" />;
-  const wrapper = mount(element, createContext({ x: { type: String } }));
+test('<TextField> - renders an input with correct placeholder', async () => {
+  const placeholder = 'y';
+  renderWithContext(
+    <TextField name="x" placeholder={placeholder} />,
+    createContext({ x: { type: String } }),
+  );
 
-  expect(wrapper.find('input')).toHaveLength(1);
-  expect(wrapper.find('input').prop('name')).toBe('x');
+  expect(screen.getByRole('textbox').getAttribute('placeholder')).toBe(
+    placeholder,
+  );
 });
 
-test('<TextField> - renders an input with correct placeholder', () => {
-  const element = <TextField name="x" placeholder="y" />;
-  const wrapper = mount(element, createContext({ x: { type: String } }));
+test('<TextField> - renders an input with correct type', async () => {
+  renderWithContext(
+    <TextField name="x" />,
+    createContext({ x: { type: String } }),
+  );
 
-  expect(wrapper.find('input')).toHaveLength(1);
-  expect(wrapper.find('input').prop('placeholder')).toBe('y');
-});
-
-test('<TextField> - renders an input with correct type', () => {
-  const element = <TextField name="x" />;
-  const wrapper = mount(element, createContext({ x: { type: String } }));
-
-  expect(wrapper.find('input')).toHaveLength(1);
-  expect(wrapper.find('input').prop('type')).toBe('text');
+  expect(screen.getByRole('textbox').getAttribute('type')).toBe('text');
 });
 
 test('<TextField> - renders an input with correct value (default)', () => {
-  const element = <TextField name="x" />;
-  const wrapper = mount(element, createContext({ x: { type: String } }));
+  renderWithContext(
+    <TextField name="x" />,
+    createContext({ x: { type: String } }),
+  );
 
-  expect(wrapper.find('input')).toHaveLength(1);
-  expect(wrapper.find('input').prop('value')).toBe('');
+  expect(screen.getByRole('textbox').getAttribute('value')).toBe('');
 });
 
 test('<TextField> - renders an input with correct value (model)', () => {
-  const element = <TextField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String } }, { model: { x: 'y' } }),
+  const defaultValue = 'y';
+  renderWithContext(
+    <TextField name="x" />,
+    createContext({ x: { type: String } }, { model: { x: defaultValue } }),
   );
 
-  expect(wrapper.find('input')).toHaveLength(1);
-  expect(wrapper.find('input').prop('value')).toBe('y');
+  expect(screen.getByRole('textbox').getAttribute('value')).toBe(defaultValue);
 });
 
 test('<TextField> - renders an input with correct value (specified)', () => {
-  const element = <TextField name="x" value="y" />;
-  const wrapper = mount(element, createContext({ x: { type: String } }));
+  const defaultValue = 'y';
+  renderWithContext(
+    <TextField name="x" value={defaultValue} />,
+    createContext({ x: { type: String } }),
+  );
 
-  expect(wrapper.find('input')).toHaveLength(1);
-  expect(wrapper.find('input').prop('value')).toBe('y');
+  expect(screen.getByRole('textbox').getAttribute('value')).toBe(defaultValue);
 });
 
 test('<TextField> - renders an input which correctly reacts on change', () => {
   const onChange = jest.fn();
-
-  const element = <TextField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String } }, { onChange }),
+  const name = 'x';
+  const text = 'y';
+  renderWithContext(
+    <TextField name={name} />,
+    createContext({ [name]: { type: String } }, { onChange }),
   );
 
-  expect(wrapper.find('input')).toHaveLength(1);
-  expect(
-    wrapper.find('input').simulate('change', { target: { value: 'y' } }),
-  ).toBeTruthy();
-  expect(onChange).toHaveBeenLastCalledWith('x', 'y');
-});
-
-test('<TextField> - renders an input which correctly reacts on change (empty)', () => {
-  const onChange = jest.fn();
-
-  const element = <TextField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String } }, { onChange }),
-  );
-
-  expect(wrapper.find('input')).toHaveLength(1);
-  expect(
-    wrapper.find('input').simulate('change', { target: { value: '' } }),
-  ).toBeTruthy();
-  expect(onChange).toHaveBeenLastCalledWith('x', '');
-});
-
-test('<TextField> - renders an input which correctly reacts on change (same value)', () => {
-  const onChange = jest.fn();
-
-  const element = <TextField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String } }, { model: { x: 'y' }, onChange }),
-  );
-
-  expect(wrapper.find('input')).toHaveLength(1);
-  expect(
-    wrapper.find('input').simulate('change', { target: { value: 'y' } }),
-  ).toBeTruthy();
-  expect(onChange).toHaveBeenLastCalledWith('x', 'y');
+  const input = screen.getByRole('textbox');
+  userEvent.type(input, text);
+  expect(onChange).toHaveBeenLastCalledWith(name, text);
 });
 
 test('<TextField> - renders a label', () => {
-  const element = <TextField name="x" label="y" />;
-  const wrapper = mount(element, createContext({ x: { type: String } }));
-
-  expect(wrapper.find('label')).toHaveLength(1);
-  expect(wrapper.find('label').text()).toBe('y');
-  expect(wrapper.find('label').prop('htmlFor')).toBe(
-    wrapper.find('input').prop('id'),
+  const label = 'y';
+  renderWithContext(
+    <TextField name="x" label={label} />,
+    createContext({ x: { type: String } }),
   );
+
+  expect(screen.getByLabelText(label)).toBeVisible();
 });
 
 test('<TextField> - renders a wrapper with unknown props', () => {
-  const element = <TextField name="x" data-x="x" data-y="y" data-z="z" />;
-  const wrapper = mount(element, createContext({ x: { type: String } }));
+  const props = {
+    'data-x': 'x',
+    'data-y': 'y',
+    'data-z': 'z',
+  };
 
-  expect(wrapper.find('div').at(0).prop('data-x')).toBe('x');
-  expect(wrapper.find('div').at(0).prop('data-y')).toBe('y');
-  expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
+  renderWithContext(
+    <TextField name="x" {...props} />,
+    createContext({ x: { type: String } }),
+  );
+
+  const wrapper = screen.getByRole('textbox').closest('div');
+  Object.entries(props).forEach(([key, value]) =>
+    expect(wrapper?.getAttribute(key)).toBe(value),
+  );
 });
 
-test('<TextField> - renders a input with autocomplete turned off', () => {
-  const element = <TextField name="x" autoComplete="off" />;
-  const wrapper = mount(element, createContext({ x: { type: String } }));
+test('<TextField> - renders an input with autocomplete turned off', () => {
+  renderWithContext(
+    <TextField name="x" autoComplete="off" />,
+    createContext({ x: { type: String } }),
+  );
 
-  expect(wrapper.find('div').at(0).prop('autoComplete')).toBeFalsy();
-  expect(wrapper.find('input').prop('autoComplete')).toBe('off');
+  expect(screen.getByRole('textbox').getAttribute('autocomplete')).toBe('off');
 });
