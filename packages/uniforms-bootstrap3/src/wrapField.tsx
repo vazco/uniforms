@@ -26,7 +26,7 @@ type WrapperProps = Override<
 // eslint-disable-next-line complexity
 export default function wrapField(
   {
-    changed = false,
+    changed,
     className,
     disabled,
     error,

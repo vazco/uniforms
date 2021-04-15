@@ -24,7 +24,7 @@ type WrapperProps = Override<
 
 export default function wrapField(
   {
-    changed = false,
+    changed,
     className,
     disabled,
     error,
