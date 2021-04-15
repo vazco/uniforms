@@ -24,7 +24,6 @@ The table below lists all of the **guaranteed** props that will be passed to the
 |    `onChange`     | `func(value, [name])` |          Change field value.           |
 |   `placeholder`   |       `string`        |           Field placeholder.           |
 |    `readOnly`     |       `boolean`       |          Is field read-only?           |
-|    `submitted`    |       `boolean`       |     Has the field been submitted?      |
 | `showInlineError` |       `boolean`       |           Show inline error?           |
 |      `value`      |         `any`         |              Field value.              |
 
