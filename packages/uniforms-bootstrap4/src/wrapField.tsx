@@ -8,6 +8,7 @@ import gridClassName from './gridClassName';
 type WrapperProps = Override<
   Omit<HTMLProps<HTMLDivElement>, 'onChange'>,
   {
+    changed?: boolean;
     error?: unknown;
     errorMessage?: string;
     grid?: number | string | Record<string, number>;
@@ -23,6 +24,7 @@ type WrapperProps = Override<
 
 export default function wrapField(
   {
+    changed,
     className,
     disabled,
     error,
@@ -49,11 +51,13 @@ export default function wrapField(
       {help}
     </span>
   );
+  const isValid = !error && changed;
 
   return (
     <div
       className={classnames(className, 'form-group', {
         'is-invalid': error,
+        'is-valid': isValid,
         disabled,
         required,
         row: grid,
@@ -74,6 +78,7 @@ export default function wrapField(
             {
               'col-form-label': grid,
               'text-danger': error,
+              'text-success': isValid,
             },
             gridClassName(grid, 'label'),
             labelClassName,
