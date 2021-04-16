@@ -101,5 +101,6 @@ test('<AutoFields> - pass props to the child AutoField', () => {
   const hasShowInlineErrorMap = wrapper
     .find(AutoField)
     .map(node => node.prop('showInlineError'));
+  expect(hasShowInlineErrorMap).toHaveLength(3);
   expect(hasShowInlineErrorMap).toBeTruthy();
 });
