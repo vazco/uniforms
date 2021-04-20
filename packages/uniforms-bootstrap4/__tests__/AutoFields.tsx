@@ -93,8 +93,8 @@ test('<AutoFields> - pass props to the child AutoField', () => {
     element,
     createContext({
       x: { type: String },
-      y: { type: Number },
-      z: { type: Date },
+      y: { type: String },
+      z: { type: String },
     }),
   );
 
