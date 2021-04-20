@@ -27,11 +27,13 @@ export default function AutoFields({
     (fields ?? schema.getSubfields())
       .filter(field => !omitFields.includes(field))
       .map(field =>
-        createElement(autoField, {
-          key: field,
-          name: field,
-          ...(showInlineError !== null ? { showInlineError } : {}),
-        }),
+        createElement(
+          autoField,
+          Object.assign(
+            { key: field, name: field },
+            showInlineError === undefined ? null : { showInlineError },
+          ),
+        ),
       ),
   );
 }
