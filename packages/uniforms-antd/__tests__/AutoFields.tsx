@@ -98,7 +98,9 @@ test('<AutoFields> - pass props to the children', () => {
     }),
   );
 
-  expect(wrapper.find(AutoField).at(0).prop('showInlineError')).toBeTruthy();
-  expect(wrapper.find(AutoField).at(1).prop('showInlineError')).toBeTruthy();
-  expect(wrapper.find(AutoField).at(2).prop('showInlineError')).toBeTruthy();
+  expect(
+    wrapper
+      .find(AutoField)
+      .every(autoField => autoField.prop('showInlineError')),
+  ).toBeTruthy();
 });

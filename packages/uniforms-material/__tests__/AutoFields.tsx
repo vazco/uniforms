@@ -1,6 +1,5 @@
 import React from 'react';
-import { AutoField } from 'uniforms-antd';
-import { AutoFields } from 'uniforms-material';
+import { AutoField, AutoFields } from 'uniforms-material';
 
 import createContext from './_createContext';
 import mount from './_mount';
