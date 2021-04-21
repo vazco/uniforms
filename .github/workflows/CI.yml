@@ -27,7 +27,7 @@ jobs:
         uses: codecov/codecov-action@v1.0.15
       - name: Build docs
         run: npm --prefix website run build
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '14.x'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '16.x'
       - name: Deploy docs
         uses: peaceiris/actions-gh-pages@v3.7.3
         with:
@@ -36,4 +36,4 @@ jobs:
           force_orphan: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./website/build
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '14.x'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '16.x'
