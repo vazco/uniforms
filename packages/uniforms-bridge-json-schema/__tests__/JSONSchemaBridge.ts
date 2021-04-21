@@ -728,10 +728,17 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
-    it('works with anyOf for a non-object computed property', () => {
+    it('works with anyOf for a non-object computed property (required default value)', () => {
       expect(bridge.getProps('nonObjectAnyOf')).toHaveProperty(
         'required',
         false,
+      );
+    });
+
+    it('works with anyOf for a non-object computed property (properties not defined)', () => {
+      expect(bridge.getProps('nonObjectAnyOf')).toHaveProperty(
+        'properties',
+        undefined,
       );
     });
 
