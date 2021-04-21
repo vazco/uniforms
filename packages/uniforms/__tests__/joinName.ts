@@ -10,6 +10,7 @@ describe('joinName', () => {
     expect(joinName(null, 'a')).toEqual(['a']);
     expect(joinName(null, 'a', 'b')).toEqual(['a', 'b']);
     expect(joinName(null, 'a', 'b', null)).toEqual(['a', 'b']);
+    expect(joinName(null, 'a', 'b', null, 0)).toEqual(['a', 'b', '0']);
     expect(joinName(null, 'a', 'b', null, 1)).toEqual(['a', 'b', '1']);
   });
 
@@ -31,6 +32,9 @@ describe('joinName', () => {
   });
 
   it('works with numbers', () => {
+    expect(joinName(0, 'a', 'b')).toBe('0.a.b');
+    expect(joinName('a', 0, 'b')).toBe('a.0.b');
+    expect(joinName('a', 'b', 0)).toBe('a.b.0');
     expect(joinName(1, 'a', 'b')).toBe('1.a.b');
     expect(joinName('a', 1, 'b')).toBe('a.1.b');
     expect(joinName('a', 'b', 1)).toBe('a.b.1');
