@@ -135,6 +135,22 @@ describe('JSONSchemaBridge', () => {
         maxItems: 3,
         minItems: 1,
       },
+      nonObjectAnyOf: {
+        anyOf: [
+          {
+            const: 'alphabetic',
+            type: 'string',
+          },
+          {
+            enum: ['top', 'middle', 'bottom'],
+            type: 'string',
+          },
+          {
+            type: 'number',
+            minimum: 0,
+          },
+        ],
+      },
     },
     required: ['dateOfBirth'],
   };
@@ -712,6 +728,13 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
+    it('works with anyOf for a non-object computed property', () => {
+      expect(bridge.getProps('nonObjectAnyOf')).toHaveProperty(
+        'required',
+        false,
+      );
+    });
+
     it('works with maxItems in props', () => {
       expect(bridge.getProps('arrayWithAllOf')).toHaveProperty('maxCount', 3);
     });
@@ -753,6 +776,7 @@ describe('JSONSchemaBridge', () => {
         'passwordNumeric',
         'recursive',
         'arrayWithAllOf',
+        'nonObjectAnyOf',
       ]);
     });
 
