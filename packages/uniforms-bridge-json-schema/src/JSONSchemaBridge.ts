@@ -198,9 +198,7 @@ export default class JSONSchemaBridge extends Bridge {
           ? { ...definition.properties }
           : {};
         const localRequired = definition.required
-          ? Array.isArray(definition.required)
-            ? definition.required.slice()
-            : definition.required
+          ? definition.required.slice()
           : [];
 
         combinedPartials.forEach(({ properties, required, type }) => {

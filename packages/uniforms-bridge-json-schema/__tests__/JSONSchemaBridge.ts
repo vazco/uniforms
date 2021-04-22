@@ -166,10 +166,9 @@ describe('JSONSchemaBridge', () => {
             minimum: 0,
           },
         ],
-        required: true,
       },
     },
-    required: ['dateOfBirth'],
+    required: ['dateOfBirth', 'nonObjectAnyOfRequired'],
   };
 
   const validator = jest.fn();
