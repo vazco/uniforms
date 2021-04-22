@@ -135,8 +135,40 @@ describe('JSONSchemaBridge', () => {
         maxItems: 3,
         minItems: 1,
       },
+      nonObjectAnyOf: {
+        anyOf: [
+          {
+            const: 'alphabetic',
+            type: 'string',
+          },
+          {
+            enum: ['top', 'middle', 'bottom'],
+            type: 'string',
+          },
+          {
+            type: 'number',
+            minimum: 0,
+          },
+        ],
+      },
+      nonObjectAnyOfRequired: {
+        anyOf: [
+          {
+            const: 'alphabetic',
+            type: 'string',
+          },
+          {
+            enum: ['top', 'middle', 'bottom'],
+            type: 'string',
+          },
+          {
+            type: 'number',
+            minimum: 0,
+          },
+        ],
+      },
     },
-    required: ['dateOfBirth'],
+    required: ['dateOfBirth', 'nonObjectAnyOfRequired'],
   };
 
   const validator = jest.fn();
@@ -712,6 +744,27 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
+    it('works with anyOf for a non-object computed property (required default value)', () => {
+      expect(bridge.getProps('nonObjectAnyOf')).toHaveProperty(
+        'required',
+        false,
+      );
+    });
+
+    it('works with anyOf for a non-object computed property (required)', () => {
+      expect(bridge.getProps('nonObjectAnyOfRequired')).toHaveProperty(
+        'required',
+        true,
+      );
+    });
+
+    it('works with anyOf for a non-object computed property (properties not defined)', () => {
+      expect(bridge.getProps('nonObjectAnyOf')).toHaveProperty(
+        'properties',
+        undefined,
+      );
+    });
+
     it('works with maxItems in props', () => {
       expect(bridge.getProps('arrayWithAllOf')).toHaveProperty('maxCount', 3);
     });
@@ -753,6 +806,8 @@ describe('JSONSchemaBridge', () => {
         'passwordNumeric',
         'recursive',
         'arrayWithAllOf',
+        'nonObjectAnyOf',
+        'nonObjectAnyOfRequired',
       ]);
     });
 

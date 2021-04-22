@@ -194,20 +194,31 @@ export default class JSONSchemaBridge extends Bridge {
         .filter(Boolean);
 
       if (combinedPartials.length) {
-        _definition.properties = definition.properties ?? {};
-        _definition.required = definition.required ?? [];
+        const localProperties = definition.properties
+          ? { ...definition.properties }
+          : {};
+        const localRequired = definition.required
+          ? definition.required.slice()
+          : [];
 
         combinedPartials.forEach(({ properties, required, type }) => {
           if (properties) {
-            Object.assign(_definition.properties, properties);
+            Object.assign(localProperties, properties);
           }
           if (required) {
-            _definition.required.push(...required);
+            localRequired.push(...required);
           }
           if (type && !_definition.type) {
             _definition.type = type;
           }
         });
+
+        if (Object.keys(localProperties).length > 0) {
+          _definition.properties = localProperties;
+        }
+        if (localRequired.length > 0) {
+          _definition.required = localRequired;
+        }
       }
 
       this._compiledSchema[_key] = Object.assign(_definition, { isRequired });
