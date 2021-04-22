@@ -194,8 +194,14 @@ export default class JSONSchemaBridge extends Bridge {
         .filter(Boolean);
 
       if (combinedPartials.length) {
-        const localProperties = definition.properties ? { ...definition.properties } : {};
-        const localRequired = definition.required ? definition.required.slice() : [];
+        const localProperties = definition.properties
+          ? { ...definition.properties }
+          : {};
+        const localRequired = definition.required
+          ? Array.isArray(definition.required)
+            ? definition.required.slice()
+            : definition.required
+          : [];
 
         combinedPartials.forEach(({ properties, required, type }) => {
           if (properties) {
