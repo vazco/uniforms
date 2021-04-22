@@ -151,6 +151,23 @@ describe('JSONSchemaBridge', () => {
           },
         ],
       },
+      nonObjectAnyOfRequired: {
+        anyOf: [
+          {
+            const: 'alphabetic',
+            type: 'string',
+          },
+          {
+            enum: ['top', 'middle', 'bottom'],
+            type: 'string',
+          },
+          {
+            type: 'number',
+            minimum: 0,
+          },
+        ],
+        required: true,
+      },
     },
     required: ['dateOfBirth'],
   };
@@ -735,6 +752,13 @@ describe('JSONSchemaBridge', () => {
       );
     });
 
+    it('works with anyOf for a non-object computed property (required)', () => {
+      expect(bridge.getProps('nonObjectAnyOfRequired')).toHaveProperty(
+        'required',
+        true,
+      );
+    });
+
     it('works with anyOf for a non-object computed property (properties not defined)', () => {
       expect(bridge.getProps('nonObjectAnyOf')).toHaveProperty(
         'properties',
@@ -784,6 +808,7 @@ describe('JSONSchemaBridge', () => {
         'recursive',
         'arrayWithAllOf',
         'nonObjectAnyOf',
+        'nonObjectAnyOfRequired',
       ]);
     });
 
