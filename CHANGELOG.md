@@ -1,3 +1,11 @@
+## [v3.4.0](https://github.com/vazco/uniforms/tree/v3.4.0) (2021-04-23)
+
+- **Added:** Ajv v8 support in `JSONSchemaBridge`. [\#923](https://github.com/vazco/uniforms/issues/923)
+- **Added:** New `showInlineError` on `AutoFields`. [\#827](https://github.com/vazco/uniforms/issues/827)
+- **Added:** Success styling in all Bootstrap themes. [\#899](https://github.com/vazco/uniforms/issues/899)
+- **Fixed:** Handling of more `anyOf` cases in `JSONSchemaBridge`. [\#919](https://github.com/vazco/uniforms/issues/919)
+- **Fixed:** Leaking `setTimeout` of `BaseForm`. [\#920](https://github.com/vazco/uniforms/issues/920)
+
 ## [v3.3.0](https://github.com/vazco/uniforms/tree/v3.3.0) (2021-03-31)
 
 - **Added:** Compatibility with React v17. [\#859](https://github.com/vazco/uniforms/issues/859)
