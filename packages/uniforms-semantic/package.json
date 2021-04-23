@@ -1,6 +1,6 @@
 {
   "name": "uniforms-semantic",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "license": "MIT",
   "main": "es5/index.js",
   "module": "es6/index.js",
@@ -35,6 +35,6 @@
     "invariant": "^2.0.0",
     "lodash": "^4.0.0",
     "tslib": "^1.10.0",
-    "uniforms": "^3.3.0"
+    "uniforms": "^3.4.0"
   }
 }
