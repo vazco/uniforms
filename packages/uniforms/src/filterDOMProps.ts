@@ -3,12 +3,13 @@ import { FilterDOMProps } from '.';
 type FilterDOMPropsKeys = keyof FilterDOMProps;
 
 const registered: FilterDOMPropsKeys[] = [];
+const registeredCache = new Set<string>();
 
 export const filterDOMProps = Object.assign(
   function filterDOMProps<T extends object>(props: T) {
     const filteredProps = { ...props };
     for (const prop in props) {
-      if (registered.includes(prop as any)) {
+      if (registeredCache.has(prop)) {
         delete filteredProps[prop];
       }
     }
@@ -18,8 +19,9 @@ export const filterDOMProps = Object.assign(
   {
     register(...props: FilterDOMPropsKeys[]) {
       props.forEach(prop => {
-        if (!registered.includes(prop)) {
+        if (!registeredCache.has(prop)) {
           registered.push(prop);
+          registeredCache.add(prop);
         }
       });
 
