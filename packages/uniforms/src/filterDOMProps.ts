@@ -1,35 +1,35 @@
-import pickBy from 'lodash/pickBy';
-import sortedIndex from 'lodash/sortedIndex';
-import sortedIndexOf from 'lodash/sortedIndexOf';
-
 import { FilterDOMProps } from '.';
 
 type FilterDOMPropsKeys = keyof FilterDOMProps;
 
 const registered: FilterDOMPropsKeys[] = [];
 
-function filter<T extends object>(props: T) {
-  return pickBy(props, filterOne) as Omit<T, FilterDOMPropsKeys>;
-}
-
-function filterOne(value: unknown, prop: string) {
-  return sortedIndexOf(registered, prop) === -1;
-}
-
-function register(...props: FilterDOMPropsKeys[]) {
-  props.forEach(prop => {
-    if (sortedIndexOf(registered, prop) === -1) {
-      registered.splice(sortedIndex(registered, prop), 0, prop);
+export const filterDOMProps = Object.assign(
+  function filterDOMProps<T extends object>(props: T) {
+    const filteredProps = { ...props };
+    for (const prop in props) {
+      if (registered.includes(prop as any)) {
+        delete filteredProps[prop];
+      }
     }
-  });
-}
 
-export const filterDOMProps = Object.assign(filter, {
-  register,
-  registered: registered as readonly FilterDOMPropsKeys[],
-});
+    return filteredProps as Omit<T, FilterDOMPropsKeys>;
+  },
+  {
+    register(...props: FilterDOMPropsKeys[]) {
+      props.forEach(prop => {
+        if (!registered.includes(prop)) {
+          registered.push(prop);
+        }
+      });
 
-register(
+      props.sort();
+    },
+    registered: registered as readonly FilterDOMPropsKeys[],
+  },
+);
+
+filterDOMProps.register(
   // These props are provided by useField directly.
   'changed',
   'error',
