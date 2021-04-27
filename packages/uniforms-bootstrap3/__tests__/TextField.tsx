@@ -3,7 +3,9 @@ import React from 'react';
 import { TextField } from 'uniforms-bootstrap3';
 import { render, TextFieldTests } from 'uniforms/__suites__';
 
-TextFieldTests(TextField);
+describe('TextField tests', () => {
+  TextFieldTests(TextField);
+});
 
 test('<TextField> - renders a wrapper with unknown props', () => {
   const props = {

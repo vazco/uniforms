@@ -59,6 +59,12 @@ export function TextFieldTests(TextField: React.FC<any>) {
     expect(screen.getByRole('textbox')).toHaveAttribute('type', 'text');
   });
 
+  test('<TextField> - renders an input with correct type (password)', async () => {
+    render(<TextField name="x" type="url" />);
+
+    expect(screen.getByRole('textbox')).toHaveAttribute('type', 'url');
+  });
+
   test('<TextField> - renders an input with correct value (default)', () => {
     render(<TextField name="x" />);
 
