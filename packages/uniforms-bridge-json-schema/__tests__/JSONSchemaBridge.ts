@@ -167,6 +167,7 @@ describe('JSONSchemaBridge', () => {
           },
         ],
       },
+      objectWithoutProperties: { type: 'object' },
     },
     required: ['dateOfBirth', 'nonObjectAnyOfRequired'],
   };
@@ -808,6 +809,7 @@ describe('JSONSchemaBridge', () => {
         'arrayWithAllOf',
         'nonObjectAnyOf',
         'nonObjectAnyOfRequired',
+        'objectWithoutProperties',
       ]);
     });
 
@@ -841,6 +843,10 @@ describe('JSONSchemaBridge', () => {
       );
 
       expect(localBridge.getSubfields()).toEqual(['city', 'state', 'street']);
+    });
+
+    it('works when an object does not have properties', () => {
+      expect(bridge.getSubfields('objectWithoutProperties')).toEqual([]);
     });
 
     it('works on top level when schema does not have properties', () => {
