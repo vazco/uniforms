@@ -8,6 +8,7 @@
     "jsx": "react",
     "moduleResolution": "node",
     "paths": { "uniforms": ["uniforms/src"], "uniforms-*": ["uniforms-*/src"] },
-    "strict": true
+    "strict": true,
+    "target": "ESNext"
   }
 }
