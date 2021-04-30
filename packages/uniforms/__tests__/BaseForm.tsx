@@ -1,6 +1,6 @@
 import { ReactWrapper } from 'enzyme';
 import React from 'react';
-import { BaseForm, Bridge, Context } from 'uniforms';
+import { BaseForm, Bridge, Context, useField } from 'uniforms';
 
 import mount from './_mount';
 
@@ -111,6 +111,27 @@ describe('BaseForm', () => {
 
       expect(context).toHaveProperty('schema', schema2);
     });
+
+    it('ignores changes made on first render', () => {
+      function Field() {
+        const [props] = useField('name', {});
+        props.onChange(123);
+        return null;
+      }
+
+      const wrapper = mount<BaseForm<any>>(
+        <BaseForm onChange={onChange} schema={schema}>
+          <Field />
+        </BaseForm>,
+      );
+
+      const context = wrapper.instance().getContext();
+      expect(context).toHaveProperty('changed', false);
+      expect(context).toHaveProperty('changedMap', {});
+
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith('name', 123);
+    });
   });
 
   describe('when changed', () => {
@@ -142,6 +163,16 @@ describe('BaseForm', () => {
       expect(context2).toHaveProperty('changedMap.$.1');
       // @ts-expect-error: Dynamic `changedMap` structure.
       expect(context2.changedMap.$?.[1]).toBeTruthy();
+
+      wrapper.instance().getContext().onChange('$', [1]);
+
+      const context3 = wrapper.instance().getContext();
+      expect(context3).toHaveProperty('changed', true);
+      expect(context3).toHaveProperty('changedMap.$');
+      expect(context3.changedMap.$).toBeTruthy();
+      expect(context3).toHaveProperty('changedMap.$.1');
+      // @ts-expect-error: Dynamic `changedMap` structure.
+      expect(context3.changedMap.$?.[1]).toBeTruthy();
     });
 
     it('autosaves correctly (`autosave` = true)', async () => {
@@ -194,6 +225,14 @@ describe('BaseForm', () => {
 
       expect(onSubmit).toHaveBeenCalledTimes(2);
       expect(onSubmit).toHaveBeenLastCalledWith(model);
+    });
+
+    it('clears autosave correctly', () => {
+      wrapper.setProps({ autosave: true, autosaveDelay: 100 });
+      wrapper.instance().getContext().onChange('a', 1);
+      wrapper.unmount();
+
+      expect(onSubmit).not.toBeCalled();
     });
 
     it('autosaves correctly (`autosave` = false)', () => {
