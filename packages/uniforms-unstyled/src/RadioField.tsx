@@ -2,10 +2,10 @@ import omit from 'lodash/omit';
 import React from 'react';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
-const base64 =
-  typeof btoa !== 'undefined'
-    ? btoa
-    : (x: string) => Buffer.from(x).toString('base64');
+const base64: typeof btoa =
+  typeof btoa === 'undefined'
+    ? /* istanbul ignore next */ x => Buffer.from(x).toString('base64')
+    : btoa;
 const escape = (x: string) => base64(encodeURIComponent(x)).replace(/=+$/, '');
 
 export type RadioFieldProps = HTMLFieldProps<
