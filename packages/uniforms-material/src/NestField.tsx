@@ -25,7 +25,7 @@ function Nest({
     { ...props, component: undefined, fullWidth, margin },
     label && <FormLabel component="legend">{label}</FormLabel>,
     children ||
-      fields?.map(field => (
+      fields.map(field => (
         <AutoField key={field} name={field} {...itemProps} />
       )),
   );
