@@ -9,6 +9,6 @@
     "moduleResolution": "node",
     "paths": { "uniforms": ["uniforms/src"], "uniforms-*": ["uniforms-*/src"] },
     "strict": true,
-    "target": "ESNext"
+    "target": "ES6"
   }
 }
