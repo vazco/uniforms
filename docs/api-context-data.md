@@ -136,6 +136,10 @@ The state properties are:
 |    `readOnly`     |       Indicates whether the form is read-only.       |
 | `showInlineError` | Indicates whether the inline errors should be shown. |
 
+### `submitted`
+
+Indicates whether the form was submitted.
+
 ### `submitting`
 
 Indicates whether the form is in the `submitting` state. Helpful when handling asynchronous submission.

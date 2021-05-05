@@ -55,7 +55,7 @@ describe('connectField', () => {
     } as Context<any>,
   };
 
-  const Test = jest.fn(() => null);
+  const Test = jest.fn(props => props.children || null);
 
   beforeEach(() => {
     Test.mockClear();
@@ -108,7 +108,15 @@ describe('connectField', () => {
       expect(onChange).not.toBeCalled();
     });
 
-    it('respects `required`', () => {
+    it('respects `required` (props)', () => {
+      const Field = connectField(Test, { initialValue: true });
+
+      mount(<Field name="another" required />, reactContext);
+
+      expect(onChange).not.toBeCalled();
+    });
+
+    it('respects `required` (schema)', () => {
       const Field = connectField(Test, { initialValue: true });
 
       mount(<Field name="another" />, reactContext);
@@ -183,5 +191,49 @@ describe('connectField', () => {
         expect(wrapper.find(Test).prop('label')).toBe(result);
       },
     );
+  });
+
+  describe('when rendered provides correct onChange', () => {
+    it('is defaults to field name', () => {
+      const Field = connectField(Test);
+      const value = 'some value';
+      const wrapper = mount(<Field name="another" />, reactContext);
+      wrapper.find(Test).prop('onChange')(value);
+      expect(onChange).toBeCalledWith('another', value);
+    });
+
+    it('is able to set another field value', () => {
+      const Field = connectField(Test);
+      const value = { subfield: 123 };
+      const wrapper = mount(<Field name="another" />, reactContext);
+      wrapper.find(Test).prop('onChange')(value, 'field');
+      expect(onChange).toBeCalledWith('field', value);
+    });
+  });
+
+  it('works with nested labels', () => {
+    const Field = connectField(Test);
+    const wrapper = mount(
+      <Field name="field" label={null}>
+        <Field name="" />
+        <Field name="subfield" label="Other">
+          <Field name="" />
+        </Field>
+        <Field name="subfield" label={false}>
+          <Field name="">
+            <Field name="" label />
+          </Field>
+        </Field>
+      </Field>,
+      reactContext,
+    );
+
+    expect(wrapper.find(Test).at(0).prop('label')).toBe('');
+    expect(wrapper.find(Test).at(1).prop('label')).toBe('Field');
+    expect(wrapper.find(Test).at(2).prop('label')).toBe('Other');
+    expect(wrapper.find(Test).at(3).prop('label')).toBe('Subfield');
+    expect(wrapper.find(Test).at(4).prop('label')).toBe('');
+    expect(wrapper.find(Test).at(5).prop('label')).toBe('');
+    expect(wrapper.find(Test).at(6).prop('label')).toBe('Subfield');
   });
 });

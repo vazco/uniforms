@@ -19,6 +19,7 @@ function propagate(
   const value =
     prop === '' ||
     prop === false ||
+    prop === null ||
     (forcedFallbackInProp && (forcedFallbackInSchema || !state))
       ? ''
       : forcedFallbackInProp

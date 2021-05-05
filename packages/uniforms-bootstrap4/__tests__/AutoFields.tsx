@@ -1,5 +1,5 @@
 import React from 'react';
-import { AutoFields } from 'uniforms-bootstrap4';
+import { AutoFields, AutoField } from 'uniforms-bootstrap4';
 
 import createContext from './_createContext';
 import mount from './_mount';
@@ -85,4 +85,22 @@ test('<AutoFields> - wraps fields in specified element', () => {
   );
 
   expect(wrapper.find('section').find('input')).toHaveLength(3);
+});
+
+test('<AutoFields> - pass props to the child AutoField', () => {
+  const element = <AutoFields showInlineError />;
+  const wrapper = mount(
+    element,
+    createContext({
+      x: { type: String },
+      y: { type: String },
+      z: { type: String },
+    }),
+  );
+
+  const hasShowInlineErrorMap = wrapper
+    .find(AutoField)
+    .map(node => node.prop('showInlineError'));
+  expect(hasShowInlineErrorMap).toHaveLength(3);
+  expect(hasShowInlineErrorMap).toBeTruthy();
 });
