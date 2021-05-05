@@ -40,7 +40,6 @@ function Text({
   return (
     <div
       className={classnames(className, { disabled, error, required }, 'field')}
-      data-testid="field-wrapper"
       {...filterDOMProps(props)}
     >
       {label && <label htmlFor={id}>{label}</label>}
@@ -67,11 +66,7 @@ function Text({
         />
 
         {(icon || iconLeft) && (
-          <i
-            data-testid="field-icon"
-            className={`${icon || iconLeft} icon`}
-            {...iconProps}
-          />
+          <i className={`${icon || iconLeft} icon`} {...iconProps} />
         )}
       </div>
 
