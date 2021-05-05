@@ -4,14 +4,14 @@ import React from 'react';
 
 import createContext, { render } from './renderWithContext';
 
-export function TextFieldTests(TextField: React.FC<any>) {
-  test('<TextField> - renders an input with correct disabled state', async () => {
+export function TextFieldTests(TextField: React.ComponentType<any>) {
+  test('<TextField> - renders an input with correct disabled state', () => {
     render(<TextField name="x" disabled />);
 
     expect(screen.getByRole('textbox')).toBeDisabled();
   });
 
-  test('<TextField> - renders an input with correct readOnly state', async () => {
+  test('<TextField> - renders an input with correct readOnly state', () => {
     render(<TextField name="x" readOnly />);
 
     expect(screen.getByRole('textbox')).toHaveAttribute('readonly', '');
@@ -23,27 +23,27 @@ export function TextFieldTests(TextField: React.FC<any>) {
     expect(screen.getByRole('textbox')).toHaveAttribute('autocomplete', 'off');
   });
 
-  test('<TextField> - renders an input with correct id (inherited)', async () => {
+  test('<TextField> - renders an input with correct id (inherited)', () => {
     render(<TextField name="x" />);
 
     expect(screen.getByRole('textbox')).toHaveAttribute('id');
   });
 
-  test('<TextField> - renders an input with correct id (specified)', async () => {
+  test('<TextField> - renders an input with correct id (specified)', () => {
     const id = 'y';
     render(<TextField name="x" id={id} />);
 
     expect(screen.getByRole('textbox')).toHaveAttribute('id', id);
   });
 
-  test('<TextField> - renders an input with correct name', async () => {
+  test('<TextField> - renders an input with correct name', () => {
     const name = 'x';
     render(<TextField name={name} />);
 
     expect(screen.getByRole('textbox')).toHaveAttribute('name', name);
   });
 
-  test('<TextField> - renders an input with correct placeholder', async () => {
+  test('<TextField> - renders an input with correct placeholder', () => {
     const placeholder = 'y';
     render(<TextField name="x" placeholder={placeholder} />);
 
@@ -53,13 +53,13 @@ export function TextFieldTests(TextField: React.FC<any>) {
     );
   });
 
-  test('<TextField> - renders an input with correct type', async () => {
+  test('<TextField> - renders an input with correct type', () => {
     render(<TextField name="x" />);
 
     expect(screen.getByRole('textbox')).toHaveAttribute('type', 'text');
   });
 
-  test('<TextField> - renders an input with correct type (url)', async () => {
+  test('<TextField> - renders an input with correct type (url)', () => {
     render(<TextField name="x" type="url" />);
 
     expect(screen.getByRole('textbox')).toHaveAttribute('type', 'url');
@@ -119,8 +119,7 @@ export function TextFieldTests(TextField: React.FC<any>) {
   });
 
   test('<TextField> - renders a label', () => {
-    const label = 'y';
-    render(<TextField name="x" label={label} />);
+    render(<TextField name="x" label="y" />);
 
     expect(screen.getByLabelText(/y.*/)).toBeInTheDocument();
   });

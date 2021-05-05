@@ -39,7 +39,7 @@ export default function createContext(
 }
 
 export function render(
-  element: any,
+  element: React.ReactElement,
   customContext = createContext({ x: { type: String } }),
 ) {
   const Wrapper: React.ComponentType = ({ children }) => (

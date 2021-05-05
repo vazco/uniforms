@@ -2,7 +2,7 @@ import React from 'react';
 import { ListAddField, ListField, ListItemField } from 'uniforms-unstyled';
 import { ListFieldTests } from 'uniforms/__suites__';
 
-describe(' @RTL - ListField tests', () => {
+describe('@RTL - ListField tests', () => {
   ListFieldTests(ListField);
 });
 

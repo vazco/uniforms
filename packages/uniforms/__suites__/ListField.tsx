@@ -8,7 +8,7 @@ function getDefaultContext() {
   return createContext({ x: { type: Array }, 'x.$': { type: String } });
 }
 
-export function ListFieldTests(ListField: React.FC<any>) {
+export function ListFieldTests(ListField: React.ComponentType<any>) {
   test('<ListField> - renders ListAddField', () => {
     render(<ListField name="x" label="ListFieldLabel" />, getDefaultContext());
 
