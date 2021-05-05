@@ -59,7 +59,7 @@ export function TextFieldTests(TextField: React.FC<any>) {
     expect(screen.getByRole('textbox')).toHaveAttribute('type', 'text');
   });
 
-  test('<TextField> - renders an input with correct type (password)', async () => {
+  test('<TextField> - renders an input with correct type (url)', async () => {
     render(<TextField name="x" type="url" />);
 
     expect(screen.getByRole('textbox')).toHaveAttribute('type', 'url');
@@ -100,6 +100,22 @@ export function TextFieldTests(TextField: React.FC<any>) {
     const input = screen.getByRole('textbox');
     userEvent.type(input, text);
     expect(onChange).toHaveBeenLastCalledWith(name, text);
+  });
+
+  test('<TextField> - renders an input which correctly reacts on change (empty value)', () => {
+    const onChange = jest.fn();
+    const name = 'x';
+    render(
+      <TextField name={name} />,
+      createContext(
+        { [name]: { type: String } },
+        { model: { [name]: 'y' }, onChange },
+      ),
+    );
+
+    const input = screen.getByRole('textbox');
+    userEvent.type(input, '{backspace}');
+    expect(onChange).toHaveBeenLastCalledWith(name, '');
   });
 
   test('<TextField> - renders a label', () => {

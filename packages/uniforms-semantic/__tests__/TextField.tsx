@@ -17,7 +17,7 @@ describe('@RTL - TextField tests', () => {
     };
     render(<TextField name="x" {...props} />);
 
-    const wrapper = screen.getByTestId('field-wrapper');
+    const wrapper = screen.getByRole('textbox').closest('div')?.parentElement;
     Object.entries(props).forEach(([key, value]) =>
       expect(wrapper).toHaveAttribute(key, value),
     );
@@ -54,7 +54,9 @@ describe('@RTL - TextField tests', () => {
   test('<TextField> - renders an icon', () => {
     render(<TextField name="x" icon="small home" />);
 
-    expect(screen.getByTestId('field-icon')).toBeInTheDocument();
+    expect(
+      screen.getByRole('textbox').closest('div')?.querySelector('i'),
+    ).toBeInTheDocument();
   });
 
   test('<TextField> - renders with a custom wrapClassName', () => {
