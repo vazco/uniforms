@@ -6,7 +6,7 @@ import { ListFieldTests } from 'uniforms/__suites__';
 import createContext from './_createContext';
 import mount from './_mount';
 
-describe('ListField tests', () => {
+describe('@RTL - ListField tests', () => {
   ListFieldTests(ListField);
 });
 

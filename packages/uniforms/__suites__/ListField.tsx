@@ -65,10 +65,6 @@ export function ListFieldTests(ListField: React.FC<any>) {
     );
     render(element, getDefaultContext());
 
-    // Two approaches here: Either change the Child mock to input and check the name explicitly
-    // Or check mocked prop passing
-    // expect(fields[0]).toHaveAttribute('name', '0');
-    // expect(fields[1]).toHaveAttribute('name', '1');
     expect(Child).toHaveBeenNthCalledWith(1, { name: '0' }, {});
     expect(Child).toHaveBeenNthCalledWith(2, { name: '1' }, {});
   });
@@ -92,8 +88,15 @@ export function ListFieldTests(ListField: React.FC<any>) {
       ),
     );
 
-    userEvent.click(screen.getByText(/\+/));
-    expect(onChange).toHaveBeenNthCalledWith(1, 'x', [
+    // Due to differences in how and where the add button is rendered,
+    // we have to use different queries for different themes
+    const addButton =
+      screen.queryByText(/\+/) ??
+      screen.queryAllByRole('img').pop() ??
+      screen.getAllByRole('button')[0];
+    userEvent.click(addButton);
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenLastCalledWith('x', [
       undefined,
       undefined,
       undefined,
