@@ -33,7 +33,7 @@ function Nest({
       )}
 
       {children ||
-        fields?.map(field => (
+        fields.map(field => (
           <AutoField key={field} name={field} {...itemProps} />
         ))}
     </div>

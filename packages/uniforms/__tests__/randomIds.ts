@@ -9,6 +9,11 @@ describe('randomIds', () => {
     expect(randomIds()).toBeInstanceOf(Function);
   });
 
+  it('accepts custom prefix', () => {
+    const generator = randomIds('my-id-generator');
+    expect(generator()).toMatch(/^my-id-generator/);
+  });
+
   it('generate random id', () => {
     const amount = 100;
 

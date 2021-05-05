@@ -49,10 +49,10 @@ type SelectProps = FieldProps<
 export type SelectFieldProps = (CheckboxesProps | SelectProps) &
   SelectFieldCommonProps;
 
-const base64 =
-  typeof btoa !== 'undefined'
-    ? btoa
-    : (x: string) => Buffer.from(x).toString('base64');
+const base64: typeof btoa =
+  typeof btoa === 'undefined'
+    ? /* istanbul ignore next */ x => Buffer.from(x).toString('base64')
+    : btoa;
 const escape = (x: string) => base64(encodeURIComponent(x)).replace(/=+$/, '');
 
 // eslint-disable-next-line complexity
