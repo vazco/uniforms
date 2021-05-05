@@ -52,11 +52,9 @@ describe('@RTL - TextField tests', () => {
   });
 
   test('<TextField> - renders an icon', () => {
-    render(<TextField name="x" icon="small home" />);
+    const { container } = render(<TextField name="x" icon="small home" />);
 
-    expect(
-      screen.getByRole('textbox').closest('div')?.querySelector('i'),
-    ).toBeInTheDocument();
+    expect(container.querySelector('i')).toBeInTheDocument();
   });
 
   test('<TextField> - renders with a custom wrapClassName', () => {
