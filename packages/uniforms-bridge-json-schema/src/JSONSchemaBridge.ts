@@ -79,6 +79,7 @@ export default class JSONSchemaBridge extends Bridge {
     super();
 
     this.schema = distinctSchema(schema);
+    this._compiledSchema[''] = this.schema;
 
     // Memoize for performance and referential equality.
     this.getField = memoize(this.getField.bind(this));
@@ -301,23 +302,15 @@ export default class JSONSchemaBridge extends Bridge {
     return ready;
   }
 
-  getSubfields(name?: string) {
-    if (!name) {
-      if (this.schema.properties) {
-        return Object.keys(this.schema.properties);
-      }
-
-      return [];
-    }
-
-    const { type: _type, properties: _properties } = this.getField(name);
+  getSubfields(name = '') {
+    const field = this.getField(name);
     const {
-      type: fieldType = _type,
-      properties: fieldProperties = _properties,
+      properties = field.properties,
+      type = field.type,
     } = this._compiledSchema[name];
 
-    if (fieldType === 'object') {
-      return Object.keys(fieldProperties);
+    if (type === 'object' && properties) {
+      return Object.keys(properties);
     }
 
     return [];
