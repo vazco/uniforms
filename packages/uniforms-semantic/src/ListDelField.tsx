@@ -60,4 +60,7 @@ function ListDel({ disabled, name, readOnly, ...props }: ListDelFieldProps) {
   );
 }
 
-export default connectField(ListDel, { initialValue: false, kind: 'leaf' });
+export default connectField<ListDelFieldProps>(ListDel, {
+  initialValue: false,
+  kind: 'leaf',
+});

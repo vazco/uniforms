@@ -1,18 +1,25 @@
 import invariant from 'invariant';
-import { ComponentType, createContext, createElement, useContext } from 'react';
+import {
+  ComponentType,
+  ReactElement,
+  createContext,
+  createElement,
+  useContext,
+} from 'react';
 
 import { connectField } from './connectField';
-import { Context, Override } from './types';
+import { Context } from './types';
 import { useField } from './useField';
 
-type AutoFieldProps = Override<
-  Record<string, unknown>,
-  { component?: Component; name: string }
->;
+export type AutoFieldProps = {
+  component?: Component;
+  name: string;
+  [prop: string]: unknown;
+};
 
-type Component = ComponentType<any> | ReturnType<typeof connectField>;
+export type Component = ComponentType<any> | ReturnType<typeof connectField>;
 
-type ComponentDetector = (
+export type ComponentDetector = (
   props: ReturnType<typeof useField>[0],
   uniforms: Context<unknown>,
 ) => Component;
@@ -20,7 +27,7 @@ type ComponentDetector = (
 export function createAutoField(defaultComponentDetector: ComponentDetector) {
   const context = createContext<ComponentDetector>(defaultComponentDetector);
 
-  function AutoField(rawProps: AutoFieldProps) {
+  function AutoField(rawProps: AutoFieldProps): ReactElement {
     const [props, uniforms] = useField(rawProps.name, rawProps);
     const componentDetector = useContext(context);
     const component = props.component ?? componentDetector(props, uniforms);
@@ -32,8 +39,8 @@ export function createAutoField(defaultComponentDetector: ComponentDetector) {
       : createElement(component, rawProps);
   }
 
-  AutoField.componentDetectorContext = context;
-  AutoField.defaultComponentDetector = defaultComponentDetector;
-
-  return AutoField;
+  return Object.assign(AutoField, {
+    componentDetectorContext: context,
+    defaultComponentDetector,
+  });
 }

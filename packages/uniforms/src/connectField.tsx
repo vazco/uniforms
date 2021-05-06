@@ -6,32 +6,50 @@ import { context as contextReference } from './context';
 import { GuaranteedProps, Override } from './types';
 import { useField } from './useField';
 
+/** @internal */
+export type ConnectFieldOptions = {
+  initialValue?: boolean;
+  kind?: 'leaf' | 'node';
+};
+
+/** @internal */
+export type ConnectedFieldProps<
+  Props extends Record<string, unknown>,
+  Value = Props['value']
+> = Override<
+  Props,
+  Override<
+    Partial<GuaranteedProps<Value>>,
+    {
+      label?: Props['label'] | boolean | null | string;
+      name: string;
+      placeholder?: Props['placeholder'] | boolean | null | string;
+    }
+  >
+>;
+
+/** @internal */
+export type ConnectedField<
+  Props extends Record<string, unknown>,
+  Value = Props['value']
+> = FunctionComponent<ConnectedFieldProps<Props, Value>> & {
+  Component: ComponentType<Props>;
+  options?: ConnectFieldOptions;
+};
+
 export function connectField<
-  Props extends Partial<GuaranteedProps<Value>>,
+  Props extends Record<string, unknown>,
   Value = Props['value']
 >(
   Component: ComponentType<Props>,
-  options?: { initialValue?: boolean; kind?: 'leaf' | 'node' },
-) {
-  type FieldProps = Override<
-    Props,
-    Override<
-      Partial<GuaranteedProps<Value>>,
-      {
-        label?: Props['label'] | boolean | null | string;
-        name: string;
-        placeholder?: Props['placeholder'] | boolean | null | string;
-      }
-    >
-  >;
-
-  function Field(props: FieldProps) {
+  options?: ConnectFieldOptions,
+): ConnectedField<Props, Value> {
+  function Field(props: ConnectedFieldProps<Props, Value>) {
     const [fieldProps, context] = useField(props.name, props, options);
 
     const hasChainName = props.name !== '';
     const anyFlowingPropertySet = some(
       context.state,
-      // @ts-expect-error: `props` has no index signature.
       (_, key) => props[key] !== null && props[key] !== undefined,
     );
 
@@ -42,7 +60,6 @@ export function connectField<
     const nextContext = { ...context };
     if (anyFlowingPropertySet) {
       nextContext.state = mapValues(nextContext.state, (value, key) =>
-        // @ts-expect-error: `props` has no index signature.
         props[key] !== null && props[key] !== undefined ? !!props[key] : value,
       );
     }
@@ -60,8 +77,5 @@ export function connectField<
 
   Field.displayName = `${Component.displayName || Component.name}Field`;
 
-  return Object.assign(Field as FunctionComponent<FieldProps>, {
-    Component,
-    options,
-  });
+  return Object.assign(Field, { Component, options });
 }

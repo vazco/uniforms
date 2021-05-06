@@ -1,15 +1,16 @@
 import { FilterDOMProps } from '.';
 
-type FilterDOMPropsKeys = keyof FilterDOMProps;
+/** @internal */
+export type FilterDOMPropsKeys = keyof FilterDOMProps;
 
 const registered: FilterDOMPropsKeys[] = [];
-const registeredCache = new Set<string>();
+const registeredCache = new Set<FilterDOMPropsKeys>();
 
 export const filterDOMProps = Object.assign(
   function filterDOMProps<T extends object>(props: T) {
     const filteredProps = { ...props };
     for (const prop in props) {
-      if (registeredCache.has(prop)) {
+      if (registeredCache.has(prop as FilterDOMPropsKeys)) {
         delete filteredProps[prop];
       }
     }
@@ -25,7 +26,7 @@ export const filterDOMProps = Object.assign(
         }
       });
 
-      props.sort();
+      registered.sort();
     },
     registered: registered as readonly FilterDOMPropsKeys[],
   },
