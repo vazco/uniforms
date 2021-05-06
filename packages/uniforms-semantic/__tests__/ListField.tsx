@@ -1,12 +1,12 @@
 import React from 'react';
 import { ListAddField, ListField, ListItemField } from 'uniforms-semantic';
-import { ListFieldTests } from 'uniforms/__suites__';
+import { runListFieldTests } from 'uniforms/__suites__/ListField';
 
 import createContext from './_createContext';
 import mount from './_mount';
 
 describe('@RTL - ListField tests', () => {
-  ListFieldTests(ListField);
+  runListFieldTests(ListField);
 });
 
 test('<ListField> - works', () => {

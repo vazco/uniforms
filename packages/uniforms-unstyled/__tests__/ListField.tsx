@@ -1,13 +1,13 @@
 import React from 'react';
 import { ListAddField, ListField, ListItemField } from 'uniforms-unstyled';
-import { ListFieldTests } from 'uniforms/__suites__';
-
-describe('@RTL - ListField tests', () => {
-  ListFieldTests(ListField);
-});
+import { runListFieldTests } from 'uniforms/__suites__/ListField';
 
 import createContext from './_createContext';
 import mount from './_mount';
+
+describe('@RTL - ListField tests', () => {
+  runListFieldTests(ListField);
+});
 
 test('<ListField> - works', () => {
   const element = <ListField name="x" />;

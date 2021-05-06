@@ -2,13 +2,13 @@ import IconButton from '@material-ui/core/IconButton';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import React from 'react';
 import { ListAddField, ListField, ListItemField } from 'uniforms-material';
-import { ListFieldTests } from 'uniforms/__suites__';
+import { runListFieldTests } from 'uniforms/__suites__/ListField';
 
 import createContext from './_createContext';
 import mount from './_mount';
 
 describe('@RTL - ListField tests', () => {
-  ListFieldTests(ListField);
+  runListFieldTests(ListField);
 });
 
 test('<ListField> - works', () => {

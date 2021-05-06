@@ -2,13 +2,14 @@ import TextFieldMaterial from '@material-ui/core/TextField';
 import { screen } from '@testing-library/react';
 import React from 'react';
 import { TextField } from 'uniforms-material';
-import { render, TextFieldTests } from 'uniforms/__suites__';
+import { runTextFieldTests } from 'uniforms/__suites__/TextField';
+import { render } from 'uniforms/__suites__/renderWithContext';
 
 import createContext from './_createContext';
 import mount from './_mount';
 
 describe('@RTL - TextField tests', () => {
-  TextFieldTests(TextField);
+  runTextFieldTests(TextField);
 
   test('<TextField> - renders a TextField with correct error text (specified)', () => {
     const errorMessage = 'Error';

@@ -10,6 +10,6 @@ module.exports = {
     '^uniforms([^/]*)(.*)$': '<rootDir>/packages/uniforms$1/src$2',
   },
   preset: 'ts-jest',
-  setupFiles: ['./scripts/setupEnzyme.ts'],
+  setupFiles: ['./scripts/setupEnzyme.ts', './scripts/setupMatchers.ts'],
   testPathIgnorePatterns: ['/node_modules/', '/_[^/]*$', '\\.d\\.ts$'],
 };

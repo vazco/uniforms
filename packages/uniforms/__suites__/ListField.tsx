@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import React, { ComponentType, FC } from 'react';
 
 import createContext, { render } from './renderWithContext';
 
@@ -8,7 +8,7 @@ function getDefaultContext() {
   return createContext({ x: { type: Array }, 'x.$': { type: String } });
 }
 
-export function ListFieldTests(ListField: React.ComponentType<any>) {
+export function runListFieldTests(ListField: ComponentType<any>) {
   test('<ListField> - renders ListAddField', () => {
     render(<ListField name="x" label="ListFieldLabel" />, getDefaultContext());
 
@@ -30,7 +30,7 @@ export function ListFieldTests(ListField: React.ComponentType<any>) {
 
   test('<ListField> - passes itemProps to its children', () => {
     const itemProps = { 'data-xyz': 1 };
-    const Child = jest.fn(() => <div />) as React.FC<any>;
+    const Child = jest.fn(() => <div />) as FC<any>;
     render(
       <ListField name="x" initialCount={2} itemProps={itemProps}>
         <Child />
@@ -44,7 +44,7 @@ export function ListFieldTests(ListField: React.ComponentType<any>) {
   });
 
   test('<ListField> - renders children (specified)', () => {
-    const Child = jest.fn(() => <div />) as React.FC<any>;
+    const Child = jest.fn(() => <div />) as FC<any>;
     const element = (
       <ListField name="x" initialCount={2}>
         <Child />
@@ -57,7 +57,7 @@ export function ListFieldTests(ListField: React.ComponentType<any>) {
   });
 
   test('<ListField> - renders children with correct name (children)', () => {
-    const Child = jest.fn(() => <div data-testid="field" />) as React.FC<any>;
+    const Child = jest.fn(() => <div data-testid="field" />) as FC<any>;
     const element = (
       <ListField name="x" initialCount={2}>
         <Child name="$" />

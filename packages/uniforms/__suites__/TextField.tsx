@@ -1,10 +1,10 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import React, { ComponentType } from 'react';
 
 import createContext, { render } from './renderWithContext';
 
-export function TextFieldTests(TextField: React.ComponentType<any>) {
+export function runTextFieldTests(TextField: ComponentType<any>) {
   test('<TextField> - renders an input with correct disabled state', () => {
     render(<TextField name="x" disabled />);
 

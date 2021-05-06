@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/extend-expect';
-import { render as rtlRender } from '@testing-library/react';
-import React from 'react';
+import { render as renderOnScreen } from '@testing-library/react';
+import React, { ComponentType, ReactElement } from 'react';
 import SimpleSchema from 'simpl-schema';
 import { context, Context, randomIds } from 'uniforms';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
@@ -39,13 +39,13 @@ export default function createContext(
 }
 
 export function render(
-  element: React.ReactElement,
+  element: ReactElement,
   customContext = createContext({ x: { type: String } }),
 ) {
-  const Wrapper: React.ComponentType = ({ children }) => (
+  const Wrapper: ComponentType = ({ children }) => (
     <context.Provider value={customContext.context}>
       {children}
     </context.Provider>
   );
-  return rtlRender(element, { wrapper: Wrapper });
+  return renderOnScreen(element, { wrapper: Wrapper });
 }
