@@ -1,4 +1,3 @@
-import '@testing-library/jest-dom/extend-expect';
 import { render as renderOnScreen } from '@testing-library/react';
 import React, { ComponentType, ReactElement } from 'react';
 import SimpleSchema from 'simpl-schema';
