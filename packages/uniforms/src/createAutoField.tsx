@@ -17,8 +17,10 @@ export type AutoFieldProps = {
   [prop: string]: unknown;
 };
 
+/** @internal */
 export type Component = ComponentType<any> | ReturnType<typeof connectField>;
 
+/** @internal */
 export type ComponentDetector = (
   props: ReturnType<typeof useField>[0],
   uniforms: Context<unknown>,
