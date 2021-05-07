@@ -59,4 +59,4 @@ function Bool({ onChange, ...props }: BoolFieldProps) {
   );
 }
 
-export default connectField(Bool, { kind: 'leaf' });
+export default connectField<BoolFieldProps>(Bool, { kind: 'leaf' });

@@ -71,4 +71,4 @@ function Radio({
   );
 }
 
-export default connectField(Radio, { kind: 'leaf' });
+export default connectField<RadioFieldProps>(Radio, { kind: 'leaf' });

@@ -1,9 +1,9 @@
 import React from 'react';
 import { HTMLFieldProps, connectField } from 'uniforms';
 
-type ImageProps = HTMLFieldProps<string, HTMLDivElement>;
+export type ImageFieldProps = HTMLFieldProps<string, HTMLDivElement>;
 
-function Image({ onChange, value }: ImageProps) {
+function Image({ onChange, value }: ImageFieldProps) {
   return (
     <div className="ImageField">
       <label htmlFor="file-input">
@@ -29,4 +29,4 @@ function Image({ onChange, value }: ImageProps) {
   );
 }
 
-export default connectField(Image);
+export default connectField<ImageFieldProps>(Image);

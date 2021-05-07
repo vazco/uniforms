@@ -48,4 +48,4 @@ function Nest({
 
 Nest.defaultProps = { grouped: true };
 
-export default connectField(Nest);
+export default connectField<NestFieldProps>(Nest);

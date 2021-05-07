@@ -57,4 +57,7 @@ function ListAdd({
   );
 }
 
-export default connectField(ListAdd, { initialValue: false, kind: 'leaf' });
+export default connectField<ListAddFieldProps>(ListAdd, {
+  initialValue: false,
+  kind: 'leaf',
+});

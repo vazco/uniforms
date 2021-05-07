@@ -1,5 +1,6 @@
 import invariant from 'invariant';
 import { createAutoField } from 'uniforms';
+export { AutoFieldProps } from 'uniforms';
 
 import BoolField from './BoolField';
 import DateField from './DateField';
@@ -9,8 +10,6 @@ import NumField from './NumField';
 import RadioField from './RadioField';
 import SelectField from './SelectField';
 import TextField from './TextField';
-
-export type AutoFieldProps = Parameters<typeof AutoField>[0];
 
 const AutoField = createAutoField(props => {
   if (props.allowedValues) {

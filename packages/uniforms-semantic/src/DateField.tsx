@@ -91,4 +91,4 @@ function Date({
   );
 }
 
-export default connectField(Date, { kind: 'leaf' });
+export default connectField<DateFieldProps>(Date, { kind: 'leaf' });
