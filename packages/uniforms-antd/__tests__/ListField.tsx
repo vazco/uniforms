@@ -1,3 +1,4 @@
+import { screen } from '@testing-library/react';
 import Tooltip from 'antd/lib/tooltip';
 import React from 'react';
 import { ListAddField, ListField, ListItemField } from 'uniforms-antd';
@@ -7,7 +8,7 @@ import createContext from './_createContext';
 import mount from './_mount';
 
 describe('@RTL - ListField tests', () => {
-  runListFieldTests(ListField);
+  runListFieldTests(ListField, () => screen.queryAllByRole('img').pop());
 });
 
 test('<ListField> - works', () => {

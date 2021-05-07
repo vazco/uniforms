@@ -1,5 +1,6 @@
 import IconButton from '@material-ui/core/IconButton';
 import ListSubheader from '@material-ui/core/ListSubheader';
+import { screen } from '@testing-library/react';
 import React from 'react';
 import { ListAddField, ListField, ListItemField } from 'uniforms-material';
 import { runListFieldTests } from 'uniforms/__suites__/ListField';
@@ -8,7 +9,7 @@ import createContext from './_createContext';
 import mount from './_mount';
 
 describe('@RTL - ListField tests', () => {
-  runListFieldTests(ListField);
+  runListFieldTests(ListField, () => screen.queryByText(/\+/));
 });
 
 test('<ListField> - works', () => {

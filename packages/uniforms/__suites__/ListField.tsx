@@ -8,7 +8,13 @@ function getDefaultContext() {
   return createContext({ x: { type: Array }, 'x.$': { type: String } });
 }
 
-export function runListFieldTests(ListField: ComponentType<any>) {
+function defaultAddFieldLocator(): HTMLElement | null | undefined {
+  return screen.getAllByRole('button')[0];
+}
+export function runListFieldTests(
+  ListField: ComponentType<any>,
+  addFieldLocator = defaultAddFieldLocator,
+) {
   test('<ListField> - renders ListAddField', () => {
     render(<ListField name="x" label="ListFieldLabel" />, getDefaultContext());
 
@@ -88,13 +94,7 @@ export function runListFieldTests(ListField: ComponentType<any>) {
       ),
     );
 
-    // Due to differences in how and where the add button is rendered,
-    // we have to use different queries for different themes
-    const addButton =
-      screen.queryByText(/\+/) ??
-      screen.queryAllByRole('img').pop() ??
-      screen.getAllByRole('button')[0];
-    userEvent.click(addButton);
+    userEvent.click(addFieldLocator()!);
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toHaveBeenLastCalledWith('x', [
       undefined,
