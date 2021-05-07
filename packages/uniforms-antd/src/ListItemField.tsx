@@ -42,4 +42,4 @@ function ListItem({
   );
 }
 
-export default connectField(ListItem);
+export default connectField<ListItemFieldProps>(ListItem);

@@ -67,4 +67,7 @@ ListDel.defaultProps = {
   removeIcon: <i className="glyphicon glyphicon-minus" />,
 };
 
-export default connectField(ListDel, { initialValue: false, kind: 'leaf' });
+export default connectField<ListDelFieldProps>(ListDel, {
+  initialValue: false,
+  kind: 'leaf',
+});

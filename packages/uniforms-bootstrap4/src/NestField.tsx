@@ -40,4 +40,4 @@ function Nest({
   );
 }
 
-export default connectField(Nest);
+export default connectField<NestFieldProps>(Nest);

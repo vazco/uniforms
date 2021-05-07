@@ -28,6 +28,7 @@ export type Context<Model> = {
   validating: boolean;
 };
 
+/** @internal */
 export type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
 };
@@ -71,9 +72,8 @@ export type HTMLFieldProps<Value, Element, Extension = object> = FieldProps<
 
 export type ModelTransformMode = 'form' | 'submit' | 'validate';
 
+/** @internal */
 export type Override<T, U> = U & Omit<T, keyof U>;
-
-export type Partialize<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
 export type ValidateMode = 'onChange' | 'onChangeAfterSubmit' | 'onSubmit';
 

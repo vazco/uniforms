@@ -17,4 +17,6 @@ function ListItem({
   );
 }
 
-export default connectField(ListItem, { initialValue: false });
+export default connectField<ListItemFieldProps>(ListItem, {
+  initialValue: false,
+});
