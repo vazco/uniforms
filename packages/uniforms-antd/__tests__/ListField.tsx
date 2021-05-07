@@ -8,17 +8,19 @@ import createContext from './_createContext';
 import mount from './_mount';
 
 describe('@RTL - ListField tests', () => {
-  runListFieldTests(ListField, () => screen.queryAllByRole('img').pop());
-});
+  runListFieldTests(ListField, {
+    addFieldLocator: () => screen.queryAllByRole('img').pop(),
+  });
 
-test('<ListField> - works', () => {
-  const element = <ListField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: Array }, 'x.$': { type: String } }),
-  );
+  test('<ListField> - works', () => {
+    const element = <ListField name="x" />;
+    const wrapper = mount(
+      element,
+      createContext({ x: { type: Array }, 'x.$': { type: String } }),
+    );
 
-  expect(wrapper.find(ListField)).toHaveLength(1);
+    expect(wrapper.find(ListField)).toHaveLength(1);
+  });
 });
 
 test('<ListField> - renders ListAddField', () => {

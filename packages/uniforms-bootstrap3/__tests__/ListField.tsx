@@ -1,3 +1,4 @@
+import { screen } from '@testing-library/react';
 import React from 'react';
 import { ListAddField, ListField, ListItemField } from 'uniforms-bootstrap3';
 import { runListFieldTests } from 'uniforms/__suites__/ListField';
@@ -6,7 +7,9 @@ import createContext from './_createContext';
 import mount from './_mount';
 
 describe('@RTL - ListField tests', () => {
-  runListFieldTests(ListField);
+  runListFieldTests(ListField, {
+    addFieldLocator: () => screen.getAllByRole('button')[0],
+  });
 });
 
 test('<ListField> - works', () => {

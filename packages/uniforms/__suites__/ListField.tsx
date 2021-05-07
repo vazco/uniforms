@@ -8,12 +8,13 @@ function getDefaultContext() {
   return createContext({ x: { type: Array }, 'x.$': { type: String } });
 }
 
-function defaultAddFieldLocator(): HTMLElement | null | undefined {
-  return screen.getAllByRole('button')[0];
-}
+type RunListFieldTestsOptions = {
+  addFieldLocator(): HTMLElement | null | undefined;
+};
+
 export function runListFieldTests(
   ListField: ComponentType<any>,
-  addFieldLocator = defaultAddFieldLocator,
+  { addFieldLocator }: RunListFieldTestsOptions,
 ) {
   test('<ListField> - renders ListAddField', () => {
     render(<ListField name="x" label="ListFieldLabel" />, getDefaultContext());
@@ -94,7 +95,9 @@ export function runListFieldTests(
       ),
     );
 
-    userEvent.click(addFieldLocator()!);
+    const addField = addFieldLocator();
+    expect(addField).toBeTruthy();
+    userEvent.click(addField!);
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toHaveBeenLastCalledWith('x', [
       undefined,

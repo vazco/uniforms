@@ -9,7 +9,9 @@ import createContext from './_createContext';
 import mount from './_mount';
 
 describe('@RTL - ListField tests', () => {
-  runListFieldTests(ListField, () => screen.queryByText(/\+/));
+  runListFieldTests(ListField, {
+    addFieldLocator: () => screen.queryByText(/\+/),
+  });
 });
 
 test('<ListField> - works', () => {
