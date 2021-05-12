@@ -8,6 +8,7 @@
   "include": [
     "packages/*/__mocks__",
     "packages/*/__tests__",
+    "packages/uniforms/__suites__",
     "scripts",
     "website"
   ],

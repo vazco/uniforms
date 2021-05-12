@@ -1,9 +1,44 @@
 import TextFieldMaterial from '@material-ui/core/TextField';
+import { screen } from '@testing-library/react';
 import React from 'react';
 import { TextField } from 'uniforms-material';
+import { runTextFieldTests } from 'uniforms/__suites__/TextField';
+import { render } from 'uniforms/__suites__/renderWithContext';
 
 import createContext from './_createContext';
 import mount from './_mount';
+
+describe('@RTL - TextField tests', () => {
+  runTextFieldTests(TextField);
+
+  test('<TextField> - renders a TextField with correct error text (specified)', () => {
+    const errorMessage = 'Error';
+    render(
+      <TextField
+        error={new Error()}
+        name="x"
+        showInlineError
+        errorMessage={errorMessage}
+      />,
+    );
+
+    expect(screen.getByText(errorMessage)).toBeInTheDocument();
+  });
+
+  test('<TextField> - renders a TextField with correct error text (showInlineError=false)', () => {
+    const errorMessage = 'Error';
+    render(
+      <TextField
+        name="x"
+        error={new Error()}
+        showInlineError={false}
+        errorMessage={errorMessage}
+      />,
+    );
+
+    expect(screen.queryByText(errorMessage)).not.toBeInTheDocument();
+  });
+});
 
 test('<TextField> - renders an TextField', () => {
   const element = <TextField name="x" />;

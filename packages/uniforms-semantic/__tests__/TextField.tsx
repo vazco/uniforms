@@ -1,8 +1,72 @@
+import { screen } from '@testing-library/react';
 import React from 'react';
 import { TextField } from 'uniforms-semantic';
+import { runTextFieldTests } from 'uniforms/__suites__/TextField';
+import { render } from 'uniforms/__suites__/renderWithContext';
 
 import createContext from './_createContext';
 import mount from './_mount';
+
+describe('@RTL - TextField tests', () => {
+  runTextFieldTests(TextField);
+
+  test('<TextField> - renders a wrapper with unknown props', () => {
+    const props = {
+      'data-x': 'x',
+      'data-y': 'y',
+      'data-z': 'z',
+    };
+    render(<TextField name="x" {...props} />);
+
+    const wrapper = screen.getByRole('textbox').closest('div')?.parentElement;
+    Object.entries(props).forEach(([key, value]) =>
+      expect(wrapper).toHaveAttribute(key, value),
+    );
+  });
+
+  test('<TextField> - renders a TextField with correct error text (specified)', () => {
+    const errorMessage = 'Error';
+    render(
+      <TextField
+        error={new Error()}
+        name="x"
+        showInlineError
+        errorMessage={errorMessage}
+      />,
+    );
+
+    expect(screen.getByText(errorMessage)).toBeInTheDocument();
+  });
+
+  test('<TextField> - renders a TextField with correct error text (showInlineError=false)', () => {
+    const errorMessage = 'Error';
+    render(
+      <TextField
+        name="x"
+        error={new Error()}
+        showInlineError={false}
+        errorMessage={errorMessage}
+      />,
+    );
+
+    expect(screen.queryByText(errorMessage)).not.toBeInTheDocument();
+  });
+
+  test('<TextField> - renders an icon', () => {
+    const { container } = render(<TextField name="x" icon="small home" />);
+
+    expect(container.querySelector('i')).toBeInTheDocument();
+  });
+
+  test('<TextField> - renders with a custom wrapClassName', () => {
+    const testClassName = 'test-class-name';
+    render(<TextField name="x" wrapClassName={testClassName} />);
+
+    expect(screen.getByRole('textbox').closest('div')).toHaveClass(
+      testClassName,
+    );
+  });
+});
 
 test('<TextField> - renders an input', () => {
   const element = <TextField name="x" />;
