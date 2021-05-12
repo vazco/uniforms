@@ -111,19 +111,14 @@ export default class JSONSchemaBridge extends Bridge {
   }
 
   getErrorMessages(error: any) {
-    if (error) {
-      if (Array.isArray(error.details)) {
-        // FIXME: Correct type for `error`.
-        return (error.details as any[]).reduce(
-          (acc, { message }) => acc.concat(message),
-          [],
-        );
-      }
-
-      return [error.message || error];
+    if (!error) {
+      return [];
     }
 
-    return [];
+    const { details } = error;
+    return Array.isArray(details)
+      ? details.map(error => error.message)
+      : [error.message || error];
   }
 
   getField(name: string) {

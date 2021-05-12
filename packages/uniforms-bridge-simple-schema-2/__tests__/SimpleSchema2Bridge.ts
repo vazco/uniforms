@@ -87,6 +87,7 @@ describe('SimpleSchema2Bridge', () => {
 
   describe('#getErrorMessages', () => {
     it('works without error', () => {
+      expect(bridge.getErrorMessages(null)).toEqual([]);
       expect(bridge.getErrorMessages(undefined)).toEqual([]);
     });
 

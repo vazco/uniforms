@@ -49,22 +49,14 @@ export default class GraphQLBridge extends Bridge {
   }
 
   getErrorMessages(error: any) {
-    if (error) {
-      if (Array.isArray(error.details)) {
-        // FIXME: Correct type for `error`.
-        return (error.details as any[]).map(error => error.message);
-      }
-
-      if (error.message) {
-        return [error.message];
-      }
+    if (!error) {
+      return [];
     }
 
-    if (error !== undefined) {
-      return [error];
-    }
-
-    return [];
+    const { details } = error;
+    return Array.isArray(details)
+      ? details.map(error => error.message)
+      : [error.message || error];
   }
 
   getField(name: string) {

@@ -33,29 +33,21 @@ export default class SimpleSchemaBridge extends Bridge {
   }
 
   getErrorMessages(error: any) {
-    if (error) {
-      if (Array.isArray(error.details)) {
-        // FIXME: Correct type for `error`.
-        return (error.details as any[]).map(error =>
+    if (!error) {
+      return [];
+    }
+
+    const { details } = error;
+    return Array.isArray(details)
+      ? details.map(error =>
           this.schema.messageForError(
             error.type,
             error.name,
             null,
             error.details && error.details.value,
           ),
-        );
-      }
-
-      if (error.message) {
-        return [error.message];
-      }
-    }
-
-    if (error !== undefined) {
-      return [error];
-    }
-
-    return [];
+        )
+      : [error.message || error];
   }
 
   getField(name: string) {

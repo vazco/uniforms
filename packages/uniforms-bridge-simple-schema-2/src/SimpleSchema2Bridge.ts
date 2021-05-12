@@ -26,25 +26,15 @@ export default class SimpleSchema2Bridge extends Bridge {
   }
 
   getErrorMessages(error: any) {
-    if (error) {
-      if (Array.isArray(error.details)) {
-        // FIXME: Correct type for `error`.
-        return (error.details as any[]).map(error =>
-          // @ts-expect-error: `messageForError` has incorrect typing.
-          this.schema.messageForError(error),
-        );
-      }
-
-      if (error.message) {
-        return [error.message];
-      }
+    if (!error) {
+      return [];
     }
 
-    if (error !== undefined) {
-      return [error];
-    }
-
-    return [];
+    const { details } = error;
+    return Array.isArray(details)
+      ? // @ts-expect-error: `messageForError` has incorrect typing.
+        details.map(error => this.schema.messageForError(error))
+      : [error.message || error];
   }
 
   getField(name: string) {

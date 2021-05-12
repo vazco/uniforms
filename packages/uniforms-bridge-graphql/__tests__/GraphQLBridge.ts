@@ -135,6 +135,7 @@ describe('GraphQLBridge', () => {
 
   describe('#getErrorMessages', () => {
     it('works without error', () => {
+      expect(bridgeI.getErrorMessages(null)).toEqual([]);
       expect(bridgeI.getErrorMessages(undefined)).toEqual([]);
     });
 
