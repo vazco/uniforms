@@ -1,3 +1,11 @@
+## [v3.5.0](https://github.com/vazco/uniforms/tree/v3.5.0) (2021-05-12)
+
+- **Changed:** Bumped minimal required version of `tslib` to 2.2.0. [\#949](https://github.com/vazco/uniforms/issues/949)
+- **Fixed:** Handling of `object` fields with no `properties` in `JSONSchemaBridge`. [\#934](https://github.com/vazco/uniforms/issues/934)
+- **Fixed:** Simplified typings of all field components. [\#949](https://github.com/vazco/uniforms/pull/949)
+- **Fixed:** TypeScript error in `uniforms-bootstrap4`. [\#904](https://github.com/vazco/uniforms/pull/904)
+- **Optimized:** The `changedKeys` helper. [\#953](https://github.com/vazco/uniforms/pull/953)
+
 ## [v3.4.0](https://github.com/vazco/uniforms/tree/v3.4.0) (2021-04-23)
 
 - **Added:** Ajv v8 support in `JSONSchemaBridge`. [\#923](https://github.com/vazco/uniforms/issues/923)
@@ -5,6 +13,8 @@
 - **Added:** Success styling in all Bootstrap themes. [\#899](https://github.com/vazco/uniforms/issues/899)
 - **Fixed:** Handling of more `anyOf` cases in `JSONSchemaBridge`. [\#919](https://github.com/vazco/uniforms/issues/919)
 - **Fixed:** Leaking `setTimeout` of `BaseForm`. [\#920](https://github.com/vazco/uniforms/issues/920)
+- **Optimized:** The `filterDOMProps` helper. [\#939](https://github.com/vazco/uniforms/pull/939)
+- **Optimized:** The `joinName` helper. [\#935](https://github.com/vazco/uniforms/pull/935)
 
 ## [v3.3.0](https://github.com/vazco/uniforms/tree/v3.3.0) (2021-03-31)
 
