@@ -62,7 +62,7 @@ export default class SimpleSchema2Bridge extends Bridge {
       try {
         merged.defaultValue = merged.autoValue.call({ operator: null });
       } catch (_) {
-        /* ignore it */
+        // It's fine.
       }
     }
 
