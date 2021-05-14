@@ -4,6 +4,8 @@ import memoize from 'lodash/memoize';
 import SimpleSchema from 'simpl-schema';
 import { Bridge, joinName } from 'uniforms';
 
+const propsToRemove = ['optional', 'type', 'uniforms'];
+
 export default class SimpleSchema2Bridge extends Bridge {
   constructor(public schema: SimpleSchema) {
     super();
@@ -15,8 +17,12 @@ export default class SimpleSchema2Bridge extends Bridge {
   }
 
   getError(name: string, error: any) {
-    // FIXME: Correct type for `error`.
-    return error?.details?.find?.((error: any) => error.name === name) || null;
+    const details = error?.details;
+    if (!Array.isArray(details)) {
+      return null;
+    }
+
+    return details.find(error => error.name === name) || null;
   }
 
   getErrorMessage(name: string, error: any) {
@@ -63,13 +69,12 @@ export default class SimpleSchema2Bridge extends Bridge {
     return merged;
   }
 
-  getInitialValue(name: string, props: Record<string, any> = {}): any {
+  getInitialValue(name: string, props?: Record<string, any>): any {
     const field = this.getField(name);
 
     if (field.type === Array) {
       const item = this.getInitialValue(joinName(name, '0'));
-      const items = Math.max(props.initialCount || 0, field.minCount || 0);
-
+      const items = Math.max(props?.initialCount || 0, field.minCount || 0);
       return Array.from({ length: items }, () => item);
     }
 
@@ -81,58 +86,62 @@ export default class SimpleSchema2Bridge extends Bridge {
   }
 
   // eslint-disable-next-line complexity
-  getProps(name: string, props: Record<string, any> = {}) {
-    const { optional, type, uniforms, ...contextField } = this.getField(name);
-    let field = { ...contextField, required: !optional };
+  getProps(name: string, fieldProps?: Record<string, any>) {
+    const props = Object.assign({}, this.getField(name));
+    props.required = !props.optional;
 
-    if (uniforms) {
-      if (typeof uniforms === 'string' || typeof uniforms === 'function') {
-        field = { ...field, component: uniforms };
-      } else {
-        field = { ...field, ...uniforms };
-      }
+    if (
+      typeof props.uniforms === 'function' ||
+      typeof props.uniforms === 'string'
+    ) {
+      props.component = props.uniforms;
+    } else {
+      Object.assign(props, props.uniforms);
     }
 
-    if (type === Array) {
-      try {
-        const itemProps = this.getProps(`${name}.$`, props);
-        if (itemProps.allowedValues && !props.allowedValues) {
-          field.allowedValues = itemProps.allowedValues;
-        }
-
-        if (itemProps.transform && !props.transform) {
-          field.transform = itemProps.transform;
-        }
-      } catch (_) {
-        /* ignore it */
-      }
-    } else if (type === Number) {
-      field = { ...field, decimal: true };
+    if (props.type === Number) {
+      props.decimal = true;
     }
 
-    let options = props.options || field.options;
+    type OptionDict = Record<string, string>;
+    type OptionList = { label: string; value: unknown }[];
+    type Options = OptionDict | OptionList | (() => OptionDict | OptionList);
+    let options: Options = fieldProps?.options || props.options;
     if (options) {
       if (typeof options === 'function') {
         options = options();
       }
 
-      if (!Array.isArray(options)) {
-        field = {
-          ...field,
-          transform: (value: any) => options[value],
-          allowedValues: Object.keys(options),
-        };
+      if (Array.isArray(options)) {
+        props.allowedValues = options.map(option => option.value);
+        props.transform = (value: unknown) =>
+          (options as OptionList).find(option => option.value === value)!.label;
       } else {
-        field = {
-          ...field,
-          transform: (value: any) =>
-            (options as any[]).find(option => option.value === value).label,
-          allowedValues: options.map(option => option.value),
-        };
+        props.allowedValues = Object.keys(options);
+        props.transform = (value: string) => (options as OptionDict)[value];
+      }
+    } else if (props.type === Array) {
+      try {
+        const itemProps = this.getProps(`${name}.$`, fieldProps);
+        if (itemProps.allowedValues && !fieldProps?.allowedValues) {
+          props.allowedValues = itemProps.allowedValues;
+        }
+
+        if (itemProps.transform && !fieldProps?.transform) {
+          props.transform = itemProps.transform;
+        }
+      } catch (_) {
+        // It's fine.
       }
     }
 
-    return field;
+    propsToRemove.forEach(key => {
+      if (key in props) {
+        delete props[key];
+      }
+    });
+
+    return props;
   }
 
   getSubfields(name?: string) {

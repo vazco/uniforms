@@ -14,12 +14,8 @@ import memoize from 'lodash/memoize';
 import upperFirst from 'lodash/upperFirst';
 import { Bridge, joinName } from 'uniforms';
 
-function extractValue(x: boolean | null | string | undefined, y: string) {
-  return x === false || x === null ? '' : x !== true && x !== undefined ? x : y;
-}
-
-function toHumanLabel(label: string) {
-  return upperFirst(lowerCase(label));
+function fieldInvariant(name: string, condition: boolean): asserts condition {
+  invariant(condition, 'Field not found in schema: "%s"', name);
 }
 
 export default class GraphQLBridge extends Bridge {
@@ -37,10 +33,12 @@ export default class GraphQLBridge extends Bridge {
   }
 
   getError(name: string, error: any) {
-    return (
-      // FIXME: Correct type for `error`.
-      error?.details?.find?.((error: any) => error.name === name) || null
-    );
+    const details = error?.details;
+    if (!Array.isArray(details)) {
+      return null;
+    }
+
+    return details.find(error => error.name === name) || null;
   }
 
   getErrorMessage(name: string, error: any) {
@@ -60,37 +58,33 @@ export default class GraphQLBridge extends Bridge {
   }
 
   getField(name: string) {
-    const root = { name: '', type: this.schema } as GraphQLInputField;
+    return joinName(null, name).reduce(
+      (field, namePart) => {
+        const fieldType = getNullableType(field.type);
 
-    return joinName(null, name).reduce((field, namePart) => {
-      const fieldType = getNullableType(field.type);
+        if (namePart === '$' || namePart === '' + parseInt(namePart, 10)) {
+          fieldInvariant(name, isListType(fieldType));
+          return { ...field, type: fieldType.ofType };
+        }
 
-      if (namePart === '$' || namePart === '' + parseInt(namePart, 10)) {
-        invariant(
-          isListType(fieldType),
-          'Field not found in schema: "%s"',
-          name,
-        );
+        if (isInputObjectType(fieldType) || isObjectType(fieldType)) {
+          const fields = fieldType.getFields();
+          fieldInvariant(name, namePart in fields);
+          return fields[namePart] as GraphQLInputField;
+        }
 
-        return { ...field, type: fieldType.ofType };
-      }
-
-      if (isInputObjectType(fieldType) || isObjectType(fieldType)) {
-        const fields = fieldType.getFields();
-        invariant(namePart in fields, 'Field not found in schema: "%s"', name);
-        return fields[namePart] as GraphQLInputField;
-      }
-
-      invariant(false, 'Field not found in schema: "%s"', name);
-    }, root);
+        fieldInvariant(name, false);
+      },
+      { name: '', type: this.schema } as GraphQLInputField,
+    );
   }
 
-  getInitialValue(name: string, props: Record<string, any> = {}): any {
+  getInitialValue(name: string, props?: Record<string, any>): any {
     const type = this.getType(name);
+
     if (type === Array) {
       const item = this.getInitialValue(joinName(name, '0'));
-      const items = (props.initialCount as number) || 0;
-
+      const items = props?.initialCount || 0;
       return Array.from({ length: items }, () => item);
     }
 
@@ -102,36 +96,39 @@ export default class GraphQLBridge extends Bridge {
     return defaultValue ?? this.extras[name]?.initialValue;
   }
 
-  getProps(nameNormal: string, props: Record<string, any> = {}) {
+  getProps(nameNormal: string, fieldProps?: Record<string, any>) {
     const nameGeneric = nameNormal.replace(/\.\d+/g, '.$');
 
-    const { name, type } = this.getField(nameGeneric);
-    const result = {
-      required: isNonNullType(type),
+    const field = this.getField(nameGeneric);
+    const props = {
+      required: isNonNullType(field.type),
       ...this.extras[nameGeneric],
       ...this.extras[nameNormal],
     };
 
-    const fieldType = getNullableType(type);
+    const fieldType = getNullableType(field.type);
     if (isScalarType(fieldType) && fieldType.name === 'Float') {
-      result.decimal = true;
+      props.decimal = true;
     }
 
-    result.label = extractValue(result.label, toHumanLabel(name));
+    props.label ??= upperFirst(lowerCase(field.name));
 
-    const options = props.options || result.options;
+    type OptionDict = Record<string, string>;
+    type OptionList = { label: string; value: unknown }[];
+    type Options = OptionDict | OptionList;
+    const options: Options = fieldProps?.options || props.options;
     if (options) {
-      if (!Array.isArray(options)) {
-        result.transform = (value: any) => options[value];
-        result.allowedValues = Object.keys(options);
+      if (Array.isArray(options)) {
+        props.allowedValues = options.map(option => option.value);
+        props.transform = (value: unknown) =>
+          options.find(option => option.value === value)!.label;
       } else {
-        result.transform = (value: any) =>
-          options.find(option => option.value === value).label;
-        result.allowedValues = options.map(option => option.value);
+        props.allowedValues = Object.keys(options);
+        props.transform = (value: string) => options[value];
       }
     }
 
-    return result;
+    return props;
   }
 
   getSubfields(name = '') {
