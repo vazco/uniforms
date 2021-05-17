@@ -1,3 +1,7 @@
+## [v3.5.1](https://github.com/vazco/uniforms/tree/v3.5.1) (2021-05-17)
+
+- **Fixed:** Incorrect label placing of `DateField` in `uniforms-material`. [\#961](https://github.com/vazco/uniforms/issues/961)
+
 ## [v3.5.0](https://github.com/vazco/uniforms/tree/v3.5.0) (2021-05-12)
 
 - **Changed:** Bumped minimal required version of `tslib` to 2.2.0. [\#949](https://github.com/vazco/uniforms/issues/949)
