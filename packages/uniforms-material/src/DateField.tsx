@@ -44,7 +44,7 @@ function Date({
       fullWidth
       helperText={(error && showInlineError && errorMessage) || helperText}
       label={label}
-      InputLabelProps={{ ...labelProps, ...InputLabelProps }}
+      InputLabelProps={{ ...labelProps, ...InputLabelProps, shrink: true }}
       inputProps={{ readOnly }}
       margin="dense"
       name={name}
