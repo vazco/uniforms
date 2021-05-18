@@ -168,6 +168,8 @@ describe('JSONSchemaBridge', () => {
         ],
       },
       objectWithoutProperties: { type: 'object' },
+      withLabel: { type: 'string', uniforms: { label: 'Example' } },
+      forcedRequired: { type: 'string', uniforms: { required: true } },
     },
     required: ['dateOfBirth', 'nonObjectAnyOfRequired'],
   };
@@ -185,11 +187,15 @@ describe('JSONSchemaBridge', () => {
         definitions: schema.definitions,
         $ref: '#/definitions/personalData',
       };
-      const localBridge = new JSONSchemaBridge(localSchema, validator);
-      expect(localBridge.schema).toEqual({
+      const resolvedSchema = {
         ...localSchema,
         ...localSchema.definitions.personalData,
-      });
+      };
+      // @ts-expect-error: $ref is not optional.
+      delete resolvedSchema.$ref;
+
+      const localBridge = new JSONSchemaBridge(localSchema, validator);
+      expect(localBridge.schema).toEqual(resolvedSchema);
     });
 
     it('falls back to input schema', () => {
@@ -590,10 +596,24 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
+    it('works with allowedValues from props', () => {
+      expect(bridge.getProps('forcedRequired')).toEqual({
+        label: 'Forced required',
+        required: true,
+      });
+    });
+
     it('works with custom component', () => {
       expect(bridge.getProps('age')).toEqual({
         component: 'span',
         label: 'Age',
+        required: false,
+      });
+    });
+
+    it('works with label (default)', () => {
+      expect(bridge.getProps('withLabel')).toEqual({
+        label: 'Example',
         required: false,
       });
     });
@@ -619,18 +639,6 @@ describe('JSONSchemaBridge', () => {
         options: undefined,
         placeholder: undefined,
         required: false,
-      });
-    });
-
-    it('works with label (falsy)', () => {
-      expect(bridge.getProps('billingAddress.city')).toEqual({
-        label: '',
-        required: false,
-      });
-
-      expect(bridge.getProps('dateOfBirth', { label: null })).toEqual({
-        label: 'Date of birth',
-        required: true,
       });
     });
 
@@ -811,6 +819,8 @@ describe('JSONSchemaBridge', () => {
         'nonObjectAnyOf',
         'nonObjectAnyOfRequired',
         'objectWithoutProperties',
+        'withLabel',
+        'forcedRequired',
       ]);
     });
 

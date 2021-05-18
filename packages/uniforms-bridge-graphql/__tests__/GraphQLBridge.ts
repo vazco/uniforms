@@ -227,7 +227,7 @@ describe('GraphQLBridge', () => {
           it('should use AST field name', () => {
             expect(bridgeT.getProps('title')).toEqual({
               allowedValues: ['a', 'b', 'Some Title'],
-              label: '',
+              label: false,
               required: false,
               transform: expect.any(Function),
               options: [
@@ -271,7 +271,7 @@ describe('GraphQLBridge', () => {
         it('should use label from props', () => {
           expect(bridgeT.getProps('title', { label: 'Overriden' })).toEqual({
             allowedValues: ['a', 'b', 'Some Title'],
-            label: '',
+            label: false,
             required: false,
             transform: expect.any(Function),
             options: [
@@ -283,7 +283,7 @@ describe('GraphQLBridge', () => {
           });
           expect(bridgeT.getProps('title', { label: '' })).toEqual({
             allowedValues: ['a', 'b', 'Some Title'],
-            label: '',
+            label: false,
             required: false,
             transform: expect.any(Function),
             options: [
@@ -395,10 +395,10 @@ describe('GraphQLBridge', () => {
       });
     });
 
-    it('works with placeholder (extra.placeholedr === undefined)', () => {
+    it('works with placeholder (extra.placeholder === undefined)', () => {
       expect(bridgeI.getProps('title', { placeholder: true })).toEqual({
         allowedValues: ['a', 'b', 'Some Title'],
-        label: '',
+        label: false,
         required: false,
         transform: expect.any(Function),
         options: [
