@@ -19,9 +19,10 @@ Currently available bridges:
 If you see a lot of [`Warning: Unknown props...`](https://fb.me/react-unknown-prop) logs, check if your schema or theme doesn't provide extra props. If so, consider [registering it with `filterDOMProps`](api-helpers#filterdomprops).
 
 ## `GraphQLBridge`
+
 This bridge enables using GraphQL schema types as uniforms forms.
-This saves you from not having to re-write the form schema in your code.
-As a trade-off, you have to write the validator from scratch yourself, so in some cases it might be easier to rewrite the schema and use for example [`JSONSchemaBridge` with `ajv`](api-bridges#jsonschemabridge).
+This saves you from not having to rewrite the form schema in your code.
+As a trade-off, you have to write the validator from scratch. In some cases, it might be easier to rewrite the schema and use, for example, [`JSONSchemaBridge` with `ajv`](api-bridges#jsonschemabridge).
 If only a simple or no validation is needed, this bridge is perfectly suited to work with GraphQL schemas.
 
 The constructor accepts three arguments:
