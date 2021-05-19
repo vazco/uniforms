@@ -20,10 +20,22 @@ If you see a lot of [`Warning: Unknown props...`](https://fb.me/react-unknown-pr
 
 ## `GraphQLBridge`
 
+This bridge enables using GraphQL schema types as uniforms forms.
+This saves you from not having to rewrite the form schema in your code.
+As a trade-off, you have to write the validator from scratch. In some cases, it might be easier to rewrite the schema and use, for example, [`JSONSchemaBridge` with `ajv`](api-bridges#jsonschemabridge).
+If only a simple or no validation is needed, this bridge is perfectly suited to work with GraphQL schemas.
+
+The constructor accepts three arguments:
+
+- `schema: GraphQLType` can be any type parsed and extracted from a GraphQL schema.
+- `validator: (model: Record<string, any>) => any` a custom validator function that should return a falsy value if no errors are present or information about errors in the model as described in the [custom bridge section](examples-custom-bridge#validator-definition).
+- `extras: Record<string, any> = {}` used to extend the schema generated from GraphQL type with extra field configuration.
+
+### Code example
+
 ```js
 import { GraphQLBridge } from 'uniforms-bridge-graphql';
-import { buildASTSchema } from 'graphql/utilities';
-import { parse } from 'graphql/language/parser';
+import { buildASTSchema, parse } from 'graphql';
 
 const schema = `
     type Author {
@@ -44,7 +56,7 @@ const schema = `
 `;
 
 const schemaType = buildASTSchema(parse(schema)).getType('Post');
-const schemaData = {
+const schemaExtras = {
   id: {
     allowedValues: [1, 2, 3]
   },
@@ -53,24 +65,36 @@ const schemaData = {
       { label: 1, value: 'a' },
       { label: 2, value: 'b' }
     ]
+  },
+  'author.firstName': {
+    placeholder: 'John'
   }
 };
 
-const schemaValidator = model => {
+const schemaValidator = (model: object) => {
   const details = [];
 
   if (!model.id) {
     details.push({ name: 'id', message: 'ID is required!' });
   }
 
+  if (!model.author.id) {
+    details.push({ name: 'author.id', message: 'Author ID is required!' });
+  }
+
+  if (model.votes < 0) {
+    details.push({
+      name: 'votes',
+      message: 'Votes must be a non-negative number!'
+    });
+  }
+
   // ...
 
-  if (details.length) {
-    throw { details };
-  }
+  return details.length ? { details } : null;
 };
 
-const bridge = new GraphQLBridge(schemaType, schemaValidator, schemaData);
+const bridge = new GraphQLBridge(schemaType, schemaValidator, schemaExtras);
 ```
 
 ## `JSONSchemaBridge`
