@@ -26,11 +26,13 @@ As a trade-off, you have to write the validator from scratch. In some cases, it 
 If only a simple or no validation is needed, this bridge is perfectly suited to work with GraphQL schemas.
 
 The constructor accepts three arguments:
+
 - `schema: GraphQLType` can be any type parsed and extracted from a GraphQL schema.
 - `validator: (model: Record<string, any>) => any` a custom validator function that should return a falsy value if no errors are present or information about errors in the model as described in the [custom bridge section](examples-custom-bridge#validator-definition).
 - `extras: Record<string, any> = {}` used to extend the schema generated from GraphQL type with extra field configuration.
 
 ### Code example
+
 ```js
 import { GraphQLBridge } from 'uniforms-bridge-graphql';
 import { buildASTSchema, parse } from 'graphql';
@@ -81,7 +83,10 @@ const schemaValidator = (model: object) => {
   }
 
   if (model.votes < 0) {
-    details.push({ name: 'votes', message: 'Votes must be a non-negative number!' });
+    details.push({
+      name: 'votes',
+      message: 'Votes must be a non-negative number!'
+    });
   }
 
   // ...
