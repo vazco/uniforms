@@ -12,7 +12,7 @@ Some of them were designed for internal use, but you can still take advantage of
 
 A convenient way to access context is to use the `useForm` hook:
 
-```js
+```tsx
 import { useForm } from 'uniforms';
 
 function MyComponent() {
@@ -22,7 +22,7 @@ function MyComponent() {
 
 If you want to access only field-relevant part, use `useField(name, props)` hook, where `name` is the target field name and `props` are the props of it:
 
-```js
+```tsx
 import { useField } from 'uniforms';
 
 function MyCustomField(rawProps) {
@@ -32,7 +32,7 @@ function MyCustomField(rawProps) {
 
 Using `useField` allows you to create components that combine values of multiple fields:
 
-```js
+```tsx
 import { useField } from 'uniforms';
 
 function ArePasswordsEqual() {
@@ -72,7 +72,7 @@ An object with current form fields values structured `{field: value}`.
 
 It is an array of the parent fields names:
 
-```js
+```tsx
 <Field name="x">
   // name = []
   <Field name="y.z">
@@ -84,7 +84,7 @@ It is an array of the parent fields names:
 
 For example if we define a `CompositeField`:
 
-```js
+```tsx
 const Composite = () => (
   <section>
     <AutoField name="firstName" />
@@ -95,7 +95,7 @@ const Composite = () => (
 
 And use it like that:
 
-```js
+```tsx
 <AutoForm schema={schema}>
   <CompositeField name="personA" />
   <SubmitField />

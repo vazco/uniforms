@@ -21,7 +21,7 @@ You can tell your schema to use your custom field by adding the `uniforms` prope
 
 Example in JSONSchema:
 
-```js
+```tsx
 const schema = {
   /*...*/
   firstName: {
@@ -36,7 +36,7 @@ We say that the component used for the `firstName` property will be the `MyCusto
 
 You can also leave the schema untouched and pass your custom field directly to the `AutoField` in a `component` property instead:
 
-```js
+```tsx
 <AutoForm schema={schema} onSubmit={onSubmit}>
   /*...*/
   <AutoField component={MyCustomFirstNameField} name="firstName" />
@@ -50,7 +50,7 @@ You can pass any additional props to your custom field, by converting the `unifo
 
 E.g. in JSONSchema:
 
-```js
+```tsx
 const schema = {
   /*...*/
   firstName: {
@@ -69,7 +69,7 @@ We say that the component used for the `firstName` property will be the `MyCusto
 
 You can also leave the schema untouched and pass your custom field with props directly to the `AutoField` instead:
 
-```js
+```tsx
 <AutoForm schema={schema} onSubmit={onSubmit}>
   /*...*/
   <AutoField
@@ -108,13 +108,13 @@ Any form can be validated in one of those three styles:
 
 You change the way your form validates by setting `validate` prop:
 
-```js
+```tsx
 <AutoForm validate="onChange" schema={schema} onSubmit={onSubmit} />
 ```
 
 **Note:** If your schema validator accepts any options, those can be passed in `validator` prop:
 
-```js
+```tsx
 <AutoForm validator={validatorOptions} />
 ```
 
@@ -129,7 +129,7 @@ These methods are:
 - `submit()`
 - `validate()` _(added in `ValidatedForm`)_
 
-```js
+```tsx
 const MyForm = ({ schema, onSubmit }) => {
   let formRef;
 
@@ -161,7 +161,7 @@ You should `modelTransform`. It is a function transforming one model into anothe
 
 **Remember not to mutate a given model!**
 
-```js
+```tsx
 function transform(mode, model) {
   // This model will be passed to the fields.
   if (mode === 'form') {
@@ -189,7 +189,7 @@ function transform(mode, model) {
 
 You can take a reference to the field and manually trigger `.focus()`:
 
-```js
+```tsx
 <AutoField name="firstName" inputRef={field => field.focus()} />
 ```
 
@@ -217,7 +217,7 @@ The context data consists of various properties which can be found in [here](/do
 
 ##### Example usage:
 
-```js
+```tsx
 function SubmittingState() {
   const uniforms = useForm();
   return uniforms.submitting ? 'Submitting...' : null;
@@ -233,7 +233,7 @@ function SubmittingState() {
 Basically, you have to find out whether there is a difference between a current form state and your model, e.g. by calling lodash's `isEqual` function.
 Current form state can be accessed through the context (see [How can I know a current form state?](/docs/faq#how-can-i-know-a-current-form-state)) and form model can be passed as an ordinary prop:
 
-```js
+```tsx
 function DifferentSubmitField({ initialModel }) {
   const { model } = useForm();
   return <SubmitField disabled={isEqual(uniforms.model, initialModel)} />;

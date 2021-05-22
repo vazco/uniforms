@@ -22,7 +22,7 @@ Let's add a new property to our schema - `pictureUrl`, which will store an URL s
 and declare that it will be managed by our newly created custom `ImageField` component:
 
 <CodeSection
-  language="js"
+  language="tsx"
   section="schema"
   source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestSchema4')}
 />
@@ -35,7 +35,7 @@ It's worth noting, that it will also add the `Field` suffix to the name of our c
 Our newly created `ImageField` looks like this:
 
 <CodeSection
-  language="js"
+  language="tsx"
   replace={{ "'[^']*?/universal'": "'uniforms-semantic'" }}
   source={require('!!raw-loader!../website/pages-parts/Tutorial/ImageField')}
 />
@@ -48,7 +48,7 @@ By using these, we don't have to worry about managing the field's state.
 Take a look at the form code:
 
 <CodeSection
-  language="js"
+  language="tsx"
   replace={{
     "'[^']*?/universal'": "'uniforms-semantic'",
     './GuestSchema\\d': './GuestSchema'

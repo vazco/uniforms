@@ -40,7 +40,7 @@ export function ExampleCustomizer({
           case 'Code':
             return (
               <CodeSection
-                language="js"
+                language="tsx"
                 replace={{ "'[^']*?/universal'": `'uniforms-${theme}'` }}
                 source={code}
               />
@@ -54,7 +54,7 @@ export function ExampleCustomizer({
               </themeContext.Provider>
             );
           case 'Schema':
-            return <CodeSection language="js" source={schema} />;
+            return <CodeSection language="tsx" source={schema} />;
           default:
             return null;
         }

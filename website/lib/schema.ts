@@ -3,12 +3,22 @@ import { buildASTSchema, parse } from 'graphql';
 // @ts-expect-error: Typings.
 import MessageBox from 'message-box';
 import SimpleSchema from 'simpl-schema';
+import { filterDOMProps } from 'uniforms';
 import { GraphQLBridge } from 'uniforms-bridge-graphql';
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 
 import presets from './presets';
 import { themes } from './universal';
+
+// Hide custom props.
+declare module 'uniforms' {
+  interface FilterDOMProps {
+    const: never;
+  }
+}
+
+filterDOMProps.register('const');
 
 // FIXME: Make it extensible for globals.
 const scope: any = typeof window === 'undefined' ? global : window;

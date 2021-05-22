@@ -46,7 +46,7 @@ All additional props will be passed to the result field component.
 
 ##### Props usage:
 
-```js
+```tsx
 import { AutoField } from 'uniforms-unstyled';
 
 <AutoField component={MyComponent} />;
@@ -71,7 +71,7 @@ E.g. you want to group your fields inside a section, just do `element="section"`
 
 ##### Props usage:
 
-```js
+```tsx
 import { AutoFields } from 'uniforms-unstyled';
 
 <AutoFields
@@ -108,7 +108,7 @@ A checkbox.
 
 ##### Props usage:
 
-```js
+```tsx
 import { BoolField } from 'uniforms-unstyled';
 
 <BoolField
@@ -165,7 +165,7 @@ import { BoolField } from 'uniforms-unstyled';
 
 ##### Props usage:
 
-```js
+```tsx
 import { DateField } from 'uniforms-unstyled';
 
 <DateField
@@ -210,7 +210,7 @@ Error message renderer.
 
 ##### Props usage:
 
-```js
+```tsx
 import { ErrorField } from 'uniforms-unstyled';
 
 <ErrorField children={children} name="field" />;
@@ -228,7 +228,7 @@ Error messages renderer.
 
 ##### Props usage:
 
-```js
+```tsx
 import { ErrorsField } from 'uniforms-unstyled';
 
 <ErrorsField children={children} />;
@@ -245,7 +245,7 @@ import { ErrorsField } from 'uniforms-unstyled';
 
 ##### Props usage:
 
-```js
+```tsx
 import { HiddenField } from 'uniforms-unstyled';
 
 <HiddenField name="field" value={value} />;
@@ -263,7 +263,7 @@ import { HiddenField } from 'uniforms-unstyled';
 
 ##### Props usage:
 
-```js
+```tsx
 import { ListAddField } from 'uniforms-unstyled';
 
 <ListAddField addIcon={<MyAddIcon />} />;
@@ -281,7 +281,7 @@ import { ListAddField } from 'uniforms-unstyled';
 
 ##### Props usage:
 
-```js
+```tsx
 import { ListDelField } from 'uniforms-unstyled';
 
 <ListDelField removeIcon={<MyRemoveIcon />} />;
@@ -301,7 +301,7 @@ import { ListDelField } from 'uniforms-unstyled';
 
 ##### Props usage:
 
-```js
+```tsx
 import { ListField } from 'uniforms-unstyled';
 
 <ListField
@@ -327,7 +327,7 @@ import { ListField } from 'uniforms-unstyled';
 
 ##### Props usage:
 
-```js
+```tsx
 import { ListItemField } from 'uniforms-unstyled';
 
 <ListItemField removeIcon={<MyRemoveIcon />} />;
@@ -360,7 +360,7 @@ A textarea.
 
 ##### Props usage:
 
-```js
+```tsx
 import { LongTextField } from 'uniforms-unstyled';
 
 <LongTextField
@@ -399,7 +399,7 @@ import { LongTextField } from 'uniforms-unstyled';
 
 ##### Props usage:
 
-```js
+```tsx
 import { NestField } from 'uniforms-unstyled';
 
 <NestField fields={['fieldA', 'fieldB' /* ... */]} grouped showInlineError />;
@@ -436,7 +436,7 @@ A numeric input field.
 
 ##### Props usage:
 
-```js
+```tsx
 import { NumField } from 'uniforms-unstyled';
 
 <NumField
@@ -484,7 +484,7 @@ import { NumField } from 'uniforms-unstyled';
 
 ##### Props usage:
 
-```js
+```tsx
 import { RadioField } from 'uniforms-unstyled';
 
 <RadioField
@@ -530,7 +530,7 @@ import { RadioField } from 'uniforms-unstyled';
 
 ##### Props usage:
 
-```js
+```tsx
 import { SelectField } from 'uniforms-unstyled';
 
 <SelectField
@@ -567,7 +567,7 @@ import { SelectField } from 'uniforms-unstyled';
 
 ##### Props usage:
 
-```js
+```tsx
 import { SubmitField } from 'uniforms-unstyled';
 
 <SubmitField inputClassName="a b c" inputRef={ref => {}} />;
@@ -597,7 +597,7 @@ import { SubmitField } from 'uniforms-unstyled';
 
 ##### Props usage:
 
-```js
+```tsx
 import { TextField } from 'uniforms-unstyled';
 
 <TextField
@@ -637,7 +637,7 @@ import { TextField } from 'uniforms-unstyled';
 
 ##### Props usage:
 
-```js
+```tsx
 <SomeField disabled={false} label name="field" placeholder={false} />
 ```
 
@@ -647,7 +647,7 @@ Few props propagate in a very special way. These are `disabled`, `label`, `place
 
 **Example:**
 
-```js
+```tsx
 <TextField />                    // default label | no      placeholder
 <TextField label="Text" />       // custom  label | no      placeholder
 <TextField label={false} />      // no      label | no      placeholder

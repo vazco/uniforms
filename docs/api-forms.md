@@ -34,7 +34,7 @@ In other words, that means that `AutoForm` receives all props listed on this pag
 
 ##### Props usage:
 
-```js
+```tsx
 import { AutoForm } from 'uniforms'; // Or from the theme package.
 
 <AutoForm onChangeModel={model => console.log(model)} />;
@@ -70,7 +70,7 @@ however, there will be validation checks.
 
 ##### Props usage:
 
-```js
+```tsx
 import { ValidatedForm } from 'uniforms'; // Or from the theme package.
 
 <ValidatedForm
@@ -130,7 +130,7 @@ However, `QuickForm` is not self-managed, so you won't be able to type anything 
 
 ##### Props usage:
 
-```js
+```tsx
 import { QuickForm } from 'uniforms'; // Or from the theme package.
 
 <QuickForm
@@ -169,7 +169,7 @@ However, `BaseForm` is not self-managed, so you won't be able to type anything u
 
 ##### Props usage:
 
-```js
+```tsx
 import { BaseForm } from 'uniforms'; // Or from the theme package.
 
 <BaseForm
@@ -233,7 +233,7 @@ import { BaseForm } from 'uniforms'; // Or from the theme package.
 
 `AutoForm` and `ValidatedForm` both accept an `onValidate` prop. It can be used to create an asynchronous validation:
 
-```js
+```tsx
 const onValidate = async (model, error) => {
   // You can either ignore validation error...
   if (omitValidation(model)) {
@@ -260,7 +260,7 @@ Every form has autosave functionality. If you set an `autosave` prop, then every
 
 **Example:**
 
-```js
+```tsx
 <AutoForm
   autosave
   autosaveDelay={5000} // 5 seconds
@@ -273,7 +273,7 @@ Every form has autosave functionality. If you set an `autosave` prop, then every
 
 You can use [React `ref` prop](https://facebook.github.io/react/docs/more-about-refs.html) to manually access form methods. Example usage:
 
-```js
+```tsx
 const MyForm = ({ schema, onSubmit }) => {
   let formRef;
 
@@ -329,7 +329,7 @@ If you want to make one field to influence others, simply extend `AutoForm` and 
 
 **Example:**
 
-```js
+```tsx
 class ChainForm extends AutoForm {
   onChange(key, value) {
     if (key === 'key_to_intercept') return;
@@ -349,7 +349,7 @@ It can be easily applied multiple times to make your forms even more reusable.
 
 **Example:**
 
-```js
+```tsx
 const withMultipliedField = (fieldA, fieldB, Form) =>
   class withMultipliedFieldForm extends Form {
     onChange(key, value) {
@@ -368,7 +368,7 @@ If you need to transform model before it will be validated, submitted or passed 
 
 **Example:**
 
-```js
+```tsx
 <AutoForm
   // Do not mutate given model!
   modelTransform={(mode, model) => {
@@ -412,7 +412,7 @@ If your schema validator accepts any options, those can be passed in `validator`
 
 **Example:**
 
-```js
+```tsx
 <AutoForm
   validate="onChange"
   validator={validatorOptions}
