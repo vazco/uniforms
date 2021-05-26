@@ -18,7 +18,7 @@ It would be also a decent idea to somehow gather their visions and expectations 
 Let's modify our schema by adding two new properties: `profession` and `additionalInfo` in order to have the additional fields rendered:
 
 <CodeSection
-  language="js"
+  language="tsx"
   section="schema"
   source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestSchema2')}
 />
@@ -27,7 +27,7 @@ After the schema change, we must not forget to add the fields to our form.
 We will add the `profession` field above the `workExperience` field and the `additionalInfo` at the bottom:
 
 <CodeSection
-  language="js"
+  language="tsx"
   replace={{
     "'[^']*?/universal'": "'uniforms-semantic'",
     './GuestSchema\\d': './GuestSchema'
@@ -58,7 +58,7 @@ The same thing applies to the `additionalInfo` - in order to see it as a text ar
 Let's see our changes in action:
 
 <CodeSection
-  language="js"
+  language="tsx"
   replace={{
     "'[^']*?/universal'": "'uniforms-semantic'",
     './GuestSchema\\d': './GuestSchema'
@@ -80,7 +80,7 @@ without the necessity to replace the `AutoField`. That means modifying our schem
 Before touching the schema, let's have a look at the React form first:
 
 <CodeSection
-  language="js"
+  language="tsx"
   replace={{
     "'[^']*?/universal'": "'uniforms-semantic'",
     './GuestSchema\\d': './GuestSchema'
@@ -94,7 +94,7 @@ Now we can focus on modifying the schema.
 Instead of having to type the React component by ourselves inside our form, we can declare it inside the schema, thanks to the `uniforms` property, as it's demonstrated below:
 
 <CodeSection
-  language="js"
+  language="tsx"
   section="schema"
   source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestSchema3')}
 />

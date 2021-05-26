@@ -11,7 +11,7 @@ In [\#800](https://github.com/vazco/uniforms/issues/800), a new way of creating 
 
 ## Default `AutoField` implementation
 
-```ts
+```tsx
 import { createAutoField } from 'uniforms';
 
 const AutoField = createAutoField(props => {

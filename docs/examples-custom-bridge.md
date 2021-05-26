@@ -16,7 +16,7 @@ Each of them has the following self-explanatory properties:
 - `initialValue`
 - `label`
 
-```js
+```tsx
 const UserLoginSchema = {
   login: {
     __type__: String,
@@ -50,7 +50,7 @@ That function, called validator, takes a model (the submitted object) as input a
 In our case we say 'form is invalid' when there's no login or password at all,
 login has less then 5 characters, password has lass then 10 characters or given passwords mismatch:
 
-```js
+```tsx
 const UserLoginSchemaValidator = model => {
   const error = {};
 
@@ -83,7 +83,7 @@ export default UserLoginSchemaValidator;
 Now that both have the schema and the validator, we can define our bridge, which will be a binder between the form and the data itself.
 All we have to do is to extend `Bridge` class and implement its methods according to the [Bridge concept](/docs/uth-bridge-concept):
 
-```js
+```tsx
 import { Bridge } from 'uniforms';
 
 export default class UserLoginSchemaBridge extends Bridge {
@@ -139,7 +139,7 @@ export default class UserLoginSchemaBridge extends Bridge {
 After our custom bridge is created, we can use in the very same way as we would use predefined one -
 we have to supply the schema and validator and then we can take an advantage of it in the AutoForm:
 
-```js
+```tsx
 import UserLoginSchema from './UserLoginSchema';
 import UserLoginSchemaBridge from './UserLoginSchemaBridge';
 import UserLoginSchemaValidator from './UserLoginSchemaValidator';

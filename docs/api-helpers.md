@@ -29,7 +29,7 @@ The table below lists all of the **guaranteed** props that will be passed to the
 
 The `connectField` function accepts two arguments: the first one is a component and the second one is an `options` object.
 
-```ts
+```tsx
 function Example(props) {
   /* ... */
 }
@@ -59,7 +59,7 @@ If you are not sure which one to use, do not use the `kind` option at all - it'l
 
 Returns an array of changed keys between `valueA` and `valueB`, where `root` is the root key. For examples see [`changedKeys` tests](https://github.com/vazco/uniforms/blob/master/packages/uniforms/__tests__/changedKeys.ts).
 
-```ts
+```tsx
 import { changedKeys } from 'uniforms';
 
 changedKeys('a', { b: 1, c: 2 }, { b: 1 }); // ['a', 'a.c']
@@ -69,7 +69,7 @@ changedKeys('a', { b: 1, c: 2 }, { b: 1 }); // ['a', 'a.c']
 
 Removes all uniforms-related props, registered with `filterDOMProps.register`. Use it in all places where you'd like to pass all unrelated props down and `useField` or `connectField` provide you with the props.
 
-```ts
+```tsx
 import { filterDOMProps } from 'uniforms';
 
 const filteredProps = filterDOMProps(props);
@@ -79,7 +79,7 @@ const filteredProps = filterDOMProps(props);
 
 It's often the case that your custom components will have a bunch of known properties, like `locale` or `userType`. To ease the process of using them across the project, you can register them to make `filterDOMProps` remove them as well. For example, [`SimpleSchemaBridge`](https://github.com/vazco/uniforms/blob/master/packages/uniforms-bridge-simple-schema/src/register.ts) registers all of the SimpleSchema-specific options.
 
-```ts
+```tsx
 import { filterDOMProps } from 'uniforms';
 
 filterDOMProps({ example: 42 }); // { example: 42 }
@@ -91,7 +91,7 @@ filterDOMProps({ example: 42 }); // {}
 
 As `filterDOMProps` is fully typed, if you'd like to make it work with TypeScript, you have to extend the `FilterDOMProps` interface as well.
 
-```ts
+```tsx
 declare module 'uniforms' {
   interface FilterDOMProps {
     propA: never;
@@ -106,7 +106,7 @@ filterDOMProps.register('propA', 'propB');
 
 Safely joins partial field names. When the first param is null, returns an array of strings. Otherwise, returns a string. If you create a custom field with subfields, then it's better to use this helper than manually concatenating them.
 
-```ts
+```tsx
 import { joinName } from 'uniforms';
 
 joinName(null, 'a', 'b.c', 'd'); // ['a', 'b', 'c', 'd']
@@ -117,7 +117,7 @@ joinName('a', 'b.c', 'd'); // 'a.b.c.d'
 
 Generates random ID, based on given prefix. Use it, if you want to have random but deterministic strings. If no prefix is provided, a unique 'uniforms-X' prefix will be used generated.
 
-```ts
+```tsx
 import { randomIds } from 'uniforms';
 
 const randomId1 = randomIds();
@@ -140,7 +140,7 @@ randomId3(); // prefix-0002
 
 A hook version of [`connectField`](#connectfield). It receives three arguments: field name (string), field props (object), and optional options.
 
-```ts
+```tsx
 function Example(props) {
   const [fieldProps, context] = useField(props.name, props, options);
   return <input {...filterDOMProps(fieldProps)} />;

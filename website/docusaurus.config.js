@@ -74,6 +74,9 @@ module.exports = {
       ],
       logo: { alt: 'uniforms logo', src: 'img/uniforms.svg' },
     },
+    prism: {
+      theme: require('prism-react-renderer/themes/oceanicNext'),
+    },
     sidebarCollapsible: false,
   },
   favicon: 'favicon.ico',

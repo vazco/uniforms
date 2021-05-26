@@ -102,7 +102,7 @@
 - **Added:** New `FieldProps` and `HTMLFieldProps` utility types. [\#760](https://github.com/vazco/uniforms/issues/760)
 - **Added:** Improved typing of `filterDOMProps`. To properly register a new property, extend `FilterDOMProps` interface. [\#763](https://github.com/vazco/uniforms/issues/763)
 
-  ```ts
+  ```tsx
   declare module 'uniforms' {
     interface FilterDOMProps {
       customPropToFilter: never;

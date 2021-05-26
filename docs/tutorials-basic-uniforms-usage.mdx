@@ -36,7 +36,7 @@ have a read on [Semantic UI React's theme usage](https://react.semantic-ui.com/u
 After we've installed required packages, it's time to define our Guest schema. We can do it in a plain JSON, which is a valid JSONSchema instance:
 
 <CodeSection
-  language="js"
+  language="tsx"
   section="schema"
   source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestSchema')}
 />
@@ -51,14 +51,14 @@ Creating the bridge instance is necessary - without it, uniforms would not be ab
 As we are using the JSONSchema, we have to import the `uniforms-bridge-json-schema` package.
 
 <CodeSection
-  language="js"
+  language="tsx"
   section="bridgeImport"
   source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestSchema')}
 />
 
 Now you may think that we can simply do:
 
-```js
+```tsx
 // Wrong usage of the JSONSchemaBridge!
 // You have to pass a validator!
 const bridge = new JSONSchemaBridge(schema);
@@ -71,7 +71,7 @@ we need to **manually define a validator**, and that is required by the uniforms
 To manually create the validator, we will use the [ajv](https://github.com/epoberezkin/ajv) package:
 
 <CodeSection
-  language="js"
+  language="tsx"
   section="validator"
   source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestSchema')}
 />
@@ -79,7 +79,7 @@ To manually create the validator, we will use the [ajv](https://github.com/epobe
 Now that we have both the schema and the validator, we can create the uniforms bridge:
 
 <CodeSection
-  language="js"
+  language="tsx"
   section="bridge"
   source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestSchema')}
 />
@@ -87,7 +87,7 @@ Now that we have both the schema and the validator, we can create the uniforms b
 Just to recap, the whole `GuestSchema.js` file looks like this:
 
 <CodeSection
-  language="js"
+  language="tsx"
   replace={{ '//.*?\n': '' }}
   source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestSchema')}
 />
@@ -98,7 +98,7 @@ uniforms theme packages provide the `AutoForm` component, which is able to gener
 All we have to do now is to pass the previously created GuestSchema to the `AutoForm`:
 
 <CodeSection
-  language="js"
+  language="tsx"
   replace={{ "'[^']*?/universal'": "'uniforms-semantic'" }}
   source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestFormBasic')}
 />

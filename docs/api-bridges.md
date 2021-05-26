@@ -33,7 +33,7 @@ The constructor accepts three arguments:
 
 ### Code example
 
-```js
+```tsx
 import { GraphQLBridge } from 'uniforms-bridge-graphql';
 import { buildASTSchema, parse } from 'graphql';
 
@@ -99,7 +99,7 @@ const bridge = new GraphQLBridge(schemaType, schemaValidator, schemaExtras);
 
 ## `JSONSchemaBridge`
 
-```js
+```tsx
 import Ajv from 'ajv';
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 
@@ -144,7 +144,7 @@ The current handling of `allOf`/`anyOf`/`oneOf` is not complete and does not wor
 
 Below is an example of these implications:
 
-```json
+```tsxon
 {
   "type": "object",
   "properties": {
@@ -164,7 +164,7 @@ Below is an example of these implications:
 
 ## `SimpleSchema2Bridge`
 
-```js
+```tsx
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 
@@ -187,7 +187,7 @@ const bridge = new SimpleSchema2Bridge(PersonSchema);
 
 ## `SimpleSchemaBridge`
 
-```js
+```tsx
 import SimpleSchemaBridge from 'uniforms-bridge-simple-schema';
 import { SimpleSchema } from 'aldeed:simple-schema';
 

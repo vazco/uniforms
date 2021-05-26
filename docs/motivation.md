@@ -27,7 +27,7 @@ Most of the time you’ll be using either AutoForm or ValidatedForm, but there a
 >
 > -- <cite>[Radosław Miernik](https://github.com/radekmie)</cite>
 
-```js
+```tsx
 import BaseForm from './BaseForm';
 import QuickForm from './QuickForm';
 import ValidatedForm from './ValidatedForm';

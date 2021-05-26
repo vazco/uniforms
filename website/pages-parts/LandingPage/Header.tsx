@@ -47,7 +47,7 @@ function Showcase() {
     <div className={classNames(styles['floating-example'])}>
       <SystemWindow>
         <CodeSection
-          language="js"
+          language="tsx"
           section="schema"
           source={require('!!raw-loader!../CommonForms/ShippingSchema')}
         />
