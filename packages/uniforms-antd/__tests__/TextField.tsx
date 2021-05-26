@@ -2,14 +2,13 @@ import { screen } from '@testing-library/react';
 import Input from 'antd/lib/input';
 import React from 'react';
 import { TextField } from 'uniforms-antd';
-import { runTextFieldTests } from 'uniforms/__suites__/TextField';
-import { render } from 'uniforms/__suites__/renderWithContext';
+import { render, testTextField } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
 import mount from './_mount';
 
 describe('@RTL - TextField tests', () => {
-  runTextFieldTests(TextField);
+  testTextField(TextField);
 
   test('<TextField> - renders component with unknown props', () => {
     const props = {
@@ -17,7 +16,7 @@ describe('@RTL - TextField tests', () => {
       'data-y': 'y',
       'data-z': 'z',
     };
-    render(<TextField name="x" {...props} />);
+    render(<TextField name="x" {...props} />, { x: String });
 
     const input = screen.getByRole('textbox');
     Object.entries(props).forEach(([key, value]) =>

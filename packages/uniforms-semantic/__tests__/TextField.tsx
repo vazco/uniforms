@@ -1,14 +1,13 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
 import { TextField } from 'uniforms-semantic';
-import { runTextFieldTests } from 'uniforms/__suites__/TextField';
-import { render } from 'uniforms/__suites__/renderWithContext';
+import { render, testTextField } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
 import mount from './_mount';
 
 describe('@RTL - TextField tests', () => {
-  runTextFieldTests(TextField);
+  testTextField(TextField);
 
   test('<TextField> - renders a wrapper with unknown props', () => {
     const props = {
@@ -16,7 +15,7 @@ describe('@RTL - TextField tests', () => {
       'data-y': 'y',
       'data-z': 'z',
     };
-    render(<TextField name="x" {...props} />);
+    render(<TextField name="x" {...props} />, { x: String });
 
     const wrapper = screen.getByRole('textbox').closest('div')?.parentElement;
     Object.entries(props).forEach(([key, value]) =>
@@ -33,6 +32,7 @@ describe('@RTL - TextField tests', () => {
         showInlineError
         errorMessage={errorMessage}
       />,
+      { x: String },
     );
 
     expect(screen.getByText(errorMessage)).toBeInTheDocument();
@@ -47,20 +47,23 @@ describe('@RTL - TextField tests', () => {
         showInlineError={false}
         errorMessage={errorMessage}
       />,
+      { x: String },
     );
 
     expect(screen.queryByText(errorMessage)).not.toBeInTheDocument();
   });
 
   test('<TextField> - renders an icon', () => {
-    const { container } = render(<TextField name="x" icon="small home" />);
+    const { container } = render(<TextField name="x" icon="small home" />, {
+      x: String,
+    });
 
     expect(container.querySelector('i')).toBeInTheDocument();
   });
 
   test('<TextField> - renders with a custom wrapClassName', () => {
     const testClassName = 'test-class-name';
-    render(<TextField name="x" wrapClassName={testClassName} />);
+    render(<TextField name="x" wrapClassName={testClassName} />, { x: String });
 
     expect(screen.getByRole('textbox').closest('div')).toHaveClass(
       testClassName,
