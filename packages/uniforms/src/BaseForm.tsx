@@ -168,6 +168,7 @@ export class BaseForm<
 
   getNativeFormProps(): Record<string, any> {
     const props = omit(this.props, [
+      'autocomplete',
       'autosave',
       'autosaveDelay',
       'disabled',
