@@ -308,7 +308,6 @@ test('<SelectField> - disabled items (options) based on predicate', () => {
 
 test('<SelectField> - renders with correct classnames', () => {
   const wrapper = mount(
-    // @ts-expect-error Fix SelectFieldProps.
     <SelectField name="x" textFieldProps={{ className: 'select-class' }} />,
     createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
   );

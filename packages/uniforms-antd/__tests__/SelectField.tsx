@@ -388,7 +388,7 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct option
     <SelectField
       checkboxes
       name="x"
-      transform={(x: string) => x.toUpperCase()}
+      transform={(x: unknown) => String(x).toUpperCase()}
     />
   );
   const wrapper = mount(

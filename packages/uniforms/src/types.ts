@@ -73,7 +73,7 @@ export type HTMLFieldProps<Value, Element, Extension = object> = FieldProps<
 export type ModelTransformMode = 'form' | 'submit' | 'validate';
 
 /** @internal */
-export type Override<T, U> = U & Omit<T, keyof U>;
+export type Override<T, U> = T extends any ? U & Omit<T, keyof U> : never;
 
 export type ValidateMode = 'onChange' | 'onChangeAfterSubmit' | 'onSubmit';
 

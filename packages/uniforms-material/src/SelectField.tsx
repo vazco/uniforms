@@ -18,10 +18,8 @@ import wrapField from './wrapField';
 type SelectFieldCommonProps = {
   allowedValues?: string[];
   appearance?: 'checkbox' | 'switch';
-  checkboxes?: boolean;
   disableItem?: (value: string) => boolean;
   inputRef?: Ref<HTMLButtonElement>;
-  native?: boolean;
   required?: boolean;
   transform?: (value: string) => string;
 };
@@ -29,25 +27,25 @@ type SelectFieldCommonProps = {
 type CheckboxesProps = FieldProps<
   string | string[],
   CheckboxProps | SwitchProps,
-  {
+  SelectFieldCommonProps & {
     checkboxes: true;
     legend?: string;
-    native: false;
+    variant?: undefined;
   }
 >;
 
 type SelectProps = FieldProps<
   string | string[],
-  TextFieldProps & MaterialSelectProps,
-  {
+  MaterialSelectProps & TextFieldProps,
+  SelectFieldCommonProps & {
     checkboxes?: false;
     labelProps?: object;
-    textFieldProps: Omit<TextFieldProps, 'value'>;
+    native?: boolean;
+    textFieldProps?: Omit<TextFieldProps, 'value'>;
   }
 >;
 
-export type SelectFieldProps = (CheckboxesProps | SelectProps) &
-  SelectFieldCommonProps;
+export type SelectFieldProps = CheckboxesProps | SelectProps;
 
 const base64: typeof btoa =
   typeof btoa === 'undefined'
@@ -77,14 +75,10 @@ function Select(props: SelectFieldProps) {
     const appearance = props.appearance ?? 'checkbox';
     const SelectionControl = appearance === 'checkbox' ? Checkbox : Switch;
     const filteredProps = omit(filterDOMProps(props), [
-      'checkboxes',
-      'disableItem',
-      'fullWidth',
-      'helperText',
+      'checkboxes' as never,
+      'disableItem' as never,
       'id',
-      'margin',
-      'textFieldProps',
-      'variant',
+      'inputRef',
     ]);
 
     const children =
