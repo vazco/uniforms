@@ -1,5 +1,4 @@
 import mapValues from 'lodash/mapValues';
-import some from 'lodash/some';
 import React, { ComponentType, FunctionComponent } from 'react';
 
 import { context as contextReference } from './context';
