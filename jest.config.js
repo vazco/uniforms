@@ -12,5 +12,6 @@ module.exports = {
   preset: 'ts-jest',
   setupFiles: ['./scripts/setupEnzyme.ts'],
   setupFilesAfterEnv: ['./scripts/setupMatchers.ts'],
+  testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['/node_modules/', '/_[^/]*$', '\\.d\\.ts$'],
 };
