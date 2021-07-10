@@ -43,7 +43,7 @@ export function useField<
   const name = joinName(options?.absoluteName ? '' : context.name, fieldName);
   const state = mapValues(context.state, (prev, key) => {
     const next = props[key];
-    return next === null || next === undefined ? prev : !!next;
+    return next !== null && next !== undefined ? !!next : prev;
   });
 
   const changed = !!get(context.changedMap, name);

@@ -48,10 +48,10 @@ export function connectField<
     const [fieldProps, context] = useField(props.name, props, options);
 
     const hasChainName = props.name !== '';
-    const anyFlowingPropertySet = some(
-      context.state,
-      (_, key) => props[key] !== null && props[key] !== undefined,
-    );
+    const anyFlowingPropertySet = Object.keys(context.state).some(key => {
+      const next = props[key];
+      return next !== null && next !== undefined;
+    });
 
     if (!anyFlowingPropertySet && !hasChainName) {
       return <Component {...((props as unknown) as Props)} {...fieldProps} />;
@@ -59,9 +59,10 @@ export function connectField<
 
     const nextContext = { ...context };
     if (anyFlowingPropertySet) {
-      nextContext.state = mapValues(nextContext.state, (value, key) =>
-        props[key] !== null && props[key] !== undefined ? !!props[key] : value,
-      );
+      nextContext.state = mapValues(nextContext.state, (prev, key) => {
+        const next = props[key];
+        return next !== null && next !== undefined ? !!next : prev;
+      });
     }
 
     if (hasChainName) {
