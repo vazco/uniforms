@@ -23,7 +23,7 @@ jobs:
       - name: Check differences
         run: git status -s
           | grep " M package-lock.json"
-          && echo "::""warning file=package-lock.json""::"Duplicate dependencies found. Run npm dedupe to remove them, or add --dry-run parameter to get more info."
+          && echo "::"warning file=package-lock.json"::"Duplicate dependencies found. Run npm dedupe to remove them, or add --dry-run parameter to get more info.
       - name: Reset changes
         run: git reset --hard HEAD
       - name: Install
