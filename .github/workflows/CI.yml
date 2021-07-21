@@ -20,7 +20,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Check dependency vulnerabilities
         run: |
-          npm audit fix
+          npm audit fix | : # skip non-0 exit 
           git status -s | grep " M package-lock.json" && echo "::"warning file=package-lock.json"::"Found vulnerabilities in the project dependencies. Run npm audit to show the audit details. More info: https://docs.npmjs.com/cli/v7/commands/npm-audit
           git reset --hard HEAD
       - name: Check dependency duplications
