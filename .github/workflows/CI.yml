@@ -18,14 +18,11 @@ jobs:
         with:
           cache: npm
           node-version: ${{ matrix.node-version }}
-      - name: Find dependency duplications
-        run: npm dedupe
-      - name: Check differences
-        run: git status -s
-          | grep " M package-lock.json"
-          && echo "::"warning file=package-lock.json"::"Duplicate dependencies found. Run npm dedupe to remove them, or add --dry-run parameter to get more info.
-      - name: Reset changes
-        run: git reset --hard HEAD
+      - name: Check dependency duplications
+        run: |
+          npm dedupe
+          git status -s | grep " M package-lock.json" && echo "::"warning file=package-lock.json"::"Duplicate dependencies found. Run npm dedupe to remove them, or add --dry-run parameter to get more info.
+          git reset --hard HEAD
       - name: Install
         run: npm i -g npm@7 && npm ci
       - name: Lint
