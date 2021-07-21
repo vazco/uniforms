@@ -18,7 +18,7 @@ jobs:
         with:
           cache: npm
           node-version: ${{ matrix.node-version }}
-      - name: Fix dependency duplications
+      - name: Find dependency duplications
         run: npm dedupe
       - name: Check differences
         run: git status -s
