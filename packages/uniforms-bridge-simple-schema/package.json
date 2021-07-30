@@ -3,7 +3,7 @@
   "version": "3.5.1",
   "license": "MIT",
   "main": "es5/index.js",
-  "module": "es6/index.js",
+  "module": "esm/index.js",
   "sideEffects": [
     "es5/index.js",
     "es5/register.js",
