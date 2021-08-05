@@ -2,8 +2,8 @@
   "name": "uniforms-bootstrap3",
   "version": "3.5.2",
   "license": "MIT",
-  "main": "es5/index.js",
-  "module": "esm/index.js",
+  "main": "./es5/index.js",
+  "module": "./esm/index.js",
   "sideEffects": false,
   "description": "Bootstrap3 UI components for uniforms.",
   "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-bootstrap3",
@@ -20,12 +20,14 @@
     "validation"
   ],
   "files": [
-    "es5/*.d.ts",
-    "es5/*.js",
-    "es6/*.d.ts",
-    "es6/*.js",
-    "src/*.ts",
-    "src/*.tsx"
+    "./es5/*.d.ts",
+    "./es5/*.js",
+    "./esm/*.d.ts",
+    "./esm/*.js",
+    "./es6/*.d.ts",
+    "./es6/*.js",
+    "./src/*.ts",
+    "./src/*.tsx"
   ],
   "peerDependencies": {
     "react": "^17.0.0 || ^16.8.0"
