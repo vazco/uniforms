@@ -5,12 +5,14 @@
   "main": "./es5/index.js",
   "module": "./esm/index.js",
   "sideEffects": [
-    "es5/filterDOMProps.js",
-    "es5/randomIds.js",
-    "es6/filterDOMProps.js",
-    "es6/randomIds.js",
-    "src/filterDOMProps.ts",
-    "src/randomIds.ts"
+    "./es5/filterDOMProps.js",
+    "./es5/randomIds.js",
+    "./esm/filterDOMProps.js",
+    "./esm/randomIds.js",
+    "./es6/filterDOMProps.js",
+    "./es6/randomIds.js",
+    "./src/filterDOMProps.ts",
+    "./src/randomIds.ts"
   ],
   "description": "Core package of uniforms.",
   "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms",
@@ -26,12 +28,14 @@
     "validation"
   ],
   "files": [
-    "es5/*.d.ts",
-    "es5/*.js",
-    "es6/*.d.ts",
-    "es6/*.js",
-    "src/*.ts",
-    "src/*.tsx"
+    "./es5/*.d.ts",
+    "./es5/*.js",
+    "./esm/*.d.ts",
+    "./esm/*.js",
+    "./es6/*.d.ts",
+    "./es6/*.js",
+    "./src/*.ts",
+    "./src/*.tsx"
   ],
   "peerDependencies": {
     "react": "^17.0.0 || ^16.8.0"
