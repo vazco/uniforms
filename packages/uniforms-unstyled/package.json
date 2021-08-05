@@ -19,14 +19,14 @@
     "validation"
   ],
   "files": [
-    "./es5/*.d.ts",
-    "./es5/*.js",
-    "./esm/*.d.ts",
-    "./esm/*.js",
-    "./es6/*.d.ts",
-    "./es6/*.js",
-    "./src/*.ts",
-    "./src/*.tsx"
+    "es5/*.d.ts",
+    "es5/*.js",
+    "esm/*.d.ts",
+    "esm/*.js",
+    "es6/*.d.ts",
+    "es6/*.js",
+    "src/*.ts",
+    "src/*.tsx"
   ],
   "peerDependencies": {
     "react": "^17.0.0 || ^16.8.0"

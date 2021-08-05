@@ -1,3 +1,7 @@
+## [v3.5.4](https://github.com/vazco/uniforms/tree/v3.5.4) (2021-08-05)
+
+- **Fixed:** Invalid publish occurred. Sorry!
+
 ## [v3.5.3](https://github.com/vazco/uniforms/tree/v3.5.3) (2021-08-05)
 
 - **Fixed:** All package paths in `package.json` are now relative. [\#992](https://github.com/vazco/uniforms/issues/992)
