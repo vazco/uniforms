@@ -1,3 +1,7 @@
+## [v3.5.3](https://github.com/vazco/uniforms/tree/v3.5.3) (2021-08-05)
+
+- **Fixed:** All package paths in `package.json` are now relative. [\#992](https://github.com/vazco/uniforms/issues/992)
+
 ## [v3.5.2](https://github.com/vazco/uniforms/tree/v3.5.2) (2021-07-30)
 
 - **Fixed:** All bridge methods are now unified between bridges. [\#957](https://github.com/vazco/uniforms/issues/957)
