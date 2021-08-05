@@ -2,8 +2,8 @@
   "name": "uniforms-bridge-simple-schema-2",
   "version": "3.5.2",
   "license": "MIT",
-  "main": "es5/index.js",
-  "module": "esm/index.js",
+  "main": "./es5/index.js",
+  "module": "./esm/index.js",
   "sideEffects": [
     "es5/index.js",
     "es5/register.js",
