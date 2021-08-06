@@ -1,4 +1,4 @@
-import { useTheme } from '@material-ui/core';
+import { PropTypes, useTheme } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import RadioMaterial, { RadioProps } from '@material-ui/core/Radio';
@@ -17,7 +17,7 @@ export type RadioFieldProps = FieldProps<
     checkboxes?: boolean;
     fullWidth?: boolean;
     helperText?: string;
-    margin?: any;
+    margin?: PropTypes.Margin;
     row?: boolean;
     transform?: (value: string) => string;
   }
