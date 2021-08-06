@@ -1,3 +1,4 @@
+import { useTheme } from '@material-ui/core';
 import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
@@ -28,13 +29,17 @@ function Num({
   value,
   ...props
 }: NumFieldProps) {
+  const theme = useTheme();
+  const themeProps = theme.props?.MuiTextField;
+
   return (
     <TextField
       disabled={disabled}
       error={!!error}
-      fullWidth
+      fullWidth={themeProps?.fullWidth ?? true}
       helperText={(error && showInlineError && errorMessage) || helperText}
       inputProps={{
+        ...(themeProps?.inputProps ?? {}),
         min,
         max,
         readOnly,
@@ -42,7 +47,7 @@ function Num({
         ...inputProps,
       }}
       label={label}
-      margin="dense"
+      margin={themeProps?.margin ?? 'dense'}
       name={name}
       onChange={event => {
         const parse = decimal ? parseFloat : parseInt;

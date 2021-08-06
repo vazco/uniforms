@@ -1,3 +1,4 @@
+import { useTheme } from '@material-ui/core';
 import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
@@ -37,16 +38,19 @@ function Date({
   value,
   ...props
 }: DateFieldProps) {
+  const theme = useTheme();
+  const themeProps = theme.props?.MuiTextField;
+
   return (
     <TextField
       disabled={disabled}
       error={!!error}
-      fullWidth
+      fullWidth={themeProps?.fullWidth ?? true}
       helperText={(error && showInlineError && errorMessage) || helperText}
       label={label}
       InputLabelProps={{ shrink: true, ...labelProps, ...InputLabelProps }}
-      inputProps={{ readOnly }}
-      margin="dense"
+      inputProps={{ readOnly, ...(themeProps?.inputProps ?? {}) }}
+      margin={themeProps?.margin ?? 'dense'}
       name={name}
       onChange={event =>
         // FIXME: `valueAsNumber` is not available in `EventTarget`.

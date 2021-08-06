@@ -1,3 +1,4 @@
+import { useTheme } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import React, { ReactNode, createElement } from 'react';
@@ -18,16 +19,19 @@ export default function wrapField(
   }: any,
   ...children: ReactNode[]
 ) {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const theme = useTheme();
   const formHelperText = showInlineError && error ? errorMessage : helperText;
+  const materialProps = theme.props?.MuiFormControl;
   const props = {
     component,
     disabled: !!disabled,
     error: !!error,
-    fullWidth: !!fullWidth,
-    margin,
+    fullWidth: materialProps?.fullWidth ?? !!fullWidth,
+    margin: materialProps?.margin ?? margin,
     readOnly,
     required,
-    variant,
+    variant: materialProps?.variant ?? variant,
   };
 
   return createElement(
