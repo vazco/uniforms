@@ -1,3 +1,4 @@
+import { useTheme } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import RadioMaterial, { RadioProps } from '@material-ui/core/Radio';
@@ -25,11 +26,9 @@ export type RadioFieldProps = FieldProps<
 function Radio({
   allowedValues,
   disabled,
-  fullWidth = true,
   id,
   inputRef,
   label,
-  margin = 'dense',
   name,
   onChange,
   readOnly,
@@ -38,8 +37,16 @@ function Radio({
   value,
   ...props
 }: RadioFieldProps) {
+  const theme = useTheme();
+  const formControlThemeProps = theme.props?.MuiFormControl;
   return wrapField(
-    { ...props, component: 'fieldset', disabled, fullWidth, margin },
+    {
+      fullWidth: formControlThemeProps?.fullWidth ?? true,
+      margin: formControlThemeProps?.margin ?? 'dense',
+      ...props,
+      component: 'fieldset',
+      disabled,
+    },
     label && (
       <FormLabel component="legend" htmlFor={name}>
         {label}

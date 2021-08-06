@@ -1,3 +1,4 @@
+import { useTheme } from '@material-ui/core';
 import FormLabel from '@material-ui/core/FormLabel';
 import React from 'react';
 import { connectField, HTMLFieldProps } from 'uniforms';
@@ -15,14 +16,19 @@ export type NestFieldProps = HTMLFieldProps<
 function Nest({
   children,
   fields,
-  fullWidth = true,
   itemProps,
   label,
-  margin = 'dense',
   ...props
 }: NestFieldProps) {
+  const theme = useTheme();
+  const formControlThemeProps = theme.props?.MuiFormControl;
   return wrapField(
-    { ...props, component: undefined, fullWidth, margin },
+    {
+      fullWidth: formControlThemeProps?.fullWidth ?? true,
+      margin: formControlThemeProps?.margin ?? 'dense',
+      ...props,
+      component: undefined,
+    },
     label && <FormLabel component="legend">{label}</FormLabel>,
     children ||
       fields.map(field => (
