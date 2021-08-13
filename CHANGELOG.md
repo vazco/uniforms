@@ -1,3 +1,7 @@
+## [v3.5.5](https://github.com/vazco/uniforms/tree/v3.5.5) (2021-08-13)
+
+- **Fixed:** Types of `DateField`, `LongTextField`, `NumField`, and `TextField` in `uniforms-material` are now correctly based on `TextFieldProps`. [\#987](https://github.com/vazco/uniforms/issues/987)
+
 ## [v3.5.4](https://github.com/vazco/uniforms/tree/v3.5.4) (2021-08-05)
 
 - **Fixed:** Invalid publish occurred. Sorry!
