@@ -3,11 +3,75 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
 import Switch from '@material-ui/core/Switch';
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import ThemeProvider from '@material-ui/styles/ThemeProvider/ThemeProvider';
 import React from 'react';
 import { BoolField } from 'uniforms-material';
+import { render } from 'uniforms/__suites__';
 
+import * as wrapField from '../src/wrapField';
 import createContext from './_createContext';
 import mount from './_mount';
+
+describe('@RTL - BoolField tests', () => {
+  test('<BoolField> - default props are not passed when MUI theme props are specified', () => {
+    const wrapFieldSpy = jest.spyOn(wrapField, 'default');
+    const theme = createMuiTheme({
+      props: { MuiFormControl: { fullWidth: false, margin: 'normal' } },
+    });
+    render(
+      <ThemeProvider theme={theme}>
+        <BoolField name="x" />
+      </ThemeProvider>,
+      { x: { type: Boolean } },
+    );
+
+    expect(wrapFieldSpy).toHaveBeenCalledWith(
+      expect.not.objectContaining({
+        fullWidth: expect.anything(),
+        margin: expect.anything(),
+      }),
+      undefined,
+      expect.anything(),
+    );
+  });
+
+  test('<BoolField> - default props are passed when MUI theme props are absent', () => {
+    const wrapFieldSpy = jest.spyOn(wrapField, 'default');
+    render(<BoolField name="y" />, { y: { type: Boolean } });
+
+    expect(wrapFieldSpy).toHaveBeenCalledWith(
+      expect.objectContaining({
+        fullWidth: true,
+        margin: 'dense',
+      }),
+      undefined,
+      expect.anything(),
+    );
+  });
+
+  test('<BoolField> - explicit props are passed when MUI theme props are specified', () => {
+    const wrapFieldSpy = jest.spyOn(wrapField, 'default');
+    const theme = createMuiTheme({
+      props: { MuiFormControl: { fullWidth: false, margin: 'normal' } },
+    });
+    render(
+      <ThemeProvider theme={theme}>
+        <BoolField name="x" />
+      </ThemeProvider>,
+      { x: { type: Boolean } },
+    );
+
+    expect(wrapFieldSpy).toHaveBeenCalledWith(
+      expect.objectContaining({
+        fullWidth: true,
+        margin: 'dense',
+      }),
+      undefined,
+      expect.anything(),
+    );
+  });
+});
 
 test('<BoolField> - renders an Checkbox', () => {
   const element = <BoolField name="x" />;

@@ -1,8 +1,9 @@
-import { PropTypes, useTheme } from '@material-ui/core';
+import type { PropTypes } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText, {
   FormHelperTextProps,
 } from '@material-ui/core/FormHelperText';
+import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import { Override, connectField, filterDOMProps } from 'uniforms';
 
@@ -15,8 +16,8 @@ function Error({
   children,
   error,
   errorMessage,
-  fullWidth = true,
-  margin = 'dense',
+  fullWidth,
+  margin,
   variant,
   ...props
 }: ErrorFieldProps) {
@@ -26,9 +27,9 @@ function Error({
   return !error ? null : (
     <FormControl
       error={!!error}
-      fullWidth={themeProps?.fullWidth ?? !!fullWidth}
-      margin={themeProps?.margin ?? margin}
-      variant={themeProps?.variant ?? variant}
+      fullWidth={fullWidth ?? themeProps?.fullWidth ?? true}
+      margin={margin ?? themeProps?.margin ?? 'dense'}
+      variant={variant}
     >
       <FormHelperText {...filterDOMProps(props)}>
         {children || errorMessage}

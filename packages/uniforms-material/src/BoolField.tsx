@@ -1,9 +1,9 @@
-import { useTheme } from '@material-ui/core';
 import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
+import useTheme from '@material-ui/core/styles/useTheme';
 import omit from 'lodash/omit';
 import React, { Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
@@ -41,8 +41,10 @@ function Bool(props: BoolFieldProps) {
 
   return wrapField(
     {
-      fullWidth: formControlThemeProps?.fullWidth ?? true,
-      margin: formControlThemeProps?.margin ?? 'dense',
+      ...(formControlThemeProps?.fullWidth === undefined && {
+        fullWidth: true,
+      }),
+      ...(formControlThemeProps?.margin === undefined && { margin: 'dense' }),
       ...props,
       component: 'fieldset',
     },

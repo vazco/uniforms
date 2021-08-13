@@ -30,7 +30,7 @@ const LongText = ({
       error={!!error}
       fullWidth={themeProps?.fullWidth ?? true}
       helperText={(error && showInlineError && errorMessage) || helperText}
-      inputProps={{ readOnly, ...(themeProps?.inputProps ?? {}) }}
+      inputProps={{ ...themeProps?.inputProps, readOnly }}
       label={label}
       margin={themeProps?.margin ?? 'dense'}
       multiline
