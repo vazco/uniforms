@@ -1,4 +1,4 @@
-import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
+import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
@@ -16,7 +16,7 @@ const dateParse = (timestamp: number, onChange: DateFieldProps['onChange']) => {
 
 export type DateFieldProps = FieldProps<
   Date,
-  StandardTextFieldProps,
+  TextFieldProps,
   { labelProps?: object }
 >;
 
