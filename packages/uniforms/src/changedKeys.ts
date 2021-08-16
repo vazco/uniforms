@@ -4,7 +4,7 @@ import { joinName } from './joinName';
 
 // eslint-disable-next-line complexity
 export function changedKeys<T>(root: string, valueA?: T, valueB?: T) {
-  if (!valueA || typeof valueA !== typeof valueB || valueA !== Object(valueA) || valueA instanceof Date) {
+  if (!valueA || valueA !== Object(valueA) || valueA instanceof Date || typeof valueA !== typeof valueB) {
     return isEqual(valueA, valueB) ? [] : [root];
   }
 
