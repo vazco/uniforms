@@ -81,11 +81,13 @@ export function useField<
   let initialValue: Value | undefined;
   let value: Value | undefined = props.value ?? valueFromModel;
 
-  if (value === undefined) {
-    value = context.schema.getInitialValue(name, props);
-    initialValue = value;
-  } else if (props.value !== undefined && props.value !== valueFromModel) {
-    initialValue = props.value;
+  if (!changed) {
+    if (value === undefined) {
+      value = context.schema.getInitialValue(name, props);
+      initialValue = value;
+    } else if (props.value !== undefined && props.value !== valueFromModel) {
+      initialValue = props.value;
+    }
   }
 
   if (options?.initialValue !== false) {
