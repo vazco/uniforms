@@ -4,7 +4,7 @@ import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 /* istanbul ignore next */
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
-const dateFormat = (value?: Date) => value && value.toISOString().slice(0, -8);
+const dateFormat = (value?: Date) => value && value.toString().slice(0, -8);
 const dateParse = (timestamp: number, onChange: DateFieldProps['onChange']) => {
   const date = new DateConstructor(timestamp);
   if (date.getFullYear() < 10000) {
