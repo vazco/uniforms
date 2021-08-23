@@ -1,3 +1,4 @@
+import type { PropTypes } from '@material-ui/core';
 import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -15,8 +16,10 @@ export type BoolFieldProps = FieldProps<
   CheckboxProps | SwitchProps,
   {
     appearance?: 'checkbox' | 'switch';
+    fullWidth?: boolean;
     helperText?: string;
     legend?: string;
+    margin?: PropTypes.Margin;
     transform?: (label: string) => string;
   }
 >;
@@ -67,7 +70,7 @@ function Bool(props: BoolFieldProps) {
             }
             ref={inputRef as Ref<HTMLButtonElement>}
             value={name}
-            {...omit(filterDOMProps(props), ['helperText'])}
+            {...omit(filterDOMProps(props), ['helperText', 'fullWidth'])}
           />
         }
         label={transform ? transform(label as string) : label}

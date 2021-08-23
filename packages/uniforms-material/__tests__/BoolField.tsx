@@ -55,18 +55,20 @@ describe('@RTL - BoolField tests', () => {
     const theme = createMuiTheme({
       props: { MuiFormControl: { fullWidth: false, margin: 'normal' } },
     });
+    const explicitProps = {
+      fullWidth: true,
+      margin: 'dense' as const,
+    };
+
     render(
       <ThemeProvider theme={theme}>
-        <BoolField name="x" />
+        <BoolField name="x" {...explicitProps} />
       </ThemeProvider>,
       { x: { type: Boolean } },
     );
 
     expect(wrapFieldSpy).toHaveBeenCalledWith(
-      expect.objectContaining({
-        fullWidth: true,
-        margin: 'dense',
-      }),
+      expect.objectContaining(explicitProps),
       undefined,
       expect.anything(),
     );
