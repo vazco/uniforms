@@ -46,7 +46,7 @@ export const themeContext = createContext<keyof typeof themes>('unstyled');
 function _createThemedComponent(component: keyof typeof unstyled) {
   return function ThemedComponent(props: Record<string, any>) {
     const theme = useContext(themeContext);
-    const Component = themes[theme][component];
+    const Component: any = themes[theme][component];
     return <Component key={theme} {...props} />;
   };
 }
