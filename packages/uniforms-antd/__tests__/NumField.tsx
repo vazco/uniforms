@@ -175,7 +175,7 @@ test('<NumField> - renders an InputNumber which correctly reacts on change (deci
   expect(onChange).toHaveBeenLastCalledWith('x', 2);
 });
 
-test('<NumField> - renders an InputNumber which correctly reacts on change (empty)', () => {
+test('<NumField> - renders an InputNumber which does not react to change (empty)', () => {
   const onChange = jest.fn();
 
   const element = <NumField name="x" />;
@@ -188,10 +188,10 @@ test('<NumField> - renders an InputNumber which correctly reacts on change (empt
   expect(
     wrapper.find('input').simulate('change', { target: { value: '' } }),
   ).toBeTruthy();
-  expect(onChange).toHaveBeenLastCalledWith('x', undefined);
+  expect(onChange).not.toHaveBeenCalled();
 });
 
-test('<NumField> - renders an InputNumber which correctly reacts on change (same value)', () => {
+test('<NumField> - renders an InputNumber which does not react to change (same value)', () => {
   const onChange = jest.fn();
 
   const element = <NumField name="x" />;
@@ -204,7 +204,7 @@ test('<NumField> - renders an InputNumber which correctly reacts on change (same
   expect(
     wrapper.find('input').simulate('change', { target: { value: '1' } }),
   ).toBeTruthy();
-  expect(onChange).toHaveBeenLastCalledWith('x', 1);
+  expect(onChange).not.toHaveBeenCalled();
 });
 
 test('<NumField> - renders an InputNumber which correctly reacts on change (zero)', () => {
