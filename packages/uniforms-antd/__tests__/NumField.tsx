@@ -185,10 +185,10 @@ test('<NumField> - renders an InputNumber which does not react to change (empty)
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
-  expect(
-    wrapper.find('input').simulate('change', { target: { value: '' } }),
-  ).toBeTruthy();
-  expect(onChange).not.toHaveBeenCalled();
+
+  wrapper.find(InputNumber).props().onChange!('');
+
+  expect(onChange).toHaveBeenLastCalledWith('x', undefined);
 });
 
 test('<NumField> - renders an InputNumber which does not react to change (same value)', () => {
@@ -201,10 +201,10 @@ test('<NumField> - renders an InputNumber which does not react to change (same v
   );
 
   expect(wrapper.find('input')).toHaveLength(1);
-  expect(
-    wrapper.find('input').simulate('change', { target: { value: '1' } }),
-  ).toBeTruthy();
-  expect(onChange).not.toHaveBeenCalled();
+
+  wrapper.find(InputNumber).props().onChange!('1');
+
+  expect(onChange).toHaveBeenLastCalledWith('x', 1);
 });
 
 test('<NumField> - renders an InputNumber which correctly reacts on change (zero)', () => {
