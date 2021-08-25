@@ -44,9 +44,9 @@ export const themes = {
 export const themeContext = createContext<keyof typeof themes>('unstyled');
 
 function _createThemedComponent(component: keyof typeof unstyled) {
-  return function ThemedComponent(props: Record<string, any>) {
+  return function ThemedComponent(props: Record<string, unknown>) {
     const theme = useContext(themeContext);
-    // Form prop errors due to `props` having no strict type here
+    // FIXME: Form prop errors due to `props` having no strict type here.
     const Component: any = themes[theme][component];
     return <Component key={theme} {...props} />;
   };
