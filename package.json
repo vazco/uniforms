@@ -36,7 +36,7 @@
     "@types/warning": "3.0.0",
     "@wojtekmaj/enzyme-adapter-react-17": "0.6.0",
     "ajv": "8.0.5",
-    "antd": "4.10.3",
+    "antd": "4.16.13",
     "classnames": "^2.0.0",
     "core-js": "3.8.3",
     "enzyme": "3.11.0",
