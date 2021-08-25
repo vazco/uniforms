@@ -2,14 +2,18 @@ import isEqual from 'lodash/isEqual';
 
 import { joinName } from './joinName';
 
+function isObject(value: unknown): value is Record<string, unknown> {
+  return !!value && value === Object(value) && !(value instanceof Date);
+}
+
 // eslint-disable-next-line complexity
-export function changedKeys<T>(root: string, valueA?: T, valueB?: T) {
-  if (!valueA || valueA !== Object(valueA) || valueA instanceof Date || typeof valueA !== typeof valueB) {
+export function changedKeys(root: string, valueA?: unknown, valueB?: unknown) {
+  if (!isObject(valueA) || (valueB && typeof valueA !== typeof valueB)) {
     return isEqual(valueA, valueB) ? [] : [root];
   }
 
   const changed = [root];
-  if (valueB) {
+  if (isObject(valueB)) {
     for (const key in valueA) {
       if (!(key in valueB) || !isEqual(valueA[key], valueB[key])) {
         changed.push(joinName(root, key));
