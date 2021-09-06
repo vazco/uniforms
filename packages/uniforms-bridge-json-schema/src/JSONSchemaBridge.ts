@@ -35,12 +35,16 @@ function resolveRef(reference: string, schema: Record<string, any>) {
 function resolveRefIfNeeded(
   partial: Record<string, any>,
   schema: Record<string, any>,
-) {
-  if (partial.$ref) {
-    partial = Object.assign({}, partial, resolveRef(partial.$ref, schema));
-    delete partial.$ref;
+): Record<string, any> {
+  const ref = partial.$ref;
+  if (!ref) {
+    return partial;
   }
-
+  delete partial.$ref;
+  partial = resolveRefIfNeeded(
+    Object.assign({}, partial, resolveRef(ref, schema)),
+    schema,
+  );
   return partial;
 }
 
