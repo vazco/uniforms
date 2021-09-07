@@ -1,6 +1,5 @@
 import invariant from 'invariant';
 import cloneDeep from 'lodash/cloneDeep';
-import get from 'lodash/get';
 import memoize from 'lodash/memoize';
 import SimpleSchema from 'simpl-schema';
 import { Bridge, joinName } from 'uniforms';
