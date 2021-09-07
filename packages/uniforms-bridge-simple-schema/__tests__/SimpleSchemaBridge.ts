@@ -42,6 +42,13 @@ describe('SimpleSchemaBridge', () => {
           },
         },
         t: { type: String, uniforms: { options: () => ({ a: 1, b: 2 }) } },
+        u: { type: Array, defaultValue: ['u'] },
+        'u.$': { type: String },
+        v: { type: Object, defaultValue: { a: 'a' } },
+        'v.a': { type: String },
+        w: { type: Array, defaultValue: [{ a: 'a' }] },
+        'w.$': { type: Object },
+        'w.$.a': { type: String },
       }[name];
 
       if (field) {
@@ -178,8 +185,20 @@ describe('SimpleSchemaBridge', () => {
       ]);
     });
 
+    it('works with arrays (defaultValue)', () => {
+      expect(bridge.getInitialValue('u')).toEqual(['u']);
+    });
+
+    it('works with arrays of objects (defaultValue)', () => {
+      expect(bridge.getInitialValue('w')).toEqual([{ a: 'a' }]);
+    });
+
     it('works with objects', () => {
       expect(bridge.getInitialValue('a')).toEqual({});
+    });
+
+    it('works with objects (defaultValue)', () => {
+      expect(bridge.getInitialValue('v')).toEqual({ a: 'a' });
     });
   });
 

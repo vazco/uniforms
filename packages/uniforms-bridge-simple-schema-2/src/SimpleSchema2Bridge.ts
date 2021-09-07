@@ -1,5 +1,6 @@
 import invariant from 'invariant';
 import cloneDeep from 'lodash/cloneDeep';
+import get from 'lodash/get';
 import memoize from 'lodash/memoize';
 import SimpleSchema from 'simpl-schema';
 import { Bridge, joinName } from 'uniforms';
@@ -72,6 +73,11 @@ export default class SimpleSchema2Bridge extends Bridge {
   getInitialValue(name: string, props?: Record<string, any>): any {
     const field = this.getField(name);
 
+    const defaultValue = field.defaultValue;
+    if (defaultValue !== undefined) {
+      return cloneDeep(defaultValue);
+    }
+
     if (field.type === Array) {
       const item = this.getInitialValue(joinName(name, '0'));
       const items = Math.max(props?.initialCount || 0, field.minCount || 0);
@@ -82,7 +88,7 @@ export default class SimpleSchema2Bridge extends Bridge {
       return {};
     }
 
-    return field.defaultValue;
+    return undefined;
   }
 
   // eslint-disable-next-line complexity

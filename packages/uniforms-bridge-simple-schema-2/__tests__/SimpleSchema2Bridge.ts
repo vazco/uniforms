@@ -38,6 +38,13 @@ describe('SimpleSchema2Bridge', () => {
     u: { type: SimpleSchema.Integer },
     w: { type: new SimpleSchema({ x: String }) },
     x: { type: String, autoValue: () => '$setOnInsert:hack!' },
+    y: { type: Array, defaultValue: ['y'] },
+    'y.$': String,
+    z: { type: Object, defaultValue: { a: 'a' } },
+    'z.a': String,
+    aa: { type: Array, defaultValue: [{ a: 'a' }] },
+    'aa.$': Object,
+    'aa.$.a': String,
     // FIXME: `SimpleSchemaDefinition` ignores `extendOptions`.
   } as any);
 
@@ -136,7 +143,7 @@ describe('SimpleSchema2Bridge', () => {
     });
 
     it('throws on not found field', () => {
-      expect(() => bridge.getField('y')).toThrow(/Field not found in schema/);
+      expect(() => bridge.getField('-y')).toThrow(/Field not found in schema/);
     });
   });
 
@@ -159,8 +166,20 @@ describe('SimpleSchema2Bridge', () => {
       ]);
     });
 
+    it('works with arrays (defaultValue)', () => {
+      expect(bridge.getInitialValue('y')).toEqual(['y']);
+    });
+
+    it('works with arrays of objects (defaultValue)', () => {
+      expect(bridge.getInitialValue('aa')).toEqual([{ a: 'a' }]);
+    });
+
     it('works with objects', () => {
       expect(bridge.getInitialValue('a')).toEqual({});
+    });
+
+    it('works with objects (defaultValue)', () => {
+      expect(bridge.getInitialValue('z')).toEqual({ a: 'a' });
     });
   });
 
@@ -284,6 +303,9 @@ describe('SimpleSchema2Bridge', () => {
         'u',
         'w',
         'x',
+        'y',
+        'z',
+        'aa',
       ]);
     });
 

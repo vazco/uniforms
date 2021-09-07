@@ -67,6 +67,11 @@ export default class SimpleSchemaBridge extends Bridge {
   getInitialValue(name: string, props?: Record<string, any>): any {
     const field = this.getField(name);
 
+    const defaultValue = field.defaultValue;
+    if (defaultValue !== undefined) {
+      return cloneDeep(defaultValue);
+    }
+
     if (field.type === Array) {
       const item = this.getInitialValue(joinName(name, '0'));
       const items = Math.max(props?.initialCount || 0, field.minCount || 0);
@@ -77,7 +82,7 @@ export default class SimpleSchemaBridge extends Bridge {
       return {};
     }
 
-    return field.defaultValue;
+    return undefined;
   }
 
   // eslint-disable-next-line complexity
