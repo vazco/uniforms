@@ -66,7 +66,6 @@ export default class SimpleSchemaBridge extends Bridge {
 
   getInitialValue(name: string, props?: Record<string, any>): any {
     const field = this.getField(name);
-
     const defaultValue = field.defaultValue;
     if (defaultValue !== undefined) {
       return cloneDeep(defaultValue);
