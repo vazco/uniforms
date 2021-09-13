@@ -7,7 +7,7 @@ import {
   useContext,
 } from 'react';
 
-import { connectField } from './connectField';
+import { ConnectedField } from './connectField';
 import { Context } from './types';
 import { useField } from './useField';
 
@@ -18,7 +18,7 @@ export type AutoFieldProps = {
 };
 
 /** @internal */
-export type Component = ComponentType<any> | ReturnType<typeof connectField>;
+export type Component = ComponentType<any> | ConnectedField<any>;
 
 /** @internal */
 export type ComponentDetector = (
@@ -36,7 +36,7 @@ export function createAutoField(defaultComponentDetector: ComponentDetector) {
 
     invariant(component, 'AutoField received no component for: %s', props.name);
 
-    return 'options' in component && component.options?.kind === 'leaf'
+    return isConnectedLeafComponent(component)
       ? createElement(component.Component, props)
       : createElement(component, rawProps);
   }
@@ -45,4 +45,8 @@ export function createAutoField(defaultComponentDetector: ComponentDetector) {
     componentDetectorContext: context,
     defaultComponentDetector,
   });
+}
+
+function isConnectedLeafComponent(x: Component): x is ConnectedField<any> {
+  return typeof x === 'object' && 'options' in x && x.options?.kind === 'leaf';
 }
