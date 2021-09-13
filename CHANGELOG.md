@@ -1,3 +1,10 @@
+## [v3.6.0](https://github.com/vazco/uniforms/tree/v3.6.0) (2021-09-13)
+
+- **Added:** Explicit form types. [\#1003](https://github.com/vazco/uniforms/issues/1003)
+- **Added:** Support for changing field value in `changedKeys`. [\#982](https://github.com/vazco/uniforms/issues/982)
+- **Added:** Support for recursive `$ref`s in `JSONSchemaBrdige`. [\#1006](https://github.com/vazco/uniforms/issues/1006)
+- **Fixed:** Default values resolution in SimpleSchema bridges. [\#1008](https://github.com/vazco/uniforms/issues/1008)
+
 ## [v3.5.5](https://github.com/vazco/uniforms/tree/v3.5.5) (2021-08-13)
 
 - **Fixed:** Types of `DateField`, `LongTextField`, `NumField`, and `TextField` in `uniforms-material` are now correctly based on `TextFieldProps`. [\#987](https://github.com/vazco/uniforms/issues/987)
