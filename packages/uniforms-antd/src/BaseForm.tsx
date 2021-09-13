@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import { BaseForm } from 'uniforms';
 
-function AntD(parent: any): any {
+function AntD(parent: any) {
   class _ extends parent {
     static AntD = AntD;
 
@@ -21,7 +21,7 @@ function AntD(parent: any): any {
     }
   }
 
-  return _;
+  return (_ as unknown) as typeof BaseForm;
 }
 
 export default AntD(BaseForm);

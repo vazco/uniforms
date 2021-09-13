@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import { BaseForm } from 'uniforms';
 
-function Semantic(parent: any): any {
+function Semantic(parent: any) {
   class _ extends parent {
     static Semantic = Semantic;
 
@@ -18,7 +18,7 @@ function Semantic(parent: any): any {
     }
   }
 
-  return _;
+  return (_ as unknown) as typeof BaseForm;
 }
 
 export default Semantic(BaseForm);
