@@ -95,4 +95,21 @@ describe('changedKeys', () => {
       expect(changedKeys('a', 'pe', 'no')).toEqual(['a']);
     });
   });
+
+  it('works with changing value types', () => {
+    expect(changedKeys('a', '1', 1)).toEqual(['a']);
+    expect(changedKeys('a', 1, '1')).toEqual(['a']);
+    expect(changedKeys('a', 'true', true)).toEqual(['a']);
+    expect(changedKeys('a', true, 'true')).toEqual(['a']);
+    expect(changedKeys('a', 'false', false)).toEqual(['a']);
+    expect(changedKeys('a', false, 'false')).toEqual(['a']);
+    expect(changedKeys('a', '0', null)).toEqual(['a']);
+    expect(changedKeys('a', null, '0')).toEqual(['a']);
+    expect(changedKeys('a', Date.now(), new Date())).toEqual(['a']);
+    expect(changedKeys('a', new Date(), Date.now())).toEqual(['a']);
+    expect(changedKeys('a', 'value', { key: 'value' })).toEqual(['a']);
+    expect(changedKeys('a', { key: 'value' }, 'value')).toEqual(['a']);
+    expect(changedKeys('a', 'value', ['value'])).toEqual(['a']);
+    expect(changedKeys('a', ['value'], 'value')).toEqual(['a']);
+  });
 });

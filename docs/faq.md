@@ -245,3 +245,21 @@ const ChangedForm = ({ model }) => (
   </AutoForm>
 );
 ```
+
+### Why am I suddenly getting type errors in my form components?
+
+After introduction of TypeScript in `uniforms@3.0.0`, in the initial versions all form components in theme packages were typed as `any`.
+Natural strict typing is not possible due to TypeScript constraints. In one of the versions we have decided to change this approach and explicitly cast all of the form types.
+If you experience any errors regarding form types, please [file us a bug report](https://github.com/vazco/uniforms/issues/new?assignees=&labels=&template=bug-report.md) and use one of the following workarounds for the time being in your project.
+
+```tsx
+const AnyAutoForm: any = AutoForm;
+<AnyAutoForm untypedProp={1} />;
+
+// or
+
+const anyProps: any = {
+  untypedProp: 1
+}
+<AutoForm {...anyProps} />
+```

@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import { BaseForm } from 'uniforms';
 
-function Bootstrap3(parent: any): any {
+function Bootstrap3(parent: any) {
   class _ extends parent {
     static Bootstrap3 = Bootstrap3;
 
@@ -34,7 +34,7 @@ function Bootstrap3(parent: any): any {
     }
   }
 
-  return _;
+  return (_ as unknown) as typeof BaseForm;
 }
 
 export default Bootstrap3(BaseForm);
