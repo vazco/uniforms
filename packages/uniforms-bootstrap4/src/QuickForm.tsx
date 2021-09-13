@@ -22,7 +22,7 @@ function Quick(parent: any) {
     }
   }
 
-  return (_ as unknown) as QuickForm;
+  return _ as unknown as QuickForm;
 }
 
 export default Quick(BaseForm);

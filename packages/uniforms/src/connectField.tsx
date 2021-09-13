@@ -14,7 +14,7 @@ export type ConnectFieldOptions = {
 /** @internal */
 export type ConnectedFieldProps<
   Props extends Record<string, unknown>,
-  Value = Props['value']
+  Value = Props['value'],
 > = Override<
   Props,
   Override<
@@ -30,7 +30,7 @@ export type ConnectedFieldProps<
 /** @internal */
 export type ConnectedField<
   Props extends Record<string, unknown>,
-  Value = Props['value']
+  Value = Props['value'],
 > = FunctionComponent<ConnectedFieldProps<Props, Value>> & {
   Component: ComponentType<Props>;
   options?: ConnectFieldOptions;
@@ -38,7 +38,7 @@ export type ConnectedField<
 
 export function connectField<
   Props extends Record<string, unknown>,
-  Value = Props['value']
+  Value = Props['value'],
 >(
   Component: ComponentType<Props>,
   options?: ConnectFieldOptions,
@@ -53,7 +53,7 @@ export function connectField<
     });
 
     if (!anyFlowingPropertySet && !hasChainName) {
-      return <Component {...((props as unknown) as Props)} {...fieldProps} />;
+      return <Component {...(props as unknown as Props)} {...fieldProps} />;
     }
 
     const nextContext = { ...context };
@@ -70,7 +70,7 @@ export function connectField<
 
     return (
       <contextReference.Provider value={nextContext}>
-        <Component {...((props as unknown) as Props)} {...fieldProps} />
+        <Component {...(props as unknown as Props)} {...fieldProps} />
       </contextReference.Provider>
     );
   }

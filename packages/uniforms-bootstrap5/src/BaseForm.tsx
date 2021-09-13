@@ -23,7 +23,7 @@ function Bootstrap5(parent: any) {
     }
   }
 
-  return (_ as unknown) as typeof BaseForm;
+  return _ as unknown as typeof BaseForm;
 }
 
 export default Bootstrap5(BaseForm);

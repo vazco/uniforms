@@ -24,7 +24,7 @@ function SubmitField({
   ...props
 }: SubmitFieldProps) {
   const { error, state: anyState } = useForm();
-  const state = (anyState as unknown) as { disabled: boolean; grid: any };
+  const state = anyState as unknown as { disabled: boolean; grid: any };
   const hasWrap = !!(state.grid || wrapClassName);
 
   const blockInput = (

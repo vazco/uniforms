@@ -62,8 +62,11 @@
     "@typescript-eslint/require-await": "off",
     "@typescript-eslint/restrict-plus-operands": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
+    "consistent-return": "off",
+    "eslint-comments/require-description": "off",
     "import/default": "off",
     "prefer-rest-params": "off",
+    "react/jsx-pascal-case": "off",
     "react/no-children-prop": "off",
     "react/prop-types": "off"
   },

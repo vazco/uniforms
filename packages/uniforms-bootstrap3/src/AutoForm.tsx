@@ -7,7 +7,7 @@ function Auto(parent: any) {
     static Auto = Auto;
   }
 
-  return (_ as unknown) as AutoForm;
+  return _ as unknown as AutoForm;
 }
 
 export default Auto(ValidatedQuickForm);

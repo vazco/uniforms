@@ -18,7 +18,7 @@ function Semantic(parent: any) {
     }
   }
 
-  return (_ as unknown) as typeof BaseForm;
+  return _ as unknown as typeof BaseForm;
 }
 
 export default Semantic(BaseForm);

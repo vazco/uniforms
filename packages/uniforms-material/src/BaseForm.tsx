@@ -7,7 +7,7 @@ function Material(parent: any) {
     static displayName = `Material${parent.displayName}`;
   }
 
-  return (_ as unknown) as typeof BaseForm;
+  return _ as unknown as typeof BaseForm;
 }
 
 export default Material(BaseForm);

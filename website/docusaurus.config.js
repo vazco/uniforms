@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
 
 module.exports = {
@@ -13,8 +12,7 @@ module.exports = {
       { url: 'https://www.deskpro.com/', image: 'deskpro.png', alt: 'Deskpro' },
       { url: 'https://www.nokia.com/', image: 'nokia.png', alt: 'Nokia' },
       {
-        url:
-          'https://github.com/react-page/react-page/tree/master/packages/plugins/createPluginMaterialUi',
+        url: 'https://github.com/react-page/react-page/tree/master/packages/plugins/createPluginMaterialUi',
         image: 'react-page.png',
         alt: 'React Page',
       },

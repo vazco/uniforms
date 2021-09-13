@@ -292,10 +292,8 @@ export default class JSONSchemaBridge extends Bridge {
 
   getSubfields(name = '') {
     const field = this.getField(name);
-    const {
-      properties = field.properties,
-      type = field.type,
-    } = this._compiledSchema[name];
+    const { properties = field.properties, type = field.type } =
+      this._compiledSchema[name];
 
     if (type === 'object' && properties) {
       return Object.keys(properties);

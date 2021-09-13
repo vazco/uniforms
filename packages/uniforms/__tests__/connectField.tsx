@@ -10,7 +10,7 @@ jest.mock('meteor/check');
 
 describe('connectField', () => {
   const onChange = jest.fn();
-  const schema = new SimpleSchemaBridge(({
+  const schema = new SimpleSchemaBridge({
     getDefinition(name: 'another' | 'field' | 'field.subfield') {
       return {
         field: { type: Object, label: 'Field' },
@@ -29,7 +29,7 @@ describe('connectField', () => {
     },
 
     validator() {},
-  } as any) as SimpleSchema);
+  } as any as SimpleSchema);
 
   const reactContext = {
     context: {

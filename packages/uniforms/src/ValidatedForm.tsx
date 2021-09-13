@@ -27,7 +27,7 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
   class ValidatedForm<
     Model,
     Props extends ValidatedFormProps<Model> = ValidatedFormProps<Model>,
-    State extends ValidatedFormState<Model> = ValidatedFormState<Model>
+    State extends ValidatedFormState<Model> = ValidatedFormState<Model>,
   > extends Base<Model, Props, State> {
     static Validated = Validated;
     static displayName = `Validated${Base.displayName}`;
@@ -54,9 +54,8 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
       };
 
       this.onValidate = this.validate = this.onValidate.bind(this);
-      this.onValidateModel = this.validateModel = this.onValidateModel.bind(
-        this,
-      );
+      this.onValidateModel = this.validateModel =
+        this.onValidateModel.bind(this);
     }
 
     getContextError(): Context<Model>['error'] {
