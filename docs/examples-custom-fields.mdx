@@ -21,6 +21,8 @@ field props here, like value or onChange for some extra logic.
 
 ### `CustomAutoField`
 
+**Note:** Since v3.1, the preferred way is to create an `AutoField` component is to use the `createAutoField` helper. Also, it's often the case that using the [`AutoField.componentDetectorContext`](uth-autofield-algorithm#overriding-autofield) is enough.
+
 These are two _standard_ options to define a custom `AutoField`: either using `connectField` or simply taking the code from the [original one](https://github.com/vazco/uniforms/blob/master/packages/uniforms-unstyled/src/AutoField.tsx#L14-L47) _(theme doesn't matter)_ and simply apply own components and/or rules to render components. Below an example with `connectField`.
 
 ```tsx
