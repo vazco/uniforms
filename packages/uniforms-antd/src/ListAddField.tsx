@@ -3,6 +3,7 @@ import Button, { ButtonProps } from 'antd/lib/button';
 import cloneDeep from 'lodash/cloneDeep';
 import React from 'react';
 import {
+  ConnectedField,
   FieldProps,
   connectField,
   filterDOMProps,
@@ -57,7 +58,12 @@ function ListAdd({
   );
 }
 
+// There's no way to tell TypeScript NOT TO expand the type alias. Creating a
+// local type helps, at least in the current version.
+// https://github.com/microsoft/TypeScript/issues/34556
+type ListAddFieldType = ConnectedField<ListAddFieldProps>;
+
 export default connectField<ListAddFieldProps>(ListAdd, {
   initialValue: false,
   kind: 'leaf',
-});
+}) as ListAddFieldType;
