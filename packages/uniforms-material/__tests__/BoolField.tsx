@@ -1,4 +1,5 @@
 import Checkbox from '@material-ui/core/Checkbox';
+import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -9,68 +10,70 @@ import React from 'react';
 import { BoolField } from 'uniforms-material';
 import { render } from 'uniforms/__suites__';
 
-import * as wrapField from '../src/wrapField';
 import createContext from './_createContext';
 import mount from './_mount';
 
 describe('@RTL - BoolField tests', () => {
   test('<BoolField> - default props are not passed when MUI theme props are specified', () => {
-    const wrapFieldSpy = jest.spyOn(wrapField, 'default');
     const theme = createMuiTheme({
       props: { MuiFormControl: { fullWidth: false, margin: 'normal' } },
     });
-    render(
+    const { container } = render(
       <ThemeProvider theme={theme}>
         <BoolField name="x" />
       </ThemeProvider>,
       { x: { type: Boolean } },
     );
 
-    expect(wrapFieldSpy).toHaveBeenCalledWith(
-      expect.not.objectContaining({
-        fullWidth: expect.anything(),
-        margin: expect.anything(),
-      }),
-      undefined,
-      expect.anything(),
+    const elements = container.getElementsByClassName(
+      'MuiFormControl-marginNormal',
+    );
+    expect(elements.length).toBe(1);
+    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
+      false,
     );
   });
 
   test('<BoolField> - default props are passed when MUI theme props are absent', () => {
-    const wrapFieldSpy = jest.spyOn(wrapField, 'default');
-    render(<BoolField name="y" />, { y: { type: Boolean } });
+    const theme = createMuiTheme({});
+    const { container } = render(
+      <ThemeProvider theme={theme}>
+        <BoolField name="x" />
+      </ThemeProvider>,
+      { x: { type: Boolean } },
+    );
 
-    expect(wrapFieldSpy).toHaveBeenCalledWith(
-      expect.objectContaining({
-        fullWidth: true,
-        margin: 'dense',
-      }),
-      undefined,
-      expect.anything(),
+    const elements = container.getElementsByClassName(
+      'MuiFormControl-marginDense',
+    );
+    expect(elements.length).toBe(1);
+    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
+      true,
     );
   });
 
   test('<BoolField> - explicit props are passed when MUI theme props are specified', () => {
-    const wrapFieldSpy = jest.spyOn(wrapField, 'default');
     const theme = createMuiTheme({
-      props: { MuiFormControl: { fullWidth: false, margin: 'normal' } },
+      props: { MuiFormControl: { fullWidth: true, margin: 'dense' } },
     });
     const explicitProps = {
-      fullWidth: true,
-      margin: 'dense' as const,
+      fullWidth: false,
+      margin: 'normal' as const,
     };
 
-    render(
+    const { container } = render(
       <ThemeProvider theme={theme}>
         <BoolField name="x" {...explicitProps} />
       </ThemeProvider>,
       { x: { type: Boolean } },
     );
 
-    expect(wrapFieldSpy).toHaveBeenCalledWith(
-      expect.objectContaining(explicitProps),
-      undefined,
-      expect.anything(),
+    const elements = container.getElementsByClassName(
+      'MuiFormControl-marginNormal',
+    );
+    expect(elements.length).toBe(1);
+    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
+      false,
     );
   });
 });
@@ -284,4 +287,22 @@ test('<BoolField> - renders a helperText', () => {
 
   expect(wrapper.find(FormHelperText)).toHaveLength(1);
   expect(wrapper.find(FormHelperText).text()).toBe('Helper');
+});
+
+test('<BoolField> - default props are not passed when MUI theme props are specified', () => {
+  const themeProps = { fullWidth: true, margin: 'normal' } as const;
+  const theme = createMuiTheme({
+    props: { MuiFormControl: { fullWidth: true, margin: 'normal' } },
+  });
+  const element = (
+    <ThemeProvider theme={theme}>
+      <BoolField name="x" />
+    </ThemeProvider>
+  );
+  const wrapper = mount(element, createContext({ x: { type: Boolean } }));
+
+  expect(wrapper.find(FormControl)).toHaveLength(1);
+  expect(wrapper.find(FormControl).props()).toBe(
+    expect.objectContaining(themeProps),
+  );
 });
