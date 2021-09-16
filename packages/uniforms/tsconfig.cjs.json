@@ -2,10 +2,10 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": "src",
-    "outDir": "es5",
+    "outDir": "cjs",
     "rootDir": "src",
-    "target": "es5",
-    "tsBuildInfoFile": "../../node_modules/.cache/uniforms.es5.tsbuildinfo"
+    "module": "CommonJS",
+    "tsBuildInfoFile": "../../node_modules/.cache/uniforms.cjs.tsbuildinfo"
   },
   "include": ["src"]
 }
