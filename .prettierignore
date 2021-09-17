@@ -5,9 +5,8 @@
 /node_modules
 /npm-debug.log
 /npm-debug.log*
-/packages/*/es5
+/packages/*/cjs
 /packages/*/esm
-/packages/*/es6
 /packages/*/node_modules
 /reproductions/.cache
 /reproductions/dist
