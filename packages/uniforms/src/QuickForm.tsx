@@ -15,7 +15,7 @@ export function Quick<Base extends typeof BaseForm>(Base: Base) {
   class QuickForm<
     Model,
     Props extends QuickFormProps<Model> = QuickFormProps<Model>,
-    State extends QuickFormState<Model> = QuickFormState<Model>
+    State extends QuickFormState<Model> = QuickFormState<Model>,
   > extends Base<Model, Props, State> {
     static Quick = Quick;
     static displayName = `Quick${Base.displayName}`;

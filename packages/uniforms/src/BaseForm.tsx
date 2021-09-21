@@ -42,7 +42,7 @@ export type BaseFormState<Model> = {
 export class BaseForm<
   Model,
   Props extends BaseFormProps<Model> = BaseFormProps<Model>,
-  State extends BaseFormState<Model> = BaseFormState<Model>
+  State extends BaseFormState<Model> = BaseFormState<Model>,
 > extends Component<Props, State> {
   static displayName = 'Form';
   static defaultProps = {

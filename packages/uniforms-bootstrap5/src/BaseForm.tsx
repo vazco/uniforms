@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import omit from 'lodash/omit';
 import { BaseForm } from 'uniforms';
 
-function Bootstrap5(parent: any): any {
+function Bootstrap5(parent: any) {
   class _ extends parent {
     static Bootstrap5 = Bootstrap5;
 
@@ -23,7 +23,7 @@ function Bootstrap5(parent: any): any {
     }
   }
 
-  return _;
+  return _ as unknown as typeof BaseForm;
 }
 
 export default Bootstrap5(BaseForm);

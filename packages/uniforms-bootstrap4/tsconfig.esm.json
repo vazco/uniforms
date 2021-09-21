@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "src",
+    "outDir": "esm",
+    "rootDir": "src",
+    "target": "es5",
+    "module": "es6",
+    "tsBuildInfoFile": "../../node_modules/.cache/uniforms-bootstrap4.esm.tsbuildinfo"
+  },
+  "include": ["src"],
+  "references": [{ "path": "../uniforms/tsconfig.esm.json" }]
+}

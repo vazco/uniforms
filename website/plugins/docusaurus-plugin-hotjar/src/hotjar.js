@@ -34,7 +34,7 @@ export default (function hotjar() {
     return null;
   }
 
-  /* eslint-disable */
+  /* eslint-disable func-names */
   (function (h, o, t, j, a, r) {
     h.hj =
       h.hj ||

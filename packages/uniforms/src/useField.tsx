@@ -32,7 +32,7 @@ function propagate(
 export function useField<
   Props extends Record<string, any>,
   Value = Props['value'],
-  Model = Record<string, any>
+  Model = Record<string, any>,
 >(
   fieldName: string,
   props: Props,

@@ -144,7 +144,7 @@ The current handling of `allOf`/`anyOf`/`oneOf` is not complete and does not wor
 
 Below is an example of these implications:
 
-```tsxon
+```ts
 {
   "type": "object",
   "properties": {

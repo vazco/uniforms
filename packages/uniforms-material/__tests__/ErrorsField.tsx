@@ -1,6 +1,9 @@
 import FormHelperText from '@material-ui/core/FormHelperText';
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import ThemeProvider from '@material-ui/styles/ThemeProvider/ThemeProvider';
 import React from 'react';
 import { ErrorsField } from 'uniforms-material';
+import { render } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
 import mount from './_mount';
@@ -15,6 +18,92 @@ const error = {
   ],
   message: 'X is required [validation-error]',
 };
+
+describe('@RTL - ErrorsField tests', () => {
+  test('<ErrorsField> - default props are not passed when MUI theme props are specified', () => {
+    const theme = createMuiTheme({
+      props: {
+        MuiFormControl: {
+          fullWidth: false,
+          margin: 'normal',
+          variant: 'filled',
+        },
+      },
+    });
+    const { container } = render(
+      <ThemeProvider theme={theme}>
+        <ErrorsField />
+      </ThemeProvider>,
+      { x: { type: String } },
+      { error },
+    );
+
+    const elements = container.getElementsByClassName(
+      'MuiFormControl-marginNormal',
+    );
+    expect(elements).toHaveLength(1);
+    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
+      false,
+    );
+    expect(
+      container.getElementsByClassName('MuiFormHelperText-contained'),
+    ).toHaveLength(3);
+  });
+
+  test('<ErrorsField> - default props are passed when MUI theme props are absent', () => {
+    const theme = createMuiTheme({});
+    const { container } = render(
+      <ThemeProvider theme={theme}>
+        <ErrorsField />
+      </ThemeProvider>,
+      { x: { type: String } },
+      { error },
+    );
+
+    const elements = container.getElementsByClassName(
+      'MuiFormControl-marginDense',
+    );
+    expect(elements).toHaveLength(1);
+    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
+      true,
+    );
+    expect(
+      container.getElementsByClassName('MuiFormHelperText-contained'),
+    ).toHaveLength(0);
+  });
+
+  test('<ErrorsField> - explicit props are passed when MUI theme props are specified', () => {
+    const theme = createMuiTheme({
+      props: {
+        MuiFormControl: { fullWidth: true, margin: 'dense', variant: 'filled' },
+      },
+    });
+    const explicitProps = {
+      fullWidth: false,
+      margin: 'normal' as const,
+      variant: 'standard' as const,
+    };
+
+    const { container } = render(
+      <ThemeProvider theme={theme}>
+        <ErrorsField {...explicitProps} />
+      </ThemeProvider>,
+      { x: { type: String } },
+      { error },
+    );
+
+    const elements = container.getElementsByClassName(
+      'MuiFormControl-marginNormal',
+    );
+    expect(elements).toHaveLength(1);
+    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
+      false,
+    );
+    expect(
+      container.getElementsByClassName('MuiFormHelperText-contained'),
+    ).toHaveLength(0);
+  });
+});
 
 test('<ErrorsField> - works', () => {
   const element = <ErrorsField />;

@@ -27,7 +27,7 @@ export function Auto<Base extends typeof ValidatedQuickForm>(Base: Base) {
   class AutoForm<
     Model,
     Props extends AutoFormProps<Model> = AutoFormProps<Model>,
-    State extends AutoFormState<Model> = AutoFormState<Model>
+    State extends AutoFormState<Model> = AutoFormState<Model>,
   > extends Base<Model, Props, State> {
     static Auto = Auto;
     static displayName = `Auto${Base.displayName}`;

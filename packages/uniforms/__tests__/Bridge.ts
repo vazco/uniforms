@@ -9,17 +9,19 @@ describe('Bridge', () => {
     expect(() => new Bridge()).toThrow();
   });
 
-  ([
-    'getError',
-    'getErrorMessage',
-    'getErrorMessages',
-    'getField',
-    'getInitialValue',
-    'getProps',
-    'getSubfields',
-    'getType',
-    'getValidator',
-  ] as const).forEach(method => {
+  (
+    [
+      'getError',
+      'getErrorMessage',
+      'getErrorMessages',
+      'getField',
+      'getInitialValue',
+      'getProps',
+      'getSubfields',
+      'getType',
+      'getValidator',
+    ] as const
+  ).forEach(method => {
     describe(`#${method}`, () => {
       it('throws an unimplemented error', () => {
         // @ts-expect-error

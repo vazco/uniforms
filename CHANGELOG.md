@@ -1,3 +1,29 @@
+## [v3.6.0](https://github.com/vazco/uniforms/tree/v3.6.0) (2021-09-13)
+
+- **Added:** Explicit form types. [\#1003](https://github.com/vazco/uniforms/issues/1003)
+- **Added:** Support for changing field value in `changedKeys`. [\#982](https://github.com/vazco/uniforms/issues/982)
+- **Added:** Support for recursive `$ref`s in `JSONSchemaBrdige`. [\#1006](https://github.com/vazco/uniforms/issues/1006)
+- **Fixed:** Default values resolution in SimpleSchema bridges. [\#1008](https://github.com/vazco/uniforms/issues/1008)
+
+## [v3.5.5](https://github.com/vazco/uniforms/tree/v3.5.5) (2021-08-13)
+
+- **Fixed:** Types of `DateField`, `LongTextField`, `NumField`, and `TextField` in `uniforms-material` are now correctly based on `TextFieldProps`. [\#987](https://github.com/vazco/uniforms/issues/987)
+
+## [v3.5.4](https://github.com/vazco/uniforms/tree/v3.5.4) (2021-08-05)
+
+- **Fixed:** Invalid publish occurred. Sorry!
+
+## [v3.5.3](https://github.com/vazco/uniforms/tree/v3.5.3) (2021-08-05)
+
+- **Fixed:** All package paths in `package.json` are now relative. [\#992](https://github.com/vazco/uniforms/issues/992)
+
+## [v3.5.2](https://github.com/vazco/uniforms/tree/v3.5.2) (2021-07-30)
+
+- **Fixed:** All bridge methods are now unified between bridges. [\#957](https://github.com/vazco/uniforms/issues/957)
+- **Fixed:** Incorrect `module` usage in `package.json`. None of the uniforms packages requires special Babel handling anymore (e.g., `meteor.nodeModules.recompile` in Meteor). [\#986](https://github.com/vazco/uniforms/issues/986)
+- **Fixed:** `FieldProps` problems with type unions. [\#971](https://github.com/vazco/uniforms/issues/971)
+- **Optimized:** The `JSONSchemaBridge` is now much faster. [\#957](https://github.com/vazco/uniforms/issues/957)
+
 ## [v3.5.1](https://github.com/vazco/uniforms/tree/v3.5.1) (2021-05-17)
 
 - **Fixed:** Incorrect label placing of `DateField` in `uniforms-material`. [\#961](https://github.com/vazco/uniforms/issues/961)

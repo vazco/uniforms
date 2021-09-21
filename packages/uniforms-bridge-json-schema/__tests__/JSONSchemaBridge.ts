@@ -24,11 +24,13 @@ describe('JSONSchemaBridge', () => {
         type: 'object',
         properties: {
           firstName: { $ref: '#/definitions/firstName' },
+          middleName: { $ref: '#/definitions/middleName' },
           lastName: { $ref: '#/definitions/firstName' },
         },
         required: ['lastName'],
       },
       firstName: { type: 'string', default: 'John' },
+      middleName: { $ref: '#/definitions/lastName' },
       lastName: { type: 'string' },
       recursive: {
         type: 'object',
@@ -470,6 +472,12 @@ describe('JSONSchemaBridge', () => {
     it('returns correct definition (nested with $ref)', () => {
       expect(bridge.getField('personalData.firstName')).toEqual({
         default: 'John',
+        type: 'string',
+      });
+    });
+
+    it('returns correct definition ($ref pointing to $ref)', () => {
+      expect(bridge.getField('personalData.middleName')).toEqual({
         type: 'string',
       });
     });

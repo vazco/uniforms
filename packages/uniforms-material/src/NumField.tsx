@@ -1,11 +1,11 @@
 import { useTheme } from '@material-ui/core';
-import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
+import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 export type NumFieldProps = FieldProps<
   number,
-  StandardTextFieldProps,
+  TextFieldProps,
   { decimal?: boolean; max?: number; min?: number; step?: number }
 >;
 

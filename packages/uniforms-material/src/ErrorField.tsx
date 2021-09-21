@@ -1,4 +1,4 @@
-import type { PropTypes } from '@material-ui/core';
+import { PropTypes } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText, {
   FormHelperTextProps,
@@ -29,7 +29,7 @@ function Error({
       error={!!error}
       fullWidth={fullWidth ?? themeProps?.fullWidth ?? true}
       margin={margin ?? themeProps?.margin ?? 'dense'}
-      variant={variant}
+      variant={variant ?? themeProps?.variant}
     >
       <FormHelperText {...filterDOMProps(props)}>
         {children || errorMessage}

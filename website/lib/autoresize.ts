@@ -19,10 +19,10 @@ function handleResize(
 export function useFrameAutoResize(watch: unknown[]) {
   const [height, setHeight] = useState(300);
   const ref = useRef<HTMLIFrameElement | undefined>();
-  const onLoad = useCallback(() => handleResize(ref, setHeight), [
-    ref,
-    setHeight,
-  ]);
+  const onLoad = useCallback(
+    () => handleResize(ref, setHeight),
+    [ref, setHeight],
+  );
 
   useEffect(() => {
     const id = setInterval(onLoad, 1000);
