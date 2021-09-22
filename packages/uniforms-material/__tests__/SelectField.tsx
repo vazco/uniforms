@@ -67,6 +67,7 @@ describe('@RTL - SelectField tests', () => {
 
     const { container } = render(
       <ThemeProvider theme={theme}>
+        {/* When passing explicit props, TS errors regarding missing variant pop up */}
         {/* @ts-expect-error */}
         <SelectField name="x" {...explicitProps} />
       </ThemeProvider>,
