@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { AutoForm, BaseForm, connectField, useField } from 'uniforms';
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 
@@ -72,6 +72,69 @@ describe('useField', () => {
       ).toBeTruthy();
 
       expect(wrapper.find('input').prop('value')).toBe('');
+    });
+  });
+
+  describe('Array component', () => {
+    const bridge = new JSONSchemaBridge(
+      {
+        type: 'object',
+        properties: {
+          a: { type: 'string' },
+          b: { type: 'array', items: { type: 'string' } },
+        },
+      },
+      () => {},
+    );
+    const createArrayTestComponent = (valueHasChanged: jest.Mock) =>
+      connectField((props: Record<string, any>) => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        useEffect(() => {
+          return valueHasChanged();
+        }, [props.value]);
+        return <div />;
+      });
+    const StringTestComponent = connectField((props: Record<string, any>) => {
+      return (
+        <input
+          value={props.value || ''}
+          onChange={event => {
+            props.onChange(event.target.value);
+          }}
+        />
+      );
+    });
+    it('should have been called once', () => {
+      const valueHasChanged = jest.fn();
+      const ArrayTestComponent = createArrayTestComponent(valueHasChanged);
+
+      mount(
+        <AutoForm schema={bridge}>
+          <StringTestComponent name="a" />
+          <ArrayTestComponent name="b" />
+        </AutoForm>,
+      );
+
+      expect(valueHasChanged).toBeCalledTimes(1);
+    });
+
+    it('should have been called once despite other changes', () => {
+      const valueHasChanged = jest.fn();
+      const ArrayTestComponent = createArrayTestComponent(valueHasChanged);
+
+      const wrapper = mount(
+        <AutoForm schema={bridge}>
+          <StringTestComponent name="a" />
+          <ArrayTestComponent name="b" />
+        </AutoForm>,
+      );
+
+      expect(
+        wrapper
+          .find('input')
+          .simulate('change', { target: { value: 'hello' } }),
+      ).toBeTruthy();
+      expect(valueHasChanged).toBeCalledTimes(1);
     });
   });
 
