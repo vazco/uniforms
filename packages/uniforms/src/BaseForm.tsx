@@ -195,13 +195,7 @@ export class BaseForm<
   onChange(key: string, value: any) {
     // Do not set `changed` before componentDidMount
     if (this.mounted) {
-      const initialValue = this.getContextSchema().getInitialValue(key, {});
-      const currentValue = get(this.getModel(), key);
-      const computedValue =
-        initialValue !== undefined && currentValue === undefined
-          ? initialValue // pretend the current value is equal to the initial value
-          : currentValue;
-      const keys = changedKeys(key, value, computedValue);
+      const keys = changedKeys(key, value, get(this.getModel(), key));
       if (keys.length !== 0) {
         this.setState(state =>
           // If all are already marked, we can skip the update completely.
