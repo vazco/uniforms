@@ -1,6 +1,6 @@
 import get from 'lodash/get';
 import mapValues from 'lodash/mapValues';
-import { ReactNode, useCallback, useEffect, useMemo } from 'react';
+import { ReactNode, useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { joinName } from './joinName';
 import { GuaranteedProps } from './types';
@@ -39,6 +39,7 @@ export function useField<
   options?: { absoluteName?: boolean; initialValue?: boolean },
 ) {
   const context = useForm<Model>();
+  const onChangeCalled = useRef(false);
 
   const name = joinName(options?.absoluteName ? '' : context.name, fieldName);
   const state = mapValues(context.state, (prev, key) => {
@@ -71,6 +72,9 @@ export function useField<
   const id = useMemo(() => context.randomId(), []);
   const onChange = useCallback(
     (value?: Value, key: string = name) => {
+      if (!onChangeCalled.current) {
+        onChangeCalled.current = true;
+      }
       context.onChange(key, value);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -81,7 +85,7 @@ export function useField<
   let initialValue: Value | undefined;
   let value: Value | undefined = props.value ?? valueFromModel;
 
-  if (!changed) {
+  if (!onChangeCalled.current) {
     if (value === undefined) {
       value = context.schema.getInitialValue(name, props);
       initialValue = value;
