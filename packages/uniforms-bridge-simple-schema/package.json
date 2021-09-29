@@ -2,15 +2,13 @@
   "name": "uniforms-bridge-simple-schema",
   "version": "3.6.0",
   "license": "MIT",
-  "main": "./es5/index.js",
+  "main": "./cjs/index.js",
   "module": "./esm/index.js",
   "sideEffects": [
-    "es5/index.js",
-    "es5/register.js",
+    "cjs/index.js",
+    "cjs/register.js",
     "esm/index.js",
     "esm/register.js",
-    "es6/index.js",
-    "es6/register.js",
     "src/index.ts",
     "src/register.ts"
   ],
@@ -27,12 +25,10 @@
     "validation"
   ],
   "files": [
-    "es5/*.d.ts",
-    "es5/*.js",
+    "cjs/*.d.ts",
+    "cjs/*.js",
     "esm/*.d.ts",
     "esm/*.js",
-    "es6/*.d.ts",
-    "es6/*.js",
     "src/*.ts",
     "src/*.tsx"
   ],

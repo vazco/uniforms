@@ -2,15 +2,13 @@
   "name": "uniforms",
   "version": "3.6.0",
   "license": "MIT",
-  "main": "./es5/index.js",
+  "main": "./cjs/index.js",
   "module": "./esm/index.js",
   "sideEffects": [
-    "es5/filterDOMProps.js",
-    "es5/randomIds.js",
+    "cjs/filterDOMProps.js",
+    "cjs/randomIds.js",
     "esm/filterDOMProps.js",
     "esm/randomIds.js",
-    "es6/filterDOMProps.js",
-    "es6/randomIds.js",
     "src/filterDOMProps.ts",
     "src/randomIds.ts"
   ],
@@ -28,12 +26,10 @@
     "validation"
   ],
   "files": [
-    "es5/*.d.ts",
-    "es5/*.js",
+    "cjs/*.d.ts",
+    "cjs/*.js",
     "esm/*.d.ts",
     "esm/*.js",
-    "es6/*.d.ts",
-    "es6/*.js",
     "src/*.ts",
     "src/*.tsx"
   ],

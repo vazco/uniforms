@@ -4,8 +4,7 @@
     "baseUrl": "src",
     "outDir": "esm",
     "rootDir": "src",
-    "target": "es5",
-    "module": "es6",
+    "module": "ES6",
     "tsBuildInfoFile": "../../node_modules/.cache/uniforms-bridge-simple-schema.esm.tsbuildinfo"
   },
   "include": ["src"],
