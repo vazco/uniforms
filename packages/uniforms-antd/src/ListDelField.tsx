@@ -2,6 +2,7 @@ import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
 import Button, { ButtonProps } from 'antd/lib/button';
 import React from 'react';
 import {
+  ConnectedField,
   connectField,
   FieldProps,
   filterDOMProps,
@@ -52,7 +53,12 @@ function ListDel({
   );
 }
 
+// There's no way to tell TypeScript NOT TO expand the type alias. Creating a
+// local type helps, at least in the current version.
+// https://github.com/microsoft/TypeScript/issues/34556
+type ListDelFieldType = ConnectedField<ListDelFieldProps>;
+
 export default connectField<ListDelFieldProps>(ListDel, {
   initialValue: false,
   kind: 'leaf',
-});
+}) as ListDelFieldType;
