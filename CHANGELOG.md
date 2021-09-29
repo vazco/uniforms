@@ -1,3 +1,9 @@
+## [v3.6.1](https://github.com/vazco/uniforms/tree/v3.6.1) (2021-09-29)
+
+- **Fixed:** All components in `uniforms-material` are now respecting the theme correctly. [\#993](https://github.com/vazco/uniforms/issues/993)
+- **Fixed:** Build configuration. [\#1001](https://github.com/vazco/uniforms/issues/1001)
+- **Fixed:** Types of `ListAddField` and `ListDelField` in `uniforms-antd` for `antd@4.16.13`. [\#1004](https://github.com/vazco/uniforms/issues/1004)
+
 ## [v3.6.0](https://github.com/vazco/uniforms/tree/v3.6.0) (2021-09-13)
 
 - **Added:** Explicit form types. [\#1003](https://github.com/vazco/uniforms/issues/1003)
