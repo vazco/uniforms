@@ -1,8 +1,10 @@
+import type { PropTypes } from '@material-ui/core';
 import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
+import useTheme from '@material-ui/core/styles/useTheme';
 import omit from 'lodash/omit';
 import React, { Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
@@ -14,8 +16,10 @@ export type BoolFieldProps = FieldProps<
   CheckboxProps | SwitchProps,
   {
     appearance?: 'checkbox' | 'switch';
+    fullWidth?: boolean;
     helperText?: string;
     legend?: string;
+    margin?: PropTypes.Margin;
     transform?: (label: string) => string;
   }
 >;
@@ -33,11 +37,20 @@ function Bool(props: BoolFieldProps) {
     transform,
     value,
   } = props;
+  const theme = useTheme();
+  const formControlThemeProps = theme.props?.MuiFormControl;
   const SelectionControl =
     appearance === 'checkbox' || appearance === undefined ? Checkbox : Switch;
 
   return wrapField(
-    { fullWidth: true, margin: 'dense', ...props, component: 'fieldset' },
+    {
+      ...(formControlThemeProps?.fullWidth === undefined && {
+        fullWidth: true,
+      }),
+      ...(formControlThemeProps?.margin === undefined && { margin: 'dense' }),
+      ...props,
+      component: 'fieldset',
+    },
     legend && (
       <FormLabel component="legend" htmlFor={name}>
         {legend}
@@ -57,7 +70,7 @@ function Bool(props: BoolFieldProps) {
             }
             ref={inputRef as Ref<HTMLButtonElement>}
             value={name}
-            {...omit(filterDOMProps(props), ['helperText'])}
+            {...omit(filterDOMProps(props), ['helperText', 'fullWidth'])}
           />
         }
         label={transform ? transform(label as string) : label}

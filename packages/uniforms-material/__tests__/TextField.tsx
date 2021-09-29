@@ -1,4 +1,6 @@
 import TextFieldMaterial from '@material-ui/core/TextField';
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import ThemeProvider from '@material-ui/styles/ThemeProvider/ThemeProvider';
 import { screen } from '@testing-library/react';
 import React from 'react';
 import { TextField } from 'uniforms-material';
@@ -38,6 +40,69 @@ describe('@RTL - TextField tests', () => {
     );
 
     expect(screen.queryByText(errorMessage)).not.toBeInTheDocument();
+  });
+
+  test('<TextField> - default props are not passed when MUI theme props are specified', () => {
+    const theme = createMuiTheme({
+      props: { MuiTextField: { fullWidth: false, margin: 'normal' } },
+    });
+    const { container } = render(
+      <ThemeProvider theme={theme}>
+        <TextField name="x" />
+      </ThemeProvider>,
+      { x: { type: String } },
+    );
+
+    const elements = container.getElementsByClassName(
+      'MuiFormControl-marginNormal',
+    );
+    expect(elements).toHaveLength(1);
+    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
+      false,
+    );
+  });
+
+  test('<TextField> - default props are passed when MUI theme props are absent', () => {
+    const theme = createMuiTheme({});
+    const { container } = render(
+      <ThemeProvider theme={theme}>
+        <TextField name="x" />
+      </ThemeProvider>,
+      { x: { type: String } },
+    );
+
+    const elements = container.getElementsByClassName(
+      'MuiFormControl-marginDense',
+    );
+    expect(elements).toHaveLength(1);
+    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
+      true,
+    );
+  });
+
+  test('<TextField> - explicit props are passed when MUI theme props are specified', () => {
+    const theme = createMuiTheme({
+      props: { MuiTextField: { fullWidth: true, margin: 'dense' } },
+    });
+    const explicitProps = {
+      fullWidth: false,
+      margin: 'normal' as const,
+    };
+
+    const { container } = render(
+      <ThemeProvider theme={theme}>
+        <TextField name="x" {...explicitProps} />
+      </ThemeProvider>,
+      { x: { type: String } },
+    );
+
+    const elements = container.getElementsByClassName(
+      'MuiFormControl-marginNormal',
+    );
+    expect(elements).toHaveLength(1);
+    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
+      false,
+    );
   });
 });
 

@@ -1,3 +1,4 @@
+import { useTheme } from '@material-ui/core';
 import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -55,6 +56,8 @@ const escape = (x: string) => base64(encodeURIComponent(x)).replace(/=+$/, '');
 
 // eslint-disable-next-line complexity
 function Select(props: SelectFieldProps) {
+  const theme = useTheme();
+  const formControlThemeProps = theme.props?.MuiFormControl;
   const value = props.value ?? '';
 
   if (props.checkboxes) {
@@ -130,28 +133,28 @@ function Select(props: SelectFieldProps) {
       );
 
     return wrapField(
-      { ...props, component: 'fieldset' },
+      { ...formControlThemeProps, ...props, component: 'fieldset' },
       (legend || label) && (
         <FormLabel component="legend">{legend || label}</FormLabel>
       ),
       children,
     );
   }
-
+  const textFieldThemeProps = theme.props?.MuiTextField;
   const {
     allowedValues,
     disabled,
     error,
     errorMessage,
     fieldType,
-    fullWidth = true,
+    fullWidth = textFieldThemeProps?.fullWidth ?? true,
     helperText,
     id,
     InputLabelProps,
     inputProps,
     label,
     labelProps,
-    margin = 'dense',
+    margin = textFieldThemeProps?.margin ?? 'dense',
     name,
     native,
     onChange,
