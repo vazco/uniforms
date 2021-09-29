@@ -39,7 +39,10 @@ export function useField<
   options?: { absoluteName?: boolean; initialValue?: boolean },
 ) {
   const context = useForm<Model>();
-  let onChangeCalled: React.MutableRefObject<boolean> | undefined;
+
+  const usesInitialValue = options?.initialValue !== false;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const onChangeCalled = usesInitialValue ? useRef(false) : { current: false };
 
   const name = joinName(options?.absoluteName ? '' : context.name, fieldName);
   const state = mapValues(context.state, (prev, key) => {
@@ -72,9 +75,7 @@ export function useField<
   const id = useMemo(() => context.randomId(), []);
   const onChange = useCallback(
     (value?: Value, key: string = name) => {
-      if (onChangeCalled) {
-        onChangeCalled.current = true;
-      }
+      onChangeCalled.current = true;
       context.onChange(key, value);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -85,9 +86,7 @@ export function useField<
   let initialValue: Value | undefined;
   let value: Value | undefined = props.value ?? valueFromModel;
 
-  if (options?.initialValue !== false) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    onChangeCalled = useRef(false);
+  if (usesInitialValue) {
     if (!onChangeCalled.current) {
       if (value === undefined) {
         value = context.schema.getInitialValue(name, props);
