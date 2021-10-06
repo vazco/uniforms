@@ -75,7 +75,6 @@ module.exports = {
     prism: {
       theme: require('prism-react-renderer/themes/oceanicNext'),
     },
-    sidebarCollapsible: false,
   },
   favicon: 'favicon.ico',
   plugins: [path.resolve(__dirname, './plugins/docusaurus-plugin-hotjar')],
@@ -89,6 +88,7 @@ module.exports = {
         },
         pages: { path: './pages' },
         theme: { customCss: path.join(__dirname, './src/theme/index.css') },
+        sidebarCollapsible: false,
       },
     ],
   ],
