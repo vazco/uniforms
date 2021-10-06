@@ -14,6 +14,7 @@ describe('SimpleSchemaBridge', () => {
         a: { type: Object, label: name },
         'a.b': { type: Object, label: name },
         'a.b.c': { type: String, label: name },
+        aa: { type: String, uniforms: { type: 'password' } },
         d: { type: String, defaultValue: 'D' },
         e: { type: String, allowedValues: ['E'] },
         f: { type: Number, min: 42 },
@@ -286,6 +287,14 @@ describe('SimpleSchemaBridge', () => {
     it('works with transform from props', () => {
       expect(bridge.getProps('p', { transform: () => {} })).toEqual({
         label: 'P',
+        required: true,
+      });
+    });
+
+    it('works with type', () => {
+      expect(bridge.getProps('aa')).toEqual({
+        label: 'AA',
+        type: 'password',
         required: true,
       });
     });

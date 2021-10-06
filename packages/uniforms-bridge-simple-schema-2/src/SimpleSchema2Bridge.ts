@@ -4,7 +4,7 @@ import memoize from 'lodash/memoize';
 import SimpleSchema from 'simpl-schema';
 import { Bridge, joinName } from 'uniforms';
 
-const propsToRemove = ['optional', 'type', 'uniforms'];
+const propsToRemove = ['optional', 'uniforms'];
 
 export default class SimpleSchema2Bridge extends Bridge {
   constructor(public schema: SimpleSchema) {
@@ -91,8 +91,12 @@ export default class SimpleSchema2Bridge extends Bridge {
 
   // eslint-disable-next-line complexity
   getProps(name: string, fieldProps?: Record<string, any>) {
-    const props = Object.assign({}, this.getField(name));
+    const field = this.getField(name);
+    const props = Object.assign({}, field);
     props.required = !props.optional;
+
+    const fieldType = field.type;
+    delete props.type;
 
     if (
       typeof props.uniforms === 'function' ||
@@ -103,7 +107,7 @@ export default class SimpleSchema2Bridge extends Bridge {
       Object.assign(props, props.uniforms);
     }
 
-    if (props.type === Number) {
+    if (fieldType === Number) {
       props.decimal = true;
     }
 
@@ -124,7 +128,7 @@ export default class SimpleSchema2Bridge extends Bridge {
         props.allowedValues = Object.keys(options);
         props.transform = (value: string) => (options as OptionDict)[value];
       }
-    } else if (props.type === Array) {
+    } else if (fieldType === Array) {
       try {
         const itemProps = this.getProps(`${name}.$`, fieldProps);
         if (itemProps.allowedValues && !fieldProps?.allowedValues) {
