@@ -117,14 +117,15 @@ import { ValidatedForm } from 'uniforms'; // Or from the theme package.
 It's based on `BaseForm` and extends its functionality by enabling automatic form generation.
 If you provide a schema, the fields will be automatically rendered.
 However, `QuickForm` is not self-managed, so you won't be able to type anything until there is no `onChange` handler.
+You can customize which `AutoField` should be used with [`AutoField.componentDetectorContext`](/docs/uth-autofield-algorithm#overriding-autofield).
 
 ##### Props:
 
-|     Name      |                                        Description                                        |
-| :-----------: | :---------------------------------------------------------------------------------------: |
-|  `autoField`  |  Custom `AutoField`. It should be anything that will pass through `React.createElement`.  |
-| `errorsField` | Custom `ErrorsField`. It should be anything that will pass through `React.createElement`. |
-| `submitField` | Custom `SubmitField`. It should be anything that will pass through `React.createElement`. |
+|     Name      |                                        Description                                         |
+| :-----------: | :----------------------------------------------------------------------------------------: |
+|  `autoField`  | Custom `AutoField` (deprecated, see [#980](https://github.com/vazco/uniforms/issues/980)). |
+| `errorsField` | Custom `ErrorsField`. It should be anything that will pass through `React.createElement`.  |
+| `submitField` | Custom `SubmitField`. It should be anything that will pass through `React.createElement`.  |
 
 **Note:** All `BaseForm` props are also accepted and all methods are available.
 

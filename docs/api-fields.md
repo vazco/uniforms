@@ -54,20 +54,22 @@ import { AutoField } from 'uniforms-unstyled';
 
 ### `AutoFields`
 
-`AutoFields` is basically a set of rendered `AutoFields`.
-By default, the rendered fields will be `AutoFields` in a chosen theme.
-However, you can replace the standard `AutoField` with a custom one through the `autoField` property.
+`AutoFields` is basically a set of rendered `AutoField`s.
+By default, the rendered fields will be `AutoField` in a chosen theme.
+However, you can replace the standard `AutoField` with [`AutoField.componentDetectorContext`](/docs/uth-autofield-algorithm#overriding-autofield).
+There is also an `autoField` prop, but [it's deprecated](https://github.com/vazco/uniforms/issues/980) and will be removed in a future release.
+
 The `element` property defines a wrapping component.
 E.g. you want to group your fields inside a section, just do `element="section"`. The default one is `div`.
 
 ##### Props:
 
-|     Name     |       Default        |           Description           |
-| :----------: | :------------------: | :-----------------------------: |
-| `autoField`  | Standard `AutoField` | `AutoField` Component to render |
-|  `element`   |        `div`         |         Fields wrapper          |
-|   `fields`   |  All schema fields   |    List of fields to render     |
-| `omitFields` |         `[]`         |     List of fields to omit      |
+|     Name     |       Default        |                                        Description                                         |
+| :----------: | :------------------: | :----------------------------------------------------------------------------------------: |
+| `autoField`  | Standard `AutoField` | `AutoField` component to render (see [#980](https://github.com/vazco/uniforms/issues/980)) |
+|  `element`   |        `div`         |                                       Fields wrapper                                       |
+|   `fields`   |  All schema fields   |                                  List of fields to render                                  |
+| `omitFields` |         `[]`         |                                   List of fields to omit                                   |
 
 ##### Props usage:
 
