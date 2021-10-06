@@ -86,7 +86,8 @@ export default class SimpleSchemaBridge extends Bridge {
 
   // eslint-disable-next-line complexity
   getProps(name: string, fieldProps?: Record<string, any>) {
-    const props = Object.assign({}, this.getField(name));
+    const field = this.getField(name);
+    const props = Object.assign({}, field);
     props.required = !props.optional;
 
     if (
@@ -135,6 +136,10 @@ export default class SimpleSchemaBridge extends Bridge {
         delete props[key];
       }
     });
+
+    if (field.uniforms?.type) {
+      props.type = field.uniforms?.type;
+    }
 
     return props;
   }
