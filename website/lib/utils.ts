@@ -3,7 +3,7 @@ import LZString from 'lz-string';
 
 const URL_KEYS = ['preset', 'props', 'theme'];
 
-const compress = (string: string) =>
+export const compress = (string: string) =>
   LZString.compressToBase64(string)
     .replace(/\+/g, '-') // Convert '+' to '-'.
     .replace(/\//g, '_') // Convert '/' to '_'.
