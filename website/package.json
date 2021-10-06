@@ -7,8 +7,8 @@
   },
   "dependencies": {
     "@ant-design/icons": "4.4.0",
-    "@docusaurus/core": "2.0.0-beta.0",
-    "@docusaurus/preset-classic": "2.0.0-beta.0",
+    "@docusaurus/core": "2.0.0-beta.6",
+    "@docusaurus/preset-classic": "2.0.0-beta.6",
     "@material-ui/core": "4.11.2",
     "@material-ui/icons": "4.11.2",
     "ajv": "8.0.5",
