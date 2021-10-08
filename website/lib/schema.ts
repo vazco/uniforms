@@ -63,7 +63,7 @@ const propsSchema = new SimpleSchema({
     type: String,
     custom() {
       try {
-        eval(`(${this.value})`);
+        eval(`(${this.value ?? ''})`);
         return undefined;
       } catch (error) {
         MessageBox.defaults({
