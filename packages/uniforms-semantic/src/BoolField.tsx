@@ -53,7 +53,7 @@ function Bool({
           type="checkbox"
         />
 
-        {!!label && <label htmlFor={id}>{label}</label>}
+        <label htmlFor={id}>{label || null}</label>
       </div>
 
       {!!(error && showInlineError) && (
