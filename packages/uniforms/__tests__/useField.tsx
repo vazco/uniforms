@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { BaseForm, useField } from 'uniforms';
+import { AutoForm, BaseForm, connectField, useField } from 'uniforms';
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 
 import mount from './_mount';
@@ -11,6 +11,7 @@ describe('useField', () => {
       properties: {
         a: { type: 'string' },
         b: { type: 'object', properties: { c: { type: 'string' } } },
+        d: { type: 'number', default: 4 },
       },
     },
     () => {},
@@ -27,6 +28,51 @@ describe('useField', () => {
 
   it('is a function', () => {
     expect(useField).toBeInstanceOf(Function);
+  });
+
+  describe('when called with initialValue', () => {
+    const TestComponent = connectField((props: Record<string, any>) => {
+      return (
+        <input
+          value={props.value || ''}
+          onChange={event => {
+            props.onChange(event.target.value);
+          }}
+        />
+      );
+    });
+
+    it('applies default value', () => {
+      const wrapper = mount(
+        <AutoForm schema={bridge}>
+          <TestComponent name="d" />
+        </AutoForm>,
+      );
+
+      expect(wrapper.find('input').prop('value')).toBe(4);
+
+      expect(
+        wrapper
+          .find('input')
+          .simulate('change', { target: { value: undefined } }),
+      ).toBeTruthy();
+    });
+
+    it('does not apply default value after first change', () => {
+      const wrapper = mount(
+        <AutoForm schema={bridge}>
+          <TestComponent name="d" />
+        </AutoForm>,
+      );
+
+      expect(
+        wrapper
+          .find('input')
+          .simulate('change', { target: { value: undefined } }),
+      ).toBeTruthy();
+
+      expect(wrapper.find('input').prop('value')).toBe('');
+    });
   });
 
   describe('when called with `absoluteName`', () => {

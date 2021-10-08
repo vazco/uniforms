@@ -1,6 +1,6 @@
 import get from 'lodash/get';
 import mapValues from 'lodash/mapValues';
-import { ReactNode, useCallback, useEffect, useMemo } from 'react';
+import { ReactNode, useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { joinName } from './joinName';
 import { GuaranteedProps } from './types';
@@ -40,6 +40,10 @@ export function useField<
 ) {
   const context = useForm<Model>();
 
+  const usesInitialValue = options?.initialValue !== false;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const onChangeCalled = usesInitialValue ? useRef(false) : { current: false };
+
   const name = joinName(options?.absoluteName ? '' : context.name, fieldName);
   const state = mapValues(context.state, (prev, key) => {
     const next = props[key];
@@ -71,6 +75,7 @@ export function useField<
   const id = useMemo(() => context.randomId(), []);
   const onChange = useCallback(
     (value?: Value, key: string = name) => {
+      onChangeCalled.current = true;
       context.onChange(key, value);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -81,14 +86,15 @@ export function useField<
   let initialValue: Value | undefined;
   let value: Value | undefined = props.value ?? valueFromModel;
 
-  if (value === undefined) {
-    value = context.schema.getInitialValue(name, props);
-    initialValue = value;
-  } else if (props.value !== undefined && props.value !== valueFromModel) {
-    initialValue = props.value;
-  }
-
-  if (options?.initialValue !== false) {
+  if (usesInitialValue) {
+    if (!onChangeCalled.current) {
+      if (value === undefined) {
+        value = context.schema.getInitialValue(name, props);
+        initialValue = value;
+      } else if (props.value !== undefined && props.value !== valueFromModel) {
+        initialValue = props.value;
+      }
+    }
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
       const required = props.required ?? schemaProps.required;
