@@ -7,6 +7,7 @@ describe('SimpleSchema2Bridge', () => {
     a: { type: Object },
     'a.b': { type: Object },
     'a.b.c': { type: String },
+    aa: { type: String, uniforms: { type: 'password' } },
     d: { type: String, defaultValue: 'D' },
     e: { type: String, allowedValues: ['E'] },
     f: { type: Number, min: 42 },
@@ -278,12 +279,29 @@ describe('SimpleSchema2Bridge', () => {
         required: true,
       });
     });
+
+    it('works with type', () => {
+      expect(bridge.getProps('aa')).toEqual({
+        label: 'Aa',
+        type: 'password',
+        required: true,
+      });
+    });
+
+    it('returns no field type', () => {
+      expect(bridge.getProps('a')).not.toHaveProperty('type');
+      expect(bridge.getProps('j')).not.toHaveProperty('type');
+      expect(bridge.getProps('d')).not.toHaveProperty('type');
+      expect(bridge.getProps('f')).not.toHaveProperty('type');
+      expect(bridge.getProps('i')).not.toHaveProperty('type');
+    });
   });
 
   describe('#getSubfields', () => {
     it('works on top level', () => {
       expect(bridge.getSubfields()).toEqual([
         'a',
+        'aa',
         'd',
         'e',
         'f',

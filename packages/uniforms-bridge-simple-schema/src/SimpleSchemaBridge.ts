@@ -5,7 +5,7 @@ import memoize from 'lodash/memoize';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Bridge, joinName } from 'uniforms';
 
-const propsToRemove = ['optional', 'type', 'uniforms'];
+const propsToRemove = ['optional', 'uniforms'];
 
 export default class SimpleSchemaBridge extends Bridge {
   constructor(public schema: SimpleSchema) {
@@ -86,7 +86,7 @@ export default class SimpleSchemaBridge extends Bridge {
 
   // eslint-disable-next-line complexity
   getProps(name: string, fieldProps?: Record<string, any>) {
-    const props = Object.assign({}, this.getField(name));
+    const { type: fieldType, ...props } = this.getField(name);
     props.required = !props.optional;
 
     if (
@@ -115,7 +115,7 @@ export default class SimpleSchemaBridge extends Bridge {
         props.allowedValues = Object.keys(options);
         props.transform = (value: string) => (options as OptionDict)[value];
       }
-    } else if (props.type === Array) {
+    } else if (fieldType === Array) {
       try {
         const itemProps = this.getProps(`${name}.$`, fieldProps);
         if (itemProps.allowedValues && !fieldProps?.allowedValues) {

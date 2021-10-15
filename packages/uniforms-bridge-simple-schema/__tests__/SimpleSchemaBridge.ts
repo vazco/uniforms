@@ -14,6 +14,7 @@ describe('SimpleSchemaBridge', () => {
         a: { type: Object, label: name },
         'a.b': { type: Object, label: name },
         'a.b.c': { type: String, label: name },
+        aa: { type: String, uniforms: { type: 'password' } },
         d: { type: String, defaultValue: 'D' },
         e: { type: String, allowedValues: ['E'] },
         f: { type: Number, min: 42 },
@@ -288,6 +289,22 @@ describe('SimpleSchemaBridge', () => {
         label: 'P',
         required: true,
       });
+    });
+
+    it('works with type', () => {
+      expect(bridge.getProps('aa')).toEqual({
+        label: 'AA',
+        type: 'password',
+        required: true,
+      });
+    });
+
+    it('returns no field type', () => {
+      expect(bridge.getProps('a')).not.toHaveProperty('type');
+      expect(bridge.getProps('j')).not.toHaveProperty('type');
+      expect(bridge.getProps('d')).not.toHaveProperty('type');
+      expect(bridge.getProps('f')).not.toHaveProperty('type');
+      expect(bridge.getProps('i')).not.toHaveProperty('type');
     });
   });
 
