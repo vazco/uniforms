@@ -298,6 +298,14 @@ describe('SimpleSchemaBridge', () => {
         required: true,
       });
     });
+
+    it('returns no field type', () => {
+      expect(bridge.getProps('a')).not.toContain({ type: Object });
+      expect(bridge.getProps('j')).not.toContain({ type: Array });
+      expect(bridge.getProps('d')).not.toContain({ type: String });
+      expect(bridge.getProps('f')).not.toContain({ type: Number });
+      expect(bridge.getProps('i')).not.toContain({ type: Date });
+    });
   });
 
   describe('#getSubfields', () => {
