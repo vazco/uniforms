@@ -162,6 +162,31 @@ Below is an example of these implications:
 }
 ```
 
+### Note on Bluebird
+
+If you're using the [`bluebird`](https://www.npmjs.com/package/bluebird) package, you may have seen the following warning ([docs](http://bluebirdjs.com/docs/warning-explanations.html#warning-a-promise-was-rejected-with-a-non-error)):
+
+> Warning: a promise was rejected with a non-error [object Object]
+
+In order to fix it, your `validator` function should return a `Error`-like object instead of an object with a single `details` property. The cleanest would be to create a custom `ValidationError` class:
+
+```ts
+import { ErrorObject } from 'ajv';
+
+class ValidationError extends Error {
+  name = 'ValidationError';
+
+  constructor(public details: ErrorObject[]) {
+    super('ValidationError');
+  }
+}
+
+// Usage.
+return validator.errors?.length ? new ValidationError(validator.errors) : null;
+```
+
+See [#1047](https://github.com/vazco/uniforms/discussions/1047) for more details.
+
 ## `SimpleSchema2Bridge`
 
 ```tsx
