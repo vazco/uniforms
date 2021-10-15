@@ -289,11 +289,11 @@ describe('SimpleSchema2Bridge', () => {
     });
 
     it('returns no field type', () => {
-      expect(bridge.getProps('a')).not.toMatchObject({ type: Object });
-      expect(bridge.getProps('j')).not.toMatchObject({ type: Array });
-      expect(bridge.getProps('d')).not.toMatchObject({ type: String });
-      expect(bridge.getProps('f')).not.toMatchObject({ type: Number });
-      expect(bridge.getProps('i')).not.toMatchObject({ type: Date });
+      expect(bridge.getProps('a')).not.toHaveProperty('type');
+      expect(bridge.getProps('j')).not.toHaveProperty('type');
+      expect(bridge.getProps('d')).not.toHaveProperty('type');
+      expect(bridge.getProps('f')).not.toHaveProperty('type');
+      expect(bridge.getProps('i')).not.toHaveProperty('type');
     });
   });
 
