@@ -1,3 +1,9 @@
+## [v3.6.2](https://github.com/vazco/uniforms/tree/v3.6.2) (2021-10-15)
+
+- **Fixed:** Handling of `initialValue` in `NumField`. [\#1004](https://github.com/vazco/uniforms/issues/1004)
+- **Fixed:** Handling of `label` in `BoolField` in `uniforms-semantic`. [\#1042](https://github.com/vazco/uniforms/issues/1042)
+- **Fixed:** Handling of `type` in both SimpleSchema-based bridges. [\#1039](https://github.com/vazco/uniforms/issues/1039)
+
 ## [v3.6.1](https://github.com/vazco/uniforms/tree/v3.6.1) (2021-09-29)
 
 - **Fixed:** All components in `uniforms-material` are now respecting the theme correctly. [\#993](https://github.com/vazco/uniforms/issues/993)
