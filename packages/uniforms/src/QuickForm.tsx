@@ -3,6 +3,9 @@ import React, { ComponentType } from 'react';
 import { BaseForm, BaseFormProps, BaseFormState } from './BaseForm';
 
 export type QuickFormProps<Model> = BaseFormProps<Model> & {
+  /**
+   * @deprecated
+   */
   autoField?: ComponentType<{ name: string }>;
   errorsField?: ComponentType;
   submitField?: ComponentType;
