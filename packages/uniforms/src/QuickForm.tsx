@@ -21,18 +21,14 @@ export function Quick<Base extends typeof BaseForm>(Base: Base) {
     static displayName = `Quick${Base.displayName}`;
 
     getNativeFormProps() {
-      const superProps = super.getNativeFormProps();
-      type ChildFields = {
-        autoField?: React.ComponentType<{ name: string }>;
-        errorsField?: React.ComponentType<{}>;
-        submitField?: React.ComponentType<{}>;
-      };
+      const _props = super.getNativeFormProps();
       const {
         autoField: AutoField = this.getAutoField(),
         errorsField: ErrorsField = this.getErrorsField(),
         submitField: SubmitField = this.getSubmitField(),
         ...props
-      }: typeof superProps & ChildFields = superProps;
+      }: typeof _props &
+        Pick<Props, 'autoField' | 'errorsField' | 'submitField'> = _props;
 
       if (!props.children) {
         props.children = this.getContextSchema()
