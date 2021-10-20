@@ -39,12 +39,13 @@ export function useField<
   options?: { absoluteName?: boolean; initialValue?: boolean },
 ) {
   const context = useForm<Model>();
+  const name = joinName(options?.absoluteName ? '' : context.name, fieldName);
+  const field = context.schema.getField(name);
 
   const usesInitialValue = options?.initialValue !== false;
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const onChangeCalled = usesInitialValue ? useRef(false) : { current: false };
 
-  const name = joinName(options?.absoluteName ? '' : context.name, fieldName);
   const state = mapValues(context.state, (prev, key) => {
     const next = props[key];
     return next !== null && next !== undefined ? !!next : prev;
@@ -53,7 +54,6 @@ export function useField<
   const changed = !!get(context.changedMap, name);
   const error = context.schema.getError(name, context.error);
   const errorMessage = context.schema.getErrorMessage(name, context.error);
-  const field = context.schema.getField(name);
   const fieldType = context.schema.getType(name);
   const fields = context.schema.getSubfields(name);
   const schemaProps = context.schema.getProps(name, { ...state, ...props });
