@@ -80,6 +80,8 @@ export class BaseForm<
       mode !== undefined && this.props.modelTransform
         ? this.props.modelTransform(mode, model)
         : model;
+
+    this.formRef = this;
   }
 
   componentDidMount() {
@@ -102,12 +104,14 @@ export class BaseForm<
   change: (key: string, value: any) => void;
   submit: (event?: SyntheticEvent) => Promise<any>;
   randomId: () => string;
+  formRef: BaseForm<Model>;
 
   getContext(): Context<Model> {
     return {
       changed: this.state.changed,
       changedMap: this.state.changedMap,
       error: this.getContextError(),
+      formRef: this.getContextFormRef(),
       model: this.getContextModel(),
       name: this.getContextName(),
       onChange: this.getContextOnChange(),
@@ -115,9 +119,9 @@ export class BaseForm<
       randomId: this.randomId,
       schema: this.getContextSchema(),
       state: this.getContextState(),
+      submitted: this.state.submitted,
       submitting: this.state.submitting,
       validating: false,
-      submitted: this.state.submitted,
     };
   }
 
@@ -127,6 +131,10 @@ export class BaseForm<
 
   getContextError(): Context<Model>['error'] {
     return this.props.error;
+  }
+
+  getContextFormRef(): Context<Model>['formRef'] {
+    return this.formRef;
   }
 
   getContextModel(): Context<Model>['model'] {
