@@ -56,6 +56,7 @@ describe('BaseForm', () => {
       submitted: false,
       submitting: false,
       validating: false,
+      formRef: expect.any(BaseForm),
     });
   });
 

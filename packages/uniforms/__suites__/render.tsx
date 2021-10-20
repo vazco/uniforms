@@ -1,7 +1,7 @@
 import { render as renderOnScreen } from '@testing-library/react';
 import React, { ReactElement } from 'react';
 import SimpleSchema, { SimpleSchemaDefinition } from 'simpl-schema';
-import { context, Context, randomIds } from 'uniforms';
+import { BaseForm, context, Context, randomIds } from 'uniforms';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 
 const randomId = randomIds();
@@ -33,6 +33,7 @@ export function render(
       showInlineError: false,
       ...contextValueExtension?.state,
     },
+    formRef: {} as BaseForm<any>,
   };
 
   return renderOnScreen(element, {
