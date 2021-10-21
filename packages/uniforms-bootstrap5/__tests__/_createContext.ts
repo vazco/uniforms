@@ -31,7 +31,7 @@ export default function createContext(
         showInlineError: false,
         ...context?.state,
       },
-      formRef: {} as BaseForm<any>,
+      formRef: {} as BaseForm<unknown>,
     },
   };
 }

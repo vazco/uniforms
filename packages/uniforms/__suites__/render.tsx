@@ -33,7 +33,7 @@ export function render(
       showInlineError: false,
       ...contextValueExtension?.state,
     },
-    formRef: {} as BaseForm<any>,
+    formRef: {} as BaseForm<unknown>,
   };
 
   return renderOnScreen(element, {
