@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "parcel build index.html",
-    "start": "parcel serve index.html"
+    "start": "parcel serve index.html ../package.json"
   },
   "dependencies": {
     "@ant-design/icons": "4.4.0",
