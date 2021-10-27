@@ -4,7 +4,14 @@
   "license": "MIT",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
-  "sideEffects": false,
+  "sideEffects": [
+    "cjs/index.js",
+    "cjs/register.js",
+    "esm/index.js",
+    "esm/register.js",
+    "src/index.ts",
+    "src/register.ts"
+  ],
   "description": "JSONSchema schema bridge for uniforms.",
   "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-bridge-json-schema",
   "bugs": "https://github.com/vazco/uniforms/issues",
