@@ -8,7 +8,7 @@
 /packages/*/esm
 /packages/*/cjs
 /packages/*/node_modules
-/reproductions/.cache
+/reproductions/.parcel-cache
 /reproductions/dist
 /reproductions/node_modules
 /website/.cache-loader
