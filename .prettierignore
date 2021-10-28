@@ -1,4 +1,5 @@
 /.idea
+/.parcel-cache
 /coverage
 /lerna-debug.log
 /lerna.json
@@ -8,7 +9,6 @@
 /packages/*/cjs
 /packages/*/esm
 /packages/*/node_modules
-/reproductions/.parcel-cache
 /reproductions/dist
 /reproductions/node_modules
 /website/.cache-loader
