@@ -50,8 +50,9 @@ export function Auto<Base extends typeof ValidatedQuickForm>(Base: Base) {
       super.componentDidUpdate(prevProps, prevState, snapshot);
     }
 
-    getNativeFormProps(): Record<string, any> {
-      return omit(super.getNativeFormProps(), ['onChangeModel']);
+    getNativeFormProps() {
+      const props = super.getNativeFormProps();
+      return omit(props, ['onChangeModel']) as typeof props;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

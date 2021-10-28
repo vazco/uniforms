@@ -69,12 +69,13 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
       };
     }
 
-    getNativeFormProps(): Record<string, any> {
-      return omit(super.getNativeFormProps(), [
+    getNativeFormProps() {
+      const props = super.getNativeFormProps();
+      return omit(props, [
         'onValidate',
         'validate',
         'validator',
-      ]);
+      ]) as typeof props;
     }
 
     componentDidUpdate(prevProps: Props, prevState: State, snapshot: never) {

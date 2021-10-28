@@ -166,7 +166,11 @@ export class BaseForm<
     return model;
   }
 
-  getNativeFormProps(): Record<string, any> {
+  getNativeFormProps(): {
+    [key: string]: unknown;
+    onSubmit: BaseForm<Model, Props, State>['onSubmit'];
+    key: string;
+  } {
     const props = omit(this.props, [
       'autosave',
       'autosaveDelay',
