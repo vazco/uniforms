@@ -1,4 +1,4 @@
-import { Context, randomIds } from 'uniforms';
+import { BaseForm, Context, randomIds } from 'uniforms';
 
 import createSchema from './_createSchema';
 
@@ -31,6 +31,7 @@ export default function createContext(
         showInlineError: false,
         ...context?.state,
       },
+      formRef: {} as BaseForm<unknown>,
     },
   };
 }

@@ -23,7 +23,7 @@ export type Component = ComponentType<any> | ReturnType<typeof connectField>;
 /** @internal */
 export type ComponentDetector = (
   props: ReturnType<typeof useField>[0],
-  uniforms: Context<unknown>,
+  uniforms: Context<Record<string, unknown>>,
 ) => Component;
 
 export function createAutoField(defaultComponentDetector: ComponentDetector) {

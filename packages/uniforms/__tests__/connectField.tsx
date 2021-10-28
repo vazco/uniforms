@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { SimpleSchema } from 'simpl-schema';
-import { Context, connectField, randomIds } from 'uniforms';
+import { Context, connectField, randomIds, BaseForm } from 'uniforms';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
 
 import mount from './_mount';
@@ -52,6 +52,7 @@ describe('connectField', () => {
       submitted: false,
       submitting: false,
       validating: false,
+      formRef: {} as BaseForm<unknown>,
     } as Context<any>,
   };
 

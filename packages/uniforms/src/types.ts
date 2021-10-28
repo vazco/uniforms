@@ -1,5 +1,6 @@
 import { HTMLProps, ReactNode, SyntheticEvent } from 'react';
 
+import { BaseForm } from './BaseForm';
 import { Bridge } from './Bridge';
 
 export type ChangedMap<T> = T extends object
@@ -10,6 +11,7 @@ export type Context<Model> = {
   changed: boolean;
   changedMap: ChangedMap<Model>;
   error: any;
+  formRef: BaseForm<Model>;
   model: DeepPartial<Model>;
   name: string[];
   onChange: (key: string, value: any) => void;

@@ -108,6 +108,7 @@ export class BaseForm<
       changed: this.state.changed,
       changedMap: this.state.changedMap,
       error: this.getContextError(),
+      formRef: this,
       model: this.getContextModel(),
       name: this.getContextName(),
       onChange: this.getContextOnChange(),
@@ -115,9 +116,9 @@ export class BaseForm<
       randomId: this.randomId,
       schema: this.getContextSchema(),
       state: this.getContextState(),
+      submitted: this.state.submitted,
       submitting: this.state.submitting,
       validating: false,
-      submitted: this.state.submitted,
     };
   }
 
