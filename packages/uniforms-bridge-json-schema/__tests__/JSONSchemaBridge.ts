@@ -915,11 +915,9 @@ describe('JSONSchemaBridge', () => {
   describe('#filterDOMProps', () => {
     const props = bridge.getProps('arrayWithAllOf');
     const filteredProps = filterDOMProps(props);
-    it('filters minCount', () => {
-      expect(filteredProps).not.toHaveProperty('minCount');
-    });
-    it('filters maxCount', () => {
-      expect(filteredProps).not.toHaveProperty('maxCount');
+    it.each(['minCount', 'maxCount'])('filters %s', keyword => {
+      expect(props).toHaveProperty(keyword);
+      expect(filteredProps).not.toHaveProperty(keyword);
     });
   });
 });
