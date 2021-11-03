@@ -292,6 +292,29 @@ const MyForm = ({ schema, onSubmit }) => {
 };
 ```
 
+You can do the same by using the [`useForm`](/docs/api-context-data#accessing-context-data) hook and the [`formRef`](/docs/api-context-data#formref) property.
+
+```tsx
+function FormControls() {
+  const { formRef } = useForm();
+
+  return (
+    <>
+      <button onClick={() => formRef.reset()}>Reset</button>
+      <button onClick={() => formRef.submit()}>Submit</button>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <AutoForm>
+      <FormControls />
+    </AutoForm>
+  );
+}
+```
+
 All available methods:
 
 #### `change(key, value)`
