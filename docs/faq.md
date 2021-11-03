@@ -120,7 +120,7 @@ You change the way your form validates by setting `validate` prop:
 
 ### How can I reset my form state?
 
-You can use [React `ref` prop](https://facebook.github.io/react/docs/more-about-refs.html) to manually access form methods.
+You can use [React `ref` prop](https://facebook.github.io/react/docs/more-about-refs.html) or [`formRef`](/docs/api-context-data#formref) to manually access form methods.
 
 These methods are:
 
@@ -145,6 +145,29 @@ const MyForm = ({ schema, onSubmit }) => {
     </section>
   );
 };
+```
+
+or the hook way:
+
+```tsx
+function FormControls() {
+  const { formRef } = useForm();
+
+  return (
+    <>
+      <button onClick={() => formRef.reset()}>Reset</button>
+      <button onClick={() => formRef.submit()}>Submit</button>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <AutoForm>
+      <FormControls />
+    </AutoForm>
+  );
+}
 ```
 
 You can find more about form methods [here](/docs/api-forms).

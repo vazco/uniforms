@@ -64,6 +64,10 @@ A map of changed fields. Rather internal one, used for checking if _other_ field
 
 An object with a `details` field, which is an array of any validation errors.
 
+### `formRef`
+
+Contains reference to the form component that gives access to [the form methods](/docs/api-forms#methods).
+
 ### `model`
 
 An object with current form fields values structured `{field: value}`.
