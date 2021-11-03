@@ -2,6 +2,7 @@
   "version": "3.6.2",
   "packages": [
     "packages/*",
+    "reproductions",
     "website"
   ]
 }

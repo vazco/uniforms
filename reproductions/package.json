@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "parcel build index.html",
-    "start": "parcel serve index.html"
+    "start": "parcel serve index.html ../package.json"
   },
   "dependencies": {
     "@ant-design/icons": "4.4.0",
@@ -11,21 +11,21 @@
     "@material-ui/icons": "4.11.2",
     "ajv": "8.0.5",
     "antd": "4.10.3",
-    "react": "16.9.0",
-    "react-dom": "16.9.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "simpl-schema": "1.10.2",
-    "uniforms": "^3.0.0",
-    "uniforms-antd": "^3.0.0",
-    "uniforms-bootstrap3": "^3.0.0",
-    "uniforms-bootstrap4": "^3.0.0",
-    "uniforms-bootstrap5": "^3.0.0",
-    "uniforms-bridge-graphql": "^3.0.0",
-    "uniforms-bridge-json-schema": "^3.0.0",
-    "uniforms-bridge-simple-schema": "^3.0.0",
-    "uniforms-bridge-simple-schema-2": "^3.0.0",
-    "uniforms-material": "^3.0.0",
-    "uniforms-semantic": "^3.0.0",
-    "uniforms-unstyled": "^3.0.0"
+    "uniforms": "3.6.2",
+    "uniforms-antd": "3.6.2",
+    "uniforms-bootstrap3": "3.6.2",
+    "uniforms-bootstrap4": "3.6.2",
+    "uniforms-bootstrap5": "3.6.2",
+    "uniforms-bridge-graphql": "3.6.2",
+    "uniforms-bridge-json-schema": "3.6.2",
+    "uniforms-bridge-simple-schema": "3.6.2",
+    "uniforms-bridge-simple-schema-2": "3.6.2",
+    "uniforms-material": "3.6.2",
+    "uniforms-semantic": "3.6.2",
+    "uniforms-unstyled": "3.6.2"
   },
   "devDependencies": {
     "@types/react": "16.9.44",
