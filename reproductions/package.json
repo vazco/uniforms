@@ -9,6 +9,7 @@
     "@ant-design/icons": "4.4.0",
     "@material-ui/core": "4.11.2",
     "@material-ui/icons": "4.11.2",
+    "@mui/material": "5.0.6",
     "ajv": "8.0.5",
     "antd": "4.10.3",
     "react": "17.0.2",
@@ -24,6 +25,7 @@
     "uniforms-bridge-simple-schema": "3.6.2",
     "uniforms-bridge-simple-schema-2": "3.6.2",
     "uniforms-material": "3.6.2",
+    "uniforms-mui-material": "3.6.2",
     "uniforms-semantic": "3.6.2",
     "uniforms-unstyled": "3.6.2"
   },
