@@ -1,3 +1,4 @@
+import { filterDOMProps } from 'uniforms';
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 
 describe('JSONSchemaBridge', () => {
@@ -908,6 +909,15 @@ describe('JSONSchemaBridge', () => {
   describe('#getValidator', () => {
     it('calls correct validator', () => {
       expect(bridge.getValidator()).toBe(validator);
+    });
+  });
+
+  describe('#filterDOMProps', () => {
+    const props = bridge.getProps('arrayWithAllOf');
+    const filteredProps = filterDOMProps(props);
+    it.each(['minCount', 'maxCount'])('filters %s', keyword => {
+      expect(props).toHaveProperty(keyword);
+      expect(filteredProps).not.toHaveProperty(keyword);
     });
   });
 });
