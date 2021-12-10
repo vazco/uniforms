@@ -18,6 +18,7 @@
   --dusk-blue: #412a94;
   --greenblue-10: rgba(31, 216, 152, 0.1);
   --greenblue: #1fd898;
+  --grey: #eee;
   --greyish-brown: #474747;
   --pale-grey: #e8e6f5;
   --periwinkle-50: rgba(136, 89, 255, 0.2);
@@ -33,6 +34,7 @@
   --uni-oval-background-color: var(--white);
   --uni-oval-shadow-color: var(--pale-grey);
   --uni-testimonial-text-color: var(--greyish-brown);
+  --uni-toolbar-bgcolor: var(--grey);
 
   --ifm-button-color: var(--white);
 }
@@ -43,6 +45,7 @@
   --uni-heading-helper-color: var(--ifm-font-color-base);
   --uni-oval-shadow-color: var(--black);
   --uni-testimonial-text-color: var(--ifm-font-color-base);
+  --uni-toolbar-bgcolor: var(--ifm-background-color);
 }
 
 .padding {
@@ -753,7 +756,7 @@
 }
 
 .playground-toolbar {
-  background: #eee;
+  background: var(--uni-toolbar-bgcolor);
 }
 
 .playground-toolbar select {
