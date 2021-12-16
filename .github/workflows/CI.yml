@@ -5,6 +5,8 @@ on:
     branches:
       - master
 jobs:
+  npm_dedupe_check:
+    uses: vazco/open-standards/.github/workflows/check_dependency_duplications.yml@v1
   CI:
     runs-on: ubuntu-latest
     strategy:
@@ -23,8 +25,6 @@ jobs:
           npm audit fix || true # skip non-0 exit
           git status -s | grep " M package-lock.json" && echo "::"warning file=package-lock.json"::"Found vulnerabilities in the project dependencies. Run npm audit to show the audit details. More info: https://docs.npmjs.com/cli/v7/commands/npm-audit
           git reset --hard HEAD
-      - name: Check dependency duplications
-        uses: vazco/open-standards/.github/workflows/check_dependency_duplications.yml@v1
       - name: Install
         run: npm i -g npm@7 && npm ci
       - name: Lint
