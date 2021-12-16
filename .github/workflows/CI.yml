@@ -8,6 +8,9 @@ jobs:
   npm_dedupe_check:
     name: NPM dependency duplication check
     uses: vazco/open-standards/.github/workflows/check_dependency_duplications.yml@master
+  npm_vuln_check:
+    name: NPM dependency vulnerabilities check
+    uses: vazco/open-standards/.github/workflows/check_dependency_vulnerabilities.yml@master
   CI:
     runs-on: ubuntu-latest
     strategy:
@@ -21,11 +24,6 @@ jobs:
         with:
           cache: npm
           node-version: ${{ matrix.node-version }}
-      - name: Check dependency vulnerabilities
-        run: |
-          npm audit fix || true # skip non-0 exit
-          git status -s | grep " M package-lock.json" && echo "::"warning file=package-lock.json"::"Found vulnerabilities in the project dependencies. Run npm audit to show the audit details. More info: https://docs.npmjs.com/cli/v7/commands/npm-audit
-          git reset --hard HEAD
       - name: Install
         run: npm i -g npm@7 && npm ci
       - name: Lint
