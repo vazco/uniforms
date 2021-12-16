@@ -8,6 +8,9 @@ jobs:
   npm_dedupe_check:
     name: NPM dependency duplication check
     uses: vazco/open-standards/.github/workflows/check_dependency_duplications.yml@master
+    with:
+      node-version: 17.2.0
+      project-path: reproductions
   npm_vuln_check:
     name: NPM dependency vulnerabilities check
     uses: vazco/open-standards/.github/workflows/check_dependency_vulnerabilities.yml@master
