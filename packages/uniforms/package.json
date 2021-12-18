@@ -1,6 +1,6 @@
 {
   "name": "uniforms",
-  "version": "3.6.2",
+  "version": "3.7.0",
   "license": "MIT",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
