@@ -1,3 +1,10 @@
+## [v3.7.0](https://github.com/vazco/uniforms/tree/v3.7.0) (2021-12-18)
+
+- **Added:** New context property: `formRef`. [\#974](https://github.com/vazco/uniforms/issues/974)
+- **Changed:** Both `minCount` and `maxCount` JSON Schema properties are now registered in `filterDOMProps` by default. [\#981](https://github.com/vazco/uniforms/issues/981)
+- **Changed:** Return type of `getNativeFormProps`. [\#1037](https://github.com/vazco/uniforms/issues/1037)
+- **Fixed:** Error message when using `useField` without `name`. [\#976](https://github.com/vazco/uniforms/issues/976)
+
 ## [v3.6.2](https://github.com/vazco/uniforms/tree/v3.6.2) (2021-10-15)
 
 - **Fixed:** Handling of `initialValue` in `NumField`. [\#1004](https://github.com/vazco/uniforms/issues/1004)
