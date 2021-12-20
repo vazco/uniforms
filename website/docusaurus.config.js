@@ -44,15 +44,11 @@ module.exports = {
   },
   themeConfig: {
     algolia: {
-      algoliaOptions: {},
-      apiKey: '513292b2605e0bc7bfdf63163dfde1c4',
+      apiKey: '9bab87682792c2bd77ec707a56669e29',
+      appId: 'WWWW16GKXU',
       indexName: 'uniforms',
     },
     footer: { links: [] },
-    googleAnalytics: { trackingID: 'UA-136559762-4' },
-    gtag: {
-      trackingID: 'GTM-5RFDRMB',
-    },
     hideableSidebar: true,
     hotjar: { hjid: 1434110 },
     navbar: {
@@ -84,11 +80,13 @@ module.exports = {
       {
         docs: {
           path: '../docs',
+          sidebarCollapsible: false,
           sidebarPath: require.resolve('./sidebars.json'),
         },
+        googleAnalytics: { trackingID: 'UA-136559762-4' },
+        gtag: { trackingID: 'GTM-5RFDRMB' },
         pages: { path: './pages' },
         theme: { customCss: path.join(__dirname, './src/theme/index.css') },
-        sidebarCollapsible: false,
       },
     ],
   ],
