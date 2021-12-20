@@ -1,3 +1,5 @@
+import flatten from 'lodash/flatten';
+
 export function joinName(flag: null, ...parts: unknown[]): string[];
 export function joinName(...parts: unknown[]): string;
 export function joinName(...parts: unknown[]) {
@@ -7,7 +9,15 @@ export function joinName(...parts: unknown[]) {
     if (part || part === 0) {
       if (typeof part === 'string') {
         if (part.indexOf('.') !== -1) {
-          name.push(...part.split('.'));
+          name.push(
+            ...flatten(
+              part
+                .split(/\[|\]/)
+                .map(subkey =>
+                  /^['"]/.exec(subkey) ? `[${subkey}]` : subkey.split('.'),
+                ),
+            ).filter(Boolean),
+          );
         } else {
           name.push(part);
         }

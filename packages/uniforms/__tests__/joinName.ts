@@ -49,4 +49,12 @@ describe('joinName', () => {
     expect(joinName(null, 'a.b', 'c.d')).toEqual(['a', 'b', 'c', 'd']);
     expect(joinName(null, 'a.b.c', 'd')).toEqual(['a', 'b', 'c', 'd']);
   });
+
+  it('works with dot-names', () => {
+    expect(joinName('a', 'b.c')).toBe('a.b.c');
+    expect(joinName('a', '["b.c"]')).toBe('a.["b.c"]');
+
+    expect(joinName(null, 'a', 'b.c')).toMatchObject(['a', 'b', 'c']);
+    expect(joinName(null, 'a', '["b.c"]')).toMatchObject(['a', '["b.c"]']);
+  });
 });
