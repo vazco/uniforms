@@ -9,7 +9,7 @@ You can style your form fields simply by passing a `className` property.
 
 ### How can I create custom fields?
 
-You can create a custom field by wrapping your component inside the [`connectField`](api-helpers#connectfieldcomponent-options).
+You can create a custom field by wrapping your component inside the [`connectField`](/docs/api-helpers#connectfieldcomponent-options).
 
 The `connectField` will pass various props related to the form management, such as `onChange()` function, current field's value, errors and so on, to your component.
 

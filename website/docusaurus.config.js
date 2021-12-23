@@ -91,4 +91,7 @@ module.exports = {
       },
     ],
   ],
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'throw',
+  onDuplicateRoutes: 'throw',
 };
