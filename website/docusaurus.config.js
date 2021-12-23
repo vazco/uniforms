@@ -7,6 +7,7 @@ module.exports = {
   projectName: 'uniforms',
   baseUrl: '/',
   url: 'https://uniforms.tools',
+  trailingSlash: true,
   customFields: {
     companies: [
       { url: 'https://www.deskpro.com/', image: 'deskpro.png', alt: 'Deskpro' },
