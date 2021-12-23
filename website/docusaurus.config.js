@@ -6,7 +6,7 @@ module.exports = {
   organizationName: 'vazco',
   projectName: 'uniforms',
   baseUrl: '/',
-  url: 'https://uniforms.tools/',
+  url: 'https://uniforms.tools',
   customFields: {
     companies: [
       { url: 'https://www.deskpro.com/', image: 'deskpro.png', alt: 'Deskpro' },
