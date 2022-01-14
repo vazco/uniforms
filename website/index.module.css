@@ -756,11 +756,11 @@
 }
 
 .playground-toolbar {
-  background: var(--uni-toolbar-bgcolor);
+  background-color: var(--uni-toolbar-bgcolor);
 }
 
 .playground-toolbar select {
-  background: transparent;
+  background-color: var(--uni-toolbar-bgcolor);
   font-size: 1rem;
   margin: 0.25em;
   padding: 0.5em;
