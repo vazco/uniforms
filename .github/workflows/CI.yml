@@ -6,8 +6,11 @@ on:
       - master
 jobs:
   npm_dedupe_check:
+    runs-on: ubuntu-latest
     name: NPM dependency duplication check
-    uses: vazco/open-standards/.github/workflows/check_dependency_duplications.yml@master
+    steps:
+      - name: Check dedupe
+        uses: vazco/open-standards/actions/npm-dependency-duplications/@action-test
   npm_vuln_check:
     name: NPM dependency vulnerabilities check
     uses: vazco/open-standards/.github/workflows/check_dependency_vulnerabilities.yml@master
