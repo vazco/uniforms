@@ -199,6 +199,14 @@ describe('JSONSchemaBridge', () => {
           },
         },
       },
+      path: {
+        type: 'object',
+        properties: {
+          'with.a.dot': {
+            type: 'boolean',
+          },
+        },
+      },
     },
     required: ['dateOfBirth', 'nonObjectAnyOfRequired'],
   };
@@ -516,6 +524,9 @@ describe('JSONSchemaBridge', () => {
         bridge.getField('["path.with.a.dot"].another.with.a.dot'),
       ).toMatchObject({
         type: 'number',
+      });
+      expect(bridge.getField('path["with.a.dot"]')).toMatchObject({
+        type: 'boolean',
       });
     });
 
@@ -873,6 +884,7 @@ describe('JSONSchemaBridge', () => {
         'withLabel',
         'forcedRequired',
         '["path.with.a.dot"]',
+        'path',
       ]);
     });
 
