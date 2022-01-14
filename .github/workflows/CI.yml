@@ -16,13 +16,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.4
-      - name: npm_dedupe_check
-        uses: vazco/open-standards/actions/npm-dependency-duplications/@action-test
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2.2.0
         with:
           cache: npm
           node-version: ${{ matrix.node-version }}
+      - name: Npm dependency duplication check
+        uses: vazco/open-standards/actions/npm-dependency-duplications/@action-test
       - name: Install
         run: npm i -g npm@7 && npm ci
       - name: Lint
