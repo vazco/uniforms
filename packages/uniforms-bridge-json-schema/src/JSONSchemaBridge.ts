@@ -7,6 +7,20 @@ import memoize from 'lodash/memoize';
 import upperFirst from 'lodash/upperFirst';
 import { Bridge, joinName } from 'uniforms';
 
+function unescapeJSONPath(path: string) {
+  if (path.startsWith('["') && path.endsWith('"]')) {
+    return path.slice(2, -2);
+  }
+  return path;
+}
+
+function escapeJSONPath(path: string) {
+  if (path.includes('.')) {
+    return `["${path}"]`;
+  }
+  return path;
+}
+
 function fieldInvariant(name: string, condition: boolean): asserts condition {
   invariant(condition, 'Field not found in schema: "%s"', name);
 }
@@ -150,9 +164,7 @@ export default class JSONSchemaBridge extends Bridge {
         fieldInvariant(name, !!definition);
       } else if (definition.type === 'object') {
         fieldInvariant(name, !!definition.properties);
-        definition =
-          definition.properties[next] ||
-          definition.properties[next.slice(2, -2)];
+        definition = definition.properties[unescapeJSONPath(next)];
         fieldInvariant(name, !!definition);
       } else {
         let nextFound = false;
@@ -298,9 +310,7 @@ export default class JSONSchemaBridge extends Bridge {
       this._compiledSchema[name];
 
     if (type === 'object' && properties) {
-      return Object.keys(properties).map(key =>
-        key.includes('.') ? `["${key}"]` : key,
-      );
+      return Object.keys(properties).map(escapeJSONPath);
     }
 
     return [];
