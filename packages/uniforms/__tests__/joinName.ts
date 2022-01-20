@@ -1,52 +1,111 @@
 import { joinName } from 'uniforms';
 
+function test(parts: unknown[], array: string[], string: string) {
+  // Serialization (join).
+  expect(joinName(...parts)).toBe(string);
+
+  // Deserialization (split).
+  expect(joinName(null, ...parts)).toEqual(array);
+
+  // Re-serialization (split + join).
+  expect(joinName(joinName(null, ...parts))).toEqual(string);
+
+  // Re-deserialization (join + split).
+  expect(joinName(null, joinName(...parts))).toEqual(array);
+}
+
 describe('joinName', () => {
   it('is a function', () => {
     expect(joinName).toBeInstanceOf(Function);
   });
 
-  it('have raw mode', () => {
-    expect(joinName(null)).toEqual([]);
-    expect(joinName(null, 'a')).toEqual(['a']);
-    expect(joinName(null, 'a', 'b')).toEqual(['a', 'b']);
-    expect(joinName(null, 'a', 'b', null)).toEqual(['a', 'b']);
-    expect(joinName(null, 'a', 'b', null, 0)).toEqual(['a', 'b', '0']);
-    expect(joinName(null, 'a', 'b', null, 1)).toEqual(['a', 'b', '1']);
+  it('works with empty name', () => {
+    test([], [], '');
   });
 
   it('works with arrays', () => {
-    expect(joinName(['a'], 'b')).toBe('a.b');
-    expect(joinName('a', ['b'])).toBe('a.b');
+    test([['a'], 'b'], ['a', 'b'], 'a.b');
+    test(['a', ['b']], ['a', 'b'], 'a.b');
   });
 
   it('works with empty strings', () => {
-    expect(joinName('', 'a', 'b')).toBe('a.b');
-    expect(joinName('a', '', 'b')).toBe('a.b');
-    expect(joinName('a', 'b', '')).toBe('a.b');
+    test(['', 'a', 'b'], ['a', 'b'], 'a.b');
+    test(['a', '', 'b'], ['a', 'b'], 'a.b');
+    test(['a', 'b', ''], ['a', 'b'], 'a.b');
   });
 
   it('works with falsy values', () => {
-    expect(joinName('a', null, 'b')).toBe('a.b');
-    expect(joinName('a', false, 'b')).toBe('a.b');
-    expect(joinName('a', undefined, 'b')).toBe('a.b');
+    test(['a', null, 'b'], ['a', 'b'], 'a.b');
+    test(['a', false, 'b'], ['a', 'b'], 'a.b');
+    test(['a', undefined, 'b'], ['a', 'b'], 'a.b');
   });
 
   it('works with numbers', () => {
-    expect(joinName(0, 'a', 'b')).toBe('0.a.b');
-    expect(joinName('a', 0, 'b')).toBe('a.0.b');
-    expect(joinName('a', 'b', 0)).toBe('a.b.0');
-    expect(joinName(1, 'a', 'b')).toBe('1.a.b');
-    expect(joinName('a', 1, 'b')).toBe('a.1.b');
-    expect(joinName('a', 'b', 1)).toBe('a.b.1');
+    test([0, 'a', 'b'], ['0', 'a', 'b'], '0.a.b');
+    test(['a', 0, 'b'], ['a', '0', 'b'], 'a.0.b');
+    test(['a', 'b', 0], ['a', 'b', '0'], 'a.b.0');
+    test([1, 'a', 'b'], ['1', 'a', 'b'], '1.a.b');
+    test(['a', 1, 'b'], ['a', '1', 'b'], 'a.1.b');
+    test(['a', 'b', 1], ['a', 'b', '1'], 'a.b.1');
   });
 
   it('works with partials', () => {
-    expect(joinName('a', 'b.c.d')).toBe('a.b.c.d');
-    expect(joinName('a.b', 'c.d')).toBe('a.b.c.d');
-    expect(joinName('a.b.c', 'd')).toBe('a.b.c.d');
+    test(['a', 'b.c.d'], ['a', 'b', 'c', 'd'], 'a.b.c.d');
+    test(['a.b', 'c.d'], ['a', 'b', 'c', 'd'], 'a.b.c.d');
+    test(['a.b.c', 'd'], ['a', 'b', 'c', 'd'], 'a.b.c.d');
+  });
 
-    expect(joinName(null, 'a', 'b.c.d')).toEqual(['a', 'b', 'c', 'd']);
-    expect(joinName(null, 'a.b', 'c.d')).toEqual(['a', 'b', 'c', 'd']);
-    expect(joinName(null, 'a.b.c', 'd')).toEqual(['a', 'b', 'c', 'd']);
+  it('works with subscripts', () => {
+    test(['a["b"]'], ['a', 'b'], 'a.b');
+    test(['a["b"].c'], ['a', 'b', 'c'], 'a.b.c');
+    test(['a["b"].c["d"]'], ['a', 'b', 'c', 'd'], 'a.b.c.d');
+    test(['a["b"]["c.d"]'], ['a', 'b', '["c.d"]'], 'a.b["c.d"]');
+    test(['a["b"]["c.d"].e'], ['a', 'b', '["c.d"]', 'e'], 'a.b["c.d"].e');
+    test(['a["b"]["c.d"]["e"]'], ['a', 'b', '["c.d"]', 'e'], 'a.b["c.d"].e');
+    test(['a["b"].["c.d"]'], ['a', 'b', '["c.d"]'], 'a.b["c.d"]');
+    test(['a["b"].["c.d"].e'], ['a', 'b', '["c.d"]', 'e'], 'a.b["c.d"].e');
+    test(['a["b"].["c.d"]["e"]'], ['a', 'b', '["c.d"]', 'e'], 'a.b["c.d"].e');
+
+    test(['["a"]'], ['a'], 'a');
+    test(['["a"].b'], ['a', 'b'], 'a.b');
+    test(['["a"]["b.c"]'], ['a', '["b.c"]'], 'a["b.c"]');
+    test(['["a"]["b.c"].d'], ['a', '["b.c"]', 'd'], 'a["b.c"].d');
+    test(['["a"]["b.c"]["d"]'], ['a', '["b.c"]', 'd'], 'a["b.c"].d');
+    test(['["a"].["b.c"]'], ['a', '["b.c"]'], 'a["b.c"]');
+    test(['["a"].["b.c"].d'], ['a', '["b.c"]', 'd'], 'a["b.c"].d');
+    test(['["a"].["b.c"]["d"]'], ['a', '["b.c"]', 'd'], 'a["b.c"].d');
+
+    test(['[""]'], ['[""]'], '[""]');
+    test(['["."]'], ['["."]'], '["."]');
+    test(['[".."]'], ['[".."]'], '[".."]');
+    test(['["..."]'], ['["..."]'], '["..."]');
+    test(['["[\'\']"]'], ['["[\'\']"]'], '["[\'\']"]');
+    test(['["[\\"\\"]"]'], ['["[\\"\\"]"]'], '["[\\"\\"]"]');
+  });
+
+  it('handles incorrect cases _somehow_', () => {
+    // Dots before subscripts.
+    test(['a["b"].c.["d"]'], ['a', 'b', 'c', 'd'], 'a.b.c.d');
+    test(['a.["b"].c["d"]'], ['a', 'b', 'c', 'd'], 'a.b.c.d');
+    test(['a.["b"].c.["d"]'], ['a', 'b', 'c', 'd'], 'a.b.c.d');
+
+    // Only dots.
+    test(['.'], ['["."]'], '["."]');
+    test(['..'], ['[".."]'], '[".."]');
+    test(['...'], ['["..."]'], '["..."]');
+
+    // Leading and trailing dots.
+    test(['a.'], ['["a."]'], '["a."]');
+    test(['.a'], ['[""]', 'a'], '[""].a');
+    test(['["a"].'], ['a'], 'a');
+    test(['.["a"]'], ['a'], 'a');
+
+    // Unescaped brackets.
+    test(['['], ['["["]'], '["["]');
+    test(["['"], ['["[\'"]'], '["[\'"]');
+    test(["[''"], ['["[\'\'"]'], '["[\'\'"]');
+    test(["['']"], ['["[\'\']"]'], '["[\'\']"]');
+    test(['["'], ['["[\\""]'], '["[\\""]');
+    test(['[""'], ['["[\\"\\""]'], '["[\\"\\""]');
   });
 });
