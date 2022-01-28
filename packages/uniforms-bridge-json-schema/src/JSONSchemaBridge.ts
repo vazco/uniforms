@@ -296,7 +296,7 @@ export default class JSONSchemaBridge extends Bridge {
       this._compiledSchema[name];
 
     if (type === 'object' && properties) {
-      return Object.keys(properties);
+      return Object.keys(properties).map(joinName.escape);
     }
 
     return [];
