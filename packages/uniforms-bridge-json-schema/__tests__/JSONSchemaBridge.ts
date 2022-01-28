@@ -885,7 +885,7 @@ describe('JSONSchemaBridge', () => {
         'objectWithoutProperties',
         'withLabel',
         'forcedRequired',
-        'path.with.a.dot',
+        '["path.with.a.dot"]',
         'path',
       ]);
     });
