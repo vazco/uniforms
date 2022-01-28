@@ -1,17 +1,21 @@
-const escapeMatch = /^([^.[\]]+?(?:\.[^.[\]]+?)+?|\[".*?"]|.*[.[\]].*|)$/;
+const escapeMatch = /[.[\]]/;
 const escapeRegex = /"/g;
 /** @internal */
 function escape(string: string) {
-  return escapeMatch.test(string)
+  return string === '' || escapeMatch.test(string)
     ? `["${string.replace(escapeRegex, '\\"')}"]`
     : string;
 }
 
-const unescapeMatch = /^\[".*?"]$/;
+function escapeIfNeeded(string: string, index: number) {
+  const escaped = escape(string);
+  return escaped === string ? (index ? `.${string}` : string) : escaped;
+}
+
 const unescapeRegex = /\\"/g;
 /** @internal */
 function unescape(string: string) {
-  return unescapeMatch.test(string)
+  return string.startsWith('["') && string.endsWith('"]')
     ? string.slice(2, -2).replace(unescapeRegex, '"')
     : string;
 }
@@ -32,7 +36,11 @@ function joinName_(...parts: unknown[]) {
 
           // `prefix` is a dotted name, e.g., `object.nested.2.field`.
           if (prefix) {
-            name.push(...prefix.split('.'));
+            if (prefix.includes('.')) {
+              name.push(...prefix.split('.'));
+            } else {
+              name.push(prefix);
+            }
           }
 
           // `subscript` is a `["..."]` subscript. The content within should be
@@ -59,12 +67,7 @@ function joinName_(...parts: unknown[]) {
 
   return parts[0] === null
     ? name.map(escape)
-    : name
-        .map((part, index) => {
-          const escaped = escape(part);
-          return escaped === part ? (index ? `.${part}` : part) : escaped;
-        })
-        .join('');
+    : name.map(escapeIfNeeded).join('');
 }
 
 export const joinName = Object.assign(joinName_, { escape, unescape });
