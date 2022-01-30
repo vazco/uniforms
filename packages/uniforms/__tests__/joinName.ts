@@ -24,8 +24,20 @@ describe('joinName', () => {
   });
 
   it('works with arrays', () => {
+    test([['a']], ['a'], 'a');
+    test([[['a']]], ['a'], 'a');
+    test([[[['a']]]], ['a'], 'a');
+
+    test([[], 'a'], ['a'], 'a');
+    test(['a', []], ['a'], 'a');
+
     test([['a'], 'b'], ['a', 'b'], 'a.b');
     test(['a', ['b']], ['a', 'b'], 'a.b');
+
+    test([['a', 'b'], 'c'], ['a', 'b', 'c'], 'a.b.c');
+    test(['a', ['b', 'c']], ['a', 'b', 'c'], 'a.b.c');
+
+    test(['a', ['b', 'c'], 'd'], ['a', 'b', 'c', 'd'], 'a.b.c.d');
   });
 
   it('works with empty strings', () => {
@@ -84,6 +96,11 @@ describe('joinName', () => {
   });
 
   it('handles incorrect cases _somehow_', () => {
+    // Boolean `true`.
+    test([true], ['true'], 'true');
+    test([true, 'a'], ['true', 'a'], 'true.a');
+    test(['a', true], ['a', 'true'], 'a.true');
+
     // Dots before subscripts.
     test(['a["b"].c.["d"]'], ['a', 'b', 'c', 'd'], 'a.b.c.d');
     test(['a.["b"].c["d"]'], ['a', 'b', 'c', 'd'], 'a.b.c.d');
