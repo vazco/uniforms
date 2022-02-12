@@ -1,3 +1,7 @@
+## [v3.8.0](https://github.com/vazco/uniforms/tree/v3.8.0) (2022-02-12)
+
+- **Added:** Support of complex names in `joinName`. [\#963](https://github.com/vazco/uniforms/issues/963)
+
 ## [v3.7.0](https://github.com/vazco/uniforms/tree/v3.7.0) (2021-12-18)
 
 - **Added:** New context property: `formRef`. [\#974](https://github.com/vazco/uniforms/issues/974)
