@@ -173,6 +173,39 @@ describe('JSONSchemaBridge', () => {
       objectWithoutProperties: { type: 'object' },
       withLabel: { type: 'string', uniforms: { label: 'Example' } },
       forcedRequired: { type: 'string', uniforms: { required: true } },
+      'path.with.a.dot': {
+        type: 'object',
+        properties: {
+          'another.with.a.dot': {
+            type: 'string',
+          },
+          another: {
+            type: 'object',
+            properties: {
+              with: {
+                type: 'object',
+                properties: {
+                  a: {
+                    type: 'object',
+                    properties: {
+                      dot: {
+                        type: 'number',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+      path: {
+        type: 'object',
+        properties: {
+          'with.a.dot': { type: 'number' },
+          '["with.a.dot"]': { type: 'string' },
+        },
+      },
     },
     required: ['dateOfBirth', 'nonObjectAnyOfRequired'],
   };
@@ -473,6 +506,28 @@ describe('JSONSchemaBridge', () => {
     it('returns correct definition (nested with $ref)', () => {
       expect(bridge.getField('personalData.firstName')).toEqual({
         default: 'John',
+        type: 'string',
+      });
+    });
+
+    it('returns correct definition (dots in name)', () => {
+      expect(bridge.getField('["path.with.a.dot"]')).toMatchObject({
+        type: 'object',
+      });
+      expect(
+        bridge.getField('["path.with.a.dot"]["another.with.a.dot"]'),
+      ).toMatchObject({
+        type: 'string',
+      });
+      expect(
+        bridge.getField('["path.with.a.dot"].another.with.a.dot'),
+      ).toMatchObject({
+        type: 'number',
+      });
+      expect(bridge.getField('path["with.a.dot"]')).toMatchObject({
+        type: 'number',
+      });
+      expect(bridge.getField('path["[\\"with.a.dot\\"]"]')).toMatchObject({
         type: 'string',
       });
     });
@@ -830,6 +885,8 @@ describe('JSONSchemaBridge', () => {
         'objectWithoutProperties',
         'withLabel',
         'forcedRequired',
+        '["path.with.a.dot"]',
+        'path',
       ]);
     });
 

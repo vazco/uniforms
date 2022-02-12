@@ -68,7 +68,8 @@
     "prefer-rest-params": "off",
     "react/jsx-pascal-case": "off",
     "react/no-children-prop": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "valid-jsdoc": "off"
   },
   "settings": {
     "import/core-modules": ["meteor/aldeed:simple-schema", "meteor/check"],

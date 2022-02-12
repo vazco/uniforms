@@ -104,14 +104,39 @@ filterDOMProps.register('propA', 'propB');
 
 ## `joinName`
 
-Safely joins partial field names. When the first param is null, returns an array of strings. Otherwise, returns a string. If you create a custom field with subfields, then it's better to use this helper than manually concatenating them.
+Safely joins partial field names.
+If you create a custom field with subfields, do use `joinName` instead of manually concatenating them.
+It ensures that the name will be correctly escaped if needed.
 
 ```tsx
 import { joinName } from 'uniforms';
 
-joinName(null, 'a', 'b.c', 'd'); // ['a', 'b', 'c', 'd']
-joinName('a', 'b.c', 'd'); // 'a.b.c.d'
+joinName('array', 1, 'field'); // 'array.1.field'
+joinName('object', 'nested.property'); // 'object.nested.property'
 ```
+
+If the first argument is `null`, then it returns an array of escaped parts.
+
+```tsx
+import { joinName } from 'uniforms';
+
+joinName(null, 'array', 1, 'field'); // ['array', '1', 'field']
+joinName(null, 'object', 'nested.property'); // ['object', 'nested', 'property']
+```
+
+If the field name contains a dot (`.`) or a bracket (`[` or `]`), it has to be escaped with `["..."]`.
+If any of these characters is not escaped, `joinName` will **not** throw an error but its behavior is not specified.
+The escape of any other name part will be stripped.
+
+```tsx
+joinName(null, 'object["with.dot"].field'); // ['object', '["with.dot"]', 'field']
+joinName('object["with.dot"].field'); // 'object["with.dot"].field'
+
+joinName(null, 'this["is"].safe'); // ['this', 'is', 'safe']
+joinName('this["is"].safe'); // 'this.is.safe'
+```
+
+For more examples check [`joinName` tests](https://github.com/vazco/uniforms/blob/master/packages/uniforms/__tests__/joinName.ts).
 
 ## `randomIds`
 
