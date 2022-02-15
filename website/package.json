@@ -35,5 +35,9 @@
     "uniforms-semantic": "3.7.0",
     "uniforms-unstyled": "3.7.0",
     "universal-fetch": "1.0.0"
-  }
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11"
+  ]
 }
