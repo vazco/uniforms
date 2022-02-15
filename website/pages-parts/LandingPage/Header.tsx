@@ -77,7 +77,7 @@ const themes = [
   {
     alt: 'Material-UI',
     src: 'themes/material-ui.png',
-    to: 'https://material-ui.com/',
+    to: 'https://mui.com/',
   },
   {
     alt: 'Bootstrap',

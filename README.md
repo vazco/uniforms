@@ -59,7 +59,8 @@
   - **[Bootstrap3](https://getbootstrap.com/docs/3.4/) theme**
   - **[Bootstrap4](https://getbootstrap.com/docs/4.6) theme**
   - **[Bootstrap5](https://getbootstrap.com/) theme**
-  - **[Material-UI](https://material-ui.com/) theme**
+  - **[Material-UI v4](https://v4.mui.com/) theme**
+  - **[Material-UI v5](https://mui.com/) theme**
   - **[Semantic UI](http://semantic-ui.com/) theme**
   - **plain HTML theme**
 

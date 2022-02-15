@@ -4,6 +4,7 @@ import * as bootstrap3 from 'uniforms-bootstrap3';
 import * as bootstrap4 from 'uniforms-bootstrap4';
 import * as bootstrap5 from 'uniforms-bootstrap5';
 import * as material from 'uniforms-material';
+import * as material5 from 'uniforms-material5';
 import * as semantic from 'uniforms-semantic';
 import * as unstyled from 'uniforms-unstyled';
 
@@ -37,6 +38,7 @@ export const themes = {
   bootstrap4,
   bootstrap5,
   material,
+  material5,
   semantic,
   unstyled,
 };

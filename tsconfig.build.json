@@ -22,6 +22,8 @@
     { "path": "packages/uniforms-bridge-simple-schema-2/tsconfig.esm.json" },
     { "path": "packages/uniforms-material/tsconfig.cjs.json" },
     { "path": "packages/uniforms-material/tsconfig.esm.json" },
+    { "path": "packages/uniforms-material5/tsconfig.cjs.json" },
+    { "path": "packages/uniforms-material5/tsconfig.esm.json" },
     { "path": "packages/uniforms-semantic/tsconfig.cjs.json" },
     { "path": "packages/uniforms-semantic/tsconfig.esm.json" },
     { "path": "packages/uniforms-unstyled/tsconfig.cjs.json" },

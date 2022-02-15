@@ -32,6 +32,7 @@
     "uniforms-bridge-simple-schema": "3.7.0",
     "uniforms-bridge-simple-schema-2": "3.7.0",
     "uniforms-material": "3.7.0",
+    "uniforms-material5": "file:../packages/uniforms-material5",
     "uniforms-semantic": "3.7.0",
     "uniforms-unstyled": "3.7.0",
     "universal-fetch": "1.0.0"
