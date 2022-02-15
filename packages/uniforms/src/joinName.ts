@@ -34,7 +34,7 @@ function unescape(string: string) {
 //
 // All three parts can be empty!
 const nameRegex =
-  /^([^.[\]]*(?:\.[^.[\]]+)*)(?:\.?(\["(?:[^"]|\\")*?(?<!\\)"])\.?(.*))?$/;
+  /^([^.[\]]*(?:\.[^.[\]]+)*)(?:\.?(\["(?:(?:[^"]|\\")*?[^\\])?"])\.?(.*))?$/;
 
 // We cannot use `joinName` as we export a function with assigned internal
 // helpers and the symbol has to stay free until then.
