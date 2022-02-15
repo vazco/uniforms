@@ -5,7 +5,7 @@ import { connectField, HTMLFieldProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
-const base64: typeof btoa =
+const base64: (string: string) => string =
   typeof btoa === 'undefined'
     ? /* istanbul ignore next */ x => Buffer.from(x).toString('base64')
     : btoa;
