@@ -3,7 +3,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import FormLabel from '@mui/material/FormLabel';
 import Switch, { SwitchProps } from '@mui/material/Switch';
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material';
 import omit from 'lodash/omit';
 import React, { Ref, isValidElement } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';

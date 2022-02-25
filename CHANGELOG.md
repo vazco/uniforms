@@ -1,3 +1,7 @@
+## [v3.8.1](https://github.com/vazco/uniforms/tree/v3.8.1) (2022-02-15)
+
+- **Added:** Fixed RegExp compatibility with Safari. [\#1088](https://github.com/vazco/uniforms/issues/1088)
+
 ## [v3.8.0](https://github.com/vazco/uniforms/tree/v3.8.0) (2022-02-12)
 
 - **Added:** Support of complex names in `joinName`. [\#963](https://github.com/vazco/uniforms/issues/963)

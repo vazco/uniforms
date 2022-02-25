@@ -125,6 +125,7 @@ test('<ListField> - renders proper number of optional values after add new value
       { onChange },
     ),
   );
+  console.log(wrapper.debug())
   expect(
     wrapper.find(ListAddField).find(IconButton).simulate('click'),
   ).toBeTruthy();

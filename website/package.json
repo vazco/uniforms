@@ -7,10 +7,14 @@
   },
   "dependencies": {
     "@ant-design/icons": "4.4.0",
-    "@docusaurus/core": "2.0.0-beta.13",
-    "@docusaurus/preset-classic": "2.0.0-beta.13",
+    "@docusaurus/core": "2.0.0-beta.15",
+    "@docusaurus/preset-classic": "2.0.0-beta.15",
+    "@emotion/styled": "11.6.0",
+    "@emotion/react": "11.7.1",
     "@material-ui/core": "4.11.2",
     "@material-ui/icons": "4.11.2",
+    "@mui/material": "5.4.1",
+    "@mui/styles": "5.4.1",
     "ajv": "8.0.5",
     "antd": "4.10.3",
     "core-js": "3.8.3",
@@ -32,9 +36,13 @@
     "uniforms-bridge-simple-schema": "3.7.0",
     "uniforms-bridge-simple-schema-2": "3.7.0",
     "uniforms-material": "3.7.0",
-    "uniforms-material5": "file:../packages/uniforms-material5",
+    "uniforms-material5": "3.7.0",
     "uniforms-semantic": "3.7.0",
     "uniforms-unstyled": "3.7.0",
     "universal-fetch": "1.0.0"
-  }
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11"
+  ]
 }

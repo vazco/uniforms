@@ -3,7 +3,7 @@ import xor from 'lodash/xor';
 import React, { Ref } from 'react';
 import { connectField, filterDOMProps, HTMLFieldProps } from 'uniforms';
 
-const base64: typeof btoa =
+const base64: (string: string) => string =
   typeof btoa === 'undefined'
     ? /* istanbul ignore next */ x => Buffer.from(x).toString('base64')
     : btoa;

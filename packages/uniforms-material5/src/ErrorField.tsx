@@ -2,7 +2,7 @@ import FormControl from '@mui/material/FormControl';
 import FormHelperText, {
   FormHelperTextProps,
 } from '@mui/material/FormHelperText';
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material';
 import React from 'react';
 import { Override, connectField, filterDOMProps } from 'uniforms';
 

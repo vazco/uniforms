@@ -12,13 +12,13 @@
     "lint:types": "npm run build",
     "prereset": "npm run clean",
     "publish": "npm run clean && npm run build && lerna publish",
-    "reset": "rimraf node_modules packages/*/node_modules reproductions/.cache reproductions/dist reproductions/node_modules website/.docusaurus website/node_modules",
+    "reset": "rimraf node_modules packages/*/node_modules reproductions/.cache reproductions/dist reproductions/node_modules website/.docusaurus website/build website/node_modules",
     "test": "jest"
   },
   "dependencies": {
     "@ant-design/icons": "4.4.0",
-    "@docusaurus/core": "2.0.0-beta.13",
-    "@docusaurus/preset-classic": "2.0.0-beta.13",
+    "@docusaurus/core": "2.0.0-beta.15",
+    "@docusaurus/preset-classic": "2.0.0-beta.15",
     "@emotion/styled": "11.6.0",
     "@emotion/react": "11.7.1",
     "@material-ui/core": "4.11.2",

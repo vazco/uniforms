@@ -269,6 +269,19 @@ export class PlaygroundWrap extends Component<any, any> {
       );
     }
 
+    if (theme === 'material5') {
+      // Material-UI injects scoped CSS classes into head.
+      return (
+        <section
+          children={content}
+          className={classNames(
+            'frame-root',
+            playgroundStyles['playground-wrap'],
+          )}
+        />
+      );
+    }
+
     let frameContent = content;
     if (theme === 'antd') {
       // Make AntD popups contained within the iframe.
