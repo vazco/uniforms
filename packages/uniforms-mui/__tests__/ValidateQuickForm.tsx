@@ -1,5 +1,5 @@
 import React from 'react';
-import { ValidatedQuickForm } from 'uniforms-material5';
+import { ValidatedQuickForm } from 'uniforms-mui';
 
 import createContext from './_createContext';
 import createSchema from './_createSchema';

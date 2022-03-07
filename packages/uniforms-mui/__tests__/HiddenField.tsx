@@ -1,5 +1,5 @@
 import React from 'react';
-import { HiddenField } from 'uniforms-material5';
+import { HiddenField } from 'uniforms-mui';
 
 import createContext from './_createContext';
 import mount from './_mount';

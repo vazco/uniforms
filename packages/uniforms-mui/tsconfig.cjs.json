@@ -5,7 +5,7 @@
     "outDir": "cjs",
     "rootDir": "src",
     "module": "CommonJS",
-    "tsBuildInfoFile": "../../node_modules/.cache/uniforms-material5.cjs.tsbuildinfo"
+    "tsBuildInfoFile": "../../node_modules/.cache/uniforms-mui.cjs.tsbuildinfo"
   },
   "include": ["src"],
   "references": [{ "path": "../uniforms/tsconfig.cjs.json" }]

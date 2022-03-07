@@ -1,13 +1,13 @@
 import React from 'react';
-import { BaseForm } from 'uniforms-material5';
+import { ValidatedForm } from 'uniforms-mui';
 
 import createContext from './_createContext';
 import createSchema from './_createSchema';
 import mount from './_mount';
 
-test('<BaseForm> - works', () => {
-  const element = <BaseForm schema={createSchema()} />;
+test('<ValidatedForm> - works', () => {
+  const element = <ValidatedForm schema={createSchema()} />;
   const wrapper = mount(element, createContext());
 
-  expect(wrapper.find(BaseForm)).toHaveLength(1);
+  expect(wrapper.find(ValidatedForm)).toHaveLength(1);
 });

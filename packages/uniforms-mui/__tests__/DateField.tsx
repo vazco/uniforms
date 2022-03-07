@@ -5,7 +5,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import { adaptV4Theme, createTheme } from '@mui/material/styles';
 import ThemeProvider from '@mui/styles/ThemeProvider';
 import React from 'react';
-import { DateField } from 'uniforms-material5';
+import { DateField } from 'uniforms-mui';
 import { render } from 'uniforms/__suites__';
 
 import createContext from './_createContext';

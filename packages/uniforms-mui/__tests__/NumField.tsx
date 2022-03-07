@@ -2,7 +2,7 @@ import TextField from '@mui/material/TextField';
 import { adaptV4Theme, createTheme } from '@mui/material/styles';
 import ThemeProvider from '@mui/styles/ThemeProvider';
 import React from 'react';
-import { NumField } from 'uniforms-material5';
+import { NumField } from 'uniforms-mui';
 import { render } from 'uniforms/__suites__';
 
 import createContext from './_createContext';

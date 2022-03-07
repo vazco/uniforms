@@ -1,7 +1,7 @@
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
 import React from 'react';
-import { wrapField } from 'uniforms-material5';
+import { wrapField } from 'uniforms-mui';
 
 import mount from './_mount';
 

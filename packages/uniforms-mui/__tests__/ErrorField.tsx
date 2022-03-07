@@ -1,8 +1,7 @@
-import FormHelperText from '@mui/material/FormHelperText';
 import { adaptV4Theme, createTheme } from '@mui/material/styles';
 import ThemeProvider from '@mui/styles/ThemeProvider';
 import React from 'react';
-import { ErrorsField } from 'uniforms-material5';
+import { ErrorField } from 'uniforms-mui';
 import { render } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
@@ -11,16 +10,13 @@ import mount from './_mount';
 const error = {
   error: 'validation-error',
   reason: 'X is required',
-  details: [
-    { name: 'x', type: 'required', details: { value: null } },
-    { name: 'y', type: 'required', details: { value: null } },
-    { name: 'z', type: 'required', details: { value: null } },
-  ],
+  details: [{ name: 'x', type: 'required', details: { value: null } }],
   message: 'X is required [validation-error]',
 };
 
-describe('@RTL - ErrorsField tests', () => {
-  test('<ErrorsField> - default props are not passed when MUI theme props are specified', () => {
+// TODO[theme]
+describe.skip('@RTL - ErrorField tests', () => {
+  test('<ErrorField> - default props are not passed when MUI theme props are specified', () => {
     const theme = createTheme(
       adaptV4Theme({
         props: {
@@ -34,7 +30,7 @@ describe('@RTL - ErrorsField tests', () => {
     );
     const { container } = render(
       <ThemeProvider theme={theme}>
-        <ErrorsField />
+        <ErrorField name="x" />
       </ThemeProvider>,
       { x: { type: String } },
       { error },
@@ -49,15 +45,14 @@ describe('@RTL - ErrorsField tests', () => {
     );
     expect(
       container.getElementsByClassName('MuiFormHelperText-contained'),
-    ).toHaveLength(3);
+    ).toHaveLength(1);
   });
 
-  // TODO[theme]
-  test.skip('<ErrorsField> - default props are passed when MUI theme props are absent', () => {
+  test('<ErrorField> - default props are passed when MUI theme props are absent', () => {
     const theme = createTheme(adaptV4Theme({}));
-    const { container } = render(
+    const { container, debug } = render(
       <ThemeProvider theme={theme}>
-        <ErrorsField />
+        <ErrorField name="x" />
       </ThemeProvider>,
       { x: { type: String } },
       { error },
@@ -75,7 +70,7 @@ describe('@RTL - ErrorsField tests', () => {
     ).toHaveLength(0);
   });
 
-  test('<ErrorsField> - explicit props are passed when MUI theme props are specified', () => {
+  test('<ErrorField> - explicit props are passed when MUI theme props are specified', () => {
     const theme = createTheme(
       adaptV4Theme({
         props: {
@@ -95,7 +90,7 @@ describe('@RTL - ErrorsField tests', () => {
 
     const { container } = render(
       <ThemeProvider theme={theme}>
-        <ErrorsField {...explicitProps} />
+        <ErrorField name="x" {...explicitProps} />
       </ThemeProvider>,
       { x: { type: String } },
       { error },
@@ -114,40 +109,34 @@ describe('@RTL - ErrorsField tests', () => {
   });
 });
 
-test('<ErrorsField> - works', () => {
-  const element = <ErrorsField />;
+test('<ErrorField> - works', () => {
+  const element = <ErrorField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
-  expect(wrapper.find(ErrorsField)).toHaveLength(1);
+  expect(wrapper.find(ErrorField)).toHaveLength(1);
 });
 
-test('<ErrorsField> - renders list of correct error messages (context)', () => {
-  const element = <ErrorsField />;
+test('<ErrorField> - renders correct error message (context)', () => {
+  const element = <ErrorField name="x" />;
   const wrapper = mount(
     element,
-    createContext(
-      { x: { type: String }, y: { type: String }, z: { type: String } },
-      { error },
-    ),
+    createContext({ x: { type: String } }, { error }),
   );
 
-  expect(wrapper.find(FormHelperText)).toHaveLength(3);
-  expect(wrapper.find(FormHelperText).at(0).text()).toBe('X is required');
-  expect(wrapper.find(FormHelperText).at(1).text()).toBe('Y is required');
-  expect(wrapper.find(FormHelperText).at(2).text()).toBe('Z is required');
+  expect(wrapper.find(ErrorField)).toHaveLength(1);
+  expect(wrapper.find(ErrorField).text()).toBe('X is required');
 });
 
-test('<ErrorsField> - renders children (specified)', () => {
-  const element = <ErrorsField children="Error message list" />;
-  const wrapper = mount(
-    element,
-    createContext(
-      { x: { type: String }, y: { type: String }, z: { type: String } },
-      { error },
-    ),
+test('<ErrorField> - renders correct error message (specified)', () => {
+  const element = (
+    <ErrorField
+      name="x"
+      error={error.details[0]}
+      errorMessage="X is required"
+    />
   );
+  const wrapper = mount(element, createContext({ x: { type: String } }));
 
-  expect(wrapper.find(ErrorsField).text()).toEqual(
-    expect.stringContaining('Error message list'),
-  );
+  expect(wrapper.find(ErrorField)).toHaveLength(1);
+  expect(wrapper.find(ErrorField).text()).toBe('X is required');
 });

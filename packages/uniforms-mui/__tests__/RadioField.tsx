@@ -7,7 +7,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import { adaptV4Theme, createTheme } from '@mui/material/styles';
 import ThemeProvider from '@mui/styles/ThemeProvider';
 import React from 'react';
-import { RadioField } from 'uniforms-material5';
+import { RadioField } from 'uniforms-mui';
 import { render } from 'uniforms/__suites__';
 
 import createContext from './_createContext';

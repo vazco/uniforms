@@ -3,7 +3,7 @@ import { adaptV4Theme, createTheme } from '@mui/material/styles';
 import ThemeProvider from '@mui/styles/ThemeProvider';
 import { screen } from '@testing-library/react';
 import React from 'react';
-import { TextField } from 'uniforms-material5';
+import { TextField } from 'uniforms-mui';
 import { render, testTextField } from 'uniforms/__suites__';
 
 import createContext from './_createContext';

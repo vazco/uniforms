@@ -9,7 +9,7 @@ import {
   RadioField,
   SelectField,
   TextField,
-} from 'uniforms-material5';
+} from 'uniforms-mui';
 
 import createContext from './_createContext';
 import mount from './_mount';

@@ -1,4 +1,4 @@
-# uniforms-material
+# uniforms-mui
 
 > Material UI components for `uniforms`.
 

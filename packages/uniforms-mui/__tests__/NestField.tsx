@@ -3,7 +3,7 @@ import FormLabel from '@mui/material/FormLabel';
 import { adaptV4Theme, createTheme } from '@mui/material/styles';
 import ThemeProvider from '@mui/styles/ThemeProvider';
 import React from 'react';
-import { AutoField, NestField } from 'uniforms-material5';
+import { AutoField, NestField } from 'uniforms-mui';
 import { render } from 'uniforms/__suites__';
 
 import createContext from './_createContext';

@@ -1,4 +1,4 @@
-import * as material from 'uniforms-material5';
+import * as material from 'uniforms-mui';
 
 it('exports everything', () => {
   expect(material).toEqual({
