@@ -1,7 +1,7 @@
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormLabel from '@mui/material/FormLabel';
-import Input from '@mui/material/Input';
+import OutlinedInput from '@mui/material/OutlinedInput';
 import { adaptV4Theme, createTheme } from '@mui/material/styles';
 import ThemeProvider from '@mui/styles/ThemeProvider';
 import React from 'react';
@@ -84,28 +84,28 @@ test('<DateField> - renders Input', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
-  expect(wrapper.find(Input)).toHaveLength(1);
+  expect(wrapper.find(OutlinedInput)).toHaveLength(1);
 });
 
 test('<DateField> - renders a Input with correct id (inherited)', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
-  expect(wrapper.find(Input).prop('id')).toBeTruthy();
+  expect(wrapper.find(OutlinedInput).prop('id')).toBeTruthy();
 });
 
 test('<DateField> - renders a Input with correct id (specified)', () => {
   const element = <DateField name="x" id="y" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
-  expect(wrapper.find(Input).prop('id')).toBe('y');
+  expect(wrapper.find(OutlinedInput).prop('id')).toBe('y');
 });
 
 test('<DateField> - renders a Input with correct name', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
-  expect(wrapper.find(Input).prop('name')).toBe('x');
+  expect(wrapper.find(OutlinedInput).prop('name')).toBe('x');
 });
 
 test('<DateField> - renders an Input with correct disabled state', () => {
@@ -119,7 +119,7 @@ test('<DateField> - renders an Input with correct readOnly state', () => {
   const element = <DateField name="x" inputProps={{ readOnly: true }} />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
-  expect(wrapper.find(Input).prop('inputProps')!.readOnly).toBe(true);
+  expect(wrapper.find(OutlinedInput).prop('inputProps')!.readOnly).toBe(true);
 });
 
 test('<DateField> - renders a Input with correct label (specified)', () => {
@@ -133,7 +133,7 @@ test('<DateField> - renders a Input with correct value (default)', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
-  expect(wrapper.find(Input).prop('value')).toBe('');
+  expect(wrapper.find(OutlinedInput).prop('value')).toBe('');
 });
 
 test('<DateField> - renders a Input with correct value (model)', () => {
@@ -144,7 +144,7 @@ test('<DateField> - renders a Input with correct value (model)', () => {
     createContext({ x: { type: Date } }, { model: { x: now } }),
   );
 
-  expect(wrapper.find(Input).prop('value')).toEqual(
+  expect(wrapper.find(OutlinedInput).prop('value')).toEqual(
     now.toISOString().slice(0, -8),
   );
 });
@@ -154,7 +154,7 @@ test('<DateField> - renders a Input with correct value (specified)', () => {
   const element = <DateField name="x" value={now} />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
-  expect(wrapper.find(Input).prop('value')).toEqual(
+  expect(wrapper.find(OutlinedInput).prop('value')).toEqual(
     now.toISOString().slice(0, -8),
   );
 });
@@ -170,7 +170,7 @@ test('<DateField> - renders a Input which correctly reacts on change', () => {
   );
 
   // @ts-expect-error Provide a valid EventTarget.
-  wrapper.find(Input).props().onChange!({ target: { valueAsNumber: now } });
+  wrapper.find(OutlinedInput).props().onChange!({ target: { valueAsNumber: now } });
   expect(onChange).toHaveBeenLastCalledWith('x', now);
 });
 
@@ -183,7 +183,7 @@ test('<DateField> - renders a Input which correctly reacts on change (empty)', (
     createContext({ x: { type: Date } }, { onChange }),
   );
 
-  wrapper.find(Input).props().onChange!({
+  wrapper.find(OutlinedInput).props().onChange!({
     // @ts-expect-error Provide a valid EventTarget.
     target: { valueAsNumber: undefined },
   });
@@ -201,7 +201,7 @@ test('<DateField> - renders a Input which correctly reacts on change (overflow)'
   );
 
   // @ts-expect-error Provide a valid EventTarget.
-  wrapper.find(Input).props().onChange!({ target: { valueAsNumber: now } });
+  wrapper.find(OutlinedInput).props().onChange!({ target: { valueAsNumber: now } });
   expect(onChange).not.toHaveBeenCalled();
 });
 

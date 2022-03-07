@@ -1,11 +1,11 @@
+import { useTheme } from '@mui/material';
 import Checkbox, { CheckboxProps } from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import FormLabel from '@mui/material/FormLabel';
 import Switch, { SwitchProps } from '@mui/material/Switch';
-import { useTheme } from '@mui/material';
 import omit from 'lodash/omit';
-import React, { Ref, isValidElement } from 'react';
+import React, { Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
@@ -41,7 +41,6 @@ function Bool(props: BoolFieldProps) {
   const SelectionControl =
     appearance === 'checkbox' || appearance === undefined ? Checkbox : Switch;
 
-  const fieldLabel = transform ? transform(label as string) : label;
   return wrapField(
     {
       ...(formControlThemeProps?.fullWidth === undefined && {
@@ -73,7 +72,8 @@ function Bool(props: BoolFieldProps) {
             {...omit(filterDOMProps(props), ['helperText', 'fullWidth'])}
           />
         }
-        label={isValidElement(fieldLabel) ? fieldLabel : ''}
+        // @ts-expect-error TODO
+        label={transform ? transform(label as string) : label}
       />
     </FormGroup>,
   );
