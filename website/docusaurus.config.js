@@ -47,7 +47,9 @@ module.exports = {
     algolia: {
       apiKey: '9bab87682792c2bd77ec707a56669e29',
       appId: 'WWWW16GKXU',
+      contextualSearch: false,
       indexName: 'uniforms',
+      searchPagePath: false,
     },
     footer: { links: [] },
     hideableSidebar: true,
