@@ -12,7 +12,7 @@ export function CommercialServices() {
       className={classNames(
         'hero hero--primary',
         styles['overflow-hidden'],
-        styles.whyus,
+        styles.whyus
       )}
     >
       <div className="container">
@@ -33,7 +33,7 @@ export function CommercialServices() {
                 className={classNames(
                   styles.text,
                   styles.bullets,
-                  styles['commercial-bullets'],
+                  styles['commercial-bullets']
                 )}
               >
                 <li>
@@ -57,7 +57,12 @@ export function CommercialServices() {
               </div>
             </div>
             <div className={classNames('col', styles['commercial-box'])}>
-              <img width="600px" height="600px" src="/img/form-builder.png" />
+              <img
+                width="600px"
+                height="600px"
+                src="/img/form-builder.png"
+                alt="Form Builder"
+              />
             </div>
           </div>
         </div>
