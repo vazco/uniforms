@@ -259,31 +259,6 @@
   margin-top: -8em;
 }
 
-.commercial-box.solid-border-box {
-  margin-top: 0;
-  margin-bottom: 0;
-  padding: 2em;
-}
-
-.commercial-box h1 {
-  margin-bottom: 1em;
-}
-
-.commercial-box.commercial-box-right {
-  margin-left: 6em;
-  margin-right: -7em;
-  margin-bottom: 1em;
-}
-
-@media (max-width: 1200px) {
-  .commercial-box.solid-border-box {
-    margin: 0;
-  }
-  .commercial-box.commercial-box-right {
-    margin-bottom: 1em;
-  }
-}
-
 .fully-customizable-text {
   margin-right: -5em;
   margin-top: -8em;
@@ -700,6 +675,17 @@
 
 .bullets li::before {
   background-color: var(--periwinkle) !important;
+}
+
+.commercial-bullets > li {
+  font-weight: 400;
+}
+
+.commercial-box {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 0;
 }
 
 .vazco {
