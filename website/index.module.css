@@ -292,6 +292,10 @@
   padding: 2em;
 }
 
+.no-padding {
+  padding: 0;
+}
+
 @media (max-width: 500px) {
   .preview {
     padding: 1em;
@@ -829,4 +833,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.iframe-form-builder {
+  width: 100%;
+  aspect-ratio: 1;
 }

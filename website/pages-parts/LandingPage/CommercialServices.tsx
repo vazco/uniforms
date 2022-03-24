@@ -17,9 +17,17 @@ export function CommercialServices() {
       >
         <div className="col">
           <div
-            className={classNames(styles['preview-border'], styles['preview'])}
+            className={classNames(
+              styles['preview-border'],
+              styles['preview'],
+              styles['no-padding']
+            )}
           >
-            AAA
+            <iframe
+              className={classNames(styles['iframe-form-builder'])}
+              title="form-builder-iframe"
+              src="https://vazco.github.io/uniforms-form-builder/#N4Igtg9gJgpgNiAXKAbgSxgdwM5INqgDGEYADhAHYwUAuSIAggK40QBiGcUIANCAGacoASW6IQARl4g4AQwBG8ehwBO2GgAIKssDGnoso-lIC-PIiXJVa9Zqw7xufQY6PiATNLmKE4hgHM9PgNMNxBPMwsySmo6PxZ2IWkXLjCAZi8FJXEAcWpYFX0MULEQDMiQYmjrOMYEhy5koTCAFkyfegARWRoYDQh-DRoVWTQKMf8iw1K2iqqrWNt6pOdm0oBWduyQACE0FRoACyhZAE8pkvpNkwBdPjlTiBZcRAIQbV16AAVZQI0pe5nJ5xUAAazGpQAwpQaKMqIU-IRDmguCpqPgwRDlCsQCEwgCZECWGEIuYQOCKKUGk5ccUSZlHsTSuUyRSoTC4TAEZVkaj0a9MZTsY4LvTAYyaGFrqyseJqaLSgSHsCwgA2EAVNnCxrBOnMhkq0oAdg1dxANFOpD04gAMmh1NJiBRBJNkLjZCo0LIbOJDhBPQAvDkIMyEiWtDUyoVynF4mYGpn0AAckcFVNjequCclpQAnKa-BarfQ7Q7EZQXUhUB6vT7cVyaGhCLIQ-LDcYNbc-NgkTAwLIMQI1h2-B9rUO1DQAHI6ILmy3j9SeiiTCopESlTyj2f0X5zovjihMMCKQpr4fiDLbz7iQKUrnSA_0JcTaTUY_4EAAWRbc7Yfd_EAbnPVx42vccTl6AB5fgABURjGV9CwXZ9hiQkB3zAT8v0oE5Tg0NJEAABiIjQvi_aRYKYGBsDw_5iNI8jpAAdRgKAqFos4NHcBiyIo4CyXXKVkn9ftakgmAAFpG0-cD6HkfYjjwx8UPEF8V1NUMKAgXoXmAEwTCAA"
+            />
           </div>
         </div>
 
