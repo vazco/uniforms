@@ -77,8 +77,11 @@ export function CommercialServices() {
                 uniforms
               </li>
             </ul>
-            <div className="text--center">
-              <Button to="https://www.vazco.eu/form-builder">
+            <div className={classNames(styles['center-button'])}>
+              <Button
+                to="https://www.vazco.eu/form-builder"
+                className={classNames(styles['long-button'])}
+              >
                 Check Form Builder in action
               </Button>
             </div>

@@ -555,6 +555,17 @@
   margin-bottom: 8em;
 }
 
+.center-button {
+  display: flex;
+  justify-content: center;
+}
+
+.long-button {
+  display: flex;
+  max-width: 100%;
+  white-space: pre-line;
+}
+
 .text {
   font-family: Poppins, sans-serif;
   font-stretch: normal;
