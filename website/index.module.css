@@ -352,6 +352,10 @@
   transition: 0.2s filter;
 }
 
+.full-image {
+  display: flex;
+}
+
 .company:hover {
   filter: none;
 }
