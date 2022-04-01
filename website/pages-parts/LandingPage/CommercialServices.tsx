@@ -65,7 +65,7 @@ export function CommercialServices() {
               A commercial implementation of uniforms, which can save you up to
               1500 hours of work.
             </p>
-            <ul>
+            <ul className={classNames(styles['commercial-bullets'])}>
               <li>
                 <b>Ideal for building no-code tools</b> - thanks to a
                 schema-first approach
