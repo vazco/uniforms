@@ -23,7 +23,12 @@ export function CommercialServices() {
               styles['no-padding'],
             )}
           >
-            <a className={styles['full-image']} href="https://bit.ly/3LaZkTl">
+            <a
+              className={styles['full-image']}
+              href="https://bit.ly/3LaZkTl"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
                 alt="form-builder"
                 className={styles.company}
