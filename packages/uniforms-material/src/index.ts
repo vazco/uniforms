@@ -3,7 +3,11 @@ export { default as AutoFields, AutoFieldsProps } from './AutoFields';
 export { default as AutoForm } from './AutoForm';
 export { default as BaseForm } from './BaseForm';
 export { default as BoolField, BoolFieldProps } from './BoolField';
-export { default as DateField, DateFieldProps } from './DateField';
+export {
+  default as DateField,
+  AllowedDateTypes,
+  DateFieldProps,
+} from './DateField';
 export { default as ErrorField, ErrorFieldProps } from './ErrorField';
 export { default as ErrorsField, ErrorsFieldProps } from './ErrorsField';
 export { default as HiddenField, HiddenFieldProps } from './HiddenField';
