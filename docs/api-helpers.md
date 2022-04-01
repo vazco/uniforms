@@ -5,7 +5,7 @@ title: Helpers
 
 ## `connectField`
 
-Provides form management related props. The `connectField` helper is a component wrapper, that provides various props related to the form management. It also adds the `Field` suffix to the name of the wrapped component.
+Provides form management related props. The `connectField` helper is a component wrapper (higher order component, HOC), that provides various props related to the form management. It also adds the `Field` suffix to the name of the wrapped component.
 
 The table below lists all of the **guaranteed** props that will be passed to the wrapped component:
 
@@ -55,6 +55,17 @@ Every field is either a _leaf_ or _node_ field. In the future, we could introduc
 
 If you are not sure which one to use, do not use the `kind` option at all - it'll default to the safest option (right now it's `node`).
 
+### Props merging order
+
+The resulting props of a field are a merge of the props that uniforms provide, the ones coming from the bridge (schema) and finally the actual field props. For the exact ordering, please refer to the [source of `useField` hook](https://github.com/vazco/uniforms/blob/master/packages/uniforms/src/useField.tsx). Overall, it looks as follows:
+
+1. uniforms props (e.g., `changed`, `onChange`, `value`).
+2. uniforms state (as defined in [context data](/docs/api-context-data/#state)).
+3. bridge props (depending on the schema)
+4. field props (only when rendered directly)
+
+That's important, as using empty values in the schema or field props, like `undefined`, will be merged as well. See [#1094](https://github.com/vazco/uniforms/issues/1094) for more context as well as an example of a potential pitfall.
+
 ## `changedKeys`
 
 Returns an array of changed keys between `valueA` and `valueB`, where `root` is the root key. For examples see [`changedKeys` tests](https://github.com/vazco/uniforms/blob/master/packages/uniforms/__tests__/changedKeys.ts).
@@ -75,7 +86,7 @@ import { filterDOMProps } from 'uniforms';
 const filteredProps = filterDOMProps(props);
 ```
 
-### Custom props
+### Custom props registration
 
 It's often the case that your custom components will have a bunch of known properties, like `locale` or `userType`. To ease the process of using them across the project, you can register them to make `filterDOMProps` remove them as well. For example, [`SimpleSchemaBridge`](https://github.com/vazco/uniforms/blob/master/packages/uniforms-bridge-simple-schema/src/register.ts) registers all of the SimpleSchema-specific options.
 
@@ -140,7 +151,7 @@ For more examples check [`joinName` tests](https://github.com/vazco/uniforms/blo
 
 ## `randomIds`
 
-Generates random ID, based on given prefix. Use it, if you want to have random but deterministic strings. If no prefix is provided, a unique 'uniforms-X' prefix will be used generated.
+Generates random ID, based on given prefix. Use it, if you want to have random but deterministic strings. If no prefix is provided, a unique `uniforms-X` prefix will be used generated.
 
 ```tsx
 import { randomIds } from 'uniforms';
@@ -161,9 +172,21 @@ randomId3(); // prefix-0001
 randomId3(); // prefix-0002
 ```
 
+## `useForm`
+
+A direct way of accessing the [context data](/docs/api-context-data/#state):
+
+```tsx
+import { useForm } from 'uniforms';
+
+function Example() {
+  const context = useForm();
+}
+```
+
 ## `useField`
 
-A hook version of [`connectField`](#connectfield). It receives three arguments: field name (string), field props (object), and optional options.
+A hook version of [`connectField`](#connectfield). It receives three arguments: field name (`string`), field props (`object`), and optional options.
 
 ```tsx
 function Example(props) {
@@ -174,7 +197,20 @@ function Example(props) {
 
 The table below lists all available options:
 
-|      Name      |   Type    |                                                             Description                                                              |
-| :------------: | :-------: | :----------------------------------------------------------------------------------------------------------------------------------: |
-| `absoluteName` | `boolean` |                                              If `true`, ignores the name from context.                                               |
-| `initialValue` | `boolean` | Initial value check. If `true`, then after the first render the default value is set as value if no value is provided (`undefined`). |
+|      Name      |   Type    | Default |                                                             Description                                                              |
+| :------------: | :-------: | :-----: | :----------------------------------------------------------------------------------------------------------------------------------: |
+| `absoluteName` | `boolean` | `false` |                         Whether the field name should be treated as a top-level one, ignoring parent fields.                         |
+| `initialValue` | `boolean` | `true`  | Initial value check. If `true`, then after the first render the default value is set as value if no value is provided (`undefined`). |
+
+Using `useField` allows you to create components that combine values of multiple fields:
+
+```tsx
+import { useField } from 'uniforms';
+
+function ArePasswordsEqual() {
+  const [{ value: passwordA }] = useField('passwordA', {});
+  const [{ value: passwordB }] = useField('passwordB', {});
+  const areEqual = passwordA === passwordB;
+  return <div>{`Passwords are ${areEqual ? 'equal' : 'not equal'}`}</div>;
+}
+```
