@@ -58,17 +58,17 @@ const schema = `
 const schemaType = buildASTSchema(parse(schema)).getType('Post');
 const schemaExtras = {
   id: {
-    allowedValues: [1, 2, 3]
+    allowedValues: [1, 2, 3],
   },
   title: {
     options: [
       { label: 1, value: 'a' },
-      { label: 2, value: 'b' }
-    ]
+      { label: 2, value: 'b' },
+    ],
   },
   'author.firstName': {
-    placeholder: 'John'
-  }
+    placeholder: 'John',
+  },
 };
 
 const schemaValidator = (model: object) => {
@@ -85,7 +85,7 @@ const schemaValidator = (model: object) => {
   if (model.votes < 0) {
     details.push({
       name: 'votes',
-      message: 'Votes must be a non-negative number!'
+      message: 'Votes must be a non-negative number!',
     });
   }
 
@@ -114,10 +114,10 @@ const schema = {
     age: {
       description: 'Age in years',
       type: 'integer',
-      minimum: 0
-    }
+      minimum: 0,
+    },
   },
-  required: ['firstName', 'lastName']
+  required: ['firstName', 'lastName'],
 };
 
 function createValidator(schema: object) {
@@ -202,9 +202,9 @@ const PersonSchema = new SimpleSchema({
     uniforms: {
       // ...or object...
       component: MyText, // ...with component...
-      propA: 1 // ...and/or extra props.
-    }
-  }
+      propA: 1, // ...and/or extra props.
+    },
+  },
 });
 
 const bridge = new SimpleSchema2Bridge(PersonSchema);
@@ -225,9 +225,9 @@ const PersonSchema = new SimpleSchema({
     uniforms: {
       // ...or object...
       component: MyText, // ...with component...
-      propA: 1 // ...and/or extra props.
-    }
-  }
+      propA: 1, // ...and/or extra props.
+    },
+  },
 });
 
 const bridge = new SimpleSchemaBridge(PersonSchema);
