@@ -10,45 +10,25 @@ Some of them were designed for internal use, but you can still take advantage of
 
 ## Accessing context data
 
-A convenient way to access context is to use the `useForm` hook:
+A direct way of accessing the context data is to use the [`useForm`](/docs/api-helpers/#useform) hook:
 
 ```tsx
 import { useForm } from 'uniforms';
 
-function MyComponent() {
-  const uniforms = useForm();
+function Example() {
+  const context = useForm();
 }
 ```
 
-If you want to access only field-relevant part, use `useField(name, props)` hook, where `name` is the target field name and `props` are the props of it:
+For convenience, it's also accessible through the [`useField`](/docs/api-helpers/#usefield) hook:
 
 ```tsx
 import { useField } from 'uniforms';
 
-function MyCustomField(rawProps) {
-  const [props, uniforms] = useField(rawProps.name, rawProps);
+function Example(rawProps) {
+  const [props, context] = useField(rawProps.name, rawProps);
 }
 ```
-
-Using `useField` allows you to create components that combine values of multiple fields:
-
-```tsx
-import { useField } from 'uniforms';
-
-function ArePasswordsEqual() {
-  const [{ value: passwordA }] = useField('passwordA', {});
-  const [{ value: passwordB }] = useField('passwordB', {});
-  const areEqual = passwordA === passwordB;
-  return <div>{`Passwords are ${areEqual ? 'equal' : 'not equal'}`}</div>;
-}
-```
-
-Additionally, `useField` accept third, optional parameter: `options`:
-
-|     Option     | Default |                                                             Description                                                              |
-| :------------: | :-----: | :----------------------------------------------------------------------------------------------------------------------------------: |
-| `absoluteName` | `false` |                         Whether the field name should be treated as a top-level one, ignoring parent fields.                         |
-| `initialValue` | `true`  | Initial value check. If `true`, then after the first render the default value is set as value if no value is provided (`undefined`). |
 
 ## Available context data
 
