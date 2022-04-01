@@ -9,6 +9,7 @@
     "moduleResolution": "node",
     "paths": { "uniforms": ["uniforms/src"], "uniforms-*": ["uniforms-*/src"] },
     "strict": true,
-    "target": "ES6"
+    "target": "ES6",
+    "resolveJsonModule": true
   }
 }
