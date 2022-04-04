@@ -1,5 +1,5 @@
 import React from 'react';
-import { DateField } from 'uniforms-bootstrap3';
+import { DateField, DateFieldProps } from 'uniforms-bootstrap3';
 
 import createContext from './_createContext';
 import mount from './_mount';
@@ -43,13 +43,18 @@ test('<DateField> - renders an input with correct type', () => {
   expect(wrapper.find('input').prop('type')).toBe('datetime-local');
 });
 
-test('<DateField> - renders an input with correct disabled state', () => {
-  const element = <DateField name="x" disabled />;
-  const wrapper = mount(element, createContext({ x: { type: Date } }));
+const cases = ['datetime-local', 'date'] as DateFieldProps['type'][];
 
-  expect(wrapper.find('input')).toHaveLength(1);
-  expect(wrapper.find('input').prop('disabled')).toBe(true);
-});
+test.each(cases)(
+  '<DateField> - renders a Input with correct type : "%s"',
+  (type: DateFieldProps['type']) => {
+    const element = <DateField name="x" type={type} />;
+    const wrapper = mount(element, createContext({ x: { type: Date } }));
+
+    expect(wrapper.find('input')).toHaveLength(1);
+    expect(wrapper.find('input').prop('type')).toBe(type);
+  },
+);
 
 test('<DateField> - renders an input with correct readOnly state', () => {
   const element = <DateField name="x" readOnly />;

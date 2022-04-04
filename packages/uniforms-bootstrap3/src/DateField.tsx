@@ -18,6 +18,7 @@ export type DateFieldProps = HTMLFieldProps<
     max?: Date;
     min?: Date;
     wrapClassName?: string;
+    type?: 'date' | 'datetime-local';
   }
 >;
 
@@ -34,8 +35,11 @@ function Date({
   placeholder,
   readOnly,
   value,
+  type,
   ...props
 }: DateFieldProps) {
+  const dateType = type === 'date' ? type : 'datetime-local';
+
   return wrapField(
     { ...props, id },
     <input
@@ -58,7 +62,7 @@ function Date({
       placeholder={placeholder}
       readOnly={readOnly}
       ref={inputRef}
-      type="datetime-local"
+      type={dateType}
       value={dateFormat(value) ?? ''}
     />,
   );
