@@ -20,7 +20,7 @@ What makes it unique though, is the ability to **completely generate the form** 
 In order to do so, uniforms require you to do two things:
 
 1. Provide **the schema** of your data. You can approach the schema as a formal description of the data, where you define its types, allowed values, default values, required ones and so on.
-2. Select desired **theme**. The theme is basically a package containing pre-styled form components in one of the popular styles (AntD, Bootstrap 3, Bootstrap 4, Bootstrap 5, Material, Semantic) or raw, unstyled HTML.
+2. Select desired **theme**. The theme is basically a package containing pre-styled form components in one of the popular styles (AntD, Bootstrap 3, Bootstrap 4, Bootstrap 5, Material, MUI, Semantic) or raw, unstyled HTML.
 
 To operate on the schema, uniforms will need to receive a _bridge_ of it.
 A bridge is a unified schema mapper that is used by uniforms internals in order to be able to operate on the schema data, validate it and generate errors.
