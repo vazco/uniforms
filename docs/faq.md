@@ -26,8 +26,8 @@ const schema = {
   /*...*/
   firstName: {
     type: 'string',
-    uniforms: MyCustomFirstNameField
-  }
+    uniforms: MyCustomFirstNameField,
+  },
   /*...*/
 };
 ```
@@ -58,9 +58,9 @@ const schema = {
     uniforms: {
       component: MyCustomFirstNameField,
       propA: 1,
-      propB: 2
-    }
-  }
+      propB: 2,
+    },
+  },
   /*...*/
 };
 ```

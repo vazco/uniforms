@@ -22,20 +22,20 @@ const UserLoginSchema = {
     __type__: String,
     required: true,
     initialValue: '',
-    label: 'Login'
+    label: 'Login',
   },
   password1: {
     __type__: String,
     required: true,
     initialValue: '',
-    label: 'Password'
+    label: 'Password',
   },
   password2: {
     __type__: String,
     required: true,
     initialValue: '',
-    label: 'Password (again)'
-  }
+    label: 'Password (again)',
+  },
 };
 
 export default UserLoginSchema;
@@ -146,7 +146,7 @@ import UserLoginSchemaValidator from './UserLoginSchemaValidator';
 
 const bridge = new UserLoginSchemaBridge(
   UserLoginSchema,
-  UserLoginSchemaValidator
+  UserLoginSchemaValidator,
 );
 
 <AutoForm schema={bridge} />;

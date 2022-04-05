@@ -34,7 +34,7 @@ const Modifier = parent =>
         // It's a good idea to omit empty modifiers.
         const $set = update.reduce(
           (acc, key) => ({ ...acc, [key]: doc[key] }),
-          {}
+          {},
         );
         const $unset = remove.reduce((acc, key) => ({ ...acc, [key]: '' }), {});
 

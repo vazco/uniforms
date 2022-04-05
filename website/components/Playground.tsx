@@ -129,6 +129,7 @@ class PlaygroundPreview extends Component<any, any> {
     this._schema = eval(`(${this.props.value.schema})`);
   }
 
+  // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(props: any) {
     if (this.props.value.schema !== props.value.schema) {
       this._schema = eval(`(${props.value.schema})`);
