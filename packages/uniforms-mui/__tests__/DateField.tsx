@@ -97,8 +97,8 @@ test('<DateField> - renders a Input which correctly reacts on change', () => {
     createContext({ x: { type: Date } }, { onChange }),
   );
 
-  // @ts-expect-error Provide a valid EventTarget.
   wrapper.find(OutlinedInput).props().onChange!({
+    // @ts-expect-error Provide a valid EventTarget.
     target: { valueAsNumber: now },
   });
   expect(onChange).toHaveBeenLastCalledWith('x', now);
@@ -130,8 +130,8 @@ test('<DateField> - renders a Input which correctly reacts on change (overflow)'
     createContext({ x: { type: Date } }, { onChange }),
   );
 
-  // @ts-expect-error Provide a valid EventTarget.
   wrapper.find(OutlinedInput).props().onChange!({
+    // @ts-expect-error Provide a valid EventTarget.
     target: { valueAsNumber: now },
   });
   expect(onChange).not.toHaveBeenCalled();
