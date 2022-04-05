@@ -21,6 +21,7 @@ test('<ListAddField> - works', () => {
   expect(wrapper.find(ListAddField)).toHaveLength(1);
 });
 
+// TODO[rtl]
 // Strange enzyme behavior
 // TypeError: Cannot read properties of null (reading '__reactFiber$v1v8jcegjcp')
 test.skip('<ListAddField> - prevents onClick when disabled', () => {

@@ -2,7 +2,6 @@ import FormControl from '@mui/material/FormControl';
 import FormHelperText, {
   FormHelperTextProps,
 } from '@mui/material/FormHelperText';
-import { useTheme } from '@mui/material';
 import React from 'react';
 import { Override, connectField, filterDOMProps } from 'uniforms';
 
@@ -24,15 +23,12 @@ function Error({
   variant,
   ...props
 }: ErrorFieldProps) {
-  const theme = useTheme();
-  const themeProps = theme.components?.MuiFormControl?.defaultProps;
-
   return !error ? null : (
     <FormControl
       error={!!error}
-      fullWidth={fullWidth ?? themeProps?.fullWidth ?? true}
-      margin={margin ?? themeProps?.margin ?? 'dense'}
-      variant={variant ?? themeProps?.variant}
+      fullWidth={!!fullWidth}
+      margin={margin === 'dense' ? margin : undefined}
+      variant={variant}
     >
       <FormHelperText {...filterDOMProps(props)}>
         {children || errorMessage}

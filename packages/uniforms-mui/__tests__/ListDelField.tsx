@@ -21,6 +21,7 @@ test('<ListDelField> - works', () => {
   expect(wrapper.find(ListDelField)).toHaveLength(1);
 });
 
+// TODO[rtl]
 // Strange enzyme behavior
 // Cannot read properties of null (reading '__reactFiber$ap6ft6j7fg7')
 test.skip('<ListDelField> - prevents onClick when disabled', () => {

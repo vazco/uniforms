@@ -1,82 +1,10 @@
 import FormHelperText from '@mui/material/FormHelperText';
 import FormLabel from '@mui/material/FormLabel';
-import { adaptV4Theme, createTheme } from '@mui/material/styles';
-import ThemeProvider from '@mui/styles/ThemeProvider';
 import React from 'react';
 import { AutoField, NestField } from 'uniforms-mui';
-import { render } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
 import mount from './_mount';
-
-describe('@RTL - NestField tests', () => {
-  test('<NestField> - default props are not passed when MUI theme props are specified', () => {
-    const theme = createTheme(
-      adaptV4Theme({
-        props: { MuiFormControl: { fullWidth: false, margin: 'normal' } },
-      }),
-    );
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <NestField name="x" />
-      </ThemeProvider>,
-      { x: { type: Object }, 'x.a': { type: String } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginNormal',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
-  });
-
-  test('<NestField> - default props are passed when MUI theme props are absent', () => {
-    const theme = createTheme(adaptV4Theme({}));
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <NestField name="x" />
-      </ThemeProvider>,
-      { x: { type: Object }, 'x.a': { type: String } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginDense',
-    );
-    expect(elements).toHaveLength(2); // Nested TextField is found as well
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      true,
-    );
-  });
-
-  test('<NestField> - explicit props are passed when MUI theme props are specified', () => {
-    const theme = createTheme(
-      adaptV4Theme({
-        props: { MuiFormControl: { fullWidth: true, margin: 'dense' } },
-      }),
-    );
-    const explicitProps = {
-      fullWidth: false,
-      margin: 'normal' as const,
-    };
-
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <NestField name="x" {...explicitProps} />
-      </ThemeProvider>,
-      { x: { type: Object }, 'x.a': { type: String } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginNormal',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
-  });
-});
 
 test('<NestField> - renders an <AutoField> for each field', () => {
   const element = <NestField name="x" />;

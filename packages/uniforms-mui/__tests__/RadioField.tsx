@@ -4,83 +4,11 @@ import FormHelperText from '@mui/material/FormHelperText';
 import FormLabel from '@mui/material/FormLabel';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
-import { adaptV4Theme, createTheme } from '@mui/material/styles';
-import ThemeProvider from '@mui/styles/ThemeProvider';
 import React from 'react';
 import { RadioField } from 'uniforms-mui';
-import { render } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
 import mount from './_mount';
-
-describe('@RTL - RadioField tests', () => {
-  test('<RadioField> - default props are not passed when MUI theme props are specified', () => {
-    const theme = createTheme(
-      adaptV4Theme({
-        props: { MuiFormControl: { fullWidth: false, margin: 'normal' } },
-      }),
-    );
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <RadioField name="x" />
-      </ThemeProvider>,
-      { x: { type: String } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginNormal',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
-  });
-
-  test('<RadioField> - default props are passed when MUI theme props are absent', () => {
-    const theme = createTheme(adaptV4Theme({}));
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <RadioField name="x" />
-      </ThemeProvider>,
-      { x: { type: String } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginDense',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      true,
-    );
-  });
-
-  test('<RadioField> - explicit props are passed when MUI theme props are specified', () => {
-    const theme = createTheme(
-      adaptV4Theme({
-        props: { MuiFormControl: { fullWidth: true, margin: 'dense' } },
-      }),
-    );
-    const explicitProps = {
-      fullWidth: false,
-      margin: 'normal' as const,
-    };
-
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <RadioField name="x" {...explicitProps} />
-      </ThemeProvider>,
-      { x: { type: String } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginNormal',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
-  });
-});
 
 test('<RadioField> - renders a set of Radio buttons', () => {
   const element = <RadioField name="x" />;

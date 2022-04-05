@@ -1,11 +1,11 @@
 # uniforms-mui
 
-> Material UI components for `uniforms`.
+> MUI components for `uniforms`.
 
 ## Install
 
 ```sh
-$ npm install uniforms-material
+$ npm install uniforms-mui
 ```
 
 For more in depth documentation see [uniforms.tools](https://uniforms.tools).

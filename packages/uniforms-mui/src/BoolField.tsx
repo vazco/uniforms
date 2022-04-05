@@ -1,4 +1,3 @@
-import { useTheme } from '@mui/material';
 import Checkbox, { CheckboxProps } from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
@@ -36,20 +35,11 @@ function Bool(props: BoolFieldProps) {
     transform,
     value,
   } = props;
-  const theme = useTheme();
-  const formControlThemeProps = theme.components?.MuiFormControl?.defaultProps;
   const SelectionControl =
     appearance === 'checkbox' || appearance === undefined ? Checkbox : Switch;
 
   return wrapField(
-    {
-      ...(formControlThemeProps?.fullWidth === undefined && {
-        fullWidth: true,
-      }),
-      ...(formControlThemeProps?.margin === undefined && { margin: 'dense' }),
-      ...props,
-      component: 'fieldset',
-    },
+    { fullWidth: true, margin: 'dense', ...props, component: 'fieldset' },
     legend && (
       <FormLabel component="legend" htmlFor={name}>
         {legend}

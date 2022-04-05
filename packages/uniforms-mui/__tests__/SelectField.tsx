@@ -8,107 +8,11 @@ import RadioGroup from '@mui/material/RadioGroup';
 import Select from '@mui/material/Select';
 import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
-import { adaptV4Theme, createTheme } from '@mui/material/styles';
-import ThemeProvider from '@mui/styles/ThemeProvider';
 import React from 'react';
 import { SelectField } from 'uniforms-mui';
-import { render } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
 import mount from './_mount';
-
-describe('@RTL - SelectField tests', () => {
-  test('<SelectField> - default props are not passed when MUI theme props are specified', () => {
-    const theme = createTheme(
-      adaptV4Theme({
-        props: { MuiTextField: { fullWidth: false, margin: 'normal' } },
-      }),
-    );
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <SelectField name="x" />
-      </ThemeProvider>,
-      { x: { type: String, allowedValues: ['a', 'b'] } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginNormal',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
-  });
-
-  test('<SelectField> - default props are passed when MUI theme props are absent', () => {
-    const theme = createTheme(adaptV4Theme({}));
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <SelectField name="x" />
-      </ThemeProvider>,
-      { x: { type: String, allowedValues: ['a', 'b'] } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginDense',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      true,
-    );
-  });
-
-  test('<SelectField> - explicit props are passed when MUI theme props are specified', () => {
-    const theme = createTheme(
-      adaptV4Theme({
-        props: { MuiTextField: { fullWidth: true, margin: 'dense' } },
-      }),
-    );
-    const explicitProps = {
-      fullWidth: false,
-      margin: 'normal' as const,
-    };
-
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        {/* When passing explicit props, TS errors regarding missing variant pop up */}
-        {/* @ts-expect-error */}
-        <SelectField name="x" {...explicitProps} />
-      </ThemeProvider>,
-      { x: { type: String, allowedValues: ['a', 'b'] } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginNormal',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
-  });
-
-  test('<SelectField checkboxes> -  MUI theme props are passed', () => {
-    const theme = createTheme(
-      adaptV4Theme({
-        props: { MuiFormControl: { fullWidth: false, margin: 'normal' } },
-      }),
-    );
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <SelectField checkboxes name="x" />
-      </ThemeProvider>,
-      { x: { type: String, allowedValues: ['a', 'b'] } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginNormal',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
-  });
-});
 
 test('<SelectField> - renders a Select', () => {
   const element = <SelectField name="x" />;

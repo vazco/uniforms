@@ -3,83 +3,11 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormLabel from '@mui/material/FormLabel';
 import Switch from '@mui/material/Switch';
-import { adaptV4Theme, createTheme } from '@mui/material/styles';
-import ThemeProvider from '@mui/styles/ThemeProvider';
 import React from 'react';
 import { BoolField } from 'uniforms-mui';
-import { render } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
 import mount from './_mount';
-
-describe('@RTL - BoolField tests', () => {
-  test('<BoolField> - default props are not passed when MUI theme props are specified', () => {
-    const theme = createTheme(
-      adaptV4Theme({
-        props: { MuiFormControl: { fullWidth: false, margin: 'normal' } },
-      }),
-    );
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <BoolField name="x" />
-      </ThemeProvider>,
-      { x: { type: Boolean } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginNormal',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
-  });
-
-  test('<BoolField> - default props are passed when MUI theme props are absent', () => {
-    const theme = createTheme(adaptV4Theme({}));
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <BoolField name="x" />
-      </ThemeProvider>,
-      { x: { type: Boolean } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginDense',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      true,
-    );
-  });
-
-  test('<BoolField> - explicit props are passed when MUI theme props are specified', () => {
-    const theme = createTheme(
-      adaptV4Theme({
-        props: { MuiFormControl: { fullWidth: true, margin: 'dense' } },
-      }),
-    );
-    const explicitProps = {
-      fullWidth: false,
-      margin: 'normal' as const,
-    };
-
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <BoolField name="x" {...explicitProps} />
-      </ThemeProvider>,
-      { x: { type: Boolean } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginNormal',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
-  });
-});
 
 test('<BoolField> - renders an Checkbox', () => {
   const element = <BoolField name="x" />;

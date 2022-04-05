@@ -1,4 +1,3 @@
-import { useTheme } from '@mui/material';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
@@ -38,19 +37,16 @@ function Date({
   value,
   ...props
 }: DateFieldProps) {
-  const theme = useTheme();
-  const themeProps = theme.components?.MuiTextField?.defaultProps;
-
   return (
     <TextField
       disabled={disabled}
       error={!!error}
-      fullWidth={themeProps?.fullWidth ?? true}
+      fullWidth
       helperText={(error && showInlineError && errorMessage) || helperText}
       label={label}
       InputLabelProps={{ shrink: true, ...labelProps, ...InputLabelProps }}
-      inputProps={{ readOnly, ...(themeProps?.inputProps ?? {}) }}
-      margin={themeProps?.margin ?? 'dense'}
+      inputProps={{ readOnly }}
+      margin="dense"
       name={name}
       onChange={event =>
         // FIXME: `valueAsNumber` is not available in `EventTarget`.

@@ -1,4 +1,3 @@
-import { useTheme } from '@mui/material';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
@@ -29,17 +28,13 @@ function Num({
   value,
   ...props
 }: NumFieldProps) {
-  const theme = useTheme();
-  const themeProps = theme.components?.MuiTextField?.defaultProps;
-
   return (
     <TextField
       disabled={disabled}
       error={!!error}
-      fullWidth={themeProps?.fullWidth ?? true}
+      fullWidth
       helperText={(error && showInlineError && errorMessage) || helperText}
       inputProps={{
-        ...(themeProps?.inputProps ?? {}),
         min,
         max,
         readOnly,
@@ -47,7 +42,7 @@ function Num({
         ...inputProps,
       }}
       label={label}
-      margin={themeProps?.margin ?? 'dense'}
+      margin="dense"
       name={name}
       onChange={event => {
         const parse = decimal ? parseFloat : parseInt;

@@ -269,7 +269,7 @@ export class PlaygroundWrap extends Component<any, any> {
       );
     }
 
-    if (theme === 'material5') {
+    if (theme === 'mui') {
       // Material-UI injects scoped CSS classes into head.
       return (
         <section

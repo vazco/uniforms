@@ -1,6 +1,6 @@
 # uniforms-material
 
-> Material UI components for `uniforms`.
+> Material components for `uniforms`.
 
 ## Install
 

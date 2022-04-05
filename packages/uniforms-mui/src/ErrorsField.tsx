@@ -1,4 +1,3 @@
-import { useTheme } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import FormHelperText, {
   FormHelperTextProps,
@@ -22,16 +21,14 @@ function ErrorsField({
   variant,
   ...props
 }: ErrorsFieldProps) {
-  const theme = useTheme();
-  const themeProps = theme.components?.MuiFormControl?.defaultProps;
   const { error, schema } = useForm();
 
   return !error && !children ? null : (
     <FormControl
       error={!!error}
-      fullWidth={fullWidth ?? themeProps?.fullWidth ?? true}
-      margin={margin ?? themeProps?.margin ?? 'dense'}
-      variant={variant ?? themeProps?.variant}
+      fullWidth={!!fullWidth}
+      margin={margin}
+      variant={variant}
     >
       {!!children && (
         <FormHelperText {...filterDOMProps(props)}>{children}</FormHelperText>

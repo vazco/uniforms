@@ -1,81 +1,9 @@
 import TextField from '@mui/material/TextField';
-import { adaptV4Theme, createTheme } from '@mui/material/styles';
-import ThemeProvider from '@mui/styles/ThemeProvider';
 import React from 'react';
 import { NumField } from 'uniforms-mui';
-import { render } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
 import mount from './_mount';
-
-describe('@RTL - NumField tests', () => {
-  test('<NumField> - default props are not passed when MUI theme props are specified', () => {
-    const theme = createTheme(
-      adaptV4Theme({
-        props: { MuiTextField: { fullWidth: false, margin: 'normal' } },
-      }),
-    );
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <NumField name="x" />
-      </ThemeProvider>,
-      { x: { type: Number } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginNormal',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
-  });
-
-  test('<NumField> - default props are passed when MUI theme props are absent', () => {
-    const theme = createTheme(adaptV4Theme({}));
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <NumField name="x" />
-      </ThemeProvider>,
-      { x: { type: Number } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginDense',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      true,
-    );
-  });
-
-  test('<NumField> - explicit props are passed when MUI theme props are specified', () => {
-    const theme = createTheme(
-      adaptV4Theme({
-        props: { MuiTextField: { fullWidth: true, margin: 'dense' } },
-      }),
-    );
-    const explicitProps = {
-      fullWidth: false,
-      margin: 'normal' as const,
-    };
-
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <NumField name="x" {...explicitProps} />
-      </ThemeProvider>,
-      { x: { type: Number } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginNormal',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
-  });
-});
 
 test('<NumField> - renders a TextField', () => {
   const element = <NumField name="x" />;

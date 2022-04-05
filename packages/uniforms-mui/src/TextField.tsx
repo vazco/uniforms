@@ -1,4 +1,3 @@
-import { useTheme } from '@mui/material';
 import TextField, {
   TextFieldProps as MUITextFieldProps,
 } from '@mui/material/TextField';
@@ -23,18 +22,15 @@ function Text({
   value = '',
   ...props
 }: TextFieldProps) {
-  const theme = useTheme();
-  const themeProps = theme.components?.MuiTextField?.defaultProps;
-
   return (
     <TextField
       disabled={disabled}
       error={!!error}
-      fullWidth={themeProps?.fullWidth ?? true}
+      fullWidth
       helperText={(error && showInlineError && errorMessage) || helperText}
-      inputProps={{ readOnly, ...(themeProps?.inputProps ?? {}) }}
+      inputProps={{ readOnly }}
       label={label}
-      margin={themeProps?.margin ?? 'dense'}
+      margin="dense"
       name={name}
       onChange={event => disabled || onChange(event.target.value)}
       placeholder={placeholder}

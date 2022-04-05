@@ -1,4 +1,3 @@
-import { useTheme } from '@mui/material';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
@@ -21,18 +20,15 @@ const LongText = ({
   value,
   ...props
 }: LongTextFieldProps) => {
-  const theme = useTheme();
-  const themeProps = theme.components?.MuiTextField?.defaultProps;
-
   return (
     <TextField
       disabled={disabled}
       error={!!error}
-      fullWidth={themeProps?.fullWidth ?? true}
+      fullWidth
       helperText={(error && showInlineError && errorMessage) || helperText}
-      inputProps={{ ...themeProps?.inputProps, readOnly }}
+      inputProps={{ readOnly }}
       label={label}
-      margin={themeProps?.margin ?? 'dense'}
+      margin="dense"
       multiline
       name={name}
       onChange={event => disabled || onChange(event.target.value)}

@@ -1,4 +1,3 @@
-import { useTheme } from '@mui/material';
 import Button, { ButtonProps } from '@mui/material/Button';
 import React, { ReactNode, Ref } from 'react';
 import { Override, filterDOMProps, useForm } from 'uniforms';
@@ -18,8 +17,6 @@ function SubmitField({
   ...props
 }: SubmitFieldProps) {
   const { error, state } = useForm();
-  const theme = useTheme();
-  const themeProps = theme.components?.MuiButton?.defaultProps;
 
   return (
     <Button
@@ -27,7 +24,7 @@ function SubmitField({
       ref={inputRef}
       type="submit"
       value={value}
-      variant={themeProps?.variant ?? 'contained'}
+      variant="contained"
       {...filterDOMProps(props)}
     >
       {children || label}

@@ -2,83 +2,11 @@ import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormLabel from '@mui/material/FormLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import { adaptV4Theme, createTheme } from '@mui/material/styles';
-import ThemeProvider from '@mui/styles/ThemeProvider';
 import React from 'react';
 import { DateField } from 'uniforms-mui';
-import { render } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
 import mount from './_mount';
-
-describe('@RTL - DateField tests', () => {
-  test('<DateField> - default props are not passed when MUI theme props are specified', () => {
-    const theme = createTheme(
-      adaptV4Theme({
-        props: { MuiTextField: { fullWidth: false, margin: 'normal' } },
-      }),
-    );
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <DateField name="x" />
-      </ThemeProvider>,
-      { x: { type: Date } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginNormal',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
-  });
-
-  test('<DateField> - default props are passed when MUI theme props are absent', () => {
-    const theme = createTheme(adaptV4Theme({}));
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <DateField name="x" />
-      </ThemeProvider>,
-      { x: { type: Date } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginDense',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      true,
-    );
-  });
-
-  test('<DateField> - explicit props are passed when MUI theme props are specified', () => {
-    const theme = createTheme(
-      adaptV4Theme({
-        props: { MuiTextField: { fullWidth: true, margin: 'dense' } },
-      }),
-    );
-    const explicitProps = {
-      fullWidth: false,
-      margin: 'normal' as const,
-    };
-
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <DateField name="x" {...explicitProps} />
-      </ThemeProvider>,
-      { x: { type: Date } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginNormal',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
-  });
-});
 
 test('<DateField> - renders Input', () => {
   const element = <DateField name="x" />;
@@ -170,7 +98,9 @@ test('<DateField> - renders a Input which correctly reacts on change', () => {
   );
 
   // @ts-expect-error Provide a valid EventTarget.
-  wrapper.find(OutlinedInput).props().onChange!({ target: { valueAsNumber: now } });
+  wrapper.find(OutlinedInput).props().onChange!({
+    target: { valueAsNumber: now },
+  });
   expect(onChange).toHaveBeenLastCalledWith('x', now);
 });
 
@@ -201,7 +131,9 @@ test('<DateField> - renders a Input which correctly reacts on change (overflow)'
   );
 
   // @ts-expect-error Provide a valid EventTarget.
-  wrapper.find(OutlinedInput).props().onChange!({ target: { valueAsNumber: now } });
+  wrapper.find(OutlinedInput).props().onChange!({
+    target: { valueAsNumber: now },
+  });
   expect(onChange).not.toHaveBeenCalled();
 });
 
