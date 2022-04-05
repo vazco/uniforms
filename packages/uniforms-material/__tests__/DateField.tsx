@@ -132,9 +132,7 @@ test('<DateField> - renders a Input with correct value (default)', () => {
   expect(wrapper.find(Input).prop('value')).toBe('');
 });
 
-const cases = ['datetime-local', 'date'] as DateFieldProps['type'][];
-
-test.each(cases)(
+test.each(['datetime-local', 'date'] as const)(
   '<DateField> - renders a Input with correct value (model) when type is "%s"',
   (type: DateFieldProps['type']) => {
     const now = new Date();

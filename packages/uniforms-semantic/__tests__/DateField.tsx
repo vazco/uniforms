@@ -35,9 +35,7 @@ test('<DateField> - renders a input with correct name', () => {
   expect(wrapper.find('input').prop('name')).toBe('x');
 });
 
-const cases = ['datetime-local', 'date'] as DateFieldProps['type'][];
-
-test.each(cases)(
+test.each(['datetime-local', 'date'] as const)(
   '<DateField> - renders a Input with correct type : "%s"',
   (type: DateFieldProps['type']) => {
     const element = <DateField name="x" type={type} />;
