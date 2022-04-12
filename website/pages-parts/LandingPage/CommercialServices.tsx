@@ -24,7 +24,7 @@ export function CommercialServices() {
             )}
           >
             <a
-              className={styles['full-image']}
+              className={styles['flex-center']}
               href="https://bit.ly/3LaZkTl"
               target="_blank"
               rel="noopener noreferrer"
@@ -82,7 +82,7 @@ export function CommercialServices() {
                 uniforms
               </li>
             </ul>
-            <div className={classNames(styles['center-button'])}>
+            <div className={classNames(styles['flex-center'])}>
               <Button
                 to="https://www.vazco.eu/form-builder"
                 className={classNames(styles['long-button'])}
