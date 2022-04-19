@@ -5,7 +5,8 @@ import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 /* istanbul ignore next */
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
-const dateFormat = (value?: Date) => value && value.toISOString().slice(0, -8);
+const dateFormat = (value?: Date, type = 'datetime-local') =>
+  value?.toISOString().slice(0, type === 'datetime-local' ? -8 : -14);
 const dateParse = (timestamp: number, onChange: DateFieldProps['onChange']) => {
   const date = new DateConstructor(timestamp);
   if (date.getFullYear() < 10000) {
@@ -18,7 +19,10 @@ const dateParse = (timestamp: number, onChange: DateFieldProps['onChange']) => {
 export type DateFieldProps = FieldProps<
   Date,
   TextFieldProps,
-  { labelProps?: object }
+  {
+    labelProps?: object;
+    type?: 'date' | 'datetime-local';
+  }
 >;
 
 function Date({
@@ -36,10 +40,12 @@ function Date({
   readOnly,
   showInlineError,
   value,
+  type,
   ...props
 }: DateFieldProps) {
   const theme = useTheme();
   const themeProps = theme.components?.MuiTextField?.defaultProps;
+  const dateType = type === 'date' ? type : 'datetime-local';
 
   return (
     <TextField
@@ -52,14 +58,14 @@ function Date({
       inputProps={{ readOnly, ...(themeProps?.inputProps ?? {}) }}
       margin={themeProps?.margin ?? 'dense'}
       name={name}
-      onChange={event =>
+      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
         // FIXME: `valueAsNumber` is not available in `EventTarget`.
-        disabled || dateParse((event.target as any).valueAsNumber, onChange)
+        disabled || dateParse(event.target.valueAsNumber, onChange)
       }
       placeholder={placeholder}
       ref={inputRef}
-      type="datetime-local"
-      value={dateFormat(value) ?? ''}
+      type={dateType}
+      value={dateFormat(value, type) ?? ''}
       {...filterDOMProps(props)}
     />
   );
