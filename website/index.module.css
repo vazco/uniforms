@@ -556,8 +556,11 @@
   justify-content: center;
 }
 
+.top-margin {
+  margin-top: 70px;
+}
+
 .long-button {
-  display: flex;
   max-width: 100%;
   white-space: pre-line;
 }
