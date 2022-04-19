@@ -42,6 +42,7 @@ const styles = {
   ]),
 
   material: style([]),
+  mui: style([]),
 
   semantic: style([
     'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css',
