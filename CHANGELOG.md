@@ -1,3 +1,7 @@
+## [v3.9.0](https://github.com/vazco/uniforms/tree/v3.9.0) (2022-04-22)
+
+- **Added:** Handling of `type="date"` in `DateField`. [\#1099](https://github.com/vazco/uniforms/issues/1099)
+
 ## [v3.8.1](https://github.com/vazco/uniforms/tree/v3.8.1) (2022-02-15)
 
 - **Added:** Fixed RegExp compatibility with Safari. [\#1088](https://github.com/vazco/uniforms/issues/1088)
