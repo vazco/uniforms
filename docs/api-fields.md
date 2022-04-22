@@ -12,7 +12,7 @@ The list below contains a guaranteed set of fields, implemented in every theme p
 |   `AutoField`   |       Automatically renders a given field.        |
 |  `AutoFields`   |        Automatically renders given fields.        |
 |   `BoolField`   |                     Checkbox.                     |
-|   `DateField`   |           HTML5 `datetime-local` input.           |
+|   `DateField`   |      HTML5 `date` or `datetime-local` input.      |
 |  `ErrorField`   |         Error message for a given field.          |
 |  `ErrorsField`  |  Error message with a list of validation errors.  |
 |  `HiddenField`  | Hidden field (with a possibility to omit in DOM). |
@@ -162,6 +162,7 @@ import { BoolField } from 'uniforms-unstyled';
 |       `min`       |                                                                          Minimal value. Date object.                                                                           |                        All                         |
 | `showInlineError` |                                                          Field inline error. _Some description would be great, huh?_                                                           | antd, bootstrap3, bootstrap4, bootstrap5, semantic |
 |   `timeFormat`    |                                                           Display time picker in ampm (12hr) format or 24hr format.                                                            |                      material                      |
+|      `type`       |                                                 Display date and time or date only picker. Format value according to its type                                                  |                  All except antd                   |
 |  `wrapClassName`  | Field and sourroundings wrap className. In SemanticUI theme, this class name is used on ui input wrapper, so you can pass classes like small, huge, inverted, transparent etc. |    bootstrap3, bootstrap4, bootstrap5, semantic    |
 |   `wrapperCol`    |                                                         Field layout. The layout for input controls. Same as labelCol.                                                         |                        antd                        |
 
