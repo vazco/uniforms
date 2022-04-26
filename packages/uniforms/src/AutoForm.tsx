@@ -19,7 +19,6 @@ export type AutoFormProps<Model> = ValidatedQuickFormProps<Model> & {
 
 export type AutoFormState<Model> = ValidatedQuickFormState<Model> & {
   model: DeepPartial<Model>;
-  modelSync: DeepPartial<Model>;
 };
 
 export function Auto<Base extends typeof ValidatedQuickForm>(Base: Base) {
