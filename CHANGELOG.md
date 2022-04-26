@@ -1,3 +1,7 @@
+## [v3.9.1](https://github.com/vazco/uniforms/tree/v3.9.1) (2022-04-26)
+
+- **Optimized:** The `kind="leaf"` fields created using `connectField` will skip unnecessary context providers. [\#1108](https://github.com/vazco/uniforms/issues/1108)
+
 ## [v3.9.0](https://github.com/vazco/uniforms/tree/v3.9.0) (2022-04-22)
 
 - **Added:** Handling of `type="date"` in `DateField`. [\#1099](https://github.com/vazco/uniforms/issues/1099)
