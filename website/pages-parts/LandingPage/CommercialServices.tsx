@@ -5,6 +5,8 @@ import { Button } from '../../components/Button';
 import { Heading } from '../../components/Heading';
 import styles from '../../index.module.css';
 
+const formBuilderLink = 'https://bit.ly/3LaZkTl';
+
 export function CommercialServices() {
   return (
     <div className={classNames('section', styles.example)}>
@@ -25,7 +27,7 @@ export function CommercialServices() {
           >
             <a
               className={styles['flex-center']}
-              href="https://bit.ly/3LaZkTl"
+              href={formBuilderLink}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -89,7 +91,7 @@ export function CommercialServices() {
               )}
             >
               <Button
-                to="https://www.vazco.eu/form-builder"
+                to={formBuilderLink}
                 className={classNames(
                   styles.discussions,
                   styles['long-button'],
