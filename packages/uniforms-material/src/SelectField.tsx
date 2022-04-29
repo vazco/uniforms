@@ -24,6 +24,7 @@ type SelectFieldCommonProps = {
   required?: boolean;
   transform?: (value: string) => string;
   variant?: 'standard' | 'outlined' | 'filled';
+  margin?: 'normal' | 'dense' | 'none';
 };
 
 type CheckboxesProps = FieldProps<

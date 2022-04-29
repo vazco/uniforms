@@ -62,7 +62,7 @@ describe('@RTL - SelectField tests', () => {
     });
     const explicitProps = {
       fullWidth: false,
-      margin: 'dense' as const,
+      margin: 'normal' as const,
     };
 
     const { container } = render(
