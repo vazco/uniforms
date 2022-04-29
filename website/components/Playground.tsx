@@ -257,20 +257,7 @@ export class PlaygroundWrap extends Component<any, any> {
       </React.Fragment>
     );
 
-    if (theme === 'material') {
-      // Material-UI injects scoped CSS classes into head.
-      return (
-        <section
-          children={content}
-          className={classNames(
-            'frame-root',
-            playgroundStyles['playground-wrap'],
-          )}
-        />
-      );
-    }
-
-    if (theme === 'mui') {
+    if (theme === 'material' || theme === 'mui') {
       // Material-UI injects scoped CSS classes into head.
       return (
         <section
