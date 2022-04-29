@@ -24,7 +24,6 @@ type SelectFieldCommonProps = {
   required?: boolean;
   transform?: (value: string) => string;
   variant?: 'standard' | 'outlined' | 'filled';
-  margin?: 'normal' | 'dense' | 'none';
 };
 
 type CheckboxesProps = FieldProps<
@@ -36,9 +35,13 @@ type CheckboxesProps = FieldProps<
   }
 >;
 
+type MarginType = {
+  margin?: 'normal' | 'dense' | 'none';
+};
+
 type SelectProps = FieldProps<
   string | string[],
-  MaterialSelectProps & TextFieldProps,
+  Omit<MaterialSelectProps & TextFieldProps, 'margin'> & MarginType,
   SelectFieldCommonProps & {
     checkboxes?: false;
     labelProps?: object;
@@ -171,7 +174,7 @@ function Select(props: SelectFieldProps) {
   const Item = native ? 'option' : MenuItem;
   const hasPlaceholder = !!placeholder;
   const hasValue = value !== '' && value !== undefined;
-  const filteredProps = omit(filterDOMProps(props), [
+  const filteredOmittedItems = [
     'checkboxes',
     'disableItem',
     'fullWidth',
@@ -179,7 +182,12 @@ function Select(props: SelectFieldProps) {
     'margin',
     'textFieldProps',
     'variant',
-  ]);
+  ] as const;
+  const filteredProps = omit(filterDOMProps(props), filteredOmittedItems);
+  const filteredPropsOmitted = filteredProps as Omit<
+    typeof filteredProps,
+    typeof filteredOmittedItems[number]
+  >;
 
   return (
     <TextField
@@ -206,7 +214,7 @@ function Select(props: SelectFieldProps) {
         inputProps: { name, id, ...inputProps },
         multiple: fieldType === Array || undefined,
         native,
-        ...filteredProps,
+        ...filteredPropsOmitted,
       }}
       value={native && !value ? '' : value}
       variant={variant}
