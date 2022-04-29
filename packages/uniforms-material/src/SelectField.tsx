@@ -23,6 +23,7 @@ type SelectFieldCommonProps = {
   inputRef?: Ref<HTMLButtonElement>;
   required?: boolean;
   transform?: (value: string) => string;
+  variant?: 'standard' | 'outlined' | 'filled';
 };
 
 type CheckboxesProps = FieldProps<
@@ -31,7 +32,6 @@ type CheckboxesProps = FieldProps<
   SelectFieldCommonProps & {
     checkboxes: true;
     legend?: string;
-    variant?: undefined;
   }
 >;
 
