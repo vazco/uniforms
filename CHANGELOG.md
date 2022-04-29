@@ -1,3 +1,11 @@
+## [v3.9.1](https://github.com/vazco/uniforms/tree/v3.9.1) (2022-04-26)
+
+- **Optimized:** The `kind="leaf"` fields created using `connectField` will skip unnecessary context providers. [\#1108](https://github.com/vazco/uniforms/issues/1108)
+
+## [v3.9.0](https://github.com/vazco/uniforms/tree/v3.9.0) (2022-04-22)
+
+- **Added:** Handling of `type="date"` in `DateField`. [\#1099](https://github.com/vazco/uniforms/issues/1099)
+
 ## [v3.8.1](https://github.com/vazco/uniforms/tree/v3.8.1) (2022-02-15)
 
 - **Added:** Fixed RegExp compatibility with Safari. [\#1088](https://github.com/vazco/uniforms/issues/1088)
@@ -15,7 +23,7 @@
 
 ## [v3.6.2](https://github.com/vazco/uniforms/tree/v3.6.2) (2021-10-15)
 
-- **Fixed:** Handling of `initialValue` in `NumField`. [\#1004](https://github.com/vazco/uniforms/issues/1004)
+- **Fixed:** Handling of `initialValue` in `NumField`. [\#969](https://github.com/vazco/uniforms/issues/969)
 - **Fixed:** Handling of `label` in `BoolField` in `uniforms-semantic`. [\#1042](https://github.com/vazco/uniforms/issues/1042)
 - **Fixed:** Handling of `type` in both SimpleSchema-based bridges. [\#1039](https://github.com/vazco/uniforms/issues/1039)
 

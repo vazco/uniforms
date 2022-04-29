@@ -5,7 +5,7 @@ import Input from '@material-ui/core/Input';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import ThemeProvider from '@material-ui/styles/ThemeProvider/ThemeProvider';
 import React from 'react';
-import { DateField } from 'uniforms-material';
+import { DateField, DateFieldProps } from 'uniforms-material';
 import { render } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
@@ -132,18 +132,22 @@ test('<DateField> - renders a Input with correct value (default)', () => {
   expect(wrapper.find(Input).prop('value')).toBe('');
 });
 
-test('<DateField> - renders a Input with correct value (model)', () => {
-  const now = new Date();
-  const element = <DateField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: Date } }, { model: { x: now } }),
-  );
+test.each(['datetime-local', 'date'] as const)(
+  '<DateField> - renders a Input with correct value (model) when type is "%s"',
+  (type: DateFieldProps['type']) => {
+    const now = new Date();
+    const element = <DateField name="x" type={type} />;
+    const sliceEnd = type === 'datetime-local' ? -8 : -14;
+    const wrapper = mount(
+      element,
+      createContext({ x: { type: Date } }, { model: { x: now } }),
+    );
 
-  expect(wrapper.find(Input).prop('value')).toEqual(
-    now.toISOString().slice(0, -8),
-  );
-});
+    expect(wrapper.find(Input).prop('value')).toEqual(
+      now.toISOString().slice(0, sliceEnd),
+    );
+  },
+);
 
 test('<DateField> - renders a Input with correct value (specified)', () => {
   const now = new Date();

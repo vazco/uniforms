@@ -8,7 +8,12 @@ const dateFormat = (value?: Date) => value?.toISOString().slice(0, -8);
 export type DateFieldProps = HTMLFieldProps<
   Date,
   HTMLDivElement,
-  { inputRef?: Ref<HTMLInputElement>; max?: Date; min?: Date }
+  {
+    inputRef?: Ref<HTMLInputElement>;
+    max?: Date;
+    min?: Date;
+    type?: 'date' | 'datetime-local';
+  }
 >;
 
 function Date({
@@ -23,8 +28,11 @@ function Date({
   placeholder,
   readOnly,
   value,
+  type,
   ...props
 }: DateFieldProps) {
+  const dateType = type === 'date' ? type : 'datetime-local';
+
   return (
     <div {...filterDOMProps(props)}>
       {label && <label htmlFor={id}>{label}</label>}
@@ -46,7 +54,7 @@ function Date({
         placeholder={placeholder}
         readOnly={readOnly}
         ref={inputRef}
-        type="datetime-local"
+        type={dateType}
         value={dateFormat(value) ?? ''}
       />
     </div>
