@@ -8,9 +8,10 @@
     "install": "lerna bootstrap --hoist && npm run build",
     "lint": "npm run lint:code && npm run lint:text && npm run lint:types",
     "lint:code": "eslint --cache --cache-location node_modules/.cache/eslint --cache-strategy content --ext js,ts,tsx .",
-    "lint:text": "prettier --check **/*.{json,md,mdx,yml}",
+    "lint:text": "prettier --check '**/*.{json,md,mdx,yml}'",
     "lint:types": "npm run build",
     "prereset": "npm run clean",
+    "pretest": "npm run lint",
     "publish": "npm run clean && npm run build && lerna publish",
     "reset": "rimraf node_modules packages/*/node_modules reproductions/.cache reproductions/dist reproductions/node_modules website/.docusaurus website/build website/node_modules",
     "test": "jest"
