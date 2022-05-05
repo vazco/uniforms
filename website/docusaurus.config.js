@@ -68,6 +68,11 @@ module.exports = {
           href: 'https://github.com/vazco/uniforms',
           position: 'left',
         },
+        {
+          label: 'Enterprise',
+          to: '/#commercial-services',
+          position: 'left',
+        },
       ],
       logo: { alt: 'uniforms logo', src: 'img/uniforms.svg' },
     },
