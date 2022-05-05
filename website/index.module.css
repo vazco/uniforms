@@ -7,6 +7,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --black: #000;
   --bright-cyan-50: rgba(63, 196, 254, 0.2);
