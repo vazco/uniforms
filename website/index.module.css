@@ -7,8 +7,10 @@
   }
 }
 
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 :root {
@@ -138,6 +140,9 @@ html {
 @media (min-width: 997px) {
   .landing :global .section {
     margin-top: 4em;
+  }
+  .landing :global .container {
+    scroll-margin-top: 200px;
   }
 }
 

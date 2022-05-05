@@ -33,8 +33,7 @@ export function LandingPage() {
         <div className="container">
           <Comparison />
         </div>
-        <div id="commercial" />
-        <div className="container">
+        <div className="container" id="commercial-services">
           <CommercialServices />
         </div>
         <Footer />
