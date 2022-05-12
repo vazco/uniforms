@@ -45,7 +45,7 @@ function Date({
       helperText={(error && showInlineError && errorMessage) || helperText}
       label={label}
       InputLabelProps={{ shrink: true, ...labelProps, ...InputLabelProps }}
-      inputProps={{ readOnly }}
+      inputProps={{ readOnly, ...props.inputProps }}
       margin="dense"
       name={name}
       onChange={event =>
