@@ -1,5 +1,5 @@
+import Button, { ButtonProps } from '@mui/material/Button';
 import FormControl, { FormControlProps } from '@mui/material/FormControl';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import cloneDeep from 'lodash/cloneDeep';
 import React, { ReactNode } from 'react';
 import {
@@ -12,7 +12,7 @@ import {
 
 export type ListAddFieldProps = FieldProps<
   unknown,
-  IconButtonProps,
+  ButtonProps,
   {
     fullWidth?: FormControlProps['fullWidth'];
     icon?: ReactNode;
@@ -46,7 +46,9 @@ function ListAdd({
 
   return (
     <FormControl fullWidth={fullWidth} margin={margin} variant={variant}>
-      <IconButton
+      <Button
+        size="large"
+        variant="outlined"
         {...filterDOMProps(props)}
         disabled={!limitNotReached}
         onClick={() => {
@@ -54,10 +56,9 @@ function ListAdd({
             parent.onChange(parent.value!.concat([cloneDeep(value)]));
           }
         }}
-        size="large"
       >
         {icon}
-      </IconButton>
+      </Button>
     </FormControl>
   );
 }
