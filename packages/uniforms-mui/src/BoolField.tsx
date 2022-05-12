@@ -39,7 +39,7 @@ function Bool(props: BoolFieldProps) {
     appearance === 'checkbox' || appearance === undefined ? Checkbox : Switch;
 
   return wrapField(
-    { fullWidth: true, margin: 'dense', ...props, component: 'fieldset' },
+    { fullWidth: true, ...props },
     legend && (
       <FormLabel component="legend" htmlFor={name}>
         {legend}
