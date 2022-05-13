@@ -12,7 +12,7 @@ import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import omit from 'lodash/omit';
 import xor from 'lodash/xor';
 import React, { Ref } from 'react';
-import { FieldProps, connectField, filterDOMProps } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps, Override } from 'uniforms';
 
 import wrapField from './wrapField';
 
@@ -35,13 +35,12 @@ type CheckboxesProps = FieldProps<
   }
 >;
 
-type MarginType = {
-  margin?: 'normal' | 'dense' | 'none';
-};
-
 type SelectProps = FieldProps<
   string | string[],
-  Omit<MaterialSelectProps & TextFieldProps, 'margin'> & MarginType,
+  Override<
+    MaterialSelectProps & TextFieldProps,
+    { margin?: 'normal' | 'dense' | 'none' }
+  >,
   SelectFieldCommonProps & {
     checkboxes?: false;
     labelProps?: object;
@@ -174,20 +173,20 @@ function Select(props: SelectFieldProps) {
   const Item = native ? 'option' : MenuItem;
   const hasPlaceholder = !!placeholder;
   const hasValue = value !== '' && value !== undefined;
-  const filteredOmittedItems = [
-    'checkboxes',
-    'disableItem',
+
+  /*
+  Never was added because these 2 variables cause omit to fall into an unpleasant overload.
+  So we need to use a trick to reduce the confusion of handling types
+  */
+  const filteredProps = omit(filterDOMProps(props), [
+    'checkboxes' as never,
+    'disableItem' as never,
     'fullWidth',
     'helperText',
     'margin',
     'textFieldProps',
     'variant',
-  ] as const;
-  const filteredProps = omit(filterDOMProps(props), filteredOmittedItems);
-  const filteredPropsOmitted = filteredProps as Omit<
-    typeof filteredProps,
-    typeof filteredOmittedItems[number]
-  >;
+  ]);
 
   return (
     <TextField
@@ -214,7 +213,7 @@ function Select(props: SelectFieldProps) {
         inputProps: { name, id, ...inputProps },
         multiple: fieldType === Array || undefined,
         native,
-        ...filteredPropsOmitted,
+        ...filteredProps,
       }}
       value={native && !value ? '' : value}
       variant={variant}
