@@ -16,7 +16,7 @@ export type ErrorsFieldProps = Override<
 
 function ErrorsField({
   children,
-  fullWidth,
+  fullWidth = true,
   margin,
   variant,
   ...props
