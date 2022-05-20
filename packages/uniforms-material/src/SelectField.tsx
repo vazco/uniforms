@@ -12,7 +12,7 @@ import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import omit from 'lodash/omit';
 import xor from 'lodash/xor';
 import React, { Ref } from 'react';
-import { FieldProps, connectField, filterDOMProps } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps, Override } from 'uniforms';
 
 import wrapField from './wrapField';
 
@@ -23,6 +23,7 @@ type SelectFieldCommonProps = {
   inputRef?: Ref<HTMLButtonElement>;
   required?: boolean;
   transform?: (value: string) => string;
+  variant?: 'standard' | 'outlined' | 'filled';
 };
 
 type CheckboxesProps = FieldProps<
@@ -31,13 +32,15 @@ type CheckboxesProps = FieldProps<
   SelectFieldCommonProps & {
     checkboxes: true;
     legend?: string;
-    variant?: undefined;
   }
 >;
 
 type SelectProps = FieldProps<
   string | string[],
-  MaterialSelectProps & TextFieldProps,
+  Override<
+    MaterialSelectProps & TextFieldProps,
+    { margin?: 'normal' | 'dense' | 'none' }
+  >,
   SelectFieldCommonProps & {
     checkboxes?: false;
     labelProps?: object;
@@ -170,9 +173,14 @@ function Select(props: SelectFieldProps) {
   const Item = native ? 'option' : MenuItem;
   const hasPlaceholder = !!placeholder;
   const hasValue = value !== '' && value !== undefined;
+
+  /*
+  Never was added because these 2 variables cause omit to fall into an unpleasant overload.
+  So we need to use a trick to reduce the confusion of handling types
+  */
   const filteredProps = omit(filterDOMProps(props), [
-    'checkboxes',
-    'disableItem',
+    'checkboxes' as never,
+    'disableItem' as never,
     'fullWidth',
     'helperText',
     'margin',
