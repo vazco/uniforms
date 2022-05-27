@@ -47,7 +47,7 @@ export function CommercialServices() {
               styles['simple-yet-powerful-text'],
             )}
           >
-            <p
+            <h3
               className={classNames(
                 styles.centered,
                 styles.text,
@@ -55,7 +55,7 @@ export function CommercialServices() {
               )}
             >
               Commercial support
-            </p>
+            </h3>
             <Heading>Form Builder</Heading>
             <p
               className={classNames(

@@ -7,11 +7,11 @@ export type SubtitleProps = JSX.IntrinsicElements['p'];
 
 export function Subtitle({ children, className, ...props }: SubtitleProps) {
   return (
-    <p
+    <h3
       {...props}
       className={classNames(styles.text, styles['section-subtitle'], className)}
     >
       {children}
-    </p>
+    </h3>
   );
 }
