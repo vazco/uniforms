@@ -70,7 +70,7 @@ module.exports = {
         },
         {
           label: 'Enterprise',
-          to: '/#commercial-services',
+          href: '/#commercial-services',
           position: 'left',
         },
       ],
