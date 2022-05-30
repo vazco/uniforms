@@ -1,3 +1,8 @@
+## [v3.10.0-rc.0](https://github.com/vazco/uniforms/tree/v3.10.0-rc.0) (2022-05-30)
+
+- **Added:** New theme: `uniforms-mui`. [\#1054](https://github.com/vazco/uniforms/issues/1054)
+- **Added:** Improved typings of `SelectField` in `uniforms-material`. [\#1111](https://github.com/vazco/uniforms/issues/1111)
+
 ## [v3.9.1](https://github.com/vazco/uniforms/tree/v3.9.1) (2022-04-26)
 
 - **Optimized:** The `kind="leaf"` fields created using `connectField` will skip unnecessary context providers. [\#1108](https://github.com/vazco/uniforms/issues/1108)
