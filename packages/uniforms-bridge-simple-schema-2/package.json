@@ -1,6 +1,6 @@
 {
   "name": "uniforms-bridge-simple-schema-2",
-  "version": "3.9.1",
+  "version": "3.10.0-rc.0",
   "license": "MIT",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -37,6 +37,6 @@
     "lodash": "^4.0.0",
     "simpl-schema": "^1.0.0 || ^0.0.4",
     "tslib": "^2.2.0",
-    "uniforms": "^3.9.1"
+    "uniforms": "^3.10.0-rc.0"
   }
 }
