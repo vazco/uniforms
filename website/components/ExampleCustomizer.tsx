@@ -9,6 +9,7 @@ import { TogglerTabs } from './TogglerTabs';
 const tabs = [
   { name: 'Semantic', value: 'semantic' as const },
   { name: 'Material', value: 'material' as const },
+  { name: 'MUI', value: 'mui' as const },
   { name: 'Bootstrap3', value: 'bootstrap3' as const },
   { name: 'Bootstrap4', value: 'bootstrap4' as const },
   { name: 'Bootstrap5', value: 'bootstrap5' as const },

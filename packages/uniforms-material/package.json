@@ -5,7 +5,7 @@
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
   "sideEffects": false,
-  "description": "Material UI components for uniforms.",
+  "description": "Material components for uniforms.",
   "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-material",
   "bugs": "https://github.com/vazco/uniforms/issues",
   "funding": "https://github.com/vazco/uniforms?sponsor=1",
@@ -28,6 +28,7 @@
     "src/*.tsx"
   ],
   "peerDependencies": {
+    "csstype": "^2.0.0",
     "@material-ui/core": "^4.0.0",
     "react": "^17.0.0 || ^16.8.0"
   },

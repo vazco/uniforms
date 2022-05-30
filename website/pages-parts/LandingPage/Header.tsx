@@ -75,9 +75,9 @@ const themes = [
     to: 'https://ant.design/',
   },
   {
-    alt: 'Material-UI',
-    src: 'themes/material-ui.png',
-    to: 'https://material-ui.com/',
+    alt: 'MUI',
+    src: 'themes/mui.png',
+    to: 'https://mui.com/',
   },
   {
     alt: 'Bootstrap',

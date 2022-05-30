@@ -88,7 +88,8 @@ export function WhyUs() {
                     <li>Bootstrap3</li>
                     <li>Bootstrap4</li>
                     <li>Bootstrap5</li>
-                    <li>Material-UI</li>
+                    <li>Material</li>
+                    <li>MUI</li>
                     <li>Semantic UI</li>
                     <li>Plain HTML</li>
                   </ul>

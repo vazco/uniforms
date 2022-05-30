@@ -111,6 +111,43 @@ const presets = {
       })
     )
   `,
+
+  'All Fields (SimpleSchema)': preset`
+    new SimpleSchema2Bridge(
+      new SimpleSchema({
+        text: { type: String },
+        num: { type: Number },
+        bool: { type: Boolean },
+        nested: { type: Object },
+        'nested.text': { type: String },
+        date: { type: Date },
+        list: { type: Array },
+        'list.$': {
+          type: String,
+          uniforms: { label: 'List Text', placeholder: 'List Text Placeholder' },
+        },
+        select: {
+          type: String,
+          uniforms: {
+            options: [
+              { label: 'Option A', value: 'a' },
+              { label: 'Option B', value: 'b' },
+            ],
+          },
+        },
+        radio: {
+          type: String,
+          uniforms: {
+            checkboxes: true,
+            options: [
+              { label: 'Option A', value: 'a' },
+              { label: 'Option B', value: 'b' },
+            ],
+          },
+        },
+      })
+    )
+  `,
 };
 
 export default presets;
