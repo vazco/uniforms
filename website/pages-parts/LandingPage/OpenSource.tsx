@@ -11,7 +11,7 @@ export function OpenSource() {
   const { stars, forks, downloads } = useStats();
   return (
     <div className="section text--center">
-      <h3
+      <h2
         className={classNames(
           styles.centered,
           styles.text,
@@ -19,7 +19,7 @@ export function OpenSource() {
         )}
       >
         Always Open Source.
-      </h3>
+      </h2>
       <Heading>
         React form library <br /> trusted by GitHub community
       </Heading>
