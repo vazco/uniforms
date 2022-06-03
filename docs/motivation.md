@@ -10,7 +10,10 @@ Basically, there are a few types of forms with different capabilities.
 Most of the time you’ll be using either AutoForm or ValidatedForm, but there are quite a few more to choose from:
 
 <p align="center">
-  <img src="/img/uniforms-graph.svg" alt="Graph showing inheritance hierarchy of different forms." />
+  <img
+    src="/img/uniforms-graph.svg"
+    alt="AutoForm class inheritance from ValidatedQuickForm which subsequently inherits from QuickForm and ValidatedForm."
+  />
 </p>
 
 > **If you are not familiar with concept of HOC, read one of many posts about them first.**
@@ -35,7 +38,10 @@ const ValidatedQuickForm = ValidatedForm.Validated(QuickForm.Quick(BaseForm));
 ```
 
 <p align="center">
-  <img src="/img/uniforms-traits.png" alt='AutoValidatedQuickSemanticForm (using 5 "traits") viewed in React DevTools.' />
+  <img
+    src="/img/uniforms-traits.png"
+    alt='Single AutoValidatedQuickSemanticForm component (using 5 "traits") viewed in React DevTools.'
+  />
 </p>
 
 While it’s not a universal approach that will work in every situation, using it in uniforms allows us to deliver clean-looking components while keeping extensibility and separation of concerns.
