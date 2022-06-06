@@ -1,11 +1,9 @@
 import React from 'react';
+import SimpleSchema from 'simpl-schema';
 import { AutoForm, connectField } from 'uniforms';
-import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
+import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 
 import mount from './_mount';
-
-jest.mock('meteor/aldeed:simple-schema');
-jest.mock('meteor/check');
 
 describe('AutoForm', () => {
   const onChangeModel = jest.fn();
@@ -13,12 +11,14 @@ describe('AutoForm', () => {
   const onChange = jest.fn();
   const onSubmit = jest.fn();
   const model = { a: '1' };
-  const schema = new SimpleSchemaBridge({
-    getDefinition: () => ({ type: String, defaultValue: '' }),
-    messageForError: () => {},
-    objectKeys: () => ['a', 'b', 'c'],
-    validator: () => validator,
-  } as any);
+  const schema = new SimpleSchema2Bridge(
+    new SimpleSchema({
+      a: { type: String, defaultValue: '' },
+      b: { type: String, defaultValue: '' },
+      c: { type: String, defaultValue: '' },
+    }),
+  );
+  jest.spyOn(schema.schema, 'validator').mockImplementation(() => validator);
 
   beforeEach(() => {
     onChange.mockClear();

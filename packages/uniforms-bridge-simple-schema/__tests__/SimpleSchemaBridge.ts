@@ -1,10 +1,12 @@
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
 
 jest.mock('meteor/aldeed:simple-schema');
 jest.mock('meteor/check');
 
 describe('SimpleSchemaBridge', () => {
-  const noop = () => {};
+  const noopComponent = () => null;
+  const noopTransform = () => {};
   const schema = {
     getDefinition(name: string) {
       // Simulate SimpleSchema.
@@ -26,12 +28,12 @@ describe('SimpleSchemaBridge', () => {
         k: { type: Array },
         'k.$': { type: String },
         l: { type: String, uniforms: 'div' },
-        m: { type: String, uniforms: noop },
+        m: { type: String, uniforms: noopComponent },
         n: { type: String, uniforms: { component: 'div' } },
         o: { type: Array },
         'o.$': { type: String, allowedValues: ['O'] },
         p: { type: Array },
-        'p.$': { type: String, uniforms: { transform: noop } },
+        'p.$': { type: String, uniforms: { transform: noopTransform } },
         r: { type: String, uniforms: { options: { a: 1, b: 2 } } },
         s: {
           type: String,
@@ -80,9 +82,9 @@ describe('SimpleSchemaBridge', () => {
         throw 'ValidationError';
       };
     },
-  };
+  } as unknown as SimpleSchema;
 
-  const bridge = new SimpleSchemaBridge(schema as any);
+  const bridge = new SimpleSchemaBridge(schema);
 
   describe('#getError', () => {
     it('works without error', () => {
@@ -228,7 +230,7 @@ describe('SimpleSchemaBridge', () => {
       expect(bridge.getProps('m')).toEqual({
         label: 'M',
         required: true,
-        component: noop,
+        component: noopComponent,
       });
     });
 
@@ -280,7 +282,7 @@ describe('SimpleSchemaBridge', () => {
       expect(bridge.getProps('p')).toEqual({
         label: 'P',
         required: true,
-        transform: noop,
+        transform: noopTransform,
       });
     });
 
@@ -339,9 +341,11 @@ describe('SimpleSchemaBridge', () => {
             if (typeof model.x !== 'number') {
               throw new Error();
             }
+
+            return true;
           };
         },
-      } as any);
+      } as SimpleSchema);
 
       expect(bridge.getValidator()({})).not.toEqual(null);
       expect(bridge.getValidator({})({})).not.toEqual(null);

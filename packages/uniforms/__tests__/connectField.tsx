@@ -1,35 +1,19 @@
 import React, { ReactNode } from 'react';
-import { SimpleSchema } from 'simpl-schema';
+import SimpleSchema from 'simpl-schema';
 import { Context, connectField, randomIds, BaseForm } from 'uniforms';
-import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
+import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 
 import mount from './_mount';
 
-jest.mock('meteor/aldeed:simple-schema');
-jest.mock('meteor/check');
-
 describe('connectField', () => {
   const onChange = jest.fn();
-  const schema = new SimpleSchemaBridge({
-    getDefinition(name: 'another' | 'field' | 'field.subfield') {
-      return {
-        field: { type: Object, label: 'Field' },
-        'field.subfield': { type: Number, label: 'Subfield' },
-        another: { type: String, optional: true },
-      }[name];
-    },
-
-    messageForError() {},
-
-    objectKeys(name: 'field' | 'field.subfield') {
-      return {
-        field: ['subfield'],
-        'field.subfield': [],
-      }[name];
-    },
-
-    validator() {},
-  } as any as SimpleSchema);
+  const schema = new SimpleSchema2Bridge(
+    new SimpleSchema({
+      another: { type: String, optional: true },
+      field: { type: Object, label: 'Field' },
+      'field.subfield': { type: Number, label: 'Subfield' },
+    }),
+  );
 
   const reactContext = {
     context: {
