@@ -1,0 +1,66 @@
+'Area: Bridge':
+  - 'packages/uniforms-bridge-graphql/**/*'
+  - 'packages/uniforms-bridge-json-schema/**/*'
+  - 'packages/uniforms-bridge-simple-schema-2/**/*'
+  - 'packages/uniforms-bridge-simple-schema/**/*'
+'Area: Core':
+  - 'packages/uniforms/**/*'
+'Area: Docs':
+  - 'CODE_OF_CONDUCT.md'
+  - 'LICENSE'
+  - 'README.md'
+  - 'docs/**/*'
+  - 'reproductions/**/*'
+  - 'website/**/*'
+'Area: Infra':
+  - '.editorconfig'
+  - '.eslintignore'
+  - '.eslintrc.json'
+  - '.github/**/*'
+  - '.gitignore'
+  - '.huskyrc.json'
+  - '.lintstagedrc.js'
+  - '.prettierignore'
+  - '.prettierrc.js'
+  - '.stylelintrc'
+  - 'jest.config.js'
+  - 'lerna.json'
+  - 'package-lock.json'
+  - 'package.json'
+  - 'scripts/**/*'
+  - 'tsconfig.build.json'
+  - 'tsconfig.global.json'
+  - 'tsconfig.json'
+'Area: Theme':
+  - 'packages/uniforms-antd/**/*'
+  - 'packages/uniforms-bootstrap3/**/*'
+  - 'packages/uniforms-bootstrap4/**/*'
+  - 'packages/uniforms-bootstrap5/**/*'
+  - 'packages/uniforms-material/**/*'
+  - 'packages/uniforms-mui/**/*'
+  - 'packages/uniforms-semantic/**/*'
+  - 'packages/uniforms-unstyled/**/*'
+'Bridge: GraphQL':
+  - 'packages/uniforms-bridge-graphql/**/*'
+'Bridge: JSON Schema':
+  - 'packages/uniforms-bridge-json-schema/**/*'
+'Bridge: SimpleSchema':
+  - 'packages/uniforms-bridge-simple-schema/**/*'
+'Bridge: SimpleSchema (v2)':
+  - 'packages/uniforms-bridge-simple-schema-2/**/*'
+'Theme: AntD':
+  - 'packages/uniforms-antd/**/*'
+'Theme: Bootstrap 3':
+  - 'packages/uniforms-bootstrap3/**/*'
+'Theme: Bootstrap 4':
+  - 'packages/uniforms-bootstrap4/**/*'
+'Theme: Bootstrap 5':
+  - 'packages/uniforms-bootstrap5/**/*'
+'Theme: MUI':
+  - 'packages/uniforms-material/**/*'
+'Theme: Material-UI':
+  - 'packages/uniforms-mui/**/*'
+'Theme: Semantic UI':
+  - 'packages/uniforms-semantic/**/*'
+'Theme: Unstyled':
+  - 'packages/uniforms-unstyled/**/*'
