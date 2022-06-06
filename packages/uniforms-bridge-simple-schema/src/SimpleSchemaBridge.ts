@@ -78,7 +78,14 @@ export default class SimpleSchemaBridge extends Bridge {
     }
 
     if (field.type === Object) {
-      return {};
+      const value: Record<string, unknown> = {};
+      this.getSubfields(name).forEach(key => {
+        const initialValue = this.getInitialValue(joinName(name, key));
+        if (initialValue !== undefined) {
+          value[key] = initialValue;
+        }
+      });
+      return value;
     }
 
     return undefined;
@@ -139,7 +146,7 @@ export default class SimpleSchemaBridge extends Bridge {
     return props;
   }
 
-  getSubfields(name?: string) {
+  getSubfields(name?: string): string[] {
     return this.schema.objectKeys(SimpleSchema._makeGeneric(name));
   }
 

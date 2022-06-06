@@ -195,7 +195,7 @@ describe('SimpleSchemaBridge', () => {
     });
 
     it('works with objects', () => {
-      expect(bridge.getInitialValue('a')).toEqual({});
+      expect(bridge.getInitialValue('a')).toEqual({ b: {} });
     });
 
     it('works with objects (defaultValue)', () => {

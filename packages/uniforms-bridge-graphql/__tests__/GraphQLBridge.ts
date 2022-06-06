@@ -204,7 +204,11 @@ describe('GraphQLBridge', () => {
     });
 
     it('works with objects', () => {
-      expect(bridgeI.getInitialValue('author')).toEqual({});
+      expect(bridgeI.getInitialValue('author')).toEqual({
+        firstName: 'John',
+        lastName: 'Doe',
+        tags: [],
+      });
     });
 
     it('works with undefined primitives', () => {
