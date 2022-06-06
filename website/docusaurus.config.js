@@ -1,8 +1,9 @@
 const path = require('path');
 
 module.exports = {
-  title: 'uniforms',
-  tagline: 'A React library for building forms from any schema',
+  title: 'uniforms | React form library for building forms from any schema',
+  tagline:
+    "When it comes to using build forms in React, it's always good to choose a trusted React form library. Build forms and enjoy peace of mind on your project.",
   organizationName: 'vazco',
   projectName: 'uniforms',
   baseUrl: '/',
@@ -70,7 +71,7 @@ module.exports = {
         },
         {
           label: 'Enterprise',
-          to: '/#commercial-services',
+          href: '/#commercial-services',
           position: 'left',
         },
       ],

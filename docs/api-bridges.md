@@ -6,7 +6,7 @@ title: Bridges
 To make use of any schema, uniforms have to create a _bridge_ of it - a unified schema mapper.
 
 <p align="center">
-  <img src="/img/bridge-concept.svg" />
+  <img src="/img/bridge-concept.svg" alt="" />
 </p>
 
 Currently available bridges:

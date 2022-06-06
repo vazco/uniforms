@@ -58,7 +58,7 @@ export function Testimonial({
 export function Testimonials() {
   return (
     <div className="section text--center">
-      <p
+      <h3
         className={classNames(
           styles.centered,
           styles.text,
@@ -66,7 +66,7 @@ export function Testimonials() {
         )}
       >
         They speak about us
-      </p>
+      </h3>
       <Heading>Testimonials</Heading>
       <div className={styles.testimonials}>
         <Testimonial

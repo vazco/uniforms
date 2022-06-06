@@ -1,5 +1,4 @@
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import classNames from 'classnames';
 import React from 'react';
 
@@ -87,9 +86,6 @@ const themes = [
 ];
 
 export function Header() {
-  const context = useDocusaurusContext();
-  const { siteConfig = {} } = context;
-  const { title, tagline } = siteConfig;
   return (
     <div className="hero hero--primary">
       <div className="container">
@@ -102,17 +98,17 @@ export function Header() {
                 styles.title,
               )}
             >
-              {title}
+              uniforms
             </span>
-            <span
+            <h1
               className={classNames(
                 styles.description,
                 styles.text,
                 styles['text-huge'],
               )}
             >
-              {tagline}
-            </span>
+              A React library for building forms from any schema
+            </h1>
             <ul className={classNames(styles.text, styles.bullets)}>
               <li>support of all schemas and themes</li>
               <li>instant prototyping</li>

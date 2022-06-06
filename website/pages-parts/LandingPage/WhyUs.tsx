@@ -29,7 +29,7 @@ export function WhyUs() {
               </Heading>
               <p className={classNames(styles.text, styles.paragraph)}>
                 A set of open-source libraries capable of instantly generating
-                any given form.
+                any given form in React.
               </p>
               <h2 className={classNames(styles.text, styles.emphasis)}>
                 Carried out by the global community of 50+ developers.

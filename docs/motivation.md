@@ -10,7 +10,10 @@ Basically, there are a few types of forms with different capabilities.
 Most of the time you’ll be using either AutoForm or ValidatedForm, but there are quite a few more to choose from:
 
 <p align="center">
-  <img src="/img/uniforms-graph.svg" />
+  <img
+    src="/img/uniforms-graph.svg"
+    alt="AutoForm class inheritance from ValidatedQuickForm which subsequently inherits from QuickForm and ValidatedForm."
+  />
 </p>
 
 > **If you are not familiar with concept of HOC, read one of many posts about them first.**
@@ -19,8 +22,7 @@ Most of the time you’ll be using either AutoForm or ValidatedForm, but there a
 > -- <cite>[Radosław Miernik](https://github.com/radekmie)</cite>
 
 <p align="center">
-  <img src="/img/hoc-hell.png" />
-  <small style={{display: 'block'}}>Screenshot of React DevTools when lots of HOC’s are applied to a component.</small>
+  <img src="/img/hoc-hell.png" alt="React DevTools when lots of HOC’s are applied to a component." />
 </p>
 
 > I wanted to achieve the same functionality as with multiple HOCs, but within one component. To be honest, readability is more important than performance. In short, I’ve reached (more or less) traits with ES6 classes. The result?
@@ -36,8 +38,10 @@ const ValidatedQuickForm = ValidatedForm.Validated(QuickForm.Quick(BaseForm));
 ```
 
 <p align="center">
-  <img src="/img/uniforms-traits.png" />
-  <small style={{display: 'block'}}>AutoValidatedQuickSemanticForm (using 5 "traits") viewed in React DevTools.</small>
+  <img
+    src="/img/uniforms-traits.png"
+    alt='Single AutoValidatedQuickSemanticForm component (using 5 "traits") viewed in React DevTools.'
+  />
 </p>
 
 While it’s not a universal approach that will work in every situation, using it in uniforms allows us to deliver clean-looking components while keeping extensibility and separation of concerns.
