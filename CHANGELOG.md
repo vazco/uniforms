@@ -1,5 +1,6 @@
-## Next
+## [v3.10.0-rc.1](https://github.com/vazco/uniforms/tree/v3.10.0-rc.1) (2022-06-10)
 
+- **Added:** Support for React v18. [\#1109](https://github.com/vazco/uniforms/issues/1109)
 - **Changed:** All bridges calculate initial values (`getInitialValue`) for objects just like for arrays, i.e., recursively for all subfields. [\#1112](https://github.com/vazco/uniforms/issues/1112)
 
 ## [v3.10.0-rc.0](https://github.com/vazco/uniforms/tree/v3.10.0-rc.0) (2022-05-30)
