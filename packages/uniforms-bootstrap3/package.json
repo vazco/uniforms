@@ -28,7 +28,7 @@
     "src/*.tsx"
   ],
   "peerDependencies": {
-    "react": "^17.0.0 || ^16.8.0"
+    "react": "^18.0.0 || ^17.0.0 || ^16.8.0"
   },
   "dependencies": {
     "classnames": "^2.0.0",

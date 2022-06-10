@@ -3,6 +3,14 @@ id: faq
 title: FAQ
 ---
 
+### Can I use React v18?
+
+_Yes_, but be cautious about it.
+
+Our test suite is incompatible with it (we're using Enzyme; see [enzymejs/enzyme#2429](https://github.com/enzymejs/enzyme/issues/2429) and [enzymejs/enzyme#2524](https://github.com/enzymejs/enzyme/issues/2524)), therefore we are not certain that everything works as it should. Based on the [official upgrade guide](https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html), there's nothing you should worry about. A few people (including some of our projects) are already doing that (see [#1109](https://github.com/vazco/uniforms/issues/1109)).
+
+If you'll encounter any issues, do file an issue.
+
 ### How can I customize/style my form fields?
 
 You can style your form fields simply by passing a `className` property.
