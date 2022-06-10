@@ -1,7 +1,7 @@
 import invariant from 'invariant';
 import cloneDeep from 'lodash/cloneDeep';
 import memoize from 'lodash/memoize';
-// @ts-ignore
+// @ts-ignore -- This package _is_ typed, but not in all environments.
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Bridge, joinName } from 'uniforms';
 

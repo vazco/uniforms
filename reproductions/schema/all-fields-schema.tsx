@@ -32,6 +32,6 @@ const schema = new SimpleSchema({
       ],
     },
   },
-} as any);
+});
 
 export const bridge = new SimpleSchema2Bridge(schema);

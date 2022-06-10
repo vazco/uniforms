@@ -1,6 +1,5 @@
-// @ts-ignore
+// @ts-ignore -- This package _is_ typed, but not in all environments.
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-// @ts-ignore
 import { Match } from 'meteor/check';
 import { filterDOMProps } from 'uniforms';
 

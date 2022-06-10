@@ -2,7 +2,8 @@ import SimpleSchema from 'simpl-schema';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 
 describe('SimpleSchema2Bridge', () => {
-  const noop = () => {};
+  const noopComponent = () => null;
+  const noopTransform = () => {};
   const schema = new SimpleSchema({
     a: { type: Object },
     'a.b': { type: Object },
@@ -19,12 +20,12 @@ describe('SimpleSchema2Bridge', () => {
     k: { type: Array },
     'k.$': { type: String },
     l: { type: String, uniforms: 'div' },
-    m: { type: String, uniforms: noop },
+    m: { type: String, uniforms: noopComponent },
     n: { type: String, uniforms: { component: 'div' } },
     o: { type: Array },
     'o.$': { type: String, allowedValues: ['O'] },
     p: { type: Array },
-    'p.$': { type: String, uniforms: { transform: noop } },
+    'p.$': { type: String, uniforms: { transform: noopTransform } },
     r: { type: String, uniforms: { options: { a: 1, b: 2 } } },
     s: {
       type: String,
@@ -44,10 +45,9 @@ describe('SimpleSchema2Bridge', () => {
     z: { type: Object, defaultValue: { a: 'a' } },
     'z.a': String,
     zs: { type: Array, defaultValue: [{ a: 'a' }] },
-    'zs.$': Object,
+    'zs.$': { type: Object },
     'zs.$.a': String,
-    // FIXME: `SimpleSchemaDefinition` ignores `extendOptions`.
-  } as any);
+  });
 
   const bridge = new SimpleSchema2Bridge(schema);
 
@@ -209,7 +209,7 @@ describe('SimpleSchema2Bridge', () => {
       expect(bridge.getProps('m')).toEqual({
         label: 'M',
         required: true,
-        component: noop,
+        component: noopComponent,
       });
     });
 
@@ -269,7 +269,7 @@ describe('SimpleSchema2Bridge', () => {
       expect(bridge.getProps('p')).toEqual({
         label: 'P',
         required: true,
-        transform: noop,
+        transform: noopTransform,
       });
     });
 

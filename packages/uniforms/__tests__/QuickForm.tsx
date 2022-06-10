@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
+import SimpleSchema from 'simpl-schema';
 import { QuickForm } from 'uniforms';
-import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
+import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 
 import mount from './_mount';
-
-jest.mock('meteor/aldeed:simple-schema');
-jest.mock('meteor/check');
 
 describe('QuickForm', () => {
   // @ts-expect-error QuickForm is not a valid Component.
@@ -18,12 +16,13 @@ describe('QuickForm', () => {
     getSubmitField = () => () => <i className="submit" />;
   }
 
-  const schema = new SimpleSchemaBridge({
-    getDefinition: () => {},
-    messageForError: () => {},
-    objectKeys: () => ['a', 'b', 'c'],
-    validator: () => {},
-  } as any);
+  const schema = new SimpleSchema2Bridge(
+    new SimpleSchema({
+      a: String,
+      b: String,
+      c: String,
+    }),
+  );
 
   describe('when rendered with custom fields', () => {
     it('renders `AutoField` for each field', () => {
