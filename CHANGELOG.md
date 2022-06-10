@@ -1,3 +1,7 @@
+## Next
+
+- **Changed:** All bridges calculate initial values (`getInitialValue`) for objects just like for arrays, i.e., recursively for all subfields. [\#1112](https://github.com/vazco/uniforms/issues/1112)
+
 ## [v3.10.0-rc.0](https://github.com/vazco/uniforms/tree/v3.10.0-rc.0) (2022-05-30)
 
 - **Added:** New theme: `uniforms-mui`. [\#1054](https://github.com/vazco/uniforms/issues/1054)

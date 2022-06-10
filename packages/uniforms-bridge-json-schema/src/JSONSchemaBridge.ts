@@ -223,7 +223,14 @@ export default class JSONSchemaBridge extends Bridge {
     }
 
     if (type === 'object') {
-      return {};
+      const value: Record<string, unknown> = {};
+      this.getSubfields(name).forEach(key => {
+        const initialValue = this.getInitialValue(joinName(name, key));
+        if (initialValue !== undefined) {
+          value[key] = initialValue;
+        }
+      });
+      return value;
     }
 
     return undefined;

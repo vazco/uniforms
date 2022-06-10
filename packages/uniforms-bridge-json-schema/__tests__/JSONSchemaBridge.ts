@@ -617,7 +617,7 @@ describe('JSONSchemaBridge', () => {
     it('works with arrays', () => {
       expect(bridge.getInitialValue('friends')).toEqual([]);
       expect(bridge.getInitialValue('friends', { initialCount: 1 })).toEqual([
-        {},
+        { firstName: 'John', lastName: 'John' },
       ]);
       expect(
         bridge.getInitialValue('friends.0.firstName', { initialCount: 1 }),

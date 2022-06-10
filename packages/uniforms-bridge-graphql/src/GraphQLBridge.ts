@@ -89,7 +89,14 @@ export default class GraphQLBridge extends Bridge {
     }
 
     if (type === Object) {
-      return {};
+      const value: Record<string, unknown> = {};
+      this.getSubfields(name).forEach(key => {
+        const initialValue = this.getInitialValue(joinName(name, key));
+        if (initialValue !== undefined) {
+          value[key] = initialValue;
+        }
+      });
+      return value;
     }
 
     const { defaultValue } = this.getField(name);
