@@ -5,9 +5,6 @@ on:
     branches:
       - master
 jobs:
-  npm_vuln_check:
-    name: NPM dependency vulnerabilities check
-    uses: vazco/open-standards/.github/workflows/check_dependency_vulnerabilities.yml@master
   CI:
     runs-on: ubuntu-latest
     strategy:
@@ -21,8 +18,10 @@ jobs:
         with:
           cache: npm
           node-version: ${{ matrix.node-version }}
-      - name: Npm dependency duplication check
-        uses: vazco/open-standards/actions/npm-dependency-duplications/@action-test
+      - name: Check dependency duplications
+        uses: vazco/open-standards/actions/npm-dependency-duplications/@master
+      - name: Check dependency vulnerabilities
+        uses: vazco/open-standards/actions/npm-dependency-vulnerabilities/@master
       - name: Install
         run: npm i -g npm@7 && npm ci
       - name: Lint
