@@ -1,7 +1,8 @@
 import {
+  getNullableType,
   GraphQLInputField,
   GraphQLType,
-  getNullableType,
+  isEnumType,
   isInputObjectType,
   isListType,
   isNonNullType,
@@ -133,6 +134,13 @@ export default class GraphQLBridge extends Bridge {
         props.allowedValues = Object.keys(options);
         props.transform = (value: string) => options[value];
       }
+    }
+
+    if (isEnumType(fieldType)) {
+      const values = fieldType.getValues();
+      props.allowedValues = values.map(option => option.value);
+      props.transform = (value: unknown) =>
+        values.find(searchValue => searchValue.value === value)!.name;
     }
 
     return props;

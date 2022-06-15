@@ -1,4 +1,4 @@
-import { GraphQLString, buildASTSchema, parse } from 'graphql';
+import { buildASTSchema, GraphQLString, parse } from 'graphql';
 import { GraphQLBridge } from 'uniforms-bridge-graphql';
 
 describe('GraphQLBridge', () => {
@@ -7,6 +7,7 @@ describe('GraphQLBridge', () => {
 
         enum AccessLevel {
             Admin
+            User
         }
 
         input Author {
@@ -461,6 +462,20 @@ describe('GraphQLBridge', () => {
       expect(bridgeI.getProps('category', { x: 1, y: 1 })).toEqual({
         label: 'Category',
         required: true,
+      });
+    });
+
+    describe('when enum', () => {
+      it('should return possibleValues', () => {
+        expect(bridgeI.getProps('author.level').allowedValues).toEqual([
+          'Admin',
+          'User',
+        ]);
+      });
+
+      it('should transform the value to the name', () => {
+        const transform = bridgeI.getProps('author.level').transform;
+        expect(transform('Admin')).toBe('Admin');
       });
     });
   });
