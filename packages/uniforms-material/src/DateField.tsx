@@ -3,10 +3,13 @@ import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
+type DateFieldType = 'date' | 'datetime-local';
+
 /* istanbul ignore next */
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
-const dateFormat = (value?: Date, type = 'datetime-local') =>
+const dateFormat = (value?: Date, type: DateFieldType = 'datetime-local') =>
   value?.toISOString().slice(0, type === 'datetime-local' ? -8 : -14);
+
 const dateParse = (timestamp: number, onChange: DateFieldProps['onChange']) => {
   const date = new DateConstructor(timestamp);
   if (date.getFullYear() < 10000) {
@@ -21,7 +24,7 @@ export type DateFieldProps = FieldProps<
   TextFieldProps,
   {
     labelProps?: object;
-    type?: 'date' | 'datetime-local';
+    type?: DateFieldType;
   }
 >;
 

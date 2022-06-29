@@ -2,9 +2,12 @@ import classnames from 'classnames';
 import React, { Ref } from 'react';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
+type DateFieldType = 'date' | 'datetime-local';
+
 /* istanbul ignore next */
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
-const dateFormat = (value?: Date) => value?.toISOString().slice(0, -8);
+const dateFormat = (value?: Date, type: DateFieldType = 'datetime-local') =>
+  value?.toISOString().slice(0, type === 'datetime-local' ? -8 : -14);
 
 export type DateFieldProps = HTMLFieldProps<
   Date,
@@ -17,7 +20,7 @@ export type DateFieldProps = HTMLFieldProps<
     max?: Date;
     min?: Date;
     wrapClassName?: string;
-    type?: 'date' | 'datetime-local';
+    type?: DateFieldType;
   }
 >;
 
