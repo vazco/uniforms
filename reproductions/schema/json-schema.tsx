@@ -15,34 +15,64 @@ function createValidator(schema: object) {
 const schema = {
   type: 'object',
   properties: {
-    a: {
-      type: 'number',
-      title: 'a',
-      uniforms: { title: 'Horse' },
-    },
-    b: {
+    regularRequired: {
       type: 'string',
-      uniforms: {
-        placeholder: 'Horse',
-        required: false,
+    },
+    'nested.required': {
+      type: 'string',
+    },
+
+    regularMinLength: {
+      type: 'string',
+      minLength: 5,
+      default: 'Horse',
+    },
+    'nested.minLength': {
+      type: 'string',
+      minLength: 5,
+      default: 'Horse',
+    },
+    'nested.array': {
+      type: 'array',
+      minItems: 5,
+      items: {
+        type: 'object',
+        required: ['first.name', 'last.name'],
+        properties: {
+          'first.name': {
+            type: 'string',
+            minLength: 5,
+          },
+          'last.name': {
+            type: 'string',
+            minLength: 5,
+          },
+        },
       },
     },
-    c: {
-      type: 'string',
-      title: 'Title',
-      uniforms: { label: 'Horse' },
-    },
-    d: { type: 'string' },
-    e: {
-      type: 'string',
-      title: 'Title',
-      uniforms: {
-        label: 'Horse A',
-        placeholder: 'Horse B',
+    'nested.object': {
+      type: 'object',
+      required: ['first.name', 'last.name'],
+      properties: {
+        'first.name': {
+          type: 'string',
+          minLength: 5,
+        },
+        'last.name': {
+          type: 'string',
+          minLength: 5,
+        },
+        'another.nested': {
+          type: 'object',
+          properties: {
+            a: { type: 'string', minLength: 5 },
+            b: { type: 'string', minLength: 5 },
+          },
+        },
       },
     },
   },
-  required: ['b', 'c', 'd', 'e'],
+  required: ['nested.required', 'regularRequired'],
 };
 
 const schemaValidator = createValidator(schema);

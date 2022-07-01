@@ -102,13 +102,14 @@ export default class JSONSchemaBridge extends Bridge {
       return null;
     }
 
-    const nameParts = joinName(null, name);
+    const nameParts = joinName(null, name).map(joinName.unescape);
+    const unescapedName = joinName(...nameParts);
     const rootName = joinName(nameParts.slice(0, -1));
     const baseName = nameParts[nameParts.length - 1];
     const scopedError = details.find(error => {
       const path = pathToName(error.instancePath ?? error.dataPath);
       return (
-        name === path ||
+        unescapedName === path ||
         (rootName === path && baseName === error.params.missingProperty)
       );
     });
