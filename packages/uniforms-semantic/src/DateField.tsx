@@ -83,7 +83,7 @@ function Date({
           readOnly={readOnly}
           ref={inputRef}
           type={dateType}
-          value={dateFormat(value) ?? ''}
+          value={dateFormat(value, dateType) ?? ''}
         />
 
         {(icon || iconLeft) && (
