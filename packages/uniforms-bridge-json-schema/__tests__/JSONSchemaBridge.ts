@@ -391,12 +391,13 @@ describe('JSONSchemaBridge', () => {
 
     it('works with correct error (complex instance paths - dots in names)', () => {
       const pairs = [
-        ['["path.with.a.dot"]', '/path.with.a.dot'],
-        ['["path.with.a.dot"].another', '/path.with.a.dot/another'],
-        [
-          '["path.with.a.dot"].["another.with.a.dot"]',
-          '/path.with.a.dot/another.with.a.dot',
-        ],
+        ['["a.b.c"].["d.e/f"].g', '/a.b.c/d.e~1f/g'],
+        ['a.["b"]', '/a/b'],
+        ['a.["b"].c', '/a/b/c'],
+        ['a.["b.c"]', '/a/b.c'],
+        ['a.["b.c"].d', '/a/b.c/d'],
+        ['["a"].b', '/a/b'],
+        ['["a.b"].c', '/a.b/c'],
       ];
 
       pairs.forEach(([name, instancePath]) => {

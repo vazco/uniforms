@@ -103,7 +103,7 @@ export default class JSONSchemaBridge extends Bridge {
     }
 
     const nameParts = joinName(null, name).map(joinName.unescape);
-    const unescapedName = joinName(...nameParts);
+    const unescapedName = joinName(nameParts);
     const rootName = joinName(nameParts.slice(0, -1));
     const baseName = nameParts[nameParts.length - 1];
     const scopedError = details.find(error => {
