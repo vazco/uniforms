@@ -294,3 +294,14 @@ const anyProps: any = {
 }
 <AutoForm {...anyProps} />
 ```
+
+### Why am I getting "useForm must be used within a form" error?
+
+`uniforms` uses a `React.Context` in order to keep the state of the whole form.
+The provider for this context is created by `BaseForm`, and in turn all the other Form components inheriting it.
+
+There are two most common issues causing this problem:
+
+1. The component calling this function does not have a Form component above it anywhere in the component tree. To fix
+   this, wrap this component within a parent Form component (does not have to be direct).
+2. There are multiple versions of `uniforms` installed in your `node_modules`. This usually happens when you have more than one version of the core `uniforms` package installed which can happen when you have a mismatch of versions between any of your `uniforms` related dependencies. Ensure all your versions are matching, clean any `node_modules` directories and reinstall dependencies to resolve this error.
