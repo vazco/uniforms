@@ -13,66 +13,15 @@ function createValidator(schema: object) {
 }
 
 const schema = {
+  title: 'Address',
   type: 'object',
   properties: {
-    regularRequired: {
-      type: 'string',
-    },
-    'nested.required': {
-      type: 'string',
-    },
-
-    regularMinLength: {
-      type: 'string',
-      minLength: 5,
-      default: 'Horse',
-    },
-    'nested.minLength': {
-      type: 'string',
-      minLength: 5,
-      default: 'Horse',
-    },
-    'nested.array': {
-      type: 'array',
-      minItems: 5,
-      items: {
-        type: 'object',
-        required: ['first.name', 'last.name'],
-        properties: {
-          'first.name': {
-            type: 'string',
-            minLength: 5,
-          },
-          'last.name': {
-            type: 'string',
-            minLength: 5,
-          },
-        },
-      },
-    },
-    'nested.object': {
-      type: 'object',
-      required: ['first.name', 'last.name'],
-      properties: {
-        'first.name': {
-          type: 'string',
-          minLength: 5,
-        },
-        'last.name': {
-          type: 'string',
-          minLength: 5,
-        },
-        'another.nested': {
-          type: 'object',
-          properties: {
-            a: { type: 'string', minLength: 5 },
-            b: { type: 'string', minLength: 5 },
-          },
-        },
-      },
-    },
+    city: { type: 'string' },
+    state: { type: 'string' },
+    street: { type: 'string' },
+    zip: { type: 'string', pattern: '[0-9]{5}' },
   },
-  required: ['nested.required', 'regularRequired'],
+  required: ['street', 'zip', 'state'],
 };
 
 const schemaValidator = createValidator(schema);
