@@ -1,8 +1,33 @@
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { DateField, DateFieldProps } from 'uniforms-bootstrap3';
+import { render } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
 import mount from './_mount';
+
+describe('@RTL - DateField tests', () => {
+  test('<DateField> - handles "date" type correctly', () => {
+    const onChange = jest.fn();
+    const initialDate = new Date(Date.UTC(2020, 0, 1));
+
+    render(
+      <DateField name="x" type="date" placeholder="X" value={initialDate} />,
+      { x: Date },
+      { onChange },
+    );
+
+    const wrapper = screen.getByPlaceholderText('X');
+    // @ts-expect-error Incorrect types, approach taken from docs: https://testing-library.com/docs/example-input-event/
+    expect(wrapper.value).toBe('2020-01-01');
+    userEvent.type(wrapper, '2021-03-03');
+    expect(onChange.mock.calls[1][0]).toBe('x');
+    expect(onChange.mock.calls[1][1].toISOString()).toBe(
+      '2021-03-03T00:00:00.000Z',
+    );
+  });
+});
 
 test('<DateField> - renders an input', () => {
   const element = <DateField name="x" />;

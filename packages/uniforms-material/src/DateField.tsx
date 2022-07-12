@@ -43,12 +43,11 @@ function Date({
   readOnly,
   showInlineError,
   value,
-  type,
+  type = 'datetime-local',
   ...props
 }: DateFieldProps) {
   const theme = useTheme();
   const themeProps = theme.props?.MuiTextField;
-  const dateType = type === 'date' ? type : 'datetime-local';
 
   return (
     <TextField
@@ -67,7 +66,7 @@ function Date({
       }
       placeholder={placeholder}
       ref={inputRef}
-      type={dateType}
+      type={type}
       value={dateFormat(value, type) ?? ''}
       {...filterDOMProps(props)}
     />

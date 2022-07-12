@@ -45,11 +45,9 @@ function Date({
   showInlineError,
   value,
   wrapClassName,
-  type,
+  type = 'datetime-local',
   ...props
 }: DateFieldProps) {
-  const dateType = type === 'date' ? type : 'datetime-local';
-
   return (
     <div
       className={classnames(className, { disabled, error, required }, 'field')}
@@ -82,8 +80,8 @@ function Date({
           placeholder={placeholder}
           readOnly={readOnly}
           ref={inputRef}
-          type={dateType}
-          value={dateFormat(value, dateType) ?? ''}
+          type={type}
+          value={dateFormat(value, type) ?? ''}
         />
 
         {(icon || iconLeft) && (

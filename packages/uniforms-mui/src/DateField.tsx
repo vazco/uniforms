@@ -39,11 +39,9 @@ function Date({
   readOnly,
   showInlineError,
   value,
-  type,
+  type = 'datetime-local',
   ...props
 }: DateFieldProps) {
-  const dateType = type === 'date' ? type : 'datetime-local';
-
   return (
     <TextField
       disabled={disabled}
@@ -61,7 +59,7 @@ function Date({
       }
       placeholder={placeholder}
       ref={inputRef}
-      type={dateType}
+      type={type}
       value={dateFormat(value, type) ?? ''}
       {...filterDOMProps(props)}
     />

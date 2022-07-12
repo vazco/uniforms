@@ -38,11 +38,9 @@ function Date({
   placeholder,
   readOnly,
   value,
-  type,
+  type = 'datetime-local',
   ...props
 }: DateFieldProps) {
-  const dateType = type === 'date' ? type : 'datetime-local';
-
   return wrapField(
     { ...props, id },
     <input
@@ -65,7 +63,7 @@ function Date({
       placeholder={placeholder}
       readOnly={readOnly}
       ref={inputRef}
-      type={dateType}
+      type={type}
       value={dateFormat(value, type) ?? ''}
     />,
   );
