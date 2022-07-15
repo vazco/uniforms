@@ -477,6 +477,26 @@ describe('GraphQLBridge', () => {
         const transform = bridgeI.getProps('author.level').transform;
         expect(transform('Admin')).toBe('Admin');
       });
+
+      it('should prefer options over enum', () => {
+        const bridge = new GraphQLBridge(
+          astI.getType('Post')!,
+          schemaValidator,
+          {
+            ...schemaData,
+            'author.level': {
+              options: [
+                { label: 'A', value: 'a' },
+                { label: 'B', value: 'b' },
+              ],
+            },
+          },
+        );
+        const { allowedValues, transform } = bridge.getProps('author.level');
+        expect(allowedValues).toEqual(['a', 'b']);
+        expect(transform('a')).toEqual('A');
+        expect(transform('b')).toEqual('B');
+      });
     });
   });
 
