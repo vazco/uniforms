@@ -134,9 +134,7 @@ export default class GraphQLBridge extends Bridge {
         props.allowedValues = Object.keys(options);
         props.transform = (value: string) => options[value];
       }
-    }
-
-    if (isEnumType(fieldType)) {
+    } else if (isEnumType(fieldType)) {
       const values = fieldType.getValues();
       props.allowedValues = values.map(option => option.value);
       props.transform = (value: unknown) =>
