@@ -6,17 +6,29 @@ import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 
 import { render } from '../__suites__';
 
+const schema = new SimpleSchema2Bridge(
+  new SimpleSchema({
+    a: { type: String, defaultValue: '' },
+    b: { type: String, defaultValue: '' },
+    c: { type: String, defaultValue: '' },
+  }),
+);
+const model = { a: '1' };
+const onChange = jest.fn();
+const onChangeModel = jest.fn();
+const onSubmit = jest.fn();
+const validator = jest.fn();
+
+beforeEach(() => {
+  onChange.mockClear();
+  onChangeModel.mockClear();
+  onSubmit.mockClear();
+  validator.mockClear();
+});
+
 describe('<AutoForm />', () => {
   describe('when changes', () => {
     test('updates', () => {
-      const schema = new SimpleSchema2Bridge(
-        new SimpleSchema({
-          a: { type: String, defaultValue: '' },
-          b: { type: String, defaultValue: '' },
-          c: { type: String, defaultValue: '' },
-        }),
-      );
-      const onChange = jest.fn();
       render(
         <AutoForm data-testid="autoForm" onChange={onChange} schema={schema} />,
         { schema: { type: SimpleSchema2Bridge } },
@@ -27,15 +39,6 @@ describe('<AutoForm />', () => {
     // todo no way to test in rts cause of AutoField not rendering inputs, and in rts we don't have access to instance
     test.skip('validates', () => {
       // FIXME: AutoForm is not a valid Component.
-      const schema = new SimpleSchema2Bridge(
-        new SimpleSchema({
-          a: { type: String, defaultValue: '' },
-          b: { type: String, defaultValue: '' },
-          c: { type: String, defaultValue: '' },
-        }),
-      );
-      const onChange = jest.fn();
-      const validator = jest.fn();
       render(
         <AutoForm data-testid="autoForm" onChange={onChange} schema={schema} />,
         { schema: { type: SimpleSchema2Bridge } },
@@ -55,14 +58,6 @@ describe('<AutoForm />', () => {
 
     test('calls `onChangeModel`', () => {
       // FIXME: AutoForm is not a valid Component.
-      const schema = new SimpleSchema2Bridge(
-        new SimpleSchema({
-          a: { type: String, defaultValue: '' },
-          b: { type: String, defaultValue: '' },
-          c: { type: String, defaultValue: '' },
-        }),
-      );
-      const onChangeModel = jest.fn();
       render(
         <AutoForm
           data-testid="autoForm"
@@ -83,14 +78,6 @@ describe('<AutoForm />', () => {
       // todo no way to test in rts cause we don't have access to instance and state of component
       // (https://testing-library.com/docs/react-testing-library/intro/#the-problem)
       // FIXME: AutoForm is not a valid Component.
-      const schema = new SimpleSchema2Bridge(
-        new SimpleSchema({
-          a: { type: String, defaultValue: '' },
-          b: { type: String, defaultValue: '' },
-          c: { type: String, defaultValue: '' },
-        }),
-      );
-      const onChange = jest.fn();
       render(
         <AutoForm data-testid="autoForm" onChange={onChange} schema={schema} />,
         { schema: { type: SimpleSchema2Bridge } },
@@ -113,16 +100,6 @@ describe('<AutoForm />', () => {
       const field = () => null;
       const Field = connectField(field);
 
-      const schema = new SimpleSchema2Bridge(
-        new SimpleSchema({
-          a: { type: String, defaultValue: '' },
-          b: { type: String, defaultValue: '' },
-          c: { type: String, defaultValue: '' },
-        }),
-      );
-      const model = { a: '1' };
-      const onChange = jest.fn();
-
       // FIXME: AutoForm is not a valid Component.
       render(
         <AutoForm
@@ -143,16 +120,6 @@ describe('<AutoForm />', () => {
     test.skip('skips `onSubmit` until rendered (`autosave` = true)', async () => {
       // todo no way to test in rts cause we don't have access to instance and state of component
       // FIXME: AutoForm is not a valid Component.
-      const schema = new SimpleSchema2Bridge(
-        new SimpleSchema({
-          a: { type: String, defaultValue: '' },
-          b: { type: String, defaultValue: '' },
-          c: { type: String, defaultValue: '' },
-        }),
-      );
-      const onSubmit = jest.fn();
-      const onChange = jest.fn();
-      const validator = jest.fn();
       render(
         <AutoForm
           data-testid="autoForm"
@@ -183,14 +150,6 @@ describe('<AutoForm />', () => {
     test.skip('reset `model`', () => {
       // todo no way to test in rts cause we don't have access to instance and state of component
       // FIXME: AutoForm is not a valid Component.
-      const schema = new SimpleSchema2Bridge(
-        new SimpleSchema({
-          a: { type: String, defaultValue: '' },
-          b: { type: String, defaultValue: '' },
-          c: { type: String, defaultValue: '' },
-        }),
-      );
-      const model = { a: '1' };
       render(
         <AutoForm
           data-testid="autoForm"
@@ -209,15 +168,6 @@ describe('<AutoForm />', () => {
     test.skip('resets state `changedMap`', () => {
       // todo no way to test in rts cause we don't have access to instance and state of component
       // FIXME: AutoForm is not a valid Component.
-      const schema = new SimpleSchema2Bridge(
-        new SimpleSchema({
-          a: { type: String, defaultValue: '' },
-          b: { type: String, defaultValue: '' },
-          c: { type: String, defaultValue: '' },
-        }),
-      );
-      const model = { a: '1' };
-      const onSubmit = jest.fn();
       render(
         <AutoForm
           data-testid="autoForm"
@@ -236,15 +186,6 @@ describe('<AutoForm />', () => {
     test.skip('resets state `changed`', () => {
       // todo no way to test in rts cause we don't have access to instance and state of component
       // FIXME: AutoForm is not a valid Component.
-      const schema = new SimpleSchema2Bridge(
-        new SimpleSchema({
-          a: { type: String, defaultValue: '' },
-          b: { type: String, defaultValue: '' },
-          c: { type: String, defaultValue: '' },
-        }),
-      );
-      const model = { a: '1' };
-      const onSubmit = jest.fn();
       render(
         <AutoForm
           data-testid="autoForm"
@@ -265,13 +206,6 @@ describe('<AutoForm />', () => {
     test.skip('<AutoForm />, updates', () => {
       // todo no way to test in rts cause AutoForm not render input in core
       // FIXME: AutoForm is not a valid Component.
-      const schema = new SimpleSchema2Bridge(
-        new SimpleSchema({
-          a: { type: String, defaultValue: '' },
-          b: { type: String, defaultValue: '' },
-          c: { type: String, defaultValue: '' },
-        }),
-      );
       render(<AutoForm schema={schema} />, {
         schema: { type: SimpleSchema2Bridge },
       });
@@ -282,14 +216,6 @@ describe('<AutoForm />', () => {
     test.skip('<AutoForm />, validates', () => {
       // todo no way to test in rts cause AutoForm not render input in core
       // FIXME: AutoForm is not a valid Component.
-      const schema = new SimpleSchema2Bridge(
-        new SimpleSchema({
-          a: { type: String, defaultValue: '' },
-          b: { type: String, defaultValue: '' },
-          c: { type: String, defaultValue: '' },
-        }),
-      );
-      const validator = jest.fn();
       render(<AutoForm schema={schema} />, {
         schema: { type: SimpleSchema2Bridge },
       });
