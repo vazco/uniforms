@@ -1,20 +1,20 @@
 import { randomIds } from 'uniforms';
 
 describe('randomIds', () => {
-  it('is a function', () => {
+  test('is a function', () => {
     expect(randomIds).toBeInstanceOf(Function);
   });
 
-  it('returns a function', () => {
+  test('returns a function', () => {
     expect(randomIds()).toBeInstanceOf(Function);
   });
 
-  it('accepts custom prefix', () => {
+  test('accepts custom prefix', () => {
     const generator = randomIds('my-id-generator');
     expect(generator()).toMatch(/^my-id-generator/);
   });
 
-  it('generate random id', () => {
+  test('generate random id', () => {
     const amount = 100;
 
     const generator = randomIds();

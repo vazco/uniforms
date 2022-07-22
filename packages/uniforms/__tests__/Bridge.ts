@@ -4,7 +4,7 @@ describe('Bridge', () => {
   class CustomBridge extends Bridge {}
   const customBridgeInstance = new CustomBridge();
 
-  it('cannot be instantiated', () => {
+  test('cannot be instantiated', () => {
     // @ts-expect-error
     expect(() => new Bridge()).toThrow();
   });
@@ -23,7 +23,7 @@ describe('Bridge', () => {
     ] as const
   ).forEach(method => {
     describe(`#${method}`, () => {
-      it('throws an unimplemented error', () => {
+      test('throws an unimplemented error', () => {
         // @ts-expect-error
         expect(() => customBridgeInstance[method]()).toThrow();
       });
