@@ -1,4 +1,4 @@
-import { buildASTSchema, GraphQLString, parse } from 'graphql';
+import { GraphQLString, buildASTSchema, parse } from 'graphql';
 import { GraphQLBridge } from 'uniforms-bridge-graphql';
 
 describe('GraphQLBridge', () => {
