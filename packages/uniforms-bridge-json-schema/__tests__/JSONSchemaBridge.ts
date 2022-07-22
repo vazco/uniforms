@@ -388,6 +388,23 @@ describe('JSONSchemaBridge', () => {
         expect(bridge.getError(name, error)).toEqual(error.details[0]);
       });
     });
+
+    it('works with correct error (complex instance paths - dots in names)', () => {
+      const pairs = [
+        ['["a.b.c"].["d.e/f"].g', '/a.b.c/d.e~1f/g'],
+        ['a.["b"]', '/a/b'],
+        ['a.["b"].c', '/a/b/c'],
+        ['a.["b.c"]', '/a/b.c'],
+        ['a.["b.c"].d', '/a/b.c/d'],
+        ['["a"].b', '/a/b'],
+        ['["a.b"].c', '/a.b/c'],
+      ];
+
+      pairs.forEach(([name, instancePath]) => {
+        const error = { details: [{ instancePath }] };
+        expect(bridge.getError(name, error)).toEqual(error.details[0]);
+      });
+    });
   });
 
   describe('#getErrorMessage', () => {

@@ -13,36 +13,15 @@ function createValidator(schema: object) {
 }
 
 const schema = {
+  title: 'Address',
   type: 'object',
   properties: {
-    a: {
-      type: 'number',
-      title: 'a',
-      uniforms: { title: 'Horse' },
-    },
-    b: {
-      type: 'string',
-      uniforms: {
-        placeholder: 'Horse',
-        required: false,
-      },
-    },
-    c: {
-      type: 'string',
-      title: 'Title',
-      uniforms: { label: 'Horse' },
-    },
-    d: { type: 'string' },
-    e: {
-      type: 'string',
-      title: 'Title',
-      uniforms: {
-        label: 'Horse A',
-        placeholder: 'Horse B',
-      },
-    },
+    city: { type: 'string' },
+    state: { type: 'string' },
+    street: { type: 'string' },
+    zip: { type: 'string', pattern: '[0-9]{5}' },
   },
-  required: ['b', 'c', 'd', 'e'],
+  required: ['street', 'zip', 'state'],
 };
 
 const schemaValidator = createValidator(schema);
