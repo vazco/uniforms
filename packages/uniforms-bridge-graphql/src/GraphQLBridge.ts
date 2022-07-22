@@ -1,7 +1,7 @@
 import {
-  getNullableType,
   GraphQLInputField,
   GraphQLType,
+  getNullableType,
   isEnumType,
   isInputObjectType,
   isListType,
