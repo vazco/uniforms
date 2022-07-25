@@ -7,6 +7,7 @@ describe('GraphQLBridge', () => {
 
         enum AccessLevel {
             Admin
+            User
         }
 
         input Author {
@@ -461,6 +462,40 @@ describe('GraphQLBridge', () => {
       expect(bridgeI.getProps('category', { x: 1, y: 1 })).toEqual({
         label: 'Category',
         required: true,
+      });
+    });
+
+    describe('when enum', () => {
+      it('should return possibleValues', () => {
+        expect(bridgeI.getProps('author.level').allowedValues).toEqual([
+          'Admin',
+          'User',
+        ]);
+      });
+
+      it('should transform the value to the name', () => {
+        const transform = bridgeI.getProps('author.level').transform;
+        expect(transform('Admin')).toBe('Admin');
+      });
+
+      it('should prefer options over enum', () => {
+        const bridge = new GraphQLBridge(
+          astI.getType('Post')!,
+          schemaValidator,
+          {
+            ...schemaData,
+            'author.level': {
+              options: [
+                { label: 'A', value: 'a' },
+                { label: 'B', value: 'b' },
+              ],
+            },
+          },
+        );
+        const { allowedValues, transform } = bridge.getProps('author.level');
+        expect(allowedValues).toEqual(['a', 'b']);
+        expect(transform('a')).toEqual('A');
+        expect(transform('b')).toEqual('B');
       });
     });
   });
