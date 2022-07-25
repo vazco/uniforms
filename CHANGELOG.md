@@ -1,3 +1,8 @@
+## [v3.10.0](https://github.com/vazco/uniforms/tree/v3.10.0) (2022-07-25)
+
+- **Added:** Support for enums in `GraphQLSchemaBridge`. [\#1135](https://github.com/vazco/uniforms/issues/1135)
+- **Fixed:** Handling errors of fields with dots names in `JSONSchemaBrdige`. [\#1131](https://github.com/vazco/uniforms/issues/1131)
+
 ## [v3.10.0-rc.1](https://github.com/vazco/uniforms/tree/v3.10.0-rc.1) (2022-06-10)
 
 - **Added:** Support for React v18. [\#1109](https://github.com/vazco/uniforms/issues/1109)
