@@ -2,8 +2,6 @@ import TextField, { TextFieldProps } from '@mui/material/TextField';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
-type DateFieldType = 'date' | 'datetime-local';
-
 /* istanbul ignore next */
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
 
@@ -19,7 +17,7 @@ const dateParse = (timestamp: number, onChange: DateFieldProps['onChange']) => {
 export type DateFieldProps = FieldProps<
   Date,
   TextFieldProps,
-  { labelProps?: object; type?: DateFieldType }
+  { labelProps?: object; type?: 'date' | 'datetime-local' }
 >;
 
 function Date({
