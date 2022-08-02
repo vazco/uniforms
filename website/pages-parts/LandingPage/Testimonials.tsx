@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 
 import { Heading } from '../../components/Heading';
+import { OvalLink } from '../../components/OvalLink';
 import styles from '../../index.module.css';
 
 export type TestimonialProps = {
@@ -10,6 +11,9 @@ export type TestimonialProps = {
   mirror?: boolean;
   position: string;
   who: string;
+  avatar: string;
+  linkGithub: string;
+  linkLinkedin: string;
 };
 
 export function Testimonial({
@@ -18,6 +22,9 @@ export function Testimonial({
   mirror,
   position,
   who,
+  avatar,
+  linkGithub,
+  linkLinkedin,
 }: TestimonialProps) {
   return (
     <div
@@ -39,17 +46,33 @@ export function Testimonial({
             : styles['border-disable-top-right'],
         )}
       >
-        <h2>{who}</h2>
+        <img src={avatar} alt={who} className={styles['testimonial-avatar']} />
         <p>
-          <b>{company}</b>
+          <b>{who}</b>
           <br />
-          {position}
+          {position} at <b>{company}</b>
+          <br />
         </p>
+        <div className={styles['testimonial-links-wrapper']}>
+          <OvalLink to={linkGithub}>
+            <img
+              alt="github"
+              src="assets/github.svg"
+              className={styles['small-image-icon']}
+            />
+          </OvalLink>
+          <OvalLink to={linkLinkedin}>
+            <img
+              alt="github"
+              src="assets/linkedin.svg"
+              className={styles['small-image-icon']}
+            />
+          </OvalLink>
+        </div>
         <p
           className={classNames(styles.text, styles['testimonial-description'])}
-        >
-          {description}
-        </p>
+          dangerouslySetInnerHTML={{ __html: description }}
+        />
       </div>
     </div>
   );
@@ -70,17 +93,23 @@ export function Testimonials() {
       <Heading>Testimonials</Heading>
       <div className={styles.testimonials}>
         <Testimonial
-          company="Red Hat"
-          description="uniforms it’s one and the only library that allows you to have greater flexibility on top of the React platform to building forms you like, with great robustness with advanced support of many different forms inputs."
-          position="Team Lead"
-          who="Wojtek Trocki"
+          company="Resolve"
+          description="Uniforms is the backbone of our data-intensive web-applications. We have about 200 different forms, from very simple ones, to ones that are filled with complex data-loading conditional form components, which create an incredible UX for our users. And if you really need to push the limits of what you can do with forms, I would highly recommend <b><a href='https://www.vazco.eu/' alt='Vazco website' target='blank'>reaching out to Vazco</a></b> themselves for expert advice."
+          position="CTO and Co-Founder at Resolve"
+          who="Florian Bienefeldt"
+          avatar="img/florian-carre.jpg"
+          linkGithub="https://github.com/Floriferous"
+          linkLinkedin="https://ch.linkedin.com/in/florianbienefelt"
         />
         <Testimonial
-          company="Paystack"
-          description="The simplicity with which one can dive into details and break a form apart into it's primitive provides the much-needed peace of mind."
+          company="Toptal"
+          description="Uniforms is my go-to solution for quite a while. Great holistic approach to tackle forms. I especially love the approach to making custom form layouts. Developer experience par-excellence"
           mirror
-          position="Engineering Manager"
-          who="Serkan Durusoy"
+          position="Front-end Platform Architect"
+          who="Viktor Bezdek"
+          avatar="img/viktor-bezdek.png"
+          linkGithub="https://github.com/viktorbezdek"
+          linkLinkedin="https://www.linkedin.com/in/viktorbezdek/"
         />
       </div>
     </div>
