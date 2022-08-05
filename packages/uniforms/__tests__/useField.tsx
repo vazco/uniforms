@@ -51,29 +51,24 @@ describe('useField', () => {
         </AutoForm>,
         { schema: { type: SimpleSchema2Bridge } },
       );
+      const input = screen.getByRole('textbox');
 
-      const element = screen.getByTestId('autoForm').children[0];
-
-      expect(element).toHaveAttribute('value', '4');
-
-      fireEvent.change(element, { target: { value: undefined } });
-      expect(element.getAttribute('value')).toBeTruthy();
+      expect(input).toHaveAttribute('value', '4');
     });
 
-    test.skip('does not apply default value after first change', () => {
-      render(
-        <AutoForm schema={bridge} data-testid="autoForm">
+    test('does not apply default value after first change', () => {
+      const { getByRole } = render(
+        <AutoForm label schema={bridge} data-testid="autoForm">
           <TestComponent name="d" />
         </AutoForm>,
         { schema: { type: SimpleSchema2Bridge } },
       );
 
-      const element = screen.getByTestId('autoForm').children[0];
-      fireEvent.change(element, { target: { value: undefined } });
+      const input = getByRole('textbox');
 
-      expect(element).toBeTruthy();
+      fireEvent.change(input, { target: { value: null } });
 
-      expect(element).toHaveAttribute('value', '');
+      expect(input).toHaveAttribute('value', '');
     });
   });
 
