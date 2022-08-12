@@ -1,19 +1,20 @@
 import classNames from 'classnames';
 import React from 'react';
+import { GitHub, Linkedin } from 'react-feather';
 
 import { Heading } from '../../components/Heading';
-import { OvalLink } from '../../components/OvalLink';
+import { IconLink } from '../../components/IconLink';
 import styles from '../../index.module.css';
 
 export type TestimonialProps = {
+  avatar: string;
   company: string;
-  description: string;
+  description: JSX.Element;
+  linkGithub: string;
+  linkLinkedin: string;
   mirror?: boolean;
   position: string;
   who: string;
-  avatar: string;
-  linkGithub: string;
-  linkLinkedin: string;
 };
 
 export function Testimonial({
@@ -54,25 +55,14 @@ export function Testimonial({
           <br />
         </p>
         <div className={styles['testimonial-links-wrapper']}>
-          <OvalLink to={linkGithub}>
-            <img
-              alt="github"
-              src="assets/github.svg"
-              className={styles['small-image-icon']}
-            />
-          </OvalLink>
-          <OvalLink to={linkLinkedin}>
-            <img
-              alt="github"
-              src="assets/linkedin.svg"
-              className={styles['small-image-icon']}
-            />
-          </OvalLink>
+          <IconLink to={linkGithub}>
+            <GitHub className={styles['small-link-icon']} />
+          </IconLink>
+          <IconLink to={linkLinkedin}>
+            <Linkedin className={styles['small-link-icon']} />
+          </IconLink>
         </div>
-        <p
-          className={classNames(styles.text, styles['testimonial-description'])}
-          dangerouslySetInnerHTML={{ __html: description }}
-        />
+        {description}
       </div>
     </div>
   );
@@ -94,20 +84,51 @@ export function Testimonials() {
       <div className={styles.testimonials}>
         <Testimonial
           company="Resolve"
-          description="Uniforms is the backbone of our data-intensive web-applications. We have about 200 different forms, from very simple ones, to ones that are filled with complex data-loading conditional form components, which create an incredible UX for our users. And if you really need to push the limits of what you can do with forms, I would highly recommend <b><a href='https://www.vazco.eu/' alt='Vazco website' target='blank'>reaching out to Vazco</a></b> themselves for expert advice."
+          description={
+            <p
+              className={classNames(
+                styles.text,
+                styles['testimonial-description'],
+              )}
+            >
+              uniforms is the backbone of our data-intensive web-applications.
+              We have about 200 different forms, from very simple ones, to ones
+              that are filled with complex data-loading conditional form
+              components, which create an incredible UX for our users. And if
+              you really need to push the limits of what you can do with forms,
+              I would highly recommend{' '}
+              <b>
+                <a href="https://www.vazco.eu/" target="blank">
+                  reaching out to Vazco
+                </a>
+              </b>{' '}
+              themselves for expert advice.
+            </p>
+          }
           position="CTO and Co-Founder at Resolve"
-          who="Florian Bienefeldt"
-          avatar="img/florian-carre.jpg"
+          who="Florian Bienefelt"
+          avatar="img/avatar/florian-bienefelt.jpg"
           linkGithub="https://github.com/Floriferous"
           linkLinkedin="https://ch.linkedin.com/in/florianbienefelt"
         />
         <Testimonial
           company="Toptal"
-          description="Uniforms is my go-to solution for quite a while. Great holistic approach to tackle forms. I especially love the approach to making custom form layouts. Developer experience par-excellence"
+          description={
+            <p
+              className={classNames(
+                styles.text,
+                styles['testimonial-description'],
+              )}
+            >
+              uniforms is my go-to solution for quite a while. Great holistic
+              approach to tackle forms. I especially love the approach to making
+              custom form layouts. Developer experience par-excellence
+            </p>
+          }
           mirror
           position="Front-end Platform Architect"
           who="Viktor Bezdek"
-          avatar="img/viktor-bezdek.png"
+          avatar="img/avatar/viktor-bezdek.jpg"
           linkGithub="https://github.com/viktorbezdek"
           linkLinkedin="https://www.linkedin.com/in/viktorbezdek/"
         />

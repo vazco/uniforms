@@ -511,14 +511,16 @@
   background-color: var(--uni-oval-background-color);
 }
 
-.oval-link-icon {
-  display: inline-block;
-  width: 35px;
-  height: 35px;
-  padding: 0;
+.link-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 37px;
+  height: 37px;
   border-radius: 50%;
   box-shadow: 0 8px 23px 0 var(--uni-oval-shadow-color);
   background-color: var(--uni-oval-background-color);
+  color: var(--dusk-blue);
 }
 
 .oval.white {
@@ -885,7 +887,7 @@
   align-items: center;
 }
 
-.small-image-icon:hover {
+.small-link-icon:hover {
   transition: filter 0.2s ease-in;
   filter: brightness(1.5);
 }
