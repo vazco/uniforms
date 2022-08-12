@@ -523,6 +523,11 @@
   color: var(--dusk-blue);
 }
 
+.link-icon-container svg:hover {
+  transition: filter 0.15s ease-in;
+  filter: brightness(1.6);
+}
+
 .oval.white {
   background-color: var(--white);
   width: 100px;
@@ -885,9 +890,4 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.small-link-icon:hover {
-  transition: filter 0.2s ease-in;
-  filter: brightness(1.5);
 }

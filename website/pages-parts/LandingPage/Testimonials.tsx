@@ -55,14 +55,14 @@ export function Testimonial({
           <br />
         </p>
         <div className={styles['testimonial-links-wrapper']}>
-          <IconLink to={linkGithub}>
-            <GitHub className={styles['small-link-icon']} />
-          </IconLink>
-          <IconLink to={linkLinkedin}>
-            <Linkedin className={styles['small-link-icon']} />
-          </IconLink>
+          <IconLink color="#412a94" icon={GitHub} to={linkGithub} />
+          <IconLink color="#412a94" icon={Linkedin} to={linkLinkedin} />
         </div>
-        {description}
+        <p
+          className={classNames(styles.text, styles['testimonial-description'])}
+        >
+          {description}
+        </p>
       </div>
     </div>
   );
@@ -85,12 +85,7 @@ export function Testimonials() {
         <Testimonial
           company="Resolve"
           description={
-            <p
-              className={classNames(
-                styles.text,
-                styles['testimonial-description'],
-              )}
-            >
+            <>
               uniforms is the backbone of our data-intensive web-applications.
               We have about 200 different forms, from very simple ones, to ones
               that are filled with complex data-loading conditional form
@@ -103,7 +98,7 @@ export function Testimonials() {
                 </a>
               </b>{' '}
               themselves for expert advice.
-            </p>
+            </>
           }
           position="CTO and Co-Founder at Resolve"
           who="Florian Bienefelt"
@@ -114,16 +109,11 @@ export function Testimonials() {
         <Testimonial
           company="Toptal"
           description={
-            <p
-              className={classNames(
-                styles.text,
-                styles['testimonial-description'],
-              )}
-            >
+            <>
               uniforms is my go-to solution for quite a while. Great holistic
               approach to tackle forms. I especially love the approach to making
               custom form layouts. Developer experience par-excellence
-            </p>
+            </>
           }
           mirror
           position="Front-end Platform Architect"

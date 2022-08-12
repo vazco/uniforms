@@ -1,19 +1,29 @@
 import Link from '@docusaurus/Link';
 import classNames from 'classnames';
-import React from 'react';
+import React, { ComponentType } from 'react';
 
 import styles from '../index.module.css';
 
-export type IconLinkProps = JSX.IntrinsicElements['div'] & { to: string };
+export type IconLinkProps = JSX.IntrinsicElements['div'] & {
+  color: string;
+  icon: ComponentType<{ color?: string }>;
+  to: string;
+};
 
-export function IconLink({ children, className, to, ...props }: IconLinkProps) {
+export function IconLink({
+  className,
+  color,
+  icon: Icon,
+  to,
+  ...props
+}: IconLinkProps) {
   return (
     <Link to={to}>
       <div
         {...props}
         className={classNames(styles['link-icon-container'], className)}
       >
-        {children}
+        <Icon color={color} />
       </div>
     </Link>
   );
