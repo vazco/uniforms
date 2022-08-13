@@ -56,12 +56,12 @@ export function Testimonial({
         </p>
         <div className={styles['testimonial-links-wrapper']}>
           <IconLink
-            className={styles['testimonial-icon-color']}
+            className={styles['testimonial-icon']}
             icon={GitHub}
             to={linkGithub}
           />
           <IconLink
-            className={styles['testimonial-icon-color']}
+            className={styles['testimonial-icon']}
             icon={Linkedin}
             to={linkLinkedin}
           />
