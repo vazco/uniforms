@@ -55,16 +55,8 @@ export function Testimonial({
           <br />
         </p>
         <div className={styles['testimonial-links-wrapper']}>
-          <IconLink
-            className={styles['testimonial-icon']}
-            icon={GitHub}
-            to={linkGithub}
-          />
-          <IconLink
-            className={styles['testimonial-icon']}
-            icon={Linkedin}
-            to={linkLinkedin}
-          />
+          <IconLink icon={GitHub} to={linkGithub} />
+          <IconLink icon={Linkedin} to={linkLinkedin} />
         </div>
         <p
           className={classNames(styles.text, styles['testimonial-description'])}

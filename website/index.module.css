@@ -419,6 +419,11 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
+  color: var(--dusk-blue);
+}
+
+.testimonial-links-wrapper a {
+  color: var(--dusk-blue);
 }
 
 .testimonial-description::before {
@@ -525,10 +530,6 @@
 .link-icon-container svg:hover {
   transition: filter 0.15s ease-in;
   filter: brightness(1.6);
-}
-
-.testimonial-icon-color {
-  color: var(--dusk-blue);
 }
 
 .oval.white {

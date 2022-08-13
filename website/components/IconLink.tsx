@@ -5,14 +5,12 @@ import React, { ComponentType } from 'react';
 import styles from '../index.module.css';
 
 export type IconLinkProps = JSX.IntrinsicElements['div'] & {
-  color?: string;
-  icon: ComponentType<{ color?: string }>;
+  icon: ComponentType;
   to: string;
 };
 
 export function IconLink({
   className,
-  color,
   icon: Icon,
   to,
   ...props
@@ -23,7 +21,7 @@ export function IconLink({
         {...props}
         className={classNames(styles['link-icon-container'], className)}
       >
-        <Icon color={color} />
+        <Icon />
       </div>
     </Link>
   );
