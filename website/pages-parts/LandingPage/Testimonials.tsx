@@ -18,14 +18,14 @@ export type TestimonialProps = {
 };
 
 export function Testimonial({
+  avatar,
   company,
   description,
+  linkGithub,
+  linkLinkedin,
   mirror,
   position,
   who,
-  avatar,
-  linkGithub,
-  linkLinkedin,
 }: TestimonialProps) {
   return (
     <div
@@ -55,8 +55,16 @@ export function Testimonial({
           <br />
         </p>
         <div className={styles['testimonial-links-wrapper']}>
-          <IconLink color="#412a94" icon={GitHub} to={linkGithub} />
-          <IconLink color="#412a94" icon={Linkedin} to={linkLinkedin} />
+          <IconLink
+            className={styles['testimonial-icon-color']}
+            icon={GitHub}
+            to={linkGithub}
+          />
+          <IconLink
+            className={styles['testimonial-icon-color']}
+            icon={Linkedin}
+            to={linkLinkedin}
+          />
         </div>
         <p
           className={classNames(styles.text, styles['testimonial-description'])}
@@ -112,7 +120,7 @@ export function Testimonials() {
             <>
               uniforms is my go-to solution for quite a while. Great holistic
               approach to tackle forms. I especially love the approach to making
-              custom form layouts. Developer experience par-excellence
+              custom form layouts. Developer experience par-excellence.
             </>
           }
           mirror

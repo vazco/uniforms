@@ -5,7 +5,7 @@ import React, { ComponentType } from 'react';
 import styles from '../index.module.css';
 
 export type IconLinkProps = JSX.IntrinsicElements['div'] & {
-  color: string;
+  color?: string;
   icon: ComponentType<{ color?: string }>;
   to: string;
 };
