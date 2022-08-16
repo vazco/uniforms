@@ -100,7 +100,7 @@ export function Testimonials() {
               themselves for expert advice.
             </>
           }
-          position="CTO and Co-Founder at Resolve"
+          position="CTO and Co-Founder"
           who="Florian Bienefelt"
           avatar="img/avatar/florian-bienefelt.jpg"
           linkGithub="https://github.com/Floriferous"
