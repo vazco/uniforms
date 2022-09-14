@@ -7,4 +7,4 @@ This guide is designed to help you through the migration. If you went through it
 
 ## Breaking API changes
 
-* `AutoFields` component in all themes now renders a `React.Fragment` instead of a `div`. Explicitly render a wrapper component around if you need one.
+- `AutoFields` component in all themes now renders a `React.Fragment` instead of a `div`. Explicitly render a wrapper component around if you need one.
