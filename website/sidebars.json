@@ -1,7 +1,7 @@
 {
   "docs": {
     "Introduction": ["what-are-uniforms", "motivation", "compare-matrix"],
-    "Getting Started": ["installation", "faq", "migrating-2-to-3"],
+    "Getting Started": ["installation", "faq", "migrating-3-to-4", "migrating-2-to-3"],
     "Tutorials": [
       "tutorials-basic-uniforms-usage",
       "tutorials-customizing-your-form-layout",
