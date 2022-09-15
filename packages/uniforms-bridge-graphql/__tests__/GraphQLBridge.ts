@@ -199,9 +199,6 @@ describe('GraphQLBridge', () => {
   describe('#getInitialValue', () => {
     it('works with arrays', () => {
       expect(bridgeI.getInitialValue('author.tags')).toEqual([]);
-      expect(
-        bridgeI.getInitialValue('author.tags', { initialCount: 1 }),
-      ).toEqual([undefined]);
     });
 
     it('works with objects', () => {

@@ -46,16 +46,6 @@ test('<ListField> - renders correct label (specified)', () => {
   );
 });
 
-test('<ListField> - renders correct numer of items with initialCount (specified)', () => {
-  const element = <ListField name="x" initialCount={3} />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: Array }, 'x.$': { type: String } }),
-  );
-
-  expect(wrapper.find('input')).toHaveLength(3);
-});
-
 test('<ListField> - passes itemProps to its children', () => {
   const element = (
     <ListField name="x" initialCount={3} itemProps={{ 'data-xyz': 1 }} />
@@ -151,7 +141,7 @@ test('<ListField> - renders correct error text (showInlineError=false)', () => {
   expect(wrapper.find('.help-block')).toHaveLength(0);
 });
 
-test('<ListField> - renders proper number of optional values after add new value (with initialCount)', () => {
+test('<ListField> - renders proper number of optional values after add new value', () => {
   const element = (
     <ListField name="x" initialCount={3} addIcon="+" label="ListFieldLabel" />
   );
