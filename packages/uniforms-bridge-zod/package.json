@@ -1,0 +1,35 @@
+{
+  "name": "uniforms-bridge-zod",
+  "version": "3.10.0",
+  "license": "MIT",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "sideEffects": false,
+  "description": "Zod schema bridge for uniforms.",
+  "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-bridge-zod",
+  "bugs": "https://github.com/vazco/uniforms/issues",
+  "funding": "https://github.com/vazco/uniforms?sponsor=1",
+  "keywords": [
+    "form",
+    "forms",
+    "react",
+    "schema",
+    "validation",
+    "zod"
+  ],
+  "files": [
+    "cjs/*.d.ts",
+    "cjs/*.js",
+    "esm/*.d.ts",
+    "esm/*.js",
+    "src/*.ts",
+    "src/*.tsx"
+  ],
+  "dependencies": {
+    "invariant": "^2.0.0",
+    "lodash": "^4.0.0",
+    "tslib": "^2.2.0",
+    "uniforms": "^3.10.0",
+    "zod": "^3.0.0"
+  }
+}
