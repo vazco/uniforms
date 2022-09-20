@@ -154,6 +154,50 @@ describe('ZodBridge', () => {
     });
   });
 
+  describe('#getInitialValue', () => {
+    it('works with array', () => {
+      const schema = object({ a: array(array(string())) });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getInitialValue('a')).toEqual([]);
+    });
+
+    it('works with array (min length)', () => {
+      const schema = object({ a: array(array(string()).min(1)).min(2) });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getInitialValue('a')).toEqual([[], []]);
+    });
+
+    it('works with boolean', () => {
+      const schema = object({ a: boolean() });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getInitialValue('a')).toEqual(undefined);
+    });
+
+    it('works with date', () => {
+      const schema = object({ a: date() });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getInitialValue('a')).toEqual(undefined);
+    });
+
+    it('works with number', () => {
+      const schema = object({ a: number() });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getInitialValue('a')).toEqual(undefined);
+    });
+
+    it('works with object', () => {
+      const schema = object({ a: object({ b: object({ c: string() }) }) });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getInitialValue('a')).toEqual({ b: {} });
+    });
+
+    it('works with string', () => {
+      const schema = object({ a: string() });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getInitialValue('a')).toEqual(undefined);
+    });
+  });
+
   describe('#getSubfields', () => {
     it('works with empty objects', () => {
       const schema = object({});

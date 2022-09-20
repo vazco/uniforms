@@ -66,6 +66,35 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     return field;
   }
 
+  // TODO: The `fieldProps` argument will be removed in v4. See
+  // https://github.com/vazco/uniforms/issues/1048 for details.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getInitialValue(name: string, fieldProps?: Record<string, unknown>): unknown {
+    const field = this.getField(name);
+    if (field instanceof ZodArray) {
+      const item = this.getInitialValue(joinName(name, '$'));
+      if (item === undefined) {
+        return [];
+      }
+
+      const length = field._def.minLength?.value || 0;
+      return Array.from({ length }, () => item);
+    }
+
+    if (field instanceof ZodObject) {
+      const value: Record<string, unknown> = {};
+      this.getSubfields(name).forEach(key => {
+        const initialValue = this.getInitialValue(joinName(name, key));
+        if (initialValue !== undefined) {
+          value[key] = initialValue;
+        }
+      });
+      return value;
+    }
+
+    return undefined;
+  }
+
   getSubfields(name = '') {
     const field = this.getField(name);
     if (field instanceof ZodArray) {
