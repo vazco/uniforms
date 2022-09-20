@@ -5,6 +5,7 @@ import {
   ZodArray,
   ZodBoolean,
   ZodDate,
+  ZodError,
   ZodNumber,
   ZodObject,
   ZodRawShape,
@@ -22,6 +23,14 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
 
     this.getField = memoize(this.getField.bind(this));
     this.getSubfields = memoize(this.getSubfields.bind(this));
+  }
+
+  getError(name: string, error: unknown) {
+    if (!(error instanceof ZodError)) {
+      return null;
+    }
+
+    return error.issues.find(issue => name === joinName(issue.path)) || null;
   }
 
   getField(name: string) {

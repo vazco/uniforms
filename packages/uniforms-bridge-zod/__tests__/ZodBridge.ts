@@ -2,6 +2,44 @@ import { ZodBridge } from 'uniforms-bridge-zod';
 import { array, boolean, date, number, object, string } from 'zod';
 
 describe('ZodBridge', () => {
+  describe('#getError', () => {
+    it('works without error', () => {
+      const schema = object({ a: string() });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getError('a', null)).toBe(null);
+      expect(bridge.getError('a', undefined)).toBe(null);
+    });
+
+    it('works with simple types', () => {
+      const schema = object({ a: string(), b: number() });
+      const bridge = new ZodBridge(schema);
+      const error = bridge.getValidator()({});
+      expect(bridge.getError('a', error)).toBe(error?.issues[0]);
+      expect(bridge.getError('b', error)).toBe(error?.issues[1]);
+    });
+
+    it('works with arrays', () => {
+      const schema = object({ a: array(array(string())) });
+      const bridge = new ZodBridge(schema);
+      const error = bridge.getValidator()({ a: [['x', 'y', 0], [1]] });
+      expect(bridge.getError('a', error)).toBe(null);
+      expect(bridge.getError('a.0', error)).toBe(null);
+      expect(bridge.getError('a.0.0', error)).toBe(null);
+      expect(bridge.getError('a.0.1', error)).toBe(null);
+      expect(bridge.getError('a.0.2', error)).toBe(error?.issues[0]);
+      expect(bridge.getError('a.1.0', error)).toBe(error?.issues[1]);
+    });
+
+    it('works with nested objects', () => {
+      const schema = object({ a: object({ b: object({ c: string() }) }) });
+      const bridge = new ZodBridge(schema);
+      const error = bridge.getValidator()({ a: { b: { c: 1 } } });
+      expect(bridge.getError('a', error)).toBe(null);
+      expect(bridge.getError('a.b', error)).toBe(null);
+      expect(bridge.getError('a.b.c', error)).toBe(error?.issues[0]);
+    });
+  });
+
   describe('#getField', () => {
     it('works with root schema', () => {
       const schema = object({});
@@ -19,9 +57,9 @@ describe('ZodBridge', () => {
     it('works with arrays', () => {
       const schema = object({ a: array(array(string())) });
       const bridge = new ZodBridge(schema);
-      expect(bridge.getField('a')).toEqual(schema.shape.a);
-      expect(bridge.getField('a.$')).toEqual(schema.shape.a.element);
-      expect(bridge.getField('a.$.$')).toEqual(schema.shape.a.element.element);
+      expect(bridge.getField('a')).toBe(schema.shape.a);
+      expect(bridge.getField('a.$')).toBe(schema.shape.a.element);
+      expect(bridge.getField('a.$.$')).toBe(schema.shape.a.element.element);
     });
 
     it('works with nested objects', () => {
