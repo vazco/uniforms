@@ -7,4 +7,4 @@ This guide is designed to help you through the migration. If you went through it
 
 ## Breaking API changes
 
-- Removed `autoField` prop from `QuickForm` and `AutoForm`. Use [`AutoField.componentDetectorContext.Provider`](/docs/uth-autofield-algorithm/#overriding-autofield) instead.
+- Removed the `autoField` prop from `QuickForm`, `AutoForm`, and `AutoFields` components in all themes. Use [`AutoField.componentDetectorContext.Provider`](/docs/uth-autofield-algorithm/#overriding-autofield) instead.
