@@ -37,6 +37,20 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     return this.getError(name, error)?.message || '';
   }
 
+  getErrorMessages(error: unknown) {
+    if (error instanceof ZodError) {
+      // TODO: There's no information which field caused which error. We could
+      // do some generic prefixing, e.g., `{name}: {message}`.
+      return error.issues.map(issue => issue.message);
+    }
+
+    if (error instanceof Error) {
+      return [error.message];
+    }
+
+    return [];
+  }
+
   getField(name: string) {
     let field: ZodType = this.schema;
     for (const key of joinName(null, name)) {

@@ -84,6 +84,45 @@ describe('ZodBridge', () => {
     });
   });
 
+  describe('#getErrorMessages', () => {
+    it('works without error', () => {
+      const schema = object({ a: string() });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getErrorMessages(null)).toEqual([]);
+      expect(bridge.getErrorMessages(undefined)).toEqual([]);
+    });
+
+    it('works with generic error', () => {
+      const schema = object({ a: string() });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getErrorMessages(new Error('Error'))).toEqual(['Error']);
+    });
+
+    it('works with simple types', () => {
+      const schema = object({ a: string(), b: number() });
+      const bridge = new ZodBridge(schema);
+      const error = bridge.getValidator()({});
+      const messages = error?.issues?.map(issue => issue.message);
+      expect(bridge.getErrorMessages(error)).toEqual(messages);
+    });
+
+    it('works with arrays', () => {
+      const schema = object({ a: array(array(string())) });
+      const bridge = new ZodBridge(schema);
+      const error = bridge.getValidator()({ a: [['x', 'y', 0], [1]] });
+      const messages = error?.issues?.map(issue => issue.message);
+      expect(bridge.getErrorMessages(error)).toEqual(messages);
+    });
+
+    it('works with nested objects', () => {
+      const schema = object({ a: object({ b: object({ c: string() }) }) });
+      const bridge = new ZodBridge(schema);
+      const error = bridge.getValidator()({ a: { b: { c: 1 } } });
+      const messages = error?.issues?.map(issue => issue.message);
+      expect(bridge.getErrorMessages(error)).toEqual(messages);
+    });
+  });
+
   describe('#getField', () => {
     it('works with root schema', () => {
       const schema = object({});
