@@ -1,5 +1,5 @@
 import { ZodBridge } from 'uniforms-bridge-zod';
-import { array, number, object, string } from 'zod';
+import { array, boolean, date, number, object, string } from 'zod';
 
 describe('ZodBridge', () => {
   describe('#getField', () => {
@@ -67,6 +67,44 @@ describe('ZodBridge', () => {
       expect(bridge.getSubfields('a')).toEqual(['b']);
       expect(bridge.getSubfields('a.b')).toEqual(['c']);
       expect(bridge.getSubfields('a.b.c')).toEqual([]);
+    });
+  });
+
+  describe('#getType', () => {
+    it('works with array', () => {
+      const schema = object({ a: array(array(string())) });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getType('a')).toBe(Array);
+    });
+
+    it('works with boolean', () => {
+      const schema = object({ a: boolean() });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getType('a')).toBe(Boolean);
+    });
+
+    it('works with date', () => {
+      const schema = object({ a: date() });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getType('a')).toBe(Date);
+    });
+
+    it('works with number', () => {
+      const schema = object({ a: number() });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getType('a')).toBe(Number);
+    });
+
+    it('works with object', () => {
+      const schema = object({ a: object({ b: object({ c: string() }) }) });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getType('a')).toBe(Object);
+    });
+
+    it('works with string', () => {
+      const schema = object({ a: string() });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getType('a')).toBe(String);
     });
   });
 });

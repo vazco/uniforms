@@ -1,7 +1,16 @@
 import invariant from 'invariant';
 import memoize from 'lodash/memoize';
 import { Bridge, joinName } from 'uniforms';
-import { ZodArray, ZodObject, ZodRawShape, ZodType } from 'zod';
+import {
+  ZodArray,
+  ZodBoolean,
+  ZodDate,
+  ZodNumber,
+  ZodObject,
+  ZodRawShape,
+  ZodString,
+  ZodType,
+} from 'zod';
 
 function fieldInvariant(name: string, condition: boolean): asserts condition {
   invariant(condition, 'Field not found in schema: "%s"', name);
@@ -41,5 +50,34 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     }
 
     return [];
+  }
+
+  getType(name: string) {
+    const field = this.getField(name);
+    if (field instanceof ZodArray) {
+      return Array;
+    }
+
+    if (field instanceof ZodBoolean) {
+      return Boolean;
+    }
+
+    if (field instanceof ZodDate) {
+      return Date;
+    }
+
+    if (field instanceof ZodNumber) {
+      return Number;
+    }
+
+    if (field instanceof ZodObject) {
+      return Object;
+    }
+
+    if (field instanceof ZodString) {
+      return String;
+    }
+
+    invariant(false, 'Field "%s" has an unknown type', name);
   }
 }
