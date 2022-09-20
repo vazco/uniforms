@@ -33,6 +33,10 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     return error.issues.find(issue => name === joinName(issue.path)) || null;
   }
 
+  getErrorMessage(name: string, error: unknown) {
+    return this.getError(name, error)?.message || '';
+  }
+
   getField(name: string) {
     let field: ZodType = this.schema;
     for (const key of joinName(null, name)) {
