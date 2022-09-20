@@ -121,11 +121,10 @@ You can customize which `AutoField` should be used with [`AutoField.componentDet
 
 ##### Props:
 
-|     Name      |                                        Description                                         |
-| :-----------: | :----------------------------------------------------------------------------------------: |
-|  `autoField`  | Custom `AutoField` (deprecated, see [#980](https://github.com/vazco/uniforms/issues/980)). |
-| `errorsField` | Custom `ErrorsField`. It should be anything that will pass through `React.createElement`.  |
-| `submitField` | Custom `SubmitField`. It should be anything that will pass through `React.createElement`.  |
+|     Name      |                                        Description                                        |
+| :-----------: | :---------------------------------------------------------------------------------------: |
+| `errorsField` | Custom `ErrorsField`. It should be anything that will pass through `React.createElement`. |
+| `submitField` | Custom `SubmitField`. It should be anything that will pass through `React.createElement`. |
 
 **Note:** All `BaseForm` props are also accepted and all methods are available.
 
@@ -134,11 +133,7 @@ You can customize which `AutoField` should be used with [`AutoField.componentDet
 ```tsx
 import { QuickForm } from 'uniforms'; // Or from the theme package.
 
-<QuickForm
-  autoField={CustomAutoField}
-  errorsField={CustomErrorsField}
-  submitField={CustomSubmitField}
-/>;
+<QuickForm errorsField={CustomErrorsField} submitField={CustomSubmitField} />;
 ```
 
 ### `BaseForm`

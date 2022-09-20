@@ -42,8 +42,6 @@ const AutoField = createAutoField(props => {
 
 ## Overriding `AutoField`
 
-While specifying the `autoField` prop on your `QuickForm` or `AutoForm` components may cover a lot of cases, some fields - `ListField` and `NestField` - use `AutoField` directly. That means there's no easy way to let them know that you have a custom component defined.
-
 To make it possible, all `AutoFields` created with the `createAutoField` are configurable. To adjust the components, use the React context available in `AutoField.componentDetectorContext`. You can use it as often as needed - in most apps once will be enough. Example:
 
 ```tsx
