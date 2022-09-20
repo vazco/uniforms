@@ -107,4 +107,12 @@ describe('ZodBridge', () => {
       expect(bridge.getType('a')).toBe(String);
     });
   });
+
+  describe('#getValidator', () => {
+    it('is a function', () => {
+      const schema = object({});
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getValidator()).toEqual(expect.any(Function));
+    });
+  });
 });

@@ -80,4 +80,13 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
 
     invariant(false, 'Field "%s" has an unknown type', name);
   }
+
+  getValidator() {
+    return (model: Record<string, unknown>) => {
+      // TODO: What about async schemas?
+      // eslint-disable-next-line react/no-this-in-sfc
+      const result = this.schema.safeParse(model);
+      return result.success ? null : result.error;
+    };
+  }
 }
