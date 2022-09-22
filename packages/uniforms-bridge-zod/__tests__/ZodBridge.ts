@@ -291,6 +291,26 @@ describe('ZodBridge', () => {
       expect(bridge.getProps('a.0.0')).toEqual({ label: '0', required: true });
     });
 
+    it('works with array (maxCount)', () => {
+      const schema = object({ a: array(array(string())).max(1) });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getProps('a')).toEqual({
+        label: 'A',
+        required: true,
+        maxCount: 1,
+      });
+    });
+
+    it('works with array (minCount)', () => {
+      const schema = object({ a: array(array(string())).min(1) });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getProps('a')).toEqual({
+        label: 'A',
+        required: true,
+        minCount: 1,
+      });
+    });
+
     it('works with boolean', () => {
       const schema = object({ a: boolean() });
       const bridge = new ZodBridge(schema);
@@ -364,7 +384,49 @@ describe('ZodBridge', () => {
     it('works with number', () => {
       const schema = object({ a: number() });
       const bridge = new ZodBridge(schema);
+      expect(bridge.getProps('a')).toEqual({
+        label: 'A',
+        required: true,
+        decimal: true,
+      });
+    });
+
+    it('works with number (int)', () => {
+      const schema = object({ a: number().int() });
+      const bridge = new ZodBridge(schema);
       expect(bridge.getProps('a')).toEqual({ label: 'A', required: true });
+    });
+
+    it('works with number (max)', () => {
+      const schema = object({ a: number().max(1) });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getProps('a')).toEqual({
+        label: 'A',
+        required: true,
+        decimal: true,
+        max: 1,
+      });
+    });
+
+    it('works with number (min)', () => {
+      const schema = object({ a: number().min(1) });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getProps('a')).toEqual({
+        label: 'A',
+        required: true,
+        decimal: true,
+        min: 1,
+      });
+    });
+
+    it('works with number (multipleOf)', () => {
+      const schema = object({ a: number().int().multipleOf(7) });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getProps('a')).toEqual({
+        label: 'A',
+        required: true,
+        step: 7,
+      });
     });
 
     it('works with object', () => {

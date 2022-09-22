@@ -12,6 +12,7 @@ import {
   ZodError,
   ZodNativeEnum,
   ZodNumber,
+  ZodNumberDef,
   ZodObject,
   ZodOptional,
   ZodRawShape,
@@ -141,13 +142,43 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
       props.required = false;
     }
 
-    if (field instanceof ZodEnum) {
-      props.allowedValues = field.options;
-    }
+    if (field instanceof ZodArray) {
+      if (field._def.maxLength) {
+        props.maxCount = field._def.maxLength.value;
+      }
 
-    if (field instanceof ZodNativeEnum) {
+      if (field._def.minLength) {
+        props.minCount = field._def.minLength.value;
+      }
+    } else if (field instanceof ZodEnum) {
+      props.allowedValues = field.options;
+    } else if (field instanceof ZodNativeEnum) {
       // Native enums have both numeric and string values.
       props.allowedValues = Object.values(field.enum).filter(isNativeEnumValue);
+    } else if (field instanceof ZodNumber) {
+      if (!field.isInt) {
+        props.decimal = true;
+      }
+
+      const max = field.maxValue;
+      if (max !== null) {
+        props.max = max;
+      }
+
+      const min = field.minValue;
+      if (min !== null) {
+        props.min = min;
+      }
+
+      // TODO: File an issue to expose a `.getStep` function.
+      type ZodNumberCheck = ZodNumberDef['checks'][number];
+      const step = field._def.checks.find(
+        (check): check is Extract<ZodNumberCheck, { kind: 'multipleOf' }> =>
+          check.kind === 'multipleOf',
+      );
+      if (step) {
+        props.step = step.value;
+      }
     }
 
     return props;
