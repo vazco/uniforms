@@ -12,6 +12,7 @@ import {
   ZodNativeEnum,
   ZodNumber,
   ZodObject,
+  ZodOptional,
   ZodRawShape,
   ZodString,
   ZodType,
@@ -62,6 +63,10 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
   getField(name: string) {
     let field: ZodType = this.schema;
     for (const key of joinName(null, name)) {
+      if (field instanceof ZodOptional) {
+        field = field.unwrap();
+      }
+
       if (key === '$' || key === '' + parseInt(key, 10)) {
         fieldInvariant(name, field instanceof ZodArray);
         field = field.element;
@@ -115,12 +120,16 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
   // `getInitialValue` function.
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getProps(name: string, fieldProps?: Record<string, unknown>) {
-    const field = this.getField(name);
     const props: Record<string, unknown> = {
       label: upperFirst(lowerCase(joinName(null, name).slice(-1)[0])),
-      // TODO: Handle optional values.
       required: true,
     };
+
+    let field = this.getField(name);
+    if (field instanceof ZodOptional) {
+      field = field.unwrap();
+      props.required = false;
+    }
 
     if (field instanceof ZodEnum) {
       props.allowedValues = field.options;
@@ -135,7 +144,11 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
   }
 
   getSubfields(name = '') {
-    const field = this.getField(name);
+    let field = this.getField(name);
+    if (field instanceof ZodOptional) {
+      field = field.unwrap();
+    }
+
     if (field instanceof ZodArray) {
       return ['$'];
     }
@@ -148,7 +161,11 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
   }
 
   getType(name: string) {
-    const field = this.getField(name);
+    let field = this.getField(name);
+    if (field instanceof ZodOptional) {
+      field = field.unwrap();
+    }
+
     if (field instanceof ZodArray) {
       return Array;
     }

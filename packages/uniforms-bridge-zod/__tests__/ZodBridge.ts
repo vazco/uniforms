@@ -7,6 +7,7 @@ import {
   nativeEnum,
   number,
   object,
+  optional,
   string,
 } from 'zod';
 
@@ -161,6 +162,13 @@ describe('ZodBridge', () => {
       expect(bridge.getField('a.b')).toBe(schema.shape.a.shape.b);
       expect(bridge.getField('a.b.c')).toBe(schema.shape.a.shape.b.shape.c);
     });
+
+    it('works with optional', () => {
+      const schema = object({ a: optional(object({ b: string() })) });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getField('a')).toBe(schema.shape.a);
+      expect(bridge.getField('a.b')).toBe(schema.shape.a.unwrap().shape.b);
+    });
   });
 
   describe('#getInitialValue', () => {
@@ -240,6 +248,12 @@ describe('ZodBridge', () => {
       const schema = object({ a: object({ b: object({ c: string() }) }) });
       const bridge = new ZodBridge(schema);
       expect(bridge.getInitialValue('a')).toEqual({ b: {} });
+    });
+
+    it('works with optional', () => {
+      const schema = object({ a: optional(string()) });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getInitialValue('a')).toEqual(undefined);
     });
 
     it('works with string', () => {
@@ -342,6 +356,12 @@ describe('ZodBridge', () => {
       expect(bridge.getProps('a.b.c')).toEqual({ label: 'C', required: true });
     });
 
+    it('works with optional', () => {
+      const schema = object({ a: optional(string()) });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getProps('a')).toEqual({ label: 'A', required: false });
+    });
+
     it('works with string', () => {
       const schema = object({ a: string() });
       const bridge = new ZodBridge(schema);
@@ -383,6 +403,13 @@ describe('ZodBridge', () => {
       expect(bridge.getSubfields('a')).toEqual(['b']);
       expect(bridge.getSubfields('a.b')).toEqual(['c']);
       expect(bridge.getSubfields('a.b.c')).toEqual([]);
+    });
+
+    it('works with optional', () => {
+      const schema = object({ a: optional(object({ b: string() })) });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getSubfields('a')).toEqual(['b']);
+      expect(bridge.getSubfields('a.b')).toEqual([]);
     });
   });
 
@@ -457,6 +484,12 @@ describe('ZodBridge', () => {
       const schema = object({ a: object({ b: object({ c: string() }) }) });
       const bridge = new ZodBridge(schema);
       expect(bridge.getType('a')).toBe(Object);
+    });
+
+    it('works with optional', () => {
+      const schema = object({ a: optional(string()) });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getType('a')).toBe(String);
     });
 
     it('works with string', () => {
