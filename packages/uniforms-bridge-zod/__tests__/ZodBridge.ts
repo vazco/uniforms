@@ -198,6 +198,48 @@ describe('ZodBridge', () => {
     });
   });
 
+  describe('#getProps', () => {
+    it('works with array', () => {
+      const schema = object({ a: array(array(string())) });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getProps('a')).toEqual({ label: 'A', required: true });
+      expect(bridge.getProps('a.0')).toEqual({ label: '0', required: true });
+      expect(bridge.getProps('a.0.0')).toEqual({ label: '0', required: true });
+    });
+
+    it('works with boolean', () => {
+      const schema = object({ a: boolean() });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getProps('a')).toEqual({ label: 'A', required: true });
+    });
+
+    it('works with date', () => {
+      const schema = object({ a: date() });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getProps('a')).toEqual({ label: 'A', required: true });
+    });
+
+    it('works with number', () => {
+      const schema = object({ a: number() });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getProps('a')).toEqual({ label: 'A', required: true });
+    });
+
+    it('works with object', () => {
+      const schema = object({ a: object({ b: object({ c: string() }) }) });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getProps('a')).toEqual({ label: 'A', required: true });
+      expect(bridge.getProps('a.b')).toEqual({ label: 'B', required: true });
+      expect(bridge.getProps('a.b.c')).toEqual({ label: 'C', required: true });
+    });
+
+    it('works with string', () => {
+      const schema = object({ a: string() });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getProps('a')).toEqual({ label: 'A', required: true });
+    });
+  });
+
   describe('#getSubfields', () => {
     it('works with empty objects', () => {
       const schema = object({});

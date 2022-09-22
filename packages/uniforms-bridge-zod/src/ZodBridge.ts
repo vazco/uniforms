@@ -1,5 +1,7 @@
 import invariant from 'invariant';
+import lowerCase from 'lodash/lowerCase';
 import memoize from 'lodash/memoize';
+import upperFirst from 'lodash/upperFirst';
 import { Bridge, joinName } from 'uniforms';
 import {
   ZodArray,
@@ -93,6 +95,17 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     }
 
     return undefined;
+  }
+
+  // TODO: The `props` argument could be removed in v4, just like in the
+  // `getInitialValue` function.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getProps(name: string, props?: Record<string, unknown>) {
+    return {
+      label: upperFirst(lowerCase(joinName(null, name).slice(-1)[0])),
+      // TODO: Handle optional values.
+      required: true,
+    };
   }
 
   getSubfields(name = '') {
