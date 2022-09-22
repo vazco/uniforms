@@ -6,6 +6,8 @@ import { filterDOMProps } from 'uniforms';
 import { GraphQLBridge } from 'uniforms-bridge-graphql';
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
+import { ZodBridge } from 'uniforms-bridge-zod';
+import { z } from 'zod';
 
 import presets from './presets';
 import { themes } from './universal';
@@ -32,8 +34,10 @@ scope.GraphQLBridge = GraphQLBridge;
 scope.JSONSchemaBridge = JSONSchemaBridge;
 scope.SimpleSchema = SimpleSchema;
 scope.SimpleSchema2Bridge = SimpleSchema2Bridge;
+scope.ZodBridge = ZodBridge;
 scope.buildASTSchema = buildASTSchema;
 scope.parse = parse;
+scope.z = z;
 
 // Dynamic field error.
 MessageBox.defaults({ messages: { en: { syntax: '' } } });

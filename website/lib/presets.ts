@@ -112,6 +112,18 @@ const presets = {
     )
   `,
 
+  'Address (Zod)': preset`
+    new ZodBridge(
+      z.object({
+        // TODO: Make it optional.
+        city: z.string().max(50),
+        state: z.string(),
+        street: z.string().max(100),
+        zip: z.string().regex(/^[0-9]{5}$/),
+      })
+    )
+  `,
+
   'All Fields (SimpleSchema)': preset`
     new SimpleSchema2Bridge(
       new SimpleSchema({
@@ -145,6 +157,24 @@ const presets = {
             ],
           },
         },
+      })
+    )
+  `,
+
+  'All Fields (Zod)': preset`
+    new ZodBridge(
+      z.object({
+        text: z.string(),
+        num: z.number(),
+        bool: z.boolean(),
+        nested: z.object({ text: z.string() }),
+        date: z.date(),
+        // TODO: Custom label and placeholder.
+        list: z.array(z.string()),
+        // TODO: Enums.
+        select: z.string(),
+        // TODO: Enums with custom props.
+        radio: z.string(),
       })
     )
   `,
