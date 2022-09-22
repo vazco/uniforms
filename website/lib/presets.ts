@@ -115,8 +115,7 @@ const presets = {
   'Address (Zod)': preset`
     new ZodBridge(
       z.object({
-        // TODO: Make it optional.
-        city: z.string().max(50),
+        city: z.string().max(50).optional(),
         state: z.string(),
         street: z.string().max(100),
         zip: z.string().regex(/^[0-9]{5}$/),

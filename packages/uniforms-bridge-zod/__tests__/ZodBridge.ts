@@ -163,6 +163,15 @@ describe('ZodBridge', () => {
       expect(bridge.getField('a.b.c')).toBe(schema.shape.a.shape.b.shape.c);
     });
 
+    it('works with default', () => {
+      const schema = object({ a: object({ b: string() }).default({ b: 'x' }) });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getField('a')).toBe(schema.shape.a);
+      expect(bridge.getField('a.b')).toBe(
+        schema.shape.a.removeDefault().shape.b,
+      );
+    });
+
     it('works with optional', () => {
       const schema = object({ a: optional(object({ b: string() })) });
       const bridge = new ZodBridge(schema);
@@ -182,6 +191,8 @@ describe('ZodBridge', () => {
       const schema = object({ a: array(array(string()).min(1)).min(2) });
       const bridge = new ZodBridge(schema);
       expect(bridge.getInitialValue('a')).toEqual([[], []]);
+      expect(bridge.getInitialValue('a.0')).toEqual([]);
+      expect(bridge.getInitialValue('a.0.0')).toEqual(undefined);
     });
 
     it('works with boolean', () => {
@@ -248,6 +259,14 @@ describe('ZodBridge', () => {
       const schema = object({ a: object({ b: object({ c: string() }) }) });
       const bridge = new ZodBridge(schema);
       expect(bridge.getInitialValue('a')).toEqual({ b: {} });
+      expect(bridge.getInitialValue('a.b')).toEqual({});
+      expect(bridge.getInitialValue('a.b.c')).toEqual(undefined);
+    });
+
+    it('works with default', () => {
+      const schema = object({ a: string().default('x') });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getInitialValue('a')).toEqual('x');
     });
 
     it('works with optional', () => {
@@ -356,6 +375,12 @@ describe('ZodBridge', () => {
       expect(bridge.getProps('a.b.c')).toEqual({ label: 'C', required: true });
     });
 
+    it('works with default', () => {
+      const schema = object({ a: string().default('x') });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getProps('a')).toEqual({ label: 'A', required: false });
+    });
+
     it('works with optional', () => {
       const schema = object({ a: optional(string()) });
       const bridge = new ZodBridge(schema);
@@ -403,6 +428,13 @@ describe('ZodBridge', () => {
       expect(bridge.getSubfields('a')).toEqual(['b']);
       expect(bridge.getSubfields('a.b')).toEqual(['c']);
       expect(bridge.getSubfields('a.b.c')).toEqual([]);
+    });
+
+    it('works with optional', () => {
+      const schema = object({ a: object({ b: string() }).default({ b: 'x' }) });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getSubfields('a')).toEqual(['b']);
+      expect(bridge.getSubfields('a.b')).toEqual([]);
     });
 
     it('works with optional', () => {
