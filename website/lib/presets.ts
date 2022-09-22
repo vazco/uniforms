@@ -171,10 +171,9 @@ const presets = {
         date: z.date(),
         // TODO: Custom label and placeholder.
         list: z.array(z.string()),
-        // TODO: Enums.
-        select: z.string(),
+        select: z.enum(['a', 'b']),
         // TODO: Enums with custom props.
-        radio: z.string(),
+        radio: z.enum(['a', 'b']),
       })
     )
   `,

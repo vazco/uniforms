@@ -7,7 +7,9 @@ import {
   ZodArray,
   ZodBoolean,
   ZodDate,
+  ZodEnum,
   ZodError,
+  ZodNativeEnum,
   ZodNumber,
   ZodObject,
   ZodRawShape,
@@ -17,6 +19,10 @@ import {
 
 function fieldInvariant(name: string, condition: boolean): asserts condition {
   invariant(condition, 'Field not found in schema: "%s"', name);
+}
+
+function isNativeEnumValue(value: unknown) {
+  return typeof value !== 'number';
 }
 
 export default class ZodBridge<T extends ZodRawShape> extends Bridge {
@@ -83,6 +89,14 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
       return Array.from({ length }, () => item);
     }
 
+    if (field instanceof ZodEnum) {
+      return field.options[0];
+    }
+
+    if (field instanceof ZodNativeEnum) {
+      return Object.values(field.enum)[0];
+    }
+
     if (field instanceof ZodObject) {
       const value: Record<string, unknown> = {};
       this.getSubfields(name).forEach(key => {
@@ -100,12 +114,24 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
   // TODO: The `props` argument could be removed in v4, just like in the
   // `getInitialValue` function.
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getProps(name: string, props?: Record<string, unknown>) {
-    return {
+  getProps(name: string, fieldProps?: Record<string, unknown>) {
+    const field = this.getField(name);
+    const props: Record<string, unknown> = {
       label: upperFirst(lowerCase(joinName(null, name).slice(-1)[0])),
       // TODO: Handle optional values.
       required: true,
     };
+
+    if (field instanceof ZodEnum) {
+      props.allowedValues = field.options;
+    }
+
+    if (field instanceof ZodNativeEnum) {
+      // Native enums have both numeric and string values.
+      props.allowedValues = Object.values(field.enum).filter(isNativeEnumValue);
+    }
+
+    return props;
   }
 
   getSubfields(name = '') {
@@ -135,16 +161,20 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
       return Date;
     }
 
+    if (
+      field instanceof ZodEnum ||
+      field instanceof ZodNativeEnum ||
+      field instanceof ZodString
+    ) {
+      return String;
+    }
+
     if (field instanceof ZodNumber) {
       return Number;
     }
 
     if (field instanceof ZodObject) {
       return Object;
-    }
-
-    if (field instanceof ZodString) {
-      return String;
     }
 
     invariant(false, 'Field "%s" has an unknown type', name);
