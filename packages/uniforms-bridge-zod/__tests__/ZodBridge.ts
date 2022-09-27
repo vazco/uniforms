@@ -185,6 +185,8 @@ describe('ZodBridge', () => {
       const schema = object({ a: array(array(string())) });
       const bridge = new ZodBridge(schema);
       expect(bridge.getInitialValue('a')).toEqual([]);
+      expect(bridge.getInitialValue('a.0')).toEqual([]);
+      expect(bridge.getInitialValue('a.0.0')).toEqual(undefined);
     });
 
     it('works with array (min length)', () => {
@@ -580,6 +582,12 @@ describe('ZodBridge', () => {
       expect(bridge.getType('a')).toBe(Object);
     });
 
+    it('works with default', () => {
+      const schema = object({ a: string().default('x') });
+      const bridge = new ZodBridge(schema);
+      expect(bridge.getType('a')).toBe(String);
+    });
+
     it('works with optional', () => {
       const schema = object({ a: optional(string()) });
       const bridge = new ZodBridge(schema);
@@ -597,7 +605,9 @@ describe('ZodBridge', () => {
     it('is a function', () => {
       const schema = object({});
       const bridge = new ZodBridge(schema);
-      expect(bridge.getValidator()).toEqual(expect.any(Function));
+      const validator = bridge.getValidator();
+      expect(validator).toEqual(expect.any(Function));
+      expect(validator({})).toEqual(null);
     });
   });
 });
