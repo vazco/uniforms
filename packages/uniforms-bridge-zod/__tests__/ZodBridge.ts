@@ -1,14 +1,33 @@
 import { ZodBridge } from 'uniforms-bridge-zod';
 import {
+  any,
   array,
+  bigint,
   boolean,
   date,
+  discriminatedUnion,
   enum as enum_,
+  function as function_,
+  instanceof as instanceof_,
+  intersection,
+  lazy,
+  literal,
+  map,
+  nan,
   nativeEnum,
+  never,
+  null as null_,
   number,
   object,
   optional,
+  promise,
+  record,
+  set,
   string,
+  tuple,
+  undefined as undefined_,
+  union,
+  unknown,
 } from 'zod';
 
 describe('ZodBridge', () => {
@@ -599,10 +618,43 @@ describe('ZodBridge', () => {
       const bridge = new ZodBridge(schema);
       expect(bridge.getType('a')).toBe(String);
     });
+
+    it.each([
+      ['any', any()],
+      ['bigint', bigint()],
+      [
+        'discriminatedUnion',
+        discriminatedUnion('type', [
+          object({ type: literal('a') }),
+          object({ type: literal('b') }),
+        ]),
+      ],
+      ['function', function_()],
+      ['intersection', intersection(number(), string())],
+      ['instanceof', instanceof_(Date)],
+      ['lazy', lazy(() => string())],
+      ['literal', literal('a')],
+      ['map', map(string(), string())],
+      ['nan', nan()],
+      ['never', never()],
+      ['null', null_()],
+      ['promise', promise(string())],
+      ['record', record(string())],
+      ['set', set(string())],
+      ['tuple', tuple([])],
+      ['undefined', undefined_()],
+      ['union', union([number(), string()])],
+      ['unknown', unknown()],
+    ])('throws on %s', (type, fieldSchema) => {
+      const schema = object({ a: fieldSchema });
+      const bridge = new ZodBridge(schema);
+      const error = 'Field "a" has an unknown type';
+      expect(() => bridge.getType('a')).toThrowError(error);
+    });
   });
 
   describe('#getValidator', () => {
-    it('is a function', () => {
+    it('return a function', () => {
       const schema = object({});
       const bridge = new ZodBridge(schema);
       const validator = bridge.getValidator();
