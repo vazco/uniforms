@@ -258,8 +258,8 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getError('age', { invalid: true })).toEqual(null);
     });
 
-    it('works with correct error (data path)', () => {
-      const error = { details: [{ dataPath: '.x' }] };
+    it('works with correct error (instance path)', () => {
+      const error = { details: [{ instancePath: '.x' }] };
       expect(bridge.getError('x', error)).toEqual(error.details[0]);
       expect(bridge.getError('y', error)).toEqual(null);
     });
@@ -270,11 +270,11 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getError('y', error)).toEqual(null);
     });
 
-    it('works with correct error (data path at root)', () => {
+    it('works with correct error (instance path at root)', () => {
       const error = {
         details: [
           {
-            dataPath: '',
+            instancePath: '',
             keyword: 'required',
             message: "should have required property 'x'",
             params: { missingProperty: 'x' },
@@ -304,11 +304,11 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getError('y', error)).toEqual(null);
     });
 
-    it('works with correct error (data path of parent)', () => {
+    it('works with correct error (instance path of parent)', () => {
       const error = {
         details: [
           {
-            dataPath: '.x',
+            instancePath: '.x',
             keyword: 'required',
             message: "should have required property 'y'",
             params: { missingProperty: 'y' },
@@ -340,7 +340,7 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getError('y.x', error)).toEqual(null);
     });
 
-    it('works with correct error (complex data paths)', () => {
+    it('works with correct error (complex instance paths)', () => {
       const pairs = [
         ["a.0.b.c-d.0.f/'g", ".a[0].b['c-d'][0]['f/\\'g']"],
         ['a.0.b.c-d.0.h/"i', ".a[0].b['c-d'][0]['h/\"i']"],
@@ -348,8 +348,8 @@ describe('JSONSchemaBridge', () => {
         ['a b', '["a b"]'],
       ];
 
-      pairs.forEach(([name, dataPath]) => {
-        const error = { details: [{ dataPath }] };
+      pairs.forEach(([name, instancePath]) => {
+        const error = { details: [{ instancePath }] };
         expect(bridge.getError(name, error)).toEqual(error.details[0]);
       });
     });
@@ -368,7 +368,7 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
-    it('works with correct error (complex data paths - JSON pointers)', () => {
+    it('works with correct error (complex instance paths - JSON pointers)', () => {
       const pairs = [
         ["a.0.b.c-d.0.f/'g", "/a/0/b/c-d/0/f~1'g"],
         ['a.0.b.c-d.0.h/"i', '/a/0/b/c-d/0/h~1"i'],
@@ -376,8 +376,8 @@ describe('JSONSchemaBridge', () => {
         ['a b', '/a b'],
       ];
 
-      pairs.forEach(([name, dataPath]) => {
-        const error = { details: [{ dataPath }] };
+      pairs.forEach(([name, instancePath]) => {
+        const error = { details: [{ instancePath }] };
         expect(bridge.getError(name, error)).toEqual(error.details[0]);
       });
     });
@@ -427,12 +427,12 @@ describe('JSONSchemaBridge', () => {
     it('works with correct error', () => {
       expect(
         bridge.getErrorMessage('age', {
-          details: [{ dataPath: '.age', message: 'Zing!' }],
+          details: [{ instancePath: '.age', message: 'Zing!' }],
         }),
       ).toBe('Zing!');
       expect(
         bridge.getErrorMessage('age', {
-          details: [{ dataPath: '.field', message: 'Ignore!' }],
+          details: [{ instancePath: '.field', message: 'Ignore!' }],
         }),
       ).toBe('');
     });
@@ -459,7 +459,7 @@ describe('JSONSchemaBridge', () => {
 
     it('works with other errors', () => {
       expect(bridge.getErrorMessages('correct')).toEqual(['correct']);
-      expect(bridge.getErrorMessages(999999999)).toEqual([999999999]);
+      expect(bridge.getErrorMessages(999999999)).toEqual(['999999999']);
     });
 
     it('works with Error', () => {
@@ -471,12 +471,12 @@ describe('JSONSchemaBridge', () => {
     it('works with ValidationError', () => {
       expect(
         bridge.getErrorMessages({
-          details: [{ dataPath: '.age', message: 'Zing!' }],
+          details: [{ instancePath: '.age', message: 'Zing!' }],
         }),
       ).toEqual(['Zing!']);
       expect(
         bridge.getErrorMessages({
-          details: [{ dataPath: '.field', message: 'Ignore!' }],
+          details: [{ instancePath: '.field', message: 'Ignore!' }],
         }),
       ).toEqual(['Ignore!']);
     });

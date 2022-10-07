@@ -1,3 +1,4 @@
+import type { ErrorObject } from 'ajv';
 import invariant from 'invariant';
 import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
@@ -77,13 +78,24 @@ function pathToName(path: string) {
   return path.slice(1);
 }
 
+type FieldErrorKeywords = string;
+type FieldErrorProperties = {
+  [key: string]: unknown;
+  missingProperty?: string;
+};
+type FieldError = ErrorObject<FieldErrorKeywords, FieldErrorProperties>;
+type ValidatorResult =
+  | { [key: string]: unknown; details?: Partial<FieldError>[] }
+  | null
+  | undefined;
+
 export default class JSONSchemaBridge extends Bridge {
   schema: Record<string, any>;
   _compiledSchema: Record<string, any>;
 
   constructor(
     schema: Record<string, any>,
-    public validator: (model: Record<string, any>) => any,
+    public validator: (model: Record<string, any>) => ValidatorResult,
   ) {
     super();
 
@@ -97,7 +109,7 @@ export default class JSONSchemaBridge extends Bridge {
     this.getType = memoize(this.getType.bind(this));
   }
 
-  getError(name: string, error: any) {
+  getError(name: string, error: ValidatorResult | undefined) {
     const details = error?.details;
     if (!Array.isArray(details)) {
       return null;
@@ -108,30 +120,40 @@ export default class JSONSchemaBridge extends Bridge {
     const rootName = joinName(nameParts.slice(0, -1));
     const baseName = nameParts[nameParts.length - 1];
     const scopedError = details.find(error => {
-      const path = pathToName(error.instancePath ?? error.dataPath);
+      const path = pathToName(error.instancePath || '');
       return (
         unescapedName === path ||
-        (rootName === path && baseName === error.params.missingProperty)
+        (rootName === path &&
+          error.params &&
+          baseName === error.params.missingProperty)
       );
     });
 
     return scopedError || null;
   }
 
-  getErrorMessage(name: string, error: any) {
+  getErrorMessage(name: string, error: ValidatorResult) {
     const scopedError = this.getError(name, error);
     return scopedError?.message || '';
   }
 
-  getErrorMessages(error: any) {
+  getErrorMessages(error: ValidatorResult | Error | string | number) {
     if (!error) {
       return [];
     }
 
+    if (error instanceof Error) {
+      return [error.message];
+    }
+
+    if (typeof error !== 'object') {
+      return ['' + error];
+    }
+
     const { details } = error;
     return Array.isArray(details)
-      ? details.map(error => error.message)
-      : [error.message || error];
+      ? details.map(error => error.message || '')
+      : [];
   }
 
   getField(name: string) {

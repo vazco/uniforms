@@ -14,7 +14,7 @@ describe('useField', () => {
         d: { type: 'number', default: 4 },
       },
     },
-    () => {},
+    () => null,
   );
 
   function Test(rawProps: {
