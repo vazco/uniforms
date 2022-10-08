@@ -1,12 +1,20 @@
+// <schema>
 // <validator>
-import Ajv from 'ajv';
+import Ajv, { JSONSchemaType } from 'ajv';
 // </validator>
+// </schema>
 // <bridgeImport>
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 // </bridgeImport>
 
 // <schema>
-const schema = {
+interface FormData {
+  firstName: string;
+  lastName: string;
+  workExperience?: number;
+}
+
+const schema: JSONSchemaType<FormData> = {
   title: 'Guest',
   type: 'object',
   properties: {
@@ -17,6 +25,7 @@ const schema = {
       type: 'integer',
       minimum: 0,
       maximum: 100,
+      nullable: true,
     },
   },
   required: ['firstName', 'lastName'],
@@ -24,12 +33,16 @@ const schema = {
 // </schema>
 
 // <validator>
-const ajv = new Ajv({ allErrors: true, useDefaults: true });
+const ajv = new Ajv({
+  allErrors: true,
+  useDefaults: true,
+  keywords: ['uniforms'],
+});
 
-function createValidator(schema: object) {
+function createValidator(schema: JSONSchemaType<FormData>) {
   const validator = ajv.compile(schema);
 
-  return (model: object) => {
+  return (model: Record<string, unknown>) => {
     validator(model);
     return validator.errors?.length ? { details: validator.errors } : null;
   };
