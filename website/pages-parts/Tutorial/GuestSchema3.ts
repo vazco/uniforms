@@ -1,12 +1,25 @@
-import Ajv from 'ajv';
+// <schema>
+import Ajv, { JSONSchemaType } from 'ajv';
+// </schema>
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 import { LongTextField } from 'uniforms-unstyled';
 
 const ajv = new Ajv({ allErrors: true, useDefaults: true });
+// <keywords>
+// Required by Ajv strict mode
 ajv.addVocabulary(['options', 'uniforms']);
+// </keywords>
 
 // <schema>
-const schema = {
+interface FormData {
+  firstName: string;
+  lastName: string;
+  workExperience?: number;
+  profession?: string;
+  additionalInfo?: string;
+}
+
+const schema: JSONSchemaType<FormData> = {
   title: 'Guest',
   type: 'object',
   properties: {
@@ -17,9 +30,11 @@ const schema = {
       type: 'integer',
       minimum: 0,
       maximum: 100,
+      nullable: true,
     },
     profession: {
       type: 'string',
+      nullable: true,
       options: [
         {
           label: 'Developer',
@@ -45,6 +60,7 @@ const schema = {
     },
     additionalInfo: {
       type: 'string',
+      nullable: true,
       uniforms: { component: LongTextField },
     },
   },
