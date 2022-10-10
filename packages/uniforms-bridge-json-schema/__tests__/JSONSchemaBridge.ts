@@ -68,6 +68,13 @@ describe('JSONSchemaBridge', () => {
           $ref: '#/definitions/personalData',
         },
       },
+      friendsMinCount: {
+        type: 'array',
+        minItems: 3,
+        items: {
+          $ref: '#/definitions/personalData',
+        },
+      },
       hasAJob: { type: 'boolean', title: 'Currently Employed' },
       invalid: { type: 'null' },
       personalData: { $ref: '#/definitions/personalData' },
@@ -631,7 +638,7 @@ describe('JSONSchemaBridge', () => {
   });
 
   describe('#getInitialValue', () => {
-    it('works with arrays', () => {
+    it.only('works with arrays', () => {
       expect(bridge.getInitialValue('friends')).toEqual([]);
       expect(bridge.getInitialValue('friends', { initialCount: 1 })).toEqual([
         { firstName: 'John', lastName: 'John' },
@@ -639,6 +646,11 @@ describe('JSONSchemaBridge', () => {
       expect(
         bridge.getInitialValue('friends.0.firstName', { initialCount: 1 }),
       ).toBe('John');
+      expect(bridge.getInitialValue('friendsMinCount')).toEqual([
+        { firstName: 'John', lastName: 'John' },
+        { firstName: 'John', lastName: 'John' },
+        { firstName: 'John', lastName: 'John' },
+      ]);
     });
 
     it('works with objects', () => {
@@ -887,6 +899,7 @@ describe('JSONSchemaBridge', () => {
         'dateOfBirthTuple',
         'email',
         'friends',
+        'friendsMinCount',
         'hasAJob',
         'invalid',
         'personalData',

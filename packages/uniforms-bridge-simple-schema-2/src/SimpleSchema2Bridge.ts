@@ -77,9 +77,13 @@ export default class SimpleSchema2Bridge extends Bridge {
     }
 
     if (field.type === Array) {
-      const item = this.getInitialValue(joinName(name, '0'));
-      const items = Math.max(props?.initialCount || 0, field.minCount || 0);
-      return Array.from({ length: items }, () => item);
+      const item = this.getInitialValue(joinName(name, '$'));
+      if (item === undefined) {
+        return [];
+      }
+
+      const length = Math.max(props?.initialCount || 0, field.minCount || 0);
+      return Array.from({ length }, () => item);
     }
 
     if (field.type === Object || field.type instanceof SimpleSchema) {

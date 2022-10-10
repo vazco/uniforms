@@ -84,9 +84,13 @@ export default class GraphQLBridge extends Bridge {
     const type = this.getType(name);
 
     if (type === Array) {
-      const item = this.getInitialValue(joinName(name, '0'));
-      const items = props?.initialCount || 0;
-      return Array.from({ length: items }, () => item);
+      const item = this.getInitialValue(joinName(name, '$'));
+      if (item === undefined) {
+        return [];
+      }
+
+      const length = props?.initialCount || 0;
+      return Array.from({ length }, () => item);
     }
 
     if (type === Object) {

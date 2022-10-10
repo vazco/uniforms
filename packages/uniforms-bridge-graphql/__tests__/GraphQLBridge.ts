@@ -43,6 +43,7 @@ describe('GraphQLBridge', () => {
 
   const schemaData = {
     author: { component: 'div' },
+    'author.tags.$': { initialValue: 'x' },
     id: {
       allowedValues: [1, 2, 3],
       label: 'Post ID',
@@ -201,7 +202,7 @@ describe('GraphQLBridge', () => {
       expect(bridgeI.getInitialValue('author.tags')).toEqual([]);
       expect(
         bridgeI.getInitialValue('author.tags', { initialCount: 1 }),
-      ).toEqual([undefined]);
+      ).toEqual(['x']);
     });
 
     it('works with objects', () => {
