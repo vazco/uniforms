@@ -15,7 +15,6 @@ export type ListFieldProps = HTMLFieldProps<
   HTMLDivElement,
   {
     addIcon?: ReactNode;
-    initialCount?: number;
     itemProps?: object;
     removeIcon?: ReactNode;
   }
@@ -27,7 +26,6 @@ function List({
   className,
   error,
   errorMessage,
-  initialCount,
   itemProps,
   label,
   removeIcon,
@@ -45,11 +43,7 @@ function List({
           <div className="card-title">
             <label className="col-form-label">{label}&nbsp;</label>
 
-            <ListAddField
-              addIcon={addIcon}
-              initialCount={initialCount}
-              name="$"
-            />
+            <ListAddField addIcon={addIcon} name="$" />
 
             {!!(error && showInlineError) && (
               <span className="text-danger">{errorMessage}</span>

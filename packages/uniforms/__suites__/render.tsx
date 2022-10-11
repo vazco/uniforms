@@ -10,12 +10,13 @@ export function render(
   element: ReactElement,
   schema: SimpleSchemaDefinition,
   contextValueExtension?: Partial<Context<unknown>>,
+  initialModel?: object,
 ) {
   const contextValue = {
     changed: false,
     changedMap: {},
     error: null,
-    model: {},
+    model: initialModel ?? {},
     name: [],
     onChange() {},
     onSubmit() {},
