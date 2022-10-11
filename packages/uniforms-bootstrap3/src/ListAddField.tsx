@@ -12,14 +12,13 @@ import {
 export type ListAddFieldProps = HTMLFieldProps<
   unknown,
   HTMLDivElement,
-  { addIcon?: ReactNode; initialCount?: number }
+  { addIcon?: ReactNode }
 >;
 
 function ListAdd({
   addIcon,
   className,
   disabled,
-  initialCount,
   name,
   readOnly,
   value,
@@ -29,11 +28,10 @@ function ListAdd({
   const parentName = joinName(nameParts.slice(0, -1));
   const parent = useField<
     {
-      initialCount?: number;
       maxCount?: number;
     },
     unknown[]
-  >(parentName, { initialCount }, { absoluteName: true })[0];
+  >(parentName, {}, { absoluteName: true })[0];
 
   const limitNotReached =
     !disabled && !(parent.maxCount! <= parent.value!.length);
