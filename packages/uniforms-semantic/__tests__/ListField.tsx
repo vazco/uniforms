@@ -50,11 +50,9 @@ test('<ListField> - renders correct number of items with model (specified)', () 
   const element = <ListField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Array }, 'x.$': { type: String } }, undefined, [
-      undefined,
-      undefined,
-      undefined,
-    ]),
+    createContext({ x: { type: Array }, 'x.$': { type: String } }, undefined, {
+      x: [undefined, undefined, undefined],
+    }),
   );
 
   expect(wrapper.find('input')).toHaveLength(3);
