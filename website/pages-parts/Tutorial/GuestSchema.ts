@@ -8,11 +8,11 @@ import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 // </bridgeImport>
 
 // <schema>
-interface FormData {
+type FormData = {
   firstName: string;
   lastName: string;
-  workExperience?: number;
-}
+  workExperience: number;
+};
 
 const schema: JSONSchemaType<FormData> = {
   title: 'Guest',
@@ -25,7 +25,6 @@ const schema: JSONSchemaType<FormData> = {
       type: 'integer',
       minimum: 0,
       maximum: 100,
-      nullable: true,
     },
   },
   required: ['firstName', 'lastName'],
@@ -39,7 +38,7 @@ const ajv = new Ajv({
   keywords: ['uniforms'],
 });
 
-function createValidator(schema: JSONSchemaType<FormData>) {
+function createValidator<T>(schema: JSONSchemaType<T>) {
   const validator = ajv.compile(schema);
 
   return (model: Record<string, unknown>) => {

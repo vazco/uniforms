@@ -10,13 +10,13 @@ const ajv = new Ajv({
 });
 
 // <schema>
-interface FormData {
+type FormData = {
   firstName: string;
   lastName: string;
-  workExperience?: number;
-  profession?: string;
-  additionalInfo?: string;
-}
+  workExperience: number;
+  profession: string;
+  additionalInfo: string;
+};
 
 const schema: JSONSchemaType<FormData> = {
   title: 'Guest',
@@ -29,19 +29,18 @@ const schema: JSONSchemaType<FormData> = {
       type: 'integer',
       minimum: 0,
       maximum: 100,
-      nullable: true,
     },
-    profession: { type: 'string', nullable: true },
-    additionalInfo: { type: 'string', nullable: true },
+    profession: { type: 'string' },
+    additionalInfo: { type: 'string' },
   },
   required: ['firstName', 'lastName'],
 };
 // </schema>
 
-function createValidator(schema: JSONSchemaType<FormData>) {
+function createValidator<T>(schema: JSONSchemaType<T>) {
   const validator = ajv.compile(schema);
 
-  return (model: object) => {
+  return (model: Record<string, unknown>) => {
     validator(model);
     return validator.errors?.length ? { details: validator.errors } : null;
   };

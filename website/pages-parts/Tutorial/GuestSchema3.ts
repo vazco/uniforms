@@ -11,13 +11,13 @@ ajv.addVocabulary(['options', 'uniforms']);
 // </keywords>
 
 // <schema>
-interface FormData {
+type FormData = {
   firstName: string;
   lastName: string;
-  workExperience?: number;
-  profession?: string;
-  additionalInfo?: string;
-}
+  workExperience: number;
+  profession: string;
+  additionalInfo: string;
+};
 
 const schema: JSONSchemaType<FormData> = {
   title: 'Guest',
@@ -30,11 +30,9 @@ const schema: JSONSchemaType<FormData> = {
       type: 'integer',
       minimum: 0,
       maximum: 100,
-      nullable: true,
     },
     profession: {
       type: 'string',
-      nullable: true,
       options: [
         {
           label: 'Developer',
@@ -60,7 +58,6 @@ const schema: JSONSchemaType<FormData> = {
     },
     additionalInfo: {
       type: 'string',
-      nullable: true,
       uniforms: { component: LongTextField },
     },
   },
@@ -68,10 +65,10 @@ const schema: JSONSchemaType<FormData> = {
 };
 // </schema>
 
-function createValidator(schema: object) {
+function createValidator<T>(schema: JSONSchemaType<T>) {
   const validator = ajv.compile(schema);
 
-  return (model: object) => {
+  return (model: Record<string, unknown>) => {
     validator(model);
     return validator.errors?.length ? { details: validator.errors } : null;
   };
