@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/namespace -- Something weird happened.
 import components from '@theme/MDXComponents';
 import React from 'react';
 
