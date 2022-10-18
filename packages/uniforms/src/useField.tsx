@@ -89,7 +89,7 @@ export function useField<
   if (usesInitialValue) {
     if (!onChangeCalled.current) {
       if (value === undefined) {
-        value = context.schema.getInitialValue(name, props);
+        value = context.schema.getInitialValue(name);
         initialValue = value;
       } else if (props.value !== undefined && props.value !== valueFromModel) {
         initialValue = props.value;

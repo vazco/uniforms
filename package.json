@@ -52,7 +52,7 @@
     "husky": "8.0.1",
     "invariant": "^2.0.0",
     "jest": "27.0.6",
-    "lerna": "4.0.0",
+    "lerna": "6.0.1",
     "lint-staged": "13.0.3",
     "lodash": "^4.0.0",
     "lz-string": "1.4.4",
@@ -72,7 +72,8 @@
     "tslib": "^2.2.0",
     "typescript": "4.2.4",
     "universal-fetch": "1.0.0",
-    "warning": "^4.0.0"
+    "warning": "^4.0.0",
+    "zod": "^3.0.0"
   },
   "engines": {
     "npm": ">=7.0.0"

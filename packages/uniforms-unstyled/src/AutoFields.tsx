@@ -1,4 +1,4 @@
-import { ComponentType, createElement } from 'react';
+import { ComponentType, Fragment, createElement } from 'react';
 import { useForm } from 'uniforms';
 
 import AutoField from './AutoField';
@@ -12,7 +12,7 @@ export type AutoFieldsProps = {
 
 export default function AutoFields({
   autoField = AutoField,
-  element = 'div',
+  element = Fragment,
   fields,
   omitFields = [],
   ...props
