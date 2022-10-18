@@ -30,6 +30,7 @@ This guide is designed to help you through the migration. If you went through it
   const parentField = useField(parentName, {}, { absoluteName: true })[0];
   ```
 - Removed `injectName`. In most cases, it can be safely omitted.
+- Removed `includeInChain` parameter from `connectField` options. It was used only in the `NestField` and `ListField` family, and mostly because of the way how the old context API worked. In most cases, if you've used `includeInChain: false`, the migration is to use `name=""` for the nested fields. See [#738](https://github.com/vazco/uniforms/pull/738), [#720](https://github.com/vazco/uniforms/pull/720), [#721](https://github.com/vazco/uniforms/pull/721) for more information.
 - Removed `mapProps` from `connectField` options. Map props directly in the component.
 - Removed `nothing`. Use `null` instead.
 - Removed all `propTypes` in favor of TypeScript types.

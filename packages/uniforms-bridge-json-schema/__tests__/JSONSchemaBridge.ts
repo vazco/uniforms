@@ -638,14 +638,8 @@ describe('JSONSchemaBridge', () => {
   });
 
   describe('#getInitialValue', () => {
-    it.only('works with arrays', () => {
+    it('works with arrays', () => {
       expect(bridge.getInitialValue('friends')).toEqual([]);
-      expect(bridge.getInitialValue('friends', { initialCount: 1 })).toEqual([
-        { firstName: 'John', lastName: 'John' },
-      ]);
-      expect(
-        bridge.getInitialValue('friends.0.firstName', { initialCount: 1 }),
-      ).toBe('John');
       expect(bridge.getInitialValue('friendsMinCount')).toEqual([
         { firstName: 'John', lastName: 'John' },
         { firstName: 'John', lastName: 'John' },

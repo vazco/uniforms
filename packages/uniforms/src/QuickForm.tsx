@@ -3,10 +3,6 @@ import React, { ComponentType } from 'react';
 import { BaseForm, BaseFormProps, BaseFormState } from './BaseForm';
 
 export type QuickFormProps<Model> = BaseFormProps<Model> & {
-  /**
-   * @deprecated
-   */
-  autoField?: ComponentType<{ name: string }>;
   errorsField?: ComponentType;
   submitField?: ComponentType;
 };
@@ -26,12 +22,12 @@ export function Quick<Base extends typeof BaseForm>(Base: Base) {
     getNativeFormProps() {
       const _props = super.getNativeFormProps();
       const {
-        autoField: AutoField = this.getAutoField(),
         errorsField: ErrorsField = this.getErrorsField(),
         submitField: SubmitField = this.getSubmitField(),
         ...props
-      }: typeof _props &
-        Pick<Props, 'autoField' | 'errorsField' | 'submitField'> = _props;
+      }: typeof _props & Pick<Props, 'errorsField' | 'submitField'> = _props;
+
+      const AutoField = this.getAutoField();
 
       if (!props.children) {
         props.children = this.getContextSchema()

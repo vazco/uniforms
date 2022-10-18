@@ -92,6 +92,7 @@ export default class JSONSchemaBridge extends Bridge {
 
     // Memoize for performance and referential equality.
     this.getField = memoize(this.getField.bind(this));
+    this.getInitialValue = memoize(this.getInitialValue.bind(this));
     this.getSubfields = memoize(this.getSubfields.bind(this));
     this.getType = memoize(this.getType.bind(this));
   }
@@ -206,7 +207,7 @@ export default class JSONSchemaBridge extends Bridge {
     }, this.schema);
   }
 
-  getInitialValue(name: string, props?: Record<string, any>): any {
+  getInitialValue(name: string): any {
     const field = this.getField(name);
     const {
       default: defaultValue = field.default ?? get(this.schema.default, name),
@@ -223,7 +224,7 @@ export default class JSONSchemaBridge extends Bridge {
         return [];
       }
 
-      const length = Math.max(props?.initialCount || 0, field?.minItems || 0);
+      const length = field?.minItems || 0;
       return Array.from({ length }, () => item);
     }
 

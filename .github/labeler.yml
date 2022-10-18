@@ -3,6 +3,7 @@
   - 'packages/uniforms-bridge-json-schema/**/*'
   - 'packages/uniforms-bridge-simple-schema-2/**/*'
   - 'packages/uniforms-bridge-simple-schema/**/*'
+  - 'packages/uniforms-bridge-zod/**/*'
 'Area: Core':
   - 'packages/uniforms/**/*'
 'Area: Docs':
@@ -18,7 +19,6 @@
   - '.eslintrc.json'
   - '.github/**/*'
   - '.gitignore'
-  - '.huskyrc.json'
   - '.lintstagedrc.js'
   - '.prettierignore'
   - '.prettierrc.js'
@@ -48,6 +48,8 @@
   - 'packages/uniforms-bridge-simple-schema/**/*'
 'Bridge: SimpleSchema (v2)':
   - 'packages/uniforms-bridge-simple-schema-2/**/*'
+'Bridge: Zod':
+  - 'packages/uniforms-bridge-zod/**/*'
 'Theme: AntD':
   - 'packages/uniforms-antd/**/*'
 'Theme: Bootstrap 3':

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import SimpleSchema from 'simpl-schema';
 import { QuickForm } from 'uniforms';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
@@ -45,17 +45,6 @@ describe('QuickForm', () => {
   });
 
   describe('when rendered with custom fields in `props`', () => {
-    it('renders `AutoField` for each field', () => {
-      const wrapper = mount<TestForm>(
-        <TestForm
-          schema={schema}
-          autoField={() => <i className="autoOverride" />}
-        />,
-      );
-
-      expect(wrapper.find('.autoOverride').length).toBeGreaterThan(0);
-    });
-
     it('renders `ErrorsField`', () => {
       const wrapper = mount<TestForm>(
         <TestForm
@@ -76,26 +65,6 @@ describe('QuickForm', () => {
       );
 
       expect(wrapper.find('.submitOverride').length).toBeGreaterThan(0);
-    });
-
-    it('works with elements', () => {
-      class Code extends Component<{ name: string }> {
-        render = () => <code />;
-      }
-
-      const wrapper = mount<TestForm>(
-        <TestForm schema={schema} autoField={Code} />,
-      );
-
-      expect(wrapper.find('code').length).toBeGreaterThan(0);
-    });
-
-    it('works with functions', () => {
-      const wrapper = mount<TestForm>(
-        <TestForm schema={schema} autoField={() => <code />} />,
-      );
-
-      expect(wrapper.find('code').length).toBeGreaterThan(0);
     });
   });
 
