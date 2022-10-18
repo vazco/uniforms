@@ -46,23 +46,25 @@ test('<ListField> - renders correct label (specified)', () => {
   );
 });
 
-test('<ListField> - renders correct numer of items with initialCount (specified)', () => {
-  const element = <ListField name="x" initialCount={3} />;
+test('<ListField> - renders correct numer of items with model (specified)', () => {
+  const element = <ListField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Array }, 'x.$': { type: String } }),
+    createContext({ x: { type: Array }, 'x.$': { type: String } }, undefined, {
+      x: [undefined, undefined, undefined],
+    }),
   );
 
   expect(wrapper.find('input')).toHaveLength(3);
 });
 
 test('<ListField> - passes itemProps to its children', () => {
-  const element = (
-    <ListField name="x" initialCount={3} itemProps={{ 'data-xyz': 1 }} />
-  );
+  const element = <ListField name="x" itemProps={{ 'data-xyz': 1 }} />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Array }, 'x.$': { type: String } }),
+    createContext({ x: { type: Array }, 'x.$': { type: String } }, undefined, {
+      x: [undefined],
+    }),
   );
 
   expect(wrapper.find(ListItemField).first().prop('data-xyz')).toBe(1);
@@ -72,14 +74,16 @@ test('<ListField> - renders children (specified)', () => {
   const Child = jest.fn(() => <div />) as React.FC<any>;
 
   const element = (
-    <ListField name="x" initialCount={2}>
+    <ListField name="x">
       <Child />
       PlainText
     </ListField>
   );
   mount(
     element,
-    createContext({ x: { type: Array }, 'x.$': { type: String } }),
+    createContext({ x: { type: Array }, 'x.$': { type: String } }, undefined, {
+      x: [undefined, undefined],
+    }),
   );
 
   expect(Child).toHaveBeenCalledTimes(2);
@@ -89,13 +93,15 @@ test('<ListField> - renders children with correct name (children)', () => {
   const Child = jest.fn(() => <div />) as React.FC<any>;
 
   const element = (
-    <ListField name="x" initialCount={2}>
+    <ListField name="x">
       <Child name="$" />
     </ListField>
   );
   const wrapper = mount(
     element,
-    createContext({ x: { type: Array }, 'x.$': { type: String } }),
+    createContext({ x: { type: Array }, 'x.$': { type: String } }, undefined, {
+      x: [undefined, undefined],
+    }),
   );
 
   expect(wrapper.find(Child).at(0).prop('name')).toBe('0');
@@ -103,10 +109,12 @@ test('<ListField> - renders children with correct name (children)', () => {
 });
 
 test('<ListField> - renders children with correct name (value)', () => {
-  const element = <ListField name="x" initialCount={2} />;
+  const element = <ListField name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: Array }, 'x.$': { type: String } }),
+    createContext({ x: { type: Array }, 'x.$': { type: String } }, undefined, {
+      x: [undefined, undefined],
+    }),
   );
 
   expect(wrapper.find(ListItemField).at(0).prop('name')).toBe('0');
@@ -151,16 +159,17 @@ test('<ListField> - renders correct error text (showInlineError=false)', () => {
   expect(wrapper.find('.text-danger')).toHaveLength(0);
 });
 
-test('<ListField> - renders proper number of optional values after add new value (with initialCount)', () => {
-  const element = (
-    <ListField name="x" initialCount={3} addIcon="+" label="ListFieldLabel" />
-  );
+test('<ListField> - renders proper number of optional values after add new value', () => {
+  const element = <ListField name="x" addIcon="+" label="ListFieldLabel" />;
   const onChange = jest.fn();
   const wrapper = mount(
     element,
     createContext(
       { x: { type: Array, optional: true }, 'x.$': { type: String } },
       { onChange },
+      {
+        x: [undefined, undefined, undefined],
+      },
     ),
   );
 

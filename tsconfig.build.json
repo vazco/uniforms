@@ -20,6 +20,8 @@
     { "path": "packages/uniforms-bridge-simple-schema/tsconfig.esm.json" },
     { "path": "packages/uniforms-bridge-simple-schema-2/tsconfig.cjs.json" },
     { "path": "packages/uniforms-bridge-simple-schema-2/tsconfig.esm.json" },
+    { "path": "packages/uniforms-bridge-zod/tsconfig.cjs.json" },
+    { "path": "packages/uniforms-bridge-zod/tsconfig.esm.json" },
     { "path": "packages/uniforms-material/tsconfig.cjs.json" },
     { "path": "packages/uniforms-material/tsconfig.esm.json" },
     { "path": "packages/uniforms-mui/tsconfig.cjs.json" },
