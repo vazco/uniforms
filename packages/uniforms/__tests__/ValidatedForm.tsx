@@ -485,7 +485,7 @@ describe('ValidatedForm', () => {
         expect(onValidate).toHaveBeenCalledTimes(run);
 
         if (hasValidationError) {
-          expect(onSubmit).toHaveBeenCalledTimes(0);
+          expect(onSubmit).not.toHaveBeenCalled();
           expect(wrapper.instance().getContext().error).toBe(error);
         } else {
           expect(onSubmit).toHaveBeenCalledTimes(run);

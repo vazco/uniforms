@@ -168,6 +168,8 @@ If you're using the [`bluebird`](https://www.npmjs.com/package/bluebird) package
 
 > Warning: a promise was rejected with a non-error [object Object]
 
+There could be multiple causes of this error. One of it is not returning a proper error object.
+
 In order to fix it, your `validator` function should return a `Error`-like object instead of an object with a single `details` property. The cleanest would be to create a custom `ValidationError` class:
 
 ```ts
@@ -184,6 +186,10 @@ class ValidationError extends Error {
 // Usage.
 return validator.errors?.length ? new ValidationError(validator.errors) : null;
 ```
+
+Another cause of this error may be two different implementations of the `Promise` object when using an asynchronous validate function.
+Ensure that you are returning the same `Promise` object implementation that Bluebird is expecting.
+The simplest way to do that should be to avoid using the `async` keyword and instead make the function return a `Promise` instead.
 
 See [#1047](https://github.com/vazco/uniforms/discussions/1047) for more details.
 

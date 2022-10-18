@@ -99,8 +99,21 @@ Instead of having to type the React component by ourselves inside our form, we c
   source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestSchema3')}
 />
 
-What's changed is that now we've included the available options inside the `profession` property definition -
+What's changed is that now we've included the available `options` inside the `profession` property definition -
 uniforms are smart enough to deduce result field type, thanks to the [`AutoField` algorithm](/docs/uth-autofield-algorithm).
+
+:::caution
+
+Remember to register the `uniforms` and `options` keyword (see [Unknown keywords](https://ajv.js.org/strict-mode.html#unknown-keywords) for more details).
+
+<CodeSection
+  language="tsx"
+  section="keywords"
+  source={require('!!raw-loader!../website/pages-parts/Tutorial/GuestSchema3')}
+/>
+
+:::
+
 When it comes to the `additionalInfo`, there is a slightly different approach applied - we can explicitly tell the `AutoForm` what field should be rendered.
 Just don't forget to import the desired one!
 
