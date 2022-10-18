@@ -53,7 +53,7 @@
     "invariant": "^2.0.0",
     "jest": "27.0.6",
     "lerna": "4.0.0",
-    "lint-staged": "^13.0.3",
+    "lint-staged": "13.0.3",
     "lodash": "^4.0.0",
     "lz-string": "1.4.4",
     "parcel": "2.0.1",
