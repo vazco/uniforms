@@ -53,7 +53,7 @@ module.exports = {
       searchPagePath: false,
     },
     footer: { links: [] },
-    hideableSidebar: true,
+    docs: { sidebar: { hideable: true } },
     hotjar: { hjid: 1434110 },
     navbar: {
       items: [
@@ -78,7 +78,7 @@ module.exports = {
       logo: { alt: 'uniforms logo', src: 'img/uniforms.svg' },
     },
     prism: {
-      theme: require('prism-react-renderer/themes/oceanicNext'),
+      theme: require('prism-react-renderer/themes/vsDark'),
     },
   },
   favicon: 'favicon.ico',
