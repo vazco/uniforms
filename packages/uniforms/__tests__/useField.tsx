@@ -46,7 +46,7 @@ describe('useField', () => {
   describe('when called with initialValue', () => {
     test('applies default value', () => {
       render(
-        <AutoForm schema={bridge} data-testid="autoForm">
+        <AutoForm schema={bridge}>
           <TestComponent name="d" />
         </AutoForm>,
         { schema: { type: SimpleSchema2Bridge } },
@@ -58,7 +58,7 @@ describe('useField', () => {
 
     test('does not apply default value after first change', () => {
       const { getByRole } = render(
-        <AutoForm label schema={bridge} data-testid="autoForm">
+        <AutoForm label schema={bridge}>
           <TestComponent name="d" />
         </AutoForm>,
         { schema: { type: SimpleSchema2Bridge } },

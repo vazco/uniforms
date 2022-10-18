@@ -1,7 +1,7 @@
 import { fireEvent, screen } from '@testing-library/react';
 import React from 'react';
 import SimpleSchema from 'simpl-schema';
-import { AutoForm, connectField } from 'uniforms';
+import { AutoForm, connectField, context } from 'uniforms';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 
 import { render } from '../__suites__';
@@ -19,6 +19,8 @@ const onChangeModel = jest.fn();
 const onSubmit = jest.fn();
 const validator = jest.fn();
 
+jest.spyOn(schema.schema, 'validator').mockImplementation(() => validator);
+
 beforeEach(() => {
   onChange.mockClear();
   onChangeModel.mockClear();
@@ -30,65 +32,76 @@ describe('<AutoForm />', () => {
   describe('when changes', () => {
     test('updates', () => {
       render(
-        <AutoForm data-testid="autoForm" onChange={onChange} schema={schema} />,
+        // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
+        // @ts-expect-error
+        <AutoForm name="form" onChange={onChange} schema={schema} />,
         { schema: { type: SimpleSchema2Bridge } },
         { onChange },
       );
     });
-
-    // todo no way to test in rts cause of AutoField not rendering inputs, and in rts we don't have access to instance
+    // todo no way to test in rts cause we don't have access to validator function call
     test.skip('validates', () => {
       // FIXME: AutoForm is not a valid Component.
       render(
-        <AutoForm data-testid="autoForm" onChange={onChange} schema={schema} />,
-        { schema: { type: SimpleSchema2Bridge } },
+        <AutoForm
+          // TODO: delete ts-expect-error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
+          // @ts-expect-error
+          name="form"
+          onChange={onChange}
+          schema={schema}
+        />,
+        {
+          schema: { type: SimpleSchema2Bridge },
+        },
       );
 
-      const element = screen.getByTestId('autoForm');
-      fireEvent.submit(element);
+      const form = screen.getByRole('form');
+      fireEvent.submit(form);
 
       expect(validator).toHaveBeenCalledTimes(1);
       expect(validator).toHaveBeenLastCalledWith({});
 
-      fireEvent.change(element, onChange({ a: '1' }));
+      // fireEvent.change(form, onChange({ a: '2' }));
 
       expect(validator).toHaveBeenCalledTimes(2);
-      expect(validator).toHaveBeenLastCalledWith({ a: '1' });
+      expect(validator).toHaveBeenLastCalledWith({ a: '2' });
     });
 
     test('calls `onChangeModel`', () => {
       // FIXME: AutoForm is not a valid Component.
       render(
         <AutoForm
-          data-testid="autoForm"
+          // TODO: delete ts-expect-error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
+          // @ts-expect-error
+          name="form"
           onChange={onChangeModel}
           schema={schema}
         />,
         { schema: { type: SimpleSchema2Bridge } },
       );
 
-      const element = screen.getByTestId('autoForm');
+      const element = screen.getByRole('form');
       fireEvent.change(element, onChangeModel({ a: '2' }));
 
       expect(onChangeModel).toHaveBeenCalledTimes(1);
       expect(onChangeModel).toHaveBeenLastCalledWith({ a: '2' });
     });
-
+    // todo no way to test in rts cause we don't have access to call onChange
     test.skip('updates `changed` and `changedMap`', () => {
-      // todo no way to test in rts cause we don't have access to instance and state of component
-      // (https://testing-library.com/docs/react-testing-library/intro/#the-problem)
       // FIXME: AutoForm is not a valid Component.
       render(
-        <AutoForm data-testid="autoForm" onChange={onChange} schema={schema} />,
-        { schema: { type: SimpleSchema2Bridge } },
+        // TODO: delete ts-expect-error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
+        // @ts-expect-error
+        <AutoForm name="form" schema={schema} />,
+        {
+          schema: { type: SimpleSchema2Bridge },
+        },
       );
 
-      const element = screen.getByTestId('autoForm');
+      const element = screen.getByRole('form');
 
-      expect(element).toHaveProperty('changed', false);
-      expect(element).toHaveProperty('changedMap', {});
-
-      fireEvent.change(element, onChange({ a: '1' }));
+      expect(element).toBe('false');
+      expect(element).toBe('{}');
 
       expect(element).toHaveProperty('changed', true);
       expect(element).toHaveProperty('changedMap.a');
@@ -103,7 +116,6 @@ describe('<AutoForm />', () => {
       // FIXME: AutoForm is not a valid Component.
       render(
         <AutoForm
-          data-testid="autoForm"
           onChange={onChange}
           schema={schema}
           autoField={Field}
@@ -116,13 +128,14 @@ describe('<AutoForm />', () => {
       expect(onChange.mock.calls[0]).toEqual(expect.arrayContaining(['b', '']));
       expect(onChange.mock.calls[1]).toEqual(expect.arrayContaining(['c', '']));
     });
-
+    // todo no way to test in rts cause we don't have access to onChange and validator function call
     test.skip('skips `onSubmit` until rendered (`autosave` = true)', async () => {
-      // todo no way to test in rts cause we don't have access to instance and state of component
       // FIXME: AutoForm is not a valid Component.
       render(
         <AutoForm
-          data-testid="autoForm"
+          // TODO: delete ts-expect-error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
+          // @ts-expect-error
+          name="form"
           autosave
           onSubmit={onSubmit}
           schema={schema}
@@ -134,7 +147,7 @@ describe('<AutoForm />', () => {
 
       expect(onSubmit).not.toBeCalled();
 
-      const element = screen.getByTestId('autoForm');
+      const element = screen.getByRole('form');
 
       await new Promise(resolve => setTimeout(resolve));
 
@@ -146,65 +159,88 @@ describe('<AutoForm />', () => {
       expect(validator).toHaveBeenLastCalledWith({ a: 1 });
     });
   });
+
   describe('when reset', () => {
-    test.skip('reset `model`', () => {
-      // todo no way to test in rts cause we don't have access to instance and state of component
+    test('reset `model`', () => {
       // FIXME: AutoForm is not a valid Component.
-      render(
-        <AutoForm
-          data-testid="autoForm"
-          autosave
-          model={model}
-          schema={schema}
-        />,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
+      const Component = () => (
+        <AutoForm autosave model={model} schema={schema}>
+          <context.Consumer>
+            {context => (
+              <>
+                {context && context.model ? (
+                  <p data-testid="model">{JSON.stringify(context.model)}</p>
+                ) : null}
+              </>
+            )}
+          </context.Consumer>
+        </AutoForm>
       );
+      const { rerender } = render(<Component />, {
+        schema: { type: SimpleSchema2Bridge },
+      });
 
-      // expect(wrapper.instance().getContext().model).toEqual(model);
+      rerender(<Component />);
+      const renderedModel = JSON.parse(screen.getByTestId('model').innerHTML);
+
+      expect(renderedModel).toEqual(model);
     });
 
-    test.skip('resets state `changedMap`', () => {
-      // todo no way to test in rts cause we don't have access to instance and state of component
+    test('resets state `changedMap`', () => {
       // FIXME: AutoForm is not a valid Component.
-      render(
-        <AutoForm
-          data-testid="autoForm"
-          onSubmit={onSubmit}
-          model={model}
-          schema={schema}
-        />,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
+      const Component = () => (
+        <AutoForm autosave model={model} schema={schema}>
+          <context.Consumer>
+            {context => (
+              <>
+                {context && context.changedMap ? (
+                  <p data-testid="changedMap">
+                    {JSON.stringify(context.changedMap)}
+                  </p>
+                ) : null}
+              </>
+            )}
+          </context.Consumer>
+        </AutoForm>
       );
+      const { rerender } = render(<Component />, {
+        schema: { type: SimpleSchema2Bridge },
+      });
 
-      // expect(wrapper.instance().getContext().changedMap).toEqual({});
+      rerender(<Component />);
+      const changedMap = JSON.parse(screen.getByTestId('changedMap').innerHTML);
+
+      expect(changedMap).toEqual({});
     });
 
-    test.skip('resets state `changed`', () => {
-      // todo no way to test in rts cause we don't have access to instance and state of component
+    test('resets state `changed`', () => {
       // FIXME: AutoForm is not a valid Component.
-      render(
-        <AutoForm
-          data-testid="autoForm"
-          autosave
-          model={model}
-          onSubmit={onSubmit}
-          schema={schema}
-        />,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
+      const Component = () => (
+        <AutoForm autosave model={model} schema={schema}>
+          <context.Consumer>
+            {context => (
+              <>
+                {context ? (
+                  <p data-testid="changed">{JSON.stringify(context.changed)}</p>
+                ) : null}
+              </>
+            )}
+          </context.Consumer>
+        </AutoForm>
       );
+      const { rerender } = render(<Component />, {
+        schema: { type: SimpleSchema2Bridge },
+      });
 
-      // expect(wrapper.instance().getContext().changed).toEqual(false);
+      rerender(<Component />);
+      const changed = JSON.parse(screen.getByTestId('changed').innerHTML);
+
+      expect(changed).toEqual(false);
     });
   });
   describe('when update', () => {
+    // todo no way to test in rts cause we don't have access to props
     test.skip('<AutoForm />, updates', () => {
-      // todo no way to test in rts cause AutoForm not render input in core
       // FIXME: AutoForm is not a valid Component.
       render(<AutoForm schema={schema} />, {
         schema: { type: SimpleSchema2Bridge },
@@ -214,12 +250,13 @@ describe('<AutoForm />', () => {
     });
 
     test.skip('<AutoForm />, validates', () => {
-      // todo no way to test in rts cause AutoForm not render input in core
+      // todo no way to test in rts cause we don't have access to setProps
       // FIXME: AutoForm is not a valid Component.
       render(<AutoForm schema={schema} />, {
         schema: { type: SimpleSchema2Bridge },
       });
 
+      // element.setProps({ model, validate: 'onChange' });
       expect(validator).toHaveBeenCalledTimes(1);
     });
   });
