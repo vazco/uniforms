@@ -49,7 +49,7 @@
     "eslint-import-resolver-alias": "1.1.2",
     "eslint-import-resolver-typescript": "2.3.0",
     "graphql": "^15.0.0",
-    "husky": "4.3.8",
+    "husky": "8.0.1",
     "invariant": "^2.0.0",
     "jest": "27.0.6",
     "lerna": "4.0.0",
