@@ -25,7 +25,7 @@ function fieldInvariant(name: string, condition: boolean): asserts condition {
 }
 
 function isNativeEnumValue(value: unknown) {
-  return typeof value !== 'number';
+  return typeof value !== 'string';
 }
 
 export default class ZodBridge<T extends ZodRawShape> extends Bridge {
@@ -107,7 +107,8 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     }
 
     if (field instanceof ZodNativeEnum) {
-      return Object.values(field.enum)[0];
+      const values = Object.values(field.enum);
+      return values.find(isNativeEnumValue) ?? values[0];
     }
 
     if (field instanceof ZodObject) {
@@ -153,8 +154,9 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     } else if (field instanceof ZodEnum) {
       props.allowedValues = field.options;
     } else if (field instanceof ZodNativeEnum) {
-      // Native enums have both numeric and string values.
-      props.allowedValues = Object.values(field.enum).filter(isNativeEnumValue);
+      const values = Object.values(field.enum);
+      const nativeValues = values.filter(isNativeEnumValue);
+      props.allowedValues = nativeValues.length ? nativeValues : values;
     } else if (field instanceof ZodNumber) {
       if (!field.isInt) {
         props.decimal = true;
@@ -223,12 +225,15 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
       return Date;
     }
 
-    if (
-      field instanceof ZodEnum ||
-      field instanceof ZodNativeEnum ||
-      field instanceof ZodString
-    ) {
+    if (field instanceof ZodEnum || field instanceof ZodString) {
       return String;
+    }
+
+    if (field instanceof ZodNativeEnum) {
+      const values = Object.values(field.enum);
+      return typeof values.find(isNativeEnumValue) === 'number'
+        ? Number
+        : String;
     }
 
     if (field instanceof ZodNumber) {

@@ -238,24 +238,12 @@ describe('ZodBridge', () => {
       enum Test {
         x,
         y,
-        z = 'a',
-      }
-
-      const schema = object({ a: nativeEnum(Test) });
-      const bridge = new ZodBridge(schema);
-      expect(bridge.getInitialValue('a')).toEqual('x');
-    });
-
-    it('works with enum (native, numbers)', () => {
-      enum Test {
-        x,
-        y,
         z,
       }
 
       const schema = object({ a: nativeEnum(Test) });
       const bridge = new ZodBridge(schema);
-      expect(bridge.getInitialValue('a')).toEqual('x');
+      expect(bridge.getInitialValue('a')).toEqual(0);
     });
 
     it('works with enum (native, string)', () => {
@@ -354,22 +342,6 @@ describe('ZodBridge', () => {
       });
     });
 
-    it('works with enum (native, mixed)', () => {
-      enum Test {
-        x,
-        y,
-        z = 'a',
-      }
-
-      const schema = object({ a: nativeEnum(Test) });
-      const bridge = new ZodBridge(schema);
-      expect(bridge.getProps('a')).toEqual({
-        allowedValues: ['x', 'y', 'a'],
-        label: 'A',
-        required: true,
-      });
-    });
-
     it('works with enum (native, number)', () => {
       enum Test {
         x,
@@ -380,7 +352,7 @@ describe('ZodBridge', () => {
       const schema = object({ a: nativeEnum(Test) });
       const bridge = new ZodBridge(schema);
       expect(bridge.getProps('a')).toEqual({
-        allowedValues: ['x', 'y', 'z'],
+        allowedValues: [0, 1, 2],
         label: 'A',
         required: true,
       });
@@ -553,18 +525,6 @@ describe('ZodBridge', () => {
       expect(bridge.getType('a')).toBe(String);
     });
 
-    it('works with enum (native, mixed)', () => {
-      enum Test {
-        x,
-        y,
-        z = 'a',
-      }
-
-      const schema = object({ a: nativeEnum(Test) });
-      const bridge = new ZodBridge(schema);
-      expect(bridge.getType('a')).toBe(String);
-    });
-
     it('works with enum (native, number)', () => {
       enum Test {
         x,
@@ -574,7 +534,7 @@ describe('ZodBridge', () => {
 
       const schema = object({ a: nativeEnum(Test) });
       const bridge = new ZodBridge(schema);
-      expect(bridge.getType('a')).toBe(String);
+      expect(bridge.getType('a')).toBe(Number);
     });
 
     it('works with enum (native, string)', () => {
