@@ -1,6 +1,6 @@
 import React from 'react';
 import SimpleSchema from 'simpl-schema';
-import { AutoForm } from 'uniforms';
+import { AutoForm, connectField } from 'uniforms';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 
 import mount from './_mount';
@@ -87,6 +87,33 @@ describe('AutoForm', () => {
   });
 
   describe('when rendered', () => {
+    it('calls `onChange` before render', () => {
+      const field = () => null;
+      const Field = connectField(field);
+
+      // @ts-expect-error Convoluted AutoForm types
+      class CustomAutoForm extends AutoForm {
+        getAutoField() {
+          return Field
+        }
+      }
+
+      // FIXME: AutoForm is not a valid Component.
+      mount<CustomAutoForm | any>(
+        // @ts-expect-error Convoluted AutoForm types
+        <CustomAutoForm
+          autoField={Field}
+          model={model}
+          onChange={onChange}
+          schema={schema}
+        />,
+      );
+
+      expect(onChange).toHaveBeenCalledTimes(2);
+      expect(onChange.mock.calls[0]).toEqual(expect.arrayContaining(['b', '']));
+      expect(onChange.mock.calls[1]).toEqual(expect.arrayContaining(['c', '']));
+    });
+
     it('skips `onSubmit` until rendered (`autosave` = true)', async () => {
       // FIXME: AutoForm is not a valid Component.
       const wrapper = mount<AutoForm | any>(
