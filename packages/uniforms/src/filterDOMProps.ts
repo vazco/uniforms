@@ -40,7 +40,6 @@ filterDOMProps.register(
   'field',
   'fieldType',
   'fields',
-  'initialCount',
   'name',
   'onChange',
   'transform',

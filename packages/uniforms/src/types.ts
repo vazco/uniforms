@@ -92,7 +92,6 @@ declare module '.' {
     field: never;
     fieldType: never;
     fields: never;
-    initialCount: never;
     label: never;
     name: never;
     onChange: never;

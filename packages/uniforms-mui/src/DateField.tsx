@@ -4,7 +4,7 @@ import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 /* istanbul ignore next */
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
-const dateFormat = (value?: Date) => value && value.toISOString().slice(0, -8);
+
 const dateParse = (timestamp: number, onChange: DateFieldProps['onChange']) => {
   const date = new DateConstructor(timestamp);
   if (date.getFullYear() < 10000) {
@@ -17,7 +17,7 @@ const dateParse = (timestamp: number, onChange: DateFieldProps['onChange']) => {
 export type DateFieldProps = FieldProps<
   Date,
   TextFieldProps,
-  { labelProps?: object }
+  { labelProps?: object; type?: 'date' | 'datetime-local' }
 >;
 
 function Date({
@@ -35,6 +35,7 @@ function Date({
   readOnly,
   showInlineError,
   value,
+  type = 'datetime-local',
   ...props
 }: DateFieldProps) {
   return (
@@ -54,8 +55,11 @@ function Date({
       }
       placeholder={placeholder}
       ref={inputRef}
-      type="datetime-local"
-      value={dateFormat(value) ?? ''}
+      type={type}
+      value={
+        value?.toISOString().slice(0, type === 'datetime-local' ? -8 : -14) ??
+        ''
+      }
       {...filterDOMProps(props)}
     />
   );

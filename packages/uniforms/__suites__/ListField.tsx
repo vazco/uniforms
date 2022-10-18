@@ -29,11 +29,16 @@ export function testListField(
     expect(screen.getByText(/ListFieldLabel.*/)).toBeInTheDocument();
   });
 
-  test('<ListField> - renders correct numer of items with initialCount (specified)', () => {
-    render(<ListField name="x" initialCount={3} />, {
-      x: Array,
-      'x.$': String,
-    });
+  test('<ListField> - renders correct numer of items with model (specified)', () => {
+    render(
+      <ListField name="x" />,
+      {
+        x: Array,
+        'x.$': String,
+      },
+      undefined,
+      { x: [undefined, undefined, undefined] },
+    );
 
     expect(screen.getAllByRole('textbox')).toHaveLength(3);
   });
@@ -42,10 +47,12 @@ export function testListField(
     const itemProps = { 'data-xyz': 1 };
     const Child = jest.fn(() => <div />) as FC<any>;
     render(
-      <ListField name="x" initialCount={2} itemProps={itemProps}>
+      <ListField name="x" itemProps={itemProps}>
         <Child />
       </ListField>,
       { x: Array, 'x.$': String },
+      undefined,
+      { x: [undefined, undefined] },
     );
 
     expect(Child).toHaveBeenCalledTimes(2);
@@ -56,11 +63,13 @@ export function testListField(
   test('<ListField> - renders children (specified)', () => {
     const Child = jest.fn(() => <div />) as FC<any>;
     render(
-      <ListField name="x" initialCount={2}>
+      <ListField name="x">
         <Child />
         PlainText
       </ListField>,
       { x: Array, 'x.$': String },
+      undefined,
+      { x: [undefined, undefined] },
     );
 
     expect(Child).toHaveBeenCalledTimes(2);
@@ -69,10 +78,12 @@ export function testListField(
   test('<ListField> - renders children with correct name (children)', () => {
     const Child = jest.fn(() => <div data-testid="field" />) as FC<any>;
     render(
-      <ListField name="x" initialCount={2}>
+      <ListField name="x">
         <Child name="$" />
       </ListField>,
       { x: Array, 'x.$': String },
+      undefined,
+      { x: [undefined, undefined] },
     );
 
     expect(Child).toHaveBeenNthCalledWith(1, { name: '0' }, {});
@@ -80,20 +91,25 @@ export function testListField(
   });
 
   test('<ListField> - renders children with correct name (value)', () => {
-    render(<ListField name="x" initialCount={2} />, {
-      x: Array,
-      'x.$': String,
-    });
+    render(
+      <ListField name="x" />,
+      {
+        x: Array,
+        'x.$': String,
+      },
+      undefined,
+      { x: [undefined, undefined] },
+    );
 
     const inputs = screen.getAllByRole('textbox');
     expect(inputs[0]).toHaveAttribute('name', 'x.0');
     expect(inputs[1]).toHaveAttribute('name', 'x.1');
   });
 
-  test('<ListField> - renders proper number of optional values after add new value (with initialCount)', () => {
+  test('<ListField> - renders proper number of optional values after add new value', () => {
     const onChange = jest.fn();
     render(
-      <ListField name="x" initialCount={3} label="ListFieldLabel" />,
+      <ListField name="x" label="ListFieldLabel" />,
       { x: { type: Array, optional: true }, 'x.$': String },
       { onChange },
     );
@@ -102,11 +118,6 @@ export function testListField(
     expect(addField).toBeTruthy();
     userEvent.click(addField!);
     expect(onChange).toHaveBeenCalledTimes(1);
-    expect(onChange).toHaveBeenLastCalledWith('x', [
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-    ]);
+    expect(onChange).toHaveBeenLastCalledWith('x', [undefined]);
   });
 }

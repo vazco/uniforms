@@ -94,6 +94,14 @@ export class BaseForm<
     if (this.delayId) {
       clearTimeout(this.delayId);
     }
+
+    // There are at least 4 places where we'd need to check, whether or not we
+    // actually perform `setState` after the component gets unmounted. Instead,
+    // we override it to hide the React warning. Also because React no longer
+    // will raise it in the newer versions.
+    // https://github.com/facebook/react/pull/22114
+    // https://github.com/vazco/uniforms/issues/1152
+    this.setState = () => {};
   }
 
   delayId?: any;

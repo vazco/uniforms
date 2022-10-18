@@ -19,7 +19,6 @@ export type ListFieldProps = HTMLFieldProps<
     addIcon?: ReactNode;
     children?: ReactNode;
     info?: string;
-    initialCount?: number;
     itemProps?: object;
     labelCol?: any;
     wrapperCol?: any;
@@ -40,7 +39,6 @@ function List({
   error,
   errorMessage,
   info,
-  initialCount,
   itemProps,
   label,
   labelCol,
@@ -92,7 +90,7 @@ function List({
         ),
       )}
 
-      <ListAddField name="$" initialCount={initialCount} />
+      <ListAddField name="$" />
     </div>
   );
 }

@@ -1,3 +1,9 @@
+## [v3.10.1](https://github.com/vazco/uniforms/tree/v3.10.1) (2022-10-07)
+
+- **Fixed:** Problems with `DateField` not always formatting correctly. [\#1162](https://github.com/vazco/uniforms/issues/1162)
+- **Fixed:** Problems with `DateField` not always rendering correctly. [\#1138](https://github.com/vazco/uniforms/issues/1138)
+- **Fixed:** Warning when the form got unmounted during submit. [\#1152](https://github.com/vazco/uniforms/issues/1152)
+
 ## [v3.10.0](https://github.com/vazco/uniforms/tree/v3.10.0) (2022-07-25)
 
 - **Added:** Support for enums in `GraphQLSchemaBridge`. [\#1135](https://github.com/vazco/uniforms/issues/1135)

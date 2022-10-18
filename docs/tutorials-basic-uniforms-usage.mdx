@@ -74,7 +74,13 @@ However, **there's small caveat with using the JSONSchemaBridge**.
 Because of its simplicity, JSONSchema doesn't provide any validation checkers, so in order to properly validate our submitted data,
 we need to **manually define a validator**, and that is required by the uniforms `JSONSchemaBrigde` constructor.
 
-To manually create the validator, we will use the [ajv](https://github.com/epoberezkin/ajv) package:
+To manually create the validator, we will use the [Ajv](https://github.com/ajv-validator/ajv) package:
+
+:::caution
+
+Ajv executes in [strict mode by default](https://ajv.js.org/options.html#strict) since version 7. To avoid errors at schema compilation phase, we have to register the `uniforms` keyword (see [Unknown keywords](https://ajv.js.org/strict-mode.html#unknown-keywords) for more details).
+
+:::
 
 <CodeSection
   language="tsx"

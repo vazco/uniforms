@@ -1,9 +1,12 @@
 import React, { Ref } from 'react';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
+type DateFieldType = 'date' | 'datetime-local';
+
 /* istanbul ignore next */
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
-const dateFormat = (value?: Date) => value?.toISOString().slice(0, -8);
+const dateFormat = (value?: Date, type: DateFieldType = 'datetime-local') =>
+  value?.toISOString().slice(0, type === 'datetime-local' ? -8 : -14);
 
 export type DateFieldProps = HTMLFieldProps<
   Date,
@@ -12,7 +15,7 @@ export type DateFieldProps = HTMLFieldProps<
     inputRef?: Ref<HTMLInputElement>;
     max?: Date;
     min?: Date;
-    type?: 'date' | 'datetime-local';
+    type?: DateFieldType;
   }
 >;
 
@@ -28,11 +31,9 @@ function Date({
   placeholder,
   readOnly,
   value,
-  type,
+  type = 'datetime-local',
   ...props
 }: DateFieldProps) {
-  const dateType = type === 'date' ? type : 'datetime-local';
-
   return (
     <div {...filterDOMProps(props)}>
       {label && <label htmlFor={id}>{label}</label>}
@@ -54,8 +55,8 @@ function Date({
         placeholder={placeholder}
         readOnly={readOnly}
         ref={inputRef}
-        type={dateType}
-        value={dateFormat(value) ?? ''}
+        type={type}
+        value={dateFormat(value, type) ?? ''}
       />
     </div>
   );

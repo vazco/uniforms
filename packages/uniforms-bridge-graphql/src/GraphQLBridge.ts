@@ -29,6 +29,7 @@ export default class GraphQLBridge extends Bridge {
 
     // Memoize for performance and referential equality.
     this.getField = memoize(this.getField.bind(this));
+    this.getInitialValue = memoize(this.getInitialValue.bind(this));
     this.getSubfields = memoize(this.getSubfields.bind(this));
     this.getType = memoize(this.getType.bind(this));
   }
@@ -80,13 +81,11 @@ export default class GraphQLBridge extends Bridge {
     );
   }
 
-  getInitialValue(name: string, props?: Record<string, any>): any {
+  getInitialValue(name: string): any {
     const type = this.getType(name);
 
     if (type === Array) {
-      const item = this.getInitialValue(joinName(name, '0'));
-      const items = props?.initialCount || 0;
-      return Array.from({ length: items }, () => item);
+      return [];
     }
 
     if (type === Object) {

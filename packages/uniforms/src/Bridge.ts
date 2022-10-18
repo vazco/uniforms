@@ -75,12 +75,12 @@ export abstract class Bridge {
   // `props` are this field instance props. If a field is rendered multiple
   // times, this function will be called multiple times, possibly with different
   // `props`.
-  getInitialValue(name: string, props: Record<string, any>): any {
+  getInitialValue(name: string): any {
     return invariant(
       false,
       '%s have not implemented `getInitialValue` method (args=%o).',
       this.constructor.name,
-      { name, props },
+      { name },
     );
   }
 

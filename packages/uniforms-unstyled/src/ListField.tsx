@@ -7,12 +7,11 @@ import ListItemField from './ListItemField';
 export type ListFieldProps = HTMLFieldProps<
   unknown[],
   HTMLUListElement,
-  { initialCount?: number; itemProps?: object }
+  { itemProps?: object }
 >;
 
 function List({
   children = <ListItemField name="$" />,
-  initialCount,
   itemProps,
   label,
   value,
@@ -23,7 +22,7 @@ function List({
       {label && (
         <label>
           {label}
-          <ListAddField initialCount={initialCount} name="$" />
+          <ListAddField name="$" />
         </label>
       )}
 
