@@ -153,12 +153,6 @@ describe('SimpleSchema2Bridge', () => {
       expect(bridge.getInitialValue('k')).toEqual([]);
     });
 
-    it('works with arrays (initialCount)', () => {
-      expect(bridge.getInitialValue('k', { initialCount: 1 })).toEqual([
-        undefined,
-      ]);
-    });
-
     it('works with arrays (minCount)', () => {
       expect(bridge.getInitialValue('j')).toEqual([
         undefined,
