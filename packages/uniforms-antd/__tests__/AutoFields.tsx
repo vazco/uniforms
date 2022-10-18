@@ -57,22 +57,6 @@ test('<AutoFields> - does not render ommited fields', () => {
   );
 });
 
-test('<AutoFields> - works with custom component', () => {
-  const Component = jest.fn(() => null);
-
-  const element = <AutoFields autoField={Component} />;
-  mount(
-    element,
-    createContext({
-      x: { type: String },
-      y: { type: String },
-      z: { type: String },
-    }),
-  );
-
-  expect(Component).toHaveBeenCalledTimes(3);
-});
-
 test('<AutoFields> - wraps fields in specified element', () => {
   const element = <AutoFields element="section" />;
   const wrapper = mount(
