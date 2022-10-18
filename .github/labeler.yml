@@ -19,7 +19,6 @@
   - '.eslintrc.json'
   - '.github/**/*'
   - '.gitignore'
-  - '.huskyrc.json'
   - '.lintstagedrc.js'
   - '.prettierignore'
   - '.prettierrc.js'
