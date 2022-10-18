@@ -73,8 +73,13 @@ export default class SimpleSchemaBridge extends Bridge {
     }
 
     if (field.type === Array) {
-      const item = this.getInitialValue(joinName(name, '0'));
-      return Array.from({ length: field.minCount || 0 }, () => item);
+      const item = this.getInitialValue(joinName(name, '$'));
+      if (item === undefined) {
+        return [];
+      }
+
+      const length = field.minCount || 0;
+      return Array.from({ length }, () => item);
     }
 
     if (field.type === Object) {

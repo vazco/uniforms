@@ -43,6 +43,7 @@ describe('GraphQLBridge', () => {
 
   const schemaData = {
     author: { component: 'div' },
+    'author.tags.$': { initialValue: 'x' },
     id: {
       allowedValues: [1, 2, 3],
       label: 'Post ID',

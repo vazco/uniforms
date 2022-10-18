@@ -24,9 +24,11 @@ describe('SimpleSchemaBridge', () => {
         h: { type: Number },
         i: { type: Date },
         j: { type: Array, minCount: 3 },
-        'j.$': { type: String },
+        'j.$': { type: Object },
+        'j.$.a': { type: String, defaultValue: 'x' },
         k: { type: Array },
-        'k.$': { type: String },
+        'k.$': { type: Object },
+        'k.$.a': { type: String, defaultValue: 'y' },
         l: { type: String, uniforms: 'div' },
         m: { type: String, uniforms: noopComponent },
         n: { type: String, uniforms: { component: 'div' } },
@@ -68,11 +70,15 @@ describe('SimpleSchemaBridge', () => {
       return `(${name})`;
     },
 
-    objectKeys(name: 'a' | 'a.b') {
+    objectKeys(name: 'a' | 'a.b' | 'j' | 'j.$' | 'k' | 'k.$') {
       return (
         {
           a: ['b'],
           'a.b': ['c'],
+          j: ['$'],
+          'j.$': ['a'],
+          k: ['$'],
+          'k.$': ['a'],
         }[name] || []
       );
     },
@@ -176,9 +182,9 @@ describe('SimpleSchemaBridge', () => {
 
     it('works with arrays (minCount)', () => {
       expect(bridge.getInitialValue('j')).toEqual([
-        undefined,
-        undefined,
-        undefined,
+        { a: 'x' },
+        { a: 'x' },
+        { a: 'x' },
       ]);
     });
 
