@@ -7,13 +7,14 @@ const randomId = randomIds();
 export default function createContext(
   schema?: object,
   context?: Partial<Context<any>>,
+  model?: object,
 ): { context: Context<any> } {
   return {
     context: {
       changed: false,
       changedMap: {},
       error: null,
-      model: {},
+      model: model ?? {},
       name: [],
       onChange() {},
       onSubmit() {},

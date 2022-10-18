@@ -8,7 +8,7 @@ import ListItemField from './ListItemField';
 export type ListFieldProps = HTMLFieldProps<
   unknown[],
   HTMLDivElement,
-  { initialCount?: number; itemProps?: object }
+  { itemProps?: object }
 >;
 
 function List({
@@ -17,7 +17,6 @@ function List({
   disabled,
   error,
   errorMessage,
-  initialCount,
   itemProps,
   label,
   required,
@@ -39,11 +38,7 @@ function List({
         <div className={classnames({ error, required }, 'field item')}>
           <label className="left floated">{label}</label>
 
-          <ListAddField
-            className="right floated"
-            initialCount={initialCount}
-            name="$"
-          />
+          <ListAddField className="right floated" name="$" />
         </div>
       )}
 
