@@ -94,7 +94,7 @@ describe('AutoForm', () => {
       // @ts-expect-error Convoluted AutoForm types
       class CustomAutoForm extends AutoForm {
         getAutoField() {
-          return Field
+          return Field;
         }
       }
 
