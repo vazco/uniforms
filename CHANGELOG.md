@@ -1,3 +1,12 @@
+## [v4.0.0-alpha.0](https://github.com/vazco/uniforms/tree/v4.0.0-alpha.0) (2022-11-02)
+
+- **Added:** Zod integration. [\#1159](https://github.com/vazco/uniforms/issues/1159)
+- **Breaking:** Changed the way `getInitialValue` works with `undefined`s. [\#1171](https://github.com/vazco/uniforms/issues/1171)
+- **Breaking:** Moved the `component` prop check from the `AutoField` to the `defaultComponentDetector`. [\#1114](https://github.com/vazco/uniforms/issues/1114)
+- **Breaking:** Removed the `autoField` prop from `QuickForm` and its descendants. [\#980](https://github.com/vazco/uniforms/issues/980)
+- **Breaking:** Removed the `props` argument from `getInitialValue`. It also implies removal of the `initialCount` prop from all bridges and `ListField`s. [\#1048](https://github.com/vazco/uniforms/issues/1048)
+- **Breaking:** `AutoFields` render `Fragment` instead of `div` by default. [\#1173](https://github.com/vazco/uniforms/issues/1173)
+
 ## [v3.10.1](https://github.com/vazco/uniforms/tree/v3.10.1) (2022-10-07)
 
 - **Fixed:** Problems with `DateField` not always formatting correctly. [\#1162](https://github.com/vazco/uniforms/issues/1162)
