@@ -8,7 +8,7 @@
     "install": "lerna bootstrap --hoist && npm run build && husky install",
     "lint": "npm run lint:code && npm run lint:text && npm run lint:types",
     "lint:code": "eslint --cache --cache-location node_modules/.cache/eslint --cache-strategy content --ext js,ts,tsx .",
-    "lint:text": "prettier --check '**/*.{json,md,mdx,yml}'",
+    "lint:text": "prettier --check **/*.{json,md,mdx,yml}",
     "lint:types": "npm run build",
     "prereset": "npm run clean",
     "pretest": "npm run lint",
