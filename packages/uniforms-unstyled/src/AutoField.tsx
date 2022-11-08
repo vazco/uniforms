@@ -12,6 +12,7 @@ import SelectField from './SelectField';
 import TextField from './TextField';
 
 const AutoField = createAutoField(props => {
+  console.log(props)
   if (props.component) {
     return props.component;
   }

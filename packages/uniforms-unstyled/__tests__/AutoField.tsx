@@ -144,3 +144,17 @@ test('<AutoField> - uses Component (invalid)', () => {
   }).toThrow(/Unsupported field type:/);
   spy.mockRestore();
 });
+
+test('<AutoField> - works with absolute nested names ', () => {
+  const element = <AutoField name="x.y.z" options={{ absoluteName: true }} />;
+  const wrapper = mount(
+    element,
+    createContext({
+      x: { type: Object },
+      'x.y': { type: Object },
+      'x.y.z': { type: String },
+    }),
+  );
+
+  expect(wrapper.find(TextField.Component)).toHaveLength(1);
+});
