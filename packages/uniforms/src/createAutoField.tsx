@@ -32,7 +32,6 @@ export function createAutoField(defaultComponentDetector: ComponentDetector) {
 
   function AutoField({ options, ...rawProps }: AutoFieldProps): ReactElement {
     const [props, uniforms] = useField(rawProps.name, rawProps, options);
-    console.log(props)
     const componentDetector = useContext(context);
     const component = componentDetector(props, uniforms);
 

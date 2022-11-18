@@ -1,11 +1,11 @@
 import React from 'react';
-import { BaseForm, AutoField, AutoForm } from 'uniforms-unstyled';
+// import { AutoForm } from 'uniforms-unstyled';
 // import { AutoForm } from 'uniforms-antd';
 // import { AutoForm } from 'uniforms-bootstrap3';
 // import { AutoForm } from 'uniforms-bootstrap4';
 // import { AutoForm } from 'uniforms-bootstrap5';
 // import { AutoForm } from 'uniforms-material';
-// import { AutoForm } from 'uniforms-mui';s
+import { AutoForm } from 'uniforms-mui';
 // import { AutoForm } from 'uniforms-semantic';
 
 // import { bridge as schema } from './schema/json-schema';
@@ -19,9 +19,6 @@ export function App() {
       placeholder
       schema={schema}
       onSubmit={(model: any) => alert(JSON.stringify(model, null, 2))}
-    >
-      <h1>aaaaaa</h1>
-      <AutoField name="nested.text" options={{ absoluteName: true }} />
-    </AutoForm>
+    />
   );
 }
