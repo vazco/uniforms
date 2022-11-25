@@ -493,6 +493,18 @@ describe('JSONSchemaBridge', () => {
         }),
       ).toEqual(['Ignore!']);
     });
+
+    it('works with empty object', () => {
+      expect(bridge.getErrorMessages({})).toEqual([]);
+    });
+
+    it('works with empty messages', () => {
+      expect(
+        bridge.getErrorMessages({
+          details: [{ instancePath: '.field' }],
+        }),
+      ).toEqual(['']);
+    });
   });
 
   describe('#getField', () => {
