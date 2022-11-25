@@ -78,16 +78,20 @@ function pathToName(path: string) {
   return path.slice(1);
 }
 
+function isValidatorResult(value: unknown): value is ValidatorResult {
+  return typeof value === 'object' && value !== null;
+}
+
 type FieldErrorKeywords = string;
-type FieldErrorProperties = {
-  [key: string]: unknown;
+type FieldErrorProperties = Record<string, unknown> & {
   missingProperty?: string;
 };
-type FieldError = ErrorObject<FieldErrorKeywords, FieldErrorProperties>;
-type ValidatorResult =
-  | { [key: string]: unknown; details?: Partial<FieldError>[] }
-  | null
-  | undefined;
+type FieldError = ErrorObject<FieldErrorKeywords, FieldErrorProperties> & {
+  dataPath?: string; // Ajv <8
+};
+type ValidatorResult = Record<string, unknown> & {
+  details?: Partial<FieldError>[];
+};
 
 export default class JSONSchemaBridge extends Bridge {
   schema: Record<string, any>;
@@ -95,7 +99,9 @@ export default class JSONSchemaBridge extends Bridge {
 
   constructor(
     schema: Record<string, any>,
-    public validator: (model: Record<string, any>) => ValidatorResult,
+    public validator: (
+      model: Record<string, any>,
+    ) => ValidatorResult | null | undefined,
   ) {
     super();
 
@@ -109,8 +115,8 @@ export default class JSONSchemaBridge extends Bridge {
     this.getType = memoize(this.getType.bind(this));
   }
 
-  getError(name: string, error: ValidatorResult | undefined) {
-    const details = error?.details;
+  getError(name: string, error: unknown) {
+    const details = isValidatorResult(error) && error.details;
     if (!Array.isArray(details)) {
       return null;
     }
@@ -120,7 +126,7 @@ export default class JSONSchemaBridge extends Bridge {
     const rootName = joinName(nameParts.slice(0, -1));
     const baseName = nameParts[nameParts.length - 1];
     const scopedError = details.find(error => {
-      const path = pathToName(error.instancePath || '');
+      const path = pathToName((error.instancePath ?? error.dataPath) || '');
       return (
         unescapedName === path ||
         (rootName === path &&
@@ -132,12 +138,12 @@ export default class JSONSchemaBridge extends Bridge {
     return scopedError || null;
   }
 
-  getErrorMessage(name: string, error: ValidatorResult) {
+  getErrorMessage(name: string, error: unknown) {
     const scopedError = this.getError(name, error);
     return scopedError?.message || '';
   }
 
-  getErrorMessages(error: ValidatorResult | Error | string | number) {
+  getErrorMessages(error: unknown) {
     if (!error) {
       return [];
     }
@@ -146,14 +152,14 @@ export default class JSONSchemaBridge extends Bridge {
       return [error.message];
     }
 
-    if (typeof error !== 'object') {
-      return ['' + error];
+    if (isValidatorResult(error)) {
+      const { details } = error;
+      return Array.isArray(details)
+        ? details.map(error => error.message || '')
+        : [];
     }
 
-    const { details } = error;
-    return Array.isArray(details)
-      ? details.map(error => error.message || '')
-      : [];
+    return ['' + error];
   }
 
   getField(name: string) {
