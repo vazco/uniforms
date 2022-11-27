@@ -1,7 +1,7 @@
 import { fireEvent, screen } from '@testing-library/react';
-import React, { useRef } from 'react';
+import React from 'react';
 import SimpleSchema from 'simpl-schema';
-import { ValidatedForm, context } from 'uniforms';
+import { ValidatedForm, context, useForm } from 'uniforms';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 import { AutoField } from 'uniforms-unstyled';
 
@@ -579,35 +579,38 @@ describe('ValidatedForm', () => {
 
   describe('on reset', () => {
     test('removes `error`', async () => {
-      const Component = () => {
-        // @ts-expect-error
-        let formRef;
+      const FormControls = () => {
+        const { formRef } = useForm();
 
         return (
-          // FIXME: ValidatedForm is not a valid Component.
-          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-          <ValidatedForm
-            // @ts-expect-error
-            name="form"
-            ref={ref => (formRef = ref)}
-            model={model}
-            onSubmit={onSubmit}
-            schema={schema}
-          >
-            <context.Consumer>
-              {context => (
-                <>
-                  {context ? (
-                    <p data-testid="error">{context.error?.message}</p>
-                  ) : null}
-                </>
-              )}
-            </context.Consumer>
-            {/* @ts-expect-error */}
+          <>
             <button onClick={() => formRef.reset()}>Reset</button>
-          </ValidatedForm>
+          </>
         );
       };
+
+      const Component = () => (
+        // FIXME: ValidatedForm is not a valid Component.
+        // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
+        <ValidatedForm
+          // @ts-expect-error
+          name="form"
+          model={model}
+          onSubmit={onSubmit}
+          schema={schema}
+        >
+          <context.Consumer>
+            {context => (
+              <>
+                {context ? (
+                  <p data-testid="error">{context.error?.message}</p>
+                ) : null}
+              </>
+            )}
+          </context.Consumer>
+          <FormControls />
+        </ValidatedForm>
+      );
 
       render(<Component />, {
         schema: { type: SimpleSchema2Bridge },
