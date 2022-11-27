@@ -3,6 +3,7 @@ import React from 'react';
 import SimpleSchema from 'simpl-schema';
 import { AutoForm, connectField, context } from 'uniforms';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
+import { AutoField } from 'uniforms-unstyled';
 
 import { render } from '../__suites__';
 
@@ -32,36 +33,35 @@ describe('<AutoForm />', () => {
   describe('when changes', () => {
     test('updates', () => {
       render(
-        // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-        // @ts-expect-error
-        <AutoForm name="form" onChange={onChange} schema={schema} />,
+        <AutoForm onChange={onChange} schema={schema} />,
         { schema: { type: SimpleSchema2Bridge } },
         { onChange },
       );
     });
-    // todo no way to test in rts cause we don't have access to validator function call
-    test.skip('validates', () => {
+    test('validates', () => {
       // FIXME: AutoForm is not a valid Component.
       render(
         <AutoForm
           // TODO: delete ts-expect-error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
           // @ts-expect-error
           name="form"
-          onChange={onChange}
           schema={schema}
-        />,
+        >
+          <AutoField name="a" />
+        </AutoForm>,
         {
           schema: { type: SimpleSchema2Bridge },
         },
       );
 
       const form = screen.getByRole('form');
+      const input = screen.getByLabelText('A');
       fireEvent.submit(form);
 
       expect(validator).toHaveBeenCalledTimes(1);
-      expect(validator).toHaveBeenLastCalledWith({});
+      expect(validator).toHaveBeenLastCalledWith({ a: '' });
 
-      // fireEvent.change(form, onChange({ a: '2' }));
+      fireEvent.change(input, { target: { value: '2' } });
 
       expect(validator).toHaveBeenCalledTimes(2);
       expect(validator).toHaveBeenLastCalledWith({ a: '2' });
@@ -80,32 +80,43 @@ describe('<AutoForm />', () => {
         { schema: { type: SimpleSchema2Bridge } },
       );
 
-      const element = screen.getByRole('form');
-      fireEvent.change(element, onChangeModel({ a: '2' }));
+      const form = screen.getByRole('form');
+      fireEvent.change(form, onChangeModel({ a: '2' }));
 
       expect(onChangeModel).toHaveBeenCalledTimes(1);
       expect(onChangeModel).toHaveBeenLastCalledWith({ a: '2' });
     });
-    // todo no way to test in rts cause we don't have access to call onChange
-    test.skip('updates `changed` and `changedMap`', () => {
+    test('updates `changed` and `changedMap`', () => {
       // FIXME: AutoForm is not a valid Component.
       render(
-        // TODO: delete ts-expect-error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-        // @ts-expect-error
-        <AutoForm name="form" schema={schema} />,
+        <AutoForm schema={schema}>
+          <context.Consumer>
+            {context => (
+              <>
+                {context ? (
+                  <>
+                    <p data-testid="changed">{`${context.changed}`}</p>
+                    <p data-testid="changedMap">
+                      {JSON.stringify(context?.changedMap)}
+                    </p>
+                  </>
+                ) : null}
+              </>
+            )}
+          </context.Consumer>
+          <AutoField name="b" />
+        </AutoForm>,
         {
           schema: { type: SimpleSchema2Bridge },
         },
       );
 
-      const element = screen.getByRole('form');
+      const changed = screen.getByTestId('changed').innerHTML;
+      const changedMap = JSON.parse(screen.getByTestId('changedMap').innerHTML);
 
-      expect(element).toBe('false');
-      expect(element).toBe('{}');
-
-      expect(element).toHaveProperty('changed', true);
-      expect(element).toHaveProperty('changedMap.a');
-      // expect(element.changedMap.a).toBeTruthy();
+      expect(changed).toBe('true');
+      expect(changedMap).toHaveProperty('b');
+      expect(changedMap.b).toBeTruthy();
     });
   });
   describe('when render', () => {
@@ -136,18 +147,12 @@ describe('<AutoForm />', () => {
       expect(onChange.mock.calls[0]).toEqual(expect.arrayContaining(['b', '']));
       expect(onChange.mock.calls[1]).toEqual(expect.arrayContaining(['c', '']));
     });
-    // todo no way to test in rts cause we don't have access to onChange and validator function call
-    test.skip('skips `onSubmit` until rendered (`autosave` = true)', async () => {
+    test('skips `onSubmit` until rendered (`autosave` = true)', async () => {
       // FIXME: AutoForm is not a valid Component.
       render(
-        <AutoForm
-          // TODO: delete ts-expect-error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-          // @ts-expect-error
-          name="form"
-          autosave
-          onSubmit={onSubmit}
-          schema={schema}
-        />,
+        <AutoForm autosave onSubmit={onSubmit} schema={schema}>
+          <AutoField name="a" />
+        </AutoForm>,
         {
           schema: { type: SimpleSchema2Bridge },
         },
@@ -155,16 +160,18 @@ describe('<AutoForm />', () => {
 
       expect(onSubmit).not.toBeCalled();
 
-      const element = screen.getByRole('form');
-
       await new Promise(resolve => setTimeout(resolve));
 
-      fireEvent.change(element, onChange({ a: '1' }));
+      const input = screen.getByLabelText('A');
 
       expect(onSubmit).toHaveBeenCalledTimes(1);
-      expect(onSubmit).toHaveBeenLastCalledWith({ a: 1 });
-      expect(validator).toHaveBeenCalledTimes(1);
-      expect(validator).toHaveBeenLastCalledWith({ a: 1 });
+      expect(onSubmit).toHaveBeenLastCalledWith({ a: '' });
+
+      await new Promise(resolve => setTimeout(resolve));
+      fireEvent.change(input, { target: { value: '1' } });
+
+      expect(validator).toHaveBeenCalledTimes(2);
+      expect(validator).toHaveBeenLastCalledWith({ a: '1' });
     });
   });
 
@@ -247,24 +254,37 @@ describe('<AutoForm />', () => {
     });
   });
   describe('when update', () => {
-    // todo no way to test in rts cause we don't have access to props
-    test.skip('<AutoForm />, updates', () => {
+    test('<AutoForm />, updates', () => {
       // FIXME: AutoForm is not a valid Component.
-      render(<AutoForm schema={schema} />, {
-        schema: { type: SimpleSchema2Bridge },
-      });
+      render(
+        <AutoForm schema={schema}>
+          <context.Consumer>
+            {context => (
+              <>
+                {context ? (
+                  <p data-testid="model">{JSON.stringify(context.model)}</p>
+                ) : null}
+              </>
+            )}
+          </context.Consumer>
+        </AutoForm>,
+        {
+          schema: { type: SimpleSchema2Bridge },
+        },
+      );
 
-      // expect(wrapper.instance().props.model).toEqual({});
+      const model = JSON.parse(screen.getByTestId('model').innerHTML);
+
+      expect(model).toEqual({});
     });
 
-    test.skip('<AutoForm />, validates', () => {
-      // todo no way to test in rts cause we don't have access to setProps
+    test('<AutoForm />, validates', () => {
       // FIXME: AutoForm is not a valid Component.
-      render(<AutoForm schema={schema} />, {
+      const { rerender } = render(<AutoForm schema={schema} />, {
         schema: { type: SimpleSchema2Bridge },
       });
 
-      // element.setProps({ model, validate: 'onChange' });
+      rerender(<AutoForm schema={schema} model={model} validate="onChange" />);
       expect(validator).toHaveBeenCalledTimes(1);
     });
   });

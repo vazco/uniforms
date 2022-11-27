@@ -226,9 +226,6 @@ describe('ValidatedForm', () => {
     test('has `validating` context variable, default `false`', () => {
       render(
         <ValidatedForm
-          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-          // @ts-expect-error
-          name="form"
           schema={schema}
           model={model}
           onValidate={onValidate}
@@ -328,7 +325,7 @@ describe('ValidatedForm', () => {
       validator.mockImplementationOnce(() => {
         throw error;
       });
-      // TODO: add role form to form html element
+
       const form = screen.getByRole('form');
       fireEvent.submit(form);
       await new Promise(resolve => process.nextTick(resolve));
@@ -641,8 +638,6 @@ describe('ValidatedForm', () => {
     // FIXME: ValidatedForm is not a valid Component.
     const Component = (props: any) => (
       <ValidatedForm
-        // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-        name="form"
         model={model}
         schema={schema}
         validate="onChange"
@@ -688,8 +683,6 @@ describe('ValidatedForm', () => {
     // FIXME: ValidatedForm is not a valid Component.
     const Component = (props: any) => (
       <ValidatedForm
-        // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-        name="form"
         model={model}
         schema={schema}
         validate="onSubmit"
