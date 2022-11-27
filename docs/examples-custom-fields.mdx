@@ -41,8 +41,13 @@ const CustomAutoField = connectField(CustomAuto, {
   initialValue: false,
 });
 
-// Deprecated: You can also tell your `AutoForm`/`QuickForm`/`ValidatedQuickForm` to use it.
-<AutoForm {...props} autoField={CustomAutoField} />;
+const CustomAutoFieldDetector = () => {
+  return CustomAutoField;
+};
+
+<AutoField.componentDetectorContext.Provider value={CustomAutoFieldDetector}>
+  <Application />
+</AutoField.componentDetectorContext.Provider>;
 ```
 
 ### `CycleField`

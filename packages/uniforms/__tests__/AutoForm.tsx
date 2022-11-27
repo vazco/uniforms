@@ -113,9 +113,17 @@ describe('<AutoForm />', () => {
       const field = () => null;
       const Field = connectField(field);
 
+      // @ts-expect-error Convoluted AutoForm types
+      class CustomAutoForm extends AutoForm {
+        getAutoField() {
+          return Field;
+        }
+      }
+
       // FIXME: AutoForm is not a valid Component.
       render(
-        <AutoForm
+        // @ts-expect-error Convoluted AutoForm types
+        <CustomAutoForm
           onChange={onChange}
           schema={schema}
           autoField={Field}

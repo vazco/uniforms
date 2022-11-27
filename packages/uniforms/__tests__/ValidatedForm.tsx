@@ -1,5 +1,5 @@
 import { fireEvent, screen } from '@testing-library/react';
-import React from 'react';
+import React, { useRef } from 'react';
 import SimpleSchema from 'simpl-schema';
 import { ValidatedForm, context } from 'uniforms';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
@@ -585,8 +585,8 @@ describe('ValidatedForm', () => {
 
         return (
           // FIXME: ValidatedForm is not a valid Component.
+          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
           <ValidatedForm
-            // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
             // @ts-expect-error
             name="form"
             ref={ref => (formRef = ref)}
@@ -788,127 +788,126 @@ describe('ValidatedForm', () => {
   });
 });
 
-//   describe('validation flow', () => {
-//     const variantGroups = [
-//       {
-//         'fail-async': () => Promise.resolve(error),
-//         'fail-sync': () => error,
-//         'good-async': () => Promise.resolve(null),
-//         'good-async-silent': () => Promise.resolve(),
-//         'good-sync': () => null,
-//         'good-sync-silent': () => {},
-//       },
-//       {
-//         'fail-async': () => Promise.resolve(error),
-//         'fail-sync': () => error,
-//         'good-async': () => Promise.resolve(null),
-//         'good-async-silent': () => Promise.resolve(),
-//         'good-sync': () => null,
-//         'good-sync-silent': () => {},
-//         'pass-async': (_: string, error: any) => Promise.resolve(error),
-//         'pass-sync': (_: string, error: any) => error,
-//       },
-//       {
-//         'fail-async': () =>
-//           new Promise((_, reject) => setTimeout(() => reject(error))),
-//         'good-async': () =>
-//           new Promise(resolve => setTimeout(() => resolve('ok'))),
-//         'good-sync': () => 'ok',
-//       },
-//     ] as const;
+// describe('validation flow', () => {
+//   const variantGroups = [
+//     {
+//       'fail-async': () => Promise.resolve(error),
+//       'fail-sync': () => error,
+//       'good-async': () => Promise.resolve(null),
+//       'good-async-silent': () => Promise.resolve(),
+//       'good-sync': () => null,
+//       'good-sync-silent': () => {},
+//     },
+//     {
+//       'fail-async': () => Promise.resolve(error),
+//       'fail-sync': () => error,
+//       'good-async': () => Promise.resolve(null),
+//       'good-async-silent': () => Promise.resolve(),
+//       'good-sync': () => null,
+//       'good-sync-silent': () => {},
+//       'pass-async': (_: string, error: any) => Promise.resolve(error),
+//       'pass-sync': (_: string, error: any) => error,
+//     },
+//     {
+//       'fail-async': () =>
+//         new Promise((_, reject) => setTimeout(() => reject(error))),
+//       'good-async': () =>
+//         new Promise(resolve => setTimeout(() => resolve('ok'))),
+//       'good-sync': () => 'ok',
+//     },
+//   ] as const;
 //
-//     function cartesian<X, Y>(xs: X[], ys: Y[]) {
-//       return xs.reduce<[X, Y][]>(
-//         (xys, x) => ys.reduce((xys, y) => [...xys, [x, y]], xys),
-//         [],
-//       );
-//     }
+//   function cartesian<X, Y>(xs: X[], ys: Y[]) {
+//     return xs.reduce<[X, Y][]>(
+//       (xys, x) => ys.reduce((xys, y) => [...xys, [x, y]], xys),
+//       [],
+//     );
+//   }
 //
-//     function keys<X>(x: X) {
-//       return Object.keys(x) as (keyof X)[];
-//     }
+//   function keys<X>(x: X) {
+//     return Object.keys(x) as (keyof X)[];
+//   }
 //
-//     const cases = cartesian(
-//       [true, false] as [true, false],
-//       cartesian(
-//         keys(variantGroups[0]),
-//         cartesian(keys(variantGroups[1]), keys(variantGroups[2])),
-//       ),
+//   const cases = cartesian(
+//     [true, false] as [true, false],
+//     cartesian(
+//       keys(variantGroups[0]),
+//       cartesian(keys(variantGroups[1]), keys(variantGroups[2])),
+//     ),
+//   );
+//
+//   const alternativeSchema = new SimpleSchema2Bridge(schema.schema);
+//   alternativeSchema.getValidator = () => validator;
+//
+//   function flatPair4<A, B, C, D>([a, [b, [c, d]]]: [A, [B, [C, D]]]) {
+//     return [a, b, c, d] as const;
+//   }
+//
+//   it.each(cases.map(flatPair4))('works for %p/%p/%p/%p', async (...modes) => {
+//     const [hasError, validatorMode, onValidateMode, onSubmitMode] = modes;
+//     // FIXME: ValidatedForm is not a valid Component.
+//     const wrapper = mount<ValidatedForm | any>(
+//       <ValidatedForm
+//         error={hasError ? error : null}
+//         onSubmit={onSubmit}
+//         onValidate={onValidate}
+//         schema={alternativeSchema}
+//       />,
 //     );
 //
-//     const alternativeSchema = new SimpleSchema2Bridge(schema.schema);
-//     alternativeSchema.getValidator = () => validator;
+//     const asyncSubmission = onSubmitMode.includes('async');
+//     const asyncValidation =
+//       validatorMode.includes('async') || onValidateMode.includes('async');
+//     const hasValidationError =
+//       hasError ||
+//       (validatorMode.includes('good')
+//         ? onValidateMode.includes('fail')
+//         : !onValidateMode.includes('good'));
+//     const hasSubmissionError =
+//       hasValidationError || onSubmitMode.includes('fail');
 //
-//     function flatPair4<A, B, C, D>([a, [b, [c, d]]]: [A, [B, [C, D]]]) {
-//       return [a, b, c, d] as const;
-//     }
+//     for (let run = 1; run <= 3; ++run) {
+//       validator.mockImplementationOnce(variantGroups[0][validatorMode]);
+//       onValidate.mockImplementationOnce(variantGroups[1][onValidateMode]);
+//       onSubmit.mockImplementationOnce(variantGroups[2][onSubmitMode]);
 //
-//     it.each(cases.map(flatPair4))('works for %p/%p/%p/%p', async (...modes) => {
-//       const [hasError, validatorMode, onValidateMode, onSubmitMode] = modes;
-//       // FIXME: ValidatedForm is not a valid Component.
-//       const wrapper = mount<ValidatedForm | any>(
-//         <ValidatedForm
-//           error={hasError ? error : null}
-//           onSubmit={onSubmit}
-//           onValidate={onValidate}
-//           schema={alternativeSchema}
-//         />,
-//       );
+//       const result = wrapper.instance().submit();
+//       expect(validator).toHaveBeenCalledTimes(run);
 //
-//       const asyncSubmission = onSubmitMode.includes('async');
-//       const asyncValidation =
-//         validatorMode.includes('async') || onValidateMode.includes('async');
-//       const hasValidationError =
-//         hasError ||
-//         (validatorMode.includes('good')
-//           ? onValidateMode.includes('fail')
-//           : !onValidateMode.includes('good'));
-//       const hasSubmissionError =
-//         hasValidationError || onSubmitMode.includes('fail');
-//
-//       for (let run = 1; run <= 3; ++run) {
-//         validator.mockImplementationOnce(variantGroups[0][validatorMode]);
-//         onValidate.mockImplementationOnce(variantGroups[1][onValidateMode]);
-//         onSubmit.mockImplementationOnce(variantGroups[2][onSubmitMode]);
-//
-//         const result = wrapper.instance().submit();
-//         expect(validator).toHaveBeenCalledTimes(run);
-//
-//         if (asyncValidation) {
-//           expect(wrapper.instance().getContext().validating).toBe(true);
-//           await new Promise(resolve => process.nextTick(resolve));
-//           expect(wrapper.instance().getContext().validating).toBe(false);
-//         }
-//
+//       if (asyncValidation) {
+//         expect(wrapper.instance().getContext().validating).toBe(true);
 //         await new Promise(resolve => process.nextTick(resolve));
+//         expect(wrapper.instance().getContext().validating).toBe(false);
+//       }
 //
-//         expect(onValidate).toHaveBeenCalledTimes(run);
+//       await new Promise(resolve => process.nextTick(resolve));
 //
-//         if (hasValidationError) {
-//           expect(onSubmit).toHaveBeenCalledTimes(0);
-//           expect(wrapper.instance().getContext().error).toBe(error);
-//         } else {
-//           expect(onSubmit).toHaveBeenCalledTimes(run);
-//           expect(wrapper.instance().getContext().error).toBe(null);
+//       expect(onValidate).toHaveBeenCalledTimes(run);
 //
-//           if (asyncSubmission) {
-//             expect(wrapper.instance().getContext().submitting).toBe(true);
-//             await new Promise(resolve => setTimeout(resolve));
-//             expect(wrapper.instance().getContext().submitting).toBe(false);
-//           }
-//         }
+//       if (hasValidationError) {
+//         expect(onSubmit).not.toHaveBeenCalled();
+//         expect(wrapper.instance().getContext().error).toBe(error);
+//       } else {
+//         expect(onSubmit).toHaveBeenCalledTimes(run);
+//         expect(wrapper.instance().getContext().error).toBe(null);
 //
-//         await new Promise(resolve => setTimeout(resolve));
-//
-//         if (hasSubmissionError) {
-//           expect(wrapper.instance().getContext().error).toBe(error);
-//           await expect(result).rejects.toEqual(error);
-//         } else {
-//           expect(wrapper.instance().getContext().error).toBe(null);
-//           const submissionResult = asyncSubmission ? 'ok' : undefined;
-//           await expect(result).resolves.toEqual(submissionResult);
+//         if (asyncSubmission) {
+//           expect(wrapper.instance().getContext().submitting).toBe(true);
+//           await new Promise(resolve => setTimeout(resolve));
+//           expect(wrapper.instance().getContext().submitting).toBe(false);
 //         }
 //       }
-//     });
+//
+//       await new Promise(resolve => setTimeout(resolve));
+//
+//       if (hasSubmissionError) {
+//         expect(wrapper.instance().getContext().error).toBe(error);
+//         await expect(result).rejects.toEqual(error);
+//       } else {
+//         expect(wrapper.instance().getContext().error).toBe(null);
+//         const submissionResult = asyncSubmission ? 'ok' : undefined;
+//         await expect(result).resolves.toEqual(submissionResult);
+//       }
+//     }
 //   });
 // });

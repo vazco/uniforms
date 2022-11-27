@@ -384,5 +384,16 @@ describe('BaseForm', () => {
 
       await expect(wrapper.instance().submit()).resolves.toBe(value);
     });
+
+    it('works when unmounted on submit', () => {
+      const spy = jest.spyOn(console, 'error');
+      const wrapper = createWrapper();
+      onSubmit.mockImplementationOnce(async () => wrapper.unmount());
+      wrapper.find('form').simulate('submit');
+
+      expect(spy).not.toHaveBeenCalled();
+
+      spy.mockRestore();
+    });
   });
 });

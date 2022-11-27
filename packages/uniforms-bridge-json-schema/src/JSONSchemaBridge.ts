@@ -92,6 +92,7 @@ export default class JSONSchemaBridge extends Bridge {
 
     // Memoize for performance and referential equality.
     this.getField = memoize(this.getField.bind(this));
+    this.getInitialValue = memoize(this.getInitialValue.bind(this));
     this.getSubfields = memoize(this.getSubfields.bind(this));
     this.getType = memoize(this.getType.bind(this));
   }
@@ -102,13 +103,14 @@ export default class JSONSchemaBridge extends Bridge {
       return null;
     }
 
-    const nameParts = joinName(null, name);
+    const nameParts = joinName(null, name).map(joinName.unescape);
+    const unescapedName = joinName(nameParts);
     const rootName = joinName(nameParts.slice(0, -1));
     const baseName = nameParts[nameParts.length - 1];
     const scopedError = details.find(error => {
       const path = pathToName(error.instancePath ?? error.dataPath);
       return (
-        name === path ||
+        unescapedName === path ||
         (rootName === path && baseName === error.params.missingProperty)
       );
     });
@@ -205,7 +207,7 @@ export default class JSONSchemaBridge extends Bridge {
     }, this.schema);
   }
 
-  getInitialValue(name: string, props?: Record<string, any>): any {
+  getInitialValue(name: string): any {
     const field = this.getField(name);
     const {
       default: defaultValue = field.default ?? get(this.schema.default, name),
@@ -217,9 +219,13 @@ export default class JSONSchemaBridge extends Bridge {
     }
 
     if (type === 'array') {
-      const item = this.getInitialValue(joinName(name, '0'));
-      const items = props?.initialCount || 0;
-      return Array.from({ length: items }, () => item);
+      const item = this.getInitialValue(joinName(name, '$'));
+      if (item === undefined) {
+        return [];
+      }
+
+      const length = field?.minItems || 0;
+      return Array.from({ length }, () => item);
     }
 
     if (type === 'object') {

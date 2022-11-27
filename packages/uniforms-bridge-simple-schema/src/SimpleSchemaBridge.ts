@@ -13,6 +13,7 @@ export default class SimpleSchemaBridge extends Bridge {
 
     // Memoize for performance and referential equality.
     this.getField = memoize(this.getField.bind(this));
+    this.getInitialValue = memoize(this.getInitialValue.bind(this));
     this.getSubfields = memoize(this.getSubfields.bind(this));
     this.getType = memoize(this.getType.bind(this));
   }
@@ -64,7 +65,7 @@ export default class SimpleSchemaBridge extends Bridge {
     return definition;
   }
 
-  getInitialValue(name: string, props?: Record<string, any>): any {
+  getInitialValue(name: string): any {
     const field = this.getField(name);
     const defaultValue = field.defaultValue;
     if (defaultValue !== undefined) {
@@ -72,9 +73,13 @@ export default class SimpleSchemaBridge extends Bridge {
     }
 
     if (field.type === Array) {
-      const item = this.getInitialValue(joinName(name, '0'));
-      const items = Math.max(props?.initialCount || 0, field.minCount || 0);
-      return Array.from({ length: items }, () => item);
+      const item = this.getInitialValue(joinName(name, '$'));
+      if (item === undefined) {
+        return [];
+      }
+
+      const length = field.minCount || 0;
+      return Array.from({ length }, () => item);
     }
 
     if (field.type === Object) {

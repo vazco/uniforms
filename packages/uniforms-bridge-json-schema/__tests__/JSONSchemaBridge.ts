@@ -68,6 +68,13 @@ describe('JSONSchemaBridge', () => {
           $ref: '#/definitions/personalData',
         },
       },
+      friendsMinCount: {
+        type: 'array',
+        minItems: 3,
+        items: {
+          $ref: '#/definitions/personalData',
+        },
+      },
       hasAJob: { type: 'boolean', title: 'Currently Employed' },
       invalid: { type: 'null' },
       personalData: { $ref: '#/definitions/personalData' },
@@ -388,6 +395,23 @@ describe('JSONSchemaBridge', () => {
         expect(bridge.getError(name, error)).toEqual(error.details[0]);
       });
     });
+
+    it('works with correct error (complex instance paths - dots in names)', () => {
+      const pairs = [
+        ['["a.b.c"].["d.e/f"].g', '/a.b.c/d.e~1f/g'],
+        ['a.["b"]', '/a/b'],
+        ['a.["b"].c', '/a/b/c'],
+        ['a.["b.c"]', '/a/b.c'],
+        ['a.["b.c"].d', '/a/b.c/d'],
+        ['["a"].b', '/a/b'],
+        ['["a.b"].c', '/a.b/c'],
+      ];
+
+      pairs.forEach(([name, instancePath]) => {
+        const error = { details: [{ instancePath }] };
+        expect(bridge.getError(name, error)).toEqual(error.details[0]);
+      });
+    });
   });
 
   describe('#getErrorMessage', () => {
@@ -616,12 +640,11 @@ describe('JSONSchemaBridge', () => {
   describe('#getInitialValue', () => {
     it('works with arrays', () => {
       expect(bridge.getInitialValue('friends')).toEqual([]);
-      expect(bridge.getInitialValue('friends', { initialCount: 1 })).toEqual([
+      expect(bridge.getInitialValue('friendsMinCount')).toEqual([
+        { firstName: 'John', lastName: 'John' },
+        { firstName: 'John', lastName: 'John' },
         { firstName: 'John', lastName: 'John' },
       ]);
-      expect(
-        bridge.getInitialValue('friends.0.firstName', { initialCount: 1 }),
-      ).toBe('John');
     });
 
     it('works with objects', () => {
@@ -870,6 +893,7 @@ describe('JSONSchemaBridge', () => {
         'dateOfBirthTuple',
         'email',
         'friends',
+        'friendsMinCount',
         'hasAJob',
         'invalid',
         'personalData',

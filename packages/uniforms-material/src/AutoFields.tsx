@@ -1,10 +1,9 @@
-import { ComponentType, createElement } from 'react';
+import { ComponentType, Fragment, createElement } from 'react';
 import { useForm } from 'uniforms';
 
 import AutoField from './AutoField';
 
 export type AutoFieldsProps = {
-  autoField?: ComponentType<{ name: string }>;
   element?: ComponentType | string;
   fields?: string[];
   omitFields?: string[];
@@ -12,8 +11,7 @@ export type AutoFieldsProps = {
 };
 
 export default function AutoFields({
-  autoField = AutoField,
-  element = 'div',
+  element = Fragment,
   fields,
   omitFields = [],
   showInlineError,
@@ -28,7 +26,7 @@ export default function AutoFields({
       .filter(field => !omitFields.includes(field))
       .map(field =>
         createElement(
-          autoField,
+          AutoField,
           Object.assign(
             { key: field, name: field },
             showInlineError === undefined ? null : { showInlineError },
