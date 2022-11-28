@@ -1,6 +1,6 @@
 import * as material from 'uniforms-material';
 
-test('exports everything', () => {
+it('exports everything', () => {
   expect(material).toEqual({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),
