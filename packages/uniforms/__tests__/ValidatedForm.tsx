@@ -528,7 +528,7 @@ describe('ValidatedForm', () => {
         );
       };
 
-      const Component = () => (
+      render(
         // FIXME: ValidatedForm is not a valid Component.
         // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
         <ValidatedForm
@@ -542,12 +542,11 @@ describe('ValidatedForm', () => {
             {context => mockContext(context?.error)}
           </context.Consumer>
           <FormControls />
-        </ValidatedForm>
+        </ValidatedForm>,
+        {
+          schema: { type: SimpleSchema2Bridge },
+        },
       );
-
-      render(<Component />, {
-        schema: { type: SimpleSchema2Bridge },
-      });
       validator.mockImplementationOnce(() => {
         throw error;
       });
@@ -570,7 +569,7 @@ describe('ValidatedForm', () => {
     const anotherModel = { x: 2 };
 
     // FIXME: ValidatedForm is not a valid Component.
-    const Component = (props: any) => (
+    const Component = (props: Record<any, any>) => (
       <ValidatedForm
         model={model}
         schema={schema}
@@ -580,94 +579,88 @@ describe('ValidatedForm', () => {
     );
 
     it('does not revalidate arbitrarily', () => {
-      const { rerender } = render(<Component />, {
+      const { rerenderWithProps } = render(<Component />, {
         schema: { type: SimpleSchema2Bridge },
       });
-      rerender(<Component anything="anything" />);
+      rerenderWithProps({ anything: 'anything' });
       expect(validator).not.toBeCalled();
     });
 
     it('revalidates if `model` changes', () => {
-      const { rerender } = render(<Component />, {
+      const { rerenderWithProps } = render(<Component />, {
         schema: { type: SimpleSchema2Bridge },
       });
-      rerender(<Component model={anotherModel} />);
+      rerenderWithProps({ model: anotherModel });
       expect(validator).toHaveBeenCalledTimes(1);
     });
 
     it('revalidates if `validator` changes', () => {
-      const { rerender } = render(<Component />, {
+      const { rerenderWithProps } = render(<Component />, {
         schema: { type: SimpleSchema2Bridge },
       });
-      rerender(<Component validator={{}} />);
+      rerenderWithProps({ validator: {} });
       expect(validator).toHaveBeenCalledTimes(1);
     });
 
     it('revalidate if `schema` changes', () => {
       const anotherSchema = new SimpleSchema2Bridge(schema.schema);
-      const { rerender } = render(<Component />, {
+      const { rerenderWithProps } = render(<Component />, {
         schema: { type: SimpleSchema2Bridge },
       });
-      rerender(<Component schema={anotherSchema} />);
+      rerenderWithProps({ schema: anotherSchema });
       expect(validator).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('in `onSubmit` mode', () => {
     // FIXME: ValidatedForm is not a valid Component.
-    const Component = (props: any) => (
-      <ValidatedForm
-        model={model}
-        schema={schema}
-        validate="onSubmit"
-        {...props}
-      />
+    const Component = () => (
+      <ValidatedForm model={model} schema={schema} validate="onSubmit" />
     );
 
     it('does not revalidate when `model` changes', () => {
-      const { rerender } = render(<Component />, {
+      const { rerenderWithProps } = render(<Component />, {
         schema: { type: SimpleSchema2Bridge },
       });
-      rerender(<Component model={{}} />);
+      rerenderWithProps({ model: {} });
       expect(validator).not.toBeCalled();
     });
 
     it('does not revalidate when validator `options` change', () => {
-      const { rerender } = render(<Component />, {
+      const { rerenderWithProps } = render(<Component />, {
         schema: { type: SimpleSchema2Bridge },
       });
-      rerender(<Component validator={{}} />);
+      rerenderWithProps({ validator: {} });
       expect(validator).not.toBeCalled();
     });
 
     it('does not revalidate when `schema` changes', () => {
       const anotherSchema = new SimpleSchema2Bridge(schema.schema);
-      const { rerender } = render(<Component />, {
+      const { rerenderWithProps } = render(<Component />, {
         schema: { type: SimpleSchema2Bridge },
       });
-      rerender(<Component schema={anotherSchema} />);
+      rerenderWithProps({ schema: anotherSchema });
       expect(validator).not.toBeCalled();
     });
   });
 
   describe('in any mode', () => {
-    // FIXME: ValidatedForm is not a valid Component.
-    const Component = (props: any) => (
-      <ValidatedForm
-        // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-        name="form"
-        model={model}
-        schema={schema}
-        {...props}
-      >
-        <AutoField name="a" />
-      </ValidatedForm>
-    );
-
     it('reuses the validator between validations', () => {
-      render(<Component />, {
-        schema: { type: SimpleSchema2Bridge },
-      });
+      render(
+        // FIXME: ValidatedForm is not a valid Component.
+        <ValidatedForm
+          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
+          // @ts-expect-error
+          name="form"
+          model={model}
+          schema={schema}
+        >
+          <AutoField name="a" />
+        </ValidatedForm>,
+        {
+          schema: { type: SimpleSchema2Bridge },
+        },
+      );
       ['1', '2', '3'].forEach(value => {
         const form = screen.getByRole('form');
         const input = screen.getByLabelText('A');
@@ -681,19 +674,23 @@ describe('ValidatedForm', () => {
     it('uses the new validator settings if `validator` changes', () => {
       const validatorA = Symbol();
       const validatorB = Symbol();
-      const { rerender } = render(<Component />, {
-        schema: { type: SimpleSchema2Bridge },
-      });
+      const { rerenderWithProps } = render(
+        // FIXME: ValidatedForm is not a valid Component.
+        <ValidatedForm model={model} schema={schema} />,
+        {
+          schema: { type: SimpleSchema2Bridge },
+        },
+      );
 
-      rerender(<Component validator={validatorA} />);
+      rerenderWithProps({ validator: validatorA });
       expect(validatorForSchema).toHaveBeenCalledTimes(2);
       expect(validatorForSchema).toHaveBeenNthCalledWith(2, validatorA);
 
-      rerender(<Component validator={validatorB} />);
+      rerenderWithProps({ validator: validatorB });
       expect(validatorForSchema).toHaveBeenCalledTimes(3);
       expect(validatorForSchema).toHaveBeenNthCalledWith(3, validatorB);
 
-      rerender(<Component validator={validatorA} />);
+      rerenderWithProps({ validator: validatorA });
       expect(validatorForSchema).toHaveBeenCalledTimes(4);
       expect(validatorForSchema).toHaveBeenNthCalledWith(4, validatorA);
     });
@@ -704,11 +701,25 @@ describe('ValidatedForm', () => {
       jest
         .spyOn(alternativeSchema, 'getValidator')
         .mockImplementation(() => alternativeValidator);
-      const { rerender } = render(<Component />, {
-        schema: { type: SimpleSchema2Bridge },
-      });
+      const { rerenderWithProps } = render(
+        // FIXME: ValidatedForm is not a valid Component.
+        <ValidatedForm
+          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
+          // @ts-expect-error
+          name="form"
+          model={model}
+          schema={schema}
+        >
+          <AutoField name="a" />
+        </ValidatedForm>,
+        {
+          schema: { type: SimpleSchema2Bridge },
+        },
+      );
 
-      rerender(<Component schema={alternativeSchema} />);
+      rerenderWithProps({
+        schema: alternativeSchema,
+      });
       const form = screen.getByRole('form');
       fireEvent.submit(form);
 

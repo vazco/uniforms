@@ -1,6 +1,6 @@
 import * as semantic from 'uniforms-semantic';
 
-it('exports everything', () => {
+test('exports everything', () => {
   expect(semantic).toEqual({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),

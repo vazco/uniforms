@@ -5,7 +5,7 @@ import createContext from './_createContext';
 import createSchema from './_createSchema';
 import mount from './_mount';
 
-it('<ValidatedForm> - works', () => {
+test('<ValidatedForm> - works', () => {
   const element = <ValidatedForm schema={createSchema()} />;
   const wrapper = mount(element, createContext());
 

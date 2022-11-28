@@ -3,21 +3,21 @@ import { wrapField } from 'uniforms-bootstrap3';
 
 import mount from './_mount';
 
-it('<wrapField> - renders wrapper with correct class', () => {
+test('<wrapField> - renders wrapper with correct class', () => {
   const element = wrapField({ wrapClassName: 'container' }, <div />);
   const wrapper = mount(element);
 
   expect(wrapper.find('.container')).toHaveLength(1);
 });
 
-it('<wrapField> - renders help block', () => {
+test('<wrapField> - renders help block', () => {
   const element = wrapField({ help: 'Hint' }, <div />);
   const wrapper = mount(element);
 
   expect(wrapper.find('.help-block').text()).toBe('Hint');
 });
 
-it('<wrapField> - renders help block with specified class', () => {
+test('<wrapField> - renders help block with specified class', () => {
   const element = wrapField(
     { help: 'Hint', helpClassName: 'text-hint' },
     <div />,
@@ -27,7 +27,7 @@ it('<wrapField> - renders help block with specified class', () => {
   expect(wrapper.find('.help-block.text-hint')).toHaveLength(1);
 });
 
-it('<wrapField> - renders error block', () => {
+test('<wrapField> - renders error block', () => {
   const error = new Error();
   const element = wrapField(
     { error, showInlineError: true, errorMessage: 'Error' },
@@ -38,7 +38,7 @@ it('<wrapField> - renders error block', () => {
   expect(wrapper.find('.help-block').text()).toBe('Error');
 });
 
-it('<wrapField> - renders error block (feedbackable)', () => {
+test('<wrapField> - renders error block (feedbackable)', () => {
   const error = new Error();
   const element = wrapField({ error, feedbackable: true }, <div />);
   const wrapper = mount(element);
@@ -46,7 +46,7 @@ it('<wrapField> - renders error block (feedbackable)', () => {
   expect(wrapper.find('.form-control-feedback')).toHaveLength(1);
 });
 
-it('<wrapField> - renders error block (showInlineError=false)', () => {
+test('<wrapField> - renders error block (showInlineError=false)', () => {
   const error = new Error();
   const element = wrapField(
     { error, showInlineError: false, errorMessage: 'Error' },
@@ -57,7 +57,7 @@ it('<wrapField> - renders error block (showInlineError=false)', () => {
   expect(wrapper.find('.help-block')).toHaveLength(0);
 });
 
-it('<wrapField> - label has custom class (String)', () => {
+test('<wrapField> - label has custom class (String)', () => {
   const element = wrapField(
     {
       label: 'A field label',
@@ -70,7 +70,7 @@ it('<wrapField> - label has custom class (String)', () => {
   expect(wrapper.find('label.custom-label-class')).toHaveLength(1);
 });
 
-it('<wrapField> - label has custom class (Array[String])', () => {
+test('<wrapField> - label has custom class (Array[String])', () => {
   const element = wrapField(
     {
       label: 'A field label',

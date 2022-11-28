@@ -4,7 +4,7 @@ import { ValidatedForm } from 'uniforms-bootstrap5';
 import createSchema from './_createSchema';
 import mount from './_mount';
 
-it('<ValidatedForm> - works', () => {
+test('<ValidatedForm> - works', () => {
   const element = <ValidatedForm schema={createSchema()} />;
   const wrapper = mount(element);
 

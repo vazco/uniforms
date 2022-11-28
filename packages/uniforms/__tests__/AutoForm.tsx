@@ -166,55 +166,55 @@ describe('<AutoForm />', () => {
 
   describe('when reset', () => {
     it('reset `model`', () => {
-      // FIXME: AutoForm is not a valid Component.
-      const Component = () => (
+      const { rerenderWithProps } = render(
+        // FIXME: AutoForm is not a valid Component.
         <AutoForm autosave model={model} schema={schema}>
           <context.Consumer>
             {context => mockContext(context?.model)}
           </context.Consumer>
-        </AutoForm>
+        </AutoForm>,
+        {
+          schema: { type: SimpleSchema2Bridge },
+        },
       );
-      const { rerender } = render(<Component />, {
-        schema: { type: SimpleSchema2Bridge },
-      });
 
-      rerender(<Component />);
+      rerenderWithProps({});
 
       expect(mockContext).toHaveBeenLastCalledWith(model);
     });
 
     it('resets state `changedMap`', () => {
-      // FIXME: AutoForm is not a valid Component.
-      const Component = () => (
+      const { rerenderWithProps } = render(
+        // FIXME: AutoForm is not a valid Component.
         <AutoForm autosave model={model} schema={schema}>
           <context.Consumer>
             {context => mockContext(context?.changedMap)}
           </context.Consumer>
-        </AutoForm>
+        </AutoForm>,
+        {
+          schema: { type: SimpleSchema2Bridge },
+        },
       );
-      const { rerender } = render(<Component />, {
-        schema: { type: SimpleSchema2Bridge },
-      });
 
-      rerender(<Component />);
+      rerenderWithProps({});
 
       expect(mockContext).toHaveBeenLastCalledWith({});
     });
 
     it('resets state `changed`', () => {
-      // FIXME: AutoForm is not a valid Component.
-      const Component = () => (
+      const { rerenderWithProps } = render(
+        // FIXME: AutoForm is not a valid Component.
         <AutoForm autosave model={model} schema={schema}>
           <context.Consumer>
             {context => mockContext(context?.changed)}
           </context.Consumer>
-        </AutoForm>
+        </AutoForm>,
+        {
+          schema: { type: SimpleSchema2Bridge },
+        },
       );
-      const { rerender } = render(<Component />, {
-        schema: { type: SimpleSchema2Bridge },
-      });
 
-      rerender(<Component />);
+      rerenderWithProps({});
 
       expect(mockContext).toHaveBeenLastCalledWith(false);
     });
@@ -238,11 +238,11 @@ describe('<AutoForm />', () => {
 
     it('<AutoForm />, validates', () => {
       // FIXME: AutoForm is not a valid Component.
-      const { rerender } = render(<AutoForm schema={schema} />, {
+      const { rerenderWithProps } = render(<AutoForm schema={schema} />, {
         schema: { type: SimpleSchema2Bridge },
       });
 
-      rerender(<AutoForm schema={schema} model={model} validate="onChange" />);
+      rerenderWithProps({ model, validate: 'onChange' });
       expect(validator).toHaveBeenCalledTimes(1);
     });
   });

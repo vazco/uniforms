@@ -4,14 +4,14 @@ import { SubmitField } from 'uniforms-bootstrap4';
 import createContext from './_createContext';
 import mount from './_mount';
 
-it('<SubmitField> - renders', () => {
+test('<SubmitField> - renders', () => {
   const element = <SubmitField />;
   const wrapper = mount(element, createContext());
 
   expect(wrapper).toHaveLength(1);
 });
 
-it('<SubmitField> - renders disabled if error', () => {
+test('<SubmitField> - renders disabled if error', () => {
   const element = <SubmitField />;
   const wrapper = mount(element, createContext(undefined, { error: {} }));
 
@@ -19,7 +19,7 @@ it('<SubmitField> - renders disabled if error', () => {
   expect(wrapper.find('input').prop('disabled')).toBe(true);
 });
 
-it('<SubmitField> - renders enabled if error and enabled', () => {
+test('<SubmitField> - renders enabled if error and enabled', () => {
   const element = <SubmitField disabled={false} />;
   const wrapper = mount(element, createContext(undefined, { error: {} }));
 
@@ -27,7 +27,7 @@ it('<SubmitField> - renders enabled if error and enabled', () => {
   expect(wrapper.find('input').prop('disabled')).toBe(false);
 });
 
-it('<SubmitField> - renders a wrapper with correct class', () => {
+test('<SubmitField> - renders a wrapper with correct class', () => {
   const element = <SubmitField wrapClassName="container" />;
   const wrapper = mount(element, createContext());
 
@@ -35,7 +35,7 @@ it('<SubmitField> - renders a wrapper with correct class', () => {
   expect(wrapper.find('.container')).toHaveLength(1);
 });
 
-it('<SubmitField> - renders a wrapper with correct value', () => {
+test('<SubmitField> - renders a wrapper with correct value', () => {
   const element = <SubmitField value="Example" />;
   const wrapper = mount(element, createContext());
 

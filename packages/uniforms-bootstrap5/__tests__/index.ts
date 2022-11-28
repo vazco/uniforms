@@ -1,6 +1,6 @@
 import * as bootstrap5 from 'uniforms-bootstrap5';
 
-it('exports everything', () => {
+test('exports everything', () => {
   expect(bootstrap5).toEqual({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),

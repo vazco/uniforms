@@ -221,11 +221,11 @@ describe('JSONSchemaBridge', () => {
   const bridge = new JSONSchemaBridge(schema, validator);
 
   describe('#constructor()', () => {
-    it('sets schema correctly when has top level type of object', () => {
+    test('sets schema correctly when has top level type of object', () => {
       expect(bridge.schema).toEqual(schema);
     });
 
-    it('sets schema correctly when has top level $ref', () => {
+    test('sets schema correctly when has top level $ref', () => {
       const localSchema = {
         definitions: schema.definitions,
         $ref: '#/definitions/personalData',
@@ -241,7 +241,7 @@ describe('JSONSchemaBridge', () => {
       expect(localBridge.schema).toEqual(resolvedSchema);
     });
 
-    it('falls back to input schema', () => {
+    test('falls back to input schema', () => {
       const localSchema = { definitions: schema.definitions };
       const localBridge = new JSONSchemaBridge(localSchema, validator);
       expect(localBridge.schema).toEqual(localSchema);
@@ -249,28 +249,28 @@ describe('JSONSchemaBridge', () => {
   });
 
   describe('#getError', () => {
-    it('works without error', () => {
+    test('works without error', () => {
       expect(bridge.getError('age', undefined)).toEqual(null);
     });
 
-    it('works with invalid error', () => {
+    test('works with invalid error', () => {
       expect(bridge.getError('age', {})).toEqual(null);
       expect(bridge.getError('age', { invalid: true })).toEqual(null);
     });
 
-    it('works with correct error (data path)', () => {
+    test('works with correct error (data path)', () => {
       const error = { details: [{ dataPath: '.x' }] };
       expect(bridge.getError('x', error)).toEqual(error.details[0]);
       expect(bridge.getError('y', error)).toEqual(null);
     });
 
-    it('works with correct error (instance path)', () => {
+    test('works with correct error (instance path)', () => {
       const error = { details: [{ instancePath: '.x' }] };
       expect(bridge.getError('x', error)).toEqual(error.details[0]);
       expect(bridge.getError('y', error)).toEqual(null);
     });
 
-    it('works with correct error (data path at root)', () => {
+    test('works with correct error (data path at root)', () => {
       const error = {
         details: [
           {
@@ -287,7 +287,7 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getError('y', error)).toEqual(null);
     });
 
-    it('works with correct error (instance path at root)', () => {
+    test('works with correct error (instance path at root)', () => {
       const error = {
         details: [
           {
@@ -304,7 +304,7 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getError('y', error)).toEqual(null);
     });
 
-    it('works with correct error (data path of parent)', () => {
+    test('works with correct error (data path of parent)', () => {
       const error = {
         details: [
           {
@@ -322,7 +322,7 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getError('y.x', error)).toEqual(null);
     });
 
-    it('works with correct error (instance path of parent)', () => {
+    test('works with correct error (instance path of parent)', () => {
       const error = {
         details: [
           {
@@ -340,7 +340,7 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getError('y.x', error)).toEqual(null);
     });
 
-    it('works with correct error (complex data paths)', () => {
+    test('works with correct error (complex data paths)', () => {
       const pairs = [
         ["a.0.b.c-d.0.f/'g", ".a[0].b['c-d'][0]['f/\\'g']"],
         ['a.0.b.c-d.0.h/"i', ".a[0].b['c-d'][0]['h/\"i']"],
@@ -354,7 +354,7 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
-    it('works with correct error (complex instance paths)', () => {
+    test('works with correct error (complex instance paths)', () => {
       const pairs = [
         ["a.0.b.c-d.0.f/'g", ".a[0].b['c-d'][0]['f/\\'g']"],
         ['a.0.b.c-d.0.h/"i', ".a[0].b['c-d'][0]['h/\"i']"],
@@ -368,7 +368,7 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
-    it('works with correct error (complex data paths - JSON pointers)', () => {
+    test('works with correct error (complex data paths - JSON pointers)', () => {
       const pairs = [
         ["a.0.b.c-d.0.f/'g", "/a/0/b/c-d/0/f~1'g"],
         ['a.0.b.c-d.0.h/"i', '/a/0/b/c-d/0/h~1"i'],
@@ -382,7 +382,7 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
-    it('works with correct error (complex instance paths - JSON pointers)', () => {
+    test('works with correct error (complex instance paths - JSON pointers)', () => {
       const pairs = [
         ["a.0.b.c-d.0.f/'g", "/a/0/b/c-d/0/f~1'g"],
         ['a.0.b.c-d.0.h/"i', '/a/0/b/c-d/0/h~1"i'],
@@ -396,7 +396,7 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
-    it('works with correct error (complex instance paths - dots in names)', () => {
+    test('works with correct error (complex instance paths - dots in names)', () => {
       const pairs = [
         ['["a.b.c"].["d.e/f"].g', '/a.b.c/d.e~1f/g'],
         ['a.["b"]', '/a/b'],
@@ -415,16 +415,16 @@ describe('JSONSchemaBridge', () => {
   });
 
   describe('#getErrorMessage', () => {
-    it('works without error', () => {
+    test('works without error', () => {
       expect(bridge.getErrorMessage('age', undefined)).toBe('');
     });
 
-    it('works with invalid error', () => {
+    test('works with invalid error', () => {
       expect(bridge.getErrorMessage('age', {})).toBe('');
       expect(bridge.getErrorMessage('age', { invalid: true })).toBe('');
     });
 
-    it('works with correct error', () => {
+    test('works with correct error', () => {
       expect(
         bridge.getErrorMessage('age', {
           details: [{ dataPath: '.age', message: 'Zing!' }],
@@ -437,7 +437,7 @@ describe('JSONSchemaBridge', () => {
       ).toBe('');
     });
 
-    it('works with correct error (instance path)', () => {
+    test('works with correct error (instance path)', () => {
       expect(
         bridge.getErrorMessage('age', {
           details: [{ instancePath: '.age', message: 'Zing!' }],
@@ -452,23 +452,23 @@ describe('JSONSchemaBridge', () => {
   });
 
   describe('#getErrorMessages', () => {
-    it('works without error', () => {
+    test('works without error', () => {
       expect(bridge.getErrorMessages(null)).toEqual([]);
       expect(bridge.getErrorMessages(undefined)).toEqual([]);
     });
 
-    it('works with other errors', () => {
+    test('works with other errors', () => {
       expect(bridge.getErrorMessages('correct')).toEqual(['correct']);
       expect(bridge.getErrorMessages(999999999)).toEqual([999999999]);
     });
 
-    it('works with Error', () => {
+    test('works with Error', () => {
       expect(bridge.getErrorMessages(new Error('correct'))).toEqual([
         'correct',
       ]);
     });
 
-    it('works with ValidationError', () => {
+    test('works with ValidationError', () => {
       expect(
         bridge.getErrorMessages({
           details: [{ dataPath: '.age', message: 'Zing!' }],
@@ -481,7 +481,7 @@ describe('JSONSchemaBridge', () => {
       ).toEqual(['Ignore!']);
     });
 
-    it('works with ValidationError (instance path)', () => {
+    test('works with ValidationError (instance path)', () => {
       expect(
         bridge.getErrorMessages({
           details: [{ instancePath: '.age', message: 'Zing!' }],
@@ -496,7 +496,7 @@ describe('JSONSchemaBridge', () => {
   });
 
   describe('#getField', () => {
-    it('returns correct definition (flat)', () => {
+    test('returns correct definition (flat)', () => {
       expect(bridge.getField('age')).toEqual({
         type: 'integer',
         default: 24,
@@ -504,7 +504,7 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
-    it('returns correct definition (flat with $ref)', () => {
+    test('returns correct definition (flat with $ref)', () => {
       expect(bridge.getField('billingAddress')).toEqual({
         properties: expect.objectContaining({
           city: { type: 'string', uniforms: { label: false, required: false } },
@@ -523,18 +523,18 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
-    it('returns correct definition (nested)', () => {
+    test('returns correct definition (nested)', () => {
       expect(bridge.getField('email.work')).toEqual({ type: 'string' });
     });
 
-    it('returns correct definition (nested with $ref)', () => {
+    test('returns correct definition (nested with $ref)', () => {
       expect(bridge.getField('personalData.firstName')).toEqual({
         default: 'John',
         type: 'string',
       });
     });
 
-    it('returns correct definition (dots in name)', () => {
+    test('returns correct definition (dots in name)', () => {
       expect(bridge.getField('["path.with.a.dot"]')).toMatchObject({
         type: 'object',
       });
@@ -556,30 +556,30 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
-    it('returns correct definition ($ref pointing to $ref)', () => {
+    test('returns correct definition ($ref pointing to $ref)', () => {
       expect(bridge.getField('personalData.middleName')).toEqual({
         type: 'string',
       });
     });
 
-    it('returns correct definition (array tuple)', () => {
+    test('returns correct definition (array tuple)', () => {
       expect(bridge.getField('dateOfBirthTuple.1')).toEqual({ type: 'string' });
     });
 
-    it('returns correct definition (array flat $ref)', () => {
+    test('returns correct definition (array flat $ref)', () => {
       expect(bridge.getField('friends.$')).toEqual(
         expect.objectContaining({ type: expect.any(String) }),
       );
     });
 
-    it('returns correct definition (array flat $ref, nested property)', () => {
+    test('returns correct definition (array flat $ref, nested property)', () => {
       expect(bridge.getField('friends.$.firstName')).toEqual({
         default: 'John',
         type: 'string',
       });
     });
 
-    it('returns correct definition when schema has top level $ref', () => {
+    test('returns correct definition when schema has top level $ref', () => {
       const localBridge = new JSONSchemaBridge(
         { definitions: schema.definitions, $ref: '#/definitions/personalData' },
         validator,
@@ -591,7 +591,7 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
-    it('throws when resolving field schema is not possible', () => {
+    test('throws when resolving field schema is not possible', () => {
       const localBridge = new JSONSchemaBridge(
         { definitions: schema.definitions, $ref: '#/definitions/personalData' },
         validator,
@@ -602,13 +602,13 @@ describe('JSONSchemaBridge', () => {
       );
     });
 
-    it('throws when resolving field schema is not possible (with allOf with $ref field)', () => {
+    test('throws when resolving field schema is not possible (with allOf with $ref field)', () => {
       expect(() => bridge.getField('shippingAddress.street.invalid')).toThrow(
         /Field not found in schema/,
       );
     });
 
-    it('throws when resolving field schema is not possible (with allOf with $ref field without properties prop)', () => {
+    test('throws when resolving field schema is not possible (with allOf with $ref field without properties prop)', () => {
       const localBridge = new JSONSchemaBridge(
         {
           definitions: schema.definitions,
@@ -630,7 +630,7 @@ describe('JSONSchemaBridge', () => {
       );
     });
 
-    it('returns correct definition (allOf with $ref)', () => {
+    test('returns correct definition (allOf with $ref)', () => {
       expect(bridge.getField('shippingAddress.street')).toEqual({
         type: 'string',
       });
@@ -638,7 +638,7 @@ describe('JSONSchemaBridge', () => {
   });
 
   describe('#getInitialValue', () => {
-    it('works with arrays', () => {
+    test('works with arrays', () => {
       expect(bridge.getInitialValue('friends')).toEqual([]);
       expect(bridge.getInitialValue('friendsMinCount')).toEqual([
         { firstName: 'John', lastName: 'John' },
@@ -647,25 +647,25 @@ describe('JSONSchemaBridge', () => {
       ]);
     });
 
-    it('works with objects', () => {
+    test('works with objects', () => {
       expect(bridge.getInitialValue('billingAddress')).toEqual({});
     });
 
-    it('works with undefined primitives', () => {
+    test('works with undefined primitives', () => {
       expect(bridge.getInitialValue('salary')).toBe(undefined);
     });
 
-    it('works with defined primitives', () => {
+    test('works with defined primitives', () => {
       expect(bridge.getInitialValue('age')).toBe(24);
     });
 
-    it('works with default values', () => {
+    test('works with default values', () => {
       expect(bridge.getInitialValue('personalData.firstName')).toBe('John');
     });
   });
 
   describe('#getProps', () => {
-    it('works with allowedValues', () => {
+    test('works with allowedValues', () => {
       expect(bridge.getProps('shippingAddress.type')).toEqual({
         allowedValues: ['residential', 'business'],
         label: 'Type',
@@ -673,7 +673,7 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
-    it('works with allowedValues from props', () => {
+    test('works with allowedValues from props', () => {
       expect(
         bridge.getProps('shippingAddress.type', { allowedValues: [1] }),
       ).toEqual({
@@ -683,14 +683,14 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
-    it('works with allowedValues from props', () => {
+    test('works with allowedValues from props', () => {
       expect(bridge.getProps('forcedRequired')).toEqual({
         label: 'Forced required',
         required: true,
       });
     });
 
-    it('works with custom component', () => {
+    test('works with custom component', () => {
       expect(bridge.getProps('age')).toEqual({
         component: 'span',
         label: 'Age',
@@ -698,28 +698,28 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
-    it('works with label (default)', () => {
+    test('works with label (default)', () => {
       expect(bridge.getProps('withLabel')).toEqual({
         label: 'Example',
         required: false,
       });
     });
 
-    it('works with label (custom)', () => {
+    test('works with label (custom)', () => {
       expect(bridge.getProps('dateOfBirth', { label: 'Death' })).toEqual({
         label: 'Date of birth',
         required: true,
       });
     });
 
-    it('works with label (true)', () => {
+    test('works with label (true)', () => {
       expect(bridge.getProps('dateOfBirth', { label: true })).toEqual({
         label: 'Date of birth',
         required: true,
       });
     });
 
-    it('works with property title as default label', () => {
+    test('works with property title as default label', () => {
       expect(bridge.getProps('hasAJob', { label: true })).toEqual({
         allowedValues: undefined,
         label: 'Currently Employed',
@@ -729,28 +729,28 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
-    it('works with placeholder (custom)', () => {
+    test('works with placeholder (custom)', () => {
       expect(bridge.getProps('email.work', { placeholder: 'Email' })).toEqual({
         label: 'Work',
         required: true,
       });
     });
 
-    it('works with placeholder (true)', () => {
+    test('works with placeholder (true)', () => {
       expect(bridge.getProps('email.work', { placeholder: true })).toEqual({
         label: 'Work',
         required: true,
       });
     });
 
-    it('works with placeholder (falsy)', () => {
+    test('works with placeholder (falsy)', () => {
       expect(bridge.getProps('email.work', { placeholder: null })).toEqual({
         label: 'Work',
         required: true,
       });
     });
 
-    it('works with placeholder (label falsy)', () => {
+    test('works with placeholder (label falsy)', () => {
       expect(
         bridge.getProps('email.work', { label: null, placeholder: true }),
       ).toEqual({
@@ -766,7 +766,7 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
-    it('works with Number type', () => {
+    test('works with Number type', () => {
       expect(bridge.getProps('salary')).toEqual({
         allowedValues: ['low', 'medium', 'height'],
         decimal: true,
@@ -777,7 +777,7 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
-    it('works with options (array)', () => {
+    test('works with options (array)', () => {
       expect(bridge.getProps('billingAddress.state').transform('AL')).toBe(
         'Alabama',
       );
@@ -792,14 +792,14 @@ describe('JSONSchemaBridge', () => {
       );
     });
 
-    it('works with options (object)', () => {
+    test('works with options (object)', () => {
       expect(bridge.getProps('salary').transform('low')).toBe(6000);
       expect(bridge.getProps('salary').transform('medium')).toBe(12000);
       expect(bridge.getProps('salary').allowedValues[0]).toBe('low');
       expect(bridge.getProps('salary').allowedValues[1]).toBe('medium');
     });
 
-    it('works with options from props', () => {
+    test('works with options from props', () => {
       const props = { options: { minimal: 4000, avarage: 8000 } };
       expect(bridge.getProps('salary', props).transform('minimal')).toBe(4000);
       expect(bridge.getProps('salary', props).transform('avarage')).toBe(8000);
@@ -807,7 +807,7 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getProps('salary', props).allowedValues[1]).toBe('avarage');
     });
 
-    it('works with type', () => {
+    test('works with type', () => {
       expect(bridge.getProps('password')).toEqual({
         label: 'Password',
         required: false,
@@ -825,7 +825,7 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
-    it('works with other props', () => {
+    test('works with other props', () => {
       expect(bridge.getProps('personalData.firstName', { x: 1, y: 1 })).toEqual(
         {
           label: 'First name',
@@ -834,57 +834,57 @@ describe('JSONSchemaBridge', () => {
       );
     });
 
-    it('works with allOf in items', () => {
+    test('works with allOf in items', () => {
       expect(bridge.getProps('arrayWithAllOf.0.child')).toEqual({
         label: 'Child',
         required: true,
       });
     });
 
-    it('works with anyOf for a non-object computed property (required default value)', () => {
+    test('works with anyOf for a non-object computed property (required default value)', () => {
       expect(bridge.getProps('nonObjectAnyOf')).toHaveProperty(
         'required',
         false,
       );
     });
 
-    it('works with anyOf for a non-object computed property (required)', () => {
+    test('works with anyOf for a non-object computed property (required)', () => {
       expect(bridge.getProps('nonObjectAnyOfRequired')).toHaveProperty(
         'required',
         true,
       );
     });
 
-    it('works with anyOf for a non-object computed property (properties not defined)', () => {
+    test('works with anyOf for a non-object computed property (properties not defined)', () => {
       expect(bridge.getProps('nonObjectAnyOf')).toHaveProperty(
         'properties',
         undefined,
       );
     });
 
-    it('works with maxItems in props', () => {
+    test('works with maxItems in props', () => {
       expect(bridge.getProps('arrayWithAllOf')).toHaveProperty('maxCount', 3);
     });
 
-    it('works with minItems in props', () => {
+    test('works with minItems in props', () => {
       expect(bridge.getProps('arrayWithAllOf')).toHaveProperty('minCount', 1);
     });
 
-    it('works with maximum in props', () => {
+    test('works with maximum in props', () => {
       expect(bridge.getProps('passwordNumeric')).toHaveProperty('max', 9999);
     });
 
-    it('works with minimum in props', () => {
+    test('works with minimum in props', () => {
       expect(bridge.getProps('passwordNumeric')).toHaveProperty('min', 1000);
     });
 
-    it('works with multipleOf in props', () => {
+    test('works with multipleOf in props', () => {
       expect(bridge.getProps('passwordNumeric')).toHaveProperty('step', 3);
     });
   });
 
   describe('#getSubfields', () => {
-    it('works on top level', () => {
+    test('works on top level', () => {
       expect(bridge.getSubfields()).toEqual([
         'age',
         'billingAddress',
@@ -914,7 +914,7 @@ describe('JSONSchemaBridge', () => {
       ]);
     });
 
-    it('works with nested types', () => {
+    test('works with nested types', () => {
       expect(bridge.getSubfields('arrayWithAllOf.0')).toEqual(['child']);
       expect(bridge.getSubfields('shippingAddress')).toEqual([
         'city',
@@ -924,7 +924,7 @@ describe('JSONSchemaBridge', () => {
       ]);
     });
 
-    it('works with recursive types', () => {
+    test('works with recursive types', () => {
       expect(bridge.getSubfields('recursive')).toEqual(['field', 'recursive']);
       expect(bridge.getSubfields('recursive.recursive')).toEqual([
         'field',
@@ -932,12 +932,12 @@ describe('JSONSchemaBridge', () => {
       ]);
     });
 
-    it('works with primitives', () => {
+    test('works with primitives', () => {
       expect(bridge.getSubfields('personalData.firstName')).toEqual([]);
       expect(bridge.getSubfields('age')).toEqual([]);
     });
 
-    it('works when schema has top level $ref', () => {
+    test('works when schema has top level $ref', () => {
       const localBridge = new JSONSchemaBridge(
         { definitions: schema.definitions, $ref: '#/definitions/address' },
         validator,
@@ -946,11 +946,11 @@ describe('JSONSchemaBridge', () => {
       expect(localBridge.getSubfields()).toEqual(['city', 'state', 'street']);
     });
 
-    it('works when an object does not have properties', () => {
+    test('works when an object does not have properties', () => {
       expect(bridge.getSubfields('objectWithoutProperties')).toEqual([]);
     });
 
-    it('works on top level when schema does not have properties', () => {
+    test('works on top level when schema does not have properties', () => {
       const localBridge = new JSONSchemaBridge(
         { definitions: schema.definitions, $ref: '#/definitions/lastName' },
         validator,
@@ -961,7 +961,7 @@ describe('JSONSchemaBridge', () => {
   });
 
   describe('#getType', () => {
-    it('works with any type', () => {
+    test('works with any type', () => {
       expect(bridge.getType('age')).toBe(Number);
       expect(bridge.getType('billingAddress')).toBe(Object);
       expect(bridge.getType('billingAddress.city')).toBe(String);
@@ -988,7 +988,7 @@ describe('JSONSchemaBridge', () => {
   });
 
   describe('#getValidator', () => {
-    it('calls correct validator', () => {
+    test('calls correct validator', () => {
       expect(bridge.getValidator()).toBe(validator);
     });
   });

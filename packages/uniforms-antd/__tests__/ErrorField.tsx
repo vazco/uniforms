@@ -11,14 +11,14 @@ const error = {
   message: 'X is required [validation-error]',
 };
 
-it('<ErrorField> - works', () => {
+test('<ErrorField> - works', () => {
   const element = <ErrorField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find(ErrorField)).toHaveLength(1);
 });
 
-it('<ErrorField> - default props override', () => {
+test('<ErrorField> - default props override', () => {
   const divProps = { style: {} };
 
   const element = <ErrorField name="x" {...divProps} />;
@@ -29,7 +29,7 @@ it('<ErrorField> - default props override', () => {
   );
 });
 
-it('<ErrorField> - renders correct error message (context)', () => {
+test('<ErrorField> - renders correct error message (context)', () => {
   const element = <ErrorField name="x" />;
   const wrapper = mount(
     element,
@@ -40,7 +40,7 @@ it('<ErrorField> - renders correct error message (context)', () => {
   expect(wrapper.find(ErrorField).text()).toBe('X is required');
 });
 
-it('<ErrorField> - renders correct error message (specified)', () => {
+test('<ErrorField> - renders correct error message (specified)', () => {
   const element = (
     <ErrorField
       name="x"
@@ -54,7 +54,7 @@ it('<ErrorField> - renders correct error message (specified)', () => {
   expect(wrapper.find(ErrorField).text()).toBe('X is required');
 });
 
-it('<ErrorField> - renders correct children if specified', () => {
+test('<ErrorField> - renders correct children if specified', () => {
   const element = <ErrorField name="x">Error</ErrorField>;
   const wrapper = mount(
     element,

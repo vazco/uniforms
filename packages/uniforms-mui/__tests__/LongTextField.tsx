@@ -5,14 +5,14 @@ import { LongTextField } from 'uniforms-mui';
 import createContext from './_createContext';
 import mount from './_mount';
 
-it('<LongTextField> - renders a TextField', () => {
+test('<LongTextField> - renders a TextField', () => {
   const element = <LongTextField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find(TextField)).toHaveLength(1);
 });
 
-it('<LongTextField> - renders a TextField with correct disabled state', () => {
+test('<LongTextField> - renders a TextField with correct disabled state', () => {
   const element = <LongTextField name="x" disabled />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -20,7 +20,7 @@ it('<LongTextField> - renders a TextField with correct disabled state', () => {
   expect(wrapper.find(TextField).prop('disabled')).toBe(true);
 });
 
-it('<LongTextField> - renders a TextField with correct readOnly state', () => {
+test('<LongTextField> - renders a TextField with correct readOnly state', () => {
   const element = <LongTextField name="x" inputProps={{ readOnly: true }} />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -28,7 +28,7 @@ it('<LongTextField> - renders a TextField with correct readOnly state', () => {
   expect(wrapper.find(TextField).prop('inputProps')!.readOnly).toBe(true);
 });
 
-it('<LongTextField> - renders a TextField with correct id (inherited)', () => {
+test('<LongTextField> - renders a TextField with correct id (inherited)', () => {
   const element = <LongTextField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -36,7 +36,7 @@ it('<LongTextField> - renders a TextField with correct id (inherited)', () => {
   expect(wrapper.find(TextField).prop('id')).toBeTruthy();
 });
 
-it('<LongTextField> - renders a TextField with correct id (specified)', () => {
+test('<LongTextField> - renders a TextField with correct id (specified)', () => {
   const element = <LongTextField name="x" id="y" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -44,7 +44,7 @@ it('<LongTextField> - renders a TextField with correct id (specified)', () => {
   expect(wrapper.find(TextField).prop('id')).toBe('y');
 });
 
-it('<LongTextField> - renders a TextField with correct name', () => {
+test('<LongTextField> - renders a TextField with correct name', () => {
   const element = <LongTextField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -52,7 +52,7 @@ it('<LongTextField> - renders a TextField with correct name', () => {
   expect(wrapper.find(TextField).prop('name')).toBe('x');
 });
 
-it('<LongTextField> - renders a TextField with correct placeholder', () => {
+test('<LongTextField> - renders a TextField with correct placeholder', () => {
   const element = <LongTextField name="x" placeholder="y" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -60,7 +60,7 @@ it('<LongTextField> - renders a TextField with correct placeholder', () => {
   expect(wrapper.find(TextField).prop('placeholder')).toBe('y');
 });
 
-it('<LongTextField> - renders a TextField with correct value (default)', () => {
+test('<LongTextField> - renders a TextField with correct value (default)', () => {
   const element = <LongTextField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -68,7 +68,7 @@ it('<LongTextField> - renders a TextField with correct value (default)', () => {
   expect(wrapper.find(TextField).prop('value')).toBe('');
 });
 
-it('<LongTextField> - renders a TextField with correct value (model)', () => {
+test('<LongTextField> - renders a TextField with correct value (model)', () => {
   const element = <LongTextField name="x" />;
   const wrapper = mount(
     element,
@@ -79,7 +79,7 @@ it('<LongTextField> - renders a TextField with correct value (model)', () => {
   expect(wrapper.find(TextField).prop('value')).toBe('y');
 });
 
-it('<LongTextField> - renders a TextField with correct value (specified)', () => {
+test('<LongTextField> - renders a TextField with correct value (specified)', () => {
   const element = <LongTextField name="x" value="y" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -87,7 +87,7 @@ it('<LongTextField> - renders a TextField with correct value (specified)', () =>
   expect(wrapper.find(TextField).prop('value')).toBe('y');
 });
 
-it('<LongTextField> - renders a TextField which correctly reacts on change', () => {
+test('<LongTextField> - renders a TextField which correctly reacts on change', () => {
   const onChange = jest.fn();
 
   const element = <LongTextField name="x" />;
@@ -102,7 +102,7 @@ it('<LongTextField> - renders a TextField which correctly reacts on change', () 
   expect(onChange).toHaveBeenLastCalledWith('x', 'y');
 });
 
-it('<LongTextField> - renders a TextField which correctly reacts on change (empty)', () => {
+test('<LongTextField> - renders a TextField which correctly reacts on change (empty)', () => {
   const onChange = jest.fn();
 
   const element = <LongTextField name="x" />;
@@ -117,7 +117,7 @@ it('<LongTextField> - renders a TextField which correctly reacts on change (empt
   expect(onChange).toHaveBeenLastCalledWith('x', '');
 });
 
-it('<LongTextField> - renders a TextField which correctly reacts on change (same value)', () => {
+test('<LongTextField> - renders a TextField which correctly reacts on change (same value)', () => {
   const onChange = jest.fn();
 
   const element = <LongTextField name="x" />;
@@ -132,14 +132,14 @@ it('<LongTextField> - renders a TextField which correctly reacts on change (same
   expect(onChange).toHaveBeenLastCalledWith('x', 'y');
 });
 
-it('<LongTextField> - renders a label', () => {
+test('<LongTextField> - renders a label', () => {
   const element = <LongTextField name="x" label="y" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find(TextField).prop('label')).toBe('y');
 });
 
-it('<LongTextField> - renders a TextField with correct error text (specified)', () => {
+test('<LongTextField> - renders a TextField with correct error text (specified)', () => {
   const error = new Error();
   const element = (
     <LongTextField
@@ -154,7 +154,7 @@ it('<LongTextField> - renders a TextField with correct error text (specified)', 
   expect(wrapper.find(TextField).prop('helperText')).toBe('Error');
 });
 
-it('<LongTextField> - renders a TextField with correct error text (showInlineError=false)', () => {
+test('<LongTextField> - renders a TextField with correct error text (showInlineError=false)', () => {
   const error = new Error();
   const element = (
     <LongTextField

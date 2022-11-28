@@ -16,14 +16,14 @@ beforeEach(() => {
   onChange.mockClear();
 });
 
-it('<ListAddField> - works', () => {
+test('<ListAddField> - works', () => {
   const element = <ListAddField name="x.$" />;
   const wrapper = mount(element, context());
 
   expect(wrapper.find(ListAddField)).toHaveLength(1);
 });
 
-it('<ListAddField> - prevents onClick when disabled', () => {
+test('<ListAddField> - prevents onClick when disabled', () => {
   const element = <ListAddField name="x.1" disabled />;
   const wrapper = mount(element, context());
 
@@ -31,7 +31,7 @@ it('<ListAddField> - prevents onClick when disabled', () => {
   expect(onChange).not.toHaveBeenCalled();
 });
 
-it('<ListAddField> - prevents onClick when limit reached', () => {
+test('<ListAddField> - prevents onClick when limit reached', () => {
   const element = <ListAddField name="x.1" />;
   const wrapper = mount(element, context({ x: { maxCount: 0 } }));
 
@@ -39,7 +39,7 @@ it('<ListAddField> - prevents onClick when limit reached', () => {
   expect(onChange).not.toHaveBeenCalled();
 });
 
-it('<ListAddField> - correctly reacts on click', () => {
+test('<ListAddField> - correctly reacts on click', () => {
   const element = <ListAddField name="x.1" value="y" />;
   const wrapper = mount(element, context());
 
@@ -47,7 +47,7 @@ it('<ListAddField> - correctly reacts on click', () => {
   expect(onChange).toHaveBeenLastCalledWith('x', ['y']);
 });
 
-it('<ListAddField> - correctly reacts on keyboard enter key', () => {
+test('<ListAddField> - correctly reacts on keyboard enter key', () => {
   const element = <ListAddField name="x.1" value="y" />;
   const wrapper = mount(element, context());
 

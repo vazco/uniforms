@@ -1,5 +1,5 @@
-import { render as renderOnScreen } from '@testing-library/react';
-import React, { ReactElement } from 'react';
+import { render as renderOnScreen, RenderResult } from '@testing-library/react';
+import React, { cloneElement, ReactElement } from 'react';
 import SimpleSchema, { SimpleSchemaDefinition } from 'simpl-schema';
 import { BaseForm, context, Context, randomIds } from 'uniforms';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
@@ -11,7 +11,9 @@ export function render(
   schema: SimpleSchemaDefinition,
   contextValueExtension?: Partial<Context<unknown>>,
   initialModel?: object,
-) {
+): RenderResult & {
+  rerenderWithProps: (props: Record<any, any>) => void;
+} {
   const contextValue = {
     changed: false,
     changedMap: {},
@@ -37,11 +39,19 @@ export function render(
     formRef: {} as BaseForm<unknown>,
   };
 
-  return renderOnScreen(element, {
+  const originalRender = renderOnScreen(element, {
     wrapper({ children }) {
       return (
         <context.Provider value={contextValue}>{children}</context.Provider>
       );
     },
   });
+
+  const { rerender } = originalRender;
+
+  const rerenderWithProps = (props: Record<any, any>) => {
+    rerender(cloneElement(element, props));
+  };
+
+  return { rerenderWithProps, ...originalRender };
 }

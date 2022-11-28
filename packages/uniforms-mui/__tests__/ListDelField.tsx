@@ -14,7 +14,7 @@ const context = (schema?: object) =>
     { onChange, model: { x: ['x', 'y', 'z'] } },
   );
 
-it('<ListDelField> - works', () => {
+test('<ListDelField> - works', () => {
   const element = <ListDelField name="x.1" />;
   const wrapper = mount(element, context());
 
@@ -56,7 +56,7 @@ test.skip('<ListDelField> - correctly reacts on click', () => {
   expect(onChange).toHaveBeenLastCalledWith('x', ['x', 'z']);
 });
 
-it('<ListDelField> - renders correct icon', () => {
+test('<ListDelField> - renders correct icon', () => {
   const element = <ListDelField name="x.1" icon={<Icon />} />;
   const wrapper = mount(element, context());
 

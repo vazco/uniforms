@@ -5,21 +5,21 @@ import { wrapField } from 'uniforms-material';
 
 import mount from './_mount';
 
-it('<wrapField> - renders wrapper', () => {
+test('<wrapField> - renders wrapper', () => {
   const element = wrapField({}, <div />);
   const wrapper = mount(element);
 
   expect(wrapper.find(FormControl)).toHaveLength(1);
 });
 
-it('<wrapField> - renders wrapper with helper text', () => {
+test('<wrapField> - renders wrapper with helper text', () => {
   const element = wrapField({ helperText: 'Helper text' }, <div />);
   const wrapper = mount(element);
 
   expect(wrapper.find(FormHelperText).text()).toBe('Helper text');
 });
 
-it('<wrapField> - renders wrapper with error', () => {
+test('<wrapField> - renders wrapper with error', () => {
   const element = wrapField(
     {
       showInlineError: true,

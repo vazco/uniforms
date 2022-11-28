@@ -15,7 +15,7 @@ const error = {
 };
 
 describe('@RTL - ErrorField tests', () => {
-  it('<ErrorField> - default props are not passed when MUI theme props are specified', () => {
+  test('<ErrorField> - default props are not passed when MUI theme props are specified', () => {
     const theme = createMuiTheme({
       props: {
         MuiFormControl: {
@@ -45,7 +45,7 @@ describe('@RTL - ErrorField tests', () => {
     ).toHaveLength(1);
   });
 
-  it('<ErrorField> - default props are passed when MUI theme props are absent', () => {
+  test('<ErrorField> - default props are passed when MUI theme props are absent', () => {
     const theme = createMuiTheme({});
     const { container } = render(
       <ThemeProvider theme={theme}>
@@ -67,7 +67,7 @@ describe('@RTL - ErrorField tests', () => {
     ).toHaveLength(0);
   });
 
-  it('<ErrorField> - explicit props are passed when MUI theme props are specified', () => {
+  test('<ErrorField> - explicit props are passed when MUI theme props are specified', () => {
     const theme = createMuiTheme({
       props: {
         MuiFormControl: { fullWidth: true, margin: 'dense', variant: 'filled' },
@@ -100,14 +100,14 @@ describe('@RTL - ErrorField tests', () => {
   });
 });
 
-it('<ErrorField> - works', () => {
+test('<ErrorField> - works', () => {
   const element = <ErrorField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find(ErrorField)).toHaveLength(1);
 });
 
-it('<ErrorField> - renders correct error message (context)', () => {
+test('<ErrorField> - renders correct error message (context)', () => {
   const element = <ErrorField name="x" />;
   const wrapper = mount(
     element,
@@ -118,7 +118,7 @@ it('<ErrorField> - renders correct error message (context)', () => {
   expect(wrapper.find(ErrorField).text()).toBe('X is required');
 });
 
-it('<ErrorField> - renders correct error message (specified)', () => {
+test('<ErrorField> - renders correct error message (specified)', () => {
   const element = (
     <ErrorField
       name="x"

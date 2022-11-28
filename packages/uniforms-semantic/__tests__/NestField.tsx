@@ -4,7 +4,7 @@ import { AutoField, NestField } from 'uniforms-semantic';
 import createContext from './_createContext';
 import mount from './_mount';
 
-it('<NestField> - renders an <AutoField> for each field', () => {
+test('<NestField> - renders an <AutoField> for each field', () => {
   const element = <NestField name="x" />;
   const wrapper = mount(
     element,
@@ -20,7 +20,7 @@ it('<NestField> - renders an <AutoField> for each field', () => {
   expect(wrapper.find(AutoField).at(1).prop('name')).toBe('b');
 });
 
-it('<NestField> - renders custom content if given', () => {
+test('<NestField> - renders custom content if given', () => {
   const element = (
     <NestField name="x">
       <article data-test="content" />
@@ -40,7 +40,7 @@ it('<NestField> - renders custom content if given', () => {
   expect(wrapper.find('article').prop('data-test')).toBe('content');
 });
 
-it('<NestField> - renders a label', () => {
+test('<NestField> - renders a label', () => {
   const element = <NestField name="x" label="y" />;
   const wrapper = mount(
     element,
@@ -55,7 +55,7 @@ it('<NestField> - renders a label', () => {
   expect(wrapper.find('label').at(0).text()).toBe('y');
 });
 
-it('<NestField> - renders a wrapper with unknown props', () => {
+test('<NestField> - renders a wrapper with unknown props', () => {
   const element = <NestField name="x" data-x="x" data-y="y" data-z="z" />;
   const wrapper = mount(
     element,
@@ -71,7 +71,7 @@ it('<NestField> - renders a wrapper with unknown props', () => {
   expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });
 
-it('<NestField> - renders correct error text (specified)', () => {
+test('<NestField> - renders correct error text (specified)', () => {
   const error = new Error();
   const element = (
     <NestField name="x" error={error} showInlineError errorMessage="Error" />
@@ -88,7 +88,7 @@ it('<NestField> - renders correct error text (specified)', () => {
   expect(wrapper.children().at(0).text()).toBe('Error');
 });
 
-it('<NestField> - renders correct error text (showInlineError=false)', () => {
+test('<NestField> - renders correct error text (showInlineError=false)', () => {
   const error = new Error();
   const element = (
     <NestField

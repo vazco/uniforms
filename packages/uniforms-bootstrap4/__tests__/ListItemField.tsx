@@ -4,7 +4,7 @@ import { AutoField, ListDelField, ListItemField } from 'uniforms-bootstrap4';
 import createContext from './_createContext';
 import mount from './_mount';
 
-it('<ListItemField> - works', () => {
+test('<ListItemField> - works', () => {
   const element = <ListItemField name="x.1" />;
   const wrapper = mount(
     element,
@@ -14,7 +14,7 @@ it('<ListItemField> - works', () => {
   expect(wrapper.find(ListItemField)).toHaveLength(1);
 });
 
-it('<ListItemField> - renders ListDelField', () => {
+test('<ListItemField> - renders ListDelField', () => {
   const element = <ListItemField name="x.1" />;
   const wrapper = mount(
     element,
@@ -25,7 +25,7 @@ it('<ListItemField> - renders ListDelField', () => {
   expect(wrapper.find(ListDelField).childAt(0).prop('name')).toBe('x.1');
 });
 
-it('<ListItemField> - renders AutoField', () => {
+test('<ListItemField> - renders AutoField', () => {
   const element = <ListItemField name="x.1" />;
   const wrapper = mount(
     element,
@@ -35,7 +35,7 @@ it('<ListItemField> - renders AutoField', () => {
   expect(wrapper.find(AutoField)).toHaveLength(1);
 });
 
-it('<ListItemField> - renders children if specified', () => {
+test('<ListItemField> - renders children if specified', () => {
   const Child = jest.fn(() => <div />) as React.FC<any>;
 
   const element = (

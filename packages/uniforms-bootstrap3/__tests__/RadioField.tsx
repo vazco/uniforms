@@ -4,7 +4,7 @@ import { RadioField } from 'uniforms-bootstrap3';
 import createContext from './_createContext';
 import mount from './_mount';
 
-it('<RadioField> - renders a set of checkboxes', () => {
+test('<RadioField> - renders a set of checkboxes', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
@@ -14,7 +14,7 @@ it('<RadioField> - renders a set of checkboxes', () => {
   expect(wrapper.find('input')).toHaveLength(2);
 });
 
-it('<RadioField> - renders a set of inline checkboxes', () => {
+test('<RadioField> - renders a set of inline checkboxes', () => {
   const element = <RadioField name="x" inline />;
   const wrapper = mount(
     element,
@@ -25,7 +25,7 @@ it('<RadioField> - renders a set of inline checkboxes', () => {
   expect(wrapper.find('.radio-inline')).toHaveLength(2);
 });
 
-it('<RadioField> - renders a set of checkboxes with correct disabled state', () => {
+test('<RadioField> - renders a set of checkboxes with correct disabled state', () => {
   const element = <RadioField name="x" disabled />;
   const wrapper = mount(
     element,
@@ -37,7 +37,7 @@ it('<RadioField> - renders a set of checkboxes with correct disabled state', () 
   expect(wrapper.find('input').at(1).prop('disabled')).toBe(true);
 });
 
-it('<RadioField> - renders a set of checkboxes with correct readOnly state', () => {
+test('<RadioField> - renders a set of checkboxes with correct readOnly state', () => {
   const onChange = jest.fn();
 
   const element = <RadioField name="x" readOnly />;
@@ -54,7 +54,7 @@ it('<RadioField> - renders a set of checkboxes with correct readOnly state', () 
   expect(onChange).not.toBeCalled();
 });
 
-it('<RadioField> - renders a set of checkboxes with correct id (inherited)', () => {
+test('<RadioField> - renders a set of checkboxes with correct id (inherited)', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
@@ -66,7 +66,7 @@ it('<RadioField> - renders a set of checkboxes with correct id (inherited)', () 
   expect(wrapper.find('input').at(1).prop('id')).toBeTruthy();
 });
 
-it('<RadioField> - renders a set of checkboxes with correct id (specified)', () => {
+test('<RadioField> - renders a set of checkboxes with correct id (specified)', () => {
   const element = <RadioField name="x" id="y" />;
   const wrapper = mount(
     element,
@@ -78,7 +78,7 @@ it('<RadioField> - renders a set of checkboxes with correct id (specified)', () 
   expect(wrapper.find('input').at(1).prop('id')).toBe('y-Yg');
 });
 
-it('<RadioField> - renders a set of checkboxes with correct name', () => {
+test('<RadioField> - renders a set of checkboxes with correct name', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
@@ -90,7 +90,7 @@ it('<RadioField> - renders a set of checkboxes with correct name', () => {
   expect(wrapper.find('input').at(1).prop('name')).toBe('x');
 });
 
-it('<RadioField> - renders a set of checkboxes with correct options', () => {
+test('<RadioField> - renders a set of checkboxes with correct options', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
@@ -102,7 +102,7 @@ it('<RadioField> - renders a set of checkboxes with correct options', () => {
   expect(wrapper.find('label').at(1).text()).toBe('b');
 });
 
-it('<RadioField> - renders a set of checkboxes with correct options (transform)', () => {
+test('<RadioField> - renders a set of checkboxes with correct options (transform)', () => {
   const element = <RadioField name="x" transform={x => x.toUpperCase()} />;
   const wrapper = mount(
     element,
@@ -114,7 +114,7 @@ it('<RadioField> - renders a set of checkboxes with correct options (transform)'
   expect(wrapper.find('label').at(1).text()).toBe('B');
 });
 
-it('<RadioField> - renders a set of checkboxes with correct value (default)', () => {
+test('<RadioField> - renders a set of checkboxes with correct value (default)', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
@@ -126,7 +126,7 @@ it('<RadioField> - renders a set of checkboxes with correct value (default)', ()
   expect(wrapper.find('input').at(1).prop('checked')).toBe(false);
 });
 
-it('<RadioField> - renders a set of checkboxes with correct value (model)', () => {
+test('<RadioField> - renders a set of checkboxes with correct value (model)', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
@@ -141,7 +141,7 @@ it('<RadioField> - renders a set of checkboxes with correct value (model)', () =
   expect(wrapper.find('input').at(1).prop('checked')).toBe(true);
 });
 
-it('<RadioField> - renders a set of checkboxes with correct value (specified)', () => {
+test('<RadioField> - renders a set of checkboxes with correct value (specified)', () => {
   const element = <RadioField name="x" value="b" />;
   const wrapper = mount(
     element,
@@ -153,7 +153,7 @@ it('<RadioField> - renders a set of checkboxes with correct value (specified)', 
   expect(wrapper.find('input').at(1).prop('checked')).toBe(true);
 });
 
-it('<RadioField> - renders a set of checkboxes which correctly reacts on change', () => {
+test('<RadioField> - renders a set of checkboxes which correctly reacts on change', () => {
   const onChange = jest.fn();
 
   const element = <RadioField name="x" />;
@@ -170,7 +170,7 @@ it('<RadioField> - renders a set of checkboxes which correctly reacts on change'
   expect(onChange).toHaveBeenLastCalledWith('x', 'b');
 });
 
-it('<RadioField> - renders a set of checkboxes which correctly reacts on change (same value)', () => {
+test('<RadioField> - renders a set of checkboxes which correctly reacts on change (same value)', () => {
   const onChange = jest.fn();
 
   const element = <RadioField name="x" />;
@@ -187,7 +187,7 @@ it('<RadioField> - renders a set of checkboxes which correctly reacts on change 
   expect(onChange).toHaveBeenLastCalledWith('x', 'a');
 });
 
-it('<RadioField> - renders a label', () => {
+test('<RadioField> - renders a label', () => {
   const element = <RadioField name="x" label="y" />;
   const wrapper = mount(
     element,
@@ -198,7 +198,7 @@ it('<RadioField> - renders a label', () => {
   expect(wrapper.find('label').at(0).text()).toBe('y');
 });
 
-it('<RadioField> - renders a wrapper with unknown props', () => {
+test('<RadioField> - renders a wrapper with unknown props', () => {
   const element = <RadioField name="x" data-x="x" data-y="y" data-z="z" />;
   const wrapper = mount(
     element,
@@ -210,7 +210,7 @@ it('<RadioField> - renders a wrapper with unknown props', () => {
   expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });
 
-it('<RadioField> - works with special characters', () => {
+test('<RadioField> - works with special characters', () => {
   mount(
     <RadioField name="x" />,
     createContext({ x: { type: String, allowedValues: ['ă', 'ș'] } }),

@@ -4,7 +4,7 @@ import { ValidatedQuickForm } from 'uniforms-semantic';
 import createSchema from './_createSchema';
 import mount from './_mount';
 
-it('<ValidatedQuickForm> - works', () => {
+test('<ValidatedQuickForm> - works', () => {
   const element = <ValidatedQuickForm schema={createSchema()} />;
   const wrapper = mount(element);
 

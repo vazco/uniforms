@@ -10,14 +10,14 @@ describe('@RTL - TextField tests', () => {
   testTextField(TextField);
 });
 
-it('<TextField> - renders an TextField', () => {
+test('<TextField> - renders an TextField', () => {
   const element = <TextField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find(TextFieldMaterial)).toHaveLength(1);
 });
 
-it('<TextField> - renders a TextField with correct disabled state', () => {
+test('<TextField> - renders a TextField with correct disabled state', () => {
   const element = <TextField name="x" disabled />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -25,7 +25,7 @@ it('<TextField> - renders a TextField with correct disabled state', () => {
   expect(wrapper.find(TextFieldMaterial).prop('disabled')).toBe(true);
 });
 
-it('<TextField> - renders a TextField with correct readOnly state', () => {
+test('<TextField> - renders a TextField with correct readOnly state', () => {
   const element = <TextField name="x" inputProps={{ readOnly: true }} />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -35,7 +35,7 @@ it('<TextField> - renders a TextField with correct readOnly state', () => {
   );
 });
 
-it('<TextField> - renders a TextField with correct id (inherited)', () => {
+test('<TextField> - renders a TextField with correct id (inherited)', () => {
   const element = <TextField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -43,7 +43,7 @@ it('<TextField> - renders a TextField with correct id (inherited)', () => {
   expect(wrapper.find(TextFieldMaterial).prop('id')).toBeTruthy();
 });
 
-it('<TextField> - renders a TextField with correct id (specified)', () => {
+test('<TextField> - renders a TextField with correct id (specified)', () => {
   const element = <TextField name="x" id="y" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -51,7 +51,7 @@ it('<TextField> - renders a TextField with correct id (specified)', () => {
   expect(wrapper.find(TextFieldMaterial).prop('id')).toBe('y');
 });
 
-it('<TextField> - renders a TextField with correct name', () => {
+test('<TextField> - renders a TextField with correct name', () => {
   const element = <TextField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -59,7 +59,7 @@ it('<TextField> - renders a TextField with correct name', () => {
   expect(wrapper.find(TextFieldMaterial).prop('name')).toBe('x');
 });
 
-it('<TextField> - renders a TextField with correct placeholder', () => {
+test('<TextField> - renders a TextField with correct placeholder', () => {
   const element = <TextField name="x" placeholder="y" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -67,7 +67,7 @@ it('<TextField> - renders a TextField with correct placeholder', () => {
   expect(wrapper.find(TextFieldMaterial).prop('placeholder')).toBe('y');
 });
 
-it('<TextField> - renders a TextField with correct value (default)', () => {
+test('<TextField> - renders a TextField with correct value (default)', () => {
   const element = <TextField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -75,7 +75,7 @@ it('<TextField> - renders a TextField with correct value (default)', () => {
   expect(wrapper.find(TextFieldMaterial).prop('value')).toBe('');
 });
 
-it('<TextField> - renders a TextField with correct value (model)', () => {
+test('<TextField> - renders a TextField with correct value (model)', () => {
   const element = <TextField name="x" />;
   const wrapper = mount(
     element,
@@ -86,7 +86,7 @@ it('<TextField> - renders a TextField with correct value (model)', () => {
   expect(wrapper.find(TextFieldMaterial).prop('value')).toBe('y');
 });
 
-it('<TextField> - renders a TextField with correct value (specified)', () => {
+test('<TextField> - renders a TextField with correct value (specified)', () => {
   const element = <TextField name="x" value="y" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -94,7 +94,7 @@ it('<TextField> - renders a TextField with correct value (specified)', () => {
   expect(wrapper.find(TextFieldMaterial).prop('value')).toBe('y');
 });
 
-it('<TextField> - renders a TextField which correctly reacts on change', () => {
+test('<TextField> - renders a TextField which correctly reacts on change', () => {
   const onChange = jest.fn();
 
   const element = <TextField name="x" />;
@@ -110,7 +110,7 @@ it('<TextField> - renders a TextField which correctly reacts on change', () => {
   expect(onChange).toHaveBeenLastCalledWith('x', 'y');
 });
 
-it('<TextField> - renders a TextField which correctly reacts on change (empty)', () => {
+test('<TextField> - renders a TextField which correctly reacts on change (empty)', () => {
   const onChange = jest.fn();
 
   const element = <TextField name="x" />;
@@ -126,7 +126,7 @@ it('<TextField> - renders a TextField which correctly reacts on change (empty)',
   expect(onChange).toHaveBeenLastCalledWith('x', '');
 });
 
-it('<TextField> - renders a TextField which correctly reacts on change (same value)', () => {
+test('<TextField> - renders a TextField which correctly reacts on change (same value)', () => {
   const onChange = jest.fn();
 
   const element = <TextField name="x" />;
@@ -142,7 +142,7 @@ it('<TextField> - renders a TextField which correctly reacts on change (same val
   expect(onChange).toHaveBeenLastCalledWith('x', 'y');
 });
 
-it('<TextField> - renders a label', () => {
+test('<TextField> - renders a label', () => {
   const element = <TextField name="x" label="y" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -150,7 +150,7 @@ it('<TextField> - renders a label', () => {
   expect(wrapper.find(TextFieldMaterial).prop('label')).toBe('y');
 });
 
-it('<TextField> - renders a TextField with correct error text (specified)', () => {
+test('<TextField> - renders a TextField with correct error text (specified)', () => {
   const error = new Error();
   const element = (
     <TextField name="x" error={error} showInlineError errorMessage="Error" />
@@ -160,7 +160,7 @@ it('<TextField> - renders a TextField with correct error text (specified)', () =
   expect(wrapper.find(TextFieldMaterial).prop('helperText')).toBe('Error');
 });
 
-it('<TextField> - renders a TextField with correct error text (showInlineError=false)', () => {
+test('<TextField> - renders a TextField with correct error text (showInlineError=false)', () => {
   const error = new Error();
   const element = (
     <TextField
@@ -175,7 +175,7 @@ it('<TextField> - renders a TextField with correct error text (showInlineError=f
   expect(wrapper.find(TextFieldMaterial).prop('helperText')).toBeUndefined();
 });
 
-it('<TextField> - renders a input with autocomplete off', () => {
+test('<TextField> - renders a input with autocomplete off', () => {
   const element = <TextField name="x" autoComplete="off" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 

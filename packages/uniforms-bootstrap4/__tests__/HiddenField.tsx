@@ -4,14 +4,14 @@ import { HiddenField } from 'uniforms-bootstrap4';
 import createContext from './_createContext';
 import mount from './_mount';
 
-it('<HiddenField> - renders an input', () => {
+test('<HiddenField> - renders an input', () => {
   const element = <HiddenField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find('input')).toHaveLength(1);
 });
 
-it('<HiddenField> - renders an input with correct id (inherited)', () => {
+test('<HiddenField> - renders an input with correct id (inherited)', () => {
   const element = <HiddenField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -19,7 +19,7 @@ it('<HiddenField> - renders an input with correct id (inherited)', () => {
   expect(wrapper.find('input').prop('id')).toBeTruthy();
 });
 
-it('<HiddenField> - renders an input with correct id (specified)', () => {
+test('<HiddenField> - renders an input with correct id (specified)', () => {
   const element = <HiddenField name="x" id="y" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -27,7 +27,7 @@ it('<HiddenField> - renders an input with correct id (specified)', () => {
   expect(wrapper.find('input').prop('id')).toBe('y');
 });
 
-it('<HiddenField> - renders an input with correct name', () => {
+test('<HiddenField> - renders an input with correct name', () => {
   const element = <HiddenField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -35,7 +35,7 @@ it('<HiddenField> - renders an input with correct name', () => {
   expect(wrapper.find('input').prop('name')).toBe('x');
 });
 
-it('<HiddenField> - renders an input with correct type', () => {
+test('<HiddenField> - renders an input with correct type', () => {
   const element = <HiddenField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -43,7 +43,7 @@ it('<HiddenField> - renders an input with correct type', () => {
   expect(wrapper.find('input').prop('type')).toBe('hidden');
 });
 
-it('<HiddenField> - renders an input with correct value (default)', () => {
+test('<HiddenField> - renders an input with correct value (default)', () => {
   const element = <HiddenField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -51,7 +51,7 @@ it('<HiddenField> - renders an input with correct value (default)', () => {
   expect(wrapper.find('input').prop('value')).toBe('');
 });
 
-it('<HiddenField> - renders an input with correct value (model)', () => {
+test('<HiddenField> - renders an input with correct value (model)', () => {
   const element = <HiddenField name="x" />;
   const wrapper = mount(
     element,
@@ -62,7 +62,7 @@ it('<HiddenField> - renders an input with correct value (model)', () => {
   expect(wrapper.find('input').prop('value')).toBe('y');
 });
 
-it('<HiddenField> - renders an input which correctly reacts on model change', () => {
+test('<HiddenField> - renders an input which correctly reacts on model change', () => {
   const onChange = jest.fn();
 
   const element = <HiddenField name="x" />;
@@ -76,7 +76,7 @@ it('<HiddenField> - renders an input which correctly reacts on model change', ()
   expect(onChange).toHaveBeenLastCalledWith('x', 'y');
 });
 
-it('<HiddenField> - renders an input which correctly reacts on model change (empty)', () => {
+test('<HiddenField> - renders an input which correctly reacts on model change (empty)', () => {
   const onChange = jest.fn();
 
   const element = <HiddenField name="x" />;
@@ -90,7 +90,7 @@ it('<HiddenField> - renders an input which correctly reacts on model change (emp
   expect(onChange).not.toHaveBeenCalled();
 });
 
-it('<HiddenField> - renders an input which correctly reacts on model change (same value)', () => {
+test('<HiddenField> - renders an input which correctly reacts on model change (same value)', () => {
   const onChange = jest.fn();
 
   const element = <HiddenField name="x" />;
@@ -104,14 +104,14 @@ it('<HiddenField> - renders an input which correctly reacts on model change (sam
   expect(onChange).not.toHaveBeenCalled();
 });
 
-it('<HiddenField noDOM> - renders nothing', () => {
+test('<HiddenField noDOM> - renders nothing', () => {
   const element = <HiddenField noDOM name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.children()).toHaveLength(0);
 });
 
-it('<HiddenField noDOM> - renders nothing which correctly reacts on model change', () => {
+test('<HiddenField noDOM> - renders nothing which correctly reacts on model change', () => {
   const onChange = jest.fn();
 
   const element = <HiddenField noDOM name="x" />;
@@ -125,7 +125,7 @@ it('<HiddenField noDOM> - renders nothing which correctly reacts on model change
   expect(onChange).toHaveBeenLastCalledWith('x', 'y');
 });
 
-it('<HiddenField noDOM> - renders nothing which correctly reacts on model change (empty)', () => {
+test('<HiddenField noDOM> - renders nothing which correctly reacts on model change (empty)', () => {
   const onChange = jest.fn();
 
   const element = <HiddenField noDOM name="x" />;
@@ -139,7 +139,7 @@ it('<HiddenField noDOM> - renders nothing which correctly reacts on model change
   expect(onChange).not.toHaveBeenCalled();
 });
 
-it('<HiddenField noDOM> - renders nothing which correctly reacts on model change (same value)', () => {
+test('<HiddenField noDOM> - renders nothing which correctly reacts on model change (same value)', () => {
   const onChange = jest.fn();
 
   const element = <HiddenField noDOM name="x" />;

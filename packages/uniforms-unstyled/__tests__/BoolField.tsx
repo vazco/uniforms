@@ -4,14 +4,14 @@ import { BoolField } from 'uniforms-unstyled';
 import createContext from './_createContext';
 import mount from './_mount';
 
-it('<BoolField> - renders an input', () => {
+test('<BoolField> - renders an input', () => {
   const element = <BoolField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
   expect(wrapper.find('input')).toHaveLength(1);
 });
 
-it('<BoolField> - renders a input with correct id (inherited)', () => {
+test('<BoolField> - renders a input with correct id (inherited)', () => {
   const element = <BoolField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -19,7 +19,7 @@ it('<BoolField> - renders a input with correct id (inherited)', () => {
   expect(wrapper.find('input').prop('id')).toBeTruthy();
 });
 
-it('<BoolField> - renders a input with correct id (specified)', () => {
+test('<BoolField> - renders a input with correct id (specified)', () => {
   const element = <BoolField name="x" id="y" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -27,7 +27,7 @@ it('<BoolField> - renders a input with correct id (specified)', () => {
   expect(wrapper.find('input').prop('id')).toBe('y');
 });
 
-it('<BoolField> - renders a input with correct name', () => {
+test('<BoolField> - renders a input with correct name', () => {
   const element = <BoolField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -35,7 +35,7 @@ it('<BoolField> - renders a input with correct name', () => {
   expect(wrapper.find('input').prop('name')).toBe('x');
 });
 
-it('<BoolField> - renders an input with correct type', () => {
+test('<BoolField> - renders an input with correct type', () => {
   const element = <BoolField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -43,7 +43,7 @@ it('<BoolField> - renders an input with correct type', () => {
   expect(wrapper.find('input').prop('type')).toBe('checkbox');
 });
 
-it('<BoolField> - renders an input with correct disabled state', () => {
+test('<BoolField> - renders an input with correct disabled state', () => {
   const element = <BoolField name="x" disabled />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -51,7 +51,7 @@ it('<BoolField> - renders an input with correct disabled state', () => {
   expect(wrapper.find('input').prop('disabled')).toBe(true);
 });
 
-it('<BoolField> - renders an input with correct readOnly state', () => {
+test('<BoolField> - renders an input with correct readOnly state', () => {
   const onChange = jest.fn();
 
   const element = <BoolField name="x" readOnly />;
@@ -65,7 +65,7 @@ it('<BoolField> - renders an input with correct readOnly state', () => {
   expect(onChange).not.toHaveBeenCalled();
 });
 
-it('<BoolField> - renders a input with correct label (specified)', () => {
+test('<BoolField> - renders a input with correct label (specified)', () => {
   const element = <BoolField name="x" label="BoolFieldLabel" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -76,7 +76,7 @@ it('<BoolField> - renders a input with correct label (specified)', () => {
   );
 });
 
-it('<BoolField> - renders a input with correct value (default)', () => {
+test('<BoolField> - renders a input with correct value (default)', () => {
   const element = <BoolField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -84,7 +84,7 @@ it('<BoolField> - renders a input with correct value (default)', () => {
   expect(wrapper.find('input').prop('checked')).toBe(false);
 });
 
-it('<BoolField> - renders a input with correct value (model)', () => {
+test('<BoolField> - renders a input with correct value (model)', () => {
   const element = <BoolField name="x" />;
   const wrapper = mount(
     element,
@@ -95,7 +95,7 @@ it('<BoolField> - renders a input with correct value (model)', () => {
   expect(wrapper.find('input').prop('checked')).toBe(true);
 });
 
-it('<BoolField> - renders a input with correct value (specified)', () => {
+test('<BoolField> - renders a input with correct value (specified)', () => {
   const element = <BoolField name="x" value />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -103,7 +103,7 @@ it('<BoolField> - renders a input with correct value (specified)', () => {
   expect(wrapper.find('input').prop('checked')).toBe(true);
 });
 
-it('<BoolField> - renders a input which correctly reacts on change', () => {
+test('<BoolField> - renders a input which correctly reacts on change', () => {
   const onChange = jest.fn();
 
   const element = <BoolField name="x" />;
@@ -117,7 +117,7 @@ it('<BoolField> - renders a input which correctly reacts on change', () => {
   expect(onChange).toHaveBeenLastCalledWith('x', true);
 });
 
-it('<BoolField> - renders a wrapper with unknown props', () => {
+test('<BoolField> - renders a wrapper with unknown props', () => {
   const element = <BoolField name="x" data-x="x" data-y="y" data-z="z" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 

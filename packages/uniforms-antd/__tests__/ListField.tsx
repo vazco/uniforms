@@ -12,7 +12,7 @@ describe('@RTL - ListField tests', () => {
     addFieldLocator: () => screen.queryAllByRole('img').pop(),
   });
 
-  it('<ListField> - works', () => {
+  test('<ListField> - works', () => {
     const element = <ListField name="x" />;
     const wrapper = mount(
       element,
@@ -23,7 +23,7 @@ describe('@RTL - ListField tests', () => {
   });
 });
 
-it('<ListField> - renders ListAddField', () => {
+test('<ListField> - renders ListAddField', () => {
   const element = <ListField name="x" label="ListFieldLabel" />;
   const wrapper = mount(
     element,
@@ -34,7 +34,7 @@ it('<ListField> - renders ListAddField', () => {
   expect(wrapper.find(ListAddField).prop('name')).toBe('$');
 });
 
-it('<ListField> - renders correct label and info (specified)', () => {
+test('<ListField> - renders correct label and info (specified)', () => {
   const element = (
     <ListField name="x" label="ListFieldLabel" info="ListFieldInfo" />
   );
@@ -47,7 +47,7 @@ it('<ListField> - renders correct label and info (specified)', () => {
   expect(wrapper.find(Tooltip).prop('title')).toBe('ListFieldInfo');
 });
 
-it('<ListField> - renders correct label (specified)', () => {
+test('<ListField> - renders correct label (specified)', () => {
   const element = <ListField name="x" label="ListFieldLabel" />;
   const wrapper = mount(
     element,
@@ -59,7 +59,7 @@ it('<ListField> - renders correct label (specified)', () => {
   );
 });
 
-it('<ListField> - renders correct numer of items with model (specified)', () => {
+test('<ListField> - renders correct numer of items with model (specified)', () => {
   const element = <ListField name="x" />;
   const wrapper = mount(
     element,
@@ -71,7 +71,7 @@ it('<ListField> - renders correct numer of items with model (specified)', () => 
   expect(wrapper.find('input')).toHaveLength(3);
 });
 
-it('<ListField> - passes itemProps to its children', () => {
+test('<ListField> - passes itemProps to its children', () => {
   const element = <ListField name="x" itemProps={{ 'data-xyz': 1 }} />;
   const wrapper = mount(
     element,
@@ -83,7 +83,7 @@ it('<ListField> - passes itemProps to its children', () => {
   expect(wrapper.find(ListItemField).first().prop('data-xyz')).toBe(1);
 });
 
-it('<ListField> - renders children (specified)', () => {
+test('<ListField> - renders children (specified)', () => {
   const Child = jest.fn(() => <div />) as React.FC<any>;
 
   const element = (
@@ -102,7 +102,7 @@ it('<ListField> - renders children (specified)', () => {
   expect(Child).toHaveBeenCalledTimes(2);
 });
 
-it('<ListField> - renders children with correct name (children)', () => {
+test('<ListField> - renders children with correct name (children)', () => {
   const Child = jest.fn(() => <div />) as React.FC<any>;
 
   const element = (
@@ -121,7 +121,7 @@ it('<ListField> - renders children with correct name (children)', () => {
   expect(wrapper.find(Child).at(1).prop('name')).toBe('1');
 });
 
-it('<ListField> - renders children with correct name (value)', () => {
+test('<ListField> - renders children with correct name (value)', () => {
   const element = <ListField name="x" />;
   const wrapper = mount(
     element,
@@ -134,7 +134,7 @@ it('<ListField> - renders children with correct name (value)', () => {
   expect(wrapper.find(ListItemField).at(1).prop('name')).toBe('1');
 });
 
-it('<ListField> - renders correct error text (specified)', () => {
+test('<ListField> - renders correct error text (specified)', () => {
   const error = new Error();
   const element = (
     <ListField name="x" error={error} errorMessage="Error" showInlineError />
@@ -147,7 +147,7 @@ it('<ListField> - renders correct error text (specified)', () => {
   expect(wrapper.find('div > div').at(0).text()).toBe('Error');
 });
 
-it('<ListField> - renders correct error style', () => {
+test('<ListField> - renders correct error style', () => {
   const error = new Error();
   const element = <ListField name="x" error={error} />;
   const wrapper = mount(
@@ -161,7 +161,7 @@ it('<ListField> - renders correct error style', () => {
   );
 });
 
-it('<ListField> - renders correct error style (with specified style prop)', () => {
+test('<ListField> - renders correct error style (with specified style prop)', () => {
   const error = new Error();
   const element = (
     <ListField name="x" error={error} style={{ marginLeft: '8px' }} />
@@ -177,7 +177,7 @@ it('<ListField> - renders correct error style (with specified style prop)', () =
   );
 });
 
-it('<ListField> - renders proper number of optional values after add new value', () => {
+test('<ListField> - renders proper number of optional values after add new value', () => {
   const element = <ListField name="x" label="ListFieldLabel" />;
   const onChange = jest.fn();
   const wrapper = mount(

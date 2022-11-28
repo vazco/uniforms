@@ -85,23 +85,23 @@ describe('GraphQLBridge', () => {
   );
 
   describe('#constructor()', () => {
-    it('always ensures `extras`', () => {
+    test('always ensures `extras`', () => {
       const bridge = new GraphQLBridge(astI.getType('Post')!, schemaValidator);
       expect(bridge.extras).toEqual({});
     });
   });
 
   describe('#getError', () => {
-    it('works without error', () => {
+    test('works without error', () => {
       expect(bridgeI.getError('title', undefined)).toBe(null);
     });
 
-    it('works with invalid error', () => {
+    test('works with invalid error', () => {
       expect(bridgeI.getError('title', {})).toBe(null);
       expect(bridgeI.getError('title', { invalid: true })).toBe(null);
     });
 
-    it('works with correct error', () => {
+    test('works with correct error', () => {
       expect(
         bridgeI.getError('title', { details: [{ name: 'title' }] }),
       ).toEqual({ name: 'title' });
@@ -112,16 +112,16 @@ describe('GraphQLBridge', () => {
   });
 
   describe('#getErrorMessage', () => {
-    it('works without error', () => {
+    test('works without error', () => {
       expect(bridgeI.getErrorMessage('title', undefined)).toBe('');
     });
 
-    it('works with invalid error', () => {
+    test('works with invalid error', () => {
       expect(bridgeI.getErrorMessage('title', {})).toBe('');
       expect(bridgeI.getErrorMessage('title', { invalid: true })).toBe('');
     });
 
-    it('works with correct error', () => {
+    test('works with correct error', () => {
       expect(
         bridgeI.getErrorMessage('title', {
           details: [{ name: 'title', message: '!' }],
@@ -136,23 +136,23 @@ describe('GraphQLBridge', () => {
   });
 
   describe('#getErrorMessages', () => {
-    it('works without error', () => {
+    test('works without error', () => {
       expect(bridgeI.getErrorMessages(null)).toEqual([]);
       expect(bridgeI.getErrorMessages(undefined)).toEqual([]);
     });
 
-    it('works with other errors', () => {
+    test('works with other errors', () => {
       expect(bridgeI.getErrorMessages('correct')).toEqual(['correct']);
       expect(bridgeI.getErrorMessages(999999999)).toEqual([999999999]);
     });
 
-    it('works with Error', () => {
+    test('works with Error', () => {
       expect(bridgeI.getErrorMessages(new Error('correct'))).toEqual([
         'correct',
       ]);
     });
 
-    it('works with ValidationError', () => {
+    test('works with ValidationError', () => {
       expect(
         bridgeI.getErrorMessages({
           details: [{ name: 'title', message: '!' }],
@@ -167,7 +167,7 @@ describe('GraphQLBridge', () => {
   });
 
   describe('#getField', () => {
-    it('return correct definition (input)', () => {
+    test('return correct definition (input)', () => {
       expect(bridgeI.getField('author.firstName')).toEqual({
         astNode: expect.objectContaining({}),
         defaultValue: 'John',
@@ -177,7 +177,7 @@ describe('GraphQLBridge', () => {
       });
     });
 
-    it('return correct definition (type)', () => {
+    test('return correct definition (type)', () => {
       expect(bridgeT.getField('author.firstName')).toEqual({
         args: [],
         astNode: expect.objectContaining({}),
@@ -189,7 +189,7 @@ describe('GraphQLBridge', () => {
       });
     });
 
-    it('throws on not found field', () => {
+    test('throws on not found field', () => {
       const error = /Field not found in schema/;
       expect(() => bridgeI.getField('x')).toThrow(error);
       expect(() => bridgeI.getField('author.x')).toThrow(error);
@@ -198,11 +198,11 @@ describe('GraphQLBridge', () => {
   });
 
   describe('#getInitialValue', () => {
-    it('works with arrays', () => {
+    test('works with arrays', () => {
       expect(bridgeI.getInitialValue('author.tags')).toEqual([]);
     });
 
-    it('works with objects', () => {
+    test('works with objects', () => {
       expect(bridgeI.getInitialValue('author')).toEqual({
         firstName: 'John',
         lastName: 'Doe',
@@ -210,15 +210,15 @@ describe('GraphQLBridge', () => {
       });
     });
 
-    it('works with undefined primitives', () => {
+    test('works with undefined primitives', () => {
       expect(bridgeI.getInitialValue('id')).toBe(undefined);
     });
 
-    it('works with defined primitives', () => {
+    test('works with defined primitives', () => {
       expect(bridgeI.getInitialValue('votes')).toBe(44);
     });
 
-    it('works with default values', () => {
+    test('works with default values', () => {
       expect(bridgeI.getInitialValue('author.firstName')).toBe('John');
     });
   });
@@ -227,7 +227,7 @@ describe('GraphQLBridge', () => {
     describe('labels are derived properly', () => {
       describe('when props.label is undefined or true', () => {
         describe('and no extra data is passed', () => {
-          it('should use AST field name', () => {
+          test('should use AST field name', () => {
             expect(bridgeT.getProps('title')).toEqual({
               allowedValues: ['a', 'b', 'Some Title'],
               label: false,
@@ -253,7 +253,7 @@ describe('GraphQLBridge', () => {
         });
 
         describe('and extra data is present', () => {
-          it('should use extra data', () => {
+          test('should use extra data', () => {
             expect(bridgeT.getProps('id')).toEqual({
               allowedValues: [1, 2, 3],
               label: 'Post ID',
@@ -271,7 +271,7 @@ describe('GraphQLBridge', () => {
       });
 
       describe('when props.label is a string', () => {
-        it('should use label from props', () => {
+        test('should use label from props', () => {
           expect(bridgeT.getProps('title', { label: 'Overriden' })).toEqual({
             allowedValues: ['a', 'b', 'Some Title'],
             label: false,
@@ -300,7 +300,7 @@ describe('GraphQLBridge', () => {
       });
 
       describe('when props.label is false or null (unset)', () => {
-        it('should display empty label', () => {
+        test('should display empty label', () => {
           expect(bridgeT.getProps('id', { label: false })).toEqual({
             allowedValues: [1, 2, 3],
             label: 'Post ID',
@@ -318,7 +318,7 @@ describe('GraphQLBridge', () => {
       });
     });
 
-    it('works with allowedValues', () => {
+    test('works with allowedValues', () => {
       expect(bridgeI.getProps('id')).toEqual({
         label: 'Post ID',
         placeholder: 'Post ID',
@@ -327,7 +327,7 @@ describe('GraphQLBridge', () => {
       });
     });
 
-    it('works with allowedValues from props', () => {
+    test('works with allowedValues from props', () => {
       expect(bridgeI.getProps('id', { allowedValues: [1] })).toEqual({
         label: 'Post ID',
         placeholder: 'Post ID',
@@ -336,7 +336,7 @@ describe('GraphQLBridge', () => {
       });
     });
 
-    it('works with custom component', () => {
+    test('works with custom component', () => {
       expect(bridgeI.getProps('author')).toEqual({
         label: 'Author',
         required: true,
@@ -344,7 +344,7 @@ describe('GraphQLBridge', () => {
       });
     });
 
-    it('works with label (custom)', () => {
+    test('works with label (custom)', () => {
       expect(bridgeI.getProps('id', { label: 'ID' })).toEqual({
         label: 'Post ID',
         placeholder: 'Post ID',
@@ -353,7 +353,7 @@ describe('GraphQLBridge', () => {
       });
     });
 
-    it('works with label (true)', () => {
+    test('works with label (true)', () => {
       expect(bridgeI.getProps('id', { label: true })).toEqual({
         label: 'Post ID',
         placeholder: 'Post ID',
@@ -362,7 +362,7 @@ describe('GraphQLBridge', () => {
       });
     });
 
-    it('works with label (falsy)', () => {
+    test('works with label (falsy)', () => {
       expect(bridgeI.getProps('id', { label: null })).toEqual({
         label: 'Post ID',
         placeholder: 'Post ID',
@@ -371,7 +371,7 @@ describe('GraphQLBridge', () => {
       });
     });
 
-    it('works with placeholder (custom)', () => {
+    test('works with placeholder (custom)', () => {
       expect(bridgeI.getProps('id', { placeholder: 'Post ID' })).toEqual({
         label: 'Post ID',
         placeholder: 'Post ID',
@@ -380,7 +380,7 @@ describe('GraphQLBridge', () => {
       });
     });
 
-    it('works with placeholder (true)', () => {
+    test('works with placeholder (true)', () => {
       expect(bridgeI.getProps('id', { placeholder: true })).toEqual({
         label: 'Post ID',
         placeholder: 'Post ID',
@@ -389,7 +389,7 @@ describe('GraphQLBridge', () => {
       });
     });
 
-    it('works with placeholder (falsy)', () => {
+    test('works with placeholder (falsy)', () => {
       expect(bridgeI.getProps('id', { placeholder: null })).toEqual({
         label: 'Post ID',
         placeholder: 'Post ID',
@@ -398,7 +398,7 @@ describe('GraphQLBridge', () => {
       });
     });
 
-    it('works with placeholder (extra.placeholder === undefined)', () => {
+    test('works with placeholder (extra.placeholder === undefined)', () => {
       expect(bridgeI.getProps('title', { placeholder: true })).toEqual({
         allowedValues: ['a', 'b', 'Some Title'],
         label: false,
@@ -413,7 +413,7 @@ describe('GraphQLBridge', () => {
       });
     });
 
-    it('works with Number type', () => {
+    test('works with Number type', () => {
       expect(bridgeI.getProps('author.decimal1')).toEqual({
         label: 'Decimal 1',
         required: false,
@@ -427,21 +427,21 @@ describe('GraphQLBridge', () => {
       });
     });
 
-    it('works with options (array)', () => {
+    test('works with options (array)', () => {
       expect(bridgeI.getProps('title').transform('a')).toBe(1);
       expect(bridgeI.getProps('title').transform('b')).toBe(2);
       expect(bridgeI.getProps('title').allowedValues[0]).toBe('a');
       expect(bridgeI.getProps('title').allowedValues[1]).toBe('b');
     });
 
-    it('works with options (object)', () => {
+    test('works with options (object)', () => {
       expect(bridgeI.getProps('votes').transform('a')).toBe(1);
       expect(bridgeI.getProps('votes').transform('b')).toBe(2);
       expect(bridgeI.getProps('votes').allowedValues[0]).toBe('a');
       expect(bridgeI.getProps('votes').allowedValues[1]).toBe('b');
     });
 
-    it('works with options from props', () => {
+    test('works with options from props', () => {
       expect(
         bridgeI.getProps('votes', { options: { c: 1, d: 2 } }).transform('c'),
       ).toBe(1);
@@ -456,7 +456,7 @@ describe('GraphQLBridge', () => {
       ).toBe('d');
     });
 
-    it('works with other props', () => {
+    test('works with other props', () => {
       expect(bridgeI.getProps('category', { x: 1, y: 1 })).toEqual({
         label: 'Category',
         required: true,
@@ -464,19 +464,19 @@ describe('GraphQLBridge', () => {
     });
 
     describe('when enum', () => {
-      it('should return possibleValues', () => {
+      test('should return possibleValues', () => {
         expect(bridgeI.getProps('author.level').allowedValues).toEqual([
           'Admin',
           'User',
         ]);
       });
 
-      it('should transform the value to the name', () => {
+      test('should transform the value to the name', () => {
         const transform = bridgeI.getProps('author.level').transform;
         expect(transform('Admin')).toBe('Admin');
       });
 
-      it('should prefer options over enum', () => {
+      test('should prefer options over enum', () => {
         const bridge = new GraphQLBridge(
           astI.getType('Post')!,
           schemaValidator,
@@ -499,7 +499,7 @@ describe('GraphQLBridge', () => {
   });
 
   describe('#getSubfields', () => {
-    it('works on top level', () => {
+    test('works on top level', () => {
       expect(bridgeI.getSubfields()).toEqual([
         'id',
         'author',
@@ -511,7 +511,7 @@ describe('GraphQLBridge', () => {
       ]);
     });
 
-    it('works with nested types', () => {
+    test('works with nested types', () => {
       expect(bridgeI.getSubfields('author')).toEqual([
         'id',
         'confirmed',
@@ -524,7 +524,7 @@ describe('GraphQLBridge', () => {
       ]);
     });
 
-    it('works with primitives', () => {
+    test('works with primitives', () => {
       expect(bridgeI.getSubfields('id')).toEqual([]);
       expect(bridgeI.getSubfields('author.id')).toEqual([]);
     });
@@ -574,7 +574,7 @@ describe('GraphQLBridge', () => {
   });
 
   describe('#getValidator', () => {
-    it('calls correct validator', () => {
+    test('calls correct validator', () => {
       expect(bridgeI.getValidator()).toBe(schemaValidator);
     });
   });

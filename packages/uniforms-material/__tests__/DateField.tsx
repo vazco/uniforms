@@ -14,7 +14,7 @@ import createContext from './_createContext';
 import mount from './_mount';
 
 describe('@RTL - DateField tests', () => {
-  it('<DateField> - handles "date" type correctly', () => {
+  test('<DateField> - handles "date" type correctly', () => {
     const onChange = jest.fn();
     const initialDate = new Date(Date.UTC(2020, 0, 1));
 
@@ -36,7 +36,7 @@ describe('@RTL - DateField tests', () => {
 });
 
 describe('@RTL - DateField tests', () => {
-  it('<DateField> - default props are not passed when MUI theme props are specified', () => {
+  test('<DateField> - default props are not passed when MUI theme props are specified', () => {
     const theme = createMuiTheme({
       props: { MuiTextField: { fullWidth: false, margin: 'normal' } },
     });
@@ -56,7 +56,7 @@ describe('@RTL - DateField tests', () => {
     );
   });
 
-  it('<DateField> - default props are passed when MUI theme props are absent', () => {
+  test('<DateField> - default props are passed when MUI theme props are absent', () => {
     const theme = createMuiTheme({});
     const { container } = render(
       <ThemeProvider theme={theme}>
@@ -74,7 +74,7 @@ describe('@RTL - DateField tests', () => {
     );
   });
 
-  it('<DateField> - explicit props are passed when MUI theme props are specified', () => {
+  test('<DateField> - explicit props are passed when MUI theme props are specified', () => {
     const theme = createMuiTheme({
       props: { MuiTextField: { fullWidth: true, margin: 'dense' } },
     });
@@ -100,56 +100,56 @@ describe('@RTL - DateField tests', () => {
   });
 });
 
-it('<DateField> - renders Input', () => {
+test('<DateField> - renders Input', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
   expect(wrapper.find(Input)).toHaveLength(1);
 });
 
-it('<DateField> - renders a Input with correct id (inherited)', () => {
+test('<DateField> - renders a Input with correct id (inherited)', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
   expect(wrapper.find(Input).prop('id')).toBeTruthy();
 });
 
-it('<DateField> - renders a Input with correct id (specified)', () => {
+test('<DateField> - renders a Input with correct id (specified)', () => {
   const element = <DateField name="x" id="y" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
   expect(wrapper.find(Input).prop('id')).toBe('y');
 });
 
-it('<DateField> - renders a Input with correct name', () => {
+test('<DateField> - renders a Input with correct name', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
   expect(wrapper.find(Input).prop('name')).toBe('x');
 });
 
-it('<DateField> - renders an Input with correct disabled state', () => {
+test('<DateField> - renders an Input with correct disabled state', () => {
   const element = <DateField name="x" disabled />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
   expect(wrapper.find(FormControl).prop('disabled')).toBe(true);
 });
 
-it('<DateField> - renders an Input with correct readOnly state', () => {
+test('<DateField> - renders an Input with correct readOnly state', () => {
   const element = <DateField name="x" inputProps={{ readOnly: true }} />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
   expect(wrapper.find(Input).prop('inputProps')!.readOnly).toBe(true);
 });
 
-it('<DateField> - renders a Input with correct label (specified)', () => {
+test('<DateField> - renders a Input with correct label (specified)', () => {
   const element = <DateField name="x" label="DateFieldLabel" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
   expect(wrapper.find(FormLabel).text()).toBe('DateFieldLabel *');
 });
 
-it('<DateField> - renders a Input with correct value (default)', () => {
+test('<DateField> - renders a Input with correct value (default)', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
@@ -173,7 +173,7 @@ test.each(['datetime-local', 'date'] as const)(
   },
 );
 
-it('<DateField> - renders a Input with correct value (specified)', () => {
+test('<DateField> - renders a Input with correct value (specified)', () => {
   const now = new Date();
   const element = <DateField name="x" value={now} />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
@@ -183,7 +183,7 @@ it('<DateField> - renders a Input with correct value (specified)', () => {
   );
 });
 
-it('<DateField> - renders a Input which correctly reacts on change', () => {
+test('<DateField> - renders a Input which correctly reacts on change', () => {
   const onChange = jest.fn();
 
   const now = new Date();
@@ -198,7 +198,7 @@ it('<DateField> - renders a Input which correctly reacts on change', () => {
   expect(onChange).toHaveBeenLastCalledWith('x', now);
 });
 
-it('<DateField> - renders a Input which correctly reacts on change (empty)', () => {
+test('<DateField> - renders a Input which correctly reacts on change (empty)', () => {
   const onChange = jest.fn();
 
   const element = <DateField name="x" />;
@@ -214,7 +214,7 @@ it('<DateField> - renders a Input which correctly reacts on change (empty)', () 
   expect(onChange).toHaveBeenLastCalledWith('x', undefined);
 });
 
-it('<DateField> - renders a Input which correctly reacts on change (overflow)', () => {
+test('<DateField> - renders a Input which correctly reacts on change (overflow)', () => {
   const onChange = jest.fn();
 
   const now = new Date(1e5, 0);
@@ -229,7 +229,7 @@ it('<DateField> - renders a Input which correctly reacts on change (overflow)', 
   expect(onChange).not.toHaveBeenCalled();
 });
 
-it('<DateField> - renders a Input with correct error text (specified)', () => {
+test('<DateField> - renders a Input with correct error text (specified)', () => {
   const error = new Error();
   const element = (
     <DateField name="x" error={error} showInlineError errorMessage="Error" />
@@ -239,7 +239,7 @@ it('<DateField> - renders a Input with correct error text (specified)', () => {
   expect(wrapper.find(FormHelperText).text()).toBe('Error');
 });
 
-it('<DateField> - renders a Input with correct error text (showInlineError=false)', () => {
+test('<DateField> - renders a Input with correct error text (showInlineError=false)', () => {
   const error = new Error();
   const element = (
     <DateField

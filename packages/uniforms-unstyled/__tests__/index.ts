@@ -1,6 +1,6 @@
 import * as unstyled from 'uniforms-unstyled';
 
-it('exports everything', () => {
+test('exports everything', () => {
   expect(unstyled).toEqual({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),

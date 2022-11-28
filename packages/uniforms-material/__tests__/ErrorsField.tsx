@@ -20,7 +20,7 @@ const error = {
 };
 
 describe('@RTL - ErrorsField tests', () => {
-  it('<ErrorsField> - default props are not passed when MUI theme props are specified', () => {
+  test('<ErrorsField> - default props are not passed when MUI theme props are specified', () => {
     const theme = createMuiTheme({
       props: {
         MuiFormControl: {
@@ -50,7 +50,7 @@ describe('@RTL - ErrorsField tests', () => {
     ).toHaveLength(3);
   });
 
-  it('<ErrorsField> - default props are passed when MUI theme props are absent', () => {
+  test('<ErrorsField> - default props are passed when MUI theme props are absent', () => {
     const theme = createMuiTheme({});
     const { container } = render(
       <ThemeProvider theme={theme}>
@@ -72,7 +72,7 @@ describe('@RTL - ErrorsField tests', () => {
     ).toHaveLength(0);
   });
 
-  it('<ErrorsField> - explicit props are passed when MUI theme props are specified', () => {
+  test('<ErrorsField> - explicit props are passed when MUI theme props are specified', () => {
     const theme = createMuiTheme({
       props: {
         MuiFormControl: { fullWidth: true, margin: 'dense', variant: 'filled' },
@@ -105,14 +105,14 @@ describe('@RTL - ErrorsField tests', () => {
   });
 });
 
-it('<ErrorsField> - works', () => {
+test('<ErrorsField> - works', () => {
   const element = <ErrorsField />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find(ErrorsField)).toHaveLength(1);
 });
 
-it('<ErrorsField> - renders list of correct error messages (context)', () => {
+test('<ErrorsField> - renders list of correct error messages (context)', () => {
   const element = <ErrorsField />;
   const wrapper = mount(
     element,
@@ -128,7 +128,7 @@ it('<ErrorsField> - renders list of correct error messages (context)', () => {
   expect(wrapper.find(FormHelperText).at(2).text()).toBe('Z is required');
 });
 
-it('<ErrorsField> - renders children (specified)', () => {
+test('<ErrorsField> - renders children (specified)', () => {
   const element = <ErrorsField children="Error message list" />;
   const wrapper = mount(
     element,

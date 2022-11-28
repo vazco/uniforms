@@ -17,14 +17,14 @@ beforeEach(() => {
   onChange.mockClear();
 });
 
-it('<ListDelField> - works', () => {
+test('<ListDelField> - works', () => {
   const element = <ListDelField name="x.1" />;
   const wrapper = mount(element, context());
 
   expect(wrapper.find(ListDelField)).toHaveLength(1);
 });
 
-it('<ListDelField> - default props override', () => {
+test('<ListDelField> - default props override', () => {
   const buttonProps = {
     icon: <span id="icon" />,
     size: 'large' as const,
@@ -41,7 +41,7 @@ it('<ListDelField> - default props override', () => {
   );
 });
 
-it('<ListDelField> - prevents onClick when disabled', () => {
+test('<ListDelField> - prevents onClick when disabled', () => {
   const element = <ListDelField name="x.1" disabled />;
   const wrapper = mount(element, context());
 
@@ -49,7 +49,7 @@ it('<ListDelField> - prevents onClick when disabled', () => {
   expect(onChange).not.toHaveBeenCalled();
 });
 
-it('<ListDelField> - prevents onClick when readOnly', () => {
+test('<ListDelField> - prevents onClick when readOnly', () => {
   const element = <ListDelField name="x.1" readOnly />;
   const wrapper = mount(element, context());
 
@@ -57,7 +57,7 @@ it('<ListDelField> - prevents onClick when readOnly', () => {
   expect(onChange).not.toHaveBeenCalled();
 });
 
-it('<ListDelField> - prevents onClick when limit reached', () => {
+test('<ListDelField> - prevents onClick when limit reached', () => {
   const element = <ListDelField name="x.1" />;
   const wrapper = mount(element, context({ x: { minCount: 3 } }));
 
@@ -65,7 +65,7 @@ it('<ListDelField> - prevents onClick when limit reached', () => {
   expect(onChange).not.toHaveBeenCalled();
 });
 
-it('<ListDelField> - correctly reacts on click', () => {
+test('<ListDelField> - correctly reacts on click', () => {
   const element = <ListDelField name="x.1" />;
   const wrapper = mount(element, context());
 

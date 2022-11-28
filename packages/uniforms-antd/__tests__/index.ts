@@ -1,6 +1,6 @@
 import * as antd from 'uniforms-antd';
 
-it('exports everything', () => {
+test('exports everything', () => {
   expect(antd).toEqual({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),

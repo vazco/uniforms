@@ -6,14 +6,14 @@ import { DateField } from 'uniforms-antd';
 import createContext from './_createContext';
 import mount from './_mount';
 
-it('<DateField> - renders an input', () => {
+test('<DateField> - renders an input', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
   expect(wrapper.find(DatePicker)).toHaveLength(1);
 });
 
-it('<DateField> - default props override', () => {
+test('<DateField> - default props override', () => {
   const pickerProps = { showTime: false, style: {} };
   const element = <DateField name="x" {...pickerProps} />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
@@ -23,7 +23,7 @@ it('<DateField> - default props override', () => {
   );
 });
 
-it('<DateField> - renders a input with correct id (inherited)', () => {
+test('<DateField> - renders a input with correct id (inherited)', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
@@ -31,7 +31,7 @@ it('<DateField> - renders a input with correct id (inherited)', () => {
   expect(wrapper.find(DatePicker).prop('id')).toBeTruthy();
 });
 
-it('<DateField> - renders a input with correct id (specified)', () => {
+test('<DateField> - renders a input with correct id (specified)', () => {
   const element = <DateField name="x" id="y" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
@@ -39,7 +39,7 @@ it('<DateField> - renders a input with correct id (specified)', () => {
   expect(wrapper.find(DatePicker).prop('id')).toBe('y');
 });
 
-it('<DateField> - renders a input with correct name', () => {
+test('<DateField> - renders a input with correct name', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
@@ -47,7 +47,7 @@ it('<DateField> - renders a input with correct name', () => {
   expect(wrapper.find(DatePicker).prop('name')).toBe('x');
 });
 
-it('<DateField> - renders an input with correct disabled state', () => {
+test('<DateField> - renders an input with correct disabled state', () => {
   const element = <DateField name="x" disabled />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
@@ -55,7 +55,7 @@ it('<DateField> - renders an input with correct disabled state', () => {
   expect(wrapper.find(DatePicker).prop('disabled')).toBe(true);
 });
 
-it('<DateField> - renders an input with correct readOnly state', () => {
+test('<DateField> - renders an input with correct readOnly state', () => {
   const onChange = jest.fn();
 
   const now = moment();
@@ -71,7 +71,7 @@ it('<DateField> - renders an input with correct readOnly state', () => {
   expect(onChange).not.toHaveBeenCalled();
 });
 
-it('<DateField> - renders a input with correct label (specified)', () => {
+test('<DateField> - renders a input with correct label (specified)', () => {
   const element = <DateField name="x" label="DateFieldLabel" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
@@ -79,7 +79,7 @@ it('<DateField> - renders a input with correct label (specified)', () => {
   expect(wrapper.find('label').text()).toBe('DateFieldLabel');
 });
 
-it('<DateField> - renders a input with correct value (default)', () => {
+test('<DateField> - renders a input with correct value (default)', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
@@ -87,7 +87,7 @@ it('<DateField> - renders a input with correct value (default)', () => {
   expect(wrapper.find(DatePicker).prop('value')).toBe(undefined);
 });
 
-it('<DateField> - renders a input with correct value (model)', () => {
+test('<DateField> - renders a input with correct value (model)', () => {
   const now = moment();
   const element = <DateField name="x" />;
   const wrapper = mount(
@@ -99,7 +99,7 @@ it('<DateField> - renders a input with correct value (model)', () => {
   expect(wrapper.find(DatePicker).prop('value')).toEqual(now);
 });
 
-it('<DateField> - renders a input with correct value (specified)', () => {
+test('<DateField> - renders a input with correct value (specified)', () => {
   const now = moment();
   const element = <DateField name="x" value={now} />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
@@ -108,7 +108,7 @@ it('<DateField> - renders a input with correct value (specified)', () => {
   expect(wrapper.find(DatePicker).prop('value')).toEqual(now);
 });
 
-it('<DateField> - renders a input which correctly reacts on change', () => {
+test('<DateField> - renders a input which correctly reacts on change', () => {
   const onChange = jest.fn();
 
   const now = moment();
@@ -124,7 +124,7 @@ it('<DateField> - renders a input which correctly reacts on change', () => {
   expect(onChange).toHaveBeenLastCalledWith('x', now.toDate());
 });
 
-it('<DateField> - renders a input which correctly reacts on change (empty)', () => {
+test('<DateField> - renders a input which correctly reacts on change (empty)', () => {
   const onChange = jest.fn();
 
   const element = <DateField name="x" />;
@@ -139,7 +139,7 @@ it('<DateField> - renders a input which correctly reacts on change (empty)', () 
   expect(onChange).toHaveBeenLastCalledWith('x', undefined);
 });
 
-it('<DateField> - renders a wrapper with unknown props', () => {
+test('<DateField> - renders a wrapper with unknown props', () => {
   const element = <DateField name="x" data-x="x" data-y="y" data-z="z" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 

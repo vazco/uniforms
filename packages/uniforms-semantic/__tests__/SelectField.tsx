@@ -4,7 +4,7 @@ import { SelectField } from 'uniforms-semantic';
 import createContext from './_createContext';
 import mount from './_mount';
 
-it('<SelectField> - renders a select', () => {
+test('<SelectField> - renders a select', () => {
   const element = <SelectField name="x" />;
   const wrapper = mount(
     element,
@@ -14,7 +14,7 @@ it('<SelectField> - renders a select', () => {
   expect(wrapper.find('select')).toHaveLength(1);
 });
 
-it('<SelectField> - renders a select with correct disabled state', () => {
+test('<SelectField> - renders a select with correct disabled state', () => {
   const element = <SelectField name="x" disabled />;
   const wrapper = mount(
     element,
@@ -25,7 +25,7 @@ it('<SelectField> - renders a select with correct disabled state', () => {
   expect(wrapper.find('select').prop('disabled')).toBe(true);
 });
 
-it('<SelectField> - renders a select with correct readOnly state', () => {
+test('<SelectField> - renders a select with correct readOnly state', () => {
   const onChange = jest.fn();
 
   const element = <SelectField name="x" readOnly />;
@@ -44,7 +44,7 @@ it('<SelectField> - renders a select with correct readOnly state', () => {
   expect(onChange).not.toHaveBeenCalled();
 });
 
-it('<SelectField> - renders a select with correct id (inherited)', () => {
+test('<SelectField> - renders a select with correct id (inherited)', () => {
   const element = <SelectField name="x" />;
   const wrapper = mount(
     element,
@@ -55,7 +55,7 @@ it('<SelectField> - renders a select with correct id (inherited)', () => {
   expect(wrapper.find('select').prop('id')).toBeTruthy();
 });
 
-it('<SelectField> - renders a select with correct id (specified)', () => {
+test('<SelectField> - renders a select with correct id (specified)', () => {
   const element = <SelectField name="x" id="y" />;
   const wrapper = mount(
     element,
@@ -66,7 +66,7 @@ it('<SelectField> - renders a select with correct id (specified)', () => {
   expect(wrapper.find('select').prop('id')).toBe('y');
 });
 
-it('<SelectField> - renders a select with correct name', () => {
+test('<SelectField> - renders a select with correct name', () => {
   const element = <SelectField name="x" />;
   const wrapper = mount(
     element,
@@ -77,7 +77,7 @@ it('<SelectField> - renders a select with correct name', () => {
   expect(wrapper.find('select').prop('name')).toBe('x');
 });
 
-it('<SelectField> - renders a select with correct options', () => {
+test('<SelectField> - renders a select with correct options', () => {
   const element = <SelectField name="x" />;
   const wrapper = mount(
     element,
@@ -97,7 +97,7 @@ it('<SelectField> - renders a select with correct options', () => {
   });
 });
 
-it('<SelectField> - renders a select with correct options (transform)', () => {
+test('<SelectField> - renders a select with correct options (transform)', () => {
   const element = <SelectField name="x" transform={x => x.toUpperCase()} />;
   const wrapper = mount(
     element,
@@ -117,7 +117,7 @@ it('<SelectField> - renders a select with correct options (transform)', () => {
   });
 });
 
-it('<SelectField> - renders a select with correct placeholder (fallback)', () => {
+test('<SelectField> - renders a select with correct placeholder (fallback)', () => {
   const element = <SelectField name="x" label="y" placeholder="" />;
   const wrapper = mount(
     element,
@@ -139,7 +139,7 @@ it('<SelectField> - renders a select with correct placeholder (fallback)', () =>
   });
 });
 
-it('<SelectField> - renders a select with correct placeholder (implicit)', () => {
+test('<SelectField> - renders a select with correct placeholder (implicit)', () => {
   const element = <SelectField name="x" placeholder="y" />;
   const wrapper = mount(
     element,
@@ -159,7 +159,7 @@ it('<SelectField> - renders a select with correct placeholder (implicit)', () =>
   });
 });
 
-it('<SelectField> - renders a select with correct value (default)', () => {
+test('<SelectField> - renders a select with correct value (default)', () => {
   const element = <SelectField name="x" />;
   const wrapper = mount(
     element,
@@ -170,7 +170,7 @@ it('<SelectField> - renders a select with correct value (default)', () => {
   expect(wrapper.find('select').prop('value')).toBe('');
 });
 
-it('<SelectField> - renders a select with correct value (model)', () => {
+test('<SelectField> - renders a select with correct value (model)', () => {
   const element = <SelectField name="x" />;
   const wrapper = mount(
     element,
@@ -184,7 +184,7 @@ it('<SelectField> - renders a select with correct value (model)', () => {
   expect(wrapper.find('select').prop('value')).toBe('b');
 });
 
-it('<SelectField> - renders a select with correct value (specified)', () => {
+test('<SelectField> - renders a select with correct value (specified)', () => {
   const element = <SelectField name="x" value="b" />;
   const wrapper = mount(
     element,
@@ -195,7 +195,7 @@ it('<SelectField> - renders a select with correct value (specified)', () => {
   expect(wrapper.find('select').prop('value')).toBe('b');
 });
 
-it('<SelectField> - renders a select which correctly reacts on change', () => {
+test('<SelectField> - renders a select which correctly reacts on change', () => {
   const onChange = jest.fn();
 
   const element = <SelectField name="x" />;
@@ -214,7 +214,7 @@ it('<SelectField> - renders a select which correctly reacts on change', () => {
   expect(onChange).toHaveBeenLastCalledWith('x', 'b');
 });
 
-it('<SelectField> - renders a select which correctly reacts on change (empty)', () => {
+test('<SelectField> - renders a select which correctly reacts on change (empty)', () => {
   const onChange = jest.fn();
 
   const element = <SelectField name="x" />;
@@ -233,7 +233,7 @@ it('<SelectField> - renders a select which correctly reacts on change (empty)', 
   expect(onChange).toHaveBeenLastCalledWith('x', undefined);
 });
 
-it('<SelectField> - renders a select which correctly reacts on change (same value)', () => {
+test('<SelectField> - renders a select which correctly reacts on change (same value)', () => {
   const onChange = jest.fn();
 
   const element = <SelectField name="x" />;
@@ -252,7 +252,7 @@ it('<SelectField> - renders a select which correctly reacts on change (same valu
   expect(onChange).toHaveBeenLastCalledWith('x', 'b');
 });
 
-it('<SelectField> - renders a label', () => {
+test('<SelectField> - renders a label', () => {
   const element = <SelectField name="x" label="y" />;
   const wrapper = mount(
     element,
@@ -266,7 +266,7 @@ it('<SelectField> - renders a label', () => {
   );
 });
 
-it('<SelectField> - renders a wrapper with unknown props', () => {
+test('<SelectField> - renders a wrapper with unknown props', () => {
   const element = <SelectField name="x" data-x="x" data-y="y" data-z="z" />;
   const wrapper = mount(
     element,
@@ -278,14 +278,14 @@ it('<SelectField> - renders a wrapper with unknown props', () => {
   expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });
 
-it('<SelectField> - works with special characters', () => {
+test('<SelectField> - works with special characters', () => {
   mount(
     <SelectField name="x" />,
     createContext({ x: { type: String, allowedValues: ['ă', 'ș'] } }),
   );
 });
 
-it('<SelectField> - disabled items (options) based on predicate', () => {
+test('<SelectField> - disabled items (options) based on predicate', () => {
   const allowedValues = ['a', 'b'];
 
   const element = (
@@ -301,7 +301,7 @@ it('<SelectField> - disabled items (options) based on predicate', () => {
   expect(wrapper.find('option[value="b"]').at(0).prop('disabled')).toBe(false);
 });
 
-it('<SelectField> - renders a select with correct value (default)', () => {
+test('<SelectField> - renders a select with correct value (default)', () => {
   const element = <SelectField name="x" />;
   const wrapper = mount(
     element,
@@ -315,7 +315,7 @@ it('<SelectField> - renders a select with correct value (default)', () => {
   expect(wrapper.find('select').prop('value')).toStrictEqual([]);
 });
 
-it('<SelectField> - renders a select with correct value (model)', () => {
+test('<SelectField> - renders a select with correct value (model)', () => {
   const element = <SelectField name="x" />;
   const wrapper = mount(
     element,
@@ -332,7 +332,7 @@ it('<SelectField> - renders a select with correct value (model)', () => {
   expect(wrapper.find('select').prop('value')).toStrictEqual(['b']);
 });
 
-it('<SelectField> - renders a select with correct value (specified)', () => {
+test('<SelectField> - renders a select with correct value (specified)', () => {
   const element = <SelectField name="x" value={['b']} />;
   const wrapper = mount(
     element,
@@ -346,7 +346,7 @@ it('<SelectField> - renders a select with correct value (specified)', () => {
   expect(wrapper.find('select').prop('value')).toStrictEqual(['b']);
 });
 
-it('<SelectField> - renders a select which correctly reacts on change (first value)', () => {
+test('<SelectField> - renders a select which correctly reacts on change (first value)', () => {
   const onChange = jest.fn();
 
   const element = <SelectField name="x" />;
@@ -368,7 +368,7 @@ it('<SelectField> - renders a select which correctly reacts on change (first val
   expect(onChange).toHaveBeenLastCalledWith('x', ['a']);
 });
 
-it('<SelectField> - renders a select which correctly reacts on change (next value)', () => {
+test('<SelectField> - renders a select which correctly reacts on change (next value)', () => {
   const onChange = jest.fn();
 
   const element = <SelectField name="x" value={['b']} />;
@@ -390,7 +390,7 @@ it('<SelectField> - renders a select which correctly reacts on change (next valu
   expect(onChange).toHaveBeenLastCalledWith('x', ['a', 'b']);
 });
 
-it('<SelectField> - renders a select which correctly reacts on change (uncheck) by value', () => {
+test('<SelectField> - renders a select which correctly reacts on change (uncheck) by value', () => {
   const onChange = jest.fn();
 
   const element = <SelectField name="x" value={['a']} />;
@@ -412,7 +412,7 @@ it('<SelectField> - renders a select which correctly reacts on change (uncheck) 
   expect(onChange).toHaveBeenLastCalledWith('x', []);
 });
 
-it('<SelectField> - renders a select which correctly reacts on change (uncheck) by selectedIndex', () => {
+test('<SelectField> - renders a select which correctly reacts on change (uncheck) by selectedIndex', () => {
   const onChange = jest.fn();
 
   const element = <SelectField name="x" value={['a']} />;
@@ -436,7 +436,7 @@ it('<SelectField> - renders a select which correctly reacts on change (uncheck) 
   expect(onChange).toHaveBeenLastCalledWith('x', []);
 });
 
-it('<SelectField checkboxes> - renders a set of checkboxes', () => {
+test('<SelectField checkboxes> - renders a set of checkboxes', () => {
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -446,7 +446,7 @@ it('<SelectField checkboxes> - renders a set of checkboxes', () => {
   expect(wrapper.find('input')).toHaveLength(2);
 });
 
-it('<SelectField checkboxes> - renders a set of checkboxes with correct disabled state', () => {
+test('<SelectField checkboxes> - renders a set of checkboxes with correct disabled state', () => {
   const element = <SelectField checkboxes name="x" disabled />;
   const wrapper = mount(
     element,
@@ -458,7 +458,7 @@ it('<SelectField checkboxes> - renders a set of checkboxes with correct disabled
   expect(wrapper.find('input').at(1).prop('disabled')).toBe(true);
 });
 
-it('<SelectField checkboxes> - renders a set of checkboxes with correct readOnly state', () => {
+test('<SelectField checkboxes> - renders a set of checkboxes with correct readOnly state', () => {
   const onChange = jest.fn();
 
   const element = <SelectField checkboxes name="x" readOnly />;
@@ -475,7 +475,7 @@ it('<SelectField checkboxes> - renders a set of checkboxes with correct readOnly
   expect(onChange).not.toHaveBeenCalled();
 });
 
-it('<SelectField checkboxes> - renders a set of checkboxes with correct id (inherited)', () => {
+test('<SelectField checkboxes> - renders a set of checkboxes with correct id (inherited)', () => {
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -487,7 +487,7 @@ it('<SelectField checkboxes> - renders a set of checkboxes with correct id (inhe
   expect(wrapper.find('input').at(1).prop('id')).toBeTruthy();
 });
 
-it('<SelectField checkboxes> - renders a set of checkboxes with correct id (specified)', () => {
+test('<SelectField checkboxes> - renders a set of checkboxes with correct id (specified)', () => {
   const element = <SelectField checkboxes name="x" id="y" />;
   const wrapper = mount(
     element,
@@ -499,7 +499,7 @@ it('<SelectField checkboxes> - renders a set of checkboxes with correct id (spec
   expect(wrapper.find('input').at(1).prop('id')).toBe('y-Yg');
 });
 
-it('<SelectField checkboxes> - renders a set of checkboxes with correct name', () => {
+test('<SelectField checkboxes> - renders a set of checkboxes with correct name', () => {
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -511,7 +511,7 @@ it('<SelectField checkboxes> - renders a set of checkboxes with correct name', (
   expect(wrapper.find('input').at(1).prop('name')).toBe('x');
 });
 
-it('<SelectField checkboxes> - renders a set of checkboxes with correct options', () => {
+test('<SelectField checkboxes> - renders a set of checkboxes with correct options', () => {
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -523,7 +523,7 @@ it('<SelectField checkboxes> - renders a set of checkboxes with correct options'
   expect(wrapper.find('label').at(1).text()).toBe('b');
 });
 
-it('<SelectField checkboxes> - renders a set of checkboxes with correct options (transform)', () => {
+test('<SelectField checkboxes> - renders a set of checkboxes with correct options (transform)', () => {
   const element = (
     <SelectField checkboxes name="x" transform={x => x.toUpperCase()} />
   );
@@ -537,7 +537,7 @@ it('<SelectField checkboxes> - renders a set of checkboxes with correct options 
   expect(wrapper.find('label').at(1).text()).toBe('B');
 });
 
-it('<SelectField checkboxes> - renders a set of checkboxes with correct value (default)', () => {
+test('<SelectField checkboxes> - renders a set of checkboxes with correct value (default)', () => {
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -549,7 +549,7 @@ it('<SelectField checkboxes> - renders a set of checkboxes with correct value (d
   expect(wrapper.find('input').at(1).prop('checked')).toBe(false);
 });
 
-it('<SelectField checkboxes> - renders a set of checkboxes with correct value (model)', () => {
+test('<SelectField checkboxes> - renders a set of checkboxes with correct value (model)', () => {
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -564,7 +564,7 @@ it('<SelectField checkboxes> - renders a set of checkboxes with correct value (m
   expect(wrapper.find('input').at(1).prop('checked')).toBe(true);
 });
 
-it('<SelectField checkboxes> - renders a set of checkboxes with correct value (specified)', () => {
+test('<SelectField checkboxes> - renders a set of checkboxes with correct value (specified)', () => {
   const element = <SelectField checkboxes name="x" value="b" />;
   const wrapper = mount(
     element,
@@ -576,7 +576,7 @@ it('<SelectField checkboxes> - renders a set of checkboxes with correct value (s
   expect(wrapper.find('input').at(1).prop('checked')).toBe(true);
 });
 
-it('<SelectField checkboxes> - renders a set of checkboxes which correctly reacts on change', () => {
+test('<SelectField checkboxes> - renders a set of checkboxes which correctly reacts on change', () => {
   const onChange = jest.fn();
 
   const element = <SelectField checkboxes name="x" />;
@@ -593,7 +593,7 @@ it('<SelectField checkboxes> - renders a set of checkboxes which correctly react
   expect(onChange).toHaveBeenLastCalledWith('x', 'b');
 });
 
-it('<SelectField checkboxes> - renders a set of checkboxes which correctly reacts on change (array check)', () => {
+test('<SelectField checkboxes> - renders a set of checkboxes which correctly reacts on change (array check)', () => {
   const onChange = jest.fn();
 
   const element = <SelectField checkboxes name="x" />;
@@ -613,7 +613,7 @@ it('<SelectField checkboxes> - renders a set of checkboxes which correctly react
   expect(onChange).toHaveBeenLastCalledWith('x', ['b']);
 });
 
-it('<SelectField checkboxes> - renders a set of checkboxes which correctly reacts on change (array uncheck)', () => {
+test('<SelectField checkboxes> - renders a set of checkboxes which correctly reacts on change (array uncheck)', () => {
   const onChange = jest.fn();
 
   const element = <SelectField checkboxes name="x" value={['b']} />;
@@ -633,7 +633,7 @@ it('<SelectField checkboxes> - renders a set of checkboxes which correctly react
   expect(onChange).toHaveBeenLastCalledWith('x', []);
 });
 
-it('<SelectField checkboxes> - renders a set of checkboxes which correctly reacts on change (same value)', () => {
+test('<SelectField checkboxes> - renders a set of checkboxes which correctly reacts on change (same value)', () => {
   const onChange = jest.fn();
 
   const element = <SelectField checkboxes name="x" />;
@@ -650,7 +650,7 @@ it('<SelectField checkboxes> - renders a set of checkboxes which correctly react
   expect(onChange).toHaveBeenLastCalledWith('x', 'a');
 });
 
-it('<SelectField checkboxes> - renders a label', () => {
+test('<SelectField checkboxes> - renders a label', () => {
   const element = <SelectField checkboxes name="x" label="y" />;
   const wrapper = mount(
     element,
@@ -661,7 +661,7 @@ it('<SelectField checkboxes> - renders a label', () => {
   expect(wrapper.find('label').at(0).text()).toBe('y');
 });
 
-it('<SelectField checkboxes> - renders a wrapper with unknown props', () => {
+test('<SelectField checkboxes> - renders a wrapper with unknown props', () => {
   const element = (
     <SelectField checkboxes name="x" data-x="x" data-y="y" data-z="z" />
   );
@@ -675,14 +675,14 @@ it('<SelectField checkboxes> - renders a wrapper with unknown props', () => {
   expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });
 
-it('<SelectField checkboxes> - works with special characters', () => {
+test('<SelectField checkboxes> - works with special characters', () => {
   mount(
     <SelectField checkboxes name="x" />,
     createContext({ x: { type: String, allowedValues: ['ă', 'ș'] } }),
   );
 });
 
-it('<SelectField> - renders correct error text (specified)', () => {
+test('<SelectField> - renders correct error text (specified)', () => {
   const error = new Error();
   const element = (
     <SelectField name="x" error={error} showInlineError errorMessage="Error" />
@@ -696,7 +696,7 @@ it('<SelectField> - renders correct error text (specified)', () => {
   expect(wrapper.find('.ui.red.label').text()).toBe('Error');
 });
 
-it('<SelectField> - renders correct error text (showInlineError=false)', () => {
+test('<SelectField> - renders correct error text (showInlineError=false)', () => {
   const error = new Error();
   const element = (
     <SelectField
@@ -714,7 +714,7 @@ it('<SelectField> - renders correct error text (showInlineError=false)', () => {
   expect(wrapper.find('.ui.red.label').length).toBe(0);
 });
 
-it('<SelectField checkboxes> - disabled items (checkboxes) based on predicate', () => {
+test('<SelectField checkboxes> - disabled items (checkboxes) based on predicate', () => {
   const allowedValues = ['a', 'b'];
 
   const element = (

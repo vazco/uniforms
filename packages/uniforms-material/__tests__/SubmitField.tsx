@@ -8,7 +8,7 @@ import createContext from './_createContext';
 import mount from './_mount';
 
 describe('@RTL - SubmitField tests', () => {
-  it('<SubmitField> - default props are not passed when MUI theme props are specified', () => {
+  test('<SubmitField> - default props are not passed when MUI theme props are specified', () => {
     const theme = createMuiTheme({
       props: { MuiButton: { variant: 'outlined' } },
     });
@@ -23,7 +23,7 @@ describe('@RTL - SubmitField tests', () => {
     expect(elements).toHaveLength(1);
   });
 
-  it('<SubmitField> - default props are passed when MUI theme props are absent', () => {
+  test('<SubmitField> - default props are passed when MUI theme props are absent', () => {
     const theme = createMuiTheme({});
     const { container } = render(
       <ThemeProvider theme={theme}>
@@ -36,7 +36,7 @@ describe('@RTL - SubmitField tests', () => {
     expect(elements).toHaveLength(1);
   });
 
-  it('<SubmitField> - explicit props are passed when MUI theme props are specified', () => {
+  test('<SubmitField> - explicit props are passed when MUI theme props are specified', () => {
     const theme = createMuiTheme({
       props: { MuiButton: { variant: 'outlined' } },
     });
@@ -56,21 +56,21 @@ describe('@RTL - SubmitField tests', () => {
   });
 });
 
-it('<SubmitField> - renders', () => {
+test('<SubmitField> - renders', () => {
   const element = <SubmitField />;
   const wrapper = mount(element, createContext());
 
   expect(wrapper).toHaveLength(1);
 });
 
-it('<SubmitField> - renders SubmitField with correct disabled state', () => {
+test('<SubmitField> - renders SubmitField with correct disabled state', () => {
   const element = <SubmitField disabled />;
   const wrapper = mount(element, createContext());
 
   expect(wrapper.children().first().prop('disabled')).toBe(true);
 });
 
-it('<SubmitField> - renders SubmitField with correct disabled state when error (context)', () => {
+test('<SubmitField> - renders SubmitField with correct disabled state when error (context)', () => {
   const error = new Error();
   const element = <SubmitField />;
   const wrapper = mount(element, createContext({}, { error }));

@@ -6,7 +6,7 @@ import { AutoField, NestField } from 'uniforms-mui';
 import createContext from './_createContext';
 import mount from './_mount';
 
-it('<NestField> - renders an <AutoField> for each field', () => {
+test('<NestField> - renders an <AutoField> for each field', () => {
   const element = <NestField name="x" />;
   const wrapper = mount(
     element,
@@ -22,7 +22,7 @@ it('<NestField> - renders an <AutoField> for each field', () => {
   expect(wrapper.find(AutoField).at(1).prop('name')).toBe('b');
 });
 
-it('<NestField> - renders custom content if given', () => {
+test('<NestField> - renders custom content if given', () => {
   const element = (
     <NestField name="x">
       <article data-test="content" />
@@ -42,7 +42,7 @@ it('<NestField> - renders custom content if given', () => {
   expect(wrapper.find('article').prop('data-test')).toBe('content');
 });
 
-it('<NestField> - renders a Subheader', () => {
+test('<NestField> - renders a Subheader', () => {
   const element = <NestField name="x" label="y" />;
   const wrapper = mount(
     element,
@@ -56,7 +56,7 @@ it('<NestField> - renders a Subheader', () => {
   expect(wrapper.find(FormLabel).at(0).text()).toBe('y *');
 });
 
-it('<NestField> - renders a helperText', () => {
+test('<NestField> - renders a helperText', () => {
   const element = <NestField name="x" helperText="Helper" />;
   const wrapper = mount(
     element,

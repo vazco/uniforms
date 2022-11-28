@@ -4,14 +4,14 @@ import { AutoFields } from 'uniforms-unstyled';
 import createContext from './_createContext';
 import mount from './_mount';
 
-it('<AutoFields> - works', () => {
+test('<AutoFields> - works', () => {
   const element = <AutoFields />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find('AutoFields')).toHaveLength(1);
 });
 
-it('<AutoFields> - render all fields by default', () => {
+test('<AutoFields> - render all fields by default', () => {
   const element = <AutoFields />;
   const wrapper = mount(
     element,
@@ -25,7 +25,7 @@ it('<AutoFields> - render all fields by default', () => {
   expect(wrapper.find('input')).toHaveLength(3);
 });
 
-it('<AutoFields> - renders only specified fields', () => {
+test('<AutoFields> - renders only specified fields', () => {
   const element = <AutoFields fields={['x', 'y']} />;
   const wrapper = mount(
     element,
@@ -41,7 +41,7 @@ it('<AutoFields> - renders only specified fields', () => {
   );
 });
 
-it('<AutoFields> - does not render ommited fields', () => {
+test('<AutoFields> - does not render ommited fields', () => {
   const element = <AutoFields omitFields={['x']} />;
   const wrapper = mount(
     element,
@@ -57,7 +57,7 @@ it('<AutoFields> - does not render ommited fields', () => {
   );
 });
 
-it('<AutoFields> - wraps fields in specified element', () => {
+test('<AutoFields> - wraps fields in specified element', () => {
   const element = <AutoFields element="section" />;
   const wrapper = mount(
     element,
