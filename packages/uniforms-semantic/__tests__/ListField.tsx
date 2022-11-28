@@ -12,7 +12,7 @@ describe('@RTL - ListField tests', () => {
   });
 });
 
-test('<ListField> - works', () => {
+it('<ListField> - works', () => {
   const element = <ListField name="x" />;
   const wrapper = mount(
     element,
@@ -22,7 +22,7 @@ test('<ListField> - works', () => {
   expect(wrapper.find(ListField)).toHaveLength(1);
 });
 
-test('<ListField> - renders ListAddField', () => {
+it('<ListField> - renders ListAddField', () => {
   const element = <ListField name="x" label="ListFieldLabel" />;
   const wrapper = mount(
     element,
@@ -33,7 +33,7 @@ test('<ListField> - renders ListAddField', () => {
   expect(wrapper.find(ListAddField).prop('name')).toBe('$');
 });
 
-test('<ListField> - renders correct label (specified)', () => {
+it('<ListField> - renders correct label (specified)', () => {
   const element = <ListField name="x" label="ListFieldLabel" />;
   const wrapper = mount(
     element,
@@ -46,7 +46,7 @@ test('<ListField> - renders correct label (specified)', () => {
   );
 });
 
-test('<ListField> - renders correct number of items with model (specified)', () => {
+it('<ListField> - renders correct number of items with model (specified)', () => {
   const element = <ListField name="x" />;
   const wrapper = mount(
     element,
@@ -58,7 +58,7 @@ test('<ListField> - renders correct number of items with model (specified)', () 
   expect(wrapper.find('input')).toHaveLength(3);
 });
 
-test('<ListField> - passes itemProps to its children', () => {
+it('<ListField> - passes itemProps to its children', () => {
   const element = <ListField name="x" itemProps={{ 'data-xyz': 1 }} />;
   const wrapper = mount(
     element,
@@ -70,7 +70,7 @@ test('<ListField> - passes itemProps to its children', () => {
   expect(wrapper.find(ListItemField).first().prop('data-xyz')).toBe(1);
 });
 
-test('<ListField> - renders children (specified)', () => {
+it('<ListField> - renders children (specified)', () => {
   const Child = jest.fn(() => <div />) as React.FC<any>;
 
   const element = (
@@ -89,7 +89,7 @@ test('<ListField> - renders children (specified)', () => {
   expect(Child).toHaveBeenCalledTimes(2);
 });
 
-test('<ListField> - renders children with correct name (children)', () => {
+it('<ListField> - renders children with correct name (children)', () => {
   const Child = jest.fn(() => <div />) as React.FC<any>;
 
   const element = (
@@ -108,7 +108,7 @@ test('<ListField> - renders children with correct name (children)', () => {
   expect(wrapper.find(Child).at(1).prop('name')).toBe('1');
 });
 
-test('<ListField> - renders children with correct name (value)', () => {
+it('<ListField> - renders children with correct name (value)', () => {
   const element = <ListField name="x" />;
   const wrapper = mount(
     element,
@@ -121,7 +121,7 @@ test('<ListField> - renders children with correct name (value)', () => {
   expect(wrapper.find(ListItemField).at(1).prop('name')).toBe('1');
 });
 
-test('<ListField> - renders correct error text (specified)', () => {
+it('<ListField> - renders correct error text (specified)', () => {
   const error = new Error();
   const element = (
     <ListField name="x" error={error} showInlineError errorMessage="Error" />
@@ -134,7 +134,7 @@ test('<ListField> - renders correct error text (specified)', () => {
   expect(wrapper.children().first().text()).toBe('Error');
 });
 
-test('<ListField> - renders correct error text (showInlineError=false)', () => {
+it('<ListField> - renders correct error text (showInlineError=false)', () => {
   const error = new Error();
   const element = (
     <ListField
@@ -152,7 +152,7 @@ test('<ListField> - renders correct error text (showInlineError=false)', () => {
   expect(wrapper.children().first().text()).not.toBe('Error');
 });
 
-test('<ListField> - renders proper number of optional values after add new value', () => {
+it('<ListField> - renders proper number of optional values after add new value', () => {
   const element = <ListField name="x" label="ListFieldLabel" />;
   const onChange = jest.fn();
   const wrapper = mount(

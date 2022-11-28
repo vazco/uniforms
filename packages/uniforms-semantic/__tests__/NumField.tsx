@@ -4,14 +4,14 @@ import { NumField } from 'uniforms-semantic';
 import createContext from './_createContext';
 import mount from './_mount';
 
-test('<NumField> - renders an input', () => {
+it('<NumField> - renders an input', () => {
   const element = <NumField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
   expect(wrapper.find('input')).toHaveLength(1);
 });
 
-test('<NumField> - renders an input with correct disabled state', () => {
+it('<NumField> - renders an input with correct disabled state', () => {
   const element = <NumField name="x" disabled />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
@@ -19,7 +19,7 @@ test('<NumField> - renders an input with correct disabled state', () => {
   expect(wrapper.find('input').prop('disabled')).toBe(true);
 });
 
-test('<NumField> - renders an input with correct readOnly state', () => {
+it('<NumField> - renders an input with correct readOnly state', () => {
   const element = <NumField name="x" readOnly />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
@@ -27,7 +27,7 @@ test('<NumField> - renders an input with correct readOnly state', () => {
   expect(wrapper.find('input').prop('readOnly')).toBe(true);
 });
 
-test('<NumField> - renders an input with correct id (inherited)', () => {
+it('<NumField> - renders an input with correct id (inherited)', () => {
   const element = <NumField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
@@ -35,7 +35,7 @@ test('<NumField> - renders an input with correct id (inherited)', () => {
   expect(wrapper.find('input').prop('id')).toBeTruthy();
 });
 
-test('<NumField> - renders an input with correct id (specified)', () => {
+it('<NumField> - renders an input with correct id (specified)', () => {
   const element = <NumField name="x" id="y" />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
@@ -43,7 +43,7 @@ test('<NumField> - renders an input with correct id (specified)', () => {
   expect(wrapper.find('input').prop('id')).toBe('y');
 });
 
-test('<NumField> - renders an input with correct max', () => {
+it('<NumField> - renders an input with correct max', () => {
   const element = <NumField name="x" max={10} />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
@@ -51,7 +51,7 @@ test('<NumField> - renders an input with correct max', () => {
   expect(wrapper.find('input').prop('max')).toBe(10);
 });
 
-test('<NumField> - renders an input with correct min', () => {
+it('<NumField> - renders an input with correct min', () => {
   const element = <NumField name="x" min={10} />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
@@ -59,7 +59,7 @@ test('<NumField> - renders an input with correct min', () => {
   expect(wrapper.find('input').prop('min')).toBe(10);
 });
 
-test('<NumField> - renders an input with correct name', () => {
+it('<NumField> - renders an input with correct name', () => {
   const element = <NumField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
@@ -67,7 +67,7 @@ test('<NumField> - renders an input with correct name', () => {
   expect(wrapper.find('input').prop('name')).toBe('x');
 });
 
-test('<NumField> - renders an input with correct placeholder', () => {
+it('<NumField> - renders an input with correct placeholder', () => {
   const element = <NumField name="x" placeholder="y" />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
@@ -75,7 +75,7 @@ test('<NumField> - renders an input with correct placeholder', () => {
   expect(wrapper.find('input').prop('placeholder')).toBe('y');
 });
 
-test('<NumField> - renders an input with correct step (decimal)', () => {
+it('<NumField> - renders an input with correct step (decimal)', () => {
   const element = <NumField name="x" decimal />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
@@ -83,7 +83,7 @@ test('<NumField> - renders an input with correct step (decimal)', () => {
   expect(wrapper.find('input').prop('step')).toBe(0.01);
 });
 
-test('<NumField> - renders an input with correct step (integer)', () => {
+it('<NumField> - renders an input with correct step (integer)', () => {
   const element = <NumField name="x" decimal={false} />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
@@ -91,7 +91,7 @@ test('<NumField> - renders an input with correct step (integer)', () => {
   expect(wrapper.find('input').prop('step')).toBe(1);
 });
 
-test('<NumField> - renders an input with correct step (set)', () => {
+it('<NumField> - renders an input with correct step (set)', () => {
   const element = <NumField name="x" decimal={false} step={3} />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
@@ -99,7 +99,7 @@ test('<NumField> - renders an input with correct step (set)', () => {
   expect(wrapper.find('input').prop('step')).toBe(3);
 });
 
-test('<NumField> - renders an input with correct type', () => {
+it('<NumField> - renders an input with correct type', () => {
   const element = <NumField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
@@ -107,7 +107,7 @@ test('<NumField> - renders an input with correct type', () => {
   expect(wrapper.find('input').prop('type')).toBe('number');
 });
 
-test('<NumField> - renders an input with correct value (default)', () => {
+it('<NumField> - renders an input with correct value (default)', () => {
   const element = <NumField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
@@ -115,7 +115,7 @@ test('<NumField> - renders an input with correct value (default)', () => {
   expect(wrapper.find('input').prop('value')).toBe('');
 });
 
-test('<NumField> - renders an input with correct value (model)', () => {
+it('<NumField> - renders an input with correct value (model)', () => {
   const onChange = jest.fn();
 
   const element = <NumField name="x" />;
@@ -157,7 +157,7 @@ test('<NumField> - renders an input with correct value (model)', () => {
   spy.mockRestore();
 });
 
-test('<NumField> - renders an input with correct value (specified)', () => {
+it('<NumField> - renders an input with correct value (specified)', () => {
   const element = <NumField name="x" value={2} />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
@@ -165,7 +165,7 @@ test('<NumField> - renders an input with correct value (specified)', () => {
   expect(wrapper.find('input').prop('value')).toBe(2);
 });
 
-test('<NumField> - renders an input which correctly reacts on change', () => {
+it('<NumField> - renders an input which correctly reacts on change', () => {
   const onChange = jest.fn();
 
   const element = <NumField name="x" />;
@@ -181,7 +181,7 @@ test('<NumField> - renders an input which correctly reacts on change', () => {
   expect(onChange).toHaveBeenLastCalledWith('x', 1);
 });
 
-test('<NumField> - renders an input which correctly reacts on change (decimal on decimal)', () => {
+it('<NumField> - renders an input which correctly reacts on change (decimal on decimal)', () => {
   const onChange = jest.fn();
 
   const element = <NumField name="x" decimal />;
@@ -197,7 +197,7 @@ test('<NumField> - renders an input which correctly reacts on change (decimal on
   expect(onChange).toHaveBeenLastCalledWith('x', 2.5);
 });
 
-test('<NumField> - renders an input which correctly reacts on change (decimal on integer)', () => {
+it('<NumField> - renders an input which correctly reacts on change (decimal on integer)', () => {
   const onChange = jest.fn();
 
   const element = <NumField name="x" decimal={false} />;
@@ -213,7 +213,7 @@ test('<NumField> - renders an input which correctly reacts on change (decimal on
   expect(onChange).toHaveBeenLastCalledWith('x', 2);
 });
 
-test('<NumField> - renders an input which correctly reacts on change (empty)', () => {
+it('<NumField> - renders an input which correctly reacts on change (empty)', () => {
   const onChange = jest.fn();
 
   const element = <NumField name="x" />;
@@ -229,7 +229,7 @@ test('<NumField> - renders an input which correctly reacts on change (empty)', (
   expect(onChange).toHaveBeenLastCalledWith('x', undefined);
 });
 
-test('<NumField> - renders an input which correctly reacts on change (same value)', () => {
+it('<NumField> - renders an input which correctly reacts on change (same value)', () => {
   const onChange = jest.fn();
 
   const element = <NumField name="x" />;
@@ -245,7 +245,7 @@ test('<NumField> - renders an input which correctly reacts on change (same value
   expect(onChange).toHaveBeenLastCalledWith('x', 1);
 });
 
-test('<NumField> - renders an input which correctly reacts on change (zero)', () => {
+it('<NumField> - renders an input which correctly reacts on change (zero)', () => {
   const onChange = jest.fn();
 
   const element = <NumField name="x" />;
@@ -261,7 +261,7 @@ test('<NumField> - renders an input which correctly reacts on change (zero)', ()
   expect(onChange).toHaveBeenLastCalledWith('x', 0);
 });
 
-test('<NumField> - renders a label', () => {
+it('<NumField> - renders a label', () => {
   const element = <NumField name="x" label="y" />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
@@ -272,7 +272,7 @@ test('<NumField> - renders a label', () => {
   );
 });
 
-test('<NumField> - renders a wrapper with unknown props', () => {
+it('<NumField> - renders a wrapper with unknown props', () => {
   const element = <NumField name="x" data-x="x" data-y="y" data-z="z" />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
@@ -281,7 +281,7 @@ test('<NumField> - renders a wrapper with unknown props', () => {
   expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });
 
-test('<NumField> - renders correct error text (specified)', () => {
+it('<NumField> - renders correct error text (specified)', () => {
   const error = new Error();
   const element = (
     <NumField name="x" error={error} showInlineError errorMessage="Error" />
@@ -291,7 +291,7 @@ test('<NumField> - renders correct error text (specified)', () => {
   expect(wrapper.children().last().text()).toBe('Error');
 });
 
-test('<NumField> - renders correct error text (showInlineError=false)', () => {
+it('<NumField> - renders correct error text (showInlineError=false)', () => {
   const error = new Error();
   const element = (
     <NumField
@@ -306,21 +306,21 @@ test('<NumField> - renders correct error text (showInlineError=false)', () => {
   expect(wrapper.children().last().text()).not.toBe('Error');
 });
 
-test('<NumField> - renders a icon', () => {
+it('<NumField> - renders a icon', () => {
   const element = <NumField name="x" icon="small home" />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
   expect(wrapper.find('i')).toHaveLength(1);
 });
 
-test('<NumField> - renders a icon', () => {
+it('<NumField> - renders a icon', () => {
   const element = <NumField name="x" iconLeft="small home" />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 
   expect(wrapper.find('i')).toHaveLength(1);
 });
 
-test('<NumField> - renders with a custom wrapClassName', () => {
+it('<NumField> - renders with a custom wrapClassName', () => {
   const element = <NumField name="x" wrapClassName="test-class-name" />;
   const wrapper = mount(element, createContext({ x: { type: Number } }));
 

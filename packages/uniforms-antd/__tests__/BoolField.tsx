@@ -6,14 +6,14 @@ import { BoolField } from 'uniforms-antd';
 import createContext from './_createContext';
 import mount from './_mount';
 
-test('<BoolField> - renders a switch input', () => {
+it('<BoolField> - renders a switch input', () => {
   const element = <BoolField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
   expect(wrapper.find(Switch)).toHaveLength(1);
 });
 
-test('<BoolField> - default props override', () => {
+it('<BoolField> - default props override', () => {
   const switchProps = {
     checkedChildren: <span id="checked" />,
     unCheckedChildren: <span id="unchecked" />,
@@ -27,14 +27,14 @@ test('<BoolField> - default props override', () => {
   );
 });
 
-test('<BoolField> - renders a checkbox input', () => {
+it('<BoolField> - renders a checkbox input', () => {
   const element = <BoolField checkbox name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
   expect(wrapper.find(Checkbox)).toHaveLength(1);
 });
 
-test('<BoolField> - renders a switch input with correct id (inherited)', () => {
+it('<BoolField> - renders a switch input with correct id (inherited)', () => {
   const element = <BoolField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -42,7 +42,7 @@ test('<BoolField> - renders a switch input with correct id (inherited)', () => {
   expect(wrapper.find(Switch).prop('id')).toBeTruthy();
 });
 
-test('<BoolField> - renders a checkbox input with correct id (inherited)', () => {
+it('<BoolField> - renders a checkbox input with correct id (inherited)', () => {
   const element = <BoolField checkbox name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -50,7 +50,7 @@ test('<BoolField> - renders a checkbox input with correct id (inherited)', () =>
   expect(wrapper.find(Checkbox).prop('id')).toBeTruthy();
 });
 
-test('<BoolField> - renders a switch input with correct id (specified)', () => {
+it('<BoolField> - renders a switch input with correct id (specified)', () => {
   const element = <BoolField name="x" id="y" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -58,7 +58,7 @@ test('<BoolField> - renders a switch input with correct id (specified)', () => {
   expect(wrapper.find(Switch).prop('id')).toBe('y');
 });
 
-test('<BoolField> - renders a checkbox input with correct id (specified)', () => {
+it('<BoolField> - renders a checkbox input with correct id (specified)', () => {
   const element = <BoolField checkbox name="x" id="y" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -66,7 +66,7 @@ test('<BoolField> - renders a checkbox input with correct id (specified)', () =>
   expect(wrapper.find(Checkbox).prop('id')).toBe('y');
 });
 
-test('<BoolField> - renders a switch input with correct name', () => {
+it('<BoolField> - renders a switch input with correct name', () => {
   const element = <BoolField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -74,7 +74,7 @@ test('<BoolField> - renders a switch input with correct name', () => {
   expect(wrapper.find(Switch).prop('name')).toBe('x');
 });
 
-test('<BoolField> - renders a checkbox input with correct name', () => {
+it('<BoolField> - renders a checkbox input with correct name', () => {
   const element = <BoolField checkbox name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -82,7 +82,7 @@ test('<BoolField> - renders a checkbox input with correct name', () => {
   expect(wrapper.find(Checkbox).prop('name')).toBe('x');
 });
 
-test('<BoolField> - renders a switch input with correct disabled state', () => {
+it('<BoolField> - renders a switch input with correct disabled state', () => {
   const element = <BoolField name="x" disabled />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -90,7 +90,7 @@ test('<BoolField> - renders a switch input with correct disabled state', () => {
   expect(wrapper.find(Switch).prop('disabled')).toBe(true);
 });
 
-test('<BoolField> - renders a checkbox input with correct disabled state', () => {
+it('<BoolField> - renders a checkbox input with correct disabled state', () => {
   const element = <BoolField checkbox name="x" disabled />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -98,7 +98,7 @@ test('<BoolField> - renders a checkbox input with correct disabled state', () =>
   expect(wrapper.find(Checkbox).prop('disabled')).toBe(true);
 });
 
-test('<BoolField> - renders a switch input with correct readOnly state', () => {
+it('<BoolField> - renders a switch input with correct readOnly state', () => {
   const onChange = jest.fn();
 
   const element = <BoolField name="x" readOnly />;
@@ -113,7 +113,7 @@ test('<BoolField> - renders a switch input with correct readOnly state', () => {
   expect(onChange).not.toHaveBeenCalled();
 });
 
-test('<BoolField> - renders a checkbox input with correct readOnly state', () => {
+it('<BoolField> - renders a checkbox input with correct readOnly state', () => {
   const onChange = jest.fn();
 
   const element = <BoolField checkbox name="x" readOnly />;
@@ -128,7 +128,7 @@ test('<BoolField> - renders a checkbox input with correct readOnly state', () =>
   expect(onChange).not.toHaveBeenCalled();
 });
 
-test('<BoolField> - renders a switch input with correct label (specified)', () => {
+it('<BoolField> - renders a switch input with correct label (specified)', () => {
   const element = <BoolField name="x" label="BoolFieldLabel" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -136,7 +136,7 @@ test('<BoolField> - renders a switch input with correct label (specified)', () =
   expect(wrapper.find('label').text()).toBe('BoolFieldLabel'); // Label is prefixed with a &nbsp;.
 });
 
-test('<BoolField> - renders a checkbox input with correct label (specified)', () => {
+it('<BoolField> - renders a checkbox input with correct label (specified)', () => {
   const element = <BoolField checkbox name="x" label="BoolFieldLabel" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -144,7 +144,7 @@ test('<BoolField> - renders a checkbox input with correct label (specified)', ()
   expect(wrapper.find('label').first().text()).toBe('BoolFieldLabel'); // Label is prefixed with a &nbsp;.
 });
 
-test('<BoolField> - renders a switch input with correct value (default)', () => {
+it('<BoolField> - renders a switch input with correct value (default)', () => {
   const element = <BoolField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -152,7 +152,7 @@ test('<BoolField> - renders a switch input with correct value (default)', () => 
   expect(wrapper.find(Switch).prop('checked')).toBe(false);
 });
 
-test('<BoolField> - renders a checkbox input with correct value (default)', () => {
+it('<BoolField> - renders a checkbox input with correct value (default)', () => {
   const element = <BoolField checkbox name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -160,7 +160,7 @@ test('<BoolField> - renders a checkbox input with correct value (default)', () =
   expect(wrapper.find(Checkbox).prop('checked')).toBe(false);
 });
 
-test('<BoolField> - renders a switch input with correct value (model)', () => {
+it('<BoolField> - renders a switch input with correct value (model)', () => {
   const element = <BoolField name="x" />;
   const wrapper = mount(
     element,
@@ -171,7 +171,7 @@ test('<BoolField> - renders a switch input with correct value (model)', () => {
   expect(wrapper.find(Switch).prop('checked')).toBe(true);
 });
 
-test('<BoolField> - renders a checkbox input with correct value (model)', () => {
+it('<BoolField> - renders a checkbox input with correct value (model)', () => {
   const element = <BoolField checkbox name="x" />;
   const wrapper = mount(
     element,
@@ -182,7 +182,7 @@ test('<BoolField> - renders a checkbox input with correct value (model)', () => 
   expect(wrapper.find(Checkbox).prop('checked')).toBe(true);
 });
 
-test('<BoolField> - renders a switch input with correct value (specified)', () => {
+it('<BoolField> - renders a switch input with correct value (specified)', () => {
   const element = <BoolField name="x" value />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -190,7 +190,7 @@ test('<BoolField> - renders a switch input with correct value (specified)', () =
   expect(wrapper.find(Switch).prop('checked')).toBe(true);
 });
 
-test('<BoolField> - renders a checkbox input with correct value (specified)', () => {
+it('<BoolField> - renders a checkbox input with correct value (specified)', () => {
   const element = <BoolField checkbox name="x" value />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -198,7 +198,7 @@ test('<BoolField> - renders a checkbox input with correct value (specified)', ()
   expect(wrapper.find(Checkbox).prop('checked')).toBe(true);
 });
 
-test('<BoolField> - renders a switch input which correctly reacts on change', () => {
+it('<BoolField> - renders a switch input which correctly reacts on change', () => {
   const onChange = jest.fn();
 
   const element = <BoolField name="x" />;
@@ -213,7 +213,7 @@ test('<BoolField> - renders a switch input which correctly reacts on change', ()
   expect(onChange).toHaveBeenLastCalledWith('x', true);
 });
 
-test('<BoolField> - renders a checkbox input which correctly reacts on change', () => {
+it('<BoolField> - renders a checkbox input which correctly reacts on change', () => {
   const onChange = jest.fn();
 
   const element = <BoolField checkbox name="x" />;
@@ -228,7 +228,7 @@ test('<BoolField> - renders a checkbox input which correctly reacts on change', 
   expect(onChange).toHaveBeenLastCalledWith('x', true);
 });
 
-test('<BoolField> - renders a switch wrapper with unknown props', () => {
+it('<BoolField> - renders a switch wrapper with unknown props', () => {
   const element = <BoolField name="x" data-x="x" data-y="y" data-z="z" />;
   const wrapper = mount(element, createContext({ x: { type: Boolean } }));
 
@@ -237,7 +237,7 @@ test('<BoolField> - renders a switch wrapper with unknown props', () => {
   expect(wrapper.find(Switch).prop('data-z')).toBe('z');
 });
 
-test('<BoolField> - renders a checkbox wrapper with unknown props', () => {
+it('<BoolField> - renders a checkbox wrapper with unknown props', () => {
   const element = (
     <BoolField checkbox name="x" data-x="x" data-y="y" data-z="z" />
   );

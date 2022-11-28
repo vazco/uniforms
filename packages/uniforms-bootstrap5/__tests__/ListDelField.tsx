@@ -16,14 +16,14 @@ beforeEach(() => {
   onChange.mockClear();
 });
 
-test('<ListDelField> - works', () => {
+it('<ListDelField> - works', () => {
   const element = <ListDelField name="x.1" />;
   const wrapper = mount(element, context());
 
   expect(wrapper.find(ListDelField)).toHaveLength(1);
 });
 
-test('<ListDelField> - prevents onClick when disabled', () => {
+it('<ListDelField> - prevents onClick when disabled', () => {
   const element = <ListDelField name="x.1" disabled />;
   const wrapper = mount(element, context());
 
@@ -31,7 +31,7 @@ test('<ListDelField> - prevents onClick when disabled', () => {
   expect(onChange).not.toHaveBeenCalled();
 });
 
-test('<ListDelField> - prevents onClick when limit reached', () => {
+it('<ListDelField> - prevents onClick when limit reached', () => {
   const element = <ListDelField name="x.1" />;
   const wrapper = mount(element, context({ x: { minCount: 3 } }));
 
@@ -39,7 +39,7 @@ test('<ListDelField> - prevents onClick when limit reached', () => {
   expect(onChange).not.toHaveBeenCalled();
 });
 
-test('<ListDelField> - correctly reacts on click', () => {
+it('<ListDelField> - correctly reacts on click', () => {
   const element = <ListDelField name="x.1" />;
   const wrapper = mount(element, context());
 
@@ -47,7 +47,7 @@ test('<ListDelField> - correctly reacts on click', () => {
   expect(onChange).toHaveBeenLastCalledWith('x', ['x', 'z']);
 });
 
-test('<ListDelField> - correctly reacts on keyboard enter key', () => {
+it('<ListDelField> - correctly reacts on keyboard enter key', () => {
   const element = <ListDelField name="x.1" />;
   const wrapper = mount(element, context());
 

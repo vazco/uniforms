@@ -17,14 +17,14 @@ beforeEach(() => {
   onChange.mockClear();
 });
 
-test('<ListAddField> - works', () => {
+it('<ListAddField> - works', () => {
   const element = <ListAddField name="x.$" />;
   const wrapper = mount(element, context());
 
   expect(wrapper.find(ListAddField)).toHaveLength(1);
 });
 
-test('<ListAddField> - default props override', () => {
+it('<ListAddField> - default props override', () => {
   const buttonProps = {
     icon: <span id="icon" />,
     size: 'large' as const,
@@ -40,7 +40,7 @@ test('<ListAddField> - default props override', () => {
   );
 });
 
-test('<ListAddField> - prevents onClick when disabled', () => {
+it('<ListAddField> - prevents onClick when disabled', () => {
   const element = <ListAddField name="x.1" disabled />;
   const wrapper = mount(element, context());
 
@@ -48,7 +48,7 @@ test('<ListAddField> - prevents onClick when disabled', () => {
   expect(onChange).not.toHaveBeenCalled();
 });
 
-test('<ListAddField> - prevents onClick when readOnly', () => {
+it('<ListAddField> - prevents onClick when readOnly', () => {
   const element = <ListAddField name="x.1" readOnly />;
   const wrapper = mount(element, context());
 
@@ -56,7 +56,7 @@ test('<ListAddField> - prevents onClick when readOnly', () => {
   expect(onChange).not.toHaveBeenCalled();
 });
 
-test('<ListAddField> - prevents onClick when limit reached', () => {
+it('<ListAddField> - prevents onClick when limit reached', () => {
   const element = <ListAddField name="x.1" />;
   const wrapper = mount(element, context({ x: { maxCount: 0 } }));
 
@@ -64,7 +64,7 @@ test('<ListAddField> - prevents onClick when limit reached', () => {
   expect(onChange).not.toHaveBeenCalled();
 });
 
-test('<ListAddField> - correctly reacts on click', () => {
+it('<ListAddField> - correctly reacts on click', () => {
   const element = <ListAddField name="x.1" value="y" />;
   const wrapper = mount(element, context());
 

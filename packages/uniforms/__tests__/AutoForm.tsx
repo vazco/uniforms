@@ -3,7 +3,7 @@ import React from 'react';
 import SimpleSchema from 'simpl-schema';
 import { AutoForm, connectField, context } from 'uniforms';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
-import { AutoField } from 'uniforms-unstyled';
+import { AutoFields } from 'uniforms-unstyled';
 
 import { render } from '../__suites__';
 
@@ -19,6 +19,7 @@ const onChange = jest.fn();
 const onChangeModel = jest.fn();
 const onSubmit = jest.fn();
 const validator = jest.fn();
+const mockContext = jest.fn();
 
 jest.spyOn(schema.schema, 'validator').mockImplementation(() => validator);
 
@@ -31,14 +32,14 @@ beforeEach(() => {
 
 describe('<AutoForm />', () => {
   describe('when changes', () => {
-    test('updates', () => {
+    it('updates', () => {
       render(
         <AutoForm onChange={onChange} schema={schema} />,
         { schema: { type: SimpleSchema2Bridge } },
         { onChange },
       );
     });
-    test('validates', () => {
+    it('validates', () => {
       // FIXME: AutoForm is not a valid Component.
       render(
         <AutoForm
@@ -47,7 +48,7 @@ describe('<AutoForm />', () => {
           name="form"
           schema={schema}
         >
-          <AutoField name="a" />
+          <AutoFields />
         </AutoForm>,
         {
           schema: { type: SimpleSchema2Bridge },
@@ -59,15 +60,15 @@ describe('<AutoForm />', () => {
       fireEvent.submit(form);
 
       expect(validator).toHaveBeenCalledTimes(1);
-      expect(validator).toHaveBeenLastCalledWith({ a: '' });
+      expect(validator).toHaveBeenLastCalledWith({ a: '', b: '', c: '' });
 
       fireEvent.change(input, { target: { value: '2' } });
 
       expect(validator).toHaveBeenCalledTimes(2);
-      expect(validator).toHaveBeenLastCalledWith({ a: '2' });
+      expect(validator).toHaveBeenLastCalledWith({ a: '2', b: '', c: '' });
     });
 
-    test('calls `onChangeModel`', () => {
+    it('calls `onChangeModel`', () => {
       // FIXME: AutoForm is not a valid Component.
       render(
         <AutoForm
@@ -86,41 +87,29 @@ describe('<AutoForm />', () => {
       expect(onChangeModel).toHaveBeenCalledTimes(1);
       expect(onChangeModel).toHaveBeenLastCalledWith({ a: '2' });
     });
-    test('updates `changed` and `changedMap`', () => {
+    it('updates `changed` and `changedMap`', () => {
       // FIXME: AutoForm is not a valid Component.
       render(
         <AutoForm schema={schema}>
           <context.Consumer>
-            {context => (
-              <>
-                {context ? (
-                  <>
-                    <p data-testid="changed">{`${context.changed}`}</p>
-                    <p data-testid="changedMap">
-                      {JSON.stringify(context?.changedMap)}
-                    </p>
-                  </>
-                ) : null}
-              </>
-            )}
+            {context => mockContext(context?.changed, context?.changedMap)}
           </context.Consumer>
-          <AutoField name="b" />
+          <AutoFields />
         </AutoForm>,
         {
           schema: { type: SimpleSchema2Bridge },
         },
       );
 
-      const changed = screen.getByTestId('changed').innerHTML;
-      const changedMap = JSON.parse(screen.getByTestId('changedMap').innerHTML);
-
-      expect(changed).toBe('true');
-      expect(changedMap).toHaveProperty('b');
-      expect(changedMap.b).toBeTruthy();
+      expect(mockContext).toHaveBeenLastCalledWith(true, {
+        a: {},
+        b: {},
+        c: {},
+      });
     });
   });
   describe('when render', () => {
-    test('calls `onChange` before render', () => {
+    it('calls `onChange` before render', () => {
       const field = () => null;
       const Field = connectField(field);
 
@@ -147,11 +136,11 @@ describe('<AutoForm />', () => {
       expect(onChange.mock.calls[0]).toEqual(expect.arrayContaining(['b', '']));
       expect(onChange.mock.calls[1]).toEqual(expect.arrayContaining(['c', '']));
     });
-    test('skips `onSubmit` until rendered (`autosave` = true)', async () => {
+    it('skips `onSubmit` until rendered (`autosave` = true)', async () => {
       // FIXME: AutoForm is not a valid Component.
       render(
         <AutoForm autosave onSubmit={onSubmit} schema={schema}>
-          <AutoField name="a" />
+          <AutoFields />
         </AutoForm>,
         {
           schema: { type: SimpleSchema2Bridge },
@@ -165,29 +154,23 @@ describe('<AutoForm />', () => {
       const input = screen.getByLabelText('A');
 
       expect(onSubmit).toHaveBeenCalledTimes(1);
-      expect(onSubmit).toHaveBeenLastCalledWith({ a: '' });
+      expect(onSubmit).toHaveBeenLastCalledWith({ a: '', b: '', c: '' });
 
       await new Promise(resolve => setTimeout(resolve));
       fireEvent.change(input, { target: { value: '1' } });
 
       expect(validator).toHaveBeenCalledTimes(2);
-      expect(validator).toHaveBeenLastCalledWith({ a: '1' });
+      expect(validator).toHaveBeenLastCalledWith({ a: '1', b: '', c: '' });
     });
   });
 
   describe('when reset', () => {
-    test('reset `model`', () => {
+    it('reset `model`', () => {
       // FIXME: AutoForm is not a valid Component.
       const Component = () => (
         <AutoForm autosave model={model} schema={schema}>
           <context.Consumer>
-            {context => (
-              <>
-                {context && context.model ? (
-                  <p data-testid="model">{JSON.stringify(context.model)}</p>
-                ) : null}
-              </>
-            )}
+            {context => mockContext(context?.model)}
           </context.Consumer>
         </AutoForm>
       );
@@ -196,25 +179,16 @@ describe('<AutoForm />', () => {
       });
 
       rerender(<Component />);
-      const renderedModel = JSON.parse(screen.getByTestId('model').innerHTML);
 
-      expect(renderedModel).toEqual(model);
+      expect(mockContext).toHaveBeenLastCalledWith(model);
     });
 
-    test('resets state `changedMap`', () => {
+    it('resets state `changedMap`', () => {
       // FIXME: AutoForm is not a valid Component.
       const Component = () => (
         <AutoForm autosave model={model} schema={schema}>
           <context.Consumer>
-            {context => (
-              <>
-                {context && context.changedMap ? (
-                  <p data-testid="changedMap">
-                    {JSON.stringify(context.changedMap)}
-                  </p>
-                ) : null}
-              </>
-            )}
+            {context => mockContext(context?.changedMap)}
           </context.Consumer>
         </AutoForm>
       );
@@ -223,23 +197,16 @@ describe('<AutoForm />', () => {
       });
 
       rerender(<Component />);
-      const changedMap = JSON.parse(screen.getByTestId('changedMap').innerHTML);
 
-      expect(changedMap).toEqual({});
+      expect(mockContext).toHaveBeenLastCalledWith({});
     });
 
-    test('resets state `changed`', () => {
+    it('resets state `changed`', () => {
       // FIXME: AutoForm is not a valid Component.
       const Component = () => (
         <AutoForm autosave model={model} schema={schema}>
           <context.Consumer>
-            {context => (
-              <>
-                {context ? (
-                  <p data-testid="changed">{JSON.stringify(context.changed)}</p>
-                ) : null}
-              </>
-            )}
+            {context => mockContext(context?.changed)}
           </context.Consumer>
         </AutoForm>
       );
@@ -248,24 +215,17 @@ describe('<AutoForm />', () => {
       });
 
       rerender(<Component />);
-      const changed = JSON.parse(screen.getByTestId('changed').innerHTML);
 
-      expect(changed).toEqual(false);
+      expect(mockContext).toHaveBeenLastCalledWith(false);
     });
   });
   describe('when update', () => {
-    test('<AutoForm />, updates', () => {
+    it('<AutoForm />, updates', () => {
       // FIXME: AutoForm is not a valid Component.
       render(
         <AutoForm schema={schema}>
           <context.Consumer>
-            {context => (
-              <>
-                {context ? (
-                  <p data-testid="model">{JSON.stringify(context.model)}</p>
-                ) : null}
-              </>
-            )}
+            {context => mockContext(context?.model)}
           </context.Consumer>
         </AutoForm>,
         {
@@ -273,12 +233,10 @@ describe('<AutoForm />', () => {
         },
       );
 
-      const model = JSON.parse(screen.getByTestId('model').innerHTML);
-
-      expect(model).toEqual({});
+      expect(mockContext).toHaveBeenLastCalledWith({});
     });
 
-    test('<AutoForm />, validates', () => {
+    it('<AutoForm />, validates', () => {
       // FIXME: AutoForm is not a valid Component.
       const { rerender } = render(<AutoForm schema={schema} />, {
         schema: { type: SimpleSchema2Bridge },

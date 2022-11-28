@@ -15,14 +15,14 @@ const error = {
   message: 'X is required [validation-error]',
 };
 
-test('<ErrorsField> - works', () => {
+it('<ErrorsField> - works', () => {
   const element = <ErrorsField />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find(ErrorsField)).toHaveLength(1);
 });
 
-test('<ErrorsField> - renders list of correct error messages (context)', () => {
+it('<ErrorsField> - renders list of correct error messages (context)', () => {
   const element = <ErrorsField />;
   const wrapper = mount(
     element,
@@ -38,7 +38,7 @@ test('<ErrorsField> - renders list of correct error messages (context)', () => {
   expect(wrapper.find('.panel-body > div').at(2).text()).toBe('Z is required');
 });
 
-test('<ErrorsField> - renders children (specified)', () => {
+it('<ErrorsField> - renders children (specified)', () => {
   const element = <ErrorsField children="Error message list" />;
   const wrapper = mount(
     element,

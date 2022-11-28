@@ -10,7 +10,7 @@ export function testListField(
     addFieldLocator,
   }: { addFieldLocator: () => HTMLElement | null | undefined },
 ) {
-  test('<ListField> - renders ListAddField', () => {
+  it('<ListField> - renders ListAddField', () => {
     render(<ListField name="x" label="ListFieldLabel" />, {
       x: Array,
       'x.$': String,
@@ -19,7 +19,7 @@ export function testListField(
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
-  test('<ListField> - renders correct label (specified)', () => {
+  it('<ListField> - renders correct label (specified)', () => {
     render(<ListField name="x" label="ListFieldLabel" />, {
       x: Array,
       'x.$': String,
@@ -29,7 +29,7 @@ export function testListField(
     expect(screen.getByText(/ListFieldLabel.*/)).toBeInTheDocument();
   });
 
-  test('<ListField> - renders correct numer of items with model (specified)', () => {
+  it('<ListField> - renders correct numer of items with model (specified)', () => {
     render(
       <ListField name="x" />,
       {
@@ -43,7 +43,7 @@ export function testListField(
     expect(screen.getAllByRole('textbox')).toHaveLength(3);
   });
 
-  test('<ListField> - passes itemProps to its children', () => {
+  it('<ListField> - passes itemProps to its children', () => {
     const itemProps = { 'data-xyz': 1 };
     const Child = jest.fn(() => <div />) as FC<any>;
     render(
@@ -60,7 +60,7 @@ export function testListField(
     expect(Child).toHaveBeenNthCalledWith(2, itemProps, {});
   });
 
-  test('<ListField> - renders children (specified)', () => {
+  it('<ListField> - renders children (specified)', () => {
     const Child = jest.fn(() => <div />) as FC<any>;
     render(
       <ListField name="x">
@@ -75,7 +75,7 @@ export function testListField(
     expect(Child).toHaveBeenCalledTimes(2);
   });
 
-  test('<ListField> - renders children with correct name (children)', () => {
+  it('<ListField> - renders children with correct name (children)', () => {
     const Child = jest.fn(() => <div data-testid="field" />) as FC<any>;
     render(
       <ListField name="x">
@@ -90,7 +90,7 @@ export function testListField(
     expect(Child).toHaveBeenNthCalledWith(2, { name: '1' }, {});
   });
 
-  test('<ListField> - renders children with correct name (value)', () => {
+  it('<ListField> - renders children with correct name (value)', () => {
     render(
       <ListField name="x" />,
       {
@@ -106,7 +106,7 @@ export function testListField(
     expect(inputs[1]).toHaveAttribute('name', 'x.1');
   });
 
-  test('<ListField> - renders proper number of optional values after add new value', () => {
+  it('<ListField> - renders proper number of optional values after add new value', () => {
     const onChange = jest.fn();
     render(
       <ListField name="x" label="ListFieldLabel" />,

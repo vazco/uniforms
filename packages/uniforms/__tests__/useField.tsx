@@ -39,12 +39,12 @@ const TestComponent = connectField((props: Record<string, any>) => {
 });
 
 describe('useField', () => {
-  test('is a function', () => {
+  it('is a function', () => {
     expect(useField).toBeInstanceOf(Function);
   });
 
   describe('when called with initialValue', () => {
-    test('applies default value', () => {
+    it('applies default value', () => {
       render(
         <AutoForm schema={bridge}>
           <TestComponent name="d" />
@@ -56,7 +56,7 @@ describe('useField', () => {
       expect(input).toHaveAttribute('value', '4');
     });
 
-    test('does not apply default value after first change', () => {
+    it('does not apply default value after first change', () => {
       const { getByRole } = render(
         <AutoForm label schema={bridge}>
           <TestComponent name="d" />
@@ -73,7 +73,7 @@ describe('useField', () => {
   });
 
   describe('when called with `absoluteName`', () => {
-    test('works on top-level', () => {
+    it('works on top-level', () => {
       render(
         <BaseForm schema={bridge}>
           <Test name="a" options={{ absoluteName: true }} />
@@ -84,7 +84,7 @@ describe('useField', () => {
       );
     });
 
-    test('works nested', () => {
+    it('works nested', () => {
       render(
         <BaseForm schema={bridge}>
           <Test name="b">

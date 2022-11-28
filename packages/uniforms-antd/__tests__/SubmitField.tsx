@@ -5,14 +5,14 @@ import { SubmitField } from 'uniforms-antd';
 import createContext from './_createContext';
 import mount from './_mount';
 
-test('<SubmitField> - renders', () => {
+it('<SubmitField> - renders', () => {
   const element = <SubmitField />;
   const wrapper = mount(element, createContext());
 
   expect(wrapper).toHaveLength(1);
 });
 
-test('<SubmitField> - renders disabled if error', () => {
+it('<SubmitField> - renders disabled if error', () => {
   const element = <SubmitField />;
   const wrapper = mount(element, createContext(undefined, { error: {} }));
 
@@ -20,7 +20,7 @@ test('<SubmitField> - renders disabled if error', () => {
   expect(wrapper.find(Button).prop('disabled')).toBe(true);
 });
 
-test('<SubmitField> - renders enabled if error and enabled', () => {
+it('<SubmitField> - renders enabled if error and enabled', () => {
   const element = <SubmitField disabled={false} />;
   const wrapper = mount(element, createContext(undefined, { error: {} }));
 

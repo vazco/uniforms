@@ -13,6 +13,7 @@ describe('ValidatedForm', () => {
   const onValidate = jest.fn((model, error) => error);
   const validator = jest.fn();
   const validatorForSchema = jest.fn(() => validator);
+  const mockContext = jest.fn();
 
   const error = new Error('test error message');
   const model = { a: 1 };
@@ -30,7 +31,7 @@ describe('ValidatedForm', () => {
   describe('on validation', () => {
     // FIXME: ValidatedForm is not a valid Component.
 
-    test('validates (when `.validate` is called)', () => {
+    it('validates (when `.validate` is called)', () => {
       render(
         <ValidatedForm
           // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
@@ -50,7 +51,7 @@ describe('ValidatedForm', () => {
       expect(validator).toHaveBeenCalledTimes(1);
     });
 
-    test('correctly calls `validator`', () => {
+    it('correctly calls `validator`', () => {
       render(
         <ValidatedForm
           // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
@@ -71,7 +72,7 @@ describe('ValidatedForm', () => {
       expect(validator).toHaveBeenCalledTimes(1);
       expect(validator).toHaveBeenLastCalledWith(model);
     });
-    test('updates error state with errors from `validator`', async () => {
+    it('updates error state with errors from `validator`', async () => {
       render(
         <ValidatedForm
           // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
@@ -99,7 +100,7 @@ describe('ValidatedForm', () => {
       expect(onValidate).toHaveBeenLastCalledWith(model, error);
     });
 
-    test('correctly calls `onValidate` when validation succeeds', () => {
+    it('correctly calls `onValidate` when validation succeeds', () => {
       render(
         <ValidatedForm
           // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
@@ -121,7 +122,7 @@ describe('ValidatedForm', () => {
       expect(onValidate).toHaveBeenLastCalledWith(model, null);
     });
 
-    test('correctly calls `onValidate` when validation fails ', () => {
+    it('correctly calls `onValidate` when validation fails ', () => {
       render(
         <ValidatedForm
           // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
@@ -149,7 +150,7 @@ describe('ValidatedForm', () => {
       expect(onValidate).toHaveBeenLastCalledWith(model, error);
     });
 
-    test('updates error state with async errors from `onValidate`', async () => {
+    it('updates error state with async errors from `onValidate`', async () => {
       render(
         <ValidatedForm
           // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
@@ -161,13 +162,7 @@ describe('ValidatedForm', () => {
           validator={validator}
         >
           <context.Consumer>
-            {context => (
-              <>
-                {context && context.error ? (
-                  <p data-testid="error">{context.error.message}</p>
-                ) : null}
-              </>
-            )}
+            {context => mockContext(context?.error)}
           </context.Consumer>
         </ValidatedForm>,
         {
@@ -179,11 +174,10 @@ describe('ValidatedForm', () => {
       onValidate.mockImplementationOnce(() => error);
 
       fireEvent.submit(form);
-      const errorElement = screen.getByTestId('error');
 
-      expect(errorElement.innerHTML).toBe('test error message');
+      expect(mockContext).toHaveBeenLastCalledWith(error);
     });
-    test('leaves error state alone when `onValidate` suppress `validator` errors', async () => {
+    it('leaves error state alone when `onValidate` suppress `validator` errors', async () => {
       render(
         <ValidatedForm
           // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
@@ -195,15 +189,7 @@ describe('ValidatedForm', () => {
           validator={validator}
         >
           <context.Consumer>
-            {context => (
-              <>
-                {context ? (
-                  <p data-testid="error">
-                    {JSON.stringify({ error: context.error })}
-                  </p>
-                ) : null}
-              </>
-            )}
+            {context => mockContext(context?.error)}
           </context.Consumer>
         </ValidatedForm>,
         {
@@ -211,7 +197,6 @@ describe('ValidatedForm', () => {
         },
       );
       const form = screen.getByRole('form');
-      const errorContext = JSON.parse(screen.getByTestId('error').innerHTML);
 
       validator.mockImplementationOnce(() => {
         throw error;
@@ -221,9 +206,9 @@ describe('ValidatedForm', () => {
 
       expect(validator).toHaveBeenCalled();
       expect(onValidate).toHaveBeenCalled();
-      expect(errorContext.error).toBe(null);
+      expect(mockContext).toHaveBeenLastCalledWith(null);
     });
-    test('has `validating` context variable, default `false`', () => {
+    it('has `validating` context variable, default `false`', () => {
       render(
         <ValidatedForm
           schema={schema}
@@ -232,15 +217,7 @@ describe('ValidatedForm', () => {
           validator={validator}
         >
           <context.Consumer>
-            {context => (
-              <>
-                {context ? (
-                  <p data-testid="validating">
-                    {JSON.stringify(context.validating)}
-                  </p>
-                ) : null}
-              </>
-            )}
+            {context => mockContext(context?.validating)}
           </context.Consumer>
         </ValidatedForm>,
         {
@@ -248,14 +225,10 @@ describe('ValidatedForm', () => {
         },
       );
 
-      const validatingContext = JSON.parse(
-        screen.getByTestId('validating').innerHTML,
-      );
-
-      expect(validatingContext).toBe(false);
+      expect(mockContext).toHaveBeenCalledWith(false);
     });
 
-    test('uses `modelTransform`s `validate` mode', () => {
+    it('uses `modelTransform`s `validate` mode', () => {
       const transformedModel = { b: 1 };
       const modelTransform = (mode: string, model: Record<string, any>) =>
         mode === 'validate' ? transformedModel : model;
@@ -281,7 +254,7 @@ describe('ValidatedForm', () => {
   });
 
   describe('when submitted', () => {
-    test('calls `onSubmit` when validation succeeds', async () => {
+    it('calls `onSubmit` when validation succeeds', async () => {
       render(
         // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm
@@ -305,7 +278,7 @@ describe('ValidatedForm', () => {
       expect(onSubmit).toHaveBeenCalledTimes(1);
     });
 
-    test('skips `onSubmit` when validation fails', async () => {
+    it('skips `onSubmit` when validation fails', async () => {
       render(
         // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm
@@ -333,7 +306,7 @@ describe('ValidatedForm', () => {
       expect(onSubmit).not.toBeCalled();
     });
 
-    test('sets submitted to true, when form is submitted and validation succeeds', () => {
+    it('sets submitted to true, when form is submitted and validation succeeds', () => {
       render(
         // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm
@@ -346,15 +319,7 @@ describe('ValidatedForm', () => {
           onSubmit={onSubmit}
         >
           <context.Consumer>
-            {context => (
-              <>
-                {context ? (
-                  <p data-testid="submitted">
-                    {JSON.stringify(context.submitted)}
-                  </p>
-                ) : null}
-              </>
-            )}
+            {context => mockContext(context?.submitted)}
           </context.Consumer>
         </ValidatedForm>,
         {
@@ -362,19 +327,15 @@ describe('ValidatedForm', () => {
         },
       );
       const form = screen.getByRole('form');
-      const getSubmittedContext = () =>
-        JSON.parse(screen.getByTestId('submitted').innerHTML);
-      let submittedContext = getSubmittedContext();
 
-      expect(submittedContext).toBe(false);
+      expect(mockContext).toHaveBeenLastCalledWith(false);
 
       fireEvent.submit(form);
-      submittedContext = getSubmittedContext();
 
-      expect(submittedContext).toBe(true);
+      expect(mockContext).toHaveBeenLastCalledWith(true);
     });
 
-    test('sets submitted to true, when form is submitted and validation fails', () => {
+    it('sets submitted to true, when form is submitted and validation fails', () => {
       render(
         // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm
@@ -387,15 +348,7 @@ describe('ValidatedForm', () => {
           onSubmit={onSubmit}
         >
           <context.Consumer>
-            {context => (
-              <>
-                {context ? (
-                  <p data-testid="submitted">
-                    {JSON.stringify(context.submitted)}
-                  </p>
-                ) : null}
-              </>
-            )}
+            {context => mockContext(context?.submitted)}
           </context.Consumer>
         </ValidatedForm>,
         {
@@ -408,19 +361,15 @@ describe('ValidatedForm', () => {
       });
 
       const form = screen.getByRole('form');
-      const getSubmittedContext = () =>
-        JSON.parse(screen.getByTestId('submitted').innerHTML);
-      let submittedContext = getSubmittedContext();
 
-      expect(submittedContext).toBe(false);
+      expect(mockContext).toHaveBeenLastCalledWith(false);
 
       fireEvent.submit(form);
-      submittedContext = getSubmittedContext();
 
-      expect(submittedContext).toBe(true);
+      expect(mockContext).toHaveBeenLastCalledWith(true);
     });
 
-    test('updates error state with async errors from `onSubmit`', async () => {
+    it('updates error state with async errors from `onSubmit`', async () => {
       render(
         // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm
@@ -433,13 +382,7 @@ describe('ValidatedForm', () => {
           onSubmit={onSubmit}
         >
           <context.Consumer>
-            {context => (
-              <>
-                {context && context.error ? (
-                  <p data-testid="error">{context.error.message}</p>
-                ) : null}
-              </>
-            )}
+            {context => mockContext(context?.error)}
           </context.Consumer>
         </ValidatedForm>,
         {
@@ -452,13 +395,12 @@ describe('ValidatedForm', () => {
 
       fireEvent.submit(form);
       await new Promise(resolve => process.nextTick(resolve));
-      const errorMessage = screen.getByTestId('error').innerHTML;
 
       expect(onSubmit).toHaveBeenCalled();
-      expect(errorMessage).toBe('test error message');
+      expect(mockContext).toHaveBeenLastCalledWith(error);
     });
 
-    test('works if unmounts on submit', async () => {
+    it('works if unmounts on submit', async () => {
       const { unmount } = render(
         // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm
@@ -483,7 +425,7 @@ describe('ValidatedForm', () => {
 
   describe('on change', () => {
     describe('in `onChange` mode', () => {
-      test('validates', () => {
+      it('validates', () => {
         // FIXME: ValidatedForm is not a valid Component.
         render(
           <ValidatedForm
@@ -505,7 +447,7 @@ describe('ValidatedForm', () => {
     });
 
     describe('in `onSubmit` mode', () => {
-      test('does not validate', () => {
+      it('does not validate', () => {
         // FIXME: ValidatedForm is not a valid Component.
         render(
           <ValidatedForm model={model} schema={schema} validate="onSubmit">
@@ -523,7 +465,7 @@ describe('ValidatedForm', () => {
     });
 
     describe('in `onChangeAfterSubmit` mode', () => {
-      test('does not validates before submit', () => {
+      it('does not validates before submit', () => {
         render(
           // FIXME: ValidatedForm is not a valid Component.
           <ValidatedForm
@@ -543,7 +485,7 @@ describe('ValidatedForm', () => {
         expect(validator).not.toHaveBeenCalled();
       });
 
-      test('validates after submit', async () => {
+      it('validates after submit', async () => {
         render(
           // FIXME: ValidatedForm is not a valid Component.
           <ValidatedForm
@@ -575,7 +517,7 @@ describe('ValidatedForm', () => {
   });
 
   describe('on reset', () => {
-    test('removes `error`', async () => {
+    it('removes `error`', async () => {
       const FormControls = () => {
         const { formRef } = useForm();
 
@@ -597,13 +539,7 @@ describe('ValidatedForm', () => {
           schema={schema}
         >
           <context.Consumer>
-            {context => (
-              <>
-                {context ? (
-                  <p data-testid="error">{context.error?.message}</p>
-                ) : null}
-              </>
-            )}
+            {context => mockContext(context?.error)}
           </context.Consumer>
           <FormControls />
         </ValidatedForm>
@@ -621,14 +557,12 @@ describe('ValidatedForm', () => {
 
       fireEvent.submit(form);
       await new Promise(resolve => process.nextTick(resolve));
-      const errorMessage = screen.getByTestId('error').innerHTML;
 
-      expect(errorMessage).toBe('test error message');
+      expect(mockContext).toHaveBeenLastCalledWith(error);
 
       fireEvent.click(resetButton);
       await new Promise(resolve => process.nextTick(resolve));
-      const errorMessage2 = screen.getByTestId('error').innerHTML;
-      expect(errorMessage2).toBe('');
+      expect(mockContext).toHaveBeenLastCalledWith(null);
     });
   });
 
@@ -645,7 +579,7 @@ describe('ValidatedForm', () => {
       />
     );
 
-    test('does not revalidate arbitrarily', () => {
+    it('does not revalidate arbitrarily', () => {
       const { rerender } = render(<Component />, {
         schema: { type: SimpleSchema2Bridge },
       });
@@ -653,7 +587,7 @@ describe('ValidatedForm', () => {
       expect(validator).not.toBeCalled();
     });
 
-    test('revalidates if `model` changes', () => {
+    it('revalidates if `model` changes', () => {
       const { rerender } = render(<Component />, {
         schema: { type: SimpleSchema2Bridge },
       });
@@ -661,7 +595,7 @@ describe('ValidatedForm', () => {
       expect(validator).toHaveBeenCalledTimes(1);
     });
 
-    test('revalidates if `validator` changes', () => {
+    it('revalidates if `validator` changes', () => {
       const { rerender } = render(<Component />, {
         schema: { type: SimpleSchema2Bridge },
       });
@@ -669,7 +603,7 @@ describe('ValidatedForm', () => {
       expect(validator).toHaveBeenCalledTimes(1);
     });
 
-    test('revalidate if `schema` changes', () => {
+    it('revalidate if `schema` changes', () => {
       const anotherSchema = new SimpleSchema2Bridge(schema.schema);
       const { rerender } = render(<Component />, {
         schema: { type: SimpleSchema2Bridge },
@@ -690,7 +624,7 @@ describe('ValidatedForm', () => {
       />
     );
 
-    test('does not revalidate when `model` changes', () => {
+    it('does not revalidate when `model` changes', () => {
       const { rerender } = render(<Component />, {
         schema: { type: SimpleSchema2Bridge },
       });
@@ -698,7 +632,7 @@ describe('ValidatedForm', () => {
       expect(validator).not.toBeCalled();
     });
 
-    test('does not revalidate when validator `options` change', () => {
+    it('does not revalidate when validator `options` change', () => {
       const { rerender } = render(<Component />, {
         schema: { type: SimpleSchema2Bridge },
       });
@@ -706,7 +640,7 @@ describe('ValidatedForm', () => {
       expect(validator).not.toBeCalled();
     });
 
-    test('does not revalidate when `schema` changes', () => {
+    it('does not revalidate when `schema` changes', () => {
       const anotherSchema = new SimpleSchema2Bridge(schema.schema);
       const { rerender } = render(<Component />, {
         schema: { type: SimpleSchema2Bridge },
@@ -730,7 +664,7 @@ describe('ValidatedForm', () => {
       </ValidatedForm>
     );
 
-    test('reuses the validator between validations', () => {
+    it('reuses the validator between validations', () => {
       render(<Component />, {
         schema: { type: SimpleSchema2Bridge },
       });
@@ -744,7 +678,7 @@ describe('ValidatedForm', () => {
       expect(validatorForSchema).toHaveBeenCalledTimes(1);
     });
 
-    test('uses the new validator settings if `validator` changes', () => {
+    it('uses the new validator settings if `validator` changes', () => {
       const validatorA = Symbol();
       const validatorB = Symbol();
       const { rerender } = render(<Component />, {
@@ -764,7 +698,7 @@ describe('ValidatedForm', () => {
       expect(validatorForSchema).toHaveBeenNthCalledWith(4, validatorA);
     });
 
-    test('uses the new validator if `schema` changes', () => {
+    it('uses the new validator if `schema` changes', () => {
       const alternativeValidator = jest.fn();
       const alternativeSchema = new SimpleSchema2Bridge(schema.schema);
       jest

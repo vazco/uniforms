@@ -15,15 +15,15 @@ function testFn(parts: unknown[], array: string[], string: string) {
 }
 
 describe('joinName', () => {
-  test('is a function', () => {
+  it('is a function', () => {
     expect(joinName).toBeInstanceOf(Function);
   });
 
-  test('works with empty name', () => {
+  it('works with empty name', () => {
     testFn([], [], '');
   });
 
-  test('works with arrays', () => {
+  it('works with arrays', () => {
     testFn([['a']], ['a'], 'a');
     testFn([[['a']]], ['a'], 'a');
     testFn([[[['a']]]], ['a'], 'a');
@@ -40,19 +40,19 @@ describe('joinName', () => {
     testFn(['a', ['b', 'c'], 'd'], ['a', 'b', 'c', 'd'], 'a.b.c.d');
   });
 
-  test('works with empty strings', () => {
+  it('works with empty strings', () => {
     testFn(['', 'a', 'b'], ['a', 'b'], 'a.b');
     testFn(['a', '', 'b'], ['a', 'b'], 'a.b');
     testFn(['a', 'b', ''], ['a', 'b'], 'a.b');
   });
 
-  test('works with falsy values', () => {
+  it('works with falsy values', () => {
     testFn(['a', null, 'b'], ['a', 'b'], 'a.b');
     testFn(['a', false, 'b'], ['a', 'b'], 'a.b');
     testFn(['a', undefined, 'b'], ['a', 'b'], 'a.b');
   });
 
-  test('works with numbers', () => {
+  it('works with numbers', () => {
     testFn([0, 'a', 'b'], ['0', 'a', 'b'], '0.a.b');
     testFn(['a', 0, 'b'], ['a', '0', 'b'], 'a.0.b');
     testFn(['a', 'b', 0], ['a', 'b', '0'], 'a.b.0');
@@ -61,13 +61,13 @@ describe('joinName', () => {
     testFn(['a', 'b', 1], ['a', 'b', '1'], 'a.b.1');
   });
 
-  test('works with partials', () => {
+  it('works with partials', () => {
     testFn(['a', 'b.c.d'], ['a', 'b', 'c', 'd'], 'a.b.c.d');
     testFn(['a.b', 'c.d'], ['a', 'b', 'c', 'd'], 'a.b.c.d');
     testFn(['a.b.c', 'd'], ['a', 'b', 'c', 'd'], 'a.b.c.d');
   });
 
-  test('works with subscripts', () => {
+  it('works with subscripts', () => {
     testFn(['a["b"]'], ['a', 'b'], 'a.b');
     testFn(['a["b"].c'], ['a', 'b', 'c'], 'a.b.c');
     testFn(['a["b"].c["d"]'], ['a', 'b', 'c', 'd'], 'a.b.c.d');
@@ -95,7 +95,7 @@ describe('joinName', () => {
     testFn(['["[\\"\\"]"]'], ['["[\\"\\"]"]'], '["[\\"\\"]"]');
   });
 
-  test('handles incorrect cases _somehow_', () => {
+  it('handles incorrect cases _somehow_', () => {
     // Boolean `true`.
     testFn([true], ['true'], 'true');
     testFn([true, 'a'], ['true', 'a'], 'true.a');

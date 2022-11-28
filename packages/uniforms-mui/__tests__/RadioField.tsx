@@ -10,7 +10,7 @@ import { RadioField } from 'uniforms-mui';
 import createContext from './_createContext';
 import mount from './_mount';
 
-test('<RadioField> - renders a set of Radio buttons', () => {
+it('<RadioField> - renders a set of Radio buttons', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
@@ -20,7 +20,7 @@ test('<RadioField> - renders a set of Radio buttons', () => {
   expect(wrapper.find(Radio)).toHaveLength(2);
 });
 
-test('<RadioField> - renders a set of Radio buttons wrapped with RadioGroup', () => {
+it('<RadioField> - renders a set of Radio buttons wrapped with RadioGroup', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
@@ -31,7 +31,7 @@ test('<RadioField> - renders a set of Radio buttons wrapped with RadioGroup', ()
   expect(wrapper.find(RadioGroup).find(Radio)).toHaveLength(2);
 });
 
-test('<RadioField> - renders a set of Radio buttons with correct disabled state', () => {
+it('<RadioField> - renders a set of Radio buttons with correct disabled state', () => {
   const element = <RadioField name="x" disabled />;
   const wrapper = mount(
     element,
@@ -41,7 +41,7 @@ test('<RadioField> - renders a set of Radio buttons with correct disabled state'
   expect(wrapper.find(FormControl).prop('disabled')).toBe(true);
 });
 
-test('<RadioField> - renders a RadioGroup with correct id (inherited)', () => {
+it('<RadioField> - renders a RadioGroup with correct id (inherited)', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
@@ -52,7 +52,7 @@ test('<RadioField> - renders a RadioGroup with correct id (inherited)', () => {
   expect(wrapper.find(RadioGroup).prop('id')).toBeTruthy();
 });
 
-test('<RadioField> - renders a RadioGroup with correct id (specified)', () => {
+it('<RadioField> - renders a RadioGroup with correct id (specified)', () => {
   const element = <RadioField name="x" id="y" />;
   const wrapper = mount(
     element,
@@ -63,7 +63,7 @@ test('<RadioField> - renders a RadioGroup with correct id (specified)', () => {
   expect(wrapper.find(RadioGroup).prop('id')).toBe('y');
 });
 
-test('<RadioField> - renders a RadioGroup with correct name', () => {
+it('<RadioField> - renders a RadioGroup with correct name', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
@@ -74,7 +74,7 @@ test('<RadioField> - renders a RadioGroup with correct name', () => {
   expect(wrapper.find(RadioGroup).prop('name')).toBe('x');
 });
 
-test('<RadioField> - renders a set of Radio buttons with correct options', () => {
+it('<RadioField> - renders a set of Radio buttons with correct options', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
@@ -86,7 +86,7 @@ test('<RadioField> - renders a set of Radio buttons with correct options', () =>
   expect(wrapper.find(FormControlLabel).at(1).prop('label')).toBe('b');
 });
 
-test('<RadioField> - renders a set of Radio buttons with correct options (transform)', () => {
+it('<RadioField> - renders a set of Radio buttons with correct options (transform)', () => {
   const element = <RadioField name="x" transform={x => x.toUpperCase()} />;
   const wrapper = mount(
     element,
@@ -98,7 +98,7 @@ test('<RadioField> - renders a set of Radio buttons with correct options (transf
   expect(wrapper.find(FormControlLabel).at(1).prop('label')).toBe('B');
 });
 
-test('<RadioField> - renders a RadioGroup with correct value (default)', () => {
+it('<RadioField> - renders a RadioGroup with correct value (default)', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
@@ -109,7 +109,7 @@ test('<RadioField> - renders a RadioGroup with correct value (default)', () => {
   expect(wrapper.find(RadioGroup).prop('value')).toBeFalsy();
 });
 
-test('<RadioField> - renders a RadioGroup with correct value (model)', () => {
+it('<RadioField> - renders a RadioGroup with correct value (model)', () => {
   const element = <RadioField name="x" />;
   const wrapper = mount(
     element,
@@ -123,7 +123,7 @@ test('<RadioField> - renders a RadioGroup with correct value (model)', () => {
   expect(wrapper.find(RadioGroup).prop('value')).toBe('b');
 });
 
-test('<RadioField> - renders a RadioGroup with correct value (specified)', () => {
+it('<RadioField> - renders a RadioGroup with correct value (specified)', () => {
   const element = <RadioField name="x" value="b" />;
   const wrapper = mount(
     element,
@@ -134,7 +134,7 @@ test('<RadioField> - renders a RadioGroup with correct value (specified)', () =>
   expect(wrapper.find(RadioGroup).prop('value')).toBe('b');
 });
 
-test('<RadioField> - renders a RadioGroup which correctly reacts on change', () => {
+it('<RadioField> - renders a RadioGroup which correctly reacts on change', () => {
   const onChange = jest.fn();
 
   const element = <RadioField name="x" />;
@@ -152,7 +152,7 @@ test('<RadioField> - renders a RadioGroup which correctly reacts on change', () 
   expect(onChange).toHaveBeenLastCalledWith('x', 'b');
 });
 
-test('<RadioField> - renders a RadioGroup which correctly reacts on change (same value)', () => {
+it('<RadioField> - renders a RadioGroup which correctly reacts on change (same value)', () => {
   const onChange = jest.fn();
 
   const element = <RadioField name="x" />;
@@ -170,7 +170,7 @@ test('<RadioField> - renders a RadioGroup which correctly reacts on change (same
   expect(onChange).toHaveBeenLastCalledWith('x', 'a');
 });
 
-test('<RadioField> - renders a label', () => {
+it('<RadioField> - renders a label', () => {
   const element = <RadioField name="x" label="y" />;
   const wrapper = mount(
     element,
@@ -181,7 +181,7 @@ test('<RadioField> - renders a label', () => {
   expect(wrapper.find(FormLabel).text()).toBe('y *');
 });
 
-test('<RadioField> - renders a helperText', () => {
+it('<RadioField> - renders a helperText', () => {
   const element = <RadioField name="x" helperText="Helper" />;
   const wrapper = mount(
     element,
@@ -192,7 +192,7 @@ test('<RadioField> - renders a helperText', () => {
   expect(wrapper.find(FormHelperText).text()).toBe('Helper');
 });
 
-test('<RadioField> - renders a TextField with correct error text (specified)', () => {
+it('<RadioField> - renders a TextField with correct error text (specified)', () => {
   const error = new Error();
   const element = (
     <RadioField name="x" error={error} showInlineError errorMessage="Error" />
@@ -205,7 +205,7 @@ test('<RadioField> - renders a TextField with correct error text (specified)', (
   expect(wrapper.find(FormHelperText).text()).toBe('Error');
 });
 
-test('<RadioField> - works with special characters', () => {
+it('<RadioField> - works with special characters', () => {
   mount(
     <RadioField name="x" />,
     createContext({ x: { type: String, allowedValues: ['ă', 'ș'] } }),

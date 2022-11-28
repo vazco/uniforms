@@ -14,14 +14,14 @@ const context = (schema?: object) =>
     { onChange, model: { x: ['x', 'y', 'z'] } },
   );
 
-test('<ListDelField> - works', () => {
+it('<ListDelField> - works', () => {
   const element = <ListDelField name="x.1" />;
   const wrapper = mount(element, context());
 
   expect(wrapper.find(ListDelField)).toHaveLength(1);
 });
 
-test('<ListDelField> - prevents onClick when disabled', () => {
+it('<ListDelField> - prevents onClick when disabled', () => {
   const element = <ListDelField name="x.1" disabled />;
   const wrapper = mount(element, context());
 
@@ -29,7 +29,7 @@ test('<ListDelField> - prevents onClick when disabled', () => {
   expect(onChange).not.toHaveBeenCalled();
 });
 
-test('<ListDelField> - prevents onClick when readOnly', () => {
+it('<ListDelField> - prevents onClick when readOnly', () => {
   const element = <ListDelField name="x.1" readOnly />;
   const wrapper = mount(element, context());
 
@@ -37,7 +37,7 @@ test('<ListDelField> - prevents onClick when readOnly', () => {
   expect(onChange).not.toHaveBeenCalled();
 });
 
-test('<ListDelField> - prevents onClick when limit reached', () => {
+it('<ListDelField> - prevents onClick when limit reached', () => {
   const element = <ListDelField name="x.1" />;
   const wrapper = mount(element, context({ x: { minCount: 3 } }));
 
@@ -45,7 +45,7 @@ test('<ListDelField> - prevents onClick when limit reached', () => {
   expect(onChange).not.toHaveBeenCalled();
 });
 
-test('<ListDelField> - correctly reacts on click', () => {
+it('<ListDelField> - correctly reacts on click', () => {
   const element = <ListDelField name="x.1" />;
   const wrapper = mount(element, context());
 
@@ -53,7 +53,7 @@ test('<ListDelField> - correctly reacts on click', () => {
   expect(onChange).toHaveBeenLastCalledWith('x', ['x', 'z']);
 });
 
-test('<ListDelField> - renders correct icon', () => {
+it('<ListDelField> - renders correct icon', () => {
   const element = <ListDelField name="x.1" icon={<Icon />} />;
   const wrapper = mount(element, context());
 

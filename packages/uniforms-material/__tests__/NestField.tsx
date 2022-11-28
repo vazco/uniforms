@@ -10,7 +10,7 @@ import createContext from './_createContext';
 import mount from './_mount';
 
 describe('@RTL - NestField tests', () => {
-  test('<NestField> - default props are not passed when MUI theme props are specified', () => {
+  it('<NestField> - default props are not passed when MUI theme props are specified', () => {
     const theme = createMuiTheme({
       props: { MuiFormControl: { fullWidth: false, margin: 'normal' } },
     });
@@ -30,7 +30,7 @@ describe('@RTL - NestField tests', () => {
     );
   });
 
-  test('<NestField> - default props are passed when MUI theme props are absent', () => {
+  it('<NestField> - default props are passed when MUI theme props are absent', () => {
     const theme = createMuiTheme({});
     const { container } = render(
       <ThemeProvider theme={theme}>
@@ -48,7 +48,7 @@ describe('@RTL - NestField tests', () => {
     );
   });
 
-  test('<NestField> - explicit props are passed when MUI theme props are specified', () => {
+  it('<NestField> - explicit props are passed when MUI theme props are specified', () => {
     const theme = createMuiTheme({
       props: { MuiFormControl: { fullWidth: true, margin: 'dense' } },
     });
@@ -74,7 +74,7 @@ describe('@RTL - NestField tests', () => {
   });
 });
 
-test('<NestField> - renders an <AutoField> for each field', () => {
+it('<NestField> - renders an <AutoField> for each field', () => {
   const element = <NestField name="x" />;
   const wrapper = mount(
     element,
@@ -90,7 +90,7 @@ test('<NestField> - renders an <AutoField> for each field', () => {
   expect(wrapper.find(AutoField).at(1).prop('name')).toBe('b');
 });
 
-test('<NestField> - renders custom content if given', () => {
+it('<NestField> - renders custom content if given', () => {
   const element = (
     <NestField name="x">
       <article data-test="content" />
@@ -110,7 +110,7 @@ test('<NestField> - renders custom content if given', () => {
   expect(wrapper.find('article').prop('data-test')).toBe('content');
 });
 
-test('<NestField> - renders a Subheader', () => {
+it('<NestField> - renders a Subheader', () => {
   const element = <NestField name="x" label="y" />;
   const wrapper = mount(
     element,
@@ -124,7 +124,7 @@ test('<NestField> - renders a Subheader', () => {
   expect(wrapper.find(FormLabel).at(0).text()).toBe('y *');
 });
 
-test('<NestField> - renders a helperText', () => {
+it('<NestField> - renders a helperText', () => {
   const element = <NestField name="x" helperText="Helper" />;
   const wrapper = mount(
     element,

@@ -4,7 +4,7 @@ import { ValidatedQuickForm } from 'uniforms-antd';
 import createSchema from './_createSchema';
 import mount from './_mount';
 
-test('<ValidatedQuickForm> - works', () => {
+it('<ValidatedQuickForm> - works', () => {
   const element = <ValidatedQuickForm schema={createSchema()} />;
   const wrapper = mount(element);
 

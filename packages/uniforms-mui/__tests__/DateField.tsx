@@ -12,7 +12,7 @@ import createContext from './_createContext';
 import mount from './_mount';
 
 describe('@RTL - DateField tests', () => {
-  test('<DateField> - handles "date" type correctly', () => {
+  it('<DateField> - handles "date" type correctly', () => {
     const onChange = jest.fn();
     const initialDate = new Date(Date.UTC(2020, 0, 1));
 
@@ -33,63 +33,63 @@ describe('@RTL - DateField tests', () => {
   });
 });
 
-test('<DateField> - renders Input', () => {
+it('<DateField> - renders Input', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
   expect(wrapper.find(OutlinedInput)).toHaveLength(1);
 });
 
-test('<DateField> - renders a Input with correct id (inherited)', () => {
+it('<DateField> - renders a Input with correct id (inherited)', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
   expect(wrapper.find(OutlinedInput).prop('id')).toBeTruthy();
 });
 
-test('<DateField> - renders a Input with correct id (specified)', () => {
+it('<DateField> - renders a Input with correct id (specified)', () => {
   const element = <DateField name="x" id="y" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
   expect(wrapper.find(OutlinedInput).prop('id')).toBe('y');
 });
 
-test('<DateField> - renders a Input with correct name', () => {
+it('<DateField> - renders a Input with correct name', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
   expect(wrapper.find(OutlinedInput).prop('name')).toBe('x');
 });
 
-test('<DateField> - renders an Input with correct disabled state', () => {
+it('<DateField> - renders an Input with correct disabled state', () => {
   const element = <DateField name="x" disabled />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
   expect(wrapper.find(FormControl).prop('disabled')).toBe(true);
 });
 
-test('<DateField> - renders an Input with correct readOnly state', () => {
+it('<DateField> - renders an Input with correct readOnly state', () => {
   const element = <DateField name="x" inputProps={{ readOnly: true }} />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
   expect(wrapper.find(OutlinedInput).prop('inputProps')!.readOnly).toBe(true);
 });
 
-test('<DateField> - renders a Input with correct label (specified)', () => {
+it('<DateField> - renders a Input with correct label (specified)', () => {
   const element = <DateField name="x" label="DateFieldLabel" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
   expect(wrapper.find(FormLabel).text()).toBe('DateFieldLabel *');
 });
 
-test('<DateField> - renders a Input with correct value (default)', () => {
+it('<DateField> - renders a Input with correct value (default)', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
   expect(wrapper.find(OutlinedInput).prop('value')).toBe('');
 });
 
-test('<DateField> - renders a Input with correct value (model)', () => {
+it('<DateField> - renders a Input with correct value (model)', () => {
   const now = new Date();
   const element = <DateField name="x" />;
   const wrapper = mount(
@@ -102,7 +102,7 @@ test('<DateField> - renders a Input with correct value (model)', () => {
   );
 });
 
-test('<DateField> - renders a Input with correct value (specified)', () => {
+it('<DateField> - renders a Input with correct value (specified)', () => {
   const now = new Date();
   const element = <DateField name="x" value={now} />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
@@ -112,7 +112,7 @@ test('<DateField> - renders a Input with correct value (specified)', () => {
   );
 });
 
-test('<DateField> - renders a Input which correctly reacts on change', () => {
+it('<DateField> - renders a Input which correctly reacts on change', () => {
   const onChange = jest.fn();
 
   const now = new Date();
@@ -129,7 +129,7 @@ test('<DateField> - renders a Input which correctly reacts on change', () => {
   expect(onChange).toHaveBeenLastCalledWith('x', now);
 });
 
-test('<DateField> - renders a Input which correctly reacts on change (empty)', () => {
+it('<DateField> - renders a Input which correctly reacts on change (empty)', () => {
   const onChange = jest.fn();
 
   const element = <DateField name="x" />;
@@ -145,7 +145,7 @@ test('<DateField> - renders a Input which correctly reacts on change (empty)', (
   expect(onChange).toHaveBeenLastCalledWith('x', undefined);
 });
 
-test('<DateField> - renders a Input which correctly reacts on change (overflow)', () => {
+it('<DateField> - renders a Input which correctly reacts on change (overflow)', () => {
   const onChange = jest.fn();
 
   const now = new Date(1e5, 0);
@@ -162,7 +162,7 @@ test('<DateField> - renders a Input which correctly reacts on change (overflow)'
   expect(onChange).not.toHaveBeenCalled();
 });
 
-test('<DateField> - renders a Input with correct error text (specified)', () => {
+it('<DateField> - renders a Input with correct error text (specified)', () => {
   const error = new Error();
   const element = (
     <DateField name="x" error={error} showInlineError errorMessage="Error" />
@@ -172,7 +172,7 @@ test('<DateField> - renders a Input with correct error text (specified)', () => 
   expect(wrapper.find(FormHelperText).text()).toBe('Error');
 });
 
-test('<DateField> - renders a Input with correct error text (showInlineError=false)', () => {
+it('<DateField> - renders a Input with correct error text (showInlineError=false)', () => {
   const error = new Error();
   const element = (
     <DateField

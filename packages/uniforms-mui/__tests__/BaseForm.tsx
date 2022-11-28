@@ -5,7 +5,7 @@ import createContext from './_createContext';
 import createSchema from './_createSchema';
 import mount from './_mount';
 
-test('<BaseForm> - works', () => {
+it('<BaseForm> - works', () => {
   const element = <BaseForm schema={createSchema()} />;
   const wrapper = mount(element, createContext());
 

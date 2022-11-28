@@ -8,7 +8,7 @@ import createContext from './_createContext';
 import mount from './_mount';
 
 describe('@RTL - DateField tests', () => {
-  test('<DateField> - handles "date" type correctly', () => {
+  it('<DateField> - handles "date" type correctly', () => {
     const onChange = jest.fn();
     const initialDate = new Date(Date.UTC(2020, 0, 1));
 
@@ -29,14 +29,14 @@ describe('@RTL - DateField tests', () => {
   });
 });
 
-test('<DateField> - renders an input', () => {
+it('<DateField> - renders an input', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
   expect(wrapper.find('input')).toHaveLength(1);
 });
 
-test('<DateField> - renders a input with correct id (inherited)', () => {
+it('<DateField> - renders a input with correct id (inherited)', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
@@ -44,7 +44,7 @@ test('<DateField> - renders a input with correct id (inherited)', () => {
   expect(wrapper.find('input').prop('id')).toBeTruthy();
 });
 
-test('<DateField> - renders a input with correct id (specified)', () => {
+it('<DateField> - renders a input with correct id (specified)', () => {
   const element = <DateField name="x" id="y" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
@@ -52,7 +52,7 @@ test('<DateField> - renders a input with correct id (specified)', () => {
   expect(wrapper.find('input').prop('id')).toBe('y');
 });
 
-test('<DateField> - renders a input with correct name', () => {
+it('<DateField> - renders a input with correct name', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
@@ -60,7 +60,7 @@ test('<DateField> - renders a input with correct name', () => {
   expect(wrapper.find('input').prop('name')).toBe('x');
 });
 
-test('<DateField> - renders an input with correct type', () => {
+it('<DateField> - renders an input with correct type', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
@@ -68,7 +68,7 @@ test('<DateField> - renders an input with correct type', () => {
   expect(wrapper.find('input').prop('type')).toBe('datetime-local');
 });
 
-test('<DateField> - renders an input with correct disabled state', () => {
+it('<DateField> - renders an input with correct disabled state', () => {
   const element = <DateField name="x" disabled />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
@@ -87,7 +87,7 @@ test.each(['date', 'datetime-local'] as const)(
   },
 );
 
-test('<DateField> - renders an input with correct readOnly state', () => {
+it('<DateField> - renders an input with correct readOnly state', () => {
   const element = <DateField name="x" readOnly />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
@@ -95,7 +95,7 @@ test('<DateField> - renders an input with correct readOnly state', () => {
   expect(wrapper.find('input').prop('readOnly')).toBe(true);
 });
 
-test('<DateField> - renders a input with correct label (specified)', () => {
+it('<DateField> - renders a input with correct label (specified)', () => {
   const element = <DateField name="x" label="DateFieldLabel" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
@@ -106,7 +106,7 @@ test('<DateField> - renders a input with correct label (specified)', () => {
   );
 });
 
-test('<DateField> - renders a input with correct value (default)', () => {
+it('<DateField> - renders a input with correct value (default)', () => {
   const element = <DateField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 
@@ -114,7 +114,7 @@ test('<DateField> - renders a input with correct value (default)', () => {
   expect(wrapper.find('input').prop('value')).toBe('');
 });
 
-test('<DateField> - renders a input with correct value (model)', () => {
+it('<DateField> - renders a input with correct value (model)', () => {
   const now = new Date();
   const element = <DateField name="x" />;
   const wrapper = mount(
@@ -128,7 +128,7 @@ test('<DateField> - renders a input with correct value (model)', () => {
   );
 });
 
-test('<DateField> - renders a input with correct value (specified)', () => {
+it('<DateField> - renders a input with correct value (specified)', () => {
   const now = new Date();
   const element = <DateField name="x" value={now} />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
@@ -139,7 +139,7 @@ test('<DateField> - renders a input with correct value (specified)', () => {
   );
 });
 
-test('<DateField> - renders a input which correctly reacts on change', () => {
+it('<DateField> - renders a input which correctly reacts on change', () => {
   const onChange = jest.fn();
 
   const now = new Date();
@@ -158,7 +158,7 @@ test('<DateField> - renders a input which correctly reacts on change', () => {
   expect(onChange).toHaveBeenLastCalledWith('x', now);
 });
 
-test('<DateField> - renders a input which correctly reacts on change (empty)', () => {
+it('<DateField> - renders a input which correctly reacts on change (empty)', () => {
   const onChange = jest.fn();
 
   const element = <DateField name="x" />;
@@ -176,7 +176,7 @@ test('<DateField> - renders a input which correctly reacts on change (empty)', (
   expect(onChange).toHaveBeenLastCalledWith('x', undefined);
 });
 
-test('<DateField> - renders a input which correctly reacts on change (overflow)', () => {
+it('<DateField> - renders a input which correctly reacts on change (overflow)', () => {
   const onChange = jest.fn();
 
   const now = new Date(1e5, 0);
@@ -195,7 +195,7 @@ test('<DateField> - renders a input which correctly reacts on change (overflow)'
   expect(onChange).not.toHaveBeenCalled();
 });
 
-test('<DateField> - renders a wrapper with unknown props', () => {
+it('<DateField> - renders a wrapper with unknown props', () => {
   const element = <DateField name="x" data-x="x" data-y="y" data-z="z" />;
   const wrapper = mount(element, createContext({ x: { type: Date } }));
 

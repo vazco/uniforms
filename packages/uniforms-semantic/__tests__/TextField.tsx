@@ -9,7 +9,7 @@ import mount from './_mount';
 describe('@RTL - TextField tests', () => {
   testTextField(TextField);
 
-  test('<TextField> - renders a wrapper with unknown props', () => {
+  it('<TextField> - renders a wrapper with unknown props', () => {
     const props = {
       'data-x': 'x',
       'data-y': 'y',
@@ -23,7 +23,7 @@ describe('@RTL - TextField tests', () => {
     );
   });
 
-  test('<TextField> - renders a TextField with correct error text (specified)', () => {
+  it('<TextField> - renders a TextField with correct error text (specified)', () => {
     const errorMessage = 'Error';
     render(
       <TextField
@@ -38,7 +38,7 @@ describe('@RTL - TextField tests', () => {
     expect(screen.getByText(errorMessage)).toBeInTheDocument();
   });
 
-  test('<TextField> - renders a TextField with correct error text (showInlineError=false)', () => {
+  it('<TextField> - renders a TextField with correct error text (showInlineError=false)', () => {
     const errorMessage = 'Error';
     render(
       <TextField
@@ -53,7 +53,7 @@ describe('@RTL - TextField tests', () => {
     expect(screen.queryByText(errorMessage)).not.toBeInTheDocument();
   });
 
-  test('<TextField> - renders an icon', () => {
+  it('<TextField> - renders an icon', () => {
     const { container } = render(<TextField name="x" icon="small home" />, {
       x: String,
     });
@@ -61,7 +61,7 @@ describe('@RTL - TextField tests', () => {
     expect(container.querySelector('i')).toBeInTheDocument();
   });
 
-  test('<TextField> - renders with a custom wrapClassName', () => {
+  it('<TextField> - renders with a custom wrapClassName', () => {
     const testClassName = 'test-class-name';
     render(<TextField name="x" wrapClassName={testClassName} />, { x: String });
 
@@ -71,14 +71,14 @@ describe('@RTL - TextField tests', () => {
   });
 });
 
-test('<TextField> - renders an input', () => {
+it('<TextField> - renders an input', () => {
   const element = <TextField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find('input')).toHaveLength(1);
 });
 
-test('<TextField> - renders an input with correct disabled state', () => {
+it('<TextField> - renders an input with correct disabled state', () => {
   const element = <TextField name="x" disabled />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -86,7 +86,7 @@ test('<TextField> - renders an input with correct disabled state', () => {
   expect(wrapper.find('input').prop('disabled')).toBe(true);
 });
 
-test('<TextField> - renders an input with correct readOnly state', () => {
+it('<TextField> - renders an input with correct readOnly state', () => {
   const element = <TextField name="x" readOnly />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -94,7 +94,7 @@ test('<TextField> - renders an input with correct readOnly state', () => {
   expect(wrapper.find('input').prop('readOnly')).toBe(true);
 });
 
-test('<TextField> - renders an input with correct id (inherited)', () => {
+it('<TextField> - renders an input with correct id (inherited)', () => {
   const element = <TextField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -102,7 +102,7 @@ test('<TextField> - renders an input with correct id (inherited)', () => {
   expect(wrapper.find('input').prop('id')).toBeTruthy();
 });
 
-test('<TextField> - renders an input with correct id (specified)', () => {
+it('<TextField> - renders an input with correct id (specified)', () => {
   const element = <TextField name="x" id="y" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -110,7 +110,7 @@ test('<TextField> - renders an input with correct id (specified)', () => {
   expect(wrapper.find('input').prop('id')).toBe('y');
 });
 
-test('<TextField> - renders an input with correct name', () => {
+it('<TextField> - renders an input with correct name', () => {
   const element = <TextField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -118,7 +118,7 @@ test('<TextField> - renders an input with correct name', () => {
   expect(wrapper.find('input').prop('name')).toBe('x');
 });
 
-test('<TextField> - renders an input with correct placeholder', () => {
+it('<TextField> - renders an input with correct placeholder', () => {
   const element = <TextField name="x" placeholder="y" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -126,7 +126,7 @@ test('<TextField> - renders an input with correct placeholder', () => {
   expect(wrapper.find('input').prop('placeholder')).toBe('y');
 });
 
-test('<TextField> - renders an input with correct type', () => {
+it('<TextField> - renders an input with correct type', () => {
   const element = <TextField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -134,7 +134,7 @@ test('<TextField> - renders an input with correct type', () => {
   expect(wrapper.find('input').prop('type')).toBe('text');
 });
 
-test('<TextField> - renders an input with correct value (default)', () => {
+it('<TextField> - renders an input with correct value (default)', () => {
   const element = <TextField name="x" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -142,7 +142,7 @@ test('<TextField> - renders an input with correct value (default)', () => {
   expect(wrapper.find('input').prop('value')).toBe('');
 });
 
-test('<TextField> - renders an input with correct value (model)', () => {
+it('<TextField> - renders an input with correct value (model)', () => {
   const element = <TextField name="x" />;
   const wrapper = mount(
     element,
@@ -153,7 +153,7 @@ test('<TextField> - renders an input with correct value (model)', () => {
   expect(wrapper.find('input').prop('value')).toBe('y');
 });
 
-test('<TextField> - renders an input with correct value (specified)', () => {
+it('<TextField> - renders an input with correct value (specified)', () => {
   const element = <TextField name="x" value="y" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -161,7 +161,7 @@ test('<TextField> - renders an input with correct value (specified)', () => {
   expect(wrapper.find('input').prop('value')).toBe('y');
 });
 
-test('<TextField> - renders an input which correctly reacts on change', () => {
+it('<TextField> - renders an input which correctly reacts on change', () => {
   const onChange = jest.fn();
 
   const element = <TextField name="x" />;
@@ -177,7 +177,7 @@ test('<TextField> - renders an input which correctly reacts on change', () => {
   expect(onChange).toHaveBeenLastCalledWith('x', 'y');
 });
 
-test('<TextField> - renders an input which correctly reacts on change (empty)', () => {
+it('<TextField> - renders an input which correctly reacts on change (empty)', () => {
   const onChange = jest.fn();
 
   const element = <TextField name="x" />;
@@ -193,7 +193,7 @@ test('<TextField> - renders an input which correctly reacts on change (empty)', 
   expect(onChange).toHaveBeenLastCalledWith('x', '');
 });
 
-test('<TextField> - renders an input which correctly reacts on change (same value)', () => {
+it('<TextField> - renders an input which correctly reacts on change (same value)', () => {
   const onChange = jest.fn();
 
   const element = <TextField name="x" />;
@@ -209,7 +209,7 @@ test('<TextField> - renders an input which correctly reacts on change (same valu
   expect(onChange).toHaveBeenLastCalledWith('x', 'y');
 });
 
-test('<TextField> - renders a label', () => {
+it('<TextField> - renders a label', () => {
   const element = <TextField name="x" label="y" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -220,7 +220,7 @@ test('<TextField> - renders a label', () => {
   );
 });
 
-test('<TextField> - renders a wrapper with unknown props', () => {
+it('<TextField> - renders a wrapper with unknown props', () => {
   const element = <TextField name="x" data-x="x" data-y="y" data-z="z" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
@@ -229,7 +229,7 @@ test('<TextField> - renders a wrapper with unknown props', () => {
   expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });
 
-test('<TextField> - renders correct error text (specified)', () => {
+it('<TextField> - renders correct error text (specified)', () => {
   const error = new Error();
   const element = (
     <TextField name="x" error={error} showInlineError errorMessage="Error" />
@@ -239,7 +239,7 @@ test('<TextField> - renders correct error text (specified)', () => {
   expect(wrapper.children().last().text()).toBe('Error');
 });
 
-test('<TextField> - renders correct error text (showInlineError=false)', () => {
+it('<TextField> - renders correct error text (showInlineError=false)', () => {
   const error = new Error();
   const element = (
     <TextField
@@ -254,28 +254,28 @@ test('<TextField> - renders correct error text (showInlineError=false)', () => {
   expect(wrapper.children().last().text()).not.toBe('Error');
 });
 
-test('<TextField> - renders a icon', () => {
+it('<TextField> - renders a icon', () => {
   const element = <TextField name="x" icon="small home" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find('i')).toHaveLength(1);
 });
 
-test('<TextField> - renders a icon', () => {
+it('<TextField> - renders a icon', () => {
   const element = <TextField name="x" iconLeft="small home" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find('i')).toHaveLength(1);
 });
 
-test('<TextField> - renders with a custom wrapClassName', () => {
+it('<TextField> - renders with a custom wrapClassName', () => {
   const element = <TextField name="x" wrapClassName="test-class-name" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find('.ui.input.test-class-name')).toHaveLength(1);
 });
 
-test('<TextField> - renders a input with autocomplete turned off', () => {
+it('<TextField> - renders a input with autocomplete turned off', () => {
   const element = <TextField name="x" autoComplete="off" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 

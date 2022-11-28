@@ -1,6 +1,6 @@
 import { gridClassName } from 'uniforms-bootstrap3';
 
-test('gridClassName - object', () => {
+it('gridClassName - object', () => {
   expect(gridClassName({ md: 3 }, 'input')).toBe('col-md-9');
   expect(gridClassName({ md: 5 }, 'input')).toBe('col-md-7');
   expect(gridClassName({ md: 7 }, 'input')).toBe('col-md-5');
@@ -20,21 +20,21 @@ test('gridClassName - object', () => {
   expect(gridClassName({ md: 9, xs: 8 }, 'label')).toBe('col-md-9 col-xs-8');
 });
 
-test('gridClassName - number', () => {
+it('gridClassName - number', () => {
   expect(gridClassName(3, 'input')).toBe('col-sm-9');
   expect(gridClassName(3, 'label')).toBe('col-sm-3');
   expect(gridClassName(5, 'input')).toBe('col-sm-7');
   expect(gridClassName(5, 'label')).toBe('col-sm-5');
 });
 
-test('gridClassName - number (string)', () => {
+it('gridClassName - number (string)', () => {
   expect(gridClassName('3', 'input')).toBe('col-sm-9');
   expect(gridClassName('3', 'label')).toBe('col-sm-3');
   expect(gridClassName('5', 'input')).toBe('col-sm-7');
   expect(gridClassName('5', 'label')).toBe('col-sm-5');
 });
 
-test('gridClassName - string', () => {
+it('gridClassName - string', () => {
   expect(gridClassName('col-md-9')).toBe('col-md-9');
   expect(gridClassName('col-md-3')).toBe('col-md-3');
   expect(gridClassName('col-md-7')).toBe('col-md-7');
