@@ -93,16 +93,16 @@ describe('SimpleSchemaBridge', () => {
   const bridge = new SimpleSchemaBridge(schema);
 
   describe('#getError', () => {
-    test('works without error', () => {
+    it('works without error', () => {
       expect(bridge.getError('a', null)).toBe(null);
     });
 
-    test('works with invalid error', () => {
+    it('works with invalid error', () => {
       expect(bridge.getError('a', {})).toBe(null);
       expect(bridge.getError('a', { invalid: true })).toBe(null);
     });
 
-    test('works with correct error', () => {
+    it('works with correct error', () => {
       expect(bridge.getError('a', { details: [{ name: 'a' }] })).toEqual({
         name: 'a',
       });
@@ -111,16 +111,16 @@ describe('SimpleSchemaBridge', () => {
   });
 
   describe('#getErrorMessage', () => {
-    test('works without error', () => {
+    it('works without error', () => {
       expect(bridge.getErrorMessage('a', undefined)).toBe('');
     });
 
-    test('works with invalid error', () => {
+    it('works with invalid error', () => {
       expect(bridge.getErrorMessage('a', {})).toBe('');
       expect(bridge.getErrorMessage('a', { invalid: true })).toBe('');
     });
 
-    test('works with correct error', () => {
+    it('works with correct error', () => {
       expect(
         bridge.getErrorMessage('a', {
           details: [{ name: 'a', details: { value: 1 } }],
@@ -135,23 +135,23 @@ describe('SimpleSchemaBridge', () => {
   });
 
   describe('#getErrorMessages', () => {
-    test('works without error', () => {
+    it('works without error', () => {
       expect(bridge.getErrorMessages(null)).toEqual([]);
       expect(bridge.getErrorMessages(undefined)).toEqual([]);
     });
 
-    test('works with other errors', () => {
+    it('works with other errors', () => {
       expect(bridge.getErrorMessages('correct')).toEqual(['correct']);
       expect(bridge.getErrorMessages(999999999)).toEqual([999999999]);
     });
 
-    test('works with Error', () => {
+    it('works with Error', () => {
       expect(bridge.getErrorMessages(new Error('correct'))).toEqual([
         'correct',
       ]);
     });
 
-    test('works with ValidationError', () => {
+    it('works with ValidationError', () => {
       expect(
         bridge.getErrorMessages({
           details: [{ name: 'a', details: { value: 1 } }],
@@ -166,21 +166,21 @@ describe('SimpleSchemaBridge', () => {
   });
 
   describe('#getField', () => {
-    test('return correct definition', () => {
+    it('return correct definition', () => {
       expect(bridge.getField('a')).toEqual(schema.getDefinition('a'));
     });
 
-    test('throws on not found field', () => {
+    it('throws on not found field', () => {
       expect(() => bridge.getField('x')).toThrow(/Field not found in schema/);
     });
   });
 
   describe('#getInitialValue', () => {
-    test('works with arrays', () => {
+    it('works with arrays', () => {
       expect(bridge.getInitialValue('k')).toEqual([]);
     });
 
-    test('works with arrays (minCount)', () => {
+    it('works with arrays (minCount)', () => {
       expect(bridge.getInitialValue('j')).toEqual([
         { a: 'x' },
         { a: 'x' },
@@ -188,25 +188,25 @@ describe('SimpleSchemaBridge', () => {
       ]);
     });
 
-    test('works with arrays (defaultValue)', () => {
+    it('works with arrays (defaultValue)', () => {
       expect(bridge.getInitialValue('u')).toEqual(['u']);
     });
 
-    test('works with arrays of objects (defaultValue)', () => {
+    it('works with arrays of objects (defaultValue)', () => {
       expect(bridge.getInitialValue('w')).toEqual([{ a: 'a' }]);
     });
 
-    test('works with objects', () => {
+    it('works with objects', () => {
       expect(bridge.getInitialValue('a')).toEqual({ b: {} });
     });
 
-    test('works with objects (defaultValue)', () => {
+    it('works with objects (defaultValue)', () => {
       expect(bridge.getInitialValue('v')).toEqual({ a: 'a' });
     });
   });
 
   describe('#getProps', () => {
-    test('works with allowedValues', () => {
+    it('works with allowedValues', () => {
       expect(bridge.getProps('o')).toEqual({
         label: 'O',
         required: true,
@@ -214,14 +214,14 @@ describe('SimpleSchemaBridge', () => {
       });
     });
 
-    test('works with allowedValues from props', () => {
+    it('works with allowedValues from props', () => {
       expect(bridge.getProps('o', { allowedValues: ['O'] })).toEqual({
         label: 'O',
         required: true,
       });
     });
 
-    test('works with custom component', () => {
+    it('works with custom component', () => {
       expect(bridge.getProps('l')).toEqual({
         label: 'L',
         required: true,
@@ -234,7 +234,7 @@ describe('SimpleSchemaBridge', () => {
       });
     });
 
-    test('works with custom component (field)', () => {
+    it('works with custom component (field)', () => {
       expect(bridge.getProps('n')).toEqual({
         label: 'N',
         required: true,
@@ -242,28 +242,28 @@ describe('SimpleSchemaBridge', () => {
       });
     });
 
-    test('works with options (array)', () => {
+    it('works with options (array)', () => {
       expect(bridge.getProps('s').transform('a')).toBe(1);
       expect(bridge.getProps('s').transform('b')).toBe(2);
       expect(bridge.getProps('s').allowedValues[0]).toBe('a');
       expect(bridge.getProps('s').allowedValues[1]).toBe('b');
     });
 
-    test('works with options (function)', () => {
+    it('works with options (function)', () => {
       expect(bridge.getProps('t').transform('a')).toBe(1);
       expect(bridge.getProps('t').transform('b')).toBe(2);
       expect(bridge.getProps('t').allowedValues[0]).toBe('a');
       expect(bridge.getProps('t').allowedValues[1]).toBe('b');
     });
 
-    test('works with options (object)', () => {
+    it('works with options (object)', () => {
       expect(bridge.getProps('r').transform('a')).toBe(1);
       expect(bridge.getProps('r').transform('b')).toBe(2);
       expect(bridge.getProps('r').allowedValues[0]).toBe('a');
       expect(bridge.getProps('r').allowedValues[1]).toBe('b');
     });
 
-    test('works with options from props', () => {
+    it('works with options from props', () => {
       expect(
         bridge.getProps('s', { options: { c: 1, d: 2 } }).transform('c'),
       ).toBe(1);
@@ -278,7 +278,7 @@ describe('SimpleSchemaBridge', () => {
       ).toBe('d');
     });
 
-    test('works with transform', () => {
+    it('works with transform', () => {
       expect(bridge.getProps('p')).toEqual({
         label: 'P',
         required: true,
@@ -286,14 +286,14 @@ describe('SimpleSchemaBridge', () => {
       });
     });
 
-    test('works with transform from props', () => {
+    it('works with transform from props', () => {
       expect(bridge.getProps('p', { transform: () => {} })).toEqual({
         label: 'P',
         required: true,
       });
     });
 
-    test('works with type', () => {
+    it('works with type', () => {
       expect(bridge.getProps('aa')).toEqual({
         label: 'AA',
         type: 'password',
@@ -301,7 +301,7 @@ describe('SimpleSchemaBridge', () => {
       });
     });
 
-    test('returns no field type', () => {
+    it('returns no field type', () => {
       expect(bridge.getProps('a')).not.toHaveProperty('type');
       expect(bridge.getProps('j')).not.toHaveProperty('type');
       expect(bridge.getProps('d')).not.toHaveProperty('type');
@@ -311,19 +311,19 @@ describe('SimpleSchemaBridge', () => {
   });
 
   describe('#getSubfields', () => {
-    test('works with objects', () => {
+    it('works with objects', () => {
       expect(bridge.getSubfields('a')).toEqual(['b']);
       expect(bridge.getSubfields('a.b')).toEqual(['c']);
     });
 
-    test('works with primitives', () => {
+    it('works with primitives', () => {
       expect(bridge.getSubfields('d')).toEqual([]);
       expect(bridge.getSubfields('e')).toEqual([]);
     });
   });
 
   describe('#getType', () => {
-    test('works with any type', () => {
+    it('works with any type', () => {
       expect(bridge.getType('a')).toBe(Object);
       expect(bridge.getType('j')).toBe(Array);
       expect(bridge.getType('d')).toBe(String);
@@ -333,7 +333,7 @@ describe('SimpleSchemaBridge', () => {
   });
 
   describe('#getValidator', () => {
-    test('calls correct validator', () => {
+    it('calls correct validator', () => {
       const bridge = new SimpleSchemaBridge({
         ...schema,
         validator() {
