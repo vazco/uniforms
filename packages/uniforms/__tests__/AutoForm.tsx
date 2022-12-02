@@ -7,30 +7,30 @@ import { AutoFields } from 'uniforms-unstyled';
 
 import { render } from '../__suites__';
 
-const schema = new SimpleSchema2Bridge(
-  new SimpleSchema({
-    a: { type: String, defaultValue: '' },
-    b: { type: String, defaultValue: '' },
-    c: { type: String, defaultValue: '' },
-  }),
-);
-const model = { a: '1' };
-const onChange = jest.fn();
-const onChangeModel = jest.fn();
-const onSubmit = jest.fn();
-const validator = jest.fn();
-const mockContext = jest.fn();
-
-jest.spyOn(schema.schema, 'validator').mockImplementation(() => validator);
-
-beforeEach(() => {
-  onChange.mockClear();
-  onChangeModel.mockClear();
-  onSubmit.mockClear();
-  validator.mockClear();
-});
-
 describe('<AutoForm />', () => {
+  const schema = new SimpleSchema2Bridge(
+    new SimpleSchema({
+      a: { type: String, defaultValue: '' },
+      b: { type: String, defaultValue: '' },
+      c: { type: String, defaultValue: '' },
+    }),
+  );
+  const model = { a: '1' };
+  const onChange = jest.fn();
+  const onChangeModel = jest.fn();
+  const onSubmit = jest.fn();
+  const validator = jest.fn();
+  const mockContext = jest.fn();
+
+  jest.spyOn(schema.schema, 'validator').mockImplementation(() => validator);
+
+  beforeEach(() => {
+    onChange.mockClear();
+    onChangeModel.mockClear();
+    onSubmit.mockClear();
+    validator.mockClear();
+  });
+
   describe('when changes', () => {
     it('updates', () => {
       render(
