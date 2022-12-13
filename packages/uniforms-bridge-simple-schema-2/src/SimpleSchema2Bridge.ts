@@ -160,9 +160,12 @@ export default class SimpleSchema2Bridge extends Bridge {
     return props;
   }
 
+  makeGeneric(name?: string): string | undefined {
+    return name?.replace(/\.\d+(\.|$)/g, '.$$$1');
+  }
+
   getSubfields(name?: string): string[] {
-    // @ts-expect-error: Typing for `_makeGeneric` is missing.
-    return this.schema.objectKeys(SimpleSchema._makeGeneric(name));
+    return this.schema.objectKeys(this.makeGeneric(name));
   }
 
   getType(name: string) {
