@@ -1,16 +1,16 @@
 import { screen } from '@testing-library/react';
 import React, { ComponentType } from 'react';
-import { connectField } from 'uniforms';
+import { AutoFieldProps, connectField } from 'uniforms';
 
 import { render } from './render';
 
-export function testAutoField(AutoField: ComponentType<any>) {
+export function testAutoField(AutoField: ComponentType<AutoFieldProps>) {
   test('<AutoField> - works with absolute nested names (object variant) ', () => {
     const Element = connectField(() => (
       <AutoField
         name="x.y.z"
         data-testid="x.y.z"
-        options={{ absoluteName: true }}
+        experimental_options={{ absoluteName: true }}
       />
     ));
 
@@ -29,7 +29,7 @@ export function testAutoField(AutoField: ComponentType<any>) {
       <AutoField
         name="x.0.z"
         data-testid="x.0.z"
-        options={{ absoluteName: true }}
+        experimental_options={{ absoluteName: true }}
       />
     ));
 

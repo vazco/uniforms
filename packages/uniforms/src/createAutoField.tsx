@@ -14,7 +14,7 @@ import { useField } from './useField';
 export type AutoFieldProps = {
   component?: Component;
   name: string;
-  options?: { absoluteName?: boolean };
+  experimental_options?: { absoluteName?: boolean };
   [prop: string]: unknown;
 };
 
@@ -30,7 +30,10 @@ export type ComponentDetector = (
 export function createAutoField(defaultComponentDetector: ComponentDetector) {
   const context = createContext<ComponentDetector>(defaultComponentDetector);
 
-  function AutoField({ options, ...rawProps }: AutoFieldProps): ReactElement {
+  function AutoField({
+    experimental_options: options,
+    ...rawProps
+  }: AutoFieldProps): ReactElement {
     const [props, uniforms] = useField(rawProps.name, rawProps, options);
     const componentDetector = useContext(context);
     const component = componentDetector(props, uniforms);
