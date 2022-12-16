@@ -138,16 +138,14 @@ These methods are:
 - `validate()` _(added in `ValidatedForm`)_
 
 ```tsx
+import { useRef } from 'react';
+
 const MyForm = ({ schema, onSubmit }) => {
-  let formRef;
+  const formRef = useRef();
 
   return (
     <section>
-      <AutoForm
-        ref={ref => (formRef = ref)}
-        schema={schema}
-        onSubmit={onSubmit}
-      />
+      <AutoForm ref={formRef} schema={schema} onSubmit={onSubmit} />
       <small onClick={() => formRef.reset()}>Reset</small>
       <small onClick={() => formRef.submit()}>Submit</small>
     </section>
@@ -221,7 +219,11 @@ function transform(mode, model) {
 You can take a reference to the field and manually trigger `.focus()`:
 
 ```tsx
-<AutoField name="firstName" inputRef={field => field.focus()} />
+import { useRef } from 'react'
+
+const ref = useRef()
+
+<AutoField name="firstName" inputRef={ref} />
 ```
 
 ### How can I create a multi-step form?
