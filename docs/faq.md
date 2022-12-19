@@ -138,16 +138,14 @@ These methods are:
 - `validate()` _(added in `ValidatedForm`)_
 
 ```tsx
+import { useRef } from 'react';
+
 const MyForm = ({ schema, onSubmit }) => {
-  let formRef;
+  const formRef = useRef();
 
   return (
     <section>
-      <AutoForm
-        ref={ref => (formRef = ref)}
-        schema={schema}
-        onSubmit={onSubmit}
-      />
+      <AutoForm ref={formRef} schema={schema} onSubmit={onSubmit} />
       <small onClick={() => formRef.reset()}>Reset</small>
       <small onClick={() => formRef.submit()}>Submit</small>
     </section>
@@ -221,7 +219,11 @@ function transform(mode, model) {
 You can take a reference to the field and manually trigger `.focus()`:
 
 ```tsx
-<AutoField name="firstName" inputRef={field => field.focus()} />
+import { useRef } from 'react';
+
+const inputRef = useRef();
+
+<AutoField name="firstName" inputRef={inputRef} />;
 ```
 
 ### How can I create a multi-step form?
@@ -302,14 +304,12 @@ The provider for this context is rendered by `BaseForm`, and in turn all the oth
 
 There are two most common issues causing this problem:
 
-1. The component calling this function does not have a Form component above it anywhere in the component tree. To fix
+1. **The component calling this function does not have a Form component above it anywhere in the component tree.**
 
-   this, wrap this component within a parent Form component (does not have to be direct).
+   To fix this, wrap this component within a parent Form component (does not have to be direct).
 
-2. There are multiple versions of `uniforms` installed in your `node_modules`. This usually happens when you have
+2. **There are multiple versions of `uniforms` installed in your `node_modules`**.
 
-   more than one version of the core `uniforms` package installed which can happen when you have a mismatch of
+   This usually happens when you have installed more than one version of the core `uniforms` package. It can happen when you have a mismatch of versions between any of your `uniforms` related dependencies.
 
-   versions between any of your `uniforms` related dependencies. Ensure all your versions are matching,
-
-   clean any `node_modules` directories and reinstall dependencies to resolve this error.
+   Ensure all your uniforms packages versions, clean any `node_modules` directories and reinstall dependencies to resolve this error.

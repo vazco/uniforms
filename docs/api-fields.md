@@ -109,6 +109,9 @@ A checkbox.
 
 ```tsx
 import { BoolField } from 'uniforms-unstyled';
+import { useRef } from 'react'
+
+const inputRef = useRef();
 
 <BoolField
   appearance="checkbox" // Renders a material-ui Checkbox
@@ -123,7 +126,7 @@ import { BoolField } from 'uniforms-unstyled';
   helpClassName="a b c"
   inline
   inputClassName="a b c"
-  inputRef={ref => {}}
+  inputRef={inputRef}
   labelBefore="Label"
   labelClassName="a b c" // You can either specify them as a single string
   labelClassName=[ 'a', 'b', 'c' ] // or as an array of strings
@@ -167,6 +170,9 @@ import { BoolField } from 'uniforms-unstyled';
 
 ```tsx
 import { DateField } from 'uniforms-unstyled';
+import { useRef } from 'react'
+
+const inputRef = useRef();
 
 <DateField
   extra="Extra Feedback or Help"
@@ -181,7 +187,7 @@ import { DateField } from 'uniforms-unstyled';
   iconLeft="user"
   iconProps={{onClick() {}}}
   inputClassName="a b c"
-  inputRef={ref => {}}
+  inputRef={inputRef}
   labelClassName="a b c" // You can either specify them as a single string
   labelClassName=[ 'a', 'b', 'c' ] // or as an array of strings
   labelCol={{offset: 2}} // 'ant-col-offset-2' on label
@@ -362,6 +368,9 @@ A textarea.
 
 ```tsx
 import { LongTextField } from 'uniforms-unstyled';
+import { useRef } from 'react'
+
+const inputRef = useRef();
 
 <LongTextField
   extra="Extra Feedback or Help"
@@ -375,7 +384,7 @@ import { LongTextField } from 'uniforms-unstyled';
   iconLeft="user"
   iconProps={{onClick() {}}}
   inputClassName="a b c"
-  inputRef={ref => {}}
+  inputRef={inputRef}
   labelClassName="a b c" // You can either specify them as a single string
   labelClassName=[ 'a', 'b', 'c' ] // or as an array of strings
   labelCol={{offset: 2}} // 'ant-col-offset-2' on label
@@ -438,6 +447,9 @@ A numeric input field.
 
 ```tsx
 import { NumField } from 'uniforms-unstyled';
+import { useRef } from 'react'
+
+const inputRef = useRef();
 
 <NumField
   decimal
@@ -452,7 +464,7 @@ import { NumField } from 'uniforms-unstyled';
   iconLeft="user"
   iconProps={{onClick() {}}}
   inputClassName="a b c"
-  inputRef={ref => {}}
+  inputRef={inputRef}
   labelClassName="a b c" // You can either specify them as a single string
   labelClassName=[ 'a', 'b', 'c' ] // or as an array of strings
   labelCol={{offset: 2}} // 'ant-col-offset-2' on label
@@ -532,6 +544,9 @@ import { RadioField } from 'uniforms-unstyled';
 
 ```tsx
 import { SelectField } from 'uniforms-unstyled';
+import { useRef } from 'react'
+
+const inputRef = useRef();
 
 <SelectField
   allowedValues={[value1, value2 /* ... */]}
@@ -542,7 +557,7 @@ import { SelectField } from 'uniforms-unstyled';
   helpClassName="a b c"
   inline
   inputClassName="a b c"
-  inputRef={ref => {}}
+  inputRef={inputRef}
   labelClassName="a b c" // You can either specify them as a single string
   labelClassName=[ 'a', 'b', 'c' ] // or as an array of strings
   labelCol={{offset: 2}} // 'ant-col-offset-2' on label
@@ -569,8 +584,11 @@ import { SelectField } from 'uniforms-unstyled';
 
 ```tsx
 import { SubmitField } from 'uniforms-unstyled';
+import { useRef } from 'react';
 
-<SubmitField inputClassName="a b c" inputRef={ref => {}} />;
+const inputRef = useRef();
+
+<SubmitField inputClassName="a b c" inputRef={inputRef} />;
 ```
 
 ### `TextField`
@@ -599,6 +617,9 @@ import { SubmitField } from 'uniforms-unstyled';
 
 ```tsx
 import { TextField } from 'uniforms-unstyled';
+import { useRef } from 'react'
+
+const inputRef = useRef();
 
 <TextField
   extra="Extra Feedback or Help"
@@ -612,7 +633,7 @@ import { TextField } from 'uniforms-unstyled';
   iconLeft="user"
   iconProps={{onClick() {}}}
   inputClassName="a b c"
-  inputRef={ref => {}}
+  inputRef={inputRef}
   labelClassName="a b c" // You can either specify them as a single string
   labelClassName=[ 'a', 'b', 'c' ] // or as an array of strings
   labelCol={{offset: 2}} // 'ant-col-offset-2' on label
