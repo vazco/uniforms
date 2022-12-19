@@ -164,7 +164,6 @@ export default class SimpleSchema2Bridge extends Bridge {
     return props;
   }
 
-
   getSubfields(name?: string): string[] {
     return this.schema.objectKeys(makeGeneric(name));
   }
