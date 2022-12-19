@@ -72,6 +72,26 @@ however, there will be validation checks.
 
 ```tsx
 import { ValidatedForm } from 'uniforms'; // Or from the theme package.
+import { useRef } from 'react';
+
+const formRef = useRef();
+
+const formAction = () => {
+  // Reset form.
+  //   It will reset changed state, model state in AutoForm, validation
+  //   state in ValidatedForm and rerender.
+  formRef.reset();
+
+  // Trigger form change.
+  //   It's a programmatic equivalent of a change event.
+  formRef.change(key, value);
+
+  // Submit form.
+  //   It's a programmatic equivalent of a submit event. Returns a promise,
+  //   which will either resolve with submitted form or reject with
+  //   validation error in ValidatedForm.
+  formRef.submit();
+};
 
 <ValidatedForm
   onValidate={async (model, error) => {
@@ -90,23 +110,7 @@ import { ValidatedForm } from 'uniforms'; // Or from the theme package.
   }}
   validate="onChangeAfterSubmit"
   validator={{ clean: true }}
-  ref={form => {
-    // Validate form with the current model.
-    //   Returns a Promise, which rejects with a validation error or
-    //   resolves without any value. Note, that it resolves/rejects AFTER
-    //   the component is rerendered.
-    form.validate();
-
-    // Validate form with key set to value.
-    //   You can use it to check, if a given value will pass the
-    //   validation or not. Returns validation Promise, as described above.
-    form.validate(key, value);
-
-    // Validate form with the given model.
-    //   Rather internal function. Returns validation Promise, as described
-    //   above.
-    form.validateModel(model);
-  }}
+  ref={formRef}
 />;
 ```
 
@@ -167,6 +171,26 @@ However, `BaseForm` is not self-managed, so you won't be able to type anything u
 
 ```tsx
 import { BaseForm } from 'uniforms'; // Or from the theme package.
+import { useRef } from 'react';
+
+const formRef = useRef();
+
+const formAction = () => {
+  // Reset form.
+  //   It will reset changed state, model state in AutoForm, validation
+  //   state in ValidatedForm and rerender.
+  formRef.reset();
+
+  // Trigger form change.
+  //   It's a programmatic equivalent of a change event.
+  formRef.change(key, value);
+
+  // Submit form.
+  //   It's a programmatic equivalent of a submit event. Returns a promise,
+  //   which will either resolve with submitted form or reject with
+  //   validation error in ValidatedForm.
+  formRef.submit();
+};
 
 <BaseForm
   autosaveDelay={0}
@@ -204,22 +228,7 @@ import { BaseForm } from 'uniforms'; // Or from the theme package.
   readOnly={false}
   schema={myFormSchema}
   showInlineError
-  ref={form => {
-    // Reset form.
-    //   It will reset changed state, model state in AutoForm, validation
-    //   state in ValidatedForm and rerender.
-    form.reset();
-
-    // Trigger form change.
-    //   It's a programmatic equivalent of a change event.
-    form.change(key, value);
-
-    // Submit form.
-    //   It's a programmatic equivalent of a submit event. Returns a promise,
-    //   which will either resolve with submitted form or reject with
-    //   validation error in ValidatedForm.
-    form.submit();
-  }}
+  ref={formRef}
 />;
 ```
 
@@ -270,16 +279,14 @@ Every form has autosave functionality. If you set an `autosave` prop, then every
 You can use [React `ref` prop](https://facebook.github.io/react/docs/more-about-refs.html) to manually access form methods. Example usage:
 
 ```tsx
+import { useRef } from 'react';
+
 const MyForm = ({ schema, onSubmit }) => {
-  let formRef;
+  const formRef = useRef();
 
   return (
     <section>
-      <AutoForm
-        ref={ref => (formRef = ref)}
-        schema={schema}
-        onSubmit={onSubmit}
-      />
+      <AutoForm ref={formRef} schema={schema} onSubmit={onSubmit} />
       <small onClick={() => formRef.reset()}>Reset</small>
       <small onClick={() => formRef.submit()}>Submit</small>
     </section>
