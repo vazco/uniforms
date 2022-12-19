@@ -6,6 +6,10 @@ import { Bridge, joinName } from 'uniforms';
 
 const propsToRemove = ['optional', 'uniforms'];
 
+function makeGeneric(name?: string): string | undefined {
+  return name?.replace(/\.\d+(\.|$)/g, '.$$$1');
+}
+
 export default class SimpleSchema2Bridge extends Bridge {
   constructor(public schema: SimpleSchema) {
     super();
@@ -160,12 +164,9 @@ export default class SimpleSchema2Bridge extends Bridge {
     return props;
   }
 
-  makeGeneric(name?: string): string | undefined {
-    return name?.replace(/\.\d+(\.|$)/g, '.$$$1');
-  }
 
   getSubfields(name?: string): string[] {
-    return this.schema.objectKeys(this.makeGeneric(name));
+    return this.schema.objectKeys(makeGeneric(name));
   }
 
   getType(name: string) {
