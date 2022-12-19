@@ -7,11 +7,7 @@ import { render } from './render';
 export function testAutoField(AutoField: ComponentType<AutoFieldProps>) {
   test('<AutoField> - works with absolute nested names (object variant) ', () => {
     const Element = connectField(() => (
-      <AutoField
-        name="x.y.z"
-        data-testid="x.y.z"
-        experimental_options={{ absoluteName: true }}
-      />
+      <AutoField name="x.y.z" data-testid="x.y.z" experimental_absoluteName />
     ));
 
     render(<Element name="a" />, {
@@ -26,11 +22,7 @@ export function testAutoField(AutoField: ComponentType<AutoFieldProps>) {
 
   test('<AutoField> - works with absolute nested names (list variant) ', () => {
     const Element = connectField(() => (
-      <AutoField
-        name="x.0.z"
-        data-testid="x.0.z"
-        experimental_options={{ absoluteName: true }}
-      />
+      <AutoField name="x.0.z" data-testid="x.0.z" experimental_absoluteName />
     ));
 
     render(<Element name="a" />, {
