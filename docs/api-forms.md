@@ -282,11 +282,11 @@ You can use [React `ref` prop](https://facebook.github.io/react/docs/more-about-
 import { useRef } from 'react';
 
 const MyForm = ({ schema, onSubmit }) => {
-  const ref = useRef();
+  const formRef = useRef();
 
   return (
     <section>
-      <AutoForm ref={ref} schema={schema} onSubmit={onSubmit} />
+      <AutoForm ref={formRef} schema={schema} onSubmit={onSubmit} />
       <small onClick={() => formRef.reset()}>Reset</small>
       <small onClick={() => formRef.submit()}>Submit</small>
     </section>

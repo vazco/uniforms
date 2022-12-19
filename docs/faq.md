@@ -219,11 +219,11 @@ function transform(mode, model) {
 You can take a reference to the field and manually trigger `.focus()`:
 
 ```tsx
-import { useRef } from 'react'
+import { useRef } from 'react';
 
-const ref = useRef()
+const inputRef = useRef();
 
-<AutoField name="firstName" inputRef={ref} />
+<AutoField name="firstName" inputRef={inputRef} />;
 ```
 
 ### How can I create a multi-step form?
