@@ -312,4 +312,4 @@ There are two most common issues causing this problem:
 
    This usually happens when you have installed more than one version of the core `uniforms` package. It can happen when you have a mismatch of versions between any of your `uniforms` related dependencies.
 
-   Ensure all your versions match, clean any `node_modules` directories and reinstall dependencies to resolve this error.
+   Ensure all your uniforms packages versions, clean any `node_modules` directories and reinstall dependencies to resolve this error.
