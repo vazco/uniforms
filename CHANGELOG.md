@@ -1,3 +1,7 @@
+## [v3.10.2](https://github.com/vazco/uniforms/tree/v3.10.2) (2022-12-23)
+
+- **Fixed:** Compatibility with Simple Schema v3 (on a basic level; full compatibility will be released in v4). [\#1189](https://github.com/vazco/uniforms/issues/1189)
+
 ## [v3.10.1](https://github.com/vazco/uniforms/tree/v3.10.1) (2022-10-07)
 
 - **Fixed:** Problems with `DateField` not always formatting correctly. [\#1162](https://github.com/vazco/uniforms/issues/1162)
