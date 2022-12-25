@@ -8,9 +8,14 @@ import { Bridge } from './Bridge';
 import { changedKeys } from './changedKeys';
 import { context } from './context';
 import { randomIds } from './randomIds';
-import { ChangedMap, Context, ModelTransformMode } from './types';
+import {
+  ChangedMap,
+  Context,
+  ModelTransformMode,
+  UnknownObject,
+} from './types';
 
-export type BaseFormProps<Model> = {
+export type BaseFormProps<Model extends UnknownObject> = {
   autosave: boolean;
   autosaveDelay: number;
   disabled?: boolean;
@@ -28,7 +33,7 @@ export type BaseFormProps<Model> = {
   showInlineError?: boolean;
 };
 
-export type BaseFormState<Model> = {
+export type BaseFormState<Model extends UnknownObject> = {
   changed: boolean;
   changedMap: ChangedMap<Model>;
   resetCount: number;
@@ -37,7 +42,7 @@ export type BaseFormState<Model> = {
 };
 
 export class BaseForm<
-  Model,
+  Model extends UnknownObject,
   Props extends BaseFormProps<Model> = BaseFormProps<Model>,
   State extends BaseFormState<Model> = BaseFormState<Model>,
 > extends Component<Props, State> {

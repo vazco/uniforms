@@ -1,22 +1,22 @@
 import { render as renderOnScreen } from '@testing-library/react';
 import React, { ReactElement } from 'react';
 import SimpleSchema, { SimpleSchemaDefinition } from 'simpl-schema';
-import { BaseForm, context, Context, randomIds } from 'uniforms';
+import { BaseForm, Context, UnknownObject, context, randomIds } from 'uniforms';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 
 const randomId = randomIds();
 
-export function render(
+export function render<Model extends UnknownObject>(
   element: ReactElement,
   schema: SimpleSchemaDefinition,
-  contextValueExtension?: Partial<Context<unknown>>,
-  initialModel?: object,
+  contextValueExtension?: Partial<Context<Model>>,
+  model = {} as Model,
 ) {
   const contextValue = {
     changed: false,
     changedMap: {},
     error: null,
-    model: initialModel ?? {},
+    model,
     name: [],
     onChange() {},
     onSubmit() {},
@@ -34,7 +34,7 @@ export function render(
       showInlineError: false,
       ...contextValueExtension?.state,
     },
-    formRef: {} as BaseForm<unknown>,
+    formRef: {} as BaseForm<UnknownObject>,
   };
 
   return renderOnScreen(element, {

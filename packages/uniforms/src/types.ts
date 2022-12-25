@@ -7,7 +7,7 @@ export type ChangedMap<T> = T extends object
   ? { [P in keyof T]?: ChangedMap<T[P]> }
   : Record<string, void>;
 
-export type Context<Model> = {
+export type Context<Model extends UnknownObject> = {
   changed: boolean;
   changedMap: ChangedMap<Model>;
   error: any;
@@ -71,6 +71,9 @@ export type ModelTransformMode = 'form' | 'submit' | 'validate';
 
 /** @internal */
 export type Override<T, U> = T extends any ? U & Omit<T, keyof U> : never;
+
+/** @internal */
+export type UnknownObject = Record<string, unknown>;
 
 export type ValidateMode = 'onChange' | 'onChangeAfterSubmit' | 'onSubmit';
 

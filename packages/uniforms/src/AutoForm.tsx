@@ -11,20 +11,22 @@ import {
   ValidatedQuickFormProps,
   ValidatedQuickFormState,
 } from './ValidatedQuickForm';
-import { ModelTransformMode } from './types';
+import { ModelTransformMode, UnknownObject } from './types';
 
-export type AutoFormProps<Model> = ValidatedQuickFormProps<Model> & {
-  onChangeModel?: (model: Model) => void;
-};
+export type AutoFormProps<Model extends UnknownObject> =
+  ValidatedQuickFormProps<Model> & {
+    onChangeModel?: (model: Model) => void;
+  };
 
-export type AutoFormState<Model> = ValidatedQuickFormState<Model> & {
-  model: Model;
-};
+export type AutoFormState<Model extends UnknownObject> =
+  ValidatedQuickFormState<Model> & {
+    model: Model;
+  };
 
 export function Auto<Base extends typeof ValidatedQuickForm>(Base: Base) {
   // @ts-expect-error: Mixin class problem.
   class AutoForm<
-    Model,
+    Model extends UnknownObject,
     Props extends AutoFormProps<Model> = AutoFormProps<Model>,
     State extends AutoFormState<Model> = AutoFormState<Model>,
   > extends Base<Model, Props, State> {
@@ -62,7 +64,6 @@ export function Auto<Base extends typeof ValidatedQuickForm>(Base: Base) {
     onChange(key: string, value: any) {
       super.onChange(key, value);
       this.setState(
-        // @ts-expect-error `Model` should extend `object`.
         state => ({ model: setWith(clone(state.model), key, value, clone) }),
         () => {
           if (this.props.onChangeModel) {

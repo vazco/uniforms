@@ -7,25 +7,27 @@ import setWith from 'lodash/setWith';
 import { SyntheticEvent } from 'react';
 
 import { BaseForm, BaseFormProps, BaseFormState } from './BaseForm';
-import { Context, ValidateMode } from './types';
+import { Context, UnknownObject, ValidateMode } from './types';
 
-export type ValidatedFormProps<Model> = BaseFormProps<Model> & {
-  onValidate: (model: Model, error: any) => any;
-  validate: ValidateMode;
-  validator?: any;
-};
+export type ValidatedFormProps<Model extends UnknownObject> =
+  BaseFormProps<Model> & {
+    onValidate: (model: Model, error: any) => any;
+    validate: ValidateMode;
+    validator?: any;
+  };
 
-export type ValidatedFormState<Model> = BaseFormState<Model> & {
-  error: any;
-  validate: boolean;
-  validating: boolean;
-  validator: (model: Model) => any;
-};
+export type ValidatedFormState<Model extends UnknownObject> =
+  BaseFormState<Model> & {
+    error: any;
+    validate: boolean;
+    validating: boolean;
+    validator: (model: Model) => any;
+  };
 
 export function Validated<Base extends typeof BaseForm>(Base: Base) {
   // @ts-expect-error: Mixin class problem.
   class ValidatedForm<
-    Model,
+    Model extends UnknownObject,
     Props extends ValidatedFormProps<Model> = ValidatedFormProps<Model>,
     State extends ValidatedFormState<Model> = ValidatedFormState<Model>,
   > extends Base<Model, Props, State> {
@@ -142,7 +144,6 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
     onValidate(key?: string, value?: any) {
       let model = this.getContextModel();
       if (model && key) {
-        // @ts-expect-error `Model` should extend `object`.
         model = setWith(clone(model), key, cloneDeep(value), clone);
       }
 

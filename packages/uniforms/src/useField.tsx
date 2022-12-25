@@ -3,7 +3,7 @@ import mapValues from 'lodash/mapValues';
 import { ReactNode, useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { joinName } from './joinName';
-import { GuaranteedProps } from './types';
+import { GuaranteedProps, UnknownObject } from './types';
 import { useForm } from './useForm';
 
 function propagate(
@@ -32,7 +32,7 @@ function propagate(
 export function useField<
   Props extends Record<string, any>,
   Value = Props['value'],
-  Model = Record<string, any>,
+  Model extends UnknownObject = Record<string, any>,
 >(
   fieldName: string,
   props: Props,
@@ -82,7 +82,7 @@ export function useField<
     [context.onChange, name],
   );
 
-  const valueFromModel: Value | undefined = get(context.model, name);
+  const valueFromModel = get(context.model, name) as Value | undefined;
   let initialValue: Value | undefined;
   let value: Value | undefined = props.value ?? valueFromModel;
 
