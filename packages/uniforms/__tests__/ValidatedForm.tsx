@@ -1,6 +1,6 @@
 import React from 'react';
 import SimpleSchema from 'simpl-schema';
-import { ValidatedForm } from 'uniforms';
+import { ModelTransformMode, UnknownObject, ValidatedForm } from 'uniforms';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 
 import mount from './_mount';
@@ -111,7 +111,7 @@ describe('ValidatedForm', () => {
 
     it('uses `modelTransform`s `validate` mode', () => {
       const transformedModel = { b: 1 };
-      const modelTransform = (mode: string, model: Record<string, any>) =>
+      const modelTransform = (mode: ModelTransformMode, model: UnknownObject) =>
         mode === 'validate' ? transformedModel : model;
       wrapper.setProps({ modelTransform });
       form.validate();

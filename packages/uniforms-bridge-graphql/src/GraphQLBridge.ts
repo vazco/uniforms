@@ -13,7 +13,7 @@ import invariant from 'invariant';
 import lowerCase from 'lodash/lowerCase';
 import memoize from 'lodash/memoize';
 import upperFirst from 'lodash/upperFirst';
-import { Bridge, joinName } from 'uniforms';
+import { Bridge, UnknownObject, joinName } from 'uniforms';
 
 function fieldInvariant(name: string, condition: boolean): asserts condition {
   invariant(condition, 'Field not found in schema: "%s"', name);
@@ -22,8 +22,8 @@ function fieldInvariant(name: string, condition: boolean): asserts condition {
 export default class GraphQLBridge extends Bridge {
   constructor(
     public schema: GraphQLType,
-    public validator: (model: Record<string, any>) => any,
-    public extras: Record<string, any> = {},
+    public validator: (model: UnknownObject) => any,
+    public extras: UnknownObject = {},
   ) {
     super();
 
@@ -89,7 +89,7 @@ export default class GraphQLBridge extends Bridge {
     }
 
     if (type === Object) {
-      const value: Record<string, unknown> = {};
+      const value: UnknownObject = {};
       this.getSubfields(name).forEach(key => {
         const initialValue = this.getInitialValue(joinName(name, key));
         if (initialValue !== undefined) {
@@ -100,15 +100,17 @@ export default class GraphQLBridge extends Bridge {
     }
 
     const { defaultValue } = this.getField(name);
+    // @ts-expect-error The `extras` should be typed more precisely.
     return defaultValue ?? this.extras[name]?.initialValue;
   }
 
-  getProps(nameNormal: string, fieldProps?: Record<string, any>) {
+  getProps(nameNormal: string, fieldProps?: UnknownObject) {
     const nameGeneric = nameNormal.replace(/\.\d+/g, '.$');
 
     const field = this.getField(nameGeneric);
     const props = {
       required: isNonNullType(field.type),
+      // @ts-expect-error The `extras` should be typed more precisely.
       ...this.extras[nameGeneric],
       ...this.extras[nameNormal],
     };

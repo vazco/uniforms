@@ -13,7 +13,7 @@ export type ConnectFieldOptions = {
 
 /** @internal */
 export type ConnectedFieldProps<
-  Props extends Record<string, unknown>,
+  Props extends UnknownObject,
   Value = Props['value'],
 > = Override<
   Props,
@@ -29,7 +29,7 @@ export type ConnectedFieldProps<
 
 /** @internal */
 export type ConnectedField<
-  Props extends Record<string, unknown>,
+  Props extends UnknownObject,
   Value = Props['value'],
 > = FunctionComponent<ConnectedFieldProps<Props, Value>> & {
   Component: ComponentType<Props>;
@@ -38,7 +38,7 @@ export type ConnectedField<
 
 function getNextContext<
   Model extends UnknownObject,
-  Props extends Record<string, unknown>,
+  Props extends UnknownObject,
   Value,
 >(
   context: Context<Model>,
@@ -79,7 +79,7 @@ function getNextContext<
 }
 
 export function connectField<
-  Props extends Record<string, unknown>,
+  Props extends UnknownObject,
   Value = Props['value'],
 >(
   Component: ComponentType<Props>,

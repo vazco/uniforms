@@ -5,13 +5,13 @@ import isEmpty from 'lodash/isEmpty';
 import lowerCase from 'lodash/lowerCase';
 import memoize from 'lodash/memoize';
 import upperFirst from 'lodash/upperFirst';
-import { Bridge, joinName } from 'uniforms';
+import { Bridge, UnknownObject, joinName } from 'uniforms';
 
 function fieldInvariant(name: string, condition: boolean): asserts condition {
   invariant(condition, 'Field not found in schema: "%s"', name);
 }
 
-function resolveRef(reference: string, schema: Record<string, any>) {
+function resolveRef(reference: string, schema: UnknownObject) {
   invariant(
     reference.startsWith('#'),
     'Reference is not an internal reference, and only such are allowed: "%s"',
@@ -21,7 +21,7 @@ function resolveRef(reference: string, schema: Record<string, any>) {
   const resolvedReference = reference
     .split('/')
     .filter(part => part && part !== '#')
-    .reduce((definition, next) => definition[next], schema);
+    .reduce((definition, next) => definition[next] as UnknownObject, schema);
 
   invariant(
     resolvedReference,
@@ -33,15 +33,16 @@ function resolveRef(reference: string, schema: Record<string, any>) {
 }
 
 function resolveRefIfNeeded(
-  partial: Record<string, any>,
-  schema: Record<string, any>,
-): Record<string, any> {
+  partial: UnknownObject,
+  schema: UnknownObject,
+): UnknownObject {
   if (!('$ref' in partial)) {
     return partial;
   }
 
   const { $ref, ...partialWithoutRef } = partial;
   return resolveRefIfNeeded(
+    // @ts-expect-error The `partial` and `schema` should be typed more precisely.
     Object.assign({}, partialWithoutRef, resolveRef($ref, schema)),
     schema,
   );
@@ -78,12 +79,13 @@ function pathToName(path: string) {
 }
 
 export default class JSONSchemaBridge extends Bridge {
-  schema: Record<string, any>;
+  // FIXME: The `_compiledSchema` should be typed more precisely.
   _compiledSchema: Record<string, any>;
 
   constructor(
-    schema: Record<string, any>,
-    public validator: (model: Record<string, any>) => any,
+    // FIXME: The `schema` should be typed more precisely.
+    public schema: Record<string, any>,
+    public validator: (model: UnknownObject) => any,
   ) {
     super();
 
@@ -229,7 +231,7 @@ export default class JSONSchemaBridge extends Bridge {
     }
 
     if (type === 'object') {
-      const value: Record<string, unknown> = {};
+      const value: UnknownObject = {};
       this.getSubfields(name).forEach(key => {
         const initialValue = this.getInitialValue(joinName(name, key));
         if (initialValue !== undefined) {
@@ -242,7 +244,7 @@ export default class JSONSchemaBridge extends Bridge {
     return undefined;
   }
 
-  getProps(name: string, fieldProps?: Record<string, any>) {
+  getProps(name: string, fieldProps?: UnknownObject) {
     const field = this.getField(name);
     const props = Object.assign(
       {},

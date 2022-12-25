@@ -1,5 +1,7 @@
 import invariant from 'invariant';
 
+import { UnknownObject } from './types';
+
 // There is no standarized error format. While creating a custom bridge, one can
 // come up with an own error format, returned from validator and later analyzed
 // in `getError*` methods.
@@ -89,7 +91,7 @@ export abstract class Bridge {
   // Additionally, `props` are this field instance props. If a field is rendered
   // multiple times, this function will be called multiple times, possibly with
   // different `props`.
-  getProps(name: string, props: Record<string, any>): Record<string, any> {
+  getProps(name: string, props: UnknownObject): UnknownObject {
     return invariant(
       false,
       '%s have not implemented `getProps` method (args=%o).',
@@ -124,7 +126,7 @@ export abstract class Bridge {
   // a promise that will resolve (not reject!) with an error. If there is no
   // error, return (or resolve with) a `null` value instead.
   // eslint-disable-next-line prettier/prettier
-  getValidator(options?: any): (model: Record<string, any>) => null | Error | Promise<null | Error> {
+  getValidator(options?: any): (model: UnknownObject) => null | Error | Promise<null | Error> {
     return invariant(
       false,
       '%s have not implemented `getValidator` method (args=%o).',

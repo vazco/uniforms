@@ -1,4 +1,5 @@
 import React, { createContext, useContext } from 'react';
+import { UnknownObject } from 'uniforms';
 import * as antd from 'uniforms-antd';
 import * as bootstrap3 from 'uniforms-bootstrap3';
 import * as bootstrap4 from 'uniforms-bootstrap4';
@@ -46,7 +47,7 @@ export const themes = {
 export const themeContext = createContext<keyof typeof themes>('unstyled');
 
 function _createThemedComponent(component: keyof typeof unstyled) {
-  return function ThemedComponent(props: Record<string, unknown>) {
+  return function ThemedComponent(props: UnknownObject) {
     const theme = useContext(themeContext);
     // FIXME: Form prop errors due to `props` having no strict type here.
     const Component: any = themes[theme][component];

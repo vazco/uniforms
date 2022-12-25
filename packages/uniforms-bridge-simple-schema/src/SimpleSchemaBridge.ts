@@ -3,7 +3,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import memoize from 'lodash/memoize';
 // @ts-ignore -- This package _is_ typed, but not in all environments.
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Bridge, joinName } from 'uniforms';
+import { Bridge, UnknownObject, joinName } from 'uniforms';
 
 const propsToRemove = ['optional', 'uniforms'];
 
@@ -83,7 +83,7 @@ export default class SimpleSchemaBridge extends Bridge {
     }
 
     if (field.type === Object) {
-      const value: Record<string, unknown> = {};
+      const value: UnknownObject = {};
       this.getSubfields(name).forEach(key => {
         const initialValue = this.getInitialValue(joinName(name, key));
         if (initialValue !== undefined) {
@@ -97,7 +97,7 @@ export default class SimpleSchemaBridge extends Bridge {
   }
 
   // eslint-disable-next-line complexity
-  getProps(name: string, fieldProps?: Record<string, any>) {
+  getProps(name: string, fieldProps?: UnknownObject) {
     const { type: fieldType, ...props } = this.getField(name);
     props.required = !props.optional;
 
@@ -159,7 +159,7 @@ export default class SimpleSchemaBridge extends Bridge {
     return this.getField(name).type;
   }
 
-  getValidator(options: Record<string, any> = { clean: true }) {
+  getValidator(options: UnknownObject = { clean: true }) {
     const validator = this.schema.validator(options);
     return (model: any) => {
       try {

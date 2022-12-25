@@ -2,7 +2,7 @@ import invariant from 'invariant';
 import cloneDeep from 'lodash/cloneDeep';
 import memoize from 'lodash/memoize';
 import SimpleSchema from 'simpl-schema';
-import { Bridge, joinName } from 'uniforms';
+import { Bridge, UnknownObject, joinName } from 'uniforms';
 
 const propsToRemove = ['optional', 'uniforms'];
 
@@ -92,7 +92,7 @@ export default class SimpleSchema2Bridge extends Bridge {
     }
 
     if (field.type === Object || field.type instanceof SimpleSchema) {
-      const value: Record<string, unknown> = {};
+      const value: UnknownObject = {};
       this.getSubfields(name).forEach(key => {
         const initialValue = this.getInitialValue(joinName(name, key));
         if (initialValue !== undefined) {
@@ -106,7 +106,7 @@ export default class SimpleSchema2Bridge extends Bridge {
   }
 
   // eslint-disable-next-line complexity
-  getProps(name: string, fieldProps?: Record<string, any>) {
+  getProps(name: string, fieldProps?: UnknownObject) {
     const { type: fieldType, ...props } = this.getField(name);
     props.required = !props.optional;
 
@@ -183,9 +183,9 @@ export default class SimpleSchema2Bridge extends Bridge {
   }
 
   // TODO: `ValidationOption` is not exported.
-  getValidator(options: Record<string, any> = { clean: true, mutate: true }) {
+  getValidator(options: UnknownObject = { clean: true, mutate: true }) {
     const validator = this.schema.validator(options);
-    return (model: Record<string, any>) => {
+    return (model: UnknownObject) => {
       try {
         // Clean mutate its argument, even if mutate is false.
         validator(options.clean ? cloneDeep({ ...model }) : model);

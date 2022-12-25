@@ -30,9 +30,10 @@ function propagate(
 }
 
 export function useField<
+  // This type has to use `any` to allow any object.
   Props extends Record<string, any>,
   Value = Props['value'],
-  Model extends UnknownObject = Record<string, any>,
+  Model extends UnknownObject = UnknownObject,
 >(
   fieldName: string,
   props: Props,
@@ -60,12 +61,14 @@ export function useField<
 
   const [label, labelFallback] = propagate(
     props.label,
+    // @ts-expect-error The `schema.getProps` should be typed more precisely.
     schemaProps.label,
     state.label,
     '',
   );
   const [placeholder] = propagate(
     props.placeholder,
+    // @ts-expect-error The `schema.getProps` should be typed more precisely.
     schemaProps.placeholder,
     state.placeholder,
     label || labelFallback,
@@ -82,7 +85,8 @@ export function useField<
     [context.onChange, name],
   );
 
-  const valueFromModel = get(context.model, name) as Value | undefined;
+  // @ts-expect-error The `props` should be typed more precisely.
+  const valueFromModel: Value | undefined = get(context.model, name);
   let initialValue: Value | undefined;
   let value: Value | undefined = props.value ?? valueFromModel;
 

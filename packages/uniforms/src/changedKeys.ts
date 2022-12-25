@@ -1,8 +1,9 @@
 import isEqual from 'lodash/isEqual';
 
 import { joinName } from './joinName';
+import { UnknownObject } from './types';
 
-function isObject(value: unknown): value is Record<string, unknown> {
+function isObject(value: unknown): value is UnknownObject {
   return !!value && value === Object(value) && !(value instanceof Date);
 }
 

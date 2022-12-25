@@ -73,6 +73,7 @@ export type ModelTransformMode = 'form' | 'submit' | 'validate';
 export type Override<T, U> = T extends any ? U & Omit<T, keyof U> : never;
 
 /** @internal */
+// export type UnknownObject = {};
 export type UnknownObject = Record<string, unknown>;
 
 export type ValidateMode = 'onChange' | 'onChangeAfterSubmit' | 'onSubmit';
