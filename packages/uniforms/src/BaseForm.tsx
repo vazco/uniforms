@@ -19,14 +19,14 @@ export type BaseFormProps<Model extends UnknownObject> = {
   autosave: boolean;
   autosaveDelay: number;
   disabled?: boolean;
-  error: any;
+  error: unknown;
   id?: string;
   label: boolean;
   model: Model;
   modelTransform?: (mode: ModelTransformMode, model: Model) => Model;
   noValidate: boolean;
-  onChange?: (key: string, value: any) => void;
-  onSubmit: (model: Model) => void | Promise<any>;
+  onChange?: (key: string, value: unknown) => void;
+  onSubmit: (model: Model) => void | Promise<unknown>;
   placeholder?: boolean;
   readOnly?: boolean;
   schema: Bridge;
@@ -106,11 +106,11 @@ export class BaseForm<
     this.setState = () => {};
   }
 
-  delayId?: any;
+  delayId?: ReturnType<typeof setTimeout> | undefined;
   mounted: boolean;
   reset: () => void;
-  change: (key: string, value: any) => void;
-  submit: (event?: SyntheticEvent) => Promise<any>;
+  change: (key: string, value: unknown) => void;
+  submit: (event?: SyntheticEvent) => Promise<unknown>;
   randomId: () => string;
 
   getContext(): Context<Model> {
@@ -207,7 +207,7 @@ export class BaseForm<
     };
   }
 
-  onChange(key: string, value: any) {
+  onChange(key: string, value: unknown) {
     // Do not set `changed` before componentDidMount
     if (this.mounted) {
       const keys = changedKeys(key, value, get(this.getModel(), key));
@@ -234,7 +234,7 @@ export class BaseForm<
     // Do not call `onSubmit` before componentDidMount
     if (this.mounted && this.props.autosave) {
       if (this.delayId) {
-        this.delayId = clearTimeout(this.delayId);
+        clearTimeout(this.delayId);
       }
 
       // Delay autosave by `autosaveDelay` milliseconds...

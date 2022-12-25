@@ -10,12 +10,12 @@ export type ChangedMap<T> = T extends object
 export type Context<Model extends UnknownObject> = {
   changed: boolean;
   changedMap: ChangedMap<Model>;
-  error: any;
+  error: unknown;
   formRef: BaseForm<Model>;
   model: Model;
   name: string[];
-  onChange: (key: string, value: any) => void;
-  onSubmit: (event?: SyntheticEvent) => any | Promise<any>;
+  onChange: (key: string, value: unknown) => void;
+  onSubmit: (event?: SyntheticEvent) => unknown | Promise<unknown>;
   randomId: () => string;
   schema: Bridge;
   state: {
@@ -41,10 +41,10 @@ export interface FilterDOMProps {}
 export type GuaranteedProps<Value> = {
   changed: boolean;
   disabled: boolean;
-  error?: any;
+  error?: unknown;
   errorMessage?: string;
-  field: any;
-  fieldType: any;
+  field: unknown;
+  fieldType: unknown;
   fields: string[];
   id: string;
   label: ReactNode;
@@ -58,7 +58,7 @@ export type GuaranteedProps<Value> = {
 
 type OnChange<Value> = {
   (value: Value): void;
-  (value: any, name: string): void;
+  (value: unknown, name: string): void;
 };
 
 export type HTMLFieldProps<Value, Element, Extension = object> = FieldProps<

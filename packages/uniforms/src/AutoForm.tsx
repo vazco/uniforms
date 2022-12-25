@@ -61,7 +61,7 @@ export function Auto<Base extends typeof ValidatedQuickForm>(Base: Base) {
       return this.state.model;
     }
 
-    onChange(key: string, value: any) {
+    onChange(key: string, value: unknown) {
       super.onChange(key, value);
       this.setState(
         state => ({ model: setWith(clone(state.model), key, value, clone) }),

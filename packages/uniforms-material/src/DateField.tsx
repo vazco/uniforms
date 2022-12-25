@@ -50,7 +50,7 @@ function Date({
       disabled={disabled}
       error={!!error}
       fullWidth={themeProps?.fullWidth ?? true}
-      helperText={(error && showInlineError && errorMessage) || helperText}
+      helperText={(!!error && showInlineError && errorMessage) || helperText}
       label={label}
       InputLabelProps={{ shrink: true, ...labelProps, ...InputLabelProps }}
       inputProps={{ readOnly, ...(themeProps?.inputProps ?? {}) }}
