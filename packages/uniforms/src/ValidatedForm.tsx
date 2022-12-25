@@ -7,10 +7,10 @@ import setWith from 'lodash/setWith';
 import { SyntheticEvent } from 'react';
 
 import { BaseForm, BaseFormProps, BaseFormState } from './BaseForm';
-import { Context, DeepPartial, ValidateMode } from './types';
+import { Context, ValidateMode } from './types';
 
 export type ValidatedFormProps<Model> = BaseFormProps<Model> & {
-  onValidate: (model: DeepPartial<Model>, error: any) => any;
+  onValidate: (model: Model, error: any) => any;
   validate: ValidateMode;
   validator?: any;
 };
@@ -19,7 +19,7 @@ export type ValidatedFormState<Model> = BaseFormState<Model> & {
   error: any;
   validate: boolean;
   validating: boolean;
-  validator: (model: DeepPartial<Model>) => any;
+  validator: (model: Model) => any;
 };
 
 export function Validated<Base extends typeof BaseForm>(Base: Base) {
@@ -142,6 +142,7 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
     onValidate(key?: string, value?: any) {
       let model = this.getContextModel();
       if (model && key) {
+        // @ts-expect-error `Model` should extend `object`.
         model = setWith(clone(model), key, cloneDeep(value), clone);
       }
 

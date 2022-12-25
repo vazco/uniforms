@@ -12,7 +12,7 @@ export type Context<Model> = {
   changedMap: ChangedMap<Model>;
   error: any;
   formRef: BaseForm<Model>;
-  model: DeepPartial<Model>;
+  model: Model;
   name: string[];
   onChange: (key: string, value: any) => void;
   onSubmit: (event?: SyntheticEvent) => any | Promise<any>;
@@ -28,11 +28,6 @@ export type Context<Model> = {
   submitting: boolean;
   submitted: boolean;
   validating: boolean;
-};
-
-/** @internal */
-export type DeepPartial<T> = {
-  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
 };
 
 export type FieldProps<Value, Base, Extension = object> = Override<

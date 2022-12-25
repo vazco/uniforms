@@ -8,7 +8,7 @@ import { Bridge } from './Bridge';
 import { changedKeys } from './changedKeys';
 import { context } from './context';
 import { randomIds } from './randomIds';
-import { ChangedMap, Context, DeepPartial, ModelTransformMode } from './types';
+import { ChangedMap, Context, ModelTransformMode } from './types';
 
 export type BaseFormProps<Model> = {
   autosave: boolean;
@@ -17,14 +17,11 @@ export type BaseFormProps<Model> = {
   error: any;
   id?: string;
   label: boolean;
-  model: DeepPartial<Model>;
-  modelTransform?: (
-    mode: ModelTransformMode,
-    model: DeepPartial<Model>,
-  ) => DeepPartial<Model>;
+  model: Model;
+  modelTransform?: (mode: ModelTransformMode, model: Model) => Model;
   noValidate: boolean;
   onChange?: (key: string, value: any) => void;
-  onSubmit: (model: DeepPartial<Model>) => void | Promise<any>;
+  onSubmit: (model: Model) => void | Promise<any>;
   placeholder?: boolean;
   readOnly?: boolean;
   schema: Bridge;
@@ -170,7 +167,7 @@ export class BaseForm<
 
   getModel(
     mode?: ModelTransformMode,
-    model: DeepPartial<Model> = this.props.model,
+    model: Model = this.props.model,
   ): Context<Model>['model'] {
     return model;
   }

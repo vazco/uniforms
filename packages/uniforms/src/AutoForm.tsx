@@ -11,14 +11,14 @@ import {
   ValidatedQuickFormProps,
   ValidatedQuickFormState,
 } from './ValidatedQuickForm';
-import { DeepPartial, ModelTransformMode } from './types';
+import { ModelTransformMode } from './types';
 
 export type AutoFormProps<Model> = ValidatedQuickFormProps<Model> & {
-  onChangeModel?: (model: DeepPartial<Model>) => void;
+  onChangeModel?: (model: Model) => void;
 };
 
 export type AutoFormState<Model> = ValidatedQuickFormState<Model> & {
-  model: DeepPartial<Model>;
+  model: Model;
 };
 
 export function Auto<Base extends typeof ValidatedQuickForm>(Base: Base) {
@@ -62,6 +62,7 @@ export function Auto<Base extends typeof ValidatedQuickForm>(Base: Base) {
     onChange(key: string, value: any) {
       super.onChange(key, value);
       this.setState(
+        // @ts-expect-error `Model` should extend `object`.
         state => ({ model: setWith(clone(state.model), key, value, clone) }),
         () => {
           if (this.props.onChangeModel) {
