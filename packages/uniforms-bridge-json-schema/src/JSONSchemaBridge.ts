@@ -85,7 +85,7 @@ export default class JSONSchemaBridge extends Bridge {
   constructor(
     // FIXME: The `schema` should be typed more precisely.
     public schema: Record<string, any>,
-    public validator: (model: UnknownObject) => any,
+    public validator: (model: UnknownObject) => unknown,
   ) {
     super();
 
@@ -99,6 +99,7 @@ export default class JSONSchemaBridge extends Bridge {
     this.getType = memoize(this.getType.bind(this));
   }
 
+  // TODO: Get rid of this `any`.
   getError(name: string, error: any) {
     const details = error?.details;
     if (!Array.isArray(details)) {
@@ -120,11 +121,13 @@ export default class JSONSchemaBridge extends Bridge {
     return scopedError || null;
   }
 
+  // TODO: Get rid of this `any`.
   getErrorMessage(name: string, error: any) {
     const scopedError = this.getError(name, error);
     return scopedError?.message || '';
   }
 
+  // TODO: Get rid of this `any`.
   getErrorMessages(error: any) {
     if (!error) {
       return [];

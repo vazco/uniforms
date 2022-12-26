@@ -21,6 +21,7 @@ export default class SimpleSchema2Bridge extends Bridge {
     this.getType = memoize(this.getType.bind(this));
   }
 
+  // TODO: Get rid of this `any`.
   getError(name: string, error: any) {
     const details = error?.details;
     if (!Array.isArray(details)) {
@@ -30,12 +31,14 @@ export default class SimpleSchema2Bridge extends Bridge {
     return details.find(error => error.name === name) || null;
   }
 
+  // TODO: Get rid of this `any`.
   getErrorMessage(name: string, error: any) {
     const scopedError = this.getError(name, error);
     // @ts-expect-error: `messageForError` has incorrect typing.
     return !scopedError ? '' : this.schema.messageForError(scopedError);
   }
 
+  // TODO: Get rid of this `any`.
   getErrorMessages(error: any) {
     if (!error) {
       return [];
@@ -74,7 +77,7 @@ export default class SimpleSchema2Bridge extends Bridge {
     return merged;
   }
 
-  getInitialValue(name: string): any {
+  getInitialValue(name: string): unknown {
     const field = this.getField(name);
     const defaultValue = field.defaultValue;
     if (defaultValue !== undefined) {
