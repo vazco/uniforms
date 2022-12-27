@@ -30,6 +30,7 @@ export default class GraphQLBridge extends Bridge {
     // Memoize for performance and referential equality.
     this.getField = memoize(this.getField.bind(this));
     this.getInitialValue = memoize(this.getInitialValue.bind(this));
+    this.getProps = memoize(this.getProps.bind(this));
     this.getSubfields = memoize(this.getSubfields.bind(this));
     this.getType = memoize(this.getType.bind(this));
   }
@@ -103,7 +104,7 @@ export default class GraphQLBridge extends Bridge {
     return defaultValue ?? this.extras[name]?.initialValue;
   }
 
-  getProps(nameNormal: string, fieldProps?: Record<string, any>) {
+  getProps(nameNormal: string) {
     const nameGeneric = nameNormal.replace(/\.\d+/g, '.$');
 
     const field = this.getField(nameGeneric);
@@ -123,7 +124,7 @@ export default class GraphQLBridge extends Bridge {
     type OptionDict = Record<string, string>;
     type OptionList = { label: string; value: unknown }[];
     type Options = OptionDict | OptionList;
-    const options: Options = fieldProps?.options || props.options;
+    const options: Options = props.options;
     if (options) {
       if (Array.isArray(options)) {
         props.allowedValues = options.map(option => option.value);

@@ -89,12 +89,12 @@ export abstract class Bridge {
   // Additionally, `props` are this field instance props. If a field is rendered
   // multiple times, this function will be called multiple times, possibly with
   // different `props`.
-  getProps(name: string, props: Record<string, any>): Record<string, any> {
+  getProps(name: string): Record<string, any> {
     return invariant(
       false,
       '%s have not implemented `getProps` method (args=%o).',
       this.constructor.name,
-      { name, props },
+      { name },
     );
   }
 
