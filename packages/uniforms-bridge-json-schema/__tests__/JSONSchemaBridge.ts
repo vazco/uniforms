@@ -673,17 +673,7 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
-    it('works with allowedValues from props', () => {
-      expect(
-        bridge.getProps('shippingAddress.type', { allowedValues: [1] }),
-      ).toEqual({
-        allowedValues: ['residential', 'business'],
-        label: 'Type',
-        required: true,
-      });
-    });
-
-    it('works with allowedValues from props', () => {
+    it('works with custom props', () => {
       expect(bridge.getProps('forcedRequired')).toEqual({
         label: 'Forced required',
         required: true,
@@ -702,67 +692,6 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getProps('withLabel')).toEqual({
         label: 'Example',
         required: false,
-      });
-    });
-
-    it('works with label (custom)', () => {
-      expect(bridge.getProps('dateOfBirth', { label: 'Death' })).toEqual({
-        label: 'Date of birth',
-        required: true,
-      });
-    });
-
-    it('works with label (true)', () => {
-      expect(bridge.getProps('dateOfBirth', { label: true })).toEqual({
-        label: 'Date of birth',
-        required: true,
-      });
-    });
-
-    it('works with property title as default label', () => {
-      expect(bridge.getProps('hasAJob', { label: true })).toEqual({
-        allowedValues: undefined,
-        label: 'Currently Employed',
-        options: undefined,
-        placeholder: undefined,
-        required: false,
-      });
-    });
-
-    it('works with placeholder (custom)', () => {
-      expect(bridge.getProps('email.work', { placeholder: 'Email' })).toEqual({
-        label: 'Work',
-        required: true,
-      });
-    });
-
-    it('works with placeholder (true)', () => {
-      expect(bridge.getProps('email.work', { placeholder: true })).toEqual({
-        label: 'Work',
-        required: true,
-      });
-    });
-
-    it('works with placeholder (falsy)', () => {
-      expect(bridge.getProps('email.work', { placeholder: null })).toEqual({
-        label: 'Work',
-        required: true,
-      });
-    });
-
-    it('works with placeholder (label falsy)', () => {
-      expect(
-        bridge.getProps('email.work', { label: null, placeholder: true }),
-      ).toEqual({
-        label: 'Work',
-        required: true,
-      });
-
-      expect(
-        bridge.getProps('email.work', { label: false, placeholder: true }),
-      ).toEqual({
-        label: 'Work',
-        required: true,
       });
     });
 
@@ -799,14 +728,6 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getProps('salary').allowedValues[1]).toBe('medium');
     });
 
-    it('works with options from props', () => {
-      const props = { options: { minimal: 4000, avarage: 8000 } };
-      expect(bridge.getProps('salary', props).transform('minimal')).toBe(4000);
-      expect(bridge.getProps('salary', props).transform('avarage')).toBe(8000);
-      expect(bridge.getProps('salary', props).allowedValues[0]).toBe('minimal');
-      expect(bridge.getProps('salary', props).allowedValues[1]).toBe('avarage');
-    });
-
     it('works with type', () => {
       expect(bridge.getProps('password')).toEqual({
         label: 'Password',
@@ -826,12 +747,10 @@ describe('JSONSchemaBridge', () => {
     });
 
     it('works with other props', () => {
-      expect(bridge.getProps('personalData.firstName', { x: 1, y: 1 })).toEqual(
-        {
-          label: 'First name',
-          required: false,
-        },
-      );
+      expect(bridge.getProps('personalData.firstName')).toEqual({
+        label: 'First name',
+        required: false,
+      });
     });
 
     it('works with allOf in items', () => {

@@ -189,13 +189,6 @@ describe('SimpleSchema2Bridge', () => {
       });
     });
 
-    it('works with allowedValues from props', () => {
-      expect(bridge.getProps('o', { allowedValues: ['O'] })).toEqual({
-        label: 'O',
-        required: true,
-      });
-    });
-
     it('works with custom component', () => {
       expect(bridge.getProps('l')).toEqual({
         label: 'L',
@@ -246,33 +239,11 @@ describe('SimpleSchema2Bridge', () => {
       expect(bridge.getProps('r').allowedValues[1]).toBe('b');
     });
 
-    it('works with options from props', () => {
-      expect(
-        bridge.getProps('s', { options: { c: 1, d: 2 } }).transform('c'),
-      ).toBe(1);
-      expect(
-        bridge.getProps('s', { options: { c: 1, d: 2 } }).transform('d'),
-      ).toBe(2);
-      expect(
-        bridge.getProps('s', { options: { c: 1, d: 2 } }).allowedValues[0],
-      ).toBe('c');
-      expect(
-        bridge.getProps('s', { options: { c: 1, d: 2 } }).allowedValues[1],
-      ).toBe('d');
-    });
-
     it('works with transform', () => {
       expect(bridge.getProps('p')).toEqual({
         label: 'P',
         required: true,
         transform: noopTransform,
-      });
-    });
-
-    it('works with transform from props', () => {
-      expect(bridge.getProps('p', { transform: () => {} })).toEqual({
-        label: 'P',
-        required: true,
       });
     });
 

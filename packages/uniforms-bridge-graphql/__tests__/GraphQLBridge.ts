@@ -260,59 +260,6 @@ describe('GraphQLBridge', () => {
               placeholder: 'Post ID',
               required: true,
             });
-            expect(bridgeT.getProps('id', { label: true })).toEqual({
-              allowedValues: [1, 2, 3],
-              label: 'Post ID',
-              placeholder: 'Post ID',
-              required: true,
-            });
-          });
-        });
-      });
-
-      describe('when props.label is a string', () => {
-        it('should use label from props', () => {
-          expect(bridgeT.getProps('title', { label: 'Overriden' })).toEqual({
-            allowedValues: ['a', 'b', 'Some Title'],
-            label: false,
-            required: false,
-            transform: expect.any(Function),
-            options: [
-              { label: 1, value: 'a' },
-              { label: 2, value: 'b' },
-              { label: 3, value: 'Some Title' },
-            ],
-            initialValue: 'Some Title',
-          });
-          expect(bridgeT.getProps('title', { label: '' })).toEqual({
-            allowedValues: ['a', 'b', 'Some Title'],
-            label: false,
-            required: false,
-            transform: expect.any(Function),
-            options: [
-              { label: 1, value: 'a' },
-              { label: 2, value: 'b' },
-              { label: 3, value: 'Some Title' },
-            ],
-            initialValue: 'Some Title',
-          });
-        });
-      });
-
-      describe('when props.label is false or null (unset)', () => {
-        it('should display empty label', () => {
-          expect(bridgeT.getProps('id', { label: false })).toEqual({
-            allowedValues: [1, 2, 3],
-            label: 'Post ID',
-            placeholder: 'Post ID',
-            required: true,
-          });
-
-          expect(bridgeT.getProps('id', { label: null })).toEqual({
-            allowedValues: [1, 2, 3],
-            label: 'Post ID',
-            placeholder: 'Post ID',
-            required: true,
           });
         });
       });
@@ -327,89 +274,11 @@ describe('GraphQLBridge', () => {
       });
     });
 
-    it('works with allowedValues from props', () => {
-      expect(bridgeI.getProps('id', { allowedValues: [1] })).toEqual({
-        label: 'Post ID',
-        placeholder: 'Post ID',
-        required: true,
-        allowedValues: [1, 2, 3],
-      });
-    });
-
     it('works with custom component', () => {
       expect(bridgeI.getProps('author')).toEqual({
         label: 'Author',
         required: true,
         component: 'div',
-      });
-    });
-
-    it('works with label (custom)', () => {
-      expect(bridgeI.getProps('id', { label: 'ID' })).toEqual({
-        label: 'Post ID',
-        placeholder: 'Post ID',
-        required: true,
-        allowedValues: [1, 2, 3],
-      });
-    });
-
-    it('works with label (true)', () => {
-      expect(bridgeI.getProps('id', { label: true })).toEqual({
-        label: 'Post ID',
-        placeholder: 'Post ID',
-        required: true,
-        allowedValues: [1, 2, 3],
-      });
-    });
-
-    it('works with label (falsy)', () => {
-      expect(bridgeI.getProps('id', { label: null })).toEqual({
-        label: 'Post ID',
-        placeholder: 'Post ID',
-        required: true,
-        allowedValues: [1, 2, 3],
-      });
-    });
-
-    it('works with placeholder (custom)', () => {
-      expect(bridgeI.getProps('id', { placeholder: 'Post ID' })).toEqual({
-        label: 'Post ID',
-        placeholder: 'Post ID',
-        required: true,
-        allowedValues: [1, 2, 3],
-      });
-    });
-
-    it('works with placeholder (true)', () => {
-      expect(bridgeI.getProps('id', { placeholder: true })).toEqual({
-        label: 'Post ID',
-        placeholder: 'Post ID',
-        required: true,
-        allowedValues: [1, 2, 3],
-      });
-    });
-
-    it('works with placeholder (falsy)', () => {
-      expect(bridgeI.getProps('id', { placeholder: null })).toEqual({
-        label: 'Post ID',
-        placeholder: 'Post ID',
-        required: true,
-        allowedValues: [1, 2, 3],
-      });
-    });
-
-    it('works with placeholder (extra.placeholder === undefined)', () => {
-      expect(bridgeI.getProps('title', { placeholder: true })).toEqual({
-        allowedValues: ['a', 'b', 'Some Title'],
-        label: false,
-        required: false,
-        transform: expect.any(Function),
-        options: [
-          { label: 1, value: 'a' },
-          { label: 2, value: 'b' },
-          { label: 3, value: 'Some Title' },
-        ],
-        initialValue: 'Some Title',
       });
     });
 
@@ -439,28 +308,6 @@ describe('GraphQLBridge', () => {
       expect(bridgeI.getProps('votes').transform('b')).toBe(2);
       expect(bridgeI.getProps('votes').allowedValues[0]).toBe('a');
       expect(bridgeI.getProps('votes').allowedValues[1]).toBe('b');
-    });
-
-    it('works with options from props', () => {
-      expect(
-        bridgeI.getProps('votes', { options: { c: 1, d: 2 } }).transform('c'),
-      ).toBe(1);
-      expect(
-        bridgeI.getProps('votes', { options: { c: 1, d: 2 } }).transform('d'),
-      ).toBe(2);
-      expect(
-        bridgeI.getProps('votes', { options: { c: 1, d: 2 } }).allowedValues[0],
-      ).toBe('c');
-      expect(
-        bridgeI.getProps('votes', { options: { c: 1, d: 2 } }).allowedValues[1],
-      ).toBe('d');
-    });
-
-    it('works with other props', () => {
-      expect(bridgeI.getProps('category', { x: 1, y: 1 })).toEqual({
-        label: 'Category',
-        required: true,
-      });
     });
 
     describe('when enum', () => {

@@ -242,7 +242,7 @@ export default class JSONSchemaBridge extends Bridge {
     return undefined;
   }
 
-  getProps(name: string, fieldProps?: Record<string, any>) {
+  getProps(name: string) {
     const field = this.getField(name);
     const props = Object.assign(
       {},
@@ -273,7 +273,7 @@ export default class JSONSchemaBridge extends Bridge {
     type OptionDict = Record<string, string>;
     type OptionList = { label: string; value: unknown }[];
     type Options = OptionDict | OptionList;
-    const options: Options = fieldProps?.options || props.options;
+    const options: Options = props.options;
     if (options) {
       if (Array.isArray(options)) {
         props.allowedValues = options.map(option => option.value);

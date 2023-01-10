@@ -56,7 +56,7 @@ export function useField<
   const errorMessage = context.schema.getErrorMessage(name, context.error);
   const fieldType = context.schema.getType(name);
   const fields = context.schema.getSubfields(name);
-  const schemaProps = context.schema.getProps(name, { ...state, ...props });
+  const schemaProps = context.schema.getProps(name);
 
   const [label, labelFallback] = propagate(
     props.label,
