@@ -1,5 +1,5 @@
 import { SimpleSchemaDefinition } from 'simpl-schema';
-import { BaseForm, Context, UnknownObject, randomIds } from 'uniforms';
+import { Context, UnknownObject, randomIds, ChangedMap } from 'uniforms';
 
 import createSchema from './_createSchema';
 
@@ -9,11 +9,11 @@ export default function createContext<Model extends UnknownObject>(
   schema?: SimpleSchemaDefinition,
   context?: Partial<Context<Model>>,
   model = {} as Model,
-) {
+): { context: Context<Model> } {
   return {
     context: {
       changed: false,
-      changedMap: {},
+      changedMap: {} as ChangedMap<Model>,
       error: null,
       model,
       name: [],
@@ -33,7 +33,8 @@ export default function createContext<Model extends UnknownObject>(
         showInlineError: false,
         ...context?.state,
       },
-      formRef: {} as BaseForm<Model>,
-    } as Context<Model>,
+      // @ts-expect-error We don't have a true ref in tests.
+      formRef: null,
+    },
   };
 }

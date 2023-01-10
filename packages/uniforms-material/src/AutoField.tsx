@@ -1,5 +1,4 @@
 import invariant from 'invariant';
-import { ComponentType } from 'react';
 export { AutoFieldProps } from 'uniforms';
 import { createAutoField } from 'uniforms';
 
@@ -14,7 +13,7 @@ import TextField from './TextField';
 
 const AutoField = createAutoField(props => {
   if (props.component) {
-    return props.component as ComponentType<any>;
+    return props.component;
   }
 
   if (props.allowedValues) {
