@@ -14,6 +14,7 @@ export default class SimpleSchemaBridge extends Bridge {
     // Memoize for performance and referential equality.
     this.getField = memoize(this.getField.bind(this));
     this.getInitialValue = memoize(this.getInitialValue.bind(this));
+    this.getProps = memoize(this.getProps.bind(this));
     this.getSubfields = memoize(this.getSubfields.bind(this));
     this.getType = memoize(this.getType.bind(this));
   }
@@ -99,8 +100,7 @@ export default class SimpleSchemaBridge extends Bridge {
     return undefined;
   }
 
-  // eslint-disable-next-line complexity
-  getProps(name: string, fieldProps?: UnknownObject) {
+  getProps(name: string) {
     const { type: fieldType, ...props } = this.getField(name);
     props.required = !props.optional;
 
@@ -116,7 +116,7 @@ export default class SimpleSchemaBridge extends Bridge {
     type OptionDict = Record<string, string>;
     type OptionList = { label: string; value: unknown }[];
     type Options = OptionDict | OptionList | (() => OptionDict | OptionList);
-    let options: Options = fieldProps?.options || props.options;
+    let options: Options = props.options;
     if (options) {
       if (typeof options === 'function') {
         options = options();
@@ -132,12 +132,12 @@ export default class SimpleSchemaBridge extends Bridge {
       }
     } else if (fieldType === Array) {
       try {
-        const itemProps = this.getProps(`${name}.$`, fieldProps);
-        if (itemProps.allowedValues && !fieldProps?.allowedValues) {
+        const itemProps = this.getProps(`${name}.$`);
+        if (itemProps.allowedValues) {
           props.allowedValues = itemProps.allowedValues;
         }
 
-        if (itemProps.transform && !fieldProps?.transform) {
+        if (itemProps.transform) {
           props.transform = itemProps.transform;
         }
       } catch (_) {

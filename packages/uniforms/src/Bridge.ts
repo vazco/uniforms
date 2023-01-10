@@ -87,16 +87,13 @@ export abstract class Bridge {
   /**
    * Get props defined in schema for a field `name`. There are no required nor
    * banned fields, however properties like `required` are often available.
-   * Additionally, `props` are this field instance props. If a field is rendered
-   * multiple times, this function will be called multiple times, possibly with
-   * different `props`.
    */
-  getProps(name: string, props: UnknownObject): UnknownObject {
+  getProps(name: string): UnknownObject {
     return invariant(
       false,
       '%s have not implemented `getProps` method (args=%o).',
       this.constructor.name,
-      { name, props },
+      { name },
     );
   }
 
