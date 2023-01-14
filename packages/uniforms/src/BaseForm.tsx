@@ -8,30 +8,32 @@ import { Bridge } from './Bridge';
 import { changedKeys } from './changedKeys';
 import { context } from './context';
 import { randomIds } from './randomIds';
-import { ChangedMap, Context, DeepPartial, ModelTransformMode } from './types';
+import {
+  ChangedMap,
+  Context,
+  ModelTransformMode,
+  UnknownObject,
+} from './types';
 
-export type BaseFormProps<Model> = {
+export type BaseFormProps<Model extends UnknownObject> = {
   autosave: boolean;
   autosaveDelay: number;
   disabled?: boolean;
-  error: any;
+  error: unknown;
   id?: string;
   label: boolean;
-  model: DeepPartial<Model>;
-  modelTransform?: (
-    mode: ModelTransformMode,
-    model: DeepPartial<Model>,
-  ) => DeepPartial<Model>;
+  model: Model;
+  modelTransform?: (mode: ModelTransformMode, model: Model) => Model;
   noValidate: boolean;
-  onChange?: (key: string, value: any) => void;
-  onSubmit: (model: DeepPartial<Model>) => void | Promise<any>;
+  onChange?: (key: string, value: unknown) => void;
+  onSubmit: (model: Model) => void | Promise<unknown>;
   placeholder?: boolean;
   readOnly?: boolean;
   schema: Bridge;
   showInlineError?: boolean;
 };
 
-export type BaseFormState<Model> = {
+export type BaseFormState<Model extends UnknownObject> = {
   changed: boolean;
   changedMap: ChangedMap<Model>;
   resetCount: number;
@@ -40,7 +42,7 @@ export type BaseFormState<Model> = {
 };
 
 export class BaseForm<
-  Model,
+  Model extends UnknownObject,
   Props extends BaseFormProps<Model> = BaseFormProps<Model>,
   State extends BaseFormState<Model> = BaseFormState<Model>,
 > extends Component<Props, State> {
@@ -104,11 +106,11 @@ export class BaseForm<
     this.setState = () => {};
   }
 
-  delayId?: any;
+  delayId?: ReturnType<typeof setTimeout> | undefined;
   mounted: boolean;
   reset: () => void;
-  change: (key: string, value: any) => void;
-  submit: (event?: SyntheticEvent) => Promise<any>;
+  change: (key: string, value: unknown) => void;
+  submit: (event?: SyntheticEvent) => Promise<unknown>;
   randomId: () => string;
 
   getContext(): Context<Model> {
@@ -170,7 +172,7 @@ export class BaseForm<
 
   getModel(
     mode?: ModelTransformMode,
-    model: DeepPartial<Model> = this.props.model,
+    model: Model = this.props.model,
   ): Context<Model>['model'] {
     return model;
   }
@@ -205,7 +207,7 @@ export class BaseForm<
     };
   }
 
-  onChange(key: string, value: any) {
+  onChange(key: string, value: unknown) {
     // Do not set `changed` before componentDidMount
     if (this.mounted) {
       const keys = changedKeys(key, value, get(this.getModel(), key));
@@ -232,7 +234,7 @@ export class BaseForm<
     // Do not call `onSubmit` before componentDidMount
     if (this.mounted && this.props.autosave) {
       if (this.delayId) {
-        this.delayId = clearTimeout(this.delayId);
+        clearTimeout(this.delayId);
       }
 
       // Delay autosave by `autosaveDelay` milliseconds...

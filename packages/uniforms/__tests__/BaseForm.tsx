@@ -14,7 +14,7 @@ describe('BaseForm', () => {
     getError() {},
     getErrorMessage: () => '',
     getErrorMessages: () => [],
-    getField() {},
+    getField: () => ({}),
     getInitialValue() {},
     getProps: () => ({}),
     getSubfields: () => [],

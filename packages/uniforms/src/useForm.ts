@@ -2,9 +2,9 @@ import invariant from 'invariant';
 import { useContext } from 'react';
 
 import { context as contextReference } from './context';
-import { Context } from './types';
+import { Context, UnknownObject } from './types';
 
-export function useForm<Model>(): Context<Model> {
+export function useForm<Model extends UnknownObject>(): Context<Model> {
   const context = useContext(contextReference);
   invariant(
     context !== null,

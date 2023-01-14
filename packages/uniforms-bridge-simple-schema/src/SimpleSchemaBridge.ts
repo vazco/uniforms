@@ -3,7 +3,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import memoize from 'lodash/memoize';
 // @ts-ignore -- This package _is_ typed, but not in all environments.
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Bridge, joinName } from 'uniforms';
+import { Bridge, UnknownObject, joinName } from 'uniforms';
 
 const propsToRemove = ['optional', 'uniforms'];
 
@@ -19,6 +19,7 @@ export default class SimpleSchemaBridge extends Bridge {
     this.getType = memoize(this.getType.bind(this));
   }
 
+  // TODO: Get rid of this `any`.
   getError(name: string, error: any) {
     const details = error?.details;
     if (!Array.isArray(details)) {
@@ -28,6 +29,7 @@ export default class SimpleSchemaBridge extends Bridge {
     return details.find(error => error.name === name) || null;
   }
 
+  // TODO: Get rid of this `any`.
   getErrorMessage(name: string, error: any) {
     const scopedError = this.getError(name, error);
     return !scopedError
@@ -40,6 +42,7 @@ export default class SimpleSchemaBridge extends Bridge {
         );
   }
 
+  // TODO: Get rid of this `any`.
   getErrorMessages(error: any) {
     if (!error) {
       return [];
@@ -66,7 +69,7 @@ export default class SimpleSchemaBridge extends Bridge {
     return definition;
   }
 
-  getInitialValue(name: string): any {
+  getInitialValue(name: string): unknown {
     const field = this.getField(name);
     const defaultValue = field.defaultValue;
     if (defaultValue !== undefined) {
@@ -84,7 +87,7 @@ export default class SimpleSchemaBridge extends Bridge {
     }
 
     if (field.type === Object) {
-      const value: Record<string, unknown> = {};
+      const value: UnknownObject = {};
       this.getSubfields(name).forEach(key => {
         const initialValue = this.getInitialValue(joinName(name, key));
         if (initialValue !== undefined) {
@@ -159,7 +162,7 @@ export default class SimpleSchemaBridge extends Bridge {
     return this.getField(name).type;
   }
 
-  getValidator(options: Record<string, any> = { clean: true }) {
+  getValidator(options: UnknownObject = { clean: true }) {
     const validator = this.schema.validator(options);
     return (model: any) => {
       try {

@@ -2,7 +2,7 @@ import invariant from 'invariant';
 import lowerCase from 'lodash/lowerCase';
 import memoize from 'lodash/memoize';
 import upperFirst from 'lodash/upperFirst';
-import { Bridge, joinName } from 'uniforms';
+import { Bridge, UnknownObject, joinName } from 'uniforms';
 import {
   ZodArray,
   ZodBoolean,
@@ -113,7 +113,7 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     }
 
     if (field instanceof ZodObject) {
-      const value: Record<string, unknown> = {};
+      const value: UnknownObject = {};
       this.getSubfields(name).forEach(key => {
         const initialValue = this.getInitialValue(joinName(name, key));
         if (initialValue !== undefined) {
@@ -127,7 +127,7 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
   }
 
   getProps(name: string) {
-    const props: Record<string, unknown> = {
+    const props: UnknownObject = {
       label: upperFirst(lowerCase(joinName(null, name).slice(-1)[0])),
       required: true,
     };
@@ -246,7 +246,7 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
   }
 
   getValidator() {
-    return (model: Record<string, unknown>) => {
+    return (model: UnknownObject) => {
       // TODO: What about async schemas?
       // eslint-disable-next-line react/no-this-in-sfc
       const result = this.schema.safeParse(model);

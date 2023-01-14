@@ -7,15 +7,15 @@ export type ChangedMap<T> = T extends object
   ? { [P in keyof T]?: ChangedMap<T[P]> }
   : Record<string, void>;
 
-export type Context<Model> = {
+export type Context<Model extends UnknownObject> = {
   changed: boolean;
   changedMap: ChangedMap<Model>;
-  error: any;
+  error: unknown;
   formRef: BaseForm<Model>;
-  model: DeepPartial<Model>;
+  model: Model;
   name: string[];
-  onChange: (key: string, value: any) => void;
-  onSubmit: (event?: SyntheticEvent) => any | Promise<any>;
+  onChange: (key: string, value: unknown) => void;
+  onSubmit: (event?: SyntheticEvent) => unknown | Promise<unknown>;
   randomId: () => string;
   schema: Bridge;
   state: {
@@ -30,11 +30,6 @@ export type Context<Model> = {
   validating: boolean;
 };
 
-/** @internal */
-export type DeepPartial<T> = {
-  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
-};
-
 export type FieldProps<Value, Base, Extension = object> = Override<
   Base,
   GuaranteedProps<Value> & Extension
@@ -46,10 +41,10 @@ export interface FilterDOMProps {}
 export type GuaranteedProps<Value> = {
   changed: boolean;
   disabled: boolean;
-  error?: any;
+  error?: unknown;
   errorMessage?: string;
-  field: any;
-  fieldType: any;
+  field: unknown;
+  fieldType: unknown;
   fields: string[];
   id: string;
   label: ReactNode;
@@ -63,7 +58,7 @@ export type GuaranteedProps<Value> = {
 
 type OnChange<Value> = {
   (value: Value): void;
-  (value: any, name: string): void;
+  (value: unknown, name: string): void;
 };
 
 export type HTMLFieldProps<Value, Element, Extension = object> = FieldProps<
@@ -76,6 +71,10 @@ export type ModelTransformMode = 'form' | 'submit' | 'validate';
 
 /** @internal */
 export type Override<T, U> = T extends any ? U & Omit<T, keyof U> : never;
+
+/** @internal */
+// export type UnknownObject = {};
+export type UnknownObject = Record<string, unknown>;
 
 export type ValidateMode = 'onChange' | 'onChangeAfterSubmit' | 'onSubmit';
 
