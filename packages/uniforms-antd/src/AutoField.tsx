@@ -1,6 +1,6 @@
 import invariant from 'invariant';
-import { createAutoField } from 'uniforms';
 export { AutoFieldProps } from 'uniforms';
+import { createAutoField } from 'uniforms';
 
 import BoolField from './BoolField';
 import DateField from './DateField';

@@ -7,25 +7,27 @@ import setWith from 'lodash/setWith';
 import { SyntheticEvent } from 'react';
 
 import { BaseForm, BaseFormProps, BaseFormState } from './BaseForm';
-import { Context, DeepPartial, ValidateMode } from './types';
+import { Context, UnknownObject, ValidateMode } from './types';
 
-export type ValidatedFormProps<Model> = BaseFormProps<Model> & {
-  onValidate: (model: DeepPartial<Model>, error: any) => any;
-  validate: ValidateMode;
-  validator?: any;
-};
+export type ValidatedFormProps<Model extends UnknownObject> =
+  BaseFormProps<Model> & {
+    onValidate: (model: Model, error: unknown) => unknown;
+    validate: ValidateMode;
+    validator?: unknown;
+  };
 
-export type ValidatedFormState<Model> = BaseFormState<Model> & {
-  error: any;
-  validate: boolean;
-  validating: boolean;
-  validator: (model: DeepPartial<Model>) => any;
-};
+export type ValidatedFormState<Model extends UnknownObject> =
+  BaseFormState<Model> & {
+    error: unknown;
+    validate: boolean;
+    validating: boolean;
+    validator: (model: Model) => unknown;
+  };
 
 export function Validated<Base extends typeof BaseForm>(Base: Base) {
   // @ts-expect-error: Mixin class problem.
   class ValidatedForm<
-    Model,
+    Model extends UnknownObject,
     Props extends ValidatedFormProps<Model> = ValidatedFormProps<Model>,
     State extends ValidatedFormState<Model> = ValidatedFormState<Model>,
   > extends Base<Model, Props, State> {
@@ -33,7 +35,7 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
     static displayName = `Validated${Base.displayName}`;
     static defaultProps = {
       ...Base.defaultProps,
-      onValidate(model: unknown, error: any) {
+      onValidate(model: unknown, error: unknown) {
         return error;
       },
       validate: 'onChangeAfterSubmit',
@@ -96,7 +98,7 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
       }
     }
 
-    onChange(key: string, value: any) {
+    onChange(key: string, value: unknown) {
       if (shouldRevalidate(this.props.validate, this.state.validate)) {
         this.onValidate(key, value);
       }
@@ -139,7 +141,7 @@ export function Validated<Base extends typeof BaseForm>(Base: Base) {
       return result;
     }
 
-    onValidate(key?: string, value?: any) {
+    onValidate(key?: string, value?: unknown) {
       let model = this.getContextModel();
       if (model && key) {
         model = setWith(clone(model), key, cloneDeep(value), clone);

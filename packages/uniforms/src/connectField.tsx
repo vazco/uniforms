@@ -2,7 +2,7 @@ import mapValues from 'lodash/mapValues';
 import React, { ComponentType, FunctionComponent } from 'react';
 
 import { context as contextReference } from './context';
-import { Context, GuaranteedProps, Override } from './types';
+import { Context, GuaranteedProps, Override, UnknownObject } from './types';
 import { useField } from './useField';
 
 /** @internal */
@@ -13,7 +13,7 @@ export type ConnectFieldOptions = {
 
 /** @internal */
 export type ConnectedFieldProps<
-  Props extends Record<string, unknown>,
+  Props extends UnknownObject,
   Value = Props['value'],
 > = Override<
   Props,
@@ -29,14 +29,18 @@ export type ConnectedFieldProps<
 
 /** @internal */
 export type ConnectedField<
-  Props extends Record<string, unknown>,
+  Props extends UnknownObject,
   Value = Props['value'],
 > = FunctionComponent<ConnectedFieldProps<Props, Value>> & {
   Component: ComponentType<Props>;
   options?: ConnectFieldOptions;
 };
 
-function getNextContext<Model, Props extends Record<string, unknown>, Value>(
+function getNextContext<
+  Model extends UnknownObject,
+  Props extends UnknownObject,
+  Value,
+>(
   context: Context<Model>,
   props: ConnectedFieldProps<Props, Value>,
   options?: ConnectFieldOptions,
@@ -75,7 +79,7 @@ function getNextContext<Model, Props extends Record<string, unknown>, Value>(
 }
 
 export function connectField<
-  Props extends Record<string, unknown>,
+  Props extends UnknownObject,
   Value = Props['value'],
 >(
   Component: ComponentType<Props>,

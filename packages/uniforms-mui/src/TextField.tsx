@@ -27,7 +27,7 @@ function Text({
       disabled={disabled}
       error={!!error}
       fullWidth
-      helperText={(error && showInlineError && errorMessage) || helperText}
+      helperText={(!!error && showInlineError && errorMessage) || helperText}
       inputProps={{ readOnly }}
       label={label}
       margin="dense"

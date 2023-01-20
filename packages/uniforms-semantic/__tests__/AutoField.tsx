@@ -10,9 +10,14 @@ import {
   SelectField,
   TextField,
 } from 'uniforms-semantic';
+import { testAutoField } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
 import mount from './_mount';
+
+describe('@RTL - AutoField tests', () => {
+  testAutoField(AutoField);
+});
 
 test('<AutoField> - works', () => {
   const element = <AutoField name="x" />;

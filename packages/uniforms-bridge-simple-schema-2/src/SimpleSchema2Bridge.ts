@@ -2,9 +2,13 @@ import invariant from 'invariant';
 import cloneDeep from 'lodash/cloneDeep';
 import memoize from 'lodash/memoize';
 import SimpleSchema from 'simpl-schema';
-import { Bridge, joinName } from 'uniforms';
+import { Bridge, UnknownObject, joinName } from 'uniforms';
 
 const propsToRemove = ['optional', 'uniforms'];
+
+function makeGeneric(name?: string): string | undefined {
+  return name?.replace(/\.\d+(\.|$)/g, '.$$$1');
+}
 
 export default class SimpleSchema2Bridge extends Bridge {
   constructor(public schema: SimpleSchema) {
@@ -13,10 +17,12 @@ export default class SimpleSchema2Bridge extends Bridge {
     // Memoize for performance and referential equality.
     this.getField = memoize(this.getField.bind(this));
     this.getInitialValue = memoize(this.getInitialValue.bind(this));
+    this.getProps = memoize(this.getProps.bind(this));
     this.getSubfields = memoize(this.getSubfields.bind(this));
     this.getType = memoize(this.getType.bind(this));
   }
 
+  // TODO: Get rid of this `any`.
   getError(name: string, error: any) {
     const details = error?.details;
     if (!Array.isArray(details)) {
@@ -26,12 +32,14 @@ export default class SimpleSchema2Bridge extends Bridge {
     return details.find(error => error.name === name) || null;
   }
 
+  // TODO: Get rid of this `any`.
   getErrorMessage(name: string, error: any) {
     const scopedError = this.getError(name, error);
     // @ts-expect-error: `messageForError` has incorrect typing.
     return !scopedError ? '' : this.schema.messageForError(scopedError);
   }
 
+  // TODO: Get rid of this `any`.
   getErrorMessages(error: any) {
     if (!error) {
       return [];
@@ -70,7 +78,7 @@ export default class SimpleSchema2Bridge extends Bridge {
     return merged;
   }
 
-  getInitialValue(name: string): any {
+  getInitialValue(name: string): unknown {
     const field = this.getField(name);
     const defaultValue = field.defaultValue;
     if (defaultValue !== undefined) {
@@ -88,7 +96,7 @@ export default class SimpleSchema2Bridge extends Bridge {
     }
 
     if (field.type === Object || field.type instanceof SimpleSchema) {
-      const value: Record<string, unknown> = {};
+      const value: UnknownObject = {};
       this.getSubfields(name).forEach(key => {
         const initialValue = this.getInitialValue(joinName(name, key));
         if (initialValue !== undefined) {
@@ -101,8 +109,7 @@ export default class SimpleSchema2Bridge extends Bridge {
     return undefined;
   }
 
-  // eslint-disable-next-line complexity
-  getProps(name: string, fieldProps?: Record<string, any>) {
+  getProps(name: string) {
     const { type: fieldType, ...props } = this.getField(name);
     props.required = !props.optional;
 
@@ -122,7 +129,7 @@ export default class SimpleSchema2Bridge extends Bridge {
     type OptionDict = Record<string, string>;
     type OptionList = { label: string; value: unknown }[];
     type Options = OptionDict | OptionList | (() => OptionDict | OptionList);
-    let options: Options = fieldProps?.options || props.options;
+    let options: Options = props.options;
     if (options) {
       if (typeof options === 'function') {
         options = options();
@@ -138,12 +145,12 @@ export default class SimpleSchema2Bridge extends Bridge {
       }
     } else if (fieldType === Array) {
       try {
-        const itemProps = this.getProps(`${name}.$`, fieldProps);
-        if (itemProps.allowedValues && !fieldProps?.allowedValues) {
+        const itemProps = this.getProps(`${name}.$`);
+        if (itemProps.allowedValues) {
           props.allowedValues = itemProps.allowedValues;
         }
 
-        if (itemProps.transform && !fieldProps?.transform) {
+        if (itemProps.transform) {
           props.transform = itemProps.transform;
         }
       } catch (_) {
@@ -161,8 +168,7 @@ export default class SimpleSchema2Bridge extends Bridge {
   }
 
   getSubfields(name?: string): string[] {
-    // @ts-expect-error: Typing for `_makeGeneric` is missing.
-    return this.schema.objectKeys(SimpleSchema._makeGeneric(name));
+    return this.schema.objectKeys(makeGeneric(name));
   }
 
   getType(name: string) {
@@ -180,9 +186,9 @@ export default class SimpleSchema2Bridge extends Bridge {
   }
 
   // TODO: `ValidationOption` is not exported.
-  getValidator(options: Record<string, any> = { clean: true, mutate: true }) {
+  getValidator(options: UnknownObject = { clean: true, mutate: true }) {
     const validator = this.schema.validator(options);
-    return (model: Record<string, any>) => {
+    return (model: UnknownObject) => {
       try {
         // Clean mutate its argument, even if mutate is false.
         validator(options.clean ? cloneDeep({ ...model }) : model);

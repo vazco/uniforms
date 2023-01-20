@@ -1,3 +1,7 @@
+## [v3.10.2](https://github.com/vazco/uniforms/tree/v3.10.2) (2022-12-23)
+
+- **Fixed:** Compatibility with Simple Schema v3 (on a basic level; full compatibility will be released in v4). [\#1189](https://github.com/vazco/uniforms/issues/1189)
+
 ## [v4.0.0-alpha.0](https://github.com/vazco/uniforms/tree/v4.0.0-alpha.0) (2022-11-02)
 
 - **Added:** Zod integration. [\#1159](https://github.com/vazco/uniforms/issues/1159)

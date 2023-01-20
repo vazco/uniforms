@@ -2,7 +2,7 @@ import invariant from 'invariant';
 import lowerCase from 'lodash/lowerCase';
 import memoize from 'lodash/memoize';
 import upperFirst from 'lodash/upperFirst';
-import { Bridge, joinName } from 'uniforms';
+import { Bridge, UnknownObject, joinName } from 'uniforms';
 import {
   ZodArray,
   ZodBoolean,
@@ -32,8 +32,12 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
   constructor(public schema: ZodObject<T>) {
     super();
 
+    // Memoize for performance and referential equality.
     this.getField = memoize(this.getField.bind(this));
+    this.getInitialValue = memoize(this.getInitialValue.bind(this));
+    this.getProps = memoize(this.getProps.bind(this));
     this.getSubfields = memoize(this.getSubfields.bind(this));
+    this.getType = memoize(this.getType.bind(this));
   }
 
   getError(name: string, error: unknown) {
@@ -83,10 +87,7 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     return field;
   }
 
-  // TODO: The `fieldProps` argument will be removed in v4. See
-  // https://github.com/vazco/uniforms/issues/1048 for details.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getInitialValue(name: string, fieldProps?: Record<string, unknown>): unknown {
+  getInitialValue(name: string): unknown {
     const field = this.getField(name);
     if (field instanceof ZodArray) {
       const item = this.getInitialValue(joinName(name, '$'));
@@ -112,7 +113,7 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     }
 
     if (field instanceof ZodObject) {
-      const value: Record<string, unknown> = {};
+      const value: UnknownObject = {};
       this.getSubfields(name).forEach(key => {
         const initialValue = this.getInitialValue(joinName(name, key));
         if (initialValue !== undefined) {
@@ -125,11 +126,8 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     return undefined;
   }
 
-  // TODO: The `props` argument could be removed in v4, just like in the
-  // `getInitialValue` function.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getProps(name: string, fieldProps?: Record<string, unknown>) {
-    const props: Record<string, unknown> = {
+  getProps(name: string) {
+    const props: UnknownObject = {
       label: upperFirst(lowerCase(joinName(null, name).slice(-1)[0])),
       required: true,
     };
@@ -248,7 +246,7 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
   }
 
   getValidator() {
-    return (model: Record<string, unknown>) => {
+    return (model: UnknownObject) => {
       // TODO: What about async schemas?
       // eslint-disable-next-line react/no-this-in-sfc
       const result = this.schema.safeParse(model);

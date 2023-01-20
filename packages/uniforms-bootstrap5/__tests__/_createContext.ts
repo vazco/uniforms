@@ -1,20 +1,21 @@
-import { BaseForm, Context, randomIds } from 'uniforms';
+import { SimpleSchemaDefinition } from 'simpl-schema';
+import { Context, UnknownObject, randomIds, ChangedMap } from 'uniforms';
 
 import createSchema from './_createSchema';
 
 const randomId = randomIds();
 
-export default function createContext(
-  schema?: object,
-  context?: Partial<Context<any>>,
-  model?: object,
-): { context: Context<any> } {
+export default function createContext<Model extends UnknownObject>(
+  schema?: SimpleSchemaDefinition,
+  context?: Partial<Context<Model>>,
+  model = {} as Model,
+): { context: Context<Model> } {
   return {
     context: {
       changed: false,
-      changedMap: {},
+      changedMap: {} as ChangedMap<Model>,
       error: null,
-      model: model ?? {},
+      model,
       name: [],
       onChange() {},
       onSubmit() {},
@@ -32,7 +33,8 @@ export default function createContext(
         showInlineError: false,
         ...context?.state,
       },
-      formRef: {} as BaseForm<unknown>,
+      // @ts-expect-error We don't have a true ref in tests.
+      formRef: null,
     },
   };
 }

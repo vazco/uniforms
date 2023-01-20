@@ -181,7 +181,7 @@ function Select(props: SelectFieldProps) {
       disabled={disabled}
       error={!!error}
       fullWidth={fullWidth}
-      helperText={(error && showInlineError && errorMessage) || helperText}
+      helperText={(!!error && showInlineError && errorMessage) || helperText}
       InputLabelProps={{
         shrink: !!label && (hasPlaceholder || hasValue),
         ...labelProps,

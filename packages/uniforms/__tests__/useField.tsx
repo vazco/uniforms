@@ -31,7 +31,8 @@ describe('useField', () => {
   });
 
   describe('when called with initialValue', () => {
-    const TestComponent = connectField((props: Record<string, any>) => {
+    type Props = { onChange: (value?: string) => void; value?: string };
+    const TestComponent = connectField((props: Props) => {
       return (
         <input
           value={props.value || ''}
