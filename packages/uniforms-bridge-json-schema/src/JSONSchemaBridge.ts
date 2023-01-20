@@ -1,4 +1,3 @@
-import type { ErrorObject } from 'ajv';
 import invariant from 'invariant';
 import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
@@ -83,12 +82,14 @@ function isValidatorResult(value: unknown): value is ValidatorResult {
   return typeof value === 'object' && value !== null;
 }
 
-type FieldErrorKeywords = string;
-type FieldErrorProperties = Record<string, unknown> & {
-  missingProperty?: string;
-};
-type FieldError = ErrorObject<FieldErrorKeywords, FieldErrorProperties> & {
-  dataPath?: string; // Ajv <8
+type FieldError = {
+  instancePath: string;
+  /** Provided by Ajv < 8 */
+  dataPath: string;
+  params: Record<string, unknown> & {
+    missingProperty?: string;
+  };
+  message?: string;
 };
 type ValidatorResult = Record<string, unknown> & {
   details?: Partial<FieldError>[];
