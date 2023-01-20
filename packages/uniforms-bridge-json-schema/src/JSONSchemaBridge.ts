@@ -79,7 +79,11 @@ function pathToName(path: string) {
 }
 
 function isValidatorResult(value: unknown): value is ValidatorResult {
-  return typeof value === 'object' && value !== null;
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    Array.isArray((value as ValidatorResult).details)
+  );
 }
 
 type FieldError = {
@@ -91,7 +95,7 @@ type FieldError = {
   };
   message?: string;
 };
-type ValidatorResult = Record<string, unknown> & {
+type ValidatorResult = {
   details?: Partial<FieldError>[];
 };
 
