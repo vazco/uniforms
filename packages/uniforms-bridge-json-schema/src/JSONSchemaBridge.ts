@@ -87,17 +87,15 @@ function isValidatorResult(value: unknown): value is ValidatorResult {
 }
 
 type FieldError = {
-  instancePath: string;
+  instancePath?: string;
   /** Provided by Ajv < 8 */
-  dataPath: string;
-  params: Record<string, unknown> & {
+  dataPath?: string;
+  params?: Record<string, unknown> & {
     missingProperty?: string;
   };
   message?: string;
 };
-type ValidatorResult = {
-  details?: Partial<FieldError>[];
-};
+type ValidatorResult = { details: FieldError[] };
 
 export default class JSONSchemaBridge extends Bridge {
   // FIXME: The `_compiledSchema` should be typed more precisely.
@@ -124,7 +122,7 @@ export default class JSONSchemaBridge extends Bridge {
 
   getError(name: string, error: unknown) {
     const details = isValidatorResult(error) && error.details;
-    if (!Array.isArray(details)) {
+    if (!details) {
       return null;
     }
 
@@ -137,7 +135,9 @@ export default class JSONSchemaBridge extends Bridge {
       const path = rawPath ? pathToName(rawPath) : '';
       return (
         unescapedName === path ||
-        (rootName === path && baseName === error.params?.missingProperty)
+        (rootName === path &&
+          error.params &&
+          baseName === error.params.missingProperty)
       );
     });
 
@@ -160,12 +160,10 @@ export default class JSONSchemaBridge extends Bridge {
 
     if (isValidatorResult(error)) {
       const { details } = error;
-      return Array.isArray(details)
-        ? details.map(error => error.message || '')
-        : [];
+      return details.map(error => error.message || '');
     }
 
-    if (typeof error === 'object' && isEmpty(error)) {
+    if (typeof error === 'object') {
       return [];
     }
 
