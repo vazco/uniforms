@@ -167,7 +167,7 @@ export default class JSONSchemaBridge extends Bridge {
       return [];
     }
 
-    return ['' + error];
+    return [String(error)];
   }
 
   getField(name: string) {
