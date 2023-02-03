@@ -459,7 +459,7 @@ describe('JSONSchemaBridge', () => {
 
     it('works with other errors', () => {
       expect(bridge.getErrorMessages('correct')).toEqual(['correct']);
-      expect(bridge.getErrorMessages(999999999)).toEqual([999999999]);
+      expect(bridge.getErrorMessages(999999999)).toEqual(['999999999']);
     });
 
     it('works with Error', () => {
@@ -492,6 +492,18 @@ describe('JSONSchemaBridge', () => {
           details: [{ instancePath: '.field', message: 'Ignore!' }],
         }),
       ).toEqual(['Ignore!']);
+    });
+
+    it('works with empty object', () => {
+      expect(bridge.getErrorMessages({})).toEqual([]);
+    });
+
+    it('works with empty messages', () => {
+      expect(
+        bridge.getErrorMessages({
+          details: [{ instancePath: '.field' }],
+        }),
+      ).toEqual(['']);
     });
   });
 

@@ -78,6 +78,25 @@ function pathToName(path: string) {
   return path.slice(1);
 }
 
+function isValidatorResult(value: unknown): value is ValidatorResult {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    Array.isArray((value as ValidatorResult).details)
+  );
+}
+
+type FieldError = {
+  instancePath?: string;
+  /** Provided by Ajv < 8 */
+  dataPath?: string;
+  params?: Record<string, unknown> & {
+    missingProperty?: string;
+  };
+  message?: string;
+};
+type ValidatorResult = { details: FieldError[] };
+
 export default class JSONSchemaBridge extends Bridge {
   // FIXME: The `_compiledSchema` should be typed more precisely.
   _compiledSchema: Record<string, any>;
@@ -85,7 +104,9 @@ export default class JSONSchemaBridge extends Bridge {
   constructor(
     // FIXME: The `schema` should be typed more precisely.
     public schema: Record<string, any>,
-    public validator: (model: UnknownObject) => unknown,
+    public validator: (
+      model: UnknownObject,
+    ) => ValidatorResult | null | undefined,
   ) {
     super();
 
@@ -99,10 +120,9 @@ export default class JSONSchemaBridge extends Bridge {
     this.getType = memoize(this.getType.bind(this));
   }
 
-  // TODO: Get rid of this `any`.
-  getError(name: string, error: any) {
-    const details = error?.details;
-    if (!Array.isArray(details)) {
+  getError(name: string, error: unknown) {
+    const details = isValidatorResult(error) && error.details;
+    if (!details) {
       return null;
     }
 
@@ -111,32 +131,43 @@ export default class JSONSchemaBridge extends Bridge {
     const rootName = joinName(nameParts.slice(0, -1));
     const baseName = nameParts[nameParts.length - 1];
     const scopedError = details.find(error => {
-      const path = pathToName(error.instancePath ?? error.dataPath);
+      const rawPath = error.instancePath ?? error.dataPath;
+      const path = rawPath ? pathToName(rawPath) : '';
       return (
         unescapedName === path ||
-        (rootName === path && baseName === error.params.missingProperty)
+        (rootName === path &&
+          error.params &&
+          baseName === error.params.missingProperty)
       );
     });
 
     return scopedError || null;
   }
 
-  // TODO: Get rid of this `any`.
-  getErrorMessage(name: string, error: any) {
+  getErrorMessage(name: string, error: unknown) {
     const scopedError = this.getError(name, error);
     return scopedError?.message || '';
   }
 
-  // TODO: Get rid of this `any`.
-  getErrorMessages(error: any) {
+  getErrorMessages(error: unknown) {
     if (!error) {
       return [];
     }
 
-    const { details } = error;
-    return Array.isArray(details)
-      ? details.map(error => error.message)
-      : [error.message || error];
+    if (isValidatorResult(error)) {
+      const { details } = error;
+      return details.map(error => error.message || '');
+    }
+
+    if (error instanceof Error) {
+      return [error.message];
+    }
+
+    if (typeof error === 'object') {
+      return [];
+    }
+
+    return [String(error)];
   }
 
   getField(name: string) {
