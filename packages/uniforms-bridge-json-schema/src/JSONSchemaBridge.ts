@@ -154,13 +154,13 @@ export default class JSONSchemaBridge extends Bridge {
       return [];
     }
 
-    if (error instanceof Error) {
-      return [error.message];
-    }
-
     if (isValidatorResult(error)) {
       const { details } = error;
       return details.map(error => error.message || '');
+    }
+
+    if (error instanceof Error) {
+      return [error.message];
     }
 
     if (typeof error === 'object') {
