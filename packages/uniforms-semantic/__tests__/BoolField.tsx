@@ -181,7 +181,7 @@ test('<BoolField> - renders with a `fitted` className when `label` is disabled',
 });
 
 test('<BoolField> - renders without a `fitted` className when `label` is enabled', () => {
-  const element = <BoolField name="x" label />;
+  const element = <BoolField name="x" label="a" />;
   const wrapper = mount(element, createContext({ x: { type: String } }));
 
   const found = wrapper.find('.ui');

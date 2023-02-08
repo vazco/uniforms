@@ -51,7 +51,7 @@ test('<NestField> - renders a label', () => {
     }),
   );
 
-  expect(wrapper.find('label')).toHaveLength(3);
+  expect(wrapper.find('label')).toHaveLength(1);
   expect(wrapper.find('label').at(0).text()).toBe('y');
 });
 

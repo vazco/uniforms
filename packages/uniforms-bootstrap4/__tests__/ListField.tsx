@@ -128,7 +128,7 @@ test('<ListField> - renders correct error text (specified)', () => {
       name="x"
       error={error}
       errorMessage="Error"
-      label
+      label="a"
       showInlineError
     />
   );
