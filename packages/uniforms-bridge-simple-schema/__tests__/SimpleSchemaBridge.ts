@@ -280,7 +280,10 @@ describe('SimpleSchemaBridge', () => {
 
       expect(bridgeWithLabels.getProps('o')).toHaveProperty('label', 'O');
       expect(bridgeWithLabels.getProps('aa')).toHaveProperty('label', 'AA');
-      expect(bridgeWithLabels.getProps('a.b.c')).toHaveProperty('label', 'a.b.c');
+      expect(bridgeWithLabels.getProps('a.b.c')).toHaveProperty(
+        'label',
+        'a.b.c',
+      );
     });
   });
 
