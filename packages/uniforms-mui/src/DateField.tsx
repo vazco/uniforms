@@ -1,12 +1,15 @@
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 import React from 'react';
-import { FieldProps, connectField, filterDOMProps, DateFieldType } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
+
+type DateFieldType = 'date' | 'datetime-local';
 
 /* istanbul ignore next */
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
 
-const dateFormat = (value?: Date, type: DateFieldType = 'datetime-local') =>
-  value?.toISOString().slice(0, type === 'datetime-local' ? -8 : -14);
+const dateFormat = (value?: Date | string, type: DateFieldType = 'datetime-local') => value
+  ? (typeof value === 'string' ? value : value?.toISOString()).slice(0, type === 'datetime-local' ? -8 : -14)
+  : '';
 
 const dateParse = (timestamp: number, onChange: DateFieldProps['onChange']) => {
   const date = new DateConstructor(timestamp);
@@ -21,8 +24,10 @@ export type DateFieldProps = FieldProps<
   Date,
   TextFieldProps,
   {
+    max?: string=;
+    min?: string=;
     labelProps?: object;
-    type?: 'date' | 'datetime-local'
+    type?: 'date' | 'datetime-local';
   }
 >;
 
@@ -54,10 +59,13 @@ function Date({
       helperText={(!!error && showInlineError && errorMessage) || helperText}
       label={label}
       InputLabelProps={{ shrink: true, ...labelProps, ...InputLabelProps }}
-      inputProps={{ readOnly, ...props.inputProps }}
+      inputProps={{
+        readOnly,
+        min: dateFormat(min),
+        max: dateFormat(max),
+        ...props.inputProps
+      }}
       margin="dense"
-      max={dateFormat(max)}
-      min={dateFormat(min)}
       name={name}
       onChange={event =>
         // FIXME: `valueAsNumber` is not available in `EventTarget`.
@@ -66,10 +74,7 @@ function Date({
       placeholder={placeholder}
       ref={inputRef}
       type={type}
-      value={
-        value?.toISOString().slice(0, type === 'datetime-local' ? -8 : -14) ??
-        ''
-      }
+      value={dateFormat(value)}
       {...filterDOMProps(props)}
     />
   );

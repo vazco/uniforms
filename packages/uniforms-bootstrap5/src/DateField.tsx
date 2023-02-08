@@ -1,8 +1,10 @@
 import classnames from 'classnames';
 import React, { Ref } from 'react';
-import { connectField, HTMLFieldProps, DateFieldType } from 'uniforms';
+import { connectField, HTMLFieldProps } from 'uniforms';
 
 import wrapField from './wrapField';
+
+type DateFieldType = 'date' | 'datetime-local';
 
 /* istanbul ignore next */
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
