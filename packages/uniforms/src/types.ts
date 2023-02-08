@@ -101,3 +101,5 @@ declare module '.' {
     value: never;
   }
 }
+
+export type DateFieldType = 'date' | 'datetime-local';

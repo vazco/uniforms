@@ -1,7 +1,5 @@
 import React, { Ref } from 'react';
-import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
-
-type DateFieldType = 'date' | 'datetime-local';
+import { HTMLFieldProps, connectField, filterDOMProps, DateFieldType } from 'uniforms';
 
 /* istanbul ignore next */
 const DateConstructor = (typeof global === 'object' ? global : window).Date;

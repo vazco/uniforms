@@ -1,9 +1,12 @@
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 import React from 'react';
-import { FieldProps, connectField, filterDOMProps } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps, DateFieldType } from 'uniforms';
 
 /* istanbul ignore next */
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
+
+const dateFormat = (value?: Date, type: DateFieldType = 'datetime-local') =>
+  value?.toISOString().slice(0, type === 'datetime-local' ? -8 : -14);
 
 const dateParse = (timestamp: number, onChange: DateFieldProps['onChange']) => {
   const date = new DateConstructor(timestamp);
@@ -17,7 +20,12 @@ const dateParse = (timestamp: number, onChange: DateFieldProps['onChange']) => {
 export type DateFieldProps = FieldProps<
   Date,
   TextFieldProps,
-  { labelProps?: object; type?: 'date' | 'datetime-local' }
+  {
+    labelProps?: object;
+    max?: Date;
+    min?: Date;
+    type?: 'date' | 'datetime-local'
+  }
 >;
 
 function Date({
@@ -29,6 +37,8 @@ function Date({
   inputRef,
   label,
   labelProps,
+  max,
+  min,
   name,
   onChange,
   placeholder,
@@ -48,6 +58,8 @@ function Date({
       InputLabelProps={{ shrink: true, ...labelProps, ...InputLabelProps }}
       inputProps={{ readOnly, ...props.inputProps }}
       margin="dense"
+      max={dateFormat(max)}
+      min={dateFormat(min)}
       name={name}
       onChange={event =>
         // FIXME: `valueAsNumber` is not available in `EventTarget`.

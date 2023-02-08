@@ -1,10 +1,13 @@
 import { useTheme } from '@material-ui/core';
 import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import React from 'react';
-import { FieldProps, connectField, filterDOMProps } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps, DateFieldType } from 'uniforms';
 
 /* istanbul ignore next */
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
+
+const dateFormat = (value?: Date, type: DateFieldType = 'datetime-local') =>
+  value?.toISOString().slice(0, type === 'datetime-local' ? -8 : -14);
 
 const dateParse = (timestamp: number, onChange: DateFieldProps['onChange']) => {
   const date = new DateConstructor(timestamp);
@@ -20,6 +23,8 @@ export type DateFieldProps = FieldProps<
   TextFieldProps,
   {
     labelProps?: object;
+    max?: Date;
+    min?: Date;
     type?: 'date' | 'datetime-local';
   }
 >;
@@ -33,6 +38,8 @@ function Date({
   inputRef,
   label,
   labelProps,
+  max,
+  min,
   name,
   onChange,
   placeholder,
@@ -55,6 +62,8 @@ function Date({
       InputLabelProps={{ shrink: true, ...labelProps, ...InputLabelProps }}
       inputProps={{ readOnly, ...(themeProps?.inputProps ?? {}) }}
       margin={themeProps?.margin ?? 'dense'}
+      max={dateFormat(max)}
+      min={dateFormat(min)}
       name={name}
       onChange={event =>
         // FIXME: `valueAsNumber` is not available in `EventTarget`.
