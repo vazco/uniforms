@@ -24,8 +24,8 @@ export type DateFieldProps = FieldProps<
   Date,
   TextFieldProps,
   {
-    max?: string=;
-    min?: string=;
+    max?: string;
+    min?: string;
     labelProps?: object;
     type?: 'date' | 'datetime-local';
   }
