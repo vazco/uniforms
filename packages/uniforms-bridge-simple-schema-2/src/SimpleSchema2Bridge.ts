@@ -11,7 +11,10 @@ function makeGeneric(name?: string): string | undefined {
 }
 
 export default class SimpleSchema2Bridge extends Bridge {
-  constructor(public schema: SimpleSchema) {
+  constructor(
+    public schema: SimpleSchema,
+    private provideDefaultLabelFromFieldName: boolean = false,
+  ) {
     super();
 
     // Memoize for performance and referential equality.
@@ -113,6 +116,10 @@ export default class SimpleSchema2Bridge extends Bridge {
     const { type: fieldType, ...props } = this.getField(name);
     props.required = !props.optional;
 
+    if (!this.provideDefaultLabelFromFieldName) {
+      delete props.label;
+    }
+
     if (
       typeof props.uniforms === 'function' ||
       typeof props.uniforms === 'string'
@@ -163,7 +170,6 @@ export default class SimpleSchema2Bridge extends Bridge {
         delete props[key];
       }
     });
-
     return props;
   }
 

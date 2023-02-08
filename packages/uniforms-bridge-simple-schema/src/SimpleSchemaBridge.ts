@@ -8,7 +8,10 @@ import { Bridge, UnknownObject, joinName } from 'uniforms';
 const propsToRemove = ['optional', 'uniforms'];
 
 export default class SimpleSchemaBridge extends Bridge {
-  constructor(public schema: SimpleSchema) {
+  constructor(
+    public schema: SimpleSchema,
+    private provideDefaultLabelFromFieldName: boolean = false,
+  ) {
     super();
 
     // Memoize for performance and referential equality.
@@ -103,6 +106,10 @@ export default class SimpleSchemaBridge extends Bridge {
   getProps(name: string) {
     const { type: fieldType, ...props } = this.getField(name);
     props.required = !props.optional;
+
+    if (!this.provideDefaultLabelFromFieldName) {
+      delete props.label;
+    }
 
     if (
       typeof props.uniforms === 'function' ||

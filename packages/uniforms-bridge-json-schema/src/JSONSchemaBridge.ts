@@ -107,6 +107,7 @@ export default class JSONSchemaBridge extends Bridge {
     public validator: (
       model: UnknownObject,
     ) => ValidatorResult | null | undefined,
+    private provideDefaultLabelFromFieldName: boolean = true,
   ) {
     super();
 
@@ -287,8 +288,10 @@ export default class JSONSchemaBridge extends Bridge {
       this._compiledSchema[name],
     );
 
-    props.label ??=
-      props.title ?? upperFirst(lowerCase(joinName(null, name).slice(-1)[0]));
+    if (this.provideDefaultLabelFromFieldName) {
+      props.label ??=
+        props.title ?? upperFirst(lowerCase(joinName(null, name).slice(-1)[0]));
+    }
 
     if (field.type === 'number') {
       props.decimal = true;
