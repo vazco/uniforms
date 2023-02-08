@@ -34,7 +34,6 @@ describe('connectField', () => {
       schema,
       state: {
         disabled: false,
-        label: true,
         placeholder: false,
         readOnly: false,
         showInlineError: true,
@@ -127,7 +126,6 @@ describe('connectField', () => {
     });
   });
 
-  // TODO: Write tests for `placeholder`.
   describe('when rendered with label', () => {
     const labelA = <span style={{ color: 'red' }}>Error</span>;
     const labelB = <span style={{ color: 'green' }}>OK</span>;
@@ -169,7 +167,7 @@ describe('connectField', () => {
         const context: typeof reactContext = {
           context: {
             ...reactContext.context,
-            state: { ...reactContext.context.state, label: state },
+            state: { ...reactContext.context.state },
           },
         };
 
@@ -220,11 +218,11 @@ describe('connectField', () => {
     );
 
     expect(wrapper.find(Test).at(0).prop('label')).toBe('');
-    expect(wrapper.find(Test).at(1).prop('label')).toBe('Field');
+    expect(wrapper.find(Test).at(1).prop('label')).toBe('');
     expect(wrapper.find(Test).at(2).prop('label')).toBe('Other');
-    expect(wrapper.find(Test).at(3).prop('label')).toBe('Subfield');
+    expect(wrapper.find(Test).at(3).prop('label')).toBe('');
     expect(wrapper.find(Test).at(4).prop('label')).toBe('');
     expect(wrapper.find(Test).at(5).prop('label')).toBe('');
-    expect(wrapper.find(Test).at(6).prop('label')).toBe('Subfield');
+    expect(wrapper.find(Test).at(6).prop('label')).toBe('');
   });
 });

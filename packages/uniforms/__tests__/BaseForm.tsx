@@ -48,8 +48,6 @@ describe('BaseForm', () => {
       schema,
       state: {
         disabled: false,
-        label: true,
-        placeholder: false,
         readOnly: false,
         showInlineError: false,
       },
@@ -62,13 +60,7 @@ describe('BaseForm', () => {
 
   describe('when rendered', () => {
     const wrapper = mount<BaseForm<any>>(
-      <BaseForm
-        disabled
-        label={false}
-        placeholder
-        schema={schema}
-        showInlineError
-      >
+      <BaseForm disabled schema={schema} showInlineError>
         <div />
         <div />
         <div />
@@ -96,8 +88,6 @@ describe('BaseForm', () => {
       const context = wrapper.instance().getContext();
       expect(context.state).toEqual<Context<any>['state']>({
         disabled: true,
-        label: false,
-        placeholder: true,
         readOnly: false,
         showInlineError: true,
       });
