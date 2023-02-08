@@ -20,8 +20,6 @@ export type Context<Model extends UnknownObject> = {
   schema: Bridge;
   state: {
     disabled: boolean;
-    label: boolean;
-    placeholder: boolean;
     readOnly: boolean;
     showInlineError: boolean;
   };
@@ -47,10 +45,9 @@ export type GuaranteedProps<Value> = {
   fieldType: unknown;
   fields: string[];
   id: string;
-  label: ReactNode;
+  label?: ReactNode;
   name: string;
   onChange: OnChange<Value | undefined>;
-  placeholder: string;
   readOnly: boolean;
   showInlineError: boolean;
   value?: Value;
@@ -91,10 +88,8 @@ declare module '.' {
     field: never;
     fieldType: never;
     fields: never;
-    label: never;
     name: never;
     onChange: never;
-    placeholder: never;
     readOnly: never;
     showInlineError: never;
     transform: never;
