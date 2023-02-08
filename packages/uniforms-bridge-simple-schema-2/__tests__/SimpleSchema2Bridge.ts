@@ -183,7 +183,6 @@ describe('SimpleSchema2Bridge', () => {
   describe('#getProps', () => {
     it('works with allowedValues', () => {
       expect(bridge.getProps('o')).toEqual({
-        label: 'O',
         required: true,
         allowedValues: ['O'],
       });
@@ -191,12 +190,10 @@ describe('SimpleSchema2Bridge', () => {
 
     it('works with custom component', () => {
       expect(bridge.getProps('l')).toEqual({
-        label: 'L',
         required: true,
         component: 'div',
       });
       expect(bridge.getProps('m')).toEqual({
-        label: 'M',
         required: true,
         component: noopComponent,
       });
@@ -204,7 +201,6 @@ describe('SimpleSchema2Bridge', () => {
 
     it('works with custom component (field)', () => {
       expect(bridge.getProps('n')).toEqual({
-        label: 'N',
         required: true,
         component: 'div',
       });
@@ -212,7 +208,6 @@ describe('SimpleSchema2Bridge', () => {
 
     it('works with Number type', () => {
       expect(bridge.getProps('h')).toEqual({
-        label: 'H',
         required: true,
         decimal: true,
       });
@@ -241,7 +236,6 @@ describe('SimpleSchema2Bridge', () => {
 
     it('works with transform', () => {
       expect(bridge.getProps('p')).toEqual({
-        label: 'P',
         required: true,
         transform: noopTransform,
       });
@@ -249,7 +243,6 @@ describe('SimpleSchema2Bridge', () => {
 
     it('works with type', () => {
       expect(bridge.getProps('aa')).toEqual({
-        label: 'Aa',
         type: 'password',
         required: true,
       });
@@ -261,6 +254,14 @@ describe('SimpleSchema2Bridge', () => {
       expect(bridge.getProps('d')).not.toHaveProperty('type');
       expect(bridge.getProps('f')).not.toHaveProperty('type');
       expect(bridge.getProps('i')).not.toHaveProperty('type');
+    });
+
+    it('provides default labels, if specified', () => {
+      const bridgeWithLabels = new SimpleSchema2Bridge(schema, true);
+
+      expect(bridgeWithLabels.getProps('o')).toHaveProperty('label', 'O');
+      expect(bridgeWithLabels.getProps('aa')).toHaveProperty('label', 'Aa');
+      expect(bridgeWithLabels.getProps('a.b.c')).toHaveProperty('label', 'C');
     });
   });
 

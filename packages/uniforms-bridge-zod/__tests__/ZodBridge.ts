@@ -295,16 +295,15 @@ describe('ZodBridge', () => {
     it('works with array', () => {
       const schema = object({ a: array(array(string())) });
       const bridge = new ZodBridge(schema);
-      expect(bridge.getProps('a')).toEqual({ label: 'A', required: true });
-      expect(bridge.getProps('a.0')).toEqual({ label: '0', required: true });
-      expect(bridge.getProps('a.0.0')).toEqual({ label: '0', required: true });
+      expect(bridge.getProps('a')).toEqual({ required: true });
+      expect(bridge.getProps('a.0')).toEqual({ required: true });
+      expect(bridge.getProps('a.0.0')).toEqual({ required: true });
     });
 
     it('works with array (maxCount)', () => {
       const schema = object({ a: array(array(string())).max(1) });
       const bridge = new ZodBridge(schema);
       expect(bridge.getProps('a')).toEqual({
-        label: 'A',
         required: true,
         maxCount: 1,
       });
@@ -314,7 +313,6 @@ describe('ZodBridge', () => {
       const schema = object({ a: array(array(string())).min(1) });
       const bridge = new ZodBridge(schema);
       expect(bridge.getProps('a')).toEqual({
-        label: 'A',
         required: true,
         minCount: 1,
       });
@@ -323,13 +321,13 @@ describe('ZodBridge', () => {
     it('works with boolean', () => {
       const schema = object({ a: boolean() });
       const bridge = new ZodBridge(schema);
-      expect(bridge.getProps('a')).toEqual({ label: 'A', required: true });
+      expect(bridge.getProps('a')).toEqual({ required: true });
     });
 
     it('works with date', () => {
       const schema = object({ a: date() });
       const bridge = new ZodBridge(schema);
-      expect(bridge.getProps('a')).toEqual({ label: 'A', required: true });
+      expect(bridge.getProps('a')).toEqual({ required: true });
     });
 
     it('works with enum (array)', () => {
@@ -337,7 +335,6 @@ describe('ZodBridge', () => {
       const bridge = new ZodBridge(schema);
       expect(bridge.getProps('a')).toEqual({
         allowedValues: ['x', 'y', 'z'],
-        label: 'A',
         required: true,
       });
     });
@@ -353,7 +350,6 @@ describe('ZodBridge', () => {
       const bridge = new ZodBridge(schema);
       expect(bridge.getProps('a')).toEqual({
         allowedValues: [0, 1, 2],
-        label: 'A',
         required: true,
       });
     });
@@ -369,7 +365,6 @@ describe('ZodBridge', () => {
       const bridge = new ZodBridge(schema);
       expect(bridge.getProps('a')).toEqual({
         allowedValues: ['x', 'y', 'z'],
-        label: 'A',
         required: true,
       });
     });
@@ -378,7 +373,6 @@ describe('ZodBridge', () => {
       const schema = object({ a: number() });
       const bridge = new ZodBridge(schema);
       expect(bridge.getProps('a')).toEqual({
-        label: 'A',
         required: true,
         decimal: true,
       });
@@ -387,14 +381,13 @@ describe('ZodBridge', () => {
     it('works with number (int)', () => {
       const schema = object({ a: number().int() });
       const bridge = new ZodBridge(schema);
-      expect(bridge.getProps('a')).toEqual({ label: 'A', required: true });
+      expect(bridge.getProps('a')).toEqual({ required: true });
     });
 
     it('works with number (max)', () => {
       const schema = object({ a: number().max(1) });
       const bridge = new ZodBridge(schema);
       expect(bridge.getProps('a')).toEqual({
-        label: 'A',
         required: true,
         decimal: true,
         max: 1,
@@ -405,7 +398,6 @@ describe('ZodBridge', () => {
       const schema = object({ a: number().min(1) });
       const bridge = new ZodBridge(schema);
       expect(bridge.getProps('a')).toEqual({
-        label: 'A',
         required: true,
         decimal: true,
         min: 1,
@@ -416,7 +408,6 @@ describe('ZodBridge', () => {
       const schema = object({ a: number().int().multipleOf(7) });
       const bridge = new ZodBridge(schema);
       expect(bridge.getProps('a')).toEqual({
-        label: 'A',
         required: true,
         step: 7,
       });
@@ -425,27 +416,39 @@ describe('ZodBridge', () => {
     it('works with object', () => {
       const schema = object({ a: object({ b: object({ c: string() }) }) });
       const bridge = new ZodBridge(schema);
-      expect(bridge.getProps('a')).toEqual({ label: 'A', required: true });
-      expect(bridge.getProps('a.b')).toEqual({ label: 'B', required: true });
-      expect(bridge.getProps('a.b.c')).toEqual({ label: 'C', required: true });
+      expect(bridge.getProps('a')).toEqual({ required: true });
+      expect(bridge.getProps('a.b')).toEqual({ required: true });
+      expect(bridge.getProps('a.b.c')).toEqual({ required: true });
     });
 
     it('works with default', () => {
       const schema = object({ a: string().default('x') });
       const bridge = new ZodBridge(schema);
-      expect(bridge.getProps('a')).toEqual({ label: 'A', required: false });
+      expect(bridge.getProps('a')).toEqual({ required: false });
     });
 
     it('works with optional', () => {
       const schema = object({ a: optional(string()) });
       const bridge = new ZodBridge(schema);
-      expect(bridge.getProps('a')).toEqual({ label: 'A', required: false });
+      expect(bridge.getProps('a')).toEqual({ required: false });
     });
 
     it('works with string', () => {
       const schema = object({ a: string() });
       const bridge = new ZodBridge(schema);
+      expect(bridge.getProps('a')).toEqual({ required: true });
+    });
+
+    it('provides default label if indicated', () => {
+      const schema = object({ a: string(), bC: object({ d: number() }) });
+      const bridge = new ZodBridge(schema, true);
       expect(bridge.getProps('a')).toEqual({ label: 'A', required: true });
+      expect(bridge.getProps('bC')).toEqual({ label: 'B c', required: true });
+      expect(bridge.getProps('bC.d')).toEqual({
+        decimal: true,
+        label: 'D',
+        required: true,
+      });
     });
   });
 

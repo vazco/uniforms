@@ -209,7 +209,6 @@ describe('SimpleSchemaBridge', () => {
   describe('#getProps', () => {
     it('works with allowedValues', () => {
       expect(bridge.getProps('o')).toEqual({
-        label: 'O',
         required: true,
         allowedValues: ['O'],
       });
@@ -217,12 +216,10 @@ describe('SimpleSchemaBridge', () => {
 
     it('works with custom component', () => {
       expect(bridge.getProps('l')).toEqual({
-        label: 'L',
         required: true,
         component: 'div',
       });
       expect(bridge.getProps('m')).toEqual({
-        label: 'M',
         required: true,
         component: noopComponent,
       });
@@ -230,7 +227,6 @@ describe('SimpleSchemaBridge', () => {
 
     it('works with custom component (field)', () => {
       expect(bridge.getProps('n')).toEqual({
-        label: 'N',
         required: true,
         component: 'div',
       });
@@ -259,7 +255,6 @@ describe('SimpleSchemaBridge', () => {
 
     it('works with transform', () => {
       expect(bridge.getProps('p')).toEqual({
-        label: 'P',
         required: true,
         transform: noopTransform,
       });
@@ -267,7 +262,6 @@ describe('SimpleSchemaBridge', () => {
 
     it('works with type', () => {
       expect(bridge.getProps('aa')).toEqual({
-        label: 'AA',
         type: 'password',
         required: true,
       });
@@ -279,6 +273,14 @@ describe('SimpleSchemaBridge', () => {
       expect(bridge.getProps('d')).not.toHaveProperty('type');
       expect(bridge.getProps('f')).not.toHaveProperty('type');
       expect(bridge.getProps('i')).not.toHaveProperty('type');
+    });
+
+    it('provides default labels, if specified', () => {
+      const bridgeWithLabels = new SimpleSchemaBridge(schema, true);
+
+      expect(bridgeWithLabels.getProps('o')).toHaveProperty('label', 'O');
+      expect(bridgeWithLabels.getProps('aa')).toHaveProperty('label', 'AA');
+      expect(bridgeWithLabels.getProps('a.b.c')).toHaveProperty('label', 'a.b.c');
     });
   });
 

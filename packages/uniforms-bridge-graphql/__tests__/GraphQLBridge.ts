@@ -51,7 +51,6 @@ describe('GraphQLBridge', () => {
     },
     title: {
       initialValue: 'Some Title',
-      label: false,
       options: [
         { label: 1, value: 'a' },
         { label: 2, value: 'b' },
@@ -225,12 +224,16 @@ describe('GraphQLBridge', () => {
 
   describe('#getProps', () => {
     describe('labels are derived properly', () => {
-      describe('when props.label is undefined or true', () => {
+      describe('when provideDefaultLabelFromFieldName is true', () => {
+        const bridgeTDefaultLabel = new GraphQLBridge(
+          astT.getType('Post')!,
+          schemaValidator,
+          schemaData,
+        );
         describe('and no extra data is passed', () => {
           it('should use AST field name', () => {
-            expect(bridgeT.getProps('title')).toEqual({
+            expect(bridgeTDefaultLabel.getProps('title')).toEqual({
               allowedValues: ['a', 'b', 'Some Title'],
-              label: false,
               required: false,
               transform: expect.any(Function),
               options: [
@@ -240,13 +243,11 @@ describe('GraphQLBridge', () => {
               ],
               initialValue: 'Some Title',
             });
-            expect(bridgeT.getProps('author.decimal1')).toEqual({
+            expect(bridgeTDefaultLabel.getProps('author.decimal1')).toEqual({
               decimal: true,
-              label: 'Decimal 1',
               required: false,
             });
-            expect(bridgeT.getProps('author.firstName')).toEqual({
-              label: 'First name',
+            expect(bridgeTDefaultLabel.getProps('author.firstName')).toEqual({
               required: false,
             });
           });
@@ -254,7 +255,7 @@ describe('GraphQLBridge', () => {
 
         describe('and extra data is present', () => {
           it('should use extra data', () => {
-            expect(bridgeT.getProps('id')).toEqual({
+            expect(bridgeTDefaultLabel.getProps('id')).toEqual({
               allowedValues: [1, 2, 3],
               label: 'Post ID',
               placeholder: 'Post ID',
@@ -267,8 +268,8 @@ describe('GraphQLBridge', () => {
 
     it('works with allowedValues', () => {
       expect(bridgeI.getProps('id')).toEqual({
-        label: 'Post ID',
         placeholder: 'Post ID',
+        label: 'Post ID',
         required: true,
         allowedValues: [1, 2, 3],
       });
@@ -276,7 +277,6 @@ describe('GraphQLBridge', () => {
 
     it('works with custom component', () => {
       expect(bridgeI.getProps('author')).toEqual({
-        label: 'Author',
         required: true,
         component: 'div',
       });
@@ -284,13 +284,11 @@ describe('GraphQLBridge', () => {
 
     it('works with Number type', () => {
       expect(bridgeI.getProps('author.decimal1')).toEqual({
-        label: 'Decimal 1',
         required: false,
         decimal: true,
       });
 
       expect(bridgeI.getProps('author.decimal2')).toEqual({
-        label: 'Decimal 2',
         required: true,
         decimal: true,
       });
