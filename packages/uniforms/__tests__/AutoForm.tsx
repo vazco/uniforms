@@ -29,10 +29,16 @@ describe('<AutoForm />', () => {
   describe('when changed', () => {
     it('updates', () => {
       render(
-        <AutoForm onChange={onChange} schema={schema} />,
+        <AutoForm onChange={onChange} schema={schema}>
+          <AutoFields />
+        </AutoForm>,
         { schema: { type: SimpleSchema2Bridge } },
         { onChange },
       );
+      const input = screen.getByLabelText('A');
+      fireEvent.change(input, { target: { value: '2' } });
+      expect(onChange).toHaveBeenCalledTimes(4);
+      expect(onChange).toHaveBeenLastCalledWith('a', '2');
     });
     it('validates', () => {
       // FIXME: AutoForm is not a valid Component.
