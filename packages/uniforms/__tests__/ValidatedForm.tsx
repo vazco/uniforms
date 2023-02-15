@@ -1,7 +1,7 @@
 import { fireEvent, screen } from '@testing-library/react';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import SimpleSchema from 'simpl-schema';
-import { ValidatedForm, context, useForm } from 'uniforms';
+import { ValidatedForm, context, Context, useForm } from 'uniforms';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 import { AutoField } from 'uniforms-unstyled';
 
@@ -13,7 +13,7 @@ describe('ValidatedForm', () => {
   const onValidate = jest.fn((model, error) => error);
   const validator = jest.fn();
   const validatorForSchema = jest.fn(() => validator);
-  const mockContext = jest.fn();
+  const contextSpy = jest.fn<ReactNode, [Context<any> | null]>();
 
   const error = new Error('test error message');
   const model = { a: 1 };
@@ -34,8 +34,7 @@ describe('ValidatedForm', () => {
     it('validates (when `.validate` is called)', () => {
       render(
         <ValidatedForm
-          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-          // @ts-expect-error
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
           name="form"
           schema={schema}
           model={model}
@@ -54,8 +53,7 @@ describe('ValidatedForm', () => {
     it('correctly calls `validator`', () => {
       render(
         <ValidatedForm
-          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-          // @ts-expect-error
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
           name="form"
           schema={schema}
           model={model}
@@ -75,8 +73,7 @@ describe('ValidatedForm', () => {
     it('updates error state with errors from `validator`', async () => {
       render(
         <ValidatedForm
-          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-          // @ts-expect-error
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
           name="form"
           schema={schema}
           model={model}
@@ -103,8 +100,7 @@ describe('ValidatedForm', () => {
     it('correctly calls `onValidate` when validation succeeds', () => {
       render(
         <ValidatedForm
-          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-          // @ts-expect-error
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
           name="form"
           schema={schema}
           model={model}
@@ -125,8 +121,7 @@ describe('ValidatedForm', () => {
     it('correctly calls `onValidate` when validation fails ', () => {
       render(
         <ValidatedForm
-          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-          // @ts-expect-error
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
           name="form"
           schema={schema}
           model={model}
@@ -153,17 +148,14 @@ describe('ValidatedForm', () => {
     it('updates error state with async errors from `onValidate`', async () => {
       render(
         <ValidatedForm
-          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-          // @ts-expect-error
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
           name="form"
           schema={schema}
           model={model}
           onValidate={onValidate}
           validator={validator}
         >
-          <context.Consumer>
-            {context => mockContext(context?.error)}
-          </context.Consumer>
+          <context.Consumer children={contextSpy} />
         </ValidatedForm>,
         {
           schema: { type: SimpleSchema2Bridge },
@@ -174,23 +166,21 @@ describe('ValidatedForm', () => {
       onValidate.mockImplementationOnce(() => error);
 
       fireEvent.submit(form);
-
-      expect(mockContext).toHaveBeenLastCalledWith(error);
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ error }),
+      );
     });
     it('leaves error state alone when `onValidate` suppress `validator` errors', async () => {
       render(
         <ValidatedForm
-          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-          // @ts-expect-error
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
           name="form"
           schema={schema}
           model={model}
           onValidate={onValidate}
           validator={validator}
         >
-          <context.Consumer>
-            {context => mockContext(context?.error)}
-          </context.Consumer>
+          <context.Consumer children={contextSpy} />
         </ValidatedForm>,
         {
           schema: { type: SimpleSchema2Bridge },
@@ -206,7 +196,9 @@ describe('ValidatedForm', () => {
 
       expect(validator).toHaveBeenCalled();
       expect(onValidate).toHaveBeenCalled();
-      expect(mockContext).toHaveBeenLastCalledWith(null);
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ error: null }),
+      );
     });
     it('has `validating` context variable, default `false`', () => {
       render(
@@ -216,16 +208,16 @@ describe('ValidatedForm', () => {
           onValidate={onValidate}
           validator={validator}
         >
-          <context.Consumer>
-            {context => mockContext(context?.validating)}
-          </context.Consumer>
+          <context.Consumer children={contextSpy} />
         </ValidatedForm>,
         {
           schema: { type: SimpleSchema2Bridge },
         },
       );
 
-      expect(mockContext).toHaveBeenCalledWith(false);
+      expect(contextSpy).toHaveBeenCalledWith(
+        expect.objectContaining({ validating: false }),
+      );
     });
 
     it('uses `modelTransform`s `validate` mode', () => {
@@ -234,8 +226,7 @@ describe('ValidatedForm', () => {
         mode === 'validate' ? transformedModel : model;
       render(
         <ValidatedForm
-          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-          // @ts-expect-error
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
           name="form"
           schema={schema}
           model={model}
@@ -258,8 +249,7 @@ describe('ValidatedForm', () => {
       render(
         // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm
-          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-          // @ts-expect-error
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
           name="form"
           schema={schema}
           model={model}
@@ -282,8 +272,7 @@ describe('ValidatedForm', () => {
       render(
         // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm
-          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-          // @ts-expect-error
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
           name="form"
           schema={schema}
           model={model}
@@ -310,17 +299,14 @@ describe('ValidatedForm', () => {
       render(
         // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm
-          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-          // @ts-expect-error
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
           name="form"
           schema={schema}
           model={model}
           onValidate={onValidate}
           onSubmit={onSubmit}
         >
-          <context.Consumer>
-            {context => mockContext(context?.submitted)}
-          </context.Consumer>
+          <context.Consumer children={contextSpy} />
         </ValidatedForm>,
         {
           schema: { type: SimpleSchema2Bridge },
@@ -328,28 +314,29 @@ describe('ValidatedForm', () => {
       );
       const form = screen.getByRole('form');
 
-      expect(mockContext).toHaveBeenLastCalledWith(false);
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ submitted: false }),
+      );
 
       fireEvent.submit(form);
 
-      expect(mockContext).toHaveBeenLastCalledWith(true);
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ submitted: true }),
+      );
     });
 
     it('sets submitted to true, when form is submitted and validation fails', () => {
       render(
         // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm
-          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-          // @ts-expect-error
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
           name="form"
           schema={schema}
           model={model}
           onValidate={onValidate}
           onSubmit={onSubmit}
         >
-          <context.Consumer>
-            {context => mockContext(context?.submitted)}
-          </context.Consumer>
+          <context.Consumer children={contextSpy} />
         </ValidatedForm>,
         {
           schema: { type: SimpleSchema2Bridge },
@@ -362,28 +349,29 @@ describe('ValidatedForm', () => {
 
       const form = screen.getByRole('form');
 
-      expect(mockContext).toHaveBeenLastCalledWith(false);
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ submitted: false }),
+      );
 
       fireEvent.submit(form);
 
-      expect(mockContext).toHaveBeenLastCalledWith(true);
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ submitted: true }),
+      );
     });
 
     it('updates error state with async errors from `onSubmit`', async () => {
       render(
         // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm
-          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-          // @ts-expect-error
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
           name="form"
           schema={schema}
           model={model}
           onValidate={onValidate}
           onSubmit={onSubmit}
         >
-          <context.Consumer>
-            {context => mockContext(context?.error)}
-          </context.Consumer>
+          <context.Consumer children={contextSpy} />
         </ValidatedForm>,
         {
           schema: { type: SimpleSchema2Bridge },
@@ -397,15 +385,16 @@ describe('ValidatedForm', () => {
       await new Promise(resolve => process.nextTick(resolve));
 
       expect(onSubmit).toHaveBeenCalled();
-      expect(mockContext).toHaveBeenLastCalledWith(error);
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ error }),
+      );
     });
 
     it('works if unmounts on submit', async () => {
       const { unmount } = render(
         // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm
-          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-          // @ts-expect-error
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
           name="form"
           schema={schema}
           model={model}
@@ -489,8 +478,7 @@ describe('ValidatedForm', () => {
         render(
           // FIXME: ValidatedForm is not a valid Component.
           <ValidatedForm
-            // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-            // @ts-expect-error
+            // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
             name="form"
             model={model}
             schema={schema}
@@ -530,17 +518,14 @@ describe('ValidatedForm', () => {
 
       render(
         // FIXME: ValidatedForm is not a valid Component.
-        // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
         <ValidatedForm
-          // @ts-expect-error
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
           name="form"
           model={model}
           onSubmit={onSubmit}
           schema={schema}
         >
-          <context.Consumer>
-            {context => mockContext(context?.error)}
-          </context.Consumer>
+          <context.Consumer children={contextSpy} />
           <FormControls />
         </ValidatedForm>,
         {
@@ -557,11 +542,15 @@ describe('ValidatedForm', () => {
       fireEvent.submit(form);
       await new Promise(resolve => process.nextTick(resolve));
 
-      expect(mockContext).toHaveBeenLastCalledWith(error);
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ error }),
+      );
 
       fireEvent.click(resetButton);
       await new Promise(resolve => process.nextTick(resolve));
-      expect(mockContext).toHaveBeenLastCalledWith(null);
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ error: null }),
+      );
     });
   });
 
@@ -649,8 +638,7 @@ describe('ValidatedForm', () => {
       render(
         // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm
-          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-          // @ts-expect-error
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
           name="form"
           model={model}
           schema={schema}
@@ -704,8 +692,7 @@ describe('ValidatedForm', () => {
       const { rerenderWithProps } = render(
         // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm
-          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-          // @ts-expect-error
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
           name="form"
           model={model}
           schema={schema}
@@ -786,28 +773,17 @@ describe('ValidatedForm', () => {
     it.each(cases.map(flatPair4))('works for %p/%p/%p/%p', async (...modes) => {
       const [hasError, validatorMode, onValidateMode, onSubmitMode] = modes;
 
-      const mockContextError = jest.fn();
-      const mockContextSubmitting = jest.fn();
-
       render(
         // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm
-          // TODO: delete ts-expect-error error if this issue is resolved https://github.com/vazco/uniforms/issues/1165
-          // @ts-expect-error
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
           name="form"
           error={hasError ? error : null}
           onSubmit={onSubmit}
           onValidate={onValidate}
           schema={alternativeSchema}
         >
-          <context.Consumer>
-            {context => {
-              mockContext(context?.validating);
-              mockContextError(context?.error);
-              mockContextSubmitting(context?.submitting);
-              return null;
-            }}
-          </context.Consumer>
+          <context.Consumer children={contextSpy} />
         </ValidatedForm>,
         { schema: { type: SimpleSchema2Bridge } },
       );
@@ -833,9 +809,13 @@ describe('ValidatedForm', () => {
         expect(validator).toHaveBeenCalledTimes(run);
 
         if (asyncValidation) {
-          expect(mockContext).toHaveBeenLastCalledWith(true);
+          expect(contextSpy).toHaveBeenLastCalledWith(
+            expect.objectContaining({ validating: true }),
+          );
           await new Promise(resolve => process.nextTick(resolve));
-          expect(mockContext).toHaveBeenLastCalledWith(false);
+          expect(contextSpy).toHaveBeenLastCalledWith(
+            expect.objectContaining({ validating: false }),
+          );
         }
 
         await new Promise(resolve => process.nextTick(resolve));
@@ -844,24 +824,36 @@ describe('ValidatedForm', () => {
 
         if (hasValidationError) {
           expect(onSubmit).not.toHaveBeenCalled();
-          expect(mockContextError).toHaveBeenLastCalledWith(error);
+          expect(contextSpy).toHaveBeenLastCalledWith(
+            expect.objectContaining({ error }),
+          );
         } else {
           expect(onSubmit).toHaveBeenCalledTimes(run);
-          expect(mockContextError).toHaveBeenLastCalledWith(null);
+          expect(contextSpy).toHaveBeenLastCalledWith(
+            expect.objectContaining({ error: null }),
+          );
 
           if (asyncSubmission) {
-            expect(mockContextSubmitting).toHaveBeenLastCalledWith(true);
+            expect(contextSpy).toHaveBeenLastCalledWith(
+              expect.objectContaining({ submitting: true }),
+            );
             await new Promise(resolve => setTimeout(resolve));
-            expect(mockContextSubmitting).toHaveBeenLastCalledWith(false);
+            expect(contextSpy).toHaveBeenLastCalledWith(
+              expect.objectContaining({ submitting: false }),
+            );
           }
         }
 
         await new Promise(resolve => setTimeout(resolve));
 
         if (hasSubmissionError) {
-          expect(mockContextError).toHaveBeenLastCalledWith(error);
+          expect(contextSpy).toHaveBeenLastCalledWith(
+            expect.objectContaining({ error }),
+          );
         } else {
-          expect(mockContextError).toHaveBeenLastCalledWith(null);
+          expect(contextSpy).toHaveBeenLastCalledWith(
+            expect.objectContaining({ error: null }),
+          );
         }
       }
     });

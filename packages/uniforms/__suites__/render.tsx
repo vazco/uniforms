@@ -6,14 +6,12 @@ import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 
 const randomId = randomIds();
 
-export function render(
-  element: ReactElement,
+export function render<P>(
+  element: ReactElement<P>,
   schema: SimpleSchemaDefinition,
   contextValueExtension?: Partial<Context<unknown>>,
   initialModel?: object,
-): RenderResult & {
-  rerenderWithProps: (props: Record<any, any>) => void;
-} {
+): RenderResult & { rerenderWithProps: (props: P) => void } {
   const contextValue = {
     changed: false,
     changedMap: {},
@@ -39,7 +37,7 @@ export function render(
     formRef: {} as BaseForm<unknown>,
   };
 
-  const originalRender = renderOnScreen(element, {
+  const renderResult = renderOnScreen(element, {
     wrapper({ children }) {
       return (
         <context.Provider value={contextValue}>{children}</context.Provider>
@@ -47,11 +45,11 @@ export function render(
     },
   });
 
-  const { rerender } = originalRender;
+  const { rerender } = renderResult;
 
-  const rerenderWithProps = (props: Record<any, any>) => {
+  const rerenderWithProps = (props: P) => {
     rerender(cloneElement(element, props));
   };
 
-  return { rerenderWithProps, ...originalRender };
+  return { rerenderWithProps, ...renderResult };
 }
