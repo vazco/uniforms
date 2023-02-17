@@ -8,40 +8,42 @@ const randomId = randomIds();
 
 export function render<P>(
   element: ReactElement<P>,
-  schema: SimpleSchemaDefinition,
+  schema?: SimpleSchemaDefinition,
   contextValueExtension?: Partial<Context<unknown>>,
   initialModel?: object,
 ): RenderResult & { rerenderWithProps: (props: P) => void } {
-  const contextValue = {
-    changed: false,
-    changedMap: {},
-    error: null,
-    model: initialModel ?? {},
-    name: [],
-    onChange() {},
-    onSubmit() {},
-    randomId,
-    submitted: false,
-    submitting: false,
-    validating: false,
-    ...contextValueExtension,
-    schema: new SimpleSchema2Bridge(new SimpleSchema(schema)),
-    state: {
-      disabled: false,
-      label: false,
-      placeholder: false,
-      readOnly: false,
-      showInlineError: false,
-      ...contextValueExtension?.state,
-    },
-    formRef: {} as BaseForm<unknown>,
-  };
-
   const renderResult = renderOnScreen(element, {
     wrapper({ children }) {
-      return (
-        <context.Provider value={contextValue}>{children}</context.Provider>
-      );
+      if (schema) {
+        const contextValue = {
+          changed: false,
+          changedMap: {},
+          error: null,
+          model: initialModel ?? {},
+          name: [],
+          onChange() {},
+          onSubmit() {},
+          randomId,
+          submitted: false,
+          submitting: false,
+          validating: false,
+          ...contextValueExtension,
+          schema: new SimpleSchema2Bridge(new SimpleSchema(schema)),
+          state: {
+            disabled: false,
+            label: false,
+            placeholder: false,
+            readOnly: false,
+            showInlineError: false,
+            ...contextValueExtension?.state,
+          },
+          formRef: {} as BaseForm<unknown>,
+        };
+        return (
+          <context.Provider value={contextValue}>{children}</context.Provider>
+        );
+      }
+      return <>{children}</>;
     },
   });
 

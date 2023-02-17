@@ -17,13 +17,12 @@ describe('ValidatedForm', () => {
 
   const error = new Error('test error message');
   const model = { a: 1 };
-  const schema = new SimpleSchema2Bridge(
-    new SimpleSchema({
-      a: { type: String, defaultValue: '' },
-      b: { type: String, defaultValue: '' },
-      c: { type: String, defaultValue: '' },
-    }),
-  );
+  const schemaValues = {
+    a: { type: String, defaultValue: '' },
+    b: { type: String, defaultValue: '' },
+    c: { type: String, defaultValue: '' },
+  };
+  const schema = new SimpleSchema2Bridge(new SimpleSchema(schemaValues));
   jest.spyOn(schema.schema, 'validator').mockImplementation(validatorForSchema);
 
   beforeEach(() => jest.clearAllMocks());
@@ -41,9 +40,6 @@ describe('ValidatedForm', () => {
           onValidate={onValidate}
           validator={validator}
         />,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
       );
       const form = screen.getByRole('form');
       fireEvent.submit(form);
@@ -61,9 +57,6 @@ describe('ValidatedForm', () => {
           validator={validator}
           data-testid="validateForm"
         />,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
       );
       const form = screen.getByRole('form');
       fireEvent.submit(form);
@@ -81,9 +74,6 @@ describe('ValidatedForm', () => {
           validator={validator}
           data-testid="validateForm"
         />,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
       );
       const form = screen.getByRole('form');
 
@@ -107,9 +97,6 @@ describe('ValidatedForm', () => {
           onValidate={onValidate}
           validator={validator}
         />,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
       );
       const form = screen.getByRole('form');
 
@@ -129,9 +116,6 @@ describe('ValidatedForm', () => {
           validator={validator}
           data-testid="validateForm"
         />,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
       );
       const form = screen.getByRole('form');
 
@@ -157,9 +141,7 @@ describe('ValidatedForm', () => {
         >
           <context.Consumer children={contextSpy} />
         </ValidatedForm>,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
+        schemaValues,
       );
       const form = screen.getByRole('form');
 
@@ -182,9 +164,7 @@ describe('ValidatedForm', () => {
         >
           <context.Consumer children={contextSpy} />
         </ValidatedForm>,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
+        schemaValues,
       );
       const form = screen.getByRole('form');
 
@@ -210,9 +190,7 @@ describe('ValidatedForm', () => {
         >
           <context.Consumer children={contextSpy} />
         </ValidatedForm>,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
+        schemaValues,
       );
 
       expect(contextSpy).toHaveBeenCalledWith(
@@ -233,9 +211,6 @@ describe('ValidatedForm', () => {
           onValidate={onValidate}
           modelTransform={modelTransform}
         />,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
       );
       const form = screen.getByRole('form');
       fireEvent.submit(form);
@@ -256,9 +231,6 @@ describe('ValidatedForm', () => {
           onValidate={onValidate}
           onSubmit={onSubmit}
         />,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
       );
 
       const form = screen.getByRole('form');
@@ -279,9 +251,6 @@ describe('ValidatedForm', () => {
           onValidate={onValidate}
           onSubmit={onSubmit}
         />,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
       );
 
       validator.mockImplementationOnce(() => {
@@ -308,9 +277,7 @@ describe('ValidatedForm', () => {
         >
           <context.Consumer children={contextSpy} />
         </ValidatedForm>,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
+        schemaValues,
       );
       const form = screen.getByRole('form');
 
@@ -338,9 +305,7 @@ describe('ValidatedForm', () => {
         >
           <context.Consumer children={contextSpy} />
         </ValidatedForm>,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
+        schemaValues,
       );
 
       validator.mockImplementationOnce(() => {
@@ -373,9 +338,7 @@ describe('ValidatedForm', () => {
         >
           <context.Consumer children={contextSpy} />
         </ValidatedForm>,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
+        schemaValues,
       );
 
       onSubmit.mockImplementationOnce(() => Promise.reject(error));
@@ -401,9 +364,6 @@ describe('ValidatedForm', () => {
           onValidate={onValidate}
           onSubmit={onSubmit}
         />,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
       );
       const form = screen.getByRole('form');
       onSubmit.mockImplementationOnce(() => unmount());
@@ -425,9 +385,6 @@ describe('ValidatedForm', () => {
           >
             <AutoField name="a" />
           </ValidatedForm>,
-          {
-            schema: { type: SimpleSchema2Bridge },
-          },
         );
         const input = screen.getByLabelText('A');
         fireEvent.change(input, { target: { value: 'test' } });
@@ -442,9 +399,6 @@ describe('ValidatedForm', () => {
           <ValidatedForm model={model} schema={schema} validate="onSubmit">
             <AutoField name="a" />
           </ValidatedForm>,
-          {
-            schema: { type: SimpleSchema2Bridge },
-          },
         );
         const input = screen.getByLabelText('A');
         fireEvent.change(input, { target: { value: 'test' } });
@@ -464,9 +418,6 @@ describe('ValidatedForm', () => {
           >
             <AutoField name="a" />
           </ValidatedForm>,
-          {
-            schema: { type: SimpleSchema2Bridge },
-          },
         );
         const input = screen.getByLabelText('A');
         fireEvent.change(input, { target: { value: 'test' } });
@@ -486,9 +437,6 @@ describe('ValidatedForm', () => {
           >
             <AutoField name="a" />
           </ValidatedForm>,
-          {
-            schema: { type: SimpleSchema2Bridge },
-          },
         );
 
         const form = screen.getByRole('form');
@@ -528,9 +476,7 @@ describe('ValidatedForm', () => {
           <context.Consumer children={contextSpy} />
           <FormControls />
         </ValidatedForm>,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
+        schemaValues,
       );
       validator.mockImplementationOnce(() => {
         throw error;
@@ -568,34 +514,26 @@ describe('ValidatedForm', () => {
     );
 
     it('does not revalidate arbitrarily', () => {
-      const { rerenderWithProps } = render(<Component />, {
-        schema: { type: SimpleSchema2Bridge },
-      });
+      const { rerenderWithProps } = render(<Component />);
       rerenderWithProps({ anything: 'anything' });
       expect(validator).not.toBeCalled();
     });
 
     it('revalidates if `model` changes', () => {
-      const { rerenderWithProps } = render(<Component />, {
-        schema: { type: SimpleSchema2Bridge },
-      });
+      const { rerenderWithProps } = render(<Component />);
       rerenderWithProps({ model: anotherModel });
       expect(validator).toHaveBeenCalledTimes(1);
     });
 
     it('revalidates if `validator` changes', () => {
-      const { rerenderWithProps } = render(<Component />, {
-        schema: { type: SimpleSchema2Bridge },
-      });
+      const { rerenderWithProps } = render(<Component />);
       rerenderWithProps({ validator: {} });
       expect(validator).toHaveBeenCalledTimes(1);
     });
 
     it('revalidate if `schema` changes', () => {
       const anotherSchema = new SimpleSchema2Bridge(schema.schema);
-      const { rerenderWithProps } = render(<Component />, {
-        schema: { type: SimpleSchema2Bridge },
-      });
+      const { rerenderWithProps } = render(<Component />);
       rerenderWithProps({ schema: anotherSchema });
       expect(validator).toHaveBeenCalledTimes(1);
     });
@@ -608,26 +546,20 @@ describe('ValidatedForm', () => {
     );
 
     it('does not revalidate when `model` changes', () => {
-      const { rerenderWithProps } = render(<Component />, {
-        schema: { type: SimpleSchema2Bridge },
-      });
+      const { rerenderWithProps } = render(<Component />, schemaValues);
       rerenderWithProps({ model: {} });
       expect(validator).not.toBeCalled();
     });
 
     it('does not revalidate when validator `options` change', () => {
-      const { rerenderWithProps } = render(<Component />, {
-        schema: { type: SimpleSchema2Bridge },
-      });
+      const { rerenderWithProps } = render(<Component />, schemaValues);
       rerenderWithProps({ validator: {} });
       expect(validator).not.toBeCalled();
     });
 
     it('does not revalidate when `schema` changes', () => {
       const anotherSchema = new SimpleSchema2Bridge(schema.schema);
-      const { rerenderWithProps } = render(<Component />, {
-        schema: { type: SimpleSchema2Bridge },
-      });
+      const { rerenderWithProps } = render(<Component />, schemaValues);
       rerenderWithProps({ schema: anotherSchema });
       expect(validator).not.toBeCalled();
     });
@@ -645,9 +577,6 @@ describe('ValidatedForm', () => {
         >
           <AutoField name="a" />
         </ValidatedForm>,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
       );
       ['1', '2', '3'].forEach(value => {
         const form = screen.getByRole('form');
@@ -665,9 +594,6 @@ describe('ValidatedForm', () => {
       const { rerenderWithProps } = render(
         // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm model={model} schema={schema} />,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
       );
 
       rerenderWithProps({ validator: validatorA });
@@ -699,9 +625,6 @@ describe('ValidatedForm', () => {
         >
           <AutoField name="a" />
         </ValidatedForm>,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
       );
 
       rerenderWithProps({
@@ -785,7 +708,7 @@ describe('ValidatedForm', () => {
         >
           <context.Consumer children={contextSpy} />
         </ValidatedForm>,
-        { schema: { type: SimpleSchema2Bridge } },
+        schemaValues,
       );
 
       const asyncSubmission = onSubmitMode.includes('async');

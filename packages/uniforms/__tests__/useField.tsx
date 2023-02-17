@@ -2,7 +2,6 @@ import { fireEvent, screen } from '@testing-library/react';
 import React, { ReactNode } from 'react';
 import { AutoForm, BaseForm, connectField, useField } from 'uniforms';
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
-import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 
 import { render } from '../__suites__';
 
@@ -49,7 +48,6 @@ describe('useField', () => {
         <AutoForm schema={bridge}>
           <TestComponent name="d" />
         </AutoForm>,
-        { schema: { type: SimpleSchema2Bridge } },
       );
       const input = screen.getByRole('textbox');
 
@@ -61,7 +59,6 @@ describe('useField', () => {
         <AutoForm label schema={bridge}>
           <TestComponent name="d" />
         </AutoForm>,
-        { schema: { type: SimpleSchema2Bridge } },
       );
 
       const input = getByRole('textbox');
@@ -80,7 +77,6 @@ describe('useField', () => {
           <Test name="b" options={{ absoluteName: true }} />
           <Test name="b.c" options={{ absoluteName: true }} />
         </BaseForm>,
-        { schema: { type: SimpleSchema2Bridge } },
       );
     });
 
@@ -93,7 +89,6 @@ describe('useField', () => {
             <Test name="b.c" options={{ absoluteName: true }} />
           </Test>
         </BaseForm>,
-        { schema: { type: SimpleSchema2Bridge } },
       );
     });
   });

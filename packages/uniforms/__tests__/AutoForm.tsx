@@ -14,13 +14,12 @@ describe('<AutoForm />', () => {
   const validator = jest.fn();
   const contextSpy = jest.fn<ReactNode, [Context<any> | null]>();
   const model = { a: '1' };
-  const schema = new SimpleSchema2Bridge(
-    new SimpleSchema({
-      a: { type: String, defaultValue: '' },
-      b: { type: String, defaultValue: '' },
-      c: { type: String, defaultValue: '' },
-    }),
-  );
+  const schemaValues = {
+    a: { type: String, defaultValue: '' },
+    b: { type: String, defaultValue: '' },
+    c: { type: String, defaultValue: '' },
+  };
+  const schema = new SimpleSchema2Bridge(new SimpleSchema(schemaValues));
 
   jest.spyOn(schema.schema, 'validator').mockImplementation(() => validator);
 
@@ -32,7 +31,7 @@ describe('<AutoForm />', () => {
         <AutoForm onChange={onChange} schema={schema}>
           <AutoFields />
         </AutoForm>,
-        { schema: { type: SimpleSchema2Bridge } },
+        schemaValues,
         { onChange },
       );
       const input = screen.getByLabelText('A');
@@ -50,9 +49,6 @@ describe('<AutoForm />', () => {
         >
           <AutoFields />
         </AutoForm>,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
       );
 
       const form = screen.getByRole('form');
@@ -77,7 +73,6 @@ describe('<AutoForm />', () => {
           onChange={onChangeModel}
           schema={schema}
         />,
-        { schema: { type: SimpleSchema2Bridge } },
       );
 
       const form = screen.getByRole('form');
@@ -93,9 +88,7 @@ describe('<AutoForm />', () => {
           <context.Consumer children={contextSpy} />
           <AutoFields />
         </AutoForm>,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
+        schemaValues,
       );
 
       expect(contextSpy).toHaveBeenLastCalledWith(
@@ -127,7 +120,6 @@ describe('<AutoForm />', () => {
           autoField={Field}
           model={model}
         />,
-        { schema: { type: SimpleSchema2Bridge } },
       );
 
       expect(onChange).toHaveBeenCalledTimes(2);
@@ -140,9 +132,6 @@ describe('<AutoForm />', () => {
         <AutoForm autosave onSubmit={onSubmit} schema={schema}>
           <AutoFields />
         </AutoForm>,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
       );
 
       expect(onSubmit).not.toBeCalled();
@@ -170,9 +159,7 @@ describe('<AutoForm />', () => {
           <context.Consumer children={contextSpy} />
         </AutoForm>
       );
-      const { rerender } = render(<Component />, {
-        schema: { type: SimpleSchema2Bridge },
-      });
+      const { rerender } = render(<Component />, schemaValues);
 
       rerender(<Component />);
 
@@ -189,9 +176,7 @@ describe('<AutoForm />', () => {
         </AutoForm>
       );
 
-      const { rerender } = render(<Component />, {
-        schema: { type: SimpleSchema2Bridge },
-      });
+      const { rerender } = render(<Component />, schemaValues);
 
       rerender(<Component />);
 
@@ -210,9 +195,7 @@ describe('<AutoForm />', () => {
       const { rerender } = render(
         // FIXME: AutoForm is not a valid Component.
         <Component />,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
+        schemaValues,
       );
 
       rerender(<Component />);
@@ -229,9 +212,7 @@ describe('<AutoForm />', () => {
         <AutoForm schema={schema}>
           <context.Consumer children={contextSpy} />
         </AutoForm>,
-        {
-          schema: { type: SimpleSchema2Bridge },
-        },
+        schemaValues,
       );
 
       expect(contextSpy).toHaveBeenLastCalledWith(
@@ -241,9 +222,7 @@ describe('<AutoForm />', () => {
 
     it('<AutoForm />, validates', () => {
       // FIXME: AutoForm is not a valid Component.
-      const { rerenderWithProps } = render(<AutoForm schema={schema} />, {
-        schema: { type: SimpleSchema2Bridge },
-      });
+      const { rerenderWithProps } = render(<AutoForm schema={schema} />);
 
       rerenderWithProps({ model, validate: 'onChange' });
       expect(validator).toHaveBeenCalledTimes(1);

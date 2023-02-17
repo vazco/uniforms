@@ -6,50 +6,46 @@ import { render } from './render';
 
 export function testTextField(TextField: ComponentType<any>) {
   test('<TextField> - renders an input with correct disabled state', () => {
-    render(<TextField name="x" disabled />, { x: String });
+    render(<TextField name="x" disabled />);
 
     expect(screen.getByRole('textbox')).toBeDisabled();
   });
 
   test('<TextField> - renders an input with correct readOnly state', () => {
-    render(<TextField name="x" readOnly />, { x: String });
+    render(<TextField name="x" readOnly />);
 
     expect(screen.getByRole('textbox')).toHaveAttribute('readonly', '');
   });
 
   test('<TextField> - renders an input with autocomplete turned off', () => {
-    render(<TextField name="x" autoComplete="off" />, {
-      x: String,
-    });
+    render(<TextField name="x" autoComplete="off" />);
 
     expect(screen.getByRole('textbox')).toHaveAttribute('autocomplete', 'off');
   });
 
   test('<TextField> - renders an input with correct id (inherited)', () => {
-    render(<TextField name="x" />, { x: String });
+    render(<TextField name="x" />);
 
     expect(screen.getByRole('textbox')).toHaveAttribute('id');
   });
 
   test('<TextField> - renders an input with correct id (specified)', () => {
     const id = 'y';
-    render(<TextField name="x" id={id} />, { x: String });
+    render(<TextField name="x" id={id} />);
 
     expect(screen.getByRole('textbox')).toHaveAttribute('id', id);
   });
 
   test('<TextField> - renders an input with correct name', () => {
     const name = 'x';
-    render(<TextField name={name} />, { x: String });
+    render(<TextField name={name} />);
 
     expect(screen.getByRole('textbox')).toHaveAttribute('name', name);
   });
 
   test('<TextField> - renders an input with correct placeholder', () => {
     const placeholder = 'y';
-    render(<TextField name="x" placeholder={placeholder} />, {
-      x: String,
-    });
+    render(<TextField name="x" placeholder={placeholder} />);
 
     expect(screen.getByRole('textbox')).toHaveAttribute(
       'placeholder',
@@ -58,30 +54,26 @@ export function testTextField(TextField: ComponentType<any>) {
   });
 
   test('<TextField> - renders an input with correct type', () => {
-    render(<TextField name="x" />, { x: String });
+    render(<TextField name="x" />);
 
     expect(screen.getByRole('textbox')).toHaveAttribute('type', 'text');
   });
 
   test('<TextField> - renders an input with correct type (url)', () => {
-    render(<TextField name="x" type="url" />, { x: String });
+    render(<TextField name="x" type="url" />);
 
     expect(screen.getByRole('textbox')).toHaveAttribute('type', 'url');
   });
 
   test('<TextField> - renders an input with correct value (default)', () => {
-    render(<TextField name="x" />, { x: String });
+    render(<TextField name="x" />);
 
     expect(screen.getByRole('textbox')).toHaveValue('');
   });
 
   test('<TextField> - renders an input with correct value (model)', () => {
     const defaultValue = 'y';
-    render(
-      <TextField name="x" />,
-      { x: String },
-      { model: { x: defaultValue } },
-    );
+    render(<TextField name="x" />, {}, { model: { x: defaultValue } });
 
     expect(screen.getByRole('textbox')).toHaveValue(defaultValue);
   });
@@ -121,7 +113,7 @@ export function testTextField(TextField: ComponentType<any>) {
   });
 
   test('<TextField> - renders a label', () => {
-    render(<TextField name="x" label="y" />, { x: String });
+    render(<TextField name="x" label="y" />);
 
     expect(screen.getByLabelText(/y.*/)).toBeInTheDocument();
   });
