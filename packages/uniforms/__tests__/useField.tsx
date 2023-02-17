@@ -27,23 +27,23 @@ function Test(rawProps: {
   return <>{props.children}</>;
 }
 
-const TestComponent = connectField((props: Record<string, any>) => {
-  return (
-    <input
-      value={props.value || ''}
-      onChange={event => {
-        props.onChange(event.target.value);
-      }}
-    />
-  );
-});
-
 describe('useField', () => {
   it('is a function', () => {
     expect(useField).toBeInstanceOf(Function);
   });
 
   describe('when called with initialValue', () => {
+    type Props = { onChange: (value?: string) => void; value?: string };
+    const TestComponent = connectField((props: Props) => {
+      return (
+        <input
+          value={props.value || ''}
+          onChange={event => {
+            props.onChange(event.target.value);
+          }}
+        />
+      );
+    });
     it('applies default value', () => {
       render(
         <AutoForm schema={bridge}>
