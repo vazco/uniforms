@@ -11,13 +11,19 @@ export function testListField(
   }: { addFieldLocator: () => HTMLElement | null | undefined },
 ) {
   test('<ListField> - renders ListAddField', () => {
-    render(<ListField name="x" label="ListFieldLabel" />);
+    render(<ListField name="x" label="ListFieldLabel" />, {
+      x: Array,
+      'x.$': String,
+    });
 
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
   test('<ListField> - renders correct label (specified)', () => {
-    render(<ListField name="x" label="ListFieldLabel" />);
+    render(<ListField name="x" label="ListFieldLabel" />, {
+      x: Array,
+      'x.$': String,
+    });
 
     // Throws error with no form control found when getting by label
     expect(screen.getByText(/ListFieldLabel.*/)).toBeInTheDocument();
