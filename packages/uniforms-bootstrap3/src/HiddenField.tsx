@@ -1,5 +1,5 @@
 import React, { HTMLProps, Ref, useEffect } from 'react';
-import { filterDOMProps, Override, useField } from 'uniforms';
+import { Override, filterDOMProps, useField } from 'uniforms';
 
 export type HiddenFieldProps = Override<
   HTMLProps<HTMLInputElement>,
@@ -7,7 +7,7 @@ export type HiddenFieldProps = Override<
     inputRef?: Ref<HTMLInputElement>;
     name: string;
     noDOM?: boolean;
-    value?: any;
+    value?: unknown;
   }
 >;
 
@@ -27,6 +27,7 @@ export default function HiddenField({ value, ...rawProps }: HiddenFieldProps) {
       readOnly={props.readOnly}
       ref={props.inputRef}
       type="hidden"
+      // @ts-expect-error `value` should be serializable.
       value={value ?? props.value ?? ''}
       {...filterDOMProps(props)}
     />

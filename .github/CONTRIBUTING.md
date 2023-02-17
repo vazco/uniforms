@@ -2,7 +2,7 @@
 
 Third-party patches are essential for keeping every project great. We simply can't access the huge number of use cases. We want to keep it as easy as possible to contribute changes that get things working in your environment. There are a few guidelines that we need contributors to follow to have a chance of keeping on top of things.
 
-Our kanban board is public and available [here](https://github.com/orgs/vazco/projects/1).
+Our kanban board is public and available [here](https://github.com/orgs/vazco/projects/4/views/5).
 
 ## Getting started
 

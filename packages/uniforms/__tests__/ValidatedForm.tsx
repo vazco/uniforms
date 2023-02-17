@@ -1,7 +1,14 @@
 import { fireEvent, screen } from '@testing-library/react';
 import React, { ReactNode } from 'react';
 import SimpleSchema from 'simpl-schema';
-import { ValidatedForm, context, Context, useForm } from 'uniforms';
+import {
+  ModelTransformMode,
+  UnknownObject,
+  ValidatedForm,
+  context,
+  Context,
+  useForm,
+} from 'uniforms';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 import { AutoField } from 'uniforms-unstyled';
 
@@ -200,7 +207,7 @@ describe('ValidatedForm', () => {
 
     it('uses `modelTransform`s `validate` mode', () => {
       const transformedModel = { b: 1 };
-      const modelTransform = (mode: string, model: Record<string, any>) =>
+      const modelTransform = (mode: ModelTransformMode, model: UnknownObject) =>
         mode === 'validate' ? transformedModel : model;
       render(
         <ValidatedForm

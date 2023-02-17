@@ -8,13 +8,13 @@ import {
 } from 'react';
 
 import { connectField } from './connectField';
-import { Context } from './types';
+import { Context, UnknownObject } from './types';
 import { useField } from './useField';
 
-export type AutoFieldProps = {
+export type AutoFieldProps = UnknownObject & {
   component?: Component;
+  experimental_absoluteName?: boolean;
   name: string;
-  [prop: string]: unknown;
 };
 
 /** @internal */
@@ -23,14 +23,18 @@ export type Component = ComponentType<any> | ReturnType<typeof connectField>;
 /** @internal */
 export type ComponentDetector = (
   props: ReturnType<typeof useField>[0],
-  uniforms: Context<Record<string, unknown>>,
+  uniforms: Context<UnknownObject>,
 ) => Component;
 
 export function createAutoField(defaultComponentDetector: ComponentDetector) {
   const context = createContext<ComponentDetector>(defaultComponentDetector);
 
-  function AutoField(rawProps: AutoFieldProps): ReactElement {
-    const [props, uniforms] = useField(rawProps.name, rawProps);
+  function AutoField({
+    experimental_absoluteName: absoluteName,
+    ...rawProps
+  }: AutoFieldProps): ReactElement {
+    const options = { absoluteName };
+    const [props, uniforms] = useField(rawProps.name, rawProps, options);
     const componentDetector = useContext(context);
     const component = componentDetector(props, uniforms);
 

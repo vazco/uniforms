@@ -5,13 +5,13 @@ import isEmpty from 'lodash/isEmpty';
 import lowerCase from 'lodash/lowerCase';
 import memoize from 'lodash/memoize';
 import upperFirst from 'lodash/upperFirst';
-import { Bridge, joinName } from 'uniforms';
+import { Bridge, UnknownObject, joinName } from 'uniforms';
 
 function fieldInvariant(name: string, condition: boolean): asserts condition {
   invariant(condition, 'Field not found in schema: "%s"', name);
 }
 
-function resolveRef(reference: string, schema: Record<string, any>) {
+function resolveRef(reference: string, schema: UnknownObject) {
   invariant(
     reference.startsWith('#'),
     'Reference is not an internal reference, and only such are allowed: "%s"',
@@ -21,7 +21,7 @@ function resolveRef(reference: string, schema: Record<string, any>) {
   const resolvedReference = reference
     .split('/')
     .filter(part => part && part !== '#')
-    .reduce((definition, next) => definition[next], schema);
+    .reduce((definition, next) => definition[next] as UnknownObject, schema);
 
   invariant(
     resolvedReference,
@@ -33,15 +33,16 @@ function resolveRef(reference: string, schema: Record<string, any>) {
 }
 
 function resolveRefIfNeeded(
-  partial: Record<string, any>,
-  schema: Record<string, any>,
-): Record<string, any> {
+  partial: UnknownObject,
+  schema: UnknownObject,
+): UnknownObject {
   if (!('$ref' in partial)) {
     return partial;
   }
 
   const { $ref, ...partialWithoutRef } = partial;
   return resolveRefIfNeeded(
+    // @ts-expect-error The `partial` and `schema` should be typed more precisely.
     Object.assign({}, partialWithoutRef, resolveRef($ref, schema)),
     schema,
   );
@@ -77,13 +78,35 @@ function pathToName(path: string) {
   return path.slice(1);
 }
 
+function isValidatorResult(value: unknown): value is ValidatorResult {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    Array.isArray((value as ValidatorResult).details)
+  );
+}
+
+type FieldError = {
+  instancePath?: string;
+  /** Provided by Ajv < 8 */
+  dataPath?: string;
+  params?: Record<string, unknown> & {
+    missingProperty?: string;
+  };
+  message?: string;
+};
+type ValidatorResult = { details: FieldError[] };
+
 export default class JSONSchemaBridge extends Bridge {
-  schema: Record<string, any>;
+  // FIXME: The `_compiledSchema` should be typed more precisely.
   _compiledSchema: Record<string, any>;
 
   constructor(
-    schema: Record<string, any>,
-    public validator: (model: Record<string, any>) => any,
+    // FIXME: The `schema` should be typed more precisely.
+    public schema: Record<string, any>,
+    public validator: (
+      model: UnknownObject,
+    ) => ValidatorResult | null | undefined,
   ) {
     super();
 
@@ -97,9 +120,9 @@ export default class JSONSchemaBridge extends Bridge {
     this.getType = memoize(this.getType.bind(this));
   }
 
-  getError(name: string, error: any) {
-    const details = error?.details;
-    if (!Array.isArray(details)) {
+  getError(name: string, error: unknown) {
+    const details = isValidatorResult(error) && error.details;
+    if (!details) {
       return null;
     }
 
@@ -108,30 +131,43 @@ export default class JSONSchemaBridge extends Bridge {
     const rootName = joinName(nameParts.slice(0, -1));
     const baseName = nameParts[nameParts.length - 1];
     const scopedError = details.find(error => {
-      const path = pathToName(error.instancePath ?? error.dataPath);
+      const rawPath = error.instancePath ?? error.dataPath;
+      const path = rawPath ? pathToName(rawPath) : '';
       return (
         unescapedName === path ||
-        (rootName === path && baseName === error.params.missingProperty)
+        (rootName === path &&
+          error.params &&
+          baseName === error.params.missingProperty)
       );
     });
 
     return scopedError || null;
   }
 
-  getErrorMessage(name: string, error: any) {
+  getErrorMessage(name: string, error: unknown) {
     const scopedError = this.getError(name, error);
     return scopedError?.message || '';
   }
 
-  getErrorMessages(error: any) {
+  getErrorMessages(error: unknown) {
     if (!error) {
       return [];
     }
 
-    const { details } = error;
-    return Array.isArray(details)
-      ? details.map(error => error.message)
-      : [error.message || error];
+    if (isValidatorResult(error)) {
+      const { details } = error;
+      return details.map(error => error.message || '');
+    }
+
+    if (error instanceof Error) {
+      return [error.message];
+    }
+
+    if (typeof error === 'object') {
+      return [];
+    }
+
+    return [String(error)];
   }
 
   getField(name: string) {
@@ -229,7 +265,7 @@ export default class JSONSchemaBridge extends Bridge {
     }
 
     if (type === 'object') {
-      const value: Record<string, unknown> = {};
+      const value: UnknownObject = {};
       this.getSubfields(name).forEach(key => {
         const initialValue = this.getInitialValue(joinName(name, key));
         if (initialValue !== undefined) {
@@ -242,7 +278,7 @@ export default class JSONSchemaBridge extends Bridge {
     return undefined;
   }
 
-  getProps(name: string, fieldProps?: Record<string, any>) {
+  getProps(name: string) {
     const field = this.getField(name);
     const props = Object.assign(
       {},
@@ -273,7 +309,7 @@ export default class JSONSchemaBridge extends Bridge {
     type OptionDict = Record<string, string>;
     type OptionList = { label: string; value: unknown }[];
     type Options = OptionDict | OptionList;
-    const options: Options = fieldProps?.options || props.options;
+    const options: Options = props.options;
     if (options) {
       if (Array.isArray(options)) {
         props.allowedValues = options.map(option => option.value);

@@ -1,18 +1,20 @@
 import React, { ComponentType } from 'react';
 
 import { BaseForm, BaseFormProps, BaseFormState } from './BaseForm';
+import { UnknownObject } from './types';
 
-export type QuickFormProps<Model> = BaseFormProps<Model> & {
-  errorsField?: ComponentType;
-  submitField?: ComponentType;
-};
+export type QuickFormProps<Model extends UnknownObject> =
+  BaseFormProps<Model> & {
+    errorsField?: ComponentType;
+    submitField?: ComponentType;
+  };
 
-export type QuickFormState<Model> = BaseFormState<Model>;
+export type QuickFormState<Model extends UnknownObject> = BaseFormState<Model>;
 
 export function Quick<Base extends typeof BaseForm>(Base: Base) {
   // @ts-expect-error: Mixin class problem.
   class QuickForm<
-    Model,
+    Model extends UnknownObject,
     Props extends QuickFormProps<Model> = QuickFormProps<Model>,
     State extends QuickFormState<Model> = QuickFormState<Model>,
   > extends Base<Model, Props, State> {

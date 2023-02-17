@@ -5,28 +5,28 @@ import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 
 import { render } from '../__suites__';
 
-const bridge = new JSONSchemaBridge(
-  {
-    type: 'object',
-    properties: {
-      a: { type: 'string' },
-      b: { type: 'object', properties: { c: { type: 'string' } } },
-      d: { type: 'number', default: 4 },
-    },
-  },
-  () => {},
-);
-
-function Test(rawProps: {
-  children?: ReactNode;
-  name: string;
-  options?: Parameters<typeof useField>[2];
-}) {
-  const [props] = useField(rawProps.name, rawProps, rawProps.options);
-  return <>{props.children}</>;
-}
-
 describe('useField', () => {
+  const bridge = new JSONSchemaBridge(
+    {
+      type: 'object',
+      properties: {
+        a: { type: 'string' },
+        b: { type: 'object', properties: { c: { type: 'string' } } },
+        d: { type: 'number', default: 4 },
+      },
+    },
+    () => null,
+  );
+
+  function Test(rawProps: {
+    children?: ReactNode;
+    name: string;
+    options?: Parameters<typeof useField>[2];
+  }) {
+    const [props] = useField(rawProps.name, rawProps, rawProps.options);
+    return <>{props.children}</>;
+  }
+
   it('is a function', () => {
     expect(useField).toBeInstanceOf(Function);
   });
@@ -43,6 +43,7 @@ describe('useField', () => {
         />
       );
     });
+
     it('applies default value', () => {
       render(
         <AutoForm schema={bridge}>

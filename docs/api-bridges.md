@@ -28,8 +28,8 @@ If only a simple or no validation is needed, this bridge is perfectly suited to 
 The constructor accepts three arguments:
 
 - `schema: GraphQLType` can be any type parsed and extracted from a GraphQL schema.
-- `validator: (model: Record<string, any>) => any` a custom validator function that should return a falsy value if no errors are present or information about errors in the model as described in the [custom bridge section](/docs/examples-custom-bridge#validator-definition).
-- `extras: Record<string, any> = {}` used to extend the schema generated from GraphQL type with extra field configuration.
+- `validator: (model: Record<string, unknown>) => any` a custom validator function that should return a falsy value if no errors are present or information about errors in the model as described in the [custom bridge section](/docs/examples-custom-bridge#validator-definition).
+- `extras: Record<string, unknown> = {}` used to extend the schema generated from GraphQL type with extra field configuration.
 
 ### Code example
 

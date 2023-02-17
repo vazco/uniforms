@@ -3,7 +3,7 @@ import mapValues from 'lodash/mapValues';
 import { ReactNode, useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { joinName } from './joinName';
-import { GuaranteedProps } from './types';
+import { GuaranteedProps, UnknownObject } from './types';
 import { useForm } from './useForm';
 
 function propagate(
@@ -30,9 +30,10 @@ function propagate(
 }
 
 export function useField<
+  // This type has to use `any` to allow any object.
   Props extends Record<string, any>,
   Value = Props['value'],
-  Model = Record<string, any>,
+  Model extends UnknownObject = UnknownObject,
 >(
   fieldName: string,
   props: Props,
@@ -56,16 +57,18 @@ export function useField<
   const errorMessage = context.schema.getErrorMessage(name, context.error);
   const fieldType = context.schema.getType(name);
   const fields = context.schema.getSubfields(name);
-  const schemaProps = context.schema.getProps(name, { ...state, ...props });
+  const schemaProps = context.schema.getProps(name);
 
   const [label, labelFallback] = propagate(
     props.label,
+    // @ts-expect-error The `schema.getProps` should be typed more precisely.
     schemaProps.label,
     state.label,
     '',
   );
   const [placeholder] = propagate(
     props.placeholder,
+    // @ts-expect-error The `schema.getProps` should be typed more precisely.
     schemaProps.placeholder,
     state.placeholder,
     label || labelFallback,
@@ -82,6 +85,7 @@ export function useField<
     [context.onChange, name],
   );
 
+  // @ts-expect-error The `props` should be typed more precisely.
   const valueFromModel: Value | undefined = get(context.model, name);
   let initialValue: Value | undefined;
   let value: Value | undefined = props.value ?? valueFromModel;
@@ -89,7 +93,7 @@ export function useField<
   if (usesInitialValue) {
     if (!onChangeCalled.current) {
       if (value === undefined) {
-        value = context.schema.getInitialValue(name);
+        value = context.schema.getInitialValue(name) as Value | undefined;
         initialValue = value;
       } else if (props.value !== undefined && props.value !== valueFromModel) {
         initialValue = props.value;

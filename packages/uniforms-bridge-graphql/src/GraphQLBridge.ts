@@ -13,7 +13,7 @@ import invariant from 'invariant';
 import lowerCase from 'lodash/lowerCase';
 import memoize from 'lodash/memoize';
 import upperFirst from 'lodash/upperFirst';
-import { Bridge, joinName } from 'uniforms';
+import { Bridge, UnknownObject, joinName } from 'uniforms';
 
 function fieldInvariant(name: string, condition: boolean): asserts condition {
   invariant(condition, 'Field not found in schema: "%s"', name);
@@ -22,18 +22,20 @@ function fieldInvariant(name: string, condition: boolean): asserts condition {
 export default class GraphQLBridge extends Bridge {
   constructor(
     public schema: GraphQLType,
-    public validator: (model: Record<string, any>) => any,
-    public extras: Record<string, any> = {},
+    public validator: (model: UnknownObject) => unknown,
+    public extras: UnknownObject = {},
   ) {
     super();
 
     // Memoize for performance and referential equality.
     this.getField = memoize(this.getField.bind(this));
     this.getInitialValue = memoize(this.getInitialValue.bind(this));
+    this.getProps = memoize(this.getProps.bind(this));
     this.getSubfields = memoize(this.getSubfields.bind(this));
     this.getType = memoize(this.getType.bind(this));
   }
 
+  // TODO: Get rid of this `any`.
   getError(name: string, error: any) {
     const details = error?.details;
     if (!Array.isArray(details)) {
@@ -43,11 +45,13 @@ export default class GraphQLBridge extends Bridge {
     return details.find(error => error.name === name) || null;
   }
 
+  // TODO: Get rid of this `any`.
   getErrorMessage(name: string, error: any) {
     const scopedError = this.getError(name, error);
     return scopedError?.message || '';
   }
 
+  // TODO: Get rid of this `any`.
   getErrorMessages(error: any) {
     if (!error) {
       return [];
@@ -81,7 +85,7 @@ export default class GraphQLBridge extends Bridge {
     );
   }
 
-  getInitialValue(name: string): any {
+  getInitialValue(name: string): unknown {
     const type = this.getType(name);
 
     if (type === Array) {
@@ -89,7 +93,7 @@ export default class GraphQLBridge extends Bridge {
     }
 
     if (type === Object) {
-      const value: Record<string, unknown> = {};
+      const value: UnknownObject = {};
       this.getSubfields(name).forEach(key => {
         const initialValue = this.getInitialValue(joinName(name, key));
         if (initialValue !== undefined) {
@@ -100,15 +104,17 @@ export default class GraphQLBridge extends Bridge {
     }
 
     const { defaultValue } = this.getField(name);
+    // @ts-expect-error The `extras` should be typed more precisely.
     return defaultValue ?? this.extras[name]?.initialValue;
   }
 
-  getProps(nameNormal: string, fieldProps?: Record<string, any>) {
+  getProps(nameNormal: string) {
     const nameGeneric = nameNormal.replace(/\.\d+/g, '.$');
 
     const field = this.getField(nameGeneric);
     const props = {
       required: isNonNullType(field.type),
+      // @ts-expect-error The `extras` should be typed more precisely.
       ...this.extras[nameGeneric],
       ...this.extras[nameNormal],
     };
@@ -123,7 +129,7 @@ export default class GraphQLBridge extends Bridge {
     type OptionDict = Record<string, string>;
     type OptionList = { label: string; value: unknown }[];
     type Options = OptionDict | OptionList;
-    const options: Options = fieldProps?.options || props.options;
+    const options: Options = props.options;
     if (options) {
       if (Array.isArray(options)) {
         props.allowedValues = options.map(option => option.value);

@@ -1,3 +1,14 @@
+## [v4.0.0-alpha.1](https://github.com/vazco/uniforms/tree/v4.0.0-alpha.1) (2023-02-03)
+
+- **Added:** New `experimental_absoluteName` prop on `AutoField`. [\#1126](https://github.com/vazco/uniforms/issues/1126)
+- **Breaking:** Improved core package typings, most importantly replacing most `any`s with `unknown`s, forcing `Model` to be an object, and getting rid of `DeepPartial`. [\#1205](https://github.com/vazco/uniforms/issues/1205)
+- **Breaking:** Improved `JSONSchemaBridge` typings. [\#1158](https://github.com/vazco/uniforms/issues/1158)
+- **Breaking:** Removed `props` argument from `Bridge.getProps`. [\#1206](https://github.com/vazco/uniforms/issues/1206)
+
+## [v3.10.2](https://github.com/vazco/uniforms/tree/v3.10.2) (2022-12-23)
+
+- **Fixed:** Compatibility with Simple Schema v3 (on a basic level; full compatibility will be released in v4). [\#1189](https://github.com/vazco/uniforms/issues/1189)
+
 ## [v4.0.0-alpha.0](https://github.com/vazco/uniforms/tree/v4.0.0-alpha.0) (2022-11-02)
 
 - **Added:** Zod integration. [\#1159](https://github.com/vazco/uniforms/issues/1159)

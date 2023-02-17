@@ -1,8 +1,4 @@
 {
-  "version": "4.0.0-alpha.0",
-  "packages": [
-    "packages/*",
-    "reproductions",
-    "website"
-  ]
+  "version": "4.0.0-alpha.1",
+  "packages": ["packages/*", "reproductions", "website"]
 }

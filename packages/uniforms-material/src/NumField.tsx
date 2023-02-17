@@ -37,7 +37,7 @@ function Num({
       disabled={disabled}
       error={!!error}
       fullWidth={themeProps?.fullWidth ?? true}
-      helperText={(error && showInlineError && errorMessage) || helperText}
+      helperText={(!!error && showInlineError && errorMessage) || helperText}
       inputProps={{
         ...(themeProps?.inputProps ?? {}),
         min,

@@ -1,4 +1,5 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { UnknownObject } from 'uniforms';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
 
 jest.mock('meteor/aldeed:simple-schema');
@@ -12,7 +13,7 @@ describe('SimpleSchemaBridge', () => {
       // Simulate SimpleSchema.
       name = name.replace(/\d+/g, '$');
 
-      const field: Record<string, unknown> | undefined = {
+      const field: UnknownObject | undefined = {
         a: { type: Object, label: name },
         'a.b': { type: Object, label: name },
         'a.b.c': { type: String, label: name },
@@ -214,13 +215,6 @@ describe('SimpleSchemaBridge', () => {
       });
     });
 
-    it('works with allowedValues from props', () => {
-      expect(bridge.getProps('o', { allowedValues: ['O'] })).toEqual({
-        label: 'O',
-        required: true,
-      });
-    });
-
     it('works with custom component', () => {
       expect(bridge.getProps('l')).toEqual({
         label: 'L',
@@ -263,33 +257,11 @@ describe('SimpleSchemaBridge', () => {
       expect(bridge.getProps('r').allowedValues[1]).toBe('b');
     });
 
-    it('works with options from props', () => {
-      expect(
-        bridge.getProps('s', { options: { c: 1, d: 2 } }).transform('c'),
-      ).toBe(1);
-      expect(
-        bridge.getProps('s', { options: { c: 1, d: 2 } }).transform('d'),
-      ).toBe(2);
-      expect(
-        bridge.getProps('s', { options: { c: 1, d: 2 } }).allowedValues[0],
-      ).toBe('c');
-      expect(
-        bridge.getProps('s', { options: { c: 1, d: 2 } }).allowedValues[1],
-      ).toBe('d');
-    });
-
     it('works with transform', () => {
       expect(bridge.getProps('p')).toEqual({
         label: 'P',
         required: true,
         transform: noopTransform,
-      });
-    });
-
-    it('works with transform from props', () => {
-      expect(bridge.getProps('p', { transform: () => {} })).toEqual({
-        label: 'P',
-        required: true,
       });
     });
 
@@ -337,7 +309,7 @@ describe('SimpleSchemaBridge', () => {
       const bridge = new SimpleSchemaBridge({
         ...schema,
         validator() {
-          return (model: Record<string, any>) => {
+          return (model: UnknownObject) => {
             if (typeof model.x !== 'number') {
               throw new Error();
             }

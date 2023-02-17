@@ -15,7 +15,7 @@
     <strong><a href="https://github.com/vazco/uniforms/blob/master/.github/CONTRIBUTING.md">Contribute</a></strong> |
     <strong><a href="https://uniforms.tools/docs/tutorials-basic-uniforms-usage">Quick Start</a></strong> |
     <strong><a href="https://vazco.github.io/uniforms/playground">Playground</a></strong> |
-    <strong><a href="https://github.com/orgs/vazco/projects/1">Roadmap</a></strong>
+    <strong><a href="https://github.com/orgs/vazco/projects/4/views/5">Roadmap</a></strong>
 </p>
 
 <p align="center">
@@ -38,7 +38,7 @@
         <img src="https://img.shields.io/npm/v/uniforms.svg" alt="Version" />
     </a>
     <a href="https://github.com/vazco/uniforms/actions?query=branch:master">
-        <img src="https://img.shields.io/github/workflow/status/vazco/uniforms/CI/master.svg" alt="Status" />
+        <img src="https://img.shields.io/github/actions/workflow/status/vazco/uniforms/CI.yml.svg?branch=master" alt="Status" />
     </a>
 </p>
 
