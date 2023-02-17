@@ -55,13 +55,13 @@ describe('useField', () => {
     });
 
     it('does not apply default value after first change', () => {
-      const { getByRole } = render(
+      render(
         <AutoForm label schema={bridge}>
           <TestComponent name="d" />
         </AutoForm>,
       );
 
-      const input = getByRole('textbox');
+      const input = screen.getByRole('textbox');
 
       fireEvent.change(input, { target: { value: null } });
 
