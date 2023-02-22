@@ -31,9 +31,9 @@ export type DateFieldProps = FieldProps<
   Date,
   TextFieldProps,
   {
+    labelProps?: object;
     max?: string;
     min?: string;
-    labelProps?: object;
     type?: 'date' | 'datetime-local';
   }
 >;
@@ -67,9 +67,9 @@ function Date({
       label={label}
       InputLabelProps={{ shrink: true, ...labelProps, ...InputLabelProps }}
       inputProps={{
-        readOnly,
-        min: dateFormat(min),
         max: dateFormat(max),
+        min: dateFormat(min),
+        readOnly,
         ...props.inputProps,
       }}
       margin="dense"
