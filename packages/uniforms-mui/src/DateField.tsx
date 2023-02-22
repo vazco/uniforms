@@ -81,7 +81,7 @@ function Date({
       placeholder={placeholder}
       ref={inputRef}
       type={type}
-      value={dateFormat(value)}
+      value={dateFormat(value, type) ?? ''}
       {...filterDOMProps(props)}
     />
   );
