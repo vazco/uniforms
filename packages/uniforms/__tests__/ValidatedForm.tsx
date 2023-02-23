@@ -22,14 +22,14 @@ describe('ValidatedForm', () => {
   const validatorForSchema = jest.fn(() => validator);
   const contextSpy = jest.fn<ReactNode, [Context<any> | null]>();
 
-  const error = new Error('test error message');
+  const error = new Error();
   const model = { a: 1 };
-  const schemaValues = {
+  const schemaDefinition = {
     a: { type: String, defaultValue: '' },
     b: { type: String, defaultValue: '' },
     c: { type: String, defaultValue: '' },
   };
-  const schema = new SimpleSchema2Bridge(new SimpleSchema(schemaValues));
+  const schema = new SimpleSchema2Bridge(new SimpleSchema(schemaDefinition));
   jest.spyOn(schema.schema, 'validator').mockImplementation(validatorForSchema);
 
   beforeEach(() => jest.clearAllMocks());
@@ -148,7 +148,7 @@ describe('ValidatedForm', () => {
         >
           <context.Consumer children={contextSpy} />
         </ValidatedForm>,
-        schemaValues,
+        schemaDefinition,
       );
       const form = screen.getByRole('form');
 
@@ -171,7 +171,7 @@ describe('ValidatedForm', () => {
         >
           <context.Consumer children={contextSpy} />
         </ValidatedForm>,
-        schemaValues,
+        schemaDefinition,
       );
       const form = screen.getByRole('form');
 
@@ -197,7 +197,7 @@ describe('ValidatedForm', () => {
         >
           <context.Consumer children={contextSpy} />
         </ValidatedForm>,
-        schemaValues,
+        schemaDefinition,
       );
 
       expect(contextSpy).toHaveBeenCalledWith(
@@ -284,7 +284,7 @@ describe('ValidatedForm', () => {
         >
           <context.Consumer children={contextSpy} />
         </ValidatedForm>,
-        schemaValues,
+        schemaDefinition,
       );
       const form = screen.getByRole('form');
 
@@ -312,7 +312,7 @@ describe('ValidatedForm', () => {
         >
           <context.Consumer children={contextSpy} />
         </ValidatedForm>,
-        schemaValues,
+        schemaDefinition,
       );
 
       validator.mockImplementationOnce(() => {
@@ -345,7 +345,7 @@ describe('ValidatedForm', () => {
         >
           <context.Consumer children={contextSpy} />
         </ValidatedForm>,
-        schemaValues,
+        schemaDefinition,
       );
 
       onSubmit.mockImplementationOnce(() => Promise.reject(error));
@@ -483,7 +483,7 @@ describe('ValidatedForm', () => {
           <context.Consumer children={contextSpy} />
           <FormControls />
         </ValidatedForm>,
-        schemaValues,
+        schemaDefinition,
       );
       validator.mockImplementationOnce(() => {
         throw error;
@@ -553,20 +553,20 @@ describe('ValidatedForm', () => {
     );
 
     it('does not revalidate when `model` changes', () => {
-      const { rerenderWithProps } = render(<Component />, schemaValues);
+      const { rerenderWithProps } = render(<Component />, schemaDefinition);
       rerenderWithProps({ model: {} });
       expect(validator).not.toBeCalled();
     });
 
     it('does not revalidate when validator `options` change', () => {
-      const { rerenderWithProps } = render(<Component />, schemaValues);
+      const { rerenderWithProps } = render(<Component />, schemaDefinition);
       rerenderWithProps({ validator: {} });
       expect(validator).not.toBeCalled();
     });
 
     it('does not revalidate when `schema` changes', () => {
       const anotherSchema = new SimpleSchema2Bridge(schema.schema);
-      const { rerenderWithProps } = render(<Component />, schemaValues);
+      const { rerenderWithProps } = render(<Component />, schemaDefinition);
       rerenderWithProps({ schema: anotherSchema });
       expect(validator).not.toBeCalled();
     });
@@ -715,7 +715,7 @@ describe('ValidatedForm', () => {
         >
           <context.Consumer children={contextSpy} />
         </ValidatedForm>,
-        schemaValues,
+        schemaDefinition,
       );
 
       const asyncSubmission = onSubmitMode.includes('async');
