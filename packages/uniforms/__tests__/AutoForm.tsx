@@ -44,6 +44,7 @@ describe('<AutoForm />', () => {
         <AutoForm
           // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
           name="form"
+          onChange={onChange}
           schema={schema}
         >
           <AutoFields />
@@ -80,7 +81,6 @@ describe('<AutoForm />', () => {
       expect(onChangeModel).toHaveBeenLastCalledWith({ a: '2' });
     });
     it('updates `changed` and `changedMap`', () => {
-      // FIXME: AutoForm is not a valid Component.
       render(
         <AutoForm schema={schema}>
           <context.Consumer children={contextSpy} />
@@ -109,7 +109,6 @@ describe('<AutoForm />', () => {
         }
       }
 
-      // FIXME: AutoForm is not a valid Component.
       render(
         // @ts-expect-error Convoluted AutoForm types
         <CustomAutoForm
@@ -132,18 +131,13 @@ describe('<AutoForm />', () => {
       );
 
       expect(onSubmit).not.toBeCalled();
-
-      await new Promise(resolve => setTimeout(resolve));
-
       const input = screen.getByLabelText('A');
-
-      expect(onSubmit).toHaveBeenCalledTimes(1);
-      expect(onSubmit).toHaveBeenLastCalledWith({ a: '', b: '', c: '' });
-
-      await new Promise(resolve => setTimeout(resolve));
       fireEvent.change(input, { target: { value: '1' } });
 
-      expect(validator).toHaveBeenCalledTimes(2);
+      await new Promise(resolve => setTimeout(resolve));
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+      expect(onSubmit).toHaveBeenLastCalledWith({ a: '1', b: '', c: '' });
+      expect(validator).toHaveBeenCalledTimes(1);
       expect(validator).toHaveBeenLastCalledWith({ a: '1', b: '', c: '' });
     });
   });
@@ -186,11 +180,7 @@ describe('<AutoForm />', () => {
           <context.Consumer children={contextSpy} />
         </AutoForm>
       );
-      const { rerender } = render(
-        // FIXME: AutoForm is not a valid Component.
-        <Component />,
-        schemaDefinition,
-      );
+      const { rerender } = render(<Component />, schemaDefinition);
 
       rerender(<Component />);
 
@@ -201,13 +191,14 @@ describe('<AutoForm />', () => {
   });
   describe('when update', () => {
     it('<AutoForm />, updates', () => {
-      render(
+      const { rerenderWithProps } = render(
         <AutoForm schema={schema}>
           <context.Consumer children={contextSpy} />
         </AutoForm>,
         schemaDefinition,
       );
 
+      rerenderWithProps({ model: {} });
       expect(contextSpy).toHaveBeenLastCalledWith(
         expect.objectContaining({ model: {} }),
       );

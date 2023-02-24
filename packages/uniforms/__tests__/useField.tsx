@@ -53,11 +53,13 @@ describe('useField', () => {
       const input = screen.getByRole('textbox');
 
       expect(input).toHaveAttribute('value', '4');
+      fireEvent.change(input, { target: { value: null } });
+      expect(input).toHaveAttribute('value', '');
     });
 
     it('does not apply default value after first change', () => {
       render(
-        <AutoForm label schema={bridge}>
+        <AutoForm schema={bridge}>
           <TestComponent name="d" />
         </AutoForm>,
       );
