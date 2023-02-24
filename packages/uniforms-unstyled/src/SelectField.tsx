@@ -1,6 +1,6 @@
 import xor from 'lodash/xor';
 import React, { Ref } from 'react';
-import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
+import { HTMLFieldProps, connectField, filterDOMProps, Option } from 'uniforms';
 
 const base64: (string: string) => string =
   typeof btoa === 'undefined'
@@ -12,16 +12,13 @@ export type SelectFieldProps = HTMLFieldProps<
   string | string[],
   HTMLDivElement,
   {
-    allowedValues?: string[];
     checkboxes?: boolean;
-    disableItem?: (value: string) => boolean;
     inputRef?: Ref<HTMLSelectElement>;
-    transform?: (value: string) => string;
+    options?: Option<string>[];
   }
 >;
 
 function Select({
-  allowedValues,
   checkboxes,
   disabled,
   fieldType,
@@ -33,9 +30,8 @@ function Select({
   placeholder,
   readOnly,
   required,
-  disableItem,
-  transform,
   value,
+  options,
   ...props
 }: SelectFieldProps) {
   const multiple = fieldType === Array;
@@ -43,25 +39,31 @@ function Select({
     <div {...filterDOMProps(props)}>
       {label && <label htmlFor={id}>{label}</label>}
       {checkboxes ? (
-        allowedValues!.map(item => (
-          <div key={item}>
+        options?.map(option => (
+          <div key={option.key}>
             <input
               checked={
-                fieldType === Array ? value!.includes(item) : value === item
+                fieldType === Array
+                  ? value?.includes(option.value)
+                  : value === option.value
               }
-              disabled={disableItem?.(item) ?? disabled}
-              id={`${id}-${escape(item)}`}
+              disabled={option.disabled ?? disabled}
+              id={`${id}-${escape(option.key)}`}
               name={name}
               onChange={() => {
                 if (!readOnly) {
-                  onChange(fieldType === Array ? xor([item], value) : item);
+                  onChange(
+                    fieldType === Array
+                      ? xor([option.value], value)
+                      : option.value,
+                  );
                 }
               }}
               type="checkbox"
             />
 
-            <label htmlFor={`${id}-${escape(item)}`}>
-              {transform ? transform(item) : item}
+            <label htmlFor={`${id}-${escape(option.key)}`}>
+              {option.label}
             </label>
           </div>
         ))
@@ -91,9 +93,13 @@ function Select({
             </option>
           )}
 
-          {allowedValues?.map(value => (
-            <option disabled={disableItem?.(value)} key={value} value={value}>
-              {transform ? transform(value) : value}
+          {options?.map(option => (
+            <option
+              disabled={option.disabled}
+              key={option.key}
+              value={option.value}
+            >
+              {option.label}
             </option>
           ))}
         </select>

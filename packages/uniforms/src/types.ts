@@ -101,3 +101,11 @@ declare module '.' {
     value: never;
   }
 }
+
+/** Option type used in <SelectField /> */
+export type Option<Value = unknown> = {
+  disabled?: boolean;
+  label: string;
+  key: string;
+  value: Value;
+};
