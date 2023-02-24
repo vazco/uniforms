@@ -18,7 +18,9 @@ export function testTextField(TextField: ComponentType<any>) {
   });
 
   test('<TextField> - renders an input with autocomplete turned off', () => {
-    render(<TextField name="x" autoComplete="off" />, { x: String });
+    render(<TextField name="x" autoComplete="off" />, {
+      x: String,
+    });
 
     expect(screen.getByRole('textbox')).toHaveAttribute('autocomplete', 'off');
   });
@@ -45,7 +47,9 @@ export function testTextField(TextField: ComponentType<any>) {
 
   test('<TextField> - renders an input with correct placeholder', () => {
     const placeholder = 'y';
-    render(<TextField name="x" placeholder={placeholder} />, { x: String });
+    render(<TextField name="x" placeholder={placeholder} />, {
+      x: String,
+    });
 
     expect(screen.getByRole('textbox')).toHaveAttribute(
       'placeholder',
