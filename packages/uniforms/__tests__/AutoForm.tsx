@@ -68,7 +68,7 @@ describe('<AutoForm />', () => {
         <AutoForm
           // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
           name="form"
-          onChange={onChangeModel}
+          onChangeModel={onChangeModel}
           schema={schema}
         />,
       );
