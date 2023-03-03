@@ -62,7 +62,6 @@ function Bool(props: BoolFieldProps) {
             {...omit(filterDOMProps(props), ['helperText', 'fullWidth'])}
           />
         }
-        // @ts-expect-error TODO
         label={transform ? transform(label as string) : label}
       />
     </FormGroup>,
