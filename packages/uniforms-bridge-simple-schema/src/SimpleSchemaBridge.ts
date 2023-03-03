@@ -121,8 +121,9 @@ export default class SimpleSchemaBridge extends Bridge {
 
     type OptionList = Option<unknown>[];
     type Options = OptionList | (() => OptionList);
-    let options: Options = props.options;
-    let allowedValues: unknown[] | (() => unknown[]) = props.allowedValues;
+    let options: Options | undefined = props.options;
+    let allowedValues: unknown[] | (() => unknown[]) | undefined =
+      props.allowedValues;
 
     if (typeof options === 'function') {
       options = options();

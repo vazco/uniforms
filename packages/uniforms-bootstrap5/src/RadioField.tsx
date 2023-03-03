@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import React from 'react';
-import { connectField, HTMLFieldProps } from 'uniforms';
+import { connectField, HTMLFieldProps, Option } from 'uniforms';
 
 import wrapField from './wrapField';
 
@@ -14,7 +14,7 @@ export type RadioFieldProps = HTMLFieldProps<
   string,
   HTMLDivElement,
   {
-    allowedValues?: string[];
+    options?: Option<string>[];
     inline?: boolean;
     inputClassName?: string;
     transform?: (value: string) => string;
@@ -24,9 +24,9 @@ export type RadioFieldProps = HTMLFieldProps<
 function Radio(props: RadioFieldProps) {
   return wrapField(
     props,
-    props.allowedValues?.map(item => (
+    props.options?.map(item => (
       <div
-        key={item}
+        key={item.key}
         className={classnames(props.inputClassName, 'form-check', {
           'text-danger': props.error,
           'text-success': !props.error && props.changed,
@@ -34,23 +34,23 @@ function Radio(props: RadioFieldProps) {
         })}
       >
         <label
-          htmlFor={`${props.id}-${escape(item)}`}
+          htmlFor={`${props.id}-${escape(item.key)}`}
           className="form-check-label"
         >
           <input
-            checked={item === props.value}
+            checked={item.value === props.value}
             className="form-check-input"
             disabled={props.disabled}
-            id={`${props.id}-${escape(item)}`}
+            id={`${props.id}-${escape(item.key)}`}
             name={props.name}
             onChange={() => {
               if (!props.readOnly) {
-                props.onChange(item);
+                props.onChange(item.value);
               }
             }}
             type="radio"
           />{' '}
-          {props.transform ? props.transform(item) : item}
+          {item.label}
         </label>
       </div>
     )),

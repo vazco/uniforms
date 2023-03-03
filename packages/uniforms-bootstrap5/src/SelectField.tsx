@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import xor from 'lodash/xor';
 import React, { Ref } from 'react';
-import { connectField, HTMLFieldProps } from 'uniforms';
+import { connectField, HTMLFieldProps, Option } from 'uniforms';
 
 import wrapField from './wrapField';
 
@@ -15,9 +15,8 @@ export type SelectFieldProps = HTMLFieldProps<
   string | string[],
   HTMLDivElement,
   {
-    allowedValues?: string[];
+    options?: Option<string>[];
     checkboxes?: boolean;
-    disableItem?: (value: string) => boolean;
     inline?: boolean;
     inputClassName?: string;
     inputRef?: Ref<HTMLSelectElement>;
@@ -26,9 +25,8 @@ export type SelectFieldProps = HTMLFieldProps<
 >;
 
 function Select({
-  allowedValues,
+  options,
   checkboxes,
-  disableItem,
   disabled,
   error,
   fieldType,
@@ -42,7 +40,6 @@ function Select({
   placeholder,
   readOnly,
   required,
-  transform,
   value,
   ...props
 }: SelectFieldProps) {
@@ -57,28 +54,30 @@ function Select({
       required,
     },
     checkboxes ? (
-      allowedValues?.map(item => (
+      options?.map(item => (
         <div
-          key={item}
+          key={item.key}
           className={classnames(
             inputClassName,
             `form-check${inline ? ' form-check-inline' : ''}`,
           )}
         >
-          <label htmlFor={`${id}-${escape(item)}`}>
+          <label htmlFor={`${id}-${escape(item.key)}`}>
             <input
-              checked={multiple ? value?.includes(item) : value === item}
-              disabled={disableItem?.(item) || disabled}
-              id={`${id}-${escape(item)}`}
+              checked={
+                multiple ? value?.includes(item.value) : value === item.value
+              }
+              disabled={item.disabled || disabled}
+              id={`${id}-${escape(item.key)}`}
               name={name}
               onChange={() => {
                 if (!readOnly) {
-                  onChange(multiple ? xor([item], value) : item);
+                  onChange(multiple ? xor([item.value], value) : item.value);
                 }
               }}
               type="checkbox"
             />
-            {transform ? transform(item) : item}
+            {item.label}
           </label>
         </div>
       ))
@@ -112,13 +111,13 @@ function Select({
           </option>
         )}
 
-        {allowedValues?.map(allowedValue => (
+        {options?.map(option => (
           <option
-            disabled={disableItem?.(allowedValue)}
-            key={allowedValue}
-            value={allowedValue}
+            disabled={option.disabled}
+            key={option.key}
+            value={option.value}
           >
-            {transform ? transform(allowedValue) : allowedValue}
+            {option.label}
           </option>
         ))}
       </select>
