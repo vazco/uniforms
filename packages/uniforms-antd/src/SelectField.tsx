@@ -6,7 +6,7 @@ import { RadioGroupProps } from 'antd/lib/radio';
 import RadioGroup from 'antd/lib/radio/group';
 import SelectAntD, { SelectProps as SelectAntDProps } from 'antd/lib/select';
 import React, { Ref } from 'react';
-import { FieldProps, connectField, filterDOMProps } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps, Option } from 'uniforms';
 
 import wrapField from './wrapField';
 
@@ -14,12 +14,10 @@ type CheckboxesProps = FieldProps<
   SelectFieldValue,
   CheckboxGroupProps | RadioGroupProps,
   {
-    allowedValues?: CheckboxValueType[];
+    options?: Option<CheckboxValueType>[];
     checkboxes: true;
-    disableItem?: (value: CheckboxValueType) => boolean;
     inputRef?: Ref<typeof CheckboxGroup | typeof RadioGroup>;
     required?: boolean;
-    transform?: (value: CheckboxValueType) => string;
   }
 >;
 
@@ -27,12 +25,10 @@ type SelectProps = FieldProps<
   SelectFieldValue,
   SelectAntDProps<string | string[]>,
   {
-    allowedValues?: string[];
+    options?: Option<string>[];
     checkboxes?: false;
-    disableItem?: (value: CheckboxValueType) => boolean;
     inputRef?: Ref<typeof SelectAntD>;
     required?: boolean;
-    transform?: (value: string) => string;
   }
 >;
 
@@ -61,11 +57,7 @@ function Select(props: SelectFieldProps) {
             );
           }
         }}
-        options={props.allowedValues!.map(value => ({
-          disabled: props.disableItem?.(value),
-          label: props.transform ? props.transform(value) : value,
-          value,
-        }))}
+        options={props.options}
         value={props.value}
         {...filterDOMProps(props)}
       />
@@ -92,13 +84,13 @@ function Select(props: SelectFieldProps) {
         }
         {...filterDOMProps(props)}
       >
-        {props.allowedValues?.map(value => (
+        {props.options?.map(option => (
           <SelectAntD.Option
-            disabled={props.disableItem?.(value)}
-            key={value}
-            value={value}
+            disabled={option.disabled}
+            key={option.key}
+            value={option.value}
           >
-            {props.transform ? props.transform(value) : value}
+            {option.label}
           </SelectAntD.Option>
         ))}
       </SelectAntD>

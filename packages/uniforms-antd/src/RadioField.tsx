@@ -1,13 +1,13 @@
 import RadioAntD, { RadioProps } from 'antd/lib/radio';
 import React from 'react';
-import { FieldProps, connectField, filterDOMProps } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps, Option } from 'uniforms';
 
 import wrapField from './wrapField';
 
 export type RadioFieldProps = FieldProps<
   string,
   RadioProps,
-  { allowedValues?: string[]; transform?: (value: string) => string }
+  { options?: Option<string>[] }
 >;
 
 const radioStyle = { display: 'block' };
@@ -26,9 +26,9 @@ function Radio(props: RadioFieldProps) {
       value={props.value ?? ''}
       {...filterDOMProps(props)}
     >
-      {props.allowedValues?.map(value => (
-        <RadioAntD key={value} style={radioStyle} value={value}>
-          {props.transform ? props.transform(value) : value}
+      {props.options?.map(option => (
+        <RadioAntD key={option.key} style={radioStyle} value={option.value}>
+          {option.label}
         </RadioAntD>
       ))}
     </RadioAntD.Group>,
