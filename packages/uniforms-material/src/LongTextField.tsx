@@ -1,5 +1,5 @@
-import { useTheme } from '@material-ui/core';
 import TextField, { TextFieldProps } from '@material-ui/core/TextField';
+import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 

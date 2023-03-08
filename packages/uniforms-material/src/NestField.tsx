@@ -1,5 +1,5 @@
-import { useTheme } from '@material-ui/core';
 import FormLabel from '@material-ui/core/FormLabel';
+import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import { connectField, HTMLFieldProps } from 'uniforms';
 

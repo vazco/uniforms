@@ -1,4 +1,3 @@
-import { useTheme } from '@material-ui/core';
 import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -9,6 +8,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import { SelectProps as MaterialSelectProps } from '@material-ui/core/Select';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
 import TextField, { TextFieldProps } from '@material-ui/core/TextField';
+import useTheme from '@material-ui/core/styles/useTheme';
 import omit from 'lodash/omit';
 import xor from 'lodash/xor';
 import React, { Ref } from 'react';

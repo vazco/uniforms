@@ -1,4 +1,5 @@
 import { fireEvent, screen } from '@testing-library/react';
+import omit from 'lodash/omit';
 import React, { ReactNode } from 'react';
 import SimpleSchema from 'simpl-schema';
 import { AutoForm, connectField, Context, context } from 'uniforms';
@@ -39,6 +40,7 @@ describe('<AutoForm />', () => {
       expect(onChange).toHaveBeenCalledTimes(4);
       expect(onChange).toHaveBeenLastCalledWith('a', '2');
     });
+
     it('validates', () => {
       render(
         <AutoForm
@@ -65,21 +67,21 @@ describe('<AutoForm />', () => {
     });
 
     it('calls `onChangeModel`', () => {
+      const schema = new SimpleSchema({ a: { type: String, optional: true } });
+      const bridge = new SimpleSchema2Bridge(schema);
       render(
-        <AutoForm
-          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
-          name="form"
-          onChangeModel={onChangeModel}
-          schema={schema}
-        />,
+        <AutoForm onChangeModel={onChangeModel} schema={bridge}>
+          <AutoFields />
+        </AutoForm>,
       );
 
-      const form = screen.getByRole('form');
-      fireEvent.change(form, onChangeModel({ a: '2' }));
+      const input = screen.getByLabelText('A');
+      fireEvent.change(input, { target: { value: 'a' } });
 
       expect(onChangeModel).toHaveBeenCalledTimes(1);
-      expect(onChangeModel).toHaveBeenLastCalledWith({ a: '2' });
+      expect(onChangeModel).toHaveBeenLastCalledWith({ a: 'a' });
     });
+
     it('updates `changed` and `changedMap`', () => {
       render(
         <AutoForm schema={schema}>
@@ -97,6 +99,7 @@ describe('<AutoForm />', () => {
       );
     });
   });
+
   describe('when render', () => {
     it('calls `onChange` before render', () => {
       const field = () => null;
@@ -107,15 +110,19 @@ describe('<AutoForm />', () => {
         getAutoField() {
           return Field;
         }
+
+        getNativeFormProps() {
+          return omit(super.getNativeFormProps(), 'autoField');
+        }
       }
 
       render(
         // @ts-expect-error Convoluted AutoForm types
         <CustomAutoForm
-          onChange={onChange}
-          schema={schema}
           autoField={Field}
           model={model}
+          onChange={onChange}
+          schema={schema}
         />,
       );
 
@@ -123,6 +130,7 @@ describe('<AutoForm />', () => {
       expect(onChange.mock.calls[0]).toEqual(expect.arrayContaining(['b', '']));
       expect(onChange.mock.calls[1]).toEqual(expect.arrayContaining(['c', '']));
     });
+
     it('skips `onSubmit` until rendered (`autosave` = true)', async () => {
       render(
         <AutoForm autosave onSubmit={onSubmit} schema={schema}>
@@ -144,30 +152,55 @@ describe('<AutoForm />', () => {
 
   describe('when reset', () => {
     it('reset `model`', () => {
-      const Component = () => (
-        <AutoForm autosave model={model} schema={schema}>
+      const schema = new SimpleSchema({ a: { type: String, optional: true } });
+      const bridge = new SimpleSchema2Bridge(schema);
+      render(
+        <AutoForm schema={bridge}>
           <context.Consumer children={contextSpy} />
-        </AutoForm>
+          <AutoFields />
+        </AutoForm>,
       );
-      const { rerender } = render(<Component />, schemaDefinition);
-
-      rerender(<Component />);
 
       expect(contextSpy).toHaveBeenLastCalledWith(
-        expect.objectContaining({ model }),
+        expect.objectContaining({ model: {} }),
+      );
+
+      const input = screen.getByLabelText('A');
+      fireEvent.change(input, { target: { value: 'a' } });
+
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ model: { a: 'a' } }),
+      );
+
+      contextSpy.mock.calls.slice(-1)[0][0]?.formRef.reset();
+
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ model: {} }),
       );
     });
 
     it('resets state `changedMap`', () => {
-      const Component = () => (
-        <AutoForm autosave model={model} schema={schema}>
+      const schema = new SimpleSchema({ a: { type: String, optional: true } });
+      const bridge = new SimpleSchema2Bridge(schema);
+      render(
+        <AutoForm schema={bridge}>
           <context.Consumer children={contextSpy} />
-        </AutoForm>
+          <AutoFields />
+        </AutoForm>,
       );
 
-      const { rerender } = render(<Component />, schemaDefinition);
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ changedMap: {} }),
+      );
 
-      rerender(<Component />);
+      const input = screen.getByLabelText('A');
+      fireEvent.change(input, { target: { value: 'a' } });
+
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ changedMap: { a: {} } }),
+      );
+
+      contextSpy.mock.calls.slice(-1)[0][0]?.formRef.reset();
 
       expect(contextSpy).toHaveBeenLastCalledWith(
         expect.objectContaining({ changedMap: {} }),
@@ -175,20 +208,34 @@ describe('<AutoForm />', () => {
     });
 
     it('resets state `changed`', () => {
-      const Component = () => (
-        <AutoForm autosave model={model} schema={schema}>
+      const schema = new SimpleSchema({ a: { type: String, optional: true } });
+      const bridge = new SimpleSchema2Bridge(schema);
+      render(
+        <AutoForm schema={bridge}>
           <context.Consumer children={contextSpy} />
-        </AutoForm>
+          <AutoFields />
+        </AutoForm>,
       );
-      const { rerender } = render(<Component />, schemaDefinition);
 
-      rerender(<Component />);
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ changed: false }),
+      );
+
+      const input = screen.getByLabelText('A');
+      fireEvent.change(input, { target: { value: 'a' } });
+
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ changed: true }),
+      );
+
+      contextSpy.mock.calls.slice(-1)[0][0]?.formRef.reset();
 
       expect(contextSpy).toHaveBeenLastCalledWith(
         expect.objectContaining({ changed: false }),
       );
     });
   });
+
   describe('when update', () => {
     it('<AutoForm />, updates', () => {
       const { rerenderWithProps } = render(
