@@ -11,7 +11,7 @@ import {
 
 export type ListAddFieldProps = HTMLFieldProps<
   unknown,
-  HTMLDivElement,
+  HTMLButtonElement,
   { addIcon?: ReactNode }
 >;
 
@@ -32,30 +32,24 @@ function ListAdd({
     { absoluteName: true },
   )[0];
 
-  const limitNotReached =
-    !disabled && !(parent.maxCount! <= parent.value!.length);
-
-  function onAction(event: React.KeyboardEvent | React.MouseEvent) {
-    if (
-      limitNotReached &&
-      !readOnly &&
-      (!('key' in event) || event.key === 'Enter')
-    ) {
+  disabled ||= readOnly || parent.maxCount! <= parent.value!.length;
+  function onAction() {
+    if (!disabled) {
       parent.onChange(parent.value!.concat([cloneDeep(value)]));
     }
   }
 
   return (
-    <div
+    <button
       {...filterDOMProps(props)}
-      className={classnames('badge rounded-pill float-end', className)}
+      className={classnames('btn btn-secondary btn-sm float-end', className)}
+      disabled={disabled}
       onClick={onAction}
-      onKeyDown={onAction}
-      role="button"
       tabIndex={0}
+      type="button"
     >
       {addIcon}
-    </div>
+    </button>
   );
 }
 
