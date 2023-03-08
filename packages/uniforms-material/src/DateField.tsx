@@ -8,16 +8,8 @@ type DateFieldType = 'date' | 'datetime-local';
 /* istanbul ignore next */
 const DateConstructor = (typeof global === 'object' ? global : window).Date;
 
-const dateFormat = (
-  value?: Date | string,
-  type: DateFieldType = 'datetime-local',
-) =>
-  value
-    ? (typeof value === 'string' ? value : value?.toISOString()).slice(
-        0,
-        type === 'datetime-local' ? -8 : -14,
-      )
-    : '';
+const dateFormat = (value?: Date, type: DateFieldType = 'datetime-local') =>
+  value?.toISOString().slice(0, type === 'datetime-local' ? -8 : -14);
 
 const dateParse = (timestamp: number, onChange: DateFieldProps['onChange']) => {
   const date = new DateConstructor(timestamp);
@@ -32,9 +24,9 @@ export type DateFieldProps = FieldProps<
   Date,
   TextFieldProps,
   {
+    labelProps?: object;
     max?: Date;
     min?: Date;
-    labelProps?: object;
     type?: 'date' | 'datetime-local';
   }
 >;
@@ -71,9 +63,9 @@ function Date({
       label={label}
       InputLabelProps={{ shrink: true, ...labelProps, ...InputLabelProps }}
       inputProps={{
-        readOnly,
-        min: dateFormat(min),
         max: dateFormat(max),
+        min: dateFormat(min),
+        readOnly,
         ...props.inputProps,
       }}
       margin={themeProps?.margin ?? 'dense'}
