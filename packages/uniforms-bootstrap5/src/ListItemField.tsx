@@ -12,12 +12,12 @@ export type ListItemFieldProps = {
 };
 
 function ListItem({
-  children = <AutoField className="col-11" label={null} name="" />,
+  children = <AutoField className="col" label={null} name="" />,
   removeIcon,
 }: ListItemFieldProps) {
   return (
     <div className="row">
-      <div className="col-1">
+      <div className="col-auto">
         <ListDelField name="" removeIcon={removeIcon} />
       </div>
       {children}
