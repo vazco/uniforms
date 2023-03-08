@@ -1,92 +1,103 @@
-import React from 'react';
+import { fireEvent, screen } from '@testing-library/react';
+import React, { ReactNode } from 'react';
 import SimpleSchema from 'simpl-schema';
-import { AutoForm, connectField } from 'uniforms';
+import { AutoForm, connectField, Context, context } from 'uniforms';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
+import { AutoFields } from 'uniforms-unstyled';
 
-import mount from './_mount';
+import { render } from '../__suites__';
 
-describe('AutoForm', () => {
-  const onChangeModel = jest.fn();
-  const validator = jest.fn();
+describe('<AutoForm />', () => {
   const onChange = jest.fn();
+  const onChangeModel = jest.fn();
   const onSubmit = jest.fn();
+  const validator = jest.fn();
+  const contextSpy = jest.fn<ReactNode, [Context<any> | null]>();
   const model = { a: '1' };
-  const schema = new SimpleSchema2Bridge(
-    new SimpleSchema({
-      a: { type: String, defaultValue: '' },
-      b: { type: String, defaultValue: '' },
-      c: { type: String, defaultValue: '' },
-    }),
-  );
+  const schemaDefinition = {
+    a: { type: String, defaultValue: '' },
+    b: { type: String, defaultValue: '' },
+    c: { type: String, defaultValue: '' },
+  };
+  const schema = new SimpleSchema2Bridge(new SimpleSchema(schemaDefinition));
+
   jest.spyOn(schema.schema, 'validator').mockImplementation(() => validator);
 
-  beforeEach(() => {
-    onChange.mockClear();
-    onChangeModel.mockClear();
-    onSubmit.mockClear();
-    validator.mockClear();
-  });
+  beforeEach(() => jest.clearAllMocks());
 
   describe('when changed', () => {
     it('updates', () => {
-      // FIXME: AutoForm is not a valid Component.
-      const wrapper = mount<AutoForm | any>(
-        <AutoForm onChange={onChange} schema={schema} />,
+      render(
+        <AutoForm onChange={onChange} schema={schema}>
+          <AutoFields />
+        </AutoForm>,
+        schemaDefinition,
+        { onChange },
       );
-
-      wrapper.instance().getContext().onChange('a', '2');
-
-      expect(onChange).toHaveBeenCalledTimes(1);
+      const input = screen.getByLabelText('A');
+      fireEvent.change(input, { target: { value: '2' } });
+      expect(onChange).toHaveBeenCalledTimes(4);
       expect(onChange).toHaveBeenLastCalledWith('a', '2');
     });
-
     it('validates', () => {
-      // FIXME: AutoForm is not a valid Component.
-      const wrapper = mount<AutoForm | any>(
-        <AutoForm onChange={onChange} schema={schema} />,
+      render(
+        <AutoForm
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+          name="form"
+          onChange={onChange}
+          schema={schema}
+        >
+          <AutoFields />
+        </AutoForm>,
       );
 
-      wrapper.instance().submit();
+      const form = screen.getByRole('form');
+      const input = screen.getByLabelText('A');
+      fireEvent.submit(form);
 
       expect(validator).toHaveBeenCalledTimes(1);
-      expect(validator).toHaveBeenLastCalledWith({});
+      expect(validator).toHaveBeenLastCalledWith({ a: '', b: '', c: '' });
 
-      wrapper.instance().getContext().onChange('a', '1');
+      fireEvent.change(input, { target: { value: '2' } });
 
       expect(validator).toHaveBeenCalledTimes(2);
-      expect(validator).toHaveBeenLastCalledWith({ a: '1' });
+      expect(validator).toHaveBeenLastCalledWith({ a: '2', b: '', c: '' });
     });
 
     it('calls `onChangeModel`', () => {
-      // FIXME: AutoForm is not a valid Component.
-      const wrapper = mount<AutoForm | any>(
-        <AutoForm onChangeModel={onChangeModel} schema={schema} />,
+      render(
+        <AutoForm
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+          name="form"
+          onChangeModel={onChangeModel}
+          schema={schema}
+        />,
       );
 
-      wrapper.instance().getContext().onChange('a', '2');
+      const form = screen.getByRole('form');
+      fireEvent.change(form, onChangeModel({ a: '2' }));
 
       expect(onChangeModel).toHaveBeenCalledTimes(1);
       expect(onChangeModel).toHaveBeenLastCalledWith({ a: '2' });
     });
-
     it('updates `changed` and `changedMap`', () => {
-      // FIXME: AutoForm is not a valid Component.
-      const wrapper = mount<AutoForm | any>(<AutoForm schema={schema} />);
+      render(
+        <AutoForm schema={schema}>
+          <context.Consumer children={contextSpy} />
+          <AutoFields />
+        </AutoForm>,
+        schemaDefinition,
+      );
 
-      const context1 = wrapper.instance().getContext();
-      expect(context1).toHaveProperty('changed', false);
-      expect(context1).toHaveProperty('changedMap', {});
-
-      wrapper.instance().getContext().onChange('a', '2');
-
-      const context2 = wrapper.instance().getContext();
-      expect(context2).toHaveProperty('changed', true);
-      expect(context2).toHaveProperty('changedMap.a');
-      expect(context2.changedMap.a).toBeTruthy();
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({
+          changed: true,
+          changedMap: { a: {}, b: {}, c: {} },
+        }),
+      );
     });
   });
-
-  describe('when rendered', () => {
+  describe('when render', () => {
     it('calls `onChange` before render', () => {
       const field = () => null;
       const Field = connectField(field);
@@ -98,14 +109,13 @@ describe('AutoForm', () => {
         }
       }
 
-      // FIXME: AutoForm is not a valid Component.
-      mount<CustomAutoForm | any>(
+      render(
         // @ts-expect-error Convoluted AutoForm types
         <CustomAutoForm
-          autoField={Field}
-          model={model}
           onChange={onChange}
           schema={schema}
+          autoField={Field}
+          model={model}
         />,
       );
 
@@ -113,71 +123,91 @@ describe('AutoForm', () => {
       expect(onChange.mock.calls[0]).toEqual(expect.arrayContaining(['b', '']));
       expect(onChange.mock.calls[1]).toEqual(expect.arrayContaining(['c', '']));
     });
-
     it('skips `onSubmit` until rendered (`autosave` = true)', async () => {
-      // FIXME: AutoForm is not a valid Component.
-      const wrapper = mount<AutoForm | any>(
-        <AutoForm autosave onSubmit={onSubmit} schema={schema} />,
+      render(
+        <AutoForm autosave onSubmit={onSubmit} schema={schema}>
+          <AutoFields />
+        </AutoForm>,
       );
 
       expect(onSubmit).not.toBeCalled();
-      wrapper.instance().getContext().onChange('a', 1);
+      const input = screen.getByLabelText('A');
+      fireEvent.change(input, { target: { value: '1' } });
 
       await new Promise(resolve => setTimeout(resolve));
-
       expect(onSubmit).toHaveBeenCalledTimes(1);
-      expect(onSubmit).toHaveBeenLastCalledWith({ a: 1 });
+      expect(onSubmit).toHaveBeenLastCalledWith({ a: '1', b: '', c: '' });
       expect(validator).toHaveBeenCalledTimes(1);
-      expect(validator).toHaveBeenLastCalledWith({ a: 1 });
+      expect(validator).toHaveBeenLastCalledWith({ a: '1', b: '', c: '' });
     });
   });
 
   describe('when reset', () => {
     it('reset `model`', () => {
-      // FIXME: AutoForm is not a valid Component.
-      const wrapper = mount<AutoForm | any>(
-        <AutoForm autosave model={model} schema={schema} />,
+      const Component = () => (
+        <AutoForm autosave model={model} schema={schema}>
+          <context.Consumer children={contextSpy} />
+        </AutoForm>
       );
+      const { rerender } = render(<Component />, schemaDefinition);
 
-      wrapper.instance().reset();
-      expect(wrapper.instance().getContext().model).toEqual(model);
+      rerender(<Component />);
+
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ model }),
+      );
     });
 
     it('resets state `changedMap`', () => {
-      // FIXME: AutoForm is not a valid Component.
-      const wrapper = mount<AutoForm | any>(
-        <AutoForm autosave model={model} onSubmit={onSubmit} schema={schema} />,
+      const Component = () => (
+        <AutoForm autosave model={model} schema={schema}>
+          <context.Consumer children={contextSpy} />
+        </AutoForm>
       );
 
-      wrapper.instance().reset();
-      expect(wrapper.instance().getContext().changedMap).toEqual({});
+      const { rerender } = render(<Component />, schemaDefinition);
+
+      rerender(<Component />);
+
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ changedMap: {} }),
+      );
     });
 
     it('resets state `changed`', () => {
-      // FIXME: AutoForm is not a valid Component.
-      const wrapper = mount<AutoForm | any>(
-        <AutoForm autosave model={model} onSubmit={onSubmit} schema={schema} />,
+      const Component = () => (
+        <AutoForm autosave model={model} schema={schema}>
+          <context.Consumer children={contextSpy} />
+        </AutoForm>
       );
+      const { rerender } = render(<Component />, schemaDefinition);
 
-      wrapper.instance().reset();
-      expect(wrapper.instance().getContext().changed).toEqual(false);
+      rerender(<Component />);
+
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ changed: false }),
+      );
     });
   });
+  describe('when update', () => {
+    it('<AutoForm />, updates', () => {
+      const { rerenderWithProps } = render(
+        <AutoForm schema={schema}>
+          <context.Consumer children={contextSpy} />
+        </AutoForm>,
+        schemaDefinition,
+      );
 
-  describe('when updated', () => {
-    it('updates', () => {
-      // FIXME: AutoForm is not a valid Component.
-      const wrapper = mount<AutoForm | any>(<AutoForm schema={schema} />);
-
-      wrapper.setProps({ model: {} });
-      expect(wrapper.instance().props.model).toEqual({});
+      rerenderWithProps({ model: {} });
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ model: {} }),
+      );
     });
 
-    it('validates', () => {
-      // FIXME: AutoForm is not a valid Component.
-      const wrapper = mount<AutoForm | any>(<AutoForm schema={schema} />);
+    it('<AutoForm />, validates', () => {
+      const { rerenderWithProps } = render(<AutoForm schema={schema} />);
 
-      wrapper.setProps({ model, validate: 'onChange' });
+      rerenderWithProps({ model, validate: 'onChange' });
       expect(validator).toHaveBeenCalledTimes(1);
     });
   });
