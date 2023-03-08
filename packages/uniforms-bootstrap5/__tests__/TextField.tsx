@@ -189,3 +189,14 @@ test('<TextField> - renders a input with autocomplete turned off', () => {
   expect(wrapper.find('div').at(0).prop('autoComplete')).toBeFalsy();
   expect(wrapper.find('input').prop('autoComplete')).toBe('off');
 });
+
+test('<TextField> - renders a input with minLength and maxLength', () => {
+  const element = <TextField name="x" minLength={1} maxLength={10} />;
+  const wrapper = mount(element, createContext({ x: { type: String } }));
+
+  expect(wrapper.find('div').at(0).prop('minLength')).toBeFalsy();
+  expect(wrapper.find('input').prop('minLength')).toBe(1);
+
+  expect(wrapper.find('div').at(0).prop('maxLength')).toBeFalsy();
+  expect(wrapper.find('input').prop('maxLength')).toBe(10);
+});

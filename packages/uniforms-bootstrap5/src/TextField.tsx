@@ -13,7 +13,7 @@ export type TextFieldProps = HTMLFieldProps<
 
 function Text(props: TextFieldProps) {
   return wrapField(
-    omit(props, ['autoComplete']),
+    omit(props, ['autoComplete', 'minLength', 'maxLength']),
     <input
       autoComplete={props.autoComplete}
       className={classnames(props.inputClassName, 'form-control', {
@@ -25,6 +25,8 @@ function Text(props: TextFieldProps) {
       name={props.name}
       onChange={event => props.onChange(event.target.value)}
       placeholder={props.placeholder}
+      minLength={props.minLength}
+      maxLength={props.maxLength}
       readOnly={props.readOnly}
       ref={props.inputRef}
       type={props.type ?? 'text'}
