@@ -29,7 +29,10 @@ describe('ValidatedForm', () => {
     b: { type: String, defaultValue: '' },
     c: { type: String, defaultValue: '' },
   };
-  const schema = new SimpleSchema2Bridge(new SimpleSchema(schemaDefinition));
+  const schema = new SimpleSchema2Bridge(
+    new SimpleSchema(schemaDefinition),
+    true,
+  );
   jest.spyOn(schema.schema, 'validator').mockImplementation(validatorForSchema);
 
   beforeEach(() => jest.clearAllMocks());
