@@ -31,20 +31,17 @@ function ListDel({
     { absoluteName: true },
   )[0];
 
-  const limitNotReached =
-    !disabled && !(parent.minCount! >= parent.value!.length);
+  disabled ||= readOnly || parent.minCount! >= parent.value!.length;
 
   return (
     <Button
       {...filterDOMProps(props)}
-      disabled={!limitNotReached}
+      disabled={disabled}
       icon={icon}
       onClick={() => {
-        if (!readOnly) {
-          const value = parent.value!.slice();
-          value.splice(nameIndex, 1);
-          parent.onChange(value);
-        }
+        const value = parent.value!.slice();
+        value.splice(nameIndex, 1);
+        parent.onChange(value);
       }}
       shape={shape}
       size={size}
