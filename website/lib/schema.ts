@@ -69,9 +69,8 @@ const propsSchema = new SimpleSchema({
         eval(`(${this.value ?? ''})`);
         return undefined;
       } catch (error) {
-        MessageBox.defaults({
-          messages: { en: { syntax: error.message } },
-        });
+        const message = error instanceof Error ? error.message : String(error);
+        MessageBox.defaults({ messages: { en: { syntax: message } } });
         return 'syntax';
       }
     },

@@ -116,6 +116,7 @@ export default class GraphQLBridge extends Bridge {
       required: isNonNullType(field.type),
       // @ts-expect-error The `extras` should be typed more precisely.
       ...this.extras[nameGeneric],
+      // @ts-expect-error The `extras` should be typed more precisely.
       ...this.extras[nameNormal],
     };
 
