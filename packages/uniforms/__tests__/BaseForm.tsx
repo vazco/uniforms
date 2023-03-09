@@ -162,7 +162,6 @@ describe('BaseForm', () => {
       expect(context2).toHaveProperty('changedMap.$');
       expect(context2.changedMap.$).toBeTruthy();
       expect(context2).toHaveProperty('changedMap.$.1');
-      // @ts-expect-error: Dynamic `changedMap` structure.
       expect(context2.changedMap.$?.[1]).toBeTruthy();
 
       wrapper.instance().getContext().onChange('$', [1]);
@@ -172,7 +171,6 @@ describe('BaseForm', () => {
       expect(context3).toHaveProperty('changedMap.$');
       expect(context3.changedMap.$).toBeTruthy();
       expect(context3).toHaveProperty('changedMap.$.1');
-      // @ts-expect-error: Dynamic `changedMap` structure.
       expect(context3.changedMap.$?.[1]).toBeTruthy();
     });
 

@@ -1,4 +1,5 @@
 import * as semantic from 'uniforms-semantic';
+import * as suites from 'uniforms/__suites__';
 
 it('exports everything', () => {
   expect(semantic).toEqual({
@@ -26,4 +27,14 @@ it('exports everything', () => {
     ValidatedForm: expect.any(Function),
     ValidatedQuickForm: expect.any(Function),
   });
+});
+
+describe('@RTL', () => {
+  suites.testAutoField(semantic.AutoField);
+  suites.testDateField(semantic.DateField);
+  suites.testListDelField(semantic.ListDelField);
+  suites.testListField(semantic.ListField, {
+    getListAddField: screen => screen.getByRole('button'),
+  });
+  suites.testTextField(semantic.TextField);
 });

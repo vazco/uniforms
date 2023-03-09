@@ -1,18 +1,10 @@
 import IconButton from '@mui/material/IconButton';
 import ListSubheader from '@mui/material/ListSubheader';
-import { screen } from '@testing-library/react';
 import React from 'react';
 import { ListAddField, ListField, ListItemField } from 'uniforms-mui';
-import { testListField } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
 import mount from './_mount';
-
-describe('@RTL - ListField tests', () => {
-  testListField(ListField, {
-    addFieldLocator: () => screen.queryByText(/\+/),
-  });
-});
 
 test('<ListField> - works', () => {
   const element = <ListField name="x" />;

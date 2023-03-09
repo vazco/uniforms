@@ -1,27 +1,9 @@
-import { screen } from '@testing-library/react';
 import Tooltip from 'antd/lib/tooltip';
 import React from 'react';
 import { ListAddField, ListField, ListItemField } from 'uniforms-antd';
-import { testListField } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
 import mount from './_mount';
-
-describe('@RTL - ListField tests', () => {
-  testListField(ListField, {
-    addFieldLocator: () => screen.queryAllByRole('img').pop(),
-  });
-
-  test('<ListField> - works', () => {
-    const element = <ListField name="x" />;
-    const wrapper = mount(
-      element,
-      createContext({ x: { type: Array }, 'x.$': { type: String } }),
-    );
-
-    expect(wrapper.find(ListField)).toHaveLength(1);
-  });
-});
 
 test('<ListField> - renders ListAddField', () => {
   const element = <ListField name="x" label="ListFieldLabel" />;
