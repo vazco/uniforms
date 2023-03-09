@@ -134,18 +134,19 @@ describe('connectField', () => {
       ['Props', '', 'Props'],
       ['Props', 'Schema', 'Props'],
       ['Props', labelB, 'Props'],
-      [false, '', ''],
-      [false, 'Schema', ''],
-      [false, labelB, ''],
+      ['Props', undefined, 'Props'],
+      ['', undefined, ''],
+      ['', 'Schema', ''],
+      ['', labelB, ''],
+      ['', undefined, ''],
       [labelA, '', labelA],
       [labelA, 'Schema', labelA],
       [labelA, labelB, labelA],
-      [true, '', ''],
-      [true, 'Schema', 'Schema'],
-      [true, labelB, labelB],
+      [labelA, undefined, labelA],
       [undefined, '', ''],
       [undefined, 'Schema', 'Schema'],
       [undefined, labelB, labelB],
+      [undefined, undefined, ''],
     ] as [ReactNode, ReactNode, ReactNode][])(
       'resolves it correctly (%#)',
       (prop, schema, result) => {
@@ -188,14 +189,14 @@ describe('connectField', () => {
   it('works with nested labels', () => {
     const Field = connectField(Test);
     const wrapper = mount(
-      <Field name="field" label={null}>
+      <Field name="field" label="">
         <Field name="" />
         <Field name="subfield" label="Other">
           <Field name="" />
         </Field>
-        <Field name="subfield" label={false}>
+        <Field name="subfield">
           <Field name="">
-            <Field name="" label />
+            <Field name="" />
           </Field>
         </Field>
       </Field>,

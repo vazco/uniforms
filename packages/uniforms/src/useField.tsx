@@ -1,32 +1,10 @@
 import get from 'lodash/get';
 import mapValues from 'lodash/mapValues';
-import { ReactNode, useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { joinName } from './joinName';
 import { GuaranteedProps, UnknownObject } from './types';
 import { useForm } from './useForm';
-
-function propagate(
-  prop: ReactNode,
-  schema: ReactNode,
-  fallback: ReactNode,
-): [ReactNode, ReactNode] {
-  const forcedFallbackInProp = prop === true || prop === undefined;
-  const forcedFallbackInSchema = schema === true || schema === undefined;
-
-  const schemaValue = forcedFallbackInSchema ? fallback : schema;
-  const value =
-    prop === '' ||
-    prop === false ||
-    prop === null ||
-    (forcedFallbackInProp && forcedFallbackInSchema)
-      ? ''
-      : forcedFallbackInProp
-      ? schemaValue
-      : prop;
-
-  return [value, schemaValue];
-}
 
 export function useField<
   // This type has to use `any` to allow any object.
@@ -58,12 +36,7 @@ export function useField<
   const fields = context.schema.getSubfields(name);
   const schemaProps = context.schema.getProps(name);
 
-  const [label] = propagate(
-    props.label,
-    // @ts-expect-error The `schema.getProps` should be typed more precisely.
-    schemaProps.label,
-    '',
-  );
+  const label = props.label ?? schemaProps.label ?? '';
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const id = useMemo(() => context.randomId(), []);
