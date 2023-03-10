@@ -11,10 +11,11 @@ To make use of any schema, uniforms have to create a _bridge_ of it - a unified 
 
 Currently available bridges:
 
-- `GraphQLBridge` in `uniforms-bridge-graphql`
-- `JSONSchemaBridge` in `uniforms-bridge-json-schema`
-- `SimpleSchema2Bridge` in `uniforms-bridge-simple-schema-2`
-- `SimpleSchemaBridge` in `uniforms-bridge-simple-schema`
+- `GraphQLBridge` in `uniforms-bridge-graphql` ([schema documentation](https://graphql.org/))
+- `JSONSchemaBridge` in `uniforms-bridge-json-schema` ([schema documentation](https://json-schema.org/))
+- `SimpleSchema2Bridge` in `uniforms-bridge-simple-schema-2` ([schema documentation](https://github.com/longshotlabs/simpl-schema#readme))
+- `SimpleSchemaBridge` in `uniforms-bridge-simple-schema` ([schema documentation](https://github.com/Meteor-Community-Packages/meteor-simple-schema/blob/master/DOCS.md))
+- `ZodBridge` in `uniforms-bridge-zod` ([schema documentation](https://zod.dev/))
 
 If you see a lot of [`Warning: Unknown props...`](https://fb.me/react-unknown-prop) logs, check if your schema or theme doesn't provide extra props. If so, consider [registering it with `filterDOMProps`](/docs/api-helpers#filterdomprops).
 
@@ -237,4 +238,15 @@ const PersonSchema = new SimpleSchema({
 });
 
 const bridge = new SimpleSchemaBridge(PersonSchema);
+```
+
+## `ZodBridge`
+
+```tsx
+import ZodBridge from 'uniforms-bridge-zod';
+import z from 'zod';
+
+const PersonSchema = z.object({ aboutMe: z.string() });
+
+const bridge = new ZodBridge(PersonSchema);
 ```
