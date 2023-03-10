@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import omit from 'lodash/omit';
 import React from 'react';
-import { connectField, filterDOMProps, HTMLFieldProps } from 'uniforms';
+import { connectField, filterDOMProps, HTMLFieldProps, Option } from 'uniforms';
 
 const base64: (string: string) => string =
   typeof btoa === 'undefined'
@@ -13,14 +13,13 @@ export type RadioFieldProps = HTMLFieldProps<
   string,
   HTMLDivElement,
   {
-    allowedValues?: string[];
+    options?: Option<string>[];
     checkboxes?: boolean;
-    transform?: (value: string) => string;
   }
 >;
 
 function Radio({
-  allowedValues,
+  options,
   className,
   disabled,
   error,
@@ -32,7 +31,6 @@ function Radio({
   readOnly,
   required,
   showInlineError,
-  transform,
   value,
   ...props
 }: RadioFieldProps) {
@@ -47,24 +45,24 @@ function Radio({
         </div>
       )}
 
-      {allowedValues?.map(item => (
-        <div className="field" key={item}>
+      {options?.map(option => (
+        <div className="field" key={option.key}>
           <div className="ui radio checkbox">
             <input
-              checked={item === value}
-              disabled={disabled}
-              id={`${id}-${escape(item)}`}
+              checked={option.value === value}
+              disabled={option.disabled || disabled}
+              id={`${id}-${escape(option.key)}`}
               name={name}
               onChange={() => {
                 if (!readOnly) {
-                  onChange(item);
+                  onChange(option.value);
                 }
               }}
               type="radio"
             />
 
-            <label htmlFor={`${id}-${escape(item)}`}>
-              {transform ? transform(item) : item}
+            <label htmlFor={`${id}-${escape(option.key)}`}>
+              {option.label}
             </label>
           </div>
         </div>
