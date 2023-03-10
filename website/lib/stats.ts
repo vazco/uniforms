@@ -45,29 +45,48 @@ function formatNumber(number: number) {
   return number.toLocaleString('en-US');
 }
 
-function dateRanges(from: Date, to: Date) {
-  function nextMonth(d: Date) {
-    d.setMonth(d.getMonth() + 1);
-    return d;
-  }
+function getLastDayOfYear(date: Date) {
+  const newDate = new Date(date);
+  newDate.setFullYear(newDate.getFullYear() + 1);
+  newDate.setDate(newDate.getDate() - 1);
+  return newDate;
+}
 
+function getYearRange(date: Date) {
+  const lastDayOfMonth = getLastDayOfYear(date);
+  return `${formatDate(date)}:${formatDate(lastDayOfMonth)}`;
+}
+
+function dateRanges(from: Date, to: Date) {
   const dates = [];
   while (from < to) {
-    dates.push(`${formatDate(from)}:${formatDate(nextMonth(from))}`);
+    dates.push(getYearRange(from));
+    from.setFullYear(from.getFullYear() + 1);
   }
-
   return dates;
 }
 
-function getNPMDownloadsInRange(range: string, expires?: number) {
-  return cached(
-    `npm-${range}`,
-    () =>
-      fetch(`https://api.npmjs.org/downloads/point/${range}/uniforms`)
-        .then(response => response.json())
-        .then(({ downloads }) => downloads || 0),
-    expires,
+/**
+ * Queries are limited to at most 18 months of data. The earliest date for which data will be returned is January 10, 2015.
+ * {@link https://github.com/npm/registry/blob/master/docs/download-counts.md#limits See limits}
+ */
+async function fetchNPMDownloadsInRange(range: string) {
+  type NPMResponse = {
+    downloads: number;
+    start: string;
+    end: string;
+    package: string;
+  };
+
+  const response = await fetch(
+    `https://api.npmjs.org/downloads/point/${range}/uniforms`,
   );
+  const { downloads }: NPMResponse = await response.json();
+  return downloads || 0;
+}
+
+function getNPMDownloadsInRange(range: string, expires?: number) {
+  return cached(`npm-${range}`, () => fetchNPMDownloadsInRange(range), expires);
 }
 
 function getNPMDownloads(from: Date, to: Date) {
@@ -112,7 +131,8 @@ export function useStats() {
   }, [stars, forks]);
 
   useEffect(() => {
-    const start = new Date('2016-04-01');
+    const DATE_RANGE_START = '2015-01-01';
+    const start = new Date(DATE_RANGE_START);
     const today = new Date();
 
     getNPMDownloads(start, today).then(downloads =>
