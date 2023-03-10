@@ -2,6 +2,7 @@ import { resolve } from 'path';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
+  esbuild: { target: `node${process.version.slice(1)}` },
   test: {
     alias: [
       {
