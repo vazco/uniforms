@@ -12,9 +12,9 @@ jobs:
         node-version: [14.x, 16.x, 18.x]
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3.3.0
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2.2.0
+        uses: actions/setup-node@v3.6.0
         with:
           cache: npm
           node-version: ${{ matrix.node-version }}
@@ -23,21 +23,20 @@ jobs:
       - name: Check dependency vulnerabilities
         uses: vazco/open-standards/actions/npm-dependency-vulnerabilities/@master
       - name: Install
-        run: npm i -g npm@7 && npm ci
+        run: npm i -g npm@8 --no-audit && npm ci --no-audit
       - name: Lint
         run: npm run lint
       - name: Test
         run: npm run coverage -- --no-cache --runInBand
       - name: Report coverage
-        uses: codecov/codecov-action@v2.1.0
+        uses: codecov/codecov-action@v3.1.1
         with:
           fail_ci_if_error: true
-          verbose: true
       - name: Build docs
         run: npm --prefix website run build
         if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '18.x'
       - name: Deploy docs
-        uses: peaceiris/actions-gh-pages@v3.8.0
+        uses: peaceiris/actions-gh-pages@v3.9.2
         with:
           allow_empty_commit: true
           cname: uniforms.tools

@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Update labels
-        uses: actions/labeler@v4.0.0
+        uses: actions/labeler@v4.0.3
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           sync-labels: true
