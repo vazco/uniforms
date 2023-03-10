@@ -27,7 +27,7 @@ jobs:
       - name: Lint
         run: npm run lint
       - name: Test
-        run: npm run coverage -- --no-cache --runInBand
+        run: npm run coverage
       - name: Report coverage
         uses: codecov/codecov-action@v3.1.1
         with:
