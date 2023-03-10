@@ -8,7 +8,8 @@ export type NumFieldProps = FieldProps<
   number,
   // FIXME: Why `onReset` fails with `wrapField`?
   Omit<InputNumberProps, 'onReset'>,
-  { decimal?: boolean; inputRef?: Ref<typeof InputNumber> }
+  // FIXME: `unknown` ref; see https://github.com/vazco/uniforms/discussions/1230#discussioncomment-5158439
+  { decimal?: boolean; inputRef?: Ref<unknown> }
 >;
 
 function Num(props: NumFieldProps) {
