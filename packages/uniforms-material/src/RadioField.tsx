@@ -5,7 +5,7 @@ import RadioMaterial, { RadioProps } from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import omit from 'lodash/omit';
 import React from 'react';
-import { FieldProps, connectField, filterDOMProps } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps, Option } from 'uniforms';
 
 import wrapField from './wrapField';
 
@@ -13,18 +13,17 @@ export type RadioFieldProps = FieldProps<
   string,
   RadioProps,
   {
-    allowedValues?: string[];
+    options?: Option<string>[];
     checkboxes?: boolean;
     fullWidth?: boolean;
     helperText?: string;
     margin?: PropTypes.Margin;
     row?: boolean;
-    transform?: (value: string) => string;
   }
 >;
 
 function Radio({
-  allowedValues,
+  options,
   disabled,
   id,
   inputRef,
@@ -33,7 +32,6 @@ function Radio({
   onChange,
   readOnly,
   row,
-  transform,
   value,
   ...props
 }: RadioFieldProps) {
@@ -62,16 +60,16 @@ function Radio({
       row={row}
       value={value ?? ''}
     >
-      {allowedValues?.map(item => (
+      {options?.map(item => (
         <FormControlLabel
           control={
             <RadioMaterial
               {...omit(filterDOMProps(props), ['checkboxes', 'helperText'])}
             />
           }
-          key={item}
-          label={transform ? transform(item) : item}
-          value={`${item}`}
+          key={item.key}
+          label={item.label}
+          value={`${item.value}`}
         />
       ))}
     </RadioGroup>,
