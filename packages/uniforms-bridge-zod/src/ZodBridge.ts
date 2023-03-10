@@ -2,7 +2,7 @@ import invariant from 'invariant';
 import lowerCase from 'lodash/lowerCase';
 import memoize from 'lodash/memoize';
 import upperFirst from 'lodash/upperFirst';
-import { Bridge, UnknownObject, joinName } from 'uniforms';
+import { Bridge, UnknownObject, joinName, Option } from 'uniforms';
 import {
   ZodArray,
   ZodBoolean,
@@ -126,8 +126,9 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     return undefined;
   }
 
+  // eslint-disable-next-line complexity
   getProps(name: string) {
-    const props: UnknownObject = {
+    const props: UnknownObject & { options?: Option[] } = {
       label: upperFirst(lowerCase(joinName(null, name).slice(-1)[0])),
       required: true,
     };
@@ -150,11 +151,23 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
         props.minCount = field._def.minLength.value;
       }
     } else if (field instanceof ZodEnum) {
-      props.allowedValues = field.options;
+      props.options = (
+        field.options as ZodEnum<[string]>['options']
+      ).map<Option>(value => ({
+        key: value,
+        label: value,
+        value,
+      }));
     } else if (field instanceof ZodNativeEnum) {
       const values = Object.values(field.enum);
       const nativeValues = values.filter(isNativeEnumValue);
-      props.allowedValues = nativeValues.length ? nativeValues : values;
+      props.options = (nativeValues.length ? nativeValues : values).map(
+        value => ({
+          key: String(value),
+          label: String(value),
+          value,
+        }),
+      );
     } else if (field instanceof ZodNumber) {
       if (!field.isInt) {
         props.decimal = true;
