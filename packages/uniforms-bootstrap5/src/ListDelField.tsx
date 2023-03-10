@@ -32,20 +32,17 @@ function ListDel({
   )[0];
 
   disabled ||= readOnly || parent.minCount! >= parent.value!.length;
-  function onAction() {
-    if (!disabled) {
-      const value = parent.value!.slice();
-      value.splice(nameIndex, 1);
-      parent.onChange(value);
-    }
-  }
 
   return (
     <button
       {...filterDOMProps(props)}
       className={classnames('btn btn-secondary btn-sm', className)}
       disabled={disabled}
-      onClick={onAction}
+      onClick={() => {
+        const value = parent.value!.slice();
+        value.splice(nameIndex, 1);
+        parent.onChange(value);
+      }}
       tabIndex={0}
       type="button"
     >

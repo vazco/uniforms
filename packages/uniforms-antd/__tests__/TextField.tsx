@@ -2,14 +2,12 @@ import { screen } from '@testing-library/react';
 import Input from 'antd/lib/input';
 import React from 'react';
 import { TextField } from 'uniforms-antd';
-import { render, testTextField } from 'uniforms/__suites__';
+import { render } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
 import mount from './_mount';
 
 describe('@RTL - TextField tests', () => {
-  testTextField(TextField);
-
   test('<TextField> - renders component with unknown props', () => {
     const props = {
       'data-x': 'x',

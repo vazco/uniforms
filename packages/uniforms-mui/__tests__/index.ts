@@ -1,7 +1,8 @@
-import * as material from 'uniforms-mui';
+import * as mui from 'uniforms-mui';
+import * as suites from 'uniforms/__suites__';
 
 it('exports everything', () => {
-  expect(material).toEqual({
+  expect(mui).toEqual({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),
     AutoForm: expect.any(Function),
@@ -27,4 +28,14 @@ it('exports everything', () => {
     ValidatedQuickForm: expect.any(Function),
     wrapField: expect.any(Function),
   });
+});
+
+describe('@RTL', () => {
+  suites.testAutoField(mui.AutoField);
+  suites.testDateField(mui.DateField);
+  suites.testListDelField(mui.ListDelField);
+  suites.testListField(mui.ListField, {
+    getListAddField: screen => screen.getByText(/\+/),
+  });
+  suites.testTextField(mui.TextField);
 });

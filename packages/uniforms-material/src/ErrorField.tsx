@@ -1,4 +1,4 @@
-import { PropTypes } from '@material-ui/core';
+import type { PropTypes } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText, {
   FormHelperTextProps,

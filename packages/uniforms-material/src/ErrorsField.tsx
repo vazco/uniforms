@@ -1,8 +1,9 @@
-import { useTheme, PropTypes } from '@material-ui/core';
+import type { PropTypes } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText, {
   FormHelperTextProps,
 } from '@material-ui/core/FormHelperText';
+import useTheme from '@material-ui/core/styles/useTheme';
 import React from 'react';
 import { Override, filterDOMProps, useForm } from 'uniforms';
 

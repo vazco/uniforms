@@ -1,5 +1,5 @@
-import { useTheme } from '@material-ui/core';
 import Button, { ButtonProps } from '@material-ui/core/Button';
+import useTheme from '@material-ui/core/styles/useTheme';
 import React, { ReactNode, Ref } from 'react';
 import { Override, filterDOMProps, useForm } from 'uniforms';
 
