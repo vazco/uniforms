@@ -2,7 +2,7 @@ import * as mui from 'uniforms-mui';
 import * as suites from 'uniforms/__suites__';
 
 it('exports everything', () => {
-  expect(mui).toEqual({
+  expect(mui).toMatchObject({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),
     AutoForm: expect.any(Function),

@@ -269,7 +269,7 @@ test('<SelectField> - renders a Select with correct value (specified)', () => {
 });
 
 test('<SelectField> - renders a Select which correctly reacts on change', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <SelectField name="x" />;
   const wrapper = mount(
@@ -287,7 +287,7 @@ test('<SelectField> - renders a Select which correctly reacts on change', () => 
 });
 
 test('<SelectField> - renders a Select which correctly reacts on change (empty)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <SelectField name="x" />;
   const wrapper = mount(
@@ -305,7 +305,7 @@ test('<SelectField> - renders a Select which correctly reacts on change (empty)'
 });
 
 test('<SelectField> - renders a Select which correctly reacts on change (same value)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <SelectField name="x" />;
   const wrapper = mount(
@@ -574,7 +574,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct val
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons which correctly reacts on change', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
@@ -592,7 +592,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons which correctly 
 });
 
 test('<SelectField checkboxes> - renders a set of Checkboxes which correctly reacts on change (array check)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
@@ -612,7 +612,7 @@ test('<SelectField checkboxes> - renders a set of Checkboxes which correctly rea
 });
 
 test('<SelectField checkboxes> - renders a set of Checkboxes which correctly reacts on change (array uncheck)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   const element = <SelectField checkboxes name="x" value={['b']} />;
   const wrapper = mount(
     element,
@@ -631,7 +631,7 @@ test('<SelectField checkboxes> - renders a set of Checkboxes which correctly rea
 });
 
 test('<SelectField checkboxes> - renders a set of Checkboxes with correct labels', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
@@ -650,7 +650,7 @@ test('<SelectField checkboxes> - renders a set of Checkboxes with correct labels
 });
 
 test('<SelectField checkboxes> - renders a set of Checkboxes which correct labels (transform)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   const element = (
     <SelectField checkboxes name="x" transform={x => x.toUpperCase()} />
   );
@@ -671,7 +671,7 @@ test('<SelectField checkboxes> - renders a set of Checkboxes which correct label
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons which correctly reacts on change (same value)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(

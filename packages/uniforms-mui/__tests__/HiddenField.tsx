@@ -63,7 +63,7 @@ test('<HiddenField> - renders an input with correct value (model)', () => {
 });
 
 test('<HiddenField> - renders an input which correctly reacts on model change', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <HiddenField name="x" />;
   const wrapper = mount(
@@ -77,7 +77,7 @@ test('<HiddenField> - renders an input which correctly reacts on model change', 
 });
 
 test('<HiddenField> - renders an input which correctly reacts on model change (empty)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <HiddenField name="x" />;
   const wrapper = mount(
@@ -91,7 +91,7 @@ test('<HiddenField> - renders an input which correctly reacts on model change (e
 });
 
 test('<HiddenField> - renders an input which correctly reacts on model change (same value)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <HiddenField name="x" />;
   const wrapper = mount(
@@ -112,7 +112,7 @@ test('<HiddenField noDOM> - renders nothing', () => {
 });
 
 test('<HiddenField noDOM> - renders nothing which correctly reacts on model change', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <HiddenField noDOM name="x" />;
   const wrapper = mount(
@@ -126,7 +126,7 @@ test('<HiddenField noDOM> - renders nothing which correctly reacts on model chan
 });
 
 test('<HiddenField noDOM> - renders nothing which correctly reacts on model change (empty)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <HiddenField noDOM name="x" />;
   const wrapper = mount(
@@ -140,7 +140,7 @@ test('<HiddenField noDOM> - renders nothing which correctly reacts on model chan
 });
 
 test('<HiddenField noDOM> - renders nothing which correctly reacts on model change (same value)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <HiddenField noDOM name="x" />;
   const wrapper = mount(

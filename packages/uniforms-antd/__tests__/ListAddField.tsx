@@ -6,7 +6,7 @@ import { ListAddField } from 'uniforms-antd';
 import createContext from './_createContext';
 import mount from './_mount';
 
-const onChange = jest.fn();
+const onChange = vi.fn();
 const context = (schema?: object) =>
   createContext(
     merge({ x: { type: Array, maxCount: 3 }, 'x.$': String }, schema),

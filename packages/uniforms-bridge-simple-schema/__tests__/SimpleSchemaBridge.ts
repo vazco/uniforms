@@ -2,8 +2,8 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { UnknownObject } from 'uniforms';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
 
-jest.mock('meteor/aldeed:simple-schema');
-jest.mock('meteor/check');
+vi.mock('meteor/aldeed:simple-schema');
+vi.mock('meteor/check');
 
 describe('SimpleSchemaBridge', () => {
   const noopComponent = () => null;

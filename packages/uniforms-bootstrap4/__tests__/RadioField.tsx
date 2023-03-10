@@ -39,7 +39,7 @@ test('<RadioField> - renders a set of checkboxes with correct disabled state', (
 });
 
 test('<RadioField> - renders a set of checkboxes with correct readOnly state', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <RadioField name="x" readOnly />;
   const wrapper = mount(
@@ -155,7 +155,7 @@ test('<RadioField> - renders a set of checkboxes with correct value (specified)'
 });
 
 test('<RadioField> - renders a set of checkboxes which correctly reacts on change', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <RadioField name="x" />;
   const wrapper = mount(
@@ -172,7 +172,7 @@ test('<RadioField> - renders a set of checkboxes which correctly reacts on chang
 });
 
 test('<RadioField> - renders a set of checkboxes which correctly reacts on change (same value)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <RadioField name="x" />;
   const wrapper = mount(

@@ -104,7 +104,7 @@ export function testTextField(TextField: ComponentType<any>) {
   });
 
   test('<TextField> - renders an input which correctly reacts on change', async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     renderWithZod({
       element: <TextField name="x" />,
       onChange,
@@ -115,7 +115,7 @@ export function testTextField(TextField: ComponentType<any>) {
   });
 
   test('<TextField> - renders an input which correctly reacts on change (empty value)', async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     renderWithZod({
       element: <TextField name="x" />,
       model: { x: 'y' },

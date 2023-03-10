@@ -116,7 +116,7 @@ test('<NumField> - renders an input with correct value (default)', () => {
 });
 
 test('<NumField> - renders an input with correct value (model)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <NumField name="x" />;
   const wrapper = mount(
@@ -128,7 +128,7 @@ test('<NumField> - renders an input with correct value (model)', () => {
   expect(wrapper.find('input').prop('value')).toBe(1);
 
   // NOTE: All following tests are here to cover hacky NumField implementation.
-  const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+  const spy = vi.spyOn(global.console, 'error').mockImplementation(() => {});
 
   [
     { value: 0.1 },
@@ -166,7 +166,7 @@ test('<NumField> - renders an input with correct value (specified)', () => {
 });
 
 test('<NumField> - renders an input which correctly reacts on change', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <NumField name="x" />;
   const wrapper = mount(
@@ -182,7 +182,7 @@ test('<NumField> - renders an input which correctly reacts on change', () => {
 });
 
 test('<NumField> - renders an input which correctly reacts on change (decimal on decimal)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <NumField name="x" decimal />;
   const wrapper = mount(
@@ -198,7 +198,7 @@ test('<NumField> - renders an input which correctly reacts on change (decimal on
 });
 
 test('<NumField> - renders an input which correctly reacts on change (decimal on integer)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <NumField name="x" decimal={false} />;
   const wrapper = mount(
@@ -214,7 +214,7 @@ test('<NumField> - renders an input which correctly reacts on change (decimal on
 });
 
 test('<NumField> - renders an input which correctly reacts on change (empty)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <NumField name="x" />;
   const wrapper = mount(
@@ -230,7 +230,7 @@ test('<NumField> - renders an input which correctly reacts on change (empty)', (
 });
 
 test('<NumField> - renders an input which correctly reacts on change (same value)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <NumField name="x" />;
   const wrapper = mount(
@@ -246,7 +246,7 @@ test('<NumField> - renders an input which correctly reacts on change (same value
 });
 
 test('<NumField> - renders an input which correctly reacts on change (zero)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <NumField name="x" />;
   const wrapper = mount(

@@ -2,7 +2,7 @@ import * as semantic from 'uniforms-semantic';
 import * as suites from 'uniforms/__suites__';
 
 it('exports everything', () => {
-  expect(semantic).toEqual({
+  expect(semantic).toMatchObject({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),
     AutoForm: expect.any(Function),

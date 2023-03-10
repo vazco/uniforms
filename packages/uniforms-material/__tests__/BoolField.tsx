@@ -152,7 +152,7 @@ test('<BoolField> - renders a Checkbox with correct value (specified)', () => {
 });
 
 test('<BoolField> - renders a Checkbox which correctly reacts on change', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <BoolField name="x" />;
   const wrapper = mount(
@@ -267,7 +267,7 @@ test('<BoolField> - renders a Switch with correct value (specified)', () => {
 });
 
 test('<BoolField> - renders a Switch which correctly reacts on change', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <BoolField name="x" appearance="switch" />;
   const wrapper = mount(

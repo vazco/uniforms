@@ -43,7 +43,7 @@ export function testListField(
 
   test('<ListField> - passes itemProps to its children', () => {
     const itemProps = { 'data-xyz': 1 };
-    const Child = jest.fn(() => <div />) as FC<any>;
+    const Child = vi.fn(() => <div />) as FC<any>;
     render(
       <ListField name="x" itemProps={itemProps}>
         <Child />
@@ -59,7 +59,7 @@ export function testListField(
   });
 
   test('<ListField> - renders children (specified)', () => {
-    const Child = jest.fn(() => <div />) as FC<any>;
+    const Child = vi.fn(() => <div />) as FC<any>;
     render(
       <ListField name="x">
         <Child />
@@ -74,7 +74,7 @@ export function testListField(
   });
 
   test('<ListField> - renders children with correct name (children)', () => {
-    const Child = jest.fn(() => <div data-testid="field" />) as FC<any>;
+    const Child = vi.fn(() => <div data-testid="field" />) as FC<any>;
     render(
       <ListField name="x">
         <Child name="$" />
@@ -105,7 +105,7 @@ export function testListField(
   });
 
   test('<ListField> - renders proper number of optional values after add new value', async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <ListField name="x" label="ListFieldLabel" />,
       { x: { type: Array, optional: true }, 'x.$': String },

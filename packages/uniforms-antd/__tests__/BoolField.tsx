@@ -99,7 +99,7 @@ test('<BoolField> - renders a checkbox input with correct disabled state', () =>
 });
 
 test('<BoolField> - renders a switch input with correct readOnly state', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <BoolField name="x" readOnly />;
   const wrapper = mount(
@@ -114,7 +114,7 @@ test('<BoolField> - renders a switch input with correct readOnly state', () => {
 });
 
 test('<BoolField> - renders a checkbox input with correct readOnly state', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <BoolField checkbox name="x" readOnly />;
   const wrapper = mount(
@@ -199,7 +199,7 @@ test('<BoolField> - renders a checkbox input with correct value (specified)', ()
 });
 
 test('<BoolField> - renders a switch input which correctly reacts on change', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <BoolField name="x" />;
   const wrapper = mount(
@@ -214,7 +214,7 @@ test('<BoolField> - renders a switch input which correctly reacts on change', ()
 });
 
 test('<BoolField> - renders a checkbox input which correctly reacts on change', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <BoolField checkbox name="x" />;
   const wrapper = mount(

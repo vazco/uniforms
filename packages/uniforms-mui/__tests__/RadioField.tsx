@@ -135,7 +135,7 @@ test('<RadioField> - renders a RadioGroup with correct value (specified)', () =>
 });
 
 test('<RadioField> - renders a RadioGroup which correctly reacts on change', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <RadioField name="x" />;
   const wrapper = mount(
@@ -153,7 +153,7 @@ test('<RadioField> - renders a RadioGroup which correctly reacts on change', () 
 });
 
 test('<RadioField> - renders a RadioGroup which correctly reacts on change (same value)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <RadioField name="x" />;
   const wrapper = mount(

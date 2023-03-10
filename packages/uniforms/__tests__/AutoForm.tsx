@@ -9,11 +9,11 @@ import { AutoFields } from 'uniforms-unstyled';
 import { render } from '../__suites__';
 
 describe('<AutoForm />', () => {
-  const onChange = jest.fn();
-  const onChangeModel = jest.fn();
-  const onSubmit = jest.fn();
-  const validator = jest.fn();
-  const contextSpy = jest.fn<ReactNode, [Context<any> | null]>();
+  const onChange = vi.fn();
+  const onChangeModel = vi.fn();
+  const onSubmit = vi.fn();
+  const validator = vi.fn();
+  const contextSpy = vi.fn<[Context<any> | null], ReactNode>();
   const model = { a: '1' };
   const schemaDefinition = {
     a: { type: String, defaultValue: '' },
@@ -22,9 +22,11 @@ describe('<AutoForm />', () => {
   };
   const schema = new SimpleSchema2Bridge(new SimpleSchema(schemaDefinition));
 
-  jest.spyOn(schema.schema, 'validator').mockImplementation(() => validator);
+  vi.spyOn(schema.schema, 'validator').mockImplementation(() => validator);
 
-  beforeEach(() => jest.clearAllMocks());
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
 
   describe('when changed', () => {
     it('updates', () => {

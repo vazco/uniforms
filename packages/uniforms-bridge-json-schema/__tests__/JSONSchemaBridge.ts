@@ -219,7 +219,7 @@ describe('JSONSchemaBridge', () => {
     required: ['dateOfBirth', 'nonObjectAnyOfRequired'],
   };
 
-  const validator = jest.fn();
+  const validator = vi.fn();
   const bridge = new JSONSchemaBridge(schema, validator);
 
   describe('#constructor()', () => {
@@ -797,9 +797,8 @@ describe('JSONSchemaBridge', () => {
     });
 
     it('works with anyOf for a non-object computed property (properties not defined)', () => {
-      expect(bridge.getProps('nonObjectAnyOf')).toHaveProperty(
+      expect(bridge.getProps('nonObjectAnyOf')).not.toHaveProperty(
         'properties',
-        undefined,
       );
     });
 

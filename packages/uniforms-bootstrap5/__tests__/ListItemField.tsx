@@ -36,7 +36,7 @@ test('<ListItemField> - renders AutoField', () => {
 });
 
 test('<ListItemField> - renders children if specified', () => {
-  const Child = jest.fn(() => <div />) as React.FC<any>;
+  const Child = vi.fn(() => <div />) as React.FC<any>;
 
   const element = (
     <ListItemField name="x.1">

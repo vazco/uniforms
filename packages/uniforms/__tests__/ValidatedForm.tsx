@@ -15,12 +15,12 @@ import { AutoField } from 'uniforms-unstyled';
 import { render } from '../__suites__';
 
 describe('ValidatedForm', () => {
-  const onChange = jest.fn();
-  const onSubmit = jest.fn();
-  const onValidate = jest.fn((model, error) => error);
-  const validator = jest.fn();
-  const validatorForSchema = jest.fn(() => validator);
-  const contextSpy = jest.fn<ReactNode, [Context<any> | null]>();
+  const onChange = vi.fn();
+  const onSubmit = vi.fn();
+  const onValidate = vi.fn((model, error) => error);
+  const validator = vi.fn();
+  const validatorForSchema = vi.fn(() => validator);
+  const contextSpy = vi.fn<[Context<any> | null], ReactNode>();
 
   const error = new Error();
   const model = { a: 1 };
@@ -30,9 +30,11 @@ describe('ValidatedForm', () => {
     c: { type: String, defaultValue: '' },
   };
   const schema = new SimpleSchema2Bridge(new SimpleSchema(schemaDefinition));
-  jest.spyOn(schema.schema, 'validator').mockImplementation(validatorForSchema);
+  vi.spyOn(schema.schema, 'validator').mockImplementation(validatorForSchema);
 
-  beforeEach(() => jest.clearAllMocks());
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
 
   describe('on validation', () => {
     // FIXME: ValidatedForm is not a valid Component.
@@ -617,11 +619,11 @@ describe('ValidatedForm', () => {
     });
 
     it('uses the new validator if `schema` changes', () => {
-      const alternativeValidator = jest.fn();
+      const alternativeValidator = vi.fn();
       const alternativeSchema = new SimpleSchema2Bridge(schema.schema);
-      jest
-        .spyOn(alternativeSchema, 'getValidator')
-        .mockImplementation(() => alternativeValidator);
+      vi.spyOn(alternativeSchema, 'getValidator').mockImplementation(
+        () => alternativeValidator,
+      );
       const { rerenderWithProps } = render(
         // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm
@@ -700,7 +702,7 @@ describe('ValidatedForm', () => {
       return [a, b, c, d] as const;
     }
 
-    it.each(cases.map(flatPair4))('works for %p/%p/%p/%p', async (...modes) => {
+    it.each(cases.map(flatPair4))('works for %s/%s/%s/%s', async (...modes) => {
       const [hasError, validatorMode, onValidateMode, onSubmitMode] = modes;
 
       render(

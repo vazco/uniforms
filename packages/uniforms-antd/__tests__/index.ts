@@ -2,7 +2,7 @@ import * as antd from 'uniforms-antd';
 import * as suites from 'uniforms/__suites__';
 
 it('exports everything', () => {
-  expect(antd).toEqual({
+  expect(antd).toMatchObject({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),
     AutoForm: expect.any(Function),

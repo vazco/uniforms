@@ -1,5 +1,5 @@
 export const Match = {
-  OneOf: jest.fn(),
-  Optional: jest.fn(),
-  ObjectIncluding: jest.fn(),
+  ObjectIncluding: vi.fn(),
+  OneOf: vi.fn(),
+  Optional: vi.fn(),
 };

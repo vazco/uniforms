@@ -12,7 +12,7 @@ import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 import mount from './_mount';
 
 describe('connectField', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   const schema = new SimpleSchema2Bridge(
     new SimpleSchema({
       another: { type: String, optional: true },
@@ -46,7 +46,7 @@ describe('connectField', () => {
     } as Context<any>,
   };
 
-  const Test = jest.fn(props => props.children || null);
+  const Test = vi.fn(props => props.children || null);
 
   beforeEach(() => {
     Test.mockClear();
@@ -173,9 +173,9 @@ describe('connectField', () => {
           },
         };
 
-        jest
-          .spyOn(context.context.schema, 'getProps')
-          .mockReturnValueOnce({ label: schema });
+        vi.spyOn(context.context.schema, 'getProps').mockReturnValueOnce({
+          label: schema,
+        });
 
         const Field = connectField(Test);
         const wrapper = mount(<Field name="field" label={prop} />, context);

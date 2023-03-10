@@ -52,7 +52,7 @@ test('<BoolField> - renders an input with correct disabled state', () => {
 });
 
 test('<BoolField> - renders an input with correct readOnly state', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <BoolField name="x" readOnly />;
   const wrapper = mount(
@@ -104,7 +104,7 @@ test('<BoolField> - renders a input with correct value (specified)', () => {
 });
 
 test('<BoolField> - renders a input which correctly reacts on change', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <BoolField name="x" />;
   const wrapper = mount(

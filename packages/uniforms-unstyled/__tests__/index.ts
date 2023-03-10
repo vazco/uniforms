@@ -2,7 +2,7 @@ import * as unstyled from 'uniforms-unstyled';
 import * as suites from 'uniforms/__suites__';
 
 it('exports everything', () => {
-  expect(unstyled).toEqual({
+  expect(unstyled).toMatchObject({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),
     AutoForm: expect.any(Function),

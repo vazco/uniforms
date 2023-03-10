@@ -96,7 +96,7 @@ test('<AutoField> - detects BoolField', () => {
 });
 
 test('<AutoField> - uses Component (schema)', () => {
-  const Component = jest.fn(() => null);
+  const Component = vi.fn(() => null);
 
   const element = <AutoField name="x" />;
   mount(
@@ -108,7 +108,7 @@ test('<AutoField> - uses Component (schema)', () => {
 });
 
 test('<AutoField> - uses Component (props)', () => {
-  const Component = jest.fn(() => null);
+  const Component = vi.fn(() => null);
 
   const element = <AutoField name="x" component={Component} />;
   mount(element, createContext({ x: { type: String } }));
@@ -117,8 +117,8 @@ test('<AutoField> - uses Component (props)', () => {
 });
 
 test('<AutoField> - uses Component (context)', () => {
-  const FieldA = jest.fn(() => null);
-  const FieldB = jest.fn(() => null);
+  const FieldA = vi.fn(() => null);
+  const FieldB = vi.fn(() => null);
 
   const element = (
     <AutoField.componentDetectorContext.Provider
@@ -137,7 +137,7 @@ test('<AutoField> - uses Component (context)', () => {
 });
 
 test('<AutoField> - uses Component (invalid)', () => {
-  const spy = jest.spyOn(global.console, 'error').mockImplementation(() => {});
+  const spy = vi.spyOn(global.console, 'error').mockImplementation(() => {});
   expect(() => {
     const element = <AutoField name="x" />;
     mount(element, createContext({ x: { type: Symbol } }));

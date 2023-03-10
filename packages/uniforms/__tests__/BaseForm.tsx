@@ -4,8 +4,8 @@ import { BaseForm, Bridge, Context, useField } from 'uniforms';
 
 import mount from './_mount';
 
-jest.mock('meteor/aldeed:simple-schema');
-jest.mock('meteor/check');
+vi.mock('meteor/aldeed:simple-schema');
+vi.mock('meteor/check');
 
 describe('BaseForm', () => {
   const error = new Error();
@@ -22,8 +22,8 @@ describe('BaseForm', () => {
     getValidator: () => () => {},
   };
 
-  const onChange = jest.fn();
-  const onSubmit = jest.fn();
+  const onChange = vi.fn();
+  const onSubmit = vi.fn();
 
   afterEach(() => {
     onChange.mockClear();
@@ -384,7 +384,7 @@ describe('BaseForm', () => {
     });
 
     it('works when unmounted on submit', () => {
-      const spy = jest.spyOn(console, 'error');
+      const spy = vi.spyOn(console, 'error');
       const wrapper = createWrapper();
       onSubmit.mockImplementationOnce(async () => wrapper.unmount());
       wrapper.find('form').simulate('submit');

@@ -128,7 +128,7 @@ test('<NumField> - renders an InputNumber with correct value (specified)', () =>
 });
 
 test('<NumField> - renders an InputNumber which correctly reacts on change', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <NumField name="x" />;
   const wrapper = mount(
@@ -144,7 +144,7 @@ test('<NumField> - renders an InputNumber which correctly reacts on change', () 
 });
 
 test('<NumField> - renders an InputNumber which correctly reacts on change (decimal on decimal)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <NumField name="x" decimal />;
   const wrapper = mount(
@@ -160,7 +160,7 @@ test('<NumField> - renders an InputNumber which correctly reacts on change (deci
 });
 
 test('<NumField> - renders an InputNumber which correctly reacts on change (decimal on integer)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <NumField name="x" decimal={false} />;
   const wrapper = mount(
@@ -176,7 +176,7 @@ test('<NumField> - renders an InputNumber which correctly reacts on change (deci
 });
 
 test('<NumField> - renders an InputNumber which correctly reacts on change (empty)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <NumField name="x" />;
   const wrapper = mount(
@@ -192,7 +192,7 @@ test('<NumField> - renders an InputNumber which correctly reacts on change (empt
 });
 
 test('<NumField> - renders an InputNumber which correctly reacts on change (same value)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <NumField name="x" />;
   const wrapper = mount(
@@ -208,7 +208,7 @@ test('<NumField> - renders an InputNumber which correctly reacts on change (same
 });
 
 test('<NumField> - renders an InputNumber which correctly reacts on change (zero)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <NumField name="x" />;
   const wrapper = mount(

@@ -9,7 +9,7 @@ import { renderWithZod } from './render-zod';
 
 export function testListDelField(ListDelField: ComponentType<any>) {
   test('<ListDelField> - correctly reacts on click', async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     renderWithZod({
       element: <ListDelField name="x.1" data-testid="x" />,
       model: { x: ['a', 'b', 'c'] },
@@ -21,7 +21,7 @@ export function testListDelField(ListDelField: ComponentType<any>) {
   });
 
   test('<ListDelField> - correctly reacts on enter', async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     renderWithZod({
       element: <ListDelField name="x.1" data-testid="x" />,
       model: { x: ['a', 'b', 'c'] },
@@ -33,7 +33,7 @@ export function testListDelField(ListDelField: ComponentType<any>) {
   });
 
   test('<ListDelField> - prevents onClick when disabled', async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     renderWithZod({
       element: <ListDelField name="x.1" data-testid="x" disabled />,
       model: { x: ['a', 'b', 'c'] },
@@ -47,7 +47,7 @@ export function testListDelField(ListDelField: ComponentType<any>) {
   });
 
   test('<ListDelField> - prevents onClick when readOnly', async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     renderWithZod({
       element: <ListDelField name="x.1" data-testid="x" readOnly />,
       model: { x: ['a', 'b', 'c'] },
@@ -61,7 +61,7 @@ export function testListDelField(ListDelField: ComponentType<any>) {
   });
 
   test('<ListDelField> - prevents onClick when limit reached', async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     renderWithZod({
       element: <ListDelField name="x.1" data-testid="x" readOnly />,
       model: { x: ['a', 'b', 'c'] },

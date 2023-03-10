@@ -8,7 +8,7 @@ import { renderWithZod } from './render-zod';
 export function testDateField(DateField: ComponentType<any>) {
   test('<DateField> - handles "date" type correctly (empty)', async () => {
     const date = '2021-01-01';
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     renderWithZod({
       element: <DateField name="x" type="date" />,
       model: { x: new Date(`${date}Z`) },
@@ -25,7 +25,7 @@ export function testDateField(DateField: ComponentType<any>) {
 
   test('<DateField> - handles "date" type correctly (fill)', async () => {
     const date = '2022-02-02';
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     renderWithZod({
       element: <DateField name="x" type="date" />,
       onChange,
@@ -41,7 +41,7 @@ export function testDateField(DateField: ComponentType<any>) {
 
   test('<DateField> - handles "date" type correctly (overflow)', async () => {
     const date = '12345-06-07';
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     renderWithZod({
       element: <DateField name="x" type="date" />,
       onChange,
@@ -57,7 +57,7 @@ export function testDateField(DateField: ComponentType<any>) {
 
   test('<DateField> - handles "datetime-local" type correctly (empty)', async () => {
     const date = '2021-01-01T11:11';
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     renderWithZod({
       element: <DateField name="x" />,
       model: { x: new Date(`${date}Z`) },
@@ -74,7 +74,7 @@ export function testDateField(DateField: ComponentType<any>) {
 
   test('<DateField> - handles "datetime-local" type correctly (fill)', async () => {
     const date = '2022-02-02T22:22';
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     renderWithZod({
       element: <DateField name="x" />,
       onChange,
@@ -90,7 +90,7 @@ export function testDateField(DateField: ComponentType<any>) {
 
   test('<DateField> - handles "datetime-local" type correctly (overflow)', async () => {
     const date = '12345-06-07T08:09';
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     renderWithZod({
       element: <DateField name="x" type="date" />,
       onChange,

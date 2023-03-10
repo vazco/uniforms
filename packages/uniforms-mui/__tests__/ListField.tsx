@@ -63,7 +63,7 @@ test('<ListField> - passes itemProps to its children', () => {
 });
 
 test('<ListField> - renders children (specified)', () => {
-  const Child = jest.fn(() => <div />) as React.FC<any>;
+  const Child = vi.fn(() => <div />) as React.FC<any>;
 
   const element = (
     <ListField name="x">
@@ -82,7 +82,7 @@ test('<ListField> - renders children (specified)', () => {
 });
 
 test('<ListField> - renders children with correct name (children)', () => {
-  const Child = jest.fn(() => <div />) as React.FC<any>;
+  const Child = vi.fn(() => <div />) as React.FC<any>;
 
   const element = (
     <ListField name="x">
@@ -117,7 +117,7 @@ test('<ListField> - renders children with correct name (value)', () => {
 // TypeError: Cannot read properties of null (reading '__reactFiber$my72orhzzz9')
 test.skip('<ListField> - renders proper number of optional values after add new value (with initialCount)', async () => {
   const element = <ListField name="x" label="ListFieldLabel" />;
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   const wrapper = mount(
     element,
     createContext(

@@ -56,7 +56,7 @@ test('<DateField> - renders an input with correct disabled state', () => {
 });
 
 test('<DateField> - renders an input with correct readOnly state', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const now = moment();
   const element = <DateField name="x" readOnly />;
@@ -109,7 +109,7 @@ test('<DateField> - renders a input with correct value (specified)', () => {
 });
 
 test('<DateField> - renders a input which correctly reacts on change', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const now = moment();
   const element = <DateField name="x" />;
@@ -125,7 +125,7 @@ test('<DateField> - renders a input which correctly reacts on change', () => {
 });
 
 test('<DateField> - renders a input which correctly reacts on change (empty)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <DateField name="x" />;
   const wrapper = mount(

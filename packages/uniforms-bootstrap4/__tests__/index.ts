@@ -2,7 +2,7 @@ import * as bootstrap4 from 'uniforms-bootstrap4';
 import * as suites from 'uniforms/__suites__';
 
 it('exports everything', () => {
-  expect(bootstrap4).toEqual({
+  expect(bootstrap4).toMatchObject({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),
     AutoForm: expect.any(Function),

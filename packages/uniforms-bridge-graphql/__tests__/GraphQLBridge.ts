@@ -68,7 +68,7 @@ describe('GraphQLBridge', () => {
     },
   };
 
-  const schemaValidator = jest.fn();
+  const schemaValidator = vi.fn();
 
   const astI = buildASTSchema(parse(schemaI));
   const astT = buildASTSchema(parse(schemaT));

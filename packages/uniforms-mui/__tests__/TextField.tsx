@@ -90,7 +90,7 @@ test('<TextField> - renders a TextField with correct value (specified)', () => {
 });
 
 test('<TextField> - renders a TextField which correctly reacts on change', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <TextField name="x" />;
   const wrapper = mount(
@@ -106,7 +106,7 @@ test('<TextField> - renders a TextField which correctly reacts on change', () =>
 });
 
 test('<TextField> - renders a TextField which correctly reacts on change (empty)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <TextField name="x" />;
   const wrapper = mount(
@@ -122,7 +122,7 @@ test('<TextField> - renders a TextField which correctly reacts on change (empty)
 });
 
 test('<TextField> - renders a TextField which correctly reacts on change (same value)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <TextField name="x" />;
   const wrapper = mount(

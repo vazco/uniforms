@@ -99,7 +99,7 @@ test('<LongTextField> - renders a textarea with correct value (specified)', () =
 });
 
 test('<LongTextField> - renders a textarea which correctly reacts on change', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <LongTextField name="x" />;
   const wrapper = mount(
@@ -115,7 +115,7 @@ test('<LongTextField> - renders a textarea which correctly reacts on change', ()
 });
 
 test('<LongTextField> - renders a textarea which correctly reacts on change (empty)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <LongTextField name="x" />;
   const wrapper = mount(
@@ -131,7 +131,7 @@ test('<LongTextField> - renders a textarea which correctly reacts on change (emp
 });
 
 test('<LongTextField> - renders a textarea which correctly reacts on change (same value)', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   const element = <LongTextField name="x" />;
   const wrapper = mount(

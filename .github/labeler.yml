@@ -23,7 +23,6 @@
   - '.prettierignore'
   - '.prettierrc.js'
   - '.stylelintrc'
-  - 'jest.config.js'
   - 'lerna.json'
   - 'package-lock.json'
   - 'package.json'
@@ -31,6 +30,7 @@
   - 'tsconfig.build.json'
   - 'tsconfig.global.json'
   - 'tsconfig.json'
+  - 'vite.config.ts'
 'Area: Theme':
   - 'packages/uniforms-antd/**/*'
   - 'packages/uniforms-bootstrap3/**/*'
