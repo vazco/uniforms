@@ -87,11 +87,16 @@ test('<RadioField> - renders a set of Radio buttons with correct options', () =>
 });
 
 test('<RadioField> - renders a set of Radio buttons with correct options (transform)', () => {
-  const element = <RadioField name="x" transform={x => x.toUpperCase()} />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
+  const element = (
+    <RadioField
+      name="x"
+      options={[
+        { key: 'k1', label: 'A', value: 'a' },
+        { key: 'k2', label: 'B', value: 'b' },
+      ]}
+    />
   );
+  const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find(Radio)).toHaveLength(2);
   expect(wrapper.find(FormControlLabel).at(0).prop('label')).toBe('A');
