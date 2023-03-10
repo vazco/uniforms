@@ -1,3 +1,10 @@
+## [v4.0.0-alpha.2](https://github.com/vazco/uniforms/tree/v4.0.0-alpha.2) (2023-03-10)
+
+- **Added:** Support for `min` and `max` in `DateField` in `uniforms-material` and `uniforms-mui`. [\#1213](https://github.com/vazco/uniforms/issues/1213)
+- **Added:** Support for `minLenght` and `maxLength` in `TextField` in `uniforms-bootstrap5`. [\#1223](https://github.com/vazco/uniforms/issues/1223)
+- **Changed:** The `inputRef` type in `NumField` in `uniforms-antd` due to compatibility problems. [\#1230](https://github.com/vazco/uniforms/issues/1230)
+- **Fixed:** Display of `ListDelField` in `uniforms-bootstrap5`. [\#1226](https://github.com/vazco/uniforms/issues/1226)
+
 ## [v4.0.0-alpha.1](https://github.com/vazco/uniforms/tree/v4.0.0-alpha.1) (2023-02-03)
 
 - **Added:** New `experimental_absoluteName` prop on `AutoField`. [\#1126](https://github.com/vazco/uniforms/issues/1126)
