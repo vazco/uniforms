@@ -126,6 +126,7 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     return undefined;
   }
 
+  // eslint-disable-next-line complexity
   getProps(name: string) {
     const props: UnknownObject = {
       label: upperFirst(lowerCase(joinName(null, name).slice(-1)[0])),

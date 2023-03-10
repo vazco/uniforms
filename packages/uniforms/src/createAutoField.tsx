@@ -13,6 +13,7 @@ import { useField } from './useField';
 
 export type AutoFieldProps = UnknownObject & {
   component?: Component;
+  // eslint-disable-next-line camelcase
   experimental_absoluteName?: boolean;
   name: string;
 };
