@@ -11,11 +11,11 @@ To make use of any schema, uniforms have to create a _bridge_ of it - a unified 
 
 Currently available bridges:
 
-- `GraphQLBridge` in `uniforms-bridge-graphql` [Schema documentation](https://graphql.org/)
-- `JSONSchemaBridge` in `uniforms-bridge-json-schema` [Schema documentation](https://json-schema.org/)
-- `SimpleSchema2Bridge` in `uniforms-bridge-simple-schema-2` [Schema documentation](https://github.com/longshotlabs/simpl-schema#readme)
-- `SimpleSchemaBridge` in `uniforms-bridge-simple-schema` [Schema documentation](https://github.com/Meteor-Community-Packages/meteor-simple-schema/blob/master/DOCS.md)
-- `ZodBridge` in `uniforms-bridge-zod` [Schema documentation](https://zod.dev/)
+- `GraphQLBridge` in `uniforms-bridge-graphql` ([schema documentation](https://graphql.org/))
+- `JSONSchemaBridge` in `uniforms-bridge-json-schema` ([schema documentation](https://json-schema.org/))
+- `SimpleSchema2Bridge` in `uniforms-bridge-simple-schema-2` ([schema documentation](https://github.com/longshotlabs/simpl-schema#readme))
+- `SimpleSchemaBridge` in `uniforms-bridge-simple-schema` ([schema documentation](https://github.com/Meteor-Community-Packages/meteor-simple-schema/blob/master/DOCS.md))
+- `ZodBridge` in `uniforms-bridge-zod` ([schema documentation](https://zod.dev/))
 
 If you see a lot of [`Warning: Unknown props...`](https://fb.me/react-unknown-prop) logs, check if your schema or theme doesn't provide extra props. If so, consider [registering it with `filterDOMProps`](/docs/api-helpers#filterdomprops).
 
