@@ -71,7 +71,7 @@ module.exports = {
         },
         {
           label: 'Enterprise',
-          href: 'https://www.vazco.eu/form-builder?utm_source=uniforms&utm_medium=Menu_CTA&utm_campaign=FormBuiler_uni_Menu_CTA&utm_id=FormBuilder_uniforms_menu',
+          href: 'https://forminer.com/?utm_source=uniforms&utm_medium=Menu_CTA&utm_campaign=Forminer_uniforms_menu_CTA&utm_id=Forminer_uniforms_menu',
           position: 'left',
         },
       ],
