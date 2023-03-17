@@ -308,12 +308,8 @@ export default class JSONSchemaBridge extends Bridge {
 
     type OptionList = Option<unknown>[];
     type OptionDict = Record<string, unknown>;
-    type Options = OptionList | OptionDict | (() => OptionList | OptionDict);
+    type Options = OptionList | OptionDict;
     let options: Options | undefined = props.options;
-
-    if (typeof options === 'function') {
-      options = options();
-    }
 
     if (options) {
       if (!Array.isArray(options)) {
