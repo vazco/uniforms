@@ -18,7 +18,6 @@ export type BoolFieldProps = FieldProps<
     helperText?: string;
     legend?: string;
     margin?: 'dense' | 'normal' | 'none';
-    transform?: (label: string) => string;
   }
 >;
 
@@ -32,7 +31,6 @@ function Bool(props: BoolFieldProps) {
     name,
     onChange,
     readOnly,
-    transform,
     value,
   } = props;
   const SelectionControl =
@@ -62,8 +60,8 @@ function Bool(props: BoolFieldProps) {
             {...omit(filterDOMProps(props), ['helperText', 'fullWidth'])}
           />
         }
-        // @ts-expect-error TODO
-        label={transform ? transform(label as string) : label}
+        // @ts-expect-error React.Node vs React.Element TODO
+        label={label}
       />
     </FormGroup>,
   );

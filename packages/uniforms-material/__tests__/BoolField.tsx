@@ -214,21 +214,6 @@ test('<BoolField> - renders a Switch with correct label (specified)', () => {
   expect(wrapper.find(FormControlLabel).prop('label')).toBe('BoolFieldLabel');
 });
 
-test('<BoolField> - renders a Switch with correct label (transform)', () => {
-  const element = (
-    <BoolField
-      name="x"
-      appearance="switch"
-      label="BoolFieldLabel"
-      transform={x => x.toUpperCase()}
-    />
-  );
-  const wrapper = mount(element, createContext({ x: { type: Boolean } }));
-
-  expect(wrapper.find(Switch)).toHaveLength(1);
-  expect(wrapper.find(FormControlLabel).prop('label')).toBe('BOOLFIELDLABEL');
-});
-
 test('<BoolField> - renders a Switch with correct legend (specified)', () => {
   const element = (
     <BoolField name="x" appearance="switch" legend="BoolFieldLegend" />
