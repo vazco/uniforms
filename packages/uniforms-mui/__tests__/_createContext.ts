@@ -27,8 +27,6 @@ export default function createContext<Model extends UnknownObject>(
       schema: createSchema(schema),
       state: {
         disabled: false,
-        label: false,
-        placeholder: false,
         readOnly: false,
         showInlineError: false,
         ...context?.state,

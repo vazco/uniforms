@@ -92,7 +92,7 @@ test('<SelectField> - renders a Select with correct options', () => {
   expect(wrapper.find(Select)).toHaveLength(1);
   expect(wrapper.find('option')).toHaveLength(3);
   [
-    ['', ''],
+    ['', 'X'],
     ['a', 'a'],
     ['b', 'b'],
   ].forEach(([value, text], index) => {
@@ -114,7 +114,7 @@ test('<SelectField> - renders a Select with correct options (transform)', () => 
   expect(wrapper.find(Select)).toHaveLength(1);
   expect(wrapper.find('option')).toHaveLength(3);
   [
-    ['', ''],
+    ['', 'X'],
     ['a', 'A'],
     ['b', 'B'],
   ].forEach(([value, text], index) => {

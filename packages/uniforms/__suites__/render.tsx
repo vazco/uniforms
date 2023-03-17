@@ -30,8 +30,6 @@ export function render<P, Model extends UnknownObject>(
           schema: new SimpleSchema2Bridge(new SimpleSchema(schema)),
           state: {
             disabled: false,
-            label: false,
-            placeholder: false,
             readOnly: false,
             showInlineError: false,
             ...contextValueExtension?.state,

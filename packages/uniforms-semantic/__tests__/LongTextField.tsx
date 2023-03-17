@@ -164,7 +164,10 @@ test('<LongTextField> - renders correct error text (specified)', () => {
       errorMessage="Error"
     />
   );
-  const wrapper = mount(element, createContext({ x: { type: String } }));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, label: '' } }),
+  );
 
   expect(wrapper.children().last().text()).toBe('Error');
 });

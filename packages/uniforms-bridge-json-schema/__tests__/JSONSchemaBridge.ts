@@ -220,7 +220,7 @@ describe('JSONSchemaBridge', () => {
   };
 
   const validator = jest.fn();
-  const bridge = new JSONSchemaBridge(schema, validator);
+  const bridge = new JSONSchemaBridge(schema, validator, false);
 
   describe('#constructor()', () => {
     it('sets schema correctly when has top level type of object', () => {
@@ -683,14 +683,12 @@ describe('JSONSchemaBridge', () => {
     it('works with allowedValues', () => {
       expect(bridge.getProps('shippingAddress.type')).toEqual({
         allowedValues: ['residential', 'business'],
-        label: 'Type',
         required: true,
       });
     });
 
     it('works with custom props', () => {
       expect(bridge.getProps('forcedRequired')).toEqual({
-        label: 'Forced required',
         required: true,
       });
     });
@@ -698,20 +696,20 @@ describe('JSONSchemaBridge', () => {
     it('works with custom component', () => {
       expect(bridge.getProps('age')).toEqual({
         component: 'span',
-        label: 'Age',
         required: false,
       });
     });
 
-    it('works with label (default)', () => {
+    it('works with label', () => {
       expect(bridge.getProps('withLabel')).toEqual({
         label: 'Example',
         required: false,
       });
     });
 
-    it('works with label (title)', () => {
-      expect(bridge.getProps('withTitle')).toEqual({
+    it('works with label (title - when provideDefaultLabelFromFieldName is true)', () => {
+      const localBridge = new JSONSchemaBridge(schema, validator, true);
+      expect(localBridge.getProps('withTitle')).toEqual({
         label: 'Example',
         required: false,
       });
@@ -721,7 +719,6 @@ describe('JSONSchemaBridge', () => {
       expect(bridge.getProps('salary')).toEqual({
         allowedValues: ['low', 'medium', 'height'],
         decimal: true,
-        label: 'Salary',
         options: expect.anything(),
         required: false,
         transform: expect.anything(),
@@ -752,13 +749,11 @@ describe('JSONSchemaBridge', () => {
 
     it('works with type', () => {
       expect(bridge.getProps('password')).toEqual({
-        label: 'Password',
         required: false,
         type: 'password',
       });
 
       expect(bridge.getProps('passwordNumeric')).toEqual({
-        label: 'Password numeric',
         required: false,
         decimal: true,
         type: 'password',
@@ -770,14 +765,12 @@ describe('JSONSchemaBridge', () => {
 
     it('works with other props', () => {
       expect(bridge.getProps('personalData.firstName')).toEqual({
-        label: 'First name',
         required: false,
       });
     });
 
     it('works with allOf in items', () => {
       expect(bridge.getProps('arrayWithAllOf.0.child')).toEqual({
-        label: 'Child',
         required: true,
       });
     });

@@ -29,7 +29,10 @@ function isNativeEnumValue(value: unknown) {
 }
 
 export default class ZodBridge<T extends ZodRawShape> extends Bridge {
-  constructor(public schema: ZodObject<T>) {
+  constructor(
+    public schema: ZodObject<T>,
+    private provideDefaultLabelFromFieldName: boolean = false,
+  ) {
     super();
 
     // Memoize for performance and referential equality.
@@ -128,7 +131,9 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
 
   getProps(name: string) {
     const props: UnknownObject = {
-      label: upperFirst(lowerCase(joinName(null, name).slice(-1)[0])),
+      ...(this.provideDefaultLabelFromFieldName && {
+        label: upperFirst(lowerCase(joinName(null, name).slice(-1)[0])),
+      }),
       required: true,
     };
 

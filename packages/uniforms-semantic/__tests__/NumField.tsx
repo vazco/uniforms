@@ -286,7 +286,10 @@ test('<NumField> - renders correct error text (specified)', () => {
   const element = (
     <NumField name="x" error={error} showInlineError errorMessage="Error" />
   );
-  const wrapper = mount(element, createContext({ x: { type: Number } }));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Number, label: '' } }),
+  );
 
   expect(wrapper.children().last().text()).toBe('Error');
 });

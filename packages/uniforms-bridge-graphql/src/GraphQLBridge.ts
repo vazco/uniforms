@@ -125,7 +125,12 @@ export default class GraphQLBridge extends Bridge {
       props.decimal = true;
     }
 
-    props.label ??= upperFirst(lowerCase(field.name));
+    if (
+      this.extras.provideDefaultLabelFromFieldName &&
+      props.label === undefined
+    ) {
+      props.label = upperFirst(lowerCase(field.name));
+    }
 
     type OptionDict = Record<string, string>;
     type OptionList = { label: string; value: unknown }[];
