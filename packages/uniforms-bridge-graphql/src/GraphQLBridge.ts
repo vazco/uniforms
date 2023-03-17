@@ -13,7 +13,7 @@ import invariant from 'invariant';
 import lowerCase from 'lodash/lowerCase';
 import memoize from 'lodash/memoize';
 import upperFirst from 'lodash/upperFirst';
-import { Bridge, UnknownObject, joinName } from 'uniforms';
+import { Bridge, UnknownObject, joinName, Option } from 'uniforms';
 
 function fieldInvariant(name: string, condition: boolean): asserts condition {
   invariant(condition, 'Field not found in schema: "%s"', name);
@@ -126,27 +126,27 @@ export default class GraphQLBridge extends Bridge {
 
     props.label ??= upperFirst(lowerCase(field.name));
 
-    type OptionDict = Record<string, string>;
-    type OptionList = { label: string; value: unknown }[];
+    type OptionDict = Record<string, unknown>;
+    type OptionList = Option<unknown>[];
     type Options = OptionDict | OptionList;
-    const options: Options = props.options;
+    let options: Options = props.options;
     if (options) {
-      if (Array.isArray(options)) {
-        props.allowedValues = options.map(option => option.value);
-        props.transform = (value: unknown) =>
-          options.find(option => option.value === value)!.label;
-      } else {
-        props.allowedValues = Object.keys(options);
-        props.transform = (value: string) => options[value];
+      if (!Array.isArray(options)) {
+        options = Object.entries(options).map(([key, value]) => ({
+          key,
+          label: key,
+          value,
+        }));
       }
     } else if (isEnumType(fieldType)) {
       const values = fieldType.getValues();
-      props.allowedValues = values.map(option => option.value);
-      props.transform = (value: unknown) =>
-        values.find(searchValue => searchValue.value === value)!.name;
+      options = values.map(option => ({
+        label: option.name,
+        value: option.value,
+      }));
     }
 
-    return props;
+    return Object.assign(props, { options });
   }
 
   getSubfields(name = '') {

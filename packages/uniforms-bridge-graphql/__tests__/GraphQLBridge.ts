@@ -229,10 +229,8 @@ describe('GraphQLBridge', () => {
         describe('and no extra data is passed', () => {
           it('should use AST field name', () => {
             expect(bridgeT.getProps('title')).toEqual({
-              allowedValues: ['a', 'b', 'Some Title'],
               label: false,
               required: false,
-              transform: expect.any(Function),
               options: [
                 { label: 1, value: 'a' },
                 { label: 2, value: 'b' },
@@ -297,30 +295,31 @@ describe('GraphQLBridge', () => {
     });
 
     it('works with options (array)', () => {
-      expect(bridgeI.getProps('title').transform('a')).toBe(1);
-      expect(bridgeI.getProps('title').transform('b')).toBe(2);
-      expect(bridgeI.getProps('title').allowedValues[0]).toBe('a');
-      expect(bridgeI.getProps('title').allowedValues[1]).toBe('b');
+      expect(bridgeI.getProps('title')).toMatchObject({
+        options: [
+          { label: 1, value: 'a' },
+          { label: 2, value: 'b' },
+          { label: 3, value: 'Some Title' },
+        ],
+      });
     });
 
     it('works with options (object)', () => {
-      expect(bridgeI.getProps('votes').transform('a')).toBe(1);
-      expect(bridgeI.getProps('votes').transform('b')).toBe(2);
-      expect(bridgeI.getProps('votes').allowedValues[0]).toBe('a');
-      expect(bridgeI.getProps('votes').allowedValues[1]).toBe('b');
+      expect(bridgeI.getProps('title')).toMatchObject({
+        options: [
+          { label: 1, value: 'a' },
+          { label: 2, value: 'b' },
+          { label: 3, value: 'Some Title' },
+        ],
+      });
     });
 
     describe('when enum', () => {
       it('should return possibleValues', () => {
-        expect(bridgeI.getProps('author.level').allowedValues).toEqual([
-          'Admin',
-          'User',
+        expect(bridgeI.getProps('author.level').options).toEqual([
+          { label: 'Admin', value: 'Admin' },
+          { label: 'User', value: 'User' },
         ]);
-      });
-
-      it('should transform the value to the name', () => {
-        const transform = bridgeI.getProps('author.level').transform;
-        expect(transform('Admin')).toBe('Admin');
       });
 
       it('should prefer options over enum', () => {
@@ -337,10 +336,10 @@ describe('GraphQLBridge', () => {
             },
           },
         );
-        const { allowedValues, transform } = bridge.getProps('author.level');
-        expect(allowedValues).toEqual(['a', 'b']);
-        expect(transform('a')).toEqual('A');
-        expect(transform('b')).toEqual('B');
+        expect(bridge.getProps('author.level').options).toEqual([
+          { label: 'A', value: 'a' },
+          { label: 'B', value: 'b' },
+        ]);
       });
     });
   });
