@@ -5,7 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 import lowerCase from 'lodash/lowerCase';
 import memoize from 'lodash/memoize';
 import upperFirst from 'lodash/upperFirst';
-import { Bridge, UnknownObject, joinName } from 'uniforms';
+import { Bridge, UnknownObject, joinName, Option } from 'uniforms';
 
 function fieldInvariant(name: string, condition: boolean): asserts condition {
   invariant(condition, 'Field not found in schema: "%s"', name);
@@ -306,21 +306,28 @@ export default class JSONSchemaBridge extends Bridge {
       delete props.type;
     }
 
-    type OptionDict = Record<string, string>;
-    type OptionList = { label: string; value: unknown }[];
-    type Options = OptionDict | OptionList;
-    const options: Options = props.options;
+    type OptionList = Option<unknown>[];
+    type OptionDict = Record<string, unknown>;
+    type Options = OptionList | OptionDict | (() => OptionList | OptionDict);
+    let options: Options | undefined = props.options;
+
+    if (typeof options === 'function') {
+      options = options();
+    }
+
     if (options) {
-      if (Array.isArray(options)) {
-        props.allowedValues = options.map(option => option.value);
-        props.transform = (value: unknown) =>
-          options.find(option => option.value === value)!.label;
-      } else {
-        props.allowedValues = Object.keys(options);
-        props.transform = (value: string) => options[value];
+      if (!Array.isArray(options)) {
+        options = Object.entries(options).map(([key, value]) => ({
+          key,
+          label: key,
+          value,
+        }));
       }
     } else if (props.enum) {
-      props.allowedValues = props.enum;
+      options = Object.values(props.enum).map(value => ({
+        label: String(value),
+        value,
+      }));
     }
 
     propsToRename.forEach(([key, newKey]) => {
@@ -336,7 +343,7 @@ export default class JSONSchemaBridge extends Bridge {
       }
     });
 
-    return props;
+    return Object.assign(props, { options });
   }
 
   getSubfields(name = '') {

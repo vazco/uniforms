@@ -679,7 +679,10 @@ describe('JSONSchemaBridge', () => {
   describe('#getProps', () => {
     it('works with allowedValues', () => {
       expect(bridge.getProps('shippingAddress.type')).toEqual({
-        allowedValues: ['residential', 'business'],
+        options: [
+          { label: 'residential', value: 'residential' },
+          { label: 'business', value: 'business' },
+        ],
         label: 'Type',
         required: true,
       });
@@ -709,35 +712,40 @@ describe('JSONSchemaBridge', () => {
 
     it('works with Number type', () => {
       expect(bridge.getProps('salary')).toEqual({
-        allowedValues: ['low', 'medium', 'height'],
+        options: [
+          { key: 'low', label: 'low', value: 6000 },
+          { key: 'medium', label: 'medium', value: 12000 },
+          { key: 'height', label: 'height', value: 18000 },
+        ],
         decimal: true,
         label: 'Salary',
-        options: expect.anything(),
         required: false,
-        transform: expect.anything(),
       });
     });
 
     it('works with options (array)', () => {
-      expect(bridge.getProps('billingAddress.state').transform('AL')).toBe(
-        'Alabama',
-      );
-      expect(bridge.getProps('billingAddress.state').transform('AK')).toBe(
-        'Alaska',
-      );
-      expect(bridge.getProps('billingAddress.state').allowedValues[0]).toBe(
-        'AL',
-      );
-      expect(bridge.getProps('billingAddress.state').allowedValues[1]).toBe(
-        'AK',
-      );
+      expect(bridge.getProps('billingAddress.state')).toEqual({
+        label: 'State',
+        options: [
+          { label: 'Alabama', value: 'AL' },
+          { label: 'Alaska', value: 'AK' },
+          { label: 'Arkansas', value: 'AR' },
+        ],
+        required: true,
+      });
     });
 
     it('works with options (object)', () => {
-      expect(bridge.getProps('salary').transform('low')).toBe(6000);
-      expect(bridge.getProps('salary').transform('medium')).toBe(12000);
-      expect(bridge.getProps('salary').allowedValues[0]).toBe('low');
-      expect(bridge.getProps('salary').allowedValues[1]).toBe('medium');
+      expect(bridge.getProps('salary')).toEqual({
+        options: [
+          { key: 'low', label: 'low', value: 6000 },
+          { key: 'medium', label: 'medium', value: 12000 },
+          { key: 'height', label: 'height', value: 18000 },
+        ],
+        decimal: true,
+        label: 'Salary',
+        required: false,
+      });
     });
 
     it('works with type', () => {
