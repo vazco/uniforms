@@ -25,7 +25,7 @@ function Radio(props: RadioFieldProps) {
     props,
     props.options?.map(item => (
       <div
-        key={item.key}
+        key={item.key ?? item.value}
         className={classnames(props.inputClassName, 'form-check', 'radio', {
           'custom-control-inline': props.inline,
           'text-danger': props.error,
@@ -33,14 +33,14 @@ function Radio(props: RadioFieldProps) {
         })}
       >
         <label
-          htmlFor={`${props.id}-${escape(item.key)}`}
+          htmlFor={`${props.id}-${escape(item.key ?? item.value)}`}
           className="form-check-label"
         >
           <input
             checked={item.value === props.value}
             className="form-check-input"
             disabled={props.disabled}
-            id={`${props.id}-${escape(item.key)}`}
+            id={`${props.id}-${escape(item.key ?? item.value)}`}
             name={props.name}
             onChange={() => {
               if (!props.readOnly) {
@@ -49,7 +49,7 @@ function Radio(props: RadioFieldProps) {
             }}
             type="radio"
           />{' '}
-          {item.label}
+          {item.label ?? item.value}
         </label>
       </div>
     )),

@@ -27,8 +27,12 @@ function Radio(props: RadioFieldProps) {
       {...filterDOMProps(props)}
     >
       {props.options?.map(option => (
-        <RadioAntD key={option.key} style={radioStyle} value={option.value}>
-          {option.label}
+        <RadioAntD
+          key={option.key ?? option.value}
+          style={radioStyle}
+          value={option.value}
+        >
+          {option.label ?? option.value}
         </RadioAntD>
       ))}
     </RadioAntD.Group>,

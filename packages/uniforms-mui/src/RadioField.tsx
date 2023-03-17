@@ -60,8 +60,8 @@ function Radio({
               {...omit(filterDOMProps(props), ['checkboxes', 'helperText'])}
             />
           }
-          key={option.key}
-          label={option.label}
+          key={option.key ?? option.value}
+          label={option.label ?? option.value}
           value={`${option.value}`}
         />
       ))}

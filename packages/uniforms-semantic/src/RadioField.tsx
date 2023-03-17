@@ -46,12 +46,12 @@ function Radio({
       )}
 
       {options?.map(option => (
-        <div className="field" key={option.key}>
+        <div className="field" key={option.key ?? option.value}>
           <div className="ui radio checkbox">
             <input
               checked={option.value === value}
               disabled={option.disabled || disabled}
-              id={`${id}-${escape(option.key)}`}
+              id={`${id}-${escape(option.key ?? option.value)}`}
               name={name}
               onChange={() => {
                 if (!readOnly) {
@@ -61,8 +61,8 @@ function Radio({
               type="radio"
             />
 
-            <label htmlFor={`${id}-${escape(option.key)}`}>
-              {option.label}
+            <label htmlFor={`${id}-${escape(option.key ?? option.value)}`}>
+              {option.label ?? option.value}
             </label>
           </div>
         </div>

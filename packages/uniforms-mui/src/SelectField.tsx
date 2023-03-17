@@ -92,11 +92,14 @@ function Select(props: SelectFieldProps) {
           {options!.map(option => (
             <FormControlLabel
               control={
-                <Radio id={`${id}-${escape(option.key)}`} {...filteredProps} />
+                <Radio
+                  id={`${id}-${escape(option.key ?? option.value)}`}
+                  {...filteredProps}
+                />
               }
               disabled={option.disabled || disabled}
-              key={option.key}
-              label={option.label}
+              key={option.key ?? option.value}
+              label={option.label ?? option.value}
               value={option.value}
             />
           ))}
@@ -108,7 +111,7 @@ function Select(props: SelectFieldProps) {
               control={
                 <SelectionControl
                   checked={value.includes(option.value)}
-                  id={`${id}-${escape(option.key)}`}
+                  id={`${id}-${escape(option.key ?? option.value)}`}
                   name={name}
                   onChange={() =>
                     disabled || readOnly || onChange(xor([option.value], value))
@@ -119,8 +122,8 @@ function Select(props: SelectFieldProps) {
                 />
               }
               disabled={option.disabled || disabled}
-              key={option.key}
-              label={option.label}
+              key={option.key ?? option.value}
+              label={option.label ?? option.value}
             />
           ))}
         </FormGroup>
@@ -210,8 +213,12 @@ function Select(props: SelectFieldProps) {
       )}
 
       {options!.map(option => (
-        <Item disabled={option.disabled} key={option.key} value={option.value}>
-          {option.label}
+        <Item
+          disabled={option.disabled}
+          key={option.key ?? option.value}
+          value={option.value}
+        >
+          {option.label ?? option.value}
         </Item>
       ))}
     </TextField>

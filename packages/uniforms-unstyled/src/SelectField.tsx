@@ -40,7 +40,7 @@ function Select({
       {label && <label htmlFor={id}>{label}</label>}
       {checkboxes ? (
         options?.map(option => (
-          <div key={option.key}>
+          <div key={option.key ?? option.value}>
             <input
               checked={
                 fieldType === Array
@@ -48,7 +48,7 @@ function Select({
                   : value === option.value
               }
               disabled={option.disabled ?? disabled}
-              id={`${id}-${escape(option.key)}`}
+              id={`${id}-${escape(option.key ?? option.value)}`}
               name={name}
               onChange={() => {
                 if (!readOnly) {
@@ -62,8 +62,8 @@ function Select({
               type="checkbox"
             />
 
-            <label htmlFor={`${id}-${escape(option.key)}`}>
-              {option.label}
+            <label htmlFor={`${id}-${escape(option.key ?? option.value)}`}>
+              {option.label ?? option.value}
             </label>
           </div>
         ))
@@ -96,10 +96,10 @@ function Select({
           {options?.map(option => (
             <option
               disabled={option.disabled}
-              key={option.key}
+              key={option.key ?? option.value}
               value={option.value}
             >
-              {option.label}
+              {option.label ?? option.value}
             </option>
           ))}
         </select>

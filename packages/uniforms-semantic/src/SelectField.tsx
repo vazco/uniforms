@@ -52,7 +52,7 @@ function Select({
       {/* TODO: Better handling of these props. */}
       {checkboxes ? (
         options?.map(option => (
-          <div className="field" key={option.key}>
+          <div className="field" key={option.key ?? option.value}>
             <div className="ui checkbox">
               <input
                 checked={
@@ -61,7 +61,7 @@ function Select({
                     : value === option.value
                 }
                 disabled={option.disabled || disabled}
-                id={`${id}-${escape(option.key)}`}
+                id={`${id}-${escape(option.key ?? option.value)}`}
                 name={name}
                 onChange={() => {
                   if (!readOnly) {
@@ -73,8 +73,8 @@ function Select({
                 type="checkbox"
               />
 
-              <label htmlFor={`${id}-${escape(option.key)}`}>
-                {option.label}
+              <label htmlFor={`${id}-${escape(option.key ?? option.value)}`}>
+                {option.label ?? option.value}
               </label>
             </div>
           </div>
@@ -110,10 +110,10 @@ function Select({
           {options?.map(option => (
             <option
               disabled={option.disabled}
-              key={option.key}
+              key={option.key ?? option.value}
               value={option.value}
             >
-              {option.label}
+              {option.label ?? option.value}
             </option>
           ))}
         </select>

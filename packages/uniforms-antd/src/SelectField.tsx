@@ -87,10 +87,10 @@ function Select(props: SelectFieldProps) {
         {props.options?.map(option => (
           <SelectAntD.Option
             disabled={option.disabled}
-            key={option.key}
+            key={option.key ?? option.value}
             value={option.value}
           >
-            {option.label}
+            {option.label ?? option.value}
           </SelectAntD.Option>
         ))}
       </SelectAntD>
