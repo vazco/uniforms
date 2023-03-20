@@ -1,6 +1,8 @@
 import omit from 'lodash/omit';
 import React from 'react';
-import { HTMLFieldProps, connectField, filterDOMProps, Option } from 'uniforms';
+import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
+
+import type { Option } from './types';
 
 const base64: (string: string) => string =
   typeof btoa === 'undefined'

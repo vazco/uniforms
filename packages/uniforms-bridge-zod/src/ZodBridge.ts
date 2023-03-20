@@ -2,7 +2,7 @@ import invariant from 'invariant';
 import lowerCase from 'lodash/lowerCase';
 import memoize from 'lodash/memoize';
 import upperFirst from 'lodash/upperFirst';
-import { Bridge, UnknownObject, joinName, Option } from 'uniforms';
+import { Bridge, UnknownObject, joinName } from 'uniforms';
 import {
   ZodArray,
   ZodBoolean,
@@ -27,6 +27,14 @@ function fieldInvariant(name: string, condition: boolean): asserts condition {
 function isNativeEnumValue(value: unknown) {
   return typeof value !== 'string';
 }
+
+/** Option type used in SelectField or RadioField */
+type Option<Value = unknown> = {
+  disabled?: boolean;
+  label: string;
+  key?: string;
+  value: Value;
+};
 
 export default class ZodBridge<T extends ZodRawShape> extends Bridge {
   constructor(public schema: ZodObject<T>) {

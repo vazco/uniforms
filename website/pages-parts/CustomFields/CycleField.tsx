@@ -1,8 +1,9 @@
 import React from 'react';
 import { AutoForm, SubmitField } from '../../lib/universal';
-import { HTMLFieldProps, connectField, Option } from 'uniforms';
+import { HTMLFieldProps, connectField } from 'uniforms';
 
 import { bridge as schema } from './CycleFieldSchema';
+import type { Option } from 'uniforms-unstyled/src/types';
 
 type CycleProps = HTMLFieldProps<
   number,

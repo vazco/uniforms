@@ -4,13 +4,8 @@ import omit from 'lodash/omit';
 import React, { Component } from 'react';
 // @ts-expect-error
 import Frame, { FrameContextConsumer } from 'react-frame-component';
-import {
-  ValidatedForm,
-  connectField,
-  context,
-  useForm,
-  Option,
-} from 'uniforms';
+import { ValidatedForm, connectField, context, useForm } from 'uniforms';
+import type { Option } from 'uniforms-unstyled/src/types';
 
 import playgroundStyles from '../index.module.css';
 import presets from '../lib/presets';

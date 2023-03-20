@@ -5,7 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 import lowerCase from 'lodash/lowerCase';
 import memoize from 'lodash/memoize';
 import upperFirst from 'lodash/upperFirst';
-import { Bridge, UnknownObject, joinName, Option } from 'uniforms';
+import { Bridge, UnknownObject, joinName } from 'uniforms';
 
 function fieldInvariant(name: string, condition: boolean): asserts condition {
   invariant(condition, 'Field not found in schema: "%s"', name);
@@ -85,6 +85,14 @@ function isValidatorResult(value: unknown): value is ValidatorResult {
     Array.isArray((value as ValidatorResult).details)
   );
 }
+
+/** Option type used in SelectField or RadioField */
+type Option<Value = unknown> = {
+  disabled?: boolean;
+  label: string;
+  key?: string;
+  value: Value;
+};
 
 type FieldError = {
   instancePath?: string;

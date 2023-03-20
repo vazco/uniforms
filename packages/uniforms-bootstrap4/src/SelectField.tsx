@@ -1,8 +1,9 @@
 import classnames from 'classnames';
 import xor from 'lodash/xor';
 import React, { Ref } from 'react';
-import { connectField, HTMLFieldProps, Option } from 'uniforms';
+import { connectField, HTMLFieldProps } from 'uniforms';
 
+import type { Option } from './types';
 import wrapField from './wrapField';
 
 const base64: (string: string) => string =

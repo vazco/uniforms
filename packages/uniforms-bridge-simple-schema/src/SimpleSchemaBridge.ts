@@ -3,9 +3,17 @@ import cloneDeep from 'lodash/cloneDeep';
 import memoize from 'lodash/memoize';
 // @ts-ignore -- This package _is_ typed, but not in all environments.
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Bridge, UnknownObject, joinName, Option } from 'uniforms';
+import { Bridge, UnknownObject, joinName } from 'uniforms';
 
 const propsToRemove = ['optional', 'uniforms', 'allowedValues'];
+
+/** Option type used in SelectField or RadioField */
+type Option<Value = unknown> = {
+  disabled?: boolean;
+  label: string;
+  key?: string;
+  value: Value;
+};
 
 export default class SimpleSchemaBridge extends Bridge {
   constructor(public schema: SimpleSchema) {

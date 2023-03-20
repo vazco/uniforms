@@ -13,11 +13,19 @@ import invariant from 'invariant';
 import lowerCase from 'lodash/lowerCase';
 import memoize from 'lodash/memoize';
 import upperFirst from 'lodash/upperFirst';
-import { Bridge, UnknownObject, joinName, Option } from 'uniforms';
+import { Bridge, UnknownObject, joinName } from 'uniforms';
 
 function fieldInvariant(name: string, condition: boolean): asserts condition {
   invariant(condition, 'Field not found in schema: "%s"', name);
 }
+
+/** Option type used in SelectField or RadioField */
+type Option<Value = unknown> = {
+  disabled?: boolean;
+  label: string;
+  key?: string;
+  value: Value;
+};
 
 export default class GraphQLBridge extends Bridge {
   constructor(

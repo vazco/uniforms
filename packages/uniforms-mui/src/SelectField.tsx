@@ -11,8 +11,9 @@ import TextField, { TextFieldProps } from '@mui/material/TextField';
 import omit from 'lodash/omit';
 import xor from 'lodash/xor';
 import React, { Ref } from 'react';
-import { FieldProps, connectField, filterDOMProps, Option } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
+import type { Option } from './types';
 import wrapField from './wrapField';
 
 type SelectFieldCommonProps = {

@@ -1,7 +1,8 @@
 import classnames from 'classnames';
 import React from 'react';
-import { connectField, HTMLFieldProps, Option } from 'uniforms';
+import { connectField, HTMLFieldProps } from 'uniforms';
 
+import type { Option } from './types';
 import wrapField from './wrapField';
 
 const base64: (string: string) => string =

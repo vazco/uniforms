@@ -1,7 +1,9 @@
 import classnames from 'classnames';
 import omit from 'lodash/omit';
 import React from 'react';
-import { connectField, filterDOMProps, HTMLFieldProps, Option } from 'uniforms';
+import { connectField, filterDOMProps, HTMLFieldProps } from 'uniforms';
+
+import type { Option } from './types';
 
 const base64: (string: string) => string =
   typeof btoa === 'undefined'

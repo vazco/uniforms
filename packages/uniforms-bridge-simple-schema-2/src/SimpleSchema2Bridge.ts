@@ -2,13 +2,21 @@ import invariant from 'invariant';
 import cloneDeep from 'lodash/cloneDeep';
 import memoize from 'lodash/memoize';
 import SimpleSchema from 'simpl-schema';
-import { Bridge, UnknownObject, joinName, Option } from 'uniforms';
+import { Bridge, UnknownObject, joinName } from 'uniforms';
 
 const propsToRemove = ['optional', 'uniforms', 'allowedValues'];
 
 function makeGeneric(name?: string): string | undefined {
   return name?.replace(/\.\d+(\.|$)/g, '.$$$1');
 }
+
+/** Option type used in SelectField or RadioField */
+type Option<Value = unknown> = {
+  disabled?: boolean;
+  label: string;
+  key?: string;
+  value: Value;
+};
 
 export default class SimpleSchema2Bridge extends Bridge {
   constructor(public schema: SimpleSchema) {

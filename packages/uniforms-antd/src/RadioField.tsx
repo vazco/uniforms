@@ -1,7 +1,8 @@
 import RadioAntD, { RadioProps } from 'antd/lib/radio';
 import React from 'react';
-import { FieldProps, connectField, filterDOMProps, Option } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
+import type { Option } from './types';
 import wrapField from './wrapField';
 
 export type RadioFieldProps = FieldProps<

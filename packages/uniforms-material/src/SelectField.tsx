@@ -12,14 +12,9 @@ import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import omit from 'lodash/omit';
 import xor from 'lodash/xor';
 import React, { Ref } from 'react';
-import {
-  FieldProps,
-  connectField,
-  filterDOMProps,
-  Override,
-  Option,
-} from 'uniforms';
+import { FieldProps, connectField, filterDOMProps, Override } from 'uniforms';
 
+import type { Option } from './types';
 import wrapField from './wrapField';
 
 type SelectFieldCommonProps = {

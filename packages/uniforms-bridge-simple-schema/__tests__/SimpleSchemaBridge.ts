@@ -1,5 +1,5 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Option, UnknownObject } from 'uniforms';
+import { UnknownObject } from 'uniforms';
 import { SimpleSchemaBridge } from 'uniforms-bridge-simple-schema';
 
 jest.mock('meteor/aldeed:simple-schema');
@@ -41,18 +41,15 @@ describe('SimpleSchemaBridge', () => {
               { key: 'k1', label: 'A', value: 1 },
               { key: 'k2', label: 'B', value: 2 },
             ],
-          } as {
-            options: Option<number>[];
           },
         },
         rr: {
           type: String,
           uniforms: {
-            options: () =>
-              [
-                { key: 'k1', label: 'A', value: 1 },
-                { key: 'k2', label: 'B', value: 2 },
-              ] as Option<number>[],
+            options: () => [
+              { key: 'k1', label: 'A', value: 1 },
+              { key: 'k2', label: 'B', value: 2 },
+            ],
           },
         },
         s: { type: String, allowedValues: ['a', 'b'] },

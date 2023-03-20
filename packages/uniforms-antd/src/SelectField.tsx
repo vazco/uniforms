@@ -6,8 +6,9 @@ import { RadioGroupProps } from 'antd/lib/radio';
 import RadioGroup from 'antd/lib/radio/group';
 import SelectAntD, { SelectProps as SelectAntDProps } from 'antd/lib/select';
 import React, { Ref } from 'react';
-import { FieldProps, connectField, filterDOMProps, Option } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
+import type { Option } from './types';
 import wrapField from './wrapField';
 
 type CheckboxesProps = FieldProps<

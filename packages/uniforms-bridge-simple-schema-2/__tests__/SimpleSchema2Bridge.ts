@@ -1,5 +1,4 @@
 import SimpleSchema from 'simpl-schema';
-import { Option } from 'uniforms';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 
 describe('SimpleSchema2Bridge', () => {
@@ -36,18 +35,15 @@ describe('SimpleSchema2Bridge', () => {
           { key: 'k1', label: 'A', value: 1 },
           { key: 'k2', label: 'B', value: 2 },
         ],
-      } as {
-        options: Option<number>[];
       },
     },
     rr: {
       type: String,
       uniforms: {
-        options: () =>
-          [
-            { key: 'k1', label: 'A', value: 1 },
-            { key: 'k2', label: 'B', value: 2 },
-          ] as Option<number>[],
+        options: () => [
+          { key: 'k1', label: 'A', value: 1 },
+          { key: 'k2', label: 'B', value: 2 },
+        ],
       },
     },
     s: { type: String, allowedValues: ['a', 'b'] },

@@ -5,8 +5,9 @@ import RadioMaterial, { RadioProps } from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import omit from 'lodash/omit';
 import React from 'react';
-import { FieldProps, connectField, filterDOMProps, Option } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
+import type { Option } from './types';
 import wrapField from './wrapField';
 
 export type RadioFieldProps = FieldProps<

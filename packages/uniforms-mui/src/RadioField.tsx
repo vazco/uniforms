@@ -4,8 +4,9 @@ import RadioMaterial, { RadioProps } from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import omit from 'lodash/omit';
 import React from 'react';
-import { FieldProps, connectField, filterDOMProps, Option } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
+import type { Option } from './types';
 import wrapField from './wrapField';
 
 export type RadioFieldProps = FieldProps<
