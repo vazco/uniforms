@@ -11,7 +11,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" disabled />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('textbox')).toBeDisabled();
+    expect(screen.getByRole('spinbutton')).toBeDisabled();
   });
 
   test('<NumField> - renders an InputNumber with correct readOnly state', () => {
@@ -19,7 +19,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" readOnly />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('textbox')).toHaveAttribute('readonly', '');
+    expect(screen.getByRole('spinbutton')).toHaveAttribute('readonly', '');
   });
 
   test('<NumField> - renders an InputNumber with correct id (inherited)', () => {
@@ -27,7 +27,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('textbox')).toHaveAttribute('id');
+    expect(screen.getByRole('spinbutton')).toHaveAttribute('id');
   });
 
   test('<NumField> - renders an InputNumber with correct id (specified)', () => {
@@ -35,7 +35,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" id="y" />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('textbox')).toHaveAttribute('id', 'y');
+    expect(screen.getByRole('spinbutton')).toHaveAttribute('id', 'y');
   });
 
   test('<NumField> - renders an InputNumber with correct max', () => {
@@ -43,7 +43,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" max={10} />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('textbox')).toHaveAttribute('max', 10);
+    expect(screen.getByRole('spinbutton')).toHaveAttribute('max', 10);
   });
 
   test('<NumField> - renders an InputNumber with correct min', () => {
@@ -51,7 +51,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" min={10} />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('textbox')).toHaveAttribute('min', 10);
+    expect(screen.getByRole('spinbutton')).toHaveAttribute('min', 10);
   });
 
   test('<NumField> - renders an InputNumber with correct name', () => {
@@ -59,7 +59,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('textbox')).toHaveAttribute('name', 'x');
+    expect(screen.getByRole('spinbutton')).toHaveAttribute('name', 'x');
   });
 
   test('<NumField> - renders an InputNumber with correct placeholder', () => {
@@ -67,7 +67,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" placeholder="y" />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('textbox')).toHaveAttribute('placeholder', 'y');
+    expect(screen.getByRole('spinbutton')).toHaveAttribute('placeholder', 'y');
   });
 
   test('<NumField> - renders an InputNumber with correct step (decimal)', () => {
@@ -75,7 +75,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" decimal />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('textbox')).toHaveAttribute('step', 0.01);
+    expect(screen.getByRole('spinbutton')).toHaveAttribute('step', 0.01);
   });
 
   test('<NumField> - renders an InputNumber with correct step (integer)', () => {
@@ -83,7 +83,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" decimal={false} />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('textbox')).toHaveAttribute('step', 1);
+    expect(screen.getByRole('spinbutton')).toHaveAttribute('step', 1);
   });
 
   test('<NumField> - renders an InputNumber with correct step (set)', () => {
@@ -91,7 +91,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" decimal={false} step={3} />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('textbox')).toHaveAttribute('step', 3);
+    expect(screen.getByRole('spinbutton')).toHaveAttribute('step', 3);
   });
 
   test('<NumField> - renders an InputNumber with correct value (default)', () => {
@@ -99,7 +99,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('textbox')).toHaveValue(undefined);
+    expect(screen.getByRole('spinbutton')).toHaveValue(undefined);
   });
 
   test('<NumField> - renders an InputNumber with correct value (model)', () => {
@@ -108,7 +108,7 @@ export function testNumField(NumField: ComponentType<any>) {
       model: { x: 1 },
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('textbox')).toHaveValue(1);
+    expect(screen.getByRole('spinbutton')).toHaveValue(1);
   });
 
   test('<NumField> - renders an InputNumber with correct value (specified)', () => {
@@ -116,7 +116,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" value={2} />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('textbox')).toHaveValue(2);
+    expect(screen.getByRole('spinbutton')).toHaveValue(2);
   });
 
   test('<NumField> - renders an InputNumber which correctly reacts on change', async () => {
@@ -126,7 +126,7 @@ export function testNumField(NumField: ComponentType<any>) {
       onChange,
       schema: z.object({ x: z.number() }),
     });
-    await userEvent.type(screen.getByRole('textbox'), '1');
+    await userEvent.type(screen.getByRole('spinbutton'), '1');
     expect(onChange).toHaveBeenLastCalledWith('x', 1);
   });
 
@@ -137,7 +137,7 @@ export function testNumField(NumField: ComponentType<any>) {
       onChange,
       schema: z.object({ x: z.number() }),
     });
-    await userEvent.type(screen.getByRole('textbox'), '2.5');
+    await userEvent.type(screen.getByRole('spinbutton'), '2.5');
     expect(onChange).toHaveBeenLastCalledWith('x', 2.5);
   });
 
@@ -149,7 +149,7 @@ export function testNumField(NumField: ComponentType<any>) {
       onChange,
       schema: z.object({ x: z.number() }),
     });
-    await userEvent.type(screen.getByRole('textbox'), '2.5');
+    await userEvent.type(screen.getByRole('spinbutton'), '2.5');
     expect(onChange).toHaveBeenLastCalledWith('x', 2);
   });
 
@@ -160,7 +160,7 @@ export function testNumField(NumField: ComponentType<any>) {
       onChange,
       schema: z.object({ x: z.number() }),
     });
-    await userEvent.type(screen.getByRole('textbox'), '');
+    await userEvent.type(screen.getByRole('spinbutton'), '');
     expect(onChange).toHaveBeenLastCalledWith('x', undefined);
   });
 
@@ -172,7 +172,7 @@ export function testNumField(NumField: ComponentType<any>) {
       onChange,
       schema: z.object({ x: z.number() }),
     });
-    await userEvent.type(screen.getByRole('textbox'), '1');
+    await userEvent.type(screen.getByRole('spinbutton'), '1');
     expect(onChange).toHaveBeenLastCalledWith('x', 1);
   });
 
@@ -183,7 +183,7 @@ export function testNumField(NumField: ComponentType<any>) {
       onChange,
       schema: z.object({ x: z.number() }),
     });
-    await userEvent.type(screen.getByRole('textbox'), '0');
+    await userEvent.type(screen.getByRole('spinbutton'), '0');
     expect(onChange).toHaveBeenLastCalledWith('x', 0);
   });
 
