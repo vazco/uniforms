@@ -38,5 +38,6 @@ describe('@RTL', () => {
   suites.testListField(bootstrap4.ListField, {
     getListAddField: screen => screen.getByRole('button'),
   });
+  suites.testLongTextField(bootstrap4.LongTextField);
   suites.testTextField(bootstrap4.TextField);
 });
