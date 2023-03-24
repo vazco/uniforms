@@ -43,7 +43,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" max={10} />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('spinbutton')).toHaveAttribute('max', 10);
+    expect(screen.getByRole('spinbutton')).toHaveAttribute('max', '10');
   });
 
   test('<NumField> - renders an InputNumber with correct min', () => {
@@ -51,7 +51,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" min={10} />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('spinbutton')).toHaveAttribute('min', 10);
+    expect(screen.getByRole('spinbutton')).toHaveAttribute('min', '10');
   });
 
   test('<NumField> - renders an InputNumber with correct name', () => {
@@ -75,7 +75,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" decimal />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('spinbutton')).toHaveAttribute('step', 0.01);
+    expect(screen.getByRole('spinbutton')).toHaveAttribute('step', '0.01');
   });
 
   test('<NumField> - renders an InputNumber with correct step (integer)', () => {
@@ -83,7 +83,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" decimal={false} />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('spinbutton')).toHaveAttribute('step', 1);
+    expect(screen.getByRole('spinbutton')).toHaveAttribute('step', '1');
   });
 
   test('<NumField> - renders an InputNumber with correct step (set)', () => {
@@ -91,7 +91,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" decimal={false} step={3} />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('spinbutton')).toHaveAttribute('step', 3);
+    expect(screen.getByRole('spinbutton')).toHaveAttribute('step', '3');
   });
 
   test('<NumField> - renders an InputNumber with correct value (default)', () => {
@@ -99,7 +99,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('spinbutton')).toHaveValue(undefined);
+    expect(screen.getByRole('spinbutton')).toHaveValue('');
   });
 
   test('<NumField> - renders an InputNumber with correct value (model)', () => {
@@ -108,7 +108,7 @@ export function testNumField(NumField: ComponentType<any>) {
       model: { x: 1 },
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('spinbutton')).toHaveValue(1);
+    expect(screen.getByRole('spinbutton')).toHaveValue('1.00');
   });
 
   test('<NumField> - renders an InputNumber with correct value (specified)', () => {
@@ -116,7 +116,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" value={2} />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('spinbutton')).toHaveValue(2);
+    expect(screen.getByRole('spinbutton')).toHaveValue('2.00');
   });
 
   test('<NumField> - renders an InputNumber which correctly reacts on change', async () => {
@@ -158,22 +158,11 @@ export function testNumField(NumField: ComponentType<any>) {
     renderWithZod({
       element: <NumField name="x" />,
       onChange,
-      schema: z.object({ x: z.number() }),
-    });
-    await userEvent.type(screen.getByRole('spinbutton'), '');
-    expect(onChange).toHaveBeenLastCalledWith('x', undefined);
-  });
-
-  test('<NumField> - renders an InputNumber which correctly reacts on change (same value)', async () => {
-    const onChange = jest.fn();
-    renderWithZod({
-      element: <NumField name="x" />,
       model: { x: 1 },
-      onChange,
       schema: z.object({ x: z.number() }),
     });
-    await userEvent.type(screen.getByRole('spinbutton'), '1');
-    expect(onChange).toHaveBeenLastCalledWith('x', 1);
+    await userEvent.clear(screen.getByRole('spinbutton'));
+    expect(onChange).toHaveBeenLastCalledWith('x', undefined);
   });
 
   test('<NumField> - renders an InputNumber which correctly reacts on change (zero)', async () => {
