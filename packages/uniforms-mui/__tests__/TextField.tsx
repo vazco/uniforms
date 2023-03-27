@@ -1,14 +1,9 @@
 import TextFieldMaterial from '@mui/material/TextField';
 import React from 'react';
 import { TextField } from 'uniforms-mui';
-import { testTextField } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
 import mount from './_mount';
-
-describe('@RTL - TextField tests', () => {
-  testTextField(TextField);
-});
 
 test('<TextField> - renders an TextField', () => {
   const element = <TextField name="x" />;

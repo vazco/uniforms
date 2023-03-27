@@ -1,4 +1,5 @@
 import * as bootstrap4 from 'uniforms-bootstrap4';
+import * as suites from 'uniforms/__suites__';
 
 it('exports everything', () => {
   expect(bootstrap4).toEqual({
@@ -28,4 +29,14 @@ it('exports everything', () => {
     gridClassName: expect.any(Function),
     wrapField: expect.any(Function),
   });
+});
+
+describe('@RTL', () => {
+  suites.testAutoField(bootstrap4.AutoField);
+  suites.testDateField(bootstrap4.DateField);
+  suites.testListDelField(bootstrap4.ListDelField);
+  suites.testListField(bootstrap4.ListField, {
+    getListAddField: screen => screen.getByRole('button'),
+  });
+  suites.testTextField(bootstrap4.TextField);
 });

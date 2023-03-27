@@ -1,8 +1,9 @@
-import { PropTypes, useTheme } from '@material-ui/core';
+import type { PropTypes } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import RadioMaterial, { RadioProps } from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import useTheme from '@material-ui/core/styles/useTheme';
 import omit from 'lodash/omit';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';

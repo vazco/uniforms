@@ -26,8 +26,8 @@ export class Playground extends Component<any, any> {
 
     try {
       schema.validate(state);
-    } catch (error) {
       // FIXME: Types.
+    } catch (error: any) {
       (error.details as any[]).forEach(({ name }) => {
         state[name] = schema.getDefinition(name).defaultValue;
       });

@@ -55,6 +55,8 @@ describe('SimpleSchemaBridge', () => {
         w: { type: Array, defaultValue: [{ a: 'a' }] },
         'w.$': { type: Object },
         'w.$.a': { type: String },
+        x: { type: Array },
+        'x.$': { type: String },
       }[name];
 
       if (field) {
@@ -172,13 +174,14 @@ describe('SimpleSchemaBridge', () => {
     });
 
     it('throws on not found field', () => {
-      expect(() => bridge.getField('x')).toThrow(/Field not found in schema/);
+      expect(() => bridge.getField('xxx')).toThrow(/Field not found in schema/);
     });
   });
 
   describe('#getInitialValue', () => {
     it('works with arrays', () => {
       expect(bridge.getInitialValue('k')).toEqual([]);
+      expect(bridge.getInitialValue('x')).toEqual([]);
     });
 
     it('works with arrays (minCount)', () => {

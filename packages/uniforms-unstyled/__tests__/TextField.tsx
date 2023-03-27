@@ -1,28 +1,8 @@
-import { screen } from '@testing-library/react';
 import React from 'react';
 import { TextField } from 'uniforms-unstyled';
-import { render, testTextField } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
 import mount from './_mount';
-
-describe('@RTL - TextField tests', () => {
-  testTextField(TextField);
-
-  test('<TextField> - renders a wrapper with unknown props', () => {
-    const props = {
-      'data-x': 'x',
-      'data-y': 'y',
-      'data-z': 'z',
-    };
-    render(<TextField name="x" {...props} />, { x: String });
-
-    const wrapper = screen.getByRole('textbox').closest('div');
-    Object.entries(props).forEach(([key, value]) =>
-      expect(wrapper).toHaveAttribute(key, value),
-    );
-  });
-});
 
 test('<TextField> - renders an input', () => {
   const element = <TextField name="x" />;

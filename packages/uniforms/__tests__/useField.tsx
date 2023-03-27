@@ -1,8 +1,9 @@
+import { fireEvent, screen } from '@testing-library/react';
 import React, { ReactNode } from 'react';
 import { AutoForm, BaseForm, connectField, useField } from 'uniforms';
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 
-import mount from './_mount';
+import { render } from '../__suites__';
 
 describe('useField', () => {
   const bridge = new JSONSchemaBridge(
@@ -44,41 +45,36 @@ describe('useField', () => {
     });
 
     it('applies default value', () => {
-      const wrapper = mount(
+      render(
         <AutoForm schema={bridge}>
           <TestComponent name="d" />
         </AutoForm>,
       );
+      const input = screen.getByRole('textbox');
 
-      expect(wrapper.find('input').prop('value')).toBe(4);
-
-      expect(
-        wrapper
-          .find('input')
-          .simulate('change', { target: { value: undefined } }),
-      ).toBeTruthy();
+      expect(input).toHaveAttribute('value', '4');
+      fireEvent.change(input, { target: { value: null } });
+      expect(input).toHaveAttribute('value', '');
     });
 
     it('does not apply default value after first change', () => {
-      const wrapper = mount(
+      render(
         <AutoForm schema={bridge}>
           <TestComponent name="d" />
         </AutoForm>,
       );
 
-      expect(
-        wrapper
-          .find('input')
-          .simulate('change', { target: { value: undefined } }),
-      ).toBeTruthy();
+      const input = screen.getByRole('textbox');
 
-      expect(wrapper.find('input').prop('value')).toBe('');
+      fireEvent.change(input, { target: { value: null } });
+
+      expect(input).toHaveAttribute('value', '');
     });
   });
 
   describe('when called with `absoluteName`', () => {
     it('works on top-level', () => {
-      mount(
+      render(
         <BaseForm schema={bridge}>
           <Test name="a" options={{ absoluteName: true }} />
           <Test name="b" options={{ absoluteName: true }} />
@@ -88,7 +84,7 @@ describe('useField', () => {
     });
 
     it('works nested', () => {
-      mount(
+      render(
         <BaseForm schema={bridge}>
           <Test name="b">
             <Test name="a" options={{ absoluteName: true }} />

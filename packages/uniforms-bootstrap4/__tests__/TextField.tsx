@@ -1,14 +1,12 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
 import { TextField } from 'uniforms-bootstrap4';
-import { render, testTextField } from 'uniforms/__suites__';
+import { render } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
 import mount from './_mount';
 
 describe('@RTL - TextField tests', () => {
-  testTextField(TextField);
-
   test('<TextField> - renders a wrapper with unknown props', () => {
     const props = {
       'data-x': 'x',

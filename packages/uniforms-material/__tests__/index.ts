@@ -1,4 +1,5 @@
 import * as material from 'uniforms-material';
+import * as suites from 'uniforms/__suites__';
 
 it('exports everything', () => {
   expect(material).toEqual({
@@ -27,4 +28,14 @@ it('exports everything', () => {
     ValidatedQuickForm: expect.any(Function),
     wrapField: expect.any(Function),
   });
+});
+
+describe('@RTL', () => {
+  suites.testAutoField(material.AutoField);
+  suites.testDateField(material.DateField);
+  suites.testListDelField(material.ListDelField);
+  suites.testListField(material.ListField, {
+    getListAddField: screen => screen.getByText(/\+/),
+  });
+  suites.testTextField(material.TextField);
 });

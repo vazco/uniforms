@@ -75,6 +75,7 @@ describe('JSONSchemaBridge', () => {
           $ref: '#/definitions/personalData',
         },
       },
+      friendsNames: { type: 'array', items: { type: 'string' } },
       hasAJob: { type: 'boolean', title: 'Currently Employed' },
       invalid: { type: 'null' },
       personalData: { $ref: '#/definitions/personalData' },
@@ -179,6 +180,7 @@ describe('JSONSchemaBridge', () => {
       },
       objectWithoutProperties: { type: 'object' },
       withLabel: { type: 'string', uniforms: { label: 'Example' } },
+      withTitle: { type: 'string', title: 'Example' },
       forcedRequired: { type: 'string', uniforms: { required: true } },
       'path.with.a.dot': {
         type: 'object',
@@ -657,6 +659,7 @@ describe('JSONSchemaBridge', () => {
         { firstName: 'John', lastName: 'John' },
         { firstName: 'John', lastName: 'John' },
       ]);
+      expect(bridge.getInitialValue('friendsNames')).toEqual([]);
     });
 
     it('works with objects', () => {
@@ -702,6 +705,13 @@ describe('JSONSchemaBridge', () => {
 
     it('works with label (default)', () => {
       expect(bridge.getProps('withLabel')).toEqual({
+        label: 'Example',
+        required: false,
+      });
+    });
+
+    it('works with label (title)', () => {
+      expect(bridge.getProps('withTitle')).toEqual({
         label: 'Example',
         required: false,
       });
@@ -825,6 +835,7 @@ describe('JSONSchemaBridge', () => {
         'email',
         'friends',
         'friendsMinCount',
+        'friendsNames',
         'hasAJob',
         'invalid',
         'personalData',
@@ -839,6 +850,7 @@ describe('JSONSchemaBridge', () => {
         'nonObjectAnyOfRequired',
         'objectWithoutProperties',
         'withLabel',
+        'withTitle',
         'forcedRequired',
         '["path.with.a.dot"]',
         'path',

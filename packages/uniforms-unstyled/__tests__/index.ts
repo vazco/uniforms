@@ -1,4 +1,5 @@
 import * as unstyled from 'uniforms-unstyled';
+import * as suites from 'uniforms/__suites__';
 
 it('exports everything', () => {
   expect(unstyled).toEqual({
@@ -26,4 +27,14 @@ it('exports everything', () => {
     ValidatedForm: expect.any(Function),
     ValidatedQuickForm: expect.any(Function),
   });
+});
+
+describe('@RTL', () => {
+  suites.testAutoField(unstyled.AutoField);
+  suites.testDateField(unstyled.DateField);
+  suites.testListDelField(unstyled.ListDelField);
+  suites.testListField(unstyled.ListField, {
+    getListAddField: screen => screen.getByRole('button'),
+  });
+  suites.testTextField(unstyled.TextField);
 });

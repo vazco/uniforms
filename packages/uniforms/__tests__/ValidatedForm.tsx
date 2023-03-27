@@ -1,9 +1,18 @@
-import React from 'react';
+import { fireEvent, screen } from '@testing-library/react';
+import React, { ReactNode } from 'react';
 import SimpleSchema from 'simpl-schema';
-import { ModelTransformMode, UnknownObject, ValidatedForm } from 'uniforms';
+import {
+  ModelTransformMode,
+  UnknownObject,
+  ValidatedForm,
+  context,
+  Context,
+  useForm,
+} from 'uniforms';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
+import { AutoField } from 'uniforms-unstyled';
 
-import mount from './_mount';
+import { render } from '../__suites__';
 
 describe('ValidatedForm', () => {
   const onChange = jest.fn();
@@ -11,183 +20,361 @@ describe('ValidatedForm', () => {
   const onValidate = jest.fn((model, error) => error);
   const validator = jest.fn();
   const validatorForSchema = jest.fn(() => validator);
+  const contextSpy = jest.fn<ReactNode, [Context<any> | null]>();
 
   const error = new Error();
   const model = { a: 1 };
-  const schema = new SimpleSchema2Bridge(
-    new SimpleSchema({
-      a: { type: String, defaultValue: '' },
-      b: { type: String, defaultValue: '' },
-      c: { type: String, defaultValue: '' },
-    }),
-  );
+  const schemaDefinition = {
+    a: { type: String, defaultValue: '' },
+    b: { type: String, defaultValue: '' },
+    c: { type: String, defaultValue: '' },
+  };
+  const schema = new SimpleSchema2Bridge(new SimpleSchema(schemaDefinition));
   jest.spyOn(schema.schema, 'validator').mockImplementation(validatorForSchema);
 
-  beforeEach(() => {
-    onChange.mockClear();
-    onSubmit.mockClear();
-    onValidate.mockClear();
-    validator.mockClear();
-    validatorForSchema.mockClear();
-  });
+  beforeEach(() => jest.clearAllMocks());
 
   describe('on validation', () => {
     // FIXME: ValidatedForm is not a valid Component.
-    let wrapper = mount<ValidatedForm | any>(<ValidatedForm schema={schema} />);
-    let form = wrapper.instance();
-
-    beforeEach(() => {
-      wrapper = mount<ValidatedForm>(
-        <ValidatedForm model={model} schema={schema} onValidate={onValidate} />,
-      );
-      form = wrapper.instance();
-    });
 
     it('validates (when `.validate` is called)', () => {
-      form.validate();
+      render(
+        <ValidatedForm
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+          name="form"
+          schema={schema}
+          model={model}
+          onValidate={onValidate}
+          validator={validator}
+        />,
+      );
+      const form = screen.getByRole('form');
+      fireEvent.submit(form);
       expect(validator).toHaveBeenCalledTimes(1);
     });
 
     it('correctly calls `validator`', () => {
-      form.validate();
+      render(
+        <ValidatedForm
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+          name="form"
+          schema={schema}
+          model={model}
+          onValidate={onValidate}
+          validator={validator}
+          data-testid="validateForm"
+        />,
+      );
+      const form = screen.getByRole('form');
+      fireEvent.submit(form);
       expect(validator).toHaveBeenCalledTimes(1);
       expect(validator).toHaveBeenLastCalledWith(model);
     });
-
     it('updates error state with errors from `validator`', async () => {
+      render(
+        <ValidatedForm
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+          name="form"
+          schema={schema}
+          model={model}
+          onValidate={onValidate}
+          validator={validator}
+          data-testid="validateForm"
+        />,
+      );
+      const form = screen.getByRole('form');
+
       validator.mockImplementationOnce(() => {
         throw error;
       });
 
-      form.validate();
+      fireEvent.submit(form);
       await new Promise(resolve => process.nextTick(resolve));
 
-      expect(wrapper.instance().getContext().error).toBe(error);
+      expect(onValidate).toHaveBeenLastCalledWith(model, error);
     });
 
     it('correctly calls `onValidate` when validation succeeds', () => {
-      form.validate();
+      render(
+        <ValidatedForm
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+          name="form"
+          schema={schema}
+          model={model}
+          onValidate={onValidate}
+          validator={validator}
+        />,
+      );
+      const form = screen.getByRole('form');
+
+      fireEvent.submit(form);
       expect(onValidate).toHaveBeenCalledTimes(1);
       expect(onValidate).toHaveBeenLastCalledWith(model, null);
     });
 
     it('correctly calls `onValidate` when validation fails ', () => {
+      render(
+        <ValidatedForm
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+          name="form"
+          schema={schema}
+          model={model}
+          onValidate={onValidate}
+          validator={validator}
+          data-testid="validateForm"
+        />,
+      );
+      const form = screen.getByRole('form');
+
       validator.mockImplementationOnce(() => {
         throw error;
       });
 
-      form.validate();
+      fireEvent.submit(form);
 
       expect(onValidate).toHaveBeenCalledTimes(1);
       expect(onValidate).toHaveBeenLastCalledWith(model, error);
     });
 
     it('updates error state with async errors from `onValidate`', async () => {
+      render(
+        <ValidatedForm
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+          name="form"
+          schema={schema}
+          model={model}
+          onValidate={onValidate}
+          validator={validator}
+        >
+          <context.Consumer children={contextSpy} />
+        </ValidatedForm>,
+        schemaDefinition,
+      );
+      const form = screen.getByRole('form');
+
       onValidate.mockImplementationOnce(() => error);
 
-      form.validate();
-
-      expect(wrapper.instance().getContext().error).toBe(error);
+      fireEvent.submit(form);
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ error }),
+      );
     });
-
     it('leaves error state alone when `onValidate` suppress `validator` errors', async () => {
+      render(
+        <ValidatedForm
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+          name="form"
+          schema={schema}
+          model={model}
+          onValidate={onValidate}
+          validator={validator}
+        >
+          <context.Consumer children={contextSpy} />
+        </ValidatedForm>,
+        schemaDefinition,
+      );
+      const form = screen.getByRole('form');
+
       validator.mockImplementationOnce(() => {
         throw error;
       });
       onValidate.mockImplementationOnce(() => null);
-      form.validate();
+      fireEvent.submit(form);
 
       expect(validator).toHaveBeenCalled();
       expect(onValidate).toHaveBeenCalled();
-      expect(wrapper.instance().getContext()).not.toHaveProperty(
-        'uniforms.error',
-        error,
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ error: null }),
       );
     });
-
     it('has `validating` context variable, default `false`', () => {
-      expect(wrapper.instance().getContext().validating).toBe(false);
+      render(
+        <ValidatedForm
+          schema={schema}
+          model={model}
+          onValidate={onValidate}
+          validator={validator}
+        >
+          <context.Consumer children={contextSpy} />
+        </ValidatedForm>,
+        schemaDefinition,
+      );
+
+      expect(contextSpy).toHaveBeenCalledWith(
+        expect.objectContaining({ validating: false }),
+      );
     });
 
     it('uses `modelTransform`s `validate` mode', () => {
       const transformedModel = { b: 1 };
       const modelTransform = (mode: ModelTransformMode, model: UnknownObject) =>
         mode === 'validate' ? transformedModel : model;
-      wrapper.setProps({ modelTransform });
-      form.validate();
+      render(
+        <ValidatedForm
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+          name="form"
+          schema={schema}
+          model={model}
+          onValidate={onValidate}
+          modelTransform={modelTransform}
+        />,
+      );
+      const form = screen.getByRole('form');
+      fireEvent.submit(form);
       expect(validator).toHaveBeenLastCalledWith(transformedModel);
       expect(onValidate).toHaveBeenLastCalledWith(transformedModel, null);
     });
   });
 
   describe('when submitted', () => {
-    // FIXME: ValidatedForm is not a valid Component.
-    let wrapper = mount<ValidatedForm | any>(
-      <ValidatedForm
-        model={model}
-        schema={schema}
-        onSubmit={onSubmit}
-        onValidate={onValidate}
-      />,
-    );
-
-    beforeEach(() => {
-      wrapper = mount<ValidatedForm | any>(
+    it('calls `onSubmit` when validation succeeds', async () => {
+      render(
+        // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm
-          model={model}
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+          name="form"
           schema={schema}
-          onSubmit={onSubmit}
+          model={model}
           onValidate={onValidate}
+          onSubmit={onSubmit}
         />,
       );
-    });
 
-    it('calls `onSubmit` when validation succeeds', async () => {
-      wrapper.find('form').simulate('submit');
+      const form = screen.getByRole('form');
+      fireEvent.submit(form);
       await new Promise(resolve => process.nextTick(resolve));
 
       expect(onSubmit).toHaveBeenCalledTimes(1);
     });
 
     it('skips `onSubmit` when validation fails', async () => {
+      render(
+        // FIXME: ValidatedForm is not a valid Component.
+        <ValidatedForm
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+          name="form"
+          schema={schema}
+          model={model}
+          onValidate={onValidate}
+          onSubmit={onSubmit}
+        />,
+      );
+
       validator.mockImplementationOnce(() => {
         throw error;
       });
-      wrapper.find('form').simulate('submit');
+
+      const form = screen.getByRole('form');
+      fireEvent.submit(form);
       await new Promise(resolve => process.nextTick(resolve));
 
       expect(onSubmit).not.toBeCalled();
     });
 
     it('sets submitted to true, when form is submitted and validation succeeds', () => {
-      const instance = wrapper.instance();
-      expect(instance.getContext().submitted).toBe(false);
-      wrapper.find('form').simulate('submit');
-      expect(instance.getContext().submitted).toBe(true);
+      render(
+        // FIXME: ValidatedForm is not a valid Component.
+        <ValidatedForm
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+          name="form"
+          schema={schema}
+          model={model}
+          onValidate={onValidate}
+          onSubmit={onSubmit}
+        >
+          <context.Consumer children={contextSpy} />
+        </ValidatedForm>,
+        schemaDefinition,
+      );
+      const form = screen.getByRole('form');
+
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ submitted: false }),
+      );
+
+      fireEvent.submit(form);
+
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ submitted: true }),
+      );
     });
 
     it('sets submitted to true, when form is submitted and validation fails', () => {
+      render(
+        // FIXME: ValidatedForm is not a valid Component.
+        <ValidatedForm
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+          name="form"
+          schema={schema}
+          model={model}
+          onValidate={onValidate}
+          onSubmit={onSubmit}
+        >
+          <context.Consumer children={contextSpy} />
+        </ValidatedForm>,
+        schemaDefinition,
+      );
+
       validator.mockImplementationOnce(() => {
         throw error;
       });
-      const instance = wrapper.instance();
-      expect(instance.getContext().submitted).toBe(false);
-      wrapper.find('form').simulate('submit');
-      expect(instance.getContext().submitted).toBe(true);
+
+      const form = screen.getByRole('form');
+
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ submitted: false }),
+      );
+
+      fireEvent.submit(form);
+
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ submitted: true }),
+      );
     });
 
     it('updates error state with async errors from `onSubmit`', async () => {
+      render(
+        // FIXME: ValidatedForm is not a valid Component.
+        <ValidatedForm
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+          name="form"
+          schema={schema}
+          model={model}
+          onValidate={onValidate}
+          onSubmit={onSubmit}
+        >
+          <context.Consumer children={contextSpy} />
+        </ValidatedForm>,
+        schemaDefinition,
+      );
+
       onSubmit.mockImplementationOnce(() => Promise.reject(error));
-      wrapper.find('form').simulate('submit');
+      const form = screen.getByRole('form');
+
+      fireEvent.submit(form);
       await new Promise(resolve => process.nextTick(resolve));
 
       expect(onSubmit).toHaveBeenCalled();
-      expect(wrapper.instance().getContext().error).toBe(error);
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ error }),
+      );
     });
 
     it('works if unmounts on submit', async () => {
-      onSubmit.mockImplementationOnce(() => wrapper.unmount());
-      wrapper.find('form').simulate('submit');
+      const { unmount } = render(
+        // FIXME: ValidatedForm is not a valid Component.
+        <ValidatedForm
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+          name="form"
+          schema={schema}
+          model={model}
+          onValidate={onValidate}
+          onSubmit={onSubmit}
+        />,
+      );
+      const form = screen.getByRole('form');
+      onSubmit.mockImplementationOnce(() => unmount());
+      fireEvent.submit(form);
       await new Promise(resolve => process.nextTick(resolve));
     });
   });
@@ -196,11 +383,18 @@ describe('ValidatedForm', () => {
     describe('in `onChange` mode', () => {
       it('validates', () => {
         // FIXME: ValidatedForm is not a valid Component.
-        const wrapper = mount<ValidatedForm | any>(
-          <ValidatedForm model={model} schema={schema} validate="onChange" />,
+        render(
+          <ValidatedForm
+            schema={schema}
+            model={model}
+            onChange={onChange}
+            validate="onChange"
+          >
+            <AutoField name="a" />
+          </ValidatedForm>,
         );
-        wrapper.instance().getContext().onChange('key', 'value');
-
+        const input = screen.getByLabelText('A');
+        fireEvent.change(input, { target: { value: 'test' } });
         expect(validator).toHaveBeenCalledTimes(1);
       });
     });
@@ -208,183 +402,246 @@ describe('ValidatedForm', () => {
     describe('in `onSubmit` mode', () => {
       it('does not validate', () => {
         // FIXME: ValidatedForm is not a valid Component.
-        const wrapper = mount<ValidatedForm | any>(
-          <ValidatedForm model={model} schema={schema} validate="onSubmit" />,
+        render(
+          <ValidatedForm model={model} schema={schema} validate="onSubmit">
+            <AutoField name="a" />
+          </ValidatedForm>,
         );
-        wrapper.instance().getContext().onChange('key', 'value');
+        const input = screen.getByLabelText('A');
+        fireEvent.change(input, { target: { value: 'test' } });
 
         expect(validator).not.toHaveBeenCalled();
       });
     });
 
     describe('in `onChangeAfterSubmit` mode', () => {
-      // FIXME: ValidatedForm is not a valid Component.
-      let wrapper = mount<ValidatedForm | any>(
-        <ValidatedForm
-          model={model}
-          schema={schema}
-          validate="onChangeAfterSubmit"
-        />,
-      );
-
-      beforeEach(() => {
-        wrapper = mount<ValidatedForm | any>(
+      it('does not validates before submit', () => {
+        render(
+          // FIXME: ValidatedForm is not a valid Component.
           <ValidatedForm
             model={model}
             schema={schema}
             validate="onChangeAfterSubmit"
-          />,
+          >
+            <AutoField name="a" />
+          </ValidatedForm>,
         );
-      });
+        const input = screen.getByLabelText('A');
+        fireEvent.change(input, { target: { value: 'test' } });
 
-      it('does not validates before submit', () => {
-        wrapper.instance().getContext().onChange('key', 'value');
         expect(validator).not.toHaveBeenCalled();
       });
 
       it('validates after submit', async () => {
-        wrapper.find('form').simulate('submit');
+        render(
+          // FIXME: ValidatedForm is not a valid Component.
+          <ValidatedForm
+            // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+            name="form"
+            model={model}
+            schema={schema}
+            validate="onChangeAfterSubmit"
+          >
+            <AutoField name="a" />
+          </ValidatedForm>,
+        );
+
+        const form = screen.getByRole('form');
+        fireEvent.submit(form);
         await new Promise(resolve => process.nextTick(resolve));
 
         validator.mockClear();
-        wrapper.instance().getContext().onChange('key', 'value');
+        const input = screen.getByLabelText('A');
+        fireEvent.change(input, { target: { value: 'test' } });
+
         expect(validator).toHaveBeenCalledTimes(1);
       });
     });
   });
 
   describe('on reset', () => {
-    it('removes `error`', () => {
-      // FIXME: ValidatedForm is not a valid Component.
-      const wrapper = mount<ValidatedForm | any>(
-        <ValidatedForm model={model} onSubmit={onSubmit} schema={schema} />,
+    it('removes `error`', async () => {
+      const FormControls = () => {
+        const { formRef } = useForm();
+
+        return (
+          <>
+            <button onClick={() => formRef.reset()}>Reset</button>
+          </>
+        );
+      };
+
+      render(
+        // FIXME: ValidatedForm is not a valid Component.
+        <ValidatedForm
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+          name="form"
+          model={model}
+          onSubmit={onSubmit}
+          schema={schema}
+        >
+          <context.Consumer children={contextSpy} />
+          <FormControls />
+        </ValidatedForm>,
+        schemaDefinition,
       );
       validator.mockImplementationOnce(() => {
-        throw new Error();
+        throw error;
       });
-      wrapper.find('form').simulate('submit');
-      expect(wrapper.instance().getContext().error).toBeTruthy();
 
-      wrapper.instance().reset();
-      expect(wrapper.instance().getContext().error).toBeNull();
+      const form = screen.getByRole('form');
+      const resetButton = screen.getByText('Reset');
+
+      fireEvent.submit(form);
+      await new Promise(resolve => process.nextTick(resolve));
+
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ error }),
+      );
+
+      fireEvent.click(resetButton);
+      await new Promise(resolve => process.nextTick(resolve));
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ error: null }),
+      );
     });
   });
 
   describe('when props are changed', () => {
     const anotherModel = { x: 2 };
 
-    describe('in `onChange` mode', () => {
-      // FIXME: ValidatedForm is not a valid Component.
-      let wrapper = mount<ValidatedForm | any>(
-        <ValidatedForm model={model} schema={schema} validate="onChange" />,
-      );
+    // FIXME: ValidatedForm is not a valid Component.
+    const Component = (props: Record<any, any>) => (
+      <ValidatedForm
+        model={model}
+        schema={schema}
+        validate="onChange"
+        {...props}
+      />
+    );
 
-      beforeEach(() => {
-        wrapper = mount<ValidatedForm | any>(
-          <ValidatedForm model={model} schema={schema} validate="onChange" />,
-        );
-      });
-
-      it('does not revalidate arbitrarily', () => {
-        wrapper.setProps({ anything: 'anything' });
-        expect(validator).not.toBeCalled();
-      });
-
-      it('revalidates if `model` changes', () => {
-        wrapper.setProps({ model: anotherModel });
-        expect(validator).toHaveBeenCalledTimes(1);
-      });
-
-      it('revalidates if `validator` changes', () => {
-        wrapper.setProps({ validator: {} });
-        expect(validator).toHaveBeenCalledTimes(1);
-      });
-
-      it('revalidate if `schema` changes', () => {
-        wrapper.setProps({ schema: new SimpleSchema2Bridge(schema.schema) });
-        expect(validator).toHaveBeenCalledTimes(1);
-      });
+    it('does not revalidate arbitrarily', () => {
+      const { rerenderWithProps } = render(<Component />);
+      rerenderWithProps({ anything: 'anything' });
+      expect(validator).not.toBeCalled();
     });
 
-    describe('in `onSubmit` mode', () => {
-      // FIXME: ValidatedForm is not a valid Component.
-      let wrapper = mount<ValidatedForm | any>(
-        <ValidatedForm model={model} schema={schema} validate="onSubmit" />,
-      );
-
-      beforeEach(() => {
-        wrapper = mount<ValidatedForm | any>(
-          <ValidatedForm model={model} schema={schema} validate="onSubmit" />,
-        );
-      });
-
-      it('does not revalidate when `model` changes', () => {
-        wrapper.setProps({ model: {} });
-        expect(validator).not.toBeCalled();
-      });
-
-      it('does not revalidate when validator `options` change', () => {
-        wrapper.setProps({ validator: {} });
-        expect(validator).not.toBeCalled();
-      });
-
-      it('does not revalidate when `schema` changes', () => {
-        wrapper.setProps({ schema: new SimpleSchema2Bridge(schema.schema) });
-        expect(validator).not.toBeCalled();
-      });
+    it('revalidates if `model` changes', () => {
+      const { rerenderWithProps } = render(<Component />);
+      rerenderWithProps({ model: anotherModel });
+      expect(validator).toHaveBeenCalledTimes(1);
     });
 
-    describe('in any mode', () => {
-      // FIXME: ValidatedForm is not a valid Component.
-      let wrapper = mount<ValidatedForm | any>(
+    it('revalidates if `validator` changes', () => {
+      const { rerenderWithProps } = render(<Component />);
+      rerenderWithProps({ validator: {} });
+      expect(validator).toHaveBeenCalledTimes(1);
+    });
+
+    it('revalidate if `schema` changes', () => {
+      const anotherSchema = new SimpleSchema2Bridge(schema.schema);
+      const { rerenderWithProps } = render(<Component />);
+      rerenderWithProps({ schema: anotherSchema });
+      expect(validator).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('in `onSubmit` mode', () => {
+    // FIXME: ValidatedForm is not a valid Component.
+    const Component = () => (
+      <ValidatedForm model={model} schema={schema} validate="onSubmit" />
+    );
+
+    it('does not revalidate when `model` changes', () => {
+      const { rerenderWithProps } = render(<Component />, schemaDefinition);
+      rerenderWithProps({ model: {} });
+      expect(validator).not.toBeCalled();
+    });
+
+    it('does not revalidate when validator `options` change', () => {
+      const { rerenderWithProps } = render(<Component />, schemaDefinition);
+      rerenderWithProps({ validator: {} });
+      expect(validator).not.toBeCalled();
+    });
+
+    it('does not revalidate when `schema` changes', () => {
+      const anotherSchema = new SimpleSchema2Bridge(schema.schema);
+      const { rerenderWithProps } = render(<Component />, schemaDefinition);
+      rerenderWithProps({ schema: anotherSchema });
+      expect(validator).not.toBeCalled();
+    });
+  });
+
+  describe('in any mode', () => {
+    it('reuses the validator between validations', () => {
+      render(
+        // FIXME: ValidatedForm is not a valid Component.
+        <ValidatedForm
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+          name="form"
+          model={model}
+          schema={schema}
+        >
+          <AutoField name="a" />
+        </ValidatedForm>,
+      );
+      ['1', '2', '3'].forEach(value => {
+        const form = screen.getByRole('form');
+        const input = screen.getByLabelText('A');
+        fireEvent.change(input, { target: { value } });
+        fireEvent.submit(form);
+      });
+
+      expect(validatorForSchema).toHaveBeenCalledTimes(1);
+    });
+
+    it('uses the new validator settings if `validator` changes', () => {
+      const validatorA = Symbol();
+      const validatorB = Symbol();
+      const { rerenderWithProps } = render(
+        // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm model={model} schema={schema} />,
       );
 
-      beforeEach(() => {
-        wrapper = mount<ValidatedForm | any>(
-          <ValidatedForm model={model} schema={schema} />,
-        );
+      rerenderWithProps({ validator: validatorA });
+      expect(validatorForSchema).toHaveBeenCalledTimes(2);
+      expect(validatorForSchema).toHaveBeenNthCalledWith(2, validatorA);
+
+      rerenderWithProps({ validator: validatorB });
+      expect(validatorForSchema).toHaveBeenCalledTimes(3);
+      expect(validatorForSchema).toHaveBeenNthCalledWith(3, validatorB);
+
+      rerenderWithProps({ validator: validatorA });
+      expect(validatorForSchema).toHaveBeenCalledTimes(4);
+      expect(validatorForSchema).toHaveBeenNthCalledWith(4, validatorA);
+    });
+
+    it('uses the new validator if `schema` changes', () => {
+      const alternativeValidator = jest.fn();
+      const alternativeSchema = new SimpleSchema2Bridge(schema.schema);
+      jest
+        .spyOn(alternativeSchema, 'getValidator')
+        .mockImplementation(() => alternativeValidator);
+      const { rerenderWithProps } = render(
+        // FIXME: ValidatedForm is not a valid Component.
+        <ValidatedForm
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+          name="form"
+          model={model}
+          schema={schema}
+        >
+          <AutoField name="a" />
+        </ValidatedForm>,
+      );
+
+      rerenderWithProps({
+        schema: alternativeSchema,
       });
+      const form = screen.getByRole('form');
+      fireEvent.submit(form);
 
-      it('reuses the validator between validations', () => {
-        ['1', '2', '3'].forEach(value => {
-          wrapper.instance().getContext().onChange('key', value);
-          wrapper.find('form').simulate('submit');
-        });
-
-        expect(validatorForSchema).toHaveBeenCalledTimes(1);
-      });
-
-      it('uses the new validator settings if `validator` changes', () => {
-        const validatorA = Symbol();
-        const validatorB = Symbol();
-
-        wrapper.setProps({ validator: validatorA });
-        expect(validatorForSchema).toHaveBeenCalledTimes(2);
-        expect(validatorForSchema).toHaveBeenNthCalledWith(2, validatorA);
-
-        wrapper.setProps({ validator: validatorB });
-        expect(validatorForSchema).toHaveBeenCalledTimes(3);
-        expect(validatorForSchema).toHaveBeenNthCalledWith(3, validatorB);
-
-        wrapper.setProps({ validator: validatorA });
-        expect(validatorForSchema).toHaveBeenCalledTimes(4);
-        expect(validatorForSchema).toHaveBeenNthCalledWith(4, validatorA);
-      });
-
-      it('uses the new validator if `schema` changes', () => {
-        const alternativeValidator = jest.fn();
-        const alternativeSchema = new SimpleSchema2Bridge(schema.schema);
-        jest
-          .spyOn(alternativeSchema, 'getValidator')
-          .mockImplementation(() => alternativeValidator);
-
-        wrapper.setProps({ schema: alternativeSchema });
-        wrapper.find('form').simulate('submit');
-
-        expect(validator).not.toBeCalled();
-        expect(alternativeValidator).toHaveBeenCalledTimes(1);
-      });
+      expect(validator).not.toBeCalled();
+      expect(alternativeValidator).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -445,14 +702,20 @@ describe('ValidatedForm', () => {
 
     it.each(cases.map(flatPair4))('works for %p/%p/%p/%p', async (...modes) => {
       const [hasError, validatorMode, onValidateMode, onSubmitMode] = modes;
-      // FIXME: ValidatedForm is not a valid Component.
-      const wrapper = mount<ValidatedForm | any>(
+
+      render(
+        // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm
+          // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
+          name="form"
           error={hasError ? error : null}
           onSubmit={onSubmit}
           onValidate={onValidate}
           schema={alternativeSchema}
-        />,
+        >
+          <context.Consumer children={contextSpy} />
+        </ValidatedForm>,
+        schemaDefinition,
       );
 
       const asyncSubmission = onSubmitMode.includes('async');
@@ -471,13 +734,18 @@ describe('ValidatedForm', () => {
         onValidate.mockImplementationOnce(variantGroups[1][onValidateMode]);
         onSubmit.mockImplementationOnce(variantGroups[2][onSubmitMode]);
 
-        const result = wrapper.instance().submit();
+        const form = screen.getByRole('form');
+        fireEvent.submit(form);
         expect(validator).toHaveBeenCalledTimes(run);
 
         if (asyncValidation) {
-          expect(wrapper.instance().getContext().validating).toBe(true);
+          expect(contextSpy).toHaveBeenLastCalledWith(
+            expect.objectContaining({ validating: true }),
+          );
           await new Promise(resolve => process.nextTick(resolve));
-          expect(wrapper.instance().getContext().validating).toBe(false);
+          expect(contextSpy).toHaveBeenLastCalledWith(
+            expect.objectContaining({ validating: false }),
+          );
         }
 
         await new Promise(resolve => process.nextTick(resolve));
@@ -486,27 +754,36 @@ describe('ValidatedForm', () => {
 
         if (hasValidationError) {
           expect(onSubmit).not.toHaveBeenCalled();
-          expect(wrapper.instance().getContext().error).toBe(error);
+          expect(contextSpy).toHaveBeenLastCalledWith(
+            expect.objectContaining({ error }),
+          );
         } else {
           expect(onSubmit).toHaveBeenCalledTimes(run);
-          expect(wrapper.instance().getContext().error).toBe(null);
+          expect(contextSpy).toHaveBeenLastCalledWith(
+            expect.objectContaining({ error: null }),
+          );
 
           if (asyncSubmission) {
-            expect(wrapper.instance().getContext().submitting).toBe(true);
+            expect(contextSpy).toHaveBeenLastCalledWith(
+              expect.objectContaining({ submitting: true }),
+            );
             await new Promise(resolve => setTimeout(resolve));
-            expect(wrapper.instance().getContext().submitting).toBe(false);
+            expect(contextSpy).toHaveBeenLastCalledWith(
+              expect.objectContaining({ submitting: false }),
+            );
           }
         }
 
         await new Promise(resolve => setTimeout(resolve));
 
         if (hasSubmissionError) {
-          expect(wrapper.instance().getContext().error).toBe(error);
-          await expect(result).rejects.toEqual(error);
+          expect(contextSpy).toHaveBeenLastCalledWith(
+            expect.objectContaining({ error }),
+          );
         } else {
-          expect(wrapper.instance().getContext().error).toBe(null);
-          const submissionResult = asyncSubmission ? 'ok' : undefined;
-          await expect(result).resolves.toEqual(submissionResult);
+          expect(contextSpy).toHaveBeenLastCalledWith(
+            expect.objectContaining({ error: null }),
+          );
         }
       }
     });

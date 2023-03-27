@@ -10,7 +10,7 @@ import {
 
 export type ListDelFieldProps = HTMLFieldProps<
   unknown,
-  HTMLSpanElement,
+  HTMLButtonElement,
   { removeIcon?: ReactNode }
 >;
 
@@ -31,36 +31,23 @@ function ListDel({
     { absoluteName: true },
   )[0];
 
-  const limitNotReached =
-    !disabled && !(parent.minCount! >= parent.value!.length);
-
-  function onAction(
-    event:
-      | React.KeyboardEvent<HTMLSpanElement>
-      | React.MouseEvent<HTMLSpanElement, MouseEvent>,
-  ) {
-    if (
-      limitNotReached &&
-      !readOnly &&
-      (!('key' in event) || event.key === 'Enter')
-    ) {
-      const value = parent.value!.slice();
-      value.splice(nameIndex, 1);
-      parent.onChange(value);
-    }
-  }
+  disabled ||= readOnly || parent.minCount! >= parent.value!.length;
 
   return (
-    <span
+    <button
       {...filterDOMProps(props)}
-      className={classnames('badge rounded-pill', className)}
-      onClick={onAction}
-      onKeyDown={onAction}
-      role="button"
+      className={classnames('btn btn-secondary btn-sm', className)}
+      disabled={disabled}
+      onClick={() => {
+        const value = parent.value!.slice();
+        value.splice(nameIndex, 1);
+        parent.onChange(value);
+      }}
       tabIndex={0}
+      type="button"
     >
       {removeIcon}
-    </span>
+    </button>
   );
 }
 

@@ -1,98 +1,280 @@
-<svg version="1.1" baseProfile="full" width="1475" height="457" viewbox="0 0 1475 457" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" style="font:bold  14pt monospace, Helvetica, sans-serif;;stroke-linejoin:round;stroke-linecap:round">
+<svg version="1.1" baseProfile="full" width="1596.8" height="457.0" viewbox="0 0 1596.75 457" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
   <title >bridge-concept</title>
   <desc >#edgeMargin: 5
-#fill: transparent
-#font: monospace
-#fontSize: 14
-#padding: 20
-#spacing: 35
-#stroke: #333
-#title: bridge-concept
+    #fill: transparent
+    #font: monospace
+    #fontSize: 14
+    #padding: 20
+    #spacing: 35
+    #stroke: #333
+    #title: bridge-concept
+    [GraphQL]-&gt;[GraphQLBridge]-&gt;[uniforms]
+    [SimpleSchema]-&gt;[SimpleSchemaBridge]-&gt;[uniforms]
+    [JSONSchema]-&gt;[JSONSchemaBridge]-&gt;[uniforms]
+    [SimpleSchema2 (npm)]-&gt;[SimpleSchema2Bridge]-&gt;[uniforms]
+    [Zod]-&gt;[ZodBridge]-&gt;[uniforms]
+    [uniforms]-&gt;[Ant Design]
+    [uniforms]-&gt;[Bootstrap 3]
+    [uniforms]-&gt;[Bootstrap 4]
+    [uniforms]-&gt;[Bootstrap 5]
+    [uniforms]-&gt;[Material]
+    [uniforms]-&gt;[MUI]
+    [uniforms]-&gt;[Semantic UI]
+    [uniforms]-&gt;[unstyled]</desc>
+  <g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="14pt" font-family="monospace" font-weight="bold" font-style="normal">
+    <g font-family="monospace" font-size="14pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#333">
+      <g stroke="transparent" fill="transparent">
+        <rect x="0.0" y="0.0" height="457.0" width="1596.8" stroke="none"></rect>
+      </g>
+      <g transform="translate(20, 20)" fill="#333">
+        <g transform="translate(20, 20)" fill="#333" font-family="monospace" font-size="14pt" font-weight="normal" font-style="normal">
+          <path d="M208.3 68.0 L208.25 85.5 L208.25 97.16666666666667 L208.3 97.2 " fill="none"></path>
+          <path d="M203.6 91.3 L208.3 97.2 L212.9 91.3 L208.3 103.0 Z"></path>
+          <path d="M208.3 171.0 L208.25 188.5 L708.9398039711843 233.22771015527493 L708.9 233.2 " fill="none"></path>
+          <path d="M702.7 237.4 L708.9 233.2 L703.5 228.1 L714.8 233.7 Z"></path>
+          <path d="M467.3 68.0 L467.25 85.5 L467.25 97.16666666666667 L467.3 97.2 " fill="none"></path>
+          <path d="M462.6 91.3 L467.3 97.2 L471.9 91.3 L467.3 103.0 Z"></path>
+          <path d="M467.3 171.0 L467.25 188.5 L708.9919234419502 227.7116820701116 L709.0 227.7 " fill="none"></path>
+          <path d="M702.5 231.4 L709.0 227.7 L704.0 222.2 L714.8 228.6 Z"></path>
+          <path d="M742.8 68.0 L742.75 85.5 L742.75 97.16666666666667 L742.8 97.2 " fill="none"></path>
+          <path d="M738.1 91.3 L742.8 97.2 L747.4 91.3 L742.8 103.0 Z"></path>
+          <path d="M742.8 171.0 L742.75 188.5 L753.3351322646344 201.47938837211117 L753.3 201.5 " fill="none"></path>
+          <path d="M746.0 199.9 L753.3 201.5 L753.3 194.0 L757.0 206.0 Z"></path>
+          <path d="M1023.8 68.0 L1023.75 85.5 L1023.75 97.16666666666667 L1023.8 97.2 " fill="none"></path>
+          <path d="M1019.1 91.3 L1023.8 97.2 L1028.4 91.3 L1023.8 103.0 Z"></path>
+          <path d="M1023.8 171.0 L1023.75 188.5 L860.452447031401 223.68754802461441 L860.5 223.7 " fill="none"></path>
+          <path d="M865.2 217.9 L860.5 223.7 L867.1 227.0 L854.8 224.9 Z"></path>
+          <path d="M1265.8 68.0 L1265.75 85.5 L1265.75 97.16666666666667 L1265.8 97.2 " fill="none"></path>
+          <path d="M1261.1 91.3 L1265.8 97.2 L1270.4 91.3 L1265.8 103.0 Z"></path>
+          <path d="M1265.8 171.0 L1265.75 188.5 L860.5501823344532 231.88418006190366 L860.6 231.9 " fill="none"></path>
+          <path d="M865.9 226.6 L860.6 231.9 L866.8 235.9 L854.8 232.5 Z"></path>
+          <path d="M714.8 245.1 L81 291.5 L81 303.1666666666667 L81.0 303.2 " fill="none"></path>
+          <path d="M76.3 297.3 L81.0 303.2 L85.7 297.3 L81.0 309.0 Z"></path>
+          <path d="M714.8 247.2 L283.5 291.5 L283.5 303.1666666666667 L283.5 303.2 " fill="none"></path>
+          <path d="M278.8 297.3 L283.5 303.2 L288.2 297.3 L283.5 309.0 Z"></path>
+          <path d="M714.8 252.3 L491.5 291.5 L491.5 303.1666666666667 L491.5 303.2 " fill="none"></path>
+          <path d="M486.8 297.3 L491.5 303.2 L496.2 297.3 L491.5 309.0 Z"></path>
+          <path d="M728.5 274.0 L699.5 291.5 L699.5 303.1666666666667 L699.5 303.2 " fill="none"></path>
+          <path d="M694.8 297.3 L699.5 303.2 L704.2 297.3 L699.5 309.0 Z"></path>
+          <path d="M854.8 273.9 L891 291.5 L891 303.1666666666667 L891.0 303.2 " fill="none"></path>
+          <path d="M886.3 297.3 L891.0 303.2 L895.7 297.3 L891.0 309.0 Z"></path>
+          <path d="M854.8 254.2 L1038 291.5 L1038 303.1666666666667 L1038.0 303.2 " fill="none"></path>
+          <path d="M1033.3 297.3 L1038.0 303.2 L1042.7 297.3 L1038.0 309.0 Z"></path>
+          <path d="M854.8 248.7 L1201.5 291.5 L1201.5 303.1666666666667 L1201.5 303.2 " fill="none"></path>
+          <path d="M1196.8 297.3 L1201.5 303.2 L1206.2 297.3 L1201.5 309.0 Z"></path>
+          <path d="M854.8 245.9 L1393 291.5 L1393 303.1666666666667 L1393.0 303.2 " fill="none"></path>
+          <path d="M1388.3 297.3 L1393.0 303.2 L1397.7 297.3 L1393.0 309.0 Z"></path>
+          <g data-name="GraphQL">
+            <g fill="transparent" stroke="#333" data-name="GraphQL">
+              <rect x="149.3" y="5.0" height="58.0" width="118.0" data-name="GraphQL"></rect>
+            </g>
+            <g transform="translate(149.25, 5)" font-family="monospace" font-size="14pt" font-weight="bold" font-style="normal" data-name="GraphQL">
+              <g transform="translate(20, 20)" fill="#333" text-align="center" data-name="GraphQL">
+                <text x="39.0" y="15.8" stroke="none" text-anchor="middle" data-name="GraphQL">GraphQL</text>
 
-[GraphQL] -&gt; [GraphQLBridge]
-[JSONSchema] -&gt; [JSONSchemaBridge]
-[SimpleSchema2 (npm)] -&gt; [SimpleSchema2Bridge]
-[SimpleSchema] -&gt; [SimpleSchemaBridge]
+              </g>
+            </g>
+          </g>
+          <g data-name="GraphQLBridge">
+            <g fill="transparent" stroke="#333" data-name="GraphQLBridge">
+              <rect x="115.3" y="108.0" height="58.0" width="186.0" data-name="GraphQLBridge"></rect>
+            </g>
+            <g transform="translate(115.25, 108)" font-family="monospace" font-size="14pt" font-weight="bold" font-style="normal" data-name="GraphQLBridge">
+              <g transform="translate(20, 20)" fill="#333" text-align="center" data-name="GraphQLBridge">
+                <text x="73.0" y="15.8" stroke="none" text-anchor="middle" data-name="GraphQLBridge">GraphQLBridge</text>
 
-[GraphQLBridge] -&gt; [uniforms]
-[SimpleSchemaBridge] -&gt; [uniforms]
-[JSONSchemaBridge] -&gt; [uniforms]
-[SimpleSchema2Bridge] -&gt; [uniforms]
-[SimpleSchemaBridge] -&gt; [uniforms]
+              </g>
+            </g>
+          </g>
+          <g data-name="uniforms">
+            <g fill="transparent" stroke="#333" data-name="uniforms">
+              <rect x="719.8" y="211.0" height="58.0" width="130.0" data-name="uniforms"></rect>
+            </g>
+            <g transform="translate(719.75, 211)" font-family="monospace" font-size="14pt" font-weight="bold" font-style="normal" data-name="uniforms">
+              <g transform="translate(20, 20)" fill="#333" text-align="center" data-name="uniforms">
+                <text x="45.0" y="15.8" stroke="none" text-anchor="middle" data-name="uniforms">uniforms</text>
 
-[uniforms] -&gt; [Ant Design]
-[uniforms] -&gt; [Bootstrap 3]
-[uniforms] -&gt; [Bootstrap 4]
-[uniforms] -&gt; [Bootstrap 5]
-[uniforms] -&gt; [Material]
-[uniforms] -&gt; [MUI]
-[uniforms] -&gt; [Semantic UI]
-[uniforms] -&gt; [unstyled]</desc>
-  <rect x="0" y="0" height="457" width="1475" style="stroke:none; fill:transparent;"></rect>
-  <path d="M361 108.5 L361 126 L361 137.7 L361 137.7 " style="stroke:#333;fill:none;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M356.3 131.8 L361 137.7 L365.7 131.8 L361 143.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M864.5 108.5 L864.5 126 L864.5 137.7 L864.5 137.7 " style="stroke:#333;fill:none;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M859.8 131.8 L864.5 137.7 L869.2 131.8 L864.5 143.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M1129 108.5 L1129 126 L1129 137.7 L1129 137.7 " style="stroke:#333;fill:none;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M1124.3 131.8 L1129 137.7 L1133.7 131.8 L1129 143.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M605 108.5 L605 126 L605 137.7 L605 137.7 " style="stroke:#333;fill:none;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M600.3 131.8 L605 137.7 L609.7 131.8 L605 143.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M361 211.5 L361 229 L725.5 272 L725.5 272 " style="stroke:#333;fill:none;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M719.1 276 L725.5 272 L720.2 266.7 L731.3 272.7 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M605 211.5 L605 229 L725.6 261.3 L725.6 261.3 " style="stroke:#333;fill:none;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M718.8 264.3 L725.6 261.3 L721.2 255.3 L731.3 262.8 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M864.5 211.5 L864.5 229 L846.3 243 L846.3 243 " style="stroke:#333;fill:none;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M848.1 235.7 L846.3 243 L853.7 243.1 L841.6 246.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M1129 211.5 L1129 229 L869 269.4 L869 269.4 " style="stroke:#333;fill:none;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M874.1 263.9 L869 269.4 L875.5 273.1 L863.3 270.3 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M731.3 285.5 L117 332 L117 343.7 L117 343.7 " style="stroke:#333;fill:none;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M112.3 337.8 L117 343.7 L121.7 337.8 L117 349.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M731.3 287.5 L310 332 L310 343.7 L310 343.7 " style="stroke:#333;fill:none;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M305.3 337.8 L310 343.7 L314.7 337.8 L310 349.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M731.3 292.3 L508 332 L508 343.7 L508 343.7 " style="stroke:#333;fill:none;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M503.3 337.8 L508 343.7 L512.7 337.8 L508 349.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M737 314.5 L706 332 L706 343.7 L706 343.7 " style="stroke:#333;fill:none;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M701.3 337.8 L706 343.7 L710.7 337.8 L706 349.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M857.5 314.5 L888.5 332 L888.5 343.7 L888.5 343.7 " style="stroke:#333;fill:none;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M883.8 337.8 L888.5 343.7 L893.2 337.8 L888.5 349.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M863.3 295.1 L1030 332 L1030 343.7 L1030 343.7 " style="stroke:#333;fill:none;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M1025.3 337.8 L1030 343.7 L1034.7 337.8 L1030 349.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M863.3 289.2 L1187 332 L1187 343.7 L1187 343.7 " style="stroke:#333;fill:none;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M1182.3 337.8 L1187 343.7 L1191.7 337.8 L1187 349.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M863.3 286.4 L1369.5 332 L1369.5 343.7 L1369.5 343.7 " style="stroke:#333;fill:none;stroke-dasharray:none;stroke-width:3;"></path>
-  <path d="M1364.8 337.8 L1369.5 343.7 L1374.2 337.8 L1369.5 349.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;stroke-width:3;"></path>
-  <rect x="305.5" y="45.5" height="58" width="112" data-name="GraphQL" style="stroke:#333;fill:transparent;stroke-dasharray:none;stroke-width:3;"></rect>
-  <text x="361.5" y="81.3" style="fill: #333;font:bold  14pt monospace, Helvetica, sans-serif;text-anchor: middle;" data-name="GraphQL">GraphQL</text>
-  <rect x="274.5" y="148.5" height="58" width="173" data-name="GraphQLBridge" style="stroke:#333;fill:transparent;stroke-dasharray:none;stroke-width:3;"></rect>
-  <text x="361" y="184.3" style="fill: #333;font:bold  14pt monospace, Helvetica, sans-serif;text-anchor: middle;" data-name="GraphQLBridge">GraphQLBridge</text>
-  <rect x="793.5" y="45.5" height="58" width="143" data-name="JSONSchema" style="stroke:#333;fill:transparent;stroke-dasharray:none;stroke-width:3;"></rect>
-  <text x="865" y="81.3" style="fill: #333;font:bold  14pt monospace, Helvetica, sans-serif;text-anchor: middle;" data-name="JSONSchema">JSONSchema</text>
-  <rect x="762.5" y="148.5" height="58" width="204" data-name="JSONSchemaBridge" style="stroke:#333;fill:transparent;stroke-dasharray:none;stroke-width:3;"></rect>
-  <text x="864.5" y="184.3" style="fill: #333;font:bold  14pt monospace, Helvetica, sans-serif;text-anchor: middle;" data-name="JSONSchemaBridge">JSONSchemaBridge</text>
-  <rect x="1011.5" y="45.5" height="58" width="235" data-name="SimpleSchema2 (npm)" style="stroke:#333;fill:transparent;stroke-dasharray:none;stroke-width:3;"></rect>
-  <text x="1129" y="81.3" style="fill: #333;font:bold  14pt monospace, Helvetica, sans-serif;text-anchor: middle;" data-name="SimpleSchema2 (npm)">SimpleSchema2 (npm)</text>
-  <rect x="1011.5" y="148.5" height="58" width="235" data-name="SimpleSchema2Bridge" style="stroke:#333;fill:transparent;stroke-dasharray:none;stroke-width:3;"></rect>
-  <text x="1129" y="184.3" style="fill: #333;font:bold  14pt monospace, Helvetica, sans-serif;text-anchor: middle;" data-name="SimpleSchema2Bridge">SimpleSchema2Bridge</text>
-  <rect x="523.5" y="45.5" height="58" width="163" data-name="SimpleSchema" style="stroke:#333;fill:transparent;stroke-dasharray:none;stroke-width:3;"></rect>
-  <text x="605" y="81.3" style="fill: #333;font:bold  14pt monospace, Helvetica, sans-serif;text-anchor: middle;" data-name="SimpleSchema">SimpleSchema</text>
-  <rect x="492.5" y="148.5" height="58" width="225" data-name="SimpleSchemaBridge" style="stroke:#333;fill:transparent;stroke-dasharray:none;stroke-width:3;"></rect>
-  <text x="605" y="184.3" style="fill: #333;font:bold  14pt monospace, Helvetica, sans-serif;text-anchor: middle;" data-name="SimpleSchemaBridge">SimpleSchemaBridge</text>
-  <rect x="736.5" y="251.5" height="58" width="122" data-name="uniforms" style="stroke:#333;fill:transparent;stroke-dasharray:none;stroke-width:3;"></rect>
-  <text x="797.5" y="287.3" style="fill: #333;font:bold  14pt monospace, Helvetica, sans-serif;text-anchor: middle;" data-name="uniforms">uniforms</text>
-  <rect x="45.5" y="354.5" height="58" width="143" data-name="Ant Design" style="stroke:#333;fill:transparent;stroke-dasharray:none;stroke-width:3;"></rect>
-  <text x="117" y="390.3" style="fill: #333;font:bold  14pt monospace, Helvetica, sans-serif;text-anchor: middle;" data-name="Ant Design">Ant Design</text>
-  <rect x="233.5" y="354.5" height="58" width="153" data-name="Bootstrap 3" style="stroke:#333;fill:transparent;stroke-dasharray:none;stroke-width:3;"></rect>
-  <text x="310" y="390.3" style="fill: #333;font:bold  14pt monospace, Helvetica, sans-serif;text-anchor: middle;" data-name="Bootstrap 3">Bootstrap 3</text>
-  <rect x="431.5" y="354.5" height="58" width="153" data-name="Bootstrap 4" style="stroke:#333;fill:transparent;stroke-dasharray:none;stroke-width:3;"></rect>
-  <text x="508" y="390.3" style="fill: #333;font:bold  14pt monospace, Helvetica, sans-serif;text-anchor: middle;" data-name="Bootstrap 4">Bootstrap 4</text>
-  <rect x="629.5" y="354.5" height="58" width="153" data-name="Bootstrap 5" style="stroke:#333;fill:transparent;stroke-dasharray:none;stroke-width:3;"></rect>
-  <text x="706" y="390.3" style="fill: #333;font:bold  14pt monospace, Helvetica, sans-serif;text-anchor: middle;" data-name="Bootstrap 5">Bootstrap 5</text>
-  <rect x="827.5" y="354.5" height="58" width="122" data-name="Material" style="stroke:#333;fill:transparent;stroke-dasharray:none;stroke-width:3;"></rect>
-  <text x="888.5" y="390.3" style="fill: #333;font:bold  14pt monospace, Helvetica, sans-serif;text-anchor: middle;" data-name="Material">Material</text>
-  <rect x="994.5" y="354.5" height="58" width="71" data-name="MUI" style="stroke:#333;fill:transparent;stroke-dasharray:none;stroke-width:3;"></rect>
-  <text x="1030" y="390.3" style="fill: #333;font:bold  14pt monospace, Helvetica, sans-serif;text-anchor: middle;" data-name="MUI">MUI</text>
-  <rect x="1110.5" y="354.5" height="58" width="153" data-name="Semantic UI" style="stroke:#333;fill:transparent;stroke-dasharray:none;stroke-width:3;"></rect>
-  <text x="1187" y="390.3" style="fill: #333;font:bold  14pt monospace, Helvetica, sans-serif;text-anchor: middle;" data-name="Semantic UI">Semantic UI</text>
-  <rect x="1308.5" y="354.5" height="58" width="122" data-name="unstyled" style="stroke:#333;fill:transparent;stroke-dasharray:none;stroke-width:3;"></rect>
-  <text x="1369.5" y="390.3" style="fill: #333;font:bold  14pt monospace, Helvetica, sans-serif;text-anchor: middle;" data-name="unstyled">unstyled</text>
+              </g>
+            </g>
+          </g>
+          <g data-name="SimpleSchema">
+            <g fill="transparent" stroke="#333" data-name="SimpleSchema">
+              <rect x="380.3" y="5.0" height="58.0" width="174.0" data-name="SimpleSchema"></rect>
+            </g>
+            <g transform="translate(380.25, 5)" font-family="monospace" font-size="14pt" font-weight="bold" font-style="normal" data-name="SimpleSchema">
+              <g transform="translate(20, 20)" fill="#333" text-align="center" data-name="SimpleSchema">
+                <text x="67.0" y="15.8" stroke="none" text-anchor="middle" data-name="SimpleSchema">SimpleSchema</text>
+
+              </g>
+            </g>
+          </g>
+          <g data-name="SimpleSchemaBridge">
+            <g fill="transparent" stroke="#333" data-name="SimpleSchemaBridge">
+              <rect x="346.3" y="108.0" height="58.0" width="242.0" data-name="SimpleSchemaBridge"></rect>
+            </g>
+            <g transform="translate(346.25, 108)" font-family="monospace" font-size="14pt" font-weight="bold" font-style="normal" data-name="SimpleSchemaBridge">
+              <g transform="translate(20, 20)" fill="#333" text-align="center" data-name="SimpleSchemaBridge">
+                <text x="101.0" y="15.8" stroke="none" text-anchor="middle" data-name="SimpleSchemaBridge">SimpleSchemaBridge</text>
+
+              </g>
+            </g>
+          </g>
+          <g data-name="JSONSchema">
+            <g fill="transparent" stroke="#333" data-name="JSONSchema">
+              <rect x="666.8" y="5.0" height="58.0" width="152.0" data-name="JSONSchema"></rect>
+            </g>
+            <g transform="translate(666.75, 5)" font-family="monospace" font-size="14pt" font-weight="bold" font-style="normal" data-name="JSONSchema">
+              <g transform="translate(20, 20)" fill="#333" text-align="center" data-name="JSONSchema">
+                <text x="56.0" y="15.8" stroke="none" text-anchor="middle" data-name="JSONSchema">JSONSchema</text>
+
+              </g>
+            </g>
+          </g>
+          <g data-name="JSONSchemaBridge">
+            <g fill="transparent" stroke="#333" data-name="JSONSchemaBridge">
+              <rect x="633.3" y="108.0" height="58.0" width="219.0" data-name="JSONSchemaBridge"></rect>
+            </g>
+            <g transform="translate(633.25, 108)" font-family="monospace" font-size="14pt" font-weight="bold" font-style="normal" data-name="JSONSchemaBridge">
+              <g transform="translate(20, 20)" fill="#333" text-align="center" data-name="JSONSchemaBridge">
+                <text x="89.5" y="15.8" stroke="none" text-anchor="middle" data-name="JSONSchemaBridge">JSONSchemaBridge</text>
+
+              </g>
+            </g>
+          </g>
+          <g data-name="SimpleSchema2 (npm)">
+            <g fill="transparent" stroke="#333" data-name="SimpleSchema2 (npm)">
+              <rect x="897.3" y="5.0" height="58.0" width="253.0" data-name="SimpleSchema2 (npm)"></rect>
+            </g>
+            <g transform="translate(897.25, 5)" font-family="monospace" font-size="14pt" font-weight="bold" font-style="normal" data-name="SimpleSchema2 (npm)">
+              <g transform="translate(20, 20)" fill="#333" text-align="center" data-name="SimpleSchema2 (npm)">
+                <text x="106.5" y="15.8" stroke="none" text-anchor="middle" data-name="SimpleSchema2 (npm)">SimpleSchema2 (npm)</text>
+
+              </g>
+            </g>
+          </g>
+          <g data-name="SimpleSchema2Bridge">
+            <g fill="transparent" stroke="#333" data-name="SimpleSchema2Bridge">
+              <rect x="897.3" y="108.0" height="58.0" width="253.0" data-name="SimpleSchema2Bridge"></rect>
+            </g>
+            <g transform="translate(897.25, 108)" font-family="monospace" font-size="14pt" font-weight="bold" font-style="normal" data-name="SimpleSchema2Bridge">
+              <g transform="translate(20, 20)" fill="#333" text-align="center" data-name="SimpleSchema2Bridge">
+                <text x="106.5" y="15.8" stroke="none" text-anchor="middle" data-name="SimpleSchema2Bridge">SimpleSchema2Bridge</text>
+
+              </g>
+            </g>
+          </g>
+          <g data-name="Zod">
+            <g fill="transparent" stroke="#333" data-name="Zod">
+              <rect x="1228.8" y="5.0" height="58.0" width="74.0" data-name="Zod"></rect>
+            </g>
+            <g transform="translate(1228.75, 5)" font-family="monospace" font-size="14pt" font-weight="bold" font-style="normal" data-name="Zod">
+              <g transform="translate(20, 20)" fill="#333" text-align="center" data-name="Zod">
+                <text x="17.0" y="15.8" stroke="none" text-anchor="middle" data-name="Zod">Zod</text>
+
+              </g>
+            </g>
+          </g>
+          <g data-name="ZodBridge">
+            <g fill="transparent" stroke="#333" data-name="ZodBridge">
+              <rect x="1195.3" y="108.0" height="58.0" width="141.0" data-name="ZodBridge"></rect>
+            </g>
+            <g transform="translate(1195.25, 108)" font-family="monospace" font-size="14pt" font-weight="bold" font-style="normal" data-name="ZodBridge">
+              <g transform="translate(20, 20)" fill="#333" text-align="center" data-name="ZodBridge">
+                <text x="50.5" y="15.8" stroke="none" text-anchor="middle" data-name="ZodBridge">ZodBridge</text>
+
+              </g>
+            </g>
+          </g>
+          <g data-name="Ant Design">
+            <g fill="transparent" stroke="#333" data-name="Ant Design">
+              <rect x="5.0" y="314.0" height="58.0" width="152.0" data-name="Ant Design"></rect>
+            </g>
+            <g transform="translate(5, 314)" font-family="monospace" font-size="14pt" font-weight="bold" font-style="normal" data-name="Ant Design">
+              <g transform="translate(20, 20)" fill="#333" text-align="center" data-name="Ant Design">
+                <text x="56.0" y="15.8" stroke="none" text-anchor="middle" data-name="Ant Design">Ant Design</text>
+
+              </g>
+            </g>
+          </g>
+          <g data-name="Bootstrap 3">
+            <g fill="transparent" stroke="#333" data-name="Bootstrap 3">
+              <rect x="202.0" y="314.0" height="58.0" width="163.0" data-name="Bootstrap 3"></rect>
+            </g>
+            <g transform="translate(202, 314)" font-family="monospace" font-size="14pt" font-weight="bold" font-style="normal" data-name="Bootstrap 3">
+              <g transform="translate(20, 20)" fill="#333" text-align="center" data-name="Bootstrap 3">
+                <text x="61.5" y="15.8" stroke="none" text-anchor="middle" data-name="Bootstrap 3">Bootstrap 3</text>
+
+              </g>
+            </g>
+          </g>
+          <g data-name="Bootstrap 4">
+            <g fill="transparent" stroke="#333" data-name="Bootstrap 4">
+              <rect x="410.0" y="314.0" height="58.0" width="163.0" data-name="Bootstrap 4"></rect>
+            </g>
+            <g transform="translate(410, 314)" font-family="monospace" font-size="14pt" font-weight="bold" font-style="normal" data-name="Bootstrap 4">
+              <g transform="translate(20, 20)" fill="#333" text-align="center" data-name="Bootstrap 4">
+                <text x="61.5" y="15.8" stroke="none" text-anchor="middle" data-name="Bootstrap 4">Bootstrap 4</text>
+
+              </g>
+            </g>
+          </g>
+          <g data-name="Bootstrap 5">
+            <g fill="transparent" stroke="#333" data-name="Bootstrap 5">
+              <rect x="618.0" y="314.0" height="58.0" width="163.0" data-name="Bootstrap 5"></rect>
+            </g>
+            <g transform="translate(618, 314)" font-family="monospace" font-size="14pt" font-weight="bold" font-style="normal" data-name="Bootstrap 5">
+              <g transform="translate(20, 20)" fill="#333" text-align="center" data-name="Bootstrap 5">
+                <text x="61.5" y="15.8" stroke="none" text-anchor="middle" data-name="Bootstrap 5">Bootstrap 5</text>
+
+              </g>
+            </g>
+          </g>
+          <g data-name="Material">
+            <g fill="transparent" stroke="#333" data-name="Material">
+              <rect x="826.0" y="314.0" height="58.0" width="130.0" data-name="Material"></rect>
+            </g>
+            <g transform="translate(826, 314)" font-family="monospace" font-size="14pt" font-weight="bold" font-style="normal" data-name="Material">
+              <g transform="translate(20, 20)" fill="#333" text-align="center" data-name="Material">
+                <text x="45.0" y="15.8" stroke="none" text-anchor="middle" data-name="Material">Material</text>
+
+              </g>
+            </g>
+          </g>
+          <g data-name="MUI">
+            <g fill="transparent" stroke="#333" data-name="MUI">
+              <rect x="1001.0" y="314.0" height="58.0" width="74.0" data-name="MUI"></rect>
+            </g>
+            <g transform="translate(1001, 314)" font-family="monospace" font-size="14pt" font-weight="bold" font-style="normal" data-name="MUI">
+              <g transform="translate(20, 20)" fill="#333" text-align="center" data-name="MUI">
+                <text x="17.0" y="15.8" stroke="none" text-anchor="middle" data-name="MUI">MUI</text>
+
+              </g>
+            </g>
+          </g>
+          <g data-name="Semantic UI">
+            <g fill="transparent" stroke="#333" data-name="Semantic UI">
+              <rect x="1120.0" y="314.0" height="58.0" width="163.0" data-name="Semantic UI"></rect>
+            </g>
+            <g transform="translate(1120, 314)" font-family="monospace" font-size="14pt" font-weight="bold" font-style="normal" data-name="Semantic UI">
+              <g transform="translate(20, 20)" fill="#333" text-align="center" data-name="Semantic UI">
+                <text x="61.5" y="15.8" stroke="none" text-anchor="middle" data-name="Semantic UI">Semantic UI</text>
+
+              </g>
+            </g>
+          </g>
+          <g data-name="unstyled">
+            <g fill="transparent" stroke="#333" data-name="unstyled">
+              <rect x="1328.0" y="314.0" height="58.0" width="130.0" data-name="unstyled"></rect>
+            </g>
+            <g transform="translate(1328, 314)" font-family="monospace" font-size="14pt" font-weight="bold" font-style="normal" data-name="unstyled">
+              <g transform="translate(20, 20)" fill="#333" text-align="center" data-name="unstyled">
+                <text x="45.0" y="15.8" stroke="none" text-anchor="middle" data-name="unstyled">unstyled</text>
+
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
 </svg>

@@ -5,7 +5,8 @@ import { Button } from '../../components/Button';
 import { Heading } from '../../components/Heading';
 import styles from '../../index.module.css';
 
-const formBuilderLink = 'https://bit.ly/3LaZkTl';
+const forminerLink =
+  'https://forminer.com/?utm_source=uniforms&utm_medium=Section_CTA&utm_campaign=Forminer_uniforms_section_CTA&utm_id=Forminer_uniforms_section';
 
 export function CommercialServices() {
   return (
@@ -27,14 +28,14 @@ export function CommercialServices() {
           >
             <a
               className={styles['flex-center']}
-              href={formBuilderLink}
+              href={forminerLink}
               target="_blank"
               rel="noopener noreferrer"
             >
               <img
-                alt="form-builder"
+                alt="Forminer UI"
                 className={styles.company}
-                src="assets/form-builder-screenshot.png"
+                src="assets/forminer-screenshot.png"
               />
             </a>
           </div>
@@ -56,7 +57,7 @@ export function CommercialServices() {
             >
               Commercial support
             </h3>
-            <Heading>Form Builder</Heading>
+            <Heading>Forminer</Heading>
             <p
               className={classNames(
                 styles.centered,
@@ -91,13 +92,13 @@ export function CommercialServices() {
               )}
             >
               <Button
-                to={formBuilderLink}
+                to={forminerLink}
                 className={classNames(
                   styles.discussions,
                   styles['long-button'],
                 )}
               >
-                Check Form Builder in action
+                Check Forminer in action
               </Button>
             </div>
           </div>

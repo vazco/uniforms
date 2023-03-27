@@ -1,6 +1,6 @@
 {
   "name": "uniforms-bootstrap3",
-  "version": "4.0.0-alpha.1",
+  "version": "4.0.0-alpha.2",
   "license": "MIT",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -35,7 +35,7 @@
     "invariant": "^2.0.0",
     "lodash": "^4.0.0",
     "tslib": "^2.2.0",
-    "uniforms": "^4.0.0-alpha.1",
+    "uniforms": "^4.0.0-alpha.2",
     "warning": "^4.0.0"
   }
 }

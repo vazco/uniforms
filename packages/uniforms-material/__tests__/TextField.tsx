@@ -4,14 +4,12 @@ import ThemeProvider from '@material-ui/styles/ThemeProvider/ThemeProvider';
 import { screen } from '@testing-library/react';
 import React from 'react';
 import { TextField } from 'uniforms-material';
-import { render, testTextField } from 'uniforms/__suites__';
+import { render } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
 import mount from './_mount';
 
 describe('@RTL - TextField tests', () => {
-  testTextField(TextField);
-
   test('<TextField> - renders a TextField with correct error text (specified)', () => {
     const errorMessage = 'Error';
     render(

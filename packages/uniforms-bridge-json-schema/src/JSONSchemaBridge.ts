@@ -260,7 +260,7 @@ export default class JSONSchemaBridge extends Bridge {
         return [];
       }
 
-      const length = field?.minItems || 0;
+      const length = field.minItems || 0;
       return Array.from({ length }, () => item);
     }
 

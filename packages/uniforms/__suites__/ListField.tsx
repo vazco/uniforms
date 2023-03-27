@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { Screen, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { ComponentType, FC } from 'react';
 
@@ -6,9 +6,7 @@ import { render } from './render';
 
 export function testListField(
   ListField: ComponentType<any>,
-  {
-    addFieldLocator,
-  }: { addFieldLocator: () => HTMLElement | null | undefined },
+  { getListAddField }: { getListAddField: (screen: Screen) => HTMLElement },
 ) {
   test('<ListField> - renders ListAddField', () => {
     render(<ListField name="x" label="ListFieldLabel" />, {
@@ -106,7 +104,7 @@ export function testListField(
     expect(inputs[1]).toHaveAttribute('name', 'x.1');
   });
 
-  test('<ListField> - renders proper number of optional values after add new value', () => {
+  test('<ListField> - renders proper number of optional values after add new value', async () => {
     const onChange = jest.fn();
     render(
       <ListField name="x" label="ListFieldLabel" />,
@@ -114,9 +112,7 @@ export function testListField(
       { onChange },
     );
 
-    const addField = addFieldLocator();
-    expect(addField).toBeTruthy();
-    userEvent.click(addField!);
+    await userEvent.click(getListAddField(screen));
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toHaveBeenLastCalledWith('x', [undefined]);
   });
