@@ -153,3 +153,14 @@ test('<LongTextField> - renders a wrapper with unknown props', () => {
   expect(wrapper.find('div').at(0).prop('data-y')).toBe('y');
   expect(wrapper.find('div').at(0).prop('data-z')).toBe('z');
 });
+
+test('<LongTextField> - renders a textarea with minLength and maxLength', () => {
+  const element = <LongTextField name="x" minLength={1} maxLength={10} />;
+  const wrapper = mount(element, createContext({ x: { type: String } }));
+
+  expect(wrapper.find('div').at(0).prop('minLength')).toBeFalsy();
+  expect(wrapper.find('textarea').prop('minLength')).toBe(1);
+
+  expect(wrapper.find('div').at(0).prop('maxLength')).toBeFalsy();
+  expect(wrapper.find('textarea').prop('maxLength')).toBe(10);
+});
