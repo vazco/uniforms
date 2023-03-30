@@ -1,6 +1,6 @@
-import { screen } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React, { ComponentType } from 'react';
+import React, { ComponentType, useState } from 'react';
 import z from 'zod';
 
 import { renderWithZod } from './render-zod';
@@ -130,30 +130,37 @@ export function testNumField(NumField: ComponentType<any>) {
     expect(onChange).toHaveBeenLastCalledWith('x', 1);
   });
 
-  // test('<NumField> - renders an InputNumber which correctly reacts on change (decimal on decimal)', async () => {
-  //   const onChange = jest.fn();
-  //   renderWithZod({
-  //     element: <NumField name="x" decimal />,
-  //     onChange,
-  //     schema: z.object({ x: z.number() }),
-  //   });
-  //   // await userEvent.type(screen.getByRole('spinbutton'), '2.5');
-  //   fireEvent.change(screen.getByRole('spinbutton'), {
-  //     target: { value: 2.5 },
-  //   });
-  //   expect(screen.getByRole<HTMLInputElement>('spinbutton').value).toBe('2.5');
-  // });
+  test('<NumField> - renders an InputNumber which correctly reacts on change (decimal on decimal)', () => {
+    function NumFieldComponent() {
+      const [value, setValue] = useState();
+      return <NumField name="x" value={value} decimal onChange={setValue} />;
+    }
+    renderWithZod({
+      element: <NumFieldComponent />,
+      schema: z.object({ x: z.number() }),
+    });
+    fireEvent.change(screen.getByRole('spinbutton'), {
+      target: { value: 2.5 },
+    });
+    expect(screen.getByRole('spinbutton')).toHaveValue(2.5);
+  });
 
-  // test('<NumField> - renders an InputNumber which correctly reacts on change (decimal on integer)', async () => {
-  //   const onChange = jest.fn();
-  //   renderWithZod({
-  //     element: <NumField name="x" decimal={false} />,
-  //     onChange,
-  //     schema: z.object({ x: z.number() }),
-  //   });
-  //   await userEvent.type(screen.getByRole('spinbutton'), '2.5');
-  //   expect(onChange).toHaveBeenLastCalledWith('x', '2');
-  // });
+  test('<NumField> - renders an InputNumber which correctly reacts on change (decimal on integer)', () => {
+    function NumFieldComponent() {
+      const [value, setValue] = useState();
+      return (
+        <NumField name="x" value={value} decimal={false} onChange={setValue} />
+      );
+    }
+    renderWithZod({
+      element: <NumFieldComponent />,
+      schema: z.object({ x: z.number() }),
+    });
+    fireEvent.change(screen.getByRole('spinbutton'), {
+      target: { value: 2.5 },
+    });
+    expect(screen.getByRole('spinbutton')).toHaveValue(2);
+  });
 
   test('<NumField> - renders an InputNumber which correctly reacts on change (empty)', async () => {
     const onChange = jest.fn();
