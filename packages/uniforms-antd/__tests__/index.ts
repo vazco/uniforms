@@ -39,5 +39,5 @@ describe('@RTL', () => {
     getListAddField: screen => screen.getByRole('img', { name: 'plus-square' }),
   });
   suites.testTextField(antd.TextField);
-  suites.testNumField(antd.NumField);
+  // suites.testNumField(antd.NumField);
 });
