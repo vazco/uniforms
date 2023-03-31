@@ -34,6 +34,7 @@ describe('@RTL', () => {
   suites.testAutoField(material.AutoField);
   suites.testDateField(material.DateField);
   suites.testListDelField(material.ListDelField);
+  suites.testListAddField(material.ListAddField);
   suites.testListField(material.ListField, {
     getListAddField: screen => screen.getByText(/\+/),
   });

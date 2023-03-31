@@ -35,6 +35,7 @@ describe('@RTL', () => {
   // FIXME: AntD `DatePicker` is far from the HTML one.
   // suites.testDateField(antd.DateField);
   suites.testListDelField(antd.ListDelField);
+  suites.testListAddField(antd.ListAddField);
   suites.testListField(antd.ListField, {
     getListAddField: screen => screen.getByRole('img', { name: 'plus-square' }),
   });
