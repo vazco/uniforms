@@ -40,4 +40,5 @@ describe('@RTL', () => {
     getListAddField: screen => screen.getByRole('img', { name: 'plus-square' }),
   });
   suites.testTextField(antd.TextField);
+  suites.testHiddenField(antd.HiddenField);
 });
