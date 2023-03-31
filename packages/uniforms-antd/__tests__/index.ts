@@ -40,6 +40,7 @@ describe('@RTL', () => {
     getListAddField: screen => screen.getByRole('img', { name: 'plus-square' }),
   });
   suites.testTextField(antd.TextField);
+  // FIXME: AntD number input doesn't work with new RTL test implementation
   // suites.testNumField(antd.NumField);
   suites.testHiddenField(antd.HiddenField);
 });
