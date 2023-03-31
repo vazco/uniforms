@@ -1,3 +1,7 @@
+## [v4.0.0-alpha.3](https://github.com/vazco/uniforms/tree/v4.0.0-alpha.3) (2023-03-31)
+
+- **Added:** Support for `minLenght` and `maxLength` in `LongTextField` in `uniforms-bootstrap5`. [\#1252](https://github.com/vazco/uniforms/issues/1252)
+
 ## [v4.0.0-alpha.2](https://github.com/vazco/uniforms/tree/v4.0.0-alpha.2) (2023-03-10)
 
 - **Added:** Support for `min` and `max` in `DateField` in `uniforms-material` and `uniforms-mui`. [\#1213](https://github.com/vazco/uniforms/issues/1213)
