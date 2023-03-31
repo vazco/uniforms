@@ -40,5 +40,6 @@ describe('@RTL', () => {
     getListAddField: screen => screen.getByRole('button'),
   });
   suites.testTextField(bootstrap4.TextField);
+  suites.testNumField(bootstrap4.NumField);
   suites.testHiddenField(bootstrap4.HiddenField);
 });
