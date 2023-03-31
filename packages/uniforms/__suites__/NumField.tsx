@@ -130,6 +130,7 @@ export function testNumField(NumField: ComponentType<any>) {
     expect(onChange).toHaveBeenLastCalledWith('x', 1);
   });
 
+  // Fix this - this NumFieldComponent component shouldn't be necessary
   test('<NumField> - renders an InputNumber which correctly reacts on change (decimal on decimal)', () => {
     function NumFieldComponent() {
       const [value, setValue] = useState();
@@ -145,6 +146,7 @@ export function testNumField(NumField: ComponentType<any>) {
     expect(screen.getByRole('spinbutton')).toHaveValue(2.5);
   });
 
+  // Fix this - this NumFieldComponent component shouldn't be necessary
   test('<NumField> - renders an InputNumber which correctly reacts on change (decimal on integer)', () => {
     function NumFieldComponent() {
       const [value, setValue] = useState();
