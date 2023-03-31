@@ -35,9 +35,14 @@ describe('@RTL', () => {
   suites.testAutoField(bootstrap5.AutoField);
   suites.testDateField(bootstrap5.DateField);
   suites.testListDelField(bootstrap5.ListDelField);
+  suites.testListAddField(bootstrap5.ListAddField);
   suites.testListField(bootstrap5.ListField, {
     getListAddField: screen => screen.getByRole('button'),
   });
-  suites.testLongTextField(bootstrap5.LongTextField);
+  suites.testLongTextField(bootstrap5.LongTextField, {
+    testMinMaxLength: true,
+  });
   suites.testTextField(bootstrap5.TextField);
+  suites.testNumField(bootstrap5.NumField);
+  suites.testHiddenField(bootstrap5.HiddenField);
 });

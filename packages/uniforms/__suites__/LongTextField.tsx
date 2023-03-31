@@ -9,6 +9,7 @@ export function testLongTextField(
   LongTextField: ComponentType<any>,
   options?: {
     skipShowInlineErrorTests?: boolean;
+    testMinMaxLength?: boolean;
   },
 ) {
   test('<LongTextField> - renders a textarea with correct disabled state', () => {
@@ -131,6 +132,21 @@ export function testLongTextField(
       });
 
       expect(screen.getByText(/^Error$/)).toBeInTheDocument();
+    });
+  }
+
+  if (options?.testMinMaxLength) {
+    test('<LongTextField> - renders a textarea with minLength and maxLength', () => {
+      renderWithZod({
+        element: <LongTextField name="x" minLength={1} maxLength={10} />,
+        schema: z.object({ x: z.string() }),
+      });
+
+      const element = screen.getByRole('textbox');
+      // eslint-disable-next-line no-console
+      console.log('element', element.getAttributeNames());
+      expect(element).toHaveAttribute('minlength', '1');
+      expect(element).toHaveAttribute('maxlength', '10');
     });
   }
 }
