@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import omit from 'lodash/omit';
 import React, { Ref } from 'react';
 import { connectField, HTMLFieldProps } from 'uniforms';
 
@@ -12,7 +13,7 @@ export type LongTextFieldProps = HTMLFieldProps<
 
 function LongText(props: LongTextFieldProps) {
   return wrapField(
-    props,
+    omit(props, ['autoComplete', 'minLength', 'maxLength']),
     <textarea
       className={classnames(props.inputClassName, 'form-control', {
         'is-invalid': props.error,
@@ -23,6 +24,8 @@ function LongText(props: LongTextFieldProps) {
       name={props.name}
       onChange={event => props.onChange(event.target.value)}
       placeholder={props.placeholder}
+      minLength={props.minLength}
+      maxLength={props.maxLength}
       readOnly={props.readOnly}
       ref={props.inputRef}
       rows={props.rows}
