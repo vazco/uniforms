@@ -37,6 +37,7 @@ describe('@RTL', () => {
   suites.testListField(semantic.ListField, {
     getListAddField: screen => screen.getByRole('button'),
   });
+  suites.testLongTextField(semantic.LongTextField);
   suites.testTextField(semantic.TextField);
   suites.testNumField(semantic.NumField);
   suites.testHiddenField(semantic.HiddenField);

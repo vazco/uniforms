@@ -38,6 +38,7 @@ describe('@RTL', () => {
   suites.testListField(mui.ListField, {
     getListAddField: screen => screen.getByText(/\+/),
   });
+  suites.testLongTextField(mui.LongTextField);
   suites.testTextField(mui.TextField);
   suites.testNumField(mui.NumField);
   suites.testHiddenField(mui.HiddenField);
