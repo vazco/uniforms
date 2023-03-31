@@ -36,6 +36,8 @@ describe('@RTL', () => {
   suites.testListField(unstyled.ListField, {
     getListAddField: screen => screen.getByRole('button'),
   });
-  suites.testLongTextField(unstyled.LongTextField);
+  suites.testLongTextField(unstyled.LongTextField, {
+    withoutErrorMessage: true,
+  });
   suites.testTextField(unstyled.TextField);
 });

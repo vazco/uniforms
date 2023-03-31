@@ -5,7 +5,12 @@ import z from 'zod';
 
 import { renderWithZod } from './render-zod';
 
-export function testLongTextField(LongTextField: ComponentType<any>) {
+export function testLongTextField(
+  LongTextField: ComponentType<any>,
+  options?: {
+    withoutErrorMessage?: boolean;
+  },
+) {
   test('<LongTextField> - renders a textarea with correct disabled state', () => {
     renderWithZod({
       element: <LongTextField name="x" disabled />,
@@ -109,4 +114,23 @@ export function testLongTextField(LongTextField: ComponentType<any>) {
     });
     expect(screen.getByLabelText(/^Y/)).toBeInTheDocument();
   });
+
+  if (!options?.withoutErrorMessage) {
+    test('<LongTextField> - renders a helperText', () => {
+      renderWithZod({
+        element: (
+          <LongTextField
+            name="x"
+            error={new Error()}
+            showInlineError
+            errorMessage="Error"
+          />
+        ),
+        model: { x: 'y' },
+        schema: z.object({ x: z.string() }),
+      });
+
+      expect(screen.getByText(/^Error$/)).toBeInTheDocument();
+    });
+  }
 }
