@@ -8,7 +8,7 @@ import { renderWithZod } from './render-zod';
 export function testLongTextField(
   LongTextField: ComponentType<any>,
   options?: {
-    withoutErrorMessage?: boolean;
+    skipShowInlineErrorTests?: boolean;
   },
 ) {
   test('<LongTextField> - renders a textarea with correct disabled state', () => {
@@ -115,7 +115,7 @@ export function testLongTextField(
     expect(screen.getByLabelText(/^Y/)).toBeInTheDocument();
   });
 
-  if (!options?.withoutErrorMessage) {
+  if (!options?.skipShowInlineErrorTests) {
     test('<LongTextField> - renders a helperText', () => {
       renderWithZod({
         element: (
