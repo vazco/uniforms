@@ -143,8 +143,6 @@ export function testLongTextField(
       });
 
       const element = screen.getByRole('textbox');
-      // eslint-disable-next-line no-console
-      console.log('element', element.getAttributeNames());
       expect(element).toHaveAttribute('minlength', '1');
       expect(element).toHaveAttribute('maxlength', '10');
     });
