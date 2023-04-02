@@ -19,7 +19,7 @@ function Error({
       className={classnames('ui', className, 'error message')}
       {...filterDOMProps(props)}
     >
-      {children ? children : <div className="header">{errorMessage}</div>}
+      {children || <div className="header">{errorMessage}</div>}
     </div>
   );
 }

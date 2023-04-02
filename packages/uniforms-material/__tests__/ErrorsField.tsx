@@ -1,23 +1,9 @@
-import FormHelperText from '@material-ui/core/FormHelperText';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import ThemeProvider from '@material-ui/styles/ThemeProvider/ThemeProvider';
 import React from 'react';
 import { ErrorsField } from 'uniforms-material';
-import { render } from 'uniforms/__suites__';
-
-import createContext from './_createContext';
-import mount from './_mount';
-
-const error = {
-  error: 'validation-error',
-  reason: 'X is required',
-  details: [
-    { name: 'x', type: 'required', details: { value: null } },
-    { name: 'y', type: 'required', details: { value: null } },
-    { name: 'z', type: 'required', details: { value: null } },
-  ],
-  message: 'X is required [validation-error]',
-};
+import { renderWithZod } from 'uniforms/__suites__';
+import z from 'zod';
 
 describe('@RTL - ErrorsField tests', () => {
   test('<ErrorsField> - default props are not passed when MUI theme props are specified', () => {
@@ -30,45 +16,54 @@ describe('@RTL - ErrorsField tests', () => {
         },
       },
     });
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <ErrorsField />
-      </ThemeProvider>,
-      { x: { type: String } },
-      { error },
-    );
 
-    const elements = container.getElementsByClassName(
+    const screen = renderWithZod({
+      element: (
+        <ThemeProvider theme={theme}>
+          <ErrorsField />
+        </ThemeProvider>
+      ),
+      error: z.ZodError.create([
+        { code: z.ZodIssueCode.custom, message: '', path: ['x'] },
+        { code: z.ZodIssueCode.custom, message: '', path: ['y'] },
+        { code: z.ZodIssueCode.custom, message: '', path: ['z'] },
+      ]),
+      schema: z.object({ x: z.string() }),
+    });
+
+    const elements = screen.container.getElementsByClassName(
       'MuiFormControl-marginNormal',
     );
     expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
+    expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
     expect(
-      container.getElementsByClassName('MuiFormHelperText-contained'),
+      screen.container.getElementsByClassName('MuiFormHelperText-contained'),
     ).toHaveLength(3);
   });
 
   test('<ErrorsField> - default props are passed when MUI theme props are absent', () => {
     const theme = createMuiTheme({});
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <ErrorsField />
-      </ThemeProvider>,
-      { x: { type: String } },
-      { error },
-    );
+    const screen = renderWithZod({
+      element: (
+        <ThemeProvider theme={theme}>
+          <ErrorsField />
+        </ThemeProvider>
+      ),
+      error: z.ZodError.create([
+        { code: z.ZodIssueCode.custom, message: '', path: ['x'] },
+        { code: z.ZodIssueCode.custom, message: '', path: ['y'] },
+        { code: z.ZodIssueCode.custom, message: '', path: ['z'] },
+      ]),
+      schema: z.object({ x: z.string() }),
+    });
 
-    const elements = container.getElementsByClassName(
+    const elements = screen.container.getElementsByClassName(
       'MuiFormControl-marginDense',
     );
     expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      true,
-    );
+    expect(elements[0]).toHaveClass('MuiFormControl-fullWidth');
     expect(
-      container.getElementsByClassName('MuiFormHelperText-contained'),
+      screen.container.getElementsByClassName('MuiFormHelperText-contained'),
     ).toHaveLength(0);
   });
 
@@ -78,67 +73,28 @@ describe('@RTL - ErrorsField tests', () => {
         MuiFormControl: { fullWidth: true, margin: 'dense', variant: 'filled' },
       },
     });
-    const explicitProps = {
-      fullWidth: false,
-      margin: 'normal' as const,
-      variant: 'standard' as const,
-    };
 
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <ErrorsField {...explicitProps} />
-      </ThemeProvider>,
-      { x: { type: String } },
-      { error },
-    );
+    const screen = renderWithZod({
+      element: (
+        <ThemeProvider theme={theme}>
+          <ErrorsField fullWidth={false} margin="normal" variant="standard" />
+        </ThemeProvider>
+      ),
+      error: z.ZodError.create([
+        { code: z.ZodIssueCode.custom, message: '', path: ['x'] },
+        { code: z.ZodIssueCode.custom, message: '', path: ['y'] },
+        { code: z.ZodIssueCode.custom, message: '', path: ['z'] },
+      ]),
+      schema: z.object({ x: z.string() }),
+    });
 
-    const elements = container.getElementsByClassName(
+    const elements = screen.container.getElementsByClassName(
       'MuiFormControl-marginNormal',
     );
     expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
+    expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
     expect(
-      container.getElementsByClassName('MuiFormHelperText-contained'),
+      screen.container.getElementsByClassName('MuiFormHelperText-contained'),
     ).toHaveLength(0);
   });
-});
-
-test('<ErrorsField> - works', () => {
-  const element = <ErrorsField />;
-  const wrapper = mount(element, createContext({ x: { type: String } }));
-
-  expect(wrapper.find(ErrorsField)).toHaveLength(1);
-});
-
-test('<ErrorsField> - renders list of correct error messages (context)', () => {
-  const element = <ErrorsField />;
-  const wrapper = mount(
-    element,
-    createContext(
-      { x: { type: String }, y: { type: String }, z: { type: String } },
-      { error },
-    ),
-  );
-
-  expect(wrapper.find(FormHelperText)).toHaveLength(3);
-  expect(wrapper.find(FormHelperText).at(0).text()).toBe('X is required');
-  expect(wrapper.find(FormHelperText).at(1).text()).toBe('Y is required');
-  expect(wrapper.find(FormHelperText).at(2).text()).toBe('Z is required');
-});
-
-test('<ErrorsField> - renders children (specified)', () => {
-  const element = <ErrorsField children="Error message list" />;
-  const wrapper = mount(
-    element,
-    createContext(
-      { x: { type: String }, y: { type: String }, z: { type: String } },
-      { error },
-    ),
-  );
-
-  expect(wrapper.find(ErrorsField).text()).toEqual(
-    expect.stringContaining('Error message list'),
-  );
 });

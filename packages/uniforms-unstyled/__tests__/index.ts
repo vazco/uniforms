@@ -1,8 +1,8 @@
-import * as unstyled from 'uniforms-unstyled';
+import * as theme from 'uniforms-unstyled';
 import * as suites from 'uniforms/__suites__';
 
 it('exports everything', () => {
-  expect(unstyled).toEqual({
+  expect(theme).toEqual({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),
     AutoForm: expect.any(Function),
@@ -30,17 +30,24 @@ it('exports everything', () => {
 });
 
 describe('@RTL', () => {
-  suites.testAutoField(unstyled.AutoField);
-  suites.testDateField(unstyled.DateField);
-  suites.testListDelField(unstyled.ListDelField);
-  suites.testListAddField(unstyled.ListAddField);
-  suites.testListField(unstyled.ListField, {
+  suites.testAutoField(theme.AutoField);
+  suites.testAutoForm(theme.AutoForm);
+  suites.testBaseForm(theme.BaseForm);
+  suites.testDateField(theme.DateField);
+  suites.testErrorField(theme.ErrorField);
+  suites.testErrorsField(theme.ErrorsField);
+  suites.testHiddenField(theme.HiddenField);
+  suites.testListAddField(theme.ListAddField);
+  suites.testListDelField(theme.ListDelField);
+  suites.testListField(theme.ListField, {
     getListAddField: screen => screen.getByRole('button'),
   });
-  suites.testLongTextField(unstyled.LongTextField, {
+  suites.testLongTextField(theme.LongTextField, {
     skipShowInlineErrorTests: true,
   });
-  suites.testTextField(unstyled.TextField);
-  suites.testNumField(unstyled.NumField);
-  suites.testHiddenField(unstyled.HiddenField);
+  suites.testNumField(theme.NumField);
+  suites.testQuickForm(theme.QuickForm);
+  suites.testTextField(theme.TextField);
+  suites.testValidatedForm(theme.ValidatedForm);
+  suites.testValidatedQuickForm(theme.ValidatedQuickForm);
 });

@@ -24,9 +24,7 @@ describe('@RTL - LongTextField tests', () => {
       'MuiFormControl-marginNormal',
     );
     expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
+    expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
   });
 
   test('<LongTextField> - default props are passed when MUI theme props are absent', () => {
@@ -45,9 +43,7 @@ describe('@RTL - LongTextField tests', () => {
       'MuiFormControl-marginDense',
     );
     expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      true,
-    );
+    expect(elements[0]).toHaveClass('MuiFormControl-fullWidth');
   });
 
   test('<LongTextField> - explicit props are passed when MUI theme props are specified', () => {
@@ -72,8 +68,6 @@ describe('@RTL - LongTextField tests', () => {
       'MuiFormControl-marginNormal',
     );
     expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
+    expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
   });
 });
