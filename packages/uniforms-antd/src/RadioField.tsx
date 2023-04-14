@@ -32,6 +32,7 @@ function Radio(props: RadioFieldProps) {
           key={option.key ?? option.value}
           style={radioStyle}
           value={option.value}
+          disabled={option.disabled}
         >
           {option.label ?? option.value}
         </RadioAntD>
