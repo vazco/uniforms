@@ -29,7 +29,7 @@ function isNativeEnumValue(value: unknown) {
 }
 
 /** Option type used in SelectField or RadioField */
-type Option<Value = unknown> = {
+type Option<Value> = {
   disabled?: boolean;
   label: string;
   key?: string;
@@ -136,7 +136,7 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
 
   // eslint-disable-next-line complexity
   getProps(name: string) {
-    const props: UnknownObject & { options?: Option[] } = {
+    const props: UnknownObject & { options?: Option<unknown>[] } = {
       label: upperFirst(lowerCase(joinName(null, name).slice(-1)[0])),
       required: true,
     };
@@ -159,9 +159,9 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
         props.minCount = field._def.minLength.value;
       }
     } else if (field instanceof ZodEnum) {
-      props.options = (
-        field.options as ZodEnum<[string]>['options']
-      ).map<Option>(value => ({
+      props.options = (field.options as ZodEnum<[string]>['options']).map<
+        Option<unknown>
+      >(value => ({
         key: value,
         label: value,
         value,

@@ -1,5 +1,5 @@
 /** Option type used in SelectField or RadioField */
-export type Option<Value = unknown> = {
+export type Option<Value> = {
   disabled?: boolean;
   label: string;
   key?: string;

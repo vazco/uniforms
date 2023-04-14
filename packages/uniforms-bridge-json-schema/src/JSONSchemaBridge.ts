@@ -87,7 +87,7 @@ function isValidatorResult(value: unknown): value is ValidatorResult {
 }
 
 /** Option type used in SelectField or RadioField */
-type Option<Value = unknown> = {
+type Option<Value> = {
   disabled?: boolean;
   label: string;
   key?: string;

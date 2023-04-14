@@ -8,7 +8,7 @@ import { Bridge, UnknownObject, joinName } from 'uniforms';
 const propsToRemove = ['optional', 'uniforms', 'allowedValues'];
 
 /** Option type used in SelectField or RadioField */
-type Option<Value = unknown> = {
+type Option<Value> = {
   disabled?: boolean;
   label: string;
   key?: string;
