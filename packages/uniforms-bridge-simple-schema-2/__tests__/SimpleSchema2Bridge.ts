@@ -31,19 +31,13 @@ describe('SimpleSchema2Bridge', () => {
     r: {
       type: String,
       uniforms: {
-        options: [
-          { key: 'k1', label: 'A', value: 1 },
-          { key: 'k2', label: 'B', value: 2 },
-        ],
+        options: [{ value: 1 }, { value: 2 }],
       },
     },
     rr: {
       type: String,
       uniforms: {
-        options: () => [
-          { key: 'k1', label: 'A', value: 1 },
-          { key: 'k2', label: 'B', value: 2 },
-        ],
+        options: () => [{ value: 1 }, { value: 2 }],
       },
     },
     s: { type: String, allowedValues: ['a', 'b'] },
@@ -240,29 +234,15 @@ describe('SimpleSchema2Bridge', () => {
     });
 
     it('works with options (array)', () => {
-      expect(bridge.getProps('r').options[0]).toStrictEqual({
-        key: 'k1',
-        label: 'A',
-        value: 1,
-      });
-      expect(bridge.getProps('r').options[1]).toStrictEqual({
-        key: 'k2',
-        label: 'B',
-        value: 2,
-      });
+      expect(bridge.getProps('r').options[0]).toStrictEqual({ value: 1 });
+      expect(bridge.getProps('r').options[1]).toStrictEqual({ value: 2 });
     });
 
     it('works with options (function)', () => {
       expect(bridge.getProps('rr').options[0]).toStrictEqual({
-        key: 'k1',
-        label: 'A',
         value: 1,
       });
-      expect(bridge.getProps('rr').options[1]).toStrictEqual({
-        key: 'k2',
-        label: 'B',
-        value: 2,
-      });
+      expect(bridge.getProps('rr').options[1]).toStrictEqual({ value: 2 });
     });
 
     it('works with type', () => {

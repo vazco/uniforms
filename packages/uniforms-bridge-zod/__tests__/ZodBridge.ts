@@ -336,11 +336,7 @@ describe('ZodBridge', () => {
       const schema = object({ a: enum_(['x', 'y', 'z']) });
       const bridge = new ZodBridge(schema);
       expect(bridge.getProps('a')).toEqual({
-        options: ['x', 'y', 'z'].map(value => ({
-          key: value,
-          label: value,
-          value,
-        })),
+        options: ['x', 'y', 'z'].map(value => ({ value })),
         label: 'A',
         required: true,
       });

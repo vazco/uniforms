@@ -39,7 +39,7 @@ function Radio({
           <input
             checked={option.value === value}
             disabled={option.disabled || disabled}
-            id={`${id}-${escape(option.key ?? option.value)}`}
+            id={`${id}-${option.key ?? escape(option.value)}`}
             name={name}
             onChange={() => {
               if (!readOnly) {
@@ -49,7 +49,7 @@ function Radio({
             type="radio"
           />
 
-          <label htmlFor={`${id}-${escape(option.key ?? option.value)}`}>
+          <label htmlFor={`${id}-${option.key ?? escape(option.value)}`}>
             {option.label ?? option.value}
           </label>
         </div>

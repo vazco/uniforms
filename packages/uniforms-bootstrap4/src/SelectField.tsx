@@ -62,13 +62,13 @@ function Select({
             `checkbox${inline ? '-inline' : ''}`,
           )}
         >
-          <label htmlFor={`${id}-${escape(item.key ?? item.value)}`}>
+          <label htmlFor={`${id}-${item.key ?? escape(item.value)}`}>
             <input
               checked={
                 multiple ? value?.includes(item.value) : value === item.value
               }
               disabled={item.disabled || disabled}
-              id={`${id}-${escape(item.key ?? item.value)}`}
+              id={`${id}-${item.key ?? escape(item.value)}`}
               name={name}
               onChange={() => {
                 if (!readOnly) {

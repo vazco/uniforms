@@ -159,13 +159,9 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
         props.minCount = field._def.minLength.value;
       }
     } else if (field instanceof ZodEnum) {
-      props.options = (field.options as ZodEnum<[string]>['options']).map<
-        Option<unknown>
-      >(value => ({
-        key: value,
-        label: value,
-        value,
-      }));
+      props.options = (field.options as ZodEnum<[string]>['options']).map(
+        value => ({ value }),
+      );
     } else if (field instanceof ZodNativeEnum) {
       const values = Object.values(field.enum);
       const nativeValues = values.filter(isNativeEnumValue);

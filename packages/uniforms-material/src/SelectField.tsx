@@ -100,7 +100,7 @@ function Select(props: SelectFieldProps) {
             <FormControlLabel
               control={
                 <Radio
-                  id={`${id}-${escape(option.key ?? option.value)}`}
+                  id={`${id}-${option.key ?? escape(option.value)}`}
                   {...filteredProps}
                 />
               }
@@ -118,7 +118,7 @@ function Select(props: SelectFieldProps) {
               control={
                 <SelectionControl
                   checked={value.includes(option.value)}
-                  id={`${id}-${escape(option.key ?? option.value)}`}
+                  id={`${id}-${option.key ?? escape(option.value)}`}
                   name={name}
                   onChange={() =>
                     disabled || readOnly || onChange(xor([option.value], value))

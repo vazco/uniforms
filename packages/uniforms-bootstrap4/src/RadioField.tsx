@@ -34,14 +34,14 @@ function Radio(props: RadioFieldProps) {
         })}
       >
         <label
-          htmlFor={`${props.id}-${escape(item.key ?? item.value)}`}
+          htmlFor={`${props.id}-${item.key ?? escape(item.value)}`}
           className="form-check-label"
         >
           <input
             checked={item.value === props.value}
             className="form-check-input"
             disabled={props.disabled}
-            id={`${props.id}-${escape(item.key ?? item.value)}`}
+            id={`${props.id}-${item.key ?? escape(item.value)}`}
             name={props.name}
             onChange={() => {
               if (!props.readOnly) {

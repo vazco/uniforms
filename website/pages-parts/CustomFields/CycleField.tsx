@@ -3,7 +3,14 @@ import { AutoForm, SubmitField } from '../../lib/universal';
 import { HTMLFieldProps, connectField } from 'uniforms';
 
 import { bridge as schema } from './CycleFieldSchema';
-import type { Option } from 'uniforms-unstyled/src/types';
+
+/** Option type used in SelectField or RadioField */
+export type Option<Value> = {
+  disabled?: boolean;
+  label?: string;
+  key?: string;
+  value: Value;
+};
 
 type CycleProps = HTMLFieldProps<
   number,

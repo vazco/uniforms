@@ -32,11 +32,11 @@ function Radio(props: RadioFieldProps) {
           `radio${props.inline ? '-inline' : ''}`,
         )}
       >
-        <label htmlFor={`${props.id}-${escape(item.key ?? item.value)}`}>
+        <label htmlFor={`${props.id}-${item.key ?? escape(item.value)}`}>
           <input
             checked={item.value === props.value}
             disabled={props.disabled}
-            id={`${props.id}-${escape(item.key ?? item.value)}`}
+            id={`${props.id}-${item.key ?? escape(item.value)}`}
             name={props.name}
             onChange={() => {
               if (!props.readOnly) {
