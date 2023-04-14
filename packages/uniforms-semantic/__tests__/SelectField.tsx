@@ -102,8 +102,8 @@ test('<SelectField> - renders a select with correct options (transform)', () => 
     <SelectField
       name="x"
       options={[
-        { key: 'k1', label: 'A', value: 'a' },
-        { key: 'k2', label: 'B', value: 'b' },
+        { label: 'A', value: 'a' },
+        { label: 'B', value: 'b' },
       ]}
     />
   );
@@ -538,8 +538,8 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct option
       checkboxes
       name="x"
       options={[
-        { key: 'k1', label: 'A', value: 'a' },
-        { key: 'k2', label: 'B', value: 'b' },
+        { label: 'A', value: 'a' },
+        { label: 'B', value: 'b' },
       ]}
     />
   );

@@ -159,8 +159,8 @@ test('<RadioField> - renders a set of Radio buttons with correct options (transf
     <RadioField
       name="x"
       options={[
-        { key: 'k1', label: 'A', value: 'a' },
-        { key: 'k2', label: 'B', value: 'b' },
+        { label: 'A', value: 'a' },
+        { label: 'B', value: 'b' },
       ]}
     />
   );

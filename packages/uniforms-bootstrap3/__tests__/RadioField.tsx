@@ -107,8 +107,8 @@ test('<RadioField> - renders a set of checkboxes with correct options (transform
     <RadioField
       name="x"
       options={[
-        { key: 'k1', label: 'A', value: 'a' },
-        { key: 'k2', label: 'B', value: 'b' },
+        { label: 'A', value: 'a' },
+        { label: 'B', value: 'b' },
       ]}
     />
   );

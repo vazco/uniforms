@@ -195,8 +195,8 @@ test('<SelectField> - renders a Select with correct options (transform)', () => 
     <SelectField
       name="x"
       options={[
-        { key: 'k1', label: 'A', value: 'a' },
-        { key: 'k2', label: 'B', value: 'b' },
+        { label: 'A', value: 'a' },
+        { label: 'B', value: 'b' },
       ]}
       native
     />
@@ -533,8 +533,8 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct opt
       checkboxes
       name="x"
       options={[
-        { key: 'k1', label: 'A', value: 'a' },
-        { key: 'k2', label: 'B', value: 'b' },
+        { label: 'A', value: 'a' },
+        { label: 'B', value: 'b' },
       ]}
     />
   );
@@ -667,8 +667,8 @@ test('<SelectField checkboxes> - renders a set of Checkboxes which correct label
       checkboxes
       name="x"
       options={[
-        { key: 'k1', label: 'A', value: 'a' },
-        { key: 'k2', label: 'B', value: 'b' },
+        { label: 'A', value: 'a' },
+        { label: 'B', value: 'b' },
       ]}
     />
   );
