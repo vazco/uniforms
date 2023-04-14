@@ -22,7 +22,7 @@ function fieldInvariant(name: string, condition: boolean): asserts condition {
 /** Option type used in SelectField or RadioField */
 type Option<Value> = {
   disabled?: boolean;
-  label: string;
+  label?: string;
   key?: string;
   value: Value;
 };

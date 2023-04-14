@@ -679,10 +679,7 @@ describe('JSONSchemaBridge', () => {
   describe('#getProps', () => {
     it('works with allowedValues', () => {
       expect(bridge.getProps('shippingAddress.type')).toEqual({
-        options: [
-          { label: 'residential', value: 'residential' },
-          { label: 'business', value: 'business' },
-        ],
+        options: [{ value: 'residential' }, { value: 'business' }],
         label: 'Type',
         required: true,
       });

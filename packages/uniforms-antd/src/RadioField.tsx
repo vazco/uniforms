@@ -17,6 +17,7 @@ function Radio(props: RadioFieldProps) {
   return wrapField(
     props,
     <RadioAntD.Group
+      {...filterDOMProps(props)}
       disabled={props.disabled}
       name={props.name}
       onChange={event => {
@@ -25,7 +26,10 @@ function Radio(props: RadioFieldProps) {
         }
       }}
       value={props.value ?? ''}
-      {...filterDOMProps(props)}
+      options={props.options?.map(option => ({
+        ...option,
+        label: option.label ?? option.value,
+      }))}
     >
       {props.options?.map(option => (
         <RadioAntD

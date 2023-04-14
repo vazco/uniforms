@@ -238,7 +238,7 @@ class PlaygroundSelect extends Component<any, any> {
       <select onChange={event => onChange(event.target.value)} value={value}>
         {options.map((option: Option<string>) => (
           <option key={option.key ?? option.value} value={option.value}>
-            {option.label}
+            {option.label ?? option.value}
           </option>
         ))}
       </select>

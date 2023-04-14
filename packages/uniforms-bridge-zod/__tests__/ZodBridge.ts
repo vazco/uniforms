@@ -356,11 +356,7 @@ describe('ZodBridge', () => {
       const schema = object({ a: nativeEnum(Test) });
       const bridge = new ZodBridge(schema);
       expect(bridge.getProps('a')).toEqual({
-        options: [0, 1, 2].map(value => ({
-          key: String(value),
-          label: String(value),
-          value,
-        })),
+        options: [0, 1, 2].map(value => ({ value })),
         label: 'A',
         required: true,
       });
@@ -376,11 +372,7 @@ describe('ZodBridge', () => {
       const schema = object({ a: nativeEnum(Test) });
       const bridge = new ZodBridge(schema);
       expect(bridge.getProps('a')).toEqual({
-        options: ['x', 'y', 'z'].map(value => ({
-          key: value,
-          label: value,
-          value,
-        })),
+        options: ['x', 'y', 'z'].map(value => ({ value })),
         label: 'A',
         required: true,
       });

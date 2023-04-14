@@ -31,7 +31,7 @@ function isNativeEnumValue(value: unknown) {
 /** Option type used in SelectField or RadioField */
 type Option<Value> = {
   disabled?: boolean;
-  label: string;
+  label?: string;
   key?: string;
   value: Value;
 };
@@ -170,11 +170,7 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
       const values = Object.values(field.enum);
       const nativeValues = values.filter(isNativeEnumValue);
       props.options = (nativeValues.length ? nativeValues : values).map(
-        value => ({
-          key: String(value),
-          label: String(value),
-          value,
-        }),
+        value => ({ value }),
       );
     } else if (field instanceof ZodNumber) {
       if (!field.isInt) {

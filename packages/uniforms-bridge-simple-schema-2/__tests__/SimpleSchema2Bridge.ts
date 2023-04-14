@@ -194,7 +194,7 @@ describe('SimpleSchema2Bridge', () => {
       expect(bridge.getProps('o')).toEqual({
         label: 'O',
         required: true,
-        options: [{ label: 'O', key: 'O', value: 'O' }],
+        options: [{ value: 'O' }],
       });
     });
 
@@ -228,30 +228,14 @@ describe('SimpleSchema2Bridge', () => {
     });
 
     it('works with allowedValues (array)', () => {
-      expect(bridge.getProps('s').options[0]).toStrictEqual({
-        key: 'a',
-        label: 'a',
-        value: 'a',
-      });
-      expect(bridge.getProps('s').options[1]).toStrictEqual({
-        key: 'b',
-        label: 'b',
-        value: 'b',
-      });
+      expect(bridge.getProps('s').options[0]).toStrictEqual({ value: 'a' });
+      expect(bridge.getProps('s').options[1]).toStrictEqual({ value: 'b' });
       expect(bridge.getProps('s').allowedValues).toBeUndefined();
     });
 
     it('works with allowedValues (function)', () => {
-      expect(bridge.getProps('t').options[0]).toStrictEqual({
-        key: 'a',
-        label: 'a',
-        value: 'a',
-      });
-      expect(bridge.getProps('t').options[1]).toStrictEqual({
-        key: 'b',
-        label: 'b',
-        value: 'b',
-      });
+      expect(bridge.getProps('t').options[0]).toStrictEqual({ value: 'a' });
+      expect(bridge.getProps('t').options[1]).toStrictEqual({ value: 'b' });
       expect(bridge.getProps('t').allowedValues).toBeUndefined();
     });
 

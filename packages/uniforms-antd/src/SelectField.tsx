@@ -46,6 +46,7 @@ function Select(props: SelectFieldProps) {
     props.checkboxes ? (
       // @ts-expect-error: Incorrect `value` type.
       <Group
+        {...filterDOMProps(props)}
         disabled={props.disabled}
         name={props.name}
         onChange={(eventOrValue: any) => {
@@ -58,9 +59,11 @@ function Select(props: SelectFieldProps) {
             );
           }
         }}
-        options={props.options}
+        options={props.options?.map(option => ({
+          ...option,
+          label: option.label ?? option.value,
+        }))}
         value={props.value}
-        {...filterDOMProps(props)}
       />
     ) : (
       <SelectAntD<any>

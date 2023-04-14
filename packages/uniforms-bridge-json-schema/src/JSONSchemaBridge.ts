@@ -89,7 +89,7 @@ function isValidatorResult(value: unknown): value is ValidatorResult {
 /** Option type used in SelectField or RadioField */
 type Option<Value> = {
   disabled?: boolean;
-  label: string;
+  label?: string;
   key?: string;
   value: Value;
 };
@@ -328,10 +328,7 @@ export default class JSONSchemaBridge extends Bridge {
         }));
       }
     } else if (props.enum) {
-      options = Object.values(props.enum).map(value => ({
-        label: String(value),
-        value,
-      }));
+      options = Object.values(props.enum).map(value => ({ value }));
     }
 
     propsToRename.forEach(([key, newKey]) => {

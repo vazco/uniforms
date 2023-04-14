@@ -13,7 +13,7 @@ function makeGeneric(name?: string): string | undefined {
 /** Option type used in SelectField or RadioField */
 type Option<Value> = {
   disabled?: boolean;
-  label: string;
+  label?: string;
   key?: string;
   value: Value;
 };
@@ -117,12 +117,6 @@ export default class SimpleSchema2Bridge extends Bridge {
     return undefined;
   }
 
-  private allowedValueToOption = <T>(value: T): Option<T> => ({
-    key: String(value),
-    label: String(value),
-    value,
-  });
-
   getProps(name: string) {
     const { type: fieldType, ...props } = this.getField(name);
     props.required = !props.optional;
@@ -154,7 +148,7 @@ export default class SimpleSchema2Bridge extends Bridge {
     }
 
     if (!options && Array.isArray(allowedValues)) {
-      options = allowedValues.map(this.allowedValueToOption);
+      options = allowedValues.map(value => ({ value }));
     } else if (fieldType === Array) {
       try {
         const itemProps = this.getProps(`${name}.$`);
