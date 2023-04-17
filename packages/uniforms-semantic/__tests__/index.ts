@@ -33,8 +33,12 @@ describe('@RTL', () => {
   suites.testAutoField(semantic.AutoField);
   suites.testDateField(semantic.DateField);
   suites.testListDelField(semantic.ListDelField);
+  suites.testListAddField(semantic.ListAddField);
   suites.testListField(semantic.ListField, {
     getListAddField: screen => screen.getByRole('button'),
   });
+  suites.testLongTextField(semantic.LongTextField);
   suites.testTextField(semantic.TextField);
+  suites.testNumField(semantic.NumField);
+  suites.testHiddenField(semantic.HiddenField);
 });
