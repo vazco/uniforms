@@ -76,4 +76,7 @@ function createValidator<T>(schema: JSONSchemaType<T>) {
 
 const schemaValidator = createValidator(schema);
 
-export const bridge = new JSONSchemaBridge(schema, schemaValidator);
+export const bridge = new JSONSchemaBridge({
+  schema,
+  validator: schemaValidator,
+});

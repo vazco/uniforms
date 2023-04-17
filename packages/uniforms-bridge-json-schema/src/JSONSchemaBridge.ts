@@ -98,18 +98,30 @@ type FieldError = {
 type ValidatorResult = { details: FieldError[] };
 
 export default class JSONSchemaBridge extends Bridge {
+  // FIXME: The `schema` should be typed more precisely.
+  public schema: Record<string, any>;
+  public validator: (
+    model: UnknownObject,
+  ) => ValidatorResult | null | undefined;
+  private readonly provideDefaultLabelFromFieldName: boolean = true;
+
   // FIXME: The `_compiledSchema` should be typed more precisely.
   _compiledSchema: Record<string, any>;
 
-  constructor(
-    // FIXME: The `schema` should be typed more precisely.
-    public schema: Record<string, any>,
-    public validator: (
-      model: UnknownObject,
-    ) => ValidatorResult | null | undefined,
-    private provideDefaultLabelFromFieldName: boolean = true,
-  ) {
+  constructor({
+    schema,
+    validator,
+    provideDefaultLabelFromFieldName = true,
+  }: {
+    schema: Record<string, any>;
+    validator: (model: UnknownObject) => ValidatorResult | null | undefined;
+    provideDefaultLabelFromFieldName?: boolean;
+  }) {
     super();
+
+    this.schema = schema;
+    this.validator = validator;
+    this.provideDefaultLabelFromFieldName = provideDefaultLabelFromFieldName;
 
     this.schema = resolveRefIfNeeded(schema, schema);
     this._compiledSchema = { '': this.schema };

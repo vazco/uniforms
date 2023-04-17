@@ -52,5 +52,8 @@ const schemaValidator = createValidator(schema);
 
 // <bridge>
 // Correct usage of the JSONSchemaBridge.
-export const bridge = new JSONSchemaBridge(schema, schemaValidator);
+export const bridge = new JSONSchemaBridge({
+  schema,
+  validator: schemaValidator,
+});
 // </bridge>

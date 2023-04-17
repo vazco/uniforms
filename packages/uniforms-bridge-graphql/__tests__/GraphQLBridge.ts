@@ -72,20 +72,23 @@ describe('GraphQLBridge', () => {
   const astI = buildASTSchema(parse(schemaI));
   const astT = buildASTSchema(parse(schemaT));
 
-  const bridgeI = new GraphQLBridge(
-    astI.getType('Post')!,
-    schemaValidator,
-    schemaData,
-  );
-  const bridgeT = new GraphQLBridge(
-    astT.getType('Post')!,
-    schemaValidator,
-    schemaData,
-  );
+  const bridgeI = new GraphQLBridge({
+    schema: astI.getType('Post')!,
+    validator: schemaValidator,
+    extras: schemaData,
+  });
+  const bridgeT = new GraphQLBridge({
+    schema: astT.getType('Post')!,
+    validator: schemaValidator,
+    extras: schemaData,
+  });
 
   describe('#constructor()', () => {
     it('always ensures `extras`', () => {
-      const bridge = new GraphQLBridge(astI.getType('Post')!, schemaValidator);
+      const bridge = new GraphQLBridge({
+        schema: astI.getType('Post')!,
+        validator: schemaValidator,
+      });
       expect(bridge.extras).toEqual({});
     });
   });
@@ -225,15 +228,17 @@ describe('GraphQLBridge', () => {
   describe('#getProps', () => {
     describe('labels are derived properly', () => {
       describe('when provideDefaultLabelFromFieldName is true', () => {
-        const bridgeTDefaultLabel = new GraphQLBridge(
-          astT.getType('Post')!,
-          schemaValidator,
-          schemaData,
-        );
+        const bridgeTDefaultLabel = new GraphQLBridge({
+          schema: astT.getType('Post')!,
+          validator: schemaValidator,
+          extras: schemaData,
+          provideDefaultLabelFromFieldName: true,
+        });
         describe('and no extra data is passed', () => {
           it('should use AST field name', () => {
             expect(bridgeTDefaultLabel.getProps('title')).toEqual({
               allowedValues: ['a', 'b', 'Some Title'],
+              label: 'Title',
               required: false,
               transform: expect.any(Function),
               options: [
@@ -245,9 +250,11 @@ describe('GraphQLBridge', () => {
             });
             expect(bridgeTDefaultLabel.getProps('author.decimal1')).toEqual({
               decimal: true,
+              label: 'Decimal 1',
               required: false,
             });
             expect(bridgeTDefaultLabel.getProps('author.firstName')).toEqual({
+              label: 'First name',
               required: false,
             });
           });
@@ -322,10 +329,10 @@ describe('GraphQLBridge', () => {
       });
 
       it('should prefer options over enum', () => {
-        const bridge = new GraphQLBridge(
-          astI.getType('Post')!,
-          schemaValidator,
-          {
+        const bridge = new GraphQLBridge({
+          schema: astI.getType('Post')!,
+          validator: schemaValidator,
+          extras: {
             ...schemaData,
             'author.level': {
               options: [
@@ -334,7 +341,7 @@ describe('GraphQLBridge', () => {
               ],
             },
           },
-        );
+        });
         const { allowedValues, transform } = bridge.getProps('author.level');
         expect(allowedValues).toEqual(['a', 'b']);
         expect(transform('a')).toEqual('A');

@@ -24,8 +24,8 @@ export type BaseFormProps<Model extends UnknownObject> = {
   model: Model;
   modelTransform?: (mode: ModelTransformMode, model: Model) => Model;
   noValidate: boolean;
-  onChange?: (key: string, value: any) => void;
-  onSubmit: (model: Model) => void | Promise<any>;
+  onChange?: (key: string, value: unknown) => void;
+  onSubmit: (model: Model) => void | Promise<unknown>;
   placeholder?: boolean;
   readOnly?: boolean;
   schema: Bridge;
