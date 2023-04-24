@@ -20,9 +20,7 @@ function Error({
       {...filterDOMProps(props)}
     >
       <div className="panel-body">
-        {children ? (
-          children
-        ) : (
+        {children || (
           <div className="panel-heading">
             <h4 className="panel-title">{errorMessage}</h4>
           </div>

@@ -1,8 +1,8 @@
-import * as antd from 'uniforms-antd';
+import * as theme from 'uniforms-antd';
 import * as suites from 'uniforms/__suites__';
 
 it('exports everything', () => {
-  expect(antd).toEqual({
+  expect(theme).toEqual({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),
     AutoForm: expect.any(Function),
@@ -31,17 +31,24 @@ it('exports everything', () => {
 });
 
 describe('@RTL', () => {
-  suites.testAutoField(antd.AutoField);
+  suites.testAutoField(theme.AutoField);
+  suites.testAutoForm(theme.AutoForm);
+  suites.testBaseForm(theme.BaseForm);
   // FIXME: AntD `DatePicker` is far from the HTML one.
   // suites.testDateField(antd.DateField);
-  suites.testListDelField(antd.ListDelField);
-  suites.testListAddField(antd.ListAddField);
-  suites.testListField(antd.ListField, {
+  suites.testErrorField(theme.ErrorField);
+  suites.testErrorsField(theme.ErrorsField);
+  suites.testHiddenField(theme.HiddenField);
+  suites.testListDelField(theme.ListDelField);
+  suites.testListAddField(theme.ListAddField);
+  suites.testListField(theme.ListField, {
     getListAddField: screen => screen.getByRole('img', { name: 'plus-square' }),
   });
-  suites.testLongTextField(antd.LongTextField);
-  suites.testTextField(antd.TextField);
+  suites.testLongTextField(theme.LongTextField);
   // FIXME: AntD number input doesn't work with new RTL test implementation
   // suites.testNumField(antd.NumField);
-  suites.testHiddenField(antd.HiddenField);
+  suites.testQuickForm(theme.QuickForm);
+  suites.testTextField(theme.TextField);
+  suites.testValidatedForm(theme.ValidatedForm);
+  suites.testValidatedQuickForm(theme.ValidatedQuickForm);
 });

@@ -33,9 +33,7 @@ describe('@RTL - SelectField tests', () => {
       'MuiFormControl-marginNormal',
     );
     expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
+    expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
   });
 
   test('<SelectField> - default props are passed when MUI theme props are absent', () => {
@@ -51,9 +49,7 @@ describe('@RTL - SelectField tests', () => {
       'MuiFormControl-marginDense',
     );
     expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      true,
-    );
+    expect(elements[0]).toHaveClass('MuiFormControl-fullWidth');
   });
 
   test('<SelectField> - explicit props are passed when MUI theme props are specified', () => {
@@ -76,9 +72,7 @@ describe('@RTL - SelectField tests', () => {
       'MuiFormControl-marginNormal',
     );
     expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
+    expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
   });
 
   test('<SelectField checkboxes> -  MUI theme props are passed', () => {
@@ -96,9 +90,7 @@ describe('@RTL - SelectField tests', () => {
       'MuiFormControl-marginNormal',
     );
     expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
+    expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
   });
 });
 

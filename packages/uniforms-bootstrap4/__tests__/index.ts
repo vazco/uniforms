@@ -1,8 +1,8 @@
-import * as bootstrap4 from 'uniforms-bootstrap4';
+import * as theme from 'uniforms-bootstrap4';
 import * as suites from 'uniforms/__suites__';
 
 it('exports everything', () => {
-  expect(bootstrap4).toEqual({
+  expect(theme).toEqual({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),
     AutoForm: expect.any(Function),
@@ -32,15 +32,22 @@ it('exports everything', () => {
 });
 
 describe('@RTL', () => {
-  suites.testAutoField(bootstrap4.AutoField);
-  suites.testDateField(bootstrap4.DateField);
-  suites.testListDelField(bootstrap4.ListDelField);
-  suites.testListAddField(bootstrap4.ListAddField);
-  suites.testListField(bootstrap4.ListField, {
+  suites.testAutoField(theme.AutoField);
+  suites.testAutoForm(theme.AutoForm);
+  suites.testBaseForm(theme.BaseForm);
+  suites.testDateField(theme.DateField);
+  suites.testErrorField(theme.ErrorField);
+  suites.testErrorsField(theme.ErrorsField);
+  suites.testHiddenField(theme.HiddenField);
+  suites.testListAddField(theme.ListAddField);
+  suites.testListDelField(theme.ListDelField);
+  suites.testListField(theme.ListField, {
     getListAddField: screen => screen.getByRole('button'),
   });
-  suites.testLongTextField(bootstrap4.LongTextField);
-  suites.testTextField(bootstrap4.TextField);
-  suites.testNumField(bootstrap4.NumField);
-  suites.testHiddenField(bootstrap4.HiddenField);
+  suites.testLongTextField(theme.LongTextField);
+  suites.testNumField(theme.NumField);
+  suites.testQuickForm(theme.QuickForm);
+  suites.testTextField(theme.TextField);
+  suites.testValidatedForm(theme.ValidatedForm);
+  suites.testValidatedQuickForm(theme.ValidatedQuickForm);
 });
