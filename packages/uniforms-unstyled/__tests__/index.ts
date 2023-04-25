@@ -43,4 +43,5 @@ describe('@RTL', () => {
   suites.testTextField(unstyled.TextField);
   suites.testNumField(unstyled.NumField);
   suites.testHiddenField(unstyled.HiddenField);
+  suites.testRadioField(unstyled.RadioField);
 });

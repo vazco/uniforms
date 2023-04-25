@@ -41,4 +41,5 @@ describe('@RTL', () => {
   suites.testTextField(semantic.TextField);
   suites.testNumField(semantic.NumField);
   suites.testHiddenField(semantic.HiddenField);
+  suites.testRadioField(semantic.RadioField);
 });

@@ -42,4 +42,5 @@ describe('@RTL', () => {
   suites.testTextField(material.TextField);
   suites.testNumField(material.NumField);
   suites.testHiddenField(material.HiddenField);
+  suites.testRadioField(material.RadioField);
 });

@@ -44,4 +44,5 @@ describe('@RTL', () => {
   // FIXME: AntD number input doesn't work with new RTL test implementation
   // suites.testNumField(antd.NumField);
   suites.testHiddenField(antd.HiddenField);
+  suites.testRadioField(antd.RadioField);
 });
