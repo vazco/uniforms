@@ -8,6 +8,12 @@ import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
+const base64: (string: string) => string =
+  typeof btoa === 'undefined'
+    ? /* istanbul ignore next */ x => Buffer.from(x).toString('base64')
+    : btoa;
+const escape = (x: string) => base64(encodeURIComponent(x)).replace(/=+$/, '');
+
 export type RadioFieldProps = FieldProps<
   string,
   RadioProps,
@@ -59,9 +65,11 @@ function Radio({
         <FormControlLabel
           control={
             <RadioMaterial
+              id={`${id}-${escape(item)}`}
               {...omit(filterDOMProps(props), ['checkboxes', 'helperText'])}
             />
           }
+          htmlFor={`${id}-${escape(item)}`}
           key={item}
           label={transform ? transform(item) : item}
           value={`${item}`}

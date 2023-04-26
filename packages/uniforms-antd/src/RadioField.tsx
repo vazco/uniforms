@@ -4,6 +4,12 @@ import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
+const base64: (string: string) => string =
+  typeof btoa === 'undefined'
+    ? /* istanbul ignore next */ x => Buffer.from(x).toString('base64')
+    : btoa;
+const escape = (x: string) => base64(encodeURIComponent(x)).replace(/=+$/, '');
+
 export type RadioFieldProps = FieldProps<
   string,
   RadioProps,
@@ -27,7 +33,12 @@ function Radio(props: RadioFieldProps) {
       {...filterDOMProps(props)}
     >
       {props.allowedValues?.map(value => (
-        <RadioAntD key={value} style={radioStyle} value={value}>
+        <RadioAntD
+          id={`${props.id}-${escape(value)}`}
+          key={value}
+          style={radioStyle}
+          value={value}
+        >
           {props.transform ? props.transform(value) : value}
         </RadioAntD>
       ))}

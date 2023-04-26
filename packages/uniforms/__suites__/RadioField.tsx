@@ -44,8 +44,10 @@ export function testRadioField(RadioField: ComponentType<any>) {
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
 
-    expect(screen.getAllByRole('radio')[0]).toHaveAttribute('id');
-    expect(screen.getAllByRole('radio')[1]).toHaveAttribute('id');
+    const radios = screen.getAllByRole('radio');
+    expect(radios).toHaveLength(2);
+    expect(radios[0]).toHaveAttribute('id');
+    expect(radios[1]).toHaveAttribute('id');
   });
 
   test('<RadioField> - renders a set of checkboxes with correct id (specified)', () => {
@@ -54,8 +56,10 @@ export function testRadioField(RadioField: ComponentType<any>) {
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
 
-    expect(screen.getAllByRole('radio')[0].getAttribute('id')).toBe('y-YQ');
-    expect(screen.getAllByRole('radio')[1].getAttribute('id')).toBe('y-Yg');
+    const radios = screen.getAllByRole('radio');
+    expect(radios).toHaveLength(2);
+    expect(radios[0].getAttribute('id')).toMatchInlineSnapshot('"y-YQ"');
+    expect(radios[1].getAttribute('id')).toMatchInlineSnapshot('"y-Yg"');
   });
 
   test('<RadioField> - renders a set of checkboxes with correct name', () => {
