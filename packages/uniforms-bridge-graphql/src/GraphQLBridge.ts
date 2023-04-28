@@ -20,28 +20,28 @@ function fieldInvariant(name: string, condition: boolean): asserts condition {
 }
 
 export default class GraphQLBridge extends Bridge {
-  public schema: GraphQLType;
-  public validator: (model: UnknownObject) => unknown;
-  public extras: UnknownObject = {};
-  public provideDefaultLabelFromFieldName: boolean;
+  extras: UnknownObject;
+  provideDefaultLabelFromFieldName: boolean;
+  schema: GraphQLType;
+  validator: (model: UnknownObject) => unknown;
 
   constructor({
-    schema,
-    validator,
     extras = {},
     provideDefaultLabelFromFieldName = false,
+    schema,
+    validator,
   }: {
-    schema: GraphQLType;
-    validator: (model: UnknownObject) => unknown;
     extras?: UnknownObject;
     provideDefaultLabelFromFieldName?: boolean;
+    schema: GraphQLType;
+    validator: (model: UnknownObject) => unknown;
   }) {
     super();
 
-    this.schema = schema;
-    this.validator = validator;
     this.extras = extras;
     this.provideDefaultLabelFromFieldName = provideDefaultLabelFromFieldName;
+    this.schema = schema;
+    this.validator = validator;
 
     // Memoize for performance and referential equality.
     this.getField = memoize(this.getField.bind(this));

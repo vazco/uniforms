@@ -20,9 +20,6 @@ function createValidator(schema: object) {
   };
 }
 
-const schemaValidator = createValidator(schema);
+const validator = createValidator(schema);
 
-export const bridge = new JSONSchemaBridge({
-  schema,
-  validator: schemaValidator,
-});
+export const bridge = new JSONSchemaBridge({ schema, validator });
