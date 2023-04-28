@@ -29,12 +29,19 @@ function isNativeEnumValue(value: unknown) {
 }
 
 export default class ZodBridge<T extends ZodRawShape> extends Bridge {
-  constructor(
-    public schema: ZodObject<T>,
-    private provideDefaultLabelFromFieldName: boolean = false,
-  ) {
+  schema: ZodObject<T>;
+  provideDefaultLabelFromFieldName: boolean;
+  constructor({
+    schema,
+    provideDefaultLabelFromFieldName = true,
+  }: {
+    schema: ZodObject<T>;
+    provideDefaultLabelFromFieldName: boolean;
+  }) {
     super();
 
+    this.schema = schema;
+    this.provideDefaultLabelFromFieldName = provideDefaultLabelFromFieldName;
     // Memoize for performance and referential equality.
     this.getField = memoize(this.getField.bind(this));
     this.getInitialValue = memoize(this.getInitialValue.bind(this));

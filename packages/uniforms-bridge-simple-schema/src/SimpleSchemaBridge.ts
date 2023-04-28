@@ -8,8 +8,12 @@ import { Bridge, UnknownObject, joinName } from 'uniforms';
 const propsToRemove = ['optional', 'uniforms'];
 
 export default class SimpleSchemaBridge extends Bridge {
-  constructor(public schema: SimpleSchema) {
+  schema: SimpleSchema;
+
+  constructor({ schema }: { schema: SimpleSchema }) {
     super();
+
+    this.schema = schema;
 
     // Memoize for performance and referential equality.
     this.getField = memoize(this.getField.bind(this));

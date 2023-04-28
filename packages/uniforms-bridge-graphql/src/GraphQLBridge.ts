@@ -27,7 +27,7 @@ export default class GraphQLBridge extends Bridge {
 
   constructor({
     extras = {},
-    provideDefaultLabelFromFieldName = false,
+    provideDefaultLabelFromFieldName = true,
     schema,
     validator,
   }: {
