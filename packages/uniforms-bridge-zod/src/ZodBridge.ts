@@ -36,7 +36,7 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     provideDefaultLabelFromFieldName = true,
   }: {
     schema: ZodObject<T>;
-    provideDefaultLabelFromFieldName: boolean;
+    provideDefaultLabelFromFieldName?: boolean;
   }) {
     super();
 
