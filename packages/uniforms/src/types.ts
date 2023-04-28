@@ -53,7 +53,8 @@ export type GuaranteedProps<Value> = {
   value?: Value;
 };
 
-type OnChange<Value> = {
+/** @internal */
+export type OnChange<Value> = {
   (value: Value): void;
   (value: unknown, name: string): void;
 };
@@ -70,7 +71,6 @@ export type ModelTransformMode = 'form' | 'submit' | 'validate';
 export type Override<T, U> = T extends any ? U & Omit<T, keyof U> : never;
 
 /** @internal */
-// export type UnknownObject = {};
 export type UnknownObject = Record<string, unknown>;
 
 export type ValidateMode = 'onChange' | 'onChangeAfterSubmit' | 'onSubmit';

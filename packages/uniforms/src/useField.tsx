@@ -3,7 +3,7 @@ import mapValues from 'lodash/mapValues';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { joinName } from './joinName';
-import { GuaranteedProps, UnknownObject } from './types';
+import { GuaranteedProps, OnChange, UnknownObject } from './types';
 import { useForm } from './useForm';
 
 export function useField<
@@ -40,8 +40,8 @@ export function useField<
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const id = useMemo(() => context.randomId(), []);
-  const onChange = useCallback(
-    (value?: Value | unknown, key: string = name) => {
+  const onChange: OnChange<Value | undefined> = useCallback(
+    (value, key: string = name) => {
       onChangeCalled.current = true;
       context.onChange(key, value);
     },
