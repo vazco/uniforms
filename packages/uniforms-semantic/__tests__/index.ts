@@ -1,8 +1,8 @@
-import * as semantic from 'uniforms-semantic';
+import * as theme from 'uniforms-semantic';
 import * as suites from 'uniforms/__suites__';
 
 it('exports everything', () => {
-  expect(semantic).toEqual({
+  expect(theme).toEqual({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),
     AutoForm: expect.any(Function),
@@ -30,16 +30,23 @@ it('exports everything', () => {
 });
 
 describe('@RTL', () => {
-  suites.testAutoField(semantic.AutoField);
-  suites.testDateField(semantic.DateField);
-  suites.testListDelField(semantic.ListDelField);
-  suites.testListAddField(semantic.ListAddField);
-  suites.testListField(semantic.ListField, {
+  suites.testAutoField(theme.AutoField);
+  suites.testAutoForm(theme.AutoForm);
+  suites.testBaseForm(theme.BaseForm);
+  suites.testDateField(theme.DateField);
+  suites.testErrorField(theme.ErrorField);
+  suites.testErrorsField(theme.ErrorsField);
+  suites.testHiddenField(theme.HiddenField);
+  suites.testListAddField(theme.ListAddField);
+  suites.testListDelField(theme.ListDelField);
+  suites.testListField(theme.ListField, {
     getListAddField: screen => screen.getByRole('button'),
   });
-  suites.testLongTextField(semantic.LongTextField);
-  suites.testTextField(semantic.TextField);
-  suites.testNumField(semantic.NumField);
-  suites.testHiddenField(semantic.HiddenField);
-  suites.testRadioField(semantic.RadioField);
+  suites.testLongTextField(theme.LongTextField);
+  suites.testNumField(theme.NumField);
+  suites.testQuickForm(theme.QuickForm);
+  suites.testRadioField(theme.RadioField);
+  suites.testTextField(theme.TextField);
+  suites.testValidatedForm(theme.ValidatedForm);
+  suites.testValidatedQuickForm(theme.ValidatedQuickForm);
 });

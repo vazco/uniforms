@@ -20,7 +20,7 @@ function Error({
       {...filterDOMProps(props)}
     >
       <div className="card-body">
-        {children ? children : <h4 className="card-title">{errorMessage}</h4>}
+        {children || <h4 className="card-title">{errorMessage}</h4>}
       </div>
     </div>
   );
