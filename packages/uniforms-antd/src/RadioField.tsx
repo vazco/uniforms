@@ -16,7 +16,20 @@ export type RadioFieldProps = FieldProps<
   { allowedValues?: string[]; transform?: (value: string) => string }
 >;
 
+type ObjectType = {
+  [key: string | number | symbol]: unknown;
+};
+
 const radioStyle = { display: 'block' };
+
+// helper function needed because antd radio.group does not support data-attributes https://github.com/ant-design/ant-design/issues/8561
+const filteredDataAttributes = (props: ObjectType) =>
+  Object.keys(props)
+    .filter(key => key.startsWith('data-'))
+    .reduce((newProps: ObjectType, key: string) => {
+      newProps[key] = props[key];
+      return newProps;
+    }, {});
 
 function Radio(props: RadioFieldProps) {
   return wrapField(
@@ -38,6 +51,7 @@ function Radio(props: RadioFieldProps) {
           key={value}
           style={radioStyle}
           value={value}
+          {...filteredDataAttributes(props)}
         >
           {props.transform ? props.transform(value) : value}
         </RadioAntD>

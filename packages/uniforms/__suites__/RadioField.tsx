@@ -25,7 +25,7 @@ export function testRadioField(RadioField: ComponentType<any>) {
     expect(screen.getAllByRole('radio')[1]).toHaveAttribute('disabled', '');
   });
 
-  test.skip('<RadioField> - renders a set of checkboxes with correct readOnly state', async () => {
+  test('<RadioField> - renders a set of checkboxes with correct readOnly state', async () => {
     const onChange = jest.fn();
     renderWithZod({
       element: <RadioField name="x" readOnly />,
@@ -125,10 +125,10 @@ export function testRadioField(RadioField: ComponentType<any>) {
     expect(screen.getAllByRole('radio')[1]).toHaveAttribute('checked');
   });
 
-  test.skip('<RadioField> - renders a set of checkboxes which correctly reacts on change', async () => {
+  test('<RadioField> - renders a set of checkboxes which correctly reacts on change', async () => {
     const onChange = jest.fn();
     renderWithZod({
-      element: <RadioField name="x" readOnly />,
+      element: <RadioField name="x" />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
       onChange,
     });
@@ -137,10 +137,10 @@ export function testRadioField(RadioField: ComponentType<any>) {
     expect(onChange).toHaveBeenLastCalledWith('x', 'b');
   });
 
-  test.skip('<RadioField> - renders a set of checkboxes which correctly reacts on change (same value)', async () => {
+  test('<RadioField> - renders a set of checkboxes which correctly reacts on change (same value)', async () => {
     const onChange = jest.fn();
     renderWithZod({
-      element: <RadioField name="x" readOnly />,
+      element: <RadioField name="x" />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
       onChange,
     });
@@ -166,9 +166,10 @@ export function testRadioField(RadioField: ComponentType<any>) {
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
 
-    expect(screen.getByTestId('x')).toHaveAttribute('data-x', 'x');
-    expect(screen.getByTestId('x')).toHaveAttribute('data-z', 'z');
-    expect(screen.getByTestId('x')).toHaveAttribute('data-y', 'y');
+    // get index of getAllByTestId because mui and material-ui renders it in spac multiple times
+    expect(screen.getAllByTestId('x')[0]).toHaveAttribute('data-x', 'x');
+    expect(screen.getAllByTestId('x')[0]).toHaveAttribute('data-z', 'z');
+    expect(screen.getAllByTestId('x')[0]).toHaveAttribute('data-y', 'y');
   });
 
   test('<RadioField> - works with special characters', () => {
