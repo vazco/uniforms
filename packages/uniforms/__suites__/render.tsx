@@ -27,7 +27,7 @@ export function render<P, Model extends UnknownObject>(
           submitting: false,
           validating: false,
           ...contextValueExtension,
-          schema: new SimpleSchema2Bridge(new SimpleSchema(schema)),
+          schema: new SimpleSchema2Bridge({ schema: new SimpleSchema(schema) }),
           state: {
             disabled: false,
             readOnly: false,

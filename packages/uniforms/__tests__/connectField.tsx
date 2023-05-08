@@ -13,13 +13,13 @@ import mount from './_mount';
 
 describe('connectField', () => {
   const onChange = jest.fn();
-  const schema = new SimpleSchema2Bridge(
-    new SimpleSchema({
+  const schema = new SimpleSchema2Bridge({
+    schema: new SimpleSchema({
       another: { type: String, optional: true },
       field: { type: Object, label: 'Field' },
       'field.subfield': { type: Number, label: 'Subfield' },
     }),
-  );
+  });
 
   const reactContext = {
     context: {

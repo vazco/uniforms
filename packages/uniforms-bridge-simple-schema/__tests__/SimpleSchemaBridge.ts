@@ -93,7 +93,7 @@ describe('SimpleSchemaBridge', () => {
     },
   } as unknown as SimpleSchema;
 
-  const bridge = new SimpleSchemaBridge(schema);
+  const bridge = new SimpleSchemaBridge({ schema });
 
   describe('#getError', () => {
     it('works without error', () => {
@@ -310,17 +310,19 @@ describe('SimpleSchemaBridge', () => {
   describe('#getValidator', () => {
     it('calls correct validator', () => {
       const bridge = new SimpleSchemaBridge({
-        ...schema,
-        validator() {
-          return (model: UnknownObject) => {
-            if (typeof model.x !== 'number') {
-              throw new Error();
-            }
+        schema: {
+          ...schema,
+          validator() {
+            return (model: UnknownObject) => {
+              if (typeof model.x !== 'number') {
+                throw new Error();
+              }
 
-            return true;
-          };
-        },
-      } as SimpleSchema);
+              return true;
+            };
+          },
+        } as SimpleSchema,
+      });
 
       expect(bridge.getValidator()({})).not.toEqual(null);
       expect(bridge.getValidator({})({})).not.toEqual(null);

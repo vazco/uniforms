@@ -296,7 +296,7 @@ export default class JSONSchemaBridge extends Bridge {
       field.uniforms,
       this._compiledSchema[name],
     );
-    props.label ??= props.title
+    props.label ??= props.title;
     if (this.provideDefaultLabelFromFieldName && props.label === undefined) {
       props.label = upperFirst(lowerCase(joinName(null, name).slice(-1)[0]));
     }

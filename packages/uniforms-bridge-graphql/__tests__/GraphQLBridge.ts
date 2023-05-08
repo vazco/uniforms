@@ -284,18 +284,21 @@ describe('GraphQLBridge', () => {
 
     it('works with custom component', () => {
       expect(bridgeI.getProps('author')).toEqual({
-        required: true,
         component: 'div',
+        label: 'Author',
+        required: true,
       });
     });
 
     it('works with Number type', () => {
       expect(bridgeI.getProps('author.decimal1')).toEqual({
-        required: false,
         decimal: true,
+        label: 'Decimal 1',
+        required: false,
       });
 
       expect(bridgeI.getProps('author.decimal2')).toEqual({
+        label: 'Decimal 2',
         required: true,
         decimal: true,
       });

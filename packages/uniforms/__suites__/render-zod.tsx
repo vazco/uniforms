@@ -32,7 +32,9 @@ export function renderWithZod<Props, Schema extends ZodObject<ZodRawShape>>({
         submitting: false,
         validating: false,
         ...contextValueOverride,
-        schema: new ZodBridge(schema, true),
+        schema: new ZodBridge({
+          schema,
+        }),
         state: {
           disabled: false,
           readOnly: false,
