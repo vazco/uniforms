@@ -8,18 +8,17 @@ import SelectAntD, { SelectProps as SelectAntDProps } from 'antd/lib/select';
 import React, { Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
+import type { Option } from './types';
 import wrapField from './wrapField';
 
 type CheckboxesProps = FieldProps<
   SelectFieldValue,
   CheckboxGroupProps | RadioGroupProps,
   {
-    allowedValues?: CheckboxValueType[];
+    options?: Option<CheckboxValueType>[];
     checkboxes: true;
-    disableItem?: (value: CheckboxValueType) => boolean;
     inputRef?: Ref<typeof CheckboxGroup | typeof RadioGroup>;
     required?: boolean;
-    transform?: (value: CheckboxValueType) => string;
   }
 >;
 
@@ -27,12 +26,10 @@ type SelectProps = FieldProps<
   SelectFieldValue,
   SelectAntDProps<string | string[]>,
   {
-    allowedValues?: string[];
+    options?: Option<string>[];
     checkboxes?: false;
-    disableItem?: (value: CheckboxValueType) => boolean;
     inputRef?: Ref<typeof SelectAntD>;
     required?: boolean;
-    transform?: (value: string) => string;
   }
 >;
 
@@ -49,6 +46,7 @@ function Select(props: SelectFieldProps) {
     props.checkboxes ? (
       // @ts-expect-error: Incorrect `value` type.
       <Group
+        {...filterDOMProps(props)}
         disabled={props.disabled}
         name={props.name}
         onChange={(eventOrValue: any) => {
@@ -61,13 +59,11 @@ function Select(props: SelectFieldProps) {
             );
           }
         }}
-        options={props.allowedValues!.map(value => ({
-          disabled: props.disableItem?.(value),
-          label: props.transform ? props.transform(value) : value,
-          value,
+        options={props.options?.map(option => ({
+          ...option,
+          label: option.label ?? option.value,
         }))}
         value={props.value}
-        {...filterDOMProps(props)}
       />
     ) : (
       <SelectAntD<any>
@@ -92,13 +88,13 @@ function Select(props: SelectFieldProps) {
         }
         {...filterDOMProps(props)}
       >
-        {props.allowedValues?.map(value => (
+        {props.options?.map(option => (
           <SelectAntD.Option
-            disabled={props.disableItem?.(value)}
-            key={value}
-            value={value}
+            disabled={option.disabled}
+            key={option.key ?? option.value}
+            value={option.value}
           >
-            {props.transform ? props.transform(value) : value}
+            {option.label ?? option.value}
           </SelectAntD.Option>
         ))}
       </SelectAntD>

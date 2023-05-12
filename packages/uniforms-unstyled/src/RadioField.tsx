@@ -2,6 +2,8 @@ import omit from 'lodash/omit';
 import React from 'react';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
+import type { Option } from './types';
+
 const base64: (string: string) => string =
   typeof btoa === 'undefined'
     ? /* istanbul ignore next */ x => Buffer.from(x).toString('base64')
@@ -12,21 +14,19 @@ export type RadioFieldProps = HTMLFieldProps<
   string,
   HTMLDivElement,
   {
-    allowedValues?: string[];
+    options?: Option<string>[];
     checkboxes?: boolean;
-    transform?: (value: string) => string;
   }
 >;
 
 function Radio({
-  allowedValues,
+  options,
   disabled,
   id,
   label,
   name,
   onChange,
   readOnly,
-  transform,
   value,
   ...props
 }: RadioFieldProps) {
@@ -34,23 +34,23 @@ function Radio({
     <div {...omit(filterDOMProps(props), ['checkboxes'])}>
       {label && <label>{label}</label>}
 
-      {allowedValues?.map(item => (
-        <div key={item}>
+      {options?.map(option => (
+        <div key={option.key ?? option.value}>
           <input
-            checked={item === value}
-            disabled={disabled}
-            id={`${id}-${escape(item)}`}
+            checked={option.value === value}
+            disabled={option.disabled || disabled}
+            id={`${id}-${option.key ?? escape(option.value)}`}
             name={name}
             onChange={() => {
               if (!readOnly) {
-                onChange(item);
+                onChange(option.value);
               }
             }}
             type="radio"
           />
 
-          <label htmlFor={`${id}-${escape(item)}`}>
-            {transform ? transform(item) : item}
+          <label htmlFor={`${id}-${option.key ?? escape(option.value)}`}>
+            {option.label ?? option.value}
           </label>
         </div>
       ))}

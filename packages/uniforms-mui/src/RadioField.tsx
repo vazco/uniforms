@@ -6,24 +6,24 @@ import omit from 'lodash/omit';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
+import type { Option } from './types';
 import wrapField from './wrapField';
 
 export type RadioFieldProps = FieldProps<
   string,
   RadioProps,
   {
-    allowedValues?: string[];
+    options?: Option<string>[];
     checkboxes?: boolean;
     fullWidth?: boolean;
     helperText?: string;
     margin?: 'dense' | 'normal' | 'none';
     row?: boolean;
-    transform?: (value: string) => string;
   }
 >;
 
 function Radio({
-  allowedValues,
+  options,
   disabled,
   fullWidth = true,
   id,
@@ -34,7 +34,6 @@ function Radio({
   onChange,
   readOnly,
   row,
-  transform,
   value,
   ...props
 }: RadioFieldProps) {
@@ -55,16 +54,16 @@ function Radio({
       row={row}
       value={value ?? ''}
     >
-      {allowedValues?.map(item => (
+      {options?.map(option => (
         <FormControlLabel
           control={
             <RadioMaterial
               {...omit(filterDOMProps(props), ['checkboxes', 'helperText'])}
             />
           }
-          key={item}
-          label={transform ? transform(item) : item}
-          value={`${item}`}
+          key={option.key ?? option.value}
+          label={option.label ?? option.value}
+          value={`${option.value}`}
         />
       ))}
     </RadioGroup>,

@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import React from 'react';
 import { connectField, HTMLFieldProps } from 'uniforms';
 
+import type { Option } from './types';
 import wrapField from './wrapField';
 
 const base64: (string: string) => string =
@@ -14,38 +15,37 @@ export type RadioFieldProps = HTMLFieldProps<
   string,
   HTMLDivElement,
   {
-    allowedValues?: string[];
+    options?: Option<string>[];
     inline?: boolean;
     inputClassName?: string;
-    transform?: (value: string) => string;
   }
 >;
 
 function Radio(props: RadioFieldProps) {
   return wrapField(
     props,
-    props.allowedValues?.map(item => (
+    props.options?.map(item => (
       <div
-        key={item}
+        key={item.key ?? item.value}
         className={classnames(
           props.inputClassName,
           `radio${props.inline ? '-inline' : ''}`,
         )}
       >
-        <label htmlFor={`${props.id}-${escape(item)}`}>
+        <label htmlFor={`${props.id}-${item.key ?? escape(item.value)}`}>
           <input
-            checked={item === props.value}
+            checked={item.value === props.value}
             disabled={props.disabled}
-            id={`${props.id}-${escape(item)}`}
+            id={`${props.id}-${item.key ?? escape(item.value)}`}
             name={props.name}
             onChange={() => {
               if (!props.readOnly) {
-                props.onChange(item);
+                props.onChange(item.value);
               }
             }}
             type="radio"
           />
-          {props.transform ? props.transform(item) : item}
+          {item.label ?? item.value}
         </label>
       </div>
     )),

@@ -16,7 +16,7 @@ const AutoField = createAutoField(props => {
     return props.component;
   }
 
-  if (props.allowedValues) {
+  if (props.options) {
     return props.checkboxes && props.fieldType !== Array
       ? RadioField
       : SelectField;

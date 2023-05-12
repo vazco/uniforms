@@ -14,16 +14,15 @@ import xor from 'lodash/xor';
 import React, { Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps, Override } from 'uniforms';
 
+import type { Option } from './types';
 import wrapField from './wrapField';
 
 type SelectFieldCommonProps = {
-  allowedValues?: string[];
   appearance?: 'checkbox' | 'switch';
-  disableItem?: (value: string) => boolean;
   inputRef?: Ref<HTMLButtonElement>;
   required?: boolean;
-  transform?: (value: string) => string;
   variant?: 'standard' | 'outlined' | 'filled';
+  options?: Option<string>[];
 };
 
 type CheckboxesProps = FieldProps<
@@ -65,7 +64,7 @@ function Select(props: SelectFieldProps) {
 
   if (props.checkboxes) {
     const {
-      allowedValues,
+      options,
       disabled,
       fieldType,
       id,
@@ -75,7 +74,6 @@ function Select(props: SelectFieldProps) {
       name,
       onChange,
       readOnly,
-      transform,
     } = props;
 
     const appearance = props.appearance ?? 'checkbox';
@@ -98,38 +96,41 @@ function Select(props: SelectFieldProps) {
           ref={inputRef}
           value={value ?? ''}
         >
-          {allowedValues!.map(item => (
+          {options?.map(option => (
             <FormControlLabel
               control={
-                <Radio id={`${id}-${escape(item)}`} {...filteredProps} />
+                <Radio
+                  id={`${id}-${option.key ?? escape(option.value)}`}
+                  {...filteredProps}
+                />
               }
-              disabled={props.disableItem?.(item) || disabled}
-              key={item}
-              label={transform ? transform(item) : item}
-              value={item}
+              disabled={option.disabled || disabled}
+              key={option.key ?? option.value}
+              label={option.label ?? option.value}
+              value={option.value}
             />
           ))}
         </RadioGroup>
       ) : (
         <FormGroup id={id}>
-          {allowedValues!.map(item => (
+          {options?.map(option => (
             <FormControlLabel
               control={
                 <SelectionControl
-                  checked={value.includes(item)}
-                  id={`${id}-${escape(item)}`}
+                  checked={value.includes(option.value)}
+                  id={`${id}-${option.key ?? escape(option.value)}`}
                   name={name}
                   onChange={() =>
-                    disabled || readOnly || onChange(xor([item], value))
+                    disabled || readOnly || onChange(xor([option.value], value))
                   }
                   ref={inputRef}
                   value={name}
                   {...filteredProps}
                 />
               }
-              disabled={props.disableItem?.(item) || disabled}
-              key={item}
-              label={transform ? transform(item) : item}
+              disabled={option.disabled || disabled}
+              key={option.key ?? option.value}
+              label={option.label ?? option.value}
             />
           ))}
         </FormGroup>
@@ -145,7 +146,7 @@ function Select(props: SelectFieldProps) {
   }
   const textFieldThemeProps = theme.props?.MuiTextField;
   const {
-    allowedValues,
+    options,
     disabled,
     error,
     errorMessage,
@@ -165,7 +166,6 @@ function Select(props: SelectFieldProps) {
     readOnly,
     required,
     showInlineError,
-    transform,
     variant,
     textFieldProps,
   } = props;
@@ -225,9 +225,13 @@ function Select(props: SelectFieldProps) {
         </Item>
       )}
 
-      {allowedValues!.map(value => (
-        <Item disabled={props.disableItem?.(value)} key={value} value={value}>
-          {transform ? transform(value) : value}
+      {options?.map(option => (
+        <Item
+          disabled={option.disabled}
+          key={option.key ?? option.value}
+          value={option.value}
+        >
+          {option.label ?? option.value}
         </Item>
       ))}
     </TextField>

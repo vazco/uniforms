@@ -68,7 +68,6 @@ export default function wrapField(
         'inputClassName',
         'inputRef',
         'rows',
-        'transform',
       ])}
     >
       {label && (

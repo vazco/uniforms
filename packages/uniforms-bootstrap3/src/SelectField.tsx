@@ -3,6 +3,7 @@ import xor from 'lodash/xor';
 import React, { Ref } from 'react';
 import { connectField, HTMLFieldProps } from 'uniforms';
 
+import type { Option } from './types';
 import wrapField from './wrapField';
 
 const base64: (string: string) => string =
@@ -15,20 +16,17 @@ export type SelectFieldProps = HTMLFieldProps<
   string | string[],
   HTMLDivElement,
   {
-    allowedValues?: string[];
+    options?: Option<string>[];
     checkboxes?: boolean;
-    disableItem?: (value: string) => boolean;
     inline?: boolean;
     inputClassName?: string;
     inputRef?: Ref<HTMLSelectElement>;
-    transform?: (value: string) => string;
   }
 >;
 
 function Select({
-  allowedValues,
+  options,
   checkboxes,
-  disableItem,
   disabled,
   error,
   fieldType,
@@ -42,7 +40,6 @@ function Select({
   placeholder,
   readOnly,
   required,
-  transform,
   value,
   ...props
 }: SelectFieldProps) {
@@ -50,30 +47,34 @@ function Select({
   return wrapField(
     { ...props, id, label },
     checkboxes ? (
-      allowedValues?.map(item => (
+      options?.map(item => (
         <div
-          key={item}
+          key={item.key ?? item.value}
           className={classnames(
             inputClassName,
             `checkbox${inline ? '-inline' : ''}`,
           )}
         >
-          <label htmlFor={`${id}-${escape(item)}`}>
+          <label htmlFor={`${id}-${item.key ?? escape(item.value)}`}>
             <input
               checked={
-                fieldType === Array ? value?.includes(item) : value === item
+                fieldType === Array
+                  ? value?.includes(item.value)
+                  : value === item.value
               }
-              disabled={disableItem?.(item) || disabled}
-              id={`${id}-${escape(item)}`}
+              disabled={item.disabled || disabled}
+              id={`${id}-${item.key ?? escape(item.value)}`}
               name={name}
               onChange={() => {
                 if (!readOnly) {
-                  onChange(fieldType === Array ? xor([item], value) : item);
+                  onChange(
+                    fieldType === Array ? xor([item.value], value) : item.value,
+                  );
                 }
               }}
               type="checkbox"
             />
-            {transform ? transform(item) : item}
+            {item.label ?? item.value}
           </label>
         </div>
       ))
@@ -106,9 +107,13 @@ function Select({
           </option>
         )}
 
-        {allowedValues?.map(value => (
-          <option disabled={disableItem?.(value)} key={value} value={value}>
-            {transform ? transform(value) : value}
+        {options?.map(option => (
+          <option
+            disabled={option.disabled}
+            key={option.key ?? option.value}
+            value={option.value}
+          >
+            {option.label ?? option.value}
           </option>
         ))}
       </select>
