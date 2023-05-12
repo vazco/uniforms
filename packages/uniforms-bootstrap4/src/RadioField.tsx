@@ -34,7 +34,7 @@ function Radio(props: RadioFieldProps) {
         })}
       >
         <label
-          htmlFor={`${props.id}-${escape(item.value)}`}
+          htmlFor={`${props.id}-${item.key ?? escape(item.value)}`}
           className="form-check-label"
         >
           <input
