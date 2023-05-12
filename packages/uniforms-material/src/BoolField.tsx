@@ -20,7 +20,6 @@ export type BoolFieldProps = FieldProps<
     helperText?: string;
     legend?: string;
     margin?: PropTypes.Margin;
-    transform?: (label: string) => string;
   }
 >;
 
@@ -34,7 +33,6 @@ function Bool(props: BoolFieldProps) {
     name,
     onChange,
     readOnly,
-    transform,
     value,
   } = props;
   const theme = useTheme();
@@ -73,7 +71,7 @@ function Bool(props: BoolFieldProps) {
             {...omit(filterDOMProps(props), ['helperText', 'fullWidth'])}
           />
         }
-        label={transform ? transform(label as string) : label}
+        label={label}
       />
     </FormGroup>,
   );

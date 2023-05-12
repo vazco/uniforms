@@ -82,7 +82,6 @@ export type ValidateMode = 'onChange' | 'onChangeAfterSubmit' | 'onSubmit';
 // Would it be possible not to use `declare` here?
 declare module '.' {
   interface FilterDOMProps {
-    allowedValues: never;
     changed: never;
     component: never;
     disabled: never;
@@ -97,7 +96,6 @@ declare module '.' {
     placeholder: never;
     readOnly: never;
     showInlineError: never;
-    transform: never;
     value: never;
   }
 }

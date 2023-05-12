@@ -4,19 +4,21 @@ import { HTMLFieldProps, connectField } from 'uniforms';
 
 import { bridge as schema } from './CycleFieldSchema';
 
+/** Option type used in SelectField or RadioField */
+export type Option<Value> = {
+  disabled?: boolean;
+  label?: string;
+  key?: string;
+  value: Value;
+};
+
 type CycleProps = HTMLFieldProps<
-  string,
+  number,
   HTMLAnchorElement,
-  { allowedValues: string[] }
+  { options: Option<number>[] }
 >;
 
-function Cycle({
-  allowedValues,
-  label,
-  onChange,
-  required,
-  value,
-}: CycleProps) {
+function Cycle({ options, label, onChange, required, value }: CycleProps) {
   return (
     <button
       style={{
@@ -31,12 +33,14 @@ function Cycle({
       onClick={() =>
         onChange(
           value
-            ? allowedValues.indexOf(value) === allowedValues.length - 1
+            ? options.findIndex(option => option.value === value) ===
+              options.length - 1
               ? required
-                ? allowedValues[0]
+                ? options[0].value
                 : undefined
-              : allowedValues[allowedValues.indexOf(value) + 1]
-            : allowedValues[0],
+              : options[options.findIndex(option => option.value === value) + 1]
+                  .value
+            : options[0].value,
         )
       }
     >
@@ -53,7 +57,14 @@ export function CycleFieldForm() {
       schema={schema}
       onSubmit={(model: any) => alert(JSON.stringify(model, null, 2))}
     >
-      <CycleField name="cycle" allowedValues={['One', 'Two', 'Three']} />
+      <CycleField
+        name="cycle"
+        options={[
+          { label: 'One', value: 1 },
+          { label: 'Two', value: 2 },
+          { label: 'Three', value: 3 },
+        ]}
+      />
       <br />
       <SubmitField />
     </AutoForm>

@@ -104,12 +104,16 @@ test('<SelectField> - renders a Select with correct options', () => {
 
 test('<SelectField> - renders a Select with correct options (transform)', () => {
   const element = (
-    <SelectField name="x" transform={x => x.toUpperCase()} native />
+    <SelectField
+      name="x"
+      options={[
+        { label: 'A', value: 'a' },
+        { label: 'B', value: 'b' },
+      ]}
+      native
+    />
   );
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find(Select)).toHaveLength(1);
   expect(wrapper.find('option')).toHaveLength(3);
@@ -284,20 +288,21 @@ test('<SelectField> - works with special characters', () => {
 });
 
 test('<SelectField> - disabled items (options) based on predicate', () => {
-  const allowedValues = ['a', 'b'];
-
   const element = (
     <SelectField
       native
       name="x"
-      disableItem={value => value === allowedValues[0]}
+      options={[
+        { key: 'k1', label: 'A', value: 'a', disabled: true },
+        { key: 'k2', label: 'B', value: 'b', disabled: false },
+      ]}
     />
   );
   const wrapper = mount(
     element,
     createContext({
       x: { type: Array },
-      'x.$': { type: String, allowedValues },
+      'x.$': { type: String },
     }),
   );
 
@@ -434,12 +439,16 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct opt
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct options (transform)', () => {
   const element = (
-    <SelectField checkboxes name="x" transform={x => x.toUpperCase()} />
+    <SelectField
+      checkboxes
+      name="x"
+      options={[
+        { label: 'A', value: 'a' },
+        { label: 'B', value: 'b' },
+      ]}
+    />
   );
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find('label')).toHaveLength(2);
   expect(wrapper.find(FormControlLabel).at(0).prop('label')).toBe('A');
@@ -564,14 +573,21 @@ test('<SelectField checkboxes> - renders a set of Checkboxes with correct labels
 test('<SelectField checkboxes> - renders a set of Checkboxes which correct labels (transform)', () => {
   const onChange = jest.fn();
   const element = (
-    <SelectField checkboxes name="x" transform={x => x.toUpperCase()} />
+    <SelectField
+      checkboxes
+      name="x"
+      options={[
+        { label: 'A', value: 'a' },
+        { label: 'B', value: 'b' },
+      ]}
+    />
   );
   const wrapper = mount(
     element,
     createContext(
       {
         x: { type: Array },
-        'x.$': { type: String, allowedValues: ['a', 'b'] },
+        'x.$': { type: String },
       },
       { onChange },
     ),
@@ -686,21 +702,22 @@ test('<SelectField checkboxes> - works with special characters', () => {
 });
 
 test('<SelectField checkboxes> - disabled items (checkboxes) based on predicate', () => {
-  const allowedValues = ['a', 'b'];
-
   const element = (
     <SelectField
       appearance="checkbox"
       checkboxes
       name="x"
-      disableItem={value => value === allowedValues[0]}
+      options={[
+        { key: 'k1', label: 'A', value: 'a', disabled: true },
+        { key: 'k2', label: 'B', value: 'b', disabled: false },
+      ]}
     />
   );
   const wrapper = mount(
     element,
     createContext({
       x: { type: Array },
-      'x.$': { type: String, allowedValues },
+      'x.$': { type: String },
     }),
   );
 

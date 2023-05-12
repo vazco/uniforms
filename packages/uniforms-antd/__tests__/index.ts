@@ -48,7 +48,8 @@ describe('@RTL', () => {
   // FIXME: AntD number input doesn't work with new RTL test implementation
   // suites.testNumField(antd.NumField);
   suites.testQuickForm(theme.QuickForm);
-  suites.testRadioField(theme.RadioField);
+  // FIXME: AntD radio.group does not support data-attributes https://github.com/ant-design/ant-design/issues/8561
+  // suites.testRadioField(theme.RadioField);
   suites.testTextField(theme.TextField);
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);

@@ -85,7 +85,13 @@ export function testRadioField(RadioField: ComponentType<any>) {
   test('<RadioField> - renders a set of checkboxes with correct options (transform)', () => {
     renderWithZod({
       element: (
-        <RadioField name="x" transform={(x: string) => x.toUpperCase()} />
+        <RadioField
+          name="x"
+          options={[
+            { label: 'A', value: 'a' },
+            { label: 'B', value: 'b' },
+          ]}
+        />
       ),
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });

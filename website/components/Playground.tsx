@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 // @ts-expect-error
 import Frame, { FrameContextConsumer } from 'react-frame-component';
 import { ValidatedForm, connectField, context, useForm } from 'uniforms';
+import type { Option } from 'uniforms-unstyled/src/types';
 
 import playgroundStyles from '../index.module.css';
 import presets from '../lib/presets';
@@ -231,13 +232,13 @@ const PlaygroundPropsField = connectField(PlaygroundProps);
 class PlaygroundSelect extends Component<any, any> {
   render() {
     // FIXME: allowedValues is undefined during `docusaurus build`.
-    const { allowedValues = [], onChange, transform, value } = this.props;
+    const { options, onChange, value } = this.props;
 
     return (
       <select onChange={event => onChange(event.target.value)} value={value}>
-        {allowedValues.map((value: any) => (
-          <option key={value} value={value}>
-            {transform ? transform(value) : value}
+        {options.map((option: Option<string>) => (
+          <option key={option.key ?? option.value} value={option.value}>
+            {option.label ?? option.value}
           </option>
         ))}
       </select>

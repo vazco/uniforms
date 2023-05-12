@@ -2,6 +2,7 @@ import RadioAntD, { RadioProps } from 'antd/lib/radio';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
+import type { Option } from './types';
 import wrapField from './wrapField';
 
 const base64: (string: string) => string =
@@ -13,28 +14,16 @@ const escape = (x: string) => base64(encodeURIComponent(x)).replace(/=+$/, '');
 export type RadioFieldProps = FieldProps<
   string,
   RadioProps,
-  { allowedValues?: string[]; transform?: (value: string) => string }
+  { options?: Option<string>[] }
 >;
 
-type ObjectType = {
-  [key: string | number | symbol]: unknown;
-};
-
 const radioStyle = { display: 'block' };
-
-// helper function needed because antd radio.group does not support data-attributes https://github.com/ant-design/ant-design/issues/8561
-const filteredDataAttributes = (props: ObjectType) =>
-  Object.keys(props)
-    .filter(key => key.startsWith('data-'))
-    .reduce((newProps: ObjectType, key: string) => {
-      newProps[key] = props[key];
-      return newProps;
-    }, {});
 
 function Radio(props: RadioFieldProps) {
   return wrapField(
     props,
     <RadioAntD.Group
+      {...filterDOMProps(props)}
       disabled={props.disabled}
       name={props.name}
       onChange={event => {
@@ -43,17 +32,20 @@ function Radio(props: RadioFieldProps) {
         }
       }}
       value={props.value ?? ''}
-      {...filterDOMProps(props)}
+      options={props.options?.map(option => ({
+        ...option,
+        label: option.label ?? option.value,
+      }))}
     >
-      {props.allowedValues?.map(value => (
+      {props.options?.map(option => (
         <RadioAntD
-          id={`${props.id}-${escape(value)}`}
-          key={value}
+          id={`${props.id}-${escape(option.value)}`}
+          key={option.key ?? option.value}
           style={radioStyle}
-          value={value}
-          {...filteredDataAttributes(props)}
+          value={option.value}
+          disabled={option.disabled}
         >
-          {props.transform ? props.transform(value) : value}
+          {option.label ?? option.value}
         </RadioAntD>
       ))}
     </RadioAntD.Group>,

@@ -86,6 +86,14 @@ function isValidatorResult(value: unknown): value is ValidatorResult {
   );
 }
 
+/** Option type used in SelectField or RadioField */
+type Option<Value> = {
+  disabled?: boolean;
+  label?: string;
+  key?: string;
+  value: Value;
+};
+
 type FieldError = {
   instancePath?: string;
   /** Provided by Ajv < 8 */
@@ -306,21 +314,21 @@ export default class JSONSchemaBridge extends Bridge {
       delete props.type;
     }
 
-    type OptionDict = Record<string, string>;
-    type OptionList = { label: string; value: unknown }[];
-    type Options = OptionDict | OptionList;
-    const options: Options = props.options;
+    type OptionList = Option<unknown>[];
+    type OptionDict = Record<string, unknown>;
+    type Options = OptionList | OptionDict;
+    let options: Options | undefined = props.options;
+
     if (options) {
-      if (Array.isArray(options)) {
-        props.allowedValues = options.map(option => option.value);
-        props.transform = (value: unknown) =>
-          options.find(option => option.value === value)!.label;
-      } else {
-        props.allowedValues = Object.keys(options);
-        props.transform = (value: string) => options[value];
+      if (!Array.isArray(options)) {
+        options = Object.entries(options).map(([key, value]) => ({
+          key,
+          label: key,
+          value,
+        }));
       }
     } else if (props.enum) {
-      props.allowedValues = props.enum;
+      options = Object.values(props.enum).map(value => ({ value }));
     }
 
     propsToRename.forEach(([key, newKey]) => {
@@ -336,7 +344,7 @@ export default class JSONSchemaBridge extends Bridge {
       }
     });
 
-    return props;
+    return Object.assign(props, { options });
   }
 
   getSubfields(name = '') {
