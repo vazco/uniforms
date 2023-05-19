@@ -11,6 +11,7 @@ export * from './ListField';
 export * from './LongTextField';
 export * from './NumField';
 export * from './QuickForm';
+export * from './RadioField';
 export * from './TextField';
 export * from './ValidatedForm';
 export * from './ValidatedQuickForm';
