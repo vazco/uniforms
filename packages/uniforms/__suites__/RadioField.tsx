@@ -4,8 +4,12 @@ import React, { ComponentType } from 'react';
 import z from 'zod';
 
 import { renderWithZod } from './render-zod';
+import { skipTestIf } from './skipTestIf';
 
-export function testRadioField(RadioField: ComponentType<any>) {
+export function testRadioField(
+  RadioField: ComponentType<any>,
+  { skipHtmlAttributesTest }: { skipHtmlAttributesTest?: boolean } = {},
+) {
   test('<RadioField> - renders a set of checkboxes', () => {
     renderWithZod({
       element: <RadioField name="x" />,
@@ -38,29 +42,35 @@ export function testRadioField(RadioField: ComponentType<any>) {
     expect(onChange).toHaveBeenCalledTimes(1);
   });
 
-  test('<RadioField> - renders a set of checkboxes with correct id (inherited)', () => {
-    renderWithZod({
-      element: <RadioField name="x" />,
-      schema: z.object({ x: z.enum(['a', 'b']) }),
-    });
+  skipTestIf(skipHtmlAttributesTest)(
+    '<RadioField> - renders a set of checkboxes with correct id (inherited)',
+    () => {
+      renderWithZod({
+        element: <RadioField name="x" />,
+        schema: z.object({ x: z.enum(['a', 'b']) }),
+      });
 
-    const radios = screen.getAllByRole('radio');
-    expect(radios).toHaveLength(2);
-    expect(radios[0]).toHaveAttribute('id');
-    expect(radios[1]).toHaveAttribute('id');
-  });
+      const radios = screen.getAllByRole('radio');
+      expect(radios).toHaveLength(2);
+      expect(radios[0]).toHaveAttribute('id');
+      expect(radios[1]).toHaveAttribute('id');
+    },
+  );
 
-  test('<RadioField> - renders a set of checkboxes with correct id (specified)', () => {
-    renderWithZod({
-      element: <RadioField name="x" id="y" />,
-      schema: z.object({ x: z.enum(['a', 'b']) }),
-    });
+  skipTestIf(skipHtmlAttributesTest)(
+    '<RadioField> - renders a set of checkboxes with correct id (specified)',
+    () => {
+      renderWithZod({
+        element: <RadioField name="x" id="y" />,
+        schema: z.object({ x: z.enum(['a', 'b']) }),
+      });
 
-    const radios = screen.getAllByRole('radio');
-    expect(radios).toHaveLength(2);
-    expect(radios[0].getAttribute('id')).toMatchInlineSnapshot('"y-YQ"');
-    expect(radios[1].getAttribute('id')).toMatchInlineSnapshot('"y-Yg"');
-  });
+      const radios = screen.getAllByRole('radio');
+      expect(radios).toHaveLength(2);
+      expect(radios[0].getAttribute('id')).toMatchInlineSnapshot('"y-YQ"');
+      expect(radios[1].getAttribute('id')).toMatchInlineSnapshot('"y-Yg"');
+    },
+  );
 
   test('<RadioField> - renders a set of checkboxes with correct name', () => {
     renderWithZod({
@@ -72,7 +82,7 @@ export function testRadioField(RadioField: ComponentType<any>) {
     expect(screen.getAllByRole('radio')[0].getAttribute('name')).toBe('x');
   });
 
-  test('<RadioField> - renders a set of checkboxes with correct options', () => {
+  test('<RadioField> - renders a set of checkboxes with correct schema values', () => {
     renderWithZod({
       element: <RadioField name="x" />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
@@ -82,7 +92,7 @@ export function testRadioField(RadioField: ComponentType<any>) {
     expect(screen.getByLabelText('b')).toBeTruthy();
   });
 
-  test('<RadioField> - renders a set of checkboxes with correct options (transform)', () => {
+  test('<RadioField> - renders a set of checkboxes with correct options', () => {
     renderWithZod({
       element: (
         <RadioField
@@ -164,19 +174,28 @@ export function testRadioField(RadioField: ComponentType<any>) {
     expect(screen.getByText('y')).toBeTruthy();
   });
 
-  test('<RadioField> - renders a wrapper with unknown props', () => {
-    renderWithZod({
-      element: (
-        <RadioField name="x" data-x="x" data-y="y" data-z="z" data-testid="x" />
-      ),
-      schema: z.object({ x: z.enum(['a', 'b']) }),
-    });
+  skipTestIf(skipHtmlAttributesTest)(
+    '<RadioField> - renders a wrapper with unknown props',
+    () => {
+      renderWithZod({
+        element: (
+          <RadioField
+            name="x"
+            data-x="x"
+            data-y="y"
+            data-z="z"
+            data-testid="x"
+          />
+        ),
+        schema: z.object({ x: z.enum(['a', 'b']) }),
+      });
 
-    // get index of getAllByTestId because mui and material-ui renders it in spac multiple times
-    expect(screen.getAllByTestId('x')[0]).toHaveAttribute('data-x', 'x');
-    expect(screen.getAllByTestId('x')[0]).toHaveAttribute('data-z', 'z');
-    expect(screen.getAllByTestId('x')[0]).toHaveAttribute('data-y', 'y');
-  });
+      // get index of getAllByTestId because mui and material-ui renders it in spac multiple times
+      expect(screen.getAllByTestId('x')[0]).toHaveAttribute('data-x', 'x');
+      expect(screen.getAllByTestId('x')[0]).toHaveAttribute('data-z', 'z');
+      expect(screen.getAllByTestId('x')[0]).toHaveAttribute('data-y', 'y');
+    },
+  );
 
   test('<RadioField> - works with special characters', () => {
     renderWithZod({
