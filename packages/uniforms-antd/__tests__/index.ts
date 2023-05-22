@@ -31,7 +31,10 @@ it('exports everything', () => {
 });
 
 describe('@RTL', () => {
-  suites.testAutoField(theme.AutoField);
+  suites.testAutoField(theme.AutoField, {
+    getDateField: screen => screen.getByRole('textbox'),
+    getSelectField: screen => screen.getByRole('combobox'),
+  });
   suites.testAutoForm(theme.AutoForm);
   suites.testBaseForm(theme.BaseForm);
   // FIXME: AntD `DatePicker` is far from the HTML one.

@@ -32,7 +32,10 @@ it('exports everything', () => {
 });
 
 describe('@RTL', () => {
-  suites.testAutoField(theme.AutoField);
+  suites.testAutoField(theme.AutoField, {
+    getDateField: screen => screen.getByLabelText('X'),
+    getSelectField: screen => screen.getByRole('combobox'),
+  });
   suites.testAutoForm(theme.AutoForm);
   suites.testBaseForm(theme.BaseForm);
   suites.testDateField(theme.DateField);
