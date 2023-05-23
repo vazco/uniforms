@@ -1,8 +1,8 @@
-import * as material from 'uniforms-material';
+import * as theme from 'uniforms-material';
 import * as suites from 'uniforms/__suites__';
 
 it('exports everything', () => {
-  expect(material).toEqual({
+  expect(theme).toEqual({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),
     AutoForm: expect.any(Function),
@@ -31,15 +31,23 @@ it('exports everything', () => {
 });
 
 describe('@RTL', () => {
-  suites.testAutoField(material.AutoField);
-  suites.testDateField(material.DateField);
-  suites.testListDelField(material.ListDelField);
-  suites.testListAddField(material.ListAddField);
-  suites.testListField(material.ListField, {
+  suites.testAutoField(theme.AutoField);
+  suites.testAutoForm(theme.AutoForm);
+  suites.testBaseForm(theme.BaseForm);
+  suites.testDateField(theme.DateField);
+  suites.testErrorField(theme.ErrorField);
+  suites.testErrorsField(theme.ErrorsField);
+  suites.testHiddenField(theme.HiddenField);
+  suites.testListAddField(theme.ListAddField);
+  suites.testListDelField(theme.ListDelField);
+  suites.testListField(theme.ListField, {
     getListAddField: screen => screen.getByText(/\+/),
   });
-  suites.testLongTextField(material.LongTextField);
-  suites.testTextField(material.TextField);
-  suites.testNumField(material.NumField);
-  suites.testHiddenField(material.HiddenField);
+  suites.testLongTextField(theme.LongTextField);
+  suites.testNumField(theme.NumField);
+  suites.testQuickForm(theme.QuickForm);
+  suites.testRadioField(theme.RadioField);
+  suites.testTextField(theme.TextField);
+  suites.testValidatedForm(theme.ValidatedForm);
+  suites.testValidatedQuickForm(theme.ValidatedQuickForm);
 });

@@ -69,6 +69,7 @@ export function WhyUs() {
                     <li>GraphQL</li>
                     <li>SimpleSchema</li>
                     <li>SimpleSchema2</li>
+                    <li>Zod</li>
                     <li>And any other - only a small wrapper is needed!</li>
                   </ul>
                 </div>

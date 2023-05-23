@@ -5,7 +5,15 @@ import memoize from 'lodash/memoize';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Bridge, UnknownObject, joinName } from 'uniforms';
 
-const propsToRemove = ['optional', 'uniforms'];
+const propsToRemove = ['optional', 'uniforms', 'allowedValues'];
+
+/** Option type used in SelectField or RadioField */
+type Option<Value> = {
+  disabled?: boolean;
+  label?: string;
+  key?: string;
+  value: Value;
+};
 
 export default class SimpleSchemaBridge extends Bridge {
   schema: SimpleSchema;
@@ -117,32 +125,27 @@ export default class SimpleSchemaBridge extends Bridge {
       Object.assign(props, props.uniforms);
     }
 
-    type OptionDict = Record<string, string>;
-    type OptionList = { label: string; value: unknown }[];
-    type Options = OptionDict | OptionList | (() => OptionDict | OptionList);
-    let options: Options = props.options;
-    if (options) {
-      if (typeof options === 'function') {
-        options = options();
-      }
+    type OptionList = Option<unknown>[];
+    type Options = OptionList | (() => OptionList);
+    let options: Options | undefined = props.options;
+    let allowedValues: unknown[] | (() => unknown[]) | undefined =
+      props.allowedValues;
 
-      if (Array.isArray(options)) {
-        props.allowedValues = options.map(option => option.value);
-        props.transform = (value: unknown) =>
-          (options as OptionList).find(option => option.value === value)!.label;
-      } else {
-        props.allowedValues = Object.keys(options);
-        props.transform = (value: string) => (options as OptionDict)[value];
-      }
+    if (typeof options === 'function') {
+      options = options();
+    }
+
+    if (!options && typeof allowedValues === 'function') {
+      allowedValues = allowedValues();
+    }
+
+    if (!options && Array.isArray(allowedValues)) {
+      options = allowedValues.map(value => ({ value }));
     } else if (fieldType === Array) {
       try {
         const itemProps = this.getProps(`${name}.$`);
-        if (itemProps.allowedValues) {
-          props.allowedValues = itemProps.allowedValues;
-        }
-
-        if (itemProps.transform) {
-          props.transform = itemProps.transform;
+        if (itemProps.options) {
+          options = itemProps.options as OptionList;
         }
       } catch (_) {
         // It's fine.
@@ -155,7 +158,7 @@ export default class SimpleSchemaBridge extends Bridge {
       }
     });
 
-    return props;
+    return Object.assign(props, { options });
   }
 
   getSubfields(name?: string): string[] {

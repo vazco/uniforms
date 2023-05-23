@@ -25,9 +25,7 @@ describe('@RTL - NestField tests', () => {
       'MuiFormControl-marginNormal',
     );
     expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
+    expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
   });
 
   test('<NestField> - default props are passed when MUI theme props are absent', () => {
@@ -43,9 +41,7 @@ describe('@RTL - NestField tests', () => {
       'MuiFormControl-marginDense',
     );
     expect(elements).toHaveLength(2); // Nested TextField is found as well
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      true,
-    );
+    expect(elements[0]).toHaveClass('MuiFormControl-fullWidth');
   });
 
   test('<NestField> - explicit props are passed when MUI theme props are specified', () => {
@@ -68,9 +64,7 @@ describe('@RTL - NestField tests', () => {
       'MuiFormControl-marginNormal',
     );
     expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
+    expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
   });
 });
 

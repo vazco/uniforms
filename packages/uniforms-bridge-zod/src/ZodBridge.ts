@@ -28,9 +28,18 @@ function isNativeEnumValue(value: unknown) {
   return typeof value !== 'string';
 }
 
+/** Option type used in SelectField or RadioField */
+type Option<Value> = {
+  disabled?: boolean;
+  label?: string;
+  key?: string;
+  value: Value;
+};
+
 export default class ZodBridge<T extends ZodRawShape> extends Bridge {
   schema: ZodObject<T>;
   provideDefaultLabelFromFieldName: boolean;
+
   constructor({
     schema,
     provideDefaultLabelFromFieldName = true,
@@ -136,8 +145,9 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     return undefined;
   }
 
+  // eslint-disable-next-line complexity
   getProps(name: string) {
-    const props: UnknownObject = {
+    const props: UnknownObject & { options?: Option<unknown>[] } = {
       ...(this.provideDefaultLabelFromFieldName && {
         label: upperFirst(lowerCase(joinName(null, name).slice(-1)[0])),
       }),
@@ -162,11 +172,15 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
         props.minCount = field._def.minLength.value;
       }
     } else if (field instanceof ZodEnum) {
-      props.allowedValues = field.options;
+      props.options = (field.options as ZodEnum<[string]>['options']).map(
+        value => ({ value }),
+      );
     } else if (field instanceof ZodNativeEnum) {
       const values = Object.values(field.enum);
       const nativeValues = values.filter(isNativeEnumValue);
-      props.allowedValues = nativeValues.length ? nativeValues : values;
+      props.options = (nativeValues.length ? nativeValues : values).map(
+        value => ({ value }),
+      );
     } else if (field instanceof ZodNumber) {
       if (!field.isInt) {
         props.decimal = true;

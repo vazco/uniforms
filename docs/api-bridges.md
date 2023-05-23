@@ -59,7 +59,11 @@ const schema = `
 const schemaType = buildASTSchema(parse(schema)).getType('Post');
 const schemaExtras = {
   id: {
-    allowedValues: [1, 2, 3],
+    options: [
+      { label: 1, value: 1 },
+      { label: 2, value: 2 },
+      { label: 3, value: 3 },
+    ],
   },
   title: {
     options: [

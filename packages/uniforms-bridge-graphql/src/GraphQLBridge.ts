@@ -19,6 +19,14 @@ function fieldInvariant(name: string, condition: boolean): asserts condition {
   invariant(condition, 'Field not found in schema: "%s"', name);
 }
 
+/** Option type used in SelectField or RadioField */
+type Option<Value> = {
+  disabled?: boolean;
+  label?: string;
+  key?: string;
+  value: Value;
+};
+
 export default class GraphQLBridge extends Bridge {
   extras: UnknownObject;
   provideDefaultLabelFromFieldName: boolean;
@@ -145,27 +153,27 @@ export default class GraphQLBridge extends Bridge {
       props.label = upperFirst(lowerCase(field.name));
     }
 
-    type OptionDict = Record<string, string>;
-    type OptionList = { label: string; value: unknown }[];
+    type OptionDict = Record<string, unknown>;
+    type OptionList = Option<unknown>[];
     type Options = OptionDict | OptionList;
-    const options: Options = props.options;
+    let options: Options = props.options;
     if (options) {
-      if (Array.isArray(options)) {
-        props.allowedValues = options.map(option => option.value);
-        props.transform = (value: unknown) =>
-          options.find(option => option.value === value)!.label;
-      } else {
-        props.allowedValues = Object.keys(options);
-        props.transform = (value: string) => options[value];
+      if (!Array.isArray(options)) {
+        options = Object.entries(options).map(([key, value]) => ({
+          key,
+          label: key,
+          value,
+        }));
       }
     } else if (isEnumType(fieldType)) {
       const values = fieldType.getValues();
-      props.allowedValues = values.map(option => option.value);
-      props.transform = (value: unknown) =>
-        values.find(searchValue => searchValue.value === value)!.name;
+      options = values.map(option => ({
+        label: option.name,
+        value: option.value,
+      }));
     }
 
-    return props;
+    return Object.assign(props, { options });
   }
 
   getSubfields(name = '') {

@@ -15,7 +15,11 @@ In [\#800](https://github.com/vazco/uniforms/issues/800), a new way of creating 
 import { createAutoField } from 'uniforms';
 
 const AutoField = createAutoField(props => {
-  if (props.allowedValues) {
+  if (props.component) {
+    return props.component;
+  }
+
+  if (props.options) {
     return props.checkboxes && props.fieldType !== Array
       ? RadioField
       : SelectField;

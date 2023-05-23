@@ -223,7 +223,6 @@ describe('JSONSchemaBridge', () => {
   const bridge = new JSONSchemaBridge({
     schema,
     validator,
-    provideDefaultLabelFromFieldName: false,
   });
 
   describe('#constructor()', () => {
@@ -698,13 +697,15 @@ describe('JSONSchemaBridge', () => {
   describe('#getProps', () => {
     it('works with allowedValues', () => {
       expect(bridge.getProps('shippingAddress.type')).toEqual({
-        allowedValues: ['residential', 'business'],
+        label: 'Type',
+        options: [{ value: 'residential' }, { value: 'business' }],
         required: true,
       });
     });
 
     it('works with custom props', () => {
       expect(bridge.getProps('forcedRequired')).toEqual({
+        label: 'Forced required',
         required: true,
       });
     });
@@ -712,11 +713,12 @@ describe('JSONSchemaBridge', () => {
     it('works with custom component', () => {
       expect(bridge.getProps('age')).toEqual({
         component: 'span',
+        label: 'Age',
         required: false,
       });
     });
 
-    it('works with label', () => {
+    it('works with label (default)', () => {
       expect(bridge.getProps('withLabel')).toEqual({
         label: 'Example',
         required: false,
@@ -737,43 +739,51 @@ describe('JSONSchemaBridge', () => {
 
     it('works with Number type', () => {
       expect(bridge.getProps('salary')).toEqual({
-        allowedValues: ['low', 'medium', 'height'],
+        options: [
+          { key: 'low', label: 'low', value: 6000 },
+          { key: 'medium', label: 'medium', value: 12000 },
+          { key: 'height', label: 'height', value: 18000 },
+        ],
         decimal: true,
-        options: expect.anything(),
+        label: 'Salary',
         required: false,
-        transform: expect.anything(),
       });
     });
 
     it('works with options (array)', () => {
-      expect(bridge.getProps('billingAddress.state').transform('AL')).toBe(
-        'Alabama',
-      );
-      expect(bridge.getProps('billingAddress.state').transform('AK')).toBe(
-        'Alaska',
-      );
-      expect(bridge.getProps('billingAddress.state').allowedValues[0]).toBe(
-        'AL',
-      );
-      expect(bridge.getProps('billingAddress.state').allowedValues[1]).toBe(
-        'AK',
-      );
+      expect(bridge.getProps('billingAddress.state')).toEqual({
+        label: 'State',
+        options: [
+          { label: 'Alabama', value: 'AL' },
+          { label: 'Alaska', value: 'AK' },
+          { label: 'Arkansas', value: 'AR' },
+        ],
+        required: true,
+      });
     });
 
     it('works with options (object)', () => {
-      expect(bridge.getProps('salary').transform('low')).toBe(6000);
-      expect(bridge.getProps('salary').transform('medium')).toBe(12000);
-      expect(bridge.getProps('salary').allowedValues[0]).toBe('low');
-      expect(bridge.getProps('salary').allowedValues[1]).toBe('medium');
+      expect(bridge.getProps('salary')).toEqual({
+        options: [
+          { key: 'low', label: 'low', value: 6000 },
+          { key: 'medium', label: 'medium', value: 12000 },
+          { key: 'height', label: 'height', value: 18000 },
+        ],
+        decimal: true,
+        label: 'Salary',
+        required: false,
+      });
     });
 
     it('works with type', () => {
       expect(bridge.getProps('password')).toEqual({
+        label: 'Password',
         required: false,
         type: 'password',
       });
 
       expect(bridge.getProps('passwordNumeric')).toEqual({
+        label: 'Password numeric',
         required: false,
         decimal: true,
         type: 'password',
@@ -785,12 +795,14 @@ describe('JSONSchemaBridge', () => {
 
     it('works with other props', () => {
       expect(bridge.getProps('personalData.firstName')).toEqual({
+        label: 'First name',
         required: false,
       });
     });
 
     it('works with allOf in items', () => {
       expect(bridge.getProps('arrayWithAllOf.0.child')).toEqual({
+        label: 'Child',
         required: true,
       });
     });

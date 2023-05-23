@@ -7,7 +7,6 @@ jest.mock('meteor/check');
 
 describe('SimpleSchemaBridge', () => {
   const noopComponent = () => null;
-  const noopTransform = () => {};
   const schema = {
     getDefinition(name: string) {
       // Simulate SimpleSchema.
@@ -35,19 +34,26 @@ describe('SimpleSchemaBridge', () => {
         n: { type: String, uniforms: { component: 'div' } },
         o: { type: Array },
         'o.$': { type: String, allowedValues: ['O'] },
-        p: { type: Array },
-        'p.$': { type: String, uniforms: { transform: noopTransform } },
-        r: { type: String, uniforms: { options: { a: 1, b: 2 } } },
-        s: {
+        r: {
           type: String,
           uniforms: {
             options: [
-              { label: 1, value: 'a' },
-              { label: 2, value: 'b' },
+              { key: 'k1', label: 'A', value: 1 },
+              { key: 'k2', label: 'B', value: 2 },
             ],
           },
         },
-        t: { type: String, uniforms: { options: () => ({ a: 1, b: 2 }) } },
+        rr: {
+          type: String,
+          uniforms: {
+            options: () => [
+              { key: 'k1', label: 'A', value: 1 },
+              { key: 'k2', label: 'B', value: 2 },
+            ],
+          },
+        },
+        s: { type: String, allowedValues: ['a', 'b'] },
+        t: { type: String, allowedValues: () => ['a', 'b'] },
         u: { type: Array, defaultValue: ['u'] },
         'u.$': { type: String },
         v: { type: Object, defaultValue: { a: 'a' } },
@@ -210,11 +216,11 @@ describe('SimpleSchemaBridge', () => {
   });
 
   describe('#getProps', () => {
-    it('works with allowedValues', () => {
+    it('works with allowedValues (inferred from children)', () => {
       expect(bridge.getProps('o')).toEqual({
         label: 'O',
         required: true,
-        allowedValues: ['O'],
+        options: [{ value: 'O' }],
       });
     });
 
@@ -239,32 +245,41 @@ describe('SimpleSchemaBridge', () => {
       });
     });
 
+    it('works with allowedValues (array)', () => {
+      expect(bridge.getProps('s').options[0]).toStrictEqual({ value: 'a' });
+      expect(bridge.getProps('s').options[1]).toStrictEqual({ value: 'b' });
+      expect(bridge.getProps('s').allowedValues).toBeUndefined();
+    });
+
+    it('works with allowedValues (function)', () => {
+      expect(bridge.getProps('t').options[0]).toStrictEqual({ value: 'a' });
+      expect(bridge.getProps('t').options[1]).toStrictEqual({ value: 'b' });
+      expect(bridge.getProps('t').allowedValues).toBeUndefined();
+    });
+
     it('works with options (array)', () => {
-      expect(bridge.getProps('s').transform('a')).toBe(1);
-      expect(bridge.getProps('s').transform('b')).toBe(2);
-      expect(bridge.getProps('s').allowedValues[0]).toBe('a');
-      expect(bridge.getProps('s').allowedValues[1]).toBe('b');
+      expect(bridge.getProps('r').options[0]).toStrictEqual({
+        key: 'k1',
+        label: 'A',
+        value: 1,
+      });
+      expect(bridge.getProps('r').options[1]).toStrictEqual({
+        key: 'k2',
+        label: 'B',
+        value: 2,
+      });
     });
 
     it('works with options (function)', () => {
-      expect(bridge.getProps('t').transform('a')).toBe(1);
-      expect(bridge.getProps('t').transform('b')).toBe(2);
-      expect(bridge.getProps('t').allowedValues[0]).toBe('a');
-      expect(bridge.getProps('t').allowedValues[1]).toBe('b');
-    });
-
-    it('works with options (object)', () => {
-      expect(bridge.getProps('r').transform('a')).toBe(1);
-      expect(bridge.getProps('r').transform('b')).toBe(2);
-      expect(bridge.getProps('r').allowedValues[0]).toBe('a');
-      expect(bridge.getProps('r').allowedValues[1]).toBe('b');
-    });
-
-    it('works with transform', () => {
-      expect(bridge.getProps('p')).toEqual({
-        label: 'P',
-        required: true,
-        transform: noopTransform,
+      expect(bridge.getProps('rr').options[0]).toStrictEqual({
+        key: 'k1',
+        label: 'A',
+        value: 1,
+      });
+      expect(bridge.getProps('rr').options[1]).toStrictEqual({
+        key: 'k2',
+        label: 'B',
+        value: 2,
       });
     });
 

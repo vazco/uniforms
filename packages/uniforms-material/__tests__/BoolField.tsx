@@ -28,9 +28,7 @@ describe('@RTL - BoolField tests', () => {
       'MuiFormControl-marginNormal',
     );
     expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
+    expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
   });
 
   test('<BoolField> - default props are passed when MUI theme props are absent', () => {
@@ -46,9 +44,7 @@ describe('@RTL - BoolField tests', () => {
       'MuiFormControl-marginDense',
     );
     expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      true,
-    );
+    expect(elements[0]).toHaveClass('MuiFormControl-fullWidth');
   });
 
   test('<BoolField> - explicit props are passed when MUI theme props are specified', () => {
@@ -71,9 +67,7 @@ describe('@RTL - BoolField tests', () => {
       'MuiFormControl-marginNormal',
     );
     expect(elements).toHaveLength(1);
-    expect(elements[0].classList.contains('MuiFormControl-fullWidth')).toBe(
-      false,
-    );
+    expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
   });
 });
 
@@ -212,21 +206,6 @@ test('<BoolField> - renders a Switch with correct label (specified)', () => {
 
   expect(wrapper.find(Switch)).toHaveLength(1);
   expect(wrapper.find(FormControlLabel).prop('label')).toBe('BoolFieldLabel');
-});
-
-test('<BoolField> - renders a Switch with correct label (transform)', () => {
-  const element = (
-    <BoolField
-      name="x"
-      appearance="switch"
-      label="BoolFieldLabel"
-      transform={x => x.toUpperCase()}
-    />
-  );
-  const wrapper = mount(element, createContext({ x: { type: Boolean } }));
-
-  expect(wrapper.find(Switch)).toHaveLength(1);
-  expect(wrapper.find(FormControlLabel).prop('label')).toBe('BOOLFIELDLABEL');
 });
 
 test('<BoolField> - renders a Switch with correct legend (specified)', () => {

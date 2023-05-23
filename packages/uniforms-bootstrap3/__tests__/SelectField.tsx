@@ -100,12 +100,18 @@ test('<SelectField> - renders a select with correct options', () => {
 });
 
 test('<SelectField> - renders a select with correct options (transform)', () => {
-  const element = <SelectField name="x" transform={x => x.toUpperCase()} />;
+  const element = (
+    <SelectField
+      name="x"
+      options={[
+        { label: 'A', value: 'a' },
+        { label: 'B', value: 'b' },
+      ]}
+    />
+  );
   const wrapper = mount(
     element,
-    createContext({
-      x: { type: String, allowedValues: ['a', 'b'], label: '' },
-    }),
+    createContext({ x: { type: String, label: '' } }),
   );
 
   expect(wrapper.find('select')).toHaveLength(1);
@@ -289,16 +295,17 @@ test('<SelectField> - works with special characters', () => {
   );
 });
 
-test('<SelectField> - disabled items (options) based on predicate', () => {
-  const allowedValues = ['a', 'b'];
-
+test('<SelectField> - disabled items (options)', () => {
   const element = (
-    <SelectField name="x" disableItem={value => value === allowedValues[0]} />
+    <SelectField
+      name="x"
+      options={[
+        { key: 'k1', label: 'A', value: 'a', disabled: true },
+        { key: 'k2', label: 'B', value: 'b', disabled: false },
+      ]}
+    />
   );
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues } }),
-  );
+  const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find('select')).toHaveLength(1);
   expect(wrapper.find('option[value="a"]').at(0).prop('disabled')).toBe(true);
@@ -542,13 +549,18 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct option
 
 test('<SelectField checkboxes> - renders a set of checkboxes with correct options (transform)', () => {
   const element = (
-    <SelectField checkboxes name="x" transform={x => x.toUpperCase()} />
+    <SelectField
+      checkboxes
+      name="x"
+      options={[
+        { key: 'k1', label: 'A', value: 'a', disabled: true },
+        { key: 'k2', label: 'B', value: 'b', disabled: false },
+      ]}
+    />
   );
   const wrapper = mount(
     element,
-    createContext({
-      x: { type: String, allowedValues: ['a', 'b'], label: '' },
-    }),
+    createContext({ x: { type: String, label: '' } }),
   );
 
   expect(wrapper.find('label')).toHaveLength(2);
@@ -701,14 +713,17 @@ test('<SelectField checkboxes> - works with special characters', () => {
   );
 });
 
-test('<SelectField checkboxes> - disabled items (checkboxes) based on predicate', () => {
+test('<SelectField checkboxes> - disabled items (checkboxes)', () => {
   const allowedValues = ['a', 'b'];
 
   const element = (
     <SelectField
       checkboxes
       name="x"
-      disableItem={value => value === allowedValues[0]}
+      options={[
+        { key: 'k1', label: 'A', value: 'a', disabled: true },
+        { key: 'k2', label: 'B', value: 'b', disabled: false },
+      ]}
     />
   );
   const wrapper = mount(

@@ -1,3 +1,7 @@
+## [v4.0.0-alpha.4](https://github.com/vazco/uniforms/tree/v4.0.0-alpha.4) (2023-05-12)
+
+- **Breaking:** Replaced `allowedValues` and `transform` with `options`. [\#806](https://github.com/vazco/uniforms/issues/806)
+
 ## [v4.0.0-alpha.3](https://github.com/vazco/uniforms/tree/v4.0.0-alpha.3) (2023-03-31)
 
 - **Added:** Support for `minLenght` and `maxLength` in `LongTextField` in `uniforms-bootstrap5`. [\#1252](https://github.com/vazco/uniforms/issues/1252)

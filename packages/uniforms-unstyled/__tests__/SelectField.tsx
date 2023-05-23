@@ -4,6 +4,35 @@ import { SelectField } from 'uniforms-unstyled';
 import createContext from './_createContext';
 import mount from './_mount';
 
+test('<SelectField - renders options (property)', () => {
+  const element = (
+    <SelectField
+      name="x"
+      options={[
+        { key: 'k1', label: 'l1', value: 'v1' },
+        { key: 'k2', label: 'l2', value: 'v2' },
+      ]}
+    />
+  );
+  const wrapper = mount(element, createContext({ x: { type: String } }));
+
+  expect(wrapper.find('select')).toHaveLength(1);
+  expect(wrapper.find('option')).toHaveLength(3);
+});
+
+test('<SelectField - renders options (bridge)', () => {
+  const element = <SelectField name="x" />;
+  const wrapper = mount(
+    element,
+    createContext({
+      x: { type: String, required: true, allowedValues: ['a', 'b'] },
+    }),
+  );
+
+  expect(wrapper.find('select')).toHaveLength(1);
+  expect(wrapper.find('option')).toHaveLength(3);
+});
+
 test('<SelectField> - renders a select', () => {
   const element = <SelectField name="x" />;
   const wrapper = mount(
@@ -92,28 +121,6 @@ test('<SelectField> - renders a select with correct options', () => {
     ['', ''],
     ['a', 'a'],
     ['b', 'b'],
-  ].forEach(([value, text], index) => {
-    const option = wrapper.find('option').at(index);
-    expect(option.prop('value')).toBe(value);
-    expect(option.text()).toBe(text);
-  });
-});
-
-test('<SelectField> - renders a select with correct options (transform)', () => {
-  const element = <SelectField name="x" transform={x => x.toUpperCase()} />;
-  const wrapper = mount(
-    element,
-    createContext({
-      x: { type: String, allowedValues: ['a', 'b'], label: '' },
-    }),
-  );
-
-  expect(wrapper.find('select')).toHaveLength(1);
-  expect(wrapper.find('option')).toHaveLength(3);
-  [
-    ['', ''],
-    ['a', 'A'],
-    ['b', 'B'],
   ].forEach(([value, text], index) => {
     const option = wrapper.find('option').at(index);
     expect(option.prop('value')).toBe(value);
@@ -379,19 +386,27 @@ test('<SelectField> - renders a select with correct value (default)', () => {
 });
 
 test('<SelectField> - renders a multiselect with disabled options', () => {
-  const element = <SelectField name="x" disableItem={value => value === 'b'} />;
+  const element = (
+    <SelectField
+      name="x"
+      options={[
+        { key: 'a', label: 'a', value: 'a' },
+        { key: 'b', label: 'b', value: 'b', disabled: true },
+      ]}
+    />
+  );
   const wrapper = mount(
     element,
     createContext({
       x: { type: Array },
-      'x.$': { type: String, allowedValues: ['a', 'b'] },
+      'x.$': { type: String },
     }),
   );
 
   expect(wrapper.find('select')).toHaveLength(1);
   expect(wrapper.find('select').prop('value')).toStrictEqual([]);
-  expect(wrapper.find('option').at(0).prop('disabled')).toBe(false);
-  expect(wrapper.find('option').at(1).prop('disabled')).toBe(true);
+  expect(wrapper.find('option').at(0).prop('disabled')).toBeFalsy();
+  expect(wrapper.find('option').at(1).prop('disabled')).toBeTruthy();
 });
 
 test('<SelectField> - renders a select with correct value (model)', () => {
@@ -527,22 +542,6 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct option
   expect(wrapper.find('label')).toHaveLength(2);
   expect(wrapper.find('label').at(0).text()).toBe('a');
   expect(wrapper.find('label').at(1).text()).toBe('b');
-});
-
-test('<SelectField checkboxes> - renders a set of checkboxes with correct options (transform)', () => {
-  const element = (
-    <SelectField checkboxes name="x" transform={x => x.toUpperCase()} />
-  );
-  const wrapper = mount(
-    element,
-    createContext({
-      x: { type: String, allowedValues: ['a', 'b'], label: '' },
-    }),
-  );
-
-  expect(wrapper.find('label')).toHaveLength(2);
-  expect(wrapper.find('label').at(0).text()).toBe('A');
-  expect(wrapper.find('label').at(1).text()).toBe('B');
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes with correct value (default)', () => {
@@ -691,21 +690,19 @@ test('<SelectField checkboxes> - works with special characters', () => {
 });
 
 test('<SelectField checkboxes> - renders a set of checkboxes with per-item props', () => {
-  const allowedValues = ['a', 'b'];
-
   const element = (
     <SelectField
       checkboxes
       name="x"
-      disableItem={value => value === allowedValues[0]}
+      options={[
+        { key: 'a', label: 'a', value: 'a', disabled: true },
+        { key: 'b', label: 'b', value: 'b' },
+      ]}
     />
   );
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues } }),
-  );
+  const wrapper = mount(element, createContext({ x: { type: String } }));
 
   expect(wrapper.find('input')).toHaveLength(2);
-  expect(wrapper.find('input').at(0).prop('disabled')).toBe(true);
-  expect(wrapper.find('input').at(1).prop('disabled')).toBe(false);
+  expect(wrapper.find('input').at(0).prop('disabled')).toBeTruthy();
+  expect(wrapper.find('input').at(1).prop('disabled')).toBeFalsy();
 });

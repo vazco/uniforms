@@ -42,7 +42,6 @@ filterDOMProps.register(
   'fields',
   'name',
   'onChange',
-  'transform',
   'value',
 
   // These props are provided by useField through context.state.
@@ -51,7 +50,4 @@ filterDOMProps.register(
 
   // This is used by AutoField.
   'component',
-
-  // These is used by AutoField and bridges.
-  'allowedValues',
 );

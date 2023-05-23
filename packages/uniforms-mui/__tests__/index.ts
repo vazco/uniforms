@@ -1,8 +1,8 @@
-import * as mui from 'uniforms-mui';
+import * as theme from 'uniforms-mui';
 import * as suites from 'uniforms/__suites__';
 
 it('exports everything', () => {
-  expect(mui).toEqual({
+  expect(theme).toEqual({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),
     AutoForm: expect.any(Function),
@@ -31,15 +31,23 @@ it('exports everything', () => {
 });
 
 describe('@RTL', () => {
-  suites.testAutoField(mui.AutoField);
-  suites.testDateField(mui.DateField);
-  suites.testListDelField(mui.ListDelField);
-  suites.testListAddField(mui.ListAddField);
-  suites.testListField(mui.ListField, {
+  suites.testAutoField(theme.AutoField);
+  suites.testAutoForm(theme.AutoForm);
+  suites.testBaseForm(theme.BaseForm);
+  suites.testDateField(theme.DateField);
+  suites.testErrorField(theme.ErrorField);
+  suites.testErrorsField(theme.ErrorsField);
+  suites.testHiddenField(theme.HiddenField);
+  suites.testListAddField(theme.ListAddField);
+  suites.testListDelField(theme.ListDelField);
+  suites.testListField(theme.ListField, {
     getListAddField: screen => screen.getByText(/\+/),
   });
-  suites.testLongTextField(mui.LongTextField);
-  suites.testTextField(mui.TextField);
-  suites.testNumField(mui.NumField);
-  suites.testHiddenField(mui.HiddenField);
+  suites.testLongTextField(theme.LongTextField);
+  suites.testNumField(theme.NumField);
+  suites.testQuickForm(theme.QuickForm);
+  suites.testRadioField(theme.RadioField);
+  suites.testTextField(theme.TextField);
+  suites.testValidatedForm(theme.ValidatedForm);
+  suites.testValidatedQuickForm(theme.ValidatedQuickForm);
 });

@@ -485,14 +485,13 @@ const inputRef = useRef();
 
 |       Name        |                                                          Description                                                          |                    Available in                    |
 | :---------------: | :---------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------: |
-|  `allowedValues`  |                          Array of allowed values. By default, those are extracted from your schema.                           |                        All                         |
 |     `inline`      | Checkbox inline state. In bootstrap themes, a label is rendered as a text but in inline mode, it's treated as a field label.  |         bootstrap3, bootstrap4, bootstrap5         |
+|     `options`     |                       Options. It can be either an object or an array (or a function, that returns it).                       |                        All                         |
+|    `labelCol`     |                              Field layout. The layout of label. You can set span and/or offset.                               |                        antd                        |
+|   `wrapperCol`    |                                Field layout. The layout for input controls. Same as labelCol.                                 |                        antd                        |
 | `inputClassName`  | Input wrapper class name. In bootstrap themes, passed className is used on field block. This is used on direct field wrapper. |         bootstrap3, bootstrap4, bootstrap5         |
 | `labelClassName`  |                                  Label className. A custom className for the field's label.                                   |         bootstrap3, bootstrap4, bootstrap5         |
-|    `labelCol`     |                              Field layout. The layout of label. You can set span and/or offset.                               |                        antd                        |
 | `showInlineError` |                                  Field inline error. _Some description would be great, huh?_                                  | antd, bootstrap3, bootstrap4, bootstrap5, semantic |
-|    `transform`    |                        Label transform. Allows to transform the each value into a human-readable label                        |                        All                         |
-|   `wrapperCol`    |                                Field layout. The layout for input controls. Same as labelCol.                                 |                        antd                        |
 
 ##### Props usage:
 
@@ -500,15 +499,14 @@ const inputRef = useRef();
 import { RadioField } from 'uniforms-unstyled';
 
 <RadioField
-  allowedValues={[value1, value2 /* ... */]}
   inline
   inputClassName="a b c"
   labelClassName="a b c" // You can either specify them as a single string
   labelClassName=[ 'a', 'b', 'c' ] // or as an array of strings
   labelCol={{offset: 2}} // 'ant-col-offset-2' on label
   labelCol={{span: 4}} // 'ant-col-4' on label
+  options={[{ label: 'A', value: 'a' }, { label: 'B', value: 'b' }, /* ... */]}
   showInlineError
-  transform={value => label}
   wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
   wrapperCol={{span: 4}} // 'ant-col-4' on field
 />;
@@ -520,7 +518,6 @@ import { RadioField } from 'uniforms-unstyled';
 
 |       Name        |                                                                               Description                                                                               |                    Available in                    |
 | :---------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------: |
-|  `allowedValues`  |                                               Array of allowed values. By default, those are extracted from your schema.                                                |                        All                         |
 |   `appearance`    |                 Field appearance. Set to "toggle" to appear as a Material Toggle or to "checkbox" (or leave it undefined) to use a Checkbox appearance.                 |                   material, mui                    |
 |   `checkboxes`    |                                       Turn on checkbox/radio mode. It's always true in multiple (i.e. fieldType === Array) mode.                                        |                        All                         |
 |   `disableItem`   |                                                           Disable items (options) based on a given predicate.                                                           |                        All                         |
@@ -533,9 +530,8 @@ import { RadioField } from 'uniforms-unstyled';
 | `labelClassName`  |                                                       Label className. A custom className for the field's label.                                                        |         bootstrap3, bootstrap4, bootstrap5         |
 |    `labelCol`     |                                                   Field layout. The layout of label. You can set span and/or offset.                                                    |                        antd                        |
 |   `labelProps`    |                                                                        Props for the InputLabel                                                                         |                   material, mui                    |
-|     `options`     |   Options. It is optional and using `options` will override `transform` and `allowedValues`. It can be either an object or an array (or a function, that returns it).   |                        All                         |
+|     `options`     |                                            Options. It can be either an object or an array (or a function, that returns it).                                            |                        All                         |
 | `showInlineError` |                                                       Field inline error. _Some description would be great, huh?_                                                       | antd, bootstrap3, bootstrap4, bootstrap5, semantic |
-|    `transform`    |                                             Label transform. Allows to transform the each value into a human-readable label                                             |                        All                         |
 |   `wrapperCol`    |                                                     Field layout. The layout for input controls. Same as labelCol.                                                      |                        antd                        |
 |  `wrapClassName`  |                                             Field and surroundings wrap className. _Some description would be great, huh?_                                              |         bootstrap3, bootstrap4, bootstrap5         |
 | `textFieldProps`  |                                          Props injected directly to `TextField` ( valid only for non-checkbox `SelectField` ).                                          |                   material, mui                    |
@@ -549,7 +545,6 @@ import { useRef } from 'react'
 const inputRef = useRef();
 
 <SelectField
-  allowedValues={[value1, value2 /* ... */]}
   checkboxes
   disableItem={value => value % 2}
   extra="Extra Feedback or Help"
@@ -563,9 +558,8 @@ const inputRef = useRef();
   labelCol={{offset: 2}} // 'ant-col-offset-2' on label
   labelCol={{span: 4}} // 'ant-col-4' on label
   labelProps={{shrink: true, disableAnimation: true}}
-  options={[{label: 'Hi', value: value1}, {label: 'Hello', value: value1} /* ... */]}
+  options={[{ label: 'A', value: 'a' }, { label: 'B', value: 'b' }, /* ... */]}
   showInlineError
-  transform={value => label} //   Set of values that will be shown in the select.
   wrapperCol={{offset: 2}} // 'ant-col-offset-2' on field
   wrapperCol={{span: 4}} // 'ant-col-4' on field
 />;
