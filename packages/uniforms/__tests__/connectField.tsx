@@ -189,13 +189,15 @@ describe('connectField', () => {
   it('works with nested labels', () => {
     const Field = connectField(Test);
     const wrapper = mount(
-      <Field name="field" label="">
+      <Field name="field" label={null}>
         <Field name="" label="" />
+        <Field name="" />
         <Field name="subfield" label="Other">
-          <Field name="" label="" />
+          <Field name="" />
         </Field>
-        <Field name="subfield" label="">
-          <Field name="" label="">
+        <Field name="subfield">
+          <Field name="">
+            <Field name="" label={null} />
             <Field name="" label="" />
           </Field>
         </Field>
@@ -203,12 +205,13 @@ describe('connectField', () => {
       reactContext,
     );
 
-    expect(wrapper.find(Test).at(0).prop('label')).toBe('');
+    expect(wrapper.find(Test).at(0).prop('label')).toBe('Field');
     expect(wrapper.find(Test).at(1).prop('label')).toBe('');
-    expect(wrapper.find(Test).at(2).prop('label')).toBe('Other');
-    expect(wrapper.find(Test).at(3).prop('label')).toBe('');
-    expect(wrapper.find(Test).at(4).prop('label')).toBe('');
-    expect(wrapper.find(Test).at(5).prop('label')).toBe('');
-    expect(wrapper.find(Test).at(6).prop('label')).toBe('');
+    expect(wrapper.find(Test).at(2).prop('label')).toBe('Field');
+    expect(wrapper.find(Test).at(3).prop('label')).toBe('Other');
+    expect(wrapper.find(Test).at(4).prop('label')).toBe('Subfield');
+    expect(wrapper.find(Test).at(5).prop('label')).toBe('Subfield');
+    expect(wrapper.find(Test).at(6).prop('label')).toBe('Subfield');
+    expect(wrapper.find(Test).at(7).prop('label')).toBe('Subfield');
   });
 });

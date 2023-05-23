@@ -725,13 +725,8 @@ describe('JSONSchemaBridge', () => {
       });
     });
 
-    it('works with label (title - when provideDefaultLabelFromFieldName is true)', () => {
-      const localBridge = new JSONSchemaBridge({
-        schema,
-        validator,
-        provideDefaultLabelFromFieldName: true,
-      });
-      expect(localBridge.getProps('withTitle')).toEqual({
+    it('works with label (title)', () => {
+      expect(bridge.getProps('withTitle')).toEqual({
         label: 'Example',
         required: false,
       });
