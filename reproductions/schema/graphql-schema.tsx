@@ -19,7 +19,7 @@ const validator = () => {
   /* Empty object for no errors */
 };
 
-const args = {
+const extras = {
   a: { label: 'Horse' },
   b: { placeholder: 'Horse', required: false },
   titleA: { label: 'Horse' },
@@ -28,4 +28,4 @@ const args = {
 
 const type = buildASTSchema(parse(schema)).getType('Address')!;
 
-export const bridge = new GraphQLBridge(type, validator, args);
+export const bridge = new GraphQLBridge({ schema: type, validator, extras });
