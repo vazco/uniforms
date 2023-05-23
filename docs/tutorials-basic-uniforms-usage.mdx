@@ -67,7 +67,7 @@ Now you may think that we can simply do:
 ```tsx
 // Wrong usage of the JSONSchemaBridge!
 // You have to pass a validator!
-const bridge = new JSONSchemaBridge(schema);
+const bridge = new JSONSchemaBridge({ schema });
 ```
 
 However, **there's small caveat with using the JSONSchemaBridge**.

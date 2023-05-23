@@ -11,7 +11,6 @@ const schema = new SimpleSchema({
   list: { type: Array },
   'list.$': {
     type: String,
-    uniforms: { label: 'List Text', placeholder: 'List Text Placeholder' },
   },
   select: {
     type: String,
@@ -34,4 +33,4 @@ const schema = new SimpleSchema({
   },
 });
 
-export const bridge = new SimpleSchema2Bridge(schema);
+export const bridge = new SimpleSchema2Bridge({ schema });
