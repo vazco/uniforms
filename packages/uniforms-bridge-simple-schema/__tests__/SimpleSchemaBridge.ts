@@ -216,6 +216,18 @@ describe('SimpleSchemaBridge', () => {
   });
 
   describe('#getProps', () => {
+    it('works with label in schema', () => {
+      expect(bridge.getProps('a')).toEqual({
+        label: 'a',
+        required: true,
+      });
+    });
+    it('works with default label', () => {
+      expect(bridge.getProps('h')).toEqual({
+        label: 'H',
+        required: true,
+      });
+    });
     it('works with allowedValues (inferred from children)', () => {
       expect(bridge.getProps('o')).toEqual({
         label: 'O',

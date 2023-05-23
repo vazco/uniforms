@@ -8,7 +8,7 @@ describe('JSONSchemaBridge', () => {
       address: {
         type: 'object',
         properties: {
-          city: { type: 'string', uniforms: { label: false, required: false } },
+          city: { type: 'string', uniforms: { required: false } },
           state: {
             type: 'string',
             options: [
@@ -223,6 +223,11 @@ describe('JSONSchemaBridge', () => {
   const bridge = new JSONSchemaBridge({
     schema,
     validator,
+  });
+  const bridgeNoDefaultLabel = new JSONSchemaBridge({
+    schema,
+    validator,
+    provideDefaultLabelFromFieldName: false,
   });
 
   describe('#constructor()', () => {
@@ -530,7 +535,7 @@ describe('JSONSchemaBridge', () => {
     it('returns correct definition (flat with $ref)', () => {
       expect(bridge.getField('billingAddress')).toEqual({
         properties: expect.objectContaining({
-          city: { type: 'string', uniforms: { label: false, required: false } },
+          city: { type: 'string', uniforms: { required: false } },
           state: {
             type: 'string',
             options: [
@@ -701,6 +706,10 @@ describe('JSONSchemaBridge', () => {
         options: [{ value: 'residential' }, { value: 'business' }],
         required: true,
       });
+      expect(bridgeNoDefaultLabel.getProps('shippingAddress.type')).toEqual({
+        options: [{ value: 'residential' }, { value: 'business' }],
+        required: true,
+      });
     });
 
     it('works with custom props', () => {
@@ -723,10 +732,18 @@ describe('JSONSchemaBridge', () => {
         label: 'Example',
         required: false,
       });
+      expect(bridgeNoDefaultLabel.getProps('withLabel')).toEqual({
+        label: 'Example',
+        required: false,
+      });
     });
 
     it('works with label (title)', () => {
       expect(bridge.getProps('withTitle')).toEqual({
+        label: 'Example',
+        required: false,
+      });
+      expect(bridgeNoDefaultLabel.getProps('withTitle')).toEqual({
         label: 'Example',
         required: false,
       });
@@ -748,6 +765,14 @@ describe('JSONSchemaBridge', () => {
     it('works with options (array)', () => {
       expect(bridge.getProps('billingAddress.state')).toEqual({
         label: 'State',
+        options: [
+          { label: 'Alabama', value: 'AL' },
+          { label: 'Alaska', value: 'AK' },
+          { label: 'Arkansas', value: 'AR' },
+        ],
+        required: true,
+      });
+      expect(bridgeNoDefaultLabel.getProps('billingAddress.state')).toEqual({
         options: [
           { label: 'Alabama', value: 'AL' },
           { label: 'Alaska', value: 'AK' },
