@@ -45,6 +45,7 @@ describe('@RTL', () => {
     getListAddField: screen => screen.getByRole('button'),
   });
   suites.testLongTextField(theme.LongTextField);
+  suites.testNestField(theme.NestField);
   suites.testNumField(theme.NumField);
   suites.testQuickForm(theme.QuickForm);
   suites.testRadioField(theme.RadioField);

@@ -47,6 +47,7 @@ describe('@RTL', () => {
   suites.testLongTextField(theme.LongTextField, {
     testMinMaxLength: true,
   });
+  suites.testNestField(theme.NestField);
   suites.testNumField(theme.NumField);
   suites.testQuickForm(theme.QuickForm);
   suites.testRadioField(theme.RadioField);

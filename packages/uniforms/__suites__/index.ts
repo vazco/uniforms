@@ -9,6 +9,7 @@ export * from './ListAddField';
 export * from './ListDelField';
 export * from './ListField';
 export * from './LongTextField';
+export * from './NestField';
 export * from './NumField';
 export * from './QuickForm';
 export * from './RadioField';

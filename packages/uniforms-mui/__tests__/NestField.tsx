@@ -22,26 +22,6 @@ test('<NestField> - renders an <AutoField> for each field', () => {
   expect(wrapper.find(AutoField).at(1).prop('name')).toBe('b');
 });
 
-test('<NestField> - renders custom content if given', () => {
-  const element = (
-    <NestField name="x">
-      <article data-test="content" />
-    </NestField>
-  );
-  const wrapper = mount(
-    element,
-    createContext({
-      x: { type: Object },
-      'x.a': { type: String },
-      'x.b': { type: Number },
-    }),
-  );
-
-  expect(wrapper.find(AutoField)).toHaveLength(0);
-  expect(wrapper.find('article')).toHaveLength(1);
-  expect(wrapper.find('article').prop('data-test')).toBe('content');
-});
-
 test('<NestField> - renders a Subheader', () => {
   const element = <NestField name="x" label="y" />;
   const wrapper = mount(
