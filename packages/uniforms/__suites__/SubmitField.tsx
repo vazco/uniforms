@@ -1,5 +1,4 @@
 import { screen } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
 import React, { ComponentType } from 'react';
 import z from 'zod';
 
@@ -23,15 +22,6 @@ export function testSubmitField(SubmitField: ComponentType<any>) {
     });
     expect(screen.getByRole('button')).toBeEnabled();
   });
-
-  // TODO: fix this test
-  // test('<SubmitField> - renders a wrapper with correct class', () => {
-  //   renderWithZod({
-  //     element: <SubmitField wrapClassName="container" />,
-  //     schema: z.object({}),
-  //   });
-  //   expect(screen.getByRole('button')).toHaveClass('container');
-  // });
 
   test('<SubmitField> - renders a wrapper with correct value', () => {
     renderWithZod({

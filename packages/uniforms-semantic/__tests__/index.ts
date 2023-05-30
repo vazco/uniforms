@@ -45,6 +45,7 @@ describe('@RTL', () => {
   suites.testLongTextField(theme.LongTextField);
   suites.testNumField(theme.NumField);
   suites.testQuickForm(theme.QuickForm);
+  suites.testSubmitField(theme.SubmitField);
   suites.testTextField(theme.TextField);
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);

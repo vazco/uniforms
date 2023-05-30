@@ -48,6 +48,8 @@ describe('@RTL', () => {
   // FIXME: AntD number input doesn't work with new RTL test implementation
   // suites.testNumField(antd.NumField);
   suites.testQuickForm(theme.QuickForm);
+  // FIXME: AntD doesn't work well with new RTL test implementation
+  // suites.testSubmitField(theme.SubmitField);
   suites.testTextField(theme.TextField);
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
