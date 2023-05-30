@@ -3,8 +3,12 @@ import React, { ComponentType } from 'react';
 import z from 'zod';
 
 import { renderWithZod } from './render-zod';
+import { skipTestIf } from './skipTestIf';
 
-export function testSubmitField(SubmitField: ComponentType<any>) {
+export function testSubmitField(
+  SubmitField: ComponentType<any>,
+  { skipValueTest }: { skipValueTest?: boolean } = {},
+) {
   test('<SubmitField> - renders disabled if error', () => {
     renderWithZod({
       element: <SubmitField />,
@@ -23,11 +27,14 @@ export function testSubmitField(SubmitField: ComponentType<any>) {
     expect(screen.getByRole('button')).toBeEnabled();
   });
 
-  test('<SubmitField> - renders a wrapper with correct value', () => {
-    renderWithZod({
-      element: <SubmitField value="Example" />,
-      schema: z.object({}),
-    });
-    expect(screen.getByRole('button')).toHaveValue('Example');
-  });
+  skipTestIf(skipValueTest)(
+    '<SubmitField> - renders a wrapper with correct value',
+    () => {
+      renderWithZod({
+        element: <SubmitField value="Example" />,
+        schema: z.object({}),
+      });
+      expect(screen.getByRole('button')).toHaveValue('Example');
+    },
+  );
 }
