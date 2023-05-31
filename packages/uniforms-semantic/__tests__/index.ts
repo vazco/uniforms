@@ -33,7 +33,7 @@ describe('@RTL', () => {
   suites.testAutoField(theme.AutoField);
   suites.testAutoForm(theme.AutoForm);
   suites.testBaseForm(theme.BaseForm);
-  suites.testBoolField(theme.BoolField);
+  suites.testBoolField(theme.BoolField, { testError: true });
   suites.testDateField(theme.DateField);
   suites.testErrorField(theme.ErrorField);
   suites.testErrorsField(theme.ErrorsField);

@@ -34,7 +34,10 @@ describe('@RTL', () => {
   suites.testAutoField(theme.AutoField);
   suites.testAutoForm(theme.AutoForm);
   suites.testBaseForm(theme.BaseForm);
-  suites.testBoolField(theme.BoolField, { testSwitch: true });
+  suites.testBoolField(theme.BoolField, {
+    testSwitch: true,
+    testMUIThemeProps: true,
+  });
   suites.testDateField(theme.DateField);
   suites.testErrorField(theme.ErrorField);
   suites.testErrorsField(theme.ErrorsField);
