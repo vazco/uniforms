@@ -32,6 +32,7 @@ it('exports everything', () => {
 
 describe('@RTL', () => {
   suites.testAutoField(theme.AutoField);
+  suites.testAutoFields(theme.AutoFields);
   suites.testAutoForm(theme.AutoForm);
   suites.testBaseForm(theme.BaseForm);
   suites.testDateField(theme.DateField);
