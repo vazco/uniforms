@@ -10,6 +10,8 @@ export function Footer() {
   const context = useDocusaurusContext();
   const { email } = context.siteConfig.customFields;
 
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className={classNames('hero hero--primary', styles.footer)}>
       <div className="container">
@@ -69,7 +71,7 @@ export function Footer() {
               style={{ fontSize: '0.8em', display: 'inline-block' }}
               className={classNames(styles.text, styles.paragraph)}
             >
-              Copyright © 2022 Vazco.
+              Copyright © 2016 - {currentYear} Vazco.
               <br /> All Rights Reserved.
             </p>
           </div>
