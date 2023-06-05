@@ -24,6 +24,6 @@ const schema = {
   required: ['street', 'zip', 'state'],
 };
 
-const schemaValidator = createValidator(schema);
+const validator = createValidator(schema);
 
-export const bridge = new JSONSchemaBridge(schema, schemaValidator);
+export const bridge = new JSONSchemaBridge({ schema, validator });

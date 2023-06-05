@@ -1,33 +1,10 @@
 import get from 'lodash/get';
 import mapValues from 'lodash/mapValues';
-import { ReactNode, useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { joinName } from './joinName';
-import { GuaranteedProps, UnknownObject } from './types';
+import { GuaranteedProps, OnChange, UnknownObject } from './types';
 import { useForm } from './useForm';
-
-function propagate(
-  prop: ReactNode,
-  schema: ReactNode,
-  state: boolean,
-  fallback: ReactNode,
-): [ReactNode, ReactNode] {
-  const forcedFallbackInProp = prop === true || prop === undefined;
-  const forcedFallbackInSchema = schema === true || schema === undefined;
-
-  const schemaValue = forcedFallbackInSchema ? fallback : schema;
-  const value =
-    prop === '' ||
-    prop === false ||
-    prop === null ||
-    (forcedFallbackInProp && (forcedFallbackInSchema || !state))
-      ? ''
-      : forcedFallbackInProp
-      ? schemaValue
-      : prop;
-
-  return [value, schemaValue];
-}
 
 export function useField<
   // This type has to use `any` to allow any object.
@@ -59,25 +36,12 @@ export function useField<
   const fields = context.schema.getSubfields(name);
   const schemaProps = context.schema.getProps(name);
 
-  const [label, labelFallback] = propagate(
-    props.label,
-    // @ts-expect-error The `schema.getProps` should be typed more precisely.
-    schemaProps.label,
-    state.label,
-    '',
-  );
-  const [placeholder] = propagate(
-    props.placeholder,
-    // @ts-expect-error The `schema.getProps` should be typed more precisely.
-    schemaProps.placeholder,
-    state.placeholder,
-    label || labelFallback,
-  );
+  const label = props.label ?? schemaProps.label ?? '';
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const id = useMemo(() => context.randomId(), []);
-  const onChange = useCallback(
-    (value?: Value, key: string = name) => {
+  const onChange: OnChange<Value | undefined> = useCallback(
+    (value, key: string = name) => {
       onChangeCalled.current = true;
       context.onChange(key, value);
     },
@@ -124,9 +88,6 @@ export function useField<
     ...props,
     label,
     name,
-    // TODO: Should we assert `typeof placeholder === 'string'`?
-    placeholder: placeholder as string,
   };
-
   return [fieldProps, context] as [typeof fieldProps, typeof context];
 }

@@ -232,7 +232,10 @@ test('<TextField> - renders correct error text (specified)', () => {
   const element = (
     <TextField name="x" error={error} showInlineError errorMessage="Error" />
   );
-  const wrapper = mount(element, createContext({ x: { type: String } }));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, label: '' } }),
+  );
 
   expect(wrapper.children().last().text()).toBe('Error');
 });

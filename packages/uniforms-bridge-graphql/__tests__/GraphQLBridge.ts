@@ -51,7 +51,6 @@ describe('GraphQLBridge', () => {
     },
     title: {
       initialValue: 'Some Title',
-      label: false,
       options: [
         { label: 1, value: 'a' },
         { label: 2, value: 'b' },
@@ -73,20 +72,29 @@ describe('GraphQLBridge', () => {
   const astI = buildASTSchema(parse(schemaI));
   const astT = buildASTSchema(parse(schemaT));
 
-  const bridgeI = new GraphQLBridge(
-    astI.getType('Post')!,
-    schemaValidator,
-    schemaData,
-  );
-  const bridgeT = new GraphQLBridge(
-    astT.getType('Post')!,
-    schemaValidator,
-    schemaData,
-  );
+  const bridgeI = new GraphQLBridge({
+    schema: astI.getType('Post')!,
+    validator: schemaValidator,
+    extras: schemaData,
+  });
+  const bridgeT = new GraphQLBridge({
+    schema: astT.getType('Post')!,
+    validator: schemaValidator,
+    extras: schemaData,
+  });
+  const bridgeTNoDefaultLabel = new GraphQLBridge({
+    schema: astT.getType('Post')!,
+    validator: schemaValidator,
+    extras: schemaData,
+    provideDefaultLabelFromFieldName: false,
+  });
 
   describe('#constructor()', () => {
     it('always ensures `extras`', () => {
-      const bridge = new GraphQLBridge(astI.getType('Post')!, schemaValidator);
+      const bridge = new GraphQLBridge({
+        schema: astI.getType('Post')!,
+        validator: schemaValidator,
+      });
       expect(bridge.extras).toEqual({});
     });
   });
@@ -225,122 +233,127 @@ describe('GraphQLBridge', () => {
 
   describe('#getProps', () => {
     describe('labels are derived properly', () => {
-      describe('when props.label is undefined or true', () => {
-        describe('and no extra data is passed', () => {
-          it('should use AST field name', () => {
-            expect(bridgeT.getProps('title')).toEqual({
-              label: false,
-              required: false,
-              options: [
-                { label: 1, value: 'a' },
-                { label: 2, value: 'b' },
-                { label: 3, value: 'Some Title' },
-              ],
-              initialValue: 'Some Title',
-            });
-            expect(bridgeT.getProps('author.decimal1')).toEqual({
-              decimal: true,
-              label: 'Decimal 1',
-              required: false,
-            });
-            expect(bridgeT.getProps('author.firstName')).toEqual({
-              label: 'First name',
-              required: false,
-            });
+      describe('and no extra data is passed', () => {
+        it('should use AST field name', () => {
+          expect(bridgeT.getProps('title')).toEqual({
+            label: 'Title',
+            required: false,
+            options: [
+              { label: 1, value: 'a' },
+              { label: 2, value: 'b' },
+              { label: 3, value: 'Some Title' },
+            ],
+            initialValue: 'Some Title',
           });
-        });
-
-        describe('and extra data is present', () => {
-          it('should use extra data', () => {
-            expect(bridgeT.getProps('id')).toEqual({
-              allowedValues: [1, 2, 3],
-              label: 'Post ID',
-              placeholder: 'Post ID',
-              required: true,
-            });
+          expect(bridgeT.getProps('author.decimal1')).toEqual({
+            decimal: true,
+            label: 'Decimal 1',
+            required: false,
+          });
+          expect(bridgeTNoDefaultLabel.getProps('author.decimal1')).toEqual({
+            decimal: true,
+            required: false,
+          });
+          expect(bridgeT.getProps('author.firstName')).toEqual({
+            label: 'First name',
+            required: false,
+          });
+          expect(bridgeTNoDefaultLabel.getProps('author.firstName')).toEqual({
+            required: false,
           });
         });
       });
-    });
 
-    it('works with allowedValues', () => {
-      expect(bridgeI.getProps('id')).toEqual({
-        label: 'Post ID',
-        placeholder: 'Post ID',
-        required: true,
-        allowedValues: [1, 2, 3],
+      describe('and extra data is present', () => {
+        it('should use extra data', () => {
+          expect(bridgeT.getProps('id')).toEqual({
+            allowedValues: [1, 2, 3],
+            label: 'Post ID',
+            placeholder: 'Post ID',
+            required: true,
+          });
+        });
       });
     });
+  });
 
-    it('works with custom component', () => {
-      expect(bridgeI.getProps('author')).toEqual({
-        label: 'Author',
-        required: true,
-        component: 'div',
-      });
+  it('works with allowedValues', () => {
+    expect(bridgeI.getProps('id')).toEqual({
+      label: 'Post ID',
+      placeholder: 'Post ID',
+      required: true,
+      allowedValues: [1, 2, 3],
+    });
+  });
+
+  it('works with custom component', () => {
+    expect(bridgeI.getProps('author')).toEqual({
+      label: 'Author',
+      required: true,
+      component: 'div',
+    });
+  });
+
+  it('works with Number type', () => {
+    expect(bridgeI.getProps('author.decimal1')).toEqual({
+      label: 'Decimal 1',
+      required: false,
+      decimal: true,
     });
 
-    it('works with Number type', () => {
-      expect(bridgeI.getProps('author.decimal1')).toEqual({
-        label: 'Decimal 1',
-        required: false,
-        decimal: true,
-      });
+    expect(bridgeI.getProps('author.decimal2')).toEqual({
+      label: 'Decimal 2',
+      required: true,
+      decimal: true,
+    });
+  });
 
-      expect(bridgeI.getProps('author.decimal2')).toEqual({
-        label: 'Decimal 2',
-        required: true,
-        decimal: true,
-      });
+  it('works with options (array)', () => {
+    expect(bridgeI.getProps('title')).toMatchObject({
+      options: [
+        { label: 1, value: 'a' },
+        { label: 2, value: 'b' },
+        { label: 3, value: 'Some Title' },
+      ],
+    });
+  });
+
+  it('works with options (object)', () => {
+    expect(bridgeI.getProps('title')).toMatchObject({
+      options: [
+        { label: 1, value: 'a' },
+        { label: 2, value: 'b' },
+        { label: 3, value: 'Some Title' },
+      ],
+    });
+  });
+
+  describe('when enum', () => {
+    it('should return possibleValues', () => {
+      expect(bridgeI.getProps('author.level').options).toEqual([
+        { label: 'Admin', value: 'Admin' },
+        { label: 'User', value: 'User' },
+      ]);
     });
 
-    it('works with options (array)', () => {
-      expect(bridgeI.getProps('title')).toMatchObject({
-        options: [
-          { label: 1, value: 'a' },
-          { label: 2, value: 'b' },
-          { label: 3, value: 'Some Title' },
-        ],
-      });
-    });
-
-    it('works with options (object)', () => {
-      expect(bridgeI.getProps('title')).toMatchObject({
-        options: [
-          { label: 1, value: 'a' },
-          { label: 2, value: 'b' },
-          { label: 3, value: 'Some Title' },
-        ],
-      });
-    });
-
-    describe('when enum', () => {
-      it('should return possibleValues', () => {
-        expect(bridgeI.getProps('author.level').options).toEqual([
-          { label: 'Admin', value: 'Admin' },
-          { label: 'User', value: 'User' },
-        ]);
-      });
-
-      it('should prefer options over enum', () => {
-        const bridge = new GraphQLBridge(
-          astI.getType('Post')!,
-          schemaValidator,
-          {
-            ...schemaData,
-            'author.level': {
-              options: [
-                { label: 'A', value: 'a' },
-                { label: 'B', value: 'b' },
-              ],
-            },
+    it('should prefer options over enum', () => {
+      const bridge = new GraphQLBridge({
+        schema: astI.getType('Post')!,
+        validator: schemaValidator,
+        extras: {
+          ...schemaData,
+          'author.level': {
+            options: [
+              { label: 'A', value: 'a' },
+              { label: 'B', value: 'b' },
+            ],
           },
-        );
-        expect(bridge.getProps('author.level').options).toEqual([
-          { label: 'A', value: 'a' },
-          { label: 'B', value: 'b' },
-        ]);
+        },
       });
+      expect(bridge.getProps('author.level').options).toEqual([
+        { label: 'A', value: 'a' },
+        { label: 'B', value: 'b' },
+      ]);
     });
   });
 

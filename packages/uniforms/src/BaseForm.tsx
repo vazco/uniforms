@@ -21,7 +21,6 @@ export type BaseFormProps<Model extends UnknownObject> = {
   disabled?: boolean;
   error: unknown;
   id?: string;
-  label: boolean;
   model: Model;
   modelTransform?: (mode: ModelTransformMode, model: Model) => Model;
   noValidate: boolean;
@@ -51,7 +50,6 @@ export class BaseForm<
     autosave: false,
     autosaveDelay: 0,
     error: null,
-    label: true,
     model: Object.create(null),
     noValidate: true,
     onSubmit() {},
@@ -147,8 +145,6 @@ export class BaseForm<
   getContextState(): Context<Model>['state'] {
     return {
       disabled: !!this.props.disabled,
-      label: !!this.props.label,
-      placeholder: !!this.props.placeholder,
       readOnly: !!this.props.readOnly,
       showInlineError: !!this.props.showInlineError,
     };
@@ -187,12 +183,10 @@ export class BaseForm<
       'autosaveDelay',
       'disabled',
       'error',
-      'label',
       'model',
       'modelTransform',
       'onChange',
       'onSubmit',
-      'placeholder',
       'readOnly',
       'schema',
       'showInlineError',

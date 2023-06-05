@@ -13,13 +13,13 @@ import mount from './_mount';
 
 describe('connectField', () => {
   const onChange = jest.fn();
-  const schema = new SimpleSchema2Bridge(
-    new SimpleSchema({
+  const schema = new SimpleSchema2Bridge({
+    schema: new SimpleSchema({
       another: { type: String, optional: true },
       field: { type: Object, label: 'Field' },
       'field.subfield': { type: Number, label: 'Subfield' },
     }),
-  );
+  });
 
   const reactContext = {
     context: {
@@ -34,7 +34,6 @@ describe('connectField', () => {
       schema,
       state: {
         disabled: false,
-        label: true,
         placeholder: false,
         readOnly: false,
         showInlineError: true,
@@ -127,49 +126,34 @@ describe('connectField', () => {
     });
   });
 
-  // TODO: Write tests for `placeholder`.
   describe('when rendered with label', () => {
     const labelA = <span style={{ color: 'red' }}>Error</span>;
     const labelB = <span style={{ color: 'green' }}>OK</span>;
 
     it.each([
-      ['Props', '', false, 'Props'],
-      ['Props', '', true, 'Props'],
-      ['Props', 'Schema', false, 'Props'],
-      ['Props', 'Schema', true, 'Props'],
-      ['Props', labelB, false, 'Props'],
-      ['Props', labelB, true, 'Props'],
-      [false, '', false, ''],
-      [false, '', true, ''],
-      [false, 'Schema', false, ''],
-      [false, 'Schema', true, ''],
-      [false, labelB, false, ''],
-      [false, labelB, true, ''],
-      [labelA, '', false, labelA],
-      [labelA, '', true, labelA],
-      [labelA, 'Schema', false, labelA],
-      [labelA, 'Schema', true, labelA],
-      [labelA, labelB, false, labelA],
-      [labelA, labelB, true, labelA],
-      [true, '', false, ''],
-      [true, '', true, ''],
-      [true, 'Schema', false, 'Schema'],
-      [true, 'Schema', true, 'Schema'],
-      [true, labelB, false, labelB],
-      [true, labelB, true, labelB],
-      [undefined, '', false, ''],
-      [undefined, '', true, ''],
-      [undefined, 'Schema', false, ''],
-      [undefined, 'Schema', true, 'Schema'],
-      [undefined, labelB, false, ''],
-      [undefined, labelB, true, labelB],
-    ] as [ReactNode, ReactNode, boolean, ReactNode][])(
+      ['Props', '', 'Props'],
+      ['Props', 'Schema', 'Props'],
+      ['Props', labelB, 'Props'],
+      ['Props', undefined, 'Props'],
+      ['', undefined, ''],
+      ['', 'Schema', ''],
+      ['', labelB, ''],
+      ['', undefined, ''],
+      [labelA, '', labelA],
+      [labelA, 'Schema', labelA],
+      [labelA, labelB, labelA],
+      [labelA, undefined, labelA],
+      [undefined, '', ''],
+      [undefined, 'Schema', 'Schema'],
+      [undefined, labelB, labelB],
+      [undefined, undefined, ''],
+    ] as [ReactNode, ReactNode, ReactNode][])(
       'resolves it correctly (%#)',
-      (prop, schema, state, result) => {
+      (prop, schema, result) => {
         const context: typeof reactContext = {
           context: {
             ...reactContext.context,
-            state: { ...reactContext.context.state, label: state },
+            state: { ...reactContext.context.state },
           },
         };
 
@@ -206,25 +190,29 @@ describe('connectField', () => {
     const Field = connectField(Test);
     const wrapper = mount(
       <Field name="field" label={null}>
+        <Field name="" label="" />
         <Field name="" />
         <Field name="subfield" label="Other">
           <Field name="" />
         </Field>
-        <Field name="subfield" label={false}>
+        <Field name="subfield">
           <Field name="">
-            <Field name="" label />
+            <Field name="" label={null} />
+            <Field name="" label="" />
           </Field>
         </Field>
       </Field>,
       reactContext,
     );
 
-    expect(wrapper.find(Test).at(0).prop('label')).toBe('');
-    expect(wrapper.find(Test).at(1).prop('label')).toBe('Field');
-    expect(wrapper.find(Test).at(2).prop('label')).toBe('Other');
-    expect(wrapper.find(Test).at(3).prop('label')).toBe('Subfield');
-    expect(wrapper.find(Test).at(4).prop('label')).toBe('');
-    expect(wrapper.find(Test).at(5).prop('label')).toBe('');
+    expect(wrapper.find(Test).at(0).prop('label')).toBe('Field');
+    expect(wrapper.find(Test).at(1).prop('label')).toBe('');
+    expect(wrapper.find(Test).at(2).prop('label')).toBe('Field');
+    expect(wrapper.find(Test).at(3).prop('label')).toBe('Other');
+    expect(wrapper.find(Test).at(4).prop('label')).toBe('Subfield');
+    expect(wrapper.find(Test).at(5).prop('label')).toBe('Subfield');
     expect(wrapper.find(Test).at(6).prop('label')).toBe('Subfield');
+    expect(wrapper.find(Test).at(7).prop('label')).toBe('Subfield');
+    expect(wrapper.find(Test).at(8).prop('label')).toBe('');
   });
 });

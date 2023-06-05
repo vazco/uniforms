@@ -166,7 +166,9 @@ test('<SelectField> - renders a Select with correct options', () => {
   const element = <SelectField name="x" native />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
+    createContext({
+      x: { type: String, allowedValues: ['a', 'b'], label: '' },
+    }),
   );
 
   expect(wrapper.find(Select)).toHaveLength(1);
@@ -193,7 +195,10 @@ test('<SelectField> - renders a Select with correct options (transform)', () => 
       native
     />
   );
-  const wrapper = mount(element, createContext({ x: { type: String } }));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, label: '' } }),
+  );
 
   expect(wrapper.find(Select)).toHaveLength(1);
   expect(wrapper.find('option')).toHaveLength(3);
