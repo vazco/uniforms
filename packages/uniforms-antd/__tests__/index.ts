@@ -53,6 +53,8 @@ describe('@RTL', () => {
   suites.testQuickForm(theme.QuickForm);
   // FIXME: AntD radio.group does not support HTML attributes https://github.com/ant-design/ant-design/issues/8561, added a flag to skip attributes tests.
   suites.testRadioField(theme.RadioField, { skipHtmlAttributesTest: true });
+  // FIXME: AntD has problem with toHaveValue check
+  suites.testSubmitField(theme.SubmitField, { skipValueTest: true });
   suites.testTextField(theme.TextField);
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
