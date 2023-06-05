@@ -71,7 +71,7 @@ export function Footer() {
               style={{ fontSize: '0.8em', display: 'inline-block' }}
               className={classNames(styles.text, styles.paragraph)}
             >
-              Copyright © {currentYear} Vazco.
+              Copyright © 2016 - {currentYear} Vazco.
               <br /> All Rights Reserved.
             </p>
           </div>
