@@ -213,5 +213,6 @@ describe('connectField', () => {
     expect(wrapper.find(Test).at(5).prop('label')).toBe('Subfield');
     expect(wrapper.find(Test).at(6).prop('label')).toBe('Subfield');
     expect(wrapper.find(Test).at(7).prop('label')).toBe('Subfield');
+    expect(wrapper.find(Test).at(8).prop('label')).toBe('');
   });
 });
