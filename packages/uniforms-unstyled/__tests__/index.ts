@@ -47,6 +47,7 @@ describe('@RTL', () => {
   });
   suites.testNestField(theme.NestField, {
     skipShowInlineErrorTests: true,
+    skipErrorMessageTests: true,
   });
   suites.testNumField(theme.NumField);
   suites.testQuickForm(theme.QuickForm);

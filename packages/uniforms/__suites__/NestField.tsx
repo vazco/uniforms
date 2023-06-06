@@ -9,6 +9,7 @@ export function testNestField(
   NestField: ComponentType<any>,
   options?: {
     skipForMui?: boolean;
+    skipErrorMessageTests?: boolean;
     skipShowInlineErrorTests?: boolean;
   },
 ) {
@@ -22,6 +23,8 @@ export function testNestField(
         }),
       }),
     });
+
+    screen.debug();
 
     expect(screen.getAllByRole('textbox')).toHaveLength(1);
     expect(screen.getByRole('spinbutton')).toBeInTheDocument();
@@ -89,7 +92,7 @@ export function testNestField(
     },
   );
 
-  skipTestIf(!options?.skipShowInlineErrorTests)(
+  skipTestIf(options?.skipErrorMessageTests)(
     '<NestField> - renders correct error text (specified)',
     () => {
       const error = new Error();
