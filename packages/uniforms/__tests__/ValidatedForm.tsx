@@ -29,7 +29,9 @@ describe('ValidatedForm', () => {
     b: { type: String, defaultValue: '' },
     c: { type: String, defaultValue: '' },
   };
-  const schema = new SimpleSchema2Bridge(new SimpleSchema(schemaDefinition));
+  const schema = new SimpleSchema2Bridge({
+    schema: new SimpleSchema(schemaDefinition),
+  });
   jest.spyOn(schema.schema, 'validator').mockImplementation(validatorForSchema);
 
   beforeEach(() => jest.clearAllMocks());
@@ -539,7 +541,7 @@ describe('ValidatedForm', () => {
     });
 
     it('revalidate if `schema` changes', () => {
-      const anotherSchema = new SimpleSchema2Bridge(schema.schema);
+      const anotherSchema = new SimpleSchema2Bridge({ schema: schema.schema });
       const { rerenderWithProps } = render(<Component />);
       rerenderWithProps({ schema: anotherSchema });
       expect(validator).toHaveBeenCalledTimes(1);
@@ -565,7 +567,7 @@ describe('ValidatedForm', () => {
     });
 
     it('does not revalidate when `schema` changes', () => {
-      const anotherSchema = new SimpleSchema2Bridge(schema.schema);
+      const anotherSchema = new SimpleSchema2Bridge({ schema: schema.schema });
       const { rerenderWithProps } = render(<Component />, schemaDefinition);
       rerenderWithProps({ schema: anotherSchema });
       expect(validator).not.toBeCalled();
@@ -618,7 +620,9 @@ describe('ValidatedForm', () => {
 
     it('uses the new validator if `schema` changes', () => {
       const alternativeValidator = jest.fn();
-      const alternativeSchema = new SimpleSchema2Bridge(schema.schema);
+      const alternativeSchema = new SimpleSchema2Bridge({
+        schema: schema.schema,
+      });
       jest
         .spyOn(alternativeSchema, 'getValidator')
         .mockImplementation(() => alternativeValidator);
@@ -693,7 +697,9 @@ describe('ValidatedForm', () => {
       ),
     );
 
-    const alternativeSchema = new SimpleSchema2Bridge(schema.schema);
+    const alternativeSchema = new SimpleSchema2Bridge({
+      schema: schema.schema,
+    });
     alternativeSchema.getValidator = () => validator;
 
     function flatPair4<A, B, C, D>([a, [b, [c, d]]]: [A, [B, [C, D]]]) {

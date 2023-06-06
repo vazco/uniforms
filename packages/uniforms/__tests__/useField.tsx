@@ -6,8 +6,8 @@ import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 import { render } from '../__suites__';
 
 describe('useField', () => {
-  const bridge = new JSONSchemaBridge(
-    {
+  const bridge = new JSONSchemaBridge({
+    schema: {
       type: 'object',
       properties: {
         a: { type: 'string' },
@@ -15,8 +15,8 @@ describe('useField', () => {
         d: { type: 'number', default: 4 },
       },
     },
-    () => null,
-  );
+    validator: () => null,
+  });
 
   function Test(rawProps: {
     children?: ReactNode;

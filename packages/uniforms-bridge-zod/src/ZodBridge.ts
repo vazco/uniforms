@@ -37,9 +37,20 @@ type Option<Value> = {
 };
 
 export default class ZodBridge<T extends ZodRawShape> extends Bridge {
-  constructor(public schema: ZodObject<T>) {
+  schema: ZodObject<T>;
+  provideDefaultLabelFromFieldName: boolean;
+
+  constructor({
+    schema,
+    provideDefaultLabelFromFieldName = true,
+  }: {
+    schema: ZodObject<T>;
+    provideDefaultLabelFromFieldName?: boolean;
+  }) {
     super();
 
+    this.schema = schema;
+    this.provideDefaultLabelFromFieldName = provideDefaultLabelFromFieldName;
     // Memoize for performance and referential equality.
     this.getField = memoize(this.getField.bind(this));
     this.getInitialValue = memoize(this.getInitialValue.bind(this));
@@ -137,7 +148,9 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
   // eslint-disable-next-line complexity
   getProps(name: string) {
     const props: UnknownObject & { options?: Option<unknown>[] } = {
-      label: upperFirst(lowerCase(joinName(null, name).slice(-1)[0])),
+      ...(this.provideDefaultLabelFromFieldName && {
+        label: upperFirst(lowerCase(joinName(null, name).slice(-1)[0])),
+      }),
       required: true,
     };
 

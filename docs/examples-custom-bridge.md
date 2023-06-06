@@ -144,10 +144,10 @@ import UserLoginSchema from './UserLoginSchema';
 import UserLoginSchemaBridge from './UserLoginSchemaBridge';
 import UserLoginSchemaValidator from './UserLoginSchemaValidator';
 
-const bridge = new UserLoginSchemaBridge(
-  UserLoginSchema,
-  UserLoginSchemaValidator,
-);
+const bridge = new UserLoginSchemaBridge({
+  schema: UserLoginSchema,
+  validator: UserLoginSchemaValidator,
+});
 
 <AutoForm schema={bridge} />;
 ```

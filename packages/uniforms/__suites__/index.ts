@@ -13,6 +13,7 @@ export * from './NestField';
 export * from './NumField';
 export * from './QuickForm';
 export * from './RadioField';
+export * from './SubmitField';
 export * from './TextField';
 export * from './ValidatedForm';
 export * from './ValidatedQuickForm';

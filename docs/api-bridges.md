@@ -26,11 +26,12 @@ This saves you from not having to rewrite the form schema in your code.
 As a trade-off, you have to write the validator from scratch. In some cases, it might be easier to rewrite the schema and use, for example, [`JSONSchemaBridge` with `ajv`](/docs/api-bridges#jsonschemabridge).
 If only a simple or no validation is needed, this bridge is perfectly suited to work with GraphQL schemas.
 
-The constructor accepts three arguments:
+The constructor accepts these arguments:
 
 - `schema: GraphQLType` can be any type parsed and extracted from a GraphQL schema.
 - `validator: (model: Record<string, unknown>) => any` a custom validator function that should return a falsy value if no errors are present or information about errors in the model as described in the [custom bridge section](/docs/examples-custom-bridge#validator-definition).
 - `extras: Record<string, unknown> = {}` used to extend the schema generated from GraphQL type with extra field configuration.
+- `provideDefaultLabelFromFieldName = true` if set to `true`, the bridge will use the field name as a label if no label is provided in the schema.
 
 ### Code example
 
@@ -99,7 +100,11 @@ const schemaValidator = (model: object) => {
   return details.length ? { details } : null;
 };
 
-const bridge = new GraphQLBridge(schemaType, schemaValidator, schemaExtras);
+const bridge = new GraphQLBridge({
+  schema: schemaType,
+  validator: schemaValidator,
+  extras: schemaExtras,
+});
 ```
 
 ## `JSONSchemaBridge`
@@ -134,9 +139,9 @@ function createValidator(schema: object) {
   };
 }
 
-const schemaValidator = createValidator(schema);
+const validator = createValidator(schema);
 
-const bridge = new JSONSchemaBridge(schema, schemaValidator);
+const bridge = new JSONSchemaBridge({ schema, validator });
 ```
 
 ### Note on `allOf`/`anyOf`/`oneOf`
@@ -204,7 +209,7 @@ See [#1047](https://github.com/vazco/uniforms/discussions/1047) for more details
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 
-const PersonSchema = new SimpleSchema({
+const schema = new SimpleSchema({
   // ...
 
   aboutMe: {
@@ -218,7 +223,7 @@ const PersonSchema = new SimpleSchema({
   },
 });
 
-const bridge = new SimpleSchema2Bridge(PersonSchema);
+const bridge = new SimpleSchema2Bridge({ schema });
 ```
 
 ## `SimpleSchemaBridge`
@@ -227,7 +232,7 @@ const bridge = new SimpleSchema2Bridge(PersonSchema);
 import SimpleSchemaBridge from 'uniforms-bridge-simple-schema';
 import { SimpleSchema } from 'aldeed:simple-schema';
 
-const PersonSchema = new SimpleSchema({
+const schema = new SimpleSchema({
   // ...
 
   aboutMe: {
@@ -241,7 +246,7 @@ const PersonSchema = new SimpleSchema({
   },
 });
 
-const bridge = new SimpleSchemaBridge(PersonSchema);
+const bridge = new SimpleSchemaBridge({ schema });
 ```
 
 ## `ZodBridge`
@@ -250,7 +255,7 @@ const bridge = new SimpleSchemaBridge(PersonSchema);
 import ZodBridge from 'uniforms-bridge-zod';
 import z from 'zod';
 
-const PersonSchema = z.object({ aboutMe: z.string() });
+const schema = z.object({ aboutMe: z.string() });
 
-const bridge = new ZodBridge(PersonSchema);
+const bridge = new ZodBridge({ schema });
 ```

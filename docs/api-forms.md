@@ -157,12 +157,10 @@ However, `BaseForm` is not self-managed, so you won't be able to type anything u
 |    `disabled`     |                                                                    Default `disabled` prop for all fields. By default it's `false` - set it to `true` to disable the whole form.                                                                     |
 |      `error`      |                                                                  Validation error. Current validation state. It should be either compatible with your schema or an `Error` object.                                                                   |
 |      `grid`       |                           Bootstrap grid layout style. Passing a number is an equivalent of `{sm: n}`. Object is a `{mode: size}` object. Complete string is simply passed through. Available in: bootstrap3, bootstrap4.                            |
-|      `label`      |                                                                 Default label prop for all fields. By default it's `true` - set it to `false` to disable labels for the whole form.                                                                  |
 |      `model`      | Form model. An object with `{field: value}` structure. It doesn't matter if it has a prototype or not, but keep in mind that in `onSubmit` or in `onChangeModel` you'll receive a plain object. If you treat form as an input, then this is a value. |
 | `modelTransform`  |                                                  Model transform. Function transforming one model into another. It's used in a few situations (modes) described below. Do not mutate a given model!                                                  |
 |    `onChange`     |                                              Field change action. It receives two arguments: key and value, where the key is a dot-separated path to the changed field and value is a requested value.                                               |
 |    `onSubmit`     |               Submit action. When the form is submitted manually or by an HTML5 event, then it's called with the current model. **Note:** use `Promise` to return values and errors - synchronous `return` and `throw` are disallowed.               |
-|   `placeholder`   |                   Enables placeholders for all fields. By default it's `false`, i.e., no placeholders will be shown, even if set in schema or props. When `true`, placeholders are allowed and have to be set in schema or props.                    |
 |    `readOnly`     |                                                                 Default `readOnly` prop for all fields. By default it's `false` - set it to `true` to make the whole form read-only.                                                                 |
 |     `schema`      |                                                                               Form schema. It's used for form generation in QuickForm and validation in ValidatedForm.                                                                               |
 | `showInlineError` |                             Default `showInlineError` prop for all fields. By default it's `false` - set it to `true` to enable inline errors for the whole form. Available in: antd, bootstrap3, bootstrap4, semantic.                              |
@@ -201,7 +199,6 @@ const formAction = () => {
   grid="4" // 'col-4-sm' on label, 'col-8-sm' on input
   grid={{ md: 5 }} // 'col-5-md' on label, 'col-7-md' on input
   grid="col-6-xl" // 'col-6-xl' on label, 'col-6-xl' on input
-  label
   model={{ fieldA: 1 }}
   modelTransform={(mode, model) => {
     // This model will be passed to the fields.
@@ -224,7 +221,6 @@ const formAction = () => {
   }}
   onChange={(key, value) => console.log(key, value)}
   onSubmit={model => db.saveThatReturnsPromiseOrNothing(model)}
-  placeholder={false}
   readOnly={false}
   schema={myFormSchema}
   showInlineError

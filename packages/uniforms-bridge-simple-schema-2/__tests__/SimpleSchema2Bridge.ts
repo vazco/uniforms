@@ -54,7 +54,7 @@ describe('SimpleSchema2Bridge', () => {
     'zs.$.a': String,
   });
 
-  const bridge = new SimpleSchema2Bridge(schema);
+  const bridge = new SimpleSchema2Bridge({ schema });
 
   describe('#getError', () => {
     it('works without error', () => {
@@ -323,7 +323,7 @@ describe('SimpleSchema2Bridge', () => {
   describe('#getValidator', () => {
     it('calls correct validator', () => {
       const schema = new SimpleSchema({ x: { type: Number } });
-      const bridge = new SimpleSchema2Bridge(schema);
+      const bridge = new SimpleSchema2Bridge({ schema });
 
       expect(bridge.getValidator()({})).not.toEqual(null);
       expect(bridge.getValidator({})({})).not.toEqual(null);

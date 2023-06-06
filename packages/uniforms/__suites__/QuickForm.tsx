@@ -6,7 +6,7 @@ import z from 'zod';
 export function testQuickForm(QuickForm: ComponentType<any>) {
   test('<QuickForm> - renders', () => {
     const schema = z.object({});
-    const bridge = new ZodBridge(schema);
+    const bridge = new ZodBridge({ schema });
     const screen = render(<QuickForm data-testid="form" schema={bridge} />);
     expect(screen.getByTestId('form')).toBeInTheDocument();
   });

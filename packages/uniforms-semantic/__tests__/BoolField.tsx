@@ -145,7 +145,10 @@ test('<BoolField> - renders correct error text (specified)', () => {
   const element = (
     <BoolField name="x" error={error} showInlineError errorMessage="Error" />
   );
-  const wrapper = mount(element, createContext({ x: { type: Boolean } }));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: Boolean, label: '' } }),
+  );
 
   expect(wrapper.children().last().text()).toBe('Error');
 });
@@ -174,7 +177,10 @@ test('<BoolField> - renders with a custom wrapClassName', () => {
 
 test('<BoolField> - renders with a `fitted` className when `label` is disabled', () => {
   const element = <BoolField name="x" />;
-  const wrapper = mount(element, createContext({ x: { type: String } }));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, label: '' } }),
+  );
 
   const found = wrapper.find('.ui');
   expect(found.hasClass('fitted')).toEqual(true);
