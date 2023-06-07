@@ -23,5 +23,5 @@ const schema = new SimpleSchema({
   zip: { type: String },
 });
 
-export const bridge = new SimpleSchema2Bridge(schema);
+export const bridge = new SimpleSchema2Bridge({ schema });
 // </schema>

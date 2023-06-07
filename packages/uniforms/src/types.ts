@@ -20,8 +20,6 @@ export type Context<Model extends UnknownObject> = {
   schema: Bridge;
   state: {
     disabled: boolean;
-    label: boolean;
-    placeholder: boolean;
     readOnly: boolean;
     showInlineError: boolean;
   };
@@ -47,16 +45,16 @@ export type GuaranteedProps<Value> = {
   fieldType: unknown;
   fields: string[];
   id: string;
-  label: ReactNode;
+  label?: ReactNode;
   name: string;
   onChange: OnChange<Value | undefined>;
-  placeholder: string;
   readOnly: boolean;
   showInlineError: boolean;
   value?: Value;
 };
 
-type OnChange<Value> = {
+/** @internal */
+export type OnChange<Value> = {
   (value: Value): void;
   (value: unknown, name: string): void;
 };
@@ -73,7 +71,6 @@ export type ModelTransformMode = 'form' | 'submit' | 'validate';
 export type Override<T, U> = T extends any ? U & Omit<T, keyof U> : never;
 
 /** @internal */
-// export type UnknownObject = {};
 export type UnknownObject = Record<string, unknown>;
 
 export type ValidateMode = 'onChange' | 'onChangeAfterSubmit' | 'onSubmit';
@@ -90,10 +87,8 @@ declare module '.' {
     field: never;
     fieldType: never;
     fields: never;
-    label: never;
     name: never;
     onChange: never;
-    placeholder: never;
     readOnly: never;
     showInlineError: never;
     value: never;

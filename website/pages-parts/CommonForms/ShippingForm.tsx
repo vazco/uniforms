@@ -21,7 +21,6 @@ export function ShippingForm() {
       schema={schema}
       onSubmit={(model: any) => alert(JSON.stringify(model, null, 2))}
       model={model}
-      placeholder
     >
       <div className="ui grid">
         <div className="row">

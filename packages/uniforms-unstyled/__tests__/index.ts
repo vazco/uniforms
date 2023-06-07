@@ -30,8 +30,10 @@ it('exports everything', () => {
 });
 
 describe('@RTL', () => {
-  suites.testAutoField(theme.AutoField);
-  suites.testAutoFields(theme.AutoFields);
+  suites.testAutoField(theme.AutoField, {
+    getDateField: screen => screen.getByLabelText('X'),
+    getSelectField: screen => screen.getByRole('combobox'),
+  });
   suites.testAutoForm(theme.AutoForm);
   suites.testBaseForm(theme.BaseForm);
   suites.testDateField(theme.DateField);
@@ -49,6 +51,7 @@ describe('@RTL', () => {
   suites.testNumField(theme.NumField);
   suites.testQuickForm(theme.QuickForm);
   suites.testRadioField(theme.RadioField);
+  suites.testSubmitField(theme.SubmitField);
   suites.testTextField(theme.TextField);
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);

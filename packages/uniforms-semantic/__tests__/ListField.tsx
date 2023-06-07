@@ -120,7 +120,7 @@ test('<ListField> - renders correct error text (specified)', () => {
   );
   const wrapper = mount(
     element,
-    createContext({ x: { type: Array }, 'x.$': { type: String } }),
+    createContext({ x: { type: Array, label: '' }, 'x.$': { type: String } }),
   );
 
   expect(wrapper.children().first().text()).toBe('Error');

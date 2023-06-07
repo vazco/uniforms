@@ -77,7 +77,7 @@ const propsSchema = new SimpleSchema({
   },
 });
 
-const propsBridge = new SimpleSchema2Bridge(propsSchema);
+const propsBridge = new SimpleSchema2Bridge({ schema: propsSchema });
 
 export const schema = new SimpleSchema({
   preset: {
@@ -112,4 +112,4 @@ export const schema = new SimpleSchema({
   },
 });
 
-export const bridge = new SimpleSchema2Bridge(schema);
+export const bridge = new SimpleSchema2Bridge({ schema });

@@ -20,7 +20,9 @@ describe('<AutoForm />', () => {
     b: { type: String, defaultValue: '' },
     c: { type: String, defaultValue: '' },
   };
-  const schema = new SimpleSchema2Bridge(new SimpleSchema(schemaDefinition));
+  const schema = new SimpleSchema2Bridge({
+    schema: new SimpleSchema(schemaDefinition),
+  });
 
   jest.spyOn(schema.schema, 'validator').mockImplementation(() => validator);
 
@@ -68,7 +70,7 @@ describe('<AutoForm />', () => {
 
     it('calls `onChangeModel`', () => {
       const schema = new SimpleSchema({ a: { type: String, optional: true } });
-      const bridge = new SimpleSchema2Bridge(schema);
+      const bridge = new SimpleSchema2Bridge({ schema });
       render(
         <AutoForm onChangeModel={onChangeModel} schema={bridge}>
           <AutoFields />
@@ -153,7 +155,7 @@ describe('<AutoForm />', () => {
   describe('when reset', () => {
     it('reset `model`', () => {
       const schema = new SimpleSchema({ a: { type: String, optional: true } });
-      const bridge = new SimpleSchema2Bridge(schema);
+      const bridge = new SimpleSchema2Bridge({ schema });
       render(
         <AutoForm schema={bridge}>
           <context.Consumer children={contextSpy} />
@@ -181,7 +183,7 @@ describe('<AutoForm />', () => {
 
     it('resets state `changedMap`', () => {
       const schema = new SimpleSchema({ a: { type: String, optional: true } });
-      const bridge = new SimpleSchema2Bridge(schema);
+      const bridge = new SimpleSchema2Bridge({ schema });
       render(
         <AutoForm schema={bridge}>
           <context.Consumer children={contextSpy} />
@@ -209,7 +211,7 @@ describe('<AutoForm />', () => {
 
     it('resets state `changed`', () => {
       const schema = new SimpleSchema({ a: { type: String, optional: true } });
-      const bridge = new SimpleSchema2Bridge(schema);
+      const bridge = new SimpleSchema2Bridge({ schema });
       render(
         <AutoForm schema={bridge}>
           <context.Consumer children={contextSpy} />

@@ -9,4 +9,4 @@ const schema = new SimpleSchema({
   },
 });
 
-export const bridge = new SimpleSchema2Bridge(schema);
+export const bridge = new SimpleSchema2Bridge({ schema });

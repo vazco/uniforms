@@ -6,7 +6,7 @@ import z from 'zod';
 export function testAutoForm(AutoForm: ComponentType<any>) {
   test('<AutoForm> - renders', () => {
     const schema = z.object({});
-    const bridge = new ZodBridge(schema);
+    const bridge = new ZodBridge({ schema });
     const screen = render(<AutoForm data-testid="form" schema={bridge} />);
     expect(screen.getByTestId('form')).toBeInTheDocument();
   });

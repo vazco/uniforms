@@ -20,9 +20,8 @@ export type ConnectedFieldProps<
   Override<
     Partial<GuaranteedProps<Value>>,
     {
-      label?: Props['label'] | boolean | null | string;
+      label?: Props['label'] | null | string;
       name: string;
-      placeholder?: Props['placeholder'] | boolean | null | string;
     }
   >
 >;
