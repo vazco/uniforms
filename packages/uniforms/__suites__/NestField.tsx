@@ -24,8 +24,6 @@ export function testNestField(
       }),
     });
 
-    screen.debug();
-
     expect(screen.getAllByRole('textbox')).toHaveLength(1);
     expect(screen.getByRole('spinbutton')).toBeInTheDocument();
   });

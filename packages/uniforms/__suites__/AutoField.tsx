@@ -87,7 +87,6 @@ export function testAutoField(
       }),
     });
 
-    screen.debug();
     expect(getDateField(screen)).toBeInTheDocument();
   });
 
