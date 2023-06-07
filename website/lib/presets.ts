@@ -90,7 +90,7 @@ const presets = {
 
       const validator = createValidator(schema);
 
-      return new JSONSchemaBridge({schema, validator});
+      return new JSONSchemaBridge({ schema, validator });
     })()
   `,
 
