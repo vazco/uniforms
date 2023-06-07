@@ -8,7 +8,7 @@ import { skipTestIf } from './skipTestIf';
 export function testNestField(
   NestField: ComponentType<any>,
   options?: {
-    skipForMui?: boolean;
+    skipInMuiTests?: boolean;
     skipErrorMessageTests?: boolean;
     skipShowInlineErrorTests?: boolean;
   },
@@ -61,7 +61,7 @@ export function testNestField(
     expect(screen.getByText('y')).toBeInTheDocument();
   });
 
-  skipTestIf(options?.skipForMui)(
+  skipTestIf(options?.skipInMuiTests)(
     '<NestField> - renders a wrapper with unknown props',
     () => {
       renderWithZod({
