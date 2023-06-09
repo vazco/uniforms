@@ -31,7 +31,10 @@ it('exports everything', () => {
 });
 
 describe('@RTL', () => {
-  suites.testAutoField(theme.AutoField);
+  suites.testAutoField(theme.AutoField, {
+    getDateField: screen => screen.getByRole('textbox'),
+    getSelectField: screen => screen.getByRole('combobox'),
+  });
   suites.testAutoForm(theme.AutoForm);
   suites.testBaseForm(theme.BaseForm);
   suites.testBoolField(theme.BoolField, { isButton: true, testCheckbox: true });
@@ -51,6 +54,8 @@ describe('@RTL', () => {
   suites.testQuickForm(theme.QuickForm);
   // FIXME: AntD radio.group does not support HTML attributes https://github.com/ant-design/ant-design/issues/8561, added a flag to skip attributes tests.
   suites.testRadioField(theme.RadioField, { skipHtmlAttributesTest: true });
+  // FIXME: AntD has problem with toHaveValue check
+  suites.testSubmitField(theme.SubmitField, { skipValueTest: true });
   suites.testTextField(theme.TextField);
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);

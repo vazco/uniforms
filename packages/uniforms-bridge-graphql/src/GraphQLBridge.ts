@@ -28,12 +28,28 @@ type Option<Value> = {
 };
 
 export default class GraphQLBridge extends Bridge {
-  constructor(
-    public schema: GraphQLType,
-    public validator: (model: UnknownObject) => unknown,
-    public extras: UnknownObject = {},
-  ) {
+  extras: UnknownObject;
+  provideDefaultLabelFromFieldName: boolean;
+  schema: GraphQLType;
+  validator: (model: UnknownObject) => unknown;
+
+  constructor({
+    extras = {},
+    provideDefaultLabelFromFieldName = true,
+    schema,
+    validator,
+  }: {
+    extras?: UnknownObject;
+    provideDefaultLabelFromFieldName?: boolean;
+    schema: GraphQLType;
+    validator: (model: UnknownObject) => unknown;
+  }) {
     super();
+
+    this.extras = extras;
+    this.provideDefaultLabelFromFieldName = provideDefaultLabelFromFieldName;
+    this.schema = schema;
+    this.validator = validator;
 
     // Memoize for performance and referential equality.
     this.getField = memoize(this.getField.bind(this));
@@ -133,7 +149,9 @@ export default class GraphQLBridge extends Bridge {
       props.decimal = true;
     }
 
-    props.label ??= upperFirst(lowerCase(field.name));
+    if (this.provideDefaultLabelFromFieldName && props.label === undefined) {
+      props.label = upperFirst(lowerCase(field.name));
+    }
 
     type OptionDict = Record<string, unknown>;
     type OptionList = Option<unknown>[];

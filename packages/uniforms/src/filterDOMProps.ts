@@ -46,8 +46,6 @@ filterDOMProps.register(
 
   // These props are provided by useField through context.state.
   'disabled',
-  'label',
-  'placeholder',
   'showInlineError',
 
   // This is used by AutoField.

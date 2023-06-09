@@ -16,13 +16,13 @@ describe('QuickForm', () => {
     getSubmitField = () => () => <i className="submit" />;
   }
 
-  const schema = new SimpleSchema2Bridge(
-    new SimpleSchema({
+  const schema = new SimpleSchema2Bridge({
+    schema: new SimpleSchema({
       a: String,
       b: String,
       c: String,
     }),
-  );
+  });
 
   describe('when rendered with custom fields', () => {
     it('renders `AutoField` for each field', () => {

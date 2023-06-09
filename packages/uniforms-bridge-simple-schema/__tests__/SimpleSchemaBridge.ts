@@ -99,7 +99,7 @@ describe('SimpleSchemaBridge', () => {
     },
   } as unknown as SimpleSchema;
 
-  const bridge = new SimpleSchemaBridge(schema);
+  const bridge = new SimpleSchemaBridge({ schema });
 
   describe('#getError', () => {
     it('works without error', () => {
@@ -216,6 +216,18 @@ describe('SimpleSchemaBridge', () => {
   });
 
   describe('#getProps', () => {
+    it('works with label in schema', () => {
+      expect(bridge.getProps('a')).toEqual({
+        label: 'a',
+        required: true,
+      });
+    });
+    it('works with default label', () => {
+      expect(bridge.getProps('h')).toEqual({
+        label: 'H',
+        required: true,
+      });
+    });
     it('works with allowedValues (inferred from children)', () => {
       expect(bridge.getProps('o')).toEqual({
         label: 'O',
@@ -325,17 +337,19 @@ describe('SimpleSchemaBridge', () => {
   describe('#getValidator', () => {
     it('calls correct validator', () => {
       const bridge = new SimpleSchemaBridge({
-        ...schema,
-        validator() {
-          return (model: UnknownObject) => {
-            if (typeof model.x !== 'number') {
-              throw new Error();
-            }
+        schema: {
+          ...schema,
+          validator() {
+            return (model: UnknownObject) => {
+              if (typeof model.x !== 'number') {
+                throw new Error();
+              }
 
-            return true;
-          };
-        },
-      } as SimpleSchema);
+              return true;
+            };
+          },
+        } as SimpleSchema,
+      });
 
       expect(bridge.getValidator()({})).not.toEqual(null);
       expect(bridge.getValidator({})({})).not.toEqual(null);

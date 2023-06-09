@@ -6,7 +6,7 @@ import z from 'zod';
 export function testBaseForm(BaseForm: ComponentType<any>) {
   test('<BaseForm> - renders', () => {
     const schema = z.object({});
-    const bridge = new ZodBridge(schema);
+    const bridge = new ZodBridge({ schema });
     const screen = render(<BaseForm data-testid="form" schema={bridge} />);
     expect(screen.getByTestId('form')).toBeInTheDocument();
   });

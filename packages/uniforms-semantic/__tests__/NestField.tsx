@@ -79,9 +79,9 @@ test('<NestField> - renders correct error text (specified)', () => {
   const wrapper = mount(
     element,
     createContext({
-      x: { type: Object },
-      'x.a': { type: String },
-      'x.b': { type: Number },
+      x: { type: Object, label: '' },
+      'x.a': { type: String, label: '' },
+      'x.b': { type: Number, label: '' },
     }),
   );
 

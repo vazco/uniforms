@@ -382,7 +382,9 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct option
   const element = <SelectField checkboxes name="x" />;
   const wrapper = mount(
     element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
+    createContext({
+      x: { type: String, allowedValues: ['a', 'b'], label: '' },
+    }),
   );
 
   expect(wrapper.find('label')).toHaveLength(2);
@@ -401,7 +403,10 @@ test('<SelectField checkboxes> - renders a set of checkboxes with correct option
       ]}
     />
   );
-  const wrapper = mount(element, createContext({ x: { type: String } }));
+  const wrapper = mount(
+    element,
+    createContext({ x: { type: String, label: '' } }),
+  );
 
   expect(wrapper.find('label')).toHaveLength(2);
   expect(wrapper.find('label').at(0).text()).toBe('A');

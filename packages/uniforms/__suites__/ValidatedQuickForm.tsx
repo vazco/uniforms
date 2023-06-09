@@ -6,7 +6,7 @@ import z from 'zod';
 export function testValidatedQuickForm(ValidatedQuickForm: ComponentType<any>) {
   test('<ValidatedQuickForm> - renders', () => {
     const schema = z.object({});
-    const bridge = new ZodBridge(schema);
+    const bridge = new ZodBridge({ schema });
     const screen = render(
       <ValidatedQuickForm data-testid="form" schema={bridge} />,
     );
