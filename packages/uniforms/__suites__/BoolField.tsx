@@ -7,7 +7,6 @@ import z from 'zod';
 import { renderWithZod } from './render-zod';
 import { skipTestIf } from './skipTestIf';
 
-// eslint-disable-next-line complexity
 export function testBoolField(
   BoolField: ComponentType<any>,
   options?: {
