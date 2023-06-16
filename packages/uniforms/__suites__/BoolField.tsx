@@ -10,12 +10,13 @@ import { skipTestIf } from './skipTestIf';
 export function testBoolField(
   BoolField: ComponentType<any>,
   options?: {
+    isButton?: boolean;
     testCheckbox?: boolean;
     testError?: boolean;
-    testSwitch?: boolean;
-    isButton?: boolean;
+    testFitted?: boolean;
     testInline?: boolean;
     testMUIThemeProps?: boolean;
+    testSwitch?: boolean;
   },
 ) {
   test('<BoolField> - renders an input', () => {
@@ -391,6 +392,18 @@ export function testBoolField(
 
     expect(screen.getByText(/BoolFieldLabel.*/)).toBeInTheDocument();
   });
+
+  skipTestIf(!options?.testFitted)(
+    '<BoolField> - renders with a `fitted` className when `label` is disabled',
+    () => {
+      const screen = renderWithZod({
+        element: <BoolField name="x" data-testid="boolfield" label="" />,
+        schema: z.object({ x: z.boolean() }),
+      });
+
+      expect(screen.container.querySelector('.ui')).toHaveClass('fitted');
+    },
+  );
 
   skipTestIf(!options?.testCheckbox)(
     '<BoolField> - renders a checkbox with correct label (specified)',
