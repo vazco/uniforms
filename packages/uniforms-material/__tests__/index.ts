@@ -51,6 +51,7 @@ describe('@RTL', () => {
     getListAddField: screen => screen.getByText(/\+/),
   });
   suites.testLongTextField(theme.LongTextField);
+  suites.testNestField(theme.NestField, { skipInMuiTests: true });
   suites.testNumField(theme.NumField);
   suites.testQuickForm(theme.QuickForm);
   suites.testRadioField(theme.RadioField);

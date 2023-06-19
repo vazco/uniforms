@@ -49,6 +49,10 @@ describe('@RTL', () => {
   suites.testLongTextField(theme.LongTextField, {
     skipShowInlineErrorTests: true,
   });
+  suites.testNestField(theme.NestField, {
+    skipShowInlineErrorTests: true,
+    skipErrorMessageTests: true,
+  });
   suites.testNumField(theme.NumField);
   suites.testQuickForm(theme.QuickForm);
   suites.testRadioField(theme.RadioField);
