@@ -1,6 +1,7 @@
 export * from './AutoField';
 export * from './AutoForm';
 export * from './BaseForm';
+export * from './BoolField';
 export * from './DateField';
 export * from './ErrorField';
 export * from './ErrorsField';

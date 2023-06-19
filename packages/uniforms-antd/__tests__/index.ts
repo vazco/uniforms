@@ -37,6 +37,7 @@ describe('@RTL', () => {
   });
   suites.testAutoForm(theme.AutoForm);
   suites.testBaseForm(theme.BaseForm);
+  suites.testBoolField(theme.BoolField, { isButton: true, testCheckbox: true });
   // FIXME: AntD `DatePicker` is far from the HTML one.
   // suites.testDateField(antd.DateField);
   suites.testErrorField(theme.ErrorField);
