@@ -1,4 +1,5 @@
 export * from './AutoField';
+export * from './AutoFields';
 export * from './AutoForm';
 export * from './BaseForm';
 export * from './BoolField';
