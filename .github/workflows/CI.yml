@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [14.x, 16.x, 18.x, 20.x]
     steps:
       - name: Checkout
         uses: actions/checkout@v3.3.0
@@ -34,7 +34,7 @@ jobs:
           fail_ci_if_error: true
       - name: Build docs
         run: npm --prefix website run build
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '18.x'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '20.x'
       - name: Deploy docs
         uses: peaceiris/actions-gh-pages@v3.9.2
         with:
@@ -43,4 +43,4 @@ jobs:
           force_orphan: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./website/build
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '18.x'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '20.x'
