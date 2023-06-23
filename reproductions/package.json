@@ -16,7 +16,7 @@
     "@types/react-dom": "17.0.11",
     "ajv": "8.0.5",
     "antd": "4.10.3",
-    "parcel": "2.0.1",
+    "parcel": "2.9.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "simpl-schema": "^1.0.0 || ^0.0.4",
