@@ -1,3 +1,7 @@
+## [v4.0.0-alpha.5](https://github.com/vazco/uniforms/tree/v4.0.0-alpha.5) (2023-06-23)
+
+- **Breaking:** Unified the way of handling `label` and `placeholder`. [\#973](https://github.com/vazco/uniforms/issues/973)
+
 ## [v4.0.0-alpha.4](https://github.com/vazco/uniforms/tree/v4.0.0-alpha.4) (2023-05-12)
 
 - **Breaking:** Replaced `allowedValues` and `transform` with `options`. [\#806](https://github.com/vazco/uniforms/issues/806)
