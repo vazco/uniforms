@@ -59,6 +59,11 @@ export function Footer() {
                 {email}
               </p>
             </Link>
+            <Link to="https://www.vazco.eu/open-source">
+              <h2 className={classNames(styles.text, styles['footer-heading'])}>
+                Meet the creators!
+              </h2>
+            </Link>
             <a href="https://vazco.eu">
               <img
                 alt="Vazco homepage"

@@ -393,15 +393,64 @@
   border-left: 0;
 }
 
+.arrow-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.arrow {
+  height: 35px;
+  width: auto;
+}
+
 .testimonials {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+  align-items: center;
+}
+
+.testimonials-pair {
+  display: flex;
+  justify-content: center;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .testimonials-pair {
+    flex-direction: column;
+  }
+}
+
+.slider-indicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider-indicator {
+  background-color: white;
+  height: 0.75rem;
+  width: 0.75rem;
+  border-radius: 100%;
+  border: 1px solid var(--dusk-blue);
+  outline: none;
+  margin: 0 0.3rem;
+  cursor: pointer;
+  padding: 0 !important;
+}
+
+.slider-indicator-active {
+  background-color: var(--dusk-blue);
 }
 
 .testimonial {
   margin: 2em;
   background: var(--ifm-background-surface-color);
+}
+
+.testimonial-inactive {
+  display: none;
 }
 
 .testimonial-content {
