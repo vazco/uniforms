@@ -9,7 +9,6 @@ import styles from '../../index.module.css';
 type Testimonial = {
   company: string;
   description: JSX.Element;
-  mirror: boolean;
   position: string;
   who: string;
   avatar: string;
@@ -17,133 +16,121 @@ type Testimonial = {
   linkLinkedin: string;
 };
 
-const testimonials: Testimonial[][] = [
-  [
-    {
-      company: 'Resolve',
-      description: (
-        <>
-          uniforms is the backbone of our data-intensive web-applications. We
-          have about 200 different forms, from very simple ones, to ones that
-          are filled with complex data-loading conditional form components,
-          which create an incredible UX for our users. And if you really need to
-          push the limits of what you can do with forms, I would highly
-          recommend{' '}
-          <b>
-            <a href="https://www.vazco.eu/" target="blank">
-              reaching out to Vazco
-            </a>
-          </b>{' '}
-          themselves for expert advice.
-        </>
-      ),
-      mirror: false,
-      position: 'CTO and Co-Founder',
-      who: 'Florian Bienefelt',
-      avatar: 'img/avatar/florian-bienefelt.jpg',
-      linkGithub: 'https://github.com/Floriferous',
-      linkLinkedin: 'https://ch.linkedin.com/in/florianbienefelt',
-    },
-    {
-      company: 'Toptal',
-      description: (
-        <>
-          uniforms is my go-to solution for quite a while. Great holistic
-          approach to tackle forms. I especially love the approach to making
-          custom form layouts. Developer experience par-excellence.
-        </>
-      ),
-      mirror: true,
-      position: 'Front-end Platform Architect',
-      who: 'Viktor Bezdek',
-      avatar: 'img/avatar/viktor-bezdek.jpg',
-      linkGithub: 'https://github.com/viktorbezdek',
-      linkLinkedin: 'https://www.linkedin.com/in/viktorbezdek/',
-    },
-  ],
-  [
-    {
-      company: 'Mindtree',
-      description: (
-        <>
-          Vazco&apos;s Uniforms is a developer&apos;s go-to solution for
-          simplifying form creation and validation in JavaScript applications.
-          With its intuitive APIs and extensive feature set, Uniforms
-          streamlines the process of building complex forms. It offers a wide
-          range of input types, validation options, and customization
-          possibilities. Backed by an active community, Vazco&apos;s Uniforms
-          ensures ongoing support and updates, empowering developers to enhance
-          productivity and deliver polished, user-friendly applications.
-        </>
-      ),
-      mirror: false,
-      position: 'Senior Technical Specialist',
-      who: 'Lorant Vajda',
-      avatar: 'img/avatar/lorant-vajda.jpg',
-      linkGithub: 'https://github.com/lortschi',
-      linkLinkedin: 'https://www.linkedin.com/in/lorant-vajda-596372181/',
-    },
-    {
-      company: 'Simple Commerce',
-      description: (
-        <>
-          We were looking for a forms library that was compatible with React and
-          would help us build forms quicker with built-in logic without having
-          to create it from scratch. And the addition of a GraphQL schema bridge
-          was a no brainer for us. We added a custom method to help validate
-          required fields based on our GraphQL schema which made it even more
-          practical and quick to use with the built-in features and
-          extendibility. The support for the library is also great, I have never
-          had issues asking questions and getting answers to point me in the
-          right direction.
-        </>
-      ),
-      mirror: true,
-      position: 'Software Developer',
-      who: 'Kheang Hok Chin',
-      avatar: 'img/avatar/kheang-hok-chin.jpg',
-      linkGithub: 'https://github.com/simplecommerce',
-      linkLinkedin: 'https://www.linkedin.com/in/khokchin',
-    },
-  ],
-  [
-    {
-      company: 'Okra',
-      description: (
-        <>
-          I used Uniforms extensively during the height of Meteor.js as a
-          replacement for the dominant forms solution which hadn&apos;t caught
-          up with React. The flexibility to leverage different schema solutions
-          coupled with a thoughtfully architected API with a very clean source
-          implementation quickly made it my go to solution for multiple
-          forms-heavy applications that probably shaved off significant
-          development time and directly boosted my productivity.
-        </>
-      ),
-      mirror: false,
-      position: 'Head of Engineering',
-      who: 'Serkan Durusoy',
-      avatar: 'img/avatar/serkan-durusoy.jpg',
-      linkGithub: 'https://github.com/serkandurusoy',
-      linkLinkedin: 'https://www.linkedin.com/in/serkandurusoy/',
-    },
-    {
-      company: 'MongoDB',
-      description: (
-        <>
-          Vazco&apos;s uniforms is one and the only library that allows you to
-          have greater flexibility on top of the React platform to building
-          forms you like.
-        </>
-      ),
-      mirror: true,
-      position: 'Software Engineer',
-      who: 'Wojciech Trocki',
-      avatar: 'img/avatar/wojciech-trocki.jpg',
-      linkGithub: 'https://github.com/wtrocki',
-      linkLinkedin: 'https://www.linkedin.com/in/wojciech-t-39574526/',
-    },
-  ],
+const testimonials: Testimonial[] = [
+  {
+    company: 'Resolve',
+    description: (
+      <>
+        uniforms is the backbone of our data-intensive web-applications. We have
+        about 200 different forms, from very simple ones, to ones that are
+        filled with complex data-loading conditional form components, which
+        create an incredible UX for our users. And if you really need to push
+        the limits of what you can do with forms, I would highly recommend{' '}
+        <b>
+          <a href="https://www.vazco.eu/" target="blank">
+            reaching out to Vazco
+          </a>
+        </b>{' '}
+        themselves for expert advice.
+      </>
+    ),
+    position: 'CTO and Co-Founder',
+    who: 'Florian Bienefelt',
+    avatar: 'img/avatar/florian-bienefelt.jpg',
+    linkGithub: 'https://github.com/Floriferous',
+    linkLinkedin: 'https://ch.linkedin.com/in/florianbienefelt',
+  },
+  {
+    company: 'Mindtree',
+    description: (
+      <>
+        Vazco&apos;s Uniforms is a developer&apos;s go-to solution for
+        simplifying form creation and validation in JavaScript applications.
+        With its intuitive APIs and extensive feature set, Uniforms streamlines
+        the process of building complex forms. It offers a wide range of input
+        types, validation options, and customization possibilities. Backed by an
+        active community, Vazco&apos;s Uniforms ensures ongoing support and
+        updates, empowering developers to enhance productivity and deliver
+        polished, user-friendly applications.
+      </>
+    ),
+    position: 'Senior Technical Specialist',
+    who: 'Lorant Vajda',
+    avatar: 'img/avatar/lorant-vajda.jpg',
+    linkGithub: 'https://github.com/lortschi',
+    linkLinkedin: 'https://www.linkedin.com/in/lorant-vajda-596372181/',
+  },
+
+  {
+    company: 'Simple Commerce',
+    description: (
+      <>
+        We were looking for a forms library that was compatible with React and
+        would help us build forms quicker with built-in logic without having to
+        create it from scratch. And the addition of a GraphQL schema bridge was
+        a no brainer for us. We added a custom method to help validate required
+        fields based on our GraphQL schema which made it even more practical and
+        quick to use with the built-in features and extendibility. The support
+        for the library is also great, I have never had issues asking questions
+        and getting answers to point me in the right direction.
+      </>
+    ),
+    position: 'Software Developer',
+    who: 'Kheang Hok Chin',
+    avatar: 'img/avatar/kheang-hok-chin.jpg',
+    linkGithub: 'https://github.com/simplecommerce',
+    linkLinkedin: 'https://www.linkedin.com/in/khokchin',
+  },
+  {
+    company: 'Okra',
+    description: (
+      <>
+        I used Uniforms extensively during the height of Meteor.js as a
+        replacement for the dominant forms solution which hadn&apos;t caught up
+        with React. The flexibility to leverage different schema solutions
+        coupled with a thoughtfully architected API with a very clean source
+        implementation quickly made it my go to solution for multiple
+        forms-heavy applications that probably shaved off significant
+        development time and directly boosted my productivity.
+      </>
+    ),
+    position: 'Head of Engineering',
+    who: 'Serkan Durusoy',
+    avatar: 'img/avatar/serkan-durusoy.jpg',
+    linkGithub: 'https://github.com/serkandurusoy',
+    linkLinkedin: 'https://www.linkedin.com/in/serkandurusoy/',
+  },
+
+  {
+    company: 'Toptal',
+    description: (
+      <>
+        uniforms is my go-to solution for quite a while. Great holistic approach
+        to tackle forms. I especially love the approach to making custom form
+        layouts. Developer experience par-excellence.
+      </>
+    ),
+    position: 'Front-end Platform Architect',
+    who: 'Viktor Bezdek',
+    avatar: 'img/avatar/viktor-bezdek.jpg',
+    linkGithub: 'https://github.com/viktorbezdek',
+    linkLinkedin: 'https://www.linkedin.com/in/viktorbezdek/',
+  },
+  {
+    company: 'MongoDB',
+    description: (
+      <>
+        Vazco&apos;s uniforms is one and the only library that allows you to
+        have greater flexibility on top of the React platform to building forms
+        you like.
+      </>
+    ),
+    position: 'Software Engineer',
+    who: 'Wojciech Trocki',
+    avatar: 'img/avatar/wojciech-trocki.jpg',
+    linkGithub: 'https://github.com/wtrocki',
+    linkLinkedin: 'https://www.linkedin.com/in/wojciech-t-39574526/',
+  },
 ];
 
 export type TestimonialProps = {
@@ -155,7 +142,6 @@ export type TestimonialProps = {
   mirror?: boolean;
   position: string;
   who: string;
-  customStyles?: string;
 };
 
 export function Testimonial({
@@ -167,12 +153,10 @@ export function Testimonial({
   mirror,
   position,
   who,
-  customStyles,
 }: TestimonialProps) {
   return (
     <div
       className={classNames(
-        customStyles,
         styles.testimonial,
         styles['border-dashed'],
         mirror
@@ -214,10 +198,6 @@ export function Testimonial({
 export function Testimonials() {
   const [slide, setSlide] = useState(0);
 
-  const setChosenSlide = (slideIdx: number) => {
-    setSlide(slideIdx);
-  };
-
   const setNextSlide = () => {
     setSlide(slide === testimonials.length - 1 ? 0 : slide + 1);
   };
@@ -239,7 +219,13 @@ export function Testimonials() {
       </h3>
       <Heading>Testimonials</Heading>
       <div className={styles.testimonials}>
-        <button className={styles['arrow-button']} onClick={setPrevSlide}>
+        <button
+          className={classNames(
+            styles['arrow-button'],
+            styles['left-arrow-button'],
+          )}
+          onClick={setPrevSlide}
+        >
           <img
             alt="arrow-left"
             src="assets/arrow-left.svg"
@@ -247,36 +233,51 @@ export function Testimonials() {
           />
         </button>
 
-        {testimonials.map((testimonialsPair, testimonialsPairIdx) => {
+        {testimonials.map((_, testimonialIdx) => {
+          const secondTestimonialId =
+            testimonials.length - 1 === testimonialIdx ? 0 : testimonialIdx + 1;
           return (
             <div
-              key={testimonialsPairIdx}
-              className={styles['testimonials-pair']}
+              key={testimonialIdx}
+              className={
+                slide === testimonialIdx
+                  ? styles['testimonials-pair-active']
+                  : styles['testimonials-pair-inactive']
+              }
             >
-              {testimonialsPair.map((testimonial, testimonialIdx) => {
-                return (
-                  <Testimonial
-                    customStyles={
-                      slide === testimonialsPairIdx
-                        ? undefined
-                        : styles['testimonial-inactive']
-                    }
-                    key={testimonialIdx}
-                    avatar={testimonial.avatar}
-                    company={testimonial.company}
-                    description={testimonial.description}
-                    who={testimonial.who}
-                    position={testimonial.position}
-                    linkGithub={testimonial.linkGithub}
-                    linkLinkedin={testimonial.linkLinkedin}
-                    mirror={testimonial.mirror}
-                  />
-                );
-              })}
+              <Testimonial
+                key={testimonialIdx}
+                avatar={testimonials[testimonialIdx].avatar}
+                company={testimonials[testimonialIdx].company}
+                description={testimonials[testimonialIdx].description}
+                who={testimonials[testimonialIdx].who}
+                position={testimonials[testimonialIdx].position}
+                linkGithub={testimonials[testimonialIdx].linkGithub}
+                linkLinkedin={testimonials[testimonialIdx].linkLinkedin}
+                mirror={false}
+              />
+              <Testimonial
+                key={secondTestimonialId}
+                avatar={testimonials[secondTestimonialId].avatar}
+                company={testimonials[secondTestimonialId].company}
+                description={testimonials[secondTestimonialId].description}
+                who={testimonials[secondTestimonialId].who}
+                position={testimonials[secondTestimonialId].position}
+                linkGithub={testimonials[secondTestimonialId].linkGithub}
+                linkLinkedin={testimonials[secondTestimonialId].linkLinkedin}
+                mirror
+              />
             </div>
           );
         })}
-        <button className={styles['arrow-button']} onClick={setNextSlide}>
+
+        <button
+          className={classNames(
+            styles['arrow-button'],
+            styles['right-arrow-button'],
+          )}
+          onClick={setNextSlide}
+        >
           <img
             alt="arrow-right"
             src="assets/arrow-right.svg"
@@ -284,19 +285,6 @@ export function Testimonials() {
           />
         </button>
       </div>
-      <span className={styles['slider-indicators']}>
-        {testimonials.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => setChosenSlide(idx)}
-            className={
-              slide === idx
-                ? `${styles['slider-indicator']} ${styles['slider-indicator-active']}`
-                : styles['slider-indicator']
-            }
-          />
-        ))}
-      </span>
     </div>
   );
 }
