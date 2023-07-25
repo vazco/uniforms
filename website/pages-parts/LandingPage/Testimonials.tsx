@@ -44,12 +44,12 @@ const testimonials: Testimonial[] = [
     company: 'Mindtree',
     description: (
       <>
-        Vazco&apos;s Uniforms is a developer&apos;s go-to solution for
+        Vazco&apos;s uniforms is a developer&apos;s go-to solution for
         simplifying form creation and validation in JavaScript applications.
-        With its intuitive APIs and extensive feature set, Uniforms streamlines
+        With its intuitive APIs and extensive feature set, uniforms streamlines
         the process of building complex forms. It offers a wide range of input
         types, validation options, and customization possibilities. Backed by an
-        active community, Vazco&apos;s Uniforms ensures ongoing support and
+        active community, Vazco&apos;s uniforms ensures ongoing support and
         updates, empowering developers to enhance productivity and deliver
         polished, user-friendly applications.
       </>
@@ -68,9 +68,9 @@ const testimonials: Testimonial[] = [
         We were looking for a forms library that was compatible with React and
         would help us build forms quicker with built-in logic without having to
         create it from scratch. And the addition of a GraphQL schema bridge was
-        a no brainer for us. We added a custom method to help validate required
+        a no-brainer for us. We added a custom method to help validate required
         fields based on our GraphQL schema which made it even more practical and
-        quick to use with the built-in features and extendibility. The support
+        quick to use with the built-in features and extensibility. The support
         for the library is also great, I have never had issues asking questions
         and getting answers to point me in the right direction.
       </>
@@ -85,11 +85,11 @@ const testimonials: Testimonial[] = [
     company: 'Okra',
     description: (
       <>
-        I used Uniforms extensively during the height of Meteor.js as a
+        I used uniforms extensively during the height of Meteor.js as a
         replacement for the dominant forms solution which hadn&apos;t caught up
         with React. The flexibility to leverage different schema solutions
         coupled with a thoughtfully architected API with a very clean source
-        implementation quickly made it my go to solution for multiple
+        implementation quickly made it my go-to solution for multiple
         forms-heavy applications that probably shaved off significant
         development time and directly boosted my productivity.
       </>
@@ -248,13 +248,7 @@ export function Testimonials() {
               return (
                 <Testimonial
                   key={testimonialIdx}
-                  avatar={testimonial.avatar}
-                  company={testimonial.company}
-                  description={testimonial.description}
-                  who={testimonial.who}
-                  position={testimonial.position}
-                  linkGithub={testimonial.linkGithub}
-                  linkLinkedin={testimonial.linkLinkedin}
+                  {...testimonial}
                   mirror={testimonialIdx !== slide}
                 />
               );
