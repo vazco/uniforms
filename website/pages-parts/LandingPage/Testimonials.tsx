@@ -199,11 +199,15 @@ export function Testimonials() {
   const [slide, setSlide] = useState(0);
 
   const setNextSlide = () => {
-    setSlide(slide === testimonials.length - 1 ? 0 : slide + 1);
+    setSlide(prevSlide =>
+      prevSlide === testimonials.length - 2 ? 0 : prevSlide + 1,
+    );
   };
 
   const setPrevSlide = () => {
-    setSlide(slide === 0 ? testimonials.length - 1 : slide - 1);
+    setSlide(prevSlide =>
+      prevSlide === 0 ? testimonials.length - 2 : prevSlide - 1,
+    );
   };
 
   return (
@@ -233,43 +237,30 @@ export function Testimonials() {
           />
         </button>
 
-        {testimonials.map((_, testimonialIdx) => {
-          const secondTestimonialId =
-            testimonials.length - 1 === testimonialIdx ? 0 : testimonialIdx + 1;
-          return (
-            <div
-              key={testimonialIdx}
-              className={
-                slide === testimonialIdx
-                  ? styles['testimonials-pair-active']
-                  : styles['testimonials-pair-inactive']
-              }
-            >
-              <Testimonial
-                key={testimonialIdx}
-                avatar={testimonials[testimonialIdx].avatar}
-                company={testimonials[testimonialIdx].company}
-                description={testimonials[testimonialIdx].description}
-                who={testimonials[testimonialIdx].who}
-                position={testimonials[testimonialIdx].position}
-                linkGithub={testimonials[testimonialIdx].linkGithub}
-                linkLinkedin={testimonials[testimonialIdx].linkLinkedin}
-                mirror={false}
-              />
-              <Testimonial
-                key={secondTestimonialId}
-                avatar={testimonials[secondTestimonialId].avatar}
-                company={testimonials[secondTestimonialId].company}
-                description={testimonials[secondTestimonialId].description}
-                who={testimonials[secondTestimonialId].who}
-                position={testimonials[secondTestimonialId].position}
-                linkGithub={testimonials[secondTestimonialId].linkGithub}
-                linkLinkedin={testimonials[secondTestimonialId].linkLinkedin}
-                mirror
-              />
-            </div>
-          );
-        })}
+        <div className={styles['carousel-container']}>
+          <div
+            className={styles['carousel']}
+            style={{
+              transform: `translate(-${slide * 50}%)`,
+            }}
+          >
+            {testimonials.map((testimonial, testimonialIdx) => {
+              return (
+                <Testimonial
+                  key={testimonialIdx}
+                  avatar={testimonial.avatar}
+                  company={testimonial.company}
+                  description={testimonial.description}
+                  who={testimonial.who}
+                  position={testimonial.position}
+                  linkGithub={testimonial.linkGithub}
+                  linkLinkedin={testimonial.linkLinkedin}
+                  mirror={testimonialIdx !== slide}
+                />
+              );
+            })}
+          </div>
+        </div>
 
         <button
           className={classNames(

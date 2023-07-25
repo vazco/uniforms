@@ -413,6 +413,16 @@
   width: 35px;
 }
 
+.carousel-container {
+  overflow: hidden;
+  max-width: 968px;
+}
+
+.carousel {
+  transition: transform 0.3s;
+  display: flex;
+}
+
 .testimonials {
   display: flex;
   justify-content: center;
@@ -423,8 +433,6 @@
   display: flex;
   justify-content: center;
   height: auto;
-  opacity: 1;
-  transition: opacity ease-in-out 0.6s;
 }
 
 @media (max-width: 768px) {
@@ -434,10 +442,7 @@
 }
 
 .testimonials-pair-inactive {
-  height: 0;
-  width: 0;
-  opacity: 0;
-  overflow: hidden;
+  display: none;
 }
 
 @media (max-width: 768px) {
@@ -452,7 +457,7 @@
 }
 
 .testimonial-content {
-  max-width: 420px;
+  width: 420px;
   height: 100%;
   padding: 4em 2em;
   display: flex;
