@@ -139,21 +139,27 @@ export type TestimonialProps = {
   description: JSX.Element;
   linkGithub: string;
   linkLinkedin: string;
-  mirror?: boolean;
   position: string;
   who: string;
 };
 
 export function Testimonial({
-  avatar,
-  company,
-  description,
-  linkGithub,
-  linkLinkedin,
+  testimonial,
   mirror,
-  position,
-  who,
-}: TestimonialProps) {
+}: {
+  testimonial: TestimonialProps;
+  mirror: boolean;
+}) {
+  const {
+    avatar,
+    company,
+    description,
+    linkGithub,
+    linkLinkedin,
+    position,
+    who,
+  } = testimonial;
+
   return (
     <div
       className={classNames(
@@ -244,15 +250,13 @@ export function Testimonials() {
               transform: `translate(-${slide * 50}%)`,
             }}
           >
-            {testimonials.map((testimonial, testimonialIdx) => {
-              return (
-                <Testimonial
-                  key={testimonialIdx}
-                  {...testimonial}
-                  mirror={testimonialIdx !== slide}
-                />
-              );
-            })}
+            {testimonials.map((testimonial, testimonialIdx) => (
+              <Testimonial
+                key={testimonialIdx}
+                testimonial={testimonial}
+                mirror={testimonialIdx !== slide}
+              />
+            ))}
           </div>
         </div>
 
