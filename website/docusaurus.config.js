@@ -74,6 +74,11 @@ module.exports = {
           href: 'https://forminer.com/?utm_source=uniforms&utm_medium=Menu_CTA&utm_campaign=Forminer_uniforms_menu_CTA&utm_id=Forminer_uniforms_menu',
           position: 'left',
         },
+        {
+          label: 'Custom solutions',
+          href: 'https://www.vazco.eu/',
+          position: 'left',
+        },
       ],
       logo: { alt: 'uniforms logo', src: 'img/uniforms.svg' },
     },
