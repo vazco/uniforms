@@ -104,7 +104,7 @@ describe('<AutoForm />', () => {
 
   describe('when render', () => {
     it('calls `onChange` before render', () => {
-      const field = () => null;
+      const field = jest.fn(() => null);
       const Field = connectField(field);
 
       // @ts-expect-error Convoluted AutoForm types
@@ -119,18 +119,14 @@ describe('<AutoForm />', () => {
       }
 
       render(
-        // @ts-expect-error Convoluted AutoForm types
-        <CustomAutoForm
-          autoField={Field}
-          model={model}
-          onChange={onChange}
-          schema={schema}
-        />,
+        // @ts-expect-error JSX element type 'CustomAutoForm' does not have any construct or call signatures.ts(2604)
+        <CustomAutoForm model={model} onChange={onChange} schema={schema} />,
       );
 
       expect(onChange).toHaveBeenCalledTimes(2);
       expect(onChange.mock.calls[0]).toEqual(expect.arrayContaining(['b', '']));
       expect(onChange.mock.calls[1]).toEqual(expect.arrayContaining(['c', '']));
+      expect(field).toHaveBeenCalled();
     });
 
     it('skips `onSubmit` until rendered (`autosave` = true)', async () => {
