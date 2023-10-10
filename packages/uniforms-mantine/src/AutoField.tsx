@@ -1,25 +1,17 @@
 import invariant from 'invariant';
-export { AutoFieldProps } from 'uniforms';
 import { createAutoField } from 'uniforms';
+export { AutoFieldProps } from 'uniforms';
 
-import BoolField from './BoolField';
-import DateField from './DateField';
-import ListField from './ListField';
-import NestField from './NestField';
-import NumField from './NumField';
-import RadioField from './RadioField';
-import SelectField from './SelectField';
-import TextField from './TextField';
+import BoolField from '/client/components/uniforms/base/BoolField';
+import ListField from '/client/components/uniforms/base/ListField';
+import NestField from '/client/components/uniforms/base/NestField';
+import NumField from '/client/components/uniforms/base/NumField';
+import SelectField from '/client/components/uniforms/base/SelectField';
+import TextField from '/client/components/uniforms/base/TextField';
 
 const AutoField = createAutoField(props => {
-  if (props.component) {
-    return props.component;
-  }
-
-  if (props.options) {
-    return props.checkboxes && props.fieldType !== Array
-      ? RadioField
-      : SelectField;
+  if (props.allowedValues) {
+    return SelectField;
   }
 
   switch (props.fieldType) {
@@ -27,8 +19,6 @@ const AutoField = createAutoField(props => {
       return ListField;
     case Boolean:
       return BoolField;
-    case Date:
-      return DateField;
     case Number:
       return NumField;
     case Object:

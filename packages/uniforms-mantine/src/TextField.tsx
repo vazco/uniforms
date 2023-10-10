@@ -1,15 +1,17 @@
+import { TextInput, TextInputProps } from '@mantine/core';
 import React, { Ref } from 'react';
-import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
-export type TextFieldProps = HTMLFieldProps<
+export type TextFieldProps = FieldProps<
   string,
-  HTMLDivElement,
+  TextInputProps,
   { inputRef?: Ref<HTMLInputElement> }
 >;
 
 function Text({
-  autoComplete,
   disabled,
+  error,
+  errorMessage,
   id,
   inputRef,
   label,
@@ -17,30 +19,29 @@ function Text({
   onChange,
   placeholder,
   readOnly,
+  showInlineError,
   type,
-  value,
+  value = '',
   ...props
 }: TextFieldProps) {
   return (
-    <div {...filterDOMProps(props)}>
-      {label && <label htmlFor={id}>{label}</label>}
-
-      <input
-        autoComplete={autoComplete}
-        disabled={disabled}
-        id={id}
-        name={name}
-        onChange={event => onChange(event.target.value)}
-        placeholder={placeholder}
-        readOnly={readOnly}
-        ref={inputRef}
-        type={type}
-        value={value ?? ''}
-      />
-    </div>
+    <TextInput
+      disabled={disabled}
+      error={showInlineError && !!error && errorMessage}
+      id={id}
+      name={name}
+      onChange={event => onChange(event.target.value)}
+      placeholder={placeholder}
+      label={label}
+      readOnly={readOnly}
+      ref={inputRef}
+      /* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- type comes from TextInputProps */
+      type={type ?? 'text'}
+      value={value ?? ''}
+      w="100%"
+      {...filterDOMProps(props)}
+    />
   );
 }
-
-Text.defaultProps = { type: 'text' };
 
 export default connectField<TextFieldProps>(Text, { kind: 'leaf' });

@@ -1,28 +1,36 @@
-import React, { HTMLProps, Ref } from 'react';
+import { Button, ButtonProps } from '@mantine/core';
+import React, { Ref } from 'react';
 import { Override, filterDOMProps, useForm } from 'uniforms';
 
 export type SubmitFieldProps = Override<
-  HTMLProps<HTMLInputElement>,
-  { inputRef?: Ref<HTMLInputElement>; value?: string }
+  ButtonProps,
+  { inputRef?: Ref<HTMLButtonElement>; label?: string }
 >;
 
-export default function SubmitField({
+function SubmitField({
+  children,
   disabled,
   inputRef,
-  readOnly,
-  value,
+  label = 'Submit',
   ...props
 }: SubmitFieldProps) {
-  const { error, state } = useForm();
+  const form = useForm();
 
   return (
-    <input
-      disabled={disabled === undefined ? !!(error || state.disabled) : disabled}
-      readOnly={readOnly}
+    <Button
+      disabled={
+        disabled === undefined
+          ? !!(form.error || form.state.disabled || form.submitting)
+          : disabled
+      }
       ref={inputRef}
       type="submit"
-      {...(value ? { value } : {})}
+      variant="filled"
       {...filterDOMProps(props)}
-    />
+    >
+      {children || label}
+    </Button>
   );
 }
+
+export default SubmitField;

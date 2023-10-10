@@ -1,19 +1,21 @@
+import { List } from '@mantine/core';
 import React, { HTMLProps } from 'react';
 import { filterDOMProps, useForm } from 'uniforms';
 
 export type ErrorsFieldProps = HTMLProps<HTMLDivElement>;
 
 export default function ErrorsField(props: ErrorsFieldProps) {
-  const { error, schema } = useForm();
-  return !error && !props.children ? null : (
+  const form = useForm();
+
+  return !form.error && !props.children ? null : (
     <div {...filterDOMProps(props)}>
       {props.children}
 
-      <ul>
-        {schema.getErrorMessages(error).map((message, index) => (
-          <li key={index}>{message}</li>
+      <List>
+        {form.schema.getErrorMessages(form.error).map((message, index) => (
+          <List.Item key={index}>{message}</List.Item>
         ))}
-      </ul>
+      </List>
     </div>
   );
 }

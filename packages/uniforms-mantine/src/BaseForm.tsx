@@ -1,13 +1,14 @@
 import { BaseForm } from 'uniforms';
 
-function Unstyled(parent: any) {
+function Mantine(parent: any) {
   class _ extends parent {
-    static Unstyled = Unstyled;
+    static Mantine = Mantine;
 
-    static displayName = `Unstyled${parent.displayName}`;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/restrict-template-expressions -- comes from uniform's core
+    static displayName = `Mantine${parent.displayName}`;
   }
 
   return _ as unknown as typeof BaseForm;
 }
 
-export default Unstyled(BaseForm);
+export default Mantine(BaseForm);

@@ -1,30 +1,27 @@
-import xor from 'lodash/xor';
+import {
+  Select as SelectMantine,
+  SelectItem,
+  SelectProps,
+  MultiSelect,
+  MultiSelectProps,
+} from '@mantine/core';
 import React, { Ref } from 'react';
-import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
-import type { Option } from './types';
-
-const base64: (string: string) => string =
-  typeof btoa === 'undefined'
-    ? /* istanbul ignore next */ x => Buffer.from(x).toString('base64')
-    : btoa;
-const escape = (x: string) => base64(encodeURIComponent(x)).replace(/=+$/, '');
-
-export type SelectFieldProps = HTMLFieldProps<
+export type SelectFieldProps = FieldProps<
   string | string[],
-  HTMLDivElement,
+  | Omit<SelectProps, 'maxDropdownHeight' | 'filter' | 'data'>
+  | Omit<MultiSelectProps, 'maxDropdownHeight' | 'filter' | 'data'>,
   {
-    checkboxes?: boolean;
-    inputRef?: Ref<HTMLSelectElement>;
-    options?: Option<string>[];
+    allowedValues: string[] | SelectItem[];
+    inputRef?: Ref<HTMLInputElement>;
   }
 >;
 
 function Select({
-  checkboxes,
+  allowedValues,
   disabled,
   fieldType,
-  id,
   inputRef,
   label,
   name,
@@ -33,80 +30,56 @@ function Select({
   readOnly,
   required,
   value,
-  options,
+  showInlineError,
+  error,
+  errorMessage,
   ...props
 }: SelectFieldProps) {
   const multiple = fieldType === Array;
+
+  if (multiple) {
+    return (
+      <MultiSelect
+        {...filterDOMProps(props)}
+        data={allowedValues}
+        disabled={disabled}
+        error={showInlineError && !!error && errorMessage}
+        ref={inputRef}
+        label={label}
+        name={name}
+        onChange={item => {
+          if (!readOnly) {
+            onChange(item);
+          }
+        }}
+        placeholder={placeholder}
+        required={required ?? false}
+        defaultValue={[]}
+        value={value as string[]}
+        sx={{ marginBottom: 12 }}
+      />
+    );
+  }
+
   return (
-    <div {...filterDOMProps(props)}>
-      {label && <label htmlFor={id}>{label}</label>}
-      {checkboxes ? (
-        options?.map(option => (
-          <div key={option.key ?? option.value}>
-            <input
-              checked={
-                fieldType === Array
-                  ? value?.includes(option.value)
-                  : value === option.value
-              }
-              disabled={option.disabled ?? disabled}
-              id={`${id}-${option.key ?? escape(option.value)}`}
-              name={name}
-              onChange={() => {
-                if (!readOnly) {
-                  onChange(
-                    fieldType === Array
-                      ? xor([option.value], value)
-                      : option.value,
-                  );
-                }
-              }}
-              type="checkbox"
-            />
-
-            <label htmlFor={`${id}-${option.key ?? escape(option.value)}`}>
-              {option.label ?? option.value}
-            </label>
-          </div>
-        ))
-      ) : (
-        <select
-          disabled={disabled}
-          id={id}
-          multiple={multiple}
-          name={name}
-          onChange={event => {
-            if (!readOnly) {
-              const item = event.target.value;
-              if (multiple) {
-                const clear = event.target.selectedIndex === -1;
-                onChange(clear ? [] : xor([item], value));
-              } else {
-                onChange(item !== '' ? item : undefined);
-              }
-            }
-          }}
-          ref={inputRef}
-          value={value ?? ''}
-        >
-          {(!!placeholder || !required || value === undefined) && !multiple && (
-            <option value="" disabled={required} hidden={required}>
-              {placeholder || label}
-            </option>
-          )}
-
-          {options?.map(option => (
-            <option
-              disabled={option.disabled}
-              key={option.key ?? option.value}
-              value={option.value}
-            >
-              {option.label ?? option.value}
-            </option>
-          ))}
-        </select>
-      )}
-    </div>
+    <SelectMantine
+      {...filterDOMProps(props)}
+      data={allowedValues}
+      disabled={disabled}
+      error={showInlineError && !!error && errorMessage}
+      ref={inputRef}
+      label={label}
+      name={name}
+      onChange={item => {
+        if (!readOnly) {
+          onChange(item ?? '');
+        }
+      }}
+      placeholder={placeholder}
+      required={required ?? false}
+      defaultValue={null}
+      value={value as string}
+    />
   );
 }
 

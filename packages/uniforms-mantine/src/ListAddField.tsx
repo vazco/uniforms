@@ -1,20 +1,31 @@
+import { Button, ButtonProps } from '@mantine/core';
+import { IconSquarePlus } from '@tabler/icons-react';
 import cloneDeep from 'lodash/cloneDeep';
 import React from 'react';
 import {
-  HTMLFieldProps,
+  ConnectedField,
+  FieldProps,
   connectField,
   filterDOMProps,
   joinName,
   useField,
 } from 'uniforms';
 
-export type ListAddFieldProps = HTMLFieldProps<unknown, HTMLSpanElement>;
+export type ListAddFieldProps = FieldProps<
+  unknown,
+  ButtonProps,
+  { icon?: JSX.Element; reversed?: boolean }
+>;
 
 function ListAdd({
   disabled,
+  icon = <IconSquarePlus size="1rem" />,
   name,
   readOnly,
+  size = 'sm',
   value,
+  variant = 'outline',
+  reversed = false,
   ...props
 }: ListAddFieldProps) {
   const nameParts = joinName(null, name);
@@ -26,32 +37,36 @@ function ListAdd({
   )[0];
 
   const limitNotReached =
-    !disabled && !(parent.maxCount! <= parent.value!.length);
-
-  function onAction(event: React.KeyboardEvent | React.MouseEvent) {
-    if (
-      limitNotReached &&
-      !readOnly &&
-      (!('key' in event) || event.key === 'Enter')
-    ) {
-      parent.onChange(parent.value!.concat([cloneDeep(value)]));
-    }
-  }
+    !disabled && !(parent.maxCount! <= (parent.value?.length ?? 0));
 
   return (
-    <span
+    <Button
       {...filterDOMProps(props)}
-      onClick={onAction}
-      onKeyDown={onAction}
-      role="button"
-      tabIndex={0}
+      fullWidth
+      disabled={!limitNotReached}
+      onClick={() => {
+        if (!readOnly) {
+          parent.onChange(
+            reversed
+              ? [cloneDeep(value)].concat(parent.value!)
+              : parent.value!.concat([cloneDeep(value)]),
+          );
+        }
+      }}
+      variant={variant ?? 'outline'}
+      size={size ?? 'sm'}
     >
-      +
-    </span>
+      {icon}
+    </Button>
   );
 }
+
+// There's no way to tell TypeScript NOT TO expand the type alias. Creating a
+// local type helps, at least in the current version.
+// https://github.com/microsoft/TypeScript/issues/34556
+type ListAddFieldType = ConnectedField<ListAddFieldProps>;
 
 export default connectField<ListAddFieldProps>(ListAdd, {
   initialValue: false,
   kind: 'leaf',
-});
+}) as ListAddFieldType;

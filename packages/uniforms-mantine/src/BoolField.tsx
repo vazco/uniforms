@@ -1,37 +1,36 @@
+import { Checkbox, CheckboxProps } from '@mantine/core';
 import React, { Ref } from 'react';
-import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
+import { connectField, FieldProps, filterDOMProps } from 'uniforms';
 
-export type BoolFieldProps = HTMLFieldProps<
+export type BoolFieldProps = FieldProps<
   boolean,
-  HTMLDivElement,
-  { inputRef?: Ref<HTMLInputElement> }
+  CheckboxProps,
+  { inputRef?: Ref<typeof Checkbox | any> }
 >;
 
 function Bool({
   disabled,
-  id,
   inputRef,
-  label,
   name,
   onChange,
   readOnly,
   value,
+  error,
+  errorMessage,
+  showInlineError,
   ...props
 }: BoolFieldProps) {
   return (
-    <div {...filterDOMProps(props)}>
-      <input
-        checked={value || false}
-        disabled={disabled}
-        id={id}
-        name={name}
-        onChange={() => !disabled && !readOnly && onChange(!value)}
-        ref={inputRef}
-        type="checkbox"
-      />
-
-      {label && <label htmlFor={id}>{label}</label>}
-    </div>
+    <Checkbox
+      checked={value || false}
+      disabled={disabled}
+      error={showInlineError && !!error && errorMessage}
+      name={name}
+      onChange={() => (readOnly ? undefined : onChange(!value))}
+      ref={inputRef}
+      label={props.label}
+      {...filterDOMProps(props)}
+    />
   );
 }
 

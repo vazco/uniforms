@@ -28,6 +28,8 @@
     { "path": "packages/uniforms-mui/tsconfig.esm.json" },
     { "path": "packages/uniforms-semantic/tsconfig.cjs.json" },
     { "path": "packages/uniforms-semantic/tsconfig.esm.json" },
+    {"path":  "packages/uniforms-mantine/tsconfig.cjs.json"},
+    {"path":  "packages/uniforms-mantine/tsconfig.ems.json"},
     { "path": "packages/uniforms-unstyled/tsconfig.cjs.json" },
     { "path": "packages/uniforms-unstyled/tsconfig.esm.json" }
   ]

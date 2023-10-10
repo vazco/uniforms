@@ -1,13 +1,15 @@
+import { ActionIcon, ActionIconProps } from '@mantine/core';
+import { IconTrash } from '@tabler/icons-react';
 import React from 'react';
 import {
-  HTMLFieldProps,
+  FieldProps,
   connectField,
   filterDOMProps,
   joinName,
   useField,
 } from 'uniforms';
 
-export type ListDelFieldProps = HTMLFieldProps<unknown, HTMLSpanElement>;
+export type ListDelFieldProps = FieldProps<unknown, ActionIconProps>;
 
 function ListDel({ disabled, name, readOnly, ...props }: ListDelFieldProps) {
   const nameParts = joinName(null, name);
@@ -20,28 +22,19 @@ function ListDel({ disabled, name, readOnly, ...props }: ListDelFieldProps) {
   )[0];
 
   disabled ||= readOnly || parent.minCount! >= parent.value!.length;
-  function onAction(
-    event:
-      | React.KeyboardEvent<HTMLSpanElement>
-      | React.MouseEvent<HTMLSpanElement, MouseEvent>,
-  ) {
-    if (!disabled && (!('key' in event) || event.key === 'Enter')) {
-      const value = parent.value!.slice();
-      value.splice(nameIndex, 1);
-      parent.onChange(value);
-    }
-  }
 
   return (
-    <span
+    <ActionIcon
       {...filterDOMProps(props)}
-      onClick={onAction}
-      onKeyDown={onAction}
-      role="button"
-      tabIndex={0}
+      disabled={disabled}
+      onClick={() => {
+        const value = parent.value!.slice();
+        value.splice(nameIndex, 1);
+        parent.onChange(value);
+      }}
     >
-      -
-    </span>
+      <IconTrash size="1rem" color="gray" />
+    </ActionIcon>
   );
 }
 

@@ -1,16 +1,18 @@
-import { ComponentType, Fragment, createElement } from 'react';
+import { ComponentType, createElement } from 'react';
 import { useForm } from 'uniforms';
 
-import AutoField from './AutoField';
+import AutoField from '/client/components/uniforms/base/AutoField';
 
 export type AutoFieldsProps = {
+  autoField?: ComponentType<{ name: string }>;
   element?: ComponentType | string;
   fields?: string[];
   omitFields?: string[];
 };
 
 export default function AutoFields({
-  element = Fragment,
+  autoField = AutoField,
+  element = 'div',
   fields,
   omitFields = [],
   ...props
@@ -22,6 +24,6 @@ export default function AutoFields({
     props,
     (fields ?? schema.getSubfields())
       .filter(field => !omitFields.includes(field))
-      .map(field => createElement(AutoField, { key: field, name: field })),
+      .map(field => createElement(autoField, { key: field, name: field })),
   );
 }
