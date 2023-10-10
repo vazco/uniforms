@@ -1,7 +1,7 @@
 import React from 'react';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 
-import AutoField from '/client/components/uniforms/base/AutoField';
+import AutoField from './AutoField';
 
 export type NestFieldProps = HTMLFieldProps<
   object,

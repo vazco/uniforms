@@ -1,6 +1,6 @@
 import { AutoForm } from 'uniforms';
 
-import ValidatedQuickForm from '/client/components/uniforms/base/ValidatedQuickForm';
+import ValidatedQuickForm from './ValidatedQuickForm';
 
 function Auto(parent: any) {
   class _ extends AutoForm.Auto(parent) {

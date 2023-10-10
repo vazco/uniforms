@@ -1,9 +1,9 @@
 import { QuickForm } from 'uniforms';
 
-import AutoField from '/client/components/uniforms/base/AutoField';
-import BaseForm from '/client/components/uniforms/base/BaseForm';
-import ErrorsField from '/client/components/uniforms/base/ErrorsField';
-import SubmitField from '/client/components/uniforms/base/SubmitField';
+import AutoField from './AutoField';
+import BaseForm from './BaseForm';
+import ErrorsField from './ErrorsField';
+import SubmitField from './SubmitField';
 
 function Quick(parent: any) {
   class _ extends QuickForm.Quick(parent) {

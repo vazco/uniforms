@@ -2,12 +2,12 @@ import invariant from 'invariant';
 import { createAutoField } from 'uniforms';
 export { AutoFieldProps } from 'uniforms';
 
-import BoolField from '/client/components/uniforms/base/BoolField';
-import ListField from '/client/components/uniforms/base/ListField';
-import NestField from '/client/components/uniforms/base/NestField';
-import NumField from '/client/components/uniforms/base/NumField';
-import SelectField from '/client/components/uniforms/base/SelectField';
-import TextField from '/client/components/uniforms/base/TextField';
+import BoolField from './BoolField';
+import ListField from './ListField';
+import NestField from './NestField';
+import NumField from './NumField';
+import SelectField from './SelectField';
+import TextField from './TextField';
 
 const AutoField = createAutoField(props => {
   if (props.allowedValues) {

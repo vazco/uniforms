@@ -1,8 +1,6 @@
-import { Input, NumberInput, NumberInputProps } from '@mantine/core';
+import { Input, NumberInput, NumberInputProps, Tooltip } from '@mantine/core';
 import React, { ReactNode, Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
-
-import HelpTooltip from '/client/components/HelpTooltip';
 
 export type NumFieldProps = FieldProps<
   number,
@@ -34,7 +32,7 @@ function Num({
         tooltip ? (
           <>
             <Input.Label required={required}>{label}</Input.Label>
-            {tooltip && <HelpTooltip label={tooltip} />}
+            {tooltip && <Tooltip label={tooltip}>{tooltip}</Tooltip>}
           </>
         ) : (
           label

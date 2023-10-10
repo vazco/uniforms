@@ -22,11 +22,11 @@
     "@docusaurus/preset-classic": "2.1.0",
     "@emotion/react": "11.7.1",
     "@emotion/styled": "11.6.0",
-    "@mantine/core": "^6.0.17",
+    "@mantine/core": "7.1.2",
     "@material-ui/core": "4.11.2",
     "@material-ui/icons": "4.11.2",
     "@mui/material": "5.4.1",
-    "@tabler/icons-react": "^2.24.0",
+    "@tabler/icons-react": "2.38.0",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "12.1.5",
     "@testing-library/user-event": "14.4.3",
@@ -79,5 +79,8 @@
   },
   "engines": {
     "npm": ">=7.0.0"
+  },
+  "devDependencies": {
+    "process": "^0.11.10"
   }
 }

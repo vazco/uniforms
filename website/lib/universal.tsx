@@ -4,6 +4,7 @@ import * as antd from 'uniforms-antd';
 import * as bootstrap3 from 'uniforms-bootstrap3';
 import * as bootstrap4 from 'uniforms-bootstrap4';
 import * as bootstrap5 from 'uniforms-bootstrap5';
+import * as mantine from 'uniforms-mantine';
 import * as material from 'uniforms-material';
 import * as mui from 'uniforms-mui';
 import * as semantic from 'uniforms-semantic';
@@ -38,6 +39,7 @@ export const themes = {
   bootstrap3,
   bootstrap4,
   bootstrap5,
+  mantine,
   material,
   mui,
   semantic,

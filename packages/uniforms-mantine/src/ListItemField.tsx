@@ -2,8 +2,8 @@ import { List, Group, Box } from '@mantine/core';
 import React, { ReactNode } from 'react';
 import { connectField } from 'uniforms';
 
-import AutoField from '/client/components/uniforms/base/AutoField';
-import ListDelField from '/client/components/uniforms/base/ListDelField';
+import AutoField from './AutoField';
+import ListDelField from './ListDelField';
 
 export type ListItemFieldProps = { children?: ReactNode; value?: unknown };
 

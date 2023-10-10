@@ -1,6 +1,6 @@
 import { ValidatedForm } from 'uniforms';
 
-import BaseForm from '/client/components/uniforms/base/BaseForm';
+import BaseForm from './BaseForm';
 
 function Validated(parent: any) {
   class _ extends ValidatedForm.Validated(parent) {

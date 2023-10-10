@@ -1,7 +1,7 @@
 import { ComponentType, createElement } from 'react';
 import { useForm } from 'uniforms';
 
-import AutoField from '/client/components/uniforms/base/AutoField';
+import AutoField from './AutoField';
 
 export type AutoFieldsProps = {
   autoField?: ComponentType<{ name: string }>;

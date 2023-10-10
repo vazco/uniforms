@@ -4,13 +4,13 @@ import {
   Input,
   List as ListMantine,
   ListProps,
+  Tooltip
 } from '@mantine/core';
 import React, { Children, cloneElement, isValidElement } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
-import HelpTooltip from '/client/components/HelpTooltip';
-import ListAddField from '/client/components/uniforms/base/ListAddField';
-import ListItemField from '/client/components/uniforms/base/ListItemField';
+import ListAddField from './ListAddField';
+import ListItemField from './ListItemField';
 
 const useStyles = createStyles({
   itemWrapper: {
@@ -49,7 +49,7 @@ function List({
         tooltip ? (
           <>
             <Input.Label required={required}>{label}</Input.Label>
-            <HelpTooltip label={tooltip} />
+            {tooltip && <Tooltip label={tooltip}>{tooltip}</Tooltip>}
           </>
         ) : (
           label
