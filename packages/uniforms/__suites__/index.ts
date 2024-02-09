@@ -10,6 +10,7 @@ export * from './HiddenField';
 export * from './ListAddField';
 export * from './ListDelField';
 export * from './ListField';
+export * from './ListItemField';
 export * from './LongTextField';
 export * from './NestField';
 export * from './NumField';
