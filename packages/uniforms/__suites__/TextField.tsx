@@ -14,6 +14,7 @@ type TestTextFieldOptions = {
   };
   testWrapClassName?: boolean;
   testRenderIcon?: boolean;
+  testMinMaxLength?: boolean;
 };
 
 export function testTextField(
@@ -310,6 +311,23 @@ export function testTextField(
       expect(screen.getByRole('textbox').closest('div')).toHaveClass(
         testClassName,
       );
+    });
+  }
+
+  if (options.testMinMaxLength) {
+    test('<TextField> - renders a input with minLength and maxLength', () => {
+      renderWithZod({
+        element: <TextField name="x" minLength={1} maxLength={10} />,
+        schema: z.object({ x: z.string() }),
+      });
+
+      const inputElement = screen.getByRole('textbox');
+      const wrapperElement = inputElement.parentNode;
+
+      expect(inputElement).toHaveAttribute('minLength', '1');
+      expect(inputElement).toHaveAttribute('maxLength', '10');
+      expect(wrapperElement).not.toHaveAttribute('minLength');
+      expect(wrapperElement).not.toHaveAttribute('maxLength');
     });
   }
 }
