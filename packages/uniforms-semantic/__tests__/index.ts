@@ -52,7 +52,10 @@ describe('@RTL', () => {
   suites.testQuickForm(theme.QuickForm);
   suites.testRadioField(theme.RadioField);
   suites.testSubmitField(theme.SubmitField);
-  suites.testTextField(theme.TextField);
+  suites.testTextField(theme.TextField, {
+    testWrapClassName: true,
+    testRenderIcon: true,
+  });
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
 });

@@ -12,6 +12,8 @@ type TestTextFieldOptions = {
       props: PropsWithChildren<{ themeOptions: any }>,
     ) => JSX.Element;
   };
+  testWrapClassName?: boolean;
+  testRenderIcon?: boolean;
 };
 
 export function testTextField(
@@ -283,6 +285,31 @@ export function testTextField(
       );
       expect(elements).toHaveLength(1);
       expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
+    });
+  }
+
+  if (options.testRenderIcon) {
+    test('<TextField> - renders an icon', () => {
+      const { container } = renderWithZod({
+        element: <TextField name="x" icon="small home" />,
+        schema: z.object({ x: z.string() }),
+      });
+
+      expect(container.querySelector('i')).toBeInTheDocument();
+    });
+  }
+
+  if (options.testWrapClassName) {
+    test('<TextField> - renders with a custom wrapClassName', () => {
+      const testClassName = 'test-class-name';
+      renderWithZod({
+        element: <TextField name="x" wrapClassName={testClassName} />,
+        schema: z.object({ x: z.string() }),
+      });
+
+      expect(screen.getByRole('textbox').closest('div')).toHaveClass(
+        testClassName,
+      );
     });
   }
 }
