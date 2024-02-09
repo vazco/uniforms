@@ -6,6 +6,14 @@ import z from 'zod';
 import { renderWithZod } from './render-zod';
 
 export function testTextField(TextField: ComponentType<any>) {
+  test('<TextField> - renders an input', () => {
+    renderWithZod({
+      element: <TextField name="x" />,
+      schema: z.object({ x: z.string() }),
+    });
+    expect(screen.getByRole('textbox')).toBeTruthy();
+  });
+
   test('<TextField> - renders an input with correct disabled state', () => {
     renderWithZod({
       element: <TextField name="x" disabled />,
@@ -132,5 +140,32 @@ export function testTextField(TextField: ComponentType<any>) {
       schema: z.object({ x: z.string() }),
     });
     expect(screen.getByLabelText(/^Y/)).toBeInTheDocument();
+  });
+
+  test('<TextField> - renders a wrapper with unknown props', () => {
+    const props = {
+      'data-x': 'x',
+      'data-y': 'y',
+      'data-z': 'z',
+    };
+    renderWithZod({
+      element: <TextField name="x" {...props} />,
+      schema: z.object({ x: z.string() }),
+    });
+
+    const querySelectorParams = Object.entries(props)
+      .map(([key, value]) => `[${key}="${value}"]`)
+      .join('');
+    const wrapper = screen.getByRole('textbox').closest(querySelectorParams);
+    expect(wrapper).toBeTruthy();
+  });
+
+  test('<TextField> - renders a input with correct type prop (password)', () => {
+    renderWithZod({
+      element: <TextField name="x" type="password" />,
+      schema: z.object({ x: z.string() }),
+    });
+    const wrapper = screen.getByLabelText(/^X( \*)?$/);
+    expect(wrapper).toHaveAttribute('type', 'password');
   });
 }
