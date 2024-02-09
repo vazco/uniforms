@@ -1,11 +1,25 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React, { ComponentType } from 'react';
+import React, { ComponentType, PropsWithChildren } from 'react';
 import z from 'zod';
 
 import { renderWithZod } from './render-zod';
 
-export function testTextField(TextField: ComponentType<any>) {
+type TestTextFieldOptions = {
+  testShowInlineError?: boolean;
+  testPassThemeProps?: {
+    ThemeProvider: (
+      props: PropsWithChildren<{ themeOptions: any }>,
+    ) => JSX.Element;
+  };
+};
+
+export function testTextField(
+  TextField: ComponentType<any>,
+  options: TestTextFieldOptions = {
+    testShowInlineError: true,
+  },
+) {
   test('<TextField> - renders an input', () => {
     renderWithZod({
       element: <TextField name="x" />,
@@ -168,4 +182,110 @@ export function testTextField(TextField: ComponentType<any>) {
     const wrapper = screen.getByLabelText(/^X( \*)?$/);
     expect(wrapper).toHaveAttribute('type', 'password');
   });
+
+  if (options.testShowInlineError) {
+    test('<TextField> - renders a TextField with correct error text (specified)', () => {
+      const errorMessage = 'Error';
+      renderWithZod({
+        element: (
+          <TextField
+            error={new Error()}
+            name="x"
+            showInlineError
+            errorMessage={errorMessage}
+          />
+        ),
+        schema: z.object({ x: z.string() }),
+      });
+
+      expect(screen.getByText(errorMessage)).toBeInTheDocument();
+    });
+
+    test('<TextField> - renders a TextField with correct error text (showInlineError=false)', () => {
+      const errorMessage = 'Error';
+      renderWithZod({
+        element: (
+          <TextField
+            error={new Error()}
+            name="x"
+            showInlineError={false}
+            errorMessage={errorMessage}
+          />
+        ),
+        schema: z.object({ x: z.string() }),
+      });
+
+      expect(screen.queryByText(errorMessage)).not.toBeInTheDocument();
+    });
+  }
+
+  if (options.testPassThemeProps) {
+    const { ThemeProvider } = options.testPassThemeProps;
+    if (!ThemeProvider) {
+      throw new Error('Missing ThemeProvider for testPassThemeProps');
+    }
+
+    test('<TextField> - default props are not passed when MUI theme props are specified', () => {
+      const themeOptions = {
+        props: { MuiTextField: { fullWidth: false, margin: 'normal' } },
+      };
+      const { container } = renderWithZod({
+        element: (
+          <ThemeProvider themeOptions={themeOptions}>
+            <TextField name="x" />
+          </ThemeProvider>
+        ),
+        schema: z.object({ x: z.string() }),
+      });
+
+      const elements = container.getElementsByClassName(
+        'MuiFormControl-marginNormal',
+      );
+      expect(elements).toHaveLength(1);
+      expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
+    });
+
+    test('<TextField> - default props are passed when MUI theme props are absent', () => {
+      const themeOptions = {};
+      const { container } = renderWithZod({
+        element: (
+          <ThemeProvider themeOptions={themeOptions}>
+            <TextField name="x" />
+          </ThemeProvider>
+        ),
+        schema: z.object({ x: z.string() }),
+      });
+
+      const elements = container.getElementsByClassName(
+        'MuiFormControl-marginDense',
+      );
+      expect(elements).toHaveLength(1);
+      expect(elements[0]).toHaveClass('MuiFormControl-fullWidth');
+    });
+
+    test('<TextField> - explicit props are passed when MUI theme props are specified', () => {
+      const themeOptions = {
+        props: { MuiTextField: { fullWidth: true, margin: 'dense' } },
+      };
+      const explicitProps = {
+        fullWidth: false,
+        margin: 'normal' as const,
+      };
+
+      const { container } = renderWithZod({
+        element: (
+          <ThemeProvider themeOptions={themeOptions}>
+            <TextField name="x" {...explicitProps} />
+          </ThemeProvider>
+        ),
+        schema: z.object({ x: z.string() }),
+      });
+
+      const elements = container.getElementsByClassName(
+        'MuiFormControl-marginNormal',
+      );
+      expect(elements).toHaveLength(1);
+      expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
+    });
+  }
 }

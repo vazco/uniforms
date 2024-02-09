@@ -1,3 +1,8 @@
+import createMuiTheme, {
+  ThemeOptions,
+} from '@material-ui/core/styles/createMuiTheme';
+import ThemeProvider from '@material-ui/styles/ThemeProvider/ThemeProvider';
+import React, { PropsWithChildren } from 'react';
 import * as theme from 'uniforms-material';
 import * as suites from 'uniforms/__suites__';
 
@@ -56,7 +61,20 @@ describe('@RTL', () => {
   suites.testQuickForm(theme.QuickForm);
   suites.testRadioField(theme.RadioField);
   suites.testSubmitField(theme.SubmitField);
-  suites.testTextField(theme.TextField);
+  suites.testTextField(theme.TextField, {
+    testPassThemeProps: {
+      ThemeProvider({
+        themeOptions,
+        ...props
+      }: PropsWithChildren<{ themeOptions: ThemeOptions }>) {
+        return (
+          <ThemeProvider {...props} theme={createMuiTheme(themeOptions)}>
+            {props.children}
+          </ThemeProvider>
+        );
+      },
+    },
+  });
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
 });
