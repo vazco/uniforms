@@ -221,9 +221,6 @@ export function testTextField(
 
   if (options.testPassThemeProps) {
     const { ThemeProvider } = options.testPassThemeProps;
-    if (!ThemeProvider) {
-      throw new Error('Missing ThemeProvider for testPassThemeProps');
-    }
 
     test('<TextField> - default props are not passed when MUI theme props are specified', () => {
       const themeOptions = {
