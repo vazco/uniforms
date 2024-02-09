@@ -55,7 +55,20 @@ describe('@RTL', () => {
   suites.testListField(theme.ListField, {
     getListAddField: screen => screen.getByText(/\+/),
   });
-  suites.testLongTextField(theme.LongTextField);
+  suites.testLongTextField(theme.LongTextField, {
+    testPassThemeProps: {
+      ThemeProvider({
+        themeOptions,
+        ...props
+      }: PropsWithChildren<{ themeOptions: ThemeOptions }>) {
+        return (
+          <ThemeProvider {...props} theme={createMuiTheme(themeOptions)}>
+            {props.children}
+          </ThemeProvider>
+        );
+      },
+    },
+  });
   suites.testNestField(theme.NestField, { skipInMuiTests: true });
   suites.testNumField(theme.NumField);
   suites.testQuickForm(theme.QuickForm);
