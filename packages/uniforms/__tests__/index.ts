@@ -1,4 +1,5 @@
 import * as uniforms from 'uniforms';
+import * as suites from 'uniforms/__suites__';
 
 it('exports everything', () => {
   expect(uniforms).toMatchObject({
@@ -17,4 +18,8 @@ it('exports everything', () => {
     useField: expect.any(Function),
     useForm: expect.any(Function),
   });
+});
+
+describe('@RTL', () => {
+  suites.testConnectField();
 });

@@ -3,6 +3,7 @@ export * from './AutoFields';
 export * from './AutoForm';
 export * from './BaseForm';
 export * from './BoolField';
+export * from './connectField';
 export * from './DateField';
 export * from './ErrorField';
 export * from './ErrorsField';
