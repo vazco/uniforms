@@ -1,5 +1,5 @@
 import { fireEvent, screen } from '@testing-library/react';
-import { omit } from 'lodash';
+import omit from 'lodash/omit';
 import React from 'react';
 import {
   BaseForm,
