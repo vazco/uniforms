@@ -200,7 +200,7 @@ export function testConnectField() {
   });
 
   test('connectField - when rendered with label', async () => {
-    const array = [
+    const labelVariants = [
       ['Props', '', 'Props'],
       ['Props', 'Schema', 'Props'],
       ['Props', undefined, 'Props'],
@@ -212,7 +212,7 @@ export function testConnectField() {
       [undefined, undefined, ''],
     ];
 
-    array.map(([propLabel, schemaLabel, resultLabel], index) => {
+    labelVariants.map(([propLabel, schemaLabel, resultLabel], index) => {
       const schema = {
         another: { type: String, optional: true },
         field: { type: Object, label: schemaLabel },
