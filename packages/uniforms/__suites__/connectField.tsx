@@ -143,9 +143,7 @@ export function testConnectField() {
 
     const value = 'some value';
     const input = screen.getByTestId('field');
-    fireEvent.change(input, {
-      target: { value },
-    });
+    fireEvent.change(input, { target: { value } });
 
     expect(onChange).toBeCalledWith('another', value);
   });
@@ -164,9 +162,7 @@ export function testConnectField() {
     const input = screen.getByTestId('field');
     const value = 'test';
 
-    fireEvent.change(input, {
-      target: { value },
-    });
+    fireEvent.change(input, { target: { value } });
 
     expect(onChange).toBeCalledWith('field.subfield', value);
   });
