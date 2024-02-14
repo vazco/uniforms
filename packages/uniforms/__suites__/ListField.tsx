@@ -206,7 +206,7 @@ export function testListField(
   }
 
   if (disableInlineError) {
-    test('<ListField> - renders correct error text (specified)', async () => {
+    test('<ListField> - renders correct error text (showInlineError=false)', async () => {
       const error = new Error();
 
       render(
