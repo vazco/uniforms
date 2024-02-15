@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import React from 'react';
 import type { QuickForm as QuickFormType } from 'uniforms';
 import { ZodBridge } from 'uniforms-bridge-zod';
@@ -23,8 +23,8 @@ export function testQuickForm(QuickForm: QuickFormType) {
   const bridge = new ZodBridge({ schema });
 
   test('<QuickForm> - renders', () => {
-    render(<QuickForm data-testid="form" schema={bridge} />);
-    expect(screen.getByTestId('form')).toBeInTheDocument();
+    const { container } = render(<QuickForm schema={bridge} />);
+    expect(container.getElementsByTagName('form').length).toBe(1);
   });
 
   test('<QuickForm> - when rendered with custom fields, renders `AutoField` for each field', () => {
