@@ -69,9 +69,9 @@ export function testBaseForm(BaseForm: typeof UniformsBaseForm) {
         schema={schema}
         onSubmit={onSubmit}
         data-testid="form"
-        modelTransform={(mode, model) => {
-          return mode === 'submit' ? { submit: 1 } : model;
-        }}
+        modelTransform={(mode, model) =>
+          mode === 'submit' ? { submit: 1 } : model
+        }
       />,
     );
     fireEvent.submit(screen.getByTestId('form'));
