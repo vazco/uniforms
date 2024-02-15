@@ -67,7 +67,7 @@ export function testQuickForm(QuickForm: QuickFormType) {
     expect(container.getElementsByClassName('submitOverride').length).toBe(1);
   });
 
-  test('<QuickForm> - when rendered with children, renders children', () => {
+  test('<QuickForm> - renders children', () => {
     const { container } = render(
       <QuickForm schema={bridge}>
         <div />
