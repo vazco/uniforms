@@ -31,6 +31,7 @@ export function testBaseForm(BaseForm: typeof UniformsBaseForm) {
         <div />
       </BaseForm>,
     );
+
     expect(container.getElementsByTagName('div')).toHaveLength(3);
   });
 
@@ -74,6 +75,7 @@ export function testBaseForm(BaseForm: typeof UniformsBaseForm) {
         }
       />,
     );
+
     fireEvent.submit(screen.getByTestId('form'));
     expect(onSubmit).toHaveBeenLastCalledWith({ submit: 1 });
   });
