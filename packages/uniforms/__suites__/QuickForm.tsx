@@ -24,25 +24,25 @@ export function testQuickForm(QuickForm: QuickFormType) {
 
   test('<QuickForm> - renders', () => {
     const { container } = render(<QuickForm schema={bridge} />);
-    expect(container.getElementsByTagName('form').length).toBe(1);
+    expect(container.getElementsByTagName('form')).toHaveLength(1);
   });
 
   test('<QuickForm> - when rendered with custom fields, renders `AutoField` for each field', () => {
     const { container } = render(<TestForm schema={bridge} />);
 
-    expect(container.getElementsByClassName('auto').length).toBe(3);
+    expect(container.getElementsByClassName('auto')).toHaveLength(3);
   });
 
   test('<QuickForm> - when rendered with custom fields, renders `ErrorField`', () => {
     const { container } = render(<TestForm schema={bridge} />);
 
-    expect(container.getElementsByClassName('errors').length).toBe(1);
+    expect(container.getElementsByClassName('errors')).toHaveLength(1);
   });
 
   test('<QuickForm> - when rendered with custom fields, renders `SubmitField`', () => {
     const { container } = render(<TestForm schema={bridge} />);
 
-    expect(container.getElementsByClassName('submit').length).toBe(1);
+    expect(container.getElementsByClassName('submit')).toHaveLength(1);
   });
 
   test('<QuickForm> - when rendered with custom fields in `props`, renders `ErrorsField`', () => {
@@ -53,7 +53,7 @@ export function testQuickForm(QuickForm: QuickFormType) {
       />,
     );
 
-    expect(container.getElementsByClassName('errorsOverride').length).toBe(1);
+    expect(container.getElementsByClassName('errorsOverride')).toHaveLength(1);
   });
 
   test('<QuickForm> - when rendered with custom fields in `props`, renders `SubmitField`', () => {
@@ -64,7 +64,7 @@ export function testQuickForm(QuickForm: QuickFormType) {
       />,
     );
 
-    expect(container.getElementsByClassName('submitOverride').length).toBe(1);
+    expect(container.getElementsByClassName('submitOverride')).toHaveLength(1);
   });
 
   test('<QuickForm> - renders children', () => {
@@ -74,6 +74,6 @@ export function testQuickForm(QuickForm: QuickFormType) {
       </QuickForm>,
     );
 
-    expect(container.getElementsByTagName('div').length).toBe(1);
+    expect(container.getElementsByTagName('div')).toHaveLength(1);
   });
 }
