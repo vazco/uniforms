@@ -43,28 +43,12 @@ export function testListField(
     test('<ListField> - renders correct error style', () => {
       const error = new Error();
 
-      const { container } = render(
-        <ListField name="x" label="ListFieldLabel" error={error} />,
-        {
-          x: Array,
-          'x.$': String,
-        },
-      );
-
-      expect(container.getElementsByClassName('ant-list')[0]).toHaveStyle(
-        'borderColor: rgb(255, 85, 0)',
-      );
-    });
-
-    test('<ListField> - renders correct error style (with specified style prop)', () => {
-      const error = new Error();
-
-      const { container } = render(
+      render(
         <ListField
           name="x"
           label="ListFieldLabel"
           error={error}
-          style={{ marginLeft: '8px' }}
+          data-testid="field"
         />,
         {
           x: Array,
@@ -72,9 +56,29 @@ export function testListField(
         },
       );
 
-      expect(container.getElementsByClassName('ant-list')[0]).toHaveStyle(
-        'marginLeft: 8px',
+      expect(screen.getByTestId('field')).toHaveStyle(
+        'borderColor: rgb(255, 85, 0)',
       );
+    });
+
+    test('<ListField> - renders correct error style (with specified style prop)', () => {
+      const error = new Error();
+
+      render(
+        <ListField
+          name="x"
+          label="ListFieldLabel"
+          error={error}
+          style={{ marginLeft: '8px' }}
+          data-testid="field"
+        />,
+        {
+          x: Array,
+          'x.$': String,
+        },
+      );
+
+      expect(screen.getByTestId('field')).toHaveStyle('marginLeft: 8px');
     });
   }
 
@@ -141,7 +145,7 @@ export function testListField(
   });
 
   test('<ListField> - renders children with correct name (children)', () => {
-    const Child = jest.fn(() => <div data-testid="field" />) as FC<any>;
+    const Child = jest.fn(() => <div />) as FC<any>;
     render(
       <ListField name="x">
         <Child name="$" />
