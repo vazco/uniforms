@@ -72,7 +72,7 @@ export function testConnectField() {
     expect(Field.Component).toEqual(Test);
   });
 
-  test('connectField - when called, does not set default value', () => {
+  test('connectField - when called, does not set default options value', () => {
     const Field = connectField(Test);
 
     expect(Field.options).toEqual(undefined);
