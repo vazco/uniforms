@@ -25,7 +25,7 @@ export function testBaseForm(BaseForm: typeof UniformsBaseForm) {
 
   test('<BaseForm> - when rendered, have correct children', () => {
     const { container } = render(
-      <BaseForm disabled schema={schema}>
+      <BaseForm schema={schema}>
         <div />
         <div />
         <div />
@@ -36,14 +36,7 @@ export function testBaseForm(BaseForm: typeof UniformsBaseForm) {
   });
 
   test('<BaseForm> - when submitted, calls `onSubmit` once', () => {
-    render(
-      <BaseForm
-        model={model}
-        schema={schema}
-        onSubmit={onSubmit}
-        data-testid="form"
-      />,
-    );
+    render(<BaseForm schema={schema} onSubmit={onSubmit} data-testid="form" />);
 
     fireEvent.submit(screen.getByTestId('form'));
     expect(onSubmit).toHaveBeenCalledTimes(1);
