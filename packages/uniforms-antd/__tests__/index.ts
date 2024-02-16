@@ -49,6 +49,7 @@ describe('@RTL', () => {
     getListAddField: screen => screen.getByRole('img', { name: 'plus-square' }),
   });
   suites.testListItemField(theme.ListItemField, {
+    isSelectCombobox: true,
     useInputAsSelectField: true,
   });
   suites.testLongTextField(theme.LongTextField);

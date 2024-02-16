@@ -7,6 +7,7 @@ import { renderWithZod } from './render-zod';
 export function testListItemField(
   ListItemField: ComponentType<any>,
   options?: {
+    isSelectCombobox?: boolean;
     useInputAsSelectField?: boolean;
   },
 ) {
@@ -46,6 +47,15 @@ export function testListItemField(
 
     if (options?.useInputAsSelectField) {
       expect(container.getElementsByTagName('input')).toHaveLength(3);
+
+      if (options?.isSelectCombobox) {
+        expect(screen.getByRole('combobox')).toBeInTheDocument();
+      } else {
+        expect(container.getElementsByTagName('input')?.[2]).toHaveAttribute(
+          'name',
+          'select',
+        );
+      }
     } else {
       expect(container.getElementsByTagName('input')).toHaveLength(2);
       expect(container.getElementsByTagName('select')).toHaveLength(1);
