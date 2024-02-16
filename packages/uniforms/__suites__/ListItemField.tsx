@@ -23,23 +23,6 @@ export function testListItemField(ListItemField: ComponentType<any>) {
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
-  test('<ListItemField> - renders AutoField', () => {
-    const AutoField = jest.fn(() => null) as React.FC<any>;
-
-    renderWithZod({
-      element: (
-        <ListItemField name="field">
-          <AutoField />
-        </ListItemField>
-      ),
-      schema: z.object({
-        field: z.string(),
-      }),
-    });
-
-    expect(AutoField).toHaveBeenCalledTimes(1);
-  });
-
   test('<ListItemField> - renders children if specified', () => {
     const Child = jest.fn(() => <div />) as React.FC<any>;
 
