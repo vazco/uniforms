@@ -5,14 +5,18 @@ import { ZodBridge } from 'uniforms-bridge-zod';
 import z from 'zod';
 
 export function testQuickForm(QuickForm: QuickFormType) {
+  const AutoField = jest.fn(() => <div />) as any;
+  const ErrorsField = jest.fn(() => <div />) as any;
+  const SubmitField = jest.fn(() => <div />) as any;
+
   // @ts-expect-error QuickForm is not a valid Component.
   class TestForm extends QuickForm<any> {
     // eslint-disable-next-line react/display-name
-    getAutoField = () => () => <i className="auto" />;
+    getAutoField = () => () => <AutoField />;
     // eslint-disable-next-line react/display-name
-    getErrorsField = () => () => <i className="errors" />;
+    getErrorsField = () => () => <ErrorsField />;
     // eslint-disable-next-line react/display-name
-    getSubmitField = () => () => <i className="submit" />;
+    getSubmitField = () => () => <SubmitField />;
   }
 
   const schema = z.object({
@@ -22,58 +26,64 @@ export function testQuickForm(QuickForm: QuickFormType) {
   });
   const bridge = new ZodBridge({ schema });
 
+  afterEach(() => {
+    AutoField.mockClear();
+    ErrorsField.mockClear();
+    SubmitField.mockClear();
+  });
+
   test('<QuickForm> - renders', () => {
     const { container } = render(<QuickForm schema={bridge} />);
     expect(container.getElementsByTagName('form')).toHaveLength(1);
   });
 
   test('<QuickForm> - when rendered with custom fields, renders `AutoField` for each field', () => {
-    const { container } = render(<TestForm schema={bridge} />);
+    render(<TestForm schema={bridge} />);
 
-    expect(container.getElementsByClassName('auto')).toHaveLength(3);
+    expect(AutoField).toHaveBeenCalledTimes(3);
   });
 
   test('<QuickForm> - when rendered with custom fields, renders `ErrorField`', () => {
-    const { container } = render(<TestForm schema={bridge} />);
+    render(<TestForm schema={bridge} />);
 
-    expect(container.getElementsByClassName('errors')).toHaveLength(1);
+    expect(ErrorsField).toHaveBeenCalledTimes(1);
   });
 
   test('<QuickForm> - when rendered with custom fields, renders `SubmitField`', () => {
-    const { container } = render(<TestForm schema={bridge} />);
+    render(<TestForm schema={bridge} />);
 
-    expect(container.getElementsByClassName('submit')).toHaveLength(1);
+    expect(SubmitField).toHaveBeenCalledTimes(1);
   });
 
   test('<QuickForm> - when rendered with custom fields in `props`, renders `ErrorsField`', () => {
-    const { container } = render(
-      <TestForm
-        schema={bridge}
-        errorsField={() => <i className="errorsOverride" />}
-      />,
+    const ErrorsOverrideField = jest.fn(() => <div />) as React.FC<any>;
+
+    render(
+      <TestForm schema={bridge} errorsField={() => <ErrorsOverrideField />} />,
     );
 
-    expect(container.getElementsByClassName('errorsOverride')).toHaveLength(1);
+    expect(ErrorsOverrideField).toHaveBeenCalledTimes(1);
   });
 
   test('<QuickForm> - when rendered with custom fields in `props`, renders `SubmitField`', () => {
-    const { container } = render(
-      <TestForm
-        schema={bridge}
-        submitField={() => <i className="submitOverride" />}
-      />,
+    const SubmitOverrideField = jest.fn(() => <div />) as React.FC<any>;
+
+    render(
+      <TestForm schema={bridge} submitField={() => <SubmitOverrideField />} />,
     );
 
-    expect(container.getElementsByClassName('submitOverride')).toHaveLength(1);
+    expect(SubmitOverrideField).toHaveBeenCalledTimes(1);
   });
 
   test('<QuickForm> - renders children', () => {
-    const { container } = render(
+    const Child = jest.fn(() => <div />) as React.FC<any>;
+
+    render(
       <QuickForm schema={bridge}>
-        <div />
+        <Child />
       </QuickForm>,
     );
 
-    expect(container.getElementsByTagName('div')).toHaveLength(1);
+    expect(Child).toHaveBeenCalledTimes(1);
   });
 }
