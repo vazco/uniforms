@@ -1,60 +1,60 @@
 import { screen } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
 import React, { ComponentType } from 'react';
 import z from 'zod';
 
 import { renderWithZod } from './render-zod';
 
 export function testListItemField(ListItemField: ComponentType<any>) {
-  test('<ListItemField> - renders ListItemField', () => {
+  test('<ListItemField> - works', () => {
     renderWithZod({
-      element: <ListItemField name="x" />,
-      schema: z.object({ x: z.number() }),
+      element: <ListItemField name="field" />,
+      schema: z.object({ field: z.string() }),
+    });
+
+    expect(screen.getByLabelText('Field')).toBeInTheDocument();
+  });
+
+  test('<ListItemField> - renders ListDelField', () => {
+    renderWithZod({
+      element: <ListItemField name="field" />,
+      schema: z.object({ field: z.string() }),
     });
 
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
-  test('<ListItemField> - aaa', () => {
-    renderWithZod({
-      element: <ListItemField name="x" />,
-      schema: z.object({ x: z.string() }),
-      model: { x: 'Testttt' },
+  test('<ListItemField> - renders AutoField', () => {
+    const { container } = renderWithZod({
+      element: (
+        <>
+          <ListItemField name="string" />
+          <ListItemField name="number" />
+          <ListItemField name="select" />
+        </>
+      ),
+      schema: z.object({
+        string: z.string(),
+        number: z.number(),
+        select: z.enum(['a', 'b']),
+      }),
     });
 
-    expect(screen.getByRole('textbox')).toHaveAttribute('value', 'Testttt');
+    expect(container.getElementsByTagName('input')).toHaveLength(2);
+    expect(container.getElementsByTagName('select')).toHaveLength(1);
   });
 
-  //   Bootstrap only
-  test('<ListItemField> - renders custom del field', () => {
+  test('<ListItemField> - renders children if specified', () => {
+    const Child = jest.fn(() => <div />) as React.FC<any>;
+
     renderWithZod({
       element: (
-        <ListItemField
-          name="x"
-          removeIcon={<div data-testid="asdf">Test</div>}
-        />
+        <ListItemField name="field">
+          <Child />
+        </ListItemField>
       ),
-      schema: z.object({ x: z.string() }),
+      schema: z.object({ field: z.string() }),
     });
 
-    expect(screen.getByTestId('asdf')).toBeInTheDocument();
-  });
-
-  test('<ListItemField> - renders ListDelField', () => {
-    renderWithZod({
-      element: <ListItemField name="x" />,
-      schema: z.object({ x: z.string() }),
-    });
-
-    expect(screen.getAllByRole('button')).toHaveLength(1);
-  });
-
-  test('<ListItemField> - renders AutoField', () => {
-    renderWithZod({
-      element: <ListItemField name="x" />,
-      schema: z.object({ x: z.number() }),
-    });
-
-    expect(screen.getAllByRole('spinbutton')).toHaveLength(1);
+    expect(Child).toHaveBeenCalledTimes(1);
   });
 }
