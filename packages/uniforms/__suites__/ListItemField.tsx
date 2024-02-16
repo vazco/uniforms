@@ -7,7 +7,7 @@ import { renderWithZod } from './render-zod';
 export function testListItemField(
   ListItemField: ComponentType<any>,
   options?: {
-    useInputAsSelect?: boolean;
+    useInputAsSelectField?: boolean;
   },
 ) {
   test('<ListItemField> - works', () => {
@@ -44,7 +44,7 @@ export function testListItemField(
       }),
     });
 
-    if (options?.useInputAsSelect) {
+    if (options?.useInputAsSelectField) {
       expect(container.getElementsByTagName('input')).toHaveLength(3);
     } else {
       expect(container.getElementsByTagName('input')).toHaveLength(2);

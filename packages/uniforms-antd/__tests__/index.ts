@@ -48,7 +48,9 @@ describe('@RTL', () => {
   suites.testListField(theme.ListField, {
     getListAddField: screen => screen.getByRole('img', { name: 'plus-square' }),
   });
-  suites.testListItemField(theme.ListItemField, { useInputAsSelect: true });
+  suites.testListItemField(theme.ListItemField, {
+    useInputAsSelectField: true,
+  });
   suites.testLongTextField(theme.LongTextField);
   // FIXME: AntD number input doesn't work with new RTL test implementation
   // suites.testNumField(antd.NumField);
