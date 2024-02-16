@@ -47,6 +47,7 @@ describe('@RTL', () => {
   suites.testListField(theme.ListField, {
     getListAddField: screen => screen.getByText(/\+/),
   });
+  suites.testListItemField(theme.ListItemField, { useInputAsSelect: true });
   suites.testLongTextField(theme.LongTextField);
   suites.testNestField(theme.NestField, { skipInMuiTests: true });
   suites.testNumField(theme.NumField);

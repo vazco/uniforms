@@ -4,11 +4,16 @@ import z from 'zod';
 
 import { renderWithZod } from './render-zod';
 
-export function testListItemField(ListItemField: ComponentType<any>) {
+export function testListItemField(
+  ListItemField: ComponentType<any>,
+  options?: {
+    useInputAsSelect?: boolean;
+  },
+) {
   test('<ListItemField> - works', () => {
     renderWithZod({
       element: <ListItemField name="field" />,
-      schema: z.object({ field: z.string() }),
+      schema: z.object({ field: z.string().optional() }),
     });
 
     expect(screen.getByLabelText('Field')).toBeInTheDocument();
@@ -39,8 +44,12 @@ export function testListItemField(ListItemField: ComponentType<any>) {
       }),
     });
 
-    expect(container.getElementsByTagName('input')).toHaveLength(2);
-    expect(container.getElementsByTagName('select')).toHaveLength(1);
+    if (options?.useInputAsSelect) {
+      expect(container.getElementsByTagName('input')).toHaveLength(3);
+    } else {
+      expect(container.getElementsByTagName('input')).toHaveLength(2);
+      expect(container.getElementsByTagName('select')).toHaveLength(1);
+    }
   });
 
   test('<ListItemField> - renders children if specified', () => {
