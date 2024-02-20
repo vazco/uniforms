@@ -55,6 +55,7 @@ describe('@RTL', () => {
   suites.testTextField(theme.TextField, {
     testWrapClassName: true,
     testRenderIcon: true,
+    testShowInlineError: true,
   });
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
