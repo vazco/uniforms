@@ -75,6 +75,7 @@ describe('@RTL', () => {
   suites.testRadioField(theme.RadioField);
   suites.testSubmitField(theme.SubmitField);
   suites.testTextField(theme.TextField, {
+    testShowInlineError: true,
     testPassThemeProps: {
       ThemeProvider({
         themeOptions,
