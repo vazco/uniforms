@@ -292,7 +292,15 @@ export function testTextField(
   if (options.testRenderIcon) {
     test('<TextField> - renders an icon', () => {
       const { container } = renderWithZod({
-        element: <TextField name="x" icon="small home" />,
+        element: <TextField name="x" icon="small home" iconLeft />,
+        schema: z.object({ x: z.string() }),
+      });
+
+      expect(container.querySelector('i')).toBeInTheDocument();
+    });
+    test('<TextField> - renders an iconLeft', () => {
+      const { container } = renderWithZod({
+        element: <TextField name="x" iconLeft="small home" />,
         schema: z.object({ x: z.string() }),
       });
 
