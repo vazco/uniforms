@@ -46,12 +46,13 @@ describe('connectField', () => {
     props: UnknownObject & {
       onChange: OnChange<string>;
       label?: string | React.ReactNode;
+      id: string;
     },
   ) => {
     return props.children ? (
       <>
         {props.label ? (
-          <label htmlFor={props.id as string} data-testid="label">
+          <label htmlFor={props.id} data-testid="label">
             {props.label}
           </label>
         ) : null}
@@ -65,7 +66,7 @@ describe('connectField', () => {
     ) : (
       <>
         {props.label ? (
-          <label htmlFor={props.id as string} data-testid="label">
+          <label htmlFor={props.id} data-testid="label">
             {props.label}
           </label>
         ) : null}
