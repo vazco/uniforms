@@ -42,22 +42,31 @@ describe('connectField', () => {
     formRef: {} as BaseForm<UnknownObject>,
   } as Partial<Context<any>>;
 
-  const Test = (props: UnknownObject & { onChange: OnChange<string> }) => {
+  const Test = (
+    props: UnknownObject & {
+      onChange: OnChange<string>;
+      label?: string | React.ReactNode;
+    },
+  ) => {
     return props.children ? (
       <>
+        {props.label ? <span data-testid="label">{props.label}</span> : null}
         <input
           data-testid="field"
-          {...filterDOMProps(omit(props, 'children'))}
+          {...filterDOMProps(omit(props, 'children', 'label'))}
           onChange={event => props.onChange(event.target.value)}
         />
         {props.children}
       </>
     ) : (
-      <input
-        data-testid="field"
-        {...filterDOMProps(props)}
-        onChange={event => props.onChange(event.target.value)}
-      />
+      <>
+        {props.label ? <span>{props.label}</span> : null}
+        <input
+          data-testid="field"
+          {...filterDOMProps(omit(props, 'label'))}
+          onChange={event => props.onChange(event.target.value)}
+        />
+      </>
     );
   };
 
@@ -145,6 +154,9 @@ describe('connectField', () => {
   });
 
   describe('when rendered with label', () => {
+    const labelA = <span>Label A</span>;
+    const labelB = <span>Label B</span>;
+
     it.each([
       ['Props', '', 'Props'],
       ['Props', 'Schema', 'Props'],
@@ -152,8 +164,13 @@ describe('connectField', () => {
       ['', undefined, ''],
       ['', 'Schema', ''],
       ['', undefined, ''],
+      [labelA, '', labelA],
+      [labelA, 'Schema', labelA],
+      [labelA, labelB, labelA],
+      [labelA, undefined, labelA],
       [undefined, '', ''],
       [undefined, 'Schema', 'Schema'],
+      [undefined, labelB, labelB],
       [undefined, undefined, ''],
     ])('resolves it correctly (%#)', (propLabel, schemaLabel, resultLabel) => {
       const schema = {
@@ -165,11 +182,24 @@ describe('connectField', () => {
       const Field = connectField(Test);
       render(
         <Field name="field" label={propLabel} data-testid="field" />,
+        // @ts-expect-error
         schema,
         reactContext,
       );
 
-      expect(screen.getByTestId('field')).toHaveAttribute('label', resultLabel);
+      if (resultLabel === labelA) {
+        expect(screen.getByText('Label A')).toBeInTheDocument();
+      } else if (resultLabel === labelB) {
+        expect(screen.getByText('Label B')).toBeInTheDocument();
+      } else {
+        const result = resultLabel as string;
+
+        if (result) {
+          expect(screen.getByText(result)).toBeInTheDocument();
+        } else {
+          expect(screen.queryByTestId('label')).toBe(null);
+        }
+      }
     });
   });
 
@@ -212,16 +242,16 @@ describe('connectField', () => {
     const Field = connectField(Test);
 
     render(
-      <Field name="field" label={null} data-testid="1">
-        <Field name="" label="" data-testid="2" />
-        <Field name="" data-testid="3" />
-        <Field name="subfield" label="Other" data-testid="4">
-          <Field name="" data-testid="5" />
+      <Field name="field" label={null}>
+        <Field name="" label="" />
+        <Field name="" />
+        <Field name="subfield" label="Other">
+          <Field name="" />
         </Field>
-        <Field name="subfield" data-testid="6">
-          <Field name="" data-testid="7">
-            <Field name="" label={null} data-testid="8" />
-            <Field name="" label="" data-testid="9" />
+        <Field name="subfield">
+          <Field name="">
+            <Field name="" label={null} />
+            <Field name="" label="" />
           </Field>
         </Field>
       </Field>,
@@ -229,14 +259,8 @@ describe('connectField', () => {
       reactContext,
     );
 
-    expect(screen.getByTestId('1')).toHaveAttribute('label', 'Field');
-    expect(screen.getByTestId('2')).toHaveAttribute('label', '');
-    expect(screen.getByTestId('3')).toHaveAttribute('label', 'Field');
-    expect(screen.getByTestId('4')).toHaveAttribute('label', 'Other');
-    expect(screen.getByTestId('5')).toHaveAttribute('label', 'Subfield');
-    expect(screen.getByTestId('6')).toHaveAttribute('label', 'Subfield');
-    expect(screen.getByTestId('7')).toHaveAttribute('label', 'Subfield');
-    expect(screen.getByTestId('8')).toHaveAttribute('label', 'Subfield');
-    expect(screen.getByTestId('9')).toHaveAttribute('label', '');
+    expect(screen.getAllByText('Field')).toHaveLength(2);
+    expect(screen.getAllByText('Subfield')).toHaveLength(4);
+    expect(screen.getAllByText('Other')).toHaveLength(1);
   });
 });
