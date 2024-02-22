@@ -51,11 +51,11 @@ describe('connectField', () => {
   ) => {
     return props.children ? (
       <>
-        {props.label ? (
+        {props.label && (
           <label htmlFor={props.id} data-testid="label">
             {props.label}
           </label>
-        ) : null}
+        )}
         <input
           data-testid="field"
           {...filterDOMProps(omit(props, 'children', 'label'))}
