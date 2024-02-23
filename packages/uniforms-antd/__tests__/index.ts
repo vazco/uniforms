@@ -50,6 +50,7 @@ describe('@RTL', () => {
     testTooltip: true,
     testStyle: true,
   });
+  suites.testListItemField(theme.ListItemField);
   suites.testLongTextField(theme.LongTextField);
   // FIXME: AntD number input doesn't work with new RTL test implementation
   // suites.testNumField(antd.NumField);

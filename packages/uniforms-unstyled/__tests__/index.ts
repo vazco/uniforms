@@ -47,6 +47,7 @@ describe('@RTL', () => {
     getListAddField: screen => screen.getByRole('button'),
     testError: false,
   });
+  suites.testListItemField(theme.ListItemField);
   suites.testLongTextField(theme.LongTextField, {
     skipShowInlineErrorTests: true,
   });
