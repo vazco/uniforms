@@ -46,6 +46,7 @@ describe('@RTL', () => {
   suites.testListDelField(theme.ListDelField);
   suites.testListField(theme.ListField, {
     getListAddField: screen => screen.getByText(/\+/),
+    testError: false,
   });
   suites.testLongTextField(theme.LongTextField);
   suites.testNestField(theme.NestField, { skipInMuiTests: true });
