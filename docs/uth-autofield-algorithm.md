@@ -46,7 +46,7 @@ const AutoField = createAutoField(props => {
 
 ## Overriding `AutoField`
 
-To make it possible, all `AutoFields` created with the `createAutoField` are configurable. To adjust the components, use the React context available in `AutoField.componentDetectorContext`. You can use it as often as needed - in most apps once will be enough. Example:
+If you want to alter the default behavior of `AutoField` and render a different component based on the props, you can do it using the React context available in `AutoField.componentDetectorContext`. You can use it as often as needed - once will be enough in most apps. Example:
 
 ```tsx
 <AutoField.componentDetectorContext.Provider value={(props, uniforms) => /* ... */}>
@@ -54,7 +54,7 @@ To make it possible, all `AutoFields` created with the `createAutoField` are con
 </AutoField.componentDetectorContext.Provider>
 ```
 
-If you want to add an exception and then fallback to the existing algorithm, use `AutoField.defaultComponentDetector`. Example:
+If you want to change the detector only partially, i.e., to render one additional field, and in other cases, use the default algorithm as a fallback, return `AutoField.defaultComponentDetector`. Example:
 
 ```tsx
 <AutoField.componentDetectorContext.Provider
