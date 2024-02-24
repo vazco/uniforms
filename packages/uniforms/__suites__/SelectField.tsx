@@ -110,7 +110,7 @@ export function testSelectField(
     if (options?.antdTests) {
       expect(selectField.getAttribute('name')).toBe('x');
     } else if (options?.skipInMuiTests) {
-      expect(screen.getByText('X')).toBeDefined();
+      expect(screen.getByText('X')).toBeInTheDocument();
     } else {
       const select = selectField.querySelector('select');
       expect(select?.getAttribute('name')).toBe('x');
@@ -173,11 +173,44 @@ export function testSelectField(
     expect(select.querySelector('option')?.getAttribute('disabled')).toBeNull();
   });
 
-  // test('<SelectField checkboxes> - renders a set of checkboxes', () => {});
+  test('<SelectField checkboxes> - renders a set of checkboxes', () => {
+    renderWithZod({
+      element: <SelectField checkboxes name="x" />,
+      schema: z.object({ x: z.enum(['a', 'b']) }),
+    });
+    const checkboxes =
+      options?.skipInMuiTests || options?.antdTests
+        ? screen.getByText('X').closest('body')?.querySelectorAll('input')
+        : screen.getAllByRole('checkbox');
+    expect(checkboxes).toHaveLength(2);
+  });
 
-  // test('<SelectField checkboxes> - renders a set of checkboxes with correct disabled state', () => {});
+  test('<SelectField checkboxes> - renders a set of checkboxes with correct disabled state', () => {
+    renderWithZod({
+      element: <SelectField checkboxes name="x" disabled />,
+      schema: z.object({ x: z.enum(['a', 'b']) }),
+    });
+    const checkboxes =
+      options?.skipInMuiTests || options?.antdTests
+        ? screen.getByText('X').closest('body')?.querySelectorAll('input')
+        : screen.getAllByRole('checkbox');
+    expect(checkboxes?.[0]).toBeDisabled();
+    expect(checkboxes?.[1]).toBeDisabled();
+  });
 
-  // test('<SelectField checkboxes> - renders a set of checkboxes with correct readOnly state', () => {});
+  test('<SelectField checkboxes> - renders a set of checkboxes with correct readOnly state', () => {
+    const onChange = jest.fn();
+    renderWithZod({
+      element: <SelectField checkboxes onChange={onChange} name="x" readOnly />,
+      schema: z.object({ x: z.enum(['a', 'b']) }),
+    });
+    const checkboxes =
+      options?.skipInMuiTests || options?.antdTests
+        ? screen.getByText('X').closest('body')?.querySelectorAll('input')
+        : screen.getAllByRole('checkbox');
+    checkboxes?.[1].click();
+    expect(onChange).not.toHaveBeenCalled();
+  });
 
   // TODO: refactor a bit
   test('<SelectField checkboxes> - renders a set of checkboxes with correct id (inherited)', () => {
@@ -196,7 +229,7 @@ export function testSelectField(
     expect(checkboxes?.[0]).toHaveAttribute('id');
   });
 
-  test.only('<SelectField checkboxes> - renders a set of checkboxes with correct id (specified)', () => {
+  test('<SelectField checkboxes> - renders a set of checkboxes with correct id (specified)', () => {
     renderWithZod({
       element: <SelectField checkboxes name="x" id="y" />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
@@ -234,7 +267,19 @@ export function testSelectField(
 
   // test('<SelectField checkboxes> - renders a set of checkboxes with correct value (specified)', () => {});
 
-  // test('<SelectField checkboxes> - renders a set of checkboxes which correctly reacts on change', () => {});
+  test('<SelectField checkboxes> - renders a set of checkboxes which correctly reacts on change', () => {
+    renderWithZod({
+      element: <SelectField checkboxes name="x" />,
+      schema: z.object({ x: z.enum(['a', 'b']) }),
+    });
+    const checkbox =
+      options?.antdTests || options?.skipInMuiTests
+        ? screen.getByDisplayValue('b')
+        : screen.getByRole('checkbox', { name: 'b' });
+    expect(checkbox).not.toBeChecked();
+    checkbox?.click();
+    expect(checkbox).toBeChecked();
+  });
 
   // test('<SelectField checkboxes> - renders a set of checkboxes which correctly reacts on change (array check)', () => {});
 
