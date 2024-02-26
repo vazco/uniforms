@@ -4,10 +4,10 @@ import { ZodBridge } from 'uniforms-bridge-zod';
 import z from 'zod';
 
 export function testQuickForm(QuickForm: ComponentType<any>) {
+  const bridge = new ZodBridge({ schema: z.object({}) });
+
   test('<QuickForm> - renders', () => {
-    const schema = z.object({});
-    const bridge = new ZodBridge({ schema });
-    const screen = render(<QuickForm data-testid="form" schema={bridge} />);
-    expect(screen.getByTestId('form')).toBeInTheDocument();
+    const { container } = render(<QuickForm schema={bridge} />);
+    expect(container.getElementsByTagName('form')).toHaveLength(1);
   });
 }
