@@ -43,23 +43,23 @@ export function testSelectField(SelectField: ComponentType<any>) {
   test('<SelectField> - renders a select which correctly reacts on change (uncheck) by value', () => {
     const onChange = jest.fn();
     renderWithZod({
-      element: <SelectField name="x" onChange={onChange} />,
+      element: <SelectField fieldType={Array} name="x" onChange={onChange} />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const select = screen.getByRole('combobox');
+    const select = screen.getByRole('listbox');
     fireEvent.change(select, { target: { value: '' } });
-    expect(onChange).toHaveBeenCalledWith(undefined);
+    expect(onChange).toHaveBeenCalledWith([]);
   });
 
   test('<SelectField> - renders a select which correctly reacts on change (uncheck) by selectedIndex', () => {
     const onChange = jest.fn();
     renderWithZod({
-      element: <SelectField name="x" onChange={onChange} />,
+      element: <SelectField fieldType={Array} name="x" onChange={onChange} />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const select = screen.getByRole('combobox');
+    const select = screen.getByRole('listbox');
     fireEvent.change(select, { target: { selectedIndex: -1 } });
-    expect(onChange).toHaveBeenCalledWith(undefined);
+    expect(onChange).toHaveBeenCalledWith([]);
   });
 
   // FIXME: This test is not working as expected
