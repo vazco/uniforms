@@ -40,6 +40,28 @@ export function testSelectField(SelectField: ComponentType<any>) {
     expect(onChange).not.toHaveBeenCalled();
   });
 
+  test('<SelectField> - renders a select which correctly reacts on change (uncheck) by value', () => {
+    const onChange = jest.fn();
+    renderWithZod({
+      element: <SelectField name="x" onChange={onChange} />,
+      schema: z.object({ x: z.enum(['a', 'b']) }),
+    });
+    const select = screen.getByRole('combobox');
+    fireEvent.change(select, { target: { value: '' } });
+    expect(onChange).toHaveBeenCalledWith(undefined);
+  });
+
+  test('<SelectField> - renders a select which correctly reacts on change (uncheck) by selectedIndex', () => {
+    const onChange = jest.fn();
+    renderWithZod({
+      element: <SelectField name="x" onChange={onChange} />,
+      schema: z.object({ x: z.enum(['a', 'b']) }),
+    });
+    const select = screen.getByRole('combobox');
+    fireEvent.change(select, { target: { selectedIndex: -1 } });
+    expect(onChange).toHaveBeenCalledWith(undefined);
+  });
+
   // FIXME: This test is not working as expected
   // test('<SelectField checkboxes> - renders a set of inline checkboxes', () => {
   //   renderWithZod({
@@ -110,46 +132,6 @@ export function testSelectField(SelectField: ComponentType<any>) {
     const select = screen.getByRole('combobox');
     fireEvent.change(select, { target: { selectedIndex: -1 } });
     expect(onChange).toHaveBeenCalledWith(undefined);
-  });
-
-  test('<SelectField checkboxes> - renders a set of checkboxes which correctly reacts on change (array check)', () => {
-    const onChange = jest.fn();
-    renderWithZod({
-      element: (
-        <SelectField
-          fieldType={Array}
-          value={[]}
-          checkboxes
-          name="x"
-          onChange={onChange}
-        />
-      ),
-      schema: z.object({ x: z.enum(['a', 'b']) }),
-    });
-    const checkboxes = screen.getAllByRole('checkbox');
-    fireEvent.click(checkboxes?.[1]);
-    expect(onChange).toHaveBeenCalledWith(['b']);
-    fireEvent.click(checkboxes?.[0]);
-    expect(onChange).toHaveBeenCalledWith(['a']);
-  });
-
-  test('<SelectField checkboxes> - renders a set of checkboxes which correctly reacts on change (array uncheck)', () => {
-    const onChange = jest.fn();
-    renderWithZod({
-      element: (
-        <SelectField
-          fieldType={Array}
-          value={['a']}
-          checkboxes
-          name="x"
-          onChange={onChange}
-        />
-      ),
-      schema: z.object({ x: z.enum(['a', 'b']) }),
-    });
-    const checkboxes = screen.getAllByRole('checkbox');
-    fireEvent.click(checkboxes?.[0]);
-    expect(onChange).toHaveBeenCalledWith([]);
   });
 
   test('<SelectField> - renders a select with correct id (inherited)', () => {
@@ -461,6 +443,46 @@ export function testSelectField(SelectField: ComponentType<any>) {
     const checkboxes = screen.getAllByRole('checkbox');
     fireEvent.click(checkboxes?.[1]);
     expect(onChange).toHaveBeenCalledWith('b');
+  });
+
+  test('<SelectField checkboxes> - renders a set of checkboxes which correctly reacts on change (array check)', () => {
+    const onChange = jest.fn();
+    renderWithZod({
+      element: (
+        <SelectField
+          fieldType={Array}
+          value={[]}
+          checkboxes
+          name="x"
+          onChange={onChange}
+        />
+      ),
+      schema: z.object({ x: z.enum(['a', 'b']) }),
+    });
+    const checkboxes = screen.getAllByRole('checkbox');
+    fireEvent.click(checkboxes?.[1]);
+    expect(onChange).toHaveBeenCalledWith(['b']);
+    fireEvent.click(checkboxes?.[0]);
+    expect(onChange).toHaveBeenCalledWith(['a']);
+  });
+
+  test('<SelectField checkboxes> - renders a set of checkboxes which correctly reacts on change (array uncheck)', () => {
+    const onChange = jest.fn();
+    renderWithZod({
+      element: (
+        <SelectField
+          fieldType={Array}
+          value={['a']}
+          checkboxes
+          name="x"
+          onChange={onChange}
+        />
+      ),
+      schema: z.object({ x: z.enum(['a', 'b']) }),
+    });
+    const checkboxes = screen.getAllByRole('checkbox');
+    fireEvent.click(checkboxes?.[0]);
+    expect(onChange).toHaveBeenCalledWith([]);
   });
 
   test('<SelectField checkboxes> - renders a label', () => {
