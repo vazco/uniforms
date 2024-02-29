@@ -40,6 +40,24 @@ export function testSelectField(SelectField: ComponentType<any>) {
     expect(onChange).not.toHaveBeenCalled();
   });
 
+  test('<SelectField> - ignores selection with readOnly state ', () => {
+    const onChange = jest.fn();
+    renderWithZod({
+      element: (
+        <SelectField
+          onChange={onChange}
+          data-testid="select-field"
+          name="x"
+          readOnly
+        />
+      ),
+      schema: z.object({ x: z.enum(['a', 'b']) }),
+    });
+    const select = screen.getByTestId('select-field').querySelector('select');
+    fireEvent.change(select!, { target: { value: 'b' } });
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
   test('<SelectField> - renders a select which correctly reacts on change (uncheck) by value', () => {
     const onChange = jest.fn();
     renderWithZod({
@@ -189,6 +207,14 @@ export function testSelectField(SelectField: ComponentType<any>) {
     selectOptions.forEach(option => {
       expect(screen.getByText(option.toUpperCase())).toBeInTheDocument();
     });
+  });
+
+  test('<SelectField> - renders a select with correct placeholder (fallback)', () => {
+    renderWithZod({
+      element: <SelectField name="x" label="y" placeholder="" />,
+      schema: z.object({ x: z.enum(['a', 'b']) }),
+    });
+    expect(screen.getByText('y')).toBeInTheDocument();
   });
 
   test('<SelectField> - renders a select with correct placeholder (implicit)', () => {
