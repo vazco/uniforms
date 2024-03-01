@@ -1,10 +1,16 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, Screen } from '@testing-library/react';
 import React, { ComponentType } from 'react';
 import z from 'zod';
 
 import { renderWithZod } from './render-zod';
+import { skipTestIf } from './skipTestIf';
 
-export function testSelectField(SelectField: ComponentType<any>) {
+export function testSelectField(
+  SelectField: ComponentType<any>,
+  options?: {
+    getCheckboxInlineOption?: (screen: Screen) => Element | null;
+  },
+) {
   test('<SelectField> - renders a select', () => {
     renderWithZod({
       element: <SelectField data-testid="select-field" name="x" />,
@@ -90,17 +96,6 @@ export function testSelectField(SelectField: ComponentType<any>) {
     fireEvent.change(select, { target: { selectedIndex: 0 } });
     expect(onChange).toHaveBeenCalledWith(['a']);
   });
-
-  // FIXME: This test is not working as expected
-  // test('<SelectField checkboxes> - renders a set of inline checkboxes', () => {
-  //   renderWithZod({
-  //     element: <SelectField checkboxes inline name="x" />,
-  //     schema: z.object({ x: z.enum(['a', 'b']) }),
-  //   });
-  //   expect(
-  //     screen.getByLabelText('X').closest('.form-check-inline'),
-  //   ).toBeInTheDocument();
-  // });
 
   test('<SelectField> - renders a select which correctly reacts on change (uncheck) by value', () => {
     const onChange = jest.fn();
@@ -341,6 +336,17 @@ export function testSelectField(SelectField: ComponentType<any>) {
     fireEvent.click(checkboxes?.[0]);
     expect(onChange).not.toHaveBeenCalled();
   });
+
+  skipTestIf(!options?.getCheckboxInlineOption)(
+    '<SelectField checkboxes> - renders a set of inline checkboxes',
+    () => {
+      renderWithZod({
+        element: <SelectField checkboxes inline name="x" />,
+        schema: z.object({ x: z.enum(['a', 'b']) }),
+      });
+      expect(options?.getCheckboxInlineOption?.(screen)).toBeInTheDocument();
+    },
+  );
 
   test('<SelectField checkboxes> - renders a set of checkboxes with correct id (inherited)', () => {
     renderWithZod({
