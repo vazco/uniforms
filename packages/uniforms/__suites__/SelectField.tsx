@@ -80,6 +80,17 @@ export function testSelectField(SelectField: ComponentType<any>) {
     expect(onChange).toHaveBeenCalledWith([]);
   });
 
+  test('<SelectField> - renders a select which correctly reacts on change (checked) by selectedIndex', () => {
+    const onChange = jest.fn();
+    renderWithZod({
+      element: <SelectField fieldType={Array} name="x" onChange={onChange} />,
+      schema: z.object({ x: z.enum(['a', 'b']) }),
+    });
+    const select = screen.getByRole('listbox');
+    fireEvent.change(select, { target: { selectedIndex: 0 } });
+    expect(onChange).toHaveBeenCalledWith(['a']);
+  });
+
   // FIXME: This test is not working as expected
   // test('<SelectField checkboxes> - renders a set of inline checkboxes', () => {
   //   renderWithZod({
@@ -89,45 +100,6 @@ export function testSelectField(SelectField: ComponentType<any>) {
   //   expect(
   //     screen.getByLabelText('X').closest('.form-check-inline'),
   //   ).toBeInTheDocument();
-  // });
-
-  // FIXME: This test is not working as expected
-  // test.only('<SelectField> - renders a select which correctly reacts on change (first value)', () => {
-  //   const onChange = jest.fn();
-  //   renderWithZod({
-  //     element: (
-  //       <SelectField
-  //         data-testid="select"
-  //         fieldType={Array}
-  //         name="x"
-  //         onChange={onChange}
-  //       />
-  //     ),
-  //     schema: z.object({ x: z.enum(['a', 'b']) }),
-  //   });
-  //   const select = screen.getByTestId('select');
-  //   fireEvent.change(select, { target: { value: 'a' } });
-  //   expect(onChange).toHaveBeenCalledWith(['a']);
-  // });
-
-  // FIXME: This test is not working as expected
-  // test.only('<SelectField> - renders a select which correctly reacts on change (next value)', () => {
-  //   const onChange = jest.fn();
-  //   renderWithZod({
-  //     element: (
-  //       <SelectField
-  //         data-testid="select"
-  //         fieldType={Array}
-  //         value={['a']}
-  //         name="x"
-  //         onChange={onChange}
-  //       />
-  //     ),
-  //     schema: z.object({ x: z.enum(['a', 'b']) }),
-  //   });
-  //   const select = screen.getByTestId('select');
-  //   fireEvent.change(select, { target: { value: 'b' } });
-  //   expect(onChange).toHaveBeenCalledWith(['a', 'b']);
   // });
 
   test('<SelectField> - renders a select which correctly reacts on change (uncheck) by value', () => {
@@ -232,6 +204,15 @@ export function testSelectField(SelectField: ComponentType<any>) {
     });
     const select = screen.getByRole('combobox');
     expect(select).toHaveValue('a');
+  });
+
+  test('<SelectField> - renders a select with missing value (model)', () => {
+    renderWithZod({
+      element: <SelectField name="x" value={undefined} />,
+      schema: z.object({ x: z.enum(['a', 'b']) }),
+    });
+    const select = screen.getByRole('combobox');
+    expect(select).toHaveValue('');
   });
 
   test('<SelectField> - renders a select with correct value (model)', () => {
