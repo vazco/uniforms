@@ -57,4 +57,10 @@ jobs:
           force_orphan: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./website/build
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '20.x'
+      - name: Create a concentrated doc file
+        run: ./scripts/concatenateDocs.sh . uniformsConcentratedDocs.md
+      - name: Upload the concentrated doc file as an artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: uniformsConcentratedDocs-${{ github.sha }}-${{ github.run_id }}-$(date +'%Y-%m-%d').md
+          path: uniformsConcentratedDocs.md
