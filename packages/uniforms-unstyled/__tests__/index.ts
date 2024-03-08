@@ -59,7 +59,7 @@ describe('@RTL', () => {
   suites.testQuickForm(theme.QuickForm);
   suites.testRadioField(theme.RadioField);
   suites.testSubmitField(theme.SubmitField);
-  suites.testTextField(theme.TextField);
+  suites.testTextField(theme.TextField, { testShowInlineError: false });
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
 });

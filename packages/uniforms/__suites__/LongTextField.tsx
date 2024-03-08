@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React, { ComponentType } from 'react';
+import React, { ComponentType, PropsWithChildren } from 'react';
 import z from 'zod';
 
 import { renderWithZod } from './render-zod';
@@ -10,6 +10,11 @@ export function testLongTextField(
   options?: {
     skipShowInlineErrorTests?: boolean;
     testMinMaxLength?: boolean;
+    testPassThemeProps?: {
+      ThemeProvider: (
+        props: PropsWithChildren<{ themeOptions: any }>,
+      ) => JSX.Element;
+    };
   },
 ) {
   test('<LongTextField> - renders a textarea with correct disabled state', () => {
@@ -132,6 +137,73 @@ export function testLongTextField(
       });
 
       expect(screen.getByText(/^Error$/)).toBeInTheDocument();
+    });
+  }
+
+  if (options?.testPassThemeProps) {
+    const { ThemeProvider } = options.testPassThemeProps;
+
+    test('<LongTextField> - default props are not passed when MUI theme props are specified', () => {
+      const themeOptions = {
+        props: { MuiTextField: { fullWidth: false, margin: 'normal' } },
+      };
+      const { container } = renderWithZod({
+        element: (
+          <ThemeProvider themeOptions={themeOptions}>
+            <LongTextField name="x" />
+          </ThemeProvider>
+        ),
+        schema: z.object({ x: z.string() }),
+      });
+
+      const elements = container.getElementsByClassName(
+        'MuiFormControl-marginNormal',
+      );
+      expect(elements).toHaveLength(1);
+      expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
+    });
+
+    test('<LongTextField> - default props are passed when MUI theme props are absent', () => {
+      const themeOptions = {};
+      const { container } = renderWithZod({
+        element: (
+          <ThemeProvider themeOptions={themeOptions}>
+            <LongTextField name="x" />
+          </ThemeProvider>
+        ),
+        schema: z.object({ x: z.string() }),
+      });
+
+      const elements = container.getElementsByClassName(
+        'MuiFormControl-marginDense',
+      );
+      expect(elements).toHaveLength(1);
+      expect(elements[0]).toHaveClass('MuiFormControl-fullWidth');
+    });
+
+    test('<LongTextField> - explicit props are passed when MUI theme props are specified', () => {
+      const themeOptions = {
+        props: { MuiTextField: { fullWidth: true, margin: 'dense' } },
+      };
+      const explicitProps = {
+        fullWidth: false,
+        margin: 'normal' as const,
+      };
+
+      const { container } = renderWithZod({
+        element: (
+          <ThemeProvider themeOptions={themeOptions}>
+            <LongTextField name="x" {...explicitProps} />
+          </ThemeProvider>
+        ),
+        schema: z.object({ x: z.string() }),
+      });
+
+      const elements = container.getElementsByClassName(
+        'MuiFormControl-marginNormal',
+      );
+      expect(elements).toHaveLength(1);
+      expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
     });
   }
 
