@@ -33,9 +33,22 @@ jobs:
         uses: codecov/codecov-action@v3.1.1
         with:
           fail_ci_if_error: true
+  Docs:
+    runs-on: ubuntu-latest
+    needs: CI
+    if: success() && github.event_name == 'push' && github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+      - name: Use Node.js 20
+        uses: actions/setup-node@v3.6.0
+        with:
+          cache: npm
+          node-version: 20
+      - name: Install
+        run: npm ci --no-audit
       - name: Build docs
         run: npm --prefix website run build
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '20.x'
       - name: Deploy docs
         uses: peaceiris/actions-gh-pages@v3.9.2
         with:
