@@ -14,10 +14,6 @@ export function renderWithZod<Props, Schema extends ZodObject<ZodRawShape>>({
 } & Omit<Partial<Context<TypeOf<Schema>>>, 'schema'>) {
   return renderOnScreen(element, {
     wrapper({ children }) {
-      if (!schema) {
-        return <>{children}</>;
-      }
-
       const value = {
         changed: false,
         changedMap: Object.create(null),

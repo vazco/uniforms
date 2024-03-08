@@ -2,6 +2,7 @@
 /.parcel-cache
 /coverage
 /lerna-debug.log
+.DS_Store
 
 /node_modules
 /npm-debug.log

@@ -16,6 +16,7 @@ export * from './NestField';
 export * from './NumField';
 export * from './QuickForm';
 export * from './RadioField';
+export * from './SelectField';
 export * from './SubmitField';
 export * from './TextField';
 export * from './ValidatedForm';
