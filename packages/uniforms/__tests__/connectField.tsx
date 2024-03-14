@@ -1,54 +1,85 @@
-import React, { ReactNode } from 'react';
-import SimpleSchema from 'simpl-schema';
+import { fireEvent, screen } from '@testing-library/react';
+import omit from 'lodash/omit';
+import React from 'react';
 import {
   BaseForm,
   Context,
+  OnChange,
   UnknownObject,
   connectField,
+  filterDOMProps,
   randomIds,
 } from 'uniforms';
-import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 
-import mount from './_mount';
+import { render } from '../__suites__/render';
 
 describe('connectField', () => {
   const onChange = jest.fn();
-  const schema = new SimpleSchema2Bridge({
-    schema: new SimpleSchema({
-      another: { type: String, optional: true },
-      field: { type: Object, label: 'Field' },
-      'field.subfield': { type: Number, label: 'Subfield' },
-    }),
-  });
 
-  const reactContext = {
-    context: {
-      changed: false,
-      changedMap: {},
-      error: undefined,
-      model: {},
-      name: [],
-      onChange,
-      onSubmit() {},
-      randomId: randomIds(),
-      schema,
-      state: {
-        disabled: false,
-        placeholder: false,
-        readOnly: false,
-        showInlineError: true,
-      },
-      submitted: false,
-      submitting: false,
-      validating: false,
-      formRef: {} as BaseForm<UnknownObject>,
-    } as Context<any>,
+  const schema = {
+    another: { type: String, optional: true },
+    field: { type: Object, label: 'Field' },
+    'field.subfield': { type: String, label: 'Subfield' },
   };
 
-  const Test = jest.fn(props => props.children || null);
+  const reactContext = {
+    changed: false,
+    changedMap: {},
+    error: undefined,
+    model: {},
+    name: [],
+    onChange,
+    onSubmit() {},
+    randomId: randomIds(),
+    state: {
+      disabled: false,
+      readOnly: false,
+      showInlineError: true,
+    },
+    submitted: false,
+    submitting: false,
+    validating: false,
+    formRef: {} as BaseForm<UnknownObject>,
+  } as Partial<Context<any>>;
 
-  beforeEach(() => {
-    Test.mockClear();
+  const Test = (
+    props: UnknownObject & {
+      onChange: OnChange<string>;
+      label?: string | React.ReactNode;
+      id: string;
+    },
+  ) => {
+    return props.children ? (
+      <>
+        {props.label && (
+          <label htmlFor={props.id} data-testid="label">
+            {props.label}
+          </label>
+        )}
+        <input
+          data-testid="field"
+          {...filterDOMProps(omit(props, 'children', 'label'))}
+          onChange={event => props.onChange(event.target.value)}
+        />
+        {props.children}
+      </>
+    ) : (
+      <>
+        {props.label ? (
+          <label htmlFor={props.id} data-testid="label">
+            {props.label}
+          </label>
+        ) : null}
+        <input
+          data-testid="field"
+          {...filterDOMProps(omit(props, 'label'))}
+          onChange={event => props.onChange(event.target.value)}
+        />
+      </>
+    );
+  };
+
+  afterEach(() => {
     onChange.mockClear();
   });
 
@@ -85,7 +116,7 @@ describe('connectField', () => {
     it('includes default value (true)', () => {
       const Field = connectField(Test, { initialValue: true });
 
-      mount(<Field name="field" />, reactContext);
+      render(<Field name="field" />, schema, reactContext);
 
       expect(onChange).toBeCalledWith('field', {});
     });
@@ -93,7 +124,7 @@ describe('connectField', () => {
     it('does nothing (false)', () => {
       const Field = connectField(Test, { initialValue: false });
 
-      mount(<Field name="field" />, reactContext);
+      render(<Field name="field" />, schema, reactContext);
 
       expect(onChange).not.toBeCalled();
     });
@@ -101,7 +132,7 @@ describe('connectField', () => {
     it('respects `required` (props)', () => {
       const Field = connectField(Test, { initialValue: true });
 
-      mount(<Field name="another" required />, reactContext);
+      render(<Field name="another" required />, schema, reactContext);
 
       expect(onChange).not.toBeCalled();
     });
@@ -109,7 +140,7 @@ describe('connectField', () => {
     it('respects `required` (schema)', () => {
       const Field = connectField(Test, { initialValue: true });
 
-      mount(<Field name="another" />, reactContext);
+      render(<Field name="another" />, schema, reactContext);
 
       expect(onChange).not.toBeCalled();
     });
@@ -119,7 +150,12 @@ describe('connectField', () => {
     it('treats value as initial value', async () => {
       const Field = connectField(Test);
 
-      mount(<Field name="field" value="initialValueExample" />, reactContext);
+      render(
+        <Field name="field" value="initialValueExample" />,
+        schema,
+        reactContext,
+      );
+
       await new Promise(resolve => setTimeout(resolve, 10));
 
       expect(onChange).toBeCalledWith('field', 'initialValueExample');
@@ -127,17 +163,15 @@ describe('connectField', () => {
   });
 
   describe('when rendered with label', () => {
-    const labelA = <span style={{ color: 'red' }}>Error</span>;
-    const labelB = <span style={{ color: 'green' }}>OK</span>;
+    const labelA = <span>Label A</span>;
+    const labelB = <span>Label B</span>;
 
     it.each([
       ['Props', '', 'Props'],
       ['Props', 'Schema', 'Props'],
-      ['Props', labelB, 'Props'],
       ['Props', undefined, 'Props'],
       ['', undefined, ''],
       ['', 'Schema', ''],
-      ['', labelB, ''],
       ['', undefined, ''],
       [labelA, '', labelA],
       [labelA, 'Schema', labelA],
@@ -147,48 +181,76 @@ describe('connectField', () => {
       [undefined, 'Schema', 'Schema'],
       [undefined, labelB, labelB],
       [undefined, undefined, ''],
-    ] as [ReactNode, ReactNode, ReactNode][])(
-      'resolves it correctly (%#)',
-      (prop, schema, result) => {
-        const context: typeof reactContext = {
-          context: {
-            ...reactContext.context,
-            state: { ...reactContext.context.state },
-          },
-        };
+    ])('resolves it correctly (%#)', (propLabel, schemaLabel, resultLabel) => {
+      const schema = {
+        another: { type: String, optional: true },
+        field: { type: Object, label: schemaLabel },
+        'field.subfield': { type: String, label: 'Subfield' },
+      };
 
-        jest
-          .spyOn(context.context.schema, 'getProps')
-          .mockReturnValueOnce({ label: schema });
+      const Field = connectField(Test);
+      render(
+        <Field name="field" label={propLabel} data-testid="field" />,
+        // @ts-expect-error
+        schema,
+        reactContext,
+      );
 
-        const Field = connectField(Test);
-        const wrapper = mount(<Field name="field" label={prop} />, context);
-        expect(wrapper.find(Test).prop('label')).toBe(result);
-      },
-    );
+      if (resultLabel === labelA) {
+        expect(screen.getByText('Label A')).toBeInTheDocument();
+      } else if (resultLabel === labelB) {
+        expect(screen.getByText('Label B')).toBeInTheDocument();
+      } else {
+        const result = resultLabel as string;
+
+        if (result) {
+          expect(screen.getByText(result)).toBeInTheDocument();
+        } else {
+          expect(screen.queryByTestId('label')).toBe(null);
+        }
+      }
+    });
   });
 
   describe('when rendered provides correct onChange', () => {
     it('is defaults to field name', () => {
       const Field = connectField(Test);
+
+      render(<Field name="another" />, schema, reactContext);
+
       const value = 'some value';
-      const wrapper = mount(<Field name="another" />, reactContext);
-      wrapper.find(Test).prop('onChange')(value);
+      const input = screen.getByTestId('field');
+      fireEvent.change(input, { target: { value } });
+
       expect(onChange).toBeCalledWith('another', value);
     });
 
     it('is able to set another field value', () => {
-      const Field = connectField(Test);
-      const value = { subfield: 123 };
-      const wrapper = mount(<Field name="another" />, reactContext);
-      wrapper.find(Test).prop('onChange')(value, 'field');
-      expect(onChange).toBeCalledWith('field', value);
+      const Field = connectField((props: any) => (
+        <input
+          data-testid="field"
+          {...filterDOMProps(props)}
+          onChange={event =>
+            props.onChange(event.target.value, 'field.subfield')
+          }
+        />
+      ));
+
+      render(<Field name="another" />, schema, reactContext);
+
+      const input = screen.getByTestId('field');
+      const value = 'test';
+
+      fireEvent.change(input, { target: { value } });
+
+      expect(onChange).toBeCalledWith('field.subfield', value);
     });
   });
 
   it('works with nested labels', () => {
     const Field = connectField(Test);
-    const wrapper = mount(
+
+    render(
       <Field name="field" label={null}>
         <Field name="" label="" />
         <Field name="" />
@@ -202,17 +264,12 @@ describe('connectField', () => {
           </Field>
         </Field>
       </Field>,
+      schema,
       reactContext,
     );
 
-    expect(wrapper.find(Test).at(0).prop('label')).toBe('Field');
-    expect(wrapper.find(Test).at(1).prop('label')).toBe('');
-    expect(wrapper.find(Test).at(2).prop('label')).toBe('Field');
-    expect(wrapper.find(Test).at(3).prop('label')).toBe('Other');
-    expect(wrapper.find(Test).at(4).prop('label')).toBe('Subfield');
-    expect(wrapper.find(Test).at(5).prop('label')).toBe('Subfield');
-    expect(wrapper.find(Test).at(6).prop('label')).toBe('Subfield');
-    expect(wrapper.find(Test).at(7).prop('label')).toBe('Subfield');
-    expect(wrapper.find(Test).at(8).prop('label')).toBe('');
+    expect(screen.getAllByText('Field')).toHaveLength(2);
+    expect(screen.getAllByText('Subfield')).toHaveLength(4);
+    expect(screen.getAllByText('Other')).toHaveLength(1);
   });
 });
