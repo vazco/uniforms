@@ -64,7 +64,7 @@ export function testSelectField(
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  test('<SelectField> - renders a select which correctly reacts on change (uncheck) by value', () => {
+  test('<SelectField> - (multiple) renders a select which correctly reacts on change (uncheck) by value', () => {
     const onChange = jest.fn();
     renderWithZod({
       element: <SelectField fieldType={Array} name="x" onChange={onChange} />,
@@ -75,7 +75,7 @@ export function testSelectField(
     expect(onChange).toHaveBeenCalledWith([]);
   });
 
-  test('<SelectField> - renders a select which correctly reacts on change (uncheck) by selectedIndex', () => {
+  test('<SelectField> - (multiple) renders a select which correctly reacts on change (uncheck) by selectedIndex', () => {
     const onChange = jest.fn();
     renderWithZod({
       element: <SelectField fieldType={Array} name="x" onChange={onChange} />,
@@ -86,7 +86,7 @@ export function testSelectField(
     expect(onChange).toHaveBeenCalledWith([]);
   });
 
-  test('<SelectField> - renders a select which correctly reacts on change (checked) by selectedIndex', () => {
+  test('<SelectField> - (multiple) renders a select which correctly reacts on change (checked) by selectedIndex', () => {
     const onChange = jest.fn();
     renderWithZod({
       element: <SelectField fieldType={Array} name="x" onChange={onChange} />,
@@ -458,7 +458,7 @@ export function testSelectField(
     expect(onChange).toHaveBeenCalledWith('b');
   });
 
-  test('<SelectField checkboxes> - renders a set of checkboxes which correctly reacts on change (array check)', () => {
+  test('<SelectField checkboxes> - (multiple) renders a set of checkboxes which correctly reacts on change (array check)', () => {
     const onChange = jest.fn();
     renderWithZod({
       element: (
@@ -479,7 +479,7 @@ export function testSelectField(
     expect(onChange).toHaveBeenCalledWith(['a']);
   });
 
-  test('<SelectField checkboxes> - renders a set of checkboxes which correctly reacts on change (array uncheck)', () => {
+  test('<SelectField checkboxes> - (multiple) renders a set of checkboxes which correctly reacts on change (array uncheck)', () => {
     const onChange = jest.fn();
     renderWithZod({
       element: (
