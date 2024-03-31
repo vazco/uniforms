@@ -1,11 +1,36 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React, { ComponentType } from 'react';
+import React, { ComponentType, PropsWithChildren } from 'react';
 import z from 'zod';
 
 import { renderWithZod } from './render-zod';
 
-export function testTextField(TextField: ComponentType<any>) {
+type TestTextFieldOptions = {
+  testShowInlineError?: boolean;
+  testPassThemeProps?: {
+    ThemeProvider: (
+      props: PropsWithChildren<{ themeOptions: any }>,
+    ) => JSX.Element;
+  };
+  testWrapClassName?: boolean;
+  testRenderIcon?: boolean;
+  testMinMaxLength?: boolean;
+};
+
+export function testTextField(
+  TextField: ComponentType<any>,
+  options: TestTextFieldOptions = {
+    testShowInlineError: true,
+  },
+) {
+  test('<TextField> - renders an input', () => {
+    renderWithZod({
+      element: <TextField name="x" />,
+      schema: z.object({ x: z.string() }),
+    });
+    expect(screen.getByRole('textbox')).toBeTruthy();
+  });
+
   test('<TextField> - renders an input with correct disabled state', () => {
     renderWithZod({
       element: <TextField name="x" disabled />,
@@ -133,4 +158,184 @@ export function testTextField(TextField: ComponentType<any>) {
     });
     expect(screen.getByLabelText(/^Y/)).toBeInTheDocument();
   });
+
+  test('<TextField> - renders a wrapper with unknown props', () => {
+    const props = {
+      'data-x': 'x',
+      'data-y': 'y',
+      'data-z': 'z',
+    };
+    renderWithZod({
+      element: <TextField name="x" {...props} />,
+      schema: z.object({ x: z.string() }),
+    });
+
+    const querySelectorParams = Object.entries(props)
+      .map(([key, value]) => `[${key}="${value}"]`)
+      .join('');
+    const wrapper = screen.getByRole('textbox').closest(querySelectorParams);
+    expect(wrapper).toBeTruthy();
+  });
+
+  test('<TextField> - renders a input with correct type prop (password)', () => {
+    renderWithZod({
+      element: <TextField name="x" type="password" />,
+      schema: z.object({ x: z.string() }),
+    });
+    const wrapper = screen.getByLabelText(/^X( \*)?$/);
+    expect(wrapper).toHaveAttribute('type', 'password');
+  });
+
+  if (options.testShowInlineError) {
+    test('<TextField> - renders a TextField with correct error text (specified)', () => {
+      const errorMessage = 'Error';
+      renderWithZod({
+        element: (
+          <TextField
+            error={new Error()}
+            name="x"
+            showInlineError
+            errorMessage={errorMessage}
+          />
+        ),
+        schema: z.object({ x: z.string() }),
+      });
+
+      expect(screen.getByText(errorMessage)).toBeInTheDocument();
+    });
+
+    test('<TextField> - renders a TextField with correct error text (showInlineError=false)', () => {
+      const errorMessage = 'Error';
+      renderWithZod({
+        element: (
+          <TextField
+            error={new Error()}
+            name="x"
+            showInlineError={false}
+            errorMessage={errorMessage}
+          />
+        ),
+        schema: z.object({ x: z.string() }),
+      });
+
+      expect(screen.queryByText(errorMessage)).not.toBeInTheDocument();
+    });
+  }
+
+  if (options.testPassThemeProps) {
+    const { ThemeProvider } = options.testPassThemeProps;
+
+    test('<TextField> - default props are not passed when MUI theme props are specified', () => {
+      const themeOptions = {
+        props: { MuiTextField: { fullWidth: false, margin: 'normal' } },
+      };
+      const { container } = renderWithZod({
+        element: (
+          <ThemeProvider themeOptions={themeOptions}>
+            <TextField name="x" />
+          </ThemeProvider>
+        ),
+        schema: z.object({ x: z.string() }),
+      });
+
+      const elements = container.getElementsByClassName(
+        'MuiFormControl-marginNormal',
+      );
+      expect(elements).toHaveLength(1);
+      expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
+    });
+
+    test('<TextField> - default props are passed when MUI theme props are absent', () => {
+      const themeOptions = {};
+      const { container } = renderWithZod({
+        element: (
+          <ThemeProvider themeOptions={themeOptions}>
+            <TextField name="x" />
+          </ThemeProvider>
+        ),
+        schema: z.object({ x: z.string() }),
+      });
+
+      const elements = container.getElementsByClassName(
+        'MuiFormControl-marginDense',
+      );
+      expect(elements).toHaveLength(1);
+      expect(elements[0]).toHaveClass('MuiFormControl-fullWidth');
+    });
+
+    test('<TextField> - explicit props are passed when MUI theme props are specified', () => {
+      const themeOptions = {
+        props: { MuiTextField: { fullWidth: true, margin: 'dense' } },
+      };
+      const explicitProps = {
+        fullWidth: false,
+        margin: 'normal' as const,
+      };
+
+      const { container } = renderWithZod({
+        element: (
+          <ThemeProvider themeOptions={themeOptions}>
+            <TextField name="x" {...explicitProps} />
+          </ThemeProvider>
+        ),
+        schema: z.object({ x: z.string() }),
+      });
+
+      const elements = container.getElementsByClassName(
+        'MuiFormControl-marginNormal',
+      );
+      expect(elements).toHaveLength(1);
+      expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
+    });
+  }
+
+  if (options.testRenderIcon) {
+    test('<TextField> - renders an icon', () => {
+      const { container } = renderWithZod({
+        element: <TextField name="x" icon="small home" iconLeft />,
+        schema: z.object({ x: z.string() }),
+      });
+
+      expect(container.querySelector('i')).toBeInTheDocument();
+    });
+    test('<TextField> - renders an iconLeft', () => {
+      const { container } = renderWithZod({
+        element: <TextField name="x" iconLeft="small home" />,
+        schema: z.object({ x: z.string() }),
+      });
+
+      expect(container.querySelector('i')).toBeInTheDocument();
+    });
+  }
+
+  if (options.testWrapClassName) {
+    test('<TextField> - renders with a custom wrapClassName', () => {
+      const testClassName = 'test-class-name';
+      renderWithZod({
+        element: <TextField name="x" wrapClassName={testClassName} />,
+        schema: z.object({ x: z.string() }),
+      });
+
+      expect(screen.getByRole('textbox').closest('div')).toHaveClass(
+        testClassName,
+      );
+    });
+  }
+
+  if (options.testMinMaxLength) {
+    test('<TextField> - renders a input with minLength and maxLength', () => {
+      renderWithZod({
+        element: <TextField name="x" minLength={1} maxLength={10} />,
+        schema: z.object({ x: z.string() }),
+      });
+
+      const inputElement = screen.getByRole('textbox');
+      const wrapperElement = inputElement.parentNode;
+
+      expect(inputElement).toHaveAttribute('minLength', '1');
+      expect(inputElement).toHaveAttribute('maxLength', '10');
+      expect(wrapperElement).not.toHaveAttribute('minLength');
+      expect(wrapperElement).not.toHaveAttribute('maxLength');
+    });
+  }
 }
