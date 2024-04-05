@@ -1,82 +1,96 @@
+import { render } from '@testing-library/react';
 import React from 'react';
-import SimpleSchema from 'simpl-schema';
 import { QuickForm } from 'uniforms';
-import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
-
-import mount from './_mount';
+import { ZodBridge } from 'uniforms-bridge-zod';
+import { z } from 'zod';
 
 describe('QuickForm', () => {
+  const AutoField = jest.fn(() => null) as any;
+  const ErrorsField = jest.fn(() => null) as any;
+  const SubmitField = jest.fn(() => null) as any;
+
   // @ts-expect-error QuickForm is not a valid Component.
   class TestForm extends QuickForm<any> {
     // eslint-disable-next-line react/display-name
-    getAutoField = () => () => <i className="auto" />;
+    getAutoField = () => () => <AutoField />;
     // eslint-disable-next-line react/display-name
-    getErrorsField = () => () => <i className="errors" />;
+    getErrorsField = () => () => <ErrorsField />;
     // eslint-disable-next-line react/display-name
-    getSubmitField = () => () => <i className="submit" />;
+    getSubmitField = () => () => <SubmitField />;
   }
 
-  const schema = new SimpleSchema2Bridge({
-    schema: new SimpleSchema({
-      a: String,
-      b: String,
-      c: String,
-    }),
+  const schema = z.object({
+    a: z.string(),
+    b: z.string(),
+    c: z.string(),
+  });
+  const bridge = new ZodBridge({ schema });
+
+  afterEach(() => {
+    AutoField.mockClear();
+    ErrorsField.mockClear();
+    SubmitField.mockClear();
   });
 
   describe('when rendered with custom fields', () => {
     it('renders `AutoField` for each field', () => {
-      const wrapper = mount<TestForm>(<TestForm schema={schema} />);
+      render(<TestForm schema={bridge} />);
 
-      expect(wrapper.find('.auto').length).toBeGreaterThan(0);
+      expect(AutoField).toHaveBeenCalledTimes(3);
     });
 
     it('renders `ErrorsField`', () => {
-      const wrapper = mount<TestForm>(<TestForm schema={schema} />);
+      render(<TestForm schema={bridge} />);
 
-      expect(wrapper.find('.errors').length).toBeGreaterThan(0);
+      expect(ErrorsField).toHaveBeenCalledTimes(1);
     });
 
     it('renders `SubmitField`', () => {
-      const wrapper = mount<TestForm>(<TestForm schema={schema} />);
+      render(<TestForm schema={bridge} />);
 
-      expect(wrapper.find('.submit').length).toBeGreaterThan(0);
+      expect(SubmitField).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('when rendered with custom fields in `props`', () => {
     it('renders `ErrorsField`', () => {
-      const wrapper = mount<TestForm>(
+      const ErrorsOverrideField = jest.fn(() => <div />) as React.FC<any>;
+
+      render(
         <TestForm
-          schema={schema}
-          errorsField={() => <i className="errorsOverride" />}
+          schema={bridge}
+          errorsField={() => <ErrorsOverrideField />}
         />,
       );
 
-      expect(wrapper.find('.errorsOverride').length).toBeGreaterThan(0);
+      expect(ErrorsOverrideField).toHaveBeenCalledTimes(1);
     });
 
     it('renders `SubmitField`', () => {
-      const wrapper = mount<TestForm>(
+      const SubmitOverrideField = jest.fn(() => <div />) as React.FC<any>;
+
+      render(
         <TestForm
-          schema={schema}
-          submitField={() => <i className="submitOverride" />}
+          schema={bridge}
+          submitField={() => <SubmitOverrideField />}
         />,
       );
 
-      expect(wrapper.find('.submitOverride').length).toBeGreaterThan(0);
+      expect(SubmitOverrideField).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('when rendered with children', () => {
-    const wrapper = mount<QuickForm>(
-      <QuickForm schema={schema}>
-        <div />
-      </QuickForm>,
-    );
-
     it('renders children', () => {
-      expect(wrapper.find('div')).toHaveLength(1);
+      const Child = jest.fn(() => <div />) as React.FC<any>;
+
+      render(
+        <QuickForm schema={bridge}>
+          <Child />
+        </QuickForm>,
+      );
+
+      expect(Child).toHaveBeenCalledTimes(1);
     });
   });
 });
