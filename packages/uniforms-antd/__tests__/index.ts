@@ -60,6 +60,8 @@ describe('@RTL', () => {
   suites.testRadioField(theme.RadioField, { skipHtmlAttributesTest: true });
   // FIXME: AntD has problem with toHaveValue check
   suites.testSubmitField(theme.SubmitField, { skipValueTest: true });
+  // FIXME: AntD select does not work with new RTL test implementation
+  suites.testSelectField(theme.SelectField, { theme: 'antd' });
   suites.testTextField(theme.TextField);
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
