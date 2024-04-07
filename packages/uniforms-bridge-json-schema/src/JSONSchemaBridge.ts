@@ -273,7 +273,7 @@ export default class JSONSchemaBridge extends Bridge {
     }
 
     if (type === 'array') {
-      if (!field.minItems){
+      if (!field.minItems) {
         return [];
       }
       const item = this.getInitialValue(joinName(name, '$'));
