@@ -6,7 +6,19 @@ import { render } from './render';
 
 export function testListField(
   ListField: ComponentType<any>,
-  { getListAddField }: { getListAddField: (screen: Screen) => HTMLElement },
+  {
+    getListAddField,
+    disableInlineError,
+    testError = true,
+    testStyle,
+    testTooltip,
+  }: {
+    getListAddField: (screen: Screen) => HTMLElement;
+    disableInlineError?: boolean;
+    testError?: boolean;
+    testStyle?: boolean;
+    testTooltip?: boolean;
+  },
 ) {
   test('<ListField> - renders ListAddField', () => {
     render(<ListField name="x" label="ListFieldLabel" />, {
@@ -27,7 +39,66 @@ export function testListField(
     expect(screen.getByText(/ListFieldLabel.*/)).toBeInTheDocument();
   });
 
-  test('<ListField> - renders correct numer of items with model (specified)', () => {
+  if (testStyle) {
+    test('<ListField> - renders correct error style', () => {
+      const error = new Error();
+
+      render(
+        <ListField
+          name="x"
+          label="ListFieldLabel"
+          error={error}
+          data-testid="field"
+        />,
+        {
+          x: Array,
+          'x.$': String,
+        },
+      );
+
+      expect(screen.getByTestId('field')).toHaveStyle(
+        'borderColor: rgb(255, 85, 0)',
+      );
+    });
+
+    test('<ListField> - renders correct error style (with specified style prop)', () => {
+      const error = new Error();
+
+      render(
+        <ListField
+          name="x"
+          label="ListFieldLabel"
+          error={error}
+          style={{ marginLeft: '8px' }}
+          data-testid="field"
+        />,
+        {
+          x: Array,
+          'x.$': String,
+        },
+      );
+
+      expect(screen.getByTestId('field')).toHaveStyle('marginLeft: 8px');
+    });
+  }
+
+  if (testTooltip) {
+    test('<ListField> - renders correct info (specified)', () => {
+      const { container } = render(
+        <ListField name="x" label="ListFieldLabel" info="ListFieldInfo" />,
+        {
+          x: Array,
+          'x.$': String,
+        },
+      );
+
+      expect(
+        container.getElementsByClassName('anticon-question-circle').length,
+      ).toBe(1);
+    });
+  }
+
+  test('<ListField> - renders correct number of items with model (specified)', () => {
     render(
       <ListField name="x" />,
       {
@@ -74,7 +145,7 @@ export function testListField(
   });
 
   test('<ListField> - renders children with correct name (children)', () => {
-    const Child = jest.fn(() => <div data-testid="field" />) as FC<any>;
+    const Child = jest.fn(() => <div />) as FC<any>;
     render(
       <ListField name="x">
         <Child name="$" />
@@ -116,4 +187,46 @@ export function testListField(
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toHaveBeenLastCalledWith('x', [undefined]);
   });
+
+  if (testError) {
+    test('<ListField> - renders correct error text (specified)', async () => {
+      const error = new Error();
+
+      render(
+        <ListField
+          name="x"
+          error={error}
+          errorMessage="Error"
+          showInlineError
+        />,
+        {
+          x: Array,
+          'x.$': String,
+        },
+      );
+
+      expect(screen.getByText(/^Error$/)).toBeInTheDocument();
+    });
+  }
+
+  if (disableInlineError) {
+    test('<ListField> - renders correct error text (showInlineError=false)', async () => {
+      const error = new Error();
+
+      render(
+        <ListField
+          name="x"
+          error={error}
+          errorMessage="Error"
+          showInlineError={false}
+        />,
+        {
+          x: Array,
+          'x.$': String,
+        },
+      );
+
+      expect(screen.queryByText(/^Error$/)).not.toBeInTheDocument();
+    });
+  }
 }

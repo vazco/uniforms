@@ -47,14 +47,20 @@ describe('@RTL', () => {
   suites.testListDelField(theme.ListDelField);
   suites.testListField(theme.ListField, {
     getListAddField: screen => screen.getByRole('button'),
+    disableInlineError: true,
   });
+  suites.testListItemField(theme.ListItemField);
   suites.testLongTextField(theme.LongTextField);
   suites.testNestField(theme.NestField);
   suites.testNumField(theme.NumField);
   suites.testQuickForm(theme.QuickForm);
   suites.testRadioField(theme.RadioField);
+  suites.testSelectField(theme.SelectField, {
+    getCheckboxInlineOption: screen =>
+      screen.getByLabelText('a').closest('.checkbox-inline'),
+  });
   suites.testSubmitField(theme.SubmitField);
-  suites.testTextField(theme.TextField);
+  suites.testTextField(theme.TextField, { testWrapClassName: true });
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
 });

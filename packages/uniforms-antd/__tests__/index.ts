@@ -47,7 +47,10 @@ describe('@RTL', () => {
   suites.testListDelField(theme.ListDelField);
   suites.testListField(theme.ListField, {
     getListAddField: screen => screen.getByRole('img', { name: 'plus-square' }),
+    testTooltip: true,
+    testStyle: true,
   });
+  suites.testListItemField(theme.ListItemField);
   suites.testLongTextField(theme.LongTextField);
   // FIXME: AntD number input doesn't work with new RTL test implementation
   // suites.testNumField(antd.NumField);
@@ -57,6 +60,8 @@ describe('@RTL', () => {
   suites.testRadioField(theme.RadioField, { skipHtmlAttributesTest: true });
   // FIXME: AntD has problem with toHaveValue check
   suites.testSubmitField(theme.SubmitField, { skipValueTest: true });
+  // FIXME: AntD select does not work with new RTL test implementation
+  suites.testSelectField(theme.SelectField, { theme: 'antd' });
   suites.testTextField(theme.TextField);
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);

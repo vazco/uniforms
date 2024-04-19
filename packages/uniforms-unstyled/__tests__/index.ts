@@ -45,7 +45,9 @@ describe('@RTL', () => {
   suites.testListDelField(theme.ListDelField);
   suites.testListField(theme.ListField, {
     getListAddField: screen => screen.getByRole('button'),
+    testError: false,
   });
+  suites.testListItemField(theme.ListItemField);
   suites.testLongTextField(theme.LongTextField, {
     skipShowInlineErrorTests: true,
   });
@@ -56,8 +58,9 @@ describe('@RTL', () => {
   suites.testNumField(theme.NumField);
   suites.testQuickForm(theme.QuickForm);
   suites.testRadioField(theme.RadioField);
+  suites.testSelectField(theme.SelectField);
   suites.testSubmitField(theme.SubmitField);
-  suites.testTextField(theme.TextField);
+  suites.testTextField(theme.TextField, { testShowInlineError: false });
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
 });

@@ -234,7 +234,24 @@ const formAction = () => {
 
 `AutoForm` and `ValidatedForm` both accept an `onValidate` prop. It can be used to create an asynchronous validation:
 
+The `onValidate` should return `null` if the `model` is valid, otherwise return any error value. The error can be either `Promise` for asynchronous validation or any other value for synchronous validation (https://github.com/vazco/uniforms/blob/d557f90e6807e34c1ebb9803d44fd799174175f8/packages/uniforms/src/ValidatedForm.tsx#L118-L142).
+
 ```tsx
+const MyAPI = {
+  checkOtherCondition(model): Error | null {
+    if (model.age < 18) {
+      return new Error('Too young')
+    }
+    return null
+  }
+
+  async validate(model): Error | null {
+    const result = await fetch('...', { body: JSON.stringify(model) })
+    const { error } = await result.json()
+    return error
+  }
+}
+
 const onValidate = async (model, error) => {
   // You can either ignore validation error...
   if (omitValidation(model)) {
@@ -247,7 +264,7 @@ const onValidate = async (model, error) => {
   }
 
   // ...or feed it with another error.
-  MyAPI.validate(model);
+  return MyAPI.validate(model);
 };
 
 // Later...
