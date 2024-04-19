@@ -9,8 +9,28 @@ export function testWrapField(
   wrapField: (wrapperProps: any, children: ReactNode) => ReactElement,
   options?: {
     skipForMUI?: boolean;
+    feedbackable?: boolean;
   },
 ) {
+  skipTestIf(!options?.feedbackable)(
+    '<wrapField> - renders wrapper with (feedbackable=true)',
+    () => {
+      const error = new Error();
+      renderWithZod({
+        element: wrapField(
+          { error, feedbackable: true },
+          <div data-testid="x" />,
+        ),
+        schema: z.object({}),
+      });
+      const x = screen.getByTestId('x');
+      expect(x.parentElement?.classList.contains('has-feedback')).toBe(true);
+      expect(
+        x.nextElementSibling?.classList.contains('form-control-feedback'),
+      ).toBe(true);
+    },
+  );
+
   skipTestIf(!options?.skipForMUI)('<wrapField> - renders wrapper', () => {
     renderWithZod({
       element: wrapField({}, <div data-testid="x" />),
