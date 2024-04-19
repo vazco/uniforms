@@ -65,4 +65,7 @@ describe('@RTL', () => {
   suites.testTextField(theme.TextField);
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
+  suites.testWrapField(theme.wrapField, {
+    skipForAntD: true,
+  });
 });
