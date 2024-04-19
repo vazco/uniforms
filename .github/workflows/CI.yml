@@ -58,7 +58,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./website/build
       - name: Create a concentrated doc file
-        run: ./scripts/concatenateDocs.sh . uniformsConcentratedDocs.md
+        run: node ./scripts/concatenateDocs.js . uniformsConcentratedDocs.md
       - name: Upload the concentrated doc file as an artifact
         uses: actions/upload-artifact@v3
         with:
