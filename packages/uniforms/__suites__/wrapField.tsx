@@ -219,19 +219,16 @@ export function testWrapField(
         ),
         schema: z.object({}),
       });
+      const x = screen.getByTestId('x');
       if (options?.skipForAntD) {
         expect(
-          screen
-            .getByTestId('x')
-            .closest('.ant-form-item-has-feedback.ant-form-item-has-error'),
+          x.closest('.ant-form-item-has-feedback.ant-form-item-has-error'),
         ).toBeInTheDocument();
       } else {
         expect(
-          screen
-            .getByTestId('x')
-            .parentElement?.classList.contains(
-              options?.onlyForBootstrap3 ? 'has-error' : 'is-invalid',
-            ),
+          x.parentElement?.classList.contains(
+            options?.onlyForBootstrap3 ? 'has-error' : 'is-invalid',
+          ),
         ).toBe(true);
       }
     },
