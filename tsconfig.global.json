@@ -6,7 +6,6 @@
     "tsBuildInfoFile": "node_modules/.cache/global.tsbuildinfo"
   },
   "include": [
-    "packages/*/__mocks__",
     "packages/*/__tests__",
     "packages/uniforms/__suites__",
     "scripts",
@@ -27,8 +26,6 @@
     { "path": "packages/uniforms-bridge-graphql/tsconfig.cjs.json" },
     { "path": "packages/uniforms-bridge-json-schema/tsconfig.esm.json" },
     { "path": "packages/uniforms-bridge-json-schema/tsconfig.cjs.json" },
-    { "path": "packages/uniforms-bridge-simple-schema/tsconfig.esm.json" },
-    { "path": "packages/uniforms-bridge-simple-schema/tsconfig.cjs.json" },
     { "path": "packages/uniforms-bridge-simple-schema-2/tsconfig.esm.json" },
     { "path": "packages/uniforms-bridge-simple-schema-2/tsconfig.cjs.json" },
     { "path": "packages/uniforms-bridge-zod/tsconfig.esm.json" },

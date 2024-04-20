@@ -51,7 +51,6 @@
 - **Integrations with various schemas:**
   - **[JSON Schema](http://json-schema.org/)**
   - **[GraphQL](https://github.com/graphql/graphql-js)**
-  - **[SimpleSchema](https://github.com/aldeed/meteor-simple-schema)**
   - **[SimpleSchema@2](https://github.com/aldeed/node-simple-schema)**
   - **[Zod](https://github.com/colinhacks/zod)**
   - **And any other - only [a small wrapper](https://vazco.github.io/uniforms/#/introduction) is needed!**

@@ -2,7 +2,6 @@
   - 'packages/uniforms-bridge-graphql/**/*'
   - 'packages/uniforms-bridge-json-schema/**/*'
   - 'packages/uniforms-bridge-simple-schema-2/**/*'
-  - 'packages/uniforms-bridge-simple-schema/**/*'
   - 'packages/uniforms-bridge-zod/**/*'
 'Area: Core':
   - 'packages/uniforms/**/*'
@@ -44,8 +43,6 @@
   - 'packages/uniforms-bridge-graphql/**/*'
 'Bridge: JSON Schema':
   - 'packages/uniforms-bridge-json-schema/**/*'
-'Bridge: SimpleSchema':
-  - 'packages/uniforms-bridge-simple-schema/**/*'
 'Bridge: SimpleSchema (v2)':
   - 'packages/uniforms-bridge-simple-schema-2/**/*'
 'Bridge: Zod':
