@@ -8,6 +8,7 @@ import {
   ZodBoolean,
   ZodDate,
   ZodDefault,
+  ZodEffects,
   ZodEnum,
   ZodError,
   ZodNativeEnum,
@@ -37,14 +38,14 @@ type Option<Value> = {
 };
 
 export default class ZodBridge<T extends ZodRawShape> extends Bridge {
-  schema: ZodObject<T>;
+  schema: ZodObject<T> | ZodEffects<ZodObject<T>>;
   provideDefaultLabelFromFieldName: boolean;
 
   constructor({
     schema,
     provideDefaultLabelFromFieldName = true,
   }: {
-    schema: ZodObject<T>;
+    schema: ZodObject<T> | ZodEffects<ZodObject<T>>;
     provideDefaultLabelFromFieldName?: boolean;
   }) {
     super();
@@ -87,6 +88,11 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
 
   getField(name: string) {
     let field: ZodType = this.schema;
+
+    if (this.schema instanceof ZodEffects) {
+      field = this.schema._def.schema;
+    }
+
     for (const key of joinName(null, name)) {
       if (field instanceof ZodDefault) {
         field = field.removeDefault();
