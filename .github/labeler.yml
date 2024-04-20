@@ -1,5 +1,4 @@
 'Area: Bridge':
-  - 'packages/uniforms-bridge-graphql/**/*'
   - 'packages/uniforms-bridge-json-schema/**/*'
   - 'packages/uniforms-bridge-simple-schema-2/**/*'
   - 'packages/uniforms-bridge-simple-schema/**/*'
@@ -40,8 +39,6 @@
   - 'packages/uniforms-mui/**/*'
   - 'packages/uniforms-semantic/**/*'
   - 'packages/uniforms-unstyled/**/*'
-'Bridge: GraphQL':
-  - 'packages/uniforms-bridge-graphql/**/*'
 'Bridge: JSON Schema':
   - 'packages/uniforms-bridge-json-schema/**/*'
 'Bridge: SimpleSchema':
