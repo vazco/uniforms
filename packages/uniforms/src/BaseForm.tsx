@@ -26,7 +26,6 @@ export type BaseFormProps<Model extends UnknownObject> = {
   noValidate: boolean;
   onChange?: (key: string, value: unknown) => void;
   onSubmit: (model: Model) => void | Promise<unknown>;
-  placeholder?: boolean;
   readOnly?: boolean;
   schema: Bridge;
   showInlineError?: boolean;
@@ -175,8 +174,11 @@ export class BaseForm<
 
   getNativeFormProps(): {
     [key: string]: unknown;
-    onSubmit: BaseForm<Model, Props, State>['onSubmit'];
+    children?: React.ReactNode;
+    id?: BaseFormProps<Model>['id'];
     key: string;
+    noValidate: BaseFormProps<Model>['noValidate'];
+    onSubmit: BaseForm<Model, Props, State>['onSubmit'];
   } {
     const props = omit(this.props, [
       'autosave',
