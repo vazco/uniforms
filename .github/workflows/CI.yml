@@ -13,7 +13,7 @@ jobs:
         node-version: [14.x, 16.x, 18.x, 20.x]
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.3.0
+        uses: actions/checkout@v4.1.1
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3.6.0
         with:
@@ -30,7 +30,7 @@ jobs:
       - name: Test
         run: npm run coverage -- --no-cache --runInBand
       - name: Report coverage
-        uses: codecov/codecov-action@v3.1.1
+        uses: codecov/codecov-action@v4.3.0
         with:
           fail_ci_if_error: true
         env:
@@ -39,7 +39,7 @@ jobs:
         run: npm --prefix website run build
         if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '20.x'
       - name: Deploy docs
-        uses: peaceiris/actions-gh-pages@v3.9.2
+        uses: peaceiris/actions-gh-pages@v4.0.0
         with:
           allow_empty_commit: true
           cname: uniforms.tools
