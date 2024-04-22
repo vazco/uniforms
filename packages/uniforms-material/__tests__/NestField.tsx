@@ -3,7 +3,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import ThemeProvider from '@material-ui/styles/ThemeProvider/ThemeProvider';
 import React from 'react';
-import { AutoField, NestField } from 'uniforms-material';
+import { NestField } from 'uniforms-material';
 import { render } from 'uniforms/__suites__';
 
 import createContext from './_createContext';
@@ -66,22 +66,6 @@ describe('@RTL - NestField tests', () => {
     expect(elements).toHaveLength(1);
     expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
   });
-});
-
-test('<NestField> - renders an <AutoField> for each field', () => {
-  const element = <NestField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({
-      x: { type: Object },
-      'x.a': { type: String },
-      'x.b': { type: Number },
-    }),
-  );
-
-  expect(wrapper.find(AutoField)).toHaveLength(2);
-  expect(wrapper.find(AutoField).at(0).prop('name')).toBe('a');
-  expect(wrapper.find(AutoField).at(1).prop('name')).toBe('b');
 });
 
 test('<NestField> - renders a Subheader', () => {
