@@ -131,7 +131,7 @@ describe('ZodBridge', () => {
       const schema = object({ a: string(), b: number() });
       const bridge = new ZodBridge({ schema });
       const error = bridge.getValidator()({});
-      const messages = error?.issues?.map(issue => issue.message);
+      const messages = ['A: Required', 'B: Required'];
       expect(bridge.getErrorMessages(error)).toEqual(messages);
     });
 
@@ -139,7 +139,10 @@ describe('ZodBridge', () => {
       const schema = object({ a: array(array(string())) });
       const bridge = new ZodBridge({ schema });
       const error = bridge.getValidator()({ a: [['x', 'y', 0], [1]] });
-      const messages = error?.issues?.map(issue => issue.message);
+      const messages = [
+        'A (0, 2): Expected string, received number',
+        'A (1, 0): Expected string, received number',
+      ];
       expect(bridge.getErrorMessages(error)).toEqual(messages);
     });
 
@@ -147,7 +150,7 @@ describe('ZodBridge', () => {
       const schema = object({ a: object({ b: object({ c: string() }) }) });
       const bridge = new ZodBridge({ schema });
       const error = bridge.getValidator()({ a: { b: { c: 1 } } });
-      const messages = error?.issues?.map(issue => issue.message);
+      const messages = ['C: Expected string, received number'];
       expect(bridge.getErrorMessages(error)).toEqual(messages);
     });
   });

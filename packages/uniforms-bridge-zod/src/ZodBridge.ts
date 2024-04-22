@@ -33,7 +33,7 @@ function getLabel(value: unknown) {
   return upperFirst(lowerCase(joinName(null, value).slice(-1)[0]));
 }
 
-function getFullLabel(path: ZodIssue['path'], indexes: number[]): string {
+function getFullLabel(path: ZodIssue['path'], indexes: number[] = []): string {
   const lastElement = path[path.length - 1];
 
   if (typeof lastElement === 'number') {
@@ -92,7 +92,7 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
   getErrorMessages(error: unknown) {
     if (error instanceof ZodError) {
       return error.issues.map(issue => {
-        const name = getFullLabel(issue.path, []);
+        const name = getFullLabel(issue.path);
         return `${name}: ${issue.message}`;
       });
     }
