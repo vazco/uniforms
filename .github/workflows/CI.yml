@@ -33,6 +33,8 @@ jobs:
         uses: codecov/codecov-action@v3.1.1
         with:
           fail_ci_if_error: true
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: Build docs
         run: npm --prefix website run build
         if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '20.x'
