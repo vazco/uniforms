@@ -234,6 +234,12 @@ describe('ZodBridge', () => {
       expect(bridge.getField('a')).toBe(schema.shape.a);
       expect(bridge.getField('a.b')).toBe(schema.shape.a.unwrap().shape.b);
     });
+
+    it('works with ZodEffects', () => {
+      const schema = object({}).refine(data => data);
+      const bridge = new ZodBridge({ schema });
+      expect(bridge.getField('')).toBe(schema._def.schema);
+    });
   });
 
   describe('#getInitialValue', () => {
