@@ -1,6 +1,6 @@
 {
-  "name": "uniforms-repository",
-  "private": true,
+  "name": "uniforms-react18",
+  "version": "0.0.2",
   "scripts": {
     "build": "tsc --build --incremental tsconfig.build.json",
     "clean": "tsc --build --clean tsconfig.build.json && rimraf coverage",
