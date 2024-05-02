@@ -1,6 +1,6 @@
 {
   "name": "uniforms-react18-material-ui",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
