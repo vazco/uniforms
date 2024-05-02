@@ -59,8 +59,8 @@ function Date({
       label={label}
       InputLabelProps={{ shrink: true, ...labelProps, ...InputLabelProps }}
       inputProps={{
-        max: dateFormat(max),
-        min: dateFormat(min),
+        max: dateFormat(max, type),
+        min: dateFormat(min, type),
         readOnly,
         ...props.inputProps,
       }}
