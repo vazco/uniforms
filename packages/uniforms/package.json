@@ -1,6 +1,6 @@
 {
-  "name": "uniforms",
-  "version": "4.0.0-alpha.5",
+  "name": "uniforms-react18-core",
+  "version": "0.0.2",
   "license": "MIT",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
