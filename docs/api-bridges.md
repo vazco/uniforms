@@ -229,6 +229,17 @@ const schema = new SimpleSchema({
 const bridge = new SimpleSchema2Bridge({ schema });
 ```
 
+## `ZodBridge`
+
+```tsx
+import ZodBridge from 'uniforms-bridge-zod';
+import z from 'zod';
+
+const schema = z.object({ aboutMe: z.string() });
+
+const bridge = new ZodBridge({ schema });
+```
+
 ## `SimpleSchemaBridge`
 
 :::caution
@@ -256,15 +267,4 @@ const schema = new SimpleSchema({
 });
 
 const bridge = new SimpleSchemaBridge({ schema });
-```
-
-## `ZodBridge`
-
-```tsx
-import ZodBridge from 'uniforms-bridge-zod';
-import z from 'zod';
-
-const schema = z.object({ aboutMe: z.string() });
-
-const bridge = new ZodBridge({ schema });
 ```
