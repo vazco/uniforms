@@ -1,5 +1,5 @@
 import { ConnectedField, filterDOMProps, UnknownObject } from 'uniforms';
-import { z } from 'zod';
+import { z, ZodTypeAny } from 'zod';
 
 // There's no possibility to retrieve them at runtime.
 declare module 'uniforms' {
@@ -13,7 +13,7 @@ filterDOMProps.register('minCount', 'maxCount');
 
 declare module 'zod' {
   interface ZodType {
-    uniforms(uniforms: UnknownObject | ConnectedField<any>): this;
+    uniforms(uniforms: UnknownObject | ConnectedField<any>): ZodTypeAny;
     _uniforms: UnknownObject | ConnectedField<any>;
   }
 }
