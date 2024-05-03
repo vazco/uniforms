@@ -14,18 +14,11 @@ filterDOMProps.register('minCount', 'maxCount');
 declare module 'zod' {
   interface ZodType {
     uniforms(uniforms: UnknownObject | ConnectedField<any>): this;
-  }
-
-  interface ZodTypeDef {
-    uniforms: UnknownObject | ConnectedField<any>;
+    _uniforms: UnknownObject | ConnectedField<any>;
   }
 }
 
 z.ZodType.prototype.uniforms = function extend(uniforms) {
-  const This = (this as any).constructor;
-
-  return new This({
-    ...this._def,
-    uniforms,
-  });
+  this._uniforms = uniforms;
+  return this;
 };
