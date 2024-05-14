@@ -30,6 +30,36 @@ Our kanban board is public and available [here](https://github.com/orgs/vazco/pr
 - Make sure you have added the necessary tests for your changes. Do not worry though, the Codecov bot will report it in the pull request.
 - Make sure your code passes _all_ tests: `npm test`.
 
+### Development
+
+For the best developer experience (DX) when developing locally it is recommended to start `build` and `test` in a `--watch` mode.
+
+In the root directory...
+
+#### Running the build in watch mode
+
+```sh
+npm run build -- --watch
+```
+
+#### Running the tests in watch mode
+
+```sh
+npm run test -- --watch
+```
+
+#### Making changes to the documentation website (docusaurus)
+
+The local version of docs will use the locally built version of uniforms, so make sure to run the build in watch mode for live changes.
+
+Navigate to `/website` and run
+
+```sh
+npm start
+```
+
+it will start the docusaurus in development mode supporting hot reload, so you should see the changes made to the website immediately.
+
 ## _Work in progress_ PRs are also welcome
 
 If you can't or won't finish your PR, submit it anyway - maybe someone else will continue your work. If you don't know how to achieve your desired feature - file an issue for it - maybe someone else will implement it.
