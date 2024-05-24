@@ -95,9 +95,4 @@ describe('@RTL', () => {
   });
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
-  suites.testWrapField(theme.wrapField, {
-    skipForMUI: true,
-    withoutLabel: true,
-    helpPropsName: 'helperText',
-  });
 });

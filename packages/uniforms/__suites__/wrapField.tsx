@@ -11,12 +11,16 @@ export function testWrapField(
     skipForMUI?: boolean;
     skipForAntD?: boolean;
     withoutLabel?: boolean;
+    withoutWrapClassName?: boolean;
+    withoutHelpClassName?: boolean;
+    withoutLabelClassName?: boolean;
+    withoutInlineError?: boolean;
     helpPropsName: 'help' | 'helperText';
   } = {
     helpPropsName: 'help',
   },
 ) {
-  skipTestIf(options?.skipForMUI || options?.skipForAntD)(
+  skipTestIf(options?.withoutWrapClassName)(
     '<wrapField> - renders wrapper with correct class',
     () => {
       renderWithZod({
@@ -40,7 +44,7 @@ export function testWrapField(
     expect(screen.getByText('Hint')).toBeInTheDocument();
   });
 
-  skipTestIf(options?.skipForMUI || options?.skipForAntD)(
+  skipTestIf(options?.withoutHelpClassName)(
     '<wrapField> - renders help block with specified class',
     () => {
       renderWithZod({
@@ -78,7 +82,7 @@ export function testWrapField(
     },
   );
 
-  skipTestIf(options?.skipForMUI || options?.skipForAntD)(
+  skipTestIf(options?.withoutLabelClassName)(
     '<wrapField> - label has custom class (String)',
     () => {
       renderWithZod({
@@ -93,7 +97,7 @@ export function testWrapField(
     },
   );
 
-  skipTestIf(options?.skipForMUI || options?.skipForAntD)(
+  skipTestIf(options.withoutLabelClassName)(
     '<wrapField> - label has custom class (Array[String])',
     () => {
       renderWithZod({
@@ -109,7 +113,7 @@ export function testWrapField(
     },
   );
 
-  skipTestIf(options?.skipForMUI)(
+  skipTestIf(options?.withoutInlineError)(
     '<wrapField> - renders error block (showInlineError=false)',
     () => {
       const error = new Error();

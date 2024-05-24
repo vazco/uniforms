@@ -68,5 +68,8 @@ describe('@RTL', () => {
   suites.testWrapField(theme.wrapField, {
     skipForAntD: true,
     helpPropsName: 'help',
+    withoutWrapClassName: true,
+    withoutHelpClassName: true,
+    withoutLabelClassName: true,
   });
 });

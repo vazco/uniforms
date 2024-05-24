@@ -64,5 +64,9 @@ describe('@RTL', () => {
     skipForMUI: true,
     helpPropsName: 'helperText',
     withoutLabel: true,
+    withoutInlineError: true,
+    withoutWrapClassName: true,
+    withoutHelpClassName: true,
+    withoutLabelClassName: true,
   });
 });
