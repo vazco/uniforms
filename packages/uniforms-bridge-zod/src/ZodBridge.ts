@@ -10,6 +10,7 @@ import {
   ZodDefault,
   ZodEnum,
   ZodError,
+  ZodIssue,
   ZodNativeEnum,
   ZodNumber,
   ZodNumberDef,
@@ -26,6 +27,23 @@ function fieldInvariant(name: string, condition: boolean): asserts condition {
 
 function isNativeEnumValue(value: unknown) {
   return typeof value !== 'string';
+}
+
+function getLabel(value: unknown) {
+  return upperFirst(lowerCase(joinName(null, value).slice(-1)[0]));
+}
+
+function getFullLabel(path: ZodIssue['path'], indexes: number[] = []): string {
+  const lastElement = path[path.length - 1];
+
+  if (typeof lastElement === 'number') {
+    const slicedPath = path.slice(0, path.length - 1);
+    return getFullLabel(slicedPath, [lastElement, ...indexes]);
+  }
+
+  return indexes.length > 0
+    ? `${getLabel(path)} (${indexes.join(', ')})`
+    : getLabel(path);
 }
 
 /** Option type used in SelectField or RadioField */
@@ -73,9 +91,10 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
 
   getErrorMessages(error: unknown) {
     if (error instanceof ZodError) {
-      // TODO: There's no information which field caused which error. We could
-      // do some generic prefixing, e.g., `{name}: {message}`.
-      return error.issues.map(issue => issue.message);
+      return error.issues.map(issue => {
+        const name = getFullLabel(issue.path);
+        return `${name}: ${issue.message}`;
+      });
     }
 
     if (error instanceof Error) {
@@ -149,7 +168,7 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
   getProps(name: string) {
     const props: UnknownObject & { options?: Option<unknown>[] } = {
       ...(this.provideDefaultLabelFromFieldName && {
-        label: upperFirst(lowerCase(joinName(null, name).slice(-1)[0])),
+        label: getLabel(name),
       }),
       required: true,
     };
