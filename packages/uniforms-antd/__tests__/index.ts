@@ -66,7 +66,6 @@ describe('@RTL', () => {
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
   suites.testWrapField(theme.wrapField, {
-    skipForAntD: true,
     helpPropsName: 'help',
     withoutWrapClassName: true,
     withoutHelpClassName: true,

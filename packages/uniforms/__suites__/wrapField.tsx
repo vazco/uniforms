@@ -8,8 +8,6 @@ import { skipTestIf } from './skipTestIf';
 export function testWrapField(
   wrapField: (wrapperProps: any, children: ReactNode) => ReactElement,
   options: {
-    skipForMUI?: boolean;
-    skipForAntD?: boolean;
     withoutLabel?: boolean;
     withoutWrapClassName?: boolean;
     withoutHelpClassName?: boolean;
