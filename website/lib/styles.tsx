@@ -41,7 +41,6 @@ const styles = {
     'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap.min.css',
   ]),
 
-  material: style([]),
   mui: style([]),
 
   semantic: style([
