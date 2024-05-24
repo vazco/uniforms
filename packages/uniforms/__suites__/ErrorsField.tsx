@@ -15,7 +15,9 @@ export function testErrorsField(ErrorsField: ComponentType<any>) {
       ]),
       schema: z.object({ x: z.boolean(), y: z.number(), z: z.string() }),
     });
-    expect(screen.getAllByText(errorMessage)).toHaveLength(3);
+    expect(screen.getByText(`X: ${errorMessage}`)).toBeInTheDocument();
+    expect(screen.getByText(`Y: ${errorMessage}`)).toBeInTheDocument();
+    expect(screen.getByText(`Z: ${errorMessage}`)).toBeInTheDocument();
   });
 
   test('<ErrorsField> - renders error from props', () => {

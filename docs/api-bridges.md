@@ -11,7 +11,6 @@ To make use of any schema, uniforms have to create a _bridge_ of it - a unified 
 
 Currently available bridges:
 
-- `GraphQLBridge` in `uniforms-bridge-graphql` ([schema documentation](https://graphql.org/))
 - `JSONSchemaBridge` in `uniforms-bridge-json-schema` ([schema documentation](https://json-schema.org/))
 - `SimpleSchema2Bridge` in `uniforms-bridge-simple-schema-2` ([schema documentation](https://github.com/longshotlabs/simpl-schema#readme))
 - `ZodBridge` in `uniforms-bridge-zod` ([schema documentation](https://zod.dev/))
@@ -19,96 +18,9 @@ Currently available bridges:
 Deprecated bridges:
 
 - `SimpleSchemaBridge` in `uniforms-bridge-simple-schema` ([schema documentation](https://github.com/Meteor-Community-Packages/meteor-simple-schema/blob/master/DOCS.md))
+- `GraphQLBridge` in `uniforms-bridge-graphql` ([schema documentation](https://graphql.org/))
 
 If you see a lot of [`Warning: Unknown props...`](https://fb.me/react-unknown-prop) logs, check if your schema or theme doesn't provide extra props. If so, consider [registering it with `filterDOMProps`](/docs/api-helpers#filterdomprops).
-
-## `GraphQLBridge`
-
-This bridge enables using GraphQL schema types as uniforms forms.
-This saves you from not having to rewrite the form schema in your code.
-As a trade-off, you have to write the validator from scratch. In some cases, it might be easier to rewrite the schema and use, for example, [`JSONSchemaBridge` with `ajv`](/docs/api-bridges#jsonschemabridge).
-If only a simple or no validation is needed, this bridge is perfectly suited to work with GraphQL schemas.
-
-The constructor accepts these arguments:
-
-- `schema: GraphQLType` can be any type parsed and extracted from a GraphQL schema.
-- `validator: (model: Record<string, unknown>) => any` a custom validator function that should return a falsy value if no errors are present or information about errors in the model as described in the [custom bridge section](/docs/examples-custom-bridge#validator-definition).
-- `extras: Record<string, unknown> = {}` used to extend the schema generated from GraphQL type with extra field configuration.
-- `provideDefaultLabelFromFieldName = true` if set to `true`, the bridge will use the field name as a label if no label is provided in the schema.
-
-### Code example
-
-```tsx
-import { GraphQLBridge } from 'uniforms-bridge-graphql';
-import { buildASTSchema, parse } from 'graphql';
-
-const schema = `
-    type Author {
-        id:        String!
-        firstName: String
-        lastName:  String
-    }
-
-    type Post {
-        id:     Int!
-        author: Author!
-        title:  String
-        votes:  Int
-    }
-
-    # This is required by buildASTSchema
-    type Query { anything: ID }
-`;
-
-const schemaType = buildASTSchema(parse(schema)).getType('Post');
-const schemaExtras = {
-  id: {
-    options: [
-      { label: 1, value: 1 },
-      { label: 2, value: 2 },
-      { label: 3, value: 3 },
-    ],
-  },
-  title: {
-    options: [
-      { label: 1, value: 'a' },
-      { label: 2, value: 'b' },
-    ],
-  },
-  'author.firstName': {
-    placeholder: 'John',
-  },
-};
-
-const schemaValidator = (model: object) => {
-  const details = [];
-
-  if (!model.id) {
-    details.push({ name: 'id', message: 'ID is required!' });
-  }
-
-  if (!model.author.id) {
-    details.push({ name: 'author.id', message: 'Author ID is required!' });
-  }
-
-  if (model.votes < 0) {
-    details.push({
-      name: 'votes',
-      message: 'Votes must be a non-negative number!',
-    });
-  }
-
-  // ...
-
-  return details.length ? { details } : null;
-};
-
-const bridge = new GraphQLBridge({
-  schema: schemaType,
-  validator: schemaValidator,
-  extras: schemaExtras,
-});
-```
 
 ## `JSONSchemaBridge`
 
@@ -267,4 +179,109 @@ const schema = new SimpleSchema({
 });
 
 const bridge = new SimpleSchemaBridge({ schema });
+```
+
+## `ZodBridge`
+
+```tsx
+import ZodBridge from 'uniforms-bridge-zod';
+import z from 'zod';
+
+const schema = z.object({ aboutMe: z.string() });
+
+const bridge = new ZodBridge({ schema });
+```
+
+## `GraphQLBridge`
+
+:::caution
+
+GraphQLBridge is deprecated since uniforms v4.
+
+:::
+
+This bridge enables using GraphQL schema types as uniforms forms.
+This saves you from not having to rewrite the form schema in your code.
+As a trade-off, you have to write the validator from scratch. In some cases, it might be easier to rewrite the schema and use, for example, [`JSONSchemaBridge` with `ajv`](/docs/api-bridges#jsonschemabridge).
+If only a simple or no validation is needed, this bridge is perfectly suited to work with GraphQL schemas.
+
+The constructor accepts these arguments:
+
+- `schema: GraphQLType` can be any type parsed and extracted from a GraphQL schema.
+- `validator: (model: Record<string, unknown>) => any` a custom validator function that should return a falsy value if no errors are present or information about errors in the model as described in the [custom bridge section](/docs/examples-custom-bridge#validator-definition).
+- `extras: Record<string, unknown> = {}` used to extend the schema generated from GraphQL type with extra field configuration.
+- `provideDefaultLabelFromFieldName = true` if set to `true`, the bridge will use the field name as a label if no label is provided in the schema.
+
+### Code example
+
+```tsx
+import { GraphQLBridge } from 'uniforms-bridge-graphql';
+import { buildASTSchema, parse } from 'graphql';
+
+const schema = `
+    type Author {
+        id:        String!
+        firstName: String
+        lastName:  String
+    }
+
+    type Post {
+        id:     Int!
+        author: Author!
+        title:  String
+        votes:  Int
+    }
+
+    # This is required by buildASTSchema
+    type Query { anything: ID }
+`;
+
+const schemaType = buildASTSchema(parse(schema)).getType('Post');
+const schemaExtras = {
+  id: {
+    options: [
+      { label: 1, value: 1 },
+      { label: 2, value: 2 },
+      { label: 3, value: 3 },
+    ],
+  },
+  title: {
+    options: [
+      { label: 1, value: 'a' },
+      { label: 2, value: 'b' },
+    ],
+  },
+  'author.firstName': {
+    placeholder: 'John',
+  },
+};
+
+const schemaValidator = (model: object) => {
+  const details = [];
+
+  if (!model.id) {
+    details.push({ name: 'id', message: 'ID is required!' });
+  }
+
+  if (!model.author.id) {
+    details.push({ name: 'author.id', message: 'Author ID is required!' });
+  }
+
+  if (model.votes < 0) {
+    details.push({
+      name: 'votes',
+      message: 'Votes must be a non-negative number!',
+    });
+  }
+
+  // ...
+
+  return details.length ? { details } : null;
+};
+
+const bridge = new GraphQLBridge({
+  schema: schemaType,
+  validator: schemaValidator,
+  extras: schemaExtras,
+});
 ```

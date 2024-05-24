@@ -1,3 +1,4 @@
+import { connectField } from 'uniforms';
 import { ZodBridge } from 'uniforms-bridge-zod';
 import {
   any,
@@ -28,6 +29,7 @@ import {
   undefined as undefined_,
   union,
   unknown,
+  ZodIssueCode,
 } from 'zod';
 
 describe('ZodBridge', () => {
@@ -69,6 +71,42 @@ describe('ZodBridge', () => {
       expect(bridge.getError('a', error)).toBe(null);
       expect(bridge.getError('a.b', error)).toBe(null);
       expect(bridge.getError('a.b.c', error)).toBe(issues?.[0]);
+    });
+
+    it('works with refined schema', () => {
+      const errorMessage = 'Different values';
+
+      const schema = object({
+        a: string(),
+        b: string(),
+      }).refine(({ a, b }) => a === b, {
+        message: errorMessage,
+        path: ['b'],
+      });
+
+      const bridge = new ZodBridge({ schema });
+      const error = bridge.getValidator()({ a: 'a', b: 'b' });
+      expect(error?.issues?.[0]?.message).toBe(errorMessage);
+    });
+
+    it('works with super refined schema', () => {
+      const errorMessage = 'Different values';
+
+      const schema = object({
+        a: string(),
+        b: string(),
+      }).superRefine((val, ctx) => {
+        if (val.a !== val.b) {
+          ctx.addIssue({
+            code: ZodIssueCode.custom,
+            message: errorMessage,
+          });
+        }
+      });
+
+      const bridge = new ZodBridge({ schema });
+      const error = bridge.getValidator()({ a: 'a', b: 'b' });
+      expect(error?.issues?.[0]?.message).toBe(errorMessage);
     });
   });
 
@@ -131,7 +169,7 @@ describe('ZodBridge', () => {
       const schema = object({ a: string(), b: number() });
       const bridge = new ZodBridge({ schema });
       const error = bridge.getValidator()({});
-      const messages = error?.issues?.map(issue => issue.message);
+      const messages = ['A: Required', 'B: Required'];
       expect(bridge.getErrorMessages(error)).toEqual(messages);
     });
 
@@ -139,7 +177,10 @@ describe('ZodBridge', () => {
       const schema = object({ a: array(array(string())) });
       const bridge = new ZodBridge({ schema });
       const error = bridge.getValidator()({ a: [['x', 'y', 0], [1]] });
-      const messages = error?.issues?.map(issue => issue.message);
+      const messages = [
+        'A (0, 2): Expected string, received number',
+        'A (1, 0): Expected string, received number',
+      ];
       expect(bridge.getErrorMessages(error)).toEqual(messages);
     });
 
@@ -147,7 +188,7 @@ describe('ZodBridge', () => {
       const schema = object({ a: object({ b: object({ c: string() }) }) });
       const bridge = new ZodBridge({ schema });
       const error = bridge.getValidator()({ a: { b: { c: 1 } } });
-      const messages = error?.issues?.map(issue => issue.message);
+      const messages = ['C: Expected string, received number'];
       expect(bridge.getErrorMessages(error)).toEqual(messages);
     });
   });
@@ -196,6 +237,12 @@ describe('ZodBridge', () => {
       const bridge = new ZodBridge({ schema });
       expect(bridge.getField('a')).toBe(schema.shape.a);
       expect(bridge.getField('a.b')).toBe(schema.shape.a.unwrap().shape.b);
+    });
+
+    it('works with ZodEffects', () => {
+      const schema = object({}).refine(data => data);
+      const bridge = new ZodBridge({ schema });
+      expect(bridge.getField('')).toBe(schema._def.schema);
     });
   });
 
@@ -446,6 +493,29 @@ describe('ZodBridge', () => {
       const schema = object({ a: string() });
       const bridge = new ZodBridge({ schema });
       expect(bridge.getProps('a')).toEqual({ label: 'A', required: true });
+    });
+
+    it('works with uniforms props', () => {
+      const schema = object({ a: string().uniforms({ type: 'password' }) });
+      const bridge = new ZodBridge({ schema });
+      expect(bridge.getProps('a')).toEqual({
+        label: 'A',
+        required: true,
+        type: 'password',
+      });
+    });
+
+    it('works with uniforms props (component)', () => {
+      const field = jest.fn(() => null);
+      const Field = connectField(field);
+
+      const schema = object({ a: string().uniforms(Field) });
+      const bridge = new ZodBridge({ schema });
+      expect(bridge.getProps('a')).toEqual({
+        component: Field,
+        label: 'A',
+        required: true,
+      });
     });
   });
 
