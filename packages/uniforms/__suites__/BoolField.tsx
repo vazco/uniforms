@@ -1,4 +1,3 @@
-import { ThemeProvider, createMuiTheme } from '@material-ui/core';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { ComponentType } from 'react';
@@ -748,84 +747,6 @@ export function testBoolField(
       expect(
         screen.container.querySelectorAll('.checkbox-inline'),
       ).toHaveLength(1);
-    },
-  );
-
-  skipTestIf(!options?.testMUIThemeProps)(
-    '<BoolField> - default props are not passed when MUI theme props are specified',
-    () => {
-      const theme = createMuiTheme({
-        props: { MuiFormControl: { fullWidth: false, margin: 'normal' } },
-      });
-
-      const screen = renderWithZod({
-        element: (
-          <ThemeProvider theme={theme}>
-            <BoolField name="x" />
-          </ThemeProvider>
-        ),
-        schema: z.object({ x: z.boolean() }),
-      });
-
-      const elements = screen.container.querySelectorAll(
-        '.MuiFormControl-marginNormal',
-      );
-
-      expect(elements).toHaveLength(1);
-      expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
-    },
-  );
-
-  skipTestIf(!options?.testMUIThemeProps)(
-    '<BoolField> - default props are passed when MUI theme props are absent',
-    () => {
-      const theme = createMuiTheme({});
-
-      const screen = renderWithZod({
-        element: (
-          <ThemeProvider theme={theme}>
-            <BoolField name="x" />
-          </ThemeProvider>
-        ),
-        schema: z.object({ x: z.boolean() }),
-      });
-
-      const elements = screen.container.querySelectorAll(
-        '.MuiFormControl-marginDense',
-      );
-
-      expect(elements).toHaveLength(1);
-      expect(elements[0]).toHaveClass('MuiFormControl-fullWidth');
-    },
-  );
-
-  skipTestIf(!options?.testMUIThemeProps)(
-    '<BoolField> - explicit props are passed when MUI theme props are specified',
-    () => {
-      const theme = createMuiTheme({
-        props: { MuiFormControl: { fullWidth: true, margin: 'dense' } },
-      });
-
-      const explicitProps = {
-        fullWidth: false,
-        margin: 'normal' as const,
-      };
-
-      const screen = renderWithZod({
-        element: (
-          <ThemeProvider theme={theme}>
-            <BoolField name="x" {...explicitProps} />
-          </ThemeProvider>
-        ),
-        schema: z.object({ x: z.boolean() }),
-      });
-
-      const elements = screen.container.querySelectorAll(
-        '.MuiFormControl-marginNormal',
-      );
-
-      expect(elements).toHaveLength(1);
-      expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
     },
   );
 }

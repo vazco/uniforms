@@ -45,7 +45,6 @@
           - packages/uniforms-bootstrap3/**/*
           - packages/uniforms-bootstrap4/**/*
           - packages/uniforms-bootstrap5/**/*
-          - packages/uniforms-material/**/*
           - packages/uniforms-mui/**/*
           - packages/uniforms-semantic/**/*
           - packages/uniforms-unstyled/**/*
@@ -81,10 +80,6 @@
   - changed-files:
       - any-glob-to-any-file:
           - packages/uniforms-bootstrap5/**/*
-'Theme: Material-UI':
-  - changed-files:
-      - any-glob-to-any-file:
-          - packages/uniforms-material/**/*
 'Theme: MUI':
   - changed-files:
       - any-glob-to-any-file:
