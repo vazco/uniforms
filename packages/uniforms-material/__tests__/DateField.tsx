@@ -1,93 +1,94 @@
-import FormHelperText from '@material-ui/core/FormHelperText';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import ThemeProvider from '@material-ui/styles/ThemeProvider/ThemeProvider';
+import { screen } from '@testing-library/react';
 import React from 'react';
 import { DateField } from 'uniforms-material';
-import { render } from 'uniforms/__suites__';
-
-import createContext from './_createContext';
-import mount from './_mount';
+import { renderWithZod } from 'uniforms/__suites__';
+import { z } from 'zod';
 
 describe('@RTL - DateField tests', () => {
   test('<DateField> - default props are not passed when MUI theme props are specified', () => {
     const theme = createMuiTheme({
       props: { MuiTextField: { fullWidth: false, margin: 'normal' } },
     });
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <DateField name="x" />
-      </ThemeProvider>,
-      { x: { type: Date } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginNormal',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
+    const onChange = jest.fn();
+    renderWithZod({
+      element: (
+        <ThemeProvider theme={theme}>
+          <DateField name="x" type="date" />
+        </ThemeProvider>
+      ),
+      onChange,
+      schema: z.object({ x: z.date() }),
+    });
+    const x = screen.getByText('X');
+    expect(x.closest('.MuiFormControl-marginNormal')).toBeInTheDocument();
+    expect(x.closest('.MuiFormControl-fullWidth')).not.toBeInTheDocument();
   });
 
   test('<DateField> - default props are passed when MUI theme props are absent', () => {
     const theme = createMuiTheme({});
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <DateField name="x" />
-      </ThemeProvider>,
-      { x: { type: Date } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginDense',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0]).toHaveClass('MuiFormControl-fullWidth');
+    const onChange = jest.fn();
+    renderWithZod({
+      element: (
+        <ThemeProvider theme={theme}>
+          <DateField name="x" type="date" />
+        </ThemeProvider>
+      ),
+      onChange,
+      schema: z.object({ x: z.date() }),
+    });
+    const x = screen.getByText('X');
+    expect(
+      x.closest('.MuiFormControl-marginDense.MuiFormControl-fullWidth'),
+    ).toBeInTheDocument();
   });
 
   test('<DateField> - explicit props are passed when MUI theme props are specified', () => {
     const theme = createMuiTheme({
       props: { MuiTextField: { fullWidth: true, margin: 'dense' } },
     });
-    const explicitProps = {
-      fullWidth: false,
-      margin: 'normal' as const,
-    };
-
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <DateField name="x" {...explicitProps} />
-      </ThemeProvider>,
-      { x: { type: Date } },
-    );
-
-    const elements = container.getElementsByClassName(
-      'MuiFormControl-marginNormal',
-    );
-    expect(elements).toHaveLength(1);
-    expect(elements[0]).not.toHaveClass('MuiFormControl-fullWidth');
+    const onChange = jest.fn();
+    renderWithZod({
+      element: (
+        <ThemeProvider theme={theme}>
+          <DateField name="x" fullWidth={false} margin="normal" />
+        </ThemeProvider>
+      ),
+      onChange,
+      schema: z.object({ x: z.date() }),
+    });
+    const x = screen.getByText('X');
+    expect(x.closest('.MuiFormControl-marginNormal')).toBeInTheDocument();
+    expect(x.closest('.MuiFormControl-fullWidth')).not.toBeInTheDocument();
   });
 });
 
 test('<DateField> - renders a Input with correct error text (specified)', () => {
   const error = new Error();
-  const element = (
-    <DateField name="x" error={error} showInlineError errorMessage="Error" />
-  );
-  const wrapper = mount(element, createContext({ x: { type: Date } }));
-
-  expect(wrapper.find(FormHelperText).text()).toBe('Error');
+  renderWithZod({
+    element: (
+      <DateField name="x" error={error} errorMessage="Error" showInlineError />
+    ),
+    schema: z.object({ x: z.date() }),
+  });
+  expect(screen.getByText('Error')).toBeInTheDocument();
 });
 
 test('<DateField> - renders a Input with correct error text (showInlineError=false)', () => {
   const error = new Error();
-  const element = (
-    <DateField
-      name="x"
-      error={error}
-      showInlineError={false}
-      errorMessage="Error"
-    />
-  );
-  const wrapper = mount(element, createContext({ x: { type: Date } }));
-
-  expect(wrapper.find(FormHelperText)).toHaveLength(0);
+  renderWithZod({
+    element: (
+      <DateField
+        name="x"
+        error={error}
+        errorMessage="Error"
+        showInlineError={false}
+      />
+    ),
+    schema: z.object({ x: z.date() }),
+  });
+  expect(
+    screen.getByText('X').nextElementSibling?.classList.contains('Mui-error'),
+  ).toBe(true);
 });
