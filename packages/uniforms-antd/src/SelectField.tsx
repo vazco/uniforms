@@ -41,30 +41,33 @@ export type SelectFieldProps = CheckboxesProps | SelectProps;
 
 function Select(props: SelectFieldProps) {
   const Group = props.fieldType === Array ? CheckboxGroup : RadioGroup;
+  const filteredDOMProps = filterDOMProps(props);
   return wrapField(
     props,
     props.checkboxes ? (
-      // @ts-expect-error: Incorrect `value` type.
-      <Group
-        {...filterDOMProps(props)}
-        disabled={props.disabled}
-        name={props.name}
-        onChange={(eventOrValue: any) => {
-          if (!props.readOnly) {
-            props.onChange(
-              // FIXME: Argument type depends on `props.fieldType`.
-              props.fieldType === Array
-                ? eventOrValue
-                : eventOrValue.target.value,
-            );
-          }
-        }}
-        options={props.options?.map(option => ({
-          ...option,
-          label: option.label ?? option.value,
-        }))}
-        value={props.value}
-      />
+      <span {...filteredDOMProps}>
+        {/* @ts-expect-error: Incorrect `value` type. */}
+        <Group
+          {...filteredDOMProps}
+          disabled={props.disabled}
+          name={props.name}
+          onChange={(eventOrValue: any) => {
+            if (!props.readOnly) {
+              props.onChange(
+                // FIXME: Argument type depends on `props.fieldType`.
+                props.fieldType === Array
+                  ? eventOrValue
+                  : eventOrValue.target.value,
+              );
+            }
+          }}
+          options={props.options?.map(option => ({
+            ...option,
+            label: option.label ?? option.value,
+          }))}
+          value={props.value}
+        />
+      </span>
     ) : (
       <SelectAntD<any>
         allowClear={!props.required}
@@ -86,13 +89,14 @@ function Select(props: SelectFieldProps) {
               : []
             : props.value
         }
-        {...filterDOMProps(props)}
+        {...filteredDOMProps}
       >
         {props.options?.map(option => (
           <SelectAntD.Option
             disabled={option.disabled}
             key={option.key ?? option.value}
             value={option.value}
+            id={`${props.id}-${option.key ?? escape(option.value)}`}
           >
             {option.label ?? option.value}
           </SelectAntD.Option>

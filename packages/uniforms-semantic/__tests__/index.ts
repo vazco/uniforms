@@ -53,8 +53,13 @@ describe('@RTL', () => {
   suites.testNumField(theme.NumField);
   suites.testQuickForm(theme.QuickForm);
   suites.testRadioField(theme.RadioField);
+  suites.testSelectField(theme.SelectField);
   suites.testSubmitField(theme.SubmitField);
-  suites.testTextField(theme.TextField);
+  suites.testTextField(theme.TextField, {
+    testWrapClassName: true,
+    testRenderIcon: true,
+    testShowInlineError: true,
+  });
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
 });

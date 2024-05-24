@@ -57,8 +57,15 @@ describe('@RTL', () => {
   suites.testNumField(theme.NumField);
   suites.testQuickForm(theme.QuickForm);
   suites.testRadioField(theme.RadioField);
+  suites.testSelectField(theme.SelectField, {
+    getCheckboxInlineOption: screen =>
+      screen.getByLabelText('a').closest('.form-check-inline'),
+  });
   suites.testSubmitField(theme.SubmitField);
-  suites.testTextField(theme.TextField);
+  suites.testTextField(theme.TextField, {
+    testWrapClassName: true,
+    testMinMaxLength: true,
+  });
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
 });
