@@ -42,7 +42,6 @@
   - changed-files:
       - any-glob-to-any-file:
           - packages/uniforms-antd/**/*
-          - packages/uniforms-bootstrap3/**/*
           - packages/uniforms-bootstrap4/**/*
           - packages/uniforms-bootstrap5/**/*
           - packages/uniforms-material/**/*
@@ -69,10 +68,6 @@
   - changed-files:
       - any-glob-to-any-file:
           - packages/uniforms-antd/**/*
-'Theme: Bootstrap 3':
-  - changed-files:
-      - any-glob-to-any-file:
-          - packages/uniforms-bootstrap3/**/*
 'Theme: Bootstrap 4':
   - changed-files:
       - any-glob-to-any-file:
