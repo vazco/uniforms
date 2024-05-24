@@ -1,6 +1,6 @@
-import { List, Group, Box } from '@mantine/core';
 import React, { ReactNode } from 'react';
 import { connectField } from 'uniforms';
+import { List, Group, Box } from '@mantine/core';
 
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';
@@ -12,9 +12,9 @@ function ListItem({
 }: ListItemFieldProps) {
   return (
     <List.Item mb={12}>
-      <Group spacing="xs" position="apart" noWrap align="flex-start">
+      <Group mt="xs" align="center">
         {children}
-        <Box mt={4}>
+        <Box mt={16}>
           <ListDelField name="" />
         </Box>
       </Group>

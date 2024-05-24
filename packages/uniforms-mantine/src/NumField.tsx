@@ -1,6 +1,6 @@
-import { Input, NumberInput, NumberInputProps, Tooltip } from '@mantine/core';
 import React, { ReactNode, Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
+import { Input, NumberInput, NumberInputProps, Tooltip } from '@mantine/core';
 
 export type NumFieldProps = FieldProps<
   number,
@@ -50,7 +50,6 @@ function Num({
       readOnly={readOnly}
       ref={inputRef}
       step={step || (decimal ? 0.01 : 1)}
-      type="number"
       value={value ?? ''}
       required={tooltip ? false : required}
       {...filterDOMProps(props)}

@@ -1,22 +1,9 @@
-// @ts-nocheck
-import {
-  createStyles,
-  Input,
-  List as ListMantine,
-  ListProps,
-  Tooltip
-} from '@mantine/core';
 import React, { Children, cloneElement, isValidElement } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
+import { Input, List as ListMantine, ListProps, Tooltip } from '@mantine/core';
 
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';
-
-const useStyles = createStyles({
-  itemWrapper: {
-    width: '100%',
-  },
-});
 
 export type ListFieldProps = FieldProps<
   unknown[],
@@ -26,6 +13,9 @@ export type ListFieldProps = FieldProps<
     required?: boolean;
     reversed?: boolean;
     tooltip?: string;
+    children?:
+      | React.ReactElement<{ name?: string }>
+      | React.ReactElement<{ name?: string }>[];
   }
 >;
 
@@ -41,8 +31,6 @@ function List({
   tooltip,
   ...props
 }: ListFieldProps) {
-  const { classes } = useStyles();
-
   return (
     <Input.Wrapper
       label={
@@ -58,21 +46,14 @@ function List({
       required={tooltip ? false : required}
       error={showInlineError && !!error && errorMessage}
     >
-      <ListMantine
-        listStyleType="none"
-        classNames={{ itemWrapper: classes.itemWrapper }}
-        {...filterDOMProps(props)}
-      >
-        {value?.map((item, itemIndex) =>
+      <ListMantine listStyleType="none" w="100%" {...filterDOMProps(props)}>
+        {value?.map(itemIndex =>
           Children.map(children, (child, childIndex) =>
             isValidElement(child)
               ? cloneElement(child, {
                   key: `${itemIndex}-${childIndex}`,
-                  /* eslint-disable @typescript-eslint/no-unsafe-assignment -- Just passing through */
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/restrict-plus-operands -- Use code snippet from core uniforms
                   name: child.props.name?.replace('$', '' + itemIndex),
                   ...itemProps,
-                  /* eslint-enable @typescript-eslint/no-unsafe-assignment -- Just passing through */
                 })
               : child,
           ),

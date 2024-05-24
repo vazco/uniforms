@@ -1,15 +1,14 @@
-import { Button, ButtonProps } from '@mantine/core';
-import { IconSquarePlus } from '@tabler/icons-react';
 import cloneDeep from 'lodash/cloneDeep';
 import React from 'react';
 import {
-  ConnectedField,
   FieldProps,
   connectField,
   filterDOMProps,
   joinName,
   useField,
 } from 'uniforms';
+import { Button, ButtonProps } from '@mantine/core';
+import { IconSquarePlus } from '@tabler/icons-react';
 
 export type ListAddFieldProps = FieldProps<
   unknown,
@@ -37,7 +36,7 @@ function ListAdd({
   )[0];
 
   const limitNotReached =
-    !disabled && !(parent.maxCount! <= (parent.value?.length ?? 0));
+    !disabled && !(parent.maxCount! <= parent.value!.length);
 
   return (
     <Button
@@ -61,12 +60,7 @@ function ListAdd({
   );
 }
 
-// There's no way to tell TypeScript NOT TO expand the type alias. Creating a
-// local type helps, at least in the current version.
-// https://github.com/microsoft/TypeScript/issues/34556
-type ListAddFieldType = ConnectedField<ListAddFieldProps>;
-
 export default connectField<ListAddFieldProps>(ListAdd, {
   initialValue: false,
   kind: 'leaf',
-}) as ListAddFieldType;
+});

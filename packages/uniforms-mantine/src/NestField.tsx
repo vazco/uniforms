@@ -1,6 +1,6 @@
 import React from 'react';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
-
+import { Text } from '@mantine/core';
 import AutoField from './AutoField';
 
 export type NestFieldProps = HTMLFieldProps<
@@ -18,7 +18,7 @@ function Nest({
 }: NestFieldProps) {
   return (
     <div {...filterDOMProps(props)}>
-      {label && <label>{label}</label>}
+      {label && <Text>{label}</Text>}
       {children ||
         fields.map(field => (
           <AutoField key={field} name={field} {...itemProps} />

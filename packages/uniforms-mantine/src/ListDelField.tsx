@@ -1,5 +1,3 @@
-import { ActionIcon, ActionIconProps } from '@mantine/core';
-import { IconTrash } from '@tabler/icons-react';
 import React from 'react';
 import {
   FieldProps,
@@ -8,6 +6,8 @@ import {
   joinName,
   useField,
 } from 'uniforms';
+import { ActionIcon, ActionIconProps } from '@mantine/core';
+import { IconTrash } from '@tabler/icons-react';
 
 export type ListDelFieldProps = FieldProps<unknown, ActionIconProps>;
 
@@ -33,7 +33,7 @@ function ListDel({ disabled, name, readOnly, ...props }: ListDelFieldProps) {
         parent.onChange(value);
       }}
     >
-      <IconTrash size="1rem" color="gray" />
+      <IconTrash size="1rem" color="white" />
     </ActionIcon>
   );
 }

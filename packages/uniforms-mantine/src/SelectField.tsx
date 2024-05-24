@@ -1,25 +1,25 @@
+import React, { Ref } from 'react';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 import {
   Select as SelectMantine,
-  SelectItem,
+  ComboboxItem,
   SelectProps,
   MultiSelect,
   MultiSelectProps,
 } from '@mantine/core';
-import React, { Ref } from 'react';
-import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 export type SelectFieldProps = FieldProps<
   string | string[],
-  | Omit<SelectProps, 'maxDropdownHeight' | 'filter' | 'data'>
-  | Omit<MultiSelectProps, 'maxDropdownHeight' | 'filter' | 'data'>,
+  Omit<SelectProps, 'maxDropdownHeight' | 'filter' | 'data'> &
+    Omit<MultiSelectProps, 'maxDropdownHeight' | 'filter' | 'data'>,
   {
-    allowedValues: string[] | SelectItem[];
+    options: string[] | ComboboxItem[];
     inputRef?: Ref<HTMLInputElement>;
   }
 >;
 
 function Select({
-  allowedValues,
+  options,
   disabled,
   fieldType,
   inputRef,
@@ -41,7 +41,7 @@ function Select({
     return (
       <MultiSelect
         {...filterDOMProps(props)}
-        data={allowedValues}
+        data={options}
         disabled={disabled}
         error={showInlineError && !!error && errorMessage}
         ref={inputRef}
@@ -56,7 +56,7 @@ function Select({
         required={required ?? false}
         defaultValue={[]}
         value={value as string[]}
-        sx={{ marginBottom: 12 }}
+        mb={12}
       />
     );
   }
@@ -64,7 +64,7 @@ function Select({
   return (
     <SelectMantine
       {...filterDOMProps(props)}
-      data={allowedValues}
+      data={options}
       disabled={disabled}
       error={showInlineError && !!error && errorMessage}
       ref={inputRef}

@@ -1,15 +1,15 @@
 import React, { Ref } from 'react';
-import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
+import { Textarea, TextareaProps } from '@mantine/core';
 
-export type LongTextFieldProps = HTMLFieldProps<
+export type LongTextFieldProps = FieldProps<
   string,
-  HTMLDivElement,
+  TextareaProps,
   { inputRef?: Ref<HTMLTextAreaElement> }
 >;
 
 function LongText({
   disabled,
-  id,
   inputRef,
   label,
   name,
@@ -20,20 +20,16 @@ function LongText({
   ...props
 }: LongTextFieldProps) {
   return (
-    <div {...filterDOMProps(props)}>
-      {label && <label htmlFor={id}>{label}</label>}
-
-      <textarea
-        disabled={disabled}
-        id={id}
-        name={name}
-        onChange={event => onChange(event.target.value)}
-        placeholder={placeholder}
-        readOnly={readOnly}
-        ref={inputRef}
-        value={value ?? ''}
-      />
-    </div>
+    <Textarea
+      label={label}
+      disabled={disabled}
+      name={name}
+      onChange={event => (readOnly ? undefined : onChange(event.target.value))}
+      placeholder={placeholder}
+      ref={inputRef}
+      value={value ?? ''}
+      {...filterDOMProps(props)}
+    />
   );
 }
 

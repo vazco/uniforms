@@ -1,27 +1,20 @@
-import React, { Ref } from 'react';
-import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
+import React, { RefObject } from 'react';
+import { connectField, filterDOMProps, FieldProps } from 'uniforms';
+import { DateInput, DateTimePicker, DateInputProps } from '@mantine/dates';
 
 type DateFieldType = 'date' | 'datetime-local';
 
-/* istanbul ignore next */
-const DateConstructor = (typeof global === 'object' ? global : window).Date;
-const dateFormat = (value?: Date, type: DateFieldType = 'datetime-local') =>
-  value?.toISOString().slice(0, type === 'datetime-local' ? -8 : -14);
+type DateFieldInputProps = Omit<DateInputProps, 'onCopy'> & {
+  inputRef?: RefObject<HTMLInputElement | HTMLButtonElement>;
+  max?: Date;
+  min?: Date;
+  type?: DateFieldType;
+};
 
-export type DateFieldProps = HTMLFieldProps<
-  Date,
-  HTMLDivElement,
-  {
-    inputRef?: Ref<HTMLInputElement>;
-    max?: Date;
-    min?: Date;
-    type?: DateFieldType;
-  }
->;
+type DateFieldProps = FieldProps<Date, DateFieldInputProps>;
 
 function Date({
   disabled,
-  id,
   inputRef,
   label,
   max,
@@ -34,31 +27,47 @@ function Date({
   type = 'datetime-local',
   ...props
 }: DateFieldProps) {
-  return (
-    <div {...filterDOMProps(props)}>
-      {label && <label htmlFor={id}>{label}</label>}
-
-      <input
+  if (type === 'date') {
+    return (
+      <DateInput
         disabled={disabled}
-        id={id}
-        max={dateFormat(max)}
-        min={dateFormat(min)}
+        label={label}
         name={name}
-        onChange={event => {
-          const date = new DateConstructor(event.target.valueAsNumber);
-          if (date.getFullYear() < 10000) {
-            onChange(date);
-          } else if (isNaN(event.target.valueAsNumber)) {
-            onChange(undefined);
-          }
-        }}
+        maxDate={max}
+        minDate={min}
+        onChange={date =>
+          readOnly
+            ? undefined
+            : date === null
+            ? onChange(undefined)
+            : onChange(date)
+        }
         placeholder={placeholder}
-        readOnly={readOnly}
-        ref={inputRef}
-        type={type}
-        value={dateFormat(value, type) ?? ''}
+        ref={inputRef as RefObject<HTMLInputElement>}
+        value={value}
+        {...filterDOMProps(props)}
       />
-    </div>
+    );
+  }
+
+  return (
+    <DateTimePicker
+      disabled={disabled}
+      label={label}
+      name={name}
+      maxDate={max}
+      minDate={min}
+      placeholder={placeholder}
+      ref={inputRef as RefObject<HTMLButtonElement>}
+      value={value}
+      onChange={date =>
+        readOnly
+          ? undefined
+          : date === null
+          ? onChange(undefined)
+          : onChange(date)
+      }
+    />
   );
 }
 
