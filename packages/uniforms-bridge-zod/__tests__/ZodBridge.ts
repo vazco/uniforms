@@ -29,6 +29,7 @@ import {
   undefined as undefined_,
   union,
   unknown,
+  ZodIssueCode,
 } from 'zod';
 
 describe('ZodBridge', () => {
@@ -70,6 +71,42 @@ describe('ZodBridge', () => {
       expect(bridge.getError('a', error)).toBe(null);
       expect(bridge.getError('a.b', error)).toBe(null);
       expect(bridge.getError('a.b.c', error)).toBe(issues?.[0]);
+    });
+
+    it('works with refined schema', () => {
+      const errorMessage = 'Different values';
+
+      const schema = object({
+        a: string(),
+        b: string(),
+      }).refine(({ a, b }) => a === b, {
+        message: errorMessage,
+        path: ['b'],
+      });
+
+      const bridge = new ZodBridge({ schema });
+      const error = bridge.getValidator()({ a: 'a', b: 'b' });
+      expect(error?.issues?.[0]?.message).toBe(errorMessage);
+    });
+
+    it('works with super refined schema', () => {
+      const errorMessage = 'Different values';
+
+      const schema = object({
+        a: string(),
+        b: string(),
+      }).superRefine((val, ctx) => {
+        if (val.a !== val.b) {
+          ctx.addIssue({
+            code: ZodIssueCode.custom,
+            message: errorMessage,
+          });
+        }
+      });
+
+      const bridge = new ZodBridge({ schema });
+      const error = bridge.getValidator()({ a: 'a', b: 'b' });
+      expect(error?.issues?.[0]?.message).toBe(errorMessage);
     });
   });
 
@@ -200,6 +237,12 @@ describe('ZodBridge', () => {
       const bridge = new ZodBridge({ schema });
       expect(bridge.getField('a')).toBe(schema.shape.a);
       expect(bridge.getField('a.b')).toBe(schema.shape.a.unwrap().shape.b);
+    });
+
+    it('works with ZodEffects', () => {
+      const schema = object({}).refine(data => data);
+      const bridge = new ZodBridge({ schema });
+      expect(bridge.getField('')).toBe(schema._def.schema);
     });
   });
 
