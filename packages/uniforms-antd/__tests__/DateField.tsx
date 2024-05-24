@@ -1,4 +1,4 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent, {
   PointerEventsCheckLevel,
 } from '@testing-library/user-event';
@@ -72,8 +72,12 @@ test('<DateField> - renders an input with correct readOnly state', async () => {
 
   const input = getClosestInput('X');
   expect(input).toBeInTheDocument();
-  fireEvent.mouseDown(input!);
-  fireEvent.change(input!, { target: { value: now } });
+  await userEvent.click(input!);
+  await userEvent.type(input!, now.format('YYYY-MM-DD HH:mm:ss'));
+  const ok = screen.getByText('Ok');
+  await userEvent.click(ok, {
+    pointerEventsCheck: PointerEventsCheckLevel.Never,
+  });
   expect(onChange).not.toHaveBeenCalled();
 });
 
@@ -118,7 +122,6 @@ test('<DateField> - renders a input with correct value (specified)', () => {
   expect(input?.value).toBe(moment(now).format('YYYY-MM-DD HH:mm:ss'));
 });
 
-// FIXME: This test is broken.
 test('<DateField> - renders a input which correctly reacts on change', async () => {
   const onChange = jest.fn();
   const now = moment('2024-01-01 12:00:00');
