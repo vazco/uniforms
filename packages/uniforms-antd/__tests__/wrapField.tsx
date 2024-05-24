@@ -6,16 +6,15 @@ import { z } from 'zod';
 
 describe('wrapField tests', () => {
   test('<wrapField> - renders wrapper with extra style', () => {
-    renderWithZod({
+    const { container } = renderWithZod({
       element: wrapField(
         { wrapperStyle: { backgroundColor: 'red' } },
         <div data-testid="x" />,
       ),
       schema: z.object({}),
     });
-    expect(
-      screen.getByTestId('x').closest('.ant-form-item')?.getAttribute('style'),
-    ).toBe('background-color: red;');
+    const element = container.getElementsByClassName('ant-form-item')[0];
+    expect(element?.getAttribute('style')).toBe('background-color: red;');
   });
 
   test('<wrapField> - renders wrapper with label and info', () => {
