@@ -1,149 +1,166 @@
-import DatePicker from 'antd/lib/date-picker';
+import { fireEvent, screen } from '@testing-library/react';
+import userEvent, {
+  PointerEventsCheckLevel,
+} from '@testing-library/user-event';
 import moment from 'moment';
 import React from 'react';
 import { DateField } from 'uniforms-antd';
+import { renderWithZod } from 'uniforms/__suites__';
+import { z } from 'zod';
 
-import createContext from './_createContext';
-import mount from './_mount';
+const getClosestInput = (text: string) =>
+  screen.getByText(text).closest('.ant-row')?.querySelector('input');
 
 test('<DateField> - renders an input', () => {
-  const element = <DateField name="x" />;
-  const wrapper = mount(element, createContext({ x: { type: Date } }));
-
-  expect(wrapper.find(DatePicker)).toHaveLength(1);
+  renderWithZod({
+    element: <DateField name="x" />,
+    schema: z.object({ x: z.date() }),
+  });
+  expect(getClosestInput('X')).toBeInTheDocument();
 });
 
 test('<DateField> - default props override', () => {
-  const pickerProps = { showTime: false, style: {} };
-  const element = <DateField name="x" {...pickerProps} />;
-  const wrapper = mount(element, createContext({ x: { type: Date } }));
-
-  expect(wrapper.find(DatePicker).props()).toEqual(
-    expect.objectContaining(pickerProps),
-  );
+  const pickerProps = { name: 'y' };
+  renderWithZod({
+    // @ts-ignore -- passing the same prop for testing purposes
+    element: <DateField name="x" {...pickerProps} />,
+    schema: z.object({ y: z.date() }),
+  });
+  expect(screen.getByText('Y')).toBeInTheDocument();
 });
 
 test('<DateField> - renders a input with correct id (inherited)', () => {
-  const element = <DateField name="x" />;
-  const wrapper = mount(element, createContext({ x: { type: Date } }));
-
-  expect(wrapper.find(DatePicker)).toHaveLength(1);
-  expect(wrapper.find(DatePicker).prop('id')).toBeTruthy();
+  renderWithZod({
+    element: <DateField name="x" />,
+    schema: z.object({ x: z.date() }),
+  });
+  expect(getClosestInput('X')?.id).toBeTruthy();
 });
 
 test('<DateField> - renders a input with correct id (specified)', () => {
-  const element = <DateField name="x" id="y" />;
-  const wrapper = mount(element, createContext({ x: { type: Date } }));
-
-  expect(wrapper.find(DatePicker)).toHaveLength(1);
-  expect(wrapper.find(DatePicker).prop('id')).toBe('y');
+  renderWithZod({
+    element: <DateField name="x" id="y" />,
+    schema: z.object({ x: z.date() }),
+  });
+  expect(getClosestInput('X')?.id).toBe('y');
 });
 
 test('<DateField> - renders a input with correct name', () => {
-  const element = <DateField name="x" />;
-  const wrapper = mount(element, createContext({ x: { type: Date } }));
-
-  expect(wrapper.find(DatePicker)).toHaveLength(1);
-  expect(wrapper.find(DatePicker).prop('name')).toBe('x');
+  renderWithZod({
+    element: <DateField name="x" />,
+    schema: z.object({ x: z.date() }),
+  });
+  expect(getClosestInput('X')?.name).toBe('x');
 });
 
 test('<DateField> - renders an input with correct disabled state', () => {
-  const element = <DateField name="x" disabled />;
-  const wrapper = mount(element, createContext({ x: { type: Date } }));
-
-  expect(wrapper.find(DatePicker)).toHaveLength(1);
-  expect(wrapper.find(DatePicker).prop('disabled')).toBe(true);
+  renderWithZod({
+    element: <DateField name="x" disabled />,
+    schema: z.object({ x: z.date() }),
+  });
+  expect(getClosestInput('X')?.disabled).toBe(true);
 });
 
-test('<DateField> - renders an input with correct readOnly state', () => {
+test('<DateField> - renders an input with correct readOnly state', async () => {
   const onChange = jest.fn();
-
   const now = moment();
-  const element = <DateField name="x" readOnly />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: Date } }, { onChange }),
-  );
+  renderWithZod({
+    element: <DateField name="x" readOnly />,
+    onChange,
+    schema: z.object({ x: z.date() }),
+  });
 
-  expect(wrapper.find(DatePicker)).toHaveLength(1);
-  // @ts-expect-error
-  expect(wrapper.find(DatePicker).prop('onChange')(now)).toBeFalsy();
+  const input = getClosestInput('X');
+  expect(input).toBeInTheDocument();
+  fireEvent.mouseDown(input!);
+  fireEvent.change(input!, { target: { value: now } });
   expect(onChange).not.toHaveBeenCalled();
 });
 
 test('<DateField> - renders a input with correct label (specified)', () => {
-  const element = <DateField name="x" label="DateFieldLabel" />;
-  const wrapper = mount(element, createContext({ x: { type: Date } }));
-
-  expect(wrapper.find('label')).toHaveLength(1);
-  expect(wrapper.find('label').text()).toBe('DateFieldLabel');
+  renderWithZod({
+    element: <DateField name="x" label="DateFieldLabel" />,
+    schema: z.object({ x: z.date() }),
+  });
+  expect(screen.getByText('DateFieldLabel')).toBeInTheDocument();
 });
 
 test('<DateField> - renders a input with correct value (default)', () => {
-  const element = <DateField name="x" />;
-  const wrapper = mount(element, createContext({ x: { type: Date } }));
-
-  expect(wrapper.find(DatePicker)).toHaveLength(1);
-  expect(wrapper.find(DatePicker).prop('value')).toBe(undefined);
+  renderWithZod({
+    element: <DateField name="x" />,
+    schema: z.object({ x: z.date() }),
+  });
+  const input = getClosestInput('X');
+  expect(input).toBeInTheDocument();
+  expect(input?.value).toBe('');
 });
 
 test('<DateField> - renders a input with correct value (model)', () => {
-  const now = moment();
-  const element = <DateField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: Date } }, { model: { x: now } }),
-  );
-
-  expect(wrapper.find(DatePicker)).toHaveLength(1);
-  expect(wrapper.find(DatePicker).prop('value')).toEqual(now);
+  const now = moment('2024-01-01 12:00:00');
+  renderWithZod({
+    element: <DateField name="x" />,
+    schema: z.object({ x: z.date() }),
+    model: { x: now.toDate() },
+  });
+  const input = getClosestInput('X');
+  expect(input).toBeInTheDocument();
+  expect(input?.value).toBe(moment(now).format('YYYY-MM-DD HH:mm:ss'));
 });
 
 test('<DateField> - renders a input with correct value (specified)', () => {
-  const now = moment();
-  const element = <DateField name="x" value={now} />;
-  const wrapper = mount(element, createContext({ x: { type: Date } }));
-
-  expect(wrapper.find(DatePicker)).toHaveLength(1);
-  expect(wrapper.find(DatePicker).prop('value')).toEqual(now);
+  const now = moment('2024-01-01 12:00:00');
+  renderWithZod({
+    element: <DateField name="x" value={now} />,
+    schema: z.object({ x: z.date() }),
+  });
+  const input = getClosestInput('X');
+  expect(input).toBeInTheDocument();
+  expect(input?.value).toBe(moment(now).format('YYYY-MM-DD HH:mm:ss'));
 });
 
-test('<DateField> - renders a input which correctly reacts on change', () => {
+// FIXME: This test is broken.
+test('<DateField> - renders a input which correctly reacts on change', async () => {
   const onChange = jest.fn();
+  const now = moment('2024-01-01 12:00:00');
+  renderWithZod({
+    element: <DateField name="x" />,
+    onChange,
+    schema: z.object({ x: z.date() }),
+  });
 
-  const now = moment();
-  const element = <DateField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: Date } }, { onChange }),
-  );
-
-  expect(wrapper.find(DatePicker)).toHaveLength(1);
-  // @ts-expect-error
-  expect(wrapper.find(DatePicker).prop('onChange')(now)).toBeFalsy();
+  const input = getClosestInput('X');
+  expect(input).toBeInTheDocument();
+  await userEvent.click(input!);
+  await userEvent.type(input!, now.format('YYYY-MM-DD HH:mm:ss'));
+  const ok = screen.getByText('Ok');
+  await userEvent.click(ok, {
+    pointerEventsCheck: PointerEventsCheckLevel.Never,
+  });
   expect(onChange).toHaveBeenLastCalledWith('x', now.toDate());
 });
 
-test('<DateField> - renders a input which correctly reacts on change (empty)', () => {
+test('<DateField> - renders a input which correctly reacts on change (empty)', async () => {
   const onChange = jest.fn();
+  renderWithZod({
+    element: <DateField name="x" value={new Date()} />,
+    onChange,
+    schema: z.object({ x: z.date() }),
+  });
 
-  const element = <DateField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: Date } }, { onChange }),
-  );
-
-  expect(wrapper.find(DatePicker)).toHaveLength(1);
-  // @ts-expect-error
-  expect(wrapper.find(DatePicker).prop('onChange')(undefined)).toBeFalsy();
+  const input = getClosestInput('X');
+  expect(input).toBeInTheDocument();
+  await userEvent.click(input!);
+  const clear = input?.parentElement?.querySelector('.ant-picker-clear');
+  await userEvent.click(clear!);
   expect(onChange).toHaveBeenLastCalledWith('x', undefined);
 });
 
 test('<DateField> - renders a wrapper with unknown props', () => {
-  const element = <DateField name="x" data-x="x" data-y="y" data-z="z" />;
-  const wrapper = mount(element, createContext({ x: { type: Date } }));
-
-  expect(wrapper.find(DatePicker).prop('data-x')).toBe('x');
-  expect(wrapper.find(DatePicker).prop('data-y')).toBe('y');
-  expect(wrapper.find(DatePicker).prop('data-z')).toBe('z');
+  renderWithZod({
+    element: <DateField name="x" data-x="x" data-y="y" data-z="z" />,
+    schema: z.object({ x: z.date() }),
+  });
+  expect(getClosestInput('X')?.getAttribute('data-x')).toBe('x');
+  expect(getClosestInput('X')?.getAttribute('data-y')).toBe('y');
+  expect(getClosestInput('X')?.getAttribute('data-z')).toBe('z');
 });
