@@ -93,14 +93,6 @@ export class BaseForm<
     if (this.delayId) {
       clearTimeout(this.delayId);
     }
-
-    // There are at least 4 places where we'd need to check, whether or not we
-    // actually perform `setState` after the component gets unmounted. Instead,
-    // we override it to hide the React warning. Also because React no longer
-    // will raise it in the newer versions.
-    // https://github.com/facebook/react/pull/22114
-    // https://github.com/vazco/uniforms/issues/1152
-    this.setState = () => {};
   }
 
   delayId?: ReturnType<typeof setTimeout> | undefined;
@@ -237,12 +229,14 @@ export class BaseForm<
       this.delayId = setTimeout(() => {
         // ...and wait for all scheduled `setState`s to commit. This is required
         // for AutoForm to validate correct model, waiting in `onChange`.
-        this.setState(
-          () => null,
-          () => {
-            this.onSubmit();
-          },
-        );
+        if (this.mounted) {
+          this.setState(
+            () => null,
+            () => {
+              this.onSubmit();
+            },
+          );
+        }
       }, this.props.autosaveDelay);
     }
   }
@@ -258,10 +252,12 @@ export class BaseForm<
   }
 
   onReset() {
-    // @ts-expect-error
-    // It's bound in constructor.
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    this.setState(this.__reset);
+    if (this.mounted) {
+      // @ts-expect-error
+      // It's bound in constructor.
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      this.setState(this.__reset);
+    }
   }
 
   onSubmit(event?: SyntheticEvent) {
@@ -270,16 +266,23 @@ export class BaseForm<
       event.stopPropagation();
     }
 
-    this.setState(state => (state.submitted ? null : { submitted: true }));
+    if (this.mounted) {
+      this.setState(state => (state.submitted ? null : { submitted: true }));
+    }
 
     const result = this.props.onSubmit(this.getModel('submit'));
     if (!(result instanceof Promise)) {
       return Promise.resolve();
     }
 
-    this.setState({ submitting: true });
+    if (this.mounted) {
+      this.setState({ submitting: true });
+    }
+
     return result.finally(() => {
-      this.setState({ submitting: false });
+      if (this.mounted) {
+        this.setState({ submitting: false });
+      }
     });
   }
 
