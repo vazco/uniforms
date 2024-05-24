@@ -25,42 +25,6 @@ const presets = {
     })
   `,
 
-  'Address (GraphQL)': preset`
-    new GraphQLBridge({
-      schema: buildASTSchema(
-          parse(\`
-            type Address {
-              city:   String
-              state:  String!
-              street: String!
-              zip:    String!
-            }
-
-            # This is required by buildASTSchema
-            type Query { anything: ID }
-          \`)
-        ).getType('Address'),
-        function (model) {
-          const details = [];
-          if (!model.state)
-            details.push({ name: 'state', message: 'State is required!' });
-          if (!model.street)
-            details.push({ name: 'street', message: 'Street is required!' });
-          if (!model.zip)
-            details.push({ name: 'zip', message: 'Zip is required!' });
-          if (model.city && model.city.length > 50)
-            details.push({ name: 'city', message: 'City can be at least 50 characters long!' });
-          if (model.street && model.street.length > 100)
-            details.push({ name: 'street', message: 'Street can be at least 100 characters long!' });
-          if (model.zip && !/^[0-9]{5}$/.test(model.zip))
-            details.push({ name: 'zip', message: 'Zip does not match the regular expression!' });
-          if (details.length)
-            return { details };
-        },
-        extras: { zip: { label: 'Zip code' } }
-    })
-  `,
-
   'Address (JSONSchema)': preset`
     (() => {
       const ajv = new Ajv({ allErrors: true, useDefaults: true, keywords: ["uniforms"] });
