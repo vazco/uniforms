@@ -7,9 +7,13 @@ import { skipTestIf } from './skipTestIf';
 
 export function testWrapField(
   wrapField: (wrapperProps: any, children: ReactNode) => ReactElement,
-  options?: {
+  options: {
     skipForMUI?: boolean;
     skipForAntD?: boolean;
+    withoutLabel?: boolean;
+    helpPropsName: 'help' | 'helperText';
+  } = {
+    helpPropsName: 'help',
   },
 ) {
   skipTestIf(options?.skipForMUI || options?.skipForAntD)(
@@ -30,10 +34,7 @@ export function testWrapField(
 
   test('<wrapField> - renders help block', () => {
     renderWithZod({
-      element: wrapField(
-        options?.skipForMUI ? { helperText: 'Hint' } : { help: 'Hint' },
-        <div />,
-      ),
+      element: wrapField({ [options.helpPropsName]: 'Hint' }, <div />),
       schema: z.object({}),
     });
     expect(screen.getByText('Hint')).toBeInTheDocument();
@@ -66,7 +67,7 @@ export function testWrapField(
     expect(screen.getByText('Error')).toBeInTheDocument();
   });
 
-  skipTestIf(options?.skipForMUI)(
+  skipTestIf(options?.withoutLabel)(
     '<wrapField> - renders wrapper with label',
     () => {
       renderWithZod({
@@ -105,21 +106,6 @@ export function testWrapField(
       const label = screen.getByText('A field label');
       expect(label.classList.contains('custom-1')).toBe(true);
       expect(label.classList.contains('custom-2')).toBe(true);
-    },
-  );
-
-  skipTestIf(options?.skipForMUI)(
-    '<wrapField> - renders wrapper with extra text',
-    () => {
-      renderWithZod({
-        element: wrapField({ extra: 'Extra' }, <div data-testid="x" />),
-        schema: z.object({}),
-      });
-      if (options?.skipForAntD) {
-        expect(screen.getByText('Extra')).toBeInTheDocument();
-      } else {
-        expect(screen.getByTestId('x').parentElement).toHaveAttribute('extra');
-      }
     },
   );
 

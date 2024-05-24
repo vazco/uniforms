@@ -18,19 +18,6 @@ describe('wrapField tests', () => {
     ).toBe('background-color: red;');
   });
 
-  test('<wrapField> - renders wrapper with an error status (error)', () => {
-    const error = new Error();
-    renderWithZod({
-      element: wrapField({ error }, <div data-testid="x" />),
-      schema: z.object({}),
-    });
-    expect(
-      screen
-        .getByTestId('x')
-        .closest('.ant-form-item-has-feedback.ant-form-item-has-error'),
-    ).toBeInTheDocument();
-  });
-
   test('<wrapField> - renders wrapper with label and info', () => {
     renderWithZod({
       element: wrapField({ label: 'Label', info: 'Info' }, <div />),
@@ -39,6 +26,14 @@ describe('wrapField tests', () => {
     expect(screen.getByRole('img').getAttribute('aria-label')).toBe(
       'question-circle',
     );
+  });
+
+  test('<wrapField> - renders wrapper with extra text', () => {
+    renderWithZod({
+      element: wrapField({ extra: 'Extra' }, <div data-testid="x" />),
+      schema: z.object({}),
+    });
+    expect(screen.getByText('Extra')).toBeInTheDocument();
   });
 
   test('<wrapField> - renders wrapper with a custom validateStatus', () => {
