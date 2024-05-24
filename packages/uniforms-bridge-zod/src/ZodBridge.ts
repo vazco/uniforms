@@ -155,6 +155,14 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     };
 
     let field = this.getField(name);
+
+    const uniforms = field._uniforms;
+    if (typeof uniforms === 'function') {
+      props.component = uniforms;
+    } else {
+      Object.assign(props, uniforms);
+    }
+
     if (field instanceof ZodDefault) {
       field = field.removeDefault();
       props.required = false;

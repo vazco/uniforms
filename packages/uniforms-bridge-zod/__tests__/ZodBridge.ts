@@ -1,3 +1,4 @@
+import { connectField } from 'uniforms';
 import { ZodBridge } from 'uniforms-bridge-zod';
 import {
   any,
@@ -446,6 +447,29 @@ describe('ZodBridge', () => {
       const schema = object({ a: string() });
       const bridge = new ZodBridge({ schema });
       expect(bridge.getProps('a')).toEqual({ label: 'A', required: true });
+    });
+
+    it('works with uniforms props', () => {
+      const schema = object({ a: string().uniforms({ type: 'password' }) });
+      const bridge = new ZodBridge({ schema });
+      expect(bridge.getProps('a')).toEqual({
+        label: 'A',
+        required: true,
+        type: 'password',
+      });
+    });
+
+    it('works with uniforms props (component)', () => {
+      const field = jest.fn(() => null);
+      const Field = connectField(field);
+
+      const schema = object({ a: string().uniforms(Field) });
+      const bridge = new ZodBridge({ schema });
+      expect(bridge.getProps('a')).toEqual({
+        component: Field,
+        label: 'A',
+        required: true,
+      });
     });
   });
 
