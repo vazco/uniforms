@@ -2,8 +2,8 @@ import Link from '@docusaurus/Link';
 import classNames from 'classnames';
 import React, { ComponentType } from 'react';
 
-import styles from '../index.module.css';
 import { Oval } from './Oval';
+import styles from '../index.module.css';
 
 export type BadgeProps = {
   border: number;

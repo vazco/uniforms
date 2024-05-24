@@ -307,7 +307,6 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
   getValidator() {
     return (model: UnknownObject) => {
       // TODO: What about async schemas?
-      // eslint-disable-next-line react/no-this-in-sfc
       const result = this.schema.safeParse(model);
       return result.success ? null : result.error;
     };

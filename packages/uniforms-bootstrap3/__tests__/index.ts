@@ -1,5 +1,5 @@
-import * as theme from 'uniforms-bootstrap3';
 import * as suites from 'uniforms/__suites__';
+import * as theme from 'uniforms-bootstrap3';
 
 it('exports everything', () => {
   expect(theme).toEqual({

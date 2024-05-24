@@ -3,8 +3,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import classNames from 'classnames';
 import React from 'react';
 
-import styles from '../../index.module.css';
 import { ShowcaseCard } from './ShowcaseCard';
+import styles from '../../index.module.css';
 
 export function Footer() {
   const context = useDocusaurusContext();

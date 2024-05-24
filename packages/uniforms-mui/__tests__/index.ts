@@ -1,5 +1,5 @@
-import * as theme from 'uniforms-mui';
 import * as suites from 'uniforms/__suites__';
+import * as theme from 'uniforms-mui';
 
 it('exports everything', () => {
   expect(theme).toEqual({

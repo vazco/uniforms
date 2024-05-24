@@ -3,8 +3,8 @@ import createMuiTheme, {
 } from '@material-ui/core/styles/createMuiTheme';
 import ThemeProvider from '@material-ui/styles/ThemeProvider/ThemeProvider';
 import React, { PropsWithChildren } from 'react';
-import * as theme from 'uniforms-material';
 import * as suites from 'uniforms/__suites__';
+import * as theme from 'uniforms-material';
 
 it('exports everything', () => {
   expect(theme).toEqual({

@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import styles from '../../index.module.css';
 import { CommercialServices } from './CommercialServices';
 import { Comparison } from './Comparison';
 import { Discussions } from './Discussions';
@@ -13,6 +12,7 @@ import { OpenSource } from './OpenSource';
 import { Testimonials } from './Testimonials';
 import { WhoUses } from './WhoUses';
 import { WhyUs } from './WhyUs';
+import styles from '../../index.module.css';
 
 export function LandingPage() {
   return (

@@ -1,8 +1,8 @@
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import ThemeProvider from '@material-ui/styles/ThemeProvider/ThemeProvider';
 import React from 'react';
-import { ErrorsField } from 'uniforms-material';
 import { renderWithZod } from 'uniforms/__suites__';
+import { ErrorsField } from 'uniforms-material';
 import z from 'zod';
 
 describe('@RTL - ErrorsField tests', () => {

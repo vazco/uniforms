@@ -3,8 +3,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import ThemeProvider from '@material-ui/styles/ThemeProvider/ThemeProvider';
 import React from 'react';
-import { NestField } from 'uniforms-material';
 import { render } from 'uniforms/__suites__';
+import { NestField } from 'uniforms-material';
 
 import createContext from './_createContext';
 import mount from './_mount';

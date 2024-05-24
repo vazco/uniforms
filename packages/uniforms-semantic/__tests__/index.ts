@@ -1,5 +1,5 @@
-import * as theme from 'uniforms-semantic';
 import * as suites from 'uniforms/__suites__';
+import * as theme from 'uniforms-semantic';
 
 it('exports everything', () => {
   expect(theme).toEqual({

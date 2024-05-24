@@ -1,10 +1,10 @@
 import React, { ComponentType } from 'react';
 import { Box, Code, Database } from 'react-feather';
 
-import { themeContext } from '../lib/universal';
 import { CodeSection } from './CodeSection';
 import { FormWrapper } from './FormWrapper';
 import { TogglerTabs } from './TogglerTabs';
+import { themeContext } from '../lib/universal';
 
 const tabs = [
   { name: 'Semantic', value: 'semantic' as const },
