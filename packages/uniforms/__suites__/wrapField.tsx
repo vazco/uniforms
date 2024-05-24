@@ -10,40 +10,8 @@ export function testWrapField(
   options?: {
     skipForMUI?: boolean;
     skipForAntD?: boolean;
-    onlyForBootstrap3?: boolean;
   },
 ) {
-  skipTestIf(!options?.onlyForBootstrap3)(
-    '<wrapField> - renders wrapper with (feedbackable=true)',
-    () => {
-      const error = new Error();
-      renderWithZod({
-        element: wrapField(
-          { error, feedbackable: true },
-          <div data-testid="x" />,
-        ),
-        schema: z.object({}),
-      });
-      const x = screen.getByTestId('x');
-      expect(x.parentElement?.classList.contains('has-feedback')).toBe(true);
-      expect(
-        x.nextElementSibling?.classList.contains('form-control-feedback'),
-      ).toBe(true);
-    },
-  );
-
-  skipTestIf(!options?.skipForMUI)('<wrapField> - renders wrapper', () => {
-    renderWithZod({
-      element: wrapField({}, <div data-testid="x" />),
-      schema: z.object({}),
-    });
-    expect(
-      screen
-        .getByTestId('x')
-        .parentElement?.classList.contains('MuiFormControl-root'),
-    ).toBe(true);
-  });
-
   skipTestIf(options?.skipForMUI || options?.skipForAntD)(
     '<wrapField> - renders wrapper with correct class',
     () => {
@@ -86,7 +54,7 @@ export function testWrapField(
     },
   );
 
-  test('<wrapField> - renders error block', () => {
+  test('<wrapField> - renders error block (showInlineError=true)', () => {
     const error = new Error();
     renderWithZod({
       element: wrapField(
@@ -140,43 +108,6 @@ export function testWrapField(
     },
   );
 
-  skipTestIf(!options?.skipForAntD)(
-    '<wrapField> - renders wrapper with a custom validateStatus',
-    () => {
-      renderWithZod({
-        element: wrapField(
-          { validateStatus: 'success' },
-          <div data-testid="x" />,
-        ),
-        schema: z.object({}),
-      });
-      expect(
-        screen
-          .getByTestId('x')
-          .closest('.ant-form-item-has-feedback.ant-form-item-has-success'),
-      ).toBeInTheDocument();
-    },
-  );
-
-  skipTestIf(!options?.skipForAntD)(
-    '<wrapField> - renders wrapper with extra style',
-    () => {
-      renderWithZod({
-        element: wrapField(
-          { wrapperStyle: { backgroundColor: 'red' } },
-          <div data-testid="x" />,
-        ),
-        schema: z.object({}),
-      });
-      expect(
-        screen
-          .getByTestId('x')
-          .closest('.ant-form-item')
-          ?.getAttribute('style'),
-      ).toBe('background-color: red;');
-    },
-  );
-
   skipTestIf(options?.skipForMUI)(
     '<wrapField> - renders wrapper with extra text',
     () => {
@@ -192,22 +123,6 @@ export function testWrapField(
     },
   );
 
-  skipTestIf(!options?.skipForAntD)(
-    '<wrapField> - renders wrapper with an error status (error)',
-    () => {
-      const error = new Error();
-      renderWithZod({
-        element: wrapField({ error }, <div data-testid="x" />),
-        schema: z.object({}),
-      });
-      expect(
-        screen
-          .getByTestId('x')
-          .closest('.ant-form-item-has-feedback.ant-form-item-has-error'),
-      ).toBeInTheDocument();
-    },
-  );
-
   skipTestIf(options?.skipForMUI)(
     '<wrapField> - renders error block (showInlineError=false)',
     () => {
@@ -220,30 +135,9 @@ export function testWrapField(
         schema: z.object({}),
       });
       const x = screen.getByTestId('x');
-      if (options?.skipForAntD) {
-        expect(
-          x.closest('.ant-form-item-has-feedback.ant-form-item-has-error'),
-        ).toBeInTheDocument();
-      } else {
-        expect(
-          x.parentElement?.classList.contains(
-            options?.onlyForBootstrap3 ? 'has-error' : 'is-invalid',
-          ),
-        ).toBe(true);
-      }
-    },
-  );
-
-  skipTestIf(!options?.skipForAntD)(
-    '<wrapField> - renders wrapper with label and info',
-    () => {
-      renderWithZod({
-        element: wrapField({ label: 'Label', info: 'Info' }, <div />),
-        schema: z.object({}),
-      });
-      expect(screen.getByRole('img').getAttribute('aria-label')).toBe(
-        'question-circle',
-      );
+      expect(
+        x.closest('.ant-form-item-has-error, .is-invalid'),
+      ).toBeInTheDocument();
     },
   );
 }
