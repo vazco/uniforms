@@ -18,6 +18,7 @@ export default function SubmitField({
 
   return (
     <Button
+      mb="xs"
       disabled={
         disabled === undefined
           ? !!(error || state.disabled || submitting)

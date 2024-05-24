@@ -21,6 +21,7 @@ function LongText({
 }: LongTextFieldProps) {
   return (
     <Textarea
+      mb="xs"
       label={label}
       disabled={disabled}
       name={name}

@@ -40,6 +40,7 @@ function ListAdd({
 
   return (
     <Button
+      mb="xs"
       {...filterDOMProps(props)}
       fullWidth
       disabled={!limitNotReached}

@@ -14,7 +14,7 @@ function ListItem({
     <List.Item mb={12}>
       <Group mt="xs" align="center">
         {children}
-        <Box mt={16}>
+        <Box mt={20}>
           <ListDelField name="" />
         </Box>
       </Group>

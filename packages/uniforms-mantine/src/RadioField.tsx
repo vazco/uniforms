@@ -24,7 +24,7 @@ function Radio({
   ...props
 }: RadioFieldProps) {
   return (
-    <Stack>
+    <Stack mb="xs">
       {label && <Text>{label}</Text>}
       {options?.map(option => (
         <MantineRadio

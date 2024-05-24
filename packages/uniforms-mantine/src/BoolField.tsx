@@ -23,6 +23,7 @@ function Bool({
 }: BoolFieldProps) {
   return (
     <Checkbox
+      mb="xs"
       checked={value || false}
       disabled={disabled}
       error={showInlineError && !!error && errorMessage}

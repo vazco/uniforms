@@ -33,6 +33,7 @@ function List({
 }: ListFieldProps) {
   return (
     <Input.Wrapper
+      mb="xs"
       label={
         tooltip ? (
           <>
@@ -47,7 +48,7 @@ function List({
       error={showInlineError && !!error && errorMessage}
     >
       <ListMantine listStyleType="none" w="100%" {...filterDOMProps(props)}>
-        {value?.map(itemIndex =>
+        {value?.map((item, itemIndex) =>
           Children.map(children, (child, childIndex) =>
             isValidElement(child)
               ? cloneElement(child, {

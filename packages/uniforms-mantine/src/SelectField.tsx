@@ -56,13 +56,14 @@ function Select({
         required={required ?? false}
         defaultValue={[]}
         value={value as string[]}
-        mb={12}
+        mb="xs"
       />
     );
   }
 
   return (
     <SelectMantine
+      mb="xs"
       {...filterDOMProps(props)}
       data={options}
       disabled={disabled}

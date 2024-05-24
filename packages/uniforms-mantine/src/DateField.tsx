@@ -1,6 +1,6 @@
+import { DateInput, DateTimePicker, DateInputProps } from '@mantine/dates';
 import React, { RefObject } from 'react';
 import { connectField, filterDOMProps, FieldProps } from 'uniforms';
-import { DateInput, DateTimePicker, DateInputProps } from '@mantine/dates';
 
 type DateFieldType = 'date' | 'datetime-local';
 
@@ -30,12 +30,13 @@ function Date({
   if (type === 'date') {
     return (
       <DateInput
+        mb="xs"
         disabled={disabled}
         label={label}
         name={name}
         maxDate={max}
         minDate={min}
-        onChange={date =>
+        onChange={(date: Date) =>
           readOnly
             ? undefined
             : date === null
@@ -60,7 +61,7 @@ function Date({
       placeholder={placeholder}
       ref={inputRef as RefObject<HTMLButtonElement>}
       value={value}
-      onChange={date =>
+      onChange={(date: Date) =>
         readOnly
           ? undefined
           : date === null

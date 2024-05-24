@@ -28,6 +28,7 @@ function Text({
   return (
     <div>
       <TextInput
+        mb="xs"
         label={label}
         autoComplete={autoComplete}
         error={showInlineError && !!error && errorMessage}

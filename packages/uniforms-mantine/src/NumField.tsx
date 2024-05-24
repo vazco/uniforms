@@ -27,6 +27,7 @@ function Num({
 }: NumFieldProps) {
   return (
     <NumberInput
+      mb="xs"
       disabled={disabled}
       label={
         tooltip ? (

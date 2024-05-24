@@ -25,6 +25,7 @@ function ListDel({ disabled, name, readOnly, ...props }: ListDelFieldProps) {
 
   return (
     <ActionIcon
+      mb="xs"
       {...filterDOMProps(props)}
       disabled={disabled}
       onClick={() => {
