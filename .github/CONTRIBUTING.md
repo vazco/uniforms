@@ -48,6 +48,12 @@ npm run build -- --watch
 npm run test -- --watch
 ```
 
+#### Fixing lint issues automatically
+
+```sh
+npm run lint:code -- --fix
+```
+
 #### Making changes to the documentation website (docusaurus)
 
 The local version of docs will use the locally built version of uniforms, so make sure to run the build in watch mode for live changes.
