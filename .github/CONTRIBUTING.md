@@ -32,9 +32,9 @@ Our kanban board is public and available [here](https://github.com/orgs/vazco/pr
 
 ### Development
 
-For the best developer experience (DX) when developing locally it is recommended to start `build` and `test` in a `--watch` mode.
+For the best local developer experience (DX) it is recommended to start `build` and `test` in `--watch` mode.
 
-In the root directory...
+Run the commands below in the root directory.
 
 #### Running the build in watch mode
 
@@ -64,7 +64,7 @@ Navigate to `/website` and run
 npm start
 ```
 
-it will start the docusaurus in development mode supporting hot reload, so you should see the changes made to the website immediately.
+It will start the docusaurus in development mode supporting hot reload so you should see the changes made to the website immediately.
 
 ## _Work in progress_ PRs are also welcome
 
