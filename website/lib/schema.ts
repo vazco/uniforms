@@ -1,9 +1,7 @@
 import Ajv from 'ajv';
-import { buildASTSchema, parse } from 'graphql';
 import MessageBox from 'message-box';
 import SimpleSchema from 'simpl-schema';
 import { filterDOMProps } from 'uniforms';
-import { GraphQLBridge } from 'uniforms-bridge-graphql';
 import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 import { ZodBridge } from 'uniforms-bridge-zod';
@@ -30,13 +28,10 @@ SimpleSchema.extendOptions(['uniforms']);
 
 // This is required for the eval.
 scope.Ajv = Ajv;
-scope.GraphQLBridge = GraphQLBridge;
 scope.JSONSchemaBridge = JSONSchemaBridge;
 scope.SimpleSchema = SimpleSchema;
 scope.SimpleSchema2Bridge = SimpleSchema2Bridge;
 scope.ZodBridge = ZodBridge;
-scope.buildASTSchema = buildASTSchema;
-scope.parse = parse;
 scope.z = z;
 
 // Dynamic field error.
