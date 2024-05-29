@@ -1,5 +1,7 @@
 import invariant from 'invariant';
+import set from 'lodash/set';
 
+import { joinName } from './joinName';
 import { UnknownObject } from './types';
 
 export abstract class Bridge {
@@ -82,6 +84,23 @@ export abstract class Bridge {
       this.constructor.name,
       { name },
     );
+  }
+
+  /**
+   * Get initial model value recursively.
+   */
+  getInitialModel(): UnknownObject {
+    const initialModel: UnknownObject = {};
+    const subFields = this.getSubfields();
+    for (const fieldName of subFields) {
+      const initialValue = this.getInitialValue(fieldName);
+      set(initialModel, fieldName, initialValue);
+      const newSubFields = this.getSubfields(fieldName).map(subField =>
+        joinName(fieldName, subField),
+      );
+      subFields.push(...newSubFields);
+    }
+    return initialModel;
   }
 
   /**
