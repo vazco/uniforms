@@ -13,11 +13,11 @@ Currently available bridges:
 
 - `JSONSchemaBridge` in `uniforms-bridge-json-schema` ([schema documentation](https://json-schema.org/))
 - `SimpleSchema2Bridge` in `uniforms-bridge-simple-schema-2` ([schema documentation](https://github.com/longshotlabs/simpl-schema#readme))
-- `SimpleSchemaBridge` in `uniforms-bridge-simple-schema` ([schema documentation](https://github.com/Meteor-Community-Packages/meteor-simple-schema/blob/master/DOCS.md))
 - `ZodBridge` in `uniforms-bridge-zod` ([schema documentation](https://zod.dev/))
 
-Deprecated packages:
+Deprecated bridges:
 
+- `SimpleSchemaBridge` in `uniforms-bridge-simple-schema` ([schema documentation](https://github.com/Meteor-Community-Packages/meteor-simple-schema/blob/master/DOCS.md))
 - `GraphQLBridge` in `uniforms-bridge-graphql` ([schema documentation](https://graphql.org/))
 
 If you see a lot of [`Warning: Unknown props...`](https://fb.me/react-unknown-prop) logs, check if your schema or theme doesn't provide extra props. If so, consider [registering it with `filterDOMProps`](/docs/api-helpers#filterdomprops).
@@ -141,7 +141,24 @@ const schema = new SimpleSchema({
 const bridge = new SimpleSchema2Bridge({ schema });
 ```
 
+## `ZodBridge`
+
+```tsx
+import ZodBridge from 'uniforms-bridge-zod';
+import z from 'zod';
+
+const schema = z.object({ aboutMe: z.string() });
+
+const bridge = new ZodBridge({ schema });
+```
+
 ## `SimpleSchemaBridge`
+
+:::caution
+
+SimpleSchemaBridge is deprecated since uniforms v4.
+
+:::
 
 ```tsx
 import SimpleSchemaBridge from 'uniforms-bridge-simple-schema';
