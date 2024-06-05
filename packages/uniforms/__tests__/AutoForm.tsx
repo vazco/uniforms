@@ -34,8 +34,6 @@ describe('<AutoForm />', () => {
         <AutoForm onChange={onChange} schema={schema}>
           <AutoFields />
         </AutoForm>,
-        schemaDefinition,
-        { onChange },
       );
       const input = screen.getByLabelText('A');
       fireEvent.change(input, { target: { value: '2' } });
@@ -90,7 +88,6 @@ describe('<AutoForm />', () => {
           <context.Consumer children={contextSpy} />
           <AutoFields />
         </AutoForm>,
-        schemaDefinition,
       );
 
       const fieldA = screen.getByLabelText('A');
@@ -114,7 +111,6 @@ describe('<AutoForm />', () => {
           <context.Consumer children={contextSpy} />
           <AutoFields />
         </AutoForm>,
-        schemaDefinition,
       );
 
       // initial render shouldn't mark form as changed
@@ -137,7 +133,6 @@ describe('<AutoForm />', () => {
           <context.Consumer children={contextSpy} />
           <AutoFields />
         </AutoForm>,
-        schemaDefinition,
       );
 
       // initial render shouldn't mark form as changed
@@ -286,7 +281,6 @@ describe('<AutoForm />', () => {
         <AutoForm schema={schema}>
           <context.Consumer children={contextSpy} />
         </AutoForm>,
-        schemaDefinition,
       );
 
       expect(contextSpy).toHaveBeenLastCalledWith(

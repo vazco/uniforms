@@ -44,7 +44,7 @@ describe('@RTL', () => {
   suites.testListAddField(theme.ListAddField);
   suites.testListDelField(theme.ListDelField);
   suites.testListField(theme.ListField, {
-    getListAddField: screen => screen.getByRole('button'),
+    getListAddField: screen => screen.getByRole('button', { name: '+' }),
     testError: false,
   });
   suites.testListItemField(theme.ListItemField);

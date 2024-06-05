@@ -20,6 +20,7 @@ describe('connectField', () => {
     another: { type: String, optional: true },
     field: { type: Object, label: 'Field' },
     'field.subfield': { type: String, label: 'Subfield' },
+    fieldWithDefaultValue: { type: String, defaultValue: 'John' },
   };
 
   const reactContext = {
@@ -47,9 +48,11 @@ describe('connectField', () => {
       onChange: OnChange<string>;
       label?: string | React.ReactNode;
       id: string;
+      value: string | number;
     },
   ) => {
-    return props.children ? (
+    const filteredProps = filterDOMProps(omit(props, 'children', 'label'));
+    return (
       <>
         {props.label && (
           <label htmlFor={props.id} data-testid="label">
@@ -58,23 +61,11 @@ describe('connectField', () => {
         )}
         <input
           data-testid="field"
-          {...filterDOMProps(omit(props, 'children', 'label'))}
+          {...filteredProps}
           onChange={event => props.onChange(event.target.value)}
+          value={props.value}
         />
         {props.children}
-      </>
-    ) : (
-      <>
-        {props.label ? (
-          <label htmlFor={props.id} data-testid="label">
-            {props.label}
-          </label>
-        ) : null}
-        <input
-          data-testid="field"
-          {...filterDOMProps(omit(props, 'label'))}
-          onChange={event => props.onChange(event.target.value)}
-        />
       </>
     );
   };
@@ -113,20 +104,23 @@ describe('connectField', () => {
   });
 
   describe('when called with `initialValue`', () => {
-    it('includes default value (true)', () => {
+    it('does nothing, uses default value from schema (true)', async () => {
       const Field = connectField(Test, { initialValue: true });
 
-      render(<Field name="field" />, schema, reactContext);
+      render(<Field name="fieldWithDefaultValue" />, schema, reactContext);
 
-      expect(onChange).toBeCalledWith('field', {});
+      screen.logTestingPlaygroundURL();
+      expect(onChange).not.toBeCalled();
+      expect(await screen.findByDisplayValue('John')).toBeInTheDocument();
     });
 
-    it('does nothing (false)', () => {
+    it('does nothing, uses default value from schema (false)', async () => {
       const Field = connectField(Test, { initialValue: false });
 
-      render(<Field name="field" />, schema, reactContext);
+      render(<Field name="fieldWithDefaultValue" />, schema, reactContext);
 
       expect(onChange).not.toBeCalled();
+      expect(await screen.findByDisplayValue('John')).toBeInTheDocument();
     });
 
     it('respects `required` (props)', () => {
@@ -151,14 +145,35 @@ describe('connectField', () => {
       const Field = connectField(Test);
 
       render(
-        <Field name="field" value="initialValueExample" />,
+        <Field name="fieldWithDefaultValue" value="initialValueExample" />,
         schema,
         reactContext,
       );
 
       await new Promise(resolve => setTimeout(resolve, 10));
 
-      expect(onChange).toBeCalledWith('field', 'initialValueExample');
+      expect(onChange).toBeCalledWith(
+        'fieldWithDefaultValue',
+        'initialValueExample',
+      );
+      expect(
+        await screen.findByDisplayValue('initialValueExample'),
+      ).toBeInTheDocument();
+    });
+
+    it('does nothing (value is the same as in schema)', async () => {
+      const Field = connectField(Test);
+
+      render(
+        <Field name="fieldWithDefaultValue" value="John" />,
+        schema,
+        reactContext,
+      );
+
+      await new Promise(resolve => setTimeout(resolve, 10));
+
+      expect(onChange).not.toBeCalled();
+      expect(await screen.findByDisplayValue('John')).toBeInTheDocument();
     });
   });
 
