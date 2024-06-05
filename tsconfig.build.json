@@ -14,8 +14,6 @@
     { "path": "packages/uniforms-bootstrap5/tsconfig.esm.json" },
     { "path": "packages/uniforms-bridge-json-schema/tsconfig.cjs.json" },
     { "path": "packages/uniforms-bridge-json-schema/tsconfig.esm.json" },
-    { "path": "packages/uniforms-bridge-simple-schema/tsconfig.cjs.json" },
-    { "path": "packages/uniforms-bridge-simple-schema/tsconfig.esm.json" },
     { "path": "packages/uniforms-bridge-simple-schema-2/tsconfig.cjs.json" },
     { "path": "packages/uniforms-bridge-simple-schema-2/tsconfig.esm.json" },
     { "path": "packages/uniforms-bridge-zod/tsconfig.cjs.json" },

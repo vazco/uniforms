@@ -3,7 +3,6 @@
       - any-glob-to-any-file:
           - packages/uniforms-bridge-json-schema/**/*
           - packages/uniforms-bridge-simple-schema-2/**/*
-          - packages/uniforms-bridge-simple-schema/**/*
           - packages/uniforms-bridge-zod/**/*
 'Area: Core':
   - changed-files:
@@ -53,10 +52,6 @@
   - changed-files:
       - any-glob-to-any-file:
           - packages/uniforms-bridge-json-schema/**/*
-'Bridge: SimpleSchema':
-  - changed-files:
-      - any-glob-to-any-file:
-          - packages/uniforms-bridge-simple-schema/**/*
 'Bridge: SimpleSchema (v2)':
   - changed-files:
       - any-glob-to-any-file:
