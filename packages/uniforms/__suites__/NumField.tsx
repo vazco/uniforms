@@ -6,6 +6,15 @@ import z from 'zod';
 import { renderWithZod } from './render-zod';
 
 export function testNumField(NumField: ComponentType<any>) {
+  test('<NumField> - renders an InputNumber', () => {
+    renderWithZod({
+      element: <NumField name="x" />,
+      schema: z.object({ x: z.number() }),
+    });
+
+    expect(screen.getByRole('spinbutton')).toBeInTheDocument();
+  });
+
   test('<NumField> - renders an InputNumber with correct disabled state', () => {
     renderWithZod({
       element: <NumField name="x" disabled />,
@@ -193,5 +202,17 @@ export function testNumField(NumField: ComponentType<any>) {
       schema: z.object({ x: z.number() }),
     });
     expect(screen.getByLabelText(/^Y/)).toBeInTheDocument();
+  });
+
+  test('<NumField> - renders a wrapper with unknown props', () => {
+    const { container } = renderWithZod({
+      element: <NumField name="x" data-x="x" data-y="y" data-z="z" />,
+      schema: z.object({ x: z.number() }),
+    });
+
+    const wrapperElement = container.querySelector('[data-x="x"]');
+    expect(wrapperElement).toHaveAttribute('data-x', 'x');
+    expect(wrapperElement).toHaveAttribute('data-y', 'y');
+    expect(wrapperElement).toHaveAttribute('data-z', 'z');
   });
 }

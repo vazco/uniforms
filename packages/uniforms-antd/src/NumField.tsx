@@ -30,6 +30,7 @@ function Num(props: NumFieldProps) {
       ref={props.inputRef}
       step={props.step || (props.decimal ? 0.01 : 1)}
       style={{ width: '100%' }}
+      type="number"
       value={props.value}
       {...filterDOMProps(props)}
     />,
