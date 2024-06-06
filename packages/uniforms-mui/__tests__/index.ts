@@ -30,7 +30,7 @@ it('exports everything', () => {
   });
 });
 
-describe('@RTL', () => {
+describe('@RTL MUI', () => {
   suites.testAutoField(theme.AutoField, {
     getDateField: screen => screen.getByLabelText('X *'),
     getSelectField: screen => screen.getByRole('button'),
