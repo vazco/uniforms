@@ -182,14 +182,14 @@ export function testListField(
       {
         x: { type: Array, optional: true },
         'x.$': { type: Object },
-        'x.$.name': { type: String, defaultValue: 'kebab' },
+        'x.$.name': { type: String, defaultValue: 'someValue' },
       },
       { onChange },
     );
 
     await userEvent.click(getListAddField(screen));
-    expect(await screen.findAllByDisplayValue('kebab')).toHaveLength(1);
-    expect(onChange).toHaveBeenLastCalledWith('x.0', { name: 'kebab' });
+    expect(await screen.findAllByDisplayValue('someValue')).toHaveLength(1);
+    expect(onChange).toHaveBeenLastCalledWith('x.0', { name: 'someValue' });
   });
 
   if (testError) {
