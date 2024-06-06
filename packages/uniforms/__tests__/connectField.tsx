@@ -109,7 +109,6 @@ describe('connectField', () => {
 
       render(<Field name="fieldWithDefaultValue" />, schema, reactContext);
 
-      screen.logTestingPlaygroundURL();
       expect(onChange).not.toBeCalled();
       expect(await screen.findByDisplayValue('John')).toBeInTheDocument();
     });

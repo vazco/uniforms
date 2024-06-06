@@ -30,7 +30,7 @@ it('exports everything', () => {
   });
 });
 
-describe('@RTL', () => {
+describe('@RTL AntD', () => {
   suites.testAutoField(theme.AutoField, {
     getDateField: screen => screen.getByRole('textbox'),
     getSelectField: screen => screen.getByRole('combobox'),
