@@ -23,7 +23,6 @@
     "typescript": "4.4.4",
     "uniforms": "^4.0.0-alpha.0",
     "uniforms-antd": "^4.0.0-alpha.0",
-    "uniforms-bootstrap3": "^4.0.0-alpha.0",
     "uniforms-bootstrap4": "^4.0.0-alpha.0",
     "uniforms-bootstrap5": "^4.0.0-alpha.0",
     "uniforms-bridge-json-schema": "^4.0.0-alpha.0",

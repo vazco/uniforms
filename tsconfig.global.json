@@ -16,8 +16,6 @@
     { "path": "packages/uniforms/tsconfig.cjs.json" },
     { "path": "packages/uniforms-antd/tsconfig.esm.json" },
     { "path": "packages/uniforms-antd/tsconfig.cjs.json" },
-    { "path": "packages/uniforms-bootstrap3/tsconfig.esm.json" },
-    { "path": "packages/uniforms-bootstrap3/tsconfig.cjs.json" },
     { "path": "packages/uniforms-bootstrap4/tsconfig.esm.json" },
     { "path": "packages/uniforms-bootstrap4/tsconfig.cjs.json" },
     { "path": "packages/uniforms-bootstrap5/tsconfig.esm.json" },
