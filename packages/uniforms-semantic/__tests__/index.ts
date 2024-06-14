@@ -29,7 +29,7 @@ it('exports everything', () => {
   });
 });
 
-describe('@RTL', () => {
+describe('@RTL Semantic', () => {
   suites.testAutoField(theme.AutoField, {
     getDateField: screen => screen.getByLabelText('X'),
     getSelectField: screen => screen.getByRole('combobox'),

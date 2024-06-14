@@ -179,13 +179,17 @@ export function testListField(
     const onChange = jest.fn();
     render(
       <ListField name="x" label="ListFieldLabel" />,
-      { x: { type: Array, optional: true }, 'x.$': String },
+      {
+        x: { type: Array, optional: true },
+        'x.$': { type: Object },
+        'x.$.name': { type: String, defaultValue: 'someValue' },
+      },
       { onChange },
     );
 
     await userEvent.click(getListAddField(screen));
-    expect(onChange).toHaveBeenCalledTimes(1);
-    expect(onChange).toHaveBeenLastCalledWith('x', [undefined]);
+    expect(await screen.findAllByDisplayValue('someValue')).toHaveLength(1);
+    expect(onChange).toHaveBeenLastCalledWith('x.0', { name: 'someValue' });
   });
 
   if (testError) {

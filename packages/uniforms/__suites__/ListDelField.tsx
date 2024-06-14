@@ -28,7 +28,9 @@ export function testListDelField(ListDelField: ComponentType<any>) {
       onChange,
       schema: z.object({ x: z.array(z.string()) }),
     });
-    await userEvent.type(screen.getByTestId('x'), '{Enter}');
+    // we can't use `userEvent.type(...)` because it does 'click + type' so we "select the button"  using `userEvent.tab()`
+    await userEvent.tab();
+    await userEvent.keyboard('{Enter}');
     expect(onChange).toHaveBeenLastCalledWith('x', ['a', 'c']);
   });
 

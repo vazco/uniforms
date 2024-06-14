@@ -1,43 +1,30 @@
 import { render as renderOnScreen, RenderResult } from '@testing-library/react';
 import React, { ReactElement, cloneElement } from 'react';
 import SimpleSchema, { SimpleSchemaDefinition } from 'simpl-schema';
-import { BaseForm, Context, UnknownObject, context, randomIds } from 'uniforms';
+import { Context, UnknownObject } from 'uniforms';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
+import { AutoForm } from 'uniforms-unstyled';
 
-const randomId = randomIds();
 export function render<P, Model extends UnknownObject>(
   element: ReactElement<P>,
   schema?: SimpleSchemaDefinition,
-  contextValueExtension?: Partial<Context<Model>>,
+  contextValueExtension?: Pick<Partial<Context<Model>>, 'onChange'>,
   model = {} as Model,
 ): RenderResult & { rerenderWithProps: (props: P) => void } {
   const renderResult = renderOnScreen(element, {
     wrapper({ children }) {
       if (schema) {
-        const contextValue = {
-          changed: false,
-          changedMap: {},
-          error: null,
-          model,
-          name: [],
-          onChange() {},
-          onSubmit() {},
-          randomId,
-          submitted: false,
-          submitting: false,
-          validating: false,
-          ...contextValueExtension,
-          schema: new SimpleSchema2Bridge({ schema: new SimpleSchema(schema) }),
-          state: {
-            disabled: false,
-            readOnly: false,
-            showInlineError: false,
-            ...contextValueExtension?.state,
-          },
-          formRef: {} as BaseForm<UnknownObject>,
-        };
+        const bridge = new SimpleSchema2Bridge({
+          schema: new SimpleSchema(schema),
+        });
         return (
-          <context.Provider value={contextValue}>{children}</context.Provider>
+          <AutoForm
+            onChange={contextValueExtension?.onChange}
+            model={model}
+            schema={bridge}
+          >
+            {children}
+          </AutoForm>
         );
       }
       return <>{children}</>;
