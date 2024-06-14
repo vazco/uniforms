@@ -30,7 +30,7 @@ it('exports everything', () => {
   });
 });
 
-describe('@RTL', () => {
+describe('@RTL MUI', () => {
   suites.testAutoField(theme.AutoField, {
     getDateField: screen => screen.getByLabelText('X *'),
     getSelectField: screen => screen.getByRole('button'),
@@ -60,4 +60,12 @@ describe('@RTL', () => {
   suites.testTextField(theme.TextField);
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
+  suites.testWrapField(theme.wrapField, {
+    helpPropsName: 'helperText',
+    withoutLabel: true,
+    withoutInlineError: true,
+    withoutWrapClassName: true,
+    withoutHelpClassName: true,
+    withoutLabelClassName: true,
+  });
 });

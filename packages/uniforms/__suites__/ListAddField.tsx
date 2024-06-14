@@ -11,7 +11,7 @@ export function testListAddField(ListAddField: ComponentType<any>) {
   test('<ListAddField> - correctly reacts on click', async () => {
     const onChange = jest.fn();
     renderWithZod({
-      element: <ListAddField name="x.1" data-testid="x" value="d" />,
+      element: <ListAddField name="x.$" data-testid="x" value="d" />,
       model: { x: ['a', 'b', 'c'] },
       onChange,
       schema: z.object({ x: z.array(z.string()) }),
@@ -25,19 +25,21 @@ export function testListAddField(ListAddField: ComponentType<any>) {
   test('<ListAddField> - correctly reacts on enter', async () => {
     const onChange = jest.fn();
     renderWithZod({
-      element: <ListAddField name="x.1" data-testid="x" value="d" />,
+      element: <ListAddField name="x.$" data-testid="x" value="d" />,
       model: { x: ['a', 'b', 'c'] },
       onChange,
       schema: z.object({ x: z.array(z.string()) }),
     });
-    await userEvent.type(screen.getByTestId('x'), '{Enter}');
+    // we can't use `userEvent.type(...)` because it does 'click + type' so we "select the button"  using `userEvent.tab()`
+    await userEvent.tab();
+    await userEvent.keyboard('{Enter}');
     expect(onChange).toHaveBeenLastCalledWith('x', ['a', 'b', 'c', 'd']);
   });
 
   test('<ListAddField> - prevents onClick when disabled', async () => {
     const onChange = jest.fn();
     renderWithZod({
-      element: <ListAddField name="x.1" data-testid="x" disabled />,
+      element: <ListAddField name="x.$" data-testid="x" disabled />,
       model: { x: ['a', 'b', 'c'] },
       schema: z.object({ x: z.array(z.string()) }),
     });
@@ -51,7 +53,7 @@ export function testListAddField(ListAddField: ComponentType<any>) {
   test('<ListAddField> - prevents onClick when readOnly', async () => {
     const onChange = jest.fn();
     renderWithZod({
-      element: <ListAddField name="x.1" data-testid="x" readOnly />,
+      element: <ListAddField name="x.$" data-testid="x" readOnly />,
       model: { x: ['a', 'b', 'c'] },
       onChange,
       schema: z.object({ x: z.array(z.string()) }),
@@ -65,7 +67,7 @@ export function testListAddField(ListAddField: ComponentType<any>) {
   test('<ListAddField> - prevents onClick when limit reached', async () => {
     const onChange = jest.fn();
     renderWithZod({
-      element: <ListAddField name="x.1" data-testid="x" readOnly />,
+      element: <ListAddField name="x.$" data-testid="x" readOnly />,
       model: { x: ['a', 'b', 'c'] },
       onChange,
       schema: z.object({ x: z.array(z.string()).min(3) }),

@@ -187,7 +187,7 @@ class PlaygroundProps extends Component<any, any> {
     const { onChange, schema, theme, value } = this.props;
 
     const isAntd = theme === 'antd';
-    const isBootstrap = theme === 'bootstrap3' || theme === 'bootstrap4';
+    const isBootstrap = theme === 'bootstrap4';
     const isSemantic = theme === 'semantic';
 
     // FIXME: theme is undefined during `docusaurus build`.

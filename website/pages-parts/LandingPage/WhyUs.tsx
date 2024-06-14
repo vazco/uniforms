@@ -86,7 +86,6 @@ export function WhyUs() {
                   </h2>
                   <ul>
                     <li>AntD theme</li>
-                    <li>Bootstrap3</li>
                     <li>Bootstrap4</li>
                     <li>Bootstrap5</li>
                     <li>MUI</li>
