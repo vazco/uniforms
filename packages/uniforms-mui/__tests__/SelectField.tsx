@@ -287,30 +287,6 @@ test('<SelectField> - works with special characters', () => {
   );
 });
 
-test('<SelectField> - disabled items (options) based on predicate', () => {
-  const element = (
-    <SelectField
-      native
-      name="x"
-      options={[
-        { key: 'k1', label: 'A', value: 'a', disabled: true },
-        { key: 'k2', label: 'B', value: 'b', disabled: false },
-      ]}
-    />
-  );
-  const wrapper = mount(
-    element,
-    createContext({
-      x: { type: Array },
-      'x.$': { type: String },
-    }),
-  );
-
-  expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find('option').at(0).prop('disabled')).toBe(true);
-  expect(wrapper.find('option').at(1).prop('disabled')).toBe(false);
-});
-
 test('<SelectField> - renders with correct classnames', () => {
   const wrapper = mount(
     <SelectField name="x" textFieldProps={{ className: 'select-class' }} />,
@@ -618,16 +594,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons which correctly 
   expect(onChange).toHaveBeenLastCalledWith('x', 'a');
 });
 
-test('<SelectField checkboxes> - renders a label', () => {
-  const element = <SelectField checkboxes name="x" label="y" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
-
-  expect(wrapper.find(FormLabel).text()).toBe('y *');
-});
-
+// error
 test('<SelectField checkboxes> - renders a SelectField with correct error text (showInlineError=true)', () => {
   const error = new Error();
   const element = (
@@ -647,6 +614,7 @@ test('<SelectField checkboxes> - renders a SelectField with correct error text (
   expect(wrapper.find(FormHelperText).text()).toBe('Error');
 });
 
+// error
 test('<SelectField checkboxes> - renders a SelectField with correct error text (showInlineError=false)', () => {
   const error = new Error();
   const element = (
@@ -666,6 +634,7 @@ test('<SelectField checkboxes> - renders a SelectField with correct error text (
   expect(wrapper.find(FormHelperText)).toHaveLength(0);
 });
 
+// unique
 test('<SelectField checkboxes> - renders Checkbox with appearance=checkbox', () => {
   const element = <SelectField appearance="checkbox" checkboxes name="x" />;
   const wrapper = mount(
@@ -680,6 +649,7 @@ test('<SelectField checkboxes> - renders Checkbox with appearance=checkbox', () 
   expect(wrapper.find(Switch)).toHaveLength(0);
 });
 
+// unique
 test('<SelectField checkboxes> - renders Switch with appearance=switch', () => {
   const element = <SelectField appearance="switch" checkboxes name="x" />;
   const wrapper = mount(
@@ -692,36 +662,4 @@ test('<SelectField checkboxes> - renders Switch with appearance=switch', () => {
 
   expect(wrapper.find(Checkbox)).toHaveLength(0);
   expect(wrapper.find(Switch)).toHaveLength(2);
-});
-
-test('<SelectField checkboxes> - works with special characters', () => {
-  mount(
-    <SelectField checkboxes name="x" />,
-    createContext({ x: { type: String, allowedValues: ['ă', 'ș'] } }),
-  );
-});
-
-test('<SelectField checkboxes> - disabled items (checkboxes) based on predicate', () => {
-  const element = (
-    <SelectField
-      appearance="checkbox"
-      checkboxes
-      name="x"
-      options={[
-        { key: 'k1', label: 'A', value: 'a', disabled: true },
-        { key: 'k2', label: 'B', value: 'b', disabled: false },
-      ]}
-    />
-  );
-  const wrapper = mount(
-    element,
-    createContext({
-      x: { type: Array },
-      'x.$': { type: String },
-    }),
-  );
-
-  expect(wrapper.find(Checkbox)).toHaveLength(2);
-  expect(wrapper.find(FormControlLabel).at(0).prop('disabled')).toBe(true);
-  expect(wrapper.find(FormControlLabel).at(1).prop('disabled')).toBe(false);
 });

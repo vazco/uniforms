@@ -4,6 +4,9 @@ import z from 'zod';
 
 import { renderWithZod } from './render-zod';
 import { skipTestIf } from './skipTestIf';
+import {SelectField} from "uniforms-mui";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 export function testSelectField(
   SelectField: ComponentType<any>,
@@ -365,6 +368,27 @@ export function testSelectField(
       expect(screen.getByText('B')).not.toBeDisabled();
     },
   );
+
+  test('<SelectField> - disabled items (options) based on predicate', () => {
+    renderWithZod({
+      element: (
+        <SelectField
+          data-testid="select"
+          name="x"
+          options={[
+            { key: 'k1', label: 'A', value: 'a', disabled: true },
+            { key: 'k2', label: 'B', value: 'b', disabled: false },
+          ]}
+        />
+      ),
+      schema: z.object({ x: z.enum(['a', 'b']) }),
+    });
+
+    fireEvent.click(screen.getByTestId('select'));
+
+    expect(screen.getByText('A')).toBeDisabled();
+    expect(screen.getByText('B')).toBeEnabled();
+  });
 
   test('<SelectField checkboxes> - renders a set of checkboxes', () => {
     renderWithZod({
