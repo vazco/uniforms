@@ -1,6 +1,6 @@
-import React, { Ref } from 'react';
-import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 import { Textarea, TextareaProps } from '@mantine/core';
+import React, { ChangeEvent, Ref } from 'react';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 export type LongTextFieldProps = FieldProps<
   string,
@@ -25,7 +25,9 @@ function LongText({
       label={label}
       disabled={disabled}
       name={name}
-      onChange={event => (readOnly ? undefined : onChange(event.target.value))}
+      onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
+        readOnly ? undefined : onChange(event.target.value)
+      }
       placeholder={placeholder}
       ref={inputRef}
       value={value ?? ''}

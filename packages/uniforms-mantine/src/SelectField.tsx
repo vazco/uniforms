@@ -1,5 +1,3 @@
-import React, { Ref } from 'react';
-import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 import {
   Select as SelectMantine,
   ComboboxItem,
@@ -7,6 +5,8 @@ import {
   MultiSelect,
   MultiSelectProps,
 } from '@mantine/core';
+import React, { Ref } from 'react';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 export type SelectFieldProps = FieldProps<
   string | string[],
@@ -47,7 +47,7 @@ function Select({
         ref={inputRef}
         label={label}
         name={name}
-        onChange={item => {
+        onChange={(item?: string) => {
           if (!readOnly) {
             onChange(item);
           }
@@ -55,7 +55,7 @@ function Select({
         placeholder={placeholder}
         required={required ?? false}
         defaultValue={[]}
-        value={value as string[]}
+        value={value}
         mb="xs"
       />
     );
@@ -71,7 +71,7 @@ function Select({
       ref={inputRef}
       label={label}
       name={name}
-      onChange={item => {
+      onChange={(item: string) => {
         if (!readOnly) {
           onChange(item ?? '');
         }
@@ -79,7 +79,7 @@ function Select({
       placeholder={placeholder}
       required={required ?? false}
       defaultValue={null}
-      value={value as string}
+      value={value}
     />
   );
 }

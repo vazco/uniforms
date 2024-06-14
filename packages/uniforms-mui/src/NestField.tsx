@@ -1,5 +1,4 @@
 import FormLabel from '@mui/material/FormLabel';
-import React from 'react';
 import { connectField, HTMLFieldProps } from 'uniforms';
 
 import AutoField from './AutoField';

@@ -1,6 +1,6 @@
+import { Radio as RadioMantine, RadioProps, Text, Stack } from '@mantine/core';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
-import { Radio as MantineRadio, RadioProps, Text, Stack } from '@mantine/core';
 
 import type { Option } from './types';
 
@@ -27,7 +27,7 @@ function Radio({
     <Stack mb="xs">
       {label && <Text>{label}</Text>}
       {options?.map(option => (
-        <MantineRadio
+        <RadioMantine
           key={option.key ?? option.value}
           disabled={!!option?.disabled}
           checked={option.value === value}

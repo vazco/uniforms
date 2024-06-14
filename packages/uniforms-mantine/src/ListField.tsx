@@ -1,6 +1,6 @@
+import { Input, List as ListMantine, ListProps, Tooltip } from '@mantine/core';
 import React, { Children, cloneElement, isValidElement } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
-import { Input, List as ListMantine, ListProps, Tooltip } from '@mantine/core';
 
 import ListAddField from './ListAddField';
 import ListItemField from './ListItemField';

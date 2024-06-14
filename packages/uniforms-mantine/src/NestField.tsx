@@ -1,6 +1,7 @@
+import { Text } from '@mantine/core';
 import React from 'react';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
-import { Text } from '@mantine/core';
+
 import AutoField from './AutoField';
 
 export type NestFieldProps = HTMLFieldProps<

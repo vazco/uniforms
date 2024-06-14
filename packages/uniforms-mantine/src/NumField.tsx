@@ -1,6 +1,6 @@
+import { Input, NumberInput, NumberInputProps, Tooltip } from '@mantine/core';
 import React, { ReactNode, Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
-import { Input, NumberInput, NumberInputProps, Tooltip } from '@mantine/core';
 
 export type NumFieldProps = FieldProps<
   number,

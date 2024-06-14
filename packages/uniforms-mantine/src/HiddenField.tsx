@@ -1,3 +1,4 @@
+import { TextInput } from '@mantine/core';
 import React, { HTMLProps, Ref, useEffect } from 'react';
 import { Override, filterDOMProps, useField } from 'uniforms';
 
@@ -21,14 +22,13 @@ export default function HiddenField({ value, ...rawProps }: HiddenFieldProps) {
   });
 
   return props.noDOM ? null : (
-    <input
+    <TextInput
       mb="xs"
       disabled={props.disabled}
       name={props.name}
       readOnly={props.readOnly}
       ref={props.inputRef}
       type="hidden"
-      // @ts-expect-error `value` should be serializable.
       value={value ?? props.value ?? ''}
       {...filterDOMProps(props)}
     />

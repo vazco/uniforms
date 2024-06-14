@@ -1,6 +1,6 @@
-import React, { Ref } from 'react';
-import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 import { TextInput, TextInputProps } from '@mantine/core';
+import React, { ChangeEvent, Ref } from 'react';
+import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 export type TextFieldProps = FieldProps<
   string,
@@ -35,11 +35,13 @@ function Text({
         disabled={disabled}
         id={id}
         name={name}
-        onChange={event => onChange(event.target.value)}
+        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+          onChange(event.target.value)
+        }
         placeholder={placeholder}
         readOnly={readOnly}
         ref={inputRef}
-        type={type ?? 'text'}
+        type={type}
         value={value ?? ''}
         w="100%"
         {...filterDOMProps(props)}
@@ -47,7 +49,5 @@ function Text({
     </div>
   );
 }
-
-Text.defaultProps = { type: 'text' };
 
 export default connectField<TextFieldProps>(Text, { kind: 'leaf' });

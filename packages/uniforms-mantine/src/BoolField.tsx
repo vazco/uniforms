@@ -1,6 +1,6 @@
+import { Checkbox, CheckboxProps } from '@mantine/core';
 import React, { Ref } from 'react';
 import { connectField, filterDOMProps, FieldProps } from 'uniforms';
-import { Checkbox, CheckboxProps } from '@mantine/core';
 
 export type BoolFieldProps = FieldProps<
   boolean,

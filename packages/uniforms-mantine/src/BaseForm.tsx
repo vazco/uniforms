@@ -4,7 +4,6 @@ function Mantine(parent: any) {
   class _ extends parent {
     static Mantine = Mantine;
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/restrict-template-expressions -- comes from uniform's core
     static displayName = `Mantine${parent.displayName}`;
   }
 

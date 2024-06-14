@@ -1,6 +1,6 @@
+import { Button, ButtonProps } from '@mantine/core';
 import React, { Ref } from 'react';
 import { Override, filterDOMProps, useForm } from 'uniforms';
-import { Button, ButtonProps } from '@mantine/core';
 
 export type SubmitFieldProps = Override<
   ButtonProps,

@@ -1,6 +1,6 @@
+import { List, Group, Box } from '@mantine/core';
 import React, { ReactNode } from 'react';
 import { connectField } from 'uniforms';
-import { List, Group, Box } from '@mantine/core';
 
 import AutoField from './AutoField';
 import ListDelField from './ListDelField';

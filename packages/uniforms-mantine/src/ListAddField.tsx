@@ -1,3 +1,5 @@
+import { Button, ButtonProps } from '@mantine/core';
+import { IconSquarePlus } from '@tabler/icons-react';
 import cloneDeep from 'lodash/cloneDeep';
 import React from 'react';
 import {
@@ -7,8 +9,6 @@ import {
   joinName,
   useField,
 } from 'uniforms';
-import { Button, ButtonProps } from '@mantine/core';
-import { IconSquarePlus } from '@tabler/icons-react';
 
 export type ListAddFieldProps = FieldProps<
   unknown,
