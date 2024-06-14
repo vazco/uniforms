@@ -34,6 +34,7 @@ function List({
   return (
     <Input.Wrapper
       mb="xs"
+      w="100%"
       label={
         tooltip ? (
           <>

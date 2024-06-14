@@ -8,13 +8,17 @@ import ListDelField from './ListDelField';
 export type ListItemFieldProps = { children?: ReactNode; value?: unknown };
 
 function ListItem({
-  children = <AutoField label={null} name="" />,
+  children = <AutoField label={null} name="" style={{ width: '100%' }} />,
 }: ListItemFieldProps) {
   return (
-    <List.Item mb={12}>
-      <Group mt="xs" align="center">
+    <List.Item
+      mb={12}
+      styles={{ itemLabel: { width: '100%' }, itemWrapper: { width: '100%' } }}
+      pos="relative"
+    >
+      <Group mt="xs" align="flex-start" w="100%">
         {children}
-        <Box mt={20}>
+        <Box pos="absolute" right={0} top={10}>
           <ListDelField name="" />
         </Box>
       </Group>
