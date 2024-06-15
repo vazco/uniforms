@@ -1,0 +1,40 @@
+{
+  "name": "uniforms-mantine",
+  "version": "4.0.0-alpha.5",
+  "license": "MIT",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "sideEffects": false,
+  "description": "Mantine components for uniforms.",
+  "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-mantine",
+  "bugs": "https://github.com/vazco/uniforms/issues",
+  "funding": "https://github.com/vazco/uniforms?sponsor=1",
+  "keywords": [
+    "form",
+    "forms",
+    "meteor",
+    "react",
+    "react-component",
+    "schema",
+    "validation"
+  ],
+  "files": [
+    "cjs/*.d.ts",
+    "cjs/*.js",
+    "esm/*.d.ts",
+    "esm/*.js",
+    "src/*.ts",
+    "src/*.tsx"
+  ],
+  "peerDependencies": {
+    "@tabler/icons-react": "^2.0.0",
+    "@mantine/core": "^7.0.0",
+    "react": "^18.0.0 || ^17.0.0 || ^16.8.0"
+  },
+  "dependencies": {
+    "invariant": "^2.0.0",
+    "lodash": "^4.0.0",
+    "tslib": "^2.2.0",
+    "uniforms": "^4.0.0-alpha.5"
+  }
+}

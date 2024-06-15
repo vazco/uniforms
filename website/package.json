@@ -31,6 +31,7 @@
     "uniforms-bridge-json-schema": "^4.0.0-alpha.0",
     "uniforms-bridge-simple-schema-2": "^4.0.0-alpha.0",
     "uniforms-bridge-zod": "^4.0.0-alpha.0",
+    "uniforms-mantine": "^4.0.0-alpha.0",
     "uniforms-material": "^4.0.0-alpha.0",
     "uniforms-mui": "^4.0.0-alpha.0",
     "uniforms-semantic": "^4.0.0-alpha.0",

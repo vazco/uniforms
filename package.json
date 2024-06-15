@@ -22,6 +22,9 @@
     "@docusaurus/preset-classic": "2.1.0",
     "@emotion/react": "11.7.1",
     "@emotion/styled": "11.6.0",
+    "@mantine/core": "7.8.0",
+    "@mantine/dates": "7.8.0",
+    "@tabler/icons-react": "3.2.0",
     "@material-ui/core": "4.11.2",
     "@material-ui/icons": "4.11.2",
     "@mui/material": "5.4.1",
@@ -76,5 +79,8 @@
   },
   "engines": {
     "npm": ">=7.0.0"
+  },
+  "devDependencies": {
+    "process": "^0.11.10"
   }
 }

@@ -3,8 +3,9 @@ import React from 'react';
 // import { AutoForm } from 'uniforms-antd';
 // import { AutoForm } from 'uniforms-bootstrap4';
 // import { AutoForm } from 'uniforms-bootstrap5';
+import { AutoForm } from 'uniforms-mantine';
 // import { AutoForm } from 'uniforms-material';
-import { AutoForm } from 'uniforms-mui';
+// import { AutoForm } from 'uniforms-mui';
 // import { AutoForm } from 'uniforms-semantic';
 
 // import { bridge as schema } from './schema/json-schema';
