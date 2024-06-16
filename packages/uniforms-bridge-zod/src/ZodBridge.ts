@@ -132,7 +132,12 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
   }
 
   getInitialValue(name: string): unknown {
-    const field = this.getField(name);
+    let field = this.getField(name);
+
+    if (field instanceof ZodOptional) {
+      field = field.unwrap();
+    }
+
     if (field instanceof ZodArray) {
       const item = this.getInitialValue(joinName(name, '$'));
       if (item === undefined) {
