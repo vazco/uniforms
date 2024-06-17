@@ -19,14 +19,19 @@ test('<DateField> - renders an input', () => {
   expect(getClosestInput('X')).toBeInTheDocument();
 });
 
-test('<DateField> - default props override', () => {
-  const pickerProps = { name: 'y' };
+test('<DateField> - default props override', async () => {
+  const pickerProps = { showTime: false, style: { background: 'red' } };
   renderWithZod({
-    // @ts-ignore -- passing the same prop for testing purposes
     element: <DateField name="x" {...pickerProps} />,
-    schema: z.object({ y: z.date() }),
+    schema: z.object({ x: z.date() }),
   });
-  expect(screen.getByText('Y')).toBeInTheDocument();
+  const body = screen.getByText('X').closest('body');
+  const input = body?.querySelector('.ant-picker');
+  expect(input).toBeInTheDocument();
+  expect(input).toHaveStyle('background: red');
+
+  await userEvent.click(input!);
+  expect(body?.querySelector('.ant-picker-time-panel')).not.toBeInTheDocument();
 });
 
 test('<DateField> - renders a input with correct id (inherited)', () => {
