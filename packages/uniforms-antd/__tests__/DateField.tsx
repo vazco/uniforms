@@ -66,7 +66,7 @@ test('<DateField> - renders a wrapper with unknown props', () => {
   renderWithZod({
     element: <DateField name="x" data-x="x" data-y="y" data-z="z" />,
     schema: z.object({ x: z.date() }),
-  });
+});
   const input = getClosestInput('X');
   expect(input?.getAttribute('data-x')).toBe('x');
   expect(input?.getAttribute('data-y')).toBe('y');

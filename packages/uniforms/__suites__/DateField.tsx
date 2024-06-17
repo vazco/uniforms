@@ -150,21 +150,24 @@ export function testDateField(
     },
   );
 
-  skipTestIf(!skipTestAntD)('<DateField> - handles "date" type correctly (fill)', async () => {
-    const date = '2022-02-02';
-    const onChange = jest.fn();
-    const extraProps = !skipTestAntD ? { showTime: false } : { type: 'date' };
-    renderWithZod({
-      element: <DateField name="x" data-testid="x" {...extraProps} />,
-      onChange,
-      schema: z.object({ x: z.date() }),
-    });
-    const input = findClosestInputWithTestId('x');
-    expect(input).toHaveValue('');
-    await userEvent.click(input!);
-    await userEvent.type(input!, `${date}{Enter}`);
-    expect(onChange).toHaveBeenLastCalledWith('x', new Date(`${date}Z`));
-  });
+  skipTestIf(!skipTestAntD)(
+    '<DateField> - handles "date" type correctly (fill)',
+    async () => {
+      const date = '2022-02-02';
+      const onChange = jest.fn();
+      const extraProps = !skipTestAntD ? { showTime: false } : { type: 'date' };
+      renderWithZod({
+        element: <DateField name="x" data-testid="x" {...extraProps} />,
+        onChange,
+        schema: z.object({ x: z.date() }),
+      });
+      const input = findClosestInputWithTestId('x');
+      expect(input).toHaveValue('');
+      await userEvent.click(input!);
+      await userEvent.type(input!, `${date}{Enter}`);
+      expect(onChange).toHaveBeenLastCalledWith('x', new Date(`${date}Z`));
+    },
+  );
 
   test('<DateField> - handles "date" type correctly (overflow)', async () => {
     const date = '12345-06-07';
