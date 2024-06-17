@@ -29,7 +29,7 @@ it('exports everything', () => {
   });
 });
 
-describe('@RTL', () => {
+describe('@RTL unstyled', () => {
   suites.testAutoField(theme.AutoField, {
     getDateField: screen => screen.getByLabelText('X'),
     getSelectField: screen => screen.getByRole('combobox'),
@@ -44,7 +44,7 @@ describe('@RTL', () => {
   suites.testListAddField(theme.ListAddField);
   suites.testListDelField(theme.ListDelField);
   suites.testListField(theme.ListField, {
-    getListAddField: screen => screen.getByRole('button'),
+    getListAddField: screen => screen.getByRole('button', { name: '+' }),
     testError: false,
   });
   suites.testListItemField(theme.ListItemField);

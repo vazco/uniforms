@@ -6,7 +6,7 @@
   ],
   "overrides": [
     {
-      "files": ["**/__mocks__/**/*", "**/__tests__/**/*"],
+      "files": ["**/__tests__/**/*"],
       "env": {
         "jest": true
       }
@@ -72,7 +72,6 @@
     "valid-jsdoc": "off"
   },
   "settings": {
-    "import/core-modules": ["meteor/aldeed:simple-schema", "meteor/check"],
     "import/resolver": {
       "typescript": {}
     },

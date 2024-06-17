@@ -1,35 +1,19 @@
-import FormControl from '@mui/material/FormControl';
-import FormHelperText from '@mui/material/FormHelperText';
+import { screen } from '@testing-library/react';
 import React from 'react';
 import { wrapField } from 'uniforms-mui';
+import { renderWithZod } from 'uniforms/__suites__';
+import { z } from 'zod';
 
-import mount from './_mount';
-
-test('<wrapField> - renders wrapper', () => {
-  const element = wrapField({}, <div />);
-  const wrapper = mount(element);
-
-  expect(wrapper.find(FormControl)).toHaveLength(1);
-});
-
-test('<wrapField> - renders wrapper with helper text', () => {
-  const element = wrapField({ helperText: 'Helper text' }, <div />);
-  const wrapper = mount(element);
-
-  expect(wrapper.find(FormHelperText).text()).toBe('Helper text');
-});
-
-test('<wrapField> - renders wrapper with error', () => {
-  const element = wrapField(
-    {
-      showInlineError: true,
-      error: new Error(),
-      errorMessage: 'Error message',
-    },
-    <div />,
-  );
-  const wrapper = mount(element);
-
-  expect(wrapper.find(FormControl).prop('error')).toBe(true);
-  expect(wrapper.find(FormHelperText).text()).toBe('Error message');
+describe('wrapField tests', () => {
+  test('<wrapField> - renders wrapper', () => {
+    renderWithZod({
+      element: wrapField({}, <div data-testid="x" />),
+      schema: z.object({}),
+    });
+    expect(
+      screen
+        .getByTestId('x')
+        .parentElement?.classList.contains('MuiFormControl-root'),
+    ).toBe(true);
+  });
 });

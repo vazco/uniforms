@@ -30,7 +30,7 @@ it('exports everything', () => {
   });
 });
 
-describe('@RTL', () => {
+describe('@RTL AntD', () => {
   suites.testAutoField(theme.AutoField, {
     getDateField: screen => screen.getByRole('textbox'),
     getSelectField: screen => screen.getByRole('combobox'),
@@ -65,4 +65,10 @@ describe('@RTL', () => {
   suites.testTextField(theme.TextField);
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
+  suites.testWrapField(theme.wrapField, {
+    helpPropsName: 'help',
+    withoutWrapClassName: true,
+    withoutHelpClassName: true,
+    withoutLabelClassName: true,
+  });
 });

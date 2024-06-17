@@ -65,8 +65,7 @@ export function useField<
     }
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
-      const required = props.required ?? schemaProps.required;
-      if (required && initialValue !== undefined) {
+      if (initialValue !== undefined) {
         onChange(initialValue);
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -34,12 +34,10 @@ describe('<AutoForm />', () => {
         <AutoForm onChange={onChange} schema={schema}>
           <AutoFields />
         </AutoForm>,
-        schemaDefinition,
-        { onChange },
       );
       const input = screen.getByLabelText('A');
       fireEvent.change(input, { target: { value: '2' } });
-      expect(onChange).toHaveBeenCalledTimes(4);
+      expect(onChange).toHaveBeenCalledTimes(1);
       expect(onChange).toHaveBeenLastCalledWith('a', '2');
     });
 
@@ -90,20 +88,63 @@ describe('<AutoForm />', () => {
           <context.Consumer children={contextSpy} />
           <AutoFields />
         </AutoForm>,
-        schemaDefinition,
       );
+
+      const fieldA = screen.getByLabelText('A');
+      const fieldC = screen.getByLabelText('C');
+      fireEvent.change(fieldA, { target: { value: 'a' } });
+      fireEvent.change(fieldC, { target: { value: 'c' } });
 
       expect(contextSpy).toHaveBeenLastCalledWith(
         expect.objectContaining({
           changed: true,
-          changedMap: { a: {}, b: {}, c: {} },
+          changedMap: { a: {}, b: undefined, c: {} },
         }),
       );
     });
   });
 
-  describe('when render', () => {
-    it('calls `onChange` before render', () => {
+  describe('when initial render', () => {
+    it('merges initial values of schema and props.model', () => {
+      const { rerenderWithProps } = render(
+        <AutoForm schema={schema} model={{ c: 'c', d: 'd' }}>
+          <context.Consumer children={contextSpy} />
+          <AutoFields />
+        </AutoForm>,
+      );
+
+      // initial render shouldn't mark form as changed
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ model: { a: '', b: '', c: 'c', d: 'd' } }),
+      );
+
+      rerenderWithProps({ model: { c: undefined, d: 'dd', e: 'ee' } });
+
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({
+          model: { a: '', b: '', d: 'dd', e: 'ee' },
+        }),
+      );
+    });
+
+    it('keeps `changed` false', () => {
+      render(
+        <AutoForm schema={schema}>
+          <context.Consumer children={contextSpy} />
+          <AutoFields />
+        </AutoForm>,
+      );
+
+      // initial render shouldn't mark form as changed
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({
+          changed: false,
+          changedMap: {},
+        }),
+      );
+    });
+
+    it('does not call `onChange`', () => {
       const field = jest.fn(() => null);
       const Field = connectField(field);
 
@@ -123,12 +164,12 @@ describe('<AutoForm />', () => {
         <CustomAutoForm model={model} onChange={onChange} schema={schema} />,
       );
 
-      expect(onChange).toHaveBeenCalledTimes(2);
-      expect(onChange.mock.calls[0]).toEqual(expect.arrayContaining(['b', '']));
-      expect(onChange.mock.calls[1]).toEqual(expect.arrayContaining(['c', '']));
+      expect(onChange).toHaveBeenCalledTimes(0);
       expect(field).toHaveBeenCalled();
     });
+  });
 
+  describe('when render', () => {
     it('skips `onSubmit` until rendered (`autosave` = true)', async () => {
       render(
         <AutoForm autosave onSubmit={onSubmit} schema={schema}>
@@ -234,18 +275,20 @@ describe('<AutoForm />', () => {
     });
   });
 
-  describe('when update', () => {
+  describe('when `props.model` update', () => {
     it('<AutoForm />, updates', () => {
       const { rerenderWithProps } = render(
         <AutoForm schema={schema}>
           <context.Consumer children={contextSpy} />
         </AutoForm>,
-        schemaDefinition,
       );
 
-      rerenderWithProps({ model: {} });
       expect(contextSpy).toHaveBeenLastCalledWith(
-        expect.objectContaining({ model: {} }),
+        expect.objectContaining({ model: { a: '', b: '', c: '' } }),
+      );
+      rerenderWithProps({ model: { d: '123' } });
+      expect(contextSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ model: { a: '', b: '', c: '', d: '123' } }),
       );
     });
 

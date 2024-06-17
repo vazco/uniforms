@@ -38,14 +38,29 @@ export function Auto<Base extends typeof ValidatedQuickForm>(Base: Base) {
 
       this.state = {
         ...this.state,
-        model: props.model,
+        model: this.mergeSchemaAndPropsModel(
+          this.props.schema,
+          this.props.model,
+        ),
       };
     }
 
+    /**
+     * Returns model value based on the `schema` model and `props.model`.
+     * Latter one takes precedence. Does shallow copy.
+     */
+    mergeSchemaAndPropsModel(
+      schema: Props['schema'],
+      model: Props['model'],
+    ): Props['model'] {
+      const initialModel = schema.getInitialModel();
+      return Object.assign(initialModel, model);
+    }
+
     componentDidUpdate(prevProps: Props, prevState: State, snapshot: never) {
-      const { model } = this.props;
+      const { model, schema } = this.props;
       if (!isEqual(model, prevProps.model)) {
-        this.setState({ model });
+        this.setState({ model: this.mergeSchemaAndPropsModel(schema, model) });
       }
 
       super.componentDidUpdate(prevProps, prevState, snapshot);
