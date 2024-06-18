@@ -18,11 +18,13 @@ const getDateString = (date: Date, useISOFormat: boolean) =>
 export function testDateField(
   DateField: ComponentType<any>,
   {
-    skipTestAntD = true,
+    theme,
   }: {
-    skipTestAntD?: boolean;
+    theme?: 'antd';
   } = {},
 ) {
+  const useISOFormat = theme === 'antd';
+
   test('<DateField> - renders a input with correct id (inherited)', () => {
     renderWithZod({
       element: <DateField name="x" data-testid="y" />,
@@ -81,7 +83,7 @@ export function testDateField(
     });
     const input = findClosestInputWithTestId('z');
     expect(input).toBeInTheDocument();
-    expect(input!.value).toBe(getDateString(now, skipTestAntD));
+    expect(input!.value).toBe(getDateString(now, useISOFormat));
   });
 
   test('<DateField> - renders an input with correct readOnly state', async () => {
@@ -108,10 +110,10 @@ export function testDateField(
     });
     const input = findClosestInputWithTestId('z');
     expect(input).toBeInTheDocument();
-    expect(input?.value).toBe(getDateString(now, skipTestAntD));
+    expect(input?.value).toBe(getDateString(now, useISOFormat));
   });
 
-  skipTestIf(!skipTestAntD)(
+  skipTestIf(theme === 'antd')(
     '<DateField> - renders a input which correctly reacts on change',
     async () => {
       const onChange = jest.fn();
@@ -132,7 +134,7 @@ export function testDateField(
     },
   );
 
-  skipTestIf(!skipTestAntD)(
+  skipTestIf(theme === 'antd')(
     '<DateField> - handles "date" type correctly (empty)',
     async () => {
       const date = '2021-01-01 11:00:00';
@@ -150,12 +152,13 @@ export function testDateField(
     },
   );
 
-  skipTestIf(!skipTestAntD)(
+  skipTestIf(theme === 'antd')(
     '<DateField> - handles "date" type correctly (fill)',
     async () => {
       const date = '2022-02-02';
       const onChange = jest.fn();
-      const extraProps = !skipTestAntD ? { showTime: false } : { type: 'date' };
+      const extraProps =
+        theme === 'antd' ? { showTime: false } : { type: 'date' };
       renderWithZod({
         element: <DateField name="x" data-testid="x" {...extraProps} />,
         onChange,
@@ -185,7 +188,7 @@ export function testDateField(
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  skipTestIf(!skipTestAntD)(
+  skipTestIf(theme === 'antd')(
     '<DateField> - handles "datetime-local" type correctly (empty)',
     async () => {
       const date = '2021-01-01T11:11';
@@ -205,7 +208,7 @@ export function testDateField(
     },
   );
 
-  skipTestIf(!skipTestAntD)(
+  skipTestIf(theme === 'antd')(
     '<DateField> - handles "datetime-local" type correctly (fill)',
     async () => {
       const date = '2022-02-02T22:22';
@@ -224,7 +227,7 @@ export function testDateField(
     },
   );
 
-  skipTestIf(!skipTestAntD)(
+  skipTestIf(theme === 'antd')(
     '<DateField> - handles "datetime-local" type correctly (overflow)',
     async () => {
       const date = '12345-06-07T08:09';
