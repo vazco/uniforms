@@ -65,7 +65,7 @@ describe('@RTL AntD', () => {
   suites.testTextField(theme.TextField);
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testDateField(theme.DateField, {
-    skipTestAntD: false,
+    theme: 'antd',
   });
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
   suites.testWrapField(theme.wrapField, {
