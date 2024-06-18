@@ -23,7 +23,7 @@ export function testDateField(
     theme?: 'antd';
   } = {},
 ) {
-  const useISOFormat = theme === 'antd';
+  const useISOFormat = theme !== 'antd';
 
   test('<DateField> - renders a input with correct id (inherited)', () => {
     renderWithZod({
