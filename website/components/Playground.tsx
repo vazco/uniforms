@@ -198,7 +198,7 @@ class PlaygroundProps extends Component<any, any> {
       <PlaygroundWrap theme={theme}>
         <AutoForm
           autosave
-          autosaveDelay={100}
+          autosaveDelay={1000}
           model={value}
           onSubmit={onChange}
           schema={schema}
