@@ -152,10 +152,6 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
       return field._def.defaultValue();
     }
 
-    if (field instanceof ZodEnum) {
-      return field.options[0];
-    }
-
     if (field instanceof ZodNativeEnum) {
       const values = Object.values(field.enum as Record<string, unknown>);
       return values.find(isNativeEnumValue) ?? values[0];
