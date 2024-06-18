@@ -132,11 +132,9 @@ const presets = {
           bool: z.boolean(),
           nested: z.object({ text: z.string() }),
           date: z.date(),
-          // TODO: Custom label and placeholder.
-          list: z.array(z.string()),
+          list: z.array(z.string().uniforms({ label: 'List Text', placeholder: 'List Text Placeholder' })),
           select: z.enum(['a', 'b']),
-          // TODO: Enums with custom props.
-          radio: z.enum(['a', 'b']),
+          radio: z.enum(['a', 'b']).uniforms({ checkboxes: true }),
         })
     })
   `,
