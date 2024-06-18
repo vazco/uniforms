@@ -14,6 +14,10 @@ import styles from '../lib/styles';
 import { themes } from '../lib/universal';
 import { compress, parseQuery, updateQuery } from '../lib/utils';
 
+function replacer(key: string, value: any) {
+  return value === undefined ? 'undefined' : value;
+}
+
 export class Playground extends Component<any, any> {
   static getDerivedStateFromError(error: Error) {
     return { error };
@@ -116,7 +120,12 @@ const PlaygroundModelDebug = () => {
       <br />
       <br />
       <pre>
-        <code>{`const model = ${JSON.stringify(model, null, 2)};`}</code>
+        <code>
+          {`const model = ${JSON.stringify(model, replacer, 2)};`.replace(
+            /"undefined"/g,
+            'undefined',
+          )}
+        </code>
       </pre>
     </>
   );
