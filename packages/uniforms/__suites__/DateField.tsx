@@ -7,7 +7,7 @@ import z from 'zod';
 import { renderWithZod } from './render-zod';
 import { skipTestIf } from './skipTestIf';
 
-const findClosestInputWithTestId = (testId: string) =>
+const getClosestInputWithTestId = (testId: string) =>
   screen.getByTestId(testId).closest('body')?.querySelector('input');
 
 const getDateString = (date: Date, useISOFormat: boolean) =>
@@ -30,7 +30,7 @@ export function testDateField(
       element: <DateField name="x" data-testid="y" />,
       schema: z.object({ x: z.date() }),
     });
-    expect(findClosestInputWithTestId('y')?.id).toBeTruthy();
+    expect(getClosestInputWithTestId('y')?.id).toBeTruthy();
   });
 
   test('<DateField> - renders a input with correct id (specified)', () => {
@@ -38,7 +38,7 @@ export function testDateField(
       element: <DateField name="x" id="y" data-testid="z" />,
       schema: z.object({ x: z.date() }),
     });
-    expect(findClosestInputWithTestId('z')?.id).toBe('y');
+    expect(getClosestInputWithTestId('z')?.id).toBe('y');
   });
 
   test('<DateField> - renders a input with correct name', () => {
@@ -46,7 +46,7 @@ export function testDateField(
       element: <DateField name="x" data-testid="z" />,
       schema: z.object({ x: z.date() }),
     });
-    expect(findClosestInputWithTestId('z')?.name).toBe('x');
+    expect(getClosestInputWithTestId('z')?.name).toBe('x');
   });
 
   test('<DateField> - renders an input with correct disabled state', () => {
@@ -54,7 +54,7 @@ export function testDateField(
       element: <DateField name="x" disabled data-testid="z" />,
       schema: z.object({ x: z.date() }),
     });
-    expect(findClosestInputWithTestId('z')?.disabled).toBe(true);
+    expect(getClosestInputWithTestId('z')?.disabled).toBe(true);
   });
 
   test('<DateField> - renders a input with correct label (specified)', () => {
@@ -70,7 +70,7 @@ export function testDateField(
       element: <DateField name="x" data-testid="z" />,
       schema: z.object({ x: z.date() }),
     });
-    const input = findClosestInputWithTestId('z');
+    const input = getClosestInputWithTestId('z');
     expect(input).toBeInTheDocument();
     expect(input?.value).toBe('');
   });
@@ -81,7 +81,7 @@ export function testDateField(
       element: <DateField name="x" data-testid="z" value={now} />,
       schema: z.object({ x: z.date() }),
     });
-    const input = findClosestInputWithTestId('z');
+    const input = getClosestInputWithTestId('z');
     expect(input).toBeInTheDocument();
     expect(input!.value).toBe(getDateString(now, useISOFormat));
   });
@@ -94,7 +94,7 @@ export function testDateField(
       schema: z.object({ x: z.date() }),
     });
     const now = moment();
-    const input = findClosestInputWithTestId('z');
+    const input = getClosestInputWithTestId('z');
     expect(input).toBeInTheDocument();
     await userEvent.click(input!);
     await userEvent.type(input!, `${now.format('YYYY-MM-DD HH:mm:ss')}{Enter}`);
@@ -108,7 +108,7 @@ export function testDateField(
       schema: z.object({ x: z.date() }),
       model: { x: now },
     });
-    const input = findClosestInputWithTestId('z');
+    const input = getClosestInputWithTestId('z');
     expect(input).toBeInTheDocument();
     expect(input?.value).toBe(getDateString(now, useISOFormat));
   });
@@ -122,7 +122,7 @@ export function testDateField(
         onChange,
         schema: z.object({ x: z.date() }),
       });
-      const input = findClosestInputWithTestId('z');
+      const input = getClosestInputWithTestId('z');
       expect(input).toBeInTheDocument();
       const now = new Date('2024-01-01 12:00:00');
       await userEvent.click(input!);
@@ -145,7 +145,7 @@ export function testDateField(
         onChange,
         schema: z.object({ x: z.date() }),
       });
-      const input = findClosestInputWithTestId('x');
+      const input = getClosestInputWithTestId('x');
       expect(input).toHaveValue(date.slice(0, 10));
       await userEvent.clear(input!);
       expect(onChange).toHaveBeenLastCalledWith('x', undefined);
@@ -164,7 +164,7 @@ export function testDateField(
         onChange,
         schema: z.object({ x: z.date() }),
       });
-      const input = findClosestInputWithTestId('x');
+      const input = getClosestInputWithTestId('x');
       expect(input).toHaveValue('');
       await userEvent.click(input!);
       await userEvent.type(input!, `${date}{Enter}`);
@@ -181,7 +181,7 @@ export function testDateField(
       schema: z.object({ x: z.date() }),
     });
 
-    const input = findClosestInputWithTestId('x');
+    const input = getClosestInputWithTestId('x');
     expect(input).toHaveValue('');
 
     await userEvent.type(input!, date);
