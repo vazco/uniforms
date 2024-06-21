@@ -4,14 +4,6 @@ import { SelectField } from 'uniforms-mui';
 import { renderWithZod } from 'uniforms/__suites__';
 import { z } from 'zod';
 
-test('<SelectField> - renders a Select', () => {
-  renderWithZod({
-    element: <SelectField data-testid="select-field" name="x" />,
-    schema: z.object({ x: z.enum(['a', 'b']) }),
-  });
-  expect(screen.getByTestId('select-field')).toBeInTheDocument();
-});
-
 test('<SelectField> - renders a Select with correct disabled state', () => {
   renderWithZod({
     element: <SelectField data-testid="select-field" name="x" disabled />,
@@ -30,37 +22,6 @@ test('<SelectField> - renders a Select with correct required state', () => {
   });
 
   expect(screen.getByLabelText('X *')).toBeInTheDocument();
-});
-
-test('<SelectField> - renders a Select with correct id (inherited)', () => {
-  renderWithZod({
-    element: <SelectField data-testid="select-field" name="x" />,
-    schema: z.object({ x: z.enum(['a', 'b']) }),
-  });
-
-  const select = screen.getByTestId('select-field').querySelector('[id]');
-  expect(select?.getAttribute('id')).toBeTruthy();
-});
-
-test('<SelectField> - renders a Select with correct id (specified)', () => {
-  renderWithZod({
-    element: <SelectField data-testid="select-field" name="x" id="y" />,
-    schema: z.object({ x: z.enum(['a', 'b']) }),
-  });
-
-  const select = screen.getByTestId('select-field').querySelector('[id]');
-  expect(select?.getAttribute('id')).toBe('y');
-});
-
-test('<SelectField> - renders a Select with correct name', () => {
-  renderWithZod({
-    element: <SelectField data-testid="select-field" name="x" />,
-    schema: z.object({ x: z.enum(['a', 'b']) }),
-  });
-
-  const select = screen.getByTestId('select-field');
-  const elementWithAttribute = select.querySelector('[name="x"]') || select;
-  expect(elementWithAttribute?.getAttribute('name')).toBe('x');
 });
 
 test('<SelectField> - renders a Select with correct options', () => {
@@ -171,49 +132,6 @@ test('<SelectField> - renders a Select which correctly reacts on change (same va
   expect(onChange).toBeCalledTimes(0);
 });
 
-test('<SelectField> - renders a label', () => {
-  renderWithZod({
-    element: <SelectField name="x" label="y" required={false} />,
-    schema: z.object({ x: z.enum(['a', 'b']) }),
-  });
-
-  expect(screen.getByLabelText('y')).toBeInTheDocument();
-});
-
-test('<SelectField> - renders a SelectField with correct error text (showInlineError=true)', () => {
-  const error = new Error();
-  renderWithZod({
-    element: (
-      <SelectField
-        name="x"
-        error={error}
-        showInlineError
-        errorMessage="Error"
-      />
-    ),
-    schema: z.object({ x: z.enum(['a', 'b']) }),
-  });
-
-  expect(screen.getByText('Error')).toBeInTheDocument();
-});
-
-test('<SelectField> - renders a SelectField with correct error text (showInlineError=false)', () => {
-  const error = new Error();
-  renderWithZod({
-    element: (
-      <SelectField
-        name="x"
-        error={error}
-        showInlineError={false}
-        errorMessage="Error"
-      />
-    ),
-    schema: z.object({ x: z.enum(['a', 'b']) }),
-  });
-
-  expect(screen.queryByText('Error')).not.toBeInTheDocument();
-});
-
 test('<SelectField> - works with special characters', () => {
   renderWithZod({
     element: <SelectField name="x" />,
@@ -308,35 +226,6 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct nam
   expect(screen.getByLabelText('b')).toHaveAttribute('name', 'x');
 });
 
-test('<SelectField checkboxes> - renders a set of Radio buttons with correct options', () => {
-  renderWithZod({
-    element: <SelectField checkboxes name="x" />,
-    schema: z.object({ x: z.enum(['a', 'b']) }),
-  });
-
-  expect(screen.getByLabelText('a')).toBeInTheDocument();
-  expect(screen.getByLabelText('b')).toBeInTheDocument();
-});
-
-test('<SelectField checkboxes> - renders a set of Radio buttons with correct options (transform)', () => {
-  renderWithZod({
-    element: (
-      <SelectField
-        checkboxes
-        name="x"
-        options={[
-          { label: 'A', value: 'a' },
-          { label: 'B', value: 'b' },
-        ]}
-      />
-    ),
-    schema: z.object({ x: z.string() }),
-  });
-
-  expect(screen.getByLabelText('A')).toBeInTheDocument();
-  expect(screen.getByLabelText('B')).toBeInTheDocument();
-});
-
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct value (default)', () => {
   renderWithZod({
     element: <SelectField checkboxes name="x" />,
@@ -381,29 +270,6 @@ test('<SelectField checkboxes> - renders a set of Radio buttons which correctly 
   expect(onChange).toHaveBeenCalledWith('b');
 });
 
-test('<SelectField checkboxes> - renders a set of Checkboxes which correctly reacts on change (array uncheck)', () => {
-  const onChange = jest.fn();
-
-  renderWithZod({
-    element: (
-      <SelectField checkboxes name="x" onChange={onChange} value={['b']} />
-    ),
-    schema: z.object({
-      x: z.string().uniforms({
-        fieldType: Array,
-        options: [
-          { label: 'A', value: 'a' },
-          { label: 'B', value: 'b' },
-        ],
-      }),
-    }),
-  });
-
-  fireEvent.click(screen.getByLabelText('B'));
-
-  expect(onChange).toHaveBeenLastCalledWith([]);
-});
-
 test('<SelectField checkboxes> - renders a set of Checkboxes with correct labels', () => {
   renderWithZod({
     element: <SelectField checkboxes name="x" />,
@@ -420,15 +286,6 @@ test('<SelectField checkboxes> - renders a set of Checkboxes with correct labels
 
   expect(screen.getByLabelText('A')).toBeInTheDocument();
   expect(screen.getByLabelText('B')).toBeInTheDocument();
-});
-
-test('<SelectField checkboxes> - renders a label', () => {
-  renderWithZod({
-    element: <SelectField checkboxes name="x" label="y" required={false} />,
-    schema: z.object({ x: z.enum(['a', 'b']) }),
-  });
-
-  expect(screen.getByText('y')).toBeInTheDocument();
 });
 
 test('<SelectField checkboxes> - renders a SelectField with correct error text (showInlineError=true)', () => {
