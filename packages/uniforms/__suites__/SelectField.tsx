@@ -701,7 +701,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(!options?.showInlineError)(
+  skipTestIf(options?.showInlineError !== false)(
     '<SelectField> - renders correct error text (showInlineError=false)',
     () => {
       const error = new Error();
