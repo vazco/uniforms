@@ -36,6 +36,7 @@ function Date({
   errorMessage,
   helperText,
   InputLabelProps,
+  inputProps,
   inputRef,
   label,
   labelProps,
@@ -62,7 +63,7 @@ function Date({
         max: dateFormat(max, type),
         min: dateFormat(min, type),
         readOnly,
-        ...props.inputProps,
+        ...inputProps,
       }}
       margin="dense"
       name={name}
