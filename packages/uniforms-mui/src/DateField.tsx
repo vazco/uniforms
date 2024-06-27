@@ -60,10 +60,10 @@ function Date({
       label={label}
       InputLabelProps={{ shrink: true, ...labelProps, ...InputLabelProps }}
       inputProps={{
+        ...inputProps,
         max: dateFormat(max, type),
         min: dateFormat(min, type),
         readOnly,
-        ...inputProps,
       }}
       margin="dense"
       name={name}
