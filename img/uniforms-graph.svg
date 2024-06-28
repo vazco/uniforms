@@ -1,0 +1,38 @@
+<svg version="1.1" baseProfile="full" width="395" height="427" viewbox="0 0 395 427" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" style="font-weight:bold; font-size:14pt; font-family:monospace;stroke-width:3;stroke-linejoin:round;stroke-linecap:round">
+  <title >uniforms-graph</title>
+  <desc >#edgeMargin: 5
+#fill: transparent
+#font: monospace
+#fontSize: 14
+#padding: 20
+#spacing: 35
+#stroke: #333
+#title: uniforms-graph
+
+[BaseForm] -&gt; [QuickForm]
+[BaseForm] -&gt; [ValidatedForm]
+[QuickForm] -&gt;  [ValidatedQuickForm]
+[ValidatedForm] -&gt;  [ValidatedQuickForm]
+[ValidatedQuickForm] -&gt; [AutoForm]</desc>
+  <rect x="0" y="0" height="427" width="395" style="stroke:none; fill:transparent;"></rect>
+  <path d="M125.8 93.5 L93.5 111 L93.5 128.5 L93.5 128.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M88.8 116.8 L93.5 122.7 L98.2 116.8 L93.5 128.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M251.2 93.5 L283.5 111 L283.5 128.5 L283.5 128.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M278.8 116.8 L283.5 122.7 L288.2 116.8 L283.5 128.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M93.5 196.5 L93.5 214 L125.8 231.5 L125.8 231.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M113.3 230 L120.7 228.7 L117.7 221.8 L125.8 231.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M283.5 196.5 L283.5 214 L251.2 231.5 L251.2 231.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M259.3 221.8 L256.3 228.7 L263.7 230 L251.2 231.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <path d="M188.5 299.5 L188.5 317 L188.5 334.5 L188.5 334.5 " style="stroke:#333;fill:none;stroke-dasharray:none;"></path>
+  <path d="M183.8 322.8 L188.5 328.7 L193.2 322.8 L188.5 334.5 Z" style="stroke:#333;fill:#333;stroke-dasharray:none;"></path>
+  <rect x="130.5" y="30.5" height="58" width="116" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="188.5" y="66.3" style="fill: #333;text-anchor: middle;">BaseForm</text>
+  <rect x="30.5" y="133.5" height="58" width="126" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="93.5" y="169.3" style="fill: #333;text-anchor: middle;">QuickForm</text>
+  <rect x="201.5" y="133.5" height="58" width="164" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="283.5" y="169.3" style="fill: #333;text-anchor: middle;">ValidatedForm</text>
+  <rect x="83.5" y="236.5" height="58" width="211" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="189" y="272.3" style="fill: #333;text-anchor: middle;">ValidatedQuickForm</text>
+  <rect x="130.5" y="339.5" height="58" width="116" style="stroke:#333;fill:transparent;stroke-dasharray:none;"></rect>
+  <text x="188.5" y="375.3" style="fill: #333;text-anchor: middle;">AutoForm</text>
+</svg>
