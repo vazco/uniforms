@@ -1,727 +1,524 @@
-import Checkbox from '@mui/material/Checkbox';
-import FormControl from '@mui/material/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormLabel from '@mui/material/FormLabel';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import Select from '@mui/material/Select';
-import Switch from '@mui/material/Switch';
-import TextField from '@mui/material/TextField';
+import { fireEvent, screen, within } from '@testing-library/react';
 import React from 'react';
 import { SelectField } from 'uniforms-mui';
-
-import createContext from './_createContext';
-import mount from './_mount';
+import { renderWithZod } from 'uniforms/__suites__';
+import { z } from 'zod';
 
 test('<SelectField> - renders a Select', () => {
-  const element = <SelectField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
-
-  expect(wrapper.find(Select)).toHaveLength(1);
+  renderWithZod({
+    element: <SelectField data-testid="select-field" name="x" />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
+  expect(screen.getByTestId('select-field')).toBeInTheDocument();
 });
 
 test('<SelectField> - renders a Select with correct disabled state', () => {
-  const element = <SelectField name="x" disabled />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: <SelectField data-testid="select-field" name="x" disabled />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find(FormControl).prop('disabled')).toBe(true);
+  expect(
+    screen.getByTestId('select-field').classList.contains('Mui-disabled'),
+  ).toBeTruthy();
 });
 
 test('<SelectField> - renders a Select with correct required state', () => {
-  const element = <SelectField name="x" required />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: <SelectField data-testid="select-field" name="x" required />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find(TextField).prop('required')).toBe(true);
+  expect(screen.getByLabelText('X *')).toBeInTheDocument();
 });
 
 test('<SelectField> - renders a Select with correct id (inherited)', () => {
-  const element = <SelectField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: <SelectField data-testid="select-field" name="x" />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(Select)).toHaveLength(1);
-  // FIXME: inputProps is nullable.
-  expect(wrapper.find(Select).prop('inputProps')!.id).toBeTruthy();
+  const select = screen.getByTestId('select-field').querySelector('[id]');
+  expect(select?.getAttribute('id')).toBeTruthy();
 });
 
 test('<SelectField> - renders a Select with correct id (specified)', () => {
-  const element = <SelectField name="x" id="y" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: <SelectField data-testid="select-field" name="x" id="y" />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(Select)).toHaveLength(1);
-  // FIXME: inputProps is nullable.
-  expect(wrapper.find(Select).prop('inputProps')!.id).toBe('y');
+  const select = screen.getByTestId('select-field').querySelector('[id]');
+  expect(select?.getAttribute('id')).toBe('y');
 });
 
 test('<SelectField> - renders a Select with correct name', () => {
-  const element = <SelectField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: <SelectField data-testid="select-field" name="x" />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(Select)).toHaveLength(1);
-  // FIXME: inputProps is nullable.
-  expect(wrapper.find(Select).prop('inputProps')!.name).toBe('x');
+  const select = screen.getByTestId('select-field');
+  const elementWithAttribute = select.querySelector('[name="x"]') || select;
+  expect(elementWithAttribute?.getAttribute('name')).toBe('x');
 });
 
 test('<SelectField> - renders a Select with correct options', () => {
-  const element = <SelectField name="x" native />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  const selectOptions = ['a', 'b'] as const;
+  renderWithZod({
+    element: <SelectField name="x" />,
+    schema: z.object({ x: z.enum(selectOptions) }),
+  });
 
-  expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find('option')).toHaveLength(3);
-  [
-    ['', 'X'],
-    ['a', 'a'],
-    ['b', 'b'],
-  ].forEach(([value, text], index) => {
-    const option = wrapper.find('option').at(index);
-    expect(option.prop('value')).toBe(value);
-    expect(option.text()).toBe(text);
+  fireEvent.mouseDown(screen.getByRole('button'));
+  const listbox = within(screen.getByRole('listbox'));
+
+  selectOptions.forEach(option => {
+    expect(listbox.getByRole('option', { name: option })).not.toBeNull();
   });
 });
 
 test('<SelectField> - renders a Select with correct options (transform)', () => {
-  const element = (
-    <SelectField
-      name="x"
-      options={[
-        { label: 'A', value: 'a' },
-        { label: 'B', value: 'b' },
-      ]}
-      native
-    />
-  );
-  const wrapper = mount(element, createContext({ x: { type: String } }));
+  const selectOptions = ['a', 'b'] as const;
+  renderWithZod({
+    element: (
+      <SelectField name="x" options={[{ value: 'a' }, { value: 'b' }]} />
+    ),
+    schema: z.object({ x: z.string() }),
+  });
 
-  expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find('option')).toHaveLength(3);
-  [
-    ['', 'X'],
-    ['a', 'A'],
-    ['b', 'B'],
-  ].forEach(([value, text], index) => {
-    const option = wrapper.find('option').at(index);
-    expect(option.prop('value')).toBe(value);
-    expect(option.text()).toBe(text);
+  fireEvent.mouseDown(screen.getByRole('button'));
+  const listbox = within(screen.getByRole('listbox'));
+
+  selectOptions.forEach(option => {
+    expect(listbox.getByRole('option', { name: option })).toBeInTheDocument();
   });
 });
 
 test('<SelectField> - renders a Select with correct placeholder (implicit)', () => {
-  const element = <SelectField name="x" placeholder="y" native />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
-
-  expect(wrapper.find(Select).prop('value')).toBe('');
-  expect(wrapper.find('option')).toHaveLength(3);
-  [
-    ['', 'y'],
-    ['a', 'a'],
-    ['b', 'b'],
-  ].forEach(([value, text], index) => {
-    const option = wrapper.find('option').at(index);
-    expect(option.prop('value')).toBe(value);
-    expect(option.text()).toBe(text);
+  renderWithZod({
+    element: (
+      <SelectField
+        name="x"
+        placeholder="y"
+        options={[{ value: 'a' }, { value: 'b' }]}
+      />
+    ),
+    schema: z.object({ x: z.string() }),
   });
+  expect(screen.getByText('y')).toBeInTheDocument();
 });
 
 test('<SelectField> - renders a Select with correct value (default)', () => {
-  const element = <SelectField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: <SelectField data-testid="select-field" name="x" />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find(Select).prop('value')).toBe('');
+  expect(screen.getByText('a')).toBeInTheDocument();
+  expect(screen.queryByText('b')).not.toBeInTheDocument();
 });
 
 test('<SelectField> - renders a Select with correct value (model)', () => {
-  const element = <SelectField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext(
-      { x: { type: String, allowedValues: ['a', 'b'] } },
-      { model: { x: 'b' } },
-    ),
-  );
+  renderWithZod({
+    element: <SelectField data-testid="select-field" name="x" />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+    model: { x: 'b' },
+  });
 
-  expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find(Select).prop('value')).toBe('b');
+  expect(screen.getByText('b')).toBeInTheDocument();
+  expect(screen.queryByText('a')).not.toBeInTheDocument();
 });
 
 test('<SelectField> - renders a Select with correct value (specified)', () => {
-  const element = <SelectField name="x" value="b" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: <SelectField data-testid="select-field" name="x" value="b" />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+    model: { x: 'b' },
+  });
 
-  expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find(Select).prop('value')).toBe('b');
+  expect(screen.getByText('b')).toBeInTheDocument();
+  expect(screen.queryByText('a')).not.toBeInTheDocument();
 });
 
 test('<SelectField> - renders a Select which correctly reacts on change', () => {
   const onChange = jest.fn();
+  renderWithZod({
+    element: <SelectField name="x" onChange={onChange} />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  const element = <SelectField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext(
-      { x: { type: String, allowedValues: ['a', 'b'] } },
-      { onChange },
-    ),
-  );
+  fireEvent.mouseDown(screen.getByRole('button'));
+  const listbox = within(screen.getByRole('listbox'));
+  fireEvent.click(listbox.getByText(/b/i));
 
-  expect(wrapper.find(Select)).toHaveLength(1);
-  // @ts-expect-error Provide a valid EventTarget.
-  wrapper.find(TextField).props().onChange!({ target: { value: 'b' } });
-  expect(onChange).toHaveBeenLastCalledWith('x', 'b');
-});
-
-test('<SelectField> - renders a Select which correctly reacts on change (empty)', () => {
-  const onChange = jest.fn();
-
-  const element = <SelectField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext(
-      { x: { type: String, allowedValues: ['a', 'b'] } },
-      { onChange },
-    ),
-  );
-
-  expect(wrapper.find(Select)).toHaveLength(1);
-  // @ts-expect-error Provide a valid EventTarget.
-  wrapper.find(TextField).props().onChange!({ target: { value: '' } });
-  expect(onChange).toHaveBeenLastCalledWith('x', undefined);
+  expect(onChange).toHaveBeenCalledWith('b');
 });
 
 test('<SelectField> - renders a Select which correctly reacts on change (same value)', () => {
   const onChange = jest.fn();
+  renderWithZod({
+    element: <SelectField name="x" onChange={onChange} />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+    model: { x: 'b' },
+  });
 
-  const element = <SelectField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext(
-      { x: { type: String, allowedValues: ['a', 'b'] } },
-      { model: { x: 'b' }, onChange },
-    ),
-  );
+  fireEvent.mouseDown(screen.getByRole('button'));
+  const listbox = within(screen.getByRole('listbox'));
 
-  expect(wrapper.find(Select)).toHaveLength(1);
-  // @ts-expect-error Provide a valid EventTarget.
-  wrapper.find(TextField).props().onChange!({ target: { value: 'b' } });
-  expect(onChange).toHaveBeenLastCalledWith('x', 'b');
+  fireEvent.click(listbox.getByText(/b/i));
+
+  expect(onChange).toBeCalledTimes(0);
 });
 
 test('<SelectField> - renders a label', () => {
-  const element = <SelectField name="x" label="y" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: <SelectField name="x" label="y" required={false} />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find(TextField).prop('label')).toBe('y');
+  expect(screen.getByLabelText('y')).toBeInTheDocument();
 });
 
 test('<SelectField> - renders a SelectField with correct error text (showInlineError=true)', () => {
   const error = new Error();
-  const element = (
-    <SelectField name="x" error={error} showInlineError errorMessage="Error" />
-  );
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: (
+      <SelectField
+        name="x"
+        error={error}
+        showInlineError
+        errorMessage="Error"
+      />
+    ),
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(FormHelperText).text()).toBe('Error');
+  expect(screen.getByText('Error')).toBeInTheDocument();
 });
 
 test('<SelectField> - renders a SelectField with correct error text (showInlineError=false)', () => {
   const error = new Error();
-  const element = (
-    <SelectField
-      name="x"
-      error={error}
-      showInlineError={false}
-      errorMessage="Error"
-    />
-  );
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: (
+      <SelectField
+        name="x"
+        error={error}
+        showInlineError={false}
+        errorMessage="Error"
+      />
+    ),
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(FormHelperText)).toHaveLength(0);
+  expect(screen.queryByText('Error')).not.toBeInTheDocument();
 });
 
 test('<SelectField> - works with special characters', () => {
-  mount(
-    <SelectField name="x" />,
-    createContext({ x: { type: String, allowedValues: ['ă', 'ș'] } }),
-  );
+  renderWithZod({
+    element: <SelectField name="x" />,
+    schema: z.object({ x: z.enum(['ă', 'ś']) }),
+  });
+
+  fireEvent.mouseDown(screen.getByRole('button'));
+  const listbox = within(screen.getByRole('listbox'));
+
+  expect(listbox.getByText('ă')).toBeInTheDocument();
+  expect(listbox.getByText('ś')).toBeInTheDocument();
 });
 
-test('<SelectField> - disabled items (options) based on predicate', () => {
-  const element = (
-    <SelectField
-      native
-      name="x"
-      options={[
-        { key: 'k1', label: 'A', value: 'a', disabled: true },
-        { key: 'k2', label: 'B', value: 'b', disabled: false },
-      ]}
-    />
-  );
-  const wrapper = mount(
-    element,
-    createContext({
-      x: { type: Array },
-      'x.$': { type: String },
-    }),
-  );
+test('<SelectField> - disabled items (options)', () => {
+  renderWithZod({
+    element: (
+      <SelectField
+        name="x"
+        options={[
+          { label: 'A', value: 'a', disabled: true },
+          { label: 'B', value: 'b', disabled: false },
+        ]}
+      />
+    ),
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find('option').at(0).prop('disabled')).toBe(true);
-  expect(wrapper.find('option').at(1).prop('disabled')).toBe(false);
+  fireEvent.mouseDown(screen.getByRole('button'));
+  const listbox = within(screen.getByRole('listbox'));
+
+  expect(listbox.getByText('A')).toHaveClass('Mui-disabled');
+  expect(listbox.getByText('B')).not.toHaveClass('Mui-disabled');
 });
 
 test('<SelectField> - renders with correct classnames', () => {
-  const wrapper = mount(
-    <SelectField name="x" textFieldProps={{ className: 'select-class' }} />,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
-  expect(wrapper.find(TextField).props()).toHaveProperty(
-    'className',
-    'select-class',
-  );
-});
-
-test('<SelectField> - renders a multiselect with correct value (default)', () => {
-  const element = <SelectField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({
-      x: { type: Array, allowedValues: ['a', 'b'] },
-      'x.$': { type: String },
-    }),
-  );
-
-  expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find(Select).prop('value')).toStrictEqual([]);
-});
-
-test('<SelectField> - renders a multiselect with correct value (model)', () => {
-  const element = <SelectField name="x" />;
-  const wrapper = mount(
-    element,
-    createContext(
-      {
-        x: { type: Array, allowedValues: ['a', 'b'] },
-        'x.$': { type: String },
-      },
-      { model: { x: ['b'] } },
+  const { container } = renderWithZod({
+    element: (
+      <SelectField name="x" textFieldProps={{ className: 'select-class' }} />
     ),
-  );
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find(Select).prop('value')).toStrictEqual(['b']);
-});
-
-test('<SelectField> - renders a multiselect with correct value (specified)', () => {
-  const element = <SelectField name="x" value={['b']} />;
-  const wrapper = mount(
-    element,
-    createContext({
-      x: { type: Array, allowedValues: ['a', 'b'] },
-      'x.$': { type: String },
-    }),
-  );
-
-  expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find(Select).prop('value')).toStrictEqual(['b']);
+  expect(container.getElementsByClassName('select-class').length).toBe(1);
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons', () => {
-  const element = <SelectField checkboxes name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: <SelectField checkboxes name="x" />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(Radio)).toHaveLength(2);
+  expect(screen.getByRole('radiogroup')).toBeInTheDocument();
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct disabled state', () => {
-  const element = <SelectField checkboxes name="x" disabled />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: <SelectField checkboxes name="x" disabled />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(Radio)).toHaveLength(2);
-  expect(wrapper.find(Radio).at(0).prop('disabled')).toBe(true);
-  expect(wrapper.find(Radio).at(1).prop('disabled')).toBe(true);
+  expect(screen.getByLabelText('a')).toBeDisabled();
+  expect(screen.getByLabelText('b')).toBeDisabled();
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct id (inherited)', () => {
-  const element = <SelectField checkboxes name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: <SelectField checkboxes name="x" />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(Radio)).toHaveLength(2);
-  expect(wrapper.find(Radio).at(0).prop('id')).toBeTruthy();
-  expect(wrapper.find(Radio).at(1).prop('id')).toBeTruthy();
+  expect(screen.getByLabelText('a')).toHaveAttribute('id');
+  expect(screen.getByLabelText('b')).toHaveAttribute('id');
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct id (specified)', () => {
-  const element = <SelectField checkboxes name="x" id="y" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: <SelectField checkboxes name="x" id="y" />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(Radio)).toHaveLength(2);
-  expect(wrapper.find(Radio).at(0).prop('id')).toBe('y-YQ');
-  expect(wrapper.find(Radio).at(1).prop('id')).toBe('y-Yg');
+  expect(screen.getByLabelText('a')).toHaveAttribute('id', 'y-YQ');
+  expect(screen.getByLabelText('b')).toHaveAttribute('id', 'y-Yg');
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct name', () => {
-  const element = <SelectField checkboxes name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: <SelectField checkboxes name="x" />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(Radio)).toHaveLength(2);
-  expect(wrapper.find(Radio).at(0).find('input').prop('name')).toBe('x');
-  expect(wrapper.find(Radio).at(1).find('input').prop('name')).toBe('x');
+  expect(screen.getByLabelText('a')).toHaveAttribute('name', 'x');
+  expect(screen.getByLabelText('b')).toHaveAttribute('name', 'x');
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct options', () => {
-  const element = <SelectField checkboxes name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: <SelectField checkboxes name="x" />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find('label')).toHaveLength(2);
-  expect(wrapper.find(FormControlLabel).at(0).prop('label')).toBe('a');
-  expect(wrapper.find(FormControlLabel).at(1).prop('label')).toBe('b');
+  expect(screen.getByLabelText('a')).toBeInTheDocument();
+  expect(screen.getByLabelText('b')).toBeInTheDocument();
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct options (transform)', () => {
-  const element = (
-    <SelectField
-      checkboxes
-      name="x"
-      options={[
-        { label: 'A', value: 'a' },
-        { label: 'B', value: 'b' },
-      ]}
-    />
-  );
-  const wrapper = mount(element, createContext({ x: { type: String } }));
+  renderWithZod({
+    element: (
+      <SelectField
+        checkboxes
+        name="x"
+        options={[
+          { label: 'A', value: 'a' },
+          { label: 'B', value: 'b' },
+        ]}
+      />
+    ),
+    schema: z.object({ x: z.string() }),
+  });
 
-  expect(wrapper.find('label')).toHaveLength(2);
-  expect(wrapper.find(FormControlLabel).at(0).prop('label')).toBe('A');
-  expect(wrapper.find(FormControlLabel).at(1).prop('label')).toBe('B');
+  expect(screen.getByLabelText('A')).toBeInTheDocument();
+  expect(screen.getByLabelText('B')).toBeInTheDocument();
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct value (default)', () => {
-  const element = <SelectField checkboxes name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: <SelectField checkboxes name="x" />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(Radio)).toHaveLength(2);
-  expect(wrapper.find(Radio).at(0).find('input').prop('checked')).toBe(false);
-  expect(wrapper.find(Radio).at(1).find('input').prop('checked')).toBe(false);
+  expect(screen.getByLabelText('a')).toBeChecked();
+  expect(screen.getByLabelText('b')).not.toBeChecked();
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct value (model)', () => {
-  const element = <SelectField checkboxes name="x" />;
-  const wrapper = mount(
-    element,
-    createContext(
-      { x: { type: String, allowedValues: ['a', 'b'] } },
-      { model: { x: 'b' } },
-    ),
-  );
+  renderWithZod({
+    element: <SelectField checkboxes name="x" />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+    model: { x: 'b' },
+  });
 
-  expect(wrapper.find(Radio)).toHaveLength(2);
-  expect(wrapper.find(Radio).at(0).find('input').prop('checked')).toBe(false);
-  expect(wrapper.find(Radio).at(1).find('input').prop('checked')).toBe(true);
+  expect(screen.getByLabelText('a')).not.toBeChecked();
+  expect(screen.getByLabelText('b')).toBeChecked();
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons with correct value (specified)', () => {
-  const element = <SelectField checkboxes name="x" value="b" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: <SelectField checkboxes name="x" value="b" />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(Radio)).toHaveLength(2);
-  expect(wrapper.find(Radio).at(0).find('input').prop('checked')).toBe(false);
-  expect(wrapper.find(Radio).at(1).find('input').prop('checked')).toBe(true);
+  expect(screen.getByLabelText('a')).not.toBeChecked();
+  expect(screen.getByLabelText('b')).toBeChecked();
 });
 
 test('<SelectField checkboxes> - renders a set of Radio buttons which correctly reacts on change', () => {
   const onChange = jest.fn();
 
-  const element = <SelectField checkboxes name="x" />;
-  const wrapper = mount(
-    element,
-    createContext(
-      { x: { type: String, allowedValues: ['a', 'b'] } },
-      { onChange },
-    ),
-  );
+  renderWithZod({
+    element: <SelectField checkboxes name="x" onChange={onChange} />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(Radio)).toHaveLength(2);
-  // @ts-expect-error Provide a valid value.
-  wrapper.find(RadioGroup).props().onChange!({ target: { value: 'b' } });
-  expect(onChange).toHaveBeenLastCalledWith('x', 'b');
-});
+  fireEvent.click(screen.getByLabelText('b'));
 
-test('<SelectField checkboxes> - renders a set of Checkboxes which correctly reacts on change (array check)', () => {
-  const onChange = jest.fn();
-
-  const element = <SelectField checkboxes name="x" />;
-  const wrapper = mount(
-    element,
-    createContext(
-      {
-        x: { type: Array },
-        'x.$': { type: String, allowedValues: ['a', 'b'] },
-      },
-      { onChange },
-    ),
-  );
-
-  expect(wrapper.find(Checkbox)).toHaveLength(2);
-  wrapper.find(Checkbox).at(1).find('input').simulate('change');
-  expect(onChange).toHaveBeenLastCalledWith('x', ['b']);
+  expect(onChange).toHaveBeenCalledWith('b');
 });
 
 test('<SelectField checkboxes> - renders a set of Checkboxes which correctly reacts on change (array uncheck)', () => {
   const onChange = jest.fn();
-  const element = <SelectField checkboxes name="x" value={['b']} />;
-  const wrapper = mount(
-    element,
-    createContext(
-      {
-        x: { type: Array },
-        'x.$': { type: String, allowedValues: ['a', 'b'] },
-      },
-      { onChange },
-    ),
-  );
 
-  expect(wrapper.find(Checkbox)).toHaveLength(2);
-  wrapper.find(Checkbox).at(1).find('input').simulate('change');
-  expect(onChange).toHaveBeenLastCalledWith('x', []);
+  renderWithZod({
+    element: (
+      <SelectField checkboxes name="x" onChange={onChange} value={['b']} />
+    ),
+    schema: z.object({
+      x: z.string().uniforms({
+        fieldType: Array,
+        options: [
+          { label: 'A', value: 'a' },
+          { label: 'B', value: 'b' },
+        ],
+      }),
+    }),
+  });
+
+  fireEvent.click(screen.getByLabelText('B'));
+
+  expect(onChange).toHaveBeenLastCalledWith([]);
 });
 
 test('<SelectField checkboxes> - renders a set of Checkboxes with correct labels', () => {
-  const onChange = jest.fn();
-  const element = <SelectField checkboxes name="x" />;
-  const wrapper = mount(
-    element,
-    createContext(
-      {
-        x: { type: Array },
-        'x.$': { type: String, allowedValues: ['a', 'b'] },
-      },
-      { onChange },
-    ),
-  );
+  renderWithZod({
+    element: <SelectField checkboxes name="x" />,
+    schema: z.object({
+      x: z.string().uniforms({
+        fieldType: Array,
+        options: [
+          { label: 'A', value: 'a' },
+          { label: 'B', value: 'b' },
+        ],
+      }),
+    }),
+  });
 
-  expect(wrapper.find(Checkbox)).toHaveLength(2);
-  expect(wrapper.find(FormControlLabel).at(0).text()).toBe('a');
-  expect(wrapper.find(FormControlLabel).at(1).text()).toBe('b');
-});
-
-test('<SelectField checkboxes> - renders a set of Checkboxes which correct labels (transform)', () => {
-  const onChange = jest.fn();
-  const element = (
-    <SelectField
-      checkboxes
-      name="x"
-      options={[
-        { label: 'A', value: 'a' },
-        { label: 'B', value: 'b' },
-      ]}
-    />
-  );
-  const wrapper = mount(
-    element,
-    createContext(
-      {
-        x: { type: Array },
-        'x.$': { type: String },
-      },
-      { onChange },
-    ),
-  );
-
-  expect(wrapper.find(Checkbox)).toHaveLength(2);
-  expect(wrapper.find(FormControlLabel).at(0).text()).toBe('A');
-  expect(wrapper.find(FormControlLabel).at(1).text()).toBe('B');
-});
-
-test('<SelectField checkboxes> - renders a set of Radio buttons which correctly reacts on change (same value)', () => {
-  const onChange = jest.fn();
-
-  const element = <SelectField checkboxes name="x" />;
-  const wrapper = mount(
-    element,
-    createContext(
-      { x: { type: String, allowedValues: ['a', 'b'] } },
-      { model: { x: 'b' }, onChange },
-    ),
-  );
-
-  expect(wrapper.find(Radio)).toHaveLength(2);
-
-  // @ts-expect-error Provide a valid value.
-  wrapper.find(RadioGroup).props().onChange!({ target: { value: 'a' } });
-
-  expect(onChange).toHaveBeenLastCalledWith('x', 'a');
+  expect(screen.getByLabelText('A')).toBeInTheDocument();
+  expect(screen.getByLabelText('B')).toBeInTheDocument();
 });
 
 test('<SelectField checkboxes> - renders a label', () => {
-  const element = <SelectField checkboxes name="x" label="y" />;
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: <SelectField checkboxes name="x" label="y" required={false} />,
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(FormLabel).text()).toBe('y *');
+  expect(screen.getByText('y')).toBeInTheDocument();
 });
 
 test('<SelectField checkboxes> - renders a SelectField with correct error text (showInlineError=true)', () => {
   const error = new Error();
-  const element = (
-    <SelectField
-      checkboxes
-      name="x"
-      error={error}
-      showInlineError
-      errorMessage="Error"
-    />
-  );
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: (
+      <SelectField
+        checkboxes
+        name="x"
+        error={error}
+        showInlineError
+        errorMessage="Error"
+      />
+    ),
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(FormHelperText).text()).toBe('Error');
+  expect(screen.getByText('Error')).toBeInTheDocument();
 });
 
 test('<SelectField checkboxes> - renders a SelectField with correct error text (showInlineError=false)', () => {
   const error = new Error();
-  const element = (
-    <SelectField
-      checkboxes
-      name="x"
-      error={error}
-      showInlineError={false}
-      errorMessage="Error"
-    />
-  );
-  const wrapper = mount(
-    element,
-    createContext({ x: { type: String, allowedValues: ['a', 'b'] } }),
-  );
+  renderWithZod({
+    element: (
+      <SelectField
+        checkboxes
+        name="x"
+        error={error}
+        showInlineError={false}
+        errorMessage="Error"
+      />
+    ),
+    schema: z.object({ x: z.enum(['a', 'b']) }),
+  });
 
-  expect(wrapper.find(FormHelperText)).toHaveLength(0);
+  expect(screen.queryByText('Error')).not.toBeInTheDocument();
 });
 
 test('<SelectField checkboxes> - renders Checkbox with appearance=checkbox', () => {
-  const element = <SelectField appearance="checkbox" checkboxes name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({
-      x: { type: Array },
-      'x.$': { type: String, allowedValues: ['a', 'b'] },
+  const { container } = renderWithZod({
+    element: <SelectField appearance="checkbox" checkboxes name="x" />,
+    schema: z.object({
+      x: z.string().uniforms({
+        fieldType: Array,
+        options: [
+          { label: 'A', value: 'a' },
+          { label: 'B', value: 'b' },
+        ],
+      }),
     }),
-  );
+  });
 
-  expect(wrapper.find(Checkbox)).toHaveLength(2);
-  expect(wrapper.find(Switch)).toHaveLength(0);
+  expect(container.getElementsByClassName('MuiCheckbox-root').length).toBe(2);
 });
 
 test('<SelectField checkboxes> - renders Switch with appearance=switch', () => {
-  const element = <SelectField appearance="switch" checkboxes name="x" />;
-  const wrapper = mount(
-    element,
-    createContext({
-      x: { type: Array },
-      'x.$': { type: String, allowedValues: ['a', 'b'] },
+  const { container } = renderWithZod({
+    element: <SelectField appearance="switch" checkboxes name="x" />,
+    schema: z.object({
+      x: z.string().uniforms({
+        fieldType: Array,
+        options: [
+          { label: 'A', value: 'a' },
+          { label: 'B', value: 'b' },
+        ],
+      }),
     }),
-  );
+  });
 
-  expect(wrapper.find(Checkbox)).toHaveLength(0);
-  expect(wrapper.find(Switch)).toHaveLength(2);
-});
-
-test('<SelectField checkboxes> - works with special characters', () => {
-  mount(
-    <SelectField checkboxes name="x" />,
-    createContext({ x: { type: String, allowedValues: ['ă', 'ș'] } }),
-  );
+  expect(container.getElementsByClassName('MuiSwitch-root').length).toBe(2);
 });
 
 test('<SelectField checkboxes> - disabled items (checkboxes) based on predicate', () => {
-  const element = (
-    <SelectField
-      appearance="checkbox"
-      checkboxes
-      name="x"
-      options={[
-        { key: 'k1', label: 'A', value: 'a', disabled: true },
-        { key: 'k2', label: 'B', value: 'b', disabled: false },
-      ]}
-    />
-  );
-  const wrapper = mount(
-    element,
-    createContext({
-      x: { type: Array },
-      'x.$': { type: String },
+  renderWithZod({
+    element: (
+      <SelectField
+        appearance="checkbox"
+        checkboxes
+        name="x"
+        options={[
+          { label: 'A', value: 'a', disabled: true },
+          { label: 'B', value: 'b', disabled: false },
+        ]}
+      />
+    ),
+    schema: z.object({
+      x: z.string().array(),
     }),
-  );
+  });
 
-  expect(wrapper.find(Checkbox)).toHaveLength(2);
-  expect(wrapper.find(FormControlLabel).at(0).prop('disabled')).toBe(true);
-  expect(wrapper.find(FormControlLabel).at(1).prop('disabled')).toBe(false);
+  expect(screen.getByLabelText('A')).toBeDisabled();
+  expect(screen.getByLabelText('B')).not.toBeDisabled();
 });

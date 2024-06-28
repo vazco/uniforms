@@ -55,7 +55,7 @@ describe('@RTL MUI', () => {
   suites.testQuickForm(theme.QuickForm);
   suites.testRadioField(theme.RadioField);
   // FIXME: MUI select does not work with new RTL test implementation
-  // suites.testSelectField(theme.SelectField);
+  // suites.testSelectField(theme.SelectField, { showInlineError: true });
   suites.testSubmitField(theme.SubmitField);
   suites.testTextField(theme.TextField);
   suites.testValidatedForm(theme.ValidatedForm);

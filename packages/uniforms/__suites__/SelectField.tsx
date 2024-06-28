@@ -9,6 +9,7 @@ export function testSelectField(
   SelectField: ComponentType<any>,
   options?: {
     theme?: 'antd';
+    showInlineError?: boolean;
     getCheckboxInlineOption?: (screen: Screen) => Element | null;
   },
 ) {
@@ -18,6 +19,14 @@ export function testSelectField(
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
     expect(screen.getByTestId('select-field')).toBeInTheDocument();
+  });
+
+  test('<SelectField> - renders a label', () => {
+    renderWithZod({
+      element: <SelectField name="x" label="y" />,
+      schema: z.object({ x: z.enum(['a', 'b']) }),
+    });
+    expect(screen.getByText('y')).toBeInTheDocument();
   });
 
   test('<SelectField> - renders a select with correct disabled state', () => {
@@ -617,4 +626,44 @@ export function testSelectField(
     expect(checkboxes?.[0]).toBeDisabled();
     expect(checkboxes?.[1]).not.toBeDisabled();
   });
+
+  skipTestIf(!options?.showInlineError)(
+    '<SelectField> - renders correct error text (specified)',
+    () => {
+      const error = new Error();
+      renderWithZod({
+        element: (
+          <>
+            <SelectField
+              data-testid="select"
+              name="x"
+              error={error}
+              showInlineError
+              errorMessage="Error"
+            />
+          </>
+        ),
+        schema: z.object({ x: z.enum(['a', 'b']) }),
+      });
+
+      expect(screen.getByText('Error')).toBeInTheDocument();
+    },
+  );
+
+  skipTestIf(!options?.showInlineError)(
+    '<SelectField> - renders correct error text (showInlineError=false)',
+    () => {
+      const error = new Error();
+      renderWithZod({
+        element: (
+          <>
+            <SelectField name="x" error={error} errorMessage="Error" />
+          </>
+        ),
+        schema: z.object({ x: z.enum(['a', 'b']) }),
+      });
+
+      expect(screen.queryByText('Error')).not.toBeInTheDocument();
+    },
+  );
 }

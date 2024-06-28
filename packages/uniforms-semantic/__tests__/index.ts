@@ -53,7 +53,7 @@ describe('@RTL Semantic', () => {
   suites.testNumField(theme.NumField);
   suites.testQuickForm(theme.QuickForm);
   suites.testRadioField(theme.RadioField);
-  suites.testSelectField(theme.SelectField);
+  suites.testSelectField(theme.SelectField, { showInlineError: true });
   suites.testSubmitField(theme.SubmitField);
   suites.testTextField(theme.TextField, {
     testWrapClassName: true,
