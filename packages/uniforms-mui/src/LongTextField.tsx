@@ -31,7 +31,10 @@ const LongText = ({
       margin="dense"
       multiline
       name={name}
-      onChange={event => disabled || onChange(event.target.value)}
+      onChange={event =>
+        disabled ||
+        onChange(event.target.value === '' ? undefined : event.target.value)
+      }
       placeholder={placeholder}
       ref={inputRef}
       type={type}
