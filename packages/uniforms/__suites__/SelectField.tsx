@@ -14,6 +14,8 @@ export function testSelectField(
     reverseCheckboxOrder?: false;
   },
 ) {
+  const isTheme = (themes: string[]) => themes.includes(options?.theme ?? '');
+
   test('<SelectField> - renders a select', () => {
     renderWithZod({
       element: <SelectField data-testid="select-field" name="x" />,
@@ -30,7 +32,7 @@ export function testSelectField(
     expect(screen.getByText('y')).toBeInTheDocument();
   });
 
-  skipTestIf(['mui', 'antd'].includes(options?.theme ?? ''))(
+  skipTestIf(isTheme(['mui', 'antd']))(
     '<SelectField> - renders a select with correct disabled state',
     () => {
       renderWithZod({
@@ -60,7 +62,7 @@ export function testSelectField(
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  skipTestIf(['mui', 'antd'].includes(options?.theme ?? ''))(
+  skipTestIf(isTheme(['mui', 'antd']))(
     '<SelectField> - ignores selection with readOnly state ',
     () => {
       const onChange = jest.fn();
@@ -81,7 +83,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(['mui', 'antd'].includes(options?.theme ?? ''))(
+  skipTestIf(isTheme(['mui', 'antd']))(
     '<SelectField> - (multiple) renders a select which correctly reacts on change (uncheck) by value',
     () => {
       const onChange = jest.fn();
@@ -95,7 +97,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(['mui', 'antd'].includes(options?.theme ?? ''))(
+  skipTestIf(isTheme(['mui', 'antd']))(
     '<SelectField> - (multiple) renders a select which correctly reacts on change (uncheck) by selectedIndex',
     () => {
       const onChange = jest.fn();
@@ -109,7 +111,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(['mui', 'antd'].includes(options?.theme ?? ''))(
+  skipTestIf(isTheme(['mui', 'antd']))(
     '<SelectField> - (multiple) renders a select which correctly reacts on change (checked) by selectedIndex',
     () => {
       const onChange = jest.fn();
@@ -123,7 +125,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(['mui', 'antd'].includes(options?.theme ?? ''))(
+  skipTestIf(isTheme(['mui', 'antd']))(
     '<SelectField> - renders a select which correctly reacts on change (uncheck) by value',
     () => {
       const onChange = jest.fn();
@@ -137,7 +139,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(['mui', 'antd'].includes(options?.theme ?? ''))(
+  skipTestIf(isTheme(['mui', 'antd']))(
     '<SelectField> - renders a select which correctly reacts on change (uncheck) by selectedIndex',
     () => {
       const onChange = jest.fn();
@@ -179,7 +181,7 @@ export function testSelectField(
     expect(elementWithAttribute?.getAttribute('name')).toBe('x');
   });
 
-  skipTestIf(['mui'].includes(options?.theme ?? ''))(
+  skipTestIf(isTheme(['mui']))(
     '<SelectField> - renders a select with correct options',
     () => {
       const selectOptions = ['a', 'b'] as const;
@@ -195,7 +197,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(['mui'].includes(options?.theme ?? ''))(
+  skipTestIf(isTheme(['mui']))(
     '<SelectField> - renders a select with correct options (transform)',
     () => {
       const selectOptions = ['a', 'b'] as const;
@@ -229,7 +231,7 @@ export function testSelectField(
     expect(screen.getByText('y')).toBeInTheDocument();
   });
 
-  skipTestIf(['antd', 'mui'].includes(options?.theme ?? ''))(
+  skipTestIf(isTheme(['antd', 'mui']))(
     '<SelectField> - renders a select with correct placeholder (implicit)',
     () => {
       renderWithZod({
@@ -240,7 +242,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(['antd', 'mui'].includes(options?.theme ?? ''))(
+  skipTestIf(isTheme(['antd', 'mui']))(
     '<SelectField> - renders a select with correct value (default)',
     () => {
       renderWithZod({
@@ -257,7 +259,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(['antd', 'mui'].includes(options?.theme ?? ''))(
+  skipTestIf(isTheme(['antd', 'mui']))(
     '<SelectField> - renders a select with missing value (model)',
     () => {
       renderWithZod({
@@ -269,7 +271,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(['antd', 'mui'].includes(options?.theme ?? ''))(
+  skipTestIf(isTheme(['antd', 'mui']))(
     '<SelectField> - renders a select with correct value (model)',
     () => {
       renderWithZod({
@@ -287,7 +289,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(['antd', 'mui'].includes(options?.theme ?? ''))(
+  skipTestIf(isTheme(['antd', 'mui']))(
     '<SelectField> - renders a select with correct value (specified)',
     () => {
       renderWithZod({
@@ -304,7 +306,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(['antd', 'mui'].includes(options?.theme ?? ''))(
+  skipTestIf(isTheme(['antd', 'mui']))(
     '<SelectField> - renders a select which correctly reacts on change',
     () => {
       const onChange = jest.fn();
@@ -318,7 +320,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(['antd', 'mui'].includes(options?.theme ?? ''))(
+  skipTestIf(isTheme(['antd', 'mui']))(
     '<SelectField> - renders a select which correctly reacts on change (empty)',
     () => {
       const onChange = jest.fn();
@@ -332,7 +334,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(['antd', 'mui'].includes(options?.theme ?? ''))(
+  skipTestIf(isTheme(['antd', 'mui']))(
     '<SelectField> - renders a select which correctly reacts on change (same value)',
     () => {
       const onChange = jest.fn();
@@ -366,7 +368,7 @@ export function testSelectField(
     expect(field).toHaveAttribute('data-y', 'y');
   });
 
-  skipTestIf(options?.theme === 'mui')(
+  skipTestIf(isTheme(['mui']))(
     '<SelectField> - works with special characters',
     () => {
       renderWithZod({
@@ -380,7 +382,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(['antd', 'mui'].includes(options?.theme ?? ''))(
+  skipTestIf(isTheme(['antd', 'mui']))(
     '<SelectField> - disabled items (options)',
     () => {
       renderWithZod({
@@ -446,7 +448,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(options?.theme === 'antd')(
+  skipTestIf(isTheme(['antd']))(
     '<SelectField checkboxes> - renders a set of checkboxes with correct id (inherited)',
     () => {
       renderWithZod({
@@ -458,7 +460,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(options?.theme === 'antd')(
+  skipTestIf(isTheme(['antd']))(
     '<SelectField checkboxes> - renders a set of checkboxes with correct id (specified)',
     () => {
       renderWithZod({
@@ -624,7 +626,7 @@ export function testSelectField(
   });
 
   // TODO: Fix me - MUI renders multiple checkboxes and wrappers with the same id
-  skipTestIf(options?.theme === 'mui')(
+  skipTestIf(isTheme(['mui']))(
     '<SelectField checkboxes> - renders a wrapper with unknown props',
     () => {
       renderWithZod({
