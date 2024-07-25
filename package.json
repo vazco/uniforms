@@ -27,7 +27,6 @@
     "@testing-library/react": "12.1.5",
     "@testing-library/user-event": "14.4.3",
     "@types/classnames": "2.2.11",
-    "@types/enzyme": "3.10.8",
     "@types/invariant": "2.2.34",
     "@types/jest": "26.0.20",
     "@types/lodash": "4.14.168",

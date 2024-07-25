@@ -7,7 +7,7 @@ module.exports = {
     '^uniforms([^/]*)(.*)$': '<rootDir>/packages/uniforms$1/src$2',
   },
   preset: 'ts-jest',
-  setupFiles: ['./scripts/setupEnzyme.ts', './scripts/setupFilterWarnings.ts'],
+  setupFiles: ['./scripts/setupFilterWarnings.ts'],
   setupFilesAfterEnv: ['./scripts/setupMatchers.ts'],
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['/node_modules/', '/_[^/]*$', '\\.d\\.ts$'],
