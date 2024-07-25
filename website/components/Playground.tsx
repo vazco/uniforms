@@ -188,7 +188,6 @@ class PlaygroundProps extends Component<any, any> {
 
     const isAntd = theme === 'antd';
     const isBootstrap = theme === 'bootstrap4';
-    const isMaterial = theme === 'material';
     const isSemantic = theme === 'semantic';
 
     // FIXME: theme is undefined during `docusaurus build`.
@@ -212,14 +211,11 @@ class PlaygroundProps extends Component<any, any> {
           <BoolField name="placeholder" />
           <BoolField
             name="showInlineError"
-            disabled={!(isAntd || isBootstrap || isMaterial || isSemantic)}
+            disabled={!(isAntd || isBootstrap || isSemantic)}
           />
           <BoolField name="asyncOnSubmit" />
           <BoolField name="asyncOnValidate" />
-          <LongTextField
-            name="schema"
-            {...(isMaterial && { fullWidth: true, rowsMax: 20 })}
-          />
+          <LongTextField name="schema" />
           <ErrorsField />
         </AutoForm>
       </PlaygroundWrap>
@@ -258,7 +254,7 @@ export class PlaygroundWrap extends Component<any, any> {
       </React.Fragment>
     );
 
-    if (theme === 'material' || theme === 'mui') {
+    if (theme === 'mui') {
       // Material-UI injects scoped CSS classes into head.
       return (
         <section

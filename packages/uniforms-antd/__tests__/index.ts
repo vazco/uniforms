@@ -52,8 +52,7 @@ describe('@RTL AntD', () => {
   });
   suites.testListItemField(theme.ListItemField);
   suites.testLongTextField(theme.LongTextField);
-  // FIXME: AntD number input doesn't work with new RTL test implementation
-  // suites.testNumField(antd.NumField);
+  suites.testNumField(theme.NumField);
   suites.testNestField(theme.NestField);
   suites.testQuickForm(theme.QuickForm);
   // FIXME: AntD radio.group does not support HTML attributes https://github.com/ant-design/ant-design/issues/8561, added a flag to skip attributes tests.
@@ -64,6 +63,9 @@ describe('@RTL AntD', () => {
   suites.testSelectField(theme.SelectField, { theme: 'antd' });
   suites.testTextField(theme.TextField);
   suites.testValidatedForm(theme.ValidatedForm);
+  suites.testDateField(theme.DateField, {
+    theme: 'antd',
+  });
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
   suites.testWrapField(theme.wrapField, {
     helpPropsName: 'help',
