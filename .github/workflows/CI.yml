@@ -35,9 +35,22 @@ jobs:
           fail_ci_if_error: true
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  Docs:
+    runs-on: ubuntu-latest
+    needs: CI
+    if: success() && github.event_name == 'push' && github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+      - name: Use Node.js 20
+        uses: actions/setup-node@v3.6.0
+        with:
+          cache: npm
+          node-version: 20
+      - name: Install
+        run: npm ci --no-audit
       - name: Build docs
         run: npm --prefix website run build
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '20.x'
       - name: Deploy docs
         uses: peaceiris/actions-gh-pages@v4.0.0
         with:
@@ -46,4 +59,10 @@ jobs:
           force_orphan: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./website/build
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '20.x'
+      - name: Create a concentrated doc file
+        run: node ./scripts/concatenateDocs.js . uniformsConcentratedDocs.md
+      - name: Upload the concentrated doc file as an artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: uniformsConcentratedDocs-${{ github.sha }}-${{ github.run_id }}-$(date +'%Y-%m-%d').md
+          path: uniformsConcentratedDocs.md
