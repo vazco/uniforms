@@ -1,6 +1,6 @@
 {
   "name": "uniforms",
-  "version": "4.0.0-alpha.5",
+  "version": "4.0.0-alpha.6",
   "license": "MIT",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
