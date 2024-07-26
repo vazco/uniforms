@@ -1,6 +1,3 @@
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import Enzyme from 'enzyme';
-
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation(query => ({
@@ -14,5 +11,3 @@ Object.defineProperty(window, 'matchMedia', {
     removeListener: () => {},
   })),
 });
-
-Enzyme.configure({ adapter: new Adapter() });
