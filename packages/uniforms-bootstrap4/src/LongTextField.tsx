@@ -21,7 +21,11 @@ function LongText(props: LongTextFieldProps) {
       disabled={props.disabled}
       id={props.id}
       name={props.name}
-      onChange={event => props.onChange(event.target.value)}
+      onChange={event =>
+        props.onChange(
+          event.target.value === '' ? undefined : event.target.value,
+        )
+      }
       placeholder={props.placeholder}
       readOnly={props.readOnly}
       ref={props.inputRef}
