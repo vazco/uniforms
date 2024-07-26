@@ -23,6 +23,7 @@ export function render<P, Model extends UnknownObject>(
             model={model}
             schema={bridge}
           >
+            {/* @ts-expect-error */}
             {children}
           </AutoForm>
         );
