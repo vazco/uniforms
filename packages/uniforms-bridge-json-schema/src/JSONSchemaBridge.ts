@@ -6,6 +6,8 @@ import lowerCase from 'lodash/lowerCase';
 import memoize from 'lodash/memoize';
 import upperFirst from 'lodash/upperFirst';
 import { Bridge, UnknownObject, joinName } from 'uniforms';
+import traverse from "json-schema-traverse";
+
 
 function fieldInvariant(name: string, condition: boolean): asserts condition {
   invariant(condition, 'Field not found in schema: "%s"', name);
@@ -409,5 +411,45 @@ export default class JSONSchemaBridge extends Bridge {
 
   getValidator() {
     return this.validator;
+  }
+
+  detectCycle() {
+    const schema = this.schema;
+    const visited = new Set();
+    const detectCycle = (name: string) => {
+      if (visited.has(name)) {
+        return true;
+      }
+      visited.add(name);
+      const field = this.getField(name);
+      if (field.type === Object) {
+        return Object.keys(field.properties).some(detectCycle);
+      }
+      if (field.type === Array) {
+        return field.items.some(detectCycle);
+      }
+      return false;
+    };
+    return (name: string) => detectCycle(name);
+  }
+
+  private buildGraph() {
+    const schema;
+    const graph = new Map();
+
+    function pre(schema, jsonPointer, rootSchema, parentJSON, parentKeyword, parentSchema, indexOrProperty) {
+      if (schema && schema.$ref) {
+        const ref = schema.$ref;
+        const parentPointer = jsonPointer.split('/').slice(0, -2).join('/') || '#';
+        if (!graph.has(parentPointer)) {
+          graph.set(parentPointer, []);
+        }
+        graph.get(parentPointer).push(removeHashPrefix(ref));
+      }
+    }
+
+    traverse(schema, { cb: { pre } });
+
+    return graph;
   }
 }

@@ -52,6 +52,7 @@
     "husky": "8.0.1",
     "invariant": "^2.0.0",
     "jest": "27.0.6",
+    "json-schema-traverse": "1.0.0",
     "lerna": "6.0.1",
     "lint-staged": "13.0.3",
     "lodash": "^4.0.0",
