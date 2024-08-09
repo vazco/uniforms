@@ -11,3 +11,4 @@ This guide is designed to help you through the migration. If you went through it
 - Dropped support for `initialCount` in bridges and `ListField`s. Pass a model object to the form with the appropriate amount of initial items instead.
 - `AutoFields` component in all themes now renders a `React.Fragment` instead of a `div`. Explicitly render a wrapper component around if you need one.
 - Removed the `autoField` prop from `QuickForm`, `AutoForm`, and `AutoFields` components in all themes. Use [`AutoField.componentDetectorContext.Provider`](/docs/uth-autofield-algorithm/#overriding-autofield) instead.
+- The constructors for all our bridges now accept an object (e.g., `{schema, validator}`) instead of individual parameters. This applies to `SimpleSchema2Bridge`, `JSONSchemaBridge`, and `ZodBridge`. Please update your constructor calls accordingly.
