@@ -14,7 +14,6 @@ import { test } from "vitest";
 
 // Empty test to prevent the following error:
 // Error: No test files found for test location: packages/uniforms-antd/test/DateField.tsx
-test("<DateField> - empty", async () => {});
 
 // FIXME:
 test.skip("<DateField> - default props override", async () => {
