@@ -1,7 +1,7 @@
 import { joinName } from "uniforms";
-import { describe, expect, it } from "vitest";
+import { describe, expect, test } from "vitest";
 
-function test(parts: unknown[], array: string[], string: string) {
+function testCase(parts: unknown[], array: string[], string: string) {
   // Serialization (join).
   expect(joinName(...parts)).toBe(string);
 
@@ -16,121 +16,129 @@ function test(parts: unknown[], array: string[], string: string) {
 }
 
 describe("joinName", () => {
-  it("is a function", () => {
+  test("is a function", () => {
     expect(joinName).toBeInstanceOf(Function);
   });
 
-  it("works with empty name", () => {
-    test([], [], "");
+  test("works with empty name", () => {
+    testCase([], [], "");
   });
 
-  it("works with arrays", () => {
-    test([["a"]], ["a"], "a");
-    test([[["a"]]], ["a"], "a");
-    test([[[["a"]]]], ["a"], "a");
+  test("works with arrays", () => {
+    testCase([["a"]], ["a"], "a");
+    testCase([[["a"]]], ["a"], "a");
+    testCase([[[["a"]]]], ["a"], "a");
 
-    test([[], "a"], ["a"], "a");
-    test(["a", []], ["a"], "a");
+    testCase([[], "a"], ["a"], "a");
+    testCase(["a", []], ["a"], "a");
 
-    test([["a"], "b"], ["a", "b"], "a.b");
-    test(["a", ["b"]], ["a", "b"], "a.b");
+    testCase([["a"], "b"], ["a", "b"], "a.b");
+    testCase(["a", ["b"]], ["a", "b"], "a.b");
 
-    test([["a", "b"], "c"], ["a", "b", "c"], "a.b.c");
-    test(["a", ["b", "c"]], ["a", "b", "c"], "a.b.c");
+    testCase([["a", "b"], "c"], ["a", "b", "c"], "a.b.c");
+    testCase(["a", ["b", "c"]], ["a", "b", "c"], "a.b.c");
 
-    test(["a", ["b", "c"], "d"], ["a", "b", "c", "d"], "a.b.c.d");
+    testCase(["a", ["b", "c"], "d"], ["a", "b", "c", "d"], "a.b.c.d");
   });
 
-  it("works with empty strings", () => {
-    test(["", "a", "b"], ["a", "b"], "a.b");
-    test(["a", "", "b"], ["a", "b"], "a.b");
-    test(["a", "b", ""], ["a", "b"], "a.b");
+  test("works with empty strings", () => {
+    testCase(["", "a", "b"], ["a", "b"], "a.b");
+    testCase(["a", "", "b"], ["a", "b"], "a.b");
+    testCase(["a", "b", ""], ["a", "b"], "a.b");
   });
 
-  it("works with falsy values", () => {
-    test(["a", null, "b"], ["a", "b"], "a.b");
-    test(["a", false, "b"], ["a", "b"], "a.b");
-    test(["a", undefined, "b"], ["a", "b"], "a.b");
+  test("works with falsy values", () => {
+    testCase(["a", null, "b"], ["a", "b"], "a.b");
+    testCase(["a", false, "b"], ["a", "b"], "a.b");
+    testCase(["a", undefined, "b"], ["a", "b"], "a.b");
   });
 
-  it("works with numbers", () => {
-    test([0, "a", "b"], ["0", "a", "b"], "0.a.b");
-    test(["a", 0, "b"], ["a", "0", "b"], "a.0.b");
-    test(["a", "b", 0], ["a", "b", "0"], "a.b.0");
-    test([1, "a", "b"], ["1", "a", "b"], "1.a.b");
-    test(["a", 1, "b"], ["a", "1", "b"], "a.1.b");
-    test(["a", "b", 1], ["a", "b", "1"], "a.b.1");
+  test("works with numbers", () => {
+    testCase([0, "a", "b"], ["0", "a", "b"], "0.a.b");
+    testCase(["a", 0, "b"], ["a", "0", "b"], "a.0.b");
+    testCase(["a", "b", 0], ["a", "b", "0"], "a.b.0");
+    testCase([1, "a", "b"], ["1", "a", "b"], "1.a.b");
+    testCase(["a", 1, "b"], ["a", "1", "b"], "a.1.b");
+    testCase(["a", "b", 1], ["a", "b", "1"], "a.b.1");
   });
 
-  it("works with partials", () => {
-    test(["a", "b.c.d"], ["a", "b", "c", "d"], "a.b.c.d");
-    test(["a.b", "c.d"], ["a", "b", "c", "d"], "a.b.c.d");
-    test(["a.b.c", "d"], ["a", "b", "c", "d"], "a.b.c.d");
+  test("works with partials", () => {
+    testCase(["a", "b.c.d"], ["a", "b", "c", "d"], "a.b.c.d");
+    testCase(["a.b", "c.d"], ["a", "b", "c", "d"], "a.b.c.d");
+    testCase(["a.b.c", "d"], ["a", "b", "c", "d"], "a.b.c.d");
   });
 
-  it("works with subscripts", () => {
-    test(['a["b"]'], ["a", "b"], "a.b");
-    test(['a["b"].c'], ["a", "b", "c"], "a.b.c");
-    test(['a["b"].c["d"]'], ["a", "b", "c", "d"], "a.b.c.d");
-    test(['a["b"]["c.d"]'], ["a", "b", '["c.d"]'], 'a.b["c.d"]');
-    test(['a["b"]["c.d"].e'], ["a", "b", '["c.d"]', "e"], 'a.b["c.d"].e');
-    test(['a["b"]["c.d"]["e"]'], ["a", "b", '["c.d"]', "e"], 'a.b["c.d"].e');
-    test(['a["b"].["c.d"]'], ["a", "b", '["c.d"]'], 'a.b["c.d"]');
-    test(['a["b"].["c.d"].e'], ["a", "b", '["c.d"]', "e"], 'a.b["c.d"].e');
-    test(['a["b"].["c.d"]["e"]'], ["a", "b", '["c.d"]', "e"], 'a.b["c.d"].e');
+  test("works with subscripts", () => {
+    testCase(['a["b"]'], ["a", "b"], "a.b");
+    testCase(['a["b"].c'], ["a", "b", "c"], "a.b.c");
+    testCase(['a["b"].c["d"]'], ["a", "b", "c", "d"], "a.b.c.d");
+    testCase(['a["b"]["c.d"]'], ["a", "b", '["c.d"]'], 'a.b["c.d"]');
+    testCase(['a["b"]["c.d"].e'], ["a", "b", '["c.d"]', "e"], 'a.b["c.d"].e');
+    testCase(
+      ['a["b"]["c.d"]["e"]'],
+      ["a", "b", '["c.d"]', "e"],
+      'a.b["c.d"].e',
+    );
+    testCase(['a["b"].["c.d"]'], ["a", "b", '["c.d"]'], 'a.b["c.d"]');
+    testCase(['a["b"].["c.d"].e'], ["a", "b", '["c.d"]', "e"], 'a.b["c.d"].e');
+    testCase(
+      ['a["b"].["c.d"]["e"]'],
+      ["a", "b", '["c.d"]', "e"],
+      'a.b["c.d"].e',
+    );
 
-    test(['["a"]'], ["a"], "a");
-    test(['["a"].b'], ["a", "b"], "a.b");
-    test(['["a"]["b.c"]'], ["a", '["b.c"]'], 'a["b.c"]');
-    test(['["a"]["b.c"].d'], ["a", '["b.c"]', "d"], 'a["b.c"].d');
-    test(['["a"]["b.c"]["d"]'], ["a", '["b.c"]', "d"], 'a["b.c"].d');
-    test(['["a"].["b.c"]'], ["a", '["b.c"]'], 'a["b.c"]');
-    test(['["a"].["b.c"].d'], ["a", '["b.c"]', "d"], 'a["b.c"].d');
-    test(['["a"].["b.c"]["d"]'], ["a", '["b.c"]', "d"], 'a["b.c"].d');
+    testCase(['["a"]'], ["a"], "a");
+    testCase(['["a"].b'], ["a", "b"], "a.b");
+    testCase(['["a"]["b.c"]'], ["a", '["b.c"]'], 'a["b.c"]');
+    testCase(['["a"]["b.c"].d'], ["a", '["b.c"]', "d"], 'a["b.c"].d');
+    testCase(['["a"]["b.c"]["d"]'], ["a", '["b.c"]', "d"], 'a["b.c"].d');
+    testCase(['["a"].["b.c"]'], ["a", '["b.c"]'], 'a["b.c"]');
+    testCase(['["a"].["b.c"].d'], ["a", '["b.c"]', "d"], 'a["b.c"].d');
+    testCase(['["a"].["b.c"]["d"]'], ["a", '["b.c"]', "d"], 'a["b.c"].d');
 
-    test(['[""]'], ['[""]'], '[""]');
-    test(['["."]'], ['["."]'], '["."]');
-    test(['[".."]'], ['[".."]'], '[".."]');
-    test(['["..."]'], ['["..."]'], '["..."]');
-    test(["[\"['']\"]"], ["[\"['']\"]"], "[\"['']\"]");
-    test(['["[\\"\\"]"]'], ['["[\\"\\"]"]'], '["[\\"\\"]"]');
+    testCase(['[""]'], ['[""]'], '[""]');
+    testCase(['["."]'], ['["."]'], '["."]');
+    testCase(['[".."]'], ['[".."]'], '[".."]');
+    testCase(['["..."]'], ['["..."]'], '["..."]');
+    testCase(["[\"['']\"]"], ["[\"['']\"]"], "[\"['']\"]");
+    testCase(['["[\\"\\"]"]'], ['["[\\"\\"]"]'], '["[\\"\\"]"]');
   });
 
-  it("handles incorrect cases _somehow_", () => {
+  test("handles incorrect cases _somehow_", () => {
     // Boolean `true`.
-    test([true], ["true"], "true");
-    test([true, "a"], ["true", "a"], "true.a");
-    test(["a", true], ["a", "true"], "a.true");
+    testCase([true], ["true"], "true");
+    testCase([true, "a"], ["true", "a"], "true.a");
+    testCase(["a", true], ["a", "true"], "a.true");
 
     // Dots before subscripts.
-    test(['a["b"].c.["d"]'], ["a", "b", "c", "d"], "a.b.c.d");
-    test(['a.["b"].c["d"]'], ["a", "b", "c", "d"], "a.b.c.d");
-    test(['a.["b"].c.["d"]'], ["a", "b", "c", "d"], "a.b.c.d");
+    testCase(['a["b"].c.["d"]'], ["a", "b", "c", "d"], "a.b.c.d");
+    testCase(['a.["b"].c["d"]'], ["a", "b", "c", "d"], "a.b.c.d");
+    testCase(['a.["b"].c.["d"]'], ["a", "b", "c", "d"], "a.b.c.d");
 
     // Only dots.
-    test(["."], ['["."]'], '["."]');
-    test([".."], ['[".."]'], '[".."]');
-    test(["..."], ['["..."]'], '["..."]');
+    testCase(["."], ['["."]'], '["."]');
+    testCase([".."], ['[".."]'], '[".."]');
+    testCase(["..."], ['["..."]'], '["..."]');
 
     // Leading and trailing dots.
-    test(["a."], ['["a."]'], '["a."]');
-    test([".a"], ['[""]', "a"], '[""].a');
-    test(['["a"].'], ["a"], "a");
-    test(['.["a"]'], ["a"], "a");
+    testCase(["a."], ['["a."]'], '["a."]');
+    testCase([".a"], ['[""]', "a"], '[""].a');
+    testCase(['["a"].'], ["a"], "a");
+    testCase(['.["a"]'], ["a"], "a");
 
     // Unescaped brackets.
-    test(["["], ['["["]'], '["["]');
-    test(["['"], ['["[\'"]'], '["[\'"]');
-    test(["[''"], ["[\"[''\"]"], "[\"[''\"]");
-    test(["['']"], ["[\"['']\"]"], "[\"['']\"]");
-    test(['["'], ['["[\\""]'], '["[\\""]');
-    test(['[""'], ['["[\\"\\""]'], '["[\\"\\""]');
+    testCase(["["], ['["["]'], '["["]');
+    testCase(["['"], ['["[\'"]'], '["[\'"]');
+    testCase(["[''"], ["[\"[''\"]"], "[\"[''\"]");
+    testCase(["['']"], ["[\"['']\"]"], "[\"['']\"]");
+    testCase(['["'], ['["[\\""]'], '["[\\""]');
+    testCase(['[""'], ['["[\\"\\""]'], '["[\\"\\""]');
 
     // Incorrect escape.
-    test(['["a\\"]'], ['["[\\"a\\\\"]"]'], '["[\\"a\\\\"]"]');
-    test(['[\\""]'], ['["[\\\\"\\"]"]'], '["[\\\\"\\"]"]');
-    test(['[\\"a"]'], ['["[\\\\"a\\"]"]'], '["[\\\\"a\\"]"]');
-    test(['["\\"]'], ['["[\\"\\\\"]"]'], '["[\\"\\\\"]"]');
-    test(['["\\"\\"]'], ['["[\\"\\\\"\\\\"]"]'], '["[\\"\\\\"\\\\"]"]');
+    testCase(['["a\\"]'], ['["[\\"a\\\\"]"]'], '["[\\"a\\\\"]"]');
+    testCase(['[\\""]'], ['["[\\\\"\\"]"]'], '["[\\\\"\\"]"]');
+    testCase(['[\\"a"]'], ['["[\\\\"a\\"]"]'], '["[\\\\"a\\"]"]');
+    testCase(['["\\"]'], ['["[\\"\\\\"]"]'], '["[\\"\\\\"]"]');
+    testCase(['["\\"\\"]'], ['["[\\"\\\\"\\\\"]"]'], '["[\\"\\\\"\\\\"]"]');
   });
 });
