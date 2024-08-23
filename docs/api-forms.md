@@ -25,9 +25,9 @@ By default, the validation will take place `onSubmit`, and `onChange` **after th
 
 ##### Props:
 
-|      Name       |                                                          Description                                                           |
-| :-------------: | :----------------------------------------------------------------------------------------------------------------------------: |
-| `onChangeModel` | Like `onChange` but for the whole model. Triggered just after `onChange` but with the next model instead of (key, value) pair. |
+|      Name       |                                                                                                              Description                                                                                                               |
+| :-------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| `onChangeModel` | Like `onChange` but for the whole model. Triggered just after `onChange` with the next model and information what `{ key, value, previousValue }` caused the change. `previousValue` will be `undefined` if there was no value before. |
 
 **Note:** All `ValidatedQuickForm` props are also accepted and all methods are available.
 In other words, that means that `AutoForm` receives all props listed on this page.
