@@ -3,7 +3,7 @@ import { describe } from "vitest";
 
 import * as theme from "uniforms-bootstrap5";
 
-describe("@RTL", () => {
+describe("@RTL Bootstrap5", () => {
   suites.testAutoField(theme.AutoField, {
     getDateField: (screen) => screen.getByLabelText("X"),
     getSelectField: (screen) => screen.getByRole("combobox"),

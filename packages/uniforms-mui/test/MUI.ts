@@ -3,10 +3,10 @@ import * as suites from "uniforms/test/suites";
 
 import * as theme from "uniforms-mui";
 
-describe("@RTL", () => {
+describe("@RTL MUI", () => {
   suites.testAutoField(theme.AutoField, {
     getDateField: (screen) => screen.getByLabelText("X *"),
-    getSelectField: (screen) => screen.getByRole("combobox"),
+    getSelectField: (screen) => screen.getByRole("button"),
   });
   suites.testAutoForm(theme.AutoForm);
   suites.testBaseForm(theme.BaseForm);
@@ -27,6 +27,11 @@ describe("@RTL", () => {
   suites.testNumField(theme.NumField);
   suites.testQuickForm(theme.QuickForm);
   suites.testRadioField(theme.RadioField);
+  // FIXME: MUI select does not work with new RTL test implementation
+  suites.testSelectField(theme.SelectField, {
+    showInlineError: true,
+    theme: "mui",
+  });
   suites.testSubmitField(theme.SubmitField);
   suites.testTextField(theme.TextField);
   suites.testValidatedForm(theme.ValidatedForm);
