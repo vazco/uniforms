@@ -275,7 +275,7 @@ describe("ZodBridge", () => {
       expect(bridge.getInitialValue("a")).toEqual(0);
     });
 
-    test("works with enum (native, z.string)", () => {
+    test("works with enum (native, string)", () => {
       enum Test {
         x = "x",
         y = "y",
