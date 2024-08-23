@@ -1,9 +1,9 @@
 // import { ThemeProvider, createMuiTheme } from "@material-ui/core";
-import { cleanup, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React, { ComponentType } from "react";
 import z from "zod";
-import { afterEach, expect, test, vi } from "vitest";
+import { expect, test, vi } from "vitest";
 
 import { renderWithZod } from "./utils/render-zod";
 
@@ -19,8 +19,6 @@ export function testBoolField(
     testSwitch?: boolean;
   },
 ) {
-  afterEach(cleanup);
-
   test("<BoolField> - renders an input", () => {
     renderWithZod({
       element: <BoolField name="x" data-testid="boolfield" />,

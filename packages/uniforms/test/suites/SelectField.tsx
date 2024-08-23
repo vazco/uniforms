@@ -1,5 +1,5 @@
-import { afterEach, expect, test, vi } from "vitest";
-import { cleanup, fireEvent, screen, Screen } from "@testing-library/react";
+import { expect, test, vi } from "vitest";
+import { fireEvent, screen, Screen } from "@testing-library/react";
 import React, { ComponentType } from "react";
 import z from "zod";
 
@@ -14,8 +14,6 @@ export function testSelectField(
     reverseCheckboxOrder?: false;
   },
 ) {
-  afterEach(cleanup);
-
   const isTheme = (themes: string[]) => themes.includes(options?.theme ?? "");
 
   test("<SelectField> - renders a select", () => {

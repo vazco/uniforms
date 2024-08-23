@@ -1,12 +1,10 @@
-import { cleanup, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import React, { ComponentType } from "react";
 import { ZodBridge } from "uniforms-bridge-zod";
 import z from "zod";
-import { afterEach, expect, test } from "vitest";
+import { expect, test } from "vitest";
 
 export function testQuickForm(QuickForm: ComponentType<any>) {
-  afterEach(cleanup);
-
   const bridge = new ZodBridge({ schema: z.object({}) });
 
   test("<QuickForm> - renders", () => {

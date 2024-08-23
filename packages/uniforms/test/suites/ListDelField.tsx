@@ -1,16 +1,14 @@
-import { cleanup, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent, {
   PointerEventsCheckLevel,
 } from "@testing-library/user-event";
 import React, { ComponentType } from "react";
 import z from "zod";
-import { afterEach, expect, test, vi } from "vitest";
+import { expect, test, vi } from "vitest";
 
 import { renderWithZod } from "./utils/render-zod";
 
 export function testListDelField(ListDelField: ComponentType<any>) {
-  afterEach(cleanup);
-
   test("<ListDelField> - correctly reacts on click", async () => {
     const onChange = vi.fn();
     renderWithZod({

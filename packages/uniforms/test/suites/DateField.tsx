@@ -1,8 +1,8 @@
-import { cleanup, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React, { ComponentType } from "react";
 import z from "zod";
-import { afterEach, expect, test, vi } from "vitest";
+import { expect, test, vi } from "vitest";
 import moment from "moment";
 
 import { renderWithZod } from "./utils/render-zod";
@@ -23,8 +23,6 @@ export function testDateField(
     theme?: "antd";
   } = {},
 ) {
-  afterEach(cleanup);
-
   const useISOFormat = theme !== "antd";
 
   test("<DateField> - renders a input with correct id (inherited)", () => {

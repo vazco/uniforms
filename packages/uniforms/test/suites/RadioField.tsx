@@ -1,7 +1,7 @@
-import { cleanup, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import React, { ComponentType } from "react";
 import z from "zod";
-import { afterEach, expect, test } from "vitest";
+import { expect, test } from "vitest";
 
 import { renderWithZod } from "./utils/render-zod";
 
@@ -9,8 +9,6 @@ export function testRadioField(
   RadioField: ComponentType<any>,
   { skipHtmlAttributesTest }: { skipHtmlAttributesTest?: boolean } = {},
 ) {
-  afterEach(cleanup);
-
   test("<RadioField> - renders a set of checkboxes", () => {
     renderWithZod({
       element: <RadioField name="x" />,

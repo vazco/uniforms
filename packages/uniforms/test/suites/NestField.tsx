@@ -1,7 +1,7 @@
-import { cleanup, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import React, { ComponentType } from "react";
 import z from "zod";
-import { afterEach, expect, test } from "vitest";
+import { expect, test } from "vitest";
 
 import { renderWithZod } from "./utils/render-zod";
 
@@ -13,8 +13,6 @@ export function testNestField(
     skipShowInlineErrorTests?: boolean;
   },
 ) {
-  afterEach(cleanup);
-
   test("<NestField> - renders an <AutoField> for each field", () => {
     renderWithZod({
       element: <NestField name="x" />,

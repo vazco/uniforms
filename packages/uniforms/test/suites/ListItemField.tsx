@@ -1,13 +1,11 @@
-import { cleanup, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import React, { ComponentType } from "react";
 import z from "zod";
-import { afterEach, expect, test, vi } from "vitest";
+import { expect, test, vi } from "vitest";
 
 import { renderWithZod } from "./utils/render-zod";
 
 export function testListItemField(ListItemField: ComponentType<any>) {
-  afterEach(cleanup);
-
   test("<ListItemField> - works", () => {
     renderWithZod({
       element: <ListItemField name="field" />,

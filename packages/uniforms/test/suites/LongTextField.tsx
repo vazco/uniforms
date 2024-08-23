@@ -1,8 +1,8 @@
-import { cleanup, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React, { ComponentType, PropsWithChildren } from "react";
 import z from "zod";
-import { afterEach, expect, test, vi } from "vitest";
+import { expect, test, vi } from "vitest";
 
 import { renderWithZod } from "./utils/render-zod";
 
@@ -18,8 +18,6 @@ export function testLongTextField(
     };
   },
 ) {
-  afterEach(cleanup);
-
   test("<LongTextField> - renders a textarea with correct disabled state", () => {
     renderWithZod({
       element: <LongTextField name="x" disabled />,

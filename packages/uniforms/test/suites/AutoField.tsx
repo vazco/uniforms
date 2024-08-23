@@ -1,8 +1,8 @@
-import { cleanup, Screen, screen } from "@testing-library/react";
+import { Screen, screen } from "@testing-library/react";
 import React, { ComponentType } from "react";
 import { AutoFieldProps, connectField } from "uniforms";
 import z from "zod";
-import { afterEach, expect, test, vi } from "vitest";
+import { expect, test, vi } from "vitest";
 
 import { renderWithZod } from "./utils/render-zod";
 
@@ -16,8 +16,6 @@ export function testAutoField(
     getSelectField: (screen: Screen) => HTMLElement;
   },
 ) {
-  afterEach(cleanup);
-
   test("<AutoField> - works with absolute nested names (object variant) ", () => {
     const Element = connectField(() => (
       <AutoField name="x.y.z" data-testid="x.y.z" experimental_absoluteName />

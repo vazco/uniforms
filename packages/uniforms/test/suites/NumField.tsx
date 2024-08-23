@@ -1,14 +1,12 @@
-import { screen, fireEvent, cleanup } from "@testing-library/react";
+import { screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React, { ComponentType, useState } from "react";
 import z from "zod";
-import { afterEach, expect, test, vi } from "vitest";
+import { expect, test, vi } from "vitest";
 
 import { renderWithZod } from "./utils/render-zod";
 
 export function testNumField(NumField: ComponentType<any>) {
-  afterEach(cleanup);
-
   test("<NumField> - renders an InputNumber", () => {
     renderWithZod({
       element: <NumField name="x" />,

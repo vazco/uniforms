@@ -1,13 +1,11 @@
-import { cleanup, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import React, { ComponentType } from "react";
 import z from "zod";
-import { afterEach, expect, test } from "vitest";
+import { expect, test } from "vitest";
 
 import { renderWithZod } from "./utils/render-zod";
 
 export function testAutoFields(AutoFields: ComponentType<any>) {
-  afterEach(cleanup);
-
   test("<AutoFields> - works", () => {
     renderWithZod({
       element: <AutoFields />,

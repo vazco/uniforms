@@ -1,13 +1,11 @@
-import { cleanup, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import React, { ComponentType } from "react";
 import z from "zod";
-import { afterEach, expect, test, vi } from "vitest";
+import { expect, test, vi } from "vitest";
 
 import { renderWithZod } from "./utils/render-zod";
 
 export function testHiddenField(HiddenField: ComponentType<any>) {
-  afterEach(cleanup);
-
   test("<HiddenField> - renders an input with correct id (inherited)", () => {
     renderWithZod({
       element: <HiddenField name="x" data-testid="x" />,

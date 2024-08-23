@@ -1,5 +1,5 @@
-import { afterEach, expect, test, vi } from "vitest";
-import { cleanup, screen } from "@testing-library/react";
+import { expect, test, vi } from "vitest";
+import { screen } from "@testing-library/react";
 import React, { ComponentType, PropsWithChildren } from "react";
 import userEvent from "@testing-library/user-event";
 import z from "zod";
@@ -24,8 +24,6 @@ export function testTextField(
     testShowInlineError: true,
   },
 ) {
-  afterEach(cleanup);
-
   test("<TextField> - renders an input", () => {
     renderWithZod({
       element: <TextField name="x" />,

@@ -1,7 +1,7 @@
-import { cleanup, Screen, screen } from "@testing-library/react";
+import { Screen, screen } from "@testing-library/react";
 // import userEvent from "@testing-library/user-event";
 import React, { ComponentType, FC } from "react";
-import { afterEach, expect, test, vi } from "vitest";
+import { expect, test, vi } from "vitest";
 
 import { render } from "./utils/render";
 
@@ -21,8 +21,6 @@ export function testListField(
     testTooltip?: boolean;
   },
 ) {
-  afterEach(cleanup);
-
   test("<ListField> - renders ListAddField", () => {
     render(<ListField name="x" label="ListFieldLabel" />, {
       x: Array,

@@ -1,13 +1,10 @@
-import { afterEach, expect, test } from "vitest";
-import { cleanup } from "@testing-library/react";
+import { expect, test } from "vitest";
 import React, { ComponentType } from "react";
 import z from "zod";
 
 import { renderWithZod } from "./utils/render-zod";
 
 export function testErrorsField(ErrorsField: ComponentType<any>) {
-  afterEach(cleanup);
-
   test("<ErrorsField> - renders error from context", () => {
     const errorMessage = "Example error message";
     const screen = renderWithZod({
