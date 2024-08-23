@@ -1,0 +1,68 @@
+{
+  "name": "uniforms-mui",
+  "version": "4.0.0-alpha.5",
+  "license": "MIT",
+  "type": "module",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./esm/index.d.ts",
+        "default": "./esm/index.js"
+      },
+      "require": {
+        "types": "./cjs/index.d.ts",
+        "default": "./cjs/index.js"
+      }
+    }
+  },
+  "description": "MUI components for uniforms.",
+  "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-mui",
+  "bugs": "https://github.com/vazco/uniforms/issues",
+  "funding": "https://github.com/vazco/uniforms?sponsor=1",
+  "keywords": [
+    "form",
+    "forms",
+    "material design",
+    "material-ui",
+    "meteor",
+    "mui",
+    "react",
+    "react-component",
+    "schema",
+    "validation"
+  ],
+  "files": [
+    "cjs",
+    "esm",
+    "src"
+  ],
+  "peerDependencies": {
+    "@mui/material": "^5.0.0",
+    "react": "^18.0.0 || ^17.0.0"
+  },
+  "dependencies": {
+    "invariant": "^2.0.0",
+    "lodash": "^4.0.0",
+    "uniforms": "4.0.0-alpha.5"
+  },
+  "devDependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@internal/eslint-config": "*",
+    "@internal/typescript-config": "*",
+    "@types/invariant": "^2.2.37",
+    "@types/lodash": "^4.17.0",
+    "@types/react": "^18.2.73",
+    "eslint": "^8.57.0",
+    "tslib": "^2.6.2",
+    "typescript": "^5.4.3",
+    "vite-tsconfig-paths": "^4.3.2"
+  },
+  "scripts": {
+    "build:cjs": "tsc --build tsconfig.cjs.json",
+    "build:esm": "tsc --build tsconfig.esm.json",
+    "lint": "eslint ."
+  }
+}

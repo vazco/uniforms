@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "types": ["node", "@testing-library/jest-dom"],
+    "baseUrl": "../../packages",
+    "paths": { "uniforms": ["uniforms/src"], "uniforms-*": ["uniforms-*/src"] }
+  }
+}

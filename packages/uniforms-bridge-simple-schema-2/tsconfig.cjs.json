@@ -1,0 +1,8 @@
+{
+  "extends": [
+    "@internal/typescript-config/library.json",
+    "@internal/typescript-config/cjs.json"
+  ],
+  "include": ["src"],
+  "compilerOptions": { "outDir": "cjs" }
+}

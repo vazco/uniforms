@@ -1,0 +1,7 @@
+{
+  "extends": [
+    "@internal/typescript-config/dev.json",
+    "@internal/typescript-config/library.json"
+  ],
+  "include": ["src", "test", "./*.ts"]
+}

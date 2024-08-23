@@ -1,0 +1,61 @@
+{
+  "name": "uniforms-bridge-simple-schema-2",
+  "version": "4.0.0-alpha.5",
+  "license": "MIT",
+  "type": "module",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./esm/index.d.ts",
+        "default": "./esm/index.js"
+      },
+      "require": {
+        "types": "./cjs/index.d.ts",
+        "default": "./cjs/index.js"
+      }
+    }
+  },
+  "description": "SimpleSchema 2 bridge for uniforms.",
+  "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms-bridge-simple-schema-2",
+  "bugs": "https://github.com/vazco/uniforms/issues",
+  "funding": "https://github.com/vazco/uniforms?sponsor=1",
+  "keywords": [
+    "form",
+    "forms",
+    "react",
+    "schema",
+    "simpl-schema",
+    "validation"
+  ],
+  "files": [
+    "cjs",
+    "esm",
+    "src"
+  ],
+  "dependencies": {
+    "invariant": "^2.0.0",
+    "lodash": "^4.0.0",
+    "uniforms": "4.0.0-alpha.5"
+  },
+  "peerDependencies": {
+    "simpl-schema": "^1.0.0 || ^0.0.4"
+  },
+  "devDependencies": {
+    "@internal/eslint-config": "*",
+    "@internal/typescript-config": "*",
+    "@types/invariant": "^2.2.37",
+    "@types/lodash": "^4.17.0",
+    "@types/simpl-schema": "^1.12.7",
+    "eslint": "^8.57.0",
+    "tslib": "^2.6.2",
+    "typescript": "^5.4.3",
+    "vite-tsconfig-paths": "^4.3.2"
+  },
+  "scripts": {
+    "build:cjs": "tsc --build tsconfig.cjs.json",
+    "build:esm": "tsc --build tsconfig.esm.json",
+    "lint": "eslint ."
+  }
+}

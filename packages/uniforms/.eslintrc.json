@@ -1,0 +1,19 @@
+{
+  "root": true,
+  "extends": ["@internal/eslint-config/react-library.js"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": { "project": true },
+  "rules": {
+    "@typescript-eslint/no-redundant-type-constituents": 0,
+    "@typescript-eslint/no-base-to-string": 0,
+    "@typescript-eslint/restrict-plus-operands": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/ban-ts-comment": 0,
+    "@typescript-eslint/no-floating-promises": 0,
+    "@typescript-eslint/no-unsafe-call": 0,
+    "@typescript-eslint/no-unsafe-assignment": 0,
+    "@typescript-eslint/no-unsafe-member-access": 0,
+    "@typescript-eslint/no-unsafe-argument": 0,
+    "no-redeclare": 0
+  }
+}
