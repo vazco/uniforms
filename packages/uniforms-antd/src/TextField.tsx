@@ -1,4 +1,4 @@
-import Input, { InputProps } from 'antd/lib/input';
+import Input, { InputProps, InputRef } from 'antd/lib/input';
 import React, { Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
@@ -7,7 +7,7 @@ import wrapField from './wrapField';
 export type TextFieldProps = FieldProps<
   string,
   Omit<InputProps, 'onReset'>,
-  { inputRef?: Ref<Input> }
+  { inputRef?: Ref<InputRef> }
 >;
 
 function Text(props: TextFieldProps) {

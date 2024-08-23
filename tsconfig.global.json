@@ -3,13 +3,17 @@
   "compilerOptions": {
     "noEmit": true,
     "rootDir": ".",
-    "tsBuildInfoFile": "node_modules/.cache/global.tsbuildinfo"
+    "tsBuildInfoFile": "node_modules/.cache/global.tsbuildinfo",
+    "skipLibCheck": true
   },
   "include": [
     "packages/*/__tests__",
     "packages/uniforms/__suites__",
     "scripts",
     "website"
+  ],
+  "exclude": [
+    "node_modules",
   ],
   "references": [
     { "path": "packages/uniforms/tsconfig.esm.json" },

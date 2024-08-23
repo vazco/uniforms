@@ -16,6 +16,7 @@ export function renderWithZod<Props, Schema extends ZodObject<ZodRawShape>>({
     wrapper({ children }) {
       const bridge = new ZodBridge({ schema });
       return (
+        // @ts-expect-error
         <AutoForm {...autoFormProps} schema={bridge} children={children} />
       );
     },

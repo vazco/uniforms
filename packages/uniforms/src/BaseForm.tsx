@@ -2,7 +2,7 @@ import clone from 'lodash/clone';
 import get from 'lodash/get';
 import omit from 'lodash/omit';
 import setWith from 'lodash/setWith';
-import React, { Component, SyntheticEvent } from 'react';
+import React, { Component, SyntheticEvent, ReactNode } from 'react';
 
 import { Bridge } from './Bridge';
 import { changedKeys } from './changedKeys';
@@ -29,6 +29,7 @@ export type BaseFormProps<Model extends UnknownObject> = {
   readOnly?: boolean;
   schema: Bridge;
   showInlineError?: boolean;
+  children?: ReactNode;
 };
 
 export type BaseFormState<Model extends UnknownObject> = {

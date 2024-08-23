@@ -22,5 +22,8 @@
     { "path": "packages/uniforms-semantic/tsconfig.esm.json" },
     { "path": "packages/uniforms-unstyled/tsconfig.cjs.json" },
     { "path": "packages/uniforms-unstyled/tsconfig.esm.json" }
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

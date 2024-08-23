@@ -25,7 +25,10 @@ function trigger(group: string, activeTab: number) {
 
 export function useTabs(group: string) {
   const [activeTab, setActiveTab] = useState(activeTabs[group] || 0);
-  const onTab = useCallback(activeTab => trigger(group, activeTab), [group]);
+  const onTab = useCallback(
+    (activeTab: number) => trigger(group, activeTab),
+    [group],
+  );
   useEffect(() => register(group, setActiveTab), [group]);
   return { activeTab, onTab };
 }

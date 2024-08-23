@@ -1,4 +1,4 @@
-import components from '@theme/MDXComponents';
+import Code from '@theme/MDXComponents/Code';
 import React from 'react';
 
 export type CodeSectionProps = {
@@ -52,14 +52,14 @@ export function CodeSection({
   }
 
   return (
-    <components.pre>
-      <components.code
+    <pre>
+      <Code
         children={source}
         className={`language-${language}`}
         mdxType="code"
         originalType="code"
         parentName="pre"
       />
-    </components.pre>
+    </pre>
   );
 }
