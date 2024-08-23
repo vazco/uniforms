@@ -18,7 +18,7 @@ export type AutoFormProps<Model extends UnknownObject> =
   ValidatedQuickFormProps<Model> & {
     onChangeModel?: (
       model: Model,
-      info: { key: string; value: unknown; previousValue: unknown },
+      details: { key: string; value: unknown; previousValue: unknown },
     ) => void;
   };
 
