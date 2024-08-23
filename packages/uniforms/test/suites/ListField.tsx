@@ -177,22 +177,22 @@ export function testListField(
   });
 
   // FIXME:
-  // test("<ListField> - renders proper number of optional values after add new value", async () => {
-  //   const onChange = vi.fn();
-  //   render(
-  //     <ListField name="x" label="ListFieldLabel" />,
-  //     {
-  //       x: { type: Array, optional: true },
-  //       "x.$": { type: Object },
-  //       "x.$.name": { type: String, defaultValue: "someValue" },
-  //     },
-  //     { onChange },
-  //   );
+  test.skip("<ListField> - renders proper number of optional values after add new value", async () => {
+    const onChange = vi.fn();
+    render(
+      <ListField name="x" label="ListFieldLabel" />,
+      {
+        x: { type: Array, optional: true },
+        "x.$": { type: Object },
+        "x.$.name": { type: String, defaultValue: "someValue" },
+      },
+      { onChange },
+    );
 
-  //   await userEvent.click(getListAddField(screen));
-  //   expect(await screen.findAllByDisplayValue("someValue")).toHaveLength(1);
-  //   expect(onChange).toHaveBeenLastCalledWith("x.0", { name: "someValue" });
-  // });
+    // await userEvent.click(getListAddField(screen));
+    // expect(await screen.findAllByDisplayValue("someValue")).toHaveLength(1);
+    // expect(onChange).toHaveBeenLastCalledWith("x.0", { name: "someValue" });
+  });
 
   if (testError) {
     test("<ListField> - renders correct error text (specified)", async () => {

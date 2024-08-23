@@ -27,12 +27,13 @@ describe("@RTL", () => {
   suites.testNumField(theme.NumField);
   suites.testQuickForm(theme.QuickForm);
   suites.testRadioField(theme.RadioField);
-  // suites.testSelectField(theme.SelectField, {
-  //   getCheckboxInlineOption: (screen) =>
-  //     screen.getByLabelText("a").closest(".checkbox-inline"),
-  // });
+  suites.testSelectField(theme.SelectField, {
+    getCheckboxInlineOption: (screen) =>
+      screen.getByLabelText("a").closest(".checkbox-inline"),
+  });
   suites.testSubmitField(theme.SubmitField);
-  // suites.testTextField(theme.TextField, { testWrapClassName: true });
+  suites.testTextField(theme.TextField, { testWrapClassName: true });
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
+  suites.testWrapField(theme.wrapField);
 });

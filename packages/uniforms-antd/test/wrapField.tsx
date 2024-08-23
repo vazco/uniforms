@@ -37,18 +37,18 @@ describe("wrapField tests", () => {
   });
 
   // FIXME:
-  // test("<wrapField> - renders wrapper with a custom validateStatus", () => {
-  //   renderWithZod({
-  //     element: wrapField(
-  //       { validateStatus: "success" },
-  //       <div data-testid="x" />,
-  //     ),
-  //     schema: z.object({}),
-  //   });
-  //   expect(
-  //     screen
-  //       .getByTestId("x")
-  //       .closest(".ant-form-item-has-feedback.ant-form-item-has-success"),
-  //   ).toBeInTheDocument();
-  // });
+  test.skip("<wrapField> - renders wrapper with a custom validateStatus", () => {
+    renderWithZod({
+      element: wrapField(
+        { validateStatus: "success" },
+        <div data-testid="x" />,
+      ),
+      schema: z.object({}),
+    });
+    expect(
+      screen
+        .getByTestId("x")
+        .closest(".ant-form-item-has-feedback.ant-form-item-has-success"),
+    ).toBeInTheDocument();
+  });
 });

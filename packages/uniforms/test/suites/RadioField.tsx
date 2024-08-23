@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import React, { ComponentType } from "react";
 import z from "zod";
-import { expect, test } from "vitest";
+import { expect, test, vi } from "vitest";
 
 import { renderWithZod } from "./utils/render-zod";
 
@@ -29,18 +29,18 @@ export function testRadioField(
   });
 
   // FIXME:
-  // test("<RadioField> - renders a set of checkboxes with correct readOnly state", async () => {
-  //   const onChange = vi.fn();
-  //   renderWithZod({
-  //     element: <RadioField name="x" readOnly />,
-  //     schema: z.object({ x: z.enum(["a", "b"]) }),
-  //     onChange,
-  //   });
-  //   await userEvent.click(screen.getByRole("radio", { name: "a" }));
-  //   await userEvent.click(screen.getByRole("radio", { name: "b" }));
+  test.skip("<RadioField> - renders a set of checkboxes with correct readOnly state", async () => {
+    const onChange = vi.fn();
+    renderWithZod({
+      element: <RadioField name="x" readOnly />,
+      schema: z.object({ x: z.enum(["a", "b"]) }),
+      onChange,
+    });
+    // await userEvent.click(screen.getByRole("radio", { name: "a" }));
+    // await userEvent.click(screen.getByRole("radio", { name: "b" }));
 
-  //   expect(onChange).toHaveBeenCalledTimes(0);
-  // });
+    // expect(onChange).toHaveBeenCalledTimes(0);
+  });
 
   test.skipIf(skipHtmlAttributesTest)(
     "<RadioField> - renders a set of checkboxes with correct id (inherited)",
@@ -83,34 +83,34 @@ export function testRadioField(
   });
 
   // FIXME:
-  // test("<RadioField> - renders a set of checkboxes with correct schema values", () => {
-  //   renderWithZod({
-  //     element: <RadioField name="x" />,
-  //     schema: z.object({ x: z.enum(["a", "b"]) }),
-  //   });
+  test.skip("<RadioField> - renders a set of checkboxes with correct schema values", () => {
+    renderWithZod({
+      element: <RadioField name="x" />,
+      schema: z.object({ x: z.enum(["a", "b"]) }),
+    });
 
-  // expect(screen.getByLabelText("a")).toBeTruthy();
-  //   expect(screen.getByLabelText("b")).toBeTruthy();
-  // });
+    expect(screen.getByLabelText("a")).toBeTruthy();
+    expect(screen.getByLabelText("b")).toBeTruthy();
+  });
 
   // FIXME:
-  // test("<RadioField> - renders a set of checkboxes with correct options", () => {
-  //   renderWithZod({
-  //     element: (
-  //       <RadioField
-  //         name="x"
-  //         options={[
-  //           { label: "A", value: "a" },
-  //           { label: "B", value: "b" },
-  //         ]}
-  //       />
-  //     ),
-  //     schema: z.object({ x: z.enum(["a", "b"]) }),
-  //   });
+  test.skip("<RadioField> - renders a set of checkboxes with correct options", () => {
+    renderWithZod({
+      element: (
+        <RadioField
+          name="x"
+          options={[
+            { label: "A", value: "a" },
+            { label: "B", value: "b" },
+          ]}
+        />
+      ),
+      schema: z.object({ x: z.enum(["a", "b"]) }),
+    });
 
-  //   expect(screen.getByLabelText("A")).toBeTruthy();
-  //   expect(screen.getByLabelText("B")).toBeTruthy();
-  // });
+    expect(screen.getByLabelText("A")).toBeTruthy();
+    expect(screen.getByLabelText("B")).toBeTruthy();
+  });
 
   test("<RadioField> - renders a set of checkboxes with correct value (default)", () => {
     renderWithZod({
@@ -144,30 +144,30 @@ export function testRadioField(
   });
 
   // FIXME:
-  // test("<RadioField> - renders a set of checkboxes which correctly reacts on change", async () => {
-  //   const onChange = vi.fn();
-  //   renderWithZod({
-  //     element: <RadioField name="x" />,
-  //     schema: z.object({ x: z.enum(["a", "b"]) }),
-  //     onChange,
-  //   });
-  //   await userEvent.click(screen.getByLabelText("b"));
+  test.skip("<RadioField> - renders a set of checkboxes which correctly reacts on change", async () => {
+    const onChange = vi.fn();
+    renderWithZod({
+      element: <RadioField name="x" />,
+      schema: z.object({ x: z.enum(["a", "b"]) }),
+      onChange,
+    });
+    // await userEvent.click(screen.getByLabelText("b"));
 
-  //   expect(onChange).toHaveBeenLastCalledWith("x", "b");
-  // });
+    // expect(onChange).toHaveBeenLastCalledWith("x", "b");
+  });
 
   // FIXME:
-  // test("<RadioField> - renders a set of checkboxes which correctly reacts on change (same value)", async () => {
-  //   const onChange = vi.fn();
-  //   renderWithZod({
-  //     element: <RadioField name="x" />,
-  //     schema: z.object({ x: z.enum(["a", "b"]) }),
-  //     onChange,
-  //   });
-  //   await userEvent.click(screen.getByRole("radio", { name: "a" }));
+  test.skip("<RadioField> - renders a set of checkboxes which correctly reacts on change (same value)", async () => {
+    const onChange = vi.fn();
+    renderWithZod({
+      element: <RadioField name="x" />,
+      schema: z.object({ x: z.enum(["a", "b"]) }),
+      onChange,
+    });
+    // await userEvent.click(screen.getByRole("radio", { name: "a" }));
 
-  //   expect(onChange).not.toHaveBeenCalled();
-  // });
+    // expect(onChange).not.toHaveBeenCalled();
+  });
 
   test("<RadioField> - renders a label", () => {
     renderWithZod({
@@ -202,14 +202,14 @@ export function testRadioField(
   );
 
   // FIXME:
-  // test("<RadioField> - works with special characters", () => {
-  //   renderWithZod({
-  //     element: <RadioField name="x" />,
-  //     schema: z.object({ x: z.enum(["ă", "ș"]) }),
-  //   });
+  test.skip("<RadioField> - works with special characters", () => {
+    renderWithZod({
+      element: <RadioField name="x" />,
+      schema: z.object({ x: z.enum(["ă", "ș"]) }),
+    });
 
-  //   expect(screen.getAllByRole("radio")).toHaveLength(2);
-  //   expect(screen.getByLabelText("ă")).toBeTruthy();
-  //   expect(screen.getByLabelText("ș")).toBeTruthy();
-  // });
+    expect(screen.getAllByRole("radio")).toHaveLength(2);
+    expect(screen.getByLabelText("ă")).toBeTruthy();
+    expect(screen.getByLabelText("ș")).toBeTruthy();
+  });
 }

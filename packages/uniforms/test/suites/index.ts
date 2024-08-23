@@ -21,5 +21,6 @@ export * from "./SubmitField";
 export * from "./TextField";
 export * from "./ValidatedForm";
 export * from "./ValidatedQuickForm";
+export * from "./wrapField";
 export * from "./utils/render";
 export * from "./utils/render-zod";

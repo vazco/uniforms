@@ -27,7 +27,7 @@ describe("@RTL", () => {
   suites.testListItemField(theme.ListItemField);
   suites.testLongTextField(theme.LongTextField);
   // FIXME: AntD number input doesn't work with new RTL test implementation
-  // suites.testNumField(antd.NumField);
+  suites.testNumField(theme.NumField);
   suites.testNestField(theme.NestField);
   suites.testQuickForm(theme.QuickForm);
   // FIXME: AntD radio.group does not support HTML attributes https://github.com/ant-design/ant-design/issues/8561, added a flag to skip attributes tests.
@@ -35,8 +35,14 @@ describe("@RTL", () => {
   // FIXME: AntD has problem with toHaveValue check
   suites.testSubmitField(theme.SubmitField, { skipValueTest: true });
   // FIXME: AntD select does not work with new RTL test implementation
-  // suites.testSelectField(theme.SelectField, { theme: "antd" });
+  suites.testSelectField(theme.SelectField, { theme: "antd" });
   suites.testTextField(theme.TextField);
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
+  suites.testWrapField(theme.wrapField, {
+    helpPropsName: "help",
+    withoutWrapClassName: true,
+    withoutHelpClassName: true,
+    withoutLabelClassName: true,
+  });
 });

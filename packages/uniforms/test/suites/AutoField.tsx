@@ -136,16 +136,16 @@ export function testAutoField(
   });
 
   // FIXME:
-  // test("<AutoField> - detects BoolField", () => {
-  //   renderWithZod({
-  //     element: <AutoField name="x" />,
-  //     schema: z.object({
-  //       x: z.boolean(),
-  //     }),
-  //   });
+  test.skip("<AutoField> - detects BoolField", () => {
+    renderWithZod({
+      element: <AutoField name="x" />,
+      schema: z.object({
+        x: z.boolean(),
+      }),
+    });
 
-  //   expect(screen.getByLabelText("X")).toBeInTheDocument();
-  // });
+    expect(screen.getByLabelText("X")).toBeInTheDocument();
+  });
 
   test("<AutoField> - uses Component (props)", () => {
     const Component = vi.fn(() => null);

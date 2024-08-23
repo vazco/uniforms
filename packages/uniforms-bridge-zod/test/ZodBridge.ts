@@ -1,7 +1,8 @@
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import z, { ZodIssueCode } from "zod";
 
 import { ZodBridge } from "uniforms-bridge-zod";
+import { connectField } from "uniforms";
 
 describe("ZodBridge", () => {
   describe("#getError", () => {
@@ -484,6 +485,29 @@ describe("ZodBridge", () => {
       const schema = z.object({ a: z.string() });
       const bridge = new ZodBridge({ schema });
       expect(bridge.getProps("a")).toEqual({ label: "A", required: true });
+    });
+
+    test("works with uniforms props", () => {
+      const schema = z.object({ a: z.string().uniforms({ type: "password" }) });
+      const bridge = new ZodBridge({ schema });
+      expect(bridge.getProps("a")).toEqual({
+        label: "A",
+        required: true,
+        type: "password",
+      });
+    });
+
+    test("works with uniforms props (component)", () => {
+      const field = vi.fn(() => null);
+      const Field = connectField(field);
+
+      const schema = z.object({ a: z.string().uniforms(Field) });
+      const bridge = new ZodBridge({ schema });
+      expect(bridge.getProps("a")).toEqual({
+        component: Field,
+        label: "A",
+        required: true,
+      });
     });
   });
 
