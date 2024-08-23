@@ -3,7 +3,7 @@ import { describe } from "vitest";
 
 import * as theme from "uniforms-antd";
 
-describe("@RTL", () => {
+describe("@RTL AntD", () => {
   suites.testAutoField(theme.AutoField, {
     getDateField: (screen) => screen.getByRole("textbox"),
     getSelectField: (screen) => screen.getByRole("combobox"),
@@ -26,7 +26,6 @@ describe("@RTL", () => {
   });
   suites.testListItemField(theme.ListItemField);
   suites.testLongTextField(theme.LongTextField);
-  // FIXME: AntD number input doesn't work with new RTL test implementation
   suites.testNumField(theme.NumField);
   suites.testNestField(theme.NestField);
   suites.testQuickForm(theme.QuickForm);
@@ -38,6 +37,7 @@ describe("@RTL", () => {
   suites.testSelectField(theme.SelectField, { theme: "antd" });
   suites.testTextField(theme.TextField);
   suites.testValidatedForm(theme.ValidatedForm);
+  suites.testDateField(theme.DateField, { theme: "antd" });
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
   suites.testWrapField(theme.wrapField, {
     helpPropsName: "help",
