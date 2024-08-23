@@ -67,7 +67,10 @@ describe('<AutoForm />', () => {
     });
 
     it('calls `onChangeModel`', () => {
-      const schema = new SimpleSchema({ a: { type: String, optional: true } });
+      const schema = new SimpleSchema({
+        a: { type: String, optional: true },
+        b: { type: String, optional: true },
+      });
       const bridge = new SimpleSchema2Bridge({ schema });
       render(
         <AutoForm onChangeModel={onChangeModel} schema={bridge}>
@@ -75,11 +78,27 @@ describe('<AutoForm />', () => {
         </AutoForm>,
       );
 
-      const input = screen.getByLabelText('A');
-      fireEvent.change(input, { target: { value: 'a' } });
+      const inputA = screen.getByLabelText('A');
+      fireEvent.change(inputA, { target: { value: 'a' } });
+      expect(onChangeModel).toHaveBeenLastCalledWith(
+        { a: 'a' },
+        { key: 'a', value: 'a', previousValue: undefined },
+      );
 
-      expect(onChangeModel).toHaveBeenCalledTimes(1);
-      expect(onChangeModel).toHaveBeenLastCalledWith({ a: 'a' });
+      const inputB = screen.getByLabelText('B');
+      fireEvent.change(inputB, { target: { value: 'b' } });
+      expect(onChangeModel).toHaveBeenLastCalledWith(
+        { a: 'a', b: 'b' },
+        { key: 'b', value: 'b', previousValue: undefined },
+      );
+
+      fireEvent.change(inputB, { target: { value: 'bb' } });
+      expect(onChangeModel).toHaveBeenLastCalledWith(
+        { a: 'a', b: 'bb' },
+        { key: 'b', value: 'bb', previousValue: 'b' },
+      );
+
+      expect(onChangeModel).toHaveBeenCalledTimes(3);
     });
 
     it('updates `changed` and `changedMap`', () => {
