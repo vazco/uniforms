@@ -1,11 +1,63 @@
-# Introduction
- 
-Welcome to Nextra! This is a basic docs template. You can use it as a starting point for your own project :)
+---
+id: installation
+title: Installation
+---
 
-## What is Nextra?
+import { CodeSection } from '../components/CodeSection';
+import { Tabs } from '../components/Tabs';
 
-A **simple**, **powerful** and **flexible** site generation framework with everything you love from Next.js.
+Core package first.
 
-## Documentation
+```shell
+npm install uniforms
+```
 
-The documentation is available at [https://nextra.site](https://nextra.site).
+Now the schema package.
+
+<Tabs
+  group="bridge"
+  tabs={[
+    { name: 'GraphQL' },
+    { name: 'JSON-Schema' },
+    { name: 'Simple-Schema' },
+    { name: 'Simple-Schema-2' },
+    { name: 'Zod' },
+  ]}
+>
+  {({ name: bridgeName }) => (
+    <>
+      <CodeSection
+        language="shell"
+        source={`npm install uniforms-bridge-${bridgeName.toLowerCase()}`}
+      />
+      <p>Finally, pick your theme.</p>
+      <Tabs
+        group="theme"
+        tabs={[
+          { name: 'Semantic' },
+          { name: 'MUI' },
+          { name: 'Bootstrap4' },
+          { name: 'Bootstrap5' },
+          { name: 'AntD' },
+          { name: 'Unstyled' },
+        ]}
+      >
+        {({ name: themeName }) => (
+          <>
+            <CodeSection
+              language="shell"
+              source={`npm install uniforms-${themeName.toLowerCase()}`}
+            />
+            <p>TL;DR; Just let me copy it!</p>
+            <CodeSection
+              language="shell"
+              source={`npm install uniforms uniforms-bridge-${bridgeName.toLowerCase()} uniforms-${themeName.toLowerCase()}`}
+            />
+          </>
+        )}
+      </Tabs>
+    </>
+  )}
+</Tabs>
+
+**Note:** If you are going to use a themed package - remember to include correct styles!
