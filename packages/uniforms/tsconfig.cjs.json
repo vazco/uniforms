@@ -4,8 +4,7 @@
     "baseUrl": "src",
     "outDir": "cjs",
     "rootDir": "src",
-    "module": "CommonJS",
-    "tsBuildInfoFile": "../../node_modules/.cache/uniforms.cjs.tsbuildinfo"
+    "module": "CommonJS"
   },
   "include": ["src"]
 }

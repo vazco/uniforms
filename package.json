@@ -2,7 +2,7 @@
   "name": "uniforms-repository",
   "private": true,
   "scripts": {
-    "build": "tsc --build --incremental tsconfig.build.json",
+    "build": "turbo build:cjs build:esm",
     "clean": "tsc --build --clean tsconfig.build.json && rimraf coverage",
     "coverage": "jest --coverage",
     "install": "npm run build && husky install",
@@ -71,5 +71,9 @@
   },
   "engines": {
     "npm": ">=7.0.0"
-  }
+  },
+  "packageManager": "npm@10.8.2",
+  "workspaces": [
+    "packages/*"
+  ]
 }
