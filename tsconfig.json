@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "skipLibCheck": true,
     "baseUrl": "packages",
     "declaration": true,
     "declarationMap": true,

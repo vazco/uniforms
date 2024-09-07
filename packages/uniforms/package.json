@@ -38,9 +38,9 @@
     "lodash": "^4.0.0"
   },
   "devDependencies": {
-    "@types/invariant": "^2.2.37",
-    "@types/lodash": "^4.17.0",
-    "tslib": "^2.2.0",
+    "@types/invariant": "2.2.37",
+    "@types/lodash": "4.17.5",
+    "tslib": "2.2.0",
     "typescript": "4.4.4"
   },
   "scripts": {
