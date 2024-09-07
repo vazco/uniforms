@@ -3,6 +3,7 @@
 /coverage
 /lerna-debug.log
 .DS_Store
+.turbo
 
 /node_modules
 /npm-debug.log
