@@ -30,7 +30,7 @@
           - .prettierrc.js
           - .stylelintrc
           - jest.config.js
-          - lerna.json
+          - turbo.json
           - package-lock.json
           - package.json
           - scripts/**/*
