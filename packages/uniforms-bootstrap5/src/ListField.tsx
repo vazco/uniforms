@@ -3,6 +3,7 @@ import React, {
   Children,
   cloneElement,
   isValidElement,
+  ReactElement,
   ReactNode,
 } from 'react';
 import { connectField, filterDOMProps, HTMLFieldProps } from 'uniforms';
@@ -54,11 +55,10 @@ function List({
         {value?.map((item, itemIndex) =>
           Children.map(children, (child, childIndex) =>
             isValidElement(child)
-              ? cloneElement(child, {
+              ? cloneElement(child as ReactElement, {
                   key: `${itemIndex}-${childIndex}`,
                   name: child.props.name?.replace('$', '' + itemIndex),
                   ...itemProps,
-                  // @ts-expect-error FIXME: Object literal may only specify known properties, and 'removeIcon' does not exist in type 'Partial<unknown> & Attributes'.
                   removeIcon,
                 })
               : child,
