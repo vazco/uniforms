@@ -81,6 +81,7 @@ function List({
           isValidElement(child)
             ? cloneElement(child, {
                 key: `${itemIndex}-${childIndex}`,
+                // @ts-expect-error FIXME: Object literal may only specify known properties, and 'name' does not exist in type 'Partial<unknown> & Attributes'.
                 name: child.props.name?.replace('$', '' + itemIndex),
                 labelCol,
                 wrapperCol,
