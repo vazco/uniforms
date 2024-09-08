@@ -68,9 +68,6 @@
     "warning": "^4.0.0",
     "zod": "^3.0.0"
   },
-  "engines": {
-    "npm": ">=7.0.0"
-  },
   "packageManager": "npm@10.8.2",
   "workspaces": [
     "packages/*"
