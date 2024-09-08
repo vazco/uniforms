@@ -33,8 +33,7 @@ export function render<P, Model extends UnknownObject>(
 
   const { rerender } = renderResult;
 
-  const rerenderWithProps = (props: P) => {
-    // @ts-expect-error FIXME: Argument of type 'P' is not assignable to parameter of type '(Partial<P> & Attributes) | undefined'.
+  const rerenderWithProps = (props: Partial<P>) => {
     rerender(cloneElement(element, props));
   };
 
