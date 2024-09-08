@@ -58,6 +58,7 @@ function List({
                   key: `${itemIndex}-${childIndex}`,
                   name: child.props.name?.replace('$', '' + itemIndex),
                   ...itemProps,
+                  // @ts-expect-error FIXME: Object literal may only specify known properties, and 'removeIcon' does not exist in type 'Partial<unknown> & Attributes'.
                   removeIcon,
                 })
               : child,
