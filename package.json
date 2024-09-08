@@ -15,7 +15,7 @@
     "reset": "rimraf node_modules .turbo packages/*/.turbo packages/*/node_modules reproductions/.cache reproductions/dist reproductions/node_modules website/.docusaurus website/build website/node_modules",
     "test": "jest"
   },
-  "dependencies": {
+  "devDependencies": {
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "12.1.5",
     "@testing-library/user-event": "14.4.3",
