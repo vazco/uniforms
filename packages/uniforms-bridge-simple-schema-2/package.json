@@ -25,18 +25,27 @@
     "validation"
   ],
   "files": [
-    "cjs/*.d.ts",
-    "cjs/*.js",
-    "esm/*.d.ts",
-    "esm/*.js",
-    "src/*.ts",
-    "src/*.tsx"
+    "cjs",
+    "esm",
+    "src"
   ],
   "dependencies": {
     "invariant": "^2.0.0",
     "lodash": "^4.0.0",
-    "simpl-schema": "^1.0.0 || ^0.0.4",
-    "tslib": "^2.2.0",
-    "uniforms": "^4.0.0-alpha.6"
+    "uniforms": "4.0.0-alpha.6"
+  },
+  "peerDependencies": {
+    "simpl-schema": "^1.0.0 || ^0.0.4"
+  },
+  "devDependencies": {
+    "@types/invariant": "2.2.37",
+    "@types/lodash": "4.17.5",
+    "@types/simpl-schema": "1.12.7",
+    "tslib": "2.2.0",
+    "typescript": "4.4.4"
+  },
+  "scripts": {
+    "build:cjs": "tsc --build tsconfig.cjs.json",
+    "build:esm": "tsc --build tsconfig.esm.json"
   }
 }
