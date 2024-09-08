@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
-import { wrapField } from 'uniforms-antd';
 import { renderWithZod } from 'uniforms/__suites__';
+import { wrapField } from 'uniforms-antd';
 import { z } from 'zod';
 
 describe('wrapField tests', () => {

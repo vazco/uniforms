@@ -206,8 +206,10 @@ describe('ValidatedForm', () => {
 
     it('uses `modelTransform`s `validate` mode', () => {
       const transformedModel = { b: 1 };
-      const modelTransform = (mode: ModelTransformMode, model: UnknownObject) =>
-        mode === 'validate' ? transformedModel : model;
+      const modelTransform = (
+        mode: ModelTransformMode,
+        model: UnknownObject,
+      ) => (mode === 'validate' ? transformedModel : model);
       render(
         <ValidatedForm
           // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
