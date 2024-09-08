@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build:cjs build:esm",
-    "clean": "tsc --build --clean tsconfig.build.json && rimraf coverage",
+    "clean": "rimraf ./**/cjs ./**/esm && rimraf coverage",
     "coverage": "jest --coverage",
     "install": "npm run build && husky install",
     "lint": "npm run lint:code && npm run lint:text && npm run lint:types",
