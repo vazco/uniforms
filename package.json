@@ -12,7 +12,7 @@
     "lint:types": "npm run build",
     "prereset": "npm run clean",
     "pretest": "npm run lint",
-    "reset": "rimraf node_modules packages/*/node_modules reproductions/.cache reproductions/dist reproductions/node_modules website/.docusaurus website/build website/node_modules",
+    "reset": "rimraf node_modules .turbo packages/*/.turbo packages/*/node_modules reproductions/.cache reproductions/dist reproductions/node_modules website/.docusaurus website/build website/node_modules",
     "test": "jest"
   },
   "dependencies": {
