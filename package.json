@@ -12,7 +12,6 @@
     "lint:types": "npm run build",
     "prereset": "npm run clean",
     "pretest": "npm run lint",
-    "publish": "npm run clean && npm run build && lerna publish",
     "reset": "rimraf node_modules packages/*/node_modules reproductions/.cache reproductions/dist reproductions/node_modules website/.docusaurus website/build website/node_modules",
     "test": "jest"
   },
