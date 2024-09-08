@@ -678,7 +678,7 @@ describe('ValidatedForm', () => {
       );
     }
 
-    function keys<X>(x: X) {
+    function keys<X extends Record<string, unknown>>(x: X) {
       return Object.keys(x) as (keyof X)[];
     }
 
