@@ -25,9 +25,12 @@
     "zod"
   ],
   "files": [
-    "cjs",
-    "esm",
-    "src"
+    "cjs/*.d.ts",
+    "cjs/*.js",
+    "esm/*.d.ts",
+    "esm/*.js",
+    "src/*.ts",
+    "src/*.tsx"
   ],
   "dependencies": {
     "invariant": "^2.0.0",

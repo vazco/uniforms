@@ -24,9 +24,12 @@
     "validation"
   ],
   "files": [
-    "cjs",
-    "esm",
-    "src"
+    "cjs/*.d.ts",
+    "cjs/*.js",
+    "esm/*.d.ts",
+    "esm/*.js",
+    "src/*.ts",
+    "src/*.tsx"
   ],
   "peerDependencies": {
     "@ant-design/icons": "^4.0.0",

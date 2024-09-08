@@ -26,9 +26,12 @@
     "validation"
   ],
   "files": [
-    "cjs",
-    "esm",
-    "src"
+    "cjs/*.d.ts",
+    "cjs/*.js",
+    "esm/*.d.ts",
+    "esm/*.js",
+    "src/*.ts",
+    "src/*.tsx"
   ],
   "peerDependencies": {
     "react": "^18.0.0 || ^17.0.0 || ^16.8.0"

@@ -22,9 +22,12 @@
     "validation"
   ],
   "files": [
-    "cjs",
-    "esm",
-    "src"
+    "cjs/*.d.ts",
+    "cjs/*.js",
+    "esm/*.d.ts",
+    "esm/*.js",
+    "src/*.ts",
+    "src/*.tsx"
   ],
   "peerDependencies": {
     "@mui/material": "^5.0.0",
