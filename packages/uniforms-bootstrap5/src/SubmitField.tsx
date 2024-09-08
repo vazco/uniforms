@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import React, { HTMLProps, Ref } from 'react';
 import { filterDOMProps, Override, useForm } from 'uniforms';
+import { GridSize } from 'uniforms-bootstrap4/src/gridClassName';
 
 import gridClassName from './gridClassName';
 
@@ -24,7 +25,10 @@ function SubmitField({
   ...props
 }: SubmitFieldProps) {
   const { error, state: anyState } = useForm();
-  const state = anyState as unknown as { disabled: boolean; grid: any };
+  const state = anyState as unknown as {
+    disabled: boolean;
+    grid: string | number | Partial<Record<GridSize, number>> | undefined;
+  };
   const hasWrap = !!(state.grid || wrapClassName);
 
   const blockInput = (

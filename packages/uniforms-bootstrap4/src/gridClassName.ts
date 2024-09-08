@@ -9,7 +9,7 @@ function gridClassNamePart(
     : `col-${sizeInfix}${12 - value}`;
 }
 
-type GridSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type GridSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 const gridOrder = { xs: 1, sm: 2, md: 3, lg: 4, xl: 5 };
 
 function compareSizeClass(a: GridSize, b: GridSize) {
@@ -45,7 +45,7 @@ export default function gridClassName(
       (Object.keys(grid) as GridSize[])
         .sort(compareSizeClass)
         // @ts-expect-error Weird type refinement problem.
-        .map(size => gridClassNamePart(size, grid[size], side))
+        .map(size => gridClassNamePart(size, grid[size] as number, side))
         .join(' ')
     );
   }

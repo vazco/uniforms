@@ -15,6 +15,7 @@ export type Context<Model extends UnknownObject> = {
   model: Model;
   name: string[];
   onChange: (key: string, value: unknown) => void;
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   onSubmit: (event?: SyntheticEvent) => unknown | Promise<unknown>;
   randomId: () => string;
   schema: Bridge;

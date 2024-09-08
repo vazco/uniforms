@@ -55,6 +55,7 @@ function Select(props: SelectFieldProps) {
             if (!props.readOnly) {
               props.onChange(
                 // FIXME: Argument type depends on `props.fieldType`.
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                 props.fieldType === Array
                   ? eventOrValue
                   : eventOrValue.target.value,
@@ -74,7 +75,7 @@ function Select(props: SelectFieldProps) {
         disabled={props.disabled}
         mode={props.fieldType === Array ? 'multiple' : undefined}
         name={props.name}
-        onChange={value => {
+        onChange={(value: SelectFieldValue) => {
           if (!props.readOnly) {
             props.onChange(value);
           }

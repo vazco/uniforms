@@ -54,7 +54,9 @@ function Radio({
       id={id}
       name={name}
       onChange={(event: any) =>
-        disabled || readOnly || onChange(event.target.value)
+        disabled ||
+        readOnly ||
+        onChange(event.target.value as string | undefined)
       }
       ref={inputRef}
       row={row}

@@ -16,7 +16,11 @@ function AntD(parent: any) {
 
       return {
         ...props,
-        className: classnames('ant-form', 'ant-form-' + layout, className),
+        className: classnames(
+          'ant-form',
+          'ant-form-' + layout,
+          className as string,
+        ),
       };
     }
   }
