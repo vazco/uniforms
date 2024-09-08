@@ -157,7 +157,7 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     }
 
     if (field instanceof ZodNativeEnum) {
-      const values = Object.values(field.enum);
+      const values = Object.values(field.enum as Record<string, unknown>);
       return values.find(isNativeEnumValue) ?? values[0];
     }
 
@@ -214,7 +214,7 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
         value => ({ value }),
       );
     } else if (field instanceof ZodNativeEnum) {
-      const values = Object.values(field.enum);
+      const values = Object.values(field.enum as Record<string, unknown>);
       const nativeValues = values.filter(isNativeEnumValue);
       props.options = (nativeValues.length ? nativeValues : values).map(
         value => ({ value }),
@@ -261,7 +261,7 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     }
 
     if (field instanceof ZodObject) {
-      return Object.keys(field.shape);
+      return Object.keys(field.shape as Record<string, unknown>);
     }
 
     return [];
@@ -292,7 +292,7 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     }
 
     if (field instanceof ZodNativeEnum) {
-      const values = Object.values(field.enum);
+      const values = Object.values(field.enum as Record<string, unknown>);
       return typeof values.find(isNativeEnumValue) === 'number'
         ? Number
         : String;

@@ -112,11 +112,11 @@ function joinNameImpl(...parts: unknown[]) {
         if (part.length) {
           const length = Math.min(index + 1, part.length);
           index -= length;
-          parts.splice(index + 1, length, ...part);
+          parts.splice(index + 1, length, ...(part as Array<unknown>));
         }
       } else {
         // Other values -- most likely numbers and `true` -- are stringified.
-        name.push('' + part);
+        name.push('' + (part as unknown));
       }
     }
   }
