@@ -1,7 +1,7 @@
 import { fireEvent, screen } from '@testing-library/react';
 import React from 'react';
-import { SelectField } from 'uniforms-antd';
 import { renderWithZod } from 'uniforms/__suites__';
+import { SelectField } from 'uniforms-antd';
 import { z } from 'zod';
 
 test('<SelectField> - renders a select which correctly reacts on change (array)', () => {

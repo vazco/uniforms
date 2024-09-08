@@ -1,7 +1,7 @@
 import { fireEvent, screen } from '@testing-library/react';
 import React from 'react';
-import { SelectField } from 'uniforms-semantic';
 import { renderWithZod } from 'uniforms/__suites__';
+import { SelectField } from 'uniforms-semantic';
 import { z } from 'zod';
 
 test('<SelectField> - disabled items (options) based on predicate', () => {

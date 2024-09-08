@@ -33,7 +33,6 @@ export type FieldProps<Value, Base, Extension = object> = Override<
   GuaranteedProps<Value> & Extension
 >;
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FilterDOMProps {}
 
 export type GuaranteedProps<Value> = {
