@@ -1,7 +1,7 @@
 {
-  "name": "nextra-docs-template",
-  "version": "0.0.1",
-  "description": "Nextra docs template",
+  "name": "docs",
+  "version": "4.0.0-alpha.6",
+  "description": "Uniforms documentation",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,14 +9,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shuding/nextra-docs-template.git"
+    "url": "git+https://github.com/vazco/uniforms.git"
   },
-  "author": "Shu Ding <g@shud.in>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/shuding/nextra-docs-template/issues"
-  },
-  "homepage": "https://github.com/shuding/nextra-docs-template#readme",
+  "homepage": "https://uniforms.tools/",
+  "bugs": "https://github.com/vazco/uniforms/issues",
+  "funding": "https://github.com/vazco/uniforms?sponsor=1",
+  "keywords": [
+    "form",
+    "forms",
+    "react",
+    "schema",
+    "validation",
+    "uniforms"
+  ],
   "dependencies": {
     "next": "13.0.6",
     "nextra": "latest",
@@ -25,7 +31,6 @@
     "react-dom": "18.3.1"
   },
   "devDependencies": {
-    "@types/node": "~22.5.4",
-    "typescript": "5.5.2"
+    "@types/node": "~22.5.4"
   }
 }

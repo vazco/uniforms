@@ -16,31 +16,6 @@
       "rules": {
         "import/no-unresolved": "off"
       }
-    },
-    {
-      "files": ["website/**/*"],
-      "settings": {
-        "import/resolver": {
-          "alias": {
-            "extensions": [".js", ".json", ".jsx", ".ts", ".tsx"],
-            "map": [
-              ["@docusaurus", "@docusaurus/core/lib/client/exports"],
-              ["@theme", "@docusaurus/theme-classic/src/theme"]
-            ]
-          }
-        }
-      }
-    },
-    {
-      "files": [
-        "website/pages-parts/CommonForms/*",
-        "website/pages-parts/CustomFields/*",
-        "website/pages-parts/Tutorial/*"
-      ],
-      "rules": {
-        "import/order": "off",
-        "no-console": "off"
-      }
     }
   ],
   "root": true,

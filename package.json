@@ -18,8 +18,6 @@
   },
   "dependencies": {
     "@ant-design/icons": "4.4.0",
-    "@docusaurus/core": "2.1.0",
-    "@docusaurus/preset-classic": "2.1.0",
     "@emotion/react": "11.7.1",
     "@emotion/styled": "11.6.0",
     "@mui/material": "5.4.1",

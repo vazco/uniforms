@@ -11,7 +11,3 @@
 /packages/*/node_modules
 /reproductions/dist
 /reproductions/node_modules
-/website/.cache-loader
-/website/.docusaurus
-/website/build
-/website/node_modules
