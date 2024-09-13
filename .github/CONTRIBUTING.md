@@ -19,7 +19,7 @@ Our kanban board is public and available [here](https://github.com/orgs/vazco/pr
 
 - Create a fork from where you want to base your work.
 - Clone the repo and run `npm ci` **in the top-level only**.
-  - Make sure you are using `npm` that understands the `package-lock.json` format. At the moment, it's at least v7.
+  - Make sure you are using `npm` that understands the `package-lock.json` format. Check the current version in the `package.json` file.
 - Make sure your commit messages are in the proper format:
   - Bugfix or feature:
     - `Implemented asynchronous validation (closes #17).`
@@ -32,14 +32,14 @@ Our kanban board is public and available [here](https://github.com/orgs/vazco/pr
 
 ### Development
 
-For the best local developer experience (DX) it is recommended to start `build` and `test` in `--watch` mode.
+For the best local developer experience (DX) it is recommended to run scripts in watch mode.
 
 Run the commands below in the root directory.
 
 #### Running the build in watch mode
 
 ```sh
-npm run build -- --watch
+npm run build:watch
 ```
 
 #### Running the tests in watch mode

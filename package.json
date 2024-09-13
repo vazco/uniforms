@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build:cjs build:esm",
+    "build:watch": "turbo watch build:cjs build:esm",
     "clean": "rimraf ./**/cjs ./**/esm && rimraf coverage",
     "coverage": "jest --coverage",
     "install": "npm run build && husky install",
