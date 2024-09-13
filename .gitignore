@@ -12,6 +12,7 @@
 /packages/*/node_modules
 /reproductions/dist
 /reproductions/node_modules
+/reproductions/.parcel-cache
 /website/.cache-loader
 /website/.docusaurus
 /website/build
