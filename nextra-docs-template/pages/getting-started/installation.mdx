@@ -1,0 +1,61 @@
+---
+id: installation
+title: Installation
+---
+
+Core package first.
+
+```shell copy
+npm install uniforms
+```
+
+Now the schema package.
+
+import { Tabs, Code, Pre } from 'nextra/components';
+
+export const bridges = [
+  'GraphQL',
+  'JSON-Schema',
+  'Simple-Schema',
+  'Simple-Schema-2',
+  'Zod',
+];
+
+export const themes = [
+  'Semantic',
+  'MUI',
+  'Bootstrap4',
+  'Bootstrap5',
+  'AntD',
+  'Unstyled',
+];
+
+<Tabs items={bridges}>
+  {bridges.map(bridgeName => (
+    <Tabs.Tab key={bridgeName}>
+      <Pre hasCopyCode>
+      {`npm install uniforms-bridge-${bridgeName.toLocaleLowerCase()}`}
+      </Pre>
+      <p>Finally, pick your theme.</p>
+      <Tabs
+        items={themes}
+      >
+        {themes.map(themeName => {
+          return <Tabs.Tab key={themeName}>
+            <>
+              <Pre className="language-shell">
+                {`npm install uniforms-${themeName.toLocaleLowerCase()}`}
+              </Pre>
+              <p>TL;DR; Just let me copy it!</p>
+              <Pre className="language-shell">
+                {`npm install uniforms uniforms-bridge-${bridgeName.toLocaleLowerCase()} uniforms-${themeName.toLocaleLowerCase()}`}
+              </Pre>
+            </>
+          </Tabs.Tab>
+        })}
+      </Tabs>
+    </Tabs.Tab>
+  ))}
+</Tabs>
+
+**Note:** If you are going to use a themed package - remember to include correct styles!

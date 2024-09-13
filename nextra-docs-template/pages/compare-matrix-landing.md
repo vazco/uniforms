@@ -1,0 +1,8 @@
+| Feature                                                                        |                    [uniforms](https://github.com/vazco/uniforms)                    |                   [Formik](https://github.com/jaredpalmer/formik)                   |                 [redux-form](https://github.com/erikras/redux-form)                 |         [React Final Form](https://github.com/final-form/react-final-form)          | [react-hook-form](https://github.com/react-hook-form/react-hook-form)               |
+| :----------------------------------------------------------------------------- | :---------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------: | ----------------------------------------------------------------------------------- |
+| Automatic form layout                                                          |  ✅  | ❌ | ❌ | ❌ | ❌ |
+| Manual state management                                                        |  ✅  | ❌ |  ✅  | ❌ | ✅   |
+| Manually trigger validation                                                    |  ✅  |  ✅  | ❌ | ❌ | ✅   |
+| AntD, Bootstrap 3, Bootstrap 4, Bootstrap 5, Material, MUI, Semantic UI themes |  ✅  | ❌ | ❌ | ❌ | ❌ |
+| JSON, GraphQL, SimpleSchema, Zod and custom schema support                     |  ✅  | ❌ | ❌ | ❌ | ❌ |
+| Field level validation                                                         | ❌ |  ✅  |  ✅  |  ✅  | ✅   |

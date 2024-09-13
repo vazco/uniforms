@@ -2,7 +2,12 @@ import { DocsThemeConfig } from 'nextra-theme-docs';
 import React from 'react';
 
 const config: DocsThemeConfig = {
-  logo: <b>uniforms</b>,
+  logo: (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      <img src="/img/uniforms.svg" alt="uniforms logo" width="40" height="40" />
+      <b>uniforms</b>
+    </div>
+  ),
   project: {
     link: 'https://github.com/vazco/uniforms',
   },
