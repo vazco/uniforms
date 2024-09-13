@@ -13,7 +13,6 @@ import { bridge as schema } from './schema/all-fields-schema';
 export function App() {
   return (
     <AutoForm
-      placeholder
       schema={schema}
       onSubmit={(model: any) => alert(JSON.stringify(model, null, 2))}
     />
