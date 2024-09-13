@@ -31,31 +31,64 @@ export const themes = [
 ];
 
 <Tabs items={bridges}>
-  {bridges.map(bridgeName => (
-    <Tabs.Tab key={bridgeName}>
-      <Pre hasCopyCode>
-      {`npm install uniforms-bridge-${bridgeName.toLocaleLowerCase()}`}
-      </Pre>
-      <p>Finally, pick your theme.</p>
-      <Tabs
-        items={themes}
-      >
-        {themes.map(themeName => {
-          return <Tabs.Tab key={themeName}>
-            <>
-              <Pre className="language-shell">
-                {`npm install uniforms-${themeName.toLocaleLowerCase()}`}
-              </Pre>
-              <p>TL;DR; Just let me copy it!</p>
-              <Pre className="language-shell">
-                {`npm install uniforms uniforms-bridge-${bridgeName.toLocaleLowerCase()} uniforms-${themeName.toLocaleLowerCase()}`}
-              </Pre>
-            </>
-          </Tabs.Tab>
-        })}
-      </Tabs>
-    </Tabs.Tab>
-  ))}
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-bridge-graphql
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-bridge-json-schema
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-bridge-simple-schema
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-bridge-simple-schema-2
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-bridge-zod
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+<Tabs items={themes}>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-semantic
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-mui
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-bootstrap4
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-bootstrap5
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-antd
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-unstyled
+    ```
+  </Tabs.Tab>
 </Tabs>
 
 **Note:** If you are going to use a themed package - remember to include correct styles!
