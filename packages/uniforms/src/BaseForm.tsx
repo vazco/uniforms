@@ -167,9 +167,9 @@ export class BaseForm<
   getNativeFormProps(): {
     [key: string]: unknown;
     children?: React.ReactNode;
-    id?: BaseFormProps<Model>['id'];
+    id?: string;
     key: string;
-    noValidate: BaseFormProps<Model>['noValidate'];
+    noValidate: boolean;
     onSubmit: BaseForm<Model, Props, State>['onSubmit'];
   } {
     const props = omit(this.props, [
