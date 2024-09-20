@@ -14,7 +14,12 @@ const config: DocsThemeConfig = {
   chat: {
     link: 'https://forminer.com/?utm_source=uniforms&utm_medium=Menu_CTA&utm_campaign=Forminer_uniforms_menu_CTA&utm_id=Forminer_uniforms_menu',
     icon: (
-      <img src="/img/forminer.svg" alt="forminer logo" width="120" height="40" />
+      <img
+        src="/img/forminer.svg"
+        alt="forminer logo"
+        width="120"
+        height="40"
+      />
     ),
   },
   docsRepositoryBase: 'https://github.com/vazco/uniforms',
