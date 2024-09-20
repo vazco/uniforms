@@ -1,0 +1,9 @@
+136 error Error: Command failed with exit code 1: git push --follow-tags --no-verify origin master
+136 error remote: error: GH006: Protected branch update failed for refs/heads/master.
+136 error remote: error: Changes must be made through a pull request. 3 of 3 required status checks are expected.
+136 error To github.com:vazco/uniforms.git
+136 error  * [new tag]           v4.0.0-alpha.6 -> v4.0.0-alpha.6
+136 error  ! [remote rejected]   master -> master (protected branch hook declined)
+136 error error: failed to push some refs to 'github.com:vazco/uniforms.git'
+136 error     at makeError (/Users/zaxovaiko/Documents/vazco/uniforms/node_modules/execa/lib/error.js:60:11)
+136 error     at handlePromise (/Users/zaxovaiko/Documents/vazco/uniforms/node_modules/execa/index.js:118:26)

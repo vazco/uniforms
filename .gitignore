@@ -1,8 +1,8 @@
 /.idea
 /.parcel-cache
 /coverage
-/lerna-debug.log
 .DS_Store
+.turbo
 
 /node_modules
 /npm-debug.log
@@ -10,5 +10,3 @@
 /packages/*/cjs
 /packages/*/esm
 /packages/*/node_modules
-/reproductions/dist
-/reproductions/node_modules

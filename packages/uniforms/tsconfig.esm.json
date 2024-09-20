@@ -4,8 +4,7 @@
     "baseUrl": "src",
     "outDir": "esm",
     "rootDir": "src",
-    "module": "ES6",
-    "tsBuildInfoFile": "../../node_modules/.cache/uniforms.esm.tsbuildinfo"
+    "module": "ES6"
   },
   "include": ["src"]
 }

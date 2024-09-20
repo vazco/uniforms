@@ -1,0 +1,7 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "build:cjs": { "dependsOn": ["^build:cjs"], "outputs": ["cjs/**"] },
+    "build:esm": { "dependsOn": ["^build:esm"], "outputs": ["esm/**"] }
+  }
+}
