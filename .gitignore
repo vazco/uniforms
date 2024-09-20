@@ -10,3 +10,6 @@
 /packages/*/cjs
 /packages/*/esm
 /packages/*/node_modules
+/reproductions/dist
+/reproductions/node_modules
+/reproductions/.parcel-cache
