@@ -10,3 +10,5 @@
 /reproductions/dist
 /reproductions/node_modules
 .turbo
+.next
+/packages/docs/pages/*
