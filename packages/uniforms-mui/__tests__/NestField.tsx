@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
-import { NestField } from 'uniforms-mui';
 import { renderWithZod } from 'uniforms/__suites__';
+import { NestField } from 'uniforms-mui';
 import { z } from 'zod';
 
 describe('@RTL - NestField tests', () => {

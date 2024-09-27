@@ -1,4 +1,5 @@
 /* eslint no-console: "off" */
+/* eslint @typescript-eslint/no-unsafe-argument: "off" */
 
 const fs = require('fs');
 const path = require('path');

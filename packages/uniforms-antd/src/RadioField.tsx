@@ -28,7 +28,7 @@ function Radio(props: RadioFieldProps) {
       name={props.name}
       onChange={event => {
         if (!props.readOnly) {
-          props.onChange(event.target.value);
+          props.onChange(event.target.value as string | undefined);
         }
       }}
       value={props.value ?? ''}

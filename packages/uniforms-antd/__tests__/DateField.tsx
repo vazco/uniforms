@@ -4,8 +4,8 @@ import userEvent, {
 } from '@testing-library/user-event';
 import moment from 'moment';
 import React from 'react';
-import { DateField } from 'uniforms-antd';
 import { renderWithZod } from 'uniforms/__suites__';
+import { DateField } from 'uniforms-antd';
 import { z } from 'zod';
 
 const getClosestInput = (text: string) =>

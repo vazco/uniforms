@@ -5,6 +5,7 @@ import React, {
   Children,
   cloneElement,
   isValidElement,
+  ReactElement,
   ReactNode,
 } from 'react';
 import { connectField, filterDOMProps, HTMLFieldProps } from 'uniforms';
@@ -79,7 +80,7 @@ function List({
       {value?.map((item, itemIndex) =>
         Children.map(children, (child, childIndex) =>
           isValidElement(child)
-            ? cloneElement(child, {
+            ? cloneElement(child as ReactElement, {
                 key: `${itemIndex}-${childIndex}`,
                 name: child.props.name?.replace('$', '' + itemIndex),
                 labelCol,

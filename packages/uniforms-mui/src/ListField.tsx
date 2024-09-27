@@ -2,9 +2,10 @@ import ListMaterial, { ListProps } from '@mui/material/List';
 import ListSubheader from '@mui/material/ListSubheader';
 import React, {
   Children,
-  ReactNode,
   cloneElement,
   isValidElement,
+  ReactElement,
+  ReactNode,
 } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
@@ -39,7 +40,7 @@ function List({
         {value?.map((item, itemIndex) =>
           Children.map(children, (child, childIndex) =>
             isValidElement(child)
-              ? cloneElement(child, {
+              ? cloneElement(child as ReactElement, {
                   key: `${itemIndex}-${childIndex}`,
                   name: child.props.name?.replace('$', '' + itemIndex),
                   ...itemProps,
