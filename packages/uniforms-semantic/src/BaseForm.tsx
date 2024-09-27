@@ -13,7 +13,12 @@ function Semantic(parent: any) {
 
       return {
         ...props,
-        className: classnames('ui', props.className, { error }, 'form'),
+        className: classnames(
+          'ui',
+          props.className as string,
+          { error },
+          'form',
+        ),
       };
     }
   }

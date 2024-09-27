@@ -33,7 +33,7 @@ export function render<P, Model extends UnknownObject>(
 
   const { rerender } = renderResult;
 
-  const rerenderWithProps = (props: P) => {
+  const rerenderWithProps = (props: Partial<P>) => {
     rerender(cloneElement(element, props));
   };
 

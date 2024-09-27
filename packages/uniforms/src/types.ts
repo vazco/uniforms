@@ -15,6 +15,7 @@ export type Context<Model extends UnknownObject> = {
   model: Model;
   name: string[];
   onChange: (key: string, value: unknown) => void;
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   onSubmit: (event?: SyntheticEvent) => unknown | Promise<unknown>;
   randomId: () => string;
   schema: Bridge;
@@ -33,7 +34,6 @@ export type FieldProps<Value, Base, Extension = object> = Override<
   GuaranteedProps<Value> & Extension
 >;
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FilterDOMProps {}
 
 export type GuaranteedProps<Value> = {

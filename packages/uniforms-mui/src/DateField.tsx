@@ -68,7 +68,8 @@ function Date({
       name={name}
       onChange={event =>
         // FIXME: `valueAsNumber` is not available in `EventTarget`.
-        disabled || dateParse((event.target as any).valueAsNumber, onChange)
+        disabled ||
+        dateParse((event.target as any).valueAsNumber as number, onChange)
       }
       placeholder={placeholder}
       ref={inputRef}

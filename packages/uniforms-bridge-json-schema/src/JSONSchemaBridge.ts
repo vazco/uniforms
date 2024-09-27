@@ -213,7 +213,10 @@ export default class JSONSchemaBridge extends Bridge {
         partialNames.forEach(partialName => {
           definition[partialName]?.forEach((partialElement: any) => {
             if (!nextFound) {
-              partialElement = resolveRefIfNeeded(partialElement, this.schema);
+              partialElement = resolveRefIfNeeded(
+                partialElement as UnknownObject,
+                this.schema,
+              );
               if (next in partialElement.properties) {
                 definition = partialElement.properties[next];
                 nextFound = true;
@@ -235,7 +238,7 @@ export default class JSONSchemaBridge extends Bridge {
 
       partialNames.forEach(partialName => {
         definition[partialName]?.forEach((partial: any) => {
-          partial = resolveRefIfNeeded(partial, this.schema);
+          partial = resolveRefIfNeeded(partial as UnknownObject, this.schema);
 
           if (partial.required) {
             required.push(...partial.required);
@@ -339,7 +342,9 @@ export default class JSONSchemaBridge extends Bridge {
         }));
       }
     } else if (props.enum) {
-      options = Object.values(props.enum).map(value => ({ value }));
+      options = Object.values(props.enum as Record<string, unknown>).map(
+        value => ({ value }),
+      );
     }
 
     propsToRename.forEach(([key, newKey]) => {
@@ -364,7 +369,9 @@ export default class JSONSchemaBridge extends Bridge {
       this._compiledSchema[name];
 
     if (type === 'object' && properties) {
-      return Object.keys(properties).map(joinName.escape);
+      return Object.keys(properties as Record<string, unknown>).map(
+        joinName.escape,
+      );
     }
 
     return [];

@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
-import { DateField } from 'uniforms-mui';
 import { renderWithZod } from 'uniforms/__suites__';
+import { DateField } from 'uniforms-mui';
 import { z } from 'zod';
 
 test('<DateField> - renders a Input with correct error text (specified)', () => {
