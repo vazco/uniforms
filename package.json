@@ -28,6 +28,7 @@
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^8.11.0",
     "antd": "^4.24.16",
+    "dayjs": "^1.11.13",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-vazco": "7.4.0",

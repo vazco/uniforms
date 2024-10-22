@@ -77,18 +77,18 @@ function Select(props: SelectFieldProps) {
         />
       </span>
     ) : (
-      <Select
+      <AntSelect
         allowClear={!props.required}
         disabled={props.disabled}
         mode={props.fieldType === Array ? 'multiple' : undefined}
         name={props.name}
-        // @ts-expect-error
         onChange={(value: SelectFieldValue) => {
           if (!props.readOnly) {
             props.onChange(value);
           }
         }}
         placeholder={props.placeholder}
+        // @ts-ignore
         ref={props.inputRef}
         value={
           props.fieldType === Array
@@ -99,7 +99,7 @@ function Select(props: SelectFieldProps) {
         }
         {...filteredDOMProps}
         options={props.options?.map(option => ({
-          disabled: option.disabled,
+          disabled: option.disabled ?? false,
           key: option.key ?? option.value,
           label: option.label ?? option.value,
           value: option.value,

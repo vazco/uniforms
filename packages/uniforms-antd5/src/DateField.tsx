@@ -1,12 +1,12 @@
 import { DatePicker, DatePickerProps } from 'antd';
-import moment, { Moment } from 'moment';
+import dayjs, { Dayjs } from 'dayjs';
 import React, { Ref } from 'react';
 import { connectField, FieldProps, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
 export type DateFieldProps = FieldProps<
-  Date | Moment,
+  Date | Dayjs,
   DatePickerProps,
   // FIXME: Seems like DatePickerProps doesn't contain 'showTime'.
   { inputRef?: Ref<typeof DatePicker>; showTime?: boolean }
@@ -22,6 +22,7 @@ function Date({
   return wrapField(
     // @ts-ignore
     props,
+    // @ts-ignore
     <DatePicker
       disabled={props.disabled}
       inputReadOnly={props.readOnly}
@@ -32,13 +33,13 @@ function Date({
         }
       }}
       placeholder={props.placeholder}
-      // @ts-expect-error: `DatePicker` is an intersection.
+      // @ts-ignore
       ref={props.inputRef}
       showTime={showTime}
       style={style}
       // @ts-ignore
 
-      value={props.value ? moment(props.value) : undefined}
+      value={props.value ? dayjs(props.value) : undefined}
       {...filterDOMProps(props)}
     />,
   );
