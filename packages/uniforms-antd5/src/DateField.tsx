@@ -14,11 +14,7 @@ export type DateFieldProps = FieldProps<
 
 const defaultStyle = { width: '100%' };
 
-function Date({
-  showTime = true,
-  style = defaultStyle,
-  ...props
-}: DateFieldProps) {
+function Date({ style = defaultStyle, ...props }: DateFieldProps) {
   return wrapField(
     // @ts-ignore
     props,
@@ -35,7 +31,8 @@ function Date({
       placeholder={props.placeholder}
       // @ts-ignore
       ref={props.inputRef}
-      showTime={showTime}
+      // @ts-ignore
+      showTime={props.showTime ?? false}
       style={style}
       // @ts-ignore
 
