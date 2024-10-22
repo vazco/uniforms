@@ -62,6 +62,10 @@
     "@typescript-eslint/require-await": "off",
     "@typescript-eslint/restrict-plus-operands": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/no-unsafe-argument": "off",
+    "@typescript-eslint/prefer-ts-expect-error": "off",
+    "no-constant-binary-expression": "off",
+
     "consistent-return": "off",
     "eslint-comments/require-description": "off",
     "import/default": "off",

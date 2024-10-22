@@ -9,9 +9,15 @@ import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
+// Create a new type excluding "large" from the size property in SwitchProps
+type ModifiedSwitchProps = Omit<SwitchProps, 'size'> & {
+  size?: 'small' | 'medium'; // Allow only 'small' and 'medium'
+};
+
+// Update BoolFieldProps to include modified props
 export type BoolFieldProps = FieldProps<
   boolean,
-  CheckboxProps | SwitchProps,
+  CheckboxProps | ModifiedSwitchProps, // Use modified SwitchProps here
   {
     appearance?: 'checkbox' | 'switch';
     fullWidth?: boolean;
@@ -32,9 +38,14 @@ function Bool(props: BoolFieldProps) {
     onChange,
     readOnly,
     value,
+    size,
   } = props;
+
   const SelectionControl =
     appearance === 'checkbox' || appearance === undefined ? Checkbox : Switch;
+
+  const validSize: 'small' | 'medium' | undefined =
+    size === 'large' ? undefined : size;
 
   return wrapField(
     { fullWidth: true, ...props },
@@ -53,14 +64,18 @@ function Bool(props: BoolFieldProps) {
               !disabled &&
               !readOnly &&
               onChange &&
-              onChange(event.target.checked)
+              onChange((event.target as HTMLInputElement).checked)
             }
             ref={inputRef as Ref<HTMLButtonElement>}
             value={name}
-            {...omit(filterDOMProps(props), ['helperText', 'fullWidth'])}
+            size={validSize}
+            {...omit(filterDOMProps(props), [
+              'helperText',
+              'fullWidth',
+              'size',
+            ])}
           />
         }
-        // @ts-expect-error React.Node vs React.Element TODO
         label={label}
       />
     </FormGroup>,

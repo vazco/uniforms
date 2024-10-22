@@ -68,7 +68,11 @@ function Select(props: SelectFieldProps) {
       name,
       onChange,
       readOnly,
+      size,
     } = props;
+
+    const validSize: 'small' | 'medium' | undefined =
+      size === 'large' ? undefined : size;
 
     const appearance = props.appearance ?? 'checkbox';
     const SelectionControl = appearance === 'checkbox' ? Checkbox : Switch;
@@ -77,6 +81,7 @@ function Select(props: SelectFieldProps) {
       'disableItem' as never,
       'id',
       'inputRef',
+      'size',
     ]);
 
     const children =
@@ -95,6 +100,7 @@ function Select(props: SelectFieldProps) {
               control={
                 <Radio
                   id={`${id}-${option.key ?? escape(option.value)}`}
+                  size={validSize}
                   {...filteredProps}
                 />
               }

@@ -27,6 +27,7 @@ function Num(props: NumFieldProps) {
       }}
       placeholder={props.placeholder}
       readOnly={props.readOnly}
+      // @ts-expect-error: `inputRef` is `unknown`
       ref={props.inputRef}
       step={props.step || (props.decimal ? 0.01 : 1)}
       style={{ width: '100%' }}

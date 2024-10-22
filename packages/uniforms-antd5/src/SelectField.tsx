@@ -1,5 +1,11 @@
-import { Checkbox, CheckboxProps,  Radio, RadioGroupProps, Select as AntSelect, SelectProps as AntSelectProps } from 'antd'; // Corrected imports
-
+import {
+  Checkbox,
+  CheckboxProps,
+  Radio,
+  RadioGroupProps,
+  Select as AntSelect,
+  SelectProps as AntSelectProps,
+} from 'antd'; // Corrected imports
 import React, { Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
@@ -47,7 +53,6 @@ function Select(props: SelectFieldProps) {
     props,
     props.checkboxes ? (
       <span {...filteredDOMProps}>
-          // @ts-ignore
         <Group
           {...filteredDOMProps}
           disabled={props.disabled}
@@ -56,7 +61,7 @@ function Select(props: SelectFieldProps) {
             if (!props.readOnly) {
               props.onChange(
                 // FIXME: Argument type depends on `props.fieldType`.
-                 
+
                 props.fieldType === Array
                   ? eventOrValue
                   : eventOrValue.target.value,
@@ -64,7 +69,6 @@ function Select(props: SelectFieldProps) {
             }
           }}
           // @ts-ignore
-
           options={props.options?.map(option => ({
             ...option,
             label: option.label ?? option.value,
@@ -78,15 +82,13 @@ function Select(props: SelectFieldProps) {
         disabled={props.disabled}
         mode={props.fieldType === Array ? 'multiple' : undefined}
         name={props.name}
-        // @ts-ignore
-
+        // @ts-expect-error
         onChange={(value: SelectFieldValue) => {
           if (!props.readOnly) {
             props.onChange(value);
           }
         }}
         placeholder={props.placeholder}
-        // @ts-ignore
         ref={props.inputRef}
         value={
           props.fieldType === Array
@@ -96,19 +98,14 @@ function Select(props: SelectFieldProps) {
             : props.value
         }
         {...filteredDOMProps}
-
         options={props.options?.map(option => ({
           disabled: option.disabled,
           key: option.key ?? option.value,
           label: option.label ?? option.value,
           value: option.value,
-          id: `${props.id}-${option.key ?? escape(option.value)}`
-
-          }))} // Corrected options prop
-
-      >
-
-      </Select>
+          id: `${props.id}-${option.key ?? escape(option.value)}`,
+        }))} // Corrected options prop
+      />
     ),
   );
 }

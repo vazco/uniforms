@@ -1,4 +1,4 @@
-import {DatePicker,  DatePickerProps } from 'antd';
+import { DatePicker, DatePickerProps } from 'antd';
 import moment, { Moment } from 'moment';
 import React, { Ref } from 'react';
 import { connectField, FieldProps, filterDOMProps } from 'uniforms';
@@ -38,7 +38,7 @@ function Date({
       style={style}
       // @ts-ignore
 
-      value={props.value && moment(props.value)}
+      value={props.value ? moment(props.value) : undefined}
       {...filterDOMProps(props)}
     />,
   );
