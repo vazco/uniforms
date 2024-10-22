@@ -1,4 +1,4 @@
-import Input, { InputProps, InputRef } from 'antd/lib/input';
+import {Input, InputProps, InputRef} from 'antd';
 import React, { Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 

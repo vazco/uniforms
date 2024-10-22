@@ -1,34 +1,41 @@
-import Input, { InputProps, InputRef } from 'antd/lib/input';
+import {Input,  InputProps, InputRef } from 'antd';
 import React, { Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
-export type TextFieldProps = FieldProps<
+const { TextArea } = Input;
+
+
+export type LongTextFieldProps = FieldProps<
   string,
-  Omit<InputProps, 'onReset'>,
+  // FIXME: Why `onReset` fails with `wrapField`?
+  Omit<InputRef, 'onReset'>,
   { inputRef?: Ref<InputRef> }
 >;
 
-function Text(props: TextFieldProps) {
+// @ts-ignore
+function LongText({ rows = 5, ...props }: LongTextFieldProps) {
   return wrapField(
     props,
-    <Input
+    <TextArea
       disabled={props.disabled}
       name={props.name}
-      onChange={event =>
+      onChange={(event: { target: { value: string | undefined; }; }) =>
         props.onChange(
           event.target.value === '' ? undefined : event.target.value,
         )
       }
+      // @ts-ignore
+
       placeholder={props.placeholder}
       readOnly={props.readOnly}
       ref={props.inputRef}
-      type={props.type ?? 'text'}
+      rows={rows}
       value={props.value ?? ''}
       {...filterDOMProps(props)}
     />,
   );
 }
 
-export default connectField<TextFieldProps>(Text, { kind: 'leaf' });
+export default connectField<LongTextFieldProps>(LongText, { kind: 'leaf' });

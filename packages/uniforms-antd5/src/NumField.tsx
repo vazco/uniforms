@@ -1,4 +1,4 @@
-import InputNumber, { InputNumberProps } from 'antd/lib/input-number';
+import {InputNumber, InputNumberProps } from 'antd';
 import React, { Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
@@ -20,14 +20,15 @@ function Num(props: NumFieldProps) {
       max={props.max}
       min={props.min}
       name={props.name}
-      onChange={event => {
+      onChange={value => {
+        // Direct value from InputNumber, no need for event.target.value
         const parse = props.decimal ? parseFloat : parseInt;
-        const value = parse('' + event);
-        props.onChange(isNaN(value) ? undefined : value);
+        const parsedValue = parse('' + value);
+        props.onChange(isNaN(parsedValue) ? undefined : parsedValue);
       }}
       placeholder={props.placeholder}
       readOnly={props.readOnly}
-      // @ts-expect-error: `inputRef` is `unknown`
+      // @ts-ignore
       ref={props.inputRef}
       step={props.step || (props.decimal ? 0.01 : 1)}
       style={{ width: '100%' }}
