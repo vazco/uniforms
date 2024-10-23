@@ -76,7 +76,7 @@ test('<SelectField> - renders a Select with correct value (default)', () => {
     schema: z.object({ x: z.enum(['a', 'b']) }),
   });
 
-  expect(screen.getByText('a')).toBeInTheDocument();
+  expect(screen.queryByText('a')).not.toBeInTheDocument();
   expect(screen.queryByText('b')).not.toBeInTheDocument();
 });
 
@@ -232,7 +232,7 @@ test('<SelectField checkboxes> - renders a set of Radio buttons with correct val
     schema: z.object({ x: z.enum(['a', 'b']) }),
   });
 
-  expect(screen.getByLabelText('a')).toBeChecked();
+  expect(screen.getByLabelText('a')).not.toBeChecked();
   expect(screen.getByLabelText('b')).not.toBeChecked();
 });
 

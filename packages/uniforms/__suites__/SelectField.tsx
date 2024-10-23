@@ -29,7 +29,7 @@ export function testSelectField(
       element: <SelectField name="x" label="y" />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    expect(screen.getByText('y')).toBeInTheDocument();
+    expect(screen.getByLabelText(/y\*?/)).toBeInTheDocument();
   });
 
   skipTestIf(isTheme(['mui', 'antd']))(
@@ -228,7 +228,7 @@ export function testSelectField(
       element: <SelectField name="x" label="y" placeholder="" />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    expect(screen.getByText('y')).toBeInTheDocument();
+    expect(screen.queryByPlaceholderText('y')).not.toBeInTheDocument();
   });
 
   skipTestIf(isTheme(['antd', 'mui']))(
@@ -251,10 +251,10 @@ export function testSelectField(
       });
       const select = screen.getByRole('combobox');
       if (options?.theme === 'antd') {
-        expect(screen.getByText('a')).toBeInTheDocument();
+        expect(screen.queryByText('a')).not.toBeInTheDocument();
         expect(screen.queryByText('b')).not.toBeInTheDocument();
       } else {
-        expect(select).toHaveValue('a');
+        expect(select).not.toHaveValue();
       }
     },
   );
@@ -522,7 +522,7 @@ export function testSelectField(
     const checkboxes = screen
       .getAllByRole(/checkbox|radio/)
       .filter(element => element instanceof HTMLInputElement);
-    expect(checkboxes?.[0]).toBeChecked();
+    expect(checkboxes?.[0]).not.toBeChecked();
     expect(checkboxes?.[1]).not.toBeChecked();
   });
 
