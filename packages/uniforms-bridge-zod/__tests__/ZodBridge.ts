@@ -278,7 +278,7 @@ describe('ZodBridge', () => {
     it('works with enum (array)', () => {
       const schema = object({ a: enum_(['x', 'y', 'z']) });
       const bridge = new ZodBridge({ schema });
-      expect(bridge.getInitialValue('a')).toEqual('x');
+      expect(bridge.getInitialValue('a')).toEqual(undefined);
     });
 
     it('works with enum (native, numbers)', () => {

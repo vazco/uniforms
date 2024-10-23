@@ -116,7 +116,7 @@ export function testRadioField(
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
 
-    expect(screen.getAllByRole('radio')[0]).toHaveAttribute('checked');
+    expect(screen.getAllByRole('radio')[0]).not.toHaveAttribute('checked');
     expect(screen.getAllByRole('radio')[1]).not.toHaveAttribute('checked');
   });
 
@@ -161,8 +161,9 @@ export function testRadioField(
       onChange,
     });
     await userEvent.click(screen.getByRole('radio', { name: 'a' }));
+    await userEvent.click(screen.getByRole('radio', { name: 'a' }));
 
-    expect(onChange).not.toHaveBeenCalled();
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 
   test('<RadioField> - renders a label', () => {
