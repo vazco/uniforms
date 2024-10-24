@@ -22,9 +22,15 @@ const config: DocsThemeConfig = {
       />
     ),
   },
+  color: {
+    hue: {
+      dark: 100,
+      light: 100,
+    },
+  },
   docsRepositoryBase: 'https://github.com/vazco/uniforms',
   footer: {
-    text: (
+    content: (
       <p>
         Copyright © 2016 - 2024 Vazco.
         <br />
