@@ -1,0 +1,94 @@
+---
+id: installation
+title: Installation
+---
+
+Core package first.
+
+```shell copy
+npm install uniforms
+```
+
+Now the schema package.
+
+import { Tabs, Code, Pre } from 'nextra/components';
+
+export const bridges = [
+  'GraphQL',
+  'JSON-Schema',
+  'Simple-Schema',
+  'Simple-Schema-2',
+  'Zod',
+];
+
+export const themes = [
+  'Semantic',
+  'MUI',
+  'Bootstrap4',
+  'Bootstrap5',
+  'AntD',
+  'Unstyled',
+];
+
+<Tabs items={bridges}>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-bridge-graphql
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-bridge-json-schema
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-bridge-simple-schema
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-bridge-simple-schema-2
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-bridge-zod
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+<Tabs items={themes}>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-semantic
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-mui
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-bootstrap4
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-bootstrap5
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-antd
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```shell copy
+    npm install uniforms-unstyled
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+**Note:** If you are going to use a themed package - remember to include correct styles!
