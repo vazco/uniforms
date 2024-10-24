@@ -41,10 +41,5 @@
   "workspaces": [
     "packages/*",
     "apps/*"
-  ],
-  "overrides": {
-    "next-themes": {
-      "react": "18.3.1"
-    }
-  }
+  ]
 }
