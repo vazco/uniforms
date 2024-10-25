@@ -145,9 +145,12 @@ importers:
       '@types/simpl-schema':
         specifier: 1.12.8
         version: 1.12.8(@aws-sdk/client-sso-oidc@3.679.0(@aws-sdk/client-sts@3.679.0))
-      moment:
-        specifier: 2.30.1
-        version: 2.30.1
+      dayjs:
+        specifier: ^1.11.13
+        version: 1.11.13
+      rc-input-number:
+        specifier: ^9.2.0
+        version: 9.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       simpl-schema:
         specifier: 1.13.1
         version: 1.13.1
@@ -8657,7 +8660,8 @@ snapshots:
 
   minimist@1.2.8: {}
 
-  moment@2.30.1: {}
+  moment@2.30.1:
+    optional: true
 
   mongo-object@0.1.4: {}
 
