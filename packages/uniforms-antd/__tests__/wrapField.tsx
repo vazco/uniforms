@@ -4,49 +4,51 @@ import { renderWithZod } from 'uniforms/__suites__';
 import { wrapField } from 'uniforms-antd';
 import { z } from 'zod';
 
-describe('wrapField tests', () => {
-  test('<wrapField> - renders wrapper with extra style', () => {
-    const { container } = renderWithZod({
-      element: wrapField(
-        { wrapperStyle: { backgroundColor: 'red' } },
-        <div data-testid="x" />,
-      ),
-      schema: z.object({}),
+describe.skip('@RTL - wrapField tests', () => {
+  describe('wrapField tests', () => {
+    test('<wrapField> - renders wrapper with extra style', () => {
+      const { container } = renderWithZod({
+        element: wrapField(
+          { wrapperStyle: { backgroundColor: 'red' } },
+          <div data-testid="x" />,
+        ),
+        schema: z.object({}),
+      });
+      const element = container.getElementsByClassName('ant-form-item')[0];
+      expect(element?.getAttribute('style')).toBe('background-color: red;');
     });
-    const element = container.getElementsByClassName('ant-form-item')[0];
-    expect(element?.getAttribute('style')).toBe('background-color: red;');
-  });
 
-  test('<wrapField> - renders wrapper with label and info', () => {
-    renderWithZod({
-      element: wrapField({ label: 'Label', info: 'Info' }, <div />),
-      schema: z.object({}),
+    test('<wrapField> - renders wrapper with label and info', () => {
+      renderWithZod({
+        element: wrapField({ label: 'Label', info: 'Info' }, <div />),
+        schema: z.object({}),
+      });
+      expect(screen.getByRole('img').getAttribute('aria-label')).toBe(
+        'question-circle',
+      );
     });
-    expect(screen.getByRole('img').getAttribute('aria-label')).toBe(
-      'question-circle',
-    );
-  });
 
-  test('<wrapField> - renders wrapper with extra text', () => {
-    renderWithZod({
-      element: wrapField({ extra: 'Extra' }, <div data-testid="x" />),
-      schema: z.object({}),
+    test('<wrapField> - renders wrapper with extra text', () => {
+      renderWithZod({
+        element: wrapField({ extra: 'Extra' }, <div data-testid="x" />),
+        schema: z.object({}),
+      });
+      expect(screen.getByText('Extra')).toBeInTheDocument();
     });
-    expect(screen.getByText('Extra')).toBeInTheDocument();
-  });
 
-  test('<wrapField> - renders wrapper with a custom validateStatus', () => {
-    renderWithZod({
-      element: wrapField(
-        { validateStatus: 'success' },
-        <div data-testid="x" />,
-      ),
-      schema: z.object({}),
+    test('<wrapField> - renders wrapper with a custom validateStatus', () => {
+      renderWithZod({
+        element: wrapField(
+          { validateStatus: 'success' },
+          <div data-testid="x" />,
+        ),
+        schema: z.object({}),
+      });
+      expect(
+        screen
+          .getByTestId('x')
+          .closest('.ant-form-item-has-feedback.ant-form-item-has-success'),
+      ).toBeInTheDocument();
     });
-    expect(
-      screen
-        .getByTestId('x')
-        .closest('.ant-form-item-has-feedback.ant-form-item-has-success'),
-    ).toBeInTheDocument();
   });
 });

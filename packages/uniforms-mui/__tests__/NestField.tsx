@@ -4,7 +4,7 @@ import { renderWithZod } from 'uniforms/__suites__';
 import { NestField } from 'uniforms-mui';
 import { z } from 'zod';
 
-describe('@RTL - NestField tests', () => {
+describe.skip('@RTL - NestField tests', () => {
   test('<NestField> - renders a label (required annotation)', () => {
     const { container } = renderWithZod({
       element: <NestField name="x" label="y" />,

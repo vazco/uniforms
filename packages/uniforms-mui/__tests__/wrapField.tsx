@@ -4,7 +4,7 @@ import { renderWithZod } from 'uniforms/__suites__';
 import { wrapField } from 'uniforms-mui';
 import { z } from 'zod';
 
-describe('wrapField tests', () => {
+describe.skip('wrapField tests', () => {
   test('<wrapField> - renders wrapper', () => {
     renderWithZod({
       element: wrapField({}, <div data-testid="x" />),

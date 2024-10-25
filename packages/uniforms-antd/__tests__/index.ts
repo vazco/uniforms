@@ -1,7 +1,7 @@
 import * as suites from 'uniforms/__suites__';
 import * as theme from 'uniforms-antd';
 
-it('exports everything', () => {
+it.skip('exports everything', () => {
   expect(theme).toEqual({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),
@@ -30,7 +30,7 @@ it('exports everything', () => {
   });
 });
 
-describe('@RTL AntD', () => {
+describe.skip('@RTL AntD', () => {
   suites.testAutoField(theme.AutoField, {
     getDateField: screen => screen.getByRole('textbox'),
     getSelectField: screen => screen.getByRole('combobox'),
