@@ -1,10 +1,10 @@
 import classnames from 'classnames';
 import React, { HTMLProps, Ref } from 'react';
 import { filterDOMProps, Override, useForm } from 'uniforms';
-import { GridSize } from 'uniforms-bootstrap4/src/gridClassName';
 
 import gridClassName from './gridClassName';
 
+export type GridSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type SubmitFieldProps = Override<
   HTMLProps<HTMLInputElement>,
   {
