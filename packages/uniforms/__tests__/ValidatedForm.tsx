@@ -1,4 +1,4 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import React, { act, ReactNode } from 'react';
 import SimpleSchema from 'simpl-schema';
 import {
@@ -612,9 +612,8 @@ describe('ValidatedForm', () => {
     });
   });
 
-  // FIXME:
   describe('in any mode', () => {
-    it('reuses the validator between validations', () => {
+    it('reuses the validator between validations', async () => {
       render(
         // FIXME: ValidatedForm is not a valid Component.
         <ValidatedForm
@@ -634,7 +633,7 @@ describe('ValidatedForm', () => {
         fireEvent.submit(form);
       });
 
-      expect(validatorForSchema).toHaveBeenCalledTimes(1);
+      await waitFor(() => expect(validatorForSchema).toHaveBeenCalledTimes(1));
     });
 
     it('uses the new validator settings if `validator` changes', () => {
