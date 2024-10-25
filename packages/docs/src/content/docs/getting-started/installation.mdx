@@ -1,0 +1,94 @@
+---
+id: installation
+title: Installation
+---
+
+Core package first.
+
+```shell copy
+npm install uniforms
+```
+
+Now the schema package.
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+export const bridges = [
+  'GraphQL',
+  'JSON-Schema',
+  'Simple-Schema',
+  'Simple-Schema-2',
+  'Zod',
+];
+
+export const themes = [
+  'Semantic',
+  'MUI',
+  'Bootstrap4',
+  'Bootstrap5',
+  'AntD',
+  'Unstyled',
+];
+
+<Tabs items={bridges}>
+  <TabItem label="GraphQL">
+    ```shell copy
+    npm install uniforms-bridge-graphql
+    ```
+  </TabItem>
+  <TabItem label="JSON-Schema">
+    ```shell copy
+    npm install uniforms-bridge-json-schema
+    ```
+  </TabItem>
+  <TabItem label="Simple-Schema (v2)">
+    ```shell copy
+    npm install uniforms-bridge-simple-schema
+    ```
+  </TabItem>
+  <TabItem label="Simple-Schema-2 (v2)">
+    ```shell copy
+    npm install uniforms-bridge-simple-schema-2
+    ```
+  </TabItem>
+  <TabItem label="Zod">
+    ```shell copy
+    npm install uniforms-bridge-zod
+    ```
+  </TabItem>
+</Tabs>
+
+<Tabs items={themes}>
+  <TabItem label="Semantic">
+    ```shell copy
+    npm install uniforms-semantic
+    ```
+  </TabItem>
+  <TabItem label="MUI">
+    ```shell copy
+    npm install uniforms-mui
+    ```
+  </TabItem>
+  <TabItem label="Bootstrap4">
+    ```shell copy
+    npm install uniforms-bootstrap4
+    ```
+  </TabItem>
+  <TabItem label="Bootstrap5">
+    ```shell copy
+    npm install uniforms-bootstrap5
+    ```
+  </TabItem>
+  <TabItem label="AntD">
+    ```shell copy
+    npm install uniforms-antd
+    ```
+  </TabItem>
+  <TabItem label="Unstyled">
+    ```shell copy
+    npm install uniforms-unstyled
+    ```
+  </TabItem>
+</Tabs>
+
+**Note:** If you are going to use a themed package - remember to include correct styles!

@@ -1,0 +1,32 @@
+{
+  "name": "docs",
+  "type": "module",
+  "version": "4.0.0-alpha.6",
+  "description": "Docs package of uniforms.",
+  "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms",
+  "bugs": "https://github.com/vazco/uniforms/issues",
+  "funding": "https://github.com/vazco/uniforms?sponsor=1",
+  "keywords": [
+    "form",
+    "forms",
+    "meteor",
+    "react",
+    "react-component",
+    "schema",
+    "validation"
+  ],
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "~0.28.3",
+    "astro": "4.15.3",
+    "sharp": "0.32.5",
+    "@astrojs/check": "0.9.4",
+    "typescript": "5.6.3"
+  }
+}
