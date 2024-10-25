@@ -43,6 +43,7 @@
   "devDependencies": {
     "@types/invariant": "2.2.37",
     "@types/lodash": "4.17.5",
+    "@types/react": "18.3.12",
     "@types/simpl-schema": "1.12.7",
     "tslib": "2.2.0",
     "typescript": "5.5.4"

@@ -1,4 +1,4 @@
-import { ComponentType } from 'react';
+import type { ComponentType } from 'react';
 import { GuaranteedProps, UnknownObject } from 'uniforms';
 
 declare module 'simpl-schema' {

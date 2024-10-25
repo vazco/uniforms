@@ -130,12 +130,24 @@ importers:
       '@types/react':
         specifier: 17.0.39
         version: 17.0.39
+      '@types/simpl-schema':
+        specifier: 1.12.8
+        version: 1.12.8(@aws-sdk/client-sso-oidc@3.679.0(@aws-sdk/client-sts@3.679.0))
+      moment:
+        specifier: 2.30.1
+        version: 2.30.1
+      simpl-schema:
+        specifier: 1.13.1
+        version: 1.13.1
       tslib:
         specifier: 2.2.0
         version: 2.2.0
       typescript:
         specifier: 5.5.4
         version: 5.5.4
+      zod:
+        specifier: 3.23.8
+        version: 3.23.8
 
   packages/uniforms-bootstrap4:
     dependencies:
@@ -257,6 +269,9 @@ importers:
       '@types/lodash':
         specifier: 4.17.5
         version: 4.17.5
+      '@types/react':
+        specifier: 18.3.12
+        version: 18.3.12
       '@types/simpl-schema':
         specifier: 1.12.7
         version: 1.12.7(@aws-sdk/client-sso-oidc@3.679.0(@aws-sdk/client-sts@3.679.0))
@@ -1384,6 +1399,9 @@ packages:
 
   '@types/simpl-schema@1.12.7':
     resolution: {integrity: sha512-GhXOCJqKcDeawYoIe4Jly7C5ePR3Uh3jaswb1U+Ruh1x7EtZqOJMMyxnoVvJUIl5b+v7yoFs4RVny/ZowyXBDw==}
+
+  '@types/simpl-schema@1.12.8':
+    resolution: {integrity: sha512-byUOKnUZrDcgKcg62hQZZwqyOW6j08wXyjCBxIw44CeUen/z4fG+/LItT8Va0geO/IkPMquG5NoPE/8l0k5apw==}
 
   '@types/sizzle@2.3.9':
     resolution: {integrity: sha512-xzLEyKB50yqCUPUJkIsrVvoWNfFUbIZI+RspLWt8u+tIW/BetMBZtgV2LY/2o+tYH8dRvQ+eoPf3NdhQCcLE2w==}
@@ -6173,6 +6191,13 @@ snapshots:
   '@types/semver@7.5.8': {}
 
   '@types/simpl-schema@1.12.7(@aws-sdk/client-sso-oidc@3.679.0(@aws-sdk/client-sts@3.679.0))':
+    dependencies:
+      '@types/meteor': 2.9.8(@aws-sdk/client-sso-oidc@3.679.0(@aws-sdk/client-sts@3.679.0))
+    transitivePeerDependencies:
+      - '@aws-sdk/client-sso-oidc'
+      - aws-crt
+
+  '@types/simpl-schema@1.12.8(@aws-sdk/client-sso-oidc@3.679.0(@aws-sdk/client-sts@3.679.0))':
     dependencies:
       '@types/meteor': 2.9.8(@aws-sdk/client-sso-oidc@3.679.0(@aws-sdk/client-sts@3.679.0))
     transitivePeerDependencies:
