@@ -594,7 +594,6 @@ describe('ValidatedForm', () => {
         const form = screen.getByRole('form');
         const input = screen.getByLabelText('A');
         fireEvent.change(input, { target: { value } });
-        // TODO: Why it cannot be awaited with setTimeout? next two tests will fail
         fireEvent.submit(form);
       });
 
