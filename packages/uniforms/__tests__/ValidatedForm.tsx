@@ -730,8 +730,6 @@ describe('ValidatedForm', () => {
       );
 
       const asyncSubmission = onSubmitMode.includes('async');
-      const asyncValidation =
-        validatorMode.includes('async') || onValidateMode.includes('async');
       const hasValidationError =
         hasError ||
         (validatorMode.includes('good')
@@ -746,30 +744,22 @@ describe('ValidatedForm', () => {
         onSubmit.mockImplementationOnce(variantGroups[2][onSubmitMode]);
 
         const form = screen.getByRole('form');
+
+        // Wait until all actions are done
         await act(async () => {
           fireEvent.submit(form);
-          // Two setTimeouts are needed to make sure that call stack and task queue are empty.
-          // They are required because of async behaviour of `submit` event.
+          // Two setTimeouts are needed to make sure that call stack and task queue are empty
+          // They are required because of async behaviour of `submit` event
           await new Promise(resolve => setTimeout(resolve));
           await new Promise(resolve => setTimeout(resolve));
         });
+
         expect(validator).toHaveBeenCalledTimes(run);
-
-        if (asyncValidation) {
-          // STATUS: Done
-          // expect(contextSpy).toHaveBeenLastCalledWith(
-          //   expect.objectContaining({ validating: true }),
-          // );
-          // await new Promise(resolve => setTimeout(resolve));
-          expect(contextSpy).toHaveBeenLastCalledWith(
-            expect.objectContaining({ validating: false }),
-          );
-        }
-
-        // STATUS: Done
-        // await new Promise(resolve => process.nextTick(resolve));
-
         expect(onValidate).toHaveBeenCalledTimes(run);
+
+        expect(contextSpy).toHaveBeenLastCalledWith(
+          expect.objectContaining({ validating: false }),
+        );
 
         if (hasValidationError) {
           expect(onSubmit).not.toHaveBeenCalled();
@@ -778,30 +768,13 @@ describe('ValidatedForm', () => {
           );
         } else {
           expect(onSubmit).toHaveBeenCalledTimes(run);
-          // STATUS: Done
-          if (!onSubmitMode.includes('fail')) {
-            expect(contextSpy).toHaveBeenLastCalledWith(
-              expect.objectContaining({ error: null }),
-            );
-          }
 
           if (asyncSubmission) {
-            // STATUS: Done
-            // expect(contextSpy).toHaveBeenLastCalledWith(
-            //   expect.objectContaining({ submitting: true }),
-            // );
-            // await new Promise(resolve => setTimeout(resolve));
-            // expect(contextSpy).toHaveBeenLastCalledWith(
-            //   expect.objectContaining({ submitting: true }),
-            // );
             expect(contextSpy).toHaveBeenLastCalledWith(
               expect.objectContaining({ submitted: true }),
             );
           }
         }
-
-        // STATUS: Done
-        // await new Promise(resolve => setTimeout(resolve));
 
         if (hasSubmissionError) {
           expect(contextSpy).toHaveBeenLastCalledWith(
@@ -809,7 +782,7 @@ describe('ValidatedForm', () => {
           );
         } else {
           expect(contextSpy).toHaveBeenLastCalledWith(
-            expect.objectContaining({ error: null }),
+            expect.objectContaining({ error: null, submitted: true }),
           );
         }
       }
