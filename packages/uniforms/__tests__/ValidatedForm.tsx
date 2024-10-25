@@ -51,11 +51,8 @@ describe('ValidatedForm', () => {
         />,
       );
       const form = screen.getByRole('form');
-      await act(async () => {
-        fireEvent.submit(form);
-        await new Promise(resolve => setTimeout(resolve));
-      });
-      expect(validator).toHaveBeenCalledTimes(1);
+      fireEvent.submit(form);
+      await waitFor(() => expect(validator).toHaveBeenCalledTimes(1));
     });
 
     it('correctly calls `validator`', async () => {
@@ -71,11 +68,8 @@ describe('ValidatedForm', () => {
         />,
       );
       const form = screen.getByRole('form');
-      await act(async () => {
-        fireEvent.submit(form);
-        await new Promise(resolve => setTimeout(resolve));
-      });
-      expect(validator).toHaveBeenCalledTimes(1);
+      fireEvent.submit(form);
+      await waitFor(() => expect(validator).toHaveBeenCalledTimes(1));
       expect(validator).toHaveBeenLastCalledWith(model);
     });
     it('updates error state with errors from `validator`', async () => {
@@ -96,12 +90,11 @@ describe('ValidatedForm', () => {
         throw error;
       });
 
-      await act(async () => {
-        fireEvent.submit(form);
-        await new Promise(resolve => process.nextTick(resolve));
-      });
+      fireEvent.submit(form);
 
-      expect(onValidate).toHaveBeenLastCalledWith(model, error);
+      await waitFor(() =>
+        expect(onValidate).toHaveBeenLastCalledWith(model, error),
+      );
     });
 
     it('correctly calls `onValidate` when validation succeeds', async () => {
@@ -117,11 +110,8 @@ describe('ValidatedForm', () => {
       );
       const form = screen.getByRole('form');
 
-      await act(async () => {
-        fireEvent.submit(form);
-        await new Promise(resolve => setTimeout(resolve));
-      });
-      expect(onValidate).toHaveBeenCalledTimes(1);
+      fireEvent.submit(form);
+      await waitFor(() => expect(onValidate).toHaveBeenCalledTimes(1));
       expect(onValidate).toHaveBeenLastCalledWith(model, null);
     });
 
@@ -143,12 +133,8 @@ describe('ValidatedForm', () => {
         throw error;
       });
 
-      await act(async () => {
-        fireEvent.submit(form);
-        await new Promise(resolve => setTimeout(resolve));
-      });
-
-      expect(onValidate).toHaveBeenCalledTimes(1);
+      fireEvent.submit(form);
+      await waitFor(() => expect(onValidate).toHaveBeenCalledTimes(1));
       expect(onValidate).toHaveBeenLastCalledWith(model, error);
     });
 
@@ -169,12 +155,11 @@ describe('ValidatedForm', () => {
 
       onValidate.mockImplementationOnce(() => error);
 
-      await act(async () => {
-        fireEvent.submit(form);
-        await new Promise(resolve => setTimeout(resolve));
-      });
-      expect(contextSpy).toHaveBeenLastCalledWith(
-        expect.objectContaining({ error }),
+      fireEvent.submit(form);
+      await waitFor(() =>
+        expect(contextSpy).toHaveBeenLastCalledWith(
+          expect.objectContaining({ error }),
+        ),
       );
     });
     it('leaves error state alone when `onValidate` suppress `validator` errors', async () => {
@@ -196,12 +181,9 @@ describe('ValidatedForm', () => {
         throw error;
       });
       onValidate.mockImplementationOnce(() => null);
-      await act(async () => {
-        fireEvent.submit(form);
-        await new Promise(resolve => setTimeout(resolve));
-      });
+      fireEvent.submit(form);
 
-      expect(validator).toHaveBeenCalled();
+      await waitFor(() => expect(validator).toHaveBeenCalled());
       expect(onValidate).toHaveBeenCalled();
       expect(contextSpy).toHaveBeenLastCalledWith(
         expect.objectContaining({ error: null }),
@@ -241,11 +223,10 @@ describe('ValidatedForm', () => {
         />,
       );
       const form = screen.getByRole('form');
-      await act(async () => {
-        fireEvent.submit(form);
-        await new Promise(resolve => setTimeout(resolve));
-      });
-      expect(validator).toHaveBeenLastCalledWith(transformedModel);
+      fireEvent.submit(form);
+      await waitFor(() =>
+        expect(validator).toHaveBeenLastCalledWith(transformedModel),
+      );
       expect(onValidate).toHaveBeenLastCalledWith(transformedModel, null);
     });
   });
@@ -265,12 +246,9 @@ describe('ValidatedForm', () => {
       );
 
       const form = screen.getByRole('form');
-      await act(async () => {
-        fireEvent.submit(form);
-        await new Promise(resolve => process.nextTick(resolve));
-      });
+      fireEvent.submit(form);
 
-      expect(onSubmit).toHaveBeenCalledTimes(1);
+      await waitFor(() => expect(onSubmit).toHaveBeenCalledTimes(1));
     });
 
     it('skips `onSubmit` when validation fails', async () => {
@@ -291,12 +269,9 @@ describe('ValidatedForm', () => {
       });
 
       const form = screen.getByRole('form');
-      await act(async () => {
-        fireEvent.submit(form);
-        await new Promise(resolve => process.nextTick(resolve));
-      });
+      fireEvent.submit(form);
 
-      expect(onSubmit).not.toBeCalled();
+      await waitFor(() => expect(onSubmit).not.toBeCalled());
     });
 
     it('sets submitted to true, when form is submitted and validation succeeds', async () => {
@@ -319,13 +294,12 @@ describe('ValidatedForm', () => {
         expect.objectContaining({ submitted: false }),
       );
 
-      await act(async () => {
-        fireEvent.submit(form);
-        await new Promise(resolve => setTimeout(resolve));
-      });
+      fireEvent.submit(form);
 
-      expect(contextSpy).toHaveBeenLastCalledWith(
-        expect.objectContaining({ submitted: true }),
+      await waitFor(() =>
+        expect(contextSpy).toHaveBeenLastCalledWith(
+          expect.objectContaining({ submitted: true }),
+        ),
       );
     });
 
@@ -354,13 +328,12 @@ describe('ValidatedForm', () => {
         expect.objectContaining({ submitted: false }),
       );
 
-      await act(async () => {
-        fireEvent.submit(form);
-        await new Promise(resolve => setTimeout(resolve));
-      });
+      fireEvent.submit(form);
 
-      expect(contextSpy).toHaveBeenLastCalledWith(
-        expect.objectContaining({ submitted: true }),
+      await waitFor(() =>
+        expect(contextSpy).toHaveBeenLastCalledWith(
+          expect.objectContaining({ submitted: true }),
+        ),
       );
     });
 
@@ -382,12 +355,9 @@ describe('ValidatedForm', () => {
       onSubmit.mockImplementationOnce(() => Promise.reject(error));
       const form = screen.getByRole('form');
 
-      await act(async () => {
-        fireEvent.submit(form);
-        await new Promise(resolve => setTimeout(resolve));
-      });
+      fireEvent.submit(form);
 
-      expect(onSubmit).toHaveBeenCalled();
+      await waitFor(() => expect(onSubmit).toHaveBeenCalled());
       expect(contextSpy).toHaveBeenLastCalledWith(
         expect.objectContaining({ error }),
       );
@@ -482,16 +452,13 @@ describe('ValidatedForm', () => {
         );
 
         const form = screen.getByRole('form');
-        await act(async () => {
-          fireEvent.submit(form);
-          await new Promise(resolve => process.nextTick(resolve));
-        });
+        fireEvent.submit(form);
 
         validator.mockClear();
         const input = screen.getByLabelText('A');
         fireEvent.change(input, { target: { value: 'test' } });
 
-        expect(validator).toHaveBeenCalledTimes(1);
+        await waitFor(() => expect(validator).toHaveBeenCalledTimes(1));
       });
     });
   });
@@ -528,21 +495,19 @@ describe('ValidatedForm', () => {
       const form = screen.getByRole('form');
       const resetButton = screen.getByText('Reset');
 
-      await act(async () => {
-        fireEvent.submit(form);
-        await new Promise(resolve => process.nextTick(resolve));
-      });
+      fireEvent.submit(form);
 
-      expect(contextSpy).toHaveBeenLastCalledWith(
-        expect.objectContaining({ error }),
+      await waitFor(() =>
+        expect(contextSpy).toHaveBeenLastCalledWith(
+          expect.objectContaining({ error }),
+        ),
       );
 
-      await act(async () => {
-        fireEvent.click(resetButton);
-        await new Promise(resolve => process.nextTick(resolve));
-      });
-      expect(contextSpy).toHaveBeenLastCalledWith(
-        expect.objectContaining({ error: null }),
+      fireEvent.click(resetButton);
+      await waitFor(() =>
+        expect(contextSpy).toHaveBeenLastCalledWith(
+          expect.objectContaining({ error: null }),
+        ),
       );
     });
   });
@@ -682,13 +647,12 @@ describe('ValidatedForm', () => {
       });
       const form = screen.getByRole('form');
 
-      await act(async () => {
-        fireEvent.submit(form);
-        await new Promise(resolve => setTimeout(resolve));
-      });
+      fireEvent.submit(form);
 
+      await waitFor(() =>
+        expect(alternativeValidator).toHaveBeenCalledTimes(1),
+      );
       expect(validator).not.toBeCalled();
-      expect(alternativeValidator).toHaveBeenCalledTimes(1);
     });
   });
 
