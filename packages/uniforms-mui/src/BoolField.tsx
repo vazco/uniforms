@@ -32,6 +32,7 @@ function Bool(props: BoolFieldProps) {
     onChange,
     readOnly,
     value,
+    size,
   } = props;
   const SelectionControl =
     appearance === 'checkbox' || appearance === undefined ? Checkbox : Switch;
@@ -57,10 +58,11 @@ function Bool(props: BoolFieldProps) {
             }
             ref={inputRef as Ref<HTMLButtonElement>}
             value={name}
+            // @ts-expect-error size is depending on appearance
+            size={size}
             {...omit(filterDOMProps(props), ['helperText', 'fullWidth'])}
           />
         }
-        // @ts-expect-error React.Node vs React.Element TODO
         label={label}
       />
     </FormGroup>,

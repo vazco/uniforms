@@ -68,6 +68,7 @@ function Select(props: SelectFieldProps) {
       name,
       onChange,
       readOnly,
+      size,
     } = props;
 
     const appearance = props.appearance ?? 'checkbox';
@@ -77,6 +78,7 @@ function Select(props: SelectFieldProps) {
       'disableItem' as never,
       'id',
       'inputRef',
+      'size',
     ]);
 
     const children =
@@ -95,6 +97,8 @@ function Select(props: SelectFieldProps) {
               control={
                 <Radio
                   id={`${id}-${option.key ?? escape(option.value)}`}
+                  // @ts-expect-error size is depending on appearance
+                  size={size}
                   {...filteredProps}
                 />
               }
@@ -119,6 +123,8 @@ function Select(props: SelectFieldProps) {
                   }
                   ref={inputRef}
                   value={name}
+                  // @ts-expect-error size is depending on appearance
+                  size={size}
                   {...filteredProps}
                 />
               }

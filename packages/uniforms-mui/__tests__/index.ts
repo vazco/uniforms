@@ -1,7 +1,7 @@
 import * as suites from 'uniforms/__suites__';
 import * as theme from 'uniforms-mui';
 
-it.skip('exports everything', () => {
+it('exports everything', () => {
   expect(theme).toEqual({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),
@@ -30,10 +30,10 @@ it.skip('exports everything', () => {
   });
 });
 
-describe.skip('@RTL MUI', () => {
+describe('@RTL MUI', () => {
   suites.testAutoField(theme.AutoField, {
     getDateField: screen => screen.getByLabelText('X *'),
-    getSelectField: screen => screen.getByRole('button'),
+    getSelectField: screen => screen.getByLabelText('X *'),
   });
   suites.testAutoForm(theme.AutoForm);
   suites.testBaseForm(theme.BaseForm);
