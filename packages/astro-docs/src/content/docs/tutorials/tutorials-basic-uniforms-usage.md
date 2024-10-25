@@ -3,14 +3,14 @@ id: tutorials-basic-uniforms-usage
 title: Basic uniforms usage
 ---
 
-import { Callout } from 'nextra/components'
+import { Card } from '@astrojs/starlight/components';
 
 
-<Callout type="info" emoji="💡">
+<Card title="info" icon="💡">
 
 You can also follow the tutorial and explore uniforms in our [sample CodeSandbox repository](https://codesandbox.io/s/github/vazco/uniforms/tree/master/reproductions).
 
-</Callout>
+</Card>
 
 Imagine that we host an IT conference and want to make a list of guests.
 Obviously, we want to collect their first name and last name.

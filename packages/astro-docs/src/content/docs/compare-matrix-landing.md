@@ -1,3 +1,7 @@
+---
+title: Compare matrix
+description: This is a page in my Starlight-powered site
+---
 | Feature                                                                        |                    [uniforms](https://github.com/vazco/uniforms)                    |                   [Formik](https://github.com/jaredpalmer/formik)                   |                 [redux-form](https://github.com/erikras/redux-form)                 |         [React Final Form](https://github.com/final-form/react-final-form)          | [react-hook-form](https://github.com/react-hook-form/react-hook-form)               |
 | :----------------------------------------------------------------------------- | :---------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------: | ----------------------------------------------------------------------------------- |
 | Automatic form layout                                                          |  ✅  | ❌ | ❌ | ❌ | ❌ |

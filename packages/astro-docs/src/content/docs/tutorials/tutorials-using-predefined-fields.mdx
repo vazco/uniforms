@@ -3,7 +3,7 @@ id: 'tutorials-using-predefined-fields'
 title: 'Using predefined fields'
 ---
 
-import { Callout } from 'nextra/components'
+import { Card } from '@astrojs/starlight/components';
 
 Now that we know how to ask our guests for their name, let's ask them a few more things!
 We can expect a lot of different people coming to our IT conference - they could be developers, testers, product owners, project managers, businessmen and so on.
@@ -252,7 +252,7 @@ const schema: JSONSchemaType<FormData> = {
 What's changed is that now we've included the available `options` inside the `profession` property definition -
 uniforms are smart enough to deduce result field type, thanks to the [`AutoField` algorithm](/docs/uth-autofield-algorithm).
 
-<Callout type="warning" emoji="⚠️">
+<Card title="warning" icon="⚠️">
 
 Remember to register the `uniforms` and `options` keyword (see [Unknown keywords](https://ajv.js.org/strict-mode.html#unknown-keywords) for more details).
 
@@ -261,7 +261,7 @@ Remember to register the `uniforms` and `options` keyword (see [Unknown keywords
 ajv.addVocabulary(['options', 'uniforms']);
 ```
 
-</Callout>
+</Card>
 
 When it comes to the `additionalInfo`, there is a slightly different approach applied - we can explicitly tell the `AutoForm` what field should be rendered.
 Just don't forget to import the desired one!
