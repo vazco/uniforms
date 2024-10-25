@@ -1,5 +1,5 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import React, { act, useContext } from 'react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import React, { useContext } from 'react';
 import { BaseForm, context } from 'uniforms';
 import { ZodBridge } from 'uniforms-bridge-zod';
 import { AutoField } from 'uniforms-unstyled';
@@ -59,12 +59,9 @@ describe('BaseForm', () => {
       );
 
       const input = screen.getByLabelText('A');
-      await act(async () => {
-        fireEvent.change(input, { target: { value: 'test' } });
-        await new Promise(resolve => setTimeout(resolve));
-      });
+      fireEvent.change(input, { target: { value: 'test' } });
 
-      expect(onSubmit).toHaveBeenCalledTimes(1);
+      await waitFor(() => expect(onSubmit).toHaveBeenCalledTimes(1));
       expect(onSubmit).toHaveBeenLastCalledWith(model);
     });
 
@@ -82,14 +79,11 @@ describe('BaseForm', () => {
       );
 
       const input = screen.getByLabelText('A');
-      await act(async () => {
-        fireEvent.change(input, { target: { value: 'test 1' } });
-        fireEvent.change(input, { target: { value: 'test 2' } });
-        fireEvent.change(input, { target: { value: 'test 3' } });
-        await new Promise(resolve => setTimeout(resolve, 25));
-      });
+      fireEvent.change(input, { target: { value: 'test 1' } });
+      fireEvent.change(input, { target: { value: 'test 2' } });
+      fireEvent.change(input, { target: { value: 'test 3' } });
 
-      expect(onSubmit).toHaveBeenCalledTimes(1);
+      await waitFor(() => expect(onSubmit).toHaveBeenCalledTimes(1));
       expect(onSubmit).toHaveBeenLastCalledWith(model);
     });
 
@@ -108,21 +102,17 @@ describe('BaseForm', () => {
 
       const input = screen.getByLabelText('A');
 
-      await act(async () => {
-        fireEvent.change(input, { target: { value: 'test 1' } });
-        fireEvent.change(input, { target: { value: 'test 2' } });
-        fireEvent.change(input, { target: { value: 'test 3' } });
-        await new Promise(resolve => setTimeout(resolve, 25));
-      });
+      fireEvent.change(input, { target: { value: 'test 1' } });
+      fireEvent.change(input, { target: { value: 'test 2' } });
+      fireEvent.change(input, { target: { value: 'test 3' } });
 
-      await act(async () => {
-        fireEvent.change(input, { target: { value: 'test 1' } });
-        fireEvent.change(input, { target: { value: 'test 2' } });
-        fireEvent.change(input, { target: { value: 'test 3' } });
-        await new Promise(resolve => setTimeout(resolve, 25));
-      });
+      await waitFor(() => expect(onSubmit).toHaveBeenCalledTimes(1));
 
-      expect(onSubmit).toHaveBeenCalledTimes(2);
+      fireEvent.change(input, { target: { value: 'test 1' } });
+      fireEvent.change(input, { target: { value: 'test 2' } });
+      fireEvent.change(input, { target: { value: 'test 3' } });
+
+      await waitFor(() => expect(onSubmit).toHaveBeenCalledTimes(2));
       expect(onSubmit).toHaveBeenLastCalledWith(model);
     });
 
@@ -140,12 +130,11 @@ describe('BaseForm', () => {
       );
 
       const input = screen.getByLabelText('A');
-      await act(async () => {
-        fireEvent.change(input, { target: { value: 'test 1' } });
-        await new Promise(resolve => setTimeout(resolve));
-      });
 
+      fireEvent.change(input, { target: { value: 'test 1' } });
       unmount();
+
+      await new Promise(resolve => setTimeout(resolve, 100));
 
       expect(onSubmit).not.toBeCalled();
     });
@@ -256,12 +245,9 @@ describe('BaseForm', () => {
 
       expect(submitting).toBe(true);
 
-      await act(async () => {
-        resolveSubmit();
-        await new Promise(resolve => setTimeout(resolve));
-      });
+      resolveSubmit();
 
-      expect(submitting).toBe(false);
+      await waitFor(() => expect(submitting).toBe(false));
     });
   });
 });

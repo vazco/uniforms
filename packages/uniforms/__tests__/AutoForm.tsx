@@ -1,4 +1,4 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import omit from 'lodash/omit';
 import React, { act, ReactNode } from 'react';
 import SimpleSchema from 'simpl-schema';
@@ -55,12 +55,9 @@ describe('<AutoForm />', () => {
 
       const form = screen.getByRole('form');
       const input = screen.getByLabelText('A');
-      await act(async () => {
-        fireEvent.submit(form);
-        await new Promise(resolve => setTimeout(resolve));
-      });
+      fireEvent.submit(form);
 
-      expect(validator).toHaveBeenCalledTimes(1);
+      await waitFor(() => expect(validator).toHaveBeenCalledTimes(1));
       expect(validator).toHaveBeenLastCalledWith({ a: '', b: '', c: '' });
 
       fireEvent.change(input, { target: { value: '2' } });
@@ -201,12 +198,9 @@ describe('<AutoForm />', () => {
 
       expect(onSubmit).not.toBeCalled();
       const input = screen.getByLabelText('A');
-      await act(async () => {
-        fireEvent.change(input, { target: { value: '1' } });
-        await new Promise(resolve => setTimeout(resolve));
-      });
+      fireEvent.change(input, { target: { value: '1' } });
 
-      expect(onSubmit).toHaveBeenCalledTimes(1);
+      await waitFor(() => expect(onSubmit).toHaveBeenCalledTimes(1));
       expect(onSubmit).toHaveBeenLastCalledWith({ a: '1', b: '', c: '' });
       expect(validator).toHaveBeenCalledTimes(1);
       expect(validator).toHaveBeenLastCalledWith({ a: '1', b: '', c: '' });
