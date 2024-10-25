@@ -42,7 +42,7 @@ export default defineConfig({
         },
         {
           label: 'Compare matrix',
-          autogenerate: { directory: 'compare-matrix' },
+          link: '/compare-matrix-landing',
         },
       ],
     }),
