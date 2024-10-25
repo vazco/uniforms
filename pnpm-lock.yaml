@@ -84,6 +84,9 @@ importers:
       '@types/lodash':
         specifier: 4.17.5
         version: 4.17.5
+      '@types/react':
+        specifier: 18.3.12
+        version: 18.3.12
       tslib:
         specifier: 2.2.0
         version: 2.2.0
@@ -3854,6 +3857,7 @@ packages:
 
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   run-parallel@1.2.0:
