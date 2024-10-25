@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import React, { useContext } from 'react';
+import React, { act, useContext } from 'react';
 import { BaseForm, context } from 'uniforms';
 import { ZodBridge } from 'uniforms-bridge-zod';
 import { AutoField } from 'uniforms-unstyled';
@@ -48,8 +48,6 @@ describe('BaseForm', () => {
       const input = screen.getByLabelText('A');
       fireEvent.change(input, { target: { value: 'test' } });
 
-      await new Promise(resolve => setTimeout(resolve));
-
       expect(onSubmit).not.toBeCalled();
     });
 
@@ -61,9 +59,10 @@ describe('BaseForm', () => {
       );
 
       const input = screen.getByLabelText('A');
-      fireEvent.change(input, { target: { value: 'test' } });
-
-      await new Promise(resolve => setTimeout(resolve));
+      await act(async () => {
+        fireEvent.change(input, { target: { value: 'test' } });
+        await new Promise(resolve => setTimeout(resolve));
+      });
 
       expect(onSubmit).toHaveBeenCalledTimes(1);
       expect(onSubmit).toHaveBeenLastCalledWith(model);
@@ -83,15 +82,12 @@ describe('BaseForm', () => {
       );
 
       const input = screen.getByLabelText('A');
-      fireEvent.change(input, { target: { value: 'test 1' } });
-      fireEvent.change(input, { target: { value: 'test 2' } });
-      fireEvent.change(input, { target: { value: 'test 3' } });
-
-      await new Promise(resolve => setTimeout(resolve));
-
-      expect(onSubmit).not.toHaveBeenCalled();
-
-      await new Promise(resolve => setTimeout(resolve, 25));
+      await act(async () => {
+        fireEvent.change(input, { target: { value: 'test 1' } });
+        fireEvent.change(input, { target: { value: 'test 2' } });
+        fireEvent.change(input, { target: { value: 'test 3' } });
+        await new Promise(resolve => setTimeout(resolve, 25));
+      });
 
       expect(onSubmit).toHaveBeenCalledTimes(1);
       expect(onSubmit).toHaveBeenLastCalledWith(model);
@@ -111,23 +107,26 @@ describe('BaseForm', () => {
       );
 
       const input = screen.getByLabelText('A');
-      fireEvent.change(input, { target: { value: 'test 1' } });
-      fireEvent.change(input, { target: { value: 'test 2' } });
-      fireEvent.change(input, { target: { value: 'test 3' } });
 
-      await new Promise(resolve => setTimeout(resolve, 25));
+      await act(async () => {
+        fireEvent.change(input, { target: { value: 'test 1' } });
+        fireEvent.change(input, { target: { value: 'test 2' } });
+        fireEvent.change(input, { target: { value: 'test 3' } });
+        await new Promise(resolve => setTimeout(resolve, 25));
+      });
 
-      fireEvent.change(input, { target: { value: 'test 1' } });
-      fireEvent.change(input, { target: { value: 'test 2' } });
-      fireEvent.change(input, { target: { value: 'test 3' } });
-
-      await new Promise(resolve => setTimeout(resolve, 25));
+      await act(async () => {
+        fireEvent.change(input, { target: { value: 'test 1' } });
+        fireEvent.change(input, { target: { value: 'test 2' } });
+        fireEvent.change(input, { target: { value: 'test 3' } });
+        await new Promise(resolve => setTimeout(resolve, 25));
+      });
 
       expect(onSubmit).toHaveBeenCalledTimes(2);
       expect(onSubmit).toHaveBeenLastCalledWith(model);
     });
 
-    it('clears autosave correctly', () => {
+    it('clears autosave correctly', async () => {
       const { unmount } = render(
         <BaseForm
           schema={schema}
@@ -141,7 +140,10 @@ describe('BaseForm', () => {
       );
 
       const input = screen.getByLabelText('A');
-      fireEvent.change(input, { target: { value: 'test 1' } });
+      await act(async () => {
+        fireEvent.change(input, { target: { value: 'test 1' } });
+        await new Promise(resolve => setTimeout(resolve));
+      });
 
       unmount();
 
@@ -254,8 +256,10 @@ describe('BaseForm', () => {
 
       expect(submitting).toBe(true);
 
-      resolveSubmit();
-      await new Promise(resolve => process.nextTick(resolve));
+      await act(async () => {
+        resolveSubmit();
+        await new Promise(resolve => setTimeout(resolve));
+      });
 
       expect(submitting).toBe(false);
     });

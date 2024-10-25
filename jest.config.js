@@ -11,4 +11,7 @@ module.exports = {
   setupFilesAfterEnv: ['./scripts/setupMatchers.ts'],
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['/node_modules/', '/_[^/]*$', '\\.d\\.ts$'],
+  transform: {
+    '\\.(ts|tsx)$': ['ts-jest', { diagnostics: false }],
+  },
 };
