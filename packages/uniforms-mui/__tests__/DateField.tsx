@@ -4,7 +4,7 @@ import { renderWithZod } from 'uniforms/__suites__';
 import { DateField } from 'uniforms-mui';
 import { z } from 'zod';
 
-describe.skip('@RTL - DateField tests', () => {
+describe('@RTL - DateField tests', () => {
   test('<DateField> - renders a Input with correct error text (specified)', () => {
     const error = new Error();
     renderWithZod({

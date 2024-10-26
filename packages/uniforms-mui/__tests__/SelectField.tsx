@@ -4,7 +4,7 @@ import { renderWithZod } from 'uniforms/__suites__';
 import { SelectField } from 'uniforms-mui';
 import { z } from 'zod';
 
-describe.skip('@RTL - SelectField tests', () => {
+describe('@RTL - SelectField tests', () => {
   test('<SelectField> - renders a Select with correct disabled state', () => {
     renderWithZod({
       element: <SelectField data-testid="select-field" name="x" disabled />,
@@ -22,7 +22,7 @@ describe.skip('@RTL - SelectField tests', () => {
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
 
-    expect(screen.getByLabelText('X *')).toBeInTheDocument();
+    expect(screen.getByText('X *')).toBeInTheDocument();
   });
 
   test('<SelectField> - renders a Select with correct options', () => {
@@ -32,7 +32,7 @@ describe.skip('@RTL - SelectField tests', () => {
       schema: z.object({ x: z.enum(selectOptions) }),
     });
 
-    fireEvent.mouseDown(screen.getByRole('button'));
+    fireEvent.mouseDown(screen.getByRole('combobox'));
     const listbox = within(screen.getByRole('listbox'));
 
     selectOptions.forEach(option => {
@@ -49,7 +49,7 @@ describe.skip('@RTL - SelectField tests', () => {
       schema: z.object({ x: z.string() }),
     });
 
-    fireEvent.mouseDown(screen.getByRole('button'));
+    fireEvent.mouseDown(screen.getByRole('combobox'));
     const listbox = within(screen.getByRole('listbox'));
 
     selectOptions.forEach(option => {
@@ -110,7 +110,7 @@ describe.skip('@RTL - SelectField tests', () => {
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
 
-    fireEvent.mouseDown(screen.getByRole('button'));
+    fireEvent.mouseDown(screen.getByRole('combobox'));
     const listbox = within(screen.getByRole('listbox'));
     fireEvent.click(listbox.getByText(/b/i));
 
@@ -125,7 +125,7 @@ describe.skip('@RTL - SelectField tests', () => {
       model: { x: 'b' },
     });
 
-    fireEvent.mouseDown(screen.getByRole('button'));
+    fireEvent.mouseDown(screen.getByRole('combobox'));
     const listbox = within(screen.getByRole('listbox'));
 
     fireEvent.click(listbox.getByText(/b/i));
@@ -139,7 +139,7 @@ describe.skip('@RTL - SelectField tests', () => {
       schema: z.object({ x: z.enum(['ă', 'ś']) }),
     });
 
-    fireEvent.mouseDown(screen.getByRole('button'));
+    fireEvent.mouseDown(screen.getByRole('combobox'));
     const listbox = within(screen.getByRole('listbox'));
 
     expect(listbox.getByText('ă')).toBeInTheDocument();
@@ -160,7 +160,7 @@ describe.skip('@RTL - SelectField tests', () => {
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
 
-    fireEvent.mouseDown(screen.getByRole('button'));
+    fireEvent.mouseDown(screen.getByRole('combobox'));
     const listbox = within(screen.getByRole('listbox'));
 
     expect(listbox.getByText('A')).toHaveClass('Mui-disabled');
@@ -193,8 +193,8 @@ describe.skip('@RTL - SelectField tests', () => {
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
 
-    expect(screen.getByLabelText('a')).toBeDisabled();
-    expect(screen.getByLabelText('b')).toBeDisabled();
+    expect(screen.getByLabelText('a *')).toBeDisabled();
+    expect(screen.getByLabelText('b *')).toBeDisabled();
   });
 
   test('<SelectField checkboxes> - renders a set of Radio buttons with correct id (inherited)', () => {
@@ -203,8 +203,8 @@ describe.skip('@RTL - SelectField tests', () => {
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
 
-    expect(screen.getByLabelText('a')).toHaveAttribute('id');
-    expect(screen.getByLabelText('b')).toHaveAttribute('id');
+    expect(screen.getByLabelText('a *')).toHaveAttribute('id');
+    expect(screen.getByLabelText('b *')).toHaveAttribute('id');
   });
 
   test('<SelectField checkboxes> - renders a set of Radio buttons with correct id (specified)', () => {
@@ -213,8 +213,8 @@ describe.skip('@RTL - SelectField tests', () => {
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
 
-    expect(screen.getByLabelText('a')).toHaveAttribute('id', 'y-YQ');
-    expect(screen.getByLabelText('b')).toHaveAttribute('id', 'y-Yg');
+    expect(screen.getByLabelText('a *')).toHaveAttribute('id', 'y-YQ');
+    expect(screen.getByLabelText('b *')).toHaveAttribute('id', 'y-Yg');
   });
 
   test('<SelectField checkboxes> - renders a set of Radio buttons with correct name', () => {
@@ -223,8 +223,8 @@ describe.skip('@RTL - SelectField tests', () => {
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
 
-    expect(screen.getByLabelText('a')).toHaveAttribute('name', 'x');
-    expect(screen.getByLabelText('b')).toHaveAttribute('name', 'x');
+    expect(screen.getByLabelText('a *')).toHaveAttribute('name', 'x');
+    expect(screen.getByLabelText('b *')).toHaveAttribute('name', 'x');
   });
 
   test('<SelectField checkboxes> - renders a set of Radio buttons with correct value (default)', () => {
@@ -233,8 +233,8 @@ describe.skip('@RTL - SelectField tests', () => {
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
 
-    expect(screen.getByLabelText('a')).toBeChecked();
-    expect(screen.getByLabelText('b')).not.toBeChecked();
+    expect(screen.getByLabelText('a *')).toBeChecked();
+    expect(screen.getByLabelText('b *')).not.toBeChecked();
   });
 
   test('<SelectField checkboxes> - renders a set of Radio buttons with correct value (model)', () => {
@@ -244,8 +244,8 @@ describe.skip('@RTL - SelectField tests', () => {
       model: { x: 'b' },
     });
 
-    expect(screen.getByLabelText('a')).not.toBeChecked();
-    expect(screen.getByLabelText('b')).toBeChecked();
+    expect(screen.getByLabelText('a *')).not.toBeChecked();
+    expect(screen.getByLabelText('b *')).toBeChecked();
   });
 
   test('<SelectField checkboxes> - renders a set of Radio buttons with correct value (specified)', () => {
@@ -254,8 +254,8 @@ describe.skip('@RTL - SelectField tests', () => {
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
 
-    expect(screen.getByLabelText('a')).not.toBeChecked();
-    expect(screen.getByLabelText('b')).toBeChecked();
+    expect(screen.getByLabelText('a *')).not.toBeChecked();
+    expect(screen.getByLabelText('b *')).toBeChecked();
   });
 
   test('<SelectField checkboxes> - renders a set of Radio buttons which correctly reacts on change', () => {
@@ -266,7 +266,7 @@ describe.skip('@RTL - SelectField tests', () => {
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
 
-    fireEvent.click(screen.getByLabelText('b'));
+    fireEvent.click(screen.getByLabelText('b *'));
 
     expect(onChange).toHaveBeenCalledWith('b');
   });
@@ -285,8 +285,8 @@ describe.skip('@RTL - SelectField tests', () => {
       }),
     });
 
-    expect(screen.getByLabelText('A')).toBeInTheDocument();
-    expect(screen.getByLabelText('B')).toBeInTheDocument();
+    expect(screen.getByLabelText('A *')).toBeInTheDocument();
+    expect(screen.getByLabelText('B *')).toBeInTheDocument();
   });
 
   test('<SelectField checkboxes> - renders a SelectField with correct error text (showInlineError=true)', () => {
@@ -377,7 +377,7 @@ describe.skip('@RTL - SelectField tests', () => {
       }),
     });
 
-    expect(screen.getByLabelText('A')).toBeDisabled();
-    expect(screen.getByLabelText('B')).not.toBeDisabled();
+    expect(screen.getByLabelText('A *')).toBeDisabled();
+    expect(screen.getByLabelText('B *')).not.toBeDisabled();
   });
 });
