@@ -4,7 +4,7 @@ import { renderWithZod } from 'uniforms/__suites__';
 import { wrapField } from 'uniforms-antd';
 import { z } from 'zod';
 
-describe.skip('@RTL - wrapField tests', () => {
+describe('@RTL - wrapField tests', () => {
   describe('wrapField tests', () => {
     test('<wrapField> - renders wrapper with extra style', () => {
       const { container } = renderWithZod({

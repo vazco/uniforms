@@ -1,7 +1,7 @@
 import * as suites from 'uniforms/__suites__';
 import * as theme from 'uniforms-antd';
 
-it.skip('exports everything', () => {
+it('exports everything', () => {
   expect(theme).toEqual({
     AutoFields: expect.any(Function),
     AutoField: expect.any(Function),
@@ -30,7 +30,7 @@ it.skip('exports everything', () => {
   });
 });
 
-describe.skip('@RTL AntD', () => {
+describe('@RTL AntD', () => {
   suites.testAutoField(theme.AutoField, {
     getDateField: screen => screen.getByRole('textbox'),
     getSelectField: screen => screen.getByRole('combobox'),
@@ -52,7 +52,10 @@ describe.skip('@RTL AntD', () => {
   });
   suites.testListItemField(theme.ListItemField);
   suites.testLongTextField(theme.LongTextField);
-  suites.testNumField(theme.NumField);
+  suites.testNumField(theme.NumField, {
+    minProperty: 'aria-valuemin',
+    maxProperty: 'aria-valuemax',
+  });
   suites.testNestField(theme.NestField);
   suites.testQuickForm(theme.QuickForm);
   // FIXME: AntD radio.group does not support HTML attributes https://github.com/ant-design/ant-design/issues/8561, added a flag to skip attributes tests.

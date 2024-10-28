@@ -5,7 +5,16 @@ import z from 'zod';
 
 import { renderWithZod } from './render-zod';
 
-export function testNumField(NumField: ComponentType<any>) {
+export function testNumField(
+  NumField: ComponentType<any>,
+  options?: {
+    minProperty?: string;
+    maxProperty?: string;
+  },
+) {
+  const minProperty = options?.minProperty ?? 'min';
+  const maxProperty = options?.maxProperty ?? 'max';
+
   test('<NumField> - renders an InputNumber', () => {
     renderWithZod({
       element: <NumField name="x" />,
@@ -52,7 +61,7 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" max={10} />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('spinbutton')).toHaveAttribute('max', '10');
+    expect(screen.getByRole('spinbutton')).toHaveAttribute(maxProperty, '10');
   });
 
   test('<NumField> - renders an InputNumber with correct min', () => {
@@ -60,7 +69,8 @@ export function testNumField(NumField: ComponentType<any>) {
       element: <NumField name="x" min={10} />,
       schema: z.object({ x: z.number() }),
     });
-    expect(screen.getByRole('spinbutton')).toHaveAttribute('min', '10');
+
+    expect(screen.getByRole('spinbutton')).toHaveAttribute(minProperty, '10');
   });
 
   test('<NumField> - renders an InputNumber with correct name', () => {

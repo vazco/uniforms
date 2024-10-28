@@ -1,3 +1,5 @@
+/// <reference types="rc-input-number" />
+
 import InputNumber, { type InputNumberProps } from 'antd/lib/input-number';
 import React, { Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
