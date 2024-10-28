@@ -9,8 +9,10 @@ module.exports = {
   setupFiles: ['./scripts/setupJest.ts', './scripts/setupFilterWarnings.ts'],
   setupFilesAfterEnv: ['./scripts/setupMatchers.ts'],
   testEnvironment: 'jsdom',
-  testPathIgnorePatterns: ['/node_modules/', '/_[^/]*$', '\\.d\\.ts$'],
-  transform: {
-    '\\.(ts|tsx)$': ['ts-jest', { diagnostics: false }],
-  },
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    '/_[^/]*$',
+    '\\.d\\.ts$',
+    'uniforms-antd/',
+  ],
 };

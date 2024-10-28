@@ -11,5 +11,6 @@
     "strict": true,
     "target": "ES6",
     "skipLibCheck": true
-  }
+  },
+  "include": ["./scripts/setupMatchers.ts", "./packages/**/*"]
 }

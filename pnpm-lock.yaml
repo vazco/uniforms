@@ -87,12 +87,24 @@ importers:
       '@types/react':
         specifier: 18.3.12
         version: 18.3.12
+      '@types/simpl-schema':
+        specifier: 1.12.8
+        version: 1.12.8(@aws-sdk/client-sso-oidc@3.679.0(@aws-sdk/client-sts@3.679.0))
+      moment:
+        specifier: 2.30.1
+        version: 2.30.1
+      simpl-schema:
+        specifier: 1.13.1
+        version: 1.13.1
       tslib:
         specifier: 2.2.0
         version: 2.2.0
       typescript:
         specifier: 5.5.4
         version: 5.5.4
+      zod:
+        specifier: ^3.0.0
+        version: 3.23.8
 
   packages/uniforms-antd:
     dependencies:
@@ -146,7 +158,7 @@ importers:
         specifier: 5.5.4
         version: 5.5.4
       zod:
-        specifier: 3.23.8
+        specifier: ^3.0.0
         version: 3.23.8
 
   packages/uniforms-bootstrap4:
@@ -185,6 +197,9 @@ importers:
       typescript:
         specifier: 5.5.4
         version: 5.5.4
+      zod:
+        specifier: ^3.0.0
+        version: 3.23.8
 
   packages/uniforms-bootstrap5:
     dependencies:
@@ -222,6 +237,9 @@ importers:
       typescript:
         specifier: 5.5.4
         version: 5.5.4
+      zod:
+        specifier: ^3.0.0
+        version: 3.23.8
 
   packages/uniforms-bridge-json-schema:
     dependencies:
@@ -349,6 +367,9 @@ importers:
       typescript:
         specifier: 5.5.4
         version: 5.5.4
+      zod:
+        specifier: ^3.0.0
+        version: 3.23.8
 
   packages/uniforms-semantic:
     dependencies:
@@ -383,6 +404,9 @@ importers:
       typescript:
         specifier: 5.5.4
         version: 5.5.4
+      zod:
+        specifier: ^3.0.0
+        version: 3.23.8
 
   packages/uniforms-unstyled:
     dependencies:
