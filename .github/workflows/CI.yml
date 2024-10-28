@@ -43,7 +43,7 @@ jobs:
         run: pnpm lint:types
 
       - name: Test
-        run: pnpm coverage -- --no-cache --runInBand
+        run: pnpm coverage
 
       - name: Report coverage
         uses: codecov/codecov-action@v4.3.0
