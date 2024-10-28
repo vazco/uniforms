@@ -664,7 +664,7 @@ export function testSelectField(
         ),
         schema: z.object({ x: z.enum(['a', 'b']) }),
       });
-      const field = screen.getByTestId('select-field');
+      const field = screen.getAllByTestId('select-field')[0];
       expect(field).toHaveAttribute('data-x', 'x');
       expect(field).toHaveAttribute('data-z', 'z');
       expect(field).toHaveAttribute('data-y', 'y');

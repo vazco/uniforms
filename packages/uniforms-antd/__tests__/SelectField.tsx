@@ -4,7 +4,7 @@ import { renderWithZod } from 'uniforms/__suites__';
 import { SelectField } from 'uniforms-antd';
 import { z } from 'zod';
 
-describe.skip('@RTL - SelectField tests', () => {
+describe('@RTL - SelectField tests', () => {
   test('<SelectField> - renders a select which correctly reacts on change (array)', () => {
     const onChange = jest.fn();
 
