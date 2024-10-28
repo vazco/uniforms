@@ -2,15 +2,9 @@
 /.parcel-cache
 /coverage
 
-/node_modules
+node_modules/
 /packages/*/cjs
 /packages/*/esm
-/packages/*/node_modules
 /reproductions/dist
-/reproductions/node_modules
-/website/.cache-loader
-/website/.docusaurus
-/website/build
-/website/node_modules
 /scripts/
 /jest.config.js
