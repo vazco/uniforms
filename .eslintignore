@@ -12,3 +12,5 @@
 /website/.docusaurus
 /website/build
 /website/node_modules
+/scripts/
+/jest.config.js
