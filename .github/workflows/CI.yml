@@ -14,55 +14,40 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4.0.2
         with:
-          cache: npm
+          cache: pnpm
           node-version: ${{ matrix.node-version }}
+
       - name: Check dependency duplications
         uses: vazco/open-standards/actions/npm-dependency-duplications/@master
+
       - name: Check dependency vulnerabilities
         uses: vazco/open-standards/actions/npm-dependency-vulnerabilities/@master
+
       - name: Install
-        run: npm i -g npm@8 --no-audit && npm ci --no-audit
-      - name: Lint
-        run: npm run lint
+        run: pnpm install
+
+      - name: Check linting
+        run: pnpm lint:code
+
+      - name: Check formatting
+        run: pnpm lint:text
+
+      - name: Check types
+        run: pnpm lint:types
+
       - name: Test
-        run: npm run coverage -- --no-cache --runInBand
+        run: pnpm coverage -- --no-cache --runInBand
+
       - name: Report coverage
         uses: codecov/codecov-action@v4.3.0
         with:
           fail_ci_if_error: true
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-  Docs:
-    runs-on: ubuntu-latest
-    needs: CI
-    if: success() && github.event_name == 'push' && github.ref == 'refs/heads/master'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3.3.0
-      - name: Use Node.js 20
-        uses: actions/setup-node@v3.6.0
-        with:
-          cache: npm
-          node-version: 20
-      - name: Install
-        run: npm ci --no-audit
-      - name: Build docs
-        run: npm --prefix website run build
-      - name: Deploy docs
-        uses: peaceiris/actions-gh-pages@v4.0.0
-        with:
-          allow_empty_commit: true
-          cname: uniforms.tools
-          force_orphan: true
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./website/build
-      - name: Create a concentrated doc file
-        run: node ./scripts/concatenateDocs.js . uniformsConcentratedDocs.md
-      - name: Upload the concentrated doc file as an artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: uniformsConcentratedDocs-${{ github.sha }}-${{ github.run_id }}-$(date +'%Y-%m-%d').md
-          path: uniformsConcentratedDocs.md

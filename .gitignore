@@ -5,8 +5,6 @@
 .turbo
 
 /node_modules
-/npm-debug.log
-/npm-debug.log*
 /packages/*/cjs
 /packages/*/esm
 /packages/*/node_modules

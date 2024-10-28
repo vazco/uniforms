@@ -4,5 +4,5 @@ module.exports = {
     'eslint --cache --cache-location node_modules/.cache/eslint --cache-strategy content',
   ],
   '**/*.{json,md,mdx,yml}': ['prettier --check'],
-  '**/*.{ts,tsx}': () => 'npm run lint:types'
+  '**/*.{ts,tsx}': () => 'pnpm lint:types',
 };
