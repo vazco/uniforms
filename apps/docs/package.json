@@ -1,20 +1,8 @@
 {
-  "name": "docs",
+  "name": "uniforms-docs",
+  "private": true,
   "type": "module",
-  "version": "4.0.0-alpha.6",
-  "description": "Docs package of uniforms.",
-  "repository": "https://github.com/vazco/uniforms/tree/master/packages/uniforms",
-  "bugs": "https://github.com/vazco/uniforms/issues",
-  "funding": "https://github.com/vazco/uniforms?sponsor=1",
-  "keywords": [
-    "form",
-    "forms",
-    "meteor",
-    "react",
-    "react-component",
-    "schema",
-    "validation"
-  ],
+  "description": "Uniforms documentation website",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",

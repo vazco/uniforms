@@ -5,6 +5,8 @@
 coverage/
 dist/
 node_modules/
+.astro/
+pnpm-debug.log*
 
 /packages/*/cjs
 /packages/*/esm
