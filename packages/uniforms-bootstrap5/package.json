@@ -1,6 +1,6 @@
 {
   "name": "uniforms-bootstrap5",
-  "version": "4.0.0-beta.1",
+  "version": "4.0.0-beta.2",
   "license": "MIT",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -29,19 +29,19 @@
   ],
   "peerDependencies": {
     "react": "^18.0.0 || ^17.0.0 || ^16.8.0",
-    "uniforms": "4.0.0-beta.1"
+    "uniforms": "4.0.0-beta.2"
   },
   "dependencies": {
     "classnames": "^2.0.0",
     "invariant": "^2.0.0",
     "lodash": "^4.0.0",
-    "warning": "^4.0.0"
+    "warning": "^4.0.0",
+    "tslib": "2.8.0"
   },
   "devDependencies": {
     "@types/invariant": "2.2.37",
     "@types/lodash": "4.17.5",
     "@types/react": "18.3.12",
-    "tslib": "2.2.0",
     "typescript": "5.5.4",
     "uniforms": "workspace:*",
     "zod": "^3.0.0"

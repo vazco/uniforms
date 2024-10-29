@@ -77,6 +77,9 @@ importers:
       react:
         specifier: ^18.0.0 || ^17.0.0 || ^16.8.0
         version: 18.3.1
+      tslib:
+        specifier: 2.8.0
+        version: 2.8.0
     devDependencies:
       '@types/invariant':
         specifier: 2.2.37
@@ -96,9 +99,6 @@ importers:
       simpl-schema:
         specifier: 1.13.1
         version: 1.13.1
-      tslib:
-        specifier: 2.2.0
-        version: 2.2.0
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -123,6 +123,9 @@ importers:
       react:
         specifier: ^18.0.0 || ^17.0.0 || ^16.8.0
         version: 18.3.1
+      tslib:
+        specifier: 2.8.0
+        version: 2.8.0
       warning:
         specifier: ^4.0.0
         version: 4.0.3
@@ -151,9 +154,6 @@ importers:
       simpl-schema:
         specifier: 1.13.1
         version: 1.13.1
-      tslib:
-        specifier: 2.2.0
-        version: 2.2.0
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -178,6 +178,9 @@ importers:
       react:
         specifier: ^18.0.0 || ^17.0.0 || ^16.8.0
         version: 18.3.1
+      tslib:
+        specifier: 2.8.0
+        version: 2.8.0
       warning:
         specifier: ^4.0.0
         version: 4.0.3
@@ -191,9 +194,6 @@ importers:
       '@types/react':
         specifier: 18.3.12
         version: 18.3.12
-      tslib:
-        specifier: 2.2.0
-        version: 2.2.0
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -218,6 +218,9 @@ importers:
       react:
         specifier: ^18.0.0 || ^17.0.0 || ^16.8.0
         version: 18.3.1
+      tslib:
+        specifier: 2.8.0
+        version: 2.8.0
       warning:
         specifier: ^4.0.0
         version: 4.0.3
@@ -231,9 +234,6 @@ importers:
       '@types/react':
         specifier: 18.3.12
         version: 18.3.12
-      tslib:
-        specifier: 2.2.0
-        version: 2.2.0
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -252,6 +252,9 @@ importers:
       lodash:
         specifier: ^4.0.0
         version: 4.17.21
+      tslib:
+        specifier: 2.8.0
+        version: 2.8.0
     devDependencies:
       '@types/invariant':
         specifier: 2.2.37
@@ -259,9 +262,6 @@ importers:
       '@types/lodash':
         specifier: 4.17.5
         version: 4.17.5
-      tslib:
-        specifier: 2.2.0
-        version: 2.2.0
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -280,6 +280,9 @@ importers:
       simpl-schema:
         specifier: ^1.0.0 || ^0.0.4
         version: 1.13.1
+      tslib:
+        specifier: 2.8.0
+        version: 2.8.0
     devDependencies:
       '@types/invariant':
         specifier: 2.2.37
@@ -293,9 +296,6 @@ importers:
       '@types/simpl-schema':
         specifier: 1.12.7
         version: 1.12.7(@aws-sdk/client-sso-oidc@3.679.0(@aws-sdk/client-sts@3.679.0))
-      tslib:
-        specifier: 2.2.0
-        version: 2.2.0
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -311,6 +311,9 @@ importers:
       lodash:
         specifier: ^4.0.0
         version: 4.17.21
+      tslib:
+        specifier: 2.8.0
+        version: 2.8.0
       zod:
         specifier: ^3.0.0
         version: 3.23.8
@@ -321,9 +324,6 @@ importers:
       '@types/lodash':
         specifier: 4.17.5
         version: 4.17.5
-      tslib:
-        specifier: 2.2.0
-        version: 2.2.0
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -345,6 +345,9 @@ importers:
       react:
         specifier: ^18.0.0 || ^17.0.0
         version: 18.3.1
+      tslib:
+        specifier: 2.8.0
+        version: 2.8.0
     devDependencies:
       '@emotion/react':
         specifier: 11.7.1
@@ -361,9 +364,6 @@ importers:
       '@types/react':
         specifier: 18.3.12
         version: 18.3.12
-      tslib:
-        specifier: 2.2.0
-        version: 2.2.0
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -388,6 +388,9 @@ importers:
       react:
         specifier: ^18.0.0 || ^17.0.0 || ^16.8.0
         version: 18.3.1
+      tslib:
+        specifier: 2.8.0
+        version: 2.8.0
     devDependencies:
       '@types/invariant':
         specifier: 2.2.37
@@ -398,9 +401,6 @@ importers:
       '@types/react':
         specifier: 18.3.12
         version: 18.3.12
-      tslib:
-        specifier: 2.2.0
-        version: 2.2.0
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -422,6 +422,9 @@ importers:
       react:
         specifier: ^18.0.0 || ^17.0.0 || ^16.8.0
         version: 18.3.1
+      tslib:
+        specifier: 2.8.0
+        version: 2.8.0
     devDependencies:
       '@types/invariant':
         specifier: 2.2.37
@@ -432,9 +435,6 @@ importers:
       '@types/react':
         specifier: 18.3.12
         version: 18.3.12
-      tslib:
-        specifier: 2.2.0
-        version: 2.2.0
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -5110,9 +5110,6 @@ packages:
 
   tsconfig-paths@3.15.0:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==}
-
-  tslib@2.2.0:
-    resolution: {integrity: sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==}
 
   tslib@2.8.0:
     resolution: {integrity: sha512-jWVzBLplnCmoaTr13V9dYbiQ99wvZRd0vNWaDRg+aVYRcjDF3nDksxFDE/+fkXnKhpnUUkmx5pK/v8mCtLVqZA==}
@@ -11140,7 +11137,7 @@ snapshots:
 
   rxjs@7.8.1:
     dependencies:
-      tslib: 2.2.0
+      tslib: 2.8.0
 
   safe-array-concat@1.1.2:
     dependencies:
@@ -11567,8 +11564,6 @@ snapshots:
       json5: 1.0.2
       minimist: 1.2.8
       strip-bom: 3.0.0
-
-  tslib@2.2.0: {}
 
   tslib@2.8.0: {}
 
