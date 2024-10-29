@@ -1,6 +1,6 @@
 {
   "name": "uniforms-bridge-zod",
-  "version": "4.0.0-alpha.6",
+  "version": "4.0.0-beta.1",
   "license": "MIT",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -34,17 +34,18 @@
   ],
   "dependencies": {
     "invariant": "^2.0.0",
-    "lodash": "^4.0.0",
-    "uniforms": "4.0.0-alpha.6"
+    "lodash": "^4.0.0"
   },
   "peerDependencies": {
-    "zod": "^3.0.0"
+    "zod": "^3.0.0",
+    "uniforms": "4.0.0-beta.1"
   },
   "devDependencies": {
     "@types/invariant": "2.2.37",
     "@types/lodash": "4.17.5",
     "tslib": "2.2.0",
-    "typescript": "5.5.4"
+    "typescript": "5.5.4",
+    "uniforms": "workspace:*"
   },
   "scripts": {
     "build:cjs": "tsc --build tsconfig.cjs.json",

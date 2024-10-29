@@ -123,9 +123,6 @@ importers:
       react:
         specifier: ^18.0.0 || ^17.0.0 || ^16.8.0
         version: 18.3.1
-      uniforms:
-        specifier: ^4.0.0-alpha.6
-        version: 4.0.0-alpha.6(react@18.3.1)
       warning:
         specifier: ^4.0.0
         version: 4.0.3
@@ -160,6 +157,9 @@ importers:
       typescript:
         specifier: 5.5.4
         version: 5.5.4
+      uniforms:
+        specifier: workspace:*
+        version: link:../uniforms
       zod:
         specifier: ^3.0.0
         version: 3.23.8
@@ -178,9 +178,6 @@ importers:
       react:
         specifier: ^18.0.0 || ^17.0.0 || ^16.8.0
         version: 18.3.1
-      uniforms:
-        specifier: ^4.0.0-alpha.6
-        version: 4.0.0-alpha.6(react@18.3.1)
       warning:
         specifier: ^4.0.0
         version: 4.0.3
@@ -200,6 +197,9 @@ importers:
       typescript:
         specifier: 5.5.4
         version: 5.5.4
+      uniforms:
+        specifier: workspace:*
+        version: link:../uniforms
       zod:
         specifier: ^3.0.0
         version: 3.23.8
@@ -218,9 +218,6 @@ importers:
       react:
         specifier: ^18.0.0 || ^17.0.0 || ^16.8.0
         version: 18.3.1
-      uniforms:
-        specifier: ^4.0.0-alpha.6
-        version: 4.0.0-alpha.6(react@18.3.1)
       warning:
         specifier: ^4.0.0
         version: 4.0.3
@@ -240,6 +237,9 @@ importers:
       typescript:
         specifier: 5.5.4
         version: 5.5.4
+      uniforms:
+        specifier: workspace:*
+        version: link:../uniforms
       zod:
         specifier: ^3.0.0
         version: 3.23.8
@@ -252,9 +252,6 @@ importers:
       lodash:
         specifier: ^4.0.0
         version: 4.17.21
-      uniforms:
-        specifier: 4.0.0-alpha.6
-        version: 4.0.0-alpha.6(react@18.3.1)
     devDependencies:
       '@types/invariant':
         specifier: 2.2.37
@@ -268,6 +265,9 @@ importers:
       typescript:
         specifier: 5.5.4
         version: 5.5.4
+      uniforms:
+        specifier: workspace:*
+        version: link:../uniforms
 
   packages/uniforms-bridge-simple-schema-2:
     dependencies:
@@ -280,9 +280,6 @@ importers:
       simpl-schema:
         specifier: ^1.0.0 || ^0.0.4
         version: 1.13.1
-      uniforms:
-        specifier: 4.0.0-alpha.6
-        version: 4.0.0-alpha.6(react@18.3.1)
     devDependencies:
       '@types/invariant':
         specifier: 2.2.37
@@ -302,6 +299,9 @@ importers:
       typescript:
         specifier: 5.5.4
         version: 5.5.4
+      uniforms:
+        specifier: workspace:*
+        version: link:../uniforms
 
   packages/uniforms-bridge-zod:
     dependencies:
@@ -311,9 +311,6 @@ importers:
       lodash:
         specifier: ^4.0.0
         version: 4.17.21
-      uniforms:
-        specifier: 4.0.0-alpha.6
-        version: 4.0.0-alpha.6(react@18.3.1)
       zod:
         specifier: ^3.0.0
         version: 3.23.8
@@ -330,6 +327,9 @@ importers:
       typescript:
         specifier: 5.5.4
         version: 5.5.4
+      uniforms:
+        specifier: workspace:*
+        version: link:../uniforms
 
   packages/uniforms-mui:
     dependencies:
@@ -345,9 +345,6 @@ importers:
       react:
         specifier: ^18.0.0 || ^17.0.0
         version: 18.3.1
-      uniforms:
-        specifier: 4.0.0-alpha.6
-        version: 4.0.0-alpha.6(react@18.3.1)
     devDependencies:
       '@emotion/react':
         specifier: 11.7.1
@@ -370,6 +367,9 @@ importers:
       typescript:
         specifier: 5.5.4
         version: 5.5.4
+      uniforms:
+        specifier: workspace:*
+        version: link:../uniforms
       zod:
         specifier: ^3.0.0
         version: 3.23.8
@@ -388,9 +388,6 @@ importers:
       react:
         specifier: ^18.0.0 || ^17.0.0 || ^16.8.0
         version: 18.3.1
-      uniforms:
-        specifier: 4.0.0-alpha.6
-        version: 4.0.0-alpha.6(react@18.3.1)
     devDependencies:
       '@types/invariant':
         specifier: 2.2.37
@@ -407,6 +404,9 @@ importers:
       typescript:
         specifier: 5.5.4
         version: 5.5.4
+      uniforms:
+        specifier: workspace:*
+        version: link:../uniforms
       zod:
         specifier: ^3.0.0
         version: 3.23.8
@@ -422,9 +422,6 @@ importers:
       react:
         specifier: ^18.0.0 || ^17.0.0 || ^16.8.0
         version: 18.3.1
-      uniforms:
-        specifier: 4.0.0-alpha.6
-        version: 4.0.0-alpha.6(react@18.3.1)
     devDependencies:
       '@types/invariant':
         specifier: 2.2.37
@@ -441,6 +438,9 @@ importers:
       typescript:
         specifier: 5.5.4
         version: 5.5.4
+      uniforms:
+        specifier: workspace:*
+        version: link:../uniforms
 
   reproductions:
     dependencies:
@@ -5212,11 +5212,6 @@ packages:
   unified@9.2.2:
     resolution: {integrity: sha512-Sg7j110mtefBD+qunSLO1lqOEKdrwBFBrR6Qd8f4uwkhWNlbkaqwHse6e7QvD3AP/MNoJdEDLaf8OxYyoWgorQ==}
 
-  uniforms@4.0.0-alpha.6:
-    resolution: {integrity: sha512-j6OeGfw1h1HUztB/C1LMI5GENVFCqLXdBpr3P2ZtbpWHErAEVFjr7MQz4FSKwbW47mXbr6dKRPGVmtk7OkkRNQ==}
-    peerDependencies:
-      react: ^18.0.0 || ^17.0.0 || ^16.8.0
-
   unist-util-find-all-after@3.0.2:
     resolution: {integrity: sha512-xaTC/AGZ0rIM2gM28YVRAFPIZpzbpDtU3dRmp7EXlNVA8ziQc4hY3H7BHXM1J49nEmiqc3svnqMReW+PGqbZKQ==}
 
@@ -6648,15 +6643,13 @@ snapshots:
     transitivePeerDependencies:
       - '@parcel/core'
 
-  '@parcel/cache@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)':
+  '@parcel/cache@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))':
     dependencies:
       '@parcel/core': 2.12.0(@swc/helpers@0.5.13)
       '@parcel/fs': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
       '@parcel/logger': 2.12.0
       '@parcel/utils': 2.12.0
       lmdb: 2.8.5
-    transitivePeerDependencies:
-      - '@swc/helpers'
 
   '@parcel/codeframe@2.12.0':
     dependencies:
@@ -6716,7 +6709,7 @@ snapshots:
   '@parcel/core@2.12.0(@swc/helpers@0.5.13)':
     dependencies:
       '@mischnic/json-sourcemap': 0.1.1
-      '@parcel/cache': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
+      '@parcel/cache': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
       '@parcel/diagnostic': 2.12.0
       '@parcel/events': 2.12.0
       '@parcel/fs': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
@@ -6729,7 +6722,7 @@ snapshots:
       '@parcel/source-map': 2.1.1
       '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
       abortcontroller-polyfill: 1.7.5
       base-x: 3.0.10
       browserslist: 4.24.2
@@ -6757,7 +6750,7 @@ snapshots:
       '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
       '@parcel/utils': 2.12.0
       '@parcel/watcher': 2.4.1
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
     transitivePeerDependencies:
       - '@swc/helpers'
 
@@ -6831,7 +6824,7 @@ snapshots:
       '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
       '@parcel/rust': 2.12.0
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
 
   '@parcel/optimizer-svgo@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))':
     dependencies:
@@ -6863,7 +6856,7 @@ snapshots:
       '@parcel/node-resolver-core': 3.3.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
       '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
       '@swc/core': 1.7.40(@swc/helpers@0.5.13)
       semver: 7.6.3
     transitivePeerDependencies:
@@ -7052,7 +7045,7 @@ snapshots:
       '@parcel/core': 2.12.0(@swc/helpers@0.5.13)
       '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
       nullthrows: 1.1.1
 
   '@parcel/transformer-js@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))':
@@ -7063,7 +7056,7 @@ snapshots:
       '@parcel/rust': 2.12.0
       '@parcel/source-map': 2.1.1
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
       '@swc/helpers': 0.5.13
       browserslist: 4.24.2
       nullthrows: 1.1.1
@@ -7131,12 +7124,12 @@ snapshots:
 
   '@parcel/types@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)':
     dependencies:
-      '@parcel/cache': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
+      '@parcel/cache': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
       '@parcel/diagnostic': 2.12.0
       '@parcel/fs': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
       '@parcel/package-manager': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
       '@parcel/source-map': 2.1.1
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
       utility-types: 3.11.0
     transitivePeerDependencies:
       - '@parcel/core'
@@ -7209,7 +7202,7 @@ snapshots:
       '@parcel/watcher-win32-ia32': 2.4.1
       '@parcel/watcher-win32-x64': 2.4.1
 
-  '@parcel/workers@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)':
+  '@parcel/workers@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))':
     dependencies:
       '@parcel/core': 2.12.0(@swc/helpers@0.5.13)
       '@parcel/diagnostic': 2.12.0
@@ -7218,8 +7211,6 @@ snapshots:
       '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
       '@parcel/utils': 2.12.0
       nullthrows: 1.1.1
-    transitivePeerDependencies:
-      - '@swc/helpers'
 
   '@pkgr/core@0.1.1': {}
 
@@ -11680,13 +11671,6 @@ snapshots:
       is-plain-obj: 2.1.0
       trough: 1.0.5
       vfile: 4.2.1
-
-  uniforms@4.0.0-alpha.6(react@18.3.1):
-    dependencies:
-      invariant: 2.2.4
-      lodash: 4.17.21
-      react: 18.3.1
-      tslib: 2.2.0
 
   unist-util-find-all-after@3.0.2:
     dependencies:

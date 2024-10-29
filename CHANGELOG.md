@@ -1,3 +1,24 @@
+## [v4.0.0-beta.1](https://github.com/vazco/uniforms/tree/v4.0.0-beta.1) (2024-10-29)
+
+- **Breaking:** Update React to v18 & AntD to v5 [\#1376](https://github.com/vazco/uniforms/pull/1376)
+- **Fixed:** Removed setting initial value for enum types. [\#1354](https://github.com/vazco/uniforms/pull/1354)
+
+## [v4.0.0-alpha.6](https://github.com/vazco/uniforms/tree/v4.0.0-alpha.6) (2024-07-26)
+
+- **Breaking** Initialize model with default values [\#1343](https://github.com/vazco/uniforms/pull/1343)
+- **Breaking** Deprecate `uniforms-bootstrap3` package [\#1341](https://github.com/vazco/uniforms/pull/1341)
+- **Breaking** Deprecate `uniforms-material` package [\#1338](https://github.com/vazco/uniforms/pull/1338)
+- **Breaking** Deprecate `uniforms-bridge-simple-schema` package [\#1323](https://github.com/vazco/uniforms/pull/1323)
+- **Breaking** Deprecate `uniforms-bridge-graphql` package [\#1322](https://github.com/vazco/uniforms/pull/1322)
+- **Added:** Extend `onChangeModel` - add details about what changed. [\#1363](https://github.com/vazco/uniforms/pull/1363)
+- **Added:** Blank `TextField` and `LongTextField` [\#1356](https://github.com/vazco/uniforms/pull/1356)
+- **Added** Passing props with Zod bridge [\#1321](https://github.com/vazco/uniforms/pull/1321)
+- **Added** Improve Zod messages [\#1320](https://github.com/vazco/uniforms/pull/1320)
+- **Added** Support for Zod `.refine` and `.superRefine` [\#1319](https://github.com/vazco/uniforms/pull/1319)
+- **Fixed** Update `BaseForm` types [\#1325](https://github.com/vazco/uniforms/pull/1325)
+- **Fixed** Compatibility with StrictMode [\#1324](https://github.com/vazco/uniforms/pull/1324)
+- **Fixed:** Optional array fields (Zod bridge) [\#1352](https://github.com/vazco/uniforms/pull/1352)
+
 ## [v4.0.0-alpha.5](https://github.com/vazco/uniforms/tree/v4.0.0-alpha.5) (2023-06-23)
 
 - **Breaking:** Unified the way of handling `label` and `placeholder`. [\#973](https://github.com/vazco/uniforms/issues/973)
