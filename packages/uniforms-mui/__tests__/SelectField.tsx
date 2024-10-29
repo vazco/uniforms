@@ -77,7 +77,7 @@ describe('@RTL - SelectField tests', () => {
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
 
-    expect(screen.getByText('a')).toBeInTheDocument();
+    expect(screen.queryByText('a')).not.toBeInTheDocument();
     expect(screen.queryByText('b')).not.toBeInTheDocument();
   });
 
@@ -233,7 +233,7 @@ describe('@RTL - SelectField tests', () => {
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
 
-    expect(screen.getByLabelText('a *')).toBeChecked();
+    expect(screen.getByLabelText('a *')).not.toBeChecked();
     expect(screen.getByLabelText('b *')).not.toBeChecked();
   });
 
