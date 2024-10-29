@@ -7,7 +7,7 @@
 
 - **Breaking** Initialize model with default values [\#1343](https://github.com/vazco/uniforms/pull/1343)
 - **Breaking** Deprecate `uniforms-bootstrap3` package [\#1341](https://github.com/vazco/uniforms/pull/1341)
-- **Breaking** Deprecate `uniforms-bootstrap3` package [\#1338](https://github.com/vazco/uniforms/pull/1338)
+- **Breaking** Deprecate `uniforms-material` package [\#1338](https://github.com/vazco/uniforms/pull/1338)
 - **Breaking** Deprecate `uniforms-bridge-simple-schema` package [\#1323](https://github.com/vazco/uniforms/pull/1323)
 - **Breaking** Deprecate `uniforms-bridge-graphql` package [\#1322](https://github.com/vazco/uniforms/pull/1322)
 - **Added:** Extend `onChangeModel` - add details about what changed. [\#1363](https://github.com/vazco/uniforms/pull/1363)
