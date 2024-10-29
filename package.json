@@ -4,14 +4,12 @@
   "scripts": {
     "build": "turbo build:cjs build:esm",
     "build:watch": "turbo watch build:cjs build:esm",
-    "clean": "rimraf ./**/cjs ./**/esm && rimraf coverage",
     "coverage": "jest --coverage --no-cache --runInBand",
     "lint": "pnpm lint:code && pnpm lint:text && pnpm lint:types",
     "lint:code": "eslint --cache --cache-location node_modules/.cache/eslint --cache-strategy content --ext js,ts,tsx .",
     "lint:text": "prettier --check \"**/*.{json,md,mdx,yml}\"",
     "lint:types": "pnpm build",
-    "prereset": "pnpm clean",
-    "reset": "rimraf node_modules .turbo packages/*/.turbo packages/*/node_modules reproductions/.cache reproductions/dist reproductions/node_modules website/.docusaurus website/build website/node_modules",
+    "reset": "rimraf node_modules .turbo **/.turbo **/node_modules **/dist **/cjs **/esm coverage",
     "test": "jest"
   },
   "devDependencies": {
