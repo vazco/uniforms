@@ -40,7 +40,8 @@
     "classnames": "^2.0.0",
     "invariant": "^2.0.0",
     "lodash": "^4.0.0",
-    "warning": "^4.0.0"
+    "warning": "^4.0.0",
+    "tslib": "2.8.0"
   },
   "devDependencies": {
     "@ant-design/icons": "^5.0.0",
@@ -51,7 +52,6 @@
     "dayjs": "^1.11.13",
     "simpl-schema": "1.13.1",
     "rc-input-number": "^9.2.0",
-    "tslib": "2.2.0",
     "typescript": "5.5.4",
     "uniforms": "workspace:*",
     "zod": "^3.0.0"

@@ -34,7 +34,8 @@
   ],
   "dependencies": {
     "invariant": "^2.0.0",
-    "lodash": "^4.0.0"
+    "lodash": "^4.0.0",
+    "tslib": "2.8.0"
   },
   "peerDependencies": {
     "simpl-schema": "^1.0.0 || ^0.0.4",
@@ -45,7 +46,6 @@
     "@types/lodash": "4.17.5",
     "@types/react": "18.3.12",
     "@types/simpl-schema": "1.12.7",
-    "tslib": "2.2.0",
     "typescript": "5.5.4",
     "uniforms": "workspace:*"
   },
