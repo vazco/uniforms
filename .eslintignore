@@ -5,6 +5,6 @@
 node_modules/
 /packages/*/cjs
 /packages/*/esm
-/reproductions/dist
+/apps/
 /scripts/
 /jest.config.js

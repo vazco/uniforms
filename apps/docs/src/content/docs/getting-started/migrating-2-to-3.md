@@ -15,14 +15,14 @@ This guide is designed to help you through the migration. If you went through it
 - Removed `Bridge.check`. Without `createSchemaBridge` it's no longer needed.
 - Removed `baseField` from `connectField` options. There's no one solution here and it may require additional changes, depending on the usage.
 - Removed `createSchemaBridge`. Now all `*Bridge` instances have to be created manually.
-  ~~~diff
+  ```diff
     import { SimpleSchema } from 'simpl-schema';
   + import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
     const schema = new SimpleSchema({ /* ... */ });
   - <AutoForm schema={schema} />
   + const bridge = new SimpleSchema2Bridge(schema);
   + <AutoForm schema={bridge} />
-  ~~~
+  ```
 - Removed `ensureValue` from `connectField` options. That means `undefined` will no longer be automatically passed to the field as `''`. Use `value ?? ''` instead. **This option was enabled by default, therefore it will impact all your custom fields**.
 - Removed `includeParent` from `connectField` options. Use `useField` as many times as needed instead.
   ```tsx

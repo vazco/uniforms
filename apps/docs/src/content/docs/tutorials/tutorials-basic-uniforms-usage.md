@@ -5,7 +5,6 @@ title: Basic uniforms usage
 
 import { Card } from '@astrojs/starlight/components';
 
-
 <Card title="info" icon="💡">
 
 You can also follow the tutorial and explore uniforms in our [sample CodeSandbox repository](https://codesandbox.io/s/github/vazco/uniforms/tree/master/reproductions).
@@ -120,7 +119,6 @@ function createValidator<T>(schema: JSONSchemaType<T>) {
 const schemaValidator = createValidator(schema);
 ```
 
-
 Now that we have both the schema and the validator, we can create the uniforms bridge:
 
 ```tsx
@@ -201,4 +199,4 @@ export function GuestFormBasic() {
 And that's it! `AutoForm` will generate a complete form with labeled fields, errors list (if any) and a submit button.
 Also, it will take care of validation and handle model changes.
 
-{/* FIXME: Add interactive playground */}
+{/_ FIXME: Add interactive playground _/}

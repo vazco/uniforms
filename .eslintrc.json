@@ -4,14 +4,9 @@
     "plugin:import/typescript",
     "vazco/typescript"
   ],
-  "ignorePatterns": ["reproductions/**/*"],
   "overrides": [
     {
-      "files": [
-        "reproductions/**/*",
-        "**/__tests__/**/*",
-        "**/__suites__/**/*"
-      ],
+      "files": ["**/__tests__/**/*", "**/__suites__/**/*"],
       "rules": {
         "import/no-unresolved": "off"
       }
