@@ -18,6 +18,7 @@ import {
 export type BaseFormProps<Model extends UnknownObject> = {
   autosave: boolean;
   autosaveDelay: number;
+  children?: React.ReactNode;
   disabled?: boolean;
   error: unknown;
   id?: string;

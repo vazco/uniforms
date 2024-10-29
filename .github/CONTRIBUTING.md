@@ -18,8 +18,8 @@ Our kanban board is public and available [here](https://github.com/orgs/vazco/pr
 ## Making changes
 
 - Create a fork from where you want to base your work.
-- Clone the repo and run `npm ci` **in the top-level only**.
-  - Make sure you are using `npm` that understands the `package-lock.json` format. Check the current version in the `package.json` file.
+- Clone the repo and run `pnpm install` **in the top-level only**.
+  - Make sure you are using `pnpm` that understands the `pnpm-lock.json` format. Check the current version in the `package.json` file.
 - Make sure your commit messages are in the proper format:
   - Bugfix or feature:
     - `Implemented asynchronous validation (closes #17).`
@@ -28,7 +28,7 @@ Our kanban board is public and available [here](https://github.com/orgs/vazco/pr
     - `Refactored joinName tests.`
     - `Updated README.md.`
 - Make sure you have added the necessary tests for your changes. Do not worry though, the Codecov bot will report it in the pull request.
-- Make sure your code passes _all_ tests: `npm test`.
+- Make sure your code passes _all_ tests: `pnpm test`.
 
 ### Development
 
@@ -39,32 +39,20 @@ Run the commands below in the root directory.
 #### Running the build in watch mode
 
 ```sh
-npm run build:watch
+pnpm build:watch
 ```
 
 #### Running the tests in watch mode
 
 ```sh
-npm run test -- --watch
+pnpm test -- --watch
 ```
 
 #### Fixing lint issues automatically
 
 ```sh
-npm run lint:code -- --fix
+pnpm lint:code -- --fix
 ```
-
-#### Making changes to the documentation website (docusaurus)
-
-The local version of docs will use the locally built version of uniforms, so make sure to run the build in watch mode for live changes.
-
-Navigate to `/website` and run
-
-```sh
-npm start
-```
-
-It will start the docusaurus in development mode supporting hot reload so you should see the changes made to the website immediately.
 
 ## _Work in progress_ PRs are also welcome
 

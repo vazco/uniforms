@@ -52,7 +52,10 @@ describe('@RTL AntD', () => {
   });
   suites.testListItemField(theme.ListItemField);
   suites.testLongTextField(theme.LongTextField);
-  suites.testNumField(theme.NumField);
+  suites.testNumField(theme.NumField, {
+    minProperty: 'aria-valuemin',
+    maxProperty: 'aria-valuemax',
+  });
   suites.testNestField(theme.NestField);
   suites.testQuickForm(theme.QuickForm);
   // FIXME: AntD radio.group does not support HTML attributes https://github.com/ant-design/ant-design/issues/8561, added a flag to skip attributes tests.

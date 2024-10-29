@@ -43,9 +43,10 @@
     "@emotion/styled": "11.6.0",
     "@types/invariant": "2.2.37",
     "@types/lodash": "4.17.5",
-    "@types/react": "17.0.39",
+    "@types/react": "18.3.12",
     "tslib": "2.2.0",
-    "typescript": "5.5.4"
+    "typescript": "5.5.4",
+    "zod": "^3.0.0"
   },
   "scripts": {
     "build:cjs": "tsc --build tsconfig.cjs.json",

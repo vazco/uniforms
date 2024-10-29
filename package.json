@@ -5,20 +5,18 @@
     "build": "turbo build:cjs build:esm",
     "build:watch": "turbo watch build:cjs build:esm",
     "clean": "rimraf ./**/cjs ./**/esm && rimraf coverage",
-    "coverage": "jest --coverage",
-    "install": "npm run build && husky install",
-    "lint": "npm run lint:code && npm run lint:text && npm run lint:types",
+    "coverage": "jest --coverage --no-cache --runInBand",
+    "lint": "pnpm lint:code && pnpm lint:text && pnpm lint:types",
     "lint:code": "eslint --cache --cache-location node_modules/.cache/eslint --cache-strategy content --ext js,ts,tsx .",
     "lint:text": "prettier --check \"**/*.{json,md,mdx,yml}\"",
-    "lint:types": "npm run build",
-    "prereset": "npm run clean",
-    "pretest": "npm run lint",
+    "lint:types": "pnpm build",
+    "prereset": "pnpm clean",
     "reset": "rimraf node_modules .turbo packages/*/.turbo packages/*/node_modules reproductions/.cache reproductions/dist reproductions/node_modules website/.docusaurus website/build website/node_modules",
     "test": "jest"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "5.16.5",
-    "@testing-library/react": "12.1.5",
+    "@testing-library/react": "14.3.1",
     "@testing-library/user-event": "14.4.3",
     "@types/jest": "26.0.20",
     "@types/node": "18.19.50",
@@ -37,8 +35,5 @@
     "turbo": "2.1.1",
     "typescript": "5.5.4"
   },
-  "packageManager": "npm@10.8.3",
-  "workspaces": [
-    "packages/*"
-  ]
+  "packageManager": "pnpm@9.12.2"
 }

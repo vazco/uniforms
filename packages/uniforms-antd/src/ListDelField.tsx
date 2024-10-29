@@ -19,7 +19,7 @@ function ListDel({
   readOnly,
   shape = 'circle',
   size = 'small',
-  type = 'ghost',
+  type = 'default',
   ...props
 }: ListDelFieldProps) {
   const nameParts = joinName(null, name);

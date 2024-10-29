@@ -5,6 +5,15 @@ import z from 'zod';
 import { renderWithZod } from './render-zod';
 import { skipTestIf } from './skipTestIf';
 
+function getSelectFields() {
+  const fields = screen.queryAllByRole('checkbox');
+  if (fields.length > 0) {
+    return fields;
+  }
+
+  return screen.getAllByRole('radio');
+}
+
 export function testSelectField(
   SelectField: ComponentType<any>,
   options?: {
@@ -407,10 +416,11 @@ export function testSelectField(
       element: <SelectField checkboxes name="x" />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
+
+    const fields = getSelectFields();
+
     expect(
-      screen
-        .getAllByRole(/checkbox|radio/)
-        .filter(element => element instanceof HTMLInputElement),
+      fields.filter(element => element instanceof HTMLInputElement),
     ).toHaveLength(2);
   });
 
@@ -419,9 +429,12 @@ export function testSelectField(
       element: <SelectField checkboxes name="x" disabled />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const checkboxes = screen
-      .getAllByRole(/checkbox|radio/)
-      .filter(element => element instanceof HTMLInputElement);
+
+    const fields = getSelectFields();
+    const checkboxes = fields.filter(
+      element => element instanceof HTMLInputElement,
+    );
+
     expect(checkboxes?.[0]).toBeDisabled();
     expect(checkboxes?.[1]).toBeDisabled();
   });
@@ -432,8 +445,8 @@ export function testSelectField(
       element: <SelectField checkboxes onChange={onChange} name="x" readOnly />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const checkboxes = screen.getAllByRole(/checkbox|radio/);
-    fireEvent.click(checkboxes?.[0]);
+    const fields = getSelectFields();
+    fireEvent.click(fields?.[0]);
     expect(onChange).not.toHaveBeenCalled();
   });
 
@@ -455,8 +468,8 @@ export function testSelectField(
         element: <SelectField checkboxes name="x" />,
         schema: z.object({ x: z.enum(['a', 'b']) }),
       });
-      const checkboxes = screen.getAllByRole(/checkbox|radio/);
-      expect(checkboxes?.[0]).toHaveAttribute('id');
+      const fields = getSelectFields();
+      expect(fields?.[0]).toHaveAttribute('id');
     },
   );
 
@@ -467,9 +480,10 @@ export function testSelectField(
         element: <SelectField checkboxes name="x" id="y" />,
         schema: z.object({ x: z.enum(['a', 'b']) }),
       });
-      const checkboxes = screen
-        .getAllByRole(/checkbox|radio/)
-        .filter(element => element instanceof HTMLInputElement);
+      const fields = getSelectFields();
+      const checkboxes = fields.filter(
+        element => element instanceof HTMLInputElement,
+      );
       expect(checkboxes?.[0]).toHaveAttribute('id', 'y-YQ');
       expect(checkboxes?.[1]).toHaveAttribute('id', 'y-Yg');
     },
@@ -480,9 +494,10 @@ export function testSelectField(
       element: <SelectField checkboxes name="x" />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const checkboxes = screen
-      .getAllByRole(/checkbox|radio/)
-      .filter(element => element instanceof HTMLInputElement);
+    const fields = getSelectFields();
+    const checkboxes = fields.filter(
+      element => element instanceof HTMLInputElement,
+    );
     expect(checkboxes?.[0]).toHaveAttribute('name', 'x');
     expect(checkboxes?.[1]).toHaveAttribute('name', 'x');
   });
@@ -519,9 +534,10 @@ export function testSelectField(
       element: <SelectField checkboxes name="x" />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const checkboxes = screen
-      .getAllByRole(/checkbox|radio/)
-      .filter(element => element instanceof HTMLInputElement);
+    const fields = getSelectFields();
+    const checkboxes = fields.filter(
+      element => element instanceof HTMLInputElement,
+    );
     expect(checkboxes?.[0]).toBeChecked();
     expect(checkboxes?.[1]).not.toBeChecked();
   });
@@ -532,9 +548,10 @@ export function testSelectField(
       schema: z.object({ x: z.enum(['a', 'b']) }),
       model: { x: 'b' },
     });
-    const checkboxes = screen
-      .getAllByRole(/checkbox|radio/)
-      .filter(element => element instanceof HTMLInputElement);
+    const fields = getSelectFields();
+    const checkboxes = fields.filter(
+      element => element instanceof HTMLInputElement,
+    );
     expect(checkboxes?.[0]).not.toBeChecked();
     expect(checkboxes?.[1]).toBeChecked();
   });
@@ -544,9 +561,10 @@ export function testSelectField(
       element: <SelectField checkboxes name="x" value="b" />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const checkboxes = screen
-      .getAllByRole(/checkbox|radio/)
-      .filter(element => element instanceof HTMLInputElement);
+    const fields = getSelectFields();
+    const checkboxes = fields.filter(
+      element => element instanceof HTMLInputElement,
+    );
     expect(checkboxes?.[0]).not.toBeChecked();
     expect(checkboxes?.[1]).toBeChecked();
   });
@@ -557,9 +575,10 @@ export function testSelectField(
       element: <SelectField checkboxes name="x" onChange={onChange} />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const checkboxes = screen
-      .getAllByRole(/checkbox|radio/)
-      .filter(element => element instanceof HTMLInputElement);
+    const fields = getSelectFields();
+    const checkboxes = fields.filter(
+      element => element instanceof HTMLInputElement,
+    );
 
     fireEvent.click(checkboxes?.[1]);
     expect(onChange).toHaveBeenCalledWith('b');
@@ -572,8 +591,11 @@ export function testSelectField(
       schema: z.object({ x: z.enum(['a', 'b']) }),
       model: { x: 'a' },
     });
-    const checkbox = screen.getByRole(/checkbox|radio/, { name: 'b' });
-    fireEvent.click(checkbox);
+    let field = screen.queryByRole('checkbox', { name: 'b' });
+    if (!field) {
+      field = screen.getByRole('radio', { name: 'b' });
+    }
+    fireEvent.click(field);
     expect(onChange).toHaveBeenCalledWith('b');
   });
 
@@ -591,10 +613,10 @@ export function testSelectField(
       ),
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const checkboxes = screen.getAllByRole(/checkbox|radio/);
-    fireEvent.click(checkboxes?.[1]);
+    const fields = getSelectFields();
+    fireEvent.click(fields?.[1]);
     expect(onChange).toHaveBeenCalledWith(['b']);
-    fireEvent.click(checkboxes?.[0]);
+    fireEvent.click(fields?.[0]);
     expect(onChange).toHaveBeenCalledWith(['a']);
   });
 
@@ -612,8 +634,8 @@ export function testSelectField(
       ),
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const checkboxes = screen.getAllByRole(/checkbox|radio/);
-    fireEvent.click(checkboxes?.[0]);
+    const fields = getSelectFields();
+    fireEvent.click(fields?.[0]);
     expect(onChange).toHaveBeenCalledWith([]);
   });
 
@@ -642,7 +664,7 @@ export function testSelectField(
         ),
         schema: z.object({ x: z.enum(['a', 'b']) }),
       });
-      const field = screen.getByTestId('select-field');
+      const field = screen.getAllByTestId('select-field')[0];
       expect(field).toHaveAttribute('data-x', 'x');
       expect(field).toHaveAttribute('data-z', 'z');
       expect(field).toHaveAttribute('data-y', 'y');
@@ -672,10 +694,10 @@ export function testSelectField(
       ),
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const checkboxes = screen
-      .getAllByRole(/checkbox|radio/)
-      .filter(element => element instanceof HTMLInputElement);
-
+    const fields = getSelectFields();
+    const checkboxes = fields.filter(
+      element => element instanceof HTMLInputElement,
+    );
     expect(checkboxes?.[0]).toBeDisabled();
     expect(checkboxes?.[1]).not.toBeDisabled();
   });

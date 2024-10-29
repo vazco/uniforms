@@ -1,13 +1,13 @@
 import DatePicker, { DatePickerProps } from 'antd/lib/date-picker';
-import moment, { Moment } from 'moment';
+import dayjs from 'dayjs';
 import React, { Ref } from 'react';
 import { connectField, FieldProps, filterDOMProps } from 'uniforms';
 
 import wrapField from './wrapField';
 
 export type DateFieldProps = FieldProps<
-  Date | Moment,
-  DatePickerProps,
+  Date,
+  Omit<DatePickerProps, 'onReset'>,
   // FIXME: Seems like DatePickerProps doesn't contain 'showTime'.
   { inputRef?: Ref<typeof DatePicker>; showTime?: boolean }
 >;
@@ -35,7 +35,7 @@ function Date({
       ref={props.inputRef}
       showTime={showTime}
       style={style}
-      value={props.value && moment(props.value)}
+      value={props.value && dayjs(props.value)}
       {...filterDOMProps(props)}
     />,
   );

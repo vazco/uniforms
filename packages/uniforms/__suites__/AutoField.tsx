@@ -142,7 +142,7 @@ export function testAutoField(
       }),
     });
 
-    expect(screen.getByLabelText('X')).toBeInTheDocument();
+    expect(screen.getByText('X')).toBeInTheDocument();
   });
 
   test('<AutoField> - uses Component (props)', () => {

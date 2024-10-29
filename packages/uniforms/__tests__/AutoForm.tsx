@@ -1,6 +1,6 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import omit from 'lodash/omit';
-import React, { ReactNode } from 'react';
+import React, { act, ReactNode } from 'react';
 import SimpleSchema from 'simpl-schema';
 import { AutoForm, connectField, Context, context } from 'uniforms';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
@@ -41,7 +41,7 @@ describe('<AutoForm />', () => {
       expect(onChange).toHaveBeenLastCalledWith('a', '2');
     });
 
-    it('validates', () => {
+    it('validates', async () => {
       render(
         <AutoForm
           // @ts-expect-error https://github.com/vazco/uniforms/issues/1165
@@ -57,7 +57,7 @@ describe('<AutoForm />', () => {
       const input = screen.getByLabelText('A');
       fireEvent.submit(form);
 
-      expect(validator).toHaveBeenCalledTimes(1);
+      await waitFor(() => expect(validator).toHaveBeenCalledTimes(1));
       expect(validator).toHaveBeenLastCalledWith({ a: '', b: '', c: '' });
 
       fireEvent.change(input, { target: { value: '2' } });
@@ -200,8 +200,7 @@ describe('<AutoForm />', () => {
       const input = screen.getByLabelText('A');
       fireEvent.change(input, { target: { value: '1' } });
 
-      await new Promise(resolve => setTimeout(resolve));
-      expect(onSubmit).toHaveBeenCalledTimes(1);
+      await waitFor(() => expect(onSubmit).toHaveBeenCalledTimes(1));
       expect(onSubmit).toHaveBeenLastCalledWith({ a: '1', b: '', c: '' });
       expect(validator).toHaveBeenCalledTimes(1);
       expect(validator).toHaveBeenLastCalledWith({ a: '1', b: '', c: '' });
@@ -209,7 +208,7 @@ describe('<AutoForm />', () => {
   });
 
   describe('when reset', () => {
-    it('reset `model`', () => {
+    it('reset `model`', async () => {
       const schema = new SimpleSchema({ a: { type: String, optional: true } });
       const bridge = new SimpleSchema2Bridge({ schema });
       render(
@@ -230,14 +229,16 @@ describe('<AutoForm />', () => {
         expect.objectContaining({ model: { a: 'a' } }),
       );
 
-      contextSpy.mock.calls.slice(-1)[0][0]?.formRef.reset();
+      await act(async () => {
+        contextSpy.mock.calls.slice(-1)[0][0]?.formRef.reset();
+      });
 
       expect(contextSpy).toHaveBeenLastCalledWith(
         expect.objectContaining({ model: {} }),
       );
     });
 
-    it('resets state `changedMap`', () => {
+    it('resets state `changedMap`', async () => {
       const schema = new SimpleSchema({ a: { type: String, optional: true } });
       const bridge = new SimpleSchema2Bridge({ schema });
       render(
@@ -258,14 +259,16 @@ describe('<AutoForm />', () => {
         expect.objectContaining({ changedMap: { a: {} } }),
       );
 
-      contextSpy.mock.calls.slice(-1)[0][0]?.formRef.reset();
+      await act(async () => {
+        contextSpy.mock.calls.slice(-1)[0][0]?.formRef.reset();
+      });
 
       expect(contextSpy).toHaveBeenLastCalledWith(
         expect.objectContaining({ changedMap: {} }),
       );
     });
 
-    it('resets state `changed`', () => {
+    it('resets state `changed`', async () => {
       const schema = new SimpleSchema({ a: { type: String, optional: true } });
       const bridge = new SimpleSchema2Bridge({ schema });
       render(
@@ -286,7 +289,9 @@ describe('<AutoForm />', () => {
         expect.objectContaining({ changed: true }),
       );
 
-      contextSpy.mock.calls.slice(-1)[0][0]?.formRef.reset();
+      await act(async () => {
+        contextSpy.mock.calls.slice(-1)[0][0]?.formRef.reset();
+      });
 
       expect(contextSpy).toHaveBeenLastCalledWith(
         expect.objectContaining({ changed: false }),

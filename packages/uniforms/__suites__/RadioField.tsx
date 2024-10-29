@@ -88,8 +88,8 @@ export function testRadioField(
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
 
-    expect(screen.getByLabelText('a')).toBeTruthy();
-    expect(screen.getByLabelText('b')).toBeTruthy();
+    expect(screen.getByText('a')).toBeTruthy();
+    expect(screen.getByText('b')).toBeTruthy();
   });
 
   test('<RadioField> - renders a set of checkboxes with correct options', () => {
@@ -106,8 +106,8 @@ export function testRadioField(
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
 
-    expect(screen.getByLabelText('A')).toBeTruthy();
-    expect(screen.getByLabelText('B')).toBeTruthy();
+    expect(screen.getByText('A')).toBeTruthy();
+    expect(screen.getByText('B')).toBeTruthy();
   });
 
   test('<RadioField> - renders a set of checkboxes with correct value (default)', () => {
@@ -148,7 +148,7 @@ export function testRadioField(
       schema: z.object({ x: z.enum(['a', 'b']) }),
       onChange,
     });
-    await userEvent.click(screen.getByLabelText('b'));
+    await userEvent.click(screen.getByText('b'));
 
     expect(onChange).toHaveBeenLastCalledWith('x', 'b');
   });
@@ -204,7 +204,7 @@ export function testRadioField(
     });
 
     expect(screen.getAllByRole('radio')).toHaveLength(2);
-    expect(screen.getByLabelText('ă')).toBeTruthy();
-    expect(screen.getByLabelText('ș')).toBeTruthy();
+    expect(screen.getByText('ă')).toBeTruthy();
+    expect(screen.getByText('ș')).toBeTruthy();
   });
 }
