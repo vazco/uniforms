@@ -1,5 +1,5 @@
 {
-  "name": "uniforms-reproductions",
+  "name": "reproductions",
   "private": true,
   "scripts": {
     "build": "parcel build ./index.html",
