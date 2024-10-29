@@ -1,3 +1,7 @@
+## [v4.0.0-beta.2](https://github.com/vazco/uniforms/tree/v4.0.0-beta.2) (2024-10-29)
+
+- **Fixed:** Fixed `tslib` issue [\#1378](https://github.com/vazco/uniforms/pull/1378)
+
 ## [v4.0.0-beta.1](https://github.com/vazco/uniforms/tree/v4.0.0-beta.1) (2024-10-29)
 
 - **Breaking:** Update React to v18 & AntD to v5 [\#1376](https://github.com/vazco/uniforms/pull/1376)

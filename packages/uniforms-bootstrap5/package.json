@@ -1,6 +1,6 @@
 {
   "name": "uniforms-bootstrap5",
-  "version": "4.0.0-beta.1",
+  "version": "4.0.0-beta.2",
   "license": "MIT",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -29,7 +29,7 @@
   ],
   "peerDependencies": {
     "react": "^18.0.0 || ^17.0.0 || ^16.8.0",
-    "uniforms": "4.0.0-beta.1"
+    "uniforms": "4.0.0-beta.2"
   },
   "dependencies": {
     "classnames": "^2.0.0",
