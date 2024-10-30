@@ -1,6 +1,8 @@
 ---
 id: what-are-uniforms
 title: What are uniforms?
+sidebar:
+  order: 1
 ---
 
 Generally speaking, uniforms are a set of React libraries for building forms from every schema.

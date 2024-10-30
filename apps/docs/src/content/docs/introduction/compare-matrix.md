@@ -1,6 +1,8 @@
 ---
 id: compare-matrix
 title: Comparison matrix
+sidebar:
+  order: 3
 ---
 
 |                                                             Feature | [uniforms](https://github.com/vazco/uniforms) | [Formik](https://github.com/jaredpalmer/formik) | [redux-form](https://github.com/erikras/redux-form) | [React Final Form](https://github.com/final-form/react-final-form) | [react-hook-form](https://github.com/react-hook-form/react-hook-form) | [react-jsonschema-form](https://github.com/rjsf-team/react-jsonschema-form) |

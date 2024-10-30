@@ -1,6 +1,8 @@
 ---
 id: motivation
 title: Motivation
+sidebar:
+  order: 2
 ---
 
 ## Forms concept
