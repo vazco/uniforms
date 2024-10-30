@@ -21,3 +21,4 @@ export { default as SubmitField, SubmitFieldProps } from './SubmitField';
 export { default as TextField, TextFieldProps } from './TextField';
 export { default as ValidatedForm } from './ValidatedForm';
 export { default as ValidatedQuickForm } from './ValidatedQuickForm';
+export { default as FileUploadField } from './FileUploadField';
