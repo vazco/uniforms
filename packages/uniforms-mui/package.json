@@ -30,7 +30,7 @@
     "src/*.tsx"
   ],
   "peerDependencies": {
-    "@mui/material": "^5.0.0",
+    "@mui/material": "^6.0.0",
     "react": "^18.0.0 || ^17.0.0",
     "uniforms": "4.0.0-beta.2"
   },
