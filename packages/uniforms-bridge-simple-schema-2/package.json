@@ -1,6 +1,6 @@
 {
   "name": "uniforms-bridge-simple-schema-2",
-  "version": "4.0.0-beta.2",
+  "version": "4.0.0-beta.3",
   "license": "MIT",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -39,7 +39,7 @@
   },
   "peerDependencies": {
     "simpl-schema": "^1.0.0 || ^0.0.4",
-    "uniforms": "4.0.0-beta.2"
+    "uniforms": "4.0.0-beta.3"
   },
   "devDependencies": {
     "@types/invariant": "2.2.37",
