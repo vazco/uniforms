@@ -1,5 +1,4 @@
 module.exports = {
-  '**/*.css': ['stylelint'],
   '**/*.{js,ts,tsx}': [
     'eslint --cache --cache-location node_modules/.cache/eslint --cache-strategy content',
   ],
