@@ -89,6 +89,29 @@ describe('ZodBridge', () => {
       expect(error?.issues?.[0]?.message).toBe(errorMessage);
     });
 
+    it('works with chained refined schema', () => {
+      const firstErrorMessage = 'Different values';
+      const secondErrorMessage = 'Different moduloes of 2 and 3';
+
+      const schema = object({
+        a: number(),
+        b: number(),
+      })
+        .refine(({ a, b }) => a === b, {
+          message: firstErrorMessage,
+          path: ['b'],
+        })
+        .refine(({ a, b }) => a % 2 === b % 3, {
+          message: secondErrorMessage,
+          path: ['b'],
+        });
+
+      const bridge = new ZodBridge({ schema });
+      const error = bridge.getValidator()({ a: 1, b: 2 });
+      expect(error?.issues?.[0]?.message).toBe(firstErrorMessage);
+      expect(error?.issues?.[1]?.message).toBe(secondErrorMessage);
+    });
+
     it('works with super refined schema', () => {
       const errorMessage = 'Different values';
 
@@ -107,6 +130,37 @@ describe('ZodBridge', () => {
       const bridge = new ZodBridge({ schema });
       const error = bridge.getValidator()({ a: 'a', b: 'b' });
       expect(error?.issues?.[0]?.message).toBe(errorMessage);
+    });
+
+    it('works with chained super refined schema', () => {
+      const firstErrorMessage = 'Different values';
+      const secondErrorMessage = 'Different moduloes of 2 and 3';
+
+      const schema = object({
+        a: number(),
+        b: number(),
+      })
+        .superRefine((val, ctx) => {
+          if (val.a !== val.b) {
+            ctx.addIssue({
+              code: ZodIssueCode.custom,
+              message: firstErrorMessage,
+            });
+          }
+        })
+        .superRefine((val, ctx) => {
+          if (val.a % 2 !== val.b % 3) {
+            ctx.addIssue({
+              code: ZodIssueCode.custom,
+              message: secondErrorMessage,
+            });
+          }
+        });
+
+      const bridge = new ZodBridge({ schema });
+      const error = bridge.getValidator()({ a: 1, b: 2 });
+      expect(error?.issues?.[0]?.message).toBe(firstErrorMessage);
+      expect(error?.issues?.[1]?.message).toBe(secondErrorMessage);
     });
   });
 
@@ -243,6 +297,17 @@ describe('ZodBridge', () => {
       const schema = object({}).refine(data => data);
       const bridge = new ZodBridge({ schema });
       expect(bridge.getField('')).toBe(schema._def.schema);
+    });
+
+    it('works with nested ZodEffects', () => {
+      const schema = object({})
+        .refine(data => data)
+        .refine(data => data)
+        .refine(data => data);
+      const bridge = new ZodBridge({ schema });
+      expect(bridge.getField('')).toBe(
+        schema._def.schema._def.schema._def.schema,
+      );
     });
   });
 
