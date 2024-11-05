@@ -1,0 +1,81 @@
+---
+title: 'Installation'
+sidebar_position: 1
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+### 1. Install core
+
+```sh
+npm install uniforms
+```
+
+### 2. Install bridge
+
+<Tabs>
+  {/* prettier-ignore */}
+  <TabItem value="json-schema" label="JSON Schema">
+    ```sh 
+    npm install uniforms-bridge-json-schema
+    ```
+  </TabItem>
+  {/* prettier-ignore */}
+  <TabItem value="simple-schema-2" label="SimpleSchema (v2)">
+    ```sh 
+    npm install uniforms-bridge-simple-schema-2
+    ```
+  </TabItem>
+  {/* prettier-ignore */}
+  <TabItem value="zod" label="Zod" default>
+    ```sh 
+    npm install uniforms-bridge-zod
+    ```
+  </TabItem>
+</Tabs>
+
+### 3. Install theme
+
+<Tabs>
+  {/* prettier-ignore */}
+  <TabItem value="antd" label="AntD">
+    ```sh AntD
+    npm install uniforms-antd
+    ```
+  </TabItem>
+  {/* prettier-ignore */}
+  <TabItem value="bootstrap4" label="Bootstrap 4">
+    ```sh Bootstrap 4
+    npm install uniforms-bootstrap4
+    ```
+  </TabItem>
+  {/* prettier-ignore */}
+  <TabItem value="bootstrap5" label="Bootstrap 5">
+    ```sh Bootstrap 5
+    npm install uniforms-bootstrap5
+    ```
+  </TabItem>
+  {/* prettier-ignore */}
+  <TabItem value="mui" label="MUI" default>
+    ```sh MUI
+    npm install uniforms-mui
+    ```
+  </TabItem>
+  {/* prettier-ignore */}
+  <TabItem value="semantic" label="Semantic">
+    ```sh Semantic
+    npm install uniforms-semantic
+    ```
+  </TabItem>
+  {/* prettier-ignore */}
+  <TabItem value="unstyled" label="Unstyled">
+    ```sh Unstyled
+    npm install uniforms-unstyled
+    ```
+  </TabItem>
+</Tabs>
+
+:::info
+If you are going to use a theme package - remember to include correct styles!
+:::

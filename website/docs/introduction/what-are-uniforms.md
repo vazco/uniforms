@@ -16,7 +16,7 @@ sidebar_position: 1
 
 :::info
 To start building forms with uniforms, check out the [Getting
-Started](/getting-started/installation) section, where you'll find detailed
+Started](/docs/getting-started/installation) section, where you'll find detailed
 instructions on setting up schemas, selecting themes, and creating your first
 form.
 :::
