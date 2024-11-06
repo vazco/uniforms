@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from '../../css/index.module.css';
 // import { CommercialServices } from './CommercialServices';
-// import { Comparison } from './Comparison';
+import { Comparison } from './Comparison';
 import { Discussions } from './Discussions';
 import { ExampleFullyCustomizable } from './ExampleFullyCustomizable';
 import { ExampleSimpleYetPowerful } from './ExampleSimpleYetPowerful';
@@ -30,9 +30,9 @@ export function LandingPage() {
           <Discussions />
         </div>
         <WhoUses />
-        {/* <div className="container">
+        <div className="container">
           <Comparison />
-        </div> */}
+        </div>
         {/* <div className="container" id="commercial-services">
           <CommercialServices />
         </div> */}
