@@ -5,7 +5,7 @@ import styles from '../../css/index.module.css';
 // import { CommercialServices } from './CommercialServices';
 // import { Comparison } from './Comparison';
 // import { Discussions } from './Discussions';
-// import { ExampleFullyCustomizable } from './ExampleFullyCustomizable';
+import { ExampleFullyCustomizable } from './ExampleFullyCustomizable';
 import { ExampleSimpleYetPowerful } from './ExampleSimpleYetPowerful';
 import { Footer } from './Footer';
 import { Header } from './Header';
@@ -26,7 +26,7 @@ export function LandingPage() {
         <WhyUs />
         <div className="container">
           <ExampleSimpleYetPowerful />
-          {/* <ExampleFullyCustomizable /> */}
+          <ExampleFullyCustomizable />
           {/* <Discussions /> */}
         </div>
         {/* <WhoUses />
