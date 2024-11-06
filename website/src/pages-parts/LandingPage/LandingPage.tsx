@@ -6,7 +6,7 @@ import styles from '../../css/index.module.css';
 // import { Comparison } from './Comparison';
 // import { Discussions } from './Discussions';
 // import { ExampleFullyCustomizable } from './ExampleFullyCustomizable';
-// import { ExampleSimpleYetPowerful } from './ExampleSimpleYetPowerful';
+import { ExampleSimpleYetPowerful } from './ExampleSimpleYetPowerful';
 import { Footer } from './Footer';
 import { Header } from './Header';
 import { OpenSource } from './OpenSource';
@@ -24,12 +24,12 @@ export function LandingPage() {
           <Testimonials />
         </div>
         <WhyUs />
-        {/* <div className="container">
+        <div className="container">
           <ExampleSimpleYetPowerful />
-          <ExampleFullyCustomizable />
-          <Discussions />
+          {/* <ExampleFullyCustomizable /> */}
+          {/* <Discussions /> */}
         </div>
-        <WhoUses />
+        {/* <WhoUses />
         <div className="container">
           <Comparison />
         </div>
