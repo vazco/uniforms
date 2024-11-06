@@ -7,7 +7,7 @@ import styles from '../../css/index.module.css';
 // import { Discussions } from './Discussions';
 // import { ExampleFullyCustomizable } from './ExampleFullyCustomizable';
 // import { ExampleSimpleYetPowerful } from './ExampleSimpleYetPowerful';
-// import { Footer } from './Footer';
+import { Footer } from './Footer';
 import { Header } from './Header';
 // import { OpenSource } from './OpenSource';
 // import { Testimonials } from './Testimonials';
@@ -18,8 +18,8 @@ export function LandingPage() {
   return (
     <div className={classNames(styles.landing, styles['overflow-hidden'])}>
       <Header />
-      {/* <div className="main">
-        <div className="container">
+      <div className="main">
+        {/* <div className="container">
           <OpenSource />
           <Testimonials />
         </div>
@@ -35,9 +35,9 @@ export function LandingPage() {
         </div>
         <div className="container" id="commercial-services">
           <CommercialServices />
-        </div>
+        </div> */}
         <Footer />
-      </div> */}
+      </div>
     </div>
   );
 }

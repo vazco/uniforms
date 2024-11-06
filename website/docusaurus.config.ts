@@ -36,6 +36,10 @@ const config: Config = {
     ],
   ],
 
+  customFields: {
+    email: 'hello@uniforms.tools',
+  },
+
   themeConfig: {
     navbar: {
       logo: { alt: 'uniforms logo', src: 'img/uniforms.svg' },
