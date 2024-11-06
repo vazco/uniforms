@@ -3,7 +3,7 @@ import React, { ReactNode, useContext } from 'react';
 import styles from '../css/index.module.css';
 import { useFrameAutoResize } from '../lib/autoresize';
 import { themeContext } from '../lib/universal';
-// import { PlaygroundWrap } from './Playground';
+import { PlaygroundWrap } from './Playground';
 
 export type FormWrapperProps = {
   children: ReactNode;
@@ -15,7 +15,7 @@ export function FormWrapper(props: FormWrapperProps) {
 
   return (
     <div className={styles['form-wrapper']}>
-      {/* <PlaygroundWrap frameProps={frameProps} theme={theme} {...props} /> */}
+      <PlaygroundWrap frameProps={frameProps} theme={theme} {...props} />
     </div>
   );
 }

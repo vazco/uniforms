@@ -7,7 +7,7 @@ import { CodeSection } from '../../components/CodeSection';
 import { FormWrapper } from '../../components/FormWrapper';
 import styles from '../../css/index.module.css';
 import { themeContext } from '../../lib/universal';
-// import { ShippingForm } from '../CommonForms/ShippingForm';
+import { ShippingForm } from '../CommonForms/ShippingForm';
 
 type SystemWindowProps = JSX.IntrinsicElements['div'];
 
@@ -54,8 +54,7 @@ function Showcase() {
       <SystemWindow>
         <themeContext.Provider value="semantic">
           <FormWrapper>
-            {/* <ShippingForm /> */}
-            AAA
+            <ShippingForm />
           </FormWrapper>
         </themeContext.Provider>
       </SystemWindow>
