@@ -10,7 +10,7 @@ import styles from '../../css/index.module.css';
 import { Footer } from './Footer';
 import { Header } from './Header';
 import { OpenSource } from './OpenSource';
-// import { Testimonials } from './Testimonials';
+import { Testimonials } from './Testimonials';
 // import { WhoUses } from './WhoUses';
 // import { WhyUs } from './WhyUs';
 
@@ -21,7 +21,7 @@ export function LandingPage() {
       <div className="main">
         <div className="container">
           <OpenSource />
-          {/* <Testimonials /> */}
+          <Testimonials />
         </div>
         {/* <WhyUs />
         <div className="container">
