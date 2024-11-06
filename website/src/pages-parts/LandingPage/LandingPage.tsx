@@ -9,7 +9,7 @@ import styles from '../../css/index.module.css';
 // import { ExampleSimpleYetPowerful } from './ExampleSimpleYetPowerful';
 import { Footer } from './Footer';
 import { Header } from './Header';
-// import { OpenSource } from './OpenSource';
+import { OpenSource } from './OpenSource';
 // import { Testimonials } from './Testimonials';
 // import { WhoUses } from './WhoUses';
 // import { WhyUs } from './WhyUs';
@@ -19,11 +19,11 @@ export function LandingPage() {
     <div className={classNames(styles.landing, styles['overflow-hidden'])}>
       <Header />
       <div className="main">
-        {/* <div className="container">
+        <div className="container">
           <OpenSource />
-          <Testimonials />
+          {/* <Testimonials /> */}
         </div>
-        <WhyUs />
+        {/* <WhyUs />
         <div className="container">
           <ExampleSimpleYetPowerful />
           <ExampleFullyCustomizable />
