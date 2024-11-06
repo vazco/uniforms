@@ -12,7 +12,7 @@ import { Header } from './Header';
 import { OpenSource } from './OpenSource';
 import { Testimonials } from './Testimonials';
 // import { WhoUses } from './WhoUses';
-// import { WhyUs } from './WhyUs';
+import { WhyUs } from './WhyUs';
 
 export function LandingPage() {
   return (
@@ -23,8 +23,8 @@ export function LandingPage() {
           <OpenSource />
           <Testimonials />
         </div>
-        {/* <WhyUs />
-        <div className="container">
+        <WhyUs />
+        {/* <div className="container">
           <ExampleSimpleYetPowerful />
           <ExampleFullyCustomizable />
           <Discussions />
