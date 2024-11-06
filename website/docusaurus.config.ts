@@ -72,6 +72,13 @@ const config: Config = {
   },
 
   themeConfig: {
+    algolia: {
+      apiKey: '9bab87682792c2bd77ec707a56669e29',
+      appId: 'WWWW16GKXU',
+      contextualSearch: false,
+      indexName: 'uniforms',
+      searchPagePath: false,
+    },
     navbar: {
       logo: { alt: 'uniforms logo', src: 'img/uniforms.svg' },
       items: [
@@ -82,8 +89,24 @@ const config: Config = {
           label: 'Docs',
         },
         {
+          label: 'Tutorial',
+          to: '/docs/tutorials-basic-uniforms-usage',
+          position: 'left',
+        },
+        { label: 'Playground', to: '/playground', position: 'left' },
+        {
           href: 'https://github.com/vazco/uniforms',
           label: 'GitHub',
+          position: 'left',
+        },
+        {
+          label: 'Enterprise',
+          href: 'https://forminer.com/?utm_source=uniforms&utm_medium=Menu_CTA&utm_campaign=Forminer_uniforms_menu_CTA&utm_id=Forminer_uniforms_menu',
+          position: 'left',
+        },
+        {
+          label: 'Custom solutions',
+          href: 'https://www.vazco.eu/',
           position: 'left',
         },
       ],
