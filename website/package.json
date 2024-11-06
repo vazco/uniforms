@@ -28,6 +28,7 @@
     "lz-string": "1.5.0",
     "message-box": "0.2.7",
     "prism-react-renderer": "^2.3.0",
+    "raw-loader": "4.0.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-frame-component": "5.2.7",

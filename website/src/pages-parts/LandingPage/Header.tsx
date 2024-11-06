@@ -45,11 +45,11 @@ function Showcase() {
   return (
     <div className={classNames(styles['floating-example'])}>
       <SystemWindow>
-        {/* <CodeSection
+        <CodeSection
           language="tsx"
           section="schema"
           source={require('!!raw-loader!../CommonForms/ShippingSchema')}
-        /> */}
+        />
       </SystemWindow>
       <SystemWindow>
         <themeContext.Provider value="semantic">

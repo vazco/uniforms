@@ -5,11 +5,7 @@ function handleResize(
   ref: RefObject<HTMLIFrameElement | undefined>,
   setHeight: (height: number) => void,
 ) {
-  const scrollHeight = get(
-    ref.current,
-    'node.contentDocument.body.scrollHeight',
-    0,
-  );
+  const scrollHeight = get(ref.current, 'contentDocument.body.scrollHeight', 0);
 
   if (scrollHeight !== 0) {
     setHeight(scrollHeight);

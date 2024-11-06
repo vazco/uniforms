@@ -56,6 +56,7 @@ export function CodeSection({
       <components.code
         children={source}
         className={`language-${language}`}
+        //@ts-expect-error: Property 'mdxType' does not exist on type 'IntrinsicAttributes & Props'.
         mdxType="code"
         originalType="code"
         parentName="pre"
