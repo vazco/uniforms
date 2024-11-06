@@ -11,7 +11,7 @@ import { Footer } from './Footer';
 import { Header } from './Header';
 import { OpenSource } from './OpenSource';
 import { Testimonials } from './Testimonials';
-// import { WhoUses } from './WhoUses';
+import { WhoUses } from './WhoUses';
 import { WhyUs } from './WhyUs';
 
 export function LandingPage() {
@@ -29,11 +29,11 @@ export function LandingPage() {
           <ExampleFullyCustomizable />
           <Discussions />
         </div>
-        {/* <WhoUses />
-        <div className="container">
+        <WhoUses />
+        {/* <div className="container">
           <Comparison />
-        </div>
-        <div className="container" id="commercial-services">
+        </div> */}
+        {/* <div className="container" id="commercial-services">
           <CommercialServices />
         </div> */}
         <Footer />
