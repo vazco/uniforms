@@ -4,7 +4,7 @@ import React from 'react';
 import styles from '../../css/index.module.css';
 // import { CommercialServices } from './CommercialServices';
 // import { Comparison } from './Comparison';
-// import { Discussions } from './Discussions';
+import { Discussions } from './Discussions';
 import { ExampleFullyCustomizable } from './ExampleFullyCustomizable';
 import { ExampleSimpleYetPowerful } from './ExampleSimpleYetPowerful';
 import { Footer } from './Footer';
@@ -27,7 +27,7 @@ export function LandingPage() {
         <div className="container">
           <ExampleSimpleYetPowerful />
           <ExampleFullyCustomizable />
-          {/* <Discussions /> */}
+          <Discussions />
         </div>
         {/* <WhoUses />
         <div className="container">
