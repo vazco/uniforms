@@ -91,7 +91,7 @@ describe('ZodBridge', () => {
 
     it('works with chained refined schema', () => {
       const firstErrorMessage = 'Different values';
-      const secondErrorMessage = 'Different moduloes of 2 and 3';
+      const secondErrorMessage = 'Different results';
 
       const schema = object({
         a: number(),
@@ -134,7 +134,7 @@ describe('ZodBridge', () => {
 
     it('works with chained super refined schema', () => {
       const firstErrorMessage = 'Different values';
-      const secondErrorMessage = 'Different moduloes of 2 and 3';
+      const secondErrorMessage = 'Different results';
 
       const schema = object({
         a: number(),
