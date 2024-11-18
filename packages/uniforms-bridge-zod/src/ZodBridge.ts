@@ -17,7 +17,6 @@ import {
   ZodNumberDef,
   ZodObject,
   ZodOptional,
-  ZodRawShape,
   ZodString,
   ZodType,
 } from 'zod';
@@ -55,15 +54,15 @@ type Option<Value> = {
   value: Value;
 };
 
-export default class ZodBridge<T extends ZodRawShape> extends Bridge {
-  schema: ZodObject<T> | ZodEffects<ZodObject<T>>;
+export default class ZodBridge<T> extends Bridge {
+  schema: ZodType<T>;
   provideDefaultLabelFromFieldName: boolean;
 
   constructor({
     schema,
     provideDefaultLabelFromFieldName = true,
   }: {
-    schema: ZodObject<T> | ZodEffects<ZodObject<T>>;
+    schema: ZodType<T>;
     provideDefaultLabelFromFieldName?: boolean;
   }) {
     super();
@@ -108,8 +107,8 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
   getField(name: string) {
     let field: ZodType = this.schema;
 
-    if (this.schema instanceof ZodEffects) {
-      field = this.schema._def.schema;
+    while (field instanceof ZodEffects) {
+      field = field.innerType();
     }
 
     for (const key of joinName(null, name)) {
