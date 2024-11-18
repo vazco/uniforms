@@ -42,7 +42,8 @@
     "@docusaurus/types": "3.5.2",
     "@types/simpl-schema": "1.12.8",
     "simpl-schema": "1.13.1",
-    "typescript": "~5.5.2"
+    "typescript": "~5.5.2",
+    "uniforms": "workspace:*"
   },
   "browserslist": {
     "production": [

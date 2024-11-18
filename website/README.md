@@ -4,22 +4,28 @@ This website is built using [Docusaurus](https://docusaurus.io/), a modern stati
 
 ### Installation
 
+In the root directory of the project, run:
+
 ```
-$ yarn
+$ pnpm install
 ```
 
 ### Local Development
 
+In the root directory of the project, run:
+
 ```
-$ yarn start
+$ pnpm -filter=website run start
 ```
 
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
 ### Build
 
+In the root directory of the project, run:
+
 ```
-$ yarn build
+$ pnpm -filter=website run build
 ```
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.

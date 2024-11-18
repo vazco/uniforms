@@ -590,6 +590,9 @@ importers:
       typescript:
         specifier: ~5.5.2
         version: 5.5.4
+      uniforms:
+        specifier: workspace:*
+        version: link:../packages/uniforms
 
 packages:
 
