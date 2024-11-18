@@ -17,7 +17,6 @@ import {
   ZodNumberDef,
   ZodObject,
   ZodOptional,
-  ZodRawShape,
   ZodString,
   ZodType,
 } from 'zod';
@@ -55,27 +54,15 @@ type Option<Value> = {
   value: Value;
 };
 
-type BuildTuple<L extends number, T extends any[] = []> = T['length'] extends L
-  ? T
-  : BuildTuple<L, [...T, any]>;
-
-type Decrement<N extends number> =
-  BuildTuple<N> extends [any, ...infer R] ? R['length'] : never;
-
-type NestedZodEffect<
-  T extends ZodObject<any>,
-  Depth extends number = 20,
-> = Depth extends 0 ? T : ZodEffects<T | NestedZodEffect<T, Decrement<Depth>>>;
-
-export default class ZodBridge<T extends ZodRawShape> extends Bridge {
-  schema: ZodObject<T> | NestedZodEffect<ZodObject<T>>;
+export default class ZodBridge<T> extends Bridge {
+  schema: ZodType<T>;
   provideDefaultLabelFromFieldName: boolean;
 
   constructor({
     schema,
     provideDefaultLabelFromFieldName = true,
   }: {
-    schema: ZodObject<T> | NestedZodEffect<ZodObject<T>>;
+    schema: ZodType<T>;
     provideDefaultLabelFromFieldName?: boolean;
   }) {
     super();
