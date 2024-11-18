@@ -36,7 +36,49 @@ const config: Config = {
     ],
   ],
 
+  customFields: {
+    email: 'hello@uniforms.tools',
+    companies: [
+      { url: 'https://www.deskpro.com/', image: 'deskpro.png', alt: 'Deskpro' },
+      { url: 'https://www.nokia.com/', image: 'nokia.png', alt: 'Nokia' },
+      {
+        url: 'https://github.com/react-page/react-page/tree/master/packages/plugins/createPluginMaterialUi',
+        image: 'react-page.png',
+        alt: 'React Page',
+      },
+      {
+        url: 'https://graphback.dev',
+        image: 'graphback.png',
+        alt: 'Graphback',
+      },
+      {
+        url: 'https://www.onyx-one.com/',
+        image: 'onyx-one.png',
+        alt: 'Onyx one',
+      },
+      { url: 'https://aerogear.org', image: 'aerogear.png', alt: 'Aerogear' },
+      {
+        url: 'https://cleverbeagle.com/together',
+        image: 'cleverbeagle.png',
+        alt: 'Clever Beagle',
+      },
+      { url: 'http://www.orionjs.org', image: 'orionjs.png', alt: 'Orion.js' },
+      {
+        url: 'https://boulder.care',
+        image: 'boulder.svg',
+        alt: 'Boulder Care',
+      },
+    ],
+  },
+
   themeConfig: {
+    algolia: {
+      apiKey: '9bab87682792c2bd77ec707a56669e29',
+      appId: 'WWWW16GKXU',
+      contextualSearch: false,
+      indexName: 'uniforms',
+      searchPagePath: false,
+    },
     navbar: {
       logo: { alt: 'uniforms logo', src: 'img/uniforms.svg' },
       items: [
@@ -47,8 +89,24 @@ const config: Config = {
           label: 'Docs',
         },
         {
+          label: 'Tutorial',
+          to: '/docs/tutorials-basic-uniforms-usage',
+          position: 'left',
+        },
+        { label: 'Playground', to: '/playground', position: 'left' },
+        {
           href: 'https://github.com/vazco/uniforms',
           label: 'GitHub',
+          position: 'left',
+        },
+        {
+          label: 'Enterprise',
+          href: 'https://forminer.com/?utm_source=uniforms&utm_medium=Menu_CTA&utm_campaign=Forminer_uniforms_menu_CTA&utm_id=Forminer_uniforms_menu',
+          position: 'left',
+        },
+        {
+          label: 'Custom solutions',
+          href: 'https://www.vazco.eu/',
           position: 'left',
         },
       ],
