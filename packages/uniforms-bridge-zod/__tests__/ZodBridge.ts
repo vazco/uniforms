@@ -10,6 +10,7 @@ import {
   enum as enum_,
   function as function_,
   instanceof as instanceof_,
+  infer as infer_,
   intersection,
   lazy,
   literal,
@@ -43,7 +44,8 @@ describe('ZodBridge', () => {
 
     it('works with simple types', () => {
       const schema = object({ a: string(), b: number() });
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const error = bridge.getValidator()({});
       const issues = error?.issues;
       expect(bridge.getError('a', error)).toBe(issues?.[0]);
@@ -52,7 +54,8 @@ describe('ZodBridge', () => {
 
     it('works with arrays', () => {
       const schema = object({ a: array(array(string())) });
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const error = bridge.getValidator()({ a: [['x', 'y', 0], [1]] });
       const issues = error?.issues;
       expect(bridge.getError('a', error)).toBe(null);
@@ -65,7 +68,8 @@ describe('ZodBridge', () => {
 
     it('works with nested objects', () => {
       const schema = object({ a: object({ b: object({ c: string() }) }) });
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const error = bridge.getValidator()({ a: { b: { c: 1 } } });
       const issues = error?.issues;
       expect(bridge.getError('a', error)).toBe(null);
@@ -84,9 +88,34 @@ describe('ZodBridge', () => {
         path: ['b'],
       });
 
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const error = bridge.getValidator()({ a: 'a', b: 'b' });
       expect(error?.issues?.[0]?.message).toBe(errorMessage);
+    });
+
+    it('works with chained refined schema', () => {
+      const firstErrorMessage = 'Different values';
+      const secondErrorMessage = 'Different results';
+
+      const schema = object({
+        a: number(),
+        b: number(),
+      })
+        .refine(({ a, b }) => a === b, {
+          message: firstErrorMessage,
+          path: ['b'],
+        })
+        .refine(({ a, b }) => a % 2 === b % 3, {
+          message: secondErrorMessage,
+          path: ['b'],
+        });
+
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
+      const error = bridge.getValidator()({ a: 1, b: 2 });
+      expect(error?.issues?.[0]?.message).toBe(firstErrorMessage);
+      expect(error?.issues?.[1]?.message).toBe(secondErrorMessage);
     });
 
     it('works with super refined schema', () => {
@@ -104,9 +133,42 @@ describe('ZodBridge', () => {
         }
       });
 
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const error = bridge.getValidator()({ a: 'a', b: 'b' });
       expect(error?.issues?.[0]?.message).toBe(errorMessage);
+    });
+
+    it('works with chained super refined schema', () => {
+      const firstErrorMessage = 'Different values';
+      const secondErrorMessage = 'Different results';
+
+      const schema = object({
+        a: number(),
+        b: number(),
+      })
+        .superRefine((val, ctx) => {
+          if (val.a !== val.b) {
+            ctx.addIssue({
+              code: ZodIssueCode.custom,
+              message: firstErrorMessage,
+            });
+          }
+        })
+        .superRefine((val, ctx) => {
+          if (val.a % 2 !== val.b % 3) {
+            ctx.addIssue({
+              code: ZodIssueCode.custom,
+              message: secondErrorMessage,
+            });
+          }
+        });
+
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
+      const error = bridge.getValidator()({ a: 1, b: 2 });
+      expect(error?.issues?.[0]?.message).toBe(firstErrorMessage);
+      expect(error?.issues?.[1]?.message).toBe(secondErrorMessage);
     });
   });
 
@@ -120,7 +182,8 @@ describe('ZodBridge', () => {
 
     it('works with simple types', () => {
       const schema = object({ a: string(), b: number() });
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const error = bridge.getValidator()({});
       const issues = error?.issues;
       expect(bridge.getErrorMessage('a', error)).toBe(issues?.[0].message);
@@ -129,7 +192,8 @@ describe('ZodBridge', () => {
 
     it('works with arrays', () => {
       const schema = object({ a: array(array(string())) });
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const error = bridge.getValidator()({ a: [['x', 'y', 0], [1]] });
       const issues = error?.issues;
       expect(bridge.getErrorMessage('a', error)).toBe('');
@@ -142,7 +206,8 @@ describe('ZodBridge', () => {
 
     it('works with nested objects', () => {
       const schema = object({ a: object({ b: object({ c: string() }) }) });
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const error = bridge.getValidator()({ a: { b: { c: 1 } } });
       const issues = error?.issues;
       expect(bridge.getErrorMessage('a', error)).toBe('');
@@ -167,7 +232,8 @@ describe('ZodBridge', () => {
 
     it('works with simple types', () => {
       const schema = object({ a: string(), b: number() });
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const error = bridge.getValidator()({});
       const messages = ['A: Required', 'B: Required'];
       expect(bridge.getErrorMessages(error)).toEqual(messages);
@@ -175,7 +241,8 @@ describe('ZodBridge', () => {
 
     it('works with arrays', () => {
       const schema = object({ a: array(array(string())) });
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const error = bridge.getValidator()({ a: [['x', 'y', 0], [1]] });
       const messages = [
         'A (0, 2): Expected string, received number',
@@ -186,7 +253,8 @@ describe('ZodBridge', () => {
 
     it('works with nested objects', () => {
       const schema = object({ a: object({ b: object({ c: string() }) }) });
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const error = bridge.getValidator()({ a: { b: { c: 1 } } });
       const messages = ['C: Expected string, received number'];
       expect(bridge.getErrorMessages(error)).toEqual(messages);
@@ -243,6 +311,17 @@ describe('ZodBridge', () => {
       const schema = object({}).refine(data => data);
       const bridge = new ZodBridge({ schema });
       expect(bridge.getField('')).toBe(schema._def.schema);
+    });
+
+    it('works with nested ZodEffects', () => {
+      const schema = object({})
+        .refine(data => data)
+        .refine(data => data)
+        .refine(data => data);
+      const bridge = new ZodBridge({ schema });
+      expect(bridge.getField('')).toBe(
+        schema._def.schema._def.schema._def.schema,
+      );
     });
   });
 
@@ -686,7 +765,8 @@ describe('ZodBridge', () => {
   describe('#getValidator', () => {
     it('return a function', () => {
       const schema = object({});
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const validator = bridge.getValidator();
       expect(validator).toEqual(expect.any(Function));
       expect(validator({})).toEqual(null);

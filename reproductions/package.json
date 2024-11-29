@@ -8,7 +8,7 @@
   "dependencies": {
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "@mui/material": "^5",
+    "@mui/material": "^6",
     "@types/react-dom": "^18",
     "@types/react": "^18",
     "@types/simpl-schema": "^1",

@@ -1,3 +1,12 @@
+## [v4.0.0-beta.4](https://github.com/vazco/uniforms/tree/v4.0.0-beta.3) (2024-11-18)
+
+- **Added:** Support for nested ZodEffects [\#1382](https://github.com/vazco/uniforms/pull/1382)
+
+## [v4.0.0-beta.3](https://github.com/vazco/uniforms/tree/v4.0.0-beta.3) (2024-10-31)
+
+- **Added:** Update MUI to v6 [\#1381](https://github.com/vazco/uniforms/pull/1381)
+- **Fixed:** Updated supported version of React in AntD theme [\#1380](https://github.com/vazco/uniforms/pull/1380)
+
 ## [v4.0.0-beta.2](https://github.com/vazco/uniforms/tree/v4.0.0-beta.2) (2024-10-29)
 
 - **Fixed:** Fixed `tslib` issue [\#1378](https://github.com/vazco/uniforms/pull/1378)
