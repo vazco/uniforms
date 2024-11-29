@@ -565,6 +565,36 @@ importers:
       react-frame-component:
         specifier: 5.2.7
         version: 5.2.7(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      uniforms:
+        specifier: workspace:*
+        version: link:../packages/uniforms
+      uniforms-antd:
+        specifier: workspace:*
+        version: link:../packages/uniforms-antd
+      uniforms-bootstrap4:
+        specifier: workspace:*
+        version: link:../packages/uniforms-bootstrap4
+      uniforms-bootstrap5:
+        specifier: workspace:*
+        version: link:../packages/uniforms-bootstrap5
+      uniforms-bridge-json-schema:
+        specifier: workspace:*
+        version: link:../packages/uniforms-bridge-json-schema
+      uniforms-bridge-simple-schema-2:
+        specifier: workspace:*
+        version: link:../packages/uniforms-bridge-simple-schema-2
+      uniforms-bridge-zod:
+        specifier: workspace:*
+        version: link:../packages/uniforms-bridge-zod
+      uniforms-mui:
+        specifier: workspace:*
+        version: link:../packages/uniforms-mui
+      uniforms-semantic:
+        specifier: workspace:*
+        version: link:../packages/uniforms-semantic
+      uniforms-unstyled:
+        specifier: workspace:*
+        version: link:../packages/uniforms-unstyled
       zod:
         specifier: 3.23.8
         version: 3.23.8
@@ -590,9 +620,6 @@ importers:
       typescript:
         specifier: ~5.5.2
         version: 5.5.4
-      uniforms:
-        specifier: workspace:*
-        version: link:../packages/uniforms
 
 packages:
 
@@ -11438,7 +11465,7 @@ snapshots:
       '@parcel/source-map': 2.1.1
       '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
       abortcontroller-polyfill: 1.7.5
       base-x: 3.0.10
       browserslist: 4.24.2
@@ -11466,7 +11493,7 @@ snapshots:
       '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
       '@parcel/utils': 2.12.0
       '@parcel/watcher': 2.4.1
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
     transitivePeerDependencies:
       - '@swc/helpers'
 
@@ -11540,7 +11567,7 @@ snapshots:
       '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
       '@parcel/rust': 2.12.0
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
 
   '@parcel/optimizer-svgo@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))':
     dependencies:
@@ -11572,7 +11599,7 @@ snapshots:
       '@parcel/node-resolver-core': 3.3.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
       '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
       '@swc/core': 1.7.40(@swc/helpers@0.5.13)
       semver: 7.6.3
     transitivePeerDependencies:
@@ -11761,7 +11788,7 @@ snapshots:
       '@parcel/core': 2.12.0(@swc/helpers@0.5.13)
       '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
       nullthrows: 1.1.1
 
   '@parcel/transformer-js@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))':
@@ -11772,7 +11799,7 @@ snapshots:
       '@parcel/rust': 2.12.0
       '@parcel/source-map': 2.1.1
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
       '@swc/helpers': 0.5.13
       browserslist: 4.24.2
       nullthrows: 1.1.1
@@ -11845,7 +11872,7 @@ snapshots:
       '@parcel/fs': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
       '@parcel/package-manager': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
       '@parcel/source-map': 2.1.1
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
       utility-types: 3.11.0
     transitivePeerDependencies:
       - '@parcel/core'
@@ -11918,7 +11945,7 @@ snapshots:
       '@parcel/watcher-win32-ia32': 2.4.1
       '@parcel/watcher-win32-x64': 2.4.1
 
-  '@parcel/workers@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)':
+  '@parcel/workers@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))':
     dependencies:
       '@parcel/core': 2.12.0(@swc/helpers@0.5.13)
       '@parcel/diagnostic': 2.12.0
@@ -11927,8 +11954,6 @@ snapshots:
       '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
       '@parcel/utils': 2.12.0
       nullthrows: 1.1.1
-    transitivePeerDependencies:
-      - '@swc/helpers'
 
   '@pkgr/core@0.1.1': {}
 

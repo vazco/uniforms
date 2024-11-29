@@ -33,7 +33,17 @@
     "react-dom": "^18.0.0",
     "react-feather": "2.0.10",
     "react-frame-component": "5.2.7",
-    "zod": "3.23.8"
+    "zod": "3.23.8",
+    "uniforms": "workspace:*",
+    "uniforms-antd": "workspace:*",
+    "uniforms-bootstrap4": "workspace:*",
+    "uniforms-bootstrap5": "workspace:*",
+    "uniforms-mui": "workspace:*",
+    "uniforms-semantic": "workspace:*",
+    "uniforms-unstyled": "workspace:*",
+    "uniforms-bridge-json-schema": "workspace:*",
+    "uniforms-bridge-simple-schema-2": "workspace:*",
+    "uniforms-bridge-zod": "workspace:*"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.5.2",
