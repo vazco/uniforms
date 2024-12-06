@@ -1,0 +1,5 @@
+{
+  "[mdx]": {
+    "editor.defaultFormatter": "unifiedjs.vscode-mdx"
+  }
+}
