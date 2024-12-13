@@ -1,0 +1,97 @@
+---
+title: 'Basic usage'
+sidebar_position: 1
+---
+
+import { ajvValidatorFile } from '@site/components/CodeEditor/ajvValidatorFile';
+import { CodeEditor } from '@site/components/CodeEditor/CodeEditor';
+
+### Zod
+
+export const zodFiles = {
+  '/App.tsx': `import { AutoForm } from 'uniforms-antd';
+import { ZodBridge } from 'uniforms-bridge-zod';
+import { z } from 'zod';
+
+const userSchema = z.object({
+  username: z.string(),
+});
+
+const schema = new ZodBridge({ schema: userSchema });
+
+export default function App() {
+  return (
+    <AutoForm
+      schema={schema}
+      onSubmit={model => window.alert(JSON.stringify(model))}
+    />
+  );
+}`
+};
+
+<CodeEditor bridge="zod" files={zodFiles} />
+
+### JSON Schema
+
+export const jsonSchemaFiles = {
+  '/App.tsx': `import { AutoForm } from 'uniforms-antd';
+import { schema } from './userSchema';
+
+export default function App() {
+  return (
+    <AutoForm
+      schema={schema}
+      onSubmit={model => window.alert(JSON.stringify(model))}
+    />
+  );
+}`,
+  '/userSchema.ts': `import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
+import { JSONSchemaType } from 'ajv'
+import { createValidator } from './validator';
+
+type FormData = {
+  username: string;
+};
+
+const userSchema: JSONSchemaType<FormData> = {
+  type: 'object',
+  properties: {
+    username: { type: 'string' },
+  },
+  required: ['username'],
+};
+
+export const schema = new JSONSchemaBridge({
+  schema: userSchema,
+  validator: createValidator(userSchema),
+});
+`,
+  '/validator.ts': ajvValidatorFile
+};
+
+<CodeEditor bridge="json-schema" files={jsonSchemaFiles} />
+
+### SimpleSchema
+
+export const simpleSchemaFiles = {
+  '/App.tsx': `import { AutoForm } from 'uniforms-antd';
+import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
+import SimpleSchema from 'simpl-schema';
+
+const userSchema = new SimpleSchema({
+  username: String
+});
+
+const schema = new SimpleSchema2Bridge({ schema: userSchema });
+
+export default function App() {
+  return (
+    <AutoForm
+      schema={schema}
+      onSubmit={model => window.alert(JSON.stringify(model))}
+    />
+  );
+}`
+}
+
+<CodeEditor bridge="simpl-schema" files={simpleSchemaFiles} />

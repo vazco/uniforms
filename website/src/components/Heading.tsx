@@ -1,0 +1,14 @@
+import classNames from 'classnames';
+import React from 'react';
+
+import styles from '../css/index.module.css';
+
+export type HeadingProps = JSX.IntrinsicElements['h1'];
+
+export function Heading({ children, className, ...props }: HeadingProps) {
+  return (
+    <h2 {...props} className={classNames(styles.heading, className)}>
+      {children}
+    </h2>
+  );
+}

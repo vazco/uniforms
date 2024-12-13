@@ -1,0 +1,73 @@
+{
+  "name": "website",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "docusaurus": "docusaurus",
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
+    "write-translations": "docusaurus write-translations",
+    "write-heading-ids": "docusaurus write-heading-ids",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@codemirror/autocomplete": "^6.18.2",
+    "@codesandbox/sandpack-react": "^2.19.9",
+    "@docusaurus/core": "3.5.2",
+    "@docusaurus/preset-classic": "3.5.2",
+    "@mdx-js/react": "^3.0.0",
+    "ajv": "8.17.1",
+    "antd": "5.21.5",
+    "classnames": "^2.0.0",
+    "clsx": "^2.0.0",
+    "lodash": "^4.0.0",
+    "lz-string": "1.5.0",
+    "message-box": "0.2.7",
+    "prism-react-renderer": "^2.3.0",
+    "raw-loader": "4.0.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-feather": "2.0.10",
+    "react-frame-component": "5.2.7",
+    "zod": "3.23.8",
+    "uniforms": "workspace:*",
+    "uniforms-antd": "workspace:*",
+    "uniforms-bootstrap4": "workspace:*",
+    "uniforms-bootstrap5": "workspace:*",
+    "uniforms-mui": "workspace:*",
+    "uniforms-semantic": "workspace:*",
+    "uniforms-unstyled": "workspace:*",
+    "uniforms-bridge-json-schema": "workspace:*",
+    "uniforms-bridge-simple-schema-2": "workspace:*",
+    "uniforms-bridge-zod": "workspace:*"
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "3.5.2",
+    "@docusaurus/theme-classic": "3.5.2",
+    "@docusaurus/tsconfig": "3.5.2",
+    "@docusaurus/types": "3.5.2",
+    "@types/simpl-schema": "1.12.8",
+    "simpl-schema": "1.13.1",
+    "typescript": "~5.5.2",
+    "uniforms": "workspace:*"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 3 chrome version",
+      "last 3 firefox version",
+      "last 5 safari version"
+    ]
+  },
+  "engines": {
+    "node": ">=18.0"
+  }
+}

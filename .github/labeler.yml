@@ -28,7 +28,6 @@
           - .lintstagedrc.js
           - .prettierignore
           - .prettierrc.js
-          - .stylelintrc
           - jest.config.js
           - turbo.json
           - package-lock.json
