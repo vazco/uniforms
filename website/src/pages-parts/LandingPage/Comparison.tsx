@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Matrix from '../../../docs/compare-matrix-landing.md';
+import Matrix from './compare-matrix-landing.md';
 import { Button } from '../../components/Button';
 import { Heading } from '../../components/Heading';
 import styles from '../../css/index.module.css';
