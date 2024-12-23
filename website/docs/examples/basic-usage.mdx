@@ -5,8 +5,8 @@ sidebar_position: 1
 
 import { ajvValidatorFile } from '@site/components/CodeEditor/ajvValidatorFile';
 import { CodeEditor } from '@site/components/CodeEditor/CodeEditor';
-
-### Zod
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 export const zodFiles = {
   '/App.tsx': `import { AutoForm } from 'uniforms-antd';
@@ -28,10 +28,6 @@ export default function App() {
   );
 }`
 };
-
-<CodeEditor bridge="zod" files={zodFiles} />
-
-### JSON Schema
 
 export const jsonSchemaFiles = {
   '/App.tsx': `import { AutoForm } from 'uniforms-antd';
@@ -69,10 +65,6 @@ export const schema = new JSONSchemaBridge({
   '/validator.ts': ajvValidatorFile
 };
 
-<CodeEditor bridge="json-schema" files={jsonSchemaFiles} />
-
-### SimpleSchema
-
 export const simpleSchemaFiles = {
   '/App.tsx': `import { AutoForm } from 'uniforms-antd';
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
@@ -94,4 +86,14 @@ export default function App() {
 }`
 }
 
-<CodeEditor bridge="simpl-schema" files={simpleSchemaFiles} />
+<Tabs>
+  <TabItem value="zod" label="Zod" default>
+   <CodeEditor bridge="zod" files={zodFiles} />
+  </TabItem>
+  <TabItem value="json-schema" label="JSON Schema">
+    <CodeEditor bridge="json-schema" files={jsonSchemaFiles} />
+  </TabItem>
+  <TabItem value="simpl-schema" label="Simple Schema">
+    <CodeEditor bridge="simpl-schema" files={simpleSchemaFiles} />
+  </TabItem>
+</Tabs>
