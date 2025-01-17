@@ -5,7 +5,7 @@ hide_table_of_contents: true
 ---
 
 import { ajvValidatorFile } from '@site/components/CodeEditor/ajvValidatorFile';
-import { CodeEditorTabs } from '@site/components/CodeEditorTabs';
+import { CodeEditorBridgesTabs } from '@site/components/CodeEditorBridgesTabs';
 
 export const appFile = `import { useState } from 'react';
 import { UserForm } from './UserForm';
@@ -195,4 +195,4 @@ export function ProfileForm(props: ProfileFormProps) {
 }`,
 }
 
-<CodeEditorTabs zod={zod} json={json} simple={simple} />
+<CodeEditorBridgesTabs zod={zod} json={json} simple={simple} />
