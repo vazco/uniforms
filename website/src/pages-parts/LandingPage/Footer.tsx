@@ -26,10 +26,10 @@ export function Footer() {
               and open source
             </h2>
             <ul className={styles.bullets}>
-              <Link to="/docs/installation">
+              <Link to="/docs/introduction/what-are-uniforms">
                 <li>Introduction</li>
               </Link>
-              <Link to="/docs/examples-common-forms">
+              <Link to="/docs/examples/basic-usage">
                 <li>Examples</li>
               </Link>
               <Link to="/docs/api-forms">

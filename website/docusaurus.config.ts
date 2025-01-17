@@ -89,11 +89,10 @@ const config: Config = {
           label: 'Docs',
         },
         {
-          label: 'Tutorial',
-          to: '/docs/tutorials-basic-uniforms-usage',
+          label: 'Playground',
+          to: '/docs/examples/basic-usage',
           position: 'left',
         },
-        { label: 'Playground', to: '/playground', position: 'left' },
         {
           href: 'https://github.com/vazco/uniforms',
           label: 'GitHub',

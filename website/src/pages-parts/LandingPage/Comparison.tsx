@@ -16,7 +16,7 @@ export function Comparison() {
       <div className="col col--8 col--offset-2">
         <Matrix />
         <div className={styles.centered}>
-          <Button to="/docs/compare-matrix">Read more</Button>
+          <Button to="/docs/introduction/comparison-table">Read more</Button>
         </div>
       </div>
     </div>
