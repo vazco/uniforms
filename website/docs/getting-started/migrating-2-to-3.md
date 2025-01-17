@@ -1,7 +1,7 @@
 ---
 id: migrating-2-to-3
 title: Migrating v2 to v3
-sidebar_position: 4
+sidebar_position: 3
 ---
 
 This guide is designed to help you through the migration. If you went through it and encountered any problems - do let us know. For more information on _why_ certain changes were made, see the [`CHANGELOG.md`](https://github.com/vazco/uniforms/blob/master/CHANGELOG.md). When migrating to v3, use the newest version. Gradual updates will take more time and won't ease this process.

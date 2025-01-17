@@ -125,7 +125,7 @@ export function Header() {
               ))}
             </div>
             <div className={styles['center-if-sm']}>
-              <Button to="/docs/tutorials-basic-uniforms-usage">
+              <Button to="/docs/getting-started/basic-usage">
                 Get Started
               </Button>
             </div>
