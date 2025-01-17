@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-    <strong><a href="https://uniforms.tools/docs/api-forms">API</a></strong> |
+    <strong><a href="https://uniforms.tools/docs/api-reference/forms">API</a></strong> |
     <strong><a href="https://github.com/vazco/uniforms/blob/master/.github/CONTRIBUTING.md">Contribute</a></strong> |
     <strong><a href="https://uniforms.tools/docs/tutorials-basic-uniforms-usage">Quick Start</a></strong> |
     <strong><a href="https://vazco.github.io/uniforms/playground">Playground</a></strong> |

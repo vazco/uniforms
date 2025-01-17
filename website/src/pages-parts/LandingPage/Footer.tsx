@@ -32,7 +32,7 @@ export function Footer() {
               <Link to="/docs/examples-common-forms">
                 <li>Examples</li>
               </Link>
-              <Link to="/docs/api-forms">
+              <Link to="/docs/api-reference/forms">
                 <li>API Reference</li>
               </Link>
             </ul>
