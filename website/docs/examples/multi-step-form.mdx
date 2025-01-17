@@ -1,0 +1,198 @@
+---
+title: 'Multi step form'
+sidebar_position: 4
+hide_table_of_contents: true
+---
+
+import { ajvValidatorFile } from '@site/components/CodeEditor/ajvValidatorFile';
+import { CodeEditorTabs } from '@site/components/CodeEditorTabs';
+
+export const appFile = `import { useState } from 'react';
+import { UserForm } from './UserForm';
+import { ProfileForm } from './ProfileForm';
+
+export default function App() {
+  const [step, setStep] = useState(0);
+  const [form, setForm] = useState({});
+
+  const handleUserFormSubmit = model => {
+    setForm(form => ({ ...form, user: model }));
+    setStep(1);
+  };
+
+  if (step === 0) {
+    return <UserForm onSubmit={handleUserFormSubmit} />;
+  }
+
+  if (step === 1) {
+    return (
+      <ProfileForm
+        onSubmit={model =>
+          window.alert(JSON.stringify({ ...form, profile: model }))
+        }
+      />
+    );
+  }
+
+  return null;
+}`; 
+
+export const zod = {
+  '/App.tsx': appFile,
+  '/UserForm.tsx': `import { AutoForm } from 'uniforms-antd';
+import ZodBridge from 'uniforms-bridge-zod';
+import { z } from 'zod';
+
+const userSchema = z.object({
+  username: z.string(),
+  password: z.string().uniforms({ type: 'password' }),
+});
+
+const schema = new ZodBridge({ schema: userSchema });
+
+type UserFormProps = {
+  onSubmit: (model: any) => void;
+};
+
+export function UserForm(props: UserFormProps) {
+  const { onSubmit } = props;
+
+  return <AutoForm schema={schema} onSubmit={onSubmit} />;
+}`,
+  '/ProfileForm.tsx': `import { AutoForm } from 'uniforms-antd';
+import ZodBridge from 'uniforms-bridge-zod';
+import { z } from 'zod';
+
+const profileSchema = z.object({
+  firstName: z.string(),
+  lastName: z.string(),
+});
+
+const schema = new ZodBridge({ schema: profileSchema });
+
+type ProfileFormProps = {
+  onSubmit: (model: any) => void;
+};
+export function ProfileForm(props: ProfileFormProps) {
+  const { onSubmit } = props;
+
+  return <AutoForm schema={schema} onSubmit={onSubmit} />;
+}`
+};
+
+export const json = {
+  '/App.tsx': appFile,
+  '/UserForm.tsx': `import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
+import { JSONSchemaType } from 'ajv';
+import { AutoForm } from 'uniforms-antd';
+import { createValidator } from './validator';
+
+type FormData = {
+  username: string;
+  password: string;
+};
+
+const userSchema: JSONSchemaType<FormData> = {
+  type: 'object',
+  properties: {
+    username: { type: 'string' },
+    password: { type: 'string', uniforms: { type: 'password' } },
+  },
+  required: ['username', 'password'],
+};
+
+const schema = new JSONSchemaBridge({
+  schema: userSchema,
+  validator: createValidator(userSchema),
+});
+
+type UserFormProps = {
+  onSubmit: (model: any) => void;
+};
+
+export function UserForm(props: UserFormProps) {
+  const { onSubmit } = props;
+
+  return <AutoForm schema={schema} onSubmit={onSubmit} />;
+}`,
+  '/ProfileForm.tsx': `import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
+import { JSONSchemaType } from 'ajv';
+import { AutoForm } from 'uniforms-antd';
+import { createValidator } from './validator';
+
+type FormData = {
+  firstName: string;
+  lastName: string;
+};
+
+const profileSchema: JSONSchemaType<FormData> = {
+  type: 'object',
+  properties: {
+    firstName: { type: 'string' },
+    lastName: { type: 'string' },
+  },
+  required: ['firstName', 'lastName'],
+};
+
+const schema = new JSONSchemaBridge({
+  schema: profileSchema,
+  validator: createValidator(profileSchema),
+});
+
+type ProfileFormProps = {
+  onSubmit: (model: any) => void;
+};
+
+export function ProfileForm(props: ProfileFormProps) {
+  const { onSubmit } = props;
+
+  return <AutoForm schema={schema} onSubmit={onSubmit} />;
+}`,
+  '/validator.ts': ajvValidatorFile
+}
+
+export const simple = {
+  '/App.tsx': appFile,
+  '/UserForm.tsx': `import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
+import SimpleSchema from 'simpl-schema';
+import { AutoForm } from 'uniforms-antd';
+
+const userSchema = new SimpleSchema({
+  username: String,
+  password: { type: String, uniforms: { type: 'password' } },
+});
+
+const schema = new SimpleSchema2Bridge({ schema: userSchema });
+
+type UserFormProps = {
+  onSubmit: (model: any) => void;
+};
+
+export function UserForm(props: UserFormProps) {
+  const { onSubmit } = props;
+
+  return <AutoForm schema={schema} onSubmit={onSubmit} />;
+}`,
+  '/ProfileForm.tsx': `import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
+import SimpleSchema from 'simpl-schema';
+import { AutoForm } from 'uniforms-antd';
+
+const profileSchema = new SimpleSchema({
+  firstName: String,
+  lastName: String,
+});
+
+const schema = new SimpleSchema2Bridge({ schema: profileSchema });
+
+type ProfileFormProps = {
+  onSubmit: (model: any) => void;
+};
+
+export function ProfileForm(props: ProfileFormProps) {
+  const { onSubmit } = props;
+
+  return <AutoForm schema={schema} onSubmit={onSubmit} />;
+}`,
+}
+
+<CodeEditorTabs zod={zod} json={json} simple={simple} />
