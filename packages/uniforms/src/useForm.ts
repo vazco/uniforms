@@ -14,7 +14,7 @@ Two most common reasons for this error are:
 1. Component calling this function doesn't have a parent Form component in the tree.
 2. A duplicate uniforms dependency is installed in node_modules.
 
-For more info check FAQ: https://uniforms.tools/docs/faq/#useform-must-be-used-within-a-form
+For more info check FAQ: https://uniforms.tools/docs/getting-started/faq/#useform-must-be-used-within-a-form
   `,
   );
   return context;
