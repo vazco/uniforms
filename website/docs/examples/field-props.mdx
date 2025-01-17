@@ -5,7 +5,7 @@ hide_table_of_contents: true
 ---
 
 import { ajvValidatorFile } from '@site/components/CodeEditor/ajvValidatorFile';
-import { CodeEditorTabs } from '@site/components/CodeEditorTabs';
+import { CodeEditorBridgesTabs } from '@site/components/CodeEditorBridgesTabs';
 
 export const zod = {
   '/App.tsx': `import { AutoForm, AutoField, ErrorsField, SubmitField } from 'uniforms-antd';
@@ -131,4 +131,4 @@ export default function App() {
 }`
 }
 
-<CodeEditorTabs zod={zod} json={json} simple={simple} />
+<CodeEditorBridgesTabs zod={zod} json={json} simple={simple} />
