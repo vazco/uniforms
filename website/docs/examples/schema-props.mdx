@@ -1,6 +1,6 @@
 ---
-title: 'Basic usage'
-sidebar_position: 1
+title: 'Passing field props via schema'
+sidebar_position: 3
 hide_table_of_contents: true
 ---
 
@@ -12,8 +12,15 @@ export const zod = {
 import { ZodBridge } from 'uniforms-bridge-zod';
 import { z } from 'zod';
 
+enum Role {
+  Member = 'Member',
+  Staff = 'Staff',
+}
+
 const userSchema = z.object({
   username: z.string(),
+  password: z.string().uniforms({ type: 'password' }),
+  role: z.nativeEnum(Role).uniforms({ checkboxes: true }),
 });
 
 const schema = new ZodBridge({ schema: userSchema });
@@ -41,26 +48,38 @@ export default function App() {
   );
 }`,
   '/userSchema.ts': `import { JSONSchemaBridge } from 'uniforms-bridge-json-schema';
-import { JSONSchemaType } from 'ajv'
+import { JSONSchemaType } from 'ajv';
 import { createValidator } from './validator';
+
+enum Role {
+  Member = 'Member',
+  Staff = 'Staff',
+}
 
 type FormData = {
   username: string;
+  password: string;
+  role: Role;
 };
 
 const userSchema: JSONSchemaType<FormData> = {
   type: 'object',
   properties: {
     username: { type: 'string' },
+    password: { type: 'string', uniforms: { type: 'password' } },
+    role: {
+      type: 'string',
+      enum: [Role.Member, Role.Staff],
+      uniforms: { checkboxes: true },
+    },
   },
-  required: ['username'],
+  required: ['username', 'password', 'role'],
 };
 
 export const schema = new JSONSchemaBridge({
   schema: userSchema,
   validator: createValidator(userSchema),
-});
-`,
+});`,
   '/validator.ts': ajvValidatorFile
 };
 
@@ -69,8 +88,19 @@ export const simple = {
 import { SimpleSchema2Bridge } from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 
+enum Role {
+  Member = 'Member',
+  Staff = 'Staff',
+}
+
 const userSchema = new SimpleSchema({
-  username: String
+  username: String,
+  password: { type: String, uniforms: { type: 'password' } },
+  role: {
+    type: String,
+    allowedValues: [Role.Member, Role.Staff],
+    uniforms: { checkboxes: true },
+  },
 });
 
 const schema = new SimpleSchema2Bridge({ schema: userSchema });

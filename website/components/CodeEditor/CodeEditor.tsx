@@ -27,7 +27,7 @@ export function CodeEditor(props: CodeEditorProps) {
         recompileDelay: 800,
       }}
     >
-      <SandpackLayout style={{ height: '460px' }}>
+      <SandpackLayout style={{ height: '600px' }}>
         <SandpackCodeEditor
           showTabs
           showInlineErrors
