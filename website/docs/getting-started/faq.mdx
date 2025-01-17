@@ -1,7 +1,7 @@
 ---
 id: faq
 title: FAQ
-position: 4
+sidebar_position: 4
 ---
 
 ### How can I customize/style my form fields?
@@ -10,11 +10,13 @@ You can style your form fields simply by passing a `className` property.
 
 ### How can I create custom fields?
 
-You can create a custom field by wrapping your component inside the [`connectField`](/docs/api-helpers#connectfieldcomponent-options).
+You can create a custom field by wrapping your component inside the [`connectField`](/docs/api-reference/helpers#connect-field).
 
 The `connectField` will pass various props related to the form management, such as `onChange()` function, current field's value, errors and so on, to your component.
 
-Please visit the [Tutorials > Creating a custom field](/docs/tutorials-creating-custom-field) tutorial to see how to create your own fields.
+Or you can use a hook version of `connectField` called [`useField`](/docs/api-reference/helpers#usefield). It takes the field name, field props, and optional options as arguments, returning field-specific props and context.
+
+Please visit the [Examples > Custom field](/docs/examples/custom-field) example to see how to create your own fields.
 
 ### How can I use a custom field in my form?
 
@@ -121,7 +123,7 @@ You change the way your form validates by setting `validate` prop:
 
 ### How can I reset my form state?
 
-You can use [React `ref` prop](https://facebook.github.io/react/docs/more-about-refs.html) or [`formRef`](/docs/api-context-data#formref) to manually access form methods.
+You can use [React `ref` prop](https://facebook.github.io/react/docs/more-about-refs.html) or [`formRef`](/docs/api-reference/context-data#formref) to manually access form methods.
 
 These methods are:
 
@@ -169,7 +171,7 @@ function App() {
 }
 ```
 
-You can find more about form methods [here](/docs/api-forms).
+You can find more about form methods [here](/docs/api-reference/forms).
 
 ### I want my form to be prefilled with data. How can I do that?
 
@@ -239,7 +241,7 @@ We are not planning to provide any out-of-the-box support for multi-step forms a
 
 A current form state is available in [React context](https://reactjs.org/docs/context.html), accessible through `useForm` and `useField(name)` hooks.
 
-The context data consists of various properties which can be found in [here](/docs/api-context-data).
+The context data consists of various properties which can be found in [here](/docs/api-reference/context-data).
 
 ##### Example usage:
 
