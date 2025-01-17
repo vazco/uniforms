@@ -66,17 +66,17 @@ export function DisplayIf<Model extends UnknownObject>({
     }
   },
   {
-    label: 'FileField',
-    value: "file-field",
+    label: 'ImageField',
+    value: "image-field",
     files: {
       '/App.tsx': `import { AutoForm, AutoField, ErrorsField, SubmitField } from 'uniforms-antd';
 import { ZodBridge } from 'uniforms-bridge-zod';
 import { z } from 'zod';
-import { FileField } from './FileField';
+import { ImageField } from './ImageField';
 
 const userSchema = z.object({
   name: z.string(),
-  file: z.string().uniforms({ component: FileField }),
+  file: z.string().uniforms({ component: ImageField }),
 });
 
 const schema = new ZodBridge({ schema: userSchema });
@@ -90,9 +90,9 @@ export default function App() {
   );
 }
 `,
-      '/FileField.tsx': `import { useField, filterDOMProps } from 'uniforms';
+      '/ImageField.tsx': `import { useField, filterDOMProps } from 'uniforms';
 
-export function FileField(props) {
+export function ImageField(props) {
   const [fieldProps, context] = useField(props.name, props);
   const { onChange, value } = fieldProps;
 
