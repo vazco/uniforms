@@ -18,7 +18,9 @@ Or you can use a hook version of `connectField` called [`useField`](/docs/api-re
 
 Please visit the [Examples > Custom field](/docs/examples/custom-field) example to see how to create your own fields.
 
-### How can I use a custom field in my form?
+-----------------
+
+**How can I use a custom field in my form?**
 
 You can tell your schema to use your custom field by adding the `uniforms` property.
 
@@ -237,9 +239,11 @@ What is a multi-step form? Well, one can imagine at least two completely separat
 
 We are not planning to provide any out-of-the-box support for multi-step forms as option **1.** is most of the time the best. It's not only the cleanest but also less complicated as well as doesn't rely on any library.
 
+Check out our multi-step form example [here](/docs/examples/multi-step-form).
+
 ### How can I know a current form state?
 
-A current form state is available in [React context](https://reactjs.org/docs/context.html), accessible through `useForm` and `useField(name)` hooks.
+A current form state is available in [React context](https://react.dev/reference/react/useContext), accessible through `useForm` and `useField(name)` hooks.
 
 The context data consists of various properties which can be found in [here](/docs/api-reference/context-data).
 
