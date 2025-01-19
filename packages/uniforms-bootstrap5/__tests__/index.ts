@@ -1,5 +1,5 @@
-import * as theme from 'uniforms-bootstrap5';
 import * as suites from 'uniforms/__suites__';
+import * as theme from 'uniforms-bootstrap5';
 
 it('exports everything', () => {
   expect(theme).toEqual({
@@ -31,7 +31,7 @@ it('exports everything', () => {
   });
 });
 
-describe('@RTL', () => {
+describe('@RTL Bootstrap5', () => {
   suites.testAutoField(theme.AutoField, {
     getDateField: screen => screen.getByLabelText('X'),
     getSelectField: screen => screen.getByRole('combobox'),
@@ -68,4 +68,5 @@ describe('@RTL', () => {
   });
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
+  suites.testWrapField(theme.wrapField);
 });

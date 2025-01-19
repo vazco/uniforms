@@ -10,38 +10,44 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x, 20.x]
+        node-version: [18.x, 20.x, 22.x]
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.3.0
+        uses: actions/checkout@v4.1.1
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3.6.0
+        uses: actions/setup-node@v4.0.2
         with:
-          cache: npm
+          cache: pnpm
           node-version: ${{ matrix.node-version }}
+
       - name: Check dependency duplications
         uses: vazco/open-standards/actions/npm-dependency-duplications/@master
+
       - name: Check dependency vulnerabilities
         uses: vazco/open-standards/actions/npm-dependency-vulnerabilities/@master
+
       - name: Install
-        run: npm i -g npm@8 --no-audit && npm ci --no-audit
-      - name: Lint
-        run: npm run lint
+        run: pnpm install
+
+      - name: Check linting
+        run: pnpm lint:code
+
+      - name: Check formatting
+        run: pnpm lint:text
+
+      - name: Check types
+        run: pnpm lint:types
+
       - name: Test
-        run: npm run coverage -- --no-cache --runInBand
+        run: pnpm coverage
+
       - name: Report coverage
-        uses: codecov/codecov-action@v3.1.1
+        uses: codecov/codecov-action@v4.3.0
         with:
           fail_ci_if_error: true
-      - name: Build docs
-        run: npm --prefix website run build
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '20.x'
-      - name: Deploy docs
-        uses: peaceiris/actions-gh-pages@v3.9.2
-        with:
-          allow_empty_commit: true
-          cname: uniforms.tools
-          force_orphan: true
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./website/build
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '20.x'
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

@@ -862,9 +862,8 @@ describe('JSONSchemaBridge', () => {
     });
 
     it('works with anyOf for a non-object computed property (properties not defined)', () => {
-      expect(bridge.getProps('nonObjectAnyOf')).toHaveProperty(
+      expect(bridge.getProps('nonObjectAnyOf')).not.toHaveProperty(
         'properties',
-        undefined,
       );
     });
 

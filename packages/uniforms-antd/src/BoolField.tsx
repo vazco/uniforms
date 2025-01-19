@@ -14,6 +14,7 @@ export type BoolFieldProps = FieldProps<
   {
     checkbox?: boolean;
     checkedChildren?: ReactNode;
+    // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
     inputRef?: Ref<typeof Checkbox | typeof Switch | any>;
     unCheckedChildren?: ReactNode;
   }

@@ -4,7 +4,7 @@ import { Override, useForm } from 'uniforms';
 
 export type SubmitFieldProps = Override<
   ButtonProps,
-  { inputRef?: Ref<HTMLInputElement> }
+  { inputRef?: Ref<HTMLButtonElement> }
 >;
 
 function SubmitField({

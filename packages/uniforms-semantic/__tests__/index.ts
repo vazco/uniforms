@@ -1,5 +1,5 @@
-import * as theme from 'uniforms-semantic';
 import * as suites from 'uniforms/__suites__';
+import * as theme from 'uniforms-semantic';
 
 it('exports everything', () => {
   expect(theme).toEqual({
@@ -29,7 +29,7 @@ it('exports everything', () => {
   });
 });
 
-describe('@RTL', () => {
+describe('@RTL Semantic', () => {
   suites.testAutoField(theme.AutoField, {
     getDateField: screen => screen.getByLabelText('X'),
     getSelectField: screen => screen.getByRole('combobox'),
@@ -53,7 +53,7 @@ describe('@RTL', () => {
   suites.testNumField(theme.NumField);
   suites.testQuickForm(theme.QuickForm);
   suites.testRadioField(theme.RadioField);
-  suites.testSelectField(theme.SelectField);
+  suites.testSelectField(theme.SelectField, { showInlineError: true });
   suites.testSubmitField(theme.SubmitField);
   suites.testTextField(theme.TextField, {
     testWrapClassName: true,

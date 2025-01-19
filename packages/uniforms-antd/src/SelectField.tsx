@@ -1,7 +1,4 @@
-import CheckboxGroup, {
-  CheckboxGroupProps,
-  CheckboxValueType,
-} from 'antd/lib/checkbox/Group';
+import CheckboxGroup, { CheckboxGroupProps } from 'antd/lib/checkbox/Group';
 import { RadioGroupProps } from 'antd/lib/radio';
 import RadioGroup from 'antd/lib/radio/group';
 import SelectAntD, { SelectProps as SelectAntDProps } from 'antd/lib/select';
@@ -15,7 +12,7 @@ type CheckboxesProps = FieldProps<
   SelectFieldValue,
   CheckboxGroupProps | RadioGroupProps,
   {
-    options?: Option<CheckboxValueType>[];
+    options?: Option<string>[];
     checkboxes: true;
     inputRef?: Ref<typeof CheckboxGroup | typeof RadioGroup>;
     required?: boolean;
@@ -35,7 +32,7 @@ type SelectProps = FieldProps<
 
 // This type is needed for the `SelectFieldProps` union to be a proper subtype
 // of `Partial<GuaranteedProps<Value>>` - otherwise `connectField` goes wild.
-type SelectFieldValue = CheckboxValueType | (string | undefined)[];
+type SelectFieldValue = (string | undefined)[];
 
 export type SelectFieldProps = CheckboxesProps | SelectProps;
 
@@ -46,7 +43,6 @@ function Select(props: SelectFieldProps) {
     props,
     props.checkboxes ? (
       <span {...filteredDOMProps}>
-        {/* @ts-expect-error: Incorrect `value` type. */}
         <Group
           {...filteredDOMProps}
           disabled={props.disabled}
@@ -55,6 +51,7 @@ function Select(props: SelectFieldProps) {
             if (!props.readOnly) {
               props.onChange(
                 // FIXME: Argument type depends on `props.fieldType`.
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                 props.fieldType === Array
                   ? eventOrValue
                   : eventOrValue.target.value,
@@ -74,7 +71,7 @@ function Select(props: SelectFieldProps) {
         disabled={props.disabled}
         mode={props.fieldType === Array ? 'multiple' : undefined}
         name={props.name}
-        onChange={value => {
+        onChange={(value: SelectFieldValue) => {
           if (!props.readOnly) {
             props.onChange(value);
           }

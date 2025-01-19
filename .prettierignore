@@ -1,11 +1,7 @@
 /.idea
 /.parcel-cache
 /coverage
-/lerna-debug.log
-/lerna.json
 /node_modules
-/npm-debug.log
-/npm-debug.log*
 /packages/*/cjs
 /packages/*/esm
 /packages/*/node_modules
@@ -15,3 +11,4 @@
 /website/.docusaurus
 /website/build
 /website/node_modules
+.turbo

@@ -1,5 +1,5 @@
-import * as theme from 'uniforms-mui';
 import * as suites from 'uniforms/__suites__';
+import * as theme from 'uniforms-mui';
 
 it('exports everything', () => {
   expect(theme).toEqual({
@@ -30,10 +30,10 @@ it('exports everything', () => {
   });
 });
 
-describe('@RTL', () => {
+describe('@RTL MUI', () => {
   suites.testAutoField(theme.AutoField, {
     getDateField: screen => screen.getByLabelText('X *'),
-    getSelectField: screen => screen.getByRole('button'),
+    getSelectField: screen => screen.getByLabelText('X *'),
   });
   suites.testAutoForm(theme.AutoForm);
   suites.testBaseForm(theme.BaseForm);
@@ -55,9 +55,20 @@ describe('@RTL', () => {
   suites.testQuickForm(theme.QuickForm);
   suites.testRadioField(theme.RadioField);
   // FIXME: MUI select does not work with new RTL test implementation
-  // suites.testSelectField(theme.SelectField);
+  suites.testSelectField(theme.SelectField, {
+    showInlineError: true,
+    theme: 'mui',
+  });
   suites.testSubmitField(theme.SubmitField);
   suites.testTextField(theme.TextField);
   suites.testValidatedForm(theme.ValidatedForm);
   suites.testValidatedQuickForm(theme.ValidatedQuickForm);
+  suites.testWrapField(theme.wrapField, {
+    helpPropsName: 'helperText',
+    withoutLabel: true,
+    withoutInlineError: true,
+    withoutWrapClassName: true,
+    withoutHelpClassName: true,
+    withoutLabelClassName: true,
+  });
 });

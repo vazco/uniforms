@@ -1,6 +1,6 @@
 {
   "name": "uniforms-bridge-simple-schema-2",
-  "version": "4.0.0-alpha.5",
+  "version": "4.0.0-beta.4",
   "license": "MIT",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -35,8 +35,22 @@
   "dependencies": {
     "invariant": "^2.0.0",
     "lodash": "^4.0.0",
+    "tslib": "2.8.0"
+  },
+  "peerDependencies": {
     "simpl-schema": "^1.0.0 || ^0.0.4",
-    "tslib": "^2.2.0",
-    "uniforms": "^4.0.0-alpha.5"
+    "uniforms": "4.0.0-beta.4"
+  },
+  "devDependencies": {
+    "@types/invariant": "2.2.37",
+    "@types/lodash": "4.17.5",
+    "@types/react": "18.3.12",
+    "@types/simpl-schema": "1.12.7",
+    "typescript": "5.5.4",
+    "uniforms": "workspace:*"
+  },
+  "scripts": {
+    "build:cjs": "tsc --build tsconfig.cjs.json",
+    "build:esm": "tsc --build tsconfig.esm.json"
   }
 }

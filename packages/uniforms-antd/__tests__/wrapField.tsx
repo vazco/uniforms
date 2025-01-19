@@ -1,75 +1,54 @@
-import Form from 'antd/lib/form';
-import Tooltip from 'antd/lib/tooltip';
+import { screen } from '@testing-library/react';
 import React from 'react';
+import { renderWithZod } from 'uniforms/__suites__';
 import { wrapField } from 'uniforms-antd';
+import { z } from 'zod';
 
-import mount from './_mount';
+describe('@RTL - wrapField tests', () => {
+  describe('wrapField tests', () => {
+    test('<wrapField> - renders wrapper with extra style', () => {
+      const { container } = renderWithZod({
+        element: wrapField(
+          { wrapperStyle: { backgroundColor: 'red' } },
+          <div data-testid="x" />,
+        ),
+        schema: z.object({}),
+      });
+      const element = container.getElementsByClassName('ant-form-item')[0];
+      expect(element?.getAttribute('style')).toBe('background-color: red;');
+    });
 
-test('<wrapField> - renders wrapper with label', () => {
-  const element = wrapField({ label: 'Label' }, <div />);
-  const wrapper = mount(element);
+    test('<wrapField> - renders wrapper with label and info', () => {
+      renderWithZod({
+        element: wrapField({ label: 'Label', info: 'Info' }, <div />),
+        schema: z.object({}),
+      });
+      expect(screen.getByRole('img').getAttribute('aria-label')).toBe(
+        'question-circle',
+      );
+    });
 
-  // @ts-expect-error Correct label type.
-  expect(wrapper.find(Form.Item).prop('label').props.children[0]).toBe('Label');
-});
+    test('<wrapField> - renders wrapper with extra text', () => {
+      renderWithZod({
+        element: wrapField({ extra: 'Extra' }, <div data-testid="x" />),
+        schema: z.object({}),
+      });
+      expect(screen.getByText('Extra')).toBeInTheDocument();
+    });
 
-test('<wrapField> - renders wrapper with label and info', () => {
-  const element = wrapField({ label: 'Label', info: 'Info' }, <div />);
-  const wrapper = mount(element);
-
-  expect(wrapper.find(Tooltip).prop('title')).toBe('Info');
-});
-
-test('<wrapField> - renders wrapper with an error message', () => {
-  const error = new Error();
-  const element = wrapField(
-    { error, showInlineError: true, errorMessage: 'Error' },
-    <div />,
-  );
-  const wrapper = mount(element);
-
-  expect(wrapper.find(Form.Item).prop('help')).toBe('Error');
-});
-
-test('<wrapField> - renders wrapper with an error status', () => {
-  const element = wrapField({}, <div />);
-  const wrapper = mount(element);
-
-  expect(wrapper.find(Form.Item).prop('validateStatus')).toBe(undefined);
-});
-
-test('<wrapField> - renders wrapper with an error status (error)', () => {
-  const error = new Error();
-  const element = wrapField({ error }, <div />);
-  const wrapper = mount(element);
-
-  expect(wrapper.find(Form.Item).prop('validateStatus')).toBe('error');
-});
-
-test('<wrapField> - renders wrapper with help text', () => {
-  const element = wrapField({ help: 'Help' }, <div />);
-  const wrapper = mount(element);
-
-  expect(wrapper.find(Form.Item).prop('help')).toBe('Help');
-});
-
-test('<wrapField> - renders wrapper with extra text', () => {
-  const element = wrapField({ extra: 'Extra' }, <div />);
-  const wrapper = mount(element);
-
-  expect(wrapper.find(Form.Item).prop('extra')).toBe('Extra');
-});
-
-test('<wrapField> - renders wrapper with extra style', () => {
-  const element = wrapField({ wrapperStyle: {} }, <div />);
-  const wrapper = mount(element);
-
-  expect(wrapper.find(Form.Item).prop('style')).toEqual({});
-});
-
-test('<wrapField> - renders wrapper with a custom validateStatus', () => {
-  const element = wrapField({ validateStatus: 'success' }, <div />);
-  const wrapper = mount(element);
-
-  expect(wrapper.find(Form.Item).prop('validateStatus')).toBe('success');
+    test('<wrapField> - renders wrapper with a custom validateStatus', () => {
+      renderWithZod({
+        element: wrapField(
+          { validateStatus: 'success' },
+          <div data-testid="x" />,
+        ),
+        schema: z.object({}),
+      });
+      expect(
+        screen
+          .getByTestId('x')
+          .closest('.ant-form-item-has-feedback.ant-form-item-has-success'),
+      ).toBeInTheDocument();
+    });
+  });
 });

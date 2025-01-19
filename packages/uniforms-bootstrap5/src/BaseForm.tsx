@@ -18,7 +18,7 @@ function Bootstrap5(parent: any) {
 
       return {
         ...omit(props, ['grid']),
-        className: classnames({ error }, props.className),
+        className: classnames({ error }, props.className as string),
       };
     }
   }

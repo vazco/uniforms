@@ -5,13 +5,26 @@ import z from 'zod';
 import { renderWithZod } from './render-zod';
 import { skipTestIf } from './skipTestIf';
 
+function getSelectFields() {
+  const fields = screen.queryAllByRole('checkbox');
+  if (fields.length > 0) {
+    return fields;
+  }
+
+  return screen.getAllByRole('radio');
+}
+
 export function testSelectField(
   SelectField: ComponentType<any>,
   options?: {
-    theme?: 'antd';
+    theme?: 'antd' | 'mui';
+    showInlineError?: boolean;
     getCheckboxInlineOption?: (screen: Screen) => Element | null;
+    reverseCheckboxOrder?: false;
   },
 ) {
+  const isTheme = (themes: string[]) => themes.includes(options?.theme ?? '');
+
   test('<SelectField> - renders a select', () => {
     renderWithZod({
       element: <SelectField data-testid="select-field" name="x" />,
@@ -20,14 +33,25 @@ export function testSelectField(
     expect(screen.getByTestId('select-field')).toBeInTheDocument();
   });
 
-  test('<SelectField> - renders a select with correct disabled state', () => {
+  test('<SelectField> - renders a label', () => {
     renderWithZod({
-      element: <SelectField data-testid="select-field" name="x" disabled />,
+      element: <SelectField name="x" label="y" />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const select = screen.getByRole('combobox');
-    expect(select).toBeDisabled();
+    expect(screen.getByLabelText(/y\*?/)).toBeInTheDocument();
   });
+
+  skipTestIf(isTheme(['mui', 'antd']))(
+    '<SelectField> - renders a select with correct disabled state',
+    () => {
+      renderWithZod({
+        element: <SelectField data-testid="select-field" name="x" disabled />,
+        schema: z.object({ x: z.enum(['a', 'b']) }),
+      });
+      const select = screen.getByRole('combobox');
+      expect(select).toBeDisabled();
+    },
+  );
 
   test('<SelectField> - renders a select with correct readOnly state', () => {
     const onChange = jest.fn();
@@ -47,7 +71,7 @@ export function testSelectField(
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  skipTestIf(options?.theme === 'antd')(
+  skipTestIf(isTheme(['mui', 'antd']))(
     '<SelectField> - ignores selection with readOnly state ',
     () => {
       const onChange = jest.fn();
@@ -68,7 +92,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(options?.theme === 'antd')(
+  skipTestIf(isTheme(['mui', 'antd']))(
     '<SelectField> - (multiple) renders a select which correctly reacts on change (uncheck) by value',
     () => {
       const onChange = jest.fn();
@@ -82,7 +106,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(options?.theme === 'antd')(
+  skipTestIf(isTheme(['mui', 'antd']))(
     '<SelectField> - (multiple) renders a select which correctly reacts on change (uncheck) by selectedIndex',
     () => {
       const onChange = jest.fn();
@@ -96,7 +120,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(options?.theme === 'antd')(
+  skipTestIf(isTheme(['mui', 'antd']))(
     '<SelectField> - (multiple) renders a select which correctly reacts on change (checked) by selectedIndex',
     () => {
       const onChange = jest.fn();
@@ -110,7 +134,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(options?.theme === 'antd')(
+  skipTestIf(isTheme(['mui', 'antd']))(
     '<SelectField> - renders a select which correctly reacts on change (uncheck) by value',
     () => {
       const onChange = jest.fn();
@@ -124,7 +148,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(options?.theme === 'antd')(
+  skipTestIf(isTheme(['mui', 'antd']))(
     '<SelectField> - renders a select which correctly reacts on change (uncheck) by selectedIndex',
     () => {
       const onChange = jest.fn();
@@ -166,51 +190,57 @@ export function testSelectField(
     expect(elementWithAttribute?.getAttribute('name')).toBe('x');
   });
 
-  test('<SelectField> - renders a select with correct options', () => {
-    const selectOptions = ['a', 'b'] as const;
-    renderWithZod({
-      element: <SelectField name="x" />,
-      schema: z.object({ x: z.enum(selectOptions) }),
-    });
-    const combobox = screen.getByRole('combobox');
-    fireEvent.mouseDown(combobox);
-    selectOptions.forEach(option => {
-      expect(screen.getByRole('option', { name: option })).not.toBeNull();
-    });
-  });
+  skipTestIf(isTheme(['mui']))(
+    '<SelectField> - renders a select with correct options',
+    () => {
+      const selectOptions = ['a', 'b'] as const;
+      renderWithZod({
+        element: <SelectField name="x" />,
+        schema: z.object({ x: z.enum(selectOptions) }),
+      });
+      const combobox = screen.getByRole('combobox');
+      fireEvent.mouseDown(combobox);
+      selectOptions.forEach(option => {
+        expect(screen.getByRole('option', { name: option })).not.toBeNull();
+      });
+    },
+  );
 
-  test('<SelectField> - renders a select with correct options (transform)', () => {
-    const selectOptions = ['a', 'b'] as const;
-    renderWithZod({
-      element: (
-        <SelectField
-          name="x"
-          options={[
-            { key: 'k1', label: 'A', value: 'a' },
-            { key: 'k2', label: 'B', value: 'b' },
-          ]}
-        />
-      ),
-      schema: z.object({ x: z.enum(selectOptions) }),
-    });
-    const combobox = screen.getByRole('combobox');
-    fireEvent.mouseDown(combobox);
-    selectOptions.forEach(option => {
-      expect(
-        screen.getByRole('option', { name: option.toUpperCase() }),
-      ).toBeInTheDocument();
-    });
-  });
+  skipTestIf(isTheme(['mui']))(
+    '<SelectField> - renders a select with correct options (transform)',
+    () => {
+      const selectOptions = ['a', 'b'] as const;
+      renderWithZod({
+        element: (
+          <SelectField
+            name="x"
+            options={[
+              { key: 'k1', label: 'A', value: 'a' },
+              { key: 'k2', label: 'B', value: 'b' },
+            ]}
+          />
+        ),
+        schema: z.object({ x: z.enum(selectOptions) }),
+      });
+      const combobox = screen.getByRole('combobox');
+      fireEvent.mouseDown(combobox);
+      selectOptions.forEach(option => {
+        expect(
+          screen.getByRole('option', { name: option.toUpperCase() }),
+        ).toBeInTheDocument();
+      });
+    },
+  );
 
   test('<SelectField> - renders a select with correct placeholder (fallback)', () => {
     renderWithZod({
       element: <SelectField name="x" label="y" placeholder="" />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    expect(screen.getByText('y')).toBeInTheDocument();
+    expect(screen.queryByPlaceholderText('y')).not.toBeInTheDocument();
   });
 
-  skipTestIf(options?.theme === 'antd')(
+  skipTestIf(isTheme(['antd', 'mui']))(
     '<SelectField> - renders a select with correct placeholder (implicit)',
     () => {
       renderWithZod({
@@ -221,59 +251,71 @@ export function testSelectField(
     },
   );
 
-  test('<SelectField> - renders a select with correct value (default)', () => {
-    renderWithZod({
-      element: <SelectField name="x" />,
-      schema: z.object({ x: z.enum(['a', 'b']) }),
-    });
-    const select = screen.getByRole('combobox');
-    if (options?.theme === 'antd') {
-      expect(screen.getByText('a')).toBeInTheDocument();
-      expect(screen.queryByText('b')).not.toBeInTheDocument();
-    } else {
-      expect(select).toHaveValue('a');
-    }
-  });
+  skipTestIf(isTheme(['antd', 'mui']))(
+    '<SelectField> - renders a select with correct value (default)',
+    () => {
+      renderWithZod({
+        element: <SelectField name="x" />,
+        schema: z.object({ x: z.enum(['a', 'b']) }),
+      });
+      const select = screen.getByRole('combobox');
+      if (options?.theme === 'antd') {
+        expect(screen.queryByText('a')).not.toBeInTheDocument();
+        expect(screen.queryByText('b')).not.toBeInTheDocument();
+      } else {
+        expect(select).not.toHaveValue();
+      }
+    },
+  );
 
-  test('<SelectField> - renders a select with missing value (model)', () => {
-    renderWithZod({
-      element: <SelectField name="x" value={undefined} />,
-      schema: z.object({ x: z.enum(['a', 'b']) }),
-    });
-    const select = screen.getByRole('combobox');
-    expect(select).toHaveValue('');
-  });
+  skipTestIf(isTheme(['antd', 'mui']))(
+    '<SelectField> - renders a select with missing value (model)',
+    () => {
+      renderWithZod({
+        element: <SelectField name="x" value={undefined} />,
+        schema: z.object({ x: z.enum(['a', 'b']) }),
+      });
+      const select = screen.getByRole('combobox');
+      expect(select).toHaveValue('');
+    },
+  );
 
-  test('<SelectField> - renders a select with correct value (model)', () => {
-    renderWithZod({
-      element: <SelectField name="x" />,
-      schema: z.object({ x: z.enum(['a', 'b']) }),
-      model: { x: 'b' },
-    });
-    const select = screen.getByRole('combobox');
-    if (options?.theme === 'antd') {
-      expect(screen.getByText('b')).toBeInTheDocument();
-      expect(screen.queryByText('a')).not.toBeInTheDocument();
-    } else {
-      expect(select).toHaveValue('b');
-    }
-  });
+  skipTestIf(isTheme(['antd', 'mui']))(
+    '<SelectField> - renders a select with correct value (model)',
+    () => {
+      renderWithZod({
+        element: <SelectField name="x" />,
+        schema: z.object({ x: z.enum(['a', 'b']) }),
+        model: { x: 'b' },
+      });
+      const select = screen.getByRole('combobox');
+      if (options?.theme === 'antd') {
+        expect(screen.getByText('b')).toBeInTheDocument();
+        expect(screen.queryByText('a')).not.toBeInTheDocument();
+      } else {
+        expect(select).toHaveValue('b');
+      }
+    },
+  );
 
-  test('<SelectField> - renders a select with correct value (specified)', () => {
-    renderWithZod({
-      element: <SelectField name="x" value="b" />,
-      schema: z.object({ x: z.enum(['a', 'b']) }),
-    });
-    const select = screen.getByRole('combobox');
-    if (options?.theme === 'antd') {
-      expect(screen.getByText('b')).toBeInTheDocument();
-      expect(screen.queryByText('a')).not.toBeInTheDocument();
-    } else {
-      expect(select).toHaveValue('b');
-    }
-  });
+  skipTestIf(isTheme(['antd', 'mui']))(
+    '<SelectField> - renders a select with correct value (specified)',
+    () => {
+      renderWithZod({
+        element: <SelectField name="x" value="b" />,
+        schema: z.object({ x: z.enum(['a', 'b']) }),
+      });
+      const select = screen.getByRole('combobox');
+      if (options?.theme === 'antd') {
+        expect(screen.getByText('b')).toBeInTheDocument();
+        expect(screen.queryByText('a')).not.toBeInTheDocument();
+      } else {
+        expect(select).toHaveValue('b');
+      }
+    },
+  );
 
-  skipTestIf(options?.theme === 'antd')(
+  skipTestIf(isTheme(['antd', 'mui']))(
     '<SelectField> - renders a select which correctly reacts on change',
     () => {
       const onChange = jest.fn();
@@ -287,7 +329,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(options?.theme === 'antd')(
+  skipTestIf(isTheme(['antd', 'mui']))(
     '<SelectField> - renders a select which correctly reacts on change (empty)',
     () => {
       const onChange = jest.fn();
@@ -301,7 +343,7 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(options?.theme === 'antd')(
+  skipTestIf(isTheme(['antd', 'mui']))(
     '<SelectField> - renders a select which correctly reacts on change (same value)',
     () => {
       const onChange = jest.fn();
@@ -335,18 +377,21 @@ export function testSelectField(
     expect(field).toHaveAttribute('data-y', 'y');
   });
 
-  test('<SelectField> - works with special characters', () => {
-    renderWithZod({
-      element: <SelectField name="x" />,
-      schema: z.object({ x: z.enum(['ă', 'ś']) }),
-    });
-    const combobox = screen.getByRole('combobox');
-    fireEvent.mouseDown(combobox);
-    expect(screen.getAllByText('ă')[0]).toBeInTheDocument();
-    expect(screen.getAllByText('ś')[0]).toBeInTheDocument();
-  });
+  skipTestIf(isTheme(['mui']))(
+    '<SelectField> - works with special characters',
+    () => {
+      renderWithZod({
+        element: <SelectField name="x" />,
+        schema: z.object({ x: z.enum(['ă', 'ś']) }),
+      });
+      const combobox = screen.getByRole('combobox');
+      fireEvent.mouseDown(combobox);
+      expect(screen.getAllByText('ă')[0]).toBeInTheDocument();
+      expect(screen.getAllByText('ś')[0]).toBeInTheDocument();
+    },
+  );
 
-  skipTestIf(options?.theme === 'antd')(
+  skipTestIf(isTheme(['antd', 'mui']))(
     '<SelectField> - disabled items (options)',
     () => {
       renderWithZod({
@@ -371,7 +416,12 @@ export function testSelectField(
       element: <SelectField checkboxes name="x" />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    expect(screen.getAllByRole(/checkbox|radio/)).toHaveLength(2);
+
+    const fields = getSelectFields();
+
+    expect(
+      fields.filter(element => element instanceof HTMLInputElement),
+    ).toHaveLength(2);
   });
 
   test('<SelectField checkboxes> - renders a set of checkboxes with correct disabled state', () => {
@@ -379,7 +429,12 @@ export function testSelectField(
       element: <SelectField checkboxes name="x" disabled />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const checkboxes = screen.getAllByRole(/checkbox|radio/);
+
+    const fields = getSelectFields();
+    const checkboxes = fields.filter(
+      element => element instanceof HTMLInputElement,
+    );
+
     expect(checkboxes?.[0]).toBeDisabled();
     expect(checkboxes?.[1]).toBeDisabled();
   });
@@ -390,8 +445,8 @@ export function testSelectField(
       element: <SelectField checkboxes onChange={onChange} name="x" readOnly />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const checkboxes = screen.getAllByRole(/checkbox|radio/);
-    fireEvent.click(checkboxes?.[0]);
+    const fields = getSelectFields();
+    fireEvent.click(fields?.[0]);
     expect(onChange).not.toHaveBeenCalled();
   });
 
@@ -406,26 +461,29 @@ export function testSelectField(
     },
   );
 
-  skipTestIf(options?.theme === 'antd')(
+  skipTestIf(isTheme(['antd']))(
     '<SelectField checkboxes> - renders a set of checkboxes with correct id (inherited)',
     () => {
       renderWithZod({
         element: <SelectField checkboxes name="x" />,
         schema: z.object({ x: z.enum(['a', 'b']) }),
       });
-      const checkboxes = screen.getAllByRole(/checkbox|radio/);
-      expect(checkboxes?.[0]).toHaveAttribute('id');
+      const fields = getSelectFields();
+      expect(fields?.[0]).toHaveAttribute('id');
     },
   );
 
-  skipTestIf(options?.theme === 'antd')(
+  skipTestIf(isTheme(['antd']))(
     '<SelectField checkboxes> - renders a set of checkboxes with correct id (specified)',
     () => {
       renderWithZod({
         element: <SelectField checkboxes name="x" id="y" />,
         schema: z.object({ x: z.enum(['a', 'b']) }),
       });
-      const checkboxes = screen.getAllByRole(/checkbox|radio/);
+      const fields = getSelectFields();
+      const checkboxes = fields.filter(
+        element => element instanceof HTMLInputElement,
+      );
       expect(checkboxes?.[0]).toHaveAttribute('id', 'y-YQ');
       expect(checkboxes?.[1]).toHaveAttribute('id', 'y-Yg');
     },
@@ -436,7 +494,10 @@ export function testSelectField(
       element: <SelectField checkboxes name="x" />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const checkboxes = screen.getAllByRole(/checkbox|radio/);
+    const fields = getSelectFields();
+    const checkboxes = fields.filter(
+      element => element instanceof HTMLInputElement,
+    );
     expect(checkboxes?.[0]).toHaveAttribute('name', 'x');
     expect(checkboxes?.[1]).toHaveAttribute('name', 'x');
   });
@@ -473,8 +534,11 @@ export function testSelectField(
       element: <SelectField checkboxes name="x" />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const checkboxes = screen.getAllByRole(/checkbox|radio/);
-    expect(checkboxes?.[0]).toBeChecked();
+    const fields = getSelectFields();
+    const checkboxes = fields.filter(
+      element => element instanceof HTMLInputElement,
+    );
+    expect(checkboxes?.[0]).not.toBeChecked();
     expect(checkboxes?.[1]).not.toBeChecked();
   });
 
@@ -484,7 +548,10 @@ export function testSelectField(
       schema: z.object({ x: z.enum(['a', 'b']) }),
       model: { x: 'b' },
     });
-    const checkboxes = screen.getAllByRole(/checkbox|radio/);
+    const fields = getSelectFields();
+    const checkboxes = fields.filter(
+      element => element instanceof HTMLInputElement,
+    );
     expect(checkboxes?.[0]).not.toBeChecked();
     expect(checkboxes?.[1]).toBeChecked();
   });
@@ -494,7 +561,10 @@ export function testSelectField(
       element: <SelectField checkboxes name="x" value="b" />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const checkboxes = screen.getAllByRole(/checkbox|radio/);
+    const fields = getSelectFields();
+    const checkboxes = fields.filter(
+      element => element instanceof HTMLInputElement,
+    );
     expect(checkboxes?.[0]).not.toBeChecked();
     expect(checkboxes?.[1]).toBeChecked();
   });
@@ -505,7 +575,11 @@ export function testSelectField(
       element: <SelectField checkboxes name="x" onChange={onChange} />,
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const checkboxes = screen.getAllByRole(/checkbox|radio/);
+    const fields = getSelectFields();
+    const checkboxes = fields.filter(
+      element => element instanceof HTMLInputElement,
+    );
+
     fireEvent.click(checkboxes?.[1]);
     expect(onChange).toHaveBeenCalledWith('b');
   });
@@ -517,8 +591,11 @@ export function testSelectField(
       schema: z.object({ x: z.enum(['a', 'b']) }),
       model: { x: 'a' },
     });
-    const checkbox = screen.getByRole(/checkbox|radio/, { name: 'b' });
-    fireEvent.click(checkbox);
+    let field = screen.queryByRole('checkbox', { name: 'b' });
+    if (!field) {
+      field = screen.getByRole('radio', { name: 'b' });
+    }
+    fireEvent.click(field);
     expect(onChange).toHaveBeenCalledWith('b');
   });
 
@@ -536,10 +613,10 @@ export function testSelectField(
       ),
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const checkboxes = screen.getAllByRole(/checkbox|radio/);
-    fireEvent.click(checkboxes?.[1]);
+    const fields = getSelectFields();
+    fireEvent.click(fields?.[1]);
     expect(onChange).toHaveBeenCalledWith(['b']);
-    fireEvent.click(checkboxes?.[0]);
+    fireEvent.click(fields?.[0]);
     expect(onChange).toHaveBeenCalledWith(['a']);
   });
 
@@ -557,8 +634,8 @@ export function testSelectField(
       ),
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const checkboxes = screen.getAllByRole(/checkbox|radio/);
-    fireEvent.click(checkboxes?.[0]);
+    const fields = getSelectFields();
+    fireEvent.click(fields?.[0]);
     expect(onChange).toHaveBeenCalledWith([]);
   });
 
@@ -570,25 +647,29 @@ export function testSelectField(
     expect(screen.getByText('y')).toBeInTheDocument();
   });
 
-  test('<SelectField checkboxes> - renders a wrapper with unknown props', () => {
-    renderWithZod({
-      element: (
-        <SelectField
-          checkboxes
-          data-testid="select-field"
-          name="x"
-          data-x="x"
-          data-y="y"
-          data-z="z"
-        />
-      ),
-      schema: z.object({ x: z.enum(['a', 'b']) }),
-    });
-    const field = screen.getByTestId('select-field');
-    expect(field).toHaveAttribute('data-x', 'x');
-    expect(field).toHaveAttribute('data-z', 'z');
-    expect(field).toHaveAttribute('data-y', 'y');
-  });
+  // TODO: Fix me - MUI renders multiple checkboxes and wrappers with the same id
+  skipTestIf(isTheme(['mui']))(
+    '<SelectField checkboxes> - renders a wrapper with unknown props',
+    () => {
+      renderWithZod({
+        element: (
+          <SelectField
+            checkboxes
+            data-testid="select-field"
+            name="x"
+            data-x="x"
+            data-y="y"
+            data-z="z"
+          />
+        ),
+        schema: z.object({ x: z.enum(['a', 'b']) }),
+      });
+      const field = screen.getAllByTestId('select-field')[0];
+      expect(field).toHaveAttribute('data-x', 'x');
+      expect(field).toHaveAttribute('data-z', 'z');
+      expect(field).toHaveAttribute('data-y', 'y');
+    },
+  );
 
   test('<SelectField checkboxes> - works with special characters', () => {
     renderWithZod({
@@ -613,8 +694,51 @@ export function testSelectField(
       ),
       schema: z.object({ x: z.enum(['a', 'b']) }),
     });
-    const checkboxes = screen.getAllByRole(/checkbox|radio/);
+    const fields = getSelectFields();
+    const checkboxes = fields.filter(
+      element => element instanceof HTMLInputElement,
+    );
     expect(checkboxes?.[0]).toBeDisabled();
     expect(checkboxes?.[1]).not.toBeDisabled();
   });
+
+  skipTestIf(!options?.showInlineError)(
+    '<SelectField> - renders correct error text (specified)',
+    () => {
+      const error = new Error();
+      renderWithZod({
+        element: (
+          <>
+            <SelectField
+              data-testid="select"
+              name="x"
+              error={error}
+              showInlineError
+              errorMessage="Error"
+            />
+          </>
+        ),
+        schema: z.object({ x: z.enum(['a', 'b']) }),
+      });
+
+      expect(screen.getByText('Error')).toBeInTheDocument();
+    },
+  );
+
+  skipTestIf(options?.showInlineError !== false)(
+    '<SelectField> - renders correct error text (showInlineError=false)',
+    () => {
+      const error = new Error();
+      renderWithZod({
+        element: (
+          <>
+            <SelectField name="x" error={error} errorMessage="Error" />
+          </>
+        ),
+        schema: z.object({ x: z.enum(['a', 'b']) }),
+      });
+
+      expect(screen.queryByText('Error')).not.toBeInTheDocument();
+    },
+  );
 }

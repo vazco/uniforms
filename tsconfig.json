@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": "packages",
-    "composite": true,
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
@@ -10,6 +9,8 @@
     "moduleResolution": "node",
     "paths": { "uniforms": ["uniforms/src"], "uniforms-*": ["uniforms-*/src"] },
     "strict": true,
-    "target": "ES6"
-  }
+    "target": "ES6",
+    "skipLibCheck": true
+  },
+  "include": ["./scripts/**/*", "./packages/**/*"]
 }

@@ -1,36 +1,37 @@
-import FormHelperText from '@mui/material/FormHelperText';
-import FormLabel from '@mui/material/FormLabel';
+import { screen } from '@testing-library/react';
 import React from 'react';
+import { renderWithZod } from 'uniforms/__suites__';
 import { NestField } from 'uniforms-mui';
+import { z } from 'zod';
 
-import createContext from './_createContext';
-import mount from './_mount';
+describe('@RTL - NestField tests', () => {
+  test('<NestField> - renders a label (required annotation)', () => {
+    const { container } = renderWithZod({
+      element: <NestField name="x" label="y" />,
+      schema: z.object({
+        x: z.object({
+          a: z.string(),
+          b: z.number(),
+        }),
+      }),
+    });
 
-test('<NestField> - renders a Subheader', () => {
-  const element = <NestField name="x" label="y" />;
-  const wrapper = mount(
-    element,
-    createContext({
-      x: { type: Object },
-      'x.a': { type: String },
-      'x.b': { type: Number },
-    }),
-  );
+    const label = container.getElementsByTagName('legend')[0]?.textContent;
 
-  expect(wrapper.find(FormLabel).at(0).text()).toBe('y *');
-});
+    expect(label).toBe('y *');
+  });
 
-test('<NestField> - renders a helperText', () => {
-  const element = <NestField name="x" helperText="Helper" />;
-  const wrapper = mount(
-    element,
-    createContext({
-      x: { type: Object },
-      'x.a': { type: String },
-      'x.b': { type: Number },
-    }),
-  );
+  test('<NestField> - renders a helperText', () => {
+    renderWithZod({
+      element: <NestField name="x" helperText="Helper" />,
+      schema: z.object({
+        x: z.object({
+          a: z.string(),
+          b: z.number(),
+        }),
+      }),
+    });
 
-  expect(wrapper.find(FormHelperText)).toHaveLength(1);
-  expect(wrapper.find(FormHelperText).text()).toBe('Helper');
+    expect(screen.getByText('Helper')).toBeInTheDocument();
+  });
 });

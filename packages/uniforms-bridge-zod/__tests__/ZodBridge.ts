@@ -1,3 +1,4 @@
+import { connectField } from 'uniforms';
 import { ZodBridge } from 'uniforms-bridge-zod';
 import {
   any,
@@ -9,6 +10,7 @@ import {
   enum as enum_,
   function as function_,
   instanceof as instanceof_,
+  infer as infer_,
   intersection,
   lazy,
   literal,
@@ -28,6 +30,7 @@ import {
   undefined as undefined_,
   union,
   unknown,
+  ZodIssueCode,
 } from 'zod';
 
 describe('ZodBridge', () => {
@@ -41,7 +44,8 @@ describe('ZodBridge', () => {
 
     it('works with simple types', () => {
       const schema = object({ a: string(), b: number() });
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const error = bridge.getValidator()({});
       const issues = error?.issues;
       expect(bridge.getError('a', error)).toBe(issues?.[0]);
@@ -50,7 +54,8 @@ describe('ZodBridge', () => {
 
     it('works with arrays', () => {
       const schema = object({ a: array(array(string())) });
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const error = bridge.getValidator()({ a: [['x', 'y', 0], [1]] });
       const issues = error?.issues;
       expect(bridge.getError('a', error)).toBe(null);
@@ -63,12 +68,107 @@ describe('ZodBridge', () => {
 
     it('works with nested objects', () => {
       const schema = object({ a: object({ b: object({ c: string() }) }) });
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const error = bridge.getValidator()({ a: { b: { c: 1 } } });
       const issues = error?.issues;
       expect(bridge.getError('a', error)).toBe(null);
       expect(bridge.getError('a.b', error)).toBe(null);
       expect(bridge.getError('a.b.c', error)).toBe(issues?.[0]);
+    });
+
+    it('works with refined schema', () => {
+      const errorMessage = 'Different values';
+
+      const schema = object({
+        a: string(),
+        b: string(),
+      }).refine(({ a, b }) => a === b, {
+        message: errorMessage,
+        path: ['b'],
+      });
+
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
+      const error = bridge.getValidator()({ a: 'a', b: 'b' });
+      expect(error?.issues?.[0]?.message).toBe(errorMessage);
+    });
+
+    it('works with chained refined schema', () => {
+      const firstErrorMessage = 'Different values';
+      const secondErrorMessage = 'Different results';
+
+      const schema = object({
+        a: number(),
+        b: number(),
+      })
+        .refine(({ a, b }) => a === b, {
+          message: firstErrorMessage,
+          path: ['b'],
+        })
+        .refine(({ a, b }) => a % 2 === b % 3, {
+          message: secondErrorMessage,
+          path: ['b'],
+        });
+
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
+      const error = bridge.getValidator()({ a: 1, b: 2 });
+      expect(error?.issues?.[0]?.message).toBe(firstErrorMessage);
+      expect(error?.issues?.[1]?.message).toBe(secondErrorMessage);
+    });
+
+    it('works with super refined schema', () => {
+      const errorMessage = 'Different values';
+
+      const schema = object({
+        a: string(),
+        b: string(),
+      }).superRefine((val, ctx) => {
+        if (val.a !== val.b) {
+          ctx.addIssue({
+            code: ZodIssueCode.custom,
+            message: errorMessage,
+          });
+        }
+      });
+
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
+      const error = bridge.getValidator()({ a: 'a', b: 'b' });
+      expect(error?.issues?.[0]?.message).toBe(errorMessage);
+    });
+
+    it('works with chained super refined schema', () => {
+      const firstErrorMessage = 'Different values';
+      const secondErrorMessage = 'Different results';
+
+      const schema = object({
+        a: number(),
+        b: number(),
+      })
+        .superRefine((val, ctx) => {
+          if (val.a !== val.b) {
+            ctx.addIssue({
+              code: ZodIssueCode.custom,
+              message: firstErrorMessage,
+            });
+          }
+        })
+        .superRefine((val, ctx) => {
+          if (val.a % 2 !== val.b % 3) {
+            ctx.addIssue({
+              code: ZodIssueCode.custom,
+              message: secondErrorMessage,
+            });
+          }
+        });
+
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
+      const error = bridge.getValidator()({ a: 1, b: 2 });
+      expect(error?.issues?.[0]?.message).toBe(firstErrorMessage);
+      expect(error?.issues?.[1]?.message).toBe(secondErrorMessage);
     });
   });
 
@@ -82,7 +182,8 @@ describe('ZodBridge', () => {
 
     it('works with simple types', () => {
       const schema = object({ a: string(), b: number() });
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const error = bridge.getValidator()({});
       const issues = error?.issues;
       expect(bridge.getErrorMessage('a', error)).toBe(issues?.[0].message);
@@ -91,7 +192,8 @@ describe('ZodBridge', () => {
 
     it('works with arrays', () => {
       const schema = object({ a: array(array(string())) });
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const error = bridge.getValidator()({ a: [['x', 'y', 0], [1]] });
       const issues = error?.issues;
       expect(bridge.getErrorMessage('a', error)).toBe('');
@@ -104,7 +206,8 @@ describe('ZodBridge', () => {
 
     it('works with nested objects', () => {
       const schema = object({ a: object({ b: object({ c: string() }) }) });
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const error = bridge.getValidator()({ a: { b: { c: 1 } } });
       const issues = error?.issues;
       expect(bridge.getErrorMessage('a', error)).toBe('');
@@ -129,25 +232,31 @@ describe('ZodBridge', () => {
 
     it('works with simple types', () => {
       const schema = object({ a: string(), b: number() });
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const error = bridge.getValidator()({});
-      const messages = error?.issues?.map(issue => issue.message);
+      const messages = ['A: Required', 'B: Required'];
       expect(bridge.getErrorMessages(error)).toEqual(messages);
     });
 
     it('works with arrays', () => {
       const schema = object({ a: array(array(string())) });
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const error = bridge.getValidator()({ a: [['x', 'y', 0], [1]] });
-      const messages = error?.issues?.map(issue => issue.message);
+      const messages = [
+        'A (0, 2): Expected string, received number',
+        'A (1, 0): Expected string, received number',
+      ];
       expect(bridge.getErrorMessages(error)).toEqual(messages);
     });
 
     it('works with nested objects', () => {
       const schema = object({ a: object({ b: object({ c: string() }) }) });
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const error = bridge.getValidator()({ a: { b: { c: 1 } } });
-      const messages = error?.issues?.map(issue => issue.message);
+      const messages = ['C: Expected string, received number'];
       expect(bridge.getErrorMessages(error)).toEqual(messages);
     });
   });
@@ -197,6 +306,23 @@ describe('ZodBridge', () => {
       expect(bridge.getField('a')).toBe(schema.shape.a);
       expect(bridge.getField('a.b')).toBe(schema.shape.a.unwrap().shape.b);
     });
+
+    it('works with ZodEffects', () => {
+      const schema = object({}).refine(data => data);
+      const bridge = new ZodBridge({ schema });
+      expect(bridge.getField('')).toBe(schema._def.schema);
+    });
+
+    it('works with nested ZodEffects', () => {
+      const schema = object({})
+        .refine(data => data)
+        .refine(data => data)
+        .refine(data => data);
+      const bridge = new ZodBridge({ schema });
+      expect(bridge.getField('')).toBe(
+        schema._def.schema._def.schema._def.schema,
+      );
+    });
   });
 
   describe('#getInitialValue', () => {
@@ -231,7 +357,7 @@ describe('ZodBridge', () => {
     it('works with enum (array)', () => {
       const schema = object({ a: enum_(['x', 'y', 'z']) });
       const bridge = new ZodBridge({ schema });
-      expect(bridge.getInitialValue('a')).toEqual('x');
+      expect(bridge.getInitialValue('a')).toEqual(undefined);
     });
 
     it('works with enum (native, numbers)', () => {
@@ -447,6 +573,29 @@ describe('ZodBridge', () => {
       const bridge = new ZodBridge({ schema });
       expect(bridge.getProps('a')).toEqual({ label: 'A', required: true });
     });
+
+    it('works with uniforms props', () => {
+      const schema = object({ a: string().uniforms({ type: 'password' }) });
+      const bridge = new ZodBridge({ schema });
+      expect(bridge.getProps('a')).toEqual({
+        label: 'A',
+        required: true,
+        type: 'password',
+      });
+    });
+
+    it('works with uniforms props (component)', () => {
+      const field = jest.fn(() => null);
+      const Field = connectField(field);
+
+      const schema = object({ a: string().uniforms(Field) });
+      const bridge = new ZodBridge({ schema });
+      expect(bridge.getProps('a')).toEqual({
+        component: Field,
+        label: 'A',
+        required: true,
+      });
+    });
   });
 
   describe('#getSubfields', () => {
@@ -616,7 +765,8 @@ describe('ZodBridge', () => {
   describe('#getValidator', () => {
     it('return a function', () => {
       const schema = object({});
-      const bridge = new ZodBridge({ schema });
+      type SchemaType = infer_<typeof schema>;
+      const bridge = new ZodBridge<SchemaType>({ schema });
       const validator = bridge.getValidator();
       expect(validator).toEqual(expect.any(Function));
       expect(validator({})).toEqual(null);

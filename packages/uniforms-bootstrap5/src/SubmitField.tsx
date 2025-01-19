@@ -4,6 +4,7 @@ import { filterDOMProps, Override, useForm } from 'uniforms';
 
 import gridClassName from './gridClassName';
 
+export type GridSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type SubmitFieldProps = Override<
   HTMLProps<HTMLInputElement>,
   {
@@ -24,7 +25,10 @@ function SubmitField({
   ...props
 }: SubmitFieldProps) {
   const { error, state: anyState } = useForm();
-  const state = anyState as unknown as { disabled: boolean; grid: any };
+  const state = anyState as unknown as {
+    disabled: boolean;
+    grid: string | number | Partial<Record<GridSize, number>> | undefined;
+  };
   const hasWrap = !!(state.grid || wrapClassName);
 
   const blockInput = (

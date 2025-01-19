@@ -1,44 +1,50 @@
-import Select from 'antd/lib/select';
+import { fireEvent, screen } from '@testing-library/react';
 import React from 'react';
+import { renderWithZod } from 'uniforms/__suites__';
 import { SelectField } from 'uniforms-antd';
+import { z } from 'zod';
 
-import createContext from './_createContext';
-import mount from './_mount';
+describe('@RTL - SelectField tests', () => {
+  test('<SelectField> - renders a select which correctly reacts on change (array)', () => {
+    const onChange = jest.fn();
 
-test('<SelectField> - renders a select which correctly reacts on change (array)', () => {
-  const onChange = jest.fn();
+    renderWithZod({
+      element: <SelectField name="x" />,
+      schema: z.object({
+        x: z.string().uniforms({
+          fieldType: Array,
+          options: [
+            { label: 'A', value: 'a' },
+            { label: 'B', value: 'b' },
+          ],
+        }),
+      }),
+      onChange,
+    });
 
-  const element = <SelectField name="x" value={undefined} />;
-  const wrapper = mount(
-    element,
-    createContext(
-      {
-        x: { type: Array },
-        'x.$': { type: String, allowedValues: ['a', 'b'] },
-      },
-      { onChange },
-    ),
-  );
+    fireEvent.mouseDown(screen.getByRole('combobox'));
+    fireEvent.click(screen.getByText('B'));
 
-  expect(wrapper.find(Select)).toHaveLength(1);
-  // FIXME: Provide a valid option.
-  expect(
-    wrapper.find(Select).prop('onChange')!(['b'], null as any),
-  ).toBeFalsy();
-  expect(onChange).toHaveBeenLastCalledWith('x', ['b']);
-});
+    expect(onChange).toHaveBeenLastCalledWith('x', ['b']);
+  });
 
-test('<SelectField> - renders a select (undefined values)', () => {
-  const element = <SelectField name="x" value={[undefined, 'a', undefined]} />;
-  const wrapper = mount(
-    element,
-    createContext({
-      x: { type: Array },
-      'x.$': { type: String, allowedValues: ['a', 'b'] },
-    }),
-  );
+  test('<SelectField> - renders a select (undefined values)', () => {
+    const { container } = renderWithZod({
+      element: <SelectField name="x" value={[undefined, 'a', undefined]} />,
+      schema: z.object({
+        x: z.string().uniforms({
+          fieldType: Array,
+          options: [
+            { label: 'A', value: 'a' },
+            { label: 'B', value: 'b' },
+          ],
+        }),
+      }),
+    });
 
-  expect(wrapper.find(Select)).toHaveLength(1);
-  expect(wrapper.find(Select).prop('value')).not.toContain(undefined);
-  expect(wrapper.find(Select).prop('value')).toContain('a');
+    expect(
+      container.getElementsByClassName('ant-select-selection-item-content')
+        .length,
+    ).toBe(1);
+  });
 });

@@ -8,14 +8,15 @@ import {
   ZodBoolean,
   ZodDate,
   ZodDefault,
+  ZodEffects,
   ZodEnum,
   ZodError,
+  ZodIssue,
   ZodNativeEnum,
   ZodNumber,
   ZodNumberDef,
   ZodObject,
   ZodOptional,
-  ZodRawShape,
   ZodString,
   ZodType,
 } from 'zod';
@@ -28,6 +29,23 @@ function isNativeEnumValue(value: unknown) {
   return typeof value !== 'string';
 }
 
+function getLabel(value: unknown) {
+  return upperFirst(lowerCase(joinName(null, value).slice(-1)[0]));
+}
+
+function getFullLabel(path: ZodIssue['path'], indexes: number[] = []): string {
+  const lastElement = path[path.length - 1];
+
+  if (typeof lastElement === 'number') {
+    const slicedPath = path.slice(0, path.length - 1);
+    return getFullLabel(slicedPath, [lastElement, ...indexes]);
+  }
+
+  return indexes.length > 0
+    ? `${getLabel(path)} (${indexes.join(', ')})`
+    : getLabel(path);
+}
+
 /** Option type used in SelectField or RadioField */
 type Option<Value> = {
   disabled?: boolean;
@@ -36,15 +54,15 @@ type Option<Value> = {
   value: Value;
 };
 
-export default class ZodBridge<T extends ZodRawShape> extends Bridge {
-  schema: ZodObject<T>;
+export default class ZodBridge<T> extends Bridge {
+  schema: ZodType<T>;
   provideDefaultLabelFromFieldName: boolean;
 
   constructor({
     schema,
     provideDefaultLabelFromFieldName = true,
   }: {
-    schema: ZodObject<T>;
+    schema: ZodType<T>;
     provideDefaultLabelFromFieldName?: boolean;
   }) {
     super();
@@ -73,9 +91,10 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
 
   getErrorMessages(error: unknown) {
     if (error instanceof ZodError) {
-      // TODO: There's no information which field caused which error. We could
-      // do some generic prefixing, e.g., `{name}: {message}`.
-      return error.issues.map(issue => issue.message);
+      return error.issues.map(issue => {
+        const name = getFullLabel(issue.path);
+        return `${name}: ${issue.message}`;
+      });
     }
 
     if (error instanceof Error) {
@@ -87,6 +106,11 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
 
   getField(name: string) {
     let field: ZodType = this.schema;
+
+    while (field instanceof ZodEffects) {
+      field = field.innerType();
+    }
+
     for (const key of joinName(null, name)) {
       if (field instanceof ZodDefault) {
         field = field.removeDefault();
@@ -107,7 +131,12 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
   }
 
   getInitialValue(name: string): unknown {
-    const field = this.getField(name);
+    let field = this.getField(name);
+
+    if (field instanceof ZodOptional) {
+      field = field.unwrap();
+    }
+
     if (field instanceof ZodArray) {
       const item = this.getInitialValue(joinName(name, '$'));
       if (item === undefined) {
@@ -122,12 +151,8 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
       return field._def.defaultValue();
     }
 
-    if (field instanceof ZodEnum) {
-      return field.options[0];
-    }
-
     if (field instanceof ZodNativeEnum) {
-      const values = Object.values(field.enum);
+      const values = Object.values(field.enum as Record<string, unknown>);
       return values.find(isNativeEnumValue) ?? values[0];
     }
 
@@ -149,12 +174,20 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
   getProps(name: string) {
     const props: UnknownObject & { options?: Option<unknown>[] } = {
       ...(this.provideDefaultLabelFromFieldName && {
-        label: upperFirst(lowerCase(joinName(null, name).slice(-1)[0])),
+        label: getLabel(name),
       }),
       required: true,
     };
 
     let field = this.getField(name);
+
+    const uniforms = field._uniforms;
+    if (typeof uniforms === 'function') {
+      props.component = uniforms;
+    } else {
+      Object.assign(props, uniforms);
+    }
+
     if (field instanceof ZodDefault) {
       field = field.removeDefault();
       props.required = false;
@@ -176,7 +209,7 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
         value => ({ value }),
       );
     } else if (field instanceof ZodNativeEnum) {
-      const values = Object.values(field.enum);
+      const values = Object.values(field.enum as Record<string, unknown>);
       const nativeValues = values.filter(isNativeEnumValue);
       props.options = (nativeValues.length ? nativeValues : values).map(
         value => ({ value }),
@@ -223,7 +256,7 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     }
 
     if (field instanceof ZodObject) {
-      return Object.keys(field.shape);
+      return Object.keys(field.shape as Record<string, unknown>);
     }
 
     return [];
@@ -254,7 +287,7 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
     }
 
     if (field instanceof ZodNativeEnum) {
-      const values = Object.values(field.enum);
+      const values = Object.values(field.enum as Record<string, unknown>);
       return typeof values.find(isNativeEnumValue) === 'number'
         ? Number
         : String;
@@ -274,7 +307,7 @@ export default class ZodBridge<T extends ZodRawShape> extends Bridge {
   getValidator() {
     return (model: UnknownObject) => {
       // TODO: What about async schemas?
-      // eslint-disable-next-line react/no-this-in-sfc
+
       const result = this.schema.safeParse(model);
       return result.success ? null : result.error;
     };

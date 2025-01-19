@@ -1,18 +1,10 @@
-/.idea
-/.parcel-cache
-/coverage
-/lerna-debug.log
 .DS_Store
+.idea/
+.parcel-cache/
+.turbo
+coverage/
+dist/
+node_modules/
 
-/node_modules
-/npm-debug.log
-/npm-debug.log*
 /packages/*/cjs
 /packages/*/esm
-/packages/*/node_modules
-/reproductions/dist
-/reproductions/node_modules
-/website/.cache-loader
-/website/.docusaurus
-/website/build
-/website/node_modules
