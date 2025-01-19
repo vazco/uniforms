@@ -1,5 +1,4 @@
 import invariant from 'invariant';
-import traverse from 'json-schema-traverse';
 import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
