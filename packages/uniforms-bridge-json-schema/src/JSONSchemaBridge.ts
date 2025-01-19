@@ -1,4 +1,5 @@
 import invariant from 'invariant';
+import traverse from 'json-schema-traverse';
 import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
@@ -6,8 +7,6 @@ import lowerCase from 'lodash/lowerCase';
 import memoize from 'lodash/memoize';
 import upperFirst from 'lodash/upperFirst';
 import { Bridge, UnknownObject, joinName } from 'uniforms';
-import traverse from "json-schema-traverse";
-
 
 function fieldInvariant(name: string, condition: boolean): asserts condition {
   invariant(condition, 'Field not found in schema: "%s"', name);
@@ -444,10 +443,19 @@ export default class JSONSchemaBridge extends Bridge {
     const schema;
     const graph = new Map();
 
-    function pre(schema, jsonPointer, rootSchema, parentJSON, parentKeyword, parentSchema, indexOrProperty) {
+    function pre(
+      schema,
+      jsonPointer,
+      rootSchema,
+      parentJSON,
+      parentKeyword,
+      parentSchema,
+      indexOrProperty,
+    ) {
       if (schema && schema.$ref) {
         const ref = schema.$ref;
-        const parentPointer = jsonPointer.split('/').slice(0, -2).join('/') || '#';
+        const parentPointer =
+          jsonPointer.split('/').slice(0, -2).join('/') || '#';
         if (!graph.has(parentPointer)) {
           graph.set(parentPointer, []);
         }
