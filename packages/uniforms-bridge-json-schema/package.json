@@ -37,7 +37,6 @@
   },
   "dependencies": {
     "invariant": "^2.0.0",
-    "json-schema-traverse": "^1.0.0",
     "lodash": "^4.0.0",
     "tslib": "2.8.0"
   },
