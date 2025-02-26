@@ -28,7 +28,7 @@
     "src/*.tsx"
   ],
   "peerDependencies": {
-    "react": "^18.0.0 || ^17.0.0 || ^16.8.0",
+    "react": "^19.0.0 || ^18.0.0 || ^17.0.0 || ^16.8.0",
     "uniforms": "4.0.0-beta.4"
   },
   "dependencies": {
@@ -40,7 +40,7 @@
   "devDependencies": {
     "@types/invariant": "2.2.37",
     "@types/lodash": "4.17.5",
-    "@types/react": "18.3.12",
+    "@types/react": "19.0.10",
     "typescript": "5.5.4",
     "uniforms": "workspace:*",
     "zod": "^3.0.0"
