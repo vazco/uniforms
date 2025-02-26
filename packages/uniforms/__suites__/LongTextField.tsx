@@ -13,7 +13,7 @@ export function testLongTextField(
     testPassThemeProps?: {
       ThemeProvider: (
         props: PropsWithChildren<{ themeOptions: any }>,
-      ) => JSX.Element;
+      ) => React.JSX.Element;
     };
   },
 ) {

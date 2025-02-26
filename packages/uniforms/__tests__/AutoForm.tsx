@@ -179,7 +179,7 @@ describe('<AutoForm />', () => {
       }
 
       render(
-        // @ts-expect-error JSX element type 'CustomAutoForm' does not have any construct or call signatures.ts(2604)
+        // @ts-expect-error React.JSX element type 'CustomAutoForm' does not have any construct or call signatures.ts(2604)
         <CustomAutoForm model={model} onChange={onChange} schema={schema} />,
       );
 
