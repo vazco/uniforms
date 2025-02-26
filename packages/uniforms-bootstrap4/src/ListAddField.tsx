@@ -16,7 +16,7 @@ export type ListAddFieldProps = HTMLFieldProps<
 >;
 
 function ListAdd({
-  addIcon,
+  addIcon = <i className="octicon octicon-plus" />,
   className,
   disabled,
   name,
@@ -58,8 +58,6 @@ function ListAdd({
     </div>
   );
 }
-
-ListAdd.defaultProps = { addIcon: <i className="octicon octicon-plus" /> };
 
 export default connectField<ListAddFieldProps>(ListAdd, {
   initialValue: false,

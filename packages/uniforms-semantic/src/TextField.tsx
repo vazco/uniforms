@@ -32,7 +32,7 @@ function Text({
   readOnly,
   required,
   showInlineError,
-  type,
+  type = 'text',
   value,
   wrapClassName,
   ...props
@@ -78,7 +78,5 @@ function Text({
     </div>
   );
 }
-
-Text.defaultProps = { type: 'text' };
 
 export default connectField<TextFieldProps>(Text, { kind: 'leaf' });

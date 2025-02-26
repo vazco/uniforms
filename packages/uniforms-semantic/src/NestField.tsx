@@ -17,7 +17,7 @@ function Nest({
   error,
   errorMessage,
   fields,
-  grouped,
+  grouped = true,
   itemProps,
   label,
   showInlineError,
@@ -45,7 +45,5 @@ function Nest({
     </div>
   );
 }
-
-Nest.defaultProps = { grouped: true };
 
 export default connectField<NestFieldProps>(Nest);
