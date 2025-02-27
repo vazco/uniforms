@@ -19,7 +19,7 @@ function ListDel({
   disabled,
   name,
   readOnly,
-  removeIcon,
+  removeIcon = <i className="octicon octicon-dash" />,
   ...props
 }: ListDelFieldProps) {
   const nameParts = joinName(null, name);
@@ -57,10 +57,6 @@ function ListDel({
     </span>
   );
 }
-
-ListDel.defaultProps = {
-  removeIcon: <i className="octicon octicon-dash" />,
-};
 
 export default connectField<ListDelFieldProps>(ListDel, {
   initialValue: false,

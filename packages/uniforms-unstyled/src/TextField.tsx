@@ -17,7 +17,7 @@ function Text({
   onChange,
   placeholder,
   readOnly,
-  type,
+  type = 'text',
   value,
   ...props
 }: TextFieldProps) {
@@ -42,7 +42,5 @@ function Text({
     </div>
   );
 }
-
-Text.defaultProps = { type: 'text' };
 
 export default connectField<TextFieldProps>(Text, { kind: 'leaf' });

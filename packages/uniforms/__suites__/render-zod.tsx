@@ -1,4 +1,4 @@
-import { render as renderOnScreen } from '@testing-library/react';
+import { render as renderOnScreen, RenderResult } from '@testing-library/react';
 import React, { ComponentProps, ReactElement } from 'react';
 import { ZodBridge } from 'uniforms-bridge-zod';
 import { AutoForm } from 'uniforms-unstyled';
@@ -11,7 +11,7 @@ export function renderWithZod<Props, Schema extends ZodObject<ZodRawShape>>({
 }: {
   element: ReactElement<Props>;
   schema: Schema;
-} & Partial<Omit<ComponentProps<typeof AutoForm>, 'schema'>>) {
+} & Partial<Omit<ComponentProps<typeof AutoForm>, 'schema'>>): RenderResult {
   return renderOnScreen(element, {
     wrapper({ children }) {
       const bridge = new ZodBridge({ schema });

@@ -10,7 +10,7 @@ type TestTextFieldOptions = {
   testPassThemeProps?: {
     ThemeProvider: (
       props: PropsWithChildren<{ themeOptions: any }>,
-    ) => JSX.Element;
+    ) => React.JSX.Element;
   };
   testWrapClassName?: boolean;
   testRenderIcon?: boolean;

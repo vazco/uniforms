@@ -55,8 +55,9 @@ function List({
         {value?.map((item, itemIndex) =>
           Children.map(children, (child, childIndex) =>
             isValidElement(child)
-              ? cloneElement(child as ReactElement, {
+              ? cloneElement<any>(child as ReactElement, {
                   key: `${itemIndex}-${childIndex}`,
+                  // @ts-expect-error
                   name: child.props.name?.replace('$', '' + itemIndex),
                   ...itemProps,
                   removeIcon,

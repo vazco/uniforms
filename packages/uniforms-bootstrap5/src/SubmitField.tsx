@@ -17,7 +17,7 @@ export type SubmitFieldProps = Override<
 function SubmitField({
   className,
   disabled,
-  inputClassName,
+  inputClassName = 'btn btn-primary',
   inputRef,
   readOnly,
   value,
@@ -76,7 +76,5 @@ function SubmitField({
     </div>
   );
 }
-
-SubmitField.defaultProps = { inputClassName: 'btn btn-primary' };
 
 export default SubmitField;

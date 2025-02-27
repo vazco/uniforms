@@ -44,7 +44,8 @@
   "devDependencies": {
     "@types/invariant": "2.2.37",
     "@types/lodash": "4.17.5",
-    "@types/react": "18.3.12",
+    "react": "19.0.0",
+    "@types/react": "19.0.10",
     "@types/simpl-schema": "1.12.7",
     "typescript": "5.5.4",
     "uniforms": "workspace:*"
