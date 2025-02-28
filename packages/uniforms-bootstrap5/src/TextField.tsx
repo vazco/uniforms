@@ -23,11 +23,7 @@ function Text(props: TextFieldProps) {
       disabled={props.disabled}
       id={props.id}
       name={props.name}
-      onChange={event =>
-        props.onChange(
-          event.target.value === '' ? undefined : event.target.value,
-        )
-      }
+      onChange={event => props.onChange(event.target.value)}
       placeholder={props.placeholder}
       minLength={props.minLength}
       maxLength={props.maxLength}
