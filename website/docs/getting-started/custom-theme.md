@@ -1,7 +1,7 @@
 ---
 id: custom-theme
 title: Custom theme
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 We've made hundreds of custom components across dozens of projects, including complete custom themes. Most of them began as source forks of `uniforms-unstyled` - one simply copies the source and imports `./some/project/path/uniforms-custom-theme-with-a-cool-name`.
