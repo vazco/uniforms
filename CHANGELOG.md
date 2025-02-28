@@ -2,7 +2,7 @@
 
 ## [v4.0.0-beta.5](https://github.com/vazco/uniforms/tree/v4.0.0-beta.5) (2025-02-28)
 
-- **Fixed:** Recursive schema evaluation [\#1282](https://github.com/vazco/uniforms/pull/1282)
+- **Added:** Recursive schema evaluation [\#1282](https://github.com/vazco/uniforms/pull/1282)
 - **Removed:** Blank `TextField` and `LongTextField` [\#1356](https://github.com/vazco/uniforms/pull/1356), [\#1399](https://github.com/vazco/uniforms/pull/1399)
 
 ## [v4.0.0-beta.4](https://github.com/vazco/uniforms/tree/v4.0.0-beta.4) (2024-11-18)
