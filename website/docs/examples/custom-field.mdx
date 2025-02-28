@@ -1,0 +1,128 @@
+---
+title: 'Custom field'
+sidebar_position: 5
+hide_table_of_contents: true
+---
+
+import { ajvValidatorFile } from '@site/components/CodeEditor/ajvValidatorFile';
+import { CodeEditorTabs } from '@site/components/CodeEditorTabs';
+
+export const tabs = [
+  {
+    label: "DisplayIf",
+    value: "display-if",
+    files: {
+      '/App.tsx': `import { AutoForm, AutoField, ErrorsField, SubmitField } from 'uniforms-antd';
+import { ZodBridge } from 'uniforms-bridge-zod';
+import { z } from 'zod';
+import { DisplayIf } from './DisplayIf';
+
+const userSchema = z.object({
+  username: z.string(),
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
+  password: z.string(),
+});
+
+type Model = z.infer<typeof userSchema>;
+
+const schema = new ZodBridge({ schema: userSchema });
+
+export default function App() {
+  return (
+    <AutoForm
+      schema={schema}
+      onSubmit={model => window.alert(JSON.stringify(model))}
+    >
+      <AutoField name="username" />
+
+      <AutoField name="firstName" />
+      <DisplayIf<Model> condition={context => !!context.model.firstName}>
+        <AutoField name="lastName" />
+      </DisplayIf>
+
+      <AutoField name="password" type="password" />
+
+      <ErrorsField />
+      <SubmitField />
+    </AutoForm>
+  );
+}`,
+      '/DisplayIf.tsx': `import { PropsWithChildren } from 'react';
+import { Context, UnknownObject, useForm } from 'uniforms';
+
+type DisplayIfProps<Model extends UnknownObject> = PropsWithChildren<{
+  condition: (context: Context<Model>) => boolean;
+}>;
+
+export function DisplayIf<Model extends UnknownObject>({
+  children,
+  condition,
+}: DisplayIfProps<Model>) {
+  const uniforms = useForm<Model>();
+
+  return condition(uniforms) ? children : null;
+}`
+    }
+  },
+  {
+    label: 'ImageField',
+    value: "image-field",
+    files: {
+      '/App.tsx': `import { AutoForm, AutoField, ErrorsField, SubmitField } from 'uniforms-antd';
+import { ZodBridge } from 'uniforms-bridge-zod';
+import { z } from 'zod';
+import { ImageField } from './ImageField';
+
+const userSchema = z.object({
+  name: z.string(),
+  file: z.string().uniforms({ component: ImageField }),
+});
+
+const schema = new ZodBridge({ schema: userSchema });
+
+export default function App() {
+  return (
+    <AutoForm
+      schema={schema}
+      onSubmit={model => window.alert(JSON.stringify(model))}
+    />
+  );
+}
+`,
+      '/ImageField.tsx': `import { useField, filterDOMProps } from 'uniforms';
+
+export function ImageField(props) {
+  const [fieldProps, context] = useField(props.name, props);
+  const { onChange, value } = fieldProps;
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '10px' }}>
+      {value && (
+        <img
+          alt=""
+          src={value}
+          style={{ width: '150px', height: '150px', display: 'block' }}
+        />
+      )}
+      <input
+        {...filterDOMProps(fieldProps)}
+        type="file"
+        accept="image/*"
+        id="file-input"
+        onChange={event => {
+          const files = event.target.files;
+          if (files && files[0]) {
+            onChange(URL.createObjectURL(files[0]));
+          }
+        }}
+      />
+    </div>
+  );
+}
+`
+    }
+  }
+];
+
+<CodeEditorTabs tabs={tabs} />

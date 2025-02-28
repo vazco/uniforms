@@ -1,7 +1,11 @@
+.cache-loader
+.docusaurus
 .DS_Store
+.env*
 .idea/
 .parcel-cache/
 .turbo
+build/
 coverage/
 dist/
 node_modules/
