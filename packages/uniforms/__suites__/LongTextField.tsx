@@ -110,7 +110,7 @@ export function testLongTextField(
       schema: z.object({ x: z.string() }),
     });
     await userEvent.type(screen.getByRole('textbox'), '{Backspace}');
-    expect(onChange).toHaveBeenLastCalledWith('x', undefined);
+    expect(onChange).toHaveBeenLastCalledWith('x', '');
   });
 
   test('<LongTextField> - renders a label', () => {
