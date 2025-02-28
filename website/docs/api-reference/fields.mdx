@@ -34,7 +34,7 @@ The list below contains a guaranteed set of fields, implemented in every theme p
 ### `AutoField`
 
 `AutoField` is basically a field renderer - it will render a field of a type adequate to the one defined in the schema,
-according to the [`AutoField` algorithm](/docs/uth-autofield-algorithm).
+according to the `AutoField` algorithm.
 You can also directly pass a component to it (by a `component` prop).
 All additional props will be passed to the result field component.
 
@@ -57,7 +57,7 @@ import { AutoField } from 'uniforms-unstyled';
 
 `AutoFields` is basically a set of rendered `AutoField`s.
 By default, the rendered fields will be `AutoField` in a chosen theme.
-However, you can replace the standard `AutoField` with [`AutoField.componentDetectorContext`](/docs/uth-autofield-algorithm#overriding-autofield).
+However, you can replace the standard `AutoField` with `AutoField.componentDetectorContext`.
 
 The `element` property defines a wrapping component.
 E.g. you want to group your fields inside a section, just do `element="section"`. The default one is `div`.
