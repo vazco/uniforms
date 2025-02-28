@@ -29,7 +29,7 @@ The following packages are deprecated and are no longer supported in v4.0.0.
 - Deprecate `uniforms-bridge-simple-schema` package
 - Deprecate `uniforms-bridge-graphql` package
 
-If you want to continue using these packages, you can use the following commands to download the latest version of the package:
+If you want to continue using these packages, we recommend staying with uniforms v3, as we don't guarantee they will work with the newer versions. You can use the following commands to download the latest version of the package:
 
 ```
 npx gitget https://github.com/vazco/uniforms/tree/v3.10.2/packages/<uniforms-package-name>
