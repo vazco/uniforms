@@ -1,3 +1,5 @@
+## [v4.0.0](https://github.com/vazco/uniforms/tree/v4.0.0) (2025-02-28)
+
 ## [v4.0.0-beta.5](https://github.com/vazco/uniforms/tree/v4.0.0-beta.5) (2025-02-28)
 
 - **Fixed:** Recursive schema evaluation [\#1282](https://github.com/vazco/uniforms/pull/1282)
