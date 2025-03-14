@@ -14,7 +14,7 @@
     <strong><a href="https://uniforms.tools/docs/api-reference/forms">API</a></strong> |
     <strong><a href="https://github.com/vazco/uniforms/blob/master/.github/CONTRIBUTING.md">Contribute</a></strong> |
     <strong><a href="https://uniforms.tools/docs/getting-started/basic-usage">Quick Start</a></strong> |
-    <strong><a href="https://vazco.github.io/docs/examples/basic-usage">Playground</a></strong> |
+    <strong><a href="https://uniforms.tools/docs/examples/basic-usage">Playground</a></strong> |
     <strong><a href="https://github.com/orgs/vazco/projects/4/views/5">Roadmap</a></strong>
 </p>
 
