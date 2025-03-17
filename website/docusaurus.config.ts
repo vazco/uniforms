@@ -1,6 +1,6 @@
-import { themes as prismThemes } from 'prism-react-renderer';
-import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import type { Config } from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
 
 const config: Config = {
   title: 'uniforms | React form library for building forms from any schema',
@@ -33,6 +33,20 @@ const config: Config = {
         docs: { sidebarPath: './sidebars.ts' },
         theme: { customCss: './src/css/custom.css' },
       } satisfies Preset.Options,
+    ],
+  ],
+
+  plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            to: '/docs/getting-started/migrating-3-to-4',
+            from: ['/docs/getting-started/migrating-4-to-4'],
+          },
+        ],
+      },
     ],
   ],
 

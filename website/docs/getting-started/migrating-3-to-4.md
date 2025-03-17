@@ -1,5 +1,5 @@
 ---
-id: migrating-4-to-4
+id: migrating-3-to-4
 title: Migrating v3 to v4
 sidebar_position: 4
 ---
