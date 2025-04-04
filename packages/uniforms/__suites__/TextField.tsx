@@ -148,7 +148,7 @@ export function testTextField(
       schema: z.object({ x: z.string() }),
     });
     await userEvent.type(screen.getByRole('textbox'), '{Backspace}');
-    expect(onChange).toHaveBeenLastCalledWith('x', undefined);
+    expect(onChange).toHaveBeenLastCalledWith('x', '');
   });
 
   test('<TextField> - renders a label', () => {

@@ -51,3 +51,17 @@ jobs:
           fail_ci_if_error: true
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Build docs
+        run: pnpm --filter=website build
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '22.x'
+
+      - name: Deploy docs
+        uses: peaceiris/actions-gh-pages@v3.8.0
+        with:
+          allow_empty_commit: true
+          cname: uniforms.tools
+          force_orphan: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./website/build
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.node-version == '22.x'

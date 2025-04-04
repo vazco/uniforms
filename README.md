@@ -11,10 +11,10 @@
 </p>
 
 <p align="center">
-    <strong><a href="https://uniforms.tools/docs/api-forms">API</a></strong> |
+    <strong><a href="https://uniforms.tools/docs/api-reference/forms">API</a></strong> |
     <strong><a href="https://github.com/vazco/uniforms/blob/master/.github/CONTRIBUTING.md">Contribute</a></strong> |
-    <strong><a href="https://uniforms.tools/docs/tutorials-basic-uniforms-usage">Quick Start</a></strong> |
-    <strong><a href="https://vazco.github.io/uniforms/playground">Playground</a></strong> |
+    <strong><a href="https://uniforms.tools/docs/getting-started/basic-usage">Quick Start</a></strong> |
+    <strong><a href="https://uniforms.tools/docs/examples/basic-usage">Playground</a></strong> |
     <strong><a href="https://github.com/orgs/vazco/projects/4/views/5">Roadmap</a></strong>
 </p>
 
@@ -52,7 +52,7 @@
   - **[JSON Schema](http://json-schema.org/)**
   - **[SimpleSchema@2](https://github.com/aldeed/node-simple-schema)**
   - **[Zod](https://github.com/colinhacks/zod)**
-  - **And any other - only [a small wrapper](https://vazco.github.io/uniforms/#/introduction) is needed!**
+  - **And any other - only [a small wrapper](https://uniforms.tools/#/introduction) is needed!**
 - **Wide range of themes:**
   - **[AntD](https://ant.design/) theme**
   - **[Bootstrap4](https://getbootstrap.com/docs/4.6) theme**

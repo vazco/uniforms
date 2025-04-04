@@ -33,8 +33,7 @@
     {
       "files": [
         "website/pages-parts/CommonForms/*",
-        "website/pages-parts/CustomFields/*",
-        "website/pages-parts/Tutorial/*"
+        "website/pages-parts/CustomFields/*"
       ],
       "rules": {
         "import/order": "off",

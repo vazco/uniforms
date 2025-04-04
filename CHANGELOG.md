@@ -1,4 +1,11 @@
-## [v4.0.0-beta.4](https://github.com/vazco/uniforms/tree/v4.0.0-beta.3) (2024-11-18)
+## [v4.0.0](https://github.com/vazco/uniforms/tree/v4.0.0) (2025-02-28)
+
+## [v4.0.0-beta.5](https://github.com/vazco/uniforms/tree/v4.0.0-beta.5) (2025-02-28)
+
+- **Added:** Recursive schema evaluation [\#1282](https://github.com/vazco/uniforms/pull/1282)
+- **Removed:** Blank `TextField` and `LongTextField` [\#1356](https://github.com/vazco/uniforms/pull/1356), [\#1399](https://github.com/vazco/uniforms/pull/1399)
+
+## [v4.0.0-beta.4](https://github.com/vazco/uniforms/tree/v4.0.0-beta.4) (2024-11-18)
 
 - **Added:** Support for nested ZodEffects [\#1382](https://github.com/vazco/uniforms/pull/1382)
 

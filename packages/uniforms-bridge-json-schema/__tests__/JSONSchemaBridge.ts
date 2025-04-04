@@ -33,11 +33,25 @@ describe('JSONSchemaBridge', () => {
       firstName: { type: 'string', default: 'John' },
       middleName: { $ref: '#/definitions/lastName' },
       lastName: { type: 'string' },
-      recursive: {
+      recursiveObject: {
         type: 'object',
         properties: {
           field: { type: 'string' },
-          recursive: { $ref: '#/definitions/recursive' },
+          recursiveObject: { $ref: '#/definitions/recursiveObject' },
+        },
+      },
+      recursiveArray: {
+        type: 'array',
+        items: { $ref: '#/definitions/recursiveArray' },
+      },
+      bloodlineNode: {
+        type: 'object',
+        properties: {
+          name: { type: 'string' },
+          children: {
+            type: 'array',
+            items: { $ref: '#/definitions/bloodlineNode' },
+          },
         },
       },
     },
@@ -135,7 +149,13 @@ describe('JSONSchemaBridge', () => {
         minimum: 1000,
         multipleOf: 3,
       },
-      recursive: { $ref: '#/definitions/recursive' },
+      recursiveObject: { $ref: '#/definitions/recursiveObject' },
+      recursiveArray: {
+        $ref: '#/definitions/recursiveArray',
+      },
+      bloodline: {
+        $ref: '#/definitions/bloodlineNode',
+      },
       arrayWithAllOf: {
         type: 'array',
         items: {
@@ -888,7 +908,9 @@ describe('JSONSchemaBridge', () => {
         'complexNames',
         'password',
         'passwordNumeric',
-        'recursive',
+        'recursiveObject',
+        'recursiveArray',
+        'bloodline',
         'arrayWithAllOf',
         'nonObjectAnyOf',
         'nonObjectAnyOfRequired',
@@ -911,12 +933,23 @@ describe('JSONSchemaBridge', () => {
       ]);
     });
 
-    it('works with recursive types', () => {
-      expect(bridge.getSubfields('recursive')).toEqual(['field', 'recursive']);
-      expect(bridge.getSubfields('recursive.recursive')).toEqual([
+    it('works with recursive types - object', () => {
+      expect(bridge.getSubfields('recursiveObject')).toEqual([
         'field',
-        'recursive',
+        'recursiveObject',
       ]);
+      expect(bridge.getSubfields('recursiveObject.recursiveObject')).toEqual([
+        'field',
+        'recursiveObject',
+      ]);
+    });
+    it('works with recursive types - array', () => {
+      expect(bridge.getSubfields('recursiveArray')).toEqual([]);
+    });
+
+    it('works with recursive types - mixed', () => {
+      expect(bridge.getSubfields('bloodline')).toEqual(['name', 'children']);
+      expect(bridge.getSubfields('bloodline.children')).toEqual([]);
     });
 
     it('works with primitives', () => {

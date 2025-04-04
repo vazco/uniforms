@@ -16,11 +16,7 @@ function Text(props: TextFieldProps) {
     <Input
       disabled={props.disabled}
       name={props.name}
-      onChange={event =>
-        props.onChange(
-          event.target.value === '' ? undefined : event.target.value,
-        )
-      }
+      onChange={event => props.onChange(event.target.value)}
       placeholder={props.placeholder}
       readOnly={props.readOnly}
       ref={props.inputRef}
