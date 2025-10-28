@@ -1,0 +1,80 @@
+---
+title: 'Basic usage'
+sidebar_position: 2
+---
+
+import { CodeEditor } from '../../../components/CodeEditor/CodeEditor';
+
+:::info
+This example uses `uniforms-bridge-zod` and `uniforms-antd` packages as this bridge and theme don't require any extra configuration.
+:::
+
+### 1. Installation
+
+First, install uniforms packages.
+
+```sh
+npm install uniforms uniforms-bridge-zod uniforms-antd
+```
+
+After that, we need also to install `zod` and `antd` packages.
+
+```sh
+npm install zod antd
+```
+
+### 2. Create a schema
+
+Let's create a schema for our form. We will use `zod` package for this.
+
+```ts
+import { z } from 'zod';
+
+const userSchema = z.object({
+  username: z.string(),
+  password: z.string().min(8),
+});
+
+const schema = new ZodBridge({ schema: userSchema });
+```
+
+### 3. Create a form
+
+Now we can create a form. We will use `uniforms-antd` package for this.
+
+```tsx
+import { AutoForm } from 'uniforms-antd';
+
+function App() {
+  return <AutoForm schema={schema} onSubmit={console.log} />;
+}
+```
+
+That's it! Now we can render our form and see it in action.
+
+### Summary
+
+We have created a simple form with a schema. It uses AntD theme and Zod as our schema validator.
+
+export const files = {
+  '/App.tsx': `import { AutoForm } from 'uniforms-antd';
+import { ZodBridge } from 'uniforms-bridge-zod';
+import { z } from 'zod';
+
+const userSchema = z.object({
+  username: z.string(),
+});
+
+const schema = new ZodBridge({ schema: userSchema });
+
+export default function App() {
+  return (
+    <AutoForm
+      schema={schema}
+      onSubmit={model => window.alert(JSON.stringify(model))}
+    />
+  );
+}`
+} 
+
+<CodeEditor bridge='zod' files={files} />

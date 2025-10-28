@@ -30,7 +30,7 @@ const config: Config = {
     [
       'classic',
       {
-        docs: { sidebarPath: './sidebars.ts' },
+        docs: { sidebarPath: './sidebars.ts', includeCurrentVersion: false },
         theme: { customCss: './src/css/custom.css' },
       } satisfies Preset.Options,
     ],
@@ -121,6 +121,11 @@ const config: Config = {
           label: 'Custom solutions',
           href: 'https://www.vazco.eu/',
           position: 'left',
+        },
+        {
+          type: 'docsVersionDropdown',
+          position: 'right',
+          dropdownActiveClassDisabled: true,
         },
       ],
     },
