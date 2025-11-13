@@ -60,7 +60,7 @@ If you are not sure which one to use, do not use the `kind` option at all - it'l
 The resulting props of a field are a merge of the props that uniforms provide, the ones coming from the bridge (schema) and finally the actual field props. For the exact ordering, please refer to the [source of `useField` hook](https://github.com/vazco/uniforms/blob/master/packages/uniforms/src/useField.tsx). Overall, it looks as follows:
 
 1. uniforms props (e.g., `changed`, `onChange`, `value`).
-2. uniforms state (as defined in [context data](/docs/api-context-data/#state)).
+2. uniforms state (as defined in [context data](/docs/3.0/api-context-data/#state)).
 3. bridge props (depending on the schema)
 4. field props (only when rendered directly)
 
@@ -174,7 +174,7 @@ randomId3(); // prefix-0002
 
 ## `useForm`
 
-A direct way of accessing the [context data](/docs/api-context-data/#state):
+A direct way of accessing the [context data](/docs/3.0/api-context-data/#state):
 
 ```tsx
 import { useForm } from 'uniforms';

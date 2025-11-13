@@ -117,7 +117,7 @@ import { ValidatedForm } from 'uniforms'; // Or from the theme package.
 It's based on `BaseForm` and extends its functionality by enabling automatic form generation.
 If you provide a schema, the fields will be automatically rendered.
 However, `QuickForm` is not self-managed, so you won't be able to type anything until there is no `onChange` handler.
-You can customize which `AutoField` should be used with [`AutoField.componentDetectorContext`](/docs/uth-autofield-algorithm#overriding-autofield).
+You can customize which `AutoField` should be used with [`AutoField.componentDetectorContext`](/docs/3.0/uth-autofield-algorithm#overriding-autofield).
 
 ##### Props:
 
@@ -292,7 +292,7 @@ const MyForm = ({ schema, onSubmit }) => {
 };
 ```
 
-You can do the same by using the [`useForm`](/docs/api-context-data#accessing-context-data) hook and the [`formRef`](/docs/api-context-data#formref) property.
+You can do the same by using the [`useForm`](/docs/3.0/api-context-data#accessing-context-data) hook and the [`formRef`](/docs/3.0/api-context-data#formref) property.
 
 ```tsx
 function FormControls() {

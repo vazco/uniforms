@@ -9,11 +9,11 @@ You can style your form fields simply by passing a `className` property.
 
 ### How can I create custom fields?
 
-You can create a custom field by wrapping your component inside the [`connectField`](/docs/api-helpers#connectfieldcomponent-options).
+You can create a custom field by wrapping your component inside the [`connectField`](/docs/3.0/api-helpers#connectfieldcomponent-options).
 
 The `connectField` will pass various props related to the form management, such as `onChange()` function, current field's value, errors and so on, to your component.
 
-Please visit the [Tutorials > Creating a custom field](/docs/tutorials-creating-custom-field) tutorial to see how to create your own fields.
+Please visit the [Tutorials > Creating a custom field](/docs/3.0/tutorials-creating-custom-field) tutorial to see how to create your own fields.
 
 ### How can I use a custom field in my form?
 
@@ -120,7 +120,7 @@ You change the way your form validates by setting `validate` prop:
 
 ### How can I reset my form state?
 
-You can use [React `ref` prop](https://facebook.github.io/react/docs/more-about-refs.html) or [`formRef`](/docs/api-context-data#formref) to manually access form methods.
+You can use [React `ref` prop](https://facebook.github.io/react/docs/more-about-refs.html) or [`formRef`](/docs/3.0/api-context-data#formref) to manually access form methods.
 
 These methods are:
 
@@ -170,7 +170,7 @@ function App() {
 }
 ```
 
-You can find more about form methods [here](/docs/api-forms).
+You can find more about form methods [here](/docs/3.0/api-forms).
 
 ### I want my form to be prefilled with data. How can I do that?
 
@@ -236,7 +236,7 @@ We are not planning to provide any out-of-the-box support for multi-step forms a
 
 A current form state is available in [React context](https://reactjs.org/docs/context.html), accessible through `useForm` and `useField(name)` hooks.
 
-The context data consists of various properties which can be found in [here](/docs/api-context-data).
+The context data consists of various properties which can be found in [here](/docs/3.0/api-context-data).
 
 ##### Example usage:
 
@@ -254,7 +254,7 @@ function SubmittingState() {
 ### I want to disable a submit button until there is a difference between the current form state and my model. How can I do it?
 
 Basically, you have to find out whether there is a difference between a current form state and your model, e.g. by calling lodash's `isEqual` function.
-Current form state can be accessed through the context (see [How can I know a current form state?](/docs/faq#how-can-i-know-a-current-form-state)) and form model can be passed as an ordinary prop:
+Current form state can be accessed through the context (see [How can I know a current form state?](/docs/3.0/faq#how-can-i-know-a-current-form-state)) and form model can be passed as an ordinary prop:
 
 ```tsx
 function DifferentSubmitField({ initialModel }) {

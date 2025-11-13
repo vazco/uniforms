@@ -81,7 +81,7 @@ export default UserLoginSchemaValidator;
 ### The Bridge!
 
 Now that both have the schema and the validator, we can define our bridge, which will be a binder between the form and the data itself.
-All we have to do is to extend `Bridge` class and implement its methods according to the [Bridge concept](/docs/uth-bridge-concept):
+All we have to do is to extend `Bridge` class and implement its methods according to the [Bridge concept](/docs/3.0/uth-bridge-concept):
 
 ```tsx
 import { Bridge } from 'uniforms';

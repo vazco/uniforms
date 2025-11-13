@@ -16,19 +16,19 @@ Currently available bridges:
 - `SimpleSchema2Bridge` in `uniforms-bridge-simple-schema-2`
 - `SimpleSchemaBridge` in `uniforms-bridge-simple-schema`
 
-If you see a lot of [`Warning: Unknown props...`](https://fb.me/react-unknown-prop) logs, check if your schema or theme doesn't provide extra props. If so, consider [registering it with `filterDOMProps`](/docs/api-helpers#filterdomprops).
+If you see a lot of [`Warning: Unknown props...`](https://fb.me/react-unknown-prop) logs, check if your schema or theme doesn't provide extra props. If so, consider [registering it with `filterDOMProps`](/docs/3.0/api-helpers#filterdomprops).
 
 ## `GraphQLBridge`
 
 This bridge enables using GraphQL schema types as uniforms forms.
 This saves you from not having to rewrite the form schema in your code.
-As a trade-off, you have to write the validator from scratch. In some cases, it might be easier to rewrite the schema and use, for example, [`JSONSchemaBridge` with `ajv`](/docs/api-bridges#jsonschemabridge).
+As a trade-off, you have to write the validator from scratch. In some cases, it might be easier to rewrite the schema and use, for example, [`JSONSchemaBridge` with `ajv`](/docs/3.0/api-bridges#jsonschemabridge).
 If only a simple or no validation is needed, this bridge is perfectly suited to work with GraphQL schemas.
 
 The constructor accepts three arguments:
 
 - `schema: GraphQLType` can be any type parsed and extracted from a GraphQL schema.
-- `validator: (model: Record<string, any>) => any` a custom validator function that should return a falsy value if no errors are present or information about errors in the model as described in the [custom bridge section](/docs/examples-custom-bridge#validator-definition).
+- `validator: (model: Record<string, any>) => any` a custom validator function that should return a falsy value if no errors are present or information about errors in the model as described in the [custom bridge section](/docs/3.0/examples-custom-bridge#validator-definition).
 - `extras: Record<string, any> = {}` used to extend the schema generated from GraphQL type with extra field configuration.
 
 ### Code example

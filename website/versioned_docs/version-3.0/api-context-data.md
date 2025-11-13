@@ -10,7 +10,7 @@ Some of them were designed for internal use, but you can still take advantage of
 
 ## Accessing context data
 
-A direct way of accessing the context data is to use the [`useForm`](/docs/api-helpers/#useform) hook:
+A direct way of accessing the context data is to use the [`useForm`](/docs/3.0/api-helpers/#useform) hook:
 
 ```tsx
 import { useForm } from 'uniforms';
@@ -20,7 +20,7 @@ function Example() {
 }
 ```
 
-For convenience, it's also accessible through the [`useField`](/docs/api-helpers/#usefield) hook:
+For convenience, it's also accessible through the [`useField`](/docs/3.0/api-helpers/#usefield) hook:
 
 ```tsx
 import { useField } from 'uniforms';
@@ -46,7 +46,7 @@ An object with a `details` field, which is an array of any validation errors.
 
 ### `formRef`
 
-Contains reference to the form component that gives access to [the form methods](/docs/api-forms#methods).
+Contains reference to the form component that gives access to [the form methods](/docs/3.0/api-forms#methods).
 
 ### `model`
 
@@ -98,7 +98,7 @@ Access to `onSubmit` method.
 
 ### `randomId`
 
-Access to `randomId` method. Similar to [randomIds()](/docs/api-helpers#randomidsprefix).
+Access to `randomId` method. Similar to [randomIds()](/docs/3.0/api-helpers#randomidsprefix).
 
 ### `schema`
 

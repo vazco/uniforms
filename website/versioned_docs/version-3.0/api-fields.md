@@ -33,7 +33,7 @@ The list below contains a guaranteed set of fields, implemented in every theme p
 ### `AutoField`
 
 `AutoField` is basically a field renderer - it will render a field of a type adequate to the one defined in the schema,
-according to the [`AutoField` algorithm](/docs/uth-autofield-algorithm).
+according to the [`AutoField` algorithm](/docs/3.0/uth-autofield-algorithm).
 You can also directly pass a component to it (by a `component` prop).
 All additional props will be passed to the result field component.
 
@@ -56,7 +56,7 @@ import { AutoField } from 'uniforms-unstyled';
 
 `AutoFields` is basically a set of rendered `AutoField`s.
 By default, the rendered fields will be `AutoField` in a chosen theme.
-However, you can replace the standard `AutoField` with [`AutoField.componentDetectorContext`](/docs/uth-autofield-algorithm#overriding-autofield).
+However, you can replace the standard `AutoField` with [`AutoField.componentDetectorContext`](/docs/3.0/uth-autofield-algorithm#overriding-autofield).
 There is also an `autoField` prop, but [it's deprecated](https://github.com/vazco/uniforms/issues/980) and will be removed in a future release.
 
 The `element` property defines a wrapping component.
