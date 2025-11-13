@@ -1,15 +1,7 @@
 {
   "docs": {
-    "Introduction": [
-      "what-are-uniforms",
-      "motivation",
-      "compare-matrix"
-    ],
-    "Getting Started": [
-      "installation",
-      "faq",
-      "migrating-2-to-3"
-    ],
+    "Introduction": ["what-are-uniforms", "motivation", "compare-matrix"],
+    "Getting Started": ["installation", "faq", "migrating-2-to-3"],
     "Tutorials": [
       "tutorials-basic-uniforms-usage",
       "tutorials-customizing-your-form-layout",
@@ -30,9 +22,6 @@
       "api-context-data",
       "api-helpers"
     ],
-    "Under The Hood": [
-      "uth-autofield-algorithm",
-      "uth-bridge-concept"
-    ]
+    "Under The Hood": ["uth-autofield-algorithm", "uth-bridge-concept"]
   }
 }

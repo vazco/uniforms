@@ -107,4 +107,3 @@ A checkbox.
 | `showInlineError` |                                                       Field inline error. _Some description would be great, huh?_                                                       | antd, bootstrap3, bootstrap4, bootstrap5, semantic |
 |  `wrapClassName`  |                                             Field and sourroundings wrap className. _Some description would be great, huh?_                                             |         bootstrap3, bootstrap4, bootstrap5         |
 |   `wrapperCol`    |                                                     Field layout. The layout for input controls. Same as labelCol.                                                      |                        antd                        |
-
