@@ -1,17 +1,17 @@
 import React, { Children, ReactElement } from 'react';
 import { AutoForm, SubmitField, TextField } from '../../lib/universal';
-import { Context, useForm } from 'uniforms';
+import { Context, UnknownObject, useForm } from 'uniforms';
 
 import { bridge as schema } from './DisplayIfSchema';
 
-type DisplayIfProps<T> = {
+type DisplayIfProps<T extends UnknownObject> = {
   children: ReactElement;
   condition: (context: Context<T>) => boolean;
 };
 
 // We have to ensure that there's only one child, because returning an array
 // from a component is prohibited.
-function DisplayIf<T = any>({ children, condition }: DisplayIfProps<T>) {
+function DisplayIf<T extends UnknownObject = any>({ children, condition }: DisplayIfProps<T>) {
   const uniforms = useForm<T>();
   return condition(uniforms) ? Children.only(children) : null;
 }
