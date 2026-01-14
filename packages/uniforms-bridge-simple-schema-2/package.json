@@ -38,7 +38,7 @@
     "tslib": "2.8.0"
   },
   "peerDependencies": {
-    "simpl-schema": "^1.0.0 || ^0.0.4",
+    "simpl-schema": "^3.0.0 || ^1.0.0 || ^0.0.4",
     "uniforms": "4.0.0"
   },
   "devDependencies": {
