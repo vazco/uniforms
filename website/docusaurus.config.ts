@@ -1,4 +1,3 @@
-import type * as Preset from '@docusaurus/preset-classic';
 import type { Config } from '@docusaurus/types';
 import { themes as prismThemes } from 'prism-react-renderer';
 
@@ -56,12 +55,12 @@ const config: Config = {
       { url: 'https://www.deskpro.com/', image: 'deskpro.png', alt: 'Deskpro' },
       { url: 'https://www.nokia.com/', image: 'nokia.png', alt: 'Nokia' },
       {
-        url: 'https://github.com/react-page/react-page/tree/master/packages/plugins/createPluginMaterialUi',
+        url: 'https://react-page.github.io/',
         image: 'react-page.png',
         alt: 'React Page',
       },
       {
-        url: 'https://graphback.dev',
+        url: 'https://github.com/aerogear/graphback',
         image: 'graphback.png',
         alt: 'Graphback',
       },
@@ -72,11 +71,11 @@ const config: Config = {
       },
       { url: 'https://aerogear.org', image: 'aerogear.png', alt: 'Aerogear' },
       {
-        url: 'https://cleverbeagle.com/together',
+        url: 'https://cleverbeagle.com/together', // TODO: Replace me - the link is outdated
         image: 'cleverbeagle.png',
         alt: 'Clever Beagle',
       },
-      { url: 'http://www.orionjs.org', image: 'orionjs.png', alt: 'Orion.js' },
+      { url: 'https://www.orionjs.com/', image: 'orionjs.png', alt: 'Orion.js' },
       {
         url: 'https://boulder.care',
         image: 'boulder.svg',
