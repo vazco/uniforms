@@ -4,6 +4,8 @@ import TextField, {
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
+import mergeSlotProps from './mergeSlotProps';
+
 export type TextFieldProps = FieldProps<string, MUITextFieldProps>;
 
 function Text({
@@ -18,6 +20,7 @@ function Text({
   placeholder,
   readOnly,
   showInlineError,
+  slotProps,
   type = 'text',
   value = '',
   ...props
@@ -28,7 +31,10 @@ function Text({
       error={!!error}
       fullWidth
       helperText={(!!error && showInlineError && errorMessage) || helperText}
-      inputProps={{ readOnly }}
+      slotProps={{
+        ...slotProps,
+        htmlInput: mergeSlotProps({ readOnly }, slotProps?.htmlInput),
+      }}
       label={label}
       margin="dense"
       name={name}

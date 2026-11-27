@@ -2,6 +2,8 @@ import TextField, { TextFieldProps } from '@mui/material/TextField';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
+import mergeSlotProps from './mergeSlotProps';
+
 type DateFieldType = 'date' | 'datetime-local';
 
 /* istanbul ignore next */
@@ -35,7 +37,6 @@ function Date({
   error,
   errorMessage,
   helperText,
-  InputLabelProps,
   inputRef,
   label,
   labelProps,
@@ -46,6 +47,7 @@ function Date({
   placeholder,
   readOnly,
   showInlineError,
+  slotProps,
   value,
   type = 'datetime-local',
   ...props
@@ -57,12 +59,16 @@ function Date({
       fullWidth
       helperText={(!!error && showInlineError && errorMessage) || helperText}
       label={label}
-      InputLabelProps={{ shrink: true, ...labelProps, ...InputLabelProps }}
-      inputProps={{
-        max: dateFormat(max),
-        min: dateFormat(min),
-        readOnly,
-        ...props.inputProps,
+      slotProps={{
+        ...slotProps,
+        inputLabel: mergeSlotProps(
+          { shrink: true, ...labelProps },
+          slotProps?.inputLabel,
+        ),
+        htmlInput: mergeSlotProps(
+          { max: dateFormat(max), min: dateFormat(min), readOnly },
+          slotProps?.htmlInput,
+        ),
       }}
       margin="dense"
       name={name}
