@@ -2,6 +2,8 @@ import TextField, { TextFieldProps } from '@mui/material/TextField';
 import React from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
+import mergeSlotProps from './mergeSlotProps';
+
 export type NumFieldProps = FieldProps<
   number,
   TextFieldProps,
@@ -14,7 +16,6 @@ function Num({
   error,
   errorMessage,
   helperText,
-  inputProps,
   inputRef,
   label,
   max,
@@ -24,6 +25,7 @@ function Num({
   readOnly,
   placeholder,
   showInlineError,
+  slotProps,
   step = decimal ? 0.01 : 1,
   value,
   ...props
@@ -34,12 +36,12 @@ function Num({
       error={!!error}
       fullWidth
       helperText={(!!error && showInlineError && errorMessage) || helperText}
-      inputProps={{
-        min,
-        max,
-        readOnly,
-        step,
-        ...inputProps,
+      slotProps={{
+        ...slotProps,
+        htmlInput: mergeSlotProps(
+          { min, max, readOnly, step },
+          slotProps?.htmlInput,
+        ),
       }}
       label={label}
       margin="dense"

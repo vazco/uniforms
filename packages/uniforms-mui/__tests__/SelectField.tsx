@@ -381,3 +381,41 @@ describe('@RTL - SelectField tests', () => {
     expect(screen.getByLabelText('B *')).not.toBeDisabled();
   });
 });
+
+describe('@RTL - SelectField slotProps', () => {
+  test('<SelectField> - keeps `name` and `id` with `slotProps.htmlInput`', () => {
+    renderWithZod({
+      element: (
+        <SelectField
+          id="y"
+          name="x"
+          native
+          slotProps={{ htmlInput: { 'data-testid': 'select' } }}
+        />
+      ),
+      schema: z.object({ x: z.enum(['a', 'b']) }),
+    });
+
+    const select = screen.getByTestId('select');
+    expect(select).toHaveAttribute('name', 'x');
+    expect(select).toHaveAttribute('id', 'y');
+  });
+
+  test('<SelectField> - merges `slotProps.select` with defaults', () => {
+    renderWithZod({
+      element: (
+        <SelectField
+          name="x"
+          native
+          slotProps={{
+            select: { IconComponent: () => <span data-testid="icon" /> },
+          }}
+        />
+      ),
+      schema: z.object({ x: z.enum(['a', 'b']) }),
+    });
+
+    expect(screen.getByTestId('icon')).toBeInTheDocument();
+    expect(screen.getByRole('combobox').tagName).toBe('SELECT');
+  });
+});

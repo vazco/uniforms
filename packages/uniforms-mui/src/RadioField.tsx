@@ -3,7 +3,7 @@ import FormLabel from '@mui/material/FormLabel';
 import RadioMaterial, { RadioProps } from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import omit from 'lodash/omit';
-import React from 'react';
+import React, { Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
 import type { Option } from './types';
@@ -23,6 +23,7 @@ export type RadioFieldProps = FieldProps<
     checkboxes?: boolean;
     fullWidth?: boolean;
     helperText?: string;
+    inputRef?: Ref<HTMLDivElement>;
     margin?: 'dense' | 'normal' | 'none';
     row?: boolean;
   }

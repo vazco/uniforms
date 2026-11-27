@@ -16,6 +16,7 @@ export type BoolFieldProps = FieldProps<
     appearance?: 'checkbox' | 'switch';
     fullWidth?: boolean;
     helperText?: string;
+    inputRef?: Ref<HTMLButtonElement>;
     legend?: string;
     margin?: 'dense' | 'normal' | 'none';
   }

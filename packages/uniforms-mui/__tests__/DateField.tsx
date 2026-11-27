@@ -39,3 +39,58 @@ describe('@RTL - DateField tests', () => {
     ).toBe(true);
   });
 });
+
+describe('@RTL - DateField slotProps', () => {
+  test('<DateField> - merges `slotProps.htmlInput` with defaults (object)', () => {
+    const min = new Date('2020-01-01T00:00:00.000Z');
+    renderWithZod({
+      element: (
+        <DateField
+          name="x"
+          min={min}
+          readOnly
+          slotProps={{ htmlInput: { 'data-testid': 'input' } }}
+        />
+      ),
+      schema: z.object({ x: z.date() }),
+    });
+    const input = screen.getByTestId('input');
+    expect(input).toHaveAttribute('min', '2020-01-01T00:00');
+    expect(input).toHaveAttribute('readonly');
+  });
+
+  test('<DateField> - merges `slotProps.htmlInput` with defaults (function)', () => {
+    const min = new Date('2020-01-01T00:00:00.000Z');
+    renderWithZod({
+      element: (
+        <DateField
+          name="x"
+          min={min}
+          slotProps={{ htmlInput: () => ({ 'data-testid': 'input' }) }}
+        />
+      ),
+      schema: z.object({ x: z.date() }),
+    });
+    expect(screen.getByTestId('input')).toHaveAttribute(
+      'min',
+      '2020-01-01T00:00',
+    );
+  });
+
+  test('<DateField> - allows overriding label `shrink` via `slotProps.inputLabel`', () => {
+    renderWithZod({
+      element: (
+        <DateField
+          name="x"
+          label="Label"
+          slotProps={{ inputLabel: { shrink: false } }}
+        />
+      ),
+      schema: z.object({ x: z.date() }),
+    });
+    expect(screen.getByText('Label')).not.toHaveAttribute(
+      'data-shrink',
+      'true',
+    );
+  });
+});

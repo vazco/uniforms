@@ -13,6 +13,7 @@ import xor from 'lodash/xor';
 import React, { Ref } from 'react';
 import { FieldProps, connectField, filterDOMProps } from 'uniforms';
 
+import mergeSlotProps from './mergeSlotProps';
 import type { Option } from './types';
 import wrapField from './wrapField';
 
@@ -153,8 +154,6 @@ function Select(props: SelectFieldProps) {
     fullWidth = true,
     helperText,
     id,
-    InputLabelProps,
-    inputProps,
     label,
     labelProps,
     margin = 'dense',
@@ -165,6 +164,7 @@ function Select(props: SelectFieldProps) {
     readOnly,
     required,
     showInlineError,
+    slotProps,
     variant,
     textFieldProps,
   } = props;
@@ -178,6 +178,7 @@ function Select(props: SelectFieldProps) {
     'fullWidth',
     'helperText',
     'margin',
+    'slotProps',
     'textFieldProps',
     'variant',
   ]);
@@ -188,11 +189,6 @@ function Select(props: SelectFieldProps) {
       error={!!error}
       fullWidth={fullWidth}
       helperText={(!!error && showInlineError && errorMessage) || helperText}
-      InputLabelProps={{
-        shrink: !!label && (hasPlaceholder || hasValue),
-        ...labelProps,
-        ...InputLabelProps,
-      }}
       label={label}
       margin={margin}
       onChange={event =>
@@ -202,12 +198,23 @@ function Select(props: SelectFieldProps) {
       }
       required={required}
       select
-      SelectProps={{
-        displayEmpty: hasPlaceholder,
-        inputProps: { name, id, ...inputProps },
-        multiple: fieldType === Array || undefined,
-        native,
-        ...filteredProps,
+      slotProps={{
+        ...slotProps,
+        inputLabel: mergeSlotProps(
+          { shrink: !!label && (hasPlaceholder || hasValue), ...labelProps },
+          slotProps?.inputLabel,
+        ),
+        select: mergeSlotProps(
+          {
+            displayEmpty: hasPlaceholder,
+            // `slotProps.htmlInput` is merged into these by MUI.
+            inputProps: { name, id },
+            multiple: fieldType === Array || undefined,
+            native,
+            ...filteredProps,
+          },
+          slotProps?.select,
+        ),
       }}
       value={native && !value ? '' : value}
       variant={variant}
